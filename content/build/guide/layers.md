@@ -70,7 +70,7 @@ work at build time.
 
 Related information:
 
-- [Optimizing builds with cache](../cache/index.md)
+- [Docker build cache](../cache/_index.md)
 - [Dockerfile best practices](../../develop/develop-images/dockerfile_best-practices.md)
 
 ## Next steps

@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./hugo_stats.json","./layouts/**/*.{html,js}", "./content/**/*.md", "assets/js/**/*.js"],
+  content: ["./hugo_stats.json", "layouts/**/*.html", "assets/**/*.js"],
   darkMode: "class",
   theme: {
     extend: {
@@ -12,7 +12,6 @@ module.exports = {
             'pre code': false,
             'code::before': false,
             'code::after': false,
-            table: false,
             // light colors for prose
             "--tw-prose-body": theme("colors.black"),
             "--tw-prose-headings": theme("colors.black"),
@@ -45,6 +44,12 @@ module.exports = {
           },
         },
       }),
+
+      gridTemplateColumns: {
+        'main-xl': 'minmax(300px, 1fr) minmax(100ch, 1fr) 1fr',
+        'main-lg': '300px minmax(75ch, 2fr) 1fr',
+        'main-md': '250px 1fr',
+      },
     },
 
     // theme values
@@ -59,16 +64,10 @@ module.exports = {
       "4xl": ["2.5rem", { letterSpacing: "-0.015em", fontWeight: 500 }],
     },
 
-    screens: {
-      sm: { max: "640px" },
-      md: { max: "1024px" },
-      lg: { max: "1280px" },
-      xl: { max: "1440px" },
-    },
-
     colors: {
       white: "#fff",
       black: "#000",
+      transparent: 'transparent',
 
       accent: {
         light: "#677285",
@@ -160,6 +159,32 @@ module.exports = {
         },
       },
 
+      magenta: {
+        light: {
+          DEFAULT: "#C918C0",
+          100: "#FFE6FB",
+          200: "#FFC9F6",
+          300: "#FFA6F0",
+          400: "#E950E2",
+          500: "#C918C0",
+          600: "#AB00A4",
+          700: "#830080",
+          800: "#440040",
+        },
+        dark: {
+          DEFAULT: "#E950E2",
+          100: "#7E0078",
+          200: "#92008B",
+          300: "#AB00A4",
+          400: "#CC18C4",
+          500: "#E950E2",
+          600: "#FF6FF9",
+          700: "#FF8AFA",
+          800: "#FFA4FB",
+        },
+      },
+
+
       blue: {
         light: {
           DEFAULT: "#086dd7",
@@ -238,7 +263,7 @@ module.exports = {
 
     fontFamily: {
       sans: [
-        "Roboto",
+        "Roboto Flex",
         "system-ui",
         "-apple-system",
         "BlinkMacSystemFont",

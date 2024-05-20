@@ -34,7 +34,7 @@ configuration file and restart Docker. For example:
 The daemon.json file is located in `/etc/docker/` on Linux hosts or
 `C:\ProgramData\docker\config\daemon.json` on Windows Server. For more about
 configuring Docker using `daemon.json`, see
-[daemon.json](../../../engine/reference/commandline/dockerd.md#daemon-configuration-file).
+[daemon.json](../../../reference/cli/dockerd.md#daemon-configuration-file).
 
 > **Note**
 >

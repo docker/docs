@@ -1,9 +1,10 @@
 ---
 title: Docker Build Cloud
-description: Get started with Docker Build Cloud
+description: Find documentation on Docker Build Cloud to help you build your container images faster, both locally and in CI
 keywords: build, cloud, cloud build, remote builder
 aliases:
   - /build/hydrobuild/
+  - /build/cloud/faq/
 ---
 
 Docker Build Cloud is a service that lets you build your container images
@@ -19,8 +20,8 @@ difference is in where and how that build gets executed.
 
 By default when you invoke a build command, the build runs on a local instance
 of BuildKit, bundled with the Docker daemon. With Docker Build Cloud, you send
-the build request to a BuildKit instance running remotely, in the cloud. The
-build request is transmitted over a secure, end-to-end encrypted connection.
+the build request to a BuildKit instance running remotely, in the cloud.
+All data is encrypted in transit.
 
 The remote builder executes the build steps, and sends the resulting build
 output to the destination that you specify. For example, back to your local
@@ -34,6 +35,10 @@ Docker Build Cloud provides several benefits over local builds:
 
 And the best part: you don't need to worry about managing builders or
 infrastructure. Just connect to your builders, and start building.
+Each cloud builder provisioned to an organization is completely
+isolated to a single Amazon EC2 instance, with a dedicated EBS volume for build
+cache, and encryption in transit. That means there are no shared processes or
+data between cloud builders.
 
 > **Note**
 >
@@ -45,24 +50,20 @@ infrastructure. Just connect to your builders, and start building.
 
 ## Get Docker Build Cloud
 
-To get started with Docker Build Cloud, [create a Docker
-account](../../docker-id/_index.md) and sign up for the free plan on the
+To get started with Docker Build Cloud,
+[create a Docker account](../../docker-id/_index.md)
+and sign up for the starter plan on the
 [Docker Build Cloud Dashboard](https://build.docker.com/).
 
-> **Note**
->
-> If your organization isn't already on a paid Docker subscription, you will
-> need to provide a payment method to sign up for Docker Build Cloud. If you
-> select the free plan, there will be no charges on the provided payment
-> method, it's only required for verification purposes.
+If your organization isn't already on a paid Docker subscription, you will
+need to provide a payment method to sign up for Docker Build Cloud. If you
+select the starter plan, there will be no charges on the provided payment
+method, it's only required for verification purposes.
 
-Once you've signed up and created a builder, continue by [setting up the
-builder in your local environment](./setup.md).
+Once you've signed up and created a builder, continue by
+[setting up the builder in your local environment](./setup.md).
 
-For more information about the available subscription plans, see [Docker Build Cloud
-subscriptions and features](../../subscription/build-details.md).
-
-## Frequently asked questions
-
-The [Docker Build Cloud FAQ](./faq.md) page lists common questions and answers about
-Docker Build Cloud.
+For more information about the available subscription plans, see
+[Docker Build Cloud subscriptions and features](../../subscription/build-cloud/build-details.md).
+For information about roles and permissions related to Docker Build Cloud, see
+[Roles and Permissions](../../security/for-admins/roles-and-permissions.md#docker-build-cloud).

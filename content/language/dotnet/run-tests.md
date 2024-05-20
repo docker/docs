@@ -34,7 +34,7 @@ A total of 1 test files matched the specified pattern.
 Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: < 1 ms - /source/tests/bin/Debug/net6.0/tests.dll (net6.0)
 ```
 
-To learn more about the command, see [docker compose run](/engine/reference/commandline/compose_run/).
+To learn more about the command, see [docker compose run](/reference/cli/docker/compose/run/).
 
 ## Run tests when building
 
@@ -42,7 +42,7 @@ To run your tests when building, you need to update your Dockerfile. You can cre
 
 The following is the updated Dockerfile.
 
-```dockerfile
+```dockerfile  {hl_lines="9"}
 # syntax=docker/dockerfile:1
 
 FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:6.0-alpine AS build
@@ -107,7 +107,7 @@ To learn more about building and running tests, see the [Build with Docker guide
 In this section, you learned how to run tests when developing locally using Compose and how to run tests when building your image.
 
 Related information:
- - [docker compose run](/engine/reference/commandline/compose_run/)
+ - [docker compose run](/reference/cli/docker/compose/run/)
  - [Build with Docker guide](../../build/guide/index.md)
 
 ## Next steps

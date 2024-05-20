@@ -1,10 +1,13 @@
 ---
 description: How Docker Scout handles image metadata
-keywords: scanning, supply chain, security, data, metadata
+keywords: |
+  scout, scanning, supply chain, security, purl, sbom, provenance, environment,
+  materials, config, ports, labels, os, registry, timestamp, digest, layers,
+  architecture, license, dependencies, base image
 title: Data collection and storage in Docker Scout
 ---
 
-Docker Scout image analysis works by collecting metadata from the container
+Docker Scout's image analysis works by collecting metadata from the container
 images that you analyze. This metadata is stored on the Docker Scout platform.
 
 ## Data transmission
@@ -37,15 +40,15 @@ currently being analyzed.
 
 ### SBOM metadata
 
-SBOM metadata is used to match package types and versions with public
-vulnerability data to infer whether a package is considered vulnerable.
-When the Docker Scout platform receives information from its advisory database
-about new CVEs (and other risks, such as leaked secrets), it "overlays" this
-information on the SBOM. If there's a match, the results of the match are
-displayed in the user interfaces where Docker Scout data is surfaced, such as
-the Docker Scout Dashboard and in Docker Desktop.
+Software Bill of Material (SBOM) metadata is used to match package types
+and versions with vulnerability data to infer whether an image is affected.
+When the Docker Scout platform receives information from security advisories
+about new CVEs or other risk factors, such as leaked secrets, it cross-references
+this information with the SBOM. If there's a match, Docker Scout displays the
+results in the user interfaces where Docker Scout data is surfaced,
+such as the Docker Scout Dashboard and in Docker Desktop.
 
-Docker Scout collects the SBOM metadata:
+Docker Scout collects the following SBOM metadata:
 
 - Package URLs (PURL)
 - Package author and description
@@ -64,9 +67,9 @@ and packages, and application-level packages such as maven, npm, and so on.
 
 ### Environment metadata
 
-If you integrate Docker Scout with your runtime environment via the [Sysdig
-integration](./integrations/environment/sysdig.md), the Docker Scout data plane
-collects the following data points:
+If you integrate Docker Scout with your runtime environment via the
+[Sysdig integration](./integrations/environment/sysdig.md),
+Docker Scout collects the following data points about your deployments:
 
 - Kubernetes namespace
 - Workload name
@@ -77,6 +80,16 @@ collects the following data points:
 For images analyzed locally on a developer's machine, Docker Scout only
 transmits PURLs and layer digests. This data isn't persistently stored on the
 Docker Scout platform; it's only used to run the analysis.
+
+### Provenance
+
+For images with [provenance attestations](../build/attestations/slsa-provenance.md),
+Docker Scout stores the following data in addition to the SBOM:
+
+- Materials
+- Base image
+- VCS information
+- Dockerfile
 
 ## Data storage
 

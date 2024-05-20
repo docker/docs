@@ -3,7 +3,17 @@ description: Explore common troubleshooting topics for Docker Desktop
 keywords: Linux, Mac, Windows, troubleshooting, topics, Docker Desktop
 title: Troubleshoot topics for Docker Desktop
 toc_max: 4
+tags: [ Troubleshooting ]
 ---
+
+> **Tip**
+>
+> If you do not find a solution in troubleshooting, browse the GitHub repositories or create a new issue:
+>
+> - [docker/for-mac](https://github.com/docker/for-mac/issues)
+> - [docker/for-win](https://github.com/docker/for-win/issues)
+> - [docker/for-linux](https://github.com/docker/for-linux/issues)
+{ .tip }
 
 ## Topics for all platforms
 
@@ -24,6 +34,20 @@ As well as on the registry. For example:
 2017/06/20 18:15:30 http: TLS handshake error from 192.168.203.139:52882: tls: client didn't provide a certificate
 2017/06/20 18:15:30 http: TLS handshake error from 192.168.203.139:52883: tls: first record does not look like a TLS handshake
 ```
+
+### Docker Desktop's UI appears green, distorted, or has visual artifacts
+
+Docker Desktop uses hardware-accelerated graphics by default, which may cause problems for some GPUs. In such cases,
+Docker Desktop will launch successfully, but some screens may appear green, distorted,
+or have some visual artifacts.
+
+To work around this issue, disable hardware acceleration by creating a `"disableHardwareAcceleration": true` entry in Docker Desktop's `settings.json` file. You can find this file at:
+
+- Mac: `~/Library/Group Containers/group.com.docker/settings.json`
+- Windows: `C:\Users\[USERNAME]\AppData\Roaming\Docker\settings.json`
+- Linux: `~/.docker/desktop/settings.json.`
+
+After updating the `settings.json` file, close and restart Docker Desktop to apply the changes.
 
 ## Topics for Linux and Mac
 
@@ -313,3 +337,12 @@ C:\Program Files\Docker\docker.exe:
  image operating system "linux" cannot be used on this platform.
  See 'C:\Program Files\Docker\docker.exe run --help'.
 ```
+
+### `Docker Desktop Access Denied` error message when starting Docker Desktop
+
+Docker Desktop displays the **Docker Desktop - Access Denied** error if a Windows user is not part of the **docker-users** group.
+
+If your admin account is different to your user account, add the **docker-users** group. Run **Computer Management** as an administrator and navigate to **Local Users and Groups** > **Groups** > **docker-users**.
+
+Right-click to add the user to the group. Sign out and sign back in for the changes to take effect.
+

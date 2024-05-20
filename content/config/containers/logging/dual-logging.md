@@ -111,7 +111,7 @@ as a default, with dual logging caching enabled:
 The dual logging cache accepts the same configuration options as the
 [`local` logging driver](local.md), but with a `cache-` prefix. These options
 can be specified per container, and defaults for new containers can be set using
-the [daemon configuration file](/engine/reference/commandline/dockerd/#daemon-configuration-file).
+the [daemon configuration file](/reference/cli/dockerd/#daemon-configuration-file).
 
 By default, the cache has log-file rotation enabled, and is limited to a maximum
 of 5 files of 20MB each (before compression) per container. Use the configuration
@@ -132,7 +132,7 @@ through a remote logging system, and if there is no need to read logs through
 `docker logs` for debugging purposes.
 
 Caching can be disabled for individual containers or by default for new containers,
-when using the [daemon configuration file](/engine/reference/commandline/dockerd/#daemon-configuration-file).
+when using the [daemon configuration file](/reference/cli/dockerd/#daemon-configuration-file).
 
 The following example uses the daemon configuration file to use the [`splunk`](splunk.md)
 logging driver as a default, with caching disabled:

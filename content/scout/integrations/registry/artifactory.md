@@ -11,7 +11,7 @@ automatically on images in Artifactory registries.
 
 ## Local image analysis
 
-You can analyze Artifactory images for vulnerabilities locally using Docker Desktop or the Docker CLI. You first need to authenticate with JFrog Artifactory using the [`docker login`](/engine/reference/commandline/login/) command. For example:
+You can analyze Artifactory images for vulnerabilities locally using Docker Desktop or the Docker CLI. You first need to authenticate with JFrog Artifactory using the [`docker login`](/reference/cli/docker/login/) command. For example:
 
 ```bash
 docker login {URL}
@@ -74,7 +74,6 @@ Before you deploy the agent, ensure that you meet the prerequisites:
   - Your JFrog Artifactory instance
   - `hub.docker.com`, port 443, for authenticating with Docker
   - `api.dso.docker.com`, port 443, for transacting data to Docker Scout
-- The server isn't behind a proxy
 - The registries are Docker V2 registries. V1 registries aren't supported.
 
 The agent supports all versions of JFrog Artifactory and JFrog Container
@@ -180,14 +179,12 @@ line flag.
 
 You can view the image analysis results in the Docker Scout Dashboard.
 
-1. Go to [Docker Scout Dashboard](https://scout.docker.com).
-2. Sign in using your Docker ID.
+1. Go to [Images page](https://scout.docker.com/reports/images/) in the Docker Scout Dashboard.
 
-   Once signed in, you're taken to the **Images** page. This page displays the
-   repositories in your organization connected to Docker Scout.
+   This page displays the Docker Scout-enabled repositories in your organization.
 
-3. Select the image in the list.
-4. Select the tag.
+2. Select the image in the list.
+3. Select the tag.
 
 When you have selected a tag, you're taken to the vulnerability report for that
 tag. Here, you can select if you want to view all vulnerabilities in the image,

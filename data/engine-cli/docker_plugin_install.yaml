@@ -4,7 +4,7 @@ long: |-
     Installs and enables a plugin. Docker looks first for the plugin on your Docker
     host. If the plugin does not exist locally, then the plugin is pulled from
     the registry. Note that the minimum required registry version to distribute
-    plugins is 2.3.0
+    plugins is 2.3.0.
 usage: docker plugin install [OPTIONS] PLUGIN [KEY=VALUE...]
 pname: docker plugin
 plink: docker_plugin.yaml
@@ -60,7 +60,7 @@ inherited_options:
       kubernetes: false
       swarm: false
 examples: |-
-    The following example installs `vieus/sshfs` plugin and [sets](plugin_set.md) its
+    The following example installs `vieus/sshfs` plugin and [sets](/reference/cli/docker/plugin/set/) its
     `DEBUG` environment variable to `1`. To install, `pull` the plugin from Docker
     Hub and prompt the user to accept the list of privileges that the plugin needs,
     set the plugin's parameters and enable the plugin.
@@ -85,6 +85,7 @@ examples: |-
     69553ca1d123   vieux/sshfs:latest    sshFS plugin for Docker    true
     ```
 deprecated: false
+hidden: false
 min_api_version: "1.25"
 experimental: false
 experimentalcli: false

@@ -1,4 +1,6 @@
-# Dockerfile reference
+---
+title: Dockerfile reference
+---
 
 Docker can build images automatically by reading the instructions from a
 Dockerfile. A Dockerfile is a text document that contains all the commands a
@@ -453,7 +455,7 @@ The exec form is parsed as a JSON array, which means that
 you must use double-quotes (") around words, not single-quotes (').
 
 ```dockerfile
-ENTRYPOINT ["/bin/bash", "-c", "echo", "hello"]
+ENTRYPOINT ["/bin/bash", "-c", "echo hello"]
 ```
 
 The exec form is best used to specify an `ENTRYPOINT` instruction, combined
@@ -564,8 +566,10 @@ The image can be any valid image.
   `FROM` instruction. Each `FROM` instruction clears any state created by previous
   instructions.
 - Optionally a name can be given to a new build stage by adding `AS name` to the
-  `FROM` instruction. The name can be used in subsequent `FROM` and
-  `COPY --from=<name>` instructions to refer to the image built in this stage.
+  `FROM` instruction. The name can be used in subsequent `FROM <name>`,
+  [`COPY --from=<name>`](#copy---from),
+  and [`RUN --mount=type=bind,from=<name>`](#run---mounttypebind) instructions
+  to refer to the image built in this stage.
 - The `tag` or `digest` values are optional. If you omit either of them, the
   builder assumes a `latest` tag by default. The builder returns an error if it
   can't find the `tag` value.
@@ -608,19 +612,19 @@ RUN echo $VERSION > image_version
 
 The `RUN` instruction will execute any commands to create a new layer on top of
 the current image. The added layer is used in the next step in the Dockerfile.
+`RUN` has two forms:
 
 ```dockerfile
-RUN apt-get update
-RUN apt-get install -y curl
+# Shell form:
+RUN [OPTIONS] <command> ...
+# Exec form:
+RUN [OPTIONS] [ "<command>", ... ]
 ```
 
-You can specify `RUN` instructions using
-[shell or exec forms](#shell-and-exec-form):
+For more information about the differences between these two forms, see
+[shell or exec forms](#shell-and-exec-form).
 
-- `RUN ["executable","param1","param2"]` (exec form)
-- `RUN command param1 param2` (shell form)
-
-The shell form is most commonly used, and lets you more easily break up longer
+The shell form is most commonly used, and lets you break up longer
 instructions into multiple lines, either using newline [escapes](#escape), or
 with [heredocs](#here-documents):
 
@@ -630,6 +634,12 @@ apt-get update
 apt-get install -y curl
 EOF
 ```
+
+The available `[OPTIONS]` for the `RUN` instruction are:
+
+- [`--mount`](#run---mount)
+- [`--network`](#run---network)
+- [`--security`](#run---security)
 
 ### Cache invalidation for RUN instructions
 
@@ -644,11 +654,11 @@ guide](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practi
 
 The cache for `RUN` instructions can be invalidated by [`ADD`](#add) and [`COPY`](#copy) instructions.
 
-## RUN --mount
+### RUN --mount
 
-> **Note**
->
-> Added in [`docker/dockerfile:1.2`](#syntax)
+```dockerfile
+RUN --mount=[type=<TYPE>][,option=<value>[,option=<value>]...]
+```
 
 `RUN --mount` allows you to create filesystem mounts that the build can access.
 This can be used to:
@@ -657,14 +667,13 @@ This can be used to:
 - Access build secrets or ssh-agent sockets
 - Use a persistent package management cache to speed up your build
 
-Syntax: `--mount=[type=<TYPE>][,option=<value>[,option=<value>]...]`
-
-### Mount types
+The supported mount types are:
 
 | Type                                     | Description                                                                                               |
 | ---------------------------------------- | --------------------------------------------------------------------------------------------------------- |
 | [`bind`](#run---mounttypebind) (default) | Bind-mount context directories (read-only).                                                               |
 | [`cache`](#run---mounttypecache)         | Mount a temporary directory to cache directories for compilers and package managers.                      |
+| [`tmpfs`](#run---mounttypetmpfs)         | Mount a `tmpfs` in the build container.                                                                   |
 | [`secret`](#run---mounttypesecret)       | Allow the build container to access secure files such as private keys without baking them into the image. |
 | [`ssh`](#run---mounttypessh)             | Allow the build container to access SSH keys via SSH agents, with support for passphrases.                |
 
@@ -781,7 +790,7 @@ with support for passphrases.
 | `uid`      | User ID for socket. Default `0`.                                                               |
 | `gid`      | Group ID for socket. Default `0`.                                                              |
 
-#### Example: access to Gitlab
+#### Example: access to GitLab
 
 ```dockerfile
 # syntax=docker/dockerfile:1
@@ -804,18 +813,16 @@ $ docker buildx build --ssh default=$SSH_AUTH_SOCK .
 You can also specify a path to `*.pem` file on the host directly instead of `$SSH_AUTH_SOCK`.
 However, pem files with passphrases are not supported.
 
-## RUN --network
+### RUN --network
 
-> **Note**
->
-> Added in [`docker/dockerfile:1.1`](#syntax)
+```dockerfile
+RUN --network=<TYPE>
+```
 
 `RUN --network` allows control over which networking environment the command
 is run in.
 
-Syntax: `--network=<TYPE>`
-
-### Network types
+The supported network types are:
 
 | Type                                         | Description                            |
 | -------------------------------------------- | -------------------------------------- |
@@ -858,15 +865,18 @@ The command is run in the host's network environment (similar to
 > and for a build request with [`--allow network.host` flag](https://docs.docker.com/engine/reference/commandline/buildx_build/#allow).
 { .warning }
 
-## RUN --security
+### RUN --security
 
 > **Note**
 >
 > Not yet available in stable syntax, use [`docker/dockerfile:1-labs`](#syntax) version.
 
-### RUN --security=insecure
+```dockerfile
+RUN --security=<sandbox|insecure>
+```
 
-With `--security=insecure`, builder runs the command without sandbox in insecure
+The default security mode is `sandbox`.
+With `--security=insecure`, the builder runs the command without sandbox in insecure
 mode, which allows to run flows requiring elevated privileges (e.g. containerd).
 This is equivalent to running `docker run --privileged`.
 
@@ -877,6 +887,8 @@ This is equivalent to running `docker run --privileged`.
 > `--allow-insecure-entitlement security.insecure` flag or in [buildkitd config](https://github.com/moby/buildkit/blob/master/docs/buildkitd.toml.md),
 > and for a build request with [`--allow security.insecure` flag](https://docs.docker.com/engine/reference/commandline/buildx_build/#allow).
 { .warning }
+
+Default sandbox mode can be activated via `--security=sandbox`, but that is no-op.
 
 #### Example: check entitlements
 
@@ -889,10 +901,6 @@ RUN --security=insecure cat /proc/self/status | grep CapEff
 ```text
 #84 0.093 CapEff:	0000003fffffffff
 ```
-
-### RUN --security=sandbox
-
-Default sandbox mode can be activated via `--security=sandbox`, but that is no-op.
 
 ## CMD
 
@@ -1135,28 +1143,22 @@ RUN apt-get update && apt-get install -y ...
 
 ## ADD
 
-ADD has two forms:
-
-```dockerfile
-ADD [--chown=<user>:<group>] [--chmod=<perms>] [--checksum=<checksum>] <src>... <dest>
-ADD [--chown=<user>:<group>] [--chmod=<perms>] ["<src>",... "<dest>"]
-```
-
+ADD has two forms.
 The latter form is required for paths containing whitespace.
 
-> **Note**
->
-> The `--chown` and `--chmod` features are only supported on Dockerfiles used to build Linux containers,
-> and doesn't work on Windows containers. Since user and group ownership concepts do
-> not translate between Linux and Windows, the use of `/etc/passwd` and `/etc/group` for
-> translating user and group names to IDs restricts this feature to only be viable
-> for Linux OS-based containers.
+```dockerfile
+ADD [OPTIONS] <src> ... <dest>
+ADD [OPTIONS] ["<src>", ... "<dest>"]
+```
 
-> **Note**
->
-> `--chmod` is supported since [Dockerfile 1.3](https://docs.docker.com/build/buildkit/dockerfile-frontend/).
-> Only octal notation is currently supported. Non-octal support is tracked in
-> [moby/buildkit#1951](https://github.com/moby/buildkit/issues/1951).
+The available `[OPTIONS]` are:
+
+- [`--keep-git-dir`](#add---keep-git-dir)
+- [`--checksum`](#add---checksum)
+- [`--chown`](#add---chown---chmod)
+- [`--chmod`](#add---chown---chmod)
+- [`--link`](#add---link)
+- [`--exclude`](#add---exclude)
 
 The `ADD` instruction copies new files, directories or remote file URLs from `<src>`
 and adds them to the filesystem of the image at the path `<dest>`.
@@ -1168,13 +1170,13 @@ the context of the build.
 Each `<src>` may contain wildcards and matching will be done using Go's
 [filepath.Match](https://golang.org/pkg/path/filepath#Match) rules. For example:
 
-To add all files starting with "hom":
+To add all files in the root of the build context starting with "hom":
 
 ```dockerfile
 ADD hom* /mydir/
 ```
 
-In the example below, `?` is replaced with any single character, e.g., "home.txt".
+In the following example, `?` is a single-character wildcard, matching e.g. "home.txt".
 
 ```dockerfile
 ADD hom?.txt /mydir/
@@ -1203,30 +1205,6 @@ named `arr[0].txt`, use the following;
 ```dockerfile
 ADD arr[[]0].txt /mydir/
 ```
-
-All new files and directories are created with a UID and GID of 0, unless the
-optional `--chown` flag specifies a given username, groupname, or UID/GID
-combination to request specific ownership of the content added. The
-format of the `--chown` flag allows for either username and groupname strings
-or direct integer UID and GID in any combination. Providing a username without
-groupname or a UID without GID will use the same numeric UID as the GID. If a
-username or groupname is provided, the container's root filesystem
-`/etc/passwd` and `/etc/group` files will be used to perform the translation
-from name to integer UID or GID respectively. The following examples show
-valid definitions for the `--chown` flag:
-
-```dockerfile
-ADD --chown=55:mygroup files* /somedir/
-ADD --chown=bin files* /somedir/
-ADD --chown=1 files* /somedir/
-ADD --chown=10:11 files* /somedir/
-ADD --chown=myuser:mygroup --chmod=655 files* /somedir/
-```
-
-If the container root filesystem doesn't contain either `/etc/passwd` or
-`/etc/group` files and either user or group names are used in the `--chown`
-flag, the build will fail on the `ADD` operation. Using numeric IDs requires
-no lookup and doesn't depend on container root filesystem content.
 
 In the case where `<src>` is a remote file URL, the destination will
 have permissions of 600. If the remote file being retrieved has an HTTP
@@ -1260,12 +1238,9 @@ doesn't support authentication.
 `ADD` obeys the following rules:
 
 - The `<src>` path must be inside the build context;
-  you can't use `COPY ../something /something`, because the builder can only
+  you can't use `ADD ../something /something`, because the builder can only
   access files from the context, and `../something` specifies a parent file or
   directory of the build context root.
-
-- If `<src>` is a directory, the entire contents of the directory are copied,
-  including filesystem metadata.
 
 - If `<src>` is a URL and `<dest>` does end with a trailing slash, then the
   filename is inferred from the URL and the file is downloaded to
@@ -1308,41 +1283,15 @@ doesn't support authentication.
   use of a wildcard, then `<dest>` must be a directory, and it must end with
   a slash `/`.
 
-- If `<dest>` doesn't end with a trailing slash, it will be considered a
-  regular file and the contents of `<src>` will be written at `<dest>`.
+- If `<src>` is a file, and `<dest>` doesn't end with a trailing slash,
+  the contents of `<src>` will be written as filename `<dest>`.
 
 - If `<dest>` doesn't exist, it's created, along with all missing directories
   in its path.
 
-### Verifying a remote file checksum `ADD --checksum=<checksum> <http src> <dest>`
+### Adding private Git repositories
 
-The checksum of a remote file can be verified with the `--checksum` flag:
-
-```dockerfile
-ADD --checksum=sha256:24454f830cdb571e2c4ad15481119c43b3cafd48dd869a9b2945d1036d1dc68d https://mirrors.edge.kernel.org/pub/linux/kernel/Historic/linux-0.01.tar.gz /
-```
-
-The `--checksum` flag only supports HTTP sources currently.
-
-### Adding a Git repository `ADD <git ref> <dir>`
-
-This form allows adding a Git repository to an image directly, without using the `git` command inside the image:
-
-```dockerfile
-ADD [--keep-git-dir=<boolean>] <git ref> <dir>
-```
-
-```dockerfile
-# syntax=docker/dockerfile:1
-FROM alpine
-ADD --keep-git-dir=true https://github.com/moby/buildkit.git#v0.10.1 /buildkit
-```
-
-The `--keep-git-dir=true` flag adds the `.git` directory. This flag defaults to false.
-
-### Adding a private git repository
-
-To add a private repo via SSH, create a Dockerfile with the following form:
+To add a private repository via SSH, create a Dockerfile with the following form:
 
 ```dockerfile
 # syntax=docker/dockerfile:1
@@ -1360,28 +1309,68 @@ $ docker build --ssh default
 $ buildctl build --frontend=dockerfile.v0 --local context=. --local dockerfile=. --ssh default
 ```
 
-## ADD --link
+### ADD --keep-git-dir
+
+```dockerfile
+ADD [--keep-git-dir=<boolean>] <src> ... <dir>
+```
+
+When `<src>` is the HTTP or SSH address of a remote Git repository,
+BuildKit adds the contents of the Git repository to the image
+excluding the `.git` directory by default.
+
+The `--keep-git-dir=true` flag lets you preserve the `.git` directory.
+
+```dockerfile
+# syntax=docker/dockerfile:1
+FROM alpine
+ADD --keep-git-dir=true https://github.com/moby/buildkit.git#v0.10.1 /buildkit
+```
+
+### ADD --checksum
+
+```dockerfile
+ADD [--checksum=<hash>] <src> ... <dir>
+```
+
+The `--checksum` flag lets you verify the checksum of a remote resource:
+
+```dockerfile
+ADD --checksum=sha256:24454f830cdb571e2c4ad15481119c43b3cafd48dd869a9b2945d1036d1dc68d https://mirrors.edge.kernel.org/pub/linux/kernel/Historic/linux-0.01.tar.gz /
+```
+
+The `--checksum` flag only supports HTTP sources currently.
+
+### ADD --chown --chmod
+
+See [`COPY --chown --chmod`](#copy---chown---chmod).
+
+### ADD --link
 
 See [`COPY --link`](#copy---link).
 
+### ADD --exclude
+
+See [`COPY --exclude`](#copy---exclude).
+
 ## COPY
 
-COPY has two forms:
+COPY has two forms.
+The latter form is required for paths containing whitespace.
 
 ```dockerfile
-COPY [--chown=<user>:<group>] [--chmod=<perms>] <src>... <dest>
-COPY [--chown=<user>:<group>] [--chmod=<perms>] ["<src>",... "<dest>"]
+COPY [OPTIONS] <src> ... <dest>
+COPY [OPTIONS] ["<src>", ... "<dest>"]
 ```
 
-This latter form is required for paths containing whitespace
+The available `[OPTIONS]` are:
 
-> **Note**
->
-> The `--chown` and `--chmod` features are only supported on Dockerfiles used to build Linux containers,
-> and doesn't work on Windows containers. Since user and group ownership concepts do
-> not translate between Linux and Windows, the use of `/etc/passwd` and `/etc/group` for
-> translating user and group names to IDs restricts this feature to only be viable for
-> Linux OS-based containers.
+- [`--from`](#copy---from)
+- [`--chown`](#copy---chown---chmod)
+- [`--chmod`](#copy---chown---chmod)
+- [`--link`](#copy---link)
+- [`--parents`](#copy---parents)
+- [`--exclude`](#copy---exclude)
 
 The `COPY` instruction copies new files or directories from `<src>`
 and adds them to the filesystem of the container at the path `<dest>`.
@@ -1393,13 +1382,13 @@ of the build.
 Each `<src>` may contain wildcards and matching will be done using Go's
 [filepath.Match](https://golang.org/pkg/path/filepath#Match) rules. For example:
 
-To add all files starting with "hom":
+To add all files in the root of the build context starting with "hom":
 
 ```dockerfile
 COPY hom* /mydir/
 ```
 
-In the example below, `?` is replaced with any single character, e.g., "home.txt".
+In the following example, `?` is a single-character wildcard, matching e.g. "home.txt".
 
 ```dockerfile
 COPY hom?.txt /mydir/
@@ -1429,7 +1418,109 @@ named `arr[0].txt`, use the following;
 COPY arr[[]0].txt /mydir/
 ```
 
-All new files and directories are created with a UID and GID of 0, unless the
+> **Note**
+>
+> If you build using STDIN (`docker build - < somefile`), there is no
+> build context, so `COPY` can't be used.
+
+Optionally `COPY` accepts a flag `--from=<name>` that can be used to set
+the source location to a previous build stage (created with `FROM .. AS <name>`)
+that will be used instead of a build context sent by the user. In case a build
+stage with a specified name can't be found an image with the same name is
+attempted to be used instead.
+
+`COPY` obeys the following rules:
+
+- The `<src>` path is resolved relative to the build context.
+  If you specify a relative path leading outside of the build context, such as
+  `COPY ../something /something`, parent directory paths are stripped out automatically.
+  The effective source path in this example becomes `COPY something /something`
+
+- If `<src>` is a directory, the entire contents of the directory are copied,
+  including filesystem metadata.
+
+  > **Note**
+  >
+  > The directory itself isn't copied, only its contents.
+
+- If `<src>` is any other kind of file, it's copied individually along with
+  its metadata. In this case, if `<dest>` ends with a trailing slash `/`, it
+  will be considered a directory and the contents of `<src>` will be written
+  at `<dest>/base(<src>)`.
+
+- If multiple `<src>` resources are specified, either directly or due to the
+  use of a wildcard, then `<dest>` must be a directory, and it must end with
+  a slash `/`.
+
+- If `<src>` is a file, and `<dest>` doesn't end with a trailing slash,
+  the contents of `<src>` will be written as filename `<dest>`.
+
+- If `<dest>` doesn't exist, it's created, along with all missing directories
+  in its path.
+
+> **Note**
+>
+> The first encountered `COPY` instruction will invalidate the cache for all
+> following instructions from the Dockerfile if the contents of `<src>` have
+> changed. This includes invalidating the cache for `RUN` instructions.
+> See the [Dockerfile Best Practices
+> guide – Leverage build cache](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#leverage-build-cache)
+> for more information.
+
+### COPY --from
+
+By default, the `COPY` instruction copies files from the build context. The
+`COPY --from` flag lets you copy files from an image, a build stage,
+or a named context instead.
+
+```dockerfile
+COPY [--from=<image|stage|context>] <src> ... <dest>
+```
+
+To copy from a build stage in a
+[multi-stage build](https://docs.docker.com/build/building/multi-stage/),
+specify the name of the stage you want to copy from. You specify stage names
+using the `AS` keyword with the `FROM` instruction.
+
+```dockerfile
+# syntax=docker/dockerfile:1
+FROM alpine AS build
+COPY . .
+RUN apk add clang
+RUN clang -o /hello hello.c
+
+FROM scratch
+COPY --from=build /hello /
+```
+
+You can also copy files directly from other images. The following example
+copies an `nginx.conf` file from the official Nginx image.
+
+```dockerfile
+COPY --from=nginx:latest /etc/nginx/nginx.conf /nginx.conf
+```
+
+The source path of `COPY --from` is always resolved from filesystem root of the
+image or stage that you specify.
+
+### COPY --chown --chmod
+
+> **Note**
+>
+> Only octal notation is currently supported. Non-octal support is tracked in
+> [moby/buildkit#1951](https://github.com/moby/buildkit/issues/1951).
+
+```dockerfile
+COPY [--chown=<user>:<group>] [--chmod=<perms> ...] <src> ... <dest>
+```
+
+The `--chown` and `--chmod` features are only supported on Dockerfiles used to build Linux containers,
+and doesn't work on Windows containers. Since user and group ownership concepts do
+not translate between Linux and Windows, the use of `/etc/passwd` and `/etc/group` for
+translating user and group names to IDs restricts this feature to only be viable for
+Linux OS-based containers.
+
+All files and directories copied from the build context are created with a UID and GID of 0.unless the
 optional `--chown` flag specifies a given username, groupname, or UID/GID
 combination to request specific ownership of the copied content. The
 format of the `--chown` flag allows for either username and groupname strings
@@ -1453,60 +1544,11 @@ If the container root filesystem doesn't contain either `/etc/passwd` or
 flag, the build will fail on the `COPY` operation. Using numeric IDs requires
 no lookup and does not depend on container root filesystem content.
 
-> **Note**
->
-> If you build using STDIN (`docker build - < somefile`), there is no
-> build context, so `COPY` can't be used.
+### COPY --link
 
-Optionally `COPY` accepts a flag `--from=<name>` that can be used to set
-the source location to a previous build stage (created with `FROM .. AS <name>`)
-that will be used instead of a build context sent by the user. In case a build
-stage with a specified name can't be found an image with the same name is
-attempted to be used instead.
-
-`COPY` obeys the following rules:
-
-- The `<src>` path must be inside the build context;
-  you can't use `COPY ../something /something`, because the builder can only
-  access files from the context, and `../something` specifies a parent file or
-  directory of the build context root.
-
-- If `<src>` is a directory, the entire contents of the directory are copied,
-  including filesystem metadata.
-
-  > **Note**
-  >
-  > The directory itself isn't copied, only its contents.
-
-- If `<src>` is any other kind of file, it's copied individually along with
-  its metadata. In this case, if `<dest>` ends with a trailing slash `/`, it
-  will be considered a directory and the contents of `<src>` will be written
-  at `<dest>/base(<src>)`.
-
-- If multiple `<src>` resources are specified, either directly or due to the
-  use of a wildcard, then `<dest>` must be a directory, and it must end with
-  a slash `/`.
-
-- If `<dest>` doesn't end with a trailing slash, it will be considered a
-  regular file and the contents of `<src>` will be written at `<dest>`.
-
-- If `<dest>` doesn't exist, it's created, along with all missing directories
-  in its path.
-
-> **Note**
->
-> The first encountered `COPY` instruction will invalidate the cache for all
-> following instructions from the Dockerfile if the contents of `<src>` have
-> changed. This includes invalidating the cache for `RUN` instructions.
-> See the [Dockerfile Best Practices
-> guide – Leverage build cache](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#leverage-build-cache)
-> for more information.
-
-## COPY --link
-
-> **Note**
->
-> Added in [`docker/dockerfile:1.4`](#syntax)
+```dockerfile
+COPY [--link[=<boolean>]] <src> ... <dest>
+```
 
 Enabling this flag in `COPY` or `ADD` commands allows you to copy files with
 enhanced semantics where your files remain independent on their own layer and
@@ -1537,7 +1579,7 @@ COPY /foo /bar
 
 and merging all the layers of both images together.
 
-### Benefits of using `--link`
+#### Benefits of using `--link`
 
 Use `--link` to reuse already built layers in subsequent builds with
 `--cache-from` even if the previous layers have changed. This is especially
@@ -1558,7 +1600,7 @@ the files in the base image. In that case BuildKit will only build the layers
 for the `COPY` commands and push them to the registry directly on top of the
 layers of the base image.
 
-### Incompatibilities with `--link=false`
+#### Incompatibilities with `--link=false`
 
 When using `--link` the `COPY/ADD` commands are not allowed to read any files
 from the previous state. This means that if in previous state the destination
@@ -1571,21 +1613,20 @@ path, using `--link` is always recommended. The performance of `--link` is
 equivalent or better than the default behavior and, it creates much better
 conditions for cache reuse.
 
-## COPY --parents
+### COPY --parents
 
 > **Note**
 >
-> Available in [`docker/dockerfile-upstream:master-labs`](#syntax).
-> Will be included in `docker/dockerfile:1.6-labs`.
+> Not yet available in stable syntax, use [`docker/dockerfile:1.7-labs`](#syntax) version.
 
 ```dockerfile
-COPY [--parents[=<boolean>]] <src>... <dest>
+COPY [--parents[=<boolean>]] <src> ... <dest>
 ```
 
 The `--parents` flag preserves parent directories for `src` entries. This flag defaults to `false`.
 
 ```dockerfile
-# syntax=docker/dockerfile-upstream:master-labs
+# syntax=docker/dockerfile:1.7-labs
 FROM scratch
 
 COPY ./x/a.txt ./y/a.txt /no_parents/
@@ -1596,8 +1637,28 @@ COPY --parents ./x/a.txt ./y/a.txt /parents/
 # /parents/y/a.txt
 ```
 
-This behavior is analogous to the [Linux `cp` utility's](https://www.man7.org/linux/man-pages/man1/cp.1.html)
-`--parents` flag.
+This behavior is similar to the [Linux `cp` utility's](https://www.man7.org/linux/man-pages/man1/cp.1.html)
+`--parents` or [`rsync`](https://man7.org/linux/man-pages/man1/rsync.1.html) `--relative` flag.
+
+As with Rsync, it is possible to limit which parent directories are preserved by
+inserting a dot and a slash (`./`) into the source path. If such point exists, only parent
+directories after it will be preserved. This may be especially useful copies between stages
+with `--from` where the source paths need to be absolute.
+
+```dockerfile
+# syntax=docker/dockerfile:1.7-labs
+FROM scratch
+
+COPY --parents ./x/./y/*.txt /parents/
+
+# Build context:
+# ./x/y/a.txt
+# ./x/y/b.txt
+#
+# Output:
+# /parents/y/a.txt
+# /parents/y/b.txt
+```
 
 Note that, without the `--parents` flag specified, any filename collision will
 fail the Linux `cp` operation with an explicit error message
@@ -1609,6 +1670,36 @@ instructions consisting of only one `src` entry, usually it is more beneficial
 to keep the layer count in the resulting image as low as possible. Therefore,
 with the `--parents` flag, the Buildkit is capable of packing multiple
 `COPY` instructions together, keeping the directory structure intact.
+
+### COPY --exclude
+
+> **Note**
+>
+> Not yet available in stable syntax, use [`docker/dockerfile:1.7-labs`](#syntax) version.
+
+```dockerfile
+COPY [--exclude=<path> ...] <src> ... <dest>
+```
+
+The `--exclude` flag lets you specify a path expression for files to be excluded.
+
+The path expression follows the same format as `<src>`,
+supporting wildcards and matching using Go's
+[filepath.Match](https://golang.org/pkg/path/filepath#Match) rules.
+For example, to add all files starting with "hom", excluding files with a `.txt` extension:
+
+```dockerfile
+COPY --exclude=*.txt hom* /mydir/
+```
+
+You can specify the `--exclude` option multiple times for a `COPY` instruction.
+Multiple `--excludes` are files matching its patterns not to be copied,
+even if the files paths match the pattern specified in `<src>`.
+To add all files starting with "hom", excluding files with either `.txt` or `.md` extensions:
+
+```dockerfile
+COPY --exclude=*.txt --exclude=*.md hom* /mydir/
+```
 
 ## ENTRYPOINT
 
@@ -2034,12 +2125,19 @@ ARG <name>[=<default value>]
 
 The `ARG` instruction defines a variable that users can pass at build-time to
 the builder with the `docker build` command using the `--build-arg <varname>=<value>`
-flag. If a user specifies a build argument that was not
-defined in the Dockerfile, the build outputs a warning.
+flag.
 
-```console
-[Warning] One or more build-args [foo] were not consumed.
-```
+> **Warning**
+>
+> It isn't recommended to use build arguments for passing secrets such as
+> user credentials, API tokens, etc. Build arguments are visible in the
+> `docker history` command and in `max` mode provenance attestations,
+> which are attached to the image by default if you use the Buildx GitHub Actions
+> and your GitHub repository is public.
+>
+> Refer to the [`RUN --mount=type=secret`](#run---mounttypesecret) section to
+> learn about secure ways to use secrets when building images.
+{ .warning }
 
 A Dockerfile may include one or more `ARG` instructions. For example,
 the following is a valid Dockerfile:
@@ -2050,16 +2148,6 @@ ARG user1
 ARG buildno
 # ...
 ```
-
-> **Warning**
->
-> It is not recommended to use build-time variables for passing secrets like
-> GitHub keys, user credentials etc. Build-time variable values are visible to
-> any user of the image with the `docker history` command.
->
-> Refer to the [`RUN --mount=type=secret`](#run---mounttypesecret) section to
-> learn about secure ways to use secrets when building images.
-{ .warning }
 
 ### Default values
 
@@ -2394,15 +2482,11 @@ ONBUILD ADD . /app/src
 ONBUILD RUN /usr/local/bin/python-build --dir /app/src
 ```
 
-> **Warning**
->
-> Chaining `ONBUILD` instructions using `ONBUILD ONBUILD` isn't allowed.
-{ .warning }
+### ONBUILD limitations
 
-> **Warning**
->
-> The `ONBUILD` instruction may not trigger `FROM` or `MAINTAINER` instructions.
-{ .warning }
+- Chaining `ONBUILD` instructions using `ONBUILD ONBUILD` isn't allowed.
+- The `ONBUILD` instruction may not trigger `FROM` or `MAINTAINER` instructions.
+- `ONBUILD COPY --from` is [not supported](https://github.com/moby/buildkit/issues/816).
 
 ## STOPSIGNAL
 
@@ -2616,10 +2700,6 @@ The `SHELL` instruction can also be used on Linux should an alternate shell be
 required such as `zsh`, `csh`, `tcsh` and others.
 
 ## Here-Documents
-
-> **Note**
->
-> Added in [`docker/dockerfile:1.4`](#syntax)
 
 Here-documents allow redirection of subsequent Dockerfile lines to the input of
 `RUN` or `COPY` commands. If such command contains a [here-document](https://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html#tag_18_07_04)

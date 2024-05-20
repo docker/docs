@@ -1,126 +1,66 @@
-<div
-  class="flex flex-col overflow-hidden max-w-[1024px] mx-auto p-12 gap-12"
->
-  <div class="flex flex-wrap justify-between gap-4 sm:flex-col sm:items-center">
-    {{ range site.Menus.footer }}
-      <div class="w-32 sm:my-4 sm:text-center">
-        <ul class="space-y-2">
-          <li>
-            <b
-              ><a
-                class="hover:underline"
-                href="{{ .URL }}"
-                target="_blank"
-                rel="noopener"
-                >{{ .Name }}</a
-              ></b
-            >
-          </li>
-          {{ range .Children }}
-            <li>
-              <a
-                class="hover:underline"
-                href="{{ .URL }}"
-                target="_blank"
-                rel="noopener"
-                >{{ .Name }}</a
-              >
-            </li>
-          {{ end }}
-        </ul>
-      </div>
-    {{ end }}
-  </div>
-  <div class="self-end sm:self-center">
-    <nav>
-      <ul class="flex gap-4 sm:flex-col items-center">
-        <li>
-          <a
-            class="hover:underline"
-            href="https://www.docker.com/legal/docker-terms-service"
-            target="_blank"
-            rel="noopener"
-            >Terms of Service</a
-          >
-        </li>
-        <li>
-          <a
-            class="hover:underline"
-            href="https://status.docker.com/"
-            target="_blank"
-            rel="noopener"
-            >Status</a
-          >
-        </li>
-        <li>
-          <a
-            class="hover:underline"
-            href="https://www.docker.com/legal"
-            target="_blank"
-            rel="noopener"
-            >Legal</a
-          >
-        </li>
-      </ul>
-    </nav>
-  </div>
-  <div class="flex justify-between sm:flex-col sm:gap-4 sm:items-center">
-    <div>
-      <p>
-        Copyright &copy; 2013-{{ now.Format "2006" }} Docker Inc. All rights
-        reserved.
-      </p>
-      {{ with site.Params.analytics.onetrust }}
-        <button id="ot-sdk-btn" class="ot-sdk-show-settings">
-          Cookie Settings
-        </button>
-      {{ end }}
+<div class="flex justify-center py-20 px-4 bg-gray-light-200/50 dark:bg-gray-dark-300/50">
+  <div class="flex w-full max-w-[840px] flex-col gap-10">
+    <div class="flex flex-col md:flex-row gap-4 items-center justify-evenly">
+      <a class="underline-offset-2 hover:underline" href="https://www.docker.com/">Product offerings</a>
+      <a class="underline-offset-2 hover:underline" href="https://www.docker.com/pricing/">Pricing</a>
+      <a class="underline-offset-2 hover:underline" href="https://www.docker.com/company/">About us</a>
+      <a class="underline-offset-2 hover:underline" href="https://www.docker.com/support/">Support</a>
+      <a class="underline-offset-2 hover:underline" href="https://github.com/docker/docs/blob/main/CONTRIBUTING.md">Contribute</a>
     </div>
-    <nav>
-      <ul class="flex gap-4 sm:flex-col">
-        <li class="hover:underline">
-          <a href="https://twitter.com/docker" target="_blank" rel="noopener"
-            >Twitter</a
-          >
-        </li>
-        <li class="hover:underline">
-          <a
-            href="https://www.youtube.com/user/dockerrun"
-            target="_blank"
-            rel="noopener"
-            >Youtube</a
-          >
-        </li>
-        <li class="hover:underline">
-          <a href="https://github.com/docker" target="_blank" rel="noopener"
-            >GitHub</a
-          >
-        </li>
-        <li class="hover:underline">
-          <a
-            href="https://www.linkedin.com/company/docker"
-            target="_blank"
-            rel="noopener"
-            >Linkedin</a
-          >
-        </li>
-        <li class="hover:underline">
-          <a
-            href="https://www.facebook.com/docker.run"
-            target="_blank"
-            rel="noopener"
-            >Facebook</a
-          >
-        </li>
-        <li class="hover:underline">
-          <a
-            href="https://www.reddit.com/r/docker"
-            target="_blank"
-            rel="noopener"
-            >Reddit</a
-          >
-        </li>
-      </ul>
-    </nav>
+    <hr class="text-divider-light dark:text-divider-dark" />
+    <div class="grid lg:grid-cols-3 place-items-center gap-8 grid-cols-1">
+      <p class="text-sm">
+        Copyright © 2013-{{ time.Now.Year}} Docker Inc. All rights reserved.
+      </p>
+      <div class="flex gap-4">
+        <a
+          class="h-8 w-8 rounded-full fill-blue-light dark:fill-blue-dark"
+          title="X (Twitter)"
+          href="http://twitter.com/docker/">
+          {{ (resources.Get "images/TwitterCircle.svg").Content | safe.HTML }}
+        </a>
+        <a
+          class="h-8 w-8 rounded-full fill-blue-light dark:fill-blue-dark"
+          title="LinkedIn"
+          href="https://www.linkedin.com/company/docker">
+          {{ (resources.Get "images/LinkedinCircle.svg").Content | safe.HTML }}
+        </a>
+        <a
+          class="h-8 w-8 rounded-full fill-blue-light dark:fill-blue-dark"
+          title="Instagram"
+          href="https://www.instagram.com/dockerinc/">
+          {{ (resources.Get "images/InstagramCircle.svg").Content | safe.HTML }}
+        </a>
+        <a
+          class="h-8 w-8 rounded-full fill-blue-light dark:fill-blue-dark"
+          title="YouTube"
+          href="http://www.youtube.com/user/dockerrun">
+          {{ (resources.Get "images/YoutubeCircle.svg").Content | safe.HTML }}
+        </a>
+        <a
+          class="h-8 w-8 rounded-full fill-blue-light dark:fill-blue-dark"
+          title="Facebook"
+          href="https://www.facebook.com/docker.run">
+          {{ (resources.Get "images/FacebookCircle.svg").Content | safe.HTML }}
+        </a>
+      </div>
+      <div class="flex items-center gap-4">
+        <a
+          class="underline-offset-2 hover:underline"
+          title="Docker Terms of Service"
+          href="https://www.docker.com/legal/docker-terms-service"
+          >Terms of Service</a>
+        <a
+          class="underline-offset-2 hover:underline"
+          title="Docker Systems Status Page"
+          href="https://www.dockerstatus.com/"
+          >Status</a>
+        <a
+          class="underline-offset-2 hover:underline"
+          title="Docker Legal Terms"
+          href="https://www.docker.com/legal"
+          >Legal</a>
+      </div>
+    </div>
   </div>
 </div>

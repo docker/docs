@@ -38,7 +38,7 @@ To get started with Docker Engine on RHEL, make sure you
 To install Docker Engine, you need a maintained version of one of the following
 RHEL versions:
 
-- RHEL 7 on s390x (IBM Z)
+- RHEL 7 on s390x (IBM Z) (EOL: [June 30, 2024](https://www.ibm.com/blog/announcement/ibm-is-announcing-red-hat-enterprise-linux-7-is-going-end-of-support-on-30-june-2024/))
 - RHEL 8 on s390x (IBM Z)
 - RHEL 9 on s390x (IBM Z)
 
@@ -129,17 +129,17 @@ $ sudo yum-config-manager --add-repo {{% param "download-url-base" %}}/docker-ce
    ```console
    $ yum list docker-ce --showduplicates | sort -r
 
-   docker-ce.s390x    3:24.0.0-1.el8    docker-ce-stable
-   docker-ce.s390x    3:23.0.6-1.el8    docker-ce-stable
+   docker-ce.s390x    3:26.0.2-1.el9    docker-ce-stable
+   docker-ce.s390x    3:26.0.1-1.el9    docker-ce-stable
    <...>
    ```
 
    The list returned depends on which repositories are enabled, and is specific
-   to your version of RHEL (indicated by the `.el8` suffix in this example).
+   to your version of RHEL (indicated by the `.el9` suffix in this example).
 
    Install a specific version by its fully qualified package name, which is
    the package name (`docker-ce`) plus the version string (2nd column),
-   separated by a hyphen (`-`). For example, `docker-ce-3:24.0.0-1.el8`.
+   separated by a hyphen (`-`). For example, `docker-ce-3:26.0.1-1.el9`.
 
    Replace `<VERSION_STRING>` with the desired version and then run the following
    command to install:

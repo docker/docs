@@ -105,18 +105,19 @@ flag.
 The following table describes the driver-specific options that you can pass to
 `--option` when creating a custom network using the `bridge` driver.
 
-| Option                                           | Default        | Description                                                 |
-| ------------------------------------------------ | -------------- | ----------------------------------------------------------- |
-| `com.docker.network.bridge.name`                 |                | Interface name to use when creating the Linux bridge.       |
-| `com.docker.network.bridge.enable_ip_masquerade` | `true`         | Enable IP masquerading.                                     |
-| `com.docker.network.bridge.enable_icc`           | `true`         | Enable or Disable inter-container connectivity.             |
-| `com.docker.network.bridge.host_binding_ipv4`    |                | Default IP when binding container ports.                    |
-| `com.docker.network.driver.mtu`                  | `0` (no limit) | Set the containers network Maximum Transmission Unit (MTU). |
-| `com.docker.network.container_iface_prefix`      | `eth`          | Set a custom prefix for container interfaces.               |
+| Option                                           | Default        | Description                                                                                   |
+| ------------------------------------------------ | -------------- | --------------------------------------------------------------------------------------------- |
+| `com.docker.network.bridge.name`                 |                | Interface name to use when creating the Linux bridge.                                         |
+| `com.docker.network.bridge.enable_ip_masquerade` | `true`         | Enable IP masquerading.                                                                       |
+| `com.docker.network.bridge.enable_icc`           | `true`         | Enable or Disable inter-container connectivity.                                               |
+| `com.docker.network.bridge.host_binding_ipv4`    |                | Default IP when binding container ports.                                                      |
+| `com.docker.network.driver.mtu`                  | `0` (no limit) | Set the containers network Maximum Transmission Unit (MTU).                                   |
+| `com.docker.network.container_iface_prefix`      | `eth`          | Set a custom prefix for container interfaces.                                                 |
+| `com.docker.network.bridge.inhibit_ipv4`         | `false`        | Prevent Docker from [assigning an IP address](#skip-ip-address-configuration) to the network. |
 
 Some of these options are also available as flags to the `dockerd` CLI, and you
 can use them to configure the default `docker0` bridge when starting the Docker
-daemon. The following tables shows which options have equivalent flags in the
+daemon. The following table shows which options have equivalent flags in the
 `dockerd` CLI.
 
 | Option                                           | Flag        |
@@ -131,7 +132,7 @@ daemon. The following tables shows which options have equivalent flags in the
 The Docker daemon supports a `--bridge` flag, which you can use to define
 your own `docker0` bridge. Use this option if you want to run multiple daemon
 instances on the same host. For details, see
-[Run multiple daemons](../../engine/reference/commandline/dockerd.md#run-multiple-daemons).
+[Run multiple daemons](../../reference/cli/dockerd.md#run-multiple-daemons).
 
 ## Manage a user-defined bridge
 
@@ -144,7 +145,7 @@ $ docker network create my-net
 
 You can specify the subnet, the IP address range, the gateway, and other
 options. See the
-[docker network create](../../engine/reference/commandline/network_create.md#specify-advanced-options)
+[docker network create](../../reference/cli/docker/network/create.md#specify-advanced-options)
 reference or the output of `docker network create --help` for details.
 
 Use the `docker network rm` command to remove a user-defined bridge
@@ -168,7 +169,7 @@ $ docker network rm my-net
 ## Connect a container to a user-defined bridge
 
 When you create a new container, you can specify one or more `--network` flags.
-This example connects a Nginx container to the `my-net` network. It also
+This example connects an Nginx container to the `my-net` network. It also
 publishes port 80 in the container to port 8080 on the Docker host, so external
 clients can access that port. Any other container connected to the `my-net`
 network has access to all ports on the `my-nginx` container, and vice versa.
@@ -256,6 +257,21 @@ to a single network.
 
 For more information about this limitation, see
 [moby/moby#44973](https://github.com/moby/moby/issues/44973#issuecomment-1543747718).
+
+## Skip IP address configuration
+
+The `com.docker.network.bridge.inhibit_ipv4` option lets you create a network
+that uses an existing bridge and have Docker skip configuring the IPv4 address
+on the bridge. This is useful if you want to configure the IP address for the
+bridge manually. For instance if you add a physical interface to your bridge,
+and need to move its IP address to the bridge interface.
+
+To use this option, you should first configure the Docker daemon to use a
+self-managed bridge, using the `bridge` option in the `daemon.json` or the
+`dockerd --bridge` flag.
+
+With this configuration, north-south traffic won't work unless you've manually
+configured the IP address for the bridge.
 
 ## Next steps
 

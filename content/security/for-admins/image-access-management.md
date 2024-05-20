@@ -8,9 +8,9 @@ aliases:
 - /admin/organization/image-access/
 ---
 
-> Note
+> **Note**
 >
-> Image Access Management is available to [Docker Business](../../subscription/details.md) customers only.
+> Image Access Management is available to [Docker Business](../../subscription/core-subscription/details.md#docker-business) customers only.
 
 Image Access Management gives administrators control over which types of images, such as Docker Official Images, Docker Verified Publisher Images, or community images, their developers can pull from Docker Hub.
 
@@ -36,3 +36,7 @@ You need to [configure a registry.json to enforce sign-in](configure-sign-in.md)
 
 {{< /tab >}}
 {{< /tabs >}}
+
+## More resources
+
+- [Video: Hardened Desktop Image Access Management](https://www.youtube.com/watch?v=r3QRKHA1A5U)

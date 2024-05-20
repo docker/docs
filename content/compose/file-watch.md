@@ -4,9 +4,7 @@ keywords: compose, file watch, experimental
 title: Use Compose Watch
 ---
 
-> **Note**
->
-> Compose Watch is available in Docker Compose version 2.22 and later.
+{{< introduced compose 2.22.0 "release-notes.md#2220" >}}
 
 Use `watch` to automatically update and preview your running Compose services as you edit and save your code. 
 
@@ -17,7 +15,7 @@ For many projects, this allows for a hands-off development workflow once Compose
 * Directories are watched recursively
 * Glob patterns aren't supported
 * Rules from `.dockerignore` apply
-  * Use `include` / `exclude` to override
+  * Use `ignore` option to define additional paths to be ignored (same syntax)
   * Temporary/backup files for common IDEs (Vim, Emacs, JetBrains, & more) are ignored automatically
   * `.git` directories are ignored automatically
 
@@ -43,7 +41,7 @@ Each rule requires, a `path` pattern and `action` to take when a modification is
 the `action`, additional fields might be accepted or required. 
 
 Watch mode can be used with many different languages and frameworks.
-The specific paths and rules will vary project to project, but the concepts remain the same. 
+The specific paths and rules will vary from project to project, but the concepts remain the same. 
 
 ### Prerequisites
 
@@ -51,7 +49,6 @@ In order to work properly, `watch` relies on common executables. Make sure your 
 * stat
 * mkdir
 * rmdir
-* tar
 
 `watch` also requires that the container's `USER` can write to the target path so it can update files. A common pattern is for 
 initial content to be copied into the container using the `COPY` instruction in a Dockerfile. To ensure such files are owned 
@@ -59,8 +56,14 @@ by the configured user, use the `COPY --chown` flag:
 
 ```dockerfile
 # Run as a non-privileged user
-RUN adduser -ms /bin/bash -u 1001 app
+FROM node:18-alpine
+RUN useradd -ms /bin/sh -u 1001 app
 USER app
+
+# Install dependencies
+WORKDIR /app
+COPY package.json package.lock .
+RUN npm install
 
 # Copy source files into application directory
 COPY --chown=app:app . /app
@@ -138,7 +141,7 @@ services:
           path: package.json
 ```
 
-In this example, when running `docker compose watch`, a container for the `web` service is launched using an image built from the `Dockerfile` in the project's root.
+In this example, when running `docker compose up --watch`, a container for the `web` service is launched using an image built from the `Dockerfile` in the project's root.
 The `web` service runs `npm start` for its command, which then launches a development version of the application with Hot Module Reload enabled in the bundler (Webpack, Vite, Turbopack, etc).
 
 After the service is up, the watch mode starts monitoring the target directories and files.
@@ -155,7 +158,7 @@ This pattern can be followed for many languages and frameworks, such as Python w
 ## Use `watch`
 
 1. Add `watch` sections to one or more services in `compose.yaml`.
-2. Run `docker compose watch` to build and launch a Compose project and start the file watch mode.
+2. Run `docker compose up --watch` to build and launch a Compose project and start the file watch mode.
 3. Edit service source files using your preferred IDE or editor.
 
 > **Looking for a sample project to test things out?**
@@ -165,6 +168,18 @@ This pattern can be followed for many languages and frameworks, such as Python w
 > for a demonstration of Compose `watch`.
 { .tip }
 
+
+> **Tip**
+>
+> Watch can also be used with the dedicated `docker compose watch` command if you don't want to 
+> get the application logs mixed with the (re)build logs and filesystem sync events.
+{ .tip }
+
+
 ## Feedback
 
 We are actively looking for feedback on this feature. Give feedback or report any bugs you may find in the [Compose Specification repository](https://github.com/compose-spec/compose-spec/pull/253).
+
+## Reference
+
+- [Compose Develop Specification](compose-file/develop.md)

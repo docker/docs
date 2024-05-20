@@ -8,17 +8,21 @@ aliases:
 - /docker-hub/registry-access-management/
 ---
 
-> Note
+> **Note**
 >
-> Registry Access Management is available to [Docker Business](../../subscription/details.md) customers only. 
+> Registry Access Management is available to [Docker Business](../../subscription/core-subscription/details.md) customers only.
 
-With Registry Access Management (RAM), administrators can ensure that their developers using Docker Desktop only access allowed registries. This is done through the Registry Access Management dashboard on Docker Hub. 
+With Registry Access Management (RAM), administrators can ensure that their developers using Docker Desktop only access allowed registries. This is done through the Registry Access Management dashboard in Docker Hub or the Docker Admin Console.
 
-Registry Access Management supports both cloud and on-prem registries. Example registries administrators can allow include: 
+Registry Access Management supports both cloud and on-prem registries. This feature operates at the DNS level and therefore is compatible with all registries. You can add any hostname or domain name you’d like to include in the list of allowed registries. However, if the registry redirects to other domains such as `s3.amazon.com`, then you must add those domains to the list.
+
+Example registries administrators can allow include:
+
  - Docker Hub. This is enabled by default.
  - Amazon ECR
  - GitHub Container Registry
  - Google Container Registry
+ - GitLab Container Registry
  - Nexus
  - Artifactory
 
@@ -59,3 +63,7 @@ There are certain limitations when using Registry Access Management:
 - Under the WSL 2 network, traffic from all Linux distributions is restricted (this will be resolved in the updated 5.15 series Linux kernel)
 
 Also, Registry Access Management operates on the level of hosts, not IP addresses. Developers can bypass this restriction within their domain resolution, for example by running Docker against a local proxy or modifying their operating system's `sts` file. Blocking these forms of manipulation is outside the remit of Docker Desktop.
+
+## More resources
+
+- [Video: Hardened Desktop Registry Access Management](https://www.youtube.com/watch?v=oA1WQZWnTAk)

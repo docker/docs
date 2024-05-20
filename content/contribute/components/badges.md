@@ -16,6 +16,12 @@ You can also make a badge a link.
 
 [{{< badge color="blue" text="badge with a link" >}}](../_index.md)
 
+### Usage guidelines
+
+We use the violet badge to highlight new content in our docs: {{< badge color=violet text="New" >}} 
+
+Best practice is to use this badge for no longer than 2 months post release of the feature.
+
 ### Markup
 
 ```go

@@ -1,34 +1,33 @@
-<header class="sticky top-0 z-20 h-16 px-4 text-white bg-gradient-to-r from-accent-light to-blue-light-500 dark:from-accent-dark dark:to-blue-dark-100">
-  <div class="mx-auto flex h-full max-w-[1440px] items-center justify-between">
-    <div class="flex h-full items-center gap-8 md:gap-2">
-      <button x-data tabindex="4" @click="() => {
-      $store.showSidebar = ! $store.showSidebar;
-      const sidebar = document.querySelector('#sidebar');
-      if ($store.showSidebar) {
-        sidebar.classList.replace('md:hidden', 'md:block');
-      } else {
-        sidebar.classList.replace('md:block', 'md:hidden');
-      }
-    }" class="btn-icon-round menu-btn material-symbols-rounded hidden h-full px-4 md:block" aria-label="Menu"
-        id="menu-btn">
-        menu
+<header
+  class="sticky top-0 z-20 h-16 px-4 text-white bg-gradient-to-r from-accent-light to-blue-light-500 dark:from-accent-dark dark:to-blue-dark-100">
+  <div class="mx-auto flex h-full max-w-[1400px] items-center justify-between">
+    <div class="flex h-full items-center md:gap-8 gap-2">
+      {{ if not .IsHome }}
+      <button x-data @click="$dispatch('togglesidebar')"
+        class="icon-svg block px-4 md:hidden h-full" aria-label="Menu">
+        {{ partialCached "icon" "menu" "menu" }}
       </button>
+      {{ end }}
       <div>
-        <a href="{{ site.BaseURL }}">
+        {{/* main logo */}}
+        <a title="Docker Docs home page" href="{{ site.BaseURL }}">
           <div>
-            {{ readFile "static/assets/images/docker-docs-logo.svg" | safeHTML }}
+            {{- (resources.Get "images/docker-docs-white.svg").Content | safe.HTML -}}
           </div>
         </a>
       </div>
       {{ partial "top-nav.html" . }}
     </div>
     <div class="flex items-center gap-6">
-      <div id="docsearch"></div>
-      <button id="theme-switch" tabindex="1" class="material-symbols-rounded"
+      {{ partialCached "search.html" "-" }}
+      <button aria-label="Theme switch" id="theme-switch" class="svg-icon"
         x-data="{ theme: localStorage.getItem('theme-preference') }" x-init="$watch('theme', value => {
         localStorage.setItem('theme-preference', value);
         document.firstElementChild.className = value;
-      })" @click="theme = (theme === 'dark' ? 'light' : 'dark')" x-text="`${theme}_mode`"></button>
+      })" @click="theme = (theme === 'dark' ? 'light' : 'dark')">
+        <span class="icon-svg dark:hidden">{{ partialCached "icon" "light_mode" "light_mode"}}</span>
+        <span class="icon-svg hidden dark:block">{{ partialCached "icon" "dark_mode" "dark_mode"}}</span>
+      </button>
     </div>
   </div>
 

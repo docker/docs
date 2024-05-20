@@ -5,7 +5,7 @@ keywords: build, buildx, buildkit, context, git, tarball, stdin
 ---
 
 The `docker build` and `docker buildx build` commands build Docker images from
-a [Dockerfile](../../engine/reference/builder.md) and a context.
+a [Dockerfile](../../reference/dockerfile.md) and a context.
 
 ## What is a build context?
 
@@ -207,7 +207,7 @@ clone a specific branch, tag, and subdirectory of a repository.
 
 The format of the URL fragment is `#ref:dir`, where:
 
-- `ref` is the name of the branch, tag, or remote reference
+- `ref` is the name of the branch, tag, or commit hash
 - `dir` is a subdirectory inside the repository
 
 For example, the following command uses the `container` branch,
@@ -231,11 +231,22 @@ contexts:
 | `myrepo.git#mytag:myfolder`    | `refs/tags/mytag`             | `/myfolder`        |
 | `myrepo.git#mybranch:myfolder` | `refs/heads/mybranch`         | `/myfolder`        |
 
+When you use a commit hash as the `ref` in the URL fragment, use the full,
+40-character string SHA-1 hash of the commit. A short hash, for example a hash
+truncated to 7 characters, is not supported.
+
+```bash
+# ✅ The following works:
+docker build github.com/docker/buildx#d4f088e689b41353d74f1a0bfcd6d7c0b213aed2
+# ❌ The following doesn't work because the commit hash is truncated:
+docker build github.com/docker/buildx#d4f088e
+```
+
 #### Keep `.git` directory
 
 By default, BuildKit doesn't keep the `.git` directory when using Git contexts.
 You can configure BuildKit to keep the directory by setting the
-[`BUILDKIT_CONTEXT_KEEP_GIT_DIR` build argument](../../engine/reference/builder.md#buildkit-built-in-build-args).
+[`BUILDKIT_CONTEXT_KEEP_GIT_DIR` build argument](../../reference/dockerfile.md#buildkit-built-in-build-args).
 This can be useful to if you want to retrieve Git information during your build:
 
 ```dockerfile
@@ -261,7 +272,7 @@ either SSH or token-based authentication.
 Buildx automatically detects and uses SSH credentials if the Git context you
 specify is an SSH or Git address. By default, this uses `$SSH_AUTH_SOCK`.
 You can configure the SSH credentials to use with the
-[`--ssh` flag](../../engine/reference/commandline/buildx_build.md#ssh).
+[`--ssh` flag](../../reference/cli/docker/buildx/build.md#ssh).
 
 ```console
 $ docker buildx build --ssh default git@github.com:user/private.git
@@ -269,7 +280,7 @@ $ docker buildx build --ssh default git@github.com:user/private.git
 
 If you want to use token-based authentication instead, you can pass the token
 using the
-[`--secret` flag](../../engine/reference/commandline/buildx_build.md#secret).
+[`--secret` flag](../../reference/cli/docker/buildx/build.md#secret).
 
 ```console
 $ GIT_AUTH_TOKEN=<token> docker buildx build \
@@ -411,7 +422,7 @@ ERROR: failed to solve: failed to compute cache key: failed to calculate checksu
 You can use a `.dockerignore` file to exclude files or directories from the
 build context.
 
-```gitignore
+```text
 # .dockerignore
 node_modules
 bar
@@ -471,7 +482,7 @@ on GitHub, which contains the source code.
 
 The following code snippet shows an example `.dockerignore` file.
 
-```gitignore
+```text
 # comment
 */temp*
 */*/temp*
@@ -514,7 +525,7 @@ You can prepend lines with a `!` (exclamation mark) to make exceptions to
 exclusions. The following is an example `.dockerignore` file that uses this
 mechanism:
 
-```gitignore
+```text
 *.md
 !README.md
 ```
@@ -527,7 +538,7 @@ The placement of `!` exception rules influences the behavior: the last line of
 the `.dockerignore` that matches a particular file determines whether it's
 included or excluded. Consider the following example:
 
-```gitignore
+```text
 *.md
 !README*.md
 README-secret.md
@@ -538,7 +549,7 @@ No markdown files are included in the context except README files other than
 
 Now consider this example:
 
-```gitignore
+```text
 *.md
 README-secret.md
 !README*.md

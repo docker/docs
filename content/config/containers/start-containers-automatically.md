@@ -66,7 +66,7 @@ Keep the following in mind when using restart policies:
 
 - Restart policies only apply to containers. To configure restart policies for
   Swarm services, see
-  [flags related to service restart](../../engine/reference/commandline/service_create.md).
+  [flags related to service restart](../../reference/cli/docker/service/create.md).
 
 ### Restarting foreground containers
 
@@ -139,7 +139,7 @@ container. This behavior is illustrated in the following example.
 
 If restart policies don't suit your needs, such as when processes outside
 Docker depend on Docker containers, you can use a process manager such as
-[systemd](https://freedesktop.org/wiki/Software/systemd/) or
+[systemd](https://systemd.io/) or
 [supervisor](http://supervisord.org/) instead.
 
 > **Warning**

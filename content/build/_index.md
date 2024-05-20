@@ -1,6 +1,6 @@
 ---
 title: Overview of Docker Build
-description: Introduction and overview of Docker Build
+description: Get an overview of Docker Build to package and bundle your code and ship it anywhere
 keywords: build, buildx, buildkit
 grid:
 - title: Packaging your software
@@ -17,6 +17,10 @@ grid:
     architectures.
   icon: content_copy
   link: /build/building/multi-platform/
+- title: Build Cloud
+  description: Orchestrate your builds with Bake.
+  icon: /assets/images/logo-build-cloud.svg
+  link: /build/cloud/
 - title: Architecture
   description: Explore BuildKit, the open source build engine.
   icon: construction

@@ -29,9 +29,9 @@ Create a GitHub repository, configure the Docker Hub secrets, and push your sour
 
 4. Create a new [Personal Access Token
    (PAT)](/security/for-developers/access-tokens/#create-an-access-token) for Docker Hub. You
-   can name this token `node-docker`.
+   can name this token `node-docker`. Make sure access permissions include Read and Write.
 
-5. Add the PAT as a second secret in your GitHub repository, with the name
+5. Add the PAT as a second **Repository secrets** in your GitHub repository, with the name
    `DOCKERHUB_TOKEN`.
 
 6. In your local repository on your machine, run the following command to change
@@ -43,9 +43,11 @@ Create a GitHub repository, configure the Docker Hub secrets, and push your sour
    $ git remote set-url origin https://github.com/your-username/your-repository.git
    ```
 
-7. Run the following command to push your local repository to GitHub.
+7. Run the following commands to stage, commit, and push your local repository to GitHub.
 
    ```console
+   $ git add -A
+   $ git commit -m "my commit"
    $ git push -u origin main
    ```
 
@@ -99,10 +101,13 @@ to Docker Hub.
            uses: docker/build-push-action@v5
            with:
              context: .
+             platforms: linux/amd64,linux/arm64/v8
              push: true
              target: prod
              tags: ${{ secrets.DOCKER_USERNAME }}/${{ github.event.repository.name }}:latest
    ```
+
+   If your Dockerfile is in a different directory, update the `context` with the path to the directory containing the Dockerfile.
 
    For more information about the YAML syntax used here, see [Workflow syntax for GitHub Actions](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions).
 
@@ -136,4 +141,4 @@ Related information:
 
 Next, learn how you can locally test and debug your workloads on Kubernetes before deploying.
 
-{{< button text="Develop using Kubernetes" url="./deploy.md" >}}
+{{< button text="Test your deployment" url="./deploy.md" >}}

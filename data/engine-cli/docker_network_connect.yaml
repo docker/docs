@@ -105,7 +105,7 @@ examples: |-
 
     ### Use the legacy `--link` option (--link) {#link}
 
-    You can use `--link` option to link another container with a preferred alias
+    You can use `--link` option to link another container with a preferred alias.
 
     ```console
     $ docker network connect --link container1:c1 multi-host-network container2
@@ -152,6 +152,7 @@ examples: |-
     the same type. For example, you can connect a single container bridge and overlay
     networks.
 deprecated: false
+hidden: false
 min_api_version: "1.21"
 experimental: false
 experimentalcli: false

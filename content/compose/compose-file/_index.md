@@ -26,7 +26,7 @@ grid:
   link: /compose/compose-file/07-volumes/
 - title: Configs top-level element
   description: Find out about configs in Compose.
-  icon: settings_suggest
+  icon: settings
   link: /compose/compose-file/08-configs/
 - title: Secrets top-level element
   description: Learn about secrets in Compose.
@@ -37,23 +37,16 @@ aliases:
 - /compose/compose-file/compose-file-v1/
 ---
 
->**New to Compose?**
+>**New to Docker Compose?**
 >
-> Find more information about the [key features and use cases of Docker Compose](../intro/features-uses.md) or [try the get started guide](../gettingstarted.md).
+> Find more information about the [key features and use cases of Docker Compose](../intro/features-uses.md) or [try the quickstart guide](../gettingstarted.md).
 { .tip }
 
 The Compose Specification is the latest and recommended version of the Compose file format. It helps you define a [Compose file](../compose-application-model.md) which is used to configure your Docker application’s services, networks, volumes, and more.
 
 Legacy versions 2.x and 3.x of the Compose file format were merged into the Compose Specification. It is implemented in versions 1.27.0 and above (also known as Compose V2) of the Docker Compose CLI.
 
-The Compose Specification on Docker Docs is the Docker Compose implementation. If you wish to implement your own version of the Compose Specification, see the [Compose Specication repository](https://github.com/compose-spec/compose-spec).
-
-> **Note**
->
-> Compose V1 no longer receives updates and is not available in new releases of Docker Desktop.
->
-> Compose V2 is included with all currently supported versions of Docker Desktop.
-> For more information, see [Migrate to Compose V2](/compose/migrate).
+The Compose Specification on Docker Docs is the Docker Compose implementation. If you wish to implement your own version of the Compose Specification, see the [Compose Specification repository](https://github.com/compose-spec/compose-spec).
 
 Use the following links to navigate key sections of the Compose Specification. 
 

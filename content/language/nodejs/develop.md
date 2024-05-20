@@ -21,114 +21,253 @@ In this section, you'll learn how to set up a development environment for your c
 
 You can use containers to set up local services, like a database. In this section, you'll update the `compose.yaml` file to define a database service and a volume to persist data.
 
-Open the `compose.yaml` file in an IDE or text editor. You'll notice it
-already contains commented-out instructions for a Postgres database and volume.
+1. Open your `compose.yaml` file in an IDE or text editor.
+2. Uncomment the database related instructions. The following is the updated
+   `compose.yaml` file.
 
-Open `src/persistence/postgres.js` in an IDE or text editor. You'll notice that
-this application uses a Postgres database and requires some environment
+   > **Important**
+   >
+   > For this section, don't run `docker compose up` until you are instructed to. Running the command at intermediate points may incorrectly initialize your database.
+   { .important }
+
+   ```yaml {hl_lines="26-51",collapse=true,title=compose.yaml}
+   # Comments are provided throughout this file to help you get started.
+   # If you need more help, visit the Docker Compose reference guide at
+   # https://docs.docker.com/go/compose-spec-reference/
+
+   # Here the instructions define your application as a service called "server".
+   # This service is built from the Dockerfile in the current directory.
+   # You can add other services your application may depend on here, such as a
+   # database or a cache. For examples, see the Awesome Compose repository:
+   # https://github.com/docker/awesome-compose
+   services:
+     server:
+       build:
+         context: .
+       environment:
+         NODE_ENV: production
+       ports:
+         - 3000:3000
+   
+   # The commented out section below is an example of how to define a PostgreSQL
+   # database that your application can use. `depends_on` tells Docker Compose to
+   # start the database before your application. The `db-data` volume persists the
+   # database data between container restarts. The `db-password` secret is used
+   # to set the database password. You must create `db/password.txt` and add
+   # a password of your choosing to it before running `docker-compose up`.
+       
+       depends_on:
+         db:
+           condition: service_healthy
+     db:
+       image: postgres
+       restart: always
+       user: postgres
+       secrets:
+         - db-password
+       volumes:
+         - db-data:/var/lib/postgresql/data
+       environment:
+         - POSTGRES_DB=example
+         - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
+       expose:
+         - 5432
+       healthcheck:
+         test: [ "CMD", "pg_isready" ]
+         interval: 10s
+         timeout: 5s
+         retries: 5
+   volumes:
+     db-data:
+   secrets:
+     db-password:
+       file: db/password.txt
+   ```
+
+   > **Note**
+   >
+   > To learn more about the instructions in the Compose file, see [Compose file
+   > reference](/compose/compose-file/).
+
+
+3. Open `src/persistence/postgres.js` in an IDE or text editor. You'll notice
+that this application uses a Postgres database and requires some environment
 variables in order to connect to the database. The `compose.yaml` file doesn't
-have these variables defined.
+have these variables defined yet.
+4. Add the environment variables that specify the database configuration. The
+   following is the updated `compose.yaml` file.
 
-You need to update the following items in the `compose.yaml` file:
- - Uncomment all of the database instructions.
- - Add the environment variables under the server service.
- - Add `secrets` to the server service for the database password.
+   ```yaml {hl_lines="16-19",collapse=true,title=compose.yaml}
+   # Comments are provided throughout this file to help you get started.
+   # If you need more help, visit the Docker Compose reference guide at
+   # https://docs.docker.com/go/compose-spec-reference/
 
-The following is the updated `compose.yaml` file.
+   # Here the instructions define your application as a service called "server".
+   # This service is built from the Dockerfile in the current directory.
+   # You can add other services your application may depend on here, such as a
+   # database or a cache. For examples, see the Awesome Compose repository:
+   # https://github.com/docker/awesome-compose
+   services:
+     server:
+       build:
+         context: .
+       environment:
+         NODE_ENV: production
+         POSTGRES_HOST: db
+         POSTGRES_USER: postgres
+         POSTGRES_PASSWORD_FILE: /run/secrets/db-password
+         POSTGRES_DB: example
+       ports:
+         - 3000:3000
+   
+   # The commented out section below is an example of how to define a PostgreSQL
+   # database that your application can use. `depends_on` tells Docker Compose to
+   # start the database before your application. The `db-data` volume persists the
+   # database data between container restarts. The `db-password` secret is used
+   # to set the database password. You must create `db/password.txt` and add
+   # a password of your choosing to it before running `docker-compose up`.
+       
+       depends_on:
+         db:
+           condition: service_healthy
+     db:
+       image: postgres
+       restart: always
+       user: postgres
+       secrets:
+         - db-password
+       volumes:
+         - db-data:/var/lib/postgresql/data
+       environment:
+         - POSTGRES_DB=example
+         - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
+       expose:
+         - 5432
+       healthcheck:
+         test: [ "CMD", "pg_isready" ]
+         interval: 10s
+         timeout: 5s
+         retries: 5
+   volumes:
+     db-data:
+   secrets:
+     db-password:
+       file: db/password.txt
+   ```
 
-```yaml
-services:
-  server:
-    build:
-      context: .
-    environment:
-      NODE_ENV: production
-      POSTGRES_HOST: db
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD_FILE: /run/secrets/db-password
-      POSTGRES_DB: example
-    ports:
-      - 3000:3000
-    depends_on:
-      db:
-        condition: service_healthy
-    secrets:
-      - db-password
-  db:
-    image: postgres
-    restart: always
-    user: postgres
-    secrets:
-      - db-password
-    volumes:
-      - db-data:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_DB=example
-      - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
-    expose:
-      - 5432
-    healthcheck:
-      test: [ "CMD", "pg_isready" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-volumes:
-  db-data:
-secrets:
-  db-password:
-    file: db/password.txt
-```
+5. Add the `secrets` section under the `server` service so that your application securely handles the database password. The following is the updated `compose.yaml` file.
 
-> **Note**
->
-> To learn more about the instructions in the Compose file, see [Compose file
-> reference](/compose/compose-file/).
+   ```yaml {hl_lines="33-34",collapse=true,title=compose.yaml}
+   # Comments are provided throughout this file to help you get started.
+   # If you need more help, visit the Docker Compose reference guide at
+   # https://docs.docker.com/go/compose-spec-reference/
 
-Before you run the application using Compose, notice that this Compose file uses
-`secrets` and specifies a `password.txt` file to hold the database's password.
-You must create this file as it's not included in the source repository.
+   # Here the instructions define your application as a service called "server".
+   # This service is built from the Dockerfile in the current directory.
+   # You can add other services your application may depend on here, such as a
+   # database or a cache. For examples, see the Awesome Compose repository:
+   # https://github.com/docker/awesome-compose
+   services:
+     server:
+       build:
+         context: .
+       environment:
+         NODE_ENV: production
+         POSTGRES_HOST: db
+         POSTGRES_USER: postgres
+         POSTGRES_PASSWORD_FILE: /run/secrets/db-password
+         POSTGRES_DB: example
+       ports:
+         - 3000:3000
+   
+   # The commented out section below is an example of how to define a PostgreSQL
+   # database that your application can use. `depends_on` tells Docker Compose to
+   # start the database before your application. The `db-data` volume persists the
+   # database data between container restarts. The `db-password` secret is used
+   # to set the database password. You must create `db/password.txt` and add
+   # a password of your choosing to it before running `docker-compose up`.
+       
+       depends_on:
+         db:
+           condition: service_healthy
+       secrets:
+         - db-password
+     db:
+       image: postgres
+       restart: always
+       user: postgres
+       secrets:
+         - db-password
+       volumes:
+         - db-data:/var/lib/postgresql/data
+       environment:
+         - POSTGRES_DB=example
+         - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
+       expose:
+         - 5432
+       healthcheck:
+         test: [ "CMD", "pg_isready" ]
+         interval: 10s
+         timeout: 5s
+         retries: 5
+   volumes:
+     db-data:
+   secrets:
+     db-password:
+       file: db/password.txt
+   ```
 
-In the cloned repository's directory, create a new directory named `db`. Inside the `db` directory, create a file named `password.txt`. Open `password.txt` in an IDE or text editor and add a password of your choice. The password must be on a single line with no additional lines in the file.
+6. In the `docker-nodejs-sample` directory, create a directory named `db`.
+7. In the `db` directory, create a file named `password.txt`. This file will
+   contain your database password.
+   
+   You should now have at least the following contents in your
+   `docker-nodejs-sample` directory.
 
-You should now have the following contents in your `docker-nodejs-sample`
-directory.
+   ```text
+   ├── docker-nodejs-sample/
+   │ ├── db/
+   │ │ └── password.txt
+   │ ├── spec/
+   │ ├── src/
+   │ ├── .dockerignore
+   │ ├── .gitignore
+   │ ├── compose.yaml
+   │ ├── Dockerfile
+   │ ├── package-lock.json
+   │ ├── package.json
+   │ └── README.md
+   ```
 
-```text
-├── docker-nodejs-sample/
-│ ├── db/
-│ │ └── password.txt
-│ ├── spec/
-│ ├── src/
-│ ├── .dockerignore
-│ ├── .gitignore
-│ ├── compose.yaml
-│ ├── Dockerfile
-│ ├── package-lock.json
-│ ├── package.json
-│ ├── README.Docker.md
-│ └── README.md
-```
+8. Open the `password.txt` file in an IDE or text editor, and specify a password
+   of your choice. Your password must be on a single line with no additional
+   lines. Ensure that the file doesn't contain any newline characters or other
+   hidden characters.
+9. Ensure that you save your changes to all the files that you have modified.
+10. Run the following command to start your application.
 
-Run the following command to start your application.
+    ```console
+    $ docker compose up --build
+    ```
 
-```console
-$ docker compose up --build
-```
+11. Open a browser and verify that the application is running at
+    [http://localhost:3000](http://localhost:3000).
+12. Add some items to the todo list to test data persistence.
+13. After adding some items to the todo list, press `ctrl+c` in the terminal to
+    stop your application.
+14. In the terminal, run `docker compose rm` to remove your containers.
 
-Open a browser and verify that the application is running at [http://localhost:3000](http://localhost:3000).
+    ```console
+    $ docker compose rm
+    ```
 
-Add some items to the todo list to test data persistence.
+15. Run `docker compose up` to run your application again.
 
-After adding some items to the todo list, press `ctrl+c` in the terminal to stop your application.
+    ```console
+    $ docker compose up --build
+    ```
 
-In the terminal, run `docker compose rm` to remove your containers and then run `docker compose up` to run your application again.
-
-```console
-$ docker compose rm
-$ docker compose up --build
-```
-
-Refresh [http://localhost:3000](http://localhost:3000) in your browser and verify that the todo items persisted, even after the containers were removed and ran again.
+16. Refresh [http://localhost:3000](http://localhost:3000) in your browser and verify that the todo items persisted, even after the containers were removed and ran again.
 
 ## Configure and run a development container
 
@@ -148,7 +287,7 @@ development, you can use one multi-stage Dockerfile for both.
 
 Update your Dockerfile to the following multi-stage Dockerfile.
 
-```dockerfile
+```dockerfile {hl_lines="5-26",collapse=true,title=Dockerfile}
 # syntax=docker/dockerfile:1
 
 ARG NODE_VERSION=18.0.0
@@ -167,7 +306,6 @@ COPY . .
 CMD npm run dev
 
 FROM base as prod
-ENV NODE_ENV production
 RUN --mount=type=bind,source=package.json,target=package.json \
     --mount=type=bind,source=package-lock.json,target=package-lock.json \
     --mount=type=cache,target=/root/.npm \
@@ -178,9 +316,9 @@ CMD node src/index.js
 ```
 
 In the Dockerfile, you first add a label `as base` to the `FROM
-node:${NODE_VERSION}-alpine` statement. This allows you to refer to this build
-stage in other build stages. Next, you add a new build stage labeled `dev` to
-install your dev dependencies and start the container using `npm run dev`.
+node:${NODE_VERSION}-alpine` statement. This lets you refer to this build stage
+in other build stages. Next, you add a new build stage labeled `dev` to install
+your development dependencies and start the container using `npm run dev`.
 Finally, you add a stage labeled `prod` that omits the dev dependencies and runs
 your application using `node src/index.js`. To learn more about multi-stage
 builds, see [Multi-stage builds](../../build/building/multi-stage.md).
@@ -189,8 +327,8 @@ Next, you'll need to update your Compose file to use the new stage.
 
 ### Update your Compose file for development
 
-To run the `dev` stage with Compose, you need to update your `compose.yaml` file.
-Open your `compose.yaml` file in an IDE or text editor, and then add the
+To run the `dev` stage with Compose, you need to update your `compose.yaml`
+file. Open your `compose.yaml` file in an IDE or text editor, and then add the
 `target: dev` instruction to target the `dev` stage from your multi-stage
 Dockerfile.
 
@@ -198,23 +336,23 @@ Also, add a new volume to the server service for the bind mount. For this applic
 
 Lastly, publish port `9229` for debugging.
 
-The following is the updated Compose file.
+The following is the updated Compose file. All comments have been removed.
 
-```yaml
+```yaml {hl_lines=[5,8,20,21],collapse=true,title=compose.yaml}
 services:
   server:
     build:
       context: .
       target: dev
+    ports:
+      - 3000:3000
+      - 9229:9229
     environment:
       NODE_ENV: production
       POSTGRES_HOST: db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD_FILE: /run/secrets/db-password
       POSTGRES_DB: example
-    ports:
-      - 3000:3000
-      - 9229:9229
     depends_on:
       db:
         condition: service_healthy

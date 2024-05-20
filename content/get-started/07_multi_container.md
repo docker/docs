@@ -44,7 +44,7 @@ In the following steps, you'll create the network first and then attach the MySQ
    database will use to initialize the database. To learn more about the MySQL environment variables, see the "Environment Variables" section in the [MySQL Docker Hub listing](https://hub.docker.com/_/mysql/).
 
    {{< tabs >}}
-   {{< tab name="Mac / Linux" >}}
+   {{< tab name="Mac / Linux / Git Bash" >}}
    
    ```console
    $ docker run -d \
@@ -56,7 +56,7 @@ In the following steps, you'll create the network first and then attach the MySQ
    ```
 
    {{< /tab >}}
-   {{< tab name="Windows (PowerShell)" >}}
+   {{< tab name="PowerShell" >}}
 
    ```powershell
    $ docker run -d `
@@ -68,7 +68,7 @@ In the following steps, you'll create the network first and then attach the MySQ
    ```
    
    {{< /tab >}}
-   {{< tab name="Windows (Command Prompt)" >}}
+   {{< tab name="Command Prompt" >}}
 
    ```console
    $ docker run -d ^
@@ -219,7 +219,7 @@ You can now start your dev-ready container.
    ```
    
    {{< /tab >}}
-   {{< tab name="Windows (PowerShell)" >}}
+   {{< tab name="PowerShell" >}}
    In Windows, run this command in PowerShell.
 
    ```powershell
@@ -235,7 +235,7 @@ You can now start your dev-ready container.
    ```
 
    {{< /tab >}}
-   {{< tab name="Windows (Command Prompt)" >}}
+   {{< tab name="Command Prompt" >}}
    In Windows, run this command in Command Prompt.
 
    ```console
@@ -250,6 +250,21 @@ You can now start your dev-ready container.
      sh -c "yarn install && yarn run dev"
    ```
 
+   {{< /tab >}}
+   {{< tab name="Git Bash" >}}
+
+   ```console
+   $ docker run -dp 127.0.0.1:3000:3000 \
+     -w //app -v "/$(pwd):/app" \
+     --network todo-app \
+     -e MYSQL_HOST=mysql \
+     -e MYSQL_USER=root \
+     -e MYSQL_PASSWORD=secret \
+     -e MYSQL_DB=todos \
+     node:18-alpine \
+     sh -c "yarn install && yarn run dev"
+   ```
+   
    {{< /tab >}}
    {{< /tabs >}}
 
@@ -295,7 +310,7 @@ At this point, you have an application that now stores its data in an external d
 container. You learned a little bit about container networking and service discovery using DNS.
 
 Related information:
- - [docker CLI reference](/engine/reference/commandline/cli/)
+ - [docker CLI reference](/reference/cli/docker/)
  - [Networking overview](../network/index.md)
 
 ## Next steps

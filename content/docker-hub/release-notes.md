@@ -5,6 +5,7 @@ description: Learn about the new features, bug fixes, and breaking changes for D
 keywords: docker hub, whats new, release notes
 toc_min: 1
 toc_max: 2
+tags: [Release notes]
 ---
 
 Here you can learn about the latest changes, new features, bug fixes, and
@@ -107,7 +108,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### New
 
-- You can now purchase or upgrade to a Docker Business subscription using a credit card. To learn more, see [Upgrade your subscription](../subscription/upgrade.md).
+- You can now purchase or upgrade to a Docker Business subscription using a credit card. To learn more, see [Upgrade your subscription](../subscription/core-subscription/upgrade.md).
 
 ## 2021-08-31
 
@@ -201,6 +202,7 @@ to `hub.docker.com`. You can access the page at its new URL: [https://hub.docker
 ## 2019-10-21
 
 ### New features
+
 * **Beta:** Docker Hub now supports two-factor authentication (2FA). Enable it in your account settings, under the **[Security](https://hub.docker.com/settings/security)** section.
 
     > If you lose both your 2FA authentication device and recovery code, you may
@@ -208,6 +210,7 @@ to `hub.docker.com`. You can access the page at its new URL: [https://hub.docker
     { .important }
 
 ### Enhancements
+
 * As a security measure, when two-factor authentication is enabled, the Docker CLI requires a personal access token instead of a password to log in.
 
 ### Known Issues
@@ -218,6 +221,7 @@ to `hub.docker.com`. You can access the page at its new URL: [https://hub.docker
 ## 2019-10-02
 
 ### Enhancements
+
 * You can now manage teams and members straight from your [organization page](https://hub.docker.com/orgs).
 Each organization page now breaks down into these tabs:
   * **New:** Members - manage your members directly from this page (delete,
@@ -254,7 +258,7 @@ Each organization page now breaks down into these tabs:
 
 ### Enhancements
 
-* The [billing page](../subscription/upgrade.md) for personal accounts has been updated. You can access the page at its new URL: [https://hub.docker.com/billing/plan](https://hub.docker.com/billing/plan).
+* The [billing page](../subscription/core-subscription/upgrade.md) for personal accounts has been updated. You can access the page at its new URL: [https://hub.docker.com/billing/plan](https://hub.docker.com/billing/plan).
 
 ### Known Issues
 

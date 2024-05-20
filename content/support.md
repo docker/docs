@@ -6,11 +6,11 @@ aliases:
 - /desktop/support/
 ---
 
-Find information on how to get support, and the scope of Docker support.
+Find information on how to get support, and the scope of support.
 
 ## How do I get support?
 
-If you have a paid Docker subscription, raise a ticket through [Docker support](https://hub.docker.com/support/contact/).
+If you have a paid Docker subscription, you can [contact the Support team](https://hub.docker.com/support/contact/).
 
 All Docker users can seek support through the following resources, where Docker or the community respond on a best effort basis.
    - [Docker Desktop for Windows GitHub repo](https://github.com/docker/for-win) 
@@ -64,6 +64,7 @@ Docker excludes support for the following types of issues:
    * System/Server administration activities
    * Third-party applications not provided by Docker
    * Use on or in conjunction with hardware or software other than that specified in the applicable documentation
+   * Running multiple instances of Docker Desktop on a single machine
 
 ## What Docker Desktop versions are supported?
 
@@ -97,10 +98,4 @@ For more information, see [Docker Data Processing Agreement](https://www.docker.
 
 Before seeking support, you can perform basic troubleshooting. See [Diagnose and troubleshooting](../desktop/troubleshoot/overview.md) for more information.
 
-You can also see if an answer already exists in the following FAQs:
-- [Docker Business or Team onboarding](faq/admin/general-faqs.md)
-- [Docker Desktop](../desktop/faqs/general.md)
-- [Docker Desktop for Linux](../desktop/faqs/linuxfaqs.md)
-- [Docker Desktop for Mac](../desktop/faqs/macfaqs.md)
-- [Docker Desktop for Windows](../desktop/faqs/windowsfaqs.md)
-- [Single Sign-on](faq/security/single-sign-on/faqs.md)
+You can also see if an answer already exists in the [FAQs](/tags/faq/).

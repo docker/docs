@@ -2,14 +2,11 @@
 description: Frequently asked questions for Docker Desktop for Mac
 keywords: desktop, mac, faqs
 title: FAQs for Docker Desktop for Mac
+tags: [FAQ]
 aliases:
 - /desktop/mac/space/
 - /docker-for-mac/space/
 ---
-
-### What is Docker.app?
-
-`Docker.app` is Docker Desktop on Mac. It bundles the Docker client and Docker Engine. `Docker.app` uses the macOS Hypervisor.framework to run containers.
 
 ### What is HyperKit?
 
@@ -29,6 +26,7 @@ runs in the background. The process does not consume any resources unless
 `Docker.app` connects to it, so it's safe to ignore.
 
 ### Where does Docker Desktop store Linux containers and images? 
+
 Docker Desktop stores Linux containers and images in a single, large "disk image" file in the Mac filesystem. This is different from Docker on Linux, which usually stores containers and images in the `/var/lib/docker` directory.
 
 #### Where is the disk image file?
@@ -182,6 +180,7 @@ Desktop `xhyve` virtual machine).
 >   under insecure registries, and does not send client certificates. Commands
 >   like `docker run` that attempt to pull from the registry produce error
 >   messages on the command line, as well as on the registry.
+
 #### Directory structures for certificates
 
 If you have this directory structure, you do not need to manually add the CA
@@ -221,70 +220,3 @@ To learn more about how to install a CA root certificate for the registry and
 how to set the client TLS certificate for verification, see
 [Verify repository client with certificates](../../engine/security/certificates.md)
 in the Docker Engine topics.
-
-### How do I install shell completion?
-
-Docker Desktop comes with scripts to enable completion for the `docker` and `docker compose` commands. The completion scripts may be
-found inside `Docker.app`, in the `Contents/Resources/etc/` directory and can be
-installed both in Bash and Zsh.
-
-#### Bash
-
-Bash has [built-in support for
-completion](https://www.debian-administration.org/article/316/An_introduction_to_bash_completion_part_1) To activate completion for Docker commands, these files need to be
-copied or symlinked to your `bash_completion.d/` directory. For example, if you
-installed bash via [Homebrew](https://brew.sh):
-
-```bash
-etc=/Applications/Docker.app/Contents/Resources/etc
-ln -s $etc/docker.bash-completion $(brew --prefix)/etc/bash_completion.d/docker
-ln -s $etc/docker-compose.bash-completion $(brew --prefix)/etc/bash_completion.d/docker-compose
-```
-
-Add the following to your `~/.bash_profile`:
-
-```bash
-[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
-```
-
-OR
-
-```bash
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-. $(brew --prefix)/etc/bash_completion
-fi
-```
-
-#### Zsh
-
-In Zsh, the [completion
-system](http://zsh.sourceforge.net/Doc/Release/Completion-System.html)
-takes care of things. To activate completion for Docker commands,
-these files need to be copied or symlinked to your Zsh `site-functions/`
-directory. For example, if you installed Zsh via [Homebrew](https://brew.sh):
-
-```bash
-etc=/Applications/Docker.app/Contents/Resources/etc
-ln -s $etc/docker.zsh-completion /usr/local/share/zsh/site-functions/_docker
-ln -s $etc/docker-compose.zsh-completion /usr/local/share/zsh/site-functions/_docker-compose
-```
-
-#### Fish-Shell
-
-Fish-shell also supports tab completion [completion
-system](https://fishshell.com/docs/current/#tab-completion). To activate completion for Docker commands,
-these files need to be copied or symlinked to your Fish-shell `completions/`
-directory.
-
-Create the `completions` directory:
-
-```console
-$ mkdir -p ~/.config/fish/completions
-```
-
-Now add fish completions from docker.
-
-```console
-$ ln -shi /Applications/Docker.app/Contents/Resources/etc/docker.fish-completion ~/.config/fish/completions/docker.fish
-$ ln -shi /Applications/Docker.app/Contents/Resources/etc/docker-compose.fish-completion ~/.config/fish/completions/docker-compose.fish
-```

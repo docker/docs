@@ -165,6 +165,12 @@ $ docker service create --name dns-cache \
 
 ## Bypass the routing mesh
 
+By default, swarm services which publish ports do so using the routing mesh.
+When you connect to a published port on any swarm node (whether it is running a
+given service or not), you are redirected to a worker which is running that
+service, transparently. Effectively, Docker acts as a load balancer for your
+swarm services.
+
 You can bypass the routing mesh, so that when you access the bound port on a
 given node, you are always accessing the instance of the service running on
 that node. This is referred to as `host` mode. There are a few things to keep
@@ -248,9 +254,14 @@ To use an external load balancer without the routing mesh, set `--endpoint-mode`
 to `dnsrr` instead of the default value of `vip`. In this case, there is not a
 single virtual IP. Instead, Docker sets up DNS entries for the service such that
 a DNS query for the service name returns a list of IP addresses, and the client
-connects directly to one of these. You are responsible for providing the list of
-IP addresses and ports to your load balancer. See
-[Configure service discovery](networking.md#configure-service-discovery).
+connects directly to one of these.
+
+You can't use `--endpoint-mode dnsrr` together with `--publish mode=ingress`.
+You must run your own load balancer in front of the service. A DNS query for
+the service name on the Docker host returns a list of IP addresses for the
+nodes running the service. Configure your load balancer to consume this list
+and balance the traffic across the nodes.
+See [Configure service discovery](networking.md#configure-service-discovery).
 
 ## Learn more
 

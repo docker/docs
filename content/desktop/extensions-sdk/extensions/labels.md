@@ -4,15 +4,21 @@ description: Docker extension labels
 keywords: Docker, extensions, sdk, labels
 ---
 
-Extensions use image labels to provide additional information such as title, description, screenshots, and more.
+Extensions use image labels to provide additional information such as a title, description, screenshots, and more.
 
-This information is then displayed as an overview of the extension, so users can choose to install it
+This information is then displayed as an overview of the extension, so users can choose to install it.
 
-![An extension overveiw, generated from labels](images/marketplace-details.png)
+![An extension overview, generated from labels](images/marketplace-details.png)
 
-You can define [Image labels](../../../engine/reference/builder.md#label) in the extension's `Dockerfile`.
+You can define [image labels](../../../reference/dockerfile.md#label) in the extension's `Dockerfile`.
 
-Here is the list of labels you need to specify when building your extension:
+> **Important**
+>
+> If any of the **required** labels are missing in the `Dockerfile`, Docker Desktop considers the extension invalid and doesn't list it in the Marketplace.
+{ .important }
+
+
+Here is the list of labels you can or need to specify when building your extension:
 
 | Label                                       | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | Example                                                                                                                                                                                                                                            |
 | ------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -29,27 +35,22 @@ Here is the list of labels you need to specify when building your extension:
 | `com.docker.extension.account-info`         | No       | Whether the user needs to register to a SaaS platform to use some features of the extension.                                                                                                                                                                                                                                                                                                                                                                                                          | `required` in case it does, leave it empty otherwise.                                                                                                                                                                                              |
 | `com.docker.extension.categories`           | No       | The list of Marketplace categories that your extension belongs to: `ci-cd`, `container-orchestration`, `cloud-deployment`, `cloud-development`, `database`, `kubernetes`, `networking`, `security`,`testing-tools`, `utility-tools`,`volumes`. If you don't specify this label, users won't be able to find your extension in the Extensions Marketplace when filtering by a category. Extensions published to the Marketplace before the 22nd of September 2022 have been auto-categorized by Docker. | Specified as comma separated values in case of having multiple categories e.g: `kubernetes,security` or a single value e.g. `kubernetes`.                                                                                                          |
 
-> Missing required labels
->
-> If any of the previous **required** labels are missing in the `Dockerfile`, Docker Desktop considers the extension invalid and doesn't list it in the Marketplace.
-{ .important }
-
-> HTML content styling
+> **Tip**
 >
 > Docker Desktop applies CSS styles to the provided HTML content. You can make sure that it renders correctly 
-> [within the marketplace](#preview-the-extension-in-the-marketplace). Docker recommends that you follow the 
-> [Styling guidelines](../design/index.md).
+> [within the Marketplace](#preview-the-extension-in-the-marketplace). It is recommended that you follow the 
+> [styling guidelines](../design/index.md).
 { .tip }
 
 ## Preview the extension in the Marketplace
 
 You can validate that the image labels render as you expect.
 
-When you create and install your unpublished extension, you can preview the extension in the Marketplace **Managed** tab. You can see how the extension labels render in the list and in the details page of the extension.
+When you create and install your unpublished extension, you can preview the extension in the Marketplace's **Managed** tab. You can see how the extension labels render in the list and in the details page of the extension.
 
 > Preview extensions already listed in Marketplace
 >
-> When you install a local image of an extension already published in the Marketplace, for example with the tag `latest`, your local image is currently not detected as "unpublished".
+> When you install a local image of an extension already published in the Marketplace, for example with the tag `latest`, your local image is not detected as "unpublished".
 >
 > You can re-tag your image in order to have a different image name that's not listed as a published extension.
 > Use `docker tag org/published-extension unpublished-extension` and then `docker extension install unpublished-extension`.

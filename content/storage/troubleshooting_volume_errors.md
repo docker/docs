@@ -4,6 +4,7 @@ keywords: cadvisor, troubleshooting, volumes, bind-mounts
 title: Troubleshoot storage errors
 aliases:
 - /engine/admin/troubleshooting_volume_errors/
+tags: [ Troubleshooting ]
 ---
 
 This topic discusses errors which may occur when you use Docker volumes or bind

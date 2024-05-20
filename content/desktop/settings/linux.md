@@ -18,24 +18,29 @@ You can also locate the `settings.json` file at `~/.docker/desktop/settings.json
 
 On the **General** tab, you can configure when to start Docker and specify other settings:
 
-- **Start Docker Desktop when you sign in**. Select to automatically start Docker
+- **Start Docker Desktop when you sign in to your computer**. Select to automatically start Docker
   Desktop when you sign in to your machine.
 
 - **Open Docker Dashboard when Docker Desktop starts**. Select to automatically open the
   dashboard when starting Docker Desktop.
 
-- **Choose theme for Docker Desktop**. Choose whether you want to apply a **Light** or **Dark** theme to Docker Desktop. Alternatively you can set Docker Desktop to **Use System Settings**.
+- **Choose theme for Docker Desktop**. Choose whether you want to apply a **Light** or **Dark** theme to Docker Desktop. Alternatively you can set Docker Desktop to **Use system settings**.
 
 - **Choose container terminal**. Determines which terminal is launched when opening the terminal from a container.
 If you choose the integrated terminal, you can run commands in a running container straight from the Docker Dashboard. For more information, see [Explore containers](../use-desktop/container.md).
 
+- **Enable Docker Debug by default**. Check this option to use Docker Debug by default when accessing the integrated terminal. For more information, see [Explore containers](../use-desktop/container.md#integrated-terminal).
+
+- **Use containerd for pulling and storing images**.
+  Turns on the containerd image store.
+  This brings new features like faster container startup performance by lazy-pulling images,
+  and the ability to run Wasm applications with Docker.
+  For more information, see [containerd image store](../containerd.md).
+  
 - **Send usage statistics**. Select so Docker Desktop sends diagnostics,
   crash reports, and usage data. This information helps Docker improve and
   troubleshoot the application. Clear the check box to opt out. Docker may
   periodically prompt you for more information.
-
-- **Show weekly tips**. Select to display useful advice and suggestions about
-  using Docker.
 
 - **Use Enhanced Container Isolation**. Select to enhance security by preventing containers from breaching the Linux VM. For more information, see [Enhanced Container Isolation](../hardened-desktop/enhanced-container-isolation/index.md)
     >**Note**
@@ -130,16 +135,34 @@ File share settings are:
 
 ### Proxies
 
-To configure HTTP proxies, switch on the **Manual proxy configuration** setting.
-This setting is used for logging into Docker, for pulling and pushing images, and for
+HTTP/HTTPS proxies can be used when:
+
+- Signing in to Docker
+- Pulling or pushing images
+- Fetching artifacts during image builds
+- Containers interact with the external network
+- Scanning images
+
+If the host uses a HTTP/HTTPS proxy configuration (static or via Proxy Auto-Configuration), Docker Desktop reads
+this configuration
+and automatically uses these settings for signing in to Docker, for pulling and pushing images, and for
 container Internet access. If the proxy requires authorization then Docker Desktop dynamically asks
 the developer for a username and password. All passwords are stored securely in the OS credential store.
 Note that only the `Basic` proxy authentication method is supported so we recommend using an `https://`
 URL for your HTTP/HTTPS proxies to protect passwords while in transit on the network. Docker Desktop
 supports TLS 1.3 when communicating with proxies.
 
+To set a different proxy for Docker Desktop, turn on **Manual proxy configuration** and enter a single
+upstream proxy URL of the form `http://proxy:port` or `https://proxy:port`.
+
 To prevent developers from accidentally changing the proxy settings, see
 [Settings Management](../hardened-desktop/settings-management/index.md#what-features-can-i-configure-with-settings-management).
+
+The HTTPS proxy settings used for scanning images are set using the `HTTPS_PROXY` environment variable.
+
+> **Note**
+>
+> Docker Desktop also supports the use of [SOCKS5 proxies](../networking.md#socks5-proxy-support).
 
 ### Network
 
@@ -176,7 +199,7 @@ edit the file using your favorite text editor.
 > about how to configure the Docker daemon on a manually installed Docker Engine.
 
 To see the full list of possible configuration options, see the
-[dockerd command reference](/engine/reference/commandline/dockerd/).
+[dockerd command reference](/reference/cli/dockerd/).
 
 Select **Apply & Restart** to save your settings and restart Docker Desktop.
 
@@ -235,10 +258,6 @@ You can also sign up to the [Developer Preview program](https://www.docker.com/c
 ### Beta features
 
 {{< include "beta.md" >}}
-
-#### Use containerd for pulling and storing images
-
-Turns on the containerd image store. This brings new features like faster container startup performance by lazy-pulling images, and the ability to run Wasm applications with Docker. For more information, see [containerd image store](../containerd/index.md).
 
 ### Experimental features
 

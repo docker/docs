@@ -51,10 +51,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
         with:
           buildkitd-flags: --debug
+      
       - name: Build
         uses: docker/build-push-action@v5
         with:
@@ -88,6 +90,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
         with:
@@ -125,6 +128,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
         with:
@@ -146,11 +150,11 @@ fields:
 
 | Name              | Type   | Description                                                                                                                                                                                                                                                             |
 | ----------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `name`            | String | [Name of the node](../../../engine/reference/commandline/buildx_create.md#node). If empty, it's the name of the builder it belongs to, with an index number suffix. This is useful to set it if you want to modify/remove a node in an underlying step of you workflow. |
-| `endpoint`        | String | [Docker context or endpoint](../../../engine/reference/commandline/buildx_create.md#description) of the node to add to the builder                                                                                                                                      |
-| `driver-opts`     | List   | List of additional [driver-specific options](../../../engine/reference/commandline/buildx_create.md#driver-opt)                                                                                                                                                         |
-| `buildkitd-flags` | String | [Flags for buildkitd](../../../engine/reference/commandline/buildx_create.md#buildkitd-flags) daemon                                                                                                                                                                    |
-| `platforms`       | String | Fixed [platforms](../../../engine/reference/commandline/buildx_create.md#platform) for the node. If not empty, values take priority over the detected ones.                                                                                                             |
+| `name`            | String | [Name of the node](../../../reference/cli/docker/buildx/create.md#node). If empty, it's the name of the builder it belongs to, with an index number suffix. This is useful to set it if you want to modify/remove a node in an underlying step of you workflow. |
+| `endpoint`        | String | [Docker context or endpoint](../../../reference/cli/docker/buildx/create.md#description) of the node to add to the builder                                                                                                                                      |
+| `driver-opts`     | List   | List of additional [driver-specific options](../../../reference/cli/docker/buildx/create.md#driver-opt)                                                                                                                                                         |
+| `buildkitd-flags` | String | [Flags for buildkitd](../../../reference/cli/docker/buildx/create.md#buildkitd-flags) daemon                                                                                                                                                                    |
+| `platforms`       | String | Fixed [platforms](../../../reference/cli/docker/buildx/create.md#platform) for the node. If not empty, values take priority over the detected ones.                                                                                                             |
 
 Here is an example using remote nodes with the [`remote` driver](../../drivers/remote.md)
 and [TLS authentication](#tls-authentication):
@@ -208,11 +212,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up SSH
-        uses: MrSquaare/ssh-setup-action@523473d91581ccbf89565e12b40faba93f2708bd # v1.1.0
+        uses: MrSquaare/ssh-setup-action@2d028b70b5e397cf8314c6eaea229a6c3e34977a # v3.1.0
         with:
           host: graviton2
           private-key: ${{ secrets.SSH_PRIVATE_KEY }}
           private-key-name: aws_graviton2
+      
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
         with:
@@ -272,10 +277,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
         with:
           driver: kubernetes
+      
       - name: Build
         run: |
           buildx build .
@@ -300,8 +307,6 @@ name: ci
 
 on:
   push:
-    branches:
-      - "main"
 
 jobs:
   docker:
@@ -309,20 +314,22 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - uses: docker/setup-buildx-action@v3
+      
+      - name: Set up builder1
+        uses: docker/setup-buildx-action@v3
         id: builder1
-      - uses: docker/setup-buildx-action@v3
+      
+      - name: Set up builder2
+        uses: docker/setup-buildx-action@v3
         id: builder2
-      - name: Builder 1 name
-        run: echo ${{ steps.builder1.outputs.name }}
-      - name: Builder 2 name
-        run: echo ${{ steps.builder2.outputs.name }}
+      
       - name: Build against builder1
         uses: docker/build-push-action@v5
         with:
           builder: ${{ steps.builder1.outputs.name }}
           context: .
           target: mytarget1
+      
       - name: Build against builder2
         uses: docker/build-push-action@v5
         with:

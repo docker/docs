@@ -19,7 +19,7 @@ permissions:
 
 jobs:
   publish:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     if: github.repository_owner == 'docker'
     steps:
       -
@@ -102,7 +102,20 @@ jobs:
         name: Upload files to S3 bucket
         if: ${{ env.DOCS_S3_BUCKET != '' }}
         run: |
-          aws --region ${{ env.DOCS_AWS_REGION }} s3 sync --acl public-read public s3://${{ env.DOCS_S3_BUCKET }}/ --delete
+          aws --region ${{ env.DOCS_AWS_REGION }} s3 sync \
+            --acl public-read \
+            --delete \
+            --exclude "*" \
+            --include "*.webp" \
+            --metadata-directive="REPLACE" \
+            --no-guess-mime-type \
+            --content-type="image/webp" \
+            public s3://${{ env.DOCS_S3_BUCKET }}/
+          aws --region ${{ env.DOCS_AWS_REGION }} s3 sync \
+            --acl public-read \
+            --delete \
+            --exclude "*.webp" \
+            public s3://${{ env.DOCS_S3_BUCKET }}/
       -
         name: Update S3 config
         if: ${{ env.DOCS_S3_BUCKET != '' && env.DOCS_S3_CONFIG != '' }}

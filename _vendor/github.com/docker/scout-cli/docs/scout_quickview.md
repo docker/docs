@@ -9,14 +9,14 @@ Quick overview of an image
 
 ### Options
 
-| Name             | Type     | Default | Description                                                                                              |
-|:-----------------|:---------|:--------|:---------------------------------------------------------------------------------------------------------|
-| `--env`          | `string` |         | Name of the environment                                                                                  |
-| `--latest`       |          |         | Latest indexed image                                                                                     |
-| `--org`          | `string` |         | Namespace of the Docker organization                                                                     |
-| `-o`, `--output` | `string` |         | Write the report to a file.                                                                              |
-| `--platform`     | `string` |         | Platform of image to analyze                                                                             |
-| `--ref`          | `string` |         | Reference to use if the provided tarball contains multiple references.<br>Can only be used with archive. |
+| Name             | Type     | Default | Description                                                                                             |
+|:-----------------|:---------|:--------|:--------------------------------------------------------------------------------------------------------|
+| `--env`          | `string` |         | Name of the environment                                                                                 |
+| `--latest`       |          |         | Latest indexed image                                                                                    |
+| `--org`          | `string` |         | Namespace of the Docker organization                                                                    |
+| `-o`, `--output` | `string` |         | Write the report to a file                                                                              |
+| `--platform`     | `string` |         | Platform of image to analyze                                                                            |
+| `--ref`          | `string` |         | Reference to use if the provided tarball contains multiple references.<br>Can only be used with archive |
 
 
 <!---MARKER_GEN_END-->
@@ -52,6 +52,8 @@ or if you want to control from where the image will be resolved, you must prefix
 - `oci-dir://` use an OCI layout directory
 - `archive://` use a tarball archive, as created by `docker save`
 - `fs://` use a local directory or file
+- `sbom://` SPDX file or in-toto attestation file with SPDX predicate or `syft` json SBOM file
+    In case of `sbom://` prefix, if the file is not defined then it will try to read it from the standard input.
 
 ## Examples
 
@@ -75,4 +77,20 @@ $ docker scout quickview golang:1.19.4
 
 ```console
 $ docker scout qv
+```
+
+### Quick overview from an SPDX file
+
+```console
+$  syft -o spdx-json alpine:3.16.1 | docker scout quickview sbom://
+ ✔ Loaded image                                                                                                                              alpine:3.16.1
+ ✔ Parsed image                                                                    sha256:3d81c46cd8756ddb6db9ec36fa06a6fb71c287fb265232ba516739dc67a5f07d
+ ✔ Cataloged contents                                                                     274a317d88b54f9e67799244a1250cad3fe7080f45249fa9167d1f871218d35f
+   ├── ✔ Packages                        [14 packages]
+   ├── ✔ File digests                    [75 files]
+   ├── ✔ File metadata                   [75 locations]
+   └── ✔ Executables                     [16 executables]
+
+  Target   │ <stdin>        │    1C     2H     8M     0L
+    digest │  274a317d88b5  │
 ```

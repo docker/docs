@@ -15,6 +15,7 @@ For more information, see [Environment variables precedence](envvars-precedence.
 { .important }
 
 ## Syntax
+
 The following syntax rules apply to environment files:
 
 - Lines beginning with `#` are processed as comments and ignored.
@@ -42,6 +43,7 @@ The following syntax rules apply to environment files:
   - `VAR=some\tvalue` -> `some\tvalue`
 
 ### Interpolation
+
 Compose supports interpolation in environment files.
 Interpolation is applied for unquoted and double-quoted values.
 Both braced (`${VAR}`) and unbraced (`$VAR`) expressions are supported.
@@ -59,5 +61,4 @@ For braced expressions, the following formats are supported:
   - `${VAR:+replacement}` -> `replacement` if `VAR` is set and non-empty, otherwise empty
   - `${VAR+replacement}` -> `replacement` if `VAR` is set, otherwise empty
 
-
-
+For more information, see [Interpolation](../compose-file/12-interpolation.md) in the Compose Specification. 

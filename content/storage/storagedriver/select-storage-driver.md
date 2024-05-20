@@ -1,7 +1,7 @@
 ---
 title: Docker storage drivers
 description: Learn how to select the proper storage driver for your container.
-keywords: container, storage, driver, btrfs, devicemapper, zfs, overlay, overlay2
+keywords: container, storage, driver, btrfs, zfs, overlay, overlay2
 aliases:
   - /engine/userguide/storagedriver/
   - /engine/userguide/storagedriver/selectadriver/
@@ -21,13 +21,12 @@ driver with the best overall performance and stability in the most usual scenari
 
 The Docker Engine provides the following storage drivers on Linux:
 
-| Driver                                                                                    | Description                                                                                                                                                                                                                                                                                                                                                                                                     |
-| ----------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `overlay2`                                                                                | `overlay2` is the preferred storage driver for all currently supported Linux distributions, and requires no extra configuration.                                                                                                                                                                                                                                                                                |
-| `fuse-overlayfs`                                                                          | `fuse-overlayfs`is preferred only for running Rootless Docker on a host that does not provide support for rootless `overlay2`. On Ubuntu and Debian 10, the `fuse-overlayfs` driver does not need to be used, and `overlay2` works even in rootless mode. Refer to the [rootless mode documentation](../../engine/security/rootless.md) for details.                                                            |
-| `btrfs` and `zfs`                                                                         | The `btrfs` and `zfs` storage drivers allow for advanced options, such as creating "snapshots", but require more maintenance and setup. Each of these relies on the backing filesystem being configured correctly.                                                                                                                                                                                              |
-| `vfs`                                                                                     | The `vfs` storage driver is intended for testing purposes, and for situations where no copy-on-write filesystem can be used. Performance of this storage driver is poor, and is not generally recommended for production use.                                                                                                                                                                                   |
-| `devicemapper` ([deprecated](../../../engine/deprecated.md#device-mapper-storage-driver)) | The `devicemapper` storage driver requires `direct-lvm` for production environments, because `loopback-lvm`, while zero-configuration, has very poor performance. `devicemapper` was the recommended storage driver for CentOS and RHEL, as their kernel version did not support `overlay2`. However, current versions of CentOS and RHEL now have support for `overlay2`, which is now the recommended driver. |
+| Driver            | Description                                                                                                                                                                                                                                                                                                                                          |
+| :---------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `overlay2`        | `overlay2` is the preferred storage driver for all currently supported Linux distributions, and requires no extra configuration.                                                                                                                                                                                                                     |
+| `fuse-overlayfs`  | `fuse-overlayfs`is preferred only for running Rootless Docker on a host that does not provide support for rootless `overlay2`. On Ubuntu and Debian 10, the `fuse-overlayfs` driver does not need to be used, and `overlay2` works even in rootless mode. Refer to the [rootless mode documentation](../../engine/security/rootless.md) for details. |
+| `btrfs` and `zfs` | The `btrfs` and `zfs` storage drivers allow for advanced options, such as creating "snapshots", but require more maintenance and setup. Each of these relies on the backing filesystem being configured correctly.                                                                                                                                   |
+| `vfs`             | The `vfs` storage driver is intended for testing purposes, and for situations where no copy-on-write filesystem can be used. Performance of this storage driver is poor, and is not generally recommended for production use.                                                                                                                        |
 
 <!-- markdownlint-disable reference-links-images -->
 
@@ -64,18 +63,14 @@ example, `btrfs` is only supported if your system uses `btrfs` as storage. In
 general, the following configurations work on recent versions of the Linux
 distribution:
 
-| Linux distribution | Recommended storage drivers | Alternative drivers           |
-| :----------------- | :-------------------------- | :---------------------------- |
-| Ubuntu             | `overlay2`                  | `devicemapper`¹, `zfs`, `vfs` |
-| Debian             | `overlay2`                  | `devicemapper`¹, `vfs`        |
-| CentOS             | `overlay2`                  | `devicemapper`¹, `zfs`, `vfs` |
-| Fedora             | `overlay2`                  | `devicemapper`¹, `zfs`, `vfs` |
-| SLES 15            | `overlay2`                  | `devicemapper`¹, `vfs`        |
-| RHEL               | `overlay2`                  | `devicemapper`¹, `vfs`        |
-
-¹) The `devicemapper` storage driver is deprecated, and will be removed in a future
-release. It is recommended that users of the `devicemapper` storage driver migrate
-to `overlay2`.
+| Linux distribution   | Recommended storage drivers  | Alternative drivers  |
+| :------------------- | :--------------------------- | :------------------- |
+| Ubuntu               | `overlay2`                   | `zfs`, `vfs`         |
+| Debian               | `overlay2`                   | `vfs`                |
+| CentOS               | `overlay2`                   | `zfs`, `vfs`         |
+| Fedora               | `overlay2`                   | `zfs`, `vfs`         |
+| SLES 15              | `overlay2`                   | `vfs`                |
+| RHEL                 | `overlay2`                   | `vfs`                |
 
 When in doubt, the best all-around configuration is to use a modern Linux
 distribution with a kernel that supports the `overlay2` storage driver, and to
@@ -111,7 +106,6 @@ backing filesystems.
 | :--------------- | :---------------------------- |
 | `overlay2`       | `xfs` with ftype=1, `ext4`    |
 | `fuse-overlayfs` | any filesystem                |
-| `devicemapper`   | `direct-lvm`                  |
 | `btrfs`          | `btrfs`                       |
 | `zfs`            | `zfs`                         |
 | `vfs`            | any filesystem                |
@@ -127,7 +121,7 @@ following generalizations:
 - `overlay2` operates at the file level rather than
   the block level. This uses memory more efficiently, but the container's
   writable layer may grow quite large in write-heavy workloads.
-- Block-level storage drivers such as `devicemapper`, `btrfs`, and `zfs` perform
+- Block-level storage drivers such as `btrfs`, and `zfs` perform
   better for write-heavy workloads (though not as well as Docker volumes).
 - `btrfs` and `zfs` require a lot of memory.
 - `zfs` is a good choice for high-density workloads such as PaaS.
@@ -197,7 +191,6 @@ to physical or logical disks on the Docker host.
 ## Related information
 
 - [About images, containers, and storage drivers](index.md)
-- [`devicemapper` storage driver in practice](device-mapper-driver.md)
 - [`overlay2` storage driver in practice](overlayfs-driver.md)
 - [`btrfs` storage driver in practice](btrfs-driver.md)
 - [`zfs` storage driver in practice](zfs-driver.md)

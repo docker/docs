@@ -8,6 +8,13 @@ Volumes are persistent data stores implemented by the container engine. Compose 
 
 The top-level `volumes` declaration lets you configure named volumes that can be reused across multiple services. To use a volume across multiple services, you must explicitly grant each service access by using the [volumes](05-services.md#volumes) attribute within the `services` top-level element. The `volumes` attribute has additional syntax that provides more granular control.
 
+> **Tip**
+>
+> Working with large repositories or monorepos, or with virtual file systems that are no longer scaling with your codebase? 
+> Compose now takes advantage of [Synchronized file shares](../../desktop/synchronized-file-sharing.md) and automatically creates file shares for bind mounts. 
+> Ensure you're signed in to Docker with a paid subscription and have enabled both **Access experimental features** and **Manage Synchronized file shares with Compose** in Docker Desktop's settings.
+{ .tip }
+
 ## Example
 
 The following example shows a two-service setup where a database's data directory is shared with another service as a volume, named
@@ -40,7 +47,7 @@ creating a volume. Optionally, you can configure it with the following keys:
 
 ### driver
 
-Specifies which volume driver should be used. Default and available values are platform specific. If the driver is not available, Compose returns an error and doesn't deploy the application.
+Specifies which volume driver should be used. If the driver is not available, Compose returns an error and doesn't deploy the application.
 
 ```yml
 volumes:
@@ -128,7 +135,7 @@ For example, if `DATABASE_VOLUME=my_volume_001` in your `.env` file:
 ```yml
 volumes:
   db-data:
-      name: ${DATABASE_VOLUME}
+    name: ${DATABASE_VOLUME}
 ```
 
 Running `docker compose up` uses the volume called `my_volume_001`. 

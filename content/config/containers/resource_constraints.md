@@ -15,7 +15,7 @@ on when you should set such limits and the possible implications of setting them
 
 Many of these features require your kernel to support Linux capabilities. To
 check for support, you can use the
-[`docker info`](../../engine/reference/commandline/info.md) command. If a capability
+[`docker info`](../../reference/cli/docker/system/info.md) command. If a capability
 is disabled in your kernel, you may see a warning at the end of the output like
 the following:
 
@@ -273,22 +273,9 @@ done so.
 
 Verify that your GPU is running and accessible.
 
-#### Install nvidia-container-runtime
+#### Install nvidia-container-toolkit
 
-Follow the instructions at (https://nvidia.github.io/nvidia-container-runtime/)
-and then run this command:
-
-```console
-$ apt-get install nvidia-container-runtime
-```
-
-Ensure the `nvidia-container-runtime-hook` is accessible from `$PATH`.
-
-```console
-$ which nvidia-container-runtime-hook
-```
-
-Restart the Docker daemon.
+Follow the official NVIDIA Container Toolkit [installation instructions](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html).
 
 #### Expose GPUs for use
 
@@ -350,10 +337,10 @@ This enables the `utility` driver capability which adds the `nvidia-smi` tool to
 the container.
 
 Capabilities as well as other configurations can be set in images via
-environment variables. More information on valid variables can be found at the
-[nvidia-container-runtime](https://github.com/NVIDIA/nvidia-container-runtime)
-GitHub page. These variables can be set in a Dockerfile.
+environment variables. More information on valid variables can be found in the
+[nvidia-container-toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/docker-specialized.html)
+documentation. These variables can be set in a Dockerfile.
 
 You can also use CUDA images which sets these variables automatically. See the
-[CUDA images](https://github.com/NVIDIA/nvidia-docker/wiki/CUDA) GitHub page
-for more information.
+official [CUDA images](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/cuda)
+NGC catalog page.

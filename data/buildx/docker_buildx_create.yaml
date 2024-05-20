@@ -43,9 +43,19 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: buildkitd-config
+      value_type: string
+      description: BuildKit daemon config file
+      details_url: '#buildkitd-config'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: buildkitd-flags
       value_type: string
-      description: Flags for buildkitd daemon
+      description: BuildKit daemon flags
       details_url: '#buildkitd-flags'
       deprecated: false
       hidden: false
@@ -55,10 +65,9 @@ options:
       swarm: false
     - option: config
       value_type: string
-      description: BuildKit config file
-      details_url: '#config'
+      description: BuildKit daemon config file
       deprecated: false
-      hidden: false
+      hidden: true
       experimental: false
       experimentalcli: false
       kubernetes: false
@@ -153,29 +162,15 @@ examples: |-
     eager_beaver
     ```
 
-    ### Specify options for the buildkitd daemon (--buildkitd-flags) {#buildkitd-flags}
+    ### Specify a configuration file for the BuildKit daemon (--buildkitd-config) {#buildkitd-config}
 
     ```text
-    --buildkitd-flags FLAGS
+    --buildkitd-config FILE
     ```
 
-    Adds flags when starting the buildkitd daemon. They take precedence over the
-    configuration file specified by [`--config`](#config). See `buildkitd --help`
-    for the available flags.
-
-    ```text
-    --buildkitd-flags '--debug --debugaddr 0.0.0.0:6666'
-    ```
-
-    ### Specify a configuration file for the buildkitd daemon (--config) {#config}
-
-    ```text
-    --config FILE
-    ```
-
-    Specifies the configuration file for the buildkitd daemon to use. The configuration
-    can be overridden by [`--buildkitd-flags`](#buildkitd-flags).
-    See an [example buildkitd configuration file](https://github.com/moby/buildkit/blob/master/docs/buildkitd.toml.md).
+    Specifies the configuration file for the BuildKit daemon to use. The
+    configuration can be overridden by [`--buildkitd-flags`](#buildkitd-flags).
+    See an [example BuildKit daemon configuration file](https://github.com/moby/buildkit/blob/master/docs/buildkitd.toml.md).
 
     If you don't specify a configuration file, Buildx looks for one by default in:
 
@@ -187,6 +182,36 @@ examples: |-
     certificates for registries in the `buildkitd.toml` configuration, the files
     will be copied into the container under `/etc/buildkit/certs` and configuration
     will be updated to reflect that.
+
+    ### Specify options for the BuildKit daemon (--buildkitd-flags) {#buildkitd-flags}
+
+    ```text
+    --buildkitd-flags FLAGS
+    ```
+
+    Adds flags when starting the BuildKit daemon. They take precedence over the
+    configuration file specified by [`--buildkitd-config`](#buildkitd-config). See
+    `buildkitd --help` for the available flags.
+
+    ```text
+    --buildkitd-flags '--debug --debugaddr 0.0.0.0:6666'
+    ```
+
+    #### BuildKit daemon network mode
+
+    You can specify the network mode for the BuildKit daemon with either the
+    configuration file specified by [`--buildkitd-config`](#buildkitd-config) using the
+    `worker.oci.networkMode` option or `--oci-worker-net` flag here. The default
+    value is `auto` and can be one of `bridge`, `cni`, `host`:
+
+    ```text
+    --buildkitd-flags '--oci-worker-net bridge'
+    ```
+
+    > **Note**
+    >
+    > Network mode "bridge" is supported since BuildKit v0.13 and will become the
+    > default in next v0.14.
 
     ### Set the builder driver to use (--driver) {#driver}
 
@@ -207,7 +232,7 @@ examples: |-
     #### `docker` driver
 
     Uses the builder that is built into the Docker daemon. With this driver,
-    the [`--load`](buildx_build.md#load) flag is implied by default on
+    the [`--load`](/reference/cli/docker/buildx/build/#load) flag is implied by default on
     `buildx build`. However, building multi-platform images or exporting cache is
     not currently supported.
 
@@ -217,7 +242,7 @@ examples: |-
     both building multi-platform images and exporting cache are supported.
 
     Unlike `docker` driver, built images will not automatically appear in
-    `docker images` and [`build --load`](buildx_build.md#load) needs to be used
+    `docker images` and [`build --load`](/reference/cli/docker/buildx/build/#load) needs to be used
     to achieve that.
 
     #### `kubernetes` driver
@@ -226,17 +251,17 @@ examples: |-
     BuildKit container image to build your images.
 
     Unlike `docker` driver, built images will not automatically appear in
-    `docker images` and [`build --load`](buildx_build.md#load) needs to be used
+    `docker images` and [`build --load`](/reference/cli/docker/buildx/build/#load) needs to be used
     to achieve that.
 
     #### `remote` driver
 
-    Uses a remote instance of buildkitd over an arbitrary connection. With this
-    driver, you manually create and manage instances of buildkit yourself, and
+    Uses a remote instance of BuildKit daemon over an arbitrary connection. With
+    this driver, you manually create and manage instances of buildkit yourself, and
     configure buildx to point at it.
 
     Unlike `docker` driver, built images will not automatically appear in
-    `docker images` and [`build --load`](buildx_build.md#load) needs to be used
+    `docker images` and [`build --load`](/reference/cli/docker/buildx/build/#load) needs to be used
     to achieve that.
 
     ### Set additional driver-specific options (--driver-opt) {#driver-opt}

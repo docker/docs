@@ -23,6 +23,12 @@ manage bind mounts.
 
 ![Bind mounts on the Docker host](images/types-of-mounts-bind.webp?w=450&h=300)
 
+> **Tip**
+>
+> Working with large repositories or monorepos, or with virtual file systems that are no longer scaling with your codebase?
+> Check out [Synchronized file shares](../desktop/synchronized-file-sharing.md). It provides fast and flexible host-to-VM file sharing by enhancing bind mount performance through the use of synchronized filesystem caches.
+{ .tip }
+
 ## Choose the -v or --mount flag
 
 In general, `--mount` is more explicit and verbose. The biggest difference is that
@@ -266,6 +272,30 @@ $ docker container stop devtest
 $ docker container rm devtest
 ```
 
+## Recursive mounts
+
+When you bind mount a path that itself contains mounts, those submounts are
+also included in the bind mount by default. This behavior is configurable,
+using the `bind-recursive` option for `--mount`. This option is only supported
+with the `--mount` flag, not with `-v` or `--volume`.
+
+If the bind mount is read-only, the Docker Engine makes a best-effort attempt
+at making the submounts read-only as well. This is referred to as recursive
+read-only mounts. Recursive read-only mounts require Linux kernel version 5.12
+or later. If you're running an older kernel version, submounts are
+automatically mounted as read-write by default. Attempting to set submounts to
+be read-only on a kernel version earlier than 5.12, using the
+`bind-recursive=readonly` option, results in an error.
+
+Supported values for the `bind-recursive` option are:
+
+| Value               | Description                                                                                                       |
+|:--------------------|:------------------------------------------------------------------------------------------------------------------|
+| `enabled` (default) | Read-only mounts are made recursively read-only if kernel is v5.12 or later. Otherwise, submounts are read-write. |
+| `disabled`          | Submounts are ignored (not included in the bind mount).                                                           |
+| `writable`          | Submounts are read-write.                                                                                         |
+| `readonly`          | Submounts are read-only. Requires kernel v5.12 or later.                                                          |
+
 ## Configure bind propagation
 
 Bind propagation defaults to `rprivate` for both bind mounts and volumes. It is
@@ -388,9 +418,9 @@ volumes:
 ```
 
 For more information about using volumes of the `bind` type with Compose, see
-[Compose reference on volumes](../compose/compose-file/compose-file-v3.md#volumes).
+[Compose reference on volumes](../compose/compose-file/05-services.md#volumes).
 and
-[Compose reference on volume configuration](../compose/compose-file/compose-file-v3.md#volume-configuration-reference).
+[Compose reference on volume configuration](../compose/compose-file/05-services.md#volumes).
 
 ## Next steps
 

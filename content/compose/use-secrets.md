@@ -2,6 +2,7 @@
 title: How to use secrets in Docker Compose
 description: How to use secrets in Compose and their benefits
 keywords: secrets, compose, security, environment variables
+tags: [Secrets]
 ---
 
 A secret is any piece of data, such as a password, certificate, or API key, that shouldn’t be transmitted over a network or stored unencrypted in a Dockerfile or in your application’s source code.
@@ -81,7 +82,7 @@ In the advanced example above:
 >
 > The `_FILE` environment variables demonstrated here are a convention used by some images, including Docker Official Images like [mysql](https://hub.docker.com/_/mysql) and [postgres](https://hub.docker.com/_/postgres).
 
-## Resources:
+## Resources
 
 - [Secrets top-level element](compose-file/09-secrets.md)
 - [Secrets attribute for services top-level element](compose-file/05-services.md#secrets)

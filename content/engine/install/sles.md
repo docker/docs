@@ -3,7 +3,7 @@ description: Learn how to install Docker Engine on SLES. These instructions cove
   the different installation methods, how to uninstall, and next steps.
 keywords: requirements, apt, installation, install docker engine, centos, rpm, sles, install, uninstall,
   upgrade, update, s390x, ibm-z
-title: Install Docker Engine on SLES
+title: Install Docker Engine on SLES (s390x)
 toc_max: 4
 aliases:
 - /ee/docker-ee/sles/
@@ -24,16 +24,18 @@ aliases:
 download-url-base: https://download.docker.com/linux/sles
 ---
 
+> **Note**
+>
+> The installation instructions on this page refer to packages for SLES on the
+> **s390x** architecture (IBM Z). Other architectures, including x86_64, aren't
+> supported for SLES.
+{ .warning }
+
 To get started with Docker Engine on SLES, make sure you
 [meet the prerequisites](#prerequisites), and then follow the
 [installation steps](#installation-methods).
 
 ## Prerequisites
-
-> **Note**
->
-> We currently only provide packages for SLES on s390x (IBM Z). Other architectures
-> are not yet supported for SLES.
 
 ### OS requirements
 
@@ -135,8 +137,8 @@ $ sudo zypper addrepo {{% param "download-url-base" %}}/docker-ce.repo
    ```console
    $ sudo zypper search -s --match-exact docker-ce | sort -r
  
-     v  | docker-ce | package | 3:24.0.0-3 | s390x | Docker CE Stable - s390x
-     v  | docker-ce | package | 3:23.0.6-3 | s390x | Docker CE Stable - s390x
+     v  | docker-ce | package | 3:25.0.0-3 | s390x | Docker CE Stable - s390x
+     v  | docker-ce | package | 3:24.0.7-3 | s390x | Docker CE Stable - s390x
    ```
 
    The list returned depends on which repositories are enabled, and is specific
@@ -144,7 +146,7 @@ $ sudo zypper addrepo {{% param "download-url-base" %}}/docker-ce.repo
 
    Install a specific version by its fully qualified package name, which is
    the package name (`docker-ce`) plus the version string (2nd column),
-   separated by a hyphen (`-`). For example, `docker-ce-3:24.0.0`.
+   separated by a hyphen (`-`). For example, `docker-ce-3:25.0.0`.
 
    Replace `<VERSION_STRING>` with the desired version and then run the following
    command to install:

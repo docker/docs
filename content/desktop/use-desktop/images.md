@@ -81,61 +81,26 @@ An unused image is an image which is not used by any running or stopped containe
 
 To remove individual images, select the bin icon. 
 
+## Docker Hub repositories
 
-## Interact with remote repositories
-
-The **Images** view also allows you to manage and interact with images in remote repositories.
+The **Images** view also allows you to manage and interact with images in Docker Hub repositories.
 By default, when you go to **Images** in Docker Desktop, you see a list of images that exist in your local image store.
 The **Local** and **Hub** tabs near the top toggles between viewing images in your local image store,
 and images in remote Docker Hub repositories that you have access to.
-
-For more information about supported integrations, see
-[Integrating Docker Scout](../../scout/integrations/index.md).
-
-### Hub
 
 Switching to the **Hub** tab prompts you to sign in to your Docker Hub account, if you're not already signed in.
 When signed in, it shows you a list of images in Docker Hub organizations and repositories that you have access to.
 
 Select an organization from the drop-down to view a list of repositories for that organization.
 
-If you have enabled [Vulnerability Scanning](../../docker-hub/vulnerability-scanning.md) in Docker Hub, the scan results appear next to the image tags.
+If you have enabled [Docker Scout](../../scout/_index.md) on the repositories, image analysis results appear next to the image tags.
 
 Hovering over an image tag reveals two options:
 
 - **Pull**: Pull the latest version of the image from Docker Hub.
 - **View in Hub**: Open the Docker Hub page and display detailed information about the image.
 
-### Artifactory
-
-The Artifactory integration lets you interact with images in JFrog Artifactory,
-and JFrog container registry, directly in the **Images** view of Docker Desktop.
-The integration described here connects your local Docker Desktop client with Artifactory.
-You can browse, filter, save, and pull images in the Artifactory instance you configure.
-
-You may also want to consider activating automatic image analysis for your Artifactory repositories.
-Learn more about [Artifactory integration with Docker Scout](../../scout/integrations/registry/artifactory.md).
-
-#### Connect an Artifactory registry
-
-To connect a new Artifactory registry to Docker Desktop:
-
-1. Sign in to an Artifactory registry using the `docker login` command:
-
-   ```console
-   $ cat ./password.txt | docker login -u <username> --password-stdin <hostname>
-   ```
-
-   - `password.txt`: Text file containing your Artifactory password.
-   - `username`: Your Artifactory username.
-   - `hostname`: Hostname for your Artifactory instance.
-
-2. Open the **Images** view in Docker Desktop.
-3. Select the **Artifactory** tab near the top of the image view to see Artifactory images.
-
-When signed in, a new **Artifactory** tab appears in the **Images** view.
-By default, the image list shows images sorted by push date: the newest images appear higher in the list.
-
 ## Additional resources
+
 - [Run Docker Hub images](../../guides/walkthroughs/run-hub-images.md)
 - [Publish your image](../../guides/walkthroughs/publish-your-image.md)

@@ -1,4 +1,44 @@
 @layer base {
+
+  /*
+   * Font faces for Roboto Flex and Roboto Mono.
+   *
+   * - https://fonts.google.com/specimen/Roboto+Flex
+   * - https://fonts.google.com/specimen/Roboto+Mono
+   *
+   * The TTF fonts have been compressed to woff2,
+   * preserving the latin character subset.
+   *
+   * */
+
+  /* Roboto Flex */
+  @font-face {
+    font-family: 'Roboto Flex';
+    src: url('/assets/fonts/RobotoFlex.woff2') format('woff2');
+    font-weight: 100 1000; /* Range of weights Roboto Flex supports */
+    font-stretch: 100%; /* Range of width Roboto Flex supports */
+    font-style: oblique 0deg 10deg; /* Range of oblique angle Roboto Flex supports */
+    font-display: fallback;
+  }
+
+  /* Roboto Mono */
+  @font-face {
+    font-family: 'Roboto Mono';
+    src: url('/assets/fonts/RobotoMono-Regular.woff2') format('woff2');
+    font-weight: 100 700; /* Define the range of weight the variable font supports */
+    font-style: normal;
+    font-display: fallback;
+  }
+
+  /* Roboto Mono Italic */
+  @font-face {
+    font-family: 'Roboto Mono';
+    src: url('/assets/fonts/RobotoMono-Italic.woff2') format('woff2');
+    font-weight: 100 700; /* Define the range of weight the variable font supports */
+    font-style: italic;
+    font-display: fallback;
+  }
+
   .prose {
     li {
       @apply my-2;
@@ -32,6 +72,11 @@
     h5 {
       @apply text-lg;
       line-height: 1.75;
+    }
+    table {
+      display: block;
+      overflow-x: auto;
+      max-width: 100%;
     }
   }
 }

@@ -13,7 +13,7 @@ Hyper-V to create the Docker Desktop Linux VM. ECI was not supported when Docker
 Desktop was configured to use Windows Subsystem for Linux (aka WSL).
 
 Starting with Docker Desktop 4.20, ECI is supported when Docker Desktop is
-configured to use either Hyper-V or WSL version 2.
+configured to use either Hyper-V or WSL 2.
 
 >**Note**
 >
@@ -22,7 +22,7 @@ configured to use either Hyper-V or WSL version 2.
 > it returns a version number prior to 1.1.3.0, update WSL to the latest version
 > by typing `wsl --update` in a Windows command or PowerShell terminal.
 
-Note,however, that ECI on WSL is not as secure as on Hyper-V because:
+Note however that ECI on WSL is not as secure as on Hyper-V because:
 
 * While ECI on WSL still hardens containers so that malicious workloads can't
   easily breach Docker Desktop's Linux VM, ECI on WSL can't prevent Docker
@@ -56,25 +56,54 @@ and it's an excellent way for users to run their favorite Linux distro on
 Windows hosts and access Docker from within (see Docker Desktop's WSL distro
 integration feature, enabled via the Dashboard's **Settings** > **Resources** > **WSL Integration**).
 
+### ECI protection for Docker Builds with the "Docker" driver
+
+Prior to Docker Desktop 4.30, `docker build` commands that use the buildx
+`docker` driver (the default) are not protected by ECI (i.e., the build runs
+rootful inside the Docker Desktop VM).
+
+Starting with Docker Desktop 4.30, `docker build` commands that use the buildx
+`docker` driver are protected by ECI (i.e., the build runs rootless inside
+the Docker Desktop VM), except when Docker Desktop is configured to use WSL 2
+(on Windows hosts). We expect to improve on this in future versions of Docker
+Desktop.
+
+Note that `docker build` commands that use the `docker-container` driver are
+always protected by ECI (i.e., the build runs inside a rootless Docker
+container). This is true since Docker Desktop 4.19 (when ECI was introduced) and
+on all platforms where Docker Desktop is supported (Windows with WSL or Hyper-V,
+Mac, and Linux).
+
 ### Docker Build and Buildx have some restrictions
+
 With ECI enabled, Docker build `--network=host` and Docker Buildx entitlements
 (`network.host`, `security.insecure`) are not allowed. Builds that require
 these won't work properly.
 
 ### Kubernetes pods are not yet protected
+
 Kubernetes pods are not yet protected by ECI. A malicious or privileged pod can
-compromise the Docker Desktop Linux VM and bypass security controls. 
+compromise the Docker Desktop Linux VM and bypass security controls.
 
 ### Extension containers are not yet protected
+
 Extension containers are also not yet protected by ECI. Ensure you extension
-containers come from trusted entities to avoid issues. 
+containers come from trusted entities to avoid issues.
 
 ### Docker Desktop dev environments are not yet protected
+
 Containers launched by the Docker Desktop Dev Environments feature are not yet
 protected either. We expect to improve on this in future versions of Docker
 Desktop.
 
+### Docker Debug containers are not yet protected
+
+[Docker Debug](https://docs.docker.com/reference/cli/docker/debug/) containers
+are not yet protected by ECI. We expect to improve on this in future versions of
+Docker Desktop.
+
 ### Use in production
+
 In general users should not experience differences between running a container
 in Docker Desktop with ECI enabled, which uses the Sysbox runtime, and running
 that same container in production, through the standard OCI `runc` runtime.

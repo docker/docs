@@ -31,11 +31,11 @@ what vulnerabilities they're exposed to. Policy Evaluation builds on top of the
 image analysis feature, interpreting the analysis results against the rules
 defined by policies.
 
-A policy defines one or more criteria that your artifacts should fulfill. For
-example, one of the default policies in Docker Scout is the **Critical
-vulnerabilities** policy, which requires that your artifacts must not contain
-any critical vulnerabilities. If an artifact contains one or more
-vulnerabilities with a critical severity, that artifact fails the evaluation.
+A policy defines image quality criteria that your artifacts should fulfill.
+For example, the **Copyleft licenses** policy flags packages distributed under a copyleft license.
+If an image contains a copyleft-licensed package, that image is non-compliant with this policy.
+Some policies, such as the **Copyleft licenses** policy, are configurable.
+Configurable policies let you adjust the criteria to better match your organization's needs.
 
 In Docker Scout, policies are designed to help you ratchet forward your
 security and supply chain stature. Where other tools focus on providing a pass
@@ -55,13 +55,13 @@ image up-to-dateness.
 Docker Scout ships the following out-of-the-box policies:
 
 - [Fixable critical and high vulnerabilities](#fixable-critical-and-high-vulnerabilities)
-- [Critical vulnerabilities](#critical-vulnerabilities)
 - [Copyleft licenses](#copyleft-licenses)
 - [Outdated base images](#outdated-base-images)
 - [High-profile vulnerabilities](#high-profile-vulnerabilities)
 - [Supply chain attestations](#supply-chain-attestations)
 - [Quality gates passed](#quality-gates-passed)
 - [Default non-root user](#default-non-root-user)
+- [Unapproved base images](#unapproved-base-images)
 
 To give you a head start, Scout enables several policies by default for your
 Scout-enabled repositories. You can customize the default configurations to
@@ -77,8 +77,8 @@ available. Essentially, this means that there's an easy fix that you can deploy
 for images that fail this policy: upgrade the vulnerable package to a version
 containing a fix for the vulnerability.
 
-This policy only flags critical and high severity vulnerabilities that were
-published more than 30 days ago. The rationale for only flagging
+By default, this policy only flags critical and high severity vulnerabilities
+disclosed more than 30 days ago. The rationale for only flagging
 vulnerabilities of a certain age is that newly discovered vulnerabilities
 shouldn't cause your evaluations to fail until you've had a chance to address
 them.
@@ -86,21 +86,15 @@ them.
 This policy is unfulfilled if an artifact is affected by one or more critical-
 or high-severity vulnerability, where a fix version is available.
 
-You can configure the severity level and age thresholds by creating a custom
-policy. For more information, see [Configure policies](./configure.md).
+You can configure the parameters of this policy by creating a custom version of the policy.
+The following policy parameters are configurable in a custom version:
 
-### Critical vulnerabilities
+- Name and description of the policy
+- Severity levels to consider
+- Age threshold (set to `0` to flag all vulnerabilities, regardless of age)
+- Whether or not to only report vulnerabilities with a fix version available
 
-The **Critical vulnerabilities** policy requires that your artifacts contain no
-known critical vulnerabilities. The policy is unfulfilled if your artifact
-contains one or more critical vulnerabilities.
-
-This policy flags all critical vulnerabilities, whether or not there's a fix
-version available, and regardless of how long it's been since the vulnerability
-was first disclosed.
-
-You can configure the severity level by creating a custom policy, see
-[Configure policies](./configure.md).
+For more information about configuring policies, see [Configure policies](./configure.md).
 
 ### Copyleft licenses
 
@@ -112,8 +106,9 @@ unsuitable for use in your software because of the restrictions they enforce.
 This policy is unfulfilled if your artifacts contain one or more packages with
 a violating license.
 
-You can configure the list of licenses by creating a custom policy, see
-[Configure policies](./configure.md).
+You can configure the list of licenses that this policy should look out for,
+and add exceptions by specifying an allow-list (in the form of PURLs).
+See [Configure policies](./configure.md).
 
 ### Outdated base images
 
@@ -124,22 +119,8 @@ It's unfulfilled when the tag you used to build your image points to a
 different digest than what you're using. If there's a mismatch in digests, that
 means the base image you're using is out of date.
 
-#### No base image data
-
-There are cases when it's not possible to determine whether or not the base
-image is up-to-date. In such cases, the **Outdated base images** policy
-gets flagged as having **No data**.
-
-This occurs when:
-
-- Docker Scout doesn't know what base image tag you used
-- The base image version you used has multiple tags, but not all tags are out
-  of date
-
-To make sure that Docker Scout always knows about your base image, you can
-attach [provenance attestations](../../build/attestations/slsa-provenance.md)
-at build-time. Docker Scout uses provenance attestations to find out the base
-image version.
+Your images need provenance attestations for this policy to successfully
+evaluate. For more information, see [No base image data](#no-base-image-data).
 
 ### High-profile vulnerabilities
 
@@ -153,7 +134,8 @@ The list includes the following vulnerabilities:
 - [CVE-2014-0160 (OpenSSL Heartbleed)](https://scout.docker.com/v/CVE-2014-0160)
 - [CVE-2021-44228 (Log4Shell)](https://scout.docker.com/v/CVE-2021-44228)
 - [CVE-2023-38545 (cURL SOCKS5 heap buffer overflow)](https://scout.docker.com/v/CVE-2023-38545)
-- [CVE-2023-44487 (HTTP/2 Rapid Reset)](https://scout.docker.com/v/CVE-2023-44487)
+:cc
+- [CVE-2024-3094 (XZ backdoor)](https://scout.docker.com/v/CVE-2024-3094)
 
 You can configure the CVEs included in this list by creating a custom policy.
 For more information, see [Configure policies](./configure.md).
@@ -248,7 +230,7 @@ RUN echo "Hi"
 > using the `--user` flag for the `docker run` command.
 
 To make your images compliant with this policy, use the
-[`USER`](../../engine/reference/builder.md#user) Dockerfile instruction to set
+[`USER`](../../reference/dockerfile.md#user) Dockerfile instruction to set
 a default user that doesn't have root privileges for the runtime stage.
 
 The following Dockerfile snippets shows the difference between a compliant and
@@ -283,3 +265,71 @@ ENTRYPOINT ["/app/production"]
 
 {{< /tab >}}
 {{< /tabs >}}
+
+### Unapproved base images
+
+The **Unapproved base images** policy lets you restrict which base
+images you allow in your builds.
+
+This policy checks whether the base images used in your builds match any of the
+patterns specified in the policy configuration. The following table shows a few
+example patterns for this policy.
+
+| Use case                                                        | Pattern                          |
+| --------------------------------------------------------------- | -------------------------------- |
+| Allow all images from Docker Hub                                | `docker.io/*`                    |
+| Allow all Docker Official Images                                | `docker.io/library/*`            |
+| Allow images from a specific organization                       | `docker.io/orgname/*`            |
+| Allow tags of a specific repository                             | `docker.io/orgname/repository:*` |
+| Allow images on a registry with hostname `registry.example.com` | `registry.example.com/*`         |
+| Allow slim tags of NodeJS images                                | `docker.io/library/node:*-slim`  |
+
+An asterisk (`*`) matches up until the character that follows, or until the end
+of the image reference. Note that the `docker.io` prefix is required in order
+to match Docker Hub images. This is the registry hostname of Docker Hub.
+
+You can also configure the policy to:
+
+- Allow only supported tags of Docker Official Images.
+
+  When this option is enabled, images using unsupported tags of official images
+  trigger a policy violation. Supported tags for official images are listed in
+  the **Supported tags** section of the repository overview on Docker Hub.
+
+- Allow only Docker Official Images of supported distro versions
+
+  When this option is enabled, images using unsupported Linux distributions
+  that have reached end of life (such as `ubuntu:18.04`) trigger a policy violation.
+
+  Enabling this option may cause the policy to report no data
+  if the operating system version cannot be determined.
+
+This policy isn't enabled by default. To enable the policy:
+
+1. [Create a new policy](https://scout.docker.com/reports/policies/create?fromDefinition=approved-base-images&fromNamespace=docker) in the Docker Scout Dashboard.
+2. Under **Approved base image sources**, specify the image reference patterns that you want to allow.
+3. Select whether you want to allow only supported tags for official images,
+   and supported Linux distribution versions.
+4. Select **Save and enable**.
+
+   The policy is now enabled for your current organization.
+
+Your images need provenance attestations for this policy to successfully
+evaluate. For more information, see [No base image data](#no-base-image-data).
+
+## No base image data
+
+There are cases when it's not possible to determine information about the base
+images used in your builds. In such cases, the **Outdated base images** and
+**Unapproved base images** policies get flagged as having **No data**.
+
+This "no data" state occurs when:
+
+- Docker Scout doesn't know what base image tag you used
+- The base image version you used has multiple tags, but not all tags are out
+  of date
+
+To make sure that Docker Scout always knows about your base image, you can
+attach [provenance attestations](../../build/attestations/slsa-provenance.md)
+at build-time. Docker Scout uses provenance attestations to find out the base
+image version.

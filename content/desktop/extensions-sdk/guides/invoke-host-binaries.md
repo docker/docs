@@ -5,7 +5,7 @@ description: Add invocations to host binaries from the frontend with the extensi
 keywords: Docker, extensions, sdk, build
 ---
 
-In some cases, your extension needs to invoke some command from the host. For example, you
+In some cases, your extension may need to invoke some command from the host. For example, you
 might want to invoke the CLI of your cloud provider to create a new resource, or the CLI of a tool your extension
 provides, or even a shell script that you want to run on the host. 
 
@@ -26,6 +26,9 @@ string.
 
 ## Add the executables to the extension
 
+{{< tabs >}}
+{{< tab name="Mac and Linux" >}}
+
 Create a `bash` script for macOS and Linux, in the file `binaries/unix/hello.sh` with the following content:
 
 ```bash
@@ -33,12 +36,18 @@ Create a `bash` script for macOS and Linux, in the file `binaries/unix/hello.sh`
 echo "Hello, $1!"
 ```
 
+{{< /tab >}}
+{{< tab name="Windows" >}}
+
 Create a `batch script` for Windows in another file `binaries/windows/hello.cmd` with the following content:
 
 ```bash
 @echo off
 echo "Hello, %1!"
 ```
+
+{{< /tab >}}
+{{< /tabs >}}
 
 Then update the `Dockerfile` to copy the `binaries` folder into the extension's container filesystem and make the
 files executable.
@@ -118,7 +127,7 @@ export function App() {
 
 ## Configure the metadata file
 
-The host binaries must be specified in the `metadata.json` so that Docker Desktop copies them on to the host when installing
+The host binaries must be specified in the `metadata.json` file so that Docker Desktop copies them on to the host when installing
 the extension. Once the extension is uninstalled, the binaries that were copied are removed as well.
 
 ```json

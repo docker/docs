@@ -79,7 +79,7 @@ comparing the image built from the code in the PR to the corresponding image in
 staging or production.
 
 You can also compare with streams using the `--to-env` flag on the
-[`docker scout compare`](../../../engine/reference/commandline/scout_compare.md)
+[`docker scout compare`](../../../reference/cli/docker/scout/compare.md)
 CLI command:
 
 ```console
@@ -90,10 +90,9 @@ $ docker scout compare --to-env production myorg/webapp:latest
 
 To view the images for an environment:
 
-1. Go to the [Docker Scout Dashboard](https://scout.docker.com/).
-2. Select the **Images** tab.
-3. Open the **Environments** drop-down menu.
-4. Select the environment that you want to view.
+1. Go to the [Images page](https://scout.docker.com/) in the Docker Scout Dashboard.
+2. Open the **Environments** drop-down menu.
+3. Select the environment that you want to view.
 
 The list displays all images that have been assigned to the selected
 environment. If you've deployed multiple versions of the same image in an

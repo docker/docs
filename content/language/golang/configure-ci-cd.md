@@ -25,11 +25,11 @@ Create a GitHub repository, configure the Docker Hub secrets, and push your sour
 2. Open the repository **Settings**, and go to **Secrets and variables** >
    **Actions**.
 
-3. Create a new secret named `DOCKER_USERNAME` and your Docker ID as value.
+3. Create a new **Repository secrets** named `DOCKER_USERNAME` and your Docker ID as value.
 
-4. Create a new [Personal Access Token (PAT)](../../security/for-developers/access-tokens.md/#create-an-access-token) for Docker Hub. You can name this token `docker-tutorial`.
+4. Create a new [Personal Access Token (PAT)](../../security/for-developers/access-tokens.md/#create-an-access-token) for Docker Hub. You can name this token `docker-tutorial`. Make sure access permissions include Read and Write.
 
-5. Add the PAT as a second secret in your GitHub repository, with the name
+5. Add the PAT as a second **Repository secrets** in your GitHub repository, with the name
    `DOCKERHUB_TOKEN`.
 
 6. In your local repository on your machine, run the following command to change
@@ -61,7 +61,7 @@ to Docker Hub.
    This takes you to a page for creating a new GitHub actions workflow file in
    your repository, under `.github/workflows/main.yml` by default.
 
-3. In the editor window, copy and paste the following YAML configuration.
+3. In the editor window, copy and paste the following YAML configuration and commit the changes.
 
    ```yaml
    name: ci
@@ -95,6 +95,8 @@ to Docker Hub.
              push: true
              tags: ${{ secrets.DOCKER_USERNAME }}/${{ github.event.repository.name }}:latest
    ```
+
+   If your Dockerfile is in a different directory, update the `context` with the path to the directory containing the Dockerfile. 
 
    For more information about the YAML syntax used here, see [Workflow syntax for GitHub Actions](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions).
 

@@ -5,6 +5,7 @@ usage: docker scout [command]
 pname: docker
 plink: docker.yaml
 cname:
+    - docker scout attestation
     - docker scout cache
     - docker scout compare
     - docker scout config
@@ -14,11 +15,13 @@ cname:
     - docker scout help
     - docker scout integration
     - docker scout policy
+    - docker scout push
     - docker scout quickview
     - docker scout recommendations
     - docker scout repo
     - docker scout version
 clink:
+    - docker_scout_attestation.yaml
     - docker_scout_cache.yaml
     - docker_scout_compare.yaml
     - docker_scout_config.yaml
@@ -28,6 +31,7 @@ clink:
     - docker_scout_help.yaml
     - docker_scout_integration.yaml
     - docker_scout_policy.yaml
+    - docker_scout_push.yaml
     - docker_scout_quickview.yaml
     - docker_scout_recommendations.yaml
     - docker_scout_repo.yaml

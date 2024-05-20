@@ -1,22 +1,29 @@
 ---
-description: Learn about Docker Hub features and the administrative tasks available
-  in Docker Hub
-keywords: Docker, docker, docker hub, hub, overview
+description: Find a comprehensive overview of Docker Hub, including its features, administrative settings, how to get started quickly, and more
+keywords: Docker, docker, docker hub, hub, repositories, docker account
 title: Overview of Docker Hub
 grid:
 - title: Create a Docker ID
   description: Register and create a new Docker ID.
   icon: fingerprint
   link: /docker-id
+- title: Quickstart
+  description: Step-by-step instructions on getting started on Docker Hub.
+  icon: explore
+  link: /docker-hub/quickstart
 - title: Create a repository
   description: Create a repository to share your images with your team, customers,
     or the Docker community.
   icon: inbox
   link: /docker-hub/repos
-- title: Quickstart
-  description: Step-by-step instructions on getting started on Docker Hub.
-  icon: explore
-  link: /docker-hub/quickstart
+- title: Manage repository access
+  description: Manage access to push and pull to your repository and assign permissions.
+  icon: key
+  link: /docker-hub/repos/access
+- title: Automated builds
+  description: Learn how you can automatically build images from source code to push to your repositories.
+  icon: build
+  link: /docker-hub/builds/how-builds-work
 - title: Release notes
   description: Find out about new features, improvements, and bug fixes.
   icon: note_add

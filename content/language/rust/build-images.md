@@ -58,11 +58,11 @@ directory:
 
 For building an image, only the Dockerfile is necessary. Open the Dockerfile
 in your favorite IDE or text editor and see what it contains. To learn more
-about Dockerfiles, see the [Dockerfile reference](../../engine/reference/builder.md).
+about Dockerfiles, see the [Dockerfile reference](../../reference/dockerfile.md).
 
 ## .dockerignore file
 
-When you run `docker init`, it also creates a [`.dockerignore`](../../engine/reference/builder.md#dockerignore-file) file. Use the `.dockerignore` file to specify patterns and paths that you don't want copied into the image in order to keep the image as small as possible. Open up the `.dockerignore` file in your favorite IDE or text editor and see what's inside already.
+When you run `docker init`, it also creates a [`.dockerignore`](../../reference/dockerfile.md#dockerignore-file) file. Use the `.dockerignore` file to specify patterns and paths that you don't want copied into the image in order to keep the image as small as possible. Open up the `.dockerignore` file in your favorite IDE or text editor and see what's inside already.
 
 ## Build an image
 
@@ -171,10 +171,10 @@ Docker removed the image tagged with `:v1.0.0`, but the `docker-rust-image:lates
 This section showed how you can use `docker init` to create a Dockerfile and .dockerignore file for a Rust application. It then showed you how to build an image. And finally, it showed you how to tag an image and list all images.
 
 Related information:
- - [Dockerfile reference](../../engine/reference/builder.md)
- - [.dockerignore file](../../engine/reference/builder.md#dockerignore-file)
- - [docker init CLI reference](../../engine/reference/commandline/init.md)
- - [docker build CLI reference](../../engine/reference/commandline/build.md)
+ - [Dockerfile reference](../../reference/dockerfile.md)
+ - [.dockerignore file](../../reference/dockerfile.md#dockerignore-file)
+ - [docker init CLI reference](../../reference/cli/docker/init.md)
+ - [docker build CLI reference](../../reference/cli/docker/image/build.md)
 
 
 ## Next steps

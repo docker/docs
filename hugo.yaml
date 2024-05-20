@@ -4,9 +4,9 @@ refLinksErrorLevel: ERROR
 enableGitInfo: true
 disablePathToLower: true
 enableInlineShortcodes: true
-disableKinds:
-  - taxonomy
-  - term
+
+taxonomies:
+  tag: tags
 
 markup:
   tableOfContents:
@@ -38,7 +38,9 @@ related:
 
 build:
   buildStats:
-    enabled: true
+    enable: true
+    disableIDs: true
+    disableTags: true
   cachebusters:
     - source: assets/watching/hugo_stats\.json
       target: styles\.css
@@ -55,6 +57,11 @@ outputFormats:
     isPlainText: true
     mediaType: "application/json"
     notAlternative: true
+  metadata:
+    baseName: metadata
+    isPlainText: true
+    mediaType: "application/json"
+    notAlternative: true
   robots:
     baseName: robots
     isPlainText: true
@@ -65,18 +72,16 @@ outputs:
   home:
     - html
     - redirects
+    - metadata
     - robots
-  term:
-    - html
-    - json
-
-taxonomies:
 
 languages:
   en:
     languageName: English
 
 params:
+  kapa:
+    id: ba5c2cbc-6535-4334-a72e-050f7a681c8a
   analytics:
     hotjar:
       prod: 3169877
@@ -91,23 +96,31 @@ params:
   repo: https://github.com/docker/docs
   docs_url: https://docs.docker.com
 
-  latest_engine_api_version: "1.43"
-  docker_ce_version: "24.0.7"
-  compose_version: "v2.24.1"
+  latest_engine_api_version: "1.45"
+  docker_ce_version: "26.1.3"
+  compose_version: "v2.27.0"
   compose_file_v3: "3.8"
   compose_file_v2: "2.4"
-  buildkit_version: "0.12.3"
+  buildkit_version: "0.13.1"
 
   example_go_version: "1.21"
   example_golangci_lint_version: "v1.52"
+  example_alpine_version: "3.19"
+  example_node_version: "20"
 
-  min_api_threshold: 1.41
-
+  min_version_thresholds:
+    buildx: "0.10.0"
+    buildkit: "0.11.0"
+    engine: "24.0.0"
+    api: "1.41"
+    desktop: "4.20.0"
+    compose: "2.14.0"
+    scout: "1.0.0"
 
 menus:
   main:
   - name: Guides
-    url: /get-started/overview/
+    url: /guides/
     weight: 1
   - name: Manuals
     url: /manuals/
@@ -115,12 +128,6 @@ menus:
   - name: Reference
     url: /reference/
     weight: 3
-  - name: Samples
-    url: /samples/
-    weight: 4
-  - name: FAQ
-    url: /faq/
-    weight: 5
 
   footer:
     - url: https://www.docker.com/products
@@ -225,12 +232,15 @@ module:
   proxy: https://proxy.golang.org,direct
   hugoVersion:
     extended: false
-    min: "0.116.1"
+    min: "0.124.1"
   mounts:
     - source: assets
       target: assets
     - source: hugo_stats.json
       target: assets/watching/hugo_stats.json
+    - source: node_modules/@material-symbols/svg-400/rounded
+      target: assets/icons
+
   imports:
 
     - path: github.com/moby/moby
@@ -245,7 +255,7 @@ module:
     - path: github.com/moby/buildkit
       mounts:
         - source: frontend/dockerfile/docs/reference.md
-          target: content/engine/reference/builder.md
+          target: content/reference/dockerfile.md
         - source: docs/buildkitd.toml.md
           target: content/build/buildkit/toml-configuration.md
         - source: docs/attestations/slsa-definitions.md
@@ -257,12 +267,6 @@ module:
       mounts:
         - source: docs/bake-reference.md
           target: content/build/bake/reference.md
-
-    - path: github.com/docker/scout-cli
-      mounts:
-        - source: docs
-          includeFiles: "*.yaml"
-          target: data/scout-cli
 
     - path: github.com/docker/cli
       mounts:
@@ -277,11 +281,17 @@ module:
           target: content/engine/reference/run.md
         - source: docs/reference/commandline/cli.md
           target: content/engine/reference/commandline/cli.md
-        - source: docs/reference/commandline/dockerd.md
-          target: content/engine/reference/commandline/dockerd.md
+        - source: docs/reference/dockerd.md
+          target: content/reference/cli/dockerd.md
 
     - path: github.com/docker/compose/v2
       mounts:
         - source: docs/reference
           target: data/compose-cli
+          includeFiles: "*.yaml"
+
+    - path: github.com/docker/scout-cli
+      mounts:
+        - source: docs
+          target: data/scout-cli
           includeFiles: "*.yaml"

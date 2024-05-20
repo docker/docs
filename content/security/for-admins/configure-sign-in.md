@@ -1,7 +1,7 @@
 ---
 description: Configure registry.json to enforce users to sign into Docker Desktop
 toc_max: 2
-keywords: authentication, registry.json, configure,
+keywords: authentication, registry.json, configure, enforce sign-in
 title: Enforce sign-in for Desktop
 aliases:
 - /docker-hub/configure-sign-in/
@@ -10,7 +10,7 @@ aliases:
 By default, members of your organization can use Docker Desktop without signing
 in. When users don’t sign in as a member of your organization, they don’t
 receive the [benefits of your organization’s
-subscription](../../subscription/details.md) and they can circumvent [Docker’s
+subscription](../../subscription/core-subscription/details.md) and they can circumvent [Docker’s
 security features](../../desktop/hardened-desktop/_index.md) for your organization.
 
 To ensure members of your organization always sign in, you can deploy a
@@ -32,12 +32,14 @@ following occurs:
 - When a user signs out, the **Sign in required!** prompt appears and they can
   no longer use Docker Desktop.
 
-> **Enforcing Single Sign-On (SSO)**
+> **Enforce sign-in vs enforce SSO**
 >
-> Enforcing sign-in to Docker Desktop isn't the same as enforcing SSO. To ensure
-> that your users always sign in using their SSO credentials, you must also
-> enforce SSO. For more details, see [Single Sign-On
-> overview](single-sign-on/_index.md).
+> Enforcing sign-in ensures that users are required to sign in to use Docker Desktop.
+> If your organization is also using single sign-on (SSO), you can optionally enforce SSO.
+> This means that your users must use SSO to sign in, instead of a username and password.
+> When you enforce sign-in and enforce SSO, your users must sign in and must use SSO to do so.
+> See [Enforce SSO](/security/for-admins/single-sign-on/connect#optional-enforce-sso) for details on how to enable this for your SSO connection.
+{ .tip }
 
 
 ## Create a registry.json file to enforce sign-in
@@ -68,8 +70,10 @@ details, see [Manage members](/admin/organization/members/).
 
 4. Verify that sign-in is enforced.
 
-    Start Docker Desktop on the user’s machine and verify that the **Sign in
-    required!** prompt appears.
+    To activate the `registry.json` file, restart Docker Desktop on the user’s machine. When Docker Desktop starts, verify that the **Sign in
+    required!** prompt appears. 
+    
+    In some cases, a system reboot may be necessary for the enforcement to take effect.
 
     > **Tip**
     >

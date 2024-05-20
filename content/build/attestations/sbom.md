@@ -173,7 +173,7 @@ sbom.spdx.json
 ## Inspecting SBOMs
 
 To explore created SBOMs exported through the `image` exporter, you can use
-[`imagetools inspect`](../../engine/reference/commandline/buildx_imagetools_inspect.md).
+[`imagetools inspect`](../../reference/cli/docker/buildx/imagetools/inspect.md).
 
 Using the `--format` option, you can specify a template for the output. All
 SBOM-related data is available under the `.SBOM` attribute. For example, to get
@@ -187,6 +187,11 @@ $ docker buildx imagetools inspect <namespace>/<image>:<version> \
   ...
 }
 ```
+
+> **Tip**
+>
+> If the image is multi-platform, you can check the SBOM for a platform-specific index using `--format '{{ json (index .SBOM "linux/amd64").SPDX }}'`.
+{ .tip }
 
 You can also construct more complex expressions using the full functionality
 of Go templates. For example, you can list all the installed packages and their

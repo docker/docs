@@ -66,6 +66,7 @@ see a **Quickstart** item underneath the **Extensions** menu. Selecting this ite
 >
 > During UI development, it’s helpful to use hot reloading to test your changes without rebuilding your entire
 > extension. See [Preview whilst developing the UI](dev/test-debug.md#hot-reloading-whilst-developing-the-ui) for more information.
+{ .tip }
 
 You may also want to inspect the containers that belong to the extension. By default, extension containers are
 hidden from the Docker Dashboard. You can change this in **Settings**, see
@@ -82,8 +83,6 @@ To remove the extension, run:
 ```console
 $ docker extension rm <name-of-your-extension>
 ```
-
-{{< include "extensions-form.md" >}}
 
 ## What's next
 

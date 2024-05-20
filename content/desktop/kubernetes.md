@@ -67,8 +67,8 @@ You can test the command by listing the available nodes:
 ```console
 $ kubectl get nodes
 
-NAME                 STATUS    ROLES     AGE       VERSION
-docker-desktop       Ready     master    3h        v1.19.7
+NAME                 STATUS    ROLES            AGE       VERSION
+docker-desktop       Ready     control-plane    3h        v1.29.1
 ```
 
 For more information about `kubectl`, see the

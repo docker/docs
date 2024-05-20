@@ -1,7 +1,8 @@
 ---
-description: Release notes for Docker Desktop for Mac, Linux, and Windows
+description: Find the Docker Desktop release notes for Mac, Linux, and Windows.
 keywords: Docker desktop, release notes, linux, mac, windows
 title: Docker Desktop release notes
+tags: [Release notes]
 toc_max: 2
 aliases:
 - /docker-for-mac/release-notes/
@@ -23,6 +24,381 @@ This page contains information about the new features, improvements, known issue
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1) to see what's coming next.
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/releases.md).
+
+## 4.30.0
+
+{{< release-date date="2024-05-06" >}}
+
+{{< desktop-install all=true version="4.30.0" build_path="/149282/" >}}
+
+### New
+
+#### For all platforms
+
+- Docker Desktop now supports [SOCKS5 proxies](networking.md#socks5-proxy-support). Requires a Business subscription.
+- Added a new setting to manage the onboarding survey in [Settings Management](hardened-desktop/settings-management/_index.md).
+
+#### For Windows
+
+- Added support for [Kerberos and NTLM proxy authentication](settings/windows.md#proxy-authentication) on Windows. Requires a Business subscription.
+
+### Upgrades
+
+- [Docker Compose v2.27.0](https://github.com/docker/compose/releases/tag/v2.27.0)
+- [Docker Engine v26.1.1](https://docs.docker.com/engine/release-notes/26.1/#2611)
+- [Wasm](../desktop/wasm/_index.md) runtimes:
+  - Updated `runwasi` shims to `v0.4.0`
+  - Updated `deislabs` shims to `v0.11.1`
+  - Updated `spin` shim to `v0.13.1`
+- [Docker Scout CLI v1.8.0](https://github.com/docker/scout-cli/releases/tag/v1.8.0)
+- Docker Debug `v0.0.29`
+- Linux kernel `v6.6.26`
+- [Go 1.22.2](https://github.com/golang/go/releases/tag/go1.22.2)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Improved Enhanced Container Isolation (ECI) security when running `docker build` commands in rootless containers.
+- Fixed a bug where `docker events` exited with `Unexpected EOF` when Docker Desktop entered/exited Resource Saver mode.
+- Fixed a bug where `docker stats --no-stream` hung when Docker Desktop was in Resource Saver mode.
+- Fixed a bug in the self-diagnose CLI that incorrectly showed the VM had not started. Fixes [docker/for-mac#7241](https://github.com/docker/for-mac/issues/7241).
+- Fixed a bug where high-throughput port forward transfers could stall. Fixes [docker/for-mac#7207](https://github.com/docker/for-mac/issues/7207).
+- Fixed CLI-plugin symlinks not being removed when CLI apps were removed.
+- Fixed a bug in the shared ports drawer to show the right message for local engines.
+- Dev Environments is being sunset and has moved to the **Beta** tab in **Features in development**.
+- Build UI:
+  - Better bulk delete for build records.
+  - Added action to open the relevant web page for container images and Git sources in build dependencies.
+  - Added action to download Provenance and OpenTelemetry traces in Jaeger or OTLP format.
+  - Fixed source details for remote build invocations.
+  - Fixed a bug where multi-platform builds would show up as separate records when using a cloud builder.
+
+#### For Mac
+
+- Fixed a bug where a segmentation fault was triggered with Virtualization Framework, on post-2019 Macs. See [docker/for-mac#6824](https://github.com/docker/for-mac/issues/6824).
+- Enabled `CONFIG_SECURITY=y` kernel config, for example for [Tetragon](https://tetragon.io/). Fixes [docker/for-mac#7250](https://github.com/docker/for-mac/issues/7250).
+- Re-added support for `SQUASHFS` compression. Fixes [docker/for-mac#7260](https://github.com/docker/for-mac/issues/7260).
+- Fixed a bug that caused a new version of Docker Desktop to be marked as damaged.
+- Increased network MTU when using qemu on Apple Silicon.
+- Fixed a bug preventing Docker Desktop to start if Rosetta was not installed. Fixes [docker/for-mac#7243](https://github.com/docker/for-mac/issues/7243).
+
+#### For Windows
+
+- Added a simplified provisioning mode for WSL2 that avoids the need for the ancillary `docker-desktop-data` WSL distribution (experimental).
+- Fixed bash completions for the Docker CLI in a WSL environment.
+- Fixed a regression in Docker Desktop 4.28 that caused host files bind-mounted into containers to not show up properly inside the container, when using Docker-in-Docker (via mounts of `/var/run/docker.sock`) on WSL.
+- Fixed a bug that would cause the following error `merging settings: integratedWslDistros type mismatch`.
+
+### Known issues
+
+#### For all platforms
+
+- If you have enabled a feature in Docker Desktop that requires you to be signed in, such as **Host networking** you must remain signed in to use Docker Desktop. To continue using Docker Desktop or to modify these settings, ensure you are signed in.
+- To enable or disable **Manage Synchronized file shares with Compose**, **Access experimental features** and **Manage Synchronized file shares with Compose** have to be checked or unchecked at the same time.
+- The Docker CLI will sometimes hang when running a container with the autoremove option (`--rm`) if the container fails to start (e.g.: `docker run --rm alpine invalidcommand`). In this case, the CLI process may need to be manually killed.
+
+#### For Windows
+
+- When starting Docker Desktop as a non-admin user, the following error connect `ENOENT \\.\pipe\errorReporter` might be triggered if the user is not a member of the **docker-users** group.
+This can be resolved by adding the user to the **docker-users** group. Before starting Docker Desktop, make sure to sign out and then sign back in and unregister `docker-desktop` distribution if that was created, using `wsl --unregister docker-desktop`.
+
+#### For Linux
+
+- Ubuntu 24.04 LTS is not yet supported, Docker Desktop will fail to start. Due to a change in how the latest Ubuntu release restricts the unprivileged namespaces, `sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0` needs to be ran at least once. Refer to the [Ubuntu Blog](https://ubuntu.com/blog/ubuntu-23-10-restricted-unprivileged-user-namespaces) for more details.
+
+## 4.29.0
+
+{{< release-date date="2024-04-08" >}}
+
+{{< desktop-install all=true version="4.29.0" build_path="/145265/" >}}
+
+### New
+
+- You can now enforce Rosetta usage via [Settings Management](hardened-desktop/settings-management/configure.md).
+- [Docker socket mount restrictions](hardened-desktop/enhanced-container-isolation/config.md) with ECI is now generally available.
+- Docker Desktop now takes advantage of the Moby 26 engine which includes Buildkit 0.13, sub volumes mounts, networking updates, and improvements to the containerd multi-platform image store UX.
+- New and improved Docker Desktop error screens: swift troubleshooting, easy diagnostics uploads, and actionable remediation.
+- Compose supports [Synchronized file shares (experimental)](synchronized-file-sharing.md).
+- New [interactive Compose CLI (experimental)](../compose/environment-variables/envvars.md#compose_menu).
+- Beta release of:
+  - Air-Gapped Containers with [Settings Management](hardened-desktop/air-gapped-containers/_index.md).
+  - [Host networking](../network/drivers/host.md#docker-desktop) in Docker Desktop.
+  - [Docker Debug](use-desktop/container.md#integrated-terminal) for running containers.
+  - [Volumes Backup & Share extension](use-desktop/volumes.md) functionality available in the **Volumes** tab.
+
+### Upgrades
+
+- [Docker Compose v2.26.1](https://github.com/docker/compose/releases/tag/v2.26.1)
+- [Docker Scout CLI v1.6.3](https://github.com/docker/scout-cli/releases/tag/v1.6.3)
+- [Docker Engine v26.0.0](https://docs.docker.com/engine/release-notes/26.0/#2600)
+- [Buildx v0.13.1](https://github.com/docker/buildx/releases/tag/v0.13.1)
+- [Kubernetes v1.29.2](https://github.com/kubernetes/kubernetes/releases/tag/v1.29.2)
+- [cri-dockerd v0.3.11](https://github.com/Mirantis/cri-dockerd/releases/tag/v0.3.11)
+- Docker Debug v0.0.27
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed an issue with dropdown menu opening beyond the application window.
+- Docker Init:
+  - Updated the formatting of CLI output to improve legibility.
+  - Fixed an issue with `.dockerignore` to avoid ignoring application files that start with "compose".
+  - Improved how Java applications are started based on Spring Boot version. Fixes [docker/for-mac#7171](https://github.com/docker/for-mac/issues/7171).
+  - Removed non-official Docker image used for Rust cross-compilation.
+- The maximum number of files per [Synchronized file share](synchronized-file-sharing.md) now exceeds 2 million.
+- Fixed an issue that caused the warning: "_The value provided to Autocomplete is invalid._" when selecting the **Export to local image** field.
+- **Run Cloud** can now be accessed from the Docker Dashboard.
+- Opting out from sending analytics will now also disable collecting data for bug reports.
+- You can now share and unshare a port to the Cloud Engine in the **Containers** view.
+- Shared cloud can now be accessed from the footer in the right-hand side of the **Dashboard**.
+- Added beta support for host networking on macOS, Windows and Docker Desktop for Linux  [docker#238](https://github.com/docker/roadmap/issues/238).
+- Added a timestamp to new unread notifications.
+- Fixed typo in the virtualization support error message. Fixes [docker/desktop-linux#197](https://github.com/docker/desktop-linux/issues/197).
+- Docker Desktop now allows connections to `host.docker.internal` to be blocked by a rule in a PAC file.
+- Fixed the placement of the secondary menu in the **Images** and **Containers** lists.
+- Fixed a race condition that occurred when starting Docker Desktop with QEMU.
+- Improved the error message when an image pull is blocked by Registry Access Management policy.
+- Re-add `CONFIG_BONDING=y` in the kernel config.
+
+#### For Mac
+
+- Fixed Kubernetes not starting successfully. Fixes [docker/for-mac#7136](https://github.com/docker/for-mac/issues/7136) and [docker/for-mac#7031](https://github.com/docker/for-mac/issues/7031).
+- Fixed a bug when the browser was not able to send back authentication information to Docker Desktop. Fixes [docker/for-mac/issues#7160](https://github.com/docker/for-mac/issues/7160).
+
+#### For Windows
+
+- Fixed a bug where `docker run -v` would fail after switching between WSL 2 and Hyper-V.
+- Fixed a bug where Docker Desktop was not stopping its WSL distros (`docker-desktop` and `docker-desktop-data`) when it was shutdown. Fixes [docker/for-win/issues/13443](https://github.com/docker/for-win/issues/13443) and [docker/for-win/issues/13938](https://github.com/docker/for-win/issues/13938).
+
+#### For Linux
+
+- Fixed an issue that caused the list of available experimental features in the UI to become out-of-sync with the backend data.
+
+#### Security
+
+- Disabled Electron `runAsNode` fuse to improve security hardening. For more info, see [Electron's documentation.](https://www.electronjs.org/blog/statement-run-as-node-cves)
+
+### Known issues
+
+#### For Mac
+
+- Docker Desktop on Apple Silicon doesn't start if Rosetta is not installed. This will be fixed in future releases. See [docker/for-mac#7243](https://github.com/docker/for-mac/issues/7243).
+
+## 4.28.0
+
+{{< release-date date="2024-02-26" >}}
+
+{{< desktop-install all=true version="4.28.0" build_path="/139021/" >}}
+
+### New
+
+- [Settings Management](hardened-desktop/settings-management/index.md) now allows admins to set the default file-sharing implementation and specify which paths developer can add file shares to.
+- Added support for `socks5://` HTTP and HTTPS proxy URLs when the [`SOCKS` proxy support beta feature](networking.md) is enabled.
+- Users can now filter volumes to see which ones are in use in the **Volumes** tab.
+
+### Upgrades
+
+- [Compose v2.24.6](https://github.com/docker/compose/releases/tag/v2.24.6)
+- [Docker Engine v25.0.3](https://docs.docker.com/engine/release-notes/25.0/#2503)
+- [Docker Scout CLI v1.5.0](https://github.com/docker/scout-cli/releases/tag/v1.5.0)
+- [Qemu 8.1.5](https://wiki.qemu.org/ChangeLog/8.1)
+- [Wasm](../desktop/wasm/_index.md) runtimes:
+  - Updated runwasi shims to `v0.4.0`, including:
+    - wasmtime `v17.0`, with initial support for WASI preview 2
+    - wasmedge `v0.13.5`
+    - wasmer `v4.1.2`
+  - Updated deislabs shims to `v0.11.1`, including:
+    - lunatic `v0.13.2`
+    - slight `v0.5.1`
+    - spin `v2.2.0`
+    - wws `v1.7.0`
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed `postgis` with `Qemu`. Fixes [docker/for-mac#7172](https://github.com/docker/for-mac/issues/7172).
+- Re added `CONFIG_BLK_DEV_DM` kernel config for `kpartx`. Fixes [docker/for-mac#7197](https://github.com/docker/for-mac/issues/7197).
+- Allow `SOCKS` proxies to be set via a proxy autoconfig `pac file`.
+- Re added `CONFIG_AUDIT` kernel config.
+- Fixed a bug with the Rust build on `virtiofs`. See [rust-lang/docker-rust#161](https://github.com/rust-lang/docker-rust/issues/161).
+- Fixed an issue that caused the `missing registry authentication` error when pulling Kubernetes images.
+- Fixed an issue that caused Docker Compose commands to hang.
+- Fixed a bug in `docker build` that caused Docker Desktop to crash. Fixes [docker/for-win#13885](https://github.com/docker/for-win/issues/13885), [docker/for-win#13896](https://github.com/docker/for-win/issues/13896), [docker/for-win#13899](https://github.com/docker/for-win/issues/13899), [docker/for-mac#7164](https://github.com/docker/for-mac/issues/7164), [docker/for-mac#7169](https://github.com/docker/for-mac/issues/7169)
+- Docker Init:
+  - Improved how Java applications are started based on Spring Boot version. Fixes [docker/for-mac#7171](https://github.com/docker/for-mac/issues/7171).
+  - Removed non-official Docker image used for Rust cross-compilation
+- Build UI:
+  - Active and completed builds can be found in dedicated tabs.
+  - Build details now displays build duration and cache steps.
+  - OpenTelemetry traces are now displayed in the build results.
+  - Fixed an issue where context builders events were not always triggered.
+  - Restyle the empty state view to make the dashboard clearer.
+
+#### For Mac
+
+- Fix `httpd` issue with Rosetta. [docker/for-mac#7182](https://github.com/docker/for-mac/issues/7182)
+- Fixed a bug that caused a crash on the `virtualization.framework`. Fixes [docker/for-mac#7024](https://github.com/docker/for-mac/issues/7024)
+
+#### For Windows
+
+- Fixed an issue with DNS timeouts on Windows.
+- Added support for Enhanced Container Isolation Docker socket mount permission on WSL user distros.
+- Fixed an issue that caused the `failed to get console mode` error when redirecting output from the CLI.
+- Fixed an issue with the engine socket permissions when mounted inside containers. Fixes [docker/for-win#13898](https://github.com/docker/for-win/issues/13898)
+
+### Known Issues
+
+#### For Windows
+
+- In dark mode, the **Disk image location** in **Resources**>**Advanced** settings is not visible. As a workaround, change to light mode.
+
+## 4.27.2
+
+{{< release-date date="2024-02-08" >}}
+
+{{< desktop-install all=true version="4.27.2" build_path="/137060/" >}}
+
+### Upgrades
+
+- [Compose v2.24.5](https://github.com/docker/compose/releases/tag/v2.24.5)
+- [Docker Scout CLI v1.4.1](https://github.com/docker/scout-cli/releases/tag/v1.4.1)
+- Docker Debug v0.0.24
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed a bug where the diagnostics ID would not print correctly when uploading diagnostics from the terminal.
+- Fixed a bug where the default settings values were being reset to default on startup, when using Settings Management.
+- Fixed a bug with the dashboard being shown at startup even though the **Open Docker Dashboard when Docker Desktop starts** option was disabled. Fixes [docker/for-win#13887](https://github.com/docker/for-win/issues/13887).
+- Fixed a bug in the build backend service that caused Docker Desktop to crash. Fixes [docker/for-win#13885](https://github.com/docker/for-win/issues/13885), [docker/for-win#13896](https://github.com/docker/for-win/issues/13896), [docker/for-win#13899](https://github.com/docker/for-win/issues/13899), [docker/for-mac#7164](https://github.com/docker/for-mac/issues/7164), [docker/for-mac#7169](https://github.com/docker/for-mac/issues/7169).
+- Fixed the Docker Engine socket permissions when mounted inside containers. Fixes [docker/for-win#13898](https://github.com/docker/for-win/issues/13898).
+- Docker Scout:
+  - Updated dependencies to address Leaky Vessels series of CVEs ([CVE-2024-21626](https://github.com/advisories/GHSA-xr7r-f8xq-vfvv), [CVE-2024-24557](https://github.com/advisories/GHSA-xw73-rw38-6vjc))
+  - Added initial VEX document to document false positive [CVE-2020-8911](https://github.com/advisories/GHSA-f5pg-7wfw-84q9) and [CVE-2020-8912](https://github.com/advisories/GHSA-7f33-f4f5-xwgw)
+  - Added support for cosign SBOM attestations
+  - Added support for VEX in-toto attestations
+- Docker Debug:
+  - Fixed a bug when pulling the image behind resource accesses management
+  - Fixed connection issues
+
+#### For Mac
+
+- Re-added kernel modules needed by `Istio`. Fixes [docker/for-mac#7148](https://github.com/docker/for-mac/issues/7148).
+- Node now uses all the cores available under Rosetta.
+- Fixed an issue with `php-fpm`. Fixes [docker/for-mac#7037](https://github.com/docker/for-mac/issues/7037).
+
+## 4.27.1
+
+{{< release-date date="2024-02-01" >}}
+
+{{< desktop-install all=true version="4.27.1" build_path="/136059/" >}}
+
+### Upgrades
+
+- [Docker Engine v25.0.2](https://docs.docker.com/engine/release-notes/25.0/#2502) which contains a fix for [CVE-2024-24557](https://scout.docker.com/vulnerabilities/id/CVE-2024-24557), [CVE-2024-23650](https://scout.docker.com/vulnerabilities/id/CVE-2024-23650), [CVE-2024-23651](https://scout.docker.com/vulnerabilities/id/CVE-2024-23651), [CVE-2024-23652](https://scout.docker.com/vulnerabilities/id/CVE-2024-23652) and [CVE-2024-23653](https://scout.docker.com/vulnerabilities/id/CVE-2024-23653)
+- [Containerd v1.6.28](https://github.com/containerd/containerd/releases/tag/v1.6.28)
+- [Runc v1.1.12](https://github.com/opencontainers/runc/releases/tag/v1.1.12) which contains a fix for [CVE-2024-21626](https://scout.docker.com/vulnerabilities/id/CVE-2024-21626)
+
+### Bug fixes and enhancements
+
+#### For Mac
+
+- Fixed a bug that caused Docker Desktop to hang when applying an update.
+
+## 4.27.0
+
+{{< release-date date="2024-01-25" >}}
+
+{{< desktop-install all=true version="4.27.0" build_path="/135262/" >}}
+
+### New
+
+- Docker init now supports Java and is generally available to all users.
+- [Synchronized File Shares](synchronized-file-sharing.md) provides fast and flexible host-to-VM file sharing within Docker Desktop. Utilizing the technology behind [Docker’s acquisition of Mutagen](https://www.docker.com/blog/mutagen-acquisition/), this feature provides an alternative to virtual bind mounts that uses synchronized filesystem caches, improving performance for developers working with large codebases.
+- Organization admins can now [configure Docker socket mount permissions](hardened-desktop/enhanced-container-isolation/config.md) when ECI is enabled.
+- [Containerd Image Store](containerd.md) support is now generally available to all users.
+- Get a debug shell into any container or image with the new [`docker debug` command](../reference/cli/docker/debug.md) (Beta).
+- Organization admins, with a Docker Business subscription, can now configure a custom list of extensions with [Private Extensions Marketplace](extensions/private-marketplace.md) enabled (Beta)
+
+### Upgrades
+
+- [Amazon ECR Credential Helper v0.7.1](https://github.com/awslabs/amazon-ecr-credential-helper/releases/tag/v0.7.1)
+- [Buildx v0.12.1](https://github.com/docker/buildx/releases/tag/v0.12.1)
+- [Containerd v1.6.27](https://github.com/containerd/containerd/releases/tag/v1.6.27)
+- [Compose v2.24.3](https://github.com/docker/compose/releases/tag/v2.24.3)
+- [Docker Credential Helpers v0.8.1](https://github.com/docker/docker-credential-helpers/releases/tag/v0.8.1)
+- [Runc v1.1.11](https://github.com/opencontainers/runc/releases/tag/v1.1.11)
+- [Docker Engine v25.0.0](https://docs.docker.com/engine/release-notes/25.0/)
+- [Kubernetes v1.29.1](https://github.com/kubernetes/kubernetes/releases/tag/v1.29.1)
+- [Docker Scout v1.3.0](https://github.com/docker/scout-cli/releases/tag/v1.3.0)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- The `docker scan` command has been removed. To continue learning about the vulnerabilities of your images, and many other features, use the [`docker scout` command](../reference/cli/docker/scout/_index.md).
+- Fixed a bug where automatic updates would not download when the **Always download updates** checkbox was selected.
+- Fixed typo in the dashboard tooltip. Fixes [docker/for-mac#7132](https://github.com/docker/for-mac/issues/7132)
+- Improved signal handling behavior (e.g. when pressing Ctrl-C in the terminal while running a `docker` command).
+- Re-added kernel modules required by `minikube start --cni=cilium`.
+- Fixed a bug that caused the installation screen to appear again when admin controls are enabled after sign in.
+- Fixed a bug where Docker would not start if a shared folder is no longer present.
+- Fixed the number of available CPUs displayed in the **Containers** section of the Dashboard.
+- Re-added kernel modules for `btrfs`, `xfs`, `vfat`, `exfat`, `ntfs3`, `f2fs`, `squashfs`, `udf`, `9p` and `autofs`.
+- Container usage charts have been moved to a vertical **Resource usage** side panel to allow for more space in the containers list. Accessing the usage charts remains the same via the **Show charts** button.
+- Fixed a bug where selecting **Close Application** at sign-in was leaving behind a hung backend process.
+- Fixed a bug which caused Docker Desktop to become unresponsive when analytics is disabled through Settings Management.
+- Docker init:
+  - Added support for containerizing a Java server
+  - Various fixes on Windows
+- Builder settings:
+  - You can now refresh storage data for your builder at any point in time.
+  - You can now delete the build history for a builder.
+- Build UI:
+  - An error message is now shown when a build record cannot be removed.
+  - Fixed an issue where a cloud builder could not be created in rootless mode on macOS.
+  - Inline cache and Git source are now properly handled in the **Build timing** section of the **Info** tab.
+  - The Builder used and the author invoking the build is now displayed in past builds on the **History** tab.
+  - Several improvements made to better link past builds on the **History** tab.
+  - Several improvements to make the build name more accurate.
+  - Fixed stuck builds in the **Active builds** list when a builder cannot be reached.
+  - Fixed an issue preventing the build record from being deleted in some circumstances.
+  - Fixed an issue where build names could be empty.
+  - Fixed a general issue with the Builds view when Resource saver mode is enabled.
+
+#### For Mac
+
+- Enabled `Huge Pages` and fixed PHP segmentation fault with Rosetta. Fixes [docker/for-mac#7117](https://github.com/docker/for-mac/issues/7117).
+- Fixed `xvfb` under Rosetta. Fixes [docker/for-mac#7122](https://github.com/docker/for-mac/issues/7122)
+- Fixed `ERR_WORKER_INVALID_EXEC_ARGV` error under Rosetta. [docker/for-mac#6998](https://github.com/docker/for-mac/issues/6998).
+- Fixed a bug where Docker Desktop could deadlock if `admin-settings.json` was syntactically invalid.
+
+#### For Windows
+
+- Fixed a bug that prevented UTF-16 strings from being encoded to UTF-8 for some locales. Fixes [docker/for-win#13868](https://github.com/docker/for-win/issues/13868).
+- Fixed a bug where the credentials store configuration would reset on app restart with the WSL integration. Fixes [docker/for-win#13529](https://github.com/docker/for-win/issues/13529).
+- Fixed an issue that prevented the correct WSL engine errors from propagating to the user.
+- Fixed an issue that would cause Docker Desktop to hang when quitting from Windows Containers mode.
+
+### Security
+
+#### For Windows
+
+- Mitigated several DLL side-loading vulnerabilities in the Docker Desktop installer on Windows, reported by Suman Kumar Chakraborty ([@Hijack-Everything](https://github.com/Hijack-Everything))
+
+### Known issues
+
+#### For all platforms
+
+- When using Setting Management, the settings that are not set in the `admin-settings.json` will be reset to default when Docker Desktop starts.
+
+#### For Mac
+
+- Updating to 4.27.0 from the **Software updates** sometimes hangs. As a workaround, use the 4.27.0 installer from this page.
 
 ## 4.26.1
 
@@ -104,7 +480,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 - Fixed a bug were the setting **Start Docker Desktop when you sign in** would not work. Fixes [docker/for-mac#7052](https://github.com/docker/for-mac/issues/7052).
 - You can now enable the use of Kernel networking path for UDP through the UI. Fixes [docker/for-mac#7008](https://github.com/docker/for-mac/issues/7008).
 - Fixed a regression where the `uninstall` CLI tool was missing.
-- Addressed an issue which caused Docker Desktop to become unresponsive when analytics were disabled with Settings Management. 
+- Addressed an issue which caused Docker Desktop to become unresponsive when analytics were disabled with Settings Management.
 
 #### For Windows
 
@@ -116,7 +492,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 #### For Windows
 
 - Docker CLI doesn’t work when using WSL 2 integration on an older Linux distribution (for example, Ubuntu 20.04) which uses a `glibc` version older than `2.32`. This will be fixed in future releases. See [docker/for-win#13824](https://github.com/docker/for-win/issues/13824).
-  
+
 ## 4.25.2
 
 {{< release-date date="2023-11-21" >}}
@@ -225,7 +601,8 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 - **Switch to Windows containers** option in the tray menu may not show up on Windows. As a workaround, edit the [`settings.json` file](https://docs.docker.com/desktop/settings/windows/) and set `"displaySwitchWinLinContainers": true`.
 
 #### For all platforms
-- Docker operations, such as pulling images or logging in, fail with 'connection refused' or 'timeout' errors if the Swap file size is set to 0MB. As a workaround, configure the swap file size to a non-zero value in the **Resources** tab in **Settings**. 
+
+- Docker operations, such as pulling images or logging in, fail with 'connection refused' or 'timeout' errors if the Swap file size is set to 0MB. As a workaround, configure the swap file size to a non-zero value in the **Resources** tab in **Settings**.
 
 ## 4.24.2
 
@@ -320,13 +697,13 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 #### For Mac
 
 - Creating a container with the port 53 fails with the error address `already in use`. As a workaround, deactivate network acceleration by adding `"kernelForUDP": false`, in the `settings.json` file located at `~/Library/Group Containers/group.com.docker/settings.json`.
+
 ## 4.23.0
 
 {{< release-date date="2023-09-11" >}}
 
-{{< desktop-install all=true version="4.23.0" build_path="/120376/" >}}
-
 ### Upgrades
+
 - [Compose v2.21.0](https://github.com/docker/compose/releases/tag/v2.21.0)
 - [Docker Engine v24.0.6](https://docs.docker.com/engine/release-notes/24.0/#2406)
 - [Docker Scout CLI v0.24.1](https://github.com/docker/scout-cli/releases/tag/v0.24.1).
@@ -337,8 +714,12 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 ### New
 
 - Added support for new Wasm runtimes: wws and lunatic.
-- [`docker init`](../engine/reference/commandline/init.md) now supports ASP.NET
+- [`docker init`](../reference/cli/docker/init.md) now supports ASP.NET
 - Increased performance of exposed ports on macOS, for example with `docker run -p`.
+
+### Removed
+
+- Removed Compose V1 from Docker Desktop as it has stopped receiving updates.  Compose V2 has replaced it and is now integrated into all current Docker Desktop versions. For more information, see [Migrate to Compose V2](../compose/migrate.md).
 
 ### Bug fixes and enhancements
 
@@ -385,13 +766,11 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ### Known Issues
 
-- Binding a priviledged port on Docker Desktop does not work on macOS. As a workaround you can expose the port on all interfaces (using `0.0.0.0`) or using localhost (using `127.0.0.1`).
+- Binding a privileged port on Docker Desktop does not work on macOS. As a workaround you can expose the port on all interfaces (using `0.0.0.0`) or using localhost (using `127.0.0.1`).
 
 ## 4.22.1
 
 {{< release-date date="2023-08-24" >}}
-
-{{< desktop-install all=true version="4.22.1" build_path="/118664/" >}}
 
 ### Bug fixes and enhancements
 
@@ -406,8 +785,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 ## 4.22.0
 
 {{< release-date date="2023-08-03" >}}
-
-{{< desktop-install all=true version="4.22.0" build_path="/117440/" >}}
 
 ### Upgrades
 
@@ -461,8 +838,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 {{< release-date date="2023-07-03" >}}
 
-{{< desktop-install all=true version="4.21.1" build_path="/114176/" >}}
-
 #### For all platforms
 
 - Fixed connection leak for Docker contexts using SSH ([docker/for-mac#6834](https://github.com/docker/for-mac/issues/6834) and [docker/for-win#13564](https://github.com/docker/for-win/issues/13564))
@@ -474,8 +849,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 ## 4.21.0
 
 {{< release-date date="2023-06-29" >}}
-
-{{< desktop-install all=true version="4.21.0" build_path="/113844/" >}}
 
 ### New
 
@@ -527,8 +900,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 {{< release-date date="2023-06-05" >}}
 
-{{< desktop-install all=true version="4.20.1" build_path="/110738/" >}}
-
 ### Bug fixes and enhancements
 
 #### For all platforms
@@ -543,8 +914,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 ## 4.20.0
 
 {{< release-date date="2023-05-30" >}}
-
-{{< desktop-install all=true version="4.20.0" build_path="/109717/" >}}
 
 ### Upgrades
 
@@ -585,8 +954,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 {{< release-date date="2023-04-27" >}}
 
-{{< desktop-install all=true version="4.19.0" build_path="/106363/" >}}
-
 ### New
 
 - Docker Engine and CLI updated to [Moby 23.0](https://github.com/moby/moby/releases/tag/v23.0.0).
@@ -598,7 +965,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ### Removed
 
-- Removed `docker scan` command. To continue learning about the vulnerabilities of your images, and many other features, use the new `docker scout` command. Run `docker scout --help`, or [read the docs to learn more](../engine/reference/commandline/scout.md).
+- Removed `docker scan` command. To continue learning about the vulnerabilities of your images, and many other features, use the new `docker scout` command. Run `docker scout --help`, or [read the docs to learn more](../reference/cli/docker/scout/_index.md).
 
 ### Upgrades
 
@@ -657,8 +1024,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 ## 4.18.0
 
 {{< release-date date="2023-04-03" >}}
-
-{{< desktop-install all=true version="4.18.0" build_path="/104112/" >}}
 
 ### New
 
@@ -1546,7 +1911,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 ### New
 
 - IT Administrators can now install Docker Desktop remotely using the command line.
-- Add the Docker Software Bill of Materials (SBOM) CLI plugin. The new CLI plugin enables users to generate SBOMs for Docker images. For more information, see [Docker SBOM](../engine/sbom/index.md).
+- Add the Docker Software Bill of Materials (SBOM) CLI plugin. The new CLI plugin enables users to generate SBOMs for Docker images.
 - Use [cri-dockerd](https://github.com/Mirantis/cri-dockerd) for new Kubernetes clusters instead of `dockershim`. The change is transparent from the user's point of view and Kubernetes containers run on the Docker Engine as before. `cri-dockerd` allows Kubernetes to manage Docker containers using the standard [Container Runtime Interface](https://github.com/kubernetes/cri-api#readme), the same interface used to control other container runtimes. For more information, see [The Future of Dockershim is cri-dockerd](https://www.mirantis.com/blog/the-future-of-dockershim-is-cri-dockerd/).
 
 ### Updates
@@ -1897,7 +2262,7 @@ CVE-2021-44228](https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/).
 
 Docker Dashboard incorrectly displays the container memory usage as zero on
 Hyper-V based machines.
-You can use the [`docker stats`](../engine/reference/commandline/stats.md)
+You can use the [`docker stats`](../reference/cli/docker/container/stats.md)
 command on the command line as a workaround to view the
 actual memory usage. See
 [docker/for-mac#6076](https://github.com/docker/for-mac/issues/6076).

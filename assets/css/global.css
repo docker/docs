@@ -8,6 +8,11 @@
   :root {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
+    scrollbar-color: theme(colors.gray.light.400) theme(colors.black / 0.05);
+    &.dark {
+      scrollbar-color: theme(colors.gray.dark.800) theme(colors.white / 0.10);
+    }
   }
 }
 
@@ -16,12 +21,6 @@
 @layer utilities {
   .link {
     @apply text-blue-light underline underline-offset-2 dark:text-blue-dark;
-  }
-
-  .external-link {
-    .icon:after {
-      @apply text-base ml-1;
-    }
   }
 
   .invertible {
@@ -34,5 +33,38 @@
 
   .sidebar-underline {
     @apply underline decoration-blue-light decoration-4 underline-offset-4 dark:decoration-blue-dark;
+  }
+
+  .bg-pattern-blue {
+    background-color: theme(colors.white / 50%);
+    background-image: url('/assets/images/bg-pattern-blue.webp');
+    background-blend-mode: overlay;
+    background-size: cover;
+    background-repeat: none;
+    .dark & {
+      background-color: theme(colors.black / 70%);
+    }
+  }
+
+  .bg-pattern-purple {
+    background-color: theme(colors.white / 50%);
+    background-image: url('/assets/images/bg-pattern-purple.webp');
+    background-blend-mode: overlay;
+    background-size: cover;
+    background-repeat: none;
+    .dark & {
+      background-color: theme(colors.black / 70%);
+    }
+  }
+
+  .bg-pattern-verde {
+    background-color: theme(colors.white / 50%);
+    background-image: url('/assets/images/bg-pattern-verde.webp');
+    background-blend-mode: overlay;
+    background-size: cover;
+    background-repeat: none;
+    .dark & {
+      background-color: theme(colors.black / 70%);
+    }
   }
 }

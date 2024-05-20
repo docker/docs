@@ -25,6 +25,18 @@ attestations to your image, with the following conditions:
   attestations are added to the image. These output formats don't support
   attestations.
 
+> **Warning**
+>
+> If you're using `docker/build-push-action` to build images for code in a
+> public GitHub repository, the provenance attestations attached to your image
+> by default contains the values of build arguments. If you're misusing build
+> arguments to pass secrets to your build, such as user credentials or
+> authentication tokens, those secrets are exposed in the provenance
+> attestation. Refactor your build to pass those secrets using
+> [secret mounts](../../../reference/cli/docker/buildx/build.md#secret)
+> instead. Also remember to rotate any secrets you may have exposed.
+{ .warning }
+
 ## Max-level provenance
 
 It's recommended that you build your images with max-level provenance
@@ -42,8 +54,6 @@ name: ci
 
 on:
   push:
-    branches:
-      - "main"
 
 env:
   IMAGE_NAME: user/app
@@ -66,7 +76,7 @@ jobs:
 
       - name: Extract metadata
         id: meta
-        uses: docker/metadata-action@v4
+        uses: docker/metadata-action@v5
         with:
           images: ${{ env.IMAGE_NAME }}
 
@@ -94,8 +104,6 @@ name: ci
 
 on:
   push:
-    branches:
-      - "main"
 
 env:
   IMAGE_NAME: user/app
@@ -118,7 +126,7 @@ jobs:
 
       - name: Extract metadata
         id: meta
-        uses: docker/metadata-action@v4
+        uses: docker/metadata-action@v5
         with:
           images: ${{ env.IMAGE_NAME }}
 

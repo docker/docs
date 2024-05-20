@@ -6,7 +6,7 @@ description: Learn how to Configure CI/CD for your Java application
 
 ## Prerequisites
 
-Complete the previous sections of this guide, starting with [Build your Java image](build-images.md). You must have a [GitHub](https://github.com/signup) account and a [Docker](https://hub.docker.com/signup) account to complete this section.
+Complete the previous sections of this guide, starting with [Containerize your app](containerize.md). You must have a [GitHub](https://github.com/signup) account and a [Docker](https://hub.docker.com/signup) account to complete this section.
 
 ## Overview
 
@@ -27,7 +27,7 @@ Create a GitHub repository, configure the Docker Hub secrets, and push your sour
 
 3. Create a new secret named `DOCKER_USERNAME` and your Docker ID as value.
 
-4. Create a new [Personal Access Token (PAT)](../../security/for-developers/access-tokens.md/#create-an-access-token) for Docker Hub. You can name this token `docker-tutorial`.
+4. Create a new [Personal Access Token (PAT)](../../security/for-developers/access-tokens.md/#create-an-access-token) for Docker Hub. You can name this token `docker-tutorial`. Make sure access permissions include Read and Write.
 
 5. Add the PAT as a second secret in your GitHub repository, with the name
    `DOCKERHUB_TOKEN`.
@@ -103,9 +103,11 @@ to Docker Hub.
            with:
              context: .
              push: true
-             target: production
+             target: final
              tags: ${{ secrets.DOCKER_USERNAME }}/${{ github.event.repository.name }}:latest
    ```
+   
+   If your Dockerfile is in a different directory, update the `context` with the path to the directory containing the Dockerfile.
 
    For more information about the YAML syntax used here, see [Workflow syntax for GitHub Actions](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions).
 

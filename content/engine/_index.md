@@ -1,5 +1,5 @@
 ---
-description: Engine
+description: Find a comprehensive overview of Docker Engine, including how to install, storage details, networking, and more
 keywords: Engine
 title: Docker Engine overview
 grid:
@@ -42,6 +42,7 @@ grid:
 aliases:
 - /edge/
 - /engine/ce-ee-node-activate/
+- /engine/migration/
 - /engine/misc/
 - /linux/
 ---
@@ -51,15 +52,15 @@ containerizing your applications. Docker Engine acts as a client-server
 application with:
 
 - A server with a long-running daemon process
-  [`dockerd`](/engine/reference/commandline/dockerd).
+  [`dockerd`](/reference/cli/dockerd).
 - APIs which specify interfaces that programs can use to talk to and instruct
   the Docker daemon.
 - A command line interface (CLI) client
-  [`docker`](/engine/reference/commandline/cli/).
+  [`docker`](/reference/cli/docker/).
 
 The CLI uses [Docker APIs](api/index.md) to control or interact with the Docker
 daemon through scripting or direct CLI commands. Many other Docker applications
-use the underlying API and CLI. The daemon creates and manage Docker objects,
+use the underlying API and CLI. The daemon creates and manages Docker objects,
 such as images, containers, networks, and volumes.
 
 For more details, see
@@ -71,4 +72,6 @@ For more details, see
 
 The Docker Engine is licensed under the Apache License, Version 2.0. See
 [LICENSE](https://github.com/moby/moby/blob/master/LICENSE) for the full license
-text.
+text. 
+
+However, for commercial use of Docker Engine obtained via Docker Desktop within larger enterprises (exceeding 250 employees OR with annual revenue surpassing $10 million USD), a [paid subscription](https://www.docker.com/pricing/) is required.

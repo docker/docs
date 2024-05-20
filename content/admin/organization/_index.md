@@ -1,8 +1,12 @@
 ---
-description: Learn about organizations.
+description: Learn about managing organizations in Docker including how they relate to teams, how to onboard, and more
 keywords: organizations, admin, overview
 title: Organization administration overview
 grid:
+- title: Onboard your organization
+  description: Learn how to onboard and secure your organization.
+  icon: explore
+  link: /admin/organization/onboard
 - title: Manage members
   description: Explore how to manage members.
   icon: group_add
@@ -19,9 +23,9 @@ grid:
   description: Define which registries your developers can access.
   icon: home_storage
   link: /admin/organization/registry-access/
-- title: General settings
-  description: Configure general information or create a company.
-  icon: settings_suggest
+- title: Organization settings
+  description: Configure information for your organization and manage settings.
+  icon: settings
   link: /admin/organization/general-settings/
 - title: SSO & SCIM
   description: 'Set up [Single Sign-On](/security/for-admins/single-sign-on/)

@@ -4,8 +4,6 @@ desription: How to use profiles with Docker Compose
 keywords: cli, compose, profile, profiles reference
 ---
 
-{{< include "compose-eol.md" >}}
-
 Profiles help you adjust the Compose application model for various uses and
 environments by selectively starting services.
 This is achieved by assigning each service to zero or more profiles. If
@@ -73,6 +71,10 @@ In the example, `compose.yml` file above, this starts the services `backend`,
 
 ### Start multiple profiles
 
+You can also enable
+multiple profiles, e.g. with `docker compose --profile frontend --profile debug up`
+the profiles `frontend` and `debug` will be enabled.
+
 Multiple profiles can be specified by passing multiple `--profile` flags or
 a comma-separated list for the `COMPOSE_PROFILES` environment variable:
 
@@ -83,6 +85,8 @@ $ docker compose --profile frontend --profile debug up
 ```console
 $ COMPOSE_PROFILES=frontend,debug docker compose up
 ```
+
+If you want to enable all profiles at the same time, you can run `docker compose --profile "*"`.
 
 ## Auto-starting profiles and dependency resolution
 
@@ -154,7 +158,7 @@ $ docker compose up -d
 # by implicitly enabling profiles `dev`
 $ docker compose up -d mock-backend
 
-# This fails because profiles "dev" is disabled
+# This fails because profiles "dev" is not enabled
 $ docker compose up phpmyadmin
 ```
 
