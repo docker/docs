@@ -1,5 +1,6 @@
 # syntax=docker/dockerfile:1
 
+ARG ALPINE_VERSION=3.19
 ARG GO_VERSION=1.21
 ARG HTMLTEST_VERSION=0.17.0
 
@@ -75,6 +76,12 @@ WORKDIR /test
 COPY --from=build-upstream /out ./public
 ADD .htmltest.yml .htmltest.yml
 RUN htmltest
+
+FROM alpine:${ALPINE_VERSION} AS unused-media
+RUN apk add --no-cache fd ripgrep
+WORKDIR /test
+RUN --mount=type=bind,target=. \
+    ./scripts/test_unused_media.sh
 
 FROM scratch AS release
 COPY --from=build /out /

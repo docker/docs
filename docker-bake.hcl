@@ -27,7 +27,7 @@ target "release" {
 }
 
 group "validate" {
-  targets = ["lint", "test"]
+  targets = ["lint", "test", "unused-media"]
 }
 
 target "test" {
@@ -37,6 +37,11 @@ target "test" {
 
 target "lint" {
   target = "lint"
+  output = ["type=cacheonly"]
+}
+
+target "unused-media" {
+  target = "unused-media"
   output = ["type=cacheonly"]
 }
 
