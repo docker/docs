@@ -27,7 +27,7 @@ Both `-v` (or `--volume`) and `--mount` flags used with the `docker run` command
 
 The` -v` flag is simpler and more convenient for basic volume or bind mount operations. If the host location doesn’t exist when using `-v` or `--volume`, a directory will be automatically created.
 
-Imagine you're a developer working on a project. You have a source directory on your development machine where your code resides. When you compile or build your code, the generated artifacts (compiled code, executables, images, etc.) are saved in a separate subdirectory within your source directory. Let's call this subdirectory  `/host/path`. Now you want these build artifacts to be accessible within a Docker container running your application. Additionally, you want the container to automatically access the latest build artifacts whenever you rebuild your code.
+Imagine you're a developer working on a project. You have a source directory on your development machine where your code resides. When you compile or build your code, the generated artifacts (compiled code, executables, images, etc.) are saved in a separate subdirectory within your source directory. Let's call this subdirectory  `/HOST/PATH`. Now you want these build artifacts to be accessible within a Docker container running your application. Additionally, you want the container to automatically access the latest build artifacts whenever you rebuild your code.
 
 Here’s a way how you use `docker run` to start a container using a bind mount and map it to the container file location.
 
@@ -46,13 +46,13 @@ $ docker run --mount type=bind,source=/HOST/PATH,target=/CONTAINER/PATH,readonly
 ### File permissions for Docker access to host files
 
 When using bind mounts, it's crucial to ensure that Docker has the necessary permissions to access the host directory. To grant read/write access, you can use the `:ro` flag (read-only) or `:rw` (read-write) with the `-v` or `--mount` flag during container creation.
-For example, the following command grants read-write access permission
+For example, the following command grants read-write access permission.
 
 ```console
 $ docker run -v HOST-DIRECTORY:/CONTAINER-DIRECTORY:rw nginx
 ```
 
-Now you might ask, when are read-only bind mounts useful? Read-only bind mounts are particularly suitable for the development phase. They allow the container to access configuration files or data without accidentally modifying them on the host machine. This is beneficial for maintaining a clean development environment. Additionally, read-only bind mounts can be used to prevent unauthorized changes within the container, especially when handling sensitive data. This improves security by ensuring the integrity of the data within the container."
+Now you might ask, when are read-only bind mounts useful? Read-only bind mounts are particularly suitable for the development phase. They allow the container to access configuration files or data without accidentally modifying them on the host machine. This is beneficial for maintaining a clean development environment. Additionally, read-only bind mounts can be used to prevent unauthorized changes within the container, especially when handling sensitive data. This improves security by ensuring the integrity of the data within the container.
 
 > **Synchronised File Share**
 >
@@ -82,7 +82,7 @@ In this hands-on guide, you’ll practice how to create and use a bind mount to 
     ```
 
 
-### Use Bind Mount
+### Use Bind mount
 
 Using a bind mount, you can map the configuration file on your host computer to a specific location within the container. In this example, you’ll see how to change the look and feel of the webpage by using bind mount:
 
