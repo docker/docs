@@ -4,10 +4,9 @@ description: Learn about interpolation
 keywords: compose, compose specification, interpolation, compose file reference
 ---
 
-Values in a Compose file can be set by variables and interpolated at runtime. Compose files use a Bash-like
-syntax `${VARIABLE}`.
+{{< include "compose/interpolation.md" >}}
 
-Both `$VARIABLE` and `${VARIABLE}` syntax is supported. Default values can be defined inline using typical shell syntax:
+Default values can be defined inline using typical shell syntax:
 
 - `${VARIABLE:-default}` evaluates to `default` if `VARIABLE` is unset or
   empty in the environment.

@@ -4,14 +4,7 @@ description: Learn about the Compose Build Specification
 keywords: compose, compose specification, compose file reference, compose build specification
 ---
 
-> **Note:** 
->
-> Build is an optional part of the Compose Specification
-
-A Compose implementation which focuses on running an application on a local machine needs to also support (re)building the application from source. The Compose Build Specification lets you define the build process within a Compose file
-in a portable way.
-
-`build` can be either specified as a single string defining a context path, or as a detailed build definition.
+{{< include "compose/build.md" >}}
 
 In the former case, the whole path is used as a Docker context to execute a Docker build, looking for a canonical
 `Dockerfile` at the root of the directory. The path can be absolute or relative. If it is relative, it is resolved
