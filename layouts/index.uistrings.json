@@ -1,0 +1,1 @@
+{{ encoding.Jsonify site.Data.uistrings }}

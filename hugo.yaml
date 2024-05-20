@@ -67,6 +67,11 @@ outputFormats:
     isPlainText: true
     mediaType: "text/plain"
     notAlternative: true
+  uistrings:
+    baseName: uistrings
+    isPlainText: true
+    mediaType: "application/json"
+    notAlternative: true
 
 outputs:
   home:
@@ -74,6 +79,7 @@ outputs:
     - redirects
     - metadata
     - robots
+    - uistrings
 
 languages:
   en:
