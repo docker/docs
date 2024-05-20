@@ -145,10 +145,17 @@ Using a bind mount, you can map the configuration file on your host computer to 
    --mount type=bind,source=./,target=/usr/local/apache2/htdocs/ \
    httpd:2.4
    ```
+
+   > **Tip**  
+   > Windows requires an absolute path for the mount source. This means you need to specify the full path to the directory you want to mount inside the container.
+   { .tip }
+
+
+
    {{< /tab >}}
    {{< /tabs >}}
 
-5. If you access the site, you find a new webpage that welcomes you with a friendly whale!
+   With everything now up and running, you should be able to access the site and find a new webpage that welcomes you with a friendly whale!
 
 
 ###  Access the file on the Docker dashboard
