@@ -1,5 +1,6 @@
 ---
 title: Packaging your software
+description: Learn about Dockerfiles and how to use them with Docker Images to build and package your software
 keywords: build, buildx, buildkit, getting started, dockerfile
 aliases:
 - /build/hellobuild/

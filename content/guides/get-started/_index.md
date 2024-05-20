@@ -1,7 +1,7 @@
 ---
 title: Overview of get started
 keywords: get started, quick start, intro, concepts
-description: Learn how to get started with Docker and Docker Desktop
+description: Find quick, hands-on guides on containerization concepts and how to use Docker Desktop
 aliases:
 - /guides/walkthroughs/
 

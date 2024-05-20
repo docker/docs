@@ -4,11 +4,11 @@
 
 {{ define "main" }}
   {{ partial "breadcrumbs.html" . }}
-  <article class="DocSearch-content prose max-w-none dark:prose-invert">
+  <article class="prose max-w-none dark:prose-invert">
     {{ with .Title }}
     <h1 class="scroll-mt-36">{{ . }}</h1>
     {{ end }}
-    <div class="hidden lg:block">
+    <div class="block lg:hidden">
       {{ partial "pagemeta.html" . }}
     </div>
     {{ .Content }}

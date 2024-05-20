@@ -42,7 +42,7 @@ This Dockerfile uses two stages:
 - The final stage uses a smaller base image suitable for running your application. It copies the compiled artifacts (a JAR file, for example) from the build stage. Finally, it defines the runtime configuration (using `CMD` or `ENTRYPOINT`) for starting your application.
 
 
-## Try it now
+## Try it out
 
 In this hands-on guide, you'll unlock the power of multi-stage builds to create lean and efficient Docker images for a sample Java application. You'll use a simple “Hello World” Spring Boot-based application built with Maven as your example.
 
@@ -120,10 +120,10 @@ In this hands-on guide, you'll unlock the power of multi-stage builds to create 
     @SpringBootApplication
     public class SpringBootDockerApplication {
 
-    @RequestMapping("/")
-    public String home() {
-    return "Hello World";
-    }
+        @RequestMapping("/")
+            public String home() {
+            return "Hello World";
+        }
 
     	public static void main(String[] args) {
     		SpringApplication.run(SpringBootDockerApplication.class, args);
@@ -259,14 +259,15 @@ Now that you have the project, you’re ready to create the `Dockerfile`.
 1. Consider the following Dockerfile:
 
     ```dockerfile
-    FROM eclipse-temurin:21.0.2_13-jdk-jammy as builder
+    FROM eclipse-temurin:21.0.2_13-jdk-jammy AS builder
     WORKDIR /opt/app
     COPY .mvn/ .mvn
     COPY mvnw pom.xml ./
     RUN ./mvnw dependency:go-offline
     COPY ./src ./src
     RUN ./mvnw clean install
-    FROM eclipse-temurin:21.0.2_13-jre-jammy as final
+
+    FROM eclipse-temurin:21.0.2_13-jre-jammy AS final
     WORKDIR /opt/app
     EXPOSE 8080
     COPY --from=builder /opt/app/target/*.jar /opt/app/*.jar
@@ -277,7 +278,7 @@ Now that you have the project, you’re ready to create the `Dockerfile`.
 
     - The first stage remains the same as the previous Dockerfile, providing a Java Development Kit (JDK) environment for building the application. This stage is given the name of builder.
 
-    - The second stage is a new stage named `final`. Since it starts `FROM builder`, it inherits everything from the base stage (JDK environment). It uses a slimmer `eclipse-temurin:21.0.2_13-jre-jammy` image, containing just the Java Runtime Environment (JRE) needed to run the application. This image provides a Java Runtime Environment (JRE) which is enough for running the compiled application (JAR file). 
+    - The second stage is a new stage named `final`. It uses a slimmer `eclipse-temurin:21.0.2_13-jre-jammy` image, containing just the Java Runtime Environment (JRE) needed to run the application. This image provides a Java Runtime Environment (JRE) which is enough for running the compiled application (JAR file). 
 
     
    > For production use, it's highly recommended that you produce a custom JRE-like runtime using jlink. JRE images are available for all versions of Eclipse Temurin, but `jlink` allows you to create a minimal runtime containing only the necessary Java modules for your application. This can significantly reduce the size and improve the security of your final image. [Refer to this page](https://hub.docker.com/_/eclipse-temurin) for more information.

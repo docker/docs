@@ -133,7 +133,7 @@ Docker configs.
 
 The `docker stack` command supports defining configs in a Compose file.
 However, the `configs` key is not supported for `docker compose`. See
-[the Compose file reference](../../compose/compose-file/compose-file-v3.md#configs) for details.
+[the Compose file reference](../../compose/compose-file/legacy-versions.md) for details.
 
 ### Simple example: Get started with configs
 

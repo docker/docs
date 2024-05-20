@@ -24,8 +24,9 @@ To get started with Docker Engine on Fedora, make sure you
 To install Docker Engine, you need a maintained version of one of the following
 Fedora versions:
 
-- Fedora 38
+- Fedora 38 (EOL: [May 14, 2024](https://fedorapeople.org/groups/schedule/f-38/f-38-key-tasks.html))
 - Fedora 39
+- Fedora 40
 
 ### Uninstall old versions
 
@@ -112,17 +113,17 @@ $ sudo dnf config-manager --add-repo {{% param "download-url-base" %}}/docker-ce
    ```console
    $ dnf list docker-ce --showduplicates | sort -r
 
-   docker-ce.x86_64    3:25.0.0-1.fc39    docker-ce-stable
-   docker-ce.x86_64    3:24.0.7-1.fc39    docker-ce-stable
+   docker-ce.x86_64    3:26.1.0-1.fc40    docker-ce-stable
+   docker-ce.x86_64    3:26.0.2-1.fc40    docker-ce-stable
    <...>
    ```
 
    The list returned depends on which repositories are enabled, and is specific
-   to your version of Fedora (indicated by the `.fc39` suffix in this example).
+   to your version of Fedora (indicated by the `.fc40` suffix in this example).
 
    Install a specific version by its fully qualified package name, which is
    the package name (`docker-ce`) plus the version string (2nd column),
-   separated by a hyphen (`-`). For example, `docker-ce-3:25.0.0-1.fc39`.
+   separated by a hyphen (`-`). For example, `docker-ce-3:26.1.0-1.fc40`.
 
    Replace `<VERSION_STRING>` with the desired version and then run the following
    command to install:

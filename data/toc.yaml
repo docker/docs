@@ -1,4 +1,6 @@
 Guides:
+- title: Overview
+  path: /guides/
 - title: Docker overview
   path: /get-started/overview/
 - sectiontitle: Get started
@@ -197,11 +199,11 @@ Guides:
     - title: "Test your deployment"
       path: /language/php/deploy/
 
-- sectiontitle: Use-case guides {{< badge color=violet text=New >}}
+- sectiontitle: Use-case guides
   section:
     - path: /guides/use-case/
       title: Overview
-    - sectiontitle: Generative AI
+    - sectiontitle: Machine learning & AI
       section:
       - sectiontitle: PDF analysis and chat
         section:
@@ -213,26 +215,28 @@ Guides:
           title: Develop your app
       - path: /guides/use-case/genai-video-bot/
         title: Video transcription and chat
-    - sectiontitle: Natural language processing
-      section:
-      - path: /guides/use-case/nlp/
-        title: Overview
-      - path: /guides/use-case/nlp/language-translation/
-        title: Language translation
-      - path: /guides/use-case/nlp/named-entity-recognition/
-        title: Named entity recognition
-      - path: /guides/use-case/nlp/sentiment-analysis/
-        title: Sentiment analysis
-      - path: /guides/use-case/nlp/text-classification/
-        title: Text classification
-      - path: /guides/use-case/nlp/text-summarization/
-        title: Text summarization
-    - path: /guides/use-case/tensorflowjs/
-      title: Face detection with TensorFlow.js
+      - path: /guides/use-case/tensorflowjs/
+        title: Face detection with TensorFlow.js
+      - sectiontitle: Natural language processing
+        section:
+        - path: /guides/use-case/nlp/
+          title: Overview
+        - path: /guides/use-case/nlp/language-translation/
+          title: Language translation
+        - path: /guides/use-case/nlp/named-entity-recognition/
+          title: Named entity recognition
+        - path: /guides/use-case/nlp/sentiment-analysis/
+          title: Sentiment analysis
+        - path: /guides/use-case/nlp/text-classification/
+          title: Text classification
+        - path: /guides/use-case/nlp/text-summarization/
+          title: Text summarization
     - path: /guides/use-case/jupyter/
       title: Data science with JupyterLab
     - path: /scout/guides/vex/
       title: Suppress CVEs with VEX
+    - path: /guides/use-case/databases/
+      title: Use containerized databases
 
 
 - sectiontitle: Develop with Docker
@@ -1018,14 +1022,8 @@ Reference:
       title: Compose Deploy Specification
     - path: /compose/compose-file/develop/
       title: Compose Develop Specification
-    - sectiontitle: Legacy versions
-      section:
-        - path: /compose/compose-file/compose-versioning/
-          title: About versions and upgrading
-        - path: /compose/compose-file/compose-file-v3/
-          title: Version 3
-        - path: /compose/compose-file/compose-file-v2/
-          title: Version 2
+    - path: /compose/compose-file/legacy-versions/
+      title: Legacy versions
 - path: /glossary/
   title: Glossary
 - sectiontitle: Samples
@@ -1132,7 +1130,7 @@ Manuals:
   section:
     - path: /desktop/
       title: Overview
-    - sectiontitle: Install 
+    - sectiontitle: Install
       section:
        - path: /desktop/install/mac-install/
          title: Mac
@@ -1182,8 +1180,6 @@ Manuals:
             title: What is Settings Management?
           - path: /desktop/hardened-desktop/settings-management/configure/
             title: Configure Settings Management
-          - path: /desktop/hardened-desktop/settings-management/air-gapped-containers/
-            title: Air-gapped containers (Beta)
         - sectiontitle: Enhanced Container Isolation
           section:
           - path: /desktop/hardened-desktop/enhanced-container-isolation/
@@ -1194,6 +1190,12 @@ Manuals:
             title: Key features and benefits
           - path: /desktop/hardened-desktop/enhanced-container-isolation/config/
             title: Advanced configuration options
+          - path: /desktop/hardened-desktop/enhanced-container-isolation/limitations/
+            title: Limitations
+          - path: /desktop/hardened-desktop/enhanced-container-isolation/faq/
+            title: FAQ
+        - path: /desktop/hardened-desktop/air-gapped-containers/
+          title: Air-Gapped Containers
     - sectiontitle: Dev Environments (Beta)
       section:
         - path: /desktop/dev-environments/
@@ -1414,6 +1416,8 @@ Manuals:
         title: SBOM
       - path: /scout/env-vars/
         title: Environment variables
+      - path: /scout/metrics-exporter/
+        title: Metrics exporter
     - sectiontitle: Policy Evaluation
       section:
       - path: /scout/policy/
@@ -1587,6 +1591,8 @@ Manuals:
     section:
     - path: /engine/reference/commandline/cli/
       title: Use the Docker CLI
+    - path: /config/completion/
+      title: Completion
     - path: /config/filter/
       title: Filter commands
     - path: /config/formatting/
@@ -2226,8 +2232,8 @@ Manuals:
       title: General
     - path: /security/faqs/networking-and-vms/
       title: Networking and VMs
-    - path: /security/faqs/eci-faq/
-      title: Enhanced Container Isolation
+    - path: /security/faqs/containers/
+      title: Containers
     - sectiontitle: Single Sign-On
       section:
       - path: /security/faqs/single-sign-on/faqs/

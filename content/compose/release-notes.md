@@ -1,6 +1,6 @@
 ---
 title: Docker Compose release notes
-description: Release notes for Docker Compose
+description: Learn about the new features, bug fixes, and breaking changes for the newest Docker Compose release
 keywords: release notes, compose
 tags: [Release notes]
 toc_max: 2
@@ -8,11 +8,27 @@ aliases:
 - /release-notes/docker-compose/
 ---
 
-{{< include "compose-eol.md" >}}
-
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
-## 2.26.0
+## 2.27.0
+
+{{< release-date date="2024-04-24" >}}
+
+### Update
+
+- Dependencies upgrade: bump golang to 1.21.9
+- Dependencies upgrade: bump compose-go to v2.1.0
+- Dependencies upgrade: bump docker engine and cli to v26.1.0
+
+### Bug fixes and enhancements
+
+- Introduced `--abort-on-container-failure` flag
+- Introduced `--all-resources` to not exclude resources not used by services
+- Introduced support for `build.entitlements`
+- Fixed a bug so Docker Compose now ignores missing containers when `docker compose down/stop -p` is run
+- Fixed support for `--flag=value` syntax in compatibility mode
+
+## 2.26.1
 
 {{< release-date date="2024-03-29" >}}
 
@@ -56,7 +72,7 @@ For more detailed information, see the [release notes in the Compose repo](https
 
 ### Bug fixes and enhancements
 
-- Restored `config` hebaviour until `--no-interpolate` is set
+- Restored `config` behaviour until `--no-interpolate` is set
 - Fixed service name shell completion
 - Added `--watch` flag to `up` command
 
@@ -2191,7 +2207,7 @@ naming scheme accordingly before upgrading.
 
 - Added support for `extra_hosts` in build configuration
 
-- Added support for the [long syntax](compose-file/compose-file-v3.md#long-syntax-3) for volume entries, as previously introduced in the 3.2 format.
+- Added support for the [long syntax](compose-file/legacy-versions.md) for volume entries, as previously introduced in the 3.2 format.
   Using this syntax will create [mounts](../storage/bind-mounts.md) instead of volumes.
 
 #### Compose file version 2.1 and up
@@ -3127,7 +3143,7 @@ naming scheme accordingly before upgrading.
     You don't have to use it - your existing Compose files will run on Compose
     1.6 exactly as they do today.
 
-    Check the [upgrade guide](../compose/compose-file/compose-versioning.md#upgrading)
+    Check the [upgrade guide](../compose/compose-file/legacy-versions.md)
     for full details.
 
 -   Support for networking has exited experimental status and is the recommended

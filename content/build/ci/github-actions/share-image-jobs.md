@@ -16,8 +16,6 @@ name: ci
 
 on:
   push:
-    branches:
-      - "main"
 
 jobs:
   build:
@@ -25,16 +23,19 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
+      
       - name: Build and export
         uses: docker/build-push-action@v5
         with:
           context: .
           tags: myimage:latest
           outputs: type=docker,dest=/tmp/myimage.tar
+      
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: myimage
           path: /tmp/myimage.tar
@@ -44,10 +45,11 @@ jobs:
     needs: build
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: myimage
           path: /tmp
+      
       - name: Load image
         run: |
           docker load --input /tmp/myimage.tar

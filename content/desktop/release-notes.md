@@ -1,5 +1,5 @@
 ---
-description: Release notes for Docker Desktop for Mac, Linux, and Windows
+description: Find the Docker Desktop release notes for Mac, Linux, and Windows.
 keywords: Docker desktop, release notes, linux, mac, windows
 title: Docker Desktop release notes
 tags: [Release notes]
@@ -25,6 +25,88 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/releases.md).
 
+## 4.30.0
+
+{{< release-date date="2024-05-06" >}}
+
+{{< desktop-install all=true version="4.30.0" build_path="/149282/" >}}
+
+### New
+
+#### For all platforms
+
+- Docker Desktop now supports [SOCKS5 proxies](networking.md#socks5-proxy-support). Requires a Business subscription.
+- Added a new setting to manage the onboarding survey in [Settings Management](hardened-desktop/settings-management/_index.md).
+
+#### For Windows
+
+- Added support for [Kerberos and NTLM proxy authentication](settings/windows.md#proxy-authentication) on Windows. Requires a Business subscription.
+
+### Upgrades
+
+- [Docker Compose v2.27.0](https://github.com/docker/compose/releases/tag/v2.27.0)
+- [Docker Engine v26.1.1](https://docs.docker.com/engine/release-notes/26.1/#2611)
+- [Wasm](../desktop/wasm/_index.md) runtimes:
+  - Updated `runwasi` shims to `v0.4.0`
+  - Updated `deislabs` shims to `v0.11.1`
+  - Updated `spin` shim to `v0.13.1`
+- [Docker Scout CLI v1.8.0](https://github.com/docker/scout-cli/releases/tag/v1.8.0)
+- Docker Debug `v0.0.29`
+- Linux kernel `v6.6.26`
+- [Go 1.22.2](https://github.com/golang/go/releases/tag/go1.22.2)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Improved Enhanced Container Isolation (ECI) security when running `docker build` commands in rootless containers.
+- Fixed a bug where `docker events` exited with `Unexpected EOF` when Docker Desktop entered/exited Resource Saver mode.
+- Fixed a bug where `docker stats --no-stream` hung when Docker Desktop was in Resource Saver mode.
+- Fixed a bug in the self-diagnose CLI that incorrectly showed the VM had not started. Fixes [docker/for-mac#7241](https://github.com/docker/for-mac/issues/7241).
+- Fixed a bug where high-throughput port forward transfers could stall. Fixes [docker/for-mac#7207](https://github.com/docker/for-mac/issues/7207).
+- Fixed CLI-plugin symlinks not being removed when CLI apps were removed.
+- Fixed a bug in the shared ports drawer to show the right message for local engines.
+- Dev Environments is being sunset and has moved to the **Beta** tab in **Features in development**.
+- Build UI:
+  - Better bulk delete for build records.
+  - Added action to open the relevant web page for container images and Git sources in build dependencies.
+  - Added action to download Provenance and OpenTelemetry traces in Jaeger or OTLP format.
+  - Fixed source details for remote build invocations.
+  - Fixed a bug where multi-platform builds would show up as separate records when using a cloud builder.
+
+#### For Mac
+
+- Fixed a bug where a segmentation fault was triggered with Virtualization Framework, on post-2019 Macs. See [docker/for-mac#6824](https://github.com/docker/for-mac/issues/6824).
+- Enabled `CONFIG_SECURITY=y` kernel config, for example for [Tetragon](https://tetragon.io/). Fixes [docker/for-mac#7250](https://github.com/docker/for-mac/issues/7250).
+- Re-added support for `SQUASHFS` compression. Fixes [docker/for-mac#7260](https://github.com/docker/for-mac/issues/7260).
+- Fixed a bug that caused a new version of Docker Desktop to be marked as damaged.
+- Increased network MTU when using qemu on Apple Silicon.
+- Fixed a bug preventing Docker Desktop to start if Rosetta was not installed. Fixes [docker/for-mac#7243](https://github.com/docker/for-mac/issues/7243).
+
+#### For Windows
+
+- Added a simplified provisioning mode for WSL2 that avoids the need for the ancillary `docker-desktop-data` WSL distribution (experimental).
+- Fixed bash completions for the Docker CLI in a WSL environment.
+- Fixed a regression in Docker Desktop 4.28 that caused host files bind-mounted into containers to not show up properly inside the container, when using Docker-in-Docker (via mounts of `/var/run/docker.sock`) on WSL.
+- Fixed a bug that would cause the following error `merging settings: integratedWslDistros type mismatch`.
+
+### Known issues
+
+#### For all platforms
+
+- If you have enabled a feature in Docker Desktop that requires you to be signed in, such as **Host networking** you must remain signed in to use Docker Desktop. To continue using Docker Desktop or to modify these settings, ensure you are signed in.
+- To enable or disable **Manage Synchronized file shares with Compose**, **Access experimental features** and **Manage Synchronized file shares with Compose** have to be checked or unchecked at the same time.
+- The Docker CLI will sometimes hang when running a container with the autoremove option (`--rm`) if the container fails to start (e.g.: `docker run --rm alpine invalidcommand`). In this case, the CLI process may need to be manually killed.
+
+#### For Windows
+
+- When starting Docker Desktop as a non-admin user, the following error connect `ENOENT \\.\pipe\errorReporter` might be triggered if the user is not a member of the **docker-users** group.
+This can be resolved by adding the user to the **docker-users** group. Before starting Docker Desktop, make sure to sign out and then sign back in and unregister `docker-desktop` distribution if that was created, using `wsl --unregister docker-desktop`.
+
+#### For Linux
+
+- Ubuntu 24.04 LTS is not yet supported, Docker Desktop will fail to start. Due to a change in how the latest Ubuntu release restricts the unprivileged namespaces, `sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0` needs to be ran at least once. Refer to the [Ubuntu Blog](https://ubuntu.com/blog/ubuntu-23-10-restricted-unprivileged-user-namespaces) for more details.
+
 ## 4.29.0
 
 {{< release-date date="2024-04-08" >}}
@@ -40,7 +122,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 - Compose supports [Synchronized file shares (experimental)](synchronized-file-sharing.md).
 - New [interactive Compose CLI (experimental)](../compose/environment-variables/envvars.md#compose_menu).
 - Beta release of:
-  - Air-gapped containers with [Settings Management](hardened-desktop/settings-management/air-gapped-containers.md).
+  - Air-Gapped Containers with [Settings Management](hardened-desktop/air-gapped-containers/_index.md).
   - [Host networking](../network/drivers/host.md#docker-desktop) in Docker Desktop.
   - [Docker Debug](use-desktop/container.md#integrated-terminal) for running containers.
   - [Volumes Backup & Share extension](use-desktop/volumes.md) functionality available in the **Volumes** tab.
@@ -121,7 +203,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 - [Compose v2.24.6](https://github.com/docker/compose/releases/tag/v2.24.6)
 - [Docker Engine v25.0.3](https://docs.docker.com/engine/release-notes/25.0/#2503)
 - [Docker Scout CLI v1.5.0](https://github.com/docker/scout-cli/releases/tag/v1.5.0)
-- [Qemu 8.1.5](https://wiki.qemu.org/ChangeLog/8.1) 
+- [Qemu 8.1.5](https://wiki.qemu.org/ChangeLog/8.1)
 - [Wasm](../desktop/wasm/_index.md) runtimes:
   - Updated runwasi shims to `v0.4.0`, including:
     - wasmtime `v17.0`, with initial support for WASI preview 2
@@ -398,7 +480,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 - Fixed a bug were the setting **Start Docker Desktop when you sign in** would not work. Fixes [docker/for-mac#7052](https://github.com/docker/for-mac/issues/7052).
 - You can now enable the use of Kernel networking path for UDP through the UI. Fixes [docker/for-mac#7008](https://github.com/docker/for-mac/issues/7008).
 - Fixed a regression where the `uninstall` CLI tool was missing.
-- Addressed an issue which caused Docker Desktop to become unresponsive when analytics were disabled with Settings Management. 
+- Addressed an issue which caused Docker Desktop to become unresponsive when analytics were disabled with Settings Management.
 
 #### For Windows
 
@@ -410,7 +492,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 #### For Windows
 
 - Docker CLI doesn’t work when using WSL 2 integration on an older Linux distribution (for example, Ubuntu 20.04) which uses a `glibc` version older than `2.32`. This will be fixed in future releases. See [docker/for-win#13824](https://github.com/docker/for-win/issues/13824).
-  
+
 ## 4.25.2
 
 {{< release-date date="2023-11-21" >}}
@@ -520,7 +602,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 #### For all platforms
 
-- Docker operations, such as pulling images or logging in, fail with 'connection refused' or 'timeout' errors if the Swap file size is set to 0MB. As a workaround, configure the swap file size to a non-zero value in the **Resources** tab in **Settings**. 
+- Docker operations, such as pulling images or logging in, fail with 'connection refused' or 'timeout' errors if the Swap file size is set to 0MB. As a workaround, configure the swap file size to a non-zero value in the **Resources** tab in **Settings**.
 
 ## 4.24.2
 

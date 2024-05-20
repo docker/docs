@@ -1,8 +1,7 @@
 {{ $desc := "" }}
 {{ if .Description }}
-  {{ $desc = .Description }}
+  {{ $desc = strings.Replace .Description "\n" " " }}
 {{ else }}
-  {{ $desc = .Summary }}
   {{ with .File }}
     {{ with (index (site.Data.frontmatter) .Path) }}
       {{ with .description }}

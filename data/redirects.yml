@@ -598,10 +598,14 @@
   - /feedback/extension/
 "https://docs.google.com/forms/u/1/d/e/1FAIpQLScgzKwqQyr7BmnphdrcGTO3wkye_McHJVsWzOIgEESfqmditQ/formResponse":
   - /feedback/runtime/
-"https://docs.google.com/forms/d/e/1FAIpQLSeqCJNB45MeKO_ofBO4ZvglZ0cevMMD_FYzncKoZNwqz_9bxg/viewform":
+"https://docker.qualtrics.com/jfe/form/SV_3OGeFazYFGv4Zj8":
   - /feedback/desktop-build/
+"https://docker.qualtrics.com/jfe/form/SV_3F9hnsKdzmlIr6m":
+  - /feedback/gha-build-summary/
 
 # Docker Scout
+"https://deploy-preview-19873--docsdocker.netlify.app/scout/dashboard/#notification-settings":
+  - /go/scout-notifications/
 "/scout/":
   - /go/scout/
   - /go/docker-scout/
@@ -644,6 +648,8 @@
   - "/go/scout-github/"
 "/scout/guides/vex/":
   - "/go/vex-guide/"
+"/scout/metrics-exporter/":
+  - "/go/scout-metrics-exporter"
 
 # Build links (internal)
 "/build/bake/reference/":
@@ -666,6 +672,16 @@
   - /go/attestations/
 "/build/attestations/slsa-provenance/":
   - /go/provenance/
+"/build/building/variables/#arg-usage-example":
+  - /go/build-args/
+"/build/building/secrets/":
+  - /go/build-secrets/
+"/build/building/secrets/#ssh-mounts":
+  - /go/build-ssh/
+"/reference/cli/docker/buildx/build/#build-context":
+  - /go/build-additional-context/
+"/config/labels-custom-metadata/":
+  - /go/labels/
 
 # Build links (external)
 "https://www.docker.com/build-early-access-program/?utm_campaign=onboard-30-customer-zero&utm_medium=in-product-ad&utm_source=desktop_v4":
