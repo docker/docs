@@ -31,9 +31,6 @@ ARG HUGO_ENV
 ARG DOCS_URL
 RUN hugo --gc --minify -d /out -e $HUGO_ENV -b $DOCS_URL
 
-FROM scratch AS release
-COPY --from=build /out /
-
 FROM davidanson/markdownlint-cli2:v0.12.1 AS lint
 USER root
 RUN --mount=type=bind,target=. \
@@ -79,4 +76,5 @@ COPY --from=build-upstream /out ./public
 ADD .htmltest.yml .htmltest.yml
 RUN htmltest
 
-FROM dev
+FROM scratch AS release
+COPY --from=build /out /
