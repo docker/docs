@@ -6,9 +6,7 @@ title: Use Compose Watch
 
 {{< introduced compose 2.22.0 "release-notes.md#2220" >}}
 
-Use `watch` to automatically update and preview your running Compose services as you edit and save your code. 
-
-For many projects, this allows for a hands-off development workflow once Compose is running, as services automatically update themselves when you save your work.
+{{< include "compose/watch.md" >}}
 
 `watch` adheres to the following file path rules:
 * All paths are relative to the project directory
@@ -157,17 +155,7 @@ This pattern can be followed for many languages and frameworks, such as Python w
 
 ## Use `watch`
 
-1. Add `watch` sections to one or more services in `compose.yaml`.
-2. Run `docker compose up --watch` to build and launch a Compose project and start the file watch mode.
-3. Edit service source files using your preferred IDE or editor.
-
-> **Looking for a sample project to test things out?**
->
-> Check out [`dockersamples/avatars`](https://github.com/dockersamples/avatars),
-> or [local setup for Docker docs](https://github.com/docker/docs/blob/main/CONTRIBUTING.md)
-> for a demonstration of Compose `watch`.
-{ .tip }
-
+{{< include "compose/configure-watch.md" >}}
 
 > **Tip**
 >
@@ -175,6 +163,11 @@ This pattern can be followed for many languages and frameworks, such as Python w
 > get the application logs mixed with the (re)build logs and filesystem sync events.
 { .tip }
 
+> **Looking for a sample project to test things out?**
+>
+> Check out [`dockersamples/avatars`](https://github.com/dockersamples/avatars),
+> or [local setup for Docker docs](https://github.com/docker/docs/blob/main/CONTRIBUTING.md)
+> for a demonstration of Compose `watch`.
 
 ## Feedback
 

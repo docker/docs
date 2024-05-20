@@ -4,15 +4,7 @@ desription: How to use profiles with Docker Compose
 keywords: cli, compose, profile, profiles reference
 ---
 
-Profiles help you adjust the Compose application model for various uses and
-environments by selectively starting services.
-This is achieved by assigning each service to zero or more profiles. If
-unassigned, the service is always started but if assigned, it is only started
-if the profile is activated.
-
-This allows you to define additional services in a single `compose.yml` file
-that should only be started in specific scenarios, for example for debugging or
-development tasks.
+{{< include "compose/profiles.md" >}}
 
 ## Assigning profiles to services
 
