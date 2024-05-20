@@ -17,7 +17,7 @@ Docker offers two primary storage options for persisting data and sharing files 
 
 ### Volume versus Bind Mounts
 
-If you want to ensure that data generated or modified inside the container persists even after the container stops running, you would opt for a volume. [Learn more](/running-containers/persisting-container-data/) about volumes and their use cases.
+If you want to ensure that data generated or modified inside the container persists even after the container stops running, you would opt for a volume. [Learn more](/guides/docker-concepts/running-containers/persisting-container-data/) about volumes and it's use cases.
 
 If you have specific files or directories on your host system that you want to directly share with your container, like configuration files or development code, then you would use a bind mount. It's like opening a direct portal between your host and container for sharing. Bind mounts are ideal for development environments where real-time file access and sharing between the host and container are crucial.
 
@@ -81,13 +81,14 @@ In this hands-on guide, you’ll practice how to create and use a bind mount to 
     $ curl localhost:8080
     ```
 
-    With everything now up and running, you should be able to access the site successfully.
 
 ### Use Bind Mount
 
 Using a bind mount, you can map the configuration file on your host computer to a specific location within the container. In this example, you’ll see how to change the look and feel of the webpage by using bind mount:
 
 1. Delete the existing container by using the Docker Dashboard:
+
+   ![A screenshot of Docker dashboard showing how to delete the httpd container](images/delete-httpd-container.webp?border=true)
 
 
 2. Create a new directory called `public_html` on your host system.
@@ -155,7 +156,7 @@ Using a bind mount, you can map the configuration file on your host computer to 
    {{< /tab >}}
    {{< /tabs >}}
 
-   With everything now up and running, you should be able to access the site and find a new webpage that welcomes you with a friendly whale!
+   With everything now up and running, you should be able to access the site via [http://localhost:8080](http://localhost:8080) and find a new webpage that welcomes you with a friendly whale!
 
 
 ###  Access the file on the Docker dashboard
@@ -196,12 +197,12 @@ The container continues to run until you stop it.
 The following resources will help you learn more about bind mount:
 
 
-* [Manage data in Docker](https://docs.docker.com/storage/)
-* [Volumes](https://docs.docker.com/storage/volumes/)
-* [Bind Mounts](https://docs.docker.com/storage/bind-mounts/)
-* [Running containers](https://docs.docker.com/reference/run/)
-* [Troubleshoot storage errors](https://docs.docker.com/storage/troubleshooting_volume_errors/)
-* [Persisting container data](/running-containers/persisting-container-data/)
+* [Manage data in Docker](/storage/)
+* [Volumes](/storage/volumes/)
+* [Bind Mounts](/storage/bind-mounts/)
+* [Running containers](/reference/run/)
+* [Troubleshoot storage errors](/storage/troubleshooting_volume_errors/)
+* [Persisting container data](/guides/docker-concepts/running-containers/persisting-container-data/)
 
 ## Next steps
 
