@@ -4,7 +4,7 @@ description: Learn about interpolation
 keywords: compose, compose specification, interpolation, compose file reference
 ---
 
-{{< include "compose/interpolation.md" >}}
+{{% data-include "uistrings.composeInterpolation" %}}
 
 Default values can be defined inline using typical shell syntax:
 

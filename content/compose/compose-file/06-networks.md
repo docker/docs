@@ -4,7 +4,7 @@ description: Explore all the attributes the networks top-level element can have.
 keywords: compose, compose specification, networks, compose file reference
 ---
 
-{{< include "compose/networks.md" >}}
+{{% data-include "uistrings.composeNetworks" %}}
 
 To use a network across multiple services, you must explicitly grant each service access by using the [networks](05-services.md) attribute within the `services` top-level element. The `networks` top-level element has additional syntax that provides more granular control.
 

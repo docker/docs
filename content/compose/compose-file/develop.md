@@ -8,7 +8,7 @@ keywords: compose, compose specification, compose file reference, compose develo
 >
 > Develop is an optional part of the Compose Specification. It is available with Docker Compose version 2.22.0 and later.
 
-{{< include "compose/develop.md" >}}
+{{% data-include "uistrings.composeServicesDevelop" %}}
 
 This page defines how Compose behaves to efficiently assist you and defines the development constraints and workflows set by Compose. Only a subset of
 Compose file services may require a `develop` subsection.

@@ -7,7 +7,7 @@ tags: [Secrets]
 
 A secret is any piece of data, such as a password, certificate, or API key, that shouldn’t be transmitted over a network or stored unencrypted in a Dockerfile or in your application’s source code.
 
-{{< include "compose/secrets.md" >}}
+{{% data-include "uistrings.composeSecrets" %}}
 
 Environment variables are often available to all processes, and it can be difficult to track access. They can also be printed in logs when debugging errors without your knowledge. Using secrets mitigates these risks.
 

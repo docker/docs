@@ -6,7 +6,7 @@ title: Use Compose Watch
 
 {{< introduced compose 2.22.0 "release-notes.md#2220" >}}
 
-{{< include "compose/watch.md" >}}
+{{% data-include "uistrings.composeWatch" %}}
 
 `watch` adheres to the following file path rules:
 * All paths are relative to the project directory
@@ -155,7 +155,7 @@ This pattern can be followed for many languages and frameworks, such as Python w
 
 ## Use `watch`
 
-{{< include "compose/configure-watch.md" >}}
+{{% data-include "uistrings.composeConfigureWatch" %}}
 
 > **Tip**
 >

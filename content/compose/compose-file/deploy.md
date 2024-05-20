@@ -4,7 +4,7 @@ description: Learn about the Compose Deploy Specification
 keywords: compose, compose specification, compose file reference, compose deploy specification
 ---
 
-{{< include "compose/deploy.md" >}}
+{{% data-include "uistrings.composeDeploy" %}}
 
 ## Attributes
 

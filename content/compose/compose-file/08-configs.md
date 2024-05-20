@@ -4,7 +4,7 @@ description: Explore all the attributes the configs top-level element can have.
 keywords: compose, compose specification, configs, compose file reference
 ---
 
-{{< include "compose/configs.md" >}}
+{{% data-include "uistrings.composeConfigs" %}}
 
 Services can only access configs when explicitly granted by a [`configs`](05-services.md#configs) attribute within the `services` top-level element.
 

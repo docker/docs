@@ -4,7 +4,7 @@ description: Learn about merging rules
 keywords: compose, compose specification, merge, compose file reference
 ---
 
-{{< include "compose/merge.md" >}}
+{{% data-include "uistrings.composeMerge" %}}
 
 These rules are outlined below. 
 

@@ -4,7 +4,7 @@ description: Understand how to use extensions
 keywords: compose, compose specification, extensions, compose file reference
 ---
 
-{{< include "compose/extension.md" >}}
+{{% data-include "uistrings.composeExtension" %}}
 
 They also can be used within any structure in a Compose file where user-defined keys are not expected. 
 Compose uses those to enable experimental features, the same way browsers add support for [custom CSS features](https://www.w3.org/TR/2011/REC-CSS2-20110607/syndata.html#vendor-keywords)

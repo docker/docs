@@ -4,7 +4,7 @@ description: Understand how to use fragments
 keywords: compose, compose specification, fragments, compose file reference
 ---
 
-{{< include "compose/fragments.md" >}}
+{{% data-include "uistrings.composeFragments" %}}
 
 Anchors are created using the `&` sign. The sign is followed by an alias name. You can use this alias with the `*` sign later to reference the value following the anchor. Make sure there is no space between the `&` and the `*` characters and the following alias name. 
 

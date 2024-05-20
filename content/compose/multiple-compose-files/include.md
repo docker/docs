@@ -6,7 +6,7 @@ title: Include
 
 {{< introduced compose 2.20.3 "../release-notes.md#2203" >}}
 
-{{< include "compose/include.md" >}}
+{{% data-include "uistrings.composeInclude" %}}
 
 The [`include` top-level element](../compose-file/14-include.md) helps to reflect the engineering team responsible for the code directly in the config file's organization. It also solves the relative path problem that [`extends`](extends.md) and [merge](merge.md) present. 
 
