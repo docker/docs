@@ -1,0 +1,9 @@
+{{- $path := strings.Split (.Get 0) "." }}
+{{- $data := site.Data }}
+  {{- range $path }}
+  {{- $data = index $data . }}
+{{- end }}
+{{- if eq $data nil }}
+  {{- fmt.Errorf "[data-include] data is nil: %v" .Position }}
+{{- end }}
+{{ safe.HTML $data }}
