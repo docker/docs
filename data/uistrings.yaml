@@ -1,0 +1,143 @@
+# This file is used to generate /uistrings.json
+#
+# To include these strings in content, use:
+# {{% data-include uistrings.<KEY> %}}
+
+composeBuild:
+  Build is an optional part of the Compose Specification. It tells Compose how
+  to (re)build an application from source and lets you define the build process
+  within a Compose file in a portable way.  `build` can be either specified as
+  a single string defining a context path, or as a detailed build definition.
+composeConfigs: 
+  Configs let services to adapt their behaviour without the need to rebuild a
+  Docker image. As with volumes, configs are mounted as files into a
+  container's filesystem. The location of the mount point within the container
+  defaults to `/<config-name>` in Linux containers and `C:\<config-name>` in
+  Windows containers. 
+composeConfigureWatch: 
+  1. Add `watch` sections to one or more services in `compose.yaml`.
+  2. Run `docker compose up --watch` to build and launch a Compose project and start the file watch mode.
+  3. Edit service source files using your preferred IDE or editor.
+composeDeploy:
+  Deploy is an optional part of the Compose Specification. It is used to
+  configure how services are deployed and managed in a Docker Swarm mode.
+  Essentially, it provides a set of deployment specifications for managing the
+  behavior of containers across different environments.
+composeExtension:
+  As with [Fragments](10-fragments.md), Extensions can be used to make your
+  Compose file more efficient and easier to maintain. Extensions can also be
+  used with [anchors and aliases](10-fragments.md).
+
+  Use the prefix `x-` as a top-level element to modularize configurations that
+  you want to reuse. Compose ignores any fields that start with `x-`, this is
+  the sole exception
+  where Compose silently ignores unrecognized fields.
+composeFragments:
+  With Compose, you can use built-in
+  [YAML](https://www.yaml.org/spec/1.2/spec.html#id2765878) features to make
+  your Compose file neater and more efficient. Anchors and aliases let you
+  create re-usable blocks. This is useful if you start to find common
+  configurations that span multiple services. Having re-usable blocks minimizes
+  potential mistakes.
+composeInclude:
+  With `include`, you can incorporate a separate `compose.yaml` file directly
+  in your current `compose.yaml` file. This makes it easy to modularize complex
+  applications into sub-Compose files, which in turn enables application
+  configurations to be made simpler and more explicit.
+composeInterpolation:
+  Values in a Compose file can be set by variables and interpolated at runtime.
+  Compose files use a Bash-like syntax `${VARIABLE}`. Both `$VARIABLE` and
+  `${VARIABLE}` syntax is supported. 
+composeMerge:
+  Compose lets you define a Compose application model through [multiple Compose
+  files](https://docs.docker.com/compose/multiple-compose-files/). When doing
+  so, Compose follows certain rules to merge Compose files.
+composeNetworks:
+  Networks let services communicate with each other. By default Compose sets up
+  a single network for your app. Each container for a service joins the default
+  network and is both reachable by other containers on that network, and
+  discoverable by the service's name. The top-level `networks` element lets you
+  configure named networks that can be reused across multiple services.
+composeProfiles:
+  Profiles help you adjust your Compose application for different environments
+  or use cases by selectively activating services. Services can be assigned to
+  one or more profiles; unassigned services start by default, while assigned
+  ones only start when their profile is active. This setup means specific
+  services, like those for debugging or development, to be included in a single
+  `compose.yml` file and activated only as needed.
+composeSecrets:
+  Docker Compose provides a way for you to use secrets without having to use
+  environment variables to store information. If you’re injecting passwords and
+  API keys as environment variables, you risk unintentional information
+  exposure. Services can only access secrets when explicitly granted by a
+  `secrets` attribute within the `services` top-level element.
+composeServices:
+  A service is an abstract definition of a computing resource within an
+  application which can be scaled or replaced independently from other
+  components. Services are backed by a set of containers, run by the platform
+  according to replication requirements and placement constraints. As services
+  are backed by containers, they are defined by a Docker image and set of
+  runtime arguments. All containers within a service are identically created
+  with these arguments.
+composeServicesDependsOn:
+  With the `depends_on` attribute, you can control the order of service startup
+  and shutdown. It is useful if services are closely coupled, and the startup
+  sequence impacts the application's functionality.
+composeServicesDevelop:
+  Develop lets Compose focus on the development use-case of running
+  applications on a local machine. It also supports some development hooks to
+  improve the velocity of your local workflow, also known as your "inner loop". 
+composeServicesEnvFile:
+  The `env_file` attribute is used to specify one or more files that contain
+  environment variables to be passed to the containers.
+composeServicesEnvironment:
+  The `environment` attribute defines environment variables set in the
+  container. `environment` can use either an array or a map. Any boolean
+  values; true, false, yes, no, should be enclosed in quotes to ensure they are
+  not converted to True or False by the YAML parser.
+composeServicesHealthcheck:
+  The `healthcheck` attribute declares a check that's run to determine whether
+  or not the service containers are "healthy". It works in the same way, and
+  has the same default values, as the [HEALTHCHECK Dockerfile
+  instruction](https://docs.docker.com/reference/dockerfile/#healthcheck) set
+  by the service's Docker image. Your Compose file can override the values set
+  in the Dockerfile. 
+composeServicesNetworks:
+  The `networks` attribute defines the networks that service containers are
+  attached to, referencing entries under the [`networks` top-level
+  element](06-networks.md). The `networks` attribute helps manage the
+  networking aspects of containers, providing control over how services are
+  segmented and interact within the Docker environment. This is used to specify
+  which networks the containers for that service should connect to. This is
+  important for defining how containers communicate with each other and
+  externally.
+composeServicesPorts:
+  The `ports` is used to define the port mappings between the host machine and
+  the containers.  This is crucial for allowing external access to services
+  running inside containers. It can be defined using short syntax for simple
+  port mapping or long syntax, which includes additional options like protocol
+  type and network mode. 
+composeServicesSecrets:
+  The `secrets` attribute grants access to sensitive data defined by the
+  [secrets](09-secrets.md) top-level element on a per-service basis. Services
+  can be granted access to multiple secrets.
+composeServicesVolumes:
+  The `volumes` attribute define mount host paths or named volumes that are
+  accessible by service containers. You can use `volumes` to define multiple
+  types of mounts; `volume`, `bind`, `tmpfs`, or `npipe`. 
+  
+  If the mount is a host path and is only used by a single service, it can be
+  declared as part of the service definition. To reuse a volume across multiple
+  services, a named volume must be declared in the [top-level `volumes`
+  key](07-volumes.md).
+composeVolumes:
+  Volumes are persistent data stores implemented by the container engine.
+  Compose offers a neutral way for services to mount volumes, and configuration
+  parameters to allocate them to infrastructure. The top-level `volumes`
+  declaration lets you configure named volumes that can be reused across
+  multiple services. 
+composeWatch:
+  The `watch` attribute automatically updates and previews your running Compose
+  services as you edit and save your code. For many projects, this enables a
+  hands-off development workflow once Compose is running, as services
+  automatically update themselves when you save your work.
