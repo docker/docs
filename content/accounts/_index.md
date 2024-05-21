@@ -17,14 +17,14 @@ grid:
   link: /faq/admin/general-faqs/
 ---
 
-> **Early Access**
+> **Beta**
 >
-> Docker Home is in Early Access for select users. If your account isn't selected for Early Access,
+> Docker Home is in [public beta](/release-lifecycle/#beta) for select users. If your account isn't selected for public beta,
 > you can manage your account settings, personal access tokens, and two-factor authentication for
 > your account in [Docker Hub](https://hub.docker.com/).
 { .restricted }
 
-You can create a Docker account to secure a Docker ID, which is a username for your account that lets you access Docker products. You can use your Docker account to sign in to Docker products like Docker Hub, Docker Desktop, or Docker Scout. You can manage the settings for your account in [Docker Home](https://account.docker.com/).
+You can create a Docker account to secure a Docker ID, which is a username for your account that lets you access Docker products. You can use your Docker account to sign in to Docker products like Docker Hub, Docker Desktop, or Docker Scout. You can manage the settings for your account in [Docker Home](https://app.docker.com/settings).
 
 In this section, explore how you can create, manage, or update your account.
 

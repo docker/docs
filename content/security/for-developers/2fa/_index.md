@@ -25,7 +25,7 @@ Authenticator with a registered YubiKey.
 
 ## Enable two-factor authentication
 
-1. Sign in to your [Docker account](https://account.docker.com/login).
+1. Sign in to your [Docker account](https://app.docker.com/login).
 2. Select your avatar and then from the drop-down menu, select **My Account**.
 3. Navigate to the **Security** section, then select the arrow icon to enable 2FA.
 4. Enter your password to confirm your identity, then select **Confirm**.

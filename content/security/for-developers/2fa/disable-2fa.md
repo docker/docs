@@ -13,7 +13,7 @@ aliases:
 > Docker account.
 { .warning }
 
-1. Sign in to your [Docker account](https://account.docker.com/login).
+1. Sign in to your [Docker account](https://app.docker.com/login).
 2. Select your avatar and then from the drop-down menu, then select **My Account**.
 3. Navigate to the **Security** section, then select the arrow icon.
 4. Enter your password, then select **Confirm**.

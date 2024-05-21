@@ -48,16 +48,16 @@ Consider the following effects of converting your account:
 
 ## Convert an account into an organization
 
-> **Early Access**
+> **Beta**
 >
-> Docker Home is in Early Access for select users. If your account isn't selected for Early Access,
+> Docker Home is in [public beta](/release-lifecycle/#beta) for select users. If your account isn't selected for public beta,
 > you can manage your account settings, personal access tokens, and two-factor authentication for
 > your account in [Docker Hub](https://hub.docker.com/).
 { .restricted }
 
 1. Ensure you have removed your user account from any company or teams or organizations. Also make sure that you have a new Docker ID before you convert an account. See the [Prerequisites](#prerequisites) section for details.
 
-2. Sign in to your [Docker account](https://account.docker.com/login).
+2. Sign in to your [Docker account](https://app.docker.com/login).
 
 3. In Docker Home, select your avatar in the top-right corner to open the drop-down.
 

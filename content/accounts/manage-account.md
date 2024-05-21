@@ -4,9 +4,9 @@ keywords: accounts, docker ID, account settings, account management, docker home
 title: Manage your Docker account
 ---
 
-> **Early Access**
+> **Beta**
 >
-> Docker Home is in Early Access for select users. If your account isn't selected for Early Access,
+> Docker Home is in [public beta](/release-lifecycle/#beta)  for select users. If your account isn't selected for public beta,
 > you can manage your account settings, personal access tokens, and two-factor authentication for
 > your account in [Docker Hub](https://hub.docker.com/).
 { .restricted }

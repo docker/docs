@@ -24,7 +24,7 @@ any time.
 > Treat access tokens like your password and keep them secret. Store your tokens securely in a credential manager for example.
 { .important }
 
-1. Sign in to your [Docker account](https://account.docker.com/login).
+1. Sign in to your [Docker account](https://app.docker.com/login).
 
 2. Select your avatar in the top-right corner and from the drop-down menu select **My Account**.
 
@@ -65,7 +65,7 @@ When prompted for a password, enter your personal access token instead of a pass
 
 You can rename, activate, deactivate, or delete a token as needed. You can access your tokens in your settings in Docker Dashboard.
 
-1. Sign in to your [Docker account](https://account.docker.com/login).
+1. Sign in to your [Docker account](https://app.docker.com/login).
 
 2. Select your avatar in the top-right corner and from the drop-down menu select **My Account**.
 
