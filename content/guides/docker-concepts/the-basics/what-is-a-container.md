@@ -2,6 +2,10 @@
 title: What is a container?
 keywords: concepts, build, images, container, docker desktop
 description: What is a container? This concept page will teach you about containers and provide a quick hands-on where you will run your first container.
+aliases:
+- /guides/walkthroughs/what-is-a-container/
+- /guides/walkthroughs/run-a-container/
+- /guides/walkthroughs/
 ---
 
 {{< youtube-embed W1kWqFkiu7k >}}
