@@ -33,7 +33,7 @@ Nested virtualization of other hypervisors like Hyper-V inside a vSphere VM [is 
 For steps on how to expose hardware-assisted virtualization to the guest OS, [see VMware's documentation](https://docs.vmware.com/en/VMware-vSphere/7.0/com.vmware.vsphere.vm_admin.doc/GUID-2A98801C-68E8-47AF-99ED-00C63E4857F6.html).
 
 
-### Turn on nested virtualization on Microsoft Hyper-V
+### Turn on nested virtualization on an Azure Virtual Machine
 
 Nested virtualization is supported by Microsoft for running Hyper-V inside an Azure VM.
 
