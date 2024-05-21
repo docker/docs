@@ -148,7 +148,8 @@ Using a bind mount, you can map the configuration file on your host computer to 
    ```
 
    > **Tip**  
-   > Windows requires an absolute path for the mount source. This means you need to specify the full path to the directory you want to mount inside the container.
+   > If you're using Windows with bash and you encounter an absolute path error, try using PowerShell instead. 
+     Bash on Windows sometimes add extra quotes around these paths, messing with any existing quotes and causing errors.
    { .tip }
 
 
