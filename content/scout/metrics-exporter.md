@@ -56,7 +56,7 @@ replace `ORG` with your organization name:
 ```yaml
 scrape_configs:
   - job_name: <ORG>
-    metrics_path: /v1/exporter/org/<ORG>
+    metrics_path: /v1/exporter/org/<ORG>/metrics
     scheme: https
     static_configs:
       - targets:
@@ -122,7 +122,7 @@ alongside Grafana with a pre-configured dashboard to visualize the vulnerability
      scrape_timeout: 40s
    scrape_configs:
      - job_name: Docker Scout policy
-       metrics_path: /v1/exporter/org/<ORG>
+       metrics_path: /v1/exporter/org/<ORG>/metrics
        scheme: https
        static_configs:
          - targets:
@@ -198,7 +198,7 @@ The following example shows a Datadog configuration that:
 
 ```yaml
 instances:
-  - openmetrics_endpoint: "https://api.scout.docker.com/v1/exporter/org/dockerscoutpolicy"
+  - openmetrics_endpoint: "https://api.scout.docker.com/v1/exporter/org/dockerscoutpolicy/metrics"
     namespace: "scout-metrics-exporter"
     metrics:
       - scout_*
@@ -276,7 +276,7 @@ and a Datadog site.
 
    ```yaml {hl_lines=2}
    instances:
-     - openmetrics_endpoint: "https://api.scout.docker.com/v1/exporter/org/<<ORG>>"
+     - openmetrics_endpoint: "https://api.scout.docker.com/v1/exporter/org/<<ORG>>/metrics"
        namespace: "scout-metrics-exporter"
    # ...
    ```
