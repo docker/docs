@@ -123,5 +123,5 @@ grid:
       - text: "SSO"
         url: "/security/for-admins/single-sign-on/"
       - text: "SCIM"
-        url: "/security/for-admins/scim/"
+        url: "/security/for-admins/provisioning/scim/"
 ---
