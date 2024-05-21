@@ -2,19 +2,15 @@
 {{ $sso_navigation := `Navigate to the SSO settings page for your organization or company.
    - Organization: Select **Organizations**, your organization, **Settings**, and then **Security**.
    - Company: Select **Organizations**, your company, and then **Settings**.` }}
-{{ $provisioning_step := "4. Review your summary and select **Create Connection**." }}
 
 {{ if eq (.Get "product") "admin" }}
   {{ $product_link = "the [Admin Console](https://admin.docker.com)" }}
   {{ $sso_navigation = "Select your organization or company in the left navigation drop-down menu, and then select **SSO & SCIM.**" }}
-  {{ $provisioning_step = `
-3. **Beta feature** - Choose how you want to provision users by enabling Just-in-Time (JIT) provisioning (default), or disabling JIT provisioning.
-4. Review your summary and select **Create Connection**.` }}
 {{ end }}
 
 1. In {{ $product_link }}, select the verified domains you want to apply the connection to.
 2. To provision your users, select the organization(s) and/or team(s).
-{{ $provisioning_step }}
+3. Review your summary and select **Create Connection**.
 
 ## Test your SSO configuration
 
@@ -25,7 +21,7 @@ After you’ve completed the SSO configuration process in Docker, you can test t
 
 >**Important**
 >
-> SSO has Just-in-Time (JIT) provisioning enabled by default, unless you have [disabled it](/security/for-admins/group-mapping/#sso-authentication-with-jit-provisioning-disabled). This means your users are auto-provisioned to your organization on Docker Hub.
+> SSO has Just-in-Time (JIT) provisioning enabled by default, unless you have [disabled it](/security/for-admins/provisioning/just-in-time/#sso-authentication-with-jit-provisioning-disabled). This means your users are auto-provisioned to your organization on Docker Hub.
 >
 > You can change this on a per-app basis. To prevent auto-provisioning users, you can create a security group in your IdP and configure the SSO app to authenticate and authorize only those users that are in the security group. Follow the instructions provided by your IdP:
 >
@@ -33,7 +29,7 @@ After you’ve completed the SSO configuration process in Docker, you can test t
 > - [Entra ID (formerly Azure AD)](https://learn.microsoft.com/en-us/azure/active-directory/develop/howto-restrict-your-app-to-a-set-of-users)
 { .important}
 
-The SSO connection is now created. You can continue to set up SCIM without enforcing SSO log-in. For more information about setting up SCIM, see [Set up SCIM](/security/for-admins/scim/).
+The SSO connection is now created. You can continue to set up SCIM without enforcing SSO log-in. For more information about setting up SCIM, see [Set up SCIM](/security/for-admins/provisioning/scim/).
 
 ## Optional: Enforce SSO
 

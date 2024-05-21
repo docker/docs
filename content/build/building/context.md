@@ -207,7 +207,7 @@ clone a specific branch, tag, and subdirectory of a repository.
 
 The format of the URL fragment is `#ref:dir`, where:
 
-- `ref` is the name of the branch, tag, or remote reference
+- `ref` is the name of the branch, tag, or commit hash
 - `dir` is a subdirectory inside the repository
 
 For example, the following command uses the `container` branch,
@@ -230,6 +230,17 @@ contexts:
 | `myrepo.git#master:myfolder`   | `refs/heads/master`           | `/myfolder`        |
 | `myrepo.git#mytag:myfolder`    | `refs/tags/mytag`             | `/myfolder`        |
 | `myrepo.git#mybranch:myfolder` | `refs/heads/mybranch`         | `/myfolder`        |
+
+When you use a commit hash as the `ref` in the URL fragment, use the full,
+40-character string SHA-1 hash of the commit. A short hash, for example a hash
+truncated to 7 characters, is not supported.
+
+```bash
+# ✅ The following works:
+docker build github.com/docker/buildx#d4f088e689b41353d74f1a0bfcd6d7c0b213aed2
+# ❌ The following doesn't work because the commit hash is truncated:
+docker build github.com/docker/buildx#d4f088e
+```
 
 #### Keep `.git` directory
 

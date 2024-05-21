@@ -1,6 +1,6 @@
 ---
 description: The Docker Scout Dashboard helps review and share the analysis of images.
-keywords: scanning, analysis, vulnerabilities, Hub, supply chain, security, report,
+keywords: scout, scanning, analysis, vulnerabilities, Hub, supply chain, security, report,
   reports, dashboard
 title: Dashboard
 aliases:

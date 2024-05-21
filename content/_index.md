@@ -1,6 +1,6 @@
 ---
 title: Home
-description: Home page for Docker's documentation
+description: Docker Documentation is the official Docker library of resources, manuals, and guides to help you containerize applications.
 keywords: Docker, documentation, manual, guide, reference, api, samples
 grid:
   - title: Docker Desktop
@@ -123,5 +123,5 @@ grid:
       - text: "SSO"
         url: "/security/for-admins/single-sign-on/"
       - text: "SCIM"
-        url: "/security/for-admins/scim/"
+        url: "/security/for-admins/provisioning/scim/"
 ---

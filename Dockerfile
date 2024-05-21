@@ -1,5 +1,6 @@
 # syntax=docker/dockerfile:1
 
+ARG ALPINE_VERSION=3.19
 ARG GO_VERSION=1.21
 ARG HTMLTEST_VERSION=0.17.0
 
@@ -30,20 +31,6 @@ FROM build-base AS build
 ARG HUGO_ENV
 ARG DOCS_URL
 RUN hugo --gc --minify -d /out -e $HUGO_ENV -b $DOCS_URL
-
-FROM scratch AS release
-COPY --from=build /out /
-
-FROM scratch AS update-stats
-COPY --from=build /src/hugo_stats.json /hugo_stats.json
-
-FROM build AS validate-stats
-RUN <<EOF
-if [ -n "$(git status --porcelain -- hugo_stats.json)" ]; then
-  echo >&2 'ERROR: hugo_stats.json differs. Update with `docker buildx bake update-stats`'
-  exit 1
-fi
-EOF
 
 FROM davidanson/markdownlint-cli2:v0.12.1 AS lint
 USER root
@@ -90,4 +77,11 @@ COPY --from=build-upstream /out ./public
 ADD .htmltest.yml .htmltest.yml
 RUN htmltest
 
-FROM dev
+FROM alpine:${ALPINE_VERSION} AS unused-media
+RUN apk add --no-cache fd ripgrep
+WORKDIR /test
+RUN --mount=type=bind,target=. \
+    ./scripts/test_unused_media.sh
+
+FROM scratch AS release
+COPY --from=build /out /

@@ -98,7 +98,7 @@ tags:
     x-displayName: SCIM
     description: |
       SCIM is a provisioning system that lets you manage users within your identity provider (IdP).
-      For more information, see [System for Cross-domain Identity management](https://docs.docker.com/security/for-admins/scim/).
+      For more information, see [System for Cross-domain Identity management](https://docs.docker.com/security/for-admins/provisioning/scim/).
 x-tagGroups:
   - name: General
     tags:

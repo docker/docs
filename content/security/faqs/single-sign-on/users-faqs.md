@@ -61,12 +61,12 @@ When SSO is enabled and enforced, your users just have to sign in using the emai
 
 > **Beta feature**
 >
-> Optional Just-in-Time (JIT) provisioning configuration is only available in Private Beta when you use the Admin Console. Otherwise, JIT is enabled by default. This feature will be available for all users soon.
+> Optional Just-in-Time (JIT) provisioning configuration is available in [beta](/release-lifecycle/#beta) when you use the Admin Console. Otherwise, JIT is enabled by default.
 { .experimental }
 
 Docker SSO provides Just-in-Time (JIT) provisioning by default, with an option to disable JIT. Users are provisioned when a user authenticates with SSO. If a user leaves the organization, administrators must sign in to Docker Hub and manually [remove the user](../../../admin/organization/members.md#remove-a-member-or-invitee) from the organization.
 
-[SCIM](../../../security/for-admins/scim/) is available to provide full synchronization with users and groups. When you auto-provision users with SCIM, the recommended configuration is to disable JIT so that all auto-provisioning is handled by SCIM.
+[SCIM](../../../security/for-admins/provisioning/scim/) is available to provide full synchronization with users and groups. When you auto-provision users with SCIM, the recommended configuration is to disable JIT so that all auto-provisioning is handled by SCIM.
 
 Additionally, you can use the [Docker Hub API](/docker-hub/api/latest/) to complete this process.
 
@@ -74,14 +74,14 @@ Additionally, you can use the [Docker Hub API](/docker-hub/api/latest/) to compl
 
 > **Beta feature**
 >
-> Optional Just-in-Time (JIT) provisioning configuration is only available in Private Beta when you use the Admin Console. Otherwise, JIT is enabled by default. This feature will be available for all users soon.
+> Optional Just-in-Time (JIT) provisioning configuration is available in [beta](/release-lifecycle/#beta) when you use the Admin Console and enable SCIM. Otherwise, JIT is enabled by default.
 { .experimental }
 
 If a user attempts to sign in to Docker using an email address that is a verified domain for your SSO connection, they need to be a member of the organization to access it, or have a pending invitation to the organization. Users who don't meet these criteria will encounter an `Access denied` error, and will need an administrator to invite them to the organization.
 
-See [SSO authentication with JIT provisioning disabled](/security/for-admins/group-mapping/#sso-authentication-with-jit-provisioning-disabled).
+See [SSO authentication with JIT provisioning disabled](/security/for-admins/provisioning/just-in-time/#sso-authentication-with-jit-provisioning-disabled).
 
-To auto-provision users without JIT provisioning, you can use [SCIM](/security/for-admins/scim/).
+To auto-provision users without JIT provisioning, you can use [SCIM](/security/for-admins/provisioning/scim/).
 
 ### What's the best way to provision the Docker subscription without SSO?
 

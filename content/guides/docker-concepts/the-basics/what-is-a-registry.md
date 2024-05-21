@@ -26,7 +26,7 @@ A _registry_ is a centralized location that stores and manages container images,
 >
 > You can create one private repository and unlimited public repositories using the free version of Docker Hub. For more information, visit the [Docker Hub subscription page](https://www.docker.com/pricing/).
 
-## Try it now
+## Try it out
 
 In this hands-on, you will learn how to build and push a Docker image to the Docker Hub repository.
 
@@ -116,7 +116,7 @@ Don't worry about the specifics of the Dockerfile, as you'll learn about that in
 7. Finally, it's time to push the newly built image to your Docker Hub repository by using the [`docker push`](/reference/cli/docker/image/push/) command:
 
     ```console 
-    docker push -u <YOUR_DOCKER_USERNAME>/docker-quickstart:1.0
+    docker push <YOUR_DOCKER_USERNAME>/docker-quickstart:1.0
     ```
 
 8. Open [Docker Hub](https://hub.docker.com) and navigate to your repository. Navigate to the **Tags** section and see your newly pushed image.

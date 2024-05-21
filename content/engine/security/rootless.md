@@ -53,6 +53,8 @@ testuser:231072:65536
 {{< tabs >}}
 {{< tab name="Ubuntu" >}}
 - Install `dbus-user-session` package if not installed. Run `sudo apt-get install -y dbus-user-session` and relogin.
+- Install `uidmap` package if not installed.  Run `sudo apt-get install -y uidmap`.
+- If running in a terminal where the user was not directly logged into, you will need to install `systemd-container` with `sudo apt-get install -y systemd-container`, then switch to TheUser with the command `sudo machinectl shell TheUser@`.
 
 - `overlay2` storage driver  is enabled by default
   ([Ubuntu-specific kernel patch](https://kernel.ubuntu.com/git/ubuntu/ubuntu-bionic.git/commit/fs/overlayfs?id=3b7da90f28fe1ed4b79ef2d994c81efbc58f1144)).
@@ -70,21 +72,22 @@ testuser:231072:65536
   script](https://get.docker.com/rootless), however, you must add an AppArmor
   profile for `rootlesskit` manually:
 
-  1. Add the AppArmor profile to `/etc/apparmor.d/usr.local.bin.rootlesskit`:
+  1. Create and install the currently logged-in user's AppArmor profile:
 
      ```console
-     $ cat <<EOF > /etc/apparmor.d/$(echo $HOME/bin/rootlesskit | sed -e s@^/@@ -e s@/@.@g)
+     $ filename=$(echo $HOME/bin/rootlesskit | sed -e s@^/@@ -e s@/@.@g)
+     $ cat <<EOF > ~/${filename}
      abi <abi/4.0>,
      include <tunables/global>
 
-     $HOME/bin/rootlesskit flags=(unconfined) {
+     "$HOME/bin/rootlesskit" flags=(unconfined) {
        userns,
 
-       include if exists <local/$(echo $HOME/bin/rootlesskit | sed -e s@^/@@ -e s@/@.@g)>
+       include if exists <local/${filename}>
      }
      EOF
+     $ sudo mv ~/${filename} /etc/apparmor.d/${filename}
      ```
-
   2. Restart AppArmor.
 
      ```console
@@ -167,7 +170,11 @@ testuser:231072:65536
 > If the system-wide Docker daemon is already running, consider disabling it:
 >```console
 >$ sudo systemctl disable --now docker.service docker.socket
+>$ sudo rm /var/run/docker.sock
 >```
+> Should you choose not to shut down the `docker` service and socket, you will need to use the `--force`
+> parameter in the next section. There are no known issues, but until you shutdown and disable you're
+> still running rootful Docker. 
 
 {{< tabs >}}
 {{< tab name="With packages (RPM/DEB)" >}}
@@ -428,6 +435,19 @@ For example:
   `docker run --user 2000 --ulimit nproc=100 <IMAGE> <COMMAND>`
 
 ## Troubleshooting
+
+### Unable to install with systemd when systemd is present on the system
+
+``` console
+$ dockerd-rootless-setuptool.sh install
+[INFO] systemd not detected, dockerd-rootless.sh needs to be started manually:
+...
+```
+`rootlesskit` cannot detect systemd properly if you switch to your user via `sudo su`. For users which cannot be logged-in, you must use the `machinectl` command which is part of the `systemd-container` package. After installing `systemd-container` switch to `myuser` with the following command:
+``` console
+$ sudo machinectl shell myuser@
+```
+Where `myuser@` is your desired username and @ signifies this machine.
 
 ### Errors when starting the Docker daemon
 

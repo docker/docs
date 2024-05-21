@@ -1,6 +1,6 @@
 ---
 description: Organization FAQs
-keywords: Docker, Docker Hub, SSO FAQs, single sign-on, organizations, administration
+keywords: Docker, Docker Hub, SSO FAQs, single sign-on, organizations, administration, Admin Console, members, organization management, manage orgs
 title: FAQs on organizations
 tags: [FAQ]
 aliases:
@@ -22,7 +22,7 @@ An existing owner can add additional team members as organization owners. You ca
 
 ### How do I know how many active users are part of my organization?
 
-If your organization uses a Software Asset Management tool, you can use it to find out how many users have Docker Desktop installed. If your organization doesn't use this software, you can run an internal survey to find out who is using Docker Desktop. See [Identify your Docker users and their Docker accounts](../../admin/organization/onboard.md#step-1-identify-your-docker-users-and-their-docker-accounts). With a Docker Business subscription, you can manage members in your identity provider and automatically provision them to your Docker organization with [SSO](../../security/for-admins/single-sign-on/_index.md) or [SCIM](../../security/for-admins/scim.md).
+If your organization uses a Software Asset Management tool, you can use it to find out how many users have Docker Desktop installed. If your organization doesn't use this software, you can run an internal survey to find out who is using Docker Desktop. See [Identify your Docker users and their Docker accounts](../../admin/organization/onboard.md#step-1-identify-your-docker-users-and-their-docker-accounts). With a Docker Business subscription, you can manage members in your identity provider and automatically provision them to your Docker organization with [SSO](../../security/for-admins/single-sign-on/_index.md) or [SCIM](../../security/for-admins/provisioning/scim.md).
 
 ### Do users first need to authenticate with Docker before an owner can add them to an organization?
 
@@ -52,15 +52,15 @@ There isn't any automatic notification when the total number of users for the re
 members exceed the number of licenses, you will receive an error informing you
 to contact the administrator due to lack of seats.
 
-### How can I merge organizations in Docker Hub?
+### How can I merge organization accounts?
 
-Reach out to your Support contact if you need to merge organizations.
+You can downgrade a secondary organization and transition your users and data to a primary organization. See [Merge organizations](../organization/orgs.md#merge-organizations).
 
 ### Do organization invitees take up seats?
 
 Yes. A user invited to an organization will take up one of the provisioned
 seats, even if that user hasn’t accepted their invitation yet. Organization
-owners can manage the list of invitees through the **Invitees** tab on the organization settings page in Docker Hub.
+owners can manage the list of invitees through the **Invitees** tab on the organization settings page in Docker Hub, or in the **Members** page in Admin Console.
 
 ### Do organization owners take a seat?
 

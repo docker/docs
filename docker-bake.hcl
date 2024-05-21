@@ -27,7 +27,7 @@ target "release" {
 }
 
 group "validate" {
-  targets = ["lint", "test", "validate-stats"]
+  targets = ["lint", "test", "unused-media"]
 }
 
 target "test" {
@@ -37,6 +37,11 @@ target "test" {
 
 target "lint" {
   target = "lint"
+  output = ["type=cacheonly"]
+}
+
+target "unused-media" {
+  target = "unused-media"
   output = ["type=cacheonly"]
 }
 
@@ -170,15 +175,5 @@ target "validate-upstream" {
     UPSTREAM_COMMIT = UPSTREAM_COMMIT
   }
   target = "validate-upstream"
-  output = ["type=cacheonly"]
-}
-
-target "update-stats" {
-  target = "update-stats"
-  output = ["."]
-}
-
-target "validate-stats" {
-  target = "validate-stats"
   output = ["type=cacheonly"]
 }

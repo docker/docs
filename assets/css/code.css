@@ -20,13 +20,15 @@
       font-weight: 400;
       overflow-wrap: anywhere;
       padding: 0 4px;
-      table & {
-        overflow-wrap: unset;
-      }
+    }
+
+    table:not(.lntable) code {
+      overflow-wrap: unset;
+      white-space: nowrap;
     }
 
     /* Indented code blocks */
-    :not(.highlight) > pre {
+    pre:not(.chroma) {
       @apply my-4 overflow-x-auto p-3;
       font-size: 0.875em;
       border: 1px solid;
@@ -47,33 +49,28 @@
         vertical-align: top;
         padding: 0;
         margin: 0;
-        white-space: nowrap;
         font-weight: 400;
         padding: 0 4px;
       }
 
-      .highlight {
-        @apply my-4 overflow-x-auto p-3;
-
-        /* LineTableTD */
-        .lntd {
-          vertical-align: top;
-          padding: 0;
-          margin: 0;
-          border: 0;
-        }
-        /* LineTable */
-        .lntable {
-          display: table;
-          width: 100%;
-          border-spacing: 0;
-          padding: 0;
-          margin: 0;
-          border: 0;
-          /* LineNumberColumnHighlight */
-          .lntd:first-child .hl {
-            display: block;
-          }
+      /* LineTableTD */
+      .lntd {
+        vertical-align: top;
+        padding: 0;
+        margin: 0;
+        border: 0;
+      }
+      /* LineTable */
+      .lntable {
+        display: table;
+        width: 100%;
+        border-spacing: 0;
+        padding: 0;
+        margin: 0;
+        border: 0;
+        /* LineNumberColumnHighlight */
+        .lntd:first-child .hl {
+          display: block;
         }
       }
     }

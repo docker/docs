@@ -78,7 +78,7 @@ To run Compose Watch and see the real-time changes:
    ```console
    $ docker compose watch
    ```
-2. Open `app/views/todos.ejs` in a text or code editor, then change the text on line 18.
+2. Open `app/views/todos.ejs` in a text or code editor, then change the text on line 21.
 3. Save the changes in `app/views/todos.ejs`.
 4. View your application at [http://localhost:3000](http://localhost:3000) to see the changes in real-time.
 

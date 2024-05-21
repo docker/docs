@@ -96,7 +96,7 @@ In the terminal, press `ctrl`+`c` to stop the application.
 ### Run the application in the background
 
 You can run the application detached from the terminal by adding the `-d`
-option. Inside the `docker-php-sample` directory, run the following command
+option. Inside the `spring-petclinic` directory, run the following command
 in a terminal.
 
 ```console

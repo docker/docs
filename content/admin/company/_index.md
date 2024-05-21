@@ -1,5 +1,5 @@
 ---
-description: Learn about managing companies.
+description: Learn about managing companies in Docker including how they relate to organizations, their key features, and more
 keywords: company, multiple organizations, manage companies
 title: Overview
 grid:
@@ -28,7 +28,7 @@ grid:
   description: Set up SCIM to automatically provision and deprovision users in your
     company.
   icon: checklist
-  link: /security/for-admins/scim/
+  link: /security/for-admins/provisioning/scim/
 - title: Domain management
   description: Add and verify your domains.
   icon: domain_verification

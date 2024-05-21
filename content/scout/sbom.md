@@ -1,7 +1,7 @@
 ---
 title: Docker Scout SBOMs
 description: Use Docker Scout to extract the SBOM for your project.
-keywords: scout, supply chain, sbom, software bill of material, spdx
+keywords: scout, supply chain, sbom, software bill of material, spdx, cli, attestations, file
 aliases:
 - /engine/sbom/
 ---
