@@ -42,7 +42,7 @@ grid_admins:
 - title: SCIM
   description: Set up SCIM to automatically provision and deprovision users.
   icon: checklist
-  link: /security/for-admins/scim/
+  link: /security/for-admins/provisioning/scim/
 - title: Roles and permissions
   description: Assign roles to individuals giving them different permissions within an organization.
   icon: badge

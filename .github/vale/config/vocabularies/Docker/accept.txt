@@ -45,6 +45,7 @@ Docker-Sponsored Open Source
 Dockerfile
 Dockerize
 Dockerizing
+Entra
 Ethernet
 Fargate
 Fedora
@@ -89,6 +90,7 @@ QEMU
 RHEL
 RPM
 S3
+SAML
 SARIF
 SBOMs?
 SCIM
@@ -111,6 +113,7 @@ UDP
 URLs?
 Ubuntu
 Unix
+UUID
 VLAN
 VM
 VMware
@@ -143,6 +146,7 @@ config
 containerd
 deserialization
 deserialize
+displayName
 dockerignore
 firewalld
 g?libc

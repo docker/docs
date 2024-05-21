@@ -2194,10 +2194,14 @@ Manuals:
          title: Connect
       -  path: /security/for-admins/single-sign-on/manage/
          title: Manage
-    - path: /security/for-admins/scim/
-      title: SCIM
-    - path: /security/for-admins/group-mapping/
-      title: Group mapping
+    - sectiontitle: Provisioning
+      section:
+      - path: /security/for-admins/provisioning/scim/
+        title: SCIM
+      - path: /security/for-admins/provisioning/just-in-time/
+        title: Just-in-Time
+      - path: /security/for-admins/provisioning/group-mapping/
+        title: Group mapping
     - path: /security/for-admins/configure-sign-in/
       title: Enforce sign in
     - path: /security/for-admins/roles-and-permissions/
