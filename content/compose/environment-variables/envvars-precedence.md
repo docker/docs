@@ -15,10 +15,11 @@ The order of precedence (highest to lowest) is as follows:
 1. Set using [`docker compose run -e` in the CLI](set-environment-variables.md#set-environment-variables-with-docker-compose-run---env)
 2. Substituted from your [shell](set-environment-variables.md#substitute-from-the-shell)
 3. Set using just the [`environment` attribute in the Compose file](set-environment-variables.md#use-the-environment-attribute)
-4. Use of the [`--env-file` argument](set-environment-variables.md#substitute-with---env-file) in the CLI
+4. Use of the [`docker compose run  --env-file` argument](set-environment-variables.md#substitute-with---env-file) in the CLI
 5. Use of the [`env_file` attribute](set-environment-variables.md#use-the-env_file-attribute) in the Compose file
 6. Set using an [`.env` file](set-environment-variables.md#substitute-with-an-env-file) placed at base of your project directory
-7. Set in a container image in the [ENV directive](../../reference/dockerfile.md#env).
+7. Set using an [`.env` file](set-environment-variables.md#substitute-with-an-env-file) placed at base of your project directory
+8. Set in a container image in the [ENV directive](../../reference/dockerfile.md#env).
    Having any `ARG` or `ENV` setting in a `Dockerfile` evaluates only if there is no Docker Compose entry for `environment`, `env_file` or `run --env`.
 
 ## Simple example

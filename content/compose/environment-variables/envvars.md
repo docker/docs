@@ -28,10 +28,9 @@ This page contains information on how you can set or change the following pre-de
 ## Methods to override 
 
 You can set or change the pre-defined environment variables:
-- Within your Compose file using the [`environment` attribute](set-environment-variables.md#use-the-environment-attribute)
-- With an [environment file](env-file.md) 
 - From the command line
 - From your [shell](set-environment-variables.md#substitute-from-the-shell)
+- With an [environment file](env-file.md), either using an explicit `--env-file` flag, or relying on a default `.env` file in your working directory
 
 When changing or setting any environment variables, be aware of [Environment variable precedence](envvars-precedence.md).
 
@@ -76,6 +75,8 @@ The path separator can also be customized using `COMPOSE_PATH_SEPARATOR`.
 Example: `COMPOSE_FILE=docker-compose.yml:docker-compose.prod.yml`.  
 
 See also the [command-line options overview](../reference/index.md#command-options-overview-and-help) and [using `-f` to specify name and path of one or more Compose files](../reference/index.md#use--f-to-specify-name-and-path-of-one-or-more-compose-files).
+
+When `COMPOSE\_FILE` points to a distinct folder, and both target and working directory contains a `.env` file, both get loaded. The local one (which can define `COMPOSE\_FILE`) can be used to override values set by `.env` file sibling to the target compose file.
 
 ### COMPOSE\_PROFILES
 
