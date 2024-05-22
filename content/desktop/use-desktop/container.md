@@ -77,7 +77,7 @@ The integrated terminal:
 
 To open the integrated terminal, either:
 
-- Hover over your running container and select the **Show container actions**
+- Hover over your running container and under the **Actions** column, select the **Show container actions**
   menu. From the drop-down menu, select **Open in terminal**.
 - Or, select the container and then select the **Exec** tab.
 
@@ -104,7 +104,7 @@ To open the integrated terminal in debug mode:
    subscription.
 2. After you're signed in, either:
 
-   - Hover over your running container and select the **Show container actions**
+   - Hover over your running container and under the **Actions** column, select the **Show container actions**
      menu. From the drop-down menu, select **Use Docker Debug**.
    - Or, select the container and then select the **Debug** tab. If the
      **Debug** tab isn't visible, select the **Exec** tab and then enable the
