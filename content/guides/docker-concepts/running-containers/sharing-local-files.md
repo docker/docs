@@ -149,7 +149,6 @@ Using a bind mount, you can map the configuration file on your host computer to 
 
    > **Tip**  
    > If you're using Windows with bash and you encounter an absolute path error, try using PowerShell instead. 
-     Bash on Windows sometimes add extra quotes around these paths, messing with any existing quotes and causing errors.
    { .tip }
 
 
