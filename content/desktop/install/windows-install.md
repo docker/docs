@@ -63,11 +63,6 @@ For more information on setting up WSL 2 with Docker Desktop, see [WSL](../wsl/_
 >
 > Docker only supports Docker Desktop on Windows for those versions of Windows that are still within [Microsoft’s servicing timeline](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet). Docker Desktop is not supported on server versions of Windows, such as Windows Server 2019 or Windows Server 2022. For more information on how to run containers on Windows Server, see [Microsoft's official documentation](https://learn.microsoft.com/virtualization/windowscontainers/quick-start/set-up-environment).
 
-> **Should I use Hyper-V or WSL?**
->
-> Docker Desktop's functionality remains consistent on both WSL and Hyper-V, without a preference for either architecture. Hyper-V and WSL have their own advantages and disadvantages, depending on your specific set up and your planned use case. 
-{ .tip }
-
 {{< /tab >}}
 {{< tab name="Hyper-V backend and Windows containers" >}}
 
@@ -96,10 +91,15 @@ For more information on setting up WSL 2 with Docker Desktop, see [WSL](../wsl/_
 
 > **Note**
 >
-> Docker only supports Docker Desktop on Windows for those versions of Windows that are still within [Microsoft’s servicing timeline](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet).
+> Docker only supports Docker Desktop on Windows for those versions of Windows that are still within [Microsoft’s servicing timeline](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet). Docker Desktop is not supported on server versions of Windows, such as Windows Server 2019 or Windows Server 2022. For more information on how to run containers on Windows Server, see [Microsoft's official documentation](https://learn.microsoft.com/virtualization/windowscontainers/quick-start/set-up-environment).
 
 {{< /tab >}}
 {{< /tabs >}}
+
+> **Should I use Hyper-V or WSL?**
+>
+> Docker Desktop's functionality remains consistent on both WSL and Hyper-V, without a preference for either architecture. Hyper-V and WSL have their own advantages and disadvantages, depending on your specific set up and your planned use case. 
+{ .tip }
 
 Containers and images created with Docker Desktop are shared between all
 user accounts on machines where it is installed. This is because all Windows
@@ -133,11 +133,7 @@ For more information on Windows containers, refer to the following documentation
 
 > **Note**
 >
-> When you switch to Windows containers, **Settings** only shows those tabs that are active and apply to your Windows containers. These are:
->
->  * [General](../settings/windows.md#general)
->  * [Proxies](../settings/windows.md#proxies)
->  * [Daemon](../settings/windows.md#docker-engine)
+> When you switch to Windows containers, **Settings** only shows those tabs that are active and apply to your Windows containers.
 
 If you set proxies or daemon configuration in Windows containers mode, these
 apply only on Windows containers. If you switch back to Linux containers,
