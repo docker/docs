@@ -2,6 +2,9 @@
 title: What is a registry?
 keywords: concepts, build, images, container, docker desktop
 description: What is a registry? This Docker Concept will explain what a registry is, explore their interoperability, and have you interact with registries.
+aliases:
+- /guides/walkthroughs/run-hub-images/
+- /guides/walkthroughs/publish-your-image/
 ---
 
 {{< youtube-embed 2WDl10Wv5rs >}}

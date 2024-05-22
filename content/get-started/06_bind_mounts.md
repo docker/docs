@@ -2,6 +2,8 @@
 title: Use bind mounts
 keywords: 'get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop'
 description: Using bind mounts in our application
+aliases:
+- /guides/walkthroughs/access-local-folder/
 ---
 
 In [part 5](./05_persisting_data.md), you used a volume mount to persist the

@@ -87,6 +87,6 @@ $ sudo apt-get install ./docker-desktop-<version>-<arch>.deb
 
 ## Next steps
 
-- Take a look at the [Get started](../../guides/get-started/_index.md) training modules to learn how to build an image and run it as a containerized application.
+- Take a look at the [Get started](../../get-started/_index.md) training modules to learn how to build an image and run it as a containerized application.
 - [Explore Docker Desktop](../use-desktop/index.md) and all its features.
 - Review the topics in [Develop with Docker](../../develop/index.md) to learn how to build new applications using Docker.

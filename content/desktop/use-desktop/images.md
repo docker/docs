@@ -102,5 +102,4 @@ Hovering over an image tag reveals two options:
 
 ## Additional resources
 
-- [Run Docker Hub images](../../guides/walkthroughs/run-hub-images.md)
-- [Publish your image](../../guides/walkthroughs/publish-your-image.md)
+- [What is an image?](../../guides/docker-concepts/the-basics/what-is-an-image.md)

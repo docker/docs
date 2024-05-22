@@ -11,7 +11,7 @@ get-started:
   icon: summarize
 - title: Get started
   description: Get started with the basics and the benefits of containerizing your applications.
-  link: /guides/get-started/
+  link: /get-started/
   icon: rocket
 - title: Docker concepts
   description: Gain a better understanding of foundational Docker concepts.
