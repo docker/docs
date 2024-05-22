@@ -1,5 +1,5 @@
 ---
-description: Single Sign-on FAQs
+description: Single sign-on FAQs
 keywords: Docker, Docker Hub, SSO FAQs, single sign-on, administration, security
 title: General FAQs on SSO
 tags: [FAQ]
@@ -10,11 +10,11 @@ aliases:
 
 ### Is Docker SSO available for all paid subscriptions?
 
-Docker Single Sign-on (SSO) is only available with the Docker Business subscription. Upgrade your existing subscription to start using Docker SSO.
+Docker single sign-on (SSO) is only available with the Docker Business subscription. [Upgrade your existing subscription](/subscription/core-subscription/upgrade/) to start using Docker SSO.
 
 ### How does Docker SSO work?
 
-Docker Single Sign-on (SSO) lets users to authenticate using their identity providers (IdPs) to access Docker. Docker supports Entra ID (formerly Azure AD) and any SAML 2.0 identity providers. When you enable SSO, this redirects users to your provider’s authentication page to authenticate using their email and password.
+Docker SSO lets users authenticate using their identity providers (IdPs) to access Docker. Docker supports Entra ID (formerly Azure AD) and any SAML 2.0 identity providers. When you enable SSO, this redirects users to your provider’s authentication page to authenticate using their email and password.
 
 ### What SSO flows does Docker support?
 
@@ -34,4 +34,4 @@ Yes, all users in your organization must upgrade to Docker Desktop version 4.4.2
 
 ### Can I retain my Docker ID when using SSO?
 
-For a personal Docker ID, a user is the account owner. A Docker ID is associated with access to the user's repositories, images, assets. An end user can choose to have a company domain email on the Docker account. When enforcing SSO, the account is connected to the organization account. When enforcing SSO for an organization(s) or company, any user logging in without an existing account using verified company domain email will automatically have an account provisioned, and a new Docker ID created.
+For a personal Docker ID, a user is the account owner. A Docker ID is associated with access to the user's repositories, images, assets. A user can choose to have a company domain email on the Docker account. When enforcing SSO, the account is connected to the organization account. When enforcing SSO for an organization(s) or company, any user logging in without an existing account using verified company domain email will automatically have an account provisioned, and a new Docker ID created.
