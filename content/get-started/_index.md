@@ -58,6 +58,7 @@ aliases:
 - /windows/step_six/
 - /windows/step_three/
 - /windows/step_two/
+- /guides/get-started/
 ---
 
 This guide contains step-by-step instructions on how to get started with Docker. This guide shows you how to:

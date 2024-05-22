@@ -4,6 +4,8 @@ keywords: guides, docker, language, node, java, python, R, go, golang, .net
 title: Language-specific guides overview
 toc_min: 1
 toc_max: 2
+aliases:
+- /guides/walkthroughs/containerize-your-app/
 ---
 
 The language-specific guides walk you through the process of:
