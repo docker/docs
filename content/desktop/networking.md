@@ -15,10 +15,7 @@ aliases:
 Docker Desktop provides several networking features to make it easier to
 use.
 
-## Networking features
-
-{{< tabs >}}
-{{< tab name="For all platforms" >}}
+## Networking features for all platforms
 
 ### VPN Passthrough
 
@@ -72,8 +69,7 @@ To enable and set up SOCKS proxy support:
 3. Switch on the **Manual proxy configuration** toggle. 
 4. In the **Secure Web Server HTTPS** box, paste your `socks5://host:port` URL.
 
-{{< /tab >}}
-{{< tab name="For Mac and Linux" >}}
+## Networking features for Mac and Linux
 
 ### SSH agent forwarding
 
@@ -104,9 +100,6 @@ services:
     environment:
       - SSH_AUTH_SOCK=/run/host-services/ssh-auth.sock
  ```
-
-{{< /tab >}}
-{{< /tabs >}}
 
 ## Known limitations
 

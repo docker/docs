@@ -15,15 +15,11 @@ aliases:
 - /mackit/release-notes/
 ---
 
-This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases.
+This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases. For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/releases.md).
 
-> **Note**
->
-> The information below is applicable to all platforms, unless stated otherwise.
+Docker Desktop versions older than 6 months from the latest release are not available for download. 
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1) to see what's coming next.
-
-For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/releases.md).
 
 ## 4.30.0
 
