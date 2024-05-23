@@ -83,5 +83,15 @@ WORKDIR /test
 RUN --mount=type=bind,target=. \
     ./scripts/test_unused_media.sh
 
+FROM base as pagefind
+ARG PAGEFIND_VERSION=1.1.0
+COPY --from=build /out ./public
+RUN --mount=type=bind,src=pagefind.yml,target=pagefind.yml \
+    npx pagefind@v${PAGEFIND_VERSION} --output-path "/pagefind"
+
+FROM scratch AS index
+COPY --from=pagefind /pagefind .
+
 FROM scratch AS release
 COPY --from=build /out /
+COPY --from=pagefind /pagefind .
