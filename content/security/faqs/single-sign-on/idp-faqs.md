@@ -49,9 +49,9 @@ Yes, bot accounts need a seat, similar to a regular end user, having a non-alias
 
 The SSO implementation uses Just-in-Time (JIT) provisioning by default. You can optionally disable JIT if you prefer not to auto-provision users, or if you opt for auto-provisioning using SCIM. See [Just-in-Time provisioning](/security/for-admins/provisioning/just-in-time/).
 
-### Is IdP-initiated login available?
+### Is IdP-initiated sign-in available?
 
-Docker SSO doesn't support IdP-initiated login, only Service Provider Initiated (SP-initiated) login.
+Docker SSO doesn't support IdP-initiated sign-in, only Service Provider Initiated (SP-initiated) sign-in.
 
 ### Is it possible to connect Docker Hub directly with a Microsoft Entra (formerly Azure AD) group?
 

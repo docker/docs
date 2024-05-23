@@ -49,7 +49,7 @@ Yes, you can create a test organization. Companies can set up a new 5 seat Busin
 If you enable SSO, there is no impact. Both username/password or personal access token sign-in are supported.
 However, if you enforce SSO:
 
-- Service Account domain email addresses must be unaliased and enabled in their IdP
+- Service Account domain email addresses must not be aliased and must be enabled in their IdP
 - Username/password and personal access token will still work (but only if they exist, which they won't for new accounts)
 - Those who know the IdP credentials can sign in as that Service Account through SSO on Hub and create or change the personal access token for that service account.
 
