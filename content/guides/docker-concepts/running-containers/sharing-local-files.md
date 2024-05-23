@@ -133,30 +133,25 @@ Using a bind mount, you can map the configuration file on your host computer to 
    {{< tab name="`-v`" >}}
 
    ```console
-   $ docker run -d --name my_site \
-   -p 8080:80 \
-   -v .:/usr/local/apache2/htdocs/ \
-   httpd:2.4
+   $ docker run -d --name my_site -p 8080:80 -v .:/usr/local/apache2/htdocs/ httpd:2.4
    ```
 
    {{< /tab >}}
    {{< tab name="`--mount`" >}}
 
    ```console
-   $ docker run -d --name my_site \
-   -p 8080:80 \
-   --mount type=bind,source=./,target=/usr/local/apache2/htdocs/ \
-   httpd:2.4
+   $ docker run -d --name my_site -p 8080:80 --mount type=bind,source=./,target=/usr/local/apache2/htdocs/ httpd:2.4
    ```
-
-   > **Tip**  
-   > If you're using Windows with bash and you encounter an absolute path error, try using PowerShell instead. 
-   { .tip }
-
-
 
    {{< /tab >}}
    {{< /tabs >}}
+
+
+   > **Tip**  
+   > When using the `-v` or `--mount` flag in Windows PowerShell, you need to provide the absolute path to your directory instead of just `./`. This is because PowerShell handles relative paths differently from bash (commonly used in Mac and Linux environments).    
+   { .tip }
+
+
 
    With everything now up and running, you should be able to access the site via [http://localhost:8080](http://localhost:8080) and find a new webpage that welcomes you with a friendly whale.
 
