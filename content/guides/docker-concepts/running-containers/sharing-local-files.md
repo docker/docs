@@ -77,7 +77,7 @@ In this hands-on guide, you’ll practice how to create and use a bind mount to 
 
 3. Open the browser and access [http://localhost:8080](http://localhost:8080) or use the curl command to verify if it's working fine or not.
 
-    ```
+    ```console
     $ curl localhost:8080
     ```
 
