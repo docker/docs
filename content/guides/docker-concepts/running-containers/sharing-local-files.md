@@ -194,7 +194,7 @@ The container continues to run until you stop it.
 
 ## Additional resources
 
-The following resources will help you learn more about bind mount:
+The following resources will help you learn more about bind mounts:
 
 
 * [Manage data in Docker](/storage/)
