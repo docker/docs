@@ -184,7 +184,7 @@ The container continues to run until you stop it.
 
 2. Locate the container you'd like to stop.
 
-3. Select the **Delete**  action in the Actions column.
+3. Select the **Delete** action in the Actions column.
 
 
 
