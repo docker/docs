@@ -15,7 +15,9 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ## 2024-03-23
 
- - You can now tag Docker Hub repositories with [categories](./repos/categories.md).
+### New
+
+ - You can tag Docker Hub repositories with [categories](./repos/categories.md).
 
 ## 2023-12-11
 
