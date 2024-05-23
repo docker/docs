@@ -52,7 +52,7 @@ For example, the following command grants read-write access permission.
 $ docker run -v HOST-DIRECTORY:/CONTAINER-DIRECTORY:rw nginx
 ```
 
-Now you might ask, when are read-only bind mounts useful? Read-only bind mounts are particularly suitable for the development phase. They allow the container to access configuration files or data without accidentally modifying them on the host machine. This is beneficial for maintaining a clean development environment. Additionally, read-only bind mounts can be used to prevent unauthorized changes within the container, especially when handling sensitive data. This improves security by ensuring the integrity of the data within the container.
+Now you might ask, when are read-only bind mounts useful? Read-only bind mounts are particularly suitable for the development phase. They let the container access configuration files or data without accidentally modifying them on the host machine. This is beneficial for maintaining a clean development environment. Additionally, read-only bind mounts can be used to prevent unauthorized changes within the container, especially when handling sensitive data. This improves security by ensuring the integrity of the data within the container.
 
 > **Synchronised File Share**
 >
