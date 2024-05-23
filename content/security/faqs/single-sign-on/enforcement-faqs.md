@@ -28,13 +28,9 @@ Yes. When SSO is enforced, you can access the Docker CLI through Personal Access
 
 Before enforcing SSO, you must create PATs for automation systems and CI/CD pipelines and use the tokens instead of a password.
 
-### After implementing and enforcing SSO to manage users, is there any impact on the work of existing users in the organization who used their personal email to authenticate before SSO was enforced?
+### What can organization users who authenticated with personal emails prior to enforcement expect?
 
 Ensure your users have their organization email on their account, so that the accounts will be migrated to SSO for authentication.
-
-### If an organization enables SSO, the owners can control Docker IDs associated with their work email domain. Can the owners choose which Docker IDs they add to their Docker organization and get access to the organization's Business subscription features? Is there a way to flag which of these Docker IDs are Docker Desktop users?
-
-SSO enforcement will apply to any domain email user, and automatically add that user to the Docker Hub organization that enables enforcement. The administrator could remove users from the organization manually, but those users wouldn't be able to authenticate if SSO is enforced.
 
 ### Can I enable SSO and hold off on the enforcement option?
 
