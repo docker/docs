@@ -178,7 +178,7 @@ you can use the `docker volume inspect` command.
 ```console
 $ docker volume inspect todo-db
 ```
-You should see output like the following
+You should see output like the following:
 ```console
 [
     {
