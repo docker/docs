@@ -172,7 +172,7 @@ Using a bind mount, you can map the configuration file on your host computer to 
    ![A screenshot of Docker dashboard showing the deleted files inside the a container](images/deleted-files.webp?border=true)
 
 
-3. Recreate the HTML file on the host system and you see that file re-appear under the **FILES**  tab under **Containers** on the Docker dashboard. By now, you will be able to access the site too.
+3. Recreate the HTML file on the host system and see that file re-appears under the **Files** tab under **Containers** on the Docker Dashboard. By now, you will be able to access the site too.
 
 
 
