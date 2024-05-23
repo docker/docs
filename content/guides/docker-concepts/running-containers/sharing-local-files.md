@@ -156,7 +156,7 @@ Using a bind mount, you can map the configuration file on your host computer to 
    {{< /tab >}}
    {{< /tabs >}}
 
-   With everything now up and running, you should be able to access the site via [http://localhost:8080](http://localhost:8080) and find a new webpage that welcomes you with a friendly whale!
+   With everything now up and running, you should be able to access the site via [http://localhost:8080](http://localhost:8080) and find a new webpage that welcomes you with a friendly whale.
 
 
 ### Access the file on the Docker Dashboard
