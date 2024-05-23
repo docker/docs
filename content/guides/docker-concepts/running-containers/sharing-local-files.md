@@ -29,7 +29,7 @@ The `-v` flag is simpler and more convenient for basic volume or bind mount oper
 
 Imagine you're a developer working on a project. You have a source directory on your development machine where your code resides. When you compile or build your code, the generated artifacts (compiled code, executables, images, etc.) are saved in a separate subdirectory within your source directory. In the following examples, this subdirectory is `/HOST/PATH`. Now you want these build artifacts to be accessible within a Docker container running your application. Additionally, you want the container to automatically access the latest build artifacts whenever you rebuild your code.
 
-Here’s a way how you use `docker run` to start a container using a bind mount and map it to the container file location.
+Here's a way to use `docker run` to start a container using a bind mount and map it to the container file location.
 
 ```console
 $ docker run -v /HOST/PATH:/CONTAINER/PATH -it nginx
