@@ -932,7 +932,9 @@ been the case if `group_add` were not declared.
 
 ## healthcheck
 
-{{< include "compose/services-healthcheck.md" >}}
+{{< include "compose/services-healthcheck.md" >}} 
+
+For more information on `HEALTHCHECK`, see the [Dockerfile reference](../../reference/dockerfile.md#healthcheck).
 
 ```yml
 healthcheck:
