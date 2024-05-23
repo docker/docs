@@ -1172,6 +1172,7 @@ services:
       - some-network
       - other-network
 ```
+For more information about the `networks` top-level element, see [Networks](06-networks.md).
 
 ### aliases
 
@@ -1520,7 +1521,7 @@ When both are set, `scale` must be consistent with the `replicas` attribute in t
 Two different syntax variants are supported; the short syntax and the long syntax. Long and short syntax for secrets may be used in the same Compose file.
 
 Compose reports an error if the secret doesn't exist on the platform or isn't defined in the
-`secrets` top-level section of the Compose file.
+[`secrets` top-level section](09-secrets.md) of the Compose file.
 
 Defining a secret in the top-level `secrets` must not imply granting any service access to it.
 Such grant must be explicit within service specification as [secrets](09-secrets.md) service element.
@@ -1744,6 +1745,8 @@ services:
 volumes:
   db-data:
 ```
+
+For more information about the `volumes` top-level element, see [Volumes](07-volumes.md).
 
 ### Short syntax
 
