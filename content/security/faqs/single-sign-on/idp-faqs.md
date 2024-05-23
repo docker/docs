@@ -57,6 +57,6 @@ Docker SSO doesn't support IdP-initiated sign-in, only Service Provider Initiate
 
 Yes, Entra ID (formerly Azure AD) is supported with SSO for Docker Business, both through a direct integration and through SAML.
 
-### My SSO connection with Entra ID (formerly Azure AD) isn't working and I receive an error that the application is mis-configured. How can I troubleshoot this?
+### My SSO connection with Entra ID isn't working and I receive an error that the application is mis-configured. How can I troubleshoot this?
 
 Confirm that you've configured the necessary API permissions in Entra ID (formerly Azure AD) for your SSO connection. You need to grant admin consent within your Entra ID (formerly Azure AD) tenant. See [Entra ID (formerly Azure AD) documentation](https://learn.microsoft.com/en-us/azure/active-directory/manage-apps/grant-admin-consent?pivots=portal#grant-admin-consent-in-app-registrations).

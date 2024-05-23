@@ -53,13 +53,13 @@ However, if you enforce SSO:
 - Username/password and personal access token will still work (but only if they exist, which they won't for new accounts)
 - Those who know the IdP credentials can sign in as that Service Account through SSO on Hub and create or change the personal access token for that service account.
 
-### When you enforce SAML SSO, at what stage is the login required for tracking through SAML? At runtime or install time?
+### Is the sign in required tracking at runtime or install time?
 
 At runtime for Docker Desktop if it’s configured to require authentication to the organization.
 
-### Is enforcing single sign-on the same as enforcing sign-in to Docker Desktop?
+### What is enforcing SSO versus enforcing sign-in?
 
-No. They are different features that you can use separately or together.
+Enforcing SSO and enforcing sign-in to Docker Desktop are different features that you can use separately or together.
 
 Enforcing SSO ensures that users sign in using their SSO credentials instead of their Docker ID. One of the benefits is that SSO enables you to better manage user credentials.
 
