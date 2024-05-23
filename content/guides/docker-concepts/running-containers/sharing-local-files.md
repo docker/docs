@@ -161,7 +161,7 @@ Using a bind mount, you can map the configuration file on your host computer to 
 
 ### Access the file on the Docker Dashboard
 
-1. You can view the mounted files inside a container by selecting the containers, **Files** tab and navigating to `/usr/local/apache2/htdocs/` directory and clicking “View file editor”.
+1. You can view the mounted files inside a container by selecting the container's **Files** tab and then selecting a file inside the `/usr/local/apache2/htdocs/` directory. Then, select **Open file editor**.
 
 
    ![A screenshot of Docker dashboard showing the mounted files inside the a container](images/mounted-files.webp?border=true)
