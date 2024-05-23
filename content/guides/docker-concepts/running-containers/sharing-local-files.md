@@ -84,7 +84,7 @@ In this hands-on guide, you’ll practice how to create and use a bind mount to 
     ```
 
 
-### Use Bind mount
+### Use a bind mount
 
 Using a bind mount, you can map the configuration file on your host computer to a specific location within the container. In this example, you’ll see how to change the look and feel of the webpage by using bind mount:
 
