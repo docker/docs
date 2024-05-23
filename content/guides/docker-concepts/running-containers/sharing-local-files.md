@@ -199,7 +199,7 @@ The following resources will help you learn more about bind mounts:
 
 * [Manage data in Docker](/storage/)
 * [Volumes](/storage/volumes/)
-* [Bind Mounts](/storage/bind-mounts/)
+* [Bind mounts](/storage/bind-mounts/)
 * [Running containers](/reference/run/)
 * [Troubleshoot storage errors](/storage/troubleshooting_volume_errors/)
 * [Persisting container data](/guides/docker-concepts/running-containers/persisting-container-data/)
