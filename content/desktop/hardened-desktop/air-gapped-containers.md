@@ -6,11 +6,7 @@ aliases:
 - /desktop/hardened-desktop/settings-management/air-gapped-containers/
 ---
 
-> **Beta feature**
->
-> This feature is in [Beta](../../release-lifecycle.md/#beta).
-> It's available with Docker Desktop version 4.29 and later.
-{ .experimental }
+{{< introduced desktop 0.4.29 "../release-notes.md#4290" >}}
 
 Air-gapped containers allows administrators to restrict containers from accessing network resources, limiting where data can be uploaded to or downloaded from.
 
