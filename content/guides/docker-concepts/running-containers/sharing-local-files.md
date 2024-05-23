@@ -15,7 +15,7 @@ Consider a scenario where you have a web application container that requires acc
 
 Docker offers two primary storage options for persisting data and sharing files between the host machine and containers: volumes and bind mounts.
 
-### Volume versus Bind Mounts
+### Volume versus bind mounts
 
 If you want to ensure that data generated or modified inside the container persists even after the container stops running, you would opt for a volume. See [Persisting container data](/guides/docker-concepts/running-containers/persisting-container-data/) to learn more about volumes and their use cases.
 
