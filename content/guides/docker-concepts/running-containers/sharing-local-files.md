@@ -41,7 +41,9 @@ The `--mount` flag offers more advanced features and granular control, making it
 $ docker run --mount type=bind,source=/HOST/PATH,target=/CONTAINER/PATH,readonly nginx
 ```
 
-> It is recommended to use the `--mount` syntax instead of `-v`. It provides better control over the mounting process and avoids potential issues with missing directories.
+> **Note**
+>
+> Docker recommends using the `--mount` syntax instead of `-v`. It provides better control over the mounting process and avoids potential issues with missing directories.
 
 ### File permissions for Docker access to host files
 
