@@ -159,7 +159,7 @@ Using a bind mount, you can map the configuration file on your host computer to 
    With everything now up and running, you should be able to access the site via [http://localhost:8080](http://localhost:8080) and find a new webpage that welcomes you with a friendly whale!
 
 
-###  Access the file on the Docker dashboard
+### Access the file on the Docker Dashboard
 
 1. You can view the mounted files inside a container by selecting the containers, **Files** tab and navigating to `/usr/local/apache2/htdocs/` directory and clicking “View file editor”.
 
