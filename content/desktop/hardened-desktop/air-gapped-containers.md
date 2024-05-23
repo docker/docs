@@ -6,7 +6,7 @@ aliases:
 - /desktop/hardened-desktop/settings-management/air-gapped-containers/
 ---
 
-{{< introduced desktop 0.4.29 "../release-notes.md#4290" >}}
+{{< introduced desktop 4.29.0 "../release-notes.md#4290" >}}
 
 Air-gapped containers allows administrators to restrict containers from accessing network resources, limiting where data can be uploaded to or downloaded from.
 
