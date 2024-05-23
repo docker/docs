@@ -6,6 +6,9 @@ tags: [FAQ]
 aliases:
 - /single-sign-on/faqs/
 - /faq/security/single-sign-on/faqs/
+- /single-sign-on/saml-faqs/
+- /faq/security/single-sign-on/saml-faqs/
+- /security/faqs/single-sign-on/saml-faqs/
 ---
 
 ### Is Docker SSO available for all paid subscriptions?
@@ -35,3 +38,11 @@ Yes, all users in your organization must upgrade to Docker Desktop version 4.4.2
 ### Can I retain my Docker ID when using SSO?
 
 For a personal Docker ID, a user is the account owner. A Docker ID is associated with access to the user's repositories, images, assets. A user can choose to have a company domain email on the Docker account. When enforcing SSO, the account is connected to the organization account. When enforcing SSO for an organization(s) or company, any user logging in without an existing account using verified company domain email will automatically have an account provisioned, and a new Docker ID created.
+
+### Does SAML authentication require additional attributes?
+
+You must provide an email address as an attribute to authenticate through SAML. The ‘Name’ attribute is optional.
+
+### Does the application recognize the NameID/Unique Identifier in the `SAMLResponse` subject?
+
+The preferred format is your email address, which should also be your Name ID.

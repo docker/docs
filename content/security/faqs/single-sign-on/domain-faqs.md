@@ -20,10 +20,6 @@ You can do it one time to add the domain to a connection. If your organization e
 
 Adding and verifying a domain is required to enable and enforce SSO. See [Step one: Add and verify your domain](/security/for-admins/single-sign-on/configure/#step-one-add-and-verify-your-domain) to learn how to specify the email domains that are allowed to authenticate through your server. This should include all email domains users will use to access Docker. Public domains, for example `gmail.com` or `outlook.com`, are not permitted. Also, the email domain should be set as the primary email.
 
-### Since Docker ID is tracked from SAML, at what point is the sign-in required to be tracked from SAML? Runtime or install time?
-
-Runtime for Docker Desktop if the organization enforces sign-in to Docker Desktop.
-
 ### Is IdP-initiated authentication (for example, Okta tile) supported?
 
 IdP-initiated authentication isn't supported by Docker SSO. Users must initiate sign-in through Docker Desktop or Hub.
