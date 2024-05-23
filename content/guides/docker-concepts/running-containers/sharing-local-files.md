@@ -35,7 +35,7 @@ Here's a way to use `docker run` to start a container using a bind mount and map
 $ docker run -v /HOST/PATH:/CONTAINER/PATH -it nginx
 ```
 
-The `--mount` offers more advanced features and granular control, making it suitable for complex mount scenarios or production deployments. If you use `--mount` to bind-mount a file or directory that doesn't yet exist on the Docker host, the `docker run` command doesn't automatically create it for you but generates an error.
+The `--mount` flag offers more advanced features and granular control, making it suitable for complex mount scenarios or production deployments. If you use `--mount` to bind-mount a file or directory that doesn't yet exist on the Docker host, the `docker run` command doesn't automatically create it for you but generates an error.
 
 ```console
 $ docker run --mount type=bind,source=/HOST/PATH,target=/CONTAINER/PATH,readonly nginx
