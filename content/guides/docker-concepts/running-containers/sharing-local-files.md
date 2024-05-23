@@ -67,7 +67,7 @@ In this hands-on guide, you’ll practice how to create and use a bind mount to 
 
 ### Run a container
 
-1. [Download and install](https://www.docker.com/products/docker-desktop/) Docker Desktop
+1. [Download and install](/get-docker/) Docker Desktop.
 
 2. Start a container using the [httpd](https://hub.docker.com/_/httpd) image with the following command:
 
