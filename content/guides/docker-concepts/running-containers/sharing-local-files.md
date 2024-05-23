@@ -169,7 +169,7 @@ Using a bind mount, you can map the configuration file on your host computer to 
 2. Delete the file on the host and verify the file is also deleted in the container. You will find that the files no longer exist under **Files** in the Docker Dashboard.
 
 
-![A screenshot of Docker dashboard showing the deleted files inside the a container](images/deleted-files.webp?border=true)
+   ![A screenshot of Docker dashboard showing the deleted files inside the a container](images/deleted-files.webp?border=true)
 
 
 3. Recreate the HTML file on the host system and you see that file re-appear under the **FILES**  tab under **Containers** on the Docker dashboard. By now, you will be able to access the site too.
