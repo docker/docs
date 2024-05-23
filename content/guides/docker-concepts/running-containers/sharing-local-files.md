@@ -17,7 +17,7 @@ Docker offers two primary storage options for persisting data and sharing files 
 
 ### Volume versus Bind Mounts
 
-If you want to ensure that data generated or modified inside the container persists even after the container stops running, you would opt for a volume. [Learn more](/guides/docker-concepts/running-containers/persisting-container-data/) about volumes and it's use cases.
+If you want to ensure that data generated or modified inside the container persists even after the container stops running, you would opt for a volume. See [Persisting container data](/guides/docker-concepts/running-containers/persisting-container-data/) to learn more about volumes and their use cases.
 
 If you have specific files or directories on your host system that you want to directly share with your container, like configuration files or development code, then you would use a bind mount. It's like opening a direct portal between your host and container for sharing. Bind mounts are ideal for development environments where real-time file access and sharing between the host and container are crucial.
 
