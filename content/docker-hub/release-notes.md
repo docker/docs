@@ -13,6 +13,10 @@ known issues for each Docker Hub release.
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1) to see what's coming next.
 
+## 2024-03-23
+
+ - You can now tag Docker Hub repositories with [categories](./repos/categories.md).
+
 ## 2023-12-11
 
 - The Advanced Image Management feature, along with the corresponding API endpoints, has been retired.
