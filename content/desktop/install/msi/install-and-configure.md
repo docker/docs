@@ -193,4 +193,5 @@ By default, the installer reboots the machine after a successful installation. W
 
 ## Additional resources
 
-- [Explore the FAQs](faq.md).
+- [Explore the FAQs](faq.md)
+- [Understand how the MSI installer collects analytics](analytics.md)
