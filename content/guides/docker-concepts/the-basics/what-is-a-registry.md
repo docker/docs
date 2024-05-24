@@ -27,26 +27,27 @@ A _registry_ is a centralized location that stores and manages container images,
 
 The following diagram shows the relationship between a registry, repositories, and images.
 
-```console
-    +-----------------------------------+
-    |             Registry              |
-    |-----------------------------------|
-    |                                   |
-    |  +-----------------------------+  |
-    |  |        Repository A         |  |
-    |  |-----------------------------|  |
-    |  | - Image: project-a:v1.0     |  |
-    |  | - Image: project-a:v2.0     |  |
-    |  +-----------------------------+  |
-    |                                   |
-    |  +-----------------------------+  |
-    |  |        Repository B         |  |
-    |  |-----------------------------|  |
-    |  | - Image: project-b:v1.0     |  |
-    |  | - Image: project-b:v1.1     |  |
-    |  | - Image: project-b:v2.0     |  |
-    |  +-----------------------------+  |
-    +-----------------------------------+
+```goat {class="text-sm"}
++---------------------------------------+
+|               Registry                |
+|---------------------------------------|
+|                                       |
+|    +-----------------------------+    |
+|    |        Repository A         |    |
+|    |-----------------------------|    |
+|    |   Image: project-a:v1.0     |    |
+|    |   Image: project-a:v2.0     |    |
+|    +-----------------------------+    |
+|                                       |
+|    +-----------------------------+    |
+|    |        Repository B         |    |
+|    |-----------------------------|    |
+|    |   Image: project-b:v1.0     |    |
+|    |   Image: project-b:v1.1     |    |
+|    |   Image: project-b:v2.0     |    |
+|    +-----------------------------+    |
+|                                       |
++---------------------------------------+
 ```
 
 >**Note**
