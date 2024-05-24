@@ -30,7 +30,11 @@
         {{ end }}
       </div>
     </div>
-    <div data-pagefind-body class="min-w-0 px-4 pb-32">
+    <div
+      {{- if ne .Params.sitemap false }}
+        data-pagefind-body
+      {{- end }}
+      class="min-w-0 px-4 pb-32">
       {{ block "main" . }}
       {{ end }}
     </div>
