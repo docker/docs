@@ -45,7 +45,7 @@ Using the `admin-settings.json` file, admins can:
 - Turn off Docker Desktop's onboarding survey
 - Control the file sharing implementation for your developers on macOS
 - Specify which paths your developers can add file shares to
-- Configure Air-Gapped containers
+- Configure Air-Gapped Containers
 
 For more details on the syntax and options admins can set, see [Configure Settings Management](configure.md).
 

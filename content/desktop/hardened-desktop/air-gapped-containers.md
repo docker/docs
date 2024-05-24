@@ -8,7 +8,7 @@ aliases:
 
 {{< introduced desktop 4.29.0 "../release-notes.md#4290" >}}
 
-Air-gapped containers allows administrators to restrict containers from accessing network resources, limiting where data can be uploaded to or downloaded from.
+Air-Gapped Containers allows administrators to restrict containers from accessing network resources, limiting where data can be uploaded to or downloaded from.
 
 Docker Desktop can apply a custom set of proxy rules to network traffic from containers. The proxy can be configured to:
 
