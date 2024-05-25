@@ -6,7 +6,7 @@ description: Learn how to containerize a C++ application.
 
 ## Prerequisites
 
-* You have a [git client](https://git-scm.com/downloads). The examples in this section use a command-line based git client, but you can use any client.
+* You have a [Git client](https://git-scm.com/downloads). The examples in this section use a command-line based Git client, but you can use any client.
 
 ## Overview
 
