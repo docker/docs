@@ -8,6 +8,10 @@ toc_max: 2
 
 The C++ getting started guide teaches you how to create a containerized C++ application using Docker. In this guide, you'll learn how to:
 
+> **Acknowledgment**
+>
+> Docker would like to thank [Pradumna Saraf](https://twitter.com/pradumna_saraf) for his contribution to this guide.
+
 * Containerize and run a C++ application
 * Set up a local environment to develop a C++ application using containers
 * Configure a CI/CD pipeline for a containerized C++ application using GitHub Actions
