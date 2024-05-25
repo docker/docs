@@ -53,7 +53,7 @@ Run the following command to run your application with Compose Watch.
 $ docker compose watch
 ```
 
-Now, if you modify your `ok_api.cpp` you will see the changes in real time without re-building the image!
+Now, if you modify your `ok_api.cpp` you will see the changes in real time without re-building the image.
 
 To test it out, open the `ok_api.cpp` file in your favorite text editor and change the message from `{"Status" : "OK"}` to `{"Status" : "Updated"}`. Save the file and refresh your browser at [http://localhost:8080](http://localhost:8080). You should see the updated message.
 
