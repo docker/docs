@@ -57,7 +57,7 @@ In the terminal, press `ctrl`+`c` to stop the application.
 ### Run the application in the background
 
 You can run the application detached from the terminal by adding the `-d`
-option. Inside the `r-docker` directory, run the following command
+option. Inside the `c-plus-plus-docker` directory, run the following command
 in a terminal.
 
 ```console
