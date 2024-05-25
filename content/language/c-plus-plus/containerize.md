@@ -2,7 +2,6 @@
 title: Containerize a C++ application
 keywords: C++, containerize, initialize
 description: Learn how to containerize a C++ application.
-  - /language/c-plus-plus/run-containers/
 ---
 
 ## Prerequisites
