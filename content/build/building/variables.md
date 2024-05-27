@@ -117,7 +117,7 @@ $ docker build --build-arg NODE_VERSION=current .
 For more information on how to use build arguments, refer to:
 
 - [`ARG` Dockerfile reference](../../reference/dockerfile.md#arg)
-- [`docker build --build-arg` reference](../../reference/cli/docker/image/build.md#build-arg)
+- [`docker build --build-arg` reference](../../reference/cli/docker/buildx/build.md#build-arg)
 
 ## `ENV` usage example
 

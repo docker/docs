@@ -39,7 +39,7 @@ Some projects may need distinct Dockerfiles for specific purposes. A common
 convention is to name these `<something>.Dockerfile`. You can specify the
 Dockerfile filename using the `--file` flag for the `docker build` command.
 Refer to the
-[`docker build` CLI reference](../../reference/cli/docker/image/build.md#file)
+[`docker build` CLI reference](../../reference/cli/docker/buildx/build.md#file)
 to learn about the `--file` flag.
 
 > **Note**

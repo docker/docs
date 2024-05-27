@@ -287,7 +287,7 @@ To run the application using Docker:
    feature, so subsequent builds can be faster. The console will
    return to the prompt when it's complete.
 
-   For more details, see the [docker build CLI reference](/reference/cli/docker/image/build/).
+   For more details, see the [docker build CLI reference](/reference/cli/docker/buildx/build/).
 
 2. Run the image as a container.
 
