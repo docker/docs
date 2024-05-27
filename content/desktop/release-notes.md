@@ -21,6 +21,73 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1) to see what's coming next.
 
+## 4.31.0
+
+{{< release-date date="2024-05-30" >}}
+
+{{< desktop-install all=true beta_win_arm=true version="4.31.0" build_path="/TODO_NOT_AVAILABLE_YET/" >}}
+
+### New
+
+- Tips for existing Compose files with Compose File Viewer.
+- Enable alternatives to Registry.JSON for enforcing sign in.
+- Air-gapped containers.
+- Multi-node Kind as a Kubernetes option Beta.
+
+#### For all platforms
+
+- Introducing: compose bridge. You might be asked your password to install it. Make sure in settings->advanced->Automatically check configuration is turned on.
+- Allow newer release to be displayed when an update has been already downloaded.
+- Add new Docker Compose Documentation helper and compose file viewer (beta).
+
+#### For Mac
+
+- Move the option "Automatically check configuration" from Advanced settings to General settings.
+
+### Upgrades
+
+- [Docker Engine and CLI v26.1.3](https://github.com/moby/moby/releases/tag/v26.1.3).
+- [Docker Scout CLI v1.9.1](https://github.com/docker/scout-cli/releases/tag/v1.9.1)
+- [Docker Compose v2.27.1](https://github.com/docker/compose/releases/tag/v2.27.1)
+- [Docker Buildx v0.14.1](https://github.com/docker/buildx/releases/tag/v0.14.1)
+- [Containerd v1.6.32](https://github.com/containerd/containerd/releases/tag/v1.6.32)
+- [Credential Helpers v0.8.2](https://github.com/docker/docker-credential-helpers/releases/tag/v0.8.2)
+- Linux kernel `v6.6.31`
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Allow newer release to be displayed when an update has been already downloaded.
+- Fixed a bug where Docker Debug was not working properly with Enhanced Container Isolation enabled.
+- Fixed a bug where UDP responses were not truncated properly.
+- Fixed a bug where the Update screen was possibly hidden when using [Settings Management](hardened-desktop/settings-management/_index.md).
+- Fixes [docker/for-mac#7274](https://github.com/docker/for-mac/issues/7274)
+
+#### For Windows
+
+- Change the `--allowed-org` installer flag to write a policy registry key instead to the `registry.json`.
+
+#### For Mac
+
+- Improve virtiofs caching by implementing longer attributes timeout and invalidation
+
+#### For Linux
+
+- Add linux headers to the VM, to ease the compilation of custom kernel modules.
+
+### Security
+
+#### For all platforms
+
+- Fixed a security bug in Enhanced Container Isolation (ECI) mode where a user could create Docker volumes sourced from restricted dirs inside the Docker Desktop VM and mount them into containers, thereby giving the container access to such restricted VM dirs.
+
+### Deprecation
+
+#### For Windows
+
+- Removed support for legacy version packs from the WSL2 engine
+
 ## 4.30.0
 
 {{< release-date date="2024-05-06" >}}
