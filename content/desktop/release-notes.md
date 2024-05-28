@@ -31,11 +31,8 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 - Admins can now use alternative methods to the `registry.json` file, to enforce sign in.
 - [Air-Gapped Containers](desktop/hardened-desktop/air-gapped-containers.md) is now generally available. 
-- Added Multi-node Kind as a Kubernetes option (Beta).
-
-#### For all platforms
-
 - Introducing: compose bridge. You might be asked your password to install it. Make sure in settings->advanced->Automatically check configuration is turned on.
+- Added Multi-node Kind as a Kubernetes option (Beta).
 - Added a Docker Compose documentation helper and a new way to view Compose files with the Compose File Viewer (Beta).
 
 ### Upgrades
@@ -52,12 +49,11 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 #### For all platforms
 
-- Allow newer release to be displayed when an update has been already downloaded.
-- Moved the setting **Automatically check configuration** from **Advanced** settings to **General** settings.
+- Newer releases are now displayed when an update has been already downloaded.
 - Added `proxyEnableKerberosNTLM` config to settings.json to enable fallback to Basic proxy auth if customer's Kerberos/NTLM environment is not properly set up.
 - Fixed a bug where Docker Debug was not working properly with Enhanced Container Isolation enabled.
 - Fixed a bug where UDP responses were not truncated properly.
-- Fixed a bug where the Update screen was  hidden when using [Settings Management](hardened-desktop/settings-management/_index.md).
+- Fixed a bug where the Update screen was hidden when using [Settings Management](hardened-desktop/settings-management/_index.md).
 - Fixes [docker/for-mac#7274](https://github.com/docker/for-mac/issues/7274)
 
 #### For Windows
@@ -66,6 +62,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 #### For Mac
 
+- Moved the setting **Automatically check configuration** from **Advanced** settings to **General** settings.
 - Improved VirtioFS caching by implementing longer attributes timeout and invalidation.
 
 #### For Linux
