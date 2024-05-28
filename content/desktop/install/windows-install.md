@@ -97,7 +97,7 @@ For more information on setting up WSL 2 with Docker Desktop, see [WSL](../wsl/_
 
 > **Important**
 >
-> The installer and the [privileged service](../windows/permission-requirements.md#privileged-helper) are still built for x86_64. These are not performance critical components and currently run with []`x86` emulation](https://learn.microsoft.com/en-us/windows/arm/apps-on-arm-x86-emulation#wow64-apis).
+> The installer and the [privileged service](../windows/permission-requirements.md#privileged-helper) are still built for x86_64. These are not performance critical components and currently run with [`x86` emulation](https://learn.microsoft.com/en-us/windows/arm/apps-on-arm-x86-emulation#wow64-apis).
 > 
 > Also the following features are not supported:
 > - Hyper-V backend
