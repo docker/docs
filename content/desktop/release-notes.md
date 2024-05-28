@@ -50,7 +50,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 #### For all platforms
 
 - Newer releases are now displayed when an update has been already downloaded.
-- Added `proxyEnableKerberosNTLM` config to settings.json to enable fallback to Basic proxy auth if customer's Kerberos/NTLM environment is not properly set up.
+- Added `proxyEnableKerberosNTLM` config to `settings.json` to enable fallback to Basic proxy authentication if Kerberos/NTLM environment is not properly set up.
 - Fixed a bug where Docker Debug was not working properly with Enhanced Container Isolation enabled.
 - Fixed a bug where UDP responses were not truncated properly.
 - Fixed a bug where the Update screen was hidden when using [Settings Management](hardened-desktop/settings-management/_index.md).
