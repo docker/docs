@@ -91,19 +91,17 @@ For more information on setting up WSL 2 with Docker Desktop, see [WSL](../wsl/_
 > Docker only supports Docker Desktop on Windows for those versions of Windows that are still within [Microsoft’s servicing timeline](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet). Docker Desktop is not supported on server versions of Windows, such as Windows Server 2019 or Windows Server 2022. For more information on how to run containers on Windows Server, see [Microsoft's official documentation](https://learn.microsoft.com/virtualization/windowscontainers/quick-start/set-up-environment).
 
 {{< /tab >}}
-{{< tab name="Windows with Apple silicon (Beta)" >}}
+{{< tab name="Windows on Arm (Beta)" >}}
 
-- Windows 11 64-bit: Pro version 21H2 or higher, or Enterprise or Education version 21H2 or higher.
-- Windows 10 64-bit:
-  - We recommend Home or Pro 22H2 (build 19045) or higher, or Enterprise or Education 22H2 (build 19045) or higher. 
-  - Minimum required is Home or Pro 21H2 (build 19044) or higher, or Enterprise or Education 21H2 (build 19044) or higher.
+- Windows 11 64-bit: Home or Pro version 21H2 or higher, or Enterprise or Education version 21H2 or higher.
 
 > **Important**
 >
-> The following features are not supported:
+> The installer and the [privileged service](../windows/permission-requirements.md#privileged-helper) are still built for x86_64. These are not performance critical components and currently run with []`x86` emulation](https://learn.microsoft.com/en-us/windows/arm/apps-on-arm-x86-emulation#wow64-apis).
+> 
+> Also the following features are not supported:
 > - Hyper-V backend
 > - Windows containers
-> - The installer and the privileged service
 { .important }
 
 {{< /tab >}}
