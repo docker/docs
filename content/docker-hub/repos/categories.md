@@ -6,15 +6,6 @@ description: |
 keywords: hub, images, content, categories, explore, search
 ---
 
-> **Early Access**
->
-> Categories is an [Early Access](/release-lifecycle/#early-access-ea)
-> feature of Docker Hub. It's currently only available to members of the
-> [Docker Verified Publisher](../../trusted-content/dvp-program.md)
-> and [Docker-Sponsored Open Source](../../trusted-content/dsos-program.md)
-> programs.
-{ .restricted }
-
 You can tag Docker Hub repositories with categories, representing the primary
 intended use cases for your images. This lets users more easily find and
 explore content for the problem domain that they're interested in.
