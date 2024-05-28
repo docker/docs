@@ -30,19 +30,19 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 ### New
 
 - Tips for existing Compose files with Compose File Viewer.
-- Enable alternatives to Registry.JSON for enforcing sign in.
-- Air-gapped containers.
-- Multi-node Kind as a Kubernetes option Beta.
+- Admins can now use alternative methods to the `registry.json` file, to enforce sign in.
+- [Air-Gapped Containers](/hardened-desktop/air-gapped-containers.md) is now generally available. 
+- Added Multi-node Kind as a Kubernetes option (Beta).
 
 #### For all platforms
 
 - Introducing: compose bridge. You might be asked your password to install it. Make sure in settings->advanced->Automatically check configuration is turned on.
 - Allow newer release to be displayed when an update has been already downloaded.
-- Add new Docker Compose Documentation helper and compose file viewer (beta).
+- Added a Docker Compose documentation helper and a new way to view Compose files with the Compose File Viewer (Beta).
 
 #### For Mac
 
-- Move the option "Automatically check configuration" from Advanced settings to General settings.
+- Moved the setting **Automatically check configuration**  from **Advanced** settings to **General** settings.
 
 ### Upgrades
 
@@ -61,26 +61,26 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 - Allow newer release to be displayed when an update has been already downloaded.
 - Fixed a bug where Docker Debug was not working properly with Enhanced Container Isolation enabled.
 - Fixed a bug where UDP responses were not truncated properly.
-- Fixed a bug where the Update screen was possibly hidden when using [Settings Management](hardened-desktop/settings-management/_index.md).
+- Fixed a bug where the Update screen was  hidden when using [Settings Management](hardened-desktop/settings-management/_index.md).
 - Fixes [docker/for-mac#7274](https://github.com/docker/for-mac/issues/7274)
 
 #### For Windows
 
-- Change the `--allowed-org` installer flag to write a policy registry key instead to the `registry.json`.
+- Changed the `--allowed-org` installer flag to write a policy registry key instead of to the `registry.json`.
 
 #### For Mac
 
-- Improve virtiofs caching by implementing longer attributes timeout and invalidation
+- Improved VirtioFS caching by implementing longer attributes timeout and invalidation.
 
 #### For Linux
 
-- Add linux headers to the VM, to ease the compilation of custom kernel modules.
+- Added Linux headers to the VM, to ease the compilation of custom kernel modules.
 
 ### Security
 
 #### For all platforms
 
-- Fixed a security bug in Enhanced Container Isolation (ECI) mode where a user could create Docker volumes sourced from restricted dirs inside the Docker Desktop VM and mount them into containers, thereby giving the container access to such restricted VM dirs.
+- Fixed a security bug in Enhanced Container Isolation (ECI) mode where a user could create Docker volumes sourced from restricted directories inside the Docker Desktop VM and mount them into containers, thereby giving the container access to such restricted VM directories.
 
 ### Deprecation
 
