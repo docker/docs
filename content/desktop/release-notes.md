@@ -29,20 +29,14 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### New
 
-- Tips for existing Compose files with Compose File Viewer.
 - Admins can now use alternative methods to the `registry.json` file, to enforce sign in.
-- [Air-Gapped Containers](/hardened-desktop/air-gapped-containers.md) is now generally available. 
+- [Air-Gapped Containers](desktop/hardened-desktop/air-gapped-containers.md) is now generally available. 
 - Added Multi-node Kind as a Kubernetes option (Beta).
 
 #### For all platforms
 
 - Introducing: compose bridge. You might be asked your password to install it. Make sure in settings->advanced->Automatically check configuration is turned on.
-- Allow newer release to be displayed when an update has been already downloaded.
 - Added a Docker Compose documentation helper and a new way to view Compose files with the Compose File Viewer (Beta).
-
-#### For Mac
-
-- Moved the setting **Automatically check configuration**  from **Advanced** settings to **General** settings.
 
 ### Upgrades
 
@@ -59,6 +53,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 #### For all platforms
 
 - Allow newer release to be displayed when an update has been already downloaded.
+- Moved the setting **Automatically check configuration** from **Advanced** settings to **General** settings.
 - Fixed a bug where Docker Debug was not working properly with Enhanced Container Isolation enabled.
 - Fixed a bug where UDP responses were not truncated properly.
 - Fixed a bug where the Update screen was  hidden when using [Settings Management](hardened-desktop/settings-management/_index.md).
