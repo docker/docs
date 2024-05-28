@@ -75,6 +75,15 @@ If you choose the integrated terminal, you can run commands in a running contain
 
 - **Enable background SBOM indexing**. When this option is enabled, Docker Scout automatically analyzes images that you build or pull.
 
+- **Automatically check configuration**. Regularly checks your configuration to ensure no unexpected changes have been made by another application.
+
+  Docker Desktop checks if your setup, configured during installation, has been altered by external apps like Orbstack. Docker Desktop checks:
+    - The symlinks of Docker binaries to `/usr/local/bin`.
+    - The symlink of the default Docker socket. 
+  Additionally, Docker Desktop ensures that the context is switched to `desktop-linux` on startup.
+  
+  You are notified if changes are found and are able to restore the configuration directly from the notification.
+
 ## Resources
 
 The **Resources** tab allows you to configure CPU, memory, disk, proxies,
@@ -320,13 +329,6 @@ On the **Advanced** tab, you can reconfigure your initial installation settings:
 
   For more information on each configuration and use case, see [Permission requirements](../mac/permission-requirements.md).
 
-- **Automatically check configuration**. Regularly checks your configuration to ensure no unexpected changes have been made by another application.
 
-  Docker Desktop checks if your setup, configured during installation, has been altered by external apps like Orbstack. Docker Desktop checks:
-    - The symlinks of Docker binaries to `/usr/local/bin`.
-    - The symlink of the default Docker socket. 
-  Additionally, Docker Desktop ensures that the context is switched to `desktop-linux` on startup.
-  
-  You are notified if changes are found and are able to restore the configuration directly from the notification.
 
 
