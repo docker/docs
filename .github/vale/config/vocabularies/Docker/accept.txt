@@ -109,6 +109,7 @@ Syft
 Sysdig
 TCP
 TLS
+TXT
 UDP
 URLs?
 Ubuntu
