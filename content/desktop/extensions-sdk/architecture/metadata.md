@@ -48,7 +48,7 @@ Other UI extension points will be available in the future.
 ### VM section
 
 The `vm` section defines a backend service that runs inside the Desktop VM. It must define either an `image` or a
-`composefile` value that specifies what service to run in the Desktop VM.
+`docker-compose.yaml` file that specifies what service to run in the Desktop VM.
 
 ```json
 "vm": {

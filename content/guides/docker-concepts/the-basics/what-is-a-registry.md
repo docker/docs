@@ -21,9 +21,34 @@ While Docker Hub is a popular option, there are many other available container r
 
 ### Registry vs. repository
 
-While you're working with registries, you might hear the terms **registry** and **repository** as if they're interchangeable. Even though they're related, they're not quite the same thing.
+While you're working with registries, you might hear the terms _registry_ and _repository_ as if they're interchangeable. Even though they're related, they're not quite the same thing.
 
 A _registry_ is a centralized location that stores and manages container images, whereas a _repository_ is a collection of related container images within a registry. Think of it as a folder where you organize your images based on projects. Each repository contains one or more container images.
+
+The following diagram shows the relationship between a registry, repositories, and images.
+
+```goat {class="text-sm"}
++---------------------------------------+
+|               Registry                |
+|---------------------------------------|
+|                                       |
+|    +-----------------------------+    |
+|    |        Repository A         |    |
+|    |-----------------------------|    |
+|    |   Image: project-a:v1.0     |    |
+|    |   Image: project-a:v2.0     |    |
+|    +-----------------------------+    |
+|                                       |
+|    +-----------------------------+    |
+|    |        Repository B         |    |
+|    |-----------------------------|    |
+|    |   Image: project-b:v1.0     |    |
+|    |   Image: project-b:v1.1     |    |
+|    |   Image: project-b:v2.0     |    |
+|    +-----------------------------+    |
+|                                       |
++---------------------------------------+
+```
 
 >**Note**
 >

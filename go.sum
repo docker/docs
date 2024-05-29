@@ -68,6 +68,8 @@ github.com/docker/buildx v0.13.1 h1:uZjBcb477zh02tnHk0rqNV/DZOxbf/OiHw6Mc8OhDYU=
 github.com/docker/buildx v0.13.1/go.mod h1:f2n6vggoX4sNNZ0XoRZ0Wtv6J1/rbDTabgdHtpW9NNM=
 github.com/docker/buildx v0.14.0 h1:FxqcfE7xgeEC4oQlKLpuvfobRDVDXrHE3jByM+mdyqk=
 github.com/docker/buildx v0.14.0/go.mod h1:Vy/2lC9QsJvo33+7KKkN/GDE5WxnVqW0/dpcN7ZqPJY=
+github.com/docker/buildx v0.14.1 h1:Pr3HdtHoDsCghlIExgGp0WOIgvbiViushOKIPUIyFI4=
+github.com/docker/buildx v0.14.1/go.mod h1:s6xxLYXZIWnkdYpSvxRmoqZTb1vViV9q2f+Hg8cWA3Y=
 github.com/docker/cli v24.0.2+incompatible h1:QdqR7znue1mtkXIJ+ruQMGQhpw2JzMJLRXp6zpzF6tM=
 github.com/docker/cli v24.0.2+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/cli v24.0.4+incompatible h1:Y3bYF9ekNTm2VFz5U/0BlMdJy73D+Y1iAAZ8l63Ydzw=
@@ -174,6 +176,8 @@ github.com/docker/scout-cli v1.7.0 h1:2dEbQKqkxM6wsJab/Ma3EJacS9ZrkVs1C4KbjXggJj
 github.com/docker/scout-cli v1.7.0/go.mod h1:Eo1RyCJsx3ldz/YTY5yGxu9g9mwTYbRUutxQUkow3Fc=
 github.com/docker/scout-cli v1.8.0 h1:rxwU9Xzt1LhqSY37ZVe/GPRCQxrEaQNipOMpCrUdGns=
 github.com/docker/scout-cli v1.8.0/go.mod h1:Eo1RyCJsx3ldz/YTY5yGxu9g9mwTYbRUutxQUkow3Fc=
+github.com/docker/scout-cli v1.9.3 h1:u3lKQ7A1EvT3qNe5lR2c8dTNcAGIoSmH8HvSYarLlJY=
+github.com/docker/scout-cli v1.9.3/go.mod h1:Eo1RyCJsx3ldz/YTY5yGxu9g9mwTYbRUutxQUkow3Fc=
 github.com/elazarl/goproxy v0.0.0-20191011121108-aa519ddbe484/go.mod h1:Ro8st/ElPeALwNFlcTpWmkr6IoMFfkjXAvTHpevnDsM=
 github.com/evanphx/json-patch v4.9.0+incompatible/go.mod h1:50XU6AFN0ol/bzJsmQLiYLvXMP4fmwYFNcr97nuDLSk=
 github.com/fatih/color v1.7.0/go.mod h1:Zm6kSWBoL9eyXnKyktHP6abPY2pDugNf5KwzbycvMj4=
