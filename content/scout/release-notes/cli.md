@@ -8,6 +8,78 @@ This page contains information about the new features, improvements, known
 issues, and bug fixes in the Docker Scout [CLI plugin](https://github.com/docker/scout-cli/)
 and the `docker/scout-action` [GitHub Action](https://github.com/docker/scout-action).
 
+## 1.9.3
+
+{{< release-date date="2024-05-28" >}}
+
+### Bug fix
+
+- Fix a panic while retrieving cached SBOMs.
+
+## 1.9.1
+
+{{< release-date date="2024-05-27" >}}
+
+### New
+
+- Add support for the [GitLab container scanning file format](https://docs.gitlab.com/ee/development/integrations/secure.html#container-scanning) with `--format gitlab` on `docker scout cves` command.
+
+  Here is an example pipeline:
+
+  ```yaml
+     docker-build:
+    # Use the official docker image.
+    image: docker:cli
+    stage: build
+    services:
+      - docker:dind
+    variables:
+      DOCKER_IMAGE_NAME: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+    before_script:
+      - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+         
+      # Install curl and the Docker Scout CLI
+      - |
+        apk add --update curl
+        curl -sSfL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh | sh -s -- 
+        apk del curl 
+        rm -rf /var/cache/apk/* 
+      # Login to Docker Hub required for Docker Scout CLI
+      - echo "$DOCKER_HUB_PAT" | docker login --username "$DOCKER_HUB_USER" --password-stdin
+  
+    # All branches are tagged with $DOCKER_IMAGE_NAME (defaults to commit ref slug)
+    # Default branch is also tagged with `latest`
+    script:
+      - docker buildx b --pull -t "$DOCKER_IMAGE_NAME" .
+      - docker scout cves "$DOCKER_IMAGE_NAME" --format gitlab --output gl-container-scanning-report.json
+      - docker push "$DOCKER_IMAGE_NAME"
+      - |
+        if [[ "$CI_COMMIT_BRANCH" == "$CI_DEFAULT_BRANCH" ]]; then
+          docker tag "$DOCKER_IMAGE_NAME" "$CI_REGISTRY_IMAGE:latest"
+          docker push "$CI_REGISTRY_IMAGE:latest"
+        fi
+    # Run this job in a branch where a Dockerfile exists
+    rules:
+      - if: $CI_COMMIT_BRANCH
+        exists:
+          - Dockerfile
+    artifacts:
+      reports:
+        container_scanning: gl-container-scanning-report.json
+  ```
+
+### Bug fixes and enhancements
+
+- Support single-architecture images for `docker scout attest add` command
+- Indicate on the `docker scout quickview` and `docker scout recommendations` commands if image provenance was not created using `mode=max`.
+  Without `mode=max`, base images may be incorrectly detected, resulting in less accurate results.
+
+## 1.9.0
+
+{{< release-date date="2024-05-24" >}}
+
+Discarded in favor of [1.9.1](#191).
+
 ## 1.8.0
 
 {{< release-date date="2024-04-25" >}}
