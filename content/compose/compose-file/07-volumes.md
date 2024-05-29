@@ -145,6 +145,6 @@ It can also be used in conjunction with the `external` property. This means the 
 ```yml
 volumes:
   db-data:
-    external:
-      name: actual-name-of-volume
+    external: true
+    name: actual-name-of-volume
 ```
