@@ -26,7 +26,7 @@ building-images:
   description: Learn how to create image using Dockerfile.
   link: /guides/docker-concepts/building-images/writing-a-dockerfile/
 - title: Build, tag and publish an image
-  description: Learn how to build, tag, and publish an image to Docker Hub or any other registry
+  description: Learn how to build, tag, and publish an image to Docker Hub or any other registry.
   link: /guides/docker-concepts/building-images/build-tag-and-publish-an-image/
 - title: Using the build cache
   description: Learn about the build cache, what changes invalidate the cache and how to effectively use the build cache.
@@ -37,7 +37,7 @@ building-images:
 
 running-containers:
 - title: Publishing ports
-  description: Understand the significance of publishing and exposing ports in Docker
+  description: Understand the significance of publishing and exposing ports in Docker.
   link: /guides/docker-concepts/running-containers/publishing-ports/
 - title: Overriding container defaults
   description: Learn how to override the container defaults using the `docker run` command.

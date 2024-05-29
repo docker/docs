@@ -15,8 +15,7 @@ Now that you've updated the [to-do list app](/guides/docker-concepts/getting-sta
 3. Build the container image
 4. Push the image to Docker Hub
 
-
-## Introductions
+Before you dive into hands-on guide, here are a few core concepts that you should be aware of:
 
 ### Container images
 
@@ -34,7 +33,6 @@ In the previous step, you used the following images that came from Docker Hub, e
 - [traefik](https://hub.docker.com/_/traefik) - provides Traefik, a modern HTTP reverse proxy and load balancer that routes requests to the appropriate container based on routing rules
 
 Explore the full catalog of [Docker Official Images](https://hub.docker.com/search?image_filter=official&q=), [Docker Verified Publishers](https://hub.docker.com/search?q=&image_filter=store), and [Docker Sponsored Open Source Software](https://hub.docker.com/search?q=&image_filter=open_source) images to see more of what there is to run and build on.
-
 
 ## Try it out
 
