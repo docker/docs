@@ -28,6 +28,16 @@ Guides:
 
 - sectiontitle: "Docker concepts"
   section:
+  - sectiontitle: "Getting started"
+    section:
+    - title: "Get Docker"
+      path: /guides/docker-concepts/getting-started/get-docker/
+    - title: "Develop with containers"
+      path: /guides/docker-concepts/getting-started/develop-with-containers/
+    - title: "Build and push your first image"
+      path: /guides/docker-concepts/getting-started/build-and-push-first-image/
+    - title: "What's next"
+      path: /guides/docker-concepts/getting-started/whats-next/
   - sectiontitle: "The basics"
     section:
     - title: "What is a container?"
