@@ -1,7 +1,7 @@
 ---
 title: What's next 
 keywords: concepts, build, images, container, docker desktop
-description: This concept page discuss why developers should learn more about Docker and how it will help them in their day-to-day tasks
+description: The following sections provide a step-by-step guide to understanding core Docker concepts, building images and running containers.
 notoc: true
 
 the-basics:
@@ -53,7 +53,7 @@ running-containers:
   link: /guides/docker-concepts/running-containers/multi-container-applications/
 ---
 
-This section contains guides to help you understand the foundational concepts of images, containers.
+The following sections provide a step-by-step guide to understanding core Docker concepts, building images and running containers.
 
 ## The Basics
 
