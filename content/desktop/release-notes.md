@@ -29,7 +29,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### New
 
-- Admins can now use alternative methods to the `registry.json` file, to enforce sign in.
+- Administrators can now use alternative methods to the `registry.json` file to enforce sign in.
 - [Air-Gapped Containers](desktop/hardened-desktop/air-gapped-containers.md) is now generally available. 
 - Docker Compose File Viewer shows your Compose YAML with syntax highlighting and contextual links to relevant docs (Beta, progressive rollout).
 
@@ -47,7 +47,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 #### For all platforms
 
-- Newer releases are now displayed when an update has been already downloaded.
+- Newer releases are now displayed when an update has already been downloaded.
 - Added `proxyEnableKerberosNTLM` config to `settings.json` to enable fallback to Basic proxy authentication if Kerberos/NTLM environment is not properly set up.
 - Fixed a bug where Docker Debug was not working properly with Enhanced Container Isolation enabled.
 - Fixed a bug where UDP responses were not truncated properly.
@@ -75,9 +75,12 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### Deprecation
 
-#### For Windows
+#### For all platforms
 
 - The CLI binary that used to be shipped as `com.docker.cli` is now shipped simply as `docker`. This release leaves the CLI binary as `com.docker.cli`, but it will be removed next release.
+
+#### For Windows
+
 - Removed support for legacy version packs from the WSL2 engine.
 
 ## 4.30.0
