@@ -53,22 +53,22 @@ running-containers:
   link: /guides/docker-concepts/running-containers/multi-container-applications/
 ---
 
-This section contains guides to help you get started and learn how Docker can optimize your development workflows.
+This section contains guides to help you understand the foundational concepts of images, containers.
 
 ## The Basics
 
-Get started learning the foundational concepts and workflows of Docker.
+Get started learning the core concepts of containers, images, registries, and Docker Compose.
 
 {{< grid items="the-basics" >}}
 
 ## Building images
 
-Explore more advanced concepts and scenarios in Docker.
+Craft optimized container images with Dockerfiles, build cache and Multi-stage builds.
 
 {{< grid items="building-images" >}}
 
 ## Running containers
 
-Discover community-driven resources and learn how to contribute to Docker docs.
+Master essential techniques for exposing ports, overriding defaults, persisting data, sharing files and managing multi-container applications.
 
 {{< grid items="running-containers" >}}
