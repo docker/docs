@@ -53,10 +53,10 @@ Enough talk... time to get started.
 
 Now that the environment is up and running, what's actually in it? At a high-level, there are several containers (or processes) that each serve a specific need for the application:
 
-- React frontend - a Node container that's running the React dev server, using [Vite](https://vitejs.dev/)
-- Node backend - the backend provides an API that provides the ability to retrieve, create, and delete to-do items
-- MySQL database* - a database to store the list items
-- phpMyAdmin - a web-based interface to interact with the database that is accessible at [http://db.localhost](http://db.localhost)
+- React frontend - a Node container that's running the React dev server, using [Vite](https://vitejs.dev/).
+- Node backend - the backend provides an API that provides the ability to retrieve, create, and delete to-do items.
+- MySQL database - a database to store the list of the items.
+- phpMyAdmin - a web-based interface to interact with the database that is accessible at [http://db.localhost](http://db.localhost).
 - Traefik proxy - [Traefik](https://traefik.io/traefik/) is an application proxy that routes requests to the right service. It sends all requests for `localhost/api/*` to the backend, requests for `localhost/*` to the frontend, and then requests for `db.localhost` to phpMyAdmin. This provides the ability to access all applications using port 80 (instead of different ports for each service).
 
 With this environment, you as the developer don’t need to install or configure any services, populate a database schema, configure database credentials, or anything. You only need Docker Desktop. The rest just works.
