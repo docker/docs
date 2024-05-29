@@ -36,7 +36,7 @@ If users attempt to sign in through the CLI, they must authenticate using a pers
 
 ### Is it possible to force users of Docker Desktop to authenticate, and/or authenticate using their company’s domain?
 
-Yes. Admins can force users to authenticate with Docker Desktop by provisioning a [`registry.json`](../../../security/for-admins/configure-sign-in.md) configuration file. The `registry.json` file will force users to authenticate as a user that's configured in the `allowedOrgs` list in the `registry.json` file.
+Yes. Admins can [force users to authenticate with Docker Desktop](../../for-admins/enforce-sign-in/_index.md) using a registry key, `.plist` file, or `registry.json` file. 
 
 Once SSO enforcement is set up on their Docker Business organization or company on Hub, when the user is forced to authenticate with Docker Desktop, the SSO enforcement will also force users to authenticate through SSO with their IdP (instead of authenticating using their username and password).
 
@@ -51,7 +51,7 @@ Yes, you can convert existing users to an SSO account. To convert users from a n
 - Each user has created a PAT to replace their passwords to allow them to sign in through Docker CLI.
 - Confirm that all CI/CD pipelines automation systems have replaced their passwords with PATs.
 
-For detailed prerequisites and instructions on how to enable SSO, see [Configure Single Sign-on](../../../security/for-admins/configure-sign-in.md).
+For detailed prerequisites and instructions on how to enable SSO, see [Configure Single Sign-on](../../../security/for-admins/single-sign-on/configure/_index.md).
 
 ### What impact can users expect once we start onboarding them to SSO accounts?
 
