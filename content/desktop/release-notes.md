@@ -31,9 +31,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 - Admins can now use alternative methods to the `registry.json` file, to enforce sign in.
 - [Air-Gapped Containers](desktop/hardened-desktop/air-gapped-containers.md) is now generally available. 
-- Introducing: compose bridge. You might be asked your password to install it. Make sure in settings->advanced->Automatically check configuration is turned on.
-- Added Multi-node Kind as a Kubernetes option (Beta).
-- Added a Docker Compose documentation helper and a new way to view Compose files with the Compose File Viewer (Beta).
+- Docker Compose File Viewer shows your Compose YAML with syntax highlighting and contextual links to relevant docs (Beta, progressive rollout).
 
 ### Upgrades
 
@@ -54,7 +52,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 - Fixed a bug where Docker Debug was not working properly with Enhanced Container Isolation enabled.
 - Fixed a bug where UDP responses were not truncated properly.
 - Fixed a bug where the Update screen was hidden when using [Settings Management](hardened-desktop/settings-management/_index.md).
-- Fixes [docker/for-mac#7274](https://github.com/docker/for-mac/issues/7274)
+- Fixed [docker/for-mac#7274](https://github.com/docker/for-mac/issues/7274)
 
 #### For Windows
 
@@ -79,7 +77,8 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 #### For Windows
 
-- Removed support for legacy version packs from the WSL2 engine
+- The CLI binary that used to be shipped as `com.docker.cli` is now shipped simply as `docker`. This release leaves the CLI binary as `com.docker.cli`, but it will be removed next release.
+- Removed support for legacy version packs from the WSL2 engine.
 
 ## 4.30.0
 
