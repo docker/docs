@@ -8,7 +8,7 @@ description: This concept page will teach you how to build and push your first i
 
 ## Explanation
 
-Now that you've updated the to-do app, you’re ready to create a container image for the application and share it on Docker Hub. To do so, you will need to do the following:
+Now that you've updated the [to-do list app](/guides/docker-concepts/getting-started/develop-with-containers/), you’re ready to create a container image for the application and share it on Docker Hub. To do so, you will need to do the following:
 
 1. Sign in with your Docker account
 2. Create an image repository on Docker Hub
@@ -36,9 +36,13 @@ In the previous step, you used the following images that came from Docker Hub, e
 Explore the full catalog of [Docker Official Images](https://hub.docker.com/search?image_filter=official&q=), [Docker Verified Publishers](https://hub.docker.com/search?q=&image_filter=store), and [Docker Sponsored Open Source Software](https://hub.docker.com/search?q=&image_filter=open_source) images to see more of what there is to run and build on.
 
 
+## Try it out
+
+In this hands-on guide, you'll learn how to sign in to Docker Hub and push images to Docker Hub repository.
+
 ## Sign in with your Docker account
 
-ToIn order to push images to Docker Hub, you will need to sign in with a Docker account.
+To push images to Docker Hub, you will need to sign in with a Docker account.
 
 1. Open the Docker dashboard.
 
@@ -46,7 +50,7 @@ ToIn order to push images to Docker Hub, you will need to sign in with a Docker 
 
 3. If needed, create an account and then complete the sign-in flow.
 
-OnceWhen you're done, you should see the **Sign in** button turn into a profile picture.
+Once you're done, you should see the **Sign in** button turn into a profile picture.
 
 ## Create an image repository
 

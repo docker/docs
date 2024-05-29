@@ -75,7 +75,7 @@ For this container, the frontend is accessible on port `8080`. To open the websi
 ![Screenshot of exec into the running container in Docker Desktop](images/exec-into-docker-container.webp?border=true)
 
 
-3. Select the **Inspect** field to view key information to help you troubleshoot any error as well as maintain the state of your container.
+3. Select the **Inspect** field to obtain detailed information about the container. You can perform various actions such as pause, resume, start or stop containers, or explore the **Logs**, **Bind mounts**, **Exec**, **Files**, and **Stats** tabs.
 
 ![Screenshot of inspecting the running container in Docker Desktop](images/inspecting-container.webp?border=true)
 
