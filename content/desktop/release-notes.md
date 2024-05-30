@@ -55,6 +55,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 - Fixed a bug where UDP responses were not truncated properly.
 - Fixed a bug where the Update screen was hidden when using [Settings Management](hardened-desktop/settings-management/_index.md).
 - Fixed a bug where proxy settings defined in `admin-settings.json` were not applied correctly on startup.
+- Fixed a bug where "Manage Synchronized file shares with Compose" toggle was not correctly reflecting the value with the feature.
 - Fixed a bug where a bind mounted file modified on host is not updated after the container restarts, when gRPC FUSE file sharing is used on macOS and on Windows with Hyper-V. Fixes [docker/for-mac#7274](https://github.com/docker/for-mac/issues/7274), [docker/for-win#14060](https://github.com/docker/for-win/issues/14060).
 
 #### For Windows
