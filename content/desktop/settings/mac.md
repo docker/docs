@@ -174,6 +174,8 @@ File share settings are:
 
 ### Proxies
 
+Docker Desktop on Mac supports the use of HTTP/HTTPs and [SOCKS5 proxies](../networking.md#socks5-proxy-support).
+
 HTTP/HTTPS proxies can be used when:
 
 - Signing in to Docker
@@ -182,7 +184,7 @@ HTTP/HTTPS proxies can be used when:
 - Containers interact with the external network
 - Scanning images
 
-If the host uses a HTTP/HTTPS proxy configuration (static or via Proxy Auto-Configuration), Docker Desktop reads
+If the host uses a HTTP/HTTPS proxy configuration (static or via Proxy Auto-Configuration (PAC)), Docker Desktop reads
 this configuration
 and automatically uses these settings for signing in to Docker, for pulling and pushing images, and for
 container Internet access. If the proxy requires authorization then Docker Desktop dynamically asks
@@ -201,7 +203,8 @@ The HTTPS proxy settings used for scanning images are set using the `HTTPS_PROXY
 
 > **Note**
 >
-> Docker Desktop also supports the use of [SOCKS5 proxies](../networking.md#socks5-proxy-support).
+> If you are using a PAC file hosted on a web server, make sure to add the MIME type `application/x-ns-proxy-autoconfig` for the `.pac` file extension on the server or website. Without this configuration, the PAC file may not be parsed correctly.
+
 
 ### Network
 
