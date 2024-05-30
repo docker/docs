@@ -145,7 +145,7 @@ HTTP/HTTPS proxies can be used when:
 - Containers interact with the external network
 - Scanning images
 
-If the host uses a HTTP/HTTPS proxy configuration (static or via Proxy Auto-Configuration), Docker Desktop reads
+If the host uses a HTTP/HTTPS proxy configuration (static or via Proxy Auto-Configuration (PAC)), Docker Desktop reads
 this configuration
 and automatically uses these settings for signing in to Docker, for pulling and pushing images, and for
 container Internet access. If the proxy requires authorization then Docker Desktop dynamically asks

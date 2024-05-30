@@ -205,7 +205,6 @@ The HTTPS proxy settings used for scanning images are set using the `HTTPS_PROXY
 >
 > If you are using a PAC file hosted on a web server, make sure to add the MIME type `application/x-ns-proxy-autoconfig` for the `.pac` file extension on the server or website. Without this configuration, the PAC file may not be parsed correctly.
 
-
 ### Network
 
 {{< include "desktop-network-setting.md" >}}
