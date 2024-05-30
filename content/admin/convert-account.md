@@ -48,9 +48,9 @@ Consider the following effects of converting your account:
 
 ## Convert an account into an organization
 
-> **Beta**
+> **Early Access**
 >
-> Docker Home is in [public beta](/release-lifecycle/#beta) for select users. If your account isn't selected for public beta,
+> Docker Home is in [Early Access (EA)](/release-lifecycle/#early-access-ea) for select users. If your account isn't selected for EA,
 > you can manage your account settings, personal access tokens, and two-factor authentication for
 > your account in [Docker Hub](https://hub.docker.com/).
 { .restricted }

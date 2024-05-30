@@ -25,6 +25,12 @@ Authenticator with a registered YubiKey.
 
 ## Enable two-factor authentication
 
+> **Early Access**
+>
+> The following account settings are in [Early Access (EA)](/release-lifecycle/#early-access-ea) for select users. If your account isn't selected for EA,
+> you can manage 2FA for your account in [Docker Hub](https://hub.docker.com/settings/security).
+{ .restricted }
+
 1. Sign in to your [Docker account](https://app.docker.com/login).
 2. Select your avatar and then from the drop-down menu, select **My Account**.
 3. Navigate to the **Security** section, then select the arrow icon to enable 2FA.

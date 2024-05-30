@@ -7,6 +7,12 @@ aliases:
 - /docker-hub/2fa/new-recovery-code/
 ---
 
+> **Early Access**
+>
+> The following account settings are in [Early Access (EA)](/release-lifecycle/#early-access-ea) for select users. If your account isn't selected for EA,
+> you can manage 2FA for your account in [Docker Hub](https://hub.docker.com/settings/security).
+{ .restricted }
+
 If you have lost your two-factor authentication recovery code and still have
 access to your Docker account, you can generate a new recovery code.
 

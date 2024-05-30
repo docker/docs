@@ -15,16 +15,24 @@ grid:
   description: Explore popular FAQ topics about organizations.
   icon: help
   link: /faq/admin/general-faqs/
+- title: Personal access tokens
+  description: Learn how to create and manage access tokens for your account.
+  icon: password
+  link: /security/for-developers/access-tokens/
+- title: Set up two-factor authentication
+  description: Add an extra layer of authentication to your Docker account.
+  link: /security/for-developers/2fa/
+  icon: phonelink_lock
 ---
 
-> **Beta**
+> **Early Access**
 >
-> Docker Home is in [public beta](/release-lifecycle/#beta) for select users. If your account isn't selected for public beta,
+> Docker Home is in [Early Access (EA)](/release-lifecycle/#early-access-ea) for select users. If your account isn't selected for EA,
 > you can manage your account settings, personal access tokens, and two-factor authentication for
 > your account in [Docker Hub](https://hub.docker.com/).
 { .restricted }
 
-You can create a Docker account to secure a Docker ID, which is a username for your account that lets you access Docker products. You can use your Docker account to sign in to Docker products like Docker Hub, Docker Desktop, or Docker Scout. You can manage the settings for your account in [Docker Home](https://app.docker.com/settings).
+You can create a Docker account to secure a Docker ID, which is a username for your account that lets you access Docker products. You can use your Docker account to sign in to Docker products like Docker Hub, Docker Desktop, or Docker Scout. You can manage centrally manage your [Docker account settings](https://app.docker.com/settings), as well as account security features.
 
 In this section, explore how you can create, manage, or update your account.
 

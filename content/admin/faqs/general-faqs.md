@@ -71,3 +71,14 @@ A [service account](../../docker-hub/service-accounts.md) is a Docker ID used fo
 Only someone with access to the Docker account can deactivate the account. For more details, see [Deactivating an account](../../admin/deactivate-account.md).
 
 If the user is a member of your organization, you can remove the user from your organization. For more details, see [Remove a member or invitee](../../admin/organization/members.md#remove-a-member-from-a-team).
+
+### Where can I manage the settings for my user account?
+
+> **Early Access**
+>
+> Docker Home is in [Early Access (EA)](/release-lifecycle/#early-access-ea) for select users. If your account isn't selected for EA,
+> you can manage your account settings, personal access tokens, and two-factor authentication for
+> your account in [Docker Hub](https://hub.docker.com/).
+{ .restricted }
+
+You can manage your account settings any time when you sign in to your [Docker account](https://app.docker.com/login). In Docker Home, select your avatar in the top-right navigation, then select **My Account**. You can also access this menu from any Docker web applications when you're signed in to your account. See [Manage your Docker account](../../accounts/manage-account.md). If your account is associated with an organization that uses SSO, you may have limited access to the settings that you can control.

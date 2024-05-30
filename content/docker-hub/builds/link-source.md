@@ -25,12 +25,14 @@ If you are linking a source code provider to create autobuilds for a team, follo
 
 > **Early Access**
 >
-> Centralized repository settings are in Early Access. If your account isn't selected for Early Access, you can manage the following settings in your account settings.
+> Centralized repository settings are in [Early Access (EA)](/release-lifecycle/#early-access-ea). If your account isn't selected for EA, you can manage the following settings by visiting Docker Hub then navigating to your account settings.
 { .restricted }
 
 1. Sign in to Docker Hub.
 
 2. Select the **Settings** icon in the top-right navigation, then select **Repository Settings**.
+
+   ![Repository settings menu](../images/docker-hub-repo-settings-menu.png)
 
 3. From the **Linked accounts** tab, select **Link provider** for the source provider you want to link.
 

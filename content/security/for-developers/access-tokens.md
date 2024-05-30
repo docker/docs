@@ -17,6 +17,12 @@ Compared to passwords, PATs provide the following advantages:
 Access tokens are also valuable for building integrations, as you can issue multiple tokens, one for each integration, and revoke them at
 any time.
 
+> **Early Access**
+>
+> The following account settings are in [Early Access (EA)](/release-lifecycle/#early-access-ea) for select users. If your account isn't selected for EA,
+> you can manage PATs for your account in [Docker Hub](https://hub.docker.com/settings/security).
+{ .restricted }
+
 ## Create an access token
 
 > **Important**

@@ -4,18 +4,18 @@ keywords: accounts, docker ID, account settings, account management, docker home
 title: Manage your Docker account
 ---
 
-> **Beta**
+> **Early Access**
 >
-> Docker Home is in [public beta](/release-lifecycle/#beta)  for select users. If your account isn't selected for public beta,
+> Docker Home is in [Early Access (EA)](/release-lifecycle/#early-access-ea) for select users. If your account isn't selected for EA,
 > you can manage your account settings, personal access tokens, and two-factor authentication for
 > your account in [Docker Hub](https://hub.docker.com/).
 { .restricted }
 
-You can manage the settings for your Docker account in Docker Home. Here you can also take administrative actions for your account and manage your account security.
+You can centrally manage the settings for your Docker account. Here you can also take administrative actions for your account and manage your account security.
 
 > **Tip**
 >
-> If your account is associated with an organization that enforces Single Sign-On (SSO), you may not have permissions to update your account settings. You need to contact your administrator to update your settings.
+> If your account is associated with an organization that enforces single sign-on (SSO), you may not have permissions to update your account settings. You need to contact your administrator to update your settings.
 { .tip }
 
 ## Update general settings
