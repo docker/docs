@@ -135,6 +135,8 @@ File share settings are:
 
 ### Proxies
 
+Docker Desktop on Linux supports the use of HTTP/HTTPS and [SOCKS5 proxies](../networking.md#socks5-proxy-support).
+
 HTTP/HTTPS proxies can be used when:
 
 - Signing in to Docker
@@ -162,7 +164,7 @@ The HTTPS proxy settings used for scanning images are set using the `HTTPS_PROXY
 
 > **Note**
 >
-> Docker Desktop also supports the use of [SOCKS5 proxies](../networking.md#socks5-proxy-support).
+> If you are using a PAC file hosted on a web server, make sure to add the MIME type `application/x-ns-proxy-autoconfig` for the `.pac` file extension on the server or website. Without this configuration, the PAC file may not be parsed correctly.
 
 ### Network
 

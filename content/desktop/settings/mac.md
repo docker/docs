@@ -174,7 +174,7 @@ File share settings are:
 
 ### Proxies
 
-Docker Desktop on Mac supports the use of HTTP/HTTPs and [SOCKS5 proxies](../networking.md#socks5-proxy-support).
+Docker Desktop on Mac supports the use of HTTP/HTTPS and [SOCKS5 proxies](../networking.md#socks5-proxy-support).
 
 HTTP/HTTPS proxies can be used when:
 
