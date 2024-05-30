@@ -42,6 +42,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 - [Docker Buildx v0.14.1](https://github.com/docker/buildx/releases/tag/v0.14.1)
 - [Containerd v1.6.32](https://github.com/containerd/containerd/releases/tag/v1.6.32)
 - [Credential Helpers v0.8.2](https://github.com/docker/docker-credential-helpers/releases/tag/v0.8.2)
+- [NVIDIA Container Toolkit v1.15.0](https://github.com/NVIDIA/nvidia-container-toolkit/releases/tag/v1.15.0)
 - Linux kernel `v6.6.31`
 
 ### Bug fixes and enhancements
