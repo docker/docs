@@ -1,0 +1,11 @@
+[1716996661] Log start
+[1716996661] Cmd: llama
+[1716996661] main: build = 3030 (504f0c34)
+[1716996661] main: built with Apple clang version 15.0.0 (clang-1500.3.9.4) for arm64-apple-darwin23.4.0
+[1716996661] main: seed  = 1716996661
+[1716996661] main: llama backend init
+[1716996661] main: load the model and apply lora adapter, if any
+[1716996661] llama_model_load: error loading model: llama_model_loader: failed to load model from models/7B/ggml-model-f16.gguf
+
+[1716996661] llama_load_model_from_file: failed to load model
+[1716996661] main: error: unable to load model
