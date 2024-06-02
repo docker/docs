@@ -17,13 +17,15 @@ tests in Docker when developing and when building.
 
 ## Run tests when developing locally
 
-The sample application already has the Jest package for running tests and has tests inside the `spec` directory. When developing locally, you can use Compose to run your tests.
+After the sample applications image has been built with the Jest packages (Jest packages are installed in `node_modules`), you can use Compose to run your tests.
 
 Run the following command to run the test script from the `package.json` file inside a container.
 
 ```console
-$ docker compose run server npm run test
+$ docker compose run NAME_OF_DOCKER_SERVICE npm run test
 ```
+
+Replacing `NAME_OF_DOCKER_SERVICE` with the name of the service in your `docker-compose.yml` file.
 
 To learn more about the command, see [docker compose run](/reference/cli/docker/compose/run/).
 
