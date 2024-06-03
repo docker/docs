@@ -66,4 +66,4 @@ Also, Registry Access Management operates on the level of hosts, not IP addresse
 
 ## More resources
 
-- [Video: Hardened Desktop Registry Access Management](https://www.youtube.com/watch?v=oA1WQZWnTAk)
+- [Video: Hardened Desktop Registry Access Management](https://www.youtube.com/watch?v=l9Z6WJdJC9A)

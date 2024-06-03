@@ -1,5 +1,5 @@
 ---
-description: Learn about company owners.
+description: Learn how to add and remove company owners.
 keywords: company, owners
 title: Manage company owners
 aliases:
