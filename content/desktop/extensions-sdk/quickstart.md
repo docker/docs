@@ -18,6 +18,8 @@ Follow this guide to get started with creating a basic Docker extension. The Qui
 >
 > NodeJS and Go are only required when you follow the quickstart guide to create an extension. It uses the `docker extension init` command to automatically generate boilerplate files. This command uses a template based on a ReactJS and Go application.
 
+In Docker Desktop settings, ensure you can install your extension being developed. In the Settings extensions tab, you might need to unselect "Allow only extensions distributed through the Docker Marketplace".
+
 ## Step one: Set up your directory
 
 To set up your directory, use the `init` subcommand and provide a name for your extension.
