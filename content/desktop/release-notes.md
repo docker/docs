@@ -29,7 +29,6 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### New
 
-- Administrators can now use alternative methods to the `registry.json` file to enforce sign in.
 - [Air-Gapped Containers](desktop/hardened-desktop/air-gapped-containers.md) is now generally available. 
 - Docker Compose File Viewer shows your Compose YAML with syntax highlighting and contextual links to relevant docs (Beta, progressive rollout).
 - New Sidebar user experience.
