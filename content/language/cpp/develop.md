@@ -39,8 +39,6 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
-    stdin_open: true
-    tty: true
     develop:
       watch:
         - action: rebuild
