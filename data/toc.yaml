@@ -2235,6 +2235,8 @@ Manuals:
     title: Overview
   - sectiontitle: Docker Core billing
     section:
+    - path: /billing/core-billing/buy-core/
+      title: Buy Docker Core
     - path: /billing/core-billing/payment-method/
       title: Add or update a payment method
     - path: /billing/core-billing/details/
