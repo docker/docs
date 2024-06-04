@@ -32,7 +32,7 @@ building-images:
   description: Learn about the build cache, what changes invalidate the cache, and how to effectively use the build cache.
   link: /guides/docker-concepts/building-images/using-the-build-cache/
 - title: Multi-stage builds
-  description: Get a better understanding of Multi-stage builds and its benefits.
+  description: Get a better understanding of multi-stage builds and their benefits.
   link: /guides/docker-concepts/building-images/multi-stage-builds/
 
 running-containers:
