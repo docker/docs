@@ -125,7 +125,7 @@ Now that you have a repository, you are ready to build and push your image. An i
     ...
     ```
 
-4. To push the image, use the `docker push` command. Be sure to replace `<DOCKER_USERNAME>` with your username:
+4. To push the image, use the `docker push` command. Be sure to replace `DOCKER_USERNAME` with your username:
 
     ```console
     $ docker push <DOCKER_USERNAME>/getting-started-todo-app
