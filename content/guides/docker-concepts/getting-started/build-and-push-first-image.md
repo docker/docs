@@ -15,7 +15,7 @@ Now that you've updated the [to-do list app](/guides/docker-concepts/getting-sta
 3. Build the container image
 4. Push the image to Docker Hub
 
-Before you dive into hands-on guide, here are a few core concepts that you should be aware of:
+Before you dive into the hands-on guide, the following are a few core concepts that you should be aware of.
 
 ### Container images
 
