@@ -101,7 +101,7 @@ Now that you have a repository, you are ready to build and push your image. An i
 
 2. Build the project by running the following command, swapping out `DOCKER_USERNAME` with your username.
 
-    ```bash
+    ```console
     $ docker build -t <DOCKER_USERNAME>/getting-started-todo-app .
     ```
 
