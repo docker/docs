@@ -71,7 +71,7 @@ For this container, the frontend is accessible on port `8080`. To open the websi
 1. Open Docker Desktop and select the **Container** field on the left sidebar.
 2. You can view information about your container including logs, and files, and even access the shell by selecting the **Exec** tab.
 
-![Screenshot of exec into the running container in Docker Desktop](images/exec-into-docker-container.webp?border=true)
+   ![Screenshot of exec into the running container in Docker Desktop](images/exec-into-docker-container.webp?border=true)
 
 
 3. Select the **Inspect** field to obtain detailed information about the container. You can perform various actions such as pause, resume, start or stop containers, or explore the **Logs**, **Bind mounts**, **Exec**, **Files**, and **Stats** tabs.
