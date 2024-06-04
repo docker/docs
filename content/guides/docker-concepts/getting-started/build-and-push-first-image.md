@@ -42,7 +42,7 @@ In this hands-on guide, you'll learn how to sign in to Docker Hub and push image
 
 To push images to Docker Hub, you will need to sign in with a Docker account.
 
-1. Open the Docker dashboard.
+1. Open the Docker Dashboard.
 
 2. Select **Sign in** at the top-right corner.
 
