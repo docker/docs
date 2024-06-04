@@ -95,7 +95,7 @@ Now that you have a repository, you are ready to build and push your image. An i
 
    And after the project is cloned, navigate into the new directory created by the clone:
 
-   ```
+   ```console
    $ cd getting-started-todo-app
    ```
 
