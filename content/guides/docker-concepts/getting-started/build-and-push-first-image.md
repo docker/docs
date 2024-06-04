@@ -78,7 +78,7 @@ Now that you have a repository, you are ready to build and push your image. An i
 > the backend code, and the compiled React code. 
 >
 > Any machine that runs a container using the image, will then be able to run the application as 
-> it was built without needing anything else pre-installed on their machine. 
+> it was built without needing anything else pre-installed on the machine. 
 >
 > A `Dockerfile` is a text-based script that provides the instruction set on how to build
 > the image. For this quick start, the repository already contains the Dockerfile.
