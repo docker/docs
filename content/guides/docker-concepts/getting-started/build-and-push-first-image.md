@@ -73,7 +73,7 @@ Now that you have a repository, you are ready to build and push your image. An i
 
 > **What is an image/Dockerfile?**
 >
-> Without going to deep yet, think of a container image as a single package that contains
+> Without going too deep yet, think of a container image as a single package that contains
 > everything needed to run a process. In this case, it will contain a Node environment,
 > the backend code, and the compiled React code. 
 >
