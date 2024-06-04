@@ -14,6 +14,10 @@
       scrollbar-color: theme(colors.gray.dark.800) theme(colors.white / 0.10);
     }
   }
+
+  mark {
+    @apply bg-amber-light-200 dark:bg-amber-dark-600/25 dark:text-white;
+  }
 }
 
 /* utility classes */
