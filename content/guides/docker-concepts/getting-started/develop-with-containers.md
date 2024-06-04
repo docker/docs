@@ -72,7 +72,7 @@ The greeting at the top of the page is populated by an API call at `/api/greetin
 
 1. Open the `backend/src/routes/getGreeting.js` file. This file provides the handler for the API endpoint.
 
-2. Modify the variable at the top to an array of greetings. Feel free to use the following modifications or any customize it to your own liking.
+2. Modify the variable at the top to an array of greetings. Feel free to use the following modifications or customize it to your own liking.
 
     ```js {linenos=table,hl_lines=["1-5"],linenostart=1}
     const GREETINGS = [
