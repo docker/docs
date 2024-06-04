@@ -49,7 +49,7 @@ running-containers:
   description: Explore the various storage options available in Docker and their common usage.
   link: /guides/docker-concepts/running-containers/sharing-local-files/
 - title: Multi-container applications
-  description: Learn the significance of multi-container application and how it is different from single-container application.
+  description: Learn the significance of multi-container applications and how they're different from single-container applications.
   link: /guides/docker-concepts/running-containers/multi-container-applications/
 ---
 
