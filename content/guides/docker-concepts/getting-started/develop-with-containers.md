@@ -18,6 +18,9 @@ Enough talk... time to get started.
 
 ## Try it out
 
+In this hands-on guide, you'll learn how to develop with containers.
+
+
 ## Start the project
 
 1. To get started, either clone or [download the project as a ZIP file](https://github.com/docker/getting-started-todo-app/archive/refs/heads/main.zip) to your local machine.
