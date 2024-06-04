@@ -42,7 +42,7 @@ Once it's installed, complete the setup process and you're all set to run a Dock
 
 In this hands-on guide, you will see how to run a Docker container using Docker Desktop.
 
-Follow the instructions to run a container using the CLI:
+Follow the instructions to run a container using the CLI.
 
 
 ## Run your first container
