@@ -7,6 +7,8 @@ aliases:
 - /subscription/add-seats/
 ---
 
+{{< include "tax-compliance.md" >}}
+
 You can add seats at anytime to your existing subscription.
 
 When you add seats to your subscription in the middle of your billing cycle, you are charged a prorated amount for the additional seats.

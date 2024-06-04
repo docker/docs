@@ -6,6 +6,8 @@ billing:
 - /billing/payment-method/
 ---
 
+{{< include "tax-compliance.md" >}}
+
 This page describes how to add or update a payment method for your personal account or for an organization.
 
 You can add a payment method or update your account's existing payment method at any time.
