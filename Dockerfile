@@ -94,4 +94,4 @@ COPY --from=pagefind /pagefind .
 
 FROM scratch AS release
 COPY --from=build /out /
-COPY --from=pagefind /pagefind .
+COPY --from=pagefind /pagefind /pagefind
