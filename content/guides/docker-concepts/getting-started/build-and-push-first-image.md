@@ -186,7 +186,7 @@ Going forward, you’ll want to remember that:
 
 ## Next steps
 
-Now that you’ve built an image, it's time to discuss why developers should learn more about Docker and how it will help them in their day-to-day tasks.
+Now that you’ve built an image, it's time to discuss why you as a developer should learn more about Docker and how it will help you in your day-to-day tasks.
 
 {{< button text="What's Next" url="whats-next" >}}
 
