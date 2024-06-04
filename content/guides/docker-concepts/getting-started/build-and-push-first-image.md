@@ -89,7 +89,7 @@ Now that you have a repository, you are ready to build and push your image. An i
 
 1. To get started, either clone or download the project as a ZIP file to your local machine
 
-   ```bash
+   ```console
    $ git clone https://github.com/docker/getting-started-todo-app
    ```
 
