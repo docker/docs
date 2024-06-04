@@ -82,7 +82,7 @@ Docker Desktop simplifies container management for developers by streamlining th
 
 ## What's next?
 
-Now that you have Docker Desktop installed and run your first container, it's time to start developing with containers.
+Now that you have Docker Desktop installed and ran your first container, it's time to start developing with containers.
 
 {{< button text="Develop with containers" url="develop-with-containers" >}}
 
