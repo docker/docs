@@ -8,7 +8,7 @@ the-basics:
 - title: What is a container
   description: Learn how to run your first container.
   link: /guides/docker-concepts/the-basics/what-is-a-container/
-- title: What is an image
+- title: What is an image?
   description: Learn the basics of image layers. 
   link: /guides/docker-concepts/the-basics/what-is-an-image/
 - title: What is a registry
