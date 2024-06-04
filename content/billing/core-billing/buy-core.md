@@ -1,6 +1,6 @@
 ---
 title: Buy Docker Core
-description: Learn how to start your Docker core subscription.
+description: Learn how to start your Docker Core subscription.
 keywords: payments, billing, subscription, invoices, docker core, buy docker
 ---
 
