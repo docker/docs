@@ -5,7 +5,7 @@ description: The following sections provide a step-by-step guide to understandin
 notoc: true
 
 the-basics:
-- title: What is a container
+- title: What is a container?
   description: Learn how to run your first container.
   link: /guides/docker-concepts/the-basics/what-is-a-container/
 - title: What is an image?
