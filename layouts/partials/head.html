@@ -72,3 +72,8 @@
 }}
 <script defer src="{{ $js.Permalink }}"></script>
 {{ partialCached "utils/resources.html" "-" }}
+{{- /* Highlight text from search results */ -}}
+<script type="module">
+await import('/pagefind/pagefind-highlight.js');
+new PagefindHighlight({ highlightParam: "highlight" });
+</script>
