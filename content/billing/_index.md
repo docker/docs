@@ -3,9 +3,9 @@ title: Billing and payments
 description: Discover information on billing and payment processes for Docker subscriptions.
 keywords: billing, invoice, payment, subscription
 grid_core:
-- title: Buy Docker Core
-  description: Learn how to get started with a Docker Core subscription.
-  link: /billing/core-billing/buy-core/
+- title: Get started
+  description: Learn how to set up a Docker Core subscription for a personal account or organization.
+  link: /billing/core-billing/get-started-core/
   icon: shopping_cart
 - title: Add or update a payment method
   description: Learn how to add or update a payment method for your personal account or organization.

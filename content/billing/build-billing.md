@@ -1,7 +1,7 @@
 ---
 title: Docker Build Cloud billing
-description: Learn how to buy a Docker Build Cloud subscription.
-keywords: payments, billing, subscription, build, cloud, Build Cloud, remote builder
+description: Learn how to get started with a Docker Build Cloud subscription.
+keywords: payments, billing, subscription, build, cloud, Build Cloud, remote builder, buy docker build cloud
 ---
 
 Build Cloud is a next-gen build tool that enables improved build speed, a shared build cache, and native multi-platform builds. Build Cloud is available for free with an existing Docker subscription. To get additional seats and increase your available build minutes, you can buy a subscription to enhance your builds.
@@ -15,9 +15,9 @@ If you don’t have a Docker Core subscription, you can buy Docker Build Cloud T
 
 In this section, learn how to set up and manage billing for your Build Cloud subscription. For more information about the subscription tiers, see [Build Cloud subscriptions and features](/subscription/build-cloud/build-details). To buy Docker Build Cloud Business, [contact sales](https://www.docker.com/products/build-cloud/#contact_sales).
 
-## Buy Docker Build Cloud Team
+## Set up Docker Build Cloud Team subscription
 
-You can buy a Build Cloud subscription on a monthly or annual plan. To upgrade a Build Cloud Starter plan, see [Upgrade your subscription](#upgrade-your-subscription).
+You can set up a Build Cloud subscription on a monthly or annual plan. To upgrade a Build Cloud Starter subscription, see [Upgrade your subscription](#upgrade-your-subscription).
 
 ### Existing account or organization
 
