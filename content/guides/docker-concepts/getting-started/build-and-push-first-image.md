@@ -105,7 +105,7 @@ Now that you have a repository, you are ready to build and push your image. An i
     $ docker build -t <DOCKER_USERNAME>/getting-started-todo-app .
     ```
 
-    For example, if my Docker username was `mobydock`, I would run the following:
+    For example, if your Docker username was `mobydock`, you would run the following:
 
     ```console
     $ docker build -t mobydock/getting-started-todo-app .
