@@ -87,7 +87,7 @@ Now that you have a repository, you are ready to build and push your image. An i
 {{< tabs group="cli-or-vs-code" persist=true >}}
 {{< tab name="CLI" >}}
 
-1. To get started, either clone or download the project as a ZIP file to your local machine
+1. To get started, either clone or download the project as a [ZIP file](https://github.com/docker/getting-started-todo-app/archive/refs/heads/main.zip) to your local machine.
 
    ```console
    $ git clone https://github.com/docker/getting-started-todo-app
