@@ -12,6 +12,8 @@ aliases:
   - /develop/develop-images/dockerfile_best-practices/
   - /develop/develop-images/guidelines/
   - /develop/develop-images/instructions/
+  - /develop/dev-best-practices/
+  - /develop/security-best-practices/
 ---
 
 ## Use multi-stage builds
@@ -26,6 +28,80 @@ build steps in parallel.
 
 See [Multi-stage builds](../../build/building/multi-stage.md) for more
 information.
+
+### Create reusable stages
+
+If you have multiple images with a lot in common, consider creating a reusable
+stage that includes the shared components, and basing your unique stages on
+that. Docker only needs to build the common stage once. This means that your derivative images use memory
+on the Docker host more efficiently and load more quickly.
+
+It's also easier to maintain a common base stage ("Don't repeat yourself"),
+than it is to have multiple different stages doing similar things.
+
+## Choose the right base image
+
+The first step towards achieving a secure image is to choose the right base
+image. When choosing an image, ensure it's built from a trusted source and keep
+it small.
+
+- [Docker Official Images](https://hub.docker.com/search?image_filter=official)
+  are some of the most secure and dependable images on Docker Hub. Typically,
+  Docker Official images have few or no packages containing CVEs, and are
+  thoroughly reviewed by Docker and project maintainers.
+
+- [Verified Publisher](https://hub.docker.com/search?image_filter=store) images
+  are high-quality images published and maintained by the organizations
+  partnering with Docker, with Docker verifying the authenticity of the content
+  in their repositories.
+
+- [Docker-Sponsored Open Source](https://hub.docker.com/search?image_filter=open_source)
+  are published and maintained by open source projects sponsored by Docker
+  through an [open source program](../../trusted-content/dsos-program).
+
+When you pick your base image, look out for the badges indicating that the
+image is part of these programs.
+
+![Docker Hub Official and Verified Publisher images](../images/hub-official-images.webp)
+
+When building your own image from a Dockerfile, ensure you choose a minimal base
+image that matches your requirements. A smaller base image not only offers
+portability and fast downloads, but also shrinks the size of your image and
+minimizes the number of vulnerabilities introduced through the dependencies.
+
+You should also consider using two types of base image: one for building and
+unit testing, and another (typically slimmer) image for production. In the
+later stages of development, your image may not require build tools such as
+compilers, build systems, and debugging tools. A small image with minimal
+dependencies can considerably lower the attack surface.
+
+## Rebuild your images often
+
+Docker images are immutable. Building an image is taking a snapshot of that
+image at that moment. That includes any base images, libraries, or other
+software you use in your build. To keep your images up-to-date and secure, make
+sure to rebuild your image often, with updated dependencies.
+
+To ensure that you're getting the latest versions of dependencies in your build,
+you can use the `--no-cache` option to avoid cache hits.
+
+```console
+$ docker build --no-cache -t my-image:my-tag .
+```
+
+The following Dockerfile uses the `24.04` tag of the `ubuntu` image. Over time,
+that tag may resolve to a different underlying version of the `ubuntu` image,
+as the publisher rebuilds the image with new security patches and updated
+libraries. Using the `--no-cache`, you can avoid cache hits and ensure a fresh
+download of base images and dependencies.
+
+```dockerfile
+# syntax=docker/dockerfile:1
+FROM ubuntu:24.04
+RUN apt-get -y update && apt-get install -y python
+```
+
+Also consider [pinning base image versions](#pin-base-image-versions).
 
 ## Exclude with .dockerignore
 
@@ -163,6 +239,12 @@ audit trail of when and how the change occurred.
 For more information about automatically updating your base images with Docker
 Scout, see
 [Remediation](../../scout/policy/remediation.md#automatic-base-image-updates)
+
+## Build and test your images in CI
+
+When you check in a change to source control or create a pull request, use
+[GitHub Actions](../ci/github-actions/_index.md) or another CI/CD pipeline to
+automatically build and tag a Docker image and test it.
 
 ## Dockerfile instructions
 

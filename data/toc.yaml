@@ -216,16 +216,6 @@ Guides:
     - path: /guides/use-case/databases/
       title: Use containerized databases
 
-
-- sectiontitle: Develop with Docker
-  section:
-  - path: /develop/
-    title: Overview
-  - path: /develop/dev-best-practices/
-    title: Development best practices
-  - path: /develop/security-best-practices/
-    title: Security best practices
-
 - sectiontitle: Build with Docker
   section:
   - path: /build/guide/

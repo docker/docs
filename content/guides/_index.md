@@ -27,10 +27,6 @@ dive-deeper:
   description: Walk through practical Docker applications for specific scenarios.
   link: /guides/use-case/
   icon: task
-- title: Develop with Docker
-  description: Master Docker best practices for efficient, secure development.
-  link: /develop/
-  icon: rule
 - title: Build with Docker
   description: Deep-dive into building software with Docker.
   link: /build/guide/
