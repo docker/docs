@@ -190,7 +190,7 @@ Additionally, you can also use `/norestart` or `/forcerestart` to control reboot
 
 By default, the installer reboots the machine after a successful installation. When ran silently, the reboot is automatic and the user is not prompted.
 
-## Updating Docker Desktop 
+## Updates 
 
 When installing Docker Desktop with the MSI, in-app updates are disabled.
 
