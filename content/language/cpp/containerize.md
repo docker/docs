@@ -17,7 +17,7 @@ This section walks you through containerizing and running a C++ application.
 Clone the sample application to use with this guide. Open a terminal, change directory to a directory that you want to work in, and run the following command to clone the repository:
 
 ```console
-$ git clone https://github.com/Pradumnasaraf/c-plus-plus-docker.git
+$ git clone https://github.com/dockersamples/c-plus-plus-docker.git
 ```
 
 You should now have the following contents in your `c-plus-plus-docker`
