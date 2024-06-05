@@ -1,6 +1,6 @@
 ---
 description: Language-specific guides overview
-keywords: guides, docker, language, node, java, python, R, go, golang, .net
+keywords: guides, docker, language, node, java, python, R, go, golang, .net, c++
 title: Language-specific guides overview
 toc_min: 1
 toc_max: 2
@@ -43,6 +43,9 @@ Learn how to containerize your applications and start developing using Docker. C
     </div>
     <div class="flex items-center flex-1 shadow p-4">
         <a href="/language/dotnet/"><img class="m-auto rounded" src="/language/images/c-sharp.webp" alt="Develop with C#"></a>
+    </div>
+    <div class="flex items-center flex-1 shadow p-4">
+        <a href="/language/cpp/"><img class="m-auto rounded" src="/language/images/cpp.webp" alt="Develop with C++"></a>
     </div>
     <div class="flex items-center flex-1 shadow p-4">
         <a href="/language/rust/"><img class="m-auto rounded" src="/language/images/rust-logo.webp" alt="Develop with Rust"></a>
