@@ -15,4 +15,3 @@ Whether you're looking to implement scripted installations or integrate Docker D
 
 - [Use the Microsoft installer and read the configuration options](install-and-configure.md)
 - [Read the FAQs](faq.md)
-- [Understand how the MSI installer collects analytics](analytics.md)

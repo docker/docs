@@ -185,11 +185,57 @@ msiexec /x "DockerDesktop.msi" /quiet
 | `HYPERVDEFAULTDATAROOT` | Specifies the default location for the Hyper-V VM disk. | None |
 | `WINDOWSCONTAINERSDEFAULTDATAROOT` | Specifies the default location for Windows containers. | None |
 | `WSLDEFAULTDATAROOT` | Specifies the default location for the WSL distribution disk. | None |
+| `DISABLEANALYTICS` | When set to 1, analytics collection will be disabled for the MSI. For more information, see [Analytics](#analytics). | 0 |
 
 
 Additionally, you can also use `/norestart` or `/forcerestart` to control reboot behaviour.
 
 By default, the installer reboots the machine after a successful installation. When ran silently, the reboot is automatic and the user is not prompted.
+
+## Updating Docker Desktop 
+
+When installing Docker Desktop with the MSI, in-app updates are disabled.
+
+Docker Desktop will notify you when an update is available. To update Docker Desktop, download the latest installer from the Docker Admin console. Navigate to the  **Deploy Docker Desktop** page under **Organization settings**. 
+
+To keep up to date with new releases, you can check use the [release notes](https://docs.docker.com/desktop/release-notes/) page.
+
+## Analytics
+
+The MSI installer collects data to better understand user behaviour and to improve the user experience by identifying and addressing issues or optimizing popular features.
+
+### How to opt-out
+
+{{< tabs >}}
+{{< tab name="From the GUI" >}}
+
+When you install Docker Desktop from the default installer GUI, select the **Disable analytics** checkbox located on the bottom-left corner of the **Welcome** dialog.
+
+{{< /tab >}}
+{{< tab name="From the command line" >}}
+
+When you install Docker Desktop from the command line, use the `DISABLEANALYTICS` property.
+
+```powershell
+msiexec /i "win\msi\bin\en-US\DockerDesktop.msi" /L*V ".\msi.log" DISABLEANALYTICS=1
+```
+
+{{< /tab >}}
+{{< /tabs >}}
+
+### Persistence
+
+If you decide to disable analytics for an installation, your choice is persisted in the registry and honoured across future upgrades and uninstalls.
+
+However, the key is removed when Docker Desktop is uninstalled and must be configured again via one of the preivous methods.
+
+The registry key is as follows:
+
+```powershell
+SOFTWARE\Docker Inc.\Docker Desktop\DisableMsiAnalytics
+```
+
+When analytics has been disabled, this key has a value of `1`. 
 
 ## Additional resources
 
