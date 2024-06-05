@@ -136,8 +136,6 @@ IdentifyingNumber                      Name
 msiexec /x {10FC87E2-9145-4D7D-B493-2E99E8D8E103} /L*V ".\msi.log" /quiet
 ```
 
-
-
 #### Uninstalling interactively with verbose logging
 
 ```powershell
@@ -240,4 +238,3 @@ When analytics has been disabled, this key has a value of `1`.
 ## Additional resources
 
 - [Explore the FAQs](faq.md)
-- [Understand how the MSI installer collects analytics](analytics.md)
