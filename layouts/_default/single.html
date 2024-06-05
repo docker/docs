@@ -6,7 +6,7 @@
   {{ partial "breadcrumbs.html" . }}
   <article class="prose max-w-none dark:prose-invert">
     {{ with .Title }}
-    <h1 class="scroll-mt-36">{{ . }}</h1>
+    <h1 data-pagefind-weight="10" class="scroll-mt-36">{{ . }}</h1>
     {{ end }}
     <div class="block lg:hidden">
       {{ partial "pagemeta.html" . }}
