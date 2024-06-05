@@ -84,19 +84,7 @@ dependencies if there was a change to the `package.json`.
    CMD ["node", "src/index.js"]
    ```
 
-2. Create a file named `.dockerignore` in the same folder as the Dockerfile with the following contents.
-
-   ```ignore
-   node_modules
-   ```
-
-    `.dockerignore` files are an easy way to selectively copy only image relevant files.
-    You can read more about this
-    [here](../build/building/context.md#dockerignore-files).
-    In this case, the `node_modules` folder should be omitted in the second `COPY` step because otherwise,
-    it would possibly overwrite files which were created by the command in the `RUN` step.
-
-3. Build a new image using `docker build`.
+2. Build a new image using `docker build`.
 
     ```console
     $ docker build -t getting-started .
@@ -124,9 +112,9 @@ dependencies if there was a change to the `package.json`.
     => => naming to docker.io/library/getting-started
     ```
 
-4. Now, make a change to the `src/static/index.html` file. For example, change the `<title>` to "The Awesome Todo App".
+3. Now, make a change to the `src/static/index.html` file. For example, change the `<title>` to "The Awesome Todo App".
 
-5. Build the Docker image now using `docker build -t getting-started .` again. This time, your output should look a little different.
+4. Build the Docker image now using `docker build -t getting-started .` again. This time, your output should look a little different.
 
     ```plaintext
     [+] Building 1.2s (10/10) FINISHED
@@ -209,7 +197,6 @@ into an nginx container.
 In this section, you learned a few image building best practices, including layer caching and multi-stage builds.
 
 Related information:
- - [.dockerignore](../build/building/context.md#dockerignore-files)
  - [Dockerfile reference](../reference/dockerfile.md)
  - [Build with Docker guide](../build/guide/index.md)
  - [Dockerfile best practices](../develop/develop-images/dockerfile_best-practices.md)

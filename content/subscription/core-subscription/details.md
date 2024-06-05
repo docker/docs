@@ -1,6 +1,6 @@
 ---
-title: Docker subscriptions and features
-description: Learn about Docker subscription tiers and their features
+title: Docker Core subscriptions and features
+description: Learn about Docker Core subscription tiers and their features
 keywords: subscription, personal, pro, team, business, features, docker core subscription, docker core
 aliases:
 - /subscription/details/
@@ -20,7 +20,7 @@ Docker maintains a [public roadmap](https://github.com/docker/roadmap) so subscr
 
 ## Docker Personal
 
-Docker Personal (formerly Docker Free) is ideal for open-source communities, individual developers, education, and small businesses, and includes the free use of Docker components including Docker Desktop and Docker Hub.
+**Docker Personal** (formerly Docker Free) is ideal for open-source communities, individual developers, education, and small businesses, and includes the free use of Docker components including Docker Desktop and Docker Hub.
 Docker Personal includes:
 
 - Unlimited public repositories
