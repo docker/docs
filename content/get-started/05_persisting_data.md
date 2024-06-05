@@ -136,7 +136,7 @@ To start the todo app container with the volume mounted:
 
 1. Select the search box at the top of Docker Desktop.
 2. In the search window, select the **Images** tab.
-3. In the search box, specify the container name, `getting-started`.
+3. In the search box, specify the image name, `getting-started`.
 
    > **Tip**
    >
