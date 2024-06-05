@@ -71,7 +71,7 @@ work at build time.
 Related information:
 
 - [Docker build cache](../cache/_index.md)
-- [Dockerfile best practices](../../develop/develop-images/dockerfile_best-practices.md)
+- [Dockerfile best practices](../../build/building/best-practices.md)
 
 ## Next steps
 

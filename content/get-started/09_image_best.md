@@ -212,7 +212,7 @@ Related information:
  - [.dockerignore](../build/building/context.md#dockerignore-files)
  - [Dockerfile reference](../reference/dockerfile.md)
  - [Build with Docker guide](../build/guide/index.md)
- - [Dockerfile best practices](../develop/develop-images/dockerfile_best-practices.md)
+ - [Dockerfile best practices](../build/building/best-practices.md)
 
 ## Next steps
 

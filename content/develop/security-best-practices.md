@@ -113,7 +113,7 @@ Consider the following best practices when rebuilding an image:
   vulnerabilities. Based on that, automate the rebuilding of images if necessary.
 
 For detailed best practices and methods for building efficient images, see
-[Dockerfile best practices](develop-images/dockerfile_best-practices.md).
+[Image-building best practices](/build/building/best-practices).
 
 ## Check your image for vulnerabilities
 
