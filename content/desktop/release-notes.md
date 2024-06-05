@@ -39,7 +39,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 - [Docker Scout CLI v1.9.1](https://github.com/docker/scout-cli/releases/tag/v1.9.1)
 - [Docker Compose v2.27.1](https://github.com/docker/compose/releases/tag/v2.27.1)
 - [Docker Buildx v0.14.1](https://github.com/docker/buildx/releases/tag/v0.14.1)
-- [Containerd v1.6.32](https://github.com/containerd/containerd/releases/tag/v1.6.32)
+- [Containerd v1.6.33](https://github.com/containerd/containerd/releases/tag/v1.6.33)
 - [Credential Helpers v0.8.2](https://github.com/docker/docker-credential-helpers/releases/tag/v0.8.2)
 - [NVIDIA Container Toolkit v1.15.0](https://github.com/NVIDIA/nvidia-container-toolkit/releases/tag/v1.15.0)
 - [Go 1.22.4](https://github.com/golang/go/releases/tag/go1.22.4)
