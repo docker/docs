@@ -211,7 +211,7 @@ The `install` command accepts the following flags:
 - `--hyper-v-default-data-root=<path>`: Specifies the default location for the Hyper-V VM disk. 
 - `--windows-containers-default-data-root=<path>`: Specifies the default location for the Windows containers.
 - `--wsl-default-data-root=<path>`: Specifies the default location for the WSL distribution disk.
-- `--always-run-service`: After installation completes, starts `Docker Desktop service` and sets the service startup type to Automatic. This circumvents the need for administrator privileges, which are otherwise necessary to start 'Docker Desktop service`. `Docker Desktop service` is required by Windows containers and Hyper-V backend.
+- `--always-run-service`: After installation completes, starts `com.docker.service` and sets the service startup type to Automatic. This circumvents the need for administrator privileges, which are otherwise necessary to start `com.docker.service`. `com.docker.service` is required by Windows containers and Hyper-V backend.
 
 > **Note**
 >
