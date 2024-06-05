@@ -87,7 +87,7 @@ Beginning with Docker Desktop 4.3.0, we have removed the hard requirement to ins
 
    For more information, see [Docker Desktop Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement). We recommend that you also read the [FAQs](https://www.docker.com/pricing/faq).
 6. From the installation window, select either: 
-   - **Use recommended settings (Requires password)**. This let's Docker Desktop automatically set the necessary configuration settings. 
+   - **Use recommended settings (Requires password)**. This lets Docker Desktop automatically set the necessary configuration settings. 
    - **Use advanced settings**. You can then set the location of the Docker CLI tools either in the system or user directory, enable the default Docker socket, and enable privileged port mapping. See [Settings](../settings/mac.md#advanced), for more information and how to set the location of the Docker CLI tools.
 7. Select **Finish**. If you have applied any of the above configurations that require a password in step 6, enter your password to confirm your choice.  
 
