@@ -35,7 +35,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### Upgrades
 
-- [Docker Engine and CLI v26.1.3](https://github.com/moby/moby/releases/tag/v26.1.3).
+- [Docker Engine and CLI v26.1.4](https://github.com/moby/moby/releases/tag/v26.1.4).
 - [Docker Scout CLI v1.9.1](https://github.com/docker/scout-cli/releases/tag/v1.9.1)
 - [Docker Compose v2.27.1](https://github.com/docker/compose/releases/tag/v2.27.1)
 - [Docker Buildx v0.14.1](https://github.com/docker/buildx/releases/tag/v0.14.1)
