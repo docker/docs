@@ -42,6 +42,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 - [Containerd v1.6.32](https://github.com/containerd/containerd/releases/tag/v1.6.32)
 - [Credential Helpers v0.8.2](https://github.com/docker/docker-credential-helpers/releases/tag/v0.8.2)
 - [NVIDIA Container Toolkit v1.15.0](https://github.com/NVIDIA/nvidia-container-toolkit/releases/tag/v1.15.0)
+- [Go 1.22.4](https://github.com/golang/go/releases/tag/go1.22.4)
 - Linux kernel `v6.6.31`
 
 ### Bug fixes and enhancements
