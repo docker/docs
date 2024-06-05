@@ -33,6 +33,7 @@ Before you can run the application, you need to get the application source code 
 
    ```text
    ├── getting-started-app/
+   │ ├── .dockerignore
    │ ├── package.json
    │ ├── README.md
    │ ├── spec/
