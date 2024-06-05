@@ -24,7 +24,7 @@
 
 > **Important**
 >
-> SSO has Just-In-Time (JIT) Provisioning enabled by default. This means your users are auto-provisioned to your organization.
+> SSO has Just-In-Time (JIT) Provisioning enabled by default unless you have [disabled it](/security/for-admins/provisioning/just-in-time/#sso-authentication-with-jit-provisioning-disabled). This means your users are auto-provisioned to your organization.
 >
 > You can change this on a per-app basis. To prevent auto-provisioning users, you can create a security group in your IdP and configure the SSO app to authenticate and authorize only those users that are in the security group. Follow the instructions provided by your IdP:
 >
@@ -54,10 +54,5 @@ To remove a user:
 4. Follow the on-screen instructions to remove the user.
 
 ### Manage how users are provisioned
-
-> **Beta feature**
->
-> Optional Just-in-Time (JIT) provisioning is available in [beta](/release-lifecycle/#beta) when you use the Admin Console and SCIM is enabled. With this feature, you have the option to disable JIT provisioning. See [SSO authentication with JIT provisioning disabled](/security/for-admins/provisioning/just-in-time/#sso-authentication-with-jit-provisioning-disabled).
-{ .experimental }
 
 {{ $provisioning_steps }}
