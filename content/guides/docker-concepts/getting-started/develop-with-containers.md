@@ -14,8 +14,6 @@ Now that you have Docker Desktop installed, you’re are ready to do some applic
 2. Make changes to the backend and frontend
 3. See the changes immediately
 
-Enough talk... time to get started.
-
 ## Try it out
 
 In this hands-on guide, you'll learn how to develop with containers.
