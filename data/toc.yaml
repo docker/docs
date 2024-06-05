@@ -1115,8 +1115,6 @@ Manuals:
            title: Install and configure
          - path: /desktop/install/msi/use-intune/
            title: Use Intune
-         - path: /desktop/install/msi/analytics/
-           title: Analytics
          - path: /desktop/install/msi/faq/
            title: FAQs
        - path: /desktop/windows/permission-requirements/
