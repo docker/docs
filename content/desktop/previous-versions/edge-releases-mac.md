@@ -6,6 +6,7 @@ toc_min: 1
 toc_max: 2
 aliases:
 - /desktop/mac/release-notes/edge-releases/
+sitemap: false
 ---
 
 This page contains information about Docker Desktop Edge releases. Edge releases give you early access to our newest features. Note that some of the features may be experimental, and some of them may not ever reach the Stable release. 
