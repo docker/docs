@@ -27,14 +27,15 @@ aliases:
 
 This page contains the download URL, information about system requirements, and instructions on how to install Docker Desktop for Windows.
 
-{{< button text="Docker Desktop for Windows" url="https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe" >}}
+{{< button text="Docker Desktop for Windows - x86_64" url="https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64" >}}
+{{< button text="Docker Desktop for Windows - Arm (Beta)" url="https://desktop.docker.com/win/main/arm64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-arm64" >}}
 
 _For checksums, see [Release notes](../release-notes.md)_
 
 ## System requirements
 
 {{< tabs >}}
-{{< tab name="WSL 2 backend" >}}
+{{< tab name="WSL 2 backend, x86_64" >}}
 
 - WSL version 1.1.3.0 or later.
 - Windows 11 64-bit: Home or Pro version 21H2 or higher, or Enterprise or Education version 21H2 or higher.
@@ -45,7 +46,6 @@ _For checksums, see [Release notes](../release-notes.md)_
   [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
 - The following hardware prerequisites are required to successfully run
   WSL 2 on Windows 10 or Windows 11:
-
   - 64-bit processor with [Second Level Address Translation (SLAT)](https://en.wikipedia.org/wiki/Second_Level_Address_Translation)
   - 4GB system RAM
   - Enable hardware virtualization in BIOS. For more information, see
@@ -64,15 +64,12 @@ For more information on setting up WSL 2 with Docker Desktop, see [WSL](../wsl/_
 > Docker only supports Docker Desktop on Windows for those versions of Windows that are still within [Microsoft’s servicing timeline](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet). Docker Desktop is not supported on server versions of Windows, such as Windows Server 2019 or Windows Server 2022. For more information on how to run containers on Windows Server, see [Microsoft's official documentation](https://learn.microsoft.com/virtualization/windowscontainers/quick-start/set-up-environment).
 
 {{< /tab >}}
-{{< tab name="Hyper-V backend and Windows containers" >}}
+{{< tab name="Hyper-V backend, x86_64" >}}
 
-- Windows 11 64-bit: Pro version 21H2 or higher, or Enterprise or Education version 21H2 or higher.
+- Windows 11 64-bit: Home or Pro version 21H2 or higher, or Enterprise or Education version 21H2 or higher.
 - Windows 10 64-bit:
   - We recommend Home or Pro 22H2 (build 19045) or higher, or Enterprise or Education 22H2 (build 19045) or higher. 
   - Minimum required is Home or Pro 21H2 (build 19044) or higher, or Enterprise or Education 21H2 (build 19044) or higher.
-
-  For Windows 10 and Windows 11 Home, see the system requirements in the WSL 2 backend tab.
-
 - Turn on Hyper-V and Containers Windows features.
 - The following hardware prerequisites are required to successfully run Client
   Hyper-V on Windows 10:
@@ -92,6 +89,32 @@ For more information on setting up WSL 2 with Docker Desktop, see [WSL](../wsl/_
 > **Note**
 >
 > Docker only supports Docker Desktop on Windows for those versions of Windows that are still within [Microsoft’s servicing timeline](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet). Docker Desktop is not supported on server versions of Windows, such as Windows Server 2019 or Windows Server 2022. For more information on how to run containers on Windows Server, see [Microsoft's official documentation](https://learn.microsoft.com/virtualization/windowscontainers/quick-start/set-up-environment).
+
+{{< /tab >}}
+{{< tab name="WSL 2 backend, Arm (Beta)" >}}
+
+- WSL version 1.1.3.0 or later.
+- Windows 11 64-bit: Home or Pro version 21H2 or higher, or Enterprise or Education version 21H2 or higher.
+- Windows 10 64-bit: 
+  - We recommend Home or Pro 22H2 (build 19045) or higher, or Enterprise or Education 22H2 (build 19045) or higher. 
+  - Minimum required is Home or Pro 21H2 (build 19044) or higher, or Enterprise or Education 21H2 (build 19044) or higher.
+- Turn on the WSL 2 feature on Windows. For detailed instructions, refer to the
+  [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
+- The following hardware prerequisites are required to successfully run
+  WSL 2 on Windows 10 or Windows 11:
+  - 64-bit processor with [Second Level Address Translation (SLAT)](https://en.wikipedia.org/wiki/Second_Level_Address_Translation)
+  - 4GB system RAM
+  - Enable hardware virtualization in BIOS. For more information, see
+    [Virtualization](../troubleshoot/topics.md#virtualization).
+
+> **Important**
+>
+> The installer and the [privileged service](../windows/permission-requirements.md#privileged-helper) are still built for `x86_64`. These are not performance critical components and currently run with [`x86` emulation](https://learn.microsoft.com/en-us/windows/arm/apps-on-arm-x86-emulation#wow64-apis).
+> 
+> Also, the following features are not supported:
+> - Hyper-V backend
+> - Windows containers
+{ .important }
 
 {{< /tab >}}
 {{< /tabs >}}
