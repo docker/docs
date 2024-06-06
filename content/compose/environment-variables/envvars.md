@@ -161,7 +161,7 @@ When enabled, Compose displays a navigation menu where you can choose to open th
 * Supported values:
   * `true` or `1`, to enable,
   * `false` or `0`, to disable.
-* Defaults to: `0`.
+* Defaults to: `1` if you obtained Docker Compose through Docker Desktop, otherwise default is `0`.
 
 > **Note**
 >
