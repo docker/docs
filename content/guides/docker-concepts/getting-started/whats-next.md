@@ -1,7 +1,7 @@
 ---
 title: What's next 
 keywords: concepts, build, images, container, docker desktop
-description: The following sections provide a step-by-step guide to understanding core Docker concepts, building images and running containers.
+description: Explore step-by-step guides to hep you understand core Docker concepts, building images, and running containers.
 notoc: true
 
 the-basics:
