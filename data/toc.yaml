@@ -30,8 +30,8 @@ Guides:
   section:
   - sectiontitle: "Getting started"
     section:
-    - title: "Get Docker"
-      path: /guides/docker-concepts/getting-started/get-docker/
+    - title: "Get Docker Desktop"
+      path: /guides/docker-concepts/getting-started/get-docker-desktop/
     - title: "Develop with containers"
       path: /guides/docker-concepts/getting-started/develop-with-containers/
     - title: "Build and push your first image"

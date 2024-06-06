@@ -186,8 +186,6 @@ Going forward, you’ll want to remember that:
 > organizations to run their own private registries. Quite often, trusted content 
 > is mirrored (or copied) from Docker Hub into these private registries.
 >
-> Features such as [Registry Access Management](/security/for-admins/registry-access-management/) give organizational admins the ability to choose 
-> the authorized registries developers can pull from in Docker Desktop, ensuring only vetted and approved images are used.
 
 
 

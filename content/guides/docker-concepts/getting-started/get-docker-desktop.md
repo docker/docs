@@ -1,5 +1,5 @@
 ---
-title: Get Docker 
+title: Get Docker Desktop 
 keywords: concepts, container, docker desktop
 description: This concept page will teach you download Docker Desktop and install it on Windows, Mac, and Linux
 ---
