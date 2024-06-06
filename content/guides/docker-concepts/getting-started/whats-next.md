@@ -12,7 +12,7 @@ the-basics:
   description: Learn the basics of image layers. 
   link: /guides/docker-concepts/the-basics/what-is-an-image/
 - title: What is a registry?
-  description: Learn about container registries, explore their interoperability, and have you interact with registries. 
+  description: Learn about container registries, explore their interoperability, and interact with registries. 
   link: /guides/docker-concepts/the-basics/what-is-a-registry/
 - title: What is Docker Compose?
   description: Gain a better understanding of Docker Compose.
