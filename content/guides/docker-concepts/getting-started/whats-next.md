@@ -55,7 +55,7 @@ running-containers:
 
 The following sections provide step-by-step guides to help you understand core Docker concepts, building images, and running containers.
 
-## The Basics
+## The basics
 
 Get started learning the core concepts of containers, images, registries, and Docker Compose.
 
