@@ -7,7 +7,7 @@ aliases:
 - /docker-hub/manage-a-team/
 ---
 
-You can manage teams for your organization in Docker Hub.
+You can manage teams for your organization in Docker Hub and the Docker Admin Console.
 
 A team is a group of Docker users that belong to an organization. An
 organization can have multiple teams. An
@@ -19,10 +19,27 @@ manage users, teams, and repositories in the organization by assigning them the 
 
 ## Create a team
 
+{{< tabs >}}
+{{< tab name="Docker Hub" >}}
+
 1. Go to **Organizations** in Docker Hub, and select your organization.
 2. Select the **Teams** tab and then select **Create Team**.
 3. Fill out your team's information and select **Create**.
 4. [Add members to your team](members.md#add-a-member-to-a-team)
+
+{{< /tab >}}
+{{< tab name="Admin Console" >}}
+
+{{< include "admin-early-access.md" >}}
+
+1. In Admin Console, select your organization.
+2. In the **User management** section, select **Teams**.
+3. Select **Create team**.
+4. Fill out your team's information and select **Create**.
+4. [Add members to your team](members.md#add-a-member-to-a-team)
+
+{{< /tab >}}
+{{< /tabs >}}
 
 ## Organization owner
 
