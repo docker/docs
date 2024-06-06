@@ -69,6 +69,6 @@ Craft optimized container images with Dockerfiles, build cache, and multi-stage 
 
 ## Running containers
 
-Master essential techniques for exposing ports, overriding defaults, persisting data, sharing files and managing multi-container applications.
+Master essential techniques for exposing ports, overriding defaults, persisting data, sharing files, and managing multi-container applications.
 
 {{< grid items="running-containers" >}}
