@@ -21,11 +21,82 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1) to see what's coming next.
 
+## 4.31.0
+
+{{< release-date date="2024-06-06" >}}
+
+{{< desktop-install all=true beta_win_arm=true version="4.31.0" build_path="/153195/" >}}
+
+### New
+
+- [Air-Gapped Containers](desktop/hardened-desktop/air-gapped-containers.md) is now generally available. 
+- Docker Compose File Viewer shows your Compose YAML with syntax highlighting and contextual links to relevant docs (Beta, progressive rollout).
+- New Sidebar user experience.
+
+### Upgrades
+
+- [Docker Engine and CLI v26.1.4](https://github.com/moby/moby/releases/tag/v26.1.4).
+- [Docker Scout CLI v1.9.1](https://github.com/docker/scout-cli/releases/tag/v1.9.1)
+- [Docker Compose v2.27.1](https://github.com/docker/compose/releases/tag/v2.27.1)
+- [Docker Buildx v0.14.1](https://github.com/docker/buildx/releases/tag/v0.14.1)
+- [Containerd v1.6.33](https://github.com/containerd/containerd/releases/tag/v1.6.33)
+- [Credential Helpers v0.8.2](https://github.com/docker/docker-credential-helpers/releases/tag/v0.8.2)
+- [NVIDIA Container Toolkit v1.15.0](https://github.com/NVIDIA/nvidia-container-toolkit/releases/tag/v1.15.0)
+- [Go 1.22.4](https://github.com/golang/go/releases/tag/go1.22.4)
+- Linux kernel `v6.6.31`
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Newer releases are now displayed in the **Software updates** settings tab when an update has already been downloaded.
+- Added `proxyEnableKerberosNTLM` config to `settings.json` to enable fallback to basic proxy authentication if Kerberos/NTLM environment is not properly set up.
+- Fixed a bug where Docker Debug was not working properly with Enhanced Container Isolation enabled.
+- Fixed a bug where UDP responses were not truncated properly.
+- Fixed a bug where the **Update** screen was hidden when using [Settings Management](hardened-desktop/settings-management/_index.md).
+- Fixed a bug where proxy settings defined in `admin-settings.json` were not applied correctly on startup.
+- Fixed a bug where the **Manage Synchronized file shares with Compose** toggle did not correctly reflect the value with the feature.
+- Fixed a bug where a bind mounted file modified on host is not updated after the container restarts, when gRPC FUSE file sharing is used on macOS and on Windows with Hyper-V. Fixes [docker/for-mac#7274](https://github.com/docker/for-mac/issues/7274), [docker/for-win#14060](https://github.com/docker/for-win/issues/14060).
+
+#### For Windows
+
+- Changed the `--allowed-org` installer flag to write a policy registry key instead of to the `registry.json`.
+
+#### For Mac
+
+- Moved the setting **Automatically check configuration** from **Advanced** settings to **General** settings.
+- Improved VirtioFS caching by implementing longer attributes timeout and invalidation.
+
+#### For Linux
+
+- Added Linux headers to the VM, to ease the compilation of custom kernel modules.
+
+### Security
+
+#### For all platforms
+
+- Fixed a security bug in Enhanced Container Isolation (ECI) mode where a user could create Docker volumes sourced from restricted directories inside the Docker Desktop VM and mount them into containers, thereby giving the container access to such restricted VM directories.
+- By default, only extensions listed in the marketplace can be installed in Docker Desktop. This can be changed in Docker Desktop's settings. Extension developers will need to change this option in order to test their extensions.
+
+### For Windows
+
+- Fixed [CVE-2024-5652](https://www.cve.org/cverecord?id=CVE-2024-5652) in which a user in the `docker-users` group can cause a Windows Denial-of-Service through the `exec-path` Docker daemon config option in Windows containers mode. This vulnerability was discovered by Hashim Jawad ([@ihack4falafel](https://github.com/ihack4falafel)) working with Trend Micro Zero Day Initiative.
+
+### Deprecation
+
+#### For all platforms
+
+- The CLI binary that used to be shipped as `com.docker.cli` is now shipped simply as `docker`. This release leaves the CLI binary as `com.docker.cli`, but it will be removed next release.
+
+#### For Windows
+
+- Removed support for legacy version packs from the WSL2 engine.
+
 ## 4.30.0
 
 {{< release-date date="2024-05-06" >}}
 
-{{< desktop-install all=true version="4.30.0" build_path="/149282/" >}}
+{{< desktop-install all=true beta_win_arm=true version="4.30.0" build_path="/149282/" >}}
 
 ### New
 
