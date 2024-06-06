@@ -63,7 +63,7 @@ Get started learning the core concepts of containers, images, registries, and Do
 
 ## Building images
 
-Craft optimized container images with Dockerfiles, build cache and Multi-stage builds.
+Craft optimized container images with Dockerfiles, build cache, and multi-stage builds.
 
 {{< grid items="building-images" >}}
 
