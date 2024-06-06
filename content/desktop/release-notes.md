@@ -23,7 +23,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ## 4.31.0
 
-{{< release-date date="2024-05-30" >}}
+{{< release-date date="2024-06-06" >}}
 
 {{< desktop-install all=true beta_win_arm=true version="4.31.0" build_path="/153195/" >}}
 
@@ -49,13 +49,13 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 #### For all platforms
 
-- Newer releases are now displayed in the **Software updates** when an update has already been downloaded.
-- Added `proxyEnableKerberosNTLM` config to `settings.json` to enable fallback to Basic proxy authentication if Kerberos/NTLM environment is not properly set up.
+- Newer releases are now displayed in the **Software updates** settings tab when an update has already been downloaded.
+- Added `proxyEnableKerberosNTLM` config to `settings.json` to enable fallback to basic proxy authentication if Kerberos/NTLM environment is not properly set up.
 - Fixed a bug where Docker Debug was not working properly with Enhanced Container Isolation enabled.
 - Fixed a bug where UDP responses were not truncated properly.
-- Fixed a bug where the Update screen was hidden when using [Settings Management](hardened-desktop/settings-management/_index.md).
+- Fixed a bug where the **Update** screen was hidden when using [Settings Management](hardened-desktop/settings-management/_index.md).
 - Fixed a bug where proxy settings defined in `admin-settings.json` were not applied correctly on startup.
-- Fixed a bug where "Manage Synchronized file shares with Compose" toggle was not correctly reflecting the value with the feature.
+- Fixed a bug where the **Manage Synchronized file shares with Compose** toggle did not correctly reflect the value with the feature.
 - Fixed a bug where a bind mounted file modified on host is not updated after the container restarts, when gRPC FUSE file sharing is used on macOS and on Windows with Hyper-V. Fixes [docker/for-mac#7274](https://github.com/docker/for-mac/issues/7274), [docker/for-win#14060](https://github.com/docker/for-win/issues/14060).
 
 #### For Windows
@@ -76,7 +76,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 #### For all platforms
 
 - Fixed a security bug in Enhanced Container Isolation (ECI) mode where a user could create Docker volumes sourced from restricted directories inside the Docker Desktop VM and mount them into containers, thereby giving the container access to such restricted VM directories.
-- By default, only extensions listed in the marketplace can be installed in Docker Desktop. This can be changed in Docker Desktop settings. Extension developers will need to change this option in order to test their extensions.
+- By default, only extensions listed in the marketplace can be installed in Docker Desktop. This can be changed in Docker Desktop's settings. Extension developers will need to change this option in order to test their extensions.
 
 ### For Windows
 
