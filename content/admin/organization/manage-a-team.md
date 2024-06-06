@@ -14,32 +14,7 @@ organization can have multiple teams. An
 organization owner can then create new teams and add members to an existing team
 using their Docker ID or email address and by selecting a team the user should be part of. Members aren't required to be part of a team to be associated with an organization.
 
-The organization owner can add additional organization owners to help them
-manage users, teams, and repositories in the organization by assigning them the owner role.
-
-## Create a team
-
-{{< tabs >}}
-{{< tab name="Docker Hub" >}}
-
-1. Go to **Organizations** in Docker Hub, and select your organization.
-2. Select the **Teams** tab and then select **Create Team**.
-3. Fill out your team's information and select **Create**.
-4. [Add members to your team](members.md#add-a-member-to-a-team)
-
-{{< /tab >}}
-{{< tab name="Admin Console" >}}
-
-{{< include "admin-early-access.md" >}}
-
-1. In Admin Console, select your organization.
-2. In the **User management** section, select **Teams**.
-3. Select **Create team**.
-4. Fill out your team's information and select **Create**.
-4. [Add members to your team](members.md#add-a-member-to-a-team)
-
-{{< /tab >}}
-{{< /tabs >}}
+The organization owner can add additional organization owners to help them manage users, teams, and repositories in the organization by assigning them the owner role.
 
 ## Organization owner
 
@@ -55,6 +30,30 @@ users who'd like to have a separate Docker ID for company use through SSO
 enforcement.
 
 The org owner can also add additional org owners to help them manage users, teams, and repositories in the organization.
+
+## Create a team
+
+{{< tabs >}}
+{{< tab name="Docker Hub" >}}
+
+1. Go to **Organizations** in Docker Hub, and select your organization.
+2. Select the **Teams** tab and then select **Create Team**.
+3. Fill out your team's information and select **Create**.
+4. [Add members to your team](members.md#add-a-member-to-a-team).
+
+{{< /tab >}}
+{{< tab name="Admin Console" >}}
+
+{{< include "admin-early-access.md" >}}
+
+1. In Admin Console, select your organization.
+2. In the **User management** section, select **Teams**.
+3. Select **Create team**.
+4. Fill out your team's information and select **Create**.
+4. [Add members to your team](members.md#add-a-member-to-a-team).
+
+{{< /tab >}}
+{{< /tabs >}}
 
 ## Configure repository permissions for a team
 
@@ -112,6 +111,34 @@ To view a team's permissions across all repositories:
 
 1. Open **Organizations** > **_Your Organization_** > **Teams** > **_Team Name_**.
 2. Select the **Permissions** tab, where you can view the repositories this team can access.
+
+## Delete a team
+
+Organization owners can delete a team in Docker Hub or Admin Console. When you remove a team from your organization, this action revokes the members' access to the team's permitted resources. It won't remove users from other teams that they belong to, nor will it delete any resources.
+
+{{< tabs >}}
+{{< tab name="Docker Hub" >}}
+
+1. Go to **Organizations** in Docker Hub, and select your organization.
+2. Select the **Teams** tab.
+3. Select the name of the team that you want to delete.
+4. Select **Settings**.
+5. Select **Delete Team**.
+6. Review the confirmation message, then select **Delete**.
+
+{{< /tab >}}
+{{< tab name="Admin Console" >}}
+
+{{< include "admin-early-access.md" >}}
+
+1. In Admin Console, select your organization.
+2. In the **User management** section, select **Teams**.
+3. Select the **Actions** icon next to the name of the team you want to delete.
+4. Select **Delete team**.
+5. Review the confirmation message, then select **Delete**.
+
+{{< /tab >}}
+{{< /tabs >}}
 
 ## More resources
 
