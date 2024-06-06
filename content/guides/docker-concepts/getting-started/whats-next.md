@@ -23,7 +23,7 @@ building-images:
   description: Learn about the layers of container images.
   link: /guides/docker-concepts/building-images/understanding-image-layers/
 - title: Writing a Dockerfile
-  description: Learn how to create image using Dockerfile.
+  description: Learn how to create an image using a Dockerfile.
   link: /guides/docker-concepts/building-images/writing-a-dockerfile/
 - title: Build, tag and publish an image
   description: Learn how to build, tag, and publish an image to Docker Hub or any other registry.
