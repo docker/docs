@@ -14,7 +14,7 @@ the-basics:
 - title: What is a registry?
   description: Learn about container registries, explore their interoperability, and have you interact with registries. 
   link: /guides/docker-concepts/the-basics/what-is-a-registry/
-- title: What is Docker Compose
+- title: What is Docker Compose?
   description: Gain a better understanding of Docker Compose.
   link: /guides/docker-concepts/the-basics/what-is-docker-compose/
 
