@@ -53,7 +53,7 @@ running-containers:
   link: /guides/docker-concepts/running-containers/multi-container-applications/
 ---
 
-The following sections provide a step-by-step guide to understanding core Docker concepts, building images and running containers.
+The following sections provide step-by-step guides to help you understand core Docker concepts, building images, and running containers.
 
 ## The Basics
 
