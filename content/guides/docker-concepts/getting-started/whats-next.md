@@ -20,7 +20,7 @@ the-basics:
 
 building-images:
 - title: Understanding image layers 
-  description: Learn about the layers of container image.
+  description: Learn about the layers of container images.
   link: /guides/docker-concepts/building-images/understanding-image-layers/
 - title: Writing a Dockerfile
   description: Learn how to create image using Dockerfile.
