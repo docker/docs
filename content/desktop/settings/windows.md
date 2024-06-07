@@ -234,6 +234,10 @@ Kerberos and NTLM proxy authentication are available for Business subscribers wi
 
 Developers are no longer interrupted by prompts for proxy credentials as authentication is centralized. This also reduces the risk of account lockouts due to incorrect sign in attempts.
 
+If your proxy offers multiple authentication schemes in 407(Proxy Authentication Required) response, Docker Desktop selects the strongest authentication scheme (Kerberos, NTLM, Basic, in that order). However, if your Kerberos/NTLM environment is not properly configured, Docker Desktop may fail to authenticate with the proxy, as it will attempt to use the strongest scheme. 
+
+To temporarily resolve this issue until your Kerberos/NTLM environment is fixed, you can fallback to the Basic authentication scheme by setting `proxyEnableKerberosNTLM` to `false` in the `settings.json` file located in the `%APPDATA%/Docker/` directory. Quit Docker Desktop and then start it again to effect this change. The `proxyEnableKerberosNTLM` setting is available in Docker Desktop version 4.31 and later.
+
 > **Note**
 >
 > Docker Desktop also supports the use of [SOCKS5 proxies](../networking.md#socks5-proxy-support).
