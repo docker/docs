@@ -92,6 +92,12 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 - Removed support for legacy version packs from the WSL2 engine.
 
+### Known Issues
+
+#### For Windows
+
+- When upgrading to Docker Desktop 4.31.0, existing containers, images and volumes become invisible for users that created those containers and images using Docker Desktop 4.8.0 or lower, on Windows hosts with WSL only. The data is not lost, it just becomes invisible to Docker Desktop 4.31.0. If impacted, please downgrade to 4.30 or below, or upgrade to 4.31.1. The issue does not impact Docker Desktop on Windows Hype-V, Mac or Linux. For more information see: [docker/for-win#14118](https://github.com/docker/for-win/issues/14118).
+
 ## 4.30.0
 
 {{< release-date date="2024-05-06" >}}
