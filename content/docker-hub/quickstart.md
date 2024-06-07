@@ -16,7 +16,6 @@ aliases:
 - /docker-cloud/cloud-swarm/
 - /docker-cloud/cloud-swarm/using-swarm-mode/
 - /docker-cloud/cloud-swarm/register-swarms/
-- /docker-cloud/cloud-swarm/register-swarms/
 - /docker-cloud/cloud-swarm/create-cloud-swarm-aws/
 - /docker-cloud/cloud-swarm/create-cloud-swarm-azure/
 - /docker-cloud/cloud-swarm/connect-to-swarm/

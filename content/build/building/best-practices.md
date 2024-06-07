@@ -1,11 +1,255 @@
 ---
-description: Hints, tips and guidelines for writing clean, reliable Dockerfile instructions
-keywords: parent image, images, dockerfile, best practices, hub, official image
-title: Best practices for Dockerfile instructions 
+description: Hints, tips and guidelines for writing clean, reliable Dockerfiles
+keywords: base images, dockerfile, best practices, hub, official image
+title: Building best practices
+tags: [Best practices]
+aliases:
+  - /articles/dockerfile_best-practices/
+  - /engine/articles/dockerfile_best-practices/
+  - /docker-cloud/getting-started/intermediate/optimize-dockerfiles/
+  - /docker-cloud/tutorials/optimize-dockerfiles/
+  - /engine/userguide/eng-image/dockerfile_best-practices/
+  - /develop/develop-images/dockerfile_best-practices/
+  - /develop/develop-images/guidelines/
+  - /develop/develop-images/instructions/
+  - /develop/dev-best-practices/
+  - /develop/security-best-practices/
 ---
 
-These recommendations are designed to help you create an efficient and
-maintainable Dockerfile.
+## Use multi-stage builds
+
+Multi-stage builds let you reduce the size of your final image, by creating a
+cleaner separation between the building of your image and the final output.
+Split your Dockerfile instructions into distinct stages to make sure that the
+resulting output only contains the files that's needed to run the application.
+
+Using multiple stages can also let you build more efficiently by executing
+build steps in parallel.
+
+See [Multi-stage builds](../../build/building/multi-stage.md) for more
+information.
+
+### Create reusable stages
+
+If you have multiple images with a lot in common, consider creating a reusable
+stage that includes the shared components, and basing your unique stages on
+that. Docker only needs to build the common stage once. This means that your derivative images use memory
+on the Docker host more efficiently and load more quickly.
+
+It's also easier to maintain a common base stage ("Don't repeat yourself"),
+than it is to have multiple different stages doing similar things.
+
+## Choose the right base image
+
+The first step towards achieving a secure image is to choose the right base
+image. When choosing an image, ensure it's built from a trusted source and keep
+it small.
+
+- [Docker Official Images](https://hub.docker.com/search?image_filter=official)
+  are some of the most secure and dependable images on Docker Hub. Typically,
+  Docker Official images have few or no packages containing CVEs, and are
+  thoroughly reviewed by Docker and project maintainers.
+
+- [Verified Publisher](https://hub.docker.com/search?image_filter=store) images
+  are high-quality images published and maintained by the organizations
+  partnering with Docker, with Docker verifying the authenticity of the content
+  in their repositories.
+
+- [Docker-Sponsored Open Source](https://hub.docker.com/search?image_filter=open_source)
+  are published and maintained by open source projects sponsored by Docker
+  through an [open source program](../../trusted-content/dsos-program).
+
+When you pick your base image, look out for the badges indicating that the
+image is part of these programs.
+
+![Docker Hub Official and Verified Publisher images](../images/hub-official-images.webp)
+
+When building your own image from a Dockerfile, ensure you choose a minimal base
+image that matches your requirements. A smaller base image not only offers
+portability and fast downloads, but also shrinks the size of your image and
+minimizes the number of vulnerabilities introduced through the dependencies.
+
+You should also consider using two types of base image: one for building and
+unit testing, and another (typically slimmer) image for production. In the
+later stages of development, your image may not require build tools such as
+compilers, build systems, and debugging tools. A small image with minimal
+dependencies can considerably lower the attack surface.
+
+## Rebuild your images often
+
+Docker images are immutable. Building an image is taking a snapshot of that
+image at that moment. That includes any base images, libraries, or other
+software you use in your build. To keep your images up-to-date and secure, make
+sure to rebuild your image often, with updated dependencies.
+
+To ensure that you're getting the latest versions of dependencies in your build,
+you can use the `--no-cache` option to avoid cache hits.
+
+```console
+$ docker build --no-cache -t my-image:my-tag .
+```
+
+The following Dockerfile uses the `24.04` tag of the `ubuntu` image. Over time,
+that tag may resolve to a different underlying version of the `ubuntu` image,
+as the publisher rebuilds the image with new security patches and updated
+libraries. Using the `--no-cache`, you can avoid cache hits and ensure a fresh
+download of base images and dependencies.
+
+```dockerfile
+# syntax=docker/dockerfile:1
+FROM ubuntu:24.04
+RUN apt-get -y update && apt-get install -y python
+```
+
+Also consider [pinning base image versions](#pin-base-image-versions).
+
+## Exclude with .dockerignore
+
+To exclude files not relevant to the build, without restructuring your source
+repository, use a `.dockerignore` file. This file supports exclusion patterns
+similar to `.gitignore` files. For information on creating one, see
+[Dockerignore file](../../build/building/context.md#dockerignore-files).
+
+## Create ephemeral containers
+
+The image defined by your Dockerfile should generate containers that are as
+ephemeral as possible. Ephemeral means that the container can be stopped
+and destroyed, then rebuilt and replaced with an absolute minimum set up and
+configuration.
+
+Refer to [Processes](https://12factor.net/processes) under _The Twelve-factor App_
+methodology to get a feel for the motivations of running containers in such a
+stateless fashion.
+
+## Don't install unnecessary packages
+
+Avoid installing extra or unnecessary packages just because they might be nice to have. For example, you don’t need to include a text editor in a database image.
+
+When you avoid installing extra or unnecessary packages, your images have reduced complexity, reduced dependencies, reduced file sizes, and reduced build times.
+
+## Decouple applications
+
+Each container should have only one concern. Decoupling applications into
+multiple containers makes it easier to scale horizontally and reuse containers.
+For instance, a web application stack might consist of three separate
+containers, each with its own unique image, to manage the web application,
+database, and an in-memory cache in a decoupled manner.
+
+Limiting each container to one process is a good rule of thumb, but it's not a
+hard and fast rule. For example, not only can containers be
+[spawned with an init process](../../engine/reference/run.md#specify-an-init-process),
+some programs might spawn additional processes of their own accord. For
+instance, [Celery](https://docs.celeryproject.org/) can spawn multiple worker
+processes, and [Apache](https://httpd.apache.org/) can create one process per
+request.
+
+Use your best judgment to keep containers as clean and modular as possible. If
+containers depend on each other, you can use [Docker container networks](../../network/index.md)
+to ensure that these containers can communicate.
+
+## Sort multi-line arguments
+
+Whenever possible, sort multi-line arguments alphanumerically to make maintenance easier.
+This helps to avoid duplication of packages and make the
+list much easier to update. This also makes PRs a lot easier to read and
+review. Adding a space before a backslash (`\`) helps as well.
+
+Here’s an example from the [buildpack-deps image](https://github.com/docker-library/buildpack-deps):
+
+```dockerfile
+RUN apt-get update && apt-get install -y \
+  bzr \
+  cvs \
+  git \
+  mercurial \
+  subversion \
+  && rm -rf /var/lib/apt/lists/*
+```
+
+## Leverage build cache
+
+When building an image, Docker steps through the instructions in your
+Dockerfile, executing each in the order specified. For each instruction, Docker
+checks whether it can reuse the instruction from the build cache.
+
+Understanding how the build cache works, and how cache invalidation occurs,
+is critical for ensuring faster builds.
+For more information about the Docker build cache and how to optimize your builds,
+see [Docker build cache](../../build/cache/_index.md).
+
+## Pin base image versions
+
+Image tags are mutable, meaning a publisher can update a tag to point to a new
+image. This is useful because it lets publishers update tags to point to
+newer versions of an image. And as an image consumer, it means you
+automatically get the new version when you re-build your image.
+
+For example, if you specify `FROM alpine:3.19` in your Dockerfile, `3.19`
+resolves to the latest patch version for `3.19`.
+
+```dockerfile
+# syntax=docker/dockerfile:1
+FROM alpine:3.19
+```
+
+At one point in time, the `3.19` tag might point to version 3.19.1 of the
+image. If you rebuild the image 3 months later, the same tag might point to a
+different version, such as 3.19.4. This publishing workflow is best practice,
+and most publishers use this tagging strategy, but it isn't enforced.
+
+The downside with this is that you're not guaranteed to get the same for every
+build. This could result in breaking changes, and it means you also don't have
+an audit trail of the exact image versions that you're using.
+
+To fully secure your supply chain integrity, you can pin the image version to a
+specific digest. By pinning your images to a digest, you're guaranteed to
+always use the same image version, even if a publisher replaces the tag with a
+new image. For example, the following Dockerfile pins the Alpine image to the
+same tag as earlier, `3.19`, but this time with a digest reference as well.
+
+```dockerfile
+# syntax=docker/dockerfile:1
+FROM alpine:3.19@sha256:13b7e62e8df80264dbb747995705a986aa530415763a6c58f84a3ca8af9a5bcd
+```
+
+With this Dockerfile, even if the publisher updates the `3.19` tag, your builds
+would still use the pinned image version:
+`13b7e62e8df80264dbb747995705a986aa530415763a6c58f84a3ca8af9a5bcd`.
+
+While this helps you avoid unexpected changes, it's also more tedious to have
+to look up and include the image digest for base image versions manually each
+time you want to update it. And you're opting out of automated security fixes,
+which is likely something you want to get.
+
+Docker Scout has a built-in [**Outdated base images**
+policy](../../scout/policy/_index.md#outdated-base-images) that checks for
+whether the base image version you're using is in fact the latest version. This
+policy also checks if pinned digests in your Dockerfile correspond to the
+correct version. If a publisher updates an image that you've pinned, the policy
+evaluation returns a non-compliant status, indicating that you should update
+your image.
+
+Docker Scout also supports an automated remediation workflow for keeping your
+base images up-to-date. When a new image digest is available, Docker Scout can
+automatically raise a pull request on your repository to update your
+Dockerfiles to use the latest version. This is better than using a tag that
+changes the version automatically, because you're in control and you have an
+audit trail of when and how the change occurred.
+
+For more information about automatically updating your base images with Docker
+Scout, see
+[Remediation](../../scout/policy/remediation.md#automatic-base-image-updates)
+
+## Build and test your images in CI
+
+When you check in a change to source control or create a pull request, use
+[GitHub Actions](../ci/github-actions/_index.md) or another CI/CD pipeline to
+automatically build and tag a Docker image and test it.
+
+## Dockerfile instructions
+
+Follow these recommendations on how to properly use the [Dockerfile instructions](../../reference/dockerfile.md)
+to create an efficient and maintainable Dockerfile.
 
 ### FROM
 

@@ -100,7 +100,7 @@ determine if it's up-to-date.
 If there's a policy violation, the recommended actions show how to update your
 base image version to the latest version, while also pinning the base image
 version to a specific digest. For more information, see [Pin base image
-versions](../../develop/develop-images/guidelines.md#pin-base-image-versions).
+versions](../../build/building/best-practices.md#pin-base-image-versions).
 
 ### GitHub integration enabled
 
@@ -121,7 +121,7 @@ image to a digest is important for reproducibility, and helps avoid unwanted
 changes from making their way into your supply chain.
 
 For more information about base image pinning, see [Pin base image
-versions](../../develop/develop-images/guidelines.md#pin-base-image-versions).
+versions](../../build/building/best-practices.md#pin-base-image-versions).
 
 <!--
   TODO(dvdksn): no support for the following, yet

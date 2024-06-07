@@ -3,8 +3,6 @@ title: Install Compose standalone
 description: How to install Docker Compose - Other Scenarios
 keywords: compose, orchestration, install, installation, docker, documentation
 toc_max: 3
-aliases:
-- /compose/install/other
 ---
 
 On this page you can find instructions on how to install Compose standalone on Linux or Windows Server, from the command line.
