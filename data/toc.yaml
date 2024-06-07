@@ -228,24 +228,6 @@ Guides:
     - path: /guides/use-case/databases/
       title: Use containerized databases
 
-
-- sectiontitle: Develop with Docker
-  section:
-  - path: /develop/
-    title: Overview
-  - path: /develop/dev-best-practices/
-    title: Development best practices
-  - sectiontitle: Dockerfile best practices
-    section:
-    - path: /develop/develop-images/dockerfile_best-practices/
-      title: Overview
-    - path: /develop/develop-images/guidelines/
-      title: General guidelines
-    - path: /develop/develop-images/instructions/
-      title: Best practices for Dockerfile instructions
-  - path: /develop/security-best-practices/
-    title: Security best practices
-
 - sectiontitle: Build with Docker
   section:
   - path: /build/guide/
@@ -1837,6 +1819,8 @@ Manuals:
           title: Multi-stage builds
         - path: /build/building/variables/
           title: Variables
+        - path: /build/building/best-practices/
+          title: Best practices
         - path: /build/building/multi-platform/
           title: Multi-platform images
         - path: /build/building/secrets/

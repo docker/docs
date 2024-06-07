@@ -110,5 +110,5 @@ There are lots of resources available to help you write your `Dockerfile`.
 
 * There's a [complete guide to all the instructions](../../reference/dockerfile.md) available for use in a `Dockerfile` in the reference section.
 * To help you write a clear, readable, maintainable `Dockerfile`, we've also
-  written a [Dockerfile best practices guide](../../develop/develop-images/dockerfile_best-practices.md).
+  written a [Dockerfile best practices guide](../../build/building/best-practices.md).
 * If your goal is to create a new Docker Official Image, read [Docker Official Images](../../trusted-content/official-images/_index.md).

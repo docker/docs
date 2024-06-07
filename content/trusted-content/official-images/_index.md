@@ -31,7 +31,7 @@ on Docker Hub. This is particularly important as Docker Official Images are
 some of the most popular on Docker Hub. Typically, Docker Official images have
 few or no packages containing CVEs.
 
-The images exemplify [`Dockerfile` best practices](../../develop/develop-images/dockerfile_best-practices.md)
+The images exemplify [`Dockerfile` best practices](../../build/building/best-practices.md)
 and provide clear documentation to serve as a reference for other `Dockerfile` authors.
 
 Images that are part of this program have a special badge on Docker Hub making

@@ -117,7 +117,7 @@ Make sure you have:
    >Check that the `Dockerfile` has no file extension like `.txt`. Some editors may append this file extension automatically which results in an error when you run the application.
    { .important }
 
-   For more information on how to write Dockerfiles, see the [Docker user guide](../develop/index.md) and the [Dockerfile reference](/reference/dockerfile/).
+   For more information on how to write Dockerfiles, see the [Dockerfile reference](/reference/dockerfile/).
 
 ## Step 2: Define services in a Compose file
 
