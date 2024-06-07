@@ -23,21 +23,35 @@ connected to the same cloud builder.
 
 Select the **Builds** view in the Docker Dashboard to open the build list.
 
-The build list shows running and completed builds for your active builders. The
-top-right corner shows the name of your currently selected builder, and the
+The build list shows your completed and ongoing builds. The **Build history**
+tab shows completed historical builds, and from here you can inspect the build
+logs, dependencies, traces, and more. The **Active builds** tab shows builds
+that are currently running.
+
+The list shows builds for your active, running builders. It doesn't list builds
+for inactive builders: builders that you've removed from your system, or
+builders that have been stopped.
+
+### Builder settings
+
+The top-right corner shows the name of your currently selected builder, and the
 **Builder settings** button lets you [manage builders](#manage-builders) in the
 Docker Desktop settings.
 
-Running builds are displayed in the top section of this view, with information
-about the build target and progress.
+### Import builds
 
-The lower section of the view shows your recent builds. You can select any of
-the builds from the active builds or completed builds section to view detailed
-information, such as logs, a performance breakdown, cache utilization, and
-more.
+> **Beta feature**
+>
+> Import builds is currently in [Beta](../../release-lifecycle.md#Beta).
+{ .experimental }
 
-The build list doesn't include builds for inactive builders. That is, builders
-that you've removed from your system, or builders that have been stopped.
+The **Import builds** button lets you import build records for builds by other
+people, or builds in a CI environment. When you've imported a build record, it
+gives you full access to the logs, traces, and other data for that build,
+directly in Docker Desktop. The [build summary](../../build/ci/github-actions/build-summary.md)
+for the `docker/build-push-action` and `docker/bake-action` GitHub Actions
+includes a link to download the build records, for inspecting CI jobs with
+Docker Desktop.
 
 ## Inspect builds
 

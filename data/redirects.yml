@@ -682,6 +682,10 @@
   - /go/build-additional-context/
 "/config/labels-custom-metadata/":
   - /go/labels/
+"/build/ci/github-actions/build-summary/":
+  - /go/build-summary/
+"/desktop/use-desktop/builds/#import-builds":
+  - /go/builds-import/
 
 # Build links (external)
 "https://www.docker.com/build-early-access-program/?utm_campaign=onboard-30-customer-zero&utm_medium=in-product-ad&utm_source=desktop_v4":
