@@ -54,9 +54,43 @@ it's a prerequisite for unlocking a range of new use cases, including:
 ## Enable the containerd image store
 
 The containerd image store isn't enabled by default.
-To enable the feature for Docker Desktop:
+To use it, you must manually enable it in Docker Desktop settings.
 
-1. Navigate to **Settings** in Docker Desktop.
+Before you switch from the classic image store to containerd,
+consider pruning your existing containers and images first.
+Images and containers in the classic store won't be visible to you once you switch,
+but they aren't deleted automatically.
+This is to prevent unused resources from taking up disk space on your machine.
+Once you switch over to the containerd image store,
+you can't delete images and containers in the classic store unless you switch back.
+
+Note that pruning images and containers means they're permanently lost.
+If you have images or containers that you would like to keep,
+you can manually migrate them to the image store, see [Migrate data between image stores](#migrate-data-between-image-stores).
+
+To remove containers and images:
+
+1. Stop any running containers.
+
+   ```console
+   $ docker stop $(docker ps -q)
+   ```
+
+2. Remove all containers:
+
+   ```console
+   $ docker container prune -a
+   ```
+
+3. Remove all images:
+
+   ```console
+   $ docker image prune -a
+   ```
+
+To switch to the containerd image store:
+
+1. Open Docker Desktop and navigate to **Settings**.
 2. In the **General** tab, check **Use containerd for pulling and storing images**.
 3. Select **Apply & Restart**.
 
@@ -80,6 +114,64 @@ Enabling the containerd image store lets you build multi-platform images
 and load them to your local image store:
 
 <script async id="asciicast-ZSUI4Mi2foChLjbevl2dxt5GD" src="https://asciinema.org/a/ZSUI4Mi2foChLjbevl2dxt5GD.js"></script>
+
+## Migrate data between image stores
+
+If you have container or image data that you would like to keep when migrating to a different image store,
+you can export or save them as tar archives to the filesystem before pruning them.
+Note that it isn't generally recommended to keep pet images and containers around in the image store
+without an easy way to recreate them. If possible, you should prefer to have your
+images defined in [Dockerfiles](../build/dockerfile/frontend.md).
+For long-running containers and containers with custom startup parameters,
+consider creating a shell script that hold the necessary arguments, or use [Docker Compose](../compose/_index.md).
+
+Volumes, networks, and other resources are not affected by changing the image store,
+only images and containers would need to be migrated or recreated.
+
+To migrate images and containers between image stores,
+you can export the data, as an image, to the local filesystem, before reimporting it.
+For containers, this means first creating a new image based on an existing container,
+and then exporting the image with `docker save`.
+
+```console
+$ docker ps
+CONTAINER ID   IMAGE                  COMMAND                  CREATED         STATUS         PORTS      NAMES
+e81d433c0cb7   postgres:16.3-alpine   "docker-entrypoint.s…"   2 seconds ago   Up 2 seconds   5432/tcp   some-postgres
+$ docker container commit some-postgres my-pet-container:local
+sha256:a08967fd5cb30061b4d205b6a61bb687a54b4ec966c4b4e86bec686a4d332109
+$ docker image save --output "my-pet-container.tar" my-pet-container:local
+```
+
+When you're done saving the containers and images that you would like to keep,
+stop your running containers and prune the resources:
+
+1. Stop any running containers.
+
+   ```console
+   $ docker stop $(docker ps -q)
+   ```
+
+2. Remove all containers:
+
+   ```console
+   $ docker container prune -a
+   ```
+
+3. Remove all images:
+
+   ```console
+   $ docker image prune -a
+   ```
+
+After enabling the containerd image store, import the tar archive using the
+[`docker image import`](../reference/cli/docker/image/import.md) command.
+
+```console
+$ docker image import \
+  -m "Import local container backup" \
+  my-pet-container.tar \
+  my-pet-container:local
+```
 
 ## Feedback
 
