@@ -97,8 +97,8 @@ params:
   docs_url: https://docs.docker.com
 
   latest_engine_api_version: "1.45"
-  docker_ce_version: "26.1.3"
-  compose_version: "v2.27.0"
+  docker_ce_version: "26.1.4"
+  compose_version: "v2.27.1"
   compose_file_v3: "3.8"
   compose_file_v2: "2.4"
   buildkit_version: "0.13.1"
