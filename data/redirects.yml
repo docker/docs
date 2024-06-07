@@ -619,7 +619,7 @@
   - /go/scout-policy/
 "/scout/policy/configure/":
   - /go/scout-configure-policy/
-"/develop/develop-images/guidelines/#pin-base-image-versions":
+"/build/building/best-practices/#pin-base-image-versions":
   - /go/base-image-pinning/
 # integrations
 "/scout/integrations/ci/gha/":
@@ -696,9 +696,9 @@
   - /go/filter/
 
 # Docker Init
-"/develop/develop-images/instructions/#user":
+"/build/building/best-practices/#user":
   - /go/dockerfile-user-best-practices/
-"/develop/develop-images/instructions/#apt-get":
+"/build/building/best-practices/#apt-get":
   - /go/dockerfile-aptget-best-practices/
 "/build/building/context/#dockerignore-files":
   - /go/build-context-dockerignore/

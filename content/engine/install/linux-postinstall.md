@@ -141,5 +141,3 @@ options:
 
 - Read the [Get started](../../get-started/index.md) training modules
   to learn how to build an image and run it as a containerized application.
-- Review the topics in [Develop with Docker](../../develop/index.md) to learn
-  how to build new applications using Docker.
