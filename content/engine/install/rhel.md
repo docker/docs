@@ -2,8 +2,8 @@
 description: Learn how to install Docker Engine on RHEL. These instructions cover
   the different installation methods, how to uninstall, and next steps.
 keywords: requirements, apt, installation, rhel, rpm, install, install docker engine, uninstall, upgrade,
-  update, s390x, ibm-z
-title: Install Docker Engine on RHEL (s390x)
+  update
+title: Install Docker Engine on RHEL
 toc_max: 4
 aliases:
 - /ee/docker-ee/rhel/
@@ -16,15 +16,15 @@ aliases:
 download-url-base: https://download.docker.com/linux/rhel
 ---
 
-> **Note**
+> **Experimental**
 >
-> The installation instructions on this page refer to packages for RHEL on the
-> **s390x** architecture (IBM Z). Other architectures, including x86_64, aren't
-> yet supported for RHEL.
->
-> For other architectures, you may be able to install the CentOS packages.
-> Refer to [Install Docker Engine on CentOS](centos.md).
-{ .warning }
+> Support for Docker Engine on RHEL x86_64 and aarch64 is experimental.
+{ .experimental }
+
+> **Docker Desktop for Linux** is also available for RHEL.
+> 
+> To get access, join the [Early Access Program](https://www.docker.com/docker-desktop-preview-program/).
+{ .restricted }
 
 To get started with Docker Engine on RHEL, make sure you
 [meet the prerequisites](#prerequisites), and then follow the
@@ -37,9 +37,9 @@ To get started with Docker Engine on RHEL, make sure you
 To install Docker Engine, you need a maintained version of one of the following
 RHEL versions:
 
-- RHEL 7 on s390x (IBM Z) (EOL: [June 30, 2024](https://www.ibm.com/blog/announcement/ibm-is-announcing-red-hat-enterprise-linux-7-is-going-end-of-support-on-30-june-2024/))
-- RHEL 8 on s390x (IBM Z)
-- RHEL 9 on s390x (IBM Z)
+- RHEL 7 (s390x only) (EOL: [June 30, 2024](https://www.ibm.com/blog/announcement/ibm-is-announcing-red-hat-enterprise-linux-7-is-going-end-of-support-on-30-june-2024/))
+- RHEL 8
+- RHEL 9
 
 ### Uninstall old versions
 
@@ -185,27 +185,43 @@ download the `.rpm` file for your release and install it manually. You need to
 download a new file each time you want to upgrade Docker Engine.
 
 <!-- markdownlint-disable-next-line -->
-1. Go to [{{% param "download-url-base" %}}/]({{% param "download-url-base" %}}/)
-   and choose your version of RHEL. Then go to `s390x/stable/Packages/`
-   and download the `.rpm` file for the Docker version you want to install.
+1. Go to [{{% param "download-url-base" %}}/]({{% param "download-url-base" %}}/).
 
-2. Install Docker Engine, changing the following path to the path where you downloaded
-   the Docker package.
+2. Select your RHEL version in the list.
+
+3. Select the applicable architecture (`x86_64`, `aarch64`, or `s390x`), and
+   then go to `stable/Packages/`.
+
+4. Download the following `deb` files for the Docker Engine, CLI, containerd,
+   and Docker Compose packages:
+
+   - `containerd.io_<version>_<arch>.deb`
+   - `docker-ce_<version>_<arch>.deb`
+   - `docker-ce-cli_<version>_<arch>.deb`
+   - `docker-buildx-plugin_<version>_<arch>.deb`
+   - `docker-compose-plugin_<version>_<arch>.deb`
+
+5. Install Docker Engine, changing the following path to the path where you downloaded
+   the packages.
 
    ```console
-   $ sudo yum install /path/to/package.rpm
+   $ sudo yum install ./containerd.io_<version>_<arch>.rpm \
+     ./docker-ce_<version>_<arch>.rpm \
+     ./docker-ce-cli_<version>_<arch>.rpm \
+     ./docker-buildx-plugin_<version>_<arch>.rpm \
+     ./docker-compose-plugin_<version>_<arch>.rpm
    ```
 
    Docker is installed but not started. The `docker` group is created, but no
    users are added to the group.
 
-3. Start Docker.
+6. Start Docker.
 
    ```console
    $ sudo systemctl start docker
    ```
 
-4. Verify that the Docker Engine installation is successful by running the
+7. Verify that the Docker Engine installation is successful by running the
    `hello-world` image.
 
    ```console
