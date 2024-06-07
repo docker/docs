@@ -11,7 +11,6 @@ aliases:
 - /engine/installation/linux/docker-ee/rhel/
 - /engine/installation/linux/rhel/
 - /engine/installation/rhel/
-- /engine/installation/rhel/
 - /install/linux/docker-ee/rhel/
 - /installation/rhel/
 download-url-base: https://download.docker.com/linux/rhel
