@@ -50,7 +50,7 @@ The org owner can also add additional org owners to help them manage users, team
 2. In the **User management** section, select **Teams**.
 3. Select **Create team**.
 4. Fill out your team's information and select **Create**.
-4. [Add members to your team](members.md#add-a-member-to-a-team).
+5. [Add members to your team](members.md#add-a-member-to-a-team).
 
 {{< /tab >}}
 {{< /tabs >}}
