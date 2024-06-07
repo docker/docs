@@ -60,7 +60,6 @@ aliases:
 - /engine/reference/commandline/app_uninstall/
 - /engine/reference/commandline/app_upgrade/
 - /engine/reference/commandline/app_validate/
-- /engine/reference/commandline/app_validate/
 - /engine/reference/commandline/app_version/
 ---
 
