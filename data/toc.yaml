@@ -1945,6 +1945,8 @@ Manuals:
           section:
           - path: /build/ci/github-actions/
             title: Introduction
+          - path: /build/ci/github-actions/build-summary/
+            title: Build summary
           - path: /build/ci/github-actions/configure-builder/
             title: Configuring your builder
           - path: /build/ci/github-actions/multi-platform/
