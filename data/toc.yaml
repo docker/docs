@@ -2029,10 +2029,10 @@ Manuals:
       title: Explore ways to set environment variables
     - path: /compose/environment-variables/envvars-precedence/
       title: Understand environment variables precedence
-    - path: /compose/environment-variables/env-file/
-      title: Syntax for environment files
     - path: /compose/environment-variables/envvars/
       title: Set or change pre-defined environment variables
+    - path: /compose/environment-variables/variable-interpolation/
+      title: Interpolation
     - path: /compose/environment-variables/best-practices/
       title: Best practices
   - sectiontitle: Use...
