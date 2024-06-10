@@ -1946,7 +1946,7 @@ Manuals:
           - path: /build/ci/github-actions/
             title: Introduction
           - path: /build/ci/github-actions/build-summary/
-            title: Build summary
+            title: Build summary {{< badge color=blue text=Beta >}}
           - path: /build/ci/github-actions/configure-builder/
             title: Configuring your builder
           - path: /build/ci/github-actions/multi-platform/
