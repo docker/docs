@@ -29,9 +29,9 @@ This page contains information on how you can set or change the following pre-de
 
 You can set or change the pre-defined environment variables:
 - Within your Compose file using the [`environment` attribute](set-environment-variables.md#use-the-environment-attribute)
-- With an [environment file](env-file.md) 
+- With the `env-file` attribute and an [environment file](set-environment-variables.md#use-the-env_file-attribute) 
 - From the command line
-- From your [shell](set-environment-variables.md#substitute-from-the-shell)
+- From your [shell](variable-interpolation.md#substitute-from-the-shell)
 
 When changing or setting any environment variables, be aware of [Environment variable precedence](envvars-precedence.md).
 
@@ -182,7 +182,7 @@ This is an opt-out variable. When turned off it deactivates the experimental fea
 
 ## Unsupported in Compose V2
 
-The environment variables listed below have no effect in Compose V2.
+The following environment variables have no effect in Compose V2.
 For more information, see [Migrate to Compose V2](../migrate.md).
 
 - `COMPOSE_API_VERSION`
