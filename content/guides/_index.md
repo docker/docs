@@ -11,7 +11,7 @@ get-started:
   icon: summarize
 - title: Get started
   description: Get started with the basics and the benefits of containerizing your applications.
-  link: /get-started/
+  link: /guides/getting-started/get-docker-desktop/
   icon: rocket
 - title: Docker concepts
   description: Gain a better understanding of foundational Docker concepts.
@@ -39,6 +39,10 @@ dive-deeper:
   description: Deploy and manage Docker containers at scale.
   link: /get-started/orchestration/
   icon: workspaces
+- title: Docker workshop
+  description: Get guided through a 45-minute workshop to learn about Docker.
+  link: /get-started/
+  icon: desk
 
 resources:
 - title: Educational resources

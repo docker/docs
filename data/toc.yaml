@@ -3,41 +3,21 @@ Guides:
   path: /guides/
 - title: Docker overview
   path: /get-started/overview/
-- sectiontitle: Get started
+
+- sectiontitle: "Getting started"
   section:
-  - title: "Part 1: Overview"
-    path: /get-started/
-  - title: "Part 2: Containerize an application"
-    path: /get-started/02_our_app/
-  - title: "Part 3: Update the application"
-    path: /get-started/03_updating_app/
-  - title: "Part 4: Share the application"
-    path: /get-started/04_sharing_app/
-  - title: "Part 5: Persist the DB"
-    path: /get-started/05_persisting_data/
-  - title: "Part 6: Use bind mounts"
-    path: /get-started/06_bind_mounts/
-  - title: "Part 7: Multi-container apps"
-    path: /get-started/07_multi_container/
-  - title: "Part 8: Use Docker Compose"
-    path: /get-started/08_using_compose/
-  - title: "Part 9: Image-building best practices"
-    path: /get-started/09_image_best/
-  - title: "Part 10: What next?"
-    path: /get-started/11_what_next/
+  - title: "Get Docker Desktop"
+    path: /guides/getting-started/get-docker-desktop/
+  - title: "Develop with containers"
+    path: /guides/getting-started/develop-with-containers/
+  - title: "Build and push your first image"
+    path: /guides/getting-started/build-and-push-first-image/
+  - title: "What's next"
+    path: /guides/getting-started/whats-next/
+
 
 - sectiontitle: "Docker concepts"
   section:
-  - sectiontitle: "Getting started"
-    section:
-    - title: "Get Docker Desktop"
-      path: /guides/docker-concepts/getting-started/get-docker-desktop/
-    - title: "Develop with containers"
-      path: /guides/docker-concepts/getting-started/develop-with-containers/
-    - title: "Build and push your first image"
-      path: /guides/docker-concepts/getting-started/build-and-push-first-image/
-    - title: "What's next"
-      path: /guides/docker-concepts/getting-started/whats-next/
   - sectiontitle: "The basics"
     section:
     - title: "What is a container?"
@@ -277,6 +257,31 @@ Guides:
     path: /get-started/swarm-deploy/
   - title: Cloud integrations
     path: /cloud/
+
+- sectiontitle: Docker workshop
+  section:
+  - title: "Part 1: Overview"
+    path: /get-started/
+  - title: "Part 2: Containerize an application"
+    path: /get-started/02_our_app/
+  - title: "Part 3: Update the application"
+    path: /get-started/03_updating_app/
+  - title: "Part 4: Share the application"
+    path: /get-started/04_sharing_app/
+  - title: "Part 5: Persist the DB"
+    path: /get-started/05_persisting_data/
+  - title: "Part 6: Use bind mounts"
+    path: /get-started/06_bind_mounts/
+  - title: "Part 7: Multi-container apps"
+    path: /get-started/07_multi_container/
+  - title: "Part 8: Use Docker Compose"
+    path: /get-started/08_using_compose/
+  - title: "Part 9: Image-building best practices"
+    path: /get-started/09_image_best/
+  - title: "Part 10: What next?"
+    path: /get-started/11_what_next/
+
+
 - path: /get-started/resources/
   title: "Educational resources"
 
