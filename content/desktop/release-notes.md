@@ -57,6 +57,11 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 - Fixed a bug where proxy settings defined in `admin-settings.json` were not applied correctly on startup.
 - Fixed a bug where the **Manage Synchronized file shares with Compose** toggle did not correctly reflect the value with the feature.
 - Fixed a bug where a bind mounted file modified on host is not updated after the container restarts, when gRPC FUSE file sharing is used on macOS and on Windows with Hyper-V. Fixes [docker/for-mac#7274](https://github.com/docker/for-mac/issues/7274), [docker/for-win#14060](https://github.com/docker/for-win/issues/14060).
+- Builds view:
+  - New [Import builds](use-desktop/builds.md#import-builds) feature that lets you import build records for builds by other people, or [builds in a CI environment](../build/ci/github-actions/build-summary.md).
+  - Fixed missing OpenTelemetry traces in build results for failed builds.
+  - Fixed `default-load` appearing as invalid driver-opt for the container driver.
+  - Fixed deep link to build details.
 
 #### For Windows
 
@@ -140,7 +145,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 - Fixed CLI-plugin symlinks not being removed when CLI apps were removed.
 - Fixed a bug in the shared ports drawer to show the right message for local engines.
 - Dev Environments is being sunset and has moved to the **Beta** tab in **Features in development**.
-- Build UI:
+- Builds view:
   - Better bulk delete for build records.
   - Added action to open the relevant web page for container images and Git sources in build dependencies.
   - Added action to download Provenance and OpenTelemetry traces in Jaeger or OTLP format.
@@ -303,7 +308,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 - Docker Init:
   - Improved how Java applications are started based on Spring Boot version. Fixes [docker/for-mac#7171](https://github.com/docker/for-mac/issues/7171).
   - Removed non-official Docker image used for Rust cross-compilation
-- Build UI:
+- Builds view:
   - Active and completed builds can be found in dedicated tabs.
   - Build details now displays build duration and cache steps.
   - OpenTelemetry traces are now displayed in the build results.
@@ -431,7 +436,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 - Builder settings:
   - You can now refresh storage data for your builder at any point in time.
   - You can now delete the build history for a builder.
-- Build UI:
+- Builds view:
   - An error message is now shown when a build record cannot be removed.
   - Fixed an issue where a cloud builder could not be created in rootless mode on macOS.
   - Inline cache and Git source are now properly handled in the **Build timing** section of the **Info** tab.
