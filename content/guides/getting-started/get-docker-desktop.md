@@ -63,7 +63,7 @@ For this container, the frontend is accessible on port `8080`. To open the websi
 
 
 
-![Screenshot of the landing page of the Nginx web server, coming from the running container](../the-basics/images/access-the-frontend.webp?border=true)
+![Screenshot of the landing page of the Nginx web server, coming from the running container](../docker-concepts/the-basics/images/access-the-frontend.webp?border=true)
 
 ## Manage containers using Docker Desktop
 

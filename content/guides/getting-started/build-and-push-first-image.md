@@ -8,7 +8,7 @@ description: This concept page will teach you how to build and push your first i
 
 ## Explanation
 
-Now that you've updated the [to-do list app](/guides/docker-concepts/getting-started/develop-with-containers/), you’re ready to create a container image for the application and share it on Docker Hub. To do so, you will need to do the following:
+Now that you've updated the [to-do list app](develop-with-containers.md), you’re ready to create a container image for the application and share it on Docker Hub. To do so, you will need to do the following:
 
 1. Sign in with your Docker account
 2. Create an image repository on Docker Hub
