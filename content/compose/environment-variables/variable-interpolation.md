@@ -151,6 +151,7 @@ This file path is relative to the current working directory where the Docker Com
 ```console
 $ docker compose --env-file ./config/.env.dev up
 ```
+
 #### Additional information 
 
 - This method is useful if you want to temporarily override an `.env` file that is already referenced in your `compose.yml` file. For example you may have different `.env` files for production ( `.env.prod`) and testing (`.env.test`).
