@@ -18,8 +18,8 @@ versions of the [Build and push Docker images](https://github.com/marketplace/ac
 or [Docker Buildx Bake](https://github.com/marketplace/actions/docker-buildx-bake)
 GitHub Actions:
 
-- `docker/build-push-action@v5.4.0` or `docker/build-push-action@v5`
-- `docker/bake-action@v4.6.0` or `docker/bake-action@v4`
+- `docker/build-push-action@v5.5.0` or `docker/build-push-action@v5`
+- `docker/bake-action@v4.7.0` or `docker/bake-action@v4`
 
 > **Note**
 >
