@@ -6,6 +6,8 @@ aliases:
 - /billing/cycle/
 ---
 
+{{< include "tax-compliance.md" >}}
+
 You can pay for a Pro or Team subscription on a monthly or yearly billing cycle. You select your preferred billing cycle when you buy your subscription.
 
 If you have a monthly billing cycle, you can choose to switch to an annual billing cycle. Note that it's not possible to switch from an annual billing cycle to monthly.

@@ -8,6 +8,8 @@ aliases:
 - /subscription/upgrade/
 ---
 
+{{< include "tax-compliance.md" >}}
+
 When you upgrade to a paid subscription, you immediately have access to all the features and entitlements available in your new chosen subscription. For detailed information on features available in each subscription, see [Docker Pricing](https://www.docker.com/pricing).
 
 ## Upgrade your subscription 
