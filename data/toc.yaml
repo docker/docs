@@ -1946,7 +1946,7 @@ Manuals:
           - path: /build/ci/github-actions/
             title: Introduction
           - path: /build/ci/github-actions/build-summary/
-            title: Build summary
+            title: Build summary {{< badge color=blue text=Beta >}}
           - path: /build/ci/github-actions/configure-builder/
             title: Configuring your builder
           - path: /build/ci/github-actions/multi-platform/
@@ -2015,10 +2015,10 @@ Manuals:
       title: Explore ways to set environment variables
     - path: /compose/environment-variables/envvars-precedence/
       title: Understand environment variables precedence
-    - path: /compose/environment-variables/env-file/
-      title: Syntax for environment files
     - path: /compose/environment-variables/envvars/
       title: Set or change pre-defined environment variables
+    - path: /compose/environment-variables/variable-interpolation/
+      title: Interpolation
     - path: /compose/environment-variables/best-practices/
       title: Best practices
   - sectiontitle: Use...
