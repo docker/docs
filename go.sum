@@ -242,6 +242,10 @@ github.com/moby/buildkit v0.13.0-rc3.0.20240424175633-5fce077ed0e0 h1:wTJCJDC1wo
 github.com/moby/buildkit v0.13.0-rc3.0.20240424175633-5fce077ed0e0/go.mod h1:wH5RTVyFjMQ67euC1e3UUSw7yQe7JkAHmf8OZkQY7Y4=
 github.com/moby/buildkit v0.13.0 h1:reVR1Y+rbNIUQ9jf0Q1YZVH5a/nhOixZsl+HJ9qQEGI=
 github.com/moby/buildkit v0.13.0/go.mod h1:aNmNQKLBFYAOFuzQjR3VA27/FijlvtBD1pjNwTSN37k=
+github.com/moby/buildkit v0.14.0-rc2 h1:qvl0hOKeyAWReOkksNtstQjPNaAD4jN3Dvq4r7slqYM=
+github.com/moby/buildkit v0.14.0-rc2/go.mod h1:/ZJNHNVso1nf063XlDhEkNEcRNW19utVpUKixCUo9Ks=
+github.com/moby/buildkit v0.14.0-rc2.0.20240610193248-7da4d591c4dc h1:D/QzYP+52V4IzxMvcWe8ppgg0XptfI4/JCd7ry79gqY=
+github.com/moby/buildkit v0.14.0-rc2.0.20240610193248-7da4d591c4dc/go.mod h1:1XssG7cAqv5Bz1xcGMxJL123iCv5TYN4Z/qf647gfuk=
 github.com/moby/locker v1.0.1/go.mod h1:S7SDdo5zpBK84bzzVlKr2V0hz+7x9hWbYC/kq7oQppc=
 github.com/moby/moby v24.0.2+incompatible h1:yH+5dRHH1x3XRKzl1THA2aGTy6CHYnkt5N924ADMax8=
 github.com/moby/moby v24.0.2+incompatible/go.mod h1:fDXVQ6+S340veQPv35CzDahGBmHsiclFwfEygB/TWMc=
