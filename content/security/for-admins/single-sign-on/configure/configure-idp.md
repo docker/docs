@@ -69,7 +69,7 @@ The user interface for your IdP may differ slightly from the following steps. Yo
 {{< tabs >}}
 {{< tab name="Okta" >}}
 
-You can configure Docker with Okta using the pre-configured Docker integration, or by creating a custom application. We recommend the [Docker app integration](#add-the-app-integration-in-okta).
+You can configure Docker with Okta using the pre-configured Docker integration, or by creating a custom application. You can use the [Docker app integration](#add-the-app-integration-in-okta) to simplify the set-up process.
 
 ### Add the app integration in Okta
 
@@ -114,7 +114,7 @@ See [More resources](#more-resources) for a video overview on how to set up a cu
 {{< /tab >}}
 {{< tab name="Entra ID SAML" >}}
 
-You can configure Docker with Entra ID using the pre-configured Docker integration, or by creating a custom application. We recommend the [Docker app integration](#add-the-app-integration-in-entra-id).
+You can configure Docker with Entra ID using the pre-configured Docker integration, or by creating a custom application. You can use the [Docker app integration](#add-the-app-integration-in-entra-id) to simplify the set-up process.
 
 ### Add the app integration in Entra ID
 
@@ -131,7 +131,7 @@ You can configure Docker with Entra ID using the pre-configured Docker integrati
 
 > **Tip**
 >
-> When you create the application for your SSO connection in Entra ID (formerly Azure AD) we recommend that you don't assign the app to all the users in the directory.
+> When you create the application for your SSO connection in Entra ID (formerly Azure AD) you can opt not to assign the app to all the users in the directory.
 > Instead, you can create a security group and assign the app to the group. This way, you can control who in your organization has access to Docker.
 > To change the default setting for assignment, go to the main properties for your app and find the **Assignment required** setting. Set it to **Yes**.
 { .tip }
@@ -166,7 +166,7 @@ See [More resources](#more-resources) for a video overview on how to set up SSO 
 
 ### Create app registration
 
-1. Go to the Azure AD admin portal.
+1. Go to the Azure AD administrator portal.
 2. Select **App Registration > New Registration**.
 3. Enter “Docker Hub SSO” or similar for the application name.
 4. Under **Supported account types**, specify who can use this application or access the app.
