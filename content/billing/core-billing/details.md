@@ -6,6 +6,8 @@ aliases:
 - /billing/details/
 ---
 
+{{< include "tax-compliance.md" >}}
+
 You can update the billing information for your personal account or for an organization. When you update your billing information, these changes apply to future billing invoices.
 
 > **Important**

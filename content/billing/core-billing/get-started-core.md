@@ -4,6 +4,8 @@ description: Learn how to start your Docker Core subscription.
 keywords: payments, billing, subscription, invoices, docker core, subscribe
 ---
 
+{{< include "tax-compliance.md" >}}
+
 Docker Core subscriptions offer features and benefits to support both new and professional developers, as well as plans for individuals, teams, and enterprise businesses. To learn more about what's included with each tier, see [Docker Core subscriptions and features](../../subscription/core-subscription/details.md) and [Docker Pricing](https://www.docker.com/pricing/).
 
 In this section, learn how to get started with a Docker Core subscription for individuals or for organizations. Before you begin, make sure you have a [Docker ID](../../docker-id/_index.md).
