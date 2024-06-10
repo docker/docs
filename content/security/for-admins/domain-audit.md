@@ -25,7 +25,7 @@ Although domain audit can't identify all Docker users in your environment, you c
 > - [Intune](https://learn.microsoft.com/en-us/mem/intune/apps/app-discovered-apps)
 > - [Jamf](https://docs.jamf.com/10.25.0/jamf-pro/administrator-guide/Application_Usage.html)
 > - [Kandji](https://support.kandji.io/support/solutions/articles/72000559793-view-a-device-application-list)
-> - [Kolid](https://www.kolide.com/features/device-inventory/properties/mac-apps)
+> - [Kolide](https://www.kolide.com/features/device-inventory/properties/mac-apps)
 > - [Workspace One](https://blogs.vmware.com/euc/2022/11/how-to-use-workspace-one-intelligence-to-manage-app-licenses-and-reduce-costs.html)
 { .tip }
 
