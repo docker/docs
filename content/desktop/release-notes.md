@@ -23,9 +23,9 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ## 4.31.1
 
-{{< release-date date="2024-06-07" >}}
+{{< release-date date="2024-06-10" >}}
 
-{{< desktop-install win=true beta_win_arm=true version="4.31.1" build_path="/153472/" >}}
+{{< desktop-install win=true beta_win_arm=true version="4.31.1" build_path="/153621/" >}}
 
 ### Bug fixes and enhancements
 
