@@ -21,6 +21,18 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1) to see what's coming next.
 
+## 4.31.1
+
+{{< release-date date="2024-06-10" >}}
+
+{{< desktop-install win=true beta_win_arm=true version="4.31.1" build_path="/153621/" >}}
+
+### Bug fixes and enhancements
+
+#### For Windows
+
+- Fixed a bug where containers, images and volumes created before the update were potentially invisible for users. Fixes [docker/for-win#14118](https://github.com/docker/for-win/issues/14118).
+
 ## 4.31.0
 
 {{< release-date date="2024-06-06" >}}
