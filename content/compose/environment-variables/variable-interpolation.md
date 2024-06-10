@@ -4,6 +4,7 @@ description: How to set, use, and manage variables in your Compose file with int
 keywords: compose, orchestration, environment, variables, interpolation
 aliases:
 - /compose/env-file/
+- /compose/environment-variables/env-file/
 ---
 
 A Compose file can use variables to offer more flexibility. If you want to quickly switch 
@@ -118,7 +119,7 @@ The following syntax rules apply to environment files:
 
 - Lines beginning with `#` are processed as comments and ignored.
 - Blank lines are ignored.
-- Unquoted and double-quoted (`"`) values have [interpolation](#interpolation) applied.
+- Unquoted and double-quoted (`"`) values have interpolation applied.
 - Each line represents a key-value pair. Values can optionally be quoted.
   - `VAR=VAL` -> `VAL`
   - `VAR="VAL"` -> `VAL`
