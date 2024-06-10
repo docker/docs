@@ -78,6 +78,10 @@ The user interface for your IdP may differ slightly from the following steps. Yo
 
 ### Enable SCIM
 
+If you're using the [Docker app integration](/security/for-admins/single-sign-on/configure/configure-idp/#add-the-app-integration-in-okta) for your SSO connection, SCIM is already configured. 
+
+If you manually created your application in Okta, complete the following steps.
+
 1. Go to the Okta admin portal.
 2. Go to the app you created when you configured your SSO connection.
 3. On the app page, go to the **General** tab and select **Edit App Settings**.
@@ -105,7 +109,11 @@ The user interface for your IdP may differ slightly from the following steps. Yo
     - Email
 
 {{< /tab >}}
-{{< tab name="Entra ID SAML 2.0" >}}
+{{< tab name="Entra ID SAML" >}}
+
+If you're using the [Docker app integration](/security/for-admins/single-sign-on/configure/configure-idp/#add-the-app-integration-in-entra-id) for your SSO connection, SCIM is already configured.
+
+If you manually created your application in Entra ID, complete the following steps.
 
 1. In the Azure admin portal, go to **Enterprise Applications**, then select the **Docker** application you created when you set up your SSO connection.
 2. Go to **Provisioning** and select **Get Started**.
@@ -153,6 +161,10 @@ The external namespace to use to set up these attributes is `urn:ietf:params:sci
 
 ### Set up
 
+If you're using the [Docker app integration](/security/for-admins/single-sign-on/configure/configure-idp/#add-the-app-integration-in-okta) for your SSO connection, role mapping is already configured.
+
+If you manually created your application in Okta, complete the following steps.
+
 1. Setup [SSO](../single-sign-on/configure/_index.md) and SCIM first.
 2. In the Okta admin portal, go to **Directory > Profile Editor** and select **User (Default)**.
 3. Select **Add Attribute** and configure the values for the role, org, or team you want to add. Exact naming isn't required.
@@ -175,9 +187,13 @@ The external namespace to use to set up these attributes is `urn:ietf:params:sci
 If a user doesn't already have attributes set up, users who are added to the group will inherit these attributes upon provsioning.
 
 {{< /tab >}}
-{{< tab name="Entra ID SAML 2.0" >}}
+{{< tab name="Entra ID SAML" >}}
 
 ### Set up
+
+If you're using the [Docker app integration](/security/for-admins/single-sign-on/configure/configure-idp/#add-the-app-integration-in-entra-id) for your SSO connection, role mapping is already configured.
+
+If you manually created your application in Entra ID, complete the following steps.
 
 1. Setup [SSO](../single-sign-on/configure/_index.md) and SCIM first.
 2. In the Azure AD admin portal, go to**Enterprise Apps > YOUR APP > Provisioning > Mappings > Provision Azure Active Directory Users**.

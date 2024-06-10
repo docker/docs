@@ -20,7 +20,7 @@ Make sure you have completed the following before you begin:
 - Your domain is verified
 - You have created your SSO connection in Docker
 - You have copied the necessary fields from Docker to paste in your IdP:
-    - SAML: **Entity ID**, **ACS URL**
+    - SAML: **Entity ID**, **ACS URL** to manually configure your IdP, or **Connection ID** to use an integrated application with Okta or Entra ID
     - Azure AD (OIDC): **Redirect URL**
 
 ## SSO attributes
@@ -69,7 +69,25 @@ The user interface for your IdP may differ slightly from the following steps. Yo
 {{< tabs >}}
 {{< tab name="Okta" >}}
 
-See [More resources](#more-resources) for a video overview on how to set up SSO with SAML in Okta.
+You can configure Docker with Okta using the pre-configured Docker integration, or by creating a custom application. We recommend the [Docker app integration](#add-the-app-integration-in-okta).
+
+### Add the app integration in Okta
+
+1. Sign in to the Okta Console.
+2. Select **Applications > Add Application**.
+3. Search for Docker.
+4. Select **Add**. This opens the **General Settings** page.
+5. Configure the following settings:
+   - **Application label**: Leave this as Docker or customize if you prefer.
+   - **Docker SSO Connection ID**: Copy the **Connection ID** value from Docker Hub or Admin Console and paste it here.
+   - **Application visibility**: Optionally, configure if you want this app visible to your users.
+6. Select **Done**.
+7. After you create the app, go to your app and select **View SAML setup instructions**.
+8. Here you can find the **SAML Sign-in URL** and the **x509 Certificate**. Open the certificate file in a text editor and paste the contents of the file in the **x509 Certificate** field in Docker Hub or Admin Console. Then, copy the value of the **SAML Sign-in URL** and paste it into the corresponding field in Docker Hub or Admin Console.
+
+### Create a custom application in Okta
+
+See [More resources](#more-resources) for a video overview on how to set up a custom SSO application with SAML in Okta.
 
 1. Go to the Okta admin portal.
 2. Go to **Applications > Applications > Create App Integration**.
@@ -94,7 +112,22 @@ See [More resources](#more-resources) for a video overview on how to set up SSO 
 10. Here you can find the **SAML Sign-in URL** and the **x509 Certificate**. Open the certificate file in a text editor and paste the contents of the file in the **x509 Certificate** field in Docker Hub or Admin Console. Then, copy the value of the **SAML Sign-in URL** and paste it into the corresponding field in Docker Hub or Admin Console.
 
 {{< /tab >}}
-{{< tab name="Entra ID SAML 2.0" >}}
+{{< tab name="Entra ID SAML" >}}
+
+You can configure Docker with Entra ID using the pre-configured Docker integration, or by creating a custom application. We recommend the [Docker app integration](#add-the-app-integration-in-entra-id).
+
+### Add the app integration in Entra ID
+
+1. Go to the Entra ID admin portal.
+2. Go to **Identity > Applications > Enterprise applications > All applications**.
+3. Select **New application**.
+4. Search for Docker and add it to the main directory.
+5. Copy the Docker SSO **Connection ID** from Docker Hub or Admin Console.
+6. Enter the SSO Connection ID in Entra ID to create your application.
+7. Once your application is created, find the **Login URL** and **SAML Signing Certificate** and copy them into the corresponding fields in your Docker SSO connection.
+8. Assign users to the app via direct assignment or via security groups.
+
+### Create a custom application in Entra ID
 
 > **Tip**
 >
@@ -119,13 +152,21 @@ See [More resources](#more-resources) for a video overview on how to set up SSO 
 10. From the section **Set up Docker**, copy **Login URL** and paste it into the **SAML Sign-in URL** field in Docker Hub or Admin Console.
 
 {{< /tab >}}
+{{< tab name="SAML 2.0" >}}
+
+Refer to the documentation for your IdP for configuration details. You will need the following values from your Docker SSO connection to configure your IdP:
+
+- **Entity ID**
+- **ACS URL**
+
+{{< /tab >}}
 {{< tab name="Azure Connect (OIDC)" >}}
 
 See [More resources](#more-resources) for a video overview on how to set up SSO with Azure Connect (OIDC).
 
 ### Create app registration
 
-1. Go to Azure AD admin portal.
+1. Go to the Azure AD admin portal.
 2. Select **App Registration > New Registration**.
 3. Enter “Docker Hub SSO” or similar for the application name.
 4. Under **Supported account types**, specify who can use this application or access the app.
