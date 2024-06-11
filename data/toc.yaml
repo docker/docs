@@ -2141,6 +2141,9 @@ Manuals:
   - path: /docker-hub/release-notes/
     title: Release notes
 
+- title: Docker for GitHub Copilot {{< badge color=violet text="Early Access" >}}
+  path: /copilot/
+
 - sectiontitle: Administration
   section:
   - path: /admin/
