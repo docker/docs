@@ -41,7 +41,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### New
 
-- [Air-Gapped Containers](desktop/hardened-desktop/air-gapped-containers.md) is now generally available. 
+- [Air-Gapped Containers](https://docs.docker.com/desktop/hardened-desktop/air-gapped-containers) is now generally available.
 - Docker Compose File Viewer shows your Compose YAML with syntax highlighting and contextual links to relevant docs (Beta, progressive rollout).
 - New Sidebar user experience.
 
@@ -65,12 +65,12 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 - Added `proxyEnableKerberosNTLM` config to `settings.json` to enable fallback to basic proxy authentication if Kerberos/NTLM environment is not properly set up.
 - Fixed a bug where Docker Debug was not working properly with Enhanced Container Isolation enabled.
 - Fixed a bug where UDP responses were not truncated properly.
-- Fixed a bug where the **Update** screen was hidden when using [Settings Management](hardened-desktop/settings-management/_index.md).
+- Fixed a bug where the **Update** screen was hidden when using [Settings Management](https://docs.docker.com/desktop/hardened-desktop/settings-management).
 - Fixed a bug where proxy settings defined in `admin-settings.json` were not applied correctly on startup.
 - Fixed a bug where the **Manage Synchronized file shares with Compose** toggle did not correctly reflect the value with the feature.
 - Fixed a bug where a bind mounted file modified on host is not updated after the container restarts, when gRPC FUSE file sharing is used on macOS and on Windows with Hyper-V. Fixes [docker/for-mac#7274](https://github.com/docker/for-mac/issues/7274), [docker/for-win#14060](https://github.com/docker/for-win/issues/14060).
 - Builds view:
-  - New [Import builds](use-desktop/builds.md#import-builds) feature that lets you import build records for builds by other people, or [builds in a CI environment](../build/ci/github-actions/build-summary.md).
+  - New [Import builds](https://docs.docker.com/desktop/use-desktop/builds#import-builds) feature that lets you import build records for builds by other people, or [builds in a CI environment](https://docs.docker.com/build/ci/github-actions/build-summary).
   - Fixed missing OpenTelemetry traces in build results for failed builds.
   - Fixed `default-load` appearing as invalid driver-opt for the container driver.
   - Fixed deep link to build details.
@@ -129,18 +129,18 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 #### For all platforms
 
-- Docker Desktop now supports [SOCKS5 proxies](networking.md#socks5-proxy-support). Requires a Business subscription.
-- Added a new setting to manage the onboarding survey in [Settings Management](hardened-desktop/settings-management/_index.md).
+- Docker Desktop now supports [SOCKS5 proxies](https://docs.docker.com/desktop/networking#socks5-proxy-support). Requires a Business subscription.
+- Added a new setting to manage the onboarding survey in [Settings Management](https://docs.docker.com/desktop/hardened-desktop/settings-management).
 
 #### For Windows
 
-- Added support for [Kerberos and NTLM proxy authentication](settings/windows.md#proxy-authentication) on Windows. Requires a Business subscription.
+- Added support for [Kerberos and NTLM proxy authentication](https://docs.docker.com/desktop/settings/windows#proxy-authentication) on Windows. Requires a Business subscription.
 
 ### Upgrades
 
 - [Docker Compose v2.27.0](https://github.com/docker/compose/releases/tag/v2.27.0)
 - [Docker Engine v26.1.1](https://docs.docker.com/engine/release-notes/26.1/#2611)
-- [Wasm](../desktop/wasm/_index.md) runtimes:
+- [Wasm](https://docs.docker.com/desktop/wasm) runtimes:
   - Updated `runwasi` shims to `v0.4.0`
   - Updated `deislabs` shims to `v0.11.1`
   - Updated `spin` shim to `v0.13.1`
@@ -209,17 +209,17 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 ### New
 
-- You can now enforce Rosetta usage via [Settings Management](hardened-desktop/settings-management/configure.md).
-- [Docker socket mount restrictions](hardened-desktop/enhanced-container-isolation/config.md) with ECI is now generally available.
+- You can now enforce Rosetta usage via [Settings Management](https://docs.docker.com/desktop/hardened-desktop/settings-management/configure).
+- [Docker socket mount restrictions](https://docs.docker.com/desktop/hardened-desktop/enhanced-container-isolation/config) with ECI is now generally available.
 - Docker Desktop now takes advantage of the Moby 26 engine which includes Buildkit 0.13, sub volumes mounts, networking updates, and improvements to the containerd multi-platform image store UX.
 - New and improved Docker Desktop error screens: swift troubleshooting, easy diagnostics uploads, and actionable remediation.
-- Compose supports [Synchronized file shares (experimental)](synchronized-file-sharing.md).
-- New [interactive Compose CLI (experimental)](../compose/environment-variables/envvars.md#compose_menu).
+- Compose supports [Synchronized file shares (experimental)](https://docs.docker.com/desktop/synchronized-file-sharing).
+- New [interactive Compose CLI (experimental)](https://docs.docker.com//compose/environment-variables/envvars#compose_menu).
 - Beta release of:
-  - Air-Gapped Containers with [Settings Management](hardened-desktop/air-gapped-containers/_index.md).
-  - [Host networking](../network/drivers/host.md#docker-desktop) in Docker Desktop.
-  - [Docker Debug](use-desktop/container.md#integrated-terminal) for running containers.
-  - [Volumes Backup & Share extension](use-desktop/volumes.md) functionality available in the **Volumes** tab.
+  - Air-Gapped Containers with [Settings Management](https://docs.docker.com/desktop/hardened-desktop/air-gapped-containers/).
+  - [Host networking](https://docs.docker.com/network/drivers/host#docker-desktop) in Docker Desktop.
+  - [Docker Debug](https://docs.docker.com/desktop/use-desktop/container#integrated-terminal) for running containers.
+  - [Volumes Backup & Share extension](https://docs.docker.com/desktop/use-desktop/volumes) functionality available in the **Volumes** tab.
 
 ### Upgrades
 
@@ -241,7 +241,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
   - Fixed an issue with `.dockerignore` to avoid ignoring application files that start with "compose".
   - Improved how Java applications are started based on Spring Boot version. Fixes [docker/for-mac#7171](https://github.com/docker/for-mac/issues/7171).
   - Removed non-official Docker image used for Rust cross-compilation.
-- The maximum number of files per [Synchronized file share](synchronized-file-sharing.md) now exceeds 2 million.
+- The maximum number of files per [Synchronized file share](https://docs.docker.com/desktop/synchronized-file-sharing) now exceeds 2 million.
 - Fixed an issue that caused the warning: "_The value provided to Autocomplete is invalid._" when selecting the **Export to local image** field.
 - **Run Cloud** can now be accessed from the Docker Dashboard.
 - Opting out from sending analytics will now also disable collecting data for bug reports.
@@ -288,8 +288,8 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 ### New
 
-- [Settings Management](hardened-desktop/settings-management/index.md) now allows admins to set the default file-sharing implementation and specify which paths developer can add file shares to.
-- Added support for `socks5://` HTTP and HTTPS proxy URLs when the [`SOCKS` proxy support beta feature](networking.md) is enabled.
+- [Settings Management](https://docs.docker.com/desktop/hardened-desktop/settings-management/index) now allows admins to set the default file-sharing implementation and specify which paths developer can add file shares to.
+- Added support for `socks5://` HTTP and HTTPS proxy URLs when the [`SOCKS` proxy support beta feature](https://docs.docker.com/desktop/networking) is enabled.
 - Users can now filter volumes to see which ones are in use in the **Volumes** tab.
 
 ### Upgrades
@@ -298,7 +298,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 - [Docker Engine v25.0.3](https://docs.docker.com/engine/release-notes/25.0/#2503)
 - [Docker Scout CLI v1.5.0](https://github.com/docker/scout-cli/releases/tag/v1.5.0)
 - [Qemu 8.1.5](https://wiki.qemu.org/ChangeLog/8.1)
-- [Wasm](../desktop/wasm/_index.md) runtimes:
+- [Wasm](https://docs.docker.com/desktop/wasm) runtimes:
   - Updated runwasi shims to `v0.4.0`, including:
     - wasmtime `v17.0`, with initial support for WASI preview 2
     - wasmedge `v0.13.5`
@@ -412,11 +412,11 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 ### New
 
 - Docker init now supports Java and is generally available to all users.
-- [Synchronized File Shares](synchronized-file-sharing.md) provides fast and flexible host-to-VM file sharing within Docker Desktop. Utilizing the technology behind [Docker’s acquisition of Mutagen](https://www.docker.com/blog/mutagen-acquisition/), this feature provides an alternative to virtual bind mounts that uses synchronized filesystem caches, improving performance for developers working with large codebases.
+- [Synchronized File Shares](https://docs.docker.com/desktop/synchronized-file-sharing) provides fast and flexible host-to-VM file sharing within Docker Desktop. Utilizing the technology behind [Docker’s acquisition of Mutagen](https://www.docker.com/blog/mutagen-acquisition/), this feature provides an alternative to virtual bind mounts that uses synchronized filesystem caches, improving performance for developers working with large codebases.
 - Organization admins can now [configure Docker socket mount permissions](hardened-desktop/enhanced-container-isolation/config.md) when ECI is enabled.
-- [Containerd Image Store](containerd.md) support is now generally available to all users.
-- Get a debug shell into any container or image with the new [`docker debug` command](../reference/cli/docker/debug.md) (Beta).
-- Organization admins, with a Docker Business subscription, can now configure a custom list of extensions with [Private Extensions Marketplace](extensions/private-marketplace.md) enabled (Beta)
+- [Containerd Image Store](https://docs.docker.com/desktop/containerd) support is now generally available to all users.
+- Get a debug shell into any container or image with the new [`docker debug` command](../reference/cli/docker/debug) (Beta).
+- Organization admins, with a Docker Business subscription, can now configure a custom list of extensions with [Private Extensions Marketplace](https://docs.docker.com/desktop/extensions/private-marketplace) enabled (Beta)
 
 ### Upgrades
 
@@ -434,7 +434,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 #### For all platforms
 
-- The `docker scan` command has been removed. To continue learning about the vulnerabilities of your images, and many other features, use the [`docker scout` command](../reference/cli/docker/scout/_index.md).
+- The `docker scan` command has been removed. To continue learning about the vulnerabilities of your images, and many other features, use the [`docker scout` command](https://docs.docker.com/reference/cli/docker/scout).
 - Fixed a bug where automatic updates would not download when the **Always download updates** checkbox was selected.
 - Fixed typo in the dashboard tooltip. Fixes [docker/for-mac#7132](https://github.com/docker/for-mac/issues/7132)
 - Improved signal handling behavior (e.g. when pressing Ctrl-C in the terminal while running a `docker` command).
@@ -518,17 +518,17 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 ### New
 
-- Administrators can now control access to beta and experimental features in the **Features in development** tab with [Settings Management](hardened-desktop/settings-management/configure.md).
+- Administrators can now control access to beta and experimental features in the **Features in development** tab with [Settings Management](https://docs.docker.com/desktop/hardened-desktop/settings-management/configure).
 - Introduced four new version update states in the footer.
 - `docker init` (Beta) now supports PHP with Apache + Composer.
-- The [**Builds** view](use-desktop/builds.md) is now GA. You can now inspect builds, troubleshoot errors, and optimize build speed.
+- The [**Builds** view](https://docs.docker.com/desktop/use-desktop/builds.md) is now GA. You can now inspect builds, troubleshoot errors, and optimize build speed.
 
 ### Upgrades
 
 - [Compose v2.23.3](https://github.com/docker/compose/releases/tag/v2.23.3)
 - [Docker Scout CLI v1.2.0](https://github.com/docker/scout-cli/releases/tag/v1.2.0).
 - [Buildx v0.12.0](https://github.com/docker/buildx/releases/tag/v0.12.0)
-- [Wasm](../desktop/wasm/_index.md) runtimes:
+- [Wasm](https://docs.docker.com/desktop/wasm) runtimes:
   - wasmtime, wasmedge and wasmer `v0.3.1`.
   - lunatic, slight, spin, and wws `v0.10.0`.
   - Wasmtime is now based on wasmtime `v14.0` and supports wasi preview-2 components
@@ -631,10 +631,10 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 ### New
 
-- Rosetta is now Generally Available for all users on macOS 13 or later. It provides faster emulation of Intel-based images on Apple Silicon. To use Rosetta, see [Settings](settings/mac.md). Rosetta is enabled by default on macOS 14.1 and later.
+- Rosetta is now Generally Available for all users on macOS 13 or later. It provides faster emulation of Intel-based images on Apple Silicon. To use Rosetta, see [Settings](https://docs.docker.com/desktop/settings/mac). Rosetta is enabled by default on macOS 14.1 and later.
 - Docker Desktop now detects if a WSL version is out of date. If an out dated version of WSL is detected, you can allow Docker Desktop to automatically update the installation or you can manually update WSL outside of Docker Desktop.
 - New installations of Docker Desktop for Windows now require a Windows version of 19044 or later.
-- Administrators now have the ability to control Docker Scout image analysis  in [Settings Management](hardened-desktop/settings-management/configure.md).
+- Administrators now have the ability to control Docker Scout image analysis  in [Settings Management](https://docs.docker.com/desktop/hardened-desktop/settings-management/configure).
 
 ### Upgrades
 
