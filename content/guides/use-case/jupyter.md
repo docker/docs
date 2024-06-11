@@ -322,7 +322,7 @@ $ docker compose up --build
 
 This command builds your image and runs it as a container using the instructions
 specified in the `compose.yaml` file. The `--build` option ensures that your
-image is rebuilt, which is necessary if you made changes to your `Dockefile`.
+image is rebuilt, which is necessary if you made changes to your `Dockerfile`.
 
 To access the container, in a web browser navigate to
 [localhost:8889/lab?token=my-token](http://localhost:8889/lab?token=my-token).

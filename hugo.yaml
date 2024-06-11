@@ -256,6 +256,9 @@ module:
       mounts:
         - source: frontend/dockerfile/docs/reference.md
           target: content/reference/dockerfile.md
+        - source: frontend/dockerfile/docs/rules
+          target: content/reference/build-checks
+          includeFiles: "*.md"
         - source: docs/buildkitd.toml.md
           target: content/build/buildkit/toml-configuration.md
         - source: docs/attestations/slsa-definitions.md
