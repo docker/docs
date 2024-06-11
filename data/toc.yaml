@@ -848,8 +848,8 @@ Reference:
     title: StageNameCasing
   - path: /reference/build-checks/from-as-casing/
     title: FromAsCasing
-  - path: /reference/build-checks/no-empty-continuations/
-    title: NoEmptyContinuations
+  - path: /reference/build-checks/no-empty-continuation/
+    title: NoEmptyContinuation
   - path: /reference/build-checks/consistent-instruction-casing/
     title: ConsistentInstructionCasing
   - path: /reference/build-checks/file-consistent-command-casing/
