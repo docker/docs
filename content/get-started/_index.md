@@ -1,9 +1,9 @@
 ---
-title: Overview of the get started guide
+title: Overview of the Docker workshop
 keywords: docker basics, how to start a docker container, container settings, setup
   docker, how to setup docker, setting up docker, docker container guide, how to get
   started with docker
-description: Get started with the Docker basics in this comprehensive overview, You'll
+description: Get started with the Docker basics in this workshop, You'll
   learn about containers, images, and how to containerize your first application.
 aliases:
 - /engine/getstarted-voting-app/
@@ -62,7 +62,7 @@ aliases:
 - /get-started/hands-on-overview/
 ---
 
-This guide contains step-by-step instructions on how to get started with Docker. This guide shows you how to:
+This 45-minute workshop contains step-by-step instructions on how to get started with Docker. This workshop shows you how to:
 
 - Build and run an image as a container.
 - Share images using Docker Hub.

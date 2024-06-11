@@ -42,7 +42,7 @@ Before deactivating your Docker account, ensure that you meet the following requ
 
 Once you have completed all the steps above, you can deactivate your account. 
 
-1. Select your account name in the top-right of Docker Hub and from the drop-down menu, select **My Account**.
+1. Select your account name in the top-right of Docker Hub and from the drop-down menu, select **Account settings**.
 2. From the **Deactivate Account** tab, select **Deactivate account**. 
 
 > This cannot be undone. Be sure you've gathered all the data you need from your account before deactivating it.
