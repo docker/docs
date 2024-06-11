@@ -7,6 +7,23 @@ aliases:
 - /engine/tutorials/dockerrepos/
 ---
 
+## Manage default repository settings
+
+> **Early Access**
+>
+> Centralized repository settings are in [Early Access (EA)](/release-lifecycle/#early-access-ea). If your account isn't selected for EA, you can manage the following settings by visiting Docker Hub then navigating to your account settings.
+{ .restricted }
+
+You can manage the default repository settings for your personal account in Docker Hub. Select the **Settings** icon, then select **Repository Settings**.
+
+![Repository settings menu](../images/docker-hub-repo-settings-menu.png)
+
+Here you can manage the following:
+
+- Default privacy: set the default repository privacy to either **Public** or **Private**.
+- Linked accounts: for users with a Docker Pro, Team, or Business subscription, manage your source provider accounts to enable Automated Builds.
+- Notifications: for users with a Docker Pro, Team, or Business subscription, manage how you receive notifications from autobuilds.
+
 ## Change a repository from public to private
 
 1. Navigate to your repository.
