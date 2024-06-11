@@ -7,6 +7,7 @@ description: Follow this step-by-step guide to learn how to create and run a con
   application using Docker
 aliases:
 - /get-started/part2/
+- /get-started/02_our_app/
 ---
 
 For the rest of this guide, you'll be working with a simple todo
@@ -15,7 +16,7 @@ don't worry. This guide doesn't require any prior experience with JavaScript.
 
 ## Prerequisites
 
-- You have installed the latest version of [Docker Desktop](../get-docker.md).
+- You have installed the latest version of [Docker Desktop](../../get-docker.md).
 - You have installed a [Git client](https://git-scm.com/downloads).
 - You have an IDE or a text editor to edit files. Docker recommends using [Visual Studio Code](https://code.visualstudio.com/).
 
@@ -200,9 +201,9 @@ In this section, you learned the basics about creating a Dockerfile to build an 
 
 Related information:
 
- - [Dockerfile reference](../reference/dockerfile.md)
+ - [Dockerfile reference](/reference/dockerfile/)
  - [docker CLI reference](/reference/cli/docker/)
- - [Build with Docker guide](../build/guide/index.md)
+ - [Build with Docker guide](../../build/guide/_index.md)
 
 ## Next steps
 

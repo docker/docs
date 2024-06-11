@@ -2,10 +2,12 @@ Guides:
 - title: Overview
   path: /guides/
 - title: Docker overview
-  path: /get-started/overview/
+  path: /guides/docker-overview/
 
 - sectiontitle: "Getting started"
   section:
+  - title: "Overview"
+    path: /guides/getting-started/
   - title: "Get Docker Desktop"
     path: /guides/getting-started/get-docker-desktop/
   - title: "Develop with containers"
@@ -14,7 +16,6 @@ Guides:
     path: /guides/getting-started/build-and-push-first-image/
   - title: "What's next"
     path: /guides/getting-started/whats-next/
-
 
 - sectiontitle: "Docker concepts"
   section:
@@ -244,39 +245,39 @@ Guides:
 - sectiontitle: Deployment and orchestration
   section:
   - title: "Overview"
-    path: /get-started/orchestration/
+    path: /guides/deployment-orchestration/orchestration/
   - title: "Deploy to Kubernetes"
-    path: /get-started/kube-deploy/
+    path: /guides/deployment-orchestration/kube-deploy/
   - title: "Deploy to Swarm"
-    path: /get-started/swarm-deploy/
+    path: /guides/deployment-orchestration/swarm-deploy/
   - title: Cloud integrations
     path: /cloud/
 
 - sectiontitle: Docker workshop
   section:
   - title: "Part 1: Overview"
-    path: /get-started/
+    path: /guides/workshop/
   - title: "Part 2: Containerize an application"
-    path: /get-started/02_our_app/
+    path: /guides/workshop/02_our_app/
   - title: "Part 3: Update the application"
-    path: /get-started/03_updating_app/
+    path: /guides/workshop/03_updating_app/
   - title: "Part 4: Share the application"
-    path: /get-started/04_sharing_app/
+    path: /guides/workshop/04_sharing_app/
   - title: "Part 5: Persist the DB"
-    path: /get-started/05_persisting_data/
+    path: /guides/workshop/05_persisting_data/
   - title: "Part 6: Use bind mounts"
-    path: /get-started/06_bind_mounts/
+    path: /guides/workshop/06_bind_mounts/
   - title: "Part 7: Multi-container apps"
-    path: /get-started/07_multi_container/
+    path: /guides/workshop/07_multi_container/
   - title: "Part 8: Use Docker Compose"
-    path: /get-started/08_using_compose/
+    path: /guides/workshop/08_using_compose/
   - title: "Part 9: Image-building best practices"
-    path: /get-started/09_image_best/
+    path: /guides/workshop/09_image_best/
   - title: "Part 10: What next?"
-    path: /get-started/11_what_next/
+    path: /guides/workshop/11_what_next/
 
 
-- path: /get-started/resources/
+- path: /guides/resources/
   title: "Educational resources"
 
 - sectiontitle: Contribute
