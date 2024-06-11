@@ -1,4 +1,6 @@
-# Bake file reference
+---
+title: Bake file reference
+---
 
 The Bake file is a file for defining workflows that you run using `docker buildx bake`.
 
