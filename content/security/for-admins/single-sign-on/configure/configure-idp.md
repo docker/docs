@@ -20,7 +20,7 @@ Make sure you have completed the following before you begin:
 - Your domain is verified
 - You have created your SSO connection in Docker
 - You have copied the necessary fields from Docker to paste in your IdP:
-    - SAML: **Entity ID**, **ACS URL** to manually configure your IdP, or **Connection ID** to use an integrated application with Okta or Entra ID
+    - SAML: **Entity ID** and **ACS URL**, or **Connection ID** to use the [Okta integration](https://www.okta.com/integrations/docker/)
     - Azure AD (OIDC): **Redirect URL**
 
 ## SSO attributes
@@ -69,7 +69,7 @@ The user interface for your IdP may differ slightly from the following steps. Yo
 {{< tabs >}}
 {{< tab name="Okta" >}}
 
-You can configure Docker with Okta using the pre-configured Docker integration, or by creating a custom application. You can use the [Docker app integration](#add-the-app-integration-in-okta) to simplify the set-up process.
+You can configure Docker with Okta using the pre-configured Docker integration, or by creating a custom application. You can use the [Docker app integration](https://www.okta.com/integrations/docker/) to simplify the set-up process.
 
 ### Add the app integration in Okta
 
@@ -79,11 +79,12 @@ You can configure Docker with Okta using the pre-configured Docker integration, 
 4. Select **Add**. This opens the **General Settings** page.
 5. Configure the following settings:
    - **Application label**: Leave this as Docker or customize if you prefer.
-   - **Docker SSO Connection ID**: Copy the **Connection ID** value from Docker Hub or Admin Console and paste it here.
-   - **Application visibility**: Optionally, configure if you want this app visible to your users.
+   - **Docker Connection ID**: Copy the **Connection ID** value from Docker Hub or Admin Console and paste it here.
+   - **Application visibility**: Turn visibility off.
 6. Select **Done**.
-7. After you create the app, go to your app and select **View SAML setup instructions**.
-8. Here you can find the **SAML Sign-in URL** and the **x509 Certificate**. Open the certificate file in a text editor and paste the contents of the file in the **x509 Certificate** field in Docker Hub or Admin Console. Then, copy the value of the **SAML Sign-in URL** and paste it into the corresponding field in Docker Hub or Admin Console.
+7. After you create the app, go to your app, then select the **Sign On** tab.
+8. Select **More details**.
+9. Copy both the **Sign on URL** and **Signing Certificate** and paste them into the corresponding fields in Docker Hub or Admin Console.
 
 ### Create a custom application in Okta
 
@@ -114,17 +115,17 @@ See [More resources](#more-resources) for a video overview on how to set up a cu
 {{< /tab >}}
 {{< tab name="Entra ID SAML" >}}
 
-You can configure Docker with Entra ID using the pre-configured Docker integration, or by creating a custom application. You can use the [Docker app integration](#add-the-app-integration-in-entra-id) to simplify the set-up process.
+You can configure Docker with Entra ID using the pre-configured Docker integration, or by creating a custom application. You can use the [Docker app integration](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/aad.docker) to simplify the set-up process.
 
 ### Add the app integration in Entra ID
 
 1. Go to the Entra ID admin portal.
-2. Go to **Identity > Applications > Enterprise applications > All applications**.
-3. Select **New application**.
-4. Search for Docker and add it to the main directory.
-5. Copy the Docker SSO **Connection ID** from Docker Hub or Admin Console.
-6. Enter the SSO Connection ID in Entra ID to create your application.
-7. Once your application is created, find the **Login URL** and **SAML Signing Certificate** and copy them into the corresponding fields in your Docker SSO connection.
+2. Go to **Manage > Enterprise applications > New application**.
+3. Search for **Docker** and select the correct app to **Create** into the main directory.
+4. After adding the app to the directory, go to **Setup single sign on > Get started > SAML**.
+5. Copy the Docker SSO **Entity ID**, **ACS URL**, and **Connection ID** from Docker Hub or Admin Console.
+6. Enter those values in Entra ID to create your application.
+7. Once your application is created, find the **SAML Signing Certificate (Base 64)** and **Login URL** and copy them into the corresponding fields in your Docker SSO connection.
 8. Assign users to the app via direct assignment or via security groups.
 
 ### Create a custom application in Entra ID

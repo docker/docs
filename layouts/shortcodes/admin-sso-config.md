@@ -34,4 +34,4 @@ After your domain is verified, create an SSO connection.
    - SAML: **Entity ID**, **ACS URL**, **Connection ID**
    - Azure AD (OIDC): **Redirect URL**
 
-   The **Entity ID** and **ACS URL** are required for manually configuring your IdP with your SSO connection. The **Connection ID** is required to use an integrated application with Okta or Entra ID for your SSO connection.
+   The **Entity ID** and **ACS URL** are required for configuring your IdP, including the [Entra ID integrated application](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/aad.docker). The **Connection ID** is required to use the [integrated application with Okta](https://www.okta.com/integrations/docker/) for your SSO connection.
