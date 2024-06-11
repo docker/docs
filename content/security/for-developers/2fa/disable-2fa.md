@@ -14,7 +14,7 @@ aliases:
 { .warning }
 
 1. Sign in to your Docker Hub account. 
-2. Select your avatar and then from the drop-down menu, select **My Account**.
+2. Select your avatar and then from the drop-down menu, select **Account settings**.
 3. Navigate to the **Security** tab and select **Manage Two-Factor Authentication**.
 4. Enter your password, then select **Confirm**.
 5. Select **Disable 2FA**.
