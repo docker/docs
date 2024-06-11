@@ -18,7 +18,7 @@ grid:
   icon: content_copy
   link: /build/building/multi-platform/
 - title: Build Cloud
-  description: Orchestrate your builds with Bake.
+  description: Build your images faster in the cloud.
   icon: /assets/images/logo-build-cloud.svg
   link: /build/cloud/
 - title: Architecture
