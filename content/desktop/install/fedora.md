@@ -16,7 +16,7 @@ aliases:
 
 This page contains information on how to install, launch and upgrade Docker Desktop on a Fedora distribution.
 
-{{< button text="RPM package" url="https://desktop.docker.com/linux/main/amd64/149282/docker-desktop-4.30.0-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64" >}}
+{{< button text="RPM package" url="https://desktop.docker.com/linux/main/amd64/149282/docker-desktop-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64" >}}
 
 ## Prerequisites
 
@@ -39,12 +39,12 @@ To install Docker Desktop on Fedora:
 
 1. Set up [Docker's package repository](../../engine/install/fedora.md#set-up-the-repository).
 
-2. Download latest [RPM package](https://desktop.docker.com/linux/main/amd64/149282/docker-desktop-4.30.0-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64).
+2. Download latest [RPM package](https://desktop.docker.com/linux/main/amd64/149282/docker-desktop-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64).
 
 3. Install the package with dnf as follows:
 
    ```console
-   $ sudo dnf install ./docker-desktop-<version>-<arch>.rpm
+   $ sudo dnf install ./docker-desktop-<arch>.rpm
    ```
 
 There are a few post-install configuration steps done through the post-install script contained in the RPM package.
@@ -67,7 +67,7 @@ You need to first remove the previous version and then download the new package 
 
 ```console
 $ sudo dnf remove docker-desktop
-$ sudo dnf install ./docker-desktop-<version>-<arch>.rpm
+$ sudo dnf install ./docker-desktop-<arch>.rpm
 ```
 
 ## Next steps
