@@ -123,10 +123,12 @@ You can configure Docker with Entra ID using the pre-configured Docker integrati
 2. Go to **Manage > Enterprise applications > New application**.
 3. Search for **Docker** and select the correct app to **Create** into the main directory.
 4. After adding the app to the directory, go to **Setup single sign on > Get started > SAML**.
-5. Copy the Docker SSO **Entity ID**, **ACS URL**, and **Connection ID** from Docker Hub or Admin Console.
+5. Copy the Docker SSO **Entity ID** and **ACS URL** from Docker Hub or Admin Console.
 6. Enter those values in Entra ID to create your application.
 7. Once your application is created, find the **SAML Signing Certificate (Base 64)** and **Login URL** and copy them into the corresponding fields in your Docker SSO connection.
 8. Assign users to the app via direct assignment or via security groups.
+
+For more information on configuring and testing in Entra ID, see [Microsoft Entra SSO integration with Docker](https://learn.microsoft.com/en-us/entra/identity/saas-apps/docker-tutorial).
 
 ### Create a custom application in Entra ID
 
