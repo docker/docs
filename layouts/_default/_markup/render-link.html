@@ -11,7 +11,10 @@
         {{- partialCached "icon" "open_in_new" "open_in_new" -}}
       </span></a>
 {{- else if (strings.HasPrefix $url "/") -}}
-  {{/* absolute link, use url as-is */}}
+  {{ if (strings.HasSuffix (urls.Parse $url).Path ".md") }}
+    {{/* abs path to markdown file, use ref */}}
+    {{ $url = (ref .Page $url) }}
+  {{ end }}
   <a class="link" href="{{ $url }}">{{ .Text | safeHTML }}</a>
 {{- else -}}
   {{/* check if the file links to index.md */}}
