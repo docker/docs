@@ -40,3 +40,7 @@ These samples focus specifically on Docker Compose:
 ## Awesome Compose samples
 
 The Awesome Compose samples provide a starting point on how to integrate different frameworks and technologies using Docker Compose. All samples are available in the [Awesome-compose GitHub repo](https://github.com/docker/awesome-compose) and are ready to run with `docker compose up`.
+
+## insta-infra samples
+
+The [insta-infra GitHub repo](https://github.com/data-catering/insta-infra) utilises Docker Compose to help run any service in a single command. As an example, just run `./run.sh airflow` to get started with Airflow.
