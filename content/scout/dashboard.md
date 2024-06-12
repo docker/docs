@@ -152,7 +152,8 @@ vulnerability exposure or policy compliance as a result of pushing a new image.
 > Notifications are only triggered for the *last pushed* image tags for each
 > repository. "Last pushed" refers to the image tag that was most recently
 > pushed to the registry and analyzed by Docker Scout. If the last pushed image
-> is not by a newly disclosed CVE, then no notification will be triggered.
+> is not affected by a newly disclosed CVE, then no notification will be
+> triggered.
 
 The available notification settings are:
 
