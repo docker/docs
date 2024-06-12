@@ -107,7 +107,15 @@ Also consider [pinning base image versions](#pin-base-image-versions).
 
 To exclude files not relevant to the build, without restructuring your source
 repository, use a `.dockerignore` file. This file supports exclusion patterns
-similar to `.gitignore` files. For information on creating one, see
+similar to `.gitignore` files.
+
+For example, to exclude all files with the `.md` extension:
+
+```plaintext
+*.md
+```
+
+For information on creating one, see
 [Dockerignore file](../../build/building/context.md#dockerignore-files).
 
 ## Create ephemeral containers
@@ -312,13 +320,39 @@ Split long or complex `RUN` statements on multiple lines separated with
 backslashes to make your Dockerfile more readable, understandable, and
 maintainable.
 
+For example, you can chain commands with the `&&` operator, and use
+use escape characters to break long commands into multiple lines.
+
+```dockerfile
+RUN apt-get update && apt-get install -y \
+    package-bar \
+    package-baz \
+    package-foo
+```
+
+By default, backslash escapes a newline character, but you can change it with
+the [`escape` directive](../../reference/dockerfile.md#escape).
+
+You can also use here documents to run multiple commands without chaining them
+with a pipeline operator:
+
+```dockerfile
+RUN <<EOF
+apt-get update
+apt-get install -y \
+    package-bar \
+    package-baz \
+    package-foo
+EOF
+```
+
 For more information about `RUN`, see [Dockerfile reference for the RUN instruction](../../reference/dockerfile.md#run).
 
 #### apt-get
 
-Probably the most common use case for `RUN` is an application of `apt-get`.
-Because it installs packages, the `RUN apt-get` command has several counter-intuitive behaviors to
-look out for.
+One common use case for `RUN` instructions in Debian-based images is to install
+software using `apt-get`. Because `apt-get` installs packages, the `RUN
+apt-get` command has several counter-intuitive behaviors to look out for.
 
 Always combine `RUN apt-get update` with `apt-get install` in the same `RUN`
 statement. For example:
@@ -327,8 +361,7 @@ statement. For example:
 RUN apt-get update && apt-get install -y \
     package-bar \
     package-baz \
-    package-foo  \
-    && rm -rf /var/lib/apt/lists/*
+    package-foo
 ```
 
 Using `apt-get update` alone in a `RUN` statement causes caching issues and
@@ -393,7 +426,7 @@ RUN apt-get update && apt-get install -y \
     ruby1.9.1 \
     ruby1.9.1-dev \
     s3cmd=1.1.* \
- && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/*
 ```
 
 The `s3cmd` argument specifies a version `1.1.*`. If the image previously

@@ -1489,6 +1489,10 @@ Manuals:
         section:
         - title: GitHub
           path: /scout/integrations/source-code-management/github/
+      - sectiontitle: Team collaboration
+        section:
+        - title: Slack
+          path: /scout/integrations/team-collaboration/slack/
     - sectiontitle: Release notes
       section:
       - path: /scout/release-notes/cli/
