@@ -176,6 +176,18 @@ subnet supports 65 536 IPv6 addresses.
 [wikipedia-ipv6-reserved]: https://en.wikipedia.org/wiki/Reserved_IP_addresses#IPv6
 [wikipedia-ipv6-ula]: https://en.wikipedia.org/wiki/Unique_local_address
 
+## Docker in Docker
+
+On a host using `xtables` (legacy `iptables`) instead of `nftables`, kernel
+module `ip6_tables` must be loaded before an IPv6 Docker network can be created,
+It is normally loaded automatically when Docker starts.
+
+However, if you running Docker in Docker that is not based on a recent
+version of the [official `docker` image](https://hub.docker.com/_/docker), you
+may need to run `modprobe ip6_tables` on your host. Alternatively, use daemon
+option `--ip6tables=false` to disable `ip6tables` for the containerized Docker
+Engine.
+
 ## Next steps
 
 - [Networking overview](../../network/index.md)
