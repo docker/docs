@@ -604,8 +604,6 @@
   - /feedback/gha-build-summary/
 
 # Docker Scout
-"https://deploy-preview-19873--docsdocker.netlify.app/scout/dashboard/#notification-settings":
-  - /go/scout-notifications/
 "/scout/":
   - /go/scout/
   - /go/docker-scout/
