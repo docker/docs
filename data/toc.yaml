@@ -1415,6 +1415,12 @@ Manuals:
       title: Quickstart
     - path: /scout/install/
       title: Install
+    - sectiontitle: Concepts
+      section:
+        - path: /scout/concepts/s3c/
+          title: Software supply chain security
+        - path: /scout/concepts/sbom/
+          title: Software Bill of Materials
     - sectiontitle: Explore
       section:
       - path: /scout/explore/analysis/
