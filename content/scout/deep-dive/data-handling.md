@@ -5,6 +5,8 @@ keywords: |
   materials, config, ports, labels, os, registry, timestamp, digest, layers,
   architecture, license, dependencies, base image
 title: Data collection and storage in Docker Scout
+aliases:
+  /scout/data-handling/
 ---
 
 Docker Scout's image analysis works by collecting metadata from the container
@@ -68,7 +70,7 @@ and packages, and application-level packages such as maven, npm, and so on.
 ### Environment metadata
 
 If you integrate Docker Scout with your runtime environment via the
-[Sysdig integration](./integrations/environment/sysdig.md),
+[Sysdig integration](/scout/integrations/environment/sysdig.md),
 Docker Scout collects the following data points about your deployments:
 
 - Kubernetes namespace
@@ -83,7 +85,7 @@ Docker Scout platform; it's only used to run the analysis.
 
 ### Provenance
 
-For images with [provenance attestations](../build/attestations/slsa-provenance.md),
+For images with [provenance attestations](/build/attestations/slsa-provenance.md),
 Docker Scout stores the following data in addition to the SBOM:
 
 - Materials

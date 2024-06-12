@@ -609,10 +609,8 @@
   - /go/docker-scout/
 "/scout/quickstart/":
   - /go/scout-quickstart/
-"/scout/dashboard/":
+"/scout/explore/dashboard/":
   - /go/scout-dashboard/
-"/scout/ci/":
-  - /go/scout-ci/
 "/scout/policy/":
   - /go/scout-policy/
 "/scout/policy/configure/":
@@ -620,6 +618,8 @@
 "/build/building/best-practices/#pin-base-image-versions":
   - /go/base-image-pinning/
 # integrations
+"/scout/integrations/ci/":
+  - /go/scout-ci/
 "/scout/integrations/ci/gha/":
   - "/go/scout-gha/"
 "/scout/integrations/ci/gitlab/":
@@ -646,9 +646,9 @@
   - "/go/scout-github/"
 "/scout/guides/vex/":
   - "/go/vex-guide/"
-"/scout/metrics-exporter/":
+"/scout/explore/metrics-exporter/":
   - "/go/scout-metrics-exporter"
-"/scout/dashboard/#notification-settings":
+"/scout/explore/dashboard/#notification-settings":
   - /go/scout-notifications/
 "/scout/integrations/team-collaboration/slack/":
   - "/go/scout-slack/"

@@ -1,9 +1,11 @@
 ---
-title: Specify artifact type or location with prefixes
+title: Use Scout with different artifact types
 description: |
   Some of the Docker Scout commands support image references prefixes
   for controlling the location of the images or files that you want to analyze.
 keywords: scout, vulnerabilities, analyze, analysis, cli, packages, sbom, cve, security, local, source, code, supply chain
+aliases:
+  - /scout/image-prefix/
 ---
 
 Some of the Docker Scout CLI commands support prefixes for specifying
@@ -174,6 +176,6 @@ $ docker scout sbom --format spdx -o sbom.spdx.json archive://scout-cli.tar
 
 Read about the commands and supported flags in the CLI reference documentation:
 
-- [`docker scout quickview`](../reference/cli/docker/scout/compare.md)
-- [`docker scout cves`](../reference/cli/docker/scout/compare.md)
-- [`docker scout compare`](../reference/cli/docker/scout/compare.md)
+- [`docker scout quickview`](/reference/cli/docker/scout/quickview.md)
+- [`docker scout cves`](/reference/cli/docker/scout/cves.md)
+- [`docker scout compare`](/reference/cli/docker/scout/compare.md)
