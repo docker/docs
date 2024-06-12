@@ -272,7 +272,7 @@ Docker Desktop does not start automatically after installation. To start Docker 
 
 > **Tip**
 >
-> As an IT administrator, you can use endpoint management (MDM) software to identify the number of Docker Desktop instances and their versions within your environment. This can provide accurate license reporting and help ensure your machines use the latest version of Docker Desktop. 
+> As an IT administrator, you can use endpoint management (MDM) software to identify the number of Docker Desktop instances and their versions within your environment. This can provide accurate license reporting, help ensure your machines use the latest version of Docker Desktop, and enable you to [enforce sign-in](../../security/for-admins/configure-sign-in.md).
 > - [Intune](https://learn.microsoft.com/en-us/mem/intune/apps/app-discovered-apps)
 > - [Jamf](https://docs.jamf.com/10.25.0/jamf-pro/administrator-guide/Application_Usage.html)
 > - [Kandji](https://support.kandji.io/support/solutions/articles/72000559793-view-a-device-application-list)
