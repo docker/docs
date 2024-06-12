@@ -64,7 +64,7 @@ Note that when the same variable is declared by multiple sources, precedence app
 2. If `--env-file` is not set, variables set by an `.env` file in local working directory (`PWD`)
 3. Variables from a file set by `--env-file` or an `.env` file in project directory
 
-You can check variables and values used by Compose to interpolate the compose model by running `docker compose config --environment`.
+You can check variables and values used by Compose to interpolate the Compose model by running `docker compose config --environment`.
 
 ### `.env` file
 
