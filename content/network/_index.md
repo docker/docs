@@ -91,9 +91,9 @@ $ docker run --rm -it --network container:redis example/redis-cli -h 127.0.0.1
 ## Published ports
 
 By default, when you create or run a container using `docker create` or `docker run`,
-the container doesn't expose any of its ports to the outside world.
+containers on bridge networks don't expose any ports to the outside world.
 Use the `--publish` or `-p` flag to make a port available to services
-outside of Docker.
+outside the bridge network.
 This creates a firewall rule in the host,
 mapping a container port to a port on the Docker host to the outside world.
 Here are some examples:
@@ -111,11 +111,12 @@ Here are some examples:
 > a container's ports it becomes available not only to the Docker host, but to
 > the outside world as well.
 >
-> If you include the localhost IP address (`127.0.0.1`) with the publish flag,
-> only the Docker host can access the published container port.
+> If you include the localhost IP address (`127.0.0.1`, or `::1`) with the
+> publish flag, only the Docker host and its containers can access the
+> published container port.
 >
 > ```console
-> $ docker run -p 127.0.0.1:8080:80 nginx
+> $ docker run -p 127.0.0.1:8080:80 -p '[::1]:8080:80' nginx
 > ```
 >
 > > **Warning**
@@ -131,6 +132,14 @@ If you want to make a container accessible to other containers,
 it isn't necessary to publish the container's ports.
 You can enable inter-container communication by connecting the containers to the
 same network, usually a [bridge network](./drivers/bridge.md).
+
+Ports on the host's IPv6 addresses will map to the container's IPv4 address
+if no host IP is given in a port mapping, the bridge network is IPv4-only,
+and `--userland-proxy=true` (default).
+
+For more information about port mapping, including how to disable it and use
+direct routing to containers, see
+[packet filtering and firewalls](./packet-filtering-firewalls.md).
 
 ## IP address and hostname
 

@@ -104,15 +104,16 @@ flag.
 The following table describes the driver-specific options that you can pass to
 `--option` when creating a custom network using the `bridge` driver.
 
-| Option                                           | Default        | Description                                                                                   |
-| ------------------------------------------------ | -------------- | --------------------------------------------------------------------------------------------- |
-| `com.docker.network.bridge.name`                 |                | Interface name to use when creating the Linux bridge.                                         |
-| `com.docker.network.bridge.enable_ip_masquerade` | `true`         | Enable IP masquerading.                                                                       |
-| `com.docker.network.bridge.enable_icc`           | `true`         | Enable or Disable inter-container connectivity.                                               |
-| `com.docker.network.bridge.host_binding_ipv4`    |                | Default IP when binding container ports.                                                      |
-| `com.docker.network.driver.mtu`                  | `0` (no limit) | Set the containers network Maximum Transmission Unit (MTU).                                   |
-| `com.docker.network.container_iface_prefix`      | `eth`          | Set a custom prefix for container interfaces.                                                 |
-| `com.docker.network.bridge.inhibit_ipv4`         | `false`        | Prevent Docker from [assigning an IP address](#skip-ip-address-configuration) to the network. |
+| Option                                                                                          | Default                     | Description                                                                                    |
+|-------------------------------------------------------------------------------------------------|-----------------------------|------------------------------------------------------------------------------------------------|
+| `com.docker.network.bridge.name`                                                                |                             | Interface name to use when creating the Linux bridge.                                          |
+| `com.docker.network.bridge.enable_ip_masquerade`                                                | `true`                      | Enable IP masquerading.                                                                        |
+| `com.docker.network.bridge.gateway_mode_ipv4`<br/>`com.docker.network.bridge.gateway_mode_ipv6` | `nat`                       | Enable NAT and masquerading (`nat`), or only allow direct routing to the container (`routed`). |
+| `com.docker.network.bridge.enable_icc`                                                          | `true`                      | Enable or Disable inter-container connectivity.                                                |
+| `com.docker.network.bridge.host_binding_ipv4`                                                   | all IPv4 and IPv6 addresses | Default IP when binding container ports.                                                       |
+| `com.docker.network.driver.mtu`                                                                 | `0` (no limit)              | Set the containers network Maximum Transmission Unit (MTU).                                    |
+| `com.docker.network.container_iface_prefix`                                                     | `eth`                       | Set a custom prefix for container interfaces.                                                  |
+| `com.docker.network.bridge.inhibit_ipv4`                                                        | `false`                     | Prevent Docker from [assigning an IP address](#skip-ip-address-configuration) to the network.  |
 
 Some of these options are also available as flags to the `dockerd` CLI, and you
 can use them to configure the default `docker0` bridge when starting the Docker
