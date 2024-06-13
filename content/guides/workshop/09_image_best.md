@@ -3,6 +3,8 @@ title: Image-building best practices
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers,
   docker desktop
 description: Tips for building images for your application
+aliases:
+- /get-started/09_image_best/
 ---
 
 ## Image layering
@@ -197,12 +199,12 @@ into an nginx container.
 In this section, you learned a few image building best practices, including layer caching and multi-stage builds.
 
 Related information:
- - [Dockerfile reference](../reference/dockerfile.md)
- - [Build with Docker guide](../build/guide/index.md)
- - [Dockerfile best practices](../build/building/best-practices.md)
+ - [Dockerfile reference](/reference/dockerfile/)
+ - [Build with Docker guide](../../build/guide/_index.md)
+ - [Dockerfile best practices](../../build/building/best-practices.md)
 
 ## Next steps
 
 In the next section, you'll learn about additional resources you can use to continue learning about containers.
 
-{{< button text="What next" url="11_what_next.md" >}}
+{{< button text="What next" url="10_what_next.md" >}}

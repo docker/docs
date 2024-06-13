@@ -3,6 +3,8 @@ title: Update the application
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers,
   docker desktop
 description: Making changes to your application
+aliases:
+- /get-started/03_updating_app/
 ---
 
 In [part 2](./02_our_app.md), you containerized a todo application. In this part, you'll update the application and image. You'll also learn how to stop and remove a container.

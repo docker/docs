@@ -3,6 +3,8 @@ title: Multi container apps
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers,
   docker desktop
 description: Using more than one container in your application
+aliases:
+- /get-started/07_multi_container/
 ---
 
 Up to this point, you've been working with single container apps. But, now you will add MySQL to the
@@ -311,7 +313,7 @@ container. You learned a little bit about container networking and service disco
 
 Related information:
  - [docker CLI reference](/reference/cli/docker/)
- - [Networking overview](../network/index.md)
+ - [Networking overview](../../network/_index.md)
 
 ## Next steps
 

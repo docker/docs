@@ -179,7 +179,7 @@ The following image shows the application's high-level service architecture, whi
 The application uses Docker to run the application in containers, providing a
 consistent and isolated environment for running it. This means the application
 will operate as intended within its Docker containers, regardless of the
-underlying system differences. To learn more about Docker, see the [Getting started overview](../../../get-started/_index.md).
+underlying system differences. To learn more about Docker, see the [Getting started overview](../../getting-started/_index.md).
 
 Docker Compose is a tool for defining and running multi-container applications.
 Compose makes it easy to run this application with a single command, `docker
