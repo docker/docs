@@ -134,6 +134,27 @@ your own `docker0` bridge. Use this option if you want to run multiple daemon
 instances on the same host. For details, see
 [Run multiple daemons](../../reference/cli/dockerd.md#run-multiple-daemons).
 
+### Default host binding address
+
+When no host address is given in port publishing options like `-p 80`
+or `-p 8080:80`, the default is to make the container's port 80 available on all
+host addresses, IPv4 and IPv6.
+
+The bridge network driver option `com.docker.network.bridge.host_binding_ipv4`
+can be used to modify the default address for published ports.
+
+Despite the option's name, it is possible to specify an IPv6 address.
+
+When the default binding address is an address assigned to a specific interface,
+the container's port will only be accessible via that address.
+
+Setting the default binding address to `::` means published ports will only be
+available on the host's IPv6 addresses. However, setting it to `0.0.0.0` means it
+will be available on the host's IPv4 and IPv6 addresses.
+
+To restrict a published port to IPv4 only, the address must be included in the
+container's publishing options. For example, `-p 0.0.0.0:8080:80`.
+
 ## Manage a user-defined bridge
 
 Use the `docker network create` command to create a user-defined bridge
