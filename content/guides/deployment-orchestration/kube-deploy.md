@@ -2,11 +2,13 @@
 title: Deploy to Kubernetes
 keywords: kubernetes, pods, deployments, kubernetes services
 description: Learn how to describe and deploy a simple application on Kubernetes.
+aliases:
+- /get-started/kube-deploy/
 ---
 
 ## Prerequisites
 
-- Download and install Docker Desktop as described in [Get Docker](../get-docker.md).
+- Download and install Docker Desktop as described in [Get Docker](../../get-docker.md).
 - Work through containerizing an application in [Part 2](02_our_app.md).
 - Make sure that Kubernetes is turned on in Docker Desktop:
    If Kubernetes isn't running, follow the instructions in [Orchestration](orchestration.md) to finish setting it up.

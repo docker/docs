@@ -51,5 +51,5 @@ $ sudo pacman -S gnome-terminal
 
 ## Next steps
 
-- Take a look at the [Get started](../../get-started/index.md) training modules to learn how to build an image and run it as a containerized application.
+- Take a look at the [Docker workshop](../../guides/workshop/_index.md) to learn how to build an image and run it as a containerized application.
 - [Explore Docker Desktop](../use-desktop/index.md) and all its features.

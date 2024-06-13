@@ -4,14 +4,15 @@ keywords: swarm, swarm services, stacks
 description: Learn how to describe and deploy a simple application on Docker Swarm.
 aliases:
 - /get-started/part4/
+- /get-started/swarm-deploy/
 ---
 
 {{< include "swarm-mode.md" >}}
 
 ## Prerequisites
 
-- Download and install Docker Desktop as described in [Get Docker](../get-docker.md).
-- Work through containerizing an application in [Part 2](02_our_app.md).
+- Download and install Docker Desktop as described in [Get Docker](../../get-docker.md).
+- Work through containerizing an application in [Docker workshop part 2](../../guides/workshop/02_our_app.md)
 - Make sure that Swarm is enabled on your Docker Desktop by typing `docker system info`, and looking for a message `Swarm: active` (you might have to scroll up a little).
 
   If Swarm isn't running, simply type `docker swarm init` in a shell prompt to set it up.
@@ -102,8 +103,8 @@ In addition to deploying to Swarm, you've also described your application as a s
 
 Further documentation for all new Swarm objects and CLI commands used in this article are available here:
 
- - [Swarm Mode](../engine/swarm/index.md)
- - [Swarm Mode Services](../engine/swarm/how-swarm-mode-works/services.md)
- - [Swarm Stacks](../engine/swarm/stack-deploy.md)
+ - [Swarm Mode](../../engine/swarm/_index.md)
+ - [Swarm Mode Services](../../engine/swarm/how-swarm-mode-works/services.md)
+ - [Swarm Stacks](../../engine/swarm/stack-deploy.md)
  - [`docker stack *`](/reference/cli/docker/stack/)
  - [`docker service *`](/reference/cli/docker/service/)
