@@ -1,5 +1,5 @@
 ---
-title: High-level builds with Bake
+title: Buildx Bake
 keywords: build, buildx, bake, buildkit, hcl, json, compose
 aliases:
   - /build/customize/bake/
@@ -11,27 +11,47 @@ aliases:
 > [feedback from users](https://github.com/docker/buildx/issues).
 { .experimental }
 
-Buildx provides support for high-level build orchestration that goes beyond
-invoking a single build command. Bake lets you build all the images in your
-application together. You can define all of the build jobs for your projects in
-a file that can then be easily invoked by anyone.
+Bake is a feature of Docker Buildx that lets you define your build configuraton
+using a declarative file, as opposed to specifying a complex CLI expression. It
+also lets you run multiple builds concurrently with a single invocation.
 
-You can think of Bake as a task runner for Docker builds.
-[BuildKit](https://github.com/moby/buildkit) efficiently handles multiple
-concurrent build requests and de-duplicating work. You can invoke your builds
-using general-purpose task runners, like `make`. However, such tools generally
-invoke builds in a sequence. Therefore they aren't leveraging the full
-potential of BuildKit parallelization. Bake solves this problem.
+A Bake file can be written in HCL, JSON, or YAML formats, where the YAML format
+is an extension of a Docker Compose file. Here's an example Bake file in HCL
+format:
 
-The `docker buildx bake` command supports building images from a configuration
-file in HCL, JSON or YAML format. The YAML format extends the Compose
-Specification, and it's similar to `docker compose build`, except it builds all
-of your services concurrently as part of a single request.
+```hcl
+group "default" {
+  targets = ["frontend", "backend"]
+}
 
-## Next steps
+target "frontend" {
+  context = "./frontend"
+  dockerfile = "frontend.Dockerfile"
+  args = {
+    NODE_VERSION = "22"
+  }
+  tags = ["myapp/frontend:latest"]
+}
 
-- [Bake file reference](./reference.md)
-- [Configuring builds](./configuring-build.md)
-- [User defined HCL functions](./advanced.md)
-- [Defining additional build contexts and linking targets](./build-contexts.md)
-- [Building from Compose file](./compose-file.md)
+target "backend" {
+  context = "./backend"
+  dockerfile = "backend.Dockerfile"
+  args = {
+    GO_VERSION = "{{% param "example_go_version" %}}"
+  }
+  tags = ["myapp/backend:latest"]
+}
+```
+
+The `group` block defines a group of targets that can be built concurrently.
+Each `target` block defines a build target with its own configuration, such as
+the build context, Dockerfile, and tags.
+
+To invoke a build using the above Bake file, you can run:
+
+```console
+$ docker buildx bake
+```
+
+This executes the `default` group, which builds the `frontend` and `backend`
+targets concurrently.
