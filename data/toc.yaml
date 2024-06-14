@@ -1953,6 +1953,8 @@ Manuals:
           title: Overview
         - path: /build/bake/introduction/
           title: Introduction
+        - path: /build/bake/targets/
+          title: Targets
         - path: /build/bake/reference/
           title: Bake file reference
         - path: /build/bake/configuring-build/
