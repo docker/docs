@@ -18,8 +18,8 @@ versions of the [Build and push Docker images](https://github.com/marketplace/ac
 or [Docker Buildx Bake](https://github.com/marketplace/actions/docker-buildx-bake)
 GitHub Actions:
 
-- `docker/build-push-action@v5.5.0` or `docker/build-push-action@v5`
-- `docker/bake-action@v4.7.0` or `docker/bake-action@v4`
+- `docker/build-push-action@v6`
+- `docker/bake-action@v5`
 
 > **Note**
 >
@@ -76,7 +76,7 @@ variable in the YAML configuration for your build step:
 ```yaml {hl_lines=5}
       -
         name: Build
-        uses: docker/docker-build-push-action@v5
+        uses: docker/docker-build-push-action@v6
         env:
           DOCKER_BUILD_NO_SUMMARY: true
         with:
