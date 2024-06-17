@@ -28,7 +28,7 @@ Palo Alto, CA 94306
 ## Register a tax certificate
 
 1. [Submit a Docker Support ticket](https://hub.docker.com/support/contact) to initiate the process to register a tax certificate.
-2. Enter the required information. Select **Billing** from the **Topic** dropdown.
+2. Enter the required information. Select **Billing** from the **Topic** drop-down.
 3. In the **Additional Information** field, list the Docker ID/namespace(s) of the accounts that you want to apply the tax exemption certificate to.  
 
    > **Tip**
