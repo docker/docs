@@ -52,7 +52,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
       
       - name: Build
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           platforms: linux/amd64,linux/arm64
@@ -185,7 +185,7 @@ jobs:
           private-key-name: github-ppk
       
       - name: Build and push
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           ssh: default

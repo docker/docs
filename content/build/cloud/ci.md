@@ -78,7 +78,7 @@ jobs:
           endpoint: "<ORG>/default"
           install: true
       - name: Build and push
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           tags: "<IMAGE>"
