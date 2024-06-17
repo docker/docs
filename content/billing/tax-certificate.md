@@ -6,15 +6,16 @@ keywords: billing, renewal, payments, tax
 
 {{< include "tax-compliance.md" >}}
 
-If you're exempt from sales tax or VAT, you can register a valid tax exemption certificate with Docker's support team.
+If you're a customer in the United States and you're exempt from sales tax, you can register a valid tax exemption certificate with Docker's support team. If you're a global customer subject to VAT, make sure that you provide your [VAT number](/billing/core-billing/history/#include-your-vat-number-on-your-invoice).
 
 ## Prerequisites
 
 Before you submit your tax exemption certificate, ensure the following.
 
-1. Your tax exemption certificate is valid
-2. Your tax exemption certificate specifies Docker Inc as the Seller or Vendor
-3. You have a valid Docker ID/namespace(s) of the accounts that you want to apply the tax exemption certificate to
+1. Your customer name matches the name on the exemption certificate
+2. Your tax exemption certificate specifies Docker Inc as the Seller or Vendor and all applicable information is filled out
+3. Your certificate is signed and dated, and the expiration date hasn't passed
+4. You have a valid Docker ID/namespace(s) of the accounts that you want to apply the tax exemption certificate to
 
 ## Contact information
 
