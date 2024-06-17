@@ -1963,6 +1963,8 @@ Manuals:
           title: Expressions
         - path: /build/bake/funcs/
           title: Functions
+        - path: /build/bake/matrices/
+          title: Matrices
         - path: /build/bake/overrides/
           title: Overriding configuration
         - path: /build/bake/reference/
