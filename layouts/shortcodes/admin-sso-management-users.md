@@ -10,14 +10,14 @@
 {{ if eq (.Get "product") "admin" }}
   {{ $product_link = "the [Admin Console](https://admin.docker.com)" }}
   {{ $invite_button = "**Invite**" }}
-  {{ $sso_navigation = "Select your organization or company in the left navigation drop-down menu, and then select **SSO & SCIM**." }}
+  {{ $sso_navigation = "Select your organization or company in the left navigation drop-down menu, and then select **SSO and SCIM**." }}
   {{ $member_navigation = `Navigate to the user management page for your organization or company. 
     - Organization: Select your organization in the left navigation drop-down menu, and then select **Members**.
     - Company: Select your company in the left navigation drop-down menu, and then select **Users**.` }}
   {{ $remove_button = "**Remove member**, if you're an organization, or **Remove user**, if you're a company" }}
   {{ $provisioning_steps = `Users are provisioned with JIT provisioning by default. If you enable SCIM, you can disable JIT:
   1. Sign in to the [Admin Console](https://admin.docker.com).
-  2. Select your organization or company in the left navigation drop-down menu, and then select **SSO & SCIM**.
+  2. Select your organization or company in the left navigation drop-down menu, and then select **SSO and SCIM**.
   3. In the SSO connections table, select the **Action** icon and then **Disable JIT provisioning**.
   4. Select **Disable** to confirm.` }}
 {{ end }}
