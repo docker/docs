@@ -88,7 +88,7 @@ jobs:
       # (don't push on PR, load instead)
       - name: Build and push Docker image
         id: build-and-push
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           sbom: ${{ github.event_name != 'pull_request' }}
