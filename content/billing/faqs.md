@@ -41,7 +41,7 @@ To ensure that tax assessments are correct, make sure that your billing informat
 
 ### How do I certify my tax exempt status?
 
-If you're exempt from sales tax, you can register a valid tax exemption certificate with Docker's Support team. [Contact Support](https://hub.docker.com/support/contact) to get started.
+If you're exempt from sales tax, you can [register a valid tax exemption certificate](./tax-certificate.md) with Docker's Support team. [Contact Support](https://hub.docker.com/support/contact) to get started.
 
 ### Does Docker offer academic pricing?
 
