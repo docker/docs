@@ -82,7 +82,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
       -
         name: Build website
-        uses: docker/bake-action@v4
+        uses: docker/bake-action@v5
         with:
           files: |
             docker-bake.hcl
@@ -119,7 +119,7 @@ jobs:
       -
         name: Update S3 config
         if: ${{ env.DOCS_S3_BUCKET != '' && env.DOCS_S3_CONFIG != '' }}
-        uses: docker/bake-action@v4
+        uses: docker/bake-action@v5
         with:
           files: |
             docker-bake.hcl
@@ -133,7 +133,7 @@ jobs:
       -
         name: Update Cloudfront config
         if: ${{ env.DOCS_CLOUDFRONT_ID != '' }}
-        uses: docker/bake-action@v4
+        uses: docker/bake-action@v5
         with:
           files: |
             docker-bake.hcl

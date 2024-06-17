@@ -38,7 +38,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
       
       - name: Build
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           build-contexts: |
@@ -79,7 +79,7 @@ jobs:
           driver: docker
       
       - name: Build base image
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: ./base
           file: ./base/Dockerfile
@@ -87,7 +87,7 @@ jobs:
           tags: my-base-image:latest
       
       - name: Build
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           build-contexts: |
@@ -137,7 +137,7 @@ jobs:
           driver-opts: network=host
       
       - name: Build base image
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: ./base
           file: ./base/Dockerfile
@@ -145,7 +145,7 @@ jobs:
           push: true
       
       - name: Build
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           build-contexts: |

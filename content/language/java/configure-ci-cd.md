@@ -92,14 +92,14 @@ to Docker Hub.
            uses: docker/setup-buildx-action@v3
          -
            name: Build and test
-           uses: docker/build-push-action@v5
+           uses: docker/build-push-action@v6
            with:
              context: .
              target: test
              load: true
          -
            name: Build and push
-           uses: docker/build-push-action@v5
+           uses: docker/build-push-action@v6
            with:
              context: .
              platforms: linux/amd64,linux/arm64
