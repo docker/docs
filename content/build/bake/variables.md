@@ -124,3 +124,15 @@ $ docker buildx bake -f vars.hcl -f docker-bake.hcl --print app
   }
 }
 ```
+
+## Additional resources
+
+Here are some additional resources that show how you can use variables in Bake:
+
+- You can override `variable` values using environment variables. See
+  [Overriding configurations](./overrides.md#environment-variables) for more
+  information.
+- You can refer to and use global variables in functions. See [HCL
+  functions](./funcs.md#variables-in-functions)
+- You can use variable values when evaluating expressions. See [Expression
+  evaluation](./expressions.md#expressions-with-variables)

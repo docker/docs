@@ -55,3 +55,7 @@ $ docker buildx bake
 
 This executes the `default` group, which builds the `frontend` and `backend`
 targets concurrently.
+
+## Get started
+
+To learn how to get started with Bake, head over to the [Bake introduction](./introduction.md).

@@ -82,5 +82,10 @@ target "myapp" {
 }
 ```
 
-To see all the properties that can be set for a target, refer to the
-[Bake file reference](/build/bake/reference/).
+## Next steps
+
+To learn more about using Bake, see the following topics:
+
+- Learn how to define and use [targets](./targets.md) in Bake
+- To see all the properties that can be set for a target, refer to the
+  [Bake file reference](/build/bake/reference/).

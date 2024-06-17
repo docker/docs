@@ -93,3 +93,14 @@ command.
 ```console
 $ docker buildx bake all
 ```
+
+## Additional resources
+
+Refer to the following pages to learn more about Bake's features:
+
+- Learn how to use [variables](./variables.md) in Bake to make your build
+  configuration more flexible.
+- Learn how you can use matrices to build multiple images with different
+  configurations in [Matrices](./matrices.md).
+- Head to the [Bake file reference](/build/bake/reference/) to learn about all
+  the properties you can set in a Bake file, and its syntax.
