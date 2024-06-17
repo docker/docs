@@ -415,7 +415,7 @@ The full release note for this release is available
   for initializing the context with a value of a local OCI layout directory.
   E.g. `--build-context stagename=oci-layout://path/to/dir`. This feature
   requires BuildKit v0.11.0+ and Dockerfile 1.5.0+. [docker/buildx#1456](https://github.com/docker/buildx/issues/1456)
-- Bake now supports [resource interpolation](bake/configuring-build.md#resource-interpolation)
+- Bake now supports [resource interpolation](bake/inheritance.md#reusing-single-attribute-from-targets)
   where you can reuse the values from other target definitions. [docker/buildx#1434](https://github.com/docker/buildx/issues/1434)
 - Buildx will now automatically forward `SOURCE_DATE_EPOCH` environment variable
   if it is defined in your environment. This feature is meant to be used with
