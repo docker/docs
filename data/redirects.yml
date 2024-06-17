@@ -652,7 +652,7 @@
   - /go/scout-notifications/
 "/scout/integrations/team-collaboration/slack/":
   - "/go/scout-slack/"
-"/scout/scores/":
+"/scout/policy/scores/":
   - /go/scout-scores/
 
 # Build links (internal)
