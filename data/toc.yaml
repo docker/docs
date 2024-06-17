@@ -1959,12 +1959,14 @@ Manuals:
           title: Inheritance
         - path: /build/bake/variables/
           title: Variables
+        - path: /build/bake/expressions/
+          title: Expressions
+        - path: /build/bake/funcs/
+          title: Functions
         - path: /build/bake/overrides/
           title: Overriding configuration
         - path: /build/bake/reference/
           title: Bake file reference
-        - path: /build/bake/advanced/
-          title: Advanced patterns
         - path: /build/bake/build-contexts/
           title: Build contexts and linking targets
         - path: /build/bake/compose-file/
