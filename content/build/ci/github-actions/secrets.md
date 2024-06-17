@@ -217,7 +217,7 @@ jobs:
           private-key-name: github-ppk
       
       - name: Build
-        uses: docker/bake-action@v4
+        uses: docker/bake-action@v5
         with:
           set: |
             *.ssh=default

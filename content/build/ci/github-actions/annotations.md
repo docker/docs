@@ -93,7 +93,7 @@ jobs:
           images: ${{ env.IMAGE_NAME }}
 
       - name: Build
-        uses: docker/bake-action@v4
+        uses: docker/bake-action@v5
         with:
           files: |
             ./docker-bake.hcl
