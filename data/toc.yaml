@@ -1957,6 +1957,8 @@ Manuals:
           title: Targets
         - path: /build/bake/inheritance/
           title: Inheritance
+        - path: /build/bake/variables/
+          title: Variables
         - path: /build/bake/reference/
           title: Bake file reference
         - path: /build/bake/configuring-build/
