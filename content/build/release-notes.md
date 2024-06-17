@@ -605,7 +605,7 @@ For more details, see the complete release notes in the [Buildx GitHub repositor
 
 - Build command now accepts `--build-context` flag to [define additional named build contexts](/reference/cli/docker/buildx/build/#build-context)
   for your builds. [docker/buildx#904](https://github.com/docker/buildx/issues/904)
-- Bake definitions now support [defining dependencies between targets](bake/build-contexts.md)
+- Bake definitions now support [defining dependencies between targets](bake/contexts.md)
   and using the result of one target in another build.
   [docker/buildx#928](https://github.com/docker/buildx/issues/928),
   [docker/buildx#965](https://github.com/docker/buildx/issues/965),
