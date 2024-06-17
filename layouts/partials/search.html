@@ -90,24 +90,24 @@
       modalSearchInput.addEventListener("input", modalSearch);
 
       // Event delegation for tracking link clicks
-      modalSearchResults.addEventListener('click', function(event) {
-        if (event.target.tagName === 'A' && event.target.closest('.link')) {
-          if (window.heap === undefined) {
-            return;
+      if (window.heap !== undefined) {
+        modalSearchResults.addEventListener('click', function(event) {
+          if (event.target.tagName === 'A' && event.target.closest('.link')) {
+            const searchQuery = event.target.getAttribute('data-query');
+            const resultIndex = event.target.getAttribute('data-index');
+            const url = new URL(event.target.href);
+            const properties = {
+              docs_search_target_path: url.pathname,
+              docs_search_target_title: event.target.textContent,
+              docs_search_query_text: searchQuery,
+              docs_search_target_index: resultIndex,
+              docs_search_source_path: window.location.pathname,
+              docs_search_source_title: document.title,
+            };
+            heap.track("Docs - Search - Click - Result Link", properties);
           }
-          const searchQuery = event.target.getAttribute('data-query');
-          const resultIndex = event.target.getAttribute('data-index');
-          const properties = {
-            docs_search_target_url: event.target.href,
-            docs_search_target_title: event.target.textContent,
-            docs_search_query_text: searchQuery,
-            docs_search_target_index: resultIndex,
-            docs_search_source_path: window.location.pathname,
-            docs_search_source_title: document.title,
-          };
-          heap.track("Docs - Search - Click - Result Link", properties);
-        }
-      });
+        });
+      }
     });
   </script>
 </div>
