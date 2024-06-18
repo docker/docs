@@ -156,9 +156,9 @@ Docker Run Cloud takes advantage of Synchronized file shares to enable local-to-
    ```console
    $ docker compose up -d
    ```
-8. Test the application by visiting [`http://localhost:3000`](http://localhost:3000/).  
+5. Test the application by visiting [`http://localhost:3000`](http://localhost:3000/).  
    You should see the home page. The code for this page is located in `react-express-mysql/frontend/src/App.js`.
-9. In an IDE or text editor, open the `App.js` file, change some text, and save. Watch as the code reloads live in your browser.
+6. In an IDE or text editor, open the `App.js` file, change some text, and save. Watch as the code reloads live in your browser.
 
 {{< /tab >}}
 {{< /tabs >}}
