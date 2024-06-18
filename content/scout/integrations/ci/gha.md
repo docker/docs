@@ -55,11 +55,6 @@ jobs:
       pull-requests: write
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ env.SHA }}
-
       - name: Setup Docker buildx
         uses: docker/setup-buildx-action@v3
 
@@ -90,7 +85,6 @@ jobs:
         id: build-and-push
         uses: docker/build-push-action@v6
         with:
-          context: .
           sbom: ${{ github.event_name != 'pull_request' }}
           provenance: ${{ github.event_name != 'pull_request' }}
           push: ${{ github.event_name != 'pull_request' }}
@@ -103,11 +97,10 @@ jobs:
 
 This creates workflow steps to:
 
-1. Check out the repository.
-2. Set up Docker buildx.
-3. Authenticate to the registry.
-4. Extract metadata from Git reference and GitHub events.
-5. Build and push the Docker image to the registry.
+1. Set up Docker buildx.
+2. Authenticate to the registry.
+3. Extract metadata from Git reference and GitHub events.
+4. Build and push the Docker image to the registry.
 
 > **Note**
 >

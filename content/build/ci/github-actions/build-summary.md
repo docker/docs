@@ -80,7 +80,6 @@ variable in the YAML configuration for your build step:
         env:
           DOCKER_BUILD_NO_SUMMARY: true
         with:
-          context: .
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 ```
