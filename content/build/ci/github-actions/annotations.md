@@ -19,7 +19,7 @@ with [build-push-action] and [bake-action].
 {{< tabs >}}
 {{< tab name="build-push-action" >}}
 
-```yaml {hl_lines=35}
+```yaml {hl_lines=32}
 name: ci
 
 on:
@@ -32,9 +32,6 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -117,7 +114,7 @@ want to annotate. For example, setting `DOCKER_METADATA_ANNOTATIONS_LEVELS` to
 The following example creates annotations on both the image index and
 manifests.
 
-```yaml {hl_lines=31}
+```yaml {hl_lines=28}
 name: ci
 
 on:
@@ -130,9 +127,6 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 

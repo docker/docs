@@ -78,9 +78,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       -
-        name: Checkout
-        uses: actions/checkout@v4
-      -
         name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
@@ -93,8 +90,6 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v6
         with:
-          context: .
-          file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/clockbox:latest
 ```
@@ -102,18 +97,15 @@ jobs:
 
 The previous YAML snippet contains a sequence of steps that:
 
-1. Checks out the repository on the build machine.
-2. Signs in to Docker Hub, using the
+1. Signs in to Docker Hub, using the
    [Docker Login](https://github.com/marketplace/actions/docker-login) action and your Docker Hub credentials.
-3. Creates a BuildKit builder instance using the
+2. Creates a BuildKit builder instance using the
    [Docker Setup Buildx](https://github.com/marketplace/actions/docker-setup-buildx) action.
-4. Builds the container image and pushes it to the Docker Hub repository, using
+3. Builds the container image and pushes it to the Docker Hub repository, using
    [Build and push Docker images](https://github.com/marketplace/actions/build-and-push-docker-images).
 
    The `with` key lists a number of input parameters that configures the step:
 
-   - `context`: the [build context](/build/building/context/).
-   - `file`: filepath to the Dockerfile.
    - `push`: tells the action to upload the image to a registry after building
      it.
    - `tags`: tags that specify where to push the image.
@@ -135,9 +127,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       -
-        name: Checkout
-        uses: actions/checkout@v4
-      -
         name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
@@ -150,8 +139,6 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v6
         with:
-          context: .
-          file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/clockbox:latest
 ```

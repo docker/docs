@@ -18,9 +18,6 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
       
@@ -36,7 +33,6 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
-          context: .
           push: true
           tags: user/app:latest
       

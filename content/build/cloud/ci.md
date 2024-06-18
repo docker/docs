@@ -63,8 +63,6 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
@@ -80,11 +78,10 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
-          context: .
           tags: "<IMAGE>"
           # For pull requests, export results to the build cache.
           # Otherwise, push to a registry.
-          outputs: ${{ github.event_name == 'pull_request' && 'type=cacheonly' || 'type=registry,push=true' }}
+          outputs: ${{ github.event_name == 'pull_request' && 'type=cacheonly' || 'type=registry' }}
 ```
 
 {{< /tab >}}

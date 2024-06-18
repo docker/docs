@@ -76,9 +76,6 @@ to Docker Hub.
        runs-on: ubuntu-latest
        steps:
          -
-           name: Checkout
-           uses: actions/checkout@v4
-         -
            name: Login to Docker Hub
            uses: docker/login-action@v3
            with:
@@ -91,14 +88,12 @@ to Docker Hub.
            name: Build and push
            uses: docker/build-push-action@v6
            with:
-             context: .
              push: true
              tags: ${{ secrets.DOCKER_USERNAME }}/${{ github.event.repository.name }}:latest
    ```
    
-   If your Dockerfile is in a different directory, update the `context` with the path to the directory containing the Dockerfile.
-
-   For more information about the YAML syntax used here, see [Workflow syntax for GitHub Actions](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions).
+   For more information about the YAML syntax for `docker/build-push-action`,
+   refer to the [GitHub Action README](https://github.com/docker/build-push-action/blob/master/README.md).
 
 ## Step three: Run the workflow
 

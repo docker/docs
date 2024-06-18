@@ -24,9 +24,6 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
       
@@ -42,7 +39,6 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
-          context: .
           platforms: linux/amd64,linux/arm64
           push: true
           tags: user/app:latest
@@ -90,9 +86,6 @@ jobs:
           platform=${{ matrix.platform }}
           echo "PLATFORM_PAIR=${platform//\//-}" >> $GITHUB_ENV
       
-      - name: Checkout
-        uses: actions/checkout@v4
-      
       - name: Docker meta
         id: meta
         uses: docker/metadata-action@v5
@@ -115,7 +108,6 @@ jobs:
         id: build
         uses: docker/build-push-action@v6
         with:
-          context: .
           platforms: ${{ matrix.platform }}
           labels: ${{ steps.meta.outputs.labels }}
           outputs: type=image,name=${{ env.REGISTRY_IMAGE }},push-by-digest=true,name-canonical=true,push=true

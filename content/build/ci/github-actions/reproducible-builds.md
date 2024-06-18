@@ -31,16 +31,12 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       
       - name: Build
         uses: docker/build-push-action@v6
         with:
-          context: .
           tags: user/app:latest
         env:
           SOURCE_DATE_EPOCH: 0
@@ -91,9 +87,6 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       
@@ -103,7 +96,6 @@ jobs:
       - name: Build
         uses: docker/build-push-action@v6
         with:
-          context: .
           tags: user/app:latest
         env:
           SOURCE_DATE_EPOCH: ${{ env.TIMESTAMP }}
