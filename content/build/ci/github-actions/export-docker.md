@@ -17,17 +17,12 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      
-      - name: Checkout
-        uses: actions/checkout@v4
-      
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       
       - name: Build
         uses: docker/build-push-action@v6
         with:
-          context: .
           load: true
           tags: myimage:latest
       
