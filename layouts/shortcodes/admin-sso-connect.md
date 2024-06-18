@@ -5,7 +5,7 @@
 
 {{ if eq (.Get "product") "admin" }}
   {{ $product_link = "the [Admin Console](https://admin.docker.com)" }}
-  {{ $sso_navigation = "Select your organization or company in the left navigation drop-down menu, and then select **SSO & SCIM.**" }}
+  {{ $sso_navigation = "Select your organization or company in the left navigation drop-down menu, and then select **SSO and SCIM.**" }}
 {{ end }}
 
 1. In {{ $product_link }}, select the verified domains you want to apply the connection to.
