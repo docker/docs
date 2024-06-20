@@ -7,7 +7,7 @@ aliases:
 - /docker-hub/manage-a-team/
 ---
 
-You can manage teams for your organization in Docker Hub and the Docker Admin Console.
+You can create teams for your organization in Docker Hub and the Docker Admin Console. You can [configure repository access for a team](#configure-repository-permissions-for-a-team) in Docker Hub.
 
 A team is a group of Docker users that belong to an organization. An
 organization can have multiple teams. An
