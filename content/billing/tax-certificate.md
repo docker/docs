@@ -6,7 +6,7 @@ keywords: billing, renewal, payments, tax
 
 {{< include "tax-compliance.md" >}}
 
-If you're a customer in the United States and you're exempt from sales tax, you can register a valid tax exemption certificate with Docker's Support team. If you're a global customer subejct to VAT, make sure that you provide your [VAT number](/billing/core-billing/history/#include-your-vat-number-on-your-invoice).
+If you're a customer in the United States and you're exempt from sales tax, you can register a valid tax exemption certificate with Docker's Support team. If you're a global customer subject to VAT, make sure that you provide your [VAT number](/billing/core-billing/history/#include-your-vat-number-on-your-invoice).
 
 ## Prerequisites
 
