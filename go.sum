@@ -138,6 +138,8 @@ github.com/docker/compose/v2 v2.26.1 h1:27fAR5jVzNUYwY/9ppIjrPqGYLW5HtOTq2aYGBMC
 github.com/docker/compose/v2 v2.26.1/go.mod h1:5iVCMlr18ab0NlMxIPdtTgThTkzb34Z/zj15N7KSW+s=
 github.com/docker/compose/v2 v2.27.0 h1:FKyClQdErCxUZULC2zo6Jn5ve+epFPe/Y0HaxjmUzNg=
 github.com/docker/compose/v2 v2.27.0/go.mod h1:uaqwmY6haO8wXWHk+LAsqqDapX6boH4izRKqj/E7+Bo=
+github.com/docker/compose/v2 v2.27.2 h1:8uvz019AZIPmw8+rnLBubAuyt9SEoU/pyCcAJPXMq0A=
+github.com/docker/compose/v2 v2.27.2/go.mod h1:c6QJ/VVZrzVu97Ur1jylFLivvTkFdef1rSzmnQAO3DA=
 github.com/docker/distribution v2.8.2+incompatible h1:T3de5rq0dB1j30rp0sA2rER+m322EBzniBPB6ZIzuh8=
 github.com/docker/distribution v2.8.2+incompatible/go.mod h1:J2gT2udsDAN96Uj4KfcMRqY0/ypR+oyYUYmja8H+y+w=
 github.com/docker/distribution v2.8.3+incompatible h1:AtKxIZ36LoNK51+Z6RpzLpddBirtxJnzDrHLEKxTAYk=
