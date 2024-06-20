@@ -1,19 +1,19 @@
 <div x-data="{ open: false }"
   @keyup.escape.window="open = false; if (!open) { document.body.classList.remove('overflow-hidden'); }"
   @keydown.window="(e) => {
-switch(e.key) {
-case 'k':
-  if (e.metaKey || e.ctrlKey) {
-     e.preventDefault()
-     open = !open;
-     if (open) {
-       document.body.classList.add('overflow-hidden');
-     } else {
-       document.body.classList.remove('overflow-hidden');
-     }
-  }
-}
-}">
+    switch(e.key) {
+      case 'k':
+        if (e.metaKey || e.ctrlKey) {
+          e.preventDefault()
+          open = !open;
+          if (open) {
+            document.body.classList.add('overflow-hidden');
+          } else {
+            document.body.classList.remove('overflow-hidden');
+          }
+        }
+    }
+  }">
   <!-- search button -->
   <button @click="open = true; document.body.classList.add('overflow-hidden');">
     <span class="icon-svg">{{ partialCached "icon" "search" "search" }}</span>
@@ -68,16 +68,15 @@ case 'k':
         if (search === null) {
           return;
         } else {
-          const results = await Promise.all(
-            search.results.map((r) => r.data()),
-          );
+          const resultsData = await Promise.all(search.results.map(r => r.data()));
+          const results = resultsData.map((item, index) => ({...item, index: index + 1}));
 
           let resultsHTML = `<div>${results.length} results</div>`;
           resultsHTML += results
             .map((item) => {
               return `<div class="bg-gray-light-100 dark:bg-gray-dark-200 rounded p-4">
               <div class="flex flex-col">
-                <a class="link" href="${item.url}">${item.meta.title}</a>
+                <a class="link" href="${item.url}" data-query="${query}" data-index="${item.index}">${item.meta.title}</a>
                 <p class="text-gray-light dark:text-gray-dark overflow-hidden">…${item.excerpt}…</p>
               </div>
               </div>`;
@@ -89,6 +88,26 @@ case 'k':
       }
 
       modalSearchInput.addEventListener("input", modalSearch);
+
+      // Event delegation for tracking link clicks
+      if (window.heap !== undefined) {
+        modalSearchResults.addEventListener('click', function(event) {
+          if (event.target.tagName === 'A' && event.target.closest('.link')) {
+            const searchQuery = event.target.getAttribute('data-query');
+            const resultIndex = event.target.getAttribute('data-index');
+            const url = new URL(event.target.href);
+            const properties = {
+              docs_search_target_path: url.pathname,
+              docs_search_target_title: event.target.textContent,
+              docs_search_query_text: searchQuery,
+              docs_search_target_index: resultIndex,
+              docs_search_source_path: window.location.pathname,
+              docs_search_source_title: document.title,
+            };
+            heap.track("Docs - Search - Click - Result Link", properties);
+          }
+        });
+      }
     });
   </script>
 </div>
