@@ -1442,6 +1442,8 @@ Manuals:
       section:
       - path: /scout/policy/
         title: Overview
+      - path: /scout/policy/scores/
+        title: Health scores {{< badge color=blue text=Beta >}}
       - path: /scout/policy/view/
         title: View policy status
       - path: /scout/policy/configure/
