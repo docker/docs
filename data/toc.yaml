@@ -2301,6 +2301,8 @@ Manuals:
     title: Docker Build Cloud billing
   - path: /billing/scout-billing/
     title: Docker Scout billing
+  - path: /billing/tax-certificate/
+    title: Register a tax certificate
   - path: /billing/faqs/
     title: Billing FAQs
 
