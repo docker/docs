@@ -24,8 +24,8 @@ For more detailed information, see the [release notes in the Compose repo](https
 
 ### Bug fixes and enhancements
 
-- Added `--environment` flag to `config` command
-- Fixed a bug with `watch` process hanging when use as flag with `up` command
+- Added an `--environment` flag to the `config` command
+- Fixed a bug which caused the  `watch` process to hang when used as flag with the `up` command
 - Fixed usage of `COMPOSE_PROFILES` in `.env` file
 
 ## 2.27.1
@@ -41,10 +41,10 @@ For more detailed information, see the [release notes in the Compose repo](https
 
 ### Bug fixes and enhancements
 
-- Added a navigation menu to open Compose configuration in Docker Desktop
+- Added a navigation menu in the CLI where you can open your Compose file in Docker Desktop
 - Added documentation for `--menu` flag in `docker compose up`
 - Fixed a bug with `--resolve-image-digests` used with `--no-interpolate`
-- Allowed to use local `.env` file to override `COMPOSE_*` environment variables
+- You can now use a local `.env` file to override `COMPOSE_*` environment variables
 
 ## 2.27.0
 
