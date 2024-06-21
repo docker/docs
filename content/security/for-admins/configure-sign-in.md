@@ -84,19 +84,6 @@ details, see [Manage members](/admin/organization/members/).
 
 You can also use the following alternative methods to create a `registry.json` file.
 
-### Download a registry.json file from Docker Hub
-
-In Docker Hub, you can download the `registry.json` file for your organization
-or copy the specific commands to create the file for your organization. To
-download the file or copy the commands, use the following steps.
-
-1. Sign in to [Docker Hub](http://hub.docker.com/) as an organization owner.
-
-2. Go to **Organizations** > ***Your Organization*** > **Settings**.
-
-3. Select **Enforce Sign-in** and continue with the on-screen instructions for
-   Windows, Mac, or Linux.
-
 ### Create a registry.json file when installing Docker Desktop
 
 To create a `registry.json` file when installing Docker Desktop, use the following instructions based on your user's operating system.
