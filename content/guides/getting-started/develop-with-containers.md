@@ -1,7 +1,13 @@
 ---
-title: Develop with containers  
+title: Develop with containers
 keywords: concepts, build, images, container, docker desktop
 description: This concept page will teach you how to develop with containers
+summary: |
+  Learn how to run your first container, gaining hands-on experience with
+  Docker's powerful features. We'll cover making real-time changes to both
+  backend and frontend code within the containerized environment, ensuring
+  seamless integration and testing.
+weight: 2
 ---
 
 {{< youtube-embed D0SDBrS3t9I >}}
