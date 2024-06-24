@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 ARG ALPINE_VERSION=3.20
-ARG GO_VERSION=1.21
+ARG GO_VERSION=1.22
 ARG HTMLTEST_VERSION=0.17.0
 
 FROM golang:${GO_VERSION}-alpine AS base
@@ -14,7 +14,7 @@ ENV NODE_ENV=production
 RUN npm install
 
 FROM base AS hugo
-ARG HUGO_VERSION=0.124.1
+ARG HUGO_VERSION=0.127.0
 ARG TARGETARCH
 WORKDIR /tmp/hugo
 RUN wget -O "hugo.tar.gz" "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-${TARGETARCH}.tar.gz"

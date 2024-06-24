@@ -3,6 +3,8 @@ description: More details on the advisory database and CVE-to-package matching s
   behind Docker Scout analysis.
 keywords: scout, scanning, analysis, vulnerabilities, Hub, supply chain, security, packages, repositories, ecosystem
 title: Advisory database sources and matching service
+aliases:
+  /scout/advisory-db-sources/
 ---
 
 Reliable information sources are key for Docker Scout's ability to
@@ -53,7 +55,7 @@ The database stores the Software Bill of Materials (SBOM) and other metadata abo
 When a security advisory has new information about a vulnerability,
 your SBOM is cross-referenced with the CVE information to detect how it affects you.
 
-For more details on how image analysis works, see the [image analysis page](./image-analysis.md).
+For more details on how image analysis works, see the [image analysis page](/scout/explore/analysis.md).
 
 ## Vulnerability matching
 

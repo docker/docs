@@ -4,9 +4,10 @@ description: Use Docker Scout to extract the SBOM for your project.
 keywords: scout, supply chain, sbom, software bill of material, spdx, cli, attestations, file
 aliases:
 - /engine/sbom/
+- /scout/sbom/
 ---
 
-[Image analysis](./image-analysis.md) uses image SBOMs to understand what packages and versions an image contains.
+[Image analysis](/scout/explore/analysis.md) uses image SBOMs to understand what packages and versions an image contains.
 Docker Scout uses SBOM attestations if available on the image (recommended).
 If no SBOM attestation is available, Docker Scout creates one by indexing the image contents.
 
@@ -56,12 +57,12 @@ $ docker scout sbom --format list alpine
 ```
 
 For more information about the `docker scout sbom` command, refer to the [CLI
-reference](../reference/cli/docker/scout/sbom.md).
+reference](/reference/cli/docker/scout/sbom.md).
 
 ## Attach as build attestation {#attest}
 
 You can generate the SBOM and attach it to the image at build-time as an
-[attestation](../build/attestations/_index.md). BuildKit provides a default
+[attestation](/build/attestations/_index.md). BuildKit provides a default
 SBOM generator which is different from what Docker Scout uses.
 You can configure BuildKit to use the Docker Scout SBOM generator
 using the `--attest` flag for the `docker build` command.
@@ -75,7 +76,7 @@ $ docker build --tag <org>/<image> \
 ```
 
 To build images with SBOM attestations, you must either turn on
-the [containerd image store](../desktop/containerd.md) feature, or use a
+the [containerd image store](/desktop/containerd.md) feature, or use a
 `docker-container` builder together with the `--push` flag to push the image
 (with attestations) directly to a registry.
 
