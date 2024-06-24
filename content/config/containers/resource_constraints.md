@@ -233,7 +233,9 @@ for real-time tasks per runtime period. For instance, with the default period of
 containers using the real-time scheduler can run for 950000 microseconds for every
 1000000-microsecond period, leaving at least 50000 microseconds available for
 non-real-time tasks. To make this configuration permanent on systems which use
-`systemd`, see [Control and configure Docker with systemd](../daemon/systemd.md).
+`systemd`, create a systemd unit file for the `docker` service. For an example,
+see the instruction on how to configure the daemon to use a proxy with a
+[systemd unit file](../daemon/proxy.md#systemd-unit-file).
 
 #### Configure individual containers
 

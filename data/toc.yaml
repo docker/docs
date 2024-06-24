@@ -1639,8 +1639,8 @@ Manuals:
       title: Start the daemon
     - path: /config/daemon/
       title: Configure the daemon
-    - path: /config/daemon/systemd/
-      title: Configure with systemd
+    - path: /config/daemon/proxy/
+      title: HTTP proxy
     - path: /config/containers/live-restore/
       title: Live restore
     - path: /config/daemon/troubleshoot/
