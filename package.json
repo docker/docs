@@ -17,7 +17,7 @@
     "@alpinejs/collapse": "^3.14.1",
     "@alpinejs/focus": "^3.14.1",
     "@alpinejs/persist": "^3.14.1",
-    "@floating-ui/dom": "^1.6.3",
+    "@floating-ui/dom": "^1.6.5",
     "@material-symbols/svg-400": "^0.14.6",
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
     "@tailwindcss/typography": "^0.5.10",
