@@ -20,13 +20,13 @@
     "@floating-ui/dom": "^1.6.5",
     "@material-symbols/svg-400": "^0.14.6",
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
-    "@tailwindcss/typography": "^0.5.10",
+    "@tailwindcss/typography": "^0.5.13",
     "alpinejs": "^3.14.1",
     "autoprefixer": "^10.4.17",
     "postcss": "^8.4.38",
     "postcss-cli": "^11.0.0",
     "postcss-import": "^16.1.0",
-    "tailwindcss": "^3.4.1"
+    "tailwindcss": "^3.4.4"
   },
   "devDependencies": {
     "markdownlint": "^0.34.0",
