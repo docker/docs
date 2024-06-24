@@ -14,23 +14,23 @@
   },
   "homepage": "https://docs.docker.com/",
   "dependencies": {
-    "@alpinejs/collapse": "^3.13.5",
-    "@alpinejs/focus": "^3.13.7",
-    "@alpinejs/persist": "^3.13.5",
-    "@floating-ui/dom": "^1.6.3",
+    "@alpinejs/collapse": "^3.14.1",
+    "@alpinejs/focus": "^3.14.1",
+    "@alpinejs/persist": "^3.14.1",
+    "@floating-ui/dom": "^1.6.5",
     "@material-symbols/svg-400": "^0.14.6",
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
-    "@tailwindcss/typography": "^0.5.10",
-    "alpinejs": "^3.13.5",
-    "autoprefixer": "^10.4.17",
-    "postcss": "^8.4.33",
+    "@tailwindcss/typography": "^0.5.13",
+    "alpinejs": "^3.14.1",
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38",
     "postcss-cli": "^11.0.0",
-    "postcss-import": "^16.0.0",
-    "tailwindcss": "^3.4.1"
+    "postcss-import": "^16.1.0",
+    "tailwindcss": "^3.4.4"
   },
   "devDependencies": {
-    "markdownlint": "^0.33.0",
-    "prettier": "^3.2.4",
-    "prettier-plugin-tailwindcss": "^0.5.11"
+    "markdownlint": "^0.34.0",
+    "prettier": "^3.3.2",
+    "prettier-plugin-tailwindcss": "^0.6.5"
   }
 }
