@@ -11,6 +11,7 @@ aliases:
 - /cloud/ecs-architecture/
 - /cloud/aci-compose-features/
 - /cloud/aci-container-features/
+- /engine/context/ecs-integration/
 ---
 
 Docker Compose's integration for Amazon's Elastic Container Service and Azure Container Instances has retired. The integration documentation is no longer available through the Docker Docs site. 
