@@ -25,7 +25,7 @@ with established best practices.
 ## How Policy Evaluation works
 
 When you activate Docker Scout for a repository, images that you push are
-[automatically analyzed](../image-analysis.md). The analysis gives you insights
+[automatically analyzed](/scout/explore/analysis.md). The analysis gives you insights
 about the composition of your images, including what packages they contain and
 what vulnerabilities they're exposed to. Policy Evaluation builds on top of the
 image analysis feature, interpreting the analysis results against the rules

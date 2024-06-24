@@ -1416,28 +1416,36 @@ Manuals:
       title: Quickstart
     - path: /scout/install/
       title: Install
-    - sectiontitle: Explore Docker Scout
+    - sectiontitle: Concepts
       section:
-      - path: /scout/dashboard/
+        - path: /scout/concepts/s3c/
+          title: Software supply chain security
+        - path: /scout/concepts/sbom/
+          title: Software Bill of Materials
+    - sectiontitle: Explore
+      section:
+      - path: /scout/explore/analysis/
+        title: Analysis
+      - path: /scout/explore/dashboard/
         title: Dashboard
-      - path: /scout/image-details-view/
+      - path: /scout/explore/image-details-view/
         title: Image details view
-      - path: /scout/advisory-db-sources/
-        title: Advisory database
-      - path: /scout/data-handling/
-        title: Data handling
-    - sectiontitle: Use Docker Scout
-      section:
-      - path: /scout/image-analysis/
-        title: Image analysis
-      - path: /scout/image-prefix/
-        title: Specify artifact type or location
-      - path: /scout/sbom/
-        title: SBOM
-      - path: /scout/env-vars/
-        title: Environment variables
-      - path: /scout/metrics-exporter/
+      - path: /scout/explore/metrics-exporter/
         title: Metrics exporter
+    - sectiontitle: How-tos
+      section:
+      - path: /scout/how-tos/artifact-types/
+        title: Specify artifact type or location
+      - path: /scout/how-tos/view-create-sboms/
+        title: View and create SBOMs
+      - path: /scout/how-tos/configure-cli/
+        title: Configure the CLI
+    - sectiontitle: Deep dive
+      section:
+      - path: /scout/deep-dive/advisory-db-sources/
+        title: Advisory database
+      - path: /scout/deep-dive/data-handling/
+        title: Data handling
     - sectiontitle: Policy Evaluation
       section:
       - path: /scout/policy/

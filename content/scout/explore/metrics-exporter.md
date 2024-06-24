@@ -4,6 +4,8 @@ description: |
   Learn how to scrape data from Docker Scout using Prometheus to create your own
   vulnerability and policy dashboards wiht Grafana
 keywords: scout, exporter, prometheus, grafana, metrics, dashboard, api, compose
+aliases:
+  - /scout/metrics-exporter/
 ---
 
 Docker Scout exposes a metrics HTTP endpoint that lets you scrape vulnerability
@@ -23,7 +25,7 @@ The metrics endpoint exposes the following metrics:
 
 > **Streams**
 >
-> In Docker Scout, the streams concept is a superset of [environments](./integrations/environment/_index.md).
+> In Docker Scout, the streams concept is a superset of [environments](/scout/integrations/environment/_index.md).
 > Streams include all runtime environments that you've defined,
 > as well as the special `latest-indexed` stream.
 > The `latest-indexed` stream contains the most recently pushed (and analyzed) tag for each repository.
@@ -156,16 +158,16 @@ The Prometheus server runs in a Docker container and is accessible on port 9090.
 After a few seconds, you should see the metrics endpoint as a target in the
 Prometheus UI at <http://localhost:9090/targets>.
 
-![Docker Scout metrics exporter Prometheus target](./images/scout-metrics-prom-target.png "Docker Scout metrics exporter Prometheus target")
+![Docker Scout metrics exporter Prometheus target](../images/scout-metrics-prom-target.png "Docker Scout metrics exporter Prometheus target")
 
 ### Viewing the metrics in Grafana
 
 To view the Grafana dashboards, go to <http://localhost:3000/dashboards>,
 and sign in using the credentials defined in the Docker Compose file (username: `admin`, password: `grafana`).
 
-![Vulnerability dashboard in Grafana](./images/scout-metrics-grafana-vulns.png "Vulnerability dashboard in Grafana")
+![Vulnerability dashboard in Grafana](../images/scout-metrics-grafana-vulns.png "Vulnerability dashboard in Grafana")
 
-![Policy dashboard in Grafana](images/scout-metrics-grafana-policy.png "Policy dashboard in Grafana")
+![Policy dashboard in Grafana](../images/scout-metrics-grafana-policy.png "Policy dashboard in Grafana")
 
 The dashboards are pre-configured to visualize the vulnerability and policy metrics scraped by Prometheus.
 
@@ -316,13 +318,13 @@ to see the metrics collected from this example. This configuration will collect
 all exposed metrics starting with `scout_` under the namespace
 `scout_metrics_exporter`.
 
-![datadog_metrics_summary](images/datadog_metrics_summary.png)
+![datadog_metrics_summary](../images/datadog_metrics_summary.png)
 
 The following screenshots show examples of a Datadog dashboard containing
 graphs about vulnerability and policy compliance for a specific [stream](#stream).
 
-![datadog_dashboard_1](images/datadog_dashboard_1.png)
-![datadog_dashboard_2](images/datadog_dashboard_2.png)
+![datadog_dashboard_1](../images/datadog_dashboard_1.png)
+![datadog_dashboard_2](../images/datadog_dashboard_2.png)
 
 > The reason why the lines in the graphs look flat is due to the own nature of
 > vulnerabilities (they don't change too often) and the short time interval

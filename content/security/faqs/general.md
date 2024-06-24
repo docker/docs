@@ -71,7 +71,7 @@ If SCIM isn't enabled, you have to manually remove PAT users from the organizati
 
 ### What metadata is collected from container images that Scout analyzes?
 
-For information about the metadata stored by Docker Scout, see [Data handling](../../scout/data-handling.md).
+For information about the metadata stored by Docker Scout, see [Data handling](/scout/deep-dive/data-handling.md).
 
 ### How are extensions within the Marketplace vetted for security prior to placement?
 

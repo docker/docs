@@ -1,8 +1,10 @@
 ---
-title: Environment variables used by Docker Scout
+title: Configure Docker Scout with environment variables
 linkTitle: Docker Scout environment variables
 description: Configure how the behavior of Docker Scout CLI commands using these environment variables
 keywords: scout, supply chain, cli, environment, variables, env, vars, configure
+aliases:
+  - /scout/env-vars/
 ---
 
 The following environment variables are available to configure the Docker Scout

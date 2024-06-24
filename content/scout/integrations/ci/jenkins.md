@@ -44,6 +44,6 @@ high-severity vulnerabilities.
 > **Note**
 >
 > If you're seeing a `permission denied` error related to the image cache, try
-> setting the [`DOCKER_SCOUT_CACHE_DIR`](../../env-vars.md) environment
+> setting the [`DOCKER_SCOUT_CACHE_DIR`](/scout/how-tos/configure-cli.md) environment
 > variable to a writable directory. Or alternatively, disable local caching
 > entirely with `DOCKER_SCOUT_NO_CACHE=true`.
