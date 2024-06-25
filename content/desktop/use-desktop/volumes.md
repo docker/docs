@@ -196,7 +196,7 @@ You can either [export a volume now](#export-a-volume-now) or [schedule a recurr
    {{< /tab >}}
    {{< /tabs >}}
 
-6. Select **Save**.
+7. Select **Save**.
 
 
 ## Import a volume
