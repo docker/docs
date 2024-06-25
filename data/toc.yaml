@@ -1892,7 +1892,7 @@ Manuals:
         - path: /build/building/opentelemetry/
           title: OpenTelemetry support
         - path: /build/building/base-images/
-          title: Create your own base image
+          title: Base images
     - sectiontitle: Builders
       section:
         - path: /build/builders/
