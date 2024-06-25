@@ -1,6 +1,6 @@
 # github.com/moby/moby v27.0.1+incompatible
 # github.com/moby/buildkit v0.14.1
 # github.com/docker/buildx v0.15.1
-# github.com/docker/cli v27.0.1-rc.1+incompatible
+# github.com/docker/cli v27.0.1+incompatible
 # github.com/docker/compose/v2 v2.28.1
 # github.com/docker/scout-cli v1.9.3
