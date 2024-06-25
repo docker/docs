@@ -11,6 +11,7 @@ aliases:
 ---
 
 Docker is an open platform for developing, shipping, and running applications.
+Docker provides aset of tools and a platform to automate the deployment and scaling of containerized application
 
 Docker allows you to separate your applications from your infrastructure so you
 can deliver software quickly. With Docker, you can manage your infrastructure in
