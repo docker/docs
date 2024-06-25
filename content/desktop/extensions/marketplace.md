@@ -32,7 +32,7 @@ From here, you can select **Open** to access the extension or install additional
 
 ## Update an extension
 
-You can update any extension outside of Docker Desktop releases. To update an extension to the latest version, navigate to Docker Dashboard and select the **Manage** tab.
+You can update any extension outside of Docker Desktop releases. To update an extension to the latest version, navigate to the Docker Dashboard and select the **Manage** tab.
 
 The **Manage** tab displays with all your installed extensions. If an extension has a new version available, it displays an **Update** button.
 
@@ -45,7 +45,7 @@ You can uninstall an extension at any time.
 >
 > Any data used by the extension that's stored in a volume must be manually deleted.
 
-1. Navigate to Docker Dashboard and select the **Manage** tab.
+1. Navigate to the Docker Dashboard and select the **Manage** tab.
    This displays a list of extensions you've installed.
 2. Select the ellipsis to the right of extension you want to uninstall.
 3. Select **Uninstall**.
