@@ -701,7 +701,7 @@
 
 # Run Cloud links
 "/":
-  - /go/run-cloud-eap
+  - /go/run-cloud-eap/
 
 # CLI backlinks
 "/config/filter/":
