@@ -152,7 +152,7 @@ This container runs a web server that displays a simple website. When working wi
 
 When you launched the container, you exposed one of the container's ports onto your machine. Think of this as creating configuration to let you to connect through the isolated environment of the container. 
 
-For this container, the frontend is accessible on port `8080`. To open the website, select the link in the **Port(s)** column of your container or visit [http://localhost:8080](https://localhost:8080) in your browser.
+For this container, the frontend is accessible on port `8080`. To open the website, select the link in the **Port(s)** column of your container or visit [http://localhost:8080](http://localhost:8080) in your browser.
 
 ![Screenshot of the landing page of the Nginx web server, coming from the running container](images/access-the-frontend.webp?border)
 
