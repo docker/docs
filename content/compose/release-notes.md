@@ -16,7 +16,7 @@ For more detailed information, see the [release notes in the Compose repo](https
 
 ### Bug fixes and enhancements
 
-- Fix progress display, broken in `v2.28.0`, when tty mode available.
+- Fixed progress display, broken in `v2.28.0`, when TTY mode available.
 
 ## 2.28.0
 
