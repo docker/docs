@@ -1893,6 +1893,8 @@ Manuals:
           title: OpenTelemetry support
         - path: /build/building/base-images/
           title: Create your own base image
+    - path: /build/checks/
+      title: Build checks  {{< badge color=violet text=New >}}
     - sectiontitle: Builders
       section:
         - path: /build/builders/
