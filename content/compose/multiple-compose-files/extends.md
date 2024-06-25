@@ -112,9 +112,7 @@ services:
     cpu_shares: 10
 ```
 
-## Further examples
-
-### Example one
+## Additional example
 
 Extending an individual service is useful when you have multiple services that
 have a common configuration. The example below is a Compose app with two
@@ -157,46 +155,6 @@ services:
     depends_on:
       - queue
 ```
-
-### Example two
-
-Another common use case for `extends` is running one off or administrative tasks
-against one or more services in a Compose app. This example demonstrates running
-a database backup.
-
-The `docker-compose.yml` defines the base configuration.
-
-```yaml
-services:
-  web:
-    image: example/my_web_app:latest
-    depends_on:
-      - db
-
-  db:
-    image: postgres:latest
-```
-
-`docker-compose.admin.yml` adds a new service to run the database export or
-backup.
-
-```yaml
-services:
-  dbadmin:
-    build: database_admin/
-    depends_on:
-      - db
-```
-
-To start a normal environment, run `docker compose up -d`. To run a database
-backup, include the `docker-compose.admin.yml` as well.
-
-```console
-$ docker compose -f docker-compose.yml -f docker-compose.admin.yml \
-  run dbadmin db-backup
-```
-
-Compose extends files in the order they're specified on the command line.
 
 ## Exceptions and limitations
 
