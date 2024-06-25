@@ -700,8 +700,8 @@
   - /go/docker-build-cloud/
 
 # Run Cloud links
-"https://docs.docker.com/":
-  - /go/run-cloud-eap
+"/":
+  - /go/run-cloud-eap/
 
 # CLI backlinks
 "/config/filter/":
