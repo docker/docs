@@ -22,7 +22,7 @@ Self-published extensions are autonomously published by extension developers and
 To install an extension:
 
 1. Open Docker Desktop.
-2. From the Dashboard, select **Add Extensions** in the menu bar.
+2. From the Docker Dashboard, select the **Extensions** tab.
    The Extensions Marketplace opens on the **Browse** tab.
 3. Browse the available extensions.
    You can sort the list of extensions by **Recently added**, **Most installed**, or alphabetically. Alternatively, use the **Content** or **Categories** drop-down menu to search for extensions by whether they have been reviewed or not, or by category.
@@ -32,12 +32,10 @@ From here, you can select **Open** to access the extension or install additional
 
 ## Update an extension
 
-You can update any extension outside of Docker Desktop releases. To update an extension to the latest version:
+You can update any extension outside of Docker Desktop releases. To update an extension to the latest version, navigate to Docker Dashboard and select the **Manage** tab.
 
-1. Navigate to Docker Dashboard, and from the menu bar select the ellipsis to the right of **Extensions**.
-2. Select **Manage**.
-   The **Manage** tab displays with all your installed extensions. If an extension has a new version available, it displays an **Update** button.
-3. Select **Update**.
+The **Manage** tab displays with all your installed extensions. If an extension has a new version available, it displays an **Update** button.
+
 
 ## Uninstall an extension
 
@@ -47,6 +45,7 @@ You can uninstall an extension at any time.
 >
 > Any data used by the extension that's stored in a volume must be manually deleted.
 
-1. From the menu bar, select the ellipsis to the right of **Extensions**.
-2. Select **Manage**. This displays a list of extensions you've installed.
+1. Navigate to Docker Dashboard and select the **Manage** tab.
+   This displays a list of extensions you've installed.
+2. Select the ellipsis to the right of extension you want to uninstall.
 3. Select **Uninstall**.
