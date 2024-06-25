@@ -12,7 +12,7 @@ checks whether it can reuse the instruction from the build cache.
 
 The basic rules of build cache invalidation are as follows:
 
-- Starting with a parent image that's already in the cache, the next
+- Starting with a base image that's already in the cache, the next
   instruction is compared against all child images derived from that base
   image to see if one of them was built using the exact same instruction. If
   not, the cache is invalidated.
