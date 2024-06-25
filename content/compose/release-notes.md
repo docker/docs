@@ -10,6 +10,14 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.28.1
+
+{{< release-date date="2024-06-24" >}}
+
+### Bug fixes and enhancements
+
+- Fixed progress display, broken in `v2.28.0`, when TTY mode available.
+
 ## 2.28.0
 
 {{< release-date date="2024-06-21" >}}
