@@ -31,6 +31,41 @@ doing the following:
 - Customize columns: To the right of the search bar, choose what volume
   information to display.
 
+## Create a volume
+
+You use the following steps to create an empty volume. Alternatively, if you
+[start a container with a volume](../../storage/volumes.md#start-a-container-with-a-volume)
+that doesn't yet exist, Docker creates the volume for you.
+
+To create a volume:
+
+1. In the **Volumes** view, select the **Create** button.
+2. In the **New Volume** modal, specify a volume name, and then select
+   **Create**.
+
+To use the volume with a container, see [Use volumes](../../storage/volumes.md#start-a-container-with-a-volume).
+
+## Inspect a volume
+
+To explore the details of a specific volume, select a volume from the list. This
+opens the detailed view.
+
+The **Container in-use** tab displays the name of the container using the
+volume, the image name, the port number used by the container, and the target. A
+target is a path inside a container that gives access to the files in the
+volume.
+
+The **Stored data** tab displays the files and folders in the volume and the
+file size. To save a file or a folder, right-click on the file or folder to
+display the options menu, select **Save as...**, and then specify a location to
+download the file.
+
+To delete a file or a folder from the volume, right-click on the file or folder
+to display the options menu, select **Delete**, and then select **Delete** again
+to confirm.
+
+The **Exports** tab lets you [export the volume](#export-a-volume).
+
 ## Clone a volume
 
 Cloning a volume creates a new volume with a copy of all of the data from the
@@ -45,20 +80,6 @@ To clone a volume:
    for the volume you want to clone.
 3. In the **Clone a volume** modal, specify a **Volume name**, and then select
    **Clone**.
-
-## Create a volume
-
-You use the following steps to create an empty volume. Alternatively, if you
-[start a container with a volume](../../storage/volumes.md#start-a-container-with-a-volume)
-that doesn't yet exist, Docker creates the volume for you.
-
-To create a volume:
-
-1. In the **Volumes** view, select the **Create** button.
-2. In the **New Volume** modal, specify a volume name, and then select
-   **Create**.
-
-To use the volume with a container, see [Use volumes](../../storage/volumes.md#start-a-container-with-a-volume).
 
 ## Delete one or more volumes
 
@@ -198,7 +219,6 @@ You can either [export a volume now](#export-a-volume-now) or [schedule a recurr
 
 7. Select **Save**.
 
-
 ## Import a volume
 
 You can import a local file, a local image, or an image from Docker Hub. Any
@@ -222,27 +242,6 @@ To import a volume:
    - **Registry**: Specify the image from Docker Hub that contains the content.
 
 6. Select **Import**.
-
-## Inspect a volume
-
-To explore the details of a specific volume, select a volume from the list. This
-opens the detailed view.
-
-The **Container in-use** tab displays the name of the container using the
-volume, the image name, the port number used by the container, and the target. A
-target is a path inside a container that gives access to the files in the
-volume.
-
-The **Stored data** tab displays the files and folders in the volume and the
-file size. To save a file or a folder, right-click on the file or folder to
-display the options menu, select **Save as...**, and then specify a location to
-download the file.
-
-To delete a file or a folder from the volume, right-click on the file or folder
-to display the options menu, select **Delete**, and then select **Delete** again
-to confirm.
-
-The **Exports** tab lets you [export the volume](#export-a-volume).
 
 ## Additional resources
 
