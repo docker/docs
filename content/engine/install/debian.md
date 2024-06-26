@@ -59,7 +59,7 @@ conflicts with the versions bundled with Docker Engine.
 Run the following command to uninstall all conflicting packages:
 
 ```console
-$ for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done
+$ sudo apt-get remove docker.io docker-doc docker-compose podman-docker containerd runc
 ```
 
 `apt-get` might report that you have none of these packages installed.
