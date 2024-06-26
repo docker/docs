@@ -12,12 +12,22 @@ You can downgrade your Docker subscription at anytime before the renewal date. T
 
 When you downgrade your subscription, access to paid features is available until the next billing cycle. The downgrade takes effect on the next billing cycle.
 
-Before you downgrade to a free subscription, you may need to reduce the number of team members and convert any private repositories to public repositories or delete them. For information, see [Docker Pricing](https://www.docker.com/pricing).
-
 > **Important**
 >
 > If you downgrade your personal account from a Pro subscription to a Personal subscription, note that [Personal subscriptions](details.md#docker-personal) don't include collaborators for private repositories, and only 1 private repository is included. When you downgrade, all collaborators will be removed and additional private repositories are locked.
 { .important }
+
+## Before you downgrade
+
+Consider the following aspects before you downgrade a Docker Business subscription.
+
+### Team size
+
+You may need to reduce the number of team members and convert any private repositories to public repositories or delete them. For information, see [Docker Pricing](https://www.docker.com/pricing).
+
+### SSO and SCIM
+
+If your organization uses single sign-on (SSO) for user authentication, you need to remove your SSO connection and verified domains before downgrading. After removing the SSO connection, any organization members that were auto-provisioned (for example, with SCIM) need to set up a password to sign in without SSO. To do this, users can [reset their password at sign in](/docker-id/#reset-your-password-at-sign-in).
 
 ## Downgrade your Docker subscription
 
