@@ -39,7 +39,7 @@ In this hands-on guide, you'll learn how to develop with containers.
     To start the project using the CLI, run the following command:
 
    ```console
-   $ docker compose watch
+   $ docker compose up -d
    ```
 
    You will see an output that shows container images being pulled down, containers starting, and more. Don't worry if you don't understand it all at this point. But, within a moment or two, things should stabilize and finish.
