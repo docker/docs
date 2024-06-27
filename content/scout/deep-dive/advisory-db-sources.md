@@ -47,7 +47,7 @@ Docker Scout uses the following package repositories and security trackers:
 - [SUSE Security CVRF](http://ftp.suse.com/pub/projects/security/cvrf/)
 - [Ubuntu CVE Tracker](https://people.canonical.com/~ubuntu-security/cve/)
 - [Wolfi Security Feed](https://packages.wolfi.dev/os/security.json)
-- [Chainguard Security Feed](https://packages.cgr.dev/chainguard/security.json)
+- [Chainguard Security Feed](https://packages.cgr.dev/chainguard/osv/all.json)
 
 When you enable Docker Scout for your Docker organization,
 a new database instance is provisioned on the Docker Scout platform.
