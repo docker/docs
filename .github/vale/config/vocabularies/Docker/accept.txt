@@ -21,6 +21,7 @@ Chrome
 Chrome DevTools
 CloudFront
 Codefresh
+Codespaces
 CouchDB
 Couchbase
 DHCP
@@ -114,9 +115,9 @@ TLS
 TXT
 UDP
 URLs?
+UUID
 Ubuntu
 Unix
-UUID
 VLAN
 VM
 VMware
