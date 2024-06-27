@@ -33,7 +33,7 @@ target "release" {
 }
 
 group "validate" {
-  targets = ["lint", "test", "unused-media"]
+  targets = ["lint", "test", "unused-media", "test-go-redirects"]
 }
 
 target "test" {
@@ -48,6 +48,11 @@ target "lint" {
 
 target "unused-media" {
   target = "unused-media"
+  output = ["type=cacheonly"]
+}
+
+target "test-go-redirects" {
+  target = "test-go-redirects"
   output = ["type=cacheonly"]
 }
 
