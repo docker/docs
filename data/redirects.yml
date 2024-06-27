@@ -654,7 +654,7 @@
   - "/go/scout-slack/"
 "/scout/policy/scores/":
   - /go/scout-scores/
-"/scout/exceptions/":
+"/scout/explore/exceptions/":
   - "/go/scout-exceptions/"
 
 # Build links (internal)
