@@ -31,8 +31,8 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 - Docker Desktop now takes advantage of Moby 27.
 - Docker Desktop now supports moving data to a different drive on macOS and Windows with WSL2 backend. See [docker/for-win#13384](https://github.com/docker/for-win/issues/13384).
-- Beta: Scheduled Backups for Volume Exports in Volumes Tab
-- Beta: Access terminal shell directly from Docker Desktop
+- You can now [schedule backups for volume exports](use-desktop/volumes.md) in the **Volumes** tab (Beta). 
+- Access a terminal shell directly from Docker Desktop (Beta).
 
 ### Upgrades
 
@@ -48,7 +48,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
  
 - Improved instructions for `watch` in the Compose File Viewer
 - Added support for Golang projects that don't have dependencies in Docker Init. Addresses [docker/roadmap#611](https://github.com/docker/roadmap/issues/611)
-- [Settings Management](hardened-desktop/settings-management/index.md) now lets admins to set the default value to `ProxyEnableKerberosNTLM`.
+- [Settings Management](hardened-desktop/settings-management/index.md) now lets admins set the default value to `ProxyEnableKerberosNTLM`.
 - Removed a temporary compatibility fix for older versions of Visual Studio Code.
 
 #### For Windows
