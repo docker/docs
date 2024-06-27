@@ -254,6 +254,20 @@ exception later. Image layers are immutable, so anything you put in the image's
 filesystem is there forever. Attaching the document as an
 [attestation](#attestation) provides better flexibility.
 
+> **Note**
+>
+> VEX documents embedded in the image filesystem are not considered for images
+> that have attestations. If your image has **any** attestations, Docker Scout
+> will only look for exceptions in the attestations, and not in the image
+> filesystem.
+>
+> If you want to use the VEX document embedded in the image filesystem, you
+> must remove the attestation from the image. Note that provenance attestations
+> may be added automatically for images. To ensure that no attestations are
+> added to the image, you can explicitly disable both SBOM and provenance
+> attestations using the `--provenance=false` and `--sbom=false` flags when
+> building the image.
+
 To embed a VEX document on the image filesystem, `COPY` the file into the image
 as part of the image build. The following example shows how to copy all VEX
 documents under `.vex/` in the build context, to `/var/lib/db` in the image.
