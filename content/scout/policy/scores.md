@@ -131,7 +131,7 @@ For an image with a total possible score of 90 points:
 
 - If the image only deviates from one policy (for example, the Copyleft
   Licenses policy), it might score 85 out of 90, resulting in a score of A.
-- If the image has fixable CVEs and other issues, it might score 75 out of 90,
+- If the image has fixable CVEs and other issues, it might score 65 out of 90,
   resulting in a score of B.
 
 ## Improving your health score
