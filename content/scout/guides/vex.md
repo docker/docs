@@ -297,3 +297,4 @@ For more information about VEX:
 - [VEX Status Justifications (CISA)](https://www.cisa.gov/sites/default/files/publications/VEX_Status_Justification_Jun22.pdf)
 - [VEX Use Cases (CISA)](https://www.cisa.gov/sites/default/files/publications/VEX_Use_Cases_Document_508c.pdf)
 - [OpenVEX specification](https://github.com/openvex/spec/blob/main/OPENVEX-SPEC.md)
+- [Manage vulnerability exceptions](/scout/explore/exceptions.md)

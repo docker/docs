@@ -8,6 +8,37 @@ This page contains information about the new features, improvements, known
 issues, and bug fixes in the Docker Scout [CLI plugin](https://github.com/docker/scout-cli/)
 and the `docker/scout-action` [GitHub Action](https://github.com/docker/scout-action).
 
+## 1.10.0
+
+{{< release-date date="2024-06-26" >}}
+
+### Bug fixes and enhancements
+
+- Add new classifiers:
+  - `irssi`
+  - `Backdrop`
+  - `CrateDB CLI (Crash)`
+  - `monica`
+  - `Openliberty`
+  - `dumb-init`
+  - `friendica`
+  - `redmine`
+- Fix whitespace-only originator on package breaking BuildKit exporters
+- Fix parsing image references in SPDX statement for images with a digest
+- Support `sbom://` prefix for image comparison:
+
+  ```console {title="CLI"}
+  $ docker scout compare sbom://image1.json --to sbom://image2.json
+  ```
+
+  ```yaml {title="GitHub Action"}
+  uses: docker/scout-action@v1
+  with:
+    command: compare
+    image: sbom://image1.json
+    to: sbom://image2.json
+  ```
+
 ## 1.9.3
 
 {{< release-date date="2024-05-28" >}}

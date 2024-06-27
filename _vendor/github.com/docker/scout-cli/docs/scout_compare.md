@@ -68,6 +68,7 @@ or if you want to control from where the image will be resolved, you must prefix
 - `oci-dir://` use an OCI layout directory
 - `archive://` use a tarball archive, as created by `docker save`
 - `fs://` use a local directory or file
+- `sbom://` SPDX file or in-toto attestation file with SPDX predicate or `syft` json SBOM file
 
 ## Examples
 
