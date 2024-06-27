@@ -80,8 +80,10 @@ RUN htmltest
 FROM alpine:${ALPINE_VERSION} AS unused-media
 RUN apk add --no-cache fd ripgrep
 WORKDIR /test
-RUN --mount=type=bind,target=. \
-    ./scripts/test_unused_media.sh
+RUN --mount=type=bind,target=. <<"EOT"
+set -ex
+./scripts/test_unused_media.sh
+EOT
 
 FROM base as pagefind
 ARG PAGEFIND_VERSION=1.1.0
