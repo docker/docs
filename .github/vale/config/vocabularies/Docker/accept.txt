@@ -21,6 +21,7 @@ Chrome
 Chrome DevTools
 CloudFront
 Codefresh
+Codespaces
 CouchDB
 Couchbase
 DHCP
