@@ -53,6 +53,7 @@ jobs:
           - lint
           - test
           - unused-media
+          - test-go-redirects
     steps:
       -
         name: Checkout
