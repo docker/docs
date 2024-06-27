@@ -113,9 +113,9 @@ TLS
 TXT
 UDP
 URLs?
+UUID
 Ubuntu
 Unix
-UUID
 VLAN
 VM
 VMware
