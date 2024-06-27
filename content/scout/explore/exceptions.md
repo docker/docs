@@ -76,6 +76,9 @@ Here's a description of the options in this example:
   specify the `--subcomponents` flag multiple times for a single `create`
   command.
 
+  You can also omit `--subcomponents`, in which case the VEX statement applies
+  to the entire image.
+
 `--vuln`
 : ID of the CVE that the VEX statement addresses.
 
