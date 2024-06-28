@@ -109,7 +109,7 @@ set -ex
 EOT
 
 # pagefind installs the Pagefind runtime
-FROM base as pagefind
+FROM base AS pagefind
 ARG PAGEFIND_VERSION=1.1.0
 COPY --from=build /out ./public
 RUN --mount=type=bind,src=pagefind.yml,target=pagefind.yml \
