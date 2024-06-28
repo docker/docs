@@ -22,7 +22,7 @@ Yes. You must verify a domain before using it with an SSO connection.
 
 ### Does Docker SSO support authenticating through the command line?
 
-When SSO is enforced, passwords won't be accepted to access the Docker CLI, but you can still access the Docker CLI using a personal access token (PAT) for authentication.
+When SSO is enforced, you can't use passwords to access the Docker CLI, but you can still access the Docker CLI using a personal access token (PAT) for authentication.
 
 Each user must create a PAT to access the CLI. To learn how to create a PAT, see [Manage access tokens](/security/for-developers/access-tokens/). Users who already used a PAT to sign in before SSO enforcement will still be able to use that PAT to authenticate.
 
