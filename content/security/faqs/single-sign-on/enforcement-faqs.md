@@ -22,7 +22,9 @@ Yes. You must verify a domain before using it with an SSO connection.
 
 ### Does Docker SSO support authenticating through the command line?
 
-Yes. When SSO is enforced, you can access the Docker CLI through Personal Access Tokens (PATs).  Each user must create a PAT to access the CLI. To learn how to create a PAT, see [Manage access tokens](../../../security/for-developers/access-tokens.md).
+When SSO is enforced, passwords won't be accepted to access the Docker CLI, but you can still access the Docker CLI using a personal access token (PAT) for authentication.
+
+Each user must create a PAT to access the CLI. To learn how to create a PAT, see [Manage access tokens](/security/for-developers/access-tokens/). Users who already used a PAT to sign in before SSO enforcement will still be able to use that PAT to authenticate.
 
 ### How does SSO affect our automation systems and CI/CD pipelines?
 
@@ -50,7 +52,7 @@ If you enable SSO, there is no impact. Both username/password or personal access
 However, if you enforce SSO:
 
 - Service Account domain email addresses must not be aliased and must be enabled in their IdP
-- Username/password and personal access token will still work (but only if they exist, which they won't for new accounts)
+- Username/password authentication won’t work, so you should update the build system to use a personal access token (PAT) instead of a password
 - Those who know the IdP credentials can sign in as that Service Account through SSO on Hub and create or change the personal access token for that service account.
 
 ### Is the sign in required tracking at runtime or install time?
