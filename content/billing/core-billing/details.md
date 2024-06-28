@@ -23,10 +23,9 @@ The billing information provided appears on all your billing invoices. The email
 
 1. Select your avatar in the top-right corner of Docker Hub.
 2. From the drop-down menu select **Billing**.
-3. Select the **Payment methods and billing history** link.
-4. In the **Billing Information** section, select **Update information**.
-5. Enter your updated billing details.
-6. Select **Save**.
+3. Select **Billing Address**.
+4. Enter your updated billing information.
+5. Select **Submit**.
 
 ### Organization
 
@@ -37,10 +36,9 @@ The billing information provided appears on all your billing invoices. The email
 1. Select your avatar in the top-right corner of Docker Hub.
 2. From the drop-down menu select **Billing**.
 3. Select the organization that you want to change the payment method for.
-4. Select the **Payment methods and billing history** link.
-5. In the **Billing Information** section, select **Update information**.
-6. Enter your updated billing details.
-7. Select **Save**.
+4. Select **Billing Address**.
+5. Enter your updated billing information.
+6. Select **Submit**.
 
 ## Update your email address that receives billing invoices
 
@@ -59,15 +57,15 @@ You can update the email address that receives billing invoices at any time.
 
 1. Select your avatar in the top-right corner of Docker Hub.
 2. From the drop-down menu select **Billing**.
-3. Select the **Payment methods and billing history** link.
-4. Select **Update information**, then enter your new email address.
-5. Select **Save**.
+3. Select **Billing Address**.
+4. Update the email address in the **Billing contact** section.
+5. Select **Submit**.
 
 ### Organizations
 
 1. Select your avatar in the top-right corner of Docker Hub.
 2. From the drop-down menu select **Billing**.
 3. Select the name of the organization.
-4. Select the **Payment methods and billing history** link.
-5. Select **Update information**, then enter your new email address.
-6. Select **Save**.
+4. Select **Billing Address**.
+5. Update the email address in the **Billing contact** section.
+6. Select **Submit**.
