@@ -48,11 +48,11 @@ Yes, you can create a test organization. Companies can set up a new 5 seat Busin
 
 ### Once we enable SSO for Docker Desktop, what's the impact to the flow for Build systems that use service accounts?
 
-If you enable SSO, there is no impact. Both username/password or personal access token sign-in are supported.
+If you enable SSO, there is no impact. Both username/password or personal access token (PAT) sign-in are supported.
 However, if you enforce SSO:
 
 - Service Account domain email addresses must not be aliased and must be enabled in their IdP
-- Username/password authentication won’t work, so you should update the build system to use a personal access token (PAT) instead of a password
+- Username/password authentication won’t work, so you should update the build system to use a PAT instead of a password
 - Those who know the IdP credentials can sign in as that Service Account through SSO on Hub and create or change the personal access token for that service account.
 
 ### Is the sign in required tracking at runtime or install time?
