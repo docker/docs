@@ -31,9 +31,7 @@ After your domain is verified, create an SSO connection.
 4. Select an authentication method, **SAML** or **Azure AD (OIDC)**.
 5. Copy the following fields to add to your IdP:
 
-   - SAML: **Entity ID**, **ACS URL**
+   - SAML: **Entity ID**, **ACS URL**, **Connection ID**
    - Azure AD (OIDC): **Redirect URL**
 
-   ![SAML](/docker-hub/images/saml-create-connection.png)
-
-   ![Azure AD](/docker-hub/images/azure-create-connection.png)
+   The **Entity ID** and **ACS URL** are required for configuring your IdP, including the [Entra ID integrated application](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/aad.docker). The **Connection ID** is required to use the [integrated application with Okta](https://www.okta.com/integrations/docker/) for your SSO connection.

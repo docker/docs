@@ -105,7 +105,7 @@ The user interface for your IdP may differ slightly from the following steps. Yo
     - Email
 
 {{< /tab >}}
-{{< tab name="Entra ID SAML 2.0" >}}
+{{< tab name="Entra ID SAML" >}}
 
 1. In the Azure admin portal, go to **Enterprise Applications**, then select the **Docker** application you created when you set up your SSO connection.
 2. Go to **Provisioning** and select **Get Started**.
@@ -175,7 +175,7 @@ The external namespace to use to set up these attributes is `urn:ietf:params:sci
 If a user doesn't already have attributes set up, users who are added to the group will inherit these attributes upon provsioning.
 
 {{< /tab >}}
-{{< tab name="Entra ID SAML 2.0" >}}
+{{< tab name="Entra ID SAML" >}}
 
 ### Set up
 
