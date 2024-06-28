@@ -94,10 +94,6 @@ RUN --mount=type=bind,src=pagefind.yml,target=pagefind.yml \
 FROM scratch AS index
 COPY --from=pagefind /pagefind .
 
-FROM scratch AS release
-COPY --from=build /out /
-COPY --from=pagefind /pagefind /pagefind
-
 FROM alpine:${ALPINE_VERSION} AS test-go-redirects
 WORKDIR /work
 RUN apk add yq
@@ -106,3 +102,7 @@ RUN --mount=type=bind,target=. <<"EOT"
 set -ex
 ./scripts/test_go_redirects.sh
 EOT
+
+FROM scratch AS release
+COPY --from=build /out /
+COPY --from=pagefind /pagefind /pagefind
