@@ -81,6 +81,12 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 - Fixed an issue that caused Docker Desktop to remove `Docker.app` when installing from `/Applications`.
 - Fixed an issue that caused bind mounts to fail. Fixes [docker/for-mac#7274](https://github.com/docker/for-mac/issues/7274).
 
+### Known Issues
+
+#### For Windows
+
+- On Windows if you face sign-in issues, you might need to change the config `proxyEnableKerberosNTLM` in `%APPDATA%/Docker/settings.json` file. Set it to false if your proxy is using Basic auth scheme or your proxy is configured to use Kerberos/NTLM auth scheme, then restart Docker Desktop.
+
 ## 4.31.1
 
 {{< release-date date="2024-06-10" >}}
