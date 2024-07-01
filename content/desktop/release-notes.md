@@ -23,7 +23,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ## 4.32.0
 
-{{< release-date date="2024-06-27" >}}
+{{< release-date date="2024-07-01" >}}
 
 {{< desktop-install all=true beta_win_arm=true version="4.32.0" build_path="/156455/" >}}
 
@@ -85,7 +85,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 #### For Windows
 
-- On Windows if you face sign-in issues, you might need to change the config `proxyEnableKerberosNTLM` in `%APPDATA%/Docker/settings.json` file. Set it to false if your proxy is using Basic auth scheme or your proxy is configured to use Kerberos/NTLM auth scheme, then restart Docker Desktop.
+- If you face sign-in issues, you might need to change the config `proxyEnableKerberosNTLM` in your `settings.json` file. Set it to false if your proxy is using Basic auth scheme or your proxy is configured to use Kerberos/NTLM auth scheme, then restart Docker Desktop.
 
 ## 4.31.1
 
