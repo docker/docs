@@ -35,6 +35,19 @@ target "release" {
   provenance = false
 }
 
+target "image" {
+  args = {
+    HUGO_ENV = HUGO_ENV
+    DOCS_URL = "/"
+  }
+  target = "image"
+  attest = [
+    "type=provenance,mode=max",
+    "type=sbom",
+  ]
+  output = ["type=docker"]
+}
+
 group "validate" {
   targets = ["lint", "test", "unused-media", "test-go-redirects", "dockerfile-lint", "path-warnings"]
 }

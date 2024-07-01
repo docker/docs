@@ -7,6 +7,7 @@ ARG HTMLTEST_VERSION=0.17.0
 ARG HUGO_VERSION=0.141.0
 ARG NODE_VERSION=22
 ARG PAGEFIND_VERSION=1.3.0
+ARG NGINX_VERSION=1.27
 
 # base defines the generic base stage
 FROM golang:${GO_VERSION}-alpine${ALPINE_VERSION} AS base
@@ -149,3 +150,7 @@ EOT
 FROM scratch AS release
 COPY --from=build /project/public /
 COPY --from=pagefind /pagefind /pagefind
+
+# image creates a Docker image for the documentation site
+FROM nginx:${NGINX_VERSION}-alpine AS image
+COPY --from=release / /usr/share/nginx/html
