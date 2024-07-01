@@ -105,13 +105,16 @@ The policies that influence the score, and their respective weights, are as foll
 
 | Policy                                                                                                    | Points |
 | --------------------------------------------------------------------------------------------------------- | ------ |
-| [Fixable Critical and High Vulnerabilities](./_index.md#fixable-critical-and-high-vulnerabilities) | 20     |
-| [High-Profile Vulnerabilities](./_index.md#high-profile-vulnerabilities)                           | 20     |
-| [Supply Chain Attestations](./_index.md#supply-chain-attestations)                                 | 15     |
-| [Unapproved Base Images](./_index.md#unapproved-base-images)                                       | 15     |
-| [Outdated Base Images](./_index.md#outdated-base-images)                                           | 10     |
-| [Default Non-Root User](./_index.md#default-non-root-user)                                         | 5      |
-| [Copyleft Licenses](./_index.md#copyleft-licenses)                                                 | 5      |
+| [Fixable critical and high vulnerabilities](./_index.md#fixable-critical-and-high-vulnerabilities)        | 20     |
+| [High-profile vulnerabilities](./_index.md#high-profile-vulnerabilities)                                  | 20     |
+| [Supply chain attestations](./_index.md#supply-chain-attestations)                                        | 15     |
+| [Unapproved base images](./_index.md#unapproved-base-images)                                              | 15     |
+| [Outdated base images](./_index.md#outdated-base-images)                                                  | 10     |
+| [Default non-root user](./_index.md#default-non-root-user)                                                | 5      |
+| AGPL v3-licensed software \*                                                                              | 5      |
+
+\* _The **AGPL v3-licensed software** policy is a subset of the
+[Copyleft licenses](./_index.md#copyleft-licenses) policy._
 
 ### Evaluation
 
