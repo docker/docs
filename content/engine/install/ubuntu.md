@@ -146,15 +146,15 @@ Docker from the repository.
    # List the available versions:
    $ apt-cache madison docker-ce | awk '{ print $3 }'
 
-   5:26.1.0-1~ubuntu.24.04~noble
-   5:26.0.2-1~ubuntu.24.04~noble
+   5:27.0.3-1~ubuntu.24.04~noble
+   5:27.0.2-1~ubuntu.24.04~noble
    ...
    ```
 
    Select the desired version and install:
 
    ```console
-   $ VERSION_STRING=5:26.1.0-1~ubuntu.24.04~noble
+   $ VERSION_STRING=5:27.0.3-1~ubuntu.24.04~noble
    $ sudo apt-get install docker-ce=$VERSION_STRING docker-ce-cli=$VERSION_STRING containerd.io docker-buildx-plugin docker-compose-plugin
    ```
   
