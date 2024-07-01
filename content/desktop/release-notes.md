@@ -66,6 +66,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 #### For Windows
 
 - Fixed an issue on the WSL 2 engine where Docker Desktop would not detect the existence of the `docker-desktop-data` distribution if it had been manually moved by the user.
+- The Windows on ARM installer and the [privileged service](windows/permission-requirements.md#privileged-helper) are now built for ARM64.
 
 #### For Mac
 
