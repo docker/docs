@@ -1,9 +1,9 @@
 variable "HUGO_ENV" {
-  default = "development"
+  default = null
 }
 
 variable "DOCS_URL" {
-  default = "https://docs.docker.com"
+  default = null
 }
 
 variable "DOCS_SITE_DIR" {
@@ -29,6 +29,19 @@ target "release" {
   target = "release"
   output = [DOCS_SITE_DIR]
   provenance = false
+}
+
+target "image" {
+  args = {
+    HUGO_ENV = HUGO_ENV
+    DOCS_URL = "/"
+  }
+  target = "image"
+  attest = [
+    "type=provenance,mode=max",
+    "type=sbom",
+  ]
+  output = ["type=docker"]
 }
 
 group "validate" {

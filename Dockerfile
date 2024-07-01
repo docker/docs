@@ -7,6 +7,7 @@ ARG ALPINE_VERSION=3.20
 ARG GO_VERSION=1.23
 # HTML_TEST_VERSION sets the wjdp/htmltest version for HTML testing
 ARG HTMLTEST_VERSION=0.17.0
+ARG NGINX_VERSION=1.27
 
 # base is the base stage with build dependencies
 FROM golang:${GO_VERSION}-alpine AS base
@@ -39,9 +40,9 @@ FROM build-base AS dev
 # build creates production builds with Hugo
 FROM build-base AS build
 # HUGO_ENV sets the hugo.Environment (production, development, preview)
-ARG HUGO_ENV
+ARG HUGO_ENV="development"
 # DOCS_URL sets the base URL for the site
-ARG DOCS_URL
+ARG DOCS_URL="https://docs.docker.com"
 RUN hugo --gc --minify -d /out -e $HUGO_ENV -b $DOCS_URL
 
 # lint lints markdown files
@@ -146,3 +147,7 @@ EOT
 FROM scratch AS release
 COPY --from=build /out /
 COPY --from=pagefind /pagefind /pagefind
+
+# image creates a Docker image for the documentation site
+FROM nginx:${NGINX_VERSION}-alpine AS image
+COPY --from=release / /usr/share/nginx/html
