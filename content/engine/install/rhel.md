@@ -37,7 +37,6 @@ To get started with Docker Engine on RHEL, make sure you
 To install Docker Engine, you need a maintained version of one of the following
 RHEL versions:
 
-- RHEL 7 (s390x only) (EOL: [June 30, 2024](https://www.ibm.com/blog/announcement/ibm-is-announcing-red-hat-enterprise-linux-7-is-going-end-of-support-on-30-june-2024/))
 - RHEL 8
 - RHEL 9
 
