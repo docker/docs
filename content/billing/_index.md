@@ -33,6 +33,14 @@ grid_resources:
   description: Find the answers you need and explore common questions.
   link: /billing/faqs/
   icon: help
+- title: Register a tax certificate
+  description: Learn how to register a tax exemption certificate.
+  link: /billing/tax-certificate/
+  icon: developer_guide
+- title: 3D Secure authentication
+  description: Discover how Docker billing supports 3DS and how to troubleshoot potential issues.
+  link: /billing/3d-secure/
+  icon: wallet
 ---
 
 Use the resources in this section to manage your billing and payment settings for your Docker subscriptions.
