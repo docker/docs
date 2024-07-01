@@ -155,7 +155,7 @@ This pattern can be followed for many languages and frameworks, such as Python w
 
 ## Example 2 
 
-Adapting the above example to demonstrate `sync+restart`:
+Adapting the previous example to demonstrate `sync+restart`:
 
 ```yaml
 services:
@@ -164,7 +164,7 @@ services:
     command: npm start
     develop:
       watch:
-        - action: sync+restart
+        - action: sync
           path: ./web
           target: /app/web
           ignore:
@@ -172,11 +172,6 @@ services:
         - action: sync+restart
           path: ./proxy/nginx.conf
           target: /etc/nginx/conf.d/default.conf
-    volumes:
-      - type: bind
-        source: ./proxy/nginx.conf
-        target: /etc/nginx/conf.d/default.conf
-        read_only: true
 
   backend:
     build:
@@ -184,7 +179,7 @@ services:
       target: builder
 ```
 
-This setup demonstrates how to use the sync+restart action in Docker Compose to efficiently develop and test a Node.js application with a frontend web server and backend service. The configuration ensures that changes to the application code and configuration files are quickly synchronized and applied, with the `web` service restarting as needed to reflect the changes.
+This setup demonstrates how to use the `sync+restart` action in Docker Compose to efficiently develop and test a Node.js application with a frontend web server and backend service. The configuration ensures that changes to the application code and configuration files are quickly synchronized and applied, with the `web` service restarting as needed to reflect the changes.
 
 ## Use `watch`
 
