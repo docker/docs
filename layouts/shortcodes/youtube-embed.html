@@ -1,4 +1,5 @@
-<div id="youtube-player-{{ .Get 0 }}" data-video-id="{{ .Get 0}}" class="youtube-video aspect-video w-full"></div>
+{{ $id := .Get 0 }}
+<div id="youtube-player-{{ $id }}" data-video-id="{{ $id }}" class="youtube-video aspect-video w-full"></div>
 {{ if page.Scratch.Get "youtube-embed" | default "incomplete" | ne "setup" }} 
 {{ page.Scratch.Set "youtube-embed" "setup" }}
 <script>
