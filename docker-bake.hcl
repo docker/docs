@@ -32,6 +32,20 @@ target "release" {
   output = [DOCS_SITE_DIR]
 }
 
+target "image" {
+  args = {
+    HUGO_ENV = HUGO_ENV
+    DOCS_URL = "/"
+  }
+  target = "image"
+  attest = [
+    "type=provenance,mode=max",
+    "type=sbom",
+  ]
+  tags = ["docs/docker-docs:latest"]
+  output = ["type=docker"]
+}
+
 group "validate" {
   targets = ["lint", "test", "unused-media", "test-go-redirects"]
 }
