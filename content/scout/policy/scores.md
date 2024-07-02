@@ -106,14 +106,18 @@ The policies that influence the score, and their respective weights, are as foll
 | Policy                                                                                                    | Points |
 | --------------------------------------------------------------------------------------------------------- | ------ |
 | [Fixable critical and high vulnerabilities](./_index.md#fixable-critical-and-high-vulnerabilities)        | 20     |
-| [High-profile vulnerabilities](./_index.md#high-profile-vulnerabilities)                                  | 20     |
+| [High-profile vulnerabilities](./_index.md#high-profile-vulnerabilities) \*                               | 20     |
 | [Supply chain attestations](./_index.md#supply-chain-attestations)                                        | 15     |
 | [Unapproved base images](./_index.md#unapproved-base-images)                                              | 15     |
 | [Outdated base images](./_index.md#outdated-base-images)                                                  | 10     |
 | [Default non-root user](./_index.md#default-non-root-user)                                                | 5      |
-| AGPL v3-licensed software \*                                                                              | 5      |
+| AGPL v3-licensed software \*\*                                                                            | 5      |
 
-\* _The **AGPL v3-licensed software** policy is a subset of the
+\* _The **High-profile vulnerabilities policy** also considers vulnerabilities from the
+[CISA Known Exploited Vulnerabilities catalog](https://www.cisa.gov/known-exploited-vulnerabilities-catalog).
+This is a configuration option for this policy, and for health score calculation, it is enabled by default._
+
+\*\* _The **AGPL v3-licensed software** policy is a subset of the
 [Copyleft licenses](./_index.md#copyleft-licenses) policy._
 
 ### Evaluation
