@@ -1,4 +1,4 @@
-A?GPLv3
+A?GPL(v3)?
 APIs?
 ARM
 AWS

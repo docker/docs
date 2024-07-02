@@ -88,7 +88,6 @@ params:
       stage: 3218181
     google: GTM-WL2QLG5
     onetrust: 8e0ebfd9-035d-4ec2-9b2f-a2de9c09f906
-    vwo: 723167
   algolia:
     appid: 3XRLW0LZH9
     apikey: 2899036ce47dba191b8dc1758e4bc6a4
