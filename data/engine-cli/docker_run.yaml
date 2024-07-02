@@ -869,7 +869,8 @@ options:
     - option: rm
       value_type: bool
       default_value: "false"
-      description: Automatically remove the container when it exits
+      description: |
+        Automatically remove the container and its associated anonymous volumes when it exits
       deprecated: false
       hidden: false
       experimental: false
