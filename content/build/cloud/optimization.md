@@ -29,6 +29,9 @@ more efficient:
 - [Fetch remote files in build](#fetch-remote-files-in-build)
 - [Multi-threaded tools](#multi-threaded-tools)
 
+For more information on how to optimize your builds, see
+[Building best practices](/build/building/best-practices.md).
+
 ### Dockerignore files
 
 Using a [`.dockerignore` file](/build/building/context/#dockerignore-files),
