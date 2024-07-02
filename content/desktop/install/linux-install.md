@@ -122,8 +122,6 @@ Docker provides `.deb` and `.rpm` packages from the following Linux distribution
 and architectures:
 
 
-
-
 | Platform                | x86_64 / amd64          | 
 |:------------------------|:-----------------------:|
 | [Ubuntu](ubuntu.md)                         | ✅  |
