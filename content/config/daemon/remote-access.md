@@ -88,6 +88,38 @@ and the `daemon.json` file causes a conflict that prevents Docker from starting.
    tcp        0      0 127.0.0.1:2375          0.0.0.0:*               LISTEN      3758/dockerd
    ```
 
+### Allow access to the remote API through a firewall
+
+If you run a firewall on the same host as you run Docker, and you want to access
+the Docker Remote API from another remote host, you must configure your firewall
+to allow incoming connections on the Docker port. The default port is `2376` if
+you're using TLS encrypted transport, or `2375` otherwise.
+
+Two common firewall daemons are:
+
+- [Uncomplicated Firewall (ufw)](https://help.ubuntu.com/community/UFW), often
+  used for Ubuntu systems.
+- [firewalld](https://firewalld.org), often used for RPM-based systems.
+
+Consult the documentation for your OS and firewall. The following information
+might help you get started. The settings used in this instruction are
+permissive, and you may want to use a different configuration that locks your
+system down more.
+
+- For ufw, set `DEFAULT_FORWARD_POLICY="ACCEPT"` in your configuration.
+
+- For firewalld, add rules similar to the following to your policy. One for
+  incoming requests, and one for outgoing requests.
+
+  ```xml
+  <direct>
+    [ <rule ipv="ipv6" table="filter" chain="FORWARD_direct" priority="0"> -i zt0 -j ACCEPT </rule> ]
+    [ <rule ipv="ipv6" table="filter" chain="FORWARD_direct" priority="0"> -o zt0 -j ACCEPT </rule> ]
+  </direct>
+  ```
+
+  Make sure that the interface names and chain names are correct.
+
 ## Additional information
 
 For more detailed information on configuration options for remote access to the daemon, refer to the
