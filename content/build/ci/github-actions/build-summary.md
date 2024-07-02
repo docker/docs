@@ -66,7 +66,7 @@ select the item in the list.
 
 ## Disable job summary
 
-To disable job summaries, set the `DOCKER_BUILD_NO_SUMMARY` environment
+To disable job summaries, set the `DOCKER_BUILD_SUMMARY_DISABLE` environment
 variable in the YAML configuration for your build step:
 
 ```yaml {hl_lines=5}
@@ -74,7 +74,7 @@ variable in the YAML configuration for your build step:
         name: Build
         uses: docker/docker-build-push-action@v6
         env:
-          DOCKER_BUILD_NO_SUMMARY: true
+          DOCKER_BUILD_SUMMARY_DISABLE: true
         with:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
