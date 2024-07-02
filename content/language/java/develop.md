@@ -171,7 +171,7 @@ In the `Dockerfile` you added a new stage labeled `development` based on the `ex
 
 The current Compose file doesn't start your development container. To do that, you must update your Compose file to target the development stage. Also, update the port mapping of the server service to provide access for the debugger.
 
-Open the `docker-compose.yml` and add the following instructions into the file.
+Open the `docker-compose.yaml` and add the following instructions into the file.
 
 ```yaml {hl_lines=["5","8"]}
 services:
