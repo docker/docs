@@ -7,9 +7,9 @@ aliases:
 - /compose/compose-yaml-file/
 ---
 
-Docker Compose relies on a YAML configuration file, usually named `compose.yaml`. 
+With Docker Compose you use a YAML configuration file, known as the [Compose file](#the-compose-file), to configure your application’s services, and then you create and start all the services from your configuration with the [Compose CLI](#the-compose-cli). 
 
-The `compose.yaml` file follows the rules provided by the [Compose Specification](compose-file/_index.md) in how to define multi-container applications. This is the Docker Compose implementation of the formal [Compose Specification](https://github.com/compose-spec/compose-spec). 
+The Compose file, or `compose.yaml` file, follows the rules provided by the [Compose Specification](compose-file/_index.md) in how to define multi-container applications. This is the Docker Compose implementation of the formal [Compose Specification](https://github.com/compose-spec/compose-spec). 
 
 {{< accordion title="The Compose application model" >}}
 
@@ -33,9 +33,7 @@ set the label `com.docker.compose.project`.
 
 Compose offers a way for you to set a custom project name and override this name, so that the same `compose.yaml` file can be deployed twice on the same infrastructure, without changes, by just passing a distinct name.
 
-{{< /accordion >}}
-
-You then interact with your Compose application through the [Compose CLI](reference/_index.md). Commands such as `docker compose up` are used to start the application, while `docker compose down` stops and removes the containers.
+{{< /accordion >}} 
 
 ## The Compose file
 
@@ -52,6 +50,38 @@ merged are hosted in other folders. As some Compose file elements can both be ex
 the expanded form. For more information, see [Working with multiple Compose files](multiple-compose-files/_index.md)
 
 If you want to reuse other Compose files, or factor out parts of your application model into separate Compose files, you can also use [`include`](compose-file/14-include.md). This is useful if your Compose application is dependent on another application which is managed by a different team, or needs to be shared with others.
+
+## The Compose CLI
+
+The Docker Compose CLI is the command-line interface that allows you to interact with your Docker Compose applications. Using the CLI, you can manage the lifecycle of your multi-container applications defined in the compose.yaml file. The CLI commands enable you to start, stop, and configure your applications effortlessly.
+
+### Key commands 
+
+To start all the services defined in your `compose.yaml` file:
+
+```console
+$ docker compose up
+```
+
+To stop and remove the running services:
+
+```console
+$ docker compose down 
+```
+
+If you want to monitor the output of your running containers and debug issues, you can view the logs with: 
+
+```console
+$ docker compose logs
+```
+
+To lists all the services along with their current status:
+
+```console
+$ docker compose ps
+```
+
+For a full list of all the Compose CLI commands, see the [reference documentation](../reference/cli/docker/compose/_index.md).
 
 ## Illustrative example
 
@@ -114,6 +144,18 @@ networks:
   # The presence of these objects is sufficient to define them
   front-tier: {}
   back-tier: {}
+```
+
+The `docker compose up` command starts the `frontend` and `backend` services, create the necessary networks and volumes, and injects the configuration and secret into the frontend service.
+
+`docker compose ps` provides a snapshot of the current state of your services, making it easy to see which containers are running, their status, and the ports they are using:
+
+```text
+$ docker compose ps
+
+NAME                IMAGE                COMMAND                  SERVICE             CREATED             STATUS              PORTS
+example-frontend-1  example/webapp       "nginx -g 'daemon of…"   frontend            2 minutes ago       Up 2 minutes        0.0.0.0:443->8043/tcp
+example-backend-1   example/database     "docker-entrypoint.s…"   backend             2 minutes ago       Up 2 minutes
 ```
 
 ## What's next 
