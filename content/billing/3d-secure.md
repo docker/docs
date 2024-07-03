@@ -14,7 +14,7 @@ The following transactions will use 3DS authentication if your payment method re
 
 - Starting a [new paid subscription](/billing/core-billing/get-started-core/)
 - Changing your [billing cycle](/billing/core-billing/cycle/) from monthly to annual
-- [Upgrading your subscription](/subscription/core-subscription/upgrade/) to a paid tier
+- [Upgrading your subscription](/subscription/core-subscription/upgrade/)
 - [Adding seats](/subscription/core-subscription/add-seats/) to an existing subscription
 
 ## Troubleshooting
