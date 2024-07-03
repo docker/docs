@@ -40,7 +40,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
-      - uses: errata-ai/vale-action@38bf078c328061f59879b347ca344a718a736018
+      - uses: errata-ai/vale-action@5a7c925b4888c138e2938a366b70a1559516ce95
         with:
           files: content
 
