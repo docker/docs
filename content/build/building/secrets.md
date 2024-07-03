@@ -9,7 +9,7 @@ A build secret is any piece of sensitive information, such as a password or API
 token, consumed as part of your application's build process.
 
 Build arguments and environment variables are inappropriate for passing secrets
-to your build, because they persist in the final image. Instead, should use
+to your build, because they persist in the final image. Instead, you should use
 secret mounts or SSH mounts, which expose secrets to your builds securely.
 
 ## Secret mounts
