@@ -1913,18 +1913,6 @@ Manuals:
           title: Kubernetes driver
         - path: /build/drivers/remote/
           title: Remote driver
-    - sectiontitle: Build Cloud {{< badge color=violet text=New >}}
-      section:
-        - path: /build/cloud/
-          title: Overview
-        - path: /build/cloud/setup/
-          title: Setup
-        - path: /build/cloud/usage/
-          title: Usage
-        - path: /build/cloud/ci/
-          title: Build Cloud in CI
-        - path: /build/cloud/optimization/
-          title: Optimize for cloud builds
     - sectiontitle: Exporters
       section:
         - path: /build/exporters/
@@ -2057,6 +2045,18 @@ Manuals:
             title: Reproducible builds
     - path: /build/release-notes/
       title: Release notes
+- sectiontitle: Docker Build Cloud
+  section:
+    - path: /build-cloud/
+      title: Overview
+    - path: /build-cloud/setup/
+      title: Setup
+    - path: /build-cloud/usage/
+      title: Usage
+    - path: /build-cloud/ci/
+      title: Continuous integration
+    - path: /build-cloud/optimization/
+      title: Optimization
 - sectiontitle: Docker Compose
   section:
   - path: /compose/

@@ -4,6 +4,7 @@ description: Invoke your cloud builds with the Buildx CLI client
 keywords: build, cloud build, usage, cli, buildx, client
 aliases:
   - /hydrobuild/usage/
+  - /build/cloud/usage/
 ---
 
 To build using Docker Build Cloud, invoke a build command and specify the name of the
@@ -66,7 +67,7 @@ $ docker compose build
 
 In addition to `docker buildx use`, you can also use the `docker compose build
 --builder` flag or the [`BUILDX_BUILDER` environment
-variable](../building/variables.md#buildx_builder) to select the cloud builder.
+variable](/build/building/variables.md#buildx_builder) to select the cloud builder.
 
 ## Loading build results
 
@@ -142,7 +143,7 @@ The traffic is encrypted and secrets are never stored in the build cache.
 >
 > If you're misusing build arguments to pass credentials, authentication
 > tokens, or other secrets, you should refactor your build to pass the secrets using
-> [secret mounts](../../reference/cli/docker/buildx/build.md#secret) instead.
+> [secret mounts](/reference/cli/docker/buildx/build.md#secret) instead.
 > Build arguments are stored in the cache and their values are exposed through attestations.
 > Secret mounts don't leak outside of the build and are never included in attestations.
 {.warning}
