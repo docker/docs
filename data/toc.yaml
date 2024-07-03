@@ -2240,7 +2240,7 @@ Manuals:
   - path: /admin/convert-account/
     title: Convert an account into an organization
   - path: /admin/deactivate-account/
-    title: Deactivate an account or organization
+    title: Deactivate an organization
 
 - sectiontitle: Security
   section:
