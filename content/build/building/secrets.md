@@ -135,9 +135,9 @@ fails because the builder isn't authorized to pull the repository:
 ```console
 $ docker build https://gitlab.com/example/todo-app.git
 [+] Building 0.4s (1/1) FINISHED
- => ERROR [internal] load git source https://gitlab.com/dvdk/todo-app.git
+ => ERROR [internal] load git source https://gitlab.com/example/todo-app.git
 ------
- > [internal] load git source https://gitlab.com/dvdk/todo-app.git:
+ > [internal] load git source https://gitlab.com/example/todo-app.git:
 0.313 fatal: could not read Username for 'https://gitlab.com': terminal prompts disabled
 ------
 ```
