@@ -658,6 +658,8 @@
   - "/go/scout-exceptions/"
 "/scout/explore/analysis/":
   - "/go/scout-analysis/"
+"/scout/explore/analysis/#analyze-registry-images":
+  - "/go/scout-how-to-push-images/"
 
 # Build links (internal)
 "/build/bake/reference/":
