@@ -42,6 +42,10 @@ services:
 
 ### Advanced example 
 
+In the following example, the `proxy` service uses the Nginx image, mounts a local Nginx configuration file into the container, exposes port `80` and depends on the `backend` service. 
+
+The `backend` service builds an image from the Dockerfile located in the `backend` directory that is set to build at stage `builder`.
+
 ```yaml
 services:
   proxy:
@@ -61,10 +65,6 @@ services:
       context: backend
       target: builder
 ```
-
-The `proxy` service uses the Nginx image, mounts a local Nginx configuration file into the container, exposes port `80` and depends on the `backend` service. 
-
-The `backend` service builds an image from the Dockerfile located in the `backend` directory that is set to build at stage `builder`.
 
 For more example Compose files, explore the [Awesome Compose samples](https://github.com/docker/awesome-compose).
 
