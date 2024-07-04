@@ -8,6 +8,9 @@
     {{ with .Title }}
     <h1 data-pagefind-weight="10" class="scroll-mt-36">{{ . }}</h1>
     {{ end }}
+    {{ if eq .CurrentSection.Layout "series" }}
+      {{ partial "guides-stepper.html" . }}
+    {{ end }}
     <div class="block lg:hidden">
       {{ partial "pagemeta.html" . }}
       <hr>
