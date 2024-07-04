@@ -35,7 +35,6 @@ services:
     image: postgres:13
     environment:
       POSTGRES_USER: example
-      POSTGRES_PASSWORD: example
       POSTGRES_DB: exampledb
 ```
 
@@ -63,7 +62,7 @@ services:
       target: builder
 ```
 
-The `proxy` service uses the nginx image, mounts a local nginx configuration file into the container, exposes port `80` and depends on the `backend` service. 
+The `proxy` service uses the Nginx image, mounts a local Nginx configuration file into the container, exposes port `80` and depends on the `backend` service. 
 
 The `backend` service builds an image from the Dockerfile located in the `backend` directory that is set to build at stage `builder`.
 
