@@ -39,7 +39,7 @@ services:
   db:
     image: postgres
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U example"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}'"]
       interval: 10s
       retries: 5
       start_period: 30s
@@ -50,7 +50,7 @@ Compose creates services in dependency order. `db` and `redis` are created befor
 
 Compose waits for healthchecks to pass on dependencies marked with `service_healthy`. `db` is expected to be "healthy" (as indicated by `healthcheck`) before `web` is created.
 
-The healthcheck for the `db` service uses the `pg_isready -U example` command to check if the PostgreSQL database is ready. The service is retried every 10 seconds, up to 5 times.
+The healthcheck for the `db` service uses the `pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}'` command to check if the PostgreSQL database is ready. The service is retried every 10 seconds, up to 5 times.
 
 Compose also removes services in dependency order. `web` is removed before `db` and `redis`.
 
