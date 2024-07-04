@@ -730,3 +730,10 @@
   - /go/debug-cli/
 "/desktop/use-desktop/container/#integrated-terminal":
   - /go/debug-gui/
+
+## Docker Desktop - volumes cloud backup
+"/desktop/use-desktop/volumes/#export-a-volume":
+  - /go/volume-export/
+  - /go/volume-export-aws/
+  - /go/volume-export-azure/
+  - /go/volume-export-gcs/
