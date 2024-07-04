@@ -41,6 +41,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: errata-ai/vale-action@38bf078c328061f59879b347ca344a718a736018
+        env:
+          PIP_BREAK_SYSTEM_PACKAGES: 1
         with:
           files: content
 
