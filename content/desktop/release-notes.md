@@ -21,6 +21,66 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1) to see what's coming next.
 
+## 4.32.0
+
+{{< release-date date="2024-07-04" >}}
+
+{{< desktop-install all=true beta_win_arm=true version="4.32.0" build_path="/157355/" >}}
+
+### New
+
+- Docker Desktop now takes advantage of Moby 27.
+- Docker Desktop now supports moving data to a different drive on macOS and Windows with WSL2 backend. See [docker/for-win#13384](https://github.com/docker/for-win/issues/13384).
+- You can now [schedule backups for volume exports](use-desktop/volumes.md) in the **Volumes** tab (Beta). 
+- Access a terminal shell directly from Docker Desktop (Beta).
+
+### Upgrades
+
+- [Docker Buildx v0.15.1](https://github.com/docker/buildx/releases/tag/v0.15.1)
+- [Docker Compose v2.28.1](https://github.com/docker/compose/releases/tag/v2.28.1)
+- [Docker Scout CLI v1.10.0](https://github.com/docker/scout-cli/releases/tag/v1.10.0)
+- [Docker Engine v27.0.2](https://docs.docker.com/engine/release-notes/27.0/#22700)
+- Docker Init v1.3.0
+
+### Bug fixes and enhancements
+
+#### For all platforms
+ 
+- Improved instructions for `watch` in the Compose File Viewer
+- Added support for Golang projects that don't have dependencies in Docker Init. Addresses [docker/roadmap#611](https://github.com/docker/roadmap/issues/611)
+- [Settings Management](hardened-desktop/settings-management/index.md) now lets admins set the default value to `ProxyEnableKerberosNTLM`.
+- Removed a temporary compatibility fix for older versions of Visual Studio Code.
+- Builds view:
+  - Changed icon for imported build record to a "files" icon.
+  - Improved the error message when trying to connect to an already connected Docker Build Cloud builder.
+  - Fixed an issue where build records would disappear unexpectedly.
+  - Fixed an issue that prevented users from being able to re-open an [imported build](use-desktop/builds.md#import-builds).
+  - Fixed an issue where build details were not displayed when a build's state had changed from running to completed.
+  - Fixed malformed build source link in build details.
+  - Fixed missing build stats for named contexts.
+  - Fixed image index/manifest not being displayed anymore in build results.
+  - Fixed an issue where build traces exported from the UI would appear as a single, flattened list when imported to Jaeger
+  - Fixed truncated digest/sha in build details. 
+  - Fixed final status animation of active builds.
+
+#### For Windows
+
+- Fixed an issue on the WSL 2 engine where Docker Desktop would not detect the existence of the `docker-desktop-data` distribution if it had been manually moved by the user.
+- The Windows on ARM installer and the [privileged service](windows/permission-requirements.md#privileged-helper) are now built for ARM64.
+
+#### For Mac
+
+- Re-added `CONFIG_DM_CRYPT` kernel module.
+- Re-added `CONFIG_PSI` kernel module.
+- Re-added `CONFIG_GTP` kernel module.
+- Re-added `CONFIG_NFT_BRIDGE_META` kernel module.
+- Fixed a regression where the **Another application changed your Desktop configuration** warning message appeared whenever `/var/run/docker.socket` was pointing to an unexpected path.
+- Changed the Configuration Check menu entry and banner to a notification.
+- Improved the performance of read and write operations on bind mounts.
+- Fixed fatal errors with some `AMD64` Java images. Fixes [docker/for-mac/7286](https://github.com/docker/for-mac/issues/7286) and [docker/for-mac/7006](https://github.com/docker/for-mac/issues/7006).
+- Fixed an issue that caused Docker Desktop to remove `Docker.app` when installing from `/Applications`.
+- Fixed an issue that caused bind mounts to fail. Fixes [docker/for-mac#7274](https://github.com/docker/for-mac/issues/7274).
+
 ## 4.31.1
 
 {{< release-date date="2024-06-10" >}}
