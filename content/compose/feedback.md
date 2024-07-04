@@ -18,4 +18,4 @@ To report bugs or problems, visit [Docker Compose on GitHub](https://github.com/
 
 ### Feedback via Community Slack channels
 
-You can also provide feedback through the #docker-compse [Docker Community Slack](https://dockr.ly/comm-slack) channel. 
+You can also provide feedback through the #docker-compose [Docker Community Slack](https://dockr.ly/comm-slack) channel. 
