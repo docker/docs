@@ -17,13 +17,29 @@ group "default" {
   targets = ["release"]
 }
 
+target "ctx" {
+  target = "ctx"
+  context = "."
+  output = ["type=cacheonly"]
+  provenance = false
+}
+
+target "_common" {
+  contexts = {
+    ctx = "target:ctx"
+  }
+}
+
 target "index" {
+  inherits = ["_common"]
   # generate a new local search index
   target = "index"
   output = ["type=local,dest=static/pagefind"]
+  provenance = false
 }
 
 target "release" {
+  inherits = ["_common"]
   args = {
     HUGO_ENV = HUGO_ENV
     DOCS_URL = DOCS_URL
@@ -38,22 +54,30 @@ group "validate" {
 
 target "test" {
   target = "test"
+  inherits = ["_common"]
   output = ["type=cacheonly"]
+  provenance = false
 }
 
 target "lint" {
   target = "lint"
+  inherits = ["_common"]
   output = ["type=cacheonly"]
+  provenance = false
 }
 
 target "unused-media" {
   target = "unused-media"
+  inherits = ["_common"]
   output = ["type=cacheonly"]
+  provenance = false
 }
 
 target "test-go-redirects" {
   target = "test-go-redirects"
+  inherits = ["_common"]
   output = ["type=cacheonly"]
+  provenance = false
 }
 
 #
