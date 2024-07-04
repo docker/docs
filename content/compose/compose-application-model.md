@@ -53,7 +53,7 @@ If you want to reuse other Compose files, or factor out parts of your applicatio
 
 ## The Compose CLI
 
-The Docker Compose CLI is the command-line interface that allows you to interact with your Docker Compose applications. Using the CLI, you can manage the lifecycle of your multi-container applications defined in the compose.yaml file. The CLI commands enable you to start, stop, and configure your applications effortlessly.
+The Docker Compose CLI is the command-line interface that lets you to interact with your Docker Compose applications. Using the CLI, you can manage the lifecycle of your multi-container applications defined in the `compose.yaml` file. The CLI commands enable you to start, stop, and configure your applications effortlessly.
 
 ### Key commands 
 
