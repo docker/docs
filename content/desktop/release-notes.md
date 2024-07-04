@@ -23,9 +23,9 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ## 4.32.0
 
-{{< release-date date="2024-07-01" >}}
+{{< release-date date="2024-07-04" >}}
 
-{{< desktop-install all=true beta_win_arm=true version="4.32.0" build_path="/156455/" >}}
+{{< desktop-install all=true beta_win_arm=true version="4.32.0" build_path="/157355/" >}}
 
 ### New
 
@@ -80,12 +80,6 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 - Fixed fatal errors with some `AMD64` Java images. Fixes [docker/for-mac/7286](https://github.com/docker/for-mac/issues/7286) and [docker/for-mac/7006](https://github.com/docker/for-mac/issues/7006).
 - Fixed an issue that caused Docker Desktop to remove `Docker.app` when installing from `/Applications`.
 - Fixed an issue that caused bind mounts to fail. Fixes [docker/for-mac#7274](https://github.com/docker/for-mac/issues/7274).
-
-### Known Issues
-
-#### For Windows
-
-- If you face sign-in issues, you might need to change the config `proxyEnableKerberosNTLM` in your `settings.json` file. Set it to false if your proxy is using Basic auth scheme or your proxy is configured to use Kerberos/NTLM auth scheme, then restart Docker Desktop.
 
 ## 4.31.1
 
