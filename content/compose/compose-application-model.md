@@ -51,9 +51,9 @@ the expanded form. For more information, see [Working with multiple Compose file
 
 If you want to reuse other Compose files, or factor out parts of your application model into separate Compose files, you can also use [`include`](compose-file/14-include.md). This is useful if your Compose application is dependent on another application which is managed by a different team, or needs to be shared with others.
 
-## The Compose CLI
+## CLI
 
-The Docker Compose CLI is the command-line interface that lets you to interact with your Docker Compose applications. Using the CLI, you can manage the lifecycle of your multi-container applications defined in the `compose.yaml` file. The CLI commands enable you to start, stop, and configure your applications effortlessly.
+The Docker CLI lets you to interact with your Docker Compose applications through the `docker compose` command, and its subcommands. Using the CLI, you can manage the lifecycle of your multi-container applications defined in the `compose.yaml` file. The CLI commands enable you to start, stop, and configure your applications effortlessly.
 
 ### Key commands 
 
