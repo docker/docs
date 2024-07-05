@@ -75,8 +75,8 @@ jobs:
             *.cache-from=type=gha,scope=validate-${{ matrix.target }}
             *.cache-from=type=gha,scope=build
 
-  # build-releaser job will just build _releaser app used for Netlify and
-  # AWS deployment in publish workflow. it's just to be sure it builds correctly.
+  # build-releaser builds the _releaser used for AWS deployment in publish workflow.
+  # It's just to be sure it builds correctly.
   build-releaser:
     runs-on: ubuntu-24.04
     steps:

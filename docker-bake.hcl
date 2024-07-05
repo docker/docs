@@ -83,7 +83,7 @@ target "test-go-redirects" {
 
 #
 # releaser targets are defined in _releaser/Dockerfile
-# and are used for Netlify and AWS S3 deployment
+# and are used for AWS S3 deployment
 #
 
 target "releaser-build" {
@@ -91,38 +91,6 @@ target "releaser-build" {
   target = "releaser"
   output = ["type=cacheonly"]
   provenance = false
-}
-
-variable "NETLIFY_SITE_NAME" {
-  default = ""
-}
-
-target "_common-netlify" {
-  args = {
-    NETLIFY_SITE_NAME = NETLIFY_SITE_NAME
-  }
-  secret = [
-    "id=NETLIFY_AUTH_TOKEN,env=NETLIFY_AUTH_TOKEN"
-  ]
-}
-
-target "netlify-remove" {
-  inherits = ["_common-netlify"]
-  context = "_releaser"
-  target = "netlify-remove"
-  no-cache-filter = ["netlify-remove"]
-  output = ["type=cacheonly"]
-}
-
-target "netlify-deploy" {
-  inherits = ["_common-netlify"]
-  context = "_releaser"
-  target = "netlify-deploy"
-  contexts = {
-    sitedir = DOCS_SITE_DIR
-  }
-  no-cache-filter = ["netlify-deploy"]
-  output = ["type=cacheonly"]
 }
 
 variable "AWS_REGION" {
