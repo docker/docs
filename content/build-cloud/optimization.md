@@ -4,6 +4,7 @@ description: Building remotely is different from building locally. Here's how to
 keywords: build, cloud build, optimize, remote, local, cloud
 aliases:
   - /hydrobuild/optimization/
+  - /build/cloud/optimization/
 ---
 
 Docker Build Cloud runs your builds remotely, and not on the machine where you

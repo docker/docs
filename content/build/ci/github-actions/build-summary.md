@@ -104,7 +104,7 @@ contain a link to download the build record archive.
 
 Build summaries are currently not supported for:
 
-- Builds using [Docker Build Cloud](/build/cloud/_index.md). Support for Docker
+- Builds using [Docker Build Cloud](/build-cloud/_index.md). Support for Docker
   Build Cloud is planned for a future release.
 - Repositories hosted on GitHub Enterprise Servers. Summaries can only be
   viewed for repositories hosted on GitHub.com.
