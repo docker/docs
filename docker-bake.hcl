@@ -46,6 +46,7 @@ target "release" {
   }
   target = "release"
   output = [DOCS_SITE_DIR]
+  provenance = false
 }
 
 group "validate" {
@@ -89,6 +90,7 @@ target "releaser-build" {
   context = "_releaser"
   target = "releaser"
   output = ["type=cacheonly"]
+  provenance = false
 }
 
 variable "NETLIFY_SITE_NAME" {
@@ -152,6 +154,7 @@ target "_common-aws" {
     "id=AWS_SECRET_ACCESS_KEY,env=AWS_SECRET_ACCESS_KEY",
     "id=AWS_SESSION_TOKEN,env=AWS_SESSION_TOKEN"
   ]
+  provenance = false
 }
 
 target "aws-s3-update-config" {
@@ -191,6 +194,7 @@ target "vendor" {
     MODULE = VENDOR_MODULE
   }
   output = ["."]
+  provenance = false
 }
 
 variable "UPSTREAM_MODULE_NAME" {
@@ -211,4 +215,5 @@ target "validate-upstream" {
   }
   target = "validate-upstream"
   output = ["type=cacheonly"]
+  provenance = false
 }
