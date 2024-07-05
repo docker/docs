@@ -3,7 +3,6 @@
 {{- $beta_win_arm := .Get "beta_win_arm" -}}
 {{- $mac := .Get "mac" -}}
 {{- $linux := .Get "linux" -}}
-{{- $version := .Get "version" -}}
 {{- $build_path := .Get "build_path" -}}
 <blockquote {{ if eq $build_path "/" }} class="tip" {{ end }}>
 <p>Download Docker Desktop</p>
@@ -33,13 +32,13 @@
   {{- if or $all $linux }}
   |
   <a target="_blank" rel="noopener"
-     href="https://desktop.docker.com/linux/main/amd64{{ $build_path }}docker-desktop-{{ $version }}-amd64.deb">Debian</a>
+     href="https://desktop.docker.com/linux/main/amd64{{ $build_path }}docker-desktop-amd64.deb">Debian</a>
   -
   <a target="_blank" rel="noopener"
-     href="https://desktop.docker.com/linux/main/amd64{{ $build_path }}docker-desktop-{{ $version }}-x86_64.rpm">RPM</a>
+     href="https://desktop.docker.com/linux/main/amd64{{ $build_path }}docker-desktop-x86_64.rpm">RPM</a>
   -
   <a target="_blank" rel="noopener"
-     href="https://desktop.docker.com/linux/main/amd64{{ $build_path }}docker-desktop-{{ $version }}-x86_64.pkg.tar.zst">Arch</a>
+     href="https://desktop.docker.com/linux/main/amd64{{ $build_path }}docker-desktop-x86_64.pkg.tar.zst">Arch</a>
   (<a target="_blank" rel="noopener"
       href="https://desktop.docker.com/linux/main/amd64{{ $build_path }}checksums.txt">checksum</a>)
   {{- end -}}

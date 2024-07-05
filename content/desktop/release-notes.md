@@ -25,7 +25,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 {{< release-date date="2024-07-04" >}}
 
-{{< desktop-install all=true beta_win_arm=true version="4.32.0" build_path="/157355/" >}}
+{{< desktop-install-v2 all=true beta_win_arm=true version="4.32.0" build_path="/157355/" >}}
 
 ### New
 
