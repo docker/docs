@@ -5,6 +5,8 @@
 
 /content/build/ @crazy-max @dvdksn
 
+/content/build-cloud/ @dvdksn
+
 /content/compose/ @aevesdocker
 
 /content/desktop/ @aevesdocker

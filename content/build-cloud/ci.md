@@ -4,6 +4,7 @@ description: Speed up your continuous integration pipelines with Docker Build Cl
 keywords: build, cloud build, ci, gha, gitlab, buildkite, jenkins, circle ci
 aliases:
   - /hydrobuild/ci/
+  - /build/cloud/ci/
 ---
 
 Using Docker Build Cloud in CI can speed up your build pipelines, which means less time
@@ -37,7 +38,7 @@ See [Loading build results](./usage/#loading-build-results) for details.
 >
 > Version 4.0.0 and later of `docker/build-push-action` and
 > `docker/bake-action` builds images with [provenance attestations by
-> default](../ci/github-actions/attestations.md#default-provenance). Docker
+> default](/build/ci/github-actions/attestations.md#default-provenance). Docker
 > Build Cloud automatically attempts to load images to the local image store if
 > you don't explicitly push them to a registry.
 >
