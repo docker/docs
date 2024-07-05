@@ -9,9 +9,6 @@ variable "DOCS_URL" {
 variable "DOCS_SITE_DIR" {
   default = "public"
 }
-variable "DOCS_ENFORCE_GIT_LOG_HISTORY" {
-  default = "0"
-}
 
 group "default" {
   targets = ["release"]
