@@ -25,7 +25,7 @@ Create a GitHub repository, configure the Docker Hub credentials, and push your 
 2. Open the repository **Settings**, and go to **Secrets and variables** >
    **Actions**.
 
-3. Create a new Enviornment named `test`.
+3. Create a new Environment named `test`.
 
 4. Create a new **Repository variable** named `DOCKER_USERNAME` and your Docker ID as value.
 
