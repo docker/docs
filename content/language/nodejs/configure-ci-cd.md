@@ -25,14 +25,16 @@ Create a GitHub repository, configure the Docker Hub credentials, and push your 
 2. Open the repository **Settings**, and go to **Secrets and variables** >
    **Actions**.
 
-3. Create a new **Repository variable** named `DOCKER_USERNAME` and your Docker ID as value.
+3. Create a new Enviornment named `test`.
 
-4. Create a new [Personal Access Token (PAT)](../../security/for-developers/access-tokens.md/#create-an-access-token) for Docker Hub. You can name this token `docker-tutorial`. Make sure access permissions include Read and Write.
+4. Create a new **Repository variable** named `DOCKER_USERNAME` and your Docker ID as value.
 
-5. Add the PAT as a **Repository secret** in your GitHub repository, with the name
+5. Create a new [Personal Access Token (PAT)](../../security/for-developers/access-tokens.md/#create-an-access-token) for Docker Hub. You can name this token `docker-tutorial`. Make sure access permissions include Read and Write.
+
+6. Add the PAT as a **Repository secret** in your GitHub repository, with the name
    `DOCKERHUB_TOKEN`.
 
-6. In your local repository on your machine, run the following command to change
+7. In your local repository on your machine, run the following command to change
    the origin to the repository you just created. Make sure you change
    `your-username` to your GitHub username and `your-repository` to the name of
    the repository you created.
@@ -41,7 +43,7 @@ Create a GitHub repository, configure the Docker Hub credentials, and push your 
    $ git remote set-url origin https://github.com/your-username/your-repository.git
    ```
 
-7. Run the following commands to stage, commit, and push your local repository to GitHub.
+8. Run the following commands to stage, commit, and push your local repository to GitHub.
 
    ```console
    $ git add -A
@@ -74,6 +76,7 @@ to Docker Hub.
    jobs:
      build:
        runs-on: ubuntu-latest
+       environment: test
        steps:
          -
            name: Login to Docker Hub
