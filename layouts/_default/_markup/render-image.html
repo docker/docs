@@ -1,13 +1,14 @@
-{{ $imagePath := .Destination }}
-{{ if and (eq .Page.Kind "page") (not (hasPrefix .Destination "/")) }}
-  {{ $imagePath = (printf "../%s" .Destination) }}
+{{- $u := urls.Parse .Destination -}}
+{{- $src := $u.String -}}
+{{ if not (or $u.IsAbs (strings.HasPrefix $u.String "/")) }}
+  {{ $base := urls.Parse .Page.Permalink }}
+  {{ $src = $base.JoinPath "../" $u.Path -}}
 {{ end }}
 
-{{ $params := (urls.Parse $imagePath).Query }}
-{{ $width := index $params "w" }}
-{{ $height := index $params "h" }}
-{{ $border := index $params "border" }}
-
+{{ $params := $u.Query }}
+{{ $width := $params.Get "w" }}
+{{ $height := $params.Get "h" }}
+{{ $border := $params.Has "border" }}
 
 <figure
   x-data="{ zoom: false }"
@@ -16,15 +17,10 @@
 >
   <img
     loading="lazy"
-    src="{{ $imagePath }}"
+    src="{{ $src }}"
     alt="{{ .Text }}"
-    {{ with $width }}
-      width="{{ index . 0 }}"
-    {{ end }}
-    {{ with $height }}
-      height="{{ index . 0 }}"
-    {{ end }}
-    {{ with .Title }}title="{{ . }}"{{ end }}
+    {{ with $width }} width="{{ . }}" {{ end }}
+    {{ with $height }} height="{{ . }}" {{ end }}
     class="rounded mx-auto{{ with $border }} border border-divider-light dark:border-divider-dark{{end}}"
   />
   {{ with .Title }}
@@ -45,9 +41,8 @@
       <img
         loading="lazy"
         class="rounded max-w-full max-h-full"
-        src="{{ $imagePath }}"
+        src="{{ $src }}"
         alt="{{ .Text }}"
-        {{ with .Title }}title="{{ . }}"{{ end }}
       />
     </div>
   </template>
