@@ -2328,6 +2328,8 @@ Manuals:
     title: Docker Scout billing
   - path: /billing/tax-certificate/
     title: Register a tax certificate
+  - path: /billing/3d-secure/
+    title: 3D Secure authentication
   - path: /billing/faqs/
     title: Billing FAQs
 
