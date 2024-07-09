@@ -39,7 +39,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 - [Docker Buildx v0.15.1](https://github.com/docker/buildx/releases/tag/v0.15.1)
 - [Docker Compose v2.28.1](https://github.com/docker/compose/releases/tag/v2.28.1)
 - [Docker Scout CLI v1.10.0](https://github.com/docker/scout-cli/releases/tag/v1.10.0)
-- [Docker Engine v27.0.2](https://docs.docker.com/engine/release-notes/27.0/#22700)
+- [Docker Engine v27.0.3](https://docs.docker.com/engine/release-notes/27.0/#22700)
 - Docker Init v1.3.0
 
 ### Bug fixes and enhancements
