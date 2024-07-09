@@ -16,7 +16,6 @@ When you enable SSO, your users can't authenticate using their Docker login cred
 
 The following diagram shows how SSO operates and is managed in Docker Hub and Docker Desktop. In addition, it provides information on how to authenticate between your IdP.
 
-[fixme: this url is broken]::
 ![SSO architecture](images/SSO.png)
 
 ## How to set it up
@@ -30,8 +29,8 @@ The following diagram shows how SSO operates and is managed in Docker Hub and Do
 
 * You must first notify your company about the new SSO login procedures.
 * Verify that your members have Docker Desktop version 4.4.2, or later, installed on their machines.
-* If your organization has SSO enforced, members using the Docker CLI will be required to [create a Personal Access Token (PAT)](/docker-hub/access-tokens/) to sign in instead of with a username and password. Docker plans to deprecate signing in to the CLI with a username and password in the future, so using a PAT will be required to prevent issues with authentication. For more details see the [security announcement](/security/security-announcements/#deprecation-of-password-logins-on-cli-when-sso-enforced)).
-* Ensure all email addresses of allowed users are added to your IdP.
+* If your organization is planning to [enforce SSO](/security/for-admins/single-sign-on/connect/#optional-enforce-sso), members using the Docker CLI will be required to [create a Personal Access Token (PAT)](/docker-hub/access-tokens/) to sign in instead of with a username and password. Docker plans to deprecate signing in to the CLI with a password in the future, so using a PAT will be required to prevent issues with authentication. For more details see the [security announcement](/security/security-announcements/#deprecation-of-password-logins-on-cli-when-sso-enforced).
+* Ensure all your Docker users have a valid user on your IDP with the same email address as their Unique Primary Identifier (UPN)
 * Confirm that all CI/CD pipelines have replaced their passwords with PATs.
 * For your service accounts, add your additional domains or enable it in your IdP.
 

@@ -38,9 +38,9 @@ Ensure your users have their organization email on their account, so that the ac
 
 Yes, you can choose to not enforce, and users have the option to use either Docker ID (standard email and password) or domain-verified email address (SSO) at the sign-in screen.
 
-### SSO is enforced, but one of our users is connected to several organizations (and several email addresses) and is able to bypass SSO and sign in through username and password. Why is this happening?
+### SSO is enforced, but one of our users is able to sign in through username and password. Why is this happening?
 
-Users can bypass SSO if the email they're using to sign in doesn't match the organization email that's used for SSO enforcement. TODO: review
+Guest users who are not part of your registered domain but have been invited to your organization do not login through your SSO Identity Provider. SSO Enforcement only requires that users which _do_ belong to your domain must go through the SSO IdP.
 
 ### Is there a way to test this functionality in a test tenant with Okta before going to production?
 
