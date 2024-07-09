@@ -40,7 +40,7 @@ Yes, you can choose to not enforce, and users have the option to use either Dock
 
 ### SSO is enforced, but one of our users is able to sign in through username and password. Why is this happening?
 
-Guest users who are not part of your registered domain but have been invited to your organization do not login through your SSO Identity Provider. SSO Enforcement only requires that users which _do_ belong to your domain must go through the SSO IdP.
+Guest users who are not part of your registered domain but have been invited to your organization do not sign-in through your SSO Identity Provider. SSO Enforcement only requires that users which _do_ belong to your domain must go through the SSO IdP.
 
 ### Is there a way to test this functionality in a test tenant with Okta before going to production?
 
