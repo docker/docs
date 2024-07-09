@@ -81,6 +81,12 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 - Fixed an issue that caused Docker Desktop to remove `Docker.app` when installing from `/Applications`.
 - Fixed an issue that caused bind mounts to fail. Fixes [docker/for-mac#7274](https://github.com/docker/for-mac/issues/7274).
 
+### Known issues
+
+#### For Mac
+
+- When running `docker-compose` after an update, it will return `command not found`. As a workaround, you create the following symlink: `sudo ln -sf /Applications/Docker.app/Contents/Resources/cli-plugins/docker-compose /usr/local/bin/docker-compose`
+
 ## 4.31.1
 
 {{< release-date date="2024-06-10" >}}
