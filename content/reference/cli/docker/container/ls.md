@@ -8,6 +8,7 @@ aliases:
 - /engine/reference/commandline/container_ls/
 - /engine/reference/commandline/ps/
 - /reference/cli/docker/ps/
+- /reference/cli/docker/container/ps/
 layout: cli
 ---
 
