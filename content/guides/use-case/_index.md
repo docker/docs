@@ -37,6 +37,10 @@ grid_genai:
   description: Explore an app that can summarize text.
   link: /guides/use-case/nlp/text-summarization/
   icon: summarize
+- title: RAG Ollama application
+  description: Explore how to containerize a RAG application
+  link: /guides/use-case/rag-ollama
+  icon: article
 ---
 
 Explore this collection of use-case guides designed to help you leverage Docker
