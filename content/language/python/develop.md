@@ -22,7 +22,7 @@ You'll need to clone a new repository to get a sample application that includes 
 1. Change to a directory where you want to clone the repository and run the following command.
 
    ```console
-   $ git clone https://github.com/docker/python-docker-dev
+   $ git clone https://github.com/estebanx64/python-docker-dev-example
    ```
 
 2. In the cloned repository's directory, manually create the Docker assets or run `docker init` to create the necessary Docker assets.
@@ -36,19 +36,19 @@ You'll need to clone a new repository to get a sample application that includes 
    ```console
    $ docker init
    Welcome to the Docker Init CLI!
-
+   
    This utility will walk you through creating the following files with sensible defaults for your project:
      - .dockerignore
      - Dockerfile
      - compose.yaml
      - README.Docker.md
-
+   
    Let's get started!
-
+   
    ? What application platform does your project use? Python
    ? What version of Python do you want to use? 3.11.4
    ? What port do you want your app to listen on? 8001
-   ? What is the command to run your app? python3 -m flask run --host=0.0.0.0 --port=8001
+   ? What is the command to run your app? python3 -m uvicorn app:app --host=0.0.0.0 --port=5001
    ```
 
    {{< /tab >}}
@@ -107,10 +107,10 @@ You'll need to clone a new repository to get a sample application that includes 
    COPY . .
    
    # Expose the port that the application listens on.
-   EXPOSE 8001
+   EXPOSE 5001
    
    # Run the application.
-   CMD python3 -m flask run --host=0.0.0.0 --port=8001
+   CMD python3 -m uvicorn app:app --host=0.0.0.0 --port=5001
    ```
    
    Create a file named `compose.yaml` with the following contents.
@@ -130,7 +130,7 @@ You'll need to clone a new repository to get a sample application that includes 
        build:
          context: .
        ports:
-         - 8001:8001
+         - 5001:5001
    
    # The commented out section below is an example of how to define a PostgreSQL
    # database that your application can use. `depends_on` tells Docker Compose to
@@ -204,6 +204,65 @@ You'll need to clone a new repository to get a sample application that includes 
    LICENSE
    README.md
    ```
+   Create a file named `.gitignore` with the following contents.
+   
+   ```text {collapse=true,title=".dockerignore"}
+   # Byte-compiled / optimized / DLL files
+   __pycache__/
+   *.py[cod]
+   *$py.class
+   
+   # C extensions
+   *.so
+   
+   # Distribution / packaging
+   .Python
+   build/
+   develop-eggs/
+   dist/
+   downloads/
+   eggs/
+   .eggs/
+   lib/
+   lib64/
+   parts/
+   sdist/
+   var/
+   wheels/
+   share/python-wheels/
+   *.egg-info/
+   .installed.cfg
+   *.egg
+   MANIFEST
+   
+   # Unit test / coverage reports
+   htmlcov/
+   .tox/
+   .nox/
+   .coverage
+   .coverage.*
+   .cache
+   nosetests.xml
+   coverage.xml
+   *.cover
+   *.py,cover
+   .hypothesis/
+   .pytest_cache/
+   cover/
+   
+   # PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
+   __pypackages__/
+   
+   # Environments
+   .env
+   .venv
+   env/
+   venv/
+   ENV/
+   env.bak/
+   venv.bak/
+   ```
+   
    {{< /tab >}}
    {{< /tabs >}}
 
@@ -217,14 +276,17 @@ In the `compose.yaml` file, you need to uncomment all of the database instructio
 
 The following is the updated `compose.yaml` file.
 
-```yaml {hl_lines="7-36"}
+```yaml {hl_lines="7-43"}
 services:
   server:
     build:
       context: .
     ports:
-      - 8001:8001
+      - 5001:5001
     environment:
+      - POSTGRES_SERVER=db
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=example
       - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
     depends_on:
       db:
@@ -271,16 +333,18 @@ mysecretpassword
 
 Save and close the `password.txt` file.
 
-You should now have the following contents in your `python-docker-dev`
+You should now have the following contents in your `python-docker-dev-example`
 directory.
 
 ```text
-├── python-docker-dev/
+├── python-docker-dev-example/
 │ ├── db/
 │ │ └── password.txt
 │ ├── app.py
+│ ├── config.py
 │ ├── requirements.txt
 │ ├── .dockerignore
+│ ├── .gitignore
 │ ├── compose.yaml
 │ ├── Dockerfile
 │ ├── README.Docker.md
@@ -295,18 +359,50 @@ $ docker compose up --build
 
 Now test your API endpoint. Open a new terminal then make a request to the server using the curl commands:
 
+Let's create an object with a post method
+
 ```console
-$ curl http://localhost:8001/initdb
-$ curl http://localhost:8001/widgets
+$ curl -X 'POST' \
+  'http://0.0.0.0:5001/heroes/' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "id": 1,
+  "name": "my hero",
+  "secret_name": "austing",
+  "age": 12
+}'
 ```
 
 You should receive the following response:
 
 ```json
-[]
+{
+  "age": 12,
+  "id": 1,
+  "name": "my hero",
+  "secret_name": "austing"
+}
 ```
 
-The response is empty because your database is empty.
+Let's make a get request with the next curl command:
+
+```console
+curl -X 'GET' \
+  'http://0.0.0.0:5001/heroes/' \
+  -H 'accept: application/json'
+```
+
+You should receive the same response as above because it's the only one object we have in database.
+
+```json
+{
+  "age": 12,
+  "id": 1,
+  "name": "my hero",
+  "secret_name": "austing"
+}
+```
 
 Press `ctrl+c` in the terminal to stop your application.
 
@@ -319,14 +415,17 @@ Watch](../../compose/file-watch.md).
 Open your `compose.yaml` file in an IDE or text editor and then add the Compose
 Watch instructions. The following is the updated `compose.yaml` file.
 
-```yaml {hl_lines="14-17"}
+```yaml {hl_lines="17-20"}
 services:
   server:
     build:
       context: .
     ports:
-      - 8001:8001
+      - 5001:5001
     environment:
+      - POSTGRES_SERVER=db
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=example
       - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
     depends_on:
       db:
@@ -371,13 +470,13 @@ $ docker compose watch
 In a terminal, curl the application to get a response.
 
 ```console
-$ curl http://localhost:8001
+$ curl http://localhost:5001
 Hello, Docker!
 ```
 
 Any changes to the application's source files on your local machine will now be immediately reflected in the running container.
 
-Open `python-docker-dev/app.py` in an IDE or text editor and update the `Hello, Docker!` string by adding a few more exclamation marks.
+Open `python-docker-dev-example/app.py` in an IDE or text editor and update the `Hello, Docker!` string by adding a few more exclamation marks.
 
 ```diff
 -    return 'Hello, Docker!'
@@ -387,7 +486,7 @@ Open `python-docker-dev/app.py` in an IDE or text editor and update the `Hello, 
 Save the changes to `app.py` and then wait a few seconds for the application to rebuild. Curl the application again and verify that the updated text appears.
 
 ```console
-$ curl http://localhost:8001
+$ curl http://localhost:5001
 Hello, Docker!!!
 ```
 
