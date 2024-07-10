@@ -22,7 +22,7 @@ for the application you containerized in the previous section. This includes:
 
 You can use containers to set up local services, like a database. In this section, you'll update the `docker-compose.yaml` file to define a database service and a volume to persist data. Also, this particular application uses a system property to define the database type, so you'll need to update the `Dockerfile` to pass in the system property when starting the app.
 
-In the cloned repository's directory, open the `docker-compose.yaml` file in an IDE or text editor. `docker init` added an example database service, but it'll require a few changes for your unique app.
+In the cloned repository's directory, open the `docker-compose.yaml` file in an IDE or text editor. Your Compose file has an example database service, but it'll require a few changes for your unique app.
 
 In the `docker-compose.yaml` file, you need to do the following:
 - Uncomment all of the database instructions. You'll now use a database service
@@ -41,7 +41,7 @@ In the `docker-compose.yaml` file, you need to do the following:
   overrides the default value defined in
   `spring-petclinic/src/main/resources/application-postgres.properties`.
 
-The following is the updated `compose.yaml` file. All comments have been removed.
+The following is the updated `docker-compose.yaml` file. All comments have been removed.
 
 ```yaml {hl_lines="7-29"}
 services:
@@ -113,7 +113,7 @@ as a development image.
 
 Replace the contents of your Dockerfile with the following.
 
-```dockerfile {hl_lines="22-28"}
+```dockerfile {hl_lines="22-29"}
 # syntax=docker/dockerfile:1
 
 FROM eclipse-temurin:17-jdk-jammy as deps
@@ -141,7 +141,8 @@ RUN cp -r /build/target/extracted/dependencies/. ./
 RUN cp -r /build/target/extracted/spring-boot-loader/. ./
 RUN cp -r /build/target/extracted/snapshot-dependencies/. ./
 RUN cp -r /build/target/extracted/application/. ./
-CMD [ "java", "-Dspring.profiles.active=postgres", "-Dspring-boot.run.jvmArguments='-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8000'", "org.springframework.boot.loader.launch.JarLauncher" ]
+ENV JAVA_TOOL_OPTIONS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8000
+CMD [ "java", "-Dspring.profiles.active=postgres", "org.springframework.boot.loader.launch.JarLauncher" ]
 
 FROM eclipse-temurin:17-jre-jammy AS final
 ARG UID=10001
@@ -170,9 +171,7 @@ In the `Dockerfile` you added a new stage labeled `development` based on the `ex
 
 The current Compose file doesn't start your development container. To do that, you must update your Compose file to target the development stage. Also, update the port mapping of the server service to provide access for the debugger.
 
-Open the `petclinic` in your IDE or a text editor and create a new file named
-`docker-compose.dev.yml`. Copy and paste the following instructions into the
-file.
+Open the `docker-compose.yaml` and add the following instructions into the file.
 
 ```yaml {hl_lines=["5","8"]}
 services:
