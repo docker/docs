@@ -51,12 +51,71 @@ You'll need to clone a new repository to get a sample application that includes 
    ? What is the command to run your app? python3 -m uvicorn app:app --host=0.0.0.0 --port=5001
    ```
 
+   Create a file named `.gitignore` with the following contents.
+   
+   ```text {collapse=true,title=".gitignore"}
+   # Byte-compiled / optimized / DLL files
+   __pycache__/
+   *.py[cod]
+   *$py.class
+   
+   # C extensions
+   *.so
+   
+   # Distribution / packaging
+   .Python
+   build/
+   develop-eggs/
+   dist/
+   downloads/
+   eggs/
+   .eggs/
+   lib/
+   lib64/
+   parts/
+   sdist/
+   var/
+   wheels/
+   share/python-wheels/
+   *.egg-info/
+   .installed.cfg
+   *.egg
+   MANIFEST
+   
+   # Unit test / coverage reports
+   htmlcov/
+   .tox/
+   .nox/
+   .coverage
+   .coverage.*
+   .cache
+   nosetests.xml
+   coverage.xml
+   *.cover
+   *.py,cover
+   .hypothesis/
+   .pytest_cache/
+   cover/
+   
+   # PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
+   __pypackages__/
+   
+   # Environments
+   .env
+   .venv
+   env/
+   venv/
+   ENV/
+   env.bak/
+   venv.bak/
+   ```
+   
    {{< /tab >}}
    {{< tab name="Manually create assets" >}}
-
+   
    If you don't have Docker Desktop installed or prefer creating the assets
    manually, you can create the following files in your project directory.
-
+   
    Create a file named `Dockerfile` with the following contents.
    
    ```dockerfile {collapse=true,title=Dockerfile}
@@ -206,7 +265,7 @@ You'll need to clone a new repository to get a sample application that includes 
    ```
    Create a file named `.gitignore` with the following contents.
    
-   ```text {collapse=true,title=".dockerignore"}
+   ```text {collapse=true,title=".gitignore"}
    # Byte-compiled / optimized / DLL files
    __pycache__/
    *.py[cod]
