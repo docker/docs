@@ -179,7 +179,18 @@ Guides:
       path: /language/php/configure-ci-cd/
     - title: "Test your deployment"
       path: /language/php/deploy/
-
+  - sectiontitle: Ruby
+    section:
+    - title: "Overview"
+      path: /language/ruby/
+    - title: "Containerize your app"
+      path: /language/ruby/containerize/
+    - title: "Develop your app"
+      path: /language/ruby/develop/
+    - title: "Configure CI/CD"
+      path: /language/ruby/configure-ci-cd/
+    - title: "Test your deployment"
+      path: /language/ruby/deploy/
 - sectiontitle: Use-case guides
   section:
     - path: /guides/use-case/
