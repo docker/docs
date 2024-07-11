@@ -8,6 +8,12 @@ This page outlines the different ways you can enforce sign-in for Docker Desktop
 
 ## Registry key method (Windows only)
 
+> **Early Access**
+>
+> The registry key method is an [early access](../../../release-lifecycle.md#early-access-ea) feature. 
+> It's available with Docker Desktop version 4.32 and later.
+{ .restricted }
+
 1. Create the registry key. Your new key should look like the following:
 
    ```console 
@@ -24,6 +30,10 @@ This page outlines the different ways you can enforce sign-in for Docker Desktop
 
 In some cases, a system reboot may be necessary for enforcement to take effect.
 
+>**Note**
+>
+> If a registry key and a `registry.json` file both exist, the registry key takes precedence.
+
 ### Example deployment via Group Policy
 
 The following is only an illustrative example. 
@@ -31,7 +41,7 @@ The following is only an illustrative example.
 There are many ways to deploy the registry key, for example using an MDM solution or with PowerShell scripting. The method you choose is dependent on your organizations infrastructure, security policies, and the administrative rights of the end-users. 
 
 1. Create the registry script. Write a script to create the `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Docker\Docker Desktop` key, add the `allowedOrgs` multi-string, and then set the value to your organization’s name.
-2. Within Group Policy, create or edit a Group Policy Objective (GPO) that applies to the machines or users you wish to target.
+2. Within Group Policy, create or edit a Group Policy Objective (GPO) that applies to the machines or users you want to target.
 3. Within the GPO, navigate to **Computer Configuration** > **Preferences** > **Windows Settings** > **Registry**.
 4. Add the registry item. Right-click on the **Registry** node, select **New** > **Registry Item**.
 5. Configure the new registry item to match the registry script you created, specifying the action as **Update**. Make sure you input the correct path, value name (`allowedOrgs`), and value data (your organization’s name).
@@ -40,6 +50,12 @@ There are many ways to deploy the registry key, for example using an MDM solutio
 8. Once verified, you can proceed with broader deployment. Monitor the deployment to ensure the settings are applied correctly across the organization's computers.
 
 ## plist method (Mac only)
+
+> **Early Access**
+>
+> The plist method is an [early access](../../../release-lifecycle.md#early-access-ea) feature. 
+> It's available with Docker Desktop version 4.32 and later.
+{ .restricted }
 
 1. Create the file `/Library/Application Support/com.docker.docker/desktop.plist`
 2. Open `desktop.plist` in a text editor and add the following content, where `myorg` is replaced with your organization’s name all lowercase:
@@ -65,6 +81,10 @@ There are many ways to deploy the registry key, for example using an MDM solutio
 4. Restart Docker Desktop. 
 5. Open Docker Desktop and when Docker Desktop starts, verify that the **Sign in required!** prompt appears.
 
+>**Note**
+>
+> If a registry key and a `registry.json` file both exist, the registry key takes precedence.
+
 ### Example deployment 
 
 The following is only an illustrative example. 
@@ -74,9 +94,9 @@ There are many ways to deploy the `.plist` file. The method you choose is depend
 {{< tabs >}}
 {{< tab name="MDM" >}}
 
-1. Follow the steps outlined above to create the `desktop.plist` file.
+1. Follow the steps previously outlined to create the `desktop.plist` file.
 2. Use an MDM tool like Jamf or Fleet to distribute the `desktop.plist` file to `/Library/Application Support/com.docker.docker/` on target macOS devices.
-3. Through the MDM tool, set the file permissions to allow editing by administrators only.
+3. Through the MDM tool, set the file permissions to permit editing by administrators only.
 
 {{< /tab >}}
 {{< tab name="Shell script" >}}
@@ -88,7 +108,7 @@ There are many ways to deploy the `.plist` file. The method you choose is depend
        ```console
        $ defaults write /Library/Application\ Support/com.docker.docker/desktop.plist allowedOrgs -string "myorg"
        ```
-    - Change permissions of the `plist` file to restrict editing, using `chmod` and possibly `chown` to set the owner to root or another admin account, ensuring it can't be easily modified by unauthorized users.
+    - Change permissions of the `plist` file to restrict editing, using `chmod` and possibly `chown` to set the owner to root or another administrator account, ensuring it can't be easily modified by unauthorized users.
 2. Before deploying the script across the organization, test it on a local macOS machine to ensure it behaves as expected. Pay attention to directory paths, permissions, and the successful application of `plist` settings.
 3. Ensure that you have the capability to execute scripts remotely on macOS devices. This might involve setting up SSH access or using a remote support tool that supports macOS.
 4.  Use a method of remote script execution that fits your organization's infrastructure. Options include:
@@ -145,20 +165,7 @@ details, see [Manage members](/admin/organization/members/).
     > If your users have issues starting Docker Desktop after you enforce sign-in, they may need to update to the latest version.
     { .tip }
 
-### Option 2: Download a registry.json file from Docker Hub
-
-In Docker Hub, you can download the `registry.json` file for your organization
-or copy the specific commands to create the file for your organization. To
-download the file or copy the commands, use the following steps.
-
-1. Sign in to [Docker Hub](http://hub.docker.com/) as an organization owner.
-
-2. Go to **Organizations** > ***Your Organization*** > **Settings**.
-
-3. Select **Enforce Sign-in** and continue with the on-screen instructions for
-   Windows, Mac, or Linux.
-
-### Option3: Create a registry.json file when installing Docker Desktop
+### Option 2: Create a registry.json file when installing Docker Desktop
 
 To create a `registry.json` file when installing Docker Desktop, use the following instructions based on your user's operating system.
 
@@ -199,7 +206,7 @@ $ sudo hdiutil detach /Volumes/Docker
 {{< /tab >}}
 {{< /tabs >}}
 
-### Option 4: Create a registry.json file using the command line
+### Option 3: Create a registry.json file using the command line
 
 To create a `registry.json` using the command line, use the following instructions based on your user's operating system.
 
@@ -207,7 +214,7 @@ To create a `registry.json` using the command line, use the following instructio
 {{< tab name="Windows" >}}
 
 To use the CLI to create a `registry.json` file, run the following PowerShell
-command as an Admin and replace `myorg` with your organization's name. The file
+command as an administrator and replace `myorg` with your organization's name. The file
 contents are case-sensitive and you must use lowercase letters for your
 organization's name.
 

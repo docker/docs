@@ -15,8 +15,8 @@ subscription](../../../subscription/core-subscription/details.md) and they can c
 security features](../../../desktop/hardened-desktop/_index.md) for your organization.
 
 There are multiple ways you can enforce sign-in, depending on your companies' set up and preferences:
-- [Registry key method (Windows only)](methods.md#registry-key-method-windows-only)
-- [`.plist` method (Mac only)](methods.md#plist-method-mac-only)
+- [Registry key method (Windows only)](methods.md#registry-key-method-windows-only){{< badge color=violet text="Early Access" >}}
+- [`.plist` method (Mac only)](methods.md#plist-method-mac-only){{< badge color=violet text="Early Access" >}}
 - [`registry.json` method (All)](methods.md#registryjson-method-all)
 
 ## How is sign-in enforced?
@@ -35,7 +35,7 @@ following occurs:
 - When a user signs out, the **Sign in required!** prompt appears and they can
   no longer use Docker Desktop.
 
-> **Enforce sign-in vs enforce SSO**
+> **Enforce sign-in versus enforce SSO**
 >
 > Enforcing sign-in ensures that users are required to sign in to use Docker Desktop.
 > If your organization is also using single sign-on (SSO), you can optionally enforce SSO.
