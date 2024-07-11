@@ -6,7 +6,7 @@ keywords: msi, windows, docker desktop, install, deploy, configure
 
 ## Install interactively
 
-1. In the Docker Admin Console, navigate to your organization.   
+1. In the [Docker Admin Console](http://admin.docker.com/), navigate to your organization.   
 
 2. Under **Security and access**, select the **Deploy Docker Desktop** page. 
 
