@@ -1107,7 +1107,7 @@ Manuals:
          title: Understand permission requirements for Mac
        - path: /desktop/install/windows-install/
          title: Install on Windows
-       - sectiontitle: Deploy with Microsoft installer
+       - sectiontitle: Deploy with Microsoft installer {{< badge color=violet text="EA" >}}
          section:
          - path: /desktop/install/msi/
            title: Overview

@@ -6,13 +6,17 @@ keywords: msi, windows, docker desktop, install, deploy, configure
 
 ## Install interactively
 
-1. Download the installer.
+1. In the Docker Admin Console, navigate to your organization.   
 
-2. Double-click `Docker Desktop Installer.msi` to run the installer. 
+2. Under **Security and access**, select the **Deploy Docker Desktop** page. 
 
-3. Once you've accepted the license agreement, you can choose the install location. By default, Docker Desktop is installed at `C:\Program Files\Docker\Docker`.
+3. Select the **Download MSI installer** button. 
 
-4. Configure the Docker Desktop installation. You can:
+4. Once downloaded, double-click `Docker Desktop Installer.msi` to run the installer. 
+
+5. Once you've accepted the license agreement, you can choose the install location. By default, Docker Desktop is installed at `C:\Program Files\Docker\Docker`.
+
+6. Configure the Docker Desktop installation. You can:
 
     - Create a desktop shortcut
 
@@ -20,13 +24,13 @@ keywords: msi, windows, docker desktop, install, deploy, configure
 
     - Disable Windows Container usage
 
-    - Select the engine for Docker Desktop. Either WSL or Hyper-V. If your system only supports one of the two options, you will not be able to select which backend to use.
+    - Select the engine for Docker Desktop. Either WSL or Hyper-V. If your system only supports one of the two options, you won't be able to select which backend to use.
 
-5. Follow the instructions on the installation wizard to authorize the installer and proceed with the install.
+7. Follow the instructions on the installation wizard to authorize the installer and proceed with the install.
 
-6. When the installation is successful, select **Finish** to complete the installation process.
+8. When the installation is successful, select **Finish** to complete the installation process.
 
-If your admin account is different to your user account, you must add the user to the **docker-users** group:
+If your administrator account is different to your user account, you must add the user to the **docker-users** group:
 1. Run **Computer Management** as an **administrator**.
 2. Navigate to **Local Users and Groups** > **Groups** > **docker-users**. 
 3. Right-click to add the user to the group.
@@ -40,7 +44,7 @@ When installing Docker Desktop, you can choose between interactive or non-intera
 
 Interactive installations, without specifying `/quiet` or `/qn`, display the user interface and let you select your own properties. 
 
-When installing via the user interface it is possible to:
+When installing via the user interface it's possible to:
 
 - Choose the destination folder
 - Create a desktop shortcut
@@ -105,7 +109,7 @@ msiexec /i "DockerDesktop.msi" /L*V ".\msi.log" /passive /norestart
 > 
 > - The property expects a JSON formatted string
 > - The string should be wrapped in double quotes
-> - The string should not contain any whitespace
+> - The string shouldn't contain any whitespace
 > - Property names are expected to be in double quotes
 { .tip }
 
@@ -175,7 +179,7 @@ msiexec /x "DockerDesktop.msi" /quiet
 | `ALLOWEDORG` | Requires the user to sign in and be part of the specified Docker Hub organization when running the application. This creates a registry key called `allowedOrgs` in `HKLM\Software\Policies\Docker\Docker Desktop`. | None |
 | `ALWAYSRUNSERVICE` | Lets users switch to Windows containers without needing admin rights | 0 |
 | `DISABLEWINDOWSCONTAINERS` | Disables the Windows containers integration | 0 |
-| `ENGINE` | Sets the Docker Engine that is used to run containers. This can be either `wsl` , `hyperv`, or `windows` | `wsl` |
+| `ENGINE` | Sets the Docker Engine that's used to run containers. This can be either `wsl` , `hyperv`, or `windows` | `wsl` |
 | `PROXYHTTPMODE` | Sets the HTTP Proxy mode. This can be either `system` or `manual` | `system` |
 | `OVERRIDEPROXYHTTP` | Sets the URL of the HTTP proxy that must be used for outgoing HTTP requests. | None |
 | `OVERRIDEPROXYHTTPS` | Sets the URL of the HTTP proxy that must be used for outgoing HTTPS requests. | None |
@@ -194,7 +198,7 @@ By default, the installer reboots the machine after a successful installation. W
 
 When installing Docker Desktop with the MSI, in-app updates are disabled.
 
-Docker Desktop will notify you when an update is available. To update Docker Desktop, download the latest installer from the Docker Admin console. Navigate to the  **Deploy Docker Desktop** page under **Organization settings**. 
+Docker Desktop will notify you when an update is available. To update Docker Desktop, download the latest installer from the Docker Admin console. Navigate to the  **Deploy Docker Desktop** page under **Security and access**. 
 
 To keep up to date with new releases, you can check use the [release notes](https://docs.docker.com/desktop/release-notes/) page.
 
@@ -225,7 +229,7 @@ msiexec /i "win\msi\bin\en-US\DockerDesktop.msi" /L*V ".\msi.log" DISABLEANALYTI
 
 If you decide to disable analytics for an installation, your choice is persisted in the registry and honoured across future upgrades and uninstalls.
 
-However, the key is removed when Docker Desktop is uninstalled and must be configured again via one of the preivous methods.
+However, the key is removed when Docker Desktop is uninstalled and must be configured again via one of the previous methods.
 
 The registry key is as follows:
 
@@ -233,7 +237,7 @@ The registry key is as follows:
 SOFTWARE\Docker Inc.\Docker Desktop\DisableMsiAnalytics
 ```
 
-When analytics has been disabled, this key has a value of `1`. 
+When analytics is disabled, this key has a value of `1`. 
 
 ## Additional resources
 
