@@ -198,7 +198,7 @@ By default, the installer reboots the machine after a successful installation. W
 
 When installing Docker Desktop with the MSI, in-app updates are disabled.
 
-Docker Desktop will notify you when an update is available. To update Docker Desktop, download the latest installer from the Docker Admin console. Navigate to the  **Deploy Docker Desktop** page under **Security and access**. 
+Docker Desktop will notify you when an update is available. To update Docker Desktop, download the latest installer from the Docker Admin Console. Navigate to the  **Deploy Docker Desktop** page under **Security and access**. 
 
 To keep up to date with new releases, you can check use the [release notes](https://docs.docker.com/desktop/release-notes/) page.
 
