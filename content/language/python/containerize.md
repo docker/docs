@@ -55,7 +55,7 @@ Let's get started!
 
 ? What application platform does your project use? Python
 ? What version of Python do you want to use? 3.11.4
-? What port do you want your app to listen on? 8000
+? What port do you want your app to listen on? 5000
 ? What is the command to run your app? python3 -m uvicorn app:app --host=0.0.0.0 --port=5000
 ```
 
