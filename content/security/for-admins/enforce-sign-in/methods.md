@@ -19,7 +19,7 @@ This page outlines the different ways you can enforce sign-in for Docker Desktop
    ```console 
    $ HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Docker\Docker Desktop
    ```
-2. Create a multi-string value `allowedOrgs` 
+2. Create a multi-string value `allowedOrgs`. 
    > **Important**
    >
    > Only one entry for `allowedOrgs` is currently supported. If you add more than one value, sign-in enforcement silently fails.
@@ -57,7 +57,7 @@ There are many ways to deploy the registry key, for example using an MDM solutio
 > It's available with Docker Desktop version 4.32 and later.
 { .restricted }
 
-1. Create the file `/Library/Application Support/com.docker.docker/desktop.plist`
+1. Create the file `/Library/Application Support/com.docker.docker/desktop.plist`.
 2. Open `desktop.plist` in a text editor and add the following content, where `myorg` is replaced with your organization’s name all lowercase:
 
    ```xml
@@ -83,7 +83,7 @@ There are many ways to deploy the registry key, for example using an MDM solutio
 
 >**Note**
 >
-> If a registry key and a `registry.json` file both exist, the registry key takes precedence.
+> If a `plist` and `registry.json` file both exist, the registry key takes precedence.
 
 ### Example deployment 
 
@@ -121,7 +121,7 @@ There are many ways to deploy the `.plist` file. The method you choose is depend
 
 ## registry.json method (All)
  
-The following instructions explain how to create and deploy a `registry.json` file to a single device. There are many ways to deploy the `regitry.json` file. You can follow the example deployments outlined in the `.plist` file section.  The method you choose is dependent on your organizations infrastructure, security policies, and the administrative rights of the end-users.
+The following instructions explain how to create and deploy a `registry.json` file to a single device. There are many ways to deploy the `regitry.json` file. You can follow the example deployments outlined in the `.plist` file section.  The method you choose is dependent on your organization's infrastructure, security policies, and the administrative rights of the end-users.
 
 ### Option 1: Create a registry.json file to enforce sign-in
 
