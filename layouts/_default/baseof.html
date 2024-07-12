@@ -7,22 +7,96 @@
 
 <body class="bg-background-light text-base dark:bg-background-dark dark:text-white">
   {{ partial "header.html" . }}
-  <main class="flex">
-    <div id="sidebar"
-      class="sticky top-16 flex h-screen shrink-0 grow flex-row-reverse overflow-y-scroll bg-background-light dark:bg-gray-dark-100 md:fixed md:z-10 md:hidden md:h-screen md:w-screen lg:grow-0">
-      {{ block "left" . }}
-      {{ end }}
+  <main class="grid grid-cols-1 xl:grid-cols-main-xl lg:grid-cols-main-lg md:grid-cols-main-md">
+    <!-- First column: visible on lg and xl -->
+    <div class="hidden md:block bg-background-light dark:bg-gray-dark-100 overflow-y-scroll"
+         {{- $classes := "'fixed', 'z-20', 'left-0', 'top-16', 'w-full', 'flex', 'h-lvh'" }}
+         x-data @togglesidebar.window="
+           if ($store.showSidebar == false) {
+             document.body.classList.add('overflow-hidden');
+             $el.classList.remove('hidden');
+             $el.classList.add({{$classes}});
+             $store.showSidebar = true;
+             return;
+           }
+           document.body.classList.remove('overflow-hidden');
+           $el.classList.add('hidden');
+           $el.classList.remove({{$classes}});
+           $store.showSidebar = false;
+         "
+      >
+      <div class="w-full max-w-none lg:max-w-[300px] ml-auto p-2">
+        {{ block "left" . }}
+        {{ end }}
+      </div>
     </div>
-    <div class="w-[840px] flex-initial overflow-clip p-6 pt-0 md:w-lvw">
+    <div
+      {{- if ne .Params.sitemap false }}
+        data-pagefind-body
+      {{- end }}
+      class="min-w-0 px-4 pb-32">
       {{ block "main" . }}
       {{ end }}
     </div>
-    <div class="sticky top-16 h-screen w-[300px] shrink grow overflow-y-scroll lg:hidden">
+    <div class="sticky top-16 pb-32 h-screen hidden lg:block overflow-x-hidden overflow-y-scroll pr-2">
       {{ block "right" . }}
       {{ end }}
     </div>
   </main>
   <footer>{{ partialCached "footer.html" . }}</footer>
+  {{ with (.Store.Get "youtube") }}
+    <script>
+    (function() {
+      var tag = document.createElement('script');
+      tag.id = "youtube-iframe-api";
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      window.onYouTubeIframeAPIReady = function() {
+        var youtubeDivs = document.querySelectorAll(".youtube-video");
+        for (var i = 0; i < youtubeDivs.length; i++) {
+          createPlayer(youtubeDivs[i].id, youtubeDivs[i].dataset.videoId);
+        }
+      }
+
+      function createPlayer(domElementId, videoId) {
+        new YT.Player(domElementId, {
+          width: "100%",
+          height: "100%",
+          videoId: videoId,
+          playerVars: {
+            'rel': 0,
+            'iv_load_policy': 3,
+            'enablejsapi': 1,
+            'origin': window.location.origin
+          },
+          events: {
+            'onStateChange': function (event) {
+              onPlayerStateChange(event, videoId);
+            }
+          }
+        });
+      }
+
+      function onPlayerStateChange(event, videoId) {
+        if (window.heap === undefined) return;
+
+        var properties = {
+          video_id: videoId,
+          page_path: window.location.pathname,
+          page_title: document.title,
+        };
+
+        if (event.data == YT.PlayerState.PLAYING) {
+          heap.track("Video Play", properties);
+        } else if (event.data == YT.PlayerState.PAUSED) {
+          heap.track("Video Paused", properties);
+        }
+      }
+    })();
+    </script>
+  {{ end }}
 </body>
 
 </html>

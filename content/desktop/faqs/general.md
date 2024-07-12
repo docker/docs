@@ -2,6 +2,7 @@
 description: Frequently asked Docker Desktop questions for all platforms
 keywords: desktop, mac, windows, faqs
 title: General FAQs for Desktop
+tags: [FAQ]
 aliases:
 - /mackit/faqs/
 - /docker-for-mac/faqs/

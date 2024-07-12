@@ -15,7 +15,7 @@ You can switch to **Active builds** to view any ongoing builds.
 
 ![Build UI screenshot active builds](../images/build-ui-active-builds.webp)
 
-If you're connected to a cloud builder through [Docker Build Cloud](../../build/cloud/_index.md),
+If you're connected to a cloud builder through [Docker Build Cloud](../../build-cloud/_index.md),
 the Builds view also lists any active or completed cloud builds by other team members
 connected to the same cloud builder.
 
@@ -23,21 +23,35 @@ connected to the same cloud builder.
 
 Select the **Builds** view in the Docker Dashboard to open the build list.
 
-The build list shows running and completed builds for your active builders. The
-top-right corner shows the name of your currently selected builder, and the
+The build list shows your completed and ongoing builds. The **Build history**
+tab shows completed historical builds, and from here you can inspect the build
+logs, dependencies, traces, and more. The **Active builds** tab shows builds
+that are currently running.
+
+The list shows builds for your active, running builders. It doesn't list builds
+for inactive builders: builders that you've removed from your system, or
+builders that have been stopped.
+
+### Builder settings
+
+The top-right corner shows the name of your currently selected builder, and the
 **Builder settings** button lets you [manage builders](#manage-builders) in the
 Docker Desktop settings.
 
-Running builds are displayed in the top section of this view, with information
-about the build target and progress.
+### Import builds
 
-The lower section of the view shows your recent builds. You can select any of
-the builds from the active builds or completed builds section to view detailed
-information, such as logs, a performance breakdown, cache utilization, and
-more.
+> **Beta feature**
+>
+> Import builds is currently in [Beta](../../release-lifecycle.md#Beta).
+{ .experimental }
 
-The build list doesn't include builds for inactive builders. That is, builders
-that you've removed from your system, or builders that have been stopped.
+The **Import builds** button lets you import build records for builds by other
+people, or builds in a CI environment. When you've imported a build record, it
+gives you full access to the logs, traces, and other data for that build,
+directly in Docker Desktop. The [build summary](../../build/ci/github-actions/build-summary.md)
+for the `docker/build-push-action` and `docker/bake-action` GitHub Actions
+includes a link to download the build records, for inspecting CI jobs with
+Docker Desktop.
 
 ## Inspect builds
 
@@ -105,17 +119,45 @@ The **Configuration** section of the Info tab shows parameters passed to the bui
 ### Outputs and artifacts
 
 The **Build results** section shows a summary of the generated build artifacts,
-including image manifest details, attestations, and Open Telemetry traces.
+including image manifest details, attestations, and build traces.
 
 Attestations are metadata records attached to a container image.
 The metadata describes something about the image,
 for example how it was built or what packages it contains.
 For more information about attestations, see [Build attestations](../../build/attestations/_index.md).
 
-Open Telemetry traces for builds capture information about the build execution
-steps in Buildx and BuildKit. You can view and analyze the traces yourself
-using a trace visualization tool like Jaeger. Refer to
-[OpenTelemetry support](../../build/building/opentelemetry.md) for more information.
+Build traces capture information about the build execution steps in Buildx and
+BuildKit. The traces are available in two formats: OTLP and Jaeger. You can
+download build traces from Docker Desktop by opening the actions menu and
+selecting the format you want to download.
+
+#### Inspect build traces with Jaeger
+
+Using a Jaeger client, you can import and inspect build traces from Docker
+Desktop. The following steps show you how to export a trace from Docker Desktop
+and view it in [Jaeger](https://www.jaegertracing.io/):
+
+1. Start Jaeger UI:
+
+   ```console
+   $ docker run -d --name jaeger -p "16686:16686" jaegertracing/all-in-one
+   ```
+
+2. Open the Builds view in Docker Desktop, and select a completed build.
+
+3. Navigate to the **Build results** section, open the actions menu and select **Download as Jaeger format**.
+
+   <video controls>
+     <source src="/assets/video/build-jaeger-export.mp4" type="video/mp4" />
+   </video>
+
+4. Go to <http://localhost:16686> in your browser to open Jaeger UI.
+
+5. Select the **Upload** tab and open the Jaeger build trace you just exported.
+
+Now you can analyze the build trace using the Jaeger UI:
+
+![Jaeger UI screenshot](../images/build-ui-jaeger-screenshot.png "Screenshot of a build trace in the Jaeger UI")
 
 ### Dockerfile source and errors
 

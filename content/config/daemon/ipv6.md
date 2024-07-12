@@ -6,61 +6,32 @@ aliases:
 - /engine/userguide/networking/default_network/ipv6/
 ---
 
-Before you can use IPv6 in Docker containers, you need to
-enable IPv6 support in the Docker daemon. Afterward, you can choose to use
-either IPv4 or IPv6 (or both) with any container or network.
-
 IPv6 is only supported on Docker daemons running on Linux hosts.
-
-> **Note**
->
-> When using IPv6, we recommend that you enable the
-> [experimental](../../release-lifecycle.md#experimental)
-> `ip6tables` parameter in the daemon configuration.
 
 ## Create an IPv6 network
 
-The following steps show you how to create a Docker network that uses IPv6.
+- Using `docker network create`:
 
-1. Edit the Docker daemon configuration file,
-   located at `/etc/docker/daemon.json`. Configure the following parameters:
+  ```console
+  $ docker network create --ipv6 ip6net
+  ```
 
-   ```json
-   {
-     "experimental": true,
-     "ip6tables": true
-   }
-   ```
+- Using `docker network create`, specifying an IPv6 subnet:
 
-   `ip6tables` enables additional IPv6 packet filter rules, providing network
-   isolation and port mapping. This parameter requires `experimental` to be
-   set to `true`.
+  ```console
+  $ docker network create --ipv6 --subnet 2001:db8::/64 ip6net
+  ```
 
-2. Save the configuration file.
-3. Restart the Docker daemon for your changes to take effect.
+- Using a Docker Compose file:
 
-   ```console
-   $ sudo systemctl restart docker
-   ```
-
-4. Create a new IPv6 network.
-
-   - Using `docker network create`:
-
-     ```console
-     $ docker network create --ipv6 --subnet 2001:0DB8::/112 ip6net
-     ```
-
-   - Using a Docker Compose file:
-
-     ```yaml
-      networks:
-        ip6net:
-          enable_ipv6: true
-          ipam:
-            config:
-              - subnet: 2001:0DB8::/112
-     ```
+  ```yaml
+   networks:
+     ip6net:
+       enable_ipv6: true
+       ipam:
+         config:
+           - subnet: 2001:db8::/64
+  ```
 
 You can now run containers that attach to the `ip6net` network.
 
@@ -78,8 +49,9 @@ Hostname: ea1cfde18196
 IP: 127.0.0.1
 IP: ::1
 IP: 172.17.0.2
+IP: 2001:db8::2
 IP: fe80::42:acff:fe11:2
-RemoteAddr: [fe80::42:acff:fe11:2]:54890
+RemoteAddr: [2001:db8::1]:37574
 GET / HTTP/1.1
 Host: [::1]
 User-Agent: curl/8.1.2
@@ -96,9 +68,7 @@ The following steps show you how to use IPv6 on the default bridge network.
    ```json
    {
      "ipv6": true,
-     "fixed-cidr-v6": "2001:db8:1::/64",
-     "experimental": true,
-     "ip6tables": true
+     "fixed-cidr-v6": "2001:db8:1::/64"
    }
    ```
 
@@ -106,8 +76,7 @@ The following steps show you how to use IPv6 on the default bridge network.
    - `fixed-cidr-v6` assigns a subnet to the default bridge network,
      enabling dynamic IPv6 address allocation.
    - `ip6tables` enables additional IPv6 packet filter rules, providing network
-     isolation and port mapping. This parameter requires `experimental` to be
-     set to `true`.
+     isolation and port mapping. It is enabled by-default, but can be disabled.
 
 2. Save the configuration file.
 3. Restart the Docker daemon for your changes to take effect.
@@ -132,8 +101,9 @@ Hostname: ea1cfde18196
 IP: 127.0.0.1
 IP: ::1
 IP: 172.17.0.2
-IP: fe80::42:acff:fe11:2
-RemoteAddr: [fe80::42:acff:fe11:2]:54890
+IP: 2001:db8:1::242:ac12:2
+IP: fe80::42:acff:fe12:2
+RemoteAddr: [2001:db8:1::1]:35558
 GET / HTTP/1.1
 Host: [::1]
 User-Agent: curl/8.1.2
@@ -145,11 +115,16 @@ Accept: */*
 If you don't explicitly configure subnets for user-defined networks,
 using `docker network create --subnet=<your-subnet>`,
 those networks use the default address pools of the daemon as a fallback.
-The default address pools are all IPv4 pools.
 This also applies to networks created from a Docker Compose file,
 with `enable_ipv6` set to `true`.
 
-To enable dynamic subnet allocation for user-defined IPv6 networks,
+If no IPv6 pools are included in Docker Engine's `default-address-pools`,
+and no `--subnet` option is given, [Unique Local Addresses (ULAs)][wikipedia-ipv6-ula]
+will be used when IPv6 is enabled. These `/64` subnets include a 40-bit
+Global ID based on the Docker Engine's randomly generated ID, to give a
+high probability of uniqueness.
+
+To use different pools of IPv6 subnets for dynamic address allocation,
 you must manually configure address pools of the daemon to include:
 
 - The default IPv4 address pools
@@ -173,20 +148,7 @@ The default address pool configuration is:
 
 The following example shows a valid configuration with the default values and
 an IPv6 pool. The IPv6 pool in the example provides up to 256 IPv6 subnets of
-size `/112`, from an IPv6 pool of prefix length `/104`. Each `/112`-sized
-subnet supports 65 536 IPv6 addresses.
-
-> **Note**
->
-> Be aware that the following known limitations exist for IPv6 pools:
->
-> - The `base` value for IPv6 needs a minimum prefix length of `/64`.
->   This is due to an integer overflow in the Docker daemon.
->   See [moby/moby#42801](https://github.com/moby/moby/issues/42801).
-> - The difference between the pool length and the pool size can't be larger
->   than 24. Defining an excessive number of subnets causes the daemon to
->   consume all available memory.
->   See [moby/moby#40275](https://github.com/moby/moby/issues/40275).
+size `/64`, from an IPv6 pool of prefix length `/56`.
 
 ```json
 {
@@ -198,21 +160,34 @@ subnet supports 65 536 IPv6 addresses.
     { "base": "172.24.0.0/14", "size": 16 },
     { "base": "172.28.0.0/14", "size": 16 },
     { "base": "192.168.0.0/16", "size": 20 },
-    { "base": "2001:db8::/104", "size": 112 }
+    { "base": "2001:db8::/56", "size": 64 }
   ]
 }
 ```
 
 > **Note**
 >
-> The address `2001:db8` in this example is
+> The address `2001:db8::` in this example is
 > [reserved for use in documentation][wikipedia-ipv6-reserved].
 > Replace it with a valid IPv6 network.
+>
 > The default IPv4 pools are from the private address range,
-> the IPv6 equivalent would be [ULA networks][wikipedia-ipv6-ula].
+> similar to the default IPv6 [ULA][wikipedia-ipv6-ula] networks.
 
 [wikipedia-ipv6-reserved]: https://en.wikipedia.org/wiki/Reserved_IP_addresses#IPv6
 [wikipedia-ipv6-ula]: https://en.wikipedia.org/wiki/Unique_local_address
+
+## Docker in Docker
+
+On a host using `xtables` (legacy `iptables`) instead of `nftables`, kernel
+module `ip6_tables` must be loaded before an IPv6 Docker network can be created,
+It is normally loaded automatically when Docker starts.
+
+However, if you running Docker in Docker that is not based on a recent
+version of the [official `docker` image](https://hub.docker.com/_/docker), you
+may need to run `modprobe ip6_tables` on your host. Alternatively, use daemon
+option `--ip6tables=false` to disable `ip6tables` for the containerized Docker
+Engine.
 
 ## Next steps
 

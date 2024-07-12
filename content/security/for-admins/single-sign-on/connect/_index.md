@@ -26,11 +26,6 @@ Make sure you have completed the following before you begin:
 
 ## Step four: Complete your SSO connection
 
-> **Beta feature**
->
-> Optional Just-in-Time (JIT) provisioning is available in Private Beta when you use the Admin Console. If you're participating in this program, you have the option to turn off this default provisioning and disable JIT. This configuration is recommended if you're using SCIM to auto-provision users. See [SSO authentication with JIT provisioning disabled](/security/for-admins/group-mapping/#sso-authentication-with-jit-provisioning-disabled).
-{ .experimental }
-
 {{< tabs >}}
 {{< tab name="Admin Console" >}}
 
@@ -43,6 +38,14 @@ Make sure you have completed the following before you begin:
 
 {{< /tab >}}
 {{< /tabs >}}
+
+## More resources
+
+The following videos demonstrate how to enforce SSO.
+
+- [Video: Enforce SSO with Okta SAML](https://youtu.be/c56YECO4YP4?feature=shared&t=1072)
+- [Video: Enforce SSO with Azure AD (OIDC)](https://youtu.be/bGquA8qR9jU?feature=shared&t=1087)
+
 
 ## What's next
 

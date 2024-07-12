@@ -135,16 +135,36 @@ File share settings are:
 
 ### Proxies
 
-To configure HTTP proxies, switch on the **Manual proxy configuration** setting.
-This setting is used for logging into Docker, for pulling and pushing images, and for
+Docker Desktop on Linux supports the use of HTTP/HTTPS and [SOCKS5 proxies](../networking.md#socks5-proxy-support).
+
+HTTP/HTTPS proxies can be used when:
+
+- Signing in to Docker
+- Pulling or pushing images
+- Fetching artifacts during image builds
+- Containers interact with the external network
+- Scanning images
+
+If the host uses a HTTP/HTTPS proxy configuration (static or via Proxy Auto-Configuration (PAC)), Docker Desktop reads
+this configuration
+and automatically uses these settings for signing in to Docker, for pulling and pushing images, and for
 container Internet access. If the proxy requires authorization then Docker Desktop dynamically asks
 the developer for a username and password. All passwords are stored securely in the OS credential store.
 Note that only the `Basic` proxy authentication method is supported so we recommend using an `https://`
 URL for your HTTP/HTTPS proxies to protect passwords while in transit on the network. Docker Desktop
 supports TLS 1.3 when communicating with proxies.
 
+To set a different proxy for Docker Desktop, turn on **Manual proxy configuration** and enter a single
+upstream proxy URL of the form `http://proxy:port` or `https://proxy:port`.
+
 To prevent developers from accidentally changing the proxy settings, see
 [Settings Management](../hardened-desktop/settings-management/index.md#what-features-can-i-configure-with-settings-management).
+
+The HTTPS proxy settings used for scanning images are set using the `HTTPS_PROXY` environment variable.
+
+> **Note**
+>
+> If you are using a PAC file hosted on a web server, make sure to add the MIME type `application/x-ns-proxy-autoconfig` for the `.pac` file extension on the server or website. Without this configuration, the PAC file may not be parsed correctly.
 
 ### Network
 

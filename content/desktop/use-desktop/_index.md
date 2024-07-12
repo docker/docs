@@ -1,5 +1,5 @@
 ---
-description: Understand what you can do with Docker Dashboard
+description: Learn how to use the Docker Dashboard within Docker Desktop, including Quick search, the Docker menu, and more
 keywords: Docker Dashboard, manage, containers, gui, dashboard, images, user manual,
   whale menu
 title: Explore Docker Desktop
@@ -26,7 +26,7 @@ In addition, the Docker Dashboard allows you to:
 - Be notified of new releases, installation progress updates, and more in the **Notifications center**. Select the bell icon in the bottom-right corner of the Docker Dashboard to access the notification center.
 - Access the **Learning center** from the Dashboard header. It helps you get started with quick in-app walkthroughs and provides other resources for learning about Docker. 
 
-  For a more detailed guide about getting started, see [Get started](../../get-started/index.md).
+  For a more detailed guide about getting started, see [Get started](../../guides/getting-started/_index.md).
 - Get to the [Docker Scout](../../scout/_index.md) dashboard.
 - Check the status of Docker services.
 

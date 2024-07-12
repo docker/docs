@@ -1,7 +1,8 @@
-A?GPLv3
+A?GPL(v3)?
 APIs?
 ARM
 AWS
+Admin Console
 Amazon
 Ambassador
 Anchore
@@ -20,13 +21,16 @@ Chrome
 Chrome DevTools
 CloudFront
 Codefresh
+Codespaces
 CouchDB
 Couchbase
 DHCP
 DNS
 DSOS
 DVP
+Datadog
 Ddosify
+Debootstrap
 Dev Environments?
 Django
 Docker
@@ -43,6 +47,7 @@ Docker-Sponsored Open Source
 Dockerfile
 Dockerize
 Dockerizing
+Entra
 Ethernet
 Fargate
 Fedora
@@ -54,6 +59,7 @@ GeoNetwork
 Git
 GitHub( Actions)?
 Google
+Grafana
 HTTP
 HyperKit
 IPs?
@@ -73,10 +79,12 @@ Mac
 Mail(chimp|gun)
 Microsoft
 MySQL
+NAT
 Nginx
 Nuxeo
 OAuth
 OCI
+OTel
 Okta
 Postgres
 PowerShell
@@ -85,8 +93,10 @@ QEMU
 RHEL
 RPM
 S3
+SAML
 SARIF
 SBOMs?
+SCIM
 SDKs?
 SLES
 SLSA
@@ -102,8 +112,10 @@ Syft
 Sysdig
 TCP
 TLS
+TXT
 UDP
 URLs?
+UUID
 Ubuntu
 Unix
 VLAN
@@ -114,6 +126,7 @@ Wasm
 Windows
 Zsh
 [Bb]uildx
+[Cc]odenames?
 [Cc]ompose
 [Dd]istros
 [Ff]ilepaths?
@@ -129,6 +142,7 @@ Zsh
 [Ss]andbox(ed)?
 [Ss]wappable
 [Ss]warm
+[Tt]oolchains?
 [Vv]irtualize
 [Ww]alkthrough
 cgroup
@@ -136,10 +150,11 @@ config
 containerd
 deserialization
 deserialize
+displayName
 dockerignore
 firewalld
+g?libc
 gRPC
-glibc
 inotify
 iptables
 kubectl
@@ -161,6 +176,7 @@ stdin
 stdout
 subnet
 systemd
+tmpfs
 ufw
 umask
 ungated

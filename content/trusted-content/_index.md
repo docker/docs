@@ -1,6 +1,6 @@
 ---
 title: Trusted content
-description: Optimize your development workflow with secure base images
+description: Optimize your development workflow with secure base images from our selection of trusted content
 keywords: doi, dvp, dsos, open source, security, base images
 grid:
 - title: Docker Official Images

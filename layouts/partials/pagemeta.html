@@ -1,0 +1,41 @@
+{{- $toc := false }}
+{{- with .Fragments }}
+  {{- $toc = and (ne page.Params.notoc true) .Headings }}
+{{- end }}
+{{- $tags := .GetTerms "tags" }}
+{{- if or $toc $tags }}
+  <div data-pagefind-ignore class="not-prose">
+  {{- with $tags }}
+    <div class="flex flex-col gap-2 my-2">
+      <span class="text-lg">Tags</span>
+      <div class="flex flex-wrap items-center gap-2">
+      {{- partial "tags.html" . -}}
+      </div>
+    </div>
+  {{- end }}
+  {{- with $toc }}
+    <div class="text-lg pb-0 lg:pb-2">{{ T "tableOfContents" }}</div>
+    <nav class="toc">
+      {{ $root := (index page.Fragments.Headings 0).Headings }}
+      {{- template "walkHeadingFragments" $root }}
+    </nav>
+  {{- end }}
+  </div>
+{{- end }}
+
+{{- define "walkHeadingFragments" }}
+  {{- $min := 2 }}
+  {{- $max := 3 }}
+  <ul class="pl-2">
+    {{- range . }}
+      {{- if and (ge .Level $min) (le .Level $max) }}
+        <li>
+          <a class="link lg:no-underline" href="#{{ .ID }}">{{ markdownify .Title }}</a>
+        </li>
+      {{- end }}
+      {{- with .Headings }}
+        {{ template "walkHeadingFragments" . }}
+      {{- end }}
+    {{- end }}
+  </ul>
+{{- end }}

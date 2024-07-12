@@ -4,6 +4,7 @@ description: Learn about the latest features of Docker Scout
 keywords: docker scout, release notes, changelog, features, changes, delta, new, releases
 aliases:
 - /scout/release-notes/
+tags: [Release notes]
 ---
 
 This page contains information about the new features, improvements, known
@@ -13,6 +14,34 @@ Docker Scout platform, including the Dashboard. For CLI release notes, refer to
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1)
 for what's coming next.
+
+## Q2 2024
+
+New features and enhancements released in the second quarter of 2024.
+
+### 2024-05-0x
+
+This release introduces initial support for **Exceptions** in the Docker Scout
+Dashboard. Exceptions let you suppress vulnerabilities found in your images
+(false positives), using VEX documents. Attach VEX documents to images as
+attestations, or embed them on image filesystems, and Docker Scout will
+automatically detect and incorporate the VEX statements into the image analysis
+results.
+
+The new [Exceptions page](https://scout.docker.com/reports/vex/) lists all
+exceptions affecting images in your organization. You can also go to the image
+view in the Docker Scout Dashboard to see all exceptions that apply to a given
+image.
+
+For more information, see [Manage vulnerability exceptions](/scout/explore/exceptions.md).
+If you're new to VEX, check out this use-case guide:
+[Suppress image vulnerabilities with VEX](/scout/guides/vex.md).
+
+### 2024-05-06
+
+New HTTP endpoint that lets you scrape data from Docker Scout with Prometheus,
+to create your own vulnerability and policy dashboards with Grafana.
+For more information, see [Docker Scout metrics exporter](/scout/explore/metrics-exporter.md).
 
 ## Q1 2024
 

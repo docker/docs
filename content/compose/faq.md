@@ -2,9 +2,8 @@
 description: Frequently asked questions for Docker Compose
 keywords: documentation, docs,  docker, compose, faq, docker compose vs docker-compose
 title: Compose FAQs
+tags: [FAQ]
 ---
-
-{{< include "compose-eol.md" >}}
 
 ### What is the difference between `docker compose` and `docker-compose`
 

@@ -1,4 +1,4 @@
-Onboarding your organization allows you to gain visibility into the activity of your users and enforce security settings. In addition, members of your organization receive increased pull limits and other organization wide benefits. For more details, see [Docker subscriptions and features](/subscription/details/).
+Onboarding your organization allows you to gain visibility into the activity of your users and enforce security settings. In addition, members of your organization receive increased pull limits and other organization wide benefits. For more details, see [Docker subscriptions and features](/subscription/core-subscription/details/).
 
 In this guide, you'll learn how to get started with the following:
 
@@ -14,7 +14,7 @@ Before you start to onboard your organization, ensure that you:
 
   > **Note**
   >
-  > When purchasing a subscription through [Pricing & Subscriptions](https://www.docker.com/pricing/), the on-screen instructions guide you through creating an organization. If you have purchased a subscription through Docker Sales and you have not yet created an organization, see [Create an organization](/admin/organization/orgs).
+  > When purchasing a self-serve subscription, the on-screen instructions guide you through creating an organization. If you have purchased a subscription through Docker Sales and you have not yet created an organization, see [Create an organization](/admin/organization/orgs).
 
 - Familiarize yourself with Docker concepts and terminology in the [glossary](/glossary/) and [FAQs](/faq/admin/general-faqs/).
 
@@ -52,7 +52,7 @@ Configuring SSO and SCIM is optional and only available to Docker Business subsc
 You can manage your members in your identity provider and automatically provision them to your Docker organization with SSO and SCIM. See the following for more details.
    - [Configure SSO](/security/for-admins/single-sign-on/) to authenticate and add members when they sign in to Docker through your identity provider.
    - Optional: [Enforce SSO](/security/for-admins/single-sign-on/connect/#optional-enforce-sso) to ensure that users must sign in to Docker with SSO.
-   - [Configure SCIM](/security/for-admins/scim/) to automatically provision, add, and de-provision members to Docker through your identity provider.
+   - [Configure SCIM](/security/for-admins/provisioning/scim/) to automatically provision, add, and de-provision members to Docker through your identity provider.
 
 
 ## Step 5: Enforce sign-in for Docker Desktop

@@ -6,6 +6,7 @@ toc_min: 1
 toc_max: 2
 aliases:
 - /desktop/windows/release-notes/edge-releases/
+sitemap: false
 ---
 
 This page contains information about Docker Desktop Edge releases. Edge releases give you early access to our newest features. Note that some of the features may be experimental, and some of them may not ever reach the Stable release.
@@ -912,7 +913,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 * Bug fixes and minor changes
   - LCOW does not anymore need --platform flag on multi-arch images
   - Better WCOW host.docker.internal resolution on host, don't rewrite it if not modified. From [docker/for-win#1976](https://github.com/docker/for-win/issues/1976)
-  - Disk size can now be ajusted from 32GiB to drive space.
+  - Disk size can now be adjusted from 32GiB to drive space.
   - Fix dns update too verbose in logs
   - Fix panic in diagnose
 

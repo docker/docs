@@ -1,5 +1,5 @@
 <div class="text-lg pb-2">{{ T "tableOfContents" }}</div>
-<nav id="TableOfContents">
+<nav class="toc">
   <ul>
     {{ range (.Scratch.Get "headings") }}
       {{/* add left padding depending on level (pl-2, pl-3, pl-4) */}}
@@ -13,7 +13,7 @@
           {{ else }}
             href="#{{ $text | anchorize }}"
           {{ end }}
-          >{{ plainify $text }}</a>
+          >{{ markdownify $text }}</a>
       </li>
     {{ end }}
   </ul>

@@ -18,18 +18,18 @@ In this section, you'll learn how to set up and use GitHub Actions to build and 
 
 ## Step one: Create the repository
 
-Create a GitHub repository, configure the Docker Hub secrets, and push your source code.
+Create a GitHub repository, configure the Docker Hub credentials, and push your source code.
 
 1. [Create a new repository](https://github.com/new) on GitHub.
 
 2. Open the repository **Settings**, and go to **Secrets and variables** >
    **Actions**.
 
-3. Create a new secret named `DOCKER_USERNAME` and your Docker ID as value.
+3. Create a new **Repository variable** named `DOCKER_USERNAME` and your Docker ID as value.
 
-4. Create a new [Personal Access Token (PAT)](../../security/for-developers/access-tokens.md/#create-an-access-token) for Docker Hub. You can name this token `tutorial-docker`.
+4. Create a new [Personal Access Token (PAT)](../../security/for-developers/access-tokens.md/#create-an-access-token) for Docker Hub. You can name this token `docker-tutorial`. Make sure access permissions include Read and Write.
 
-5. Add the PAT as a second secret in your GitHub repository, with the name
+5. Add the PAT as a **Repository secret** in your GitHub repository, with the name
    `DOCKERHUB_TOKEN`.
 
 6. In your local repository on your machine, run the following command to change
@@ -84,35 +84,32 @@ to Docker Hub.
        runs-on: ubuntu-latest
        steps:
          -
-           name: Checkout
-           uses: actions/checkout@v4
-         -
            name: Login to Docker Hub
            uses: docker/login-action@v3
            with:
-             username: ${{ secrets.DOCKER_USERNAME }}
+             username: ${{ vars.DOCKER_USERNAME }}
              password: ${{ secrets.DOCKERHUB_TOKEN }}
          -
            name: Set up Docker Buildx
            uses: docker/setup-buildx-action@v3
          -
            name: Build and test
-           uses: docker/build-push-action@v5
+           uses: docker/build-push-action@v6
            with:
-             context: .
              target: test
              load: true
          -
            name: Build and push
-           uses: docker/build-push-action@v5
+           uses: docker/build-push-action@v6
            with:
-             context: .
+             platforms: linux/amd64,linux/arm64
              push: true
              target: final
-             tags: ${{ secrets.DOCKER_USERNAME }}/${{ github.event.repository.name }}:latest
+             tags: ${{ vars.DOCKER_USERNAME }}/${{ github.event.repository.name }}:latest
    ```
 
-   For more information about the YAML syntax used here, see [Workflow syntax for GitHub Actions](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions).
+   For more information about the YAML syntax for `docker/build-push-action`,
+   refer to the [GitHub Action README](https://github.com/docker/build-push-action/blob/master/README.md).
 
 ## Step three: Run the workflow
 

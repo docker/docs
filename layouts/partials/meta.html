@@ -13,27 +13,12 @@
 <meta name="description" content="{{ $description }}" />
 <meta
   name="keywords"
-  content="{{- partial "utils/keywords.html" . -}}"
+  content="{{- delimit (partialCached "utils/keywords.html" . .) ", " -}}"
 />
 <link rel="canonical" href="{{ .Permalink }}" />
 
 <!-- favicon -->
-<link
-  rel="icon"
-  type="image/x-icon"
-  href="{{ site.BaseURL }}/assets/favicons/docs@2x.ico"
-  sizes="129x128"
-/>
-<link
-  rel="apple-touch-icon"
-  type="image/x-icon"
-  href="{{ site.BaseURL }}/assets/favicons/docs@2x.ico"
-  sizes="129x128"
-/>
-<meta
-  name="msapplication-TileImage"
-  content="{{ site.BaseURL }}/assets/favicons/docs@2x.ico"
-/>
+{{ partialCached "favicon.html" "favicon" }}
 <meta name="theme-color" content="#2496ed" />
 
 <!-- SEO -->
@@ -50,7 +35,7 @@
 <meta name="twitter:url" content="https://twitter.com/docker_docs" />
 <meta
   name="twitter:image:src"
-  content="{{ site.BaseURL }}/assets/images/thumbnail.webp"
+  content="{{ "assets/images/thumbnail.webp" | absURL }}"
 />
 <meta name="twitter:image:alt" content="Docker Documentation" />
 <meta property="og:title" content="{{ $title }}" />
@@ -64,7 +49,7 @@
 <meta
   property="og:image"
   itemprop="image primaryImageOfPage"
-  content="{{ site.BaseURL }}/assets/images/thumbnail.webp"
+  content="{{ "assets/images/thumbnail.webp" | absURL }}"
 />
 <meta property="og:locale" content="en_US" />
 <meta property="og:url" content="{{ .Permalink }}" />

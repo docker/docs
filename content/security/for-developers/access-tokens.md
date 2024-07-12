@@ -26,7 +26,7 @@ any time.
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
 
-2. Select your avatar in the top-right corner and from the drop-down menu select **My Account**.
+2. Select your avatar in the top-right corner and from the drop-down menu select **Account settings**.
 
 3. Select the **Security** tab and then **New Access Token**.
 
@@ -63,7 +63,7 @@ When prompted for a password, enter your personal access token instead of a pass
 
 You can rename, activate, deactivate, or delete a token as needed.
 
-1. Access your tokens under **My Account > Security**.
+1. Access your tokens under **Account settings > Security**.
    This page shows an overview of all your tokens, and lists if the token was generated manually or if it was [auto-generated](#auto-generated-tokens). You can also view the number
    of tokens that are activated and deactivated in the toolbar.
 

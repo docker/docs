@@ -14,9 +14,9 @@ aliases:
 > employees OR more than $10 million USD in annual revenue) requires a [paid
 > subscription](https://www.docker.com/pricing/).
 
-This topic discusses installation of Docker Desktop from an [Arch package](https://desktop.docker.com/linux/main/amd64/145265/docker-desktop-4.29.0-x86_64.pkg.tar.zst) that Docker provides in addition to the supported platforms. Docker has not tested or verified the installation.
+This topic discusses installation of Docker Desktop from an [Arch package](https://desktop.docker.com/linux/main/amd64/157355/docker-desktop-x86_64.pkg.tar.zst) that Docker provides in addition to the supported platforms. Docker has not tested or verified the installation.
 
-{{< button text="Arch package (experimental)" url="https://desktop.docker.com/linux/main/amd64/145265/docker-desktop-4.29.0-x86_64.pkg.tar.zst?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64" >}}
+{{< button text="Arch package (experimental)" url="https://desktop.docker.com/linux/main/amd64/157355/docker-desktop-x86_64.pkg.tar.zst?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64" >}}
 
 _For checksums, see [Release notes](../release-notes.md)_
 
@@ -42,7 +42,7 @@ $ sudo pacman -S gnome-terminal
 4. Install the package:
 
    ```console
-   $ sudo pacman -U ./docker-desktop-<version>-<arch>.pkg.tar.zst
+   $ sudo pacman -U ./docker-desktop-<arch>.pkg.tar.zst
    ```
 
 ## Launch Docker Desktop
@@ -51,6 +51,5 @@ $ sudo pacman -S gnome-terminal
 
 ## Next steps
 
-- Take a look at the [Get started](../../get-started/index.md) training modules to learn how to build an image and run it as a containerized application.
+- Take a look at the [Docker workshop](../../guides/workshop/_index.md) to learn how to build an image and run it as a containerized application.
 - [Explore Docker Desktop](../use-desktop/index.md) and all its features.
-- Review the topics in [Develop with Docker](../../develop/index.md) to learn how to build new applications using Docker.

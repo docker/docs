@@ -17,6 +17,12 @@ group "default" {
   targets = ["release"]
 }
 
+target "index" {
+  # generate a new local search index
+  target = "index"
+  output = ["type=local,dest=static/pagefind"]
+}
+
 target "release" {
   args = {
     HUGO_ENV = HUGO_ENV
@@ -27,7 +33,7 @@ target "release" {
 }
 
 group "validate" {
-  targets = ["lint", "test", "validate-stats"]
+  targets = ["lint", "test", "unused-media", "test-go-redirects"]
 }
 
 target "test" {
@@ -37,6 +43,16 @@ target "test" {
 
 target "lint" {
   target = "lint"
+  output = ["type=cacheonly"]
+}
+
+target "unused-media" {
+  target = "unused-media"
+  output = ["type=cacheonly"]
+}
+
+target "test-go-redirects" {
+  target = "test-go-redirects"
   output = ["type=cacheonly"]
 }
 
@@ -159,7 +175,7 @@ variable "UPSTREAM_MODULE_NAME" {
 variable "UPSTREAM_REPO" {
   default = null
 }
-variable "UPSTREAM_MODULE_NAME" {
+variable "UPSTREAM_COMMIT" {
   default = null
 }
 
@@ -170,15 +186,5 @@ target "validate-upstream" {
     UPSTREAM_COMMIT = UPSTREAM_COMMIT
   }
   target = "validate-upstream"
-  output = ["type=cacheonly"]
-}
-
-target "update-stats" {
-  target = "update-stats"
-  output = ["."]
-}
-
-target "validate-stats" {
-  target = "validate-stats"
   output = ["type=cacheonly"]
 }

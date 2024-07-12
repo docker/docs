@@ -26,19 +26,31 @@ To get started with Docker Engine on Ubuntu, make sure you
 
 ## Prerequisites
 
-> **Note**
+### Firewall limitations
+
+> **Warning**
 >
-> If you use ufw or firewalld to manage firewall settings, be aware that
-> when you expose container ports using Docker, these ports bypass your
-> firewall rules. For more information, refer to
-> [Docker and ufw](../../network/packet-filtering-firewalls.md#docker-and-ufw).
+> Before you install Docker, make sure you consider the following
+> security implications and firewall incompatibilities.
+{ .warning }
+
+- If you use ufw or firewalld to manage firewall settings, be aware that
+  when you expose container ports using Docker, these ports bypass your
+  firewall rules. For more information, refer to
+  [Docker and ufw](../../network/packet-filtering-firewalls.md#docker-and-ufw).
+- Docker is only compatible with `iptables-nft` and `iptables-legacy`.
+  Firewall rules created with `nft` are not supported on a system with Docker installed.
+  Make sure that any firewall rulesets you use are created with `iptables` or `iptables6`,
+  and that you add them to the `DOCKER-USER` chain,
+  see [Packet filtering and firewalls](../../network/packet-filtering-firewalls.md).
 
 ### OS requirements
 
 To install Docker Engine, you need the 64-bit version of one of these Ubuntu
 versions:
 
-- Ubuntu Mantic 23.10
+- Ubuntu Noble 24.04 (LTS)
+- Ubuntu Mantic 23.10 (EOL: [July 12, 2024](https://wiki.ubuntu.com/Releases))
 - Ubuntu Jammy 22.04 (LTS)
 - Ubuntu Focal 20.04 (LTS)
 
@@ -145,15 +157,15 @@ Docker from the repository.
    # List the available versions:
    $ apt-cache madison docker-ce | awk '{ print $3 }'
 
-   5:24.0.0-1~ubuntu.22.04~jammy
-   5:23.0.6-1~ubuntu.22.04~jammy
+   5:27.0.3-1~ubuntu.24.04~noble
+   5:27.0.2-1~ubuntu.24.04~noble
    ...
    ```
 
    Select the desired version and install:
 
    ```console
-   $ VERSION_STRING=5:24.0.0-1~ubuntu.22.04~jammy
+   $ VERSION_STRING=5:27.0.3-1~ubuntu.24.04~noble
    $ sudo apt-get install docker-ce=$VERSION_STRING docker-ce-cli=$VERSION_STRING containerd.io docker-buildx-plugin docker-compose-plugin
    ```
   
@@ -259,5 +271,3 @@ You have to delete any edited configuration files manually.
 ## Next steps
 
 - Continue to [Post-installation steps for Linux](linux-postinstall.md).
-- Review the topics in [Develop with Docker](../../develop/index.md) to learn
-  how to build new applications using Docker.

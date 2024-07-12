@@ -1,7 +1,7 @@
 ---
 description: Extensions
 keywords: Docker Extensions, Docker Desktop, Linux, Mac, Windows
-title: What are Docker Extensions?
+title: Overview of Docker Extensions
 toc_min: 1
 toc_max: 2
 ---
@@ -12,7 +12,7 @@ You can seamlessly connect your favorite development tools to your application d
 
 Anyone can use Docker Extensions and there is no limit to the number of extensions you can install.
 
-![Extensions Marketplace](/assets/images/extensions4.25.webp)
+![Extensions Marketplace](/assets/images/extensions.webp)
 
 ## What extensions are available?
 

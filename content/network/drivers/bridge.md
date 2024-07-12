@@ -6,7 +6,6 @@ aliases:
 - /config/containers/bridges/
 - /engine/userguide/networking/default_network/build-bridges/
 - /engine/userguide/networking/default_network/custom-docker0/
-- /engine/userguide/networking/default_network/dockerlinks/
 - /engine/userguide/networking/work-with-networks/
 - /network/bridge/
 ---
@@ -105,14 +104,16 @@ flag.
 The following table describes the driver-specific options that you can pass to
 `--option` when creating a custom network using the `bridge` driver.
 
-| Option                                           | Default        | Description                                                 |
-| ------------------------------------------------ | -------------- | ----------------------------------------------------------- |
-| `com.docker.network.bridge.name`                 |                | Interface name to use when creating the Linux bridge.       |
-| `com.docker.network.bridge.enable_ip_masquerade` | `true`         | Enable IP masquerading.                                     |
-| `com.docker.network.bridge.enable_icc`           | `true`         | Enable or Disable inter-container connectivity.             |
-| `com.docker.network.bridge.host_binding_ipv4`    |                | Default IP when binding container ports.                    |
-| `com.docker.network.driver.mtu`                  | `0` (no limit) | Set the containers network Maximum Transmission Unit (MTU). |
-| `com.docker.network.container_iface_prefix`      | `eth`          | Set a custom prefix for container interfaces.               |
+| Option                                                                                          | Default                     | Description                                                                                    |
+|-------------------------------------------------------------------------------------------------|-----------------------------|------------------------------------------------------------------------------------------------|
+| `com.docker.network.bridge.name`                                                                |                             | Interface name to use when creating the Linux bridge.                                          |
+| `com.docker.network.bridge.enable_ip_masquerade`                                                | `true`                      | Enable IP masquerading.                                                                        |
+| `com.docker.network.bridge.gateway_mode_ipv4`<br/>`com.docker.network.bridge.gateway_mode_ipv6` | `nat`                       | Enable NAT and masquerading (`nat`), or only allow direct routing to the container (`routed`). |
+| `com.docker.network.bridge.enable_icc`                                                          | `true`                      | Enable or Disable inter-container connectivity.                                                |
+| `com.docker.network.bridge.host_binding_ipv4`                                                   | all IPv4 and IPv6 addresses | Default IP when binding container ports.                                                       |
+| `com.docker.network.driver.mtu`                                                                 | `0` (no limit)              | Set the containers network Maximum Transmission Unit (MTU).                                    |
+| `com.docker.network.container_iface_prefix`                                                     | `eth`                       | Set a custom prefix for container interfaces.                                                  |
+| `com.docker.network.bridge.inhibit_ipv4`                                                        | `false`                     | Prevent Docker from [assigning an IP address](#skip-ip-address-configuration) to the network.  |
 
 Some of these options are also available as flags to the `dockerd` CLI, and you
 can use them to configure the default `docker0` bridge when starting the Docker
@@ -132,6 +133,27 @@ The Docker daemon supports a `--bridge` flag, which you can use to define
 your own `docker0` bridge. Use this option if you want to run multiple daemon
 instances on the same host. For details, see
 [Run multiple daemons](../../reference/cli/dockerd.md#run-multiple-daemons).
+
+### Default host binding address
+
+When no host address is given in port publishing options like `-p 80`
+or `-p 8080:80`, the default is to make the container's port 80 available on all
+host addresses, IPv4 and IPv6.
+
+The bridge network driver option `com.docker.network.bridge.host_binding_ipv4`
+can be used to modify the default address for published ports.
+
+Despite the option's name, it is possible to specify an IPv6 address.
+
+When the default binding address is an address assigned to a specific interface,
+the container's port will only be accessible via that address.
+
+Setting the default binding address to `::` means published ports will only be
+available on the host's IPv6 addresses. However, setting it to `0.0.0.0` means it
+will be available on the host's IPv4 and IPv6 addresses.
+
+To restrict a published port to IPv4 only, the address must be included in the
+container's publishing options. For example, `-p 0.0.0.0:8080:80`.
 
 ## Manage a user-defined bridge
 
@@ -198,15 +220,13 @@ the `my-nginx` container from the `my-net` network.
 $ docker network disconnect my-net my-nginx
 ```
 
-## Use IPv6
+## Use IPv6 in a user-defined bridge network
 
-If you need IPv6 support for Docker containers, you need to
-[enable the option](../../config/daemon/ipv6.md) on the Docker daemon and reload its
-configuration, before creating any IPv6 networks or assigning containers IPv6
-addresses.
+When you create your network, you can specify the `--ipv6` flag to enable IPv6.
 
-When you create your network, you can specify the `--ipv6` flag to enable
-IPv6. You can't selectively disable IPv6 support on the default `bridge` network.
+```console
+$ docker network create --ipv6 --subnet 2001:db8:1234::/64 my-net
+```
 
 ## Use the default bridge network
 
@@ -232,10 +252,8 @@ the settings you need to customize.
 {
   "bip": "192.168.1.1/24",
   "fixed-cidr": "192.168.1.0/25",
-  "fixed-cidr-v6": "2001:db8::/64",
   "mtu": 1500,
   "default-gateway": "192.168.1.254",
-  "default-gateway-v6": "2001:db8:abcd::89",
   "dns": ["10.20.1.2","10.20.1.3"]
 }
 ```
@@ -244,9 +262,28 @@ Restart Docker for the changes to take effect.
 
 ### Use IPv6 with the default bridge network
 
-If you configure Docker for IPv6 support (see [Use IPv6](#use-ipv6)), the
-default bridge network is also configured for IPv6 automatically. Unlike
-user-defined bridges, you can't selectively disable IPv6 on the default bridge.
+IPv6 can be enabled for the default bridge using the following options in
+`daemon.json`, or their command line equivalents.
+
+These three options only affect the default bridge, they are not used by
+user-defined networks. The addresses in below are examples from the
+IPv6 documentation range.
+
+- Option `ipv6` is required
+- Option `fixed-cidr-v6` is required, it specifies the network prefix to be used.
+  - The prefix should normally be `/64` or shorter.
+  - For experimentation on a local network, it is better to use a Unique Local
+    prefix (matching `fd00::/8`) than a Link Local prefix (matching `fe80::/10`).
+- Option `default-gateway-v6` is optional. If unspecified, the default is the first
+  address in the `fixed-cidr-v6` subnet.
+
+```json
+{
+  "ipv6": true,
+  "fixed-cidr-v6": "2001:db8::/64",
+  "default-gateway-v6": "2001:db8:abcd::89"
+}
+```
 
 ## Connection limit for bridge networks
 
@@ -256,6 +293,21 @@ to a single network.
 
 For more information about this limitation, see
 [moby/moby#44973](https://github.com/moby/moby/issues/44973#issuecomment-1543747718).
+
+## Skip IP address configuration
+
+The `com.docker.network.bridge.inhibit_ipv4` option lets you create a network
+that uses an existing bridge and have Docker skip configuring the IPv4 address
+on the bridge. This is useful if you want to configure the IP address for the
+bridge manually. For instance if you add a physical interface to your bridge,
+and need to move its IP address to the bridge interface.
+
+To use this option, you should first configure the Docker daemon to use a
+self-managed bridge, using the `bridge` option in the `daemon.json` or the
+`dockerd --bridge` flag.
+
+With this configuration, north-south traffic won't work unless you've manually
+configured the IP address for the bridge.
 
 ## Next steps
 

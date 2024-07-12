@@ -4,10 +4,9 @@ description: Understand how to use extensions
 keywords: compose, compose specification, extensions, compose file reference
 ---
 
-As with [Fragments](10-fragments.md), Extensions can be used to make your Compose file more efficient and easier to maintain. Extensions can also be used with [anchors and aliases](10-fragments.md).
+{{< include "compose/extension.md" >}}
 
-Use the prefix `x-` as a top-level element to modularize configurations that you want to reuse. 
-Compose ignores any fields that start with `x-`, this is the sole exception where Compose silently ignores unrecognized fields.
+Extensions can also be used with [anchors and aliases](10-fragments.md).
 
 They also can be used within any structure in a Compose file where user-defined keys are not expected. 
 Compose uses those to enable experimental features, the same way browsers add support for [custom CSS features](https://www.w3.org/TR/2011/REC-CSS2-20110607/syndata.html#vendor-keywords)

@@ -47,7 +47,7 @@ Company owners have the same access as organization owners for all associated or
 | View repository activity                              | ❌     | ❌     | ✅                 |
 | Set up Automated builds                               | ❌     | ❌     | ✅                 |
 | Edit build settings                                   | ❌     | ❌     | ✅                 |
-| View teams                                            | ❌     | ✅     | ✅                 |
+| View teams                                            | ✅     | ✅     | ✅                 |
 | Assign team permissions to repositories               | ❌     | ✅     | ✅                 |
 
 When you add members to a team, you can manage their repository permissions. For team repository permissions, see [Create and manage a team permissions reference](/admin/organization/manage-a-team/#permissions-reference).

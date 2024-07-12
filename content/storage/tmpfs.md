@@ -112,10 +112,10 @@ $ docker rm tmptest
 required. If you need to specify these options, you must use the `--mount` flag,
 as the `--tmpfs` flag does not support them.
 
-| Option       | Description                                                                                           |
-|:-------------|:------------------------------------------------------------------------------------------------------|
-| `tmpfs-size` | Size of the tmpfs mount in bytes. Unlimited by default.                                               |
-| `tmpfs-mode` | File mode of the tmpfs in octal. For instance, `700` or `0770`. Defaults to `1777` or world-writable. |
+| Option       | Description                                                                                                               |
+|:-------------|:--------------------------------------------------------------------------------------------------------------------------|
+| `tmpfs-size` | Size of the tmpfs mount in bytes. If unset, the default maximum size of a tmpfs volume is 50% of the host's total RAM.    |
+| `tmpfs-mode` | File mode of the tmpfs in octal. For instance, `700` or `0770`. Defaults to `1777` or world-writable.                     |
 
 The following example sets the `tmpfs-mode` to `1770`, so that it is not
 world-readable within the container.

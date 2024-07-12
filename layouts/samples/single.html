@@ -4,28 +4,15 @@
 
 {{ define "main" }}
   {{ partial "breadcrumbs.html" . }}
-  <article class="DocSearch-content prose max-w-none dark:prose-invert">
+  <article class="prose max-w-none dark:prose-invert">
     {{ with .Title }}
     <h1 class="scroll-mt-36">{{ . }}</h1>
     {{ end }}
-    <blockquote>
-      <p><strong>Note</strong></p>
-      <p>
-        Samples compatible with
-        <a href="{{ absURL "/desktop/dev-environments/" }}"
-          >Docker Dev Environments</a
-        >
-        require
-        <a href="{{ absURL "/get-docker/" }}">Docker Desktop</a>
-        version 4.10 or later.
-      </p>
-    </blockquote>
     <table>
       <thead>
         <tr>
           <th>Name</th>
           <th>Description</th>
-          <th>Docker Dev Environment (if compatible)</th>
         </tr>
       </thead>
       <tbody>
@@ -34,11 +21,6 @@
             <tr>
               <td>{{ printf "[%s](%s)" .title .url | markdownify }}</td>
               <td>{{ .description }}</td>
-              <td>
-                {{ if .dev_env }}
-                  {{ printf "[Open in Docker Dev Environment](https://open.docker.com/dashboard/dev-envs?url=%s)" .url | markdownify }}
-                {{ end }}
-              </td>
             </tr>
           {{ end }}
         {{ end }}

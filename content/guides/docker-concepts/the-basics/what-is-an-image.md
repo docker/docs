@@ -14,7 +14,7 @@ That's where container images come in!
 
 A container image is a standardized package that includes all of the files, binaries, libraries, and configurations to run a container.
 
-For a [PostgreSQL](https://hub.docker.com/_/postgresql) image, that image will package the database binaries, config files, and other dependencies. For a Python web app, it'll include the Python runtime, your app code, and all of its dependencies.
+For a [PostgreSQL](https://hub.docker.com/_/postgres) image, that image will package the database binaries, config files, and other dependencies. For a Python web app, it'll include the Python runtime, your app code, and all of its dependencies.
 
 There are two important principles of images:
 
@@ -36,7 +36,7 @@ Docker Hub provides a variety of Docker-supported and endorsed images known as D
 
 For example, [Redis](https://hub.docker.com/_/redis) and [Memcached](https://hub.docker.com/_/memcached) are a few popular ready-to-go Docker Official Images. You can download these images and have these services up and running in a matter of seconds. There are also base images, like the [Node.js](https://hub.docker.com/_/node) Docker image, that you can use as a starting point and add your own files and configurations.
 
-## Try it now
+## Try it out
 
 {{< tabs group=concept-usage persist=true >}}
 {{< tab name="Using the GUI" >}}

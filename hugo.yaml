@@ -4,9 +4,9 @@ refLinksErrorLevel: ERROR
 enableGitInfo: true
 disablePathToLower: true
 enableInlineShortcodes: true
-disableKinds:
-  - taxonomy
-  - term
+
+taxonomies:
+  tag: tags
 
 markup:
   tableOfContents:
@@ -80,6 +80,8 @@ languages:
     languageName: English
 
 params:
+  kapa:
+    id: ba5c2cbc-6535-4334-a72e-050f7a681c8a
   analytics:
     hotjar:
       prod: 3169877
@@ -94,16 +96,16 @@ params:
   repo: https://github.com/docker/docs
   docs_url: https://docs.docker.com
 
-  latest_engine_api_version: "1.45"
-  docker_ce_version: "26.0.0"
-  compose_version: "v2.26.1"
+  latest_engine_api_version: "1.46"
+  docker_ce_version: "27.0.2"
+  compose_version: "v2.28.1"
   compose_file_v3: "3.8"
   compose_file_v2: "2.4"
-  buildkit_version: "0.13.1"
+  buildkit_version: "0.14.1"
 
   example_go_version: "1.21"
   example_golangci_lint_version: "v1.52"
-  example_alpine_version: "3.19"
+  example_alpine_version: "3.20"
   example_node_version: "20"
 
   min_version_thresholds:
@@ -118,7 +120,7 @@ params:
 menus:
   main:
   - name: Guides
-    url: /get-started/overview/
+    url: /guides/
     weight: 1
   - name: Manuals
     url: /manuals/
@@ -126,12 +128,6 @@ menus:
   - name: Reference
     url: /reference/
     weight: 3
-  - name: Samples
-    url: /samples/
-    weight: 4
-  - name: FAQ
-    url: /faq/
-    weight: 5
 
   footer:
     - url: https://www.docker.com/products
@@ -236,7 +232,7 @@ module:
   proxy: https://proxy.golang.org,direct
   hugoVersion:
     extended: false
-    min: "0.116.1"
+    min: "0.124.1"
   mounts:
     - source: assets
       target: assets
@@ -260,6 +256,9 @@ module:
       mounts:
         - source: frontend/dockerfile/docs/reference.md
           target: content/reference/dockerfile.md
+        - source: frontend/dockerfile/docs/rules
+          target: content/reference/build-checks
+          includeFiles: "*.md"
         - source: docs/buildkitd.toml.md
           target: content/build/buildkit/toml-configuration.md
         - source: docs/attestations/slsa-definitions.md
@@ -292,4 +291,10 @@ module:
       mounts:
         - source: docs/reference
           target: data/compose-cli
+          includeFiles: "*.yaml"
+
+    - path: github.com/docker/scout-cli
+      mounts:
+        - source: docs
+          target: data/scout-cli
           includeFiles: "*.yaml"

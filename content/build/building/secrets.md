@@ -2,13 +2,14 @@
 title: Build secrets
 description: Manage credentials and other secrets securely
 keywords: build, secrets, credentials, passwords, tokens, ssh, git, auth, http
+tags: [Secrets]
 ---
 
 A build secret is any piece of sensitive information, such as a password or API
 token, consumed as part of your application's build process.
 
 Build arguments and environment variables are inappropriate for passing secrets
-to your build, because they persist in the final image. Instead, should use
+to your build, because they persist in the final image. Instead, you should use
 secret mounts or SSH mounts, which expose secrets to your builds securely.
 
 ## Secret mounts
@@ -68,7 +69,7 @@ as a file in the build container at `/run/secrets/kube`.
 $ docker build --secret id=kube,env=KUBECONFIG .
 ```
 
-When you secrets from environment variables, you can omit the `id` parameter
+When you use secrets from environment variables, you can omit the `env` parameter
 to bind the secret to a file with the same name as the variable.
 In the following example, the value of the `API_TOKEN` variable
 is mounted to `/run/secrets/API_TOKEN` in the build container.
@@ -134,9 +135,9 @@ fails because the builder isn't authorized to pull the repository:
 ```console
 $ docker build https://gitlab.com/example/todo-app.git
 [+] Building 0.4s (1/1) FINISHED
- => ERROR [internal] load git source https://gitlab.com/dvdk/todo-app.git
+ => ERROR [internal] load git source https://gitlab.com/example/todo-app.git
 ------
- > [internal] load git source https://gitlab.com/dvdk/todo-app.git:
+ > [internal] load git source https://gitlab.com/example/todo-app.git:
 0.313 fatal: could not read Username for 'https://gitlab.com': terminal prompts disabled
 ------
 ```

@@ -79,7 +79,7 @@ The following behave differently between Compose V1 and V2:
 
 Environment variable behavior in Compose V1 wasn't formally documented and behaved inconsistently in some edge cases.
 
-For Compose V2, the [Environment variables](/compose/environment-variables/) section covers both [precedence](/compose/environment-variables/envvars-precedence) as well as [`.env` file interpolation](/compose/environment-variables/env-file) and includes many examples covering tricky situations such as escaping nested quotes.
+For Compose V2, the [Environment variables](/compose/environment-variables/) section covers both [precedence](/compose/environment-variables/envvars-precedence) as well as [`.env` file interpolation](environment-variables/variable-interpolation.md) and includes many examples covering tricky situations such as escaping nested quotes.
 
 Check if:
 - Your project uses multiple levels of environment variable overrides, for example `.env` file and `--env` CLI flags.
@@ -131,6 +131,7 @@ Yes. You can still download and install Compose V1 packages, but you won't get s
 { .warning }
 
 ## Additional Resources
+
 - [docker-compose V1 on PyPI](https://pypi.org/project/docker-compose/1.29.2/)
 - [docker/compose V1 on Docker Hub](https://hub.docker.com/r/docker/compose)
 - [docker-compose V1 source on GitHub](https://github.com/docker/compose/releases/tag/1.29.2)

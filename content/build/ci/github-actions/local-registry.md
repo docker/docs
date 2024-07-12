@@ -12,8 +12,6 @@ name: ci
 
 on:
   push:
-    branches:
-      - "main"
 
 jobs:
   docker:
@@ -24,20 +22,20 @@ jobs:
         ports:
           - 5000:5000
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
+      
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
         with:
           driver-opts: network=host
+      
       - name: Build and push to local registry
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
-          context: .
           push: true
           tags: localhost:5000/name/app:latest
+      
       - name: Inspect
         run: |
           docker buildx imagetools inspect localhost:5000/name/app:latest

@@ -1,0 +1,44 @@
+{{ define "main" }}
+  {{ partial "breadcrumbs.html" . }}
+  <article class="DocSearch-content prose max-w-none dark:prose-invert">
+    <a class="link" href="/tags/"><span class="icon-svg">{{ partialCached "icon" "navigate_before" "navigate_before" }}</span>View all tags</a>
+    <h1 class="scroll-mt-36 flex gap-4 items-center">
+      <span class="bg-gray-light-200 dark:bg-gray-dark-300 rounded-full px-3 icon-svg icon-lg pb-2">{{ partialCached "icon" .Params.icon .Params.icon }}</span>
+      </span>{{ .Title }}</span>
+    </h1>
+    {{ .Content }}
+    <div class="not-prose flex justify-between items-center">
+      <span class="text-gray-light dark:text-gray-dark">Pages with this tag:</span>
+      {{ partial "pagination.html" . }}
+    </div>
+    <table style="display: table">
+      <thead>
+        <tr>
+          <th width="50%">Title</th>
+          <th width="50%">Section</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{ range .Paginator.Pages }}
+        {{ $scratch := partialCached "utils/tocparser.html" . . }}
+        {{ $sections := $scratch.GetSortedMapValues "sections" }}
+        <tr>
+          <td>
+            <a href="{{ .Permalink }}" class="link">
+              {{ .Title }}
+            </a>
+          </td>
+          <td>
+            <span class="text-gray-light dark:text-gray-dark">
+              {{ range $i, $e := $sections }}
+                {{ if $i }} / {{ end }}
+                {{ $e.title }}
+              {{ end }}
+            </span>
+          </td>
+        </tr>
+        {{ end }}
+      </tbody>
+    </table>
+  </article>
+{{ end }}

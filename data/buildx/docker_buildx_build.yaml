@@ -103,10 +103,29 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: call
+      value_type: string
+      default_value: build
+      description: Set method for evaluating build (`check`, `outline`, `targets`)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: cgroup-parent
       value_type: string
       description: Set the parent cgroup for the `RUN` instructions during build
       details_url: /reference/cli/docker/image/build/#cgroup-parent
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: check
+      value_type: bool
+      description: Shorthand for `--call=check`
       deprecated: false
       hidden: false
       experimental: false
@@ -205,7 +224,7 @@ options:
       swarm: false
     - option: iidfile
       value_type: string
-      description: Write the image ID to the file
+      description: Write the image ID to a file
       deprecated: false
       hidden: false
       experimental: false
@@ -264,7 +283,7 @@ options:
       swarm: false
     - option: metadata-file
       value_type: string
-      description: Write build result metadata to the file
+      description: Write build result metadata to a file
       details_url: '#metadata-file'
       deprecated: false
       hidden: false
@@ -330,7 +349,7 @@ options:
       value_type: string
       description: Print result of information request (e.g., outline, targets)
       deprecated: false
-      hidden: false
+      hidden: true
       experimental: false
       experimentalcli: true
       kubernetes: false
@@ -339,7 +358,7 @@ options:
       value_type: string
       default_value: auto
       description: |
-        Set type of progress output (`auto`, `plain`, `tty`). Use plain to show container output
+        Set type of progress output (`auto`, `plain`, `tty`, `rawjson`). Use plain to show container output
       details_url: '#progress'
       deprecated: false
       hidden: false
@@ -773,7 +792,7 @@ examples: |-
     Shorthand for [`--output=type=docker`](#docker). Will automatically load the
     single-platform build result to `docker images`.
 
-    ### Write build result metadata to the file (--metadata-file) {#metadata-file}
+    ### Write build result metadata to a file (--metadata-file) {#metadata-file}
 
     To output build metadata such as the image digest, pass the `--metadata-file` flag.
     The metadata will be written as a JSON object to the specified file. The
@@ -786,6 +805,7 @@ examples: |-
 
     ```json
     {
+      "buildx.build.provenance": {},
       "buildx.build.ref": "mybuilder/mybuilder0/0fjb6ubs52xx3vygf6fgdl611",
       "containerimage.config.digest": "sha256:2937f66a9722f7f4a2df583de2f8cb97fc9196059a410e7f00072fc918930e66",
       "containerimage.descriptor": {
@@ -800,6 +820,15 @@ examples: |-
       "containerimage.digest": "sha256:19ffeab6f8bc9293ac2c3fdf94ebe28396254c993aea0b5a542cfb02e0883fa3"
     }
     ```
+
+    > **Note**
+    >
+    > Build record [provenance](/build/attestations/slsa-provenance/#provenance-attestation-example)
+    > (`buildx.build.provenance`) includes minimal provenance by default. Set the
+    > `BUILDX_METADATA_PROVENANCE` environment variable to customize this behavior:
+    > * `min` sets minimal provenance (default).
+    > * `max` sets full provenance.
+    > * `disabled`, `false` or `0` does not set any provenance.
 
     ### Ignore build cache for specific stages (--no-cache-filter) {#no-cache-filter}
 
@@ -877,7 +906,7 @@ examples: |-
     ```console
     $ docker buildx build -o . .
     $ docker buildx build -o outdir .
-    $ docker buildx build -o - - > out.tar
+    $ docker buildx build -o - . > out.tar
     $ docker buildx build -o type=docker .
     $ docker buildx build -o type=docker,dest=- . > myimage.tar
     $ docker buildx build -t tonistiigi/foo -o type=registry
@@ -999,8 +1028,8 @@ examples: |-
     --progress=VALUE
     ```
 
-    Set type of progress output (`auto`, `plain`, `tty`). Use plain to show container
-    output (default "auto").
+    Set type of progress output (`auto`, `plain`, `tty`, `rawjson`). Use `plain` to show container
+    output (default `auto`).
 
     > **Note**
     >
@@ -1023,8 +1052,11 @@ examples: |-
 
     > **Note**
     >
-    > Check also our [Color output controls guide](https://github.com/docker/buildx/blob/master/docs/guides/color-output.md)
-    > for modifying the colors that are used to output information to the terminal.
+    > Check also the [`BUILDKIT_COLORS`](/build/building/variables/#buildkit_colors)
+    > environment variable for modifying the colors of the terminal output.
+
+    The `rawjson` output marshals the solve status events from BuildKit to JSON lines.
+    This mode is designed to be read by an external program.
 
     ### Create provenance attestations (--provenance) {#provenance}
 
@@ -1074,10 +1106,18 @@ examples: |-
     --secret=[type=TYPE[,KEY=VALUE]
     ```
 
-    Exposes secret to the build. The secret can be used by the build using
-    [`RUN --mount=type=secret` mount](/reference/dockerfile/#run---mounttypesecret).
+    Exposes secrets (authentication credentials, tokens) to the build.
+    A secret can be mounted into the build using a `RUN --mount=type=secret` mount in the
+    [Dockerfile](/reference/dockerfile/#run---mounttypesecret).
+    For more information about how to use build secrets, see
+    [Build secrets](/build/building/secrets/).
 
-    If `type` is unset it will be detected. Supported types are:
+    Supported types are:
+
+    - [`file`](#file)
+    - [`env`](#env)
+
+    Buildx attempts to detect the `type` automatically if unset.
 
     #### `file`
 

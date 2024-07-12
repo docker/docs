@@ -3,6 +3,7 @@ title: Manage sensitive data with Docker secrets
 description: How to securely store, retrieve, and use sensitive data with Docker services
 keywords: swarm, secrets, credentials, sensitive strings, sensitive data, security,
   encryption, encryption at rest
+tags: [Secrets]
 ---
 
 ## About secrets
@@ -142,7 +143,7 @@ a similar way, see
 
 Both the `docker-compose` and `docker stack` commands support defining secrets
 in a compose file. See
-[the Compose file reference](../../compose/compose-file/compose-file-v3.md#secrets) for details.
+[the Compose file reference](../../compose/compose-file/legacy-versions.md) for details.
 
 ### Simple example: Get started with secrets
 

@@ -91,9 +91,9 @@ $ docker run --rm -it --network container:redis example/redis-cli -h 127.0.0.1
 ## Published ports
 
 By default, when you create or run a container using `docker create` or `docker run`,
-the container doesn't expose any of its ports to the outside world.
+containers on bridge networks don't expose any ports to the outside world.
 Use the `--publish` or `-p` flag to make a port available to services
-outside of Docker.
+outside the bridge network.
 This creates a firewall rule in the host,
 mapping a container port to a port on the Docker host to the outside world.
 Here are some examples:
@@ -111,11 +111,12 @@ Here are some examples:
 > a container's ports it becomes available not only to the Docker host, but to
 > the outside world as well.
 >
-> If you include the localhost IP address (`127.0.0.1`) with the publish flag,
-> only the Docker host can access the published container port.
+> If you include the localhost IP address (`127.0.0.1`, or `::1`) with the
+> publish flag, only the Docker host and its containers can access the
+> published container port.
 >
 > ```console
-> $ docker run -p 127.0.0.1:8080:80 nginx
+> $ docker run -p 127.0.0.1:8080:80 -p '[::1]:8080:80' nginx
 > ```
 >
 > > **Warning**
@@ -131,6 +132,14 @@ If you want to make a container accessible to other containers,
 it isn't necessary to publish the container's ports.
 You can enable inter-container communication by connecting the containers to the
 same network, usually a [bridge network](./drivers/bridge.md).
+
+Ports on the host's IPv6 addresses will map to the container's IPv4 address
+if no host IP is given in a port mapping, the bridge network is IPv4-only,
+and `--userland-proxy=true` (default).
+
+For more information about port mapping, including how to disable it and use
+direct routing to containers, see
+[packet filtering and firewalls](./packet-filtering-firewalls.md).
 
 ## IP address and hostname
 
@@ -167,28 +176,12 @@ You can configure DNS resolution on a per-container basis, using flags for the
 The following table describes the available `docker run` flags related to DNS
 configuration.
 
-| Flag           | Description                                                                                                                                                                                                                                                         |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--dns`        | The IP address of a DNS server. To specify multiple DNS servers, use multiple `--dns` flags. If the container can't reach any of the IP addresses you specify, it uses Google's public DNS server at `8.8.8.8`. This allows containers to resolve internet domains. |
-| `--dns-search` | A DNS search domain to search non-fully qualified hostnames. To specify multiple DNS search prefixes, use multiple `--dns-search` flags.                                                                                                                            |
-| `--dns-opt`    | A key-value pair representing a DNS option and its value. See your operating system's documentation for `resolv.conf` for valid options.                                                                                                                            |
-| `--hostname`   | The hostname a container uses for itself. Defaults to the container's ID if not specified.                                                                                                                                                                          |
-
-### Nameservers with IPv6 addresses
-
-If the `/etc/resolv.conf` file on the host system contains one or more
-nameserver entries with an IPv6 address, those nameserver entries get copied
-over to `/etc/resolv.conf` in containers that you run.
-
-For containers using musl libc (in other words, Alpine Linux), this results in
-a race condition for hostname lookup. As a result, hostname resolution might
-sporadically fail if the external IPv6 DNS server wins the race condition
-against the embedded DNS server.
-
-It's rare that the external DNS server is faster than the embedded one. But
-things like garbage collection, or large numbers of concurrent DNS requests,
-can sometimes result in a round trip to the external server being faster than local
-resolution.
+| Flag           | Description                                                                                                                                                                                                                                           |
+| -------------- |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `--dns`        | The IP address of a DNS server. To specify multiple DNS servers, use multiple `--dns` flags. DNS requests will be forwarded from the container's network namespace so, for example, `--dns=127.0.0.1` refers to the container's own loopback address. |
+| `--dns-search` | A DNS search domain to search non-fully qualified hostnames. To specify multiple DNS search prefixes, use multiple `--dns-search` flags.                                                                                                              |
+| `--dns-opt`    | A key-value pair representing a DNS option and its value. See your operating system's documentation for `resolv.conf` for valid options.                                                                                                              |
+| `--hostname`   | The hostname a container uses for itself. Defaults to the container's ID if not specified.                                                                                                                                                            |
 
 ### Custom hosts
 

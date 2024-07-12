@@ -3,7 +3,7 @@ description: Learn how to install Docker Engine on SLES. These instructions cove
   the different installation methods, how to uninstall, and next steps.
 keywords: requirements, apt, installation, install docker engine, centos, rpm, sles, install, uninstall,
   upgrade, update, s390x, ibm-z
-title: Install Docker Engine on SLES
+title: Install Docker Engine on SLES (s390x)
 toc_max: 4
 aliases:
 - /ee/docker-ee/sles/
@@ -24,16 +24,18 @@ aliases:
 download-url-base: https://download.docker.com/linux/sles
 ---
 
+> **Note**
+>
+> The installation instructions on this page refer to packages for SLES on the
+> **s390x** architecture (IBM Z). Other architectures, including x86_64, aren't
+> supported for SLES.
+{ .warning }
+
 To get started with Docker Engine on SLES, make sure you
 [meet the prerequisites](#prerequisites), and then follow the
 [installation steps](#installation-methods).
 
 ## Prerequisites
-
-> **Note**
->
-> We currently only provide packages for SLES on s390x (IBM Z). Other architectures
-> are not yet supported for SLES.
 
 ### OS requirements
 
@@ -254,5 +256,3 @@ You have to delete any edited configuration files manually.
 ## Next steps
 
 - Continue to [Post-installation steps for Linux](linux-postinstall.md).
-- Review the topics in [Develop with Docker](../../develop/index.md) to learn
-  how to build new applications using Docker.

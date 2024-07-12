@@ -8,32 +8,31 @@ title: Configure remote access for Docker daemon
 ---
 
 By default, the Docker daemon listens for connections on a Unix socket to accept
-requests from local clients. It's possible to allow Docker to accept requests
-from remote hosts by configuring it to listen on an IP address and port as well
-as the Unix socket. For more detailed information on this configuration option,
-refer to the
-[dockerd CLI reference](/reference/cli/dockerd/#bind-docker-to-another-hostport-or-a-unix-socket).
+requests from local clients. You can configure Docker to accept requests
+from remote clients by configuring it to listen on an IP address and port as well
+as the Unix socket.
 
 <!-- prettier-ignore -->
 > **Warning**
 >
-> Before configuring Docker to accept connections from remote hosts it's
-> critically important that you understand the security implications of opening
-> Docker to the network. If steps aren't taken to secure the connection, it's
-> possible for remote non-root users to gain root access on the host. For more
-> information on how to use TLS certificates to secure this connection, check
+> Configuring Docker to accept connections from remote clients can leave you
+> vulnerable to unauthorized access to the host and other attacks.
+>
+> It's critically important that you understand the security implications of opening Docker to the network.
+> If steps aren't taken to secure the connection, it's possible for remote non-root users to gain root access on the host.
+>
+> Remote access without TLS is **not recommended**, and will require explicit opt-in in a future release.
+> For more information on how to use TLS certificates to secure this connection, see
 > [Protect the Docker daemon socket](../../engine/security/protect-access.md).
 { .warning }
 
-You can configure Docker to accept remote connections. This can be done using
-the `docker.service` systemd unit file for Linux distributions using systemd. Or
-you can use the `daemon.json` file, if your distribution doesn't use systemd.
+## Enable remote access
 
-> systemd vs `daemon.json`
->
-> Configuring Docker to listen for connections using both the systemd unit file
-> and the `daemon.json` file causes a conflict that prevents Docker from
-> starting.
+You can enable remote access to the daemon either using a `docker.service` systemd unit file for Linux distributions using systemd.
+Or you can use the `daemon.json` file, if your distribution doesn't use systemd.
+
+Configuring Docker to listen for connections using both the systemd unit file
+and the `daemon.json` file causes a conflict that prevents Docker from starting.
 
 ### Configuring remote access with systemd unit file
 
@@ -88,3 +87,40 @@ you can use the `daemon.json` file, if your distribution doesn't use systemd.
    $ sudo netstat -lntp | grep dockerd
    tcp        0      0 127.0.0.1:2375          0.0.0.0:*               LISTEN      3758/dockerd
    ```
+
+### Allow access to the remote API through a firewall
+
+If you run a firewall on the same host as you run Docker, and you want to access
+the Docker Remote API from another remote host, you must configure your firewall
+to allow incoming connections on the Docker port. The default port is `2376` if
+you're using TLS encrypted transport, or `2375` otherwise.
+
+Two common firewall daemons are:
+
+- [Uncomplicated Firewall (ufw)](https://help.ubuntu.com/community/UFW), often
+  used for Ubuntu systems.
+- [firewalld](https://firewalld.org), often used for RPM-based systems.
+
+Consult the documentation for your OS and firewall. The following information
+might help you get started. The settings used in this instruction are
+permissive, and you may want to use a different configuration that locks your
+system down more.
+
+- For ufw, set `DEFAULT_FORWARD_POLICY="ACCEPT"` in your configuration.
+
+- For firewalld, add rules similar to the following to your policy. One for
+  incoming requests, and one for outgoing requests.
+
+  ```xml
+  <direct>
+    [ <rule ipv="ipv6" table="filter" chain="FORWARD_direct" priority="0"> -i zt0 -j ACCEPT </rule> ]
+    [ <rule ipv="ipv6" table="filter" chain="FORWARD_direct" priority="0"> -o zt0 -j ACCEPT </rule> ]
+  </direct>
+  ```
+
+  Make sure that the interface names and chain names are correct.
+
+## Additional information
+
+For more detailed information on configuration options for remote access to the daemon, refer to the
+[dockerd CLI reference](/reference/cli/dockerd/#bind-docker-to-another-hostport-or-a-unix-socket).

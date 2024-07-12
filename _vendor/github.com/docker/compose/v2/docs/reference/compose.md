@@ -43,6 +43,7 @@ Define and run multi-container applications with Docker
 
 | Name                   | Type          | Default | Description                                                                                         |
 |:-----------------------|:--------------|:--------|:----------------------------------------------------------------------------------------------------|
+| `--all-resources`      |               |         | Include all resources, even those not used by services                                              |
 | `--ansi`               | `string`      | `auto`  | Control when to print ANSI control characters ("never"\|"always"\|"auto")                           |
 | `--compatibility`      |               |         | Run compose in backward compatibility mode                                                          |
 | `--dry-run`            |               |         | Execute command in dry run mode                                                                     |
@@ -175,6 +176,9 @@ If flags are explicitly set on the command line, the associated environment vari
 
 Setting the `COMPOSE_IGNORE_ORPHANS` environment variable to `true` stops docker compose from detecting orphaned
 containers for the project.
+
+Setting the `COMPOSE_MENU` environment variable to `false` disables the helper menu when running `docker compose up`
+in attached mode. Alternatively, you can also run `docker compose up --menu=false` to disable the helper menu.
 
 ### Use Dry Run mode to test your command
 

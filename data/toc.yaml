@@ -1,50 +1,21 @@
 Guides:
+- title: Overview
+  path: /guides/
 - title: Docker overview
-  path: /get-started/overview/
-- sectiontitle: Get started
+  path: /guides/docker-overview/
+
+- sectiontitle: "Getting started"
   section:
-    - title: "Overview"
-      path: /guides/get-started/
-    - sectiontitle: "Quick hands-on guides"
-      section:
-      - title: "What is a container?"
-        path: /guides/walkthroughs/what-is-a-container/
-      - title: "Run a container"
-        path: /guides/walkthroughs/run-a-container/
-      - title: "Run Docker Hub images"
-        path: /guides/walkthroughs/run-hub-images/
-      - title: "Run multi-container applications"
-        path: /guides/walkthroughs/multi-container-apps/
-      - title: "Persist container data"
-        path: /guides/walkthroughs/persist-data/
-      - title: "Access a local folder"
-        path: /guides/walkthroughs/access-local-folder/
-      - title: "Containerize your application"
-        path: /guides/walkthroughs/containerize-your-app/
-      - title: "Publish your image"
-        path: /guides/walkthroughs/publish-your-image/
-    - sectiontitle: "Getting started guide"
-      section:
-      - title: "Part 1: Overview"
-        path: /get-started/
-      - title: "Part 2: Containerize an application"
-        path: /get-started/02_our_app/
-      - title: "Part 3: Update the application"
-        path: /get-started/03_updating_app/
-      - title: "Part 4: Share the application"
-        path: /get-started/04_sharing_app/
-      - title: "Part 5: Persist the DB"
-        path: /get-started/05_persisting_data/
-      - title: "Part 6: Use bind mounts"
-        path: /get-started/06_bind_mounts/
-      - title: "Part 7: Multi-container apps"
-        path: /get-started/07_multi_container/
-      - title: "Part 8: Use Docker Compose"
-        path: /get-started/08_using_compose/
-      - title: "Part 9: Image-building best practices"
-        path: /get-started/09_image_best/
-      - title: "Part 10: What next?"
-        path: /get-started/11_what_next/
+  - title: "Overview"
+    path: /guides/getting-started/
+  - title: "Get Docker Desktop"
+    path: /guides/getting-started/get-docker-desktop/
+  - title: "Develop with containers"
+    path: /guides/getting-started/develop-with-containers/
+  - title: "Build and push your first image"
+    path: /guides/getting-started/build-and-push-first-image/
+  - title: "What's next"
+    path: /guides/getting-started/whats-next/
 
 - sectiontitle: "Docker concepts"
   section:
@@ -58,8 +29,30 @@ Guides:
       path: /guides/docker-concepts/the-basics/what-is-a-registry/
     - title: "What is Docker Compose?"
       path: /guides/docker-concepts/the-basics/what-is-docker-compose/
-
-
+  - sectiontitle: "Building images"
+    section:
+    - title: "Understanding image layers"
+      path: /guides/docker-concepts/building-images/understanding-image-layers/
+    - title: "Writing a Dockerfile"
+      path: /guides/docker-concepts/building-images/writing-a-dockerfile/
+    - title: "Build, tag and publish an image"
+      path: /guides/docker-concepts/building-images/build-tag-and-publish-an-image/
+    - title: "Using the build cache"
+      path: /guides/docker-concepts/building-images/using-the-build-cache/
+    - title: "Multi-stage builds"
+      path: /guides/docker-concepts/building-images/multi-stage-builds/
+  - sectiontitle: "Running containers"
+    section:
+    - title: "Publishing ports"
+      path: /guides/docker-concepts/running-containers/publishing-ports/
+    - title: "Overriding container defaults"
+      path: /guides/docker-concepts/running-containers/overriding-container-defaults/
+    - title: "Persisting container data"
+      path: /guides/docker-concepts/running-containers/persisting-container-data/
+    - title: "Sharing local files with containers"
+      path: /guides/docker-concepts/running-containers/sharing-local-files/
+    - title: "Multi-container applications"
+      path: /guides/docker-concepts/running-containers/multi-container-applications/
 - sectiontitle: Language-specific guides
   section:
   - path: /language/
@@ -90,6 +83,18 @@ Guides:
       path: /language/python/configure-ci-cd/
     - title: "Test your deployment"
       path: /language/python/deploy/
+  - sectiontitle: R
+    section:
+    - title: "Overview"
+      path: /language/r/
+    - title: "Containerize your app"
+      path: /language/r/containerize/
+    - title: "Develop your app"
+      path: /language/r/develop/
+    - title: "Configure CI/CD"
+      path: /language/r/configure-ci-cd/
+    - title: "Test your deployment"
+      path: /language/r/deploy/
   - sectiontitle: Java
     section:
     - title: "Overview"
@@ -134,6 +139,18 @@ Guides:
       path: /language/dotnet/configure-ci-cd/
     - title: "Test your deployment"
       path: /language/dotnet/deploy/
+  - sectiontitle: C++
+    section:
+    - title: "Overview"
+      path: /language/cpp/
+    - title: "Containerize your app"
+      path: /language/cpp/containerize/
+    - title: "Develop your app"
+      path: /language/cpp/develop/
+    - title: "Configure CI/CD"
+      path: /language/cpp/configure-ci-cd/
+    - title: "Test your deployment"
+      path: /language/cpp/deploy/
   - sectiontitle: Rust
     section:
     - title: "Overview"
@@ -163,11 +180,11 @@ Guides:
     - title: "Test your deployment"
       path: /language/php/deploy/
 
-- sectiontitle: Use-case guides {{< badge color=violet text=New >}}
+- sectiontitle: Use-case guides
   section:
     - path: /guides/use-case/
       title: Overview
-    - sectiontitle: Generative AI
+    - sectiontitle: Machine learning & AI
       section:
       - sectiontitle: PDF analysis and chat
         section:
@@ -179,44 +196,28 @@ Guides:
           title: Develop your app
       - path: /guides/use-case/genai-video-bot/
         title: Video transcription and chat
-    - sectiontitle: Natural language processing
-      section:
-      - path: /guides/use-case/nlp/
-        title: Overview
-      - path: /guides/use-case/nlp/language-translation/
-        title: Language translation
-      - path: /guides/use-case/nlp/named-entity-recognition/
-        title: Named entity recognition
-      - path: /guides/use-case/nlp/sentiment-analysis/
-        title: Sentiment analysis
-      - path: /guides/use-case/nlp/text-classification/
-        title: Text classification
-      - path: /guides/use-case/nlp/text-summarization/
-        title: Text summarization
-    - path: /guides/use-case/tensorflowjs/
-      title: Face detection with TensorFlow.js
+      - path: /guides/use-case/tensorflowjs/
+        title: Face detection with TensorFlow.js
+      - sectiontitle: Natural language processing
+        section:
+        - path: /guides/use-case/nlp/
+          title: Overview
+        - path: /guides/use-case/nlp/language-translation/
+          title: Language translation
+        - path: /guides/use-case/nlp/named-entity-recognition/
+          title: Named entity recognition
+        - path: /guides/use-case/nlp/sentiment-analysis/
+          title: Sentiment analysis
+        - path: /guides/use-case/nlp/text-classification/
+          title: Text classification
+        - path: /guides/use-case/nlp/text-summarization/
+          title: Text summarization
     - path: /guides/use-case/jupyter/
       title: Data science with JupyterLab
     - path: /scout/guides/vex/
       title: Suppress CVEs with VEX
-
-
-- sectiontitle: Develop with Docker
-  section:
-  - path: /develop/
-    title: Overview
-  - path: /develop/dev-best-practices/
-    title: Development best practices
-  - sectiontitle: Dockerfile best practices
-    section:
-    - path: /develop/develop-images/dockerfile_best-practices/
-      title: Overview
-    - path: /develop/develop-images/guidelines/
-      title: General guidelines
-    - path: /develop/develop-images/instructions/
-      title: Best practices for Dockerfile instructions
-  - path: /develop/security-best-practices/
-    title: Security best practices
+    - path: /guides/use-case/databases/
+      title: Use containerized databases
 
 - sectiontitle: Build with Docker
   section:
@@ -244,14 +245,39 @@ Guides:
 - sectiontitle: Deployment and orchestration
   section:
   - title: "Overview"
-    path: /get-started/orchestration/
+    path: /guides/deployment-orchestration/orchestration/
   - title: "Deploy to Kubernetes"
-    path: /get-started/kube-deploy/
+    path: /guides/deployment-orchestration/kube-deploy/
   - title: "Deploy to Swarm"
-    path: /get-started/swarm-deploy/
+    path: /guides/deployment-orchestration/swarm-deploy/
   - title: Cloud integrations
     path: /cloud/
-- path: /get-started/resources/
+
+- sectiontitle: Docker workshop
+  section:
+  - title: "Part 1: Overview"
+    path: /guides/workshop/
+  - title: "Part 2: Containerize an application"
+    path: /guides/workshop/02_our_app/
+  - title: "Part 3: Update the application"
+    path: /guides/workshop/03_updating_app/
+  - title: "Part 4: Share the application"
+    path: /guides/workshop/04_sharing_app/
+  - title: "Part 5: Persist the DB"
+    path: /guides/workshop/05_persisting_data/
+  - title: "Part 6: Use bind mounts"
+    path: /guides/workshop/06_bind_mounts/
+  - title: "Part 7: Multi-container apps"
+    path: /guides/workshop/07_multi_container/
+  - title: "Part 8: Use Docker Compose"
+    path: /guides/workshop/08_using_compose/
+  - title: "Part 9: Image-building best practices"
+    path: /guides/workshop/09_image_best/
+  - title: "Part 10: What next?"
+    path: /guides/workshop/10_what_next/
+
+
+- path: /guides/resources/
   title: "Educational resources"
 
 - sectiontitle: Contribute
@@ -684,6 +710,8 @@ Reference:
       title: docker scout integration list
     - path: /reference/cli/docker/scout/policy/
       title: docker scout policy
+    - path: /reference/cli/docker/scout/push/
+      title: docker scout push
     - path: /reference/cli/docker/scout/quickview/
       title: docker scout quickview
     - path: /reference/cli/docker/scout/recommendations/
@@ -828,6 +856,38 @@ Reference:
       title: docker volume update
 - title: Dockerfile reference
   path: /reference/dockerfile/
+- sectiontitle: Build checks
+  section:
+  - path: /reference/build-checks/
+    title: Overview
+  - path: /reference/build-checks/stage-name-casing/
+    title: StageNameCasing
+  - path: /reference/build-checks/from-as-casing/
+    title: FromAsCasing
+  - path: /reference/build-checks/no-empty-continuation/
+    title: NoEmptyContinuation
+  - path: /reference/build-checks/consistent-instruction-casing/
+    title: ConsistentInstructionCasing
+  - path: /reference/build-checks/file-consistent-command-casing/
+    title: FileConsistentCommandCasing
+  - path: /reference/build-checks/duplicate-stage-name/
+    title: DuplicateStageName
+  - path: /reference/build-checks/reserved-stage-name/
+    title: ReservedStageName
+  - path: /reference/build-checks/json-args-recommended/
+    title: JSONArgsRecommended
+  - path: /reference/build-checks/maintainer-deprecated/
+    title: MaintainerDeprecated
+  - path: /reference/build-checks/undefined-arg-in-from/
+    title: UndefinedArgInFrom
+  - path: /reference/build-checks/workdir-relative-path/
+    title: WorkdirRelativePath
+  - path: /reference/build-checks/undefined-var/
+    title: UndefinedVar
+  - path: /reference/build-checks/multiple-instructions-disallowed/
+    title: MultipleInstructionsDisallowed
+  - path: /reference/build-checks/legacy-key-value-format/
+    title: LegacyKeyValueFormat
 - title: Daemon CLI (dockerd)
   path: /reference/cli/dockerd/
 - sectiontitle: API reference
@@ -846,6 +906,8 @@ Reference:
       section:
       - path: /engine/api/version-history/
         title: Version history overview
+      - path: /engine/api/v1.46/
+        title: v1.46 reference
       - path: /engine/api/v1.45/
         title: v1.45 reference
       - path: /engine/api/v1.44/
@@ -982,113 +1044,104 @@ Reference:
       title: Compose Deploy Specification
     - path: /compose/compose-file/develop/
       title: Compose Develop Specification
-    - sectiontitle: Legacy versions
-      section:
-        - path: /compose/compose-file/compose-versioning/
-          title: About versions and upgrading
-        - path: /compose/compose-file/compose-file-v3/
-          title: Version 3
-        - path: /compose/compose-file/compose-file-v2/
-          title: Version 2
+    - path: /compose/compose-file/legacy-versions/
+      title: Legacy versions
 - path: /glossary/
   title: Glossary
-
-
-
-Samples:
-- path: /samples/
-  title: Overview
-- sectiontitle: Databases
+- sectiontitle: Samples
   section:
-    - path: /samples/mariadb/
-      title: MariaDB
-    - path: /samples/mongodb/
-      title: MongoDB
-    - path: /samples/ms-sql/
-      title: MS-SQL
-    - path: /samples/mysql/
-      title: MySQL
-    - path: /samples/postgres/
-      title: PostgreSQL
-    - path: /samples/redis/
-      title: Redis
-- sectiontitle: Frameworks
-  section:
-    - path: /samples/dotnet/
-      title: .NET
-    - path: /samples/angular/
-      title: Angular
-    - path: /samples/django/
-      title: Django
-    - path: /samples/express/
-      title: Express
-    - path: /samples/fastapi/
-      title: FastAPI
-    - path: /samples/flask/
-      title: Flask
-    - path: /samples/nodejs/
-      title: Node.js
-    - path: /samples/react/
-      title: React
-    - path: /samples/rails/
-      title: Rails
-    - path: /samples/spark/
-      title: Spark
-    - path: /samples/spring/
-      title: Spring Boot
-    - path: /samples/vuejs/
-      title: Vue.js
-- sectiontitle: Languages
-  section:
-    - path: /samples/go/
-      title: Go
-    - path: /samples/java/
-      title: Java
-    - path: /samples/javascript/
-      title: JavaScript
-    - path: /samples/php/
-      title: PHP
-    - path: /samples/python/
-      title: Python
-    - path: /samples/ruby/
-      title: Ruby
-    - path: /samples/rust/
-      title: Rust
-    - path: /samples/typescript/
-      title: TypeScript
-- sectiontitle: Platforms
-  section:
-    - path: /samples/gitea/
-      title: Gitea
-    - path: /samples/nextcloud/
-      title: Nextcloud
-    - path: /samples/portainer/
-      title: Portainer
-    - path: /samples/prometheus/
-      title: Prometheus
-    - path: /samples/wordpress/
-      title: WordPress
-- sectiontitle: Other samples
-  section:
-    - path: /samples/ai-ml/
-      title: AI/ML
-    - path: /samples/cloudflared/
-      title: Cloudflared
-    - path: /samples/elasticsearch/
-      title: Elasticsearch / Logstash / Kibana
-    - path: /samples/minecraft/
-      title: Minecraft
-    - path: /samples/nginx/
-      title: NGINX
-    - path: /samples/pi-hole/
-      title: Pi-hole
-    - path: /samples/plex/
-      title: Plex
-    - path: /samples/traefik/
-      title: Traefik
-    - path: /samples/wireguard/
-      title: Wireguard
-
+  - path: /samples/
+    title: Overview
+  - sectiontitle: Databases
+    section:
+      - path: /samples/mariadb/
+        title: MariaDB
+      - path: /samples/mongodb/
+        title: MongoDB
+      - path: /samples/ms-sql/
+        title: MS-SQL
+      - path: /samples/mysql/
+        title: MySQL
+      - path: /samples/postgres/
+        title: PostgreSQL
+      - path: /samples/redis/
+        title: Redis
+  - sectiontitle: Frameworks
+    section:
+      - path: /samples/dotnet/
+        title: .NET
+      - path: /samples/angular/
+        title: Angular
+      - path: /samples/django/
+        title: Django
+      - path: /samples/express/
+        title: Express
+      - path: /samples/fastapi/
+        title: FastAPI
+      - path: /samples/flask/
+        title: Flask
+      - path: /samples/nodejs/
+        title: Node.js
+      - path: /samples/react/
+        title: React
+      - path: /samples/rails/
+        title: Rails
+      - path: /samples/spark/
+        title: Spark
+      - path: /samples/spring/
+        title: Spring Boot
+      - path: /samples/vuejs/
+        title: Vue.js
+  - sectiontitle: Languages
+    section:
+      - path: /samples/go/
+        title: Go
+      - path: /samples/java/
+        title: Java
+      - path: /samples/javascript/
+        title: JavaScript
+      - path: /samples/php/
+        title: PHP
+      - path: /samples/python/
+        title: Python
+      - path: /samples/ruby/
+        title: Ruby
+      - path: /samples/rust/
+        title: Rust
+      - path: /samples/typescript/
+        title: TypeScript
+  - sectiontitle: Platforms
+    section:
+      - path: /samples/gitea/
+        title: Gitea
+      - path: /samples/nextcloud/
+        title: Nextcloud
+      - path: /samples/portainer/
+        title: Portainer
+      - path: /samples/prometheus/
+        title: Prometheus
+      - path: /samples/wordpress/
+        title: WordPress
+  - sectiontitle: Other samples
+    section:
+      - path: /samples/ai-ml/
+        title: AI/ML
+      - path: /samples/cloudflared/
+        title: Cloudflared
+      - path: /samples/elasticsearch/
+        title: Elasticsearch / Logstash / Kibana
+      - path: /samples/minecraft/
+        title: Minecraft
+      - path: /samples/nginx/
+        title: NGINX
+      - path: /samples/pi-hole/
+        title: Pi-hole
+      - path: /samples/plex/
+        title: Plex
+      - path: /samples/traefik/
+        title: Traefik
+      - path: /samples/wireguard/
+        title: Wireguard
 
 Manuals:
 - path: /manuals/
@@ -1099,14 +1152,14 @@ Manuals:
   section:
     - path: /desktop/
       title: Overview
-    - sectiontitle: Install Docker Desktop
+    - sectiontitle: Install
       section:
        - path: /desktop/install/mac-install/
-         title: Install on Mac
+         title: Mac
        - path: /desktop/mac/permission-requirements/
          title: Understand permission requirements for Mac
        - path: /desktop/install/windows-install/
-         title: Install on Windows
+         title: Windows
        - sectiontitle: Use the MSI installer {{< badge color=violet text="Early Access" >}}
          section:
          - path: /desktop/install/msi/
@@ -1120,17 +1173,17 @@ Manuals:
        - path: /desktop/windows/permission-requirements/
          title: Understand permission requirements for Windows
        - path: /desktop/install/linux-install/
-         title: Install on Linux
+         title: Linux
        - sectiontitle: Installation per Linux distro
          section:
             - path: /desktop/install/ubuntu/
-              title: Install on Ubuntu
+              title: Ubuntu
             - path: /desktop/install/debian/
-              title: Install on Debian
+              title: Debian
             - path: /desktop/install/fedora/
-              title: Install on Fedora
+              title: Fedora
             - path: /desktop/install/archlinux/
-              title: Install on Arch
+              title: Arch
     - path: /desktop/get-started/
       title: Sign in
     - sectiontitle: Explore Docker Desktop
@@ -1159,8 +1212,6 @@ Manuals:
             title: What is Settings Management?
           - path: /desktop/hardened-desktop/settings-management/configure/
             title: Configure Settings Management
-          - path: /desktop/hardened-desktop/settings-management/air-gapped-containers/
-            title: Air-gapped containers (Beta)
         - sectiontitle: Enhanced Container Isolation
           section:
           - path: /desktop/hardened-desktop/enhanced-container-isolation/
@@ -1171,6 +1222,12 @@ Manuals:
             title: Key features and benefits
           - path: /desktop/hardened-desktop/enhanced-container-isolation/config/
             title: Advanced configuration options
+          - path: /desktop/hardened-desktop/enhanced-container-isolation/limitations/
+            title: Limitations
+          - path: /desktop/hardened-desktop/enhanced-container-isolation/faq/
+            title: FAQ
+        - path: /desktop/hardened-desktop/air-gapped-containers/
+          title: Air-Gapped Containers
     - sectiontitle: Dev Environments (Beta)
       section:
         - path: /desktop/dev-environments/
@@ -1233,6 +1290,18 @@ Manuals:
       title: Uninstall Docker Desktop
     - path: /desktop/feedback/
       title: Give feedback
+    - sectiontitle: Desktop FAQs
+      section:
+      - path: /desktop/faqs/general/
+        title: General
+      - path: /desktop/faqs/macfaqs/
+        title: Mac
+      - path: /desktop/faqs/windowsfaqs/
+        title: Windows
+      - path: /desktop/faqs/linuxfaqs/
+        title: Linux
+      - path: /desktop/faqs/releases/
+        title: Releases
     - path: /desktop/release-notes/
       title: Release notes
     - sectiontitle: Previous versions
@@ -1257,7 +1326,7 @@ Manuals:
 - sectiontitle: Docker Extensions
   section:
     - path: /desktop/extensions/
-      title: What are Docker Extensions?
+      title: Overview
     - sectiontitle: Extensions on Docker Desktop
       section:
         - path: /desktop/extensions/marketplace/
@@ -1359,30 +1428,44 @@ Manuals:
       title: Quickstart
     - path: /scout/install/
       title: Install
-    - sectiontitle: Explore Docker Scout
+    - sectiontitle: Concepts
       section:
-      - path: /scout/dashboard/
+        - path: /scout/concepts/s3c/
+          title: Software supply chain security
+        - path: /scout/concepts/sbom/
+          title: Software Bill of Materials
+    - sectiontitle: Explore
+      section:
+      - path: /scout/explore/analysis/
+        title: Analysis
+      - path: /scout/explore/dashboard/
         title: Dashboard
-      - path: /scout/image-details-view/
+      - path: /scout/explore/image-details-view/
         title: Image details view
-      - path: /scout/advisory-db-sources/
-        title: Advisory database
-      - path: /scout/data-handling/
-        title: Data handling
-    - sectiontitle: Use Docker Scout
+      - path: /scout/explore/exceptions/
+        title: Exceptions {{< badge color=violet text=New >}}
+      - path: /scout/explore/metrics-exporter/
+        title: Metrics exporter
+    - sectiontitle: How-tos
       section:
-      - path: /scout/image-analysis/
-        title: Image analysis
-      - path: /scout/image-prefix/
+      - path: /scout/how-tos/artifact-types/
         title: Specify artifact type or location
-      - path: /scout/sbom/
-        title: SBOM
-      - path: /scout/env-vars/
-        title: Environment variables
+      - path: /scout/how-tos/view-create-sboms/
+        title: View and create SBOMs
+      - path: /scout/how-tos/configure-cli/
+        title: Configure the CLI
+    - sectiontitle: Deep dive
+      section:
+      - path: /scout/deep-dive/advisory-db-sources/
+        title: Advisory database
+      - path: /scout/deep-dive/data-handling/
+        title: Data handling
     - sectiontitle: Policy Evaluation
       section:
       - path: /scout/policy/
         title: Overview
+      - path: /scout/policy/scores/
+        title: Health scores {{< badge color=blue text=Beta >}}
       - path: /scout/policy/view/
         title: View policy status
       - path: /scout/policy/configure/
@@ -1431,6 +1514,10 @@ Manuals:
         section:
         - title: GitHub
           path: /scout/integrations/source-code-management/github/
+      - sectiontitle: Team collaboration
+        section:
+        - title: Slack
+          path: /scout/integrations/team-collaboration/slack/
     - sectiontitle: Release notes
       section:
       - path: /scout/release-notes/cli/
@@ -1453,7 +1540,7 @@ Manuals:
     - path: /engine/install/fedora/
       title: Fedora
     - path: /engine/install/rhel/
-      title: RHEL (s390x)
+      title: RHEL
     - path: /engine/install/sles/
       title: SLES
     - path: /engine/install/ubuntu/
@@ -1464,8 +1551,6 @@ Manuals:
       title: Binaries
     - path: /engine/install/linux-postinstall/
       title: Post-installation steps
-    - path: /engine/install/troubleshoot/
-      title: Troubleshoot installation
   - sectiontitle: Storage
     section:
     - path: /storage/
@@ -1476,8 +1561,6 @@ Manuals:
       title: Bind mounts
     - path: /storage/tmpfs/
       title: tmpfs mounts
-    - path: /storage/troubleshooting_volume_errors/
-      title: Troubleshoot
     - sectiontitle: Storage drivers
       section:
       - path: /storage/storagedriver/
@@ -1552,10 +1635,14 @@ Manuals:
     section:
     - path: /engine/reference/commandline/cli/
       title: Use the Docker CLI
+    - path: /config/completion/
+      title: Completion
     - path: /config/filter/
       title: Filter commands
     - path: /config/formatting/
       title: Format command and log output
+    - path: /config/otel/
+      title: OpenTelemetry
   - sectiontitle: Manage resources
     section:
     - path: /config/pruning/
@@ -1570,8 +1657,8 @@ Manuals:
       title: Start the daemon
     - path: /config/daemon/
       title: Configure the daemon
-    - path: /config/daemon/systemd/
-      title: Configure with systemd
+    - path: /config/daemon/proxy/
+      title: HTTP proxy
     - path: /config/containers/live-restore/
       title: Live restore
     - path: /config/daemon/troubleshoot/
@@ -1738,10 +1825,14 @@ Manuals:
     title: Deprecated features
   - sectiontitle: Release notes
     section:
-    - path: /engine/release-notes/26.0/
-      title: Engine 26.0
+    - path: /engine/release-notes/27.0/
+      title: Engine 27.0
     - sectiontitle: Previous versions
       section:
+      - path: /engine/release-notes/26.1/
+        title: Engine 26.1
+      - path: /engine/release-notes/26.0/
+        title: Engine 26.0
       - path: /engine/release-notes/25.0/
         title: Engine 25.0
       - path: /engine/release-notes/24.0/
@@ -1802,6 +1893,8 @@ Manuals:
           title: Multi-stage builds
         - path: /build/building/variables/
           title: Variables
+        - path: /build/building/best-practices/
+          title: Best practices
         - path: /build/building/multi-platform/
           title: Multi-platform images
         - path: /build/building/secrets/
@@ -1811,7 +1904,9 @@ Manuals:
         - path: /build/building/opentelemetry/
           title: OpenTelemetry support
         - path: /build/building/base-images/
-          title: Create your own base image
+          title: Base images
+    - path: /build/checks/
+      title: Build checks  {{< badge color=violet text=New >}}
     - sectiontitle: Builders
       section:
         - path: /build/builders/
@@ -1830,18 +1925,6 @@ Manuals:
           title: Kubernetes driver
         - path: /build/drivers/remote/
           title: Remote driver
-    - sectiontitle: Build Cloud {{< badge color=violet text=New >}}
-      section:
-        - path: /build/cloud/
-          title: Overview
-        - path: /build/cloud/setup/
-          title: Setup
-        - path: /build/cloud/usage/
-          title: Usage
-        - path: /build/cloud/ci/
-          title: Build Cloud in CI
-        - path: /build/cloud/optimization/
-          title: Optimize for cloud builds
     - sectiontitle: Exporters
       section:
         - path: /build/exporters/
@@ -1880,14 +1963,26 @@ Manuals:
       section:
         - path: /build/bake/
           title: Overview
+        - path: /build/bake/introduction/
+          title: Introduction
+        - path: /build/bake/targets/
+          title: Targets
+        - path: /build/bake/inheritance/
+          title: Inheritance
+        - path: /build/bake/variables/
+          title: Variables
+        - path: /build/bake/expressions/
+          title: Expressions
+        - path: /build/bake/funcs/
+          title: Functions
+        - path: /build/bake/matrices/
+          title: Matrices
+        - path: /build/bake/contexts/
+          title: Contexts
+        - path: /build/bake/overrides/
+          title: Overriding configuration
         - path: /build/bake/reference/
           title: Bake file reference
-        - path: /build/bake/configuring-build/
-          title: Configuring builds
-        - path: /build/bake/advanced/
-          title: Advanced patterns
-        - path: /build/bake/build-contexts/
-          title: Build contexts and linking targets
         - path: /build/bake/compose-file/
           title: Building from Compose file
         - path: /build/bake/remote-definition/
@@ -1926,6 +2021,8 @@ Manuals:
           section:
           - path: /build/ci/github-actions/
             title: Introduction
+          - path: /build/ci/github-actions/build-summary/
+            title: Build summary {{< badge color=blue text=Beta >}}
           - path: /build/ci/github-actions/configure-builder/
             title: Configuring your builder
           - path: /build/ci/github-actions/multi-platform/
@@ -1960,6 +2057,18 @@ Manuals:
             title: Reproducible builds
     - path: /build/release-notes/
       title: Release notes
+- sectiontitle: Docker Build Cloud
+  section:
+    - path: /build-cloud/
+      title: Overview
+    - path: /build-cloud/setup/
+      title: Setup
+    - path: /build-cloud/usage/
+      title: Usage
+    - path: /build-cloud/ci/
+      title: Continuous integration
+    - path: /build-cloud/optimization/
+      title: Optimization
 - sectiontitle: Docker Compose
   section:
   - path: /compose/
@@ -1983,7 +2092,7 @@ Manuals:
   - path: /compose/compose-application-model/
     title: How Compose works
   - path: /compose/gettingstarted/
-    title: Try Compose
+    title: Quickstart
   - path: /compose/project-name/
     title: Specify a project name
   - sectiontitle: Environment variables
@@ -1994,10 +2103,10 @@ Manuals:
       title: Explore ways to set environment variables
     - path: /compose/environment-variables/envvars-precedence/
       title: Understand environment variables precedence
-    - path: /compose/environment-variables/env-file/
-      title: Syntax for environment files
     - path: /compose/environment-variables/envvars/
       title: Set or change pre-defined environment variables
+    - path: /compose/environment-variables/variable-interpolation/
+      title: Interpolation
     - path: /compose/environment-variables/best-practices/
       title: Best practices
   - sectiontitle: Use...
@@ -2032,6 +2141,8 @@ Manuals:
     title: Give feedback
   - path: /compose/migrate/
     title: Migrate to Compose V2
+  - path: /compose/faq/
+    title: Compose FAQ
   - path: /compose/release-notes/
     title: Release notes
 
@@ -2051,6 +2162,8 @@ Manuals:
         title: Access
       - path: /docker-hub/repos/
         title: Manage
+      - path: /docker-hub/repos/categories/
+        title: Categories
   - path: /docker-hub/download-rate-limit/
     title: Download rate limit
   - path: /docker-hub/webhooks/
@@ -2084,6 +2197,9 @@ Manuals:
   - path: /docker-hub/release-notes/
     title: Release notes
 
+- title: Docker for GitHub Copilot {{< badge color=violet text="Early Access" >}}
+  path: /copilot/
+
 - sectiontitle: Administration
   section:
   - path: /admin/
@@ -2116,6 +2232,14 @@ Manuals:
       title: Manage users
     - path: /admin/company/owners/
       title: Manage company owners
+  - sectiontitle: Account and admin FAQ
+    section:
+    - path: /admin/faqs/general-faqs/
+      title: General
+    - path: /admin/faqs/organization-faqs/
+      title: Organization
+    - path: /admin/faqs/company-faqs/
+      title: Company
   - path: /admin/convert-account/
     title: Convert an account into an organization
   - path: /admin/deactivate-account/
@@ -2139,10 +2263,14 @@ Manuals:
          title: Connect
       -  path: /security/for-admins/single-sign-on/manage/
          title: Manage
-    - path: /security/for-admins/scim/
-      title: SCIM
-    - path: /security/for-admins/group-mapping/
-      title: Group mapping
+    - sectiontitle: Provisioning
+      section:
+      - path: /security/for-admins/provisioning/scim/
+        title: SCIM
+      - path: /security/for-admins/provisioning/just-in-time/
+        title: Just-in-Time
+      - path: /security/for-admins/provisioning/group-mapping/
+        title: Group mapping
     - path: /security/for-admins/configure-sign-in/
       title: Enforce sign in
     - path: /security/for-admins/roles-and-permissions/
@@ -2169,6 +2297,26 @@ Manuals:
         title: Generate a new recovery code
   - path: /security/security-announcements/
     title: Security announcements
+  - sectiontitle: Security FAQs
+    section:
+    - path: /security/faqs/general/
+      title: General
+    - path: /security/faqs/networking-and-vms/
+      title: Networking and VMs
+    - path: /security/faqs/containers/
+      title: Containers
+    - sectiontitle: Single Sign-On
+      section:
+      - path: /security/faqs/single-sign-on/faqs/
+        title: General
+      - path: /security/faqs/single-sign-on/idp-faqs/
+        title: Identity providers
+      - path: /security/faqs/single-sign-on/domain-faqs/
+        title: Domains
+      - path: /security/faqs/single-sign-on/enforcement-faqs/
+        title: Enforcement
+      - path: /security/faqs/single-sign-on/users-faqs/
+        title: Manage users
 
 - sectiontitle: Billing
   section:
@@ -2176,6 +2324,8 @@ Manuals:
     title: Overview
   - sectiontitle: Docker Core billing
     section:
+    - path: /billing/core-billing/get-started-core/
+      title: Get started with Docker Core
     - path: /billing/core-billing/payment-method/
       title: Add or update a payment method
     - path: /billing/core-billing/details/
@@ -2188,6 +2338,12 @@ Manuals:
     title: Docker Build Cloud billing
   - path: /billing/scout-billing/
     title: Docker Scout billing
+  - path: /billing/tax-certificate/
+    title: Register a tax certificate
+  - path: /billing/3d-secure/
+    title: 3D Secure authentication
+  - path: /billing/faqs/
+    title: Billing FAQs
 
 - sectiontitle: Subscription
   section:
@@ -2215,13 +2371,21 @@ Manuals:
     title: Docker Scout subscriptions and features
   - path: /subscription/desktop-license/
     title: Docker Desktop license agreement
+  - path: /subscription/faq/
+    title: Subscription FAQ
 
 - sectiontitle: Trusted content
   section:
   - path: /trusted-content/
     title: Overview
-  - path: /trusted-content/official-images/
-    title: Docker Official images
+  - sectiontitle: Docker Official Images
+    section:
+    - path: /trusted-content/official-images/
+      title: Overview
+    - path: /trusted-content/official-images/using/
+      title: Using official images
+    - path: /trusted-content/official-images/contributing/
+      title: Contributing
   - path: /trusted-content/dvp-program/
     title: Docker Verified Publisher Program
   - path: /trusted-content/dsos-program/
@@ -2229,61 +2393,7 @@ Manuals:
   - path: /trusted-content/insights-analytics/
     title: Insights and analytics
 
-- path: /release-notes/
-  title: Release notes
 - path: /support/
   title: Get support
 - path: /release-lifecycle/
   title: Product release lifecycle
-
-FAQ:
-  - path: /faq/
-    title: Overview
-  - path: /billing/faqs/
-    title: Billing
-  - path: /compose/faq/
-    title: Compose
-  - sectiontitle: Desktop
-    section:
-    - path: /desktop/faqs/general/
-      title: General
-    - path: /desktop/faqs/macfaqs/
-      title: Mac
-    - path: /desktop/faqs/windowsfaqs/
-      title: Windows
-    - path: /desktop/faqs/linuxfaqs/
-      title: Linux
-    - path: /desktop/faqs/releases/
-      title: Releases
-  - sectiontitle: Docker account and admin
-    section:
-    - path: /faq/admin/general-faqs/
-      title: General
-    - path: /faq/admin/organization-faqs/
-      title: Organization
-    - path: /faq/admin/company-faqs/
-      title: Company
-  - path: /subscription/faq/
-    title: Subscription
-  - sectiontitle: Security
-    section:
-    - path: /faq/security/general/
-      title: General
-    - path: /faq/security/networking-and-vms/
-      title: Networking and VMs
-    - path: /faq/security/eci-faq/
-      title: Enhanced Container Isolation
-    - sectiontitle: Single Sign-On
-      section:
-      - path: /faq/security/single-sign-on/faqs/
-        title: General
-      - path: /faq/security/single-sign-on/saml-faqs/
-        title: SAML
-      - path: /faq/security/single-sign-on/idp-faqs/
-        title: Identity providers
-      - path: /faq/security/single-sign-on/domain-faqs/
-        title: Domains
-      - path: /faq/security/single-sign-on/enforcement-faqs/
-        title: Enforcement
-      - path: /faq/security/single-sign-on/users-faqs/
-        title: Manage users

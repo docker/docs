@@ -33,20 +33,21 @@ container
 The following table describes the available driver-specific options that you can
 pass to `--driver-opt`:
 
-| Parameter        | Type   | Default          | Description                                                                                                            |
-| ---------------- | ------ | ---------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| `image`          | String |                  | Sets the BuildKit image to use for the container.                                                                      |
-| `memory`         | String |                  | Sets the amount of memory the container can use.                                                                       |
-| `memory-swap`    | String |                  | Sets the memory swap limit for the container.                                                                          |
-| `cpu-quota`      | String |                  | Imposes a CPU CFS quota on the container.                                                                              |
-| `cpu-period`     | String |                  | Sets the CPU CFS scheduler period for the container.                                                                   |
-| `cpu-shares`     | String |                  | Configures CPU shares (relative weight) of the container.                                                              |
-| `cpuset-cpus`    | String |                  | Limits the set of CPU cores the container can use.                                                                     |
-| `cpuset-mems`    | String |                  | Limits the set of CPU memory nodes the container can use.                                                              |
-| `network`        | String |                  | Sets the network mode for the container.                                                                               |
-| `cgroup-parent`  | String | `/docker/buildx` | Sets the cgroup parent of the container if Docker is using the "cgroupfs" driver.                                      |
-| `restart-policy` | String | `unless-stopped` | Sets the container's [restart policy](../../config/containers/start-containers-automatically.md#use-a-restart-policy). |
-| `env.<key>`      | String |                  | Sets the environment variable `key` to the specified `value` in the container.                                         |
+| Parameter        | Type    | Default          | Description                                                                                                            |
+| ---------------- | ------- | ---------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `image`          | String  |                  | Sets the BuildKit image to use for the container.                                                                      |
+| `memory`         | String  |                  | Sets the amount of memory the container can use.                                                                       |
+| `memory-swap`    | String  |                  | Sets the memory swap limit for the container.                                                                          |
+| `cpu-quota`      | String  |                  | Imposes a CPU CFS quota on the container.                                                                              |
+| `cpu-period`     | String  |                  | Sets the CPU CFS scheduler period for the container.                                                                   |
+| `cpu-shares`     | String  |                  | Configures CPU shares (relative weight) of the container.                                                              |
+| `cpuset-cpus`    | String  |                  | Limits the set of CPU cores the container can use.                                                                     |
+| `cpuset-mems`    | String  |                  | Limits the set of CPU memory nodes the container can use.                                                              |
+| `default-load`   | Boolean | `false`          | Automatically load images to the Docker Engine image store.                                                            |
+| `network`        | String  |                  | Sets the network mode for the container.                                                                               |
+| `cgroup-parent`  | String  | `/docker/buildx` | Sets the cgroup parent of the container if Docker is using the "cgroupfs" driver.                                      |
+| `restart-policy` | String  | `unless-stopped` | Sets the container's [restart policy](../../config/containers/start-containers-automatically.md#use-a-restart-policy). |
+| `env.<key>`      | String  |                  | Sets the environment variable `key` to the specified `value` in the container.                                         |
 
 Before you configure the resource limits for the container,
 read about [configuring runtime resource constraints for containers](../../config/containers/resource_constraints/).
@@ -68,31 +69,6 @@ WARNING: No output specified with docker-container driver. Build result will onl
 #1 creating container buildx_buildkit_container0 0.5s done
 #1 DONE 2.4s
 ...
-```
-
-## Loading to local image store
-
-Unlike when using the default `docker` driver, images built with the
-`docker-container` driver must be explicitly loaded into the local image store.
-Use the `--load` flag:
-
-```console
-$ docker buildx build --load -t <image> --builder=container .
-...
- => exporting to oci image format                                                                                                      7.7s
- => => exporting layers                                                                                                                4.9s
- => => exporting manifest sha256:4e4ca161fa338be2c303445411900ebbc5fc086153a0b846ac12996960b479d3                                      0.0s
- => => exporting config sha256:adf3eec768a14b6e183a1010cb96d91155a82fd722a1091440c88f3747f1f53f                                        0.0s
- => => sending tarball                                                                                                                 2.8s
- => importing to docker
-```
-
-The image becomes available in the image store when the build finishes:
-
-```console
-$ docker image ls
-REPOSITORY                       TAG               IMAGE ID       CREATED             SIZE
-<image>                          latest            adf3eec768a1   2 minutes ago       197MB
 ```
 
 ## Cache persistence

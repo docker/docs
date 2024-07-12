@@ -4,10 +4,9 @@ publish = "public"
 [context.deploy-preview.environment]
 NODE_VERSION = "20"
 NODE_ENV = "production"
-HUGO_VERSION = "0.122.0"
+HUGO_VERSION = "0.127.0"
 HUGO_ENABLEGITINFO = "true"
 HUGO_ENVIRONMENT = "preview"
 
 [context.deploy-preview]
-command = "hugo --gc --minify -b $DEPLOY_PRIME_URL"
-
+command = "hugo --gc --minify -b $DEPLOY_PRIME_URL && npx pagefind@v1.1.0"

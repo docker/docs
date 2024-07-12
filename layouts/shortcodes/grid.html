@@ -1,5 +1,5 @@
 {{ $cols := .Get "cols" | default 3 }}
-<div class="not-prose grid grid-cols-{{ $cols }} xl:grid-cols-{{ sub $cols 1 }} gap-4 sm:flex sm:flex-col">
+<div class="not-prose grid grid-cols-1 md:grid-cols-{{ math.Max 2 (sub $cols 1) }} lg:grid-cols-{{ $cols }} gap-4">
   {{ $items := index .Page.Params (.Get "items" | default "grid") }}
   {{ range $items }}
     {{ $opts := dict "title" .title "link" .link "description" .description "icon" .icon "image" .image }}

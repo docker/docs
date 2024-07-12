@@ -15,10 +15,7 @@ aliases:
 Docker Desktop provides several networking features to make it easier to
 use.
 
-## Networking features
-
-{{< tabs >}}
-{{< tab name="For all platforms" >}}
+## Networking features for all platforms
 
 ### VPN Passthrough
 
@@ -53,24 +50,26 @@ See:
 - [Proxies on Mac](settings/mac.md#proxies)
 - [Proxies on Windows](settings/windows.md#proxies)
 
-### SOCKS5 proxy support (Beta)
+### SOCKS5 proxy support 
 
-SOCKS (Socket Secure) is a protocol that facilitates the routing of network packets between a client and a server through a proxy server. It provides a way to enhance privacy, security, and network performance for users and applications.
+{{< introduced desktop 4.28.0 "release-notes.md#4280" >}}
 
-With Docker Desktop 4.28 and later, you can enable SOCKS proxy support to allow outgoing requests, such as pulling images, and access Linux container backend IPs from the host. 
+> **Note**
+>
+> Requires a Business subscription.
+
+SOCKS (Socket Secure) is a protocol that facilitates the routing of network packets between a client and a server through a proxy server. It provides a way to enhance privacy, security, and network performance for users and applications. 
+
+You can enable SOCKS proxy support to allow outgoing requests, such as pulling images, and access Linux container backend IPs from the host. 
 
 To enable and set up SOCKS proxy support:
 
-1. Navigate to **Settings** in Docker Desktop. 
-2. Go to **Features in development** and then on the **Beta** tab check the **Enable SOCKS proxy support** option. 
-3. Select **Apply & restart**.
-4. Go to the **Resources** tab and from the dropdown menu select **Proxies**
-5. Switch on the **Manual proxy configuration** toggle. 
-6. In the **Secure Web Server HTTPS** box, paste your `socks5://host:port` URL.
+1. Navigate to the **Resources** tab in **Settings**. 
+2. From the dropdown menu select **Proxies**.
+3. Switch on the **Manual proxy configuration** toggle. 
+4. In the **Secure Web Server HTTPS** box, paste your `socks5://host:port` URL.
 
-
-{{< /tab >}}
-{{< tab name="For Mac and Linux" >}}
+## Networking features for Mac and Linux
 
 ### SSH agent forwarding
 
@@ -101,9 +100,6 @@ services:
     environment:
       - SSH_AUTH_SOCK=/run/host-services/ssh-auth.sock
  ```
-
-{{< /tab >}}
-{{< /tabs >}}
 
 ## Known limitations
 

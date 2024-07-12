@@ -70,7 +70,7 @@ when the tests succeed.
 
 9. For each branch or tag, enable or disable the **Build Caching** toggle.
 
-    [Build caching](../../develop/develop-images/dockerfile_best-practices.md#leverage-build-cache)
+    [Build caching](../../build/building/best-practices.md#leverage-build-cache)
     can save time if you are building a large image frequently or have
     many dependencies. Leave the build caching disabled to
     make sure all of your dependencies are resolved at build time, or if

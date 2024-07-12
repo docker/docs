@@ -1,12 +1,61 @@
 ---
 title: Build release notes
-description: Release notes for Buildx
+description: Learn about the new features, bug fixes, and breaking changes for the newest Buildx release
 keywords: build, buildx, buildkit, release notes
+tags: [Release notes]
 toc_max: 2
 ---
 
 This page contains information about the new features, improvements, and bug
 fixes in [Docker Buildx](https://github.com/docker/buildx).
+
+## 0.14.0
+
+{{< release-date date="2024-04-18" >}}
+
+The full release note for this release is available
+[on GitHub](https://github.com/docker/buildx/releases/tag/v0.14.0).
+
+### Enhancements
+
+- Add support for `--print=lint` (experimental).
+  [docker/buildx#2404](https://github.com/docker/buildx/pull/2404),
+  [docker/buildx#2406](https://github.com/docker/buildx/pull/2406)
+- Fix JSON formatting for custom implementations of print sub-requests in frontends.
+  [docker/buildx#2374](https://github.com/docker/buildx/pull/2374)
+- Provenance records are now set when building with `--metadata-file`.
+  [docker/buildx#2280](https://github.com/docker/buildx/pull/2280)
+- Add [Git authentication support](./bake/remote-definition.md#remote-definition-in-a-private-repository) for remote definitions.
+  [docker/buildx#2363](https://github.com/docker/buildx/pull/2363)
+- New `default-load` driver option for the `docker-container`, `remote`, and `kubernetes` drivers to load build results to the Docker Engine image store by default.
+  [docker/buildx#2259](https://github.com/docker/buildx/pull/2259)
+- Add `requests.ephemeral-storage`, `limits.ephemeral-storage` and `schedulername` options to the [`kubernetes` driver](./drivers/kubernetes.md).
+  [docker/buildx#2370](https://github.com/docker/buildx/pull/2370),
+  [docker/buildx#2415](https://github.com/docker/buildx/pull/2415)
+- Add `indexof` function for `docker-bake.hcl` files.
+  [docker/buildx#2384](https://github.com/docker/buildx/pull/2384)
+- OpenTelemetry metrics for Buildx now measure durations of idle time, image exports, run operations, and image transfers for image source operations during build.
+  [docker/buildx#2316](https://github.com/docker/buildx/pull/2316),
+  [docker/buildx#2317](https://github.com/docker/buildx/pull/2317),
+  [docker/buildx#2323](https://github.com/docker/buildx/pull/2323),
+  [docker/buildx#2271](https://github.com/docker/buildx/pull/2271)
+- Build progress metrics to the OpenTelemetry endpoint associated with the `desktop-linux` context no longer requires Buildx in experimental mode (`BUILDX_EXPERIMENTAL=1`).
+  [docker/buildx#2344](https://github.com/docker/buildx/pull/2344)
+
+### Bug fixes
+
+- Fix `--load` and `--push` incorrectly overriding outputs when used with multiple Bake file definitions.
+  [docker/buildx#2336](https://github.com/docker/buildx/pull/2336)
+- Fix build from stdin with experimental mode enabled.
+  [docker/buildx#2394](https://github.com/docker/buildx/pull/2394)
+- Fix an issue where delegated traces could be duplicated.
+  [docker/buildx#2362](https://github.com/docker/buildx/pull/2362)
+
+### Packaging updates
+
+- Compose support has been updated to [v2.26.1](https://github.com/docker/compose/releases/tag/v2.26.1)
+  (via [`compose-go` v2.0.2](https://github.com/compose-spec/compose-go/releases/tag/v2.0.2)).
+  [docker/buildx#2391](https://github.com/docker/buildx/pull/2391)
 
 ## 0.13.1
 
@@ -366,7 +415,7 @@ The full release note for this release is available
   for initializing the context with a value of a local OCI layout directory.
   E.g. `--build-context stagename=oci-layout://path/to/dir`. This feature
   requires BuildKit v0.11.0+ and Dockerfile 1.5.0+. [docker/buildx#1456](https://github.com/docker/buildx/issues/1456)
-- Bake now supports [resource interpolation](bake/configuring-build.md#resource-interpolation)
+- Bake now supports [resource interpolation](bake/inheritance.md#reusing-single-attribute-from-targets)
   where you can reuse the values from other target definitions. [docker/buildx#1434](https://github.com/docker/buildx/issues/1434)
 - Buildx will now automatically forward `SOURCE_DATE_EPOCH` environment variable
   if it is defined in your environment. This feature is meant to be used with
@@ -556,7 +605,7 @@ For more details, see the complete release notes in the [Buildx GitHub repositor
 
 - Build command now accepts `--build-context` flag to [define additional named build contexts](/reference/cli/docker/buildx/build/#build-context)
   for your builds. [docker/buildx#904](https://github.com/docker/buildx/issues/904)
-- Bake definitions now support [defining dependencies between targets](bake/build-contexts.md)
+- Bake definitions now support [defining dependencies between targets](bake/contexts.md)
   and using the result of one target in another build.
   [docker/buildx#928](https://github.com/docker/buildx/issues/928),
   [docker/buildx#965](https://github.com/docker/buildx/issues/965),

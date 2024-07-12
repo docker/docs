@@ -48,10 +48,12 @@ organization after you've created it.
 displays the company name on your organization page and in the details of any
 public images you publish. You can update the company name anytime by navigating
 to your organization's **Settings** page.
-6. Select **Purchase** to continue to the billing portal.
-7. In the billing portal, select **Qty** to update the number of seats you require, then select **Update**.
-8. (Optional) Select annual or monthly billing cycle.
-9. Follow the on-screen instructions to pay for your subscription.
+6. Select **Purchase** to continue.
+7. Enter the billing information for your organization.
+8. Select **Submit** to continue to the billing portal.
+9. In the billing portal, select **Qty** to update the number of seats you require, then select **Update**.
+10. (Optional) Select annual or monthly billing cycle.
+11. Follow the on-screen instructions to pay for your subscription.
 
 You've now created an organization.
 
@@ -104,12 +106,21 @@ configure your organization.
 - **Billing**: Displays information about your existing
 [Docker subscription (plan)](../../subscription/_index.md), including the number of seats and next payment due date. For how to access the billing history and payment methods for your organization, see [View billing history](../../billing/core-billing/history.md).
 
-## Videos
+## Merge organizations
 
-You can also check out the following videos for information about creating Teams
-and Organizations in Docker Hub.
+If you have multiple organizations that you want to merge into one, complete the following:
 
-- [Overview of organizations](https://www.youtube-nocookie.com/embed/G7lvSnAqed8)
-- [Create an organization](https://www.youtube-nocookie.com/embed/b0TKcIqa9Po)
-- [Working with Teams](https://www.youtube-nocookie.com/embed/MROKmtmWCVI)
-- [Create Teams](https://www.youtube-nocookie.com/embed/78wbbBoasIc)
+1. Based on the number of seats from the secondary organization, [purchase additional seats](../../subscription/core-subscription/add-seats.md) for the primary organization account that you want to keep.
+2. Manually add users to the primary organization and remove existing users from the secondary organization.
+3. Manually move over your data, including all repositories.
+4. Once you're done moving all of your users and data, [downgrade](../../subscription/core-subscription/downgrade.md) the secondary account to a free subscription.
+
+> **Tip**
+>
+> If your organization has a Docker Core Business subscription with a purchase order, contact Support or your Account Manager at Docker.
+>
+{ .tip }
+
+## More resources
+
+- [Video: Docker Hub Organizations](https://www.youtube.com/watch?v=WKlT1O-4Du8)

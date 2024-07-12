@@ -50,8 +50,15 @@ You can do this from Docker Hub, the Docker Scout Dashboard, and CLI.
 
 1. Sign in to your Docker account with the `docker login` command or use the
    **Sign in** button in Docker Desktop.
-2. Use the Docker CLI [`docker scout repo enable`](/reference/cli/docker/scout/repo/enable)
-   command to enable analysis on an existing repository:
+
+2. Next, enroll your organization with Docker Scout, using the `docker scout enroll` command.
+
+   ```console
+   $ docker scout enroll <ORG_NAME>
+       ✓ Successfully enrolled organization <ORG_NAME> with Docker Scout Free
+   ```
+
+3. Enable Docker Scout for your image repository with the `docker scout repo enable` command.
 
    ```console
    $ docker scout repo enable --org <ORG_NAME> <ORG_NAME>/scout-demo
@@ -267,7 +274,7 @@ to policy customization, and runtime environment monitoring in real-time.
 
 Check out the following sections:
 
-- [Image analysis](./image-analysis.md)
+- [Image analysis](/scout/explore/analysis.md)
 - [Data sources](/scout/advisory-db-sources)
 - [Docker Scout Dashboard](/scout/dashboard)
 - [Integrations](./integrations/_index.md)

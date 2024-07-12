@@ -2,6 +2,11 @@
 title: What is a container?
 keywords: concepts, build, images, container, docker desktop
 description: What is a container? This concept page will teach you about containers and provide a quick hands-on where you will run your first container.
+aliases:
+- /guides/walkthroughs/what-is-a-container/
+- /guides/walkthroughs/run-a-container/
+- /guides/walkthroughs/
+- /get-started/run-your-own-container/
 ---
 
 {{< youtube-embed W1kWqFkiu7k >}}
@@ -36,7 +41,7 @@ A container is simply an isolated process with all of the files it needs to run.
 > Quite often, you will see containers and VMs used together. As an example, in a cloud environment, the provisioned machines are typically VMs. However, instead of provisioning one machine to run one application, a VM with a container runtime can run multiple containerized applications, increasing resource utilization and reducing costs.
 
 
-## Try it now
+## Try it out
 
 In this hands-on, you will see how to run a Docker container using the Docker Desktop GUI.
 

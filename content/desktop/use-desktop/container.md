@@ -77,7 +77,7 @@ The integrated terminal:
 
 To open the integrated terminal, either:
 
-- Hover over your running container and select the **Show container actions**
+- Hover over your running container and under the **Actions** column, select the **Show container actions**
   menu. From the drop-down menu, select **Open in terminal**.
 - Or, select the container and then select the **Exec** tab.
 
@@ -86,10 +86,9 @@ and select the **System default** option under **Choose your terminal**.
 
 #### Open the integrated terminal in debug mode
 
-> **Beta**
+> **Beta feature**
 >
-> The debug mode feature is in [Beta](../../release-lifecycle.md/#beta). Docker
-> recommends that you don't use this feature in production environments.
+> The debug mode feature is currently in [Beta](../../release-lifecycle.md/#beta).
 { .experimental }
 
 Debug mode requires a [Pro, Team, or Business subcription](/subscription/details/). Debug mode has several advantages, such as:
@@ -105,7 +104,7 @@ To open the integrated terminal in debug mode:
    subscription.
 2. After you're signed in, either:
 
-   - Hover over your running container and select the **Show container actions**
+   - Hover over your running container and under the **Actions** column, select the **Show container actions**
      menu. From the drop-down menu, select **Use Docker Debug**.
    - Or, select the container and then select the **Debug** tab. If the
      **Debug** tab isn't visible, select the **Exec** tab and then enable the
@@ -127,6 +126,6 @@ can also:
 - Download files and folders from the container straight to the host
 
 ## Additional resources
-- [What is a container](../../guides/walkthroughs/what-is-a-container.md)
-- [Run a container](../../guides/walkthroughs/run-a-container.md)
-- [Run multi-container applications](../../guides/walkthroughs/multi-container-apps.md)
+
+- [What is a container](../../guides/docker-concepts/the-basics/what-is-a-container.md)
+- [Run multi-container applications](../../guides/docker-concepts/running-containers/multi-container-applications.md)

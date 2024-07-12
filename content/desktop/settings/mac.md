@@ -75,6 +75,15 @@ If you choose the integrated terminal, you can run commands in a running contain
 
 - **Enable background SBOM indexing**. When this option is enabled, Docker Scout automatically analyzes images that you build or pull.
 
+- **Automatically check configuration**. Regularly checks your configuration to ensure no unexpected changes have been made by another application.
+
+  Docker Desktop checks if your setup, configured during installation, has been altered by external apps like Orbstack. Docker Desktop checks:
+    - The symlinks of Docker binaries to `/usr/local/bin`.
+    - The symlink of the default Docker socket. 
+  Additionally, Docker Desktop ensures that the context is switched to `desktop-linux` on startup.
+  
+  You are notified if changes are found and are able to restore the configuration directly from the notification.
+
 ## Resources
 
 The **Resources** tab allows you to configure CPU, memory, disk, proxies,
@@ -174,6 +183,8 @@ File share settings are:
 
 ### Proxies
 
+Docker Desktop on Mac supports the use of HTTP/HTTPS and [SOCKS5 proxies](../networking.md#socks5-proxy-support).
+
 HTTP/HTTPS proxies can be used when:
 
 - Signing in to Docker
@@ -182,7 +193,7 @@ HTTP/HTTPS proxies can be used when:
 - Containers interact with the external network
 - Scanning images
 
-If the host uses a HTTP/HTTPS proxy configuration (static or via Proxy Auto-Configuration), Docker Desktop reads
+If the host uses a HTTP/HTTPS proxy configuration (static or via Proxy Auto-Configuration (PAC)), Docker Desktop reads
 this configuration
 and automatically uses these settings for signing in to Docker, for pulling and pushing images, and for
 container Internet access. If the proxy requires authorization then Docker Desktop dynamically asks
@@ -198,6 +209,10 @@ To prevent developers from accidentally changing the proxy settings, see
 [Settings Management](../hardened-desktop/settings-management/index.md#what-features-can-i-configure-with-settings-management).
 
 The HTTPS proxy settings used for scanning images are set using the `HTTPS_PROXY` environment variable.
+
+> **Note**
+>
+> If you are using a PAC file hosted on a web server, make sure to add the MIME type `application/x-ns-proxy-autoconfig` for the `.pac` file extension on the server or website. Without this configuration, the PAC file may not be parsed correctly.
 
 ### Network
 
@@ -316,13 +331,6 @@ On the **Advanced** tab, you can reconfigure your initial installation settings:
 
   For more information on each configuration and use case, see [Permission requirements](../mac/permission-requirements.md).
 
-- **Automatically check configuration**. Regularly checks your configuration to ensure no unexpected changes have been made by another application.
 
-  Docker Desktop checks if your setup, configured during installation, has been altered by external apps like Orbstack. Docker Desktop checks:
-    - The symlinks of Docker binaries to `/usr/local/bin`.
-    - The symlink of the default Docker socket. 
-  Additionally, Docker Desktop ensures that the context is switched to `desktop-linux` on startup.
-  
-  You are notified if changes are found and are able to restore the configuration directly from the notification.
 
 

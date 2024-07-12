@@ -8,7 +8,7 @@ title: Overview of Dev Environments
 
 > **Beta**
 >
-> The Dev Environments feature is currently in [Beta](../../release-lifecycle.md#beta). We recommend that you do not use this in production environments.
+> The Dev Environments feature is currently in [Beta](../../release-lifecycle.md#beta). 
 { .experimental }
 
 Dev Environments let you create a configurable developer environment with all the code and tools you need to quickly get up and running. 
@@ -16,6 +16,15 @@ Dev Environments let you create a configurable developer environment with all th
 It uses tools built into code editors that allows Docker to access code mounted into a container rather than on your local host. This isolates the tools, files and running services on your machine allowing multiple versions of them to exist side by side.
 
 You can use Dev Environments through the intuitive GUI in Docker Dashboard or straight from your terminal with the new [`docker dev` CLI plugin](dev-cli.md).
+
+## Use Dev Environments
+
+To use Dev Environments: 
+1. Navigate to the **Features in Development** tab in **Settings**. 
+2. On the **Beta** tab, select **Turn on Dev Environments**. 
+3. Select **Apply & restart**. 
+
+The Dev Environments tab is now visible in Docker Dashboard. 
 
 ## How does it work?
 

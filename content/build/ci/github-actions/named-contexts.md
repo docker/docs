@@ -26,21 +26,17 @@ name: ci
 
 on:
   push:
-    branches:
-      - "main"
 
 jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
+      
       - name: Build
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
-          context: .
           build-contexts: |
             alpine=docker-image://alpine:{{% param "example_alpine_version" %}}
           tags: myimage:latest
@@ -65,30 +61,26 @@ name: ci
 
 on:
   push:
-    branches:
-      - "main"
 
 jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
         with:
           driver: docker
+      
       - name: Build base image
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
-          context: ./base
-          file: ./base/Dockerfile
+          context: "{{defaultContext}}:base"
           load: true
           tags: my-base-image:latest
+      
       - name: Build
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
-          context: .
           build-contexts: |
             alpine=docker-image://my-base-image:latest
           tags: myimage:latest
@@ -113,8 +105,6 @@ name: ci
 
 on:
   push:
-    branches:
-      - "main"
 
 jobs:
   docker:
@@ -125,26 +115,25 @@ jobs:
         ports:
           - 5000:5000
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
+      
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
         with:
           # network=host driver-opt needed to push to local registry
           driver-opts: network=host
+      
       - name: Build base image
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
-          context: ./base
-          file: ./base/Dockerfile
+          context: "{{defaultContext}}:base"
           tags: localhost:5000/my-base-image:latest
           push: true
+      
       - name: Build
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
-          context: .
           build-contexts: |
             alpine=docker-image://localhost:5000/my-base-image:latest
           tags: myimage:latest

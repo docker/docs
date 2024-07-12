@@ -1,13 +1,13 @@
 {{ $product_link := "[Docker Hub](https://hub.docker.com)" }}
 {{ $domain_navigation := "Select **Organizations**, your organization, **Settings**, and then **Security**." }}
 {{ $sso_link := "[SSO](/security/for-admins/single-sign-on/)" }}
-{{ $scim_link := "[SCIM](/security/for-admins/scim/)" }}
+{{ $scim_link := "[SCIM](/security/for-admins/provisioning/scim/)" }}
 
 {{ if eq (.Get "product") "admin" }}
   {{ $product_link = "the [Admin Console](https://admin.docker.com)" }}
   {{ $domain_navigation = "Select your organization in the left navigation drop-down menu, and then select **Domain management**." }}
   {{ $sso_link = "[SSO](/security/for-admins/single-sign-on/)" }}
-  {{ $scim_link = "[SCIM](/security/for-admins/scim/)" }}
+  {{ $scim_link = "[SCIM](/security/for-admins/provisioning/scim/)" }}
 {{ end }}
 
 To audit your domains:

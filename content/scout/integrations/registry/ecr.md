@@ -26,7 +26,7 @@ After the integration, Docker Scout automatically pulls and analyzes images
 that you push to the ECR registry. Metadata about your images are stored on the
 Docker Scout platform, but Docker Scout doesn't store the container images
 themselves. For more information about how Docker Scout handles image data, see
-[Data handling](../../data-handling.md).
+[Data handling](/scout/deep-dive/data-handling.md).
 
 ### CloudFormation stack template
 

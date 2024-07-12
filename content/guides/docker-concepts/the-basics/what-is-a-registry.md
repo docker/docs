@@ -2,6 +2,9 @@
 title: What is a registry?
 keywords: concepts, build, images, container, docker desktop
 description: What is a registry? This Docker Concept will explain what a registry is, explore their interoperability, and have you interact with registries.
+aliases:
+- /guides/walkthroughs/run-hub-images/
+- /guides/walkthroughs/publish-your-image/
 ---
 
 {{< youtube-embed 2WDl10Wv5rs >}}
@@ -18,15 +21,40 @@ While Docker Hub is a popular option, there are many other available container r
 
 ### Registry vs. repository
 
-While you're working with registries, you might hear the terms **registry** and **repository** as if they're interchangeable. Even though they're related, they're not quite the same thing.
+While you're working with registries, you might hear the terms _registry_ and _repository_ as if they're interchangeable. Even though they're related, they're not quite the same thing.
 
 A _registry_ is a centralized location that stores and manages container images, whereas a _repository_ is a collection of related container images within a registry. Think of it as a folder where you organize your images based on projects. Each repository contains one or more container images.
+
+The following diagram shows the relationship between a registry, repositories, and images.
+
+```goat {class="text-sm"}
++---------------------------------------+
+|               Registry                |
+|---------------------------------------|
+|                                       |
+|    +-----------------------------+    |
+|    |        Repository A         |    |
+|    |-----------------------------|    |
+|    |   Image: project-a:v1.0     |    |
+|    |   Image: project-a:v2.0     |    |
+|    +-----------------------------+    |
+|                                       |
+|    +-----------------------------+    |
+|    |        Repository B         |    |
+|    |-----------------------------|    |
+|    |   Image: project-b:v1.0     |    |
+|    |   Image: project-b:v1.1     |    |
+|    |   Image: project-b:v2.0     |    |
+|    +-----------------------------+    |
+|                                       |
++---------------------------------------+
+```
 
 >**Note**
 >
 > You can create one private repository and unlimited public repositories using the free version of Docker Hub. For more information, visit the [Docker Hub subscription page](https://www.docker.com/pricing/).
 
-## Try it now
+## Try it out
 
 In this hands-on, you will learn how to build and push a Docker image to the Docker Hub repository.
 
@@ -116,7 +144,7 @@ Don't worry about the specifics of the Dockerfile, as you'll learn about that in
 7. Finally, it's time to push the newly built image to your Docker Hub repository by using the [`docker push`](/reference/cli/docker/image/push/) command:
 
     ```console 
-    docker push -u <YOUR_DOCKER_USERNAME>/docker-quickstart:1.0
+    docker push <YOUR_DOCKER_USERNAME>/docker-quickstart:1.0
     ```
 
 8. Open [Docker Hub](https://hub.docker.com) and navigate to your repository. Navigate to the **Tags** section and see your newly pushed image.

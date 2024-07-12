@@ -19,13 +19,11 @@ with [build-push-action] and [bake-action].
 {{< tabs >}}
 {{< tab name="build-push-action" >}}
 
-```yaml {hl_lines=37}
+```yaml {hl_lines=32}
 name: ci
 
 on:
   push:
-    branches:
-      - "main"
 
 env:
   IMAGE_NAME: user/app
@@ -34,26 +32,23 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Extract metadata
         id: meta
-        uses: docker/metadata-action@v4
+        uses: docker/metadata-action@v5
         with:
           images: ${{ env.IMAGE_NAME }}
 
       - name: Build and push
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           tags: ${{ steps.meta.outputs.tags }}
           annotations: ${{ steps.meta.outputs.annotations }}
@@ -63,13 +58,11 @@ jobs:
 {{< /tab >}}
 {{< tab name="bake-action" >}}
 
-```yaml {hl_lines=39}
+```yaml {hl_lines=37}
 name: ci
 
 on:
   push:
-    branches:
-      - "main"
 
 env:
   IMAGE_NAME: user/app
@@ -87,17 +80,17 @@ jobs:
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Extract metadata
         id: meta
-        uses: docker/metadata-action@v4
+        uses: docker/metadata-action@v5
         with:
           images: ${{ env.IMAGE_NAME }}
 
       - name: Build
-        uses: docker/bake-action@v3
+        uses: docker/bake-action@v5
         with:
           files: |
             ./docker-bake.hcl
@@ -121,13 +114,11 @@ want to annotate. For example, setting `DOCKER_METADATA_ANNOTATIONS_LEVELS` to
 The following example creates annotations on both the image index and
 manifests.
 
-```yaml {hl_lines=33}
+```yaml {hl_lines=28}
 name: ci
 
 on:
   push:
-    branches:
-      - "main"
 
 env:
   IMAGE_NAME: user/app
@@ -136,28 +127,25 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Extract metadata
         id: meta
-        uses: docker/metadata-action@v4
+        uses: docker/metadata-action@v5
         with:
           images: ${{ env.IMAGE_NAME }}
         env:
           DOCKER_METADATA_ANNOTATIONS_LEVELS: manifest,index
 
       - name: Build and push
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           tags: ${{ steps.meta.outputs.tags }}
           annotations: ${{ steps.meta.outputs.annotations }}

@@ -2,6 +2,7 @@
 description: FAQs on Docker subscriptions
 keywords: Docker, Docker Hub, subscription FAQs, subscription, platform
 title: Subscription FAQs
+tags: [FAQ]
 ---
 
 For more information on Docker subscriptions, see [Docker subscription overview](_index.md).

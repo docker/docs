@@ -1,6 +1,6 @@
 ---
 title: Manuals
-description: Explore the Docker product user manuals
+description: Learn how to install, set up, configure, and use Docker products with this collection of user guides
 keywords: docker, docs, manuals, products, user guides, how-to
 notoc: true
 skip_read_time: true
@@ -38,6 +38,10 @@ services:
   description: Curated, high-quality content from trusted sources.
   icon: verified
   link: /trusted-content/
+- title: Build Cloud
+  description: Build your images faster in the cloud.
+  icon: /assets/images/logo-build-cloud.svg
+  link: /build-cloud/
 admin:
 - title: Administration
   description: Centralized observability for companies and organizations.

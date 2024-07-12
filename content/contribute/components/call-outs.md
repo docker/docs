@@ -16,7 +16,7 @@ We support these broad categories of callouts:
 
 ## Examples
 
-{{< introduced buildx 0.10.4 "../../release-notes.md#0104" >}}
+{{< introduced buildx 0.10.4 >}}
 
 > **Note**
 >

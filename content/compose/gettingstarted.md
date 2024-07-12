@@ -5,7 +5,7 @@ keywords: docker compose example, docker compose tutorial, how to use docker com
   running docker compose, how to run docker compose, docker compose build image, docker
   compose command example, run docker compose file, how to create a docker compose
   file, run a docker compose file
-title: Try Docker Compose
+title: Docker Compose Quickstart
 ---
 
 This tutorial aims to introduce fundamental concepts of Docker Compose by guiding you through the development of a basic Python web application. 
@@ -117,7 +117,7 @@ Make sure you have:
    >Check that the `Dockerfile` has no file extension like `.txt`. Some editors may append this file extension automatically which results in an error when you run the application.
    { .important }
 
-   For more information on how to write Dockerfiles, see the [Docker user guide](../develop/index.md) and the [Dockerfile reference](/reference/dockerfile/).
+   For more information on how to write Dockerfiles, see the [Dockerfile reference](/reference/dockerfile/).
 
 ## Step 2: Define services in a Compose file
 

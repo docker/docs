@@ -3,8 +3,13 @@ short: Create a new image based on source images
 long: |-
     Create a new manifest list based on source manifests. The source manifests can
     be manifest lists or single platform distribution manifests and must already
-    exist in the registry where the new manifest is created. If only one source is
-    specified, create performs a carbon copy.
+    exist in the registry where the new manifest is created.
+
+    If only one source is specified and that source is a manifest list or image index,
+    create performs a carbon copy. If one source is specified and that source is *not*
+    a list or index, the output will be a manifest list, however you can disable this
+    behavior with `--prefer-index=false` which attempts to preserve the source manifest
+    format in the output.
 usage: docker buildx imagetools create [OPTIONS] [SOURCE] [SOURCE...]
 pname: docker buildx imagetools
 plink: docker_buildx_imagetools.yaml
@@ -54,11 +59,22 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: prefer-index
+      value_type: bool
+      default_value: "true"
+      description: |
+        When only a single source is specified, prefer outputting an image index or manifest list instead of performing a carbon copy
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: progress
       value_type: string
       default_value: auto
       description: |
-        Set type of progress output (`auto`, `plain`, `tty`). Use plain to show container output
+        Set type of progress output (`auto`, `plain`, `tty`, `rawjson`). Use plain to show container output
       deprecated: false
       hidden: false
       experimental: false

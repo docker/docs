@@ -3,6 +3,7 @@ title: Best practices for working with environment variables in Docker Compose
 description: Explainer on the best ways to set, use, and manage environment variables in
   Compose
 keywords: compose, orchestration, environment, env file, environment variables
+tags: [Best practices]
 ---
 
 #### Handle sensitive information securely
@@ -19,7 +20,7 @@ Consider how your application adapts to different environments. For example deve
 
 #### Know interpolation
    
-Understand how [interpolation](env-file.md#interpolation) works within compose files for dynamic configurations.
+Understand how [interpolation](variable-interpolation.md) works within compose files for dynamic configurations.
 
 #### Command line overrides
     

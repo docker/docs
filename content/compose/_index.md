@@ -18,7 +18,7 @@ grid:
   description: Follow the instructions on how to install Docker Compose.
   icon: download
   link: /compose/install
-- title: Try Compose
+- title: Quickstart
   description: Learn the key concepts of Docker Compose whilst building a simple Python
     web application.
   icon: explore
@@ -47,8 +47,6 @@ aliases:
 - /compose/swarm/
 - /compose/completion/
 ---
-
-{{< include "compose-eol.md" >}}
 
 Docker Compose is a tool for defining and running multi-container applications. 
 It is the key to unlocking a streamlined and efficient development and deployment experience. 
