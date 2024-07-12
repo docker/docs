@@ -22,7 +22,7 @@ Yes. You must verify a domain before using it with an SSO connection.
 
 ### Does Docker SSO support authenticating through the command line?
 
-When SSO is enforced, [passwords will be prevented from accessing the Docker CLI](/security/security-announcements/#deprecation-of-password-logins-on-cli-when-sso-enforced). You can still access the Docker CLI using a personal access token (PAT) for authentication.
+When SSO is enforced, [passwords are prevented from accessing the Docker CLI](/security/security-announcements/#deprecation-of-password-logins-on-cli-when-sso-enforced). You can still access the Docker CLI using a personal access token (PAT) for authentication.
 
 Each user must create a PAT to access the CLI. To learn how to create a PAT, see [Manage access tokens](/security/for-developers/access-tokens/). Users who already used a PAT to sign in before SSO enforcement will still be able to use that PAT to authenticate.
 
@@ -40,7 +40,7 @@ Yes, you can choose to not enforce, and users have the option to use either Dock
 
 ### SSO is enforced, but one of our users is able to sign in through username and password. Why is this happening?
 
-Guest users who are not part of your registered domain but have been invited to your organization do not sign-in through your SSO Identity Provider. SSO Enforcement only requires that users which _do_ belong to your domain must go through the SSO IdP.
+Guest users who are not part of your registered domain but have been invited to your organization do not sign in through your SSO Identity Provider. SSO enforcement only requires that users which do belong to your domain, must go through the SSO IdP.
 
 ### Is there a way to test this functionality in a test tenant with Okta before going to production?
 
