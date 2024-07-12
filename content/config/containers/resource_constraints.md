@@ -3,7 +3,6 @@ title: Runtime options with Memory, CPUs, and GPUs
 description: Specify the runtime options for a container
 keywords: docker, daemon, configuration, runtime
 aliases:
-  - /engine/articles/systemd/
   - /engine/admin/resource_constraints/
 ---
 
@@ -24,7 +23,7 @@ WARNING: No swap limit support
 ```
 
 Consult your operating system's documentation for enabling them. See also the
-[Docker Engine troubleshooting guide](../../engine/install/troubleshoot.md#kernel-cgroup-swap-limit-capabilities)
+[Docker Engine troubleshooting guide](../daemon/troubleshoot.md#kernel-cgroup-swap-limit-capabilities)
 for more information.
 
 ## Memory
@@ -234,7 +233,9 @@ for real-time tasks per runtime period. For instance, with the default period of
 containers using the real-time scheduler can run for 950000 microseconds for every
 1000000-microsecond period, leaving at least 50000 microseconds available for
 non-real-time tasks. To make this configuration permanent on systems which use
-`systemd`, see [Control and configure Docker with systemd](../daemon/systemd.md).
+`systemd`, create a systemd unit file for the `docker` service. For an example,
+see the instruction on how to configure the daemon to use a proxy with a
+[systemd unit file](../daemon/proxy.md#systemd-unit-file).
 
 #### Configure individual containers
 

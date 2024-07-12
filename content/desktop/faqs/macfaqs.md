@@ -86,7 +86,7 @@ $ docker system prune
 
 This command removes all stopped containers, unused networks, dangling images, and build cache.
 
-It might take a few minutes to reclaim space on the host depending on the format of the disk image file. If the file is name:
+It might take a few minutes to reclaim space on the host depending on the format of the disk image file. If the file is named:
 
 - `Docker.raw`, space on the host is reclaimed within a few seconds.
 - `Docker.qcow2`, space is freed by a background process after a few minutes.

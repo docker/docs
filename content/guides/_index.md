@@ -7,11 +7,11 @@ notoc: true
 get-started:
 - title: Docker overview
   description: Learn about the Docker platform.
-  link: /get-started/overview/
+  link: /guides/docker-overview/
   icon: summarize
 - title: Get started
   description: Get started with the basics and the benefits of containerizing your applications.
-  link: /get-started/
+  link: /guides/getting-started/
   icon: rocket
 - title: Docker concepts
   description: Gain a better understanding of foundational Docker concepts.
@@ -27,23 +27,23 @@ dive-deeper:
   description: Walk through practical Docker applications for specific scenarios.
   link: /guides/use-case/
   icon: task
-- title: Develop with Docker
-  description: Master Docker best practices for efficient, secure development.
-  link: /develop/
-  icon: rule
 - title: Build with Docker
   description: Deep-dive into building software with Docker.
   link: /build/guide/
   icon: build
 - title: Deployment and Orchestration
   description: Deploy and manage Docker containers at scale.
-  link: /get-started/orchestration/
+  link: /guides/deployment-orchestration/orchestration/
   icon: workspaces
+- title: Docker workshop
+  description: Get guided through a 45-minute workshop to learn about Docker.
+  link: /guides/workshop/
+  icon: desk
 
 resources:
 - title: Educational resources
   description: Explore diverse Docker training and hands-on experiences.
-  link: /get-started/resources/
+  link: /guides/resources/
   icon: book
 - title: Contribute to Docker's docs
   description: Learn how to help contribute to Docker docs.

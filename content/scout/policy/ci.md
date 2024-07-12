@@ -94,9 +94,6 @@ jobs:
 
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
       - name: Setup Docker buildx
         uses: docker/setup-buildx-action@v3
 
@@ -117,7 +114,6 @@ jobs:
         id: build-and-push
         uses: docker/build-push-action@v4
         with:
-          context: .
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           sbom: ${{ github.event_name != 'pull_request' }}

@@ -20,7 +20,7 @@ Consider how your application adapts to different environments. For example deve
 
 #### Know interpolation
    
-Understand how [interpolation](env-file.md#interpolation) works within compose files for dynamic configurations.
+Understand how [interpolation](variable-interpolation.md) works within compose files for dynamic configurations.
 
 #### Command line overrides
     

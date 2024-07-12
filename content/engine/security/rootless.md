@@ -127,19 +127,10 @@ testuser:231072:65536
 
 - Known to work on openSUSE 15 and SLES 15.
 {{< /tab >}}
-{{< tab name="CentOS 8, RHEL 8, and Fedora" >}}
+{{< tab name="CentOS, RHEL, and Fedora" >}}
 - Installing `fuse-overlayfs` is recommended. Run `sudo dnf install -y fuse-overlayfs`.
 
 - You might need `sudo dnf install -y iptables`.
-
-- Known to work on CentOS 8, RHEL 8, and Fedora 34.
-{{< /tab >}}
-{{< tab name="CentOS 7 and RHEL 7" >}}
-- Add `user.max_user_namespaces=28633` to `/etc/sysctl.conf` (or 
-  `/etc/sysctl.d`) and run `sudo sysctl --system`.
-
-- `systemctl --user` does not work by default. 
-  Run `dockerd-rootless.sh` directly without systemd.
 {{< /tab >}}
 {{< /tabs >}}
 

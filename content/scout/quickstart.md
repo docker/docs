@@ -274,7 +274,7 @@ to policy customization, and runtime environment monitoring in real-time.
 
 Check out the following sections:
 
-- [Image analysis](./image-analysis.md)
+- [Image analysis](/scout/explore/analysis.md)
 - [Data sources](/scout/advisory-db-sources)
 - [Docker Scout Dashboard](/scout/dashboard)
 - [Integrations](./integrations/_index.md)

@@ -6,6 +6,7 @@ aliases:
 - /guides/walkthroughs/what-is-a-container/
 - /guides/walkthroughs/run-a-container/
 - /guides/walkthroughs/
+- /get-started/run-your-own-container/
 ---
 
 {{< youtube-embed W1kWqFkiu7k >}}

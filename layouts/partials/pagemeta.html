@@ -4,7 +4,7 @@
 {{- end }}
 {{- $tags := .GetTerms "tags" }}
 {{- if or $toc $tags }}
-  <div class="not-prose">
+  <div data-pagefind-ignore class="not-prose">
   {{- with $tags }}
     <div class="flex flex-col gap-2 my-2">
       <span class="text-lg">Tags</span>

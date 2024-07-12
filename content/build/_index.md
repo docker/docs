@@ -17,10 +17,6 @@ grid:
     architectures.
   icon: content_copy
   link: /build/building/multi-platform/
-- title: Build Cloud
-  description: Orchestrate your builds with Bake.
-  icon: /assets/images/logo-build-cloud.svg
-  link: /build/cloud/
 - title: Architecture
   description: Explore BuildKit, the open source build engine.
   icon: construction

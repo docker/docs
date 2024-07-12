@@ -105,6 +105,7 @@ options:
         - packages: default output, plain text with vulnerabilities grouped by packages
         - sarif: json Sarif output
         - spdx: json SPDX output
+        - gitlab: json GitLab output
         - markdown: markdown output (including some html tags like collapsible sections)
         - sbom: json SBOM output
       deprecated: false

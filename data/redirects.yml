@@ -604,24 +604,22 @@
   - /feedback/gha-build-summary/
 
 # Docker Scout
-"https://deploy-preview-19873--docsdocker.netlify.app/scout/dashboard/#notification-settings":
-  - /go/scout-notifications/
 "/scout/":
   - /go/scout/
   - /go/docker-scout/
 "/scout/quickstart/":
   - /go/scout-quickstart/
-"/scout/dashboard/":
+"/scout/explore/dashboard/":
   - /go/scout-dashboard/
-"/scout/ci/":
-  - /go/scout-ci/
 "/scout/policy/":
   - /go/scout-policy/
 "/scout/policy/configure/":
   - /go/scout-configure-policy/
-"/develop/develop-images/guidelines/#pin-base-image-versions":
+"/build/building/best-practices/#pin-base-image-versions":
   - /go/base-image-pinning/
 # integrations
+"/scout/integrations/ci/":
+  - /go/scout-ci/
 "/scout/integrations/ci/gha/":
   - "/go/scout-gha/"
 "/scout/integrations/ci/gitlab/":
@@ -648,8 +646,16 @@
   - "/go/scout-github/"
 "/scout/guides/vex/":
   - "/go/vex-guide/"
-"/scout/metrics-exporter/":
+"/scout/explore/metrics-exporter/":
   - "/go/scout-metrics-exporter"
+"/scout/explore/dashboard/#notification-settings":
+  - /go/scout-notifications/
+"/scout/integrations/team-collaboration/slack/":
+  - "/go/scout-slack/"
+"/scout/policy/scores/":
+  - /go/scout-scores/
+"/scout/explore/exceptions/":
+  - "/go/scout-exceptions/"
 
 # Build links (internal)
 "/build/bake/reference/":
@@ -682,6 +688,10 @@
   - /go/build-additional-context/
 "/config/labels-custom-metadata/":
   - /go/labels/
+"/build/ci/github-actions/build-summary/":
+  - /go/build-summary/
+"/desktop/use-desktop/builds/#import-builds":
+  - /go/builds-import/
 
 # Build links (external)
 "https://www.docker.com/build-early-access-program/?utm_campaign=onboard-30-customer-zero&utm_medium=in-product-ad&utm_source=desktop_v4":
@@ -691,14 +701,18 @@
 "https://www.docker.com/products/build-cloud/?utm_campaign=2024-02-02-dbc_cli&utm_medium=in-product-ad&utm_source=desktop_v4":
   - /go/docker-build-cloud/
 
+# Run Cloud links
+"/":
+  - /go/run-cloud-eap/
+
 # CLI backlinks
 "/config/filter/":
   - /go/filter/
 
 # Docker Init
-"/develop/develop-images/instructions/#user":
+"/build/building/best-practices/#user":
   - /go/dockerfile-user-best-practices/
-"/develop/develop-images/instructions/#apt-get":
+"/build/building/best-practices/#apt-get":
   - /go/dockerfile-aptget-best-practices/
 "/build/building/context/#dockerignore-files":
   - /go/build-context-dockerignore/
@@ -716,3 +730,10 @@
   - /go/debug-cli/
 "/desktop/use-desktop/container/#integrated-terminal":
   - /go/debug-gui/
+
+## Docker Desktop - volumes cloud backup
+"/desktop/use-desktop/volumes/#export-a-volume":
+  - /go/volume-export/
+  - /go/volume-export-aws/
+  - /go/volume-export-azure/
+  - /go/volume-export-gcs/

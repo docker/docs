@@ -41,16 +41,18 @@ through Docker Desktop. For instructions on how to install Docker Desktop, see:
 
 ## Supported platforms
 
-| Platform                                       | x86_64 / amd64    | arm64 / aarch64   | arm (32-bit)             | ppc64le         | s390x           |
-| :--------------------------------------------- | :---------------- | :---------------- | :----------------------- | :-------------- | :-------------- |
-| [CentOS](centos.md)                            | [✅](centos.md)   | [✅](centos.md)   |                          | [✅](centos.md) |                 |
-| [Debian](debian.md)                            | [✅](debian.md)   | [✅](debian.md)   | [✅](debian.md)          | [✅](debian.md) |                 |
-| [Fedora](fedora.md)                            | [✅](fedora.md)   | [✅](fedora.md)   |                          | [✅](fedora.md) |                 |
-| [Raspberry Pi OS (32-bit)](raspberry-pi-os.md) |                   |                   | [✅](raspberry-pi-os.md) |                 |                 |
-| [RHEL (s390x)](rhel.md)                        |                   |                   |                          |                 | [✅](rhel.md)   |
-| [SLES](sles.md)                                |                   |                   |                          |                 | [✅](sles.md)   |
-| [Ubuntu](ubuntu.md)                            | [✅](ubuntu.md)   | [✅](ubuntu.md)   | [✅](ubuntu.md)          | [✅](ubuntu.md) | [✅](ubuntu.md) |
-| [Binaries](binaries.md)                        | [✅](binaries.md) | [✅](binaries.md) | [✅](binaries.md)        |                 |                 |
+| Platform                                       | x86_64 / amd64 | arm64 / aarch64 | arm (32-bit) | ppc64le | s390x |
+| :--------------------------------------------- | :------------: | :-------------: | :----------: | :-----: | :---: |
+| [CentOS](centos.md)                            |       ✅       |       ✅        |              |   ✅    |       |
+| [Debian](debian.md)                            |       ✅       |       ✅        |      ✅      |   ✅    |       |
+| [Fedora](fedora.md)                            |       ✅       |       ✅        |              |   ✅    |       |
+| [Raspberry Pi OS (32-bit)](raspberry-pi-os.md) |                |                 |      ✅      |         |       |
+| [RHEL](rhel.md)                                |       🚧       |       🚧        |              |         |  ✅   |
+| [SLES](sles.md)                                |                |                 |              |         |  ✅   |
+| [Ubuntu](ubuntu.md)                            |       ✅       |       ✅        |      ✅      |   ✅    |  ✅   |
+| [Binaries](binaries.md)                        |       ✅       |       ✅        |      ✅      |         |       |
+
+🚧 = Experimental
 
 ### Other Linux distros
 
@@ -121,4 +123,4 @@ Security reports are greatly appreciated, and Docker will publicly thank you for
 ## Get started
 
 After setting up Docker, you can learn the basics with
-[Getting started with Docker](../../get-started/index.md).
+[Getting started with Docker](../../guides/getting-started/_index.md).

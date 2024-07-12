@@ -1,4 +1,4 @@
-A?GPLv3
+A?GPL(v3)?
 APIs?
 ARM
 AWS
@@ -21,6 +21,7 @@ Chrome
 Chrome DevTools
 CloudFront
 Codefresh
+Codespaces
 CouchDB
 Couchbase
 DHCP
@@ -29,6 +30,7 @@ DSOS
 DVP
 Datadog
 Ddosify
+Debootstrap
 Dev Environments?
 Django
 Docker
@@ -77,6 +79,7 @@ Mac
 Mail(chimp|gun)
 Microsoft
 MySQL
+NAT
 Nginx
 Nuxeo
 OAuth
@@ -109,11 +112,12 @@ Syft
 Sysdig
 TCP
 TLS
+TXT
 UDP
 URLs?
+UUID
 Ubuntu
 Unix
-UUID
 VLAN
 VM
 VMware

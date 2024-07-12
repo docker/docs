@@ -54,13 +54,13 @@ by the configured user, use the `COPY --chown` flag:
 
 ```dockerfile
 # Run as a non-privileged user
-FROM node:18-alpine
+FROM node:18
 RUN useradd -ms /bin/sh -u 1001 app
 USER app
 
 # Install dependencies
 WORKDIR /app
-COPY package.json package.lock .
+COPY package.json package-lock.json ./
 RUN npm install
 
 # Copy source files into application directory
@@ -110,7 +110,7 @@ For `path: ./app/html` and a change to `./app/html/index.html`:
 * `target: /app/static` -> `/app/static/index.html`
 * `target: /assets` -> `/assets/index.html`
 
-## Example
+## Example 1
 
 This minimal example targets a Node.js application with the following structure:
 ```text
@@ -152,6 +152,34 @@ Unlike source code files, adding a new dependency can’t be done on-the-fly, so
 rebuilds the image and recreates the `web` service container.
 
 This pattern can be followed for many languages and frameworks, such as Python with Flask: Python source files can be synced while a change to `requirements.txt` should trigger a rebuild.
+
+## Example 2 
+
+Adapting the previous example to demonstrate `sync+restart`:
+
+```yaml
+services:
+  web:
+    build: .
+    command: npm start
+    develop:
+      watch:
+        - action: sync
+          path: ./web
+          target: /app/web
+          ignore:
+            - node_modules/
+        - action: sync+restart
+          path: ./proxy/nginx.conf
+          target: /etc/nginx/conf.d/default.conf
+
+  backend:
+    build:
+      context: backend
+      target: builder
+```
+
+This setup demonstrates how to use the `sync+restart` action in Docker Compose to efficiently develop and test a Node.js application with a frontend web server and backend service. The configuration ensures that changes to the application code and configuration files are quickly synchronized and applied, with the `web` service restarting as needed to reflect the changes.
 
 ## Use `watch`
 

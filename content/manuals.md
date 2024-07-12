@@ -38,6 +38,10 @@ services:
   description: Curated, high-quality content from trusted sources.
   icon: verified
   link: /trusted-content/
+- title: Build Cloud
+  description: Build your images faster in the cloud.
+  icon: /assets/images/logo-build-cloud.svg
+  link: /build-cloud/
 admin:
 - title: Administration
   description: Centralized observability for companies and organizations.

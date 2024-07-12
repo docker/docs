@@ -51,6 +51,13 @@ Before you turn on the Docker Desktop WSL 2 feature, ensure you have:
 
 Now `docker` commands work from Windows using the new WSL 2 engine.
 
+>**Tip**
+>
+> By default, Docker Desktop stores the data for the WSL 2 engine at `C:\Users\[USERNAME]\AppData\Local\Docker\wsl`.
+> If you want to change the location, for example, to another drive you can do so via the `Settings -> Resources -> Advanced` page from the Docker Dashboard.
+> Read more about this and other Windows settings at [Changing Docker Desktop settings on Windows](../settings/windows.md)
+{ .tip }
+
 ## Enabling Docker support in WSL 2 distros
 
 WSL 2 adds support for "Linux distros" to Windows, where each distro behaves like a VM except they all run on top of a single shared Linux kernel.
@@ -89,6 +96,7 @@ Docker Desktop does not require any particular Linux distros to be installed. Th
 > **Note**
 >
 > Docker Desktop installs two special-purpose internal Linux distros `docker-desktop` and `docker-desktop-data`. The first (`docker-desktop`) is used to run the Docker engine (`dockerd`) while the second (`docker-desktop-data`) stores containers and images. Neither can be used for general development.
+
 
 ## Additional resources
 

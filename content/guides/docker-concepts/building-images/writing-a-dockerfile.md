@@ -142,7 +142,7 @@ To learn more about writing a Dockerfile, visit the following resources:
 
 * [Dockerfile reference](/reference/dockerfile/)
 * [Dockerfile best practices](/develop/develop-images/dockerfile_best-practices/)
-* [Create your own base image](/build/building/base-images/)
+* [Base images](/build/building/base-images/)
 * [Getting started with Docker Init](/reference/cli/docker/init/)
 
 ## Next steps

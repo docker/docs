@@ -8,10 +8,10 @@ keywords: compose, compose specification, compose file reference, compose build 
 
 In the former case, the whole path is used as a Docker context to execute a Docker build, looking for a canonical
 `Dockerfile` at the root of the directory. The path can be absolute or relative. If it is relative, it is resolved
-from the Compose file's parent folder. If it is absolute, the path prevents the Compose file from being portable so Compose displays a warning. 
+from the directory containing your Compose file. If it is absolute, the path prevents the Compose file from being portable so Compose displays a warning. 
 
 In the latter case, build arguments can be specified, including an alternate `Dockerfile` location. The path can be absolute or relative. If it is relative, it is resolved
-from the Compose file's parent folder. If it is absolute, the path prevents the Compose file from being portable so Compose displays a warning.
+from the directory containing your Compose file. If it is absolute, the path prevents the Compose file from being portable so Compose displays a warning.
 
 ## Using `build` and `image`
 

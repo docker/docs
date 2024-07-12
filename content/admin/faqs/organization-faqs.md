@@ -12,10 +12,6 @@ aliases:
 
 All Docker IDs are first-come, first-served except for companies that have a US Trademark on a username. If you have a trademark for your namespace, [Docker Support](https://hub.docker.com/support/contact/) can retrieve the Docker ID for you.
 
-### What if I want to create more than 3 organizations?
-
-You can create multiple organizations or multiple teams under a single company. SSO is available at the company level.
-
 ### How do I add an organization owner?
 
 An existing owner can add additional team members as organization owners. You can [invite a member](../../admin/organization/members.md#invite-members) and assign them the owner role in Docker Hub or the Docker Admin Console.
@@ -26,7 +22,7 @@ If your organization uses a Software Asset Management tool, you can use it to fi
 
 ### Do users first need to authenticate with Docker before an owner can add them to an organization?
 
-No. Organization owners can invite users through email and also choose a team for them to join within the invite.
+No. Organization owners can invite users with their email address, and also assign them to a team during the invite process.
 
 ### Can I force my organization's members to authenticate before using Docker Desktop and are there any benefits?
 
@@ -50,7 +46,7 @@ revert it to a personal user account. For prerequisites and instructions, see
 
 There isn't any automatic notification when the total number of users for the requested licenses has been met. However, if the number of team
 members exceed the number of licenses, you will receive an error informing you
-to contact the administrator due to lack of seats.
+to contact the administrator due to lack of seats. You can [add seats](/subscription/core-subscription/add-seats/) if needed.
 
 ### How can I merge organization accounts?
 

@@ -8,6 +8,13 @@ toc_max: 3
 This page provides information about the ongoing integration of `containerd` for
 image and file system management in the Docker Engine.
 
+> **Note**
+> 
+> After switching to the containerd image store,
+> images and containers in the classic image store won't be visible.
+> All of those containers and images still exist.
+> To see them again, turn off the containerd image store feature.
+
 ## What is containerd?
 
 `containerd` is an abstraction of the low-level kernel features
@@ -45,11 +52,6 @@ it's a prerequisite for unlocking a range of new use cases, including:
 [3]: https://github.com/dragonflyoss/image-service
 
 ## Enable the containerd image store
-
-After switching to the containerd image store,
-images and containers in the classic image store won't be visible.
-All of those containers and images still exist.
-To see them again, turn off the containerd image store feature.
 
 The containerd image store isn't enabled by default.
 To enable the feature for Docker Desktop:

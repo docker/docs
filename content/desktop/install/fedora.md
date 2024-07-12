@@ -16,14 +16,14 @@ aliases:
 
 This page contains information on how to install, launch and upgrade Docker Desktop on a Fedora distribution.
 
-{{< button text="RPM package" url="https://desktop.docker.com/linux/main/amd64/149282/docker-desktop-4.30.0-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64" >}}
+{{< button text="RPM package" url="https://desktop.docker.com/linux/main/amd64/157355/docker-desktop-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64" >}}
 
 ## Prerequisites
 
 To install Docker Desktop successfully, you must:
 
 - Meet the [system requirements](linux-install.md#general-system-requirements).
-- Have a 64-bit version of either Fedora 38 or Fedora 39.
+- Have a 64-bit version of Fedora 39 or Fedora 40.
 
 Additionally, for a GNOME desktop environment you must install AppIndicator and KStatusNotifierItem [GNOME extensions](https://extensions.gnome.org/extension/615/appindicator-support/).
 
@@ -39,12 +39,12 @@ To install Docker Desktop on Fedora:
 
 1. Set up [Docker's package repository](../../engine/install/fedora.md#set-up-the-repository).
 
-2. Download latest [RPM package](https://desktop.docker.com/linux/main/amd64/149282/docker-desktop-4.30.0-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64).
+2. Download latest [RPM package](https://desktop.docker.com/linux/main/amd64/157355/docker-desktop-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64).
 
 3. Install the package with dnf as follows:
 
    ```console
-   $ sudo dnf install ./docker-desktop-<version>-<arch>.rpm
+   $ sudo dnf install ./docker-desktop-<arch>.rpm
    ```
 
 There are a few post-install configuration steps done through the post-install script contained in the RPM package.
@@ -67,11 +67,10 @@ You need to first remove the previous version and then download the new package 
 
 ```console
 $ sudo dnf remove docker-desktop
-$ sudo dnf install ./docker-desktop-<version>-<arch>.rpm
+$ sudo dnf install ./docker-desktop-<arch>.rpm
 ```
 
 ## Next steps
 
-- Take a look at the [Get started](../../get-started/_index.md) training modules to learn how to build an image and run it as a containerized application.
+- Take a look at the [Docker workshop](../../guides/workshop/_index.md) to learn how to build an image and run it as a containerized application.
 - [Explore Docker Desktop](../use-desktop/index.md) and all its features.
-- Review the topics in [Develop with Docker](../../develop/index.md) to learn how to build new applications using Docker.

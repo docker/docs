@@ -25,7 +25,13 @@ You'll need to clone a new repository to get a sample application that includes 
    $ git clone https://github.com/docker/python-docker-dev
    ```
 
-2. In the cloned repository's directory, run `docker init` to create the necessary Docker files. Refer to the following example to answer the prompts from `docker init`.
+2. In the cloned repository's directory, manually create the Docker assets or run `docker init` to create the necessary Docker assets.
+
+   {{< tabs >}}
+   {{< tab name="Use Docker Init" >}}
+
+   In the cloned repository's directory, run `docker init`. Refer to the
+   following example to answer the prompts from `docker init`.
 
    ```console
    $ docker init
@@ -41,9 +47,165 @@ You'll need to clone a new repository to get a sample application that includes 
 
    ? What application platform does your project use? Python
    ? What version of Python do you want to use? 3.11.4
-   ? What port do you want your app to listen on? 5000
-   ? What is the command to run your app? python3 -m flask run --host=0.0.0.0
+   ? What port do you want your app to listen on? 8001
+   ? What is the command to run your app? python3 -m flask run --host=0.0.0.0 --port=8001
    ```
+
+   {{< /tab >}}
+   {{< tab name="Manually create assets" >}}
+
+   If you don't have Docker Desktop installed or prefer creating the assets
+   manually, you can create the following files in your project directory.
+
+   Create a file named `Dockerfile` with the following contents.
+   
+   ```dockerfile {collapse=true,title=Dockerfile}
+   # syntax=docker/dockerfile:1
+   
+   # Comments are provided throughout this file to help you get started.
+   # If you need more help, visit the Dockerfile reference guide at
+   # https://docs.docker.com/go/dockerfile-reference/
+   
+   # Want to help us make this template better? Share your feedback here: https://   forms.gle/ybq9Krt8jtBL3iCk7
+   
+   ARG PYTHON_VERSION=3.11.4
+   FROM python:${PYTHON_VERSION}-slim as base
+   
+   # Prevents Python from writing pyc files.
+   ENV PYTHONDONTWRITEBYTECODE=1
+   
+   # Keeps Python from buffering stdout and stderr to avoid situations where
+   # the application crashes without emitting any logs due to buffering.
+   ENV PYTHONUNBUFFERED=1
+   
+   WORKDIR /app
+   
+   # Create a non-privileged user that the app will run under.
+   # See https://docs.docker.com/go/dockerfile-user-best-practices/
+   ARG UID=10001
+   RUN adduser \
+       --disabled-password \
+       --gecos "" \
+       --home "/nonexistent" \
+       --shell "/sbin/nologin" \
+       --no-create-home \
+       --uid "${UID}" \
+       appuser
+   
+   # Download dependencies as a separate step to take advantage of Docker's    caching.
+   # Leverage a cache mount to /root/.cache/pip to speed up subsequent builds.
+   # Leverage a bind mount to requirements.txt to avoid having to copy them into
+   # into this layer.
+   RUN --mount=type=cache,target=/root/.cache/pip \
+       --mount=type=bind,source=requirements.txt,target=requirements.txt \
+       python -m pip install -r requirements.txt
+   
+   # Switch to the non-privileged user to run the application.
+   USER appuser
+   
+   # Copy the source code into the container.
+   COPY . .
+   
+   # Expose the port that the application listens on.
+   EXPOSE 8001
+   
+   # Run the application.
+   CMD python3 -m flask run --host=0.0.0.0 --port=8001
+   ```
+   
+   Create a file named `compose.yaml` with the following contents.
+   
+   ```yaml {collapse=true,title=compose.yaml}
+   # Comments are provided throughout this file to help you get started.
+   # If you need more help, visit the Docker Compose reference guide at
+   # https://docs.docker.com/go/compose-spec-reference/
+   
+   # Here the instructions define your application as a service called "server".
+   # This service is built from the Dockerfile in the current directory.
+   # You can add other services your application may depend on here, such as a
+   # database or a cache. For examples, see the Awesome Compose repository:
+   # https://github.com/docker/awesome-compose
+   services:
+     server:
+       build:
+         context: .
+       ports:
+         - 8001:8001
+   
+   # The commented out section below is an example of how to define a PostgreSQL
+   # database that your application can use. `depends_on` tells Docker Compose to
+   # start the database before your application. The `db-data` volume persists the
+   # database data between container restarts. The `db-password` secret is used
+   # to set the database password. You must create `db/password.txt` and add
+   # a password of your choosing to it before running `docker compose up`.
+   #     depends_on:
+   #       db:
+   #         condition: service_healthy
+   #   db:
+   #     image: postgres
+   #     restart: always
+   #     user: postgres
+   #     secrets:
+   #       - db-password
+   #     volumes:
+   #       - db-data:/var/lib/postgresql/data
+   #     environment:
+   #       - POSTGRES_DB=example
+   #       - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
+   #     expose:
+   #       - 5432
+   #     healthcheck:
+   #       test: [ "CMD", "pg_isready" ]
+   #       interval: 10s
+   #       timeout: 5s
+   #       retries: 5
+   # volumes:
+   #   db-data:
+   # secrets:
+   #   db-password:
+   #     file: db/password.txt
+   ```
+   
+   Create a file named `.dockerignore` with the following contents.
+   
+   ```text {collapse=true,title=".dockerignore"}
+   # Include any files or directories that you don't want to be copied to your
+   # container here (e.g., local build artifacts, temporary files, etc.).
+   #
+   # For more help, visit the .dockerignore file reference guide at
+   # https://docs.docker.com/go/build-context-dockerignore/
+   
+   **/.DS_Store
+   **/__pycache__
+   **/.venv
+   **/.classpath
+   **/.dockerignore
+   **/.env
+   **/.git
+   **/.gitignore
+   **/.project
+   **/.settings
+   **/.toolstarget
+   **/.vs
+   **/.vscode
+   **/*.*proj.user
+   **/*.dbmdl
+   **/*.jfm
+   **/bin
+   **/charts
+   **/docker-compose*
+   **/compose.y*ml
+   **/Dockerfile*
+   **/node_modules
+   **/npm-debug.log
+   **/obj
+   **/secrets.dev.yaml
+   **/values.dev.yaml
+   LICENSE
+   README.md
+   ```
+   {{< /tab >}}
+   {{< /tabs >}}
 
 ## Add a local database and persist data
 
@@ -61,7 +223,7 @@ services:
     build:
       context: .
     ports:
-      - 5000:5000
+      - 8001:8001
     environment:
       - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
     depends_on:
@@ -134,8 +296,8 @@ $ docker compose up --build
 Now test your API endpoint. Open a new terminal then make a request to the server using the curl commands:
 
 ```console
-$ curl http://localhost:5000/initdb
-$ curl http://localhost:5000/widgets
+$ curl http://localhost:8001/initdb
+$ curl http://localhost:8001/widgets
 ```
 
 You should receive the following response:
@@ -163,7 +325,7 @@ services:
     build:
       context: .
     ports:
-      - 5000:5000
+      - 8001:8001
     environment:
       - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
     depends_on:
@@ -209,7 +371,7 @@ $ docker compose watch
 In a terminal, curl the application to get a response.
 
 ```console
-$ curl http://localhost:5000
+$ curl http://localhost:8001
 Hello, Docker!
 ```
 
@@ -225,7 +387,7 @@ Open `python-docker-dev/app.py` in an IDE or text editor and update the `Hello, 
 Save the changes to `app.py` and then wait a few seconds for the application to rebuild. Curl the application again and verify that the updated text appears.
 
 ```console
-$ curl http://localhost:5000
+$ curl http://localhost:8001
 Hello, Docker!!!
 ```
 

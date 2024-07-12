@@ -31,16 +31,12 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       
       - name: Build
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
-          context: .
           tags: user/app:latest
         env:
           SOURCE_DATE_EPOCH: 0
@@ -66,7 +62,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
       
       - name: Build
-        uses: docker/bake-action@v4
+        uses: docker/bake-action@v5
         env:
           SOURCE_DATE_EPOCH: 0
 ```
@@ -91,9 +87,6 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       
@@ -101,9 +94,8 @@ jobs:
         run: echo "TIMESTAMP=$(git log -1 --pretty=%ct)" >> $GITHUB_ENV
       
       - name: Build
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
-          context: .
           tags: user/app:latest
         env:
           SOURCE_DATE_EPOCH: ${{ env.TIMESTAMP }}
@@ -132,7 +124,7 @@ jobs:
         run: echo "TIMESTAMP=$(git log -1 --pretty=%ct)" >> $GITHUB_ENV
       
       - name: Build
-        uses: docker/bake-action@v4
+        uses: docker/bake-action@v5
         env:
           SOURCE_DATE_EPOCH: ${{ env.TIMESTAMP }}
 ```

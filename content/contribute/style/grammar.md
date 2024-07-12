@@ -69,6 +69,13 @@ Following our conversational approach, it's acceptable to use contractions in al
 - Avoid negative contractions (can't, don't, wouldn't, and shouldn't) whenever possible. Try to rewrite your sentence to align with our helpful approach that puts the focus on solutions, not problems.
 - Never contract a noun with is, does, has, or was as this can make it look like the noun is possessive. Your container is ready. Your container’s ready.
 
+## Dangling modifiers
+
+Avoid [dangling modifiers](https://en.wikipedia.org/wiki/Dangling_modifier), where the subject of a clause's verb is unclear:
+
+- ❌ After enabling auto-log-out, your users are logged out.
+- ✅ When you enable auto-log-out, your users are logged out.
+
 ## Dates
 
 You should use the U.S. format of month day, year format for dates: June 26, 2021.

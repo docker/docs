@@ -10,6 +10,68 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.28.1
+
+{{< release-date date="2024-06-24" >}}
+
+### Bug fixes and enhancements
+
+- Fixed progress display, broken in `v2.28.0`, when TTY mode available.
+
+## 2.28.0
+
+{{< release-date date="2024-06-21" >}}
+
+### Update
+
+- Dependencies upgrade: bump compose-go to v2.1.3
+- Dependencies upgrade: bump docker engine and cli to v27.0.1-rc.1
+
+## 2.27.3
+
+{{< release-date date="2024-06-21" >}}
+
+### Update
+
+- Dependencies upgrade: bump buildx to 0.15.1
+- Dependencies upgrade: bump buildkit to 0.14.1
+
+## 2.27.2
+
+{{< release-date date="2024-06-20" >}}
+
+### Update
+
+- Dependencies upgrade: bump golang to 1.21.11
+- Dependencies upgrade: bump docker engine and cli to v26.1.4
+- Dependencies upgrade: bump buildx to 0.15.0
+- Dependencies upgrade: bump buildkit to 0.14.0
+- Dependencies upgrade: bump containerd to 1.7.18
+
+### Bug fixes and enhancements
+
+- Added an `--environment` flag to the `config` command
+- Fixed a bug which caused the  `watch` process to hang when used as flag with the `up` command
+- Fixed usage of `COMPOSE_PROFILES` in `.env` file
+
+## 2.27.1
+
+{{< release-date date="2024-05-24" >}}
+
+### Update
+
+- Dependencies upgrade: bump compose-go to v2.1.1
+- Dependencies upgrade: bump docker engine and cli to v26.1.3
+- Dependencies upgrade: bump buildx to 0.14.1
+- Dependencies upgrade: bump containerd to 1.7.17
+
+### Bug fixes and enhancements
+
+- Added a navigation menu in the CLI where you can open your Compose file in Docker Desktop
+- Added documentation for `--menu` flag in `docker compose up`
+- Fixed a bug with `--resolve-image-digests` used with `--no-interpolate`
+- You can now use a local `.env` file to override `COMPOSE_*` environment variables
+
 ## 2.27.0
 
 {{< release-date date="2024-04-24" >}}

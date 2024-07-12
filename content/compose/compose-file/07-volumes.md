@@ -1,5 +1,5 @@
 ---
-title: Volumes top-level elements
+title: Volumes top-level element
 description: Explore all the attributes the volumes top-level element can have.
 keywords: compose, compose specification, volumes, compose file reference
 ---
@@ -72,7 +72,7 @@ volumes:
 
 If set to `true`:
  - `external` specifies that this volume already exists on the platform and its lifecycle is managed outside
-of that of the application. Compose doesn't then create the volume, and returns an error if the volume doesn't  exist.
+of that of the application. Compose then doesn't create the volume and returns an error if the volume doesn't exist.
  - All other attributes apart from `name` are irrelevant. If Compose detects any other attribute, it rejects the Compose file as invalid.
 
 In the example below, instead of attempting to create a volume called
@@ -140,11 +140,11 @@ volumes:
 
 Running `docker compose up` uses the volume called `my_volume_001`. 
 
-It can also be used in conjunction with the `external` property. This means the name of the volume used to lookup the actual volume on the platform is set separately from the name used to refer to it within the Compose file:
+It can also be used in conjunction with the `external` property. This means the name used to look up the actual volume on the platform is set separately from the name used to refer to the volume within the Compose file:
 
 ```yml
 volumes:
   db-data:
-    external:
-      name: actual-name-of-volume
+    external: true
+    name: actual-name-of-volume
 ```
