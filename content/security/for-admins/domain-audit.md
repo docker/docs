@@ -17,7 +17,7 @@ Domain audit can't identify the following Docker users in your environment:
 - Users who access Docker Desktop without authenticating
 - Users who authenticate using an account that doesn't have an email address associated with one of your verified domains
 
-Although domain audit can't identify all Docker users in your environment, you can enforce sign-in to prevent unidentifiable users from accessing Docker Desktop in your environment. For more details about enforcing sign-in, see [Configure registry.json to enforce sign-in](configure-sign-in.md).
+Although domain audit can't identify all Docker users in your environment, you can enforce sign-in to prevent unidentifiable users from accessing Docker Desktop in your environment. For more details about enforcing sign-in, see [Configure registry.json to enforce sign-in](../for-admins/enforce-sign-in/_index.md).
 
 > **Tip**
 >

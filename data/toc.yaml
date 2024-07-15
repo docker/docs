@@ -2271,8 +2271,12 @@ Manuals:
         title: Just-in-Time
       - path: /security/for-admins/provisioning/group-mapping/
         title: Group mapping
-    - path: /security/for-admins/configure-sign-in/
-      title: Enforce sign in
+    - sectiontitle: Enforce sign-in
+      section:
+      - path: /security/for-admins/enforce-sign-in/
+        title: Overview
+      - path: /security/for-admins/enforce-sign-in/methods/
+        title: Methods
     - path: /security/for-admins/roles-and-permissions/
       title: Roles and permissions
     - path: /security/for-admins/domain-audit/
