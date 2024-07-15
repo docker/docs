@@ -191,24 +191,24 @@ download a new file each time you want to upgrade Docker Engine.
 3. Select the applicable architecture (`x86_64`, `aarch64`, or `s390x`), and
    then go to `stable/Packages/`.
 
-4. Download the following `deb` files for the Docker Engine, CLI, containerd,
+4. Download the following `rpm` files for the Docker Engine, CLI, containerd,
    and Docker Compose packages:
 
-   - `containerd.io_<version>_<arch>.deb`
-   - `docker-ce_<version>_<arch>.deb`
-   - `docker-ce-cli_<version>_<arch>.deb`
-   - `docker-buildx-plugin_<version>_<arch>.deb`
-   - `docker-compose-plugin_<version>_<arch>.deb`
+   - `containerd.io-<version>.<arch>.rpm`
+   - `docker-ce-<version>.<arch>.rpm`
+   - `docker-ce-cli-<version>.<arch>.rpm`
+   - `docker-buildx-plugin-<version>.<arch>.rpm`
+   - `docker-compose-plugin-<version>.<arch>.rpm`
 
 5. Install Docker Engine, changing the following path to the path where you downloaded
    the packages.
 
    ```console
-   $ sudo yum install ./containerd.io_<version>_<arch>.rpm \
-     ./docker-ce_<version>_<arch>.rpm \
-     ./docker-ce-cli_<version>_<arch>.rpm \
-     ./docker-buildx-plugin_<version>_<arch>.rpm \
-     ./docker-compose-plugin_<version>_<arch>.rpm
+   $ sudo yum install ./containerd.io-<version>.<arch>.rpm \
+     ./docker-ce-<version>.<arch>.rpm \
+     ./docker-ce-cli-<version>.<arch>.rpm \
+     ./docker-buildx-plugin-<version>.<arch>.rpm \
+     ./docker-compose-plugin-<version>.<arch>.rpm
    ```
 
    Docker is installed but not started. The `docker` group is created, but no
