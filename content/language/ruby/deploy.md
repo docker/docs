@@ -63,7 +63,7 @@ In this Kubernetes YAML file, there are two objects, separated by the `---`:
    you'll get just one replica, or copy of your pod. That pod, which is
    described under `template`, has just one container in it. The
     container is created from the image built by GitHub Actions in [Configure CI/CD for
-    your Python application](configure-ci-cd.md).
+    your Ruby on Rails application](configure-ci-cd.md).
  - A NodePort service, which will route traffic from port 30001 on your host to
    port 8001 inside the pods it routes to, allowing you to reach your app
    from the network.
@@ -83,7 +83,7 @@ To learn more about Kubernetes objects, see the [Kubernetes documentation](https
 
    ```shell
    deployment.apps/docker-ruby-on-rails-demo created
-   service/docker-ruby-on-rails-demo
+   service/docker-ruby-on-rails-demo created
    ```
 
 2. Make sure everything worked by listing your deployments.
@@ -114,8 +114,13 @@ To learn more about Kubernetes objects, see the [Kubernetes documentation](https
    ```
 
    In addition to the default `kubernetes` service, you can see your `docker-ruby-on-rails-demo` service, accepting traffic on port 30001/TCP.
+   Create and migrate the database
+   ```
+   kubectl exec -it <replace_pod_name> -- rails db:migrate RAILS_ENV=development
 
-3. IOpen the browser and go to http://localhost:30001/, you should see the ruby on rails application working.
+   ```
+
+3. Open the browser and go to http://localhost:30001/, you should see the ruby on rails application working.
   Note that a database was not deployed in this example.
 
 4. Run the following command to tear down your application.
