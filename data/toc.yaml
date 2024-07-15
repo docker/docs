@@ -1160,6 +1160,16 @@ Manuals:
          title: Understand permission requirements for Mac
        - path: /desktop/install/windows-install/
          title: Windows
+       - sectiontitle: Use the MSI installer {{< badge color=violet text="Early Access" >}}
+         section:
+         - path: /desktop/install/msi/
+           title: Overview
+         - path: /desktop/install/msi/install-and-configure/
+           title: Install and configure
+         - path: /desktop/install/msi/use-intune/
+           title: Use Intune
+         - path: /desktop/install/msi/faq/
+           title: FAQs
        - path: /desktop/windows/permission-requirements/
          title: Understand permission requirements for Windows
        - path: /desktop/install/linux-install/
