@@ -84,9 +84,9 @@ In the advanced example above:
 >
 > The `_FILE` environment variables demonstrated here are a convention used by some images, including Docker Official Images like [mysql](https://hub.docker.com/_/mysql) and [postgres](https://hub.docker.com/_/postgres).
 
-### Build Secrets
+### Build secrets
 
-In the following example, the `npm_token` secret will be available at build time. It's value will be taken from the `NPM_TOKEN` environment variable.
+In the following example, the `npm_token` secret is made available at build time. It's value is taken from the `NPM_TOKEN` environment variable.
 
 ```yaml
 services:
@@ -105,4 +105,4 @@ secrets:
 
 - [Secrets top-level element](compose-file/09-secrets.md)
 - [Secrets attribute for services top-level element](compose-file/05-services.md#secrets)
-- [Build Secrets](https://docs.docker.com/build/building/secrets/)
+- [Build secrets](https://docs.docker.com/build/building/secrets/)
