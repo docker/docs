@@ -33,6 +33,16 @@ Docker also sends an email notification `Action Required - Credit Card Payment F
 
 Once the grace period is over and the invoice is still not paid, the subscription downgrades to a free plan and all paid features are disabled.
 
+### Does Docker collect sales tax and/or VAT?
+
+Starting July 1, 2024, Docker will begin collecting sales tax on subscription fees in compliance with state regulations for customers in the United States. For global customers subject to VAT, the implementation will start rolling out on July 1, 2024. Note that while the rollout begins on this date, VAT charges may not apply to all applicable subscriptions immediately.
+
+To ensure that tax assessments are correct, make sure that your billing information and VAT/Tax ID, if applicable, are updated. See [Update the billing information](/billing/core-billing/details/).
+
+### How do I certify my tax exempt status?
+
+If you're exempt from sales tax, you can [register a valid tax exemption certificate](./tax-certificate.md) with Docker's Support team. [Contact Support](https://hub.docker.com/support/contact) to get started.
+
 ### Does Docker offer academic pricing?
 
 Contact the [Docker Sales Team](https://www.docker.com/company/contact).

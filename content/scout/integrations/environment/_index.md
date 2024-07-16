@@ -43,8 +43,8 @@ Docker Scout supports the following runtime integrations:
 >
 > Only organization owners can create new environments and set up integrations.
 > Additionally, Docker Scout only assigns an image to an environment if the
-> image [has been analyzed](../../image-analysis.md), either manually or
-> through a [registry integration](../_index.md#container-registries).
+> image [has been analyzed](/scout/explore/analysis.md), either manually or
+> through a [registry integration](/scout/integrations/_index.md#container-registries).
 
 ## List environments
 
@@ -79,7 +79,7 @@ comparing the image built from the code in the PR to the corresponding image in
 staging or production.
 
 You can also compare with streams using the `--to-env` flag on the
-[`docker scout compare`](../../../reference/cli/docker/scout/compare.md)
+[`docker scout compare`](/reference/cli/docker/scout/compare.md)
 CLI command:
 
 ```console

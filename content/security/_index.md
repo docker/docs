@@ -25,7 +25,7 @@ grid_admins:
   link: /desktop/hardened-desktop/air-gapped-containers/
 - title: Enforce sign-in
   description: Configure sign-in for members of your teams and organizations.
-  link: /security/for-admins/configure-sign-in/
+  link: /security/for-admins/enforce-sign-in/
   icon: passkey
 - title: Domain audit
   description: Identify uncaptured users in your organization.
@@ -42,7 +42,7 @@ grid_admins:
 - title: SCIM
   description: Set up SCIM to automatically provision and deprovision users.
   icon: checklist
-  link: /security/for-admins/scim/
+  link: /security/for-admins/provisioning/scim/
 - title: Roles and permissions
   description: Assign roles to individuals giving them different permissions within an organization.
   icon: badge

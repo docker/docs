@@ -1,9 +1,11 @@
 ---
 description: Language-specific guides overview
-keywords: guides, docker, language, node, java, python, R, go, golang, .net
+keywords: guides, docker, language, node, java, python, R, go, golang, .net, c++
 title: Language-specific guides overview
 toc_min: 1
 toc_max: 2
+aliases:
+- /guides/walkthroughs/containerize-your-app/
 ---
 
 The language-specific guides walk you through the process of:
@@ -14,8 +16,7 @@ The language-specific guides walk you through the process of:
 
 In addition to the language-specific modules, Docker documentation also provides guidelines to build images and efficiently manage your development environment. For more information, refer to the following topics:
 
-* [Best practices for writing Dockerfiles](../develop/develop-images/dockerfile_best-practices.md)
-* [Docker development best practices](../develop/dev-best-practices.md)
+* [Building best practices](../build/building/best-practices.md)
 * [Build images with BuildKit](../build/buildkit/index.md#getting-started)
 * [Build with Docker](../build/guide/_index.md)
 
@@ -41,6 +42,9 @@ Learn how to containerize your applications and start developing using Docker. C
     </div>
     <div class="flex items-center flex-1 shadow p-4">
         <a href="/language/dotnet/"><img class="m-auto rounded" src="/language/images/c-sharp.webp" alt="Develop with C#"></a>
+    </div>
+    <div class="flex items-center flex-1 shadow p-4">
+        <a href="/language/cpp/"><img class="m-auto rounded" src="/language/images/cpp.webp" alt="Develop with C++"></a>
     </div>
     <div class="flex items-center flex-1 shadow p-4">
         <a href="/language/rust/"><img class="m-auto rounded" src="/language/images/rust-logo.webp" alt="Develop with Rust"></a>

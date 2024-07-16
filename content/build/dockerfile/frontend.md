@@ -25,6 +25,13 @@ For example:
 # syntax=example.com/user/repo:tag@sha256:abcdef...
 ```
 
+You can also use the predefined `BUILDKIT_SYNTAX` build argument to set the
+frontend image reference on the command line:
+
+```console
+$ docker build --build-arg BUILDKIT_SYNTAX=docker/dockerfile:1 .
+```
+
 This defines the location of the Dockerfile syntax that is used to build the
 Dockerfile. The BuildKit backend allows seamlessly using external
 implementations that are distributed as Docker images and execute inside a
@@ -32,17 +39,18 @@ container sandbox environment.
 
 Custom Dockerfile implementations allow you to:
 
-- Automatically get bugfixes without updating the Docker daemon
+- Automatically get bug fixes without updating the Docker daemon
 - Make sure all users are using the same implementation to build your Dockerfile
 - Use the latest features without updating the Docker daemon
 - Try out new features or third-party features before they are integrated in the Docker daemon
 - Use [alternative build definitions, or create your own](https://github.com/moby/buildkit#exploring-llb)
+- Build your own Dockerfile frontend with custom features
 
 > **Note**
 >
-> BuildKit also ships with a built-in Dockerfile frontend, but it's recommended
+> BuildKit ships with a built-in Dockerfile frontend, but it's recommended
 > to use an external image to make sure that all users use the same version on
-> the builder and to pick up bugfixes automatically without waiting for a new
+> the builder and to pick up bug fixes automatically without waiting for a new
 > version of BuildKit or Docker Engine.
 
 ## Official releases

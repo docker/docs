@@ -464,14 +464,21 @@ file at the root of the build context if both exist.
 ### Syntax
 
 The `.dockerignore` file is a newline-separated list of patterns similar to the
-file globs of Unix shells. For the purposes of matching, the root of the
-context is considered to be both the working and the root directory. For
-example, the patterns `/foo/bar` and `foo/bar` both exclude a file or directory
-named `bar` in the `foo` subdirectory of `PATH` or in the root of the Git
-repository located at `URL`. Neither excludes anything else.
+file globs of Unix shells. Leading and trailing slashes in ignore patterns are
+disregarded. The following patterns all exclude a file or directory named `bar`
+in the subdirectory `foo` under the root of the build context:
+
+- `/foo/bar/`
+- `/foo/bar`
+- `foo/bar/`
+- `foo/bar`
 
 If a line in `.dockerignore` file starts with `#` in column 1, then this line
 is considered as a comment and is ignored before interpreted by the CLI.
+
+```gitignore
+#/this/is/a/comment
+```
 
 If you're interested in learning the precise details of the `.dockerignore`
 pattern matching logic, check out the

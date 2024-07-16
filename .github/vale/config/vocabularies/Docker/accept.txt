@@ -1,4 +1,4 @@
-A?GPLv3
+A?GPL(v3)?
 APIs?
 ARM
 AWS
@@ -21,6 +21,7 @@ Chrome
 Chrome DevTools
 CloudFront
 Codefresh
+Codespaces
 CouchDB
 Couchbase
 DHCP
@@ -29,6 +30,7 @@ DSOS
 DVP
 Datadog
 Ddosify
+Debootstrap
 Dev Environments?
 Django
 Docker
@@ -45,6 +47,7 @@ Docker-Sponsored Open Source
 Dockerfile
 Dockerize
 Dockerizing
+Entra
 Ethernet
 Fargate
 Fedora
@@ -76,6 +79,7 @@ Mac
 Mail(chimp|gun)
 Microsoft
 MySQL
+NAT
 Nginx
 Nuxeo
 OAuth
@@ -89,6 +93,7 @@ QEMU
 RHEL
 RPM
 S3
+SAML
 SARIF
 SBOMs?
 SCIM
@@ -107,8 +112,10 @@ Syft
 Sysdig
 TCP
 TLS
+TXT
 UDP
 URLs?
+UUID
 Ubuntu
 Unix
 VLAN
@@ -143,6 +150,7 @@ config
 containerd
 deserialization
 deserialize
+displayName
 dockerignore
 firewalld
 g?libc

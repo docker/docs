@@ -24,12 +24,23 @@ To get started with Docker Engine on Raspberry Pi OS, make sure you
 
 ## Prerequisites
 
-> **Note**
+### Firewall limitations
+
+> **Warning**
 >
-> If you use ufw or firewalld to manage firewall settings, be aware that
-> when you expose container ports using Docker, these ports bypass your
-> firewall rules. For more information, refer to
-> [Docker and ufw](../../network/packet-filtering-firewalls.md#docker-and-ufw).
+> Before you install Docker, make sure you consider the following
+> security implications and firewall incompatibilities.
+{ .warning }
+
+- If you use ufw or firewalld to manage firewall settings, be aware that
+  when you expose container ports using Docker, these ports bypass your
+  firewall rules. For more information, refer to
+  [Docker and ufw](../../network/packet-filtering-firewalls.md#docker-and-ufw).
+- Docker is only compatible with `iptables-nft` and `iptables-legacy`.
+  Firewall rules created with `nft` are not supported on a system with Docker installed.
+  Make sure that any firewall rulesets you use are created with `iptables` or `iptables6`,
+  and that you add them to the `DOCKER-USER` chain,
+  see [Packet filtering and firewalls](../../network/packet-filtering-firewalls.md).
 
 ### OS requirements
 
@@ -132,15 +143,15 @@ Docker from the repository.
    # List the available versions:
    $ apt-cache madison docker-ce | awk '{ print $3 }'
 
-   5:25.0.0-1~raspbian.12~bookworm
-   5:24.0.7-1~raspbian.12~bookworm
+   5:27.0.3-1~raspbian.12~bookworm
+   5:27.0.2-1~raspbian.12~bookworm
    ...
    ```
 
    Select the desired version and install:
 
    ```console
-   $ VERSION_STRING=5:25.0.0-1~raspbian.12~bookworm
+   $ VERSION_STRING=5:27.0.3-1~raspbian.12~bookworm
    $ sudo apt-get install docker-ce=$VERSION_STRING docker-ce-cli=$VERSION_STRING containerd.io docker-buildx-plugin docker-compose-plugin
    ```
 
@@ -246,5 +257,3 @@ You have to delete any edited configuration files manually.
 ## Next steps
 
 - Continue to [Post-installation steps for Linux](linux-postinstall.md).
-- Review the topics in [Develop with Docker](../../develop/index.md) to learn
-  how to build new applications using Docker.

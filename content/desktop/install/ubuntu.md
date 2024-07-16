@@ -19,7 +19,7 @@ aliases:
 
 This page contains information on how to install, launch and upgrade Docker Desktop on an Ubuntu distribution.
 
-{{< button text="DEB package" url="https://desktop.docker.com/linux/main/amd64/149282/docker-desktop-4.30.0-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64" >}}
+{{< button text="DEB package" url="https://desktop.docker.com/linux/main/amd64/157355/docker-desktop-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64" >}}
 
 _For checksums, see [Release notes](../release-notes.md)_
 
@@ -45,13 +45,13 @@ Recommended approach to install Docker Desktop on Ubuntu:
 1. Set up Docker's package repository.
    See step one of [Install using the `apt` repository](../../engine/install/ubuntu.md#install-using-the-repository).
 
-2. Download latest [DEB package](https://desktop.docker.com/linux/main/amd64/149282/docker-desktop-4.30.0-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64).
+2. Download latest [DEB package](https://desktop.docker.com/linux/main/amd64/157355/docker-desktop-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64).
 
 3. Install the package with apt as follows:
 
    ```console
    $ sudo apt-get update
-   $ sudo apt-get install ./docker-desktop-<version>-<arch>.deb
+   $ sudo apt-get install ./docker-desktop-<arch>.deb
    ```
 
    > **Note**
@@ -82,11 +82,10 @@ Once a new version for Docker Desktop is released, the Docker UI shows a notific
 You need to download the new package each time you want to upgrade Docker Desktop and run:
 
 ```console
-$ sudo apt-get install ./docker-desktop-<version>-<arch>.deb
+$ sudo apt-get install ./docker-desktop-<arch>.deb
 ```
 
 ## Next steps
 
-- Take a look at the [Get started](../../guides/get-started/_index.md) training modules to learn how to build an image and run it as a containerized application.
+- Take a look at the [Docker workshop](../../guides/workshop/_index.md) to learn how to build an image and run it as a containerized application.
 - [Explore Docker Desktop](../use-desktop/index.md) and all its features.
-- Review the topics in [Develop with Docker](../../develop/index.md) to learn how to build new applications using Docker.

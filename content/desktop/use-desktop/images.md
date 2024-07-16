@@ -52,8 +52,8 @@ To inspect an image, select the image row. Inspecting an image displays detailed
 - Vulnerabilities found
 - Packages inside the image
 
-[Docker Scout](../../scout/index.md) powers this vulnerability information.
-For more information about this view, see [Image details view](../../scout/image-details-view.md)
+[Docker Scout](/scout/_index.md) powers this vulnerability information.
+For more information about this view, see [Image details view](/scout/explore/image-details-view.md)
 
 ## Pull the latest image from Docker Hub
 
@@ -102,5 +102,4 @@ Hovering over an image tag reveals two options:
 
 ## Additional resources
 
-- [Run Docker Hub images](../../guides/walkthroughs/run-hub-images.md)
-- [Publish your image](../../guides/walkthroughs/publish-your-image.md)
+- [What is an image?](../../guides/docker-concepts/the-basics/what-is-an-image.md)

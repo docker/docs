@@ -49,8 +49,8 @@ GitHub and Bitbucket and push them to Docker Hub.
 {{< tab name="What administrative tasks can I perform in Docker Hub?" >}}
 * [Create and manage teams and organizations](orgs.md)
 * [Create a company](../admin/company/new-company.md)
-* [Enforce sign in](configure-sign-in.md)
-* Set up [SSO](../security/for-admins/single-sign-on/index.md) and [SCIM](../security/for-admins/scim.md)
+* [Enforce sign in](../security/for-admins/enforce-sign-in/_index.md)
+* Set up [SSO](../security/for-admins/single-sign-on/index.md) and [SCIM](../security/for-admins/provisioning/scim.md)
 * Use [Group mapping](group-mapping.md)
 * [Carry out domain audits](domain-audit.md)
 * [Use Image Access Management](image-access-management.md) to control developers' access to certain types of images

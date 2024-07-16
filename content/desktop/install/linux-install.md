@@ -240,7 +240,7 @@ Sign out and sign back in so that your group membership is re-evaluated.
 ## Where to go next
 
 - Explore [Docker's core subscriptions](https://www.docker.com/pricing/) to see what Docker can offer you.
-- [Get started with Docker](../../guides/get-started/_index.md).
+- [Get started with Docker](../../guides/getting-started/_index.md).
 - [Explore Docker Desktop](../use-desktop/index.md) and all its features.
 - [Troubleshooting](../troubleshoot/overview.md) describes common problems, workarounds, how to run and submit diagnostics, and submit issues.
 - [FAQs](../faqs/general.md) provide answers to frequently asked questions.

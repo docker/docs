@@ -2,6 +2,8 @@
 title: What is Docker Compose?
 keywords: concepts, build, images, container, docker desktop
 description: What is Docker Compose?
+aliases:
+- /guides/walkthroughs/multi-container-apps/
 ---
 
 {{< youtube-embed xhcUIK4fGtY >}}

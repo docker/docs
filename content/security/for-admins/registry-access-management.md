@@ -28,7 +28,7 @@ Example registries administrators can allow include:
 
 ## Prerequisites 
 
-You need to [configure a registry.json to enforce sign-in](/docker-hub/configure-sign-in/). For Registry Access Management to take effect, Docker Desktop users must authenticate to your organization.
+You need to [configure a registry.json to enforce sign-in](enforce-sign-in/_index.md). For Registry Access Management to take effect, Docker Desktop users must authenticate to your organization.
 
 ## Configure Registry Access Management permissions
 
@@ -66,4 +66,4 @@ Also, Registry Access Management operates on the level of hosts, not IP addresse
 
 ## More resources
 
-- [Video: Hardened Desktop Registry Access Management](https://www.youtube.com/watch?v=oA1WQZWnTAk)
+- [Video: Hardened Desktop Registry Access Management](https://www.youtube.com/watch?v=l9Z6WJdJC9A)

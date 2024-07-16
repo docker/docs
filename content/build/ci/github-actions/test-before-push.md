@@ -26,9 +26,6 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
       
@@ -38,13 +35,12 @@ jobs:
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       
       - name: Build and export to Docker
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
-          context: .
           load: true
           tags: ${{ env.TEST_TAG }}
       
@@ -53,9 +49,8 @@ jobs:
           docker run --rm ${{ env.TEST_TAG }}
       
       - name: Build and push
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
-          context: .
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ env.LATEST_TAG }}

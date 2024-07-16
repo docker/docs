@@ -4,12 +4,7 @@ description: Learn about the Compose Deploy Specification
 keywords: compose, compose specification, compose file reference, compose deploy specification
 ---
 
-> **Note:** 
->
-> Deploy is an optional part of the Compose Specification
-
-The Compose Deploy Specification lets you declare additional metadata on services so Compose gets
-relevant data to allocate adequate resources on the platform and configure them to match your needs.
+{{< include "compose/deploy.md" >}}
 
 ## Attributes
 

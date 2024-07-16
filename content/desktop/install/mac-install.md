@@ -87,7 +87,7 @@ Beginning with Docker Desktop 4.3.0, we have removed the hard requirement to ins
 
    For more information, see [Docker Desktop Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement). We recommend that you also read the [FAQs](https://www.docker.com/pricing/faq).
 6. From the installation window, select either: 
-   - **Use recommended settings (Requires password)**. This let's Docker Desktop automatically set the necessary configuration settings. 
+   - **Use recommended settings (Requires password)**. This lets Docker Desktop automatically set the necessary configuration settings. 
    - **Use advanced settings**. You can then set the location of the Docker CLI tools either in the system or user directory, enable the default Docker socket, and enable privileged port mapping. See [Settings](../settings/mac.md#advanced), for more information and how to set the location of the Docker CLI tools.
 7. Select **Finish**. If you have applied any of the above configurations that require a password in step 6, enter your password to confirm your choice.  
 
@@ -120,10 +120,20 @@ The `install` command accepts the following flags:
 {{< /tab >}}
 {{< /tabs >}}
 
+> **Tip**
+>
+> As an IT administrator, you can use endpoint management (MDM) software to identify the number of Docker Desktop instances and their versions within your environment. This can provide accurate license reporting, help ensure your machines use the latest version of Docker Desktop, and enable you to [enforce sign-in](../../security/for-admins/configure-sign-in.md).
+> - [Intune](https://learn.microsoft.com/en-us/mem/intune/apps/app-discovered-apps)
+> - [Jamf](https://docs.jamf.com/10.25.0/jamf-pro/administrator-guide/Application_Usage.html)
+> - [Kandji](https://support.kandji.io/support/solutions/articles/72000559793-view-a-device-application-list)
+> - [Kolide](https://www.kolide.com/features/device-inventory/properties/mac-apps)
+> - [Workspace One](https://blogs.vmware.com/euc/2022/11/how-to-use-workspace-one-intelligence-to-manage-app-licenses-and-reduce-costs.html)
+{ .tip }
+
 ## Where to go next 
 
 - Explore [Docker's core subscriptions](https://www.docker.com/pricing/) to see what Docker can offer you. 
-- [Get started with Docker](../../guides/get-started/_index.md).
+- [Get started with Docker](../../guides/getting-started/_index.md).
 - [Explore Docker Desktop](../use-desktop/index.md) and all its features.
 - [Troubleshooting](../troubleshoot/overview.md) describes common problems, workarounds, how
   to run and submit diagnostics, and submit issues.

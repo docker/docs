@@ -64,7 +64,7 @@ use the underlying API and CLI. The daemon creates and manages Docker objects,
 such as images, containers, networks, and volumes.
 
 For more details, see
-[Docker Architecture](../get-started/overview.md#docker-architecture).
+[Docker Architecture](../guides/docker-overview.md#docker-architecture).
 
 {{< grid >}}
 

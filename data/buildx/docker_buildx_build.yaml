@@ -103,10 +103,29 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: call
+      value_type: string
+      default_value: build
+      description: Set method for evaluating build (`check`, `outline`, `targets`)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: cgroup-parent
       value_type: string
       description: Set the parent cgroup for the `RUN` instructions during build
       details_url: /reference/cli/docker/image/build/#cgroup-parent
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: check
+      value_type: bool
+      description: Shorthand for `--call=check`
       deprecated: false
       hidden: false
       experimental: false
@@ -330,7 +349,7 @@ options:
       value_type: string
       description: Print result of information request (e.g., outline, targets)
       deprecated: false
-      hidden: false
+      hidden: true
       experimental: false
       experimentalcli: true
       kubernetes: false
@@ -339,7 +358,7 @@ options:
       value_type: string
       default_value: auto
       description: |
-        Set type of progress output (`auto`, `plain`, `tty`). Use plain to show container output
+        Set type of progress output (`auto`, `plain`, `tty`, `rawjson`). Use plain to show container output
       details_url: '#progress'
       deprecated: false
       hidden: false
@@ -1009,8 +1028,8 @@ examples: |-
     --progress=VALUE
     ```
 
-    Set type of progress output (`auto`, `plain`, `tty`). Use plain to show container
-    output (default "auto").
+    Set type of progress output (`auto`, `plain`, `tty`, `rawjson`). Use `plain` to show container
+    output (default `auto`).
 
     > **Note**
     >
@@ -1033,8 +1052,11 @@ examples: |-
 
     > **Note**
     >
-    > Check also our [Color output controls guide](https://github.com/docker/buildx/blob/master/docs/guides/color-output.md)
-    > for modifying the colors that are used to output information to the terminal.
+    > Check also the [`BUILDKIT_COLORS`](/build/building/variables/#buildkit_colors)
+    > environment variable for modifying the colors of the terminal output.
+
+    The `rawjson` output marshals the solve status events from BuildKit to JSON lines.
+    This mode is designed to be read by an external program.
 
     ### Create provenance attestations (--provenance) {#provenance}
 

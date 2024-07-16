@@ -1,12 +1,12 @@
 ---
-description: Learn about company owners.
+description: Learn how to add and remove company owners.
 keywords: company, owners
 title: Manage company owners
 aliases:
 - /docker-hub/company-owner/
 ---
 
-As a company owner, you can configure [Single Sign-on (SSO)](../../security/for-admins/single-sign-on/_index.md) and [System for Cross-domain Identity Management (SCIM)](../../security/for-admins/scim.md) for all organizations under the company.
+As a company owner, you can configure [Single Sign-on (SSO)](../../security/for-admins/single-sign-on/_index.md) and [System for Cross-domain Identity Management (SCIM)](../../security/for-admins/provisioning/scim.md) for all organizations under the company.
 
 {{< tabs >}}
 {{< tab name="Docker Hub" >}}

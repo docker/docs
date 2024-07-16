@@ -6,9 +6,7 @@ title: Use Compose Watch
 
 {{< introduced compose 2.22.0 "release-notes.md#2220" >}}
 
-Use `watch` to automatically update and preview your running Compose services as you edit and save your code. 
-
-For many projects, this allows for a hands-off development workflow once Compose is running, as services automatically update themselves when you save your work.
+{{< include "compose/watch.md" >}}
 
 `watch` adheres to the following file path rules:
 * All paths are relative to the project directory
@@ -56,13 +54,13 @@ by the configured user, use the `COPY --chown` flag:
 
 ```dockerfile
 # Run as a non-privileged user
-FROM node:18-alpine
+FROM node:18
 RUN useradd -ms /bin/sh -u 1001 app
 USER app
 
 # Install dependencies
 WORKDIR /app
-COPY package.json package.lock .
+COPY package.json package-lock.json ./
 RUN npm install
 
 # Copy source files into application directory
@@ -112,7 +110,7 @@ For `path: ./app/html` and a change to `./app/html/index.html`:
 * `target: /app/static` -> `/app/static/index.html`
 * `target: /assets` -> `/assets/index.html`
 
-## Example
+## Example 1
 
 This minimal example targets a Node.js application with the following structure:
 ```text
@@ -155,19 +153,37 @@ rebuilds the image and recreates the `web` service container.
 
 This pattern can be followed for many languages and frameworks, such as Python with Flask: Python source files can be synced while a change to `requirements.txt` should trigger a rebuild.
 
+## Example 2 
+
+Adapting the previous example to demonstrate `sync+restart`:
+
+```yaml
+services:
+  web:
+    build: .
+    command: npm start
+    develop:
+      watch:
+        - action: sync
+          path: ./web
+          target: /app/web
+          ignore:
+            - node_modules/
+        - action: sync+restart
+          path: ./proxy/nginx.conf
+          target: /etc/nginx/conf.d/default.conf
+
+  backend:
+    build:
+      context: backend
+      target: builder
+```
+
+This setup demonstrates how to use the `sync+restart` action in Docker Compose to efficiently develop and test a Node.js application with a frontend web server and backend service. The configuration ensures that changes to the application code and configuration files are quickly synchronized and applied, with the `web` service restarting as needed to reflect the changes.
+
 ## Use `watch`
 
-1. Add `watch` sections to one or more services in `compose.yaml`.
-2. Run `docker compose up --watch` to build and launch a Compose project and start the file watch mode.
-3. Edit service source files using your preferred IDE or editor.
-
-> **Looking for a sample project to test things out?**
->
-> Check out [`dockersamples/avatars`](https://github.com/dockersamples/avatars),
-> or [local setup for Docker docs](https://github.com/docker/docs/blob/main/CONTRIBUTING.md)
-> for a demonstration of Compose `watch`.
-{ .tip }
-
+{{< include "compose/configure-watch.md" >}}
 
 > **Tip**
 >
@@ -175,6 +191,11 @@ This pattern can be followed for many languages and frameworks, such as Python w
 > get the application logs mixed with the (re)build logs and filesystem sync events.
 { .tip }
 
+> **Looking for a sample project to test things out?**
+>
+> Check out [`dockersamples/avatars`](https://github.com/dockersamples/avatars),
+> or [local setup for Docker docs](https://github.com/docker/docs/blob/main/CONTRIBUTING.md)
+> for a demonstration of Compose `watch`.
 
 ## Feedback
 

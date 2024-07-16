@@ -5,9 +5,7 @@ description: Explainer on the ways to set, use and manage environment variables 
 keywords: compose, orchestration, environment, env file
 ---
 
-Use environment variables to pass configuration information to containers at runtime. 
-
-Environment variables are key-value pairs that contain data that can be used by processes running inside a Docker container. They are often used to configure application settings and other parameters that may vary between different environments, such as development, testing, and production.  
+By leveraging environment variables and interpolation in Docker Compose, you can create versatile and reusable configurations, making your Dockerized applications easier to manage and deploy across different environments. 
 
 > **Tip**
 >
@@ -15,10 +13,11 @@ Environment variables are key-value pairs that contain data that can be used by 
 { .tip }
 
 This section covers:
-- The various ways you can [set environment variables with Compose](set-environment-variables.md).
-- [How environment variable precedence works](envvars-precedence.md).
-- The correct syntax for an [environment file](env-file.md).
-- Changing pre-defined [environment variables](envvars.md).
+
+- [How to set environment variables within your container's environment](set-environment-variables.md).
+- [How environment variable precedence works within your container's environment](envvars-precedence.md).
+- [Pre-defined environment variables](envvars.md).
+
+It also covers: 
+- How [interpolation](variable-interpolation.md) can be used to set variables within your Compose file and how it relates to a container's environment.
 - Some [best practices](best-practices.md).
-
-

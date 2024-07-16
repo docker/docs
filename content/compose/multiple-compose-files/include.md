@@ -6,9 +6,9 @@ title: Include
 
 {{< introduced compose 2.20.3 "../release-notes.md#2203" >}}
 
-With the [`include` top-level element](../compose-file/14-include.md), you can include a separate Compose file directly in your local Compose file. This solves the relative path problem that [`extends`](extends.md) and [merge](merge.md) present. 
+{{< include "compose/include.md" >}}
 
-`include` makes it easier to modularize complex applications into sub-Compose files. This allows application configurations to be made simpler and more explicit. This also helps to reflect in the config file organization the engineering team responsible for the code.
+The [`include` top-level element](../compose-file/14-include.md) helps to reflect the engineering team responsible for the code directly in the config file's organization. It also solves the relative path problem that [`extends`](extends.md) and [merge](merge.md) present. 
 
 Each path listed in the `include` section loads as an individual Compose application model, with its own project directory, in order to resolve relative paths.
 

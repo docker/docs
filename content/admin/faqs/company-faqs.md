@@ -30,11 +30,11 @@ You can add a maximum of 10 company owners to a single company account.
 
 ### What permissions does the company owner have in the associated/nested organizations?
 
-Company owners can navigate to the **Organizations** page to view all their nested organizations in a single location. They can also view or edit organization members and change SSO and SCIM settings. Changes to company settings impact all users in each organization under the company. See [Roles and permissions](../../security/for-admins/roles-and-permissions.md).
+Company owners can navigate to the **Organizations** page to view all their nested organizations in a single location. They can also view or edit organization members and change single sign-on (SSO) and System for Cross-domain Identity Management (SCIM) settings. Changes to company settings impact all users in each organization under the company. See [Roles and permissions](../../security/for-admins/roles-and-permissions.md).
 
 ### What features are supported at the company level?
 
-You can manage domain verification, Single Sign-on, and System for Cross-domain Identity Management (SCIM) at the company level. The following features aren't supported at the company level, but you can manage them at the organization level:
+You can manage domain verification, SSO, and SCIM at the company level. The following features aren't supported at the company level, but you can manage them at the organization level:
 
 - Image Access Management
 - Registry Access Management
@@ -59,7 +59,7 @@ See your [SCIM](scim.md) and [SSO](../../security/for-admins/single-sign-on/conf
 
 ### How does a company owner enable group mapping in an IdP?
 
-See [SCIM](scim.md) and [Group mapping](../../security/for-admins/group-mapping.md) for more information.
+See [SCIM](scim.md) and [group mapping](../../security/for-admins/provisioning/group-mapping.md) for more information.
 
 ### What's the definition of a company vs an organization?
 

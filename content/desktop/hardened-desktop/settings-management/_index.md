@@ -45,13 +45,13 @@ Using the `admin-settings.json` file, admins can:
 - Turn off Docker Desktop's onboarding survey
 - Control the file sharing implementation for your developers on macOS
 - Specify which paths your developers can add file shares to
-- Configure air-gapped containers (Beta)
+- Configure Air-Gapped Containers
 
 For more details on the syntax and options admins can set, see [Configure Settings Management](configure.md).
 
 ### How do I set up and enforce Settings Management?
 
-As an administrator, you first need to [configure a registry.json to enforce sign-in](../../../security/for-admins/configure-sign-in.md). This is because the Settings Management feature requires a Docker Business subscription and therefore your Docker Desktop developers must authenticate to your organization for this configuration to take effect.
+As an administrator, you first need to [configure a registry.json to enforce sign-in](../../../security/for-admins/enforce-sign-in/_index.md). This is because the Settings Management feature requires a Docker Business subscription and therefore your Docker Desktop developers must authenticate to your organization for this configuration to take effect.
 
 Next, you must either manually [create and configure the admin-settings.json file](configure.md), or use the `--admin-settings` installer flag on [macOS](../../install/mac-install.md#install-from-the-command-line) or [Windows](../../install/windows-install.md#install-from-the-command-line) to automatically create the `admin-settings.json` and save it in the correct location.
 

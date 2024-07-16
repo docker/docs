@@ -2,15 +2,13 @@
 title: Air-gapped containers
 description: Air-gapped containers - What it is, benefits, and how to configure it.
 keywords: air gapped, security, Docker Desktop, configuration, proxy, network
+aliases:
+- /desktop/hardened-desktop/settings-management/air-gapped-containers/
 ---
 
-> **Beta feature**
->
-> This feature is in [Beta](../../release-lifecycle.md/#beta).
-> It's available with Docker Desktop version 4.29 and later.
-{ .experimental }
+{{< introduced desktop 4.29.0 "../release-notes.md#4290" >}}
 
-Air-gapped containers allows administrators to restrict containers from accessing network resources, limiting where data can be uploaded to or downloaded from.
+Air-Gapped Containers allows administrators to restrict containers from accessing network resources, limiting where data can be uploaded to or downloaded from.
 
 Docker Desktop can apply a custom set of proxy rules to network traffic from containers. The proxy can be configured to:
 
@@ -25,7 +23,7 @@ You can choose:
 
 ## Configuration
 
-Assuming [enforced sign-in](../../security/for-admins/configure-sign-in.md) and [Settings Management](settings-management/_index.md) are enabled, add the new proxy configuration to the `admin-settings.json` file. For example:
+Assuming [enforced sign-in](../../../security/for-admins/enforce-sign-in/_index.md) and [Settings Management](settings-management/_index.md) are enabled, add the new proxy configuration to the `admin-settings.json` file. For example:
 
 ```json
 {

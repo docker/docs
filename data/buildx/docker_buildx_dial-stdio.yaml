@@ -19,7 +19,8 @@ options:
     - option: progress
       value_type: string
       default_value: quiet
-      description: Set type of progress output (auto, plain, tty).
+      description: |
+        Set type of progress output (`auto`, `plain`, `tty`, `rawjson`). Use plain to show container output
       deprecated: false
       hidden: false
       experimental: false

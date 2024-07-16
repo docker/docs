@@ -1,7 +1,7 @@
 ---
 title: Docker Scout billing
-description: Learn how to buy Docker Scout and manage your subscription
-keywords: payments, billing, subscription, scout
+description: Learn how to get started with and manage you Docker Scout subscription.
+keywords: payments, billing, subscription, scout, buy docker scout, subscribe to docker scout
 ---
 
 Docker Scout lets users secure their software supply chain and continuously observe and improve their security posture. Docker Scout is free for up to 3 repositories. You can buy Docker Scout Team or Docker Scout Business to turn on Docker Scout for additional repositories. See [Docker Scout subscription and features](../subscription/scout-details.md) to select the plan that works for you.
@@ -13,7 +13,7 @@ In this section, learn how to buy and manage a Docker Scout Team subscription fo
 > You need to be an owner to manage billing for an organization.
 >
 
-## Buy Docker Scout Team
+## Set up Docker Scout Team subscription
 
 1. Go to [Billing settings](https://scout.docker.com/settings/billing) in the Docker Scout Dashboard.
 2. The default plan is Docker Scout Free. Next to the plan name, select **Change plan**.

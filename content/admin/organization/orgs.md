@@ -48,10 +48,12 @@ organization after you've created it.
 displays the company name on your organization page and in the details of any
 public images you publish. You can update the company name anytime by navigating
 to your organization's **Settings** page.
-6. Select **Purchase** to continue to the billing portal.
-7. In the billing portal, select **Qty** to update the number of seats you require, then select **Update**.
-8. (Optional) Select annual or monthly billing cycle.
-9. Follow the on-screen instructions to pay for your subscription.
+6. Select **Purchase** to continue.
+7. Enter the billing information for your organization.
+8. Select **Submit** to continue to the billing portal.
+9. In the billing portal, select **Qty** to update the number of seats you require, then select **Update**.
+10. (Optional) Select annual or monthly billing cycle.
+11. Follow the on-screen instructions to pay for your subscription.
 
 You've now created an organization.
 

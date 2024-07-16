@@ -7,7 +7,9 @@ tags: [Secrets]
 
 A secret is any piece of data, such as a password, certificate, or API key, that shouldn’t be transmitted over a network or stored unencrypted in a Dockerfile or in your application’s source code.
 
-Docker Compose provides a way for you to use secrets without having to use environment variables to store information. If you’re injecting passwords and API keys as environment variables, you risk unintentional information exposure. Environment variables are often available to all processes, and it can be difficult to track access. They can also be printed in logs when debugging errors without your knowledge. Using secrets mitigates these risks.
+{{< include "compose/secrets.md" >}}
+
+Environment variables are often available to all processes, and it can be difficult to track access. They can also be printed in logs when debugging errors without your knowledge. Using secrets mitigates these risks.
 
 ## Use secrets
 
@@ -82,7 +84,25 @@ In the advanced example above:
 >
 > The `_FILE` environment variables demonstrated here are a convention used by some images, including Docker Official Images like [mysql](https://hub.docker.com/_/mysql) and [postgres](https://hub.docker.com/_/postgres).
 
+### Build secrets
+
+In the following example, the `npm_token` secret is made available at build time. It's value is taken from the `NPM_TOKEN` environment variable.
+
+```yaml
+services:
+  myapp:
+    build:
+      secrets:
+        - npm_token
+      context: .
+
+secrets:
+  npm_token:
+    environment: NPM_TOKEN
+```
+
 ## Resources
 
 - [Secrets top-level element](compose-file/09-secrets.md)
 - [Secrets attribute for services top-level element](compose-file/05-services.md#secrets)
+- [Build secrets](https://docs.docker.com/build/building/secrets/)

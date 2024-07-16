@@ -13,6 +13,12 @@ known issues for each Docker Hub release.
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1) to see what's coming next.
 
+## 2024-03-23
+
+### New
+
+ - You can tag Docker Hub repositories with [categories](./repos/categories.md).
+
 ## 2023-12-11
 
 - The Advanced Image Management feature, along with the corresponding API endpoints, has been retired.
@@ -66,7 +72,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### Bug fixes and enhancements
 
-- In Docker Hub, you can now download a [registry.json](../security/for-admins/configure-sign-in.md) file or copy the commands to create a registry.json file to enforce sign-in for your organization.
+- In Docker Hub, you can now download a [registry.json](../security/for-admins/enforce-sign-in/_index.md) file or copy the commands to create a registry.json file to enforce sign-in for your organization.
 
 ## 2022-09-19
 

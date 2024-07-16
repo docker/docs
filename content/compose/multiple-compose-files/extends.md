@@ -42,9 +42,9 @@ services:
 ```
 
 This instructs Compose to re-use only the properties of the `webapp` service
-defined in the `common-services.yaml` file. The `webapp` service itself is not part of the final project.
+defined in the `common-services.yml` file. The `webapp` service itself is not part of the final project.
 
-If `common-services.yaml`
+If `common-services.yml`
 looks like this:
 
 ```yaml
@@ -57,7 +57,7 @@ services:
       - "/data"
 ```
 You get exactly the same result as if you wrote
-`docker-compose.yml` with the same `build`, `ports` and `volumes` configuration
+`docker-compose.yml` with the same `build`, `ports`, and `volumes` configuration
 values defined directly under `web`.
 
 To include the service `webapp` in the final project when extending services from another file, you need to explicitly include both services in your current Compose file. For example (note this is a non-normative example):
@@ -112,9 +112,7 @@ services:
     cpu_shares: 10
 ```
 
-## Further examples
-
-### Example one
+## Additional example
 
 Extending an individual service is useful when you have multiple services that
 have a common configuration. The example below is a Compose app with two
@@ -158,46 +156,6 @@ services:
       - queue
 ```
 
-### Example two
-
-Another common use case for `extends` is running one off or administrative tasks
-against one or more services in a Compose app. This example demonstrates running
-a database backup.
-
-The `docker-compose.yml` defines the base configuration.
-
-```yaml
-services:
-  web:
-    image: example/my_web_app:latest
-    depends_on:
-      - db
-
-  db:
-    image: postgres:latest
-```
-
-`docker-compose.admin.yml` adds a new service to run the database export or
-backup.
-
-```yaml
-services:
-  dbadmin:
-    build: database_admin/
-    depends_on:
-      - db
-```
-
-To start a normal environment, run `docker compose up -d`. To run a database
-backup, include the `docker-compose.admin.yml` as well.
-
-```console
-$ docker compose -f docker-compose.yml -f docker-compose.admin.yml \
-  run dbadmin db-backup
-```
-
-Compose extends files in the order they're specified on the command line.
-
 ## Exceptions and limitations
 
 `volumes_from` and `depends_on` are never shared between services using
@@ -207,7 +165,7 @@ clearly visible when reading the current file. Defining these locally also
 ensures that changes to the referenced file don't break anything.
 
 `extends` is useful if you only need a single service to be shared and you are
-familiar with the file you're extending to, so you can to tweak the
+familiar with the file you're extending to, so you can tweak the
 configuration. But this isn’t an acceptable solution when you want to re-use
 someone else's unfamiliar configurations and you don’t know about its own
 dependencies.
