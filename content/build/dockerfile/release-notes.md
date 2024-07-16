@@ -11,6 +11,65 @@ issues, and bug fixes in [Dockerfile reference](../../reference/dockerfile.md).
 
 For usage, see the [Dockerfile frontend syntax](frontend.md) page.
 
+## 1.9.0
+
+{{< release-date date="2024-07-11" >}}
+
+The full release note for this release is available
+[on GitHub](https://github.com/moby/buildkit/releases/tag/dockerfile%2F1.9.0).
+
+```dockerfile
+# syntax=docker/dockerfile:1.9.0
+```
+
+- Add new validation rules:
+  - `SecretsUsedInArgOrEnv`
+  - `InvalidDefaultArgInFrom`
+  - `RedundantTargetPlatform`
+  - `CopyIgnoredFile` (experimental)
+  - `FromPlatformFlagConstDisallowed`
+- Many performance improvements for working with big Dockerfiles. [moby/buildkit#5067](https://github.com/moby/buildkit/pull/5067/), [moby/buildkit#5029](https://github.com/moby/buildkit/pull/5029/)
+- Fix possible panic when building Dockerfile without defined stages. [moby/buildkit#5150](https://github.com/moby/buildkit/pull/5150/)
+- Fix incorrect JSON parsing that could cause some incorrect JSON values to pass without producing an error. [moby/buildkit#5107](https://github.com/moby/buildkit/pull/5107/)
+- Fix a regression where `COPY --link` with a destination path of `.` could fail. [moby/buildkit#5080](https://github.com/moby/buildkit/pull/5080/)
+- Fix validation of `ADD --checksum` when used with a Git URL. [moby/buildkit#5085](https://github.com/moby/buildkit/pull/5085/)
+
+## 1.8.1
+
+{{< release-date date="2024-06-18" >}}
+
+The full release note for this release is available
+[on GitHub](https://github.com/moby/buildkit/releases/tag/dockerfile%2F1.8.1).
+
+```dockerfile
+# syntax=docker/dockerfile:1.8.1
+```
+
+### Bug fixes and enhancements
+
+- Fix handling of empty strings on variable expansion. [moby/buildkit#5052](https://github.com/moby/buildkit/pull/5052/)
+- Improve formatting of build warnings. [moby/buildkit#5037](https://github.com/moby/buildkit/pull/5037/), [moby/buildkit#5045](https://github.com/moby/buildkit/pull/5045/), [moby/buildkit#5046](https://github.com/moby/buildkit/pull/5046/)
+- Fix possible invalid output for `UndeclaredVariable` warning for multi-stage builds. [moby/buildkit#5048](https://github.com/moby/buildkit/pull/5048/)
+
+## 1.8.0
+
+{{< release-date date="2024-06-11" >}}
+
+The full release note for this release is available
+[on GitHub](https://github.com/moby/buildkit/releases/tag/dockerfile%2F1.8.0).
+
+```dockerfile
+# syntax=docker/dockerfile:1.8.0
+```
+
+- Many new validation rules have been added to verify that your Dockerfile is using best practices. These rules are validated during build and new `check` frontend method can be used to only trigger validation without completing the whole build.
+- New directive `#check` and build argument `BUILDKIT_DOCKERFILE_CHECK` lets you control the behavior or build checks. [moby/buildkit#4962](https://github.com/moby/buildkit/pull/4962/)
+- Using a single-platform base image that does not match your expected platform is now validated. [moby/buildkit#4924](https://github.com/moby/buildkit/pull/4924/)
+- Errors from the expansion of `ARG` definitions in global scope are now handled properly. [moby/buildkit#4856](https://github.com/moby/buildkit/pull/4856/)
+- Expansion of the default value of `ARG` now only happens if it is not overwritten by the user. Previously, expansion was completed and value was later ignored, which could result in an unexpected expansion error. [moby/buildkit#4856](https://github.com/moby/buildkit/pull/4856/)
+- Performance of parsing huge Dockerfiles with many stages has been improved. [moby/buildkit#4970](https://github.com/moby/buildkit/pull/4970/)
+- Fix some Windows path handling consistency errors. [moby/buildkit#4825](https://github.com/moby/buildkit/pull/4825/)
+
 ## 1.7.0
 
 {{< release-date date="2024-03-06" >}}
