@@ -1,5 +1,5 @@
 command: docker builder build
-aliases: docker image build, docker build, docker buildx build, docker builder build
+aliases: docker image build, docker build, docker builder build
 short: Build an image from a Dockerfile
 long: |
     See [docker build](/reference/cli/docker/image/build/) for more information.
@@ -10,6 +10,7 @@ options:
     - option: add-host
       value_type: list
       description: Add a custom host-to-IP mapping (`host:ip`)
+      details_url: /reference/cli/docker/buildx/build/#add-host
       deprecated: false
       hidden: false
       experimental: false
@@ -19,6 +20,7 @@ options:
     - option: build-arg
       value_type: list
       description: Set build-time variables
+      details_url: /reference/cli/docker/buildx/build/#build-arg
       deprecated: false
       hidden: false
       experimental: false
@@ -38,6 +40,7 @@ options:
     - option: cgroup-parent
       value_type: string
       description: Set the parent cgroup for the `RUN` instructions during build
+      details_url: /reference/cli/docker/buildx/build/#cgroup-parent
       deprecated: false
       hidden: false
       experimental: false
@@ -117,6 +120,7 @@ options:
       shorthand: f
       value_type: string
       description: Name of the Dockerfile (Default is `PATH/Dockerfile`)
+      details_url: /reference/cli/docker/buildx/build/#file
       deprecated: false
       hidden: false
       experimental: false
@@ -185,6 +189,7 @@ options:
       value_type: string
       default_value: default
       description: Set the networking mode for the RUN instructions during build
+      details_url: /reference/cli/docker/buildx/build/#network
       deprecated: false
       hidden: false
       min_api_version: "1.25"
@@ -278,6 +283,7 @@ options:
       shorthand: t
       value_type: list
       description: Name and optionally a tag in the `name:tag` format
+      details_url: /reference/cli/docker/buildx/build/#tag
       deprecated: false
       hidden: false
       experimental: false
@@ -287,6 +293,7 @@ options:
     - option: target
       value_type: string
       description: Set the target build stage to build.
+      details_url: /reference/cli/docker/buildx/build/#target
       deprecated: false
       hidden: false
       experimental: false
