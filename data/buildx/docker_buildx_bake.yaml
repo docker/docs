@@ -17,6 +17,27 @@ usage: docker buildx bake [OPTIONS] [TARGET...]
 pname: docker buildx
 plink: docker_buildx.yaml
 options:
+    - option: call
+      value_type: string
+      default_value: build
+      description: Set method for evaluating build (`check`, `outline`, `targets`)
+      details_url: '#call'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: check
+      value_type: bool
+      description: Shorthand for `--call=check`
+      details_url: '#check'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: file
       shorthand: f
       value_type: stringArray
@@ -27,6 +48,26 @@ options:
       hidden: false
       experimental: false
       experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: list-targets
+      value_type: bool
+      default_value: "false"
+      description: List available targets
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: true
+      kubernetes: false
+      swarm: false
+    - option: list-variables
+      value_type: bool
+      default_value: "false"
+      description: List defined variables
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: true
       kubernetes: false
       swarm: false
     - option: load
@@ -151,6 +192,14 @@ examples: |-
 
     Same as [`buildx --builder`](/reference/cli/docker/buildx/#builder).
 
+    ### Invoke a frontend method (--call) {#call}
+
+    Same as [`build --call`](/reference/cli/docker/buildx/build/#call).
+
+    #### Call: check (--check) {#check}
+
+    Same as [`build --check`](/reference/cli/docker/buildx/build/#check).
+
     ### Specify a build definition file (-f, --file) {#file}
 
     Use the `-f` / `--file` option to specify the build definition file to use.
@@ -219,6 +268,7 @@ examples: |-
 
     ```json
     {
+      "buildx.build.warnings": {},
       "db": {
         "buildx.build.provenance": {},
         "buildx.build.ref": "mybuilder/mybuilder0/0fjb6ubs52xx3vygf6fgdl611",
@@ -260,6 +310,12 @@ examples: |-
     > * `min` sets minimal provenance (default).
     > * `max` sets full provenance.
     > * `disabled`, `false` or `0` does not set any provenance.
+
+    > **Note**
+    >
+    > Build warnings (`buildx.build.warnings`) are not included by default. Set the
+    > `BUILDX_METADATA_WARNINGS` environment variable to `1` or `true` to
+    > include them.
 
     ### Don't use cache when building the image (--no-cache) {#no-cache}
 
