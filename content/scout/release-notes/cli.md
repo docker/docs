@@ -10,6 +10,53 @@ and the `docker/scout-action` [GitHub Action](https://github.com/docker/scout-ac
 
 ## 1.10.0
 
+{{< release-date date="2024-07-25" >}}
+
+### New
+
+- Filter CVEs listed in the CISA Known Exploited Vulnerabilities catalog.
+
+  ```console {title="CLI"}
+  $ docker scout cves [IMAGE] --only-cisa-kev
+
+  ... (cropped output) ...
+  ## Packages and Vulnerabilities
+
+  0C     1H     0M     0L  io.netty/netty-codec-http2 4.1.97.Final
+  pkg:maven/io.netty/netty-codec-http2@4.1.97.Final
+
+  ✗ HIGH CVE-2023-44487  CISA KEV  [OWASP Top Ten 2017 Category A9 - Using Components with Known Vulnerabilities]
+    https://scout.docker.com/v/CVE-2023-44487
+    Affected range  : <4.1.100
+    Fixed version   : 4.1.100.Final
+    CVSS Score      : 7.5
+    CVSS Vector     : CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H
+  ... (cropped output) ...
+  ```
+
+  ```yaml {title="GitHub Action"}
+  uses: docker/scout-action@v1
+  with:
+    command: cves
+    image: [IMAGE]
+    only-cisa-kev: true
+  ```
+
+- Add new classifiers:
+  - `spiped`
+  - `swift`
+  - `eclipse-mosquitto`
+  - `znc`
+
+### Bug fixes and enhancements
+
+- Allow VEX matching when no subcomponents.
+- Fix panic when attaching an invalid VEX document.
+- Fix SPDX document root.
+- Fix base image detection when image uses SCRATCH as the base image.
+
+## 1.10.0
+
 {{< release-date date="2024-06-26" >}}
 
 ### Bug fixes and enhancements
@@ -68,16 +115,16 @@ and the `docker/scout-action` [GitHub Action](https://github.com/docker/scout-ac
       DOCKER_IMAGE_NAME: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
     before_script:
       - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-         
+
       # Install curl and the Docker Scout CLI
       - |
         apk add --update curl
-        curl -sSfL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh | sh -s -- 
-        apk del curl 
-        rm -rf /var/cache/apk/* 
+        curl -sSfL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh | sh -s --
+        apk del curl
+        rm -rf /var/cache/apk/*
       # Login to Docker Hub required for Docker Scout CLI
       - echo "$DOCKER_HUB_PAT" | docker login --username "$DOCKER_HUB_USER" --password-stdin
-  
+
     # All branches are tagged with $DOCKER_IMAGE_NAME (defaults to commit ref slug)
     # Default branch is also tagged with `latest`
     script:
@@ -118,7 +165,7 @@ Discarded in favor of [1.9.1](#191).
 ### Bug fixes and enhancements
 
 - Improve format of EPSS score and percentile.
-  
+
   Before:
 
   ```text
@@ -249,7 +296,7 @@ Discarded in favor of [1.9.1](#191).
 ### Bug fixes and enhancements
 
 - Use Windows cache from WSL2
-  
+
   When inside WSL2 with Docker Desktop running, the Docker Scout CLI plugin now
   uses the cache from Windows. That way, if an image has been indexed for
   instance by Docker Desktop there's no need anymore to re-index it on WSL2
