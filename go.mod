@@ -8,9 +8,8 @@ require (
 	github.com/docker/buildx v0.16.0 // indirect
 	github.com/docker/cli v27.0.3+incompatible // indirect
 	github.com/docker/compose/v2 v2.29.1 // indirect
-	github.com/moby/buildkit v0.15.0 // indirect
 	github.com/docker/scout-cli v1.11.0 // indirect
-	github.com/moby/buildkit v0.14.1 // indirect
+	github.com/moby/buildkit v0.15.0 // indirect
 	github.com/moby/moby v27.0.3+incompatible // indirect
 )
 

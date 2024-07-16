@@ -152,7 +152,7 @@ provenance attestation with max mode. To ensure compliance,
 update your build command to attach these attestations at build-time:
 
 ```console
-$ docker buildx build --provenance=mode=max --sbom=true -t <IMAGE> --push .
+$ docker buildx build --provenance=true --sbom=true -t <IMAGE> --push .
 ```
 
 For more information about
@@ -197,7 +197,7 @@ By default, containers run as the `root` superuser with full system
 administration privileges inside the container, unless the Dockerfile specifies
 a different default user. Running containers as a privileged user weakens their
 runtime security, as it means any code that runs in the container can perform
-administrative actions. 
+administrative actions.
 
 The **Default non-root user** policy detects images that are set to run as the
 default `root` user. To comply with this policy, images must specify a non-root
