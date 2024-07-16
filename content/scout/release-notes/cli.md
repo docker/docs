@@ -8,7 +8,7 @@ This page contains information about the new features, improvements, known
 issues, and bug fixes in the Docker Scout [CLI plugin](https://github.com/docker/scout-cli/)
 and the `docker/scout-action` [GitHub Action](https://github.com/docker/scout-action).
 
-## 1.10.0
+## 1.11.0
 
 {{< release-date date="2024-07-25" >}}
 
