@@ -2111,16 +2111,14 @@ Manuals:
       title: Interpolation
     - path: /compose/environment-variables/best-practices/
       title: Best practices
-  - sectiontitle: Use...
-    section:
-    - path: /compose/profiles/
-      title: ...service profiles
-    - path: /compose/file-watch/
-      title: ...Compose Watch
-    - path: /compose/production/
-      title: ...Compose in production
-    - path: /compose/use-secrets/
-      title: ...secrets in Compose
+  - path: /compose/profiles/
+    title: Use service profiles
+  - path: /compose/file-watch/
+    title: Use Compose Watch
+  - path: /compose/production/
+    title: Compose in production
+  - path: /compose/use-secrets/
+    title: Secrets in Compose
   - sectiontitle: Working with multiple Compose files
     section:
     - path: /compose/multiple-compose-files/
