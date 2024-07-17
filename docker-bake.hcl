@@ -9,27 +9,41 @@ variable "DOCS_URL" {
 variable "DOCS_SITE_DIR" {
   default = "public"
 }
-variable "DOCS_ENFORCE_GIT_LOG_HISTORY" {
-  default = "0"
-}
 
 group "default" {
   targets = ["release"]
 }
 
+target "ctx" {
+  target = "ctx"
+  context = "."
+  output = ["type=cacheonly"]
+  provenance = false
+}
+
+target "_common" {
+  contexts = {
+    ctx = "target:ctx"
+  }
+}
+
 target "index" {
+  inherits = ["_common"]
   # generate a new local search index
   target = "index"
   output = ["type=local,dest=static/pagefind"]
+  provenance = false
 }
 
 target "release" {
+  inherits = ["_common"]
   args = {
     HUGO_ENV = HUGO_ENV
     DOCS_URL = DOCS_URL
   }
   target = "release"
   output = [DOCS_SITE_DIR]
+  provenance = false
 }
 
 group "validate" {
@@ -38,65 +52,42 @@ group "validate" {
 
 target "test" {
   target = "test"
+  inherits = ["_common"]
   output = ["type=cacheonly"]
+  provenance = false
 }
 
 target "lint" {
   target = "lint"
+  inherits = ["_common"]
   output = ["type=cacheonly"]
+  provenance = false
 }
 
 target "unused-media" {
   target = "unused-media"
+  inherits = ["_common"]
   output = ["type=cacheonly"]
+  provenance = false
 }
 
 target "test-go-redirects" {
   target = "test-go-redirects"
+  inherits = ["_common"]
   output = ["type=cacheonly"]
+  provenance = false
 }
 
 #
 # releaser targets are defined in _releaser/Dockerfile
-# and are used for Netlify and AWS S3 deployment
+# and are used for AWS S3 deployment
 #
 
 target "releaser-build" {
   context = "_releaser"
   target = "releaser"
   output = ["type=cacheonly"]
-}
-
-variable "NETLIFY_SITE_NAME" {
-  default = ""
-}
-
-target "_common-netlify" {
-  args = {
-    NETLIFY_SITE_NAME = NETLIFY_SITE_NAME
-  }
-  secret = [
-    "id=NETLIFY_AUTH_TOKEN,env=NETLIFY_AUTH_TOKEN"
-  ]
-}
-
-target "netlify-remove" {
-  inherits = ["_common-netlify"]
-  context = "_releaser"
-  target = "netlify-remove"
-  no-cache-filter = ["netlify-remove"]
-  output = ["type=cacheonly"]
-}
-
-target "netlify-deploy" {
-  inherits = ["_common-netlify"]
-  context = "_releaser"
-  target = "netlify-deploy"
-  contexts = {
-    sitedir = DOCS_SITE_DIR
-  }
-  no-cache-filter = ["netlify-deploy"]
-  output = ["type=cacheonly"]
+  provenance = false
 }
 
 variable "AWS_REGION" {
@@ -128,6 +119,7 @@ target "_common-aws" {
     "id=AWS_SECRET_ACCESS_KEY,env=AWS_SECRET_ACCESS_KEY",
     "id=AWS_SESSION_TOKEN,env=AWS_SESSION_TOKEN"
   ]
+  provenance = false
 }
 
 target "aws-s3-update-config" {
@@ -167,6 +159,7 @@ target "vendor" {
     MODULE = VENDOR_MODULE
   }
   output = ["."]
+  provenance = false
 }
 
 variable "UPSTREAM_MODULE_NAME" {
@@ -187,4 +180,5 @@ target "validate-upstream" {
   }
   target = "validate-upstream"
   output = ["type=cacheonly"]
+  provenance = false
 }
