@@ -124,6 +124,11 @@ area/storage:
       - any-glob-to-any-file:
           - content/storage/**
 
+area/accounts:
+  - changed-files:
+      - any-glob-to-any-file:
+          - content/accounts/**
+
 hugo:
   - changed-files:
       - any-glob-to-any-file:

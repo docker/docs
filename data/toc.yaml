@@ -2150,8 +2150,6 @@ Manuals:
   section:
   - path: /docker-hub/
     title: Overview
-  - path: /docker-id/
-    title: Create an account
   - path: /docker-hub/quickstart/
     title: Quickstart
   - sectiontitle: Repositories
@@ -2200,6 +2198,17 @@ Manuals:
 - title: Docker for GitHub Copilot {{< badge color=violet text="Early Access" >}}
   path: /copilot/
 
+- sectiontitle: Docker accounts
+  section:
+  - path: /accounts/
+    title: Overview
+  - path: /docker-id/
+    title: Create an account
+  - path: /accounts/manage-account/
+    title: Manage an account
+  - path: /accounts/deactivate-user-account/
+    title: Deactivate an account
+
 - sectiontitle: Administration
   section:
   - path: /admin/
@@ -2243,7 +2252,7 @@ Manuals:
   - path: /admin/convert-account/
     title: Convert an account into an organization
   - path: /admin/deactivate-account/
-    title: Deactivate an account or organization
+    title: Deactivate an organization
 
 - sectiontitle: Security
   section:
@@ -2296,7 +2305,7 @@ Manuals:
       - path: /security/for-developers/2fa/disable-2fa/
         title: Disable two-factor authentication
       - path: /security/for-developers/2fa/recover-hub-account/
-        title: Recover your Docker Hub account
+        title: Recover your Docker account
       - path: /security/for-developers/2fa/new-recovery-code/
         title: Generate a new recovery code
   - path: /security/security-announcements/
