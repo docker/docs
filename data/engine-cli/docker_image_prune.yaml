@@ -161,7 +161,6 @@ examples: |-
     foo                 latest              2f287ac753da        14 seconds ago      3.98 MB
     alpine              latest              88e169ea8f46        8 days ago          3.98 MB
     debian              jessie              7b0a06c805e8        2 months ago        123 MB
-    busybox             latest              e02e811dd08f        2 months ago        1.09 MB
     golang              1.7.0               138c2e655421        4 months ago        670 MB
 
     $ docker image prune -a --force --filter "until=240h"
@@ -189,7 +188,6 @@ examples: |-
     REPOSITORY          TAG                 IMAGE ID            CREATED              SIZE
     foo                 latest              2f287ac753da        About a minute ago   3.98 MB
     alpine              latest              88e169ea8f46        8 days ago           3.98 MB
-    busybox             latest              e02e811dd08f        2 months ago         1.09 MB
     ```
 
     The following example removes images with the label `deprecated`:
