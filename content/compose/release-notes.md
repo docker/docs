@@ -10,6 +10,25 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.29.0
+
+{{< release-date date="2024-07-17" >}}
+
+### Update
+
+- Dependencies upgrade: bump compose-go to v2.1.4
+- Dependencies upgrade: bump docker engine and cli to v27.0.3
+- Dependencies upgrade: bump buildx to 0.16.0
+- Dependencies upgrade: bump buildkit to 0.15.0
+- Dependencies upgrade: bump containerd to 1.7.19
+
+### Bug fixes and enhancements
+
+- Added JSON stream progress writer
+- Added --prune option to docker-compose watch command
+- Unnecessary resources are excluded after services have been selected
+- Unset empty variables in containers
+
 ## 2.28.1
 
 {{< release-date date="2024-06-24" >}}
