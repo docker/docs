@@ -105,7 +105,23 @@ Now, run the following `docker compose up` command to start your application.
 ```console
 $ docker compose up --build
 ```
-Refresh <http://localhost:3000> in your browser and verify that the Whale items persisted, even after the containers were removed and ran again.u
+
+In Ruby on Rails, `db:migrate` is a Rake task that is used to run migrations on the database. Migrations are a way to alter the structure of your database schema over time in a consistent and easy way. 
+
+```console
+$ docker exec -it docker-ruby-on-rails-web-1 rake db:migrate RAILS_ENV=test
+```
+
+You will see a similar message like this:
+
+``console
+== 20240710193146 CreateWhales: migrating =====================================
+-- create_table(:whales)
+   -> 0.0126s
+== 20240710193146 CreateWhales: migrated (0.0127s) ============================
+``
+
+Refresh <http://localhost:3000> in your browser and verify that the Whale items persisted, even after the containers were removed and ran again.
 
 Press `ctrl+c` in the terminal to stop your application.
 
