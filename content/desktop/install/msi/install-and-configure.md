@@ -204,7 +204,7 @@ To keep up to date with new releases, you can check use the [release notes](http
 
 ## Analytics
 
-The MSI installer collects data to better understand user behaviour and to improve the user experience by identifying and addressing issues or optimizing popular features.
+The MSI installer collects anonymous usage statistics to better understand user behaviour and to improve the user experience by identifying and addressing issues or optimizing popular features.
 
 ### How to opt-out
 
