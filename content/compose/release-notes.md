@@ -24,10 +24,10 @@ For more detailed information, see the [release notes in the Compose repo](https
 
 ### Bug fixes and enhancements
 
-- Added JSON stream progress writer
-- Added --prune option to docker-compose watch command
-- Unnecessary resources are excluded after services have been selected
-- Unset empty variables in containers
+- Added a JSON stream progress writer.
+- Added a `--prune` flag to the `docker compose watch` command.
+- Unnecessary resources are now excluded after services have been selected.
+- Empty variables with no value are unset in containers.
 
 ## 2.28.1
 
