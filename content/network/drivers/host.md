@@ -31,7 +31,7 @@ Host mode networking can be useful for the following use cases:
 
 This is because it doesn't require network address translation (NAT), and no "userland-proxy" is created for each port.
 
-The host networking driver only works on Linux hosts, but is available as a Beta feature, on Docker Desktop version 4.29 and later.
+The host networking driver works on Linux hosts, and is available with Docker Desktop version 4.33 and later.
 
 You can also use a `host` network for a swarm service, by passing `--network host`
 to the `docker service create` command. In this case, control traffic (traffic
@@ -43,8 +43,8 @@ given swarm node.
 
 ## Docker Desktop
 
-Host networking is also supported on Docker Desktop version 4.29 and later for Mac,
-Windows, and Linux as a [beta feature](../../release-lifecycle.md#beta). To enable this feature, navigate to the **Features in development** tab in **Settings**, and then select **Enable host networking**.
+Host networking is also supported on Docker Desktop version 4.33 and later for Mac,
+Windows, and Linux. To enable this feature, navigate to the **Resources**, **Network** tab in **Settings**, and then select **Enable host networking**.
 
 This feature works in both directions. This means you can
 access a server that is running in a container from your host and you can access
@@ -88,11 +88,11 @@ $ nc localhost 80
 - The host network feature of Docker Desktop works on layer 4. This means that
 unlike with Docker on Linux, network protocols that operate below TCP or UDP are
 not supported.
+- Processes inside the container cannot bind to the IP addresses of the host
+because the container has no direct access to the interfaces of the host.
 - This feature doesn't work with Enhanced Container Isolation enabled, since
 isolating your containers from the host and allowing them access to the host
 network contradict each other.
-- IPv6 is not yet supported. Services need to use IPv4 and bind to address
-  `127.0.0.1` in the container to be visible on the host.
 
 ## Next steps
 
