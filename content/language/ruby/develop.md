@@ -23,7 +23,7 @@ In the cloned repository's directory, open the `compose.yaml` file in an IDE or 
 
 The following is the updated `compose.yaml` file.
 
-```yaml {hl_lines="10-30"}
+```yaml {hl_lines="09-30"}
 services:
   web:
     build: .
@@ -34,11 +34,9 @@ services:
       - "3000:3000"
     depends_on:
       - db
-    secrets:
-      - db-password
     environment:
-      - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
       - RAILS_ENV=test
+    env_file: "webapp.env"
   db:
     image: postgres:latest
     secrets:
@@ -68,7 +66,7 @@ In the cloned repository's directory, create a new directory named `db` and insi
 mysecretpassword
 ```
 
-Save and close the `password.txt` file.
+Save and close the `password.txt` file. In addition, in the file `webapp.env` you can change the password to connect to the database.
 
 You should now have the following contents in your `docker-ruby-on-rails`
 directory.
