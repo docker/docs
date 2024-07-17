@@ -10,7 +10,7 @@ This page outlines the different ways you can enforce sign-in for Docker Desktop
 
 > **Early Access**
 >
-> The registry key method is an [early access](../../../release-lifecycle.md#early-access-ea) feature. 
+> The registry key method is an [early access](../../../release-lifecycle.md#early-access-ea) feature for Docker Business subscribers. 
 > It's available with Docker Desktop version 4.32 and later.
 { .restricted }
 
@@ -53,7 +53,7 @@ There are many ways to deploy the registry key, for example using an MDM solutio
 
 > **Early Access**
 >
-> The plist method is an [early access](../../../release-lifecycle.md#early-access-ea) feature. 
+> The plist method is an [early access](../../../release-lifecycle.md#early-access-ea) feature for Docker Business subscribers. 
 > It's available with Docker Desktop version 4.32 and later.
 { .restricted }
 
