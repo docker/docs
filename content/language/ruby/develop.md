@@ -121,9 +121,9 @@ You will see a similar message like this:
 == 20240710193146 CreateWhales: migrated (0.0127s) ============================
 ``
 
-Refresh <http://localhost:3000> in your browser and verify that the Whale items persisted, even after the containers were removed and ran again.
+Refresh <http://localhost:3000> in your browser and add the whales. 
 
-Press `ctrl+c` in the terminal to stop your application.
+Press `ctrl+c` in the terminal to stop your application and run `docker compose up` again, the whales are being persisted.
 
 ## Automatically update services
 
