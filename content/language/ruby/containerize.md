@@ -10,7 +10,7 @@ aliases:
 ## Prerequisites
 
 * You have installed the latest version of [Docker Desktop](../../get-docker.md).
-* You have a [git client](https://git-scm.com/downloads). The examples in this section use a command-line based git client, but you can use any client.
+* You have a [Git client](https://git-scm.com/downloads). The examples in this section show the Git CLI, but you can use any client.
 
 ## Overview
 
@@ -32,11 +32,9 @@ Now that you have an application, you can create the necessary Docker assets to
 containerize your application. You can use Docker Desktop's built-in Docker Init
 feature to help streamline the process, or you can manually create the assets.
 
-Docker's docker init command provides predefined configurations tailored for specific programming languages. This feature simplifies the setup process by automatically generating Dockerfiles and other necessary configuration files based on the chosen language. For example, docker init has predefined configurations for languages like Python, Java, and Node.js, making it easier to get started with Docker for these environments.
+`docker init`, the command for bootstrapping the Docker-related assets for a project, does not yet support the Ruby programming language. This means that if you are working with Ruby, you'll need to create Dockerfiles and other related configurations manually.
 
-However, it's important to note that as of now, docker init does not offer a predefined configuration for the Ruby programming language. This means that if you are working with Ruby, you'll need to create Dockerfiles and other related configurations manually.
-
-Inside the `docker-ruby-on-rails` directory, you should create the following files:
+Inside the `docker-ruby-on-rails` directory, create the following files:
 
 Create a file named `Dockerfile` with the following contents.
 
@@ -93,7 +91,6 @@ CMD ["rails", "server", "-b", "0.0.0.0"]
 Create a file named `compose.yaml` with the following contents.
 
 ```yaml {collapse=true,title=compose.yaml}
-version: '3'
 services:
   web:
     build: .
@@ -355,7 +352,7 @@ terminal.
 $ docker compose up --build
 ```
 
-Open a browser and view the application at [http://localhost:8000](http://localhost:8000). You should see a simple Ruby on Rails application.
+Open a browser and view the application at [http://localhost:3000](http://localhost:3000). You should see a simple Ruby on Rails application.
 
 In the terminal, press `ctrl`+`c` to stop the application.
 
