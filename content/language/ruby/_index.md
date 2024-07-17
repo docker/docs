@@ -6,7 +6,7 @@ toc_min: 1
 toc_max: 2
 ---
 
-The Ruby on Rails language-specific guide teaches you how to containerize a Ruby on Rails application using Docker. In this guide, you’ll learn how to:
+The Ruby language-specific guide teaches you how to containerize a Ruby on Rails application using Docker. In this guide, you’ll learn how to:
 
 * Containerize and run a Ruby on Rails application
 * Set up a local environment to develop a Ruby on Rails application using containers
