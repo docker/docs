@@ -6,7 +6,7 @@ keywords: msi, docker desktop, windows, installation
  
 > **Early Access**
 >
-> The MSI installer is an [early access](../../../release-lifecycle.md#early-access-ea) feature.
+> The MSI installer is an [early access](../../../release-lifecycle.md#early-access-ea) feature for Docker Business subscribers.
 > It's available to all company owners and organization owners with Docker Desktop version 4.32 and later.
 { .restricted } 
 
