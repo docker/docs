@@ -151,3 +151,10 @@ jobs:
           annotations: ${{ steps.meta.outputs.annotations }}
           push: true
 ```
+
+> **Note**
+>
+> The build must produce the components that you want to annotate. For example,
+> to annotate an image index, the build must produce an index. If the build
+> produces only a manifest and you specify `index` or `index-descriptor`, the
+> build fails.
