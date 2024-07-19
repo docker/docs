@@ -117,6 +117,6 @@ To update the Compose plugin, run the following commands:
 3. Test the installation.
 
     ```console
-    $ docker compose version
+    $ docker-compose --version
     Docker Compose version {{% param "compose_version" %}}
     ```
