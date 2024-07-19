@@ -78,59 +78,42 @@ The second part represents a subdirectory inside the repository that is used as 
 
 Alternatively `build` can be an object with fields defined as follows:
 
-### context
-
-`context` defines either a path to a directory containing a Dockerfile, or a URL to a git repository.
-
-When the value supplied is a relative path, it is interpreted as relative to the location of the Compose file.
-Compose warns you about the absolute path used to define the build context as those prevent the Compose file
-from being portable.
-
-```yml
-build:
-  context: ./dir
-```
-
-```yml
-services:
-  webapp:
-    build: https://github.com/mycompany/webapp.git
-```
-
-If not set explicitly, `context` defaults to project directory (`.`). 
-
-### dockerfile
-
-`dockerfile` sets an alternate Dockerfile. A relative path is resolved from the build context.
-Compose warns you about the absolute path used to define the Dockerfile as it prevents Compose files
-from being portable.
-
-When set, `dockerfile_inline` attribute is not allowed and Compose
-rejects any Compose file having both set.
-
-```yml
-build:
-  context: .
-  dockerfile: webapp.Dockerfile
-```
-
-### dockerfile_inline
+### additional_contexts
 
 {{< introduced compose 2.17.0 "../release-notes.md#2170" >}}
 
-`dockerfile_inline` defines the Dockerfile content as an inlined string in a Compose file. When set, the `dockerfile`
-attribute is not allowed and Compose rejects any Compose file having both set.
+`additional_contexts` defines a list of named contexts the image builder should use during image build.
 
-Use of YAML multi-line string syntax is recommended to define the Dockerfile content:
+`additional_contexts` can be a mapping or a list:
 
 ```yml
 build:
   context: .
-  dockerfile_inline: |
-    FROM baseimage
-    RUN some command
+  additional_contexts:
+    - resources=/path/to/resources
+    - app=docker-image://my-app:latest
+    - source=https://github.com/myuser/project.git
 ```
 
+```yml
+build:
+  context: .
+  additional_contexts:
+    resources: /path/to/resources
+    app: docker-image://my-app:latest
+    source: https://github.com/myuser/project.git
+```
+
+When used as a list, the syntax follows the `NAME=VALUE` format, where `VALUE` is a string. Validation beyond that
+is the responsibility of the image builder (and is builder specific). Compose supports at least
+absolute and relative paths to a directory AND Git repository URLs, like [context](#context) does. Other context flavours
+must be prefixed to avoid ambiguity with a `type://` prefix.
+
+Compose warns you if the image builder does not support additional contexts and may list
+the unused contexts.
+
+Illustrative examples of how this is used in Buildx can be found
+[here](https://github.com/docker/buildx/blob/master/docs/reference/buildx_build.md#-additional-build-contexts---build-context).
 
 ### args
 
@@ -167,38 +150,26 @@ args:
   - GIT_COMMIT
 ```
 
-### ssh
+### context
 
-`ssh` defines SSH authentications that the image builder should use during image build (e.g., cloning private repository).
+`context` defines either a path to a directory containing a Dockerfile, or a URL to a git repository.
 
-`ssh` property syntax can be either:
-* `default`: Let the builder connect to the ssh-agent.
-* `ID=path`: A key/value definition of an ID and the associated path. It can be either a [PEM](https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail) file, or path to ssh-agent socket.
+When the value supplied is a relative path, it is interpreted as relative to the location of the Compose file.
+Compose warns you about the absolute path used to define the build context as those prevent the Compose file
+from being portable.
 
-```yaml
+```yml
 build:
-  context: .
-  ssh:
-    - default   # mount the default ssh agent
-```
-or
-```yaml
-build:
-  context: .
-  ssh: ["default"]   # mount the default ssh agent
+  context: ./dir
 ```
 
-Using a custom id `myproject` with path to a local SSH key:
-```yaml
-build:
-  context: .
-  ssh:
-    - myproject=~/.ssh/myproject.pem
+```yml
+services:
+  webapp:
+    build: https://github.com/mycompany/webapp.git
 ```
-The image builder can then rely on this to mount the SSH key during build.
-For illustration, [BuildKit extended syntax](https://github.com/compose-spec/compose-spec/pull/234/%5Bmoby/buildkit@master/frontend/dockerfile/docs/syntax.md#run---mounttypessh%5D(https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/syntax.md#run---mounttypessh)) can be used to mount the SSH key set by ID and access a secured resource:
 
-`RUN --mount=type=ssh,id=myproject git clone ...`
+If not set explicitly, `context` defaults to project directory (`.`). 
 
 ### cache_from
 
@@ -238,42 +209,49 @@ Cache target is defined using the same `type=TYPE[,KEY=VALUE]` syntax defined by
 
 Unsupported caches are ignored and don't prevent you from building images.
 
-### additional_contexts
+### dockerfile
+
+`dockerfile` sets an alternate Dockerfile. A relative path is resolved from the build context.
+Compose warns you about the absolute path used to define the Dockerfile as it prevents Compose files
+from being portable.
+
+When set, `dockerfile_inline` attribute is not allowed and Compose
+rejects any Compose file having both set.
+
+```yml
+build:
+  context: .
+  dockerfile: webapp.Dockerfile
+```
+
+### dockerfile_inline
 
 {{< introduced compose 2.17.0 "../release-notes.md#2170" >}}
 
-`additional_contexts` defines a list of named contexts the image builder should use during image build.
+`dockerfile_inline` defines the Dockerfile content as an inlined string in a Compose file. When set, the `dockerfile`
+attribute is not allowed and Compose rejects any Compose file having both set.
 
-`additional_contexts` can be a mapping or a list:
-
-```yml
-build:
-  context: .
-  additional_contexts:
-    - resources=/path/to/resources
-    - app=docker-image://my-app:latest
-    - source=https://github.com/myuser/project.git
-```
+Use of YAML multi-line string syntax is recommended to define the Dockerfile content:
 
 ```yml
 build:
   context: .
-  additional_contexts:
-    resources: /path/to/resources
-    app: docker-image://my-app:latest
-    source: https://github.com/myuser/project.git
+  dockerfile_inline: |
+    FROM baseimage
+    RUN some command
 ```
 
-When used as a list, the syntax follows the `NAME=VALUE` format, where `VALUE` is a string. Validation beyond that
-is the responsibility of the image builder (and is builder specific). Compose supports at least
-absolute and relative paths to a directory AND Git repository URLs, like [context](#context) does. Other context flavours
-must be prefixed to avoid ambiguity with a `type://` prefix.
+### entitlements
 
-Compose warns you if the image builder does not support additional contexts and may list
-the unused contexts.
+{{< introduced compose 2.27.1 "../release-notes.md#2271" >}}
 
-Illustrative examples of how this is used in Buildx can be found
-[here](https://github.com/docker/buildx/blob/master/docs/reference/buildx_build.md#-additional-build-contexts---build-context).
+`entitlements` defines extra privileged entitlements to be allowed during the build.
+
+ ```yaml
+ entitlements:
+   - network.host
+   - security.insecure
+ ```
 
 ### extra_hosts
 
@@ -314,18 +292,6 @@ configuration, which means for Linux `/etc/hosts` will get extra lines:
 `isolation` specifies a build’s container isolation technology. Like [isolation](05-services.md#isolation), supported values
 are platform specific.
 
-### privileged
-
-{{< introduced compose 2.15.0 "../release-notes.md#2" >}}
-
-`privileged` configures the service image to build with elevated privileges. Support and actual impacts are platform specific.
-
-```yml
-build:
-  context: .
-  privileged: true
-```
-
 ### labels
 
 `labels` add metadata to the resulting image. `labels` can be set either as an array or a map.
@@ -349,17 +315,6 @@ build:
     - "com.example.department=Finance"
     - "com.example.label-with-empty-value"
 ```
-
-### no_cache
-
-`no_cache` disables image builder cache and enforces a full rebuild from source for all image layers. This only
-applies to layers declared in the Dockerfile, referenced images COULD be retrieved from local image store whenever tag
-has been updated on registry (see [pull](#pull)).
-
-### pull
-
-`pull` requires the image builder to pull referenced images (`FROM` Dockerfile directive), even if those are already
-available in the local image store.
 
 ### network
 
@@ -385,32 +340,69 @@ build:
   network: none
 ```
 
-### shm_size
+### no_cache
 
-`shm_size` sets the size of the shared memory (`/dev/shm` partition on Linux) allocated for building Docker images. Specify
-as an integer value representing the number of bytes or as a string expressing a [byte value](11-extension.md#specifying-byte-values).
+`no_cache` disables image builder cache and enforces a full rebuild from source for all image layers. This only
+applies to layers declared in the Dockerfile, referenced images COULD be retrieved from local image store whenever tag
+has been updated on registry (see [pull](#pull)).
+
+### platforms
+
+`platforms` defines a list of target [platforms](05-services.md#platform).
+
+```yml
+build:
+  context: "."
+  platforms:
+    - "linux/amd64"
+    - "linux/arm64"
+```
+
+When the `platforms` attribute is omitted, Compose includes the service's platform
+in the list of the default build target platforms.
+
+When the `platforms` attribute is defined, Compose includes the service's
+platform, otherwise users won't be able to run images they built.
+
+Composes reports an error in the following cases:
+* When the list contains multiple platforms but the implementation is incapable of storing multi-platform images.
+* When the list contains an unsupported platform.
+
+  ```yml
+  build:
+    context: "."
+    platforms:
+      - "linux/amd64"
+      - "unsupported/unsupported"
+  ```
+* When the list is non-empty and does not contain the service's platform
+
+  ```yml
+  services:
+    frontend:
+      platform: "linux/amd64"
+      build:
+        context: "."
+        platforms:
+          - "linux/arm64"
+  ```
+
+### privileged
+
+{{< introduced compose 2.15.0 "../release-notes.md#2" >}}
+
+`privileged` configures the service image to build with elevated privileges. Support and actual impacts are platform specific.
 
 ```yml
 build:
   context: .
-  shm_size: '2gb'
+  privileged: true
 ```
 
-```yaml
-build:
-  context: .
-  shm_size: 10000000
-```
+### pull
 
-### target
-
-`target` defines the stage to build as defined inside a multi-stage `Dockerfile`.
-
-```yml
-build:
-  context: .
-  target: prod
-```
+`pull` requires the image builder to pull referenced images (`FROM` Dockerfile directive), even if those are already
+available in the local image store.
 
 ### secrets
 
@@ -483,6 +475,56 @@ Service builds may be granted access to multiple secrets. Long and short syntax 
 same Compose file. Defining a secret in the top-level `secrets` must not imply granting any service build access to it.
 Such grant must be explicit within service specification as [secrets](05-services.md#secrets) service element.
 
+### ssh
+
+`ssh` defines SSH authentications that the image builder should use during image build (e.g., cloning private repository).
+
+`ssh` property syntax can be either:
+* `default`: Let the builder connect to the ssh-agent.
+* `ID=path`: A key/value definition of an ID and the associated path. It can be either a [PEM](https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail) file, or path to ssh-agent socket.
+
+```yaml
+build:
+  context: .
+  ssh:
+    - default   # mount the default ssh agent
+```
+or
+```yaml
+build:
+  context: .
+  ssh: ["default"]   # mount the default ssh agent
+```
+
+Using a custom id `myproject` with path to a local SSH key:
+```yaml
+build:
+  context: .
+  ssh:
+    - myproject=~/.ssh/myproject.pem
+```
+The image builder can then rely on this to mount the SSH key during build.
+For illustration, [BuildKit extended syntax](https://github.com/compose-spec/compose-spec/pull/234/%5Bmoby/buildkit@master/frontend/dockerfile/docs/syntax.md#run---mounttypessh%5D(https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/syntax.md#run---mounttypessh)) can be used to mount the SSH key set by ID and access a secured resource:
+
+`RUN --mount=type=ssh,id=myproject git clone ...`
+
+### shm_size
+
+`shm_size` sets the size of the shared memory (`/dev/shm` partition on Linux) allocated for building Docker images. Specify
+as an integer value representing the number of bytes or as a string expressing a [byte value](11-extension.md#specifying-byte-values).
+
+```yml
+build:
+  context: .
+  shm_size: '2gb'
+```
+
+```yaml
+build:
+  context: .
+  shm_size: 10000000
+```
+
 ### tags
 
 `tags` defines a list of tag mappings that must be associated to the build image. This list comes in addition to
@@ -492,6 +534,16 @@ the `image` [property defined in the service section](05-services.md#image)
 tags:
   - "myimage:mytag"
   - "registry/username/myrepos:my-other-tag"
+```
+
+### target
+
+`target` defines the stage to build as defined inside a multi-stage `Dockerfile`.
+
+```yml
+build:
+  context: .
+  target: prod
 ```
 
 ### ulimits
@@ -513,43 +565,4 @@ services:
           hard: 40000
 ```
 
-### platforms
 
-`platforms` defines a list of target [platforms](05-services.md#platform).
-
-```yml
-build:
-  context: "."
-  platforms:
-    - "linux/amd64"
-    - "linux/arm64"
-```
-
-When the `platforms` attribute is omitted, Compose includes the service's platform
-in the list of the default build target platforms.
-
-When the `platforms` attribute is defined, Compose includes the service's
-platform, otherwise users won't be able to run images they built.
-
-Composes reports an error in the following cases:
-* When the list contains multiple platforms but the implementation is incapable of storing multi-platform images.
-* When the list contains an unsupported platform.
-
-  ```yml
-  build:
-    context: "."
-    platforms:
-      - "linux/amd64"
-      - "unsupported/unsupported"
-  ```
-* When the list is non-empty and does not contain the service's platform
-
-  ```yml
-  services:
-    frontend:
-      platform: "linux/amd64"
-      build:
-        context: "."
-        platforms:
-          - "linux/arm64"
-  ```
