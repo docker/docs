@@ -69,4 +69,4 @@ Any settings that are enforced, are grayed out in Docker Desktop and the user is
 
 ## More resources
 
-- [Video: Settings Managmeent](https://www.youtube.com/watch?v=I9oJOJ1P9PQ)
+- [Video: Settings Management](https://www.youtube.com/watch?v=I9oJOJ1P9PQ)
