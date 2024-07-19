@@ -66,7 +66,7 @@ Using the string syntax, only the build context can be configured as either:
       build: ./dir
   ```
 
-- A git repository URL. Git URLs accept context configuration in their fragment section, separated by a colon (`:`).
+- A Git repository URL. Git URLs accept context configuration in their fragment section, separated by a colon (`:`).
 The first part represents the reference that Git checks out, and can be either a branch, a tag, or a remote reference.
 The second part represents a subdirectory inside the repository that is used as a build context.
 
@@ -106,7 +106,7 @@ build:
 
 When used as a list, the syntax follows the `NAME=VALUE` format, where `VALUE` is a string. Validation beyond that
 is the responsibility of the image builder (and is builder specific). Compose supports at least
-absolute and relative paths to a directory AND Git repository URLs, like [context](#context) does. Other context flavours
+absolute and relative paths to a directory and Git repository URLs, like [context](#context) does. Other context flavours
 must be prefixed to avoid ambiguity with a `type://` prefix.
 
 Compose warns you if the image builder does not support additional contexts and may list
@@ -343,7 +343,7 @@ build:
 ### no_cache
 
 `no_cache` disables image builder cache and enforces a full rebuild from source for all image layers. This only
-applies to layers declared in the Dockerfile, referenced images COULD be retrieved from local image store whenever tag
+applies to layers declared in the Dockerfile, referenced images can be retrieved from local image store whenever tag
 has been updated on registry (see [pull](#pull)).
 
 ### platforms
@@ -480,20 +480,20 @@ Such grant must be explicit within service specification as [secrets](05-service
 `ssh` defines SSH authentications that the image builder should use during image build (e.g., cloning private repository).
 
 `ssh` property syntax can be either:
-* `default`: Let the builder connect to the ssh-agent.
+* `default`: Let the builder connect to the SSH-agent.
 * `ID=path`: A key/value definition of an ID and the associated path. It can be either a [PEM](https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail) file, or path to ssh-agent socket.
 
 ```yaml
 build:
   context: .
   ssh:
-    - default   # mount the default ssh agent
+    - default   # mount the default SSH agent
 ```
 or
 ```yaml
 build:
   context: .
-  ssh: ["default"]   # mount the default ssh agent
+  ssh: ["default"]   # mount the default SSH agent
 ```
 
 Using a custom id `myproject` with path to a local SSH key:
