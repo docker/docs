@@ -55,8 +55,8 @@ Let's get started!
 
 ? What application platform does your project use? Python
 ? What version of Python do you want to use? 3.11.4
-? What port do you want your app to listen on? 5000
-? What is the command to run your app? python3 -m uvicorn app:app --host=0.0.0.0 --port=5000
+? What port do you want your app to listen on? 8000
+? What is the command to run your app? python3 -m uvicorn app:app --host=0.0.0.0 --port=8000
 ```
 
 Create a file named `.gitignore` with the following contents.
@@ -174,10 +174,10 @@ USER appuser
 COPY . .
 
 # Expose the port that the application listens on.
-EXPOSE 5000
+EXPOSE 8000
 
 # Run the application.
-CMD python3 -m uvicorn app:app --host=0.0.0.0 --port=5000
+CMD python3 -m uvicorn app:app --host=0.0.0.0 --port=8000
 ```
 
 Create a file named `compose.yaml` with the following contents.
@@ -197,7 +197,7 @@ services:
     build:
       context: .
     ports:
-      - 5000:5000
+      - 8000:8000
 ```
 
 Create a file named `.dockerignore` with the following contents.
@@ -329,7 +329,7 @@ terminal.
 $ docker compose up --build
 ```
 
-Open a browser and view the application at [http://localhost:5000](http://localhost:5000). You should see a simple FastAPI application.
+Open a browser and view the application at [http://localhost:8000](http://localhost:8000). You should see a simple FastAPI application.
 
 In the terminal, press `ctrl`+`c` to stop the application.
 
@@ -343,9 +343,9 @@ in a terminal.
 $ docker compose up --build -d
 ```
 
-Open a browser and view the application at [http://localhost:5000](http://localhost:5000).
+Open a browser and view the application at [http://localhost:8000](http://localhost:8000).
 
-To see the OpenAPI docs you can go at [http://localhost:5000/docs](http://localhost:5000/docs)
+To see the OpenAPI docs you can go at [http://localhost:8000/docs](http://localhost:8000/docs)
 
 You should see a simple FastAPI application.
 

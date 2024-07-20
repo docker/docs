@@ -129,7 +129,7 @@ spec:
         - name: POSTGRES_PORT
           value: "5432"
         ports:
-        - containerPort: 5001
+        - containerPort: 8001
 ---
 apiVersion: v1
 kind: Service
@@ -141,8 +141,8 @@ spec:
   selector:
     service: fastapi
   ports:
-  - port: 5001
-    targetPort: 5001
+  - port: 8001
+    targetPort: 8001
     nodePort: 30001
 ```
 
@@ -219,7 +219,7 @@ To learn more about Kubernetes objects, see the [Kubernetes documentation](https
    NAME                 TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
    kubernetes           ClusterIP   10.43.0.1      <none>        443/TCP          13h
    postgres             ClusterIP   10.43.209.25   <none>        5432/TCP         3m10s
-   service-entrypoint   NodePort    10.43.67.120   <none>        5001:30001/TCP   79s
+   service-entrypoint   NodePort    10.43.67.120   <none>        8001:30001/TCP   79s
    ```
 
    In addition to the default `kubernetes` service, you can see your `service-entrypoint` service, accepting traffic on port 30001/TCP and the internal `ClusterIP` `postgres` with the port `5432` open to accept connections from you python app.

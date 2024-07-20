@@ -47,8 +47,8 @@ You'll need to clone a new repository to get a sample application that includes 
    
    ? What application platform does your project use? Python
    ? What version of Python do you want to use? 3.11.4
-   ? What port do you want your app to listen on? 5001
-   ? What is the command to run your app? python3 -m uvicorn app:app --host=0.0.0.0 --port=5001
+   ? What port do you want your app to listen on? 8001
+   ? What is the command to run your app? python3 -m uvicorn app:app --host=0.0.0.0 --port=8001
    ```
 
    Create a file named `.gitignore` with the following contents.
@@ -166,10 +166,10 @@ You'll need to clone a new repository to get a sample application that includes 
    COPY . .
    
    # Expose the port that the application listens on.
-   EXPOSE 5001
+   EXPOSE 8001
    
    # Run the application.
-   CMD python3 -m uvicorn app:app --host=0.0.0.0 --port=5001
+   CMD python3 -m uvicorn app:app --host=0.0.0.0 --port=8001
    ```
    
    Create a file named `compose.yaml` with the following contents.
@@ -189,7 +189,7 @@ You'll need to clone a new repository to get a sample application that includes 
        build:
          context: .
        ports:
-         - 5001:5001
+         - 8001:8001
    
    # The commented out section below is an example of how to define a PostgreSQL
    # database that your application can use. `depends_on` tells Docker Compose to
@@ -341,7 +341,7 @@ services:
     build:
       context: .
     ports:
-      - 5001:5001
+      - 8001:8001
     environment:
       - POSTGRES_SERVER=db
       - POSTGRES_USER=postgres
@@ -422,7 +422,7 @@ Let's create an object with a post method
 
 ```console
 $ curl -X 'POST' \
-  'http://0.0.0.0:5001/heroes/' \
+  'http://0.0.0.0:8001/heroes/' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -448,7 +448,7 @@ Let's make a get request with the next curl command:
 
 ```console
 curl -X 'GET' \
-  'http://0.0.0.0:5001/heroes/' \
+  'http://0.0.0.0:8001/heroes/' \
   -H 'accept: application/json'
 ```
 
@@ -480,7 +480,7 @@ services:
     build:
       context: .
     ports:
-      - 5001:5001
+      - 8001:8001
     environment:
       - POSTGRES_SERVER=db
       - POSTGRES_USER=postgres
@@ -529,7 +529,7 @@ $ docker compose watch
 In a terminal, curl the application to get a response.
 
 ```console
-$ curl http://localhost:5001
+$ curl http://localhost:8001
 Hello, Docker!
 ```
 
@@ -545,7 +545,7 @@ Open `python-docker-dev-example/app.py` in an IDE or text editor and update the 
 Save the changes to `app.py` and then wait a few seconds for the application to rebuild. Curl the application again and verify that the updated text appears.
 
 ```console
-$ curl http://localhost:5001
+$ curl http://localhost:8001
 Hello, Docker!!!
 ```
 
