@@ -162,6 +162,10 @@ In these Kubernetes YAML file, there are various objects, separated by the `---`
 
 To learn more about Kubernetes objects, see the [Kubernetes documentation](https://kubernetes.io/docs/home/).
 
+> **Note**
+>
+> * The `NodePort` service is good for development/testing purposes. For production you should implement an [ingress-controller](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/).
+
 ## Deploy and check your application
 
 1. In a terminal, navigate to `python-docker-dev-example` and deploy your database to
