@@ -139,7 +139,21 @@ The list includes the following vulnerabilities:
 - [CVE-2024-3094 (XZ backdoor)](https://scout.docker.com/v/CVE-2024-3094)
 
 You can configure the CVEs included in this list by creating a custom policy.
-For more information, see [Configure policies](./configure.md).
+Custom configuration options include:
+
+- Remove CVEs from the list
+
+  If you don't want to track a specific CVE that's
+  included in the default list, you can remove it from the custom policy.
+
+- Enable tracking of vulnerabilities from CISA's Known Exploited Vulnerabilities (KEV) catalog
+
+  If you want this policy to track all vulnerabilities from
+  [CISA's KEV catalog](https://www.cisa.gov/known-exploited-vulnerabilities-catalog),
+  in addition to Docker's curated list of high-profile vulnerabilities,
+  you can enable this option in the custom policy.
+
+For more information about how to configure policies, see [Configure policies](./configure.md).
 
 ### Supply chain attestations
 
