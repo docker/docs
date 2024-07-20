@@ -6,6 +6,7 @@ ARG ALPINE_VERSION=3.20
 ARG GO_VERSION=1.22
 # HTML_TEST_VERSION sets the wjdp/htmltest version for HTML testing
 ARG HTMLTEST_VERSION=0.17.0
+ARG NGINX_VERSION=1.27
 
 # base is the base stage with build dependencies
 FROM golang:${GO_VERSION}-alpine AS base
@@ -136,3 +137,7 @@ EOT
 FROM scratch AS release
 COPY --from=build /out /
 COPY --from=pagefind /pagefind /pagefind
+
+# image creates a Docker image for the documentation site
+FROM nginx:${NGINX_VERSION}-alpine AS image
+COPY --from=release / /usr/share/nginx/html

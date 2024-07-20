@@ -155,3 +155,26 @@ jobs:
         if: ${{ env.SEND_SLACK_MSG == 'true' }}
         run: |
           curl -X POST -H 'Content-type: application/json' --data '{"text":"${{ env.DOCS_SLACK_MSG }}"}' ${{ secrets.SLACK_WEBHOOK }}
+  image:
+    runs-on: ubuntu-22.04
+    if: github.ref == 'refs/heads/published'
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      -
+        name: Build website
+        uses: docker/bake-action@v5
+        with:
+          files: |
+            docker-bake.hcl
+          targets: image
+          set: |
+            *.cache-from=type=gha,scope=deploy-${{ env.BRANCH_NAME }}
+            *.cache-to=type=gha,scope=deploy-${{ env.BRANCH_NAME }},mode=max
+          push: true
