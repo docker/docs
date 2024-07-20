@@ -180,7 +180,7 @@ To learn more about Kubernetes objects, see the [Kubernetes documentation](https
    secret/postgres-secret created
    ```
 
-   and let's deploy our python application
+   Now, deploy your python application.
 
    ```console
    kubectl apply -f docker-python-kubernetes.yaml

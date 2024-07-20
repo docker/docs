@@ -345,7 +345,7 @@ $ docker compose up --build -d
 
 Open a browser and view the application at [http://localhost:8000](http://localhost:8000).
 
-To see the OpenAPI docs you can go at [http://localhost:8000/docs](http://localhost:8000/docs)
+To see the OpenAPI docs you can go to [http://localhost:8000/docs](http://localhost:8000/docs).
 
 You should see a simple FastAPI application.
 
