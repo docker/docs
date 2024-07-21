@@ -269,6 +269,71 @@ EOF
 (Note the `set -e` command to exit immediately after any command fails, instead
 of continuing.)
 
+## Dealing with dependencies in development
+
+In previous examples we saw the importance of layer caching to deal with dependencies when packaging the application within the container, being an ideal scenario for production environments.
+
+But remember, in development environments most of the time the application code is shared with the container through volumes, and is not copied into the image through Dockerfile
+
+In these cases:
+Do not run your package manager (NPM, Composer, Maven, Pip, etc.) inside the image, leave the installation to CMD or ENTRYPOINT. This is important so that the volume that we will normally share when developing does not overwrite the files installed by the package manager in the Dockerfile.
+
+Exemple:
+
+- app.js
+- package.json
+- Dockerfile
+- docker-compose.yaml
+- entrypoint.sh
+
+**Dockerfile**
+```dockerfile
+FROM node
+
+WORKDIR /app
+
+RUN mkdir -p /dockerfiles
+
+COPY ./entrypoint.sh /dockerfiles/entrypoint.sh
+
+RUN chmod +x /dockerfiles/entrypoint.sh
+
+ENTRYPOINT [ "/dockerfiles/entrypoint.sh" ]
+```
+
+**entrypoint.sh**
+```shell
+#!/bin/bash
+
+npm install
+
+tail -f /dev/null
+```
+
+
+**docker-compose.yaml**:
+```ỳaml
+services:
+  node:
+    build: .
+    container_name: node
+    volumes:
+      - .:/app
+    networks:
+      - default
+networks:
+  default:
+    driver: bridge
+```
+
+In this case, the volume is sharing the application code with the container, completely overwriting the installation of dependencies made within the Dockerfile.
+
+The installation of the dependencies must be persisted in the volume that was created to handle the application code, in this case, the entrypoint will install the dependencies when the container is started.
+
+For production environments, the current example is perfect. However, in development environments, we could have a new section explaining that using volumes would be sufficient instead of copying the content again with "COPY . .". Additionally, it is not necessary to run "npm run build" just to cache the layer, as this is not advantageous in development.
+
+It is also recommended not to run package managers like npm, Composer, Maven, pip, etc., inside the image. Leave the installation to the CMD or ENTRYPOINT. This is important to ensure that the shared volume in development does not overwrite the files installed by the package manager.
+
 ## Other resources
 
 For more information on using cache to do efficient builds, see:
