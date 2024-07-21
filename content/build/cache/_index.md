@@ -273,12 +273,12 @@ of continuing.)
 
 In previous examples we saw the importance of layer caching to deal with dependencies when packaging the application within the container, being an ideal scenario for production environments.
 
-But remember, in development environments most of the time the application code is shared with the container through volumes, and is not copied into the image through Dockerfile
+But remember, in development environments most of the time the application code is shared with the container through [`volumes`](../../storage/volumes.md), and is not copied into the image through Dockerfile
 
 In these cases:
-Do not run your package manager (NPM, Composer, Maven, Pip, etc.) inside the image, leave the installation to CMD or ENTRYPOINT. This is important so that the volume that we will normally share when developing does not overwrite the files installed by the package manager in the Dockerfile.
+Do not run your package manager (NPM, Composer, Maven, Pip, etc.) inside the image, leave the installation to **CMD** or **ENTRYPOINT**. This is important so that the volume that we will normally share when developing does not overwrite the files installed by the package manager in the Dockerfile.
 
-Exemple:
+Exemple, In an application with this structure:
 
 - app.js
 - package.json
@@ -327,9 +327,9 @@ networks:
     driver: bridge
 ```
 
-In this case, the volume is sharing the application code with the container, completely overwriting the installation of dependencies made within the Dockerfile.
+The volume is sharing all the application code with the container, completely overwriting the installation of dependencies made within the Dockerfile.
 
-The installation of the dependencies must be persisted in the volume that was created to handle the application code, in this case, the entrypoint will install the dependencies when the container is started.
+The installation of the dependencies must be persisted in the volume that was created to handle the application code, in this case, the **ENTRYPOINT** will install the dependencies when the container is started.
 
 ## Other resources
 
