@@ -139,6 +139,14 @@ Use File sharing to allow local directories on your machine to be shared with
 Linux containers. This is especially useful for editing source code in an IDE on
 the host while running and testing the code in a container.
 
+#### Synchronized file shares 
+
+Synchronized file shares is an alternative file sharing mechanism that provides fast and flexible host-to-VM file sharing, enhancing bind mount performance through the use of synchronized filesystem caches. Available with Pro, Team, and Business subscriptions.
+
+To learn more, see [Synchronized file share](../synchronized-file-sharing.md).
+
+#### Virtual file shares
+
 By default the `/Users`, `/Volumes`, `/private`, `/tmp` and `/var/folders` directory are shared.
 If your project is outside this directory then it must be added to the list,
 otherwise you may get `Mounts denied` or `cannot start service` errors at runtime.
@@ -218,7 +226,11 @@ The HTTPS proxy settings used for scanning images are set using the `HTTPS_PROXY
 
 {{< include "desktop-network-setting.md" >}}
 
-You can also select **Use kernel networking for UDP**. This lets you use a more efficient kernel networking path for UDP by changing the value of `kernelForUDP` in the `settings.json` file.
+You can also select the following settings:
+
+- **Use kernel networking for UDP**: Use a more efficient kernel networking path for UDP. This may not be compatible with your VPN software.
+
+- **Enable host networking**: Host networking allows containers that are started with `--net=host` to use localhost to connect to TCP and UDP services on the host. For more information, see [host networking](../../network/drivers/host.md#docker-desktop).
 
 ## Docker Engine
 

@@ -128,6 +128,14 @@ Advanced settings are:
 > The **File sharing** tab is only available in Hyper-V mode because the files
 > are automatically shared in WSL 2 mode and Windows container mode.
 
+#### Synchronized file shares 
+
+Synchronized file shares is an alternative file sharing mechanism that provides fast and flexible host-to-VM file sharing, enhancing bind mount performance through the use of synchronized filesystem caches. Available with Pro, Team, and Business subscriptions.
+
+To learn more, see [Synchronized file share](../synchronized-file-sharing.md).
+
+#### Virtual file shares
+
 Use File sharing to allow local directories on your machine to be shared with
 Linux containers. This is especially useful for editing source code in an IDE on
 the host while running and testing the code in a container.
@@ -236,11 +244,9 @@ Developers are no longer interrupted by prompts for proxy credentials as authent
 
 If your proxy offers multiple authentication schemes in 407(Proxy Authentication Required) response, Docker Desktop by default selects Basic authentication scheme. If your proxy server is properly configured for Kerberos or NTLM authentication, you can enable Kerberos/NTLM proxy authentication during Docker Desktop installation. To do that, you will have install Docker Deskop from command line and pass the installer flag '--proxy-enable-kerberosntlm'. Available with Docker Desktop 4.32 and later.
 
-
 > **Note**
 >
 > Docker Desktop also supports the use of [SOCKS5 proxies](../networking.md#socks5-proxy-support).
-
 
 ### Network
 
@@ -250,6 +256,8 @@ If your proxy offers multiple authentication schemes in 407(Proxy Authentication
 > Windows manages networking.
 
 {{< include "desktop-network-setting.md" >}}
+
+You can also select **Enable host networking**: Host networking allows containers that are started with `--net=host` to use localhost to connect to TCP and UDP services on the host. For more information, see [host networking](../../network/drivers/host.md#docker-desktop).
 
 ### WSL Integration
 
@@ -332,7 +340,7 @@ when an update becomes available. After downloading the update, select
 **Apply and Restart** to install the update. You can do this either through the
 Docker menu or in the **Updates** section in the Docker Dashboard.
 
-## Features in development
+## Extensions
 
 Use the **Extensions** tab to:
 
@@ -342,9 +350,9 @@ Use the **Extensions** tab to:
 
 For more information about Docker extensions, see [Extensions](../extensions/index.md).
 
-## Feature control
+## Features in development
 
-On the **Feature control** tab you can control your settings for **Beta features** and **Experimental features**.
+On the **Features in development** tab you can control your settings for **Beta features** and **Experimental features**.
 
 You can also sign up to the [Developer Preview Program](https://www.docker.com/community/get-involved/developer-preview/) from the **Features in development** tab.
 
