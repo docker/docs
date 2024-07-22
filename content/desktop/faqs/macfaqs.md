@@ -8,6 +8,18 @@ aliases:
 - /docker-for-mac/space/
 ---
 
+### Why do I keep getting a notification telling me an application has changed my Desktop configurations?
+
+You receive this notification because the Configuration integrity check feature has detected that a third-party application has altered your Docker Desktop configuration. This usually happens due to incorrect or missing symlinks. The notification ensures you are aware of these changes so you can review and repair any potential issues to maintain system reliability.
+
+Opening the notification presents a pop-up window which provides detailed information about the detected integrity issues.
+
+If you choose to ignore the notification, it will be shown again only at the next Docker Desktop startup. If you choose to repair your configuration, you won't be prompted again.
+
+If you want to switch off Configuration integrity check notifications, navigate to Docker Desktop's settings and in the **General** tab, clear the **Automatically check configuration** setting. 
+
+If you have feedback on how to further improve the Configuration integrity check feature, [fill out our feedback form](https://docs.google.com/forms/d/e/1FAIpQLSeD_Odqc__4ihRXDtH_ba52QJuaKZ00qGnNa_tM72MmH32CZw/viewform).
+
 ### What is HyperKit?
 
 HyperKit is a hypervisor built on top of the Hypervisor.framework in macOS. It runs entirely in userspace and has no other dependencies.

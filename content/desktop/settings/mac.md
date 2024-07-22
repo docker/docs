@@ -82,7 +82,7 @@ If you choose the integrated terminal, you can run commands in a running contain
     - The symlink of the default Docker socket. 
   Additionally, Docker Desktop ensures that the context is switched to `desktop-linux` on startup.
   
-  You are notified if changes are found and are able to restore the configuration directly from the notification.
+  You are notified if changes are found and are able to restore the configuration directly from the notification. For more information, see the [FAQs](../faqs/macfaqs.md#why-do-i-keep-getting-a-notification-telling-me-an-application-has-changed-my-desktop-configurations).
 
 ## Resources
 
