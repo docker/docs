@@ -180,6 +180,7 @@ msiexec /x "DockerDesktop.msi" /quiet
 | `ALWAYSRUNSERVICE` | Lets users switch to Windows containers without needing admin rights | 0 |
 | `DISABLEWINDOWSCONTAINERS` | Disables the Windows containers integration | 0 |
 | `ENGINE` | Sets the Docker Engine that's used to run containers. This can be either `wsl` , `hyperv`, or `windows` | `wsl` |
+| `PROXYENABLEKERBEROSNTLM` | When set to 1, enables support for Kerberos and NTLM proxy authentication. Available with Docker Desktop 4.33 and later| 0 |
 | `PROXYHTTPMODE` | Sets the HTTP Proxy mode. This can be either `system` or `manual` | `system` |
 | `OVERRIDEPROXYHTTP` | Sets the URL of the HTTP proxy that must be used for outgoing HTTP requests. | None |
 | `OVERRIDEPROXYHTTPS` | Sets the URL of the HTTP proxy that must be used for outgoing HTTPS requests. | None |
