@@ -63,11 +63,11 @@ Docker Desktop utilizes the host operating system's secure key management for ha
 
 ### How does Docker Hub secure passwords in storage and in transit?
 
-This is applicable only when using Docker Hub's application-level password versus SSO/SAML. When using SSO, Docker Hub doesn't store passwords. Application-level passwords are hashed in storage (SHA-256) and encrypted in transit (TLS).
+This is applicable only when using Docker Hub's application-level password versus SSO/SAML. For users created through SSO Just-in-Time or SCIM provisioning, Docker Hub doesn't store passwords. For all other users, application-level passwords are salt-hashed in storage (SHA-256) and encrypted in transit (TLS).
 
-### How do we de-provision access to CLI users who use personal access tokens instead of our IdP? We use SSO but not SCIM
+### How do we de-provision users who are not part of our IdP? We use SSO but not SCIM
 
-If SCIM isn't enabled, you have to manually remove PAT users from the organization in our system. Using SCIM automates this.
+If SCIM isn't enabled, you have to manually remove users from the organization in our system. Using SCIM automates this.
 
 ### What metadata is collected from container images that Scout analyzes?
 
