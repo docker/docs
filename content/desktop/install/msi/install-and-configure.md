@@ -36,6 +36,14 @@ If your administrator account is different to your user account, you must add th
 3. Right-click to add the user to the group.
 4. Sign out and sign back in for the changes to take effect.
 
+> **Note**
+>
+> When installing Docker Desktop with the MSI, in-app updates are automatically disabled. This feature ensures your organization maintains the required Docker Desktop version. For Docker Desktop installed with the .exe installer, in-app updates remain supported.
+>
+> Docker Desktop will notifies you when an update is available. To update Docker Desktop, download the latest installer from the Docker Admin Console. Navigate to the  **Deploy Docker Desktop** page > under **Security and access**. 
+>
+> To keep up to date with new releases, check the [release notes](https://docs.docker.com/desktop/release-notes/) page.
+
 ## Install from the command line
 
 This section covers command line installations of Docker Desktop using PowerShell. It provides common installation commands that you can run. You can also add additional arguments which are outlined in [configuration options](#configuration-options).
@@ -196,11 +204,7 @@ By default, the installer reboots the machine after a successful installation. W
 
 ## Updates 
 
-When installing Docker Desktop with the MSI, in-app updates are disabled.
 
-Docker Desktop will notify you when an update is available. To update Docker Desktop, download the latest installer from the Docker Admin Console. Navigate to the  **Deploy Docker Desktop** page under **Security and access**. 
-
-To keep up to date with new releases, you can check use the [release notes](https://docs.docker.com/desktop/release-notes/) page.
 
 ## Analytics
 
