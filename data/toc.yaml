@@ -555,7 +555,7 @@ Reference:
       - path: /reference/cli/docker/context/use/
         title: docker context use
   - path: /reference/cli/docker/debug/
-    title: docker debug (Beta)
+    title: docker debug
   - path: /reference/cli/docker/exec/
     title: docker exec
   - sectiontitle: docker image

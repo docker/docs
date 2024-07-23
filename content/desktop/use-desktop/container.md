@@ -86,11 +86,6 @@ and select the **System default** option under **Choose your terminal**.
 
 #### Open the integrated terminal in debug mode
 
-> **Beta feature**
->
-> The debug mode feature is currently in [Beta](../../release-lifecycle.md/#beta).
-{ .experimental }
-
 Debug mode requires a [Pro, Team, or Business subcription](/subscription/details/). Debug mode has several advantages, such as:
 
 - A customizable toolbox. The toolbox comes with many standard Linux tools
