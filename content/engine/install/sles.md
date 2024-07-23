@@ -137,8 +137,8 @@ $ sudo zypper addrepo {{% param "download-url-base" %}}/docker-ce.repo
    ```console
    $ sudo zypper search -s --match-exact docker-ce | sort -r
  
-     v  | docker-ce | package | 3:25.0.0-3 | s390x | Docker CE Stable - s390x
-     v  | docker-ce | package | 3:24.0.7-3 | s390x | Docker CE Stable - s390x
+     v  | docker-ce | package | 3:27.0.3-1 | s390x | Docker CE Stable - s390x
+     v  | docker-ce | package | 3:27.0.2-1 | s390x | Docker CE Stable - s390x
    ```
 
    The list returned depends on which repositories are enabled, and is specific
@@ -146,7 +146,7 @@ $ sudo zypper addrepo {{% param "download-url-base" %}}/docker-ce.repo
 
    Install a specific version by its fully qualified package name, which is
    the package name (`docker-ce`) plus the version string (2nd column),
-   separated by a hyphen (`-`). For example, `docker-ce-3:25.0.0`.
+   separated by a hyphen (`-`). For example, `docker-ce-3:27.0.3`.
 
    Replace `<VERSION_STRING>` with the desired version and then run the following
    command to install:

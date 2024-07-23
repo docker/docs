@@ -98,14 +98,14 @@ params:
   docs_url: https://docs.docker.com
 
   latest_engine_api_version: "1.46"
-  docker_ce_version: "27.0.2"
+  docker_ce_version: "27.1.0"
   compose_version: "v2.29.0"
   compose_file_v3: "3.8"
   compose_file_v2: "2.4"
-  buildkit_version: "0.14.1"
+  buildkit_version: "0.15.0"
 
   example_go_version: "1.21"
-  example_golangci_lint_version: "v1.52"
+  example_golangci_lint_version: "v1.59"
   example_alpine_version: "3.20"
   example_node_version: "20"
 
