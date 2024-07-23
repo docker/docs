@@ -9,18 +9,18 @@ keywords: compose, compose specification, include, compose file reference
 A Compose application can declare dependency on another Compose application. This is useful if:
 - You want to reuse other Compose files.
 - You need to factor out parts of your application model into separate Compose files so they can be managed separately or shared with others.
-- Teams need to keep a Compose file reasonably complicated for the limited amount of resources it has to declare for it's own sub-domain, within a larger deployment.
+- Teams need to keep a Compose file reasonably complicated for the limited amount of resources it has to declare for its own sub-domain within a larger deployment.
 
 The `include` top-level section is used to define the dependency on another Compose application, or sub-domain.
-Each path listed in the `include` section is loaded as an individual Compose application model, with it's own project directory, in order to resolve relative paths. 
+Each path listed in the `include` section is loaded as an individual Compose application model, with its own project directory, in order to resolve relative paths. 
 
-Once the included Compose application is loaded, all resources definitions are copied into the 
+Once the included Compose application is loaded, all resource definitions are copied into the 
 current Compose application model. Compose displays a warning if resource names conflict and doesn't 
 try to merge them. To enforce this, `include` is evaluated after the Compose file(s) selected 
 to define the Compose application model have been parsed and merged, so that conflicts 
 between Compose files are detected.
 
-`include` applies recursively so an included Compose file which declares its own `include` section, triggers those other files to be included as well. 
+`include` applies recursively so an included Compose file which declares its own `include` section triggers those other files to be included as well. 
 
 Any volumes, networks, or other resources pulled in from the included Compose file can be used by the current Compose application for cross-service references. For example:
 
@@ -62,7 +62,7 @@ In the above example, both `../commons/compose.yaml` and
 `../another_domain/compose.yaml` are loaded as individual Compose projects. Relative paths 
 in Compose files being referred by `include` are resolved relative to their own Compose 
 file path, not based on the local project's directory. Variables are interpolated using values set in the optional
-`.env` file in same folder, and is overridden by the local project's environment.
+`.env` file in same folder and are overridden by the local project's environment.
 
 ## Long syntax
 
@@ -78,7 +78,7 @@ include:
 ### path
 
 `path` is required and defines the location of the Compose file(s) to be parsed and included into the
-local Compose model. `path` can be set either to a string when a single Compose file is involved,
+local Compose model. `path` can be set to either a string when a single Compose file is involved,
 or to a list of strings when multiple Compose files need to be [merged together](13-merge.md) to
 define the Compose model to be included in the local application.
 
@@ -100,7 +100,7 @@ the directory of the included Compose file.
 in the Compose file being parsed. It defaults to `.env` file in the `project_directory` for the Compose 
 file being parsed. 
 
-`env_file` can be set either to a string or a list of strings when multiple environment files need to be merged
+`env_file` can be set to either a string or a list of strings when multiple environment files need to be merged
 to define a project environment.
 
 ```yaml
