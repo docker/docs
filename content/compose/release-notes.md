@@ -10,6 +10,20 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.29.1
+
+{{< release-date date="2024-07-23" >}}
+
+### Update
+
+- Dependencies upgrade: bump compose-go to v2.1.5.
+- Dependencies upgrade: bump docker engine and cli to v27.1.0.
+
+### Bug fixes and enhancements
+
+- Enhance JSON progress events with more fields.
+
+
 ## 2.29.0
 
 {{< release-date date="2024-07-17" >}}
