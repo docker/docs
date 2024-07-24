@@ -114,7 +114,7 @@ Docker from the repository.
    sudo curl -fsSL {{% param "download-url-base" %}}/gpg -o /etc/apt/keyrings/docker.asc
    sudo chmod a+r /etc/apt/keyrings/docker.asc
 
-   # Set up Docker's APT repository:
+   # Add the repository to Apt sources:
    echo \
      "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] {{% param "download-url-base" %}} \
      $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
@@ -135,7 +135,7 @@ Docker from the repository.
   
    {{< /tab >}}
    {{< tab name="Specific version" >}}
-  
+
    To install a specific version of Docker Engine, start by listing the
    available versions in the repository:
 
@@ -143,15 +143,15 @@ Docker from the repository.
    # List the available versions:
    $ apt-cache madison docker-ce | awk '{ print $3 }'
 
-   5:27.0.3-1~raspbian.12~bookworm
-   5:27.0.2-1~raspbian.12~bookworm
+   5:27.1.1-1~raspbian.12~bookworm
+   5:27.1.0-1~raspbian.12~bookworm
    ...
    ```
 
    Select the desired version and install:
 
    ```console
-   $ VERSION_STRING=5:27.0.3-1~raspbian.12~bookworm
+   $ VERSION_STRING=5:27.1.1-1~raspbian.12~bookworm
    $ sudo apt-get install docker-ce=$VERSION_STRING docker-ce-cli=$VERSION_STRING containerd.io docker-buildx-plugin docker-compose-plugin
    ```
 
