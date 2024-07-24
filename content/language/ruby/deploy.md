@@ -11,7 +11,7 @@ description: Learn how to develop locally using Kubernetes
 
 ## Overview
 
-In this section, you'll learn how to use Docker Desktop to deploy your application to a fully-featured Kubernetes environment on your development machine. This allows you to test and debug your workloads on Kubernetes locally before deploying.
+In this section, you'll learn how to use Docker Desktop to deploy your application to a fully-featured Kubernetes environment on your development machine. This lets you to test and debug your workloads on Kubernetes locally before deploying.
 
 ## Create a Kubernetes YAML file
 
@@ -120,7 +120,7 @@ To learn more about Kubernetes objects, see the [Kubernetes documentation](https
 
    ```
 
-3. Open the browser and go to http://localhost:30001/, you should see the ruby on rails application working.
+3. Open the browser and go to HTTP://localhost:30001/, you should see the ruby on rails application working.
   Note that a database was not deployed in this example.
 
 4. Run the following command to tear down your application.

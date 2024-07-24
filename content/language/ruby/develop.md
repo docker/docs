@@ -19,7 +19,7 @@ In this section, you'll learn how to set up a development environment for your c
 
 You can use containers to set up local services, like a database. In this section, you'll update the `compose.yaml` file to define a database service and a volume to persist data.
 
-In the cloned repository's directory, open the `compose.yaml` file in an IDE or text editor. Yyou need to add the database password file as an environment variable to the server service and specify the secret file to use .
+In the cloned repository's directory, open the `compose.yaml` file in an IDE or text editor. You need to add the database password file as an environment variable to the server service and specify the secret file to use .
 
 The following is the updated `compose.yaml` file.
 
