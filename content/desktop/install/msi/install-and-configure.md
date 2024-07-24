@@ -40,7 +40,7 @@ If your administrator account is different to your user account, you must add th
 >
 > When installing Docker Desktop with the MSI, in-app updates are automatically disabled. This feature ensures your organization maintains the required Docker Desktop version. For Docker Desktop installed with the .exe installer, in-app updates remain supported.
 >
-> Docker Desktop will notifies you when an update is available. To update Docker Desktop, download the latest installer from the Docker Admin Console. Navigate to the  **Deploy Docker Desktop** page > under **Security and access**. 
+> Docker Desktop notifies you when an update is available. To update Docker Desktop, download the latest installer from the Docker Admin Console. Navigate to the  **Deploy Docker Desktop** page > under **Security and access**. 
 >
 > To keep up to date with new releases, check the [release notes](https://docs.docker.com/desktop/release-notes/) page.
 
@@ -201,10 +201,6 @@ msiexec /x "DockerDesktop.msi" /quiet
 Additionally, you can also use `/norestart` or `/forcerestart` to control reboot behaviour.
 
 By default, the installer reboots the machine after a successful installation. When ran silently, the reboot is automatic and the user is not prompted.
-
-## Updates 
-
-
 
 ## Analytics
 
