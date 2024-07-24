@@ -226,9 +226,7 @@ The HTTPS proxy settings used for scanning images are set using the `HTTPS_PROXY
 
 {{< include "desktop-network-setting.md" >}}
 
-You can also select the following settings:
-
-- **Use kernel networking for UDP**: Use a more efficient kernel networking path for UDP. This may not be compatible with your VPN software.
+You can also select the **Use kernel networking for UDP** setting. This lets you use a more efficient kernel networking path for UDP. This may not be compatible with your VPN software.
 
 ## Docker Engine
 
