@@ -10,10 +10,10 @@ If you don’t have a Docker Core subscription, you can buy Docker Build Cloud T
 
 > **Tip**
 >
-> You can create a free Docker Personal account and [try Docker Build Cloud for free](../../subscription/build-cloud/build-details.md#docker-personal). Team benefits aren't included.
+> You can create a free Docker Personal account and [try Docker Build Cloud for free](../subscription/build-cloud/build-details.md#docker-personal). Team benefits aren't included.
 { .tip }
 
-In this section, learn how to set up and manage billing for your Build Cloud subscription. For more information about the subscription tiers, see [Build Cloud subscriptions and features](../../subscription/build-cloud/build-details.md). To buy Docker Build Cloud Business, [contact sales](https://www.docker.com/products/build-cloud/#contact_sales).
+In this section, learn how to set up and manage billing for your Build Cloud subscription. For more information about the subscription tiers, see [Build Cloud subscriptions and features](../subscription/build-cloud/build-details.md). To buy Docker Build Cloud Business, [contact sales](https://www.docker.com/products/build-cloud/#contact_sales).
 
 ## Set up Docker Build Cloud Team subscription
 
@@ -44,7 +44,7 @@ You can buy a Docker Build Cloud Team subscription if you haven’t created an o
 5. Select **Continue to payment**.
 6. Follow the on-screen instructions to buy your subscription.
 
-When your payment is complete, you’ll be redirected to the dashboard for your new team in Docker Build Cloud. Here, you can [invite users](../../subscription/build-cloud/manage-seats.md) to your team.
+When your payment is complete, you’ll be redirected to the dashboard for your new team in Docker Build Cloud. Here, you can [invite users](../subscription/build-cloud/manage-seats.md) to your team.
 
 ## Manage your subscription
 
