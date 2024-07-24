@@ -44,7 +44,7 @@ You can buy a Docker Build Cloud Team subscription if you haven’t created an o
 5. Select **Continue to payment**.
 6. Follow the on-screen instructions to buy your subscription.
 
-When your payment is complete, you’ll be redirected to the dashboard for your new team in Docker Build Cloud. Here, you can [invite users](/subscription/build-cloud/manage-seats/) to your team.
+When your payment is complete, you’ll be redirected to the dashboard for your new team in Docker Build Cloud. Here, you can [invite users](/subscription/build-cloud/manage-seats.md) to your team.
 
 ## Manage your subscription
 
