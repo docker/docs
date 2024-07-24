@@ -107,6 +107,14 @@ Use File sharing to allow local directories on your machine to be shared with
 Linux containers. This is especially useful for editing source code in an IDE on
 the host while running and testing the code in a container.
 
+#### Synchronized file shares 
+
+Synchronized file shares is an alternative file sharing mechanism that provides fast and flexible host-to-VM file sharing, enhancing bind mount performance through the use of synchronized filesystem caches. Available with Pro, Team, and Business subscriptions.
+
+To learn more, see [Synchronized file share](../synchronized-file-sharing.md).
+
+#### Virtual file shares
+
 By default the `/home/<user>` directory is shared.
 If your project is outside this directory then it must be added to the list,
 otherwise you may get `Mounts denied` or `cannot start service` errors at runtime.
