@@ -257,8 +257,6 @@ If your proxy offers multiple authentication schemes in 407(Proxy Authentication
 
 {{< include "desktop-network-setting.md" >}}
 
-You can also select **Enable host networking**: Host networking allows containers that are started with `--net=host` to use localhost to connect to TCP and UDP services on the host. For more information, see [host networking](../../network/drivers/host.md#docker-desktop).
-
 ### WSL Integration
 
 In WSL 2 mode, you can configure which WSL 2 distributions will have the Docker

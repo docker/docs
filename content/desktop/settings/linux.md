@@ -178,8 +178,6 @@ The HTTPS proxy settings used for scanning images are set using the `HTTPS_PROXY
 
 {{< include "desktop-network-setting.md" >}}
 
-You can also select **Enable host networking**: Host networking allows containers that are started with `--net=host` to use localhost to connect to TCP and UDP services on the host. For more information, see [host networking](../../network/drivers/host.md#docker-desktop).
-
 ## Docker Engine
 
 The **Docker Engine** tab allows you to configure the Docker daemon used to run containers with Docker Desktop.

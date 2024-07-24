@@ -230,8 +230,6 @@ You can also select the following settings:
 
 - **Use kernel networking for UDP**: Use a more efficient kernel networking path for UDP. This may not be compatible with your VPN software.
 
-- **Enable host networking**: Host networking allows containers that are started with `--net=host` to use localhost to connect to TCP and UDP services on the host. For more information, see [host networking](../../network/drivers/host.md#docker-desktop).
-
 ## Docker Engine
 
 The **Docker Engine** tab allows you to configure the Docker daemon used to run containers with Docker Desktop.
