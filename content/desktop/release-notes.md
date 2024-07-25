@@ -21,6 +21,59 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1) to see what's coming next.
 
+## 4.33.0
+
+{{< release-date date="2024-07-25" >}}
+
+{{< desktop-install-v2 all=true beta_win_arm=true version="4.33.0" build_path="/TBD/" >}}
+
+### New
+
+- Docker Debug in now generally available.
+- BuildKit now evaluates Dockerfile rules to inform you of potential issues.
+- **Resource Allocation** settings can now be accessed directly from the resource usage data displayed in the Dashboard footer.
+
+### Upgrades
+
+- [Docker Compose v2.29.1-desktop.1](https://github.com/docker/compose/releases/tag/v2.29.1-desktop.1)
+- [Docker Engine v27.1.1](https://docs.docker.com/engine/release-notes/27.1/#2711)
+- [containerd v1.7.19](https://github.com/containerd/containerd/releases/tag/v1.7.19)
+- [NVIDIA Container Toolkit v1.16.0](https://github.com/NVIDIA/nvidia-container-toolkit/releases/tag/v1.16.0)
+- [Docker Scout CLI v1.11.0](https://github.com/docker/scout-cli/releases/tag/v1.11.0)
+- [Kubernetes v1.30.2](https://github.com/kubernetes/kubernetes/releases/tag/v1.30.2)
+- Linux kernel `v6.10`
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed an issue that caused containers started with `--net=host` and listening on an IPv6 address to be accessible from the host.
+- Improved the UX for enabling the containerd image store in the **Settings** tab.
+- Fixed an issue that caused a deadlock seen while using the `grpcfuse` filesharing option under heavy load.
+- Fixed a bug where Mac-specific admin settings were impacting other platforms.
+- IPv6 address blocks can now be specified in Docker Engine's `default-address-pools`.
+- Fixed an issue with the validation of the Docker Engine's `bip`, `fixed-cidr` and `fixed-cidr-v6`. Fixes  [docker/for-mac#7104](https://github.com/docker/for-mac/issues/7104).
+- Docker Engine's `default-network-opts` parameter is now properly validated.
+- VirtioFS performance improvements include increasing directory cache timeout, handling change notifications from the host, removing extra FUSE operations for security.capability attributes, optimizing host event detection, and providing an API to clean caches after container termination.
+- Docker Desktop now notifies when there is a port conflict in a host networking container.
+
+#### For Mac
+
+- The Configuration integrity check feature now provides more context around what has changed with your Docker Desktop configuration. For more information, see the [FAQs](faqs/macfaqs.md).
+- The Configuration integrity check feature shows an error when it fails to repair Docker Desktop.
+- Fixed a bug where the IPv6 TCP was set to `host.docker.internal`. Fixes [docker/for-mac#7332](https://github.com/docker/for-mac/issues/7332).
+- Fixed an issue where the `docker-compose` symlink pointed to an empty location. Fixes [docker/for-mac#7345](https://github.com/docker/for-mac/issues/7345).
+
+#### For Linux
+
+- Fixed an issue where some `wincred` values were persisted after uninstall. Reported by Javier Yong [@Javiery3889](https://github.com/Javiery3889).
+
+### Security
+
+#### For Windows
+
+- Fixed an issue where some `wincred` values were persisted after uninstall. Reported by Javier Yong [@Javiery3889](https://github.com/Javiery3889).
+
 ## 4.32.0
 
 {{< release-date date="2024-07-04" >}}
