@@ -18,12 +18,12 @@ This section walks you through containerizing and running a Python application.
 
 ## Get the sample application
 
-The sample application uses the popular [Flask](https://flask.palletsprojects.com/) framework.
+The sample application uses the popular [FastAPI](https://fastapi.tiangolo.com) framework.
 
 Clone the sample application to use with this guide. Open a terminal, change directory to a directory that you want to work in, and run the following command to clone the repository:
 
 ```console
-$ git clone https://github.com/docker/python-docker
+$ git clone https://github.com/estebanx64/python-docker-example
 ```
 
 ## Initialize Docker assets
@@ -35,9 +35,9 @@ feature to help streamline the process, or you can manually create the assets.
 {{< tabs >}}
 {{< tab name="Use Docker Init" >}}
 
-Inside the `python-docker` directory, run the `docker init` command. `docker
+Inside the `python-docker-example` directory, run the `docker init` command. `docker
 init` provides some default configuration, but you'll need to answer a few
-questions about your application. For example, this application uses Flask to
+questions about your application. For example, this application uses FastAPI to
 run. Refer to the following example to answer the prompts from `docker init` and
 use the same answers for your prompts.
 
@@ -56,7 +56,66 @@ Let's get started!
 ? What application platform does your project use? Python
 ? What version of Python do you want to use? 3.11.4
 ? What port do you want your app to listen on? 8000
-? What is the command to run your app? python3 -m flask run --host=0.0.0.0 --port=8000
+? What is the command to run your app? python3 -m uvicorn app:app --host=0.0.0.0 --port=8000
+```
+
+Create a file named `.gitignore` with the following contents.
+
+```text {collapse=true,title=".gitignore"}
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
+__pypackages__/
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
 ```
 
 {{< /tab >}}
@@ -118,7 +177,7 @@ COPY . .
 EXPOSE 8000
 
 # Run the application.
-CMD python3 -m flask run --host=0.0.0.0 --port=8000
+CMD python3 -m uvicorn app:app --host=0.0.0.0 --port=8000
 ```
 
 Create a file named `compose.yaml` with the following contents.
@@ -139,39 +198,6 @@ services:
       context: .
     ports:
       - 8000:8000
-
-# The commented out section below is an example of how to define a PostgreSQL
-# database that your application can use. `depends_on` tells Docker Compose to
-# start the database before your application. The `db-data` volume persists the
-# database data between container restarts. The `db-password` secret is used
-# to set the database password. You must create `db/password.txt` and add
-# a password of your choosing to it before running `docker compose up`.
-#     depends_on:
-#       db:
-#         condition: service_healthy
-#   db:
-#     image: postgres
-#     restart: always
-#     user: postgres
-#     secrets:
-#       - db-password
-#     volumes:
-#       - db-data:/var/lib/postgresql/data
-#     environment:
-#       - POSTGRES_DB=example
-#       - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
-#     expose:
-#       - 5432
-#     healthcheck:
-#       test: [ "CMD", "pg_isready" ]
-#       interval: 10s
-#       timeout: 5s
-#       retries: 5
-# volumes:
-#   db-data:
-# secrets:
-#   db-password:
-#     file: db/password.txt
 ```
 
 Create a file named `.dockerignore` with the following contents.
@@ -212,17 +238,77 @@ Create a file named `.dockerignore` with the following contents.
 LICENSE
 README.md
 ```
+Create a file named `.gitignore` with the following contents.
+
+```text {collapse=true,title=".gitignore"}
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
+__pypackages__/
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+```
+
 {{< /tab >}}
 {{< /tabs >}}
 
-You should now have the following contents in your `python-docker`
+You should now have the following contents in your `python-docker-example`
 directory.
 
 ```text
-├── python-docker/
+├── python-docker-example/
 │ ├── app.py
 │ ├── requirements.txt
 │ ├── .dockerignore
+│ ├── .gitignore
 │ ├── compose.yaml
 │ ├── Dockerfile
 │ └── README.md
@@ -231,25 +317,26 @@ directory.
 To learn more about the files, see the following:
  - [Dockerfile](../../reference/dockerfile.md)
  - [.dockerignore](../../reference/dockerfile.md#dockerignore-file)
+ - [.gitignore](https://git-scm.com/docs/gitignore)
  - [compose.yaml](../../compose/compose-file/_index.md)
 
 ## Run the application
 
-Inside the `python-docker` directory, run the following command in a
+Inside the `python-docker-example` directory, run the following command in a
 terminal.
 
 ```console
 $ docker compose up --build
 ```
 
-Open a browser and view the application at [http://localhost:8000](http://localhost:8000). You should see a simple Flask application.
+Open a browser and view the application at [http://localhost:8000](http://localhost:8000). You should see a simple FastAPI application.
 
 In the terminal, press `ctrl`+`c` to stop the application.
 
 ### Run the application in the background
 
 You can run the application detached from the terminal by adding the `-d`
-option. Inside the `python-docker` directory, run the following command
+option. Inside the `python-docker-example` directory, run the following command
 in a terminal.
 
 ```console
@@ -258,7 +345,9 @@ $ docker compose up --build -d
 
 Open a browser and view the application at [http://localhost:8000](http://localhost:8000).
 
-You should see a simple Flask application.
+To see the OpenAPI docs you can go to [http://localhost:8000/docs](http://localhost:8000/docs).
+
+You should see a simple FastAPI application.
 
 In the terminal, run the following command to stop the application.
 
