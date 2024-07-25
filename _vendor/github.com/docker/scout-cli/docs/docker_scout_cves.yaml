@@ -144,6 +144,16 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: only-cisa-kev
+      value_type: bool
+      default_value: "false"
+      description: Filter to CVEs listed in the CISA KEV catalog
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: only-cve-id
       value_type: stringSlice
       default_value: '[]'
