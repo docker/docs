@@ -110,20 +110,43 @@ To learn more about Kubernetes objects, see the [Kubernetes documentation](https
    ```shell
    NAME                        TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
    kubernetes                  ClusterIP   10.96.0.1       <none>        443/TCP          23h
-   docker-ruby-on-rails-demo   NodePort    10.99.128.230   <none>        8001:30001/TCP   75s
+   docker-ruby-on-rails-demo   NodePort    10.99.128.230   <none>        3000:30001/TCP   75s
    ```
 
    In addition to the default `kubernetes` service, you can see your `docker-ruby-on-rails-demo` service, accepting traffic on port 30001/TCP.
-   Create and migrate the database
+  
+
+3. To create and migrate the database in a Ruby on Rails application running on Kubernetes, you need to follow these steps.
+
+   **Get the Current Pods**:
+   First, you need to identify the pods running in your Kubernetes cluster. Execute the following command to list the current pods in the `default` namespace:
+
+   ```sh
+   # Get the current pods in the cluster in the namespace default
+   $ kubectl get pods
    ```
-   kubectl exec -it <replace_pod_name> -- rails db:migrate RAILS_ENV=development
 
+   This command will display a list of all pods in the `default` namespace. Look for the pod with the prefix `docker-ruby-on-rails-demo-`. Here is an example output:
+
+   ```console
+   NAME                                         READY   STATUS    RESTARTS      AGE
+   docker-ruby-on-rails-demo-7cbddb5d6f-qh44l   1/1     Running   2 (22h ago)   9d
    ```
 
-3. Open the browser and go to HTTP://localhost:30001/, you should see the ruby on rails application working.
-  Note that a database was not deployed in this example.
+   **Execute the Migration Command**:
+   Once you've identified the correct pod, use the `kubectl exec` command to run the database migration inside the pod.
 
-4. Run the following command to tear down your application.
+   ```sh
+   $ kubectl exec -it docker-ruby-on-rails-demo-7cbddb5d6f-qh44l -- rails db:migrate RAILS_ENV=development
+   ```
+
+   This command opens an interactive terminal session (`-it`) in the specified pod and runs the `rails db:migrate` command with the environment set to development (`RAILS_ENV=development`).
+
+   By following these steps, you ensure that your database is properly migrated within the Ruby on Rails application running in your Kubernetes cluster. This process helps maintain the integrity and consistency of your application's data structure during deployment and updates.
+
+4. Open the browser and go to [http://localhost:30001](http://localhost:30001), you should see the ruby on rails application working.
+
+5. Run the following command to tear down your application.
 
    ```console
    $ kubectl delete -f docker-ruby-on-rails-kubernetes.yaml

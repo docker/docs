@@ -19,7 +19,7 @@ In this section, you'll learn how to set up a development environment for your c
 
 You can use containers to set up local services, like a database. In this section, you'll update the `compose.yaml` file to define a database service and a volume to persist data.
 
-In the cloned repository's directory, open the `compose.yaml` file in an IDE or text editor. You need to add the database password file as an environment variable to the server service and specify the secret file to use .
+In the cloned repository's directory, open the `compose.yaml` file in an IDE or text editor. You need to add the database password file as an environment variable to the server service and specify the secret file to use.
 
 The following is the updated `compose.yaml` file.
 
@@ -28,8 +28,6 @@ services:
   web:
     build: .
     command: bundle exec rails s -b '0.0.0.0'
-    volumes:
-      - .:/myapp
     ports:
       - "3000:3000"
     depends_on:
@@ -132,23 +130,19 @@ Watch](../../compose/file-watch.md).
 Open your `compose.yaml` file in an IDE or text editor and then add the Compose
 Watch instructions. The following is the updated `compose.yaml` file.
 
-```yaml {hl_lines="17-2 0"}
-version: '3'
+```yaml {hl_lines="16-19"}
 services:
   web:
     build: .
     command: bundle exec rails s -b '0.0.0.0'
-    volumes:
-      - .:/myapp
     ports:
       - "3000:3000"
     depends_on:
       - db
-    secrets:
-      - db-password
     environment:
-      - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
       - RAILS_ENV=test
+    env_file: "webapp.env"
+
     develop:
       watch:
         - action: rebuild
