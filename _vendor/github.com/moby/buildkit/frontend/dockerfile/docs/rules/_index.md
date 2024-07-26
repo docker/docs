@@ -42,10 +42,6 @@ $ docker build --check .
     </tr>
     <tr>
       <td><a href="./consistent-instruction-casing/">ConsistentInstructionCasing</a></td>
-      <td>Instructions should be in consistent casing (all lower or all upper)</td>
-    </tr>
-    <tr>
-      <td><a href="./file-consistent-command-casing/">FileConsistentCommandCasing</a></td>
       <td>All commands within the Dockerfile should use the same casing (either upper or lower)</td>
     </tr>
     <tr>
@@ -83,6 +79,26 @@ $ docker build --check .
     <tr>
       <td><a href="./legacy-key-value-format/">LegacyKeyValueFormat</a></td>
       <td>Legacy key/value format with whitespace separator should not be used</td>
+    </tr>
+    <tr>
+      <td><a href="./redundant-target-platform/">RedundantTargetPlatform</a></td>
+      <td>Setting platform to predefined $TARGETPLATFORM in FROM is redundant as this is the default behavior</td>
+    </tr>
+    <tr>
+      <td><a href="./secrets-used-in-arg-or-env/">SecretsUsedInArgOrEnv</a></td>
+      <td>Sensitive data should not be used in the ARG or ENV commands</td>
+    </tr>
+    <tr>
+      <td><a href="./invalid-default-arg-in-from/">InvalidDefaultArgInFrom</a></td>
+      <td>Default value for global ARG results in an empty or invalid base image name</td>
+    </tr>
+    <tr>
+      <td><a href="./from-platform-flag-const-disallowed/">FromPlatformFlagConstDisallowed</a></td>
+      <td>FROM --platform flag should not use a constant value</td>
+    </tr>
+    <tr>
+      <td><a href="./copy-ignored-file/">CopyIgnoredFile</a></td>
+      <td>Attempting to Copy file that is excluded by .dockerignore</td>
     </tr>
   </tbody>
 </table>
