@@ -57,6 +57,13 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 - VirtioFS performance improvements include increasing directory cache timeout, handling change notifications from the host, removing extra FUSE operations for security.capability attributes, optimizing host event detection, and providing an API to clean caches after container termination.
 - Docker Desktop now notifies when there is a port conflict in a host networking container.
 - Compose Bridge command line option is now available via Experimental features. When enabled, run `compose-bridge` to convert your Compose configuration to Kubernetes resources.
+- Builds view:
+  - Added [build checks](../build/checks.md) to the build details' **Source** tab.
+  - Added build tags to the build details' **Info** tab under the **Source details** section.
+  - Newly imported builds are now highlighted.
+  - Improved performance of error message handling.
+  - Fixed a connection issue to the builder which prevented build records from displaying.
+  - Fixed the navigation when opening builds through the CLI.
 
 #### For Mac
 
