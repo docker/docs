@@ -25,7 +25,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 {{< release-date date="2024-07-25" >}}
 
-{{< desktop-install-v2 all=true beta_win_arm=true version="4.33.0" build_path="/TBD/" >}}
+{{< desktop-install-v2 all=true beta_win_arm=true version="4.33.0" build_path="/160616/" >}}
 
 ### New
 
@@ -56,6 +56,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 - Docker Engine's `default-network-opts` parameter is now properly validated.
 - VirtioFS performance improvements include increasing directory cache timeout, handling change notifications from the host, removing extra FUSE operations for security.capability attributes, optimizing host event detection, and providing an API to clean caches after container termination.
 - Docker Desktop now notifies when there is a port conflict in a host networking container.
+- Compose Bridge command line option is now available via Experimental features. When enabled, run `compose-bridge` to convert your Compose configuration to Kubernetes resources.
 
 #### For Mac
 
