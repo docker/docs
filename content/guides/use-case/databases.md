@@ -188,10 +188,10 @@ the port mapped.
 Run the following command in a terminal.
 
 ```console
-$ docker run -p 3306:3306 --name my-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -e MYSQL_DATABASE=mydb -d mysql:latest
+$ docker run -p 3307:3306 --name my-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -e MYSQL_DATABASE=mydb -d mysql:latest
 ```
 
-In this command, `-p 3306:3306` maps port 3307 on the host to port 3306 in the container.
+In this command, `-p 3307:3306` maps port 3307 on the host to port 3306 in the container.
 
 To verify the port is mapped, run the following command.
 
