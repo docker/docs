@@ -6,16 +6,16 @@ keywords: compose, bridge, kubernetes
 
 {{< include "compose-bridge-early-access.md" >}}
 
-Compose Bridge supplies an out-of-the box transformation for you Compose configuration file. Based on an arbitrary `compose.yaml` file, Compose Bridge produces:
+Compose Bridge supplies an out-of-the box transformation for your Compose configuration file. Based on an arbitrary `compose.yaml` file, Compose Bridge produces:
 
 - A [Namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) so all your resources are isolated and don't conflict with resources from other deployments.
 - A [ConfigMap](https://kubernetes.io/docs/concepts/configuration/configmap/) with an entry for each and every [config](../compose-file/08-configs.md) resource in your Compose application.
 - [Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) for application services. This ensures that the specified number of instances of your application are maintained in the Kubernetes cluster.
 - [Services](https://kubernetes.io/docs/concepts/services-networking/service/) for ports exposed by your services, used for service-to-service communication.
-- [Services](https://kubernetes.io/docs/concepts/services-networking/service/) for ports published by your services, with type `LoadBalancer` so that Docker Desktop will also expose same port on the host.
+- [Services](https://kubernetes.io/docs/concepts/services-networking/service/) for ports published by your services, with type `LoadBalancer` so that Docker Desktop will also expose the same port on the host.
 - [Network policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) to replicate the networking topology defined in your `compose.yaml` file. 
 - [PersistentVolumeClaims](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) for your volumes, using `hostpath` storage class so that Docker Desktop manages volume creation.
-- [Secrets](https://kubernetes.io/docs/concepts/configuration/secret/) with your secret encoded. This is designed for local use in a testing environment
+- [Secrets](https://kubernetes.io/docs/concepts/configuration/secret/) with your secret encoded. This is designed for local use in a testing environment.
 
 It also supplies a Kustomize overlay dedicated to Docker Desktop with:
  - `Loadbalancer` for services which need to expose ports on host.
