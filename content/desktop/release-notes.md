@@ -75,6 +75,13 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 - Fixed an issue where some `wincred` values were persisted after uninstall. Reported by Javier Yong [@Javiery3889](https://github.com/Javiery3889).
 
+### Known Issues
+
+#### For Windows
+
+- Docker Desktop fails to start with WSL pre-releases `v2.3.11.0` and `v2.3.12.0`, which is included in Windows 11 Insider. To fix this ensure WSL `v2.2.4.0` is installed.
+For more information, see [microsoft/WSL#11794](https://github.com/microsoft/WSL/issues/11794). This affects Docker Desktop 4.33.0 and earlier.
+
 ## 4.32.0
 
 {{< release-date date="2024-07-04" >}}
