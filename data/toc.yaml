@@ -862,34 +862,42 @@ Reference:
   section:
   - path: /reference/build-checks/
     title: Overview
-  - path: /reference/build-checks/stage-name-casing/
-    title: StageNameCasing
-  - path: /reference/build-checks/from-as-casing/
-    title: FromAsCasing
-  - path: /reference/build-checks/no-empty-continuation/
-    title: NoEmptyContinuation
   - path: /reference/build-checks/consistent-instruction-casing/
     title: ConsistentInstructionCasing
-  - path: /reference/build-checks/file-consistent-command-casing/
-    title: FileConsistentCommandCasing
+  - path: /reference/build-checks/copy-ignored-file/
+    title: CopyIgnoredFile
   - path: /reference/build-checks/duplicate-stage-name/
     title: DuplicateStageName
-  - path: /reference/build-checks/reserved-stage-name/
-    title: ReservedStageName
+  - path: /reference/build-checks/from-as-casing/
+    title: FromAsCasing
+  - path: /reference/build-checks/from-platform-flag-const-disallowed/
+    title: FromPlatformConstDisallowed
+  - path: /reference/build-checks/invalid-default-arg-in-from/
+    title: InvalidDefaultArgInFrom
   - path: /reference/build-checks/json-args-recommended/
     title: JSONArgsRecommended
-  - path: /reference/build-checks/maintainer-deprecated/
-    title: MaintainerDeprecated
-  - path: /reference/build-checks/undefined-arg-in-from/
-    title: UndefinedArgInFrom
-  - path: /reference/build-checks/workdir-relative-path/
-    title: WorkdirRelativePath
-  - path: /reference/build-checks/undefined-var/
-    title: UndefinedVar
-  - path: /reference/build-checks/multiple-instructions-disallowed/
-    title: MultipleInstructionsDisallowed
   - path: /reference/build-checks/legacy-key-value-format/
     title: LegacyKeyValueFormat
+  - path: /reference/build-checks/maintainer-deprecated/
+    title: MaintainerDeprecated
+  - path: /reference/build-checks/multiple-instructions-disallowed/
+    title: MultipleInstructionsDisallowed
+  - path: /reference/build-checks/no-empty-continuation/
+    title: NoEmptyContinuation
+  - path: /reference/build-checks/redundant-target-platform/
+    title: RedundantTargetPlatform
+  - path: /reference/build-checks/reserved-stage-name/
+    title: ReservedStageName
+  - path: /reference/build-checks/secrets-used-in-arg-or-env/
+    title: SecretsUsedInArgOrEnv
+  - path: /reference/build-checks/stage-name-casing/
+    title: StageNameCasing
+  - path: /reference/build-checks/undefined-arg-in-from/
+    title: UndefinedArgInFrom
+  - path: /reference/build-checks/undefined-var/
+    title: UndefinedVar
+  - path: /reference/build-checks/workdir-relative-path/
+    title: WorkdirRelativePath
 - title: Daemon CLI (dockerd)
   path: /reference/cli/dockerd/
 - sectiontitle: API reference
