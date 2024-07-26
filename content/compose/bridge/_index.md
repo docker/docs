@@ -16,7 +16,7 @@ Compose Bridge significantly simplifies the transition from Docker Compose to Ku
 
 Compose Bridge uses transformations to let you convert a Compose model into another form. 
 
-A transformation is packaged as a Docker image that receives the fully-resolved Compose model as `/in/compose.yaml` and can produce any target format file under `/out`.
+A transformation is packaged as a Docker image that receives the fully resolved Compose model as `/in/compose.yaml` and can produce any target format file under `/out`.
 
 Compose Bridge provides its own transformation for Kubernetes using Go templates, so that it is easy to extend for customization by replacing or appending your own templates.
 
