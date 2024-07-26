@@ -2144,7 +2144,17 @@ Manuals:
   - path: /compose/migrate/
     title: Migrate to Compose V2
   - path: /compose/faq/
-    title: Compose FAQ
+    title: FAQs
+  - sectiontitle: Compose Bridge (Early Access)
+    section:
+    - path: /compose/bridge/
+      title: Overview
+    - path: /compose/bridge/usage/
+      title: Usage
+    - path: /compose/bridge/customize/
+      title: Customize
+    - path: /compose/bridge/advanced-integration/
+      title: Advanced
   - path: /compose/release-notes/
     title: Release notes
 
