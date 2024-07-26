@@ -40,6 +40,10 @@ grid:
   description: Learn how to migrate from Compose V1 to V2
   icon: folder_delete
   link: /compose/migrate/
+- title: Compose Bridge
+  description: Transform your Compose configurations to Kubernetes resources.
+  icon: multiple_stop
+  link: /compose/bridge/
 aliases:
 - /compose/cli-command/
 - /compose/networking/swarm/

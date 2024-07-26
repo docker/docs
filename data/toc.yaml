@@ -2141,6 +2141,14 @@ Manuals:
     title: Give feedback
   - path: /compose/migrate/
     title: Migrate to Compose V2
+  - sectiontitle: Compose Bridge {{< badge color=violet text="Early Access" >}}
+    section:
+      - path: /compose/bridge/
+        title: Overview
+      - path: /compose/bridge/templates/
+        title: Templates
+      - path: /compose/bridge/transformation/
+        title: Transformation
   - path: /compose/faq/
     title: Compose FAQ
   - path: /compose/release-notes/
