@@ -196,5 +196,5 @@ including OCI registries, must be accessible over the internet.
 >
 >We are currently testing an experimental feature which lets cloud builders access internal resources. 
 >
-> If you're interested in trying this feature, contact us using the [Support form](https://hub.docker.com/support/contact?topic=Docker+Build+Cloud&subject=Private+registry+access&severity=S3+-+Technical+Request,+Configuration+change).
+> If you're interested in trying this feature, contact us using the [Support form](https://hub.docker.com/support/contact?topic=Docker+Build+Cloud&subject=Private+registry+access).
 { .tip }
