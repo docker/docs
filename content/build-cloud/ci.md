@@ -249,7 +249,7 @@ case $UNAME_ARCH in
 esac
 BUILDX_URL=$(curl -s https://raw.githubusercontent.com/docker/actions-toolkit/main/.github/buildx-lab-releases.json | jq -r ".latest.assets[] | select(endswith(\"linux-$ARCH\"))")
 
-# Download docker buildx with Hyrdobuild support
+# Download docker buildx with Build Cloud support
 curl --silent -L --output $DOCKER_DIR/cli-plugins/docker-buildx $BUILDX_URL
 chmod a+x ~/.docker/cli-plugins/docker-buildx
 
@@ -380,7 +380,7 @@ pipelines:
 ARCH=amd64
 BUILDX_URL=$(curl -s https://raw.githubusercontent.com/docker/actions-toolkit/main/.github/buildx-lab-releases.json | jq -r ".latest.assets[] | select(endswith(\"linux-$ARCH\"))")
 
-# Download docker buildx with Hyrdobuild support
+# Download docker buildx with Build Cloud support
 mkdir -vp ~/.docker/cli-plugins/
 curl --silent -L --output ~/.docker/cli-plugins/docker-buildx $BUILDX_URL
 chmod a+x ~/.docker/cli-plugins/docker-buildx
@@ -424,7 +424,7 @@ COMPOSE_URL=$(curl -sL \
   https://api.github.com/repos/docker/compose-desktop/releases \
   | jq "[ .[] | select(.prerelease==false and .draft==false) ] | .[0].assets.[] | select(.name | endswith(\"linux-${ARCH}\")) | .browser_download_url")
 
-# Download docker buildx with Hyrdobuild support
+# Download docker buildx with Build Cloud support
 mkdir -vp ~/.docker/cli-plugins/
 curl --silent -L --output ~/.docker/cli-plugins/docker-buildx $BUILDX_URL
 curl --silent -L --output ~/.docker/cli-plugins/docker-compose $COMPOSE_URL
