@@ -6,7 +6,7 @@ description: Learn how to develop your generative RAG application locally.
 
 ## Prerequisites
 
-Complete [Containerize a generative AI application](containerize.md).
+Complete [Containerize a RAG application](containerize.md).
 
 ## Overview
 
