@@ -105,7 +105,7 @@ To run Ollama in a container and provide GPU access:
 ```console
 . ./download_model.sh <model-name>
 ```
-Pulling ollama model could take several minutes.
+Pulling an Ollama model can take several minutes.
 
 {{< /tab >}}
 {{< tab name="Run Ollama outside of a container" >}}
