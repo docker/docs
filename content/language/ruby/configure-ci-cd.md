@@ -88,7 +88,7 @@ to Docker Hub.
            name: Build and push
            uses: docker/build-push-action@v6
            with:
-             platforms: linux/amd64,linux/arm64
+             platforms: linux/amd64
              push: true
              tags: ${{ vars.DOCKER_USERNAME }}/${{ github.event.repository.name }}:latest
    ```
