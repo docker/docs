@@ -654,6 +654,12 @@
   - "/go/scout-slack/"
 "/scout/policy/scores/":
   - /go/scout-scores/
+"/scout/explore/exceptions/":
+  - "/go/scout-exceptions/"
+"/scout/explore/analysis/":
+  - "/go/scout-analysis/"
+"/scout/explore/analysis/#analyze-registry-images":
+  - "/go/scout-how-to-push-images/"
 
 # Build links (internal)
 "/build/bake/reference/":
@@ -728,3 +734,10 @@
   - /go/debug-cli/
 "/desktop/use-desktop/container/#integrated-terminal":
   - /go/debug-gui/
+
+## Docker Desktop - volumes cloud backup
+"/desktop/use-desktop/volumes/#export-a-volume":
+  - /go/volume-export/
+  - /go/volume-export-aws/
+  - /go/volume-export-azure/
+  - /go/volume-export-gcs/

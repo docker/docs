@@ -83,6 +83,7 @@ import (
 
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
+        "github.com/docker/docker/api/types/image"
 	"github.com/docker/docker/client"
 	"github.com/docker/docker/pkg/stdcopy"
 )
@@ -95,7 +96,7 @@ func main() {
     }
     defer cli.Close()
 
-    reader, err := cli.ImagePull(ctx, "docker.io/library/alpine", types.ImagePullOptions{})
+    reader, err := cli.ImagePull(ctx, "docker.io/library/alpine", image.PullOptions{})
     if err != nil {
         panic(err)
     }

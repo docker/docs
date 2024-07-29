@@ -2,6 +2,12 @@
 title: Build and push your first image
 keywords: concepts, container, docker desktop
 description: This concept page will teach you how to build and push your first image
+summary: |
+  Learn how to build your first Docker image, a key step in containerizing your
+  application. We'll guide you through the process of creating an image
+  repository and building and pushing your image to Docker Hub. This enables
+  you to share your image easily within your team.
+weight: 3
 ---
 
 {{< youtube-embed 7ge1s5nAa34 >}}

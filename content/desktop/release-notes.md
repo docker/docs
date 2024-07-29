@@ -21,6 +21,133 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1) to see what's coming next.
 
+## 4.33.0
+
+{{< release-date date="2024-07-25" >}}
+
+{{< desktop-install-v2 all=true beta_win_arm=true version="4.33.0" build_path="/160616/" >}}
+
+### New
+
+- Docker Debug in now generally available.
+- BuildKit now evaluates Dockerfile rules to inform you of potential issues.
+- **Resource Allocation** settings can now be accessed directly from the resource usage data displayed in the Dashboard footer.
+
+### Upgrades
+
+- [Docker Compose v2.29.1-desktop.1](https://github.com/docker/compose/releases/tag/v2.29.1-desktop.1)
+- [Docker Engine v27.1.1](https://docs.docker.com/engine/release-notes/27.1/#2711)
+- [containerd v1.7.19](https://github.com/containerd/containerd/releases/tag/v1.7.19)
+- [NVIDIA Container Toolkit v1.16.0](https://github.com/NVIDIA/nvidia-container-toolkit/releases/tag/v1.16.0)
+- [Docker Scout CLI v1.11.0](https://github.com/docker/scout-cli/releases/tag/v1.11.0)
+- [Kubernetes v1.30.2](https://github.com/kubernetes/kubernetes/releases/tag/v1.30.2)
+- Linux kernel `v6.10`
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed an issue that caused containers started with `--net=host` and listening on an IPv6 address to be accessible from the host.
+- Improved the UX for enabling the containerd image store in the **Settings** tab.
+- Fixed an issue that caused a deadlock seen while using the `grpcfuse` filesharing option under heavy load.
+- Fixed a bug where Mac-specific admin settings were impacting other platforms.
+- IPv6 address blocks can now be specified in Docker Engine's `default-address-pools`.
+- Fixed an issue with the validation of the Docker Engine's `bip`, `fixed-cidr` and `fixed-cidr-v6`. Fixes  [docker/for-mac#7104](https://github.com/docker/for-mac/issues/7104).
+- Docker Engine's `default-network-opts` parameter is now properly validated.
+- VirtioFS performance improvements include increasing directory cache timeout, handling change notifications from the host, removing extra FUSE operations for security.capability attributes, optimizing host event detection, and providing an API to clean caches after container termination.
+- Docker Desktop now notifies when there is a port conflict in a host networking container.
+- Compose Bridge command line option is now available via Experimental features. When enabled, run `compose-bridge` to convert your Compose configuration to Kubernetes resources.
+
+#### For Mac
+
+- The Configuration integrity check feature now provides more context around what has changed with your Docker Desktop configuration. For more information, see the [FAQs](faqs/macfaqs.md).
+- The Configuration integrity check feature shows an error when it fails to repair Docker Desktop.
+- Fixed a bug where the IPv6 TCP was set to `host.docker.internal`. Fixes [docker/for-mac#7332](https://github.com/docker/for-mac/issues/7332).
+- Fixed an issue where the `docker-compose` symlink pointed to an empty location. Fixes [docker/for-mac#7345](https://github.com/docker/for-mac/issues/7345).
+
+#### For Linux
+
+- Fixed an issue where some `wincred` values were persisted after uninstall. Reported by Javier Yong [@Javiery3889](https://github.com/Javiery3889).
+
+### Security
+
+#### For Windows
+
+- Fixed an issue where some `wincred` values were persisted after uninstall. Reported by Javier Yong [@Javiery3889](https://github.com/Javiery3889).
+
+### Known Issues
+
+#### For Windows
+
+- Docker Desktop fails to start with WSL pre-releases `v2.3.11.0` and `v2.3.12.0`, which is included in Windows 11 Insider. To fix this ensure WSL `v2.2.4.0` is installed.
+For more information, see [microsoft/WSL#11794](https://github.com/microsoft/WSL/issues/11794). This affects Docker Desktop 4.33.0 and earlier.
+
+## 4.32.0
+
+{{< release-date date="2024-07-04" >}}
+
+{{< desktop-install-v2 all=true beta_win_arm=true version="4.32.0" build_path="/157355/" >}}
+
+### New
+
+- Docker Desktop now takes advantage of Moby 27.
+- Docker Desktop now supports moving data to a different drive on macOS and Windows with WSL2 backend. See [docker/for-win#13384](https://github.com/docker/for-win/issues/13384).
+- You can now [schedule backups for volume exports](use-desktop/volumes.md) in the **Volumes** tab (Beta). 
+- Access a terminal shell directly from Docker Desktop (Beta).
+
+### Upgrades
+
+- [Docker Buildx v0.15.1](https://github.com/docker/buildx/releases/tag/v0.15.1)
+- [Docker Compose v2.28.1](https://github.com/docker/compose/releases/tag/v2.28.1)
+- [Docker Scout CLI v1.10.0](https://github.com/docker/scout-cli/releases/tag/v1.10.0)
+- [Docker Engine v27.0.3](https://docs.docker.com/engine/release-notes/27.0/#2703)
+- Docker Init v1.3.0
+
+### Bug fixes and enhancements
+
+#### For all platforms
+ 
+- Improved instructions for `watch` in the Compose File Viewer
+- Added support for Golang projects that don't have dependencies in Docker Init. Addresses [docker/roadmap#611](https://github.com/docker/roadmap/issues/611)
+- [Settings Management](hardened-desktop/settings-management/index.md) now lets admins set the default value to `ProxyEnableKerberosNTLM`.
+- Removed a temporary compatibility fix for older versions of Visual Studio Code.
+- Builds view:
+  - Changed icon for imported build record to a "files" icon.
+  - Improved the error message when trying to connect to an already connected Docker Build Cloud builder.
+  - Fixed an issue where build records would disappear unexpectedly.
+  - Fixed an issue that prevented users from being able to re-open an [imported build](use-desktop/builds.md#import-builds).
+  - Fixed an issue where build details were not displayed when a build's state had changed from running to completed.
+  - Fixed malformed build source link in build details.
+  - Fixed missing build stats for named contexts.
+  - Fixed image index/manifest not being displayed anymore in build results.
+  - Fixed an issue where build traces exported from the UI would appear as a single, flattened list when imported to Jaeger
+  - Fixed truncated digest/sha in build details. 
+  - Fixed final status animation of active builds.
+
+#### For Windows
+
+- Fixed an issue on the WSL 2 engine where Docker Desktop would not detect the existence of the `docker-desktop-data` distribution if it had been manually moved by the user.
+- The Windows on ARM installer and the [privileged service](windows/permission-requirements.md#privileged-helper) are now built for ARM64.
+
+#### For Mac
+
+- Re-added `CONFIG_DM_CRYPT` kernel module.
+- Re-added `CONFIG_PSI` kernel module.
+- Re-added `CONFIG_GTP` kernel module.
+- Re-added `CONFIG_NFT_BRIDGE_META` kernel module.
+- Fixed a regression where the **Another application changed your Desktop configuration** warning message appeared whenever `/var/run/docker.socket` was pointing to an unexpected path.
+- Changed the Configuration Check menu entry and banner to a notification.
+- Improved the performance of read and write operations on bind mounts.
+- Fixed fatal errors with some `AMD64` Java images. Fixes [docker/for-mac/7286](https://github.com/docker/for-mac/issues/7286) and [docker/for-mac/7006](https://github.com/docker/for-mac/issues/7006).
+- Fixed an issue that caused Docker Desktop to remove `Docker.app` when installing from `/Applications`.
+- Fixed an issue that caused bind mounts to fail. Fixes [docker/for-mac#7274](https://github.com/docker/for-mac/issues/7274).
+
+### Known issues
+
+#### For Mac
+
+- When running `docker-compose` after an update, it will return `command not found`. As a workaround, you can create the following symlink: `sudo ln -sf /Applications/Docker.app/Contents/Resources/cli-plugins/docker-compose /usr/local/bin/docker-compose`
+
 ## 4.31.1
 
 {{< release-date date="2024-06-10" >}}
@@ -272,7 +399,8 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 #### Security
 
-- Disabled Electron `runAsNode` fuse to improve security hardening. For more info, see [Electron's documentation.](https://www.electronjs.org/blog/statement-run-as-node-cves)
+- Disabled Electron `runAsNode` fuse to improve security hardening. For more info, see [Electron's documentation.](https://www.electronjs.org/blog/statement-run-as-node-cves).
+- Fixed [CVE-2024-6222](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-6222) which allows an attacker who has gained access to the Docker Desktop VM through a container breakout to further escape to the host by passing extensions and dashboard related IPC messages. Reported by Billy Jheng Bing-Jhong, Đỗ Minh Tuấn, Muhammad Alifa Ramdhan working with Trend Micro Zero Day Initiative.
 
 ### Known issues
 

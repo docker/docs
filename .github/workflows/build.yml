@@ -16,7 +16,7 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       -
         name: Checkout
@@ -37,15 +37,17 @@ jobs:
 
   vale:
     if: ${{ github.event_name == 'pull_request' }}
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - uses: errata-ai/vale-action@38bf078c328061f59879b347ca344a718a736018
+      - uses: errata-ai/vale-action@reviewdog
+        env:
+          PIP_BREAK_SYSTEM_PACKAGES: 1
         with:
           files: content
 
   validate:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
@@ -53,6 +55,7 @@ jobs:
           - lint
           - test
           - unused-media
+          - test-go-redirects
     steps:
       -
         name: Checkout
@@ -72,10 +75,10 @@ jobs:
             *.cache-from=type=gha,scope=validate-${{ matrix.target }}
             *.cache-from=type=gha,scope=build
 
-  # build-releaser job will just build _releaser app used for Netlify and
-  # AWS deployment in publish workflow. it's just to be sure it builds correctly.
+  # build-releaser builds the _releaser used for AWS deployment in publish workflow.
+  # It's just to be sure it builds correctly.
   build-releaser:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       -
         name: Checkout

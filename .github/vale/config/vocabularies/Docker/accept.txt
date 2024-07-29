@@ -1,4 +1,4 @@
-A?GPLv3
+A?GPL(v3)?
 APIs?
 ARM
 AWS
@@ -21,6 +21,7 @@ Chrome
 Chrome DevTools
 CloudFront
 Codefresh
+Codespaces
 CouchDB
 Couchbase
 DHCP
@@ -59,6 +60,7 @@ Git
 GitHub( Actions)?
 Google
 Grafana
+Gravatar
 HTTP
 HyperKit
 IPs?
@@ -114,9 +116,9 @@ TLS
 TXT
 UDP
 URLs?
+UUID
 Ubuntu
 Unix
-UUID
 VLAN
 VM
 VMware

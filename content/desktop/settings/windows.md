@@ -128,6 +128,14 @@ Advanced settings are:
 > The **File sharing** tab is only available in Hyper-V mode because the files
 > are automatically shared in WSL 2 mode and Windows container mode.
 
+#### Synchronized file shares 
+
+Synchronized file shares is an alternative file sharing mechanism that provides fast and flexible host-to-VM file sharing, enhancing bind mount performance through the use of synchronized filesystem caches. Available with Pro, Team, and Business subscriptions.
+
+To learn more, see [Synchronized file share](../synchronized-file-sharing.md).
+
+#### Virtual file shares
+
 Use File sharing to allow local directories on your machine to be shared with
 Linux containers. This is especially useful for editing source code in an IDE on
 the host while running and testing the code in a container.
@@ -234,14 +242,11 @@ Kerberos and NTLM proxy authentication are available for Business subscribers wi
 
 Developers are no longer interrupted by prompts for proxy credentials as authentication is centralized. This also reduces the risk of account lockouts due to incorrect sign in attempts.
 
-If your proxy offers multiple authentication schemes in 407(Proxy Authentication Required) response, Docker Desktop selects the strongest authentication scheme (Kerberos, NTLM, Basic, in that order). However, if your Kerberos/NTLM environment is not properly configured, Docker Desktop may fail to authenticate with the proxy, as it will attempt to use the strongest scheme. 
-
-To temporarily resolve this issue until your Kerberos/NTLM environment is fixed, you can fallback to the Basic authentication scheme by setting `proxyEnableKerberosNTLM` to `false` in the `settings.json` file located in the `%APPDATA%/Docker/` directory. Quit Docker Desktop and then start it again to effect this change. The `proxyEnableKerberosNTLM` setting is available in Docker Desktop version 4.31 and later.
+If your proxy offers multiple authentication schemes in 407(Proxy Authentication Required) response, Docker Desktop by default selects Basic authentication scheme. If your proxy server is properly configured for Kerberos or NTLM authentication, you can enable Kerberos/NTLM proxy authentication during Docker Desktop installation. To do that, you will have install Docker Deskop from command line and pass the installer flag '--proxy-enable-kerberosntlm'. Available with Docker Desktop 4.32 and later.
 
 > **Note**
 >
 > Docker Desktop also supports the use of [SOCKS5 proxies](../networking.md#socks5-proxy-support).
-
 
 ### Network
 
@@ -333,7 +338,7 @@ when an update becomes available. After downloading the update, select
 **Apply and Restart** to install the update. You can do this either through the
 Docker menu or in the **Updates** section in the Docker Dashboard.
 
-## Features in development
+## Extensions
 
 Use the **Extensions** tab to:
 
@@ -343,9 +348,9 @@ Use the **Extensions** tab to:
 
 For more information about Docker extensions, see [Extensions](../extensions/index.md).
 
-## Feature control
+## Features in development
 
-On the **Feature control** tab you can control your settings for **Beta features** and **Experimental features**.
+On the **Features in development** tab you can control your settings for **Beta features** and **Experimental features**.
 
 You can also sign up to the [Developer Preview Program](https://www.docker.com/community/get-involved/developer-preview/) from the **Features in development** tab.
 

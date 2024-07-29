@@ -27,10 +27,13 @@ The following table outlines some differences between drivers.
 | Feature                      |  `docker`   | `docker-container` | `kubernetes` |      `remote`      |
 | :--------------------------- | :---------: | :----------------: | :----------: | :----------------: |
 | **Automatically load image** |     ✅      |                    |              |                    |
-| **Cache export**             | Inline only |         ✅         |      ✅      |         ✅         |
+| **Cache export**             |     ✓\*     |         ✅         |      ✅      |         ✅         |
 | **Tarball output**           |             |         ✅         |      ✅      |         ✅         |
 | **Multi-arch images**        |             |         ✅         |      ✅      |         ✅         |
 | **BuildKit configuration**   |             |         ✅         |      ✅      | Managed externally |
+
+\* _The `docker` driver doesn't support all cache export options.
+See [Cache storage backends](../cache/backends/_index.md) for more information._
 
 ## Loading to local image store
 

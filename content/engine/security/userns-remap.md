@@ -49,10 +49,10 @@ purpose.
 
 > **Warning**
 >
-> Some distributions, such as RHEL and CentOS 7.3, do not
-> automatically add the new group to the `/etc/subuid` and `/etc/subgid` files.
-> You are responsible for editing these files and assigning non-overlapping
-> ranges, in this case. This step is covered in [Prerequisites](#prerequisites).
+> Some distributions do not automatically add the new group to the
+> `/etc/subuid` and `/etc/subgid` files. If that's the case, you are may have
+> to manually edit these files and assign non-overlapping ranges. This step is
+> covered in [Prerequisites](#prerequisites).
 { .warning }
 
 It is very important that the ranges do not overlap, so that a process cannot gain
@@ -86,9 +86,8 @@ avoid these situations.
 
 2.  The way the namespace remapping is handled on the host is using two files,
     `/etc/subuid` and `/etc/subgid`. These files are typically managed
-    automatically when you add or remove users or groups, but on a few
-    distributions such as RHEL and CentOS 7.3, you may need to manage these
-    files manually.
+    automatically when you add or remove users or groups, but on some
+    distributions, you may need to manage these files manually.
 
     Each file contains three fields: the username or ID of the user, followed by
     a beginning UID or GID (which is treated as UID or GID 0 within the namespace)

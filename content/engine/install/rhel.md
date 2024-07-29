@@ -37,7 +37,6 @@ To get started with Docker Engine on RHEL, make sure you
 To install Docker Engine, you need a maintained version of one of the following
 RHEL versions:
 
-- RHEL 7 (s390x only) (EOL: [June 30, 2024](https://www.ibm.com/blog/announcement/ibm-is-announcing-red-hat-enterprise-linux-7-is-going-end-of-support-on-30-june-2024/))
 - RHEL 8
 - RHEL 9
 
@@ -91,7 +90,6 @@ Docker from the repository.
 
 #### Set up the repository
 
-
 Install the `yum-utils` package (which provides the `yum-config-manager`
 utility) and set up the repository.
 
@@ -106,7 +104,7 @@ $ sudo yum-config-manager --add-repo {{% param "download-url-base" %}}/docker-ce
 
    {{< tabs >}}
    {{< tab name="Latest" >}}
-  
+
    To install the latest version, run:
 
    ```console
@@ -128,8 +126,8 @@ $ sudo yum-config-manager --add-repo {{% param "download-url-base" %}}/docker-ce
    ```console
    $ yum list docker-ce --showduplicates | sort -r
 
-   docker-ce.s390x    3:26.0.2-1.el9    docker-ce-stable
-   docker-ce.s390x    3:26.0.1-1.el9    docker-ce-stable
+   docker-ce.x86_64    3:27.1.1-1.el9    docker-ce-stable
+   docker-ce.x86_64    3:27.1.0-1.el9    docker-ce-stable
    <...>
    ```
 
@@ -138,7 +136,7 @@ $ sudo yum-config-manager --add-repo {{% param "download-url-base" %}}/docker-ce
 
    Install a specific version by its fully qualified package name, which is
    the package name (`docker-ce`) plus the version string (2nd column),
-   separated by a hyphen (`-`). For example, `docker-ce-3:26.0.1-1.el9`.
+   separated by a hyphen (`-`). For example, `docker-ce-3:27.1.1-1.el9`.
 
    Replace `<VERSION_STRING>` with the desired version and then run the following
    command to install:
@@ -149,7 +147,7 @@ $ sudo yum-config-manager --add-repo {{% param "download-url-base" %}}/docker-ce
 
    This command installs Docker, but it doesn't start Docker. It also creates a
    `docker` group, however, it doesn't add any users to the group by default.
-  
+
    {{< /tab >}}
    {{< /tabs >}}
 
@@ -192,24 +190,24 @@ download a new file each time you want to upgrade Docker Engine.
 3. Select the applicable architecture (`x86_64`, `aarch64`, or `s390x`), and
    then go to `stable/Packages/`.
 
-4. Download the following `deb` files for the Docker Engine, CLI, containerd,
+4. Download the following `rpm` files for the Docker Engine, CLI, containerd,
    and Docker Compose packages:
 
-   - `containerd.io_<version>_<arch>.deb`
-   - `docker-ce_<version>_<arch>.deb`
-   - `docker-ce-cli_<version>_<arch>.deb`
-   - `docker-buildx-plugin_<version>_<arch>.deb`
-   - `docker-compose-plugin_<version>_<arch>.deb`
+   - `containerd.io-<version>.<arch>.rpm`
+   - `docker-ce-<version>.<arch>.rpm`
+   - `docker-ce-cli-<version>.<arch>.rpm`
+   - `docker-buildx-plugin-<version>.<arch>.rpm`
+   - `docker-compose-plugin-<version>.<arch>.rpm`
 
 5. Install Docker Engine, changing the following path to the path where you downloaded
    the packages.
 
    ```console
-   $ sudo yum install ./containerd.io_<version>_<arch>.rpm \
-     ./docker-ce_<version>_<arch>.rpm \
-     ./docker-ce-cli_<version>_<arch>.rpm \
-     ./docker-buildx-plugin_<version>_<arch>.rpm \
-     ./docker-compose-plugin_<version>_<arch>.rpm
+   $ sudo yum install ./containerd.io-<version>.<arch>.rpm \
+     ./docker-ce-<version>.<arch>.rpm \
+     ./docker-ce-cli-<version>.<arch>.rpm \
+     ./docker-buildx-plugin-<version>.<arch>.rpm \
+     ./docker-compose-plugin-<version>.<arch>.rpm
    ```
 
    Docker is installed but not started. The `docker` group is created, but no

@@ -109,9 +109,7 @@ For more information on setting up WSL 2 with Docker Desktop, see [WSL](../wsl/_
 
 > **Important**
 >
-> The installer and the [privileged service](../windows/permission-requirements.md#privileged-helper) are still built for `x86_64`. These are not performance critical components and currently run with [`x86` emulation](https://learn.microsoft.com/en-us/windows/arm/apps-on-arm-x86-emulation#wow64-apis).
-> 
-> Also, the following features are not supported:
+> The following features are not supported:
 > - Hyper-V backend
 > - Windows containers
 { .important }
@@ -231,6 +229,7 @@ The `install` command accepts the following flags:
 - `--override-proxy-http=<URL>`: Sets the URL of the HTTP proxy that must be used for outgoing HTTP requests, requires `--proxy-http-mode` to be `manual`
 - `--override-proxy-https=<URL>`: Sets the URL of the HTTP proxy that must be used for outgoing HTTPS requests, requires `--proxy-http-mode` to be `manual`
 - `--override-proxy-exclude=<hosts/domains>`: Bypasses proxy settings for the hosts and domains. Uses a comma-separated list.
+- `--proxy-enable-kerberosntlm`: Enables Kerberos and NTLM proxy authentication. If you are enabling this, ensure your proxy server is properly configured for Kerberos/NTLM authentication. Available with Docker Desktop 4.32 and later.
 - `--hyper-v-default-data-root=<path>`: Specifies the default location for the Hyper-V VM disk. 
 - `--windows-containers-default-data-root=<path>`: Specifies the default location for the Windows containers.
 - `--wsl-default-data-root=<path>`: Specifies the default location for the WSL distribution disk.

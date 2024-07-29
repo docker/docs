@@ -34,6 +34,7 @@ long: |-
     - `oci-dir://` use an OCI layout directory
     - `archive://` use a tarball archive, as created by `docker save`
     - `fs://` use a local directory or file
+    - `sbom://` SPDX file or in-toto attestation file with SPDX predicate or `syft` json SBOM file
 usage: docker scout compare --to IMAGE|DIRECTORY|ARCHIVE [IMAGE|DIRECTORY|ARCHIVE]
 pname: docker scout
 plink: docker_scout.yaml

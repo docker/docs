@@ -21,7 +21,7 @@ Your Docker ID becomes your username for hosted Docker services, and [Docker for
 
 ### Sign up with your email address
 
-1. Go to the [Docker sign-up page](https://hub.docker.com/signup/).
+1. Go to the [Docker sign-up page](https://app.docker.com/signup/).
 
 2. Enter a unique, valid email address.
 
@@ -48,7 +48,7 @@ Your Docker ID becomes your username for hosted Docker services, and [Docker for
 > To sign up with your social provider, make sure you verify your email address with your provider before you begin.
 { .important }
 
-1. Go to the [Docker sign-up page](https://hub.docker.com/signup/).
+1. Go to the [Docker sign-up page](https://app.docker.com/signup/).
 
 2. Select your social provider, Google or GitHub.
 

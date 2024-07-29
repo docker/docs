@@ -4,6 +4,7 @@ description: Speed up your continuous integration pipelines with Docker Build Cl
 keywords: build, cloud build, ci, gha, gitlab, buildkite, jenkins, circle ci
 aliases:
   - /hydrobuild/ci/
+  - /build/cloud/ci/
 ---
 
 Using Docker Build Cloud in CI can speed up your build pipelines, which means less time
@@ -37,7 +38,7 @@ See [Loading build results](./usage/#loading-build-results) for details.
 >
 > Version 4.0.0 and later of `docker/build-push-action` and
 > `docker/bake-action` builds images with [provenance attestations by
-> default](../ci/github-actions/attestations.md#default-provenance). Docker
+> default](/build/ci/github-actions/attestations.md#default-provenance). Docker
 > Build Cloud automatically attempts to load images to the local image store if
 > you don't explicitly push them to a registry.
 >
@@ -248,7 +249,7 @@ case $UNAME_ARCH in
 esac
 BUILDX_URL=$(curl -s https://raw.githubusercontent.com/docker/actions-toolkit/main/.github/buildx-lab-releases.json | jq -r ".latest.assets[] | select(endswith(\"linux-$ARCH\"))")
 
-# Download docker buildx with Hyrdobuild support
+# Download docker buildx with Build Cloud support
 curl --silent -L --output $DOCKER_DIR/cli-plugins/docker-buildx $BUILDX_URL
 chmod a+x ~/.docker/cli-plugins/docker-buildx
 
@@ -379,7 +380,7 @@ pipelines:
 ARCH=amd64
 BUILDX_URL=$(curl -s https://raw.githubusercontent.com/docker/actions-toolkit/main/.github/buildx-lab-releases.json | jq -r ".latest.assets[] | select(endswith(\"linux-$ARCH\"))")
 
-# Download docker buildx with Hyrdobuild support
+# Download docker buildx with Build Cloud support
 mkdir -vp ~/.docker/cli-plugins/
 curl --silent -L --output ~/.docker/cli-plugins/docker-buildx $BUILDX_URL
 chmod a+x ~/.docker/cli-plugins/docker-buildx
@@ -423,7 +424,7 @@ COMPOSE_URL=$(curl -sL \
   https://api.github.com/repos/docker/compose-desktop/releases \
   | jq "[ .[] | select(.prerelease==false and .draft==false) ] | .[0].assets.[] | select(.name | endswith(\"linux-${ARCH}\")) | .browser_download_url")
 
-# Download docker buildx with Hyrdobuild support
+# Download docker buildx with Build Cloud support
 mkdir -vp ~/.docker/cli-plugins/
 curl --silent -L --output ~/.docker/cli-plugins/docker-buildx $BUILDX_URL
 curl --silent -L --output ~/.docker/cli-plugins/docker-compose $COMPOSE_URL

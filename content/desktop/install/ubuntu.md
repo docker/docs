@@ -19,7 +19,7 @@ aliases:
 
 This page contains information on how to install, launch and upgrade Docker Desktop on an Ubuntu distribution.
 
-{{< button text="DEB package" url="https://desktop.docker.com/linux/main/amd64/149282/docker-desktop-4.30.0-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64" >}}
+{{< button text="DEB package" url="https://desktop.docker.com/linux/main/amd64/docker-desktop-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64" >}}
 
 _For checksums, see [Release notes](../release-notes.md)_
 
@@ -28,7 +28,7 @@ _For checksums, see [Release notes](../release-notes.md)_
 To install Docker Desktop successfully, you must:
 
 - Meet the [system requirements](linux-install.md#system-requirements)
-- Have a 64-bit version of either the LTS version Ubuntu Jammy Jellyfish 22.04, or the current non-LTS version (Ubuntu Mantic Minotaur 23.10). Docker Desktop is supported on `x86_64` (or `amd64`) architecture.
+- Have a 64-bit version of either the LTS version Ubuntu Jammy Jellyfish 22.04, or the current non-LTS version. Docker Desktop is supported on `x86_64` (or `amd64`) architecture.
    > **Note**
    >
    > The latest Ubuntu 24.04 LTS is not yet supported. Docker Desktop will fail to start. Due to a change in how the latest Ubuntu release restricts the unprivileged namespaces, `sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0` needs to be run at least once. Refer to the [Ubuntu Blog](https://ubuntu.com/blog/ubuntu-23-10-restricted-unprivileged-user-namespaces) for more details.
@@ -45,13 +45,13 @@ Recommended approach to install Docker Desktop on Ubuntu:
 1. Set up Docker's package repository.
    See step one of [Install using the `apt` repository](../../engine/install/ubuntu.md#install-using-the-repository).
 
-2. Download latest [DEB package](https://desktop.docker.com/linux/main/amd64/149282/docker-desktop-4.30.0-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64).
+2. Download latest [DEB package](https://desktop.docker.com/linux/main/amd64/docker-desktop-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64).
 
 3. Install the package with apt as follows:
 
    ```console
    $ sudo apt-get update
-   $ sudo apt-get install ./docker-desktop-<version>-<arch>.deb
+   $ sudo apt-get install ./docker-desktop-<arch>.deb
    ```
 
    > **Note**
@@ -82,7 +82,7 @@ Once a new version for Docker Desktop is released, the Docker UI shows a notific
 You need to download the new package each time you want to upgrade Docker Desktop and run:
 
 ```console
-$ sudo apt-get install ./docker-desktop-<version>-<arch>.deb
+$ sudo apt-get install ./docker-desktop-<arch>.deb
 ```
 
 ## Next steps

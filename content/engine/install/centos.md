@@ -27,7 +27,6 @@ To get started with Docker Engine on CentOS, make sure you
 To install Docker Engine, you need a maintained version of one of the following
 CentOS versions:
 
-- CentOS 7 (EOL: [June 30, 2024](https://blog.centos.org/2023/04/end-dates-are-coming-for-centos-stream-8-and-centos-linux-7/#centos-linux-7-end-of-life-june-30-2024))
 - CentOS 9 (stream)
 
 The `centos-extras` repository must be enabled. This repository is enabled by
@@ -106,7 +105,7 @@ $ sudo yum-config-manager --add-repo {{% param "download-url-base" %}}/docker-ce
 
    This command installs Docker, but it doesn't start Docker. It also creates a
    `docker` group, however, it doesn't add any users to the group by default.
-   
+
    {{< /tab >}}
    {{< tab name="Specific version" >}}
 
@@ -116,8 +115,8 @@ $ sudo yum-config-manager --add-repo {{% param "download-url-base" %}}/docker-ce
    ```console
    $ yum list docker-ce --showduplicates | sort -r
 
-   docker-ce.x86_64    3:26.1.3-1.el9    docker-ce-stable
-   docker-ce.x86_64    3:26.1.2-1.el9    docker-ce-stable
+   docker-ce.x86_64    3:27.1.1-1.el9    docker-ce-stable
+   docker-ce.x86_64    3:27.1.0-1.el9    docker-ce-stable
    <...>
    ```
 
@@ -126,7 +125,7 @@ $ sudo yum-config-manager --add-repo {{% param "download-url-base" %}}/docker-ce
 
    Install a specific version by its fully qualified package name, which is
    the package name (`docker-ce`) plus the version string (2nd column),
-   separated by a hyphen (`-`). For example, `docker-ce-3:26.1.2-1.el9`.
+   separated by a hyphen (`-`). For example, `docker-ce-3:27.1.1-1.el9`.
 
    Replace `<VERSION_STRING>` with the desired version and then run the following
    command to install:
@@ -137,10 +136,9 @@ $ sudo yum-config-manager --add-repo {{% param "download-url-base" %}}/docker-ce
 
    This command installs Docker, but it doesn't start Docker. It also creates a
    `docker` group, however, it doesn't add any users to the group by default.
-   
+
    {{< /tab >}}
    {{< /tabs >}}
-
 
 2. Start Docker.
 

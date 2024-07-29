@@ -9,6 +9,104 @@ toc_max: 2
 This page contains information about the new features, improvements, and bug
 fixes in [Docker Buildx](https://github.com/docker/buildx).
 
+## 0.16.2
+
+{{< release-date date="2024-07-25" >}}
+
+The full release note for this release is available
+[on GitHub](https://github.com/docker/buildx/releases/tag/v0.16.2).
+
+### Bug fixes
+
+- Fix possible "bad file descriptor" error when exporting local cache to NFS volume [docker/buildx#2629](https://github.com/docker/buildx/pull/2629/)
+
+## 0.16.1
+
+{{< release-date date="2024-07-18" >}}
+
+The full release note for this release is available
+[on GitHub](https://github.com/docker/buildx/releases/tag/v0.16.1).
+
+### Bug fixes
+
+- Fix possible panic due to data race in `buildx bake --print` command [docker/buildx#2603](https://github.com/docker/buildx/pull/2603/)
+- Improve messaging about using `--debug` flag to inspect build warnings [docker/buildx#2612](https://github.com/docker/buildx/pull/2612/)
+
+## 0.16.0
+
+{{< release-date date="2024-07-11" >}}
+
+The full release note for this release is available
+[on GitHub](https://github.com/docker/buildx/releases/tag/v0.16.0).
+
+### New
+
+- Bake command now supports `--call` and `--check` flags and `call` attribute in target definitions for selecting custom frontend methods. [docker/buildx#2556](https://github.com/docker/buildx/pull/2556/), [docker/buildx#2576](https://github.com/docker/buildx/pull/2576/)
+- {{< badge color=violet text=Experimental >}} Bake now supports `--list-targets` and `--list-variables` flags for inspecting the definition and possible configuration options for your project. [docker/buildx#2556](https://github.com/docker/buildx/pull/2556/)
+- Bake definition variables and targets supports new `description` attribute for defining text-based description that can be inspected using e.g. `--list-targets` and `--list-variables`. [docker/buildx#2556](https://github.com/docker/buildx/pull/2556/)
+- Bake now supports printing warnings for build check violations. [docker/buildx#2501](https://github.com/docker/buildx/pull/2501/)
+
+### Enhancements
+
+- The build command now ensures that multi-node builds use the same build reference for each node. [docker/buildx#2572](https://github.com/docker/buildx/pull/2572/)
+- Avoid duplicate requests and improve the performance of remote driver. [docker/buildx#2501](https://github.com/docker/buildx/pull/2501/)
+- Build warnings can now be saved to the metadata file by setting the `BUILDX_METADATA_WARNINGS=1` environment variable. [docker/buildx#2551](https://github.com/docker/buildx/pull/2551/), [docker/buildx#2521](https://github.com/docker/buildx/pull/2521/), [docker/buildx#2550](https://github.com/docker/buildx/pull/2550/)
+- Improve message of the `--check` flag when no warnings are detected. [docker/buildx#2549](https://github.com/docker/buildx/pull/2549/)
+
+### Bug fixes
+
+- Fix support for multi-type annotations during build. [docker/buildx#2522](https://github.com/docker/buildx/pull/2522/)
+- Fix a regression where possible inefficient transfer of files would occur when switching projects due to incremental transfer reuse. [docker/buildx#2558](https://github.com/docker/buildx/pull/2558/)
+- Fix incorrect default load for chained Bake targets. [docker/buildx#2583](https://github.com/docker/buildx/pull/2583/)
+- Fix incorrect `COMPOSE_PROJECT_NAME` handling in Bake. [docker/buildx#2579](https://github.com/docker/buildx/pull/2579/)
+- Fix index annotations support for multi-node builds. [docker/buildx#2546](https://github.com/docker/buildx/pull/2546/)
+- Fix capturing provenance metadata for builds from remote context. [docker/buildx#2560](https://github.com/docker/buildx/pull/2560/)
+
+### Packaging updates
+
+- Compose support has been updated to v2.1.3. [docker/buildx#2547](https://github.com/docker/buildx/pull/2547/)
+
+## 0.15.1
+
+{{< release-date date="2024-06-18" >}}
+
+The full release note for this release is available
+[on GitHub](https://github.com/docker/buildx/releases/tag/v0.15.1).
+
+### Bug fixes
+
+- Fix missing build error and exit code for some validation requests with `--check`. [docker/buildx#2518](https://github.com/docker/buildx/pull/2518/)
+- Update fallback image for `--check` to Dockerfile v1.8.1. [docker/buildx#2538](https://github.com/docker/buildx/pull/2538/)
+
+## 0.15.0
+
+{{< release-date date="2024-06-11" >}}
+
+The full release note for this release is available
+[on GitHub](https://github.com/docker/buildx/releases/tag/v0.15.0).
+
+### New
+
+- New `--call` option allows setting evaluation method for a build, replacing the previous experimental `--print` flag. [docker/buildx#2498](https://github.com/docker/buildx/pull/2498/), [docker/buildx#2487](https://github.com/docker/buildx/pull/2487/), [docker/buildx#2513](https://github.com/docker/buildx/pull/2513/)
+
+  In addition to the default `build` method, the following methods are implemented by Dockerfile frontend:
+
+  - [`--call=check`](/reference/cli/docker/buildx/build.md#check): Run validation routines for your build configuration. For more information about build checks, see [Build checks](/build/checks.md)
+  - [`--call=outline`](/reference/cli/docker/buildx/build.md#call-outline): Show configuration that would be used by current build, including all build arguments, secrets, SSH mounts, etc., that your build would use.
+  - [`--call=targets`](/reference/cli/docker/buildx/build.md#call-targets): Show all available targets and their descriptions.
+
+- New `--prefer-index` flag has been added to the `docker buildx imagetools create` command to control the behavior of creating image out of one single-platform image manifest. [docker/buildx#2482](https://github.com/docker/buildx/pull/2482/)
+- The [`kubernetes` driver](/build/drivers/kubernetes.md) now supports a `timeout` option for configuring deployment timeout. [docker/buildx#2492](https://github.com/docker/buildx/pull/2492/)
+- New metrics definitions have been added for build warning types. [docker/buildx#2482](https://github.com/docker/buildx/pull/2482/), [docker/buildx#2507](https://github.com/docker/buildx/pull/2507/)
+- The [`buildx prune`](/reference/cli/docker/buildx/prune.md) and [`buildx du`](/reference/cli/docker/buildx/du.md) commands now support negative and prefix filters. [docker/buildx#2473](https://github.com/docker/buildx/pull/2473/)
+- Building Compose files with Bake now supports passing SSH forwarding configuration. [docker/buildx#2445](https://github.com/docker/buildx/pull/2445/)
+- Fix issue with configuring the `kubernetes` driver with custom TLS certificates. [docker/buildx#2454](https://github.com/docker/buildx/pull/2454/)
+- Fix concurrent kubeconfig access when loading nodes. [docker/buildx#2497](https://github.com/docker/buildx/pull/2497/)
+
+### Packaging updates
+
+- Compose support has been updated to v2.1.2. [docker/buildx#2502](https://github.com/docker/buildx/pull/2502/), [docker/buildx#2425](https://github.com/docker/buildx/pull/2425/)
+
 ## 0.14.0
 
 {{< release-date date="2024-04-18" >}}

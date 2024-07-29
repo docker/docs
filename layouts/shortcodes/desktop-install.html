@@ -6,42 +6,42 @@
 {{- $version := .Get "version" -}}
 {{- $build_path := .Get "build_path" -}}
 <blockquote {{ if eq $build_path "/" }} class="tip" {{ end }}>
-  <p>Download Docker Desktop</p>
-  <p>
-    {{- if or $all $win }}
-    <a target="_blank" rel="noopener"
-      href="https://desktop.docker.com/win/main/amd64{{ $build_path }}Docker%20Desktop%20Installer.exe">Windows</a>
-    (<a target="_blank" rel="noopener"
-      href="https://desktop.docker.com/win/main/amd64{{ $build_path }}checksums.txt">checksum</a>) | 
-    {{ end }}
-    {{- if or $beta_win_arm }}
-    <a target="_blank" rel="noopener"
-      href="https://desktop.docker.com/win/main/arm64{{ $build_path }}Docker%20Desktop%20Installer.exe">Windows ARM Beta</a>
-    (<a target="_blank" rel="noopener"
-      href="https://desktop.docker.com/win/main/arm64{{ $build_path }}checksums.txt">checksum</a>) | 
-    {{ end }}
-    {{- if or $all $mac }}
-    <a target="_blank" rel="noopener" href="https://desktop.docker.com/mac/main/arm64{{ $build_path }}Docker.dmg">Mac
-      with Apple chip</a>
-    (<a target="_blank" rel="noopener"
+<p>Download Docker Desktop</p>
+<p>
+  {{- if or $all $win }}
+  <a target="_blank" rel="noopener"
+     href="https://desktop.docker.com/win/main/amd64{{ $build_path }}Docker%20Desktop%20Installer.exe">Windows</a>
+  (<a target="_blank" rel="noopener"
+      href="https://desktop.docker.com/win/main/amd64{{ $build_path }}checksums.txt">checksum</a>) |
+  {{ end }}
+  {{- if or $beta_win_arm }}
+  <a target="_blank" rel="noopener"
+     href="https://desktop.docker.com/win/main/arm64{{ $build_path }}Docker%20Desktop%20Installer.exe">Windows ARM Beta</a>
+  (<a target="_blank" rel="noopener"
+      href="https://desktop.docker.com/win/main/arm64{{ $build_path }}checksums.txt">checksum</a>) |
+  {{ end }}
+  {{- if or $all $mac }}
+  <a target="_blank" rel="noopener" href="https://desktop.docker.com/mac/main/arm64{{ $build_path }}Docker.dmg">Mac
+    with Apple chip</a>
+  (<a target="_blank" rel="noopener"
       href="https://desktop.docker.com/mac/main/arm64{{ $build_path }}checksums.txt">checksum</a>) |
-    <a target="_blank" rel="noopener" href="https://desktop.docker.com/mac/main/amd64{{ $build_path }}Docker.dmg">Mac
-      with Intel chip</a>
-    (<a target="_blank" rel="noopener"
+  <a target="_blank" rel="noopener" href="https://desktop.docker.com/mac/main/amd64{{ $build_path }}Docker.dmg">Mac
+    with Intel chip</a>
+  (<a target="_blank" rel="noopener"
       href="https://desktop.docker.com/mac/main/amd64{{ $build_path }}checksums.txt">checksum</a>)
-    {{ end -}}
-    {{- if or $all $linux }}
-    |
-    <a target="_blank" rel="noopener"
-      href="https://desktop.docker.com/linux/main/amd64{{ $build_path }}docker-desktop-{{ $version }}-amd64.deb">Debian</a>
-    -
-    <a target="_blank" rel="noopener"
-      href="https://desktop.docker.com/linux/main/amd64{{ $build_path }}docker-desktop-{{ $version }}-x86_64.rpm">RPM</a>
-    -
-    <a target="_blank" rel="noopener"
-      href="https://desktop.docker.com/linux/main/amd64{{ $build_path }}docker-desktop-{{ $version }}-x86_64.pkg.tar.zst">Arch</a>
-    (<a target="_blank" rel="noopener"
+  {{ end -}}
+  {{- if or $all $linux }}
+  |
+  <a target="_blank" rel="noopener"
+     href="https://desktop.docker.com/linux/main/amd64{{ $build_path }}docker-desktop-{{ $version }}-amd64.deb">Debian</a>
+  -
+  <a target="_blank" rel="noopener"
+     href="https://desktop.docker.com/linux/main/amd64{{ $build_path }}docker-desktop-{{ $version }}-x86_64.rpm">RPM</a>
+  -
+  <a target="_blank" rel="noopener"
+     href="https://desktop.docker.com/linux/main/amd64{{ $build_path }}docker-desktop-{{ $version }}-x86_64.pkg.tar.zst">Arch</a>
+  (<a target="_blank" rel="noopener"
       href="https://desktop.docker.com/linux/main/amd64{{ $build_path }}checksums.txt">checksum</a>)
-    {{- end -}}
-  </p>
+  {{- end -}}
+</p>
 </blockquote>

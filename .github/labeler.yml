@@ -13,6 +13,11 @@ area/build:
           - _vendor/github.com/docker/buildx/**
           - content/engine/commandline/build*
 
+area/build-cloud:
+  - changed-files:
+      - any-glob-to-any-file:
+          - content/build-cloud/**
+
 area/compose:
   - changed-files:
       - any-glob-to-any-file:
@@ -118,6 +123,11 @@ area/storage:
   - changed-files:
       - any-glob-to-any-file:
           - content/storage/**
+
+area/accounts:
+  - changed-files:
+      - any-glob-to-any-file:
+          - content/accounts/**
 
 hugo:
   - changed-files:

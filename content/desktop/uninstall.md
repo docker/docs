@@ -70,6 +70,8 @@ $ rm -rf ~/Library/Containers/com.docker.docker
 $ rm -rf ~/.docker
 ```
 
+You can also move the Docker application to the trash. 
+
 {{< /tab >}}
 {{< tab name="Linux" >}}
 

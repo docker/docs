@@ -21,10 +21,6 @@ GitHub Actions:
 - `docker/build-push-action@v6`
 - `docker/bake-action@v5`
 
-> **Note**
->
-> Job summaries are not yet supported with [Docker Build Cloud](../../cloud/_index.md).
-
 To view the job summary, open the details page for the job in GitHub after the
 job has finished. The summary is available for both failed and successful
 builds. In the case of a failed build, the summary also displays the error
@@ -70,16 +66,45 @@ select the item in the list.
 
 ## Disable job summary
 
-To disable job summaries, set the `DOCKER_BUILD_NO_SUMMARY` environment
-variable in the YAML configuration for your build step:
+To disable job summaries, set the `DOCKER_BUILD_SUMMARY` environment variable
+in the YAML configuration for your build step:
 
 ```yaml {hl_lines=5}
       -
         name: Build
         uses: docker/docker-build-push-action@v6
         env:
-          DOCKER_BUILD_NO_SUMMARY: true
+          DOCKER_BUILD_SUMMARY: false
         with:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 ```
+
+## Disable build record upload
+
+To disable the upload of the build record archive to GitHub, set the
+`DOCKER_BUILD_RECORD_UPLOAD` environment variable in the YAML configuration for
+your build step:
+
+```yaml {hl_lines=5}
+      -
+        name: Build
+        uses: docker/docker-build-push-action@v6
+        env:
+          DOCKER_BUILD_RECORD_UPLOAD: false
+        with:
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+```
+
+With this configuration, the build summary is still generated, but does not
+contain a link to download the build record archive.
+
+## Limitations
+
+Build summaries are currently not supported for:
+
+- Builds using [Docker Build Cloud](/build-cloud/_index.md). Support for Docker
+  Build Cloud is planned for a future release.
+- Repositories hosted on GitHub Enterprise Servers. Summaries can only be
+  viewed for repositories hosted on GitHub.com.

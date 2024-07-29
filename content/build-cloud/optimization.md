@@ -4,6 +4,7 @@ description: Building remotely is different from building locally. Here's how to
 keywords: build, cloud build, optimize, remote, local, cloud
 aliases:
   - /hydrobuild/optimization/
+  - /build/cloud/optimization/
 ---
 
 Docker Build Cloud runs your builds remotely, and not on the machine where you
@@ -28,6 +29,9 @@ more efficient:
 - [Multi-stage builds](#multi-stage-builds)
 - [Fetch remote files in build](#fetch-remote-files-in-build)
 - [Multi-threaded tools](#multi-threaded-tools)
+
+For more information on how to optimize your builds, see
+[Building best practices](/build/building/best-practices.md).
 
 ### Dockerignore files
 

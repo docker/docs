@@ -82,7 +82,7 @@ If you choose the integrated terminal, you can run commands in a running contain
     - The symlink of the default Docker socket. 
   Additionally, Docker Desktop ensures that the context is switched to `desktop-linux` on startup.
   
-  You are notified if changes are found and are able to restore the configuration directly from the notification.
+  You are notified if changes are found and are able to restore the configuration directly from the notification. For more information, see the [FAQs](../faqs/macfaqs.md#why-do-i-keep-getting-a-notification-telling-me-an-application-has-changed-my-desktop-configurations).
 
 ## Resources
 
@@ -138,6 +138,14 @@ Advanced settings are:
 Use File sharing to allow local directories on your machine to be shared with
 Linux containers. This is especially useful for editing source code in an IDE on
 the host while running and testing the code in a container.
+
+#### Synchronized file shares 
+
+Synchronized file shares is an alternative file sharing mechanism that provides fast and flexible host-to-VM file sharing, enhancing bind mount performance through the use of synchronized filesystem caches. Available with Pro, Team, and Business subscriptions.
+
+To learn more, see [Synchronized file share](../synchronized-file-sharing.md).
+
+#### Virtual file shares
 
 By default the `/Users`, `/Volumes`, `/private`, `/tmp` and `/var/folders` directory are shared.
 If your project is outside this directory then it must be added to the list,
@@ -218,7 +226,7 @@ The HTTPS proxy settings used for scanning images are set using the `HTTPS_PROXY
 
 {{< include "desktop-network-setting.md" >}}
 
-You can also select **Use kernel networking for UDP**. This lets you use a more efficient kernel networking path for UDP by changing the value of `kernelForUDP` in the `settings.json` file.
+You can also select the **Use kernel networking for UDP** setting. This lets you use a more efficient kernel networking path for UDP. This may not be compatible with your VPN software.
 
 ## Docker Engine
 

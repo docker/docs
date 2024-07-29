@@ -151,7 +151,7 @@ $ docker build \
   --push .
 ```
 
-For more information, see [Docker Build Cloud](../cloud/_index.md).
+For more information, see [Docker Build Cloud](/build-cloud/_index.md).
 
 ### Cross-compilation
 

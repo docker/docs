@@ -36,6 +36,17 @@ grid:
         url: "/build/building/packaging/"
       - text: "Release notes"
         url: "/build/release-notes/"
+  - title: Docker Build Cloud
+    icon: cloud
+    description: |
+      Run your builds in the cloud.
+    links:
+      - text: "Overview"
+        url: "/build-cloud/"
+      - text: "Setup"
+        url: "/build-cloud/setup/"
+      - text: "Optimization"
+        url: "/build-cloud/optimization/"
   - title: Docker Compose
     icon: polyline
     description: |

@@ -2,6 +2,13 @@
 title: Get Docker Desktop 
 keywords: concepts, container, docker desktop
 description: This concept page will teach you download Docker Desktop and install it on Windows, Mac, and Linux
+summary: |
+  Getting Docker Desktop up and running is the first crucial step for
+  developers diving into containerization, offering a seamless and
+  user-friendly interface for managing Docker containers. Docker Desktop
+  simplifies the process of building, sharing, and running applications in
+  containers, ensuring consistency across different environments.
+weight: 1
 ---
 
 {{< youtube-embed C2bPVhiNU-0 >}}
@@ -68,7 +75,7 @@ For this container, the frontend is accessible on port `8080`. To open the websi
 ## Manage containers using Docker Desktop
 
 
-1. Open Docker Desktop and select the **Container** field on the left sidebar.
+1. Open Docker Desktop and select the **Containers** field on the left sidebar.
 2. You can view information about your container including logs, and files, and even access the shell by selecting the **Exec** tab.
 
    ![Screenshot of exec into the running container in Docker Desktop](images/exec-into-docker-container.webp?border=true)

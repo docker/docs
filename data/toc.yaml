@@ -348,6 +348,8 @@ Reference:
     title: docker (base command)
   - path: /reference/cli/docker/build/
     title: docker build
+  - path: /reference/cli/docker/build-legacy/
+    title: docker build (legacy builder)
   - sectiontitle: docker builder
     section:
       - path: /reference/cli/docker/builder/
@@ -561,7 +563,7 @@ Reference:
       - path: /reference/cli/docker/context/use/
         title: docker context use
   - path: /reference/cli/docker/debug/
-    title: docker debug (Beta)
+    title: docker debug
   - path: /reference/cli/docker/exec/
     title: docker exec
   - sectiontitle: docker image
@@ -868,34 +870,42 @@ Reference:
   section:
   - path: /reference/build-checks/
     title: Overview
-  - path: /reference/build-checks/stage-name-casing/
-    title: StageNameCasing
-  - path: /reference/build-checks/from-as-casing/
-    title: FromAsCasing
-  - path: /reference/build-checks/no-empty-continuation/
-    title: NoEmptyContinuation
   - path: /reference/build-checks/consistent-instruction-casing/
     title: ConsistentInstructionCasing
-  - path: /reference/build-checks/file-consistent-command-casing/
-    title: FileConsistentCommandCasing
+  - path: /reference/build-checks/copy-ignored-file/
+    title: CopyIgnoredFile
   - path: /reference/build-checks/duplicate-stage-name/
     title: DuplicateStageName
-  - path: /reference/build-checks/reserved-stage-name/
-    title: ReservedStageName
+  - path: /reference/build-checks/from-as-casing/
+    title: FromAsCasing
+  - path: /reference/build-checks/from-platform-flag-const-disallowed/
+    title: FromPlatformConstDisallowed
+  - path: /reference/build-checks/invalid-default-arg-in-from/
+    title: InvalidDefaultArgInFrom
   - path: /reference/build-checks/json-args-recommended/
     title: JSONArgsRecommended
-  - path: /reference/build-checks/maintainer-deprecated/
-    title: MaintainerDeprecated
-  - path: /reference/build-checks/undefined-arg-in-from/
-    title: UndefinedArgInFrom
-  - path: /reference/build-checks/workdir-relative-path/
-    title: WorkdirRelativePath
-  - path: /reference/build-checks/undefined-var/
-    title: UndefinedVar
-  - path: /reference/build-checks/multiple-instructions-disallowed/
-    title: MultipleInstructionsDisallowed
   - path: /reference/build-checks/legacy-key-value-format/
     title: LegacyKeyValueFormat
+  - path: /reference/build-checks/maintainer-deprecated/
+    title: MaintainerDeprecated
+  - path: /reference/build-checks/multiple-instructions-disallowed/
+    title: MultipleInstructionsDisallowed
+  - path: /reference/build-checks/no-empty-continuation/
+    title: NoEmptyContinuation
+  - path: /reference/build-checks/redundant-target-platform/
+    title: RedundantTargetPlatform
+  - path: /reference/build-checks/reserved-stage-name/
+    title: ReservedStageName
+  - path: /reference/build-checks/secrets-used-in-arg-or-env/
+    title: SecretsUsedInArgOrEnv
+  - path: /reference/build-checks/stage-name-casing/
+    title: StageNameCasing
+  - path: /reference/build-checks/undefined-arg-in-from/
+    title: UndefinedArgInFrom
+  - path: /reference/build-checks/undefined-var/
+    title: UndefinedVar
+  - path: /reference/build-checks/workdir-relative-path/
+    title: WorkdirRelativePath
 - title: Daemon CLI (dockerd)
   path: /reference/cli/dockerd/
 - sectiontitle: API reference
@@ -1168,6 +1178,16 @@ Manuals:
          title: Understand permission requirements for Mac
        - path: /desktop/install/windows-install/
          title: Windows
+       - sectiontitle: Use the MSI installer {{< badge color=violet text="Early Access" >}}
+         section:
+         - path: /desktop/install/msi/
+           title: Overview
+         - path: /desktop/install/msi/install-and-configure/
+           title: Install and configure
+         - path: /desktop/install/msi/use-intune/
+           title: Use Intune
+         - path: /desktop/install/msi/faq/
+           title: FAQs
        - path: /desktop/windows/permission-requirements/
          title: Understand permission requirements for Windows
        - path: /desktop/install/linux-install/
@@ -1440,6 +1460,8 @@ Manuals:
         title: Dashboard
       - path: /scout/explore/image-details-view/
         title: Image details view
+      - path: /scout/explore/exceptions/
+        title: Exceptions {{< badge color=violet text=New >}}
       - path: /scout/explore/metrics-exporter/
         title: Metrics exporter
     - sectiontitle: How-tos
@@ -1547,8 +1569,6 @@ Manuals:
       title: Binaries
     - path: /engine/install/linux-postinstall/
       title: Post-installation steps
-    - path: /engine/install/troubleshoot/
-      title: Troubleshoot installation
   - sectiontitle: Storage
     section:
     - path: /storage/
@@ -1559,8 +1579,6 @@ Manuals:
       title: Bind mounts
     - path: /storage/tmpfs/
       title: tmpfs mounts
-    - path: /storage/troubleshooting_volume_errors/
-      title: Troubleshoot
     - sectiontitle: Storage drivers
       section:
       - path: /storage/storagedriver/
@@ -1825,10 +1843,12 @@ Manuals:
     title: Deprecated features
   - sectiontitle: Release notes
     section:
-    - path: /engine/release-notes/27.0/
-      title: Engine 27.0
+    - path: /engine/release-notes/27.1/
+      title: Engine 27.1
     - sectiontitle: Previous versions
       section:
+      - path: /engine/release-notes/27.0/
+        title: Engine 27.0
       - path: /engine/release-notes/26.1/
         title: Engine 26.1
       - path: /engine/release-notes/26.0/
@@ -1905,6 +1925,8 @@ Manuals:
           title: OpenTelemetry support
         - path: /build/building/base-images/
           title: Base images
+    - path: /build/checks/
+      title: Build checks  {{< badge color=violet text=New >}}
     - sectiontitle: Builders
       section:
         - path: /build/builders/
@@ -1923,18 +1945,6 @@ Manuals:
           title: Kubernetes driver
         - path: /build/drivers/remote/
           title: Remote driver
-    - sectiontitle: Build Cloud {{< badge color=violet text=New >}}
-      section:
-        - path: /build/cloud/
-          title: Overview
-        - path: /build/cloud/setup/
-          title: Setup
-        - path: /build/cloud/usage/
-          title: Usage
-        - path: /build/cloud/ci/
-          title: Build Cloud in CI
-        - path: /build/cloud/optimization/
-          title: Optimize for cloud builds
     - sectiontitle: Exporters
       section:
         - path: /build/exporters/
@@ -2067,6 +2077,18 @@ Manuals:
             title: Reproducible builds
     - path: /build/release-notes/
       title: Release notes
+- sectiontitle: Docker Build Cloud
+  section:
+    - path: /build-cloud/
+      title: Overview
+    - path: /build-cloud/setup/
+      title: Setup
+    - path: /build-cloud/usage/
+      title: Usage
+    - path: /build-cloud/ci/
+      title: Continuous integration
+    - path: /build-cloud/optimization/
+      title: Optimization
 - sectiontitle: Docker Compose
   section:
   - path: /compose/
@@ -2107,16 +2129,14 @@ Manuals:
       title: Interpolation
     - path: /compose/environment-variables/best-practices/
       title: Best practices
-  - sectiontitle: Use...
-    section:
-    - path: /compose/profiles/
-      title: ...service profiles
-    - path: /compose/file-watch/
-      title: ...Compose Watch
-    - path: /compose/production/
-      title: ...Compose in production
-    - path: /compose/use-secrets/
-      title: ...secrets in Compose
+  - path: /compose/profiles/
+    title: Use service profiles
+  - path: /compose/file-watch/
+    title: Use Compose Watch
+  - path: /compose/production/
+    title: Compose in production
+  - path: /compose/use-secrets/
+    title: Secrets in Compose
   - sectiontitle: Working with multiple Compose files
     section:
     - path: /compose/multiple-compose-files/
@@ -2140,7 +2160,17 @@ Manuals:
   - path: /compose/migrate/
     title: Migrate to Compose V2
   - path: /compose/faq/
-    title: Compose FAQ
+    title: FAQs
+  - sectiontitle: Compose Bridge (Early Access)
+    section:
+    - path: /compose/bridge/
+      title: Overview
+    - path: /compose/bridge/usage/
+      title: Usage
+    - path: /compose/bridge/customize/
+      title: Customize
+    - path: /compose/bridge/advanced-integration/
+      title: Advanced
   - path: /compose/release-notes/
     title: Release notes
 
@@ -2148,8 +2178,6 @@ Manuals:
   section:
   - path: /docker-hub/
     title: Overview
-  - path: /docker-id/
-    title: Create an account
   - path: /docker-hub/quickstart/
     title: Quickstart
   - sectiontitle: Repositories
@@ -2195,6 +2223,20 @@ Manuals:
   - path: /docker-hub/release-notes/
     title: Release notes
 
+- title: Docker for GitHub Copilot {{< badge color=violet text="Early Access" >}}
+  path: /copilot/
+
+- sectiontitle: Docker accounts
+  section:
+  - path: /accounts/
+    title: Overview
+  - path: /docker-id/
+    title: Create an account
+  - path: /accounts/manage-account/
+    title: Manage an account
+  - path: /accounts/deactivate-user-account/
+    title: Deactivate an account
+
 - sectiontitle: Administration
   section:
   - path: /admin/
@@ -2238,7 +2280,7 @@ Manuals:
   - path: /admin/convert-account/
     title: Convert an account into an organization
   - path: /admin/deactivate-account/
-    title: Deactivate an account or organization
+    title: Deactivate an organization
 
 - sectiontitle: Security
   section:
@@ -2266,8 +2308,12 @@ Manuals:
         title: Just-in-Time
       - path: /security/for-admins/provisioning/group-mapping/
         title: Group mapping
-    - path: /security/for-admins/configure-sign-in/
-      title: Enforce sign in
+    - sectiontitle: Enforce sign-in
+      section:
+      - path: /security/for-admins/enforce-sign-in/
+        title: Overview
+      - path: /security/for-admins/enforce-sign-in/methods/
+        title: Methods
     - path: /security/for-admins/roles-and-permissions/
       title: Roles and permissions
     - path: /security/for-admins/domain-audit/
@@ -2287,7 +2333,7 @@ Manuals:
       - path: /security/for-developers/2fa/disable-2fa/
         title: Disable two-factor authentication
       - path: /security/for-developers/2fa/recover-hub-account/
-        title: Recover your Docker Hub account
+        title: Recover your Docker account
       - path: /security/for-developers/2fa/new-recovery-code/
         title: Generate a new recovery code
   - path: /security/security-announcements/
@@ -2335,6 +2381,8 @@ Manuals:
     title: Docker Scout billing
   - path: /billing/tax-certificate/
     title: Register a tax certificate
+  - path: /billing/3d-secure/
+    title: 3D Secure authentication
   - path: /billing/faqs/
     title: Billing FAQs
 
