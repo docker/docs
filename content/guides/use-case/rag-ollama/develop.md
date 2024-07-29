@@ -1,5 +1,5 @@
 ---
-title: Use containers for generative RAG development
+title: Use containers for RAG development
 keywords: python, local, development, generative ai, genai, llm, rag, ollama, langchain, openai
 description: Learn how to develop your generative RAG application locally.
 ---
