@@ -29,7 +29,6 @@ To run the database service:
 
 2. In the `docker-compose.yaml` file, you'll see the following:
    - Add instructions to run a Qdrant database
-   - Specify the volume and the port 
 
    The following is the updated `compose.yaml` file. All comments have been removed.
 
