@@ -30,7 +30,6 @@ To run the database service:
 2. In the `docker-compose.yaml` file, you'll see the following:
    - Add instructions to run a Qdrant database
 
-   The following is the updated `compose.yaml` file. All comments have been removed.
 
    ```yaml{hl_lines=["3-10"]}
     services:
