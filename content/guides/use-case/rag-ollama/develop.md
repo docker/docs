@@ -82,7 +82,7 @@ To run Ollama in a container and provide GPU access:
 2. The `docker-compose.yaml` file already contains the necessary instructions. In your own apps, you'll need to add the Ollama service in your `docker-compose.yaml`. The following is
    the updated `docker-compose.yaml`:
 
-   ```yaml {hl_lines=["23-34"]}
+   ```yaml
     ollama:
       image: ollama/ollama
       container_name: ollama
