@@ -129,7 +129,6 @@ At this point, you have the following services in your Compose file:
 - Server service for your main RAG application
 - Database service to store vectors in a Qdrant database
 - (optional) Ollama service to run the LLM
-- (optional) Ollama-pull service to automatically pull the model for the Ollama
   service
 
 
