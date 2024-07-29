@@ -27,7 +27,7 @@ To run the database service:
 
 1. In the cloned repository's directory, open the `docker-compose.yaml` file in an IDE or text editor.
 
-2. In the `compose.yaml` file, add the following:
+2. In the `docker-compose.yaml` file, you'll see the following:
    - Add instructions to run a Qdrant database
    - Specify the volume and the port 
 
