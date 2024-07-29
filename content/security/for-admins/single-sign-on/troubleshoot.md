@@ -4,11 +4,12 @@ keywords: sso, troubleshoot, single sign-on
 title: Troubleshoot single sign-on
 ---
 
-While configuring single sign-on (SSO), you may encounter issues that can stem
-from your IdP or Docker configuration. The following sections describe how to
-view the error messages in the Docker Admin Console as well as some common
-errors and possible solutions. You can also see your identity provider's
-documentation to learn if you can view error logs in their service.
+While configuring or using single sign-on (SSO), you may encounter issues that
+can stem from your identity provider (IdP) or Docker configuration. The
+following sections describe how to view the error messages in the Docker Admin
+Console as well as some common errors and possible solutions. You can also see
+your identity provider's documentation to learn if you can view error logs in
+their service.
 
 ## View SSO and SCIM error logs
 
