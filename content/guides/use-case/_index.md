@@ -39,7 +39,7 @@ grid_genai:
   icon: summarize
 - title: RAG Ollama application
   description: Explore how to containerize a RAG application
-  link: /guides/use-case/rag-ollama
+  link: /guides/use-case/rag-ollama/
   icon: article
 ---
 

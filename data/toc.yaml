@@ -212,6 +212,14 @@ Guides:
           title: Text classification
         - path: /guides/use-case/nlp/text-summarization/
           title: Text summarization
+      - sectiontitle: RAG Ollama application
+        section:
+        - path: /guides/use-case/rag-ollama/
+          title: Overview
+        - path: /guides/use-case/rag-ollama/containerize/
+          title: Containerize your app
+        - path: /guides/use-case/rag-ollama/develop/
+          title: Develop your app
     - path: /guides/use-case/jupyter/
       title: Data science with JupyterLab
     - path: /scout/guides/vex/
