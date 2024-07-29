@@ -7,8 +7,8 @@ title: Troubleshoot single sign-on
 While configuring single sign-on (SSO), you may encounter issues that can stem
 from your IdP or Docker configuration. The following sections describe how to
 view the error messages in the Docker Admin Console as well as some common
-errors and possible solutions. You can also see your IdP's documentation to
-learn if you can view error logs in their service.
+errors and possible solutions. You can also see your identity provider's
+documentation to learn if you can view error logs in their service.
 
 ## View SSO and SCIM error logs
 
@@ -120,7 +120,7 @@ User '$username' is not assigned to this SSO organization. Please contact your c
 ```
 
 This error occurs if SSO Just-In-Time (JIT) provisioning is disabled. JIT
-provisioning ensures that a user is added to an organizatin after a they
+provisioning ensures that a user is added to an organization after a they
 authenticate via SSO. JIT provisioning can be optionally disabled to prevent
 users taking seats in the organization automatically or when SCIM is used as
 the only option for user provisioning.
@@ -137,8 +137,8 @@ Possible solutions:
    details, see [Manage organization members](/admin/organization/members/).
  * If SCIM should provision the user, then ensure that the IdP controlling SCIM
    provisioning is properly configured to synchronize users with Docker as soon
-   as they get assigned to the app. For more details, refer to your IdP's
-   documentation.
+   as they get assigned to the app. For more details, refer to your identity
+   provider's documentation.
 
 ### Name ID is not an email address
 
@@ -149,7 +149,7 @@ issue.
 The name ID sent by the identity provider is not an email address. Please contact your company administrator.
 ```
 
-This error can occur during SAML authentication, when the IDP sends back a Name
+This error can occur during SAML authentication, when your IdP sends back a Name
 ID (UPN) that doesn't comply with the email address format required. The Docker
 SSO app requires a name identifier to be the primary email address of the user.
 
