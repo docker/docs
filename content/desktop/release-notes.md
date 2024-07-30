@@ -21,6 +21,18 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1) to see what's coming next.
 
+## 4.33.1
+
+{{< release-date date="2024-07-31" >}}
+
+{{< desktop-install-v2 win=true beta_win_arm=true version="4.33.0" build_path="/161083/" >}}
+
+### Bug fixes and enhancements
+
+#### For Windows
+
+- Added support for WSL2 2.3.11 and above, which includes loadable kernel modules. Fixes [docker/for-win#14222](https://github.com/docker/for-win/issues/14222)
+
 ## 4.33.0
 
 {{< release-date date="2024-07-25" >}}
@@ -29,7 +41,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### New
 
-- Docker Debug in now generally available.
+- [Docker Debug](../reference/cli/docker/debug.md) in now generally available.
 - BuildKit now evaluates Dockerfile rules to inform you of potential issues.
 - **Resource Allocation** settings can now be accessed directly from the resource usage data displayed in the Dashboard footer.
 
