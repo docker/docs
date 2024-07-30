@@ -23,7 +23,7 @@ In the cloned repository's directory, open the `compose.yaml` file in an IDE or 
 
 The following is the updated `compose.yaml` file.
 
-```yaml {hl_lines="09-30"}
+```yaml {hl_lines="07-25"}
 services:
   web:
     build: .
@@ -130,7 +130,7 @@ Watch](../../compose/file-watch.md).
 Open your `compose.yaml` file in an IDE or text editor and then add the Compose
 Watch instructions. The following is the updated `compose.yaml` file.
 
-```yaml {hl_lines="16-19"}
+```yaml {hl_lines="13-16"}
 services:
   web:
     build: .
