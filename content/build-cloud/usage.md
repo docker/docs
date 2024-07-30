@@ -191,3 +191,10 @@ It isn't possible to use Docker Build Cloud with a private registry
 or registry mirror on an internal network behind a VPN.
 All endpoints that a cloud builder interacts with,
 including OCI registries, must be accessible over the internet.
+
+> **Interested in trying out an experimental feature?**
+>
+>We are currently testing an experimental feature which lets cloud builders access internal resources. 
+>
+> If you're interested in trying this feature, contact us using the [Support form](https://hub.docker.com/support/contact?topic=Docker+Build+Cloud&subject=Private+registry+access).
+{ .tip }
