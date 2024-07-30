@@ -78,6 +78,10 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### Security
 
+#### For all platforms
+
+- Includes a fix for AuthZ Plugin Bypass Regression in Docker Engine. For more information, see [CVE-2024-41110](https://www.cve.org/cverecord?id=CVE-2024-41110).
+
 #### For Windows
 
 - Fixed an issue where some `wincred` values were persisted after uninstall. Reported by Javier Yong [@Javiery3889](https://github.com/Javiery3889).
