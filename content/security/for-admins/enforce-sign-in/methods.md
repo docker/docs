@@ -83,7 +83,7 @@ There are many ways to deploy the registry key, for example using an MDM solutio
 
 >**Note**
 >
-> If a `plist` and `registry.json` file both exist, the registry key takes precedence.
+> If a `plist` and `registry.json` file both exist, the `plist` file takes precedence.
 
 ### Example deployment 
 
