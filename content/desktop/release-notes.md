@@ -47,7 +47,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### Upgrades
 
-- [Docker Compose v2.29.1-desktop.1](https://github.com/docker/compose/releases/tag/v2.29.1-desktop.1)
+- [Docker Compose v2.29.1](https://github.com/docker/compose/releases/tag/v2.29.1)
 - [Docker Engine v27.1.1](https://docs.docker.com/engine/release-notes/27.1/#2711)
 - [containerd v1.7.19](https://github.com/containerd/containerd/releases/tag/v1.7.19)
 - [NVIDIA Container Toolkit v1.16.0](https://github.com/NVIDIA/nvidia-container-toolkit/releases/tag/v1.16.0)
