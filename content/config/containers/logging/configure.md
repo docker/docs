@@ -151,7 +151,7 @@ The `mode` log option controls whether to use the `blocking` (default) or
 
 The `max-buffer-size` log option controls the size of the buffer used for
 intermediate message storage when `mode` is set to `non-blocking`. `max-buffer-size`
-defaults to 1 megabyte.
+defaults to 1 megabyte. This value is case-insensitive and allows one of the binary units of measure: `KiB`, `MiB`, `GiB`, `TiB`, or `PiB` (with `i` being optional). The shorthand format using only the first character is more common.
 
 The following example starts an Alpine container with log output in non-blocking
 mode and a 4 megabyte buffer:
