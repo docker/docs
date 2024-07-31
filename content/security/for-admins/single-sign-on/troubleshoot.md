@@ -36,16 +36,17 @@ issue.
 IdP-Initiated login is not enabled for connection "$ssoConnection".
 ```
 
-Docker doesn't support IdP-initiated SAML flow. This error can occur when a user
-attempts to authenticate from the IdP, for example the App dashboard tiles .
+Docker doesn't support an IdP-initiated SAML flow. This error can occur when a
+user attempts to authenticate from the IdP, for example using the Docker SSO App
+tile on the dashboard.
 
 Possible solutions:
 
  * The user must initiate authentication from Docker apps (Hub, Desktop, etc).
    The user needs to enter their email address and they will get redirected to
    the configured SSO IdP for their domain.
- * (Optional) Configure Docker SSO App as not visible to users on your IdP so
-   users don’t attempt to start authentication from there.
+ * (Optional) Configure the Docker SSO App as not visible to users on your IdP
+   so users don’t attempt to start authentication from there.
 
 ### Not enough seats in organization
 
@@ -121,7 +122,7 @@ User '$username' is not assigned to this SSO organization. Please contact your c
 ```
 
 This error occurs if SSO Just-In-Time (JIT) provisioning is disabled. JIT
-provisioning ensures that a user is added to an organization after a they
+provisioning ensures that a user is added to an organization after they
 authenticate via SSO. JIT provisioning can be optionally disabled to prevent
 users taking seats in the organization automatically or when SCIM is used as
 the only option for user provisioning.
