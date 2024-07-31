@@ -101,9 +101,8 @@ testuser:231072:65536
 - For Debian 10, add `kernel.unprivileged_userns_clone=1` to `/etc/sysctl.conf` (or
   `/etc/sysctl.d`) and run `sudo sysctl --system`. This step is not required on Debian 11.
 
-- Installing `fuse-overlayfs` is recommended. Run `sudo apt-get install -y fuse-overlayfs`.
-  Using `overlay2` storage driver with Debian-specific modprobe option `sudo modprobe overlay permit_mounts_in_userns=1` is also possible,
-  however, highly discouraged due to [instability](https://github.com/moby/moby/issues/42302).
+- For Debian 11, installing `fuse-overlayfs` is recommended. Run `sudo apt-get install -y fuse-overlayfs`.
+  This step is not required on Debian 12.
 
 - Rootless docker requires version of `slirp4netns` greater than `v0.4.0` (when `vpnkit` is not installed).
   Check you have this with 
@@ -120,7 +119,8 @@ testuser:231072:65536
   `/etc/sysctl.d`) and run `sudo sysctl --system`
 {{< /tab >}}
 {{< tab name="openSUSE and SLES" >}}
-- Installing `fuse-overlayfs` is recommended. Run `sudo zypper install -y fuse-overlayfs`.
+- For openSUSE 15 and SLES 15, Installing `fuse-overlayfs` is recommended. Run `sudo zypper install -y fuse-overlayfs`.
+  This step is not required on openSUSE Tumbleweed.
 
 - `sudo modprobe ip_tables iptable_mangle iptable_nat iptable_filter` is required.
   This might be required on other distros as well depending on the configuration.
@@ -128,7 +128,8 @@ testuser:231072:65536
 - Known to work on openSUSE 15 and SLES 15.
 {{< /tab >}}
 {{< tab name="CentOS, RHEL, and Fedora" >}}
-- Installing `fuse-overlayfs` is recommended. Run `sudo dnf install -y fuse-overlayfs`.
+- For RHEL 8 and similar distributions, installing `fuse-overlayfs` is recommended. Run `sudo dnf install -y fuse-overlayfs`.
+  This step is not required on RHEL 9 and similar distributions.
 
 - You might need `sudo dnf install -y iptables`.
 {{< /tab >}}
