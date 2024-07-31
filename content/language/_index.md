@@ -52,4 +52,7 @@ Learn how to containerize your applications and start developing using Docker. C
     <div class="flex items-center flex-1 shadow p-4">
         <a href="/language/php/"><img class="m-auto rounded" src="/language/images/php-logo.webp" alt="Develop with PHP"></a>
     </div>
+    <div class="flex items-center flex-1 shadow p-4">
+        <a href="/language/ruby/"><img class="m-auto rounded" src="/language/images/ruby-on-rails.webp" alt="Develop with Ruby"></a>
+    </div>
 </div>
