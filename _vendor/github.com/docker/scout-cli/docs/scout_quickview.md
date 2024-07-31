@@ -9,14 +9,17 @@ Quick overview of an image
 
 ### Options
 
-| Name             | Type     | Default | Description                                                                                             |
-|:-----------------|:---------|:--------|:--------------------------------------------------------------------------------------------------------|
-| `--env`          | `string` |         | Name of the environment                                                                                 |
-| `--latest`       |          |         | Latest indexed image                                                                                    |
-| `--org`          | `string` |         | Namespace of the Docker organization                                                                    |
-| `-o`, `--output` | `string` |         | Write the report to a file                                                                              |
-| `--platform`     | `string` |         | Platform of image to analyze                                                                            |
-| `--ref`          | `string` |         | Reference to use if the provided tarball contains multiple references.<br>Can only be used with archive |
+| Name                  | Type          | Default | Description                                                                                             |
+|:----------------------|:--------------|:--------|:--------------------------------------------------------------------------------------------------------|
+| `--env`               | `string`      |         | Name of the environment                                                                                 |
+| `--latest`            |               |         | Latest indexed image                                                                                    |
+| `--only-vex-affected` |               |         | Filter CVEs by VEX statements with status not affected                                                  |
+| `--org`               | `string`      |         | Namespace of the Docker organization                                                                    |
+| `-o`, `--output`      | `string`      |         | Write the report to a file                                                                              |
+| `--platform`          | `string`      |         | Platform of image to analyze                                                                            |
+| `--ref`               | `string`      |         | Reference to use if the provided tarball contains multiple references.<br>Can only be used with archive |
+| `--vex-author`        | `stringSlice` |         | List of VEX statement authors to accept                                                                 |
+| `--vex-location`      | `stringSlice` |         | File location of directory or file containing VEX statements                                            |
 
 
 <!---MARKER_GEN_END-->
