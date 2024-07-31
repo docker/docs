@@ -6,6 +6,16 @@ toc_min: 1
 toc_max: 2
 ---
 
+## Deprecation of password logins on CLI when SSO enforced
+
+_Last updated July, 2024_
+
+When [SSO enforcement](/security/for-admins/single-sign-on/connect/#optional-enforce-sso) was first introduced, Docker provided a grace period to continue to let passwords be used on the Docker CLI when authenticating to Docker Hub. This was allowed so organizations could more easily use SSO enforcement. It is recommended that administrators configuring SSO encourage users using the CLI [to switch over to Personal Access Tokens](/security/for-admins/single-sign-on/#prerequisites) in anticipation of this grace period ending.
+
+On September 16, 2024 the grace period will end and passwords will no longer be able to authenticate to Docker Hub via the Docker CLI when SSO is enforced. Affected users are required to switch over to using PATs to continue signing in.
+
+At Docker, we want the experience to be the most secure for our developers and organizations and this deprecation is an essential step in that direction.
+
 ## Docker Security Advisory: Multiple Vulnerabilities in runc, BuildKit, and Moby
 
 _Last updated February 2, 2024_

@@ -10,7 +10,7 @@ This page outlines the different ways you can enforce sign-in for Docker Desktop
 
 > **Early Access**
 >
-> The registry key method is an [early access](../../../release-lifecycle.md#early-access-ea) feature. 
+> The registry key method is an [early access](../../../release-lifecycle.md#early-access-ea) feature for Docker Business subscribers. 
 > It's available with Docker Desktop version 4.32 and later.
 { .restricted }
 
@@ -53,7 +53,7 @@ There are many ways to deploy the registry key, for example using an MDM solutio
 
 > **Early Access**
 >
-> The plist method is an [early access](../../../release-lifecycle.md#early-access-ea) feature. 
+> The plist method is an [early access](../../../release-lifecycle.md#early-access-ea) feature for Docker Business subscribers. 
 > It's available with Docker Desktop version 4.32 and later.
 { .restricted }
 
@@ -83,7 +83,7 @@ There are many ways to deploy the registry key, for example using an MDM solutio
 
 >**Note**
 >
-> If a `plist` and `registry.json` file both exist, the registry key takes precedence.
+> If a `plist` and `registry.json` file both exist, the `plist` file takes precedence.
 
 ### Example deployment 
 
@@ -306,3 +306,7 @@ $ sudo ls -l /usr/share/docker-desktop/registry/registry.json
 
 {{< /tab >}}
 {{< /tabs >}}
+
+## More resources
+
+- [Video: Enforce sign-in with a registry.json](https://www.youtube.com/watch?v=CIOQ6wDnJnM)

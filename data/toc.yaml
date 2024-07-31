@@ -340,6 +340,8 @@ Reference:
     title: docker (base command)
   - path: /reference/cli/docker/build/
     title: docker build
+  - path: /reference/cli/docker/build-legacy/
+    title: docker build (legacy builder)
   - sectiontitle: docker builder
     section:
       - path: /reference/cli/docker/builder/
@@ -553,7 +555,7 @@ Reference:
       - path: /reference/cli/docker/context/use/
         title: docker context use
   - path: /reference/cli/docker/debug/
-    title: docker debug (Beta)
+    title: docker debug
   - path: /reference/cli/docker/exec/
     title: docker exec
   - sectiontitle: docker image
@@ -860,34 +862,42 @@ Reference:
   section:
   - path: /reference/build-checks/
     title: Overview
-  - path: /reference/build-checks/stage-name-casing/
-    title: StageNameCasing
-  - path: /reference/build-checks/from-as-casing/
-    title: FromAsCasing
-  - path: /reference/build-checks/no-empty-continuation/
-    title: NoEmptyContinuation
   - path: /reference/build-checks/consistent-instruction-casing/
     title: ConsistentInstructionCasing
-  - path: /reference/build-checks/file-consistent-command-casing/
-    title: FileConsistentCommandCasing
+  - path: /reference/build-checks/copy-ignored-file/
+    title: CopyIgnoredFile
   - path: /reference/build-checks/duplicate-stage-name/
     title: DuplicateStageName
-  - path: /reference/build-checks/reserved-stage-name/
-    title: ReservedStageName
+  - path: /reference/build-checks/from-as-casing/
+    title: FromAsCasing
+  - path: /reference/build-checks/from-platform-flag-const-disallowed/
+    title: FromPlatformConstDisallowed
+  - path: /reference/build-checks/invalid-default-arg-in-from/
+    title: InvalidDefaultArgInFrom
   - path: /reference/build-checks/json-args-recommended/
     title: JSONArgsRecommended
-  - path: /reference/build-checks/maintainer-deprecated/
-    title: MaintainerDeprecated
-  - path: /reference/build-checks/undefined-arg-in-from/
-    title: UndefinedArgInFrom
-  - path: /reference/build-checks/workdir-relative-path/
-    title: WorkdirRelativePath
-  - path: /reference/build-checks/undefined-var/
-    title: UndefinedVar
-  - path: /reference/build-checks/multiple-instructions-disallowed/
-    title: MultipleInstructionsDisallowed
   - path: /reference/build-checks/legacy-key-value-format/
     title: LegacyKeyValueFormat
+  - path: /reference/build-checks/maintainer-deprecated/
+    title: MaintainerDeprecated
+  - path: /reference/build-checks/multiple-instructions-disallowed/
+    title: MultipleInstructionsDisallowed
+  - path: /reference/build-checks/no-empty-continuation/
+    title: NoEmptyContinuation
+  - path: /reference/build-checks/redundant-target-platform/
+    title: RedundantTargetPlatform
+  - path: /reference/build-checks/reserved-stage-name/
+    title: ReservedStageName
+  - path: /reference/build-checks/secrets-used-in-arg-or-env/
+    title: SecretsUsedInArgOrEnv
+  - path: /reference/build-checks/stage-name-casing/
+    title: StageNameCasing
+  - path: /reference/build-checks/undefined-arg-in-from/
+    title: UndefinedArgInFrom
+  - path: /reference/build-checks/undefined-var/
+    title: UndefinedVar
+  - path: /reference/build-checks/workdir-relative-path/
+    title: WorkdirRelativePath
 - title: Daemon CLI (dockerd)
   path: /reference/cli/dockerd/
 - sectiontitle: API reference
@@ -1825,10 +1835,12 @@ Manuals:
     title: Deprecated features
   - sectiontitle: Release notes
     section:
-    - path: /engine/release-notes/27.0/
-      title: Engine 27.0
+    - path: /engine/release-notes/27.1/
+      title: Engine 27.1
     - sectiontitle: Previous versions
       section:
+      - path: /engine/release-notes/27.0/
+        title: Engine 27.0
       - path: /engine/release-notes/26.1/
         title: Engine 26.1
       - path: /engine/release-notes/26.0/
@@ -2109,16 +2121,14 @@ Manuals:
       title: Interpolation
     - path: /compose/environment-variables/best-practices/
       title: Best practices
-  - sectiontitle: Use...
-    section:
-    - path: /compose/profiles/
-      title: ...service profiles
-    - path: /compose/file-watch/
-      title: ...Compose Watch
-    - path: /compose/production/
-      title: ...Compose in production
-    - path: /compose/use-secrets/
-      title: ...secrets in Compose
+  - path: /compose/profiles/
+    title: Use service profiles
+  - path: /compose/file-watch/
+    title: Use Compose Watch
+  - path: /compose/production/
+    title: Compose in production
+  - path: /compose/use-secrets/
+    title: Secrets in Compose
   - sectiontitle: Working with multiple Compose files
     section:
     - path: /compose/multiple-compose-files/
@@ -2142,7 +2152,17 @@ Manuals:
   - path: /compose/migrate/
     title: Migrate to Compose V2
   - path: /compose/faq/
-    title: Compose FAQ
+    title: FAQs
+  - sectiontitle: Compose Bridge (Early Access)
+    section:
+    - path: /compose/bridge/
+      title: Overview
+    - path: /compose/bridge/usage/
+      title: Usage
+    - path: /compose/bridge/customize/
+      title: Customize
+    - path: /compose/bridge/advanced-integration/
+      title: Advanced
   - path: /compose/release-notes/
     title: Release notes
 
@@ -2150,8 +2170,6 @@ Manuals:
   section:
   - path: /docker-hub/
     title: Overview
-  - path: /docker-id/
-    title: Create an account
   - path: /docker-hub/quickstart/
     title: Quickstart
   - sectiontitle: Repositories
@@ -2200,6 +2218,17 @@ Manuals:
 - title: Docker for GitHub Copilot {{< badge color=violet text="Early Access" >}}
   path: /copilot/
 
+- sectiontitle: Docker accounts
+  section:
+  - path: /accounts/
+    title: Overview
+  - path: /docker-id/
+    title: Create an account
+  - path: /accounts/manage-account/
+    title: Manage an account
+  - path: /accounts/deactivate-user-account/
+    title: Deactivate an account
+
 - sectiontitle: Administration
   section:
   - path: /admin/
@@ -2243,7 +2272,7 @@ Manuals:
   - path: /admin/convert-account/
     title: Convert an account into an organization
   - path: /admin/deactivate-account/
-    title: Deactivate an account or organization
+    title: Deactivate an organization
 
 - sectiontitle: Security
   section:
@@ -2296,7 +2325,7 @@ Manuals:
       - path: /security/for-developers/2fa/disable-2fa/
         title: Disable two-factor authentication
       - path: /security/for-developers/2fa/recover-hub-account/
-        title: Recover your Docker Hub account
+        title: Recover your Docker account
       - path: /security/for-developers/2fa/new-recovery-code/
         title: Generate a new recovery code
   - path: /security/security-announcements/

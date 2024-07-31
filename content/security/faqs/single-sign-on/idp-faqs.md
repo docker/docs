@@ -30,7 +30,9 @@ If your existing certificate has expired, you may need to contact your identity 
 
 ### What happens if my IdP goes down when SSO is enabled?
 
-It's not possible to access Docker Hub when your IdP is down. However, you can access Docker Hub images from the CLI using your Personal Access Token. Or, if you had an existing account before the SSO enforcement, you can use your username and password to access Docker Hub images during the grace period for your organization.
+If SSO is enforced, then it is not possible to access Docker Hub when your IdP is down. You can still access Docker Hub images from the CLI using your Personal Access Token.
+
+If SSO is enabled but not enforced, then users could fallback to authenticate with username/password and trigger a reset password flow (if necessary).
 
 ### How do I handle accounts using Docker Hub as a secondary registry? Do I need a bot account?
 

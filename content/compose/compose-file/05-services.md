@@ -556,6 +556,23 @@ dns_search:
 
 `domainname` declares a custom domain name to use for the service container. It must be a valid RFC 1123 hostname.
 
+### driver_opts
+
+{{< introduced compose 2.27.1 "../release-notes.md#2271" >}}
+
+`driver_opts` specifies a list of options as key-value pairs to pass to the driver. These options are
+driver-dependent. Consult the driver's documentation for more information.
+
+```yml
+services:
+  app:
+    networks:
+      app_net:
+        driver_opts:
+          foo: "bar"
+          baz: 1
+```
+
 ### entrypoint
 
 `entrypoint` declares the default entrypoint for the service container.

@@ -22,7 +22,7 @@ Command line tool for Docker Scout
 | [`help`](scout_help.md)                                       | Display information about the available commands                                            |
 | [`integration`](scout_integration.md)                         | Commands to list, configure, and delete Docker Scout integrations                           |
 | [`policy`](scout_policy.md)                                   | Evaluate policies against an image and display the policy evaluation results (experimental) |
-| [`push`](scout_push.md)                                       | Push an image or image index to Docker Scout (experimental)                                 |
+| [`push`](scout_push.md)                                       | Push an image or image index to Docker Scout                                                |
 | [`quickview`](scout_quickview.md)                             | Quick overview of an image                                                                  |
 | [`recommendations`](scout_recommendations.md)                 | Display available base image updates and remediation recommendations                        |
 | [`repo`](scout_repo.md)                                       | Commands to list, enable, and disable Docker Scout on repositories                          |

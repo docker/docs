@@ -36,6 +36,14 @@ If your administrator account is different to your user account, you must add th
 3. Right-click to add the user to the group.
 4. Sign out and sign back in for the changes to take effect.
 
+> **Note**
+>
+> When installing Docker Desktop with the MSI, in-app updates are automatically disabled. This feature ensures your organization maintains the required Docker Desktop version. For Docker Desktop installed with the .exe installer, in-app updates remain supported.
+>
+> Docker Desktop notifies you when an update is available. To update Docker Desktop, download the latest installer from the Docker Admin Console. Navigate to the  **Deploy Docker Desktop** page > under **Security and access**. 
+>
+> To keep up to date with new releases, check the [release notes](https://docs.docker.com/desktop/release-notes/) page.
+
 ## Install from the command line
 
 This section covers command line installations of Docker Desktop using PowerShell. It provides common installation commands that you can run. You can also add additional arguments which are outlined in [configuration options](#configuration-options).
@@ -180,6 +188,7 @@ msiexec /x "DockerDesktop.msi" /quiet
 | `ALWAYSRUNSERVICE` | Lets users switch to Windows containers without needing admin rights | 0 |
 | `DISABLEWINDOWSCONTAINERS` | Disables the Windows containers integration | 0 |
 | `ENGINE` | Sets the Docker Engine that's used to run containers. This can be either `wsl` , `hyperv`, or `windows` | `wsl` |
+| `PROXYENABLEKERBEROSNTLM` | When set to 1, enables support for Kerberos and NTLM proxy authentication. Available with Docker Desktop 4.33 and later| 0 |
 | `PROXYHTTPMODE` | Sets the HTTP Proxy mode. This can be either `system` or `manual` | `system` |
 | `OVERRIDEPROXYHTTP` | Sets the URL of the HTTP proxy that must be used for outgoing HTTP requests. | None |
 | `OVERRIDEPROXYHTTPS` | Sets the URL of the HTTP proxy that must be used for outgoing HTTPS requests. | None |
@@ -194,17 +203,9 @@ Additionally, you can also use `/norestart` or `/forcerestart` to control reboot
 
 By default, the installer reboots the machine after a successful installation. When ran silently, the reboot is automatic and the user is not prompted.
 
-## Updates 
-
-When installing Docker Desktop with the MSI, in-app updates are disabled.
-
-Docker Desktop will notify you when an update is available. To update Docker Desktop, download the latest installer from the Docker Admin Console. Navigate to the  **Deploy Docker Desktop** page under **Security and access**. 
-
-To keep up to date with new releases, you can check use the [release notes](https://docs.docker.com/desktop/release-notes/) page.
-
 ## Analytics
 
-The MSI installer collects data to better understand user behaviour and to improve the user experience by identifying and addressing issues or optimizing popular features.
+The MSI installer collects anonymous usage statistics to better understand user behaviour and to improve the user experience by identifying and addressing issues or optimizing popular features.
 
 ### How to opt-out
 

@@ -13,7 +13,6 @@ var (
 	cli     struct {
 		Version kong.VersionFlag
 		Aws     AwsCmd     `kong:"cmd,name=aws"`
-		Netlify NetlifyCmd `kong:"cmd,name=netlify"`
 	}
 )
 

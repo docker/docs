@@ -137,8 +137,14 @@ $ docker buildx imagetools inspect <IMAGE>@sha256:d20246ef744b1d05a1dd69d0b3fa90
 ## Specify annotation level
 
 By default, annotations are added to the image manifest. You can specify which
-level(s) to attach the manifest to, by prefixing the annotation string with a
-special type declaration:
+level (OCI image component) to attach the annotation to by prefixing the
+annotation string with a special type declaration:
+
+```console
+$ docker build --annotation "<TYPE>:<KEY>=<VALUE>" .
+```
+
+The following types are supported:
 
 - `manifest`: annotates manifests.
 - `index`: annotates the root index.
@@ -152,7 +158,23 @@ image index:
 $ docker build --tag <IMAGE> --push --annotation "index:foo=bar" .
 ```
 
-It's possible to specify types, separated by a comma, to add the annotation to
+Note that the build must produce the component that you specify, or else the
+build will fail. For example, the following does not work, because the `docker`
+exporter does not produce an index:
+
+```console
+$ docker build --output type=docker --annotation "index:foo=bar" .
+```
+
+Likewise, the following example also does not work, because buildx creates a
+`docker` output by default under some circumstances, such as when provenance
+attestations are explicitly disabled:
+
+```console
+$ docker build --provenance=false --annotation "index:foo=bar" .
+```
+
+It is possible to specify types, separated by a comma, to add the annotation to
 more than one level. The following example creates an image with the annotation
 `foo=bar` on both the image index and the image manifest:
 
@@ -160,9 +182,10 @@ more than one level. The following example creates an image with the annotation
 $ docker build --tag <IMAGE> --push --annotation "index,manifest:foo=bar" .
 ```
 
-You can also specify a platform qualifier in the type prefix, to annotate only
-components matching specific OS and architectures. The following example adds
-the `foo=bar` annotation only to the `linux/amd64` manifest:
+You can also specify a platform qualifier within square brackets in the type
+prefix, to annotate only components matching specific OS and architectures. The
+following example adds the `foo=bar` annotation only to the `linux/amd64`
+manifest:
 
 ```console
 $ docker build --tag <IMAGE> --push --annotation "manifest[linux/amd64]:foo=bar" .
