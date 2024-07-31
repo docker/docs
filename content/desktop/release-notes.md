@@ -41,7 +41,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### New
 
-- [Docker Debug](../reference/cli/docker/debug.md) in now generally available.
+- [Docker Debug](../reference/cli/docker/debug.md) is now generally available.
 - BuildKit now evaluates Dockerfile rules to inform you of potential issues.
 - **Resource Allocation** settings can now be accessed directly from the resource usage data displayed in the Dashboard footer.
 
