@@ -30,7 +30,7 @@ all previous values.
 ### Key format recommendations
 
 A label key is the left-hand side of the key-value pair. Keys are alphanumeric
-strings which may contain periods (`.`), underscores (`_`), and hyphens (`-`). Most Docker users use
+strings which may contain periods (`.`), underscores (`_`), slashes (`/`), and hyphens (`-`). Most Docker users use
 images created by other organizations, and the following guidelines help to
 prevent inadvertent duplication of labels across objects, especially if you plan
 to use labels as a mechanism for automation.
