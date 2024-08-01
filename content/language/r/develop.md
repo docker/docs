@@ -30,8 +30,8 @@ $ git clone https://github.com/mfranzon/r-docker-dev.git
 To try the connection between the Shiny application and the local database you have to modify the `Dockerfile` changing the `COPY` instruction:
 
 ```diff
--RUN src/ .
-+RUN src_db/ .
+-COPY src/ .
++COPY src_db/ .
 ```
 
 ## Add a local database and persist data
