@@ -152,7 +152,7 @@ provenance attestation with max mode. To ensure compliance,
 update your build command to attach these attestations at build-time:
 
 ```console
-$ docker buildx build --provenance=mode=max --sbom=true -t <IMAGE> --push .
+$ docker buildx build --provenance=true --sbom=true -t <IMAGE> --push .
 ```
 
 For more information about
