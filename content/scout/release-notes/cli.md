@@ -8,6 +8,57 @@ This page contains information about the new features, improvements, known
 issues, and bug fixes in the Docker Scout [CLI plugin](https://github.com/docker/scout-cli/)
 and the `docker/scout-action` [GitHub Action](https://github.com/docker/scout-action).
 
+## 1.12.0
+
+{{< release-date date="2024-07-31" >}}
+
+### New
+
+- Only display vulnerabilities from the base image:
+
+  ```console {title="CLI"}
+  $ docker scout cves --only-base IMAGE
+  ```
+
+  ```yaml {title="GitHub Action"}
+  uses: docker/scout-action@v1
+  with:
+    command: cves
+    image: [IMAGE]
+    only-base: true
+  ```
+
+- Account for VEX in `quickview` command.
+
+  ```console {title="CLI"}
+  $ docker scout quickview IMAGE --only-vex-affected --vex-location ./path/to/my.vex.json
+  ```
+
+  ```yaml {title="GitHub Action"}
+  uses: docker/scout-action@v1
+  with:
+    command: quickview
+    image: [IMAGE]
+    only-vex-affected: true
+    vex-location: ./path/to/my.vex.json
+  ```
+
+- Account for VEX in `cves` command (GitHub Actions).
+
+  ```yaml {title="GitHub Action"}
+  uses: docker/scout-action@v1
+  with:
+    command: cves
+    image: [IMAGE]
+    only-vex-affected: true
+    vex-location: ./path/to/my.vex.json
+  ```
+
+### Bug fixes and enhancements
+
+- Update `github.com/docker/docker` to `v26.1.5+incompatible` to fix CVE-2024-41110.
+- Update Syft to 1.10.0.
+
 ## 1.11.0
 
 {{< release-date date="2024-07-25" >}}
