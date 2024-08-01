@@ -37,10 +37,10 @@ and the `docker/scout-action` [GitHub Action](https://github.com/docker/scout-ac
   ```yaml {title="GitHub Action"}
   uses: docker/scout-action@v1
   with:
-  command: quickview
-  image: [IMAGE]
-  only-vex-affected: true
-  vex-location: ./path/to/my.vex.json
+    command: quickview
+    image: [IMAGE]
+    only-vex-affected: true
+    vex-location: ./path/to/my.vex.json
   ```
 
 - Account for VEX in `cves` command (GitHub Actions).
@@ -57,7 +57,7 @@ and the `docker/scout-action` [GitHub Action](https://github.com/docker/scout-ac
 ### Bug fixes and enhancements
 
 - Update `github.com/docker/docker` to `v26.1.5+incompatible` to fix CVE-2024-41110.
-- Update syft to 1.10.0.
+- Update Syft to 1.10.0.
 
 ## 1.11.0
 
