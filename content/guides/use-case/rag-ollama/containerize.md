@@ -72,11 +72,26 @@ server-1  |
 
 Open a browser and view the application at [http://localhost:8501](http://localhost:8501). You should see a simple Streamlit application. 
 
-The application requires a Qdrant database service and an LLM service to
-function. If you have access to services that you ran outside of Docker, specify
-the connection information and try it out. If you don't have the services
-running, continue with this guide to learn how you can run some or all of these
-services with Docker.
+The application requires a Qdrant database service and an LLM service to work properly. If you have access to services that you ran outside of Docker, specify the connection information in the `docker-compose.yaml`.
+
+```yaml
+winy:
+build:
+    context: ./app 
+    dockerfile: Dockerfile
+environment:
+    - QDRANT_CLIENT=http://qdrant:6333 # Specifies the url for the qdrant database
+    - OLLAMA=http://ollama:11434 # Specifies the url for the ollama service
+container_name: winy 
+ports:
+    - "8501:8501" 
+depends_on:
+    - qdrant 
+    - ollama 
+```
+
+If you don't have the services running, continue with this guide to learn how you can run some or all of these services with Docker.
+Remember that the `ollama` service is empty, it has not any model, for this reason you had to pull a model before starting to use the RAG application. All the instruction are in the following page!
 
 In the terminal, press `ctrl`+`c` to stop the application.
 
@@ -87,6 +102,6 @@ application using Docker.
 
 ## Next steps
 
-In the next section, you'll learn how you can run your application, database, and LLM service all locally using Docker.
+In the next section, you'll learn how to properly configure the application with your preferred LLM model, completely locally, using Docker.
 
 {{< button text="Develop your application" url="develop.md" >}}

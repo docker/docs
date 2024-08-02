@@ -21,7 +21,7 @@ In this section, you'll learn how to set up a development environment to access 
 
 ## Add a local database
 
-You can use containers to set up local services, like a database. In this section, you'll update the `docker-compose.yaml` file to define a database service. In addition, you'll specify an environment variables file to load the database connection information rather than manually entering the information every time.
+You can use containers to set up local services, like a database. In this section, you'll explore the database service in the `docker-compose.yaml` file.
 
 To run the database service:
 
@@ -117,6 +117,12 @@ To run Ollama outside of a container:
    ```console
    $ ollama pull llama2
    ```
+3. Remove the `ollama` service from the `docker-compose.yaml` and update properly the connection variables in `winy` service:
+
+```diff
+- OLLAMA=http://ollama:11434 
++ OLLAMA=<your-url>
+```
 
 {{< /tab >}}
 
