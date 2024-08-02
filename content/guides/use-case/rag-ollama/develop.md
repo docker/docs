@@ -21,7 +21,7 @@ In this section, you'll learn how to set up a development environment to access 
 
 ## Add a local database
 
-You can use containers to set up local services, like a database. In this section, you'll update the `compose.yaml` file to define a database service. In addition, you'll specify an environment variables file to load the database connection information rather than manually entering the information every time.
+You can use containers to set up local services, like a database. In this section, you'll update the `docker-compose.yaml` file to define a database service. In addition, you'll specify an environment variables file to load the database connection information rather than manually entering the information every time.
 
 To run the database service:
 
