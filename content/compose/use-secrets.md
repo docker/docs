@@ -86,7 +86,7 @@ In the advanced example above:
 
 ### Build secrets
 
-In the following example, the `npm_token` secret is made available at build time. It's value is taken from the `NPM_TOKEN` environment variable.
+In the following example, the `npm_token` secret is made available at build time. Its value is taken from the `NPM_TOKEN` environment variable.
 
 ```yaml
 services:
