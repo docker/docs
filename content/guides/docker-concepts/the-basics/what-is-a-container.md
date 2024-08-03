@@ -115,7 +115,13 @@ The `docker/welcome-to-docker` container continues to run until you stop it.
 
 Follow the instructions to run a container using the CLI:
 
-1. Open your CLI terminal and start a container by using the [`docker run`](/reference/cli/docker/container/run/) command:
+1. Open your CLI terminal and pull the welcome-to-docker image from Dockerhub by using the [`docker pull`](/reference/cli/docker/compose/pull/) command:
+
+    ```console
+    $ docker pull docker/welcome-to-docker
+    ```
+
+2. Start a container by using the [`docker run`](/reference/cli/docker/container/run/) command:
 
     ```console
     $ docker run -d -p 8080:80 docker/welcome-to-docker
@@ -152,7 +158,7 @@ This container runs a web server that displays a simple website. When working wi
 
 When you launched the container, you exposed one of the container's ports onto your machine. Think of this as creating configuration to let you to connect through the isolated environment of the container. 
 
-For this container, the frontend is accessible on port `8080`. To open the website, select the link in the **Port(s)** column of your container or visit [http://localhost:8080](https://localhost:8080) in your browser.
+For this container, the frontend is accessible on port `8080`. To open the website, select the link in the **Port(s)** column of your container or visit [http://localhost:8080](http://localhost:8080) in your browser.
 
 ![Screenshot of the landing page of the Nginx web server, coming from the running container](images/access-the-frontend.webp?border)
 
