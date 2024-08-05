@@ -159,38 +159,6 @@ For more information about
 building with attestations, see
 [Attestations](../../build/attestations/_index.md).
 
-### Quality gates passed
-
-The Quality gates passed policy builds on the [SonarQube
-integration](../integrations/code-quality/sonarqube.md) to assess the quality
-of your source code. This policy works by ingesting the SonarQube code analysis
-results into Docker Scout.
-
-You define the criteria for this policy using SonarQube's [quality
-gates](https://docs.sonarsource.com/sonarqube/latest/user-guide/quality-gates/).
-SonarQube evaluates your source code against the quality gates you've defined
-in SonarQube. Docker Scout surfaces the SonarQube assessment as a Docker Scout
-policy.
-
-Docker Scout uses [provenance](../../build/attestations/slsa-provenance.md)
-attestations or the `org.opencontainers.image.revision` OCI annotation to link
-SonarQube analysis results with container images. In addition to enabling the
-SonarQube integration, you must also make sure that your images has either the
-attestation or the label.
-
-![Git commit SHA links image with SonarQube analysis](../images/scout-sq-commit-sha.webp)
-
-Once you push an image and policy evaluation completes, the results from the
-SonarQube quality gates display as a policy in the Docker Scout Dashboard, and
-in the CLI.
-
-> **Note**
->
-> Docker Scout can only access SonarQube analyses created after the integration
-> is enabled. Docker Scout doesn't have access to historic evaluations. Trigger
-> a SonarQube analysis and policy evaluation after enabling the integration to
-> view the results in Docker Scout.
-
 ### Default non-root user
 
 By default, containers run as the `root` superuser with full system
