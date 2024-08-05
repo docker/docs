@@ -89,7 +89,7 @@ Desktop Linux VM and bypass security controls.
 As an alternative, you can use the [K8s.io KinD](https://kind.sigs.k8s.io/) tool
 with ECI. In this case, each Kubernetes node runs inside an ECI-protected
 container, thereby more strongly isolating the Kubernetes cluster away from the
-underlying Docker Desktop Linux VM (and Docker engine within). No special
+underlying Docker Desktop Linux VM (and Docker Engine within). No special
 arrangements are needed, just enable ECI and run the KinD tool as usual.
 
 ### Extension containers are not yet protected
@@ -114,7 +114,7 @@ Docker Desktop.
 ECI only works when Docker Desktop is in Linux containers mode (the default,
 most common mode). It's not supported when Docker Desktop is configured in
 native Windows containers mode (i.e., it's not supported on Windows hosts, when
-the engine is switched from it's default Linux mode to native Windows mode).
+Docker Desktop is switched from its default Linux mode to native Windows mode).
 
 ### Use in production
 
