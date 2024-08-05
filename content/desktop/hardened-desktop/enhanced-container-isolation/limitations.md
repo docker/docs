@@ -109,6 +109,13 @@ Desktop.
 are not yet protected by ECI. We expect to improve on this in future versions of
 Docker Desktop.
 
+### Native Windows containers are not supported
+
+ECI only works when Docker Desktop is in Linux containers mode (the default,
+most common mode). It's not supported when Docker Desktop is configured in
+native Windows containers mode (i.e., it's not supported on Windows hosts, when
+the engine is switched from it's default Linux mode to native Windows mode).
+
 ### Use in production
 
 In general users should not experience differences between running a container
