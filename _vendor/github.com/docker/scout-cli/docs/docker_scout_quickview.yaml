@@ -56,6 +56,16 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: only-vex-affected
+      value_type: bool
+      default_value: "false"
+      description: Filter CVEs by VEX statements with status not affected
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: org
       value_type: string
       description: Namespace of the Docker organization
@@ -100,6 +110,36 @@ options:
       description: Name of stream
       deprecated: true
       hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: vex
+      value_type: bool
+      default_value: "false"
+      description: Apply VEX statements to filter CVEs
+      deprecated: true
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: vex-author
+      value_type: stringSlice
+      default_value: '[]'
+      description: List of VEX statement authors to accept
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: vex-location
+      value_type: stringSlice
+      default_value: '[]'
+      description: File location of directory or file containing VEX statements
+      deprecated: false
+      hidden: false
       experimental: false
       experimentalcli: false
       kubernetes: false

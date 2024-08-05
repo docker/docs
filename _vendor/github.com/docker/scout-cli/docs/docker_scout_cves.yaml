@@ -144,6 +144,16 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: only-base
+      value_type: bool
+      default_value: "false"
+      description: Only show CVEs introduced by the base image
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: only-cisa-kev
       value_type: bool
       default_value: "false"

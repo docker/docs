@@ -43,7 +43,7 @@ $ sh install-scout.sh
 
    ```json
    {
-     "cliPluginExtraDirs": [
+     "cliPluginsExtraDirs": [
        "$HOME/.docker/scout"
      ]
    }
@@ -76,7 +76,7 @@ $ sh install-scout.sh
 
    ```json
    {
-     "cliPluginExtraDirs": [
+     "cliPluginsExtraDirs": [
        "$HOME/.docker/scout"
      ]
    }
@@ -97,7 +97,7 @@ $ sh install-scout.sh
 
    ```json
    {
-     "cliPluginExtraDirs": [
+     "cliPluginsExtraDirs": [
        "C:\Users\MobyWhale\.docker\scout"
      ]
    }
