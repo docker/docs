@@ -115,13 +115,7 @@ The `docker/welcome-to-docker` container continues to run until you stop it.
 
 Follow the instructions to run a container using the CLI:
 
-1. Open your CLI terminal and pull the welcome-to-docker image from Dockerhub by using the [`docker pull`](/reference/cli/docker/compose/pull/) command:
-
-    ```console
-    $ docker pull docker/welcome-to-docker
-    ```
-
-2. Start a container by using the [`docker run`](/reference/cli/docker/container/run/) command:
+1. Open your CLI terminal and start a container by using the [`docker run`](/reference/cli/docker/container/run/) command:
 
     ```console
     $ docker run -d -p 8080:80 docker/welcome-to-docker
