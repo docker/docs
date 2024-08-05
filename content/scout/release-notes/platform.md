@@ -19,7 +19,7 @@ for what's coming next.
 
 New features and enhancements released in the second quarter of 2024.
 
-### 2024-05-0x
+### 2024-06-27
 
 This release introduces initial support for **Exceptions** in the Docker Scout
 Dashboard. Exceptions let you suppress vulnerabilities found in your images
