@@ -38,7 +38,7 @@ spec:
         service: shiny
     spec:
       containers:
-       - name: shimy-service
+       - name: shiny-service
          image: DOCKER_USERNAME/REPO_NAME
          imagePullPolicy: Always
          env:
