@@ -57,7 +57,7 @@ Dockerfile the issue originated. If you want to see more detailed information
 about the checks, you can use the `--debug` flag. For example:
 
 ```console
-$ docker build --debug .
+$ docker --debug build .
 [+] Building 3.5s (11/11) FINISHED
 ...
 

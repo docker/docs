@@ -613,6 +613,22 @@
   - /go/scout-dashboard/
 "/scout/policy/":
   - /go/scout-policy/
+"/scout/policy/#no-fixable-critical-or-high-vulnerabilities":
+  - /go/scout-policy-dsp001/
+"/scout/policy/#no-copyleft-licenses":
+  - /go/scout-policy-dsp002/
+"/scout/policy/#no-outdated-base-images":
+  - /go/scout-policy-dsp003/
+"/scout/policy/#no-high-profile-vulnerabilities":
+  - /go/scout-policy-dsp004/
+"/scout/policy/#supply-chain-attestations":
+  - /go/scout-policy-dsp005/
+"/scout/policy/#default-non-root-user":
+  - /go/scout-policy-dsp006/
+"/scout/policy/#no-unapproved-base-images":
+  - /go/scout-policy-dsp007/
+"/scout/policy/#sonarqube-quality-gates-passed":
+  - /go/scout-policy-dsp008/
 "/scout/policy/configure/":
   - /go/scout-configure-policy/
 "/build/building/best-practices/#pin-base-image-versions":

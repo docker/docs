@@ -124,6 +124,17 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: ignore-suppressed
+      value_type: bool
+      default_value: "false"
+      description: |
+        Filter CVEs found in Scout exceptions based on the specified exception scope
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: locations
       value_type: bool
       default_value: "false"

@@ -163,14 +163,14 @@ $ docker scout quickview
 ...
 Policy status  FAILED  (2/6 policies met, 2 missing data)
 
-  Status │                  Policy                   │           Results
-─────────┼───────────────────────────────────────────┼──────────────────────────────
-  ✓      │ Copyleft licenses                         │    0 packages
-  !      │ Default non-root user                     │
-  !      │ Fixable critical and high vulnerabilities │    2C    16H     0M     0L
-  ✓      │ High-profile vulnerabilities              │    0C     0H     0M     0L
-  ?      │ Outdated base images                      │    No data
-  ?      │ Supply chain attestations                 │    No data
+  Status │                  Policy                      │           Results
+─────────┼──────────────────────────────────────────────┼──────────────────────────────
+  ✓      │ No copyleft licenses                         │    0 packages
+  !      │ Default non-root user                        │
+  !      │ No fixable critical or high vulnerabilities  │    2C    16H     0M     0L
+  ✓      │ No high-profile vulnerabilities              │    0C     0H     0M     0L
+  ?      │ No outdated base images                      │    No data
+  ?      │ Supply chain attestations                    │    No data
 ```
 
 Exclamation marks in the status column indicate a violated policy.
@@ -239,7 +239,7 @@ The sidebar shows a compliance overview for the last pushed tag of a repository.
 > It might take a few minutes before the results appear if this is your
 > first time using the Docker Scout Dashboard.
 
-Inspect the **Outdated base images** policy.
+Inspect the **No outdated base images** policy.
 This policy checks whether base images you use are up-to-date.
 It currently has a non-compliant status,
 because the example image uses an old version `alpine` as a base image.

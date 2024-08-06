@@ -34,7 +34,7 @@ containing security fixes. The `alpine:3.18` tag you've been using becomes
 out-of-date; the `alpine:3.18` you're using is no longer the latest.
 
 When this happens, Docker Scout detects the discrepancy and surfaces it through
-the [Outdated base images](../../policy/_index.md#outdated-base-images) policy.
+the [No outdated base images](/scout/policy/#no-outdated-base-images) policy.
 When the GitHub integration's enabled, you'll also get automated suggestions on
 how to update your base image. For more information about how Docker Scout can
 help you automatically improve your supply chain conduct and security posture,

@@ -82,8 +82,15 @@ these won't work properly.
 
 ### Kubernetes pods are not yet protected
 
-Kubernetes pods are not yet protected by ECI. A malicious or privileged pod can
-compromise the Docker Desktop Linux VM and bypass security controls.
+When using the Docker Desktop integrated Kubernetes, pods are not yet protected
+by ECI. Therefore a malicious or privileged pod can compromise the Docker
+Desktop Linux VM and bypass security controls.
+
+As an alternative, you can use the [K8s.io KinD](https://kind.sigs.k8s.io/) tool
+with ECI. In this case, each Kubernetes node runs inside an ECI-protected
+container, thereby more strongly isolating the Kubernetes cluster away from the
+underlying Docker Desktop Linux VM (and Docker Engine within). No special
+arrangements are needed, just enable ECI and run the KinD tool as usual.
 
 ### Extension containers are not yet protected
 
@@ -101,6 +108,13 @@ Desktop.
 [Docker Debug](https://docs.docker.com/reference/cli/docker/debug/) containers
 are not yet protected by ECI. We expect to improve on this in future versions of
 Docker Desktop.
+
+### Native Windows containers are not supported
+
+ECI only works when Docker Desktop is in Linux containers mode (the default,
+most common mode). It's not supported when Docker Desktop is configured in
+native Windows containers mode (i.e., it's not supported on Windows hosts, when
+Docker Desktop is switched from its default Linux mode to native Windows mode).
 
 ### Use in production
 
