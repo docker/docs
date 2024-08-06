@@ -19,8 +19,9 @@ their service.
 3. In the SSO connections table, select the **Actions** icon and **View error
    logs**. The **Connection errors** page appears with a list of errors that
    have occurred in the past 7 days.
-4. In the **Connection errors** page, select an error message for more details.
-   A modal appears with a JSON object containing more details.
+4. In the **Connection errors** page, select **View error details** next to an
+   error message for more details. A modal appears with a JSON object containing
+   more details.
 
 ## Common SSO errors and solutions
 
