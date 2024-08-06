@@ -5,14 +5,15 @@ Evaluate policies against an image and display the policy evaluation results (ex
 
 ### Options
 
-| Name                | Type     | Default | Description                                                 |
-|:--------------------|:---------|:--------|:------------------------------------------------------------|
-| `-e`, `--exit-code` |          |         | Return exit code '2' if policies are not met, '0' otherwise |
-| `--org`             | `string` |         | Namespace of the Docker organization                        |
-| `-o`, `--output`    | `string` |         | Write the report to a file                                  |
-| `--platform`        | `string` |         | Platform of image to pull policy results from               |
-| `--to-env`          | `string` |         | Name of the environment to compare to                       |
-| `--to-latest`       |          |         | Latest image processed to compare to                        |
+| Name                | Type          | Default | Description                                                 |
+|:--------------------|:--------------|:--------|:------------------------------------------------------------|
+| `-e`, `--exit-code` |               |         | Return exit code '2' if policies are not met, '0' otherwise |
+| `--only-policy`     | `stringSlice` |         | Comma separated list of policies to evaluate                |
+| `--org`             | `string`      |         | Namespace of the Docker organization                        |
+| `-o`, `--output`    | `string`      |         | Write the report to a file                                  |
+| `--platform`        | `string`      |         | Platform of image to pull policy results from               |
+| `--to-env`          | `string`      |         | Name of the environment to compare to                       |
+| `--to-latest`       |               |         | Latest image processed to compare to                        |
 
 
 <!---MARKER_GEN_END-->
