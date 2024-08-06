@@ -30,6 +30,16 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: only-policy
+      value_type: stringSlice
+      default_value: '[]'
+      description: Comma separated list of policies to evaluate
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: org
       value_type: string
       description: Namespace of the Docker organization

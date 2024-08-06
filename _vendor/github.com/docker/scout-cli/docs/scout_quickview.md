@@ -12,7 +12,9 @@ Quick overview of an image
 | Name                  | Type          | Default | Description                                                                                             |
 |:----------------------|:--------------|:--------|:--------------------------------------------------------------------------------------------------------|
 | `--env`               | `string`      |         | Name of the environment                                                                                 |
+| `--ignore-suppressed` |               |         | Filter CVEs found in Scout exceptions based on the specified exception scope                            |
 | `--latest`            |               |         | Latest indexed image                                                                                    |
+| `--only-policy`       | `stringSlice` |         | Comma separated list of policies to evaluate                                                            |
 | `--only-vex-affected` |               |         | Filter CVEs by VEX statements with status not affected                                                  |
 | `--org`               | `string`      |         | Namespace of the Docker organization                                                                    |
 | `-o`, `--output`      | `string`      |         | Write the report to a file                                                                              |

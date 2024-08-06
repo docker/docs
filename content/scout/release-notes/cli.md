@@ -8,6 +8,25 @@ This page contains information about the new features, improvements, known
 issues, and bug fixes in the Docker Scout [CLI plugin](https://github.com/docker/scout-cli/)
 and the `docker/scout-action` [GitHub Action](https://github.com/docker/scout-action).
 
+## 1.13.0
+
+{{< release-date date="2024-08-05" >}}
+
+### New
+
+- Add `--only-policy` filter option to the `docker scout quickview`, `docker scout policy` and `docker scout compare` commands.
+- Add `--ignore-suppressed` filter option to `docker scout cves` and `docker scout quickview`  commands to filter out CVEs affected by [exceptions](/scout/explore/exceptions/).
+
+### Bug fixes and enhancements
+
+- Use conditional policy name in checks.
+- Add support for detecting the version of a Go project set using linker flags,
+  for example:
+
+  ```console
+  $ go build -ldflags "-X main.Version=1.2.3"
+  ```
+
 ## 1.12.0
 
 {{< release-date date="2024-07-31" >}}
