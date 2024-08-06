@@ -51,7 +51,7 @@ For more details on the syntax and options admins can set, see [Configure Settin
 
 ### How do I set up and enforce Settings Management?
 
-As an administrator, you first need to [configure a registry.json to enforce
+As an administrator, you first need to [enforce
 sign-in](../../../security/for-admins/enforce-sign-in/_index.md). This is
 because the Settings Management feature requires a Docker Business subscription
 and therefore your Docker Desktop developers must authenticate to your

@@ -18,13 +18,12 @@ For example, a developer, who is part of an organization, building a new contain
 
 ## Prerequisites
 
-You need to [configure a registry.json to enforce
-sign-in](enforce-sign-in/_index.md). For Image Access Management to take effect,
-Docker Desktop users must authenticate to your organization. Enforcing sign-in
-ensures that your Docker Desktop developers always authenticate to your
-organization, even though they can authenticate without it and the feature will
-take effect. Enforcing sign-in guarantees the feature always takes effect.
-
+You need to [enforce sign-in](enforce-sign-in/_index.md). For Image Access
+Management to take effect, Docker Desktop users must authenticate to your
+organization. Enforcing sign-in ensures that your Docker Desktop developers
+always authenticate to your organization, even though they can authenticate
+without it and the feature will take effect. Enforcing sign-in guarantees the
+feature always takes effect.
 
 ## Configure Image Access Management permissions
 
