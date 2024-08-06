@@ -62,7 +62,7 @@ examples: |-
     Total:         10.36GB
     ```
 
-    If `RECLAIMABLE` is false, the `docker buildx du prune` command won't delete
+    If `RECLAIMABLE` is false, the `docker buildx prune` command won't delete
     the record, even if you use `--all`. That's because the record is actively in
     use by some component of the builder.
 
