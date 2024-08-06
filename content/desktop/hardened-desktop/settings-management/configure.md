@@ -15,7 +15,7 @@ Settings Management is designed specifically for organizations who don’t give 
 ### Prerequisites
 
 - [Download and install Docker Desktop 4.13.0 or later](../../release-notes.md).
-- As an admin, you need to [enforce
+- As an administrator, you need to [enforce
   sign-in](../../../security/for-admins/enforce-sign-in/_index.md). This is
   because this feature requires a Docker Business subscription and therefore
   your Docker Desktop users must authenticate to your organization for this
