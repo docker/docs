@@ -100,18 +100,18 @@ $ docker scout policy \
 ​
 ​Policy status  FAILED  (2/8 policies met, 3 missing data)
 ​
-​  Status │                  Policy                   │           Results
-​─────────┼───────────────────────────────────────────┼──────────────────────────────
-​  ✓      │ Copyleft licenses                         │    0 packages
-​  !      │ Default non-root user                     │
-​  !      │ Fixable critical and high vulnerabilities │    2C     1H     0M     0L
-​  ✓      │ High-profile vulnerabilities              │    0C     0H     0M     0L
-​  ?      │ Outdated base images                      │    No data
-​         │                                           │    Learn more ↗
-​  ?      │ Quality gates passed                      │    No data
-​         │                                           │    Learn more ↗
-​  !      │ Supply chain attestations                 │    2 deviations
-​  ?      │ Unapproved base images                    │    No data
+​  Status │                  Policy                             │           Results
+​─────────┼─────────────────────────────────────────────────────┼──────────────────────────────
+​  ✓      │ No copyleft licenses                                │    0 packages
+​  !      │ Default non-root user                               │
+​  !      │ No fixable critical or high vulnerabilities         │    2C     1H     0M     0L
+​  ✓      │ No high-profile vulnerabilities                     │    0C     0H     0M     0L
+​  ?      │ No outdated base images                             │    No data
+​         │                                                     │    Learn more ↗
+​  ?      │ SonarQube quality gates passed                      │    No data
+​         │                                                     │    Learn more ↗
+​  !      │ Supply chain attestations                           │    2 deviations
+​  ?      │ No unapproved base images                           │    No data
 
 ...
 ```
