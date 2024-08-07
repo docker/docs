@@ -100,9 +100,7 @@ because the Enhanced Container Isolation feature requires a Docker Business
 subscription and therefore your Docker Desktop users must authenticate to your
 organization for this configuration to take effect. 
 
-Enforcing sign-in ensures that your Docker Desktop developers always authenticate to your organization,
-even though they can authenticate without it and the feature will take effect.
-Enforcing sign-in guarantees the feature always takes effect.
+Enforcing sign-in ensures that your Docker Desktop developers always authenticate to your organization.
 
 ##### Setup
 
