@@ -1825,8 +1825,9 @@ components:
           type: integer
           description: "tag ID"
         images:
-          type: object
-          $ref: '#/components/schemas/image'
+          type: array
+          items:
+            $ref: '#/components/schemas/image'
         creator:
           type: integer
           description: "ID of the user that pushed the tag"
