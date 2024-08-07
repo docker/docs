@@ -79,7 +79,7 @@ See [ECI Support for WSL](limitations.md#eci-support-for-wsl) for further info a
 
 To enable Enhanced Container Isolation as a developer:
 1. Ensure your organization has a Docker Business subscription.
-2. Log in to your organization in Docker Desktop. This will ensure the ECI feature is available to you in Docker Desktop's Settings menu.
+2. Sign in to your organization in Docker Desktop. This will ensure the ECI feature is available to you in Docker Desktop's Settings menu.
 3. Stop and remove all existing containers.
 4. Navigate to **Settings** > **General** in Docker Desktop.
 5. Next to **Use Enhanced Container Isolation**, select the checkbox.
@@ -92,16 +92,21 @@ To enable Enhanced Container Isolation as a developer:
 
 #### As an admin
 
+##### Prerequisite
+
 To enable Enhanced Container Isolation as an admin, you first need to [enforce
 sign-in](../../../security/for-admins/enforce-sign-in/_index.md). This is
 because the Enhanced Container Isolation feature requires a Docker Business
 subscription and therefore your Docker Desktop users must authenticate to your
-organization for this configuration to take effect. Enforcing sign-in ensures
-that your Docker Desktop developers always authenticate to your organization,
+organization for this configuration to take effect. 
+
+Enforcing sign-in ensures that your Docker Desktop developers always authenticate to your organization,
 even though they can authenticate without it and the feature will take effect.
 Enforcing sign-in guarantees the feature always takes effect.
 
-Next, you must [create and configure the `admin-settings.json` file](../settings-management/configure.md) and specify:
+##### Setup
+
+[Create and configure the `admin-settings.json` file](../settings-management/configure.md) and specify:
 
 ```json
 {
