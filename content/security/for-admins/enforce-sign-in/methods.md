@@ -83,7 +83,7 @@ There are many ways to deploy the registry key, for example using an MDM solutio
 
 >**Note**
 >
-> If a `plist` and `registry.json` file both exist, the registry key takes precedence.
+> If a `plist` and `registry.json` file both exist, the `plist` file takes precedence.
 
 ### Example deployment 
 
@@ -306,3 +306,7 @@ $ sudo ls -l /usr/share/docker-desktop/registry/registry.json
 
 {{< /tab >}}
 {{< /tabs >}}
+
+## More resources
+
+- [Video: Enforce sign-in with a registry.json](https://www.youtube.com/watch?v=CIOQ6wDnJnM)

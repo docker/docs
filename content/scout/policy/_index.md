@@ -32,9 +32,9 @@ image analysis feature, interpreting the analysis results against the rules
 defined by policies.
 
 A policy defines image quality criteria that your artifacts should fulfill.
-For example, the **Copyleft licenses** policy flags packages distributed under a copyleft license.
+For example, the **No copyleft licenses** policy flags packages distributed under a copyleft license.
 If an image contains a copyleft-licensed package, that image is non-compliant with this policy.
-Some policies, such as the **Copyleft licenses** policy, are configurable.
+Some policies, such as the **No copyleft licenses** policy, are configurable.
 Configurable policies let you adjust the criteria to better match your organization's needs.
 
 In Docker Scout, policies are designed to help you ratchet forward your
@@ -54,10 +54,10 @@ image up-to-dateness.
 
 Docker Scout ships the following out-of-the-box policies:
 
-- [Fixable critical and high vulnerabilities](#fixable-critical-and-high-vulnerabilities)
-- [Copyleft licenses](#copyleft-licenses)
-- [Outdated base images](#outdated-base-images)
-- [High-profile vulnerabilities](#high-profile-vulnerabilities)
+- [No fixable critical or high vulnerabilities](#no-fixable-critical-or-high-vulnerabilities)
+- [No copyleft licenses](#no-copyleft-licenses)
+- [No outdated base images](#no-outdated-base-images)
+- [No high-profile vulnerabilities](#no-high-profile-vulnerabilities)
 - [Supply chain attestations](#supply-chain-attestations)
 - [Default non-root user](#default-non-root-user)
 
@@ -70,9 +70,9 @@ policies](./configure.md).
 There's also a set of [additional policies](#additional-policies) that can be
 optionally enabled for repositories.
 
-### Fixable critical and high vulnerabilities
+### No fixable critical or high vulnerabilities
 
-The **Fixable critical and high vulnerabilities** policy requires that your
+The **No fixable critical or high vulnerabilities** policy requires that your
 artifacts aren't exposed to known vulnerabilities where there's a fix version
 available. Essentially, this means that there's an easy fix that you can deploy
 for images that fail this policy: upgrade the vulnerable package to a version
@@ -97,9 +97,9 @@ The following policy parameters are configurable in a custom version:
 
 For more information about configuring policies, see [Configure policies](./configure.md).
 
-### Copyleft licenses
+### No copyleft licenses
 
-The **Copyleft licenses** policy requires that your artifacts don't contain
+The **No copyleft licenses** policy requires that your artifacts don't contain
 packages distributed under an AGPLv3 or GPLv3 license. These licenses are
 protective [copyleft](https://en.wikipedia.org/wiki/Copyleft), and may be
 unsuitable for use in your software because of the restrictions they enforce.
@@ -111,9 +111,9 @@ You can configure the list of licenses that this policy should look out for,
 and add exceptions by specifying an allow-list (in the form of PURLs).
 See [Configure policies](./configure.md).
 
-### Outdated base images
+### No outdated base images
 
-The **Outdated base images** policy requires that the base images you use are
+The **No outdated base images** policy requires that the base images you use are
 up-to-date.
 
 It's unfulfilled when the tag you used to build your image points to a
@@ -123,9 +123,9 @@ means the base image you're using is out of date.
 Your images need provenance attestations for this policy to successfully
 evaluate. For more information, see [No base image data](#no-base-image-data).
 
-### High-profile vulnerabilities
+### No high-profile vulnerabilities
 
-The **High-profile vulnerabilities** policy requires that your artifacts don't
+The **No high-profile vulnerabilities** policy requires that your artifacts don't
 contain vulnerabilities from Docker Scout’s curated list. This list is kept
 up-to-date with newly disclosed vulnerabilities that are widely recognized to
 be risky.
@@ -165,7 +165,7 @@ By default, containers run as the `root` superuser with full system
 administration privileges inside the container, unless the Dockerfile specifies
 a different default user. Running containers as a privileged user weakens their
 runtime security, as it means any code that runs in the container can perform
-administrative actions. 
+administrative actions.
 
 The **Default non-root user** policy detects images that are set to run as the
 default `root` user. To comply with this policy, images must specify a non-root
@@ -243,12 +243,12 @@ by default, Docker Scout supports the following optional policies. Before you
 can enable these policies, you need to either configure the policies, or
 configure the integration that the policy requires.
 
-- [Unapproved base images](#unapproved-base-images)
-- [Quality gates passed](#quality-gates-passed)
+- [No unapproved base images](#no-unapproved-base-images)
+- [SonarQube quality gates passed](#sonarqube-quality-gates-passed)
 
-### Unapproved base images
+### No unapproved base images
 
-The **Unapproved base images** policy lets you restrict which base
+The **No unapproved base images** policy lets you restrict which base
 images you allow in your builds.
 
 This policy checks whether the base images used in your builds match any of the
@@ -297,9 +297,9 @@ This policy isn't enabled by default. To enable the policy:
 Your images need provenance attestations for this policy to successfully
 evaluate. For more information, see [No base image data](#no-base-image-data).
 
-### Quality gates passed
+### SonarQube quality gates passed
 
-The Quality gates passed policy builds on the [SonarQube
+The **SonarQube quality gates passed** policy builds on the [SonarQube
 integration](../integrations/code-quality/sonarqube.md) to assess the quality
 of your source code. This policy works by ingesting the SonarQube code analysis
 results into Docker Scout.
@@ -332,8 +332,8 @@ in the CLI.
 ## No base image data
 
 There are cases when it's not possible to determine information about the base
-images used in your builds. In such cases, the **Outdated base images** and
-**Unapproved base images** policies get flagged as having **No data**.
+images used in your builds. In such cases, the **No outdated base images** and
+**No unapproved base images** policies get flagged as having **No data**.
 
 This "no data" state occurs when:
 

@@ -51,7 +51,15 @@ For more details on the syntax and options admins can set, see [Configure Settin
 
 ### How do I set up and enforce Settings Management?
 
-As an administrator, you first need to [configure a registry.json to enforce sign-in](../../../security/for-admins/enforce-sign-in/_index.md). This is because the Settings Management feature requires a Docker Business subscription and therefore your Docker Desktop developers must authenticate to your organization for this configuration to take effect.
+As an administrator, you first need to [enforce
+sign-in](../../../security/for-admins/enforce-sign-in/_index.md). This is
+because the Settings Management feature requires a Docker Business subscription
+and therefore your Docker Desktop developers must authenticate to your
+organization. Enforcing sign-in ensures that your Docker Desktop developers
+always authenticate to your organization, even though they can authenticate
+without it and the feature will take effect. Enforcing sign-in guarantees the
+feature always takes effect.
+
 
 Next, you must either manually [create and configure the admin-settings.json file](configure.md), or use the `--admin-settings` installer flag on [macOS](../../install/mac-install.md#install-from-the-command-line) or [Windows](../../install/windows-install.md#install-from-the-command-line) to automatically create the `admin-settings.json` and save it in the correct location.
 
@@ -69,4 +77,4 @@ Any settings that are enforced, are grayed out in Docker Desktop and the user is
 
 ## More resources
 
-- [Video: Settings Managmeent](https://www.youtube.com/watch?v=I9oJOJ1P9PQ)
+- [Video: Settings Management](https://www.youtube.com/watch?v=I9oJOJ1P9PQ)

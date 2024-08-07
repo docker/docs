@@ -219,7 +219,7 @@ We appreciate any feedback you submit by [opening an issue here](https://github.
    ...
    ```
 
-9. Create a Dockerfile and build a `hello-world` image.
+9. Create a Dockerfile and build a `hello-buildkit` image.
 
    ```console
    > mkdir sample_dockerfile
@@ -246,5 +246,5 @@ We appreciate any feedback you submit by [opening an issue here](https://github.
 11. After pushing to the registry, run the image with `docker run`.
 
     ```console
-    > docker run <username>/hello-world
+    > docker run <username>/hello-buildkit
     ```

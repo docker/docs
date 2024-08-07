@@ -9,6 +9,29 @@ toc_max: 2
 This page contains information about the new features, improvements, and bug
 fixes in [Docker Buildx](https://github.com/docker/buildx).
 
+## 0.16.2
+
+{{< release-date date="2024-07-25" >}}
+
+The full release note for this release is available
+[on GitHub](https://github.com/docker/buildx/releases/tag/v0.16.2).
+
+### Bug fixes
+
+- Fix possible "bad file descriptor" error when exporting local cache to NFS volume [docker/buildx#2629](https://github.com/docker/buildx/pull/2629/)
+
+## 0.16.1
+
+{{< release-date date="2024-07-18" >}}
+
+The full release note for this release is available
+[on GitHub](https://github.com/docker/buildx/releases/tag/v0.16.1).
+
+### Bug fixes
+
+- Fix possible panic due to data race in `buildx bake --print` command [docker/buildx#2603](https://github.com/docker/buildx/pull/2603/)
+- Improve messaging about using `--debug` flag to inspect build warnings [docker/buildx#2612](https://github.com/docker/buildx/pull/2612/)
+
 ## 0.16.0
 
 {{< release-date date="2024-07-11" >}}

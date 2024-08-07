@@ -21,6 +21,90 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1) to see what's coming next.
 
+## 4.33.1
+
+{{< release-date date="2024-07-31" >}}
+
+{{< desktop-install-v2 win=true beta_win_arm=true version="4.33.0" build_path="/161083/" >}}
+
+### Bug fixes and enhancements
+
+#### For Windows
+
+- Added support for WSL2 2.3.11 and above, which includes loadable kernel modules. Fixes [docker/for-win#14222](https://github.com/docker/for-win/issues/14222)
+
+## 4.33.0
+
+{{< release-date date="2024-07-25" >}}
+
+{{< desktop-install-v2 all=true beta_win_arm=true version="4.33.0" build_path="/160616/" >}}
+
+### New
+
+- [Docker Debug](../reference/cli/docker/debug.md) is now generally available.
+- BuildKit now evaluates Dockerfile rules to inform you of potential issues.
+- **Resource Allocation** settings can now be accessed directly from the resource usage data displayed in the Dashboard footer.
+
+### Upgrades
+
+- [Docker Compose v2.29.1](https://github.com/docker/compose/releases/tag/v2.29.1)
+- [Docker Engine v27.1.1](https://docs.docker.com/engine/release-notes/27.1/#2711)
+- [containerd v1.7.19](https://github.com/containerd/containerd/releases/tag/v1.7.19)
+- [NVIDIA Container Toolkit v1.16.0](https://github.com/NVIDIA/nvidia-container-toolkit/releases/tag/v1.16.0)
+- [Docker Scout CLI v1.11.0](https://github.com/docker/scout-cli/releases/tag/v1.11.0)
+- [Kubernetes v1.30.2](https://github.com/kubernetes/kubernetes/releases/tag/v1.30.2)
+- Linux kernel `v6.10`
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed an issue that caused containers started with `--net=host` and listening on an IPv6 address to be accessible from the host.
+- Improved the UX for enabling the containerd image store in the **Settings** tab.
+- Fixed an issue that caused a deadlock seen while using the `grpcfuse` filesharing option under heavy load.
+- Fixed a bug where Mac-specific admin settings were impacting other platforms.
+- IPv6 address blocks can now be specified in Docker Engine's `default-address-pools`.
+- Fixed an issue with the validation of the Docker Engine's `bip`, `fixed-cidr` and `fixed-cidr-v6`. Fixes  [docker/for-mac#7104](https://github.com/docker/for-mac/issues/7104).
+- Docker Engine's `default-network-opts` parameter is now properly validated.
+- VirtioFS performance improvements include increasing directory cache timeout, handling change notifications from the host, removing extra FUSE operations for security.capability attributes, optimizing host event detection, and providing an API to clean caches after container termination.
+- Docker Desktop now notifies when there is a port conflict in a host networking container.
+- Compose Bridge command line option is now available via Experimental features. When enabled, run `compose-bridge` to convert your Compose configuration to Kubernetes resources.
+- Builds view:
+  - Added [build checks](../build/checks.md) to the build details' **Source** tab.
+  - Added build tags to the build details' **Info** tab under the **Source details** section.
+  - Newly imported builds are now highlighted.
+  - Improved performance of error message handling.
+  - Fixed a connection issue to the builder which prevented build records from displaying.
+  - Fixed the navigation when opening builds through the CLI.
+
+#### For Mac
+
+- The Configuration integrity check feature now provides more context around what has changed with your Docker Desktop configuration. For more information, see the [FAQs](faqs/macfaqs.md).
+- The Configuration integrity check feature shows an error when it fails to repair Docker Desktop.
+- Fixed a bug where the IPv6 TCP was set to `host.docker.internal`. Fixes [docker/for-mac#7332](https://github.com/docker/for-mac/issues/7332).
+- Fixed an issue where the `docker-compose` symlink pointed to an empty location. Fixes [docker/for-mac#7345](https://github.com/docker/for-mac/issues/7345).
+
+#### For Linux
+
+- Fixed an issue where some `wincred` values were persisted after uninstall. Reported by Javier Yong [@Javiery3889](https://github.com/Javiery3889).
+
+### Security
+
+#### For all platforms
+
+- Includes a fix for AuthZ Plugin Bypass Regression in Docker Engine. For more information, see [CVE-2024-41110](https://www.cve.org/cverecord?id=CVE-2024-41110).
+
+#### For Windows
+
+- Fixed an issue where some `wincred` values were persisted after uninstall. Reported by Javier Yong [@Javiery3889](https://github.com/Javiery3889).
+
+### Known Issues
+
+#### For Windows
+
+- Docker Desktop fails to start with WSL pre-releases `v2.3.11.0` and `v2.3.12.0`, which is included in Windows 11 Insider. To fix this ensure WSL `v2.2.4.0` is installed.
+For more information, see [microsoft/WSL#11794](https://github.com/microsoft/WSL/issues/11794). This affects Docker Desktop 4.33.0 and earlier.
+
 ## 4.32.0
 
 {{< release-date date="2024-07-04" >}}
