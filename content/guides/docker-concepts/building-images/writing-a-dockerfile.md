@@ -85,7 +85,7 @@ Now that you have the project, you’re ready to create the `Dockerfile`.
 4. Now, define the working directory by using the `WORKDIR` instruction. This will specify where future commands will run and the directory files will be copied inside the container image.
 
     ```dockerfile
-    WORKDIR /usr/local/app
+    WORKDIR /app
     ```
 
 5. Copy all of the files from your project on your machine into the container image by using the `COPY` instruction:
