@@ -34,7 +34,7 @@ An error message, similar to the following, appears in the error logs for this
 issue.
 
 ```text
-IdP-Initiated login is not enabled for connection "$ssoConnection".
+IdP-Initiated sign in is not enabled for connection '$ssoConnection'.
 ```
 
 Docker doesn't support an IdP-initiated SAML flow. This error can occur when a
@@ -55,7 +55,7 @@ An error message, similar to the following, appears in the error logs for this
 issue.
 
 ```text
-Not enough seats in organization '$orgName'. Please add more seats. Please contact your company administrator. TraceID: XXXXXXXXXXXXXX
+Not enough seats in organization '$orgName'. Add more seats or contact your administrator.
 ```
 
 This error can occur when attempting to provision a user into the organization
@@ -77,7 +77,7 @@ An error message, similar to the following, appears in the error logs for this
 issue.
 
 ```text
-Domain '$emailDomain' is not verified for your SSO connection. Please contact your company administrator. TraceID: XXXXXXXXXXXXXX
+Domain '$emailDomain' is not verified for your SSO connection. Contact your company administrator. TraceID: XXXXXXXXXXXXXX
 ```
 
 This error occurs if the IdP authenticated a user through SSO and the UPN
@@ -93,13 +93,13 @@ Possible solutions:
    and verify your
    domain](/security/for-admins/single-sign-on/configure/#step-one-add-and-verify-your-domain).
 
-### Back button pressed
+### Unable to find session
 
 An error message, similar to the following, appears in the error logs for this
 issue.
 
 ```text
-You may have pressed the back button, refreshed during login, opened too many login dialogs, or there is some issue with cookies, since we couldn't find your session. Try logging in again from the application and if the problem persists please contact the administrator.
+We couldn't find your session. You may have pressed the back button, refreshed the page, opened too many sign-in dialogs, or there is some issue with cookies. Try signing in again. If the issue persists, contact your administrator.
 ```
 
 This error typically occurs during the authentication flow when a user presses
@@ -119,7 +119,7 @@ An error message, similar to the following, appears in the error logs for this
 issue.
 
 ```text
-User '$username' is not assigned to this SSO organization. Please contact your company administrator. TraceID: XXXXXXXXXXXXX
+User '$username' is not assigned to this SSO organization. Contact your administrator. TraceID: XXXXXXXXXXXXX
 ```
 
 This error occurs if SSO Just-In-Time (JIT) provisioning is disabled. JIT
@@ -149,7 +149,7 @@ An error message, similar to the following, appears in the error logs for this
 issue.
 
 ```text
-The name ID sent by the identity provider is not an email address. Please contact your company administrator.
+The name ID sent by the identity provider is not an email address. Contact your company administrator.
 ```
 
 This error can occur during SAML authentication, when your IdP sends back a Name
