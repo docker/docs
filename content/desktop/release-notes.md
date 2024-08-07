@@ -87,6 +87,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 #### For Linux
 
 - Fixed an issue where some `wincred` values were persisted after uninstall. Reported by Javier Yong [@Javiery3889](https://github.com/Javiery3889).
+- Fixed an issue where the notification **Another application changed your Desktop configurations** is incorrectly triggered.
 
 ### Security
 
