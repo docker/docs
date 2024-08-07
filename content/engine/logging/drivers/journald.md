@@ -23,6 +23,7 @@ stores the following metadata in the journal with each message:
 | `CONTAINER_NAME`                     | The container name at the time it was started. If you use `docker rename` to rename a container, the new name isn't reflected in the journal entries. |
 | `CONTAINER_TAG`, `SYSLOG_IDENTIFIER` | The container tag ([log tag option documentation](log_tags.md)).                                                                                      |
 | `CONTAINER_PARTIAL_MESSAGE`          | A field that flags log integrity. Improve logging of long log lines.                                                                                  |
+| `IMAGE_NAME`                         | The name of the container image.                                                                                                                      |
 
 ## Usage
 
