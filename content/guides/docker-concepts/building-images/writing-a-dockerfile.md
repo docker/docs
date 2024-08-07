@@ -120,8 +120,7 @@ Now that you have the project, you’re ready to create the `Dockerfile`.
 >
 > It's important to note that this Dockerfile is _not_ following all
 > of the best practices yet (by design). It will build the app, but the
-> builds won't be as fast as they could be and the image could be made
-> more secure.
+> builds won't be as fast, or the images as secure, as they could be.
 >
 > Keep reading to learn more about how to make the image maximize the
 > build cache, run as a non-root user, and multi-stage builds.

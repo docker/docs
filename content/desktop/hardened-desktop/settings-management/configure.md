@@ -15,7 +15,15 @@ Settings Management is designed specifically for organizations who don’t give 
 ### Prerequisites
 
 - [Download and install Docker Desktop 4.13.0 or later](../../release-notes.md).
-- As an admin, you need to [configure a registry.json to enforce sign-in](../../../security/for-admins/enforce-sign-in/_index.md). This is because this feature requires a Docker Business subscription and therefore your Docker Desktop users must authenticate to your organization for this configuration to take effect.
+- As an administrator, you need to [enforce
+  sign-in](../../../security/for-admins/enforce-sign-in/_index.md). This is
+  because this feature requires a Docker Business subscription and therefore
+  your Docker Desktop users must authenticate to your organization for this
+  configuration to take effect. Enforcing sign-in ensures that your Docker
+  Desktop developers always authenticate to your organization, even though they
+  can authenticate without it and the feature will take effect. Enforcing
+  sign-in guarantees the feature always takes effect.
+
 
 ### Step one: Create the `admin-settings.json` file and save it in the correct location
 

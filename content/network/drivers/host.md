@@ -93,6 +93,8 @@ not supported.
 - This feature doesn't work with Enhanced Container Isolation enabled, since
 isolating your containers from the host and allowing them access to the host
 network contradict each other.
+- Only Linux containers are supported. Host networking does not work with
+  Windows containers.
 
 ## Next steps
 
