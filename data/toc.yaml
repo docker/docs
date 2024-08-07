@@ -1654,8 +1654,6 @@ Manuals:
       title: Start containers automatically
   - sectiontitle: CLI
     section:
-    - path: /engine/reference/commandline/cli/
-      title: Use the Docker CLI
     - path: /config/completion/
       title: Completion
     - path: /config/filter/

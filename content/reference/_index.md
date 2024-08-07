@@ -15,7 +15,7 @@ grid_clis:
 - title: Docker CLI
   description: The main Docker CLI, includes all `docker` commands.
   icon: terminal
-  link: /engine/reference/commandline/cli/
+  link: /reference/cli/docker/
 - title: Compose CLI
   description: The CLI for Docker Compose, for building and running multi-container
     applications.

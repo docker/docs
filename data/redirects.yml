@@ -140,7 +140,7 @@
   - /go/daemon-access/
 "/engine/deprecated/#deprecated-engine-features-1":
   - /go/deprecated/
-"/engine/reference/commandline/cli/#experimental-features":
+"/reference/cli/docker/#experimental-features":
   - /go/experimental/
 "/reference/cli/docker/login/#credential-stores":
   - /go/credential-store/

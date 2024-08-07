@@ -78,7 +78,7 @@ The following table describes the available configuration parameters.
 These settings are used to configure proxy environment variables for containers
 only, and not used as proxy settings for the Docker CLI or the Docker Engine
 itself.
-Refer to the [environment variables](/engine/reference/commandline/cli/#environment-variables)
+Refer to the [environment variables](/reference/cli/docker/#environment-variables)
 and [configure the Docker daemon to use a proxy server](../config/daemon/proxy.md#httphttps-proxy)
 sections for configuring proxy settings for the CLI and daemon.
 
