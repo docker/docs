@@ -365,7 +365,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 - You can now enforce Rosetta usage via [Settings Management](hardened-desktop/settings-management/configure.md).
 - [Docker socket mount restrictions](hardened-desktop/enhanced-container-isolation/config.md) with ECI is now generally available.
-- Docker Engine and CLI updated to [Moby 26.0](https://github.com/moby/moby/releases/tag/v26.0.0) which includes Buildkit 0.13, sub volumes mounts, networking updates, and improvements to the containerd multi-platform image store UX.
+- Docker Engine and CLI updated to [Moby 26.0](https://github.com/moby/moby/releases/tag/v26.0.0). This includes Buildkit 0.13, sub volumes mounts, networking updates, and improvements to the containerd multi-platform image store UX.
 - New and improved Docker Desktop error screens: swift troubleshooting, easy diagnostics uploads, and actionable remediation.
 - Compose supports [Synchronized file shares (experimental)](synchronized-file-sharing.md).
 - New [interactive Compose CLI (experimental)](../compose/environment-variables/envvars.md#compose_menu).
