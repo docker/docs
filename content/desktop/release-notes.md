@@ -114,7 +114,7 @@ For more information, see [microsoft/WSL#11794](https://github.com/microsoft/WSL
 
 ### New
 
-- Docker Desktop now takes advantage of Moby 27.
+- Docker Engine and CLI updated to [Moby 27.0](../engine/release-notes/27.0.md#2700).
 - Docker Desktop now supports moving data to a different drive on macOS and Windows with WSL2 backend. See [docker/for-win#13384](https://github.com/docker/for-win/issues/13384).
 - You can now [schedule backups for volume exports](use-desktop/volumes.md) in the **Volumes** tab (Beta). 
 - Access a terminal shell directly from Docker Desktop (Beta).
@@ -167,6 +167,10 @@ For more information, see [microsoft/WSL#11794](https://github.com/microsoft/WSL
 - Fixed an issue that caused bind mounts to fail. Fixes [docker/for-mac#7274](https://github.com/docker/for-mac/issues/7274).
 
 ### Known issues
+
+#### For all platforms
+
+- The **Manage Synchronized File Shares with Compose** setting is automatically enabled for all users who opt into **Access experimental features**. This converts all bind mounts into synchronized file shares. To disable this behavior, deselect **Access experimental features**. Then, manually delete any file shares by going to the **File sharing** tab within **Resources**, navigating to the **Synchronized file shares** section, selecting the file shares you want to remove, and selecting **Delete**.
 
 #### For Mac
 
@@ -362,7 +366,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 - You can now enforce Rosetta usage via [Settings Management](hardened-desktop/settings-management/configure.md).
 - [Docker socket mount restrictions](hardened-desktop/enhanced-container-isolation/config.md) with ECI is now generally available.
-- Docker Desktop now takes advantage of the Moby 26 engine which includes Buildkit 0.13, sub volumes mounts, networking updates, and improvements to the containerd multi-platform image store UX.
+- Docker Engine and CLI updated to [Moby 26.0](https://github.com/moby/moby/releases/tag/v26.0.0). This includes Buildkit 0.13, sub volumes mounts, networking updates, and improvements to the containerd multi-platform image store UX.
 - New and improved Docker Desktop error screens: swift troubleshooting, easy diagnostics uploads, and actionable remediation.
 - Compose supports [Synchronized file shares (experimental)](synchronized-file-sharing.md).
 - New [interactive Compose CLI (experimental)](../compose/environment-variables/envvars.md#compose_menu).
