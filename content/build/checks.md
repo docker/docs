@@ -31,9 +31,15 @@ Build checks are useful for:
 
 ## Build with checks
 
-Build checks are supported in Buildx version 0.15.0 and later. Invoking a build
-runs the checks by default, and displays any violations in the build output.
-For example, the following command both builds the image and runs the checks:
+Build checks are supported in:
+
+- Buildx version 0.15.0 and later
+- [docker/build-push-action](https://github.com/docker/build-push-action) version 6.6.0 and later
+- [docker/bake-action](https://github.com/docker/bake-action) version 5.6.0 and later
+
+Invoking a build runs the checks by default, and displays any violations in the
+build output. For example, the following command both builds the image and runs
+the checks:
 
 ```console
 $ docker build .
@@ -48,6 +54,23 @@ $ docker build .
 In this example, the build ran successfully, but a
 [JSONArgsRecommended](/reference/build-checks/json-args-recommended/) warning
 was reported, because `CMD` instructions should use JSON array syntax.
+
+With the GitHub Actions, the checks display in the diff view of pull requests.
+
+```yaml
+name: Build and push Docker images
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build and push
+        uses: docker/build-push-action@v6.6.0
+```
+
+![GitHub Actions build check annotations](./images/gha-check-annotations.png)
 
 ### More verbose output
 
