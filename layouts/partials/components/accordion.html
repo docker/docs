@@ -1,11 +1,17 @@
-<div x-data="{ open: false }" class="border border-gray-light-200 dark:border-gray-dark-200 bg-white dark:bg-gray-dark-100">
+<div
+  id="{{ urls.Anchorize .title }}"
+  x-data="{ open: {{ .open | default false }} }" class="border border-gray-light-200 dark:border-gray-dark-200 bg-white dark:bg-gray-dark-100 py-2 my-6 rounded">
   <button class="not-prose w-full py-2 px-4 flex justify-between" x-on:click="open = ! open">
-    <span>{{ .title }}</span>
+    <div class="{{ with .large }} text-xl {{ end }} flex items-center gap-2">
+      {{- with .icon }}
+        <span class="icon-svg -mt-1">{{ partialCached "icon" . . }}</span>
+      {{- end }}
+      {{ .title }}
+    </div>
     <span :class="{ 'hidden' : !open }" class="icon-svg">{{ partialCached "icon" "expand_less" "expand_less" }}</span>
     <span :class="{ 'hidden' : open }" class="icon-svg">{{ partialCached "icon" "expand_more" "expand_more" }}</span>
   </button>
-
   <div x-show="open" x-collapse class="px-4">
-    {{ .body | .page.RenderString (dict "display" "block") }}
+    {{ markdownify .body }}
   </div>
 </div>
