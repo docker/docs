@@ -132,6 +132,9 @@ menus:
   - name: Reference
     url: /reference/
     weight: 4
+  - name: Learning paths
+    url: /learning-paths/
+    weight: 5
 
   footer:
     - url: https://www.docker.com/products

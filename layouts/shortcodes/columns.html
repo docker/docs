@@ -1,0 +1,8 @@
+{{ $cols := strings.Split .InnerDeindent "<!-- break -->" }}
+<div class="md:flex gap-8">
+   {{ range $cols }}
+      <div class="flex-1">
+         {{ markdownify . }}
+      </div>
+   {{ end }}
+</div>

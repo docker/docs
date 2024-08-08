@@ -1,0 +1,16 @@
+<div class="not-prose">
+  <div class="flex flex-col sm:flex-row gap-4 p-6 m-4 bg-gray-light-200 dark:bg-gray-dark-300">
+    <div class="flex-grow flex flex-col sm:items-center">
+      <span><strong>Skill level</strong></span>
+      <span>{{ .Params.skill }}</span>
+    </div>
+    <div class="flex-grow flex flex-col sm:items-center">
+      <span><strong>Time to complete</strong></span>
+      <span>{{ .Params.time }}</span>
+    </div>
+    <div class="flex-grow flex flex-col sm:items-center">
+      <span><strong>Prerequisites</strong></span>
+      <span>{{ .Params.prereq }}</span>
+    </div>
+  </div>
+</div>
