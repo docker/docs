@@ -151,9 +151,11 @@ STDERR or STDOUT streams block.
 The `mode` log option controls whether to use the `blocking` (default) or
 `non-blocking` message delivery.
 
-The `max-buffer-size` log option controls the size of the buffer used for
-intermediate message storage when `mode` is set to `non-blocking`. `max-buffer-size`
-defaults to 1 megabyte.
+The `max-buffer-size` controls the size of the buffer used for
+intermediate message storage when `mode` is set to `non-blocking`.
+The default is `1m` meaning 1 megabyte (1 million bytes).
+See [here](https://pkg.go.dev/github.com/docker/go-units#FromHumanSize) for the allowed format strings,
+some examples are `1KiB` for 1024 bytes, `2g` for 2 billion bytes.
 
 The following example starts an Alpine container with log output in non-blocking
 mode and a 4 megabyte buffer:
