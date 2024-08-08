@@ -169,7 +169,7 @@ For more information, see [microsoft/WSL#11794](https://github.com/microsoft/WSL
 
 #### For all platforms
 
-- The **Manage Synchronized File Shares with Compose** setting is automatically enabled for all users who opt into **Access Experimental Features**. This converts all bind mounts into synchronized file shares. To disable this behavior, deselect **Access Experimental Features**. Then, manually delete any file shares by going to the **File Sharing** tab within **Resources**, navigating to the **Synchronized File Shares** section, selecting the file shares you want to remove, and selecting **Delete**.
+- The **Manage Synchronized File Shares with Compose** setting is automatically enabled for all users who opt into **Access experimental features**. This converts all bind mounts into synchronized file shares. To disable this behavior, deselect **Access experimental features**. Then, manually delete any file shares by going to the **File sharing** tab within **Resources**, navigating to the **Synchronized file shares** section, selecting the file shares you want to remove, and selecting **Delete**.
 
 #### For Mac
 
