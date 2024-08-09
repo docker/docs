@@ -107,7 +107,7 @@ flag only retrieves messages generated since the last system boot:
 $ sudo journalctl -b CONTAINER_NAME=webserver
 ```
 
-The `-o` flag specifies the format for the retried log messages. Use `-o json`
+The `-o` flag specifies the format for the retrieved log messages. Use `-o json`
 to return the log messages in JSON format.
 
 ```console
