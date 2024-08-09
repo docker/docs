@@ -153,8 +153,8 @@ The `mode` log option controls whether to use the `blocking` (default) or
 
 The `max-buffer-size` controls the size of the buffer used for
 intermediate message storage when `mode` is set to `non-blocking`.
-The default is `1m` meaning 1 megabyte (1 million bytes).
-See [here](https://pkg.go.dev/github.com/docker/go-units#FromHumanSize) for the allowed format strings,
+The default is `1m` meaning 1 MB (1 million bytes).
+See [function `FromHumanSize()` in the `go-units` package](https://pkg.go.dev/github.com/docker/go-units#FromHumanSize) for the allowed format strings,
 some examples are `1KiB` for 1024 bytes, `2g` for 2 billion bytes.
 
 The following example starts an Alpine container with log output in non-blocking
