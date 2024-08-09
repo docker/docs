@@ -58,10 +58,6 @@ Select applies to more devices, while click is more specific to a mouse.
 
 Don't use `currently` when talking about the product or its features. The documentation describes the product as it is today.
 
-#### deselect
-
-Don’t use `deselect`. Instead, use `clear`.
-
 #### disable
 
 Don't use `disable`. Implies that disability is a less-desired or negative state.
