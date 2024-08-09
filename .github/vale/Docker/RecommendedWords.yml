@@ -31,7 +31,6 @@ swap:
   check box: checkbox
   check boxes: checkboxes
   click: select
-  deselect: clear
   ergo: therefore
   file name: filename
   keypress: keystroke
