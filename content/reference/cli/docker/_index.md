@@ -14,6 +14,7 @@ aliases:
 - /engine/reference/commandline/registry_ls/
 - /engine/reference/commandline/registry_rmi/
 - /engine/reference/commandline/docker/
+- /engine/reference/commandline/cli/
 layout: cli
 ---
 

@@ -412,6 +412,17 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: oom-score-adj
+      value_type: int64
+      default_value: "0"
+      description: Tune host's OOM preferences (-1000 to 1000)
+      deprecated: false
+      hidden: false
+      min_api_version: "1.46"
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: placement-pref
       value_type: pref
       description: Add a placement preference
