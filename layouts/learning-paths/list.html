@@ -1,0 +1,9 @@
+{{ define "main" }}
+  {{ partial "breadcrumbs.html" . }}
+  <article class="prose max-w-none dark:prose-invert">
+    <h1>{{ .Title }}</h1>
+    {{ .Content }}
+    <hr>
+    {{ partial "post-links.html" .Pages }}
+  </article>
+{{ end }}

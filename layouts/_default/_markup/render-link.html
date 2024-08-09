@@ -13,7 +13,7 @@
 {{- else if (strings.HasPrefix $url "/") -}}
   {{ if (strings.HasSuffix (urls.Parse $url).Path ".md") }}
     {{/* abs path to markdown file, use ref */}}
-    {{ $url = (ref .Page $url) }}
+    {{ $url = (ref page $url) }}
   {{ end }}
   <a class="link" href="{{ $url }}">{{ .Text | safeHTML }}</a>
 {{- else -}}
@@ -21,12 +21,12 @@
   {{- if (strings.FindRE `([^_]|^)index.md` $url 1) -}}
     <a
       class="link"
-      href="{{ ref .Page (strings.Replace $url "index.md" "_index.md") }}"
+      href="{{ ref page (strings.Replace $url "index.md" "_index.md") }}"
       >{{ .Text | safeHTML }}</a
     >
   {{- else -}}
     {{/* relative link, use ref */}}
-    <a class="link" href="{{ ref .Page $url }}"
+    <a class="link" href="{{ ref page $url }}"
       >{{ .Text | safeHTML }}</a
     >
   {{- end -}}
