@@ -1332,7 +1332,7 @@ examples: |-
     > for example by adding individual kernel capabilities with `--cap-add`.
     >
     > For more information, see
-    > [Runtime privilege and Linux capabilities](/engine/reference/run/#runtime-privilege-and-linux-capabilities)
+    > [Runtime privilege and Linux capabilities](/engine/containers/run/#runtime-privilege-and-linux-capabilities)
     { .warning }
 
     The following example doesn't work, because by default, Docker drops most
@@ -2291,7 +2291,7 @@ examples: |-
     container's logging driver.
 
     To learn about the supported logging drivers and how to use them, refer to
-    [Configure logging drivers](/config/containers/logging/configure/).
+    [Configure logging drivers](/engine/logging/configure/).
 
     To disable logging for a container, set the `--log-driver` flag to `none`:
 

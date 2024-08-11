@@ -81,7 +81,7 @@ These settings are used to configure proxy environment variables for containers
 only, and not used as proxy settings for the Docker CLI or the Docker Engine
 itself.
 Refer to the [environment variables](/reference/cli/docker/#environment-variables)
-and [configure the Docker daemon to use a proxy server](/engine/daemon/proxy.md#httphttps-proxy)
+and [configure the Docker daemon to use a proxy server](/engine/daemon/proxy.md)
 sections for configuring proxy settings for the CLI and daemon.
 
 ### Run containers with a proxy configuration
