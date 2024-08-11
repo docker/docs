@@ -282,9 +282,13 @@ the scope of these instructions.
 
 If you are running Docker with the `iptables` option set to `true`, and
 [firewalld](https://firewalld.org) is enabled on your system, Docker
-automatically creates a `firewalld` zone called `docker` and inserts all the
-network interfaces it creates (for example, `docker0`) into the `docker` zone
-to allow seamless networking.
+automatically creates a `firewalld` zone called `docker`, with target `ACCEPT`.
+
+All network interfaces created by Docker (for example, `docker0`) are inserted
+into the `docker` zone.
+
+Docker also creates a forwarding policy called `docker-forwarding` that allows
+forwarding from `ANY` zone to the `docker` zone.
 
 ## Docker and ufw
 
