@@ -306,7 +306,7 @@ Desktop at `$HOME/.docker/desktop/log/`.
 
 ## View the Docker daemon logs
 
-Refer to the [Read the daemon logs](../../config/daemon/logs.md) section
+Refer to the [Read the daemon logs](/engine/daemon/logs.md) section
 to learn how to view the Docker Daemon logs.
 
 ## Further resources

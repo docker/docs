@@ -137,8 +137,8 @@ File share settings are:
 > * Shared folders are designed to allow application code to be edited
 >   on the host while being executed in containers. For non-code items
 >   such as cache directories or databases, the performance will be much
->   better if they are stored in the Linux VM, using a [data volume](../../storage/volumes.md)
->   (named volume) or [data container](../../storage/volumes.md).
+>   better if they are stored in the Linux VM, using a [data volume](/engine/storage/volumes.md)
+>   (named volume) or [data container](/engine/storage/volumes.md).
 { .tip }
 
 ### Proxies
@@ -204,8 +204,8 @@ edit the file using your favorite text editor.
 >
 > Only the **Docker Desktop** daemon uses the configuration file under `$HOME/.docker`.
 > If you manually install Docker Engine alongside Docker Desktop, the manually
-> installed instance uses a `daemon.json` configuration file in a  different location.
-> Refer to [Configure the daemon](../../config/daemon/index.md) for more information
+> installed instance uses a `daemon.json` configuration file in a different location.
+> Refer to [Configure the daemon](/engine/daemon/_index.md) for more information
 > about how to configure the Docker daemon on a manually installed Docker Engine.
 
 To see the full list of possible configuration options, see the

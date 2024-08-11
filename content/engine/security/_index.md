@@ -37,7 +37,7 @@ of another container. Of course, if the host system is setup
 accordingly, containers can interact with each other through their
 respective network interfaces — just like they can interact with
 external hosts. When you specify public ports for your containers or use
-[links](../../network/links.md)
+[links](/engine/network/links.md)
 then IP traffic is allowed between containers. They can ping each other,
 send/receive UDP packets, and establish TCP connections, but that can be
 restricted if necessary. From a network architecture point of view, all
@@ -280,4 +280,4 @@ pull requests, or comments on the Docker community forums.
 * [Seccomp security profiles for Docker](seccomp.md)
 * [AppArmor security profiles for Docker](apparmor.md)
 * [On the Security of Containers (2014)](https://medium.com/@ewindisch/on-the-security-of-containers-2c60ffe25a9e)
-* [Docker swarm mode overlay network security model](../../network/drivers/overlay.md)
+* [Docker swarm mode overlay network security model](/engine/network/drivers/overlay.md)

@@ -1574,178 +1574,178 @@ Manuals:
       title: Post-installation steps
   - sectiontitle: Storage
     section:
-    - path: /storage/
+    - path: /engine/storage/
       title: Overview
-    - path: /storage/volumes/
+    - path: /engine/storage/volumes/
       title: Volumes
-    - path: /storage/bind-mounts/
+    - path: /engine/storage/bind-mounts/
       title: Bind mounts
-    - path: /storage/tmpfs/
+    - path: /engine/storage/tmpfs/
       title: tmpfs mounts
     - sectiontitle: Storage drivers
       section:
-      - path: /storage/storagedriver/
+      - path: /engine/storage/drivers/
         title: Overview
-      - path: /storage/storagedriver/select-storage-driver/
+      - path: /engine/storage/drivers/select-storage-driver/
         title: Select a storage driver
-      - path: /storage/storagedriver/btrfs-driver/
+      - path: /engine/storage/drivers/btrfs-driver/
         title: Use the Btrfs storage driver
-      - path: /storage/storagedriver/device-mapper-driver/
+      - path: /engine/storage/drivers/device-mapper-driver/
         title: Use the Device mapper storage driver
-      - path: /storage/storagedriver/overlayfs-driver/
+      - path: /engine/storage/drivers/overlayfs-driver/
         title: Use the OverlayFS storage driver
-      - path: /storage/storagedriver/zfs-driver/
+      - path: /engine/storage/drivers/zfs-driver/
         title: Use the ZFS storage driver
-      - path: /storage/storagedriver/vfs-driver/
+      - path: /engine/storage/drivers/vfs-driver/
         title: Use the VFS storage driver
-      - path: /storage/storagedriver/aufs-driver/
+      - path: /engine/storage/drivers/aufs-driver/
         title: Use the AUFS storage driver (deprecated)
-      - path: /storage/containerd/
-        title: containerd snapshotters
+    - path: /engine/storage/containerd/
+      title: containerd snapshotters
   - sectiontitle: Networking
     section:
-    - path: /network/
+    - path: /engine/network/
       title: Overview
     - sectiontitle: Network drivers
       section:
-      - path: /network/drivers/
+      - path: /engine/network/drivers/
         title: Overview
-      - path: /network/drivers/bridge/
+      - path: /engine/network/drivers/bridge/
         title: Bridge
-      - path: /network/drivers/overlay/
+      - path: /engine/network/drivers/overlay/
         title: Overlay
-      - path: /network/drivers/host/
+      - path: /engine/network/drivers/host/
         title: Host
-      - path: /network/drivers/ipvlan/
+      - path: /engine/network/drivers/ipvlan/
         title: IPvlan
-      - path: /network/drivers/macvlan/
+      - path: /engine/network/drivers/macvlan/
         title: Macvlan
-      - path: /network/drivers/none/
+      - path: /engine/network/drivers/none/
         title: None (no networking)
-    - path: /network/proxy/
-      title: Configure Docker to use a proxy server
-    - path: /network/packet-filtering-firewalls/
+    - path: /engine/network/packet-filtering-firewalls/
       title: Packet filtering and firewalls
-    - path: /config/daemon/ipv6/
-      title: Use IPv6
     - sectiontitle: Networking tutorials
       section:
-      - path: /network/network-tutorial-standalone/
+      - path: /engine/network/tutorials/standalone/
         title: Bridge network tutorial
-      - path: /network/network-tutorial-host/
+      - path: /engine/network/tutorials/host/
         title: Host networking tutorial
-      - path: /network/network-tutorial-overlay/
+      - path: /engine/network/tutorials/overlay/
         title: Overlay networking tutorial
-      - path: /network/network-tutorial-macvlan/
+      - path: /engine/network/tutorials/macvlan/
         title: Macvlan network tutorial
     - sectiontitle: Legacy networking content
       section:
-      - path: /network/links/
+      - path: /engine/network/links/
         title: (Legacy) Container links
   - sectiontitle: Containers
     section:
-    - path: /engine/reference/run/
+    - path: /engine/containers/run/
       title: Running containers
-    - path: /config/containers/resource_constraints/
+    - path: /engine/containers/resource_constraints/
       title: Configure resource constraints
-    - path: /config/containers/multi-service_container/
+    - path: /engine/containers/multi-service_container/
       title: Run multiple processes in a container
-    - path: /config/containers/start-containers-automatically/
+    - path: /engine/containers/start-containers-automatically/
       title: Start containers automatically
+    - path: /engine/containers/runmetrics/
+      title: Runtime metrics
   - sectiontitle: CLI
     section:
-    - path: /config/completion/
+    - path: /engine/cli/completion/
       title: Completion
-    - path: /config/filter/
+    - path: /engine/cli/proxy/
+      title: Client proxy configuration
+    - path: /engine/cli/filter/
       title: Filter commands
-    - path: /config/formatting/
+    - path: /engine/cli/formatting/
       title: Format command and log output
-    - path: /config/otel/
+    - path: /engine/cli/otel/
       title: OpenTelemetry
   - sectiontitle: Manage resources
     section:
-    - path: /config/pruning/
+    - path: /engine/manage-resources/pruning/
       title: Prune unused objects
-    - path: /config/labels-custom-metadata/
+    - path: /engine/manage-resources/labels/
       title: Labels
-    - path: /engine/context/working-with-contexts/
+    - path: /engine/manage-resources/contexts/
       title: Contexts
   - sectiontitle: Daemon
     section:
-    - path: /config/daemon/start/
+    - path: /engine/daemon/start/
       title: Start the daemon
-    - path: /config/daemon/
+    - path: /engine/daemon/
       title: Configure the daemon
-    - path: /config/daemon/proxy/
-      title: HTTP proxy
-    - path: /config/containers/live-restore/
+    - path: /engine/daemon/ipv6/
+      title: Use IPv6
+    - path: /engine/daemon/proxy/
+      title: Daemon proxy configuration
+    - path: /engine/containers/live-restore/
       title: Live restore
-    - path: /config/daemon/troubleshoot/
+    - path: /engine/daemon/troubleshoot/
       title: Troubleshoot
-    - path: /config/daemon/remote-access/
+    - path: /engine/daemon/remote-access/
       title: Remote access
-    - path: /engine/alternative-runtimes/
+    - path: /engine/daemon/alternative-runtimes/
       title: Alternative container runtimes
-    - sectiontitle: Engine plugins
-      section:
-      - path: /engine/extend/
-        title: Managed plugin system
-      - path: /engine/extend/plugins_authorization/
-        title: Access authorization plugin
-      - path: /engine/extend/legacy_plugins/
-        title: Extending Docker with plugins
-      - path: /engine/extend/plugins_network/
-        title: Network plugins
-      - path: /engine/extend/plugins_logging/
-        title: Logging plugins
-      - path: /engine/extend/plugins_volume/
-        title: Volume plugins
-      - title: Plugin configuration
-        path: /engine/extend/config/
-      - path: /engine/extend/plugin_api/
-        title: Plugin API
+    - path: /engine/daemon/logs/
+      title: Daemon logs
+    - path: /engine/daemon/prometheus/
+      title: Collect metrics with Prometheus
+  - sectiontitle: Engine plugins
+    section:
+    - path: /engine/extend/
+      title: Managed plugin system
+    - path: /engine/extend/plugins_authorization/
+      title: Access authorization plugin
+    - path: /engine/extend/legacy_plugins/
+      title: Extending Docker with plugins
+    - path: /engine/extend/plugins_network/
+      title: Network plugins
+    - path: /engine/extend/plugins_logging/
+      title: Logging plugins
+    - path: /engine/extend/plugins_volume/
+      title: Volume plugins
+    - title: Plugin configuration
+      path: /engine/extend/config/
+    - path: /engine/extend/plugin_api/
+      title: Plugin API
   - sectiontitle: Logs and metrics
     section:
     - sectiontitle: Container logs
       section:
-      - path: /config/containers/logging/
+      - path: /engine/logging/
         title: View container logs
-      - path: /config/containers/logging/configure/
+      - path: /engine/logging/configure/
         title: Configure logging drivers
-      - path: /config/containers/logging/dual-logging/
+      - path: /engine/logging/dual-logging/
         title: Use a remote logging driver
-      - path: /config/containers/logging/plugins/
+      - path: /engine/logging/plugins/
         title: Use a logging driver plugin
-      - path: /config/containers/logging/log_tags/
+      - path: /engine/logging/log_tags/
         title: Customize log driver output
       - sectiontitle: Logging drivers
         section:
-        - path: /config/containers/logging/local/
+        - path: /engine/logging/drivers/local/
           title: Local file logging driver
-        - path: /config/containers/logging/json-file/
+        - path: /engine/logging/drivers/json-file/
           title: JSON File logging driver
-        - path: /config/containers/logging/gelf/
+        - path: /engine/logging/drivers/gelf/
           title: Graylog Extended Format (GELF) logging driver
-        - path: /config/containers/logging/syslog/
+        - path: /engine/logging/drivers/syslog/
           title: Syslog logging driver
-        - path: /config/containers/logging/awslogs/
+        - path: /engine/logging/drivers/awslogs/
           title: Amazon CloudWatch logs logging driver
-        - path: /config/containers/logging/etwlogs/
+        - path: /engine/logging/drivers/etwlogs/
           title: ETW logging driver
-        - path: /config/containers/logging/fluentd/
+        - path: /engine/logging/drivers/fluentd/
           title: Fluentd logging driver
-        - path: /config/containers/logging/gcplogs/
+        - path: /engine/logging/drivers/gcplogs/
           title: Google Cloud logging driver
-        - path: /config/containers/logging/journald/
+        - path: /engine/logging/drivers/journald/
           title: Journald logging driver
-        - path: /config/containers/logging/splunk/
+        - path: /engine/logging/drivers/splunk/
           title: Splunk logging driver
-    - path: /config/daemon/logs/
-      title: Daemon logs
-    - path: /config/containers/runmetrics/
-      title: Runtime metrics
-    - path: /config/daemon/prometheus/
-      title: Collect metrics with Prometheus
   - sectiontitle: Security
     section:
       - path: /engine/security/

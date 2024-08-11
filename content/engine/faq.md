@@ -101,14 +101,14 @@ thousands or even millions of containers.
 ### How do I connect Docker containers?
 
 Currently the recommended way to connect containers is via the Docker network
-feature. You can see details of [how to work with Docker networks](../network/drivers/bridge.md).
+feature. You can see details of [how to work with Docker networks](/engine/network/drivers/bridge.md).
 
 ### How do I run more than one process in a Docker container?
 
 This approach is discouraged for most use cases. For maximum efficiency and
 isolation, each container should address one specific area of concern. However,
 if you need to run multiple services within a single container, see
-[Run multiple services in a container](../config/containers/multi-service_container.md).
+[Run multiple services in a container](/engine/containers/multi-service_container.md).
 
 ### How do I report a security issue with Docker?
 

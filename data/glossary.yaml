@@ -28,7 +28,7 @@ Compose: |
   *Also known as Docker Compose*
 copy-on-write: |
   Docker uses a
-  [copy-on-write](/storage/storagedriver/#the-copy-on-write-cow-strategy)
+  [copy-on-write](/engine/storage/drivers/#the-copy-on-write-cow-strategy)
   technique and a [union file system](#union-file-system) for both images and
   containers to optimize resources and speed performance. Multiple copies of an
   entity share the same instance and each one makes only specific changes to its
@@ -45,7 +45,7 @@ copy-on-write: |
 
   For more about copy-on-write in the context of Docker, see [Understand images,
   containers, and storage
-  drivers](/storage/storagedriver/).
+  drivers](/engine/storage/drivers/).
 container: |
   A container is a runtime instance of a [docker image](#image).
 
@@ -176,7 +176,7 @@ member: |
 namespace: |
   A [Linux namespace](https://man7.org/linux/man-pages/man7/namespaces.7.html)
   is a Linux kernel feature that isolates and virtualizes system resources. Processes which are restricted to a namespace can only interact with resources or processes that are part of the same namespace. Namespaces
-  are an important part of Docker's isolation model. Namespaces exist for each type of resource, including `net` (networking), `mnt` (storage), `pid` (processes), `uts` (hostname control), and `user` (UID mapping). For more information about namespaces, see [Docker run reference](/engine/reference/run/) and [Isolate containers with a user namespace](/engine/security/userns-remap/).
+  are an important part of Docker's isolation model. Namespaces exist for each type of resource, including `net` (networking), `mnt` (storage), `pid` (processes), `uts` (hostname control), and `user` (UID mapping). For more information about namespaces, see [Docker run reference](/engine/containers/run/) and [Isolate containers with a user namespace](/engine/security/userns-remap/).
 node: |
   A [node](/engine/swarm/how-swarm-mode-works/nodes/) is a physical or virtual
   machine running an instance of the Docker Engine in [swarm mode](#swarm-mode).
@@ -229,7 +229,7 @@ service: |
 service account: |
   A service account is a Docker ID used for automated management of container images or containerized applications. Service accounts are typically used in automated workflows, and do not share Docker IDs with the members in a Docker Team or Docker Business subscription plan.
 service discovery: |
-  Swarm mode [container discovery](/network/drivers/overlay/#container-discovery) is a DNS component internal to the swarm that automatically assigns each service on an overlay network in the swarm a VIP and DNS entry. Containers on the network share DNS mappings for the service through gossip so any container on the network can access the service through its service name.
+  Swarm mode [container discovery](/engine/network/drivers/overlay/#container-discovery) is a DNS component internal to the swarm that automatically assigns each service on an overlay network in the swarm a VIP and DNS entry. Containers on the network share DNS mappings for the service through gossip so any container on the network can access the service through its service name.
 
   You don’t need to expose service-specific ports to make the service available to other services on the same overlay network. The swarm’s internal load balancer automatically distributes requests to the service VIP among the active tasks.
 swarm: |

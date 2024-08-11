@@ -372,7 +372,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 - New [interactive Compose CLI (experimental)](../compose/environment-variables/envvars.md#compose_menu).
 - Beta release of:
   - Air-Gapped Containers with [Settings Management](hardened-desktop/air-gapped-containers/_index.md).
-  - [Host networking](../network/drivers/host.md#docker-desktop) in Docker Desktop.
+  - [Host networking](/engine/network/drivers/host.md#docker-desktop) in Docker Desktop.
   - [Docker Debug](use-desktop/container.md#integrated-terminal) for running containers.
   - [Volumes Backup & Share extension](use-desktop/volumes.md) functionality available in the **Volumes** tab.
 
