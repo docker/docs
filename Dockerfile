@@ -1,4 +1,4 @@
-# syntax=docker/dockerfile:1
+# syntax=docker/dockerfile-upstream:master
 
 # ALPINE_VERSION sets the Alpine Linux version for all Alpine stages
 ARG ALPINE_VERSION=3.20
@@ -26,14 +26,11 @@ WORKDIR /tmp/hugo
 RUN wget -O "hugo.tar.gz" "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-${TARGETARCH}.tar.gz"
 RUN tar -xf "hugo.tar.gz" hugo
 
-FROM scratch AS ctx
-COPY --link . .
-
 # build-base is the base stage for building the site
 FROM base AS build-base
 COPY --from=hugo /tmp/hugo/hugo /bin/hugo
 COPY --from=node /src/node_modules /src/node_modules
-COPY --from=ctx . .
+COPY . .
 
 # dev is for local development with Docker Compose
 FROM build-base AS dev
@@ -49,7 +46,7 @@ RUN hugo --gc --minify -d /out -e $HUGO_ENV -b $DOCS_URL
 # lint lints markdown files
 FROM davidanson/markdownlint-cli2:v0.12.1 AS lint
 USER root
-RUN --mount=type=bind,from=ctx,target=. \
+RUN --mount=type=bind,target=. \
     /usr/local/bin/markdownlint-cli2 \
     "content/**/*.md" \
     "#content/engine/release-notes/*.md" \
@@ -106,7 +103,7 @@ RUN htmltest
 FROM alpine:${ALPINE_VERSION} AS unused-media
 RUN apk add --no-cache fd ripgrep
 WORKDIR /test
-RUN --mount=type=bind,from=ctx,target=. <<"EOT"
+RUN --mount=type=bind,target=. <<"EOT"
 set -ex
 ./scripts/test_unused_media.sh
 EOT
@@ -115,7 +112,7 @@ EOT
 FROM base AS pagefind
 ARG PAGEFIND_VERSION=1.1.0
 COPY --from=build /out ./public
-RUN --mount=type=bind,from=ctx,src=pagefind.yml,target=pagefind.yml \
+RUN --mount=type=bind,src=pagefind.yml,target=pagefind.yml \
     npx pagefind@v${PAGEFIND_VERSION} --output-path "/pagefind"
 
 # index generates a Pagefind index
@@ -127,7 +124,7 @@ FROM alpine:${ALPINE_VERSION} AS test-go-redirects
 WORKDIR /work
 RUN apk add yq
 COPY --from=build /out ./public
-RUN --mount=type=bind,from=ctx,target=. <<"EOT"
+RUN --mount=type=bind,target=. <<"EOT"
 set -ex
 ./scripts/test_go_redirects.sh
 EOT
