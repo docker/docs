@@ -109,6 +109,18 @@ set -ex
 ./scripts/test_unused_media.sh
 EOT
 
+# path-warnings checks for duplicate target paths
+FROM build-base AS path-warnings
+RUN hugo --printPathWarnings > /path-warnings.txt
+RUN <<EOT
+DUPLICATE_TARGETS=$(grep "Duplicate target paths" /path-warnings.txt)
+if [ ! -z "$DUPLICATE_TARGETS" ]; then
+    echo "$DUPLICATE_TARGETS"
+    echo "You probably have a duplicate alias defined. Please check your aliases."
+    exit 1
+fi
+EOT
+
 # pagefind installs the Pagefind runtime
 FROM base AS pagefind
 ARG PAGEFIND_VERSION=1.1.0

@@ -57,6 +57,7 @@ jobs:
           - unused-media
           - test-go-redirects
           - dockerfile-lint
+          - path-warnings
     steps:
       -
         name: Checkout
