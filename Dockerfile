@@ -45,7 +45,7 @@ ARG DOCS_URL
 RUN hugo --gc --minify -d /out -e $HUGO_ENV -b $DOCS_URL
 
 # lint lints markdown files
-FROM davidanson/markdownlint-cli2:v0.12.1 AS lint
+FROM davidanson/markdownlint-cli2:v0.13.0 AS lint
 USER root
 RUN --mount=type=bind,target=. \
     /usr/local/bin/markdownlint-cli2 \
