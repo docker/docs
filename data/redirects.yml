@@ -148,7 +148,7 @@
   - /go/compose-ecs-eol/
 "/compose/migrate/":
   - /go/compose-v1-eol/
-"/config/formatting/":
+"/engine/cli/formatting/":
   # Instructions on using Go templates to format CLI output with --format
   - /go/formatting/
 "/?utm_source=docker&utm_medium=inproductad&utm_campaign=20-11nurturecli_docs":
@@ -164,7 +164,7 @@
   # Instructions on running docker in rootless mode. This redirect is currently
   # used in the installation script at "get.docker.com"
   - /go/rootless/
-"/storage/storagedriver/select-storage-driver/":
+"/engine/storage/drivers/select-storage-driver/":
   - /go/storage-driver/
 "/docker-hub/vulnerability-scanning/":
   - /go/tip-scanning/
@@ -706,7 +706,7 @@
   - /go/build-ssh/
 "/reference/cli/docker/buildx/build/#build-context":
   - /go/build-additional-context/
-"/config/labels-custom-metadata/":
+"/engine/manage-resources/labels/":
   - /go/labels/
 "/build/ci/github-actions/build-summary/":
   - /go/build-summary/
@@ -726,7 +726,7 @@
   - /go/run-cloud-eap/
 
 # CLI backlinks
-"/config/filter/":
+"/engine/cli/filter/":
   - /go/filter/
 
 # Docker Init

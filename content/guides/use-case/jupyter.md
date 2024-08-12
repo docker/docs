@@ -114,7 +114,7 @@ managed by Docker.
 ## Save and access notebooks
 
 When you remove a container, all data in that container is deleted. To save
-notebooks outside of the container, you can use a [volume](/storage/volumes/).
+notebooks outside of the container, you can use a [volume](/engine/storage/volumes/).
 
 ### Run a JupterLab container with a volume
 
@@ -371,7 +371,7 @@ $ docker run --rm -p 8889:8888 YOUR-USER-NAME/my-jupyer-image start-notebook.py 
 
 ### Share your volume
 
-This example uses the Docker Desktop [Volumes Backup & Share](https://hub.docker.com/extensions/docker/volumes-backup-extension) extension. Alternatively, in the CLI you can [back up the volume](/storage/volumes/#back-up-a-volume) and then [push it using the ORAS CLI](/docker-hub/oci-artifacts/#push-a-volume).
+This example uses the Docker Desktop [Volumes Backup & Share](https://hub.docker.com/extensions/docker/volumes-backup-extension) extension. Alternatively, in the CLI you can [back up the volume](/engine/storage/volumes/#back-up-a-volume) and then [push it using the ORAS CLI](/docker-hub/oci-artifacts/#push-a-volume).
 
 1. Install the Volumes Backup & Share extension.
    1. Open the Docker Dashboard and select **Extensions**.

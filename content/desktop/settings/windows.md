@@ -163,8 +163,8 @@ File share settings are:
 > * Shared folders are designed to allow application code to be edited
 >   on the host while being executed in containers. For non-code items
 >   such as cache directories or databases, the performance will be much
->   better if they are stored in the Linux VM, using a [data volume](../../storage/volumes.md)
->   (named volume) or [data container](../../storage/volumes.md).
+>   better if they are stored in the Linux VM, using a [data volume](/engine/storage/volumes.md)
+>   (named volume) or [data container](/engine/storage/volumes.md).
 > * Docker Desktop sets permissions to read/write/execute for users, groups and
 >   others [0777 or a+rwx](https://chmodcommand.com/chmod-0777/).
 >   This is not configurable. See [Permissions errors on data directories for shared volumes](../troubleshoot/topics.md).

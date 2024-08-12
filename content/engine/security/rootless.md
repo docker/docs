@@ -380,7 +380,7 @@ Or add `net.ipv4.ip_unprivileged_port_start=0` to `/etc/sysctl.conf` (or
 
 Limiting resources with cgroup-related `docker run` flags such as `--cpus`, `--memory`, `--pids-limit`
 is supported only when running with cgroup v2 and systemd.
-See [Changing cgroup version](../../config/containers/runmetrics.md) to enable cgroup v2.
+See [Changing cgroup version](/engine/containers/runmetrics.md) to enable cgroup v2.
 
 If `docker info` shows `none` as `Cgroup Driver`, the conditions are not satisfied.
 When these conditions are not satisfied, rootless mode ignores the cgroup-related `docker run` flags.

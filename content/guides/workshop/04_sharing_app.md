@@ -111,7 +111,7 @@ new instance that has never seen this container image. To do this, you will use 
     > on all interfaces of the host, making it available to the outside world.
     >
     > For more information about how port mapping works, see
-    > [Networking](../../network/_index.md#published-ports).
+    > [Networking](/engine/network/_index.md#published-ports).
     { .tip }
 
 6. Select the 3000 badge when it appears.

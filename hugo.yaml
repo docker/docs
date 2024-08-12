@@ -282,9 +282,7 @@ module:
         - source: docs/deprecated.md
           target: content/engine/deprecated.md
         - source: docs/reference/run.md
-          target: content/engine/reference/run.md
-        - source: docs/reference/commandline/cli.md
-          target: content/engine/reference/commandline/cli.md
+          target: content/engine/containers/run.md
         - source: docs/reference/dockerd.md
           target: content/reference/cli/dockerd.md
 

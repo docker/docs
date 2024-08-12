@@ -33,7 +33,7 @@ Now, any traffic sent to port `8080` on your host machine will be forwarded to p
 
 > **Important**
 >
-> When a port is published, it's published to all network interfaces by default. This means any traffic that reaches your machine can access the published application. Be mindful of publishing databases or any sensitive information. [Learn more about published ports here](https://docs.docker.com/network/#published-ports).
+> When a port is published, it's published to all network interfaces by default. This means any traffic that reaches your machine can access the published application. Be mindful of publishing databases or any sensitive information. [Learn more about published ports here](/engine/network/#published-ports).
 { .important }
 
 ### Publishing to ephemeral ports
@@ -122,7 +122,7 @@ This example will launch the same application using Docker Compose:
 If you’d like to dive in deeper on this topic, be sure to check out the following resources:
 
 * [`docker container port` CLI reference](/reference/cli/docker/container/port/)
-* [Published ports](/network/#published-ports)
+* [Published ports](/engine/network/#published-ports)
 
 ## Next steps
 

@@ -6,7 +6,7 @@ aliases:
 - /compose/reference/envvars/
 ---
 
-Compose already comes with pre-defined environment variables. It also inherits common Docker CLI environment variables, such as `DOCKER_HOST` and `DOCKER_CONTEXT`. See [Docker CLI environment variable reference](/engine/reference/commandline/cli/#environment-variables) for details.
+Compose already comes with pre-defined environment variables. It also inherits common Docker CLI environment variables, such as `DOCKER_HOST` and `DOCKER_CONTEXT`. See [Docker CLI environment variable reference](/reference/cli/docker/#environment-variables) for details.
 
 This page contains information on how you can set or change the following pre-defined environment variables if you need to:
 
@@ -187,7 +187,7 @@ For more information, see [Migrate to Compose V2](../migrate.md).
 
 - `COMPOSE_API_VERSION`
     By default the API version is negotiated with the server. Use `DOCKER_API_VERSION`.  
-    See the [Docker CLI environment variable reference](../../../engine/reference/commandline/cli/#environment-variables) page.
+    See the [Docker CLI environment variable reference](/reference/cli/docker/#environment-variables) page.
 - `COMPOSE_HTTP_TIMEOUT`
 - `COMPOSE_TLS_VERSION`
 - `COMPOSE_FORCE_WINDOWS_HOST`
