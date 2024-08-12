@@ -83,7 +83,7 @@ This page contains download URLs, information about system requirements, and ins
 
    Note that Docker Desktop won't run if you do not agree to the terms. You can choose to accept the terms at a later date by opening Docker Desktop.
 
-   For more information, see [Docker Desktop Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement).  you also read the [FAQs](https://www.docker.com/pricing/faq).
+   For more information, see [Docker Desktop Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement). It is recommended that you also read the [FAQs](https://www.docker.com/pricing/faq).
 
 6. From the installation window, select either: 
    - **Use recommended settings (Requires password)**. This lets Docker Desktop automatically set the necessary configuration settings. 

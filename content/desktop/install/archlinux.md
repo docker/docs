@@ -14,7 +14,7 @@ aliases:
 > employees OR more than $10 million USD in annual revenue) requires a [paid
 > subscription](https://www.docker.com/pricing/).
 
-This page contains information on how to install, launch and upgrade Docker Desktop on an Arch-based distribution that Docker provides in addition to the supported platforms. Docker has not tested or verified the installation.
+This page contains information on how to install, launch and upgrade Docker Desktop on an Arch-based distribution. Docker has not tested or verified the installation.
 
 ## Prerequisites
 
