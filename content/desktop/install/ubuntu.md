@@ -23,7 +23,7 @@ This page contains information on how to install, launch and upgrade Docker Desk
 
 To install Docker Desktop successfully, you must:
 
-- Meet the [general system requirements](linux-install.md#general-system-requirements)
+- Meet the [general system requirements](linux-install.md#general-system-requirements).
 - Have a 64-bit version of either the LTS version Ubuntu Jammy Jellyfish 22.04, or the current non-LTS version. Docker Desktop is supported on `x86_64` (or `amd64`) architecture.
    > **Note**
    >
@@ -41,7 +41,7 @@ Recommended approach to install Docker Desktop on Ubuntu:
 1. Set up Docker's package repository.
    See step one of [Install using the `apt` repository](../../engine/install/ubuntu.md#install-using-the-repository).
 
-2. Download latest [DEB package](https://desktop.docker.com/linux/main/amd64/docker-desktop-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64). For checksums, see the [Release notes](../release-notes.md).
+2. Download the latest [DEB package](https://desktop.docker.com/linux/main/amd64/docker-desktop-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64). For checksums, see the [Release notes](../release-notes.md).
 
 3. Install the package with apt as follows:
 
@@ -49,7 +49,7 @@ Recommended approach to install Docker Desktop on Ubuntu:
    $ sudo apt-get update
    $ sudo apt-get install ./docker-desktop-<arch>.deb
    ```
-   
+
    Don't forget to substitute `<arch>` with the architecture you want.
 
    > **Note**

@@ -33,7 +33,7 @@ $ sudo pacman -S gnome-terminal
 2. [Install Docker client binary on Linux](../../engine/install/binaries.md#install-daemon-and-client-binaries-on-linux). On Arch-based distributions, users must install the Docker client binary.
    Static binaries for the Docker client are available for Linux (as `docker`).
 
-3. Download the Arch package from the [Release notes](../release-notes.md).
+3. Download the latest Arch package from the [Release notes](../release-notes.md).
 
 4. Install the package:
 

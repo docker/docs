@@ -53,7 +53,7 @@ This page contains download URLs, information about system requirements, and ins
   { .important }
 
 - At least 4 GB of RAM.
-- There is no longer a hard requirement to install Rosetta 2. There are a few optional command line tools that still require Rosetta 2 when using Darwin/AMD64. See [Known issues](../troubleshoot/known-issues.md). However, for the best experience, it's recommended that you install Rosetta 2. To install Rosetta 2 manually from the command line, run the following command:
+- For the best experience, it's recommended that you install Rosetta 2. There is no longer a hard requirement to install Rosetta 2, however there are a few optional command line tools that still require Rosetta 2 when using Darwin/AMD64. See [Known issues](../troubleshoot/known-issues.md). To install Rosetta 2 manually from the command line, run the following command:
 
    ```console
    $ softwareupdate --install-rosetta

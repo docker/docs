@@ -37,7 +37,7 @@ Recommended approach to install Docker Desktop on Debian:
 1. Set up Docker's `apt` repository.
    See step one of [Install using the `apt` repository](../../engine/install/debian.md#install-using-the-repository).
 
-2. Download latest [DEB package](https://desktop.docker.com/linux/main/amd64/docker-desktop-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64). For checksums, see the [Release notes](../release-notes.md).
+2. Download the latest [DEB package](https://desktop.docker.com/linux/main/amd64/docker-desktop-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64). For checksums, see the [Release notes](../release-notes.md).
 
 3. Install the package with apt as follows:
 
