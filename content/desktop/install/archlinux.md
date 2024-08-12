@@ -14,15 +14,11 @@ aliases:
 > employees OR more than $10 million USD in annual revenue) requires a [paid
 > subscription](https://www.docker.com/pricing/).
 
-This topic discusses installation of Docker Desktop from an [Arch package](https://desktop.docker.com/linux/main/amd64/docker-desktop-x86_64.pkg.tar.zst) that Docker provides in addition to the supported platforms. Docker has not tested or verified the installation.
-
-{{< button text="Arch package (experimental)" url="https://desktop.docker.com/linux/main/amd64/docker-desktop-x86_64.pkg.tar.zst?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64" >}}
-
-_For checksums, see [Release notes](../release-notes.md)_
+This page contains information on how to install, launch and upgrade Docker Desktop on an Arch-based distribution that Docker provides in addition to the supported platforms. Docker has not tested or verified the installation.
 
 ## Prerequisites
 
-To install Docker Desktop successfully, you must meet the [system requirements](linux-install.md#system-requirements).
+To install Docker Desktop successfully, you must meet the [general system requirements](linux-install.md#general-system-requirements).
 
 Additionally, for non-Gnome Desktop environments, `gnome-terminal` must be installed:
 
@@ -37,7 +33,7 @@ $ sudo pacman -S gnome-terminal
 2. [Install Docker client binary on Linux](../../engine/install/binaries.md#install-daemon-and-client-binaries-on-linux). On Arch-based distributions, users must install the Docker client binary.
    Static binaries for the Docker client are available for Linux (as `docker`).
 
-3. Download the Arch package from the [release](../release-notes.md) page.
+3. Download the Arch package from the [Release notes](../release-notes.md).
 
 4. Install the package:
 
@@ -45,11 +41,19 @@ $ sudo pacman -S gnome-terminal
    $ sudo pacman -U ./docker-desktop-<arch>.pkg.tar.zst
    ```
 
+   By default, Docker Desktop is installed at `/opt/docker-desktop`.
+
 ## Launch Docker Desktop
 
 {{< include "desktop-linux-launch.md" >}}
 
 ## Next steps
 
+- Explore [Docker's core subscriptions](https://www.docker.com/pricing/) to see what Docker can offer you.
 - Take a look at the [Docker workshop](../../guides/workshop/_index.md) to learn how to build an image and run it as a containerized application.
 - [Explore Docker Desktop](../use-desktop/index.md) and all its features.
+- [Troubleshooting](../troubleshoot/overview.md) describes common problems, workarounds, how to run and submit diagnostics, and submit issues.
+- [FAQs](../faqs/general.md) provide answers to frequently asked questions.
+- [Release notes](../release-notes.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
+- [Back up and restore data](../backup-and-restore.md) provides instructions
+  on backing up and restoring data related to Docker.

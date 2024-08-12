@@ -16,15 +16,11 @@ aliases:
 
 This page contains information on how to install, launch, and upgrade Docker Desktop on a Debian distribution.
 
-{{< button text="DEB package" url="https://desktop.docker.com/linux/main/amd64/docker-desktop-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64" >}}
-
-_For checksums, see [Release notes](../release-notes.md)_
-
 ## Prerequisites
 
 To install Docker Desktop successfully, you must:
 
-- Meet the [system requirements](linux-install.md#system-requirements).
+- Meet the [general system requirements](linux-install.md#general-system-requirements).
 - Have a 64-bit version of Debian 12.
 - For a Gnome Desktop environment, you must also install AppIndicator and KStatusNotifierItem [Gnome extensions](https://extensions.gnome.org/extension/615/appindicator-support/).
 
@@ -41,7 +37,7 @@ Recommended approach to install Docker Desktop on Debian:
 1. Set up Docker's `apt` repository.
    See step one of [Install using the `apt` repository](../../engine/install/debian.md#install-using-the-repository).
 
-2. Download latest [DEB package](https://desktop.docker.com/linux/main/amd64/docker-desktop-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64).
+2. Download latest [DEB package](https://desktop.docker.com/linux/main/amd64/docker-desktop-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64). For checksums, see the [Release notes](../release-notes.md).
 
 3. Install the package with apt as follows:
 
@@ -58,6 +54,8 @@ Recommended approach to install Docker Desktop on Debian:
   > ```text
   > N: Download is performed unsandboxed as root, as file '/home/user/Downloads/docker-desktop.deb' couldn't be accessed by user '_apt'. - pkgAcquire::Run (13: Permission denied)
   > ```
+
+   By default, Docker Desktop is installed at `/opt/docker-desktop`.
 
 There are a few post-install configuration steps done through the post-install script contained in the deb package.
 
@@ -83,5 +81,11 @@ $ sudo apt-get install ./docker-desktop-<arch>.deb
 
 ## Next steps
 
+- Explore [Docker's core subscriptions](https://www.docker.com/pricing/) to see what Docker can offer you.
 - Take a look at the [Docker workshop](../../guides/workshop/_index.md) to learn how to build an image and run it as a containerized application.
 - [Explore Docker Desktop](../use-desktop/index.md) and all its features.
+- [Troubleshooting](../troubleshoot/overview.md) describes common problems, workarounds, how to run and submit diagnostics, and submit issues.
+- [FAQs](../faqs/general.md) provide answers to frequently asked questions.
+- [Release notes](../release-notes.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
+- [Back up and restore data](../backup-and-restore.md) provides instructions
+  on backing up and restoring data related to Docker.

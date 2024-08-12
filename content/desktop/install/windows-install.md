@@ -34,6 +34,11 @@ _For checksums, see [Release notes](../release-notes.md)_
 
 ## System requirements
 
+> **Should I use Hyper-V or WSL?**
+>
+> Docker Desktop's functionality remains consistent on both WSL and Hyper-V, without a preference for either architecture. Hyper-V and WSL have their own advantages and disadvantages, depending on your specific set up and your planned use case. 
+{ .tip }
+
 {{< tabs >}}
 {{< tab name="WSL 2 backend, x86_64" >}}
 
@@ -53,22 +58,22 @@ _For checksums, see [Release notes](../release-notes.md)_
 
 For more information on setting up WSL 2 with Docker Desktop, see [WSL](../wsl/_index.md).
 
+> **Note**
+>
+> Docker only supports Docker Desktop on Windows for those versions of Windows that are still within [Microsoft’s servicing timeline](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet). Docker Desktop is not supported on server versions of Windows, such as Windows Server 2019 or Windows Server 2022. For more information on how to run containers on Windows Server, see [Microsoft's official documentation](https://learn.microsoft.com/virtualization/windowscontainers/quick-start/set-up-environment).
+
 > **Important**
 >
 > To run Windows containers, you need Windows 10 or Windows 11 Professional or Enterprise edition.
 > Windows Home or Education editions only allow you to run Linux containers.
 { .important }
 
-> **Note**
->
-> Docker only supports Docker Desktop on Windows for those versions of Windows that are still within [Microsoft’s servicing timeline](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet). Docker Desktop is not supported on server versions of Windows, such as Windows Server 2019 or Windows Server 2022. For more information on how to run containers on Windows Server, see [Microsoft's official documentation](https://learn.microsoft.com/virtualization/windowscontainers/quick-start/set-up-environment).
-
 {{< /tab >}}
 {{< tab name="Hyper-V backend, x86_64" >}}
 
 - Windows 11 64-bit: Home or Pro version 21H2 or higher, or Enterprise or Education version 21H2 or higher.
 - Windows 10 64-bit:
-  - We recommend Home or Pro 22H2 (build 19045) or higher, or Enterprise or Education 22H2 (build 19045) or higher. 
+  - Home or Pro 22H2 (build 19045) or higher, or Enterprise or Education 22H2 (build 19045) or higher is recommended. 
   - Minimum required is Home or Pro 21H2 (build 19044) or higher, or Enterprise or Education 21H2 (build 19044) or higher.
 - Turn on Hyper-V and Containers Windows features.
 - The following hardware prerequisites are required to successfully run Client
@@ -80,15 +85,15 @@ For more information on setting up WSL 2 with Docker Desktop, see [WSL](../wsl/_
     BIOS settings. For more information, see
     [Virtualization](../troubleshoot/topics.md#virtualization).
 
-> **Important**
->
-> To run Windows containers, you need Windows 10 or Windows 11 Professional or Enterprise edition.
-> Windows Home or Education editions only allow you to run Linux containers.
-{ .important }
-
 > **Note**
 >
 > Docker only supports Docker Desktop on Windows for those versions of Windows that are still within [Microsoft’s servicing timeline](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet). Docker Desktop is not supported on server versions of Windows, such as Windows Server 2019 or Windows Server 2022. For more information on how to run containers on Windows Server, see [Microsoft's official documentation](https://learn.microsoft.com/virtualization/windowscontainers/quick-start/set-up-environment).
+
+> **Important**
+>
+> To run Windows containers, you need Windows 10 or Windows 11 Professional or Enterprise edition.
+> Windows Home or Education editions only let you run Linux containers.
+{ .important }
 
 {{< /tab >}}
 {{< tab name="WSL 2 backend, Arm (Beta)" >}}
@@ -96,7 +101,7 @@ For more information on setting up WSL 2 with Docker Desktop, see [WSL](../wsl/_
 - WSL version 1.1.3.0 or later.
 - Windows 11 64-bit: Home or Pro version 21H2 or higher, or Enterprise or Education version 21H2 or higher.
 - Windows 10 64-bit: 
-  - We recommend Home or Pro 22H2 (build 19045) or higher, or Enterprise or Education 22H2 (build 19045) or higher. 
+  - Home or Pro 22H2 (build 19045) or higher, or Enterprise or Education 22H2 (build 19045) or higher is recommended. 
   - Minimum required is Home or Pro 21H2 (build 19044) or higher, or Enterprise or Education 21H2 (build 19044) or higher.
 - Turn on the WSL 2 feature on Windows. For detailed instructions, refer to the
   [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
@@ -116,11 +121,6 @@ For more information on setting up WSL 2 with Docker Desktop, see [WSL](../wsl/_
 
 {{< /tab >}}
 {{< /tabs >}}
-
-> **Should I use Hyper-V or WSL?**
->
-> Docker Desktop's functionality remains consistent on both WSL and Hyper-V, without a preference for either architecture. Hyper-V and WSL have their own advantages and disadvantages, depending on your specific set up and your planned use case. 
-{ .tip }
 
 Containers and images created with Docker Desktop are shared between all
 user accounts on machines where it is installed. This is because all Windows
@@ -166,8 +166,7 @@ again when you switch back.
 
 ## Install Docker Desktop on Windows
 
-{{< tabs >}}
-{{< tab name="Install interactively" >}}
+### Install interactively
 
 1. Download the installer using the download button at the top of the page, or from the [release notes](../release-notes.md).
 
@@ -175,20 +174,21 @@ again when you switch back.
 
 3. When prompted, ensure the **Use WSL 2 instead of Hyper-V** option on the Configuration page is selected or not depending on your choice of backend.
 
-   If your system only supports one of the two options, you will not be able to select which backend to use.
+   If your system only supports one of the two options, you won't be able to select which backend to use.
 
 4. Follow the instructions on the installation wizard to authorize the installer and proceed with the install.
 
 5. When the installation is successful, select **Close** to complete the installation process.
 
-If your admin account is different to your user account, you must add the user to the **docker-users** group:
+6. [Start Docker Desktop](#start-docker-desktop).
+
+If your administrator account is different to your user account, you must add the user to the **docker-users** group:
 1. Run **Computer Management** as an **administrator**.
 2. Navigate to **Local Users and Groups** > **Groups** > **docker-users**. 
 3. Right-click to add the user to the group.
 4. Sign out and sign back in for the changes to take effect.
 
-{{< /tab >}}
-{{< tab name="Install from the command line" >}}
+### Install from the command line
 
 After downloading `Docker Desktop Installer.exe`, run the following command in a terminal to install Docker Desktop:
 
@@ -248,16 +248,12 @@ If your admin account is different to your user account, you must add the user t
 ```console
 $ net localgroup docker-users <user> /add
 ```
-{{< /tab >}}
-{{< /tabs >}}
 
 ## Start Docker Desktop
 
 Docker Desktop does not start automatically after installation. To start Docker Desktop:
 
 1. Search for Docker, and select **Docker Desktop** in the search results.
-
-   ![Search for Docker app](images/docker-app-search.png)
 
 2. The Docker menu ({{< inline-image src="images/whale-x.svg" alt="whale menu" >}}) displays the Docker Subscription Service Agreement.
 
@@ -267,7 +263,7 @@ Docker Desktop does not start automatically after installation. To start Docker 
 
    Note that Docker Desktop won't run if you do not agree to the terms. You can choose to accept the terms at a later date by opening Docker Desktop.
 
-   For more information, see [Docker Desktop Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement/). We recommend that you also read the [FAQs](https://www.docker.com/pricing/faq).
+   For more information, see [Docker Desktop Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement/). It is recommended that you read the [FAQs](https://www.docker.com/pricing/faq).
 
 > **Tip**
 >
