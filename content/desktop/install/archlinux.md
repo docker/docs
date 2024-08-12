@@ -41,6 +41,8 @@ $ sudo pacman -S gnome-terminal
    $ sudo pacman -U ./docker-desktop-<arch>.pkg.tar.zst
    ```
 
+   Don't forget to substitute `<arch>` with the architecture you want.
+
    By default, Docker Desktop is installed at `/opt/docker-desktop`.
 
 ## Launch Docker Desktop

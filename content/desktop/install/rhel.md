@@ -98,6 +98,8 @@ To install Docker Desktop on RHEL:
    $ sudo dnf install ./docker-desktop-<arch>-rhel.rpm
    ```
 
+   Don't forget to substitute `<arch>` with the architecture you want.
+
 There are a few post-install configuration steps done through the post-install script contained in the RPM package.
 
 The post-install script:
