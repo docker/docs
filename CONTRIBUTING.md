@@ -51,11 +51,7 @@ You can use Docker (surprise) to build and serve the files locally.
 > This requires Docker Desktop version **4.24** or later, or Docker Engine with Docker
 > Compose version [**2.22**](https://docs.docker.com/compose/file-watch/) or later.
 
-1. Fork the docker/docs repository.
-
-   1. Go to the [docker/docs](https://github.com/docker/docs) repository.
-   2. In the top-right corner of the page, select **Fork**.
-   3. Specify the **Owner** as yourself and then select **Create fork**.
+1. [Fork the docker/docs repository.](https://github.com/docker/docs/fork)
 
 2. Clone your forked docs repository:
 
