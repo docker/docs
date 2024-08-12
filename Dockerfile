@@ -1,4 +1,5 @@
 # syntax=docker/dockerfile-upstream:master
+# check=skip=InvalidBaseImagePlatform
 
 # ALPINE_VERSION sets the Alpine Linux version for all Alpine stages
 ARG ALPINE_VERSION=3.20
