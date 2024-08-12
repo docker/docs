@@ -74,6 +74,10 @@ If you need to specify volume driver options, you must use `--mount`.
   - The `destination` takes as its value the path where the file or directory
     is mounted in the container. Can be specified as `destination`, `dst`,
     or `target`.
+  - The `volume-subpath` option takes a path to a subdirectory within the
+    volume to mount into the container. The subdirectory must exist in the
+    volume before the volume is mounted to a container.
+    See [Mount a volume subdirectory](#mount-a-volume-subdirectory).
   - The `readonly` option, if present, causes the bind mount to be [mounted into
     the container as read-only](#use-a-read-only-volume). Can be specified as `readonly` or `ro`.
   - The `volume-opt` option, which can be specified more than once, takes a
@@ -403,6 +407,43 @@ $ docker container rm nginxtest
 
 $ docker volume rm nginx-vol
 ```
+
+## Mount a volume subdirectory
+
+When you mount a volume to a container, you can specify a subdirectory of the
+volume to use, with the `volume-subpath` parameter for the `--mount` flag. The
+subdirectory that you specify must exist in the volume before you attempt to
+mount it into a container; if it doesn't exist, the mount fails.
+
+Specifying `volume-subpath` is useful if you only want to share a specific
+portion of a volume with a container. Say for example that you have multiple
+containers running and you want to store logs from each container in a shared
+volume. You can create a subdirectory for each container in the shared volume,
+and mount the subdirectory to the container.
+
+The following example creates a `logs` volume and initiates the subdirectories
+`app1` and `app2` in the volume. It then starts two containers and mounts one
+of the subdirectories of the `logs` volume to each container. This example
+assumes that the processes in the containers write their logs to
+`/var/log/app1` and `/var/log/app2`.
+
+```console
+$ docker volume create logs
+$ docker run --rm \
+  --mount src=logs,dst=/logs \
+  alpine mkdir -p /logs/app1 /logs/app2
+$ docker run -d \
+  --name=app1 \
+  --mount src=logs,dst=/var/log/app1/,volume-subpath=app1 \
+  app1:latest
+$ docker run -d \
+  --name=app2 \
+  --mount src=logs,dst=/var/log/app2,volume-subpath=app2 \
+  app2:latest
+```
+
+With this setup, the containers write their logs to separate subdirectories of
+the `logs` volume. The containers can't access the other container's logs.
 
 ## Share data between machines
 
