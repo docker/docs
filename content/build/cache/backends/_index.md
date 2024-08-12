@@ -168,3 +168,16 @@ $ docker buildx build --push -t <registry>/<image> \
 
 This property is only meaningful with the `--cache-to` flag. When fetching
 cache, BuildKit will auto-detect the correct media types to use.
+
+By default, the OCI media type generates an image index for the cache image.
+Some OCI registries, such as Amazon ECR, don't support the image index media
+type: `application/vnd.oci.image.index.v1+json`. If you export cache images to
+ECR, or any other registry that doesn't support image indices, set the
+`image-manifest` parameter to `true` to generate a single image manifest
+instead of an image index for the cache image:
+
+```console
+$ docker buildx build --push -t <registry>/<image> \
+  --cache-to type=registry,ref=<registry>/<cache-image>,oci-mediatypes=true,image-manifest=true \
+  --cache-from type=registry,ref=<registry>/<cache-image> .
+```
