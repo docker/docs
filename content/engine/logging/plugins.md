@@ -5,6 +5,7 @@ keywords: logging, driver, plugins, monitoring
 aliases:
   - /engine/admin/logging/plugins/
   - /engine/reference/logging/plugins/
+  - /config/containers/logging/plugins/
 ---
 
 Docker logging plugins allow you to extend and customize Docker's logging

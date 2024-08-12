@@ -10,6 +10,7 @@ aliases:
   - /engine/admin/logging/logentries/
   - /engine/admin/logging/overview/
   - /engine/admin/logging/
+  - /config/containers/logging/configure/
 ---
 
 Docker includes multiple logging mechanisms to help you get information from
