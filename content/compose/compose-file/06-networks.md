@@ -73,7 +73,7 @@ networks:
     driver: bridge
 ```
 
-For more information on drivers and available options, see [Network drivers](../../network/drivers/_index.md).
+For more information on drivers and available options, see [Network drivers](/engine/network/drivers/_index.md).
 
 ### driver_opts
 
@@ -103,7 +103,7 @@ networks:
 
 ### enable_ipv6
 
-`enable_ipv6` enables IPv6 networking. For an example, see step four of [Create an IPv6 network](../../config/daemon/ipv6.md).
+`enable_ipv6` enables IPv6 networking. For an example, see step four of [Create an IPv6 network](/engine/daemon/ipv6.md).
 
 ### external
 

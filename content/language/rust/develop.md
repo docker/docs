@@ -35,7 +35,7 @@ $ docker network create postgresnet
 ```
 
 Now you can run PostgreSQL in a container and attach to the volume and network that you created previously. Docker pulls the image from Hub and runs it for you locally.
-In the following command, option `--mount` is for starting the container with a volume. For more information, see [Docker volumes](../../storage/volumes.md).
+In the following command, option `--mount` is for starting the container with a volume. For more information, see [Docker volumes](/engine/storage/volumes.md).
 
 ```console
 $ docker run --rm -d --mount \
@@ -314,7 +314,7 @@ You should receive the following response:
 In this section, you took a look at setting up your Compose file to run your Rust application and database with a single command.
 
 Related information:
- - [Docker volumes](../../storage/volumes.md)
+ - [Docker volumes](/engine/storage/volumes.md)
  - [Compose overview](../../compose/index.md)
 
 ## Next steps

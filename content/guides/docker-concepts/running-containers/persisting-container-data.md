@@ -165,9 +165,9 @@ There are a few methods to remove volumes, including the following:
 
 The following resources will help you learn more about volumes:
 
-- [Manage data in Docker](/storage)
-- [Volumes](/storage/volumes)
-- [Volume mounts (`docker run` reference)](/engine/reference/run/#volume-mounts)
+- [Manage data in Docker](/engine/storage)
+- [Volumes](/engine/storage/volumes)
+- [Volume mounts](/engine/containers/run/#volume-mounts)
 
 
 ## Next steps

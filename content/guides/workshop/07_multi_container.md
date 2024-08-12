@@ -313,7 +313,7 @@ container. You learned a little bit about container networking and service disco
 
 Related information:
  - [docker CLI reference](/reference/cli/docker/)
- - [Networking overview](../../network/_index.md)
+ - [Networking overview](/engine/network/_index.md)
 
 ## Next steps
 

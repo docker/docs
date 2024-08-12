@@ -51,7 +51,7 @@ The following three network concepts are important to swarm services:
 
 > **Tip**
 >
-> See also [Networking overview](../../network/index.md) for more details about Swarm networking in general.
+> See also [Networking overview](/engine/network/_index.md) for more details about Swarm networking in general.
 { .tip }
 
 ## Firewall considerations
@@ -248,7 +248,7 @@ endpoint mode with an external load balancer, or use multiple smaller overlay ne
 
 Management and control plane data related to a swarm is always encrypted.
 For more details about the encryption mechanisms, see the
-[Docker swarm mode overlay network security model](../../network/drivers/overlay.md).
+[Docker swarm mode overlay network security model](/engine/network/drivers/overlay.md).
 
 Application data among swarm nodes is not encrypted by default. To encrypt this
 traffic on a given overlay network, use the `--opt encrypted` flag on `docker
@@ -479,5 +479,5 @@ preferred because it is somewhat self-documenting.
 * [Deploy services to a swarm](services.md)
 * [Swarm administration guide](admin_guide.md)
 * [Swarm mode tutorial](swarm-tutorial/index.md)
-* [Networking overview](../../network/index.md)
+* [Networking overview](/engine/network/_index.md)
 * [Docker CLI reference](../../reference/cli/docker/)

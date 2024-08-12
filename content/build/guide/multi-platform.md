@@ -241,7 +241,7 @@ Related information:
 
 - [Multi-platfom images](../building/multi-platform.md)
 - [containerd image store (Docker Desktop)](../../desktop/containerd.md)
-- [containerd image store (Docker Engine)](../../storage/containerd.md)
+- [containerd image store (Docker Engine)](/engine/storage/containerd.md)
 
 You may also want to consider checking out
 [xx - Dockerfile cross-compilation helpers](https://github.com/tonistiigi/xx).

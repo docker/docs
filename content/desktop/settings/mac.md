@@ -169,8 +169,8 @@ File share settings are:
 > * Shared folders are designed to allow application code to be edited
 >   on the host while being executed in containers. For non-code items
 >   such as cache directories or databases, the performance will be much
->   better if they are stored in the Linux VM, using a [data volume](../../storage/volumes.md)
->   (named volume) or [data container](../../storage/volumes.md).
+>   better if they are stored in the Linux VM, using a [data volume](/engine/storage/volumes.md)
+>   (named volume) or [data container](/engine/storage/volumes.md).
 > * If you share the whole of your home directory into a container, MacOS may
 >   prompt you to give Docker access to personal areas of your home directory such as
 >   your Reminders or Downloads.

@@ -24,17 +24,18 @@ $ docker buildx build --push -t <registry>/<image> \
 The following table describes the available CSV parameters that you can pass to
 `--cache-to` and `--cache-from`.
 
-| Name                | Option       | Type                    | Default | Description                                                          |
-| ------------------- | ------------ | ----------------------- | ------- | -------------------------------------------------------------------- |
-| `src`               | `cache-from` | String                  |         | Path of the local directory where cache gets imported from.          |
-| `digest`            | `cache-from` | String                  |         | Digest of manifest to import, see [cache versioning][4].             |
-| `dest`              | `cache-to`   | String                  |         | Path of the local directory where cache gets exported to.            |
-| `mode`              | `cache-to`   | `min`,`max`             | `min`   | Cache layers to export, see [cache mode][1].                         |
-| `oci-mediatypes`    | `cache-to`   | `true`,`false`          | `true`  | Use OCI media types in exported manifests, see [OCI media types][2]. |
-| `compression`       | `cache-to`   | `gzip`,`estargz`,`zstd` | `gzip`  | Compression type, see [cache compression][3].                        |
-| `compression-level` | `cache-to`   | `0..22`                 |         | Compression level, see [cache compression][3].                       |
-| `force-compression` | `cache-to`   | `true`,`false`          | `false` | Forcibly apply compression, see [cache compression][3].              |
-| `ignore-error`      | `cache-to`   | Boolean                 | `false` | Ignore errors caused by failed cache exports.                        |
+| Name                | Option       | Type                    | Default | Description                                                                                                                     |
+| ------------------- | ------------ | ----------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `src`               | `cache-from` | String                  |         | Path of the local directory where cache gets imported from.                                                                     |
+| `digest`            | `cache-from` | String                  |         | Digest of manifest to import, see [cache versioning][4].                                                                        |
+| `dest`              | `cache-to`   | String                  |         | Path of the local directory where cache gets exported to.                                                                       |
+| `mode`              | `cache-to`   | `min`,`max`             | `min`   | Cache layers to export, see [cache mode][1].                                                                                    |
+| `oci-mediatypes`    | `cache-to`   | `true`,`false`          | `true`  | Use OCI media types in exported manifests, see [OCI media types][2].                                                            |
+| `image-manifest`    | `cache-to`   | `true`,`false`          | `false` | When using OCI media types, generate an image manifest instead of an image index for the cache image, see [OCI media types][2]. |
+| `compression`       | `cache-to`   | `gzip`,`estargz`,`zstd` | `gzip`  | Compression type, see [cache compression][3].                                                                                   |
+| `compression-level` | `cache-to`   | `0..22`                 |         | Compression level, see [cache compression][3].                                                                                  |
+| `force-compression` | `cache-to`   | `true`,`false`          | `false` | Forcibly apply compression, see [cache compression][3].                                                                         |
+| `ignore-error`      | `cache-to`   | Boolean                 | `false` | Ignore errors caused by failed cache exports.                                                                                   |
 
 [1]: _index.md#cache-mode
 [2]: _index.md#oci-media-types

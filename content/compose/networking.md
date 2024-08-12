@@ -7,7 +7,7 @@ title: Networking in Compose
 {{< include "compose-eol.md" >}}
 
 By default Compose sets up a single
-[network](../reference/cli/docker/network/create.md) for your app. Each
+[network](/reference/cli/docker/network/create.md) for your app. Each
 container for a service joins the default network and is both reachable by
 other containers on that network, and discoverable by the service's name.
 
@@ -85,13 +85,13 @@ See the [links reference](compose-file/05-services.md#links) for more informatio
 
 ## Multi-host networking
 
-When deploying a Compose application on a Docker Engine with [Swarm mode enabled](../engine/swarm/index.md),
+When deploying a Compose application on a Docker Engine with [Swarm mode enabled](../engine/swarm/_index.md),
 you can make use of the built-in `overlay` driver to enable multi-host communication.
 
 Overlay networks are always created as `attachable`. You can optionally set the [`attachable`](compose-file/06-networks.md#attachable) property to `false`.
 
-Consult the [Swarm mode section](../engine/swarm/index.md), to see how to set up
-a Swarm cluster, and the [Getting started with multi-host networking](../network/network-tutorial-overlay.md)
+Consult the [Swarm mode section](../engine/swarm/_index.md), to see how to set up
+a Swarm cluster, and the [Getting started with multi-host networking](/engine/network/tutorials/overlay.md)
 to learn about multi-host overlay networks.
 
 ## Specify custom networks

@@ -240,7 +240,7 @@ services:
 
 Whenever a file is changed, Compose syncs the file to the corresponding location under `/code` inside the container. Once copied, the bundler updates the running application without a restart.
 
-For more information on how Compose Watch works, see [Use Compose Watch](file-watch.md). Alternatively, see [Manage data in containers](../storage/volumes.md) for other options.
+For more information on how Compose Watch works, see [Use Compose Watch](file-watch.md). Alternatively, see [Manage data in containers](/engine/storage/volumes.md) for other options.
 
 > **Note**
 >

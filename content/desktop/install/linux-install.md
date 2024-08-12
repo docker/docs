@@ -74,7 +74,7 @@ $ sudo systemctl disable docker docker.socket containerd
 
 The Docker CLI can be used to interact with multiple Docker Engines. For example,
 you can use the same Docker CLI to control a local Docker Engine and to control
-a remote Docker Engine instance running in the cloud. [Docker Contexts](../../engine/context/working-with-contexts.md)
+a remote Docker Engine instance running in the cloud. [Docker Contexts](/engine/manage-resources/contexts.md)
 allow you to switch between Docker Engines instances.
 
 When installing Docker Desktop, a dedicated "desktop-linux" context is created to
@@ -112,7 +112,7 @@ desktop-linux
 Current context is now "desktop-linux"
 ```
 
-Refer to the [Docker Context documentation](../../engine/context/working-with-contexts.md) for more details.
+Refer to the [Docker Context documentation](/engine/manage-resources/contexts.md) for more details.
 
 {{< /accordion >}}
 
@@ -241,7 +241,7 @@ Sign out and sign back in so that your group membership is re-evaluated.
 
 - Explore [Docker's core subscriptions](https://www.docker.com/pricing/) to see what Docker can offer you.
 - [Get started with Docker](../../guides/getting-started/_index.md).
-- [Explore Docker Desktop](../use-desktop/index.md) and all its features.
+- [Explore Docker Desktop](../use-desktop/_index.md) and all its features.
 - [Troubleshooting](../troubleshoot/overview.md) describes common problems, workarounds, how to run and submit diagnostics, and submit issues.
 - [FAQs](../faqs/general.md) provide answers to frequently asked questions.
 - [Release notes](../release-notes.md) lists component updates, new features, and improvements associated with Docker Desktop releases.

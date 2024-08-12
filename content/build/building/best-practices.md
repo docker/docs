@@ -145,14 +145,14 @@ database, and an in-memory cache in a decoupled manner.
 
 Limiting each container to one process is a good rule of thumb, but it's not a
 hard and fast rule. For example, not only can containers be
-[spawned with an init process](../../engine/reference/run.md#specify-an-init-process),
+[spawned with an init process](/engine/containers/run.md#specify-an-init-process),
 some programs might spawn additional processes of their own accord. For
 instance, [Celery](https://docs.celeryproject.org/) can spawn multiple worker
 processes, and [Apache](https://httpd.apache.org/) can create one process per
 request.
 
 Use your best judgment to keep containers as clean and modular as possible. If
-containers depend on each other, you can use [Docker container networks](../../network/index.md)
+containers depend on each other, you can use [Docker container networks](/engine/network/_index.md)
 to ensure that these containers can communicate.
 
 ## Sort multi-line arguments
@@ -308,10 +308,10 @@ LABEL vendor=ACME\ Incorporated \
       com.example.release-date="2015-02-12"
 ```
 
-See [Understanding object labels](../../config/labels-custom-metadata.md)
+See [Understanding object labels](/engine/manage-resources/labels.md)
 for guidelines about acceptable label keys and values. For information about
 querying labels, refer to the items related to filtering in
-[Managing labels on objects](../../config/labels-custom-metadata.md#manage-labels-on-objects).
+[Managing labels on objects](/engine/manage-resources/labels.md#manage-labels-on-objects).
 See also [LABEL](../../reference/dockerfile.md#label) in the Dockerfile reference.
 
 ### RUN

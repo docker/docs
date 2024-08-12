@@ -117,11 +117,11 @@ $ sudo systemctl disable containerd.service
 You can use systemd unit files to configure the Docker service on startup,
 for example to add an HTTP proxy, set a different directory or partition for the
 Docker runtime files, or other customizations. For an example, see
-[Configure the daemon to use a proxy](../../config/daemon/proxy.md#systemd-unit-file).
+[Configure the daemon to use a proxy](/engine/daemon/proxy.md#systemd-unit-file).
 
 ## Configure default logging driver
 
-Docker provides [logging drivers](../../config/containers/logging/index.md) for
+Docker provides [logging drivers](/engine/logging/_index.md) for
 collecting and viewing log data from all containers running on a host. The
 default logging driver, `json-file`, writes log data to JSON-formatted files on
 the host filesystem. Over time, these log files expand in size, leading to
@@ -131,13 +131,13 @@ To avoid issues with overusing disk for log data, consider one of the following
 options:
 
 - Configure the `json-file` logging driver to turn on
-  [log rotation](../../config/containers/logging/json-file.md).
+  [log rotation](/engine/logging/drivers/json-file.md).
 - Use an
-  [alternative logging driver](../../config/containers/logging/configure.md#configure-the-default-logging-driver)
-  such as the ["local" logging driver](../../config/containers/logging/local.md)
+  [alternative logging driver](/engine/logging/configure.md#configure-the-default-logging-driver)
+  such as the ["local" logging driver](/engine/logging/drivers/local.md)
   that performs log rotation by default.
 - Use a logging driver that sends logs to a remote logging aggregator.
 
 ## Next steps
 
-- Take a look at the [Docker workshop](../../guides/workshop/_index.md) to learn how to build an image and run it as a containerized application.
+- Take a look at the [Docker workshop](/guides/workshop/_index.md) to learn how to build an image and run it as a containerized application.

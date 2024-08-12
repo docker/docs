@@ -2303,7 +2303,7 @@ naming scheme accordingly before upgrading.
 - Added support for `extra_hosts` in build configuration
 
 - Added support for the [long syntax](compose-file/legacy-versions.md) for volume entries, as previously introduced in the 3.2 format.
-  Using this syntax will create [mounts](../storage/bind-mounts.md) instead of volumes.
+  Using this syntax will create [mounts](/engine/storage/bind-mounts.md) instead of volumes.
 
 #### Compose file version 2.1 and up
 

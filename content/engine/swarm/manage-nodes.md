@@ -130,9 +130,9 @@ $ docker node update --label-add foo --label-add bar=baz node-1
 node-1
 ```
 
-The labels you set for nodes using docker node update apply only to the node
-entity within the swarm. Do not confuse them with the docker daemon labels for
-[dockerd](../../config/labels-custom-metadata.md).
+The labels you set for nodes using `docker node update` apply only to the node
+entity within the swarm. Do not confuse them with the Docker daemon labels for
+[dockerd](/engine/manage-resources/labels.md).
 
 Therefore, node labels can be used to limit critical tasks to nodes that meet
 certain requirements. For example, schedule only on machines where special

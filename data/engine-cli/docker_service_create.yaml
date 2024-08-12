@@ -412,6 +412,17 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: oom-score-adj
+      value_type: int64
+      default_value: "0"
+      description: Tune host's OOM preferences (-1000 to 1000)
+      deprecated: false
+      hidden: false
+      min_api_version: "1.46"
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: placement-pref
       value_type: pref
       description: Add a placement preference
@@ -1376,7 +1387,7 @@ examples: |-
     | `node.platform.os`   | Node operating system          | `node.platform.os==windows`                   |
     | `node.platform.arch` | Node architecture              | `node.platform.arch==x86_64`                  |
     | `node.labels`        | User-defined node labels       | `node.labels.security==high`                  |
-    | `engine.labels`      | Docker Engine's labels         | `engine.labels.operatingsystem==ubuntu-22.04` |
+    | `engine.labels`      | Docker Engine's labels         | `engine.labels.operatingsystem==ubuntu-24.04` |
 
     `engine.labels` apply to Docker Engine labels like operating system, drivers,
     etc. Swarm administrators add `node.labels` for operational purposes by using
@@ -1618,7 +1629,7 @@ examples: |-
     The swarm extends my-network to each node running the service.
 
     Containers on the same network can access each other using
-    [service discovery](/network/drivers/overlay/#container-discovery).
+    [service discovery](/engine/network/drivers/overlay/#container-discovery).
 
     Long form syntax of `--network` allows to specify list of aliases and driver options:
     `--network name=my-network,alias=web1,driver-opt=field1=value1`

@@ -46,11 +46,11 @@ pass to `--driver-opt`:
 | `default-load`   | Boolean | `false`          | Automatically load images to the Docker Engine image store.                                                            |
 | `network`        | String  |                  | Sets the network mode for the container.                                                                               |
 | `cgroup-parent`  | String  | `/docker/buildx` | Sets the cgroup parent of the container if Docker is using the "cgroupfs" driver.                                      |
-| `restart-policy` | String  | `unless-stopped` | Sets the container's [restart policy](../../config/containers/start-containers-automatically.md#use-a-restart-policy). |
+| `restart-policy` | String  | `unless-stopped` | Sets the container's [restart policy](/engine/containers/start-containers-automatically.md#use-a-restart-policy).      |
 | `env.<key>`      | String  |                  | Sets the environment variable `key` to the specified `value` in the container.                                         |
 
 Before you configure the resource limits for the container,
-read about [configuring runtime resource constraints for containers](../../config/containers/resource_constraints/).
+read about [configuring runtime resource constraints for containers](/engine/containers/resource_constraints/).
 
 ## Usage
 
