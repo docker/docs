@@ -28,8 +28,7 @@ The structure of the sidebar navigation on the site is defined in
 [`/data/toc.yaml`](./data/toc.yaml). To rename or change the location of a page
 in the left-hand navigation, edit the `toc.yaml` file.
 
-You can edit the files directly on GitHub using the web editor, or
-[locally](#local-setup), whichever way you prefer.
+You must fork this repository to create a pull request to propose changes. For more details, see [Local setup](#local-setup).
 
 ### General guidelines
 
@@ -46,26 +45,40 @@ Help make reviewing easier by following these guidelines:
 
 ### Local setup
 
-You can use Docker (surprise) to build and serve the files locally. 
+You can use Docker (surprise) to build and serve the files locally.
 
-> [!IMPORTANT]  
+> [!IMPORTANT]
 > This requires Docker Desktop version **4.24** or later, or Docker Engine with Docker
 > Compose version [**2.22**](https://docs.docker.com/compose/file-watch/) or later.
 
-1. Clone the repository:
+1. Fork the docker/docs repository.
+
+   1. Go to the [docker/docs](https://github.com/docker/docs) repository.
+   2. In the top-right corner of the page, select **Fork**.
+   3. Specify the **Owner** as yourself and then select **Create fork**.
+
+2. Clone your forked docs repository:
 
    ```console
-   $ git clone git@github.com:docker/docs.git
+   $ git clone https://github.com/<your-username>/docs
    $ cd docs
    ```
 
-2. Check out a branch:
+3. Configure Git to sync your docs fork with the upstream docker/docs
+   repository and prevent accidental pushes to the upstream repository:
+
+   ```console
+   $ git remote add upstream https://github.com/docker/docs.git
+   $ git remote set-url --push upstream no_pushing
+   ```
+
+4. Check out a branch:
 
    ```console
    $ git checkout -b <branch>
    ```
 
-3. Start the local development server:
+5. Start the local development server:
 
    ```console
    $ docker compose watch
