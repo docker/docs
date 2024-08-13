@@ -111,8 +111,8 @@ area/configuration:
 area/extensions:
   - changed-files:
       - any-glob-to-any-file:
-          - content/desktop/extensions/**
-          - content/desktop/extensions-sdk/**
+          - content/extensions/**
+          - content/extensions/extensions-sdk/**
 
 area/samples:
   - changed-files:

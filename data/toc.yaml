@@ -983,51 +983,55 @@ Reference:
         path: /docker-hub/api/deprecated/
   - sectiontitle: Docker Extension SDK API
     section:
-      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/DesktopUI/
+      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/DesktopUI/
         title: DesktopUI
-      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/Dialog/
+      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/Dialog/
         title: Dialog
-      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/Docker/
+      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/Docker/
         title: Docker
-      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/DockerCommand/
+      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/DockerCommand/
         title: DockerCommand
-      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/DockerDesktopClient/
+      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/DockerDesktopClient/
         title: DockerDesktopClient
-      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/Exec/
+      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/Exec/
         title: Exec
-      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/ExecProcess/
+      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/ExecProcess/
         title: ExecProcess
-      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/ExecResult/
+      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/ExecResult/
         title: ExecResult
-      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/ExecStreamOptions/
+      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/ExecStreamOptions/
         title: ExecStreamOptions
-      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/Extension/
+      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/Extension/
         title: Extension
-      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/ExtensionCli/
+      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/ExtensionCli/
         title: ExtensionCli
-      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/ExtensionHost/
+      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/ExtensionHost/
         title: ExtensionHost
-      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/ExtensionVM/
+      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/ExtensionVM/
         title: ExtensionVM
-      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/Host/
+      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/Host/
         title: Host
-      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/HttpService/
+      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/HttpService/
         title: HttpService
-      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/NavigationIntents/
+      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/NavigationIntents/
         title: NavigationIntents
-      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/OpenDialogResult/
+      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/OpenDialogResult/
         title: OpenDialogResult
-      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/RawExecResult/
+      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/RawExecResult/
         title: RawExecResult
-      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/RequestConfig/
+      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/RequestConfig/
         title: RequestConfig
-      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/RequestConfigV0/
+      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/RequestConfigV0/
         title: RequestConfigV0
-      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/Toast/
+      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/ServiceError/
+        title: ServiceError
+      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/ServiceError/
+        title: SpawnOptions
+      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/Toast/
         title: Toast
-      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/ExecResultV0/
+      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/ExecResultV0/
         title: ExecResultV0
-      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/BackendV0/
+      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/BackendV0/
         title: BackendV0
 - sectiontitle: Compose file reference
   section:
@@ -1346,100 +1350,100 @@ Manuals:
 
 - sectiontitle: Docker Extensions
   section:
-    - path: /desktop/extensions/
+    - path: /extensions/
       title: Overview
     - sectiontitle: Extensions on Docker Desktop
       section:
-        - path: /desktop/extensions/marketplace/
+        - path: /extensions/marketplace/
           title: Manage Marketplace extensions
-        - path: /desktop/extensions/non-marketplace/
+        - path: /extensions/non-marketplace/
           title: Manage non-Marketplace extensions
-        - path: /desktop/extensions/settings-feedback/
+        - path: /extensions/settings-feedback/
           title: Change settings and give feedback
-        - path: /desktop/extensions/private-marketplace/
+        - path: /extensions/private-marketplace/
           title: Configure a private Marketplace (Beta)
     - sectiontitle: Extensions SDK
       section:
-        - path: /desktop/extensions-sdk/
+        - path: /extensions/extensions-sdk/
           title: Overview
-        - path: /desktop/extensions-sdk/process/
+        - path: /extensions/extensions-sdk/process/
           title: The build and publish process
-        - path: /desktop/extensions-sdk/quickstart/
+        - path: /extensions/extensions-sdk/quickstart/
           title: Quickstart
         - sectiontitle: "Part one: Build"
           section:
             - title: Create a simple extension
-              path: /desktop/extensions-sdk/build/minimal-frontend-extension/
+              path: /extensions/extensions-sdk/build/minimal-frontend-extension/
             - title: Create an advanced frontend extension
-              path: /desktop/extensions-sdk/build/frontend-extension-tutorial/
+              path: /extensions/extensions-sdk/build/frontend-extension-tutorial/
             - title: Add a backend to your extension
-              path: /desktop/extensions-sdk/build/backend-extension-tutorial/
+              path: /extensions/extensions-sdk/build/backend-extension-tutorial/
         - sectiontitle: "Part two: Publish"
           section:
             - title: Overview
-              path: /desktop/extensions-sdk/extensions/
+              path: /extensions/extensions-sdk/extensions/
             - title: Labels
-              path: /desktop/extensions-sdk/extensions/labels/
+              path: /extensions/extensions-sdk/extensions/labels/
             - title: Validate
-              path: /desktop/extensions-sdk/extensions/validate/
+              path: /extensions/extensions-sdk/extensions/validate/
             - title: Package and release your extension
-              path: /desktop/extensions-sdk/extensions/DISTRIBUTION/
+              path: /extensions/extensions-sdk/extensions/DISTRIBUTION/
             - title: Generate a share link
-              path: /desktop/extensions-sdk/extensions/share/
+              path: /extensions/extensions-sdk/extensions/share/
             - title: Publish in the Marketplace
-              path: /desktop/extensions-sdk/extensions/publish/
+              path: /extensions/extensions-sdk/extensions/publish/
             - title: Build multi-arch extensions
-              path: /desktop/extensions-sdk/extensions/multi-arch/
+              path: /extensions/extensions-sdk/extensions/multi-arch/
         - sectiontitle: "Architecture"
           section:
             - title: Overview
-              path: /desktop/extensions-sdk/architecture/
+              path: /extensions/extensions-sdk/architecture/
             - title: Metadata
-              path: /desktop/extensions-sdk/architecture/metadata/
+              path: /extensions/extensions-sdk/architecture/metadata/
             - title: Security
-              path: /desktop/extensions-sdk/architecture/security/
+              path: /extensions/extensions-sdk/architecture/security/
         - sectiontitle: "Design and UI styling"
           section:
              - title: UI styling guidelines
-               path: /desktop/extensions-sdk/design/
+               path: /extensions/extensions-sdk/design/
              - title: Guidelines
-               path: /desktop/extensions-sdk/design/design-guidelines/
+               path: /extensions/extensions-sdk/design/design-guidelines/
              - title: Docker design principles
-               path: /desktop/extensions-sdk/design/design-principles/
+               path: /extensions/extensions-sdk/design/design-principles/
              - title: MUI best practices
-               path: /desktop/extensions-sdk/design/mui-best-practices/
+               path: /extensions/extensions-sdk/design/mui-best-practices/
         - sectiontitle: "Developer Guides"
           section:
             - title: Invoke host binaries
-              path: /desktop/extensions-sdk/guides/invoke-host-binaries/
+              path: /extensions/extensions-sdk/guides/invoke-host-binaries/
             - title: Use the Docker socket from the extension backend
-              path: /desktop/extensions-sdk/guides/use-docker-socket-from-backend/
+              path: /extensions/extensions-sdk/guides/use-docker-socket-from-backend/
             - title: Interacting with Kubernetes
-              path: /desktop/extensions-sdk/guides/kubernetes/
+              path: /extensions/extensions-sdk/guides/kubernetes/
             - title: Authentication
-              path: /desktop/extensions-sdk/guides/oauth2-flow/
+              path: /extensions/extensions-sdk/guides/oauth2-flow/
         - sectiontitle: Developer SDK tools
           section:
             - title: "Test and debug"
-              path: /desktop/extensions-sdk/dev/test-debug/
+              path: /extensions/extensions-sdk/dev/test-debug/
             - title: "Continuous integration"
-              path: /desktop/extensions-sdk/dev/continuous-integration/
+              path: /extensions/extensions-sdk/dev/continuous-integration/
             - title: CLI reference
-              path: /desktop/extensions-sdk/dev/usage/
+              path: /extensions/extensions-sdk/dev/usage/
             - sectiontitle: Extension APIs
               section:
                 - title: Overview
-                  path: /desktop/extensions-sdk/dev/api/overview/
+                  path: /extensions/extensions-sdk/dev/api/overview/
                 - title: Extension Backend
-                  path: /desktop/extensions-sdk/dev/api/backend/
+                  path: /extensions/extensions-sdk/dev/api/backend/
                 - title: Docker
-                  path: /desktop/extensions-sdk/dev/api/docker/
+                  path: /extensions/extensions-sdk/dev/api/docker/
                 - title: Dashboard
-                  path: /desktop/extensions-sdk/dev/api/dashboard/
+                  path: /extensions/extensions-sdk/dev/api/dashboard/
                 - title: Navigation
-                  path: /desktop/extensions-sdk/dev/api/dashboard-routes-navigation/
+                  path: /extensions/extensions-sdk/dev/api/dashboard-routes-navigation/
                 - title: API Reference
-                  path: /desktop/extensions-sdk/dev/api/reference/README/
+                  path: /extensions/extensions-sdk/dev/api/reference/README/
 
 - sectiontitle: Docker Scout
   section:
