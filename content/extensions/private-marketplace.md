@@ -139,7 +139,7 @@ $ /opt/docker-desktop/extension-admin generate
 
 This creates an `extension-marketplace` directory and downloads the marketplace metadata for all the allowed extensions.
 
-The marketplace content is generated from extension image information as image labels, which is the [same format as public extensions](/extensions-sdk/extensions/labels.md). It includes the extension title, description, screenshots, links, etc. 
+The marketplace content is generated from extension image information as image labels, which is the [same format as public extensions](extensions-sdk/extensions/labels.md). It includes the extension title, description, screenshots, links, etc. 
 
 ## Step five: Test the private marketplace setup
 

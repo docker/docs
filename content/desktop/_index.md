@@ -54,7 +54,7 @@ Docker Desktop reduces the time spent on complex setups so you can focus on writ
 - Docker CLI client
 - [Docker Scout](../scout/_index.md) (additional subscription may apply)
 - [Docker Build](../build/_index.md)
-- [Docker Extensions](./extensions/_index.md)
+- [Docker Extensions](../extensions/_index.md)
 - [Docker Compose](../compose/_index.md)
 - [Docker Content Trust](../engine/security/trust/_index.md)
 - [Kubernetes](https://github.com/kubernetes/kubernetes/)
