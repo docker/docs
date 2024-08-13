@@ -16,7 +16,7 @@ Learn how to configure and set up a private marketplace with a curated list of e
 
 It is designed specifically 
 
-Docker Extensions' private marketplace is designed specifically for organizations who don’t give developers root access to their machines. It makes use of [Settings Management](../hardened-desktop/settings-management/_index.md) so administrators have complete control over the private marketplace.
+Docker Extensions' private marketplace is designed specifically for organizations who don’t give developers root access to their machines. It makes use of [Settings Management](/desktop/hardened-desktop/settings-management/_index.md) so administrators have complete control over the private marketplace.
 
 ## Prerequisites
 

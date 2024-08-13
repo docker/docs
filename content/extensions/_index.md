@@ -8,7 +8,7 @@ aliases:
 
 Docker Extensions let you use third-party tools within Docker Desktop to extend its functionality.
 
-You can seamlessly connect your favorite development tools to your application development and deployment workflows. Augment Docker Desktop with debugging, testing, security, and networking functionalities, and create custom add-ons using the Extensions [SDK](/extensions-sdk/index.md).
+You can seamlessly connect your favorite development tools to your application development and deployment workflows. Augment Docker Desktop with debugging, testing, security, and networking functionalities, and create custom add-ons using the Extensions [SDK](extensions-sdk/index.md).
 
 Anyone can use Docker Extensions and there is no limit to the number of extensions you can install.
 
