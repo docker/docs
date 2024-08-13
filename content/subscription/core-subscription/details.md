@@ -66,7 +66,7 @@ For a list of features available in each tier, see [Docker Pricing](https://www.
 
 Docker Business includes:
 - Everything included in Docker Team
-- [Hardened Docker Desktop](../../desktop/hardened-desktop/index.md) 
+- [Hardened Docker Desktop](/security/for-admins/hardened-desktop/index.md) 
 - [Image Access Management](/security/for-admins/hardened-desktop/image-access-management.md) which lets admins control what content developers can access
 - [Registry Access Management](/security/for-admins/hardened-desktop/registry-access-management.md) which lets admins control what registries developers can access
 - [Company layer](../../admin/company/_index.md) to manage multiple organizations and settings
