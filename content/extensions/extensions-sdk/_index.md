@@ -25,7 +25,7 @@ grid:
   - title: "Interacting with Kubernetes"
     description: Find information on how to interact indirectly with a Kubernetes cluster from your Docker extension.
     icon: "multiple_stop"
-    link: "/extensions/extensions-sdk/dev/kubernetes/"
+    link: "/extensions/extensions-sdk/guides/kubernetes/"
   - title: "Multi-arch extensions"
     description: Build your extension for multiple architectures.
     icon: "content_copy"
