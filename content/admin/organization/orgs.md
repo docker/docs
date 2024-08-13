@@ -100,7 +100,7 @@ configure your organization.
 - **Settings**: Displays information about your
   organization, and allows you to view and change your repository privacy
   settings, configure org permissions such as
-  [Image Access Management](../../security/for-admins/image-access-management.md), configure notification settings, and [deactivate](../deactivate-account.md#deactivate-an-organization) You can also update your organization name and company name that appear on your organization landing page. You must be an owner to access the
+  [Image Access Management](/security/for-admins/hardened-desktop/image-access-management.md), configure notification settings, and [deactivate](../deactivate-account.md#deactivate-an-organization) You can also update your organization name and company name that appear on your organization landing page. You must be an owner to access the
    organization's **Settings** page.
 
 - **Billing**: Displays information about your existing

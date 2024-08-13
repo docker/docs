@@ -53,8 +53,8 @@ GitHub and Bitbucket and push them to Docker Hub.
 * Set up [SSO](../security/for-admins/single-sign-on/index.md) and [SCIM](../security/for-admins/provisioning/scim.md)
 * Use [Group mapping](group-mapping.md)
 * [Carry out domain audits](domain-audit.md)
-* [Use Image Access Management](image-access-management.md) to control developers' access to certain types of images
-* [Turn on Registry Access Management](../security/for-admins/registry-access-management.md)
+* [Use Image Access Management](/security/for-admins/hardened-desktop/image-access-management.md) to control developers' access to certain types of images
+* [Turn on Registry Access Management](/security/for-admins/hardened-desktop/registry-access-management.md)
 {{< /tab >}}
 {{< /tabs >}}
 

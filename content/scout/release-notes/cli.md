@@ -372,7 +372,7 @@ Discarded in favor of [1.9.1](#191).
   instance by Docker Desktop there's no need anymore to re-index it on WSL2
   side.
 - Indexing is now blocked in the CLI if it has been disabled using
-  [Settings Management](../../desktop/hardened-desktop/settings-management/configure.md) feature.
+  [Settings Management](/security/for-admins/hardened-desktop/settings-management/configure.md) feature.
 
 - Fix a panic that would occur when analyzing a single-image `oci-dir` input
 - Improve local attestation support with the containerd image store

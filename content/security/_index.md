@@ -6,23 +6,23 @@ grid_admins:
 - title: Settings Management
   description: Learn how Settings Management can secure your developers' workflows.
   icon: shield_locked
-  link: /desktop/hardened-desktop/settings-management/
+  link: /security/for-admins/hardened-desktop/settings-management/
 - title: Enhanced Container Isolation
   description: Understand how Enhanced Container Isolation can prevent container attacks.
   icon: security
-  link: /desktop/hardened-desktop/enhanced-container-isolation/
+  link: /security/for-admins/hardened-desktop/enhanced-container-isolation/
 - title: Registry Access Management
   description: Control the registries developers can access while using Docker Desktop.
   icon: home_storage
-  link: /security/for-admins/registry-access-management/
+  link: /security/for-admins/hardened-desktop/registry-access-management/
 - title: Image Access Management
   description: Control the images developers can pull from Docker Hub.
   icon: photo_library
-  link: /security/for-admins/image-access-management/
+  link: /security/for-admins/hardened-desktop/image-access-management/
 - title: "Air-Gapped Containers"
   description: Restrict containers from accessing unwanted network resources.
   icon: "vpn_lock"
-  link: /desktop/hardened-desktop/air-gapped-containers/
+  link: /security/for-admins/hardened-desktop/air-gapped-containers/
 - title: Enforce sign-in
   description: Configure sign-in for members of your teams and organizations.
   link: /security/for-admins/enforce-sign-in/

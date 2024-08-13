@@ -2,6 +2,8 @@
 description: How to configure Settings Management for Docker Desktop
 keywords: admin, controls, rootless, enhanced container isolation
 title: Configure Settings Management
+aliases: 
+ - /desktop/hardened-desktop/settings-management/configure/
 ---
 
 >**Note**
@@ -14,7 +16,7 @@ Settings Management is designed specifically for organizations who don’t give 
 
 ### Prerequisites
 
-- [Download and install Docker Desktop 4.13.0 or later](../../release-notes.md).
+- [Download and install Docker Desktop 4.13.0 or later](/desktop/release-notes.md).
 - As an administrator, you need to [enforce
   sign-in](../../../security/for-admins/enforce-sign-in/_index.md). This is
   because this feature requires a Docker Business subscription and therefore
@@ -27,7 +29,7 @@ Settings Management is designed specifically for organizations who don’t give 
 
 ### Step one: Create the `admin-settings.json` file and save it in the correct location
 
-You can either use the `--admin-settings` installer flag on [macOS](../../install/mac-install.md#install-from-the-command-line) or [Windows](../../install/windows-install.md#install-from-the-command-line) to automatically create the `admin-settings.json` and save it in the correct location, or set it up manually.
+You can either use the `--admin-settings` installer flag on [macOS](/desktop/install/mac-install.md#install-from-the-command-line) or [Windows](/desktop/install/windows-install.md#install-from-the-command-line) to automatically create the `admin-settings.json` and save it in the correct location, or set it up manually.
 
 To set it up manually:
 1. Create a new, empty JSON file and name it `admin-settings.json`.

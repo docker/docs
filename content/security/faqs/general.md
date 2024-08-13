@@ -81,4 +81,4 @@ Extensions are not covered as part of Docker’s Third-Party Risk Management Pro
 
 ### Can I disable private repos in my organization via a setting to make sure nobody is pushing images into Docker Hub?
 
-No. With [Registry Access Management](../../security/for-admins/registry-access-management.md) (RAM), administrators can ensure that their developers using Docker Desktop only access allowed registries. This is done through the Registry Access Management dashboard on Docker Hub.
+No. With [Registry Access Management](/security/for-admins/hardened-desktop/registry-access-management.md) (RAM), administrators can ensure that their developers using Docker Desktop only access allowed registries. This is done through the Registry Access Management dashboard on Docker Hub.
