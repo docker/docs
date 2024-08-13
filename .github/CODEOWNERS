@@ -11,21 +11,21 @@
 
 /content/desktop/ @aevesdocker
 
-/content/desktop/extensions/ @aevesdocker
+/content/extensions/ @aevesdocker
 
-/content/desktop/extensions-sdk/ @aevesdocker
+/content/extensions-sdk/ @aevesdocker
 
 /content/scout/ @dvdksn
 
-/content/docker-hub/ @aevesdocker @craig-osterhout @stephaurelio
+/content/docker-hub/ @aevesdocker @craig-osterhout
 
 /content/engine/ @dvdksn
 
-/content/subscription/ @aevesdocker @stephaurelio
+/content/subscription/ @aevesdocker
 
-/content/docker-hub/publish/ @aevesdocker
+/content/docker-hub/publish/ @craig-osterhout
 
-/content/docker-hub/official_images/ @aevesdocker
+/content/docker-hub/official_images/ @craig-osterhout
 
 /content/registry/ @dvdksn
 
