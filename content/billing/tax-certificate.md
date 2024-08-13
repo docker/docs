@@ -36,7 +36,7 @@ Palo Alto, CA 94306
    >
    > You can list multiple namespaces that share the same tax exemption certificate, if applicable.
    { .tip }
-4. Select **Browse Files** to upload the tax certificate from your system or simply drag and drop the certificate in the given space.
+4. Add the tax certificate from your system by dragging and dropping them onto the file area, or select the **Browse Files** button to open a file dialog.
 5. Select **Submit**.
 
-Docker's Support team will reach out to you once a ticket is open and if Support team needs any additional information. You'll receive a confirmation from Docker once your tax exemption status has processed and is applied to your account.
+Docker's support team will reach out to you if any additional information is required. You'll receive an e-mail confirmation from Docker once your tax exemption status is applied to your account.
