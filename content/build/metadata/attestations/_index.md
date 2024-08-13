@@ -4,6 +4,8 @@ keywords: build, attestations, sbom, provenance, metadata
 description: |
   Introduction to SBOM and provenance attestations with Docker Build,
   what they are, and why they exist
+aliases:
+  - /build/attestations/
 ---
 
 Build attestations describe how an image was built, and what it contains. The
@@ -58,13 +60,13 @@ $ docker buildx build --sbom=true --provenance=true .
 >
 > - Use a `docker-container` driver with the `--push` flag to push the image to
 >   a registry directly.
-> - Enable the [containerd image store](../../desktop/containerd.md).
+> - Enable the [containerd image store](/desktop/containerd.md).
 
 > [!NOTE]
 >
 > Provenance attestations are enabled by default, with the `mode=min` option.
 > You can disable provenance attestations using the `--provenance=false` flag,
-> or by setting the [`BUILDX_NO_DEFAULT_ATTESTATIONS`](../building/variables.md#buildx_no_default_attestations) environment variable.
+> or by setting the [`BUILDX_NO_DEFAULT_ATTESTATIONS`](/build/building/variables.md#buildx_no_default_attestations) environment variable.
 >
 > Using the `--provenance=true` flag attaches provenance attestations with `mode=max`
 > by default. See [Provenance attestation](./slsa-provenance.md) for more details.

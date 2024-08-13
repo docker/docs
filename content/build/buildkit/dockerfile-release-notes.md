@@ -4,6 +4,8 @@ description: Release notes for Dockerfile frontend
 keywords: build, dockerfile, frontend, release notes
 tags: [Release notes]
 toc_max: 2
+aliases:
+  - /build/dockerfile/release-notes/
 ---
 
 This page contains information about the new features, improvements, known

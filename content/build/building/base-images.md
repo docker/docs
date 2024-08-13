@@ -62,7 +62,7 @@ ADD hello /
 CMD ["/hello"]
 ```
 
-Assuming an executable binary named `hello` exists at the root of the [build context](../../build/building/context.md).
+Assuming an executable binary named `hello` exists at the root of the [build context](/build/concepts/context.md).
 You can build this Docker image using the following `docker build` command:
 
 ```console

@@ -7,6 +7,7 @@ keywords: build, buildx, driver, builder, kubernetes
 aliases:
   - /build/buildx/drivers/kubernetes/
   - /build/building/drivers/kubernetes/
+  - /build/drivers/kubernetes/
 ---
 
 The Kubernetes driver lets you connect your local development or CI
@@ -108,7 +109,7 @@ replicas. `sticky` (the default) attempts to connect the same build performed
 multiple times to the same node each time, ensuring better use of local cache.
 
 For more information on scalability, see the options for
-[`docker buildx create`](../../reference/cli/docker/buildx/create.md#driver-opt).
+[`docker buildx create`](/reference/cli/docker/buildx/create.md#driver-opt).
 
 ## Node assignment
 
@@ -143,7 +144,7 @@ $ docker buildx create \
 ## Multi-platform builds
 
 The Kubernetes driver has support for creating
-[multi-platform images](../building/multi-platform.md),
+[multi-platform images](/build/building/multi-platform.md),
 either using QEMU or by leveraging the native architecture of nodes.
 
 ### QEMU
@@ -343,9 +344,9 @@ Prerequisites:
      --push .
    ```
 
-That's it! You've now built an image from a Kubernetes pod, using Buildx!
+That's it: you've now built an image from a Kubernetes pod, using Buildx.
 
 ## Further reading
 
 For more information on the Kubernetes driver, see the
-[buildx reference](../../reference/cli/docker/buildx/create.md#driver).
+[buildx reference](/reference/cli/docker/buildx/create.md#driver).

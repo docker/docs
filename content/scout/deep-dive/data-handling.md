@@ -85,7 +85,7 @@ Docker Scout platform; it's only used to run the analysis.
 
 ### Provenance
 
-For images with [provenance attestations](/build/attestations/slsa-provenance.md),
+For images with [provenance attestations](/build/metadata/attestations/slsa-provenance.md),
 Docker Scout stores the following data in addition to the SBOM:
 
 - Materials

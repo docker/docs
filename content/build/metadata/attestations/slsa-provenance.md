@@ -3,6 +3,8 @@ title: Provenance attestations
 keywords: build, attestations, provenance, slsa, git, metadata
 description: >
   Provenance build attestations describe how and where your image was built.
+aliases:
+  - /build/attestations/slsa-provenance/
 ---
 
 The provenance attestations include facts about the build process, including
@@ -34,7 +36,7 @@ Alternatively, you can use the shorthand `--provenance=true` option instead of `
 To specify the `mode` parameter using the shorthand option, use: `--provenance=mode=max`.
 
 For an example on how to add provenance attestations with GitHub Actions, see
-[Add attestations with GitHub Actions](../ci/github-actions/attestations.md).
+[Add attestations with GitHub Actions](/build/ci/github-actions/attestations.md).
 
 ## Mode
 
@@ -141,17 +143,17 @@ detailed information for analysis.
 > [!WARNING]
 >
 > Note that `mode=max` exposes the values of
-> [build arguments](../../reference/cli/docker/buildx/build.md#build-arg).
+> [build arguments](/reference/cli/docker/buildx/build.md#build-arg).
 >
 > If you're misusing build arguments to pass credentials, authentication
 > tokens, or other secrets, you should refactor your build to pass the secrets using
-> [secret mounts](../../reference/cli/docker/buildx/build.md#secret) instead.
+> [secret mounts](/reference/cli/docker/buildx/build.md#secret) instead.
 > Secret mounts don't leak outside of the build and are never included in provenance attestations.
 
 ## Inspecting Provenance
 
 To explore created Provenance exported through the `image` exporter, you can
-use [`imagetools inspect`](../../reference/cli/docker/buildx/imagetools/inspect.md).
+use [`imagetools inspect`](/reference/cli/docker/buildx/imagetools/inspect.md).
 
 Using the `--format` option, you can specify a template for the output. All
 provenance-related data is available under the `.Provenance` attribute. For

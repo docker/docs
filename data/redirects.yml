@@ -243,7 +243,7 @@
   - /go/dockerfile-user-best-practices/
 "/build/building/best-practices/#apt-get":
   - /go/dockerfile-aptget-best-practices/
-"/build/building/context/#dockerignore-files":
+"/build/concepts/context/#dockerignore-files":
   - /go/build-context-dockerignore/
 "/compose/compose-file":
   - /go/compose-spec-reference/

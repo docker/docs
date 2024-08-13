@@ -12,7 +12,7 @@ The `oci` exporter outputs the build result into an
 tarball. The `docker` exporter behaves the same way, except it exports a Docker
 image layout instead.
 
-The [`docker` driver](../drivers/docker.md) doesn't support these exporters. You
+The [`docker` driver](/build/builders/drivers/docker.md) doesn't support these exporters. You
 must use `docker-container` or some other driver if you want to generate these
 outputs.
 

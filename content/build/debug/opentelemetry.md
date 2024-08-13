@@ -2,6 +2,8 @@
 title: OpenTelemetry support
 description: Analyze telemetry data for builds
 keywords: build, buildx buildkit, opentelemetry
+aliases:
+- /build/building/opentelemetry/
 ---
 
 Both Buildx and BuildKit support [OpenTelemetry](https://opentelemetry.io/).
@@ -16,8 +18,8 @@ First create a Jaeger container:
 $ docker run -d --name jaeger -p "6831:6831/udp" -p "16686:16686" --restart unless-stopped jaegertracing/all-in-one
 ```
 
-Then [create a `docker-container` builder](../drivers/docker-container.md)
-that will use the Jaeger instance via the `JAEGER_TRACE` env var:
+Then [create a `docker-container` builder](/build/builders/drivers/docker-container.md)
+that will use the Jaeger instance via the `JAEGER_TRACE` environment variable:
 
 ```console
 $ docker buildx create --use \
@@ -27,7 +29,7 @@ $ docker buildx create --use \
   --driver-opt "env.JAEGER_TRACE=localhost:6831"
 ```
 
-Boot and [inspect `mybuilder`](../../reference/cli/docker/buildx/inspect.md):
+Boot and [inspect `mybuilder`](/reference/cli/docker/buildx/inspect.md):
 
 ```console
 $ docker buildx inspect --bootstrap

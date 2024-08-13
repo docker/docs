@@ -18,10 +18,10 @@ parameters by defining garbage collection policies.
 
 ## Configuration
 
-Depending on the [driver](../drivers/index.md) used by your builder instance,
+Depending on the [driver](../builders/drivers/_index.md) used by your builder instance,
 the garbage collection will use a different configuration file.
 
-If you're using the [`docker` driver](../drivers/docker.md), garbage collection
+If you're using the [`docker` driver](../builders/drivers/docker.md), garbage collection
 can be configured in the [Docker Daemon configuration](../../reference/cli/dockerd.md#daemon-configuration-file).
 file:
 

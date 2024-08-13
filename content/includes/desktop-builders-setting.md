@@ -54,7 +54,7 @@ the build cache is also removed, along with the builder.
 ### Stop and start a builder
 
 Builders that use the
-[`docker-container` driver](/build/drivers/docker-container/)
+[`docker-container` driver](/build/builders/drivers/docker-container/)
 run the BuildKit daemon in a container.
 You can start and stop the BuildKit container using the drop-down menu.
 

@@ -65,7 +65,7 @@ Logs will be available at the end of a job:
 ## BuildKit Daemon configuration
 
 You can provide a [BuildKit configuration](../../buildkit/toml-configuration.md)
-to your builder if you're using the [`docker-container` driver](../../drivers/docker-container.md)
+to your builder if you're using the [`docker-container` driver](/build/builders/drivers/docker-container.md)
 (default) with the `config` or `config-inline` inputs:
 
 ### Registry mirror
@@ -145,7 +145,7 @@ fields:
 | `buildkitd-flags` | String | [Flags for buildkitd](../../../reference/cli/docker/buildx/create.md#buildkitd-flags) daemon                                                                                                                                                                    |
 | `platforms`       | String | Fixed [platforms](../../../reference/cli/docker/buildx/create.md#platform) for the node. If not empty, values take priority over the detected ones.                                                                                                             |
 
-Here is an example using remote nodes with the [`remote` driver](../../drivers/remote.md)
+Here is an example using remote nodes with the [`remote` driver](/build/builders/drivers/remote.md)
 and [TLS authentication](#tls-authentication):
 
 ```yaml
@@ -187,7 +187,7 @@ using SSH or TLS.
 
 ### SSH authentication
 
-To be able to connect to an SSH endpoint using the [`docker-container` driver](../../drivers/docker-container.md),
+To be able to connect to an SSH endpoint using the [`docker-container` driver](/build/builders/drivers/docker-container.md),
 you have to set up the SSH private key and configuration on the GitHub Runner:
 
 ```yaml
@@ -215,7 +215,7 @@ jobs:
 
 ### TLS authentication
 
-You can also [set up a remote BuildKit instance](../../drivers/remote.md#example-remote-buildkit-in-docker-container)
+You can also [set up a remote BuildKit instance](/build/builders/drivers/remote.md#example-remote-buildkit-in-docker-container)
 using the remote driver. To ease the integration in your workflow, you can use
 an environment variables that sets up authentication using the BuildKit client
 certificates for the `tcp://`:
@@ -288,7 +288,7 @@ some packages may be particularly resource-intensive to build and require more
 compute. Or they require a builder equipped with a particular capability or
 hardware.
 
-For more information about remote builder, see [`remote` driver](../../drivers/remote.md)
+For more information about remote builder, see [`remote` driver](/build/builders/drivers/remote.md)
 and the [append builder nodes example](#append-additional-nodes-to-the-builder).
 
 ```yaml

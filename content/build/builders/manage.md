@@ -9,10 +9,10 @@ or [using Docker Desktop](#manage-builders-with-docker-desktop).
 
 ## Create a new builder
 
-The default builder uses the [`docker` driver](../drivers/docker.md).
+The default builder uses the [`docker` driver](drivers/docker.md).
 You can't manually create new `docker` builders, but you can create builders
 that use other drivers, such as the
-[`docker-container` driver](../drivers/docker-container.md),
+[`docker-container` driver](drivers/docker-container.md),
 which runs the BuildKit daemon in a container.
 
 Use the
@@ -25,7 +25,7 @@ $ docker buildx create --name=<builder-name>
 
 Buildx uses the `docker-container` driver by default if you omit the `--driver`
 flag. For more information about available drivers, see
-[Build drivers](../drivers/index.md).
+[Build drivers](drivers/_index.md).
 
 ## List available builders
 
@@ -42,7 +42,7 @@ my_builder      docker-container
 ```
 
 The asterisk (`*`) next to the builder name indicates the
-[selected builder](index.md#selected-builder).
+[selected builder](_index.md#selected-builder).
 
 ## Inspect a builder
 

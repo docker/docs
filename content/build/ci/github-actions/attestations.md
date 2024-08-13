@@ -5,7 +5,7 @@ keywords: ci, github actions, gha, buildkit, buildx, attestations, sbom, provena
 ---
 
 Software Bill of Material (SBOM) and provenance
-[attestations](../../attestations/_index.md) add metadata about the contents of
+[attestations](../../metadata/attestations/_index.md) add metadata about the contents of
 your image, and how it was built.
 
 Attestations are supported with version 4 and later of the

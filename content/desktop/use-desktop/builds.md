@@ -66,7 +66,7 @@ platform:
 ![Platform filter](../images/build-ui-platform-menu.webp?w=400)
 
 The **Source details** section shows information about the frontend
-[frontend](../../build/dockerfile/frontend.md) and, if available,
+[frontend](../../build/buildkit/frontend.md) and, if available,
 the source code repository used for the build.
 
 ### Build timing
@@ -93,7 +93,7 @@ operations are defined as follows:
 | HTTP                 | Remote artifact downloads using `ADD`.                                                                                                                                          |
 | Git                  | Same as **HTTP** but for Git URLs.                                                                                                                                              |
 | Result exports       | Time spent exporting the build results.                                                                                                                                         |
-| SBOM                 | Time spent generating the [SBOM attestation](../../build/attestations/sbom.md).                                                                                                 |
+| SBOM                 | Time spent generating the [SBOM attestation](../../build/metadata/attestations/sbom.md).                                                                                                 |
 | Idle                 | Idle time for build workers, which can happen if you have configured a [max parallelism limit](../../build/buildkit/configure.md#max-parallelism).                              |
 
 ### Build dependencies
@@ -123,7 +123,7 @@ including image manifest details, attestations, and build traces.
 Attestations are metadata records attached to a container image.
 The metadata describes something about the image,
 for example how it was built or what packages it contains.
-For more information about attestations, see [Build attestations](../../build/attestations/_index.md).
+For more information about attestations, see [Build attestations](../../build/metadata/attestations/_index.md).
 
 Build traces capture information about the build execution steps in Buildx and
 BuildKit. The traces are available in two formats: OTLP and Jaeger. You can
@@ -161,7 +161,7 @@ Now you can analyze the build trace using the Jaeger UI:
 ### Dockerfile source and errors
 
 When inspecting a successful completed build or an ongoing active build,
-the **Source** tab shows the [frontend](../../build/dockerfile/frontend.md)
+the **Source** tab shows the [frontend](../../build/buildkit/frontend.md)
 used to create the build.
 
 If the build failed, an **Error** tab displays instead of the **Source** tab.

@@ -4,6 +4,7 @@ description: Dive deep into the Dockerfile frontend, and learn about custom fron
 keywords: build, buildkit, dockerfile, frontend
 aliases:
   - /build/buildkit/dockerfile-frontend/
+  - /build/dockerfile/frontend/
 ---
 
 ## Dockerfile frontend

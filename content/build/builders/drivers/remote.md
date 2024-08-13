@@ -7,6 +7,7 @@ keywords: build, buildx, driver, builder, remote
 aliases:
   - /build/buildx/drivers/remote/
   - /build/building/drivers/remote/
+  - /build/drivers/remote/
 ---
 
 The Buildx remote driver allows for more complex custom build workloads,
