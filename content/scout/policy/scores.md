@@ -108,20 +108,10 @@ The policies that influence the score, and their respective weights, are as foll
 | [No fixable critical or high vulnerabilities](/scout/policy#no-fixable-critical-or-high-vulnerabilities)   | 20     |
 | [No high-profile vulnerabilities](/scout/policy#no-high-profile-vulnerabilities)                           | 20     |
 | [Supply chain attestations](/scout/policy#supply-chain-attestations)                                       | 15     |
-| [No unapproved base images](/scout/policy/#no-unapproved-base-images) \*                                   | 15     |
+| [No unapproved base images](/scout/policy/#no-unapproved-base-images)                                      | 15     |
 | [No outdated base images](/scout/policy#no-outdated-base-images)                                           | 10     |
 | [Default non-root user](/scout/policy#default-non-root-user)                                               | 5      |
-| No AGPL v3 licenses \*\*                                                                                   | 5      |
-
-\* _The **No unapproved base images** policy used for health score evaluation also
-checks that the tags of Docker Official Images use supported tags and, where
-applicable, that the Linux distro that the image uses is a supported distro
-version. This is a policy configuration option that's enabled by default for
-health score evaluation. For more information, refer to the
-[Unapproved base images](/scout/policy/#no-unapproved-base-images) policy._
-
-\*\* _The **No AGPL v3 licenses** policy is a subset of the
-[Copyleft licenses](./_index.md#no-copyleft-licenses) policy._
+| [No AGPL v3 licenses](/scout/policy/_index.md#no-agpl-v3-licenses)                                         | 5      |
 
 ### Evaluation
 

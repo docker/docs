@@ -615,7 +615,7 @@
   - /go/scout-policy/
 "/scout/policy/#no-fixable-critical-or-high-vulnerabilities":
   - /go/scout-policy-dsp001/
-"/scout/policy/#no-copyleft-licenses":
+"/scout/policy/#no-agpl-v3-licenses":
   - /go/scout-policy-dsp002/
 "/scout/policy/#no-outdated-base-images":
   - /go/scout-policy-dsp003/
