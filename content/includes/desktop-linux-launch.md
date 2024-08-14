@@ -1,6 +1,14 @@
-To start Docker Desktop for Linux, search **Docker Desktop** on the
-**Applications** menu and open it. This launches the Docker menu icon and opens
-the Docker Dashboard, reporting the status of Docker Desktop.
+To start Docker Desktop for Linux:
+
+1. Open your **Applications** menu in Gnome/KDE Desktop and search for **Docker Desktop**.
+
+2. Select **Docker Desktop** to start Docker. <br> The Docker menu ({{< inline-image src="images/whale-x.svg" alt="whale menu" >}}) displays the Docker Subscription Service Agreement.
+
+3. Select **Accept** to continue. Docker Desktop starts after you accept the terms.
+
+   Note that Docker Desktop won't run if you do not agree to the terms. You can choose to accept the terms at a later date by opening Docker Desktop.
+
+   For more information, see [Docker Desktop Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement). It is recommended that you also read the [FAQs](https://www.docker.com/pricing/faq).
 
 Alternatively, open a terminal and run:
 
@@ -25,16 +33,16 @@ of these binaries by running the following commands:
 
 ```console
 $ docker compose version
-Docker Compose version v2.17.3
+Docker Compose version v2.29.1
 
 $ docker --version
-Docker version 23.0.5, build bc4487a
+Docker version 27.1.1, build 6312585
 
 $ docker version
-Client: Docker Engine - Community
- Cloud integration: v1.0.31
+Client: 
  Version:           23.0.5
  API version:       1.42
+ Go version:        go1.21.12
 <...>
 ```
 
