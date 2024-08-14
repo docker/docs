@@ -2,13 +2,6 @@
 description: Learn what the Docker Verified Publisher Program is and how it works
 title: Docker Verified Publisher Program
 aliases:
-- /docker-store/byol/
-- /docker-store/certify-images/
-- /docker-store/certify-plugins-logging/
-- /docker-store/customer_faq/
-- /docker-store/publisher_faq/
-- /docker-store/trustchain/
-- /docker-store/publish/
 - /docker-hub/publish/publish/
 - /docker-hub/publish/customer_faq/
 - /docker-hub/publish/publisher_faq/
