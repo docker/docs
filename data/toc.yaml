@@ -2094,6 +2094,8 @@ Manuals:
       title: Continuous integration
     - path: /build-cloud/optimization/
       title: Optimization
+    - path: /build-cloud/private-resource-access/
+      title: Private resource access
 - sectiontitle: Docker Compose
   section:
   - path: /compose/
