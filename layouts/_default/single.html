@@ -12,7 +12,7 @@
       {{ partial "guides-stepper.html" . }}
     {{ end }}
     <div class="block lg:hidden">
-      {{ partial "pagemeta.html" . }}
+      {{ partialCached "pagemeta.html" . . }}
       <hr>
     </div>
     {{ .Content }}

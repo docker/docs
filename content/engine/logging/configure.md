@@ -9,7 +9,6 @@ aliases:
   - /engine/admin/reference/logging/
   - /engine/admin/logging/logentries/
   - /engine/admin/logging/overview/
-  - /engine/admin/logging/
   - /config/containers/logging/configure/
 ---
 

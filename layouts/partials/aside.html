@@ -1,6 +1,6 @@
 <aside class="py-4 space-y-4">
   {{ partial "github-links.html" . }}
   <div id="TableOfContents">
-    {{ partial "pagemeta.html" . }}
+    {{ partialCached "pagemeta.html" . . }}
   </div>
 </aside>
