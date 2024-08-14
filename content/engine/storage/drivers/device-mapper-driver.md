@@ -3,7 +3,7 @@ description: Learn how to optimize your use of device mapper driver.
 keywords: container, storage, driver, device mapper
 title: Use the Device Mapper storage driver (deprecated)
 aliases:
-- /engine/userguide/storagedriver/device-mapper-driver/
+  - /storage/storagedriver/device-mapper-driver/
 ---
 
 > **Deprecated**

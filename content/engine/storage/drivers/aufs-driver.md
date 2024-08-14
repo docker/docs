@@ -4,7 +4,7 @@ keywords: 'container, storage, driver, AUFS '
 title: Use the AUFS storage driver
 sitemap: false
 aliases:
-- /engine/userguide/storagedriver/aufs-driver/
+  - /storage/storagedriver/aufs-driver/
 ---
 
 > **Deprecated**

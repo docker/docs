@@ -3,9 +3,8 @@ title: Docker storage drivers
 description: Learn how to select the proper storage driver for your container.
 keywords: container, storage, driver, btrfs, zfs, overlay, overlay2
 aliases:
-  - /engine/userguide/storagedriver/
-  - /engine/userguide/storagedriver/selectadriver/
   - /storage/storagedriver/selectadriver/
+  - /storage/storagedriver/select-storage-driver/
 ---
 
 Ideally, very little data is written to a container's writable layer, and you
