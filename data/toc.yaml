@@ -31,6 +31,8 @@ Guides:
       path: /guides/docker-concepts/the-basics/what-is-docker-compose/
   - sectiontitle: "Building images"
     section:
+    - title: Overview
+      path: /guides/docker-concepts/building-images/
     - title: "Understanding image layers"
       path: /guides/docker-concepts/building-images/understanding-image-layers/
     - title: "Writing a Dockerfile"

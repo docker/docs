@@ -2,6 +2,12 @@
 title: Writing a Dockerfile
 keywords: concepts, build, images, container, docker desktop
 description: This concept page will teach you how to create image using Dockerfile.
+summary: |
+  Mastering Dockerfile practices is vital for leveraging container technology
+  effectively, enhancing application reliability and supporting DevOps and
+  CI/CD methodologies. In this guide, you’ll learn how to write a Dockerfile,
+  how to define a base image and setup instructions, including software
+  installation and copying necessary files.
 ---
 
 {{< youtube-embed Jx8zoIhiP4c >}}

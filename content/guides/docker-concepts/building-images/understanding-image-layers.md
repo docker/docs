@@ -2,6 +2,11 @@
 title: Understanding the image layers
 keywords: concepts, build, images, container, docker desktop
 description: This concept page will teach you about the layers of container image.
+summary: |
+  Have you ever wondered how images work? This guide will help you to
+  understand image layers - the fundamental building blocks of container
+  images. You'll gain a comprehensive understanding of how layers are created,
+  stacked, and utilized to ensure efficient and optimized containers.
 ---
 
 {{< youtube-embed wJwqtAkmtQA >}}

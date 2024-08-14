@@ -2,6 +2,13 @@
 title: Using the build cache
 keywords: concepts, build, images, container, docker desktop
 description: This concept page will teach you about the build cache, what changes invalidate the cache and how to effectively use the build cache.
+summary: |
+  Using the build cache effectively allows you to achieve faster builds by
+  reusing results from previous builds and skipping unnecessary steps. To
+  maximize cache usage and avoid resource-intensive and time-consuming
+  rebuilds, it's crucial to understand how cache invalidation works. In this
+  guide, you’ll learn how to use the Docker build cache efficiently for
+  streamlined Docker image development and continuous integration workflows.
 ---
 
 {{< youtube-embed Ri6jMknjprY >}}
