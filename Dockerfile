@@ -1,4 +1,5 @@
 # syntax=docker/dockerfile-upstream:master
+# check=skip=InvalidBaseImagePlatform
 
 # ALPINE_VERSION sets the Alpine Linux version for all Alpine stages
 ARG ALPINE_VERSION=3.20
@@ -20,7 +21,7 @@ RUN npm install
 
 # hugo downloads and extracts the Hugo binary
 FROM base AS hugo
-ARG HUGO_VERSION=0.127.0
+ARG HUGO_VERSION=0.132.0
 ARG TARGETARCH
 WORKDIR /tmp/hugo
 RUN wget -O "hugo.tar.gz" "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-${TARGETARCH}.tar.gz"
@@ -44,7 +45,7 @@ ARG DOCS_URL
 RUN hugo --gc --minify -d /out -e $HUGO_ENV -b $DOCS_URL
 
 # lint lints markdown files
-FROM davidanson/markdownlint-cli2:v0.12.1 AS lint
+FROM davidanson/markdownlint-cli2:v0.13.0 AS lint
 USER root
 RUN --mount=type=bind,target=. \
     /usr/local/bin/markdownlint-cli2 \
@@ -106,6 +107,18 @@ WORKDIR /test
 RUN --mount=type=bind,target=. <<"EOT"
 set -ex
 ./scripts/test_unused_media.sh
+EOT
+
+# path-warnings checks for duplicate target paths
+FROM build-base AS path-warnings
+RUN hugo --printPathWarnings > /path-warnings.txt
+RUN <<EOT
+DUPLICATE_TARGETS=$(grep "Duplicate target paths" /path-warnings.txt)
+if [ ! -z "$DUPLICATE_TARGETS" ]; then
+    echo "$DUPLICATE_TARGETS"
+    echo "You probably have a duplicate alias defined. Please check your aliases."
+    exit 1
+fi
 EOT
 
 # pagefind installs the Pagefind runtime

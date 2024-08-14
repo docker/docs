@@ -53,19 +53,17 @@ This page contains download URLs, information about system requirements, and ins
   { .important }
 
 - At least 4 GB of RAM.
-  
-Beginning with Docker Desktop 4.3.0, we have removed the hard requirement to install Rosetta 2. There are a few optional command line tools that still require Rosetta 2 when using Darwin/AMD64. See [Known issues](../troubleshoot/known-issues.md). However, to get the best experience, we recommend that you install Rosetta 2. To install Rosetta 2 manually from the command line, run the following command:
+- For the best experience, it's recommended that you install Rosetta 2. There is no longer a hard requirement to install Rosetta 2, however there are a few optional command line tools that still require Rosetta 2 when using Darwin/AMD64. See [Known issues](../troubleshoot/known-issues.md). To install Rosetta 2 manually from the command line, run the following command:
 
-  ```console
-  $ softwareupdate --install-rosetta
-  ```
+   ```console
+   $ softwareupdate --install-rosetta
+   ```
 {{< /tab >}}
 {{< /tabs >}}
 
 ## Install and run Docker Desktop on Mac
 
-{{< tabs >}}
-{{< tab name="Install interactively" >}}
+### Install interactively
 
 1. Download the installer using the download buttons at the top of the page, or from the [release notes](../release-notes.md).
 
@@ -85,14 +83,14 @@ Beginning with Docker Desktop 4.3.0, we have removed the hard requirement to ins
 
    Note that Docker Desktop won't run if you do not agree to the terms. You can choose to accept the terms at a later date by opening Docker Desktop.
 
-   For more information, see [Docker Desktop Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement). We recommend that you also read the [FAQs](https://www.docker.com/pricing/faq).
+   For more information, see [Docker Desktop Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement). It is recommended that you also read the [FAQs](https://www.docker.com/pricing/faq).
+
 6. From the installation window, select either: 
    - **Use recommended settings (Requires password)**. This lets Docker Desktop automatically set the necessary configuration settings. 
    - **Use advanced settings**. You can then set the location of the Docker CLI tools either in the system or user directory, enable the default Docker socket, and enable privileged port mapping. See [Settings](../settings/mac.md#advanced), for more information and how to set the location of the Docker CLI tools.
-7. Select **Finish**. If you have applied any of the above configurations that require a password in step 6, enter your password to confirm your choice.  
+7. Select **Finish**. If you have applied any of the previous configurations that require a password in step 6, enter your password to confirm your choice.  
 
-{{< /tab >}}
-{{< tab name="Install from the command line" >}}
+### Install from the command line
 
 After downloading `Docker.dmg` from either the download buttons at the top of the page or from the [release notes](../release-notes.md), run the following commands in a terminal to install Docker Desktop in the **Applications** folder:
 
@@ -116,9 +114,6 @@ The `install` command accepts the following flags:
 - `--override-proxy-http=<URL>`: Sets the URL of the HTTP proxy that must be used for outgoing HTTP requests. It requires `--proxy-http-mode` to be `manual`.
 - `--override-proxy-https=<URL>`: Sets the URL of the HTTP proxy that must be used for outgoing HTTPS requests, requires `--proxy-http-mode` to be `manual`
 - `--override-proxy-exclude=<hosts/domains>`: Bypasses proxy settings for the hosts and domains. It's a comma-separated list.
-
-{{< /tab >}}
-{{< /tabs >}}
 
 > **Tip**
 >

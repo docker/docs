@@ -41,18 +41,16 @@ Depends on site.Params.min_version_thresholds and i18n strings for component IDs
     {{ end }}
   {{ end }}
   {{- if $versionAboveThreshold }}
-  <div class="text-gray-light dark:text-gray-dark flex items-center gap-2">
-     <span class="icon-svg flex items-center">{{ partial "icon.html" "chevron_right" }}</span>
-     <span>Introduced in {{ T $component }} version
-     {{- if $link }}
-       {{ page.RenderString (fmt.Printf `[%s](%s)` $v $link) }}
-     {{- else }}
-       {{ $v }}
-     {{- end }}
-     </span>
-  </div>
-  {{- else }}
-    {{ warnf "[introduced] version below threshold: %s %s %v" $component $v $pos }}
+    <div class="text-gray-light dark:text-gray-dark flex items-center gap-2">
+       <span class="icon-svg flex items-center">{{ partialCached "icon.html" "chevron_right" "chevron_right" }}</span>
+       <span>Introduced in {{ T $component }} version
+       {{- if $link }}
+         {{ page.RenderString (fmt.Printf `[%s](%s)` $v $link) }}
+       {{- else }}
+         {{ $v }}
+       {{- end }}
+       </span>
+    </div>
   {{- end }}
 {{- else }}
   {{ errorf "[introduced] invalid component: %s %v" $component $pos }}
