@@ -4,7 +4,6 @@ keywords: Docker, docker, registry, teams, organizations, plans, Dockerfile, Doc
   Hub, docs, documentation
 title: Create your organization
 aliases:
-- /docker-cloud/orgs/
 - /docker-hub/orgs/
 ---
 

@@ -2,9 +2,6 @@
 description: Automated tests
 keywords: Automated, testing, repository
 title: Automated repository tests
-aliases:
-- /docker-cloud/feature-reference/automated-testing/
-- /docker-cloud/builds/automated-testing/
 ---
 
 > **Note**

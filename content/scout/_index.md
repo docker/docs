@@ -4,12 +4,6 @@ keywords: scout, supply chain, vulnerabilities, packages, cves, scan, analysis, 
 description:
   Get an overview on Docker Scout to proactively enhance your software supply chain security
 aliases:
-  - /atomist/
-  - /atomist/try-atomist/
-  - /atomist/configure/settings/
-  - /atomist/configure/advisories/
-  - /atomist/integrate/github/
-  - /atomist/integrate/deploys/
   - /engine/scan/
 grid:
   - title: Quickstart
