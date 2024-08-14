@@ -3,7 +3,6 @@ title: Docker Build Cloud setup
 description: How to get started with Docker Build Cloud
 keywords: build, cloud build
 aliases:
-  - /hydrobuild/setup/
   - /build/cloud/setup/
 ---
 

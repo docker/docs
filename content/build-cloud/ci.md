@@ -3,7 +3,6 @@ title: Use Docker Build Cloud in CI
 description: Speed up your continuous integration pipelines with Docker Build Cloud in CI
 keywords: build, cloud build, ci, gha, gitlab, buildkite, jenkins, circle ci
 aliases:
-  - /hydrobuild/ci/
   - /build/cloud/ci/
 ---
 
