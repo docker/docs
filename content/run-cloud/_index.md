@@ -46,7 +46,7 @@ Docker automatically switches you to your new cloud engine. To verify, check the
 Run the following command: 
 
 ```console
-$ docker cloud engine create cloudengine --arch "amd64"  --use
+$ docker harmonia engine create cloudengine --arch "amd64"  --use
 ```
 
 This creates an engine called `cloudengine` and:
@@ -106,7 +106,7 @@ Running a container with a cloud engine is just as straightforward as running it
 
 1. Create a new cloud engine. Run:
    ```console
-   $ docker cloud engine create cloudengine2
+   $ docker harmonia engine create cloudengine2
    ```
    Docker automatically switches you to your new cloud engine. 
 2. Switch between engines, also known as your Docker contexts. Either switch to your first cloud engine:
@@ -149,7 +149,7 @@ Docker Run Cloud takes advantage of Synchronized file shares to enable local-to-
 2. In your terminal, change into the `awesome-compose/react-express-mysql` directory.
 3. Create a file sync for `cloudengine`:
    ```console
-   $ docker cloud file-sync create --engine cloudengine $PWD
+   $ docker harmonia file-sync create --engine cloudengine $PWD
 4. Run the project in the cloud engine with:
    ```console
    $ docker compose up -d
@@ -183,14 +183,14 @@ To view all shared ports for your Docker context, select the **Shared ports** ic
 
 To share a container port, run: 
 ``` console
-$ docker cloud port-share 3000
+$ docker harmonia engine share create cloudengine 3000
 ```
 This returns a publicly accessible URL for your React app hosted on port `3000`, that you can share with teammates.
 
 To see a list of all your shared ports, run:
 
 ```console
-$ docker cloud port-share list 
+$ docker harmonia engine share list 
 ```
 
 {{< /tab >}}
@@ -215,13 +215,13 @@ To remove a cloud engine, navigate to the **Docker Run Cloud** view and then sel
 To remove the file sync session, run:
 
 ```console
-$ docker cloud port-share delete 3000
+$ docker harmonia file-sync delete --engine cloudengine $PWD
 ```
 
 To remove a cloud engine, run:
 
 ```console
-$ docker cloud engine delete <name-of-engine>
+$ docker harmonia engine delete <name-of-engine>
 ```
 
 {{< /tab >}}
@@ -229,7 +229,7 @@ $ docker cloud engine delete <name-of-engine>
 
 ## Troubleshoot
 
-Run `docker cloud doctor` to print helpful troubleshooting information. 
+Run `docker harmonia doctor` to print helpful troubleshooting information. 
 
 ## Known issues
 
@@ -239,7 +239,3 @@ Run `docker cloud doctor` to print helpful troubleshooting information.
 - Bind volumes are not supported.
 - Port-forwarding support for UDP
 - Docker Compose projects relying on `watch` in `sync` mode are not working with the `tar` synchronizer. Configure it to use `docker cp` instead, disable tar sync by setting `COMPOSE_EXPERIMENTAL_WATCH_TAR=0` in your environment.
-
-## FAQs 
-
-## Feedback and support
