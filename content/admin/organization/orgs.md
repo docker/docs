@@ -9,7 +9,7 @@ aliases:
 
 This section describes how to create an organization. Before you begin:
 
-- You need a [Docker ID](../../docker-id/_index.md).
+- You need a [Docker ID](/accounts/create-account/).
 - Review the [Docker subscriptions and features](../../subscription/core-subscription/details.md) to determine what plan to choose for your organization.
 
 ## Create an organization
@@ -23,7 +23,7 @@ detailed instructions on converting an existing user account to an organization,
 
 To create an organization:
 
-1. Sign in to [Docker Hub](https://hub.docker.com/) using your [Docker ID](../../docker-id/_index.md), your email address, or your social provider.
+1. Sign in to [Docker Hub](https://hub.docker.com/) using your Docker ID, your email address, or your social provider.
 2. Select **Organizations** and then **Create Organization** to create a new
    organization.
 3. Choose a plan for your organization and select **Buy Now**. See

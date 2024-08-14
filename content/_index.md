@@ -66,7 +66,7 @@ grid:
       - text: "Overview"
         url: "/docker-hub/"
       - text: "Create an account"
-        url: "/docker-id/"
+        url: "/accounts/create-account/"
       - text: "Create a repository"
         url: "/docker-hub/repos/create/"
   - title: Docker Scout
