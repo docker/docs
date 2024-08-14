@@ -3,7 +3,6 @@ title: Optimize for building in the cloud
 description: Building remotely is different from building locally. Here's how to optimize for remote builders.
 keywords: build, cloud build, optimize, remote, local, cloud
 aliases:
-  - /hydrobuild/optimization/
   - /build/cloud/optimization/
 ---
 

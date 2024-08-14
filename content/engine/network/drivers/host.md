@@ -4,6 +4,7 @@ description: All about exposing containers on the Docker host's network
 keywords: network, host, standalone, host mode networking
 aliases:
 - /network/host/
+- /network/drivers/host/
 ---
 
 If you use the `host` network mode for a container, that container's network

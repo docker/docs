@@ -4,7 +4,6 @@ keywords: accounts, docker ID, billing, paid plans, support, Hub, Store, Forums,
   base, beta access, email, activation, verification
 title: Create an account
 aliases:
-- /docker-cloud/dockerid/
 - /docker-hub/accounts/
 ---
 

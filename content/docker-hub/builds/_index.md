@@ -4,9 +4,6 @@ keywords: automated, build, images, Docker Hub
 title: Set up Automated Builds
 aliases:
 - /docker-hub/builds/automated-build/
-- /docker-cloud/feature-reference/automated-build/
-- /docker-cloud/builds/automated-build/
-- /docker-cloud/builds/
 - /docker-hub/builds/classic/
 ---
 

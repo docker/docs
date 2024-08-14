@@ -6,8 +6,6 @@ tags: [Best practices]
 aliases:
   - /articles/dockerfile_best-practices/
   - /engine/articles/dockerfile_best-practices/
-  - /docker-cloud/getting-started/intermediate/optimize-dockerfiles/
-  - /docker-cloud/tutorials/optimize-dockerfiles/
   - /engine/userguide/eng-image/dockerfile_best-practices/
   - /develop/develop-images/dockerfile_best-practices/
   - /develop/develop-images/guidelines/

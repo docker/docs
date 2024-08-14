@@ -24,7 +24,7 @@ development:
 - title: Docker Extensions
   description: Customize your Docker Desktop workflow.
   icon: extension
-  link: /desktop/extensions/
+  link: /extensions/
 services:
 - title: Docker Hub
   description: Discover, share, and integrate container images

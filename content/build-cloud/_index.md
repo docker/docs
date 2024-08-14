@@ -3,7 +3,6 @@ title: Docker Build Cloud
 description: Find documentation on Docker Build Cloud to help you build your container images faster, both locally and in CI
 keywords: build, cloud, cloud build, remote builder
 aliases:
-  - /build/hydrobuild/
   - /build/cloud/faq/
   - /build/cloud/
 ---

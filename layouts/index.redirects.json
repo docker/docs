@@ -5,9 +5,6 @@
     {{- range .Params.aliases -}}
       {{ $redirects.SetInMap "paths" . $target }}
     {{- end -}}
-    {{- range .Params.redirect_from -}}
-      {{ $redirects.SetInMap "paths" . $target }}
-    {{- end -}}
   {{- end -}}
 {{- end -}}
 {{- range $target, $aliases := site.Data.redirects -}}

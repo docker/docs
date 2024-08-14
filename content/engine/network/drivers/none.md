@@ -4,6 +4,7 @@ description: How to isolate the networking stack of a container using the none d
 keywords: network, none, standalone
 aliases:
 - /network/none/
+- /network/drivers/none/
 ---
 
 If you want to completely isolate the networking stack of a container, you can
