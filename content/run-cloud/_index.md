@@ -5,21 +5,19 @@ keywords: run, cloud, docker desktop, resources
 sitemap: false
 ---
 
-> **Early Access**
+> **Private Preview**
 >
-> Docker Run Cloud is an early-access feature.
+> Docker Run Cloud is in Private Preview.
 { .restricted }
 
-Docker Run Cloud brings the power of cloud-based development to Docker. You can now run your applications in the cloud whilst continuing to use your existing tools and workflows and without worrying about local resource limitations. Docker Run Cloud also lets you share previews of your cloud-based applications for real-time feedback. 
+Docker Run Cloud brings the power of the Cloud to your local development workflow. You can now run your applications in the cloud whilst continuing to use your existing tools and workflows and without worrying about local resource limitations. Docker Run Cloud also lets you share previews of your cloud-based applications for real-time feedback. 
 
 ## Set up 
 
 To get started with Docker Run Cloud, you need to:
 
-- Download and install [Docker Desktop version 4.32](../desktop/release-notes.md). 
-- Have a Docker ID that's part of a Docker organization participating in the Docker Run Cloud early access program. 
-
-Once Docker Run Cloud is enabled for your organization, sign out of Docker Desktop and sign back in to activate the changes. 
+- Have a Docker account that's part of a Docker organization
+- Reach out to us at (email address TBD) so we can help you onboard
 
 ## Quickstart
 
@@ -37,7 +35,7 @@ This guide introduces you to essential commands and steps for creating, managing
 3. Fill out the creation form:
    - Enter `cloudengine` as the name
    - Choose an organization to associate the cloud engine with
-   - Select the **Standard** engine size with the **AMD-64** architecture
+   - Select the engine size and architecture
 4. Select **Create**.
 
 Docker automatically switches you to your new cloud engine. To verify, check the context switcher in the top-left corner of the Docker Dashboard; it should display `cloudengine`. You’re now ready to use it.
@@ -48,7 +46,7 @@ Docker automatically switches you to your new cloud engine. To verify, check the
 Run the following command: 
 
 ```console
-$ docker harmonia engine create cloudengine --arch "amd64"  --use
+$ docker cloud engine create cloudengine --arch "amd64"  --use
 ```
 
 This creates an engine called `cloudengine` and:
@@ -108,7 +106,7 @@ Running a container with a cloud engine is just as straightforward as running it
 
 1. Create a new cloud engine. Run:
    ```console
-   $ docker harmonia engine create cloudengine2
+   $ docker cloud engine create cloudengine2
    ```
    Docker automatically switches you to your new cloud engine. 
 2. Switch between engines, also known as your Docker contexts. Either switch to your first cloud engine:
@@ -151,7 +149,7 @@ Docker Run Cloud takes advantage of Synchronized file shares to enable local-to-
 2. In your terminal, change into the `awesome-compose/react-express-mysql` directory.
 3. Create a file sync for `cloudengine`:
    ```console
-   $ docker harmonia file-sync create --engine cloudengine $PWD
+   $ docker cloud file-sync create --engine cloudengine $PWD
 4. Run the project in the cloud engine with:
    ```console
    $ docker compose up -d
@@ -185,14 +183,14 @@ To view all shared ports for your Docker context, select the **Shared ports** ic
 
 To share a container port, run: 
 ``` console
-$ docker harmonia engine share create cloudengine 3000
+$ docker cloud port-share 3000
 ```
 This returns a publicly accessible URL for your React app hosted on port `3000`, that you can share with teammates.
 
 To see a list of all your shared ports, run:
 
 ```console
-$ docker harmonia engine share list 
+$ docker cloud port-share list 
 ```
 
 {{< /tab >}}
@@ -217,13 +215,13 @@ To remove a cloud engine, navigate to the **Docker Run Cloud** view and then sel
 To remove the file sync session, run:
 
 ```console
-$ docker harmonia file-sync delete --engine cloudengine $PWD
+$ docker cloud port-share delete 3000
 ```
 
 To remove a cloud engine, run:
 
 ```console
-$ docker harmonia engine delete <name-of-engine>
+$ docker cloud engine delete <name-of-engine>
 ```
 
 {{< /tab >}}
@@ -231,7 +229,7 @@ $ docker harmonia engine delete <name-of-engine>
 
 ## Troubleshoot
 
-Run `docker harmonia doctor` to print helpful troubleshooting information. 
+Run `docker cloud doctor` to print helpful troubleshooting information. 
 
 ## Known issues
 
