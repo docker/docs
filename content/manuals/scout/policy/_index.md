@@ -101,6 +101,12 @@ The following policy parameters are configurable in a custom version:
 - **Fixable vulnerabilities only**: Whether or not to only report
   vulnerabilities with a fix version available (enabled by default).
 
+- **Package types**: List of package types to consider.
+
+  This option lets you specify the package types, as [PURL package type definitions](https://github.com/package-url/purl-spec/blob/master/PURL-TYPES.rst),
+  that you want to include in the policy evaluation. By default, the policy
+  considers all package types.
+
 For more information about configuring policies, see [Configure policies](./configure.md).
 
 ### No AGPL v3 licenses
