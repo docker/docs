@@ -3,10 +3,6 @@ description: Find a comprehensive overview of Docker Hub, including its features
 keywords: Docker, docker, docker hub, hub, repositories, docker account
 title: Overview of Docker Hub
 grid:
-- title: Create a Docker ID
-  description: Register and create a new Docker ID.
-  icon: fingerprint
-  link: /docker-id
 - title: Quickstart
   description: Step-by-step instructions on getting started on Docker Hub.
   icon: explore

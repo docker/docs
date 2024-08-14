@@ -5,6 +5,7 @@ keywords: accounts, docker ID, billing, paid plans, support, Hub, Store, Forums,
 title: Create an account
 aliases:
 - /docker-hub/accounts/
+- /docker-id/
 ---
 
 You can create a free Docker account with your email address or by signing up with your Google or GitHub account. Once you've created your account with a unique Docker ID, you can access all Docker products, including Docker Hub. With Docker Hub, you can access repositories and explore images that are available from the community and verified publishers.

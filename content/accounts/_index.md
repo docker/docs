@@ -6,7 +6,7 @@ grid:
 - title: Create a Docker ID
   description: Get started with Docker and create an account.
   icon: fingerprint
-  link: /docker-id/
+  link: /accounts/create-account/
 - title: Manage account
   description: Learn how to manage the settings for your account.
   icon: manage_accounts
