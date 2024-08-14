@@ -107,6 +107,9 @@
 # redirect for old location of dockerd reference
 "/reference/cli/dockerd/":
   - /engine/reference/commandline/dockerd/
+# redirect updated location of the "running containers" page
+"/engine/reference/run":
+  - /engine/containers/run/
 
 "/engine/security/#docker-daemon-attack-surface":
   # Details about the "Docker Daemon attack surface". This redirect is currently

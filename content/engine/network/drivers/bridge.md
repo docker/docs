@@ -8,6 +8,7 @@ aliases:
 - /engine/userguide/networking/default_network/custom-docker0/
 - /engine/userguide/networking/work-with-networks/
 - /network/bridge/
+- /network/drivers/bridge/
 ---
 
 In terms of networking, a bridge network is a Link Layer device

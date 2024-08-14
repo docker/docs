@@ -5,6 +5,7 @@ description: All about using IPvlan to make your containers appear like physical
 keywords: network, ipvlan, l2, l3, standalone
 aliases:
 - /network/ipvlan/
+- /network/drivers/ipvlan/
 ---
 
 The IPvlan driver gives users total control over both IPv4 and IPv6 addressing.
