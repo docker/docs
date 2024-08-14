@@ -42,25 +42,6 @@ grid_apis:
   description: API for Docker Verified Publishers to fetch analytics data.
   icon: area_chart
   link: /docker-hub/api/dvp/
-aliases:
-- /app/working-with-app/
-- /engine/reference/commandline/app/
-- /engine/reference/commandline/app_bundle/
-- /engine/reference/commandline/app_completion/
-- /engine/reference/commandline/app_init/
-- /engine/reference/commandline/app_inspect/
-- /engine/reference/commandline/app_install/
-- /engine/reference/commandline/app_list/
-- /engine/reference/commandline/app_merge/
-- /engine/reference/commandline/app_pull/
-- /engine/reference/commandline/app_push/
-- /engine/reference/commandline/app_render/
-- /engine/reference/commandline/app_split/
-- /engine/reference/commandline/app_status/
-- /engine/reference/commandline/app_uninstall/
-- /engine/reference/commandline/app_upgrade/
-- /engine/reference/commandline/app_validate/
-- /engine/reference/commandline/app_version/
 ---
 
 This section includes the reference documentation for the Docker platform's
