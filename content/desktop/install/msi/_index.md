@@ -4,11 +4,10 @@ description: If you're an IT admin, learn how to deploy Docker Desktop with Micr
 keywords: msi, docker desktop, windows, installation
 ---
  
-> **Early Access**
->
-> The MSI installer is an [early access](../../../release-lifecycle.md#early-access-ea) feature for Docker Business subscribers.
-> It's available to all company owners and organization owners with Docker Desktop version 4.32 and later.
-{ .restricted } 
+{{% restricted title="Early Access" %}}
+The MSI installer is an [early access](../../../release-lifecycle.md#early-access-ea) feature for Docker Business subscribers.
+It's available to all company owners and organization owners with Docker Desktop version 4.32 and later.
+{{% /restricted %}}
 
 Docker offers a 64-bit Microsoft Installer (MSI) package designed to assist IT administrators in customizing and deploying Docker Desktop across multiple users or machines in an enterprise environment. 
 

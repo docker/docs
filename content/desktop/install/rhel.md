@@ -8,10 +8,9 @@ toc_max: 4
 download-url-base: https://download.docker.com/linux/rhel
 ---
 
-> **Early Access**
->
-> Docker Desktop on RHEL is in [Early Access](../../release-lifecycle.md).
-{ .restricted }
+{{% restricted title="Early Access" %}}
+Docker Desktop on RHEL is in [Early Access](../../release-lifecycle.md).
+{{% /restricted %}}
 
 > **Docker Desktop terms**
 >

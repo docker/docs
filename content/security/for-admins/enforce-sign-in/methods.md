@@ -8,11 +8,10 @@ This page outlines the different ways you can enforce sign-in for Docker Desktop
 
 ## Registry key method (Windows only)
 
-> **Early Access**
->
-> The registry key method is an [early access](../../../release-lifecycle.md#early-access-ea) feature for Docker Business subscribers. 
-> It's available with Docker Desktop version 4.32 and later.
-{ .restricted }
+{{% restricted title="Early Access" %}}
+The registry key method is an [early access](../../../release-lifecycle.md#early-access-ea) feature for Docker Business subscribers. 
+It's available with Docker Desktop version 4.32 and later.
+{{% /restricted %}}
 
 1. Create the registry key. Your new key should look like the following:
 
@@ -50,11 +49,10 @@ There are many ways to deploy the registry key, for example using an MDM solutio
 
 ## plist method (Mac only)
 
-> **Early Access**
->
-> The plist method is an [early access](../../../release-lifecycle.md#early-access-ea) feature for Docker Business subscribers. 
-> It's available with Docker Desktop version 4.32 and later.
-{ .restricted }
+{{% restricted title="Early Access" %}}
+The plist method is an [early access](../../../release-lifecycle.md#early-access-ea) feature for Docker Business subscribers. 
+It's available with Docker Desktop version 4.32 and later.
+{{% /restricted %}}
 
 1. Create the file `/Library/Application Support/com.docker.docker/desktop.plist`.
 2. Open `desktop.plist` in a text editor and add the following content, where `myorg` is replaced with your organization’s name all lowercase:
