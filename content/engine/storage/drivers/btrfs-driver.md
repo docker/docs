@@ -18,7 +18,7 @@ combine multiple physical block devices into a single Btrfs filesystem.
 This page refers to Docker's Btrfs storage driver as `btrfs` and the overall
 Btrfs Filesystem as Btrfs.
 
-> **Note**
+> [!NOTE]
 >
 > The `btrfs` storage driver is only supported with Docker Engine CE on SLES,
 > Ubuntu, and Debian systems.
@@ -87,7 +87,7 @@ This procedure is essentially identical on SLES and Ubuntu.
    $ sudo mount -t btrfs /dev/xvdf /var/lib/docker
    ```
 
-   > **Note**
+   > [!NOTE]
    >
    > Make the change permanent across reboots by adding an entry to
    > `/etc/fstab`.
@@ -151,7 +151,7 @@ $ sudo btrfs device add /dev/svdh /var/lib/docker
 $ sudo btrfs filesystem balance /var/lib/docker
 ```
 
-> **Note**
+> [!NOTE]
 >
 > While you can do these operations with Docker running, performance suffers.
 > It might be best to plan an outage window to balance the Btrfs filesystem.
@@ -260,7 +260,7 @@ filesystem itself and the space is reclaimed.
 There are several factors that influence Docker's performance under the `btrfs`
 storage driver.
 
-> **Note**
+> [!NOTE]
 >
 > Many of these factors are mitigated by using Docker volumes for write-heavy
 > workloads, rather than relying on storing data in the container's writable

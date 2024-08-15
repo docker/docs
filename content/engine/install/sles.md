@@ -24,12 +24,11 @@ aliases:
 download-url-base: https://download.docker.com/linux/sles
 ---
 
-> **Note**
+> [!NOTE]
 >
 > The installation instructions on this page refer to packages for SLES on the
 > **s390x** architecture (IBM Z). Other architectures, including x86_64, aren't
 > supported for SLES.
-{ .warning }
 
 To get started with Docker Engine on SLES, make sure you
 [meet the prerequisites](#prerequisites), and then follow the

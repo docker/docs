@@ -142,10 +142,9 @@ You will see output like the following:
 
 This container runs a web server that displays a simple website. When working with more complex projects, you'll run different parts in different containers. For example, a different container for the `frontend`, `backend`, and `database`.
 
-> **Tip**
+> [!TIP]
 >
 > The `docker ps` command will show you _only_ running containers. To view stopped containers, add the `-a` flag to list all containers: `docker ps -a`
-{ .tip }
 
 
 ### Access the frontend
@@ -168,14 +167,13 @@ The `docker/welcome-to-docker` container continues to run until you stop it. You
     docker stop <the-container-id>
     ```
 
-> **Tip**
+> [!TIP]
 >
 > When referencing containers by ID, you don't need to provide the full ID. You only need to provide enough of the ID to make it unique. As an example, the previous container could be stopped by running the following command:
 >
 > ```console
 > docker stop a1f
 > ```
-{ .tip }
 
 {{< /tab >}}
 {{< /tabs >}}

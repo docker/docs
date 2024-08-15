@@ -11,14 +11,13 @@ In Docker Build, build arguments (`ARG`) and environment variables (`ENV`)
 both serve as a means to pass information into the build process.
 You can use them to parameterize the build, allowing for more flexible and configurable builds.
 
-> **Warning**
+> [!WARNING]
 >
 > Build arguments and environment variables are inappropriate for passing secrets
 > to your build, because they're exposed in the final image. Instead, use
 > secret mounts or SSH mounts, which expose secrets to your builds securely.
 >
 > See [Build secrets](./secrets.md) for more information.
-{ .warning }
 
 ## Similarities and differences
 

@@ -42,7 +42,7 @@ $ docker service create \
   <IMAGE>
 ```
 
-> **Note**
+> [!NOTE]
 >
 > The older form of this syntax is a colon-separated string, where
 > the published port is first and the target port is second, such as

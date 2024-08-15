@@ -29,7 +29,7 @@ The project showcases the following technologies:
 
 - You have an [OpenAI API Key](https://platform.openai.com/api-keys).
 
-  > **Note**
+  > [!NOTE]
   >
   > OpenAI is a third-party hosted service and [charges](https://openai.com/pricing) may apply.
 
@@ -126,7 +126,7 @@ The dockerbot service is a question-answering service that leverages both the
 Pinecone database and an AI model to provide responses. The following steps show
 how to use the service.
 
-> **Note**
+> [!NOTE]
 >
 > You must process at least one video via the
 > [yt-whisper service](#using-the-yt-whisper-service) before using

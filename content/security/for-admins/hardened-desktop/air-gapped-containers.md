@@ -49,10 +49,9 @@ The `containersProxy` setting describes the policy which is applied to traffic f
 - `pac` : URL for a PAC file. Only takes effect if `mode` is `manual`, and is considered higher priority than `http`, `https`, `exclude`.
 - `transparentPorts`: A comma-separated list of ports (e.g. `"80,443,8080"`) or a wildcard (`*`) indicating which ports should be proxied.
 
-> **Important**
+> [!IMPORTANT]
 >
 > Any existing `proxy` setting in the `admin-settings.json` file continues to apply to traffic from the app on the host.
-{ .important }
 
 ## Example PAC file
 

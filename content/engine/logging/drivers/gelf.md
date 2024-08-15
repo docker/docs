@@ -42,7 +42,7 @@ option.
 
 Restart Docker for the changes to take effect.
 
-> **Note**
+> [!NOTE]
 >
 > `log-opts` configuration options in the `daemon.json` configuration file must
 > be provided as strings. Boolean and numeric values (such as the value for
@@ -74,7 +74,7 @@ The `gelf` logging driver supports the following options:
 | `env`                      | optional | Applies when starting the Docker daemon. A comma-separated list of logging-related environment variables this daemon accepts. Adds additional key on the `extra` fields, prefixed by an underscore (`_`). Used for advanced [log tag options](log_tags.md).                         | `--log-opt env=os,customer`                        |
 | `env-regex`                | optional | Similar to and compatible with `env`. A regular expression to match logging-related environment variables. Used for advanced [log tag options](log_tags.md).                                                                                                                        | `--log-opt env-regex=^(os\|customer)`              |
 
-> **Note**
+> [!NOTE]
 >
 > The `gelf` driver doesn't support TLS for TCP connections. Messages sent to TLS-protected inputs can silently fail.
 

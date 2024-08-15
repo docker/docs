@@ -68,7 +68,6 @@ To move the disk image file to a different location:
 >**Important**
 >
 > Do not move the file directly in Finder as this can cause Docker Desktop to lose track of the file.
-{ .important }
 
 ##### How do I delete unnecessary containers and images?
 
@@ -163,7 +162,7 @@ $ security add-trusted-cert -d -r trustRoot -k ~/Library/Keychains/login.keychai
 See also, [Directory structures for
 certificates](#directory-structures-for-certificates).
 
-> **Note**
+> [!NOTE]
 >
 > You need to restart Docker Desktop after making any changes to the keychain or
 > to the `~/.docker/certs.d` directory in order for the changes to take effect.
@@ -182,7 +181,7 @@ When the Docker Desktop application starts, it copies the `~/.docker/certs.d`
 folder on your Mac to the `/etc/docker/certs.d` directory on Moby (the Docker
 Desktop `xhyve` virtual machine).
 
-> **Note**
+> [!NOTE]
 >
 > * You need to restart Docker Desktop after making any changes to the keychain
 >   or to the `~/.docker/certs.d` directory in order for the changes to take

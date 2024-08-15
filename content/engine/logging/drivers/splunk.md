@@ -37,7 +37,7 @@ The daemon.json file is located in `/etc/docker/` on Linux hosts or
 configuring Docker using `daemon.json`, see
 [daemon.json](../../../reference/cli/dockerd.md#daemon-configuration-file).
 
-> **Note**
+> [!NOTE]
 >
 > `log-opts` configuration options in the `daemon.json` configuration file must
 > be provided as strings. Boolean and numeric values (such as the value for

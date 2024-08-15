@@ -59,7 +59,7 @@ For more information about this view, see [Image details view](/scout/explore/im
 
 Select the image from the list, select the **More options** button and select **Pull**.
 
-> **Note**
+> [!NOTE]
 >
 > The repository must exist on Docker Hub in order to pull the latest version of an image. You must be signed in to pull private images.
 
@@ -67,13 +67,13 @@ Select the image from the list, select the **More options** button and select **
 
 Select the image from the list, select the **More options** button and select **Push to Hub**.
 
-> **Note**
+> [!NOTE]
 >
 > You can only push an image to Docker Hub if the image belongs to your Docker ID or your organization. That is, the image must contain the correct username/organization in its tag to be able to push it to Docker Hub.
 
 ## Remove an image
 
-> **Note**
+> [!NOTE]
 >
 > To remove an image used by a running or a stopped container, you must first remove the associated container.
 

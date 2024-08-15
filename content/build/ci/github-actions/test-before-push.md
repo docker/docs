@@ -56,7 +56,7 @@ jobs:
           tags: ${{ env.LATEST_TAG }}
 ```
 
-> **Note**
+> [!NOTE]
 >
 > The `linux/amd64` image is only built once in this workflow. The image is
 > built once, and the following steps use the internal cache from the first

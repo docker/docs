@@ -19,7 +19,7 @@ $ curl -fsSL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh 
 $ sh install-scout.sh
 ```
 
-> **Note**
+> [!NOTE]
 >
 > Always examine scripts downloaded from the internet before running them
 > locally. Before installing, make yourself familiar with potential risks and

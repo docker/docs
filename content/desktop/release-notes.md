@@ -1042,7 +1042,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 - [Compose v2.20.2](https://github.com/docker/compose/releases/tag/v2.20.2)
 - [Docker Engine v24.0.5](https://docs.docker.com/engine/release-notes/24.0/#2405)
 
-> **Note**
+> [!NOTE]
 >
 > In this release, the bundled Docker Compose and Buildx binaries show a different version string. This relates to our efforts to test new features without causing backwards compatibility issues.
 >

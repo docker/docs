@@ -207,7 +207,7 @@ USER root
 RUN echo "Hi"
 ```
 
-> **Note**
+> [!NOTE]
 >
 > This policy only checks for the default user of the image, as set in the
 > image configuration blob. Even if you do specify a non-root default user,
@@ -342,7 +342,7 @@ Once you push an image and policy evaluation completes, the results from the
 SonarQube quality gates display as a policy in the Docker Scout Dashboard, and
 in the CLI.
 
-> **Note**
+> [!NOTE]
 >
 > Docker Scout can only access SonarQube analyses created after the integration
 > is enabled. Docker Scout doesn't have access to historic evaluations. Trigger

@@ -39,7 +39,6 @@ included with Docker, you can also implement and use [logging driver plugins](pl
 > section below to learn how to configure the `local` logging driver as a default,
 > and the [local file logging driver](drivers/local.md) page for more details about the
 > `local` logging driver.
-{ .tip }
 
 ## Configure the default logging driver
 
@@ -77,7 +76,7 @@ example sets four configurable options on the `json-file` logging driver:
 Restart Docker for the changes to take effect for newly created containers.
 Existing containers don't use the new logging configuration automatically.
 
-> **Note**
+> [!NOTE]
 >
 > `log-opts` configuration options in the `daemon.json` configuration file must
 > be provided as strings. Boolean and numeric values (such as the value for
@@ -94,7 +93,7 @@ $ docker info --format '{{.LoggingDriver}}'
 json-file
 ```
 
-> **Note**
+> [!NOTE]
 >
 > Changing the default logging driver or logging driver options in the daemon
 > configuration only affects containers that are created after the configuration
@@ -141,11 +140,10 @@ The `non-blocking` message delivery mode prevents applications from blocking due
 to logging back pressure. Applications are likely to fail in unexpected ways when
 STDERR or STDOUT streams block.
 
-> **Warning**
+> [!WARNING]
 >
 > When the buffer is full, new messages will not be enqueued. Dropping messages is often preferred to blocking the
 > log-writing process of an application.
-{ .warning }
 
 The `mode` log option controls whether to use the `blocking` (default) or
 `non-blocking` message delivery.

@@ -108,7 +108,7 @@ You can create the volume and start the container using the CLI or Docker Deskto
    $ docker run -dp 127.0.0.1:3000:3000 --mount type=volume,src=todo-db,target=/etc/todos getting-started
    ```
 
-   > **Note**
+   > [!NOTE]
    >
    > If you're using Git Bash, you must use different syntax for this command.
    >
@@ -140,10 +140,9 @@ To start the todo app container with the volume mounted:
 2. In the search window, select the **Images** tab.
 3. In the search box, specify the image name, `getting-started`.
 
-   > **Tip**
+   > [!TIP]
    >
    >  Use the search filter to filter images and only show **Local images**.
-   { .tip }
 
 4. Select your image and then select **Run**.
 5. Select **Optional settings**.

@@ -15,22 +15,20 @@ To get started with Docker Engine on Raspberry Pi OS, make sure you
 [meet the prerequisites](#prerequisites), and then follow the
 [installation steps](#installation-methods).
 
-> **Important**
+> [!IMPORTANT]
 >
 > This installation instruction refers to the 32-bit (armhf) version of
 > Raspberry Pi OS. If you're using the 64-bit (arm64) version, follow the
 > instructions for [Debian](debian.md).
-{ .important }
 
 ## Prerequisites
 
 ### Firewall limitations
 
-> **Warning**
+> [!WARNING]
 >
 > Before you install Docker, make sure you consider the following
 > security implications and firewall incompatibilities.
-{ .warning }
 
 - If you use ufw or firewalld to manage firewall settings, be aware that
   when you expose container ports using Docker, these ports bypass your

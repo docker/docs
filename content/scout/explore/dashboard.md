@@ -147,7 +147,7 @@ vulnerability is disclosed in a security advisory, and it affects one or more
 of your images. You will not receive notifications about changes to
 vulnerability exposure or policy compliance as a result of pushing a new image.
 
-> **Note**
+> [!NOTE]
 >
 > Notifications are only triggered for the *last pushed* image tags for each
 > repository. "Last pushed" refers to the image tag that was most recently

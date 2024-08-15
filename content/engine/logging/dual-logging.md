@@ -101,7 +101,7 @@ as a default, with dual logging caching enabled:
   2019-02-04T19:48:15.599Z [INFO]  core: cluster listeners successfully shut down
   ```
 
-> **Note**
+> [!NOTE]
 >
 > For logging drivers that support reading logs, such as the `local`, `json-file`
 > and `journald` drivers, there is no difference in functionality before or after
@@ -150,7 +150,7 @@ $ cat /etc/docker/daemon.json
 }
 ```
 
-> **Note**
+> [!NOTE]
 >
 > For logging drivers that support reading logs, such as the `local`, `json-file`
 > and `journald` drivers, dual logging isn't used, and disabling the option has

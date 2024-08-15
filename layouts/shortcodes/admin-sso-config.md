@@ -8,7 +8,7 @@
   {{ $sso_navigation = "Select your organization or company in the left navigation drop-down menu, and then select **SSO and SCIM.**" }}
 {{ end }}
 
-> **Important**
+> [!IMPORTANT]
 >
 > If your IdP setup requires an Entity ID and the ACS URL, you must select the
 > **SAML** tab in the **Authentication Method** section. For example, if your
@@ -16,7 +16,6 @@
 > AD, you must select **SAML**. If you are [configuring Open ID Connect with Entra ID (formerly Azure AD)](https://docs.microsoft.com/en-us/powerapps/maker/portals/configure/configure-openid-settings) select
 > **Azure AD (OIDC)** as the authentication method. Also, IdP initiated connections
 > aren't supported at this time.
-{ .important}
 
 After your domain is verified, create an SSO connection.
 
@@ -24,7 +23,7 @@ After your domain is verified, create an SSO connection.
 2. {{ $sso_navigation }}
 3. In the SSO connections table select **Create Connection**, and create a name for the connection.
 
-   > **Note**
+   > [!NOTE]
    >
    > You have to verify at least one domain before creating the connections.
 

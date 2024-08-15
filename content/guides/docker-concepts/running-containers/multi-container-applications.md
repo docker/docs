@@ -133,7 +133,7 @@ In this hands-on guide, you'll first see how to build and run a counter web appl
     $ docker run -d --name nginx --network sample-app  -p 80:80 nginx
     ```
 
-     > **Note**
+     > [!NOTE]
      >
      > Nginx is typically used as a reverse proxy for web applications, routing traffic to backend servers. In this case, it routes to the Node.js backend containers (web1 or web2).
 
@@ -167,7 +167,7 @@ In this hands-on guide, you'll first see how to build and run a counter web appl
     web1: Number of visits is: 12
     ```
 
-    > **Note**
+    > [!NOTE]
     >
     > You might have noticed that Nginx, acting as a reverse proxy, likely distributes incoming requests in a round-robin fashion between the two backend containers. This means each request might be directed to a different container (web1 and web2) on a rotating basis. The output shows consecutive increments for both the web1 and web2 containers and the actual counter value stored in Redis is updated only after the response is sent back to the client.
 

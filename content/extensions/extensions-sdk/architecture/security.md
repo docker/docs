@@ -18,7 +18,6 @@ Extensions are executed with the same permissions as the Docker Desktop user. Ex
 
 The Extensions SDK provides a set of JavaScript APIs to invoke commands or invoke these binaries from the extension UI code. Extensions can also provide a backend part that starts a long-lived running container in the background.
 
-> **Important**
+> [!IMPORTANT]
 >
 > Make sure you trust the publisher or author of the extension when you install it, as the extension has the same access rights as the user running Docker Desktop.
-{ .important }

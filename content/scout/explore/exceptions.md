@@ -257,7 +257,7 @@ exception later. Image layers are immutable, so anything you put in the image's
 filesystem is there forever. Attaching the document as an
 [attestation](#attestation) provides better flexibility.
 
-> **Note**
+> [!NOTE]
 >
 > VEX documents embedded in the image filesystem are not considered for images
 > that have attestations. If your image has **any** attestations, Docker Scout

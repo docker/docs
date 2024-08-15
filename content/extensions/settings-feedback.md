@@ -45,7 +45,7 @@ update your settings:
 3. Next to **Show Docker Extensions system containers**, select or clear the checkbox to set your desired state.
 4. In the bottom-right corner, select **Apply & Restart**.
 
-> **Note**
+> [!NOTE]
 >
 > Enabling extensions doesn't use computer resources (CPU / Memory) by itself.
 >

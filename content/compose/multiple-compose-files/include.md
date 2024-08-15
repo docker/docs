@@ -14,7 +14,7 @@ Each path listed in the `include` section loads as an individual Compose applica
 
 Once the included Compose application loads, all resources are copied into the current Compose application model.
 
-> **Note**
+> [!NOTE]
 >
 > `include` applies recursively so an included Compose file which declares its own `include` section, results in those other files being included as well.
 

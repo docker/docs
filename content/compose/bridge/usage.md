@@ -60,7 +60,7 @@ These files are then stored within your project in the `/out` folder.
 The Kubernetes manifests can then be used to run the application on Kubernetes using
 the standard deployment command `kubectl apply -k out/overlays/desktop/`.
 
-> **Note**
+> [!NOTE]
 >
 > Make sure you have enabled Kubernetes in Docker Desktop before you deploy your Compose Bridge transformations.
 
@@ -70,10 +70,9 @@ If you want to convert a `compose.yaml` file that is located in another director
 $ compose-bridge convert -f <path-to-file>/compose.yaml 
 ```
 
-> **Tip**
+> [!TIP]
 >
 > Run `compose-bridge convert --help` to see all available flags. 
-{ .tip }
 
 ## What's next?
 

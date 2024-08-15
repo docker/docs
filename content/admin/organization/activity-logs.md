@@ -17,7 +17,7 @@ For example, activity logs display activities such as the date when a repository
 
 Owners can also see the activity logs for their repository if the repository is part of the organization subscribed to a Docker Business or Team plan.
 
-> **Note**
+> [!NOTE]
 >
 > Activity logs requires a [Docker Team or Business subscription](../../../subscription/_index.md).
 

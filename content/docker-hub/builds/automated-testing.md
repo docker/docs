@@ -4,7 +4,7 @@ keywords: Automated, testing, repository
 title: Automated repository tests
 ---
 
-> **Note**
+> [!NOTE]
 >
 > Automated builds require a
 > [Docker Pro, Team, or Business subscription](../../subscription/index.md).
@@ -41,7 +41,7 @@ You can define any number of linked services in this file. The only requirement
 is that `sut` is defined. Its return code determines if tests passed or not.
 Tests pass if the `sut` service returns `0`, and fail otherwise.
 
-> **Note**
+> [!NOTE]
 > 
 > Only the `sut` service and all other services listed in
 > [`depends_on`](../../compose/compose-file/05-services.md#depends_on) are
@@ -54,7 +54,7 @@ that ends in `.test.yml` is used for testing, and the tests run sequentially.
 You can also use [custom build hooks](advanced.md#override-build-test-or-push-commands)
 to further customize your test behavior.
 
-> **Note**
+> [!NOTE]
 >
 > If you enable Automated builds, they also run any tests defined
 in the `test.yml` files.
@@ -101,13 +101,12 @@ Docker repository, regardless of the Autotest settings.
     pull requests to branches that match a build rule, including when the
     pull request originated in an external source repository.
 
-    > **Important**
+    > [!IMPORTANT]
     >
     >For security purposes, autotest on external pull requests is
     limited on public repositories. Private images are not pulled and
     environment variables defined in Docker Hub are not
     available. Automated builds continue to work as usual.
-    { .important }
 
 7. Select **Save** to save the settings, or select **Save and build** to save and
 run an initial test.

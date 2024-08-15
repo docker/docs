@@ -96,7 +96,7 @@ writable container layer. Each storage driver handles the implementation
 differently, but all drivers use stackable image layers and the copy-on-write
 (CoW) strategy.
 
-> **Note**
+> [!NOTE]
 >
 > Use Docker volumes if you need multiple containers to have shared access to
 > the exact same data. Refer to the [volumes section](../volumes.md) to learn
@@ -358,7 +358,7 @@ layers are the same.
    to an image registry. Shared image layers can therefore reduce network
    bandwidth and storage.
 
-   > **Tip**
+   > [!TIP]
    >
    > Format output of Docker commands with the `--format` option.
    > 
@@ -371,7 +371,6 @@ layers are the same.
    > [format command and log output section](/engine/cli/formatting.md).
    > We also pretty-printed the JSON output using the [`jq` utility](https://stedolan.github.io/jq/)
    > for readability.
-   { .tip }
 
 ### Copying makes containers efficient
 
@@ -403,7 +402,7 @@ container's thin writable top layer. Note that changing the metadata of files,
 for example, changing file permissions or ownership of a file, can also result
 in a `copy_up` operation, therefore duplicating the file to the writable layer.
 
-> **Tip**
+> [!TIP]
 >
 > Use volumes for write-heavy applications.
 >
@@ -417,7 +416,6 @@ in a `copy_up` operation, therefore duplicating the file to the writable layer.
 > among containers and don't increase the size of your container's writable
 > layer. Refer to the [use volumes](../volumes.md) section to learn about
 > volumes.
-{ .tip }
 
 A `copy_up` operation can incur a noticeable performance overhead. This overhead
 is different depending on which storage driver is in use. Large files,
@@ -467,7 +465,7 @@ examines how much room they take up.
 
    {{< accordion title="Advanced: metadata and logs storage used for containers" >}}
    
-   > **Note**
+   > [!NOTE]
    >
    > This step requires a Linux machine, and doesn't work on Docker Desktop, as
    > it requires access to the Docker Daemon's file storage.

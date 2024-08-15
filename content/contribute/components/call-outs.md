@@ -8,9 +8,6 @@ We support these broad categories of callouts:
 
 - Version callouts
 - Notes (no HTML attribute required)
-- Tips, which use the `{ .tip }` class
-- Important, which use the `{ .important }` class
-- Warning, which use the `{ .warning }` class
 - Experimental, which use the `{ .experimental }` class
 - Restricted, which use the `{ .restricted }` class
 
@@ -18,7 +15,7 @@ We support these broad categories of callouts:
 
 {{< introduced buildx 0.10.4 >}}
 
-> **Note**
+> [!NOTE]
 >
 > Note the way the `get_hit_count` function is written. This basic retry
 > loop lets us attempt our request multiple times if the redis service is
@@ -28,20 +25,18 @@ We support these broad categories of callouts:
 > cluster, this also helps handling momentary connection drops between
 > nodes.
 
-> **Tip**
+> [!TIP]
 >
 > For a smaller base image, use `alpine`.
-{ .tip }
 
 
-> **Important**
+> [!IMPORTANT]
 >
 > Treat access tokens like your password and keep them secret. Store your
 > tokens securely (for example, in a credential manager).
-{ .important }
 
 
-> **Warning**
+> [!WARNING]
 >
 > Removing Volumes
 >
@@ -50,7 +45,6 @@ We support these broad categories of callouts:
 > the `--volumes` flag.
 >
 > The Docker Dashboard does not remove volumes when you delete the app stack.
-{ .warning }
 
 For both of the following callouts, consult [the Docker release lifecycle](/release-lifecycle) for more information on when to use them.
 
@@ -72,7 +66,7 @@ For both of the following callouts, consult [the Docker release lifecycle](/rele
 ```
 
 ```html
-> **Note**
+> [!NOTE]
 >
 > Note the way the `get_hit_count` function is written. This basic retry
 > loop lets us attempt our request multiple times if the redis service is
@@ -82,18 +76,16 @@ For both of the following callouts, consult [the Docker release lifecycle](/rele
 > cluster, this also helps handling momentary connection drops between
 > nodes.
 
-> **Tip**
+> [!TIP]
 >
 > For a smaller base image, use `alpine`.
-{ .tip }
 
-> **Important**
+> [!IMPORTANT]
 >
 > Treat access tokens like your password and keep them secret. Store your
 > tokens securely (for example, in a credential manager).
-{ .important }
 
-> **Warning**
+> [!WARNING]
 >
 > Removing Volumes
 >
@@ -102,7 +94,6 @@ For both of the following callouts, consult [the Docker release lifecycle](/rele
 > the `--volumes` flag.
 >
 > The Docker Dashboard does _not_ remove volumes when you delete the app stack.
-{ .warning }
 
 > **Beta feature**
 >

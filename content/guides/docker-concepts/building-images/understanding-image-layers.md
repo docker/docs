@@ -125,7 +125,6 @@ In this first step, you will create your own base image that you will then use f
 > A base image is a foundation for building other images. It's possible to use any images as a base image. However, some images are intentionally created as building blocks, providing a foundation or starting point for an application.
 >
 > In this example, you probably won’t deploy this `node-base` image, as it doesn’t actually do anything yet. But it’s a base you can use for other builds.
-{ .tip }
 
 
 ### Build an app image

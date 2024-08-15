@@ -351,7 +351,7 @@ $ docker build --tag docker-gs-ping-roach .
 
 Now, run your container. This time you'll need to set some environment variables so that your application knows how to access the database. For now, you’ll do this right in the `docker run` command. Later you'll see a more convenient method with Docker Compose.
 
-> **Note**
+> [!NOTE]
 >
 > Since you're running your CockroachDB cluster in insecure mode, the value for the password can be anything.
 >
@@ -620,7 +620,7 @@ $ docker compose up --build
 
 You passed the `--build` flag so Docker will compile your image and then start it.
 
-> **Note**
+> [!NOTE]
 >
 > Docker Compose is a useful tool, but it has its own quirks. For example, no rebuild is triggered on the update to the source code unless the `--build` flag is provided. It is a very common pitfall to edit one's source code, and forget to use the `--build` flag when running `docker compose up`.
 

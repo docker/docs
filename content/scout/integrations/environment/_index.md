@@ -39,7 +39,7 @@ Docker Scout supports the following runtime integrations:
 - [CLI client](./cli.md)
 - [Sysdig integration](./sysdig.md)
 
-> **Note**
+> [!NOTE]
 >
 > Only organization owners can create new environments and set up integrations.
 > Additionally, Docker Scout only assigns an image to an environment if the

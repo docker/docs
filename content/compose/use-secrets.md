@@ -80,7 +80,7 @@ In the advanced example above:
 - The top-level `secrets` section defines the variables `db_password` and `db_root_password` and provides the `file` that populates their values.
 - The deployment of each container means Docker creates a temporary filesystem mount under `/run/secrets/<secret_name>` with their specific values.
 
-> **Note**
+> [!NOTE]
 >
 > The `_FILE` environment variables demonstrated here are a convention used by some images, including Docker Official Images like [mysql](https://hub.docker.com/_/mysql) and [postgres](https://hub.docker.com/_/postgres).
 

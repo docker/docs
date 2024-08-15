@@ -19,7 +19,7 @@ After configuring the integration, Docker Scout sends notifications about
 changes to policy compliance and vulnerability exposure for your repositories,
 to the Slack channels associated with the webhook.
 
-> **Note**
+> [!NOTE]
 >
 > Notifications are only triggered for the *last pushed* image tags for each
 > repository. "Last pushed" refers to the image tag that was most recently

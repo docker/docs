@@ -271,7 +271,6 @@ for the entire app. The containers will stop and the network will be removed.
 >remove the volumes, you need to add the `--volumes` flag.
 >
 >The Docker Dashboard does not remove volumes when you delete the app stack.
-{ .warning }
 
 ## Summary
 

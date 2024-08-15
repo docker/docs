@@ -163,12 +163,11 @@ $ docker buildx build \
   --push .
 ```
 
-> **Warning**
+> [!WARNING]
 >
 > QEMU performs full-CPU emulation of non-native platforms, which is much
 > slower than native builds. Compute-heavy tasks like compilation and
 > compression/decompression will likely take a large performance hit.
-{ .warning }
 
 Using a custom BuildKit image or invoking non-native binaries in builds may
 require that you explicitly turn on QEMU using the `qemu.install` option when
@@ -301,7 +300,7 @@ Prerequisites:
      --driver-opt=namespace=buildkit
    ```
 
-   > **Note**
+   > [!NOTE]
    >
    > Remember to specify the namespace in driver options.
 

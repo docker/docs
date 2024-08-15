@@ -47,7 +47,7 @@ Recommended approach to install Docker Desktop on Debian:
   ```
    Don't forget to substitute `<arch>` with the architecture you want.
 
-  > **Note**
+  > [!NOTE]
   >
   > At the end of the installation process, `apt` displays an error due to installing a downloaded package. You
   > can ignore this error message.

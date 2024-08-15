@@ -11,12 +11,11 @@ Insights and analytics provides usage analytics for Docker Verified
 Publisher (DVP) and Docker-Sponsored Open Source (DSOS) images on Docker Hub. This includes self-serve access to image and extension usage metrics for a desired time span. You can also display the number of image pulls by tag or by digest, and get breakdowns by geolocation, cloud provider, client, and more.
 
 <!-- prettier-ignore -->
-> **Tip**
+> [!TIP]
 >
 > Head to the
 [Docker Verified Publisher Program](https://www.docker.com/partners/programs/) or [Docker-Sponsored Open Source](https://www.docker.com/community/open-source/application/#) pages
 to learn more about the programs.
-{ .tip }
 
 ## View the image's analytics data
 
@@ -35,11 +34,10 @@ To view data in the chart:
 ![Insights and analytics chart visualization](./images/chart.png)
 
 <!-- prettier-ignore -->
-> **Tip**
+> [!TIP]
 >
 > Hovering your cursor over the chart displays a tooltip, showing precise data
 > for points in time.
-{ .tip }
 
 ### Share analytics data
 
@@ -229,11 +227,10 @@ This section contains information about privacy-protecting measures that ensures
 consumers of content on Docker Hub remain completely anonymous.
 
 <!-- prettier-ignore -->
-> **Important**
+> [!IMPORTANT]
 >
 > Docker never shares any Personally Identifiable Information (PII) as part of
 > analytics data.
-{ .important }
 
 The image pulls summary dataset includes unique IP address count. This data point only
 includes the number of distinct unique IP addresses that request an image.

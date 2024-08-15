@@ -30,7 +30,7 @@ To create an organization:
 [Docker Pricing](https://www.docker.com/pricing/)
 for details on the features offered in the Team and Business plan.
 
-   > **Note**
+   > [!NOTE]
    >
    > Selecting **Buy Now** isn't an obligation to pay. You can complete
    > this step without incurring a payment.
@@ -39,7 +39,7 @@ for details on the features offered in the Team and Business plan.
 your organization in Docker Hub. It's not possible to change the name of the
 organization after you've created it.
 
-   > **Note**
+   > [!NOTE]
    >
    > You can't use the same name for the organization and your Docker ID. If you want to use your Docker ID as the organization name, then you must first [convert your account into an organization](../convert-account.md).
 
@@ -63,7 +63,7 @@ To view an organization:
 1. Sign in to Docker Hub with a user account that is a member of any team in the
    organization. 
 
-      > **Note**
+      > [!NOTE]
       >
       > You can't _directly_ log in to an organization. This is especially
       > important to note if you create an organization by
@@ -114,11 +114,10 @@ If you have multiple organizations that you want to merge into one, complete the
 3. Manually move over your data, including all repositories.
 4. Once you're done moving all of your users and data, [downgrade](../../subscription/core-subscription/downgrade.md) the secondary account to a free subscription.
 
-> **Tip**
+> [!TIP]
 >
 > If your organization has a Docker Core Business subscription with a purchase order, contact Support or your Account Manager at Docker.
 >
-{ .tip }
 
 ## More resources
 

@@ -245,7 +245,7 @@ Use the `force-compression=true` option to force re-compressing layers imported
 from a previous image, if the requested compression algorithm is different from
 the previous compression algorithm.
 
-> **Note**
+> [!NOTE]
 >
 > The `gzip` and `estargz` compression methods use the [`compress/gzip` package](https://pkg.go.dev/compress/gzip),
 > while `zstd` uses the [`github.com/klauspost/compress/zstd` package](https://github.com/klauspost/compress/tree/master/zstd).

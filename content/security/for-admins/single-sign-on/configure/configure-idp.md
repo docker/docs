@@ -36,15 +36,13 @@ When a user signs in using SSO, Docker obtains the following attributes from the
 
 If you use SAML for your SSO connection, Docker obtains these attributes from the SAML assertion message. Your IdP may use different naming for SAML attributes than those in the previous list. The following table lists the possible SAML attributes that can be present in order for your SSO connection to work.
 
-> **Important**
+> [!IMPORTANT]
 >
 >SSO uses Just-in-Time (JIT) provisioning by default. If you [enable SCIM](../../provisioning/scim.md), JIT values still overwrite the attribute values set by SCIM provisioning whenever users log in. To avoid conflicts, make sure your JIT values match your SCIM values. For example, to make sure that the full name of a user displays in your organization, you would set a `name` attribute in your SAML attributes and ensure the value includes their first name and last name. The exact method for setting these values (for example, constructing it with `user.firstName + " " + user.lastName`) varies depending on your IdP.
-{.important}
 
-> **Tip**
+> [!TIP]
 >
 > Optional Just-in-Time (JIT) provisioning is available when you use the Admin Console and enable SCIM. With this feature, you can avoid conflicts between SCIM and JIT by disabling JIT provisioning in your SSO connection. See [SSO authentication with JIT provisioning disabled](/security/for-admins/provisioning/just-in-time/#sso-authentication-with-jit-provisioning-disabled).
-{ .tip }
 
 You can also configure attributes to override default values, such as default team or organization. See [role mapping](../../provisioning/scim.md#set-up-role-mapping).
 
@@ -57,10 +55,9 @@ You can also configure attributes to override default values, such as default te
 | Docker Team (optional)     | `dockerTeam`  |
 | Docker Role (optional)      | `dockerRole`  |
 
-> **Important**
+> [!IMPORTANT]
 >
 > If none of the email address attributes listed in the previous table are found, SSO returns an error. Also, if the `Full name` attribute isn't set, then the name will be displayed as the value of the `Email address`.
-{ .important}
 
 ## Step three: Configure your IdP to work with Docker
 
@@ -96,12 +93,11 @@ See [More resources](#more-resources) for a video overview on how to set up SSO 
 {{< /tab >}}
 {{< tab name="Entra ID SAML 2.0" >}}
 
-> **Tip**
+> [!TIP]
 >
 > When you create the application for your SSO connection in Entra ID (formerly Azure AD) we recommend that you don't assign the app to all the users in the directory.
 > Instead, you can create a security group and assign the app to the group. This way, you can control who in your organization has access to Docker.
 > To change the default setting for assignment, go to the main properties for your app and find the **Assignment required** setting. Set it to **Yes**.
-{ .tip }
 
 See [More resources](#more-resources) for a video overview on how to set up SSO with SAML in Entra ID (formerly Azure AD).
 

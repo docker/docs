@@ -6,7 +6,7 @@ aliases:
  - /desktop/hardened-desktop/enhanced-container-isolation/config/
 ---
 
-> **Note**
+> [!NOTE]
 >
 > This feature is available with Docker Desktop version 4.27 (and later) on Mac, Linux, and Windows (Hyper-V).
 > For Windows with WSL 2, this feature requires Docker Desktop 4.28 and later.
@@ -101,10 +101,9 @@ $ docker run -it -v /var/run/docker.sock:/var/run/docker.sock docker:cli sh
 / #
 ```
 
-> **Tip**
+> [!TIP]
 >
 > Be restrictive on the images you allow, as described in [Recommendations](#recommendations) below.
-{ .tip }
 
 In general, it's easier to specify the image using the tag wildcard format
 (e.g., `<image-name>:*`) because then `imageList` doesn't need to be updated whenever a new version of the
@@ -257,7 +256,7 @@ Whether to configure the list as an allow or deny list depends on the use case.
 | scout                | Docker Scout |
 | trust                | Manage trust on Docker images |
 
-> **Note**
+> [!NOTE]
 >
 > Docker socket mount permissions do not apply when running "true"
 > Docker-in-Docker (i.e., when running the Docker Engine inside a container). In

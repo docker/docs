@@ -90,7 +90,7 @@ If you see an error similar to this one and you are starting the daemon manually
 with flags, you may need to adjust your flags or the `daemon.json` to remove the
 conflict.
 
-> **Note**
+> [!NOTE]
 >
 > If you see this specific error message about `hosts`, continue to the
 > [next section](#configure-the-daemon-host-with-systemd)
@@ -122,7 +122,7 @@ ExecStart=/usr/bin/dockerd
 There are other times when you might need to configure `systemd` with Docker,
 such as [configuring a HTTP or HTTPS proxy](./proxy.md).
 
-> **Note**
+> [!NOTE]
 >
 > If you override this option without specifying a `hosts` entry in the
 > `daemon.json` or a `-H` flag when starting Docker manually, Docker fails to
@@ -132,11 +132,10 @@ Run `sudo systemctl daemon-reload` before attempting to start Docker. If Docker
 starts successfully, it's now listening on the IP address specified in the
 `hosts` key of the `daemon.json` instead of a socket.
 
-> **Important**
+> [!IMPORTANT]
 >
 > Setting `hosts` in the `daemon.json` isn't supported on Docker
 > Desktop for Windows or Docker Desktop for Mac.
-{ .important }
 
 ### Out of memory issues
 

@@ -45,10 +45,9 @@ testuser:231072:65536
 
 ### Distribution-specific hint
 
-> **Tip**
+> [!TIP]
 >
 > We recommend that you use the Ubuntu kernel.
-{ .tip }
 
 {{< tabs >}}
 {{< tab name="Ubuntu" >}}
@@ -157,7 +156,7 @@ testuser:231072:65536
 
 ## Install
 
-> **Note**
+> [!NOTE]
 >
 > If the system-wide Docker daemon is already running, consider disabling it:
 >```console
@@ -405,7 +404,7 @@ EOF
 # systemctl daemon-reload
 ```
 
-> **Note**
+> [!NOTE]
 >
 > Delegating `cpuset` requires systemd 244 or later.
 
@@ -484,7 +483,7 @@ $ mkdir -p $XDG_RUNTIME_DIR
 $ dockerd-rootless.sh
 ```
 
-> **Note**
+> [!NOTE]
 >
 > You must remove the directory every time you log out.
 

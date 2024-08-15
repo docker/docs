@@ -36,7 +36,7 @@ Annotations are not to be confused with [attestations]:
 You can add annotations to an image at build-time, or when creating the image
 manifest or index.
 
-> **Note**
+> [!NOTE]
 > 
 > The Docker Engine image store doesn't support loading images with
 > annotations. To build with annotations, make sure to push the image directly

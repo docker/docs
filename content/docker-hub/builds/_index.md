@@ -7,7 +7,7 @@ aliases:
 - /docker-hub/builds/classic/
 ---
 
-> **Note**
+> [!NOTE]
 >
 > Automated builds require a
 > [Docker Pro, Team, or Business subscription](../../subscription/index.md).
@@ -114,7 +114,7 @@ For each source:
 
 * Specify the **Dockerfile location** as a path relative to the root of the source code repository. If the Dockerfile is at the repository root, leave this path set to `/`.
 
-> **Note**
+> [!NOTE]
 >
 > When Docker Hub pulls a branch from a source code repository, it performs a
 > shallow clone - only the tip of the specified branch. Refer to
@@ -133,7 +133,7 @@ commands you set in `hooks` files. However, they're stored so that only users wh
 means you can use them to store access tokens or other information that
 should remain secret.
 
-> **Note**
+> [!NOTE]
 >
 > The variables set on the build configuration screen are used during
 > the build processes only and shouldn't get confused with the environment
@@ -192,7 +192,7 @@ the case, you can specify a path where the build looks for the files.
 The build context is the path to the files needed for the build, relative to
 the root of the repository. Enter the path to these files in the **Build context** field. Enter `/` to set the build context as the root of the source code repository.
 
-> **Note**
+> [!NOTE]
 >
 > If you delete the default path `/` from the **Build context** field and leave
 > it blank, the build system uses the path to the Dockerfile as the build
@@ -250,7 +250,7 @@ including any testing settings.
 
 ### Service users for team autobuilds
 
-> **Note**
+> [!NOTE]
 >
 > Only owners can set up Automated builds for teams.
 
@@ -284,7 +284,7 @@ variable to automated builds associated with the account. For more information, 
 
 5. Sign in to Docker Hub as an owner, switch to the organization, and follow the instructions to [link to source code repository](link-source.md) using the service account.
 
-    > **Note**
+    > [!NOTE]
     >
     > You may need to log out of your individual account on the source code provider to create the link to the service account.
 

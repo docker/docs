@@ -9,7 +9,7 @@ aliases:
  - /security/for-admins/image-access-management/
 ---
 
-> **Note**
+> [!NOTE]
 >
 > Image Access Management is available to [Docker Business](/subscription/core-subscription/details.md#docker-business) customers only.
 

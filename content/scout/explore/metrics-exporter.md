@@ -32,7 +32,7 @@ The metrics endpoint exposes the following metrics:
 >
 > Streams is mostly an internal concept in Docker Scout,
 > with the exception of the data exposed through this metrics endpoint.
-{ .tip #stream }
+{ #stream }
 
 ## Creating an access token
 
@@ -214,13 +214,12 @@ instances:
         value: Bearer <TOKEN>
 ```
 
-> **Important**
+> [!IMPORTANT]
 >
 > Do not replace the `<TOKEN>` placeholder in the previous configuration
 > example. It must stay as it is. Only make sure the Docker PAT is correctly
 > mounted into the Datadog agent in the specified filesystem path. Save the
 > file as `conf.yaml` and restart the agent.
-{ .important }
 
 When creating a Datadog agent configuration of your own, make sure to edit the
 `openmetrics_endpoint` property to target your organization, by replacing

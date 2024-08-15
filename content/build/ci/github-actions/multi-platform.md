@@ -7,7 +7,7 @@ keywords: ci, github actions, gha, buildkit, buildx, multi-platform
 You can build [multi-platform images](../../building/multi-platform.md) using
 the `platforms` option, as shown in the following example:
 
-> **Note**
+> [!NOTE]
 >
 > - For a list of available platforms, see the [Docker Setup Buildx](https://github.com/marketplace/actions/docker-setup-buildx)
 >   action.

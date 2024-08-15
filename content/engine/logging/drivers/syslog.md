@@ -56,7 +56,7 @@ this example uses UDP.
 
 Restart Docker for the changes to take effect.
 
-> **Note**
+> [!NOTE]
 >
 > `log-opts` configuration options in the `daemon.json` configuration file must
 > be provided as strings. Numeric and Boolean values (such as the value for

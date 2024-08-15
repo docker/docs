@@ -372,7 +372,7 @@ $ docker run --net=ipnet210 --ip=10.1.214.9 -it --rm alpine ping -c 2 192.168.21
 
 ```
 
-> **Note**
+> [!NOTE]
 >
 > Notice that there is no `--gateway=` option in the network create. The field
 > is ignored if one is specified `l3` mode. Take a look at the container routing
@@ -504,7 +504,7 @@ using IPv4 packets:
 $ docker run --net=ipvlan140 --ip=192.168.140.10 -it --rm alpine /bin/sh
 ```
 
-> **Note**
+> [!NOTE]
 >
 > Different subnets on the same parent interface in IPvlan `L2` mode cannot ping
 > one another. That requires a router to proxy-arp the requests with a secondary
@@ -573,7 +573,7 @@ $$ ip -6 route
 default dev eth0  metric 1024
 ```
 
-> **Note**
+> [!NOTE]
 >
 > There may be a bug when specifying `--ip6=` addresses when you delete a
 > container with a specified v6 address and then start a new container with the

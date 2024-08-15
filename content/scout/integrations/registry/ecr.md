@@ -32,7 +32,7 @@ themselves. For more information about how Docker Scout handles image data, see
 
 The following table describes the configuration resources.
 
-> **Note**
+> [!NOTE]
 >
 > Creating these resources incurs a small, recurring cost on the AWS account.
 > The **Cost** column in the table represents an estimated monthly cost of the
@@ -133,7 +133,7 @@ organization.
 
 3. In the dialog that opens, confirm by selecting **Remove**.
 
-> **Important**
+> [!IMPORTANT]
 >
 > Removing the integration from the Docker Scout dashboard doesn't remove the
 > AWS resources in your account.
@@ -141,7 +141,6 @@ organization.
 > After removing the integration in Docker Scout, go to the AWS console and
 > delete the **DockerScoutECRIntegration** CloudFormation stack for the integration
 > that you want to remove.
-{ .important }
 
 ## Troubleshooting
 

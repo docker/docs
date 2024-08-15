@@ -47,7 +47,7 @@ You can opt in to add either the SBOM or provenance attestation type, or both.
 $ docker buildx build --sbom=true --provenance=true .
 ```
 
-> **Note**
+> [!NOTE]
 >
 > The default image store doesn't support attestations. If you're using the
 > default image store and you build an image using the default `docker` driver,
@@ -60,7 +60,7 @@ $ docker buildx build --sbom=true --provenance=true .
 >   a registry directly.
 > - Enable the [containerd image store](../../desktop/containerd.md).
 
-> **Note**
+> [!NOTE]
 >
 > Provenance attestations are enabled by default, with the `mode=min` option.
 > You can disable provenance attestations using the `--provenance=false` flag,

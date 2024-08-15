@@ -112,7 +112,7 @@ systemd drop-in file that sets the variables for the `docker` service.
    Environment="HTTPS_PROXY=https://proxy.example.com:3129"
    ```
 
-   > **Note**
+   > [!NOTE]
    >
    > Special characters in the proxy value, such as `#?!()[]{}`, must be double
    > escaped using `%%`. For example:
@@ -199,7 +199,7 @@ systemd drop-in file that sets the variables for the `docker` service.
    Environment="HTTPS_PROXY=https://proxy.example.com:3129"
    ```
 
-   > **Note**
+   > [!NOTE]
    >
    > Special characters in the proxy value, such as `#?!()[]{}`, must be double
    > escaped using `%%`. For example:

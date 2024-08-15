@@ -188,10 +188,9 @@ $ docker buildx imagetools inspect <namespace>/<image>:<version> \
 }
 ```
 
-> **Tip**
+> [!TIP]
 >
 > If the image is multi-platform, you can check the SBOM for a platform-specific index using `--format '{{ json (index .SBOM "linux/amd64").SPDX }}'`.
-{ .tip }
 
 You can also construct more complex expressions using the full functionality
 of Go templates. For example, you can list all the installed packages and their
@@ -223,11 +222,10 @@ an image that implements the
 $ docker buildx build --attest type=sbom,generator=<image> .
 ```
 
-> **Tip**
+> [!TIP]
 >
 > The Docker Scout SBOM generator is available. See
 > [Docker Scout SBOMs](/scout/how-tos/view-create-sboms.md).
-{ .tip }
 
 ## SBOM attestation example
 

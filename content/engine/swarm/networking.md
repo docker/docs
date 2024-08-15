@@ -49,10 +49,9 @@ The following three network concepts are important to swarm services:
   join a swarm. Most users do not need to customize its configuration, but
   Docker allows you to do so.
 
-> **Tip**
+> [!TIP]
 >
 > See also [Networking overview](/engine/network/_index.md) for more details about Swarm networking in general.
-{ .tip }
 
 ## Firewall considerations
 
@@ -231,7 +230,7 @@ Multiple pools can be configured if discontiguous address space is required. How
 
 The default mask length can be configured and is the same for all networks. It is set to `/24` by default. To change the default subnet mask length, use the `--default-addr-pool-mask-length` command line option.
 
-> **Note**
+> [!NOTE]
 >
 > Default address pools can only be configured on `swarm init` and cannot be altered after cluster creation.
 
@@ -256,7 +255,7 @@ network create`. This enables IPSEC encryption at the level of the vxlan. This
 encryption imposes a non-negligible performance penalty, so you should test this
 option before using it in production.
 
-> **Note**
+> [!NOTE]
 >
 > You must [customize the automatically created ingress](#customize-ingress)
 > to enable encryption. By default, all ingress traffic is unencrypted, as encryption
@@ -365,7 +364,7 @@ services which publish ports, such as a WordPress service which publishes port
       my-ingress
     ```
 
-    > **Note**
+    > [!NOTE]
     >
     > You can name your `ingress` network something other than
     > `ingress`, but you can only have one. An attempt to create a second one

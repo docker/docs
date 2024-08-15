@@ -34,10 +34,11 @@ _For checksums, see [Release notes](../release-notes.md)_
 
 ## System requirements
 
+> [!TIP]
+>
 > **Should I use Hyper-V or WSL?**
 >
 > Docker Desktop's functionality remains consistent on both WSL and Hyper-V, without a preference for either architecture. Hyper-V and WSL have their own advantages and disadvantages, depending on your specific set up and your planned use case. 
-{ .tip }
 
 {{< tabs >}}
 {{< tab name="WSL 2 backend, x86_64" >}}
@@ -58,15 +59,14 @@ _For checksums, see [Release notes](../release-notes.md)_
 
 For more information on setting up WSL 2 with Docker Desktop, see [WSL](../wsl/_index.md).
 
-> **Note**
+> [!NOTE]
 >
 > Docker only supports Docker Desktop on Windows for those versions of Windows that are still within [Microsoft’s servicing timeline](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet). Docker Desktop is not supported on server versions of Windows, such as Windows Server 2019 or Windows Server 2022. For more information on how to run containers on Windows Server, see [Microsoft's official documentation](https://learn.microsoft.com/virtualization/windowscontainers/quick-start/set-up-environment).
 
-> **Important**
+> [!IMPORTANT]
 >
 > To run Windows containers, you need Windows 10 or Windows 11 Professional or Enterprise edition.
 > Windows Home or Education editions only allow you to run Linux containers.
-{ .important }
 
 {{< /tab >}}
 {{< tab name="Hyper-V backend, x86_64" >}}
@@ -85,15 +85,14 @@ For more information on setting up WSL 2 with Docker Desktop, see [WSL](../wsl/_
     BIOS settings. For more information, see
     [Virtualization](../troubleshoot/topics.md#virtualization).
 
-> **Note**
+> [!NOTE]
 >
 > Docker only supports Docker Desktop on Windows for those versions of Windows that are still within [Microsoft’s servicing timeline](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet). Docker Desktop is not supported on server versions of Windows, such as Windows Server 2019 or Windows Server 2022. For more information on how to run containers on Windows Server, see [Microsoft's official documentation](https://learn.microsoft.com/virtualization/windowscontainers/quick-start/set-up-environment).
 
-> **Important**
+> [!IMPORTANT]
 >
 > To run Windows containers, you need Windows 10 or Windows 11 Professional or Enterprise edition.
-> Windows Home or Education editions only let you run Linux containers.
-{ .important }
+> Windows Home or Education editions only allow you to run Linux containers.
 
 {{< /tab >}}
 {{< tab name="WSL 2 backend, Arm (Beta)" >}}
@@ -112,12 +111,11 @@ For more information on setting up WSL 2 with Docker Desktop, see [WSL](../wsl/_
   - Enable hardware virtualization in BIOS. For more information, see
     [Virtualization](../troubleshoot/topics.md#virtualization).
 
-> **Important**
+> [!IMPORTANT]
 >
 > The following features are not supported:
 > - Hyper-V backend
 > - Windows containers
-{ .important }
 
 {{< /tab >}}
 {{< /tabs >}}
@@ -152,7 +150,7 @@ For more information on Windows containers, refer to the following documentation
 - To understand how to connect to Windows containers from the local host, see
   [I want to connect to a container from Windows](../networking.md#i-want-to-connect-to-a-container-from-the-host)
 
-> **Note**
+> [!NOTE]
 >
 > When you switch to Windows containers, **Settings** only shows those tabs that are active and apply to your Windows containers.
 
@@ -235,7 +233,7 @@ The `install` command accepts the following flags:
 - `--wsl-default-data-root=<path>`: Specifies the default location for the WSL distribution disk.
 - `--always-run-service`: After installation completes, starts `com.docker.service` and sets the service startup type to Automatic. This circumvents the need for administrator privileges, which are otherwise necessary to start `com.docker.service`. `com.docker.service` is required by Windows containers and Hyper-V backend.
 
-> **Note**
+> [!NOTE]
 >
 > If you're using PowerShell, you need to use the `ArgumentList` parameter before any flags. 
 > For example:
@@ -265,7 +263,7 @@ Docker Desktop does not start automatically after installation. To start Docker 
 
    For more information, see [Docker Desktop Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement/). It is recommended that you read the [FAQs](https://www.docker.com/pricing/faq).
 
-> **Tip**
+> [!TIP]
 >
 > As an IT administrator, you can use endpoint management (MDM) software to identify the number of Docker Desktop instances and their versions within your environment. This can provide accurate license reporting, help ensure your machines use the latest version of Docker Desktop, and enable you to [enforce sign-in](../../security/for-admins/enforce-sign-in/_index.md).
 > - [Intune](https://learn.microsoft.com/en-us/mem/intune/apps/app-discovered-apps)
@@ -273,7 +271,6 @@ Docker Desktop does not start automatically after installation. To start Docker 
 > - [Kandji](https://support.kandji.io/support/solutions/articles/72000559793-view-a-device-application-list)
 > - [Kolide](https://www.kolide.com/features/device-inventory/properties/mac-apps)
 > - [Workspace One](https://blogs.vmware.com/euc/2022/11/how-to-use-workspace-one-intelligence-to-manage-app-licenses-and-reduce-costs.html)
-{ .tip }
 
 ## Where to go next
 

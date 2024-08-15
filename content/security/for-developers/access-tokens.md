@@ -19,10 +19,9 @@ any time.
 
 ## Create an access token
 
-> **Important**
+> [!IMPORTANT]
 >
 > Treat access tokens like your password and keep them secret. Store your tokens securely in a credential manager for example.
-{ .important }
 
 1. Sign in to your [Docker account](https://app.docker.com/login).
 
@@ -55,7 +54,7 @@ $ docker login --username <YOUR_USERNAME>
 
 When prompted for a password, enter your personal access token instead of a password.
 
-> **Note**
+> [!NOTE]
 >
 > If you have [two-factor authentication (2FA)](2fa/index.md) enabled, you must
 > use a personal access token when logging in from the Docker CLI. 2FA is an

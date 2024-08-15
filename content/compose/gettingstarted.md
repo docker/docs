@@ -63,7 +63,7 @@ Make sure you have:
    In this example, `redis` is the hostname of the redis container on the
    application's network and the default port, `6379` is used.
 
-   > **Note**
+   > [!NOTE]
    >
    > Note the way the `get_hit_count` function is written. This basic retry
    > loop attempts the request multiple times if the Redis service is
@@ -112,10 +112,9 @@ Make sure you have:
 
    {{< /accordion >}}
 
-   > **Important**
+   > [!IMPORTANT]
    >
    >Check that the `Dockerfile` has no file extension like `.txt`. Some editors may append this file extension automatically which results in an error when you run the application.
-   { .important }
 
    For more information on how to write Dockerfiles, see the [Dockerfile reference](/reference/dockerfile/).
 
@@ -242,7 +241,7 @@ Whenever a file is changed, Compose syncs the file to the corresponding location
 
 For more information on how Compose Watch works, see [Use Compose Watch](file-watch.md). Alternatively, see [Manage data in containers](/engine/storage/volumes.md) for other options.
 
-> **Note**
+> [!NOTE]
 >
 > For this example to work, the `--debug` option is added to the `Dockerfile`. The `--debug` option in Flask enables automatic code reload, making it possible to work on the backend API without the need to restart or rebuild the container.
 > After changing the `.py` file, subsequent API calls will use the new code, but the browser UI will not automatically refresh in this small example. Most frontend development servers include native live reload support that works with Compose.

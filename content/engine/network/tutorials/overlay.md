@@ -165,7 +165,7 @@ connect a service to each of them.
     service will publish port 80 to the outside world. All of the service
     task containers can communicate with each other without opening any ports.
 
-    > **Note**
+    > [!NOTE]
     >
     > Services can only be created on a manager.
 
@@ -221,7 +221,7 @@ connect a service to each of them.
     `nginx-net-2` and notice that all the service task containers are connected
     to it.
 
-    > **Note**
+    > [!NOTE]
     >
     > Even though overlay networks are automatically created on swarm
     > worker nodes as needed, they are not automatically removed.
@@ -370,7 +370,7 @@ example also uses Linux hosts, but the same commands work on Windows.
     fb635f5ece59563e7b8b99556f816d24e6949a5f6a5b1fbd92ca244db17a4342
     ```
 
-    > **Note**
+    > [!NOTE]
     >
     > Automatic DNS container discovery only works with unique container names.
 

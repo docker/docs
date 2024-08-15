@@ -11,7 +11,7 @@ aliases:
 The [Docker Official Images](https://hub.docker.com/search?q=&type=image&image_filter=official)
 are a curated set of Docker repositories hosted on Docker Hub.
 
-> **Note**
+> [!NOTE]
 >
 > Use of Docker Official Images is subject to [Docker's Terms of Service](https://www.docker.com/legal/docker-terms-service/).
 

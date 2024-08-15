@@ -10,10 +10,9 @@ You can convert an existing user account to an organization. This is useful if y
 
 When you convert a user account to an organization, the account is migrated to a Docker Team plan.
 
-> **Important**
+> [!IMPORTANT]
 >
 > Once you convert your account to an organization, you can’t revert it to a user account. 
-{ .important }
 
 ## Prerequisites
 

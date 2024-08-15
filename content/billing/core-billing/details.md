@@ -10,10 +10,9 @@ aliases:
 
 You can update the billing information for your personal account or for an organization. When you update your billing information, these changes apply to future billing invoices.
 
-> **Important**
+> [!IMPORTANT]
 >
 > You can't update an existing invoice, including paid and unpaid invoices.
-{ .important }
 
 The billing information provided appears on all your billing invoices. The email address provided is where Docker sends all invoices and other [billing-related communication](#update-your-email-address-that-receives-billing-invoices).
 
@@ -29,7 +28,7 @@ The billing information provided appears on all your billing invoices. The email
 
 ### Organization
 
-> **Note**
+> [!NOTE]
 >
 > You must be an organization owner to make changes to the billing information.
 

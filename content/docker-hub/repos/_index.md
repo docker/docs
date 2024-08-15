@@ -77,10 +77,9 @@ The private images that existed in your user account are now available for your 
 
 ## Delete a repository
 
-> **Warning**
+> [!WARNING]
 >
 > Deleting a repository deletes all the images it contains and its build settings. This action can't be undone.
-{ .warning }
 
 1. Navigate to your repository.
 2. Select the **Settings** tab.

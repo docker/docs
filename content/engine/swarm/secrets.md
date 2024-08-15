@@ -26,7 +26,7 @@ runtime but you don't want to store in the image or in source control, such as:
 - Other important data such as the name of a database or internal server
 - Generic strings or binary content (up to 500 kb in size)
 
-> **Note**
+> [!NOTE]
 >
 > Docker secrets are only available to swarm services, not to
 > standalone containers. To use this feature, consider adapting your container
@@ -133,7 +133,7 @@ easier to use Docker secrets. To find out how to modify your own images in
 a similar way, see
 [Build support for Docker Secrets into your images](#build-support-for-docker-secrets-into-your-images).
 
-> **Note**
+> [!NOTE]
 >
 > These examples use a single-Engine swarm and unscaled services for
 > simplicity. The examples use Linux containers, but Windows containers also
@@ -305,7 +305,7 @@ This example assumes that you have PowerShell installed.
         microsoft/iis:nanoserver
     ```
 
-    > **Note**
+    > [!NOTE]
     >
     > There is technically no reason to use secrets for this
     > example; [configs](configs.md) are a better fit. This example is
@@ -472,7 +472,7 @@ generate the site key and certificate, name the files `site.key` and
     actually starts, so you don't need to rebuild your image if you change the
     Nginx configuration.
 
-    > **Note**
+    > [!NOTE]
     >
     > Normally you would create a Dockerfile which copies the `site.conf`
     > into place, build the image, and run a container using your custom image.
@@ -630,7 +630,7 @@ This example illustrates some techniques to use Docker secrets to avoid saving
 sensitive credentials within your image or passing them directly on the command
 line.
 
-> **Note**
+> [!NOTE]
 >
 > This example uses a single-Engine swarm for simplicity, and uses a
 > single-node MySQL service because a single MySQL server instance cannot be
@@ -648,7 +648,7 @@ line.
     password. You can use another command to generate the password if you
     choose.
 
-    > **Note**
+    > [!NOTE]
     >
     > After you create a secret, you cannot update it. You can only
     > remove and re-create it, and you cannot remove a secret that a service is
@@ -834,7 +834,7 @@ This example builds upon the previous one. In this scenario, you create a new
 secret with a new MySQL password, update the `mysql` and `wordpress` services to
 use it, then remove the old secret.
 
-> **Note**
+> [!NOTE]
 >
 > Changing the password on a MySQL database involves running extra
 > queries or commands, as opposed to just changing a single environment variable
@@ -871,7 +871,7 @@ use it, then remove the old secret.
     Even though the MySQL service has access to both the old and new secrets
     now, the MySQL password for the WordPress user has not yet been changed.
 
-    > **Note**
+    > [!NOTE]
     >
     > This example does not rotate the MySQL `root` password.
 
@@ -968,7 +968,7 @@ their values from a file (`WORDPRESS_DB_PASSWORD_FILE`). This strategy ensures
 that backward compatibility is preserved, while allowing your container to read
 the information from a Docker-managed secret instead of being passed directly.
 
-> **Note**
+> [!NOTE]
 >
 > Docker secrets do not set environment variables directly. This was a
 > conscious decision, because environment variables can unintentionally be leaked

@@ -13,7 +13,6 @@ aliases:
 > you must migrate to a supported storage driver before upgrading to Docker
 > Engine v25.0. Read the [Docker storage drivers](select-storage-driver.md)
 > page for supported storage drivers.
-{ .warning }
 
 Device Mapper is a kernel-based framework that underpins many advanced
 volume management technologies on Linux. Docker's `devicemapper` storage driver
@@ -146,7 +145,7 @@ After you have satisfied the [prerequisites](#prerequisites), follow the steps
 below to configure Docker to use the `devicemapper` storage driver in
 `direct-lvm` mode.
 
-> **Warning**: Changing the storage driver makes any containers you have already
+> [!WARNING]: Changing the storage driver makes any containers you have already
   created inaccessible on the local system. Use `docker save` to save containers,
   and push existing images to Docker Hub or a private repository, so you do not
   need to recreate them later.
@@ -192,7 +191,7 @@ See all storage options for each storage driver in the
 Restart Docker for the changes to take effect. Docker invokes the commands to
 configure the block device for you.
 
-> **Warning**: Changing these values after Docker has prepared the block device
+> [!WARNING]: Changing these values after Docker has prepared the block device
 > for you is not supported and causes an error.
 
 You still need to [perform periodic maintenance tasks](#manage-devicemapper).
@@ -228,7 +227,7 @@ assumes that the Docker daemon is in the `stopped` state.
 4.  Create a physical volume on your block device from step 1, using the
     `pvcreate` command. Substitute your device name for `/dev/xvdf`.
 
-    > **Warning**: The next few steps are destructive, so be sure that you have
+    > [!WARNING]: The next few steps are destructive, so be sure that you have
     > specified the correct device!
 
     ```console
@@ -652,7 +651,7 @@ $ sudo lvchange -ay docker/thinpool
 
 ## How the `devicemapper` storage driver works
 
-> **Warning**: Do not directly manipulate any files or directories within
+> [!WARNING]: Do not directly manipulate any files or directories within
 > `/var/lib/docker/`. These files and directories are managed by Docker.
 
 Use the `lsblk` command to see the devices and their pools, from the operating

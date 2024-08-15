@@ -356,10 +356,9 @@ Run the image with a bind mount.
 2. In the search window, select the **Images** tab.
 3. In the search box, specify the container name, `getting-started`.
 
-   > **Tip**
+   > [!TIP]
    >
    >  Use the search filter to filter images and only show **Local images**.
-   { .tip }
 
 4. Select your image and then select **Run**.
 5. Select **Optional settings**.

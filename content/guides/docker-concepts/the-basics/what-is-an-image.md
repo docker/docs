@@ -180,7 +180,6 @@ Follow the instructions to search and pull a Docker image using CLI to view its 
     > **Viewing the full command**
     >
     > If you add the `--no-trunc` flag to the command, you will see the full command. Note that, since the output is in a table-like format, longer commands will cause the output to be very difficult to navigate.
-    { .tip }
 
 
 {{< /tab >}}

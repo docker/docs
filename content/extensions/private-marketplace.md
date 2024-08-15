@@ -104,10 +104,9 @@ This list can include different types of extension images:
 - Extension images stored in Docker Hub as private images. Developers need to be signed in and have pull access to these images.
 - Extension images stored in a private registry. Developers need to be signed in and have pull access to these images.
  
-> **Important**
+> [!IMPORTANT]
 > 
 > Your developers can only install the version of the extension that you’ve listed.
-{ .important}
 
 ## Step four: Generate the private marketplace
 

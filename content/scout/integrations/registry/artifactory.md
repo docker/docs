@@ -17,11 +17,10 @@ You can analyze Artifactory images for vulnerabilities locally using Docker Desk
 docker login {URL}
 ```
 
-> **Tip**
+> [!TIP]
 >
 > For cloud-hosted Artifactory you can find the credentials for your Artifactory repository by
 > selecting it in the Artifactory UI and then the **Set Me Up** button.
-{ .tip }
 
 ## Remote image analysis
 
@@ -142,11 +141,10 @@ the container. Make sure the mount path you use is the directory containing the
 `config.json` file.
 
 <!-- prettier-ignore -->
-> **Important**
+> [!IMPORTANT]
 >
 > Use the `v1` tag of the Artifactory agent image. Don't use the `latest` tag as
 > doing so may incur breaking changes.
-{ .important }
 
 ```console
 $ docker run \

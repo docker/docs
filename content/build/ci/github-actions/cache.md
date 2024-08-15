@@ -6,7 +6,7 @@ keywords: ci, github actions, gha, buildkit, buildx, cache
 This page contains examples on using the cache storage backends with GitHub
 Actions.
 
-> **Note**
+> [!NOTE]
 >
 > See [Cache storage backends](../../cache/backends/_index.md) for more
 > details about cache storage backends.
@@ -209,12 +209,11 @@ For more information about this workaround, refer to the
 
 ### Local cache
 
-> **Warning**
+> [!WARNING]
 >
 > At the moment, old cache entries aren't deleted, so the cache size [keeps growing](https://github.com/docker/build-push-action/issues/252).
 > The following example uses the `Move cache` step as a workaround (see [`moby/buildkit#1896`](https://github.com/moby/buildkit/issues/1896)
 > for more info).
-{ .warning }
 
 You can also leverage [GitHub cache](https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows)
 using the [actions/cache](https://github.com/actions/cache) and [local cache exporter](../../cache/backends/local.md)

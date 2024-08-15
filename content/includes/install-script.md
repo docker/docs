@@ -14,7 +14,6 @@ for the script is open source, and you can find it in the
 Always examine scripts downloaded from the internet before running them locally.
 Before installing, make yourself familiar with potential risks and limitations
 of the convenience script:
-{ .warning }
 
 - The script requires `root` or `sudo` privileges to run.
 - The script attempts to detect your Linux distribution and version and

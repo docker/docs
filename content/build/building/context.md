@@ -288,7 +288,7 @@ $ GIT_AUTH_TOKEN=<token> docker buildx build \
   https://github.com/user/private.git
 ```
 
-> **Note**
+> [!NOTE]
 >
 > Don't use `--build-arg` for secrets.
 
@@ -512,7 +512,7 @@ A preprocessing step uses Go's
 to trim whitespace and remove `.` and `..`.
 Lines that are blank after preprocessing are ignored.
 
-> **Note**
+> [!NOTE]
 >
 > For historical reasons, the pattern `.` is ignored.
 

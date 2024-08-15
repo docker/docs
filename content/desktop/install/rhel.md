@@ -122,7 +122,6 @@ The post-install script:
 > ```console
 > $ docker run --rm -it -v "/etc/pki/entitlement:/etc/pki/entitlement" -v "/etc/rhsm:/etc/rhsm-host" -v "/etc/yum.repos.d/redhat.repo:/etc/yum.repos.d/redhat.repo" registry.access.redhat.com/ubi9
 > ```
-{ .tip }
 
 ## Upgrade Docker Desktop
 

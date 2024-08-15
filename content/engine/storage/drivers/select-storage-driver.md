@@ -48,7 +48,7 @@ the final decision.
 
 ## Supported storage drivers per Linux distribution
 
-> **Note**
+> [!NOTE]
 >
 > Modifying the storage driver by editing the daemon configuration file isn't
 > supported on Docker Desktop. Only the default `overlay2` driver or the
@@ -178,14 +178,13 @@ To change the storage driver, see the specific instructions for the new storage
 driver. Some drivers require additional configuration, including configuration
 to physical or logical disks on the Docker host.
 
-> **Important**
+> [!IMPORTANT]
 >
 > When you change the storage driver, any existing images and containers become
 > inaccessible. This is because their layers can't be used by the new storage
 > driver. If you revert your changes, you can access the old images and containers
 > again, but any that you pulled or created using the new driver are then
 > inaccessible.
-{ .important }
 
 ## Related information
 

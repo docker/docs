@@ -43,11 +43,10 @@ All the Docker trust keys are stored encrypted using the passphrase you provide
 on creation. Even so, you should still take care of the location where you back them up.
 Good practice is to create two encrypted USB keys.
 
-> **Warning**
+> [!WARNING]
 >
 > It is very important that you back up your keys to a safe, secure location.
 The loss of the repository key is recoverable, but the loss of the root key is not.
-{ .warning }
 
 The Docker client stores the keys in the `~/.docker/trust/private` directory.
 Before backing them up, you should `tar` them into an archive:
@@ -69,12 +68,11 @@ Prior to Docker Engine 1.11, this feature was only in the experimental branch.
 
 ## Key loss
 
-> **Warning**
+> [!WARNING]
 >
 > If a publisher loses keys it means losing the ability to sign images for the repositories in
 question. If you lose a key, send an email to [Docker Hub Support](mailto:hub-support@docker.com).
 As a reminder, the loss of a root key is not recoverable.
-{ .warning }
 
 This loss also requires manual intervention from every consumer that used a signed
 tag from this repository prior to the loss.  

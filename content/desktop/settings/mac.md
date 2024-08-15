@@ -46,16 +46,14 @@ If you choose the integrated terminal, you can run commands in a running contain
   For more information, see [containerd image store](../containerd.md).
 
 - **Use Virtualization framework**. Select to allow Docker Desktop to use the `virtualization.framework` instead of the `hypervisor.framework`.
-    > **Tip**
+    > [!TIP]
     >
     > Turn this setting on to make Docker Desktop run faster.
-    { .tip }
 
 - **Choose file sharing implementation for your containers**. Choose whether you want to share files using **VirtioFS**, **gRPC FUSE**, or **osxfs**. VirtioFS is only available for macOS versions 12.5 and above, and is turned on by default.
     >**Tip**
     >
     > Use VirtioFS for speedy file sharing. VirtioFS has reduced the time taken to complete filesystem operations by [up to 98%](https://github.com/docker/roadmap/issues/7#issuecomment-1044452206)
-    { .tip }
 
 - **Use Rosetta for x86_64/amd64 emulation on Apple Silicon**. Turns on Rosetta to accelerate x86/AMD64 binary emulation on Apple Silicon. This option is only available if you have turned on **Virtualization framework** in the **General** settings tab. You must also be on macOS Ventura or later. 
 
@@ -116,7 +114,6 @@ Advanced settings are:
 >
 > If you feel Docker Desktop starting to get slow or you're running
 > multi-container workloads, increase the memory and disk image space allocation
-{ .tip }
 
 - **Resource Saver**. Enable or disable [Resource Saver mode](../use-desktop/resource-saver.md),
   which significantly reduces CPU and memory utilization on the host by
@@ -187,7 +184,6 @@ File share settings are:
 >   `Test` will fail.
 >
 > For more information, see [Volume mounting requires file sharing for any project directories outside of `/Users`](../troubleshoot/topics.md)
-{ .tip }
 
 ### Proxies
 
@@ -218,7 +214,7 @@ To prevent developers from accidentally changing the proxy settings, see
 
 The HTTPS proxy settings used for scanning images are set using the `HTTPS_PROXY` environment variable.
 
-> **Note**
+> [!NOTE]
 >
 > If you are using a PAC file hosted on a web server, make sure to add the MIME type `application/x-ns-proxy-autoconfig` for the `.pac` file extension on the server or website. Without this configuration, the PAC file may not be parsed correctly.
 

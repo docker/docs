@@ -74,7 +74,6 @@ Now that you have the project, you’re ready to create the `Dockerfile`.
     >
     > It's important to note that the `Dockerfile` has _no_ file extension. Some editors
     > will automatically add an extension to the file (or complain it doesn't have one).
-    { .important }
 
 3. In the `Dockerfile`, define your base image by adding the following line:
 
@@ -124,7 +123,6 @@ Now that you have the project, you’re ready to create the `Dockerfile`.
 >
 > Keep reading to learn more about how to make the image maximize the
 > build cache, run as a non-root user, and multi-stage builds.
-{ .important }
 
 
 > **Containerize new projects quickly with `docker init`**
@@ -133,7 +131,6 @@ Now that you have the project, you’re ready to create the `Dockerfile`.
 > a Dockerfile, a `compose.yaml`, and a `.dockerignore`, helping you get
 > up and going. Since you're learning about Dockerfiles specifically here, 
 > you won't use it now. But, [learn more about it here](/engine/reference/commandline/init/).
-{ .tip }
 
 ## Additional resources
 

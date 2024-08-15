@@ -52,7 +52,7 @@ A given version of the Docker Engine SDK supports a specific version of the
 Docker Engine API, as well as all earlier versions. If breaking changes occur,
 they are documented prominently.
 
-> **Note**
+> [!NOTE]
 >
 > The Docker daemon and client don't necessarily need to be the same version
 > at all times. However, keep the following in mind.

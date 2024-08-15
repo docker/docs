@@ -9,7 +9,7 @@ aliases:
  - /security/for-admins/registry-access-management/
 ---
 
-> **Note**
+> [!NOTE]
 >
 > Registry Access Management is available to [Docker Business](/subscription/core-subscription/details.md) customers only.
 

@@ -99,7 +99,7 @@ you automatically have "Read-only" permissions:
 | Trigger Builds | ❌ | ✅ | ✅ |
 | Edit Build Settings | ❌ | ❌ | ✅ |
 
-> **Note**
+> [!NOTE]
 >
 > A user who hasn't verified their email address only has
 > `Read-only` access to the repository, regardless of the rights their team

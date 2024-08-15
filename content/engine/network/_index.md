@@ -106,7 +106,7 @@ Here are some examples:
 | `-p 8080:80/udp`                | Map port `8080` on the Docker host to UDP port `80` in the container.                                                                                   |
 | `-p 8080:80/tcp -p 8080:80/udp` | Map TCP port `8080` on the Docker host to TCP port `80` in the container, and map UDP port `8080` on the Docker host to UDP port `80` in the container. |
 
-> **Important**
+> [!IMPORTANT]
 >
 > Publishing container ports is insecure by default. Meaning, when you publish
 > a container's ports it becomes available not only to the Docker host, but to
@@ -120,14 +120,12 @@ Here are some examples:
 > $ docker run -p 127.0.0.1:8080:80 -p '[::1]:8080:80' nginx
 > ```
 >
-> > **Warning**
+> > [!WARNING]
 > >
 > > Hosts within the same L2 segment (for example, hosts connected to the same
 > > network switch) can reach ports published to localhost.
 > > For more information, see
 > > [moby/moby#45610](https://github.com/moby/moby/issues/45610)
-> { .warning }
-{ .important }
 
 If you want to make a container accessible to other containers,
 it isn't necessary to publish the container's ports.

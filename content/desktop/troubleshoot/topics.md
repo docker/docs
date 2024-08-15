@@ -6,14 +6,13 @@ toc_max: 4
 tags: [ Troubleshooting ]
 ---
 
-> **Tip**
+> [!TIP]
 >
 > If you do not find a solution in troubleshooting, browse the GitHub repositories or create a new issue:
 >
 > - [docker/for-mac](https://github.com/docker/for-mac/issues)
 > - [docker/for-win](https://github.com/docker/for-win/issues)
 > - [docker/for-linux](https://github.com/docker/for-linux/issues)
-{ .tip }
 
 ## Topics for all platforms
 

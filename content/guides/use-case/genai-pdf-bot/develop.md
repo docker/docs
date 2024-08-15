@@ -15,7 +15,7 @@ In this section, you'll learn how to set up a development environment to access 
 - Adding a local database
 - Adding a local or remote LLM service
 
-> **Note**
+> [!NOTE]
 >
 > You can see more samples of containerized GenAI applications in the [GenAI Stack](https://github.com/docker/genai-stack) demo applications.
 
@@ -60,7 +60,7 @@ To run the database service:
          retries: 5
    ```
 
-   > **Note**
+   > [!NOTE]
    >
    > To learn more about Neo4j, see the [Neo4j Official Docker Image](https://hub.docker.com/_/neo4j).
 
@@ -144,7 +144,7 @@ To run Ollama in a container and provide GPU access:
      ollama_volume:
    ```
 
-   > **Note**
+   > [!NOTE]
    >
    > For more details about the Compose instructions, see [Turn on GPU access with Docker Compose](../../../compose/gpu-support.md).
 
@@ -191,10 +191,9 @@ To run Ollama outside of a container:
 {{< /tab >}}
 {{< tab name="Use OpenAI" >}}
 
-> **Important**
+> [!IMPORTANT]
 >
 > Using OpenAI requires an [OpenAI account](https://platform.openai.com/login). OpenAI is a third-party hosted service and charges may apply.
-{ .important }
 
 1. Update the `LLM` value in your `.env` file to
    `gpt-3.5`.

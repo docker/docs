@@ -74,11 +74,10 @@ A service may be configured in such a way that no node currently in the
 swarm can run its tasks. In this case, the service remains in state `pending`.
 Here are a few examples of when a service might remain in state `pending`.
 
-> **Tip**
+> [!TIP]
 > If your only intention is to prevent a service from
 > being deployed, scale the service to 0 instead of trying to configure it in
 > such a way that it remains in `pending`.
-{ .tip }
 
 - If all nodes are paused or drained, and you create a service, it is
   pending until a node becomes available. In reality, the first node to become

@@ -723,7 +723,7 @@ expose:
   - "8080-8085/tcp"
 ```
 
-> **Note**
+> [!NOTE]
 >
 > If the Dockerfile for the image already exposes ports, it is visible to other containers on the network even if `expose` is not set in your Compose file. 
 
@@ -1173,7 +1173,7 @@ are platform specific. Driver specific options can be set with `options` as key-
 
 `mac_address` sets a MAC address for the service container.
 
-> **Note**
+> [!NOTE]
 > Container runtimes might reject this value (ie. Docker Engine >= v25.0). In that case, you should use [networks.mac_address](#mac_address) instead.
 
 ### mem_limit
@@ -1248,7 +1248,7 @@ network can use either the service name or an alias to connect to one of the ser
 
 Since `aliases` are network-scoped, the same service can have different aliases on different networks.
 
-> **Note**
+> [!NOTE]
 > A network-wide alias can be shared by multiple containers, and even by multiple services.
 > If it is, then exactly which container the name resolves to is not guaranteed.
 
@@ -1421,7 +1421,7 @@ platform: linux/arm64/v8
 
 {{< include "compose/services-ports.md" >}}
 
-> **Note**
+> [!NOTE]
 >
 > Port mapping must not be used with `network_mode: host` otherwise a runtime error occurs.
 
@@ -1461,7 +1461,7 @@ ports:
   - "6060:6060/udp"
 ```
 
-> **Note**
+> [!NOTE]
 >
 > If Host IP mapping is not supported by a container engine, Compose rejects
 > the Compose file and ignores the specified host IP.
@@ -1828,11 +1828,11 @@ The short syntax uses a single string with colon-separated values to specify a v
   - `z`: SELinux option indicating that the bind mount host content is shared among multiple containers.
   - `Z`: SELinux option indicating that the bind mount host content is private and unshared for other containers.
 
-> **Note**
+> [!NOTE]
 >
 > The SELinux re-labeling bind mount option is ignored on platforms without SELinux.
 
-> **Note**
+> [!NOTE]
 > Relative host paths are only supported by Compose that deploy to a
 > local container runtime. This is because the relative path is resolved from the Compose file’s parent
 > directory which is only applicable in the local case. When Compose deploys to a non-local
@@ -1864,12 +1864,11 @@ expressed in the short form.
   - `mode`: The file mode for the tmpfs mount as Unix permission bits as an octal number. Introduced in Docker Compose version [2.14.0](../release-notes.md#2260).
 - `consistency`: The consistency requirements of the mount. Available values are platform specific.
 
-> **Tip**
+> [!TIP]
 >
 > Working with large repositories or monorepos, or with virtual file systems that are no longer scaling with your codebase? 
 > Compose now takes advantage of [Synchronized file shares](../../desktop/synchronized-file-sharing.md) and automatically creates file shares for bind mounts. 
 > Ensure you're signed in to Docker with a paid subscription and have enabled both **Access experimental features** and **Manage Synchronized file shares with Compose** in Docker Desktop's settings.
-{ .tip }
 
 ### volumes_from
 

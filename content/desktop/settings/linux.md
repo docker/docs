@@ -85,7 +85,6 @@ Advanced settings are:
 >
 > If you feel Docker Desktop starting to get slow or you're running
 > multi-container workloads, increase the memory and disk image space allocation
-{ .tip }
 
 - **Resource Saver**. Enable or disable [Resource Saver mode](../use-desktop/resource-saver.md),
   which significantly reduces CPU and memory utilization on the host by
@@ -139,7 +138,6 @@ File share settings are:
 >   such as cache directories or databases, the performance will be much
 >   better if they are stored in the Linux VM, using a [data volume](/engine/storage/volumes.md)
 >   (named volume) or [data container](/engine/storage/volumes.md).
-{ .tip }
 
 ### Proxies
 
@@ -170,7 +168,7 @@ To prevent developers from accidentally changing the proxy settings, see
 
 The HTTPS proxy settings used for scanning images are set using the `HTTPS_PROXY` environment variable.
 
-> **Note**
+> [!NOTE]
 >
 > If you are using a PAC file hosted on a web server, make sure to add the MIME type `application/x-ns-proxy-autoconfig` for the `.pac` file extension on the server or website. Without this configuration, the PAC file may not be parsed correctly.
 
@@ -200,7 +198,7 @@ You can find this file at `$HOME/.docker/daemon.json`. To change the configurati
 edit the JSON configuration directly from the dashboard in Docker Desktop, or open and
 edit the file using your favorite text editor.
 
-> **Note**
+> [!NOTE]
 >
 > Only the **Docker Desktop** daemon uses the configuration file under `$HOME/.docker`.
 > If you manually install Docker Engine alongside Docker Desktop, the manually

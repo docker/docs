@@ -178,7 +178,7 @@ To add Wasmtime as a container runtime, follow these steps:
 1. Turn on the [containerd image store](/engine/storage/containerd.md)
    feature in the daemon configuration file.
 
-   > **Note**
+   > [!NOTE]
    >
    > This is an experimental feature.
 

@@ -21,14 +21,13 @@ The default `docker` driver supports the `inline`, `local`, `registry`, and
 `gha` cache backends, but only if you have enabled the [containerd image store](/desktop/containerd.md).
 Other cache backends require you to select a different [driver](../../drivers/_index.md).
 
-> **Warning**
+> [!WARNING]
 >
 > If you use secrets or credentials inside your build process, ensure you
 > manipulate them using the dedicated
 > [`--secret` option](../../../reference/cli/docker/buildx/build.md#secret).
 > Manually managing secrets using `COPY` or `ARG` could result in leaked
 > credentials.
-{ .warning }
 
 ## Backends
 
@@ -73,7 +72,7 @@ $ docker buildx build --push -t <registry>/<image> \
   --cache-from type=registry,ref=<registry>/<cache-image>[,parameters...] .
 ```
 
-> **Warning**
+> [!WARNING]
 >
 > As a general rule, each cache writes to some location. No location can be
 > written to twice, without overwriting the previously cached data. If you want

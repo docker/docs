@@ -15,7 +15,7 @@ from remote clients by configuring it to listen on an IP address and port as wel
 as the Unix socket.
 
 <!-- prettier-ignore -->
-> **Warning**
+> [!WARNING]
 >
 > Configuring Docker to accept connections from remote clients can leave you
 > vulnerable to unauthorized access to the host and other attacks.
@@ -26,7 +26,6 @@ as the Unix socket.
 > Remote access without TLS is **not recommended**, and will require explicit opt-in in a future release.
 > For more information on how to use TLS certificates to secure this connection, see
 > [Protect the Docker daemon socket](../../engine/security/protect-access.md).
-{ .warning }
 
 ## Enable remote access
 

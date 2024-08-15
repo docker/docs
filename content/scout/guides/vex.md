@@ -272,7 +272,7 @@ Instead, `products` should refer to the packages that contain the vulnerabilitie
 
 3. Analyze the image with `docker scout cves`.
 
-   > **Note**
+   > [!NOTE]
    >
    > This only works when analyzing remote images in a registry.
    > To force Docker Scout to analyze a registry image instead of a local one,

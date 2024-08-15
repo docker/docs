@@ -15,7 +15,7 @@ Follow this guide to get started with creating a basic Docker extension. The Qui
 - [NodeJS](https://nodejs.org/)
 - [Go](https://go.dev/dl/)
 
-> **Note**
+> [!NOTE]
 >
 > NodeJS and Go are only required when you follow the quickstart guide to create an extension. It uses the `docker extension init` command to automatically generate boilerplate files. This command uses a template based on a ReactJS and Go application.
 
@@ -65,11 +65,10 @@ $ docker extension install <name-of-your-extension>
 To preview the extension in Docker Desktop, once the installation is complete and you should
 see a **Quickstart** item underneath the **Extensions** menu. Selecting this item opens the extension's frontend.
 
-> **Tip**
+> [!TIP]
 >
 > During UI development, it’s helpful to use hot reloading to test your changes without rebuilding your entire
 > extension. See [Preview whilst developing the UI](dev/test-debug.md#hot-reloading-whilst-developing-the-ui) for more information.
-{ .tip }
 
 You may also want to inspect the containers that belong to the extension. By default, extension containers are
 hidden from the Docker Dashboard. You can change this in **Settings**, see
