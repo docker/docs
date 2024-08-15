@@ -1,3 +1,6 @@
+---
+---
+
 {{% restricted title="Early Access" %}}
 Compose Bridge is an [Early Access](/release-lifecycle#early-access-ea) product.
 

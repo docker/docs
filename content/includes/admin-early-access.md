@@ -1,3 +1,6 @@
+---
+---
+
 {{% restricted title="Early Access" %}}
 The Docker Admin Console is an [early access](/release-lifecycle#early-access-ea) product.
 
