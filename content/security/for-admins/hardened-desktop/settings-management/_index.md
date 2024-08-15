@@ -3,6 +3,8 @@ description: Understand how Settings Management works, who it is for, and what t
   benefits are
 keywords: Settings Management, rootless, docker desktop, hardened desktop
 title: What is Settings Management?
+aliases:
+ - /desktop/hardened-desktop/settings-management/
 ---
 
 >**Note**
@@ -13,7 +15,7 @@ Settings Management is a feature that helps admins to control certain Docker Des
 
 With a few lines of JSON, admins can configure controls for Docker Desktop settings such as proxies and network settings. For an extra layer of security, admins can also use Settings Management to enable and lock in [Enhanced Container Isolation](../enhanced-container-isolation/index.md) which ensures that any configurations set with Settings Management cannot be modified by containers.
 
-It is available with [Docker Desktop 4.13.0 and later](../../release-notes.md).
+It is available with [Docker Desktop 4.13.0 and later](/desktop/release-notes.md).
 
 ### Who is it for?
 
@@ -25,7 +27,7 @@ It is available with [Docker Desktop 4.13.0 and later](../../release-notes.md).
 
 Administrators can configure several Docker Desktop settings using an `admin-settings.json` file. This file is located on the Docker Desktop host and can only be accessed by developers with root or admin privileges.
 
-Values that are set to `locked: true` within the `admin-settings.json` override any previous values set by developers and ensure that these cannot be modified. For more information, see [Configure Settings Management](../settings-management/configure.md#step-two-configure-the-settings-you-want-to-lock-in).
+Values that are set to `locked: true` within the `admin-settings.json` override any previous values set by developers and ensure that these cannot be modified. For more information, see [Configure Settings Management](configure.md#step-two-configure-the-settings-you-want-to-lock-in).
 
 ### What features can I configure with Settings Management?
 
@@ -52,7 +54,7 @@ For more details on the syntax and options admins can set, see [Configure Settin
 ### How do I set up and enforce Settings Management?
 
 As an administrator, you first need to [enforce
-sign-in](../../../security/for-admins/enforce-sign-in/_index.md). This is
+sign-in](/security/for-admins/enforce-sign-in/_index.md). This is
 because the Settings Management feature requires a Docker Business subscription
 and therefore your Docker Desktop developers must authenticate to your
 organization. Enforcing sign-in ensures that your Docker Desktop developers
@@ -61,7 +63,7 @@ without it and the feature will take effect. Enforcing sign-in guarantees the
 feature always takes effect.
 
 
-Next, you must either manually [create and configure the admin-settings.json file](configure.md), or use the `--admin-settings` installer flag on [macOS](../../install/mac-install.md#install-from-the-command-line) or [Windows](../../install/windows-install.md#install-from-the-command-line) to automatically create the `admin-settings.json` and save it in the correct location.
+Next, you must either manually [create and configure the admin-settings.json file](configure.md), or use the `--admin-settings` installer flag on [macOS](/desktop/install/mac-install.md#install-from-the-command-line) or [Windows](/desktop/install/windows-install.md#install-from-the-command-line) to automatically create the `admin-settings.json` and save it in the correct location.
 
 Once this is done, Docker Desktop developers receive the changed settings when they either:
 - Quit, re-launch, and sign in to Docker Desktop

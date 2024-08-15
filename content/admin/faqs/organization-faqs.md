@@ -28,7 +28,7 @@ No. Organization owners can invite users with their email address, and also assi
 
 Yes. You can [enforce sign-in](../../security/for-admins/enforce-sign-in/_index.md) and some benefits are:
 
-- Administrators can enforce features like [Image Access Management](../../security/for-admins/image-access-management.md) and [Registry Access Management](../../security/for-admins/registry-access-management.md).
+- Administrators can enforce features like [Image Access Management](/security/for-admins/hardened-desktop/image-access-management.md) and [Registry Access Management](../../security/for-admins/hardened-desktop/registry-access-management.md).
  - Administrators can ensure compliance by blocking Docker Desktop usage for users who don't sign in as members of the organization.
 
 ### If a user has their personal email associated with a user account in Docker Hub, do they have to convert to using the organization's domain before they can be invited to join an organization?

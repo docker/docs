@@ -11,7 +11,7 @@ By default, members of your organization can use Docker Desktop without signing
 in. When users don’t sign in as a member of your organization, they don’t
 receive the [benefits of your organization’s
 subscription](../../../subscription/core-subscription/details.md) and they can circumvent [Docker’s
-security features](../../../desktop/hardened-desktop/_index.md) for your organization.
+security features](/security/for-admins/hardened-desktop/_index.md) for your organization.
 
 There are multiple ways you can enforce sign-in, depending on your companies' set up and preferences:
 - [Registry key method (Windows only)](methods.md#registry-key-method-windows-only){{< badge color=violet text="Early Access" >}}

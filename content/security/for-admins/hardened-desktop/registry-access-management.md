@@ -3,14 +3,15 @@ description: Registry Access Management
 keywords: registry, access, management, permissions, Docker Business feature
 title: Registry Access Management
 aliases:
-- /desktop/hardened-desktop/registry-access-management/
-- /admin/organization/registry-access/
-- /docker-hub/registry-access-management/
+ - /desktop/hardened-desktop/registry-access-management/
+ - /admin/organization/registry-access/
+ - /docker-hub/registry-access-management/
+ - /security/for-admins/registry-access-management/
 ---
 
 > **Note**
 >
-> Registry Access Management is available to [Docker Business](../../subscription/core-subscription/details.md) customers only.
+> Registry Access Management is available to [Docker Business](/subscription/core-subscription/details.md) customers only.
 
 With Registry Access Management (RAM), administrators can ensure that their developers using Docker Desktop only access allowed registries. This is done through the Registry Access Management dashboard in Docker Hub or the Docker Admin Console.
 
@@ -28,7 +29,7 @@ Example registries administrators can allow include:
 
 ## Prerequisites
 
-You need to [enforce sign-in](enforce-sign-in/_index.md). For Registry Access
+You need to [enforce sign-in](../enforce-sign-in/_index.md). For Registry Access
 Management to take effect, Docker Desktop users must authenticate to your
 organization. Enforcing sign-in ensures that your Docker Desktop developers
 always authenticate to your organization, even though they can authenticate
@@ -60,7 +61,7 @@ The new Registry Access Management policy takes effect after the developer succe
 
 There are certain limitations when using Registry Access Management:
 
-- Windows image pulls and image builds are not restricted by default. For Registry Access Management to take effect on Windows Container mode, you must allow the Windows Docker daemon to use Docker Desktop's internal proxy by selecting the [Use proxy for Windows Docker daemon](../../desktop/settings/windows.md/#proxies) setting.
+- Windows image pulls and image builds are not restricted by default. For Registry Access Management to take effect on Windows Container mode, you must allow the Windows Docker daemon to use Docker Desktop's internal proxy by selecting the [Use proxy for Windows Docker daemon](/desktop/settings/windows.md#proxies) setting.
 - Builds such as `docker buildx` using a Kubernetes driver are not restricted
 - Builds such as `docker buildx` using a custom docker-container driver are not restricted
 - Blocking is DNS-based; you must use a registry's access control mechanisms to distinguish between “push” and “pull”
