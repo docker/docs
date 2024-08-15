@@ -6,10 +6,9 @@ title: Overview of Dev Environments
 
 {{< include "dev-envs-changing.md" >}}
 
-> **Beta**
->
-> The Dev Environments feature is currently in [Beta](../../release-lifecycle.md#beta). 
-{ .experimental }
+{{% experimental title="Beta" %}}
+The Dev Environments feature is currently in [Beta](../../release-lifecycle.md#beta). 
+{{% /experimental %}}
 
 Dev Environments let you create a configurable developer environment with all the code and tools you need to quickly get up and running. 
 

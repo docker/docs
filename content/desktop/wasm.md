@@ -5,12 +5,11 @@ keywords: Docker, WebAssembly, wasm, containerd, engine
 toc_max: 3
 ---
 
-> **Beta**
->
-> The Wasm feature is currently in [Beta](../release-lifecycle.md/#beta).
-> We recommend that you do not use this feature in production environments as
-> this feature may change or be removed from future releases.
-{ .experimental }
+{{% experimental title="Beta" %}}
+The Wasm feature is currently in [Beta](../release-lifecycle.md/#beta).
+We recommend that you do not use this feature in production environments as
+this feature may change or be removed from future releases.
+{{% /experimental %}}
 
 Wasm (short for WebAssembly) is a fast, light alternative to the Linux and
 Windows containers you’re using in Docker today (with

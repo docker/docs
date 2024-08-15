@@ -16,10 +16,9 @@ aliases:
 download-url-base: https://download.docker.com/linux/rhel
 ---
 
-> **Experimental**
->
-> Support for Docker Engine on RHEL x86_64 and aarch64 is experimental.
-{ .experimental }
+{{% experimental %}}
+Support for Docker Engine on RHEL x86_64 and aarch64 is experimental.
+{{% /experimental %}}
 
 > **Docker Desktop for Linux** is also available for RHEL.
 > 
