@@ -3,10 +3,8 @@ description: Learn the technologies that support storage drivers.
 keywords: container, storage, driver, btrfs, overlayfs, vfs, zfs
 title: About storage drivers
 aliases:
-- /en/latest/terms/layer/
-- /engine/installation/userguide/storagedriver/
-- /engine/userguide/storagedriver/imagesandcontainers/
-- /storage/storagedriver/imagesandcontainers/
+  - /storage/storagedriver/imagesandcontainers/
+  - /storage/storagedriver/
 ---
 
 To use storage drivers effectively, it's important to know how Docker builds and

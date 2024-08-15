@@ -3,7 +3,7 @@ description: Learn how to optimize your use of OverlayFS driver.
 keywords: container, storage, driver, OverlayFS, overlay2, overlay
 title: Use the OverlayFS storage driver
 aliases:
-  - /engine/userguide/storagedriver/overlayfs-driver/
+  - /storage/storagedriver/overlayfs-driver/
 ---
 
 OverlayFS is a union filesystem.

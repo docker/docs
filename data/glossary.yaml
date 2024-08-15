@@ -252,7 +252,7 @@ Union file system: |
   containers, making them very lightweight and fast.
 
   For more on Docker and union file systems, see [Docker and OverlayFS in
-  practice](/engine/userguide/storagedriver/overlayfs-driver/).
+  practice](/engine/storage/drivers/overlayfs-driver/).
 
   Example implementations of union file systems are
   [UnionFS](https://en.wikipedia.org/wiki/UnionFS) and

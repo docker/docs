@@ -3,7 +3,7 @@ description: Learn how to optimize your use of VFS driver.
 keywords: container, storage, driver, vfs
 title: Use the VFS storage driver
 aliases:
-- /engine/userguide/storagedriver/vfs-driver/
+  - /storage/storagedriver/vfs-driver/
 ---
 
 The VFS storage driver isn't a union filesystem. Each layer is a

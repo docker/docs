@@ -3,7 +3,7 @@ description: Learn how to optimize your use of ZFS driver.
 keywords: 'container, storage, driver, ZFS '
 title: Use the ZFS storage driver
 aliases:
-- /engine/userguide/storagedriver/zfs-driver/
+  - /storage/storagedriver/zfs-driver/
 ---
 
 ZFS is a next generation filesystem that supports many advanced storage
