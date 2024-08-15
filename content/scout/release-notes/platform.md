@@ -15,6 +15,29 @@ Docker Scout platform, including the Dashboard. For CLI release notes, refer to
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1)
 for what's coming next.
 
+## Q3 2024
+
+New features and enhancements released in the third quarter of 2024.
+
+### 2024-08-13
+
+This release changes the out-of-the-box policies to align with the policy
+configurations used to evaluate Docker Scout [health scores](/scout/policy/scores.md).
+
+The default out-of-the-box policies are now:
+
+- **No high-profile vulnerabilities**
+- **No fixable critical or high vulnerabilities**
+- **No unapproved base images**
+- **Default non-root user**
+- **Supply chain attestations**
+- **No outdated base images**
+- **No AGPL v3 licenses**
+
+The configurations for these policies are now the same as the configurations
+used to calculate health scores. Previously, the out-of-the-box policies had
+different configurations than the health score policies.
+
 ## Q2 2024
 
 New features and enhancements released in the second quarter of 2024.

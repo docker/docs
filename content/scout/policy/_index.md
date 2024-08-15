@@ -32,9 +32,9 @@ image analysis feature, interpreting the analysis results against the rules
 defined by policies.
 
 A policy defines image quality criteria that your artifacts should fulfill.
-For example, the **No copyleft licenses** policy flags packages distributed under a copyleft license.
-If an image contains a copyleft-licensed package, that image is non-compliant with this policy.
-Some policies, such as the **No copyleft licenses** policy, are configurable.
+For example, the **No AGPL v3 licenses** policy flags any image containing packages distributed under the AGPL v3 license.
+If an image contains such a package, that image is non-compliant with this policy.
+Some policies, such as the **No AGPL v3 licenses** policy, are configurable.
 Configurable policies let you adjust the criteria to better match your organization's needs.
 
 In Docker Scout, policies are designed to help you ratchet forward your
@@ -55,11 +55,12 @@ image up-to-dateness.
 Docker Scout ships the following out-of-the-box policies:
 
 - [No fixable critical or high vulnerabilities](#no-fixable-critical-or-high-vulnerabilities)
-- [No copyleft licenses](#no-copyleft-licenses)
+- [No AGPL v3 licenses](#no-agpl-v3-licenses)
 - [No outdated base images](#no-outdated-base-images)
 - [No high-profile vulnerabilities](#no-high-profile-vulnerabilities)
 - [Supply chain attestations](#supply-chain-attestations)
 - [Default non-root user](#default-non-root-user)
+- [No unapproved base images](#no-unapproved-base-images)
 
 To give you a head start, Scout enables several policies by default for your
 Scout-enabled repositories. You can customize the default configurations to
@@ -78,34 +79,34 @@ available. Essentially, this means that there's an easy fix that you can deploy
 for images that fail this policy: upgrade the vulnerable package to a version
 containing a fix for the vulnerability.
 
-By default, this policy only flags critical and high severity vulnerabilities
-disclosed more than 30 days ago. The rationale for only flagging
-vulnerabilities of a certain age is that newly discovered vulnerabilities
-shouldn't cause your evaluations to fail until you've had a chance to address
-them.
+By default, this policy only flags critical and high severity vulnerabilities.
 
-This policy is unfulfilled if an artifact is affected by one or more critical-
+This policy is violated if an artifact is affected by one or more critical-
 or high-severity vulnerability, where a fix version is available.
 
 You can configure the parameters of this policy by creating a custom version of the policy.
 The following policy parameters are configurable in a custom version:
 
-- Name and description of the policy
-- Severity levels to consider
-- Age threshold (set to `0` to flag all vulnerabilities, regardless of age)
-- Whether or not to only report vulnerabilities with a fix version available
+- **Age**: The minimum number of days since the vulnerability was first published
+
+  The rationale for only flagging vulnerabilities of a certain minimum age is
+  that newly discovered vulnerabilities shouldn't cause your evaluations to
+  fail until you've had a chance to address them.
+
+<!-- vale Vale.Spelling = NO -->
+- **Severities**: Severity levels to consider (default: `Critical, High`)
+<!-- vale Vale.Spelling = YES -->
+
+- **Fixable vulnerabilities only**: Whether or not to only report
+  vulnerabilities with a fix version available (enabled by default).
 
 For more information about configuring policies, see [Configure policies](./configure.md).
 
-### No copyleft licenses
+### No AGPL v3 licenses
 
-The **No copyleft licenses** policy requires that your artifacts don't contain
-packages distributed under an AGPLv3 or GPLv3 license. These licenses are
-protective [copyleft](https://en.wikipedia.org/wiki/Copyleft), and may be
-unsuitable for use in your software because of the restrictions they enforce.
-
-This policy is unfulfilled if your artifacts contain one or more packages with
-a violating license.
+The **No AGPL v3 licenses** policy requires that your artifacts don't contain
+packages distributed under an AGPLv3 license. This policy is violated if
+your artifacts contain one or more packages with this license.
 
 You can configure the list of licenses that this policy should look out for,
 and add exceptions by specifying an allow-list (in the form of PURLs).
@@ -116,7 +117,7 @@ See [Configure policies](./configure.md).
 The **No outdated base images** policy requires that the base images you use are
 up-to-date.
 
-It's unfulfilled when the tag you used to build your image points to a
+It's violated when the tag you used to build your image points to a
 different digest than what you're using. If there's a mismatch in digests, that
 means the base image you're using is out of date.
 
@@ -135,11 +136,25 @@ The list includes the following vulnerabilities:
 - [CVE-2014-0160 (OpenSSL Heartbleed)](https://scout.docker.com/v/CVE-2014-0160)
 - [CVE-2021-44228 (Log4Shell)](https://scout.docker.com/v/CVE-2021-44228)
 - [CVE-2023-38545 (cURL SOCKS5 heap buffer overflow)](https://scout.docker.com/v/CVE-2023-38545)
-:cc
+- [CVE-2023-44487 (HTTP/2 Rapid Reset)](https://scout.docker.com/v/CVE-2023-44487)
 - [CVE-2024-3094 (XZ backdoor)](https://scout.docker.com/v/CVE-2024-3094)
 
 You can configure the CVEs included in this list by creating a custom policy.
-For more information, see [Configure policies](./configure.md).
+Custom configuration options include:
+
+- **CVEs to avoid**: Specify the CVEs that you want to avoid in your artifacts.
+
+  Default: `CVE-2014-0160`, `CVE-2021-44228`, `CVE-2023-38545`, `CVE-2023-44487`, `CVE-2024-3094`
+
+- **CISA KEV**: Enable tracking of vulnerabilities from CISA's Known Exploited Vulnerabilities (KEV) catalog
+
+  The [CISA KEV catalog](https://www.cisa.gov/known-exploited-vulnerabilities-catalog)
+  includes vulnerabilities that are actively exploited in the wild. When enabled,
+  the policy flags images that contain vulnerabilities from the CISA KEV catalog.
+
+  Enabled by default.
+
+For more information on policy configuration, see [Configure policies](./configure.md).
 
 ### Supply chain attestations
 
@@ -147,7 +162,7 @@ The **Supply chain attestations** policy requires that your artifacts have
 [SBOM](../../build/attestations/sbom.md) and
 [provenance](../../build/attestations/slsa-provenance.md) attestations.
 
-This policy is unfulfilled if an artifact lacks either an SBOM attestation or a
+This policy is violated if an artifact lacks either an SBOM attestation or a
 provenance attestation with max mode. To ensure compliance,
 update your build command to attach these attestations at build-time:
 
@@ -236,20 +251,10 @@ ENTRYPOINT ["/app/production"]
 {{< /tab >}}
 {{< /tabs >}}
 
-## Additional policies
-
-In addition to the [out-of-the-box policies](#out-of-the-box-policies) enabled
-by default, Docker Scout supports the following optional policies. Before you
-can enable these policies, you need to either configure the policies, or
-configure the integration that the policy requires.
-
-- [No unapproved base images](#no-unapproved-base-images)
-- [SonarQube quality gates passed](#sonarqube-quality-gates-passed)
-
 ### No unapproved base images
 
-The **No unapproved base images** policy lets you restrict which base
-images you allow in your builds.
+The **No unapproved base images** policy ensures that the base images you use
+in your builds are maintained and secure.
 
 This policy checks whether the base images used in your builds match any of the
 patterns specified in the policy configuration. The following table shows a few
@@ -268,15 +273,29 @@ An asterisk (`*`) matches up until the character that follows, or until the end
 of the image reference. Note that the `docker.io` prefix is required in order
 to match Docker Hub images. This is the registry hostname of Docker Hub.
 
-You can also configure the policy to:
+This policy is configurable with the following options:
 
-- Allow only supported tags of Docker Official Images.
+- **Approved base image sources**
+
+  Specify the image reference patterns that you want to allow. The policy
+  evaluates the base image references against these patterns.
+
+  Default: `[*]` (any reference is an allowed base image)
+
+- **Only supported tags**
+
+  Allow only supported tags when using Docker Official Images.
 
   When this option is enabled, images using unsupported tags of official images
-  trigger a policy violation. Supported tags for official images are listed in
-  the **Supported tags** section of the repository overview on Docker Hub.
+  as their base image trigger a policy violation. Supported tags for official
+  images are listed in the **Supported tags** section of the repository
+  overview on Docker Hub.
 
-- Allow only Docker Official Images of supported distro versions
+  Enabled by default.
+
+- **Only supported OS distributions**
+
+  Allow only Docker Official Images of supported Linux distribution versions.
 
   When this option is enabled, images using unsupported Linux distributions
   that have reached end of life (such as `ubuntu:18.04`) trigger a policy violation.
@@ -284,18 +303,19 @@ You can also configure the policy to:
   Enabling this option may cause the policy to report no data
   if the operating system version cannot be determined.
 
-This policy isn't enabled by default. To enable the policy:
-
-1. [Create a new policy](https://scout.docker.com/reports/policies/create?fromDefinition=approved-base-images&fromNamespace=docker) in the Docker Scout Dashboard.
-2. Under **Approved base image sources**, specify the image reference patterns that you want to allow.
-3. Select whether you want to allow only supported tags for official images,
-   and supported Linux distribution versions.
-4. Select **Save and enable**.
-
-   The policy is now enabled for your current organization.
+  Enabled by default.
 
 Your images need provenance attestations for this policy to successfully
 evaluate. For more information, see [No base image data](#no-base-image-data).
+
+## Additional policies
+
+In addition to the [out-of-the-box policies](#out-of-the-box-policies) enabled
+by default, Docker Scout supports the following optional policies. Before you
+can enable these policies, you need to either configure the policies, or
+configure the integration that the policy requires.
+
+- [SonarQube quality gates passed](#sonarqube-quality-gates-passed)
 
 ### SonarQube quality gates passed
 
