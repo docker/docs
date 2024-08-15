@@ -6,14 +6,18 @@ toc_max: 3
 
 We support these broad categories of callouts:
 
+- Alerts (Note, Tip, Important, Warning, Caution)
 - Version callouts
-- Notes (no HTML attribute required)
-- Experimental, which use the `{ .experimental }` class
-- Restricted, which use the `{ .restricted }` class
+- Experimental, which use the `{{%/* experimental */%}}` shortcode
+- Restricted, which use the `{{%/* restricted */%}}` shortcode
+
+The experimental and restricted shortcodes take a title as an argument. The
+title is optional, defaults to "Experimental" or "Restricted" respectively, and
+is displayed in the callout.
 
 ## Examples
 
-{{< introduced buildx 0.10.4 >}}
+{{< introduced buildx 0.16.0 >}}
 
 > [!NOTE]
 >
@@ -29,12 +33,10 @@ We support these broad categories of callouts:
 >
 > For a smaller base image, use `alpine`.
 
-
 > [!IMPORTANT]
 >
 > Treat access tokens like your password and keep them secret. Store your
 > tokens securely (for example, in a credential manager).
-
 
 > [!WARNING]
 >
@@ -46,18 +48,19 @@ We support these broad categories of callouts:
 >
 > The Docker Dashboard does not remove volumes when you delete the app stack.
 
+> [!CAUTION]
+>
+> Here be dragons.
+
 For both of the following callouts, consult [the Docker release lifecycle](/release-lifecycle) for more information on when to use them.
 
-> **Beta feature**
->
-> The Builds view is currently in Beta. This feature may change or be removed from future releases.
-{ .experimental }
+{{% experimental title="Beta feature" %}}
+The Builds view is currently in Beta. This feature may change or be removed from future releases.
+{{% /experimental %}}
 
-> **Restricted**
->
-> Docker Scout is an [early access](/release-lifecycle/#early-access-ea)
-> product.
-{ .restricted}
+{{% restricted %}}
+Docker Scout is an [early access](/release-lifecycle/#early-access-ea) product.
+{{% /restricted %}}
 
 ## Formatting 
 
@@ -95,14 +98,17 @@ For both of the following callouts, consult [the Docker release lifecycle](/rele
 >
 > The Docker Dashboard does _not_ remove volumes when you delete the app stack.
 
-> **Beta feature**
+> [!CAUTION]
 >
-> The Builds view is currently in Beta. This feature may change or be removed from future releases.
-{ .experimental }
+> Here be dragons.
+```
 
-> **Restricted**
->
-> Docker Scout is an [early access](/release-lifecycle/#early-access-ea)
-> product.
-{ .restricted }
+```go
+{{%/* experimental title="Beta feature" */%}}
+The Builds view is currently in Beta. This feature may change or be removed from future releases.
+{{%/* /experimental */%}}
+
+{{%/* restricted */%}}
+Docker Scout is an [early access](/release-lifecycle/#early-access-ea) product.
+{{%/* /restricted */%}}
 ```
