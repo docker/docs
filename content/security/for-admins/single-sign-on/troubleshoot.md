@@ -28,7 +28,7 @@ their service.
 [View the SSO and SCIM error logs](#view-sso-and-scim-error-logs) and then use
 the following sections for solutions to common configuration errors.
 
-### IdP-initiated login is not enabled for connection
+### IdP-initiated sign in is not enabled for connection
 
 An error message, similar to the following, appears in the error logs for this
 issue.
