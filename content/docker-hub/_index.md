@@ -3,10 +3,6 @@ description: Find a comprehensive overview of Docker Hub, including its features
 keywords: Docker, docker, docker hub, hub, repositories, docker account
 title: Overview of Docker Hub
 grid:
-- title: Create a Docker ID
-  description: Register and create a new Docker ID.
-  icon: fingerprint
-  link: /docker-id
 - title: Quickstart
   description: Step-by-step instructions on getting started on Docker Hub.
   icon: explore
@@ -53,8 +49,8 @@ GitHub and Bitbucket and push them to Docker Hub.
 * Set up [SSO](../security/for-admins/single-sign-on/index.md) and [SCIM](../security/for-admins/provisioning/scim.md)
 * Use [Group mapping](group-mapping.md)
 * [Carry out domain audits](domain-audit.md)
-* [Use Image Access Management](image-access-management.md) to control developers' access to certain types of images
-* [Turn on Registry Access Management](../security/for-admins/registry-access-management.md)
+* [Use Image Access Management](/security/for-admins/hardened-desktop/image-access-management.md) to control developers' access to certain types of images
+* [Turn on Registry Access Management](/security/for-admins/hardened-desktop/registry-access-management.md)
 {{< /tab >}}
 {{< /tabs >}}
 

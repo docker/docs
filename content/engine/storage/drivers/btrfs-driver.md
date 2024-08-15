@@ -3,7 +3,7 @@ description: Learn how to optimize your use of Btrfs driver.
 keywords: container, storage, driver, Btrfs
 title: Use the BTRFS storage driver
 aliases:
-  - /engine/userguide/storagedriver/btrfs-driver/
+  - /storage/storagedriver/btrfs-driver/
 ---
 
 Btrfs is a copy-on-write filesystem that supports many advanced storage

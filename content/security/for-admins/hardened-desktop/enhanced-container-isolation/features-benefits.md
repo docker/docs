@@ -2,6 +2,8 @@
 description: The benefits of enhanced container isolation
 title: Key features and benefits
 keywords: set up, enhanced container isolation, rootless, security, features, Docker Desktop
+aliases: 
+ - /desktop/hardened-desktop/enhanced-container-isolation/features-benefits/
 ---
 
 ### Linux User Namespace on all containers

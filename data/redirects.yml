@@ -35,8 +35,8 @@
 "/reference/cli/dockerd/":
   - /engine/reference/commandline/dockerd/
 # redirect updated location of the "running containers" page
-"/engine/reference/run":
-  - /engine/containers/run/
+"/engine/containers/run/":
+  - "/engine/reference/run/"
 
 "/engine/security/#docker-daemon-attack-surface":
   # Details about the "Docker Daemon attack surface". This redirect is currently
@@ -124,7 +124,7 @@
   - /go/scout-policy/
 "/scout/policy/#no-fixable-critical-or-high-vulnerabilities":
   - /go/scout-policy-dsp001/
-"/scout/policy/#no-copyleft-licenses":
+"/scout/policy/#no-agpl-v3-licenses":
   - /go/scout-policy-dsp002/
 "/scout/policy/#no-outdated-base-images":
   - /go/scout-policy-dsp003/

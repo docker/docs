@@ -3,6 +3,8 @@ description: Enhanced Container Isolation - benefits, why use it, how it differs
   Docker rootless, who it is for
 keywords: containers, rootless, security, sysbox, runtime
 title: What is Enhanced Container Isolation?
+aliases:
+ - /desktop/hardened-desktop/enhanced-container-isolation/
 ---
 
 > **Note**
@@ -11,7 +13,7 @@ title: What is Enhanced Container Isolation?
 
 Enhanced Container Isolation provides an additional layer of security to prevent malicious workloads running in containers from compromising Docker Desktop or the host.
 
-It uses a variety of advanced techniques to harden container isolation, but without impacting developer productivity. It is available with [Docker Desktop 4.13.0 and later](../../release-notes.md).
+It uses a variety of advanced techniques to harden container isolation, but without impacting developer productivity. It is available with [Docker Desktop 4.13.0 and later](/desktop/release-notes.md).
 
 These techniques include:
 - Running all containers unprivileged through the Linux user-namespace, even those launched with the `--privileged` flag. This makes it harder for malicious container workloads to escape the container and infect the Docker Desktop VM and host.
@@ -21,7 +23,7 @@ These techniques include:
 
 When Enhanced Container Isolation is enabled, these mechanisms are applied automatically and with minimal functional or performance impact to developers. Developers continue to use Docker Desktop as usual, but the containers they launch are more strongly isolated.
 
-Enhanced Container Isolation ensures stronger container isolation and also locks in any security configurations that have been created by IT admins, for instance through [Registry Access Management policies](../../../security/for-admins/registry-access-management.md) or with [Settings Management](../settings-management/index.md).
+Enhanced Container Isolation ensures stronger container isolation and also locks in any security configurations that have been created by IT admins, for instance through [Registry Access Management policies](/security/for-admins/hardened-desktop/registry-access-management.md) or with [Settings Management](../settings-management/index.md).
 
 > **Note**
 >
@@ -95,7 +97,7 @@ To enable Enhanced Container Isolation as a developer:
 ##### Prerequisite
 
 To enable Enhanced Container Isolation as an admin, you first need to [enforce
-sign-in](../../../security/for-admins/enforce-sign-in/_index.md). This is
+sign-in](/security/for-admins/enforce-sign-in/_index.md). This is
 because the Enhanced Container Isolation feature requires a Docker Business
 subscription and therefore your Docker Desktop users must authenticate to your
 organization for this configuration to take effect. 

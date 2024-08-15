@@ -1227,32 +1227,6 @@ Manuals:
           title: Resource Saver mode
         - path: /desktop/use-desktop/pause/
           title: Pause Docker Desktop
-    - sectiontitle: Hardened Docker Desktop
-      section:
-        - path: /desktop/hardened-desktop/
-          title: Overview
-        - sectiontitle: Settings Management
-          section:
-          - path: /desktop/hardened-desktop/settings-management/
-            title: What is Settings Management?
-          - path: /desktop/hardened-desktop/settings-management/configure/
-            title: Configure Settings Management
-        - sectiontitle: Enhanced Container Isolation
-          section:
-          - path: /desktop/hardened-desktop/enhanced-container-isolation/
-            title: What is Enhanced Container Isolation?
-          - path: /desktop/hardened-desktop/enhanced-container-isolation/how-eci-works/
-            title: How does it work?
-          - path: /desktop/hardened-desktop/enhanced-container-isolation/features-benefits/
-            title: Key features and benefits
-          - path: /desktop/hardened-desktop/enhanced-container-isolation/config/
-            title: Advanced configuration options
-          - path: /desktop/hardened-desktop/enhanced-container-isolation/limitations/
-            title: Limitations
-          - path: /desktop/hardened-desktop/enhanced-container-isolation/faq/
-            title: FAQ
-        - path: /desktop/hardened-desktop/air-gapped-containers/
-          title: Air-Gapped Containers
     - sectiontitle: Dev Environments (Beta)
       section:
         - path: /desktop/dev-environments/
@@ -2235,7 +2209,7 @@ Manuals:
   section:
   - path: /accounts/
     title: Overview
-  - path: /docker-id/
+  - path: /accounts/create-account/
     title: Create an account
   - path: /accounts/manage-account/
     title: Manage an account
@@ -2323,10 +2297,37 @@ Manuals:
       title: Roles and permissions
     - path: /security/for-admins/domain-audit/
       title: Domain audit
-    - path: /security/for-admins/image-access-management/
-      title: Image Access Management
-    - path: /security/for-admins/registry-access-management/
-      title: Registry Access Management
+    - sectiontitle: Hardened Docker Desktop
+      section:
+        - path: /security/for-admins/hardened-desktop/
+          title: Overview
+        - sectiontitle: Settings Management
+          section:
+          - path: /security/for-admins/hardened-desktop/settings-management/
+            title: What is Settings Management?
+          - path: /security/for-admins/hardened-desktop/settings-management/configure/
+            title: Configure Settings Management
+        - sectiontitle: Enhanced Container Isolation
+          section:
+          - path: /security/for-admins/hardened-desktop/enhanced-container-isolation/
+            title: What is Enhanced Container Isolation?
+          - path: /security/for-admins/hardened-desktop/enhanced-container-isolation/how-eci-works/
+            title: How does it work?
+          - path: /security/for-admins/hardened-desktop/enhanced-container-isolation/features-benefits/
+            title: Key features and benefits
+          - path: /security/for-admins/hardened-desktop/enhanced-container-isolation/config/
+            title: Advanced configuration options
+          - path: /security/for-admins/hardened-desktop/enhanced-container-isolation/limitations/
+            title: Limitations
+          - path: /security/for-admins/hardened-desktop/enhanced-container-isolation/faq/
+            title: FAQ
+        - path: /security/for-admins/hardened-desktop/air-gapped-containers/
+          title: Air-Gapped Containers
+        - path: /security/for-admins/hardened-desktop/image-access-management/
+          title: Image Access Management
+        - path: /security/for-admins/hardened-desktop/registry-access-management/
+          title: Registry Access Management
+
   - sectiontitle: For developers
     section:
     - path: /security/for-developers/access-tokens/
