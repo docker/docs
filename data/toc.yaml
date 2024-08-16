@@ -1185,7 +1185,7 @@ Manuals:
          title: Understand permission requirements for Mac
        - path: /desktop/install/windows-install/
          title: Windows
-       - sectiontitle: Use the MSI installer
+       - sectiontitle: Use the MSI installer {{< badge color=blue text="New" >}}
          section:
          - path: /desktop/install/msi/
            title: Overview

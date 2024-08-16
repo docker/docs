@@ -8,6 +8,10 @@ This page outlines the different ways you can enforce sign-in for Docker Desktop
 
 ## Registry key method (Windows only)
 
+> [!NOTE]
+>
+> The registry key method is available with Docker Desktop version 4.32 and later.
+
 1. Create the registry key. Your new key should look like the following:
 
    ```console 
@@ -43,6 +47,10 @@ There are many ways to deploy the registry key, for example using an MDM solutio
 8. Once verified, you can proceed with broader deployment. Monitor the deployment to ensure the settings are applied correctly across the organization's computers.
 
 ## plist method (Mac only)
+
+> [!NOTE]
+>
+> The registry key method is available with Docker Desktop version 4.32 and later.
 
 1. Create the file `/Library/Application Support/com.docker.docker/desktop.plist`.
 2. Open `desktop.plist` in a text editor and add the following content, where `myorg` is replaced with your organization’s name all lowercase:
