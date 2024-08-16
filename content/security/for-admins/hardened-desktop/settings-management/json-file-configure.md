@@ -1,31 +1,28 @@
 ---
-description: How to configure Settings Management for Docker Desktop
+description: How to configure Settings Management for Docker Desktop using a .json file
 keywords: admin, controls, rootless, enhanced container isolation
-title: Configure Settings Management
+title: Configure with a .json file
 aliases: 
  - /desktop/hardened-desktop/settings-management/configure/
+ - /security/for-admins/settings-management/configure/
 ---
 
 >**Note**
 >
 >Settings Management is available to Docker Business customers only.
 
-This page contains information for admins on how to configure Settings Management to specify and lock configuration parameters to create a standardized Docker Desktop environment across the organization.
+This page contains information for admins on how to configure Settings Management with an `admin-settings.json` file to specify and lock configuration parameters to create a standardized Docker Desktop environment across the organization.
 
-Settings Management is designed specifically for organizations who don’t give developers root access to their machines.
-
-### Prerequisites
+## Prerequisites
 
 - [Download and install Docker Desktop 4.13.0 or later](/desktop/release-notes.md).
 - As an administrator, you need to [enforce
   sign-in](/security/for-admins/enforce-sign-in/_index.md). This is
-  because this feature requires a Docker Business subscription and therefore
-  your Docker Desktop users must authenticate to your organization for this
-  configuration to take effect. Enforcing sign-in ensures that your Docker
-  Desktop developers always authenticate to your organization, even though they
-  can authenticate without it and the feature will take effect. Enforcing
-  sign-in guarantees the feature always takes effect.
+because the Enhanced Container Isolation feature requires a Docker Business
+subscription and therefore your Docker Desktop users must authenticate to your
+organization for this configuration to take effect. 
 
+## Setup
 
 ### Step one: Create the `admin-settings.json` file and save it in the correct location
 
@@ -48,9 +45,9 @@ To set it up manually:
 
 ### Step two: Configure the settings you want to lock in
 
->**Note**
+> **Note**
 >
->Some of the configuration parameters only apply to Windows. This is highlighted in the table below.
+> Some of the configuration parameters are platform specific. This is highlighted in the table below.
 
 The `admin-settings.json` file requires a nested list of configuration parameters, each of which must contain the  `locked` parameter. You can add or remove configuration parameters as per your requirements.
 
