@@ -46,7 +46,7 @@ Custom Dockerfile implementations allow you to:
 - Use [alternative build definitions, or create your own](https://github.com/moby/buildkit#exploring-llb)
 - Build your own Dockerfile frontend with custom features
 
-> **Note**
+> [!NOTE]
 >
 > BuildKit ships with a built-in Dockerfile frontend, but it's recommended
 > to use an external image to make sure that all users use the same version on

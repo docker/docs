@@ -157,7 +157,7 @@ You can promote a worker node to the manager role. This is useful when a
 manager node becomes unavailable or if you want to take a manager offline for
 maintenance. Similarly, you can demote a manager node to the worker role.
 
-> **Note**
+> [!NOTE]
 >
 > Regardless of your reason to promote or demote
 > a node, you must always maintain a quorum of manager nodes in the
@@ -195,7 +195,7 @@ install the plugin on each node or script the installation. You can also deploy
 the plugin in a similar way as a global service using the Docker API, by specifying
 a `PluginSpec` instead of a `ContainerSpec`.
 
-> **Note**
+> [!NOTE]
 >
 > There is currently no way to deploy a plugin to a swarm using the
 > Docker CLI or Docker Compose. In addition, it is not possible to install

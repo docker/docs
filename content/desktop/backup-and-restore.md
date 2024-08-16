@@ -10,7 +10,6 @@ computer, for example.
 > Should I back up my containers?
 >
 > If you use volumes or bind-mounts to store your container data, backing up your containers may not be needed, but make sure to remember the options that were used when creating the container or use a [Docker Compose file](../compose/compose-file/index.md) if you want to re-create your containers with the same configuration after re-installation.
-{ .tip }
 
 ## Save your data
 

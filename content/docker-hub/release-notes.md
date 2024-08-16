@@ -213,7 +213,6 @@ to `hub.docker.com`. You can access the page at its new URL: [https://hub.docker
 
     > If you lose both your 2FA authentication device and recovery code, you may
     > not be able to recover your account.
-    { .important }
 
 ### Enhancements
 

@@ -15,7 +15,6 @@ Before you start, make sure you have installed the latest version of [Docker Des
 > Tip
 >
 > If you want to start a codebase for your new extension, our [Quickstart guide](../quickstart.md) and `docker extension init <my-extension>` provides a better base for your extension.
-{ .tip }
 
 ## Extension folder structure
 

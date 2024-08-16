@@ -7,11 +7,10 @@ aliases:
 - /docker-hub/2fa/disable-2fa/
 ---
 
-> **Warning**
+> [!WARNING]
 >
 > Disabling two-factor authentication results in decreased security for your
 > Docker account.
-{ .warning }
 
 1. Sign in to your [Docker account](https://app.docker.com/login).
 2. Select your avatar and then from the drop-down menu, select **Account settings**.

@@ -115,7 +115,6 @@ Since this application was started using Docker Compose, it's easy to tear it al
     > ```console
     > docker compose down --volumes
     > ```
-    { .tip }
 
 2. Alternatively, you can use the Docker Desktop GUI to remove the containers by selecting the application stack and selecting the **Delete** button.
 
@@ -124,7 +123,6 @@ Since this application was started using Docker Compose, it's easy to tear it al
     > **Using the GUI for Compose stacks**
     >
     > Note that if you remove the containers for a Compose app in the GUI, it's removing only the containers. You'll have to manually remove the network and volumes if you want to do so.
-    { .important }
 
 In this walkthrough, you learned how to use Docker Compose to start and stop a multi-container application.
 

@@ -102,7 +102,7 @@ This creates workflow steps to:
 3. Extract metadata from Git reference and GitHub events.
 4. Build and push the Docker image to the registry.
 
-> **Note**
+> [!NOTE]
 >
 > This CI workflow runs a local analysis and evaluation of your image. To
 > evaluate the image locally, you must ensure that the image is loaded the

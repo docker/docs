@@ -4,7 +4,7 @@ description: Learn about 3D Secure support for Docker billing.
 keywords: billing, renewal, payments, subscriptions
 ---
 
-> **Note**
+> [!NOTE]
 >
 > [Docker Core subscription](/billing/core-billing/get-started-core/) payments support 3D secure authentication.
 
@@ -25,7 +25,6 @@ If you encounter errors completing payments due to 3DS, you can troubleshoot in 
 2. Contact your bank to determine any errors on their end.
 3. Try a different payment method that doesn’t require 3DS.
 
-> **Tip**
+> [!TIP]
 >
 > Make sure you allow third-party scripts in your browser and that any ad blocker you may use is disabled when attempting to complete payments.
-{ .tip }

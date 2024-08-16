@@ -72,7 +72,7 @@ A number of Docker Captains have also created video courses on Docker and Kubern
 
 ## Community-translated docs
 
-> **Note**
+> [!NOTE]
 >
 > The following section contains a subset of Docker docs that are translated by community
 > members. This is not an officially translated version of Docker docs and it may not be up to date.

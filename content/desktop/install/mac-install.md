@@ -35,10 +35,9 @@ This page contains download URLs, information about system requirements, and ins
 
 - A supported version of macOS.
 
-  > **Important**
+  > [!IMPORTANT]
   >
   > Docker supports Docker Desktop on the most recent versions of macOS. That is, the current release of macOS and the previous two releases. As new major versions of macOS are made generally available, Docker stops supporting the oldest version and supports the newest version of macOS (in addition to the previous two releases).
-  { .important }
 
 - At least 4 GB of RAM.
 
@@ -47,10 +46,9 @@ This page contains download URLs, information about system requirements, and ins
 
 - A supported version of macOS.
 
-  > **Important**
+  > [!IMPORTANT]
   >
   > Docker supports Docker Desktop on the most recent versions of macOS. That is, the current release of macOS and the previous two releases. As new major versions of macOS are made generally available, Docker stops supporting the oldest version and supports the newest version of macOS (in addition to the previous two releases).
-  { .important }
 
 - At least 4 GB of RAM.
 - For the best experience, it's recommended that you install Rosetta 2. There is no longer a hard requirement to install Rosetta 2, however there are a few optional command line tools that still require Rosetta 2 when using Darwin/AMD64. See [Known issues](../troubleshoot/known-issues.md). To install Rosetta 2 manually from the command line, run the following command:
@@ -115,7 +113,7 @@ The `install` command accepts the following flags:
 - `--override-proxy-https=<URL>`: Sets the URL of the HTTP proxy that must be used for outgoing HTTPS requests, requires `--proxy-http-mode` to be `manual`
 - `--override-proxy-exclude=<hosts/domains>`: Bypasses proxy settings for the hosts and domains. It's a comma-separated list.
 
-> **Tip**
+> [!TIP]
 >
 > As an IT administrator, you can use endpoint management (MDM) software to identify the number of Docker Desktop instances and their versions within your environment. This can provide accurate license reporting, help ensure your machines use the latest version of Docker Desktop, and enable you to [enforce sign-in](../../security/for-admins/enforce-sign-in/_index.md).
 > - [Intune](https://learn.microsoft.com/en-us/mem/intune/apps/app-discovered-apps)
@@ -123,7 +121,6 @@ The `install` command accepts the following flags:
 > - [Kandji](https://support.kandji.io/support/solutions/articles/72000559793-view-a-device-application-list)
 > - [Kolide](https://www.kolide.com/features/device-inventory/properties/mac-apps)
 > - [Workspace One](https://blogs.vmware.com/euc/2022/11/how-to-use-workspace-one-intelligence-to-manage-app-licenses-and-reduce-costs.html)
-{ .tip }
 
 ## Where to go next 
 

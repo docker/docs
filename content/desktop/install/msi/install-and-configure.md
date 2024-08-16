@@ -36,7 +36,7 @@ If your administrator account is different to your user account, you must add th
 3. Right-click to add the user to the group.
 4. Sign out and sign back in for the changes to take effect.
 
-> **Note**
+> [!NOTE]
 >
 > When installing Docker Desktop with the MSI, in-app updates are automatically disabled. This feature ensures your organization maintains the required Docker Desktop version. For Docker Desktop installed with the .exe installer, in-app updates remain supported.
 >
@@ -64,10 +64,9 @@ Non-interactive installations are silent and any additional configuration must b
 
 ### Common installation commands
 
-> **Important**
+> [!IMPORTANT]
 >
 > Admin rights are required to run any of the following commands.
-{ .important }
 
 #### Installing interactively with verbose logging
 
@@ -111,7 +110,7 @@ For example:
 msiexec /i "DockerDesktop.msi" /L*V ".\msi.log" /passive /norestart
 ```
 
-> **Tip**
+> [!TIP]
 >
 > Some useful tips to remember when creating a value that expects a JSON string as it’s value:
 > 
@@ -119,7 +118,6 @@ msiexec /i "DockerDesktop.msi" /L*V ".\msi.log" /passive /norestart
 > - The string should be wrapped in double quotes
 > - The string shouldn't contain any whitespace
 > - Property names are expected to be in double quotes
-{ .tip }
 
 ### Common uninstall commands
 
@@ -138,7 +136,7 @@ IdentifyingNumber                      Name
 -----------------                      ----
 {10FC87E2-9145-4D7D-B493-2E99E8D8E103} Docker Desktop
 ```
-> **Note**
+> [!NOTE]
 >
 > This command can take some time to return, depending on the number of installed applications.
 
@@ -174,10 +172,9 @@ msiexec /x "DockerDesktop.msi" /quiet
 
 ### Configuration options 
 
-> **Important**
+> [!IMPORTANT]
 >
 > In addition to the following custom properties, the Docker Desktop MSI installer also supports the standard [Windows Installer command line options](https://learn.microsoft.com/en-us/windows/win32/msi/standard-installer-command-line-options).
-{ .important }
 
 | Property | Description | Default |
 | :--- | :--- | :--- |

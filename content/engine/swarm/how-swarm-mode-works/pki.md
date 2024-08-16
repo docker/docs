@@ -60,7 +60,7 @@ reference for details.
 
 ## Rotating the CA certificate
 
-> **Note**
+> [!NOTE]
 >
 > Mirantis Kubernetes Engine (MKE), formerly known as Docker UCP, provides an external
 > certificate manager service for the swarm. If you run swarm on MKE, you shouldn't

@@ -11,7 +11,6 @@ You can deactivate an account at any time. This section describes the prerequisi
 >**Warning**
 >
 > All Docker products and services that use your Docker account or organization account will be inaccessible after deactivating your account.
-{ .warning }
 
 ## Prerequisites
 
@@ -32,10 +31,9 @@ Before deactivating an organization, complete the following:
 
 Once you have completed all the previous steps, you can deactivate your organization.
 
-> **Warning**
+> [!WARNING]
 >
 > This cannot be undone. Be sure you've gathered all the data you need from your organization before deactivating it.
-{ .warning }
 
 {{< tabs >}}
 {{< tab name="Admin Console" >}}

@@ -16,15 +16,13 @@ aliases:
 download-url-base: https://download.docker.com/linux/rhel
 ---
 
-> **Experimental**
->
-> Support for Docker Engine on RHEL x86_64 and aarch64 is experimental.
-{ .experimental }
+{{% experimental %}}
+Support for Docker Engine on RHEL x86_64 and aarch64 is experimental.
+{{% /experimental %}}
 
-> **Docker Desktop for Linux** is also available for RHEL.
-> 
-> To get access, join the [Early Access Program](https://www.docker.com/docker-desktop-preview-program/).
-{ .restricted }
+{{% restricted title="Docker Desktop for Linux is also available for RHEL." %}}
+To get access, join the [Early Access Program](https://www.docker.com/docker-desktop-preview-program/).
+{{% /restricted %}}
 
 To get started with Docker Engine on RHEL, make sure you
 [meet the prerequisites](#prerequisites), and then follow the

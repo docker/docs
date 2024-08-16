@@ -174,7 +174,6 @@ vulnerable versions.
 > [CVE-2021-45046](https://nvd.nist.gov/vuln/detail/CVE-2021-45046) and
 > [CVE-2021-45105](https://nvd.nist.gov/vuln/detail/CVE-2021-45105).
 > For a more complete fix to this vulnerability, we recommended that you update to 2.17.0 where possible.
-{ .important }
 
 ### Scan images on Docker Hub
 
@@ -206,7 +205,7 @@ vulnerable for other reasons. We recommend that you also review the guidelines p
 | [sonarqube](https://hub.docker.com/_/sonarqube)    | 8.9.5, 9.2.2 | [SonarQube announcement](https://community.sonarsource.com/t/sonarqube-sonarcloud-and-the-log4j-vulnerability/54721) |
 | [storm](https://hub.docker.com/_/storm)    | Awaiting info | Awaiting info |
 
-> **Note**
+> [!NOTE]
 >
 > Although [xwiki](https://hub.docker.com/_/xwiki) images may be detected as vulnerable
 by some scanners, the authors believe the images are not vulnerable by Log4j 2

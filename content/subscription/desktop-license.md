@@ -15,7 +15,7 @@ Our [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-
 
 Read the [Blog](https://www.docker.com/blog/updating-product-subscriptions/) and [Docker subscription FAQs](https://www.docker.com/pricing/faq) to learn how this may affect companies using Docker Desktop.
 
-> **Note**
+> [!NOTE]
 >
 > The licensing and distribution terms for Docker and Moby open-source projects, such as Docker Engine, aren't changing.
 
@@ -24,7 +24,6 @@ Docker Desktop is built using open-source software. For information about the li
 Docker Desktop distributes some components that are licensed under the
 GNU General Public License. Select [here](https://download.docker.com/opensource/License.tar.gz) to download the source for these components.
 
-> **Tip**
+> [!TIP]
 >
 > Explore [Docker subscriptions](https://www.docker.com/pricing/) to see what else Docker can offer you. 
-{ .tip }

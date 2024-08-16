@@ -17,7 +17,7 @@ Only personal account repositories can use collaborators. You can add unlimited 
 You can choose collaborators and manage their access to a private
 repository from that repository's **Settings** page.
 
-> **Note**
+> [!NOTE]
 >
 > A collaborator can't add other collaborators. Only the owner of
 > the repository has administrative access.
@@ -32,7 +32,7 @@ You can view the available tags and the size of the associated image. Go to the 
 
 To delete a tag, select the corresponding checkbox and select **Delete** from the **Action** drop-down list.
 
-> **Note**
+> [!NOTE]
 >
 > Only a user with administrative access (owner or team member with Admin
 > permission) over the repository can delete tags.

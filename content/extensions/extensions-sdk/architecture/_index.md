@@ -34,12 +34,11 @@ Every time users click on the **Extensions** tab, Docker Desktop initializes the
 The frontend can invoke `docker` commands, communicate with the extension backend, or invoke extension executables
 deployed on the host, through the [Extensions SDK](https://www.npmjs.com/package/@docker/extension-api-client).
 
-> **Tip**
+> [!TIP]
 >
 > The `docker extension init` generates a React based extension. But you can still use it as a starting point for
 > your own extension and use any other frontend framework, like Vue, Angular, Svelte, etc. or event stay with
 > vanilla Javascript.
-{ .tip }
 
 Learn more about [building a frontend](../build/frontend-extension-tutorial.md) for your extension.
 
@@ -54,11 +53,10 @@ Alongside a frontend application, extensions can also contain one or many backen
 - To access specific resources in the Docker Desktop VM, for example by mounting folders in the compose
 file
 
-> **Tip**
+> [!TIP]
 >
 > The `docker extension init` generates a Go backend. But you can still use it as a starting point for
 > your own extension and use any other language like Node.js, Python, Java, .Net, or any other language and framework.
-{ .tip }
 
 Usually, the backend is made of one container that runs within the Docker Desktop VM. Internally, Docker Desktop creates
 a Docker Compose project, creates the container from the `image` option of the `vm` section of the `metadata.json`, and
@@ -70,7 +68,7 @@ that can't be expressed just with a Docker image. The `compose.yml` file can als
 needed by the extension, like a database or a message broker. 
 Note that, if the Compose file defines many services, the SDK can only contact the first of them.
 
-> **Note**
+> [!NOTE]
 >
 > In some cases, it is useful to also interact with the Docker engine from the backend.
 > See [How to use the Docker socket](../guides/use-docker-socket-from-backend.md) from the backend.

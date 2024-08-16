@@ -21,10 +21,9 @@ const output = await window.ddClient.backend.execInContainer(container, cmd);
 console.log(output);
 ```
 
-> **Warning**
+> [!WARNING]
 >
 > It will be removed in a future version.
-{ .warning }
 
 #### Parameters
 
@@ -53,10 +52,9 @@ window.ddClient.backend
  .then((value: any) => console.log(value));
 ```
 
-> **Warning**
+> [!WARNING]
 >
 > It will be removed in a future version. Use [get](HttpService.md#get) instead.
-{ .warning }
 
 #### Parameters
 
@@ -82,10 +80,9 @@ window.ddClient.backend
  .then((value: any) => console.log(value));
 ```
 
-> **Warning**
+> [!WARNING]
 >
 > It will be removed in a future version. Use [post](HttpService.md#post) instead.
-{ .warning }
 
 #### Parameters
 
@@ -112,10 +109,9 @@ window.ddClient.backend
  .then((value: any) => console.log(value));
 ```
 
-> **Warning**
+> [!WARNING]
 > 
 > It will be removed in a future version. Use [put](HttpService.md#put) instead.
-{ .warning }
 
 #### Parameters
 
@@ -142,10 +138,9 @@ window.ddClient.backend
  .then((value: any) => console.log(value));
 ```
 
-> **Warning**
+> [!WARNING]
 >
 > It will be removed in a future version. Use [patch](HttpService.md#patch) instead.
-{ .warning }
 
 #### Parameters
 
@@ -172,10 +167,9 @@ window.ddClient.backend
  .then((value: any) => console.log(value));
 ```
 
-> **Warning**
+> [!WARNING]
 >
 > It will be removed in a future version. Use [delete](HttpService.md#delete) instead.
-{ .warning }
 
 #### Parameters
 
@@ -201,10 +195,9 @@ window.ddClient.backend
  .then((value: any) => console.log(value));
 ```
 
-> **Warning**
+> [!WARNING]
 >
 > It will be removed in a future version. Use [head](HttpService.md#head) instead.
-{ .warning }
 
 #### Parameters
 
@@ -230,10 +223,9 @@ window.ddClient.backend
  .then((value: any) => console.log(value));
 ```
 
-> **Warning**
+> [!WARNING]
 >
 > It will be removed in a future version. Use [request](HttpService.md#request) instead.
-{ .warning }
 
 #### Parameters
 
@@ -264,10 +256,9 @@ const output = await window.ddClient.backend.execInVMExtension(
 console.log(output);
 ```
 
-> **Warning**
+> [!WARNING]
 >
 > It will be removed in a future version. Use [exec](ExtensionCli.md#exec) instead.
-{ .warning }
 
 #### Parameters
 
@@ -301,10 +292,9 @@ window.ddClient.spawnInVMExtension(
 );
 ```
 
-> **Warning**
+> [!WARNING]
 >
 > It will be removed in a future version.
-{ .warning }
 
 #### Parameters
 

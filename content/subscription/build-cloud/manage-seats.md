@@ -6,7 +6,7 @@ keywords: subscription, team, business, features, build, cloud, Build Cloud, rem
 
 You can add seats and manage invitations to your Docker Build Cloud Team in the Docker Build Cloud dashboard.
 
-> **Note**
+> [!NOTE]
 >
 >If you have a Docker Build Cloud Business subscription, you can add and remove seats by working with your account executive, then assign your purchased seats in the Docker Build Cloud dashboard.
 

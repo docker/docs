@@ -34,16 +34,14 @@ If you already have Docker Engine and Docker CLI installed, you can install the 
 - [Using Docker's repository](linux.md#install-using-the-repository)
 - [Downloading and installing manually](linux.md#install-the-plugin-manually)
 
-> **Important**
+> [!IMPORTANT]
 >
 >This is only available on Linux
-{ .important }
 
 ### Scenario three: Install the Compose standalone 
 
 You can [install the Compose standalone](standalone.md) on Linux or on Windows Server.
 
-> **Warning**
+> [!WARNING]
 >
 >This install scenario is not recommended and is only supported for backward compatibility purposes.
-{ .warning }

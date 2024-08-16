@@ -86,10 +86,9 @@ In the following steps, you'll create the network first and then attach the MySQ
    
    In the previous command, you can see the `--network-alias` flag. In a later section, you'll learn more about this flag.
 
-   > **Tip**
+   > [!TIP]
    >
    > You'll notice a volume named `todo-mysql-data` in the above command that is mounted at `/var/lib/mysql`, which is where MySQL stores its data. However, you never ran a `docker volume create` command. Docker recognizes you want to use a named volume and creates one automatically for you.
-   { .tip }
 
 3. To confirm you have the database up and running, connect to the database and verify that it connects.
 
@@ -186,7 +185,7 @@ The todo app supports the setting of a few environment variables to specify MySQ
 - `MYSQL_PASSWORD` - the password to use for the connection
 - `MYSQL_DB` - the database to use once connected
 
-> **Note**
+> [!NOTE]
 >
 > While using env vars to set connection settings is generally accepted for development, it's highly discouraged
 > when running applications in production. Diogo Monica, a former lead of security at Docker,

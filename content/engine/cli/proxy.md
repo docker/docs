@@ -25,7 +25,7 @@ configure it in different ways:
 - [Configure the Docker client](#configure-the-docker-client)
 - [Set proxy using the CLI](#set-proxy-using-the-cli)
 
-> **Note**
+> [!NOTE]
 >
 > Unfortunately, there's no standard that defines how web clients should handle proxy 
 > environment variables, or the format for defining them.
@@ -52,7 +52,7 @@ Builds and containers use the configuration specified in this file.
 }
 ```
 
-> **Warning**
+> [!WARNING]
 >
 > Proxy settings may contain sensitive information. For example, some proxy servers
 > require authentication information to be included in their URL, or their
@@ -61,7 +61,6 @@ Builds and containers use the configuration specified in this file.
 > Environment variables are stored as plain text in the container's configuration,
 > and as such can be inspected through the remote API or committed to an image
 > when using `docker commit`.
-{ .warning }
 
 The configuration becomes active after saving the file, you don't need to
 restart Docker. However, the configuration only applies to new containers and

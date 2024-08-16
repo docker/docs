@@ -12,7 +12,7 @@ To run Docker Desktop in a virtual desktop environment, it is essential nested v
 
 ## Virtual desktop support
 
-> **Note**
+> [!NOTE]
 >
 > Support for running Docker Desktop on a virtual desktop is available to Docker Business customers, on VMware ESXi or Azure VMs only.
 

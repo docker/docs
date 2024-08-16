@@ -39,11 +39,10 @@ case running `docker compose up` would only start `backend` and `db`.
 
 Valid profiles names follow the regex format of `[a-zA-Z0-9][a-zA-Z0-9_.-]+`.
 
-> **Tip**
+> [!TIP]
 >
 > The core services of your application shouldn't be assigned `profiles` so
 > they are always enabled and automatically started.
-{ .tip }
 
 ## Start specific profiles
 

@@ -108,7 +108,7 @@ The Docker daemon log can be viewed by using one of the following methods:
 - `/var/log/messages`, `/var/log/daemon.log`, or `/var/log/docker.log` on older
   Linux systems
 
-> **Note**
+> [!NOTE]
 >
 > It isn't possible to manually generate a stack trace on Docker Desktop for
 > Mac or Docker Desktop for Windows. However, you can click the Docker taskbar

@@ -4,11 +4,12 @@ description: Learn how to use the Docker Extension for GitHub Copilot to streaml
 keywords: Docker, GitHub Copilot, extension, Visual Studio Code, chat, ai, containerization
 ---
 
-> **Early Access**
->
-> The Docker for GitHub Copilot extension is a part of the [Limited Public Beta](https://github.blog/changelog/2024-05-21-copilot-extensions-now-in-limited-public-beta/)
-> for GitHub Copilot Extensions. Only members of the beta program are eligible to use this extension.
-{ .restricted }
+{{% restricted title="Early access" %}}
+
+The Docker for GitHub Copilot extension is a part of the [Limited Public Beta](https://github.blog/changelog/2024-05-21-copilot-extensions-now-in-limited-public-beta/)
+for GitHub Copilot Extensions. Only members of the beta program are eligible to use this extension.
+
+{{% /restricted %}}
 
 The Docker Extension for GitHub Copilot integrates Docker's capabilities with
 GitHub Copilot, providing assistance with containerizing applications and

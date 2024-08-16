@@ -28,7 +28,7 @@ When creating a new repository:
     - Have between 2 and 255 characters
     - Only contain lowercase letters, numbers, hyphens (`-`), and underscores (`_`)
 
-  > **Note**
+  > [!NOTE]
   >
   > You can't rename a Docker Hub repository once it's created.
 
@@ -38,7 +38,7 @@ When creating a new repository:
   the repository settings.
 - You can set the repository's default visibility to public or private.
 
-  > **Note**
+  > [!NOTE]
   >
   > For organizations creating a new repository, it's recommended you select **Private**.
 

@@ -24,10 +24,9 @@ When you upgrade to a paid subscription, you immediately have access to all the 
 
 5. Go to your current plan, then select **Change plan** and then choose the plan you'd like to upgrade to.
 
-   > **Tip**
+   > [!TIP]
    >
    > If your current plan is a free plan, select **Buy now**.
-   {.tip}
 
 6. Follow the on-screen instructions.
 

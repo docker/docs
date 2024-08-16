@@ -18,7 +18,7 @@ probably want to add iptables policies that prevent unauthorized access to
 containers or other services running on your host. This page describes how
 to achieve that, and the caveats you need to be aware of.
 
-> **Note**
+> [!NOTE]
 > 
 > Docker creates `iptables` rules for bridge networks.
 > 
@@ -69,10 +69,9 @@ $ sudo iptables -I DOCKER-USER -p tcp -m conntrack --ctstate ESTABLISHED,RELATED
 $ sudo iptables -I DOCKER-USER -p tcp -m conntrack --ctorigdst 198.51.100.2 --ctorigdstport 80 -j ACCEPT
 ```
 
-> **Important**
+> [!IMPORTANT]
 >
 > Using the `conntrack` extension may result in degraded performance.
-{ .important }
 
 ## Port publishing and mapping
 
@@ -212,13 +211,12 @@ You can change the default binding address for published container ports so that
 they're only accessible to the Docker host by default. To do that, you can
 configure the daemon to use the loopback address (`127.0.0.1`) instead.
 
-> **Warning**
+> [!WARNING]
 >
 > Hosts within the same L2 segment (for example, hosts connected to the same
 > network switch) can reach ports published to localhost.
 > For more information, see
 > [moby/moby#45610](https://github.com/moby/moby/issues/45610)
-{ .warning }
 
 To configure this setting for user-defined bridge networks, use
 the `com.docker.network.bridge.host_binding_ipv4`
@@ -229,7 +227,7 @@ $ docker network create mybridge \
   -o "com.docker.network.bridge.host_binding_ipv4=127.0.0.1"
 ```
 
-> **Note**
+> [!NOTE]
 >
 > - Setting the default binding address to `::` means port bindings with no host
 >   address specified will work for any IPv6 address on the host. But, `0.0.0.0`

@@ -312,7 +312,7 @@ To run the application using Docker:
 
    For more details, see the [docker run CLI reference](/reference/cli/docker/container/run/).
 
-   > **Note**
+   > [!NOTE]
    >
    > For Windows users, you may get an error when running the container. Verify
    > that the line endings in the `entrypoint.sh` are `LF` (`\n`) and not `CRLF` (`\r\n`),

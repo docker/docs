@@ -16,13 +16,12 @@ By default, the `local` driver preserves 100MB of log messages per container and
 uses automatic compression to reduce the size on disk. The 100MB default value is based on a 20M default size
 for each file and a default count of 5 for the number of such files (to account for log rotation).
 
-> **Warning**
+> [!WARNING]
 >
 > The `local` logging driver uses file-based storage. These files are designed
 > to be exclusively accessed by the Docker daemon. Interacting with these files
 > with external tools may interfere with Docker's logging system and result in
 > unexpected behavior, and should be avoided.
-{ .warning }
 
 ## Usage
 

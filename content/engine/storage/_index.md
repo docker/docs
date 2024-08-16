@@ -100,7 +100,7 @@ machine's filesystem having a specific directory structure available. If you
 are developing new Docker applications, consider using named volumes instead.
 You can't use Docker CLI commands to directly manage bind mounts.
 
-> **Important**
+> [!IMPORTANT]
 >
 > Bind mounts allow write access to files on the host by default.
 >
@@ -109,13 +109,11 @@ You can't use Docker CLI commands to directly manage bind mounts.
 > modifying, or deleting important system files or directories. This is a
 > powerful ability which can have security implications, including impacting
 > non-Docker processes on the host system.
-{ .important }
 
-> **Tip**
+> [!TIP]
 >
 > Working with large repositories or monorepos, or with virtual file systems that are no longer scaling with your codebase?
 > Check out [Synchronized file shares](/desktop/synchronized-file-sharing.md). It provides fast and flexible host-to-VM file sharing by enhancing bind mount performance through the use of synchronized filesystem caches.
-{ .tip }
 
 ### tmpfs
 

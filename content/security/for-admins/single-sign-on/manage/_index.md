@@ -9,7 +9,7 @@ aliases:
 
 ## Manage organizations
 
-> **Note**
+> [!NOTE]
 >
 > You must have a [company](/admin/company/) to manage more than one organization.
 

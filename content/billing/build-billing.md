@@ -8,10 +8,9 @@ Build Cloud is a next-gen build tool that enables improved build speed, a shared
 
 If you don’t have a Docker Core subscription, you can buy Docker Build Cloud Team and create a team in Docker Build Cloud.
 
-> **Tip**
+> [!TIP]
 >
 > You can create a free Docker Personal account and [try Docker Build Cloud for free](/subscription/build-cloud/build-details#docker-personal). Team benefits aren't included.
-{ .tip }
 
 In this section, learn how to set up and manage billing for your Build Cloud subscription. For more information about the subscription tiers, see [Build Cloud subscriptions and features](/subscription/build-cloud/build-details). To buy Docker Build Cloud Business, [contact sales](https://www.docker.com/products/build-cloud/#contact_sales).
 
@@ -33,7 +32,7 @@ Subscription renewals charge to the default payment method.
 
 You can buy a Docker Build Cloud Team subscription if you haven’t created an organization yet. To do so, you can create a team in Docker Build Cloud.
 
-> **Note**
+> [!NOTE]
 >
 > To create a new organization and start a Docker Build Cloud Team subscription, you need a personal Docker account. You can [sign up](https://hub.docker.com/signup) for free.
 

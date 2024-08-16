@@ -12,11 +12,10 @@ aliases:
 [Prometheus](https://prometheus.io/) is an open-source systems monitoring and
 alerting toolkit. You can configure Docker as a Prometheus target.
 
-> **Warning**
+> [!WARNING]
 >
 > The available metrics and the names of those metrics are in active
 > development and may change at any time.
-{ .warning }
 
 Currently, you can only monitor Docker itself. You can't currently monitor your
 application using the Docker target.
@@ -119,7 +118,7 @@ Verify that the Docker target is listed at `http://localhost:9090/targets/`.
 
 ![Prometheus targets page](images/prometheus-targets.webp)
 
-> **Note**
+> [!NOTE]
 >
 > You can't access the endpoint URLs on this page directly if you use Docker
 > Desktop.

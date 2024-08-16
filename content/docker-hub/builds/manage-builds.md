@@ -4,7 +4,7 @@ description: How to manage autobuilds in Docker Hub
 keywords: autobuilds, automated, docker hub, registry
 ---
 
-> **Note**
+> [!NOTE]
 >
 > Automated builds require a
 > [Docker Pro, Team, or Business subscription](../../subscription/index.md).

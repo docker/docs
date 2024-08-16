@@ -9,7 +9,7 @@ aliases:
 - /installation/binaries/
 ---
 
-> **Important**
+> [!IMPORTANT]
 >
 > This page contains information on how to install Docker using binaries. These
 > instructions are mostly suitable for testing purposes. We do not recommend
@@ -29,7 +29,6 @@ aliases:
 > On Windows and Mac, we recommend that you install [Docker Desktop](../../desktop/index.md)
 > instead. For Linux, we recommend that you follow the instructions specific for
 > your distribution.
-{ .important }
 
 If you want to try Docker or use it in a testing environment, but you're not on
 a supported platform, you can try installing from static binaries. If possible,
@@ -84,7 +83,6 @@ instructions for enabling and configuring AppArmor or SELinux.
 > If either of the security mechanisms is enabled, do not disable it as a
 > work-around to make Docker or its containers run. Instead, configure it
 > correctly to fix any problems.
-{ .warning }
 
 ##### Docker daemon considerations
 
@@ -142,7 +140,7 @@ You have now successfully installed and started Docker Engine.
 
 ## Install client binaries on macOS
 
-> **Note**
+> [!NOTE]
 >
 > The following instructions are mostly suitable for testing purposes. The macOS
 > binary includes the Docker client only. It does not include the `dockerd` daemon
@@ -201,7 +199,7 @@ To install client binaries, perform the following steps:
 
 ## Install server and client binaries on Windows
 
-> **Note**
+> [!NOTE]
 >
 > The following section describes how to install the Docker daemon on Windows
 > Server which allows you to run Windows containers only. When you install the

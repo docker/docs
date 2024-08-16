@@ -56,7 +56,7 @@ registry. As a result, this workflow uses the `docker/login-action` twice:
 If you use Docker Hub as your container registry, you only need to authenticate
 once.
 
-> **Note**
+> [!NOTE]
 >
 > Due to a limitation in the Docker Engine, loading multi-platform images or
 > images with attestations to the image store isn't supported.

@@ -32,6 +32,6 @@ To generate this link you can either:
 
   ![Share button](images/list-preview.png)
 
-> **Note**
+> [!NOTE]
 >
 > Previews of the extension description or screenshots, for example, are created using [extension labels](labels.md).

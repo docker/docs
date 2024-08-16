@@ -1,2 +1,4 @@
 {{ $fileToInclude := .Get 0 }}
-{{ os.ReadFile (printf "includes/%s" $fileToInclude) | page.RenderString }}
+{{ with (site.GetPage (printf "includes/%s" $fileToInclude)) }}
+  {{ page.RenderString (dict "display" "block") .RenderShortcodes }}
+{{ end }}

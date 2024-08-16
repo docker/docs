@@ -108,7 +108,7 @@ refused.
 ERRO[0003] error waiting for container: context canceled
 ```
 
-> **Note**
+> [!NOTE]
 >
 > The command may fail with the same error if you take too long to authorize the prompt to start the helper process, as it may timeout.
 

@@ -6,7 +6,7 @@ aliases:
   - /storage/containerd/
 ---
 
-> **Note**
+> [!NOTE]
 >
 > The containerd image store is an experimental feature of Docker Engine.
 > If you're using Docker Desktop, refer to the instructions on the

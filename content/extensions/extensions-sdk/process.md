@@ -13,7 +13,7 @@ There are two main parts to creating a Docker extension:
 1. Build the foundations
 2. Publish the extension
 
-> **Note**
+> [!NOTE]
 >
 > You do not need to pay to create a Docker extension. The [Docker Extension SDK](https://www.npmjs.com/package/@docker/extension-api-client) is licensed under the Apache 2.0 License and is free to use. Anyone can create new extensions and share them without constraints.
 > 
@@ -31,10 +31,9 @@ The build process consists of:
 
 For further inspiration, see the other examples in the [samples folder](https://github.com/docker/extensions-sdk/tree/main/samples).
 
-> **Tip**
+> [!TIP]
 >
 > Whilst creating your extension, make sure you follow the [design](design/design-guidelines.md) and [UI styling](design/index.md) guidelines to ensure visual consistency and [level AA accessibility standards](https://www.w3.org/WAI/WCAG2AA-Conformance).
-{ .tip }
 
 ## Part two: Publish and distribute your extension
 

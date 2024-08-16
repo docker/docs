@@ -16,7 +16,6 @@ When you add seats to your subscription in the middle of your billing cycle, you
 >**Important**
 >
 >If you have a [sales-assisted Docker Business subscription](details.md#sales-assisted), contact your account manager to add seats to your subscription. 
-{ .important }
 
 1. Sign in to your [Docker Hub](https://hub.docker.com) account.
 

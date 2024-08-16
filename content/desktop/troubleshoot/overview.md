@@ -45,14 +45,13 @@ If you are a Mac or Linux user, you also have the option to **Uninstall** Docker
 
 ## Diagnose
  
-> **Tip**
+> [!TIP]
 >
 > If you do not find a solution in troubleshooting, browse the GitHub repositories or create a new issue:
 >
 > - [docker/for-mac](https://github.com/docker/for-mac/issues)
 > - [docker/for-win](https://github.com/docker/for-win/issues)
 > - [docker/for-linux](https://github.com/docker/for-linux/issues)
-{ .tip }
 
 ### Diagnose from the app
 
@@ -63,7 +62,7 @@ This opens the in-app **Support** page and starts collecting the diagnostics.
 3. When the diagnostics are uploaded, Docker Desktop prints a diagnostic ID. Copy this ID.
 4. Use your diagnostics ID to get help:
     - If you have a paid Docker subscription, select **Contact Support**. This opens the [Docker Desktop support](https://hub.docker.com/support/desktop/) form. Fill in the information required and add the ID you copied in step three to the **Diagnostics ID** field. Then, select **Submit** to request Docker Desktop support.
-        > **Note**
+        > [!NOTE]
         >
         > You must be signed in to Docker Desktop to access the support form. For information on what's covered as part of Docker Desktop support, see [Support](../../support/index.md).
     - If you don't have a paid Docker subscription, select **Report a Bug** to open a new Docker Desktop issue on GitHub. Complete the information required and ensure you add the diagnostic ID you copied in step three. 
@@ -74,7 +73,7 @@ This opens the in-app **Support** page and starts collecting the diagnostics.
 2. When the diagnostics are uploaded, Docker Desktop prints a diagnostic ID. Copy this ID.
 3. Use your diagnostics ID to get help:
     - If you have a paid Docker subscription, you can [contact support](https://hub.docker.com/support/desktop/). Fill in the information required and add the ID you copied in step two to the **Diagnostics ID** field. Then, select **Submit** to request Docker Desktop support.
-        > **Note**
+        > [!NOTE]
         >
         > You must be signed in to Docker Desktop to access the support form. For information on what's covered as part of Docker Desktop support, see [Support](../../support/index.md).
     - If you don't have a paid Docker subscription, you can open a new Docker Desktop issue on GitHub for [Mac](https://github.com/docker/for-mac/issues), [Windows](https://github.com/docker/for-win/issues), or [Linux](https://github.com/docker/for-linux/issues). Complete the information required and ensure you add the diagnostic ID you copied in step two. 

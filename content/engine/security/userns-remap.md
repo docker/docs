@@ -34,7 +34,7 @@ outside of the namespace, the process is running as an unprivileged high-number
 UID on the host, which does not even map to a real user. This means the process
 has no privileges on the host system at all.
 
-> **Note**
+> [!NOTE]
 >
 > It is possible to assign multiple subordinate ranges for a given user or group
 > by adding multiple non-overlapping mappings for the same user or group in the
@@ -47,13 +47,12 @@ specify an existing user and/or group, or you can specify `default`. If you
 specify `default`, a user and group `dockremap` is created and used for this
 purpose.
 
-> **Warning**
+> [!WARNING]
 >
 > Some distributions do not automatically add the new group to the
 > `/etc/subuid` and `/etc/subgid` files. If that's the case, you are may have
 > to manually edit these files and assign non-overlapping ranges. This step is
 > covered in [Prerequisites](#prerequisites).
-{ .warning }
 
 It is very important that the ranges do not overlap, so that a process cannot gain
 access in a different namespace. On most Linux distributions, system utilities
@@ -161,7 +160,7 @@ $ dockerd --userns-remap="testuser:testuser"
     }
     ```
 
-    > **Note**
+    > [!NOTE]
     >
     > To use the `dockremap` user and have Docker create it for you,
     > set the value to `default` rather than `testuser`.

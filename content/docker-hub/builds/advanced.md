@@ -4,7 +4,7 @@ keywords: automated, build, images
 title: Advanced options for Autobuild and Autotest
 ---
 
-> **Note**
+> [!NOTE]
 >
 > Automated builds require a
 > [Docker Pro, Team, or Business subscription](../../subscription/index.md).
@@ -18,7 +18,7 @@ Several utility environment variables are set by the build process, and are
 available during automated builds, automated tests, and while executing
 hooks.
 
-> **Note**
+> [!NOTE]
 >
 > These environment variables are only available to the build and test
 processes and don't affect your service's run environment.
@@ -53,12 +53,11 @@ might use a build hook to set build arguments used only during the build
 process. You can also set up [custom build phase hooks](#custom-build-phase-hooks)
 to perform actions in between these commands.
 
-> **Important**
+> [!IMPORTANT]
 >
 >Use these hooks with caution. The contents of these hook files replace the
 basic `docker` commands, so you must include a similar build, test or push
 command in the hook or your automated process does not complete.
-{ .important }
 
 To override these phases, create a folder called `hooks` in your source code
 repository at the same directory level as your Dockerfile. Create a file called
@@ -111,11 +110,10 @@ of the image being built.
 $ docker build --build-arg CUSTOM=$VAR -f $DOCKERFILE_PATH -t $IMAGE_NAME .
 ```
 
-> **Important**
+> [!IMPORTANT]
 >
 > A `hooks/build` file overrides the basic `docker build` command used by the builder, so you must include a similar build command in the hook or
 the automated build fails.
-{ .important }
 
 Refer to the [docker build documentation](../../reference/cli/docker/buildx/build.md#build-arg)
 to learn more about Docker build-time variables.

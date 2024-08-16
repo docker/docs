@@ -19,7 +19,7 @@ Domain audit can't identify the following Docker users in your environment:
 
 Although domain audit can't identify all Docker users in your environment, you can enforce sign-in to prevent unidentifiable users from accessing Docker Desktop in your environment. For more details about enforcing sign-in, see [Configure registry.json to enforce sign-in](../for-admins/enforce-sign-in/_index.md).
 
-> **Tip**
+> [!TIP]
 >
 > You can use endpoint management (MDM) software to identify the number of Docker Desktop instances and their versions within your environment. This can provide accurate license reporting, help ensure your machines use the latest version of Docker Desktop, and enable you to [enforce sign-in](enforce-sign-in/_index.md).
 > - [Intune](https://learn.microsoft.com/en-us/mem/intune/apps/app-discovered-apps)
@@ -27,7 +27,6 @@ Although domain audit can't identify all Docker users in your environment, you c
 > - [Kandji](https://support.kandji.io/support/solutions/articles/72000559793-view-a-device-application-list)
 > - [Kolide](https://www.kolide.com/features/device-inventory/properties/mac-apps)
 > - [Workspace One](https://blogs.vmware.com/euc/2022/11/how-to-use-workspace-one-intelligence-to-manage-app-licenses-and-reduce-costs.html)
-{ .tip }
 
 ## Prerequisites
 
@@ -36,10 +35,9 @@ Before you audit your domains, review the following required prerequisites:
 - Your organization must be part of a Docker Business subscription. To upgrade your existing account to a Docker Business subscription, see [Upgrade your subscription](../../subscription/core-subscription/upgrade.md).
 - You must [add and verify your domains](./single-sign-on/configure/_index.md#step-one-add-and-verify-your-domain).
 
-> **Important**
+> [!IMPORTANT]
 >
 > Domain audit is not supported for companies or organizations within a company.
-{ .important }
 
 ## Audit your domains for uncaptured users
 

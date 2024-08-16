@@ -8,7 +8,7 @@ toc_max: 3
 This page provides information about the ongoing integration of `containerd` for
 image and file system management in the Docker Engine.
 
-> **Note**
+> [!NOTE]
 > 
 > After switching to the containerd image store,
 > images and containers in the classic image store won't be visible.

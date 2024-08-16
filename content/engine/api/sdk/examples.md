@@ -125,7 +125,7 @@ hello world
 When using cURL to connect over a Unix socket, the hostname isn't important. The
 previous examples use `localhost`, but any hostname would work.
 
-> **Important**
+> [!IMPORTANT]
 >
 > The previous examples assume you're using cURL 7.50.0 or above. Older versions of
 > cURL used a [non-standard URL notation](https://github.com/moby/moby/issues/17960)
@@ -133,7 +133,6 @@ previous examples use `localhost`, but any hostname would work.
 >
 > If you're' using an older version of cURL, use `http:/<API version>/` instead,
 > for example: `http:/v{{% param "latest_engine_api_version" %}}/containers/1c6594faf5/start`.
-{ .important }
 
 {{< /tab >}}
 {{< /tabs >}}
@@ -286,7 +285,7 @@ $ curl --unix-socket /var/run/docker.sock http://localhost/v{{% param "latest_en
 Now that you know what containers exist, you can perform operations on them.
 This example stops all running containers.
 
-> **Note**
+> [!NOTE]
 >
 > Don't run this on a production server. Also, if you're' using swarm
 > services, the containers stop, but Docker creates new ones to keep
@@ -553,7 +552,7 @@ $ curl --unix-socket /var/run/docker.sock \
 
 Pull an image, like `docker pull`, with authentication:
 
-> **Note**
+> [!NOTE]
 >
 > Credentials are sent in the clear. Docker's official registries use
 > HTTPS. Private registries should also be configured to use HTTPS.

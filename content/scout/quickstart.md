@@ -231,7 +231,7 @@ The images page lists your Scout-enabled repositories.
 Select the image in the list to open the **Image details** sidebar.
 The sidebar shows a compliance overview for the last pushed tag of a repository.
 
-> **Note**
+> [!NOTE]
 >
 > If policy results haven't appeared yet, try refreshing the page.
 > It might take a few minutes before the results appear if this is your
@@ -248,12 +248,11 @@ In this case, the recommended action is to enable
 [Docker Scout's GitHub integration](./integrations/source-code-management/github.md),
 which helps keep your base images up-to-date automatically.
 
-> **Tip**
+> [!TIP]
 >
 > You can't enable this integration for the demo app used in this guide.
 > Feel free to push the code to a GitHub repository that you own,
 > and try out the integration there!
-{ .tip }
 
 ## Summary
 

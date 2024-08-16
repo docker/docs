@@ -130,7 +130,7 @@ await ddClient.docker.cli.exec(
 );
 ```
 
-> **Note**
+> [!NOTE]
 >
 >You cannot use this to chain commands in a single `exec()` invocation (like `docker kill $(docker ps -q)` or using pipe between commands).
 >

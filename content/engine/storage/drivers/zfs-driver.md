@@ -36,7 +36,7 @@ use unless you have substantial experience with ZFS on Linux.
   and push existing images to Docker Hub or a private repository, so that you
   do not need to re-create them later.
 
-> **Note**
+> [!NOTE]
 >
 > There is no need to use `MountFlags=slave` because `dockerd` and `containerd`
 > are in different mount namespaces. 

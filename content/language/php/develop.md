@@ -108,7 +108,7 @@ secrets:
     file: db/password.txt
 ```
 
-> **Note**
+> [!NOTE]
 >
 > To learn more about the instructions in the Compose file, see [Compose file
 > reference](/compose/compose-file/).

@@ -23,7 +23,7 @@ defining a mirror for `docker.io` (Docker Hub) to `mirror.gcr.io`.
      mirrors = ["mirror.gcr.io"]
    ```
 
-   > **Note**
+   > [!NOTE]
    >
    > `debug = true` turns on debug requests in the BuildKit daemon, which logs a
    > message that shows when a mirror is being used.

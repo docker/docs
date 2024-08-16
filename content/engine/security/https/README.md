@@ -19,7 +19,7 @@ My process is as following:
 
 lots of things to see and manually answer, as openssl wants to be interactive
 
-> **Note**: make sure you enter the hostname (`boot2docker` in my case) when prompted for `Computer Name`)
+> [!NOTE]: make sure you enter the hostname (`boot2docker` in my case) when prompted for `Computer Name`)
 
     root@boot2docker:/# sudo make run
 

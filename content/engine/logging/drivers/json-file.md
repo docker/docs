@@ -21,13 +21,12 @@ only one container.
 }
 ```
 
-> **Warning**
+> [!WARNING]
 >
 > The `json-file` logging driver uses file-based storage. These files are designed
 > to be exclusively accessed by the Docker daemon. Interacting with these files
 > with external tools may interfere with Docker's logging system and result in
 > unexpected behavior, and should be avoided.
-{ .warning }
 
 ## Usage
 
@@ -51,7 +50,7 @@ and `max-file` options to enable automatic log-rotation.
 }
 ```
 
-> **Note**
+> [!NOTE]
 >
 > `log-opts` configuration options in the `daemon.json` configuration file must
 > be provided as strings. Boolean and numeric values (such as the value for

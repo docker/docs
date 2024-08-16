@@ -40,7 +40,7 @@ the registry must be integrated with Docker Scout for your Docker organization.
 Docker Hub is integrated by default. For more information, see
 See [Container registry integrations](/scout/integrations/_index.md#container-registries)
 
-> **Note**
+> [!NOTE]
 >
 > You must have the **Editor** or **Owner** role in the Docker organization to
 > activate image analysis on a repository.
@@ -60,7 +60,7 @@ To trigger image analysis for an image in a registry, push the image to a
 registry that's integrated with Docker Scout, to a repository where image
 analysis is activated.
 
-> **Note**
+> [!NOTE]
 >
 > Image analysis on the Docker Scout platform has a maximum image file size
 > limit of 10 GB, unless the image has an SBOM attestation.
@@ -78,7 +78,7 @@ analysis is activated.
    [build attestations](/build/attestations/_index.md) to the image. Docker
    Scout uses attestations to provide more fine-grained analysis results.
 
-   > **Note**
+   > [!NOTE]
    >
    > The default `docker` driver only supports build attestations if you use the
    > [containerd image store](/desktop/containerd.md).
@@ -95,7 +95,7 @@ You can analyze local images with Docker Scout using Docker Desktop or the
 
 ### Docker Desktop
 
-> **Note**
+> [!NOTE]
 >
 > Docker Desktop background indexing supports images up to 10 GB in size.
 > See [Maximum image size](#maximum-image-size).

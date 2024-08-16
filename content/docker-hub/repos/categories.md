@@ -33,7 +33,7 @@ The available categories are:
 
 ## Auto-generated categories
 
-> **Note**
+> [!NOTE]
 >
 > Auto-generated categories only apply to Docker Verified Publishers and
 > Docker-Sponsored Open Source program participants.

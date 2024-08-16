@@ -19,7 +19,7 @@ aliases:
 
 This page contains information about general system requirements, supported platforms, and instructions on how to install Docker Desktop for Linux.
 
-> **Important**
+> [!IMPORTANT]
 >
 >Docker Desktop on Linux runs a Virtual Machine (VM) which creates and uses a custom docker context, `desktop-linux`, on startup. 
 >
@@ -27,10 +27,9 @@ This page contains information about general system requirements, supported plat
 >
 > {{< accordion title=" What is the difference between Docker Desktop for Linux and Docker Engine?" >}}
 
-> **Important**
+> [!IMPORTANT]
 >
-> For commercial use of Docker Engine obtained via Docker Desktop within larger enterprises (exceeding 250 employees  OR with annual revenue surpassing $10 million USD), a [paid subscription](https://www.docker.com/pricing/) is required.
-{ .important }
+> For commercial use of Docker Engine obtained via Docker Desktop within larger enterprises (exceeding 250 employees OR with annual revenue surpassing $10 million USD), a [paid subscription](https://www.docker.com/pricing/) is required.
 
 Docker Desktop for Linux provides a user-friendly graphical interface that simplifies the management of containers and services. It includes Docker Engine as this is the core technology that powers Docker containers. Docker Desktop for Linux also comes with additional features like Docker Scout and Docker Extensions.
 
@@ -110,7 +109,6 @@ Current context is now "desktop-linux"
 ``` 
 Refer to the [Docker Context documentation](/engine/manage-resources/contexts.md) for more details.
 {{< /accordion >}}
-{ .important }
 
 ## Supported platforms
 
@@ -148,7 +146,7 @@ To install Docker Desktop successfully, your Linux host must meet the following 
 
 Docker Desktop for Linux runs a Virtual Machine (VM). For more information on why, see [Why Docker Desktop for Linux runs a VM](../faqs/linuxfaqs.md#why-does-docker-desktop-for-linux-run-a-vm).
 
-> **Note**
+> [!NOTE]
 >
 > Docker does not provide support for running Docker Desktop for Linux in nested virtualization scenarios. We recommend that you run Docker Desktop for Linux natively on supported distributions.
 

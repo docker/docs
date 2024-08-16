@@ -11,7 +11,7 @@ Uninstalling Docker Compose depends on the method you have used to install Docke
 
 If you want to uninstall Compose and you have installed Docker Desktop, see [Uninstall Docker Desktop](../../desktop/uninstall.md).
 
-> **Note**
+> [!NOTE]
 >
 > Unless you have other Docker instances installed on that specific environment, you would be removing Docker altogether by uninstalling the Desktop.
 
@@ -51,7 +51,6 @@ Or, if you have installed Compose for all users, run:
 > If you get a **Permission denied** error using either of the above
 > methods, you do not have the permissions allowing you to remove
 > `docker-compose`. To force the removal, prepend `sudo` to either of the above instructions and run it again.
-{ .tip }
 
 ### Inspect the location of the Compose CLI plugin
 

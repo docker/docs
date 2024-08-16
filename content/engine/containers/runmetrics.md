@@ -138,7 +138,7 @@ container, take a look at the following paths:
 
 ### Metrics from cgroups: memory, CPU, block I/O
 
-> **Note**
+> [!NOTE]
 >
 > This section isn't yet updated for cgroup v2.
 > For further information about cgroup v2, refer to [the kernel documentation](https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html).

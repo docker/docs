@@ -13,15 +13,14 @@ The Extensions Marketplace is a space where developers can discover extensions t
 
 Whenever you are [ready to publish](DISTRIBUTION.md) your extension in the Marketplace, you can [self-publish your extension](https://github.com/docker/extensions-submissions/issues/new?assignees=&labels=&template=1_automatic_review.yaml&title=%5BSubmission%5D%3A+)
 
-> **Note**
+> [!NOTE]
 >
 > As the Extension Marketplace continues to add new features for both Extension users and publishers, you are expected
 > to maintain your extension over time to ensure it stays available in the Marketplace.
 
-> **Important**
+> [!IMPORTANT]
 >
 > The Docker manual review process for extensions is paused at the moment. Submit your extension through the [automated submission process](https://github.com/docker/extensions-submissions/issues/new?assignees=&labels=&template=1_automatic_review.yaml&title=%5BSubmission%5D%3A+)
-{ .important }
 
 ### Before you submit
 
@@ -47,8 +46,7 @@ published on the Marketplace and accessible to all users within a few hours.
 It is the fastest way to get developers the tools they need and to get feedback from them as you work to
 evolve/polish your extension.
 
-> **Important**
+> [!IMPORTANT]
 >
 > Docker Desktop caches the list of extensions available in the Marketplace for 12 hours. If you don't see your
 > extension in the Marketplace, you can restart Docker Desktop to force the cache to refresh.
-{ .important }

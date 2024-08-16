@@ -25,7 +25,7 @@ A custom certificate is configured by creating a directory under
 `/etc/docker/certs.d` using the same name as the registry's hostname, such as
 `localhost`. All `*.crt` files are added to this directory as CA roots.
 
-> **Note**
+> [!NOTE]
 >
 > On Linux any root certificates authorities are merged with the system defaults,
 > including the host's root CA set. If you are running Docker on Windows Server,
@@ -36,7 +36,7 @@ The presence of one or more `<filename>.key/cert` pairs indicates to Docker
 that there are custom certificates required for access to the desired
 repository.
 
-> **Note**
+> [!NOTE]
 >
 > If multiple certificates exist, each is tried in alphabetical
 > order. If there is a 4xx-level or 5xx-level authentication error, Docker
@@ -68,7 +68,7 @@ $ openssl genrsa -out client.key 4096
 $ openssl req -new -x509 -text -key client.key -out client.cert
 ```
 
-> **Note**
+> [!NOTE]
 >
 > These TLS commands only generate a working set of certificates on Linux.
 > The version of OpenSSL in macOS is incompatible with the type of

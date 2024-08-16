@@ -77,7 +77,7 @@ detected region to construct the remote CloudWatch Logs API endpoint.
 Use the `awslogs-endpoint` log option to override the default endpoint
 with the provided endpoint.
 
-> **Note**
+> [!NOTE]
 >
 > The `awslogs-region` log option or detected region controls the
 > region used for signing. You may experience signature errors if the
@@ -101,7 +101,7 @@ To configure which
 should be used, you can specify the `awslogs-stream` log option. If not
 specified, the container ID is used as the log stream.
 
-> **Note**
+> [!NOTE]
 >
 > Log streams within a given log group should only be used by one container
 > at a time. Using the same log stream for multiple containers concurrently
@@ -122,7 +122,7 @@ $ docker run \
     ...
 ```
 
-> **Note**
+> [!NOTE]
 >
 > Your AWS IAM policy must include the `logs:CreateLogGroup` permission before
 > you attempt to use `awslogs-create-group`.
@@ -142,7 +142,7 @@ single entry.
 This option always takes precedence if both `awslogs-datetime-format` and
 `awslogs-multiline-pattern` are configured.
 
-> **Note**
+> [!NOTE]
 >
 > Multi-line logging performs regular expression parsing and matching of all log
 > messages, which may have a negative impact on logging performance.
@@ -219,7 +219,7 @@ the delimiter between log messages.
 
 This option is ignored if `awslogs-datetime-format` is also configured.
 
-> **Note**
+> [!NOTE]
 >
 > Multi-line logging performs regular expression parsing and matching of all log
 > messages. This may have a negative impact on logging performance.
@@ -272,7 +272,7 @@ When both `awslogs-stream` and `tag` are specified, the value supplied for
 
 If not specified, the container ID is used as the log stream.
 
-> **Note**
+> [!NOTE]
 >
 > The CloudWatch log API doesn't support `:` in the log name. This can cause
 > some issues when using the `{{ .ImageName }}` as a tag,

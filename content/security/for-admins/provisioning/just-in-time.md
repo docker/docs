@@ -53,9 +53,8 @@ You may want to disable JIT provisioning for reasons such as the following:
 - You have multiple organizations, have SCIM enabled, and want SCIM to be the source of truth for provisioning
 - You want to control and restrict usage based on your organization's security configuration, and want to use SCIM to provision access
 
-> **Warning**
+> [!WARNING]
 >
 > Disabling JIT provisioning could potentially disrupt your users' workflows. Users must already be a member of the organization or have an invitation to the organization when they authenticate with SSO in order to sign in successfully. To auto-provision users with JIT disabled, you can [use SCIM](./scim.md).
-{ .warning }
 
 See [Manage how users are provisioned](../single-sign-on/manage/_index.md#manage-how-users-are-provisioned) to learn how to disable JIT provisioning.

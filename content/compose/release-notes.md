@@ -372,7 +372,7 @@ This release fixes a build issue with Docker Desktop for Windows introduced in C
 
 {{< release-date date="2023-09-21" >}}
 
-> **Note**
+> [!NOTE]
 >
 > The `watch` command is now generally available (GA). You can directly use it from the root command `docker compose watch`.
 > For more information, see [File watch](./file-watch.md).
@@ -398,7 +398,7 @@ This release fixes a build issue with Docker Desktop for Windows introduced in C
 
 {{< release-date date="2023-08-30" >}}
 
-> **Note**
+> [!NOTE]
 >
 > The format of `docker compose ps` and `docker compose ps --format=json` changed to better align with `docker ps` output. See [compose#10918](https://github.com/docker/compose/pull/10918).
 
@@ -864,7 +864,7 @@ For the full change log or additional information, check the [Compose repository
 
 {{< release-date date="2022-09-27" >}}
 
-> **Note**     
+> [!NOTE]     
 > 
 > - Updates on environment file syntax & interpolation: see [compose#9879](https://github.com/docker/compose/issues/9879)  
 > - Setting `DOCKER_HOST` via `.env` files is not supported in Compose v2
@@ -1002,13 +1002,12 @@ For the full change log, check the [Compose repository 2.10.0 release page](http
 
 {{< release-date date="2022-08-7" >}}
 
-> **Important**
+> [!IMPORTANT]
 >
 > Compose v2.9.0 contains changes to the environment variable's precedence that have since been reverted. We recommend using v2.10+ to avoid compatibility issues.
 >
-{ .important }
 
-> **Note**
+> [!NOTE]
 > 
 > This release reverts the breaking changes introduced in [Compose v2.8.0](#280) by [`compose-go v1.3.0`](https://github.com/compose-spec/compose-go/releases/tag/v1.3.0).
 
@@ -1028,14 +1027,13 @@ For the full change log or additional information, check the [Compose repository
 
 {{< release-date date="2022-07-29" >}}
 
-> **Important**
+> [!IMPORTANT]
 >
 >This release introduced a breaking change via `compose-go v1.3.0` and this [PR](https://github.com/compose-spec/compose-go/pull/294).
 In this release, Docker Compose recreates new resources (networks, volumes, secrets, configs, etc.) with new names, using a `-` (dash) instead an `_` (underscore) and tries to connect to or use these newly created resources instead of your existing ones!
 >
 > Please use Compose the v2.9.0 release instead.
 >
-{ .important }
 
 ### New
 
@@ -1838,7 +1836,7 @@ This release contains minor improvements and bug fixes.
 
 - Reverted a 1.23.0 change that appended random strings to container names
   created by `docker-compose up`, causing addressability issues.
-  > **Note**: Containers created by `docker-compose run` will continue to use
+  > [!NOTE]: Containers created by `docker-compose run` will continue to use
   randomly generated names to avoid collisions during parallel runs.
 
 - Fixed an issue where some `dockerfile` paths would fail unexpectedly when

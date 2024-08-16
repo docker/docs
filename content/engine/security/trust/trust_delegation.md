@@ -196,10 +196,9 @@ When initiating a repository, you will need the key and the passphrase of a loca
 Notary Canonical Root Key. If you have not initiated a repository before, and 
 therefore don't have a Notary root key, `$ docker trust` will create one for you.
 
-> **Important**
+> [!IMPORTANT]
 >
 > Be sure to protect and back up your [Notary Canonical Root Key](trust_key_mng.md).
-{ .important }
 
 ### Initiating the repository
 
@@ -301,7 +300,7 @@ multiple contributor keys per delegation. The only prerequisite here is to make
 sure you use the same the delegation name, in this case `jeff`. Docker trust 
 will automatically handle adding this new key to `targets/releases`. 
 
-> **Note**
+> [!NOTE]
 >
 > You will need the passphrase for the repository key; this would have been
 > configured when you first initiated the repository.
@@ -339,7 +338,7 @@ If you need to remove a delegation, including the contributor keys that are
 attached to the `targets/releases` role, you can use the 
 `$ docker trust signer remove` command.
 
-> **Note**
+> [!NOTE]
 >
 > Tags that were signed by the removed delegation will need to be resigned 
 > by an active delegation

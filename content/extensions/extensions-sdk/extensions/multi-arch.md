@@ -54,10 +54,9 @@ Manifests:
   Platform:  linux/arm64
 ```
 
-> **Tip**
+> [!TIP]
 >
 > If you're having trouble pushing the image, make sure you're signed in to Docker Hub. Otherwise, run `docker login` to authenticate.
-{ .tip }
 
 For more information, see [Multi-platform images](/build/building/multi-platform.md) page.
 
@@ -135,7 +134,7 @@ As a result, when `TARGETARCH` equals:
 - `arm64`, the `kubectl` binary fetched corresponds to the `arm64` architecture, and is copied to `/darwin/kubectl` in the final stage.
 - `amd64`, two `kubectl` binaries are fetched. One for Darwin and another for Windows. They are copied to `/darwin/kubectl` and `/windows/kubectl.exe` respectively, in the final stage.
 
-> **Note**
+> [!NOTE]
 >
 > The binary destination path for Darwin is `darwin/kubectl` in both cases. The only change is the architecture-specific binary that is downloaded.
 

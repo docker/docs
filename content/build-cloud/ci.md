@@ -25,7 +25,7 @@ build cache or build without tagging the image. When you use Docker Build Cloud,
 Buildx automatically loads the build result if you build a tagged image.
 See [Loading build results](./usage/#loading-build-results) for details.
 
-> **Note**
+> [!NOTE]
 >
 > Builds on Docker Build Cloud have a timeout limit of two hours. Builds that
 > run for longer than two hours are automatically cancelled.
@@ -33,7 +33,7 @@ See [Loading build results](./usage/#loading-build-results) for details.
 {{< tabs >}}
 {{< tab name="GitHub Actions" >}}
 
-> **Note**
+> [!NOTE]
 >
 > Version 4.0.0 and later of `docker/build-push-action` and
 > `docker/bake-action` builds images with [provenance attestations by

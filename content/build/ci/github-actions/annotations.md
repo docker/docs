@@ -152,7 +152,7 @@ jobs:
           push: true
 ```
 
-> **Note**
+> [!NOTE]
 >
 > The build must produce the components that you want to annotate. For example,
 > to annotate an image index, the build must produce an index. If the build

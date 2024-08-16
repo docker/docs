@@ -39,13 +39,12 @@ HOSTNAME=2042f2e6ebe4
 foo=bar
 ```
 
-> **Tip**
+> [!TIP]
 >
 > The `.env` file acts as a convenient way to set environment variables for your Docker containers without cluttering your command line with numerous `-e` flags. To use a `.env` file, you can pass `--env-file` option with the `docker run` command.
 > ```console
 > $ docker run --env-file .env postgres env
 > ```
-{ .tip }
 
 ### Restricting the container to consume the resources
 
@@ -60,7 +59,6 @@ This command limits container memory usage to 512 MB and defines the CPU quota o
 > **Monitor the real-time resource usage**
 >
 > You can use the `docker stats` command to monitor the real-time resource usage of running containers. This helps you understand whether the allocated resources are sufficient or need adjustment.
-{ .tip }
 
 By effectively using these `docker run` flags, you can tailor your containerized application's behavior to fit your specific requirements.
 
@@ -127,7 +125,6 @@ Follow the steps to see how to connect a Postgres container to a custom network.
     >
     > 1. DNS resolution: By default, containers connected to the default bridge network can communicate with each other, but only by IP address. (unless you use `--link` option which is considered legacy). It is not recommended for production use due to the various [technical shortcomings](/engine/network/drivers/bridge/#differences-between-user-defined-bridges-and-the-default-bridge). On a custom network, containers can resolve each other by name or alias.
     > 2. Isolation: All containers without a `--network` specified are attached to the default bridge network, hence can be a risk, as unrelated containers are then able to communicate. Using a custom network provides a scoped network in which only containers attached to that network are able to communicate, hence providing better isolation.
-    { .tip }
 
 ### Manage the resources
 
@@ -181,7 +178,7 @@ Sometimes, you might need to override the default commands (`CMD`) or entry poin
     ![A screenshot of the Docker Dashboard selecting the Postgres container and entering into its shell using EXEC button](images/exec-into-postgres-container.webp?border=true)
 
 
-    > **Note**
+    > [!NOTE]
     > 
     > The PostgreSQL image sets up trust authentication locally so you may notice a password isn't required when connecting from localhost (inside the same container). However, a password will be required if connecting from a different host/container.
 

@@ -28,11 +28,10 @@ To get started with Docker Engine on Ubuntu, make sure you
 
 ### Firewall limitations
 
-> **Warning**
+> [!WARNING]
 >
 > Before you install Docker, make sure you consider the following
 > security implications and firewall incompatibilities.
-{ .warning }
 
 - If you use ufw or firewalld to manage firewall settings, be aware that
   when you expose container ports using Docker, these ports bypass your
@@ -130,7 +129,7 @@ Docker from the repository.
    sudo apt-get update
    ```
 
-   > **Note**
+   > [!NOTE]
    >
    > If you use an Ubuntu derivative distro, such as Linux Mint,
    > you may need to use `UBUNTU_CODENAME` instead of `VERSION_CODENAME`.

@@ -56,7 +56,7 @@ through Docker Desktop. For instructions on how to install Docker Desktop, see:
 
 ### Other Linux distros
 
-> **Note**
+> [!NOTE]
 >
 > While the following instructions may work, Docker doesn't test or verify
 > installation on distro derivatives.

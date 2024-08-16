@@ -22,7 +22,7 @@
   4. Select **Disable** to confirm.` }}
 {{ end }}
 
-> **Important**
+> [!IMPORTANT]
 >
 > SSO has Just-In-Time (JIT) Provisioning enabled by default unless you have [disabled it](/security/for-admins/provisioning/just-in-time/#sso-authentication-with-jit-provisioning-disabled). This means your users are auto-provisioned to your organization.
 >
@@ -32,7 +32,6 @@
 > - [Entra ID (formerly Azure AD)](https://learn.microsoft.com/en-us/azure/active-directory/develop/howto-restrict-your-app-to-a-set-of-users)
 >
 > Alternatively, see [Manage how users are provisioned](#manage-how-users-are-provisioned).
-{ .important}
 
 
 ### Add guest users when SSO is enabled

@@ -28,7 +28,7 @@ aliases:
 
 This page shows you how to customize the Docker daemon, `dockerd`.
 
-> **Note**
+> [!NOTE]
 >
 > This page is for users who've installed Docker Engine manually. If you're
 > using Docker Desktop, refer to the following pages instead:

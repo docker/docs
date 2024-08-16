@@ -98,7 +98,6 @@ It will work well when you update a database configuration or your `nginx.conf` 
 > Optimize your `Dockerfile` for speedy
 incremental rebuilds with [image layer caching](/build/cache)
 and [multi-stage builds](/build/building/multi-stage/).
-{ .tip }
 
 ### `path` and `target`
 
@@ -185,11 +184,10 @@ This setup demonstrates how to use the `sync+restart` action in Docker Compose t
 
 {{< include "compose/configure-watch.md" >}}
 
-> **Tip**
+> [!TIP]
 >
 > Watch can also be used with the dedicated `docker compose watch` command if you don't want to 
 > get the application logs mixed with the (re)build logs and filesystem sync events.
-{ .tip }
 
 > **Looking for a sample project to test things out?**
 >

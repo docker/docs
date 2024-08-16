@@ -460,7 +460,7 @@ build from inadvertently succeeding. For example:
 RUN set -o pipefail && wget -O - https://some.site | wc -l > /number
 ```
 
-> **Note**
+> [!NOTE]
 >
 > Not all shells support the `-o pipefail` option.
 >
@@ -743,7 +743,7 @@ like the following example:
 RUN groupadd -r postgres && useradd --no-log-init -r -g postgres postgres
 ```
 
-> **Note**
+> [!NOTE]
 >
 > Consider an explicit UID/GID.
 >
@@ -751,7 +751,7 @@ RUN groupadd -r postgres && useradd --no-log-init -r -g postgres postgres
 > the "next" UID/GID is assigned regardless of image rebuilds. So, if it’s
 > critical, you should assign an explicit UID/GID.
 
-> **Note**
+> [!NOTE]
 >
 > Due to an [unresolved bug](https://github.com/golang/go/issues/13548) in the
 > Go archive/tar package's handling of sparse files, attempting to create a user

@@ -4,7 +4,7 @@ description: Get started with Synchronized file shares on Docker Desktop.
 keyword: mutagen, file sharing, docker desktop, bind mounts
 ---
 
-> **Note**
+> [!NOTE]
 >
 > Synchronized file shares is available with Docker Desktop version 4.27 and later. It is available for customers with a Docker Pro, Team, or Business subscription. 
 
@@ -26,14 +26,13 @@ A Synchronized file share behaves just like a virtual file share, but takes adva
 
 After creating a file share instance, any container using a bind mount that points to a location on the host filesystem matching the specified synchronized file share location, or a subdirectory within it,  utilizes the Synchronized File Shares feature. Bind mounts that don't satisfy this condition are passed to the normal virtual filesystem [bind-mounting mechanism](/engine/storage/bind-mounts.md), for example VirtioFS or gRPC-FUSE.
 
-> **Note**
+> [!NOTE]
 >
 > Synchronized file shares is not used by Kubernetes' `hostPath` volumes in Docker Desktop.
 
-> **Important**
+> [!IMPORTANT]
 >
 > Synchronized file shares isn't available on WSL or when using Windows containers. 
-{ .important }
 
 ## Create a file share instance 
 
@@ -51,11 +50,10 @@ When the status indicator displays **Watching for filesystem changes**, your fil
 >
 > When you create a new service, setting the [bind mount option consistency](../reference/cli/docker/service/create.md#options-for-bind-mounts) to `:consistent` bypasses Synchronized file shares. 
 
-> **Tip**
+> [!TIP]
 >
 > Compose can now automatically create file shares for bind mounts. 
 > Ensure you're signed in to Docker with a paid subscription and have enabled both **Access experimental features** and **Manage Synchronized file shares with Compose** in Docker Desktop's settings.
-{ .tip }
 
 ## Explore your file share instance
 

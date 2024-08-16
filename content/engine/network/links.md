@@ -21,7 +21,6 @@ between containers in a more controlled way.
 >
 > See [Differences between user-defined bridges and the default bridge](drivers/bridge.md#differences-between-user-defined-bridges-and-the-default-bridge)
 > for some alternatives to using `--link`.
-{ .warning }
 
 The information in this section explains legacy container links within the
 Docker default `bridge` network which is created automatically when you install
@@ -45,7 +44,7 @@ Let's say you used this command to run a simple Python Flask application:
 $ docker run -d -P training/webapp python app.py
 ```
 
-> **Note**
+> [!NOTE]
 >
 > Containers have an internal network and an IP address.
 > Docker can have a variety of network configurations. You can see more
@@ -120,13 +119,13 @@ $ docker port nostalgic_morse 5000
 127.0.0.1:49155
 ```
 
-> **Note**
+> [!NOTE]
 >
 > The `-p` flag can be used multiple times to configure multiple ports.
 
 ## Connect with the linking system
 
-> **Note**
+> [!NOTE]
 >
 > This section covers the legacy link feature in the default `bridge` network.
 > Refer to [differences between user-defined bridges and the default bridge](drivers/bridge.md#differences-between-user-defined-bridges-and-the-default-bridge)
@@ -174,7 +173,7 @@ aed84ee21bde  training/webapp:latest python app.py  12 hours ago  Up 2 seconds 0
 You can also use `docker inspect` to return the container's name.
 
 
-> **Note**
+> [!NOTE]
 >
 > Container names must be unique. That means you can only call
 > one container `web`. If you want to re-use a container name you must delete
@@ -271,13 +270,12 @@ command when the source container is started
 These environment variables enable programmatic discovery from within the
 target container of information related to the source container.
 
-> **Warning**
+> [!WARNING]
 >
 > It is important to understand that all environment variables originating
 > from Docker within a container are made available to any container
 > that links to it. This could have serious security implications if sensitive
 > data is stored in them.
-{ .warning }
 
 Docker sets an `<alias>_NAME` environment variable for each target container
 listed in the `--link` parameter. For example, if a new container called
@@ -387,7 +385,7 @@ PING webdb (172.17.0.5): 48 data bytes
 56 bytes from 172.17.0.5: icmp_seq=2 ttl=64 time=0.256 ms
 ```
 
-> **Note**
+> [!NOTE]
 >
 > In the example, you had to install `ping` because it was not included
 > in the container initially.
@@ -396,7 +394,7 @@ Here, you used the `ping` command to ping the `db` container using its host entr
 which resolves to `172.17.0.5`. You can use this host entry to configure an application
 to make use of your `db` container.
 
-> **Note**
+> [!NOTE]
 >
 > You can link multiple recipient containers to a single source. For
 > example, you could have multiple (differently named) web containers attached to your

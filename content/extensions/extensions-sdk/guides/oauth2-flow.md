@@ -7,7 +7,7 @@ aliases:
  - /desktop/extensions-sdk/guides/oauth2-flow/
 ---
 
-> **Note**
+> [!NOTE]
 >
 > This page assumes that you already have an Identity Provider (IdP), such as Google, Entra ID (formerly Azure AD) or Okta, which handles the authentication process and returns an access token.
 
@@ -55,10 +55,9 @@ window.ddClient.openExternal("https://authorization-server.com/authorize?
 
 You can get the authorization code from the extension UI by listing `docker-desktop://dashboard/extension-tab?extensionId=awesome/my-extension` as the `redirect_uri` in the OAuth app you're using and concatenating the authorization code as a query parameter. The extension UI code will then be able to read the corresponding code query-param.
 
-> **Important**
+> [!IMPORTANT]
 >
 > Using this feature requires the extension SDK 0.3.3 in Docker Desktop. You need to ensure that the required SDK version for your extension set with `com.docker.desktop.extension.api.version` in [image labels](../extensions/labels.md) is higher than 0.3.3.
-{ .important }
 
 #### Authorization
 
@@ -78,7 +77,7 @@ POST https://authorization-server.com/token
 &code=N949tDLuf9ai_DaOKyuFBXStCNMQzuQbtC1QbvLv-AXqPJ_f
 ```
 
-> **Note**
+> [!NOTE]
 >
 > The client's credentials are included in the `POST` query params in this example. OAuth authorization servers may require that the credentials are sent as a HTTP Basic Authentication header or might support different formats. See your OAuth provider docs for details.
 
@@ -88,7 +87,7 @@ The Docker Extensions SDK doesn't provide a specific mechanism to store secrets.
 
 It's highly recommended that you use an external source of storage to store the access token.
 
-> **Note**
+> [!NOTE]
 >
 > The user interface Local Storage is isolated between extensions (an extension can't access another extension's local storage), and each extension's local storage gets deleted when users uninstall an extension.
 

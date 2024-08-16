@@ -51,6 +51,6 @@ section and choose the best installation path for you.
   link="/desktop/install/linux-install/"
   icon="/assets/images/linux_48.svg" >}}
 
-> **Note**
+> [!NOTE]
 >
 > If you're looking for information on how to install Docker Engine, see [Docker Engine installation overview](/engine/install/).

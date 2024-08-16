@@ -21,10 +21,9 @@ To create a new company:
 3. Near the bottom of the **General** tab, select **Create a company**.
 4. Enter a unique name for your company, then select **Continue**.
 
-    > **Tip**
+    > [!TIP]
     >
     > The name for your company can't be the same as an existing user, organization, or company namespace.
-    { .tip }
 
 5. Review the company migration details and then select **Create company**.
 
@@ -43,10 +42,9 @@ To create a new company:
 3. Select **Create a company**.
 4. Enter a unique name for your company, then select **Continue**.
 
-    > **Tip**
+    > [!TIP]
     >
     > The name for your company can't be the same as an existing user, organization, or company namespace.
-    { .tip }
 
 5. Review the company migration details and then select **Create company**.
 

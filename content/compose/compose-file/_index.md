@@ -40,7 +40,6 @@ aliases:
 >**New to Docker Compose?**
 >
 > Find more information about the [key features and use cases of Docker Compose](../intro/features-uses.md) or [try the quickstart guide](../gettingstarted.md).
-{ .tip }
 
 The Compose Specification is the latest and recommended version of the Compose file format. It helps you define a [Compose file](../compose-application-model.md) which is used to configure your Docker application’s services, networks, volumes, and more.
 
