@@ -27,7 +27,7 @@ This page outlines the different ways you can enforce sign-in for Docker Desktop
 
 In some cases, a system reboot may be necessary for enforcement to take effect.
 
-> [!Note]
+> [!NOTE]
 >
 > If a registry key and a `registry.json` file both exist, the registry key takes precedence.
 
@@ -75,7 +75,7 @@ There are many ways to deploy the registry key, for example using an MDM solutio
 4. Restart Docker Desktop. 
 5. Open Docker Desktop and when Docker Desktop starts, verify that the **Sign in required!** prompt appears.
 
-> [!Note]
+> [!NOTE]
 >
 > If a `plist` and `registry.json` file both exist, the `plist` file takes precedence.
 
