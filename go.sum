@@ -156,6 +156,8 @@ github.com/docker/compose/v2 v2.28.1 h1:ORPfiVHrpnRQBDoC3F8JJyWAY8N5gWuo3Fgwyivx
 github.com/docker/compose/v2 v2.28.1/go.mod h1:wDtGQFHe99sPLCHXeVbCkc+Wsl4Y/2ZxiAJa/nga6rA=
 github.com/docker/compose/v2 v2.29.0 h1:qPBhzfjT2zkxUXuu+TcbQq292bPpB0ozzVHot2w2IN0=
 github.com/docker/compose/v2 v2.29.0/go.mod h1:95QFO8lue3WJmLUDSdOLBkm7KdGhcG6U+RvVxrQIzOo=
+github.com/docker/compose/v2 v2.29.2 h1:gRlR2ApZ0IGcwmSUb/wlEVCk18Az8b7zl03hJArldOg=
+github.com/docker/compose/v2 v2.29.2/go.mod h1:U+yqqZqYPhILehkmmir+Yh7ZhCfkKqAvaZdrM47JBRs=
 github.com/docker/distribution v2.8.2+incompatible h1:T3de5rq0dB1j30rp0sA2rER+m322EBzniBPB6ZIzuh8=
 github.com/docker/distribution v2.8.2+incompatible/go.mod h1:J2gT2udsDAN96Uj4KfcMRqY0/ypR+oyYUYmja8H+y+w=
 github.com/docker/distribution v2.8.3+incompatible h1:AtKxIZ36LoNK51+Z6RpzLpddBirtxJnzDrHLEKxTAYk=

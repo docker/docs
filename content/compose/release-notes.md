@@ -10,6 +10,27 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.29.2
+
+{{< release-date date="2024-08-16" >}}
+
+### Update
+
+- Dependencies upgrade: bump compose-go to v2.1.6
+- Dependencies upgrade: bump docker engine and cli to v27.1.2
+- Dependencies upgrade: bump buildx to v0.16.2
+- Dependencies upgrade: bump buildkit to v0.15.2
+- Dependencies upgrade: bump golang to v1.21.12
+- Dependencies upgrade: bump sys to v0.22.0
+- Dependencies upgrade: bump flock to v0.12.1
+
+### Bug fixes and enhancements
+
+- Fixed the docs on `docker compose kill` usage.
+- Fixed redundant condition from `toAPIBuildOptions` in build.go.
+- Fixed initial Watch `sync` after Compose restarts with introduction of `x-initSync`.
+- Fixed an issue which stopped the Compose process for a single container on `sync-restart` Watch action.
+
 ## 2.29.1
 
 {{< release-date date="2024-07-23" >}}
