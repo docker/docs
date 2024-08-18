@@ -14,7 +14,7 @@ weight: 2
 
 ## Explanation
 
-Now that you have Docker Desktop installed, you’re are ready to do some application development. Specifically, you will do the following:
+Now that you have Docker Desktop installed, you are ready to do some application development. Specifically, you will do the following:
 
 1. Clone and start a development project
 2. Make changes to the backend and frontend
