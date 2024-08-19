@@ -8,10 +8,9 @@ This page outlines the different ways you can enforce sign-in for Docker Desktop
 
 ## Registry key method (Windows only)
 
-{{% restricted title="Early Access" %}}
-The registry key method is an [early access](../../../release-lifecycle.md#early-access-ea) feature for Docker Business subscribers. 
-It's available with Docker Desktop version 4.32 and later.
-{{% /restricted %}}
+> [!NOTE]
+>
+> The registry key method is available with Docker Desktop version 4.32 and later.
 
 1. Create the registry key. Your new key should look like the following:
 
@@ -28,7 +27,7 @@ It's available with Docker Desktop version 4.32 and later.
 
 In some cases, a system reboot may be necessary for enforcement to take effect.
 
->**Note**
+> [!NOTE]
 >
 > If a registry key and a `registry.json` file both exist, the registry key takes precedence.
 
@@ -49,10 +48,9 @@ There are many ways to deploy the registry key, for example using an MDM solutio
 
 ## plist method (Mac only)
 
-{{% restricted title="Early Access" %}}
-The plist method is an [early access](../../../release-lifecycle.md#early-access-ea) feature for Docker Business subscribers. 
-It's available with Docker Desktop version 4.32 and later.
-{{% /restricted %}}
+> [!NOTE]
+>
+> The registry key method is available with Docker Desktop version 4.32 and later.
 
 1. Create the file `/Library/Application Support/com.docker.docker/desktop.plist`.
 2. Open `desktop.plist` in a text editor and add the following content, where `myorg` is replaced with your organization’s name all lowercase:
@@ -77,7 +75,7 @@ It's available with Docker Desktop version 4.32 and later.
 4. Restart Docker Desktop. 
 5. Open Docker Desktop and when Docker Desktop starts, verify that the **Sign in required!** prompt appears.
 
->**Note**
+> [!NOTE]
 >
 > If a `plist` and `registry.json` file both exist, the `plist` file takes precedence.
 
