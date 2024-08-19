@@ -9,4 +9,4 @@ HUGO_ENABLEGITINFO = "true"
 HUGO_ENVIRONMENT = "preview"
 
 [context.deploy-preview]
-command = "hugo --gc --minify -b $DEPLOY_PRIME_URL && npx pagefind@v1.1.0"
+command = "hugo --gc --minify -b $DEPLOY_PRIME_URL"

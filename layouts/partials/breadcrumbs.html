@@ -2,7 +2,7 @@
 {{ $ctx := . }}
 
 
-<nav id="breadcrumbs" data-pagefind-ignore class="py-4 gap-4 flex items-center text-gray-light dark:text-gray-dark max-w-full min-w-0">
+<nav id="breadcrumbs" class="py-4 gap-4 flex items-center text-gray-light dark:text-gray-dark max-w-full min-w-0">
   {{ with ($scratch.GetSortedMapValues "sections") }}
     {{ range $i, $e := . }}
       {{- if $i -}}

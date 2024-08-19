@@ -19,8 +19,19 @@
       {{ partial "top-nav.html" . }}
     </div>
     <div class="flex items-center gap-6">
-      {{ partialCached "search.html" "-" }}
-      <button aria-label="Theme switch" id="theme-switch" class="svg-icon"
+      <button
+        id="kapa-modal-toggle"
+        class="flex items-center gap-1 px-3 py-1 bg-white/10 hover:bg-white/20 rounded transition">
+        <span class="icon-svg">{{ partialCached "icon" "search" "search" }}</span>
+        <span>Search</span>
+        <span>
+        {{- partialCached "components/badge.html" (dict
+          "color" "magenta"
+          "content" "AI"
+          ) -}}
+        </span>
+      </button>
+      <button aria-label="Theme switch" id="theme-switch" class="icon-svg"
         x-data="{ theme: localStorage.getItem('theme-preference') }" x-init="$watch('theme', value => {
         localStorage.setItem('theme-preference', value);
         document.firstElementChild.className = value;

@@ -920,7 +920,6 @@ examples: |-
     HUGO_VERSION       0.127.0
     HUGO_ENV                     sets the hugo.Environment (production, development, preview)
     DOCS_URL                     sets the base URL for the site
-    PAGEFIND_VERSION   1.1.0
     ```
 
     This means that the `release` target is configurable using these build arguments:
@@ -931,7 +930,6 @@ examples: |-
       --build-arg HUGO_VERSION=0.127.0 \
       --build-arg HUGO_ENV=production \
       --build-arg DOCS_URL=https://example.com \
-      --build-arg PAGEFIND_VERSION=1.1.0 \
       --target release https://github.com/docker/docs.git
     ```
 
@@ -959,8 +957,6 @@ examples: |-
     build-upstream    builds an upstream project with a replacement module
     validate-upstream validates HTML output for upstream builds
     unused-media      checks for unused graphics and other media
-    pagefind          installs the Pagefind runtime
-    index             generates a Pagefind index
     test-go-redirects checks that the /go/ redirects are valid
     release (default) is an empty scratch image with only compiled assets
     ```

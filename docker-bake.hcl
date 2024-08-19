@@ -14,13 +14,6 @@ group "default" {
   targets = ["release"]
 }
 
-target "index" {
-  # generate a new local search index
-  target = "index"
-  output = ["type=local,dest=static/pagefind"]
-  provenance = false
-}
-
 target "release" {
   args = {
     HUGO_ENV = HUGO_ENV

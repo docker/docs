@@ -49,32 +49,35 @@
   })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
   </script>
 {{ end }}
-{{ if hugo.IsProduction }}
-  {{/*  kapa.ai widget */}}
-  <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    var script = document.createElement('script');
-    script.src = 'https://widget.kapa.ai/kapa-widget.bundle.js';
-    script.setAttribute('data-website-id', '{{ site.Params.kapa.id }}');
-    script.setAttribute('data-project-name', 'Docker');
-    script.setAttribute('data-user-analytics-fingerprint-enabled', 'true');
-    script.setAttribute('data-button-image-height', '29px');
-    script.setAttribute('data-button-image-width', '40px');
-    script.setAttribute('data-modal-image-height', '29px');
-    script.setAttribute('data-modal-image-width', '40px');
-    script.setAttribute('data-modal-title-color', '#fff');
-    script.setAttribute('data-project-color', '#086dd7');
-    script.setAttribute('data-modal-header-bg-color', '#086dd7');
-    script.setAttribute('data-project-logo', '/assets/images/logo-icon-white.svg');
-    script.setAttribute('data-font-family', 'Roboto Flex,sans-serif');
-    script.setAttribute('data-modal-disclaimer', 'This is a custom LLM for answering questions about Docker. Answers are based on the contents of the documentation. This feature is experimental - rate the answers to let us know what you think!');
-    script.setAttribute('data-modal-disclaimer-bg-color', '#e5f2fc');
-    script.setAttribute('data-modal-disclaimer-text-color', '#086dd7');
-    script.async = true;
-    document.body.appendChild(script);
-  });
-  </script>
-{{ end }}
+{{/*  kapa.ai widget */}}
+<script async src="https://widget.kapa.ai/kapa-widget.bundle.js"
+  data-button-hide="true"
+  data-font-family="Roboto Flex,sans-serif"
+  data-modal-close-button-hide="true"
+  data-modal-disclaimer-bg-color="#e5f2fc"
+  data-modal-disclaimer-text-color="#086dd7"
+  data-modal-disclaimer="This is a custom LLM for answering questions about Docker. Answers are based on the contents of the documentation. Rate the answers to let us know what you think!"
+  data-modal-header-bg-color="#1d63ed"
+  data-modal-image-height="29px"
+  data-modal-image-width="40px"
+  data-modal-open-on-command-k="true"
+  data-modal-override-open-class="true"
+  data-modal-override-open-id="kapa-modal-toggle"
+  data-modal-search-input-placeholder="Search the documentation…"
+  data-modal-ask-ai-input-placeholder="Ask me a question about Docker…"
+  data-modal-title-color="#fff"
+  data-modal-title-search="Search"
+  data-project-color="#1d63ed"
+  data-project-logo="/assets/images/logo-icon-white.svg"
+  data-project-name="Docker"
+  data-search-include-source-names='["Documentation"]'
+  data-search-mode-enabled="true"
+  data-switch-bg-color="#e5f2fc"
+  data-switch-border-radius="20px"
+  data-switch-color="#333"
+  data-user-analytics-fingerprint-enabled="true"
+  data-website-id="{{ site.Params.kapa.id }}"
+  ></script>
 {{/* preload Roboto Flex as it's a critical font: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel/preload */}}
 <link href="/assets/fonts/RobotoFlex.woff2" rel="preload" as="font" type="font/woff2" crossorigin />
 {{ partialCached "utils/css.html" "-" }}

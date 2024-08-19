@@ -186,7 +186,7 @@ module.exports = {
 
       blue: {
         light: {
-          DEFAULT: "#086dd7",
+          DEFAULT: "#1D63ED",
           100: "#e5f2fc",
           200: "#c0e0fa",
           300: "#8bc7f5",

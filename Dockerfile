@@ -121,17 +121,6 @@ if [ ! -z "$DUPLICATE_TARGETS" ]; then
 fi
 EOT
 
-# pagefind installs the Pagefind runtime
-FROM base AS pagefind
-ARG PAGEFIND_VERSION=1.1.0
-COPY --from=build /out ./public
-RUN --mount=type=bind,src=pagefind.yml,target=pagefind.yml \
-    npx pagefind@v${PAGEFIND_VERSION} --output-path "/pagefind"
-
-# index generates a Pagefind index
-FROM scratch AS index
-COPY --from=pagefind /pagefind .
-
 # test-go-redirects checks that the /go/ redirects are valid
 FROM alpine:${ALPINE_VERSION} AS test-go-redirects
 WORKDIR /work
@@ -145,4 +134,3 @@ EOT
 # release is an empty scratch image with only compiled assets
 FROM scratch AS release
 COPY --from=build /out /
-COPY --from=pagefind /pagefind /pagefind
