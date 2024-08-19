@@ -74,7 +74,7 @@ services:
 
 ### Shell commands
 
-When merging Compose files that use the services attributes [command](05-services.md#command), [entrypoint](05-services.md#entrypoint) and [healthcheck: `test`](05-services.md#healthcheck), the value is overridden by the latest Compose file, and not appended.
+When merging Compose files that use the services attributes [command](services.md#command), [entrypoint](services.md#entrypoint) and [healthcheck: `test`](services.md#healthcheck), the value is overridden by the latest Compose file, and not appended.
 
 Merging the following example YAML trees:
 
@@ -100,7 +100,7 @@ services:
 
 ### Unique resources
 
-Applies to the [ports](05-services.md#ports), [volumes](05-services.md#volumes), [secrets](05-services.md#secrets) and [configs](05-services.md#configs) services attributes.
+Applies to the [ports](services.md#ports), [volumes](services.md#volumes), [secrets](services.md#secrets) and [configs](services.md#configs) services attributes.
 While these types are modeled in a Compose file as a sequence, they have special uniqueness requirements:
 
 | Attribute   | Unique key               |

@@ -179,7 +179,7 @@ on Linux kernel.
 ### cpu_rt_runtime
 
 `cpu_rt_runtime` configures CPU allocation parameters for platforms with support for realtime scheduler. It can be either
-an integer value using microseconds as unit or a [duration](11-extension.md#specifying-durations).
+an integer value using microseconds as unit or a [duration](extension.md#specifying-durations).
 
 ```yml
  cpu_rt_runtime: '400ms'
@@ -189,7 +189,7 @@ an integer value using microseconds as unit or a [duration](11-extension.md#spec
 ### cpu_rt_period
 
 `cpu_rt_period` configures CPU allocation parameters for platforms with support for realtime scheduler. It can be either
-an integer value using microseconds as unit or a [duration](11-extension.md#specifying-durations).
+an integer value using microseconds as unit or a [duration](extension.md#specifying-durations).
 
 ```yml
  cpu_rt_period: '1400us'
@@ -271,7 +271,7 @@ Configs allow services to adapt their behaviour without the need to rebuild a Do
 Services can only access configs when explicitly granted by the `configs` attribute. Two different syntax variants are supported.
 
 Compose reports an error if `config` doesn't exist on the platform or isn't defined in the
-[`configs` top-level element](08-configs.md) in the Compose file.
+[`configs` top-level element](configs.md) in the Compose file.
 
 There are two syntaxes defined for configs: a short syntax and a long syntax.
 
@@ -650,7 +650,7 @@ Each line in an `.env` file must be in `VAR[=[VAL]]` format. The following synta
 
 - Lines beginning with `#` are processed as comments and ignored.
 - Blank lines are ignored.
-- Unquoted and double-quoted (`"`) values have [Interpolation](12-interpolation.md) applied.
+- Unquoted and double-quoted (`"`) values have [Interpolation](interpolation.md) applied.
 - Each line represents a key-value pair. Values can optionally be quoted.
   - `VAR=VAL` -> `VAL`
   - `VAR="VAL"` -> `VAL`
@@ -1015,7 +1015,7 @@ healthcheck:
   start_interval: 5s
 ```
 
-`interval`, `timeout`, `start_period`, and `start_interval` are [specified as durations](11-extension.md#specifying-durations). Introduced in Docker Compose version [2.20.2](/compose/release-notes.md#2202)
+`interval`, `timeout`, `start_period`, and `start_interval` are [specified as durations](extension.md#specifying-durations). Introduced in Docker Compose version [2.20.2](/compose/release-notes.md#2202)
 
 `test` defines the command Compose runs to check container health. It can be
 either a string or a list. If it's a list, the first item must be either `NONE`, `CMD` or `CMD-SHELL`.
@@ -1180,13 +1180,13 @@ are platform specific. Driver specific options can be set with `options` as key-
 
 ### mem_limit
 
-`mem_limit` configures a limit on the amount of memory a container can allocate, set as a string expressing a [byte value](11-extension.md#specifying-byte-values).
+`mem_limit` configures a limit on the amount of memory a container can allocate, set as a string expressing a [byte value](extension.md#specifying-byte-values).
 
 When set, `mem_limit` must be consistent with the `limits.memory` attribute in the [Deploy Specification](deploy.md#memory).
 
 ### mem_reservation
 
-`mem_reservation` configures a reservation on the amount of memory a container can allocate, set as a string expressing a [byte value](11-extension.md#specifying-byte-values).
+`mem_reservation` configures a reservation on the amount of memory a container can allocate, set as a string expressing a [byte value](extension.md#specifying-byte-values).
 
 When set, `mem_reservation` must be consistent with the `reservations.memory` attribute in the [Deploy Specification](deploy.md#memory).
 
@@ -1241,7 +1241,7 @@ services:
       - some-network
       - other-network
 ```
-For more information about the `networks` top-level element, see [Networks](06-networks.md).
+For more information about the `networks` top-level element, see [Networks](networks.md).
 
 #### aliases
 
@@ -1304,7 +1304,7 @@ networks:
 
 Specify a static IP address for a service container when joining the network.
 
-The corresponding network configuration in the [top-level networks section](06-networks.md) must have an
+The corresponding network configuration in the [top-level networks section](networks.md) must have an
 `ipam` attribute with subnet configurations covering each static address.
 
 ```yml
@@ -1590,10 +1590,10 @@ When both are set, `scale` must be consistent with the `replicas` attribute in t
 Two different syntax variants are supported; the short syntax and the long syntax. Long and short syntax for secrets may be used in the same Compose file.
 
 Compose reports an error if the secret doesn't exist on the platform or isn't defined in the
-[`secrets` top-level section](09-secrets.md) of the Compose file.
+[`secrets` top-level section](secrets.md) of the Compose file.
 
 Defining a secret in the top-level `secrets` must not imply granting any service access to it.
-Such grant must be explicit within service specification as [secrets](09-secrets.md) service element.
+Such grant must be explicit within service specification as [secrets](secrets.md) service element.
 
 #### Short syntax
 
@@ -1667,7 +1667,7 @@ For further default labeling schemes you can override, see [Security configurati
 ### shm_size
 
 `shm_size` configures the size of the shared memory (`/dev/shm` partition on Linux) allowed by the service container.
-It's specified as a [byte value](11-extension.md#specifying-byte-values).
+It's specified as a [byte value](extension.md#specifying-byte-values).
 
 ### stdin_open
 
@@ -1681,7 +1681,7 @@ Supported values are `true` or `false`.
 `stop_grace_period` specifies how long Compose must wait when attempting to stop a container if it doesn't
 handle SIGTERM (or whichever stop signal has been specified with
 [`stop_signal`](#stop_signal)), before sending SIGKILL. It's specified
-as a [duration](11-extension.md#specifying-durations).
+as a [duration](extension.md#specifying-durations).
 
 ```yml
     stop_grace_period: 1s
@@ -1815,7 +1815,7 @@ volumes:
   db-data:
 ```
 
-For more information about the `volumes` top-level element, see [Volumes](07-volumes.md).
+For more information about the `volumes` top-level element, see [Volumes](volumes.md).
 
 #### Short syntax
 
@@ -1849,7 +1849,7 @@ expressed in the short form.
 - `type`: The mount type. Either `volume`, `bind`, `tmpfs`, `npipe`, or `cluster`
 - `source`: The source of the mount, a path on the host for a bind mount, or the
   name of a volume defined in the
-  [top-level `volumes` key](07-volumes.md). Not applicable for a tmpfs mount.
+  [top-level `volumes` key](volumes.md). Not applicable for a tmpfs mount.
 - `target`: The path in the container where the volume is mounted.
 - `read_only`: Flag to set the volume as read-only.
 - `bind`: Used to configure additional bind options:

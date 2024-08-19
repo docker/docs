@@ -44,9 +44,9 @@ Tests pass if the `sut` service returns `0`, and fail otherwise.
 > [!NOTE]
 > 
 > Only the `sut` service and all other services listed in
-> [`depends_on`](/reference/compose-file/05-services.md#depends_on) are
+> [`depends_on`](/reference/compose-file/services.md#depends_on) are
 > started. If you have services that poll for changes in other services, be sure
-> to include the polling services in the [`depends_on`](/reference/compose-file/05-services.md#depends_on)
+> to include the polling services in the [`depends_on`](/reference/compose-file/services.md#depends_on)
 > list to make sure all of your services start.
 
 You can define more than one `docker-compose.test.yml` file if needed. Any file

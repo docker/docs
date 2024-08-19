@@ -417,8 +417,8 @@ database and persist data. You also learned how to create a multi-stage
 Dockerfile and set up a bind mount for development.
 
 Related information:
- - [Volumes top-level element](/reference/compose-file/07-volumes/)
- - [Services top-level element](/reference/compose-file/05-services/)
+ - [Volumes top-level element](/reference/compose-file/volumes/)
+ - [Services top-level element](/reference/compose-file/services/)
  - [Multi-stage builds](../../build/building/multi-stage.md)
 
 ## Next steps

@@ -23,7 +23,7 @@ Compose offers a way for you to override this name, and sets a
 default project name to be used if the top-level `name` element is not set.
 
 Whenever a project name is defined by top-level `name` or by some custom mechanism, it is exposed for
-[interpolation](12-interpolation.md) and environment variable resolution as `COMPOSE_PROJECT_NAME`
+[interpolation](interpolation.md) and environment variable resolution as `COMPOSE_PROJECT_NAME`
 
 ```yml
 name: myapp

@@ -8,7 +8,7 @@ aliases:
 
 {{< include "compose/configs.md" >}}
 
-Services can only access configs when explicitly granted by a [`configs`](05-services.md#configs) attribute within the `services` top-level element.
+Services can only access configs when explicitly granted by a [`configs`](services.md#configs) attribute within the `services` top-level element.
 
 By default, the config:
 - Is owned by the user running the container command but can be overridden by service configuration.
@@ -64,7 +64,7 @@ configs:
 External configs lookup can also use a distinct key by specifying a `name`. 
 
 The following
-example modifies the previous one to look up a config using the parameter `HTTP_CONFIG_KEY`. The actual lookup key is set at deployment time by the [interpolation](12-interpolation.md) of
+example modifies the previous one to look up a config using the parameter `HTTP_CONFIG_KEY`. The actual lookup key is set at deployment time by the [interpolation](interpolation.md) of
 variables, but exposed to containers as hard-coded ID `http_config`.
 
 ```yml

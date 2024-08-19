@@ -1034,4 +1034,4 @@ Each service uses environment variables to specify where the service should look
 for that secret data.
 
 More information on short and long syntax for secrets can be found in the
-[Compose Specification](/reference/compose-file/09-secrets.md).
+[Compose Specification](/reference/compose-file/secrets.md).

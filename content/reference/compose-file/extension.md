@@ -8,7 +8,7 @@ aliases:
 
 {{< include "compose/extension.md" >}}
 
-Extensions can also be used with [anchors and aliases](10-fragments.md).
+Extensions can also be used with [anchors and aliases](fragments.md).
 
 They also can be used within any structure in a Compose file where user-defined keys are not expected. 
 Compose uses those to enable experimental features, the same way browsers add support for [custom CSS features](https://www.w3.org/TR/2011/REC-CSS2-20110607/syndata.html#vendor-keywords)

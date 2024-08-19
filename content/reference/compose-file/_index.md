@@ -11,27 +11,27 @@ grid:
 - title: Version and name top-level element
   description: Understand version and name attributes for Compose.
   icon: feed
-  link: /reference/compose-file/04-version-and-name/
+  link: /reference/compose-file/version-and-name/
 - title: Services top-level element
   description: Explore all services attributes for Compose.
   icon: construction
-  link: /reference/compose-file/05-services/
+  link: /reference/compose-file/services/
 - title: Networks top-level element
   description: Find all networks attributes for Compose.
   icon: lan
-  link: /reference/compose-file/06-networks/
+  link: /reference/compose-file/networks/
 - title: Volumes top-level element
   description: Explore all volumes attributes for Compose.
   icon: database
-  link: /reference/compose-file/07-volumes/
+  link: /reference/compose-file/volumes/
 - title: Configs top-level element
   description: Find out about configs in Compose.
   icon: settings
-  link: /reference/compose-file/08-configs/
+  link: /reference/compose-file/configs/
 - title: Secrets top-level element
   description: Learn about secrets in Compose.
   icon: lock
-  link: /reference/compose-file/09-secrets/
+  link: /reference/compose-file/secrets/
 aliases:
  - /compose/yaml/
  - /compose/compose-file/compose-file-v1/

@@ -52,7 +52,7 @@ For braced expressions, the following formats are supported:
   - `${VAR:+replacement}` -> `replacement` if `VAR` is set and non-empty, otherwise empty
   - `${VAR+replacement}` -> `replacement` if `VAR` is set, otherwise empty
 
-For more information, see [Interpolation](/reference/compose-file/12-interpolation.md) in the Compose Specification. 
+For more information, see [Interpolation](/reference/compose-file/interpolation.md) in the Compose Specification. 
 
 ## Ways to set variables with interpolation
 
@@ -95,7 +95,7 @@ services:
 
 #### Additional information 
 
-- If you define a variable in your `.env` file, you can reference it directly in your `compose.yml` with the [`environment` attribute](/reference/compose-file/05-services.md#environment). For example, if your `.env` file contains the environment variable `DEBUG=1` and your `compose.yml` file looks like this:
+- If you define a variable in your `.env` file, you can reference it directly in your `compose.yml` with the [`environment` attribute](/reference/compose-file/services.md#environment). For example, if your `.env` file contains the environment variable `DEBUG=1` and your `compose.yml` file looks like this:
    ```yaml
     services:
       webapp:

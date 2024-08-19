@@ -8,7 +8,7 @@ aliases:
 
 With profiles you can define a set of active profiles so your Compose application model is adjusted for various usages and environments.
 
-The [services](05-services.md) top-level element supports a `profiles` attribute to define a list of named profiles. 
+The [services](services.md) top-level element supports a `profiles` attribute to define a list of named profiles. 
 Services without a `profiles` attribute are always enabled. 
 
 A service is ignored by Compose when none of the listed `profiles` match the active ones, unless the service is

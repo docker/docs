@@ -9,7 +9,7 @@ keywords: cli, compose, profile, profiles reference
 ## Assigning profiles to services
 
 Services are associated with profiles through the
-[`profiles` attribute](/reference/compose-file/05-services.md#profiles) which takes an
+[`profiles` attribute](/reference/compose-file/services.md#profiles) which takes an
 array of profile names:
 
 ```yaml
@@ -173,4 +173,4 @@ $ COMPOSE_PROFILES=dev docker compose up phpmyadmin
 
 ## Reference information
 
-[`profiles`](/reference/compose-file/05-services.md#profiles)
+[`profiles`](/reference/compose-file/services.md#profiles)

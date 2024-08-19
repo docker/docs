@@ -75,7 +75,7 @@ $ docker buildx bake --print
 The compose format has some limitations compared to the HCL format:
 
 - Specifying variables or global scope attributes is not yet supported
-- `inherits` service field is not supported, but you can use [YAML anchors](/reference/compose-file/10-fragments.md)
+- `inherits` service field is not supported, but you can use [YAML anchors](/reference/compose-file/fragments.md)
   to reference other services, as demonstrated in the previous example with `&build-dev`.
 
 ## `.env` file
@@ -128,7 +128,7 @@ $ docker buildx bake --print
 ## Extension field with `x-bake`
 
 Where some fields are not available in the compose specification, you can use
-the [special extension](/reference/compose-file/11-extension.md) field
+the [special extension](/reference/compose-file/extension.md) field
 `x-bake` in your compose file to evaluate extra fields:
 
 ```yaml

@@ -6,7 +6,7 @@ notoc: true
 ---
 
 You can control the order of service startup and shutdown with the
-[depends_on](compose-file/05-services.md#depends_on) attribute. Compose always starts and stops
+[depends_on](/referencecompose-file/services.md#depends_on) attribute. Compose always starts and stops
 containers in dependency order, where dependencies are determined by
 `depends_on`, `links`, `volumes_from`, and `network_mode: "service:..."`.
 
@@ -56,5 +56,5 @@ Compose also removes services in dependency order. `web` is removed before `db` 
 
 ## Reference information 
 
-- [`depends_on`](/reference/compose-file/05-services.md#depends_on)
-- [`healthcheck`](/reference/compose-file/05-services.md#healthcheck)
+- [`depends_on`](/reference/compose-file/services.md#depends_on)
+- [`healthcheck`](/reference/compose-file/services.md#healthcheck)
