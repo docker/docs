@@ -563,7 +563,7 @@ dns_search:
 {{< introduced compose 2.27.1 "/compose/release-notes.md#2271" >}}
 
 `driver_opts` specifies a list of options as key-value pairs to pass to the driver. These options are
-driver-dependent. Consult the driver's documentation for more information.
+driver-dependent.
 
 ```yml
 services:
@@ -571,9 +571,10 @@ services:
     networks:
       app_net:
         driver_opts:
-          foo: "bar"
-          baz: 1
+          com.docker.network.bridge.host_binding_ipv4: "127.0.0.1"
 ```
+
+Consult the [network drivers documentation](/engine/network/_index.md) for more information.
 
 ### entrypoint
 
