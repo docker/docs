@@ -4,9 +4,11 @@ keywords: admin, controls, rootless, enhanced container isolation
 title: Configure with the Docker Admin Console
 ---
 
->**Note**
->
->Settings Management is available to Docker Business customers only.
+{{% restricted title="Early Access" %}}
+
+Settings Management in Docker Admin Console is in Early Access and is available to Docker Business customers only.
+
+{{% /restricted %}}
 
 This page contains information for administrators on how to configure Settings Management with the Docker Admin Console to specify and lock configuration parameters to create a standardized Docker Desktop environment across your Docker company or organization.
 
