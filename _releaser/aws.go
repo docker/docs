@@ -153,8 +153,8 @@ func (s *AwsCloudfrontUpdateCmd) Run() error {
 
 	log.Printf("INFO: waiting for lambda function to be processed\n")
 	// the lambda function code image is never ready right away, AWS has to
-	// process it, so we wait 3 seconds before trying to publish the version.
-	time.Sleep(3 * time.Second)
+	// process it, so we wait 8 seconds before trying to publish the version.
+	time.Sleep(8 * time.Second)
 
 	publishConfig, err := svc.PublishVersion(&lambda.PublishVersionInput{
 		FunctionName: aws.String(s.Function),
