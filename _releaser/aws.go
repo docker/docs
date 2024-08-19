@@ -129,7 +129,6 @@ func (s *AwsCloudfrontUpdateCmd) Run() error {
 		}
 		_, err = svc.CreateFunction(&lambda.CreateFunctionInput{
 			FunctionName: aws.String(s.Function),
-			Timeout:      aws.Int64(10),
 		})
 		if aerr, ok := err.(awserr.Error); ok && aerr.Code() != lambda.ErrCodeResourceConflictException {
 			return err
