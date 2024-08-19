@@ -8,15 +8,15 @@ Getting started:
 - sectiontitle: "Getting started"
   section:
   - title: "Overview"
-    path: /get-started/getting-started/
+    path: /get-started/introduction/
   - title: "Get Docker Desktop"
-    path: /get-started/getting-started/get-docker-desktop/
+    path: /get-started/introduction/get-docker-desktop/
   - title: "Develop with containers"
-    path: /get-started/getting-started/develop-with-containers/
+    path: /get-started/introduction/develop-with-containers/
   - title: "Build and push your first image"
-    path: /get-started/getting-started/build-and-push-first-image/
+    path: /get-started/introduction/build-and-push-first-image/
   - title: "What's next"
-    path: /get-started/getting-started/whats-next/
+    path: /get-started/introduction/whats-next/
 - sectiontitle: "Docker concepts"
   section:
   - sectiontitle: "The basics"
