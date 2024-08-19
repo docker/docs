@@ -13,7 +13,7 @@ Environment variables are often available to all processes, and it can be diffic
 
 ## Use secrets
 
-Getting a secret into a container is a two-step process. First, define the secret using the [top-level secrets element in your Compose file](compose-file/09-secrets.md). Next, update your service definitions to reference the secrets they require with the [secrets attribute](compose-file/05-services.md#secrets). Compose grants access to secrets on a per-service basis.
+Getting a secret into a container is a two-step process. First, define the secret using the [top-level secrets element in your Compose file](/reference/compose-file/09-secrets.md). Next, update your service definitions to reference the secrets they require with the [secrets attribute](/reference/compose-file/05-services.md#secrets). Compose grants access to secrets on a per-service basis.
 
 Unlike the other methods, this permits granular access control within a service container via standard filesystem permissions.
 
@@ -103,6 +103,6 @@ secrets:
 
 ## Resources
 
-- [Secrets top-level element](compose-file/09-secrets.md)
-- [Secrets attribute for services top-level element](compose-file/05-services.md#secrets)
+- [Secrets top-level element](/reference/compose-file/09-secrets.md)
+- [Secrets attribute for services top-level element](/reference/compose-file/05-services.md#secrets)
 - [Build secrets](https://docs.docker.com/build/building/secrets/)

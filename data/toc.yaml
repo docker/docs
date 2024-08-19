@@ -1037,39 +1037,39 @@ Reference:
   section:
     - sectiontitle: Compose Specification
       section:
-      - path: /compose/compose-file/
+      - path: /reference/compose-file/
         title: Overview
-      - path: /compose/compose-file/04-version-and-name/
+      - path: /reference/compose-file/04-version-and-name/
         title: Version and name top-level element
-      - path: /compose/compose-file/05-services/
+      - path: /reference/compose-file/05-services/
         title: Services top-level element
-      - path: /compose/compose-file/06-networks/
+      - path: /reference/compose-file/06-networks/
         title: Network top-level element
-      - path: /compose/compose-file/07-volumes/
+      - path: /reference/compose-file/07-volumes/
         title: Volumes top-level element
-      - path: /compose/compose-file/08-configs/
+      - path: /reference/compose-file/08-configs/
         title: Configs top-level element
-      - path: /compose/compose-file/09-secrets/
+      - path: /reference/compose-file/09-secrets/
         title: Secrets top-level element
-      - path: /compose/compose-file/10-fragments/
+      - path: /reference/compose-file/10-fragments/
         title: Fragments
-      - path: /compose/compose-file/11-extension/
+      - path: /reference/compose-file/11-extension/
         title: Extensions
-      - path: /compose/compose-file/12-interpolation/
+      - path: /reference/compose-file/12-interpolation/
         title: Interpolation
-      - path: /compose/compose-file/13-merge/
+      - path: /reference/compose-file/13-merge/
         title: Merge
-      - path: /compose/compose-file/14-include/
+      - path: /reference/compose-file/14-include/
         title: Include
-      - path: /compose/compose-file/15-profiles/
+      - path: /reference/compose-file/15-profiles/
         title: Profiles
-    - path: /compose/compose-file/build/
+    - path: /reference/compose-file/build/
       title: Compose Build Specification
-    - path: /compose/compose-file/deploy/
+    - path: /reference/compose-file/deploy/
       title: Compose Deploy Specification
-    - path: /compose/compose-file/develop/
+    - path: /reference/compose-file/develop/
       title: Compose Develop Specification
-    - path: /compose/compose-file/legacy-versions/
+    - path: /reference/compose-file/legacy-versions/
       title: Legacy versions
 - path: /glossary/
   title: Glossary

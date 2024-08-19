@@ -10,7 +10,7 @@ grid_files:
 - title: Compose file
   description: Defines a multi-container application.
   icon: polyline
-  link: /compose/compose-file/
+  link: /reference/compose-file/
 grid_clis:
 - title: Docker CLI
   description: The main Docker CLI, includes all `docker` commands.

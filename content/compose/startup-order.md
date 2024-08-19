@@ -56,5 +56,5 @@ Compose also removes services in dependency order. `web` is removed before `db` 
 
 ## Reference information 
 
-- [`depends_on`](compose-file/05-services.md#depends_on)
-- [`healthcheck`](compose-file/05-services.md#healthcheck)
+- [`depends_on`](/reference/compose-file/05-services.md#depends_on)
+- [`healthcheck`](/reference/compose-file/05-services.md#healthcheck)
