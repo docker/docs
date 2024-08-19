@@ -62,7 +62,7 @@ reference](/reference/cli/docker/scout/sbom.md).
 ## Attach as build attestation {#attest}
 
 You can generate the SBOM and attach it to the image at build-time as an
-[attestation](/build/attestations/_index.md). BuildKit provides a default
+[attestation](/build/metadata/attestations/_index.md). BuildKit provides a default
 SBOM generator which is different from what Docker Scout uses.
 You can configure BuildKit to use the Docker Scout SBOM generator
 using the `--attest` flag for the `docker build` command.

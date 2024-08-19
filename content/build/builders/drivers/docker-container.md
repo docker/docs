@@ -5,6 +5,7 @@ keywords: build, buildx, driver, builder, docker-container
 aliases:
   - /build/buildx/drivers/docker-container/
   - /build/building/drivers/docker-container/
+  - /build/drivers/docker-container/
 ---
 
 The Docker container driver allows creation of a managed and customizable
@@ -15,7 +16,7 @@ Docker driver. For example:
 
 - Specify custom BuildKit versions to use.
 - Build multi-arch images, see [QEMU](#qemu)
-- Advanced options for [cache import and export](../cache/backends/index.md)
+- Advanced options for [cache import and export](/build/cache/backends/_index.md)
 
 ## Synopsis
 
@@ -132,14 +133,14 @@ $ docker buildx build \
 You can customize the network that the builder container uses. This is useful
 if you need to use a specific network for your builds.
 
-For example, let's [create a network](../../reference/cli/docker/network/create.md)
+For example, let's [create a network](/reference/cli/docker/network/create.md)
 named `foonet`:
 
 ```console
 $ docker network create foonet
 ```
 
-Now create a [`docker-container` builder](../../reference/cli/docker/buildx/create.md)
+Now create a [`docker-container` builder](/reference/cli/docker/buildx/create.md)
 that will use this network:
 
 ```console
@@ -149,13 +150,13 @@ $ docker buildx create --use \
   --driver-opt "network=foonet"
 ```
 
-Boot and [inspect `mybuilder`](../../reference/cli/docker/buildx/inspect.md):
+Boot and [inspect `mybuilder`](/reference/cli/docker/buildx/inspect.md):
 
 ```console
 $ docker buildx inspect --bootstrap
 ```
 
-[Inspect the builder container](../../reference/cli/docker/inspect.md)
+[Inspect the builder container](/reference/cli/docker/inspect.md)
 and see what network is being used:
 
 ```console
@@ -166,4 +167,4 @@ map[foonet:0xc00018c0c0]
 ## Further reading
 
 For more information on the Docker container driver, see the
-[buildx reference](../../reference/cli/docker/buildx/create.md#driver).
+[buildx reference](/reference/cli/docker/buildx/create.md#driver).

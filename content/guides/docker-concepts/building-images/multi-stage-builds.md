@@ -2,6 +2,8 @@
 title: Multi-stage builds
 keywords: concepts, build, images, container, docker desktop
 description: This concept page will teach you about the purpose of the multi-stage build and its benefits
+aliases:
+  - /build/guides/multi-stage/
 ---
 
 {{< youtube-embed vR185cjwxZ8 >}}

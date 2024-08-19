@@ -20,7 +20,7 @@ use case falls within the
 
 This cache storage backend is not supported with the default `docker` driver.
 To use this feature, create a new builder using a different driver. See
-[Build drivers](../../drivers/_index.md) for more information.
+[Build drivers](/build/builders/drivers/_index.md) for more information.
 
 ## Synopsis
 

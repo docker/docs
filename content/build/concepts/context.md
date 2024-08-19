@@ -2,6 +2,8 @@
 title: Build context
 description: Learn how to use the build context to access files from your Dockerfile
 keywords: build, buildx, buildkit, context, git, tarball, stdin
+aliases:
+  - /build/building/context/
 ---
 
 The `docker build` and `docker buildx build` commands build Docker images from

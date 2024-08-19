@@ -623,7 +623,7 @@ examples: |-
     --attest=type=provenance,...
     ```
 
-    Create [image attestations](/build/attestations/).
+    Create [image attestations](/build/metadata/attestations/).
     BuildKit currently supports:
 
     - `sbom` - Software Bill of Materials.
@@ -631,7 +631,7 @@ examples: |-
       Use `--attest=type=sbom` to generate an SBOM for an image at build-time.
       Alternatively, you can use the [`--sbom` shorthand](#sbom).
 
-      For more information, see [here](/build/attestations/sbom/).
+      For more information, see [here](/build/metadata/attestations/sbom/).
 
     - `provenance` - SLSA Provenance
 
@@ -641,7 +641,7 @@ examples: |-
       By default, a minimal provenance attestation will be created for the build
       result, which will only be attached for images pushed to registries.
 
-      For more information, see [here](/build/attestations/slsa-provenance/).
+      For more information, see [here](/build/metadata/attestations/slsa-provenance/).
 
     ### Allow extra privileged entitlement (--allow) {#allow}
 
@@ -1062,13 +1062,19 @@ examples: |-
 
     > **Note**
     >
-    > Build record [provenance](/build/attestations/slsa-provenance/#provenance-attestation-example)
+    > Build record [provenance](/build/metadata/attestations/slsa-provenance/#provenance-attestation-example)
     > (`buildx.build.provenance`) includes minimal provenance by default. Set the
     > `BUILDX_METADATA_PROVENANCE` environment variable to customize this behavior:
     >
     > - `min` sets minimal provenance (default).
     > - `max` sets full provenance.
     > - `disabled`, `false` or `0` doesn't set any provenance.
+
+    > **Note**
+    >
+    > Build warnings (`buildx.build.warnings`) are not included by default. Set the
+    > `BUILDX_METADATA_WARNINGS` environment variable to `1` or `true` to
+    > include them.
 
     ### Set the networking mode for the RUN instructions during build (--network) {#network}
 
@@ -1079,12 +1085,6 @@ examples: |-
     - `host`: Run in the host’s network environment.
 
     Find more details in the [Dockerfile reference](/reference/dockerfile/#run---network).
-
-    > **Note**
-    >
-    > Build warnings (`buildx.build.warnings`) are not included by default. Set the
-    > `BUILDX_METADATA_WARNINGS` environment variable to `1` or `true` to
-    > include them.
 
     ### Ignore build cache for specific stages (--no-cache-filter) {#no-cache-filter}
 
@@ -1148,7 +1148,7 @@ examples: |-
     ```
 
     Sets the export action for the build result. The default output, when using the
-    `docker` [build driver](/build/drivers/), is a container
+    `docker` [build driver](/build/builders/drivers/), is a container
     image exported to the local image store. The `--output` flag makes this step
     configurable allows export of results directly to the client's filesystem, an
     OCI image tarball, a registry, and more.
@@ -1356,7 +1356,7 @@ examples: |-
     to using the containerd image store.
 
     For more information about provenance attestations, see
-    [here](/build/attestations/slsa-provenance/).
+    [here](/build/metadata/attestations/slsa-provenance/).
 
     ### Push the build result to a registry (--push) {#push}
 
@@ -1378,7 +1378,7 @@ examples: |-
     to a registry if you use the default image store. Alternatively, you can switch
     to using the containerd image store.
 
-    For more information, see [here](/build/attestations/sbom/).
+    For more information, see [here](/build/metadata/attestations/sbom/).
 
     ### Secret to expose to the build (--secret) {#secret}
 

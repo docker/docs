@@ -191,7 +191,7 @@ while creating a builder with the [`--config` flags](../../reference/cli/docker/
   max-parallelism = 4
 ```
 
-Now you can [create a `docker-container` builder](../drivers/docker-container.md)
+Now you can [create a `docker-container` builder](/build/builders/drivers/docker-container.md)
 that will use this BuildKit configuration to limit parallelism.
 
 ```console

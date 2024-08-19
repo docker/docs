@@ -114,7 +114,7 @@ For example, to exclude all files with the `.md` extension:
 ```
 
 For information on creating one, see
-[Dockerignore file](../../build/building/context.md#dockerignore-files).
+[Dockerignore file](/build/concepts/context.md#dockerignore-files).
 
 ## Create ephemeral containers
 
@@ -578,8 +578,8 @@ For more information about `ENV`, see [Dockerfile reference for the ENV instruct
 ### ADD or COPY
 
 `ADD` and `COPY` are functionally similar. `COPY` supports basic copying of
-files into the container, from the [build context](../../build/building/context.md)
-or from a stage in a [multi-stage build](../../build/building/multi-stage.md).
+files into the container, from the [build context](/build/concepts/context.md)
+or from a stage in a [multi-stage build](/build/building/multi-stage.md).
 `ADD` supports features for fetching files from remote HTTPS and Git URLs, and
 extracting tar files automatically when adding files from the build context.
 

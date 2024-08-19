@@ -263,9 +263,9 @@ module:
         - source: docs/buildkitd.toml.md
           target: content/build/buildkit/toml-configuration.md
         - source: docs/attestations/slsa-definitions.md
-          target: content/build/attestations/slsa-definitions.md
+          target: content/build/metadata/attestations/slsa-definitions.md
         - source: docs/attestations/attestation-storage.md
-          target: content/build/attestations/attestation-storage.md
+          target: content/build/metadata/attestations/attestation-storage.md
 
     - path: github.com/docker/buildx
       mounts:

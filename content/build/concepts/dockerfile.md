@@ -1,9 +1,10 @@
 ---
-title: Packaging your software
+title: Dockerfile overview
 description: Learn about Dockerfiles and how to use them with Docker Images to build and package your software
 keywords: build, buildx, buildkit, getting started, dockerfile
 aliases:
 - /build/hellobuild/
+- /build/building/packaging/
 ---
 
 ## Dockerfile
@@ -113,7 +114,7 @@ Here's a breakdown of what this Dockerfile does:
 The first line to add to a Dockerfile is a [`# syntax` parser directive](../../reference/dockerfile.md#syntax).
 While optional, this directive instructs the Docker builder what syntax to use
 when parsing the Dockerfile, and allows older Docker versions with [BuildKit enabled](../buildkit/index.md#getting-started)
-to use a specific [Dockerfile frontend](../dockerfile/frontend.md) before
+to use a specific [Dockerfile frontend](../buildkit/frontend.md) before
 starting the build. [Parser directives](../../reference/dockerfile.md#parser-directives)
 must appear before any other comment, whitespace, or Dockerfile instruction in
 your Dockerfile, and should be the first line in Dockerfiles.
@@ -276,11 +277,3 @@ $ docker run -p 127.0.0.1:8000:8000 test:latest
 
 This publishes the container's port 8000 to `http://localhost:8000` on the
 Docker host.
-
-## Other resources
-
-If you are interested in examples in other languages, such as Go, check out
-our [language-specific guides](../../language/index.md) in the Guides section.
-
-For more information about building, including advanced use cases and patterns,
-refer to the [Build with Docker](../guide/index.md) guide.
