@@ -43,7 +43,7 @@ If both files exist, Compose prefers the canonical `compose.yaml`.
 
 You can use [fragments](/reference/compose-file/fragments.md) and [extensions](/reference/compose-file/extension.md) to keep your Compose file efficient and easy to maintain.
 
-Multiple Compose files can be [merged](merge.md) together to define the application model. The combination of YAML files is implemented by appending or overriding YAML elements based on the Compose file order you set. 
+Multiple Compose files can be [merged](/reference/compose-file/merge.md) together to define the application model. The combination of YAML files is implemented by appending or overriding YAML elements based on the Compose file order you set. 
 Simple attributes and maps get overridden by the highest order Compose file, lists get merged by appending. Relative
 paths are resolved based on the first Compose file's parent folder, whenever complimentary files being
 merged are hosted in other folders. As some Compose file elements can both be expressed as single strings or complex objects, merges apply to

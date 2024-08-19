@@ -60,7 +60,7 @@ You can check the [Compose Specification JSON schema](https://github.com/compose
 
 As part of the Go templating syntax, Compose Bridge offers a set of YAML helper functions designed to manipulate data within the templates efficiently:
 
-- `seconds`: Converts a [duration](extension.md#specifying-durations) into an integer
+- `seconds`: Converts a [duration](/reference/compose-file/extension.md#specifying-durations) into an integer
 - `uppercase`: Converts a string into upper case characters
 - `title`: Converts a string by capitalizing the first letter of each word
 - `safe`: Converts a string into a safe identifier, replacing all characters (except lowercase a-z) with `-`

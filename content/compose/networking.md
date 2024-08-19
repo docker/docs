@@ -129,7 +129,7 @@ networks:
       bar: "2"
 ```
 
-Networks can be configured with static IP addresses by setting the [ipv4_address and/or ipv6_address](compose-file/services.md#ipv4_address-ipv6_address) for each attached network.
+Networks can be configured with static IP addresses by setting the [ipv4_address and/or ipv6_address](/reference/compose-file/services.md#ipv4_address-ipv6_address) for each attached network.
 
 Networks can also be given a [custom name](/reference/compose-file/networks.md#name):
 
