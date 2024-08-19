@@ -244,5 +244,5 @@ To import a volume:
 
 ## Additional resources
 
-- [Persisting container data](../../guides/docker-concepts/running-containers/persisting-container-data.md)
+- [Persisting container data](/get-started/docker-concepts/running-containers/persisting-container-data.md)
 - [Use volumes](/engine/storage/volumes.md)

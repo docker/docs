@@ -122,5 +122,5 @@ can also:
 
 ## Additional resources
 
-- [What is a container](../../guides/docker-concepts/the-basics/what-is-a-container.md)
-- [Run multi-container applications](../../guides/docker-concepts/running-containers/multi-container-applications.md)
+- [What is a container](/get-started/docker-concepts/the-basics/what-is-a-container.md)
+- [Run multi-container applications](/get-started/guides/docker-concepts/running-containers/multi-container-applications.md)
