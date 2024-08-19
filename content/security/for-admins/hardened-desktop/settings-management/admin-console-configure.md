@@ -14,6 +14,9 @@ EXPLAIN
  - can be done at org level
  - what creating a policy means, can apply to all users or select users
 
+
+Note: if you have an admin-settings.json form, you can switch to admin console to make it easier (add corresponding tip to json file page)
+
 ## Prerequisites
 
 - [Download and install Docker Desktop 4.13.0 or later](/desktop/release-notes.md).
