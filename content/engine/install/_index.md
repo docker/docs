@@ -123,4 +123,4 @@ Security reports are greatly appreciated, and Docker will publicly thank you for
 ## Get started
 
 After setting up Docker, you can learn the basics with
-[Getting started with Docker](../../guides/getting-started/_index.md).
+[Getting started with Docker](/get-started/getting-started/_index.md).

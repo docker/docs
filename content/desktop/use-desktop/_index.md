@@ -26,7 +26,7 @@ In addition, the Docker Dashboard allows you to:
 - Be notified of new releases, installation progress updates, and more in the **Notifications center**. Select the bell icon in the bottom-right corner of the Docker Dashboard to access the notification center.
 - Access the **Learning center** from the Dashboard header. It helps you get started with quick in-app walkthroughs and provides other resources for learning about Docker. 
 
-  For a more detailed guide about getting started, see [Get started](../../guides/getting-started/_index.md).
+  For a more detailed guide about getting started, see [Get started](/get-started/getting-started/_index.md).
 - Get to the [Docker Scout](../../scout/_index.md) dashboard.
 - Check the status of Docker services.
 

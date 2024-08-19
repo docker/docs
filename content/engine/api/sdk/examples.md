@@ -12,7 +12,7 @@ aliases:
 ---
 
 After you
-[install Docker](../../../get-docker.md), you can
+[install Docker](/get-started/get-docker.md), you can
 [install the Go or Python SDK](index.md#install-the-sdks) and
 also try out the Docker Engine API.
 

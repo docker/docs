@@ -22,7 +22,7 @@ perform face detection. In this guide, you'll explore how to:
 ## Prerequisites
 
 * You have installed the latest version of
-  [Docker Desktop](../../../get-docker.md).
+  [Docker Desktop](/get-started/get-docker.md).
 * You have a [Git client](https://git-scm.com/downloads). The examples in this
   guide use a command-line based Git client, but you can use any client.
 
