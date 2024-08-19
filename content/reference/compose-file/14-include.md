@@ -2,9 +2,11 @@
 title: Include
 description: Learn about include
 keywords: compose, compose specification, include, compose file reference
+aliases: 
+ - /compose/compose-file/14-include/
 ---
 
-{{< introduced compose 2.20.0 "../release-notes.md#2200" >}}
+{{< introduced compose 2.20.0 "/compose/release-notes.md#2200" >}}
 
 A Compose application can declare dependency on another Compose application. This is useful if:
 - You want to reuse other Compose files.
@@ -116,4 +118,4 @@ override values for customization.
 
 ## Additional resources
 
-For more information on using `include`, see [Working with multiple Compose files](../multiple-compose-files/_index.md)
+For more information on using `include`, see [Working with multiple Compose files](/compose/multiple-compose-files/_index.md)

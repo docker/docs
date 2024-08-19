@@ -2,6 +2,8 @@
 title: Merge
 description: Learn about merging rules
 keywords: compose, compose specification, merge, compose file reference
+aliases: 
+ - /compose/compose-file/13-merge/
 ---
 
 {{< include "compose/merge.md" >}}
@@ -179,7 +181,7 @@ services:
 
 ### Replace value
 
-{{< introduced compose 2.24.4 "../release-notes.md#2244" >}}
+{{< introduced compose 2.24.4 "/compose/release-notes.md#2244" >}}
 
 While `!reset` can be used to remove a declaration from a Compose file using an override file, `!override` allows you 
 to fully replace an attribute, bypassing the standard merge rules. A typical example is to fully replace a resource definition, to rely on a distinct model but using the same name.
@@ -217,5 +219,5 @@ If `!override` had not been used, both `8080:80` and `8443:443` would be exposed
 
 ## Additional resources
 
-For more information on how merge can be used to create a composite Compose file, see [Working with multiple Compose files](../multiple-compose-files/_index.md)
+For more information on how merge can be used to create a composite Compose file, see [Working with multiple Compose files](/compose/multiple-compose-files/_index.md)
 

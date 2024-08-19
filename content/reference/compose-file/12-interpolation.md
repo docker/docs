@@ -2,6 +2,8 @@
 title: Interpolation
 description: Learn about interpolation
 keywords: compose, compose specification, interpolation, compose file reference
+aliases: 
+ - /compose/compose-file/12-interpolation/
 ---
 
 {{< include "compose/interpolation.md" >}}

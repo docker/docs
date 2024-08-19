@@ -222,7 +222,7 @@ The following is the updated `compose.yaml` file.
 ```yaml {hl_lines=["17-23","30-55"]}
 # Comments are provided throughout this file to help you get started.
 # If you need more help, visit the Docker compose reference guide at
-# https://docs.docker.com/compose/compose-file/
+# https://docs.docker.com/reference/compose-file/
 
 # Here the instructions define your application as a service called "server".
 # This service is built from the Dockerfile in the current directory.

@@ -2,6 +2,8 @@
 title: Networks top-level elements
 description: Explore all the attributes the networks top-level element can have.
 keywords: compose, compose specification, networks, compose file reference
+aliases:
+ - /compose/compose-file/06-networks/
 ---
 
 {{< include "compose/networks.md" >}}
@@ -217,4 +219,4 @@ networks:
 
 ## Additional resources
 
-For more examples, see [Networking in Compose](../networking.md).
+For more examples, see [Networking in Compose](/compose/networking.md).

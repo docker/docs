@@ -2,6 +2,8 @@
 title: Fragments
 description: Understand how to use fragments
 keywords: compose, compose specification, fragments, compose file reference
+aliases: 
+ - /compose/compose-file/10-fragments/
 ---
 
 {{< include "compose/fragments.md" >}}

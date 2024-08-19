@@ -279,7 +279,7 @@ directory.
 
 - [Dockerfile](/reference/dockerfile/)
 - [.dockerignore](/reference/dockerfile/#dockerignore-file)
-- [docker-compose.yaml](../../compose/compose-file/_index.md)
+- [docker-compose.yaml](/reference/compose-file/_index.md)
 
 ## Run the application
 

@@ -245,7 +245,7 @@
   - /go/dockerfile-aptget-best-practices/
 "/build/building/context/#dockerignore-files":
   - /go/build-context-dockerignore/
-"/compose/compose-file":
+"/reference/compose-file":
   - /go/compose-spec-reference/
 "/reference/dockerfile":
   - /go/dockerfile-reference/

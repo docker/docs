@@ -62,7 +62,7 @@ Press `ctrl+c` in the terminal to stop your application.
 In this section, you also learned how to use Compose Watch to automatically rebuild and run your container when you update your code.
 
 Related information:
- - [Compose file reference](/compose/compose-file/)
+ - [Compose file reference](/reference/compose-file/)
  - [Compose file watch](../../compose/file-watch.md)
  - [Multi-stage builds](../../build/building/multi-stage.md)
 

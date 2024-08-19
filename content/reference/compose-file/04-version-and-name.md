@@ -2,6 +2,8 @@
 title: Version and name top-level elements
 description: Understand when and if to set the version and name top-level element
 keywords: compose, compose specification, services, compose file reference
+aliases:
+ - /compose/compose-file/04-version-and-name/
 ---
 
 ## Version top-level element (obsolete)
@@ -32,4 +34,4 @@ services:
     command: echo "I'm running ${COMPOSE_PROJECT_NAME}"
 ```
 
-For more information on other ways to name Compose projects, see [Specify a project name](../project-name.md).
+For more information on other ways to name Compose projects, see [Specify a project name](/compose/project-name.md).

@@ -2,6 +2,8 @@
 title: Secrets top-level elements
 description: Explore all the attributes the secrets top-level element can have.
 keywords: compose, compose specification, secrets, compose file reference
+aliases: 
+ - /compose/compose-file/09-secrets/
 ---
 
 Secrets are a flavor of [Configs](08-configs.md) focusing on sensitive data, with specific constraint for this usage. 
@@ -38,4 +40,4 @@ secrets:
 
 ## Additional resources
 
-For more information, see [How to use secrets in Compose](../use-secrets.md).
+For more information, see [How to use secrets in Compose](/compose/use-secrets.md).

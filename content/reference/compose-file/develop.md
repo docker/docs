@@ -2,6 +2,8 @@
 title: Compose Develop Specification
 description: Learn about the Compose Develop Specification
 keywords: compose, compose specification, compose file reference, compose develop specification
+aliases:
+ - /compose/compose-file/develop/
 ---
 
 > **Note:** 
@@ -46,7 +48,7 @@ The `develop` subsection defines configuration options that are applied by Compo
 ### watch
 
 The `watch` attribute defines a list of rules that control automatic service updates based on local file changes. `watch` is a sequence, each individual item in the sequence defines a rule to be applied by 
-Compose to monitor source code for changes. For more information, see [Use Compose Watch](../file-watch.md).
+Compose to monitor source code for changes. For more information, see [Use Compose Watch](/compose/file-watch.md).
 
 #### action
 

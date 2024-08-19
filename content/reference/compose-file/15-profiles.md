@@ -2,6 +2,8 @@
 title: Profiles
 description: Learn about profiles
 keywords: compose, compose specification, profiles, compose file reference
+aliases: 
+ - /compose/compose-file/15-profiles/
 ---
 
 With profiles you can define a set of active profiles so your Compose application model is adjusted for various usages and environments.
@@ -65,4 +67,4 @@ In the above example:
   profile `debug` is automatically enabled and service `test_lib` is pulled in as a dependency starting both
   services `debug_lib` and `test_lib`.
 
-See how you can use `profiles` in [Docker Compose](../profiles.md).
+See how you can use `profiles` in [Docker Compose](/compose/profiles.md).

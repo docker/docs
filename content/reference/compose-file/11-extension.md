@@ -2,6 +2,8 @@
 title: Extensions
 description: Understand how to use extensions
 keywords: compose, compose specification, extensions, compose file reference
+aliases: 
+ - /compose/compose-file/11-extension/
 ---
 
 {{< include "compose/extension.md" >}}
