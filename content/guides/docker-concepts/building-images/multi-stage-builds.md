@@ -2,6 +2,12 @@
 title: Multi-stage builds
 keywords: concepts, build, images, container, docker desktop
 description: This concept page will teach you about the purpose of the multi-stage build and its benefits
+summary: |
+  By separating the build environment from the final runtime environment, you
+  can significantly reduce the image size and attack surface. In this guide,
+  you'll unlock the power of multi-stage builds to create lean and efficient
+  Docker images, essential for minimizing overhead and enhancing deployment in
+  production environments.
 ---
 
 {{< youtube-embed vR185cjwxZ8 >}}
@@ -326,5 +332,4 @@ Now that you have the project, you’re ready to create the `Dockerfile`.
 * [Dockerfile best practices](/develop/develop-images/dockerfile_best-practices/)
 * [Base images](/build/building/base-images/)
 * [Spring Boot Docker](https://spring.io/guides/topicals/spring-boot-docker)
-
 
