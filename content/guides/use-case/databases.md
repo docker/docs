@@ -641,7 +641,7 @@ To run your containers with Docker Compose:
       a service joins the default network and is both reachable by other
       containers on that network, and discoverable by the service's name.
       Therefore, in the `PMA_HOST` environment variable, you can specify the
-      service name, `db`, in order to connect to the database service. For more details about Compose, see the [Compose file reference](/compose/compose-file/).
+      service name, `db`, in order to connect to the database service. For more details about Compose, see the [Compose file reference](/reference/compose-file/).
 
 2. Run Docker Compose.
    1. Open a terminal and change directory to the directory where your
@@ -673,6 +673,6 @@ Related information:
 
 - [Docker Hub database images](https://hub.docker.com/search?q=database&type=image)
 - [Dockerfile reference](/reference/dockerfile/)
-- [Compose file reference](/compose/compose-file/)
+- [Compose file reference](/reference/compose-file/)
 - [CLI reference](/reference/cli/docker/)
 - [Database samples](../../samples/_index.md#databases)

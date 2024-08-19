@@ -2,6 +2,8 @@
 title: Compose Build Specification
 description: Learn about the Compose Build Specification
 keywords: compose, compose specification, compose file reference, compose build specification
+aliases: 
+ - /compose/compose-file/build/
 ---
 
 {{< include "compose/build.md" >}}
@@ -15,7 +17,7 @@ from the directory containing your Compose file. If it is absolute, the path pre
 
 ## Using `build` and `image`
 
-When Compose is confronted with both a `build` subsection for a service and an `image` attribute, it follows the rules defined by the [`pull_policy`](05-services.md#pull_policy) attribute. 
+When Compose is confronted with both a `build` subsection for a service and an `image` attribute, it follows the rules defined by the [`pull_policy`](services.md#pull_policy) attribute. 
 
 If `pull_policy` is missing from the service definition, Compose attempts to pull the image first and then builds from source if the image isn't found in the registry or platform cache. 
 
@@ -80,7 +82,7 @@ Alternatively `build` can be an object with fields defined as follows:
 
 ### additional_contexts
 
-{{< introduced compose 2.17.0 "../release-notes.md#2170" >}}
+{{< introduced compose 2.17.0 "/compose/release-notes.md#2170" >}}
 
 `additional_contexts` defines a list of named contexts the image builder should use during image build.
 
@@ -226,7 +228,7 @@ build:
 
 ### dockerfile_inline
 
-{{< introduced compose 2.17.0 "../release-notes.md#2170" >}}
+{{< introduced compose 2.17.0 "/compose/release-notes.md#2170" >}}
 
 `dockerfile_inline` defines the Dockerfile content as an inlined string in a Compose file. When set, the `dockerfile`
 attribute is not allowed and Compose rejects any Compose file having both set.
@@ -243,7 +245,7 @@ build:
 
 ### entitlements
 
-{{< introduced compose 2.27.1 "../release-notes.md#2271" >}}
+{{< introduced compose 2.27.1 "/compose/release-notes.md#2271" >}}
 
 `entitlements` defines extra privileged entitlements to be allowed during the build.
 
@@ -255,7 +257,7 @@ build:
 
 ### extra_hosts
 
-`extra_hosts` adds hostname mappings at build-time. Use the same syntax as [extra_hosts](05-services.md#extra_hosts).
+`extra_hosts` adds hostname mappings at build-time. Use the same syntax as [extra_hosts](services.md#extra_hosts).
 
 ```yml
 extra_hosts:
@@ -270,7 +272,7 @@ extra_hosts:
   - "myhostv6=[::1]"
 ```
 
-The separator `=` is preferred, but `:` can also be used. Introduced in Docker Compose version [2.24.1](../release-notes.md#2241). For example:
+The separator `=` is preferred, but `:` can also be used. Introduced in Docker Compose version [2.24.1](/compose/release-notes.md#2241). For example:
 
 ```yml
 extra_hosts:
@@ -289,7 +291,7 @@ configuration, which means for Linux `/etc/hosts` will get extra lines:
 
 ### isolation
 
-`isolation` specifies a build’s container isolation technology. Like [isolation](05-services.md#isolation), supported values
+`isolation` specifies a build’s container isolation technology. Like [isolation](services.md#isolation), supported values
 are platform specific.
 
 ### labels
@@ -348,7 +350,7 @@ has been updated on registry (see [pull](#pull)).
 
 ### platforms
 
-`platforms` defines a list of target [platforms](05-services.md#platform).
+`platforms` defines a list of target [platforms](services.md#platform).
 
 ```yml
 build:
@@ -389,7 +391,7 @@ Composes reports an error in the following cases:
 
 ### privileged
 
-{{< introduced compose 2.15.0 "../release-notes.md#2" >}}
+{{< introduced compose 2.15.0 "/compose/release-notes.md#2" >}}
 
 `privileged` configures the service image to build with elevated privileges. Support and actual impacts are platform specific.
 
@@ -406,11 +408,11 @@ available in the local image store.
 
 ### secrets
 
-`secrets` grants access to sensitive data defined by [secrets](05-services.md#secrets) on a per-service build basis. Two
+`secrets` grants access to sensitive data defined by [secrets](services.md#secrets) on a per-service build basis. Two
 different syntax variants are supported: the short syntax and the long syntax.
 
 Compose reports an error if the secret isn't defined in the
-[`secrets`](09-secrets.md) section of this Compose file.
+[`secrets`](secrets.md) section of this Compose file.
 
 #### Short syntax
 
@@ -473,7 +475,7 @@ secrets:
 
 Service builds may be granted access to multiple secrets. Long and short syntax for secrets may be used in the
 same Compose file. Defining a secret in the top-level `secrets` must not imply granting any service build access to it.
-Such grant must be explicit within service specification as [secrets](05-services.md#secrets) service element.
+Such grant must be explicit within service specification as [secrets](services.md#secrets) service element.
 
 ### ssh
 
@@ -511,7 +513,7 @@ For illustration, [BuildKit extended syntax](https://github.com/compose-spec/com
 ### shm_size
 
 `shm_size` sets the size of the shared memory (`/dev/shm` partition on Linux) allocated for building Docker images. Specify
-as an integer value representing the number of bytes or as a string expressing a [byte value](11-extension.md#specifying-byte-values).
+as an integer value representing the number of bytes or as a string expressing a [byte value](extension.md#specifying-byte-values).
 
 ```yml
 build:
@@ -528,7 +530,7 @@ build:
 ### tags
 
 `tags` defines a list of tag mappings that must be associated to the build image. This list comes in addition to
-the `image` [property defined in the service section](05-services.md#image)
+the `image` [property defined in the service section](services.md#image)
 
 ```yml
 tags:
@@ -548,7 +550,7 @@ build:
 
 ### ulimits
 
-{{< introduced compose 2.23.1 "../release-notes.md#2231" >}}
+{{< introduced compose 2.23.1 "/compose/release-notes.md#2231" >}}
 
 `ulimits` overrides the default ulimits for a container. It's specified either as an integer for a single limit
 or as mapping for soft/hard limits.

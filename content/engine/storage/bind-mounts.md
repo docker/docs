@@ -415,9 +415,9 @@ volumes:
 ```
 
 For more information about using volumes of the `bind` type with Compose, see
-[Compose reference on volumes](/compose/compose-file/05-services.md#volumes).
+[Compose reference on volumes](/reference/compose-file/services.md#volumes).
 and
-[Compose reference on volume configuration](/compose/compose-file/05-services.md#volumes).
+[Compose reference on volume configuration](/reference/compose-file/services.md#volumes).
 
 ## Next steps
 

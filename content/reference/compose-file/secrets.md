@@ -2,11 +2,13 @@
 title: Secrets top-level elements
 description: Explore all the attributes the secrets top-level element can have.
 keywords: compose, compose specification, secrets, compose file reference
+aliases: 
+ - /compose/compose-file/09-secrets/
 ---
 
-Secrets are a flavor of [Configs](08-configs.md) focusing on sensitive data, with specific constraint for this usage. 
+Secrets are a flavor of [Configs](configs.md) focusing on sensitive data, with specific constraint for this usage. 
 
-Services can only access secrets when explicitly granted by a [`secrets` attribute](05-services.md#secrets) within the `services` top-level element.
+Services can only access secrets when explicitly granted by a [`secrets` attribute](services.md#secrets) within the `services` top-level element.
 
 The top-level `secrets` declaration defines or references sensitive data that is granted to the services in your Compose
 application. The source of the secret is either `file` or `environment`.
@@ -38,4 +40,4 @@ secrets:
 
 ## Additional resources
 
-For more information, see [How to use secrets in Compose](../use-secrets.md).
+For more information, see [How to use secrets in Compose](/compose/use-secrets.md).

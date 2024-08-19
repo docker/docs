@@ -78,7 +78,7 @@ directory.
 To learn more about the files that `docker init` added, see the following:
  - [Dockerfile](../../reference/dockerfile.md)
  - [.dockerignore](../../reference/dockerfile.md#dockerignore-file)
- - [compose.yaml](../../compose/compose-file/_index.md)
+ - [compose.yaml](/reference/compose-file/_index.md)
 
 ## Run the application
 

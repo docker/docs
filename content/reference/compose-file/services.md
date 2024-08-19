@@ -2,6 +2,8 @@
 title: Services top-level elements
 description: Explore all the attributes the services top-level element can have.
 keywords: compose, compose specification, services, compose file reference
+aliases:
+ - /compose/compose-file/05-services/
 ---
 
 {{< include "compose/services.md" >}}
@@ -86,7 +88,7 @@ annotations:
 
 ### attach
 
-{{< introduced compose 2.20.0 "../release-notes.md#2200" >}}
+{{< introduced compose 2.20.0 "/compose/release-notes.md#2200" >}}
 
 When `attach` is defined and set to `false` Compose does not collect service logs,
 until you explicitly request it to.
@@ -177,7 +179,7 @@ on Linux kernel.
 ### cpu_rt_runtime
 
 `cpu_rt_runtime` configures CPU allocation parameters for platforms with support for realtime scheduler. It can be either
-an integer value using microseconds as unit or a [duration](11-extension.md#specifying-durations).
+an integer value using microseconds as unit or a [duration](extension.md#specifying-durations).
 
 ```yml
  cpu_rt_runtime: '400ms'
@@ -187,7 +189,7 @@ an integer value using microseconds as unit or a [duration](11-extension.md#spec
 ### cpu_rt_period
 
 `cpu_rt_period` configures CPU allocation parameters for platforms with support for realtime scheduler. It can be either
-an integer value using microseconds as unit or a [duration](11-extension.md#specifying-durations).
+an integer value using microseconds as unit or a [duration](extension.md#specifying-durations).
 
 ```yml
  cpu_rt_period: '1400us'
@@ -228,7 +230,7 @@ cap_drop:
 
 ### cgroup
 
-{{< introduced compose 2.15.0 "../release-notes.md#2150" >}}
+{{< introduced compose 2.15.0 "/compose/release-notes.md#2150" >}}
 
 `cgroup` specifies the cgroup namespace to join. When unset, it is the container runtime's decision to
 select which cgroup namespace to use, if supported.
@@ -269,7 +271,7 @@ Configs allow services to adapt their behaviour without the need to rebuild a Do
 Services can only access configs when explicitly granted by the `configs` attribute. Two different syntax variants are supported.
 
 Compose reports an error if `config` doesn't exist on the platform or isn't defined in the
-[`configs` top-level element](08-configs.md) in the Compose file.
+[`configs` top-level element](configs.md) in the Compose file.
 
 There are two syntaxes defined for configs: a short syntax and a long syntax.
 
@@ -436,7 +438,7 @@ expressed in the short form.
 
 - `restart`: When set to `true` Compose restarts this service after it updates the dependency service.
   This applies to an explicit restart controlled by a Compose operation, and excludes automated restart by the container runtime
-  after the container dies. Introduced in Docker Compose version [2.17.0](../release-notes.md#2170).
+  after the container dies. Introduced in Docker Compose version [2.17.0](/compose/release-notes.md#2170).
 
 - `condition`: Sets the condition under which dependency is considered satisfied
   - `service_started`: An equivalent of the short syntax described above
@@ -446,7 +448,7 @@ expressed in the short form.
   - `service_completed_successfully`: Specifies that a dependency is expected to run
     to successful completion before starting a dependent service.
 - `required`: When set to `false` Compose only warns you when the dependency service isn't started or available. If it's not defined
-    the default value of `required` is `true`. Introduced in Docker Compose version [2.20.0](../release-notes.md#2200).
+    the default value of `required` is `true`. Introduced in Docker Compose version [2.20.0](/compose/release-notes.md#2200).
 
 Service dependencies cause the following behaviors:
 
@@ -487,7 +489,7 @@ Compose guarantees dependency services marked with
 
 ### develop
 
-{{< introduced compose 2.22.0 "../release-notes.md#2220" >}}
+{{< introduced compose 2.22.0 "/compose/release-notes.md#2220" >}}
 
 `develop` specifies the development configuration for maintaining a container in sync with source, as defined in the [Development Section](develop.md).
 
@@ -558,7 +560,7 @@ dns_search:
 
 ### driver_opts
 
-{{< introduced compose 2.27.1 "../release-notes.md#2271" >}}
+{{< introduced compose 2.27.1 "/compose/release-notes.md#2271" >}}
 
 `driver_opts` specifies a list of options as key-value pairs to pass to the driver. These options are
 driver-dependent. Consult the driver's documentation for more information.
@@ -648,7 +650,7 @@ Each line in an `.env` file must be in `VAR[=[VAL]]` format. The following synta
 
 - Lines beginning with `#` are processed as comments and ignored.
 - Blank lines are ignored.
-- Unquoted and double-quoted (`"`) values have [Interpolation](12-interpolation.md) applied.
+- Unquoted and double-quoted (`"`) values have [Interpolation](interpolation.md) applied.
 - Each line represents a key-value pair. Values can optionally be quoted.
   - `VAR=VAL` -> `VAL`
   - `VAR="VAL"` -> `VAL`
@@ -950,7 +952,7 @@ extra_hosts:
   - "myhostv6=[::1]"
 ```
 
-The separator `=` is preferred, but `:` can also be used. Introduced in Docker Compose version [2.24.1](../release-notes.md#2241). For example:
+The separator `=` is preferred, but `:` can also be used. Introduced in Docker Compose version [2.24.1](/compose/release-notes.md#2241). For example:
 
 ```yml
 extra_hosts:
@@ -1001,7 +1003,7 @@ been the case if `group_add` were not declared.
 
 {{< include "compose/services-healthcheck.md" >}} 
 
-For more information on `HEALTHCHECK`, see the [Dockerfile reference](../../reference/dockerfile.md#healthcheck).
+For more information on `HEALTHCHECK`, see the [Dockerfile reference](/reference/dockerfile.md#healthcheck).
 
 ```yml
 healthcheck:
@@ -1013,7 +1015,7 @@ healthcheck:
   start_interval: 5s
 ```
 
-`interval`, `timeout`, `start_period`, and `start_interval` are [specified as durations](11-extension.md#specifying-durations). Introduced in Docker Compose version [2.20.2](../release-notes.md#2202)
+`interval`, `timeout`, `start_period`, and `start_interval` are [specified as durations](extension.md#specifying-durations). Introduced in Docker Compose version [2.20.2](/compose/release-notes.md#2202)
 
 `test` defines the command Compose runs to check container health. It can be
 either a string or a list. If it's a list, the first item must be either `NONE`, `CMD` or `CMD-SHELL`.
@@ -1178,13 +1180,13 @@ are platform specific. Driver specific options can be set with `options` as key-
 
 ### mem_limit
 
-`mem_limit` configures a limit on the amount of memory a container can allocate, set as a string expressing a [byte value](11-extension.md#specifying-byte-values).
+`mem_limit` configures a limit on the amount of memory a container can allocate, set as a string expressing a [byte value](extension.md#specifying-byte-values).
 
 When set, `mem_limit` must be consistent with the `limits.memory` attribute in the [Deploy Specification](deploy.md#memory).
 
 ### mem_reservation
 
-`mem_reservation` configures a reservation on the amount of memory a container can allocate, set as a string expressing a [byte value](11-extension.md#specifying-byte-values).
+`mem_reservation` configures a reservation on the amount of memory a container can allocate, set as a string expressing a [byte value](extension.md#specifying-byte-values).
 
 When set, `mem_reservation` must be consistent with the `reservations.memory` attribute in the [Deploy Specification](deploy.md#memory).
 
@@ -1239,7 +1241,7 @@ services:
       - some-network
       - other-network
 ```
-For more information about the `networks` top-level element, see [Networks](06-networks.md).
+For more information about the `networks` top-level element, see [Networks](networks.md).
 
 #### aliases
 
@@ -1302,7 +1304,7 @@ networks:
 
 Specify a static IP address for a service container when joining the network.
 
-The corresponding network configuration in the [top-level networks section](06-networks.md) must have an
+The corresponding network configuration in the [top-level networks section](networks.md) must have an
 `ipam` attribute with subnet configurations covering each static address.
 
 ```yml
@@ -1348,7 +1350,7 @@ networks:
 
 #### mac_address
 
-{{< introduced compose 2.23.2 "../release-notes.md#2232" >}}
+{{< introduced compose 2.23.2 "/compose/release-notes.md#2232" >}}
 
 `mac_address` sets the MAC address used by the service container when connecting to this particular network.
 
@@ -1475,7 +1477,7 @@ expressed in the short form.
 - `published`: The publicly exposed port. It is defined as a string and can be set as a range using syntax `start-end`. It means the actual port is assigned a remaining available port, within the set range.
 - `host_ip`: The Host IP mapping, unspecified means all network interfaces (`0.0.0.0`).
 - `protocol`: The port protocol (`tcp` or `udp`). Defaults to `tcp`.
-- `app_protocol`: The application protocol (TCP/IP level 4 / OSI level 7) this port is used for. This is optional and can be used as a hint for Compose to offer richer behavior for protocols that it understands. Introduced in Docker Compose version [2.26.0](../release-notes.md#2260).
+- `app_protocol`: The application protocol (TCP/IP level 4 / OSI level 7) this port is used for. This is optional and can be used as a hint for Compose to offer richer behavior for protocols that it understands. Introduced in Docker Compose version [2.26.0](/compose/release-notes.md#2260).
 - `mode`: `host`: For publishing a host port on each node, or `ingress` for a port to be load balanced. Defaults to `ingress`.
 - `name`: A human-readable name for the port, used to document it's usage within the service.
 
@@ -1558,7 +1560,7 @@ Optionally, limit the number of restart retries the Docker daemon attempts.
 ```
 
 You can find more detailed information on restart policies in the
-[Restart Policies (--restart)](../../reference/cli/docker/container/run.md#restart)
+[Restart Policies (--restart)](/reference/cli/docker/container/run.md#restart)
 section of the Docker run reference page.
 
 ### runtime
@@ -1588,10 +1590,10 @@ When both are set, `scale` must be consistent with the `replicas` attribute in t
 Two different syntax variants are supported; the short syntax and the long syntax. Long and short syntax for secrets may be used in the same Compose file.
 
 Compose reports an error if the secret doesn't exist on the platform or isn't defined in the
-[`secrets` top-level section](09-secrets.md) of the Compose file.
+[`secrets` top-level section](secrets.md) of the Compose file.
 
 Defining a secret in the top-level `secrets` must not imply granting any service access to it.
-Such grant must be explicit within service specification as [secrets](09-secrets.md) service element.
+Such grant must be explicit within service specification as [secrets](secrets.md) service element.
 
 #### Short syntax
 
@@ -1660,17 +1662,17 @@ security_opt:
   - label:role:ROLE
 ```
 
-For further default labeling schemes you can override, see [Security configuration](../../reference/cli/docker/container/run.md#security-opt).
+For further default labeling schemes you can override, see [Security configuration](/reference/cli/docker/container/run.md#security-opt).
 
 ### shm_size
 
 `shm_size` configures the size of the shared memory (`/dev/shm` partition on Linux) allowed by the service container.
-It's specified as a [byte value](11-extension.md#specifying-byte-values).
+It's specified as a [byte value](extension.md#specifying-byte-values).
 
 ### stdin_open
 
 `stdin_open` configures a service's container to run with an allocated stdin. This is the same as running a container with the 
-`-i` flag. For more information, see [Keep STDIN open](../../reference/cli/docker/container/run/#interactive).
+`-i` flag. For more information, see [Keep STDIN open](/reference/cli/docker/container/run.md#interactive).
 
 Supported values are `true` or `false`.
 
@@ -1679,7 +1681,7 @@ Supported values are `true` or `false`.
 `stop_grace_period` specifies how long Compose must wait when attempting to stop a container if it doesn't
 handle SIGTERM (or whichever stop signal has been specified with
 [`stop_signal`](#stop_signal)), before sending SIGKILL. It's specified
-as a [duration](11-extension.md#specifying-durations).
+as a [duration](extension.md#specifying-durations).
 
 ```yml
     stop_grace_period: 1s
@@ -1725,7 +1727,7 @@ sysctls:
 You can only use sysctls that are namespaced in the kernel. Docker does not
 support changing sysctls inside a container that also modify the host system.
 For an overview of supported sysctls, refer to [configure namespaced kernel
-parameters (sysctls) at runtime](../../reference/cli/docker/container/run.md#sysctl).
+parameters (sysctls) at runtime](/reference/cli/docker/container/run.md#sysctl).
 
 ### tmpfs
 
@@ -1744,7 +1746,7 @@ tmpfs:
 ### tty
 
 `tty` configures a service's container to run with a TTY. This is the same as running a container with the 
-`-t` or `--tty` flag. For more information, see [Allocate a pseudo-TTY](../../reference/cli/docker/container/run/#tty).
+`-t` or `--tty` flag. For more information, see [Allocate a pseudo-TTY](/reference/cli/docker/container/run.md#tty).
 
 Supported values are `true` or `false`.
 
@@ -1776,7 +1778,7 @@ userns_mode: "host"
 
 ### uts
 
-{{< introduced compose 2.15.1 "../release-notes.md#2151" >}}
+{{< introduced compose 2.15.1 "/compose/release-notes.md#2151" >}}
 
 `uts` configures the UTS namespace mode set for the service container. When unspecified
 it is the runtime's decision to assign a UTS namespace, if supported. Available values are:
@@ -1813,7 +1815,7 @@ volumes:
   db-data:
 ```
 
-For more information about the `volumes` top-level element, see [Volumes](07-volumes.md).
+For more information about the `volumes` top-level element, see [Volumes](volumes.md).
 
 #### Short syntax
 
@@ -1847,7 +1849,7 @@ expressed in the short form.
 - `type`: The mount type. Either `volume`, `bind`, `tmpfs`, `npipe`, or `cluster`
 - `source`: The source of the mount, a path on the host for a bind mount, or the
   name of a volume defined in the
-  [top-level `volumes` key](07-volumes.md). Not applicable for a tmpfs mount.
+  [top-level `volumes` key](volumes.md). Not applicable for a tmpfs mount.
 - `target`: The path in the container where the volume is mounted.
 - `read_only`: Flag to set the volume as read-only.
 - `bind`: Used to configure additional bind options:
@@ -1861,13 +1863,13 @@ expressed in the short form.
   - `subpath`: Path inside a volume to mount instead of the volume root.
 - `tmpfs`: Configures additional tmpfs options:
   - `size`: The size for the tmpfs mount in bytes (either numeric or as bytes unit).
-  - `mode`: The file mode for the tmpfs mount as Unix permission bits as an octal number. Introduced in Docker Compose version [2.14.0](../release-notes.md#2260).
+  - `mode`: The file mode for the tmpfs mount as Unix permission bits as an octal number. Introduced in Docker Compose version [2.14.0](/compose/release-notes.md#2260).
 - `consistency`: The consistency requirements of the mount. Available values are platform specific.
 
 > [!TIP]
 >
 > Working with large repositories or monorepos, or with virtual file systems that are no longer scaling with your codebase? 
-> Compose now takes advantage of [Synchronized file shares](../../desktop/synchronized-file-sharing.md) and automatically creates file shares for bind mounts. 
+> Compose now takes advantage of [Synchronized file shares](/desktop/synchronized-file-sharing.md) and automatically creates file shares for bind mounts. 
 > Ensure you're signed in to Docker with a paid subscription and have enabled both **Access experimental features** and **Manage Synchronized file shares with Compose** in Docker Desktop's settings.
 
 ### volumes_from

@@ -2,6 +2,8 @@
 title: Fragments
 description: Understand how to use fragments
 keywords: compose, compose specification, fragments, compose file reference
+aliases: 
+ - /compose/compose-file/10-fragments/
 ---
 
 {{< include "compose/fragments.md" >}}
@@ -21,7 +23,7 @@ volumes:
 
 In the example above, a `default-volume` anchor is created based on the `db-data` volume. It is later reused by the alias `*default-volume` to define the `metrics` volume. 
 
-Anchor resolution takes place before [variables interpolation](12-interpolation.md), so variables can't be used to set anchors or aliases.
+Anchor resolution takes place before [variables interpolation](interpolation.md), so variables can't be used to set anchors or aliases.
 
 ## Example 2
 
@@ -38,7 +40,7 @@ services:
     environment: *env
 ```
 
-If you have an anchor that you want to use in more than one service, use it in conjunction with an [extension](11-extension.md) to make your Compose file easier to maintain.
+If you have an anchor that you want to use in more than one service, use it in conjunction with an [extension](extension.md) to make your Compose file easier to maintain.
 
 ## Example 3
 

@@ -31,7 +31,7 @@ When you're developing software, the ability to run an application in an
 isolated environment and interact with it is crucial. The Compose command
 line tool can be used to create the environment and interact with it.
 
-The [Compose file](../compose-file/_index.md) provides a way to document and configure
+The [Compose file](/reference/compose-file/_index.md) provides a way to document and configure
 all of the application's service dependencies (databases, queues, caches,
 web service APIs, etc). Using the Compose command line tool you can create
 and start one or more containers for each dependency with a single command
@@ -46,7 +46,7 @@ started guide" to a single machine-readable Compose file and a few commands.
 An important part of any Continuous Deployment or Continuous Integration process
 is the automated test suite. Automated end-to-end testing requires an
 environment in which to run tests. Compose provides a convenient way to create
-and destroy isolated testing environments for your test suite. By defining the full environment in a [Compose file](../compose-file/_index.md), you can create and destroy these environments in just a few commands:
+and destroy isolated testing environments for your test suite. By defining the full environment in a [Compose file](/reference/compose-file/_index.md), you can create and destroy these environments in just a few commands:
 
 ```console
 $ docker compose up -d

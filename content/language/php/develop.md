@@ -111,7 +111,7 @@ secrets:
 > [!NOTE]
 >
 > To learn more about the instructions in the Compose file, see [Compose file
-> reference](/compose/compose-file/).
+> reference](/reference/compose-file/).
 
 Before you run the application using Compose, notice that this Compose file uses
 `secrets` and specifies a `password.txt` file to hold the database's password.
@@ -418,7 +418,7 @@ database and persist data. You also learned how to use Compose Watch to automati
 
 Related information:
  - [Build with Docker guide](../../build/guide/index.md)
- - [Compose file reference](/compose/compose-file/)
+ - [Compose file reference](/reference/compose-file/)
  - [Compose file watch](../../compose/file-watch.md)
  - [Dockerfile reference](../../reference/dockerfile.md)
  - [Official Docker Image for PHP](https://hub.docker.com/_/php)

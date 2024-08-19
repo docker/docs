@@ -2,11 +2,13 @@
 title: Networks top-level elements
 description: Explore all the attributes the networks top-level element can have.
 keywords: compose, compose specification, networks, compose file reference
+aliases:
+ - /compose/compose-file/06-networks/
 ---
 
 {{< include "compose/networks.md" >}}
 
-To use a network across multiple services, you must explicitly grant each service access by using the [networks](05-services.md) attribute within the `services` top-level element. The `networks` top-level element has additional syntax that provides more granular control.
+To use a network across multiple services, you must explicitly grant each service access by using the [networks](services.md) attribute within the `services` top-level element. The `networks` top-level element has additional syntax that provides more granular control.
 
 ## Examples
 
@@ -217,4 +219,4 @@ networks:
 
 ## Additional resources
 
-For more examples, see [Networking in Compose](../networking.md).
+For more examples, see [Networking in Compose](/compose/networking.md).

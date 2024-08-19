@@ -31,7 +31,7 @@ grid:
   description: Find information on defining services, networks, and volumes for a
     Docker application.
   icon: polyline
-  link: /compose/compose-file
+  link: /reference/compose-file
 - title: Browse common FAQs
   description: Explore general FAQs and find out how to give feedback.
   icon: help

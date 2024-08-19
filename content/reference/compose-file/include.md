@@ -2,9 +2,11 @@
 title: Include
 description: Learn about include
 keywords: compose, compose specification, include, compose file reference
+aliases: 
+ - /compose/compose-file/14-include/
 ---
 
-{{< introduced compose 2.20.0 "../release-notes.md#2200" >}}
+{{< introduced compose 2.20.0 "/compose/release-notes.md#2200" >}}
 
 A Compose application can declare dependency on another Compose application. This is useful if:
 - You want to reuse other Compose files.
@@ -34,7 +36,7 @@ services:
       - serviceB #use serviceB directly as if it was declared in this Compose file
 ```
 
-Compose also supports the use of interpolated variables with `include`. It's recommended that you [specify mandatory variables](12-interpolation.md). For example:
+Compose also supports the use of interpolated variables with `include`. It's recommended that you [specify mandatory variables](interpolation.md). For example:
 
 ```text
 include:
@@ -79,7 +81,7 @@ include:
 
 `path` is required and defines the location of the Compose file(s) to be parsed and included into the
 local Compose model. `path` can be set to either a string when a single Compose file is involved,
-or to a list of strings when multiple Compose files need to be [merged together](13-merge.md) to
+or to a list of strings when multiple Compose files need to be [merged together](merge.md) to
 define the Compose model to be included in the local application.
 
 ```yaml
@@ -116,4 +118,4 @@ override values for customization.
 
 ## Additional resources
 
-For more information on using `include`, see [Working with multiple Compose files](../multiple-compose-files/_index.md)
+For more information on using `include`, see [Working with multiple Compose files](/compose/multiple-compose-files/_index.md)
