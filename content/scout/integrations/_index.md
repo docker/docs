@@ -81,7 +81,7 @@ analysis, directly in your repositories.
 
 The following source code management integrations are available:
 
-- [GitHub](source-code-management/github.md) {{< badge color=violet text=Beta >}}
+- [GitHub](source-code-management/github.md) {{< badge color=blue text=Beta >}}
 
 ### Team collaboration
 
