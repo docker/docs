@@ -19,7 +19,7 @@ because the Settings Management feature requires a Docker Business
 subscription and therefore your Docker Desktop users must authenticate to your
 organization for configurations to take effect. 
 
-## Setup a settings policy
+## Create a settings policy
 
 1. Within the [Docker Admin Console](https://admin.docker.com/) navigate to the company or organization you want to define a settings policy for. 
 2. Under the **Security and access** section, select **Desktop Settings Management** policy. 
@@ -59,7 +59,7 @@ Docker doesn't automatically mandate that users re-launch and sign in once a cha
 
 ## Settings policy actions
 
-From the **Desktop Settings Management** view in the Docker Admin Console, you can:
+From the **Actions** menu on the **Desktop Settings Management** page in the Docker Admin Console, you can:
 - Edit or delete an existing settings policy. 
 - Export a settings policy as an `admin-settings.json` file.
 - Set a policy that is applied to a select group of users, to be the new global default policy for all users. 

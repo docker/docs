@@ -2310,7 +2310,7 @@ Manuals:
           - path: /security/for-admins/hardened-desktop/settings-management/json-file-configure/
             title: Configure with a JSON file
           - path: /security/for-admins/hardened-desktop/settings-management/admin-console-configure/
-            title: Configure with the Admin Console {{< badge color=purple text="Early Access" >}}
+            title: Configure with the Admin Console {{< badge color=violet text="Early Access" >}}
         - sectiontitle: Enhanced Container Isolation
           section:
           - path: /security/for-admins/hardened-desktop/enhanced-container-isolation/

@@ -62,8 +62,8 @@ subscription and therefore your Docker Desktop users must authenticate to your
 organization for this configuration to take effect. 
 
 Next, you must either:
- - Manually [create and configure the admin-settings.json file](configure.md), or use the `--admin-settings` installer flag on [macOS](/desktop/install/mac-install.md#install-from-the-command-line) or [Windows](/desktop/install/windows-install.md#install-from-the-command-line) to automatically create the `admin-settings.json` and save it in the correct location.
- - Fill out the **Settings policy** creation form in the Docker Admin Console
+ - Manually [create and configure the admin-settings.json file](json-file-configure.md), or use the `--admin-settings` installer flag on [macOS](/desktop/install/mac-install.md#install-from-the-command-line) or [Windows](/desktop/install/windows-install.md#install-from-the-command-line) to automatically create the `admin-settings.json` and save it in the correct location.
+ - Fill out the **Settings policy** creation form in the [Docker Admin Console](admin-console-configure.md)
 
 Once this is done, Docker Desktop developers receive the changed settings when they either:
 - Quit, re-launch, and sign in to Docker Desktop
