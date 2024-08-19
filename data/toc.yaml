@@ -5,7 +5,7 @@ Getting started:
   path: /get-started/get-docker/
 - title: Docker overview
   path: /get-started/docker-overview/
-- sectiontitle: "Getting started"
+- sectiontitle: "Introduction"
   section:
   - title: "Overview"
     path: /get-started/introduction/

@@ -9,14 +9,14 @@ summary: |
   containerization, beginning with foundational concepts and installation
   procedures. Progress through hands-on exercises that cover essential Docker
   commands, image creation, and container orchestration.
-aliases:
-  - /get-started/
-  - /guides/getting-started/
 layout: series
 params:
   skill: Beginner
   time: 15 minutes
   prereq: None
+aliases:
+  - /get-started/
+  - /guides/getting-started/
 ---
 
 ## About this series
