@@ -204,4 +204,4 @@ in a separate namespace and its access is limited to that namespace.
 ## Next steps
 
 - [Install Docker](/get-started/get-docker.md)
-- [Get started with Docker](/get-started/getting-started/_index.md)
+- [Get started with Docker](/get-started/introduction/_index.md)

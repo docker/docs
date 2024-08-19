@@ -9,9 +9,9 @@ get-started:
   description: Learn about the Docker platform.
   link: /get-started/docker-overview/
   icon: summarize
-- title: Get started
+- title: Introduction
   description: Get started with the basics and the benefits of containerizing your applications.
-  link: /get-started/getting-started/
+  link: /get-started/introduction/
   icon: rocket
 - title: Docker concepts
   description: Gain a better understanding of foundational Docker concepts.

@@ -21,7 +21,7 @@ This 45-minute workshop contains step-by-step instructions on how to get started
 > [!NOTE]
 >
 > For a quick introduction to Docker and the benefits of containerizing your
-> applications, see [Getting started](/get-started/getting-started/_index.md).
+> applications, see [Getting started](/get-started/introduction/_index.md).
 
 ## What is a container?
 
