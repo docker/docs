@@ -1185,7 +1185,7 @@ Manuals:
          title: Understand permission requirements for Mac
        - path: /desktop/install/windows-install/
          title: Windows
-       - sectiontitle: Use the MSI installer {{< badge color=blue text="New" >}}
+       - sectiontitle: Use the MSI installer {{< badge color=green text="New" >}}
          section:
          - path: /desktop/install/msi/
            title: Overview
@@ -1442,7 +1442,7 @@ Manuals:
       - path: /scout/explore/image-details-view/
         title: Image details view
       - path: /scout/explore/exceptions/
-        title: Exceptions {{< badge color=violet text=New >}}
+        title: Exceptions {{< badge color=green text=New >}}
       - path: /scout/explore/metrics-exporter/
         title: Metrics exporter
     - sectiontitle: How-tos
@@ -1903,7 +1903,7 @@ Manuals:
         - path: /build/building/base-images/
           title: Base images
     - path: /build/checks/
-      title: Build checks  {{< badge color=violet text=New >}}
+      title: Build checks  {{< badge color=green text=New >}}
     - sectiontitle: Builders
       section:
         - path: /build/builders/
