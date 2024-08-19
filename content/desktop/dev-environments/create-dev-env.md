@@ -19,7 +19,6 @@ This does not conflict with any of the local files or local tooling set up on yo
 >Tip
 >
 >Install the [Dev Environments browser extension](https://github.com/docker/dev-envs-extension) for [Chrome](https://chrome.google.com/webstore/detail/docker-dev-environments/gnagpachnalcofcblcgdbofnfakdbeka) or [Firefox](https://addons.mozilla.org/en-US/firefox/addon/docker-dev-environments/), to launch a dev environment faster.
-{ .tip }
 
 ## Prerequisites
 
@@ -33,14 +32,13 @@ To get started with Dev Environments, you must also install the following tools 
 
 ## Launch a dev environment from a Git repository
 
-> **Note**
+> [!NOTE]
 >
 > When cloning a Git repository using SSH, ensure you've added your SSH key to the ssh-agent. To do this, open a terminal and run `ssh-add <path to your private ssh key>`.
 
-> **Important**
+> [!IMPORTANT]
 >
 > If you have enabled the WSL 2 integration in Docker Desktop for Windows, make sure you have an SSH agent running in your WSL 2 distribution.
-{ .important }
 
 {{< accordion title="How to start an SSH agent in WSL 2" >}}
 
@@ -121,7 +119,7 @@ To launch the application, run the command `make run` in your terminal. This ope
    
    A directory from your computer is bind mounted to the container, so any changes you make locally is reflected in the dev environment. You can use an editor or IDE of your choice.
 
-> **Note**
+> [!NOTE]
 >
 > When using a local folder for a dev environment, file changes are synchronized between your environment container and your local files. This can affect the performance inside the container, depending on the number of files in your local folder and the operations performed in the container.
 

@@ -111,7 +111,7 @@ Docker images can be inherited from other images. Therefore, instead of creating
 your own base image from scratch, you can use the official Go image that already
 has all necessary tools and libraries to compile and run a Go application.
 
-> **Note**
+> [!NOTE]
 >
 > If you are curious about creating your own base images, you can check out the following section of this guide: [creating base images](../../build/building/base-images.md#create-a-base-image).
 > Note, however, that this isn't necessary to continue with your task at hand.
@@ -151,7 +151,7 @@ slash.
 COPY go.mod go.sum ./
 ```
 
-> **Note**
+> [!NOTE]
 >
 > If you'd like to familiarize yourself with the trailing slash treatment by the
 > `COPY` command, see [Dockerfile

@@ -25,7 +25,7 @@ To install Docker Desktop successfully, you must:
 
 - Meet the [general system requirements](linux-install.md#general-system-requirements).
 - Have a 64-bit version of either the LTS version Ubuntu Jammy Jellyfish 22.04, or the current non-LTS version. Docker Desktop is supported on `x86_64` (or `amd64`) architecture.
-   > **Note**
+   > [!NOTE]
    >
    > The latest Ubuntu 24.04 LTS is not yet supported. Docker Desktop will fail to start. Due to a change in how the latest Ubuntu release restricts the unprivileged namespaces, `sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0` needs to be run at least once. Refer to the [Ubuntu Blog](https://ubuntu.com/blog/ubuntu-23-10-restricted-unprivileged-user-namespaces) for more details.
   
@@ -52,7 +52,7 @@ Recommended approach to install Docker Desktop on Ubuntu:
 
    Don't forget to substitute `<arch>` with the architecture you want.
 
-   > **Note**
+   > [!NOTE]
    >
    > At the end of the installation process, `apt` displays an error due to installing a downloaded package. You
    > can ignore this error message.

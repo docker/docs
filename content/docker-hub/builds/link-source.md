@@ -8,7 +8,7 @@ aliases:
 - /docker-hub/bitbucket/
 ---
 
-> **Note**
+> [!NOTE]
 >
 > Automated builds require a
 > [Docker Pro, Team, or Business subscription](../../subscription/index.md).
@@ -109,7 +109,7 @@ from Docker Hub, and from your GitHub account.
 
 5. Select the `...` menu to the right of the Docker Hub Builder application and select **Revoke**.
 
-> **Note**
+> [!NOTE]
 >
 > Each repository that is configured as an automated build source
 contains a webhook that notifies Docker Hub of changes in the repository.
@@ -146,7 +146,7 @@ unlink it both from Docker Hub, and from your Bitbucket account.
 
 6. Select **Revoke** next to the Docker Hub line.
 
-> **Note**
+> [!NOTE]
 >
 > Each repository that is configured as an automated build source
 contains a webhook that notifies Docker Hub of changes in the repository. This

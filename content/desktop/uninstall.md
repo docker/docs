@@ -4,12 +4,11 @@ keywords: Windows, unintall, Mac, Linux, Docker Desktop
 title: Uninstall Docker Desktop
 ---
 
-> **Warning**
+> [!WARNING]
 >
 > Uninstalling Docker Desktop destroys Docker containers, images, volumes, and
 > other Docker-related data local to the machine, and removes the files generated
 > by the application. To learn how to preserve important data before uninstalling, refer to the [back up and restore data](backup-and-restore.md) section .
-{ .warning }
 
 {{< tabs >}}
 {{< tab name="Windows" >}}

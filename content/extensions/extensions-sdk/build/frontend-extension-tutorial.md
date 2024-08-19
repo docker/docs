@@ -19,12 +19,11 @@ Before you start, make sure you have installed the latest version of [Docker Des
 The quickest way to create a new extension is to run `docker extension init my-extension` as in the
 [Quickstart](../quickstart.md). This creates a new directory `my-extension` that contains a fully functional extension.
 
-> **Tip**
+> [!TIP]
 >
 > The `docker extension init` generates a React based extension. But you can still use it as a starting point for
 > your own extension and use any other frontend framework, like Vue, Angular, Svelte, etc. or even stay with
 > vanilla Javascript.
-{ .tip }
 
 Although you can start from an empty directory or from the `react-extension` [sample folder](https://github.com/docker/extensions-sdk/tree/main/samples),
 it's highly recommended that you start from the `docker extension init` command and change it to suit your needs.
@@ -54,7 +53,7 @@ it's highly recommended that you start from the `docker extension init` command 
 
 ## Adapting the Dockerfile
 
-> **Note**
+> [!NOTE]
 >
 > When using the `docker extension init`, it creates a `Dockerfile` that already contains what is needed for a React
 > extension.
@@ -104,29 +103,26 @@ COPY --from=client-builder /ui/build ui
 {{< /tab >}}
 {{< tab name="Vue" >}}
 
-> **Important**
+> [!IMPORTANT]
 >
 > We don't have a working Dockerfile for Vue yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Vue)
 > and let us know if you'd like a Dockerfile for Vue.
-{ .important }
 
 {{< /tab >}}
 {{< tab name="Angular" >}}
 
-> **Important**
+> [!IMPORTANT]
 >
 > We don't have a working Dockerfile for Angular yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Angular)
 > and let us know if you'd like a Dockerfile for Angular.
-{ .important }
 
 {{< /tab >}}
 {{< tab name="Svelte" >}}
 
-> **Important**
+> [!IMPORTANT]
 >
 > We don't have a working Dockerfile for Svelte yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Svelte)
 > and let us know if you'd like a Dockerfile for Svelte.
-{ .important }
 
 {{< /tab >}}
 {{< /tabs >}}
@@ -290,29 +286,26 @@ export function App() {
 {{< /tab >}}
 {{< tab name="Vue" >}}
 
-> **Important**
+> [!IMPORTANT]
 >
 > We don't have an example for Vue yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Vue)
 > and let us know if you'd like a sample with Vue.
-{ .important }
 
 {{< /tab >}}
 {{< tab name="Angular" >}}
 
-> **Important**
+> [!IMPORTANT]
 >
 > We don't have an example for Angular yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Angular)
 > and let us know if you'd like a sample with Angular.
-{ .important }
 
 {{< /tab >}}
 {{< tab name="Svelte" >}}
 
-> **Important**
+> [!IMPORTANT]
 >
 > We don't have an example for Svelte yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Svelte)
 > and let us know if you'd like a sample with Svelte.
-{ .important }
 
 {{< /tab >}}
 {{< /tabs >}}
@@ -349,11 +342,10 @@ $ docker extension update awesome-inc/my-extension:latest
 Now you can see the backend service running in the containers tab of the Docker Desktop Dashboard and watch the logs
 when you need to debug it.
 
-> **Tip**
+> [!TIP]
 >
 > You can turn on [hot reloading](../dev/test-debug.md#hot-reloading-whilst-developing-the-ui) to avoid the need to
 > rebuild the extension every time you make a change.
-{ .tip }
 
 ## What's next?
 

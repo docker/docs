@@ -40,7 +40,7 @@ isolated to a single Amazon EC2 instance, with a dedicated EBS volume for build
 cache, and encryption in transit. That means there are no shared processes or
 data between cloud builders.
 
-> **Note**
+> [!NOTE]
 >
 > Docker Build Cloud is currently only available in the US East region. Users
 > in Europe and Asia may experience increased latency compared to users based

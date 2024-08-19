@@ -31,14 +31,12 @@ Before you turn on the Docker Desktop WSL 2 feature, ensure you have:
 > setting available since WSL 1.3.10 (experimental).
 >
 > This feature enhances the Windows host's ability to reclaim unused memory within the WSL virtual machine, ensuring improved memory availability for other host applications. This capability is especially beneficial for Docker Desktop, as it prevents the WSL VM from retaining large amounts of memory (in GBs) within the Linux kernel's page cache during Docker container image builds, without releasing it back to the host when no longer needed within the VM.
-{ .tip }
 
 ## Turn on Docker Desktop WSL 2
 
-> **Important**
+> [!IMPORTANT]
 >
 > To avoid any potential conflicts with using WSL 2 on Docker Desktop, you must uninstall any previous versions of Docker Engine and CLI installed directly through Linux distributions before installing Docker Desktop.
-{ .important }
 
 1. Download and install the latest version of [Docker Desktop for Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe).
 2. Follow the usual installation instructions to install Docker Desktop. Depending on which version of Windows you are using, Docker Desktop may prompt you to turn on WSL 2 during installation. Read the information displayed on the screen and turn on the WSL 2 feature to continue.
@@ -56,7 +54,6 @@ Now `docker` commands work from Windows using the new WSL 2 engine.
 > By default, Docker Desktop stores the data for the WSL 2 engine at `C:\Users\[USERNAME]\AppData\Local\Docker\wsl`.
 > If you want to change the location, for example, to another drive you can do so via the `Settings -> Resources -> Advanced` page from the Docker Dashboard.
 > Read more about this and other Windows settings at [Changing Docker Desktop settings on Windows](../settings/windows.md)
-{ .tip }
 
 ## Enabling Docker support in WSL 2 distros
 
@@ -93,7 +90,7 @@ Docker Desktop does not require any particular Linux distros to be installed. Th
 
 3. Select **Apply & Restart**.
 
-> **Note**
+> [!NOTE]
 >
 > Docker Desktop installs two special-purpose internal Linux distros `docker-desktop` and `docker-desktop-data`. The first (`docker-desktop`) is used to run the Docker engine (`dockerd`) while the second (`docker-desktop-data`) stores containers and images. Neither can be used for general development.
 

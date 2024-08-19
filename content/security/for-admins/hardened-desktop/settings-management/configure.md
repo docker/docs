@@ -41,10 +41,9 @@ To set it up manually:
 
     By placing this file in the above protected directories, end users are unable to modify it.
 
-    > **Important**
+    > [!IMPORTANT]
     >
     > It is assumed that you have the ability to push the `admin-settings.json` settings file to the locations specified above through a device management software such as [Jamf](https://www.jamf.com/lp/en-gb/apple-mobile-device-management-mdm-jamf-shared/?attr=google_ads-brand-search-shared&gclid=CjwKCAjw1ICZBhAzEiwAFfvFhEXjayUAi8FHHv1JJitFPb47C_q_RCySTmF86twF1qJc_6GST-YDmhoCuJsQAvD_BwE).
-    { .important }
 
 ### Step two: Configure the settings you want to lock in
 
@@ -233,7 +232,6 @@ For settings to take effect:
   >**Important**
   >
   >Selecting **Restart** from the Docker menu isn't enough as it only restarts some components of Docker Desktop.
-  { .important }
 
 Docker doesn't automatically mandate that developers re-launch and sign in once a change has been made so as not to disrupt your developers' workflow.
 

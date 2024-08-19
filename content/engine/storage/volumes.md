@@ -83,7 +83,7 @@ If you need to specify volume driver options, you must use `--mount`.
   - The `volume-opt` option, which can be specified more than once, takes a
     key-value pair consisting of the option name and its value.
 
-> **Warning**
+> [!WARNING]
 >
 > If your volume driver accepts a comma-separated list as an option,
 > you must escape the value from the outer CSV parser. To escape a `volume-opt`,
@@ -99,7 +99,6 @@ If you need to specify volume driver options, you must use `--mount`.
 >  --name myservice \
 >  <IMAGE>
 > ```
-{ .warning }
 
 The examples below show both the `--mount` and `-v` syntax where possible, with
 `--mount` first.
@@ -500,7 +499,7 @@ The following example specifies an SSH password. However, if the two hosts have
 shared keys configured, you can exclude the password.
 Each volume driver may have zero or more configurable options.
 
-> **Note**
+> [!NOTE]
 >
 > If the volume driver requires you to pass any options,
 > you must use the `--mount` flag to mount the volume, and not `-v`.
@@ -558,12 +557,11 @@ You can mount a block storage device, such as an external drive or a drive parti
 The following example shows how to create and use a file as a block storage device,
 and how to mount the block device as a container volume.
 
-> **Important**
+> [!IMPORTANT]
 >
 > The following procedure is only an example.
 > The solution illustrated here isn't recommended as a general practice.
 > Don't attempt this approach unless you're confident about what you're doing.
-{ .important }
 
 #### How mounting block devices works
 
@@ -623,7 +621,7 @@ The filesystem support of your system depends on the version of the Linux kernel
    /dev/loop5
    ```
 
-   > **Note**
+   > [!NOTE]
    >
    > `losetup` creates an ephemeral loop device that's removed after
    > system reboot, or manually removed with `losetup -d`.
@@ -710,7 +708,7 @@ the Docker Engine removes the `/foo` volume but not the `awesome` volume.
 $ docker run --rm -v /foo -v awesome:/bar busybox top
 ```
 
-> **Note**
+> [!NOTE]
 >
 > If another container binds the volumes with
 > `--volumes-from`, the volume definitions are _copied_ and the

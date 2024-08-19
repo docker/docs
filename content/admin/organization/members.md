@@ -40,12 +40,12 @@ To add a member to a team:
 2. Select **Organizations**, your organization, and then **Members**.
 3. Select the **Action** icon, and then select **Add to team**.
 
-   > **Note**
+   > [!NOTE]
    >
    > You can also navigate to **Organizations** > **Your Organization** > **Teams** > **Your Team Name** and select **Add Member**. Select a member from the drop-down list to add them to the team or search by Docker ID or email.
 4. Select the team and then select **Add**.
 
-   > **Note**
+   > [!NOTE]
    >
    > An invitee must first accept the invitation to join the organization before being added to the team.
 
@@ -60,7 +60,7 @@ To add a member to a team:
 2. Select the team name.
 3. Select **Add member**. You can add the member by searching for their email address or username.
 
-   > **Note**
+   > [!NOTE]
    >
    > An invitee must first accept the invitation to join the organization before being added to the team.
 

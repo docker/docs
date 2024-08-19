@@ -86,7 +86,7 @@ GC Policy rule#3:
 - `rule#3`: if previous policies were insufficient start deleting internal data
   to keep build cache under cap.
 
-> **Note**
+> [!NOTE]
 >
 > `Keep Bytes` defaults to 10% of the size of the disk. If the disk size cannot
 > be determined, it uses 2GB as a fallback.

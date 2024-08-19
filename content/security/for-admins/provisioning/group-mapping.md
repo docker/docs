@@ -11,10 +11,9 @@ aliases:
 
 With directory group-to-team provisioning from your IdP, user updates will automatically sync with your Docker organizations and teams. You can use group mapping once you have configured [single sign-on (SSO)](../single-sign-on/_index.md).
 
-> **Tip**
+> [!TIP]
 >
 > Group mapping is ideal for adding a user to multiple organizations or multiple teams within one organization. If you don't need to set up multi-organization or multi-team assignment, you can use [user-level attributes](scim.md#set-up-role-mapping).
-{ .tip }
 
 ## How group mapping works
 
@@ -33,7 +32,6 @@ You can use this format to add a user to multiple organizations. For example, if
 >**Tip**
 >
 >Use the same names for the Docker teams as your group names in the IdP to prevent further configuration. When you sync groups, this creates a group if it doesn’t already exist.
-{ .tip}
 
 The following lists the supported group mapping attributes:
 
@@ -168,10 +166,9 @@ To verify, go to **Monitor > Provisioning logs** to see that your groups were pr
 
 Once complete, a user who signs in to Docker through SSO is automatically added to the organizations and teams mapped in the IdP.
 
-> **Tip**
+> [!TIP]
 >
 > [Enable SCIM](scim.md) to take advantage of automatic user provisioning and de-provisioning. If you don't enable SCIM users are only automatically provisioned. You have to de-provision them manually.
-{ .tip }
 
 ## More resources
 

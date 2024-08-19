@@ -122,7 +122,7 @@ $ docker buildx build \
   --push .
 ```
 
-> **Note**
+> [!NOTE]
 >
 > Emulation with QEMU can be much slower than native builds, especially for
 > compute-heavy tasks like compilation and compression or decompression.

@@ -15,7 +15,7 @@ All of these examples use the `docker inspect` command, but many other CLI
 commands have a `--format` flag, and many of the CLI command references
 include examples of customizing the output format.
 
-> **Note**
+> [!NOTE]
 >
 > When using the `--format` flag, you need observe your shell environment.
 > In a POSIX shell, you can run the following with a single quote:
@@ -31,7 +31,6 @@ include examples of customizing the output format.
 > $ docker inspect --format '{{join .Args \" , \"}}'
 > ```
 >
-{ .important }
 
 ## join
 

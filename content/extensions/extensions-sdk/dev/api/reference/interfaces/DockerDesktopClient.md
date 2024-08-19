@@ -24,7 +24,6 @@ The client is already connected to the backend.
 >**Warning**
 >
 > It will be removed in a future version. Use [extension](DockerDesktopClient.md#extension) instead.
-{ .warning }
 
 #### Inherited from
 
@@ -92,7 +91,6 @@ const containers = await window.ddClient.listContainers();
 >**Warning**
 >
 > It will be removed in a future version. Use [listContainers](Docker.md#listcontainers) instead.
-{ .warning }
 
 #### Parameters
 
@@ -122,10 +120,9 @@ Get the list of images
 const images = await window.ddClient.listImages();
 ```
 
-> **Warning**
+> [!WARNING]
 > 
 > It will be removed in a future version. Use [listImages](Docker.md#listimages) instead.
-{ .warning }
 
 #### Parameters
 
@@ -154,10 +151,9 @@ Navigate to the container's window in Docker Desktop.
 window.ddClient.navigateToContainers();
 ```
 
-> **Warning**
+> [!WARNING]
 > 
 > It will be removed in a future version. Use [viewContainers](NavigationIntents.md#viewcontainers) instead.
-{ .warning }
 
 #### Returns
 
@@ -178,10 +174,9 @@ Navigate to the container window in Docker Desktop.
 await window.ddClient.navigateToContainer(id);
 ```
 
-> **Warning**
+> [!WARNING]
 >
 > It will be removed in a future version.
-{ .warning }
 
 #### Parameters
 
@@ -210,10 +205,9 @@ Navigate to the container logs window in Docker Desktop.
 await window.ddClient.navigateToContainerLogs(id);
 ```
 
-> **Warning**
+> [!WARNING]
 >
 > It will be removed in a future version.
-{ .warning }
 
 #### Parameters
 
@@ -242,10 +236,9 @@ Navigate to the container inspect window in Docker Desktop.
 await window.ddClient.navigateToContainerInspect(id);
 ```
 
-> **Warning**
+> [!WARNING]
 >
 > It will be removed in a future version.
-{ .warning }
 
 #### Parameters
 
@@ -275,10 +268,9 @@ Navigate to the container stats to see the CPU, memory, disk read/write and netw
 await window.ddClient.navigateToContainerStats(id);
 ```
 
-> **Warning**
+> [!WARNING]
 > 
 > It will be removed in a future version.
-{ .warning }
 
 #### Parameters
 
@@ -307,10 +299,9 @@ Navigate to the images window in Docker Desktop.
 await window.ddClient.navigateToImages(id);
 ```
 
-> **Warning**
+> [!WARNING]
 >
 > It will be removed in a future version. Use [viewImages](NavigationIntents.md#viewimages) instead.
-{ .warning }
 
 #### Returns
 
@@ -333,10 +324,9 @@ In this navigation route you can find the image layers, commands, created time a
 await window.ddClient.navigateToImage(id, tag);
 ```
 
-> **Warning**
+> [!WARNING]
 >
 > It will be removed in a future version. Use [viewImage](NavigationIntents.md#viewimage) instead.
-{ .warning }
 
 #### Parameters
 
@@ -367,10 +357,9 @@ Navigate to the volumes window in Docker Desktop.
 await window.ddClient.navigateToVolumes();
 ```
 
-> **Warning**
+> [!WARNING]
 >
 > It will be removed in a future version. Use [viewVolumes](NavigationIntents.md#viewvolumes) instead.
-{ .warning }
 
 #### Returns
 
@@ -392,10 +381,9 @@ Navigate to a specific volume in Docker Desktop.
 window.ddClient.navigateToVolume(volume);
 ```
 
-> **Warning**
+> [!WARNING]
 >
 > It will be removed in a future version. Use [viewVolume](NavigationIntents.md#viewvolume) instead.
-{ .warning }
 
 #### Parameters
 
@@ -423,10 +411,9 @@ Navigate to the Dev Environments window in Docker Desktop.
 window.ddClient.navigateToDevEnvironments();
 ```
 
-> **Warning**
+> [!WARNING]
 > 
 > It will be removed in a future version. Use [viewDevEnvironments](NavigationIntents.md#viewdevenvironments) instead.
-{ .warning }
 
 #### Returns
 
@@ -452,10 +439,9 @@ window.ddClient.execHostCmd(`cliShippedOnHost xxx`).then((cmdResult: any) => {
 });
 ```
 
-> **Warning**
+> [!WARNING]
 > 
 > It will be removed in a future version. Use [exec](ExtensionCli.md#exec) instead.
-{ .warning }
 
 #### Parameters
 
@@ -493,10 +479,9 @@ window.ddClient.spawnHostCmd(
 );
 ```
 
-> **Warning**
+> [!WARNING]
 >
 > It will be removed in a future version. Use [exec](ExtensionCli.md#exec) instead.
-{ .warning }
 
 #### Parameters
 
@@ -526,10 +511,9 @@ You can also directly execute the Docker binary.
 const output = await window.ddClient.execDockerCmd("info");
 ```
 
-> **Warning**
+> [!WARNING]
 >
 > It will be removed in a future version. Use [exec](DockerCommand.md#exec) instead.
-{ .warning }
 
 #### Parameters
 
@@ -574,10 +558,9 @@ ___
 
 ▸ **spawnDockerCmd**(`cmd`, `args`, `callback`): `void`
 
-> **Warning**
+> [!WARNING]
 >
 > It will be removed in a future version. Use [exec](DockerCommand.md#exec) instead.
-{ .warning }
 
 #### Parameters
 
@@ -610,7 +593,6 @@ window.ddClient.openExternal("https://docker.com");
 **Warning**
 >
 > It will be removed in a future version. Use [openExternal](Host.md#openexternal) instead.
-{ .warning }
 
 #### Parameters
 
@@ -643,7 +625,6 @@ window.ddClient.toastSuccess("message");
 >**Warning`**
 >
 > It will be removed in a future version. Use [success](Toast.md#success) instead.
-{ .warning }
 
 #### Parameters
 
@@ -671,10 +652,9 @@ Display a toast message of type warning.
 window.ddClient.toastWarning("message");
 ```
 
-> **Warning**
+> [!WARNING]
 >
 > It will be removed in a future version. Use [warning](Toast.md#warning) instead.
-{ .warning }
 
 #### Parameters
 
@@ -705,7 +685,6 @@ window.ddClient.toastError("message");
 >**Warning**
 >
 > It will be removed in a future version. Use [error](Toast.md#error) instead.
-{ .warning }
 
 #### Parameters
 

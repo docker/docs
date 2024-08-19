@@ -8,11 +8,9 @@ This page outlines the different ways you can enforce sign-in for Docker Desktop
 
 ## Registry key method (Windows only)
 
-> **Early Access**
+> [!NOTE]
 >
-> The registry key method is an [early access](../../../release-lifecycle.md#early-access-ea) feature for Docker Business subscribers. 
-> It's available with Docker Desktop version 4.32 and later.
-{ .restricted }
+> The registry key method is available with Docker Desktop version 4.32 and later.
 
 1. Create the registry key. Your new key should look like the following:
 
@@ -20,17 +18,16 @@ This page outlines the different ways you can enforce sign-in for Docker Desktop
    $ HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Docker\Docker Desktop
    ```
 2. Create a multi-string value `allowedOrgs`. 
-   > **Important**
+   > [!IMPORTANT]
    >
    > Only one entry for `allowedOrgs` is currently supported. If you add more than one value, sign-in enforcement silently fails.
-   { .important }
 3. As string data use your organization’s name, all lowercase.
 4. Restart Docker Desktop.
 5. Open Docker Desktop and when Docker Desktop starts, verify that the **Sign in required!** prompt appears.
 
 In some cases, a system reboot may be necessary for enforcement to take effect.
 
->**Note**
+> [!NOTE]
 >
 > If a registry key and a `registry.json` file both exist, the registry key takes precedence.
 
@@ -51,11 +48,9 @@ There are many ways to deploy the registry key, for example using an MDM solutio
 
 ## plist method (Mac only)
 
-> **Early Access**
+> [!NOTE]
 >
-> The plist method is an [early access](../../../release-lifecycle.md#early-access-ea) feature for Docker Business subscribers. 
-> It's available with Docker Desktop version 4.32 and later.
-{ .restricted }
+> The registry key method is available with Docker Desktop version 4.32 and later.
 
 1. Create the file `/Library/Application Support/com.docker.docker/desktop.plist`.
 2. Open `desktop.plist` in a text editor and add the following content, where `myorg` is replaced with your organization’s name all lowercase:
@@ -72,16 +67,15 @@ There are many ways to deploy the registry key, for example using an MDM solutio
      </dict>
    </plist>
    ```
-   > **Important**
+   > [!IMPORTANT]
    >
    > Only one entry for `allowedOrgs` is currently supported. If you add more than one value, sign-in enforcement silently fails.
-   { .important }
 
 3. Modify the file permissions to ensure the file cannot be edited by any non-administrator users.
 4. Restart Docker Desktop. 
 5. Open Docker Desktop and when Docker Desktop starts, verify that the **Sign in required!** prompt appears.
 
->**Note**
+> [!NOTE]
 >
 > If a `plist` and `registry.json` file both exist, the `plist` file takes precedence.
 
@@ -148,10 +142,9 @@ details, see [Manage members](/admin/organization/members/).
     "allowedOrgs": ["myorg"]
     }
     ```
-   > **Important**
+   > [!IMPORTANT]
    >
    > Only one entry for `allowedOrgs` is currently supported. If you add more than one value, sign-in enforcement silently fails.
-   { .important }
 
 4. Verify that sign-in is enforced.
 
@@ -160,10 +153,9 @@ details, see [Manage members](/admin/organization/members/).
     
     In some cases, a system reboot may be necessary for the enforcement to take effect.
 
-    > **Tip**
+    > [!TIP]
     >
     > If your users have issues starting Docker Desktop after you enforce sign-in, they may need to update to the latest version.
-    { .tip }
 
 ### Option 2: Create a registry.json file when installing Docker Desktop
 

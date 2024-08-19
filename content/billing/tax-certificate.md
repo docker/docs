@@ -32,10 +32,9 @@ Palo Alto, CA 94306
 2. Enter the required information.
 3. In the **Additional Information** field, list the Docker ID/namespace(s) of the accounts that you want to apply the tax exemption certificate to.  
 
-   > **Tip**
+   > [!TIP]
    >
    > You can list multiple namespaces that share the same tax exemption certificate, if applicable.
-   { .tip }
 4. Add the tax certificate from your system by dragging and dropping them onto the file area, or select the **Browse Files** button to open a file dialog.
 5. Select **Submit**.
 

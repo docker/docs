@@ -25,7 +25,7 @@ attestations to your image, with the following conditions:
   attestations are added to the image. These output formats don't support
   attestations.
 
-> **Warning**
+> [!WARNING]
 >
 > If you're using `docker/build-push-action` to build images for code in a
 > public GitHub repository, the provenance attestations attached to your image
@@ -35,7 +35,6 @@ attestations to your image, with the following conditions:
 > attestation. Refactor your build to pass those secrets using
 > [secret mounts](../../../reference/cli/docker/buildx/build.md#secret)
 > instead. Also remember to rotate any secrets you may have exposed.
-{ .warning }
 
 ## Max-level provenance
 

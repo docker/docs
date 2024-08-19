@@ -5,7 +5,7 @@ keywords: docker hub, troubleshoot, automated builds, autobuilds
 tags: [ Troubleshooting ]
 ---
 
-> **Note**
+> [!NOTE]
 >
 > Automated builds require a
 > [Docker Pro, Team, or Business subscription](../../subscription/index.md).
@@ -17,7 +17,7 @@ If a build fails, a **Retry** icon appears next to the build report line on the
 
 ![Timeline view showing the retry build button](images/retry-build.png)
 
-> **Note**
+> [!NOTE]
 >
 > If you are viewing the build details for a repository that belongs to an
 > organization, the **Cancel** and **Retry** buttons only appear if you have `Read & Write` access to the repository.
@@ -46,7 +46,7 @@ To work around this, you can set up your automated build using the `SSH_PRIVATE`
 environment variable to override the deployment key and grant Docker Hub's build
 system access to the repositories.
 
-> **Note**
+> [!NOTE]
 >
 > If you are using autobuild for teams, use the process below
 > instead, and configure a service user for your source code provider. You can
@@ -64,7 +64,7 @@ system access to the repositories.
 6. Paste the private half of the keypair into the **Value** field.
 7. Select **Save**, or **Save and Build** to validate that the build now completes.
 
-> **Note**
+> [!NOTE]
 >
 > You must configure your private git submodules using git clone over SSH
 > (`git@submodule.tld:some-submodule.git`) rather than HTTPS.

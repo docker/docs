@@ -105,21 +105,19 @@ services:
    ```
    Docker Compose replaces `${DEBUG}` with the value from the `.env` file
 
-   > **Important**
+   > [!IMPORTANT]
    >
    > Be aware of [Environment variables precedence](envvars-precedence.md) when using variables in an `.env` file that  as environment variables in your container's environment.
-   { .important }
 
 - You can place your `.env` file in a location other than the root of your project's directory, and then use the [`--env-file` option in the CLI](#substitute-with---env-file) so Compose can navigate to it.
 
 - Your `.env` file can be overridden by another `.env` if it is [substituted with `--env-file`](#substitute-with---env-file).
 
-> **Important**
+> [!IMPORTANT]
 >
 > Substitution from `.env` files is a Docker Compose CLI feature.
 >
 > It is not supported by Swarm when running `docker stack deploy`.
-{ .important }
 
 #### `.env` file syntax
 
@@ -244,7 +242,7 @@ When you run `docker compose up` with this configuration, Compose looks for the 
 
 If an environment variable is not set, Compose substitutes with an empty string. In the previous example, if `POSTGRES_VERSION` is not set, the value for the image option is `postgres:`.
 
-> **Note**
+> [!NOTE]
 >
 > `postgres:` is not a valid image reference. Docker expects either a reference without a tag, like `postgres` which defaults to the latest image, or with a tag such as `postgres:15`.
 

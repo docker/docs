@@ -33,10 +33,9 @@ The Docker CLI platform provides a consistent and predictable set of options and
 This change lets you use all of the shared flags on the root `docker` command.
 For example, `docker --log-level=debug --tls compose up` enables debug logging from the Docker Engine as well as ensuring that TLS is used for the connection.
 
-> **Tip**
+> [!TIP]
 >
 > Update scripts to use Compose V2 by replacing the hyphen (`-`) with a space, using `docker compose` instead of `docker-compose`.
-{ .tip }
 
 ### Service container names
 
@@ -50,11 +49,10 @@ By using a hyphen instead, Compose V2 ensures service containers can be accessed
  
 For example, running the Compose command `-p myproject up --scale=1 svc` results in a container named `myproject_svc_1` with Compose V1 and a container named `myproject-svc-1` with Compose V2.
 
-> **Tip**
+> [!TIP]
 >
 >In Compose V2, the global `--compatibility` flag or `COMPOSE_COMPATIBILITY` environment variable preserves the Compose V1 behavior to use underscores (`_`) as the word separator.
 As this option must be specified for every Compose V2 command run, it's recommended that you only use this as a temporary measure while transitioning to Compose V2.
-{ .tip }
 
 ### Command-line flags and subcommands
 
@@ -87,14 +85,13 @@ Check if:
 - Any `.env` file values contain literal `$` signs in them. This is common with PHP projects.
 - Any variable values use advanced expansion syntax, for example `${VAR:?error}`.
 
-> **Tip**
+> [!TIP]
 >
 > Run `docker compose config` on the project to preview the configuration after Compose V2 has performed interpolation to
 verify that values appear as expected.
 >
 > Maintaining backwards compatibility with Compose V1 is typically achievable by ensuring that literal values (no
 interpolation) are single-quoted and values that should have interpolation applied are double-quoted.
-{ .tip }
 
 ## What does this mean for my projects that use Compose V1?
 
@@ -128,7 +125,6 @@ Yes. You can still download and install Compose V1 packages, but you won't get s
 >**Warning**
 >
 > The final Compose V1 release, version 1.29.2, was May 10, 2021. These packages haven't received any security updates since then. Use at your own risk. 
-{ .warning }
 
 ## Additional Resources
 

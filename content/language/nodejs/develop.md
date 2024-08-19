@@ -25,10 +25,9 @@ You can use containers to set up local services, like a database. In this sectio
 2. Uncomment the database related instructions. The following is the updated
    `compose.yaml` file.
 
-   > **Important**
+   > [!IMPORTANT]
    >
    > For this section, don't run `docker compose up` until you are instructed to. Running the command at intermediate points may incorrectly initialize your database.
-   { .important }
 
    ```yaml {hl_lines="26-51",collapse=true,title=compose.yaml}
    # Comments are provided throughout this file to help you get started.
@@ -84,7 +83,7 @@ You can use containers to set up local services, like a database. In this sectio
        file: db/password.txt
    ```
 
-   > **Note**
+   > [!NOTE]
    >
    > To learn more about the instructions in the Compose file, see [Compose file
    > reference](/compose/compose-file/).

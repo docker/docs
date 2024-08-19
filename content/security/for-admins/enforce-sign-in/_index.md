@@ -14,8 +14,8 @@ subscription](../../../subscription/core-subscription/details.md) and they can c
 security features](/security/for-admins/hardened-desktop/_index.md) for your organization.
 
 There are multiple ways you can enforce sign-in, depending on your companies' set up and preferences:
-- [Registry key method (Windows only)](methods.md#registry-key-method-windows-only){{< badge color=violet text="Early Access" >}}
-- [`.plist` method (Mac only)](methods.md#plist-method-mac-only){{< badge color=violet text="Early Access" >}}
+- [Registry key method (Windows only)](methods.md#registry-key-method-windows-only){{< badge color=blue text="New" >}}
+- [`.plist` method (Mac only)](methods.md#plist-method-mac-only){{< badge color=blue text="New" >}}
 - [`registry.json` method (All)](methods.md#registryjson-method-all)
 
 ## How is sign-in enforced?
@@ -41,4 +41,3 @@ following occurs:
 > This means that your users must use SSO to sign in, instead of a username and password.
 > When you enforce sign-in and enforce SSO, your users must sign in and must use SSO to do so.
 > See [Enforce SSO](/security/for-admins/single-sign-on/connect#optional-enforce-sso) for details on how to enable this for your SSO connection.
-{ .tip }

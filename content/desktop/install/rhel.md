@@ -8,10 +8,9 @@ toc_max: 4
 download-url-base: https://download.docker.com/linux/rhel
 ---
 
-> **Early Access**
->
-> Docker Desktop on RHEL is in [Early Access](../../release-lifecycle.md).
-{ .restricted }
+{{% restricted title="Early Access" %}}
+Docker Desktop on RHEL is in [Early Access](../../release-lifecycle.md).
+{{% /restricted %}}
 
 > **Docker Desktop terms**
 >
@@ -122,7 +121,6 @@ The post-install script:
 > ```console
 > $ docker run --rm -it -v "/etc/pki/entitlement:/etc/pki/entitlement" -v "/etc/rhsm:/etc/rhsm-host" -v "/etc/yum.repos.d/redhat.repo:/etc/yum.repos.d/redhat.repo" registry.access.redhat.com/ubi9
 > ```
-{ .tip }
 
 ## Upgrade Docker Desktop
 

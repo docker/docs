@@ -20,14 +20,12 @@ You can manage the organizations in a company in Docker Hub and the Docker Admin
 >**Important**
 >
 > You must be a company owner to add an organization to a company. You must also be an organization owner of the organization you want to add.
-{ .important }
 
 There is no limit to the number of organizations you can have under a company layer. All organizations must have a Business subscription.
 
 >**Important**
 >
 > Once you add an organization to a company, you can't remove it from the company.
-{ .important }
 
 1. In Docker Hub, select **Organizations**.
 2. Select your company.
@@ -60,14 +58,12 @@ When you have a [self-serve](../../subscription/core-subscription/details.md#sel
 >**Important**
 >
 > You must be a company owner to add an organization to a company. You must also be an organization owner of the organization you want to add.
-{ .important }
 
 There is no limit to the number of organizations you can have under a company layer. All organizations must have a Business subscription.
 
 >**Important**
 >
 > Once you add an organization to a company, you can't remove it from the company.
-{ .important }
 
 1. Sign in to the [Admin Console](https://admin.docker.com).
 2. In the left navigation, select your company in the drop-down menu.

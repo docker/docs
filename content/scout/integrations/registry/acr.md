@@ -32,7 +32,7 @@ Docker Scout pulls and analyzes the latest image version automatically.
 
 The following table describes the configuration resources.
 
-> **Note**
+> [!NOTE]
 >
 > Creating these resources incurs a small, recurring cost on the Azure account.
 > The **Cost** column in the table represents an estimated monthly cost of the
@@ -118,11 +118,10 @@ latest image version automatically.
 
 ## Remove an integration
 
-> **Important**
+> [!IMPORTANT]
 >
 > Removing the integration in the Docker Scout Dashboard doesn't automatically
 > remove the resources created in Azure.
-{ .important }
 
 To remove an ACR integration:
 

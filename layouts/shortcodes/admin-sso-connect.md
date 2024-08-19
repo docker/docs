@@ -19,7 +19,7 @@ After you’ve completed the SSO configuration process in Docker, you can test t
 1. Authenticate through email instead of using your Docker ID, and test the login process.
 2. To authenticate through CLI, your users must have a PAT before you enforce SSO for CLI users.
 
->**Important**
+> [!IMPORTANT]
 >
 > SSO has Just-in-Time (JIT) provisioning enabled by default, unless you have [disabled it](/security/for-admins/provisioning/just-in-time/#sso-authentication-with-jit-provisioning-disabled). This means your users are auto-provisioned to your organization.
 >
@@ -29,7 +29,6 @@ After you’ve completed the SSO configuration process in Docker, you can test t
 > - [Entra ID (formerly Azure AD)](https://learn.microsoft.com/en-us/azure/active-directory/develop/howto-restrict-your-app-to-a-set-of-users)
 >
 > Alternatively, see [Manage how users are provisioned](/security/for-admins/single-sign-on/manage/#manage-how-users-are-provisioned).
-{ .important}
 
 The SSO connection is now created. You can continue to set up SCIM without enforcing SSO log-in. For more information about setting up SCIM, see [Set up SCIM](/security/for-admins/provisioning/scim/).
 
@@ -46,7 +45,6 @@ The SSO connection is now created. You can continue to set up SCIM without enfor
 
 Your users must now sign in to Docker with SSO.
 
-> **Important**
+> [!IMPORTANT]
 >
 > If SSO isn't enforced, users can choose to sign in with either their Docker ID or SSO.
-{ .important}

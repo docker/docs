@@ -13,7 +13,7 @@ becomes unavailable. This functionality is called _live restore_. The live resto
 option helps reduce container downtime due to daemon crashes, planned outages,
 or upgrades.
 
-> **Note**
+> [!NOTE]
 >
 > Live restore isn't supported for Windows containers, but it does work for
 > Linux containers running on Docker Desktop for Windows.

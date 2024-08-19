@@ -40,7 +40,7 @@ to zero when Resource Saver mode is on.
 
 - Docker commands that don't run containers, for example listing container images or volumes, don't necessarily trigger an exit from Resource Saver mode as Docker Desktop can serve such commands without unnecessarily waking up the Linux VM.
 
-> **Note**
+> [!NOTE]
 >
 > Docker Desktop exits the Resource Saver mode automatically when it needs to.
 > Commands that cause an exit from Resource Saver take a little longer to execute

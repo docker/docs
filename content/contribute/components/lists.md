@@ -17,7 +17,7 @@ Use dashes (`-`) or asterisks (`*`) for bullet points.
 
 2.  Numbered list item 2. Let's put a note in it.
 
-    > **Note**: We did it!
+    > [!NOTE]: We did it!
 
 3.  Numbered list item 3 with a code block in it. You need the blank line before
     the code block happens.
@@ -53,7 +53,7 @@ Use dashes (`-`) or asterisks (`*`) for bullet points.
 
 2.  Numbered list item 2. Let's put a note in it.
 
-    > **Note**: We did it!
+    > [!NOTE]: We did it!
 
 3.  Numbered list item 3 with a code block in it. You need the blank line before
     the code block happens.

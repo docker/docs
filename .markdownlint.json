@@ -16,7 +16,7 @@
   "ol-prefix": {"style": "ordered"},
   "no-reversed-links": true,
   "reference-links-images": {
-    "shortcut_syntax": true
+    "shortcut_syntax": false
   },
   "fenced-code-language": true,
   "table-pipe-style": true,

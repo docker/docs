@@ -17,7 +17,7 @@ service options in one place and refer to it from anywhere. You can refer to
 another Compose file and select a service you want to also use in your own
 application, with the ability to override some attributes for your own needs.
 
-> **Important**
+> [!IMPORTANT]
 >
 > When you use multiple Compose files, you must make sure all paths in the files
 are relative to the base Compose file (i.e. the Compose file in your main-project folder). This is required because extend files
@@ -25,7 +25,6 @@ need not be valid Compose files. Extend files can contain small fragments of
 configuration. Tracking which fragment of a service is relative to which path is
 difficult and confusing, so to keep paths easier to understand, all paths must
 be defined relative to the base file. 
-{ .important }
 
 ## How it works
 

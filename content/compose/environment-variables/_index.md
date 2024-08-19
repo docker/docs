@@ -7,10 +7,9 @@ keywords: compose, orchestration, environment, env file
 
 By leveraging environment variables and interpolation in Docker Compose, you can create versatile and reusable configurations, making your Dockerized applications easier to manage and deploy across different environments. 
 
-> **Tip**
+> [!TIP]
 >
 > Before using environment variables, read through all of the information first to get a full picture of environment variables in Docker Compose.
-{ .tip }
 
 This section covers:
 

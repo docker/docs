@@ -5,7 +5,7 @@ keywords: gpu, gpu support, nvidia, wsl2, docker desktop, windows
 toc_max: 3
 ---
 
-> **Note**
+> [!NOTE]
 >
 > Currently GPU support in Docker Desktop is only available on Windows with the WSL2 backend.
 

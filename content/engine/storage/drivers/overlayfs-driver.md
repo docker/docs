@@ -11,7 +11,7 @@ OverlayFS is a union filesystem.
 This page refers to the Linux kernel driver as `OverlayFS` and to the Docker
 storage driver as `overlay2`.
 
-> **Note**
+> [!NOTE]
 >
 > For `fuse-overlayfs` driver, check [Rootless mode documentation](/engine/security/rootless.md).
 
@@ -117,11 +117,10 @@ filesystem.
 After downloading a five-layer image using `docker pull ubuntu`, you can see
 six directories under `/var/lib/docker/overlay2`.
 
-> **Warning**
+> [!WARNING]
 >
 > Don't directly manipulate any files or directories within
 > `/var/lib/docker/`. These files and directories are managed by Docker.
-{ .warning }
 
 ```console
 $ ls -l /var/lib/docker/overlay2
@@ -246,11 +245,10 @@ Each image layer has its own directory within `/var/lib/docker/overlay/`, which
 contains its contents, as shown in the following example. The image layer IDs
 don't correspond to the directory IDs.
 
-> **Warning**
+> [!WARNING]
 >
 > Don't directly manipulate any files or directories within
 > `/var/lib/docker/`. These files and directories are managed by Docker.
-{ .warning }
 
 ```console
 $ ls -l /var/lib/docker/overlay/

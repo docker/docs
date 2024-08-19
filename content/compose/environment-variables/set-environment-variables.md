@@ -12,7 +12,6 @@ A container's environment is not set until there's an explicit entry in the serv
 >**Tip**
 >
 > Don't use environment variables to pass sensitive information, such as passwords, in to your containers. Use [secrets](../use-secrets.md) instead.
-{ .tip }
 
 
 ## Use the `environment` attribute
@@ -74,12 +73,11 @@ The [`env_file` attribute](../compose-file/05-services.md#env_file) also lets yo
 
 The paths to your `.env` file, specified in the `env_file` attribute, are relative to the location of your `compose.yml` file. 
 
-> **Important**
+> [!IMPORTANT]
 >
 > Interpolation in `.env` files is a Docker Compose CLI feature.
 >
 > It is not supported when running `docker run --env-file ...`.
-{ .important }
 
 ### Additional information 
 

@@ -173,7 +173,7 @@ window.ddClient.spawnHostCmd(
 );
 ```
 
-> **Note**
+> [!NOTE]
 > 
 >You cannot use this to chain commands in a single `exec()` invocation (like `cmd1 $(cmd2)` or using pipe between commands).
 >

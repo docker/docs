@@ -48,26 +48,26 @@
     </table>
     {{ .Content }}
     {{ if $data.deprecated }}
-      <blockquote class="warning">
-        <p><strong>This command is deprecated</strong></p>
-        <p>
-          It may be removed in a future Docker version. For more information,
-          see the
-          <a href="https://github.com/docker/roadmap/issues/209"
-            >Docker roadmap</a
-          >
-        </p>
-      </blockquote>
+      {{ markdownify `
+> [!WARNING]
+> This command is deprecated
+>
+> It may be removed in a future Docker version. For more information, see the
+> [Docker roadmap](https://github.com/docker/roadmap/issues/209)`
+      }}
     {{ end }}
     {{ if or $data.experimental $data.experimentalcli }}
-      <blockquote class="important">
-        <p><strong>This command is experimental</strong></p>
-        <p>
-          Experimental features are intended for testing and feedback as their
-          functionality or design may change between releases without warning or
-          can be removed entirely in a future release.
-        </p>
-      </blockquote>
+      {{ markdownify `
+{{% experimental %}}
+
+**This command is experimental.**
+
+Experimental features are intended for testing and feedback as their
+functionality or design may change between releases without warning or
+can be removed entirely in a future release.
+
+{{% /experimental %}}`
+      }}
     {{ end }}
     {{ with $data.kubernetes }}
       <p>

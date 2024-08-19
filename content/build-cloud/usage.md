@@ -54,7 +54,7 @@ buildx build`, without discrepancies.
 To build with Docker Build Cloud using `docker compose build`, first set the
 cloud builder as your selected builder, then run your build.
 
-> **Note**
+> [!NOTE]
 >
 > Make sure you're using a supported version of Docker Compose, see
 > [Prerequisites](setup.md#prerequisites).
@@ -138,14 +138,13 @@ such as authentication credentials or tokens,
 use the `--secret` and `--ssh` CLI flags for the `docker buildx` command.
 The traffic is encrypted and secrets are never stored in the build cache.
 
-> **Warning**
+> [!WARNING]
 >
 > If you're misusing build arguments to pass credentials, authentication
 > tokens, or other secrets, you should refactor your build to pass the secrets using
 > [secret mounts](/reference/cli/docker/buildx/build.md#secret) instead.
 > Build arguments are stored in the cache and their values are exposed through attestations.
 > Secret mounts don't leak outside of the build and are never included in attestations.
-{.warning}
 
 For more information, refer to:
 
@@ -165,11 +164,10 @@ To clear the builder's cache manually,
 use the [`docker buildx prune` command](/reference/cli/docker/buildx/prune/).
 This works like pruning the cache for any other builder.
 
-> **Warning**
+> [!WARNING]
 >
 > Pruning a cloud builder's cache also removes the cache for other team members
 > using the same builder.
-{ .warning }
 
 ## Unset Docker Build Cloud as the default builder
 
@@ -196,4 +194,3 @@ including OCI registries, must be accessible over the internet.
 >We are currently testing an experimental feature which lets cloud builders access internal resources. 
 >
 > If you're interested in trying this feature, contact us using the [Support form](https://hub.docker.com/support/contact?topic=Docker+Build+Cloud&subject=Private+registry+access).
-{ .tip }

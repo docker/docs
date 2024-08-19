@@ -71,7 +71,7 @@ This enables IPsec encryption at the level of the Virtual Extensible LAN (VXLAN)
 This encryption imposes a non-negligible performance penalty,
 so you should test this option before using it in production.
 
-> **Warning**
+> [!WARNING]
 >
 > Don't attach Windows containers to encrypted overlay networks.
 >
@@ -82,7 +82,6 @@ so you should test this option before using it in production.
 >
 > - Windows containers can't communicate with Linux containers on the network
 > - Data traffic between Windows containers on the network isn't encrypted
-{ .warning }
 
 ## Attach a container to an overlay network
 
@@ -96,7 +95,7 @@ To join an overlay network named `multi-host-network` with a `busybox` container
 $ docker run --network multi-host-network busybox sh
 ```
 
-> **Note**
+> [!NOTE]
 >
 > This only works if the overlay network is attachable
 > (created with the `--attachable` flag).

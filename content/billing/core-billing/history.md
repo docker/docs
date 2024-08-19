@@ -69,7 +69,7 @@ From here you can download an invoice.
 
 ### Organization
 
-> **Note**
+> [!NOTE]
 >
 > You must be an owner of the organization to view the billing history. 
 

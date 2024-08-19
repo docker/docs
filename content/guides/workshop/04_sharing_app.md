@@ -70,7 +70,7 @@ In the following image, you can see an example Docker command from Docker Hub. T
 Now that your image has been built and pushed into a registry, try running your app on a brand
 new instance that has never seen this container image. To do this, you will use Play with Docker.
 
-> **Note**
+> [!NOTE]
 >
 > Play with Docker uses the amd64 platform. If you are using an ARM based Mac with Apple silicon, you will need to rebuild the image to be compatible with Play with Docker and push the new image to your repository.
 >
@@ -100,7 +100,7 @@ new instance that has never seen this container image. To do this, you will use 
 
     You should see the image get pulled down and eventually start up.
 
-    > **Tip**
+    > [!TIP]
     >
     > You may have noticed that this command binds the port mapping to a
     > different IP address. Previous `docker run` commands published ports to
@@ -112,7 +112,6 @@ new instance that has never seen this container image. To do this, you will use 
     >
     > For more information about how port mapping works, see
     > [Networking](/engine/network/_index.md#published-ports).
-    { .tip }
 
 6. Select the 3000 badge when it appears.
 

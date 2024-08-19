@@ -120,7 +120,7 @@ $ docker buildx bake --print
 }
 ```
 
-> **Note**
+> [!NOTE]
 >
 > System environment variables take precedence over environment variables
 > in `.env` file.

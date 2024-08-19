@@ -6,11 +6,9 @@ aliases:
  - /desktop/extensions/private-marketplace/
 ---
 
-> **Beta**
->
-> This feature is currently in [Beta](../../release-lifecycle.md#beta). It is available to Docker Business customers only.
-{ .experimental }
-
+{{% experimental title="Beta" %}}
+This feature is currently in [Beta](../../release-lifecycle.md#beta). It is available to Docker Business customers only.
+{{% /experimental %}}
 
 Learn how to configure and set up a private marketplace with a curated list of extensions for your Docker Desktop users.
 
@@ -104,10 +102,9 @@ This list can include different types of extension images:
 - Extension images stored in Docker Hub as private images. Developers need to be signed in and have pull access to these images.
 - Extension images stored in a private registry. Developers need to be signed in and have pull access to these images.
  
-> **Important**
+> [!IMPORTANT]
 > 
 > Your developers can only install the version of the extension that you’ve listed.
-{ .important}
 
 ## Step four: Generate the private marketplace
 

@@ -1,4 +1,4 @@
-> **Note**
+> [!NOTE]
 >
 > Swarm mode is an advanced feature for managing a cluster of Docker daemons.
 >

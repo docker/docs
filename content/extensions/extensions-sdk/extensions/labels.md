@@ -14,10 +14,9 @@ This information is then displayed as an overview of the extension, so users can
 
 You can define [image labels](/reference/dockerfile.md#label) in the extension's `Dockerfile`.
 
-> **Important**
+> [!IMPORTANT]
 >
 > If any of the **required** labels are missing in the `Dockerfile`, Docker Desktop considers the extension invalid and doesn't list it in the Marketplace.
-{ .important }
 
 
 Here is the list of labels you can or need to specify when building your extension:
@@ -37,12 +36,11 @@ Here is the list of labels you can or need to specify when building your extensi
 | `com.docker.extension.account-info`         | No       | Whether the user needs to register to a SaaS platform to use some features of the extension.                                                                                                                                                                                                                                                                                                                                                                                                          | `required` in case it does, leave it empty otherwise.                                                                                                                                                                                              |
 | `com.docker.extension.categories`           | No       | The list of Marketplace categories that your extension belongs to: `ci-cd`, `container-orchestration`, `cloud-deployment`, `cloud-development`, `database`, `kubernetes`, `networking`, `image-registry`, `security`, `testing-tools`, `utility-tools`,`volumes`. If you don't specify this label, users won't be able to find your extension in the Extensions Marketplace when filtering by a category. Extensions published to the Marketplace before the 22nd of September 2022 have been auto-categorized by Docker. | Specified as comma separated values in case of having multiple categories e.g: `kubernetes,security` or a single value e.g. `kubernetes`.                                                                                                          |
 
-> **Tip**
+> [!TIP]
 >
 > Docker Desktop applies CSS styles to the provided HTML content. You can make sure that it renders correctly 
 > [within the Marketplace](#preview-the-extension-in-the-marketplace). It is recommended that you follow the 
 > [styling guidelines](../design/index.md).
-{ .tip }
 
 ## Preview the extension in the Marketplace
 

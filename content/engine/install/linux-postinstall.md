@@ -28,14 +28,13 @@ Docker Engine using a package manager. In that case, there is no need for you to
 manually create the group.
 
 <!-- prettier-ignore -->
-> **Warning**
+> [!WARNING]
 >
 > The `docker` group grants root-level privileges to the user. For
 > details on how this impacts security in your system, see
 > [Docker Daemon Attack Surface](../security/index.md#docker-daemon-attack-surface).
-{ .warning }
 
-> **Note**
+> [!NOTE]
 >
 > To run Docker without root privileges, see
 > [Run the Docker daemon as a non-root user (Rootless mode)](../security/rootless.md).

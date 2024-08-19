@@ -7,7 +7,7 @@ aliases:
  - /desktop/hardened-desktop/enhanced-container-isolation/
 ---
 
-> **Note**
+> [!NOTE]
 >
 > Enhanced Container Isolation is available to Docker Business customers only.
 
@@ -25,7 +25,7 @@ When Enhanced Container Isolation is enabled, these mechanisms are applied autom
 
 Enhanced Container Isolation ensures stronger container isolation and also locks in any security configurations that have been created by IT admins, for instance through [Registry Access Management policies](/security/for-admins/hardened-desktop/registry-access-management.md) or with [Settings Management](../settings-management/index.md).
 
-> **Note**
+> [!NOTE]
 >
 > Enhanced Container Isolation is in addition to other container security techniques used by Docker. For example, reduced Linux Capabilities, Seccomp, AppArmor.
 
@@ -57,12 +57,11 @@ These features and restrictions ensure that containers are better secured at run
 
 For more information on how Enhanced Container Isolation work, see [How does it work](how-eci-works.md).
 
-> **Important**
+> [!IMPORTANT]
 >
 > Enhanced Container Isolation does not yet fully protect Docker builds,
 > Kubernetes pods and Extension containers. For more information on known
 > limitations and workarounds, see [FAQs](faq.md).
-{.important }
 
 ### What host OSes / platforms is Enhanced Container Isolation supported on?
 
@@ -87,10 +86,9 @@ To enable Enhanced Container Isolation as a developer:
 5. Next to **Use Enhanced Container Isolation**, select the checkbox.
 6. Select **Apply and restart** to save your settings.
 
-> **Important**
+> [!IMPORTANT]
 >
 > Enhanced Container Isolation does not protect containers created prior to enabling ECI. For more information on known limitations and workarounds, see [FAQs](faq.md).
-{ .important }
 
 #### As an admin
 
@@ -131,10 +129,9 @@ For this to take effect:
 - On a new install, developers need to launch Docker Desktop and authenticate to their organization.
 - On an existing install, developers need to quit Docker Desktop through the Docker menu, and then relaunch Docker Desktop. If they are already signed in, they don’t need to sign in again for the changes to take effect.
 
-> **Important**
+> [!IMPORTANT]
 >
 > Selecting **Restart** from the Docker menu isn't enough as it only restarts some components of Docker Desktop.
-{ .important }
 
 ### What do users see when this setting is enforced by an admin?
 

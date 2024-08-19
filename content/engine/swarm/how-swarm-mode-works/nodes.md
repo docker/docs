@@ -49,7 +49,6 @@ Docker recommends a maximum of seven manager nodes for a swarm.
     >
     > Adding more managers does NOT mean increased
     > scalability or higher performance. In general, the opposite is true.
-    { .important }
 
 ## Worker nodes
 

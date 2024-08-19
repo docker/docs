@@ -305,7 +305,7 @@ Discarded in favor of [1.9.1](#191).
 
 {{< release-date date="2024-03-20" >}}
 
-> **Note**
+> [!NOTE]
 >
 > This release only affects the `docker/scout-action` GitHub Action.
 
@@ -333,7 +333,7 @@ Discarded in favor of [1.9.1](#191).
 
 {{< release-date date="2024-03-19" >}}
 
-> **Note**
+> [!NOTE]
 >
 > This release only affects the CLI plugin, not the GitHub Action
 

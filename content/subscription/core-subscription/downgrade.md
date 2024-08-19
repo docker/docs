@@ -12,10 +12,9 @@ You can downgrade your Docker subscription at anytime before the renewal date. T
 
 When you downgrade your subscription, access to paid features is available until the next billing cycle. The downgrade takes effect on the next billing cycle.
 
-> **Important**
+> [!IMPORTANT]
 >
 > If you downgrade your personal account from a Pro subscription to a Personal subscription, note that [Personal subscriptions](details.md#docker-personal) don't include collaborators for private repositories, and only 1 private repository is included. When you downgrade, all collaborators will be removed and additional private repositories are locked.
-{ .important }
 
 ## Before you downgrade
 
@@ -34,7 +33,6 @@ If you want to downgrade a Docker Business subscription and your organization us
 >**Important**
 >
 >If you have a [sales-assisted Docker Business subscription](details.md#sales-assisted), contact your account manager to downgrade your subscription. 
-{ .important }
 
 1. Sign in to your [Docker Hub](https://hub.docker.com) account.
 

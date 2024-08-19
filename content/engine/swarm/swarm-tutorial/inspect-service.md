@@ -38,7 +38,6 @@ the Docker CLI to see details about the service running in the swarm.
     >
     > To return the service details in json format, run the same command
     without the `--pretty` flag.
-    { .tip }
 
     ```console
     [manager1]$ docker service inspect helloworld
@@ -114,7 +113,6 @@ the Docker CLI to see details about the service running in the swarm.
     >
     > If `helloworld` is running on a node other than your manager node,
     you must ssh to that node.
-    { .tip }
 
     ```console
     [worker2]$ docker ps

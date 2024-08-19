@@ -17,7 +17,7 @@ Self-published extensions are autonomously published by extension developers and
 
 ## Install an extension
 
-> **Note**
+> [!NOTE]
 >
 > For some extensions, a separate account needs to be created before use.
 
@@ -43,7 +43,7 @@ The **Manage** tab displays with all your installed extensions. If an extension 
 
 You can uninstall an extension at any time.
 
-> **Note**
+> [!NOTE]
 >
 > Any data used by the extension that's stored in a volume must be manually deleted.
 

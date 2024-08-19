@@ -41,7 +41,7 @@ The `--mount` flag offers more advanced features and granular control, making it
 $ docker run --mount type=bind,source=/HOST/PATH,target=/CONTAINER/PATH,readonly nginx
 ```
 
-> **Note**
+> [!NOTE]
 >
 > Docker recommends using the `--mount` syntax instead of `-v`. It provides better control over the mounting process and avoids potential issues with missing directories.
 
@@ -59,7 +59,6 @@ Read-only bind mounts let the container access the mounted files on the host for
 > **Synchronised File Share**
 >
 > As your codebase grows larger, traditional methods of file sharing like bind mounts may become inefficient or slow, especially in development environments where frequent access to files is necessary. [Synchronized file shares](/desktop/synchronized-file-sharing/) improve bind mount performance by leveraging synchronized filesystem caches. This optimization ensures that file access between the host and virtual machine (VM) is fast and efficient.
-{ .tip }
 
 ## Try it out
 
@@ -147,9 +146,8 @@ Using a bind mount, you can map the configuration file on your host computer to 
    {{< /tabs >}}
 
 
-   > **Tip**  
+   > [!TIP]  
    > When using the `-v` or `--mount` flag in Windows PowerShell, you need to provide the absolute path to your directory instead of just `./`. This is because PowerShell handles relative paths differently from bash (commonly used in Mac and Linux environments).    
-   { .tip }
 
 
 

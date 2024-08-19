@@ -24,11 +24,10 @@ manage bind mounts.
 
 ![Bind mounts on the Docker host](images/types-of-mounts-bind.webp?w=450&h=300)
 
-> **Tip**
+> [!TIP]
 >
 > Working with large repositories or monorepos, or with virtual file systems that are no longer scaling with your codebase?
 > Check out [Synchronized file shares](/desktop/synchronized-file-sharing.md). It provides fast and flexible host-to-VM file sharing by enhancing bind mount performance through the use of synchronized filesystem caches.
-{ .tip }
 
 ## Choose the -v or --mount flag
 
@@ -41,7 +40,6 @@ syntax separates them. Here is a comparison of the syntax for each flag.
 > New users should use the `--mount` syntax. Experienced users may
 > be more familiar with the `-v` or `--volume` syntax, but are encouraged to
 > use `--mount`, because research has shown it to be easier to use.
-{ .tip }
 
 - `-v` or `--volume`: Consists of three fields, separated by colon characters
   (`:`). The fields must be in the correct order, and the meaning of each field
@@ -311,10 +309,9 @@ propagation setting has a recursive counterpoint. In the case of recursion,
 consider that `/tmp/a` is also mounted as `/foo`. The propagation settings
 control whether `/mnt/a` and/or `/tmp/a` would exist.
 
-> **Warning**
+> [!WARNING]
 >
 > Mount propagation doesn't work with Docker Desktop.
-{ .warning }
 
 | Propagation setting | Description                                                                                                                                                                                                         |
 |:--------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -381,12 +378,11 @@ Use extreme caution with these options. Bind-mounting a system directory
 such as `/home` or `/usr` with the `Z` option renders your host machine
 inoperable and you may need to relabel the host machine files by hand.
 
-> **Important**
+> [!IMPORTANT]
 >
 > When using bind mounts with services, selinux labels
 > (`:Z` and `:z`), as well as `:ro` are ignored. See
 > [moby/moby #32579](https://github.com/moby/moby/issues/32579) for details.
-{ .important }
 
 This example sets the `z` option to specify that multiple containers can share
 the bind mount's contents:

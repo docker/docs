@@ -76,7 +76,7 @@ For more details about image tag resolution, see
 
 ### gMSA for Swarm
 
-> **Note**
+> [!NOTE]
 >
 > This example only works for a Windows container.
 
@@ -122,7 +122,7 @@ nodes are able to log into the registry and pull the image.
 
  In Enterprise Edition 3.0, security is improved through the centralized distribution and management of Group Managed Service Account(gMSA) credentials using Docker config functionality. Swarm now allows using a Docker config as a gMSA credential spec, which reduces the burden of distributing credential specs to the nodes on which they are used. 
 
-> **Note**
+> [!NOTE]
 >
 > This option is only applicable to services using Windows containers.
 
@@ -304,7 +304,7 @@ updated. This feature is particularly important if you do use often-changing tag
 such as `latest`, because it ensures that all service tasks use the same version
 of the image.
 
-> **Note**>
+> [!NOTE]>
 >
 > If [content trust](../security/trust/index.md) is
 > enabled, the client actually resolves the image's tag to a digest before
@@ -356,7 +356,7 @@ When you run `service update` with the `--image` flag, the swarm manager queries
 Docker Hub or your private Docker registry for the digest the tag currently
 points to and updates the service tasks to use that digest.
 
-> **Note**
+> [!NOTE]
 >
 > If you use [content trust](../security/trust/index.md), the Docker
 > client resolves image and the swarm manager receives the image and digest,
@@ -474,7 +474,7 @@ control of the process for routing requests to your service's tasks. To publish
 a service's port directly on the node where it is running, use the `mode=host`
 option to the `--publish` flag.
 
-> **Note**
+> [!NOTE]
 >
 > If you publish a service's ports directly on the swarm node using
 > `mode=host` and also set `published=<PORT>` this creates an implicit
@@ -508,7 +508,7 @@ You can reach the nginx server on port 8080 of every swarm node. If you add a
 node to the swarm, a nginx task is started on it. You cannot start another
 service or container on any swarm node which binds to port 8080.
 
-> **Note**
+> [!NOTE]
 >
 > This is a purely illustrative example. Creating an application-layer
 > routing framework for a multi-tiered service is complex and out of scope for
@@ -566,10 +566,9 @@ flag. For more information, see
 
 ### Customize a service's isolation mode
 
-> **Important**
+> [!IMPORTANT]
 >
 > This setting applies to Windows hosts only and is ignored for Linux hosts.
-{ .important }
 
 Docker allows you to specify a swarm service's isolation
 mode. The isolation mode can be one of the following:
@@ -582,7 +581,7 @@ mode. The isolation mode can be one of the following:
 
 - `process`: Run the service tasks as a separate process on the host.
 
-  > **Note**
+  > [!NOTE]
   >
   > `process` isolation mode is only supported on Windows Server.
   > Windows 10 only supports `hyperv` isolation mode.
@@ -749,7 +748,7 @@ Placement preferences are not strictly enforced. If no node has the label
 you specify in your preference, the service is deployed as though the
 preference were not set.
 
-> **Note**
+> [!NOTE]
 >
 > Placement preferences are ignored for global services.
 
@@ -766,7 +765,7 @@ $ docker service create \
   redis:3.0.6
 ```
 
-> **Note**
+> [!NOTE]
 >
 > Nodes which are missing the label used to spread still receive
 > task assignments. As a group, these nodes receive tasks in equal
@@ -981,7 +980,7 @@ The following examples show bind mount syntax:
     <IMAGE>
   ```
 
-> **Important**
+> [!IMPORTANT]
 >
 > Bind mounts can be useful but they can also cause problems. In
 > most cases, it is recommended that you architect your application such that
@@ -999,7 +998,6 @@ The following examples show bind mount syntax:
 > - Host bind mounts are non-portable. When you use bind mounts, there is no
 >   guarantee that your application runs the same way in development as it does
 >   in production.
-{ .important }
 
 ### Create services using templates
 

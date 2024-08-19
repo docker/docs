@@ -42,7 +42,7 @@ Refer to the
 [`docker build` CLI reference](../../reference/cli/docker/buildx/build.md#file)
 to learn about the `--file` flag.
 
-> **Note**
+> [!NOTE]
 >
 > We recommend using the default (`Dockerfile`) for your project's primary
 > Dockerfile.
@@ -122,12 +122,11 @@ your Dockerfile, and should be the first line in Dockerfiles.
 # syntax=docker/dockerfile:1
 ```
 
-> **Tip**
+> [!TIP]
 >
 > We recommend using `docker/dockerfile:1`, which always points to the latest
 > release of the version 1 syntax. BuildKit automatically checks for updates of
 > the syntax before building, making sure you are using the most current version.
-{ .tip }
 
 ### Base image
 
@@ -168,7 +167,7 @@ Dockerfiles begin with the `#` symbol. As your Dockerfile evolves, comments can
 be instrumental to document how your Dockerfile works for any future readers
 and editors of the file, including your future self!
 
-> **Note**
+> [!NOTE]
 >
 > You might've noticed that comments are denoted using the same symbol as the
 > [syntax directive](#dockerfile-syntax) on the first line of the file.

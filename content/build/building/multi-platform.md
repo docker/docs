@@ -72,7 +72,7 @@ automatically detects the secondary architectures that are available. When
 BuildKit needs to run a binary for a different architecture, it automatically
 loads it through a binary registered in the `binfmt_misc` handler.
 
-> **Note**
+> [!NOTE]
 >
 > Emulation with QEMU can be much slower than native builds, especially for
 > compute-heavy tasks like compilation and compression or decompression.
@@ -258,7 +258,7 @@ $ docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t <userna
 #16 DONE 5.6s
 ```
 
-> **Note**
+> [!NOTE]
 > 
 > * `<username>` must be a valid Docker ID and `<image>` and valid repository on
 >   Docker Hub.

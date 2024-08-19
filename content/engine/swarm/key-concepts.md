@@ -53,7 +53,7 @@ manager node*. The manager node dispatches units of work called
 [tasks](#services-and-tasks) to worker nodes.
 
 Manager nodes also perform the orchestration and cluster management functions
-required to maintain the desired state of the swarm. Manager nodes elect a
+required to maintain the desired state of the swarm. Manager nodes select a
 single leader to conduct orchestration tasks.
 
 Worker nodes receive and execute tasks dispatched from manager nodes.

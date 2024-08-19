@@ -22,12 +22,11 @@ This provides more granular control over a GPU reservation as custom values can 
 - `options`. Key-value pairs representing driver specific options.
 
 
-> **Important**
+> [!IMPORTANT]
 >
 > You must set the `capabilities` field. Otherwise, it returns an error on service deployment.
 >
 > `count` and `device_ids` are mutually exclusive. You must only define one field at a time.
-{ .important }
 
 For more information on these properties, see the [Compose Deploy Specification](compose-file/deploy.md#devices).
 

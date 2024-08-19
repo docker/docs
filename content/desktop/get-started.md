@@ -31,7 +31,7 @@ Docker recommends that you authenticate using the **Sign in** option in the top-
 
 In large enterprises where admin access is restricted, administrators can [enforce sign-in](../security/for-admins/enforce-sign-in/_index.md). 
 
-> **Tip**
+> [!TIP]
 >
 > Explore [Docker's core subscriptions](https://www.docker.com/pricing/) to see what else Docker can offer you. 
 
@@ -43,7 +43,7 @@ In large enterprises where admin access is restricted, administrators can [enfor
 
 - Improve your organization’s security posture for containerized development by taking advantage of [Hardened Desktop](/security/for-admins/hardened-desktop/index.md).
 
-> **Note**
+> [!NOTE]
 >
 > Docker Desktop automatically signs you out after 90 days, or after 30 days of inactivity. 
 

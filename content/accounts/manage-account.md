@@ -6,10 +6,9 @@ title: Manage your Docker account
 
 You can centrally manage the settings for your Docker account. Here you can also take administrative actions for your account and manage your account security.
 
-> **Tip**
+> [!TIP]
 >
 > If your account is associated with an organization that enforces single sign-on (SSO), you may not have permissions to update your account settings. You need to contact your administrator to update your settings.
-{ .tip }
 
 ## Update general settings
 

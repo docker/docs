@@ -63,7 +63,7 @@ log: Hello world!
 A client can parse this message string to get both the log message, as well as its
 context information. The timestamp is also available within the ETW event.
 
-> **Note**
+> [!NOTE]
 >
 > This ETW provider only emits a message string, and not a specially structured
 > ETW event. Therefore, you don't have to register a manifest file with the

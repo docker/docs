@@ -52,7 +52,7 @@ The following example sets the log driver to `fluentd` and sets the
 
 Restart Docker for the changes to take effect.
 
-> **Note**
+> [!NOTE]
 >
 > `log-opts` configuration options in the `daemon.json` configuration file must
 > be provided as strings. Boolean and numeric values (such as the value for

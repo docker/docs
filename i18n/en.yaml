@@ -9,6 +9,15 @@ tableOfContents:
 relatedContent:
   other: Related content
 
+## callout titles:
+
+experimental: Experimental
+restricted: Restricted
+important: Important
+note: Note
+tip: Tip
+warning: Warning
+
 ## openapi strings:
 
 apiExampleResponse:

@@ -12,7 +12,7 @@ Services without a `profiles` attribute are always enabled.
 A service is ignored by Compose when none of the listed `profiles` match the active ones, unless the service is
 explicitly targeted by a command. In that case its profile is added to the set of active profiles.
 
-> **Note**
+> [!NOTE]
 >
 > All other top-level elements are not affected by `profiles` and are always active.
 

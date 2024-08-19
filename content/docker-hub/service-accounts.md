@@ -4,14 +4,14 @@ keywords: Docker, service, accounts, Docker Hub
 title: Service accounts
 ---
 
-> **Note**
+> [!NOTE]
 >
 > Service accounts require a
 > [Docker Team, or Business subscription](../subscription/index.md).
 
 A service account is a Docker ID used for automated management of container images or containerized applications. Service accounts are typically used in automated workflows, and don't share Docker IDs with the members in the organization. Common use cases for service accounts include mirroring content on Docker Hub, or tying in image pulls from your CI/CD process.
 
-> **Note**
+> [!NOTE]
 >
 > All paid Docker subscriptions include up to 5000 pulls per day per authenticated user. If you require a higher number of pulls, you can purchase an Enhanced Service Account add-on.
 
@@ -48,7 +48,7 @@ To create a new service account for your Team account:
 4. Add the new Docker ID  to the [team](manage-a-team.md) you created earlier.
 5. Create a new [personal access token (PAT)](access-tokens.md) from the user account and use it for CI.
 
-> **Note**
+> [!NOTE]
 >
 > If you want a read-only PAT just for your open-source repositories, or to access
 official images and other public images, you don't have to grant any access permissions to the new Docker ID.

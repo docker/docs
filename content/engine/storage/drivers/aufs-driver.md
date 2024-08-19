@@ -13,7 +13,6 @@ aliases:
 > v24.0. If you are using AufS, you must migrate to a supported storage driver
 > before upgrading to Docker Engine v24.0. Read the [Docker storage drivers](select-storage-driver.md)
 > page for supported storage drivers.
-{ .warning }
 
 AUFS is a *union filesystem*. The `aufs` storage driver was previously the default
 storage driver used for managing images and layers on Docker for Ubuntu, and for
@@ -107,7 +106,7 @@ Status: Downloaded newer image for ubuntu:latest
 
 #### The image layers
 
-> **Warning**: Do not directly manipulate any files or directories within
+> [!WARNING]: Do not directly manipulate any files or directories within
 > `/var/lib/docker/`. These files and directories are managed by Docker.
 
 All of the information about the image and container layers is stored in

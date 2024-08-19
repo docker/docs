@@ -29,7 +29,7 @@ grid:
     link: /security/for-admins/hardened-desktop/air-gapped-containers/
 ---
 
-> **Note**
+> [!NOTE]
 >
 > Hardened Docker Desktop is available to Docker Business customers only.
 

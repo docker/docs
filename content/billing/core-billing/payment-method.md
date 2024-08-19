@@ -42,7 +42,7 @@ All currency, for example the amount listed on your billing invoice, is in Unite
 
 ### Organization
 
-> **Note**
+> [!NOTE]
 >
 > You must be an organization owner to make changes to the payment information.
 

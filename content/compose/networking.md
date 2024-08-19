@@ -11,7 +11,7 @@ By default Compose sets up a single
 container for a service joins the default network and is both reachable by
 other containers on that network, and discoverable by the service's name.
 
-> **Note**
+> [!NOTE]
 >
 > Your app's network is given a name based on the "project name",
 > which is based on the name of the directory it lives in. You can override the
@@ -61,10 +61,9 @@ If you make a configuration change to a service and run `docker compose up` to u
 
 If any containers have connections open to the old container, they are closed. It is a container's responsibility to detect this condition, look up the name again and reconnect.
 
-> **Tip**
+> [!TIP]
 >
 > Reference containers by name, not IP, whenever possible. Otherwise you’ll need to constantly update the IP address you use.
-{ .tip }
 
 ## Link containers
 

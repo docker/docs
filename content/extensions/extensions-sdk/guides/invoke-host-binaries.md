@@ -19,7 +19,7 @@ means that you need to ship the executables for all the platforms you want to su
 
 Learn more about extensions [architecture](../architecture/index.md).
 
-> **Note**
+> [!NOTE]
 >
 > Only executables shipped as part of the extension can be invoked with the SDK. 
 
@@ -100,29 +100,26 @@ export function App() {
 {{< /tab >}}
 {{< tab name="Vue" >}}
 
-> **Important**
+> [!IMPORTANT]
 >
 > We don't have an example for Vue yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Vue)
 > and let us know if you'd like a sample with Vue.
-{ .important }
 
 {{< /tab >}}
 {{< tab name="Angular" >}}
 
-> **Important**
+> [!IMPORTANT]
 >
 > We don't have an example for Angular yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Angular)
 > and let us know if you'd like a sample with Angular.
-{ .important }
 
 {{< /tab >}}
 {{< tab name="Svelte" >}}
 
-> **Important**
+> [!IMPORTANT]
 >
 > We don't have an example for Svelte yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Svelte)
 > and let us know if you'd like a sample with Svelte.
-{ .important }
 
 {{< /tab >}}
 {{< /tabs >}}

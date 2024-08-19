@@ -1,4 +1,4 @@
-> **Note**
+> [!NOTE]
 >
 > The `docker stack deploy` command uses the legacy
 > [Compose file version 3](/compose/compose-file/compose-file-v3/)

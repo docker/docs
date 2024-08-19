@@ -143,11 +143,10 @@ Docker depend on Docker containers, you can use a process manager such as
 [systemd](https://systemd.io/) or
 [supervisor](http://supervisord.org/) instead.
 
-> **Warning**
+> [!WARNING]
 >
 > Don't combine Docker restart policies with host-level process managers,
 > as this creates conflicts.
-{ .warning }
 
 To use a process manager, configure it to start your container or service using
 the same `docker start` or `docker service` command you would normally use to
@@ -159,10 +158,9 @@ process manager for more details.
 Process managers can also run within the container to check whether a process is
 running and starts/restart it if not.
 
-> **Warning**
+> [!WARNING]
 >
 > These aren't Docker-aware, and only monitor operating system processes within
 > the container. Docker doesn't recommend this approach, because it's
 > platform-dependent and may differ between versions of a given Linux
 > distribution.
-{ .warning }

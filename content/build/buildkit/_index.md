@@ -86,7 +86,7 @@ command, run:
 $ DOCKER_BUILDKIT=1 docker build .
 ```
 
-> **Note**
+> [!NOTE]
 >
 > [Buildx](../architecture.md#buildx) always uses BuildKit.
 
@@ -107,12 +107,11 @@ daemon.
 
 ## BuildKit on Windows
 
-> **Warning**
+> [!WARNING]
 >
 > BuildKit only fully supports building Linux containers.
 > Windows container support is experimental, and is tracked in
 > [`moby/buildkit#616`](https://github.com/moby/buildkit/issues/616).
-{ .warning }
 
 BuildKit has experimental support for Windows containers (WCOW) as of version 0.13.
 This section walks you through the steps for trying it out.
@@ -133,7 +132,7 @@ We appreciate any feedback you submit by [opening an issue here](https://github.
 
 ### Steps
 
-> **Note**
+> [!NOTE]
 >
 > The following commands require administrator (elevated) privileges in a PowerShell terminal.
 
@@ -188,7 +187,7 @@ We appreciate any feedback you submit by [opening an issue here](https://github.
 
 7. In another terminal with administrator privileges, create a remote builder that uses the local BuildKit daemon.
 
-   > **Note**
+   > [!NOTE]
    >
    > This requires Docker Desktop version 4.29 or later.
 

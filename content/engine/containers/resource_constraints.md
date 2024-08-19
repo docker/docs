@@ -210,12 +210,11 @@ can't use the CFS scheduler. You need to
 before you can [configure the Docker daemon](#configure-the-docker-daemon) or
 [configure individual containers](#configure-individual-containers).
 
-> **Warning**
+> [!WARNING]
 >
 > CPU scheduling and prioritization are advanced kernel-level features. Most
 > users don't need to change these values from their defaults. Setting these
 > values incorrectly can cause your host system to become unstable or unusable.
-{ .warning }
 
 #### Configure the host machine's kernel
 
@@ -322,7 +321,7 @@ $ docker run -it --rm --gpus '"device=0,2"' ubuntu nvidia-smi
 
 Exposes the first and third GPUs.
 
-> **Note**
+> [!NOTE]
 >
 > NVIDIA GPUs can only be accessed by systems running a single engine.
 

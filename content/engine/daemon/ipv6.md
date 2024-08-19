@@ -166,7 +166,7 @@ size `/64`, from an IPv6 pool of prefix length `/56`.
 }
 ```
 
-> **Note**
+> [!NOTE]
 >
 > The address `2001:db8::` in this example is
 > [reserved for use in documentation][wikipedia-ipv6-reserved].

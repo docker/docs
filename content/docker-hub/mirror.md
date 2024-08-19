@@ -16,7 +16,7 @@ to the internet and fetches an image it doesn't have locally, from the Docker
 repository. You can run a local registry mirror and point all your daemons
 there, to avoid this extra internet traffic.
 
-> **Note**
+> [!NOTE]
 >
 > Docker Official Images are an intellectual property of Docker.
 
@@ -33,7 +33,7 @@ relying entirely on your local registry is the simplest scenario.
 It's currently not possible to mirror another private registry. Only the central
 Hub can be mirrored.
 
-> **Note**
+> [!NOTE]
 >
 > Mirrors of Docker Hub are still subject to Docker's [fair usage policy](https://www.docker.com/pricing/resource-consumption-updates).
 
@@ -76,7 +76,7 @@ Multiple registry caches can be deployed over the same back-end. A single
 registry cache ensures that concurrent requests do not pull duplicate data,
 but this property does not hold true for a registry cache cluster.
 
-> **Note**
+> [!NOTE]
 >
 > When using Docker Hub, all paid Docker subscriptions are limited to 5000 pulls per day. If you require a higher number of pulls, you can purchase an Enhanced Service Account add-on. See [Service Accounts](/docker-hub/service-accounts/) for more details.
 
@@ -95,19 +95,17 @@ proxy:
   password: [password]
 ```
 
-> **Warning**
+> [!WARNING]
 >
 > If you specify a username and password, it's very important to understand that
 > private resources that this user has access to Docker Hub is made available on
 > your mirror. You must secure your mirror by implementing authentication if
 > you expect these resources to stay private!
-{ .warning }
 
-> **Warning**
+> [!WARNING]
 >
 > For the scheduler to clean up old entries, `delete` must be enabled in the
 > registry configuration.
-{ .warning }
 
 ### Configure the Docker daemon
 
@@ -123,7 +121,7 @@ and add the `registry-mirrors` key and value, to make the change persistent.
 
 Save the file and reload Docker for the change to take effect.
 
-> **Note**
+> [!NOTE]
 >
 > Some log messages that appear to be errors are actually informational
 > messages.

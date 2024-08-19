@@ -24,16 +24,15 @@ workloads.
 3. Next to **Enable Kubernetes**, select the checkbox.
 4. Select **Apply & Restart** to save the settings and then select **Install** to confirm. This instantiates images required to run the Kubernetes server as containers, and installs the `/usr/local/bin/kubectl` command on your machine.
 
-   > **Important**
+   > [!IMPORTANT]
    >
    > The `kubectl` binary is not automatically packaged with Docker Desktop for Linux. To install the kubectl command for Linux, see [Kubernetes documentation](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/). It should be installed at `/usr/local/bin/kubectl`.
-   { .important}
 
 By default, Kubernetes containers are hidden from commands like `docker ps`, because managing them manually is not supported. Most users do not need this option. To see these internal containers, select **Show system containers (advanced)**. 
 
 When Kubernetes is turned on and running, an additional status bar in the Docker Dashboard footer and Docker menu displays. 
 
-> **Note**
+> [!NOTE]
 >
 > Docker Desktop does not upgrade your Kubernetes cluster automatically after a new update. To upgrade your Kubernetes cluster to the latest version, select **Reset Kubernetes Cluster**.
 
@@ -52,12 +51,11 @@ $ kubectl config get-contexts
 $ kubectl config use-context docker-desktop
 ```
 
-> **Tip**
+> [!TIP]
 >
 > Run the `kubectl` command in a CMD or PowerShell terminal, otherwise `kubectl config get-contexts` may return an empty result. 
 >
 > If you are using a different terminal and this happens, you can try setting the `kubeconfig` environment variable to the location of the `.kube/config` file. 
-{ .tip }
 
 If you installed `kubectl` using Homebrew, or by some other method, and
 experience conflicts, remove `/usr/local/bin/kubectl`.

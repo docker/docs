@@ -66,7 +66,7 @@ webapp:
     - ANOTHER_VARIABLE=value
 ```
 
-> **Important**
+> [!IMPORTANT]
 >
 > When you use multiple Compose files, you must make sure all paths in the
 files are relative to the base Compose file (the first Compose file specified
@@ -75,7 +75,6 @@ Compose files. Override files can contain small fragments of configuration.
 Tracking which fragment of a service is relative to which path is difficult and
 confusing, so to keep paths easier to understand, all paths must be defined
 relative to the base file.
-{ .important }
 
 ### Additional information
 

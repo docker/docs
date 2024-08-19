@@ -81,7 +81,7 @@ services:
       YET_ANOTHER: VARIABLE
 ```
 
-> **Note**
+> [!NOTE]
 >
 > [YAML merge](https://yaml.org/type/merge.html) only applies to mappings, and can't be used with sequences. 
 

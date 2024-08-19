@@ -73,7 +73,7 @@ containers.
 
 ### Advanced
 
-> **Note**
+> [!NOTE]
 >
 > The **Resource allocation** options in the **Advanced** tab are only available in Hyper-V mode, because Windows manages
 > the resources in WSL 2 mode and Windows container mode. In WSL 2
@@ -105,7 +105,6 @@ Advanced settings are:
 >
 > If you feel Docker Desktop starting to get slow or you're running
 > multi-container workloads, increase the memory and disk image space allocation
-{ .tip }
 
 - **Resource Saver**. Enable or disable [Resource Saver mode](../use-desktop/resource-saver.md),
   which significantly reduces CPU and memory utilization on the host by
@@ -123,7 +122,7 @@ Advanced settings are:
 
 ### File sharing
 
-> **Note**
+> [!NOTE]
 >
 > The **File sharing** tab is only available in Hyper-V mode because the files
 > are automatically shared in WSL 2 mode and Windows container mode.
@@ -179,7 +178,6 @@ File share settings are:
 >   open `Test` will fail with the error "No such file or directory". Similarly,
 >   once a file called `test` is created, attempts to create a second file called
 >   `Test` will fail.
-{ .tip }
 
 #### Shared folders on demand
 
@@ -222,7 +220,7 @@ The HTTPS proxy settings used for scanning images are set using the `HTTPS_PROXY
 If you are running Windows containers in Docker, you can allow the Windows Docker daemon to use Docker Desktop's internal proxy, with the **Use proxy for Windows Docker daemon** setting.
 This is useful when a corporate proxy that requires authentication is manually configured or set at the system level. If you are an admin for your organization and have a Docker Business subscription, you can control this setting with [Settings management](/security/for-admins/hardened-desktop/settings-management/configure.md) using the `windowsDockerdPort` parameter.
 
-> **Note**
+> [!NOTE]
 >
 > If you are using a PAC file hosted on a web server, make sure to add the MIME type `application/x-ns-proxy-autoconfig` for the `.pac` file extension on the server or website. Without this configuration, the PAC file may not be parsed correctly.
 
@@ -244,13 +242,13 @@ Developers are no longer interrupted by prompts for proxy credentials as authent
 
 If your proxy offers multiple authentication schemes in 407(Proxy Authentication Required) response, Docker Desktop by default selects Basic authentication scheme. If your proxy server is properly configured for Kerberos or NTLM authentication, you can enable Kerberos/NTLM proxy authentication during Docker Desktop installation. To do that, you will have install Docker Deskop from command line and pass the installer flag '--proxy-enable-kerberosntlm'. Available with Docker Desktop 4.32 and later.
 
-> **Note**
+> [!NOTE]
 >
 > Docker Desktop also supports the use of [SOCKS5 proxies](../networking.md#socks5-proxy-support).
 
 ### Network
 
-> **Note**
+> [!NOTE]
 >
 > The **Network** tab isn't available in the Windows container mode because
 > Windows manages networking.
@@ -304,7 +302,7 @@ Select **Apply & Restart** to save your settings and restart Docker Desktop.
 
 ## Kubernetes
 
-> **Note**
+> [!NOTE]
 >
 > The **Kubernetes** tab is not available in Windows container mode.
 

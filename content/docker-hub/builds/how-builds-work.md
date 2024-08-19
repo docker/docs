@@ -4,7 +4,7 @@ keywords: docker hub, automated builds
 title: How Automated builds work
 ---
 
-> **Note**
+> [!NOTE]
 >
 > Automated builds require a
 > [Docker Pro, Team, or Business subscription](../../subscription/index.md).
@@ -20,7 +20,7 @@ to a source-code branch, for example in GitHub, for one of those listed image
 tags, the push uses a webhook to trigger a new build, which produces a Docker
 image. The built image is then pushed to Docker Hub.
 
-> **Note**
+> [!NOTE]
 >
 > You can still use `docker push` to push pre-built images to
 repositories with Automated builds configured.

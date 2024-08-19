@@ -69,7 +69,7 @@ This 45-minute workshop contains step-by-step instructions on how to get started
 - Deploy Docker applications using multiple containers with a database.
 - Run applications using Docker Compose.
 
-> **Note**
+> [!NOTE]
 >
 > For a quick introduction to Docker and the benefits of containerizing your
 > applications, see [Getting started](../getting-started/_index.md).

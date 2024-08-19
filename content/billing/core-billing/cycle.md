@@ -26,7 +26,7 @@ When you change the billing cycle's duration:
 
 ## Organization
 
-> **Note**
+> [!NOTE]
 >
 > You must be an organization owner to make changes to the payment information.
 

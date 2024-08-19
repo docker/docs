@@ -138,7 +138,7 @@ well as:
 When possible, you should prefer `mode=max` as it contains significantly more
 detailed information for analysis.
 
-> **Warning**
+> [!WARNING]
 >
 > Note that `mode=max` exposes the values of
 > [build arguments](../../reference/cli/docker/buildx/build.md#build-arg).
@@ -147,7 +147,6 @@ detailed information for analysis.
 > tokens, or other secrets, you should refactor your build to pass the secrets using
 > [secret mounts](../../reference/cli/docker/buildx/build.md#secret) instead.
 > Secret mounts don't leak outside of the build and are never included in provenance attestations.
-{.warning}
 
 ## Inspecting Provenance
 

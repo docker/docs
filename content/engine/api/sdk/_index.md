@@ -162,7 +162,7 @@ hello world
 When using cURL to connect over a Unix socket, the hostname is not important. The previous
 examples use `localhost`, but any hostname would work.
 
-> **Important**
+> [!IMPORTANT]
 >
 > The previous examples assume you're using cURL 7.50.0 or above. Older versions of
 > cURL used a [non-standard URL notation](https://github.com/moby/moby/issues/17960)
@@ -170,7 +170,6 @@ examples use `localhost`, but any hostname would work.
 >
 > If you're' using an older version of cURL, use `http:/<API version>/` instead,
 > for example: `http:/v{{% param "latest_engine_api_version" %}}/containers/1c6594faf5/start`.
-{ .important }
 
 {{< /tab >}}
 {{< /tabs >}}

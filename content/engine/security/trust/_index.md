@@ -95,11 +95,10 @@ The following image depicts the various signing keys and their relationships:
 
 ![Content Trust components](images/trust_components.png)
 
-> **Warning**
+> [!WARNING]
 >
 >The root key once lost is not recoverable. If you lose any other key, send an email to [Docker Hub Support](mailto:hub-support@docker.com). This loss also requires manual intervention from every
 consumer that used a signed tag from this repository prior to the loss.
-{ .warning }
 
 You should back up the root key somewhere safe. Given that it is only required
 to create new repositories, it is a good idea to store it offline in hardware.

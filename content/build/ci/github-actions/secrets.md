@@ -57,7 +57,7 @@ jobs:
             "github_token=${{ secrets.GITHUB_TOKEN }}"
 ```
 
-> **Note**
+> [!NOTE]
 >
 > You can also expose a secret file to the build with the `secret-files` input:
 >
@@ -94,7 +94,7 @@ secrets: |
 | `EMPTYLINE`      | `aaaa\n\nbbbb\nccc`                 |
 | `JSON_SECRET`    | `{"key1":"value1","key2":"value2"}` |
 
-> **Note**
+> [!NOTE]
 >
 > Double escapes are needed for quote signs.
 

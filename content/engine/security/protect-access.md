@@ -13,7 +13,7 @@ optionally communicate using SSH or a TLS (HTTPS) socket.
 
 ## Use SSH to protect the Docker daemon socket
 
-> **Note**
+> [!NOTE]
 >
 > The given `USERNAME` must have permissions to access the docker socket on the
 > remote machine. Refer to [manage Docker as a non-root user](../install/linux-postinstall.md#manage-docker-as-a-non-root-user)
@@ -85,15 +85,14 @@ In the daemon mode, it only allows connections from clients
 authenticated by a certificate signed by that CA. In the client mode,
 it only connects to servers with a certificate signed by that CA.
 
-> **Important**
+> [!IMPORTANT]
 >
 > Using TLS and managing a CA is an advanced topic. Familiarize yourself
 > with OpenSSL, x509, and TLS before using it in production.
-{ .important }
 
 ### Create a CA, server and client keys with OpenSSL
 
-> **Note**
+> [!NOTE]
 >
 > Replace all instances of `$HOST` in the following example with the
 > DNS name of your Docker daemon's host.
@@ -131,7 +130,7 @@ Now that you have a CA, you can create a server key and certificate
 signing request (CSR). Make sure that "Common Name" matches the hostname you use
 to connect to Docker:
 
-> **Note**
+> [!NOTE]
 >
 > Replace all instances of `$HOST` in the following example with the
 > DNS name of your Docker daemon's host.
@@ -183,7 +182,7 @@ Docker clients.
 For client authentication, create a client key and certificate signing
 request:
 
-> **Note**
+> [!NOTE]
 >
 > For simplicity of the next couple of steps, you may perform this
 > step on the Docker daemon's host machine as well.
@@ -255,14 +254,13 @@ $ dockerd \
 To connect to Docker and validate its certificate, provide your client keys,
 certificates and trusted CA:
 
-> **Tip**
+> [!TIP]
 >
 > This step should be run on your Docker client machine. As such, you
 > need to copy your CA certificate, your server certificate, and your client
 > certificate to that machine.
-{ .tip }
 
-> **Note**
+> [!NOTE]
 >
 > Replace all instances of `$HOST` in the following example with the
 > DNS name of your Docker daemon's host.
@@ -275,18 +273,17 @@ $ docker --tlsverify \
     -H=$HOST:2376 version
 ```
 
-> **Note**
+> [!NOTE]
 >
 > Docker over TLS should run on TCP port 2376.
 
-> **Warning**
+> [!WARNING]
 >
 > As shown in the example above, you don't need to run the `docker` client
 > with `sudo` or the `docker` group when you use certificate authentication.
 > That means anyone with the keys can give any instructions to your Docker
 > daemon, giving them root access to the machine hosting the daemon. Guard
 > these keys as you would a root password!
-{ .warning }
 
 ### Secure by default
 

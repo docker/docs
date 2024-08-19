@@ -54,7 +54,7 @@ See:
 
 {{< introduced desktop 4.28.0 "release-notes.md#4280" >}}
 
-> **Note**
+> [!NOTE]
 >
 > Requires a Business subscription.
 
