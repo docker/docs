@@ -7,7 +7,9 @@ keywords: Docker, GitHub Copilot, extension, Visual Studio Code, chat, ai, conta
 {{% restricted title="Early access" %}}
 
 The Docker for GitHub Copilot extension is a part of the [Limited Public Beta](https://github.blog/changelog/2024-05-21-copilot-extensions-now-in-limited-public-beta/)
-for GitHub Copilot Extensions. Only members of the beta program are eligible to use this extension.
+for GitHub Copilot Extensions.
+
+To get access, [sign up for the Copilot Extensions waitlist](https://github.com/github-copilot/copilot_extensions_waitlist_signup).
 
 {{% /restricted %}}
 
