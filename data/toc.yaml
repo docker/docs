@@ -2308,9 +2308,9 @@ Manuals:
           - path: /security/for-admins/hardened-desktop/settings-management/
             title: What is Settings Management?
           - path: /security/for-admins/hardened-desktop/settings-management/json-file-configure/
-            title: Configure with a JSON file
+            title: Set with a JSON file
           - path: /security/for-admins/hardened-desktop/settings-management/admin-console-configure/
-            title: Configure with the Admin Console {{< badge color=violet text="Early Access" >}}
+            title: Set with the Admin Console {{< badge color=violet text="EA" >}}
         - sectiontitle: Enhanced Container Isolation
           section:
           - path: /security/for-admins/hardened-desktop/enhanced-container-isolation/
