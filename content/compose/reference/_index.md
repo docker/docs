@@ -78,4 +78,4 @@ You can use Docker Compose binary, `docker compose [-f <arg>...] [options]
 - [Specify a project name](../project-name.md)
 - [Using environment variables](../environment-variables/_index.md)
 - [Working with multiple Compose files](../multiple-compose-files/_index.md)
-- [Compose Specification](../compose-file/_index.md)
+- [Compose Specification](/reference/compose-file/_index.md)

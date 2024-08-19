@@ -227,7 +227,7 @@ examples: |-
     * `kubernetes`
     * `remote`
 
-    For more information about build drivers, see [here](/build/drivers/).
+    For more information about build drivers, see [here](/build/builders/drivers/).
 
     #### `docker` driver
 
@@ -274,10 +274,10 @@ examples: |-
     For information about available driver options, refer to the detailed
     documentation for the specific driver:
 
-    * [`docker` driver](/build/drivers/docker/)
-    * [`docker-container` driver](/build/drivers/docker-container/)
-    * [`kubernetes` driver](/build/drivers/kubernetes/)
-    * [`remote` driver](/build/drivers/remote/)
+    * [`docker` driver](/build/builders/drivers/docker/)
+    * [`docker-container` driver](/build/builders/drivers/docker-container/)
+    * [`kubernetes` driver](/build/builders/drivers/kubernetes/)
+    * [`remote` driver](/build/builders/drivers/remote/)
 
     ### Remove a node from a builder (--leave) {#leave}
 

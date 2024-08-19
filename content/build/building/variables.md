@@ -306,7 +306,7 @@ They're used to configure the Buildx client, or the BuildKit daemon.
 | [BUILDKIT_COLORS](#buildkit_colors)                                         | String            | Configure text color for the terminal output.        |
 | [BUILDKIT_HOST](#buildkit_host)                                             | String            | Specify host to use for remote builders.             |
 | [BUILDKIT_PROGRESS](#buildkit_progress)                                     | String            | Configure type of progress output.                   |
-| [BUILDKIT_TTY_LOG_LINES](#buildkit_tty_log_lines)                           | String            | Number of log lines (for active steps in tty mode).  |
+| [BUILDKIT_TTY_LOG_LINES](#buildkit_tty_log_lines)                           | String            | Number of log lines (for active steps in TTY mode).  |
 | [BUILDX_BAKE_GIT_AUTH_HEADER](#buildx_bake_git_auth_header)                 | String            | HTTP authentication scheme for remote Bake files.    |
 | [BUILDX_BAKE_GIT_AUTH_TOKEN](#buildx_bake_git_auth_token)                   | String            | HTTP authentication token for remote Bake files.     |
 | [BUILDX_BAKE_GIT_SSH](#buildx_bake_git_ssh)                                 | String            | SSH authentication for remote Bake files.            |
@@ -380,7 +380,7 @@ $ export BUILDKIT_PROGRESS=plain
 
 ### BUILDKIT_TTY_LOG_LINES
 
-You can change how many log lines are visible for active steps in tty mode by
+You can change how many log lines are visible for active steps in TTY mode by
 setting `BUILDKIT_TTY_LOG_LINES` to a number (default to `6`).
 
 ```console
@@ -519,7 +519,7 @@ $ export BUILDX_EXPERIMENTAL=1
 {{< introduced buildx 0.10.4 "../release-notes.md#0104" >}}
 
 When set to true, checks for dirty state in source control information for
-[provenance attestations](../attestations/slsa-provenance.md).
+[provenance attestations](/build/metadata/attestations/slsa-provenance.md).
 
 Usage:
 
@@ -532,7 +532,7 @@ $ export BUILDX_GIT_CHECK_DIRTY=1
 {{< introduced buildx 0.10.0 "../release-notes.md#0100" >}}
 
 When set to false, removes source control information from
-[provenance attestations](../attestations/slsa-provenance.md).
+[provenance attestations](/build/metadata/attestations/slsa-provenance.md).
 
 Usage:
 
@@ -574,7 +574,7 @@ If the repository is in a dirty state, the `revision` gets a `-dirty` suffix.
 {{< introduced buildx 0.10.4 "../release-notes.md#0104" >}}
 
 By default, BuildKit v0.11 and later adds
-[provenance attestations](../attestations/slsa-provenance.md) to images you
+[provenance attestations](/build/metadata/attestations/slsa-provenance.md) to images you
 build. Set `BUILDX_NO_DEFAULT_ATTESTATIONS=1` to disable the default provenance
 attestations.
 

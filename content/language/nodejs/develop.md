@@ -86,7 +86,7 @@ You can use containers to set up local services, like a database. In this sectio
    > [!NOTE]
    >
    > To learn more about the instructions in the Compose file, see [Compose file
-   > reference](/compose/compose-file/).
+   > reference](/reference/compose-file/).
 
 
 3. Open `src/persistence/postgres.js` in an IDE or text editor. You'll notice
@@ -417,8 +417,8 @@ database and persist data. You also learned how to create a multi-stage
 Dockerfile and set up a bind mount for development.
 
 Related information:
- - [Volumes top-level element](/compose/compose-file/07-volumes/)
- - [Services top-level element](/compose/compose-file/05-services/)
+ - [Volumes top-level element](/reference/compose-file/volumes/)
+ - [Services top-level element](/reference/compose-file/services/)
  - [Multi-stage builds](../../build/building/multi-stage.md)
 
 ## Next steps

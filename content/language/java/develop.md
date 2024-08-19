@@ -335,7 +335,7 @@ In this section, you took a look at running a database locally and persisting th
 
 Related information:
 
- - [Compose file reference](/compose/compose-file/)
+ - [Compose file reference](/reference/compose-file/)
  - [Compose Watch](../../compose/file-watch.md)
  - [Dockerfile reference](/reference/dockerfile/)
 

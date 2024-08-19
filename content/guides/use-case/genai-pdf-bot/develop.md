@@ -236,7 +236,7 @@ access all the services that your GenAI application needs.
 
 Related information:
  - [Dockerfile reference](../../../reference/dockerfile.md)
- - [Compose file reference](../../../compose/compose-file/_index.md)
+ - [Compose file reference](/reference/compose-file/_index.md)
  - [Ollama Docker image](https://hub.docker.com/r/ollama/ollama)
  - [Neo4j Official Docker Image](https://hub.docker.com/_/neo4j)
  - [GenAI Stack demo applications](https://github.com/docker/genai-stack)

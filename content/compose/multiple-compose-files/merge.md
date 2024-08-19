@@ -14,7 +14,7 @@ services.
 
 If a service is defined in both files, Compose merges the configurations using
 the rules described below and in the 
-[Compose Specification](../compose-file/13-merge.md).
+[Compose Specification](/reference/compose-file/merge.md).
 
 ## How to merge multiple Compose files
 
@@ -273,7 +273,7 @@ services:
       - ./local:/baz
 ```
 
-For more merging rules, see [Merge and override](../compose-file/13-merge.md) in the Compose Specification. 
+For more merging rules, see [Merge and override](/reference/compose-file/merge.md) in the Compose Specification. 
 
 ## Example
 
@@ -367,4 +367,4 @@ With such a constraint, code organization in a monorepo can become hard as a nat
 
 ## Reference information
 
-- [Merge rules](../compose-file/13-merge.md)
+- [Merge rules](/reference/compose-file/merge.md)

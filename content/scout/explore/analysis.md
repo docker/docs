@@ -75,7 +75,7 @@ analysis is activated.
    ```
 
    Building with the `--provenance=true` and `--sbom=true` flags attaches
-   [build attestations](/build/attestations/_index.md) to the image. Docker
+   [build attestations](/build/metadata/attestations/_index.md) to the image. Docker
    Scout uses attestations to provide more fine-grained analysis results.
 
    > [!NOTE]
@@ -231,7 +231,7 @@ Image analysis on the Docker Scout platform, and analysis triggered by backgroun
 indexing in Docker Desktop, has an image file size limit of 10 GB (uncompressed).
 To analyze images larger than that, you can either:
 
-- Attach [SBOM attestations](/build/attestations/sbom.md) at build-time
+- Attach [SBOM attestations](/build/metadata/attestations/sbom.md) at build-time
 - Use the [CLI](#cli) to analyze the image locally
 
 Images analyzed locally with the CLI and images with SBOM attestations

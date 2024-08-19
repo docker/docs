@@ -34,7 +34,7 @@ For more information on how to optimize your builds, see
 
 ### Dockerignore files
 
-Using a [`.dockerignore` file](/build/building/context/#dockerignore-files),
+Using a [`.dockerignore` file](/build/concepts/context.md#dockerignore-files),
 you can be explicit about which local files you don’t want to include in the
 build context. Files caught by the glob patterns you specify in your
 ignore-file aren't transferred to the remote builder.

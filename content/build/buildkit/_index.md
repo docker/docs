@@ -16,10 +16,10 @@ It also introduces support for handling more complex scenarios:
 - Detect and skip executing unused build stages
 - Parallelize building independent build stages
 - Incrementally transfer only the changed files in your
-  [build context](../building/context.md) between builds
+  [build context](../concepts/context.md) between builds
 - Detect and skip transferring unused files in your
-  [build context](../building/context.md)
-- Use [Dockerfile frontend](../dockerfile/frontend.md) implementations with many
+  [build context](../concepts/context.md)
+- Use [Dockerfile frontend](frontend.md) implementations with many
   new features
 - Avoid side effects with rest of the API (intermediate images and containers)
 - Prioritize your build cache for automatic pruning
@@ -67,7 +67,7 @@ work for the features used by their definition.
 
 For example, to build a [Dockerfile](../../reference/dockerfile.md) with
 BuildKit, you would
-[use an external Dockerfile frontend](../dockerfile/frontend.md).
+[use an external Dockerfile frontend](frontend.md).
 
 ## Getting started
 
@@ -88,7 +88,7 @@ $ DOCKER_BUILDKIT=1 docker build .
 
 > [!NOTE]
 >
-> [Buildx](../architecture.md#buildx) always uses BuildKit.
+> Buildx always uses BuildKit.
 
 To use Docker BuildKit by default, edit the Docker daemon configuration in
 `/etc/docker/daemon.json` as follows, and restart the daemon.

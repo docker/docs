@@ -7,7 +7,7 @@ aliases:
 - /compose/extends/
 ---
 
-Docker Compose's [`extends` attribute](../compose-file/05-services.md#extends)
+Docker Compose's [`extends` attribute](/reference/compose-file/services.md#extends)
 lets you share common configurations among different files, or even different
 projects entirely.
 
@@ -205,4 +205,4 @@ services:
 
 ## Reference information
 
-- [`extends`](../compose-file/05-services.md#extends)
+- [`extends`](/reference/compose-file/services.md#extends)

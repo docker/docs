@@ -105,7 +105,7 @@ jobs:
 ## Configure annotation level
 
 By default, annotations are placed on image manifests. To configure the
-[annotation level](../../building/annotations.md#specify-annotation-level), set
+[annotation level](../../metadata/annotations.md#specify-annotation-level), set
 the `DOCKER_METADATA_ANNOTATIONS_LEVELS` environment variable on the
 `metadata-action` step to a comma-separated list of all the levels that you
 want to annotate. For example, setting `DOCKER_METADATA_ANNOTATIONS_LEVELS` to

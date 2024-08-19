@@ -1037,39 +1037,39 @@ Reference:
   section:
     - sectiontitle: Compose Specification
       section:
-      - path: /compose/compose-file/
+      - path: /reference/compose-file/
         title: Overview
-      - path: /compose/compose-file/04-version-and-name/
+      - path: /reference/compose-file/version-and-name/
         title: Version and name top-level element
-      - path: /compose/compose-file/05-services/
+      - path: /reference/compose-file/services/
         title: Services top-level element
-      - path: /compose/compose-file/06-networks/
+      - path: /reference/compose-file/networks/
         title: Network top-level element
-      - path: /compose/compose-file/07-volumes/
+      - path: /reference/compose-file/volumes/
         title: Volumes top-level element
-      - path: /compose/compose-file/08-configs/
+      - path: /reference/compose-file/configs/
         title: Configs top-level element
-      - path: /compose/compose-file/09-secrets/
+      - path: /reference/compose-file/secrets/
         title: Secrets top-level element
-      - path: /compose/compose-file/10-fragments/
+      - path: /reference/compose-file/fragments/
         title: Fragments
-      - path: /compose/compose-file/11-extension/
+      - path: /reference/compose-file/extension/
         title: Extensions
-      - path: /compose/compose-file/12-interpolation/
+      - path: /reference/compose-file/interpolation/
         title: Interpolation
-      - path: /compose/compose-file/13-merge/
+      - path: /reference/compose-file/merge/
         title: Merge
-      - path: /compose/compose-file/14-include/
+      - path: /reference/compose-file/include/
         title: Include
-      - path: /compose/compose-file/15-profiles/
+      - path: /reference/compose-file/profiles/
         title: Profiles
-    - path: /compose/compose-file/build/
+    - path: /reference/compose-file/build/
       title: Compose Build Specification
-    - path: /compose/compose-file/deploy/
+    - path: /reference/compose-file/deploy/
       title: Compose Deploy Specification
-    - path: /compose/compose-file/develop/
+    - path: /reference/compose-file/develop/
       title: Compose Develop Specification
-    - path: /compose/compose-file/legacy-versions/
+    - path: /reference/compose-file/legacy-versions/
       title: Legacy versions
 - path: /glossary/
   title: Glossary
@@ -1185,7 +1185,7 @@ Manuals:
          title: Understand permission requirements for Mac
        - path: /desktop/install/windows-install/
          title: Windows
-       - sectiontitle: Use the MSI installer {{< badge color=blue text="New" >}}
+       - sectiontitle: Use the MSI installer {{< badge color=green text="New" >}}
          section:
          - path: /desktop/install/msi/
            title: Overview
@@ -1442,7 +1442,7 @@ Manuals:
       - path: /scout/explore/image-details-view/
         title: Image details view
       - path: /scout/explore/exceptions/
-        title: Exceptions {{< badge color=violet text=New >}}
+        title: Exceptions {{< badge color=green text=New >}}
       - path: /scout/explore/metrics-exporter/
         title: Metrics exporter
     - sectiontitle: How-tos
@@ -1880,84 +1880,48 @@ Manuals:
   section:
     - path: /build/
       title: Overview
-    - path: /build/architecture/
-      title: Architecture
-    - sectiontitle: Building images
+    - sectiontitle: Core concepts
       section:
-        - path: /build/building/packaging/
-          title: Packaging your software
-        - path: /build/building/context/
-          title: Context
+        - path: /build/concepts/overview/
+          title: Build overview
+        - path: /build/concepts/dockerfile/
+          title: Dockerfile
+        - path: /build/concepts/context/
+          title: Build context
+    - sectiontitle: Building
+      section:
         - path: /build/building/multi-stage/
           title: Multi-stage builds
         - path: /build/building/variables/
           title: Variables
-        - path: /build/building/best-practices/
-          title: Best practices
         - path: /build/building/multi-platform/
           title: Multi-platform images
         - path: /build/building/secrets/
           title: Build secrets
-        - path: /build/building/annotations/
-          title: Annotations
-        - path: /build/building/opentelemetry/
-          title: OpenTelemetry support
+        - path: /build/building/best-practices/
+          title: Best practices
         - path: /build/building/base-images/
           title: Base images
     - path: /build/checks/
-      title: Build checks  {{< badge color=violet text=New >}}
+      title: Build checks  {{< badge color=green text=New >}}
     - sectiontitle: Builders
       section:
         - path: /build/builders/
           title: Builders overview
         - path: /build/builders/manage/
           title: Manage builders
-    - sectiontitle: Drivers
-      section:
-        - path: /build/drivers/
-          title: Drivers overview
-        - path: /build/drivers/docker/
-          title: Docker driver
-        - path: /build/drivers/docker-container/
-          title: Docker container driver
-        - path: /build/drivers/kubernetes/
-          title: Kubernetes driver
-        - path: /build/drivers/remote/
-          title: Remote driver
-    - sectiontitle: Exporters
-      section:
-        - path: /build/exporters/
-          title: Overview
-        - path: /build/exporters/image-registry/
-          title: Image and registry exporters
-        - path: /build/exporters/local-tar/
-          title: Local and tar exporters
-        - path: /build/exporters/oci-docker/
-          title: OCI and Docker exporters
-    - sectiontitle: Cache
-      section:
-        - path: /build/cache/
-          title: Overview
-        - path: /build/cache/invalidation/
-          title: Cache invalidation
-        - path: /build/cache/garbage-collection/
-          title: Garbage collection
-        - sectiontitle: Cache backends
+        - sectiontitle: Build drivers
           section:
-            - path: /build/cache/backends/
+            - path: /build/builders/drivers/
               title: Overview
-            - path: /build/cache/backends/inline/
-              title: Inline
-            - path: /build/cache/backends/local/
-              title: Local
-            - path: /build/cache/backends/registry/
-              title: Registry
-            - path: /build/cache/backends/gha/
-              title: GitHub Actions
-            - path: /build/cache/backends/azblob/
-              title: Azure Blob Storage
-            - path: /build/cache/backends/s3/
-              title: Amazon S3
+            - path: /build/builders/drivers/docker/
+              title: Docker driver
+            - path: /build/builders/drivers/docker-container/
+              title: Docker container driver
+            - path: /build/builders/drivers/kubernetes/
+              title: Kubernetes driver
+            - path: /build/builders/drivers/remote/
+              title: Remote driver
     - sectiontitle: Bake
       section:
         - path: /build/bake/
@@ -1986,24 +1950,94 @@ Manuals:
           title: Building from Compose file
         - path: /build/bake/remote-definition/
           title: Remote Bake file definition
-    - sectiontitle: Attestations
+    - sectiontitle: Cache
       section:
-        - path: /build/attestations/
+        - path: /build/cache/
           title: Overview
-        - path: /build/attestations/sbom/
-          title: SBOM
-        - path: /build/attestations/slsa-provenance/
-          title: Provenance
-        - path: /build/attestations/slsa-definitions/
-          title: SLSA definitions
-        - path: /build/attestations/attestation-storage/
-          title: Attestation storage
-    - sectiontitle: Dockerfile
+        - path: /build/cache/invalidation/
+          title: Cache invalidation
+        - path: /build/cache/garbage-collection/
+          title: Garbage collection
+        - sectiontitle: Cache backends
+          section:
+            - path: /build/cache/backends/
+              title: Overview
+            - path: /build/cache/backends/inline/
+              title: Inline
+            - path: /build/cache/backends/local/
+              title: Local
+            - path: /build/cache/backends/registry/
+              title: Registry
+            - path: /build/cache/backends/gha/
+              title: GitHub Actions
+            - path: /build/cache/backends/azblob/
+              title: Azure Blob Storage
+            - path: /build/cache/backends/s3/
+              title: Amazon S3
+    - sectiontitle: GitHub Actions
       section:
-        - path: /build/dockerfile/frontend/
-          title: Custom Dockerfile syntax
-        - path: /build/dockerfile/release-notes/
-          title: Release notes
+      - path: /build/ci/github-actions/
+        title: Introduction
+      - path: /build/ci/github-actions/build-summary/
+        title: Build summary {{< badge color=blue text=Beta >}}
+      - path: /build/ci/github-actions/configure-builder/
+        title: Configuring your builder
+      - path: /build/ci/github-actions/multi-platform/
+        title: Multi-platform image
+      - path: /build/ci/github-actions/secrets/
+        title: Secrets
+      - path: /build/ci/github-actions/push-multi-registries/
+        title: Push to multiple registries
+      - path: /build/ci/github-actions/manage-tags-labels/
+        title: Manage tags and labels
+      - path: /build/ci/github-actions/cache/
+        title: Cache management
+      - path: /build/ci/github-actions/export-docker/
+        title: Export to Docker
+      - path: /build/ci/github-actions/test-before-push/
+        title: Test before push
+      - path: /build/ci/github-actions/local-registry/
+        title: Local registry
+      - path: /build/ci/github-actions/share-image-jobs/
+        title: Share built image between jobs
+      - path: /build/ci/github-actions/named-contexts/
+        title: Named contexts
+      - path: /build/ci/github-actions/copy-image-registries/
+        title: Copy image between registries
+      - path: /build/ci/github-actions/update-dockerhub-desc/
+        title: Update Docker Hub repo description
+      - path: /build/ci/github-actions/attestations/
+        title: SBOM and provenance attestations
+      - path: /build/ci/github-actions/annotations/
+        title: Annotations
+      - path: /build/ci/github-actions/reproducible-builds/
+        title: Reproducible builds
+    - sectiontitle: Metadata
+      section:
+        - path: /build/metadata/annotations/
+          title: Annotations
+        - sectiontitle: Attestations
+          section:
+            - path: /build/metadata/attestations/
+              title: Overview
+            - path: /build/metadata/attestations/sbom/
+              title: SBOM
+            - path: /build/metadata/attestations/slsa-provenance/
+              title: Provenance
+            - path: /build/metadata/attestations/slsa-definitions/
+              title: SLSA definitions
+            - path: /build/metadata/attestations/attestation-storage/
+              title: Attestation storage
+    - sectiontitle: Exporters
+      section:
+        - path: /build/exporters/
+          title: Overview
+        - path: /build/exporters/image-registry/
+          title: Image and registry exporters
+        - path: /build/exporters/local-tar/
+          title: Local and tar exporters
+        - path: /build/exporters/oci-docker/
+          title: OCI and Docker exporters
     - sectiontitle: BuildKit
       section:
         - path: /build/buildkit/
@@ -2012,48 +2046,14 @@ Manuals:
           title: Configure
         - path: /build/buildkit/toml-configuration/
           title: TOML configuration
-    - sectiontitle: Continuous integration
+        - path: /build/buildkit/frontend/
+          title: Custom Dockerfile syntax
+        - path: /build/buildkit/dockerfile-release-notes/
+          title: Dockerfile release notes
+    - sectiontitle: Debugging
       section:
-        - path: /build/ci/
-          title: CI with Docker
-        - sectiontitle: GitHub Actions
-          section:
-          - path: /build/ci/github-actions/
-            title: Introduction
-          - path: /build/ci/github-actions/build-summary/
-            title: Build summary {{< badge color=blue text=Beta >}}
-          - path: /build/ci/github-actions/configure-builder/
-            title: Configuring your builder
-          - path: /build/ci/github-actions/multi-platform/
-            title: Multi-platform image
-          - path: /build/ci/github-actions/secrets/
-            title: Secrets
-          - path: /build/ci/github-actions/push-multi-registries/
-            title: Push to multiple registries
-          - path: /build/ci/github-actions/manage-tags-labels/
-            title: Manage tags and labels
-          - path: /build/ci/github-actions/cache/
-            title: Cache management
-          - path: /build/ci/github-actions/export-docker/
-            title: Export to Docker
-          - path: /build/ci/github-actions/test-before-push/
-            title: Test before push
-          - path: /build/ci/github-actions/local-registry/
-            title: Local registry
-          - path: /build/ci/github-actions/share-image-jobs/
-            title: Share built image between jobs
-          - path: /build/ci/github-actions/named-contexts/
-            title: Named contexts
-          - path: /build/ci/github-actions/copy-image-registries/
-            title: Copy image between registries
-          - path: /build/ci/github-actions/update-dockerhub-desc/
-            title: Update Docker Hub repo description
-          - path: /build/ci/github-actions/attestations/
-            title: SBOM and provenance attestations
-          - path: /build/ci/github-actions/annotations/
-            title: Annotations
-          - path: /build/ci/github-actions/reproducible-builds/
-            title: Reproducible builds
+      - path: /build/debug/opentelemetry/
+        title: OpenTelemetry support
     - path: /build/release-notes/
       title: Release notes
 - sectiontitle: Docker Build Cloud

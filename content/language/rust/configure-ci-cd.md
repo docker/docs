@@ -118,7 +118,7 @@ Save the workflow file and run the job.
 In this section, you learned how to set up a GitHub Actions workflow for your Rust application.
 
 Related information:
- - [Introduction to GitHub Actions](../../build/ci/github-actions/index.md)
+ - [Introduction to GitHub Actions](../../build/ci/github-actions/_index.md)
  - [Workflow syntax for GitHub Actions](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions)
 
 ## Next steps

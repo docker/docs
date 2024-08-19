@@ -19,7 +19,7 @@ When you enable the GitHub integration, Docker Scout can make a direct link
 between the image analysis results and the source.
 
 When analyzing your image, Docker Scout checks for [provenance
-attestations](../../../build/attestations/slsa-provenance.md) to detect the
+attestations](../../../build/metadata/attestations/slsa-provenance.md) to detect the
 location of the source code repository for the image. If the source location is
 found, and you've enabled the GitHub app, Docker Scout parses the Dockerfile
 used to create the image.

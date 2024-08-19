@@ -304,7 +304,7 @@ examples: |-
 
     > **Note**
     >
-    > Build record [provenance](/build/attestations/slsa-provenance/#provenance-attestation-example)
+    > Build record [provenance](/build/metadata/attestations/slsa-provenance/#provenance-attestation-example)
     > (`buildx.build.provenance`) includes minimal provenance by default. Set the
     > `BUILDX_METADATA_PROVENANCE` environment variable to customize this behavior:
     > * `min` sets minimal provenance (default).

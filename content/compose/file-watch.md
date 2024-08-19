@@ -201,4 +201,4 @@ We are actively looking for feedback on this feature. Give feedback or report an
 
 ## Reference
 
-- [Compose Develop Specification](compose-file/develop.md)
+- [Compose Develop Specification](/reference/compose-file/develop.md)

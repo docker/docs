@@ -13,7 +13,7 @@ if you have not already done so.
 The samples should help you to:
 
 - Define services based on Docker images using
-  [Compose files](compose-file/index.md): `compose.yml` and
+  [Compose files](/reference/compose-file/index.md): `compose.yml` and
   `docker-stack.yml`
 - Understand the relationship between `compose.yml` and
   [Dockerfiles](/reference/dockerfile/)

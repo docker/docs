@@ -30,7 +30,7 @@ the [Go website](https://golang.org/) is a great place to explore,
 so *go* (pun intended) check it out!
 
 You also must know some basic [Docker concepts](../../guides/docker-concepts/the-basics/what-is-a-container.md) as well as to 
-be at least vaguely familiar with the [Dockerfile format](../../build/building/packaging.md#dockerfile).
+be at least vaguely familiar with the [Dockerfile format](../../build/concepts/dockerfile.md).
 
 Your Docker set-up must have BuildKit enabled. BuildKit is enabled by default for all users on [Docker Desktop](../../desktop/index.md). 
 If you have installed Docker Desktop, you don’t have to manually enable BuildKit. If you are running Docker on Linux, 

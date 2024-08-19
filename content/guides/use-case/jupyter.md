@@ -308,7 +308,7 @@ volumes:
 ```
 
 This Compose file specifies all the options you used in the `docker run` command. For more details about the Compose instructions, see the
-[Compose file reference](../../../compose/compose-file/_index.md).
+[Compose file reference](/reference/compose-file/_index.md).
 
 Before you proceed, save your changes to the `compose.yaml` file.
 
@@ -416,6 +416,6 @@ notebooks and environments with other data scientists.
 Related information:
 
 - [Dockerfile reference](/reference/dockerfile/)
-- [Compose file reference](/compose/compose-file/)
+- [Compose file reference](/reference/compose-file/)
 - [Docker CLI reference](reference/cli/docker/)
 - [Jupyter Docker Stacks docs](https://jupyter-docker-stacks.readthedocs.io/en/latest/)

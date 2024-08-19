@@ -36,7 +36,7 @@ directory.
 To learn more about the files in the repository, see the following:
  - [Dockerfile](../../reference/dockerfile.md)
  - [.dockerignore](../../reference/dockerfile.md#dockerignore-file)
- - [compose.yml](../../compose/compose-file/_index.md)
+ - [compose.yml](/reference/compose-file/_index.md)
 
 ## Run the application
 

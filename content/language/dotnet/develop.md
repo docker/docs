@@ -119,7 +119,7 @@ secrets:
 > [!NOTE]
 >
 > To learn more about the instructions in the Compose file, see [Compose file
-> reference](/compose/compose-file/).
+> reference](/reference/compose-file/).
 
 Before you run the application using Compose, notice that this Compose file uses
 `secrets` and specifies a `password.txt` file to hold the database's password.
@@ -382,7 +382,7 @@ In this section, you took a look at setting up your Compose file to add a local
 database and persist data. You also learned how to use Compose Watch to automatically rebuild and run your container when you update your code. And finally, you learned how to create a development container that contains the SDK tools and dependencies needed for development.
 
 Related information:
- - [Compose file reference](/compose/compose-file/)
+ - [Compose file reference](/reference/compose-file/)
  - [Compose file watch](../../compose/file-watch.md)
  - [Multi-stage builds](../../build/building/multi-stage.md)
 

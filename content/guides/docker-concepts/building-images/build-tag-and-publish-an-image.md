@@ -22,7 +22,7 @@ Most often, images are built using a Dockerfile. The most basic `docker build` c
 docker build .
 ```
 
-The final `.` in the command provides the path or URL to the [build context](https://docs.docker.com/build/building/context/#what-is-a-build-context). At this location, the builder will find the `Dockerfile` and other referenced files.
+The final `.` in the command provides the path or URL to the [build context](https://docs.docker.com/build/concepts/context/#what-is-a-build-context). At this location, the builder will find the `Dockerfile` and other referenced files.
 
 When you run a build, the builder pulls the base image, if needed, and then runs the instructions specified in the Dockerfile.
 
@@ -212,7 +212,7 @@ Now that you have an image built, it's time to push the image to a registry.
 
 To learn more about building, tagging, and publishing images, visit the following resources:
 
-* [What is a build context?](/build/building/context/#what-is-a-build-context)
+* [What is a build context?](/build/concepts/context/#what-is-a-build-context)
 * [docker build reference](/engine/reference/commandline/image_build/)
 * [docker image tag reference](/engine/reference/commandline/image_tag/)
 * [docker push reference](/engine/reference/commandline/image_push/)
