@@ -119,14 +119,13 @@ services:
 
 networks:
   frontend:
-    # Use a custom driver
-    driver: custom-driver-1
-  backend:
-    # Use a custom driver which takes special options
-    driver: custom-driver-2
+    # Specify driver options
+    driver: bridge
     driver_opts:
-      foo: "1"
-      bar: "2"
+      com.docker.network.bridge.host_binding_ipv4: "127.0.0.1"
+  backend:
+    # Use a custom driver
+    driver: custom-driver
 ```
 
 Networks can be configured with static IP addresses by setting the [ipv4_address and/or ipv6_address](/reference/compose-file/services.md#ipv4_address-ipv6_address) for each attached network.

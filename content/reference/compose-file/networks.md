@@ -50,14 +50,13 @@ services:
 
 networks:
   frontend:
-    # Use a custom driver
-    driver: custom-driver-1
-  backend:
-    # Use a custom driver which takes special options
-    driver: custom-driver-2
+    # Specify driver options
+    driver: bridge
     driver_opts:
-      foo: "1"
-      bar: "2"
+      com.docker.network.bridge.host_binding_ipv4: "127.0.0.1"
+  backend:
+    # Use a custom driver
+    driver: custom-driver
 ```
 
 The advanced example shows a Compose file which defines two custom networks. The `proxy` service is isolated from the `db` service, because they do not share a network in common. Only `app` can talk to both.
@@ -80,15 +79,17 @@ For more information on drivers and available options, see [Network drivers](/en
 ### driver_opts
 
 `driver_opts` specifies a list of options as key-value pairs to pass to the driver. These options are
-driver-dependent. Consult the driver's documentation for more information. 
+driver-dependent.
 
 ```yml
 networks:
-  db-data:
+  frontend:
+    driver: bridge
     driver_opts:
-      foo: "bar"
-      baz: 1
+      com.docker.network.bridge.host_binding_ipv4: "127.0.0.1"
 ```
+
+Consult the [network drivers documentation](/engine/network/_index.md) for more information.
 
 ### attachable
 
