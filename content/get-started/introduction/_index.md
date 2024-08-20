@@ -1,5 +1,5 @@
 ---
-title: Getting started
+title: Introduction
 keywords: get started, getting started, how to get started
 description: |
   Get started with Docker. You'll learn about Docker Desktop, developing with
