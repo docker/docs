@@ -15,7 +15,6 @@ params:
   time: 15 minutes
   prereq: None
 aliases:
-  - /get-started/
   - /guides/getting-started/
 ---
 
