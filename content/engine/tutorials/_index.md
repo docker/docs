@@ -12,4 +12,4 @@ Learn by example:
 * [Network containers](networkingcontainers.md)
 * [Manage data in containers](/engine/storage/volumes.md)
 * [Samples](../../samples/index.md)
-* [Get Started](../../guides/getting-started/_index.md)
+* [Get Started](/get-started/introduction/_index.md)

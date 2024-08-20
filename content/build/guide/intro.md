@@ -12,7 +12,7 @@ you can improve how you build the application with Docker.
 
 To follow this guide:
 
-1. Install [Docker Desktop or Docker Engine](../../get-docker.md)
+1. Install [Docker Desktop or Docker Engine](/get-started/get-docker.md)
 2. Clone or create a new repository from the
    [application example on GitHub](https://github.com/dockersamples/buildme)
 

@@ -120,15 +120,18 @@ params:
 
 menus:
   main:
+  - name: Get started
+    url: /get-started/
+    weight: 1
   - name: Guides
     url: /guides/
-    weight: 1
+    weight: 2
   - name: Manuals
     url: /manuals/
-    weight: 2
+    weight: 3
   - name: Reference
     url: /reference/
-    weight: 3
+    weight: 4
 
   footer:
     - url: https://www.docker.com/products
