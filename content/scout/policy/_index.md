@@ -169,9 +169,12 @@ update your build command to attach these attestations at build-time:
 $ docker buildx build --provenance=true --sbom=true -t <IMAGE> --push .
 ```
 
-For more information about
-building with attestations, see
+For more information about building with attestations, see
 [Attestations](../../build/metadata/attestations/_index.md).
+
+If you're using GitHub Actions to build and push your images,
+learn how you can [configure the action](/build/ci/github-actions/attestations.md)
+to apply SBOM and provenance attestations.
 
 ### Default non-root user
 
