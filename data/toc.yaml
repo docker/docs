@@ -1,60 +1,86 @@
-Guides:
+Get started:
 - title: Overview
-  path: /guides/
+  path: /get-started/
+- title: Get Docker
+  path: /get-started/get-docker/
 - title: Docker overview
-  path: /guides/docker-overview/
-
-- sectiontitle: "Getting started"
+  path: /get-started/docker-overview/
+- sectiontitle: "Introduction"
   section:
   - title: "Overview"
-    path: /guides/getting-started/
+    path: /get-started/introduction/
   - title: "Get Docker Desktop"
-    path: /guides/getting-started/get-docker-desktop/
+    path: /get-started/introduction/get-docker-desktop/
   - title: "Develop with containers"
-    path: /guides/getting-started/develop-with-containers/
+    path: /get-started/introduction/develop-with-containers/
   - title: "Build and push your first image"
-    path: /guides/getting-started/build-and-push-first-image/
+    path: /get-started/introduction/build-and-push-first-image/
   - title: "What's next"
-    path: /guides/getting-started/whats-next/
-
+    path: /get-started/introduction/whats-next/
 - sectiontitle: "Docker concepts"
   section:
   - sectiontitle: "The basics"
     section:
     - title: "What is a container?"
-      path: /guides/docker-concepts/the-basics/what-is-a-container/
+      path: /get-started/docker-concepts/the-basics/what-is-a-container/
     - title: "What is an image?"
-      path: /guides/docker-concepts/the-basics/what-is-an-image/
+      path: /get-started/docker-concepts/the-basics/what-is-an-image/
     - title: "What is a registry?"
-      path: /guides/docker-concepts/the-basics/what-is-a-registry/
+      path: /get-started/docker-concepts/the-basics/what-is-a-registry/
     - title: "What is Docker Compose?"
-      path: /guides/docker-concepts/the-basics/what-is-docker-compose/
+      path: /get-started/docker-concepts/the-basics/what-is-docker-compose/
   - sectiontitle: "Building images"
     section:
     - title: Overview
-      path: /guides/docker-concepts/building-images/
+      path: /get-started/docker-concepts/building-images/
     - title: "Understanding image layers"
-      path: /guides/docker-concepts/building-images/understanding-image-layers/
+      path: /get-started/docker-concepts/building-images/understanding-image-layers/
     - title: "Writing a Dockerfile"
-      path: /guides/docker-concepts/building-images/writing-a-dockerfile/
+      path: /get-started/docker-concepts/building-images/writing-a-dockerfile/
     - title: "Build, tag and publish an image"
-      path: /guides/docker-concepts/building-images/build-tag-and-publish-an-image/
+      path: /get-started/docker-concepts/building-images/build-tag-and-publish-an-image/
     - title: "Using the build cache"
-      path: /guides/docker-concepts/building-images/using-the-build-cache/
+      path: /get-started/docker-concepts/building-images/using-the-build-cache/
     - title: "Multi-stage builds"
-      path: /guides/docker-concepts/building-images/multi-stage-builds/
+      path: /get-started/docker-concepts/building-images/multi-stage-builds/
   - sectiontitle: "Running containers"
     section:
     - title: "Publishing ports"
-      path: /guides/docker-concepts/running-containers/publishing-ports/
+      path: /get-started/docker-concepts/running-containers/publishing-ports/
     - title: "Overriding container defaults"
-      path: /guides/docker-concepts/running-containers/overriding-container-defaults/
+      path: /get-started/docker-concepts/running-containers/overriding-container-defaults/
     - title: "Persisting container data"
-      path: /guides/docker-concepts/running-containers/persisting-container-data/
+      path: /get-started/docker-concepts/running-containers/persisting-container-data/
     - title: "Sharing local files with containers"
-      path: /guides/docker-concepts/running-containers/sharing-local-files/
+      path: /get-started/docker-concepts/running-containers/sharing-local-files/
     - title: "Multi-container applications"
-      path: /guides/docker-concepts/running-containers/multi-container-applications/
+      path: /get-started/docker-concepts/running-containers/multi-container-applications/
+- sectiontitle: Docker workshop
+  section:
+  - title: "Part 1: Overview"
+    path: /get-started/workshop/
+  - title: "Part 2: Containerize an application"
+    path: /get-started/workshop/02_our_app/
+  - title: "Part 3: Update the application"
+    path: /get-started/workshop/03_updating_app/
+  - title: "Part 4: Share the application"
+    path: /get-started/workshop/04_sharing_app/
+  - title: "Part 5: Persist the DB"
+    path: /get-started/workshop/05_persisting_data/
+  - title: "Part 6: Use bind mounts"
+    path: /get-started/workshop/06_bind_mounts/
+  - title: "Part 7: Multi-container apps"
+    path: /get-started/workshop/07_multi_container/
+  - title: "Part 8: Use Docker Compose"
+    path: /get-started/workshop/08_using_compose/
+  - title: "Part 9: Image-building best practices"
+    path: /get-started/workshop/09_image_best/
+  - title: "Part 10: What next?"
+    path: /get-started/workshop/10_what_next/
+
+Guides:
+- title: Overview
+  path: /guides/
 - sectiontitle: Language-specific guides
   section:
   - path: /language/
@@ -265,30 +291,6 @@ Guides:
     path: /guides/deployment-orchestration/swarm-deploy/
   - title: Cloud integrations
     path: /cloud/
-
-- sectiontitle: Docker workshop
-  section:
-  - title: "Part 1: Overview"
-    path: /guides/workshop/
-  - title: "Part 2: Containerize an application"
-    path: /guides/workshop/02_our_app/
-  - title: "Part 3: Update the application"
-    path: /guides/workshop/03_updating_app/
-  - title: "Part 4: Share the application"
-    path: /guides/workshop/04_sharing_app/
-  - title: "Part 5: Persist the DB"
-    path: /guides/workshop/05_persisting_data/
-  - title: "Part 6: Use bind mounts"
-    path: /guides/workshop/06_bind_mounts/
-  - title: "Part 7: Multi-container apps"
-    path: /guides/workshop/07_multi_container/
-  - title: "Part 8: Use Docker Compose"
-    path: /guides/workshop/08_using_compose/
-  - title: "Part 9: Image-building best practices"
-    path: /guides/workshop/09_image_best/
-  - title: "Part 10: What next?"
-    path: /guides/workshop/10_what_next/
-
 
 - path: /guides/resources/
   title: "Educational resources"
@@ -1173,8 +1175,6 @@ Reference:
 Manuals:
 - path: /manuals/
   title: Overview
-- title: Get Docker
-  path: /get-docker/
 - sectiontitle: Docker Desktop
   section:
     - path: /desktop/

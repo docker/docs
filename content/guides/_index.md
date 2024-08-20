@@ -4,20 +4,6 @@ keywords: Docker guides
 description: Explore the Docker guides
 notoc: true
 
-get-started:
-- title: Docker overview
-  description: Learn about the Docker platform.
-  link: /guides/docker-overview/
-  icon: summarize
-- title: Get started
-  description: Get started with the basics and the benefits of containerizing your applications.
-  link: /guides/getting-started/
-  icon: rocket
-- title: Docker concepts
-  description: Gain a better understanding of foundational Docker concepts.
-  link: /guides/docker-concepts/the-basics/what-is-a-container/
-  icon: foundation
-
 dive-deeper:
 - title: Language-specific guides
   description: Learn how to containerize, develop, and test language-specific apps using Docker.
@@ -35,10 +21,6 @@ dive-deeper:
   description: Deploy and manage Docker containers at scale.
   link: /guides/deployment-orchestration/orchestration/
   icon: workspaces
-- title: Docker workshop
-  description: Get guided through a 45-minute workshop to learn about Docker.
-  link: /guides/workshop/
-  icon: desk
 
 resources:
 - title: Educational resources
@@ -52,12 +34,6 @@ resources:
 ---
 
 This section contains guides to help you get started and learn how Docker can optimize your development workflows.
-
-## Foundations of Docker
-
-Get started learning the foundational concepts and workflows of Docker.
-
-{{< grid items="get-started" >}}
 
 ## Advancing with Docker
 

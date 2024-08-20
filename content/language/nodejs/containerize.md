@@ -11,7 +11,7 @@ aliases:
 ## Prerequisites
 
 * You have installed the latest version of [Docker
-  Desktop](../../get-docker.md).
+  Desktop](/get-started/get-docker.md).
 * You have a [git client](https://git-scm.com/downloads). The examples in this
   section use a command-line based git client, but you can use any client.
 

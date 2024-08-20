@@ -24,7 +24,7 @@ This guide uses the MySQL image for examples, but the concepts can be applied to
 
 ## Prerequisites
 
-To follow along with this guide, you must have Docker installed. To install Docker, see [Get Docker](../../get-docker.md).
+To follow along with this guide, you must have Docker installed. To install Docker, see [Get Docker](/get-started/get-docker.md).
 
 ## Run a local containerized database
 
