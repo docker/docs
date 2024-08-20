@@ -7,7 +7,7 @@ IgnoreAltEmpty: true
 IgnoreEmptyHref: true
 IgnoreDirectoryMissingTrailingSlash: true
 IgnoreURLs:
-- "^/docker-hub/api/latest/.*$"
+- "^/reference/api/docker-hub/.*$"
 - "^/engine/api/v.+/#.*$"
 - "^/glossary/.*$"
 IgnoreDirs:

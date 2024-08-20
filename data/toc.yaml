@@ -980,11 +980,11 @@ Reference:
   - sectiontitle: Docker Hub API
     section:
       - title: Docker Hub API
-        path: /docker-hub/api/latest/
+        path: /reference/api/docker-hub/latest/
       - title: DVP Data API
-        path: /docker-hub/api/dvp/
+        path: /reference/api/docker-hub/dvp/
       - title: Deprecated API
-        path: /docker-hub/api/deprecated/
+        path: /reference/api/docker-hub/deprecated/
   - sectiontitle: Docker Extension SDK API
     section:
       - path: /extensions/extensions-sdk/dev/api/reference/interfaces/DesktopUI/

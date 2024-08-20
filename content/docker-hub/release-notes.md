@@ -139,7 +139,7 @@ The updated [Docker Subscription Service Agreement](https://www.docker.com/legal
 
 When managing the content of your repositories, you can now filter the results based on the currentness of the tags and more easily identify your untagged images.
 
-For Docker Hub API documentation, see [Docker Hub API Reference](api/latest.md#operation/GetNamespacesRepositoriesImages).
+For Docker Hub API documentation, see [Docker Hub API Reference](/reference/api/docker-hub/latest.md#operation/GetNamespacesRepositoriesImages).
 
 ## 2021-04-13
 

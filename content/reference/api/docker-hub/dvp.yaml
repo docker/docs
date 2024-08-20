@@ -690,5 +690,5 @@ components:
       description: |
         JWT Bearer Authentication is required to access the Docker DVP Data API.  
           
-        This authentication documentation is duplicated from the [Hub API Authentication docs](https://docs.docker.com/docker-hub/api/latest/#tag/authentication)
+        This authentication documentation is duplicated from the [Hub API Authentication docs](https://docs.docker.com/reference/api/docker-hub/#tag/authentication)
       x-displayName: Docker Hub Authentication
