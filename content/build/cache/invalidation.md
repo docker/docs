@@ -5,21 +5,21 @@ keywords: build, buildx, buildkit, cache, invalidation, cache miss
 ---
 
 When building an image, Docker steps through the instructions in your
-Dockerfile, executing each in the order specified. For each instruction, Docker
-checks whether it can reuse the instruction from the build cache.
+Dockerfile, executing each in the order specified. For each instruction, the
+[builder](/build/builders/_index.md) checks whether it can reuse the
+instruction from the build cache.
 
 ## General rules
 
 The basic rules of build cache invalidation are as follows:
 
-- Starting with a base image that's already in the cache, the next
-  instruction is compared against all child images derived from that base
-  image to see if one of them was built using the exact same instruction. If
-  not, the cache is invalidated.
+- The builder begins by checking if the base image is already cached. Each
+  subsequent instruction is compared against the cached layers. If no cached
+  layer matches the instruction exactly, the cache is invalidated.
 
-- In most cases, simply comparing the instruction in the Dockerfile with one
-  of the child images is sufficient. However, certain instructions require more
-  examination and explanation.
+- In most cases, comparing the Dockerfile instruction with the corresponding
+  cached layer is sufficient. However, some instructions require additional
+  checks and explanations.
 
 - For the `ADD` and `COPY` instructions, and for `RUN` instructions with bind
   mounts (`RUN --mount=type=bind`), the builder calculates a cache checksum
