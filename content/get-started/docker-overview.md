@@ -12,7 +12,6 @@ aliases:
 - /engine/understanding-docker/
 - /engine/docker-overview/
 - /get-started/overview/
-- /get-started/docker-overview/
 ---
 
 Docker is an open platform for developing, shipping, and running applications.
