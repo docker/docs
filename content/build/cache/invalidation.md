@@ -21,10 +21,15 @@ The basic rules of build cache invalidation are as follows:
   of the child images is sufficient. However, certain instructions require more
   examination and explanation.
 
-- For the `ADD` and `COPY` instructions, the modification time and size file
-  metadata is used to determine whether cache is valid. During cache lookup,
+- For the `ADD` and `COPY` instructions, and for `RUN` instructions with bind
+  mounts (`RUN --mount=type=bind`), the builder calculates a cache checksum
+  from file metadata to determine whether cache is valid. During cache lookup,
   cache is invalidated if the file metadata has changed for any of the files
   involved.
+
+  The modification time of a file (`mtime`) is not taken into account when
+  calculating the cache checksum. If only the `mtime` of the copied files have
+  changed, the cache is not invalidated.
 
 - Aside from the `ADD` and `COPY` commands, cache checking doesn't look at the
   files in the container to determine a cache match. For example, when processing
