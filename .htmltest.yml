@@ -8,9 +8,8 @@ IgnoreEmptyHref: true
 IgnoreDirectoryMissingTrailingSlash: true
 IgnoreURLs:
 - "^/reference/api/hub/.*$"
-- "^/engine/api/v.+/#.*$"
+- "^/reference/api/engine/v.+/#.*$"
 IgnoreDirs:
-- "engine/api"
 - "registry/configuration"
 - "compose/compose-file" # temporarily ignore until upstream is fixed
 CacheExpires: "6h"

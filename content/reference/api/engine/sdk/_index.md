@@ -3,8 +3,9 @@ title: Develop with Docker Engine SDKs
 description: Learn how to use Docker Engine SDKs to automate Docker tasks in your language of choice
 keywords: developing, sdk, Docker Engine SDKs, install SDKs, SDK versions
 aliases:
-- /engine/api/sdks/
-- /develop/sdk/
+  - /develop/sdk/
+  - /engine/api/sdks/
+  - /engine/api/sdk/
 ---
 
 Docker provides an API for interacting with the Docker daemon (called the Docker
@@ -46,13 +47,13 @@ For more information, see [Docker Engine Python SDK reference](https://docker-py
 ## View the API reference
 
 You can
-[view the reference for the latest version of the API](/engine/api/latest/)
-or [choose a specific version](/engine/api/version-history/).
+[view the reference for the latest version of the API](/reference/api/engine/latest/)
+or [choose a specific version](/reference/api/engine/version-history/).
 
 ## Versioned API and SDK
 
 The version of the Docker Engine API you should use depends on the version of
-your Docker daemon and Docker client. See the [versioned API and SDK](/engine/api/#versioned-api-and-sdk)
+your Docker daemon and Docker client. See the [versioned API and SDK](/reference/api/engine/#versioned-api-and-sdk)
 section in the API documentation for details.
 
 ## SDK and API quickstart
@@ -60,7 +61,7 @@ section in the API documentation for details.
 Use the following guidelines to choose the SDK or API version to use in your
 code:
 
-- If you're starting a new project, use the [latest version](/engine/api/latest/),
+- If you're starting a new project, use the [latest version](/reference/api/engine/latest/),
   but use API version negotiation or specify the version you are using. This
   helps prevent surprises.
 - If you need a new feature, update your code to use at least the minimum version

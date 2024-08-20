@@ -919,63 +919,63 @@ Reference:
   section:
   - sectiontitle: Docker Engine API
     section:
-    - path: /engine/api/
+    - path: /reference/api/engine/
       title: Overview
-    - path: /engine/api/sdk/
+    - path: /reference/api/engine/sdk/
       title: SDKs
-    - path: /engine/api/sdk/examples/
+    - path: /reference/api/engine/sdk/examples/
       title: SDK examples
-    - path: /engine/api/latest/
+    - path: /reference/api/engine/latest/
       title: v{{< param latest_engine_api_version >}} reference (latest)
     - sectiontitle: API reference by version
       section:
-      - path: /engine/api/version-history/
+      - path: /reference/api/engine/version-history/
         title: Version history overview
-      - path: /engine/api/v1.46/
+      - path: /reference/api/engine/v1.46/
         title: v1.46 reference
-      - path: /engine/api/v1.45/
+      - path: /reference/api/engine/v1.45/
         title: v1.45 reference
-      - path: /engine/api/v1.44/
+      - path: /reference/api/engine/v1.44/
         title: v1.44 reference
-      - path: /engine/api/v1.43/
+      - path: /reference/api/engine/v1.43/
         title: v1.43 reference
-      - path: /engine/api/v1.42/
+      - path: /reference/api/engine/v1.42/
         title: v1.42 reference
-      - path: /engine/api/v1.41/
+      - path: /reference/api/engine/v1.41/
         title: v1.41 reference
-      - path: /engine/api/v1.40/
+      - path: /reference/api/engine/v1.40/
         title: v1.40 reference
-      - path: /engine/api/v1.39/
+      - path: /reference/api/engine/v1.39/
         title: v1.39 reference
-      - path: /engine/api/v1.38/
+      - path: /reference/api/engine/v1.38/
         title: v1.38 reference
-      - path: /engine/api/v1.37/
+      - path: /reference/api/engine/v1.37/
         title: v1.37 reference
-      - path: /engine/api/v1.36/
+      - path: /reference/api/engine/v1.36/
         title: v1.36 reference
-      - path: /engine/api/v1.35/
+      - path: /reference/api/engine/v1.35/
         title: v1.35 reference
-      - path: /engine/api/v1.34/
+      - path: /reference/api/engine/v1.34/
         title: v1.34 reference
-      - path: /engine/api/v1.33/
+      - path: /reference/api/engine/v1.33/
         title: v1.33 reference
-      - path: /engine/api/v1.32/
+      - path: /reference/api/engine/v1.32/
         title: v1.32 Reference
-      - path: /engine/api/v1.31/
+      - path: /reference/api/engine/v1.31/
         title: v1.31 Reference
-      - path: /engine/api/v1.30/
+      - path: /reference/api/engine/v1.30/
         title: v1.30 Reference
-      - path: /engine/api/v1.29/
+      - path: /reference/api/engine/v1.29/
         title: v1.29 Reference
-      - path: /engine/api/v1.28/
+      - path: /reference/api/engine/v1.28/
         title: v1.28 reference
-      - path: /engine/api/v1.27/
+      - path: /reference/api/engine/v1.27/
         title: v1.27 reference
-      - path: /engine/api/v1.26/
+      - path: /reference/api/engine/v1.26/
         title: v1.26 reference
-      - path: /engine/api/v1.25/
+      - path: /reference/api/engine/v1.25/
         title: v1.25 reference
-      - path: /engine/api/v1.24/
+      - path: /reference/api/engine/v1.24/
         title: v1.24 reference
   - sectiontitle: Docker Hub API
     section:
