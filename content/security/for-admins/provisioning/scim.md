@@ -2,15 +2,8 @@
 keywords: SCIM, SSO, user provisioning, de-provisioning, role mapping, assign users
 title: SCIM provisioning
 description: Learn how System for Cross-domain Identity Management works and how to set it up.
-
 aliases:
-- /security/for-admins/scim/
-
-direct_from:
-- /docker-hub/company-scim/
-- /docker-hub/scim/
-- /admin/company/settings/scim/
-- /admin/organization/security-settings/scim/
+  - /security/for-admins/scim/
 ---
 
 This section is for administrators who want to enable System for Cross-domain Identity Management (SCIM) 2.0 for their business. It is available for Docker Business customers.
