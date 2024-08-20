@@ -32,7 +32,7 @@ Get started:
   - sectiontitle: "Building images"
     section:
     - title: Overview
-      path: /guides/docker-concepts/building-images/
+      path: /get-started/docker-concepts/building-images/
     - title: "Understanding image layers"
       path: /get-started/docker-concepts/building-images/understanding-image-layers/
     - title: "Writing a Dockerfile"
