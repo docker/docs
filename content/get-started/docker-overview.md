@@ -6,12 +6,13 @@ keywords: what is a docker, docker daemon, why use docker, docker architecture, 
   what is docker container used for, what are docker containers used for
 title: Docker overview
 aliases:
-- /introduction/understanding-docker/
-- /engine/userguide/basics/
-- /engine/introduction/understanding-docker/
-- /engine/understanding-docker/
-- /engine/docker-overview/
-- /get-started/overview/
+ - /introduction/understanding-docker/
+ - /engine/userguide/basics/
+ - /engine/introduction/understanding-docker/
+ - /engine/understanding-docker/
+ - /engine/docker-overview/
+ - /get-started/overview/
+ - /guides/docker-overview/
 ---
 
 Docker is an open platform for developing, shipping, and running applications.
