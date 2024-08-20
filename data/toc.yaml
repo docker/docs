@@ -980,11 +980,11 @@ Reference:
   - sectiontitle: Docker Hub API
     section:
       - title: Docker Hub API
-        path: /reference/api/docker-hub/latest/
+        path: /reference/api/hub/latest/
       - title: DVP Data API
-        path: /reference/api/docker-hub/dvp/
+        path: /reference/api/hub/dvp/
       - title: Deprecated API
-        path: /reference/api/docker-hub/deprecated/
+        path: /reference/api/hub/deprecated/
   - sectiontitle: Docker Extension SDK API
     section:
       - path: /extensions/extensions-sdk/dev/api/reference/interfaces/DesktopUI/
@@ -1075,7 +1075,7 @@ Reference:
       title: Compose Develop Specification
     - path: /reference/compose-file/legacy-versions/
       title: Legacy versions
-- path: /glossary/
+- path: /reference/glossary/
   title: Glossary
 - sectiontitle: Samples
   section:

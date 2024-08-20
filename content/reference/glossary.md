@@ -6,7 +6,7 @@ layout: glossary
 notoc: true
 aliases:
 - /engine/reference/glossary/
-- /reference/glossary/
+- /glossary/
 ---
 
 <!--

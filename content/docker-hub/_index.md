@@ -40,7 +40,7 @@ GitHub and Bitbucket and push them to Docker Hub.
 * [Webhooks](webhooks.md): Trigger actions after a successful push
   to a repository to integrate Docker Hub with other services.
 * [Docker Hub CLI](https://github.com/docker/hub-tool#readme) tool (currently experimental) and an API that allows you to interact with Docker Hub.
-  * Browse through the [Docker Hub API](/reference/api/docker-hub/latest/) documentation to explore the supported endpoints.
+  * Browse through the [Docker Hub API](/reference/api/hub/latest/) documentation to explore the supported endpoints.
 {{< /tab >}}
 {{< tab name="What administrative tasks can I perform in Docker Hub?" >}}
 * [Create and manage teams and organizations](orgs.md)

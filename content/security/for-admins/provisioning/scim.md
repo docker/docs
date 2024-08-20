@@ -31,7 +31,7 @@ The following table lists the supported attributes. Note that your attribute map
 | name.familyName | User’s surname |
 | active | Indicates if a user is enabled or disabled. Can be set to false to de-provision the user. |
 
-For additional details about supported attributes and SCIM, see [Docker Hub API SCIM reference](/reference/api/docker-hub/latest/#tag/scim).
+For additional details about supported attributes and SCIM, see [Docker Hub API SCIM reference](/reference/api/hub/latest/#tag/scim).
 
 > [!IMPORTANT]
 >

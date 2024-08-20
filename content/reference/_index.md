@@ -37,11 +37,11 @@ grid_apis:
 - title: Docker Hub API
   description: API to interact with Docker Hub.
   icon: communities
-  link: /reference/api/docker-hub/latest/
+  link: /reference/api/hub/latest/
 - title: DVP Data API
   description: API for Docker Verified Publishers to fetch analytics data.
   icon: area_chart
-  link: /reference/api/docker-hub/dvp/
+  link: /reference/api/hub/dvp/
 ---
 
 This section includes the reference documentation for the Docker platform's

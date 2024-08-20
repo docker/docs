@@ -7,9 +7,8 @@ IgnoreAltEmpty: true
 IgnoreEmptyHref: true
 IgnoreDirectoryMissingTrailingSlash: true
 IgnoreURLs:
-- "^/reference/api/docker-hub/.*$"
+- "^/reference/api/hub/.*$"
 - "^/engine/api/v.+/#.*$"
-- "^/glossary/.*$"
 IgnoreDirs:
 - "engine/api"
 - "registry/configuration"

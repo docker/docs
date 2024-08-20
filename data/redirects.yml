@@ -101,9 +101,9 @@
 "/desktop/windows/wsl/":
   # Link used by Docker Desktop to refer users on how to activate WSL 2
   - /go/wsl2/
-"/reference/api/docker-hub/latest/":
+"/reference/api/hub/latest/":
   - /docker-hub/api/latest/
-"/reference/api/docker-hub/dvp/":
+"/reference/api/hub/dvp/":
   - /docker-hub/api/dvp/
 
 # feedback
