@@ -3,7 +3,6 @@ title: Manuals
 description: Learn how to install, set up, configure, and use Docker products with this collection of user guides
 keywords: docker, docs, manuals, products, user guides, how-to
 notoc: true
-skip_read_time: true
 development:
 - title: Docker Desktop
   description: Your command center for container development.
