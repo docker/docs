@@ -49,7 +49,7 @@ including nodes, services, tasks, and load balancing.
 A node is an instance of the Docker engine participating in the swarm. You can also think of this as a Docker node. You can run one or more nodes on a single physical computer or cloud server, but production swarm deployments typically include Docker nodes distributed across multiple physical and cloud machines.
 
 To deploy your application to a swarm, you submit a service definition to a
-manager node*. The manager node dispatches units of work called
+manager node. The manager node dispatches units of work called
 [tasks](#services-and-tasks) to worker nodes.
 
 Manager nodes also perform the orchestration and cluster management functions
