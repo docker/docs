@@ -5,19 +5,14 @@ keywords: run, cloud, docker desktop, resources
 sitemap: false
 ---
 
-> **Private Preview**
->
-> Docker Run Cloud is in Private Preview.
-{ .restricted }
-
-Docker Run Cloud brings the power of the Cloud to your local development workflow. You can now run your applications in the cloud whilst continuing to use your existing tools and workflows and without worrying about local resource limitations. Docker Run Cloud also lets you share previews of your cloud-based applications for real-time feedback. 
+Docker Run Cloud brings the power of the cloud to your local development workflow. You can now run your applications in the cloud whilst continuing to use your existing tools and workflows and without worrying about local resource limitations. Docker Run Cloud also lets you share previews of your cloud-based applications for real-time feedback. 
 
 ## Set up 
 
 To get started with Docker Run Cloud, you need to:
 
 - Have a Docker account that's part of a Docker organization
-- Reach out to us at (email address TBD) so we can help you onboard
+- Email `run.cloud@docker.com` to get help with onboarding
 
 ## Quickstart
 
@@ -36,9 +31,11 @@ This guide introduces you to essential commands and steps for creating, managing
    - Enter `cloudengine` as the name
    - Choose an organization to associate the cloud engine with
    - Select the engine size and architecture
+
+   Note that the **Switch Docker Context to use remote engine** is selected by default. The automatically switches you to your new cloud engine once it has been created. 
 4. Select **Create**.
 
-Docker automatically switches you to your new cloud engine. To verify, check the context switcher in the top-left corner of the Docker Dashboard; it should display `cloudengine`. You’re now ready to use it.
+To verify creation, check the context switcher in the top-left corner of the Docker Dashboard; it should display `cloudengine`. You’re now ready to use it.
 
 {{< /tab >}}
 {{< tab name="CLI">}}
@@ -76,9 +73,9 @@ You should see the following:
 
 1. Run an Nginx container in the cloud engine:
    ```console
-   $ docker run -d -p 80:80 nginx
+   $ docker run -d -p 8080:80 nginx
    ```
-   This maps the container's port `80` to the host's port `80`. If port 80 is already in use on your host, you can specify a different port.
+   This maps the container's port `80` to the host's port `8080`. If port `8080` is already in use on your host, you can specify a different port.
 2. View the Nginx welcome page. Navigate to [`http://localhost/`](http://localhost/).
 3. Verify the running container:
    - In the **Containers** tab in the Docker Dashboard, you should see your Nginx container listed. 
@@ -123,7 +120,7 @@ Running a container with a cloud engine is just as straightforward as running it
 
 ### Step four: Use a file sync for your cloud engine
 
-Docker Run Cloud takes advantage of Synchronized file shares to enable local-to-remote file shares and port mappings. 
+Docker Run Cloud takes advantage of [Synchronized file shares](/desktop/synchronized-file-sharing.md) to enable local-to-remote file shares and port mappings. 
 
 {{< tabs group="method" >}}
 {{< tab name="Docker Desktop">}}
@@ -169,7 +166,7 @@ Docker Run Cloud takes advantage of Synchronized file shares to enable local-to-
 1. Make sure your Docker context is set to `cloudengine`. 
 2. In your terminal, run the Nginx container:
    ```console
-   $ docker run -d -p 80:80 nginx
+   $ docker run -d -p 8080:80 nginx
    ```
 3. In the Docker Dashboard, navigate to the **Containers** view. 
 4. Select the **lock** icon in the **Ports** column of your running container. 
@@ -181,7 +178,7 @@ To view all shared ports for your Docker context, select the **Shared ports** ic
 {{< /tab >}}
 {{< tab name="CLI">}}
 
-To share a container port, run: 
+To share a container port, make sure your Docker context is set to `cloudengine` and then run: 
 ``` console
 $ docker harmonia engine share create cloudengine 3000
 ```
