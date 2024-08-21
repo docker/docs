@@ -14,7 +14,7 @@ This page contains information for administrators on how to configure Settings M
 
 ## Prerequisites
 
-- [Download and install Docker Desktop 4.34.0 or later](/desktop/release-notes.md).
+- [Download and install Docker Desktop 4.35.0 or later](/desktop/release-notes.md).
 - As an administrator, you need to [enforce
   sign-in](/security/for-admins/enforce-sign-in/_index.md). This is
 because the Settings Management feature requires a Docker Business
@@ -33,7 +33,7 @@ organization for configurations to take effect.
    >
    > If a policy is assigned to all users, it sets the policy as the global default policy.
 
-6. Configure the settings for the policy. Go through each setting and select your chosen setting state. You can choose:
+6. Configure the settings for the policy. Go through each setting and select your chosen setting state. You can choose
    - **User-defined**. 
    - **Always enabled**. This means the setting is turned on and your users won't be able to edit this setting from Docker Desktop or the CLI.
    - **Enabled**. The setting is turned on and users can edit this setting from Docker Desktop or the CLI.
@@ -65,3 +65,4 @@ From the **Actions** menu on the **Desktop Settings Management** page in the Doc
 - Edit or delete an existing settings policy. 
 - Export a settings policy as an `admin-settings.json` file.
 - Set a policy that is applied to a select group of users, to be the new global default policy for all users. 
+
