@@ -5,6 +5,10 @@ keywords: run, cloud, docker desktop, resources
 sitemap: false
 ---
 
+{{% restricted title="Private preview" %}}
+Docker Run Cloud is in Private preview.
+{{% /restricted %}}
+
 Docker Run Cloud brings the power of the cloud to your local development workflow. You can now run your applications in the cloud whilst continuing to use your existing tools and workflows and without worrying about local resource limitations. Docker Run Cloud also lets you share previews of your cloud-based applications for real-time feedback. 
 
 ## Set up 
@@ -16,7 +20,7 @@ To get started with Docker Run Cloud, you need to:
 
 ## Quickstart
 
-You can use Docker Run Cloud direct from the Docker Dashboard or from the CLI. 
+You can use Docker Run Cloud from the Docker Dashboard or from the CLI. 
 
 This guide introduces you to essential commands and steps for creating, managing, and sharing a cloud engine. 
 
@@ -47,9 +51,9 @@ $ docker harmonia engine create cloudengine --arch "amd64"  --use
 ```
 
 This creates an engine called `cloudengine` and:
-- Immediately switches you to the new cloud engine with the --use flag.
-- Sets the engine's CPU architecture to amd64 using the --arch "amd64" flag. You can choose between amd64 and arm64.
-- Configures the engine size with the --size "standard" flag. Options are standard (2 CPU cores, 4GB RAM, default) or large (4 CPU cores, 8GB RAM).
+- Immediately switches you to the new cloud engine with the `--use` flag.
+- Sets the engine's CPU architecture to amd64 using the `--arch "amd64"` flag. You can choose between amd64 and arm64.
+- Configures the engine size with the `--size "standard"` flag. Options are standard (2 CPU cores, 4GB RAM, default) or large (4 CPU cores, 8GB RAM).
 
 To verify you're using the newly created cloud engine, run:
 
