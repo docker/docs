@@ -79,7 +79,6 @@ In this section, you learned how you can containerize and run your C++
 application using Docker.
 
 Related information:
- - [Build with Docker guide](../../build/guide/index.md)
  - [Docker Compose overview](../../compose/_index.md)
 
 ## Next steps

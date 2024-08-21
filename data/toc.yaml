@@ -258,29 +258,6 @@ Guides:
     - path: /guides/use-case/databases/
       title: Use containerized databases
 
-- sectiontitle: Build with Docker
-  section:
-  - path: /build/guide/
-    title: Overview
-  - path: /build/guide/intro/
-    title: 1. Introduction
-  - path: /build/guide/layers/
-    title: 2. Layers
-  - path: /build/guide/multi-stage/
-    title: 3. Multi-stage
-  - path: /build/guide/mounts/
-    title: 4. Mounts
-  - path: /build/guide/build-args/
-    title: 5. Build arguments
-  - path: /build/guide/export/
-    title: 6. Export binaries
-  - path: /build/guide/test/
-    title: 7. Test
-  - path: /build/guide/multi-platform/
-    title: 8. Multi-platform
-  - path: /build/guide/next-steps/
-    title: Next steps
-
 - sectiontitle: Deployment and orchestration
   section:
   - title: "Overview"
@@ -1900,6 +1877,8 @@ Manuals:
           title: Multi-platform images
         - path: /build/building/secrets/
           title: Build secrets
+        - path: /build/building/export/
+          title: Export binaries
         - path: /build/building/best-practices/
           title: Best practices
         - path: /build/building/base-images/
@@ -1958,6 +1937,8 @@ Manuals:
           title: Overview
         - path: /build/cache/invalidation/
           title: Cache invalidation
+        - path: /build/cache/optimize/
+          title: Optimize cache usage
         - path: /build/cache/garbage-collection/
           title: Garbage collection
         - sectiontitle: Cache backends

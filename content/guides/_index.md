@@ -13,10 +13,6 @@ dive-deeper:
   description: Walk through practical Docker applications for specific scenarios.
   link: /guides/use-case/
   icon: task
-- title: Build with Docker
-  description: Deep-dive into building software with Docker.
-  link: /build/guide/
-  icon: build
 - title: Deployment and Orchestration
   description: Deploy and manage Docker containers at scale.
   link: /guides/deployment-orchestration/orchestration/

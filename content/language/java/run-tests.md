@@ -113,13 +113,6 @@ You should see output containing the following
 #15 DONE 101.4s
 ```
 
-## Summary
-
-In this section, you learned how to run tests when building your image.
-
-Related information:
- - [Build with Docker guide](../../build/guide/index.md)
-
 ## Next steps
 
 In the next section, you’ll take a look at how to set up a CI/CD pipeline using

@@ -100,15 +100,12 @@ You should see output containing the following.
 #18 0.395 OK (1 test, 1 assertion)
 ```
 
-To learn more about building and running tests, see the [Build with Docker guide](../../build/guide/_index.md).
-
 ## Summary
 
 In this section, you learned how to run tests when developing locally using Compose and how to run tests when building your image.
 
 Related information:
  - [docker compose run](/reference/cli/docker/compose/run/)
- - [Build with Docker guide](../../build/guide/index.md)
 
 ## Next steps
 
