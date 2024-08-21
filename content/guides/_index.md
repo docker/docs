@@ -33,7 +33,7 @@ resources:
   icon: edit
 ---
 
-This section contains guides to help you get started and learn how Docker can optimize your development workflows.
+This section contains more advanced guides to help you learn how Docker can optimize your development workflows.
 
 ## Advancing with Docker
 
