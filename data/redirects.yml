@@ -254,15 +254,31 @@
 "/get-started/04_sharing_app":
   - /go/get-started-sharing/
 
-## Docker Debug
+# Docker Debug
 "/reference/cli/docker/debug/":
   - /go/debug-cli/
 "/desktop/use-desktop/container/#integrated-terminal":
   - /go/debug-gui/
 
-## Docker Desktop - volumes cloud backup
+# Docker Desktop - volumes cloud backup
 "/desktop/use-desktop/volumes/#export-a-volume":
   - /go/volume-export/
   - /go/volume-export-aws/
   - /go/volume-export-azure/
   - /go/volume-export-gcs/
+
+# Docker Admin Console - Insights
+"/admin/organization/insights/":
+  - /go/insights/
+"/admin/organization/insights/#docker-desktop-users/":
+  - /go/insights-users/
+"/admin/organization/insights/#builds":
+  - /go/insights-builds/
+"/admin/organization/insights/#containers":
+  - /go/insights-containers/
+"/admin/organization/insights/#docker-desktop-usage":
+  - /go/insights-usage/
+"/admin/organization/insights/#docker-hub-images":
+  - /go/insights-images/
+"/admin/organization/insights/#extensions":
+  - /go/insights-extensions/
