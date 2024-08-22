@@ -1,0 +1,21 @@
+# check if there is at least one published port
+
+#! server-service.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: server-published
+    namespace: docs
+    labels:
+        com.docker.compose.project: docs
+        com.docker.compose.service: server
+spec:
+    selector:
+        com.docker.compose.project: docs
+        com.docker.compose.service: server
+    ports:
+        - name: server-1313
+          port: 1313
+          protocol: TCP
+          targetPort: server-1313
