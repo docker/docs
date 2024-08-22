@@ -240,3 +240,4 @@ Run `docker harmonia doctor` to print helpful troubleshooting information.
 - Bind volumes are not supported.
 - Port-forwarding support for UDP
 - Docker Compose projects relying on `watch` in `sync` mode are not working with the `tar` synchronizer. Configure it to use `docker cp` instead, disable tar sync by setting `COMPOSE_EXPERIMENTAL_WATCH_TAR=0` in your environment.
+- Some Docker Engine features that let you access the underlying host, such as `--pid=host`, `--network=host`, and `--ipc=host`, are currently disabled.
