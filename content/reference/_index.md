@@ -30,10 +30,6 @@ grid_apis:
   description: The main API for Docker, provides programmatic access to a daemon.
   icon: api
   link: /reference/api/engine/
-- title: Registry API
-  description: Facilitates distribution of images to the engine.
-  icon: storage
-  link: /registry/spec/api/
 - title: Docker Hub API
   description: API to interact with Docker Hub.
   icon: communities
