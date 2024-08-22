@@ -281,7 +281,7 @@ the way you define and share multi-service applications.
 Related information:
  - [Compose overview](/compose/_index.md)
  - [Compose file reference](/reference/compose-file/_index.md)
- - [Compose CLI reference](/compose/reference/_index.md)
+ - [Compose CLI reference](/reference/cli/docker/compose/_index.md)
 
 ## Next steps
 

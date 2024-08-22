@@ -20,7 +20,7 @@ grid_clis:
   description: The CLI for Docker Compose, for building and running multi-container
     applications.
   icon: subtitles
-  link: /compose/reference/
+  link: /reference/cli/docker/compose/
 - title: Daemon CLI (dockerd)
   description: Persistent process that manages containers.
   icon: developer_board

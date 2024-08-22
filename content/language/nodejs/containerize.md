@@ -266,7 +266,7 @@ $ docker compose down
 ```
 
 For more information about Compose commands, see the [Compose CLI
-reference](../../compose/reference/_index.md).
+reference](/reference/cli/docker/compose/_index.md).
 
 ## Summary
 
