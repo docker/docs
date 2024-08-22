@@ -1,8 +1,0 @@
-#! 0-docs-namespace.yaml
-# Generated code, do not edit
-apiVersion: v1
-kind: Namespace
-metadata:
-    name: docs
-    labels:
-        com.docker.compose.project: docs
