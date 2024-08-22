@@ -20,7 +20,7 @@ ddClient.extension.vm.service
  .then((value: any) => console.log(value)
 ```
 
-See [Service API Reference](reference/interfaces/HttpService.md) for other methods such as POST, UPDATE, and DELETE.
+See [Service API Reference](/reference/api/extensions-sdk/HttpService.md) for other methods such as POST, UPDATE, and DELETE.
 
 > Deprecated extension backend communication
 >
@@ -92,7 +92,7 @@ await ddClient.extension.vm.cli.exec("ls", ["-l"], {
 });
 ```
 
-For more details, refer to the [Extension VM API Reference](reference/interfaces/ExtensionVM.md)
+For more details, refer to the [Extension VM API Reference](/reference/api/extensions-sdk/ExtensionVM.md)
 
 > Deprecated extension backend command execution
 >
@@ -143,7 +143,7 @@ await ddClient.extension.host.cli.exec("kubectl", ["-h"], {
 
 You can stream the output of the command executed in the backend container or in the host.
 
-For more details, refer to the [Extension Host API Reference](reference/interfaces/ExtensionHost.md)
+For more details, refer to the [Extension Host API Reference](/reference/api/extensions-sdk/ExtensionHost.md)
 
 > Deprecated invocation of extension binary
 >

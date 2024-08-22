@@ -987,55 +987,55 @@ Reference:
         path: /reference/api/hub/deprecated/
   - sectiontitle: Docker Extension SDK API
     section:
-      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/DesktopUI/
+      - path: /reference/api/extensions-sdk/DesktopUI/
         title: DesktopUI
-      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/Dialog/
+      - path: /reference/api/extensions-sdk/Dialog/
         title: Dialog
-      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/Docker/
+      - path: /reference/api/extensions-sdk/Docker/
         title: Docker
-      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/DockerCommand/
+      - path: /reference/api/extensions-sdk/DockerCommand/
         title: DockerCommand
-      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/DockerDesktopClient/
+      - path: /reference/api/extensions-sdk/DockerDesktopClient/
         title: DockerDesktopClient
-      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/Exec/
+      - path: /reference/api/extensions-sdk/Exec/
         title: Exec
-      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/ExecProcess/
+      - path: /reference/api/extensions-sdk/ExecProcess/
         title: ExecProcess
-      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/ExecResult/
+      - path: /reference/api/extensions-sdk/ExecResult/
         title: ExecResult
-      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/ExecStreamOptions/
+      - path: /reference/api/extensions-sdk/ExecStreamOptions/
         title: ExecStreamOptions
-      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/Extension/
+      - path: /reference/api/extensions-sdk/Extension/
         title: Extension
-      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/ExtensionCli/
+      - path: /reference/api/extensions-sdk/ExtensionCli/
         title: ExtensionCli
-      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/ExtensionHost/
+      - path: /reference/api/extensions-sdk/ExtensionHost/
         title: ExtensionHost
-      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/ExtensionVM/
+      - path: /reference/api/extensions-sdk/ExtensionVM/
         title: ExtensionVM
-      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/Host/
+      - path: /reference/api/extensions-sdk/Host/
         title: Host
-      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/HttpService/
+      - path: /reference/api/extensions-sdk/HttpService/
         title: HttpService
-      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/NavigationIntents/
+      - path: /reference/api/extensions-sdk/NavigationIntents/
         title: NavigationIntents
-      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/OpenDialogResult/
+      - path: /reference/api/extensions-sdk/OpenDialogResult/
         title: OpenDialogResult
-      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/RawExecResult/
+      - path: /reference/api/extensions-sdk/RawExecResult/
         title: RawExecResult
-      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/RequestConfig/
+      - path: /reference/api/extensions-sdk/RequestConfig/
         title: RequestConfig
-      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/RequestConfigV0/
+      - path: /reference/api/extensions-sdk/RequestConfigV0/
         title: RequestConfigV0
-      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/ServiceError/
+      - path: /reference/api/extensions-sdk/ServiceError/
         title: ServiceError
-      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/ServiceError/
+      - path: /reference/api/extensions-sdk/ServiceError/
         title: SpawnOptions
-      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/Toast/
+      - path: /reference/api/extensions-sdk/Toast/
         title: Toast
-      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/ExecResultV0/
+      - path: /reference/api/extensions-sdk/ExecResultV0/
         title: ExecResultV0
-      - path: /extensions/extensions-sdk/dev/api/reference/interfaces/BackendV0/
+      - path: /reference/api/extensions-sdk/BackendV0/
         title: BackendV0
 - sectiontitle: Compose file reference
   section:

@@ -41,7 +41,7 @@ Use to display a toast message of type error.
 ddClient.desktopUI.toast.error("message");
 ```
 
-For more details about method parameters and the return types available, see [Toast API reference](reference/interfaces/Toast.md).
+For more details about method parameters and the return types available, see [Toast API reference](/reference/api/extensions-sdk/Toast.md).
 
 > Deprecated user notifications
 >
@@ -57,7 +57,7 @@ window.ddClient.toastError("message");
 
 This function opens a file selector dialog that asks the user to select a file or folder.
 
-▸ **showOpenDialog**(`dialogProperties`): `Promise`<[`OpenDialogResult`](reference/interfaces/OpenDialogResult.md)\>:
+▸ **showOpenDialog**(`dialogProperties`): `Promise`<[`OpenDialogResult`](/reference/api/extensions-sdk/OpenDialogResult.md)\>:
 
 The `dialogProperties` parameter is a list of flags passed to Electron to customize the dialog's behaviour. For example, you can pass `multiSelections` to allow a user to select multiple files. See [Electron's documentation](https://www.electronjs.org/docs/latest/api/dialog) for a full list.
 
@@ -82,7 +82,7 @@ ddClient.host.openExternal("https://docker.com");
 
 > The URL must have the protocol `http` or `https`.
 
-For more details about method parameters and the return types available, see [Desktop host API reference](reference/interfaces/Host.md).
+For more details about method parameters and the return types available, see [Desktop host API reference](/reference/api/extensions-sdk/Host.md).
 
 > Deprecated user notifications
 >

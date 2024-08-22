@@ -24,7 +24,7 @@ To get the list of local container images:
 const images = await ddClient.docker.listImages();
 ```
 
-See the [Docker API reference](reference/interfaces/Docker.md) for details about these methods.
+See the [Docker API reference](/reference/api/extensions-sdk/Docker.md) for details about these methods.
 
 > Deprecated access to Docker objects
 >
@@ -40,7 +40,7 @@ const images = await window.ddClient.listImages();
 
 Extensions can also directly execute the `docker` command line.
 
-▸ **exec**(`cmd`, `args`): `Promise`<[`ExecResult`](reference/interfaces/ExecResult.md)\>
+▸ **exec**(`cmd`, `args`): `Promise`<[`ExecResult`](/reference/api/extensions-sdk/ExecResult.md)\>
 
 ```typescript
 const result = await ddClient.docker.cli.exec("info", [
@@ -136,7 +136,7 @@ await ddClient.docker.cli.exec(
 >
 > You need to invoke `exec()` for each command and parse results to pass parameters to the next command if needed.
 
-See the [Exec API reference](reference/interfaces/Exec.md) for details about these methods.
+See the [Exec API reference](/reference/api/extensions-sdk/Exec.md) for details about these methods.
 
 > Deprecated execution of Docker commands
 >
