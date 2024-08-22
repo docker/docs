@@ -2,7 +2,7 @@ To start Docker Desktop for Linux:
 
 1. Open your **Applications** menu in Gnome/KDE Desktop and search for **Docker Desktop**.
 
-2. Select **Docker Desktop** to start Docker. <br> The Docker menu ({{< inline-image src="images/whale-x.svg" alt="whale menu" >}}) displays the Docker Subscription Service Agreement.
+2. Select **Docker Desktop** to start Docker. <br> The Docker Subscription Service Agreement displays
 
 3. Select **Accept** to continue. Docker Desktop starts after you accept the terms.
 
