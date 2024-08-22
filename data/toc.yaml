@@ -413,8 +413,8 @@ Reference:
       title: docker checkpoint rm
   - sectiontitle: docker compose
     section:
-      - path: /compose/reference/
-        title: overview
+      - path: /reference/cli/docker/compose/
+        title: docker compose
       - path: /reference/cli/docker/compose/alpha/
         title: docker compose alpha
       - path: /reference/cli/docker/compose/alpha/dry-run/
@@ -425,8 +425,6 @@ Reference:
         title: docker compose alpha scale
       - path: /reference/cli/docker/compose/alpha/viz/
         title: docker compose alpha viz
-      - path: /reference/cli/docker/compose/
-        title: docker compose
       - path: /reference/cli/docker/compose/build/
         title: docker compose build
       - path: /reference/cli/docker/compose/config/
