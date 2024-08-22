@@ -58,7 +58,7 @@ application with:
 - A command line interface (CLI) client
   [`docker`](/reference/cli/docker/).
 
-The CLI uses [Docker APIs](api/index.md) to control or interact with the Docker
+The CLI uses [Docker APIs](/reference/api/engine/_index.md) to control or interact with the Docker
 daemon through scripting or direct CLI commands. Many other Docker applications
 use the underlying API and CLI. The daemon creates and manages Docker objects,
 such as images, containers, networks, and volumes.

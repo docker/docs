@@ -250,10 +250,10 @@ module:
     - path: github.com/moby/moby
       mounts:
         - source: docs/api
-          target: content/engine/api
+          target: content/reference/api/engine
           includeFiles: "*.md"
         - source: docs/api
-          target: static/reference/engine
+          target: static/reference/api/engine
           includeFiles: "*.yaml"
 
     - path: github.com/moby/buildkit

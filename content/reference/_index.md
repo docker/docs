@@ -29,7 +29,7 @@ grid_apis:
 - title: Engine API
   description: The main API for Docker, provides programmatic access to a daemon.
   icon: api
-  link: /engine/api/
+  link: /reference/api/engine/
 - title: Registry API
   description: Facilitates distribution of images to the engine.
   icon: storage
@@ -37,11 +37,11 @@ grid_apis:
 - title: Docker Hub API
   description: API to interact with Docker Hub.
   icon: communities
-  link: /docker-hub/api/latest/
+  link: /reference/api/hub/latest/
 - title: DVP Data API
   description: API for Docker Verified Publishers to fetch analytics data.
   icon: area_chart
-  link: /docker-hub/api/dvp/
+  link: /reference/api/hub/dvp/
 ---
 
 This section includes the reference documentation for the Docker platform's
