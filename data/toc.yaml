@@ -3,7 +3,7 @@ Get started:
   path: /get-started/
 - title: Get Docker
   path: /get-started/get-docker/
-- title: Docker overview
+- title: What is Docker?
   path: /get-started/docker-overview/
 - sectiontitle: "Introduction"
   section:

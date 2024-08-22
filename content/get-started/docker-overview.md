@@ -4,7 +4,7 @@ description: Get an in-depth overview of the Docker platform including what it c
 keywords: what is a docker, docker daemon, why use docker, docker architecture, what
   to use docker for, docker client, what is docker for, why docker, uses for docker,
   what is docker container used for, what are docker containers used for
-title: Docker overview
+title: What is Docker?
 aliases:
  - /introduction/understanding-docker/
  - /engine/userguide/basics/
