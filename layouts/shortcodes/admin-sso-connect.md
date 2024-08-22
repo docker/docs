@@ -36,6 +36,14 @@ The SSO connection is now created. You can continue to set up SCIM without enfor
 
 1. Sign in to {{ $product_link }}.
 2. {{ $sso_navigation }}
+
+   > [!NOTE]
+   >
+   > When an organization is part of a company, you must select the company and
+   > configure SSO enforcement for that organization at the company level. Each
+   > organization in a company can have its own configuration, but it must be
+   > configured at the company level.
+
 3. In the SSO connections table, select the **Action** icon and then **Enable enforcement**.
 
    When SSO is enforced, your users are unable to modify their email address and password, convert a user account to an organization, or set up 2FA through Docker Hub. You must enable 2FA through your IdP.
