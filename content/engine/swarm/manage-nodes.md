@@ -203,7 +203,7 @@ a `PluginSpec` instead of a `ContainerSpec`.
 
 The [`PluginSpec`](/engine/extend/plugin_api/#json-specification)
 is defined by the plugin developer. To add the plugin to all Docker nodes, use
-the [`service/create`](/engine/api/v1.31/#operation/ServiceCreate) API, passing
+the [`service/create`](/reference/api/engine/v1.31/#operation/ServiceCreate) API, passing
 the `PluginSpec` JSON defined in the `TaskTemplate`.
 
 ## Leave the swarm

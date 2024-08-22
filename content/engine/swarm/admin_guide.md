@@ -154,7 +154,7 @@ worker nodes that do not meet these requirements cannot run these tasks.
 
 You can monitor the health of manager nodes by querying the docker `nodes` API
 in JSON format through the `/nodes` HTTP endpoint. Refer to the
-[nodes API documentation](/engine/api/v1.25/#tag/Node)
+[nodes API documentation](/reference/api/engine/v1.25/#tag/Node)
 for more information.
 
 From the command line, run `docker node inspect <id-node>` to query the nodes.

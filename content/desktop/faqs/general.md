@@ -49,7 +49,7 @@ $ export DOCKER_HOST=unix:///var/run/docker.sock
 Docker Desktop Windows users can connect to the Docker Engine through a **named pipe**: `npipe:////./pipe/docker_engine`, or **TCP socket** at this URL:
 `tcp://localhost:2375`.
 
-For details, see [Docker Engine API](../../engine/api/index.md).
+For details, see [Docker Engine API](/reference/api/engine/_index.md).
 
 ### How do I connect from a container to a service on the host?
 

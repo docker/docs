@@ -26,7 +26,7 @@ Manager nodes handle cluster management tasks:
 
 * Maintaining cluster state
 * Scheduling services
-* Serving Swarm mode [HTTP API endpoints](../../api/index.md)
+* Serving Swarm mode [HTTP API endpoints](/reference/api/engine/_index.md)
 
 Using a [Raft](https://raft.github.io/raft.pdf) implementation, the managers
 maintain a consistent internal state of the entire swarm and all the services

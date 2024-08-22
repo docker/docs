@@ -11,7 +11,7 @@
     <!-- favicon -->
     {{ partialCached "favicon.html" "favicon" }}
     <!-- make the latest API version the canonical page as that's what we want users to be using mostly -->
-    <link rel="canonical" href="{{ site.BaseURL }}/engine/api/v{{ site.Params.latest_engine_api_version }}/" />
+    <link rel="canonical" href="{{ site.BaseURL }}/reference/api/engine/v{{ site.Params.latest_engine_api_version }}/" />
     <style>
         body {
             margin: 0;
@@ -26,7 +26,7 @@
 </head>
 
 <body>
-    <redoc spec-url="/reference/engine/{{ .File.BaseFileName }}.yaml" hide-hostname="true" suppress-warnings="true"
+    <redoc spec-url="/reference/api/engine/{{ .File.BaseFileName }}.yaml" hide-hostname="true" suppress-warnings="true"
         lazy-rendering></redoc>
     <script src="https://cdn.redoc.ly/redoc/latest/bundles/redoc.standalone.js"></script>
 </body>

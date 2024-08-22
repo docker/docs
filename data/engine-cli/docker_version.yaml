@@ -105,7 +105,7 @@ long: |-
     version that is supported by both the Docker CLI and the Docker Engine.
 
     For example, if the CLI is connecting with Docker Engine version 19.03, it downgrades
-    to API version 1.40 (refer to the [API version matrix](/engine/api/#api-version-matrix)
+    to API version 1.40 (refer to the [API version matrix](/reference/api/engine/#api-version-matrix)
     to learn about the supported API versions for Docker Engine):
 
     ```console
