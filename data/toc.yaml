@@ -987,7 +987,7 @@ Reference:
         path: /reference/api/hub/deprecated/
   - sectiontitle: Docker Extension SDK API
     section:
-      - path: /reference/api/extensions-sdk/README/
+      - path: /reference/api/extensions-sdk/
         title: API Reference
       - path: /reference/api/extensions-sdk/DesktopUI/
         title: DesktopUI

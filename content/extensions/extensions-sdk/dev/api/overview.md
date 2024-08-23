@@ -34,4 +34,4 @@ The `ddClient` object gives access to various APIs:
 - [Dashboard](dashboard.md)
 - [Navigation](dashboard-routes-navigation.md)
 
-Find the Extensions API reference [here](reference/api/extensions-sdk/README.md).
+Find the Extensions API reference [here](reference/api/extensions-sdk/_index.md).
