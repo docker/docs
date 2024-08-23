@@ -29,12 +29,12 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### New
 
-- Add host networking support to Docker Desktop
-- When a user is authenticating in the CLI but does not have DD installed, they will be able to authenticate using a browser-based flow (eliminating manual PAT generation)
-- Windows on Arm: Add support for Hyper-V
-- Fresh installations of Docker Desktop will now default to use the containerd image store
-- Improve the output of `docker image list` to show multi-platform-related image information
-- Improve output of `docker image inspect` to account for multi-platform images (relevant to containerd image store)
+- [Host networking](/engine/network/drivers/host.md#docker-desktop) support on Docker Desktop is now generally available.
+- If you authenticate via the CLI without Docker Desktop installed, you can now authenticate through a browser-based flow, removing the need for manual PAT generation.
+- Windows on Arm now supports the Hyper-V backend.
+- Fresh installations of Docker Desktop now use the containerd image store by default. 
+- Improved the output of `docker image list` to show multi-platform-related image information.
+- Improved the output of `docker image inspect` to account for multi-platform images (relevant to the containerd image store).
 
 ### Upgrades
 
@@ -49,23 +49,23 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 #### For all platforms
 
 - Fixed a bug that caused the CLI to become idle when a container was started with AutoRemove (`--rm`) but whose port bindings would be rejected by Docker Dekstop at start-up.
-- Fixed a bug where diagnostics collection would fail sporadically on the Support screen.
-- Fixed a bug where folders wouldn't expand in the container files view. Fixes [docker/for-win#14204](https://github.com/docker/for-win/issues/14204).
+- Fixed a bug where diagnostics collection would fail sporadically on the **Support** screen.
+- Fixed a bug where folders wouldn't expand in a container's **File** tab. Fixes [docker/for-win#14204](https://github.com/docker/for-win/issues/14204).
 - Compose File Viewer can now convert and deploy your compose project to a kubernetes cluster
-- In-app updates now respect the proxy settings
+- In-app updates now respect the proxy settings.
 - Extended the ECI Docker socket mount permissions feature to optionally child images derived from allowed images. This allows ECI to work with buildpacks (e.g., Paketo) that create ephemeral local images that use Docker socket mounts.
 - 
 #### For Mac
 
-- Fixed a bug where a `Partial repair error` would occasionally appear when triggering configuration integrity check feature.
-- Configuration integrity check feature now shows information on why the docker socket is mis-configured.
-- Fixed an issue where the configuration integrity check would report the system path instead of the user path if Docker Desktop is installed as User.
+- Fixed a bug where a `Partial repair error` would occasionally appear when triggering the Configuration integrity check feature.
+- Configuration integrity check feature now shows information on why the Docker socket is mis-configured.
+- Fixed an issue where the Configuration integrity check feature would report the system path instead of the user path if Docker Desktop is installed as `User`.
 
 #### For Windows
 
 - Fixed a bug where Docker Desktop would reset docker's `credsStore` to `desktop` when the user's intention is to keep it empty. Fixes [docker/for-win#9843](https://github.com/docker/for-win/issues/9843)
 - Fixed a bug that would cause Docker Desktop to not start in the WSL2 engine  [docker/for-win#14034](https://github.com/docker/for-win/issues/14034)
-- Automatic data-disk file (vhdx) compaction for the WSL2 engine (experimental).
+- Automatic data-disk file (VHDX) compaction for the WSL2 engine (experimental).
 - Fixed a bug that caused WSL distro to terminate abruptly. Fixes [for-win/14230](https://github.com/docker/for-win/issues/14230)
 - Fixed an issue that caused WSL to update in each startup. Fixes [for-win/13868](https://github.com/docker/for-win/issues/13868)
 
