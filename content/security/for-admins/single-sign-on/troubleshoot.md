@@ -16,6 +16,12 @@ their service.
 1. Sign in to the [Admin Console](https://app.docker.com/admin/).
 2. Select your organization or company in the left navigation drop-down menu,
    and then select **SSO and SCIM**.
+
+   > [!NOTE]
+   >
+   > When an organization is part of a company, you must select the company and
+   > view the SSO connection for that organization at the company level.
+
 3. In the SSO connections table, select the **Actions** icon and **View error
    logs**. The **Connection errors** page appears with a list of errors that
    have occurred in the past 7 days.

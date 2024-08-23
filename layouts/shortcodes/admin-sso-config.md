@@ -21,6 +21,14 @@ After your domain is verified, create an SSO connection.
 
 1. Sign in to {{ $product_link }}.
 2. {{ $sso_navigation }}
+
+   > [!NOTE]
+   >
+   > When an organization is part of a company, you must select the company and
+   > configure SSO for that organization at the company level. Each organization
+   > can have its own SSO configuration and domain, but it must be configured at
+   > the company level.
+
 3. In the SSO connections table select **Create Connection**, and create a name for the connection.
 
    > [!NOTE]
