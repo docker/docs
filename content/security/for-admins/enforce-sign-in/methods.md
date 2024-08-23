@@ -115,7 +115,7 @@ There are many ways to deploy the `.plist` file. The method you choose is depend
 
 ## registry.json method (All)
  
-The following instructions explain how to create and deploy a `registry.json` file to a single device. There are many ways to deploy the `regitry.json` file. You can follow the example deployments outlined in the `.plist` file section.  The method you choose is dependent on your organization's infrastructure, security policies, and the administrative rights of the end-users.
+The following instructions explain how to create and deploy a `registry.json` file to a single device. There are many ways to deploy the `registry.json` file. You can follow the example deployments outlined in the `.plist` file section.  The method you choose is dependent on your organization's infrastructure, security policies, and the administrative rights of the end-users.
 
 ### Option 1: Create a registry.json file to enforce sign-in
 

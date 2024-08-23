@@ -15,12 +15,12 @@ grid_clis:
 - title: Docker CLI
   description: The main Docker CLI, includes all `docker` commands.
   icon: terminal
-  link: /engine/reference/commandline/cli/
+  link: /reference/cli/docker/
 - title: Compose CLI
   description: The CLI for Docker Compose, for building and running multi-container
     applications.
   icon: subtitles
-  link: /compose/reference/
+  link: /reference/cli/docker/compose/
 - title: Daemon CLI (dockerd)
   description: Persistent process that manages containers.
   icon: developer_board
@@ -30,10 +30,6 @@ grid_apis:
   description: The main API for Docker, provides programmatic access to a daemon.
   icon: api
   link: /reference/api/engine/
-- title: Registry API
-  description: Facilitates distribution of images to the engine.
-  icon: storage
-  link: /registry/spec/api/
 - title: Docker Hub API
   description: API to interact with Docker Hub.
   icon: communities

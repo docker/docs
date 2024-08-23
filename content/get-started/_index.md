@@ -5,10 +5,14 @@ description: Get started with Docker
 notoc: true
 
 get-started:
-- title: Docker overview
+- title: Get Docker
+  description: Choose the best installation path for your setup.
+  icon: download
+- title: What is Docker?
   description: Learn about the Docker platform.
   link: /get-started/docker-overview/
   icon: summarize
+get-started2:
 - title: Introduction
   description: Get started with the basics and the benefits of containerizing your applications.
   link: /get-started/introduction/
@@ -23,10 +27,18 @@ get-started:
   icon: desk
 ---
 
-This section contains guides to help you get started and learn how Docker can optimize your development workflows. For more advanced concepts and scenarios in Docker, see [Guides](/guides/).
+If you're new to Docker, this section guides you through the essential resources to get started.
+
+Follow the guides to help you get started and learn how Docker can optimize your development workflows. 
+
+For more advanced concepts and scenarios in Docker, see [Guides](/guides/).
 
 ## Foundations of Docker
 
-Get started learning the foundational concepts and workflows of Docker.
+Install Docker and jump into discovering what Docker is. 
 
 {{< grid items="get-started" >}}
+
+Learn the foundational concepts and workflows of Docker.
+
+{{< grid items="get-started2" >}}

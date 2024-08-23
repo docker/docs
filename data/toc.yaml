@@ -3,7 +3,7 @@ Get started:
   path: /get-started/
 - title: Get Docker
   path: /get-started/get-docker/
-- title: Docker overview
+- title: What is Docker?
   path: /get-started/docker-overview/
 - sectiontitle: "Introduction"
   section:
@@ -413,8 +413,8 @@ Reference:
       title: docker checkpoint rm
   - sectiontitle: docker compose
     section:
-      - path: /compose/reference/
-        title: overview
+      - path: /reference/cli/docker/compose/
+        title: docker compose
       - path: /reference/cli/docker/compose/alpha/
         title: docker compose alpha
       - path: /reference/cli/docker/compose/alpha/dry-run/
@@ -425,8 +425,6 @@ Reference:
         title: docker compose alpha scale
       - path: /reference/cli/docker/compose/alpha/viz/
         title: docker compose alpha viz
-      - path: /reference/cli/docker/compose/
-        title: docker compose
       - path: /reference/cli/docker/compose/build/
         title: docker compose build
       - path: /reference/cli/docker/compose/config/
@@ -2448,3 +2446,13 @@ Manuals:
   title: Get support
 - path: /release-lifecycle/
   title: Product release lifecycle
+
+Learning paths:
+- title: Overview
+  path: /learning-paths/
+- title: Docker Build Cloud
+  path: /learning-paths/docker-build-cloud/
+- title: Docker Scout
+  path: /learning-paths/docker-scout/
+- title: Docker Compose
+  path: /learning-paths/docker-compose/
