@@ -987,6 +987,8 @@ Reference:
         path: /reference/api/hub/deprecated/
   - sectiontitle: Docker Extension SDK API
     section:
+      - path: /reference/api/extensions-sdk/README/
+        title: API Reference
       - path: /reference/api/extensions-sdk/DesktopUI/
         title: DesktopUI
       - path: /reference/api/extensions-sdk/Dialog/
@@ -1418,8 +1420,6 @@ Manuals:
                   path: /extensions/extensions-sdk/dev/api/dashboard/
                 - title: Navigation
                   path: /extensions/extensions-sdk/dev/api/dashboard-routes-navigation/
-                - title: API Reference
-                  path: /extensions/extensions-sdk/dev/api/reference/README/
 
 - sectiontitle: Docker Scout
   section:
