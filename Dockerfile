@@ -31,18 +31,23 @@ RUN tar -xf "hugo.tar.gz" hugo
 FROM base AS build-base
 COPY --from=hugo /tmp/hugo/hugo /bin/hugo
 COPY --from=node /src/node_modules /src/node_modules
-COPY . .
 
 # dev is for local development with Docker Compose
 FROM build-base AS dev
+COPY . .
 
 # build creates production builds with Hugo
 FROM build-base AS build
+WORKDIR /build
 # HUGO_ENV sets the hugo.Environment (production, development, preview)
 ARG HUGO_ENV
 # DOCS_URL sets the base URL for the site
 ARG DOCS_URL
-RUN hugo --gc --minify -d /out -e $HUGO_ENV -b $DOCS_URL
+RUN --mount=type=bind,target=.,rw <<EOT
+    set -e
+    mv /src/node_modules .
+    hugo --gc --minify -d /out -e $HUGO_ENV -b $DOCS_URL
+EOT
 
 # lint lints markdown files
 FROM davidanson/markdownlint-cli2:v0.13.0 AS lint
