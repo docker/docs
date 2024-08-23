@@ -4,7 +4,8 @@ toc_max: 2
 keywords: authentication, registry.json, configure, enforce sign-in, docker desktop, security,
 title: Enforce sign-in for Docker Desktop
 aliases:
-- /security/for-admins/configure-sign-in/
+ - /security/for-admins/configure-sign-in/
+ - /docker-hub/configure-sign-in/
 ---
 
 By default, members of your organization can use Docker Desktop without signing
