@@ -1,11 +1,12 @@
 ---
 description: Docker extension API reference
 keywords: Docker, extensions, sdk, API, reference
-aliases: 
- - /desktop/extensions-sdk/dev/api/reference/interfaces/ExtensionCli/
+aliases:
+ - /desktop/extensions-sdk/dev/api/reference/interfaces/DockerCommand/
+ - /extensions/extensions-sdk/dev/api/reference/interfaces/DockerCommand/
 ---
 
-# Interface: ExtensionCli
+# Interface: DockerCommand
 
 **`Since`**
 

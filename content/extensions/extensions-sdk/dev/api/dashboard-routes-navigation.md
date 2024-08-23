@@ -34,7 +34,7 @@ try {
 
 A promise that fails if the container doesn't exist.
 
-For more details about all navigation methods, see the [Navigation API reference](reference/interfaces/NavigationIntents.md).
+For more details about all navigation methods, see the [Navigation API reference](/reference/api/extensions-sdk/NavigationIntents.md).
 
 > Deprecated navigation methods
 >
