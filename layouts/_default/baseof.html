@@ -44,58 +44,9 @@
     </div>
   </main>
   <footer>{{ partialCached "footer.html" . }}</footer>
-  {{ with (.Store.Get "youtube") }}
-    <script>
-    (function() {
-      var tag = document.createElement('script');
-      tag.id = "youtube-iframe-api";
-      tag.src = "https://www.youtube.com/iframe_api";
-      var firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-      window.onYouTubeIframeAPIReady = function() {
-        var youtubeDivs = document.querySelectorAll(".youtube-video");
-        for (var i = 0; i < youtubeDivs.length; i++) {
-          createPlayer(youtubeDivs[i].id, youtubeDivs[i].dataset.videoId);
-        }
-      }
-
-      function createPlayer(domElementId, videoId) {
-        new YT.Player(domElementId, {
-          width: "100%",
-          height: "100%",
-          videoId: videoId,
-          playerVars: {
-            'rel': 0,
-            'iv_load_policy': 3,
-            'enablejsapi': 1,
-            'origin': window.location.origin
-          },
-          events: {
-            'onStateChange': function (event) {
-              onPlayerStateChange(event, videoId);
-            }
-          }
-        });
-      }
-
-      function onPlayerStateChange(event, videoId) {
-        if (window.heap === undefined) return;
-
-        var properties = {
-          video_id: videoId,
-          page_path: window.location.pathname,
-          page_title: document.title,
-        };
-
-        if (event.data == YT.PlayerState.PLAYING) {
-          heap.track("Video Play", properties);
-        } else if (event.data == YT.PlayerState.PAUSED) {
-          heap.track("Video Paused", properties);
-        }
-      }
-    })();
-    </script>
+  {{/* Load the YouTube player if the page embeds a YouTube video */}}
+  {{ with .Store.Get "youtube" }}
+    {{- partial "youtube-script.html" . }}
   {{ end }}
 </body>
 

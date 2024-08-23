@@ -1,0 +1,13 @@
+<div class="not-prose gap-12 py-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+  {{ range . }}
+    <div class="flex flex-col">
+      <a class="hover:underline" href="{{ .Permalink }}">
+        {{- $img := resources.Get .Params.image }}
+        {{- $img = $img.Process "resize 600x" }}
+        <img class="h-48 w-full object-cover rounded shadow" src="{{ $img.Permalink }}">
+        <p class="text-xl leading-snug my-4">{{ .Title }}</p>
+      </a>
+      <p class="text-sm">{{ .Summary }} <a class="link" href="{{ .Permalink }}">Read more</a></p>
+    </div>
+  {{ end }}
+</div>

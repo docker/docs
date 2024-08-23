@@ -2446,3 +2446,13 @@ Manuals:
   title: Get support
 - path: /release-lifecycle/
   title: Product release lifecycle
+
+Learning paths:
+- title: Overview
+  path: /learning-paths/
+- title: Docker Build Cloud
+  path: /learning-paths/docker-build-cloud/
+- title: Docker Scout
+  path: /learning-paths/docker-scout/
+- title: Docker Compose
+  path: /learning-paths/docker-compose/
