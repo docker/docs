@@ -63,11 +63,11 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 #### For Windows
 
-- Fixed a bug where Docker Desktop would reset docker's `credsStore` to `desktop` when the user's intention is to keep it empty. Fixes [docker/for-win#9843](https://github.com/docker/for-win/issues/9843)
-- Fixed a bug that would cause Docker Desktop to not start in the WSL2 engine  [docker/for-win#14034](https://github.com/docker/for-win/issues/14034)
+- Fixed a bug where Docker Desktop would reset docker's `credsStore` to `desktop` when the user's intention is to keep it empty. Fixes [docker/for-win#9843](https://github.com/docker/for-win/issues/9843).
+- Fixed a bug that would cause Docker Desktop to not start in the WSL2 engine  [docker/for-win#14034](https://github.com/docker/for-win/issues/14034).
 - Automatic data-disk file (VHDX) compaction for the WSL2 engine (experimental).
-- Fixed a bug that caused WSL distro to terminate abruptly. Fixes [for-win/14230](https://github.com/docker/for-win/issues/14230)
-- Fixed an issue that caused WSL to update in each startup. Fixes [for-win/13868](https://github.com/docker/for-win/issues/13868)
+- Fixed a bug that caused WSL distro to terminate abruptly. Fixes [for-win/14230](https://github.com/docker/for-win/issues/14230).
+- Fixed an issue that caused WSL to update in each startup. Fixes [for-win/13868](https://github.com/docker/for-win/issues/13868).
 
 ## 4.33.1
 
