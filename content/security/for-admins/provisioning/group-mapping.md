@@ -54,7 +54,10 @@ The exact configuration may vary depending on your IdP. You can use [group mappi
 
 ### Use group mapping with SSO
 
-The following steps describe how to set up and use group mapping with your SSO connection only. For these configurations, enabling SCIM isn't required.
+The following steps describe how to set up and use group mapping with SSO
+connections that use the SAML authentication method. Note that group mapping
+with SSO isn't supported with the Azure AD (OIDC) authentication method.
+Additionally, SCIM isn't required for these configurations.
 
 {{< tabs >}}
 {{< tab name="Okta" >}}

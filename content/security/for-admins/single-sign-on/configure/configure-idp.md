@@ -144,9 +144,8 @@ See [More resources](#more-resources) for a video overview on how to set up SSO 
 3. Select **Grant admin consent for YOUR TENANT NAME > Yes**.
 4. Next, you need to add additional permissions. Select **Add a permission**.
 5. Select **Delegated permissions**.
-6. Search for `Directory.Read.All`, and select this option.
-7. Then, search for `User.Read`, and select this option.
-8. Select **Add permissions**.
+6. Then, search for `User.Read`, and select this option.
+7. Select **Add permissions**.
 
 You can verify admin consent was granted for each permission correctly by checking the **Status** column.
 
