@@ -70,13 +70,33 @@ an organization is completely isolated to a single Amazon EC2 instance, with a
 dedicated EBS volume for build cache and encryption in transit. That means
 there are no shared processes or data between cloud builders.
 
+**Duration**: 2.5 minutes
+
 {{< youtube-embed "8AqKhEO2PQA" >}}
+
+{{< /accordion >}}
+
+{{< accordion large=true title=`Demo: set up and use Docker Build Cloud in development` icon=`play_circle` >}}
+
+Shift the build workload from local machines to a remote BuildKit instance —
+achieve faster build times, especially for multi-platform builds.
+
+- Choose the right build: local or cloud?
+- Use with Docker Compose
+- Multi-platform builds
+- Cloud builds in Docker Desktop
+
+**Duration**: 4 minutes
+
+{{< youtube-embed "oPGq2AP5OtQ" >}}
 
 {{< /accordion >}}
 
 {{< accordion large=true title=`Demo: using Docker Build Cloud in CI` icon=`play_circle` >}}
 
 Speed up your build pipelines — delegate the build execution to Docker Build Cloud in CI.
+
+**Duration**: 4 minutes
 
 {{< youtube-embed "wvLdInoVBGg" >}}
 

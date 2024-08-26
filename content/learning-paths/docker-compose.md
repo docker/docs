@@ -28,6 +28,13 @@ orchestrated.
 
 <!-- break -->
 
+## What you’ll learn
+
+- What Docker Compose is and what it does
+- How to define services
+- Use cases for Docker Compose
+- How things would be different without Docker Compose
+
 ## Who’s this for?
 
 - Developers and DevOps engineers who need to define, manage, and orchestrate
@@ -58,11 +65,22 @@ Docker Compose provides several benefits:
 - Streamlines development workflows and reduces setup time.
 - Ensures that each service runs in its own container, avoiding conflicts.
 
+**Duration**: 2.5 minutes
+
 {{< youtube-embed 2EqarOM2V4U >}}
 
 {{< /accordion >}}
 
 {{< accordion large=true title=`Demo: Set up and use Docker Compose` icon=`play_circle` >}}
+
+This Docker Compose demo shows how to orchestrate a multi-container application
+environment, streamlining development and deployment processes.
+
+- Compare Docker Compose to the `docker run` command
+- Configure a multi-container web app using a compose.yml file
+- Run a multi-container web app using one command
+
+**Duration**: 2.5 minutes
 
 {{< youtube-embed P5RBKmOLPH4 >}}
 
