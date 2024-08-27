@@ -1,6 +1,6 @@
 ---
 description: Advanced Configuration for Enhanced Container Isolation
-title: Advanced configuration options
+title: Advanced configuration options for ECI
 keywords: enhanced container isolation, Docker Desktop, Docker socket, bind mount, configuration
 aliases:
  - /desktop/hardened-desktop/enhanced-container-isolation/config/
@@ -29,13 +29,16 @@ push malicious images into the organization's repositories) or similar.
 However, some legitimate use cases require containers to have access to the
 Docker Engine socket. For example, the popular [Testcontainers](https://testcontainers.com/)
 framework sometimes bind-mounts the Docker Engine socket into containers to
-manage them or perform post-test cleanup.
+manage them or perform post-test cleanup. Similarly, some Buildpack frameworks
+(e.g., [Paketo](https://paketo.io/)) require Docker socket bind-mounts into
+containers.
 
 Starting with Docker Desktop 4.27, admins can optionally configure ECI to allow
 bind mounting the Docker Engine socket into containers, but in a controlled way.
 
-This can be done via the `admin-settings.json` file, as described in
-[Settings Management](../settings-management/configure.md). For example:
+This can be done via the Docker Socket mount permissions section in the
+`admin-settings.json` file (see [Settings Management](../settings-management/configure.md)
+for more info on this file). For example:
 
 ```json
 {
@@ -133,15 +136,81 @@ then the tag operation succeeds, but the `docker run` command fails
 because the image digest of the disallowed image won't match that of the allowed
 ones in the repository.
 
+### Docker Socket Mount Permissions for Derived Images
+
+> [!NOTE]
+>
+> * This feature is available with Docker Desktop version 4.34 (and later).
+
+As described in the prior section, admins can configure the list of container
+images that are allowed to mount the Docker socket via the `imageList`.
+
+This works for most scenarios, but not always, because it requires knowing upfront
+the name of the image(s) on which the Docker socket mounts should be allowed.
+Some container tools such as [Paketo](https://paketo.io/) buildpacks,
+build ephemeral local images that require Docker socket bind mounts. Since the name of
+those ephemeral images is not known upfront, the `imageList` is not sufficient.
+
+To overcome this, starting with Docker Desktop 4.34, the Docker Socket mount permissions
+not only apply to the images listed in the `imageList`; they also apply to any local
+images derived (i.e., built from) an image in the `imageList`.
+
+That is, if a local image called "myLocalImage" is built from "myBaseImage"
+(i.e., has a Dockerfile with a `FROM myBaseImage`), then if "myBaseImage" is in
+the `imageList`, both "myBaseImage" and "myLocalImage" are allowed to mount the
+Docker socket (i.e., ECI won't block the mount).
+
+For example, to enable Paketo buildpacks to work with Docker Desktop and ECI,
+simply add the following image to the `imageList`:
+
+```json
+"imageList": {
+  "images": [
+    "paketobuildpacks/builder:base",
+  ],
+  "allowDerivedImages": true
+}
+```
+
+When the buildpack runs, it will create an ephemeral image derived from
+`paketobuildpacks/builder:base` and mount the Docker socket to it. ECI will
+allow this because it will notice that the ephemeral image is derived from an
+allowed image.
+
+The behavior described above is available since Docker Destkop 4.34 and enabled
+by default. It can be disabled by setting `allowDerivedImages=false` in the
+`admin-settings.json` file. In general we don't recommend disabling this
+setting unless you know it won't be required.
+
+A couple of caveats:
+
+* The `allowDerivedImages` setting only applies to local-only images built from
+  an allowed image. That is, the derived image must not be present in a remote
+  repository (because if it were, you would just list it's name in the `imageList`).
+
+* For derived image checking to work, the parent image (i.e., the image in the
+  `imageList`) must be present locally (i.e., must have been explicitly pulled
+  from a repository). This is usually not a problem as the tools that need this
+  feature (e.g., Paketo buildpacks) will do the pre-pull of the parent image.
+
+* The `allowDerivedImages` setting applies to all images in the `imageList`
+  specified with an explicit tag (e.g., `<name>:<tag>`). It does not apply to
+  images specified using the tag wildcard (e.g., `<name>:*`) described in the
+  prior section, because Docker Desktop needs to know the tag in order to
+  perform ancestor-descendant image checks. Therefore, if you want Docker socket
+  mounts to be allowed for images derived from a parent image in the
+  `imageList`, make sure the parent image is listed with name and tag.
+
 ### Command list
 
-The `commandList` restricts the Docker commands that a container can issue via a
-bind-mounted Docker socket when ECI is enabled. It acts as a complementary
-security mechanism to the `imageList` (i.e., like a second line of defense).
+In addition to the `imageList` described in the prior sections, ECI can further
+restrict the commands that a container can issue via a bind mounted Docker
+socket. This is done via the Docker socket mount permission `commandList`, and
+acts as a complementary security mechanism to the `imageList` (i.e., like a
+second line of defense).
 
-For example, say the `imageList` is configured to allow
-image `docker:cli` to mount the Docker socket, and a container is started with
-it:
+For example, say the `imageList` is configured to allow image `docker:cli` to
+mount the Docker socket, and a container is started with it:
 
 ```console
 $ docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock sh
@@ -149,7 +218,7 @@ $ docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock sh
 ```
 
 By default, this allows the container to issue any command via that Docker
-socket (e.g., build and push images to the organisation's repositories), which
+socket (e.g., build and push images to the organization's repositories), which
 is generally not desirable.
 
 To improve security, the `commandList` can be configured to restrict the
