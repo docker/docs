@@ -31,10 +31,10 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 - [Host networking](/engine/network/drivers/host.md#docker-desktop) support on Docker Desktop is now generally available.
 - If you authenticate via the CLI without Docker Desktop installed, you can now authenticate through a browser-based flow, removing the need for manual PAT generation.
-- Windows on Arm now supports the Hyper-V backend.
-- Fresh installations of Docker Desktop now use the containerd image store by default. 
+- Windows now supports automatic reclamation of disk space in Docker Desktop for WSL2.
+- Windows registry key sign in enforcement method in GA.
+- Fresh installations of Docker Desktop now use the containerd image store by default.
 - Improved the output of `docker image list` to show multi-platform-related image information.
-- Improved the output of `docker image inspect` to account for multi-platform images (relevant to the containerd image store).
 
 ### Upgrades
 
