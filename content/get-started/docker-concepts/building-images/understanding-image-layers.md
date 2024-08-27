@@ -7,6 +7,7 @@ summary: |
   understand image layers - the fundamental building blocks of container
   images. You'll gain a comprehensive understanding of how layers are created,
   stacked, and utilized to ensure efficient and optimized containers.
+weight: 1
 aliases: 
  - /guides/docker-concepts/building-images/understanding-image-layers/
 ---
