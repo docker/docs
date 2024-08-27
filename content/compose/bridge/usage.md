@@ -73,13 +73,14 @@ $ compose-bridge convert -f <path-to-file>/compose.yaml
 To see all available flags, run:
 
 ```console
-compose-bridge convert --help
+$ compose-bridge convert --help
 ```
 
 > [!TIP]
 >
-> You can now convert and deploy your Compose project to a Kubernetes cluster from the Compose file viewer. 
-> Make sure you are signed in to you Docker account, navigate to your container in the **Containers** view, and in the top-right corner select **View configurations** and then **Convert and Deploy to Kubernetes**. 
+> You can now convert and deploy your Compose project to a Kubernetes cluster from the Compose file viewer.
+> 
+> Make sure you are signed in to your Docker account, navigate to your container in the **Containers** view, and in the top-right corner select **View configurations** and then **Convert and Deploy to Kubernetes**. 
 
 ## What's next?
 
