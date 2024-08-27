@@ -7,6 +7,7 @@ summary: |
   containerization workflow. In this guide, you’ll learn how to create Docker
   images, how to tag those images with a unique identifier, and how to publish
   your image to a public registry.
+weight: 3
 aliases: 
  - /guides/docker-concepts/building-images/build-tag-and-publish-an-image/
 ---
