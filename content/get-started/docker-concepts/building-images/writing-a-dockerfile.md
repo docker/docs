@@ -8,6 +8,7 @@ summary: |
   CI/CD methodologies. In this guide, you’ll learn how to write a Dockerfile,
   how to define a base image and setup instructions, including software
   installation and copying necessary files.
+weight: 2
 aliases: 
  - /guides/docker-concepts/building-images/writing-a-dockerfile/
 ---

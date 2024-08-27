@@ -8,6 +8,7 @@ summary: |
   you'll unlock the power of multi-stage builds to create lean and efficient
   Docker images, essential for minimizing overhead and enhancing deployment in
   production environments.
+weight: 5
 aliases: 
  - /guides/docker-concepts/building-images/multi-stage-builds/
 ---

@@ -9,6 +9,7 @@ summary: |
   rebuilds, it's crucial to understand how cache invalidation works. In this
   guide, you’ll learn how to use the Docker build cache efficiently for
   streamlined Docker image development and continuous integration workflows.
+weight: 4
 aliases: 
  - /guides/docker-concepts/building-images/using-the-build-cache/
 ---
