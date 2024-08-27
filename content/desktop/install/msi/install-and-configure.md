@@ -95,7 +95,7 @@ msiexec /i "DockerDesktop.msi" /L*V ".\msi.log" /quiet /norestart
 #### Installing non-interactively with admin settings
 
 ```powershell
-msiexec /i "DockerDesktop.msi" /L*V ".\msi.log" /quiet /norestart ADMINSETTINGS="{"configurationFileVersion":2,"enhancedContainerIsolation":{"value":true,"locked":false}}" ALLOWEDORG="docker.com"
+msiexec /i "DockerDesktop.msi" /L*V ".\msi.log" /quiet /norestart ADMINSETTINGS="{"configurationFileVersion":2,"enhancedContainerIsolation":{"value":true,"locked":false}}" ALLOWEDORG="docker"
 ```
 
 #### Installing with the passive display option
