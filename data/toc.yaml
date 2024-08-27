@@ -2140,7 +2140,7 @@ Manuals:
     title: Migrate to Compose V2
   - path: /compose/faq/
     title: FAQs
-  - sectiontitle: Compose Bridge {{< badge color=violet text="Early Access" >}}
+  - sectiontitle: Compose Bridge
     section:
     - path: /compose/bridge/
       title: Overview

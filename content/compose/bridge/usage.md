@@ -4,7 +4,7 @@ description: Learn about and use the Compose Bridge default transformation
 keywords: compose, bridge, kubernetes
 ---
 
-{{< include "compose-bridge-early-access.md" >}}
+{{< include "compose-bridge-experimental.md" >}}
 
 Compose Bridge supplies an out-of-the box transformation for your Compose configuration file. Based on an arbitrary `compose.yaml` file, Compose Bridge produces:
 
@@ -70,9 +70,16 @@ If you want to convert a `compose.yaml` file that is located in another director
 $ compose-bridge convert -f <path-to-file>/compose.yaml 
 ```
 
+To see all available flags, run:
+
+```console
+compose-bridge convert --help
+```
+
 > [!TIP]
 >
-> Run `compose-bridge convert --help` to see all available flags. 
+> You can now convert and deploy your Compose project to a Kubernetes cluster from the Compose file viewer. 
+> Make sure you are signed in to you Docker account, navigate to your container in the **Containers** view, and in the top-right corner select **View configurations** and then **Convert and Deploy to Kubernetes**. 
 
 ## What's next?
 
