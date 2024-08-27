@@ -77,7 +77,7 @@ This Docker Compose demo shows how to orchestrate a multi-container application
 environment, streamlining development and deployment processes.
 
 - Compare Docker Compose to the `docker run` command
-- Configure a multi-container web app using a compose.yml file
+- Configure a multi-container web app using a Compose file
 - Run a multi-container web app using one command
 
 **Duration**: 2.5 minutes
@@ -94,7 +94,7 @@ environment, streamlining development and deployment processes.
 
 You don't necessarily need to maintain entirely separate Compose files for your
 development, testing, and staging environments. You can define all your
-services in a single Compose file (`compose.yml`). You can use profiles to
+services in a single Compose file (`compose.yaml`). You can use profiles to
 group service configurations specific to each environment (`dev`, `test`,
 `staging`).
 
@@ -136,7 +136,7 @@ tool for defining and running multi-container applications. Even if your
 application isn't a multi-container application, Docker Compose can make it
 easier to run by defining all the `docker run` options in a file.
 
-To use Compose, you need a `compose.yml` file. In this file, you can specify
+To use Compose, you need a `compose.yaml` file. In this file, you can specify
 the build context and Dockerfile for each service. When you run the command
 `docker compose up --build`, Docker Compose will build the images for each
 service and then start the containers.
