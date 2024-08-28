@@ -204,7 +204,6 @@ Related information:
 
  - [Dockerfile reference](/reference/dockerfile/)
  - [docker CLI reference](/reference/cli/docker/)
- - [Build with Docker guide](/build/guide/_index.md)
 
 ## Next steps
 

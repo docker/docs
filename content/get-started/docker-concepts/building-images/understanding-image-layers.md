@@ -203,8 +203,7 @@ Now that you have a base image, you can extend that image to build additional im
 
 If you’d like to dive deeper into the things you learned, check out the following resources:
 
-* [docker image history CLI reference](/reference/cli/docker/image/history/)
-* [docker image layers](/build/guide/layers/)
+* [`docker image history`](/reference/cli/docker/image/history/)
 * [`docker container commit`](/reference/cli/docker/container/commit/)
 
 

@@ -417,7 +417,6 @@ In this section, you took a look at setting up your Compose file to add a local
 database and persist data. You also learned how to use Compose Watch to automatically sync your application when you update your code. And finally, you learned how to create a development container that contains the dependencies needed for development.
 
 Related information:
- - [Build with Docker guide](../../build/guide/index.md)
  - [Compose file reference](/reference/compose-file/)
  - [Compose file watch](../../compose/file-watch.md)
  - [Dockerfile reference](../../reference/dockerfile.md)
