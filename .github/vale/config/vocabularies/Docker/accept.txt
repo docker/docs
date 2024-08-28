@@ -35,7 +35,6 @@ Ddosify
 Debootstrap
 Dev Environments?
 Django
-Docker
 Docker Build Cloud
 Docker Business
 Docker Dasboard
