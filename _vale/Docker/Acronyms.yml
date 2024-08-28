@@ -4,7 +4,7 @@ link: https://docs.docker.com/contribute/style/grammar/#acronyms-and-initialisms
 level: warning
 ignorecase: false
 # Ensures that the existence of 'first' implies the existence of 'second'.
-first: '\b([A-Z]{3,5})\b'
+first: '\b[^!]([A-Z]{3,5})\b'
 second: '(?:\b[A-Za-z]+(?: |\n))+\(([A-Z]{3,5})\)'
 # ... with the exception of these:
 exceptions:
