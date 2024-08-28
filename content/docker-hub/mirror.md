@@ -115,7 +115,7 @@ and add the `registry-mirrors` key and value, to make the change persistent.
 
 ```json
 {
-  "registry-mirrors": ["https://<my-docker-mirror-host>"]
+  "registry-mirrors": ["https://<my-docker-mirror-host-and-port>"]
 }
 ```
 
