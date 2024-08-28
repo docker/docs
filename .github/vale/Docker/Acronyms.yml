@@ -67,6 +67,7 @@ exceptions:
   - TBD
   - TCP
   - TODO
+  - TTY
   - URI
   - URL
   - USB
