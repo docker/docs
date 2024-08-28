@@ -19,14 +19,18 @@ exceptions:
   - CSS
   - CSV
   - CVE
+  - DCT
   - DEBUG
   - DOM
   - DPI
+  - DSOS
+  - DVP
   - ELK
   - FAQ
   - GCC
   - GDB
   - GET
+  - GHSA
   - GPU
   - GTK
   - GUI
@@ -63,6 +67,7 @@ exceptions:
   - TBD
   - TCP
   - TODO
+  - TTY
   - URI
   - URL
   - USB

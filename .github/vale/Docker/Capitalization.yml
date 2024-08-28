@@ -1,0 +1,10 @@
+extends: existence
+message: "Please capitalize Docker."
+level: error
+ignorecase: false
+action:
+  name: replace
+  params:
+    - Docker
+tokens:
+  - 'docker(?!/[a-z-]+)'
