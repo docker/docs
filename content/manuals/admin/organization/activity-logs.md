@@ -66,6 +66,9 @@ Refer to the following section for a list of events and their descriptions:
 | Single Sign-On domain added | Details of the single sign-on domain added to your organization |
 | Single Sign-On domain removed | Details of the single sign-on domain removed from your organization |
 | Single Sign-On domain verified | Details of the single sign-on domain verified for your organization |
+| Access token created | Access token created in organization |
+| Access token updated | Access token updated in organization |
+| Access token deleted | Access token deleted in organization |
 
 ### Repository events
 
