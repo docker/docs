@@ -27,6 +27,7 @@ exceptions:
   - GCC
   - GDB
   - GET
+  - GHSA
   - GPU
   - GTK
   - GUI
