@@ -139,7 +139,7 @@ ones in the repository.
 
 > [!NOTE]
 >
-> * This feature is available with Docker Desktop version 4.34 and later.
+> This feature is available with Docker Desktop version 4.34 and later.
 
 As described in the prior section, admins can configure the list of container
 images that are allowed to mount the Docker socket via the `imageList`.
