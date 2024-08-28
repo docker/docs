@@ -49,12 +49,33 @@ Here's how to get started with the Docker Extension for GitHub Copilot.
 Before you start, ensure that:
 
 - You have been granted access to GitHub's [limited public beta program](https://github.blog/changelog/2024-05-21-copilot-extensions-now-in-limited-public-beta/).
-- The [Docker for GitHub Copilot](https://github.com/marketplace/docker-for-github-copilot)
-  app is installed in your GitHub organization.
+- You're signed in to your GitHub account on GitHub.com.
 
-### Setup
+### Install the extension for your organization
 
-Select where you want to use the Docker Extension for GitHub Copilot:
+1. Go to the [Docker for GitHub Copilot](https://github.com/marketplace/docker-for-github-copilot)
+   app in the GitHub Marketplace.
+
+2. Select the **Add** button at the top of the page.
+
+3. Under **Pricing and setup**, select the organization that you want to
+   install the extension for and select **Install it for free**.
+
+4. Select the **Complete order and begin installation** button.
+
+5. Select the repositories where you want to use the Docker Extension for
+   GitHub Copilot and finish with **Install**.
+
+> [!NOTE]
+> Before you can use Copilot Extensions in your organization, you need to
+> enable the Copilot Extensions policy. For more information, see
+> [Setting a policy for GitHub Copilot Extensions in your organization](https://docs.github.com/en/copilot/managing-copilot/managing-github-copilot-in-your-organization/setting-policies-for-copilot-in-your-organization/managing-policies-for-copilot-in-your-organization#setting-a-policy-for-github-copilot-extensions-in-your-organization).
+
+### Set up Copilot Chat
+
+Once you've installed the Docker extension and enabled the Copilot Extensions
+policy, you can use the Docker Extension for GitHub Copilot in your editor or
+IDE, or on GitHub.com.
 
 {{< tabs >}}
 {{< tab name="Editor or IDE" >}}
@@ -76,6 +97,12 @@ see [Using the extension](#using-the-extension).
 {{< /tab >}}
 {{< /tabs >}}
 
+You can verify that the extension has been properly installed by typing
+`@docker` in the Copilot Chat window. As you type, you should see the Docker
+agent appear in the chat interface.
+
+![Docker agent in chat](/copilot/docker-agent-copilot.png)
+
 ## Using the Extension
 
 The Docker Extension for GitHub Copilot provides a chat interface that you can
@@ -89,7 +116,7 @@ guidance on Dockerfiles, Docker Compose files, and other Docker assets.
 
 1. Open your project in your editor.
 2. Open the Copilot extension or plugin.
-3. Interact with the Docker agent using the `/docker` slash prompt, followed by your question.
+3. Interact with the Docker agent using the `/docker` or `@docker`, followed by your question.
 
 ### GitHub.com
 
