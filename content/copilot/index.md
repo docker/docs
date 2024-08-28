@@ -6,7 +6,7 @@ keywords: Docker, GitHub Copilot, extension, Visual Studio Code, chat, ai, conta
 
 {{% restricted title="Early access" %}}
 
-The Docker for GitHub Copilot extension is a part of the [Limited Public Beta](https://github.blog/changelog/2024-05-21-copilot-extensions-now-in-limited-public-beta/)
+The Docker Extension for GitHub Copilot is a part of the [Limited Public Beta](https://github.blog/changelog/2024-05-21-copilot-extensions-now-in-limited-public-beta/)
 for GitHub Copilot Extensions.
 
 To get access, [sign up for the Copilot Extensions waitlist](https://github.com/github-copilot/copilot_extensions_waitlist_signup).
@@ -73,9 +73,9 @@ Before you start, ensure that:
 
 ### Set up Copilot Chat
 
-Once you've installed the Docker extension and enabled the Copilot Extensions
-policy, you can use the Docker Extension for GitHub Copilot in your editor or
-IDE, or on GitHub.com.
+Once you've installed the Docker Extension for GitHub Copilot and enabled the
+Copilot Extensions policy, you can use the extension in your editor or IDE, or
+on GitHub.com.
 
 {{< tabs >}}
 {{< tab name="Editor or IDE" >}}
@@ -103,7 +103,7 @@ agent appear in the chat interface.
 
 ![Docker agent in chat](/copilot/docker-agent-copilot.png)
 
-## Using the Extension
+## Using the extension
 
 The Docker Extension for GitHub Copilot provides a chat interface that you can
 use to interact with the Docker agent. You can ask questions and get help
@@ -114,13 +114,15 @@ guidance on Dockerfiles, Docker Compose files, and other Docker assets.
 
 ### Editor
 
+To use the extension in your editor or IDE:
+
 1. Open your project in your editor.
-2. Open the Copilot extension or plugin.
+2. Open the Copilot chat interface.
 3. Interact with the Docker agent using the `/docker` or `@docker`, followed by your question.
 
 ### GitHub.com
 
-To use the Docker Extension in the GitHub web interface:
+To use the extension in the GitHub web interface:
 
 1. Go to [github.com](https://github.com/) and sign in to your account.
 2. Go to any repository.
