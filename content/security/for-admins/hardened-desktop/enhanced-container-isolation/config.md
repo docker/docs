@@ -279,10 +279,11 @@ Whether to configure the list as an allow or deny list depends on the use case.
   `admin-settings.json` file due to image tag changes.
 
 * In the `commandList`, block commands that you don't expect the container to
-  execute. For example, for local testing (e.g., Testcontainers), containers that bind-mount the Docker
-  socket typically create / run / remove containers, volumes, and networks, but
-  don't typically build images or push them into repositories (though some may
-  legitimately do this). What commands to allow or block depends on the use case.
+  execute. For example, for local testing (e.g., Testcontainers), containers
+  that bind-mount the Docker socket typically create / run / remove containers,
+  volumes, and networks, but don't typically build images or push them into
+  repositories (though some may legitimately do this). What commands to allow or
+  block depends on the use case.
 
   - Note that all "docker" commands issued by the container via the bind-mounted
     Docker socket will also execute under enhanced container isolation (i.e.,
@@ -299,11 +300,10 @@ Whether to configure the list as an allow or deny list depends on the use case.
   this case, remove the local image and pull it again (e.g., `docker rm <image>`
   and `docker pull <image>`).
 
-* It's not possible to allow Docker socket bind-mounts on images that are not on
-  a registry (e.g., images built locally and not yet pushed to a
-  registry). That's because Docker Desktop pulls the digests for the allowed
-  images from the registry, and then uses that to compare against the local copy
-  of the image.
+* It's not possible to allow Docker socket bind-mounts on local images (i.e., images that are not on
+  a registry) unless they are [derived from an allowed image](#docker-socket-Mount-permissions-for-derived-images).
+  That's because Docker Desktop pulls the digests for the allowed images from the
+  registry, and then uses that to compare against the local copy of the image.
 
 * The `commandList` configuration applies to all containers that are allowed to
   bind-mount the Docker socket. Therefore it can't be configured differently per
