@@ -19,9 +19,12 @@ exceptions:
   - CSS
   - CSV
   - CVE
+  - DCT
   - DEBUG
   - DOM
   - DPI
+  - DSOS
+  - DVP
   - ELK
   - FAQ
   - GCC
