@@ -29,16 +29,15 @@ push malicious images into the organization's repositories) or similar.
 However, some legitimate use cases require containers to have access to the
 Docker Engine socket. For example, the popular [Testcontainers](https://testcontainers.com/)
 framework sometimes bind-mounts the Docker Engine socket into containers to
-manage them or perform post-test cleanup. Similarly, some Buildpack frameworks
-(e.g., [Paketo](https://paketo.io/)) require Docker socket bind-mounts into
+manage them or perform post-test cleanup. Similarly, some Buildpack frameworks,
+for example [Paketo](https://paketo.io/), require Docker socket bind-mounts into
 containers.
 
 Starting with Docker Desktop 4.27, admins can optionally configure ECI to allow
 bind mounting the Docker Engine socket into containers, but in a controlled way.
 
 This can be done via the Docker Socket mount permissions section in the
-`admin-settings.json` file (see [Settings Management](../settings-management/configure.md)
-for more info on this file). For example:
+[admin-settings.json](../settings-management/configure.md) file. For example:
 
 ```json
 {
@@ -136,11 +135,11 @@ then the tag operation succeeds, but the `docker run` command fails
 because the image digest of the disallowed image won't match that of the allowed
 ones in the repository.
 
-### Docker Socket Mount Permissions for Derived Images
+### Docker Socket Mount Permissions for derived images
 
 > [!NOTE]
 >
-> * This feature is available with Docker Desktop version 4.34 (and later).
+> * This feature is available with Docker Desktop version 4.34 and later.
 
 As described in the prior section, admins can configure the list of container
 images that are allowed to mount the Docker socket via the `imageList`.
@@ -151,9 +150,10 @@ Some container tools such as [Paketo](https://paketo.io/) buildpacks,
 build ephemeral local images that require Docker socket bind mounts. Since the name of
 those ephemeral images is not known upfront, the `imageList` is not sufficient.
 
-To overcome this, starting with Docker Desktop 4.34, the Docker Socket mount permissions
-not only apply to the images listed in the `imageList`; they also apply to any local
-images derived (i.e., built from) an image in the `imageList`.
+To overcome this, starting with Docker Desktop version 4.34, the Docker Socket
+mount permissions not only apply to the images listed in the `imageList`; they
+also apply to any local images derived (i.e., built from) an image in the
+`imageList`.
 
 That is, if a local image called "myLocalImage" is built from "myBaseImage"
 (i.e., has a Dockerfile with a `FROM myBaseImage`), then if "myBaseImage" is in
@@ -177,10 +177,10 @@ When the buildpack runs, it will create an ephemeral image derived from
 allow this because it will notice that the ephemeral image is derived from an
 allowed image.
 
-The behavior described above is available since Docker Destkop 4.34 and enabled
-by default. It can be disabled by setting `allowDerivedImages=false` in the
-`admin-settings.json` file. In general we don't recommend disabling this
-setting unless you know it won't be required.
+The behavior is enabled by default. It can be disabled by setting
+`allowDerivedImages=false` in the `admin-settings.json` file. In general it is
+not recommended that you disable this setting unless you know it won't be
+required.
 
 A couple of caveats:
 
