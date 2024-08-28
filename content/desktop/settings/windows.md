@@ -14,7 +14,7 @@ To navigate to **Settings** either:
 
 You can also locate the `settings.json` file at `C:\Users\[USERNAME]\AppData\Roaming\Docker\settings.json`.
 
-# General
+## General
 
 On the **General** tab, you can configure when to start Docker and specify other settings:
 
@@ -63,7 +63,7 @@ If you choose the integrated terminal, you can run commands in a running contain
 
 - **Enable background SBOM indexing**. When this option is enabled, Docker Scout automatically analyzes images that you build or pull.
 
-# Resources
+## Resources
 
 The **Resources** tab allows you to configure CPU, memory, disk, proxies,
 network, and other resources.
@@ -71,7 +71,7 @@ Different settings are available for configuration depending on whether you are
 using Linux containers in WSL 2 mode, Linux containers in Hyper-V mode, or Windows
 containers.
 
-## Advanced
+### Advanced
 
 > [!NOTE]
 >
@@ -120,20 +120,20 @@ Advanced settings are:
   > Exit from Resource Saver mode occurs automatically when containers run. Exit
   > may take a few seconds (~3 to 10 secs) as Docker Desktop restarts the Linux VM.
 
-## File sharing
+### File sharing
 
 > [!NOTE]
 >
 > The **File sharing** tab is only available in Hyper-V mode because the files
 > are automatically shared in WSL 2 mode and Windows container mode.
 
-### Synchronized file shares 
+#### Synchronized file shares 
 
 Synchronized file shares is an alternative file sharing mechanism that provides fast and flexible host-to-VM file sharing, enhancing bind mount performance through the use of synchronized filesystem caches. Available with Pro, Team, and Business subscriptions.
 
 To learn more, see [Synchronized file share](../synchronized-file-sharing.md).
 
-### Virtual file shares
+#### Virtual file shares
 
 Use File sharing to allow local directories on your machine to be shared with
 Linux containers. This is especially useful for editing source code in an IDE on
@@ -179,7 +179,7 @@ File share settings are:
 >   once a file called `test` is created, attempts to create a second file called
 >   `Test` will fail.
 
-### Shared folders on demand
+#### Shared folders on demand
 
 You can share a folder "on demand" the first time a particular folder is used by a container.
 
@@ -192,7 +192,7 @@ containers. Alternatively, you can opt not to share it by selecting **Cancel**.
 
 ![Shared folder on demand](../images/shared-folder-on-demand.png)
 
-## Proxies
+### Proxies
 
 Docker Desktop on Windows supports the use of HTTP/HTTPS and [SOCKS5 proxies](../networking.md#socks5-proxy-support).
 
@@ -224,17 +224,17 @@ This is useful when a corporate proxy that requires authentication is manually c
 >
 > If you are using a PAC file hosted on a web server, make sure to add the MIME type `application/x-ns-proxy-autoconfig` for the `.pac` file extension on the server or website. Without this configuration, the PAC file may not be parsed correctly.
 
-### Proxy authentication
+#### Proxy authentication
 
 Docker Desktop supports Basic, Kerberos and NTLM proxy authentication methods. 
 
-#### Basic authentication
+##### Basic authentication
 
 If your proxy uses Basic authentication, Docker Desktop prompts developers for a username and password and caches the credentials. All passwords are stored securely in the OS credential store. It will request re-authentication if that cache is removed.
 
 It's recommended that you use an `https://` URL for HTTP/HTTPS proxies to protect passwords during network transit. Docker Desktop also supports TLS 1.3 for communication with proxies.
 
-#### Kerberos and NTLM authentication
+##### Kerberos and NTLM authentication
 
 > [!NOTE]
 >
@@ -244,21 +244,19 @@ Developers are no longer interrupted by prompts for proxy credentials as authent
 
 If your proxy offers multiple authentication schemes in 407 (Proxy Authentication Required) response, Docker Desktop by default selects the Basic authentication scheme.
 
-##### Docker Desktop version 4.30 to 4.31 
+For Docker Desktop version 4.30 to 4.31: 
 
 To enable Kerberos or NTLM proxy authentication, no additional configuration is needed beyond specifying the proxy IP address and port.
 
-##### Docker Desktop version 4.32 and later 
+For Docker Desktop version 4.32 and later: 
 
-To enable Kerberos or NTLM proxy authentication, you can either:
- - Specify the proxy IP address and port
- - Pass the `--proxy-enable-kerberosntlm` installer flag during Docker Desktop installation via the command line, if your proxy server is properly configured for Kerberos or NTLM authentication
+To enable Kerberos or NTLM proxy authentication you must pass the `--proxy-enable-kerberosntlm` installer flag during installation via the command line, and ensure your proxy server is properly configured for Kerberos or NTLM authentication.
 
 > [!TIP]
 >
 > Docker Desktop also supports the use of [SOCKS5 proxies](../networking.md#socks5-proxy-support).
 
-## Network
+### Network
 
 > [!NOTE]
 >
@@ -267,7 +265,7 @@ To enable Kerberos or NTLM proxy authentication, you can either:
 
 {{< include "desktop-network-setting.md" >}}
 
-## WSL Integration
+### WSL Integration
 
 In WSL 2 mode, you can configure which WSL 2 distributions will have the Docker
 WSL integration.
@@ -281,7 +279,7 @@ You can also select any additional distributions you would like to enable the WS
 For more details on configuring Docker Desktop to use WSL 2, see
 [Docker Desktop WSL 2 backend](../wsl/index.md).
 
-# Docker Engine
+## Docker Engine
 
 The **Docker Engine** tab allows you to configure the Docker daemon used to run containers with Docker Desktop.
 
@@ -308,11 +306,11 @@ To see the full list of possible configuration options, see the
 
 Select **Apply & Restart** to save your settings and restart Docker Desktop.
 
-# Builders
+## Builders
 
 {{< include "desktop-builders-setting.md" >}}
 
-# Kubernetes
+## Kubernetes
 
 > [!NOTE]
 >
@@ -331,7 +329,7 @@ Select **Reset Kubernetes cluster** to delete all stacks and Kubernetes resource
 For more information about using the Kubernetes integration with Docker Desktop,
 see [Deploy on Kubernetes](../kubernetes.md).
 
-# Software Updates
+## Software Updates
 
 The **Software Updates** tab notifies you of any updates available to Docker Desktop.
 When there's a new update, you can choose to download the update right away, or
@@ -348,7 +346,7 @@ when an update becomes available. After downloading the update, select
 **Apply and Restart** to install the update. You can do this either through the
 Docker menu or in the **Updates** section in the Docker Dashboard.
 
-# Extensions
+## Extensions
 
 Use the **Extensions** tab to:
 
@@ -358,20 +356,20 @@ Use the **Extensions** tab to:
 
 For more information about Docker extensions, see [Extensions](/extensions/index.md).
 
-# Features in development
+## Features in development
 
 On the **Features in development** tab you can control your settings for **Beta features** and **Experimental features**.
 
 You can also sign up to the [Developer Preview Program](https://www.docker.com/community/get-involved/developer-preview/) from the **Features in development** tab.
 
-## Beta features
+### Beta features
 
 {{< include "beta.md" >}}
 
-## Experimental features
+### Experimental features
 
 {{< include "desktop-experimental.md" >}}
 
-# Notifications
+## Notifications
 
 {{< include "desktop-notifications-settings.md" >}}
