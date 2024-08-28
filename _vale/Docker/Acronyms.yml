@@ -9,11 +9,10 @@ second: '(?:\b[A-Za-z]+(?: |\n))+\(([A-Z]{3,5})\)'
 # ... with the exception of these:
 exceptions:
   - API
-  - BIOS
-  - FUSE
   - ARM
   - ASP
   - AWS
+  - BIOS
   - CLI
   - CPU
   - CSS
@@ -27,6 +26,7 @@ exceptions:
   - DVP
   - ELK
   - FAQ
+  - FUSE
   - GCC
   - GDB
   - GET
