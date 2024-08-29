@@ -44,9 +44,14 @@ given swarm node.
 
 ## Docker Desktop
 
-Host networking is also supported on Docker Desktop version 4.34 and later for Mac,
-Windows, and Linux. To enable this feature, navigate to the **Resources**, **Network** tab
-in **Settings**, and then select **Enable host networking**.
+Host networking is supported on Docker Desktop version 4.34 and later.
+To enable this feature:
+
+1. Sign in to your Docker account in Docker Desktop.
+2. Navigate to **Settings**.
+3. Under the **Resources** tab, select **Network**.
+4. Check the **Enable host networking** option.
+5. Select **Apply and restart**.
 
 This feature works in both directions. This means you can
 access a server that is running in a container from your host and you can access
