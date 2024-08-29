@@ -4,7 +4,7 @@ keywords: compose, orchestration, kubernetes, bridge
 title: Overview of Compose Bridge
 ---
 
-{{< include "compose-bridge-early-access.md" >}}
+{{< include "compose-bridge-experimental.md" >}}
 
 Compose Bridge lets you transform your Compose configuration file into configuration files for different platforms, primarily focusing on Kubernetes. The default transformation generates Kubernetes manifests and a Kustomize overlay which are designed for deployment on Docker Desktop with Kubernetes enabled.  
 
@@ -26,7 +26,7 @@ For more detailed information on how these transformations work and how you can 
 
 To get started with Compose Bridge, you need to:
 
-1. Download and install a version of Docker Desktop that supports Compose Bridge.
+1. Download and install Docker Desktop version 4.33 and later.
 2. Sign in to your Docker account.
 3. Navigate to the **Features in development** tab in **Settings**. 
 4. From the **Experimental features** tab, select **Enable Compose Bridge**.
