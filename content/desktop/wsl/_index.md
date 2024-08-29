@@ -92,7 +92,12 @@ Docker Desktop does not require any particular Linux distros to be installed. Th
 
 > [!NOTE]
 >
-> Docker Desktop installs two special-purpose internal Linux distros `docker-desktop` and `docker-desktop-data`. The first (`docker-desktop`) is used to run the Docker engine (`dockerd`) while the second (`docker-desktop-data`) stores containers and images. Neither can be used for general development.
+> With Docker Desktop version 4.30 and earlier, Docker Desktop installed two special-purpose internal Linux distros `docker-desktop` and `docker-desktop-data`. `docker-desktop` is used to run the Docker engine `dockerd`, while `docker-desktop-data` stores containers and images. Neither can be used for general development.
+>
+> With fresh installations of Docker Desktop 4.30 and later, `docker-desktop-data` is no longer created. Instead, Docker Desktop creates and 
+> manages its own virtual hard disk for storage. The `docker-desktop` distro is still created and used to run the Docker engine.
+>
+> Note that Docker Desktop version 4.30 and later keeps using the `docker-desktop-data` distribution if it was already created by an earlier version of Docker Desktop and has not been freshly installed or factory reset.
 
 
 ## Additional resources
