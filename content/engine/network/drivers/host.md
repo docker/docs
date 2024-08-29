@@ -32,7 +32,7 @@ Host mode networking can be useful for the following use cases:
 
 This is because it doesn't require network address translation (NAT), and no "userland-proxy" is created for each port.
 
-The host networking driver works on Linux hosts, and is available with Docker Desktop version 4.34 and later.
+The host networking driver is supported on Docker Engine (Linux only) and Docker Desktop version 4.34 and later.
 
 You can also use a `host` network for a swarm service, by passing `--network host`
 to the `docker service create` command. In this case, control traffic (traffic
