@@ -85,10 +85,12 @@ MySQL
 NAT
 Nginx
 Nuxeo
+OAT
 OAuth
 OCI
 OTel
 Okta
+PAT
 Postgres
 PowerShell
 Python
