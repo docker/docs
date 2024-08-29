@@ -99,7 +99,7 @@ params:
 
   latest_engine_api_version: "1.46"
   docker_ce_version: "27.1.2"
-  compose_version: "v2.29.1"
+  compose_version: "v2.29.2"
   compose_file_v3: "3.8"
   compose_file_v2: "2.4"
   buildkit_version: "0.15.1"
