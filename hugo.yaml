@@ -105,7 +105,6 @@ params:
   buildkit_version: "0.15.1"
 
   example_go_version: "1.23"
-  example_golangci_lint_version: "v1.59"
   example_alpine_version: "3.20"
   example_node_version: "20"
 
