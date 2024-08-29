@@ -301,7 +301,7 @@ Whether to configure the list as an allow or deny list depends on the use case.
   and `docker pull <image>`).
 
 * It's not possible to allow Docker socket bind-mounts on local images (i.e., images that are not on
-  a registry) unless they are [derived from an allowed image](#docker-socket-Mount-permissions-for-derived-images).
+  a registry) unless they are [derived from an allowed image](#docker-socket-mount-permissions-for-derived-images).
   That's because Docker Desktop pulls the digests for the allowed images from the
   registry, and then uses that to compare against the local copy of the image.
 
