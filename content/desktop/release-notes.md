@@ -21,6 +21,55 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1) to see what's coming next.
 
+## 4.34.0
+
+{{< release-date date="2024-08-29" >}}
+
+{{< desktop-install-v2 all=true beta_win_arm=true version="4.34.0" build_path="/165256/" >}}
+
+### New
+
+- [Host networking](/engine/network/drivers/host.md#docker-desktop) support on Docker Desktop is now generally available.
+- If you authenticate via the CLI without Docker Desktop installed, you can now authenticate through a browser-based flow, removing the need for manual PAT generation.
+- Windows now supports automatic reclamation of disk space in Docker Desktop for WSL2 installations [using a managed virtual hard disk](/desktop/wsl/best-practices.md).
+- Deploying Docker Desktop via the [MSI installer](/desktop/install/msi/_index.md) is now generally available.
+- Two new methods to [enforce sign-in](/security/for-admins/enforce-sign-in/_index.md) (windows registry key and `.plist` file) are now generally available.- Fresh installations of Docker Desktop now use the containerd image store by default.
+- [Compose Bridge](/compose/bridge/_index.md) (Experimental) is now available from the Compose file viewer. Easily convert and deploy your Compose project to a Kubernetes cluster.
+
+### Upgrades
+
+- [Docker Engine v27.2.0](https://docs.docker.com/engine/release-notes/27.2/#2720)
+- [Docker Compose v2.29.2](https://github.com/docker/compose/releases/tag/v2.29.2)
+- [containerd v1.7.20](https://github.com/containerd/containerd/releases/tag/v1.7.20)
+- [Docker Scout CLI v1.13.0](https://github.com/docker/scout-cli/releases/tag/v1.13.0)
+- [Docker Buildx v0.16.2](https://github.com/docker/buildx/releases/tag/v0.16.2)
+- Linux kernel `v6.10.1`
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed a bug that caused the CLI to become idle when a container was started with AutoRemove (`--rm`) but whose port bindings would be rejected by Docker Dekstop at start-up.
+- Fixed a bug where diagnostics collection would fail sporadically on the **Support** screen.
+- Fixed a bug where folders wouldn't expand in a container's **File** tab. Fixes [docker/for-win#14204](https://github.com/docker/for-win/issues/14204).
+- In-app updates now respect the proxy settings.
+- Extended the ECI Docker socket mount permissions feature to optionally child images derived from allowed images. This allows ECI to work with buildpacks (e.g., Paketo) that create ephemeral local images that use Docker socket mounts.
+- Fixed a bug that caused the **Containers** view to flash when using certain proxy settings. Fixes [docker/for-win#13972](https://github.com/docker/for-win/issues/13972).
+- Improved the output of `docker image list` to show multi-platform-related image information.
+
+#### For Mac
+
+- Fixed a bug where a `Partial repair error` would occasionally appear when triggering the Configuration integrity check feature.
+- Configuration integrity check feature now shows information on why the Docker socket is mis-configured.
+- Fixed an issue where the Configuration integrity check feature would report the system path instead of the user path if Docker Desktop is installed as `User`.
+
+#### For Windows
+
+- Fixed a bug where Docker Desktop would reset docker's `credsStore` to `desktop` when the user's intention is to keep it empty. Fixes [docker/for-win#9843](https://github.com/docker/for-win/issues/9843).
+- Fixed a bug that would cause Docker Desktop to not start in the WSL2 engine  [docker/for-win#14034](https://github.com/docker/for-win/issues/14034).
+- Fixed a bug that caused WSL distro to terminate abruptly. Fixes [for-win/14230](https://github.com/docker/for-win/issues/14230).
+- Fixed an issue that caused WSL to update in each startup. Fixes [for-win/13868](https://github.com/docker/for-win/issues/13868), [for-win/13806](https://github.com/docker/for-win/issues/13806).
+
 ## 4.33.1
 
 {{< release-date date="2024-07-31" >}}
