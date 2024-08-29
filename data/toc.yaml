@@ -257,6 +257,8 @@ Guides:
       title: Suppress CVEs with VEX
     - path: /guides/use-case/databases/
       title: Use containerized databases
+    - path: /guides/use-case/debug/
+      title: Debug containers
 
 - sectiontitle: Deployment and orchestration
   section:
