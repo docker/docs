@@ -86,8 +86,6 @@ You should see output containing the following.
 #13 4.915 PASS
 ```
 
-To learn more about building and running tests, see the [Build with Docker guide](../../build/guide/_index.md).
-
 ## Next steps
 
 In this section, you learned how to run tests when building your image. Next,

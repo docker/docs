@@ -1,37 +1,126 @@
 ---
-title: Multi-platform images
-description: Introduction to multi-platform images and how to build them
-keywords: build, buildx, buildkit, multi-platform images
+title: Multi-platform builds
+description: Introduction to what multi-platform builds are and how to execute them using Docker Buildx.
+keywords: build, buildx, buildkit, multi-platform, cross-platform, cross-compilation, emulation, QEMU, ARM, x86, Windows, Linux, macOS
 aliases:
 - /build/buildx/multiplatform-images/
 - /desktop/multi-arch/
 - /docker-for-mac/multi-arch/
 - /mackit/multi-arch/
+- /build/guide/multi-platform/
 ---
 
-A multi-platform image refers to a single image that includes variants for
-multiple different architectures and, in some cases, different operating
-systems, like Windows. This means that whether you are using an ARM-based
-system or an x86 machine, Docker automatically detects and selects the
-appropriate variant for your hosts's operating system and architecture.
+A multi-platform build refers to a single build invocation that targets
+multiple different operating system or CPU architecture combinations. When
+building images, this lets you create a single image that can run on multiple
+platforms, such as `linux/amd64`, `linux/arm64`, and `windows/amd64`.
 
-Many of the Docker Official Images available on Docker Hub support various
-architectures. For instance, the `busybox` image includes support for these
-platforms:
+## Why multi-platform builds?
 
-- x86-64 (`linux/amd64`, `linux/i386`)
-- ARM architectures (`linux/arm/v5`, `linux/arm/v6`, `linux/arm/v7`, `linux/arm64`)
-- PowerPC and IBM Z (`linux/ppc64le`, `linux/s390x`)
+Docker solves the "it works on my machine" problem by packaging applications
+and their dependencies into containers. This makes it easy to run the same
+application on different environments, such as development, testing, and
+production.
 
-On an x86 machine, Docker will automatically use the `linux/amd64` variant
-when you run a container or invoke a build.
+But containerization by itself only solves part of the problem. Containers
+share the host kernel, which means that the code that's running inside the
+container must be compatible with the host's architecture. This is why you
+can't run a `linux/amd64` container on a `linux/arm64` host, or a Windows
+container on a Linux host.
 
-Most Docker images use the `linux/` OS prefix to indicate they are Linux-based.
-While Docker Desktop on macOS or Windows typically runs Linux containers using
-a Linux VM, Docker also supports Windows containers if you're operating in
-Windows container mode.
+Multi-platform builds solve this problem by packaging multiple variants of the
+same application into a single image. This enables you to run the same image on
+different types of hardware, such as development machines running x86-64 or
+ARM-based Amazon EC2 instances in the cloud, without the need for emulation.
 
-## Building multi-platform images
+{{< accordion title="How it works" >}}
+
+Multi-platform images have a different structure than single-platform images.
+Single-platform images contain a single manifest that points to a single
+configuration and a single set of layers. Multi-platform images contain a
+manifest list, pointing to multiple manifests, each of which points to a
+different configuration and set of layers.
+
+![Multi-platform image structure](/build/images/single-vs-multiplatform-image.svg)
+
+When you push a multi-platform image to a registry, the registry stores the
+manifest list and all the individual manifests. When you pull the image, the
+registry returns the manifest list, and Docker automatically selects the
+correct variant based on the host's architecture. For example, if you run a
+multi-platform image on an ARM-based Raspberry Pi, Docker selects the
+`linux/arm64` variant. If you run the same image on an x86-64 laptop, Docker
+selects the `linux/amd64` variant (if you're using Linux containers).
+
+{{< /accordion >}}
+
+## Prerequisites
+
+To build multi-platform images, you first need to make sure that your builder
+and Docker Engine support multi-platform builds. The easiest way to do this is
+to [enable the containerd image store](#enable-the-containerd-image-store).
+
+Alternatively, you can [create a custom builder](#create-a-custom-builder) that
+uses the `docker-container` driver, which supports multi-platform builds.
+
+### Enable the containerd image store
+
+{{< tabs >}}
+{{< tab name="Docker Desktop" >}}
+
+To enable the containerd image store in Docker Desktop,
+go to **Settings** and select **Use containerd for pulling and storing images**
+in the **General** tab.
+
+Note that changing the image store means you'll temporarily lose access to
+images and containers in the classic image store.
+Those resources still exist, but to view them, you'll need to
+disable the containerd image store.
+
+{{< /tab >}}
+{{< tab name="Docker Engine" >}}
+
+If you're not using Docker Desktop,
+enable the containerd image store by adding the following feature configuration
+to your `/etc/docker/daemon.json` configuration file.
+
+```json {hl_lines=3}
+{
+  "features": {
+    "containerd-snapshotter": true
+  }
+}
+```
+
+Restart the daemon after updating the configuration file.
+
+```console
+$ systemctl restart docker
+```
+
+{{< /tab >}}
+{{< /tabs >}}
+
+### Create a custom builder
+
+To create a custom builder, use the `docker buildx create` command to create a
+builder that uses the `docker-container` driver. This driver runs the BuildKit
+daemon in a container, as opposed to the default `docker` driver, which uses
+the BuildKit library bundled with the Docker daemon. There isn't much
+difference between the two drivers, but the `docker-container` driver provides
+more flexibility and advanced features, including multi-platform support.
+
+```console
+$ docker buildx create \
+  --name container-builder \
+  --driver docker-container \
+  --use --bootstrap
+```
+
+This command creates a new builder named `container-builder` that uses the
+`docker-container` driver (default) and sets it as the active builder. The
+`--bootstrap` flag pulls the BuildKit image and starts the build container.
+
+## Build multi-platform images
 
 When triggering a build, use the `--platform` flag to define the target
 platforms for the build output, such as `linux/amd64` and `linux/arm64`:
@@ -40,37 +129,27 @@ platforms for the build output, such as `linux/amd64` and `linux/arm64`:
 $ docker build --platform linux/amd64,linux/arm64 .
 ```
 
-By default, Docker can build for only one platform at a time.
-To build for multiple platforms concurrently, you can:
-
-- **Enable the containerd image store**:
-  The default image store in Docker Engine doesn't support multi-platform images.
-  The containerd image store does, and lets you create multi-platform images using the default builder.
-  Refer to the [containerd in Docker Desktop documentation](../../desktop/containerd.md).
-
-- **Create a custom builder**:
-  Initialize a [builder](../builders/_index.md) that uses the `docker-container` driver, which supports multi-platform builds.
-  For more details, see the [`docker-container` driver documentation](/build/builders/drivers/docker-container.md).
+> [!NOTE]
+> If you're using the `docker-container` driver, you need to specify the
+> `--load` flag to load the image into the local image store after the build
+> finishes. This is because images built using the `docker-container` driver
+> aren't automatically loaded into the local image store.
 
 ## Strategies
 
 You can build multi-platform images using three different strategies,
 depending on your use case:
 
-1. Using emulation, via [QEMU](#qemu) support in the Linux kernel
-2. Building on a single builder backed by
-   [multiple nodes of different architectures](#multiple-native-nodes).
-3. Using a stage in your Dockerfile to [cross-compile](#cross-compilation) to
-   different architectures
+1. Using emulation, via [QEMU](#qemu)
+2. Use a builder with [multiple native nodes](#multiple-native-nodes)
+3. Use [cross-compilation](#cross-compilation) with multi-stage builds
 
 ### QEMU
 
 Building multi-platform images under emulation with QEMU is the easiest way to
-get started if your builder already supports it. Docker Desktop supports it out
-of the box. It requires no changes to your Dockerfile, and BuildKit
-automatically detects the secondary architectures that are available. When
-BuildKit needs to run a binary for a different architecture, it automatically
-loads it through a binary registered in the `binfmt_misc` handler.
+get started if your builder already supports it. Using emulation requires no
+changes to your Dockerfile, and BuildKit automatically detects the
+architectures that are available for emulation.
 
 > [!NOTE]
 >
@@ -80,37 +159,37 @@ loads it through a binary registered in the `binfmt_misc` handler.
 > Use [multiple native nodes](#multiple-native-nodes) or
 > [cross-compilation](#cross-compilation) instead, if possible.
 
-#### Support on Docker Desktop
+Docker Desktop supports running and building multi-platform images under
+emulation by default. No configuration is necessary as the builder uses the
+QEMU that's bundled within the Docker Desktop VM.
 
-[Docker Desktop](../../desktop/_index.md) provides support for running and
-building multi-platform images under emulation by default, which means you can
-run containers for different Linux architectures such as `arm`, `mips`,
-`ppc64le`, and even `s390x`.
+#### Install QEMU manually
 
-This doesn't require any special configuration in the container itself as it
-uses QEMU bundled within the Docker Desktop VM. Because of this, you can run
-containers of non-native architectures like the `arm32v7` or `ppc64le`
-automatically.
+If you're using a builder outside of Docker Desktop, such as if you're using
+Docker Engine on Linux, or a custom remote builder, you need to install QEMU
+and register the executable types on the host OS. The prerequisites for
+installing QEMU are:
 
-#### QEMU without Docker Desktop
+- Linux kernel version 4.8 or later
+- `binfmt-support` version 2.1.7 or later
+- The QEMU binaries must be statically compiled and registered with the
+  `fix_binary` flag
 
-If you're running Docker Engine on Linux, without Docker Desktop, you must
-install statically compiled QEMU binaries and register them with
-[`binfmt_misc`](https://en.wikipedia.org/wiki/Binfmt_misc). This enables QEMU
-to execute non-native file formats for emulation. The QEMU binaries must be
-statically compiled and registered with the `fix_binary` flag. This requires a
-kernel version 4.8 or later, and `binfmt-support` version 2.1.7 or later.
-
-Once QEMU is installed and the executable types are registered on the host OS,
-they work transparently inside containers. You can verify your registration by
-checking if `F` is among the flags in `/proc/sys/fs/binfmt_misc/qemu-*`. While
-Docker Desktop comes preconfigured with `binfmt_misc` support for additional
-platforms, for other installations it likely needs to be installed using
-[`tonistiigi/binfmt`](https://github.com/tonistiigi/binfmt) image:
+Use the [`tonistiigi/binfmt`](https://github.com/tonistiigi/binfmt) image to
+install QEMU and register the executable types on the host with a single
+command:
 
 ```console
 $ docker run --privileged --rm tonistiigi/binfmt --install all
 ```
+
+This installs the QEMU binaries and registers them with
+[`binfmt_misc`](https://en.wikipedia.org/wiki/Binfmt_misc), enabling QEMU to
+execute non-native file formats for emulation.
+
+Once QEMU is installed and the executable types are registered on the host OS,
+they work transparently inside containers. You can verify your registration by
+checking if `F` is among the flags in `/proc/sys/fs/binfmt_misc/qemu-*`.
 
 ### Multiple native nodes
 
@@ -178,136 +257,257 @@ FROM alpine
 COPY --from=build /log /log
 ```
 
-## Getting started
+## Examples
 
-Run the [`docker buildx ls` command](../../reference/cli/docker/buildx/ls.md)
-to list the existing builders:
+Here are some examples of multi-platform builds:
 
-```console
-$ docker buildx ls
-NAME/NODE  DRIVER/ENDPOINT  STATUS   BUILDKIT PLATFORMS
-default *  docker
-  default  default          running  v0.11.6  linux/amd64, linux/arm64, linux/arm/v7, linux/arm/v6
-```
+- [Simple multi-platform build using emulation](#simple-multi-platform-build-using-emulation)
+- [Multi-platform Neovim build using Docker Build Cloud](#multi-platform-neovim-build-using-docker-build-cloud)
+- [Cross-compiling a Go application](#cross-compiling-a-go-application)
 
-This displays the default builtin driver, that uses the BuildKit server
-components built directly into the Docker Engine, also known as the [`docker` driver](/build/builders/drivers/docker.md).
+### Simple multi-platform build using emulation
 
-Create a new builder using the [`docker-container` driver](/build/builders/drivers/docker-container.md)
-which gives you access to more complex features like multi-platform builds
-and the more advanced cache exporters, which are currently unsupported in the
-default `docker` driver:
+This example demonstrates how to build a simple multi-platform image using
+emulation with QEMU. The image contains a single file that prints the
+architecture of the container.
 
-```console
-$ docker buildx create --name mybuilder --bootstrap --use
-```
+Prerequisites:
 
-Now listing the existing builders again, you can see that the new builder is
-registered:
+- Docker Desktop, or Docker Engine with [QEMU installed](#install-qemu-manually)
+- [containerd image store enabled](#enable-the-containerd-image-store)
 
-```console
-$ docker buildx ls
-NAME/NODE     DRIVER/ENDPOINT              STATUS   BUILDKIT PLATFORMS
-mybuilder *   docker-container
-  mybuilder0  unix:///var/run/docker.sock  running  v0.12.1  linux/amd64, linux/amd64/v2, linux/amd64/v3, linux/arm64, linux/riscv64, linux/ppc64le, linux/s390x, linux/386, linux/mips64le, linux/mips64, linux/arm/v7, linux/arm/v6
-default       docker
-  default     default                      running  v{{% param "buildkit_version" %}}  linux/amd64, linux/arm64, linux/arm/v7, linux/arm/v6
-```
+Steps:
 
-## Example
+1. Create an empty directory and navigate to it:
 
-Test the workflow to ensure you can build, push, and run multi-platform images.
-Create a simple example Dockerfile, build a couple of image variants, and push
-them to Docker Hub.
+   ```console
+   $ mkdir multi-platform
+   $ cd multi-platform
+   ```
 
-The following example uses a single `Dockerfile` to build an Alpine image with
-cURL installed for multiple architectures:
+2. Create a simple Dockerfile that prints the architecture of the container:
 
-```dockerfile
-# syntax=docker/dockerfile:1
-FROM alpine:{{% param "example_alpine_version" %}}
-RUN apk add curl
-```
+   ```dockerfile
+   # syntax=docker/dockerfile:1
+   FROM alpine
+   RUN uname -m > /arch
+   ```
 
-Build the Dockerfile with buildx, passing the list of architectures to
-build for:
+3. Build the image for `linux/amd64` and `linux/arm64`:
 
-```console
-$ docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t <username>/<image>:latest --push .
-...
-#16 exporting to image
-#16 exporting layers
-#16 exporting layers 0.5s done
-#16 exporting manifest sha256:71d7ecf3cd12d9a99e73ef448bf63ae12751fe3a436a007cb0969f0dc4184c8c 0.0s done
-#16 exporting config sha256:a26f329a501da9e07dd9cffd9623e49229c3bb67939775f936a0eb3059a3d045 0.0s done
-#16 exporting manifest sha256:5ba4ceea65579fdd1181dfa103cc437d8e19d87239683cf5040e633211387ccf 0.0s done
-#16 exporting config sha256:9fcc6de03066ac1482b830d5dd7395da781bb69fe8f9873e7f9b456d29a9517c 0.0s done
-#16 exporting manifest sha256:29666fb23261b1f77ca284b69f9212d69fe5b517392dbdd4870391b7defcc116 0.0s done
-#16 exporting config sha256:92cbd688027227473d76e705c32f2abc18569c5cfabd00addd2071e91473b2e4 0.0s done
-#16 exporting manifest list sha256:f3b552e65508d9203b46db507bb121f1b644e53a22f851185d8e53d873417c48 0.0s done
-#16 ...
+   ```console
+   $ docker build --platform linux/amd64,linux/arm64 -t multi-platform .
+   ```
 
-#17 [auth] <username>/<image>:pull,push token for registry-1.docker.io
-#17 DONE 0.0s
+4. Run the image and print the architecture:
 
-#16 exporting to image
-#16 pushing layers
-#16 pushing layers 3.6s done
-#16 pushing manifest for docker.io/<username>/<image>:latest@sha256:f3b552e65508d9203b46db507bb121f1b644e53a22f851185d8e53d873417c48
-#16 pushing manifest for docker.io/<username>/<image>:latest@sha256:f3b552e65508d9203b46db507bb121f1b644e53a22f851185d8e53d873417c48 1.4s done
-#16 DONE 5.6s
-```
+   ```console
+   $ docker run --rm multi-platform cat /arch
+   ```
 
-> [!NOTE]
-> 
-> * `<username>` must be a valid Docker ID and `<image>` and valid repository on
->   Docker Hub.
-> * The `--platform` flag informs buildx to create Linux images for x86 64-bit,
->   ARM 64-bit, and ARMv7 architectures.
-> * The `--push` flag generates a multi-arch manifest and pushes all the images
->   to Docker Hub.
+   - If you're running on an x86-64 machine, you should see `x86_64`.
+   - If you're running on an ARM machine, you should see `aarch64`.
 
-Inspect the image using [`docker buildx imagetools` command](../../reference/cli/docker/buildx/imagetools/_index.md):
+### Multi-platform Neovim build using Docker Build Cloud
 
-```console
-$ docker buildx imagetools inspect <username>/<image>:latest
-Name:      docker.io/<username>/<image>:latest
-MediaType: application/vnd.docker.distribution.manifest.list.v2+json
-Digest:    sha256:f3b552e65508d9203b46db507bb121f1b644e53a22f851185d8e53d873417c48
+This example demonstrates how run a multi-platform build using Docker Build
+Cloud to compile and export [Neovim](https://github.com/neovim/neovim) binaries
+for the `linux/amd64` and `linux/arm64` platforms.
 
-Manifests:
-  Name:      docker.io/<username>/<image>:latest@sha256:71d7ecf3cd12d9a99e73ef448bf63ae12751fe3a436a007cb0969f0dc4184c8c
-  MediaType: application/vnd.docker.distribution.manifest.v2+json
-  Platform:  linux/amd64
+Docker Build Cloud provides managed multi-node builders that support native
+multi-platform builds without the need for emulation, making it much faster to
+do CPU-intensive tasks like compilation.
 
-  Name:      docker.io/<username>/<image>:latest@sha256:5ba4ceea65579fdd1181dfa103cc437d8e19d87239683cf5040e633211387ccf
-  MediaType: application/vnd.docker.distribution.manifest.v2+json
-  Platform:  linux/arm64
+Prerequisites:
 
-  Name:      docker.io/<username>/<image>:latest@sha256:29666fb23261b1f77ca284b69f9212d69fe5b517392dbdd4870391b7defcc116
-  MediaType: application/vnd.docker.distribution.manifest.v2+json
-  Platform:  linux/arm/v7
-```
+- You've [signed up for Docker Build Cloud and created a builder](/build-cloud/setup.md)
 
-The image is now available on Docker Hub with the tag `<username>/<image>:latest`.
-You can use this image to run a container on Intel laptops, Amazon EC2 Graviton
-instances, Raspberry Pis, and on other architectures. Docker pulls the correct
-image for the current architecture, so Raspberry PIs run the 32-bit ARM version
-and EC2 Graviton instances run 64-bit ARM.
+Steps:
 
-The digest identifies a fully qualified image variant. You can also run images
-targeted for a different architecture on Docker Desktop. For example, when
-you run the following on a macOS:
+1. Create an empty directory and navigate to it:
 
- ```console
-$ docker run --rm docker.io/<username>/<image>:latest@sha256:2b77acdfea5dc5baa489ffab2a0b4a387666d1d526490e31845eb64e3e73ed20 uname -m
-aarch64
-```
+   ```console
+   $ mkdir docker-build-neovim
+   $ cd docker-build-neovim
+   ```
 
-```console
-$ docker run --rm docker.io/<username>/<image>:latest@sha256:723c22f366ae44e419d12706453a544ae92711ae52f510e226f6467d8228d191 uname -m
-armv7l
-```
+2. Create a Dockerfile that builds Neovim.
 
-In the previous example, `uname -m` returns `aarch64` and `armv7l` as expected,
-even when running the commands on a native macOS or Windows developer machine.
+   ```dockerfile
+   # syntax=docker/dockerfile:1
+   FROM debian:bookworm AS build
+   WORKDIR /work
+   RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+       --mount=type=cache,target=/var/lib/apt,sharing=locked \
+       apt-get update && apt-get install -y \
+       build-essential \
+       cmake \
+       curl \
+       gettext \
+       ninja-build \
+       unzip
+   ADD https://github.com/neovim/neovim.git#stable .
+   RUN make CMAKE_BUILD_TYPE=RelWithDebInfo
+   
+   FROM scratch
+   COPY --from=build /work/build/bin/nvim /
+   ```
+
+3. Build the image for `linux/amd64` and `linux/arm64` using Docker Build Cloud:
+
+   ```console
+   $ docker build \
+      --builder <cloud-builder> \
+      --platform linux/amd64,linux/arm64 \
+      --output ./bin
+   ```
+
+   This command builds the image using the cloud builder and exports the
+   binaries to the `bin` directory.
+
+4. Verify that the binaries are built for both platforms. You should see the
+   `nvim` binary for both `linux/amd64` and `linux/arm64`.
+
+   ```console
+   $ tree ./bin
+   ./bin
+   ├── linux_amd64
+   │   └── nvim
+   └── linux_arm64
+       └── nvim
+   
+   3 directories, 2 files
+   ```
+
+### Cross-compiling a Go application
+
+This example demonstrates how to cross-compile a Go application for multiple
+platforms using multi-stage builds. The application is a simple HTTP server
+that listens on port 8080 and returns the architecture of the container.
+This example uses Go, but the same principles apply to other programming
+languages that support cross-compilation.
+
+Cross-compilation with Docker builds works by leveraging a series of
+pre-defined (in BuildKit) build arguments that give you information about
+platforms of the builder and the build targets. You can use these pre-defined
+arguments to pass the platform information to the compiler.
+
+In Go, you can use the `GOOS` and `GOARCH` environment variables to specify the
+target platform to build for.
+
+Prerequisites:
+
+- Docker Desktop or Docker Engine
+
+Steps:
+
+1. Create an empty directory and navigate to it:
+
+   ```console
+   $ mkdir go-server
+   $ cd go-server
+   ```
+
+2. Create a base Dockerfile that builds the Go application:
+
+   ```dockerfile
+   # syntax=docker/dockerfile:1
+   FROM golang:alpine AS build
+   WORKDIR /app
+   ADD https://github.com/dvdksn/buildme.git#eb6279e0ad8a10003718656c6867539bd9426ad8 .
+   RUN go build -o server .
+   
+   FROM alpine
+   COPY --from=build /app/server /server
+   ENTRYPOINT ["/server"]
+   ```
+
+   This Dockerfile can't build multi-platform with cross-compilation yet. If
+   you were to try to build this Dockerfile with `docker build`, the builder
+   would attempt to use emulation to build the image for the specified
+   platforms.
+
+3. To add cross-compilation support, update the Dockerfile to use the
+   pre-defined `BUILDPLATFORM` and `TARGETPLATFORM` build arguments. These
+   arguments are automatically available in the Dockerfile when you use the
+   `--platform` flag with `docker build`.
+
+   - Pin the `golang` image to the platform of the builder using the
+     `--platform=$BUILDPLATFORM` option.
+   - Add `ARG` instructions for the Go compilation stages to make the
+     `TARGETOS` and `TARGETARCH` build arguments available to the commands in
+     this stage.
+   - Set the `GOOS` and `GOARCH` environment variables to the values of
+     `TARGETOS` and `TARGETARCH`. The Go compiler uses these variables to do
+     cross-compilation.
+
+   {{< tabs >}}
+   {{< tab name="Updated Dockerfile" >}}
+
+   ```dockerfile
+   # syntax=docker/dockerfile:1
+   FROM --platform=$BUILDPLATFORM golang:alpine AS build
+   ARG TARGETOS
+   ARG TARGETARCH
+   WORKDIR /app
+   ADD https://github.com/dvdksn/buildme.git#eb6279e0ad8a10003718656c6867539bd9426ad8 .
+   RUN GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -o server .
+   
+   FROM alpine
+   COPY --from=build /app/server /server
+   ENTRYPOINT ["/server"]
+   ```
+
+   {{< /tab >}}
+   {{< tab name="Old Dockerfile" >}}
+
+   ```dockerfile
+   # syntax=docker/dockerfile:1
+   FROM golang:alpine AS build
+   WORKDIR /app
+   ADD https://github.com/dvdksn/buildme.git#eb6279e0ad8a10003718656c6867539bd9426ad8 .
+   RUN go build -o server .
+   
+   FROM alpine
+   COPY --from=build /app/server /server
+   ENTRYPOINT ["/server"]
+   ```
+
+   {{< /tab >}}
+   {{< tab name="Diff" >}}
+
+   ```diff
+   # syntax=docker/dockerfile:1
+   -FROM golang:alpine AS build
+   +FROM --platform=$BUILDPLATFORM golang:alpine AS build
+   +ARG TARGETOS
+   +ARG TARGETARCH
+   WORKDIR /app
+   ADD https://github.com/dvdksn/buildme.git#eb6279e0ad8a10003718656c6867539bd9426ad8 .
+   -RUN go build -o server .
+   RUN GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -o server .
+   
+   FROM alpine
+   COPY --from=build /app/server /server
+   ENTRYPOINT ["/server"]
+   ```
+
+   {{< /tab >}}
+   {{< /tabs >}}
+
+4. Build the image for `linux/amd64` and `linux/arm64`:
+
+   ```console
+   $ docker build --platform linux/amd64,linux/arm64 -t go-server .
+   ```
+
+This example has shown how to cross-compile a Go application for multiple
+platforms with Docker builds. The specific steps on how to do cross-compilation
+may vary depending on the programming language you're using. Consult the
+documentation for your programming language to learn more about cross-compiling
+for different platforms.
+
+> [!TIP]
+> You may also want to consider checking out
+> [xx - Dockerfile cross-compilation helpers](https://github.com/tonistiigi/xx).
+> `xx` is a Docker image containing utility scripts that make cross-compiling with Docker builds easier.

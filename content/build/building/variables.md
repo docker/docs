@@ -5,6 +5,7 @@ keywords: build, args, variables, parameters, env, environment variables, config
 aliases:
 - /build/buildkit/color-output-controls/
 - /build/building/env-vars/
+- /build/guide/build-args/
 ---
 
 In Docker Build, build arguments (`ARG`) and environment variables (`ENV`)

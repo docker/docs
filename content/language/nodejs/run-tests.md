@@ -125,8 +125,6 @@ Run the following command to build a new image using the test stage as the targe
 $ docker build -t node-docker-image-test --progress=plain --no-cache --target test .
 ```
 
-To learn more about building and running tests, see the [Build with Docker guide](../../build/guide/_index.md).
-
 You should see output containing the following.
 
 ```console
@@ -164,7 +162,6 @@ In this section, you learned how to run tests when developing locally using Comp
 
 Related information:
  - [docker compose run](/reference/cli/docker/compose/run/)
- - [Build with Docker guide](../../build/guide/index.md)
 
 ## Next steps
 

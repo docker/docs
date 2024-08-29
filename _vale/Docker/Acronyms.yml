@@ -4,29 +4,33 @@ link: https://docs.docker.com/contribute/style/grammar/#acronyms-and-initialisms
 level: warning
 ignorecase: false
 # Ensures that the existence of 'first' implies the existence of 'second'.
-first: '\b([A-Z]{3,5})\b'
+first: '\b[^!]([A-Z]{3,5})\b'
 second: '(?:\b[A-Za-z]+(?: |\n))+\(([A-Z]{3,5})\)'
 # ... with the exception of these:
 exceptions:
   - API
-  - BIOS
-  - FUSE
   - ARM
   - ASP
   - AWS
+  - BIOS
   - CLI
   - CPU
   - CSS
   - CSV
   - CVE
+  - DCT
   - DEBUG
   - DOM
   - DPI
+  - DSOS
+  - DVP
   - ELK
   - FAQ
+  - FUSE
   - GCC
   - GDB
   - GET
+  - GHSA
   - GPU
   - GTK
   - GUI
@@ -51,6 +55,7 @@ exceptions:
   - POST
   - RAM
   - REPL
+  - REST
   - RSA
   - SBOM
   - SCM
@@ -63,6 +68,7 @@ exceptions:
   - TBD
   - TCP
   - TODO
+  - TTY
   - URI
   - URL
   - USB
