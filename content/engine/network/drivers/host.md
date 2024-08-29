@@ -32,7 +32,7 @@ Host mode networking can be useful for the following use cases:
 
 This is because it doesn't require network address translation (NAT), and no "userland-proxy" is created for each port.
 
-The host networking driver only works on Linux hosts, but is available as a Beta feature, on Docker Desktop version 4.29 and later.
+The host networking driver is supported on Docker Engine (Linux only) and Docker Desktop version 4.34 and later.
 
 You can also use a `host` network for a swarm service, by passing `--network host`
 to the `docker service create` command. In this case, control traffic (traffic
@@ -44,8 +44,14 @@ given swarm node.
 
 ## Docker Desktop
 
-Host networking is also supported on Docker Desktop version 4.29 and later for Mac,
-Windows, and Linux as a [beta feature](/release-lifecycle.md#beta). To enable this feature, navigate to the **Features in development** tab in **Settings**, and then select **Enable host networking**.
+Host networking is supported on Docker Desktop version 4.34 and later.
+To enable this feature:
+
+1. Sign in to your Docker account in Docker Desktop.
+2. Navigate to **Settings**.
+3. Under the **Resources** tab, select **Network**.
+4. Check the **Enable host networking** option.
+5. Select **Apply and restart**.
 
 This feature works in both directions. This means you can
 access a server that is running in a container from your host and you can access
