@@ -253,6 +253,8 @@ Guides:
           title: Text summarization
     - path: /guides/use-case/jupyter/
       title: Data science with JupyterLab
+    - path: /guides/use-case/kafka/
+      title: Event-driven applications with Kafka
     - path: /guides/use-case/databases/
       title: Use containerized databases
 
