@@ -164,7 +164,7 @@ For more information, see [microsoft/WSL#11794](https://github.com/microsoft/WSL
 
 ### New
 
-- Docker Engine and CLI updated to [Moby 27.0](../engine/release-notes/27.0.md#2700).
+- Docker Engine and CLI updated to version 27.0.
 - Docker Desktop now supports moving data to a different drive on macOS and Windows with WSL2 backend. See [docker/for-win#13384](https://github.com/docker/for-win/issues/13384).
 - You can now [schedule backups for volume exports](use-desktop/volumes.md) in the **Volumes** tab (Beta). 
 - Access a terminal shell directly from Docker Desktop (Beta).
@@ -174,7 +174,7 @@ For more information, see [microsoft/WSL#11794](https://github.com/microsoft/WSL
 - [Docker Buildx v0.15.1](https://github.com/docker/buildx/releases/tag/v0.15.1)
 - [Docker Compose v2.28.1](https://github.com/docker/compose/releases/tag/v2.28.1)
 - [Docker Scout CLI v1.10.0](https://github.com/docker/scout-cli/releases/tag/v1.10.0)
-- [Docker Engine v27.0.3](https://docs.docker.com/engine/release-notes/27.0/#2703)
+- [Docker Engine v27.0.3](https://docs.docker.com/engine/release-notes/27/#2703)
 - Docker Init v1.3.0
 
 ### Bug fixes and enhancements
