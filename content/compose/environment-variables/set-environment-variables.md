@@ -82,7 +82,7 @@ The paths to your `.env` file, specified in the `env_file` attribute, are relati
 ### Additional information 
 
 - If multiple files are specified, they are evaluated in order and can override values set in previous files.
-- In addition, as the `.env` file supports [interpolation](variable-interpolation.md), it is possible to combine those with values set by `environment`. 
+- The variable interpolation supported by the [.env file](variable-interpolation.md), is explicitly not available to env files specified using `env_file`. 
 - As of Docker Compose version 2.24.0, you can set your `.env` file, defined by the `env_file` attribute, to be optional by using the `required` field. When `required` is set to `false` and the `.env` file is missing, Compose silently ignores the entry.
   ```yaml
   env_file:
