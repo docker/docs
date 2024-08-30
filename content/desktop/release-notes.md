@@ -30,7 +30,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 ### New
 
 - [Host networking](/engine/network/drivers/host.md#docker-desktop) support on Docker Desktop is now generally available.
-- If you authenticate via the CLI without Docker Desktop installed, you can now authenticate through a browser-based flow, removing the need for manual PAT generation.
+- If you authenticate via the CLI, you can now authenticate through a browser-based flow, removing the need for manual PAT generation.
 - Windows now supports automatic reclamation of disk space in Docker Desktop for WSL2 installations [using a managed virtual hard disk](/desktop/wsl/best-practices.md).
 - Deploying Docker Desktop via the [MSI installer](/desktop/install/msi/_index.md) is now generally available.
 - Two new methods to [enforce sign-in](/security/for-admins/enforce-sign-in/_index.md) (windows registry key and `.plist` file) are now generally available.
@@ -70,6 +70,12 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 - Fixed a bug that would cause Docker Desktop to not start in the WSL2 engine  [docker/for-win#14034](https://github.com/docker/for-win/issues/14034).
 - Fixed a bug that caused WSL distro to terminate abruptly. Fixes [for-win/14230](https://github.com/docker/for-win/issues/14230).
 - Fixed an issue that caused WSL to update in each startup. Fixes [for-win/13868](https://github.com/docker/for-win/issues/13868), [for-win/13806](https://github.com/docker/for-win/issues/13806).
+
+### Known Issues
+
+- There is a known issue when authenticating against a registry in the Docker CLI (`docker login [registry address]`) where, if the provided registry address includes a repository/image name (such as `docker login index.docker.io/docker/welcome-to-docker`), the repository part (`docker/welcome-to-docker`) is not normalized and results in credentials being stored incorrectly, which causes subsequent pulls from the registry (`docker pull index.docker.io/docker/welcome-to-docker`) to not be authenticated. To prevent this, don't include any extraneous suffix in the registry address when running `docker login`.
+  > [!NOTE]
+  > Using `docker login` with an address that includes URL path segments is not a documented use case and is considered unsupported. The recommended usage is to specify only a registry hostname, and optionally a port, as the address for `docker login`.
 
 ## 4.33.1
 
@@ -164,7 +170,7 @@ For more information, see [microsoft/WSL#11794](https://github.com/microsoft/WSL
 
 ### New
 
-- Docker Engine and CLI updated to [Moby 27.0](../engine/release-notes/27.0.md#2700).
+- Docker Engine and CLI updated to version 27.0.
 - Docker Desktop now supports moving data to a different drive on macOS and Windows with WSL2 backend. See [docker/for-win#13384](https://github.com/docker/for-win/issues/13384).
 - You can now [schedule backups for volume exports](use-desktop/volumes.md) in the **Volumes** tab (Beta). 
 - Access a terminal shell directly from Docker Desktop (Beta).
@@ -174,7 +180,7 @@ For more information, see [microsoft/WSL#11794](https://github.com/microsoft/WSL
 - [Docker Buildx v0.15.1](https://github.com/docker/buildx/releases/tag/v0.15.1)
 - [Docker Compose v2.28.1](https://github.com/docker/compose/releases/tag/v2.28.1)
 - [Docker Scout CLI v1.10.0](https://github.com/docker/scout-cli/releases/tag/v1.10.0)
-- [Docker Engine v27.0.3](https://docs.docker.com/engine/release-notes/27.0/#2703)
+- [Docker Engine v27.0.3](https://docs.docker.com/engine/release-notes/27/#2703)
 - Docker Init v1.3.0
 
 ### Bug fixes and enhancements
