@@ -71,6 +71,11 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 - Fixed a bug that caused WSL distro to terminate abruptly. Fixes [for-win/14230](https://github.com/docker/for-win/issues/14230).
 - Fixed an issue that caused WSL to update in each startup. Fixes [for-win/13868](https://github.com/docker/for-win/issues/13868), [for-win/13806](https://github.com/docker/for-win/issues/13806).
 
+### Known issues
+
+- Compose bridge does not work automaticly as you enable experimental setting. Might take a couple of minutes for the user to get a notification to repair Docker Desktop that will allow to install the `compose-bridge` binary.
+- The 'Convert and Deploy' button in compose file viewer page might be disabled even when kubernetes are running and the compose-bridge experimental setting was enabled. The workaround for this is to disable (and click Apply Settings) and enable (and click Apply Settings) the compose-bridge experimental setting again.
+
 ## 4.33.1
 
 {{< release-date date="2024-07-31" >}}
