@@ -168,7 +168,7 @@ To help this make sense, let’s look at how Kafka needs to be configured to sup
 
 Since there are two different methods clients need to connect, two different listeners are required - `HOST` and `DOCKER`. The `HOST` listener will tell clients to connect using localhost:9092, while the `DOCKER` listener will inform clients to connect using `kafka:9093`. Notice this means Kafka is listening on both ports 9092 and 9093. But, only the host listener needs to be exposed to the host.
 
-[ IMAGE TO GO HERE ]
+![Diagram showing the DOCKER and HOST listeners and how they are exposed to the host and Docker networks](./images/kafka-1.webp)
 
 In order to set this up, the `compose.yaml` for Kafka needs some additional configuration. Once you start overriding some of the defaults, you also need to specify a few other options in order for KRaft mode to work. 
 
