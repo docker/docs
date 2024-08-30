@@ -54,7 +54,7 @@ Start a basic Kafka cluster by doing the following steps. This example will laun
 
     Doing so will produce output similar to the following:
 
-    ```
+    ```plaintext
     Cluster ID: 5L6g3nShT-eMCtK--X86sw
     ```
 
@@ -86,7 +86,7 @@ Start a basic Kafka cluster by doing the following steps. This example will laun
 
     You should then see your messages in the output:
 
-     ```
+    ```plaintext
     First message
     Second message
     ```
@@ -109,31 +109,31 @@ Since the cluster is running locally and is exposed at port 9092, the app can co
     $ docker run -d --name=kafka -p 9092:9092 apache/kafka
     ```
 
-1. Clone the [GitHub repository](https://github.com/dockersamples/kafka-development-node) locally.
+2. Clone the [GitHub repository](https://github.com/dockersamples/kafka-development-node) locally.
 
     ```console
     $ git clone https://github.com/dockersamples/kafka-development-node.git
     ```
 
-2. Navigate into the project.
+3. Navigate into the project.
 
     ```console
     cd kafka-development-node/app
     ```
 
-3. Install the dependencies using yarn.
+4. Install the dependencies using yarn.
 
     ```console
     $ yarn install
     ```
 
-4. Start the application using `yarn dev`. This will set the `NODE_ENV` environment variable to `development` and use `nodemon` to watch for file changes.
+5. Start the application using `yarn dev`. This will set the `NODE_ENV` environment variable to `development` and use `nodemon` to watch for file changes.
 
     ```console
     $ yarn dev
     ```
 
-5. With the application now running, it will log received messages to the console. In a new terminal, publish a few messages using the following command:
+6. With the application now running, it will log received messages to the console. In a new terminal, publish a few messages using the following command:
 
     ```console
     $ docker exec -ti kafka /opt/kafka/bin/kafka-console-producer.sh --bootstrap-server :9092 --topic demo
