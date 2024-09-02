@@ -24,13 +24,13 @@ You can use them to parameterize the build, allowing for more flexible and confi
 
 Build arguments and environment variables are similar.
 They're both declared in the Dockerfile and can be set using flags for the `docker build` command.
-Both can be used to parametrize the build.
+Both can be used to parameterize the build.
 But they each serve a distinct purpose.
 
 ### Build arguments
 
 Build arguments are variables for the Dockerfile itself.
-Use them to parametrize values of Dockerfile instructions.
+Use them to parameterize values of Dockerfile instructions.
 For example, you might use a build argument to specify the version of a dependency to install.
 
 Build arguments have no effect on the build unless it's used in an instruction.
