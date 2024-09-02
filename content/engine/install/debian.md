@@ -114,11 +114,11 @@ Docker from the repository.
    # Add the repository to Apt sources:
    echo \
      "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] {{% param "download-url-base" %}} \
-     $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+     $(. /etc/os-release && echo "$UBUNTU_CODENAME") stable" | \
      sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
    sudo apt-get update
    ```
-
+[//]: <> (If possible, include links to find the relevant links for finding $VERSION_CODENAME)
    > [!NOTE]
    >
    > If you use a derivative distro, such as Kali Linux,
@@ -126,7 +126,7 @@ Docker from the repository.
    > print the version codename:
    >
    > ```console
-   > $(. /etc/os-release && echo "$VERSION_CODENAME")
+   > $(. /etc/os-release && echo "$UBUNTU_CODENAME")
    > ```
    >
    > Replace this part with the codename of the corresponding Debian release,
