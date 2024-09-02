@@ -79,7 +79,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 - There is a known issue when authenticating against a registry in the Docker CLI (`docker login [registry address]`) where, if the provided registry address includes a repository/image name (such as `docker login index.docker.io/docker/welcome-to-docker`), the repository part (`docker/welcome-to-docker`) is not normalized and results in credentials being stored incorrectly, which causes subsequent pulls from the registry (`docker pull index.docker.io/docker/welcome-to-docker`) to not be authenticated. To prevent this, don't include any extraneous suffix in the registry address when running `docker login`.
   > [!NOTE]
   > Using `docker login` with an address that includes URL path segments is not a documented use case and is considered unsupported. The recommended usage is to specify only a registry hostname, and optionally a port, as the address for `docker login`.
-- When running `docker compose up` and Resource Saver mode is enabled, the command is unresponsive. As a workaround you can manually exit the Resource Saving mode for docker compose to become responsive again.
+- When running `docker compose up` and Docker Desktop is in the Resource Saver mode, the command is unresponsive. As a workaround you can manually exit the Resource Saving mode for docker compose to become responsive again.
 
 ## 4.33.1
 
