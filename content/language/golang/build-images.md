@@ -17,7 +17,7 @@ application.
 
 To complete this tutorial, you need the following:
 
-- Docker running locally. Follow the [instructions to download and install Docker](../../desktop/index.md).
+- Docker running locally. Follow the [instructions to download and install Docker](/manuals/desktop/index.md).
 - An IDE or a text editor to edit files. [Visual Studio Code](https://code.visualstudio.com/) is a free and popular choice but you can use anything you feel comfortable with.
 - A Git client. This guide uses a command-line based `git` client, but you are free to use whatever works for you.
 - A command-line terminal application. The examples shown in this module are from the Linux shell, but they should work in PowerShell, Windows Command Prompt, or OS X Terminal with minimal, if any, modifications.
@@ -113,7 +113,7 @@ has all necessary tools and libraries to compile and run a Go application.
 
 > [!NOTE]
 >
-> If you are curious about creating your own base images, you can check out the following section of this guide: [creating base images](../../build/building/base-images.md#create-a-base-image).
+> If you are curious about creating your own base images, you can check out the following section of this guide: [creating base images](/manuals/build/building/base-images.md#create-a-base-image).
 > Note, however, that this isn't necessary to continue with your task at hand.
 
 Now that you have defined the base image for your upcoming container image, you
@@ -307,7 +307,7 @@ successfully built your image named `docker-gs-ping`.
 
 To see the list of images you have on your local machine, you have two options.
 One is to use the CLI and the other is to use [Docker
-Desktop](../../desktop/index.md). Since you're currently working in the
+Desktop](/manuals/desktop/index.md). Since you're currently working in the
 terminal, take a look at listing images with the CLI.
 
 To list images, run the `docker image ls`command (or the `docker images` shorthand):
@@ -407,7 +407,7 @@ The answer is that the full toolchain is still there, in the container image.
 Not only this is inconvenient because of the large file size, but it may also
 present a security risk when the container is deployed.
 
-These two issues can be solved by using [multi-stage builds](../../build/building/multi-stage.md).
+These two issues can be solved by using [multi-stage builds](/manuals/build/building/multi-stage.md).
 
 In a nutshell, a multi-stage build can carry over the artifacts from one build stage into another,
 and every build stage can be instantiated from a different base image.
@@ -478,7 +478,7 @@ This is so because the ["distroless"](https://github.com/GoogleContainerTools/di
 base image that you have used in the second stage of the build is very barebones and is designed for lean deployments of static binaries.
 
 There's much more to multi-stage builds, including the possibility of multi-architecture builds, 
-so feel free to check out [multi-stage builds](../../build/building/multi-stage.md). This is, however, not essential for your progress here.
+so feel free to check out [multi-stage builds](/manuals/build/building/multi-stage.md). This is, however, not essential for your progress here.
 
 ## Next steps
 

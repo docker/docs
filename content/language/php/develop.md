@@ -236,7 +236,7 @@ Press `ctrl+c` in the terminal to stop your application.
 
 ## Automatically update services
 
-Use Compose Watch to automatically update your running Compose services as you edit and save your code. For more details about Compose Watch, see [Use Compose Watch](../../compose/file-watch.md).
+Use Compose Watch to automatically update your running Compose services as you edit and save your code. For more details about Compose Watch, see [Use Compose Watch](/manuals/compose/file-watch.md).
 
 Open your `compose.yaml` file in an IDE or text editor and then add the Compose Watch instructions. The following is the updated `compose.yaml` file.
 
@@ -313,7 +313,7 @@ Press `ctrl+c` in the terminal to stop Compose Watch. Run `docker compose down` 
 
 ## Create a development container
 
-At this point, when you run your containerized application, Composer isn't installing the dev dependencies. While this small image is good for production, it lacks the tools and dependencies you may need when developing and it doesn't include the `tests` directory. You can use multi-stage builds to build stages for both development and production in the same Dockerfile. For more details, see [Multi-stage builds](../../build/building/multi-stage.md).
+At this point, when you run your containerized application, Composer isn't installing the dev dependencies. While this small image is good for production, it lacks the tools and dependencies you may need when developing and it doesn't include the `tests` directory. You can use multi-stage builds to build stages for both development and production in the same Dockerfile. For more details, see [Multi-stage builds](/manuals/build/building/multi-stage.md).
 
 In the `Dockerfile`, you'll need to update the following:
 1. Split the `deps` staged into two stages. One stage for production
@@ -418,7 +418,7 @@ database and persist data. You also learned how to use Compose Watch to automati
 
 Related information:
  - [Compose file reference](/reference/compose-file/)
- - [Compose file watch](../../compose/file-watch.md)
+ - [Compose file watch](/manuals/compose/file-watch.md)
  - [Dockerfile reference](../../reference/dockerfile.md)
  - [Official Docker Image for PHP](https://hub.docker.com/_/php)
 

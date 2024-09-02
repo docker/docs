@@ -8,9 +8,9 @@ description: Learn how to containerize a generative AI (GenAI) application.
 
 > [!NOTE]
 >
-> GenAI applications can often benefit from GPU acceleration. Currently Docker Desktop supports GPU acceleration only on [Windows with the WSL2 backend](../../../desktop/gpu.md#using-nvidia-gpus-with-wsl2). Linux users can also access GPU acceleration using a native installation of the [Docker Engine](../../../engine/install/_index.md).
+> GenAI applications can often benefit from GPU acceleration. Currently Docker Desktop supports GPU acceleration only on [Windows with the WSL2 backend](/manuals/desktop/gpu.md#using-nvidia-gpus-with-wsl2). Linux users can also access GPU acceleration using a native installation of the [Docker Engine](/manuals/engine/install/_index.md).
 
-* You have installed the latest version of [Docker Desktop](/get-started/get-docker.md) or, if you are a Linux user and are planning to use GPU acceleration, [Docker Engine](../../../engine/install/_index.md). Docker adds new features regularly and some parts of this guide may work only with the latest version of Docker Desktop.
+* You have installed the latest version of [Docker Desktop](/get-started/get-docker.md) or, if you are a Linux user and are planning to use GPU acceleration, [Docker Engine](/manuals/engine/install/_index.md). Docker adds new features regularly and some parts of this guide may work only with the latest version of Docker Desktop.
 * You have a [git client](https://git-scm.com/downloads). The examples in this section use a command-line based git client, but you can use any client.
 
 ## Overview

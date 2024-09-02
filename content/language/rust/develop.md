@@ -7,7 +7,7 @@ description: Learn how to develop your Rust application locally.
 ## Prerequisites
 
 * You have installed the latest version of [Docker Desktop](/get-started/get-docker.md).
-* You have completed the walkthroughs in the Docker Desktop [Learning Center](../../desktop/get-started.md) to learn about Docker concepts.
+* You have completed the walkthroughs in the Docker Desktop [Learning Center](/manuals/desktop/get-started.md) to learn about Docker concepts.
 * You have a [git client](https://git-scm.com/downloads). The examples in this section use a command-line based git client, but you can use any client.
 
 ## Overview
@@ -35,7 +35,7 @@ $ docker network create postgresnet
 ```
 
 Now you can run PostgreSQL in a container and attach to the volume and network that you created previously. Docker pulls the image from Hub and runs it for you locally.
-In the following command, option `--mount` is for starting the container with a volume. For more information, see [Docker volumes](/engine/storage/volumes.md).
+In the following command, option `--mount` is for starting the container with a volume. For more information, see [Docker volumes](/manuals/engine/storage/volumes.md).
 
 ```console
 $ docker run --rm -d --mount \
@@ -277,7 +277,7 @@ secrets:
     file: db/password.txt
 ```
 
-Note that the file doesn't specify a network for those 2 services. When you use Compose, it automatically creates a network and connects the services to it. For more information see [Networking in Compose](../../compose/networking.md).
+Note that the file doesn't specify a network for those 2 services. When you use Compose, it automatically creates a network and connects the services to it. For more information see [Networking in Compose](/manuals/compose/networking.md).
 
 Before you run the application using Compose, notice that this Compose file specifies a `password.txt` file to hold the database's password. You must create this file as it's not included in the source repository.
 
@@ -287,7 +287,7 @@ In the cloned repository's directory, create a new directory named `db` and insi
 mysecretpassword
 ```
 
-If you have any other containers running from the previous sections, [stop](./run-containers.md/#stop-start-and-name-containers) them now.
+If you have any other containers running from the previous sections, [stop](./run-containers.md#stop-start-and-name-containers) them now.
 
 Now, run the following `docker compose up` command to start your application.
 
@@ -314,8 +314,8 @@ You should receive the following response:
 In this section, you took a look at setting up your Compose file to run your Rust application and database with a single command.
 
 Related information:
- - [Docker volumes](/engine/storage/volumes.md)
- - [Compose overview](../../compose/index.md)
+ - [Docker volumes](/manuals/engine/storage/volumes.md)
+ - [Compose overview](/manuals/compose/index.md)
 
 ## Next steps
 

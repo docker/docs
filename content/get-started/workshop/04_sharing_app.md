@@ -80,7 +80,7 @@ new instance that has never seen this container image. To do this, you will use 
 > $ docker build --platform linux/amd64 -t YOUR-USER-NAME/getting-started .
 > ```
 >
-> Docker buildx also supports building multi-platform images. To learn more, see [Multi-platform images](/build/building/multi-platform.md).
+> Docker buildx also supports building multi-platform images. To learn more, see [Multi-platform images](/manuals/build/building/multi-platform.md).
 
 
 1. Open your browser to [Play with Docker](https://labs.play-with-docker.com/).
@@ -112,7 +112,7 @@ new instance that has never seen this container image. To do this, you will use 
     > on all interfaces of the host, making it available to the outside world.
     >
     > For more information about how port mapping works, see
-    > [Networking](/engine/network/_index.md#published-ports).
+    > [Networking](/manuals/engine/network/_index.md#published-ports).
 
 6. Select the 3000 badge when it appears.
 
@@ -129,8 +129,8 @@ can use the latest version of the image.
 Related information:
 
  - [docker CLI reference](/reference/cli/docker/)
- - [Multi-platform images](/build/building/multi-platform.md)
- - [Docker Hub overview](/docker-hub/_index.md)
+ - [Multi-platform images](/manuals/build/building/multi-platform.md)
+ - [Docker Hub overview](/manuals/docker-hub/_index.md)
 
 ## Next steps
 

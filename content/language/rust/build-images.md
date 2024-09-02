@@ -110,7 +110,7 @@ You should see output like the following.
 
 ## View local images
 
-To see a list of images you have on your local machine, you have two options. One is to use the Docker CLI and the other is to use [Docker Desktop](../../desktop/use-desktop/images.md). As you are working in the terminal already, take a look at listing images using the CLI.
+To see a list of images you have on your local machine, you have two options. One is to use the Docker CLI and the other is to use [Docker Desktop](/manuals/desktop/use-desktop/images.md). As you are working in the terminal already, take a look at listing images using the CLI.
 
 To list images, run the `docker images` command.
 

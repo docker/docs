@@ -88,7 +88,7 @@ annotations:
 
 ### attach
 
-{{< introduced compose 2.20.0 "/compose/release-notes.md#2200" >}}
+{{< introduced compose 2.20.0 "/manuals/compose/release-notes.md#2200" >}}
 
 When `attach` is defined and set to `false` Compose does not collect service logs,
 until you explicitly request it to.
@@ -230,7 +230,7 @@ cap_drop:
 
 ### cgroup
 
-{{< introduced compose 2.15.0 "/compose/release-notes.md#2150" >}}
+{{< introduced compose 2.15.0 "/manuals/compose/release-notes.md#2150" >}}
 
 `cgroup` specifies the cgroup namespace to join. When unset, it is the container runtime's decision to
 select which cgroup namespace to use, if supported.
@@ -438,7 +438,7 @@ expressed in the short form.
 
 - `restart`: When set to `true` Compose restarts this service after it updates the dependency service.
   This applies to an explicit restart controlled by a Compose operation, and excludes automated restart by the container runtime
-  after the container dies. Introduced in Docker Compose version [2.17.0](/compose/release-notes.md#2170).
+  after the container dies. Introduced in Docker Compose version [2.17.0](/manuals/compose/release-notes.md#2170).
 
 - `condition`: Sets the condition under which dependency is considered satisfied
   - `service_started`: An equivalent of the short syntax described above
@@ -448,7 +448,7 @@ expressed in the short form.
   - `service_completed_successfully`: Specifies that a dependency is expected to run
     to successful completion before starting a dependent service.
 - `required`: When set to `false` Compose only warns you when the dependency service isn't started or available. If it's not defined
-    the default value of `required` is `true`. Introduced in Docker Compose version [2.20.0](/compose/release-notes.md#2200).
+    the default value of `required` is `true`. Introduced in Docker Compose version [2.20.0](/manuals/compose/release-notes.md#2200).
 
 Service dependencies cause the following behaviors:
 
@@ -489,7 +489,7 @@ Compose guarantees dependency services marked with
 
 ### develop
 
-{{< introduced compose 2.22.0 "/compose/release-notes.md#2220" >}}
+{{< introduced compose 2.22.0 "/manuals/compose/release-notes.md#2220" >}}
 
 `develop` specifies the development configuration for maintaining a container in sync with source, as defined in the [Development Section](develop.md).
 
@@ -560,7 +560,7 @@ dns_search:
 
 ### driver_opts
 
-{{< introduced compose 2.27.1 "/compose/release-notes.md#2271" >}}
+{{< introduced compose 2.27.1 "/manuals/compose/release-notes.md#2271" >}}
 
 `driver_opts` specifies a list of options as key-value pairs to pass to the driver. These options are
 driver-dependent.
@@ -574,7 +574,7 @@ services:
           com.docker.network.bridge.host_binding_ipv4: "127.0.0.1"
 ```
 
-Consult the [network drivers documentation](/engine/network/_index.md) for more information.
+Consult the [network drivers documentation](/manuals/engine/network/_index.md) for more information.
 
 ### entrypoint
 
@@ -953,7 +953,7 @@ extra_hosts:
   - "myhostv6=[::1]"
 ```
 
-The separator `=` is preferred, but `:` can also be used. Introduced in Docker Compose version [2.24.1](/compose/release-notes.md#2241). For example:
+The separator `=` is preferred, but `:` can also be used. Introduced in Docker Compose version [2.24.1](/manuals/compose/release-notes.md#2241). For example:
 
 ```yml
 extra_hosts:
@@ -1016,7 +1016,7 @@ healthcheck:
   start_interval: 5s
 ```
 
-`interval`, `timeout`, `start_period`, and `start_interval` are [specified as durations](extension.md#specifying-durations). Introduced in Docker Compose version [2.20.2](/compose/release-notes.md#2202)
+`interval`, `timeout`, `start_period`, and `start_interval` are [specified as durations](extension.md#specifying-durations). Introduced in Docker Compose version [2.20.2](/manuals/compose/release-notes.md#2202)
 
 `test` defines the command Compose runs to check container health. It can be
 either a string or a list. If it's a list, the first item must be either `NONE`, `CMD` or `CMD-SHELL`.
@@ -1220,7 +1220,7 @@ There is a performance penalty for applications that swap memory to disk often.
 
 - `none`: Turns off all container networking.
 - `host`: Gives the container raw access to the host's network interface.
-- `service:{name}`: Gives the containers access to the specified service only. For more information, see [Container networks](/engine/network/_index.md#container-networks).
+- `service:{name}`: Gives the containers access to the specified service only. For more information, see [Container networks](/manuals/engine/network/_index.md#container-networks).
 
 ```yml
     network_mode: "host"
@@ -1351,7 +1351,7 @@ networks:
 
 #### mac_address
 
-{{< introduced compose 2.23.2 "/compose/release-notes.md#2232" >}}
+{{< introduced compose 2.23.2 "/manuals/compose/release-notes.md#2232" >}}
 
 `mac_address` sets the MAC address used by the service container when connecting to this particular network.
 
@@ -1478,7 +1478,7 @@ expressed in the short form.
 - `published`: The publicly exposed port. It is defined as a string and can be set as a range using syntax `start-end`. It means the actual port is assigned a remaining available port, within the set range.
 - `host_ip`: The Host IP mapping, unspecified means all network interfaces (`0.0.0.0`).
 - `protocol`: The port protocol (`tcp` or `udp`). Defaults to `tcp`.
-- `app_protocol`: The application protocol (TCP/IP level 4 / OSI level 7) this port is used for. This is optional and can be used as a hint for Compose to offer richer behavior for protocols that it understands. Introduced in Docker Compose version [2.26.0](/compose/release-notes.md#2260).
+- `app_protocol`: The application protocol (TCP/IP level 4 / OSI level 7) this port is used for. This is optional and can be used as a hint for Compose to offer richer behavior for protocols that it understands. Introduced in Docker Compose version [2.26.0](/manuals/compose/release-notes.md#2260).
 - `mode`: `host`: For publishing a host port on each node, or `ingress` for a port to be load balanced. Defaults to `ingress`.
 - `name`: A human-readable name for the port, used to document it's usage within the service.
 
@@ -1577,7 +1577,7 @@ web:
   runtime: runc
 ```
 
-The default is `runc`. To use a different runtime, see [Alternative runtimes](/engine/daemon/alternative-runtimes.md).
+The default is `runc`. To use a different runtime, see [Alternative runtimes](/manuals/engine/daemon/alternative-runtimes.md).
 
 ### scale
 
@@ -1779,7 +1779,7 @@ userns_mode: "host"
 
 ### uts
 
-{{< introduced compose 2.15.1 "/compose/release-notes.md#2151" >}}
+{{< introduced compose 2.15.1 "/manuals/compose/release-notes.md#2151" >}}
 
 `uts` configures the UTS namespace mode set for the service container. When unspecified
 it is the runtime's decision to assign a UTS namespace, if supported. Available values are:
@@ -1864,13 +1864,13 @@ expressed in the short form.
   - `subpath`: Path inside a volume to mount instead of the volume root.
 - `tmpfs`: Configures additional tmpfs options:
   - `size`: The size for the tmpfs mount in bytes (either numeric or as bytes unit).
-  - `mode`: The file mode for the tmpfs mount as Unix permission bits as an octal number. Introduced in Docker Compose version [2.14.0](/compose/release-notes.md#2260).
+  - `mode`: The file mode for the tmpfs mount as Unix permission bits as an octal number. Introduced in Docker Compose version [2.14.0](/manuals/compose/release-notes.md#2260).
 - `consistency`: The consistency requirements of the mount. Available values are platform specific.
 
 > [!TIP]
 >
 > Working with large repositories or monorepos, or with virtual file systems that are no longer scaling with your codebase? 
-> Compose now takes advantage of [Synchronized file shares](/desktop/synchronized-file-sharing.md) and automatically creates file shares for bind mounts. 
+> Compose now takes advantage of [Synchronized file shares](/manuals/desktop/synchronized-file-sharing.md) and automatically creates file shares for bind mounts. 
 > Ensure you're signed in to Docker with a paid subscription and have enabled both **Access experimental features** and **Manage Synchronized file shares with Compose** in Docker Desktop's settings.
 
 ### volumes_from

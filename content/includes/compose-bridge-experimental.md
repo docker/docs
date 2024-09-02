@@ -2,5 +2,5 @@
 ---
 
 {{% experimental %}}
-Compose Bridge is an [Experimental](/release-lifecycle.md#experimental) product.
+Compose Bridge is an [Experimental](/manuals/release-lifecycle.md#experimental) product.
 {{% /experimental %}}

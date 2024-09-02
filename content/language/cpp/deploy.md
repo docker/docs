@@ -133,5 +133,5 @@ In this section, you learned how to use Docker Desktop to deploy your C++ applic
 
 Related information:
    - [Kubernetes documentation](https://kubernetes.io/docs/home/)
-   - [Deploy on Kubernetes with Docker Desktop](../../desktop/kubernetes.md)
-   - [Swarm mode overview](../../engine/swarm/_index.md)
+   - [Deploy on Kubernetes with Docker Desktop](/manuals/desktop/kubernetes.md)
+   - [Swarm mode overview](/manuals/engine/swarm/_index.md)

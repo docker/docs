@@ -121,7 +121,7 @@ application using Docker.
 Related information:
  - [Dockerfile reference](../../reference/dockerfile.md)
  - [.dockerignore file reference](../../reference/dockerfile.md#dockerignore-file)
- - [Docker Compose overview](../../compose/_index.md)
+ - [Docker Compose overview](/manuals/compose/_index.md)
 
 ## Next steps
 

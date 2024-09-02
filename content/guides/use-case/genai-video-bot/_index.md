@@ -183,7 +183,7 @@ underlying system differences. To learn more about Docker, see the [Getting star
 
 Docker Compose is a tool for defining and running multi-container applications.
 Compose makes it easy to run this application with a single command, `docker
-compose up`. For more details, see the [Compose overview](../../../compose/_index.md).
+compose up`. For more details, see the [Compose overview](/manuals/compose/_index.md).
 
 ### OpenAI API
 

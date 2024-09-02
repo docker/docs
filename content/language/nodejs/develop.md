@@ -270,7 +270,7 @@ have these variables defined yet.
 
 ## Configure and run a development container
 
-You can use a bind mount to mount your source code into the container. The container can then see the changes you make to the code immediately, as soon as you save a file. This means that you can run processes, like nodemon, in the container that watch for filesystem changes and respond to them. To learn more about bind mounts, see [Storage overview](/engine/storage/index.md).
+You can use a bind mount to mount your source code into the container. The container can then see the changes you make to the code immediately, as soon as you save a file. This means that you can run processes, like nodemon, in the container that watch for filesystem changes and respond to them. To learn more about bind mounts, see [Storage overview](/manuals/engine/storage/index.md).
 
 In addition to adding a bind mount, you can configure your Dockerfile and `compose.yaml` file to install development dependencies and run development tools.
 
@@ -320,7 +320,7 @@ in other build stages. Next, you add a new build stage labeled `dev` to install
 your development dependencies and start the container using `npm run dev`.
 Finally, you add a stage labeled `prod` that omits the dev dependencies and runs
 your application using `node src/index.js`. To learn more about multi-stage
-builds, see [Multi-stage builds](../../build/building/multi-stage.md).
+builds, see [Multi-stage builds](/manuals/build/building/multi-stage.md).
 
 Next, you'll need to update your Compose file to use the new stage.
 
@@ -419,7 +419,7 @@ Dockerfile and set up a bind mount for development.
 Related information:
  - [Volumes top-level element](/reference/compose-file/volumes/)
  - [Services top-level element](/reference/compose-file/services/)
- - [Multi-stage builds](../../build/building/multi-stage.md)
+ - [Multi-stage builds](/manuals/build/building/multi-stage.md)
 
 ## Next steps
 

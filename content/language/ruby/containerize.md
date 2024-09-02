@@ -385,7 +385,7 @@ In this section, you learned how you can containerize and run your Ruby
 application using Docker.
 
 Related information:
- - [Docker Compose overview](../../compose/_index.md)
+ - [Docker Compose overview](/manuals/compose/_index.md)
 
 ## Next steps
 

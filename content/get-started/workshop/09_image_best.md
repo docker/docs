@@ -201,7 +201,7 @@ In this section, you learned a few image building best practices, including laye
 
 Related information:
  - [Dockerfile reference](/reference/dockerfile/)
- - [Dockerfile best practices](/build/building/best-practices.md)
+ - [Dockerfile best practices](/manuals/build/building/best-practices.md)
 
 ## Next steps
 
