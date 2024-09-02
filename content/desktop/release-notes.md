@@ -73,8 +73,8 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### Known issues
 
-- Compose bridge does not work automaticly as you enable experimental setting. Might take a couple of minutes for the user to get a notification to repair Docker Desktop that will allow to install the `compose-bridge` binary.
-- The 'Convert and Deploy' button in compose file viewer page might be disabled even when kubernetes are running and the compose-bridge experimental setting was enabled. The workaround for this is to disable (and click Apply Settings) and enable (and click Apply Settings) the compose-bridge experimental setting again.
+- Compose Bridge does not work automatically when you enable it within the **Experimental** settings tab.  It take a few minutes before you are notified that you must 'repair' Docker Desktop which then installs the `compose-bridge` binary.
+- The **Convert and Deploy** button in the Compose file viewer  might be disabled even when Kubernetes is running and Compose Bridge is enabled. The workaround for this is to disable Compose Bridge in the **Experimental** settings tab, apply the change with **Apply & restart**, then re-enable and select **Apply & restart** again. 
 
 ## 4.33.1
 
