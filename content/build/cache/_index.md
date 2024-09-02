@@ -4,6 +4,7 @@ description: Improve your build speed with effective use of the build cache
 keywords: build, buildx, buildkit, dockerfile, image layers, build instructions, build context
 aliases:
   - /build/building/cache/
+  - /build/guide/layers/
 ---
 
 When you build the same Docker image multiple times, knowing how to optimize
