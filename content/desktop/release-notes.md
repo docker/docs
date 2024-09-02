@@ -63,16 +63,19 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 - Fixed a bug where a `Partial repair error` would occasionally appear when triggering the Configuration integrity check feature.
 - Configuration integrity check feature now shows information on why the Docker socket is mis-configured.
 - Fixed an issue where the Configuration integrity check feature would report the system path instead of the user path if Docker Desktop is installed as `User`.
+- Fixed a bug where applications trying to read extended attributes from bind mounted volumes could experience failures. Fixes [docker/for-mac#7377](https://github.com/docker/for-mac/issues/7377).
 
 #### For Windows
 
 - Fixed a bug where Docker Desktop would reset docker's `credsStore` to `desktop` when the user's intention is to keep it empty. Fixes [docker/for-win#9843](https://github.com/docker/for-win/issues/9843).
 - Fixed a bug that would cause Docker Desktop to not start in the WSL2 engine  [docker/for-win#14034](https://github.com/docker/for-win/issues/14034).
-- Fixed a bug that caused WSL distro to terminate abruptly. Fixes [for-win/14230](https://github.com/docker/for-win/issues/14230).
-- Fixed an issue that caused WSL to update in each startup. Fixes [for-win/13868](https://github.com/docker/for-win/issues/13868), [for-win/13806](https://github.com/docker/for-win/issues/13806).
+- Fixed a bug that caused WSL distro to terminate abruptly. Fixes [docker/for-win/14230](https://github.com/docker/for-win/issues/14230).
+- Fixed an issue that caused WSL to update in each startup. Fixes [docker/for-win/13868](https://github.com/docker/for-win/issues/13868), [docker/for-win/13806](https://github.com/docker/for-win/issues/13806).
 
-### Known Issues
+### Known issues
 
+- Compose Bridge does not work automatically when you enable it within the **Experimental** settings tab.  It take a few minutes before you are notified that you must 'repair' Docker Desktop which then installs the `compose-bridge` binary.
+- The **Convert and Deploy** button in the Compose file viewer  might be disabled even when Kubernetes is running and Compose Bridge is enabled. The workaround for this is to disable Compose Bridge in the **Experimental** settings tab, apply the change with **Apply & restart**, then re-enable and select **Apply & restart** again. 
 - There is a known issue when authenticating against a registry in the Docker CLI (`docker login [registry address]`) where, if the provided registry address includes a repository/image name (such as `docker login index.docker.io/docker/welcome-to-docker`), the repository part (`docker/welcome-to-docker`) is not normalized and results in credentials being stored incorrectly, which causes subsequent pulls from the registry (`docker pull index.docker.io/docker/welcome-to-docker`) to not be authenticated. To prevent this, don't include any extraneous suffix in the registry address when running `docker login`.
   > [!NOTE]
   > Using `docker login` with an address that includes URL path segments is not a documented use case and is considered unsupported. The recommended usage is to specify only a registry hostname, and optionally a port, as the address for `docker login`.
