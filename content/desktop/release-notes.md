@@ -17,7 +17,7 @@ aliases:
 
 This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases. For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/releases.md).
 
-Docker Desktop versions older than 6 months from the latest release are not available for download. 
+Docker Desktop versions older than 6 months from the latest release are not available for download.
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1) to see what's coming next.
 
@@ -80,6 +80,8 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
   > [!NOTE]
   > Using `docker login` with an address that includes URL path segments is not a documented use case and is considered unsupported. The recommended usage is to specify only a registry hostname, and optionally a port, as the address for `docker login`.
 - When running `docker compose up` and Docker Desktop is in the Resource Saver mode, the command is unresponsive. As a workaround, manually exit the Resource Saving mode and Docker Compose becomes responsive again.
+- When [Enhanced Container Isolation (ECI)](../../content/security/for-admins/hardened-desktop/enhanced-container-isolation/_index.md) is enabled, Docker Desktop may not enter Resource Saver mode. This will be fixed in a future Docker Desktop release.
+- The new [ECI Docker socket mount permissions for derived images](../../content/security/for-admins/hardened-desktop/enhanced-container-isolation/config.md#docker-socket-mount-permissions-for-derived-images) feature does not yet work when Docker Desktop is configured with "Use containerd for pulling and storing images" in the GUI->Settings page. This will be fixed in the next Docker Desktop release.
 
 ## 4.33.1
 
@@ -176,7 +178,7 @@ For more information, see [microsoft/WSL#11794](https://github.com/microsoft/WSL
 
 - Docker Engine and CLI updated to version 27.0.
 - Docker Desktop now supports moving data to a different drive on macOS and Windows with WSL2 backend. See [docker/for-win#13384](https://github.com/docker/for-win/issues/13384).
-- You can now [schedule backups for volume exports](use-desktop/volumes.md) in the **Volumes** tab (Beta). 
+- You can now [schedule backups for volume exports](use-desktop/volumes.md) in the **Volumes** tab (Beta).
 - Access a terminal shell directly from Docker Desktop (Beta).
 
 ### Upgrades
@@ -190,7 +192,7 @@ For more information, see [microsoft/WSL#11794](https://github.com/microsoft/WSL
 ### Bug fixes and enhancements
 
 #### For all platforms
- 
+
 - Improved instructions for `watch` in the Compose File Viewer
 - Added support for Golang projects that don't have dependencies in Docker Init. Addresses [docker/roadmap#611](https://github.com/docker/roadmap/issues/611)
 - [Settings Management](/security/for-admins/hardened-desktop/settings-management/index.md) now lets admins set the default value to `ProxyEnableKerberosNTLM`.
@@ -205,7 +207,7 @@ For more information, see [microsoft/WSL#11794](https://github.com/microsoft/WSL
   - Fixed missing build stats for named contexts.
   - Fixed image index/manifest not being displayed anymore in build results.
   - Fixed an issue where build traces exported from the UI would appear as a single, flattened list when imported to Jaeger
-  - Fixed truncated digest/sha in build details. 
+  - Fixed truncated digest/sha in build details.
   - Fixed final status animation of active builds.
 
 #### For Windows
@@ -256,7 +258,7 @@ For more information, see [microsoft/WSL#11794](https://github.com/microsoft/WSL
 
 ### New
 
-- [Air-Gapped Containers](/security/for-admins/hardened-desktop/air-gapped-containers.md) is now generally available. 
+- [Air-Gapped Containers](/security/for-admins/hardened-desktop/air-gapped-containers.md) is now generally available.
 - Docker Compose File Viewer shows your Compose YAML with syntax highlighting and contextual links to relevant docs (Beta, progressive rollout).
 - New Sidebar user experience.
 
