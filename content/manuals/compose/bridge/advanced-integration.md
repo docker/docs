@@ -1,5 +1,7 @@
 ---
 title: Advanced integration
+linkTitle: Advanced
+weight: 30
 description: Learn about how Compose Bridge can function a kubectl plugin
 keywords: kubernetes, compose, compose bridge, plugin, advanced
 ---

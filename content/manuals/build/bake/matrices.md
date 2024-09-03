@@ -1,5 +1,6 @@
 ---
 title: Matrix targets
+weight: 70
 description: Learn how to define and use matrix targets in Bake to fork a single target into multiple different variants
 keywords: build, buildx, bake, buildkit, matrix, hcl, json
 ---

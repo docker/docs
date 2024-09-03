@@ -1,5 +1,6 @@
 ---
 title: Integrate Docker Scout with GitHub
+linkTitle: GitHub
 description: Integrate Docker Scout using the GitHub app to get remediation advice directly in your repositories
 keywords: scout, github, integration, image analysis, supply chain, remediation, source code
 ---

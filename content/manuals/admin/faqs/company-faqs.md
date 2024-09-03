@@ -1,7 +1,9 @@
 ---
+title: FAQs on companies
+linkTitle: Company
+weight: 30
 description: Company FAQs
 keywords: Docker, Docker Hub, SSO FAQs, single sign-on, company, administration, company management
-title: FAQs on companies
 tags: [FAQ]
 aliases:
 - /docker-hub/company-faqs/

@@ -2,6 +2,7 @@
 description: How swarm mode services work
 keywords: docker, container, cluster, swarm mode, node
 title: How services work
+weight: 20
 ---
 
 To deploy an application image when Docker Engine is in Swarm mode, you create a

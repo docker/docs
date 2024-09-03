@@ -2,6 +2,7 @@
 description: How to integrate Docker Scout with GitHub Actions
 keywords: supply chain, security, ci, continuous integration, github actions
 title: Integrate Docker Scout with GitHub Actions
+linkTitle: GitHub Actions
 ---
 
 The following example shows how to set up a Docker Scout workflow with GitHub

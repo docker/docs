@@ -2,6 +2,7 @@
 description: Integrate Amazon Elastic Container Registry with Docker Scout
 keywords: docker scout, ecr, integration, image analysis, security, cves
 title: Integrate Docker Scout with Amazon ECR
+linkTitle: Amazon ECR
 ---
 
 Integrating Docker Scout with Amazon Elastic Container Registry (ECR) lets you

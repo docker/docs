@@ -1,7 +1,9 @@
 ---
+title: Overview of Docker Extensions
+linkTitle: Docker Extensions
+weight: 100
 description: Extensions
 keywords: Docker Extensions, Docker Desktop, Linux, Mac, Windows
-title: Overview of Docker Extensions
 aliases:
  - /desktop/extensions/
 ---

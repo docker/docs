@@ -1,8 +1,9 @@
 ---
+title: Create your organization
+weight: 10
 description: Learn how to create an organization.
 keywords: Docker, docker, registry, teams, organizations, plans, Dockerfile, Docker
   Hub, docs, documentation
-title: Create your organization
 aliases:
 - /docker-hub/orgs/
 ---

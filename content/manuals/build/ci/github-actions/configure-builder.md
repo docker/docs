@@ -1,5 +1,6 @@
 ---
 title: Configuring your GitHub Actions builder
+linkTitle: BuildKit configuration
 description: Configuring BuildKit instances for building in CI with GitHub Actions
 keywords: ci, github actions, gha, buildkit, buildx
 ---

@@ -1,5 +1,6 @@
 ---
 title: Dockerfile overview
+weight: 20
 description: Learn about Dockerfiles and how to use them with Docker Images to build and package your software
 keywords: build, buildx, buildkit, getting started, dockerfile
 aliases:

@@ -2,6 +2,7 @@
 description: How to integrate Docker Scout with Jenkins
 keywords: supply chain, security, ci, continuous integration, jenkins
 title: Integrate Docker Scout with Jenkins
+linkTitle: Jenkins
 ---
 
 You can add the following stage and steps definition to a `Jenkinsfile` to run

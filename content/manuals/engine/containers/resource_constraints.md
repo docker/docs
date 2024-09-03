@@ -1,5 +1,6 @@
 ---
-title: Runtime options with Memory, CPUs, and GPUs
+title: Resource constraints
+weight: 30
 description: Specify the runtime options for a container
 keywords: docker, daemon, configuration, runtime
 aliases:

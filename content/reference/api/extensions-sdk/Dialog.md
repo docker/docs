@@ -1,12 +1,11 @@
 ---
+title: "Interface: Dialog"
 description: Docker extension API reference
 keywords: Docker, extensions, sdk, API, reference
 aliases:
  - /desktop/extensions-sdk/dev/api/reference/interfaces/Dialog/
  - /extensions/extensions-sdk/dev/api/reference/interfaces/Dialog/
 ---
-
-# Interface: Dialog
 
 Allows opening native dialog boxes.
 

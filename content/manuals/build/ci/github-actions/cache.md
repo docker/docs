@@ -1,5 +1,6 @@
 ---
 title: Cache management with GitHub Actions
+linkTitle: Cache management
 keywords: ci, github actions, gha, buildkit, buildx, cache
 ---
 

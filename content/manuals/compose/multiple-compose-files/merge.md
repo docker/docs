@@ -2,6 +2,7 @@
 description: How merging Compose files works
 keywords: compose, docker, merge, compose file
 title: Merge Compose files
+linkTitle: Merge
 ---
 
 Docker Compose lets you merge and override a set of Compose files together to create a composite Compose file.

@@ -1,7 +1,9 @@
 ---
+title: Building best practices
+linkTitle: Best practices
+weight: 60
 description: Hints, tips and guidelines for writing clean, reliable Dockerfiles
 keywords: base images, dockerfile, best practices, hub, official image
-title: Building best practices
 tags: [Best practices]
 aliases:
   - /articles/dockerfile_best-practices/

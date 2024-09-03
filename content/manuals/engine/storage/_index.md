@@ -1,6 +1,7 @@
 ---
 description: Overview of persisting data in containers
-title: Manage data in Docker
+title: Storage
+weight: 20
 keywords: storage, persistence, data persistence, volumes, mounts, bind mounts, tmpfs
 aliases:
   - /engine/admin/volumes/

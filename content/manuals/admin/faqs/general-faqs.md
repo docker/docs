@@ -1,5 +1,7 @@
 ---
 title: General FAQs for Docker accounts
+linkTitle: General
+weight: 10
 description: Frequently asked Docker account and administration questions
 keywords: onboarding, docker, teams, orgs, user accounts, organization accounts
 tags: [FAQ]

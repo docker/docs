@@ -3,6 +3,7 @@ description: How to use Docker Compose's extends keyword to share configuration 
   files and projects
 keywords: fig, composition, compose, docker, orchestration, documentation, docs
 title: Extend your Compose file
+linkTitle: Extend
 aliases:
 - /compose/extends/
 ---

@@ -1,5 +1,7 @@
 ---
 title: Bake targets
+linkTitle: Targets
+weight: 20
 description: Learn how to define and use targets in Bake
 keywords: bake, target, targets, buildx, docker, buildkit, default
 ---

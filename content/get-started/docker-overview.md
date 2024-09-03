@@ -5,6 +5,7 @@ keywords: what is a docker, docker daemon, why use docker, docker architecture, 
   to use docker for, docker client, what is docker for, why docker, uses for docker,
   what is docker container used for, what are docker containers used for
 title: What is Docker?
+weight: 20
 aliases:
  - /introduction/understanding-docker/
  - /engine/userguide/basics/

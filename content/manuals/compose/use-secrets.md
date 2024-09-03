@@ -1,5 +1,7 @@
 ---
 title: How to use secrets in Docker Compose
+linkTitle: Secrets in Compose
+weight: 100
 description: How to use secrets in Compose and their benefits
 keywords: secrets, compose, security, environment variables
 tags: [Secrets]

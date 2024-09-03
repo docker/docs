@@ -1,5 +1,6 @@
 ---
 title: Integrate Docker Scout with Sysdig
+linkTitle: Sysdig
 description: scout, sysdig, integration, image analysis, environments, supply chain
 keywords: Integrate your runtime environments with Docker Scout using Sysdig
 ---

@@ -3,6 +3,7 @@ description: Learn how to manage repositories on Docker Hub
 keywords: Docker, docker, trusted, registry, accounts, plans, Dockerfile, Docker Hub,
   webhooks, docs, documentation, manage, repos
 title: Manage repositories
+weight: 20
 aliases:
 - /engine/tutorials/dockerrepos/
 ---

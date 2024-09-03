@@ -1,5 +1,6 @@
 ---
 title: Export to Docker with GitHub Actions
+linkTitle: Export to Docker
 description: Load the build results to the image store with GitHub Actions
 keywords: ci, github actions, gha, buildkit, buildx, docker, export, load
 ---

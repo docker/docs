@@ -1,6 +1,7 @@
 ---
 description: Using tmpfs mounts
 title: tmpfs mounts
+weight: 30
 keywords: storage, persistence, data persistence, tmpfs
 aliases:
 - /engine/admin/volumes/tmpfs/

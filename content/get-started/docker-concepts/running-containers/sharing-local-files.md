@@ -1,5 +1,6 @@
 ---
 title: Sharing local files with containers
+weight: 4
 keywords: concepts, images, container, docker desktop
 description: This concept page will teach you the various storage options available in Docker and their common usage.
 aliases: 

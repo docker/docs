@@ -1,5 +1,6 @@
 ---
 title: Building images
+weight: 20
 keywords: build images, Dockerfile, layers, tag, push, cache, multi-stage
 description: |
   Learn how to build Docker images from a Dockerfile. You'll understand the

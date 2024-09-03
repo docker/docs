@@ -1,5 +1,7 @@
 ---
 title: Exporters overview
+linkTitle: Exporters
+weight: 90
 description: Build exporters define the output format of your build result
 keywords: build, buildx, buildkit, exporter, image, registry, local, tar, oci, docker, cacheonly
 aliases:

@@ -1,5 +1,7 @@
 ---
 title: Install Docker Engine
+linkTitle: Install
+weight: 10
 description: Learn how to choose the best method for you to install Docker Engine. This client-server
   application is available on Linux, Mac, Windows, and as a static binary.
 keywords: install engine, docker engine install, install docker engine, docker engine

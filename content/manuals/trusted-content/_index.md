@@ -1,5 +1,6 @@
 ---
 title: Trusted content
+weight: 200
 description: Optimize your development workflow with secure base images from our selection of trusted content
 keywords: doi, dvp, dsos, open source, security, base images
 grid:

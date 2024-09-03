@@ -1,5 +1,7 @@
 ---
 title: Multi container apps
+weight: 70
+linkTitle: "Part 6: Multi-container apps"
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers,
   docker desktop
 description: Using more than one container in your application

@@ -2,6 +2,7 @@
 description: Remove the service from the swarm
 keywords: tutorial, cluster management, swarm, service, get started
 title: Delete the service running on the swarm
+weight: 60
 notoc: true
 ---
 

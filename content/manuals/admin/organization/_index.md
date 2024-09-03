@@ -1,7 +1,9 @@
 ---
+title: Organization administration overview
+linkTitle: Organization administration
+weight: 10
 description: Learn about managing organizations in Docker including how they relate to teams, how to onboard, and more
 keywords: organizations, admin, overview
-title: Organization administration overview
 grid:
 - title: Onboard your organization
   description: Learn how to onboard and secure your organization.

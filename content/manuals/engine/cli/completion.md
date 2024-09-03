@@ -1,5 +1,6 @@
 ---
-title: CLI completion
+title: Completion
+weight: 10
 description: Set up your shell to get autocomplete for Docker commands and flags
 keywords: cli, shell, fish, bash, zsh, completion, options
 aliases:

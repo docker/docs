@@ -1,5 +1,6 @@
 ---
-title: Enable IPv6 support
+title: Use IPv6 networking
+weight: 20
 description: How to enable IPv6 support in the Docker daemon
 keywords: daemon, network, networking, ipv6
 aliases:

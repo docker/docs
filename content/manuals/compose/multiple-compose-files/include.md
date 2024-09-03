@@ -2,6 +2,7 @@
 description: How to use Docker Compose's include top-level element
 keywords: compose, docker, include, compose file
 title: Include
+linkTitle: Include
 ---
 
 {{< introduced compose 2.20.3 "../release-notes.md#2203" >}}

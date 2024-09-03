@@ -1,5 +1,6 @@
 ---
 title: What is an image?
+weight: 20
 keywords: concepts, build, images, container, docker desktop
 description: What is an image
 aliases: 

@@ -1,5 +1,7 @@
 ---
 title: Use a proxy server with the Docker CLI
+linkTitle: Proxy configuration
+weight: 20
 description: How to configure the Docker client CLI to use a proxy server
 keywords: network, networking, proxy, client
 aliases:

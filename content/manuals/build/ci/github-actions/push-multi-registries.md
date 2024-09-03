@@ -1,5 +1,6 @@
 ---
 title: Push to multiple registries with GitHub Actions
+linkTitle: Push to multiple registries
 description: Push to multiple registries with GitHub Actions
 keywords: ci, github actions, gha, buildkit, buildx, registry
 ---

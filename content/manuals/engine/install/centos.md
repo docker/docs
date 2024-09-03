@@ -3,6 +3,8 @@ description: Learn how to install Docker Engine on CentOS. These instructions co
   the different installation methods, how to uninstall, and next steps.
 keywords: requirements, yum, installation, centos, install, uninstall, docker engine, upgrade, update
 title: Install Docker Engine on CentOS
+linkTitle: CentOS
+weight: 60
 toc_max: 4
 aliases:
 - /ee/docker-ee/centos/

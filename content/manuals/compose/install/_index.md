@@ -5,6 +5,8 @@ keywords: install docker compose, docker compose install, install docker compose
   installing docker compose, docker compose download, docker compose not found, docker
   compose windows, how to install docker compose
 title: Overview of installing Docker Compose
+linkTitle: Install
+weight: 20
 toc_max: 3
 aliases:
 - /compose/compose-desktop/

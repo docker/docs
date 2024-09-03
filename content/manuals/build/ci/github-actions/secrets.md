@@ -1,5 +1,6 @@
 ---
 title: Using secrets with GitHub Actions
+linkTitle: Build secrets
 description: Example using secret mounts with GitHub Actions
 keywords: ci, github actions, gha, buildkit, buildx, secret
 tags: [Secrets]

@@ -1,5 +1,7 @@
 ---
 title: Build variables
+linkTitle: Variables
+weight: 20
 description: Using build arguments and environment variables to configure builds
 keywords: build, args, variables, parameters, env, environment variables, config
 aliases:

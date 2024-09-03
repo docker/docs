@@ -2,6 +2,7 @@
 description: Learn how to run more than one process in a single container
 keywords: docker, supervisor, process management
 title: Run multiple processes in a container
+weight: 20
 aliases:
   - /articles/using_supervisord/
   - /engine/admin/multi-service_container/

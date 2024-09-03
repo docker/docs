@@ -1,5 +1,7 @@
 ---
 title: Customize Compose Bridge 
+linkTitle: Customize
+weight: 20
 description: Learn about the Compose Bridge templates syntax
 keywords: compose, bridge, templates
 ---

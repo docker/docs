@@ -1,5 +1,6 @@
 ---
 title: Add SBOM and provenance attestations with GitHub Actions
+linkTitle: Attestations
 description: Add SBOM and provenance attestations to your images with GitHub Actions
 keywords: ci, github actions, gha, buildkit, buildx, attestations, sbom, provenance, slsa
 ---

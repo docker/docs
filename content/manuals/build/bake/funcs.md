@@ -1,5 +1,6 @@
 ---
-title: HCL functions
+title: Functions
+weight: 60
 description: Learn about built-in and user-defined HCL functions with Bake
 keywords: build, buildx, bake, buildkit, hcl, functions, user-defined, built-in, custom, gocty
 aliases:

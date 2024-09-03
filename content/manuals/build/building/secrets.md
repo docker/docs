@@ -1,5 +1,7 @@
 ---
 title: Build secrets
+linkTitle: Secrets
+weight: 30
 description: Manage credentials and other secrets securely
 keywords: build, secrets, credentials, passwords, tokens, ssh, git, auth, http
 tags: [Secrets]

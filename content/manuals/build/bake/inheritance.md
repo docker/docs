@@ -1,5 +1,7 @@
 ---
 title: Inheritance in Bake
+linkTitle: Inheritance
+weight: 30
 description: Learn how to inherit attributes from other targets in Bake
 keywords: buildx, buildkit, bake, inheritance, targets, attributes
 ---

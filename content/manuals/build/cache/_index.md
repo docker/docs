@@ -1,5 +1,7 @@
 ---
 title: Docker build cache
+linkTitle: Cache
+weight: 60
 description: Improve your build speed with effective use of the build cache
 keywords: build, buildx, buildkit, dockerfile, image layers, build instructions, build context
 aliases:

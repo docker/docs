@@ -1,12 +1,11 @@
 ---
+title: "Interface: SpawnOptions"
 description: Docker extension API reference
 keywords: Docker, extensions, sdk, API, reference
 aliases:
  - /desktop/extensions-sdk/dev/api/reference/interfaces/SpawnOptions/
  - /extensions/extensions-sdk/dev/api/reference/interfaces/SpawnOptions/
 ---
-
-# Interface: SpawnOptions
 
 **`Since`**
 

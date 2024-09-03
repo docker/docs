@@ -1,7 +1,7 @@
 ---
 description: Learn how to optimize your use of VFS driver.
 keywords: container, storage, driver, vfs
-title: Use the VFS storage driver
+title: VFS storage driver
 aliases:
   - /storage/storagedriver/vfs-driver/
 ---

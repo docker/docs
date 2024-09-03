@@ -5,6 +5,8 @@ keywords: docker for windows, docker windows, docker desktop for windows, docker
   windows, install docker windows, install docker on windows, docker windows 10, docker
   run on windows, installing docker for windows, windows containers, wsl, hyper-v
 title: Install Docker Desktop on Windows
+linkTitle: Windows
+weight: 20
 aliases:
 - /desktop/windows/install/
 - /docker-ee-for-windows/install/

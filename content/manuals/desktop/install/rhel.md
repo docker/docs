@@ -4,6 +4,8 @@ keywords: red hat, red hat enterprise linux, rhel, rpm,
   update install, uninstall, upgrade, update, linux,
   desktop, docker desktop, docker desktop for linux, dd4l
 title: Install Docker Desktop on RHEL
+linkTitle: RHEL
+weight: 90
 toc_max: 4
 download-url-base: https://download.docker.com/linux/rhel
 ---

@@ -1,5 +1,6 @@
 ---
 title: Set, use, and manage variables in a Compose file with interpolation
+linkTitle: Interpolation
 description: How to set, use, and manage variables in your Compose file with interpolation
 keywords: compose, orchestration, environment, variables, interpolation
 aliases:

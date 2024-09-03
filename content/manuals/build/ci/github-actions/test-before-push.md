@@ -1,5 +1,6 @@
 ---
 title: Test before push with GitHub Actions
+linkTitle: Test before push
 description: Here's how you can validate an image, before pushing it to a registry
 keywords: ci, github actions, gha, buildkit, buildx, test
 ---

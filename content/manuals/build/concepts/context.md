@@ -1,5 +1,6 @@
 ---
 title: Build context
+weight: 30
 description: Learn how to use the build context to access files from your Dockerfile
 keywords: build, buildx, buildkit, context, git, tarball, stdin
 aliases:

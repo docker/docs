@@ -1,7 +1,9 @@
 ---
+title: Docker subscription overview
+linkTitle: Subscription
+weight: 200
 description: Learn about subscription features and how to manage your subscription
 keywords: Docker, pricing, billing, Pro, Team, business, subscription, tier, plan
-title: Docker subscription overview
 grid_subscriptions:
 - title: Docker Core subscriptions and features
   description: Explore what you can do with your Docker subscription.

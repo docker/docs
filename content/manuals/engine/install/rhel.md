@@ -4,6 +4,8 @@ description: Learn how to install Docker Engine on RHEL. These instructions cove
 keywords: requirements, apt, installation, rhel, rpm, install, install docker engine, uninstall, upgrade,
   update
 title: Install Docker Engine on RHEL
+linkTitle: RHEL
+weight: 30
 toc_max: 4
 aliases:
 - /ee/docker-ee/rhel/

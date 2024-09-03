@@ -1,5 +1,7 @@
 ---
 title: Building with Docker Build Cloud
+linkTitle: Usage
+weight: 20
 description: Invoke your cloud builds with the Buildx CLI client
 keywords: build, cloud build, usage, cli, buildx, client
 aliases:

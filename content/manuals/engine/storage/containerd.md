@@ -1,5 +1,7 @@
 ---
 title: containerd image store with Docker Engine
+linkTitle: containerd image store
+weight: 50
 keywords: containerd, snapshotters, image store, docker engine
 description: Learn how to enable the containerd image store on Docker Engine
 aliases:

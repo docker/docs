@@ -1,5 +1,6 @@
 ---
 title: Start the daemon
+weight: 10
 description: Starting the Docker daemon manually
 keywords: docker, daemon, configuration, troubleshooting
 aliases:

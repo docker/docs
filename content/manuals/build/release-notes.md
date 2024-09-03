@@ -1,5 +1,6 @@
 ---
 title: Build release notes
+weight: 120
 description: Learn about the new features, bug fixes, and breaking changes for the newest Buildx release
 keywords: build, buildx, buildkit, release notes
 tags: [Release notes]

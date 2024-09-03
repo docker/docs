@@ -1,5 +1,7 @@
 ---
 title: Optimize for building in the cloud
+linkTitle: Optimization
+weight: 40
 description: Building remotely is different from building locally. Here's how to optimize for remote builders.
 keywords: build, cloud build, optimize, remote, local, cloud
 aliases:

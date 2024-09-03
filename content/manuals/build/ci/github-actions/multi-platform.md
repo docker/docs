@@ -1,5 +1,6 @@
 ---
 title: Multi-platform image with GitHub Actions
+linkTitle: Multi-platform image
 description: Build for multiple architectures with GitHub Actions using QEMU emulation or multiple native builders
 keywords: ci, github actions, gha, buildkit, buildx, multi-platform
 ---

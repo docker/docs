@@ -1,5 +1,6 @@
 ---
 build:
   render: never
-title: Networking tutorials
+title: Tutorials
+weight: 30
 ---

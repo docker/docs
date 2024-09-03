@@ -1,5 +1,7 @@
 ---
 title: Using profiles with Compose
+linkTitle: Use service profiles
+weight: 70
 desription: How to use profiles with Docker Compose
 keywords: cli, compose, profile, profiles reference
 ---

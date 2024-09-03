@@ -1,5 +1,7 @@
 ---
 title: Share the application
+weight: 40
+linkTitle: "Part 3: Share the application"
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers,
   docker desktop, docker hub, sharing
 description: Sharing your image you built for your example application so you can

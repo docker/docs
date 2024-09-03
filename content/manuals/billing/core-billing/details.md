@@ -1,5 +1,6 @@
 ---
 title: Update the billing information
+weight: 30
 description: Learn how to update your billing information in Docker Hub
 keywords: payments, billing, subscription, invoices
 aliases:

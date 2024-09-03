@@ -1,7 +1,8 @@
 ---
 description: Run the Docker daemon as a non-root user (Rootless mode)
 keywords: security, namespaces, rootless
-title: Run the Docker daemon as a non-root user (Rootless mode)
+title: Rootless mode
+weight: 10
 ---
 
 Rootless mode allows running the Docker daemon and containers as a non-root

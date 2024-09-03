@@ -1,5 +1,6 @@
 ---
 title: Specify a project name
+weight: 50
 description: Understand the different ways you can set a project name in Compose and what the precedence is.
 keywords: name, compose, project, -p flag, name top-level element
 ---

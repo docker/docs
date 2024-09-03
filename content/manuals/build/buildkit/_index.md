@@ -1,5 +1,6 @@
 ---
 title: BuildKit
+weight: 100
 description: Introduction and overview of BuildKit
 keywords: build, buildkit
 ---

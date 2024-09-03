@@ -1,5 +1,6 @@
 ---
 title: Named contexts with GitHub Actions
+linkTitle: Named contexts
 description: Use additional contexts in multi-stage builds with GitHub Actions
 keywords: ci, github actions, gha, buildkit, buildx, context
 ---

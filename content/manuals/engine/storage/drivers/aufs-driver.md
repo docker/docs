@@ -1,7 +1,7 @@
 ---
 description: Learn how to optimize your use of AUFS driver.
 keywords: 'container, storage, driver, AUFS '
-title: Use the AUFS storage driver
+title: AUFS storage driver
 sitemap: false
 aliases:
   - /storage/storagedriver/aufs-driver/

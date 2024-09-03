@@ -1,5 +1,6 @@
 ---
 title: Get started with Docker Core
+weight: 10
 description: Learn how to start your Docker Core subscription.
 keywords: payments, billing, subscription, invoices, docker core, subscribe
 ---

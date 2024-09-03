@@ -1,5 +1,7 @@
 ---
 title: Install Docker Scout
+linkTitle: Install
+weight: 10
 description: Installation instructions for the Docker Scout CLI plugin
 keywords: scout, cli, install, download
 ---

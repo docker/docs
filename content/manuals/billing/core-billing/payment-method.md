@@ -1,5 +1,6 @@
 ---
 title: Add or update a payment method
+weight: 20
 description: Learn how to add or update a payment method in Docker Hub
 keywords: payments, billing, subscription, supported payment methods, failed payments, coupons
 billing:

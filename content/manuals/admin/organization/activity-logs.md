@@ -1,7 +1,8 @@
 ---
+title: Activity logs
+weight: 50
 description: Learn about activity logs.
 keywords: team, organization, activity, log, audit, activities
-title: Activity logs
 aliases:
 - /docker-hub/audit-log/
 ---

@@ -5,6 +5,8 @@ keywords: docker for mac, install docker macos, docker mac, docker mac install, 
   install macos, install docker on mac, install docker macbook, docker desktop for
   mac, how to install docker on mac, setup docker on mac
 title: Install Docker Desktop on Mac
+linkTitle: Mac
+weight: 10
 aliases:
 - /desktop/mac/install/
 - /docker-for-mac/install/

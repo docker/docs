@@ -1,5 +1,6 @@
 ---
 title: Environment variables precedence in Docker Compose
+linkTitle: Environment variables precedence
 description: Scenario overview illustrating how environment variables are resolved
   in Compose
 keywords: compose, environment, env file

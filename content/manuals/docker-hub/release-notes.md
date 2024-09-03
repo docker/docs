@@ -1,5 +1,7 @@
 ---
 title: Docker Hub release notes
+linkTitle: Release notes
+weight: 999
 description: Learn about the new features, bug fixes, and breaking changes for Docker
   Hub
 keywords: docker hub, whats new, release notes

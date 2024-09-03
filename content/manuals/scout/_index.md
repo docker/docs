@@ -1,5 +1,6 @@
 ---
 title: Docker Scout
+weight: 100
 keywords: scout, supply chain, vulnerabilities, packages, cves, scan, analysis, analyze
 description:
   Get an overview on Docker Scout to proactively enhance your software supply chain security

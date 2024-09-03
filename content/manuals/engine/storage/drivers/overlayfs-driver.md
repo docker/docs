@@ -1,7 +1,7 @@
 ---
 description: Learn how to optimize your use of OverlayFS driver.
 keywords: container, storage, driver, OverlayFS, overlay2, overlay
-title: Use the OverlayFS storage driver
+title: OverlayFS storage driver
 aliases:
   - /storage/storagedriver/overlayfs-driver/
 ---

@@ -1,5 +1,7 @@
 ---
 title: Variables in Bake
+linkTitle: Variables
+weight: 40
 description: 
 keywords: build, buildx, bake, buildkit, hcl, variables
 ---

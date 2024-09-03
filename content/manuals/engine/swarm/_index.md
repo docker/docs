@@ -1,7 +1,8 @@
 ---
 description: Docker Engine Swarm mode overview
 keywords: docker, container, cluster, swarm, docker engine
-title: Swarm mode overview
+title: Swarm mode
+weight: 80
 aliases:
 - /api/swarm-api/
 - /engine/userguide/networking/overlay-standalone-swarm/

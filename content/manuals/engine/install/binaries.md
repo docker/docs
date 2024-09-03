@@ -2,6 +2,8 @@
 description: Learn how to install Docker as a binary. These instructions are most suitable for testing purposes.
 keywords: binaries, installation, docker, documentation, linux, install docker engine
 title: Install Docker Engine from binaries
+linkTitle: Binaries
+weight: 80
 aliases:
 - /engine/installation/binaries/
 - /engine/installation/linux/docker-ce/binaries/

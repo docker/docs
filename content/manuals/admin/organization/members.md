@@ -1,7 +1,8 @@
 ---
+title: Manage organization members
+weight: 30
 description: Learn how to manage organization members in Docker Hub and Docker Admin Console.
 keywords: members, teams, organizations, invite members, manage team members
-title: Manage organization members
 aliases:
 - /docker-hub/members/
 ---

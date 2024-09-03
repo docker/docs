@@ -1,5 +1,6 @@
 ---
 title: Manage tags and labels with GitHub Actions
+linkTitle: Tags and labels
 description: Assign tags and labels to images automatically with GitHub Actions
 keywords: ci, github actions, gha, buildkit, buildx, tags, labels
 ---

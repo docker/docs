@@ -1,7 +1,8 @@
 ---
+title: Manage an account
+weight: 20
 description: Learn how to manage settings for your Docker account.
 keywords: accounts, docker ID, account settings, account management, docker home
-title: Manage your Docker account
 ---
 
 You can centrally manage the settings for your Docker account. Here you can also take administrative actions for your account and manage your account security.

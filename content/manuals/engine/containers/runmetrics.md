@@ -2,6 +2,7 @@
 description: Learn how to measure running containers, and about the different metrics
 keywords: docker, metrics, CPU, memory, disk, IO, run, runtime, stats
 title: Runtime metrics
+weight: 50
 aliases:
   - /articles/runmetrics/
   - /engine/articles/run_metrics/

@@ -6,6 +6,8 @@ keywords: docker compose example, docker compose tutorial, how to use docker com
   compose command example, run docker compose file, how to create a docker compose
   file, run a docker compose file
 title: Docker Compose Quickstart
+linkTitle: Quickstart
+weight: 40
 ---
 
 This tutorial aims to introduce fundamental concepts of Docker Compose by guiding you through the development of a basic Python web application. 

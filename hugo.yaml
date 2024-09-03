@@ -251,9 +251,10 @@ module:
 
     - path: github.com/moby/moby
       mounts:
-        - source: docs/api
-          target: content/reference/api/engine
-          includeFiles: "*.md"
+        - source: docs/api/v1.24.md
+          target: content/reference/api/engine/version/v1.24.md
+        - source: docs/api/version-history.md
+          target: content/reference/api/engine/version-history.md
         - source: docs/api
           target: static/reference/api/engine
           includeFiles: "*.yaml"

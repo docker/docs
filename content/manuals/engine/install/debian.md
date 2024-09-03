@@ -3,6 +3,8 @@ description: Learn how to install Docker Engine on Debian. These instructions co
   the different installation methods, how to uninstall, and next steps.
 keywords: requirements, apt, installation, debian, install, uninstall, install debian, docker engine, install docker engine, upgrade, update
 title: Install Docker Engine on Debian
+linkTitle: Debian
+weight: 20
 toc_max: 4
 aliases:
 - /engine/installation/debian/

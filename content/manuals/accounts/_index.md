@@ -1,7 +1,9 @@
 ---
+title: Docker account overview
+linkTitle: Docker accounts
+weight: 200
 description: Learn how to create and manage your Docker account.
 keywords: accounts, docker ID, account management, account settings, docker account, docker home
-title: Docker account overview
 grid:
 - title: Create a Docker ID
   description: Get started with Docker and create an account.

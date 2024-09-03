@@ -2,6 +2,7 @@
 description: Inspect the application
 keywords: tutorial, cluster management, swarm mode, get started
 title: Inspect a service on the swarm
+weight: 40
 notoc: true
 ---
 

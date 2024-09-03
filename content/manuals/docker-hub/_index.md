@@ -2,6 +2,8 @@
 description: Find a comprehensive overview of Docker Hub, including its features, administrative settings, how to get started quickly, and more
 keywords: Docker, docker, docker hub, hub, repositories, docker account
 title: Overview of Docker Hub
+linkTitle: Docker Hub
+weight: 100
 grid:
 - title: Quickstart
   description: Step-by-step instructions on getting started on Docker Hub.

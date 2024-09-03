@@ -1,5 +1,7 @@
 ---
 title: Billing and payments
+linkTitle: Billing
+weight: 200
 description: Discover information on billing and payment processes for Docker subscriptions.
 keywords: billing, invoice, payment, subscription
 grid_core:

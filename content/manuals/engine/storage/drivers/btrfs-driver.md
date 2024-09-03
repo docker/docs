@@ -1,7 +1,7 @@
 ---
 description: Learn how to optimize your use of Btrfs driver.
 keywords: container, storage, driver, Btrfs
-title: Use the BTRFS storage driver
+title: BTRFS storage driver
 aliases:
   - /storage/storagedriver/btrfs-driver/
 ---

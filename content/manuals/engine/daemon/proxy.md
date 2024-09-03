@@ -1,7 +1,8 @@
 ---
 description: Learn how to configure the Docker daemon to use an HTTP proxy
 keywords: dockerd, daemon, configuration, proxy, networking, http_proxy, https_proxy, no_proxy, systemd, environment variables
-title: Configure the daemon to use a proxy
+title: Daemon proxy configuration
+weight: 30
 aliases:
   - /articles/host_integration/
   - /articles/systemd/

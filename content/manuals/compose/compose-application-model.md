@@ -1,5 +1,6 @@
 ---
 title: How Compose works
+weight: 30
 description: Understand how Compose works and the Compose application model with an illustrative example 
 keywords: compose, docker compose, compose specification, compose model 
 aliases:

@@ -2,6 +2,7 @@
 description: Initialize the swarm
 keywords: tutorial, cluster management, swarm mode, get started, docker engine
 title: Create a swarm
+weight: 10
 notoc: true
 ---
 

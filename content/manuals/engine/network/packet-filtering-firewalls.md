@@ -1,5 +1,6 @@
 ---
 title: Packet filtering and firewalls
+weight: 10
 description: How Docker works with packet filtering, iptables, and firewalls
 keywords: network, iptables, firewall
 aliases:

@@ -1,5 +1,6 @@
 ---
 title: Integrate Docker Scout with SonarQube
+linkTitle: SonarQube
 description: Evaluate your images with the SonarQube quality gates defined in your projects
 keywords: scout, supply chain, integration, code quality
 ---

@@ -2,6 +2,7 @@
 description: Use File watch to automatically update running services as you work
 keywords: compose, file watch, experimental
 title: Use Compose Watch
+weight: 80
 ---
 
 {{< introduced compose 2.22.0 "release-notes.md#2220" >}}

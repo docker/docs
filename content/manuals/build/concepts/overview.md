@@ -1,5 +1,6 @@
 ---
 title: Docker Build Overview
+weight: 10
 description: Learn about Docker Build and its components.
 keywords: build, buildkit, buildx, architecture
 aliases:

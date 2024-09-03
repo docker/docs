@@ -2,6 +2,7 @@
 description: Drain nodes on the swarm
 keywords: tutorial, cluster management, swarm, service, drain, get started
 title: Drain a node on the swarm
+weight: 80
 notoc: true
 ---
 

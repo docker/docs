@@ -1,5 +1,6 @@
 ---
 title: Reproducible builds with GitHub Actions
+linkTitle: Reproducible builds
 description: How to create reproducible builds in GitHub Actions using the SOURCE_EPOCH environment variable
 keywords: build, buildx, github actions, ci, gha, reproducible builds, SOURCE_DATE_EPOCH
 ---

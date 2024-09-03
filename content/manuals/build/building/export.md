@@ -1,5 +1,6 @@
 ---
 title: Export binaries
+weight: 50
 description: Using Docker builds to create and export executable binaries
 keywords: build, buildkit, buildx, guide, tutorial, build arguments, arg
 aliases:

@@ -1,5 +1,6 @@
 ---
 title: Change your billing cycle
+weight: 50
 description: Learn to change your billing cycle for your Docker subscription
 keywords: billing, cycle, payments, subscription
 aliases:

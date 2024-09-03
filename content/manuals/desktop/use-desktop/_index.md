@@ -3,6 +3,7 @@ description: Learn how to use the Docker Dashboard within Docker Desktop, includ
 keywords: Docker Dashboard, manage, containers, gui, dashboard, images, user manual,
   whale menu
 title: Explore Docker Desktop
+weight: 30
 aliases:
 - /desktop/dashboard/
 ---

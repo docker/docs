@@ -1,5 +1,6 @@
 ---
 title: Docker Scout CLI release notes
+linkTitle: CLI release notes
 description: Learn about the latest features of the Docker Scout CLI plugin
 keywords: docker scout, release notes, changelog, cli, features, changes, delta, new, releases, github actions
 ---

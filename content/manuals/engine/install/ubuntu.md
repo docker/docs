@@ -5,6 +5,8 @@ keywords: docker install script, ubuntu docker server, ubuntu server docker, ins
   docker engine ubuntu, install docker on ubuntu server, ubuntu 22.04 docker-ce, install
   docker engine on ubuntu, ubuntu install docker ce, ubuntu install docker engine
 title: Install Docker Engine on Ubuntu
+linkTitle: Ubuntu
+weight: 10
 toc_max: 4
 aliases:
 - /ee/docker-ee/ubuntu/

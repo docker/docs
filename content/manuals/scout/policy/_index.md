@@ -1,5 +1,7 @@
 ---
 title: Get started with Policy Evaluation in Docker Scout
+linkTitle: Policy Evaluation
+weight: 70
 keywords: scout, supply chain, vulnerabilities, packages, cves, policy
 description: |
   Policies in Docker Scout let you define supply chain rules and thresholds

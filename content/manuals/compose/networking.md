@@ -2,6 +2,8 @@
 description: How Docker Compose sets up networking between containers
 keywords: documentation, docs, docker, compose, orchestration, containers, networking
 title: Networking in Compose
+linkTitle: Networking
+weight: 130
 ---
 
 {{< include "compose-eol.md" >}}

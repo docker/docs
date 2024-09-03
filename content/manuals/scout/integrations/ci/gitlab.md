@@ -1,7 +1,8 @@
 ---
 description: How to integrate Docker Scout with GitLab CI
 keywords: supply chain, security, ci, continuous integration, gitlab
-title: Integrate Docker Scout with GitLab CI
+title: Integrate Docker Scout with GitLab CI/CD
+linkTitle: GitLab CI/CD
 ---
 
 The following examples runs in GitLab CI in a repository containing a Docker

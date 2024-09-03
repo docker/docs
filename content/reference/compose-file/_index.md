@@ -4,7 +4,7 @@ description: Find the latest recommended version of the Docker Compose file form
 keywords: docker compose file, docker compose yml, docker compose reference, docker
   compose cmd, docker compose user, docker compose image, yaml spec, docker compose
   syntax, yaml specification, docker compose specification
-title: Overview
+title: Compose file reference
 toc_max: 4
 toc_min: 1
 grid:

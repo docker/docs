@@ -1,5 +1,6 @@
 ---
-title: Deactivating a user account
+title: Deactivate an account
+weight: 30
 description: Learn how to deactivate a Docker user account.
 keywords: Docker Hub, delete, deactivate, account, account management
 ---

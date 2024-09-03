@@ -4,6 +4,8 @@ description: Explore the Learning center and understand the benefits of signing 
 keywords: Docker Dashboard, manage, containers, gui, dashboard, images, user manual,
   learning center, guide, sign in
 title: Sign in to Docker Desktop
+linkTitle: Sign in
+weight: 20
 aliases:
 - /desktop/linux/
 - /desktop/linux/index/

@@ -1,5 +1,7 @@
 ---
 title: Deploy with Microsoft installer
+linkTitle: Use the MSI installer
+weight: 30
 description: If you're an IT admin, learn how to deploy Docker Desktop with Microsoft installer
 keywords: msi, docker desktop, windows, installation
 ---

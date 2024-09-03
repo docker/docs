@@ -4,6 +4,8 @@ description: Instructions for installing Docker Desktop Arch package. Mostly mea
 keywords: Arch Linux, install, uninstall, upgrade, update, linux, desktop, docker
   desktop, docker desktop for linux, dd4l
 title: Install Docker Desktop on Arch-based distributions
+linkTitle: Arch
+weight: 80
 aliases:
 - /desktop/linux/install/archlinux/
 ---

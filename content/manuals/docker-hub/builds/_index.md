@@ -2,6 +2,8 @@
 description: Set up Automated builds
 keywords: automated, build, images, Docker Hub
 title: Set up Automated Builds
+linkTitle: Automated builds
+weight: 60
 aliases:
 - /docker-hub/builds/automated-build/
 - /docker-hub/builds/classic/

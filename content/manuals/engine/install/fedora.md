@@ -4,6 +4,8 @@ description: Learn how to install Docker Engine on Fedora. These instructions co
 keywords: requirements, apt, installation, fedora, install fedora, install docker engine, rpm, install, uninstall, upgrade,
   update
 title: Install Docker Engine on Fedora
+linkTitle: Fedora
+weight: 40
 toc_max: 4
 aliases:
 - /engine/installation/fedora/

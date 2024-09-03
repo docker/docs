@@ -1,5 +1,7 @@
 ---
 title: Using Bake with additional contexts
+linkTitle: Contexts
+weight: 80
 description: |
   Additional contexts are useful when you want to pin image versions,
   or reference the output of other targets

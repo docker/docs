@@ -2,6 +2,8 @@
 description: Configuring the Docker daemon
 keywords: docker, daemon, configuration
 title: Docker daemon configuration overview
+linkTitle: Daemon
+weight: 60
 aliases:
   - /articles/chef/
   - /articles/configuring/

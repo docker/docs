@@ -1,5 +1,6 @@
 ---
 title: View billing history
+weight: 40
 description: Discover how to view your billing history in Docker Hub
 keywords: payments, billing, subscription, invoices, renewals, invoice management, billing administration
 aliases:

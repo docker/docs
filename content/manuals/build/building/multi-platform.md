@@ -1,5 +1,7 @@
 ---
 title: Multi-platform builds
+linkTitle: Multi-platform
+weight: 40
 description: Introduction to what multi-platform builds are and how to execute them using Docker Buildx.
 keywords: build, buildx, buildkit, multi-platform, cross-platform, cross-compilation, emulation, QEMU, ARM, x86, Windows, Linux, macOS
 aliases:

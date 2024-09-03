@@ -2,6 +2,7 @@
 description: CLI and log output formatting reference
 keywords: format, formatting, output, templates, log
 title: Format command and log output
+weight: 40
 aliases:
   - /engine/admin/formatting/
   - /config/formatting/

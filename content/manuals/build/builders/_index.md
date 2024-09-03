@@ -1,5 +1,6 @@
 ---
 title: Builders
+weight: 40
 keywords: build, buildx, builders, buildkit, drivers, backend
 description: Learn about builders and how to manage them
 ---

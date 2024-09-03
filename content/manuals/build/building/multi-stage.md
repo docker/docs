@@ -1,5 +1,7 @@
 ---
 title: Multi-stage builds
+linkTitle: Multi-stage
+weight: 10
 description: |
   Learn about multi-stage builds and how you can use
   them to improve your builds and get smaller images

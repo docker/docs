@@ -2,6 +2,7 @@
 description: How to start containers automatically
 keywords: containers, restart, policies, automation, administration
 title: Start containers automatically
+weight: 10
 aliases:
   - /engine/articles/host_integration/
   - /engine/admin/host_integration/

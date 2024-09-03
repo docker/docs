@@ -1,5 +1,7 @@
 ---
-title: Overview
+title: Environment variables in Compose
+linkTitle: Environment variables
+weight: 60
 description: Explainer on the ways to set, use and manage environment variables in
   Compose
 keywords: compose, orchestration, environment, env file

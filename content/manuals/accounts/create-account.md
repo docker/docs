@@ -1,8 +1,9 @@
 ---
+title: Create an account
+weight: 10
 description: Learn how to register for a Docker ID and sign in to your account
 keywords: accounts, docker ID, billing, paid plans, support, Hub, Store, Forums, knowledge
   base, beta access, email, activation, verification
-title: Create an account
 aliases:
 - /docker-hub/accounts/
 - /docker-id/

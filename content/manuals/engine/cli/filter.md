@@ -1,5 +1,6 @@
 ---
 title: Filter commands
+weight: 30
 description: |
   Use the filtering function in the CLI to selectively include resources
   that match the pattern you define.

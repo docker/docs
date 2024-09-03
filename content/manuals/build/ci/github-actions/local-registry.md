@@ -1,5 +1,6 @@
 ---
 title: Local registry with GitHub Actions
+linkTitle: Local registry
 description: Create and use a local OCI registry with GitHub Actions
 keywords: ci, github actions, gha, buildkit, buildx, registry
 ---

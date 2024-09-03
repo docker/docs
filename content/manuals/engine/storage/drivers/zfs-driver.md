@@ -1,7 +1,7 @@
 ---
 description: Learn how to optimize your use of ZFS driver.
 keywords: 'container, storage, driver, ZFS '
-title: Use the ZFS storage driver
+title: ZFS storage driver
 aliases:
   - /storage/storagedriver/zfs-driver/
 ---

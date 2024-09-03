@@ -1,7 +1,9 @@
 ---
 description: Review of the Docker Daemon attack surface
 keywords: Docker, Docker documentation, security
-title: Docker security
+title: Docker Engine security
+linkTitle: Security
+weight: 80
 aliases:
 - /articles/security/
 - /engine/articles/security/

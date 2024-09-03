@@ -1,5 +1,6 @@
 ---
-title: Buildx Bake
+title: Bake
+weight: 50
 keywords: build, buildx, bake, buildkit, hcl, json, compose
 aliases:
   - /build/customize/bake/

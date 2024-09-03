@@ -1,7 +1,9 @@
 ---
+title: Continuous integration with Docker
+linkTitle: CI
+weight: 70
 description: Using Docker for continuous integration
 keywords: ci, build
-title: Continuous integration with Docker
 aliases:
   - /ci-cd/best-practices/
 ---

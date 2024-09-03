@@ -2,6 +2,7 @@
 description: Learn how to create, manage, and use volumes instead of bind mounts for
   persisting data generated and used by Docker.
 title: Volumes
+weight: 10
 keywords: docker compose volumes, docker volumes, docker compose volume, docker volume
   mount, docker mount volume, docker volume create, docker volume location
 aliases:

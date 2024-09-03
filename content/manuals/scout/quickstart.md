@@ -1,5 +1,7 @@
 ---
 title: Docker Scout quickstart
+linkTitle: Quickstart
+weight: 20
 keywords: scout, supply chain, vulnerabilities, packages, cves, scan, analysis, analyze
 description: Learn how to get started with Docker Scout to analyze images and fix vulnerabilities
 ---

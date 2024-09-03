@@ -1,6 +1,7 @@
 ---
 description: Using bind mounts
 title: Bind mounts
+weight: 20
 keywords: storage, persistence, data persistence, mounts, bind mounts
 aliases:
 - /engine/admin/volumes/bind-mounts/

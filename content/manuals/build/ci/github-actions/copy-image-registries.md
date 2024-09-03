@@ -1,5 +1,6 @@
 ---
 title: Copy image between registries with GitHub Actions
+linkTitle: Copy image between registries
 description: Build multi-platform images and copy them between registries with GitHub Actions
 keywords: ci, github actions, gha, buildkit, buildx, registry
 ---

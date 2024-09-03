@@ -2,6 +2,8 @@
 description: Learn about usage and rate limits for Docker Hub.
 keywords: Docker Hub, pulls, download, limit, usage
 title: Docker Hub usage and rate limits
+linkTitle: Usage and rate limits
+weight: 30
 ---
 
 Understanding your Docker Hub usage and rate limits helps you manage your and

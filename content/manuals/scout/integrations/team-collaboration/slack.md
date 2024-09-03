@@ -1,5 +1,6 @@
 ---
 title: Integrate Docker Scout with Slack
+linkTitle: Slack
 description: |
   Integrate Docker Scout with Slack to receive real-time updates
   about vulnerabilities and policy compliance in Slack channels

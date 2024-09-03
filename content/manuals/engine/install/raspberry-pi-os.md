@@ -4,6 +4,8 @@ description: Learn how to install Docker Engine on a 32-bit Raspberry Pi OS syst
 keywords: requirements, apt, installation, install docker engine, Raspberry Pi OS, install, uninstall, upgrade,
   update
 title: Install Docker Engine on Raspberry Pi OS (32-bit)
+linkTitle: Raspberry Pi OS (32-bit)
+weight: 50
 toc_max: 4
 aliases:
 - /engine/installation/linux/raspbian/

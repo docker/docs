@@ -2,6 +2,7 @@
 description: Deploy a service to the swarm
 keywords: tutorial, cluster management, swarm mode, get started
 title: Deploy a service to the swarm
+weight: 30
 notoc: true
 ---
 

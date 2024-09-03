@@ -2,7 +2,8 @@
 description: General overview for the different ways you can work with multiple compose
   files in Docker Compose
 keywords: compose, compose file, merge, extends, include, docker compose, -f flag
-title: Overview
+linkTitle: Working with multiple Compose files
+weight: 110
 ---
 
 This section contains information on the ways you can work with multiple Compose files. 

@@ -1,5 +1,6 @@
 ---
 title: Add image annotations with GitHub Actions
+linkTitle: Annotations
 description: Add OCI annotations to image components using GitHub Actions
 keywords: ci, github actions, gha, buildkit, buildx, annotations, oci
 ---

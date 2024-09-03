@@ -1,5 +1,7 @@
 ---
 title: Introduction to Bake
+linkTitle: Introduction
+weight: 10
 description: Get started with using Bake to build your project
 keywords: bake, quickstart, build, project, introduction, getting started
 ---

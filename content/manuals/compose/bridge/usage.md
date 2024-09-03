@@ -1,5 +1,7 @@
 ---
 title: Use the default Compose Bridge transformation
+linkTitle: Usage
+weight: 10
 description: Learn about and use the Compose Bridge default transformation
 keywords: compose, bridge, kubernetes
 ---

@@ -1,5 +1,7 @@
 ---
 title: Use containers for generative AI development
+linkTitle: Develop your app
+weight: 20
 keywords: python, local, development, generative ai, genai, llm, neo4j, ollama, langchain, openai
 description: Learn how to develop your generative AI (GenAI) application locally.
 ---

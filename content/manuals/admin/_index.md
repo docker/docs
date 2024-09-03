@@ -1,7 +1,9 @@
 ---
+title: Administration overview
+linkTitle: Administration
+weight: 200
 description: Discover manuals on administration for accounts, organizations, and companies.
 keywords: admin, administration, company, organization, Admin Console, user accounts, account management
-title: Administration overview
 grid:
 - title: Company administration
   description: Explore how to manage a company.

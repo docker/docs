@@ -3,6 +3,8 @@ description: Instructions for installing Docker Desktop on Debian
 keywords: debian, install, uninstall, upgrade, update, linux, desktop, docker desktop,
   docker desktop for linux, dd4l
 title: Install Docker Desktop on Debian
+linkTitle: Debian
+weight: 60
 toc_max: 4
 aliases:
 - /desktop/linux/install/debian/

@@ -5,6 +5,8 @@ keywords: run docker without sudo, docker running as root, docker post install, 
   post installation, run docker as non root, docker non root user, how to run docker
   in linux, how to run docker linux, how to start docker in linux, run docker on linux
 title: Linux post-installation steps for Docker Engine
+linkTitle: Post-installation steps
+weight: 90
 aliases:
 - /engine/installation/linux/docker-ee/linux-postinstall/
 - /engine/installation/linux/linux-postinstall/

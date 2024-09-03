@@ -1,5 +1,6 @@
 ---
 title: Update Docker Hub description with GitHub Actions
+linkTitle: Update Docker Hub description
 description: How to update the repository README in Docker Hub using with GitHub Actions
 keywords: ci, github actions, gha, buildkit, buildx, docker hub
 ---

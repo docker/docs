@@ -1,5 +1,6 @@
 ---
 title: Docker Scout release notes
+linkTitle: Platform release notes
 description: Learn about the latest features of Docker Scout
 keywords: docker scout, release notes, changelog, features, changes, delta, new, releases
 aliases:

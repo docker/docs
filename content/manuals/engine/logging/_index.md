@@ -2,6 +2,8 @@
 description: Learn how to write to, view, and configure a container's logs
 keywords: docker, logging
 title: View container logs
+linkTitle: Logs and metrics
+weight: 70
 aliases:
   - /engine/admin/logging/
   - /engine/admin/logging/view_container_logs/

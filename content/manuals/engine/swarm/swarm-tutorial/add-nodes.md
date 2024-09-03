@@ -2,6 +2,7 @@
 description: Add nodes to the swarm
 keywords: tutorial, cluster management, swarm, get started
 title: Add nodes to the swarm
+weight: 20
 notoc: true
 ---
 

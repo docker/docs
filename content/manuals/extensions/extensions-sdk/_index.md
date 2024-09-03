@@ -1,5 +1,6 @@
 ---
 title: Overview of the Extensions SDK
+linkTitle: Extensions SDK
 description: Overall index for Docker Extensions SDK documentation
 keywords: Docker, Extensions, sdk
 aliases:

@@ -1,5 +1,7 @@
 ---
 title: Containerize a generative AI application
+linkTitle: Containerize your app
+weight: 10
 keywords: python, generative ai, genai, llm, neo4j, ollama, containerize, intitialize, langchain, openai
 description: Learn how to containerize a generative AI (GenAI) application.
 ---

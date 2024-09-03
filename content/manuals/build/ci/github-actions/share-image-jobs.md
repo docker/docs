@@ -1,5 +1,6 @@
 ---
 title: Share built image between jobs with GitHub Actions
+linkTitle: Share image between jobs
 description: Share an image between runners without pushing to a registry
 keywords: ci, github actions, gha, buildkit, buildx
 ---

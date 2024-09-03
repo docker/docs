@@ -1,5 +1,7 @@
 ---
 title: Docker Build Cloud setup
+linkTitle: Setup
+weight: 10
 description: How to get started with Docker Build Cloud
 keywords: build, cloud build
 aliases:

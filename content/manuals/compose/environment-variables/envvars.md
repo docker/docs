@@ -2,6 +2,7 @@
 description: Compose pre-defined environment variables
 keywords: fig, composition, compose, docker, orchestration, cli, reference
 title: Set or change pre-defined environment variables in Docker Compose
+linkTitle: Pre-defined environment variables
 aliases:
 - /compose/reference/envvars/
 ---

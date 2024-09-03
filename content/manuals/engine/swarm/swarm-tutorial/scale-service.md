@@ -2,6 +2,7 @@
 description: Scale the service running in the swarm
 keywords: tutorial, cluster management, swarm mode, scale, get started
 title: Scale the service in the swarm
+weight: 50
 notoc: true
 ---
 

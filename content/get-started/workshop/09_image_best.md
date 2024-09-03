@@ -1,5 +1,7 @@
 ---
 title: Image-building best practices
+weight: 90
+linkTitle: "Part 8: Image-building best practices"
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers,
   docker desktop
 description: Tips for building images for your application

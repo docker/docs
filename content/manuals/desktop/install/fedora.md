@@ -3,6 +3,8 @@ description: Instructions for installing Docker Desktop on Fedora
 keywords: fedora, rpm, update install, uninstall, upgrade, update, linux, desktop,
   docker desktop, docker desktop for linux, dd4l
 title: Install Docker Desktop on Fedora
+linkTitle: Fedora
+weight: 70
 toc_max: 4
 aliases:
 - /desktop/linux/install/fedora/

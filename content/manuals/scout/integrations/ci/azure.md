@@ -2,6 +2,7 @@
 description: How to integrate Docker Scout with Microsoft Azure DevOps Pipelines
 keywords: supply chain, security, ci, continuous integration, azure, devops
 title: Integrate Docker Scout with Microsoft Azure DevOps Pipelines
+linkTitle: Azure DevOps Pipelines
 ---
 
 The following examples runs in an Azure DevOps-connected repository containing

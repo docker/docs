@@ -1,5 +1,7 @@
 ---
 title: Networking overview
+linkTitle: Networking
+weight: 30
 description: Learn how networking works from the container's point of view
 keywords: networking, container, standalone, IP address, DNS resolution
 aliases:

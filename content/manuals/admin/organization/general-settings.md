@@ -1,7 +1,8 @@
 ---
+title: Organization settings
+weight: 60
 description: Learn how to manage settings for organizations using Docker Admin Console.
 keywords: organization, settings, Admin Console
-title: General organization settings
 ---
 
 {{< include "admin-early-access.md" >}}

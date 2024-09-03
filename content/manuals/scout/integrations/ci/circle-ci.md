@@ -2,6 +2,7 @@
 description: How to integrate Docker Scout with Circle CI
 keywords: supply chain, security, ci, continuous integration, circle ci
 title: Integrate Docker Scout with Circle CI
+linkTitle: Circle CI
 ---
 
 The following examples runs when triggered in CircleCI. When triggered, it

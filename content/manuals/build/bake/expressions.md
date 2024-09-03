@@ -1,5 +1,7 @@
 ---
 title: Expression evaluation in Bake
+linkTitle: Expressions
+weight: 50
 description: Learn about advanced Bake features, like user-defined functions
 keywords: build, buildx, bake, buildkit, hcl, expressions, evaluation, math, arithmetic, conditionals
 aliases:

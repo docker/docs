@@ -1,5 +1,7 @@
 ---
 title: Docker for GitHub Copilot
+linkTitle: Docker for GitHub Copilot {{< badge color="violet" text="Early Access" >}}
+weight: 100
 description: Learn how to use the Docker Extension for GitHub Copilot to streamline Docker-related tasks.
 keywords: Docker, GitHub Copilot, extension, Visual Studio Code, chat, ai, containerization
 ---

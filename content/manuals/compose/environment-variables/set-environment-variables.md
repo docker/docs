@@ -1,5 +1,7 @@
 ---
 title: Set environment variables within your container's environment
+linkTitle: Set environment variables
+weight: 10
 description: How to set, use, and manage environment variables with Compose
 keywords: compose, orchestration, environment, environment variables, container environment variables
 aliases:
