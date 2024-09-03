@@ -1247,7 +1247,7 @@ Manuals:
         - path: /desktop/allow-list/
           title: Allowlist for Docker Desktop
     - path: /desktop/settings/
-    - title: Change settings
+      title: Change settings
     - sectiontitle: Troubleshoot and diagnose
       section:
         - path: /desktop/troubleshoot/overview/
