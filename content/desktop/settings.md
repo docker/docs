@@ -99,12 +99,6 @@ If you choose the integrated terminal, you can run commands in a running contain
 The **Resources** tab allows you to configure CPU, memory, disk, proxies,
 network, and other resources.
 
-> [!NOTE]
->
-> On Windows, different settings are available for configuration depending on whether you are
-using Linux containers in WSL 2 mode, Linux containers in Hyper-V mode, or Windows
-containers.
-
 ### Advanced
 
 > [!NOTE]
@@ -135,7 +129,7 @@ Advanced settings are:
   move a disk image to a location that already has one, you are asked if you
   want to use the existing image or replace it.
 
->**Tip**
+>[!TIP]
 >
 > If you feel Docker Desktop starting to get slow or you're running
 > multi-container workloads, increase the memory and disk image space allocation
@@ -149,7 +143,7 @@ Advanced settings are:
   should Docker Desktop be idle before Resource Saver mode kicks in. Default is
   5 minutes.
 
-  >**Note**
+  > [!NOTE]
   >
   > Exit from Resource Saver mode occurs automatically when containers run. Exit
   > may take a few seconds (~3 to 10 secs) as Docker Desktop restarts the Linux VM.
@@ -187,7 +181,7 @@ File share settings are:
 - **Apply & Restart** makes the directory available to containers using Docker's
   bind mount (`-v`) feature.
 
-> Tips on shared folders, permissions, and volume mounts
+> [!TIP]
 >
 > * Share only the directories that you need with the container. File sharing
 >   introduces overhead as any changes to the files on the host need to be notified
@@ -263,8 +257,6 @@ The HTTPS proxy settings used for scanning images are set using the `HTTPS_PROXY
 
 #### Proxy authentication
 
-On Windows, Docker Desktop supports Basic, Kerberos and NTLM proxy authentication methods. 
-
 ##### Basic authentication
 
 If your proxy uses Basic authentication, Docker Desktop prompts developers for a username and password and caches the credentials. All passwords are stored securely in the OS credential store. It will request re-authentication if that cache is removed.
@@ -275,7 +267,7 @@ It's recommended that you use an `https://` URL for HTTP/HTTPS proxies to protec
 
 > [!NOTE]
 >
-> Available for Docker Business subscribers with Docker Desktop version 4.30 and later.
+> Available for Docker Business subscribers with Docker Desktop for Windows version 4.30 and later.
 
 Developers are no longer interrupted by prompts for proxy credentials as authentication is centralized. This also reduces the risk of account lockouts due to incorrect sign in attempts.
 
@@ -289,10 +281,6 @@ For Docker Desktop version 4.32 and later:
 
 To enable Kerberos or NTLM proxy authentication you must pass the `--proxy-enable-kerberosntlm` installer flag during installation via the command line, and ensure your proxy server is properly configured for Kerberos or NTLM authentication.
 
-> [!TIP]
->
-> Docker Desktop also supports the use of [SOCKS5 proxies](/desktop/networking.md#socks5-proxy-support).
-
 ### Network
 
 > [!NOTE]
@@ -302,7 +290,7 @@ To enable Kerberos or NTLM proxy authentication you must pass the `--proxy-enabl
 
 Docker Desktop uses a private IPv4 network for internal services such as a DNS server and an HTTP proxy. In case Docker Desktop's choice of subnet clashes with IPs in your environment, you can specify a custom subnet using the **Network** setting.
 
-{{< badge color=amber text="Mac only" >}} You can also select the **Use kernel networking for UDP** setting. This lets you use a more efficient kernel networking path for UDP. This may not be compatible with your VPN software.
+On Mac, you can also select the **Use kernel networking for UDP** setting. This lets you use a more efficient kernel networking path for UDP. This may not be compatible with your VPN software.
 
 ### WSL Integration
 
@@ -495,7 +483,7 @@ Notifications momentarily appear in the lower-right of the Docker Dashboard and 
 
 ## Advanced
 
-On Mac on the **Advanced** tab, you can reconfigure your initial installation settings:
+On Mac, you can reconfigure your initial installation settings  on the **Advanced** tab:
 
 - **Choose how to configure the installation of Docker's CLI tools**.
   - **System**: Docker CLI tools are installed in the system directory under `/usr/local/bin`
