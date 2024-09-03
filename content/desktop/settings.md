@@ -1,23 +1,23 @@
 ---
-description: Change your Docker Desktop settings on Mac
+description: Learn about and change Docker Desktop's settings
 keywords: settings, preferences, proxy, file sharing, resources, kubernetes, Docker
-  Desktop, Mac
-title: Change Docker Desktop settings on Mac
+  Desktop, Linux, Mac, Windows
+title: Change your Docker Desktop settings
 aliases:
-- /docker-for-mac/mutagen-caching/
-- /docker-for-mac/mutagen/
-- /docker-for-mac/osxfs-caching/
-- /docker-for-mac/osxfs/
+ - /desktop/settings/mac/
+ - /desktop/settings/windows/
+ - /desktop/settings/linux/
 ---
-
-This page provides information on how to configure and manage your Docker Desktop for Mac settings.
 
 To navigate to **Settings** either:
 
-- Select the Docker menu {{< inline-image src="../images/whale-x.svg" alt="whale menu" >}} and then **Settings**
+- Select the Docker menu {{< inline-image src="images/whale-x.svg" alt="whale menu" >}} and then **Settings**
 - Select the **Settings** icon from the Docker Dashboard.
 
-You can also locate the `settings.json` file at `~/Library/Group Containers/group.com.docker/settings.json`.
+You can also locate the `settings.json` file at:
+ - Mac: `~/Library/Group Containers/group.com.docker/settings.json`
+ - Windows: `C:\Users\[USERNAME]\AppData\Roaming\Docker\settings.json`
+ - Linux: `~/.docker/desktop/settings.json`
 
 ## General
 
@@ -32,30 +32,42 @@ On the **General** tab, you can configure when to start Docker and specify other
 - **Choose theme for Docker Desktop**. Choose whether you want to apply a **Light** or **Dark** theme to Docker Desktop. Alternatively you can set Docker Desktop to **Use system settings**.
 
 - **Choose container terminal**. Determines which terminal is launched when opening the terminal from a container.
-If you choose the integrated terminal, you can run commands in a running container straight from the Docker Dashboard. For more information, see [Explore containers](../use-desktop/container.md).
+If you choose the integrated terminal, you can run commands in a running container straight from the Docker Dashboard. For more information, see [Explore containers](/desktop/use-desktop/container.md).
 
-- **Enable Docker Debug by default**. Check this option to use Docker Debug by default when accessing the integrated terminal. For more information, see [Explore containers](../use-desktop/container.md#integrated-terminal).
+- **Enable Docker terminal**. Interact with your host machine and execute commands directly from Docker Desktop.
 
-- **Include VM in Time Machine backups**. Select to back up the Docker Desktop
+- **Enable Docker Debug by default**. Check this option to use Docker Debug by default when accessing the integrated terminal. For more information, see [Explore containers](/desktop/use-desktop/container.md#integrated-terminal).
+
+- {{< badge color=amber text="Mac only" >}}**Include VM in Time Machine backups**. Select to back up the Docker Desktop
   virtual machine. This option is turned off by default.
+
+- {{< badge color=amber text="Windows only" >}}**Expose daemon on tcp://localhost:2375 without TLS**. Check this option to
+  enable legacy clients to connect to the Docker daemon. You must use this option
+  with caution as exposing the daemon without TLS can result in remote code
+  execution attacks.
+
+- {{< badge color=amber text="Windows only" >}}**Use the WSL 2 based engine**. WSL 2 provides better performance than the
+  Hyper-V backend. For more information, see [Docker Desktop WSL 2 backend](/desktop/wsl/index.md).
+
+- {{< badge color=amber text="Windows only" >}}**Add the `*.docker.internal` names to the host's `/etc/hosts` file (Password required)**. Lets you resolve `*.docker.internal` DNS names from both the host and your containers.
 
 - **Use containerd for pulling and storing images**.
   Turns on the containerd image store.
   This brings new features like faster container startup performance by lazy-pulling images,
   and the ability to run Wasm applications with Docker.
-  For more information, see [containerd image store](../containerd.md).
+  For more information, see [containerd image store](containerd.md).
 
-- **Use Virtualization framework**. Select to allow Docker Desktop to use the `virtualization.framework` instead of the `hypervisor.framework`.
+- {{< badge color=amber text="Mac only" >}} **Use Virtualization framework**. Select to allow Docker Desktop to use the `virtualization.framework` instead of the `hypervisor.framework`.
     > [!TIP]
     >
     > Turn this setting on to make Docker Desktop run faster.
 
-- **Choose file sharing implementation for your containers**. Choose whether you want to share files using **VirtioFS**, **gRPC FUSE**, or **osxfs**. VirtioFS is only available for macOS versions 12.5 and above, and is turned on by default.
+- {{< badge color=amber text="Mac only" >}}**Choose file sharing implementation for your containers**. Choose whether you want to share files using **VirtioFS**, **gRPC FUSE**, or **osxfs (Legacy)**. VirtioFS is only available for macOS versions 12.5 and above, and is turned on by default.
     >**Tip**
     >
     > Use VirtioFS for speedy file sharing. VirtioFS has reduced the time taken to complete filesystem operations by [up to 98%](https://github.com/docker/roadmap/issues/7#issuecomment-1044452206)
 
-- **Use Rosetta for x86_64/amd64 emulation on Apple Silicon**. Turns on Rosetta to accelerate x86/AMD64 binary emulation on Apple Silicon. This option is only available if you have turned on **Virtualization framework** in the **General** settings tab. You must also be on macOS Ventura or later. 
+- {{< badge color=amber text="Mac only" >}}**Use Rosetta for x86_64/amd64 emulation on Apple Silicon**. Turns on Rosetta to accelerate x86/AMD64 binary emulation on Apple Silicon. This option is only available if you have turned on **Virtualization framework** in the **General** settings tab. You must also be on macOS Ventura or later. 
 
 - **Send usage statistics**. Select so Docker Desktop sends diagnostics,
   crash reports, and usage data. This information helps Docker improve and
@@ -63,7 +75,7 @@ If you choose the integrated terminal, you can run commands in a running contain
   periodically prompt you for more information.
 
 - **Use Enhanced Container Isolation**. Select to enhance security by preventing containers from breaching the Linux VM. For more information, see [Enhanced Container Isolation](/security/for-admins/hardened-desktop/enhanced-container-isolation/index.md).
-    >**Note**
+    > [!NOTE]
     >
     > This setting is only available if you are signed in to Docker Desktop and have a Docker Business subscription.
 
@@ -73,21 +85,34 @@ If you choose the integrated terminal, you can run commands in a running contain
 
 - **Enable background SBOM indexing**. When this option is enabled, Docker Scout automatically analyzes images that you build or pull.
 
-- **Automatically check configuration**. Regularly checks your configuration to ensure no unexpected changes have been made by another application.
+- {{< badge color=amber text="Mac only" >}}**Automatically check configuration**. Regularly checks your configuration to ensure no unexpected changes have been made by another application.
 
   Docker Desktop checks if your setup, configured during installation, has been altered by external apps like Orbstack. Docker Desktop checks:
     - The symlinks of Docker binaries to `/usr/local/bin`.
     - The symlink of the default Docker socket. 
   Additionally, Docker Desktop ensures that the context is switched to `desktop-linux` on startup.
   
-  You are notified if changes are found and are able to restore the configuration directly from the notification. For more information, see the [FAQs](../faqs/macfaqs.md#why-do-i-keep-getting-a-notification-telling-me-an-application-has-changed-my-desktop-configurations).
+  You are notified if changes are found and are able to restore the configuration directly from the notification. For more information, see the [FAQs](/desktop/faqs/macfaqs.md#why-do-i-keep-getting-a-notification-telling-me-an-application-has-changed-my-desktop-configurations).
 
 ## Resources
 
 The **Resources** tab allows you to configure CPU, memory, disk, proxies,
 network, and other resources.
 
+> [!NOTE]
+>
+> On Windows, different settings are available for configuration depending on whether you are
+using Linux containers in WSL 2 mode, Linux containers in Hyper-V mode, or Windows
+containers.
+
 ### Advanced
+
+> [!NOTE]
+>
+> On Windows, the **Resource allocation** options in the **Advanced** tab are only available in Hyper-V mode, because Windows manages
+> the resources in WSL 2 mode and Windows container mode. In WSL 2
+> mode, you can configure limits on the memory, CPU, and swap size allocated
+> to the [WSL 2 utility VM](https://docs.microsoft.com/en-us/windows/wsl/wsl-config#configure-global-options-with-wslconfig).
 
 On the **Advanced** tab, you can limit resources available to the Docker Linux VM.
 
@@ -115,7 +140,7 @@ Advanced settings are:
 > If you feel Docker Desktop starting to get slow or you're running
 > multi-container workloads, increase the memory and disk image space allocation
 
-- **Resource Saver**. Enable or disable [Resource Saver mode](../use-desktop/resource-saver.md),
+- **Resource Saver**. Enable or disable [Resource Saver mode](/desktop/use-desktop/resource-saver.md),
   which significantly reduces CPU and memory utilization on the host by
   automatically turning off the Linux VM when Docker Desktop is idle (i.e., no
   containers are running).
@@ -132,6 +157,11 @@ Advanced settings are:
 
 ### File sharing
 
+> [!NOTE]
+>
+> On Windows, the **File sharing** tab is only available in Hyper-V mode because the files
+> are automatically shared in WSL 2 mode and Windows container mode.
+
 Use File sharing to allow local directories on your machine to be shared with
 Linux containers. This is especially useful for editing source code in an IDE on
 the host while running and testing the code in a container.
@@ -140,7 +170,7 @@ the host while running and testing the code in a container.
 
 Synchronized file shares is an alternative file sharing mechanism that provides fast and flexible host-to-VM file sharing, enhancing bind mount performance through the use of synchronized filesystem caches. Available with Pro, Team, and Business subscriptions.
 
-To learn more, see [Synchronized file share](../synchronized-file-sharing.md).
+To learn more, see [Synchronized file share](/desktop/synchronized-file-sharing.md).
 
 #### Virtual file shares
 
@@ -183,11 +213,24 @@ File share settings are:
 >   once a file called `test` is created, attempts to create a second file called
 >   `Test` will fail.
 >
-> For more information, see [Volume mounting requires file sharing for any project directories outside of `/Users`](../troubleshoot/topics.md)
+> For more information, see [Volume mounting requires file sharing for any project directories outside of `/Users`](/desktop/troubleshoot/topics.md)
+
+#### Shared folders on demand
+
+On Windows, you can share a folder "on demand" the first time a particular folder is used by a container.
+
+If you run a Docker command from a shell with a volume mount (as shown in the
+example below) or kick off a Compose file that includes volume mounts, you get a
+popup asking if you want to share the specified folder.
+
+You can select to **Share it**, in which case it is added to your Docker Desktop Shared Folders list and available to
+containers. Alternatively, you can opt not to share it by selecting **Cancel**.
+
+![Shared folder on demand](/desktop/images/shared-folder-on-demand.png)
 
 ### Proxies
 
-Docker Desktop on Mac supports the use of HTTP/HTTPS and [SOCKS5 proxies](../networking.md#socks5-proxy-support).
+Docker Desktop supports the use of HTTP/HTTPS and [SOCKS5 proxies](/desktop/networking.md#socks5-proxy-support).
 
 HTTP/HTTPS proxies can be used when:
 
@@ -218,11 +261,62 @@ The HTTPS proxy settings used for scanning images are set using the `HTTPS_PROXY
 >
 > If you are using a PAC file hosted on a web server, make sure to add the MIME type `application/x-ns-proxy-autoconfig` for the `.pac` file extension on the server or website. Without this configuration, the PAC file may not be parsed correctly.
 
+#### Proxy authentication
+
+On Windows, Docker Desktop supports Basic, Kerberos and NTLM proxy authentication methods. 
+
+##### Basic authentication
+
+If your proxy uses Basic authentication, Docker Desktop prompts developers for a username and password and caches the credentials. All passwords are stored securely in the OS credential store. It will request re-authentication if that cache is removed.
+
+It's recommended that you use an `https://` URL for HTTP/HTTPS proxies to protect passwords during network transit. Docker Desktop also supports TLS 1.3 for communication with proxies.
+
+##### Kerberos and NTLM authentication
+
+> [!NOTE]
+>
+> Available for Docker Business subscribers with Docker Desktop version 4.30 and later.
+
+Developers are no longer interrupted by prompts for proxy credentials as authentication is centralized. This also reduces the risk of account lockouts due to incorrect sign in attempts.
+
+If your proxy offers multiple authentication schemes in 407 (Proxy Authentication Required) response, Docker Desktop by default selects the Basic authentication scheme.
+
+For Docker Desktop version 4.30 to 4.31: 
+
+To enable Kerberos or NTLM proxy authentication, no additional configuration is needed beyond specifying the proxy IP address and port.
+
+For Docker Desktop version 4.32 and later: 
+
+To enable Kerberos or NTLM proxy authentication you must pass the `--proxy-enable-kerberosntlm` installer flag during installation via the command line, and ensure your proxy server is properly configured for Kerberos or NTLM authentication.
+
+> [!TIP]
+>
+> Docker Desktop also supports the use of [SOCKS5 proxies](/desktop/networking.md#socks5-proxy-support).
+
 ### Network
 
-{{< include "desktop-network-setting.md" >}}
+> [!NOTE]
+>
+> On Windows, the **Network** tab isn't available in the Windows container mode because
+> Windows manages networking.
 
-You can also select the **Use kernel networking for UDP** setting. This lets you use a more efficient kernel networking path for UDP. This may not be compatible with your VPN software.
+Docker Desktop uses a private IPv4 network for internal services such as a DNS server and an HTTP proxy. In case Docker Desktop's choice of subnet clashes with IPs in your environment, you can specify a custom subnet using the **Network** setting.
+
+{{< badge color=amber text="Mac only" >}} You can also select the **Use kernel networking for UDP** setting. This lets you use a more efficient kernel networking path for UDP. This may not be compatible with your VPN software.
+
+### WSL Integration
+
+On Windows in WSL 2 mode, you can configure which WSL 2 distributions will have the Docker
+WSL integration.
+
+By default, the integration is enabled on your default WSL distribution.
+To change your default WSL distro, run `wsl --set-default <distro name>`. (For example,
+to set Ubuntu as your default WSL distro, run `wsl --set-default ubuntu`).
+
+You can also select any additional distributions you would like to enable the WSL 2 integration on.
+
+For more details on configuring Docker Desktop to use WSL 2, see
+[Docker Desktop WSL 2 backend](/desktop/wsl/index.md).
 
 ## Docker Engine
 
@@ -253,9 +347,75 @@ Select **Apply & Restart** to save your settings and restart Docker Desktop.
 
 ## Builders
 
-{{< include "desktop-builders-setting.md" >}}
+If you have turned on the
+[Docker Desktop Builds view](/desktop/use-desktop/builds/), you can use the
+**Builders** tab to inspect and manage builders in the Docker Desktop settings.
+
+### Inspect
+
+To inspect builders, find the builder that you want to inspect and select the
+expand icon. You can only inspect active builders.
+
+Inspecting an active builder shows:
+
+- BuildKit version
+- Status
+- Driver type
+- Supported capabilities and platforms
+- Disk usage
+- Endpoint address
+
+### Select a different builder
+
+The **Selected builder** section displays the selected builder.
+To select a different builder:
+
+1. Find the builder that you want to use under **Available builders**
+2. Open the drop-down menu next to the builder's name.
+3. Select **Use** to switch to this builder.
+
+Your build commands now use the selected builder by default.
+
+### Create a builder
+
+To create a builder, use the Docker CLI. See
+[Create a new builder](/build/builders/manage/#create-a-new-builder)
+
+### Remove a builder
+
+You can remove a builder if:
+
+- The builder isn't your [selected builder](/build/builders/#selected-builder)
+- The builder isn't [associated with a Docker context](/build/builders/#default-builder).
+
+  To remove builders associated with a Docker context, remove the context using
+  the `docker context rm` command.
+
+To remove a builder:
+
+1. Find the builder that you want to remove under **Available builders**
+2. Open the drop-down menu.
+3. Select **Remove** to remove this builder.
+
+If the builder uses the `docker-container` or `kubernetes` driver,
+the build cache is also removed, along with the builder.
+
+### Stop and start a builder
+
+Builders that use the
+[`docker-container` driver](/build/builders/drivers/docker-container/)
+run the BuildKit daemon in a container.
+You can start and stop the BuildKit container using the drop-down menu.
+
+Running a build automatically starts the container if it's stopped.
+
+You can only start and stop builders using the `docker-container` driver.
 
 ## Kubernetes
+
+> [!NOTE]
+>
+> On Windows the **Kubernetes** tab is not available in Windows container mode.
 
 Docker Desktop includes a standalone Kubernetes server, so that you can test
 deploying your Docker workloads on Kubernetes. To turn on Kubernetes support and
@@ -268,7 +428,7 @@ using Docker commands.
 Select **Reset Kubernetes cluster** to delete all stacks and Kubernetes resources.
 
 For more information about using the Kubernetes integration with Docker Desktop,
-see [Deploy on Kubernetes](../kubernetes.md).
+see [Deploy on Kubernetes](/desktop/kubernetes.md).
 
 ## Software Updates
 
@@ -305,19 +465,37 @@ You can also sign up to the [Developer Preview program](https://www.docker.com/c
 
 ### Beta features
 
-{{< include "beta.md" >}}
+Beta features provide access to future product functionality.
+These features are intended for testing and feedback only as they may change
+between releases without warning or remove them entirely from a future
+release. Beta features must not be used in production environments.
+Docker doesn't offer support for beta features.
 
 ### Experimental features
 
-{{< include "desktop-experimental.md" >}}
+Experimental features provide early access to future product functionality.
+These features are intended for testing and feedback only as they may change
+between releases without warning or can be removed entirely from a future
+release. Experimental features must not be used in production environments.
+Docker does not offer support for experimental features.
+
+For a list of current experimental features in the Docker CLI, see [Docker CLI Experimental features](https://github.com/docker/cli/blob/master/experimental/README.md).
 
 ## Notifications
 
-{{< include "desktop-notifications-settings.md" >}}
+Use the **Notifications** tab to turn on or turn off notifications for the following events:
+
+- **Status updates on tasks and processes**
+- **Docker announcements**
+- **Docker surveys**
+
+By default, all notifications are turned on. You'll always receive error notifications and notifications about new Docker Desktop releases and updates.
+
+Notifications momentarily appear in the lower-right of the Docker Dashboard and then move to the **Notifications** drawer. To open the **Notifications** drawer, select {{< inline-image src="images/notifications.svg" alt="notifications" >}}.
 
 ## Advanced
 
-On the **Advanced** tab, you can reconfigure your initial installation settings:
+On Mac on the **Advanced** tab, you can reconfigure your initial installation settings:
 
 - **Choose how to configure the installation of Docker's CLI tools**.
   - **System**: Docker CLI tools are installed in the system directory under `/usr/local/bin`
@@ -329,12 +507,9 @@ On the **Advanced** tab, you can reconfigure your initial installation settings:
             ```
      3. Save and the close the file. Restart your shell to apply the changes to the PATH variable.
 
-- **Enable default Docker socket (Requires password)**. Creates `/var/run/docker.sock` which some third party clients may use to communicate with Docker Desktop. For more information, see [permission requirements for macOS](../mac/permission-requirements.md#installing-symlinks).
+- **Enable default Docker socket (Requires password)**. Creates `/var/run/docker.sock` which some third party clients may use to communicate with Docker Desktop. For more information, see [permission requirements for macOS](/desktop/mac/permission-requirements.md#installing-symlinks).
 
-- **Enable privileged port mapping (Requires password)**. Starts the privileged helper process which binds the ports that are between 1 and 1024. For more information, see [permission requirements for macOS](../mac/permission-requirements.md#binding-privileged-ports).
+- **Enable privileged port mapping (Requires password)**. Starts the privileged helper process which binds the ports that are between 1 and 1024. For more information, see [permission requirements for macOS](/desktop/mac/permission-requirements.md#binding-privileged-ports).
 
-  For more information on each configuration and use case, see [Permission requirements](../mac/permission-requirements.md).
-
-
-
+  For more information on each configuration and use case, see [Permission requirements](/desktop/mac/permission-requirements.md).
 

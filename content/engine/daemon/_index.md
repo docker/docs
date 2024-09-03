@@ -31,11 +31,7 @@ This page shows you how to customize the Docker daemon, `dockerd`.
 > [!NOTE]
 >
 > This page is for users who've installed Docker Engine manually. If you're
-> using Docker Desktop, refer to the following pages instead:
->
-> - [Change preferences on Mac](../../desktop/settings/mac#docker-engine)
-> - [Change preferences on Windows](../../desktop/settings/windows#docker-engine)
-> - [Change preferences on Linux](../../desktop/settings/linux#docker-engine)
+> using Docker Desktop, refer to the [settings page](/desktop/settings.md#docker-engine).
 
 ## Configure the Docker daemon
 

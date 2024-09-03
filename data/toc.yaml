@@ -1246,14 +1246,8 @@ Manuals:
           title: Run Docker Desktop for Windows in a VM or VDI environment
         - path: /desktop/allow-list/
           title: Allowlist for Docker Desktop
-    - sectiontitle: Change settings
-      section:
-        - path: /desktop/settings/mac/
-          title: On Mac
-        - path: /desktop/settings/windows/
-          title: On Windows
-        - path: /desktop/settings/linux/
-          title: On Linux
+    - path: /desktop/settings/
+    - title: Change settings
     - sectiontitle: Troubleshoot and diagnose
       section:
         - path: /desktop/troubleshoot/overview/

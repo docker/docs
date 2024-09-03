@@ -88,7 +88,7 @@
 "/desktop/use-desktop/pause/":
   - /go/mac-desktop-pause/
   - /go/win-desktop-pause/
-"/desktop/settings/mac/#file-sharing":
+"/desktop/settings/#file-sharing":
   - /go/mac-file-sharing/
 "/engine/security/rootless/":
   # Instructions on running docker in rootless mode. This redirect is currently
