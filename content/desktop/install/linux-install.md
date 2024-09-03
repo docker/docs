@@ -38,7 +38,7 @@ Docker Desktop for Linux provides a user-friendly graphical interface that simpl
 Docker Desktop for Linux and Docker Engine can be installed side-by-side on the
 same machine. Docker Desktop for Linux stores containers and images in an isolated
 storage location within a VM and offers
-controls to restrict [its resources](../settings/linux.md#resources). Using a dedicated storage
+controls to restrict [its resources](/desktop/settings.md#resources). Using a dedicated storage
 location for Docker Desktop prevents it from interfering with a Docker Engine
 installation on the same machine.
 

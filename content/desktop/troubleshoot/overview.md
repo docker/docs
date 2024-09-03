@@ -33,7 +33,7 @@ The **Troubleshoot** page contains the following options:
 
 - **Get support**. Users with a paid Docker subscription can use this option to send a support request. Other users can use this option to diagnose any issues in Docker Desktop. For more information, see [Diagnose and feedback](#diagnose) and [Support](../../support/index.md).
 
-- **Reset Kubernetes cluster**. Select to delete all stacks and Kubernetes resources. For more information, see [Kubernetes](../settings/linux.md#kubernetes).
+- **Reset Kubernetes cluster**. Select to delete all stacks and Kubernetes resources. For more information, see [Kubernetes](/desktop/settings.md#kubernetes).
 
 - **Clean / Purge data**. This option resets all Docker data without a
 reset to factory defaults. Selecting this option results in the loss of existing settings.

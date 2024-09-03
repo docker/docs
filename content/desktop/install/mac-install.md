@@ -85,7 +85,7 @@ This page contains download URLs, information about system requirements, and ins
 
 6. From the installation window, select either: 
    - **Use recommended settings (Requires password)**. This lets Docker Desktop automatically set the necessary configuration settings. 
-   - **Use advanced settings**. You can then set the location of the Docker CLI tools either in the system or user directory, enable the default Docker socket, and enable privileged port mapping. See [Settings](../settings/mac.md#advanced), for more information and how to set the location of the Docker CLI tools.
+   - **Use advanced settings**. You can then set the location of the Docker CLI tools either in the system or user directory, enable the default Docker socket, and enable privileged port mapping. See [Settings](/desktop/settings.md#advanced), for more information and how to set the location of the Docker CLI tools.
 7. Select **Finish**. If you have applied any of the previous configurations that require a password in step 6, enter your password to confirm your choice.  
 
 ### Install from the command line

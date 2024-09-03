@@ -53,7 +53,7 @@ Now `docker` commands work from Windows using the new WSL 2 engine.
 >
 > By default, Docker Desktop stores the data for the WSL 2 engine at `C:\Users\[USERNAME]\AppData\Local\Docker\wsl`.
 > If you want to change the location, for example, to another drive you can do so via the `Settings -> Resources -> Advanced` page from the Docker Dashboard.
-> Read more about this and other Windows settings at [Changing Docker Desktop settings on Windows](../settings/windows.md)
+> Read more about this and other Windows settings at [Changing settings](/desktop/settings.md)
 
 ## Enabling Docker support in WSL 2 distros
 

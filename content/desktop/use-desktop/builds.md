@@ -209,8 +209,4 @@ The **Builder settings** view in the Docker Desktop settings lets you:
 
 ![Builder settings drop-down](../images/build-ui-manage-builders.webp)
 
-For more information about managing builders, see:
-
-- [Change settings, Windows](../settings/windows.md#builders)
-- [Change settings, Mac](../settings/mac.md#builders)
-- [Change settings, Linux](../settings/linux.md#builders)
+For more information about managing builders, see [Change settings](/desktop/settings.md#builders)

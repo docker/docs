@@ -20,7 +20,7 @@ No, running Docker Desktop on Windows Server is not supported.
 ### Can I change permissions on shared volumes for container-specific deployment requirements?
 
 Docker Desktop does not enable you to control (`chmod`)
-the Unix-style permissions on [shared volumes](../settings/windows.md#file-sharing) for
+the Unix-style permissions on [shared volumes](/desktop/settings.md#file-sharing) for
 deployed containers, but rather sets permissions to a default value of
 [0777](https://chmodcommand.com/chmod-0777/)
 (`read`, `write`, `execute` permissions for `user` and for
@@ -69,7 +69,7 @@ You need to restart Docker Desktop after making any changes to the keychain
 or to the `~/.docker/certs.d` directory in order for the changes to take effect.
 
 The registry cannot be listed as an insecure registry (see
-[Docker Daemon](../settings/windows.md#docker-engine)). Docker Desktop ignores
+[Docker Daemon](/desktop/settings.md#docker-engine)). Docker Desktop ignores
 certificates listed under insecure registries, and does not send client
 certificates. Commands like `docker run` that attempt to pull from the registry
 produce error messages on the command line, as well as on the registry.
