@@ -103,13 +103,13 @@ $ docker compose run -e DEBUG=1 web python console.py
 
 ### Additional information 
 
-- You can also pass a variable from the shell by not giving it a value:
+- You can also pass a variable from the shell or your environment files by not giving it a value:
 
   ```console
   $ docker compose run -e DEBUG web python console.py
   ```
 
-The value of the `DEBUG` variable in the container is taken from the value for the same variable in the shell in which Compose is run.
+The value of the `DEBUG` variable in the container is taken from the value for the same variable in the shell in which Compose is run or from the environment files.
 
 ## Further resources
 
