@@ -172,3 +172,5 @@ tests or perform one-off tasks within that container.
 - [Compose Build Specification](/compose/compose-file/build/)
 
 {{< /accordion >}}
+
+<div id="compose-lp-survey-anchor"></div>
