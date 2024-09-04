@@ -85,7 +85,7 @@ build:
 container_name: winy 
   ports:
     - "8501:8501" 
-depends_on:
+  depends_on:
     - qdrant 
     - ollama 
 ```
