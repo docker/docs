@@ -79,7 +79,7 @@ winy:
 build:
     context: ./app 
     dockerfile: Dockerfile
-environment:
+  environment:
     - QDRANT_CLIENT=http://qdrant:6333 # Specifies the url for the qdrant database
     - OLLAMA=http://ollama:11434 # Specifies the url for the ollama service
 container_name: winy 
