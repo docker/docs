@@ -191,7 +191,7 @@ to use the command, see [docker login](../reference/cli/docker/login.md).
 
 If you're running Docker Swarm, you must use the `--with-registry-auth` flag to
 authenticate with Docker Hub. For more information, see [Create a
-service](../reference/cli/docker/service/create.md/#create-a-service). If you
+service](../reference/cli/docker/service/create.md#with-registry-auth). If you
 are using a Docker Compose file to deploy an application stack, see [docker
 stack deploy](../reference/cli/docker/stack/deploy.md).
 
