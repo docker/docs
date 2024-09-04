@@ -189,3 +189,5 @@ documentation](/build-cloud/ci/) for Docker Build Cloud.
 - [Using Docker Build Cloud](/build-cloud/usage/)
 
 {{< /accordion >}}
+
+<div id="dbc-lp-survey-anchor"></div>

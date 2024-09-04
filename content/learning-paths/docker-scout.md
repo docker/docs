@@ -173,3 +173,5 @@ the components in the image have known vulnerabilities.
 <!-- vale Docker.HeadingLength = YES -->
 
 {{< /accordion >}}
+
+<div id="scout-lp-survey-anchor"></div>
