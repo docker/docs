@@ -91,7 +91,7 @@ depends_on:
 ```
 
 If you don't have the services running, continue with this guide to learn how you can run some or all of these services with Docker.
-Remember that the `ollama` service is empty, it has not any model, for this reason you had to pull a model before starting to use the RAG application. All the instruction are in the following page!
+Remember that the `ollama` service is empty; it doesn't have any model. For this reason you need to pull a model before starting to use the RAG application. All the instructions are in the following page.
 
 In the terminal, press `ctrl`+`c` to stop the application.
 
