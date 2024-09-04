@@ -38,7 +38,7 @@ grid_genai:
   link: /guides/use-case/nlp/text-summarization/
   icon: summarize
 - title: RAG Ollama application
-  description: Explore how to containerize a RAG application
+  description: Explore how to containerize a RAG application.
   link: /guides/use-case/rag-ollama/
   icon: article
 ---
