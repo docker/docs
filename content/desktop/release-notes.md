@@ -19,7 +19,7 @@ This page contains information about the new features, improvements, known issue
 
 Docker Desktop versions older than 6 months from the latest release are not available for download.
 
-Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1) to see what's coming next.
+Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projects/51/views/1?filterQuery=) to see what's coming next.
 
 ## 4.34.0
 
