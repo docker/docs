@@ -58,8 +58,8 @@ $ docker compose --profile debug up
 $ COMPOSE_PROFILES=debug docker compose up
 ```
 
-The above commands would both start your application with the `debug` profile enabled.
-In the example, `compose.yml` file above, this starts the services
+Both commands start the servies with the `debug` profile enabled.
+In the previous `compose.yml` file, this starts the services
 `db` and `phpmyadmin`.
 
 ### Start multiple profiles
@@ -185,7 +185,7 @@ $ docker compose --profile debug down
 $ COMPOSE_PROFILES=debug docker compose down
 ```
 
-Both commands above would stop and remove services with the `debug` profile. In the following `compose.yml` file, this stops the services `db` and `phpmyadmin`.
+Both commands stop and remove services with the `debug` profile. In the following `compose.yml` file, this stops the services `db` and `phpmyadmin`.
 
 ```yaml
 services:
