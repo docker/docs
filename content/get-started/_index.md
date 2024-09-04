@@ -7,6 +7,7 @@ notoc: true
 get-started:
 - title: Get Docker
   description: Choose the best installation path for your setup.
+  link: /get-started/get-docker/
   icon: download
 - title: What is Docker?
   description: Learn about the Docker platform.

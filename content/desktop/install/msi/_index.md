@@ -6,7 +6,7 @@ keywords: msi, docker desktop, windows, installation
 
 > [!NOTE]
 >
-> The MSI installer is available to all company owners and organization owners with Docker Desktop version 4.32 and later.
+> The MSI installer is available to all company and organization owners with a Business subscription and Docker Desktop version 4.32 and later.
 
 Docker offers a 64-bit Microsoft Installer (MSI) package designed to assist IT administrators in customizing and deploying Docker Desktop across multiple users or machines in an enterprise environment. 
 

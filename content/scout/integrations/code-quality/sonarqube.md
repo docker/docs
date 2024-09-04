@@ -27,6 +27,8 @@ annotations, to link image repositories with SonarQube analysis results.
 > analysis results recorded after the integration is enabled will be available
 > to Docker Scout.
 
+Both self-managed SonarQube instances and SonarCloud are supported.
+
 ## Prerequisites
 
 To integrate Docker Scout with SonarQube, ensure that:
