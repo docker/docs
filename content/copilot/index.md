@@ -35,9 +35,11 @@ The Docker Extension for GitHub Copilot supports the following
 programming languages:
 
 - Dockerfile
+- Go
 - Java
 - JavaScript
 - Python
+- Rust
 - TypeScript
 
 ## Get Started
