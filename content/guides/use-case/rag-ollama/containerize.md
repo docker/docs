@@ -76,7 +76,7 @@ The application requires a Qdrant database service and an LLM service to work pr
 
 ```yaml
 winy:
-build:
+  build:
     context: ./app 
     dockerfile: Dockerfile
   environment:
