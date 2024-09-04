@@ -83,7 +83,7 @@ environment:
     - QDRANT_CLIENT=http://qdrant:6333 # Specifies the url for the qdrant database
     - OLLAMA=http://ollama:11434 # Specifies the url for the ollama service
 container_name: winy 
-ports:
+  ports:
     - "8501:8501" 
 depends_on:
     - qdrant 
