@@ -1,41 +1,39 @@
 ---
 description: Learn how download rate limits for image pulls on Docker Hub work
 keywords: Docker Hub, pulls, download, limit,
-title: Docker Hub rate limit
+title: Docker Hub usage and rate limits
 ---
 
+## Definition of a pull request 
+A Docker pull request includes both a version check and any download that occurs as a result of the pull.
+
+- A pull request for a normal image makes one pull for a [single manifest](https://github.com/opencontainers/image-spec/blob/main/manifest.md).
+- A pull request for a multi-arch image will count as one pull for each different architecture. 
+- Pulls are accounted to the user doing the pull, not to the owner of the image.
+
+**Version Check**
+- Depending on the client, a `docker pull` can verify the existence of an image or tag without downloading it.
+
 ## What's the download rate limit on Docker Hub?
-
-Docker Hub limits the number of Docker image downloads, or pulls, based on the account type of the user pulling the image. Pull rate limits are based on individual IP address.
-
-| User type | Rate limit |
-| --------- | ---------- |
-| Anonymous users | 100 pulls per 6 hours per IP address |
-| [Authenticated users](#how-do-i-authenticate-pull-requests)| 200 pulls per 6 hour period |
-| Users with a paid [Docker subscription](https://www.docker.com/pricing) | Up to 5000 pulls per day |
-
-If you require a higher number of pulls, you can also buy an [Enhanced Service Account add-on](service-accounts.md#enhanced-service-account-add-on-pricing).
-
-
-## Definition of limits
-
-A user's limit is equal to the highest entitlement of their
-personal account or any organization they belong to. To take 
-advantage of this, you must sign in to 
+Docker Hub applies rate limits on the number of Docker pulls, depending on the account type of the user pulling the image. To take 
+advantage of this, you must log in to 
 [Docker Hub](https://hub.docker.com/) 
 as an authenticated user. For more information, see
 [How do I authenticate pull requests](#how-do-i-authenticate-pull-requests). 
 Unauthenticated (anonymous) users will have the limits enforced via IP.
 
-- Pulls are accounted to the user doing the pull, not to the owner of the image.
-- A pull request is defined as up to two `GET` requests on registry 
-manifest URLs (`/v2/*/manifests/*`).
-- A normal image pull makes a 
-single manifest request.
-- A pull request for a multi-arch image makes two 
-manifest requests. 
-- `HEAD` requests aren't counted.
-- Some images are unlimited through our [Docker Sponsored Open Source](https://www.docker.com/blog/expanded-support-for-open-source-software-projects/) and [Docker Verified Publisher](https://www.docker.com/partners/programs) programs.
+
+Docker Hub limits the number of Docker image downloads, or pulls, based on the account type of the user pulling the image. Pull rate limits are based on individual IP address.
+
+| User type | Rate limit |
+| --------- | ---------- |
+| Anonymous users | 10 pulls per hour per IP address |
+| [Authenticated users](#how-do-i-authenticate-pull-requests)| 40 pulls per hour user |
+| Users with a paid [Docker subscription](https://www.docker.com/pricing) | Unlimited (fair use) |
+
+## Subcription Limits
+To compare features available for each plan, see [Docker Hub Pricing](https://www.docker.com/pricing/) 
+
 
 ## How do I know my pull requests are being limited?
 
@@ -84,16 +82,16 @@ $ curl --head -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/
 Which should return the following headers:
 
 ```http
-ratelimit-limit: 100;w=21600
-ratelimit-remaining: 76;w=21600
+ratelimit-limit: 10;w=3600
+ratelimit-remaining: 5;w=3600
 docker-ratelimit-source: 192.0.2.1
 ```
 
-In the previous example, the pull limit is 100 pulls per 21600 seconds (6 hours), and there are 76 pulls remaining.
+In the example above, the pull limit is 10 pulls per 3600 seconds (1 hour), and there are 5 pulls remaining.
 
 ### I don't see any RateLimit headers
 
-If you don't see any RateLimit header, it could be because the image or your IP is unlimited in partnership with a publisher, provider, or an open-source organization. It could also mean that the user you are pulling as is part of a paid Docker plan. Pulling that image won’t count toward pull limits if you don’t see these headers. However, users with a paid Docker subscription pulling more than 5000 times daily require a [Service Account](../docker-hub/service-accounts.md) subscription.
+If you don't see any RateLimit header, it could be because the image or your IP is unlimited in partnership with a publisher, provider, or an open-source organization. It could also mean that the user you are pulling as is part of a paid Docker plan. Pulling that image won’t count toward pull limits if you don’t see these headers. 
 
 ## I'm being limited to a lower rate even though I have a paid Docker subscription
 
@@ -113,11 +111,11 @@ Select **Sign in / Create Docker ID** from the Docker Desktop menu and follow th
 
 ### Docker Engine
 
-If you're using a standalone version of Docker Engine, run the `docker login` command from a terminal to authenticate with Docker Hub. For information on how to use the command, see [docker login](../reference/cli/docker/login.md).
+If you're using a standalone version of Docker Engine, run the `docker login` command from a terminal to authenticate with Docker Hub. For information on how to use the command, see [docker login](../engine/reference/commandline/login.md).
 
 ### Docker Swarm
 
-If you're running Docker Swarm, you must use the `-- with-registry-auth` flag to authenticate with Docker Hub. For more information, see [Create a service](../reference/cli/docker/service/create.md/#create-a-service). If you are using a Docker Compose file to deploy an application stack, see [docker stack deploy](../reference/cli/docker/stack/deploy.md).
+If you're running Docker Swarm, you must use the `-- with-registry-auth` flag to authenticate with Docker Hub. For more information, see [Create a service](../engine/reference/commandline/service_create.md/#create-a-service). If you are using a Docker Compose file to deploy an application stack, see [docker stack deploy](../engine/reference/commandline/stack_deploy.md).
 
 ### GitHub Actions
 
