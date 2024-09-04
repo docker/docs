@@ -136,7 +136,7 @@ hours), and there are 76 pulls remaining.
 #### I don't see any RateLimit headers
 
 If you don't see any RateLimit header, it could be because the image or your IP
-is unlimited in partnership with a publisher, provider, or an open-source
+is unlimited in partnership with a publisher, provider, or an open source
 organization. It could also mean that the user you are pulling as is part of a
 paid Docker plan. Pulling that image won’t count toward pull limits if you don’t
 see these headers. However, users with a paid Docker subscription pulling more
