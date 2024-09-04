@@ -66,7 +66,7 @@ While all platforms can use any of the previous scenarios, the performance and
 GPU support may vary. You can use the following guidelines to help you choose the appropriate option:
 - Run Ollama in a container if you're on Linux, and using a native installation of the Docker Engine, or Windows 10/11, and using Docker Desktop, you
   have a CUDA-supported GPU, and your system has at least 8 GB of RAM.
-- Run Ollama outside of a container on a Linux Machine.
+- Run Ollama outside of a container if running Docker Desktop on a Linux Machine.
 
 Choose one of the following options for your LLM service.
 
