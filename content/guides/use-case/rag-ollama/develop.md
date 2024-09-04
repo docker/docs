@@ -102,7 +102,7 @@ To run Ollama in a container and provide GPU access:
    > For more details about the Compose instructions, see [Turn on GPU access with Docker Compose](../../../compose/gpu-support.md).
 
 3. Once the Ollama container is up and running it is possible to use the `download_model.sh` inside the `tools` folder with this command:
-```console
+   ```console
 . ./download_model.sh <model-name>
 ```
 Pulling an Ollama model can take several minutes.
