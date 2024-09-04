@@ -18,7 +18,7 @@ download the file:
    sign in to an account that is an owner for that organization. Otherwise,
    you can only view your own usage. 
 
-2. In Docker Hub, select **Usage**.
+2. In Docker Hub, navigate to the [**Usage** page](https://hub.docker.com/usage).
 3. In the drop-down, select whether to download your personal data or
    data for an organization.
 4. In **From** and **To**, select a date range for the data.
