@@ -21,6 +21,18 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projects/51/views/1?filterQuery=) to see what's coming next.
 
+## 4.34.1
+
+{{< release-date date="2024-08-05" >}}
+
+{{< desktop-install-v2 win=true beta_win_arm=true version="4.34.1" build_path="/166053/" >}}
+
+### Bug fixes and enhancements
+
+#### For Windows
+
+- Fixed a bug where Docker Desktop would fail to start, incorrectly believing another instance is running. Fixes [docker/for-win#14294](https://github.com/docker/for-win/issues/14294) and [docker/for-win#13806](https://github.com/docker/for-win/issues/13806).
+
 ## 4.34.0
 
 {{< release-date date="2024-08-29" >}}
