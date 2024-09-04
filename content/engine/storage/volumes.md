@@ -38,7 +38,7 @@ If your container generates non-persistent state data, consider using a
 increase the container's performance by avoiding writing into the container's
 writable layer.
 
-Volumes use `rprivate` bind propagation, and bind propagation isn't
+Volumes use `private` bind propagation, and bind propagation isn't
 configurable for volumes.
 
 ## Choose the -v or --mount flag
