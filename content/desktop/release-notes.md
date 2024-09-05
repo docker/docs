@@ -23,7 +23,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 ## 4.34.1
 
-{{< release-date date="2024-08-05" >}}
+{{< release-date date="2024-09-05" >}}
 
 {{< desktop-install-v2 win=true beta_win_arm=true version="4.34.1" build_path="/166053/" >}}
 
@@ -31,7 +31,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 #### For Windows
 
-- Fixed a bug where Docker Desktop would fail to start, incorrectly believing another instance is running. Fixes [docker/for-win#14294](https://github.com/docker/for-win/issues/14294) and [docker/for-win#13806](https://github.com/docker/for-win/issues/13806).
+- Fixed a bug where Docker Desktop failed to start (often on first boot) incorrectly believing another instance of the application is running. ([docker/for-win#14294](https://github.com/docker/for-win/issues/14294) and [docker/for-win#14034](https://github.com/docker/for-win/issues/14034)).
 
 ## 4.34.0
 
