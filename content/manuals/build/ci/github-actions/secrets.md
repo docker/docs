@@ -26,8 +26,7 @@ First, create a `Dockerfile` that uses the secret:
 ```dockerfile
 # syntax=docker/dockerfile:1
 FROM alpine
-RUN --mount=type=secret,id=github_token \
-  cat /run/secrets/github_token
+RUN --mount=type=secret,id=github_token,env=GITHUB_TOKEN ...
 ```
 
 In this example, the secret name is `github_token`. The following workflow
