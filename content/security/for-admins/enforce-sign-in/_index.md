@@ -35,10 +35,16 @@ following occurs:
 - When a user signs out, the **Sign in required!** prompt appears and they can
   no longer use Docker Desktop.
 
-> **Enforce sign-in versus enforce SSO**
->
-> Enforcing sign-in ensures that users are required to sign in to use Docker Desktop.
-> If your organization is also using single sign-on (SSO), you can optionally enforce SSO.
-> This means that your users must use SSO to sign in, instead of a username and password.
-> When you enforce sign-in and enforce SSO, your users must sign in and must use SSO to do so.
-> See [Enforce SSO](/security/for-admins/single-sign-on/connect#optional-enforce-sso) for details on how to enable this for your SSO connection.
+## Enforcing sign-in versus enforcing single sign-on (SSO)
+
+[Enforcing
+SSO](/security/for-admins/single-sign-on/connect#optional-enforce-sso) and
+enforcing sign-in are different features. The following table provides a
+description and benefits when using each feature.
+
+| Enforcement                       | Description                                                     | Benefits                                                                                                                                                                                                                                                   |
+|:----------------------------------|:----------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Enforce sign-in only              | Users must sign in before using Docker Desktop.                 | Ensures users receive the benefits of your subscription and ensures security features are applied. In addition, you gain insights into users’ activity.                                                                                                    |
+| Enforce single sign-on (SSO) only | If users sign in, they must sign in using SSO.                  | Centralizes authentication and enforces unified policies set by the identity provider.                                                                                                                                                                     |
+| Enforce both                      | Users must sign in using SSO before using Docker Desktop.       | Ensures users receive the benefits of your subscription and ensures security features are applied. In addition, you gain insights into users’ activity. Finally, it centralizes authentication and enforces unified policies set by the identity provider. |
+| Enforce neither                   | If users sign in, they can use SSO or their Docker credentials. | Allows users to access Docker Desktop without barriers, but at the cost of reduced security and insights.                                                                                                                                                  |
