@@ -2149,7 +2149,7 @@ Manuals:
       - path: /docker-hub/repos/categories/
         title: Categories
   - path: /docker-hub/download-rate-limit/
-    title: Download rate limit
+    title: Usage and rate limits
   - path: /docker-hub/webhooks/
     title: Webhooks
   - path: /docker-hub/service-accounts/
