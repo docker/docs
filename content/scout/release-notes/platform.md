@@ -57,8 +57,6 @@ view in the Docker Scout Dashboard to see all exceptions that apply to a given
 image.
 
 For more information, see [Manage vulnerability exceptions](/scout/explore/exceptions.md).
-If you're new to VEX, check out this use-case guide:
-[Suppress image vulnerabilities with VEX](/scout/guides/vex.md).
 
 ### 2024-05-06
 
