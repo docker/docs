@@ -253,8 +253,6 @@ Guides:
           title: Text summarization
     - path: /guides/use-case/jupyter/
       title: Data science with JupyterLab
-    - path: /scout/guides/vex/
-      title: Suppress CVEs with VEX
     - path: /guides/use-case/databases/
       title: Use containerized databases
 
@@ -1424,6 +1422,10 @@ Manuals:
         title: Metrics exporter
     - sectiontitle: How-tos
       section:
+      - path: /scout/how-tos/create-exceptions-gui/
+        title: Create exceptions (GUI)
+      - path: /scout/how-tos/create-exceptions-vex/
+        title: Create exceptions (VEX)
       - path: /scout/how-tos/artifact-types/
         title: Specify artifact type or location
       - path: /scout/how-tos/view-create-sboms/
