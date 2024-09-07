@@ -57,6 +57,14 @@ exposed. Consider using the
 [`crazy-max/ghaction-github-runtime`](https://github.com/crazy-max/ghaction-github-runtime),
 GitHub Action as a helper for exposing the variables.
 
+If you are using the `docker-container` driver, `ACTIONS_RUNTIME_TOKEN` and `ACTIONS_RUNTIME_URL` environment variables must be passed into the container. 
+
+```console
+docker buildx create --driver=docker-container --use --bootstrap \
+  --driver-opt=env.ACTIONS_RUNTIME_TOKEN=$ACTIONS_RUNTIME_TOKEN \
+  --driver-opt=env.ACTIONS_RUNTIME_URL=$ACTIONS_RUNTIME_URL
+```
+
 ## Scope
 
 Scope is a key used to identify the cache object. By default, it is set to
