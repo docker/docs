@@ -1,5 +1,7 @@
 ---
 title: Update the application
+weight: 30
+linkTitle: "Part 2: Update the application"
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers,
   docker desktop
 description: Making changes to your application

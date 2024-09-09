@@ -1,5 +1,7 @@
 ---
 title: Image-building best practices
+weight: 90
+linkTitle: "Part 8: Image-building best practices"
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers,
   docker desktop
 description: Tips for building images for your application
@@ -201,7 +203,7 @@ In this section, you learned a few image building best practices, including laye
 
 Related information:
  - [Dockerfile reference](/reference/dockerfile/)
- - [Dockerfile best practices](/build/building/best-practices.md)
+ - [Dockerfile best practices](/manuals/build/building/best-practices.md)
 
 ## Next steps
 

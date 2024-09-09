@@ -1,7 +1,8 @@
 ---
+title: Natural language processing guides
+linkTitle: Natural language processing
 description: Learn how to build natural language processing (NLP) applications.
 keywords:  nlp, natural language processing
-title: Natural language processing guides
 ---
 
 The natural language processing (NLP) guides teach you how to build and run NLP

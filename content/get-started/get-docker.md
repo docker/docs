@@ -4,6 +4,7 @@ description: Download and install Docker on the platform of your choice, includi
 keywords: install docker, docker download, download docker, docker installation, how
   to install docker, get docker, docker locally
 title: Get Docker
+weight: 10
 aliases:
  - /install/
  - /install/overview/

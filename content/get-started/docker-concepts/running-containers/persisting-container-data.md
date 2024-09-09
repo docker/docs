@@ -1,5 +1,6 @@
 ---
 title: Persisting container data
+weight: 3
 keywords: concepts, build, images, container, docker desktop
 description: This concept page will teach you the significance of data persistence in Docker
 aliases:

@@ -1,5 +1,6 @@
 ---
 title: Use-case guides
+weight: 20
 keywords: guide, use-case
 description: Learn how to accomplish tasks with Docker.
 notoc: true

@@ -1,5 +1,7 @@
 ---
 title: Multi container apps
+weight: 70
+linkTitle: "Part 6: Multi-container apps"
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers,
   docker desktop
 description: Using more than one container in your application
@@ -313,7 +315,7 @@ container. You learned a little bit about container networking and service disco
 
 Related information:
  - [docker CLI reference](/reference/cli/docker/)
- - [Networking overview](/engine/network/_index.md)
+ - [Networking overview](/manuals/engine/network/_index.md)
 
 ## Next steps
 

@@ -20,8 +20,6 @@
       </thead>
       <tbody>
         {{ range .Paginator.Pages }}
-        {{ $scratch := partialCached "utils/tocparser.html" . . }}
-        {{ $sections := $scratch.GetSortedMapValues "sections" }}
         <tr>
           <td>
             <a href="{{ .Permalink }}" class="link">
@@ -30,10 +28,9 @@
           </td>
           <td>
             <span class="text-gray-light dark:text-gray-dark">
-              {{ range $i, $e := $sections }}
-                {{ if $i }} / {{ end }}
-                {{ $e.title }}
-              {{ end }}
+              {{- range .Ancestors.Reverse }}
+                {{ .Title }} / 
+              {{- end }}
             </span>
           </td>
         </tr>

@@ -1,5 +1,6 @@
 ---
 title: Examples using the Docker Engine SDKs and Docker API
+linkTitle: Examples
 description: Examples on how to perform a given Docker operation using the Go and
   Python SDKs and the HTTP API using curl.
 keywords: developing, api, sdk, developers, rest, curl, python, go
