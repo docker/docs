@@ -363,7 +363,7 @@ For more information, see [microsoft/WSL#11794](https://github.com/microsoft/WSL
 
 #### For Windows
 
-- Added support for [Kerberos and NTLM proxy authentication](settings/windows.md#proxy-authentication) on Windows. Requires a Business subscription.
+- Added support for [Kerberos and NTLM proxy authentication](/manuals/desktop/settings.md#proxy-authentication) on Windows. Requires a Business subscription.
 
 ### Upgrades
 
@@ -861,7 +861,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 ### New
 
-- Rosetta is now Generally Available for all users on macOS 13 or later. It provides faster emulation of Intel-based images on Apple Silicon. To use Rosetta, see [Settings](settings/mac.md). Rosetta is enabled by default on macOS 14.1 and later.
+- Rosetta is now Generally Available for all users on macOS 13 or later. It provides faster emulation of Intel-based images on Apple Silicon. To use Rosetta, see [Settings](/manuals/desktop/settings.md). Rosetta is enabled by default on macOS 14.1 and later.
 - Docker Desktop now detects if a WSL version is out of date. If an out dated version of WSL is detected, you can allow Docker Desktop to automatically update the installation or you can manually update WSL outside of Docker Desktop.
 - New installations of Docker Desktop for Windows now require a Windows version of 19044 or later.
 - Administrators now have the ability to control Docker Scout image analysis  in [Settings Management](/manuals/security/for-admins/hardened-desktop/settings-management/configure.md).
@@ -922,7 +922,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 #### For Windows
 
-- **Switch to Windows containers** option in the tray menu may not show up on Windows. As a workaround, edit the [`settings.json` file](https://docs.docker.com/desktop/settings/windows/) and set `"displaySwitchWinLinContainers": true`.
+- **Switch to Windows containers** option in the tray menu may not show up on Windows. As a workaround, edit the [`settings.json` file](/manuals/desktop/settings.md) and set `"displaySwitchWinLinContainers": true`.
 
 #### For all platforms
 
@@ -1150,13 +1150,13 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 #### For Mac
 
 - Fixed a bug that prevented Docker Desktop from starting. [docker/for-mac#6890](https://github.com/docker/for-mac/issues/6890)
-- Resource Saver is now available on Mac. It optimises Docker Desktop's usage of your system resources when no containers are running. To access this feature, make sure you have [turned on access to experimental features](settings/mac.md) in settings.
+- Resource Saver is now available on Mac. It optimises Docker Desktop's usage of your system resources when no containers are running. To access this feature, make sure you have [turned on access to experimental features](/manuals/desktop/settings.md) in settings.
 
 #### For Windows
 
 - Fixed a bug where the self-diagnose tool showed a false-positive failure when vpnkit is expected to be not running. Fixes [docker/for-win#13479](https://github.com/docker/for-win/issues/13479).
 - Fixed a bug where an invalid regular expression in the search bar caused an error. Fixes [docker/for-win#13592](https://github.com/docker/for-win/issues/13592).
-- Resource Saver is now available on Windows Hyper-V. It optimises Docker Desktop's usage of your system resources when no containers are running. To access this feature, make sure you have [turned on access to experimental features](settings/windows.md) in settings.
+- Resource Saver is now available on Windows Hyper-V. It optimises Docker Desktop's usage of your system resources when no containers are running. To access this feature, make sure you have [turned on access to experimental features](/manuals/desktop/settings.md) in settings.
 
 ## 4.21.1
 
@@ -1268,7 +1268,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 - Fixed a bug that meant WSL data could not be moved to a different disk. Fixes [docker/for-win#13269](https://github.com/docker/for-win/issues/13269).
 - Fixed a bug where Docker Desktop was not stopping its WSL distros (docker-desktop and docker-desktop-data) when it was shutdown, consuming host memory unnecessarily.
-- Added a new setting that allows the Windows Docker daemon to use Docker Desktop's internal proxy when running Windows containers. See [Windows proxy settings](settings/windows.md#proxies).
+- Added a new setting that allows the Windows Docker daemon to use Docker Desktop's internal proxy when running Windows containers. See [Windows proxy settings](/manuals/desktop/settings.md#proxies).
 
 #### For Linux
 
@@ -2297,7 +2297,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 #### For Mac
 
-- Docker Desktop 4.6.0 gives macOS users the option of enabling a new experimental file sharing technology called VirtioFS. During testing VirtioFS has been shown to drastically reduce the time taken to sync changes between the host and VM, leading to substantial performance improvements. For more information, see [VirtioFS](settings/mac.md#beta-features).
+- Docker Desktop 4.6.0 gives macOS users the option of enabling a new experimental file sharing technology called VirtioFS. During testing VirtioFS has been shown to drastically reduce the time taken to sync changes between the host and VM, leading to substantial performance improvements. For more information, see [VirtioFS](/manuals/desktop/settings.md#beta-features).
 
 ### Updates
 

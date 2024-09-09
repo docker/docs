@@ -1560,9 +1560,9 @@ TCP connection is idle for more than five minutes (related to
 
 **New**
 
-- Dedicated preference pane for advanced configuration of the docker daemon (edit daemon.json). See [Daemon Advanced (JSON configuration file)](../settings/mac.md#docker-engine).
+- Dedicated preference pane for advanced configuration of the docker daemon (edit daemon.json). See [Daemon Advanced (JSON configuration file)](/manuals/desktop/settings.md#docker-engine).
 
-- Docker Experimental mode can be toggled. See [Daemon Basic (experimental mode and registries)](../settings/mac.md#docker-engine).
+- Docker Experimental mode can be toggled. See [Daemon Basic (experimental mode and registries)](/manuals/desktop/settings.md#docker-engine).
 
 **Upgrades**
 

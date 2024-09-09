@@ -50,10 +50,7 @@ work.
 
 1. Verify that your `getting-started-app` directory is in a directory defined in
 Docker Desktop's file sharing setting. This setting defines which parts of your
-filesystem you can share with containers. For details about accessing the
-setting, see the topic for [Mac](/manuals/desktop/settings/mac.md#file-sharing),
-[Windows](/manuals/desktop/settings/windows.md#file-sharing), or
-[Linux](/manuals/desktop/settings/linux.md#file-sharing).
+filesystem you can share with containers. For details about accessing the setting, see [File sharing](/manuals/desktop/settings.md#file-sharing).
 
 2. Open a terminal and change directory to the `getting-started-app`
    directory.
