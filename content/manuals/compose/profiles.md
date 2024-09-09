@@ -58,7 +58,7 @@ $ docker compose --profile debug up
 $ COMPOSE_PROFILES=debug docker compose up
 ```
 
-Both commands start the servies with the `debug` profile enabled.
+Both commands start the services with the `debug` profile enabled.
 In the previous `compose.yml` file, this starts the services
 `db` and `phpmyadmin`.
 
