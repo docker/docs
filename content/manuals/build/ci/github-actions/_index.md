@@ -66,7 +66,7 @@ Create a GitHub repository and configure the Docker Hub credentials.
 
 2. Open the repository **Settings**, and go to **Secrets and variables** > **Actions**.
 
-3. Create a new **Repository variable** named `DOCKER_USERNAME` and your Docker ID as value.
+3. Create a new **Repository variable** named `DOCKERHUB_USERNAME` and your Docker ID as value.
 
 4. Create a new
    [Personal Access Token (PAT)](/security/for-developers/access-tokens/#create-an-access-token)
