@@ -20,7 +20,11 @@
 </nav>
 
 {{ define "renderChildren" }}
-  {{- range .Pages }}
+  {{- $pages := .Pages }}
+  {{- if .Params.sidebar.reverse }}
+    {{ $pages = .Pages.Reverse }}
+  {{- end }}
+  {{- range $pages }}
     {{- if eq .Params.sitemap false }}
       {{- continue }}
     {{- end }}
