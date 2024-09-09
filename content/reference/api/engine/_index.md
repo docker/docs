@@ -127,6 +127,7 @@ You can specify the API version to use in any of the following ways:
 
 | Docker version | Maximum API version        | Change log                                                                   |
 |:---------------|:---------------------------|:-----------------------------------------------------------------------------|
+| 27.2           | [1.47](/reference/api/engine/version/v1.47/) | [changes](/reference/api/engine/version-history/#v147-api-changes) |
 | 27.1           | [1.46](/reference/api/engine/version/v1.46/) | [changes](/reference/api/engine/version-history/#v146-api-changes) |
 | 27.0           | [1.46](/reference/api/engine/version/v1.46/) | [changes](/reference/api/engine/version-history/#v146-api-changes) |
 | 26.1           | [1.45](/reference/api/engine/version/v1.45/) | [changes](/reference/api/engine/version-history/#v145-api-changes) |
