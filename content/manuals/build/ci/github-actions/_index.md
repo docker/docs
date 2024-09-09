@@ -27,7 +27,7 @@ The following GitHub Actions are available:
   installs [QEMU](https://github.com/qemu/qemu) static binaries for multi-arch
   builds.
 - [Docker Buildx Bake](https://github.com/marketplace/actions/docker-buildx-bake):
-  enables using high-level builds with [Bake](../../bake/index.md).
+  enables using high-level builds with [Bake](../../bake/_index.md).
 - [Docker Scout](https://github.com/docker/scout-action):
   analyze Docker images for security vulnerabilities.
 
@@ -69,10 +69,10 @@ Create a GitHub repository and configure the Docker Hub credentials.
 3. Create a new **Repository variable** named `DOCKERHUB_USERNAME` and your Docker ID as value.
 
 4. Create a new
-   [Personal Access Token (PAT)](/security/for-developers/access-tokens/#create-an-access-token)
+   [personal access token](/security/for-developers/access-tokens/#create-an-access-token)
    for Docker Hub. You can name this token `clockboxci`.
 
-5. Add the PAT as a **Repository secret** in your GitHub repository, with the name
+5. Add the Docker Hub access token as a **Repository secret** in your GitHub repository, with the name
    `DOCKERHUB_TOKEN`.
 
 With your repository created, and credentials configured, you're now ready for
@@ -203,7 +203,7 @@ Save the workflow file and run the job.
    [repositories on Docker Hub](https://hub.docker.com/repositories).
 
    If you see the new repository in that list, it means the GitHub Actions
-   successfully pushed the image to Docker Hub!
+   successfully pushed the image to Docker Hub.
 
 ## Next steps
 
