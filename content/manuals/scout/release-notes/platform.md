@@ -20,6 +20,19 @@ for what's coming next.
 
 New features and enhancements released in the third quarter of 2024.
 
+### 2024-09-05
+
+This release changes how [health scores](/manuals/scout/policy/scores.md) are
+calculated in Docker Scout. The health score calculation now considers optional
+and custom policies that you have configured for your organization.
+
+This means that if you have enabled, disabled, or customized any of the default
+policies, Docker Scout will now take those policies into account when
+calculating the health score for your organization's images.
+
+If you haven't yet enabled Docker Scout for your organization, the health score
+calculation will be based on the out-of-the-box policies.
+
 ### 2024-08-13
 
 This release changes the out-of-the-box policies to align with the policy
