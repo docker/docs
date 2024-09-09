@@ -97,7 +97,7 @@ params:
   repo: https://github.com/docker/docs
   docs_url: https://docs.docker.com
 
-  latest_engine_api_version: "1.46"
+  latest_engine_api_version: "1.47"
   docker_ce_version: "27.2.0"
   compose_version: "v2.29.2"
   compose_file_v3: "3.8"
@@ -282,9 +282,10 @@ module:
       mounts:
         - source: docs/extend
           target: content/manuals/engine/extend
-          excludefiles: "index.md"
-        - source: docs/extend/index.md
-          target: content/manuals/engine/extend/_index.md
+          excludeFiles:
+            - "EBS_volume.md"
+            - "plugins_metrics.md"
+            - "plugins_services.md"
         - source: docs/deprecated.md
           target: content/manuals/engine/deprecated.md
         - source: docs/reference/run.md
