@@ -1,5 +1,7 @@
 ---
-title: Docker Engine release notes
+title: Docker Engine prior releases
+linkTitle: Prior releases
+weight: 100
 description: Release notes for Docker CE
 keywords: release notes, community
 toc_max: 2
