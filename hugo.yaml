@@ -97,7 +97,7 @@ params:
   repo: https://github.com/docker/docs
   docs_url: https://docs.docker.com
 
-  latest_engine_api_version: "1.46"
+  latest_engine_api_version: "1.47"
   docker_ce_version: "27.2.0"
   compose_version: "v2.29.2"
   compose_file_v3: "3.8"
@@ -120,19 +120,19 @@ params:
 menus:
   main:
   - name: Get started
-    url: /get-started/
+    pageRef: /get-started/
     weight: 1
   - name: Guides
-    url: /guides/
+    pageRef: /guides/
     weight: 2
   - name: Manuals
-    url: /manuals/
+    pageRef: /manuals/
     weight: 3
   - name: Reference
-    url: /reference/
+    pageRef: /reference/
     weight: 4
   - name: Learning paths
-    url: /learning-paths/
+    pageRef: /learning-paths/
     weight: 5
 
   footer:
@@ -251,9 +251,10 @@ module:
 
     - path: github.com/moby/moby
       mounts:
-        - source: docs/api
-          target: content/reference/api/engine
-          includeFiles: "*.md"
+        - source: docs/api/v1.24.md
+          target: content/reference/api/engine/version/v1.24.md
+        - source: docs/api/version-history.md
+          target: content/reference/api/engine/version-history.md
         - source: docs/api
           target: static/reference/api/engine
           includeFiles: "*.yaml"
@@ -266,28 +267,29 @@ module:
           target: content/reference/build-checks
           includeFiles: "*.md"
         - source: docs/buildkitd.toml.md
-          target: content/build/buildkit/toml-configuration.md
+          target: content/manuals/build/buildkit/toml-configuration.md
         - source: docs/attestations/slsa-definitions.md
-          target: content/build/metadata/attestations/slsa-definitions.md
+          target: content/manuals/build/metadata/attestations/slsa-definitions.md
         - source: docs/attestations/attestation-storage.md
-          target: content/build/metadata/attestations/attestation-storage.md
+          target: content/manuals/build/metadata/attestations/attestation-storage.md
 
     - path: github.com/docker/buildx
       mounts:
         - source: docs/bake-reference.md
-          target: content/build/bake/reference.md
+          target: content/manuals/build/bake/reference.md
 
     - path: github.com/docker/cli
       mounts:
         - source: docs/extend
-          target: content/engine/extend
-          excludefiles: "index.md"
-        - source: docs/extend/index.md
-          target: content/engine/extend/_index.md
+          target: content/manuals/engine/extend
+          excludeFiles:
+            - "EBS_volume.md"
+            - "plugins_metrics.md"
+            - "plugins_services.md"
         - source: docs/deprecated.md
-          target: content/engine/deprecated.md
+          target: content/manuals/engine/deprecated.md
         - source: docs/reference/run.md
-          target: content/engine/containers/run.md
+          target: content/manuals/engine/containers/run.md
         - source: docs/reference/dockerd.md
           target: content/reference/cli/dockerd.md
 

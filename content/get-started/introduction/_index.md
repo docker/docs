@@ -1,6 +1,7 @@
 ---
 title: Introduction
 keywords: get started, getting started, how to get started
+weight: 30
 description: |
   Get started with Docker. You'll learn about Docker Desktop, developing with
   Docker, as well as how to build and push your first image.

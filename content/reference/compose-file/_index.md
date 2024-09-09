@@ -4,7 +4,7 @@ description: Find the latest recommended version of the Docker Compose file form
 keywords: docker compose file, docker compose yml, docker compose reference, docker
   compose cmd, docker compose user, docker compose image, yaml spec, docker compose
   syntax, yaml specification, docker compose specification
-title: Overview
+title: Compose file reference
 toc_max: 4
 toc_min: 1
 grid:
@@ -40,9 +40,9 @@ aliases:
 
 >**New to Docker Compose?**
 >
-> Find more information about the [key features and use cases of Docker Compose](/compose/intro/features-uses.md) or [try the quickstart guide](/compose/gettingstarted.md).
+> Find more information about the [key features and use cases of Docker Compose](/manuals/compose/intro/features-uses.md) or [try the quickstart guide](/manuals/compose/gettingstarted.md).
 
-The Compose Specification is the latest and recommended version of the Compose file format. It helps you define a [Compose file](/compose/compose-application-model.md) which is used to configure your Docker application’s services, networks, volumes, and more.
+The Compose Specification is the latest and recommended version of the Compose file format. It helps you define a [Compose file](/manuals/compose/compose-application-model.md) which is used to configure your Docker application’s services, networks, volumes, and more.
 
 Legacy versions 2.x and 3.x of the Compose file format were merged into the Compose Specification. It is implemented in versions 1.27.0 and above (also known as Compose V2) of the Docker Compose CLI.
 

@@ -1,5 +1,6 @@
 ---
 title: Build a text summarization app
+linkTitle: Text summarization
 keywords: nlp, natural language processing, text summarization, python, bert extractive summarizer
 description: Learn how to build and run a text summarization application using Python, Bert Extractive Summarizer, and Docker.
 ---

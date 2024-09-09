@@ -5,6 +5,7 @@ keywords: what is a docker, docker daemon, why use docker, docker architecture, 
   to use docker for, docker client, what is docker for, why docker, uses for docker,
   what is docker container used for, what are docker containers used for
 title: What is Docker?
+weight: 20
 aliases:
  - /introduction/understanding-docker/
  - /engine/userguide/basics/
@@ -106,7 +107,7 @@ Docker API. The Docker client can communicate with more than one daemon.
 
 ### Docker Desktop
 
-Docker Desktop is an easy-to-install application for your Mac, Windows or Linux environment that enables you to build and share containerized applications and microservices. Docker Desktop includes the Docker daemon (`dockerd`), the Docker client (`docker`), Docker Compose, Docker Content Trust, Kubernetes, and Credential Helper. For more information, see [Docker Desktop](/desktop/index.md).
+Docker Desktop is an easy-to-install application for your Mac, Windows or Linux environment that enables you to build and share containerized applications and microservices. Docker Desktop includes the Docker daemon (`dockerd`), the Docker client (`docker`), Docker Compose, Docker Content Trust, Kubernetes, and Credential Helper. For more information, see [Docker Desktop](/manuals/desktop/index.md).
 
 ### Docker registries
 

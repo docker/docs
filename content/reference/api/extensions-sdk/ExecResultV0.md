@@ -1,12 +1,11 @@
 ---
+title: "Interface: ExecResultV0"
 description: Docker extension API reference
 keywords: Docker, extensions, sdk, API, reference
 aliases:
  - /desktop/extensions-sdk/dev/api/reference/interfaces/ExecResultV0/
  - /extensions/extensions-sdk/dev/api/reference/interfaces/ExecResultV0/
 ---
-
-# Interface: ExecResultV0
 
 ## Properties
 

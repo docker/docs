@@ -1,5 +1,6 @@
 ---
 title: Overriding container defaults
+weight: 2
 keywords: concepts, build, images, container, docker desktop
 description: This concept page will teach you how to override the container defaults using the `docker run` command.
 aliases: 

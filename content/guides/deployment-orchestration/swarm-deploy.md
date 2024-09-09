@@ -103,8 +103,8 @@ In addition to deploying to Swarm, you've also described your application as a s
 
 Further documentation for all new Swarm objects and CLI commands used in this article are available here:
 
- - [Swarm Mode](/engine/swarm/_index.md)
- - [Swarm Mode Services](/engine/swarm/how-swarm-mode-works/services.md)
- - [Swarm Stacks](/engine/swarm/stack-deploy.md)
+ - [Swarm Mode](/manuals/engine/swarm/_index.md)
+ - [Swarm Mode Services](/manuals/engine/swarm/how-swarm-mode-works/services.md)
+ - [Swarm Stacks](/manuals/engine/swarm/stack-deploy.md)
  - [`docker stack *`](/reference/cli/docker/stack/)
  - [`docker service *`](/reference/cli/docker/service/)

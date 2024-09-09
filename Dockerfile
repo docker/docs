@@ -50,8 +50,8 @@ USER root
 RUN --mount=type=bind,target=. \
     /usr/local/bin/markdownlint-cli2 \
     "content/**/*.md" \
-    "#content/engine/release-notes/*.md" \
-    "#content/desktop/previous-versions/*.md"
+    "#content/manuals/engine/release-notes/*.md" \
+    "#content/manuals/desktop/previous-versions/*.md"
 
 # test validates HTML output and checks for broken links
 FROM wjdp/htmltest:v${HTMLTEST_VERSION} AS test

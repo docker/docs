@@ -1,5 +1,6 @@
 ---
 title: Build a sentiment analysis app
+linkTitle: Sentiment analysis
 keywords: nlp, natural language processing, sentiment analysis, python, nltk
 description: Learn how to build and run a sentiment analysis application using Python, NLTK, and Docker.
 ---

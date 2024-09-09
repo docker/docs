@@ -1,5 +1,7 @@
 ---
 title: Use bind mounts
+weight: 60
+linkTitle: "Part 5: Use bind mounts"
 keywords: 'get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop'
 description: Using bind mounts in our application
 aliases:
@@ -48,10 +50,7 @@ work.
 
 1. Verify that your `getting-started-app` directory is in a directory defined in
 Docker Desktop's file sharing setting. This setting defines which parts of your
-filesystem you can share with containers. For details about accessing the
-setting, see the topic for [Mac](/desktop/settings/mac.md#file-sharing),
-[Windows](/desktop/settings/windows.md#file-sharing), or
-[Linux](/desktop/settings/linux.md#file-sharing).
+filesystem you can share with containers. For details about accessing the setting, see [File sharing](/manuals/desktop/settings.md#file-sharing).
 
 2. Open a terminal and change directory to the `getting-started-app`
    directory.

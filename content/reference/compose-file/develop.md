@@ -48,7 +48,7 @@ The `develop` subsection defines configuration options that are applied by Compo
 ### watch
 
 The `watch` attribute defines a list of rules that control automatic service updates based on local file changes. `watch` is a sequence, each individual item in the sequence defines a rule to be applied by 
-Compose to monitor source code for changes. For more information, see [Use Compose Watch](/compose/file-watch.md).
+Compose to monitor source code for changes. For more information, see [Use Compose Watch](/manuals/compose/file-watch.md).
 
 #### action
 

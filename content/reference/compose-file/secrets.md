@@ -40,4 +40,4 @@ secrets:
 
 ## Additional resources
 
-For more information, see [How to use secrets in Compose](/compose/use-secrets.md).
+For more information, see [How to use secrets in Compose](/manuals/compose/use-secrets.md).

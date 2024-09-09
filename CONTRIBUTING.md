@@ -24,9 +24,12 @@ The website is built using [Hugo](https://gohugo.io/). The content is primarily
 Markdown files in the `/content` directory of this repository (with a few
 exceptions, see [Content not edited here](#content-not-edited-here)).
 
-The structure of the sidebar navigation on the site is defined in
-[`/data/toc.yaml`](./data/toc.yaml). To rename or change the location of a page
-in the left-hand navigation, edit the `toc.yaml` file.
+The structure of the sidebar navigation on the site is defined by the site's
+section hierarchy in the `contents` directory. The titles of the pages are
+defined in the front matter of the Markdown files. You can use `title` and
+`linkTitle` to define the title of the page. `title` is used for the page
+title, and `linkTitle` is used for the sidebar title. If `linkTitle` is not
+defined, the `title` is used for both.
 
 You must fork this repository to create a pull request to propose changes. For more details, see [Local setup](#local-setup).
 

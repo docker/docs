@@ -31,14 +31,6 @@
     @apply dark:hue-rotate-180 dark:invert dark:filter;
   }
 
-  .sidebar-hover {
-    @apply hover:bg-gray-light-200 hover:dark:bg-gray-dark-200;
-  }
-
-  .sidebar-underline {
-    @apply underline decoration-blue-light decoration-4 underline-offset-4 dark:decoration-blue-dark;
-  }
-
   .bg-pattern-blue {
     background-color: theme(colors.white / 50%);
     background-image: url('/assets/images/bg-pattern-blue.webp');
