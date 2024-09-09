@@ -10,10 +10,9 @@ image and file system management in the Docker Engine.
 
 > [!NOTE]
 > 
-> After switching to the containerd image store,
-> images and containers in the classic image store won't be visible.
-> All of those containers and images still exist.
-> To see them again, turn off the containerd image store feature.
+> Images and containers are not shared between the classic image store and the
+> new containerd image store. When you switch image stores, containers and
+> images from the inactive store remain but are hidden until you switch back.
 
 ## What is containerd?
 
@@ -53,8 +52,13 @@ it's a prerequisite for unlocking a range of new use cases, including:
 
 ## Enable the containerd image store
 
-The containerd image store isn't enabled by default.
-To enable the feature for Docker Desktop:
+The containerd image store is enabled by default in Docker Desktop version 4.34
+and later, but only for clean installs or if you perform a factory reset. If
+you upgrade from an earlier version of Docker Desktop, or if you use an older
+version of Docker Desktop you must manually switch to the containerd image
+store.
+
+To manually enable this feature in Docker Desktop:
 
 1. Navigate to **Settings** in Docker Desktop.
 2. In the **General** tab, check **Use containerd for pulling and storing images**.

@@ -75,10 +75,11 @@ $ docker build --tag <org>/<image> \
   --push .
 ```
 
-To build images with SBOM attestations, you must either turn on
-the [containerd image store](/desktop/containerd.md) feature, or use a
-`docker-container` builder together with the `--push` flag to push the image
-(with attestations) directly to a registry.
+To build images with SBOM attestations, you must use either the [containerd
+image store](/desktop/containerd.md) feature, or use a `docker-container`
+builder together with the `--push` flag to push the image (with attestations)
+directly to a registry. The classic image store doesn't support manifest lists
+or image indices, which is required for adding attestations to an image.
 
 ## Extract to file
 
