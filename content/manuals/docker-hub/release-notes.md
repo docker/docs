@@ -13,7 +13,7 @@ tags: [Release notes]
 Here you can learn about the latest changes, new features, bug fixes, and
 known issues for each Docker Hub release.
 
-Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1) to see what's coming next.
+Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projects/51/views/1?filterQuery=) to see what's coming next.
 
 ## 2024-03-23
 
