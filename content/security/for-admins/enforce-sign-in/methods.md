@@ -18,10 +18,10 @@ This page outlines the different ways you can enforce sign-in for Docker Desktop
    $ HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Docker\Docker Desktop
    ```
 2. Create a multi-string value `allowedOrgs`. 
+3. As string data, use your organization’s name. Make sure it is all lowercase. 
    > [!IMPORTANT]
    >
-   > Only one entry for `allowedOrgs` is currently supported. If you add more than one value, sign-in enforcement silently fails.
-3. As string data use your organization’s name, all lowercase.
+   > As of Docker Desktop version 4.35 and later, you can add more than one organization. With Docker Desktop version 4.34 and earlier, if you add more than one organization sign-in enforcement silently fails.
 4. Restart Docker Desktop.
 5. Open Docker Desktop and when Docker Desktop starts, verify that the **Sign in required!** prompt appears.
 
@@ -66,11 +66,10 @@ There are many ways to deploy the registry key, for example using an MDM solutio
          </array>
      </dict>
    </plist>
-   ```
+   ``` 
    > [!IMPORTANT]
    >
-   > Only one entry for `allowedOrgs` is currently supported. If you add more than one value, sign-in enforcement silently fails.
-
+   > As of Docker Desktop version 4.35 and later, you can add more than one organization. With Docker Desktop version 4.34 and earlier, if you add more than one organization sign-in enforcement silently fails.
 3. Modify the file permissions to ensure the file cannot be edited by any non-administrator users.
 4. Restart Docker Desktop. 
 5. Open Docker Desktop and when Docker Desktop starts, verify that the **Sign in required!** prompt appears.
@@ -144,7 +143,7 @@ details, see [Manage members](/admin/organization/members/).
     ```
    > [!IMPORTANT]
    >
-   > Only one entry for `allowedOrgs` is currently supported. If you add more than one value, sign-in enforcement silently fails.
+   > As of Docker Desktop version 4.35 and later, you can add more than one organization to a single `registry.json` file. With Docker Desktop version 4.34 and earlier, if you add more than one organization sign-in enforcement silently fails.
 
 4. Verify that sign-in is enforced.
 
@@ -181,6 +180,10 @@ If you're using the Windows Command Prompt:
 ```console
 C:\Users\Admin> "Docker Desktop Installer.exe" install --allowed-org=myorg
 ```
+
+> [!IMPORTANT]
+>
+> As of Docker Desktop version 4.35 and later, you can add more than one organization to a single `registry.json` file. With Docker Desktop version 4.34 and earlier, if you add more than one organization sign-in enforcement silently fails.
 
 {{< /tab >}}
 {{< tab name="Mac" >}}
@@ -230,6 +233,10 @@ Path          Owner                  Access
 registry.json BUILTIN\Administrators NT AUTHORITY\SYSTEM Allow  FullControl...
 ```
 
+> [!IMPORTANT]
+>
+> As of Docker Desktop version 4.35 and later, you can add more than one organization to a single `registry.json` file. With Docker Desktop version 4.34 and earlier, if you add more than one organization sign-in enforcement silently fails.
+
 {{< /tab >}}
 {{< tab name="Mac" >}}
 
@@ -263,6 +270,10 @@ $ sudo ls -l "/Library/Application Support/com.docker.docker/registry.json"
 -rw-r--r--  1 root  admin  26 Jul 27 22:01 /Library/Application Support/com.docker.docker/registry.json
 ```
 
+> [!IMPORTANT]
+>
+> As of Docker Desktop version 4.35 and later, you can add more than one organization to a single `registry.json` file. With Docker Desktop version 4.34 and earlier, if you add more than one organization sign-in enforcement silently fails.
+
 {{< /tab >}}
 {{< tab name="Linux" >}}
 
@@ -295,6 +306,10 @@ Verify that the file has the expected permissions (`-rw-r--r--`) and ownership
 $ sudo ls -l /usr/share/docker-desktop/registry/registry.json
 -rw-r--r--  1 root  root  26 Jul 27 22:01 /usr/share/docker-desktop/registry/registry.json
 ```
+
+> [!IMPORTANT]
+>
+> As of Docker Desktop version 4.35 and later, you can add more than one organization to a single `registry.json` file. With Docker Desktop version 4.34 and earlier, if you add more than one organization sign-in enforcement silently fails.
 
 {{< /tab >}}
 {{< /tabs >}}
