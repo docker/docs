@@ -282,9 +282,10 @@ module:
       mounts:
         - source: docs/extend
           target: content/manuals/engine/extend
-          excludefiles: "index.md"
-        - source: docs/extend/index.md
-          target: content/manuals/engine/extend/_index.md
+          excludeFiles:
+            - "EBS_volume.md"
+            - "plugins_metrics.md"
+            - "plugins_services.md"
         - source: docs/deprecated.md
           target: content/manuals/engine/deprecated.md
         - source: docs/reference/run.md
