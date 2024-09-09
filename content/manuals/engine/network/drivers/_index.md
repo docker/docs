@@ -41,7 +41,7 @@ exist by default, and provide core networking functionality:
   `none` is not available for Swarm services.
   See [None network driver](none.md).
 
-- [Network plugins](/engine/extend/plugins_services/): You can install and use
+- [Network plugins](/engine/extend/plugins_network/): You can install and use
   third-party network plugins with Docker.
 
 ### Network driver summary
