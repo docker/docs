@@ -204,12 +204,13 @@ built so that it can provide a better evaluation result.
 Before you can build an image with attestations,
 you must enable the [containerd image store](../desktop/containerd.md)
 (or create a custom builder using the `docker-container` driver).
-The default image store doesn't support manifest lists,
+The classic image store doesn't support manifest lists,
 which is how the provenance attestations are attached to an image.
 
-Open **Settings** in Docker Desktop. Under the **General** section,
-check the **Use containerd for pulling and storing images** option.
-Note that changing the image store hides existing images and containers until you switch back.
+Open **Settings** in Docker Desktop. Under the **General** section, make sure
+that the **Use containerd for pulling and storing images** option is checked.
+Note that changing image stores temporarily hides images and containers of the
+inactive image store until you switch back.
 
 With the containerd image store enabled, rebuild the image with a new `v3` tag.
 This time, add the `--provenance=true` and `--sbom=true` flags.

@@ -29,6 +29,24 @@ The key features are:
 - Get summaries of project vulnerabilities from Docker Scout and receive next
   steps via CLI.
 
+## Data Privacy
+
+The Docker agent is trained exclusively on Docker's documentation and tools to
+assist with containerization and related tasks. It does not have access to your
+project's data outside the context of the questions you ask.
+
+When using the Docker Extension for GitHub Copilot, GitHub Copilot may include
+a reference to the currently open file in its request if authorized by the
+user. The Docker agent can read the file to provide context-aware responses.
+
+If the agent is requested to check for vulnerabilities or generate
+Docker-related assets, it will clone the referenced repository into in-memory
+storage to perform the necessary actions.
+
+Source code, questions, and responses are not persistently stored. The Docker
+agent processes data only to provide responses and discards it immediately
+afterward.
+
 ## Supported languages
 
 The Docker Extension for GitHub Copilot supports the following
