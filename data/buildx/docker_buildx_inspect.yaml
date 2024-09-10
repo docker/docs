@@ -27,6 +27,17 @@ inherited_options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: debug
+      shorthand: D
+      value_type: bool
+      default_value: "false"
+      description: Enable debug logging
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
 examples: |-
     ### Ensure that the builder is running before inspecting (--bootstrap) {#bootstrap}
 
@@ -48,8 +59,7 @@ examples: |-
     The following example shows information about a builder instance named
     `elated_tesla`:
 
-    > **Note**
-    >
+    > [!NOTE]
     > The asterisk (`*`) next to node build platform(s) indicate they have been
     > manually set during `buildx create`. Otherwise the platforms were
     > automatically detected.
