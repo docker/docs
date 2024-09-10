@@ -8,6 +8,12 @@ enableInlineShortcodes: true
 taxonomies:
   tag: tags
 
+permalinks:
+  page:
+    manuals: /:sections[1:]/:slugorfilename/
+  section:
+    manuals: /:sections[1:]/:slugorfilename/
+
 markup:
   tableOfContents:
     startLevel: 2
@@ -252,7 +258,7 @@ module:
     - path: github.com/moby/moby
       mounts:
         - source: docs/api/v1.24.md
-          target: content/reference/api/engine/version/v1-24.md
+          target: content/reference/api/engine/version/v1.24.md
         - source: docs/api/version-history.md
           target: content/reference/api/engine/version-history.md
         - source: docs/api

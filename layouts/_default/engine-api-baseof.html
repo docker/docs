@@ -6,7 +6,7 @@
     <!-- needed for adaptive design -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description"
-        content="Reference documentation and Swagger (OpenAPI) specification for the {{ strings.Replace .File.BaseFileName "-" "." }} version of the API served by Docker Engine." />
+        content="Reference documentation and Swagger (OpenAPI) specification for the {{ .File.BaseFileName }} version of the API served by Docker Engine." />
     <meta charset="utf-8" />
     <!-- favicon -->
     {{ partialCached "favicon.html" "favicon" }}

@@ -1360,7 +1360,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 - [Buildx v0.10.4](https://github.com/docker/buildx/releases/tag/v0.10.4)
 - [Compose 2.17.2](https://github.com/docker/compose/releases/tag/v2.17.2)
 - [Containerd v1.6.18](https://github.com/containerd/containerd/releases/tag/v1.6.18), which includes fixes for [CVE-2023-25153](https://github.com/advisories/GHSA-259w-8hf6-59c2) and [CVE-2023-25173](https://github.com/advisories/GHSA-hmfx-3pcx-653p).
-- [Docker Engine v20.10.24](https://docs.docker.com/engine/release-notes/20-10/#201024), which contains fixes for [CVE-2023-28841](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-28841),
+- [Docker Engine v20.10.24](https://docs.docker.com/engine/release-notes/20.10/#201024), which contains fixes for [CVE-2023-28841](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-28841),
   [CVE-2023-28840](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-28840), and
   [CVE-2023-28842](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-28842).
 
@@ -1441,7 +1441,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 ### Upgrades
 
 - [Containerd v1.6.18](https://github.com/containerd/containerd/releases/tag/v1.6.18), which includes fixes for [CVE-2023-25153](https://github.com/advisories/GHSA-259w-8hf6-59c2) and [CVE-2023-25173](https://github.com/advisories/GHSA-hmfx-3pcx-653p).
-- [Docker Engine v20.10.23](https://docs.docker.com/engine/release-notes/20-10/#201023).
+- [Docker Engine v20.10.23](https://docs.docker.com/engine/release-notes/20.10/#201023).
 - [Go 1.19.5](https://github.com/golang/go/releases/tag/go1.19.5)
 
 ### Bug fixes and enhancements
@@ -1562,7 +1562,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 - [Compose v2.15.1](https://github.com/docker/compose/releases/tag/v2.15.1)
 - [Containerd v1.6.14](https://github.com/containerd/containerd/releases/tag/v1.6.14)
-- [Docker Engine v20.10.22](https://docs.docker.com/engine/release-notes/20-10/#201022)
+- [Docker Engine v20.10.22](https://docs.docker.com/engine/release-notes/20.10/#201022)
 - [Buildx v0.10.0](https://github.com/docker/buildx/releases/tag/v0.10.0)
 - [Docker Scan v0.23.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.23.0)
 - [Go 1.19.4](https://github.com/golang/go/releases/tag/go1.19.4)
@@ -1685,7 +1685,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 ### Updates
 
-- [Docker Engine v20.10.21](/manuals/engine/release-notes/20-10.md#201021),
+- [Docker Engine v20.10.21](/manuals/engine/release-notes/20.10.md#201021),
   which contains mitigations against a Git vulnerability, tracked in [CVE-2022-39253](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-39253),
   and updates the handling of `image:tag@digest` image references.
 - [Docker Compose v2.12.2](https://github.com/docker/compose/releases/tag/v2.12.2)
@@ -1771,7 +1771,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 - [Docker Scan v0.21.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.21.0)
 - [Go 1.19.2](https://github.com/golang/go/releases/tag/go1.19.2) to address [CVE-2022-2879](https://www.cve.org/CVERecord?id=CVE-2022-2879), [CVE-2022-2880](https://www.cve.org/CVERecord?id=CVE-2022-2880) and [CVE-2022-41715](https://www.cve.org/CVERecord?id=CVE-2022-41715)
-- Updated Docker Engine and Docker CLI to [v20.10.20](/manuals/engine/release-notes/20-10.md#201020),
+- Updated Docker Engine and Docker CLI to [v20.10.20](/manuals/engine/release-notes/20.10.md#201020),
   which contain mitigations against a Git vulnerability, tracked in [CVE-2022-39253](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-39253),
   and updated handling of `image:tag@digest` image references, as well as a fix for [CVE-2022-36109](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-36109).
 - [Docker Credential Helpers v0.7.0](https://github.com/docker/docker-credential-helpers/releases/tag/v0.7.0)
@@ -2001,7 +2001,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 ### Updates
 
-- [Docker Engine v20.10.17](/manuals/engine/release-notes/20-10.md#201017)
+- [Docker Engine v20.10.17](/manuals/engine/release-notes/20.10.md#201017)
 - [Docker Compose v2.6.1](https://github.com/docker/compose/releases/tag/v2.6.1)
 - [Kubernetes v1.24.1](https://github.com/kubernetes/kubernetes/releases/tag/v1.24.1)
 - [cri-dockerd to v0.2.1](https://github.com/Mirantis/cri-dockerd/releases/tag/v0.2.1)
@@ -2082,7 +2082,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 ### Updates
 
 - [Compose v2.6.0](https://github.com/docker/compose/releases/tag/v2.6.0)
-- [Docker Engine v20.10.16](/manuals/engine/release-notes/20-10.md#201016)
+- [Docker Engine v20.10.16](/manuals/engine/release-notes/20.10.md#201016)
 - [containerd v1.6.4](https://github.com/containerd/containerd/releases/tag/v1.6.4)
 - [runc v1.1.1](https://github.com/opencontainers/runc/releases/tag/v1.1.1)
 - [Go 1.18.2](https://github.com/golang/go/releases/tag/go1.18.2)
@@ -2240,7 +2240,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 ### Updates
 
-- [Docker Engine v20.10.14](/manuals/engine/release-notes/20-10.md#201014)
+- [Docker Engine v20.10.14](/manuals/engine/release-notes/20.10.md#201014)
 - [Compose v2.4.1](https://github.com/docker/compose/releases/tag/v2.4.1)
 - [Buildx 0.8.2](https://github.com/docker/buildx/releases/tag/v0.8.2)
 - [containerd v1.5.11](https://github.com/containerd/containerd/releases/tag/v1.5.11)
@@ -2303,7 +2303,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 #### For all platforms
 
-- [Docker Engine v20.10.13](/manuals/engine/release-notes/20-10.md#201013)
+- [Docker Engine v20.10.13](/manuals/engine/release-notes/20.10.md#201013)
 - [Compose v2.3.3](https://github.com/docker/compose/releases/tag/v2.3.3)
 - [Buildx 0.8.0](https://github.com/docker/buildx/releases/tag/v0.8.0)
 - [containerd v1.4.13](https://github.com/containerd/containerd/releases/tag/v1.4.13)
@@ -2465,7 +2465,7 @@ Installing Docker Desktop 4.5.0 from scratch has a bug which defaults Docker Des
 
 ### Upgrades
 
-- [Docker Engine v20.10.12](/manuals/engine/release-notes/20-10.md#201012)
+- [Docker Engine v20.10.12](/manuals/engine/release-notes/20.10.md#201012)
 - [Compose v2.2.3](https://github.com/docker/compose/releases/tag/v2.2.3)
 - [Kubernetes 1.22.5](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.5)
 - [docker scan v0.16.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.16.0)
@@ -2556,7 +2556,7 @@ CVE-2021-44228](https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/).
 
 ### Upgrades
 
-- [Docker Engine v20.10.11](/manuals/engine/release-notes/20-10.md#201011)
+- [Docker Engine v20.10.11](/manuals/engine/release-notes/20.10.md#201011)
 - [containerd v1.4.12](https://github.com/containerd/containerd/releases/tag/v1.4.12)
 - [Buildx 0.7.1](https://github.com/docker/buildx/releases/tag/v0.7.1)
 - [Compose v2.2.1](https://github.com/docker/compose/releases/tag/v2.2.1)
@@ -2614,7 +2614,7 @@ actual memory usage. See
 
 ### Upgrades
 
-- [Docker Engine v20.10.10](/manuals/engine/release-notes/20-10.md#201010)
+- [Docker Engine v20.10.10](/manuals/engine/release-notes/20.10.md#201010)
 - [containerd v1.4.11](https://github.com/containerd/containerd/releases/tag/v1.4.11)
 - [runc v1.0.2](https://github.com/opencontainers/runc/releases/tag/v1.0.2)
 - [Go 1.17.2](https://golang.org/doc/go1.17)
