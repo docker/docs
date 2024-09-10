@@ -225,6 +225,8 @@
   - /go/build-summary/
 "/desktop/use-desktop/builds/#import-builds":
   - /go/builds-import/
+"/build/checks/#experimental-checks":
+  - "/go/build-checks-experimental/"
 
 # Build links (external)
 "https://www.docker.com/build-early-access-program/?utm_campaign=onboard-30-customer-zero&utm_medium=in-product-ad&utm_source=desktop_v4":
