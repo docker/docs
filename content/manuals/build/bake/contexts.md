@@ -93,6 +93,25 @@ multiple Dockerfiles that can't be easily merged into one.
 
 ## Deduplicate context transfer
 
+> **Note**
+>
+> As of Buildx version 0.17.0 and later, Bake automatically deduplicates
+> context transfer for targets that share the same context. In addition to
+> Buildx version 0.17.0, the builder must be running BuildKit version 0.16.0 or
+> later, and the Dockerfile syntax must be `docker/dockerfile:1.10` or later.
+>
+> If you meet these requirements, you don't need to manually deduplicate
+> context transfer as described in this section.
+>
+> - To check your Buildx version, run `docker buildx version`.
+> - To check your BuildKit version, run `docker buildx inspect --bootstrap` and
+>   look for the `BuildKit version` field.
+> - To check your Dockerfile syntax version, check the `syntax`
+>   [parser directive](/reference/dockerfile.md#syntax) in your Dockerfile. If
+>   it's not present, the default version whatever comes bundled with your
+>   current version of BuildKit. To set the version explicitly, add
+>   `#syntax=docker/dockerfile:1.10` at the top of your Dockerfile.
+
 When you build targets concurrently, using groups, build contexts are loaded
 independently for each target. If the same context is used by multiple targets
 in a group, that context is transferred once for each time it's used. This can

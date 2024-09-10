@@ -259,7 +259,7 @@ different ways, depending on your desired outcome.
 An image version can be expressed in several different ways:
 
 - If you specify a tag, the manager (or the Docker client, if you use
-  [content trust](../security/trust/index.md)) resolves that tag to a digest.
+  [content trust](../security/trust/_index.md)) resolves that tag to a digest.
   When the request to create a container task is received on a worker node, the
   worker node only sees the digest, not the tag.
 
@@ -306,7 +306,7 @@ of the image.
 
 > [!NOTE]>
 >
-> If [content trust](../security/trust/index.md) is
+> If [content trust](../security/trust/_index.md) is
 > enabled, the client actually resolves the image's tag to a digest before
 > contacting the swarm manager, to verify that the image is signed.
 > Thus, if you use content trust, the swarm manager receives the request
@@ -358,7 +358,7 @@ points to and updates the service tasks to use that digest.
 
 > [!NOTE]
 >
-> If you use [content trust](../security/trust/index.md), the Docker
+> If you use [content trust](../security/trust/_index.md), the Docker
 > client resolves image and the swarm manager receives the image and digest,
 >  rather than a tag.
 

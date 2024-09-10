@@ -17,7 +17,7 @@ However host binaries invoke from the extension executables (as binaries, shell 
 shipped as part of your extension and deployed to the host. As extensions can run on multiple platforms, this
 means that you need to ship the executables for all the platforms you want to support.
 
-Learn more about extensions [architecture](../architecture/index.md).
+Learn more about extensions [architecture](../architecture/_index.md).
 
 > [!NOTE]
 >

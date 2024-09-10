@@ -128,7 +128,7 @@ roll back to a previous version of the service.
 ## What's next?
 
 * Learn Swarm mode [key concepts](key-concepts.md).
-* Get started with the [Swarm mode tutorial](swarm-tutorial/index.md).
+* Get started with the [Swarm mode tutorial](swarm-tutorial/_index.md).
 * Explore Swarm mode CLI commands
   * [swarm init](/reference/cli/docker/swarm/init.md)
   * [swarm join](/reference/cli/docker/swarm/join.md)

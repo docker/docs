@@ -27,7 +27,7 @@ builders have used the backend to:
 - Store data in a local database and serve them back with a REST API.
 - Store the extension state, for example when a button starts a long-running process, so that if you navigate away from the extension user interface and comes back, the frontend can pick up where it left off.
 
-For more information about extension backends, see [Architecture](../architecture/index.md#the-backend).
+For more information about extension backends, see [Architecture](../architecture/_index.md#the-backend).
 
 ## Add a backend to the extension
 
@@ -357,5 +357,5 @@ call displayed.
 
 ## What's next?
 
-- Learn how to [share and publish your extension](../extensions/index.md).
-- Learn more about extensions [architecture](../architecture/index.md).
+- Learn how to [share and publish your extension](../extensions/_index.md).
+- Learn more about extensions [architecture](../architecture/_index.md).

@@ -16,16 +16,14 @@ secret mounts or SSH mounts, which expose secrets to your builds securely.
 
 ## Secret mounts
 
-Secret mounts expose secrets to the build containers as files. You [mount the
-secrets to the `RUN`
-instructions](/reference/dockerfile.md#run---mounttypesecret) that
+Secret mounts expose secrets to the build containers, as files or environment
+variables. You can use secret mounts to pass sensitive information to your
+builds, such as API tokens, passwords, or SSH keys. You [mount the secrets to
+the `RUN` instructions](/reference/dockerfile.md#run---mounttypesecret) that
 need to access them, similar to how you would define a bind mount or cache
 mount.
 
-```dockerfile
-RUN --mount=type=secret,id=mytoken \
-    TOKEN=$(cat /run/secrets/mytoken) ...
-```
+### Passing secrets
 
 To pass a secret to a build, use the [`docker build --secret`
 flag](/reference/cli/docker/buildx/build.md#secret), or the
@@ -82,20 +80,39 @@ $ docker build --secret id=API_TOKEN .
 
 ### Target
 
-By default, secrets are mounted to `/run/secrets/<id>`. You can customize the
-mount point in the build container using the `target` option in the Dockerfile.
+By default, secrets are mounted as files located at `/run/secrets/<id>`. You
+can customize how the secrets get mounted in the build container using the
+`target` and `env` options for the `RUN --mount` flag in the Dockerfile.
 
-The following example mounts the secret to a `/root/.aws/credentials` file in
-the build container.
+The following example takes secret id `aws` and mounts it to `/run/secrets/aws`
+in the build container.
 
-```console
-$ docker build --secret id=aws,src=/root/.aws/credentials .
+```dockerfile
+RUN --mount=type=secret,id=aws \
+    AWS_SHARED_CREDENTIALS_FILE=/run/secrets/aws \
+    aws s3 cp ...
 ```
+
+To mount a secret as a file with a different name, use the `target` option in
+the `--mount` flag.
 
 ```dockerfile
 RUN --mount=type=secret,id=aws,target=/root/.aws/credentials \
     aws s3 cp ...
 ```
+
+To mount a secret as an environment variable instead of a file, use the
+`env` option in the `--mount` flag.
+
+```dockerfile
+RUN --mount=type=secret,id=aws-key-id,env=AWS_ACCESS_KEY_ID \
+    --mount=type=secret,id=aws-secret-key,env=AWS_SECRET_ACCESS_KEY \
+    --mount=type=secret,id=aws-session-token,env=AWS_SESSION_TOKEN \
+    aws s3 cp ...
+```
+
+It's possible to use the `target` and `env` options together to mount a secret
+as both a file and an environment variable.
 
 ## SSH mounts
 

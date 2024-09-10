@@ -31,7 +31,7 @@ extension. If you request a review from the Docker Extensions team and have not 
 
 These guidelines don't replace Docker's terms of service or guarantee approval:
 - Review the [design guidelines](../design/design-guidelines.md)
-- Ensure the [UI styling](../design/index.md) is in line with Docker Desktop guidelines
+- Ensure the [UI styling](../design/_index.md) is in line with Docker Desktop guidelines
 - Ensure your extensions support both light and dark mode
 - Consider the needs of both new and existing users of your extension
 - Test your extension with potential users

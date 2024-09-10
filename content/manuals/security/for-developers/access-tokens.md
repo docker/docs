@@ -56,7 +56,7 @@ When prompted for a password, enter your personal access token instead of a pass
 
 > [!NOTE]
 >
-> If you have [two-factor authentication (2FA)](2fa/index.md) enabled, you must
+> If you have [two-factor authentication (2FA)](2fa/_index.md) enabled, you must
 > use a personal access token when logging in from the Docker CLI. 2FA is an
 > optional, but more secure method of authentication.
 

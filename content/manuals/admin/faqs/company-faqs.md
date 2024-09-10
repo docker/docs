@@ -57,7 +57,7 @@ You can add organizations to a company in the [Admin Console](../../admin/compan
 
 ### How does a company owner manage SSO/SCIM settings from a company?
 
-See your [SCIM](scim.md) and [SSO](../../security/for-admins/single-sign-on/configure/index.md) settings.
+See your [SCIM](scim.md) and [SSO](../../security/for-admins/single-sign-on/configure/_index.md) settings.
 
 ### How does a company owner enable group mapping in an IdP?
 

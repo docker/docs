@@ -17,17 +17,6 @@
   {{ end }}
   <a class="link" href="{{ $url }}">{{ .Text | safeHTML }}</a>
 {{- else -}}
-  {{/* check if the file links to index.md */}}
-  {{- if (strings.FindRE `([^_]|^)index.md` $url 1) -}}
-    <a
-      class="link"
-      href="{{ ref page (strings.Replace $url "index.md" "_index.md") }}"
-      >{{ .Text | safeHTML }}</a
-    >
-  {{- else -}}
-    {{/* relative link, use ref */}}
-    <a class="link" href="{{ ref page $url }}"
-      >{{ .Text | safeHTML }}</a
-    >
-  {{- end -}}
+  {{/* relative link, use ref */}}
+  <a class="link" href="{{ ref page $url }}">{{ .Text | safeHTML }}</a>
 {{- end -}}

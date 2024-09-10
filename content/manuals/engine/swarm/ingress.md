@@ -18,7 +18,7 @@ ports open between the swarm nodes before you enable Swarm mode:
 * Port `4789` UDP (configurable) for the container ingress network.
 
 When setting up networking in a Swarm, special care should be taken. Consult
-the [tutorial](swarm-tutorial/index.md#open-protocols-and-ports-between-the-hosts)
+the [tutorial](swarm-tutorial/_index.md#open-protocols-and-ports-between-the-hosts)
 for an overview.
 
 You must also open the published port between the swarm nodes and any external

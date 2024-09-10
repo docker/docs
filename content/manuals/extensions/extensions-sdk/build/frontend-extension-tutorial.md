@@ -352,6 +352,6 @@ when you need to debug it.
 - Add a [backend](backend-extension-tutorial.md) to your extension.
 - Learn how to [test and debug](../dev/test-debug.md) your extension.
 - Learn how to [setup CI for your extension](../dev/continuous-integration.md).
-- Learn more about extensions [architecture](../architecture/index.md).
+- Learn more about extensions [architecture](../architecture/_index.md).
 - For more information and guidelines on building the UI, see the [Design and UI styling section](../design/design-guidelines.md).
 - If you want to set up user authentication for the extension, see [Authentication](../guides/oauth2-flow.md).

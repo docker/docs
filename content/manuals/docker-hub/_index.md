@@ -36,8 +36,8 @@ Docker Hub is also where you can go to [change your Docker account settings and 
 
 {{< tabs >}}
 {{< tab name="What key features are included in Docker Hub?" >}}
-* [Repositories](../docker-hub/repos/index.md): Push and pull container images.
-* [Builds](builds/index.md): Automatically build container images from
+* [Repositories](../docker-hub/repos/_index.md): Push and pull container images.
+* [Builds](builds/_index.md): Automatically build container images from
 GitHub and Bitbucket and push them to Docker Hub.
 * [Webhooks](webhooks.md): Trigger actions after a successful push
   to a repository to integrate Docker Hub with other services.
@@ -48,7 +48,7 @@ GitHub and Bitbucket and push them to Docker Hub.
 * [Create and manage teams and organizations](orgs.md)
 * [Create a company](../admin/company/new-company.md)
 * [Enforce sign in](../security/for-admins/enforce-sign-in/_index.md)
-* Set up [SSO](../security/for-admins/single-sign-on/index.md) and [SCIM](../security/for-admins/provisioning/scim.md)
+* Set up [SSO](../security/for-admins/single-sign-on/_index.md) and [SCIM](../security/for-admins/provisioning/scim.md)
 * Use [Group mapping](group-mapping.md)
 * [Carry out domain audits](domain-audit.md)
 * [Use Image Access Management](/manuals/security/for-admins/hardened-desktop/image-access-management.md) to control developers' access to certain types of images

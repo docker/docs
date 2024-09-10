@@ -50,4 +50,4 @@ Our colors have been chosen so that the counterpart colors in each variant of th
 ## What's next?
 
 - Take a look at our [MUI best practices](mui-best-practices.md).
-- Learn how to [publish your extension](../extensions/index.md).
+- Learn how to [publish your extension](../extensions/_index.md).
