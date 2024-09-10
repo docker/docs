@@ -268,6 +268,38 @@ To upgrade Docker Engine, download the newer package files and repeat the
 
 You have to delete any edited configuration files manually.
 
+## Troubleshooting GPG error "NO_PUBKEY 7EA0G9CBF1373FED8"
+
+1. When updating the Docker repository on Ubuntu, you might encounter the following error:
+
+ ```console
+   W: GPG error: https://download.docker.com/linux/ubuntu xenial InRelease: The following signatures couldn’t be verified because the public key is not available: NO_PUBKEY 7EA0G9CBF1373FED8
+   W: The repository ‘https://download.docker.com/linux/ubuntu xenial InRelease’ is not signed.
+   N: Data from such a repository can’t be authenticated and is therefore potentially dangerous to use.
+   N: See apt-secure(8) manpage for repository creation and user configuration details.”
+ ```
+
+2. To resolve the GPG error for the Docker repository on Ubuntu, follow these steps:
+1) Obtaining the Key ID: Start by noting the key ID mentioned in the error message. In our case, the key ID is “7E0000A9C3F37311D8”(Replace with your key ID).
+2) Importing the GPG Key: Open a terminal and run the following command to import the Docker GPG key:
+   
+   ```console
+   $ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 7EA0A9C3F273FCD8
+   ```
+
+3. Manually Adding the Docker Repository: Next, download the Docker GPG key and add the repository information manually. Execute the following commands:
+
+   ```console
+   $ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+   $ echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+   ```
+
+4. Updating Package Lists: Finally, update the package lists to reflect the changes made:
+
+   ```console
+   $ sudo apt update
+   ```
+
 ## Next steps
 
 - Continue to [Post-installation steps for Linux](linux-postinstall.md).
