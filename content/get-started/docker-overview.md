@@ -18,9 +18,9 @@ aliases:
 
 Docker is an open platform for developing, shipping, and running applications.
 Docker enables you to separate your applications from your infrastructure so
-you can deliver software quickly. With Docker, you can manage your infrastructure
-in the same ways you manage your applications. By taking advantage of Docker's
-methodologies for shipping, testing, and deploying code, you can
+you can deliver software quickly. 
+With Docker, you can manage your infrastructure in the same ways you manage your applications.
+By taking advantage of Docker's methodologies for shipping, testing, and deploying code, you can
 significantly reduce the delay between writing code and running it in production.
 
 ## The Docker platform
@@ -42,7 +42,7 @@ Docker provides tooling and a platform to manage the lifecycle of your container
   production environment is a local data center, a cloud provider, or a hybrid
   of the two.
 
-## What can I use Docker for?
+## What can I use Docker for? What is usage of docker?
 
 ### Fast, consistent delivery of your applications
 
