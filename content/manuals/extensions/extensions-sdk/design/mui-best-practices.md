@@ -49,4 +49,4 @@ Some of the above options require you to extend our MUI theme. See the MUI docum
 ## What's next?
 
 - Take a look at our [UI styling guide](index.md).
-- Learn how to [publish your extension](../extensions/index.md).
+- Learn how to [publish your extension](../extensions/_index.md).

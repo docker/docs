@@ -28,7 +28,7 @@ aliases:
 > Also, static binaries may not include all functionalities provided by the dynamic
 > packages.
 >
-> On Windows and Mac, we recommend that you install [Docker Desktop](/manuals/desktop/index.md)
+> On Windows and Mac, we recommend that you install [Docker Desktop](/manuals/desktop/_index.md)
 > instead. For Linux, we recommend that you follow the instructions specific for
 > your distribution.
 
@@ -147,7 +147,7 @@ You have now successfully installed and started Docker Engine.
 > The following instructions are mostly suitable for testing purposes. The macOS
 > binary includes the Docker client only. It does not include the `dockerd` daemon
 > which is required to run containers. Therefore, we recommend that you install
-> [Docker Desktop](/manuals/desktop/index.md) instead.
+> [Docker Desktop](/manuals/desktop/_index.md) instead.
 
 The binaries for Mac also do not contain:
 
@@ -207,7 +207,7 @@ To install client binaries, perform the following steps:
 > Server which allows you to run Windows containers only. When you install the
 > Docker daemon on Windows Server, the daemon doesn't contain Docker components
 > such as `buildx` and `compose`. If you're running Windows 10 or 11,
-> we recommend that you install [Docker Desktop](/manuals/desktop/index.md) instead.
+> we recommend that you install [Docker Desktop](/manuals/desktop/_index.md) instead.
 
 Binary packages on Windows include both `dockerd.exe` and `docker.exe`. On Windows,
 these binaries only provide the ability to run native Windows containers (not

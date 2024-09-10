@@ -349,6 +349,6 @@ This is a simplified example, but it demonstrates the basic principle of `includ
 ## Where to go next
 
 - Try the [Sample apps with Compose](https://github.com/docker/awesome-compose)
-- [Explore the full list of Compose commands](reference/index.md)
-- [Explore the Compose file reference](/reference/compose-file/index.md)
+- [Explore the full list of Compose commands](reference/_index.md)
+- [Explore the Compose file reference](/reference/compose-file/_index.md)
 - [Check out the Learning Docker Compose video on LinkedIn Learning](https://www.linkedin.com/learning/learning-docker-compose/)

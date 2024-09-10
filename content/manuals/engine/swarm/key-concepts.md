@@ -38,7 +38,7 @@ that only swarm managers can manage a swarm, while standalone containers can be
 started on any daemon. Docker daemons can participate in a swarm as managers,
 workers, or both.
 
-In the same way that you can use [Docker Compose](/manuals/compose/index.md) to define and run
+In the same way that you can use [Docker Compose](/manuals/compose/_index.md) to define and run
 containers, you can define and run [Swarm service](services.md) stacks.
 
 Keep reading for details about concepts related to Docker swarm services,
@@ -108,4 +108,4 @@ the service.
 ## What's next?
 
 * Read the [Swarm mode overview](index.md).
-* Get started with the [Swarm mode tutorial](swarm-tutorial/index.md).
+* Get started with the [Swarm mode tutorial](swarm-tutorial/_index.md).

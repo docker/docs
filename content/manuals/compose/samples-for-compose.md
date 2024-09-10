@@ -7,7 +7,7 @@ weight: 140
 ---
 
 The following samples show the various aspects of how to work with Docker
-Compose. As a prerequisite, be sure to [install Docker Compose](install/index.md)
+Compose. As a prerequisite, be sure to [install Docker Compose](install/_index.md)
 if you have not already done so.
 
 ## Key concepts these samples cover
@@ -15,12 +15,12 @@ if you have not already done so.
 The samples should help you to:
 
 - Define services based on Docker images using
-  [Compose files](/reference/compose-file/index.md): `compose.yml` and
+  [Compose files](/reference/compose-file/_index.md): `compose.yml` and
   `docker-stack.yml`
 - Understand the relationship between `compose.yml` and
   [Dockerfiles](/reference/dockerfile/)
 - Learn how to make calls to your application services from Compose files
-- Learn how to deploy applications and services to a [swarm](/manuals/engine/swarm/index.md)
+- Learn how to deploy applications and services to a [swarm](/manuals/engine/swarm/_index.md)
 
 ## Samples tailored to demo Compose
 

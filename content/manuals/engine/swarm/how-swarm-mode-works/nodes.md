@@ -18,7 +18,7 @@ There are two types of nodes: [managers](#manager-nodes) and
 ![Swarm mode cluster](/engine/swarm/images/swarm-diagram.webp)
 
 If you haven't already, read through the
-[Swarm mode overview](../index.md) and
+[Swarm mode overview](../_index.md) and
 [key concepts](../key-concepts.md).
 
 ## Manager nodes

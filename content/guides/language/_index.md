@@ -20,7 +20,7 @@ The language-specific guides walk you through the process of:
 In addition to the language-specific modules, Docker documentation also provides guidelines to build images and efficiently manage your development environment. For more information, refer to the following topics:
 
 * [Building best practices](/manuals/build/building/best-practices.md)
-* [Build images with BuildKit](/manuals/build/buildkit/index.md#getting-started)
+* [Build images with BuildKit](/manuals/build/buildkit/_index.md#getting-started)
 
 ## Language-specific guides
 

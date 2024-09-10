@@ -32,7 +32,7 @@ Engine API), as well as SDKs for Go and Python. The SDKs allow you to efficientl
 scale Docker apps and solutions. If Go or Python don't work
 for you, you can use the Docker Engine API directly.
 
-For information about Docker Engine SDKs, see [Develop with Docker Engine SDKs](sdk/index.md).
+For information about Docker Engine SDKs, see [Develop with Docker Engine SDKs](sdk/_index.md).
 
 The Docker Engine API is a RESTful API accessed by an HTTP client such as `wget` or
 `curl`, or the HTTP library which is part of most modern programming languages.

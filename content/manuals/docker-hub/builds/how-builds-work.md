@@ -7,7 +7,7 @@ title: How Automated builds work
 > [!NOTE]
 >
 > Automated builds require a
-> [Docker Pro, Team, or Business subscription](../../subscription/index.md).
+> [Docker Pro, Team, or Business subscription](../../subscription/_index.md).
 
 Docker Hub can automatically build images from source code in an external
 repository and automatically push the built image to your Docker repositories.

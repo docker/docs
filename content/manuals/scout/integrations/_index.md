@@ -57,7 +57,7 @@ The following environment monitoring integrations are available
 - [Sysdig](./environment/sysdig.md)
 
 For more information about environment integrations, see
-[Environments](./environment/index.md).
+[Environments](./environment/_index.md).
 
 ### Code quality
 

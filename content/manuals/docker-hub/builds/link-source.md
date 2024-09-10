@@ -11,7 +11,7 @@ aliases:
 > [!NOTE]
 >
 > Automated builds require a
-> [Docker Pro, Team, or Business subscription](../../subscription/index.md).
+> [Docker Pro, Team, or Business subscription](../../subscription/_index.md).
 
 To automate building and testing of your images, you link to your hosted source
 code service to Docker Hub so that it can access your source code

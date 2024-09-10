@@ -9,7 +9,7 @@ computer, for example.
 
 > Should I back up my containers?
 >
-> If you use volumes or bind-mounts to store your container data, backing up your containers may not be needed, but make sure to remember the options that were used when creating the container or use a [Docker Compose file](/reference/compose-file/index.md) if you want to re-create your containers with the same configuration after re-installation.
+> If you use volumes or bind-mounts to store your container data, backing up your containers may not be needed, but make sure to remember the options that were used when creating the container or use a [Docker Compose file](/reference/compose-file/_index.md) if you want to re-create your containers with the same configuration after re-installation.
 
 ## Save your data
 
@@ -23,12 +23,12 @@ computer, for example.
    Also note that filesystem changes in volume that are attached to the
    container are not included in the image, and must be backed up separately.
 
-   If you used a [named volume](/manuals/engine/storage/index.md#more-details-about-mount-types) to store container data, such as databases, refer to the [back up, restore, or migrate data volumes](/manuals/engine/storage/volumes.md#back-up-restore-or-migrate-data-volumes) page in the storage section.
+   If you used a [named volume](/manuals/engine/storage/_index.md#more-details-about-mount-types) to store container data, such as databases, refer to the [back up, restore, or migrate data volumes](/manuals/engine/storage/volumes.md#back-up-restore-or-migrate-data-volumes) page in the storage section.
 
 2. Use [`docker push`](/reference/cli/docker/image/push.md) to push any
-   images you have built locally and want to keep to the [Docker Hub registry](../docker-hub/index.md).
+   images you have built locally and want to keep to the [Docker Hub registry](../docker-hub/_index.md).
    
-   Make sure to configure the [repository's visibility as "private"](../docker-hub/repos/index.md)
+   Make sure to configure the [repository's visibility as "private"](../docker-hub/repos/_index.md)
    for images that should not be publicly accessible. 
 
    Alternatively, use [`docker image save -o images.tar image1 [image2 ...]`](/reference/cli/docker/image/save.md)
@@ -46,6 +46,6 @@ and [install a different version](release-notes.md) or reset Docker Desktop to f
    to restore previously saved images.
 
 2. Re-create your containers if needed, using [`docker run`](/reference/cli/docker/container/run.md),
-   or [Docker Compose](/manuals/compose/index.md).
+   or [Docker Compose](/manuals/compose/_index.md).
 
 Refer to the [backup, restore, or migrate data volumes](/manuals/engine/storage/volumes.md#back-up-restore-or-migrate-data-volumes) page in the storage section to restore volume data.

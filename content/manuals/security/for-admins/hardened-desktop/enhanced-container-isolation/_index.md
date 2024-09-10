@@ -23,7 +23,7 @@ These techniques include:
 
 When Enhanced Container Isolation is enabled, these mechanisms are applied automatically and with minimal functional or performance impact to developers. Developers continue to use Docker Desktop as usual, but the containers they launch are more strongly isolated.
 
-Enhanced Container Isolation ensures stronger container isolation and also locks in any security configurations that have been created by IT admins, for instance through [Registry Access Management policies](/manuals/security/for-admins/hardened-desktop/registry-access-management.md) or with [Settings Management](../settings-management/index.md).
+Enhanced Container Isolation ensures stronger container isolation and also locks in any security configurations that have been created by IT admins, for instance through [Registry Access Management policies](/manuals/security/for-admins/hardened-desktop/registry-access-management.md) or with [Settings Management](../settings-management/_index.md).
 
 > [!NOTE]
 >

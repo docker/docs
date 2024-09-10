@@ -99,4 +99,4 @@ This node joined a swarm as a manager.
 ## Learn More
 
 * `swarm join` [command line reference](/reference/cli/docker/swarm/join.md)
-* [Swarm mode tutorial](swarm-tutorial/index.md)
+* [Swarm mode tutorial](swarm-tutorial/_index.md)

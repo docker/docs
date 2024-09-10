@@ -12,7 +12,7 @@ aliases:
 > [!NOTE]
 >
 > Automated builds require a
-> [Docker Pro, Team, or Business subscription](../../subscription/index.md).
+> [Docker Pro, Team, or Business subscription](../../subscription/_index.md).
 
 This page contains information on:
 - [Configuring Automated builds](#configure-automated-builds)
@@ -227,7 +227,7 @@ sources. For example, you might have
 
 Autobuilds use the BuildKit build system by default. If you want to use the legacy
 Docker build system, add the [environment variable](index.md#environment-variables-for-builds)
-`DOCKER_BUILDKIT=0`. Refer to the [BuildKit](/manuals/build/buildkit/index.md)
+`DOCKER_BUILDKIT=0`. Refer to the [BuildKit](/manuals/build/buildkit/_index.md)
 page for more information on BuildKit.
 
 ## Autobuild for teams
