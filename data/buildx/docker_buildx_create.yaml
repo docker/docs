@@ -147,6 +147,18 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+inherited_options:
+    - option: debug
+      shorthand: D
+      value_type: bool
+      default_value: "false"
+      description: Enable debug logging
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
 examples: |-
     ### Append a new node to an existing builder (--append) {#append}
 
@@ -208,8 +220,7 @@ examples: |-
     --buildkitd-flags '--oci-worker-net bridge'
     ```
 
-    > **Note**
-    >
+    > [!NOTE]
     > Network mode "bridge" is supported since BuildKit v0.13 and will become the
     > default in next v0.14.
 

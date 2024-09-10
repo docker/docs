@@ -104,6 +104,17 @@ inherited_options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: debug
+      shorthand: D
+      value_type: bool
+      default_value: "false"
+      description: Enable debug logging
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
 examples: |-
     ### Add annotations to an image (--annotation) {#annotation}
 
@@ -120,8 +131,7 @@ examples: |-
       foo/bar:alpha foo/bar:beta foo/bar:gamma
     ```
 
-    > **Note**
-    >
+    > [!NOTE]
     > The `imagetools create` command supports adding annotations to the image
     > index and descriptor, using the following type prefixes:
     >
