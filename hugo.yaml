@@ -102,7 +102,7 @@ params:
   compose_version: "v2.29.2"
   compose_file_v3: "3.8"
   compose_file_v2: "2.4"
-  buildkit_version: "0.15.1"
+  buildkit_version: "0.16.0"
 
   example_go_version: "1.23"
   example_alpine_version: "3.20"
