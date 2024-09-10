@@ -82,12 +82,12 @@ Build arguments do result in cache invalidation.
 ```dockerfile
 FROM alpine
 ARG CACHEBUST
-RUN --mount=type=secret,id=foo \
-    TOKEN=$(cat /run/secrets/foo) ...
+RUN --mount=type=secret,id=TOKEN,env=TOKEN \
+    some-command ...
 ```
 
 ```console
-$ TOKEN=verysecret docker build --secret id=foo,env=TOKEN --build-arg CACHEBUST=1 .
+$ TOKEN="tkn_pat123456" docker build --secret id=TOKEN --build-arg CACHEBUST=1 .
 ```
 
 Properties of secrets such as IDs and mount paths do participate in the cache
