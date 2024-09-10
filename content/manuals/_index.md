@@ -4,9 +4,6 @@ description: Learn how to install, set up, configure, and use Docker products wi
 keywords: docker, docs, manuals, products, user guides, how-to
 # hard-code the URL of this page
 url: /manuals/
-# remove the /manuals/ prefix for pages in this section
-cascade:
-- url: /:sections[1:]/:slugorfilename
 notoc: true
 development:
 - title: Docker Desktop
