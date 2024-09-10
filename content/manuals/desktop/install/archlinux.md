@@ -55,7 +55,7 @@ $ sudo pacman -S gnome-terminal
 
 - Explore [Docker's core subscriptions](https://www.docker.com/pricing/) to see what Docker can offer you.
 - Take a look at the [Docker workshop](/get-started/workshop/_index.md) to learn how to build an image and run it as a containerized application.
-- [Explore Docker Desktop](../use-desktop/index.md) and all its features.
+- [Explore Docker Desktop](../use-desktop/_index.md) and all its features.
 - [Troubleshooting](../troubleshoot/overview.md) describes common problems, workarounds, how to run and submit diagnostics, and submit issues.
 - [FAQs](../faqs/general.md) provide answers to frequently asked questions.
 - [Release notes](../release-notes.md) lists component updates, new features, and improvements associated with Docker Desktop releases.

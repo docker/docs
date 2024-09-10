@@ -26,7 +26,7 @@ To run through this tutorial, you need:
     > `docker stack` and `docker service` commands must be run from a manager
     > node.
 
-2.  A current version of [Docker Compose](/manuals/compose/install/index.md).
+2.  A current version of [Docker Compose](/manuals/compose/install/_index.md).
 
 ## Set up a Docker registry
 

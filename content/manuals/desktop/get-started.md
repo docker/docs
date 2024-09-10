@@ -43,7 +43,7 @@ In large enterprises where admin access is restricted, administrators can [enfor
 
 - Authenticated users also get a higher pull rate limit compared to anonymous users. For example, if you are authenticated, you get 200 pulls per 6 hour period, compared to 100 pulls per 6 hour period per IP address for anonymous users. For more information, see [Download rate limit](../docker-hub/download-rate-limit.md).
 
-- Improve your organization’s security posture for containerized development by taking advantage of [Hardened Desktop](/manuals/security/for-admins/hardened-desktop/index.md).
+- Improve your organization’s security posture for containerized development by taking advantage of [Hardened Desktop](/manuals/security/for-admins/hardened-desktop/_index.md).
 
 > [!NOTE]
 >
@@ -107,6 +107,6 @@ docker.io/molly/privateimage:latest
 
 ## What's next?
 
-- [Explore Docker Desktop](use-desktop/index.md) and its features. 
+- [Explore Docker Desktop](use-desktop/_index.md) and its features. 
 - Change your Docker Desktop settings
 - [Browse common FAQs](faqs/general.md)

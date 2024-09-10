@@ -76,7 +76,7 @@ hidden from the Docker Dashboard. You can change this in **Settings**, see
 
 ## Step four: Submit and publish your extension to the Marketplace
 
-If you want to make your extension available to all Docker Desktop users, you can submit it for publication in the Marketplace. For more information, see [Publish](extensions/index.md).
+If you want to make your extension available to all Docker Desktop users, you can submit it for publication in the Marketplace. For more information, see [Publish](extensions/_index.md).
 
 ## Clean up
 
@@ -91,5 +91,5 @@ $ docker extension rm <name-of-your-extension>
 - Build a more [advanced frontend](build/frontend-extension-tutorial.md) for your extension.
 - Learn how to [test and debug](dev/test-debug.md) your extension.
 - Learn how to [setup CI for your extension](dev/continuous-integration.md).
-- Learn more about extensions [architecture](architecture/index.md).
+- Learn more about extensions [architecture](architecture/_index.md).
 - Learn more about [designing the UI](design/design-guidelines.md).

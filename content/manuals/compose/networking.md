@@ -17,7 +17,7 @@ other containers on that network, and discoverable by the service's name.
 >
 > Your app's network is given a name based on the "project name",
 > which is based on the name of the directory it lives in. You can override the
-> project name with either the [`--project-name` flag](reference/index.md)
+> project name with either the [`--project-name` flag](reference/_index.md)
 > or the [`COMPOSE_PROJECT_NAME` environment variable](environment-variables/envvars.md#compose_project_name).
 
 For example, suppose your app is in a directory called `myapp`, and your `compose.yml` looks like this:

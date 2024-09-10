@@ -571,7 +571,7 @@ networks:
 ```
 
 
-This Docker Compose configuration is super convenient as you don't have to type all the parameters to pass to the `docker run` command. You can declaratively do that in the Docker Compose file. The [Docker Compose documentation pages](/manuals/compose/index.md) are quite extensive and include a full reference for the Docker Compose file format.
+This Docker Compose configuration is super convenient as you don't have to type all the parameters to pass to the `docker run` command. You can declaratively do that in the Docker Compose file. The [Docker Compose documentation pages](/manuals/compose/_index.md) are quite extensive and include a full reference for the Docker Compose file format.
 
 ### The `.env` file
 

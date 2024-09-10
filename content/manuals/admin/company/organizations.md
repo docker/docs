@@ -77,7 +77,7 @@ There is no limit to the number of organizations you can have under a company la
 2. In the left navigation, select your company in the drop-down menu.
 3. Select the organization that you want to manage.
 
-For more details about managing an organization, see [Organization administration](../organization/index.md).
+For more details about managing an organization, see [Organization administration](../organization/_index.md).
 {{< /tab >}}
 
 {{< /tabs >}}

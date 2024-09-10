@@ -48,7 +48,7 @@ Valid profiles names follow the regex format of `[a-zA-Z0-9][a-zA-Z0-9_.-]+`.
 
 ## Start specific profiles
 
-To start a specific profile supply the `--profile` [command-line option](reference/index.md) or
+To start a specific profile supply the `--profile` [command-line option](reference/_index.md) or
 use the [`COMPOSE_PROFILES` environment variable](environment-variables/envvars.md#compose_profiles):
 
 ```console
@@ -175,7 +175,7 @@ $ COMPOSE_PROFILES=dev docker compose up phpmyadmin
 
 ## Stop specific profiles
 
-As with starting specific profiles, you can use the `--profile` [command-line option](reference/index.md) or
+As with starting specific profiles, you can use the `--profile` [command-line option](reference/_index.md) or
 use the [`COMPOSE_PROFILES` environment variable](environment-variables/envvars.md#compose_profiles):
 
 ```console

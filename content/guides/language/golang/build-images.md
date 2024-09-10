@@ -20,7 +20,7 @@ application.
 
 To complete this tutorial, you need the following:
 
-- Docker running locally. Follow the [instructions to download and install Docker](/manuals/desktop/index.md).
+- Docker running locally. Follow the [instructions to download and install Docker](/manuals/desktop/_index.md).
 - An IDE or a text editor to edit files. [Visual Studio Code](https://code.visualstudio.com/) is a free and popular choice but you can use anything you feel comfortable with.
 - A Git client. This guide uses a command-line based `git` client, but you are free to use whatever works for you.
 - A command-line terminal application. The examples shown in this module are from the Linux shell, but they should work in PowerShell, Windows Command Prompt, or OS X Terminal with minimal, if any, modifications.
@@ -310,7 +310,7 @@ successfully built your image named `docker-gs-ping`.
 
 To see the list of images you have on your local machine, you have two options.
 One is to use the CLI and the other is to use [Docker
-Desktop](/manuals/desktop/index.md). Since you're currently working in the
+Desktop](/manuals/desktop/_index.md). Since you're currently working in the
 terminal, take a look at listing images with the CLI.
 
 To list images, run the `docker image ls`command (or the `docker images` shorthand):

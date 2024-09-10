@@ -31,7 +31,7 @@ Note however that ECI on WSL is not as secure as on Hyper-V because:
   and use that access to modify Docker Engine settings inside the VM. This gives
   Docker Desktop users control of the Docker Desktop VM and allows them to
   bypass Docker Desktop configs set by admins via the
-  [settings-management](../settings-management/index.md) feature. In contrast,
+  [settings-management](../settings-management/_index.md) feature. In contrast,
   ECI on Hyper-V does not allow Docker Desktop users to breach the Docker
   Desktop Linux VM.
 

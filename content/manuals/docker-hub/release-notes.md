@@ -133,7 +133,7 @@ The updated [Docker Subscription Service Agreement](https://www.docker.com/legal
 - The existing Docker Free subscription has been renamed **Docker Personal**.
 - **No changes** to Docker Engine or any other upstream **open source** Docker or Moby project.
 
-    To understand how these changes affect you, read the [FAQs](https://www.docker.com/pricing/faq). For more information, see [Docker subscription overview](../subscription/index.md).
+    To understand how these changes affect you, read the [FAQs](https://www.docker.com/pricing/faq). For more information, see [Docker subscription overview](../subscription/_index.md).
 
 ## 2021-05-05
 
@@ -157,7 +157,7 @@ You can now specify any email address to receive billing-related emails for your
 
 To change the email address receiving billing-related emails, log into Docker Hub and navigate to the **Billing** tab of your organization. Select **Payment Methods** > **Billing Information**. Enter the new email address that you'd like to use in the **Email** field. Click **Update** for the changes to take effect.
 
-For details on how to update your billing information, see [Update billing information](../billing/index.md).
+For details on how to update your billing information, see [Update billing information](../billing/_index.md).
 
 ## 2021-03-22
 
@@ -179,7 +179,7 @@ For more information about this feature and for instructions on how to use it, s
 
 ### New feature
 
-The **Repositories** view now shows which images have gone stale because they haven't been pulled or pushed recently. For more information, see [repository tags](repos/access/index.md#view-repository-tags).
+The **Repositories** view now shows which images have gone stale because they haven't been pulled or pushed recently. For more information, see [repository tags](repos/access/_index.md#view-repository-tags).
 
 ## 2020-10-07
 
@@ -191,7 +191,7 @@ Docker introduces Hub Vulnerability Scanning which enables you to automatically 
 
 ### New features
 
-* Docker has announced a new, per-seat pricing model to accelerate developer workflows for cloud-native development. The previous private repository/concurrent autobuild-based plans have been replaced with new **Pro** and **Team** plans that include unlimited private repositories. For more information, see [Docker subscription](../subscription/index.md).
+* Docker has announced a new, per-seat pricing model to accelerate developer workflows for cloud-native development. The previous private repository/concurrent autobuild-based plans have been replaced with new **Pro** and **Team** plans that include unlimited private repositories. For more information, see [Docker subscription](../subscription/_index.md).
 
 * Docker has enabled download rate limits for downloads and pull requests on Docker Hub. This caps the number of objects that users can download within a specified timeframe. For more information, see [Download rate limit](download-rate-limit.md).
 
@@ -199,7 +199,7 @@ Docker introduces Hub Vulnerability Scanning which enables you to automatically 
 
 ### Enhancements
 
-* The [repositories page](repos/index.md) and all
+* The [repositories page](repos/_index.md) and all
 related settings and tabs have been updated and moved from `cloud.docker.com`
 to `hub.docker.com`. You can access the page at its new URL: [https://hub.docker.com/repositories](https://hub.docker.com/repositories).
 

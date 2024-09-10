@@ -1126,7 +1126,7 @@ TCP connection is idle for more than five minutes (related to
 
 - Add daemon options validation
 - Diagnose can be cancelled & Improved help information. Fixes [docker/for-mac#1134](https://github.com/docker/for-mac/issues/1134), [docker/for-mac#1474](https://github.com/docker/for-mac/issues/1474)
-- Support paging of Docker Cloud [repositories](../../docker-hub/repos/index.md) and [organizations](../../admin/organization/orgs.md). Fixes [docker/for-mac#1538](https://github.com/docker/for-mac/issues/1538)
+- Support paging of Docker Cloud [repositories](../../docker-hub/repos/_index.md) and [organizations](../../admin/organization/orgs.md). Fixes [docker/for-mac#1538](https://github.com/docker/for-mac/issues/1538)
 
 ### Docker Community Edition 17.06.1-ce-mac20, 2017-07-18
 
@@ -1979,7 +1979,7 @@ events or unexpected unmounts.
 
 **Bug fixes and minor changes**
 
-* Documentation moved to [/desktop/mac/](../index.md)
+* Documentation moved to [/desktop/mac/](../_index.md)
 * Allow non-admin users to launch the app for the first time (using admin creds)
 * Prompt non-admin users for admin password when needed in Preferences
 * Fixed download links, documentation links

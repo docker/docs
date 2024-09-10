@@ -347,4 +347,4 @@ $ curl https://$HOST:2376/images/json \
 ## Related information
 
 * [Using certificates for repository client verification](certificates.md)
-* [Use trusted images](trust/index.md)
+* [Use trusted images](trust/_index.md)

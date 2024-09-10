@@ -62,7 +62,7 @@ each other over the following ports:
 * Port `4789` UDP (configurable) for the overlay network (including ingress) data path.
 
 When setting up networking in a Swarm, special care should be taken. Consult
-the [tutorial](swarm-tutorial/index.md#open-protocols-and-ports-between-the-hosts)
+the [tutorial](swarm-tutorial/_index.md#open-protocols-and-ports-between-the-hosts)
 for an overview.
 
 ## Overlay networking
@@ -477,6 +477,6 @@ preferred because it is somewhat self-documenting.
 
 * [Deploy services to a swarm](services.md)
 * [Swarm administration guide](admin_guide.md)
-* [Swarm mode tutorial](swarm-tutorial/index.md)
+* [Swarm mode tutorial](swarm-tutorial/_index.md)
 * [Networking overview](/manuals/engine/network/_index.md)
 * [Docker CLI reference](/reference/cli/docker/)

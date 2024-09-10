@@ -47,7 +47,7 @@ If you choose the integrated terminal, you can run commands in a running contain
   execution attacks.
 
 - {{< badge color=blue text="Windows only" >}}**Use the WSL 2 based engine**. WSL 2 provides better performance than the
-  Hyper-V backend. For more information, see [Docker Desktop WSL 2 backend](/manuals/desktop/wsl/index.md).
+  Hyper-V backend. For more information, see [Docker Desktop WSL 2 backend](/manuals/desktop/wsl/_index.md).
 
 - {{< badge color=blue text="Windows only" >}}**Add the `*.docker.internal` names to the host's `/etc/hosts` file (Password required)**. Lets you resolve `*.docker.internal` DNS names from both the host and your containers.
 
@@ -74,7 +74,7 @@ If you choose the integrated terminal, you can run commands in a running contain
   troubleshoot the application. Clear the checkbox to opt out. Docker may
   periodically prompt you for more information.
 
-- **Use Enhanced Container Isolation**. Select to enhance security by preventing containers from breaching the Linux VM. For more information, see [Enhanced Container Isolation](/manuals/security/for-admins/hardened-desktop/enhanced-container-isolation/index.md).
+- **Use Enhanced Container Isolation**. Select to enhance security by preventing containers from breaching the Linux VM. For more information, see [Enhanced Container Isolation](/manuals/security/for-admins/hardened-desktop/enhanced-container-isolation/_index.md).
     > [!NOTE]
     >
     > This setting is only available if you are signed in to Docker Desktop and have a Docker Business subscription.
@@ -247,7 +247,7 @@ To set a different proxy for Docker Desktop, turn on **Manual proxy configuratio
 upstream proxy URL of the form `http://proxy:port` or `https://proxy:port`.
 
 To prevent developers from accidentally changing the proxy settings, see
-[Settings Management](/manuals/security/for-admins/hardened-desktop/settings-management/index.md#what-features-can-i-configure-with-settings-management).
+[Settings Management](/manuals/security/for-admins/hardened-desktop/settings-management/_index.md#what-features-can-i-configure-with-settings-management).
 
 The HTTPS proxy settings used for scanning images are set using the `HTTPS_PROXY` environment variable.
 
@@ -304,7 +304,7 @@ to set Ubuntu as your default WSL distro, run `wsl --set-default ubuntu`).
 You can also select any additional distributions you would like to enable the WSL 2 integration on.
 
 For more details on configuring Docker Desktop to use WSL 2, see
-[Docker Desktop WSL 2 backend](/manuals/desktop/wsl/index.md).
+[Docker Desktop WSL 2 backend](/manuals/desktop/wsl/_index.md).
 
 ## Docker Engine
 
@@ -443,7 +443,7 @@ Use the **Extensions** tab to:
 - **Allow only extensions distributed through the Docker Marketplace**
 - **Show Docker Extensions system containers**
 
-For more information about Docker extensions, see [Extensions](/manuals/extensions/index.md).
+For more information about Docker extensions, see [Extensions](/manuals/extensions/_index.md).
 
 ## Features in development
 

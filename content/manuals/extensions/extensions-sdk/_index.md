@@ -42,7 +42,7 @@ At the root of the image filesystem is a `metadata.json` file which describes th
 It's a fundamental element of a Docker extension.
 
 An extension can contain a UI part and backend parts that run either on the host or in the Desktop virtual machine.
-For further information, see [Architecture](architecture/index.md).
+For further information, see [Architecture](architecture/_index.md).
 
 You distribute extensions through Docker Hub. However, you can develop them locally without the need to push 
 the extension to Docker Hub. See [Extensions distribution](extensions/DISTRIBUTION.md) for further details.
