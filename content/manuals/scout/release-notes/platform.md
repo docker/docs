@@ -20,7 +20,7 @@ for what's coming next.
 
 New features and enhancements released in the third quarter of 2024.
 
-### 2024-09-05
+### 2024-09-09
 
 This release changes how [health scores](/manuals/scout/policy/scores.md) are
 calculated in Docker Scout. The health score calculation now considers optional

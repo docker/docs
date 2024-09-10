@@ -430,7 +430,7 @@ The full release note for this release is available
 
 {{< release-date date="2023-03-06" >}}
 
-{{< include "buildx-v0.10-disclaimer.md" >}}
+{{< include "buildx-v0-10-disclaimer.md" >}}
 
 ### Bug fixes and enhancements
 
@@ -442,7 +442,7 @@ The full release note for this release is available
 
 {{< release-date date="2023-02-16" >}}
 
-{{< include "buildx-v0.10-disclaimer.md" >}}
+{{< include "buildx-v0-10-disclaimer.md" >}}
 
 ### Bug fixes and enhancements
 
@@ -456,7 +456,7 @@ The full release note for this release is available
 
 {{< release-date date="2023-01-30" >}}
 
-{{< include "buildx-v0.10-disclaimer.md" >}}
+{{< include "buildx-v0-10-disclaimer.md" >}}
 
 ### Bug fixes and enhancements
 
@@ -470,7 +470,7 @@ The full release note for this release is available
 
 {{< release-date date="2023-01-27" >}}
 
-{{< include "buildx-v0.10-disclaimer.md" >}}
+{{< include "buildx-v0-10-disclaimer.md" >}}
 
 ### Bug fixes and enhancements
 
@@ -487,7 +487,7 @@ The full release note for this release is available
 
 {{< release-date date="2023-01-10" >}}
 
-{{< include "buildx-v0.10-disclaimer.md" >}}
+{{< include "buildx-v0-10-disclaimer.md" >}}
 
 ### New
 

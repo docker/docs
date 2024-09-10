@@ -2,7 +2,9 @@
 title: Latest (v{{< param latest_engine_api_version >}})
 weight: 20
 ---
+{{< redirect.inline >}}
 <html>
-<head><meta http-equiv="refresh" content="0;url=/reference/api/engine/version/v{{< param latest_engine_api_version >}}/" /></head>
+<head><meta http-equiv="refresh" content="0;url=/reference/api/engine/version/v{{ strings.Replace (site.Param "latest_engine_api_version") "." "-" }}/" /></head>
 <body><p>Redirecting to the latest version of the Docker Engine API reference.</body>
 </html>
+{{< /redirect.inline >}}
