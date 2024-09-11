@@ -4,6 +4,7 @@ description: Understand when and if to set the version and name top-level elemen
 keywords: compose, compose specification, services, compose file reference
 aliases:
  - /compose/compose-file/04-version-and-name/
+weight: 10
 ---
 
 ## Version top-level element (obsolete)

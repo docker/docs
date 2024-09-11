@@ -4,6 +4,7 @@ description: Understand how to use fragments
 keywords: compose, compose specification, fragments, compose file reference
 aliases: 
  - /compose/compose-file/10-fragments/
+weight: 70
 ---
 
 {{< include "compose/fragments.md" >}}
