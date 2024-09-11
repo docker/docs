@@ -3,6 +3,7 @@ title: Limitations
 description: Limitations of Enhanced Container Isolation
 keywords: enhanced container isolation, security, sysbox, known issues, Docker Desktop
 toc_max: 2
+weight: 50
 ---
 
 ### ECI support for WSL

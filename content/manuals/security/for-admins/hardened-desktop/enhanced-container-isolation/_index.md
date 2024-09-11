@@ -5,6 +5,7 @@ keywords: containers, rootless, security, sysbox, runtime
 title: What is Enhanced Container Isolation?
 aliases:
  - /desktop/hardened-desktop/enhanced-container-isolation/
+weight: 20
 ---
 
 > [!NOTE]

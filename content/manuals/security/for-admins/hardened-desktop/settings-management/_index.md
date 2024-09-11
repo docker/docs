@@ -5,6 +5,7 @@ keywords: Settings Management, rootless, docker desktop, hardened desktop
 title: What is Settings Management?
 aliases:
  - /desktop/hardened-desktop/settings-management/
+weight: 10
 ---
 
 >**Note**

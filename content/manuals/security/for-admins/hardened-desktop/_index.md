@@ -27,6 +27,7 @@ grid:
     description: Restrict containers from accessing unwanted network resources.
     icon: "vpn_lock"
     link: /security/for-admins/hardened-desktop/air-gapped-containers/
+weight: 60
 ---
 
 > [!NOTE]

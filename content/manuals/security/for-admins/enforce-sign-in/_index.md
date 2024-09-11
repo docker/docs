@@ -6,6 +6,7 @@ title: Enforce sign-in for Docker Desktop
 aliases:
  - /security/for-admins/configure-sign-in/
  - /docker-hub/configure-sign-in/
+ weight: 30
 ---
 
 By default, members of your organization can use Docker Desktop without signing

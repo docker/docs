@@ -6,6 +6,7 @@ aliases:
 - /single-sign-on/
 - /admin/company/settings/sso/
 - /admin/organization/security-settings/sso-management/
+weight: 10
 ---
 
 Single sign-on (SSO) allows users to authenticate using their identity providers (IdPs) to access Docker. SSO is available for a whole company, and all associated organizations, or an individual organization that has a Docker Business subscription. To upgrade your existing account to a Docker Business subscription, see [Upgrade your subscription](/subscription/upgrade/).

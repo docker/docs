@@ -7,6 +7,7 @@ aliases:
  - /admin/organization/registry-access/
  - /docker-hub/registry-access-management/
  - /security/for-admins/registry-access-management/
+weight: 30
 ---
 
 > [!NOTE]
