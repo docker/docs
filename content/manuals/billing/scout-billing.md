@@ -1,8 +1,9 @@
 ---
 title: Docker Scout billing
+linkTitle: Docker Scout
 description: Learn how to get started with and manage you Docker Scout subscription.
 keywords: payments, billing, subscription, scout, buy docker scout, subscribe to docker scout
-weight: 400
+weight: 30
 
 ---
 

@@ -2,7 +2,7 @@
 title: Register a tax certificate
 description: Learn how to submit a tax exemption certificate for your Docker billing.
 keywords: billing, renewal, payments, tax
-weight: 600
+weight: 50
 ---
 
 {{< include "tax-compliance.md" >}}

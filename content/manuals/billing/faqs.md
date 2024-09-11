@@ -1,9 +1,10 @@
 ---
 title: Billing FAQs
+linkTitle: FAQs
 description: Frequently asked questions related to billing
 keywords: billing, renewal, payments, faq
 tags: [FAQ]
-weight: 700
+weight: 60
 ---
 
 ### What credit and debit cards are supported?
