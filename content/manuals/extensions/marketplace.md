@@ -2,7 +2,7 @@
 description: Extensions
 keywords: Docker Extensions, Docker Desktop, Linux, Mac, Windows, Marketplace
 title: Marketplace extensions
-weight: 100
+weight: 10
 aliases:
  - /desktop/extensions/marketplace/
 ---

@@ -1,9 +1,10 @@
 ---
-title: Extension release process
+title: "Part two: Publish"
 description: General steps in how to publish an extension
 keywords: Docker, Extensions, sdk, publish
 aliases: 
  - /desktop/extensions-sdk/extensions/
+weight: 40
 ---
 
 This section describes how to make your extension available and more visible, so users can discover it and install it with a single click.

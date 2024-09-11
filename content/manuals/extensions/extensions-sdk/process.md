@@ -4,6 +4,7 @@ title: The build and publish process
 keyword: Docker Extensions, sdk, build, create, publish
 aliases:
  - /desktop/extensions-sdk/process/
+weight: 10
 ---
 
 This documentation is structured so that it matches the steps you need to take when creating your extension. 
