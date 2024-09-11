@@ -1,5 +1,6 @@
 ---
 title: Extension security
+linkTitle: Security
 description: Aspects of the security model of extensions
 keywords: Docker, extensions, sdk, security
 aliases:

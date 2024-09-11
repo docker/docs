@@ -4,6 +4,7 @@ description: Automatically test and validate your extension.
 keywords: Docker, Extensions, sdk, CI, test, regression
 aliases: 
  - /desktop/extensions-sdk/dev/continuous-integration/
+weight: 20
 ---
 
 In order to help validate your extension and ensure it's functional, the Extension SDK provides tools to help you setup continuous integration for your extension.

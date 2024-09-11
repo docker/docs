@@ -1,9 +1,11 @@
 ---
 title: Extension image labels
+linkTitle: Add labels
 description: Docker extension labels
 keywords: Docker, extensions, sdk, labels
 aliases: 
  - /desktop/extensions-sdk/extensions/labels/
+weight: 10
 ---
 
 Extensions use image labels to provide additional information such as a title, description, screenshots, and more.

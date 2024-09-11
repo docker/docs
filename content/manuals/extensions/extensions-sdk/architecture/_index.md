@@ -1,9 +1,11 @@
 ---
 title: Extension architecture
+linkTitle: Architecture
 description: Docker extension architecture
 keywords: Docker, extensions, sdk, metadata
 aliases: 
  - /desktop/extensions-sdk/architecture/
+weight: 50
 ---
 
 Extensions are applications that run inside the Docker Desktop. They're packaged as Docker images, distributed

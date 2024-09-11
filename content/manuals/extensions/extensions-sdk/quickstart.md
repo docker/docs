@@ -5,6 +5,7 @@ keywords: quickstart, extensions
 aliases:
  - desktop/extensions-sdk/tutorials/initialize/
  - /desktop/extensions-sdk/quickstart/
+weight: 20
 ---
 
 Follow this guide to get started with creating a basic Docker extension. The Quickstart guide automatically generates boilerplate files for you.
