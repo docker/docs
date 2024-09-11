@@ -2,6 +2,8 @@
 title: Docker Scout billing
 description: Learn how to get started with and manage you Docker Scout subscription.
 keywords: payments, billing, subscription, scout, buy docker scout, subscribe to docker scout
+weight: 400
+
 ---
 
 Docker Scout lets users secure their software supply chain and continuously observe and improve their security posture. Docker Scout is free for up to 3 repositories. You can buy Docker Scout Team or Docker Scout Business to turn on Docker Scout for additional repositories. See [Docker Scout subscription and features](../subscription/scout-details.md) to select the plan that works for you.

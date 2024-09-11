@@ -3,6 +3,7 @@ title: Billing FAQs
 description: Frequently asked questions related to billing
 keywords: billing, renewal, payments, faq
 tags: [FAQ]
+weight: 700
 ---
 
 For more information on billing, see [Billing and payments](_index.md).
