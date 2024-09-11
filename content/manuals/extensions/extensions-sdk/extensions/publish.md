@@ -1,5 +1,5 @@
 ---
-title: Publish your extension in the Marketplace
+title: Publish in the Marketplace
 description: Docker extension distribution
 keywords: Docker, extensions, publish
 aliases: 

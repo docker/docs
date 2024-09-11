@@ -1,5 +1,6 @@
 ---
 title: Extension image labels
+linkTitle: Add labels
 description: Docker extension labels
 keywords: Docker, extensions, sdk, labels
 aliases: 

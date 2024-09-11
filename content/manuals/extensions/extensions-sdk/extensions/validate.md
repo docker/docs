@@ -1,5 +1,6 @@
 ---
 title: Validate your extension
+linkTitle: Validate
 description: Step three in the extension creation process
 keywords: Docker, Extensions, sdk, validate, install
 aliases:

@@ -1,5 +1,6 @@
 ---
 title: Use the Docker socket from the extension backend
+linkTitle: Use the Docker socket
 description: Docker extension metadata
 keywords: Docker, extensions, sdk, metadata
 aliases: 

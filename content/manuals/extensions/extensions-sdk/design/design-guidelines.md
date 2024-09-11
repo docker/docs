@@ -1,5 +1,6 @@
 ---
 title: Design guidelines for Docker extensions
+linkTitle: Guidelines
 description: Docker extension design
 keywords: Docker, extensions, design
 aliases: 
