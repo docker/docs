@@ -2,9 +2,11 @@
 description: Frequently asked questions for Docker Desktop for Linux
 keywords: desktop, linux, faqs
 title: FAQs for Docker Desktop for Linux
+linkTitle: Linux
 tags: [FAQ]
 aliases:
 - /desktop/linux/space/
+weight: 40
 ---
 
 ### Why does Docker Desktop for Linux run a VM?

@@ -8,6 +8,7 @@ aliases:
  - /desktop/settings/mac/
  - /desktop/settings/windows/
  - /desktop/settings/linux/
+weight: 150
 ---
 
 To navigate to **Settings** either:

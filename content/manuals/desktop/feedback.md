@@ -3,7 +3,7 @@ description: Find a way to provide feedback that's right for you
 keywords: Feedback, Docker Desktop, Linux, Mac, Windows, Dev Environments, Extensions,
   Community forum, bugs, problems, issues
 title: Give feedback
-weight: 170
+weight: 180
 ---
 
 There are many ways you can provide feedback on Docker Desktop or Docker Desktop features.

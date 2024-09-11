@@ -2,6 +2,7 @@
 description: How to uninstall Docker Desktop
 keywords: Windows, unintall, Mac, Linux, Docker Desktop
 title: Uninstall Docker Desktop
+linkTitle: Uninstall
 weight: 210
 ---
 

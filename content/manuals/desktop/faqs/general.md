@@ -2,12 +2,14 @@
 description: Frequently asked Docker Desktop questions for all platforms
 keywords: desktop, mac, windows, faqs
 title: General FAQs for Desktop
+linkTitle: General
 tags: [FAQ]
 aliases:
 - /mackit/faqs/
 - /docker-for-mac/faqs/
 - /docker-for-windows/faqs/
 - /desktop/faqs/
+weight: 10
 ---
 
 ### Can I use Docker Desktop offline?

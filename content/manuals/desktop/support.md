@@ -2,7 +2,7 @@
 description: See what support is available for Docker Desktop
 keywords: Support, Docker Desktop, Linux, Mac, Windows
 title: Get support
-weight: 160
+weight: 170
 ---
 
 Find information on how to get support, and the scope of Docker Desktop support.
