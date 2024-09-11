@@ -496,8 +496,8 @@ On Mac, you can reconfigure your initial installation settings  on the **Advance
             ```
      3. Save and the close the file. Restart your shell to apply the changes to the PATH variable.
 
-- **Enable default Docker socket (Requires password)**. Creates `/var/run/docker.sock` which some third party clients may use to communicate with Docker Desktop. For more information, see [permission requirements for macOS](/manuals/desktop/mac/permission-requirements.md#installing-symlinks).
+- **Enable default Docker socket (Requires password)**. Creates `/var/run/docker.sock` which some third party clients may use to communicate with Docker Desktop. For more information, see [permission requirements for macOS](/manuals/desktop/install/mac-permission-requirements.md#installing-symlinks).
 
-- **Enable privileged port mapping (Requires password)**. Starts the privileged helper process which binds the ports that are between 1 and 1024. For more information, see [permission requirements for macOS](/manuals/desktop/mac/permission-requirements.md#binding-privileged-ports).
+- **Enable privileged port mapping (Requires password)**. Starts the privileged helper process which binds the ports that are between 1 and 1024. For more information, see [permission requirements for macOS](/manuals/desktop/install/mac-permission-requirements.md#binding-privileged-ports).
 
-  For more information on each configuration and use case, see [Permission requirements](/manuals/desktop/mac/permission-requirements.md).
+  For more information on each configuration and use case, see [Permission requirements](/manuals/desktop/install/mac-permission-requirements.md).

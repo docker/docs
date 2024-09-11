@@ -225,7 +225,7 @@ For more information, see [microsoft/WSL#11794](https://github.com/microsoft/WSL
 #### For Windows
 
 - Fixed an issue on the WSL 2 engine where Docker Desktop would not detect the existence of the `docker-desktop-data` distribution if it had been manually moved by the user.
-- The Windows on ARM installer and the [privileged service](windows/permission-requirements.md#privileged-helper) are now built for ARM64.
+- The Windows on ARM installer and the [privileged service](/manuals/desktop/install/windows-permission-requirements.md#privileged-helper) are now built for ARM64.
 
 #### For Mac
 
