@@ -4,6 +4,7 @@ description: Learn about merging rules
 keywords: compose, compose specification, merge, compose file reference
 aliases: 
  - /compose/compose-file/13-merge/
+weight: 100
 ---
 
 {{< include "compose/merge.md" >}}

@@ -4,6 +4,7 @@ description: Learn about profiles
 keywords: compose, compose specification, profiles, compose file reference
 aliases: 
  - /compose/compose-file/15-profiles/
+weight: 120
 ---
 
 With profiles you can define a set of active profiles so your Compose application model is adjusted for various usages and environments.

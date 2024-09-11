@@ -4,6 +4,7 @@ description: Explore all the attributes the configs top-level element can have.
 keywords: compose, compose specification, configs, compose file reference
 aliases: 
  - /compose/compose-file/08-configs/
+weight: 50
 ---
 
 {{< include "compose/configs.md" >}}
