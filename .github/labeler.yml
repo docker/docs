@@ -5,114 +5,143 @@ area/release:
           - _releaser/**
           - netlify.toml
 
+area/config:
+  - changed-files:
+      - any-glob-to-any-file:
+          - Dockerfile
+          - Makefile
+          - compose.yaml
+          - docker-bake.hcl
+          - hugo.yaml
+          - pagefind.yml
+
+area/contrib:
+  - changed-files:
+      - any-glob-to-any-file:
+          - content/contribute/**
+          - CONTRIBUTING.md
+
+area/tests:
+  - changed-files:
+      - any-glob-to-any-file:
+          - .htmltest.yml
+          - .markdownlint.json
+          - .vale.ini
+          - _vale/**
+          - scripts/test_*
+
 area/build:
   - changed-files:
       - any-glob-to-any-file:
-          - content/build/**
+          - content/manuals/build/**
           - _vendor/github.com/moby/buildkit/**
           - _vendor/github.com/docker/buildx/**
-          - content/engine/commandline/build*
+          - content/reference/cli/docker/buildx/**
 
 area/build-cloud:
   - changed-files:
       - any-glob-to-any-file:
-          - content/build-cloud/**
+          - content/manuals/build-cloud/**
 
 area/compose:
   - changed-files:
       - any-glob-to-any-file:
-          - content/compose/**
+          - content/manuals/compose/**
+          - content/reference/compose-file/**
           - _vendor/github.com/docker/compose/**
-          - _vendor/github.com/compose-spec/compose-spec/**
 
 area/desktop:
   - changed-files:
       - any-glob-to-any-file:
-          - content/desktop/**
+          - content/manuals/desktop/**
 
 area/engine:
   - changed-files:
       - any-glob-to-any-file:
-          - content/engine/**
-          - content/config/**
+          - content/manuals/engine/**
 
 area/install:
   - changed-files:
       - any-glob-to-any-file:
-          - content/desktop/install/**
-          - content/engine/install/**
+          - content/manuals/desktop/install/**
+          - content/manuals/engine/install/**
 
 area/swarm:
   - changed-files:
       - any-glob-to-any-file:
-          - content/engine/swarm/**
+          - content/manuals/engine/swarm/**
 
 area/security:
   - changed-files:
       - any-glob-to-any-file:
-          - content/security/**
+          - content/manuals/security/**
+          - content/manuals/engine/security/**
 
 area/get-started:
   - changed-files:
       - any-glob-to-any-file:
           - content/get-started/**
-          - content/language/**
+
+area/guides:
+  - changed-files:
+      - any-glob-to-any-file:
+          - content/guides/**
+          - content/learning-paths/**
 
 area/networking:
   - changed-files:
       - any-glob-to-any-file:
-          - content/network/**
-          - content/config/ipv6.md
+          - content/manuals/engine/network/**
+          - content/manuals/engine/daemon/ipv6.md
 
 area/hub:
   - changed-files:
       - any-glob-to-any-file:
-          - content/docker-hub/**
+          - content/manuals/docker-hub/**
 
 area/cli:
   - changed-files:
       - any-glob-to-any-file:
-          - content/engine/reference/commandline/**
+          - content/reference/cli/**
           - _vendor/github.com/docker/cli/**
+          - _vendor/github.com/docker/scout-cli/**
+          - data/engine-cli/**
+          - data/buildx-cli/**
+          - data/debug-cli/**
+          - data/init-cli/**
 
 area/api:
   - changed-files:
       - any-glob-to-any-file:
-          - content/engine/api/**
-          - content/docker-hub/api/**
+          - content/reference/api/**
           - _vendor/github.com/moby/moby/docs/api/*
 
 area/scout:
   - changed-files:
       - any-glob-to-any-file:
-          - content/scout/**
+          - content/manuals/scout/**
           - _vendor/github.com/docker/scout-cli/**
 
 area/billing:
   - changed-files:
       - any-glob-to-any-file:
-          - content/billing/**
+          - content/manuals/billing/**
 
 area/subscription:
   - changed-files:
       - any-glob-to-any-file:
-          - content/subscription/**
+          - content/manuals/subscription/**
 
 area/admin:
   - changed-files:
       - any-glob-to-any-file:
-          - content/admin/**
-
-area/configuration:
-  - changed-files:
-      - any-glob-to-any-file:
-          - content/config/**
+          - content/manuals/admin/**
 
 area/extensions:
   - changed-files:
       - any-glob-to-any-file:
-          - content/extensions/**
-          - content/extensions/extensions-sdk/**
+          - content/manuals/extensions/**
+          - content/reference/api/extensions-sdk/**
 
 area/samples:
   - changed-files:
@@ -122,21 +151,24 @@ area/samples:
 area/storage:
   - changed-files:
       - any-glob-to-any-file:
-          - content/storage/**
+          - content/manuals/engine/storage/**
 
 area/accounts:
   - changed-files:
       - any-glob-to-any-file:
-          - content/accounts/**
+          - content/manuals/accounts/**
 
 hugo:
   - changed-files:
       - any-glob-to-any-file:
-          - layouts/**
-          - hugo.yaml
-          - tailwind.config.js
-          - postcss.config.js
           - assets/**
+          - hugo.yaml
+          - hugo_stats.json
+          - i18n/**
+          - layouts/**
+          - postcss.config.js
+          - static/**
+          - tailwind.config.js
 
 dependencies:
   - changed-files:
