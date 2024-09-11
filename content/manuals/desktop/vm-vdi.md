@@ -4,6 +4,7 @@ keywords: nested virtualization, Docker Desktop, windows, VM, VDI environment
 title: Run Docker Desktop for Windows in a VM or VDI environment
 aliases:
 - /desktop/nested-virtualization/
+weight: 140
 ---
 
 In general, we recommend running Docker Desktop natively on either Mac, Linux, or Windows. However, Docker Desktop for Windows can run inside a virtual desktop provided the virtual desktop is properly configured. 

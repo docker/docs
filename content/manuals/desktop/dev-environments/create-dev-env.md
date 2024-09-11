@@ -4,6 +4,7 @@ keywords: Dev Environments, share, Docker Desktop, Compose, launch
 title: Launch a dev environment
 aliases:
 - /desktop/dev-environments/create-compose-dev-env/
+weight: 10
 ---
 
 {{< include "dev-envs-changing.md" >}}

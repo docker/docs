@@ -83,7 +83,7 @@ Docker Desktop is available for Mac, Linux, and Windows. The supported version i
 
 * [Mac system requirements](/manuals/desktop/install/mac-install.md#system-requirements)
 * [Windows system requirements](/manuals/desktop/install/windows-install.md#system-requirements)
-* [Linux system requirements](/manuals/desktop/install/linux-install.md#system-requirements)
+* [Linux system requirements](/manuals/desktop/install/linux/_index.md#system-requirements)
 
 ## How is personal diagnostic data handled in Docker Desktop?
 

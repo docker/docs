@@ -10,6 +10,7 @@ aliases:
 - /docker-for-win/networking/
 - /docker-for-windows/networking/
 - /desktop/windows/networking/
+weight: 120
 ---
 
 Docker Desktop provides several networking features to make it easier to

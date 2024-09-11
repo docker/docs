@@ -1,7 +1,9 @@
 ---
 description: Understand what you can do with the Volumes view on Docker Dashboard
 keywords: Docker Dashboard, manage, containers, gui, dashboard, volumes, user manual
-title: Explore Volumes
+title: Explore the Volumes view in Docker Desktop
+linkTitle: Volumes
+weight: 30
 ---
 
 The **Volumes** view in Docker Dashboard lets you create, delete, and perform

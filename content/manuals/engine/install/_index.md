@@ -37,7 +37,7 @@ This section describes how to install Docker Engine on Linux, also known as
 Docker CE. Docker Engine is also available for Windows, macOS, and Linux,
 through Docker Desktop. For instructions on how to install Docker Desktop, see:
 
-- [Docker Desktop for Linux](/manuals/desktop/install/linux-install.md)
+- [Docker Desktop for Linux](/manuals/desktop/install/linux/_index.md)
 - [Docker Desktop for Mac (macOS)](/manuals/desktop/install/mac-install.md)
 - [Docker Desktop for Windows](/manuals/desktop/install/windows-install.md)
 

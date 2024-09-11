@@ -1,6 +1,6 @@
 ---
 title: Wasm workloads (Beta)
-weight: 50
+weight: 60
 description: How to run Wasm workloads with Docker Desktop
 keywords: Docker, WebAssembly, wasm, containerd, engine
 toc_max: 3

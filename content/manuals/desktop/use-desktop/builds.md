@@ -1,7 +1,9 @@
 ---
-title: Explore Builds
+title: Explore the Builds view in Docker Desktop
+linkTitle: Builds
 description: Understand how to use the Builds view in Docker Desktop
 keywords: Docker Dashboard, manage, gui, dashboard, builders, builds
+weight: 40
 ---
 
 ![Builds view in Docker Desktop](../images/builds-view.webp)

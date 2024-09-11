@@ -2,6 +2,8 @@
 description: Understand what you can do with the Images view on Docker Dashboard
 keywords: Docker Dashboard, manage, containers, gui, dashboard, images, user manual
 title: Explore the Images view in Docker Desktop
+linkTitle: Images
+weight: 20
 ---
 
 The **Images** view lets you manage Docker images without having to use the CLI. By default, it displays a list of all Docker images on your local disk. 

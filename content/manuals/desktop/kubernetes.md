@@ -5,6 +5,7 @@ title: Deploy on Kubernetes with Docker Desktop
 aliases:
 - /docker-for-windows/kubernetes/
 - /docker-for-mac/kubernetes/
+weight: 110
 ---
 
 Docker Desktop includes a standalone Kubernetes server and client,
