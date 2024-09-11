@@ -4,6 +4,7 @@ description: Docker extension disctribution
 keywords: Docker, extensions, sdk, distribution
 aliases: 
  - /desktop/extensions-sdk/extensions/DISTRIBUTION/
+weight: 30
 ---
 
 This page contains additional information on how to package and distribute extensions.

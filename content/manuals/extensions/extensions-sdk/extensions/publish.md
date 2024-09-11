@@ -4,6 +4,7 @@ description: Docker extension distribution
 keywords: Docker, extensions, publish
 aliases: 
  - /desktop/extensions-sdk/extensions/publish/
+weight: 50
 ---
 
 ## Submit your extension to the Marketplace
