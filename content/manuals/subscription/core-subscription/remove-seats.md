@@ -2,9 +2,11 @@
 description: Learn how to remove seats from your subscription
 keywords: Docker, Docker Hub, subscription, update, remove, seats, docker core
 title: Remove seats from your subscription
+linkTitle: Remove seats
 aliases:
 - /docker-hub/billing/remove-seats/
 - /subscription/remove-seats/
+weight: 340
 ---
 
 You can remove seats from your Team or Business subscription at anytime.

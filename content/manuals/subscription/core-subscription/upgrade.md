@@ -2,10 +2,12 @@
 description: Learn how to upgrade your Docker subscription
 keywords: Docker Hub, upgrade, subscription, Pro, Team, business, pricing plan, docker core
 title: Upgrade your subscription
+linkTitle: Upgrade
 aliases:
 - /docker-hub/upgrade/
 - /docker-hub/billing/upgrade/
 - /subscription/upgrade/
+weight: 330
 ---
 
 {{< include "tax-compliance.md" >}}

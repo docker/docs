@@ -2,9 +2,11 @@
 description: Learn how to add seats to an existing subscription
 keywords: Docker, Docker Hub, subscription, update, add, seats, pricing, docker core
 title: Add seats to your subscription
+linkTitle: Add seats
 aliases:
 - /docker-hub/billing/add-seats/
 - /subscription/add-seats/
+weight: 320
 ---
 
 {{< include "tax-compliance.md" >}}
