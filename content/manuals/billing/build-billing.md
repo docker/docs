@@ -1,7 +1,9 @@
 ---
 title: Docker Build Cloud billing
+linkTitle: Docker Build Cloud
 description: Learn how to get started with a Docker Build Cloud subscription.
 keywords: payments, billing, subscription, build, cloud, Build Cloud, remote builder, buy docker build cloud
+weight: 20
 ---
 
 Build Cloud is a next-gen build tool that enables improved build speed, a shared build cache, and native multi-platform builds. Build Cloud is available for free with an existing Docker subscription. To get additional seats and increase your available build minutes, you can buy a subscription to enhance your builds.
