@@ -71,12 +71,22 @@
 {{ end }}
 
 {{ define "renderSingle" }}
-  {{ $isCurrent := eq page . }}
-  <li class="pl-4 hover:text-blue-light hover:dark:text-blue-dark
-    {{ if $isCurrent }} bg-gray-light-200 dark:bg-gray-dark-200{{ end }}">
-    <a {{ if $isCurrent }}aria-current="page" {{ end }} class="py-2 w-full truncate block"
-        href="{{ .Permalink }}" title="{{ markdownify .Title }}"
-        ><span class="flex items-center gap-2">{{ markdownify .LinkTitle }}</span>
-    </a>
-  </li>
+  {{- if .Params.goto }}
+    <li class="pl-4 hover:text-blue-light hover:dark:text-blue-dark">
+      <a class="py-2 w-full truncate block"
+         href="{{ markdownify .Params.goto }}"
+         title="{{ markdownify .Title }}">
+        <span class="flex items-center gap-2">{{ markdownify .LinkTitle }}</span>
+      </a>
+    </li>
+  {{- else }}
+    {{ $isCurrent := eq page . }}
+    <li class="pl-4 hover:text-blue-light hover:dark:text-blue-dark
+      {{ if $isCurrent }} bg-gray-light-200 dark:bg-gray-dark-200{{ end }}">
+      <a {{ if $isCurrent }}aria-current="page" {{ end }} class="py-2 w-full truncate block"
+          href="{{ .Permalink }}" title="{{ markdownify .Title }}"
+          ><span class="flex items-center gap-2">{{ markdownify .LinkTitle }}</span>
+      </a>
+    </li>
+  {{- end }}
 {{ end }}
