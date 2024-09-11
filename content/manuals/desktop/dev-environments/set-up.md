@@ -2,6 +2,7 @@
 description: Set up a dev Environments
 keywords: Dev Environments, share, set up, Compose, Docker Desktop
 title: Set up a dev environment
+weight: 20
 ---
 
 {{< include "dev-envs-changing.md" >}}
