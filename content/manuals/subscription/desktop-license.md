@@ -2,7 +2,7 @@
 title: Docker Desktop license agreement
 description: Information about Docker Desktop's license agreement
 keywords: license agreement, docker desktop, subscription
-weight: 600
+weight: 40
 ---
 
 Docker Desktop is licensed under the Docker Subscription Service Agreement. When you download and install Docker Desktop, you will be asked to agree to the updated terms.

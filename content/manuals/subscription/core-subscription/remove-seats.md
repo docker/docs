@@ -6,7 +6,7 @@ linkTitle: Remove seats
 aliases:
 - /docker-hub/billing/remove-seats/
 - /subscription/remove-seats/
-weight: 340
+weight: 40
 ---
 
 You can remove seats from your Team or Business subscription at anytime.

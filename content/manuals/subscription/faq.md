@@ -4,7 +4,7 @@ keywords: Docker, Docker Hub, subscription FAQs, subscription, platform
 title: Subscription FAQs
 linkTitle: FAQs
 tags: [FAQ]
-weight: 700
+weight: 50
 ---
 
 For more information on Docker subscriptions, see [Docker subscription overview](_index.md).

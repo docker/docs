@@ -6,7 +6,7 @@ linkTitle: Add seats
 aliases:
 - /docker-hub/billing/add-seats/
 - /subscription/add-seats/
-weight: 320
+weight: 20
 ---
 
 {{< include "tax-compliance.md" >}}

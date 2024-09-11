@@ -7,7 +7,7 @@ aliases:
 - /docker-hub/upgrade/
 - /docker-hub/billing/upgrade/
 - /subscription/upgrade/
-weight: 330
+weight: 30
 ---
 
 {{< include "tax-compliance.md" >}}

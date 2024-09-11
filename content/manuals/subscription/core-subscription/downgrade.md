@@ -7,7 +7,7 @@ aliases:
 - /docker-hub/cancel-downgrade/
 - /docker-hub/billing/downgrade/
 - /subscription/downgrade/
-weight: 350
+weight: 50
 ---
 
 You can downgrade your Docker subscription at anytime before the renewal date. The unused portion of the subscription isn't refundable or creditable.
