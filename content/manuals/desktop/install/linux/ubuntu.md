@@ -7,10 +7,10 @@ keywords: install docker ubuntu, ubuntu install docker, install docker on ubuntu
   docker on ubuntu, docker desktop for ubuntu
 title: Install Docker Desktop on Ubuntu
 linkTitle: Ubuntu
-weight: 50
 toc_max: 4
 aliases:
 - /desktop/linux/install/ubuntu/
+- /manuals/desktop/install/ubuntu/
 ---
 
 > **Docker Desktop terms**

@@ -3,6 +3,7 @@ description: Learn about and change Docker Desktop's settings
 keywords: settings, preferences, proxy, file sharing, resources, kubernetes, Docker
   Desktop, Linux, Mac, Windows
 title: Change your Docker Desktop settings
+linkTitle: Change settings
 aliases:
  - /desktop/settings/mac/
  - /desktop/settings/windows/

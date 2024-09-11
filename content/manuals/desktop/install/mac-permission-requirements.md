@@ -6,6 +6,8 @@ title: Understand permission requirements for Docker Desktop on Mac
 aliases:
 - /docker-for-mac/privileged-helper/
 - /desktop/mac/privileged-helper/
+- /manuals/desktop/mac/privileged helper/
+weight: 20
 ---
 
 This page contains information about the permission requirements for running and installing Docker Desktop on Mac.

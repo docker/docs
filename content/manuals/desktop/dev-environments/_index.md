@@ -3,7 +3,6 @@ description: Dev Environments
 keywords: Dev Environments, share, local, Compose
 title: Overview of Dev Environments
 linkTitle: Dev Environments (Beta)
-weight: 30
 ---
 
 {{< include "dev-envs-changing.md" >}}

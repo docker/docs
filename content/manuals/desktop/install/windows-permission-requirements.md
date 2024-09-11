@@ -4,6 +4,8 @@ keywords: Docker Desktop, Windows, security, install
 title: Understand permission requirements for Windows
 aliases:
 - /desktop/windows/privileged-helper/
+- /manuals/desktop/windows/permission-requirements/
+weight: 40
 ---
 
 This page contains information about the permission requirements for running and installing Docker Desktop on Windows, the functionality of the privileged helper process `com.docker.service` and the reasoning behind this approach.
