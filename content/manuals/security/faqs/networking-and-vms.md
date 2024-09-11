@@ -2,6 +2,8 @@
 description: Find the answers to FAQs related to networking and virtualization
 keywords: Docker, Docker Hub, Docker Desktop security FAQs, security, platform, networks, vms
 title: Network and VM FAQs
+linkTitle: Network and VM
+weight: 30
 tags: [FAQ]
 aliases:
 - /faq/security/networking-and-vms/

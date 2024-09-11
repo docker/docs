@@ -2,6 +2,7 @@
 description: Learn how Just-in-Time provisioning works with your SSO connection.
 keywords: user provisioning, just-in-time provisioning, JIT, autoprovision, Docker Hub, Docker Admin, admin, security
 title: Just-in-Time provisioning
+linkTitle: Just-in-Time
 ---
 
 Just-in-Time (JIT) provisioning runs after every successful single sign-on (SSO) sign-in. JIT verifies that the user that signs in is a member of the organization and teams that they are assigned to in the IdP. When you [create your SSO connection](../single-sign-on/_index.md), JIT provisioning is turned on by default.

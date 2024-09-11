@@ -2,6 +2,7 @@
 description: How to configure Settings Management for Docker Desktop
 keywords: admin, controls, rootless, enhanced container isolation
 title: Configure Settings Management
+linkTitle: Configure
 aliases: 
  - /desktop/hardened-desktop/settings-management/configure/
 ---

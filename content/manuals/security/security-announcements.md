@@ -2,6 +2,7 @@
 description: Docker security announcements
 keywords: Docker, CVEs, security, notice, Log4J 2, Log4Shell, Text4Shell, announcements
 title: Docker security announcements
+linkTitle: Security announcements
 toc_min: 1
 toc_max: 2
 ---

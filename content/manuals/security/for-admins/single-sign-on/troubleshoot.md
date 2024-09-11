@@ -2,6 +2,7 @@
 description: Learn how to troubleshoot common SSO issues.
 keywords: sso, troubleshoot, single sign-on
 title: Troubleshoot single sign-on
+linkTitle: Troubleshoot
 tags: [Troubleshooting]
 ---
 

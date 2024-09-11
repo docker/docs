@@ -2,6 +2,7 @@
 description: Learn how single sign-on works, how to set it up, and the required SSO attributes.
 keywords: Single Sign-On, SSO, sign-on, admin, docker hub, admin console, security
 title: Single sign-on overview
+linkTitle: Single sign-on
 aliases:
 - /single-sign-on/
 - /admin/company/settings/sso/
