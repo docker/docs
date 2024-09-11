@@ -6,8 +6,6 @@ tags: [FAQ]
 weight: 700
 ---
 
-For more information on billing, see [Billing and payments](_index.md).
-
 ### What credit and debit cards are supported?
 
 - Visa
