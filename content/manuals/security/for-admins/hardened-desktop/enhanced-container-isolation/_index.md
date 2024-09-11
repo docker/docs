@@ -3,8 +3,10 @@ description: Enhanced Container Isolation - benefits, why use it, how it differs
   Docker rootless, who it is for
 keywords: containers, rootless, security, sysbox, runtime
 title: What is Enhanced Container Isolation?
+linkTitle: Enhanced Container Isolation
 aliases:
  - /desktop/hardened-desktop/enhanced-container-isolation/
+weight: 20
 ---
 
 > [!NOTE]

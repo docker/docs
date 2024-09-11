@@ -1,5 +1,6 @@
 ---
 build:
   render: never
-title: Security FAQs
+title: FAQs
+weight: 30
 ---

@@ -3,6 +3,7 @@ description: Learn how to enable two-factor authentication on your Docker accoun
 keywords: Docker, docker, registry, security, Docker Hub, authentication, two-factor
   authentication, account security
 title: Enable two-factor authentication for your Docker account
+linkTitle: Two-factor authentication
 aliases:
 - /docker-hub/2fa/
 ---

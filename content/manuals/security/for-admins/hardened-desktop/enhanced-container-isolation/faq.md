@@ -1,10 +1,12 @@
 ---
 title: Enhanced Container Isolation (ECI) FAQs
+linkTitle: FAQs
 description: Frequently asked questions for Enhanced Container Isolation
 keywords: enhanced container isolation, security, faq, sysbox, Docker Desktop
 toc_max: 2
 aliases:
  - /desktop/hardened-desktop/enhanced-container-isolation/faq/
+weight: 40
 ---
 
 ### Do I need to change the way I use Docker when ECI is switched on?

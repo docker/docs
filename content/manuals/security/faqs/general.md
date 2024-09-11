@@ -2,6 +2,8 @@
 description: Find the answers to common security related FAQs
 keywords: Docker, Docker Hub, Docker Desktop security FAQs, platform, Docker Scout, admin, security
 title: General security FAQs
+linkTitle: General 
+weight: 10
 tags: [FAQ]
 aliases:
 - /faq/security/general/

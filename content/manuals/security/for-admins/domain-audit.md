@@ -6,6 +6,7 @@ aliases:
 - /docker-hub/domain-audit/
 - /admin/company/settings/domains/
 - /admin/organization/security-settings/domains/
+weight: 50
 ---
 
 Domain audit identifies uncaptured users in an organization. Uncaptured users are Docker users who have authenticated to Docker using an email address associated with one of your verified domains, but they're not a member of your organization in Docker. You can audit domains on organizations that are part of the Docker Business subscription. To upgrade your existing account to a Docker Business subscription, see [Upgrade your subscription](/subscription/upgrade/).

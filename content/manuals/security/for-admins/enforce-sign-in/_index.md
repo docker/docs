@@ -3,9 +3,11 @@ description: Understand what happens when you force users to sign in to Docker D
 toc_max: 2
 keywords: authentication, registry.json, configure, enforce sign-in, docker desktop, security,
 title: Enforce sign-in for Docker Desktop
+linkTitle: Enforce sign-in
 aliases:
  - /security/for-admins/configure-sign-in/
  - /docker-hub/configure-sign-in/
+weight: 30
 ---
 
 By default, members of your organization can use Docker Desktop without signing
