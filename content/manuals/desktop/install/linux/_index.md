@@ -142,7 +142,7 @@ To install Docker Desktop successfully, your Linux host must meet the following 
 - Gnome, KDE, or MATE Desktop environment.
   - For many Linux distros, the Gnome environment does not support tray icons. To add support for tray icons, you need to install a Gnome extension. For example, [AppIndicator](https://extensions.gnome.org/extension/615/appindicator-support/).
 - At least 4 GB of RAM.
-- Enable configuring ID mapping in user namespaces, see [File sharing](../faqs/linuxfaqs.md#how-do-i-enable-file-sharing).
+- Enable configuring ID mapping in user namespaces, see [File sharing](/manuals/desktop/faqs/linuxfaqs.md#how-do-i-enable-file-sharing).
 - Recommended: [Initialize `pass`](/manuals/desktop/get-started.md#credentials-management-for-linux-users) for credentials management.
 
 Docker Desktop for Linux runs a Virtual Machine (VM). For more information on why, see [Why Docker Desktop for Linux runs a VM](/manuals/desktop/faqs/linuxfaqs.md#why-does-docker-desktop-for-linux-run-a-vm).
