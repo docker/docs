@@ -24,7 +24,7 @@ The easiest and recommended way to get Docker Compose is to install Docker Deskt
 includes Docker Compose along with Docker Engine and Docker CLI which are Compose prerequisites. 
 
 Docker Desktop is available on:
-- [Linux](/manuals/desktop/install/linux-install.md)
+- [Linux](/manuals/desktop/install/linux/_index.md)
 - [Mac](/manuals/desktop/install/mac-install.md)
 - [Windows](/manuals/desktop/install/windows-install.md)
 

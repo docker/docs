@@ -50,7 +50,7 @@ section and choose the best installation path for you.
 {{< card
   title="Docker Desktop for Linux"
   description="A native Linux application that delivers all Docker tools to your Linux computer."
-  link="/desktop/install/linux-install/"
+  link="/desktop/install/linux/"
   icon="/assets/images/linux_48.svg" >}}
 
 > [!NOTE]

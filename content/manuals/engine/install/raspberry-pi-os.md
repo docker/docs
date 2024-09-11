@@ -87,7 +87,7 @@ clean installation, and prefer to clean up any existing data, read the
 You can install Docker Engine in different ways, depending on your needs:
 
 - Docker Engine comes bundled with
-  [Docker Desktop for Linux](/manuals/desktop/install/linux-install.md). This is
+  [Docker Desktop for Linux](/manuals/desktop/install/linux/_index.md). This is
   the easiest and quickest way to get started.
 
 - Set up and install Docker Engine from

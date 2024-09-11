@@ -2138,7 +2138,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 ### New
 
-- Released [Docker Desktop for Linux](install/linux-install.md).
+- Released [Docker Desktop for Linux](/manuals/desktop/install/linux/_index.md).
 - Beta release of [Docker Extensions](/manuals/extensions/_index.md) and Extensions SDK.
 - Created a Docker Homepage where you can run popular images and discover how to use them.
 - [Compose V2 is now GA](https://www.docker.com/blog/announcing-compose-v2-general-availability/)
@@ -2159,7 +2159,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 ### New
 
-- Released [Docker Desktop for Linux](install/linux-install.md).
+- Released [Docker Desktop for Linux](/manuals/desktop/install/linux/_index.md).
 - Beta release of [Docker Extensions](/manuals/extensions/_index.md) and Extensions SDK.
 - Created a Docker Homepage where you can run popular images and discover how to use them.
 - [Compose V2 is now GA](https://www.docker.com/blog/announcing-compose-v2-general-availability/)
