@@ -13,6 +13,7 @@ aliases:
 - /desktop/windows/release-notes/
 - /desktop/linux/release-notes/
 - /mackit/release-notes/
+weight: 190
 ---
 
 This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases. For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/releases.md).
