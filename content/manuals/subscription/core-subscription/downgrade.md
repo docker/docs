@@ -2,10 +2,12 @@
 description: Learn how to downgrade your Docker subscription
 keywords: Docker Hub, downgrade, subscription, Pro, Team, pricing plan, pause subscription, docker core
 title: Downgrade your subscription
+linkTitle: Downgrade
 aliases:
 - /docker-hub/cancel-downgrade/
 - /docker-hub/billing/downgrade/
 - /subscription/downgrade/
+weight: 50
 ---
 
 You can downgrade your Docker subscription at anytime before the renewal date. The unused portion of the subscription isn't refundable or creditable.
