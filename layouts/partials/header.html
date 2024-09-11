@@ -1,6 +1,6 @@
 <header
-  class="sticky top-0 z-20 h-16 px-4 text-white bg-gradient-to-r from-accent-light to-blue-light-500 dark:from-accent-dark dark:to-blue-dark-100">
-  <div class="mx-auto flex gap-4 h-full max-w-[1400px] items-center justify-between">
+  class="sticky top-0 z-20 h-16 px-6 text-white bg-gradient-to-r from-blue-light-600 to-blue-light dark:from-blue-dark-200 to-50% dark:to-blue-dark-100">
+  <div class="mx-auto flex h-full items-center justify-between">
     <div class="flex h-full items-center md:gap-8 gap-2">
       {{ if not .IsHome }}
       <button x-data @click="$dispatch('togglesidebar')"

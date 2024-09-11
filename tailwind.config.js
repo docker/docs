@@ -68,11 +68,6 @@ module.exports = {
       black: "#000",
       transparent: 'transparent',
 
-      accent: {
-        light: "#677285",
-        dark: "#2D404E",
-      },
-
       background: {
         light: "#f9f9fa",
         dark: "#141b1f",
