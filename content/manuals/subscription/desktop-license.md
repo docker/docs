@@ -2,6 +2,7 @@
 title: Docker Desktop license agreement
 description: Information about Docker Desktop's license agreement
 keywords: license agreement, docker desktop, subscription
+weight: 40
 ---
 
 Docker Desktop is licensed under the Docker Subscription Service Agreement. When you download and install Docker Desktop, you will be asked to agree to the updated terms.
@@ -19,7 +20,7 @@ Read the [Blog](https://www.docker.com/blog/updating-product-subscriptions/) and
 >
 > The licensing and distribution terms for Docker and Moby open-source projects, such as Docker Engine, aren't changing.
 
-Docker Desktop is built using open-source software. For information about the licensing of open-source components in Docker Desktop, select {{< inline-image src="../desktop/mac/images/whale-x.svg" alt="whale menu" >}} > **About Docker Desktop** > **Acknowledgements**.
+Docker Desktop is built using open-source software. For information about the licensing of open-source components in Docker Desktop, select the whale menu > **About Docker Desktop** > **Acknowledgements**.
 
 Docker Desktop distributes some components that are licensed under the
 GNU General Public License. Select [here](https://download.docker.com/opensource/License.tar.gz) to download the source for these components.

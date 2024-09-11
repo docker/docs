@@ -1,10 +1,11 @@
 ---
-title: Usage overview
+title: CLI reference
 description: Docker extension CLI
 keywords: Docker, extensions, sdk, CLI
 aliases:
  - /desktop/extensions-sdk/dev/cli/usage/
  - /desktop/extensions-sdk/dev/usage/
+weight: 30
 ---
 
 The Extensions CLI is an extension development tool that is used to manage Docker extensions. Actions include install, list, remove, and validate extensions.

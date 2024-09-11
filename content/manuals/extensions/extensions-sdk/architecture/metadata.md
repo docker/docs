@@ -1,5 +1,6 @@
 ---
 title: Extension metadata
+linkTitle: Metadata
 description: Docker extension metadata
 keywords: Docker, extensions, sdk, metadata
 aliases:

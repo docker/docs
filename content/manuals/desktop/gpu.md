@@ -1,7 +1,7 @@
 ---
 title: GPU support in Docker Desktop
 linkTitle: GPU support
-weight: 80
+weight: 90
 description: How to use GPU in Docker Desktop
 keywords: gpu, gpu support, nvidia, wsl2, docker desktop, windows
 toc_max: 3

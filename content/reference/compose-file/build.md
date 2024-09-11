@@ -4,6 +4,7 @@ description: Learn about the Compose Build Specification
 keywords: compose, compose specification, compose file reference, compose build specification
 aliases: 
  - /compose/compose-file/build/
+weight: 130
 ---
 
 {{< include "compose/build.md" >}}

@@ -1,5 +1,5 @@
 ---
-title: Build the extensions for multiple architectures
+title: Build multi-arch extensions
 description: Step three in creating an extension.
 keywords: Docker, Extensions, sdk, build, multi-arch
 aliases: 

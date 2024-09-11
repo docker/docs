@@ -5,9 +5,9 @@ keywords: Arch Linux, install, uninstall, upgrade, update, linux, desktop, docke
   desktop, docker desktop for linux, dd4l
 title: Install Docker Desktop on Arch-based distributions
 linkTitle: Arch
-weight: 80
 aliases:
 - /desktop/linux/install/archlinux/
+- /manuals/desktop/install/archlinux/
 ---
 
 > **Docker Desktop terms**
@@ -20,7 +20,7 @@ This page contains information on how to install, launch and upgrade Docker Desk
 
 ## Prerequisites
 
-To install Docker Desktop successfully, you must meet the [general system requirements](linux-install.md#general-system-requirements).
+To install Docker Desktop successfully, you must meet the [general system requirements](_index.md#general-system-requirements).
 
 Additionally, for non-Gnome Desktop environments, `gnome-terminal` must be installed:
 
@@ -35,7 +35,7 @@ $ sudo pacman -S gnome-terminal
 2. [Install Docker client binary on Linux](/manuals/engine/install/binaries.md#install-daemon-and-client-binaries-on-linux). On Arch-based distributions, users must install the Docker client binary.
    Static binaries for the Docker client are available for Linux (as `docker`).
 
-3. Download the latest Arch package from the [Release notes](../release-notes.md).
+3. Download the latest Arch package from the [Release notes](/manuals/desktop/release-notes.md).
 
 4. Install the package:
 
@@ -55,9 +55,9 @@ $ sudo pacman -S gnome-terminal
 
 - Explore [Docker's core subscriptions](https://www.docker.com/pricing/) to see what Docker can offer you.
 - Take a look at the [Docker workshop](/get-started/workshop/_index.md) to learn how to build an image and run it as a containerized application.
-- [Explore Docker Desktop](../use-desktop/_index.md) and all its features.
-- [Troubleshooting](../troubleshoot/overview.md) describes common problems, workarounds, how to run and submit diagnostics, and submit issues.
-- [FAQs](../faqs/general.md) provide answers to frequently asked questions.
-- [Release notes](../release-notes.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
-- [Back up and restore data](../backup-and-restore.md) provides instructions
+- [Explore Docker Desktop](/manuals/desktop/use-desktop/_index.md) and all its features.
+- [Troubleshooting](/manuals/desktop/troubleshoot/overview.md) describes common problems, workarounds, how to run and submit diagnostics, and submit issues.
+- [FAQs](/manuals/desktop/faqs/general.md) provide answers to frequently asked questions.
+- [Release notes](/manuals/desktop/release-notes.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
+- [Back up and restore data](/manuals/desktop/backup-and-restore.md) provides instructions
   on backing up and restoring data related to Docker.

@@ -4,6 +4,7 @@ description: Learn about interpolation
 keywords: compose, compose specification, interpolation, compose file reference
 aliases: 
  - /compose/compose-file/12-interpolation/
+weight: 90
 ---
 
 {{< include "compose/interpolation.md" >}}

@@ -2,6 +2,7 @@
 description: Find the Docker Desktop release notes for Mac, Linux, and Windows.
 keywords: Docker desktop, release notes, linux, mac, windows
 title: Docker Desktop release notes
+linkTitle: Release notes
 tags: [Release notes]
 toc_max: 2
 aliases:
@@ -13,6 +14,7 @@ aliases:
 - /desktop/windows/release-notes/
 - /desktop/linux/release-notes/
 - /mackit/release-notes/
+weight: 220
 ---
 
 This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases. For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/releases.md).
@@ -225,7 +227,7 @@ For more information, see [microsoft/WSL#11794](https://github.com/microsoft/WSL
 #### For Windows
 
 - Fixed an issue on the WSL 2 engine where Docker Desktop would not detect the existence of the `docker-desktop-data` distribution if it had been manually moved by the user.
-- The Windows on ARM installer and the [privileged service](windows/permission-requirements.md#privileged-helper) are now built for ARM64.
+- The Windows on ARM installer and the [privileged service](/manuals/desktop/install/windows-permission-requirements.md#privileged-helper) are now built for ARM64.
 
 #### For Mac
 
@@ -2138,7 +2140,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 ### New
 
-- Released [Docker Desktop for Linux](install/linux-install.md).
+- Released [Docker Desktop for Linux](/manuals/desktop/install/linux/_index.md).
 - Beta release of [Docker Extensions](/manuals/extensions/_index.md) and Extensions SDK.
 - Created a Docker Homepage where you can run popular images and discover how to use them.
 - [Compose V2 is now GA](https://www.docker.com/blog/announcing-compose-v2-general-availability/)
@@ -2159,7 +2161,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 ### New
 
-- Released [Docker Desktop for Linux](install/linux-install.md).
+- Released [Docker Desktop for Linux](/manuals/desktop/install/linux/_index.md).
 - Beta release of [Docker Extensions](/manuals/extensions/_index.md) and Extensions SDK.
 - Created a Docker Homepage where you can run popular images and discover how to use them.
 - [Compose V2 is now GA](https://www.docker.com/blog/announcing-compose-v2-general-availability/)

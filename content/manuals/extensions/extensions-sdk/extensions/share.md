@@ -4,6 +4,7 @@ description: Share your extension with a share link
 keywords: Docker, extensions, share
 aliases: 
  - /desktop/extensions-sdk/extensions/share/
+weight: 40
 ---
 
 Once your extension image is accessible on Docker Hub, anyone with access to the image can install the extension.

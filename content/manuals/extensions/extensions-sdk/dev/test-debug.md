@@ -5,6 +5,7 @@ keywords: Docker, Extensions, sdk, preview, update, Chrome DevTools
 aliases:
  - /desktop/extensions-sdk/build/test-debug/
  - /desktop/extensions-sdk/dev/test-debug/
+weight: 10
 ---
 
 In order to improve the developer experience, Docker Desktop provides a set of tools to help you test and debug your extension.

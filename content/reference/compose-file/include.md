@@ -4,6 +4,7 @@ description: Learn about include
 keywords: compose, compose specification, include, compose file reference
 aliases: 
  - /compose/compose-file/14-include/
+weight: 110
 ---
 
 {{< introduced compose 2.20.0 "/manuals/compose/release-notes.md#2200" >}}

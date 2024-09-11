@@ -2,6 +2,7 @@
 description: Learn about the different ways you can force users to sign in to Docker Desktop
 keywords: authentication, registry.json, configure, enforce sign-in, docker desktop, security 
 title: Ways to enforce sign-in for Docker Desktop
+linkTitle: Methods
 ---
 
 This page outlines the different ways you can enforce sign-in for Docker Desktop.

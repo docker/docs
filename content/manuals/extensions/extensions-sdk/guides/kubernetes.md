@@ -1,5 +1,6 @@
 ---
 title: Interacting with Kubernetes from an extension
+linkTitle: Interacting with Kubernetes
 description: How to connect to a Kubernetes cluster from an extension
 keywords: Docker, Extensions, sdk, Kubernetes
 aliases:

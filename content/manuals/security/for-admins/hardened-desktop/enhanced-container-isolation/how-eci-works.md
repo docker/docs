@@ -4,6 +4,7 @@ title: How does it work?
 keywords: set up, enhanced container isolation, rootless, security
 aliases: 
  - /desktop/hardened-desktop/enhanced-container-isolation/how-eci-works/
+weight: 10
 ---
 
 Docker implements Enhanced Container Isolation by using the [Sysbox

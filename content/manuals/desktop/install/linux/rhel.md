@@ -5,13 +5,12 @@ keywords: red hat, red hat enterprise linux, rhel, rpm,
   desktop, docker desktop, docker desktop for linux, dd4l
 title: Install Docker Desktop on RHEL
 linkTitle: RHEL
-weight: 90
-toc_max: 4
+sitemap: false
 download-url-base: https://download.docker.com/linux/rhel
 ---
 
 {{% restricted title="Early Access" %}}
-Docker Desktop on RHEL is in [Early Access](../../release-lifecycle.md).
+Docker Desktop on RHEL is in [Early Access](/manuals/release-lifecycle.md).
 {{% /restricted %}}
 
 > **Docker Desktop terms**
@@ -26,7 +25,7 @@ This page contains information on how to install, launch and upgrade Docker Desk
 
 To install Docker Desktop successfully, you must:
 
-- Meet the [general system requirements](linux-install.md#general-system-requirements).
+- Meet the [general system requirements](_index.md#general-system-requirements).
 - Have a 64-bit version of either RHEL 8 or RHEL 9.
 
 If you don't have `pass` installed, or it can't be installed, you must enable
@@ -138,9 +137,9 @@ $ sudo dnf install ./docker-desktop-<arch>-rhel.rpm
 
 - Explore [Docker's core subscriptions](https://www.docker.com/pricing/) to see what Docker can offer you.
 - Take a look at the [Docker workshop](/get-started/workshop/_index.md) to learn how to build an image and run it as a containerized application.
-- [Explore Docker Desktop](../use-desktop/_index.md) and all its features.
-- [Troubleshooting](../troubleshoot/overview.md) describes common problems, workarounds, how to run and submit diagnostics, and submit issues.
-- [FAQs](../faqs/general.md) provide answers to frequently asked questions.
-- [Release notes](../release-notes.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
-- [Back up and restore data](../backup-and-restore.md) provides instructions
+- [Explore Docker Desktop](/manuals/desktop/use-desktop/_index.md) and all its features.
+- [Troubleshooting](/manuals/desktop/troubleshoot/overview.md) describes common problems, workarounds, how to run and submit diagnostics, and submit issues.
+- [FAQs](/manuals/desktop/faqs/general.md) provide answers to frequently asked questions.
+- [Release notes](/manuals/desktop/release-notes.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
+- [Back up and restore data](/manuals/desktop/backup-and-restore.md) provides instructions
   on backing up and restoring data related to Docker.

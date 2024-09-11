@@ -4,6 +4,7 @@ description: Docker extension design
 keywords: Docker, extensions, design
 aliases: 
  - /desktop/extensions-sdk/design/design-principles/
+weight: 20
 ---
 
 ## Provide actionable guidance

@@ -2,6 +2,7 @@
 description: Learn how to complete your single-sign on connection and next steps for enabling SSO.
 keywords: configure, sso, docker hub, hub, docker admin, admin, security
 title: Complete your single sign-on connection
+linkTitle: Connect
 ---
 
 The steps to set up your SSO configuration are:

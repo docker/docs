@@ -2,6 +2,7 @@
 title: How to back up and restore your Docker Desktop data
 keywords: Docker Desktop, backup, restore, migration, reinstall, containers, images,
   volumes
+weight: 130
 ---
 
 Use the following procedure to save and restore your images and container data. This is useful if you want to reset your VM disk or to move your Docker environment to a new

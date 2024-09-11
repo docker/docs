@@ -2,6 +2,7 @@
 title: 3D Secure authentication
 description: Learn about 3D Secure support for Docker billing.
 keywords: billing, renewal, payments, subscriptions
+weight: 40
 ---
 
 > [!NOTE]

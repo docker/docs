@@ -4,6 +4,7 @@ description: Explore all the attributes the volumes top-level element can have.
 keywords: compose, compose specification, volumes, compose file reference
 aliases: 
  - /compose/compose-file/07-volumes/
+weight: 40
 ---
 
 {{< include "compose/volumes.md" >}}

@@ -8,6 +8,7 @@ aliases:
  - /desktop/extensions-sdk/build/set-up/minimal-frontend-using-docker-cli/
  - /desktop/extensions-sdk/build/set-up/frontend-extension-tutorial/
  - /desktop/extensions-sdk/build/frontend-extension-tutorial/
+weight: 20
 ---
 
 To start creating your extension, you first need a directory with files which range from the extension’s source code to the required extension-specific files. This page provides information on how to set up an extension with a more advanced frontend.

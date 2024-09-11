@@ -1,5 +1,6 @@
 ---
 title: Validate your extension
+linkTitle: Validate
 description: Step three in the extension creation process
 keywords: Docker, Extensions, sdk, validate, install
 aliases:
@@ -7,6 +8,7 @@ aliases:
  - /desktop/extensions-sdk/build/build-install/
  - /desktop/extensions-sdk/dev/cli/build-test-install-extension/
  - /desktop/extensions-sdk/extensions/validate/
+weight: 20
 ---
 
 Validate your extension before you share or publish it. Validating the extension ensures that the extension:

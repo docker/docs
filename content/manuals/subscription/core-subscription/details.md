@@ -1,9 +1,11 @@
 ---
 title: Docker Core subscriptions and features
+linkTitle: Subscriptions and features
 description: Learn about Docker Core subscription tiers and their features
 keywords: subscription, personal, pro, team, business, features, docker core subscription, docker core
 aliases:
 - /subscription/details/
+weight: 10
 ---
 
 You can do more with Docker with a Docker Core subscription, such as add collaborators, create scoped access tokens, and create private repositories. This page provides an overview of each subscription tier. To compare features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/).

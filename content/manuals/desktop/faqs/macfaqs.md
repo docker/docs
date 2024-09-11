@@ -2,10 +2,12 @@
 description: Frequently asked questions for Docker Desktop for Mac
 keywords: desktop, mac, faqs
 title: FAQs for Docker Desktop for Mac
+linkTitle: Mac
 tags: [FAQ]
 aliases:
 - /desktop/mac/space/
 - /docker-for-mac/space/
+weight: 20
 ---
 
 ### Why do I keep getting a notification telling me an application has changed my Desktop configurations?

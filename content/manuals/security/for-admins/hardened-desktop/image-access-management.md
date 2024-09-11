@@ -7,6 +7,7 @@ aliases:
  - /desktop/hardened-desktop/image-access-management/
  - /admin/organization/image-access/
  - /security/for-admins/image-access-management/
+weight: 40
 ---
 
 > [!NOTE]

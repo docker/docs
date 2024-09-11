@@ -6,6 +6,7 @@ aliases:
  - /desktop/extensions-sdk/tutorials/minimal-frontend-extension/
  - /desktop/extensions-sdk/build/set-up/minimal-frontend-extension/
  - /desktop/extensions-sdk/build/minimal-frontend-extension/
+weight: 10
 ---
 
 To start creating your extension, you first need a directory with files which range from the extension’s source code to the required extension-specific files. This page provides information on how to set up a minimal frontend extension based on plain HTML.

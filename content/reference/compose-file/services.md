@@ -4,6 +4,7 @@ description: Explore all the attributes the services top-level element can have.
 keywords: compose, compose specification, services, compose file reference
 aliases:
  - /compose/compose-file/05-services/
+weight: 20
 ---
 
 {{< include "compose/services.md" >}}

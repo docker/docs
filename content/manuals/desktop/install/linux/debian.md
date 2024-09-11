@@ -4,10 +4,11 @@ keywords: debian, install, uninstall, upgrade, update, linux, desktop, docker de
   docker desktop for linux, dd4l
 title: Install Docker Desktop on Debian
 linkTitle: Debian
-weight: 60
+weight: 20
 toc_max: 4
 aliases:
 - /desktop/linux/install/debian/
+- /manuals/desktop/install/debian/
 ---
 
 > **Docker Desktop terms**
@@ -22,7 +23,7 @@ This page contains information on how to install, launch, and upgrade Docker Des
 
 To install Docker Desktop successfully, you must:
 
-- Meet the [general system requirements](linux-install.md#general-system-requirements).
+- Meet the [general system requirements](_index.md#general-system-requirements).
 - Have a 64-bit version of Debian 12.
 - For a Gnome Desktop environment, you must also install AppIndicator and KStatusNotifierItem [Gnome extensions](https://extensions.gnome.org/extension/615/appindicator-support/).
 
@@ -39,7 +40,7 @@ Recommended approach to install Docker Desktop on Debian:
 1. Set up Docker's `apt` repository.
    See step one of [Install using the `apt` repository](/manuals/engine/install/debian.md#install-using-the-repository).
 
-2. Download the latest [DEB package](https://desktop.docker.com/linux/main/amd64/docker-desktop-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64). For checksums, see the [Release notes](../release-notes.md).
+2. Download the latest [DEB package](https://desktop.docker.com/linux/main/amd64/docker-desktop-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64). For checksums, see the [Release notes](/manuals/desktop/release-notes.md).
 
 3. Install the package with apt as follows:
 
@@ -88,9 +89,9 @@ Don't forget to substitute `<arch>` with the architecture you want.
 
 - Explore [Docker's core subscriptions](https://www.docker.com/pricing/) to see what Docker can offer you.
 - Take a look at the [Docker workshop](/get-started/workshop/_index.md) to learn how to build an image and run it as a containerized application.
-- [Explore Docker Desktop](../use-desktop/_index.md) and all its features.
-- [Troubleshooting](../troubleshoot/overview.md) describes common problems, workarounds, how to run and submit diagnostics, and submit issues.
-- [FAQs](../faqs/general.md) provide answers to frequently asked questions.
-- [Release notes](../release-notes.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
-- [Back up and restore data](../backup-and-restore.md) provides instructions
+- [Explore Docker Desktop](/manuals/desktop/use-desktop/_index.md) and all its features.
+- [Troubleshooting](/manuals/desktop/troubleshoot/overview.md) describes common problems, workarounds, how to run and submit diagnostics, and submit issues.
+- [FAQs](/manuals/desktop/faqs/general.md) provide answers to frequently asked questions.
+- [Release notes](/manuals/desktop/release-notes.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
+- [Back up and restore data](/manuals/desktop/backup-and-restore.md) provides instructions
   on backing up and restoring data related to Docker.

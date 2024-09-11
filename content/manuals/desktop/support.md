@@ -2,6 +2,7 @@
 description: See what support is available for Docker Desktop
 keywords: Support, Docker Desktop, Linux, Mac, Windows
 title: Get support
+weight: 170
 ---
 
 Find information on how to get support, and the scope of Docker Desktop support.
@@ -77,7 +78,7 @@ Docker Desktop is available for Mac, Linux, and Windows. The supported version i
 
 * [Mac system requirements](install/mac-install.md#system-requirements)
 * [Windows system requirements](install/windows-install.md#system-requirements)
-* [Linux system requirements](install/linux-install.md#system-requirements)
+* [Linux system requirements](install/linux/_index.md#system-requirements)
 
 ### How is personal diagnostic data handled in Docker Desktop?
 

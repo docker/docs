@@ -2,6 +2,7 @@
 description: Dev Environments
 keywords: Dev Environments, share, Docker Desktop
 title: Distribute your dev environment
+weight: 30
 ---
 
 {{< include "dev-envs-changing.md" >}}

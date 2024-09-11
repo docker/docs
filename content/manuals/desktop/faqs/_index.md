@@ -1,5 +1,6 @@
 ---
 build:
   render: never
-title: Desktop FAQs
+title: FAQs
+weight: 190
 ---

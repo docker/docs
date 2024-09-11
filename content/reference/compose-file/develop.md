@@ -4,6 +4,7 @@ description: Learn about the Compose Develop Specification
 keywords: compose, compose specification, compose file reference, compose develop specification
 aliases:
  - /compose/compose-file/develop/
+weight: 150
 ---
 
 > **Note:** 

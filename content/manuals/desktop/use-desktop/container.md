@@ -2,6 +2,8 @@
 description: Understand what you can do with the Containers view on Docker Dashboard
 keywords: Docker Dashboard, manage, containers, gui, dashboard, images, user manual
 title: Explore the Containers view in Docker Desktop
+linkTitle: Containers
+weight: 10
 ---
 
 The **Containers** view lists all your running containers and applications. You must have running or stopped containers and applications to see them listed.

@@ -2,6 +2,7 @@
 description: understand what pausing Docker Dashboard means
 keywords: Docker Dashboard, manage, containers, gui, dashboard, pause, user manual
 title: Pause Docker Desktop
+weight: 60
 ---
 
 When Docker Desktop is paused, the Linux VM running Docker Engine is paused, the current state of all your containers are saved in memory, and all processes are frozen. This reduces the CPU and memory usage and helps you retain a longer battery life on your laptop.

@@ -2,6 +2,7 @@
 description: Docker security announcements
 keywords: Docker, CVEs, security, notice, Log4J 2, Log4Shell, Text4Shell, announcements
 title: Docker security announcements
+linkTitle: Security announcements
 toc_min: 1
 toc_max: 2
 ---
@@ -97,7 +98,7 @@ _The issue has been fixed in Moby >= v25.0.2 and >= v24.0.9._
 
 Docker Desktop v4.27.0 and earlier are affected. Docker Desktop v4.27.1 was released on February 1 and includes runc, BuildKit, and dockerd binaries patches. In addition to updating to this new version, we encourage all Docker users to diligently use Docker images and Dockerfiles and ensure you only use trusted content in your builds.
 
-As always, you should check Docker Desktop system requirements for your operating system ([Windows](/manuals/desktop/install/windows-install.md#system-requirements), [Linux](/manuals/desktop/install/linux-install.md#general-system-requirements), [Mac](/manuals/desktop/install/mac-install.md#system-requirements)) before updating to ensure full compatibility.
+As always, you should check Docker Desktop system requirements for your operating system ([Windows](/manuals/desktop/install/windows-install.md#system-requirements), [Linux](/manuals/desktop/install/linux/_index.md#general-system-requirements), [Mac](/manuals/desktop/install/mac-install.md#system-requirements)) before updating to ensure full compatibility.
 
 #### Docker Build Cloud
 

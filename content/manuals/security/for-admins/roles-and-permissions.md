@@ -6,6 +6,7 @@ keywords: members, teams, organization, company, roles, access, docker hub, admi
 title: Roles and permissions
 aliases:
 - /docker-hub/roles-and-permissions/
+weight: 40
 ---
 
 Organization and company owners can assign roles to individuals giving them different permissions in the organization. This section is for owners who want to learn about the defined roles and their permission scopes.
