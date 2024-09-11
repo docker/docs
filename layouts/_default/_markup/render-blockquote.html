@@ -28,7 +28,7 @@
       <span class="icon-svg pb-1">{{ $i := index $icons .AlertType }}
         {{ partialCached "icon.html" $i $i }}
       </span>
-      <strong>{{ or (i18n .AlertType) (title .AlertType) }}</strong>
+      <strong>{{ i18n .AlertType }}</strong>
     </p>
     {{ .Text | safeHTML }}
   </blockquote>
