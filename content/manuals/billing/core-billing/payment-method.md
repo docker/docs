@@ -7,13 +7,11 @@ billing:
 - /billing/payment-method/
 ---
 
-{{< include "tax-compliance.md" >}}
-
 This page describes how to add or update a payment method for your personal account or for an organization.
 
 You can add a payment method or update your account's existing payment method at any time.
 
->**Important**
+> [!IMPORTANT]
 >
 > If you want to remove all payment methods, you must first downgrade your subscription to a free plan. See [Downgrade](../../subscription/core-subscription/downgrade.md).
 
@@ -28,6 +26,8 @@ The following payment methods are supported:
 - UnionPay
 
 All currency, for example the amount listed on your billing invoice, is in United States dollar (USD).
+
+{{< include "tax-compliance.md" >}}
 
 ## Manage payment method
 
