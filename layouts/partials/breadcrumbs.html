@@ -1,4 +1,10 @@
-<nav id="breadcrumbs" data-pagefind-ignore class="py-4 gap-4 flex items-center text-gray-light dark:text-gray-dark max-w-full min-w-0">
+<nav id="breadcrumbs"
+  {{- $breadcrumbTitles := slice }}
+  {{ range .Ancestors.Reverse }}
+     {{ $breadcrumbTitles = $breadcrumbTitles | append .LinkTitle }}
+  {{ end }}
+  data-pagefind-meta="breadcrumbs:{{ collections.Delimit $breadcrumbTitles " / " }}"
+  data-pagefind-ignore class="py-4 gap-4 flex items-center text-gray-light dark:text-gray-dark max-w-full min-w-0">
   {{ range .Ancestors.Reverse }}
     <a href="{{ .Permalink }}" class="link truncate">{{ markdownify .LinkTitle }}</a>
     <span>/</span>
