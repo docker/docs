@@ -23,6 +23,23 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projects/51/views/1?filterQuery=) to see what's coming next.
 
+## 4.34.2
+
+{{< release-date date="2024-09-12" >}}
+
+{{< desktop-install-v2 all=true beta_win_arm=true version="4.34.2" build_path="/167172/" >}}
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed a bug where `docker compose up` would become unresponsive while in Resource Saver mode.
+
+### Security
+
+- Fixed [CVE-2024-8695](https://www.cve.org/cverecord?id=CVE-2024-8695) which allows RCE via crafted extension description/changelog which could be abused by a malicious extension.
+- Fixed [CVE-2024-8696](https://www.cve.org/cverecord?id=CVE-2024-8696) which allows RCE via crafted extension publisher-url/additional-urls which could be abused by a malicious extension.
+
 ## 4.34.1
 
 {{< release-date date="2024-09-05" >}}
