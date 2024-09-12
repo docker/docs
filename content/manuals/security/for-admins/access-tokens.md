@@ -47,7 +47,7 @@ If you have existing [service accounts](/docker-hub/service-accounts/), Docker r
 >
 > Treat access tokens like a password and keep them secret. Store your tokens securely in a credential manager for example.
 
-Organization owners can create up to 3 organization access tokens (OATs) for
+Organization owners can create up to 10 organization access tokens (OATs) for
 organizations with a Team subscription and up to 100 OATs for organizations with
 a Business subscription. Expired tokens count towards the total amount of
 tokens.
