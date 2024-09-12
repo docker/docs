@@ -10,7 +10,7 @@ weight: 30
 
 Docker may impose usage and rate limits for Docker Hub to ensure fair resource
 consumption and maintain service quality. Understanding your usage helps you
-manage you and your organization's usage effectively.
+manage your and your organization's usage effectively.
 
 ## Usage
 
@@ -20,10 +20,10 @@ data stored on Docker Hub.
 ### Fair use
 
 When utilizing the Docker Platform, users should be aware that excessive data
-transfer or storage can lead to throttling, or additional charges. To ensure
-fair resource usage and maintain service quality, we reserve the right to impose
-restrictions or apply additional charges to accounts exhibiting excessive data
-and storage consumption.
+transfer, pull rates, or data storage can lead to throttling, or additional
+charges. To ensure fair resource usage and maintain service quality, we reserve
+the right to impose restrictions or apply additional charges to accounts
+exhibiting excessive data and storage consumption.
 
 ### View Docker Hub usage
 
