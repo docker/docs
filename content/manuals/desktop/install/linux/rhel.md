@@ -138,7 +138,7 @@ $ sudo dnf install ./docker-desktop-<arch>-rhel.rpm
 - Explore [Docker's core subscriptions](https://www.docker.com/pricing/) to see what Docker can offer you.
 - Take a look at the [Docker workshop](/get-started/workshop/_index.md) to learn how to build an image and run it as a containerized application.
 - [Explore Docker Desktop](/manuals/desktop/use-desktop/_index.md) and all its features.
-- [Troubleshooting](/manuals/desktop/troubleshoot/overview.md) describes common problems, workarounds, how to run and submit diagnostics, and submit issues.
+- [Troubleshooting](/manuals/desktop/troubleshoot/_index.md) describes common problems, workarounds, how to run and submit diagnostics, and submit issues.
 - [FAQs](/manuals/desktop/faqs/general.md) provide answers to frequently asked questions.
 - [Release notes](/manuals/desktop/release-notes.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
 - [Back up and restore data](/manuals/desktop/backup-and-restore.md) provides instructions
