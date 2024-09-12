@@ -20,10 +20,10 @@ data stored on Docker Hub.
 ### Fair use
 
 When utilizing the Docker Platform, users should be aware that excessive data
-transfer or storage can lead to throttling, or additional charges. To ensure
-fair resource usage and maintain service quality, we reserve the right to impose
-restrictions or apply additional charges to accounts exhibiting excessive data
-and storage consumption.
+transfer, pull rates, or storage can lead to throttling, or additional charges.
+To ensure fair resource usage and maintain service quality, we reserve the right
+to impose restrictions or apply additional charges to accounts exhibiting
+excessive data and storage consumption.
 
 ### View Docker Hub usage
 
