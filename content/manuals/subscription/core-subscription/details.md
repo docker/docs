@@ -6,6 +6,8 @@ aliases:
 - /subscription/details/
 ---
 
+{{< include "new-plans.md" >}}
+
 You can do more with Docker with a Docker Core subscription, such as add collaborators, create scoped access tokens, and create private repositories. This page provides an overview of each subscription tier. To compare features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/).
 
 The following describes some of the key features included with your Docker Core subscription:

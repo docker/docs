@@ -6,10 +6,26 @@ linkTitle: Usage and rate limits
 weight: 30
 ---
 
-Understanding your Docker Hub usage and rate limits helps you manage your and
-your organization's usage effectively.
+{{< include "new-plans.md" >}}
 
-## View Docker Hub usage
+Docker may impose usage and rate limits for Docker Hub to ensure fair resource
+consumption and maintain service quality. Understanding your usage helps you
+manage your and your organization's usage effectively.
+
+## Usage
+
+Usage refers to the amount of data transferred from Docker Hub and the amount of
+data stored on Docker Hub.
+
+### Fair use
+
+When utilizing the Docker Platform, users should be aware that excessive data
+transfer or storage can lead to throttling, or additional charges. To ensure
+fair resource usage and maintain service quality, we reserve the right to impose
+restrictions or apply additional charges to accounts exhibiting excessive data
+and storage consumption.
+
+### View Docker Hub usage
 
 You can download a CSV file of your or your organization's Docker Hub usage. To
 download the file:
@@ -42,6 +58,46 @@ The file contains the following comma separated values.
 | `version_checks`     | The number of version checks accumulated for the date and hour of each image repository. Depending on the client, a pull request can do a version check to verify the existence of an image or tag without downloading it. | This helps identify the frequency of version checks, which you can use to analyze usage trends and potential unexpected behaviors.                                                  |
 | `pulls`              | The number of pulls accumulated for the date and hour of each image repository.                                                                                                                                            | This helps identify the frequency of repository pulls, which you can use to analyze usage trends and potential unexpected behaviors.                                                |
 
+### Optimize and manage Docker Hub usage
+
+Use the following steps to help optimize and manage your Docker Hub usage for
+both individuals and organizations.
+
+1. [View your Docker Hub usage](#view-docker-hub-usage).
+
+2. Use the Docker Hub usage data to identify which accounts consume the most
+   data, determine peak usage times, and identify which images are related to
+   the most data usage. In addition, look for usage trends, such as the
+   following:
+
+   - Inefficient pull behavior: Identify frequently accessed repositories to
+     assess whether you can optimize caching practices or consolidate usage to
+     reduce pulls.
+   - Inefficient automated systems: Check which automated tools, such as CI/CD
+     pipelines, may be causing higher pull rates, and configure them to avoid
+     unnecessary image pulls.
+
+3. Optimize image pulls by doing the following:
+
+   - Use caching: Implement local image caching via
+     [mirroring](/docker-hub/mirror/) or within your CI/CD pipelines to reduce
+     redundant pulls.
+   - Automate manual workflows: Avoid unnecessary pulls by configuring automated
+     systems to pull only when a new version of an image is available.
+
+4. Optimize the size of repositories by regularly auditing and removing
+   untagged, unused, or outdated images.
+
+5. Increase your limits by upgrading or purchasing add-ons. For details, see
+   [Docker pricing](https://www.docker.com/pricing/).
+
+6. For organizations, monitor and enforce organizational policies by doing the
+   following:
+
+   - Routinely [view Docker Hub usage](#view-docker-hub-usage) to monitor usage.
+   - [Enforce sign-in](/security/for-admins/enforce-sign-in/) to ensure that you
+     can monitor the usage of your users and users receive higher usage limits.
+
 ## Rate limit
 
 A user's rate limit is equal to the highest entitlement of their personal
@@ -61,6 +117,38 @@ URLs (`/v2/*/manifests/*`).
   Source](https://www.docker.com/blog/expanded-support-for-open-source-software-projects/)
   and [Docker Verified Publisher](https://www.docker.com/partners/programs)
   programs.
+
+
+> [!IMPORTANT]
+>
+> Docker is introducing enhanced subscription plans. Our new plans are packed
+> with more features, higher usage limits, and simplified pricing. The new
+> subscription plans take effect at your next renewal date that occurs on or
+> after November 1, 2024. No charges on Docker Hub image pulls or storage will
+> be incurred between November 15, 2024, and January 31, 2025. See [Announcing
+> Upgraded Docker
+> Plans](https://www.docker.com/blog/november-2024-updated-plans-announcement/)
+> for more details and learn how your usage fits into these updates.
+>
+> Note that when these changes take effect, the following new definition of a
+> pull request and limits will take effect:
+>
+> - A Docker pull request includes both a version check and any download that
+>   occurs as a result of the pull. Depending on the client, a `docker pull` can
+>   verify the existence of an image or tag without downloading it by performing
+>   a version check.
+> - A pull request for a normal image makes one pull for a [single
+>   manifest](https://github.com/opencontainers/image-spec/blob/main/manifest.md).
+> - A pull request for a multi-arch image will count as one pull for each
+>   different architecture.
+> - Pulls are accounted to the user doing the pull, not to the owner of the
+>   image.
+>
+> There will be no image pull rate limit for users or automated systems with a
+> paid subscription. Anonymous and Docker Personal users using Docker Hub will
+> experience rate limits on image pull requests. For authenticated users, there
+> will be a 40 pull/hour rate limit per user; for unauthenticated usage, there
+> will be a 10 pull/hour rate limit per IP address.
 
 ### What's the download rate limit on Docker Hub?
 
