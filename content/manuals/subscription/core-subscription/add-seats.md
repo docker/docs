@@ -15,9 +15,9 @@ You can add seats at anytime to your existing subscription.
 
 When you add seats to your subscription in the middle of your billing cycle, you are charged a prorated amount for the additional seats.
 
->**Important**
+> [!IMPORTANT]
 >
->If you have a [sales-assisted Docker Business subscription](details.md#sales-assisted), contact your account manager to add seats to your subscription. 
+> If you have a [sales-assisted Docker Business subscription](details.md#sales-assisted), contact your account manager to add seats to your subscription. 
 
 1. Sign in to your [Docker Hub](https://hub.docker.com) account.
 
