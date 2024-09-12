@@ -5,6 +5,8 @@ title: Service accounts
 weight: 50
 ---
 
+{{< include "new-plans.md" >}}
+
 > [!NOTE]
 >
 > Service accounts require a

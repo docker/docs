@@ -5,6 +5,8 @@ keywords: subscription, free, team, business, features
 weight: 30
 ---
 
+{{< include "new-plans.md" >}}
+
 This page provides an overview of the subscription plans for Docker Scout. To compare features available for each plan, see [Docker Scout Pricing](https://docker.com/products/docker-scout).
 
 ## Docker Scout Free
