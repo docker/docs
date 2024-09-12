@@ -7,7 +7,7 @@ title: Install Docker Desktop on Arch-based distributions
 linkTitle: Arch
 aliases:
 - /desktop/linux/install/archlinux/
-- /manuals/desktop/install/archlinux/
+- /desktop/install/archlinux/
 ---
 
 > **Docker Desktop terms**

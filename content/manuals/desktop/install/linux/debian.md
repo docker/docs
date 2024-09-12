@@ -8,7 +8,7 @@ weight: 20
 toc_max: 4
 aliases:
 - /desktop/linux/install/debian/
-- /manuals/desktop/install/debian/
+- /desktop/install/debian/
 ---
 
 > **Docker Desktop terms**

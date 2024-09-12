@@ -11,7 +11,7 @@ weight: 10
 toc_max: 4
 aliases:
 - /desktop/linux/install/ubuntu/
-- /manuals/desktop/install/ubuntu/
+- /desktop/install/ubuntu/
 ---
 
 > **Docker Desktop terms**

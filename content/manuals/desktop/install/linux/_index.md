@@ -9,7 +9,7 @@ linkTitle: Linux
 weight: 60
 aliases:
 - /desktop/linux/install/
-- /manuals/desktop/install/linux-install/
+- /desktop/install/linux-install/
 ---
 
 > **Docker Desktop terms**
