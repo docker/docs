@@ -8,7 +8,7 @@ weight: 30
 toc_max: 4
 aliases:
 - /desktop/linux/install/fedora/
-- /manuals/desktop/install/fedora/
+- /desktop/install/fedora/
 ---
 
 > **Docker Desktop terms**
