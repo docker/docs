@@ -1,6 +1,6 @@
 {{ define "main" }}
-  {{ partial "breadcrumbs.html" . }}
   <article class="prose max-w-none dark:prose-invert">
+    {{ partial "breadcrumbs.html" . }}
     {{- $img := resources.Get .Params.image }}
     <img src="{{ $img.Permalink }}" alt="{{ .Title }}" class="w-full rounded-lg object-cover h-96">
     <h1 class="scroll-mt-36">{{ .Title }}</h1>
@@ -11,4 +11,8 @@
     <div class="text-xl">More learning paths</div>
     {{ partial "post-links.html" (where .CurrentSection.Pages "Permalink" "ne" page.Permalink) }}
   </article>
+{{ end }}
+
+{{ define "left" }}
+  {{- partial "sidebar.html" . }}
 {{ end }}

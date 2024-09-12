@@ -3,7 +3,7 @@ title: Get started
 keywords: Docker, get started
 description: Get started with Docker
 notoc: true
-
+layout: wide
 get-started:
 - title: Get Docker
   description: Choose the best installation path for your setup.

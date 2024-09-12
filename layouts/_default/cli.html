@@ -11,8 +11,9 @@
   {{ end }}
   {{ .Scratch.Set "headings" slice }}
   {{ .Scratch.Set "subheadings" slice }}
-  {{ partial "breadcrumbs.html" . }}
-  <article class="prose max-w-none dark:prose-invert">
+  <div class="flex w-full">
+    <article class="prose min-w-0 flex-[2_2_0%] max-w-4xl dark:prose-invert">
+    {{ partial "breadcrumbs.html" . }}
     <h1 class="scroll-mt-36">{{ .Title }}</h1>
     <table>
       <tbody>
@@ -192,8 +193,34 @@ can be removed entirely in a future release.
       </table>
     {{ end }}
   </article>
-{{ end }}
 
-{{ define "right" }}
-  {{ partial "cli-aside.html" . }}
+  <div class="hidden flex-1 min-w-52 lg:block">
+    <aside
+      class="sticky top-16 h-[calc(100vh-64px)] min-w-52 space-y-4 overflow-y-auto py-4 w-full"
+      >
+      <div id="TableOfContents">
+        <div class="text-lg pb-2">{{ T "tableOfContents" }}</div>
+        <nav class="toc">
+          <ul>
+            {{ range (.Scratch.Get "headings") }}
+              {{/* add left padding depending on level (pl-2, pl-3, pl-4) */}}
+              {{ $slice := strings.Split .text "{#" }}
+              {{ $text := index $slice 0 }}
+              {{ $anchor := index $slice 1 | strings.TrimRight "}" }}
+              <li{{ with .level }} class="pl-{{ . }}"{{ end }}>
+                <a
+                  {{ if $anchor }}
+                    href="#{{ $anchor }}"
+                  {{ else }}
+                    href="#{{ $text | anchorize }}"
+                  {{ end }}
+                  >{{ markdownify $text }}</a>
+              </li>
+            {{ end }}
+          </ul>
+        </nav>
+      </div>
+    </aside>
+  </div>
+
 {{ end }}

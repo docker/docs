@@ -1,5 +1,6 @@
 ---
 title: Reference documentation
+layout: wide
 description: Find reference documentation for the Docker platform’s various APIs, CLIs, and file formats
 notoc: true
 grid_files:

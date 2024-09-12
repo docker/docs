@@ -3,7 +3,7 @@ title: Guides
 keywords: Docker guides
 description: Explore the Docker guides
 notoc: true
-
+layout: wide
 dive-deeper:
 - title: Language-specific guides
   description: Learn how to containerize, develop, and test language-specific apps using Docker.

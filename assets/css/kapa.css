@@ -1,4 +1,6 @@
 .mantine-Modal-root {
+  .mantine-Modal-inner { inset: 0; }
+
   ol {
     list-style-type: decimal;
   }
