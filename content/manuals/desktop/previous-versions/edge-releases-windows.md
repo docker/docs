@@ -2274,7 +2274,7 @@ This Beta release includes some significant changes:
 * The GUI now runs in non-elevated mode and connects to an elevated Windows service
 * Allocate virtual machine memory by 256 MB increments, instead of 1 GB
 * Show a meaningful error when the user has an empty password
-* Improved [Troubleshooting](../troubleshoot/overview.md) page
+* Improved [Troubleshooting](../troubleshoot/_index.md) page
 
 **Upgrades**
 
@@ -2326,7 +2326,7 @@ This Beta release includes some significant changes:
 
 **Known issues**
 
-*  Due to limitation in the Windows NAT implementation, co-existence with other NAT prefixes needs to be carefully managed. See [Troubleshooting](../troubleshoot/overview.md) for more details.
+*  Due to limitation in the Windows NAT implementation, co-existence with other NAT prefixes needs to be carefully managed. See [Troubleshooting](../troubleshoot/_index.md) for more details.
 
 
 ### Beta 9 Release (2016-04-26 1.11.0-beta9)

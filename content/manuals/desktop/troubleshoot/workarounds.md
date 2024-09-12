@@ -3,6 +3,7 @@ description: Common workarounds
 keywords: linux, mac, windows, troubleshooting, workarounds, Docker Desktop
 title: Workarounds for common problems
 tags: [ Troubleshooting ]
+weight: 20
 ---
 
 ### Reboot
