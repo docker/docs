@@ -96,6 +96,6 @@ For more information, see [Docker Data Processing Agreement](https://www.docker.
 
 ## What can I do before seeking support?
 
-Before seeking support, you can perform basic troubleshooting. See [Diagnose and troubleshooting](/manuals/desktop/troubleshoot/overview.md) for more information.
+Before seeking support, you can perform basic troubleshooting. See [Diagnose and troubleshooting](/manuals/desktop/troubleshoot/_index.md) for more information.
 
 You can also see if an answer already exists in the [FAQs](/tags/faq/).

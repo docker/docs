@@ -129,7 +129,7 @@ The `install` command accepts the following flags:
 - Explore [Docker's core subscriptions](https://www.docker.com/pricing/) to see what Docker can offer you. 
 - [Get started with Docker](/get-started/introduction/_index.md).
 - [Explore Docker Desktop](../use-desktop/_index.md) and all its features.
-- [Troubleshooting](../troubleshoot/overview.md) describes common problems, workarounds, how
+- [Troubleshooting](/manuals/desktop/troubleshoot/_index.md) describes common problems, workarounds, how
   to run and submit diagnostics, and submit issues.
 - [FAQs](../faqs/general.md) provide answers to frequently asked questions.
 - [Release notes](../release-notes.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
