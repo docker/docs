@@ -10,7 +10,7 @@ weight: 30
 
 Docker may impose usage and rate limits for Docker Hub to ensure fair resource
 consumption and maintain service quality. Understanding your usage helps you
-manage your and your organization's usage effectively.
+manage you and your organization's usage effectively.
 
 ## Usage
 
