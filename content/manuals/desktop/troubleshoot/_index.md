@@ -14,9 +14,8 @@ aliases:
 - /windows/troubleshoot/
 - /docker-for-win/troubleshoot/
 - /docker-for-windows/troubleshoot/
-tags: [ Troubleshooting ]
-aliases:
 - /desktop/troubleshoot/overview/
+tags: [ Troubleshooting ]
 weight: 160
 ---
 
