@@ -6,6 +6,8 @@ aliases:
 - /subscription/build-details/
 ---
 
+{{< include "new-plans.md" >}}
+
 You can enhance your teams' builds with a Build Cloud subscription. This page describes the features available for the different subscription tiers. To compare features available for each tier, see [Docker Build Cloud pricing](https://www.docker.com/products/build-cloud/#pricing).
 
 ## Docker Build Cloud Starter
