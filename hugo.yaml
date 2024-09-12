@@ -262,7 +262,7 @@ module:
         - source: docs/api/version-history.md
           target: content/reference/api/engine/version-history.md
         - source: docs/api
-          target: static/reference/api/engine
+          target: content/reference/api/engine/version
           includeFiles: "*.yaml"
 
     - path: github.com/moby/buildkit

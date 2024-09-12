@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>{{ .Title }}</title>
+  <!-- needed for adaptive design -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="{{ .Description }}" />
+  <meta charset="utf-8" />
+  <!-- favicon -->
+  {{- partialCached "favicon.html" "favicon" }}
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .menu-content>div:first-child {
+      background-color: #086dd7;
+      padding: 16px;
+    }
+  </style>
+</head>
+
+<body>
+  {{ $specURL := urls.Parse (printf "/%s%s.yaml" .File.Dir .File.ContentBaseName) }}
+  <redoc spec-url="{{ $specURL.String }}" hide-hostname="true" suppress-warnings="true" lazy-rendering></redoc>
+  <script src="https://cdn.redoc.ly/redoc/latest/bundles/redoc.standalone.js"></script>
+</body>
+
+</html>
