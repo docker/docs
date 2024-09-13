@@ -143,11 +143,11 @@
           for (let i = 1; i <= resultsLength / 10; i++) {
             if (i == currentPage) {
               resultsHTML += `<li class="text-center text-white">
-                <a href="{{ site.BaseURL }}search?q=${query}&page=${i}" class="block h-6 w-6 rounded-sm bg-blue-light dark:bg-blue-dark">${i}</a>
+                <a href="/search/?q=${query}&page=${i}" class="block h-6 w-6 rounded-sm bg-blue-light dark:bg-blue-dark">${i}</a>
               </li>`;
             } else {
               resultsHTML += `<li class="text-center text-gray-light dark:text-gray-dark">
-                <a href="{{ site.BaseURL }}search?q=${query}&page=${i}" class="block h-6 w-6 rounded-sm bg-gray-light-200 dark:bg-gray-dark-200">${i}</a>
+                <a href="/search/?q=${query}&page=${i}" class="block h-6 w-6 rounded-sm bg-gray-light-200 dark:bg-gray-dark-200">${i}</a>
               </li>`;
             }
           }

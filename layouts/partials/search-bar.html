@@ -9,7 +9,7 @@
   {{ (resources.Get "images/search-ai.svg").Content | safeHTML }}
   <input x-ref="searchBarInput" type="search" id="search-bar-input" @click="open = true" @focus="open = true;"
     @blur.window.capture="$refs.searchBarRef.contains($event.relatedTarget) || (open = false);"
-    @keyup.enter.prevent="window.location.href = '{{ site.BaseURL }}search?q=' + $event.target.value;"
+    @keyup.enter.prevent="window.location.href = '/search/?q=' + $event.target.value;"
     @keyup.escape.prevent="open = false;" @keydown.window="(e) => {
           switch(e.key) {
           case 'k':
@@ -91,7 +91,7 @@
             })
             .join("");
           if (resultsLength > 5) {
-            resultsHTML += `<div class="w-fit ml-auto px-4 py-2"><a href="/search?q=${query}" class="link">Show all results</a></div>`;
+            resultsHTML += `<div class="w-fit ml-auto px-4 py-2"><a href="/search/?q=${query}" class="link">Show all results</a></div>`;
           }
 
           searchBarResults.innerHTML = resultsHTML;
