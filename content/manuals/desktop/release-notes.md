@@ -137,6 +137,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 - [Docker Debug](/reference/cli/docker/debug.md) is now generally available.
 - BuildKit now evaluates Dockerfile rules to inform you of potential issues.
 - **Resource Allocation** settings can now be accessed directly from the resource usage data displayed in the Dashboard footer.
+- New and improved experience for [troubleshooting](/manuals/desktop/troubleshoot/_index.md).
 
 ### Upgrades
 
@@ -533,8 +534,6 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 {{< release-date date="2024-02-26" >}}
 
-{{< desktop-install all=true version="4.28.0" build_path="/139021/" >}}
-
 ### New
 
 - [Settings Management](/manuals/security/for-admins/hardened-desktop/settings-management/_index.md) now allows admins to set the default file-sharing implementation and specify which paths developer can add file shares to.
@@ -602,8 +601,6 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 {{< release-date date="2024-02-08" >}}
 
-{{< desktop-install all=true version="4.27.2" build_path="/137060/" >}}
-
 ### Upgrades
 
 - [Compose v2.24.5](https://github.com/docker/compose/releases/tag/v2.24.5)
@@ -638,8 +635,6 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 {{< release-date date="2024-02-01" >}}
 
-{{< desktop-install all=true version="4.27.1" build_path="/136059/" >}}
-
 ### Upgrades
 
 - [Docker Engine v25.0.2](https://docs.docker.com/engine/release-notes/25.0/#2502) which contains a fix for [CVE-2024-24557](https://scout.docker.com/vulnerabilities/id/CVE-2024-24557), [CVE-2024-23650](https://scout.docker.com/vulnerabilities/id/CVE-2024-23650), [CVE-2024-23651](https://scout.docker.com/vulnerabilities/id/CVE-2024-23651), [CVE-2024-23652](https://scout.docker.com/vulnerabilities/id/CVE-2024-23652) and [CVE-2024-23653](https://scout.docker.com/vulnerabilities/id/CVE-2024-23653)
@@ -655,8 +650,6 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 ## 4.27.0
 
 {{< release-date date="2024-01-25" >}}
-
-{{< desktop-install all=true version="4.27.0" build_path="/135262/" >}}
 
 ### New
 
@@ -747,8 +740,6 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 {{< release-date date="2023-12-14" >}}
 
-{{< desktop-install all=true version="4.26.1" build_path="/131620/" >}}
-
 ### Bug fixes and enhancements
 
 #### For all platforms
@@ -762,8 +753,6 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 ## 4.26.0
 
 {{< release-date date="2023-12-04" >}}
-
-{{< desktop-install all=true version="4.26.0" build_path="/130397/" >}}
 
 ### New
 
@@ -840,8 +829,6 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 {{< release-date date="2023-11-21" >}}
 
-{{< desktop-install all=true version="4.25.2" build_path="/129061/" >}}
-
 ### Bug fixes and enhancements
 
 #### For all platforms
@@ -855,8 +842,6 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 ## 4.25.1
 
 {{< release-date date="2023-11-13" >}}
-
-{{< desktop-install all=true version="4.25.1" build_path="/128006/" >}}
 
 ### Bug fixes and enhancements
 
@@ -875,8 +860,6 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 ## 4.25.0
 
 {{< release-date date="2023-10-26" >}}
-
-{{< desktop-install all=true version="4.25.0" build_path="/126437/" >}}
 
 ### New
 
@@ -951,8 +934,6 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 {{< release-date date="2023-10-12" >}}
 
-{{< desktop-install all=true version="4.24.2" build_path="/124339/" >}}
-
 ### Bug fixes and enhancements
 
 #### For all platforms
@@ -975,8 +956,6 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 ## 4.24.0
 
 {{< release-date date="2023-09-28" >}}
-
-{{< desktop-install all=true version="4.24.0" build_path="/122432/" >}}
 
 ### New
 
