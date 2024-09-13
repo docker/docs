@@ -16,34 +16,32 @@ aliases:
 > employees OR more than $10 million USD in annual revenue) requires a [paid
 > subscription](https://www.docker.com/pricing/).
 
-This page contains information on how to install, launch and upgrade Docker Desktop on an Arch-based distribution. Docker has not tested or verified the installation.
+This page contains information on how to install, launch and upgrade Docker Desktop on an Arch-based distribution. 
+
+> [!IMPORTANT]
+>
+> This is an experimental installation package. Docker has not tested or verified the installation.
 
 ## Prerequisites
 
 To install Docker Desktop successfully, you must meet the [general system requirements](_index.md#general-system-requirements).
 
-Additionally, for non-Gnome Desktop environments, `gnome-terminal` must be installed:
-
-```console
-$ sudo pacman -S gnome-terminal
-```
-
 ## Install Docker Desktop
 
-1. Install client binaries. Docker does not have an Arch package repository. Binaries not included in the package must be installed manually before installing Docker Desktop.
-
-2. [Install Docker client binary on Linux](/manuals/engine/install/binaries.md#install-daemon-and-client-binaries-on-linux). On Arch-based distributions, users must install the Docker client binary.
-   Static binaries for the Docker client are available for Linux (as `docker`).
-
-3. Download the latest Arch package from the [Release notes](/manuals/desktop/release-notes.md).
-
-4. Install the package:
+1. [Install the Docker client binary on Linux](/manuals/engine/install/binaries.md#install-daemon-and-client-binaries-on-linux). Static binaries for the Docker client are available for Linux as `docker`. You can use:
 
    ```console
-   $ sudo pacman -U ./docker-desktop-<arch>.pkg.tar.zst
+   $ wget https://download.docker.com/linux/static/stable/x86_64/docker-{{% param "docker_ce_version" %}}.tgz -qO- | tar xvfz - docker/docker --strip-components=1
+   $ mv ./docker /usr/local/bin
    ```
 
-   Don't forget to substitute `<arch>` with the architecture you want.
+2. Download the latest Arch package from the [Release notes](/manuals/desktop/release-notes.md).
+
+3. Install the package:
+
+   ```console
+   $ sudo pacman -U ./docker-desktop-x86_64.pkg.tar.zst
+   ```
 
    By default, Docker Desktop is installed at `/opt/docker-desktop`.
 
