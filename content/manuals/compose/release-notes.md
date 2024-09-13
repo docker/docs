@@ -11,6 +11,22 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.29.3
+
+{{< release-date date="2024-09-12" >}}
+
+### Update
+
+- Dependencies upgrade: bump compose-go to v2.2.0
+- Dependencies upgrade: bump docker engine and cli to v27.2.1
+
+### Bug fixes and enhancements
+
+- Combination of bind mount and `rebuild` are now allowed with `watch`. 
+- Fixed a bug recreating containers when `--no-deps` is used with `up`.
+- Fixed a bug not closing streams when reattaching containers.
+- Restored recreation of anonymous volumes when using `-V` or `--renew-anon-volumes`.
+
 ## 2.29.2
 
 {{< release-date date="2024-08-16" >}}
