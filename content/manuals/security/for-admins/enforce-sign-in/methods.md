@@ -21,7 +21,8 @@ This page outlines the different ways you can enforce sign-in for Docker Desktop
 2. Create a multi-string value `allowedOrgs`. 
    > [!IMPORTANT]
    >
-   > Only one entry for `allowedOrgs` is currently supported. If you add more than one value, sign-in enforcement silently fails.
+   > As of Docker Desktop version 4.35 and later, you can add more than one organization. With Docker Desktop version 4.34 and earlier, if you add more than one organization sign-in enforcement silently fails.
+
 3. As string data use your organization’s name, all lowercase.
 4. Restart Docker Desktop.
 5. Open Docker Desktop and when Docker Desktop starts, verify that the **Sign in required!** prompt appears.
@@ -42,7 +43,7 @@ There are many ways to deploy the registry key, for example using an MDM solutio
 2. Within Group Policy, create or edit a Group Policy Objective (GPO) that applies to the machines or users you want to target.
 3. Within the GPO, navigate to **Computer Configuration** > **Preferences** > **Windows Settings** > **Registry**.
 4. Add the registry item. Right-click on the **Registry** node, select **New** > **Registry Item**.
-5. Configure the new registry item to match the registry script you created, specifying the action as **Update**. Make sure you input the correct path, value name (`allowedOrgs`), and value data (your organization’s name).
+5. Configure the new registry item to match the registry script you created, specifying the action as **Update**. Make sure you input the correct path, value name (`allowedOrgs`), and value data (your organization’s or organizations' name).
 6. Link the GPO to an Organizational Unit (OU) that contains the machines you want to apply this setting to.
 7. Test the GPO. Test the GPO on a small set of machines first to ensure it behaves as expected. You can use the `gpupdate /force` command on a test machine to manually refresh its group policy settings and check the registry to confirm the changes.
 8. Once verified, you can proceed with broader deployment. Monitor the deployment to ensure the settings are applied correctly across the organization's computers.
@@ -63,14 +64,15 @@ There are many ways to deploy the registry key, for example using an MDM solutio
      <dict>
 	     <key>allowedOrgs</key>
 	     <array>
-             <string>myorg</string>
+             <string>myorg1, myorg2</string>
          </array>
      </dict>
    </plist>
    ```
+
    > [!IMPORTANT]
    >
-   > Only one entry for `allowedOrgs` is currently supported. If you add more than one value, sign-in enforcement silently fails.
+   > As of Docker Desktop version 4.35 and later, you can add more than one organization. With Docker Desktop version 4.34 and earlier, if you add more than one organization sign-in enforcement silently fails.
 
 3. Modify the file permissions to ensure the file cannot be edited by any non-administrator users.
 4. Restart Docker Desktop. 
@@ -140,12 +142,12 @@ details, see [Manage members](/admin/organization/members/).
 
     ```json
     {
-    "allowedOrgs": ["myorg"]
+    "allowedOrgs": ["myorg1", "myorg2"]
     }
     ```
    > [!IMPORTANT]
    >
-   > Only one entry for `allowedOrgs` is currently supported. If you add more than one value, sign-in enforcement silently fails.
+   > As of Docker Desktop version 4.35 and later, you can add more than one organization. With Docker Desktop version 4.34 and earlier, if you add more than one organization sign-in enforcement silently fails.
 
 4. Verify that sign-in is enforced.
 
@@ -182,6 +184,10 @@ If you're using the Windows Command Prompt:
 ```console
 C:\Users\Admin> "Docker Desktop Installer.exe" install --allowed-org=myorg
 ```
+
+> [!IMPORTANT]
+>
+> As of Docker Desktop version 4.35 and later, you can add more than one organization to a single `registry.json` file. With Docker Desktop version 4.34 and earlier, if you add more than one organization sign-in enforcement silently fails.
 
 {{< /tab >}}
 {{< tab name="Mac" >}}
@@ -230,6 +236,10 @@ Path          Owner                  Access
 ----          -----                  ------
 registry.json BUILTIN\Administrators NT AUTHORITY\SYSTEM Allow  FullControl...
 ```
+
+> [!IMPORTANT]
+>
+> As of Docker Desktop version 4.35 and later, you can add more than one organization to a single `registry.json` file. With Docker Desktop version 4.34 and earlier, if you add more than one organization sign-in enforcement silently fails.
 
 {{< /tab >}}
 {{< tab name="Mac" >}}
@@ -296,6 +306,10 @@ Verify that the file has the expected permissions (`-rw-r--r--`) and ownership
 $ sudo ls -l /usr/share/docker-desktop/registry/registry.json
 -rw-r--r--  1 root  root  26 Jul 27 22:01 /usr/share/docker-desktop/registry/registry.json
 ```
+
+> [!IMPORTANT]
+>
+> As of Docker Desktop version 4.35 and later, you can add more than one organization to a single `registry.json` file. With Docker Desktop version 4.34 and earlier, if you add more than one organization sign-in enforcement silently fails.
 
 {{< /tab >}}
 {{< /tabs >}}
