@@ -44,7 +44,7 @@ and Docker Desktop VM.
 
 > [!IMPORTANT]
 >
-> For Docker Desktop version 4.35 and later, you can ignore the manual setup steps below as this now happens automatically. 
+> For Docker Desktop version 4.35 and later, you can ignore the manual setup steps below as this is not required anymore. 
 
 In order not to require elevated privileges, without
 unnecessarily restricting operations on the shared files, Docker Desktop runs
