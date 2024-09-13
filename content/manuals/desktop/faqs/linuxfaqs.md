@@ -40,7 +40,13 @@ Docker Desktop for Linux runs a Virtual Machine (VM) for the following reasons:
 
 Docker Desktop for Linux uses [VirtioFS](https://virtio-fs.gitlab.io/) as the
 default (and currently only) mechanism to enable file sharing between the host
-and Docker Desktop VM. In order not to require elevated privileges, without
+and Docker Desktop VM. 
+
+> [!IMPORTANT]
+>
+> For Docker Desktop version 4.35 and later, you can ignore the manual setup steps below as this now happens automatically. 
+
+In order not to require elevated privileges, without
 unnecessarily restricting operations on the shared files, Docker Desktop runs
 the file sharing service (`virtiofsd`) inside a user namespace (see
 `user_namespaces(7)`) with UID and GID mapping configured. As a result Docker
