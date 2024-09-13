@@ -11,14 +11,14 @@ toc_max: 2
 
 _Last updated September 13, 2024_
 
-Two remote code execution (RCE) vulnerabilities in Docker Desktop related to Docker extensions were reported by [Cure53](https://cure53.de/) and were fixed on September 12 in the [4.34.2](https://docs.docker.com/desktop/release-notes/#4342) release.
+Two remote code execution (RCE) vulnerabilities in Docker Desktop related to Docker Extensions were reported by [Cure53](https://cure53.de/) and were fixed on September 12 in the [4.34.2](https://docs.docker.com/desktop/release-notes/#4342) release.
 
 - [CVE-2024-8695](https://www.cve.org/cverecord?id=CVE-2024-8695): A remote code execution (RCE) vulnerability via crafted extension description/changelog could be abused by a malicious extension in Docker Desktop before 4.34.2. [Critical]
 - [CVE-2024-8696](https://www.cve.org/cverecord?id=CVE-2024-8696): A remote code execution (RCE) vulnerability via crafted extension publisher-url/additional-urls could be abused by a malicious extension in Docker Desktop before 4.34.2. [High]
 
 No existing extensions exploiting the vulnerabilities were found in the Extensions Marketplace. The Docker team will be closely monitoring and diligently reviewing any requests for publishing new extensions.
 
-We strongly encourage you to update to Docker Desktop [4.34.2](https://docs.docker.com/desktop/release-notes/#4342). If you are unable to update promptly, you can [disable Docker extensions](https://docs.docker.com/extensions/settings-feedback/#turn-on-or-turn-off-extensions) as a workaround.
+We strongly encourage you to update to Docker Desktop [4.34.2](https://docs.docker.com/desktop/release-notes/#4342). If you are unable to update promptly, you can [disable Docker Extensions](https://docs.docker.com/extensions/settings-feedback/#turn-on-or-turn-off-extensions) as a workaround.
 
 ## Deprecation of password logins on CLI when SSO enforced
 
