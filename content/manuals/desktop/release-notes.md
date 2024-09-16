@@ -23,6 +23,69 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projects/51/views/1?filterQuery=) to see what's coming next.
 
+## 4.35.0
+
+{{< release-date date="2024-09-26" >}}
+
+{{< desktop-install-v2 all=true beta_win_arm=true version="4.35.0" build_path="/TBD/" >}}
+
+### New
+
+- Docker Desktop Support for Red Hat Enterprise Linux RHEL
+- Volume Backup and Share is now generally available and can be found in the **Volumes** tab.
+- Terminal support within Docker Desktop using system shells is now generally available
+- Enhanced support for IPv6, allowing users to configure their Docker VM for IPv4-only, dual-stack, or IPv6-only operation. See [IPv6 documentation](https://docs.docker.com/go/desktop-ipv6-only)
+- Improved output of `docker image inspect` to account for multi-platform images (relevant to containerd image store)
+- Enables users to import and export a subset of multi-platform images
+- Support multi-platform images via enabling users to pick a specific platform in `docker history`
+- Beta release of Docker VMM - the faster alternative to Apple's Virtualization Framework on MacOS
+- Configure CLI completion scripts on Mac
+
+### Upgrades
+
+- [Containerd v1.7.21](https://github.com/containerd/containerd/releases/tag/v1.7.21)
+- [Docker Buildx v0.17.1](https://github.com/docker/buildx/releases/tag/v0.17.1)
+- [Docker Compose v2.29.7](https://github.com/docker/compose/releases/tag/v2.29.7)
+- [Docker Engine v27.3.1](https://docs.docker.com/engine/release-notes/27.3/#2731)
+- [Docker Scout CLI v1.14.0](https://github.com/docker/scout-cli/releases/tag/v1.14.0)
+- Docker Debug `v0.0.37`
+- Linux kernel `v6.10.9`
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed a bug where a proxy in daemon.json would override the proxy set in Docker Desktop.
+- Fixed bug where some Docker subnet ranges were not able to be used.
+- Added Docker VMM, a new powerful backend for creating and managing Docker Desktop Linux VM.
+- Available only on Apple Silicon Macs with macOS 12.5+. Docker VMM unleashes blazing performance like never before.
+- Removed `docker-index` as it is now deprecated.
+- Fixed a bug where images couldn't be sorted or filtered by tag. Fixes [docker/for-win#14297](https://github.com/docker/for-win/issues/14297).
+- Fixed a bug where the `docker` CLI did not work as expected when the IT admin `registry.json` file was malformed
+- Fixed a bug that prevented pushing images from the dashboard. Fixes [docker/for-win#14258](https://github.com/docker/for-win/issues/14258).
+- Fixed an issue where Docker Desktop startup failed when ICMPv6 setup was not successful.
+- Added drivers that allow USB/IP to work.
+- Fixed a bug in Enhanced Container Isolation (ECI) [Docker socket mount permissions for derived images](/content/manuals/security/for-admins/hardened-desktop/enhanced-container-isolation/config.md) where it was incorrectly denying Docker socket mounts for some images when Docker Desktop uses the containerd image store.
+- Enable `NFT_NUMGEN`, `NFT_FIB_IPV4` and `NFT_FIB_IPV6` kernel modules.
+
+#### For Mac
+
+- Fixed a bug where mount point permissions were `root:root`, using new virtualization mode.
+- Fixed a bug where auto-start containers could be misconfigured after changing filesharing type in settings.
+- Use `libkrun` virtualization on Apple Silicon Macs as an experimental feature. Note this is incompatible with Rosetta.
+
+#### For Windows
+
+- New installations of Docker Desktop for Windows now require a Windows version of 19045 or later
+- Fixed an issue that caused a start failure if IPv6 is disabled either in the kernel config or via the kernel command-line in WSL. Fixes [docker/for-win#14240](https://github.com/docker/for-win/issues/14240)
+- Fixed the **Clean / Purge data** button on Windows. Fixes [docker/for-win#12650](https://github.com/docker/for-win/issues/14308).
+
+### Known issues
+
+#### For Windows
+
+- Users with versions 4.14.0 and prior could encounter issues using the in-app update. To update to the latest, download and install the latest Docker Desktop.
+
 ## 4.34.3
 
 {{< release-date date="2024-10-09" >}}
