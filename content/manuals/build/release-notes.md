@@ -10,6 +10,25 @@ toc_max: 2
 This page contains information about the new features, improvements, and bug
 fixes in [Docker Buildx](https://github.com/docker/buildx).
 
+## 0.17.1
+
+{{< release-date date="2024-09-13" >}}
+
+The full release note for this release is available
+[on GitHub](https://github.com/docker/buildx/releases/tag/v0.17.1).
+
+### Bug fixes
+
+- Do not set `network.host` entitlement flag automatically on builder creation
+  for the `docker-container` and `kubernetes` drivers if the entitlement is set
+  in the [BuildKit configuration file](/manuals/build/buildkit/toml-configuration.md). [docker/buildx#2685]
+- Do not print the `network` field with `docker buildx bake --print` when empty. [docker/buildx#2689]
+- Fix telemetry socket path under WSL2. [docker/buildx#2698]
+
+[docker/buildx#2685]: https://github.com/docker/buildx/pull/2685
+[docker/buildx#2689]: https://github.com/docker/buildx/pull/2689
+[docker/buildx#2698]: https://github.com/docker/buildx/pull/2698
+
 ## 0.17.0
 
 {{< release-date date="2024-09-10" >}}
