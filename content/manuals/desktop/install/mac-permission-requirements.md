@@ -7,6 +7,7 @@ aliases:
 - /docker-for-mac/privileged-helper/
 - /desktop/mac/privileged-helper/
 - /manuals/desktop/mac/privileged helper/
+- /desktop/mac/permission-requirements/
 weight: 20
 ---
 
