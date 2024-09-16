@@ -32,7 +32,7 @@ If you have already installed Docker Desktop, you can check which version of Com
 
 > [!NOTE] 
 >
-> After Docker Compose V1 was removed in Docker Desktop version [4.23.0](/desktop/release-notes/#4230) as it had reached dnd-of-five,
+> After Docker Compose V1 was removed in Docker Desktop version [4.23.0](/desktop/release-notes/#4230) as it had reached end-of-life,
 > the `docker-compose` command now points directly to the Docker Compose V2 binary, running in standalone mode. 
 > If you rely on Docker Desktop auto-update, the symlink might be broken and command unavailable, as the update doesn't ask for administrator password. 
 > 
