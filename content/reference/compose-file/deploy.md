@@ -66,7 +66,7 @@ services:
 
 #### constraints
 
-`constraints` defines a required property the platform's node must fulfill to run the service container. For a further example, see the [CLI reference docs](/reference/cli/docker/service/create/#constraint).
+`constraints` defines a required property the platform's node must fulfill to run the service container. For a further example, see the [CLI reference docs](/reference/cli/docker/service/create.md#constraint).
 
 ```yml
 deploy:
@@ -78,7 +78,7 @@ deploy:
 #### preferences
 
 `preferences` defines a strategy (currently `spread` is the only supported strategy) to spread tasks evenly 
-over the values of the datacenter node label. For a further example, see the [CLI reference docs](/reference/cli/docker/service/create/#placement-pref)
+over the values of the datacenter node label. For a further example, see the [CLI reference docs](/reference/cli/docker/service/create.md#placement-pref)
 
 ```yml
 deploy:
