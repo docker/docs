@@ -11,6 +11,20 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.29.4
+
+{{< release-date date="2024-09-16" >}}
+
+### Update
+
+- Dependencies upgrade: bump buildx to v0.17.1
+- Dependencies upgrade: bump docker engine and cli to v27.3.0-rc.1
+
+### Bug fixes and enhancements
+
+- Fixed an issue with services not stopped when restarting dependencies diverged. 
+- Fixed potential nil pointer error on OTEL client.
+
 ## 2.29.3
 
 {{< release-date date="2024-09-12" >}}
