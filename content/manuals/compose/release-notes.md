@@ -22,8 +22,8 @@ For more detailed information, see the [release notes in the Compose repo](https
 
 ### Bug fixes and enhancements
 
-- Fixed an issue with services not stopped when restarting dependencies diverged. 
-- Fixed potential nil pointer error on OTEL client.
+- Fixed an issue with services not stopping when restarting diverged dependencies. 
+- Fixed potential `nil` pointer error on the OTEL client.
 
 ## 2.29.3
 
