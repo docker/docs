@@ -64,7 +64,8 @@ There are many ways to deploy the registry key, for example using an MDM solutio
      <dict>
 	     <key>allowedOrgs</key>
 	     <array>
-             <string>myorg1, myorg2</string>
+             <string>myorg1</string>
+             <string>myorg2</string>
          </array>
      </dict>
    </plist>
