@@ -11,7 +11,7 @@
   <main class="relative flex w-full max-w-[1920px]">
     <!-- Sidebar -->
     <div x-data
-      class="md:h-[calc(100vh - 64px)] sticky top-16 z-40 hidden h-screen flex-none overflow-y-auto overflow-x-hidden bg-background-light dark:bg-gray-dark-100 sm:w-full md:z-auto md:block md:w-[300px]"
+      class="md:h-[calc(100vh - 64px)] fixed md:sticky top-0 md:top-16 z-40 hidden h-screen flex-none overflow-y-auto overflow-x-hidden bg-background-light dark:bg-gray-dark-100 w-full md:z-auto md:block md:w-[300px]"
       :class="{ 'hidden': ! $store.showSidebar }">
       <!-- Gray backdrop on small screens -->
       <div class="fixed bg-black/50 md:hidden" x-show="$store.showSidebar" @click="openSidebar = false"
@@ -23,22 +23,39 @@
           Back
         </button>
         <!-- Main navigation -->
-        <div x-data="{ expanded: false }">
-          <div class="px-4 flex w-full items-center justify-between">
-            <a class="text-lg flex-grow" href="{{ .FirstSection.Permalink }}">{{ .FirstSection.LinkTitle }}</a>
+        <div class="py-2 px-4" x-data="{ expanded: false }">
+          <div class="flex w-full items-center justify-between">
+            <a class="hover:text-blue-light dark:hover:text-blue-dark" href="{{ .FirstSection.Permalink }}">
+              {{- with .FirstSection.Params.icon }}
+                <span class="pr-2 icon-sm icon-svg">
+                  {{- partialCached "icon.html" . . -}}
+                </span>
+              {{- end }}
+              {{- .FirstSection.LinkTitle -}}
+            </a>
             <button @click="expanded = !expanded" class="rounded hover:bg-gray-light-300 hover:dark:bg-gray-dark-300">
-              <span :class="{ 'rotate-180': expanded }" class="icon-svg transform transition-transform">
+              <span x-show="! expanded" class="icon-svg">
                 {{ partialCached "icon" "expand_more" "expand_more" }}
+              </span>
+              <span x-cloak x-show="expanded" class="icon-svg">
+                {{ partialCached "icon" "expand_less" "expand_less" }}
               </span>
             </button>
           </div>
-          <ul x-cloak x-show="expanded" class="mt-2 space-y-2 px-2">
+          <ul x-cloak x-show="expanded" class="py-4 space-y-4">
             {{ range site.Menus.main }}
-            {{ if ne page.FirstSection .Page }}
-            <li>
-              <a class="block px-2 py-1" href="{{ .URL }}">{{ .Name }}</a>
-            </li>
-            {{ end }}
+              {{ if ne page.FirstSection .Page }}
+              <li>
+                <a class="hover:text-blue-light dark:hover:text-blue-dark" href="{{ .URL }}">
+                  {{- with .Page.Params.icon }}
+                    <span class="pr-2 icon-sm icon-svg">
+                      {{- partialCached "icon.html" . . -}}
+                    </span>
+                  {{- end }}
+                  {{- .Name }}
+                </a>
+              </li>
+              {{ end }}
             {{ end }}
           </ul>
         </div>

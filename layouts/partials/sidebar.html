@@ -63,7 +63,7 @@
 
 {{ define "renderSingle" }}
   {{- if .Params.goto }}
-    <li class="pl-4 hover:text-blue-light hover:dark:text-blue-dark">
+    <li class="px-4 hover:text-blue-light hover:dark:text-blue-dark">
       <a class="py-2 w-full truncate block"
          href="{{ .Params.goto }}"
          title="{{ .LinkTitle }}">
@@ -72,7 +72,7 @@
     </li>
   {{- else }}
     {{ $isCurrent := eq page . }}
-    <li class="pl-4 hover:text-blue-light hover:dark:text-blue-dark
+    <li class="rounded px-4 hover:text-blue-light hover:dark:text-blue-dark
       {{ if $isCurrent }} bg-gray-light-200 dark:bg-gray-dark-200{{ end }}">
       <a {{ if $isCurrent }}aria-current="page" {{ end }} class="py-2 w-full truncate block"
         href="{{ .Permalink }}" title="{{ .LinkTitle }}">

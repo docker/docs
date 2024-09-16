@@ -2,31 +2,32 @@
 title: Guides
 keywords: Docker guides
 description: Explore the Docker guides
-notoc: true
+params:
+  icon: developer_guide
+  notoc: true
+  dive-deeper:
+  - title: Language-specific guides
+    description: Learn how to containerize, develop, and test language-specific apps using Docker.
+    link: /language/
+    icon: code
+  - title: Use-case guides
+    description: Walk through practical Docker applications for specific scenarios.
+    link: /guides/use-case/
+    icon: task
+  - title: Deployment and Orchestration
+    description: Deploy and manage Docker containers at scale.
+    link: /guides/deployment-orchestration/orchestration/
+    icon: workspaces
+  resources:
+  - title: Educational resources
+    description: Explore diverse Docker training and hands-on experiences.
+    link: /guides/resources/
+    icon: book
+  - title: Contribute to Docker's docs
+    description: Learn how to help contribute to Docker docs.
+    link: /contribute/
+    icon: edit
 layout: wide
-dive-deeper:
-- title: Language-specific guides
-  description: Learn how to containerize, develop, and test language-specific apps using Docker.
-  link: /language/
-  icon: code
-- title: Use-case guides
-  description: Walk through practical Docker applications for specific scenarios.
-  link: /guides/use-case/
-  icon: task
-- title: Deployment and Orchestration
-  description: Deploy and manage Docker containers at scale.
-  link: /guides/deployment-orchestration/orchestration/
-  icon: workspaces
-
-resources:
-- title: Educational resources
-  description: Explore diverse Docker training and hands-on experiences.
-  link: /guides/resources/
-  icon: book
-- title: Contribute to Docker's docs
-  description: Learn how to help contribute to Docker docs.
-  link: /contribute/
-  icon: edit
 ---
 
 This section contains more advanced guides to help you learn how Docker can optimize your development workflows.
