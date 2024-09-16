@@ -23,6 +23,11 @@ This page describes how to configure a proxy for the Docker daemon. For
 instructions on configuring proxy settings for the Docker CLI, see [Configure
 Docker CLI to use a proxy server](/manuals/engine/cli/proxy.md).
 
+> [!IMPORTANT]
+> Proxy configurations specified in the `daemon.json` are ignored by Docker
+> Desktop. If you use Docker Desktop, you can configure proxies using the
+> [Docker Desktop settings](/manuals/desktop/settings.md#proxies).
+
 There are two ways you can configure these settings:
 
 - [Configuring the daemon](#daemon-configuration) through a configuration file or CLI flags
