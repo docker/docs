@@ -1,0 +1,38 @@
+<!-- Main navigation for the sidebar -->
+<div class="py-2 px-4" x-data="{ expanded: false }">
+  <div class="flex w-full items-center justify-between">
+    <a class="hover:text-blue-light dark:hover:text-blue-dark" href="{{ .FirstSection.Permalink }}">
+      {{- with .FirstSection.Params.icon }}
+        <span class="pr-2 icon-sm icon-svg">
+          {{- partialCached "icon.html" . . -}}
+        </span>
+      {{- end }}
+      {{- .FirstSection.LinkTitle -}}
+    </a>
+    <button @click="expanded = !expanded" class="rounded hover:bg-gray-light-300 hover:dark:bg-gray-dark-300">
+      <span x-show="! expanded" class="icon-svg">
+        {{ partialCached "icon" "expand_more" "expand_more" }}
+      </span>
+      <span x-cloak x-show="expanded" class="icon-svg">
+        {{ partialCached "icon" "expand_less" "expand_less" }}
+      </span>
+    </button>
+  </div>
+  <ul x-cloak x-show="expanded" class="pt-4 space-y-4">
+    {{ range site.Menus.main }}
+      {{ if ne page.FirstSection .Page }}
+      <li>
+        <a class="hover:text-blue-light dark:hover:text-blue-dark" href="{{ .URL }}">
+          {{- with .Page.Params.icon }}
+            <span class="pr-2 icon-sm icon-svg">
+              {{- partialCached "icon.html" . . -}}
+            </span>
+          {{- end }}
+          {{- .Name }}
+        </a>
+      </li>
+      {{ end }}
+    {{ end }}
+  </ul>
+</div>
+<hr class="m-2 text-gray-light-200 dark:text-gray-dark-300" />
