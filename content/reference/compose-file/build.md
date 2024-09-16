@@ -509,7 +509,7 @@ build:
 
 The image builder can then rely on this to mount the SSH key during build.
 
-For illustration, [BuildKit extended syntax](https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/reference.md#run---mounttypessh) can be used to mount the SSH key set by ID and access a secured resource:
+For illustration, [SSH mounts](https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/reference.md#run---mounttypessh) can be used to mount the SSH key set by ID and access a secured resource:
 
 ```console
 RUN --mount=type=ssh,id=myproject git clone ...
