@@ -10,7 +10,7 @@ aliases:
  - /guides/workshop/03_updating_app/
 ---
 
-In [part 2](./02_our_app.md), you containerized a todo application. In this part, you'll update the application and image. You'll also learn how to stop and remove a container.
+In [part 1](./02_our_app.md), you containerized a todo application. In this part, you'll update the application and image. You'll also learn how to stop and remove a container.
 
 ## Update the source code
 
