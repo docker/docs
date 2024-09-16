@@ -1,38 +1,31 @@
-<!doctype html>
-<html lang="en">
+{{ define "left" }}
+  {{ partial "sidebar.html" . }}
+{{ end }}
 
-<head>
-  {{ partial "head.html" . }}
-</head>
-
-<body class="flex min-h-screen flex-col bg-background-light text-base dark:bg-background-dark dark:text-white">
-  {{ partial "header.html" . }}
-  <main class="flex justify-center">
-    <div class="w-lvw overflow-clip p-6 pt-0 lg:w-[1200px]">
-      <article class="prose max-w-none dark:prose-invert">
-        <h1 class="py-4">{{ .Title }}</h1>
-        {{ .Content }}
-        <div class="not-prose">
-          <div class="flex gap-4">
-            <input type="search" id="search-page-input"
-              class="ring-[1.5px] ring-gray-light-200 dark:ring-gray-dark-400 w-full max-w-xl rounded px-4 py-2 outline-none bg-white dark:bg-background-dark focus:ring-blue-light dark:focus:ring-blue-dark"
-              placeholder="Search…" tabindex="0" />
-            <button
-              class="py-1 px-4 rounded open-kapa-widget flex w-fit gap-2 items-center hover:bg-gray-light-200 dark:hover:bg-gray-dark-200">
-              <span>Ask&nbsp;AI</span>
-              <img height="24px" width="24px" src="{{ (resources.Get "images/ai-stars.svg").Permalink }}"
-                alt="AI sparkles!" />
-            </button>
-          </div>
-          <hr class="border-divider-light dark:border-divider-dark">
-          <div id="search-page-results">
-            <!-- results -->
-          </div>
+{{ define "main" }}
+  <div class="w-lvw overflow-clip p-6 pt-0 lg:w-[1200px]">
+    <article class="prose max-w-none dark:prose-invert">
+      <h1 class="py-4">{{ .Title }}</h1>
+      {{ .Content }}
+      <div class="not-prose">
+        <div class="flex gap-4">
+          <input type="search" id="search-page-input"
+            class="ring-[1.5px] ring-gray-light-200 dark:ring-gray-dark-400 w-full max-w-xl rounded px-4 py-2 outline-none bg-white dark:bg-background-dark focus:ring-blue-light dark:focus:ring-blue-dark"
+            placeholder="Search…" tabindex="0" />
+          <button
+            class="py-1 px-4 rounded open-kapa-widget flex w-fit gap-2 items-center hover:bg-gray-light-200 dark:hover:bg-gray-dark-200">
+            <span>Ask&nbsp;AI</span>
+            <img height="24px" width="24px" src="{{ (resources.Get "images/ai-stars.svg").Permalink }}"
+              alt="AI sparkles!" />
+          </button>
         </div>
-      </article>
-    </div>
-  </main>
-  <footer class="mt-auto">{{ partialCached "footer.html" . }}</footer>
+        <hr class="border-divider-light dark:border-divider-dark">
+        <div id="search-page-results">
+          <!-- results -->
+        </div>
+      </div>
+    </article>
+  </div>
   <script type="module">
     // Global variable to hold the pagefind module
     let pagefind;
@@ -180,6 +173,4 @@
       });
     }
   </script>
-</body>
-
-</html>
+{{ end }}
