@@ -30,6 +30,19 @@ Docker Desktop is available on:
 
 If you have already installed Docker Desktop, you can check which version of Compose you have by selecting **About Docker Desktop** from the Docker menu {{< inline-image src="../../desktop/images/whale-x.svg" alt="whale menu" >}}.
 
+> [!NOTE] 
+>
+> After Docker Compose V1 was removed in Docker Desktop version [4.23.0](/desktop/release-notes/#4230) as it had reached dnd-of-five,
+> the `docker-compose` command now points directly to the Docker Compose V2 binary, running in standalone mode. 
+> If you rely on Docker Desktop auto-update, the symlink might be broken and command unavailable, as the update doesn't ask for administrator password. 
+> 
+> This only affects Mac users. To fix this, either recreate the symlink:
+> ```console
+> $ sudo rm /usr/local/bin/docker-compose
+> $ sudo ln -s /Applications/Docker.app/Contents/Resources/cli-plugins/docker-compose /usr/local/bin/docker-compose
+> ```
+> Or enable [Automatically check configuration](/desktop/settings/) which will detect and fix it for you.
+
 ### Scenario two: Install the Compose plugin
 
 If you already have Docker Engine and Docker CLI installed, you can install the Compose plugin from the command line, by either:
