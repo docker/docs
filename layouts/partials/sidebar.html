@@ -46,12 +46,14 @@
         {{- if .Permalink }}
           {{/* If the link is not empty, use it */}}
           <a class="select-none hover:text-blue-light hover:dark:text-blue-dark"
-            href="{{ .Permalink }}">{{ markdownify .LinkTitle }}</a>
+            href="{{ .Permalink }}">
+            {{ template "renderTitle" . }}
+          </a>
         {{- else }}
           {{/* Otherwise, just expand the section */}}
           <button @click="expanded = !expanded"
             class="select-none hover:text-blue-light hover:dark:text-blue-dark">
-            {{ markdownify .LinkTitle }}
+            {{ template "renderTitle" . }}
           </button>
           {{- end }}
       </span>
@@ -76,7 +78,9 @@
       <a class="py-2 w-full truncate block"
          href="{{ markdownify .Params.goto }}"
          title="{{ markdownify .Title }}">
-        <span class="flex items-center gap-2">{{ markdownify .LinkTitle }}</span>
+        <span class="flex items-center gap-2">
+          {{ template "renderTitle" . }}
+        </span>
       </a>
     </li>
   {{- else }}
@@ -85,8 +89,17 @@
       {{ if $isCurrent }} bg-gray-light-200 dark:bg-gray-dark-200{{ end }}">
       <a {{ if $isCurrent }}aria-current="page" {{ end }} class="py-2 w-full truncate block"
           href="{{ .Permalink }}" title="{{ markdownify .Title }}"
-          ><span class="flex items-center gap-2">{{ markdownify .LinkTitle }}</span>
+          ><span class="flex items-center gap-2">
+            {{ template "renderTitle" . }}
+      </span>
       </a>
     </li>
+  {{- end }}
+{{ end }}
+
+{{ define "renderTitle" }}
+  {{ .LinkTitle }}
+  {{- with .Params.sidebar.badge }}
+    {{- partial "components/badge.html" (dict "color" .color "content" .text) }}
   {{- end }}
 {{ end }}

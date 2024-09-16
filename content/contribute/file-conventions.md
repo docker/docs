@@ -31,6 +31,7 @@ following keys are supported. The title, description, and keywords are required.
 | sitemap         | no       | Exclude the page from indexing by search engines. When set to `false`, the page is excluded from `sitemap.xml`, and a `<meta name="robots" content="noindex"/>` header is added to the page.                   |
 | sidebar.reverse | no       | This parameter for section pages changes the sort order of the pages in that section. Pages that would normally appear at the top, by weight or by title, will instead appear near the bottom, and vice versa. |
 | sidebar.goto    | no       | Set this to change the URL that the sidebar should point to for this entry. See [pageless sidebar entries](#pageless-sidebar-entries).                                                                         |
+| sidebar.badge   | no       | Set this to add a badge to the sidebar entry for this page. This param option consists of two fields: `badge.text` and `badge.color`.                                                                          |
 
 Here's an example of a valid (but contrived) page metadata. The order of
 the metadata elements in the front matter isn't important.

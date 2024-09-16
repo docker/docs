@@ -1,6 +1,11 @@
 ---
 title: Checking your build configuration
-linkTitle: Build checks {{< badge color="green" text="New" >}}
+linkTitle: Build checks
+params:
+  sidebar:
+    badge:
+      color: green
+      text: New
 weight: 30
 description: Learn how to use build checks to validate your build configuration.
 keywords: build, buildx, buildkit, checks, validate, configuration, lint
