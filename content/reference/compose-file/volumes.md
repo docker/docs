@@ -132,7 +132,7 @@ volumes:
 
 This makes it possible to make this lookup name a parameter of the Compose file, so that the model ID for the volume is hard-coded but the actual volume ID on the platform is set at runtime during deployment. 
 
-For example, if `DATABASE_VOLUME=my_volume_001` in your `.env` file:
+For example, if `DATABASE_VOLUME=my_volume_001` is in your `.env` file:
 
 ```yml
 volumes:
