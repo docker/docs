@@ -10,6 +10,58 @@ toc_max: 2
 This page contains information about the new features, improvements, and bug
 fixes in [Docker Buildx](https://github.com/docker/buildx).
 
+## 0.17.0
+
+{{< release-date date="2024-09-10" >}}
+
+The full release note for this release is available
+[on GitHub](https://github.com/docker/buildx/releases/tag/v0.17.0).
+
+### New
+
+- Add `basename`, `dirname` and `sanitize` functions to Bake. [docker/buildx#2649]
+- Enable support for Bake entitlements to allow privileged operations during builds. [docker/buildx#2666]
+
+### Enhancements
+
+- Introduce CLI metrics tracking for Bake commands. [docker/buildx#2610]
+- Add `--debug` to all build commands. Previously, it was only available on the top-level `docker` and `docker buildx` commands. [docker/buildx#2660]
+- Allow builds from stdin for multi-node builders. [docker/buildx#2656]
+- Improve `kubernetes` driver initialization. [docker/buildx#2606]
+- Include target name in the error message when building multiple targets with Bake. [docker/buildx#2651]
+- Optimize metrics handling to reduce performance overhead during progress tracking. [docker/buildx#2641]
+- Display the number of warnings after completing a rule check. [docker/buildx#2647]
+- Skip build ref and provenance metadata for frontend methods. [docker/buildx#2650]
+- Add support for setting network mode in Bake files (HCL and JSON). [docker/buildx#2671]
+- Support the `--metadata-file` flag when set along the `--call` flag. [docker/buildx#2640]
+- Use shared session for local contexts used by multiple Bake targets. [docker/buildx#2615], [docker/buildx#2607], [docker/buildx#2663]
+
+### Bug fixes
+
+- Improve memory management to avoid unnecessary allocations. [docker/buildx#2601]
+
+### Packaging updates
+
+- Compose support has been updated to v2.1.6. [docker/buildx#2547]
+
+[docker/buildx#2547]: https://github.com/docker/buildx/pull/2547/
+[docker/buildx#2601]: https://github.com/docker/buildx/pull/2601/
+[docker/buildx#2606]: https://github.com/docker/buildx/pull/2606/
+[docker/buildx#2607]: https://github.com/docker/buildx/pull/2607/
+[docker/buildx#2610]: https://github.com/docker/buildx/pull/2610/
+[docker/buildx#2615]: https://github.com/docker/buildx/pull/2615/
+[docker/buildx#2640]: https://github.com/docker/buildx/pull/2640/
+[docker/buildx#2641]: https://github.com/docker/buildx/pull/2641/
+[docker/buildx#2647]: https://github.com/docker/buildx/pull/2647/
+[docker/buildx#2649]: https://github.com/docker/buildx/pull/2649/
+[docker/buildx#2650]: https://github.com/docker/buildx/pull/2650/
+[docker/buildx#2651]: https://github.com/docker/buildx/pull/2651/
+[docker/buildx#2656]: https://github.com/docker/buildx/pull/2656/
+[docker/buildx#2660]: https://github.com/docker/buildx/pull/2660/
+[docker/buildx#2663]: https://github.com/docker/buildx/pull/2663/
+[docker/buildx#2666]: https://github.com/docker/buildx/pull/2666/
+[docker/buildx#2671]: https://github.com/docker/buildx/pull/2671/
+
 ## 0.16.2
 
 {{< release-date date="2024-07-25" >}}
