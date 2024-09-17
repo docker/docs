@@ -142,7 +142,7 @@ Let’s see it in action. Start by launching the Node.js backend service.
 
    While the AWS SDK might typically use environment variables starting with `AWS_`, this specific application directly references the following `S3_*` variables in the index.js file (under the `backend/` directory) to configure the S3Client. 
 
-   ```plaintext
+   ```js
    const s3 = new S3Client({
      endpoint: process.env.S3_ENDPOINT_URL, // Use the provided endpoint or fallback to defaults
      credentials: {
