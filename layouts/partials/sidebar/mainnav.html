@@ -1,13 +1,20 @@
 <!-- Main navigation for the sidebar -->
 <div class="py-2 px-4" x-data="{ expanded: false }">
   <div class="flex w-full items-center justify-between">
-    <a class="hover:text-blue-light dark:hover:text-blue-dark" href="{{ .FirstSection.Permalink }}">
-      {{- with .FirstSection.Params.icon }}
+    <!-- Current section: use menu, fall back to current page -->
+    {{- $curr := page }}
+    {{- range site.Menus.main }}
+      {{- if .Page.IsAncestor page }}
+        {{- $curr = .Page }}
+      {{- end }}
+    {{- end }}
+    <a class="hover:text-blue-light dark:hover:text-blue-dark" href="{{ $curr.Permalink }}">
+      {{- with $curr.Params.icon }}
         <span class="pr-2 icon-sm icon-svg">
           {{- partialCached "icon.html" . . -}}
         </span>
       {{- end }}
-      {{- .FirstSection.LinkTitle -}}
+      {{- $curr.LinkTitle -}}
     </a>
     <button @click="expanded = !expanded" class="rounded hover:bg-gray-light-300 hover:dark:bg-gray-dark-300">
       <span x-show="! expanded" class="icon-svg">

@@ -24,6 +24,8 @@
         </button>
         <!-- Actual Sidebar Content -->
         {{ block "left" . }}
+          {{ partial "sidebar/mainnav.html" . }}
+          {{ partial "sidebar/sections.html" . }}
         {{ end }}
       </div>
     </div>

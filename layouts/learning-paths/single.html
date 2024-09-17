@@ -12,7 +12,3 @@
     {{ partial "post-links.html" (where .CurrentSection.Pages "Permalink" "ne" page.Permalink) }}
   </article>
 {{ end }}
-
-{{ define "left" }}
-  {{- partial "sidebar.html" . }}
-{{ end }}
