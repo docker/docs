@@ -62,10 +62,10 @@
 {{ end }}
 
 {{ define "renderSingle" }}
-  {{- if .Params.goto }}
+  {{- if .Params.sidebar.goto }}
     <li class="px-4 hover:text-blue-light hover:dark:text-blue-dark">
       <a class="py-2 w-full truncate block"
-         href="{{ .Params.goto }}"
+         href="{{ .Params.sidebar.goto }}"
          title="{{ .LinkTitle }}">
         {{ template "renderTitle" . }}
       </a>
