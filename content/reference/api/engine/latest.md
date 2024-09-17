@@ -1,9 +1,9 @@
 ---
 build:
   render: never
-title: Latest (v{{< param latest_engine_api_version >}})
+title: Latest
 params:
   sidebar:
-    goto: "/reference/api/engine/version/v{{< param latest_engine_api_version >}}"
+    goto: /reference/api/engine/latest/
 weight: 20
 ---

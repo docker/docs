@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
@@ -6,48 +6,43 @@
 </head>
 
 <body
-  class="bg-background-light text-base dark:bg-background-dark dark:text-white">
+  class="flex flex-col items-center bg-gradient-to-r from-background-light from-20% to-white to-30% text-base dark:from-gray-dark-100 dark:to-background-dark dark:text-white">
   {{ partial "header.html" . }}
-  <main class="grid grid-cols-1 xl:grid-cols-main-xl lg:grid-cols-main-lg md:grid-cols-main-md">
-    <!-- First column: visible on lg and xl -->
-    <div class="hidden md:block bg-background-light dark:bg-gray-dark-100 overflow-y-scroll"
-         {{- $classes := "'fixed', 'z-20', 'left-0', 'top-16', 'w-full', 'flex', 'h-lvh'" }}
-         x-data @togglesidebar.window="
-           if ($store.showSidebar == false) {
-             document.body.classList.add('overflow-hidden');
-             $el.classList.remove('hidden');
-             $el.classList.add({{$classes}});
-             $store.showSidebar = true;
-             return;
-           }
-           document.body.classList.remove('overflow-hidden');
-           $el.classList.add('hidden');
-           $el.classList.remove({{$classes}});
-           $store.showSidebar = false;
-         "
-      >
-      <div class="w-full max-w-none lg:max-w-[300px] ml-auto p-2">
+  <main class="relative flex w-full max-w-[1920px]">
+    <!-- Sidebar -->
+    <div x-data
+      class="md:h-[calc(100vh - 64px)] fixed md:sticky top-0 md:top-16 z-40 hidden h-screen flex-none overflow-y-auto overflow-x-hidden bg-background-light dark:bg-gray-dark-100 w-full md:z-auto md:block md:w-[300px]"
+      :class="{ 'hidden': ! $store.showSidebar }">
+      <!-- Gray backdrop on small screens -->
+      <div class="fixed bg-black/50 md:hidden" x-show="$store.showSidebar" @click="openSidebar = false"
+        x-transition.opacity></div>
+      <div class="z-50 w-full bg-background-light p-4 dark:bg-gray-dark-100 md:block md:w-[300px]">
+        <!-- Collapse button for small screens -->
+        <button class="my-4 md:hidden" @click="$store.showSidebar = false">
+          <span class="icon-svg">{{ partialCached "icon" "arrow_left_alt" "arrow_left_alt" }}</span>
+          Back
+        </button>
+        <!-- Actual Sidebar Content -->
         {{ block "left" . }}
+          {{ partial "sidebar/mainnav.html" . }}
+          {{ partial "sidebar/sections.html" . }}
         {{ end }}
       </div>
     </div>
-    <div
-      {{- if ne .Params.sitemap false }}
-        data-pagefind-body
-      {{- end }}
-      class="min-w-0 px-4 pb-32">
+
+    <!-- Main content -->
+    <div {{ if ne .Params.sitemap false }}data-pagefind-body{{- end }}
+      class="w-full min-w-0 bg-white p-8 dark:bg-background-dark">
       {{ block "main" . }}
       {{ end }}
     </div>
-    <div class="sticky top-16 pb-32 h-screen hidden lg:block overflow-x-hidden overflow-y-scroll pr-2">
-      {{ block "right" . }}
-      {{ end }}
-    </div>
   </main>
-  <footer>{{ partialCached "footer.html" . }}</footer>
+
+  <footer class="w-full">{{ partialCached "footer.html" . }}</footer>
+
   {{/* Load the YouTube player if the page embeds a YouTube video */}}
   {{ with .Store.Get "youtube" }}
-    {{- partial "youtube-script.html" . }}
+  {{ partial "youtube-script.html" . }}
   {{ end }}
 </body>
 

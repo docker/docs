@@ -1,8 +1,14 @@
 /* global styles */
 
 @layer base {
-  [x-cloak] {
+  [x-cloak=""] {
     display: none !important;
+  }
+  /* alpine cloak for small screens only */
+  [x-cloak="sm"] {
+    @media (width <= 768px) {
+      display: none !important;
+    }
   }
 
   :root {

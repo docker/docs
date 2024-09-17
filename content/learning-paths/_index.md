@@ -1,10 +1,10 @@
 ---
 title: Learning paths
-cascade:
-  layout: wide
 description: |
   Docker Learning Paths offer structured guides to help you master Docker.
 keywords: docker, learning, paths, tutorials, resources
+params:
+  icon: "school"
 ---
 
 <p class="w-2/3">

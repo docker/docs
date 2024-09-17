@@ -508,7 +508,12 @@ build:
 ```
 
 The image builder can then rely on this to mount the SSH key during build.
-For more information, see the [`RUN --mount=type=ssh` Dockerfile reference](/reference/dockerfile.md#run---mounttypessh).
+
+For illustration, [SSH mounts](https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/reference.md#run---mounttypessh) can be used to mount the SSH key set by ID and access a secured resource:
+
+```console
+RUN --mount=type=ssh,id=myproject git clone ...
+```
 
 ### shm_size
 
