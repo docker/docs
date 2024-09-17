@@ -114,7 +114,11 @@ The post-install script:
 
 {{< include "desktop-linux-launch.md" >}}
 
->**Tip**
+> [!Important]
+>
+> After launching Docker Desktop for RHEL, you must sign in to your Docker account to start using Docker Desktop.
+
+> [!Tip]
 >
 > To attach Red Hat subscription data to containers, see [Red Hat verified solution](https://access.redhat.com/solutions/5870841).
 >
