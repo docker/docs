@@ -184,3 +184,35 @@ to give the container direct access to the network stack of the host.
 
 See the [run command](/reference/cli/docker/container/run.md) for more details on
 publish options used with `docker run`.
+
+### IPv4-only, Dual-stack and IPv6-only
+
+{{% experimental title="Beta" %}}
+This feature is currently in [Beta](../release-lifecycle.md#beta).  
+
+The exact semantics of all three options might change in future releases.
+
+Note:
+
+- IPv6 is not available for Docker Desktop on Linux.
+- If using WSL 2 on Windows, the Linux kernel must have IPv6 configured and enabled.
+{{% /experimental %}}
+
+Starting with v4.35, Docker Desktop has new options to configure how the VM behaves and the default
+settings applied to Docker networks. Dual-stack is the default mode.
+
+In IPv4-only mode, the DNS resolver embedded in the VM only serves A (= IPv4) records and
+suppresses any AAAA (= IPv6) records. This might be useful if some of your containerized software
+tries to connect to IPv6 addresses but your host doesn't have proper IPv6 connectivity.
+
+In Dual-stack mode, both A and AAAA records are served by the DNS resolver. Docker networks are
+created with an IPv4 subnet assigned, but no IPv6 subnet. You must pass the `--ipv6` flag to
+[`docker network create`](https://docs.docker.com/reference/cli/docker/network/create/#options),
+or put [`enable_ipv6: true`](https://docs.docker.com/reference/compose-file/networks/#enable_ipv6)
+in network declarations in Compose files.
+
+In IPv6-only mode, the DNS resolver serves only AAAA records, and Docker Engine assigns IPv6
+subnets by default to your networks. This might be useful if you run Docker Desktop in an
+environment where IPv4 is getting phased out but has not been entirely shut down yet.
+
+For more details about IPv6 in Docker Engine refer to [Use IPv6 networking](/manuals/engine/daemon/ipv6.md)

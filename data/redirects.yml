@@ -105,6 +105,8 @@
   - /docker-hub/api/latest/
 "/reference/api/hub/dvp/":
   - /docker-hub/api/dvp/
+"/desktop/networking/#ipv4-only-dual-stack-and-ipv6-only":
+- /go/desktop-ipv6-only/
 
 # feedback
 "https://docs.google.com/forms/d/e/1FAIpQLSenjK8KiBiOrwCpq06u_iVEZGv4tfTEpfmY_cQDmsqJrHL9Gw/viewform":
