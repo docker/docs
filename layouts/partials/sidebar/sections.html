@@ -1,20 +1,9 @@
-{{/* Render the top-nav in sidebar for small screens */}}
-<nav class="text-sm pb-4 gap-4 flex md:hidden flex-col justify-evenly">
-  <div class="text-gray-light dark:text-gray-dark">Main sections</div>
-  {{ range site.Menus.main }}
-  <div class="pl-2 underline-offset-8 decoration-2 hover:underline decoration-blue-light dark:decoration-blue-dark hover:opacity-75
-      {{- if or (page.IsDescendant .Page) (eq page .Page) }}
-        underline
-      {{- end }}">
-    <a href="{{ .URL }}">{{ .Name }}</a>
-  </div>
-  {{ end }}
-</nav>
-<nav class="text-sm flex flex-col">
-  <div class="block py-4 md:hidden text-gray-light dark:text-gray-dark">This section</div>
+<!-- section tree -->
+<nav class="md:text-sm flex flex-col">
+  <div
+    class="block py-4 md:hidden text-gray-light dark:text-gray-dark">This section</div>
   {{/* The current page is in the table of contents */}}
   <ul>
-    {{ template "renderSingle" .FirstSection }}
     {{ template "renderChildren" .FirstSection }}
   </ul>
 </nav>
@@ -42,21 +31,21 @@
   {{ $expanded := or $isCurrent (page.IsDescendant .) }}
   <li x-data="{ expanded: {{$expanded}} }">
     <div class="rounded px-4 w-full flex items-center justify-between{{ if $isCurrent }} bg-gray-light-200 dark:bg-gray-dark-200{{ end }}">
-      <span class="py-2 truncate flex items-center gap-2">
+      <div class="w-full py-2 truncate">
         {{- if .Permalink }}
           {{/* If the link is not empty, use it */}}
-          <a class="select-none hover:text-blue-light hover:dark:text-blue-dark"
+          <a class="block select-none hover:text-blue-light hover:dark:text-blue-dark"
             href="{{ .Permalink }}">
             {{ template "renderTitle" . }}
           </a>
         {{- else }}
           {{/* Otherwise, just expand the section */}}
           <button @click="expanded = !expanded"
-            class="select-none hover:text-blue-light hover:dark:text-blue-dark">
+            class="w-full text-left select-none hover:text-blue-light hover:dark:text-blue-dark">
             {{ template "renderTitle" . }}
           </button>
-          {{- end }}
-      </span>
+        {{- end }}
+      </div>
       <button @click="expanded = !expanded" class="hover:bg-gray-light-300 hover:dark:bg-gray-dark-300 rounded">
         <span :class="{ 'hidden' : expanded }" class="icon-svg {{ if $expanded }}hidden{{ end }}">
           {{ partialCached "icon" "expand_more" "expand_more" }}
@@ -74,24 +63,20 @@
 
 {{ define "renderSingle" }}
   {{- if .Params.goto }}
-    <li class="pl-4 hover:text-blue-light hover:dark:text-blue-dark">
+    <li class="px-4 hover:text-blue-light hover:dark:text-blue-dark">
       <a class="py-2 w-full truncate block"
-         href="{{ markdownify .Params.goto }}"
-         title="{{ markdownify .Title }}">
-        <span class="flex items-center gap-2">
-          {{ template "renderTitle" . }}
-        </span>
+         href="{{ .Params.goto }}"
+         title="{{ .LinkTitle }}">
+        {{ template "renderTitle" . }}
       </a>
     </li>
   {{- else }}
     {{ $isCurrent := eq page . }}
-    <li class="pl-4 hover:text-blue-light hover:dark:text-blue-dark
+    <li class="rounded px-4 hover:text-blue-light hover:dark:text-blue-dark
       {{ if $isCurrent }} bg-gray-light-200 dark:bg-gray-dark-200{{ end }}">
       <a {{ if $isCurrent }}aria-current="page" {{ end }} class="py-2 w-full truncate block"
-          href="{{ .Permalink }}" title="{{ markdownify .Title }}"
-          ><span class="flex items-center gap-2">
-            {{ template "renderTitle" . }}
-      </span>
+        href="{{ .Permalink }}" title="{{ .LinkTitle }}">
+        {{ template "renderTitle" . }}
       </a>
     </li>
   {{- end }}
@@ -100,6 +85,6 @@
 {{ define "renderTitle" }}
   {{ .LinkTitle }}
   {{- with .Params.sidebar.badge }}
-    {{- partial "components/badge.html" (dict "color" .color "content" .text) }}
+    <span>{{- partial "components/badge.html" (dict "color" .color "content" .text) }}</span>
   {{- end }}
 {{ end }}

@@ -1,7 +1,7 @@
 ---
 title: Tags
-cascade:
-  layout: wide
+params:
+  icon: tag
 ---
 
 Here you can browse Docker docs by tag.

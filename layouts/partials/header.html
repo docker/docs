@@ -1,13 +1,12 @@
-<header
-  class="sticky top-0 z-20 h-16 px-4 text-white bg-gradient-to-r from-accent-light to-blue-light-500 dark:from-accent-dark dark:to-blue-dark-100">
-  <div class="mx-auto flex gap-4 h-full max-w-[1400px] items-center justify-between">
+<header class="w-full sticky top-0 z-20 h-16 px-6 text-white bg-gradient-to-r from-blue-light-600 to-blue-light dark:from-blue-dark-200 to-50% dark:to-blue-dark-100">
+  <div class="max-w-[1920px] mx-auto flex gap-8 h-full items-center justify-between">
     <div class="flex h-full items-center md:gap-8 gap-2">
-      {{ if not .IsHome }}
-      <button x-data @click="$dispatch('togglesidebar')"
+      {{- if not .IsHome }}
+      <button x-data @click="$store.showSidebar = true"
         class="icon-svg block px-4 md:hidden h-full" aria-label="Menu">
         {{ partialCached "icon" "menu" "menu" }}
       </button>
-      {{ end }}
+      {{- end }}
       <div>
         {{/* main logo */}}
         <a title="Docker Docs home page" href="{{ site.BaseURL }}">
@@ -16,8 +15,8 @@
           </div>
         </a>
       </div>
-      <nav>
-        <ul class="mt-1 box-content hidden gap-4 md:flex">
+      <nav class="mt-1 hidden md:block">
+        <ul class="flex gap-4">
           {{ range site.Menus.main }}
           <li
             {{- if or (eq page .Page) (page.IsDescendant .Page) }}
@@ -31,7 +30,7 @@
         </ul>
       </nav>
     </div>
-    <div class="flex items-center gap-6 flex-grow justify-end">
+    <div class="flex min-w-0 items-center gap-6 flex-grow justify-end">
       {{ partialCached "search-bar.html" "-" }}
       <button aria-label="Theme switch" id="theme-switch" class="svg-icon"
         x-data="{ theme: localStorage.getItem('theme-preference') }" x-init="$watch('theme', value => {
