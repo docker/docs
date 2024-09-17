@@ -14,7 +14,7 @@ In this guide, you'll learn how to:
 
 ## What is LocalStack?
 
-LocalStack is a cloud service emulator that runs in a single container on your laptop. It provides a powerful, flexible, and cost-effective way for developers to test and develop AWS-based applications locally. 
+LocalStack is a cloud service emulator that runs in a single container on your laptop. It provides a powerful, flexible, and cost-effective way to test and develop AWS-based applications locally. 
 
 ## Why use LocalStack?
 
