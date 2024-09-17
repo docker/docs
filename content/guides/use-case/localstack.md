@@ -214,7 +214,7 @@ Now that you have learnt how to connect a non-containerized Node.js application 
 
    The `backend` service depends on `localstack` and `mongodb` services, ensuring they are running before it starts. It also uses a .env file for environment variables. The frontend service depends on the backend and sets the API URL. The `mongodb` service uses a persistent volume for data storage, and `localstack` is configured to run the S3 service. This setup lets you to develop and test your application locally with AWS-like services.
 
-   ```console
+   ```yaml
    services:
       backend:
         build:
