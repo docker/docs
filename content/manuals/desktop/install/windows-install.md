@@ -46,7 +46,7 @@ _For checksums, see [Release notes](../release-notes.md)_
 {{< tab name="WSL 2 backend, x86_64" >}}
 
 - WSL version 1.1.3.0 or later.
-- Windows 11 64-bit: Home or Pro version 21H2 or higher, or Enterprise or Education version 21H2 or higher.
+- Windows 11 64-bit: Home or Pro version 22H2 or higher, or Enterprise or Education version 22H2 or higher.
 - Windows 10 64-bit: Minimum required is Home or Pro 22H2 (build 19045) or higher, or Enterprise or Education 22H2 (build 19045) or higher. 
 - Turn on the WSL 2 feature on Windows. For detailed instructions, refer to the
   [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
@@ -71,7 +71,7 @@ For more information on setting up WSL 2 with Docker Desktop, see [WSL](../wsl/_
 {{< /tab >}}
 {{< tab name="Hyper-V backend, x86_64" >}}
 
-- Windows 11 64-bit: Home or Pro version 21H2 or higher, or Enterprise or Education version 21H2 or higher.
+- Windows 11 64-bit: Home or Pro version 22H2 or higher, or Enterprise or Education version 22H2 or higher.
 - Windows 10 64-bit: Minimum required is Home or Pro 22H2 (build 19045) or higher, or Enterprise or Education 22H2 (build 19045) or higher.
 - Turn on Hyper-V and Containers Windows features.
 - The following hardware prerequisites are required to successfully run Client
@@ -96,7 +96,7 @@ For more information on setting up WSL 2 with Docker Desktop, see [WSL](../wsl/_
 {{< tab name="WSL 2 backend, Arm (Beta)" >}}
 
 - WSL version 1.1.3.0 or later.
-- Windows 11 64-bit: Home or Pro version 21H2 or higher, or Enterprise or Education version 21H2 or higher.
+- Windows 11 64-bit: Home or Pro version 22H2 or higher, or Enterprise or Education version 22H2 or higher.
 - Windows 10 64-bit: Minimum required is Home or Pro 22H2 (build 19045) or higher, or Enterprise or Education 22H2 (build 19045) or higher.
 - Turn on the WSL 2 feature on Windows. For detailed instructions, refer to the
   [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
