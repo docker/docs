@@ -27,7 +27,6 @@ This makes it easier to validate integrations and test cloud-based scenarios wit
 ## Using LocalStack with Docker
 
 The [official Docker image for LocalStack](https://hub.docker.com/r/localstack/localstack) provides a convenient way to deploy the LocalStack container on your development machine. It contains the community and open-source version of the [core cloud emulator](https://github.com/localstack/localstack). It’s free to use and doesn’t require any API key to run. You can even use [LocalStack Docker Extension](https://www.docker.com/blog/develop-your-cloud-app-locally-with-the-localstack-extension/) to use LocalStack with a graphical user interface.
-In this guide, you will learn how to:
 
 ## Prerequisites
 
