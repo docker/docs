@@ -290,7 +290,7 @@ Now that you have learnt how to connect a non-containerised Node.js application 
 
    After a brief moment, the application will be up and running.
 
-4. Create an S3 bucket manually
+5. Create an S3 bucket manually
 
    The AWS S3 bucket is not created beforehand by the Compose file. Run the following command to create a new bucket within the LocalStack environment:
 
