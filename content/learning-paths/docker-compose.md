@@ -1,5 +1,5 @@
 ---
-title: Defining and Running Multi-Container Applications with Docker Compose
+title: Defining and running multi-container applications with Docker Compose
 summary: Simplify the process of defining, configuring, and running multi-container Docker applications to enable efficient development, testing, and deployment.
 description: Learn how to use Docker Compose to define and run multi-container Docker applications.
 params:
