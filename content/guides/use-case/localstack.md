@@ -34,6 +34,7 @@ The following prerequisites are required to follow along with this how-to guide:
 
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/) 
 - [Node.js](https://nodejs.org/en/download/package-manager)
+- [Python and pip](https://www.python.org/downloads/)
 - Basic knowledge of Docker
 
 ## Launching LocalStack
