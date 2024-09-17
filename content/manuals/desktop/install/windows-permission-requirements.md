@@ -4,7 +4,7 @@ keywords: Docker Desktop, Windows, security, install
 title: Understand permission requirements for Windows
 aliases:
 - /desktop/windows/privileged-helper/
-- /manuals/desktop/windows/permission-requirements/
+- /desktop/windows/permission-requirements/
 weight: 40
 ---
 

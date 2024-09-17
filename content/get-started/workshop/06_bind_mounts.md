@@ -10,7 +10,7 @@ aliases:
  - /guides/workshop/06_bind_mounts/
 ---
 
-In [part 5](./05_persisting_data.md), you used a volume mount to persist the
+In [part 4](./05_persisting_data.md), you used a volume mount to persist the
 data in your database. A volume mount is a great choice when you need somewhere
 persistent to store your application data.
 

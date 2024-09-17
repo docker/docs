@@ -13,6 +13,33 @@ issues, and bug fixes in [Dockerfile reference](/reference/dockerfile.md).
 
 For usage, see the [Dockerfile frontend syntax](frontend.md) page.
 
+## 1.10.0
+
+{{< release-date date="2024-09-10" >}}
+
+The full release note for this release is available
+[on GitHub](https://github.com/moby/buildkit/releases/tag/dockerfile%2F1.10.0).
+
+```dockerfile
+# syntax=docker/dockerfile:1.10.0
+```
+
+- [Build secrets](/manuals/build/building/secrets.md#target) can now be mounted as environment variables using the `env=VARIABLE` option. [moby/buildkit#5215]
+- The [`# check` directive](/reference/dockerfile.md#check) now allows new experimental attribute for enabling experimental validation rules like `CopyIgnoredFile`. [moby/buildkit#5213]
+- Improve validation of unsupported modifiers for variable substitution. [moby/buildkit#5146]
+- `ADD` and `COPY` instructions now support variable interpolation for build arguments for the `--chmod` option values. [moby/buildkit#5151]
+- Improve validation of the `--chmod` option for `COPY` and `ADD` instructions. [moby/buildkit#5148]
+- Fix missing completions for size and destination attributes on mounts. [moby/buildkit#5245]
+- OCI annotations are now set to the Dockerfile frontend release image. [moby/buildkit#5197]
+
+[moby/buildkit#5215]: https://github.com/moby/buildkit/pull/5215
+[moby/buildkit#5213]: https://github.com/moby/buildkit/pull/5213
+[moby/buildkit#5146]: https://github.com/moby/buildkit/pull/5146
+[moby/buildkit#5151]: https://github.com/moby/buildkit/pull/5151
+[moby/buildkit#5148]: https://github.com/moby/buildkit/pull/5148
+[moby/buildkit#5245]: https://github.com/moby/buildkit/pull/5245
+[moby/buildkit#5197]: https://github.com/moby/buildkit/pull/5197
+
 ## 1.9.0
 
 {{< release-date date="2024-07-11" >}}
