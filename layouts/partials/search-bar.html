@@ -3,12 +3,11 @@
   <span class="icon-svg">{{ partialCached "icon" "search" "search" }}</span>
 </a>
 <!-- search button -->
-<div x-ref="searchBarRef" x-data="{ open: false, focus: false }" @focus="open = true;" @click.outside="open = false;"
+<div x-ref="searchBarRef" x-data="{ open: false }" @click.outside="open = false;"
   @keyup.escape.window="open = false" id="search-bar"
   class="hidden sm:flex relative bg-white/10 rounded items-center p-2 sm:w-full xl:w-[400px]">
   {{ (resources.Get "images/search-ai.svg").Content | safeHTML }}
-  <input x-ref="searchBarInput" type="search" id="search-bar-input" @click="open = true" @focus="open = true;"
-    @blur.window.capture="$refs.searchBarRef.contains($event.relatedTarget) || (open = false);"
+  <input x-ref="searchBarInput" type="search" id="search-bar-input" @focus="open = true;"
     @keyup.enter.prevent="window.location.href = '/search/?q=' + $event.target.value;"
     @keyup.escape.prevent="open = false;" @keydown.window="(e) => {
           switch(e.key) {
@@ -16,7 +15,6 @@
             if (e.metaKey || e.ctrlKey) {
               e.preventDefault();
               $el.focus();
-              open = true;
             }
             break;
           }
@@ -30,7 +28,7 @@
     <span>K</span>
   </div>
   <div x-cloak :class="open || 'hidden'">
-    <button tabindex="-1" @click="$refs.searchBarInput.value = ''; open = false" class="text-white hover:text-white">
+    <button @click="$refs.searchBarInput.value = ''; open = false" class="text-white hover:text-white">
       <span class="icon-svg">{{ partialCached "icon" "close" "close" }}</span>
     </button>
   </div>
