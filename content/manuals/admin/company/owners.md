@@ -6,6 +6,13 @@ aliases:
 - /docker-hub/company-owner/
 ---
 
+A company can have multiple owners. Company owners have company-wide
+observability and can manage company-wide settings that apply to all associated
+organizations. In addition, company owners have the same access as organization
+owners for all associated organizations. Unlike organization owners, company
+owners don't need to be member of an organization. When company owners aren't a
+member in an organization, they don't occupy a seat.
+
 As a company owner, you can configure [Single Sign-on (SSO)](../../security/for-admins/single-sign-on/_index.md) and [System for Cross-domain Identity Management (SCIM)](../../security/for-admins/provisioning/scim.md) for all organizations under the company.
 
 {{< tabs >}}
