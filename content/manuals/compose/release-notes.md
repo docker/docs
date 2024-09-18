@@ -11,6 +11,14 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.29.5
+
+{{< release-date date="2024-09-17" >}}
+
+### Bug fixes and enhancements
+
+- Fixed an issue with bind mounts on WSL2.
+
 ## 2.29.4
 
 {{< release-date date="2024-09-16" >}}
