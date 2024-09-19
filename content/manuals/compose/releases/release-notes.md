@@ -1,12 +1,14 @@
 ---
 title: Docker Compose release notes
-weight: 999
+linkTitle: Release notes
+weight: 10
 description: Learn about the new features, bug fixes, and breaking changes for the newest Docker Compose release
 keywords: release notes, compose
 tags: [Release notes]
 toc_max: 2
 aliases:
 - /release-notes/docker-compose/
+- /compose/release-notes/
 ---
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
@@ -435,7 +437,7 @@ This release fixes a build issue with Docker Desktop for Windows introduced in C
 > [!NOTE]
 >
 > The `watch` command is now generally available (GA). You can directly use it from the root command `docker compose watch`.
-> For more information, see [File watch](./file-watch.md).
+> For more information, see [File watch](/manuals/compose/how-tos/file-watch.md).
 
 ### Update
 
@@ -3308,7 +3310,7 @@ naming scheme accordingly before upgrading.
 
     By default, you don't have to configure any networks. In fact, using
     networking with Compose involves even less configuration than using links.
-    Consult the [networking guide](/manuals/compose/networking.md) for how to use it.
+    Consult the [networking guide](/manuals/compose/how-tos/networking.md) for how to use it.
 
     The experimental flags `--x-networking` and `--x-network-driver`, introduced
     in Compose 1.5, have been removed.

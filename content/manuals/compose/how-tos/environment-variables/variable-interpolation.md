@@ -3,9 +3,11 @@ title: Set, use, and manage variables in a Compose file with interpolation
 linkTitle: Interpolation
 description: How to set, use, and manage variables in your Compose file with interpolation
 keywords: compose, orchestration, environment, variables, interpolation
+weight: 40
 aliases:
 - /compose/env-file/
 - /compose/environment-variables/env-file/
+- /compose/environment-variables/variable-interpolation/
 ---
 
 A Compose file can use variables to offer more flexibility. If you want to quickly switch 

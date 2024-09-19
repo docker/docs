@@ -90,7 +90,7 @@ In general, use your `.syncignore` file to exclude items that aren't critical to
 
 - If you switch from WSL2 to Hyper-V on Windows, Docker Desktop needs to be fully restarted.
 
-- POSIX-style Windows paths are not supported. Avoid setting the [`COMPOSE_CONVERT_WINDOWS_PATHS`](/manuals/compose/environment-variables/envvars.md#compose_convert_windows_paths) environment variable in Docker Compose.
+- POSIX-style Windows paths are not supported. Avoid setting the [`COMPOSE_CONVERT_WINDOWS_PATHS`](/manuals/compose/how-tos/environment-variables/envvars.md#compose_convert_windows_paths) environment variable in Docker Compose.
 
 ## Feedback and support
 

@@ -2,10 +2,11 @@
 description: How to use Docker Compose's include top-level element
 keywords: compose, docker, include, compose file
 title: Include
-linkTitle: Include
+aliases:
+- /compose/multiple-compose-files/include/
 ---
 
-{{< introduced compose 2.20.3 "../release-notes.md#2203" >}}
+{{< introduced compose 2.20.3 "/manuals/compose/releases/release-notes.md#2203" >}}
 
 {{< include "compose/include.md" >}}
 

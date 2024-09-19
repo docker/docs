@@ -7,6 +7,7 @@ keywords: compose, orchestration, environment, environment variables, container 
 aliases:
 - /compose/env/
 - /compose/link-env-deprecated/
+- /compose/set-environment-variables/
 ---
 
 A container's environment is not set until there's an explicit entry in the service configuration to make this happen. With Compose, there are two ways you can set environment variables in your containers with your Compose file. 

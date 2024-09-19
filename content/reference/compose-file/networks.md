@@ -221,4 +221,4 @@ networks:
 
 ## Additional resources
 
-For more examples, see [Networking in Compose](/manuals/compose/networking.md).
+For more examples, see [Networking in Compose](/manuals/compose/how-tos/networking.md).

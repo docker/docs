@@ -3,11 +3,13 @@ description: Summary of samples related to Compose
 keywords: documentation, docs, docker, compose, samples
 title: Sample apps with Compose
 linkTitle: Sample apps
-weight: 140
+weight: 30
+aliases:
+- /compose/samples-for-compose/
 ---
 
 The following samples show the various aspects of how to work with Docker
-Compose. As a prerequisite, be sure to [install Docker Compose](install/_index.md)
+Compose. As a prerequisite, be sure to [install Docker Compose](/manuals/compose/install/_index.md)
 if you have not already done so.
 
 ## Key concepts these samples cover

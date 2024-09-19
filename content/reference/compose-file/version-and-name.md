@@ -35,4 +35,4 @@ services:
     command: echo "I'm running ${COMPOSE_PROJECT_NAME}"
 ```
 
-For more information on other ways to name Compose projects, see [Specify a project name](/manuals/compose/project-name.md).
+For more information on other ways to name Compose projects, see [Specify a project name](/manuals/compose/how-tos/project-name.md).

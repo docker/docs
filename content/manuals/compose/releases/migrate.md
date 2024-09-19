@@ -1,11 +1,12 @@
 ---
 title: Migrate to Compose V2
-weight: 160
+weight: 20
 description: How to migrate from Compose V1 to V2
 keywords: compose, upgrade, migration, v1, v2, docker compose vs docker-compose
 aliases:
 - /compose/compose-v2/
 - /compose/cli-command-compatibility/
+- /compose/migrate/
 ---
 
 From July 2023 Compose V1 stopped receiving updates. It’s also no longer available in new releases of Docker Desktop.
@@ -20,8 +21,8 @@ With Docker Desktop, Compose V2 is always accessible as `docker compose`.
 Additionally, the **Use Compose V2** setting is turned on by default, which provides an alias from `docker-compose`.
 
 For manual installs on Linux, you can get Compose V2 by either:
-- [Using Docker's repository](install/linux.md#install-using-the-repository) (recommended)
-- [Downloading and installing manually](install/linux.md#install-the-plugin-manually)
+- [Using Docker's repository](/manuals/compose/install/linux.md#install-using-the-repository) (recommended)
+- [Downloading and installing manually](/manuals/compose/install/linux.md#install-the-plugin-manually)
 
 ## What are the differences between Compose V1 and Compose V2?
 
@@ -78,7 +79,7 @@ The following behave differently between Compose V1 and V2:
 
 Environment variable behavior in Compose V1 wasn't formally documented and behaved inconsistently in some edge cases.
 
-For Compose V2, the [Environment variables](/compose/environment-variables/) section covers both [precedence](/compose/environment-variables/envvars-precedence) as well as [`.env` file interpolation](environment-variables/variable-interpolation.md) and includes many examples covering tricky situations such as escaping nested quotes.
+For Compose V2, the [Environment variables](/manuals/compose/how-tos/environment-variables/) section covers both [precedence](/manuals/compose/how-tos/environment-variables/envvars-precedence) as well as [`.env` file interpolation](/manuals/compose/how-tos/environment-variables/variable-interpolation.md) and includes many examples covering tricky situations such as escaping nested quotes.
 
 Check if:
 - Your project uses multiple levels of environment variable overrides, for example `.env` file and `--env` CLI flags.

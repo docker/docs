@@ -2,6 +2,7 @@
 title: History and development of Docker Compose
 description: History of Compose V1 and Compose YAML schema versioning
 keywords: compose, compose yaml, swarm, migration, compatibility, docker compose vs docker-compose
+weight: 30
 aliases:
 - /compose/history/
 ---
@@ -45,4 +46,4 @@ To address confusion around Compose CLI versioning, Compose file format versioni
 
 Compose V2 uses the Compose Specification for project definition. Unlike the prior file formats, the Compose Specification is rolling and makes the `version` top-level element optional. Compose V2 also makes use of optional specifications - [Deploy](/reference/compose-file/deploy.md), [Develop](/reference/compose-file/develop.md) and [Build](/reference/compose-file/build.md).
 
-To make [migration](../migrate.md) easier, Compose V2 has backwards compatibility for certain elements that have been deprecated or changed between Compose file format 2.x/3.x and the Compose Specification.
+To make [migration](/manuals/compose/releases/migrate.md) easier, Compose V2 has backwards compatibility for certain elements that have been deprecated or changed between Compose file format 2.x/3.x and the Compose Specification.
