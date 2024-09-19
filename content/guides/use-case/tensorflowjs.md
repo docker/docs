@@ -431,7 +431,7 @@ Docker Compose is a tool for defining and running multi-container Docker
 applications. With Compose, you use a YAML file to configure your application's
 services, networks, and volumes. In this case, the application isn't a
 multi-container application, but Docker Compose has other useful features for
-development, like [Compose Watch](/manuals/compose/file-watch.md).
+development, like [Compose Watch](/manuals/compose/how-tos/file-watch.md).
 
 The sample application doesn't have a Compose file yet. To create a Compose
 file, in the `TensorJS-Face-Detection` directory, create a text file named

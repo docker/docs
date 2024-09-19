@@ -148,7 +148,7 @@ To run Ollama in a container and provide GPU access:
 
    > [!NOTE]
    >
-   > For more details about the Compose instructions, see [Turn on GPU access with Docker Compose](/manuals/compose/gpu-support.md).
+   > For more details about the Compose instructions, see [Turn on GPU access with Docker Compose](/manuals/compose/how-tos/gpu-support.md).
 
 3. Add the ollama-pull service to your `compose.yaml` file. This service uses
    the `docker/genai:ollama-pull` image, based on the GenAI Stack's

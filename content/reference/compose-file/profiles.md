@@ -68,4 +68,4 @@ In the above example:
   profile `debug` is automatically enabled and service `test_lib` is pulled in as a dependency starting both
   services `debug_lib` and `test_lib`.
 
-See how you can use `profiles` in [Docker Compose](/manuals/compose/profiles.md).
+See how you can use `profiles` in [Docker Compose](/manuals/compose/how-tos/profiles.md).

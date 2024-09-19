@@ -7,7 +7,7 @@ aliases:
 weight: 110
 ---
 
-{{< introduced compose 2.20.0 "/manuals/compose/release-notes.md#2200" >}}
+{{< introduced compose 2.20.0 "/manuals/compose/releases/release-notes.md#2200" >}}
 
 A Compose application can declare dependency on another Compose application. This is useful if:
 - You want to reuse other Compose files.
@@ -119,4 +119,4 @@ override values for customization.
 
 ## Additional resources
 
-For more information on using `include`, see [Working with multiple Compose files](/manuals/compose/multiple-compose-files/_index.md)
+For more information on using `include`, see [Working with multiple Compose files](/manuals/compose/how-tos/multiple-compose-files/_index.md)

@@ -21,7 +21,7 @@ aliases:
 Multi-stage builds let you reduce the size of your final image, by creating a
 cleaner separation between the building of your image and the final output.
 Split your Dockerfile instructions into distinct stages to make sure that the
-resulting output only contains the files that's needed to run the application.
+resulting output only contains the files that are needed to run the application.
 
 Using multiple stages can also let you build more efficiently by executing
 build steps in parallel.

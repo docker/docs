@@ -4,8 +4,10 @@ linkTitle: Environment variables precedence
 description: Scenario overview illustrating how environment variables are resolved
   in Compose
 keywords: compose, environment, env file
+weight: 20
 aliases:
 - /compose/envvars-precedence/
+- /compose/environment-variables/envvvars-precedence/
 ---
 
 When the same environment variable is set in multiple sources, Docker Compose follows a precedence rule to determine the value for that variable in your container's environment.

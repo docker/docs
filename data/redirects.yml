@@ -76,7 +76,7 @@
   - /go/credential-store/
 "/cloud/ecs-integration/":
   - /go/compose-ecs-eol/
-"/compose/migrate/":
+"/compose/releases/migrate/":
   - /go/compose-v1-eol/
 "/engine/cli/formatting/":
   # Instructions on using Go templates to format CLI output with --format

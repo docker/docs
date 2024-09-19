@@ -15,7 +15,7 @@ grid:
 - title: How Compose works 
   description: Understand how Compose works
   icon: category
-  link: /compose/compose-application-model/
+  link: /compose/intro/compose-application-model/
 - title: Install Compose
   description: Follow the instructions on how to install Docker Compose.
   icon: download
@@ -41,7 +41,7 @@ grid:
 - title: Migrate to Compose V2
   description: Learn how to migrate from Compose V1 to V2
   icon: folder_delete
-  link: /compose/migrate/
+  link: /compose/releases/migrate/
 aliases:
 - /compose/cli-command/
 - /compose/networking/swarm/

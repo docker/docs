@@ -3,7 +3,7 @@ description: Understand what Compose Bridge is and how it can be useful
 keywords: compose, orchestration, kubernetes, bridge
 title: Overview of Compose Bridge
 linkTitle: Compose Bridge
-weight: 180
+weight: 50
 ---
 
 {{< include "compose-bridge-experimental.md" >}}

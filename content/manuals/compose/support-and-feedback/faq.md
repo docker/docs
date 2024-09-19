@@ -2,8 +2,11 @@
 description: Frequently asked questions for Docker Compose
 keywords: documentation, docs,  docker, compose, faq, docker compose vs docker-compose
 title: Compose FAQs
-weight: 170
+linkTitle: FAQs
+weight: 10
 tags: [FAQ]
+aliases:
+- /compose/faq/
 ---
 
 ### What is the difference between `docker compose` and `docker-compose`
@@ -12,7 +15,7 @@ Version one of the Docker Compose command-line binary was first released in 2014
 
 Version two of the Docker Compose command-line binary was announced in 2020, is written in Go, and is invoked with `docker compose`. Compose V2 ignores the version top-level element in the compose.yml file.
 
-For further information, see [History and development of Compose](intro/history.md).
+For further information, see [History and development of Compose](/manuals/compose/intro/history.md).
 
 ### What's the difference between `up`, `run`, and `start`?
 
@@ -78,8 +81,8 @@ handling `SIGTERM` properly.
 
 Compose uses the project name to create unique identifiers for all of a
 project's containers and other resources. To run multiple copies of a project,
-set a custom project name using the [`-p` command line option](reference/_index.md)
-or the [`COMPOSE_PROJECT_NAME` environment variable](environment-variables/envvars.md#compose_project_name).
+set a custom project name using the `-p` command line option
+or the [`COMPOSE_PROJECT_NAME` environment variable](/manuals/compose/how-tos/environment-variables/envvars.md#compose_project_name).
 
 ### Can I use JSON instead of YAML for my Compose file?
 
