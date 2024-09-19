@@ -1,3 +1,4 @@
+#sudo su 
 # Contributing to Docker Documentation
 
 We value documentation contributions from the Docker community. We'd like to
