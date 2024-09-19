@@ -13,6 +13,18 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.29.6
+
+{{< release-date date="2024-09-19" >}}
+
+### Update
+
+- Dependencies upgrade: bump docker engine and cli to v27.3.0-rc.2
+
+### Bug fixes and enhancements
+
+- Fixed an issue with Windows Containers bind mounts.
+
 ## 2.29.5
 
 {{< release-date date="2024-09-17" >}}
