@@ -30,6 +30,17 @@ No, you can continue with business as usual.
 
 You can add a maximum of 10 company owners to a single company account.
 
+### Do company owners occupy a subscription seat?
+
+Company owners don't occupy a seat in any organization unless they are added as
+member of the organization. Since company owners have the same access as
+organization owners for all organizations associated with the company, it is not
+necessary to add company owners to an organization.
+
+Note that when you first create a company, your account will be both a company
+owner and an organization owner. Your account will occupy a seat as long as
+you're an organization owner.
+
 ### What permissions does the company owner have in the associated/nested organizations?
 
 Company owners can navigate to the **Organizations** page to view all their nested organizations in a single location. They can also view or edit organization members and change single sign-on (SSO) and System for Cross-domain Identity Management (SCIM) settings. Changes to company settings impact all users in each organization under the company. See [Roles and permissions](../../security/for-admins/roles-and-permissions.md).
