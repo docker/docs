@@ -52,7 +52,7 @@ You can use Docker (surprise) to build and serve the files locally.
 
 > [!IMPORTANT]
 > This requires Docker Desktop version **4.24** or later, or Docker Engine with Docker
-> Compose version [**2.22**](https://docs.docker.com/compose/file-watch/) or later.
+> Compose version [**2.22**](https://docs.docker.com/compose/how-tos/file-watch/) or later.
 
 1. [Fork the docker/docs repository.](https://github.com/docker/docs/fork)
 

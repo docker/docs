@@ -3,8 +3,9 @@ description: How to control service startup and shutdown order in Docker Compose
 keywords: documentation, docs, docker, compose, startup, shutdown, order
 title: Control startup and shutdown order in Compose
 linkTitle: Control startup order
-weight: 120
-notoc: true
+weight: 30
+aliases:
+- /compose/startup-order/
 ---
 
 You can control the order of service startup and shutdown with the

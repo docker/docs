@@ -72,7 +72,7 @@ grid_developers:
 - title: Secrets in Docker Compose
   description: Learn how to use secrets in Docker Compose.
   icon: privacy_tip
-  link: /compose/use-secrets/
+  link: /compose/how-tos/use-secrets/
 grid_resources:
 - title: Security FAQs
   description: Explore common security FAQs.

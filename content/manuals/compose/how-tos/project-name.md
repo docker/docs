@@ -1,8 +1,10 @@
 ---
 title: Specify a project name
-weight: 50
+weight: 10
 description: Understand the different ways you can set a project name in Compose and what the precedence is.
 keywords: name, compose, project, -p flag, name top-level element
+aliases:
+- /compose/project-name/
 ---
 
 In Compose, the default project name is derived from the base name of the project directory. However, you have the flexibility to set a custom project name. 
@@ -12,7 +14,7 @@ This page offers examples of scenarios where custom project names can be helpful
 > [!NOTE]
 >
 > The default project directory is the base directory of the Compose file. A custom value can also be set
-> for it using the [`--project-directory` command line option](reference/_index.md).
+> for it using the [`--project-directory` command line option](/reference/cli/docker/compose.md#use--p-to-specify-a-project-name).
 
 ## Example use cases
 

@@ -1,9 +1,11 @@
 ---
 title: Using profiles with Compose
 linkTitle: Use service profiles
-weight: 70
+weight: 20
 desription: How to use profiles with Docker Compose
 keywords: cli, compose, profile, profiles reference
+aliases:
+- /compose/profiles/
 ---
 
 {{< include "compose/profiles.md" >}}
@@ -48,7 +50,7 @@ Valid profiles names follow the regex format of `[a-zA-Z0-9][a-zA-Z0-9_.-]+`.
 
 ## Start specific profiles
 
-To start a specific profile supply the `--profile` [command-line option](reference/_index.md) or
+To start a specific profile supply the `--profile` [command-line option](/reference/cli/docker/compose.md) or
 use the [`COMPOSE_PROFILES` environment variable](environment-variables/envvars.md#compose_profiles):
 
 ```console
@@ -175,7 +177,7 @@ $ COMPOSE_PROFILES=dev docker compose up phpmyadmin
 
 ## Stop specific profiles
 
-As with starting specific profiles, you can use the `--profile` [command-line option](reference/_index.md) or
+As with starting specific profiles, you can use the `--profile` [command-line option](/reference/cli/docker/compose.md#use--p-to-specify-a-project-name) or
 use the [`COMPOSE_PROFILES` environment variable](environment-variables/envvars.md#compose_profiles):
 
 ```console

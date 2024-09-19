@@ -1,11 +1,12 @@
 ---
 title: How Compose works
-weight: 30
+weight: 10
 description: Understand how Compose works and the Compose application model with an illustrative example 
 keywords: compose, docker compose, compose specification, compose model 
 aliases:
 - /compose/compose-file/02-model/
 - /compose/compose-yaml-file/
+- /compose/compose-application-model/
 ---
 
 With Docker Compose you use a YAML configuration file, known as the [Compose file](#the-compose-file), to configure your application’s services, and then you create and start all the services from your configuration with the [Compose CLI](#cli). 
@@ -48,7 +49,7 @@ Multiple Compose files can be [merged](/reference/compose-file/merge.md) togethe
 Simple attributes and maps get overridden by the highest order Compose file, lists get merged by appending. Relative
 paths are resolved based on the first Compose file's parent folder, whenever complimentary files being
 merged are hosted in other folders. As some Compose file elements can both be expressed as single strings or complex objects, merges apply to
-the expanded form. For more information, see [Working with multiple Compose files](multiple-compose-files/_index.md)
+the expanded form. For more information, see [Working with multiple Compose files](/manuals/compose/how-tos/multiple-compose-files/_index.md)
 
 If you want to reuse other Compose files, or factor out parts of your application model into separate Compose files, you can also use [`include`](/reference/compose-file/include.md). This is useful if your Compose application is dependent on another application which is managed by a different team, or needs to be shared with others.
 
@@ -96,7 +97,7 @@ The backend stores data in a persistent volume.
 
 Both services communicate with each other on an isolated back-tier network, while the frontend is also connected to a front-tier network and exposes port 443 for external usage.
 
-![Compose application example](images/compose-application.webp)
+![Compose application example](../images/compose-application.webp)
 
 The example application is composed of the following parts:
 
@@ -161,6 +162,6 @@ example-backend-1   example/database     "docker-entrypoint.s…"   backend     
 
 ## What's next 
 
-- [Quickstart](gettingstarted.md)
-- [Explore some sample applications](samples-for-compose.md)
+- [Quickstart](/manuals/compose/gettingstarted.md)
+- [Explore some sample applications](/manuals/compose/support-and-feedback/samples-for-compose.md)
 - [Familiarize yourself with the Compose Specification](/reference/compose-file/_index.md)

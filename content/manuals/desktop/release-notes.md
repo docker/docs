@@ -463,7 +463,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 - Docker Engine and CLI updated to [Moby 26.0](https://github.com/moby/moby/releases/tag/v26.0.0). This includes Buildkit 0.13, sub volumes mounts, networking updates, and improvements to the containerd multi-platform image store UX.
 - New and improved Docker Desktop error screens: swift troubleshooting, easy diagnostics uploads, and actionable remediation.
 - Compose supports [Synchronized file shares (experimental)](synchronized-file-sharing.md).
-- New [interactive Compose CLI (experimental)](/manuals/compose/environment-variables/envvars.md#compose_menu).
+- New [interactive Compose CLI (experimental)](/manuals/compose/how-tos/environment-variables/envvars.md#compose_menu).
 - Beta release of:
   - Air-Gapped Containers with [Settings Management](/manuals/security/for-admins/hardened-desktop/air-gapped-containers/_index.md).
   - [Host networking](/manuals/engine/network/drivers/host.md#docker-desktop) in Docker Desktop.
@@ -960,7 +960,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 ### New
 
 - The new Notification center is now available to all users so you can be notified of new releases, installation progress updates, and more. Select the bell icon in the bottom-right corner of the Docker Dashboard to access the notification center.
-- Compose Watch is now available to all users. For more information, see [Use Compose Watch](/manuals/compose/file-watch.md).
+- Compose Watch is now available to all users. For more information, see [Use Compose Watch](/manuals/compose/how-tos/file-watch.md).
 - Resource Saver is now available to all users and is enabled by default. To configure this feature, navigate to the **Resources** tab in **Settings**. For more information see [Docker Desktop's Resource Saver mode](use-desktop/resource-saver.md).
 - You can now view and manage the Docker Engine state, with pause, stop, and resume, directly from the Docker Dashboard.
 
@@ -1041,7 +1041,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 ### Removed
 
-- Removed Compose V1 from Docker Desktop as it has stopped receiving updates.  Compose V2 has replaced it and is now integrated into all current Docker Desktop versions. For more information, see [Migrate to Compose V2](/manuals/compose/migrate.md).
+- Removed Compose V1 from Docker Desktop as it has stopped receiving updates.  Compose V2 has replaced it and is now integrated into all current Docker Desktop versions. For more information, see [Migrate to Compose V2](/manuals/compose/releases/migrate.md).
 
 ### Bug fixes and enhancements
 
@@ -1123,7 +1123,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 ### New
 
 - [Resource Usage](use-desktop/container.md) has moved from experimental to GA.
-- You can now split large Compose projects into multiple sub-projects with [`include`](/manuals/compose/multiple-compose-files/include.md).
+- You can now split large Compose projects into multiple sub-projects with [`include`](/manuals/compose/how-tos/multiple-compose-files/include.md).
 
 ### Bug fixes and enhancements
 
@@ -1306,7 +1306,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 - Added more details to dashboard errors when a `docker-compose` action fails ([docker/for-win#13378](https://github.com/docker/for-win/issues/13378)).
 - Added support for setting HTTP proxy configuration during installation. This can be done via the `--proxy-http-mode`, `--overrider-proxy-http`, `--override-proxy-https` and `--override-proxy-exclude` installer flags in the case of installation from the CLI on [Mac](install/mac-install.md#install-from-the-command-line) and [Windows](install/windows-install.md#install-from-the-command-line), or alternatively by setting the values in the `install-settings.json` file.
 - Docker Desktop now stops overriding .docker/config.json `credsStore` keys on application start. Note that if you use a custom credential helper then the CLI `docker login` and `docker logout` does not affect whether the UI is signed in to Docker or not. In general, it is better to sign into Docker via the UI since the UI supports multi-factor authentication.
-- Added a warning about the [forthcoming removal of Compose V1 from Docker Desktop](/manuals/compose/migrate.md). Can be suppressed with `COMPOSE_V1_EOL_SILENT=1`.
+- Added a warning about the [forthcoming removal of Compose V1 from Docker Desktop](/manuals/compose/releases/migrate.md). Can be suppressed with `COMPOSE_V1_EOL_SILENT=1`.
 - In the Compose config, boolean fields in YAML should be either `true` or `false`. Deprecated YAML 1.1 values such as “on” or “no” now produce a warning.
 - Improved UI for image table, allowing rows to use more available space.
 - Fixed various bugs in port-forwarding.
@@ -1867,7 +1867,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 - Compose V2 is now enabled after factory reset.
 - Compose V2 is now enabled by default on new installations of Docker Desktop.
-- Precedence order of environment variables in Compose is more consistent, and clearly [documented](/manuals/compose/environment-variables/envvars-precedence.md).
+- Precedence order of environment variables in Compose is more consistent, and clearly [documented](/manuals/compose/how-tos/environment-variables/envvars-precedence.md).
 - Upgraded kernel to 5.10.124.
 - Improved overall performance issues caused by calculating disk size. Related to [docker/for-win#9401](https://github.com/docker/for-win/issues/9401).
 - Docker Desktop now prevents users on ARM macs without Rosetta installed from switching back to Compose V1, which has only intel binaries.

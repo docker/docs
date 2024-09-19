@@ -147,7 +147,7 @@ Press `ctrl+c` in the terminal to stop your application.
 
 Use Compose Watch to automatically update your running Compose services as you
 edit and save your code. For more details about Compose Watch, see [Use Compose
-Watch](/manuals/compose/file-watch.md).
+Watch](/manuals/compose/how-tos/file-watch.md).
 
 Lines 15 to 18 in the `compose.yaml` file contain properties that trigger Docker
 to rebuild the image when a file in the current working directory is changed:
@@ -213,7 +213,7 @@ database and persist data. You also learned how to use Compose Watch to automati
 
 Related information:
  - [Compose file reference](/reference/compose-file/)
- - [Compose file watch](/manuals/compose/file-watch.md)
+ - [Compose file watch](/manuals/compose/how-tos/file-watch.md)
  - [Multi-stage builds](/manuals/build/building/multi-stage.md)
 
 ## Next steps
