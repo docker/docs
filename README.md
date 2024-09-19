@@ -1,3 +1,4 @@
+#sudo su 
 # Docs @ Docker
 
 <img src="static/assets/images/docker-docs.png" alt="Welcome to Docker Documentation" style="max-width: 50%;">
