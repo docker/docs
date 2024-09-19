@@ -79,7 +79,7 @@ The following behave differently between Compose V1 and V2:
 
 Environment variable behavior in Compose V1 wasn't formally documented and behaved inconsistently in some edge cases.
 
-For Compose V2, the [Environment variables](/manuals/compose/how-tos/environment-variables/) section covers both [precedence](/manuals/compose/how-tos/environment-variables/envvars-precedence) as well as [`.env` file interpolation](/manuals/compose/how-tos/environment-variables/variable-interpolation.md) and includes many examples covering tricky situations such as escaping nested quotes.
+For Compose V2, the [Environment variables](/manuals/compose/how-tos/environment-variables/_index.md) section covers both [precedence](/manuals/compose/how-tos/environment-variables/envvars-precedence.md) as well as [`.env` file interpolation](/manuals/compose/how-tos/environment-variables/variable-interpolation.md) and includes many examples covering tricky situations such as escaping nested quotes.
 
 Check if:
 - Your project uses multiple levels of environment variable overrides, for example `.env` file and `--env` CLI flags.

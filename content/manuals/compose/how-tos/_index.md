@@ -1,6 +1,6 @@
 ---
 build:
   render: never
-title: Introduction to Compose
+title: How-tos
 weight: 40
 ---

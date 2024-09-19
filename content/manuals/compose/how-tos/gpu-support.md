@@ -1,8 +1,8 @@
 ---
 description: Understand GPU support in Docker Compose
 keywords: documentation, docs, docker, compose, GPU access, NVIDIA, samples
-title: Turn on GPU access with Docker Compose
-linkTitle: GPU support
+title: Enable GPU access with Docker Compose
+linkTitle: Enable GPU support
 weight: 90
 aliases:
 - /compose/gpu-support/

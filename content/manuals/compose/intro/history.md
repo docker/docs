@@ -1,5 +1,6 @@
 ---
 title: History and development of Docker Compose
+linkTitle: History and development
 description: History of Compose V1 and Compose YAML schema versioning
 keywords: compose, compose yaml, swarm, migration, compatibility, docker compose vs docker-compose
 weight: 30
