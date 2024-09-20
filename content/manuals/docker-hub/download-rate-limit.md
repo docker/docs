@@ -98,7 +98,7 @@ both individuals and organizations.
    - [Enforce sign-in](/security/for-admins/enforce-sign-in/) to ensure that you
      can monitor the usage of your users and users receive higher usage limits.
 
-## Pull Attribution
+## Pull attribution
 
 Pulls can be attributed to either a personal or organization [namespace] (https://docs.docker.com/contribute/style/terminology/#namespace)
 
