@@ -246,7 +246,7 @@ audit trail of when and how the change occurred.
 
 For more information about automatically updating your base images with Docker
 Scout, see
-[Remediation](../../scout/policy/remediation.md#automatic-base-image-updates)
+[Remediation](../../scout/policy/remediation.md#automatic-base-image-updates).
 
 ## Build and test your images in CI
 
