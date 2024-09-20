@@ -100,7 +100,7 @@ both individuals and organizations.
 
 ## Pull attribution
 
-Pulls can be attributed to either a personal or organization [namespace] (https://docs.docker.com/contribute/style/terminology/#namespace)
+Pulls can be attributed to either a personal or organization [namespace](https://docs.docker.com/contribute/style/terminology/#namespace)
 
 **Private Pulls**
 Pulls for private repositories are attributed to the repository’s namespace owner.
