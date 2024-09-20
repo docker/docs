@@ -13,6 +13,14 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.29.7
+
+{{< release-date date="2024-09-20" >}}
+
+### Bug fixes and enhancements
+
+- Fixed regressions using mount API for bind mounts (reverted)
+
 ## 2.29.6
 
 {{< release-date date="2024-09-19" >}}
