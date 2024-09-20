@@ -122,6 +122,8 @@ github.com/docker/cli v27.2.0+incompatible h1:yHD1QEB1/0vr5eBNpu8tncu8gWxg8EydFP
 github.com/docker/cli v27.2.0+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/cli v27.2.2-0.20240909090509-65decb573126+incompatible h1:if+XpfWkGSpLf8NtVlYgvCeVvKW4Eba90LispMGC50M=
 github.com/docker/cli v27.2.2-0.20240909090509-65decb573126+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
+github.com/docker/cli v27.3.0+incompatible h1:h7J5eiGdUbH2Q4EcGr1mFb20qzS7Nrot3EI9hwycpK0=
+github.com/docker/cli v27.3.0+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/compose-cli v1.0.35 h1:uZyEHLalfqBS2PiTpA1LAULyJmuQ+YtZg7nG4Xl3/Cc=
 github.com/docker/compose-cli v1.0.35/go.mod h1:mSXI4hFLpRU3EtI8NTo32bNwI0UXSr8jnq+/rYjGAUU=
 github.com/docker/compose/v2 v2.22.0 h1:3rRz4L7tPU75wRsV8JZh2/aTgerQvPa1cpzZN+tHqUY=
@@ -319,6 +321,8 @@ github.com/moby/moby v27.2.0+incompatible h1:WX2CjnXfZ8V87ugEIJuwVp7fDhHXCdi7gjl
 github.com/moby/moby v27.2.0+incompatible/go.mod h1:fDXVQ6+S340veQPv35CzDahGBmHsiclFwfEygB/TWMc=
 github.com/moby/moby v27.2.1+incompatible h1:mIRBoOsLr+Q6s+h65ZFyi6cXBEVy2RXCWS5HOHlxx54=
 github.com/moby/moby v27.2.1+incompatible/go.mod h1:fDXVQ6+S340veQPv35CzDahGBmHsiclFwfEygB/TWMc=
+github.com/moby/moby v27.3.0+incompatible h1:AhSu/R7C5uiyd+JCts3kxrKyTzXa3FilBJ0KCLUHXqA=
+github.com/moby/moby v27.3.0+incompatible/go.mod h1:fDXVQ6+S340veQPv35CzDahGBmHsiclFwfEygB/TWMc=
 github.com/moby/sys/symlink v0.1.0/go.mod h1:GGDODQmbFOjFsXvfLVn3+ZRxkch54RkSiGqsZeMYowQ=
 github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd/go.mod h1:6dJC0mAP4ikYIbvyc7fijjWJddQyLn8Ig3JB5CqoB9Q=
 github.com/morikuni/aec v1.0.0/go.mod h1:BbKIizmSmc5MMPqRYbxO4ZU0S0+P200+tUnFx7PXmsc=
