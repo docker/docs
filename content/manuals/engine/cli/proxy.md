@@ -84,7 +84,7 @@ sections for configuring proxy settings for the CLI and daemon.
 
 ### Run containers with a proxy configuration
 
-When you start a container, its proxy-related environment variable are set
+When you start a container, its proxy-related environment variables are set
 to reflect your proxy configuration in `~/.docker/config.json`.
 
 For example, assuming a proxy configuration like the example
