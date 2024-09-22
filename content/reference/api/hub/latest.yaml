@@ -118,7 +118,7 @@ paths:
     post:
       tags:
         - authentication
-      summary: Create an authenticated token
+      summary: Create an authentication token
       operationId: PostUsersLogin
       description: |
         Creates and returns a bearer token in JWT format that you can use to
