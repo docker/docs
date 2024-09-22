@@ -243,20 +243,20 @@ Make sure you stop any running Postgres containers(along with volumes) to preven
     3 rows)
    ```
 
-   Now that you’ve been shown how to pre-seed a database by using volumes, let’s see how you can simplify the whole process of seeding by using a single Docker Compose file. 
+Now that you’ve been shown how to pre-seed a database by using volumes, let’s see how you can simplify the whole process of seeding by using a single Docker Compose file. 
 
-   > [!TIP]
-   > Make sure you stop any running Postgres containers(along with volumes) to prevent port conflicts before you follow the next steps.
+> [!TIP]
+> Make sure you stop any running Postgres containers(along with volumes) to prevent port conflicts before you follow the next steps.
 
-   First, you will need to create the following project directory structure:
+First, you will need to create the following project directory structure:
 
-   ```console
-   $ tree
-   .
-   ├── compose.yml
-   └── sql_files
-      └── seed.sql
-   ```
+```console
+$ tree
+.
+├── compose.yml
+└── sql_files
+    └── seed.sql
+```
 
 1. Start by writing the compose file
 
