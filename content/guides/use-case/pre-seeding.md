@@ -318,7 +318,7 @@ Make sure you stop any running Postgres containers(along with volumes) to preven
 
     Enter `mysecretpassword` when prompted for the password.
 
-    ```
+    ```plaintext
     Password for user postgres:
     psql (15.8 (Homebrew), server 16.4 (Debian 16.4-1.pgdg120+1))
     WARNING: psql major version 15, server major version 16.
