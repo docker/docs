@@ -7,8 +7,7 @@ long: |-
     [swarm join](/reference/cli/docker/swarm/join/). Nodes use the join token only when they join the
     swarm.
 
-    > **Note**
-    >
+    > [!NOTE]
     > This is a cluster management command, and must be executed on a swarm
     > manager node. To learn about managers and workers, refer to the
     > [Swarm mode section](/engine/swarm/) in the
