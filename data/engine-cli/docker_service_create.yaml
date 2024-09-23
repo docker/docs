@@ -3,8 +3,7 @@ short: Create a new service
 long: |-
     Creates a service as described by the specified parameters.
 
-    > **Note**
-    >
+    > [!NOTE]
     > This is a cluster management command, and must be executed on a swarm
     > manager node. To learn about managers and workers, refer to the
     > [Swarm mode section](/engine/swarm/) in the
