@@ -5,7 +5,7 @@
 <!-- search button -->
 <div x-ref="searchBarRef" x-data="{ open: false }" @click.outside="open = false;"
   @keyup.escape.window="open = false" id="search-bar"
-  class="hidden sm:flex relative bg-white/10 rounded items-center p-2 sm:w-full xl:w-[400px]">
+  class="hidden min-w-0 sm:flex relative bg-white/10 rounded items-center p-2 sm:w-full xl:w-[400px]">
   {{ (resources.Get "images/search-ai.svg").Content | safeHTML }}
   <input x-ref="searchBarInput" type="search" id="search-bar-input" @focus="open = true;"
     @keyup.enter.prevent="window.location.href = '/search/?q=' + $event.target.value;"
@@ -18,9 +18,9 @@
             }
             break;
           }
-        }" class="flex-grow px-2 bg-transparent text-white placeholder:text-white outline-none" placeholder="Search"
+        }" class="flex-grow px-2 bg-transparent min-w-0 text-white placeholder:text-white outline-none" placeholder="Search"
     tabindex="0" />
-  <div x-cloak :class="open && 'hidden'" class="border px-1 text-sm border-white rounded flex items-center">
+  <div x-cloak :class="open && 'hidden'" class="hidden lg:flex border px-1 text-sm border-white rounded items-center">
     <div class="-mt-0.5">
       <span x-show="navigator.platform == 'MacIntel'" class="icon-svg icon-sm">{{ partialCached "icon" "keyboard_command_key" "keyboard_command_key" }}</span>
       <span x-show="navigator.platform != 'MacIntel'" class="icon-svg icon-sm">{{ partialCached "icon" "keyboard_control_key" "keyboard_control_key" }}</span>
@@ -34,17 +34,9 @@
   </div>
   <div x-show="open" x-cloak
     class="absolute px-6 py-4 right-0 w-screen max-w-xl top-full bg-background-light dark:bg-background-dark rounded shadow-lg z-50">
-    <button @click="open = false"
-      class="text-black dark:text-white py-1 px-2 rounded w-full open-kapa-widget flex justify-between items-center hover:bg-gray-light-200 dark:hover:bg-gray-dark-200">
-      <div class="flex gap-1 items-center">
-        <img src="{{ (resources.Get "images/ai-stars.svg").Permalink }}" alt="AI Stars" />
-        <span>Ask AI</span>
-      </div>
-      <span>→</span>
-    </button>
-    <hr class="mt-2 border-b border-divider-light dark:border-divider-dark">
     <div id="search-bar-results">
-      <div class="p-2 text-gray-light dark:text-gray-dark">Start typing to search…</div>
+      {{- $emptyState := `<div class="p-2 text-gray-light dark:text-gray-dark">Start typing to search… or try <button @click="open=false" class="open-kapa-widget link">Ask AI</button></div>` }}
+      {{- $emptyState | safe.HTML }}
       <!-- results -->
     </div>
   </div>
@@ -60,7 +52,7 @@
       async function search(e) {
         const query = e.target.value;
         if (query === "") {
-          searchBarResults.innerHTML = `<div class="p-2 text-gray-light dark:text-gray-dark">Start typing to search…</div>`;
+          searchBarResults.innerHTML = `{{ $emptyState | safe.HTML }}`;
           return;
         }
         const search = await pagefind.debouncedSearch(query);
