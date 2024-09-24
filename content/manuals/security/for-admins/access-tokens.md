@@ -3,18 +3,19 @@ title: Organization access tokens
 description: Learn how to create and manage organization access tokens
   to securely push and pull images programmatically.
 keywords: docker hub, security, OAT, organization access token
+linkTitle: Organization access tokens (Beta)
 ---
 
-> [!NOTE]
->
-> Organization access tokens require a
-> [Docker Team, or Business subscription](/subscription/core-subscription/details/).
+{{% experimental title="Beta" %}}
+The organization access tokens feature is currently in [Beta](../../release-lifecycle.md#beta).
+{{% /experimental %}}
 
 An organization access token (OAT) is like a [personal access token
 (PAT)](/security/for-developers/access-tokens/), but an OAT is associated with
 an organization and not a single user account. Use an OAT instead of a PAT to
 let business-critical tasks access Docker Hub repositories without connecting
-the token to single user.
+the token to single user. You must have a [Docker Team or Business
+subscription](/subscription/core-subscription/details/) to use OATs.
 
 OATs provide the following advantages:
 
