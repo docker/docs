@@ -35,12 +35,12 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 - Volume Backup and Share is now generally available and can be found in the **Volumes** tab.
 - Terminal support within Docker Desktop using system shells is now generally available.
 - Enhanced support for IPv6, allowing users to configure their Docker VM for IPv4-only, dual-stack, or IPv6-only operation. See [IPv6 documentation](https://docs.docker.com/go/desktop-ipv6-only).
-- Containerd image store:
+- containerd image store:
   - Improved output of `docker image inspect` to account for multi-platform images.
   - Enables users to import and export a subset of multi-platform images.
   - Support multi-platform images via enabling users to pick a specific platform in `docker history`.
 - Beta release of Docker VMM - the faster alternative to Apple's Virtualization Framework on MacOS (requires Apple Silicon and macOS 12.5 or later).
-- Configure CLI completion scripts on Mac
+- Configure CLI completion scripts on Mac.
 
 ### Upgrades
 
@@ -59,8 +59,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 - Fixed a bug where proxy settings in `daemon.json` would override proxies set in Docker Desktop settings.
 - Fixed a bug where some Docker subnet ranges were not able to be used.
 - Added Docker VMM, a new powerful backend for creating and managing Docker Desktop Linux VM.
-- Available only on Apple Silicon Macs with macOS 12.5+. Docker VMM unleashes blazing performance like never before.
-- Removed `docker-index` as it is now deprecated.
+- Removed [docker-index](https://github.com/docker/index-cli-plugin) as it is now deprecated, you can use `docker scout cves fs://<path to binary>` instead.
 - Fixed a bug where images couldn't be sorted or filtered by tag. Fixes [docker/for-win#14297](https://github.com/docker/for-win/issues/14297).
 - Fixed a bug where the `docker` CLI did not work as expected when the `registry.json` file was malformed.
 - Fixed a bug where the **Push to Docker Hub** action in the **Images** view would result in an `invalid tag format` error. Fixes [docker/for-win#14258](https://github.com/docker/for-win/issues/14258).
@@ -81,7 +80,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 #### For Windows
 
-- New installations of Docker Desktop for Windows now require a Windows version of 19045 or later
+- New installations of Docker Desktop for Windows now require a Windows version of 19045 or later.
 - Fixed an issue that caused a start failure if IPv6 is disabled either in the kernel config or via the kernel command-line in WSL. Fixes [docker/for-win#14240](https://github.com/docker/for-win/issues/14240)
 - Fixed the **Clean / Purge data** button on Windows. Fixes [docker/for-win#12650](https://github.com/docker/for-win/issues/14308).
 
