@@ -35,9 +35,10 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 - Volume Backup and Share is now generally available and can be found in the **Volumes** tab.
 - Terminal support within Docker Desktop using system shells is now generally available.
 - Enhanced support for IPv6, allowing users to configure their Docker VM for IPv4-only, dual-stack, or IPv6-only operation. See [IPv6 documentation](https://docs.docker.com/go/desktop-ipv6-only).
-- Improved output of `docker image inspect` to account for multi-platform images  (requires containerd image store).
-- Enables users to import and export a subset of multi-platform images (requires containerd image store).
-- Support multi-platform images via enabling users to pick a specific platform in `docker history` (requires containerd image store).
+- Containerd image store:
+  - Improved output of `docker image inspect` to account for multi-platform images.
+  - Enables users to import and export a subset of multi-platform images.
+  - Support multi-platform images via enabling users to pick a specific platform in `docker history`.
 - Beta release of Docker VMM - the faster alternative to Apple's Virtualization Framework on MacOS (requires Apple Silicon and macOS 12.5 or later).
 - Configure CLI completion scripts on Mac
 
