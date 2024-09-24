@@ -33,12 +33,12 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 - Docker Desktop Support for Red Hat Enterprise Linux RHEL
 - Volume Backup and Share is now generally available and can be found in the **Volumes** tab.
-- Terminal support within Docker Desktop using system shells is now generally available
-- Enhanced support for IPv6, allowing users to configure their Docker VM for IPv4-only, dual-stack, or IPv6-only operation. See [IPv6 documentation](https://docs.docker.com/go/desktop-ipv6-only)
-- Improved output of `docker image inspect` to account for multi-platform images (relevant to containerd image store)
-- Enables users to import and export a subset of multi-platform images
-- Support multi-platform images via enabling users to pick a specific platform in `docker history`
-- Beta release of Docker VMM - the faster alternative to Apple's Virtualization Framework on MacOS
+- Terminal support within Docker Desktop using system shells is now generally available.
+- Enhanced support for IPv6, allowing users to configure their Docker VM for IPv4-only, dual-stack, or IPv6-only operation. See [IPv6 documentation](https://docs.docker.com/go/desktop-ipv6-only).
+- Improved output of `docker image inspect` to account for multi-platform images  (requires containerd image store).
+- Enables users to import and export a subset of multi-platform images (requires containerd image store).
+- Support multi-platform images via enabling users to pick a specific platform in `docker history` (requires containerd image store).
+- Beta release of Docker VMM - the faster alternative to Apple's Virtualization Framework on MacOS (requires Apple Silicon and macOS 12.5 or later).
 - Configure CLI completion scripts on Mac
 
 ### Upgrades
@@ -55,18 +55,22 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 #### For all platforms
 
-- Fixed a bug where a proxy in daemon.json would override the proxy set in Docker Desktop.
-- Fixed bug where some Docker subnet ranges were not able to be used.
+- Fixed a bug where proxy settings in `daemon.json` would override proxies set in Docker Desktop settings.
+- Fixed a bug where some Docker subnet ranges were not able to be used.
 - Added Docker VMM, a new powerful backend for creating and managing Docker Desktop Linux VM.
 - Available only on Apple Silicon Macs with macOS 12.5+. Docker VMM unleashes blazing performance like never before.
 - Removed `docker-index` as it is now deprecated.
 - Fixed a bug where images couldn't be sorted or filtered by tag. Fixes [docker/for-win#14297](https://github.com/docker/for-win/issues/14297).
-- Fixed a bug where the `docker` CLI did not work as expected when the IT admin `registry.json` file was malformed
-- Fixed a bug that prevented pushing images from the dashboard. Fixes [docker/for-win#14258](https://github.com/docker/for-win/issues/14258).
+- Fixed a bug where the `docker` CLI did not work as expected when the `registry.json` file was malformed.
+- Fixed a bug where the **Push to Docker Hub** action in the **Images** view would result in an `invalid tag format` error. Fixes [docker/for-win#14258](https://github.com/docker/for-win/issues/14258).
 - Fixed an issue where Docker Desktop startup failed when ICMPv6 setup was not successful.
 - Added drivers that allow USB/IP to work.
 - Fixed a bug in Enhanced Container Isolation (ECI) [Docker socket mount permissions for derived images](/content/manuals/security/for-admins/hardened-desktop/enhanced-container-isolation/config.md) where it was incorrectly denying Docker socket mounts for some images when Docker Desktop uses the containerd image store.
 - Enable `NFT_NUMGEN`, `NFT_FIB_IPV4` and `NFT_FIB_IPV6` kernel modules.
+- Build UI:
+  - Highlight build check warnings in the **Completed builds** list.
+  - Improve visualization for the build time charts.
+  - Image tags added to **Build results** section under the **Info** tab.
 
 #### For Mac
 
