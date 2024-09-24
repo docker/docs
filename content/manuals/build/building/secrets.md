@@ -14,16 +14,27 @@ Build arguments and environment variables are inappropriate for passing secrets
 to your build, because they persist in the final image. Instead, you should use
 secret mounts or SSH mounts, which expose secrets to your builds securely.
 
-## Secret mounts
+## Types of build secrets
 
-Secret mounts expose secrets to the build containers, as files or environment
-variables. You can use secret mounts to pass sensitive information to your
-builds, such as API tokens, passwords, or SSH keys. You [mount the secrets to
-the `RUN` instructions](/reference/dockerfile.md#run---mounttypesecret) that
-need to access them, similar to how you would define a bind mount or cache
-mount.
+- [Secret mounts](#secret-mounts) are general-purpose mounts for passing
+  secrets into your build. A secret mount takes a secret from the build client
+  and makes it temporarily available inside the build container, for the
+  duration of the build instruction. This is useful if, for example, your build
+  needs to communicate with a private artifact server or API.
+- [SSH mounts](#ssh-mounts) are special-purpose mounts for making SSH sockets
+  or keys available inside builds. They're commonly used when you need to fetch
+  private Git repositories in your builds.
+- [Git authentication for remote contexts](#git-authentication-for-remote-contexts)
+  is a set of pre-defined secrets for when you build with a remote Git context
+  that's also a private repository. These secrets are "pre-flight" secrets:
+  they are not consumed within your build instruction, but they're used to
+  provide the builder with the necessary credentials to fetch the context.
 
-### Passing secrets
+## Using build secrets
+
+For secret mounts and SSH mounts, using build secrets is a two-step process.
+First you need to pass the secret into the `docker build` command, and then you
+need to consume the secret in your Dockerfile.
 
 To pass a secret to a build, use the [`docker build --secret`
 flag](/reference/cli/docker/buildx/build.md#secret), or the
@@ -54,6 +65,22 @@ target "default" {
 {{< /tab >}}
 {{< /tabs >}}
 
+To consume a secret in a build and make it accessible to the `RUN` instruction,
+use the [`--mount=type=secret`](/reference/dockerfile.md#run---mounttypesecret)
+flag in the Dockerfile.
+
+```dockerfile
+RUN --mount=type=secret,id=aws \
+    AWS_SHARED_CREDENTIALS_FILE=/run/secrets/aws \
+    aws s3 cp ...
+```
+
+## Secret mounts
+
+Secret mounts expose secrets to the build containers, as files or environment
+variables. You can use secret mounts to pass sensitive information to your
+builds, such as API tokens, passwords, or SSH keys.
+
 ### Sources
 
 The source of a secret can be either a
@@ -80,12 +107,14 @@ $ docker build --secret id=API_TOKEN .
 
 ### Target
 
-By default, secrets are mounted as files located at `/run/secrets/<id>`. You
-can customize how the secrets get mounted in the build container using the
-`target` and `env` options for the `RUN --mount` flag in the Dockerfile.
+When consuming a secret in a Dockerfile, the secret is mounted a file by
+default. The default file path of the secret, inside the build container, is
+`/run/secrets/<id>`. You can customize how the secrets get mounted in the build
+container using the `target` and `env` options for the `RUN --mount` flag in
+the Dockerfile.
 
-The following example takes secret id `aws` and mounts it to `/run/secrets/aws`
-in the build container.
+The following example takes secret id `aws` and mounts it to a file at
+`/run/secrets/aws` in the build container.
 
 ```dockerfile
 RUN --mount=type=secret,id=aws \

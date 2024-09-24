@@ -93,7 +93,7 @@ params:
       prod: 3169877
       stage: 3218181
     google: GTM-WL2QLG5
-    onetrust: 8e0ebfd9-035d-4ec2-9b2f-a2de9c09f906
+    onetrust: 65425fb0-7b36-4317-9f10-7b3e08039af0
     vwo: 723167
   algolia:
     appid: 3XRLW0LZH9
