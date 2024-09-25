@@ -238,6 +238,6 @@ Run `docker harmonia doctor` to print helpful troubleshooting information.
 - Containers cannot access host through DNS `host.docker.internal`.
 - File binds (non-directory binds) are currently static, meaning changes will not be reflected until the container is restarted. This also affects Compose configs and secrets directives.
 - Bind volumes are not supported.
-- Port-forwarding support for UDP
+- Port-forwarding for UDP is not supported. 
 - Docker Compose projects relying on `watch` in `sync` mode are not working with the `tar` synchronizer. Configure it to use `docker cp` instead, disable tar sync by setting `COMPOSE_EXPERIMENTAL_WATCH_TAR=0` in your environment.
 - Some Docker Engine features that let you access the underlying host, such as `--pid=host`, `--network=host`, and `--ipc=host`, are currently disabled.
