@@ -1,26 +1,28 @@
 ---
-title: Docker Run Cloud
-description: Learn how you can run your applications in the cloud with Docker Run Cloud
+title: Project Harmonia
+description: Learn how you can run your applications in the cloud with Project Harmonia
 keywords: run, cloud, docker desktop, resources
 sitemap: false
+aliases:
+- /run-cloud/
 ---
 
 {{% restricted title="Private preview" %}}
-Docker Run Cloud is in Private preview.
+Project Harmonia is in Private preview.
 {{% /restricted %}}
 
-Docker Run Cloud brings the power of the cloud to your local development workflow. You can now run your applications in the cloud whilst continuing to use your existing tools and workflows and without worrying about local resource limitations. Docker Run Cloud also lets you share previews of your cloud-based applications for real-time feedback. 
+Project Harmonia brings the power of the cloud to your local development workflow. You can now run your applications in the cloud whilst continuing to use your existing tools and workflows and without worrying about local resource limitations. Project Harmonia also lets you share previews of your cloud-based applications for real-time feedback. 
 
 ## Set up 
 
-To get started with Docker Run Cloud, you need to:
+To get started with Project Harmonia, you need to:
 
 - Have a Docker account that's part of a Docker organization
 - Email `run.cloud@docker.com` to get help with onboarding
 
 ## Quickstart
 
-You can use Docker Run Cloud from the Docker Dashboard or from the CLI. 
+You can use Project Harmonia from the Docker Dashboard or from the CLI. 
 
 This guide introduces you to essential commands and steps for creating, managing, and sharing a cloud engine. 
 
@@ -29,7 +31,7 @@ This guide introduces you to essential commands and steps for creating, managing
 {{< tabs group="method" >}}
 {{< tab name="Docker Desktop">}}
 
-1. In the Docker Dashboard, navigate to the **Docker Run Cloud** tab. 
+1. In the Docker Dashboard, navigate to the **Project Harmonia** tab. 
 2. In the top right-hand corner, select **Create Cloud Engine**.
 3. Fill out the creation form:
    - Enter `cloudengine` as the name
@@ -99,7 +101,7 @@ Running a container with a cloud engine is just as straightforward as running it
    - Enter `cloudengine2` as the name
    - Choose an organization to associate the cloud engine with
    - Select the **Standard** engine size with the **AMD-64** architecture
-   In the **Docker Run Cloud** view you should now see both `cloudengine` and `cloudengine2`. 
+   In the **Project Harmonia** view you should now see both `cloudengine` and `cloudengine2`. 
 2. Switch between engines, also known as your Docker contexts. Use the context switcher in the top-left corner of the Docker Dashboard to toggle between your cloud engines or switch from your local engine (`desktop-linux`) to a cloud engine. 
 
 {{< /tab >}}
@@ -124,13 +126,13 @@ Running a container with a cloud engine is just as straightforward as running it
 
 ### Step four: Use a file sync for your cloud engine
 
-Docker Run Cloud takes advantage of [Synchronized file shares](/manuals/desktop/synchronized-file-sharing.md) to enable local-to-remote file shares and port mappings. 
+Project Harmonia takes advantage of [Synchronized file shares](/manuals/desktop/synchronized-file-sharing.md) to enable local-to-remote file shares and port mappings. 
 
 {{< tabs group="method" >}}
 {{< tab name="Docker Desktop">}}
 
 1. Clone the [Awesome Compose](https://github.com/docker/awesome-compose) repository. 
-2. In the Docker Dashboard, navigate to the **Docker Run Cloud** view. 
+2. In the Docker Dashboard, navigate to the **Project Harmonia** view. 
 3. For the `cloudengine` cloud engine, select the **Actions** menu and then **Manage file syncs**.
 4. Select **Create file sync**.
 5. Navigate to the `awesome-compose/react-express-mysql` folder and select **Open**.
@@ -203,12 +205,12 @@ $ docker harmonia engine share list
 {{< tab name="Docker Desktop">}}
 
 To remove a file sync session:
-1. Navigate to your cloud engine in the **Docker Run Cloud** view.
+1. Navigate to your cloud engine in the **Project Harmonia** view.
 2. Select the **Actions** menu and then **Manage file syncs**.
 3. Select the **drop-down** icon on the file sync.
 4. Select **Delete**.
 
-To remove a cloud engine, navigate to the **Docker Run Cloud** view and then select the **delete** icon.
+To remove a cloud engine, navigate to the **Project Harmonia** view and then select the **delete** icon.
 
 {{< /tab >}}
 {{< tab name="CLI">}}
@@ -234,10 +236,10 @@ Run `docker harmonia doctor` to print helpful troubleshooting information.
 
 ## Known issues
 
-- KinD does not run on Docker Run Cloud due to some hard-coded assumptions to ensure it's running in a privileged container. K3d is a good alternative.
+- KinD does not run on Project Harmonia due to some hard-coded assumptions to ensure it's running in a privileged container. K3d is a good alternative.
 - Containers cannot access host through DNS `host.docker.internal`.
 - File binds (non-directory binds) are currently static, meaning changes will not be reflected until the container is restarted. This also affects Compose configs and secrets directives.
 - Bind volumes are not supported.
-- Port-forwarding support for UDP
+- Port-forwarding for UDP is not supported. 
 - Docker Compose projects relying on `watch` in `sync` mode are not working with the `tar` synchronizer. Configure it to use `docker cp` instead, disable tar sync by setting `COMPOSE_EXPERIMENTAL_WATCH_TAR=0` in your environment.
 - Some Docker Engine features that let you access the underlying host, such as `--pid=host`, `--network=host`, and `--ipc=host`, are currently disabled.

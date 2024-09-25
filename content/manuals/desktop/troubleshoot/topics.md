@@ -107,7 +107,7 @@ in the Apple documentation, and Docker Desktop [Mac system requirements](../inst
 
 ### VPNKit keeps breaking
 
-In Docker Desktop version 4.19, gVisor replaced VPNKit to enhance the performance of VM networking when using the Virtualization framework on macOS Ventura and above. 
+In Docker Desktop version 4.19, gVisor replaced VPNKit to enhance the performance of VM networking when using the Virtualization framework on macOS 13 and above.
 
 To continue using VPNKit, add `"networkType":"vpnkit"` to your `settings.json` file located at `~/Library/Group Containers/group.com.docker/settings.json`.
 
