@@ -25,7 +25,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 ## 4.35.0
 
-{{< release-date date="2024-09-26" >}}
+{{< release-date date="2024-10-02" >}}
 
 {{< desktop-install-v2 all=true beta_win_arm=true version="4.35.0" build_path="/TBD/" >}}
 
@@ -37,9 +37,8 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 - Enhanced support for IPv6, allowing users to configure their Docker VM for IPv4-only, dual-stack, or IPv6-only operation. See [IPv6 documentation](https://docs.docker.com/go/desktop-ipv6-only).
 - containerd image store:
   - Improved output of `docker image inspect` to account for multi-platform images.
-  - Enables users to import and export a subset of multi-platform images.
   - Support multi-platform images via enabling users to pick a specific platform in `docker history`.
-- Beta release of Docker VMM - the faster alternative to Apple's Virtualization Framework on MacOS (requires Apple Silicon and macOS 12.5 or later).
+- Beta release of Docker VMM - the faster alternative to Apple's Virtualization Framework on macOS (requires Apple Silicon and macOS 12.5 or later).
 - Configure CLI completion scripts on Mac.
 
 ### Upgrades
