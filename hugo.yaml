@@ -9,6 +9,11 @@ ignoreLogs:
 
 taxonomies:
   tag: tags
+  # filters for guides:
+  language: languages
+  subject: subjects
+  level: levels
+  product: products
 
 permalinks:
   page:
@@ -139,9 +144,6 @@ menus:
   - name: Reference
     pageRef: /reference/
     weight: 4
-  - name: Learning paths
-    pageRef: /learning-paths/
-    weight: 5
 
   footer:
     - url: https://www.docker.com/products

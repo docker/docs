@@ -19,7 +19,7 @@
         <ul class="flex text-sm md:text-base lg:gap-4">
           {{ range site.Menus.main }}
           <li
-            {{- if or (eq page .Page) (page.IsDescendant .Page) }}
+            {{- if or (eq page.Permalink .Page.Permalink) (page.IsDescendant .Page) }}
               class="border-b-4"
             {{- else }}
               class="border-b-4 border-transparent hover:border-white/20"
