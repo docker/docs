@@ -128,11 +128,10 @@ code provider.
 
 5. On the page that appears, select **Grant access**.
 
-
 ### Unlink a Bitbucket user account
 
 To permanently revoke Docker Hub's access to your Bitbucket account, you must
-unlink it both from Docker Hub, and from your Bitbucket account.
+unlink it both from Docker Hub, and revoke authorization in your Bitbucket account.
 
 1. Sign in to Docker Hub.
 
@@ -140,11 +139,18 @@ unlink it both from Docker Hub, and from your Bitbucket account.
 
 3. From the **Linked accounts** tab, select the **Plug** icon next to the source provider you want to remove.
 
-4. Go to your Bitbucket account and navigate to **Bitbucket settings**.
+> [!IMPORTANT]
+> After unlinking the account on Docker Hub, you must also revoke the authorization on the Bitbucket end.
 
-5. On the page that appears, select **OAuth**.
+To revoke authorization in your Bitbucket account:
 
-6. Select **Revoke** next to the Docker Hub line.
+1. Go to your Bitbucket account and navigate to [**Bitbucket settings**](https://bitbucket.org/account/settings/app-authorizations/).
+
+2. On the page that appears, select **OAuth**.
+
+3. Select **Revoke** next to the Docker Hub line.
+
+![Bitbucket Authorization revocation page](images/bitbucket-revoke.png)
 
 > [!NOTE]
 >
