@@ -293,6 +293,7 @@ For more information, see [microsoft/WSL#11794](https://github.com/microsoft/WSL
 - [Air-Gapped Containers](/manuals/security/for-admins/hardened-desktop/air-gapped-containers.md) is now generally available.
 - Docker Compose File Viewer shows your Compose YAML with syntax highlighting and contextual links to relevant docs (Beta, progressive rollout).
 - New Sidebar user experience.
+- Admins can now control whether developers can use the Docker terminal with [Settings Management](/manuals/security/for-admins/hardened-desktop/settings-management/_index.md).
 
 ### Upgrades
 
