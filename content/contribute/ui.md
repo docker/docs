@@ -2,6 +2,7 @@
 title: UI elements in content
 description: How to refer and interact with UI content
 keywords: ui, contribute, style guide
+weight: 40
 ---
 
 This page contains information on how to write technical content that involves a user interface (UI).

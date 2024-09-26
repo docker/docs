@@ -3,6 +3,7 @@ title: Formatting guide
 description: Formatting guidelines for technical documentation
 keywords: formatting, style guide, contribute
 toc_max: 2
+weight: 20
 ---
 
 ## Headings and subheadings
