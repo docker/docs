@@ -2,6 +2,7 @@
 title: Writing checklist
 description: A helpful writing checklist when creating documentation
 keywords: checklist, documentation, style guide, contribute
+weight: 60
 ---
 
 Use this checklist to communicate in a way that is clear, helpful, and consistent with the rest of Docker Docs.

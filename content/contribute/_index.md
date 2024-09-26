@@ -1,5 +1,6 @@
 ---
 title: Contribute to Docker's docs
+weight: 10
 toc_max: 1
 aliases:
 - /opensource/
