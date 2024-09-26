@@ -59,17 +59,18 @@ If you choose the integrated terminal, you can run commands in a running contain
   and the ability to run Wasm applications with Docker.
   For more information, see [containerd image store](containerd.md).
 
-- {{< badge color=blue text="Mac only" >}} **Use Virtualization framework**. Select to allow Docker Desktop to use the `virtualization.framework` instead of the `hypervisor.framework`.
-    > [!TIP]
-    >
-    > Turn this setting on to make Docker Desktop run faster.
+- {{< badge color=blue text="Mac only" >}} **Choose Virtual Machine Manager (VMM)**. The Virtual Machine Manager is the technology used to run the Linux VM. Docker Desktop 4.35 supports:
+  - {{< badge color=blue text="Apple Silicon only" >}} **Docker VMM (beta)**: Select to use the beta version of a container-optimised VMM with fast filesharing support.
+  - **Apple Virtualization framework**: Select to allow Docker Desktop to use the `virtualization.framework`. Select if you need access to Rosetta to speed up x86_65/amd64 emulation.
+  - {{< badge color=blue text="Apple Silicon only" >}} **QEMU (Legacy)**: Select if you encounter problems with other options and want to use qemu.
+  - {{< badge color=blue text="Intel only" >}}**HyperKit**: Select if you encounter problems with other options and want to use hyperkit.
 
-- {{< badge color=blue text="Mac only" >}}**Choose file sharing implementation for your containers**. Choose whether you want to share files using **VirtioFS**, **gRPC FUSE**, or **osxfs (Legacy)**. VirtioFS is only available for macOS versions 12.5 and above, and is turned on by default.
+- {{< badge color=blue text="Mac only" >}} **Choose file sharing implementation for your containers**. Choose whether you want to share files using **VirtioFS**, **gRPC FUSE**, or **osxfs (Legacy)**. VirtioFS is only available for macOS versions 12.5 and above, and is turned on by default.
     >**Tip**
     >
     > Use VirtioFS for speedy file sharing. VirtioFS has reduced the time taken to complete filesystem operations by [up to 98%](https://github.com/docker/roadmap/issues/7#issuecomment-1044452206)
 
-- {{< badge color=blue text="Mac only" >}}**Use Rosetta for x86_64/amd64 emulation on Apple Silicon**. Turns on Rosetta to accelerate x86/AMD64 binary emulation on Apple Silicon. This option is only available if you have turned on **Virtualization framework** in the **General** settings tab. You must also be on macOS 13 or later.
+- {{< badge color=blue text="Mac only" >}}**Use Rosetta for x86_64/amd64 emulation on Apple Silicon**. Turns on Rosetta to accelerate x86/AMD64 binary emulation on Apple Silicon. This option is only available if you have selected **Virtualization framework** as the Virtual Machine Manager. You must also be on macOS 13 or later.
 
 - **Send usage statistics**. Select so Docker Desktop sends diagnostics,
   crash reports, and usage data. This information helps Docker improve and
