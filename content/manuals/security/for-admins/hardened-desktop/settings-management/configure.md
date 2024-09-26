@@ -59,7 +59,7 @@ If `locked: true`, users aren't able to edit this setting from Docker Desktop or
 If `locked: false`, it's similar to setting a factory default in that:
 - For new installs, `locked: false` pre-populates the relevant settings in the Docker Desktop UI, but users are able to modify it.
 
-- If Docker Desktop is already installed and being used, `locked: false` is ignored. This is because existing users of Docker Desktop may have already updated a setting, which in turn will have been written to the relevant config file, for example the `settings.json` or `daemon.json`. In these instances, the user's preferences are respected and we don't alter these values. These can be controlled by the admin by setting `locked: true`.
+- If Docker Desktop is already installed and being used, `locked: false` is ignored. This is because existing users of Docker Desktop may have already updated a setting, which in turn will have been written to the relevant config file, for example the `settings-store.json` or `daemon.json`. In these instances, the user's preferences are respected and we don't alter these values. These can be controlled by the admin by setting `locked: true`.
 
 The following `admin-settings.json` code and table provides an example of the required syntax and descriptions for parameters and values:
 
