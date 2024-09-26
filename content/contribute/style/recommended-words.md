@@ -2,6 +2,7 @@
 title: Recommended word list
 description: Recommended word list for Technical documentation
 keywords: recommended word list, style guide, contribute
+weight: 30
 ---
 
 To help ensure consistency across documentation, the Technical Writing team recommends these wording choices.
