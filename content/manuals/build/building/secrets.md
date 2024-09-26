@@ -44,7 +44,7 @@ equivalent options for [Bake](../bake/reference.md#targetsecret).
 {{< tab name="CLI" >}}
 
 ```console
-$ docker build --secret id=mytoken,src=$HOME/.aws/credentials .
+$ docker build --secret id=aws,src=$HOME/.aws/credentials .
 ```
 
 {{< /tab >}}
@@ -57,7 +57,7 @@ variable "HOME" {
 
 target "default" {
   secret = [
-    "id=mytoken,src=${HOME}/.aws/credentials"
+    "id=aws,src=${HOME}/.aws/credentials"
   ]
 }
 ```
