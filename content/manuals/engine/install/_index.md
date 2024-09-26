@@ -49,12 +49,10 @@ through Docker Desktop. For instructions on how to install Docker Desktop, see:
 | [Debian](debian.md)                            |       ✅       |       ✅        |      ✅      |   ✅    |       |
 | [Fedora](fedora.md)                            |       ✅       |       ✅        |              |   ✅    |       |
 | [Raspberry Pi OS (32-bit)](raspberry-pi-os.md) |                |                 |      ✅      |         |       |
-| [RHEL](rhel.md)                                |       🚧       |       🚧        |              |         |  ✅   |
+| [RHEL](rhel.md)                                |       ✅       |       ✅        |              |         |  ✅   |
 | [SLES](sles.md)                                |                |                 |              |         |  ✅   |
 | [Ubuntu](ubuntu.md)                            |       ✅       |       ✅        |      ✅      |   ✅    |  ✅   |
 | [Binaries](binaries.md)                        |       ✅       |       ✅        |      ✅      |         |       |
-
-🚧 = Experimental
 
 ### Other Linux distros
 
