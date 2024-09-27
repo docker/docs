@@ -123,7 +123,7 @@ EOT
 
 # pagefind installs the Pagefind runtime
 FROM base AS pagefind
-ARG PAGEFIND_VERSION=1.1.0
+ARG PAGEFIND_VERSION=1.1.1
 COPY --from=build /out ./public
 RUN --mount=type=bind,src=pagefind.yml,target=pagefind.yml \
     npx pagefind@v${PAGEFIND_VERSION} --output-path "/pagefind"
