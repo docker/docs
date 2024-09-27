@@ -4,6 +4,8 @@ refLinksErrorLevel: ERROR
 enableGitInfo: true
 disablePathToLower: true
 enableInlineShortcodes: true
+ignoreLogs:
+  - cascade-pattern-with-extension
 
 taxonomies:
   tag: tags
