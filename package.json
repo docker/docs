@@ -32,6 +32,6 @@
     "markdownlint": "^0.35.0",
     "prettier": "^3.3.3",
     "prettier-plugin-go-template": "^0.0.15",
-    "prettier-plugin-tailwindcss": "^0.6.5"
+    "prettier-plugin-tailwindcss": "^0.6.8"
   }
 }
