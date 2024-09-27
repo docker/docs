@@ -145,17 +145,13 @@ The list includes the following vulnerabilities:
 - [CVE-2023-38545 (cURL SOCKS5 heap buffer overflow)](https://scout.docker.com/v/CVE-2023-38545)
 - [CVE-2023-44487 (HTTP/2 Rapid Reset)](https://scout.docker.com/v/CVE-2023-44487)
 - [CVE-2024-3094 (XZ backdoor)](https://scout.docker.com/v/CVE-2024-3094)
-- [CVE-2024-47176 (OpenPrinting - `cups-browsed`)](https://scout.docker.com/v/CVE-2024-47176)
-- [CVE-2024-47076 (OpenPrinting - `libcupsfilters`)](https://scout.docker.com/v/CVE-2024-47076)
-- [CVE-2024-47175 (OpenPrinting - `libppd`)](https://scout.docker.com/v/CVE-2024-47175)
-- [CVE-2024-47177 (OpenPrinting - `cups-filters`)](https://scout.docker.com/v/CVE-2024-47177)
 
 You can configure the CVEs included in this list by creating a custom policy.
 Custom configuration options include:
 
 - **CVEs to avoid**: Specify the CVEs that you want to avoid in your artifacts.
 
-  Default: `CVE-2014-0160`, `CVE-2021-44228`, `CVE-2023-38545`, `CVE-2023-44487`, `CVE-2024-3094`, `CVE-2024-47176`, `CVE-2024-47076`, `CVE-2024-47175`, `CVE-2024-47177`
+  Default: `CVE-2014-0160`, `CVE-2021-44228`, `CVE-2023-38545`, `CVE-2023-44487`, `CVE-2024-3094`
 
 - **CISA KEV**: Enable tracking of vulnerabilities from CISA's Known Exploited Vulnerabilities (KEV) catalog
 
