@@ -70,6 +70,7 @@ exceptions:
   - SVG
   - TBD
   - TCP
+  - TIP
   - TODO
   - TTY
   - URI
