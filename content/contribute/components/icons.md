@@ -57,11 +57,11 @@ grid:
     icon: "database"
     description: Icon name = database
   - title: "logs"
-    icon: "feed"
-    description: Icon name = feed
+    icon: "text_snippet"
+    description: Icon name = text_snippet
   - title: "Prune/cut"
-    icon: "cut"
-    description: Icon name = cut
+    icon: "content_cut"
+    description: Icon name = content_cut
   - title: "Configure"
     icon: "tune"
     description: Icon name = tune

@@ -18,10 +18,10 @@
     </a>
     <button @click="expanded = !expanded" class="rounded hover:bg-gray-light-300 hover:dark:bg-gray-dark-300">
       <span x-show="! expanded" class="icon-svg">
-        {{ partialCached "icon" "expand_more" "expand_more" }}
+        {{ partialCached "icon" "arrow_drop_down" "arrow_drop_down" }}
       </span>
       <span x-cloak x-show="expanded" class="icon-svg">
-        {{ partialCached "icon" "expand_less" "expand_less" }}
+        {{ partialCached "icon" "arrow_drop_up" "arrow_drop_up" }}
       </span>
     </button>
   </div>

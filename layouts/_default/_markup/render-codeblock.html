@@ -21,7 +21,7 @@
           <button @click="collapse = false"
             class="flex items-center rounded-full bg-blue-light px-2 text-sm text-white dark:bg-blue-dark-400">
             <span>Show more</span>
-            <span class="icon-svg">{{ partialCached "icon" "expand_more" "expand_more" }}</span>
+            <span class="icon-svg">{{ partialCached "icon" "arrow_drop_down" "arrow_drop_down" }}</span>
           </button>
         </div>
         <div :class="{ 'h-32': collapse }">
@@ -29,7 +29,7 @@
           <button @click="collapse = true" x-show="!collapse"
             class="mx-auto -mt-4 flex items-center rounded-b-lg bg-blue-light px-2 text-sm text-white dark:bg-blue-dark-400">
             <span>Hide</span>
-            <span class="icon-svg">{{ partialCached "icon" "expand_less" "expand_less" }}</span>
+            <span class="icon-svg">{{ partialCached "icon" "arrow_drop_up" "arrow_drop_up" }}</span>
           </button>
         </div>
       </div>
