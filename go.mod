@@ -1,8 +1,6 @@
 module github.com/docker/docs
 
-go 1.21.0
-
-toolchain go1.22.5
+go 1.23.1
 
 require (
 	github.com/docker/buildx v0.17.0 // indirect

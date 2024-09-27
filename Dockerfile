@@ -4,7 +4,7 @@
 # ALPINE_VERSION sets the Alpine Linux version for all Alpine stages
 ARG ALPINE_VERSION=3.20
 # GO_VERSION sets the Go version for the base stage
-ARG GO_VERSION=1.22
+ARG GO_VERSION=1.23
 # HTML_TEST_VERSION sets the wjdp/htmltest version for HTML testing
 ARG HTMLTEST_VERSION=0.17.0
 
