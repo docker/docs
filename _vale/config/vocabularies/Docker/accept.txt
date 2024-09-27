@@ -1,8 +1,6 @@
 A?GPL(v3)?
 APIs?
-snapshotters?
 ARM
-Netplan
 AWS
 Admin Console
 Amazon
@@ -36,7 +34,6 @@ Ddosify
 Debootstrap
 Dev Environments?
 Django
-Docker's
 Docker Build Cloud
 Docker Business
 Docker Dasboard
@@ -46,6 +43,7 @@ Docker Extension
 Docker Hub
 Docker Scout
 Docker Team
+Docker's
 Docker-Sponsored Open Source
 Dockerfile
 Dockerize
@@ -84,6 +82,7 @@ Mail(chimp|gun)
 Microsoft
 MySQL
 NAT
+Netplan
 Nginx
 Nuxeo
 OAuth
@@ -177,6 +176,7 @@ npm
 osquery
 osxfs
 runc
+snapshotters?
 stdin
 stdout
 subnet
