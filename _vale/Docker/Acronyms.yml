@@ -11,6 +11,7 @@ exceptions:
   - API
   - ARM
   - ASP
+  - AUFS
   - AWS
   - BIOS
   - CLI
@@ -45,6 +46,7 @@ exceptions:
   - LESS
   - LLDB
   - NET
+  - NFS
   - NOTE
   - NVDA
   - OSS
@@ -62,6 +64,7 @@ exceptions:
   - SCSS
   - SDK
   - SQL
+  - SSD
   - SSH
   - SSL
   - SVG
@@ -72,6 +75,7 @@ exceptions:
   - URI
   - URL
   - USB
+  - USD
   - UTF
   - VAT
   - WSL
