@@ -75,8 +75,6 @@ In this hands-on guide, you'll unlock the power of multi-stage builds to create 
 
     ```plaintext
     spring-boot-docker
-    ├── Dockerfile
-    ├── Dockerfile.multi
     ├── HELP.md
     ├── mvnw
     ├── mvnw.cmd
@@ -86,7 +84,7 @@ In this hands-on guide, you'll unlock the power of multi-stage builds to create 
         │   ├── java
         │   │   └── com
         │   │       └── example
-        │   │           └── springbootdocker
+        │   │           └── spring_boot_docker
         │   │               └── SpringBootDockerApplication.java
         │   └── resources
         │       ├── application.properties
@@ -96,10 +94,10 @@ In this hands-on guide, you'll unlock the power of multi-stage builds to create 
             └── java
                 └── com
                     └── example
-                        └── springbootdocker
+                        └── spring_boot_docker
                             └── SpringBootDockerApplicationTests.java
     
-    15 directories, 9 files
+    15 directories, 7 files
     ```
 
    The `src/main/java` directory contains your project's source code, the `src/test/java` directory   
