@@ -236,20 +236,21 @@ Now that you have the project, you’re ready to create the `Dockerfile`.
     You'll then see output similar to the following in the container log:
 
     ```plaintext
-    [INFO] --- spring-boot:3.3.0-M3:run (default-cli) @ spring-boot-docker ---
+    [INFO] --- spring-boot:3.3.4:run (default-cli) @ spring-boot-docker ---
     [INFO] Attaching agents: []
-     .   ____          _            __ _ _
-     /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
-     ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
-     \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
-     '  |____| .__|_| |_|_| |_\__, | / / / /
-      =========|_|==============|___/=/_/_/_/
-
-     :: Spring Boot ::             (v3.3.0-M3)
-
-     2024-04-04T15:36:47.202Z  INFO 42 --- [spring-boot-docker] [           main]       
-     c.e.s.SpringBootDockerApplication        : Starting SpringBootDockerApplication using Java    
-     21.0.2 with PID 42 (/app/target/classes started by root in /app)
+    
+         .   ____          _            __ _ _
+        /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+       ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+        \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+         '  |____| .__|_| |_|_| |_\__, | / / / /
+        =========|_|==============|___/=/_/_/_/
+    
+        :: Spring Boot ::                (v3.3.4)
+    
+    2024-09-29T23:54:07.157Z  INFO 159 --- [spring-boot-docker] [           main]
+    c.e.s.SpringBootDockerApplication        : Starting SpringBootDockerApplication using Java
+    21.0.2 with PID 159 (/app/target/classes started by root in /app)
      ….
      ```
 
