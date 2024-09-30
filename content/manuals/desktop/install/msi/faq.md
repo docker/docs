@@ -42,3 +42,35 @@ You can suppress reboots by using the `/norestart` option when launching the ins
 ```powershell
 msiexec /i "DockerDesktop.msi" /L*V ".\msi.log" /norestart
 ```
+
+### Why isn't the `docker-users` group populated when the MSI is installed with Intune or another MDM solution?
+
+It's common for MDM solutions to install applications in the context of the system account. This means that the `docker-users` group isn't populated with the user's account, as the system account doesn't have access to the user's context.
+
+As an example, you can reproduce this by running the installer with `psexec` in an elevated command prompt:
+
+```powershell
+psexec -i -s msiexec /i "DockerDesktop.msi"
+```
+The installation should complete successfully, but the `docker-users` group won't be populated.
+
+As a workaround, you can create a script that runs in the context of the user account. 
+
+The script would be responsible for creating the `docker-users` group and populating it with the correct user.
+
+Here's an example script that creates the `docker-users` group and adds the current user to it (requirements may vary depending on environment):
+
+```powershell
+$Group = "docker-users"
+$CurrentUser = [System.Security.Principal.WindowsIdentity]::GetCurrent().Name
+
+# Create the group
+New-LocalGroup -Name $Group
+
+# Add the user to the group
+Add-LocalGroupMember -Group $Group -Member $CurrentUser
+```
+
+> [!NOTE]
+>
+> After adding a new user to the `docker-users` group, the user must sign out and then sign back in for the changes to take effect.
