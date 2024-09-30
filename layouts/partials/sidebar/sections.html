@@ -48,10 +48,10 @@
       </div>
       <button @click="expanded = !expanded" class="hover:bg-gray-light-300 hover:dark:bg-gray-dark-300 rounded">
         <span :class="{ 'hidden' : expanded }" class="icon-svg {{ if $expanded }}hidden{{ end }}">
-          {{ partialCached "icon" "expand_more" "expand_more" }}
+          {{ partialCached "icon" "arrow_drop_down" "arrow_drop_down" }}
         </span>
         <span :class="{ 'hidden' : !expanded }" class="icon-svg {{ if not $expanded }}hidden{{ end }}">
-          {{ partialCached "icon" "expand_less" "expand_less" }}
+          {{ partialCached "icon" "arrow_drop_up" "arrow_drop_up" }}
         </span>
       </button>
     </div>
