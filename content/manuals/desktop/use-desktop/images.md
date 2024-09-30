@@ -95,7 +95,9 @@ When signed in, it shows you a list of images in Docker Hub organizations and re
 
 Select an organization from the drop-down to view a list of repositories for that organization.
 
-If you have enabled [Docker Scout](../../scout/_index.md) on the repositories, image analysis results appear next to the image tags.
+If you have enabled [Docker Scout](../../scout/_index.md) on the repositories,
+image analysis results (and [health scores](/manuals/scout/policy/scores.md) if
+your Docker organization is eligible) appear next to the image tags.
 
 Hovering over an image tag reveals two options:
 

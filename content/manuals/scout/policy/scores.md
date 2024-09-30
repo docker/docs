@@ -25,7 +25,10 @@ score is not visible to users outside the organization or members without
 
 ## Viewing health scores
 
-To view the health score of an image:
+{{< tabs >}}
+{{< tab name="Docker Hub" >}}
+
+To view the health score of an image in Docker Hub:
 
 1. Go to Docker Hub and sign in.
 2. Navigate to your organization's page.
@@ -34,6 +37,22 @@ In the list of repositories, you can see the health score of each repository
 based on the latest pushed tag.
 
 ![Repository health score](../images/score-badges-repolist.png)
+
+{{< /tab >}}
+{{< tab name="Docker Desktop" >}}
+
+To view the health score of an image in Docker Desktop:
+
+1. Open Docker Desktop and sign in to your Docker account.
+2. Navigate to the **Images** view and select the **Hub** tab.
+
+In the list of repositories, the **Health** column displays the scores of the
+different tags that have been pushed to Docker Hub.
+
+![Repository health score](../images/score-badges-dd.png)
+
+{{< /tab >}}
+{{< /tabs >}}
 
 The health score badge is color-coded to indicate the overall health of the
 repository:
