@@ -52,13 +52,8 @@ along with each policy that contributed to the score.
 ## Scoring system
 
 Health scores are determined by evaluating images against Docker Scout
-[policies](./_index.md). These policies align with best practices for
-the software supply chain and are recommended by Docker as foundational
-standards for images. Some examples of these policies include:
-
-- **Supply chain attestations**: Images should have supply chain attestations.
-- **No outdated base images**: Images should not use outdated base images.
-- **No AGPL v3 licenses**: Images should not contain AGPL v3-licensed packages.
+[policies](./_index.md). These policies align with best practices for the
+software supply chain.
 
 If your image repositories are already enrolled with Docker Scout, the health
 score is calculated automatically based on the policies that are enabled for
@@ -66,19 +61,21 @@ your organization. This also includes any custom policies that you have
 configured.
 
 If you're not using Docker Scout, the health scores show the compliance of your
-images with the default, [out-of-the-box policies](/manuals/scout/policy/_index.md#out-of-the-box-policies).
-You can enable Docker Scout for your organization to get a more relevant health
-score based on your specific policies.
+images with the default policies, a set of supply chain rules recommended by
+Docker as foundational standards for images. You can enable Docker Scout for
+your organization and edit the policy configurations to get a more relevant
+health score based on your specific policies.
 
 ### Scoring process
 
-Each policy is assigned a points value. If the image is compliant with a
-policy, it is awarded the points value for that policy. The health score of an
-image is calculated based on the percentage of points achieved relative to the
-total possible points.
+Each policy is assigned a points value based on its
+[type](/manuals/scout/policy/_index.md#policy-types). If the image is compliant
+with a policy, it is awarded the points value for that policy type. The health
+score of an image is calculated based on the percentage of points achieved
+relative to the total possible points.
 
 1. Policy compliance is evaluated for the image.
-2. Points are awarded based on adherence to these policies.
+2. Points are awarded based on compliance with policies.
 3. The points achieved percentage is calculated:
 
    ```text
@@ -114,18 +111,19 @@ If you see an `N/A` score, consider the following:
 
 ### Policy weights
 
-The policies that influence the score, and their respective weights, are as follows:
+Different policy types carry varying weights, which impact the score assigned
+to an image during evaluation, as shown in the following table.
 
-| Policy                                                                                                                     | Points |
-| -------------------------------------------------------------------------------------------------------------------------- | ------ |
-| [No fixable critical or high vulnerabilities](/manuals/scout/policy/_index.md#no-fixable-critical-or-high-vulnerabilities) | 20     |
-| [No high-profile vulnerabilities](/manuals/scout/policy/_index.md#no-high-profile-vulnerabilities)                         | 20     |
-| [Supply chain attestations](/manuals/scout/policy/_index.md#supply-chain-attestations)                                     | 15     |
-| [No unapproved base images](/manuals/scout/policy/_index.md#no-unapproved-base-images)                                     | 15     |
-| [No outdated base images](/manuals/scout/policy/_index.md#no-outdated-base-images)                                         | 10     |
-| [SonarQube quality gates passed](/manuals/scout/policy/_index.md#sonarqube-quality-gates-passed) \*                        | 10     |
-| [Default non-root user](/manuals/scout/policy/_index.md#default-non-root-user)                                             | 5      |
-| [No AGPL v3 licenses](/manuals/scout/policy/_index.md#no-agpl-v3-licenses)                                                 | 5      |
+| Policy type                                                                                  | Points |
+| -------------------------------------------------------------------------------------------- | ------ |
+| [Severity-Based Vulnerability](/manuals/scout/policy/_index.md#severity-based-vulnerability) | 20     |
+| [High-Profile Vulnerabilities](/manuals/scout/policy/_index.md#high-profile-vulnerabilities) | 20     |
+| [Supply Chain Attestations](/manuals/scout/policy/_index.md#supply-chain-attestations)       | 15     |
+| [Approved Base Images](/manuals/scout/policy/_index.md#approved-base-images)                 | 15     |
+| [Up-to-Date Base Images](/manuals/scout/policy/_index.md#up-to-date-base-images)             | 10     |
+| [SonarQube Quality Gates](/manuals/scout/policy/_index.md#sonarqube-quality-gates) \*        | 10     |
+| [Default Non-Root User](/manuals/scout/policy/_index.md#default-non-root-user)               | 5      |
+| [Compliant Licenses](/manuals/scout/policy/_index.md#compliant-licenses)                     | 5      |
 
 \* _This policy is not enabled by default and must be configured by the user._
 
@@ -143,12 +141,13 @@ view of the repository's security status.
 
 ### Example
 
-For an image with a total possible score of 90 points:
+For an image with a total possible score of 100 points:
 
-- If the image only deviates from one policy (for example, the Copyleft
-  Licenses policy), it might score 85 out of 90, resulting in a score of A.
-- If the image has fixable CVEs and other issues, it might score 65 out of 90,
-  resulting in a score of B.
+- If the image only deviates from one policy, worth 5 points, its score will be
+  95 out of 100. Since this score is above the 90th percentile, the image
+  receives an A health score.
+- If the image is non-compliant with more policies and scores 65 out of 100, it
+  receives a C health score, reflecting its lower compliance.
 
 ## Improving your health score
 
