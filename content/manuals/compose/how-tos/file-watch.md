@@ -22,7 +22,7 @@ aliases:
 
 You don't need to switch on `watch` for all services in a Compose project. In some instances, only part of the project, for example the Javascript frontend, might be suitable for automatic updates.
 
-Compose Watch is designed to work with services built from local source code (using the `build` attribute) and will not track changes for services that rely on pre-built images specified by the `image` attribute.
+Compose Watch is designed to work with services built from local source code using the `build` attribute. It doesn't track changes for services that rely on pre-built images specified by the `image` attribute.
 
 ## Compose Watch versus bind mounts
 
