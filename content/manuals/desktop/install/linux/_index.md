@@ -6,7 +6,7 @@ keywords: linux, docker linux install, docker linux, linux docker installation, 
   linux, how to install docker on linux, linux vs docker engine, switch docker contexts
 title: Install Docker Desktop on Linux
 linkTitle: Linux
-weight: 60
+weight: 50
 aliases:
 - /desktop/linux/install/
 - /desktop/install/linux-install/

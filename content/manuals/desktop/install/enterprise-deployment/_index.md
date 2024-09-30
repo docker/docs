@@ -1,7 +1,7 @@
 ---
 title: Enterprise deployment
 linkTitle: Enterprise deployment
-weight: 50
+weight: 60
 description: If you're an IT admin, learn how to deploy Docker Desktop with Microsoft installer
 keywords: msi, docker desktop, windows, installation
 build:
