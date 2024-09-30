@@ -29,7 +29,7 @@ In this guide, you'll learn how to get started with the following:
 Before you start to onboard your organization, ensure that you:
 - Have a Docker Team or Business subscription. See [Pricing & Subscriptions](https://www.docker.com/pricing/) for details.
 
-  > **Note**
+  > [!NOTE]
   >
   > When purchasing a self-serve subscription, the on-screen instructions guide you through creating an organization. If you have purchased a subscription through Docker Sales and you have not yet created an organization, see [Create an organization](/admin/organization/orgs).
 
