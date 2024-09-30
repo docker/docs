@@ -4,7 +4,7 @@
 # ALPINE_VERSION sets the Alpine Linux version for all Alpine stages
 ARG ALPINE_VERSION=3.20
 # GO_VERSION sets the Go version for the base stage
-ARG GO_VERSION=1.22
+ARG GO_VERSION=1.23
 # HTML_TEST_VERSION sets the wjdp/htmltest version for HTML testing
 ARG HTMLTEST_VERSION=0.17.0
 
@@ -21,7 +21,7 @@ RUN npm install
 
 # hugo downloads and extracts the Hugo binary
 FROM base AS hugo
-ARG HUGO_VERSION=0.132.0
+ARG HUGO_VERSION=0.134.3
 ARG TARGETARCH
 WORKDIR /tmp/hugo
 RUN wget -O "hugo.tar.gz" "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-${TARGETARCH}.tar.gz"
@@ -45,7 +45,7 @@ ARG DOCS_URL
 RUN hugo --gc --minify -d /out -e $HUGO_ENV -b $DOCS_URL
 
 # lint lints markdown files
-FROM davidanson/markdownlint-cli2:v0.13.0 AS lint
+FROM davidanson/markdownlint-cli2:v0.14.0 AS lint
 USER root
 RUN --mount=type=bind,target=. \
     /usr/local/bin/markdownlint-cli2 \
@@ -123,7 +123,7 @@ EOT
 
 # pagefind installs the Pagefind runtime
 FROM base AS pagefind
-ARG PAGEFIND_VERSION=1.1.0
+ARG PAGEFIND_VERSION=1.1.1
 COPY --from=build /out ./public
 RUN --mount=type=bind,src=pagefind.yml,target=pagefind.yml \
     npx pagefind@v${PAGEFIND_VERSION} --output-path "/pagefind"

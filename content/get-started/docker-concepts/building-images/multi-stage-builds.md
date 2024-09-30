@@ -75,8 +75,6 @@ In this hands-on guide, you'll unlock the power of multi-stage builds to create 
 
     ```plaintext
     spring-boot-docker
-    ├── Dockerfile
-    ├── Dockerfile.multi
     ├── HELP.md
     ├── mvnw
     ├── mvnw.cmd
@@ -86,7 +84,7 @@ In this hands-on guide, you'll unlock the power of multi-stage builds to create 
         │   ├── java
         │   │   └── com
         │   │       └── example
-        │   │           └── springbootdocker
+        │   │           └── spring_boot_docker
         │   │               └── SpringBootDockerApplication.java
         │   └── resources
         │       ├── application.properties
@@ -96,10 +94,10 @@ In this hands-on guide, you'll unlock the power of multi-stage builds to create 
             └── java
                 └── com
                     └── example
-                        └── springbootdocker
+                        └── spring_boot_docker
                             └── SpringBootDockerApplicationTests.java
     
-    15 directories, 9 files
+    15 directories, 7 files
     ```
 
    The `src/main/java` directory contains your project's source code, the `src/test/java` directory   
@@ -112,12 +110,12 @@ In this hands-on guide, you'll unlock the power of multi-stage builds to create 
 4. Create a RESTful web service that displays "Hello World!". 
 
     
-    Under the `src/main/java/com/example/springbootdocker/` directory, you can modify your  
+    Under the `src/main/java/com/example/spring_boot_docker/` directory, you can modify your  
     `SpringBootDockerApplication.java` file with the following content:
 
 
     ```java
-    package com.example.springbootdocker;
+    package com.example.spring_boot_docker;
 
     import org.springframework.boot.SpringApplication;
     import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -141,7 +139,7 @@ In this hands-on guide, you'll unlock the power of multi-stage builds to create 
     }
     ```
 
-    The `SpringbootDockerApplication.java` file starts by declaring your `com.example.springbootdocker` package and importing necessary Spring frameworks. This Java file creates a simple Spring Boot web application that responds with "Hello World" when a user visits its homepage. 
+    The `SpringbootDockerApplication.java` file starts by declaring your `com.example.spring_boot_docker` package and importing necessary Spring frameworks. This Java file creates a simple Spring Boot web application that responds with "Hello World" when a user visits its homepage. 
 
 
 ### Create the Dockerfile
@@ -238,20 +236,21 @@ Now that you have the project, you’re ready to create the `Dockerfile`.
     You'll then see output similar to the following in the container log:
 
     ```plaintext
-    [INFO] --- spring-boot:3.3.0-M3:run (default-cli) @ spring-boot-docker ---
+    [INFO] --- spring-boot:3.3.4:run (default-cli) @ spring-boot-docker ---
     [INFO] Attaching agents: []
-     .   ____          _            __ _ _
-     /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
-     ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
-     \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
-     '  |____| .__|_| |_|_| |_\__, | / / / /
-      =========|_|==============|___/=/_/_/_/
-
-     :: Spring Boot ::             (v3.3.0-M3)
-
-     2024-04-04T15:36:47.202Z  INFO 42 --- [spring-boot-docker] [           main]       
-     c.e.s.SpringBootDockerApplication        : Starting SpringBootDockerApplication using Java    
-     21.0.2 with PID 42 (/app/target/classes started by root in /app)
+    
+         .   ____          _            __ _ _
+        /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+       ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+        \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+         '  |____| .__|_| |_|_| |_\__, | / / / /
+        =========|_|==============|___/=/_/_/_/
+    
+        :: Spring Boot ::                (v3.3.4)
+    
+    2024-09-29T23:54:07.157Z  INFO 159 --- [spring-boot-docker] [           main]
+    c.e.s.SpringBootDockerApplication        : Starting SpringBootDockerApplication using Java
+    21.0.2 with PID 159 (/app/target/classes started by root in /app)
      ….
      ```
 
