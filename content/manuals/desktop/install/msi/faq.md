@@ -73,4 +73,4 @@ Add-LocalGroupMember -Group $Group -Member $CurrentUser
 
 > [!NOTE]
 >
-> After adding a new user to the `docker-users` group, they must log out and log back in for the changes to take effect.
+> After adding a new user to the `docker-users` group, the user must sign out and then sign back in for the changes to take effect.
