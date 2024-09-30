@@ -153,9 +153,9 @@ The list includes the following vulnerabilities:
 You can configure the CVEs included in this list by creating a custom policy.
 Custom configuration options include:
 
-- **CVEs to avoid**: Specify the CVEs that you want to avoid in your artifacts.
+- **Excluded CVEs**: Specify the CVEs that you want this policy to ignore.
 
-  Default: `CVE-2014-0160`, `CVE-2021-44228`, `CVE-2023-38545`, `CVE-2023-44487`, `CVE-2024-3094`, `CVE-2024-47176`, `CVE-2024-47076`, `CVE-2024-47175`, `CVE-2024-47177`
+  Default: `[]` (none of the high-profile CVEs are ignored)
 
 - **CISA KEV**: Enable tracking of vulnerabilities from CISA's Known Exploited Vulnerabilities (KEV) catalog
 
