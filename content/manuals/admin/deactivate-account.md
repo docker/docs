@@ -8,7 +8,7 @@ aliases:
 
 You can deactivate an account at any time. This section describes the prerequisites and steps to deactivate an organization account. For information on deactivating a user account, see [Deactivate a user account](../accounts/deactivate-user-account.md).
 
->**Warning**
+>[!WARNING]
 >
 > All Docker products and services that use your Docker account or organization account will be inaccessible after deactivating your account.
 

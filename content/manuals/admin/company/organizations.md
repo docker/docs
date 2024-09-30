@@ -55,13 +55,13 @@ When you have a [self-serve](../../subscription/core-subscription/details.md#sel
 
 ## Add organizations to a company
 
->**Important**
+>[!IMPORTANT]
 >
 > You must be a company owner to add an organization to a company. You must also be an organization owner of the organization you want to add.
 
 There is no limit to the number of organizations you can have under a company layer. All organizations must have a Business subscription.
 
->**Important**
+>[!IMPORTANT]
 >
 > Once you add an organization to a company, you can't remove it from the company.
 
