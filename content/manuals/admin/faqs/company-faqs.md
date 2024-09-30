@@ -64,7 +64,7 @@ A company name must be unique to that of its child organization. If a child orga
 
 ### How does a company owner add an organization to the company?
 
-You can add organizations to a company in the [Admin Console](../../admin/company/organizations.md#add-organizations-to-a-company.md) or [Docker Hub](../../admin/company/new-company.md#add-organizations-to-a-company.md).
+You can add organizations to a company in the [Admin Console](../../admin/company/organizations.md#add-organizations-to-a-company.md).
 
 ### How does a company owner manage SSO/SCIM settings from a company?
 

@@ -1,11 +1,9 @@
 {{ $product_link := "[Docker Hub](https://hub.docker.com)" }}
-{{ $sso_navigation := `Navigate to the SSO settings page for your organization or company.
-   - Organization: Select **Organizations**, your organization, **Settings**, and then **Security**.
-   - Company: Select **Organizations**, your company, and then **Settings**.` }}
+{{ $sso_navigation := `Navigate to the SSO settings page for your organization. Select **Organizations**, your organization, **Settings**, and then **Security**.` }}
 
 {{ if eq (.Get "product") "admin" }}
   {{ $product_link = "the [Admin Console](https://admin.docker.com)" }}
-  {{ $sso_navigation = "Select your organization or company in the left navigation drop-down menu, and then select **SSO and SCIM.**" }}
+  {{ $sso_navigation = "Select your organization or company in the left navigation drop-down menu, and then select **SSO and SCIM**. Note that when an organization is part of a company, you must select the company and configure SSO for that organization at the company level. Each organization can have its own SSO configuration and domain, but it must be configured at the company level." }}
 {{ end }}
 
 > [!IMPORTANT]
@@ -21,14 +19,6 @@ After your domain is verified, create an SSO connection.
 
 1. Sign in to {{ $product_link }}.
 2. {{ $sso_navigation }}
-
-   > [!NOTE]
-   >
-   > When an organization is part of a company, you must select the company and
-   > configure SSO for that organization at the company level. Each organization
-   > can have its own SSO configuration and domain, but it must be configured at
-   > the company level.
-
 3. In the SSO connections table select **Create Connection**, and create a name for the connection.
 
    > [!NOTE]

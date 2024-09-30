@@ -1,25 +1,14 @@
 {{ $product_link := "[Docker Hub](https://hub.docker.com)" }}
-{{ $domain_navigation := `Navigate to the domain settings page for your organization or company.
-
-   - Organization: Select **Organizations**, your organization, **Settings**, and then **Security**.
-   - Company: Select **Organizations**, your company, and then **Settings**.` }}
+{{ $domain_navigation := `Navigate to the domain settings page for your organization. Select **Organizations**, your organization, **Settings**, and then **Security**.` }}
 
 {{ if eq (.Get "product") "admin" }}
-  {{ $product_link = "the [Admin Console](https://admin.docker.com)" }}
-  {{ $domain_navigation = "Select your organization or company in the left navigation drop-down menu, and then select **Domain management**." }}
+{{ $product_link = "the [Admin Console](https://admin.docker.com)" }}
+{{ $domain_navigation = "Select your organization or company in the left navigation drop-down menu, and then select **Domain management**. Note that when an organization is part of a company, you must select the company and configure the domain for that organization at the company level. Each organization in a company can have its own domain, but it must be configured at the company level." }}
 {{ end }}
 
 
 1. Sign in to {{ $product_link }}.
 2. {{ $domain_navigation }}
-
-   > [!NOTE]
-   >
-   > When an organization is part of a company, you must select the company and
-   > configure the domain for that organization at the company level. Each
-   > organization in a company can have its own domain, but it must be
-   > configured at the company level.
-
 3. Select **Add a domain**.
 4. Continue with the on-screen instructions to get a verification code for
    your domain as a **TXT Record Value**.
