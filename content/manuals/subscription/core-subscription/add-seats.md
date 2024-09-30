@@ -19,9 +19,9 @@ When you add seats to your subscription in the middle of your billing cycle, you
 >
 > If you have a [sales-assisted Docker Business subscription](details.md#sales-assisted), contact your account manager to add seats to your subscription. 
 
-1. Sign in to your [Docker Hub](https://hub.docker.com) account.
+1. Sign in to [Docker Home](https://app.docker.com).
 
-2. Select **Organizations** and then choose your organization.
+2. Select your **avatar** to open the drop-down menu.
 
 3. Select the **Billing** tab and then **Add seats**.
 
