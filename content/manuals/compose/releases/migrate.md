@@ -124,7 +124,7 @@ Additionally, a new [docker/compose-bin image on Docker Hub](https://hub.docker.
 
 Yes. You can still download and install Compose V1 packages, but you won't get support from Docker if anything breaks.
 
->**Warning**
+>[!WARNING]
 >
 > The final Compose V1 release, version 1.29.2, was May 10, 2021. These packages haven't received any security updates since then. Use at your own risk. 
 
