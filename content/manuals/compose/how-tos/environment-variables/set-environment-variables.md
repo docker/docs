@@ -12,7 +12,7 @@ aliases:
 
 A container's environment is not set until there's an explicit entry in the service configuration to make this happen. With Compose, there are two ways you can set environment variables in your containers with your Compose file. 
 
->**Tip**
+>[!TIP]
 >
 > Don't use environment variables to pass sensitive information, such as passwords, in to your containers. Use [secrets](../use-secrets.md) instead.
 
