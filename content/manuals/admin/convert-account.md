@@ -45,6 +45,8 @@ Consider the following effects of converting your account:
 
 - The user account that you add as the first owner will have full administrative access to configure and manage the organization.
 
+- Converting a user account to an organization will delete all of the user's personal access tokens. See [Create an access token](https://docs.docker.com/security/for-developers/access-tokens/#create-an-access-token) for steps on creating personal access tokens after converting the user account.
+
 ## Convert an account into an organization
 
 1. Ensure you have removed your user account from any company or teams or organizations. Also make sure that you have a new Docker ID before you convert an account. See the [Prerequisites](#prerequisites) section for details.
