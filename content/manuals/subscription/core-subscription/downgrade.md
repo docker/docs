@@ -16,7 +16,7 @@ When you downgrade your subscription, access to paid features is available until
 
 > [!IMPORTANT]
 >
-> If you downgrade your personal account from a Pro subscription to a Personal subscription, note that [Personal subscriptions](details.md#docker-personal) don't include collaborators for private repositories, and only 1 private repository is included. When you downgrade, all collaborators will be removed and additional private repositories are locked.
+> If you downgrade your personal account from a Pro subscription to a Personal subscription, note that [Personal subscriptions](details.md#docker-personal) don't include collaborators for private repositories, and only one private repository is included. When you downgrade, all collaborators will be removed and additional private repositories are locked.
 
 ## Before you downgrade
 
@@ -34,21 +34,21 @@ If you want to downgrade a Docker Business subscription and your organization us
 
 >[!IMPORTANT]
 >
->If you have a [sales-assisted Docker Business subscription](details.md#sales-assisted), contact your account manager to downgrade your subscription. 
+>If you have a [sales-assisted Docker Business subscription](details.md#sales-assisted), contact your account manager to downgrade your subscription.
 
-1. Sign in to your [Docker Hub](https://hub.docker.com) account.
+1. Sign in to [Docker Home](https://app.docker.com).
 
-2. Select your avatar in the top-right corner and from the drop-down menu select **Billing**.
+2. Select your **avatar** and from the drop-down menu select **Billing**.
 
-3. Choose either your personal account or an organization to downgrade. 
+3. Choose either your personal account or an organization to downgrade.
 
 4. In the **Plan** section, select **Change plan**.
 
-5. On the **Change Plan** page, select the plan you'd like to downgrade to. 
+5. On the **Change Plan** page, select the plan you'd like to downgrade to.
 
 6. Review the downgrade warning and select **Continue**.
 
-7. Optional: Select a reason for your downgrade from the list and select **Send**.
+7. Optional. Select a reason for your downgrade from the list and select **Send**.
     The **Billing** page displays a confirmation of the downgrade with details on when the downgrade changes take effect.
 
 If you want to cancel the downgrade, select **Cancel the downgrade** on the **Plan** tab.

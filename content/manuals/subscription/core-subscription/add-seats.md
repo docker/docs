@@ -17,19 +17,19 @@ When you add seats to your subscription in the middle of your billing cycle, you
 
 > [!IMPORTANT]
 >
-> If you have a [sales-assisted Docker Business subscription](details.md#sales-assisted), contact your account manager to add seats to your subscription. 
+> If you have a [sales-assisted Docker Business subscription](details.md#sales-assisted), contact your account manager to add seats to your subscription.
 
-1. Sign in to your [Docker Hub](https://hub.docker.com) account.
+1. Sign in to [Docker Home](https://app.docker.com).
 
-2. Select **Organizations** and then choose your organization.
+2. Select your **avatar** to open the drop-down menu.
 
-3. Select the **Billing** tab and then **Add seats**.
+3. Select the **Billing** tab from the drop-down menu and then **Add seats**.
 
-4. Specify the number of seats you want to add. 
+4. Specify the number of seats you want to add.
     Your prorated fee is automatically calculated.
 
-5. Select **Purchase** to confirm. 
-    The **Billing** tab displays the new number of seats. 
+5. Select **Purchase** to confirm.
+    The **Billing** tab displays the new number of seats.
 
 6. Navigate to the **Members** tab to add new members. For more information, see [Manage organization members](../../admin/organization/members.md).
 
