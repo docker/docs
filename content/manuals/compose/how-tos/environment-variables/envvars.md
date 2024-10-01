@@ -166,9 +166,7 @@ When enabled, Compose displays a navigation menu where you can choose to open th
   * `false` or `0`, to disable.
 * Defaults to: `1` if you obtained Docker Compose through Docker Desktop, otherwise default is `0`.
 
-> [!NOTE]
->
-> Available in Docker Compose version 2.26.0 and later, and Docker Desktop version 4.29 and later
+> Available in Docker Compose version 2.26.0 and later, and Docker Desktop version 4.29 and later.
 
 ### COMPOSE\_EXPERIMENTAL
 
@@ -179,9 +177,7 @@ This is an opt-out variable. When turned off it deactivates the experimental fea
   * `false` or `0`, to disable.
 * Defaults to: `1`.
 
-> [!NOTE]
->
-> Available in Docker Compose version 2.26.0 and later, and Docker Desktop version 4.29 and later
+> Available in Docker Compose version 2.26.0 and later, and Docker Desktop version 4.29 and later.
 
 ## Unsupported in Compose V2
 
