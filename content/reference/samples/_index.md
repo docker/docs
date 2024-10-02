@@ -1,5 +1,5 @@
 ---
-linktitle: Samples
+linkTitle: Samples
 title: Samples overview
 description: Learn how to containerize different types of services by walking through
   Official Docker samples.
