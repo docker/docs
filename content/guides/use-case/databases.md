@@ -675,4 +675,4 @@ Related information:
 - [Dockerfile reference](/reference/dockerfile/)
 - [Compose file reference](/reference/compose-file/)
 - [CLI reference](/reference/cli/docker/)
-- [Database samples](../../samples/_index.md#databases)
+- [Database samples](../../reference/samples/_index.md#databases)
