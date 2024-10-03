@@ -5,7 +5,8 @@ weight: 20
 keywords: R, local, development
 description: Learn how to develop your R application locally.
 aliases:
-- /language/r/develop/
+  - /language/r/develop/
+  - /guides/language/r/develop/
 ---
 
 ## Prerequisites
@@ -42,7 +43,7 @@ To try the connection between the Shiny application and the local database you h
 
 You can use containers to set up local services, like a database. In this section, you'll update the `compose.yaml` file to define a database service and a volume to persist data.
 
-In the cloned repository's directory, open the `compose.yaml` file in an IDE or text editor. 
+In the cloned repository's directory, open the `compose.yaml` file in an IDE or text editor.
 
 In the `compose.yaml` file, you need to un-comment the properties for configuring the database. You must also mount the database password file and set an environment variable on the `shiny-app` service pointing to the location of the file in the container.
 
@@ -77,7 +78,7 @@ services:
     expose:
       - 5432
     healthcheck:
-      test: [ "CMD", "pg_isready" ]
+      test: ["CMD", "pg_isready"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -140,7 +141,6 @@ You should see a pop-up message:
 DB CONNECTED
 ```
 
-
 Press `ctrl+c` in the terminal to stop your application.
 
 ## Automatically update services
@@ -185,7 +185,7 @@ services:
     expose:
       - 5432
     healthcheck:
-      test: [ "CMD", "pg_isready" ]
+      test: ["CMD", "pg_isready"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -212,9 +212,10 @@ In this section, you took a look at setting up your Compose file to add a local
 database and persist data. You also learned how to use Compose Watch to automatically rebuild and run your container when you update your code.
 
 Related information:
- - [Compose file reference](/reference/compose-file/)
- - [Compose file watch](/manuals/compose/how-tos/file-watch.md)
- - [Multi-stage builds](/manuals/build/building/multi-stage.md)
+
+- [Compose file reference](/reference/compose-file/)
+- [Compose file watch](/manuals/compose/how-tos/file-watch.md)
+- [Multi-stage builds](/manuals/build/building/multi-stage.md)
 
 ## Next steps
 

@@ -11,6 +11,8 @@ summary: |
 languages: [python]
 levels: [beginner]
 subjects: [data-science]
+aliases:
+  - /guides/use-case/jupyter/
 params:
   time: 20 minutes
 ---
@@ -53,6 +55,7 @@ In a terminal, run the following command to run your JupyterLab container.
 ```console
 $ docker run --rm -p 8889:8888 quay.io/jupyter/base-notebook start-notebook.py --NotebookApp.token='my-token'
 ```
+
 The following are the notable parts of the command:
 
 - `-p 8889:8888`: Maps port 8889 from the host to port 8888 on the container.
@@ -158,6 +161,7 @@ For this example, you'll use the [Iris Dataset](https://scikit-learn.org/stable/
 4. Select the play button to run the code.
 
 5. In the notebook, specify the following code.
+
    ```python
    from sklearn import datasets
 
@@ -171,6 +175,7 @@ For this example, you'll use the [Iris Dataset](https://scikit-learn.org/stable/
       scatter.legend_elements()[0], iris.target_names, loc="lower right", title="Classes"
    )
    ```
+
 6. Select the play button to run the code. You should see a scatter plot of the
    Iris dataset.
 
@@ -242,7 +247,7 @@ located, and then run the following command.
 $ docker build -t my-jupyter-image .
 ```
 
-The command  builds a Docker image from your `Dockerfile` and a context. The
+The command builds a Docker image from your `Dockerfile` and a context. The
 `-t` option specifies the name and tag of the image, in this case
 `my-jupyter-image`. The `.` indicates that the current directory is the context,
 which means that the files in that directory can be used in the image creation
@@ -384,6 +389,7 @@ $ docker run --rm -p 8889:8888 YOUR-USER-NAME/my-jupyer-image start-notebook.py 
 This example uses the Docker Desktop [Volumes Backup & Share](https://hub.docker.com/extensions/docker/volumes-backup-extension) extension. Alternatively, in the CLI you can [back up the volume](/engine/storage/volumes/#back-up-a-volume) and then [push it using the ORAS CLI](/manuals/docker-hub/oci-artifacts.md#push-a-volume).
 
 1. Install the Volumes Backup & Share extension.
+
    1. Open the Docker Dashboard and select **Extensions**.
    2. Search for `Volumes Backup & Share`.
    3. In the search results select **Install** for the extension.

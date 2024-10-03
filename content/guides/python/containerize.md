@@ -8,12 +8,13 @@ aliases:
   - /language/python/build-images/
   - /language/python/run-containers/
   - /language/python/containerize/
+  - /guides/language/python/containerize/
 ---
 
 ## Prerequisites
 
-* You have installed the latest version of [Docker Desktop](/get-started/get-docker.md).
-* You have a [git client](https://git-scm.com/downloads). The examples in this section use a command-line based git client, but you can use any client.
+- You have installed the latest version of [Docker Desktop](/get-started/get-docker.md).
+- You have a [git client](https://git-scm.com/downloads). The examples in this section use a command-line based git client, but you can use any client.
 
 ## Overview
 
@@ -241,6 +242,7 @@ Create a file named `.dockerignore` with the following contents.
 LICENSE
 README.md
 ```
+
 Create a file named `.gitignore` with the following contents.
 
 ```text {collapse=true,title=".gitignore"}
@@ -318,10 +320,11 @@ directory.
 ```
 
 To learn more about the files, see the following:
- - [Dockerfile](/reference/dockerfile.md)
- - [.dockerignore](/reference/dockerfile.md#dockerignore-file)
- - [.gitignore](https://git-scm.com/docs/gitignore)
- - [compose.yaml](/reference/compose-file/_index.md)
+
+- [Dockerfile](/reference/dockerfile.md)
+- [.dockerignore](/reference/dockerfile.md#dockerignore-file)
+- [.gitignore](https://git-scm.com/docs/gitignore)
+- [compose.yaml](/reference/compose-file/_index.md)
 
 ## Run the application
 
@@ -367,7 +370,8 @@ In this section, you learned how you can containerize and run your Python
 application using Docker.
 
 Related information:
- - [Docker Compose overview](/manuals/compose/_index.md)
+
+- [Docker Compose overview](/manuals/compose/_index.md)
 
 ## Next steps
 

@@ -8,12 +8,13 @@ aliases:
   - /language/ruby/build-images/
   - /language/ruby/run-containers/
   - /language/ruby/containerize/
+  - /guides/language/ruby/containerize/
 ---
 
 ## Prerequisites
 
-* You have installed the latest version of [Docker Desktop](/get-started/get-docker.md).
-* You have a [Git client](https://git-scm.com/downloads). The examples in this section show the Git CLI, but you can use any client.
+- You have installed the latest version of [Docker Desktop](/get-started/get-docker.md).
+- You have a [Git client](https://git-scm.com/downloads). The examples in this section show the Git CLI, but you can use any client.
 
 ## Overview
 
@@ -335,16 +336,15 @@ build-iPhoneSimulator/
 You should now have the following three files in your `docker-ruby-on-rails`
 directory.
 
-
 - .dockerignore
 - compose.yaml
 - Dockerfile
 
-
 To learn more about the files, see the following:
- - [Dockerfile](/reference/dockerfile.md)
- - [.dockerignore](/reference/dockerfile.md#dockerignore-file)
- - [compose.yaml](/reference/compose-file/_index.md)
+
+- [Dockerfile](/reference/dockerfile.md)
+- [.dockerignore](/reference/dockerfile.md#dockerignore-file)
+- [compose.yaml](/reference/compose-file/_index.md)
 
 ## Run the application
 
@@ -388,7 +388,8 @@ In this section, you learned how you can containerize and run your Ruby
 application using Docker.
 
 Related information:
- - [Docker Compose overview](/manuals/compose/_index.md)
+
+- [Docker Compose overview](/manuals/compose/_index.md)
 
 ## Next steps
 

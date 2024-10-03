@@ -5,9 +5,10 @@ weight: 10
 keywords: java, containerize, initialize, maven, build
 description: Learn how to containerize a Java application.
 aliases:
- - /language/java/build-images/
- - /language/java/run-containers/
- - /language/java/containerize/
+  - /language/java/build-images/
+  - /language/java/run-containers/
+  - /language/java/containerize/
+  - /guides/language/java/containerize/
 ---
 
 ## Prerequisites
@@ -15,6 +16,7 @@ aliases:
 - You have installed the latest version of [Docker Desktop](/get-started/get-docker.md).
   Docker adds new features regularly and some parts of this guide may
   work only with the latest version of Docker Desktop.
+
 * You have a [Git client](https://git-scm.com/downloads). The examples in this
   section use a command-line based Git client, but you can use any client.
 
@@ -76,12 +78,11 @@ exists, so `docker init` overwrites that file rather than creating a new
 directory. Both names are supported, but Compose prefers the canonical
 `compose.yaml`.
 
-
 {{< /tab >}}
 {{< tab name="Manually create assets" >}}
 
 If you don't have Docker Desktop installed or prefer creating the assets
-manually, you can create the following files in your project directory. 
+manually, you can create the following files in your project directory.
 
 Create a file named `Dockerfile` with the following contents.
 
@@ -198,7 +199,6 @@ services:
       context: .
     ports:
       - 8080:8080
-
 # The commented out section below is an example of how to define a PostgreSQL
 # database that your application can use. `depends_on` tells Docker Compose to
 # start the database before your application. The `db-data` volume persists the
@@ -231,7 +231,6 @@ services:
 # secrets:
 #   db-password:
 #     file: db/password.txt
-
 
 ```
 
@@ -326,7 +325,8 @@ In this section, you learned how you can containerize and run a Java
 application using Docker.
 
 Related information:
- - [docker init reference](/reference/cli/docker/init/)
+
+- [docker init reference](/reference/cli/docker/init/)
 
 ## Next steps
 

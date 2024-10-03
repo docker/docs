@@ -5,7 +5,8 @@ weight: 40
 keywords: ci/cd, github actions, node.js, node
 description: Learn how to configure CI/CD using GitHub Actions for your Node.js application.
 aliases:
-- /language/nodejs/configure-ci-cd/
+  - /language/nodejs/configure-ci-cd/
+  - /guides/language/nodejs/configure-ci-cd/
 ---
 
 ## Prerequisites
@@ -69,33 +70,29 @@ to Docker Hub.
 
    ```yaml
    name: ci
-   
+
    on:
      push:
        branches:
          - main
-   
+
    jobs:
      build:
        runs-on: ubuntu-latest
        steps:
-         -
-           name: Login to Docker Hub
+         - name: Login to Docker Hub
            uses: docker/login-action@v3
            with:
              username: ${{ vars.DOCKER_USERNAME }}
              password: ${{ secrets.DOCKERHUB_TOKEN }}
-         -
-           name: Set up Docker Buildx
+         - name: Set up Docker Buildx
            uses: docker/setup-buildx-action@v3
-         -
-           name: Build and test
+         - name: Build and test
            uses: docker/build-push-action@v6
            with:
              target: test
              load: true
-         -
-           name: Build and push
+         - name: Build and push
            uses: docker/build-push-action@v6
            with:
              platforms: linux/amd64,linux/arm64/v8
@@ -103,7 +100,7 @@ to Docker Hub.
              target: prod
              tags: ${{ vars.DOCKER_USERNAME }}/${{ github.event.repository.name }}:latest
    ```
-   
+
    For more information about the YAML syntax for `docker/build-push-action`,
    refer to the [GitHub Action README](https://github.com/docker/build-push-action/blob/master/README.md).
 
@@ -130,8 +127,9 @@ Save the workflow file and run the job.
 In this section, you learned how to set up a GitHub Actions workflow for your Node.js application.
 
 Related information:
- - [Introduction to GitHub Actions](/manuals/build/ci/github-actions/_index.md)
- - [Workflow syntax for GitHub Actions](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions)
+
+- [Introduction to GitHub Actions](/manuals/build/ci/github-actions/_index.md)
+- [Workflow syntax for GitHub Actions](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions)
 
 ## Next steps
 

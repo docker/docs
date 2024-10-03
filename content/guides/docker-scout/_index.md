@@ -10,6 +10,8 @@ description: |
   your development workflow.
 levels: [Beginner]
 products: [scout]
+aliases:
+  - /learning-paths/docker-scout/
 params:
   featured: true
   image: images/learning-paths/scout.png

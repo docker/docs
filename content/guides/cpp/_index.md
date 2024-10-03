@@ -10,7 +10,8 @@ summary: |
 toc_min: 1
 toc_max: 2
 aliases:
-- /language/cpp/
+  - /language/cpp/
+  - /guides/language/cpp/
 languages: [cpp]
 levels: [beginner]
 params:
@@ -23,10 +24,10 @@ The C++ getting started guide teaches you how to create a containerized C++ appl
 >
 > Docker would like to thank [Pradumna Saraf](https://twitter.com/pradumna_saraf) for his contribution to this guide.
 
-* Containerize and run a C++ application
-* Set up a local environment to develop a C++ application using containers
-* Configure a CI/CD pipeline for a containerized C++ application using GitHub Actions
-* Deploy your containerized application locally to Kubernetes to test and debug your deployment
+- Containerize and run a C++ application
+- Set up a local environment to develop a C++ application using containers
+- Configure a CI/CD pipeline for a containerized C++ application using GitHub Actions
+- Deploy your containerized application locally to Kubernetes to test and debug your deployment
 
 After completing the C++ getting started modules, you should be able to containerize your own C++ application based on the examples and instructions provided in this guide.
 

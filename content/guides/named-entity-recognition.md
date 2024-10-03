@@ -11,6 +11,8 @@ summary: |
 subjects: [ai]
 languages: [python]
 levels: [beginner]
+aliases:
+  - /guides/use-case/nlp/named-entity-recognition/
 params:
   time: 20 minutes
 ---
@@ -25,8 +27,8 @@ The application processes input text to identify and print named entities, like 
 
 ## Prerequisites
 
-* You have installed the latest version of [Docker Desktop](/get-started/get-docker.md). Docker adds new features regularly and some parts of this guide may work only with the latest version of Docker Desktop.
-* You have a [Git client](https://git-scm.com/downloads). The examples in this section use a command-line based Git client, but you can use any client.
+- You have installed the latest version of [Docker Desktop](/get-started/get-docker.md). Docker adds new features regularly and some parts of this guide may work only with the latest version of Docker Desktop.
+- You have a [Git client](https://git-scm.com/downloads). The examples in this section use a command-line based Git client, but you can use any client.
 
 ## Get the sample application
 
@@ -62,7 +64,7 @@ The source code for the name recognition application is in the `Docker-NLP/02_na
    ```python
    import spacy
    ```
-   
+
    This line imports the `spaCy` library. `spaCy` is a popular library in Python
    used for natural language processing (NLP).
 
@@ -71,7 +73,7 @@ The source code for the name recognition application is in the `Docker-NLP/02_na
    ```python
    nlp = spacy.load("en_core_web_sm")
    ```
-   
+
    Here, the `spacy.load` function loads a language model. The `en_core_web_sm`
    model is a small English language model. You can use this model for various
    NLP tasks, including tokenization, part-of-speech tagging, and named entity
@@ -129,7 +131,6 @@ The source code for the name recognition application is in the `Docker-NLP/02_na
    - `doc = nlp(input_text)`: Here, the nlp model processes the user-input text. This creates a Doc object which contains various NLP attributes, including identified entities.
    - `for ent in doc.ents:`: This loop iterates over the entities found in the text.
    - `print(f"Entity: {ent.text}, Type: {ent.label_}")`: For each entity, it prints the entity text and its type (like PERSON, ORG, or GPE).
-
 
 8. Create `requirements.txt`.
 
@@ -245,10 +246,10 @@ The following steps explain each part of the `Dockerfile`. For more details, see
    ENTRYPOINT ["/app/entrypoint.sh"]
    ```
 
-    The `ENTRYPOINT` instruction configures the container to run `entrypoint.sh`
-    as its default executable. This means that when the container starts, it
-    automatically executes the script.
-   
+   The `ENTRYPOINT` instruction configures the container to run `entrypoint.sh`
+   as its default executable. This means that when the container starts, it
+   automatically executes the script.
+
    You can explore the `entrypoint.sh` script by opening it in a code or text
    editor. As the sample contains several applications, the script lets you
    specify which application to run when the container starts.
@@ -301,21 +302,20 @@ To run the application using Docker:
    - `docker run`: This is the primary command used to run a new container from
      a Docker image.
    - `-it`: This is a combination of two options:
-      - `-i` or `--interactive`: This keeps the standard input (STDIN) open even
-        if not attached. It lets the container remain running in the
-        foreground and be interactive.
-      - `-t` or `--tty`: This allocates a pseudo-TTY, essentially simulating a
-        terminal, like a command prompt or a shell. It's what lets you
-        interact with the application inside the container.
+     - `-i` or `--interactive`: This keeps the standard input (STDIN) open even
+       if not attached. It lets the container remain running in the
+       foreground and be interactive.
+     - `-t` or `--tty`: This allocates a pseudo-TTY, essentially simulating a
+       terminal, like a command prompt or a shell. It's what lets you
+       interact with the application inside the container.
    - `basic-nlp`: This specifies the name of the Docker image to use for
      creating the container. In this case, it's the image named `basic-nlp` that
      you created with the `docker build` command.
    - `02_name_entity_recognition.py`: This is the script you want to run inside
      the Docker container. It gets passed to the `entrypoint.sh` script, which
      runs it when the container starts.
-     
-   For more details, see the [docker run CLI reference](/reference/cli/docker/container/run/).
 
+   For more details, see the [docker run CLI reference](/reference/cli/docker/container/run/).
 
    > [!NOTE]
    >
@@ -335,7 +335,7 @@ To run the application using Docker:
 
    ```console
    Enter the text for entity recognition (type 'exit' to end): Apple Inc. is planning to open a new store in San Francisco. Tim Cook is the CEO of Apple.
-   
+
    Entity: Apple Inc., Type: ORG
    Entity: San Francisco, Type: GPE
    Entity: Tim Cook, Type: PERSON
@@ -350,10 +350,10 @@ and then set up the environment and run the application using Docker.
 
 Related information:
 
-* [Docker CLI reference](/reference/cli/docker/)
-* [Dockerfile reference](/reference/dockerfile/)
-* [spaCy](https://spacy.io/)
-* [Python documentation](https://docs.python.org/3/)
+- [Docker CLI reference](/reference/cli/docker/)
+- [Dockerfile reference](/reference/dockerfile/)
+- [spaCy](https://spacy.io/)
+- [Python documentation](https://docs.python.org/3/)
 
 ## Next steps
 

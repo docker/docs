@@ -5,8 +5,9 @@ weight: 30
 keywords: build, go, golang, test
 description: How to build and run your Go tests in a container
 aliases:
-- /get-started/golang/run-tests/
-- /language/golang/run-tests/
+  - /get-started/golang/run-tests/
+  - /language/golang/run-tests/
+  - /guides/language/golang/run-tests/
 ---
 
 ## Prerequisites

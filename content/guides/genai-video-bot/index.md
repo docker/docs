@@ -2,13 +2,15 @@
 title: GenAI video transcription and chat
 linkTitle: Video transcription and chat
 description: Explore a generative AI video analysis app that uses Docker, OpenAI, and Pinecone.
-keywords:  python, generative ai, genai, llm, whisper, pinecone, openai, whisper
+keywords: python, generative ai, genai, llm, whisper, pinecone, openai, whisper
 summary: |
   Learn how to build and deploy a generative AI video bot using Docker, with
   step-by-step instructions for setup, integration, and optimization to enhance
   your AI development projects.
 subjects: [ai]
 levels: [beginner]
+aliases:
+  - /guides/use-case/genai-video-bot/
 params:
   time: 20 minutes
 ---
@@ -20,6 +22,7 @@ technologies related to the
 [GenAI Stack](https://www.docker.com/blog/introducing-a-new-genai-stack/).
 
 The project showcases the following technologies:
+
 - [Docker and Docker Compose](#docker-and-docker-compose)
 - [OpenAI](#openai-api)
 - [Whisper](#whisper)
@@ -42,7 +45,6 @@ The project showcases the following technologies:
   >
   > OpenAI is a third-party hosted service and [charges](https://openai.com/pricing) may apply.
 
-
 - You have a [Pinecone API Key](https://app.pinecone.io/).
 - You have installed the latest version of [Docker Desktop](/get-started/get-docker.md). Docker adds new features regularly and some parts of this guide may work only with the latest version of Docker Desktop.
 - You have a [Git client](https://git-scm.com/downloads). The examples in this section use a command-line based Git client, but you can use any client.
@@ -56,10 +58,13 @@ addition, it provides timestamps from the video that can help you find the sourc
 
 1. Clone the sample application's repository. In a terminal, run the following
    command.
+
    ```console
    $ git clone https://github.com/Davidnet/docker-genai.git
    ```
+
    The project contains the following directories and files:
+
    ```text
    ├── docker-genai/
    │ ├── docker-bot/
@@ -88,9 +93,11 @@ addition, it provides timestamps from the video that can help you find the sourc
 
 3. Build and run the application. In a terminal, change directory to your
    `docker-genai` directory and run the following command.
+
    ```console
    $ docker compose up --build
    ```
+
    Docker Compose builds and runs the application based on the services defined
    in the `docker-compose.yaml` file. When the application is running, you'll
    see the logs of 2 services in the terminal.
@@ -150,9 +157,9 @@ how to use the service.
    The answer to that question exists in the video processed in the previous
    example,
    [https://www.youtube.com/watch?v=yaQZFhrW0fU](https://www.youtube.com/watch?v=yaQZFhrW0fU).
-   
+
    ![Asking a question to the Dockerbot](images/bot.webp)
-   
+
    In this example, the Dockerbot answers the question and
    provides links to the video with timestamps, which may contain more
    information about the answer.
@@ -172,6 +179,7 @@ how to use the service.
 ## Explore the application architecture
 
 The following image shows the application's high-level service architecture, which includes:
+
 - yt-whisper: A local service, ran by Docker Compose, that interacts with the
   remote OpenAI and Pinecone services.
 - dockerbot: A local service, ran by Docker Compose, that interacts with the

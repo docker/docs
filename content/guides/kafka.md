@@ -10,13 +10,15 @@ summary: |
 subjects: [distributed-systems]
 languages: [js]
 levels: [intermediate]
+aliases:
+  - /guides/use-case/kafka/
 params:
   time: 20 minutes
 ---
 
-With the rise of microservices, event-driven architectures have become increasingly popular. 
-[Apache Kafka](https://kafka.apache.org/), a distributed event streaming platform, is often at the 
-heart of these architectures. Unfortunately, setting up and deploying your own Kafka instance for development 
+With the rise of microservices, event-driven architectures have become increasingly popular.
+[Apache Kafka](https://kafka.apache.org/), a distributed event streaming platform, is often at the
+heart of these architectures. Unfortunately, setting up and deploying your own Kafka instance for development
 is often tricky. Fortunately, Docker and containers make this much easier.
 
 In this guide, you will learn how to:
@@ -34,7 +36,6 @@ The following prerequisites are required to follow along with this how-to guide:
 - [Node.js](https://nodejs.org/en/download/package-manager) and [yarn](https://yarnpkg.com/)
 - Basic knowledge of Kafka and Docker
 
-
 ## Launching Kafka
 
 Beginning with [Kafka 3.3](https://www.confluent.io/blog/apache-kafka-3-3-0-new-features-and-updates/), the deployment of Kafka was greatly simplified by no longer requiring Zookeeper thanks to KRaft (Kafka Raft). With KRaft, setting up a Kafka instance for local development is much easier. Starting with the launch of [Kafka 3.8](https://www.confluent.io/blog/introducing-apache-kafka-3-8/), a new [kafka-native](https://hub.docker.com/r/apache/kafka-native) Docker image is now available, providing a significantly faster startup and lower memory footprint.
@@ -49,60 +50,60 @@ Start a basic Kafka cluster by doing the following steps. This example will laun
 
 1. Start a Kafka container by running the following command:
 
-    ```console
-    $ docker run -d --name=kafka -p 9092:9092 apache/kafka
-    ```
+   ```console
+   $ docker run -d --name=kafka -p 9092:9092 apache/kafka
+   ```
 
 2. Once the image pulls, you’ll have a Kafka instance up and running within a second or two.
 
 3. The apache/kafka image ships with several helpful scripts in the `/opt/kafka/bin` directory. Run the following command to verify the cluster is up and running and get its cluster ID:
 
-    ```console
-    $ docker exec -ti kafka /opt/kafka/bin/kafka-cluster.sh cluster-id --bootstrap-server :9092
-    ```
+   ```console
+   $ docker exec -ti kafka /opt/kafka/bin/kafka-cluster.sh cluster-id --bootstrap-server :9092
+   ```
 
-    Doing so will produce output similar to the following:
+   Doing so will produce output similar to the following:
 
-    ```plaintext
-    Cluster ID: 5L6g3nShT-eMCtK--X86sw
-    ```
+   ```plaintext
+   Cluster ID: 5L6g3nShT-eMCtK--X86sw
+   ```
 
 4. Create a sample topic and produce (or publish) a few messages by running the following command:
 
-    ```console
-    $ docker exec -ti kafka /opt/kafka/bin/kafka-console-producer.sh --bootstrap-server :9092 --topic demo
-    ```
+   ```console
+   $ docker exec -ti kafka /opt/kafka/bin/kafka-console-producer.sh --bootstrap-server :9092 --topic demo
+   ```
 
-    After running, you can enter a message per line. For example, enter a few messages, one per line. A few examples might be:
+   After running, you can enter a message per line. For example, enter a few messages, one per line. A few examples might be:
 
-    ```plaintext
-    First message
-    ```
+   ```plaintext
+   First message
+   ```
 
-    And
- 
-    ```plaintext
-    Second message
-    ```
+   And
 
-    Press `enter` to send the last message and then press ctrl+c when you’re done. The messages will be published to Kafka.
+   ```plaintext
+   Second message
+   ```
+
+   Press `enter` to send the last message and then press ctrl+c when you’re done. The messages will be published to Kafka.
 
 5. Confirm the messages were published into the cluster by consuming the messages:
 
-    ```console
-    $ docker exec -ti kafka /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server :9092 --topic demo --from-beginning
-    ```
+   ```console
+   $ docker exec -ti kafka /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server :9092 --topic demo --from-beginning
+   ```
 
-    You should then see your messages in the output:
+   You should then see your messages in the output:
 
-    ```plaintext
-    First message
-    Second message
-    ```
+   ```plaintext
+   First message
+   Second message
+   ```
 
-    If you want, you can open another terminal and publish more messages and see them appear in the consumer.
+   If you want, you can open another terminal and publish more messages and see them appear in the consumer.
 
-    When you’re done, hit ctrl+c to stop consuming messages.
+   When you’re done, hit ctrl+c to stop consuming messages.
 
 You have a locally running Kafka cluster and have validated you can connect to it.
 
@@ -114,47 +115,47 @@ Since the cluster is running locally and is exposed at port 9092, the app can co
 
 1. If you don’t have the Kafka cluster running from the previous step, run the following command to start a Kafka instance:
 
-    ```console
-    $ docker run -d --name=kafka -p 9092:9092 apache/kafka
-    ```
+   ```console
+   $ docker run -d --name=kafka -p 9092:9092 apache/kafka
+   ```
 
 2. Clone the [GitHub repository](https://github.com/dockersamples/kafka-development-node) locally.
 
-    ```console
-    $ git clone https://github.com/dockersamples/kafka-development-node.git
-    ```
+   ```console
+   $ git clone https://github.com/dockersamples/kafka-development-node.git
+   ```
 
 3. Navigate into the project.
 
-    ```console
-    cd kafka-development-node/app
-    ```
+   ```console
+   cd kafka-development-node/app
+   ```
 
 4. Install the dependencies using yarn.
 
-    ```console
-    $ yarn install
-    ```
+   ```console
+   $ yarn install
+   ```
 
 5. Start the application using `yarn dev`. This will set the `NODE_ENV` environment variable to `development` and use `nodemon` to watch for file changes.
 
-    ```console
-    $ yarn dev
-    ```
+   ```console
+   $ yarn dev
+   ```
 
 6. With the application now running, it will log received messages to the console. In a new terminal, publish a few messages using the following command:
 
-    ```console
-    $ docker exec -ti kafka /opt/kafka/bin/kafka-console-producer.sh --bootstrap-server :9092 --topic demo
-    ```
+   ```console
+   $ docker exec -ti kafka /opt/kafka/bin/kafka-console-producer.sh --bootstrap-server :9092 --topic demo
+   ```
 
-    And then send a message to the cluster:
+   And then send a message to the cluster:
 
-    ```plaintext
-    Test message
-    ```
+   ```plaintext
+   Test message
+   ```
 
-    Remember to press `ctrl+c` when you’re done to stop producing messages.
+   Remember to press `ctrl+c` when you’re done to stop producing messages.
 
 ## Connecting to Kafka from both containers and native apps
 
@@ -179,7 +180,7 @@ Since there are two different methods clients need to connect, two different lis
 
 ![Diagram showing the DOCKER and HOST listeners and how they are exposed to the host and Docker networks](./images/kafka-1.webp)
 
-In order to set this up, the `compose.yaml` for Kafka needs some additional configuration. Once you start overriding some of the defaults, you also need to specify a few other options in order for KRaft mode to work. 
+In order to set this up, the `compose.yaml` for Kafka needs some additional configuration. Once you start overriding some of the defaults, you also need to specify a few other options in order for KRaft mode to work.
 
 ```yaml
 services:
@@ -212,21 +213,21 @@ Give it a try using the steps below.
 
 2. If you have the Kafka cluster running from the previous section, go ahead and stop that container using the following command:
 
-    ```console
-    $ docker rm -f kafka
-    ```
+   ```console
+   $ docker rm -f kafka
+   ```
 
 3. Start the Compose stack by running the following command at the root of the cloned project directory:
 
-    ```console
-    $ docker compose up
-    ```
+   ```console
+   $ docker compose up
+   ```
 
-    After a moment, the application will be up and running. 
+   After a moment, the application will be up and running.
 
 4. In the stack is another service that can be used to publish messages. Open it by going to [http://localhost:3000](http://localhost:3000). As you type in a message and submit the form, you should see the log message of the message being received by the app.
 
-    This helps demonstrate how a containerized approach makes it easy to add additional services to help test and troubleshoot your application.
+   This helps demonstrate how a containerized approach makes it easy to add additional services to help test and troubleshoot your application.
 
 ## Adding cluster visualization
 
@@ -241,7 +242,7 @@ services:
     ports:
       - 8080:8080
     environment:
-      DYNAMIC_CONFIG_ENABLED: 'true'
+      DYNAMIC_CONFIG_ENABLED: "true"
       KAFKA_CLUSTERS_0_NAME: local
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9093
     depends_on:
@@ -258,4 +259,4 @@ If you’re interested in learning how you can integrate Kafka easily into your 
 
 By using Docker, you can simplify the process of developing and testing event-driven applications with Kafka. Containers simplify the process of setting up and deploying the various services you need to develop. And once they’re defined in Compose, everyone on the team can benefit from the ease of use.
 
-In case you missed it earlier, all of the sample app code can be found at dockersamples/kafka-development-node. 
+In case you missed it earlier, all of the sample app code can be found at dockersamples/kafka-development-node.

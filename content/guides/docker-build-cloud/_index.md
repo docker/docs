@@ -9,6 +9,8 @@ summary: |
   cache, and native multi-architecture support.
 levels: [beginner]
 products: [dbc]
+aliases:
+  - /learning-paths/docker-build-cloud/
 params:
   featured: true
   image: images/learning-paths/build-cloud.png

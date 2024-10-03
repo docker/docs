@@ -5,7 +5,8 @@ weight: 30
 keywords: Java, build, test
 description: How to build and run your Java tests
 aliases:
-- /language/java/run-tests/
+  - /language/java/run-tests/
+  - /guides/language/java/run-tests/
 ---
 
 ## Prerequisites
@@ -103,6 +104,7 @@ $ docker build -t java-docker-image-test --progress=plain --no-cache --target=te
 ```
 
 You should see output containing the following
+
 ```console
 ...
 

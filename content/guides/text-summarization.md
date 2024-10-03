@@ -11,6 +11,8 @@ summary: |
 subjects: [ai]
 languages: [python]
 levels: [beginner]
+aliases:
+  - /guides/use-case/nlp/text-summarization/
 params:
   time: 20 minutes
 ---
@@ -30,8 +32,8 @@ cluster's centroids.
 
 ## Prerequisites
 
-* You have installed the latest version of [Docker Desktop](/get-started/get-docker.md). Docker adds new features regularly and some parts of this guide may work only with the latest version of Docker Desktop.
-* You have a [Git client](https://git-scm.com/downloads). The examples in this section use a command-line based Git client, but you can use any client.
+- You have installed the latest version of [Docker Desktop](/get-started/get-docker.md). Docker adds new features regularly and some parts of this guide may work only with the latest version of Docker Desktop.
+- You have a [Git client](https://git-scm.com/downloads). The examples in this section use a command-line based Git client, but you can use any client.
 
 ## Get the sample application
 
@@ -67,7 +69,7 @@ The source code for the text summarization application is in the `Docker-NLP/04_
    ```python
    from summarizer import Summarizer
    ```
-   
+
    This line of code imports the `Summarizer` class from the `summarizer`
    package, essential for your text summarization application. The summarizer
    module implements the Bert Extractive Summarizer, leveraging the HuggingFace
@@ -107,7 +109,6 @@ The source code for the text summarization application is in the `Docker-NLP/04_
    An infinite loop continuously prompts you for text
    input, ensuring interactivity. The loop breaks when you type `exit`, allowing
    you to control the application flow effectively.
-
 
 4. Create an instance of Summarizer.
 
@@ -252,10 +253,10 @@ The following steps explain each part of the `Dockerfile`. For more details, see
    ENTRYPOINT ["/app/entrypoint.sh"]
    ```
 
-    The `ENTRYPOINT` instruction configures the container to run `entrypoint.sh`
-    as its default executable. This means that when the container starts, it
-    automatically executes the script.
-   
+   The `ENTRYPOINT` instruction configures the container to run `entrypoint.sh`
+   as its default executable. This means that when the container starts, it
+   automatically executes the script.
+
    You can explore the `entrypoint.sh` script by opening it in a code or text
    editor. As the sample contains several applications, the script lets you
    specify which application to run when the container starts.
@@ -308,12 +309,12 @@ To run the application using Docker:
    - `docker run`: This is the primary command used to run a new container from
      a Docker image.
    - `-it`: This is a combination of two options:
-      - `-i` or `--interactive`: This keeps the standard input (STDIN) open even
-        if not attached. It lets the container remain running in the
-        foreground and be interactive.
-      - `-t` or `--tty`: This allocates a pseudo-TTY, essentially simulating a
-        terminal, like a command prompt or a shell. It's what lets you
-        interact with the application inside the container.
+     - `-i` or `--interactive`: This keeps the standard input (STDIN) open even
+       if not attached. It lets the container remain running in the
+       foreground and be interactive.
+     - `-t` or `--tty`: This allocates a pseudo-TTY, essentially simulating a
+       terminal, like a command prompt or a shell. It's what lets you
+       interact with the application inside the container.
    - `basic-nlp`: This specifies the name of the Docker image to use for
      creating the container. In this case, it's the image named `basic-nlp` that
      you created with the `docker build` command.
@@ -338,7 +339,7 @@ To run the application using Docker:
 3. Test the application.
 
    Enter some text to get the text summarization.
-   
+
    ```console
    Enter the text for summarization (type 'exit' to end): Artificial intelligence (AI) is a branch of computer science that aims to create machines capable of intelligent behavior. These machines are designed to mimic human cognitive functions such as learning, problem-solving, and decision-making. AI technologies can be classified into two main types: narrow or weak AI, which is designed for a particular task, and general or strong AI, which possesses the ability to understand, learn, and apply knowledge across various domains. One of the most popular approaches in AI is machine learning, where algorithms are trained on large datasets to recognize patterns and make predictions.
 
@@ -354,11 +355,11 @@ using Docker.
 
 Related information:
 
-* [Docker CLI reference](/reference/cli/docker/)
-* [Dockerfile reference](/reference/dockerfile/)
-* [Bert Extractive Summarizer](https://github.com/dmmiller612/bert-extractive-summarizer)
-* [PyTorch](https://pytorch.org/)
-* [Python documentation](https://docs.python.org/3/)
+- [Docker CLI reference](/reference/cli/docker/)
+- [Dockerfile reference](/reference/dockerfile/)
+- [Bert Extractive Summarizer](https://github.com/dmmiller612/bert-extractive-summarizer)
+- [PyTorch](https://pytorch.org/)
+- [Python documentation](https://docs.python.org/3/)
 
 ## Next steps
 

@@ -4,6 +4,8 @@ linkTitle: Develop your app
 weight: 20
 keywords: python, local, development, generative ai, genai, llm, neo4j, ollama, langchain, openai
 description: Learn how to develop your generative AI (GenAI) application locally.
+aliases:
+  - /guides/use-case/genai-pdf-bot/develop/
 ---
 
 ## Prerequisites
@@ -31,6 +33,7 @@ To run the database service:
    This file contains the environment variables that the containers will use.
 2. In the cloned repository's directory, open the `compose.yaml` file in an IDE or text editor.
 3. In the `compose.yaml` file, add the following:
+
    - Add instructions to run a Neo4j database
    - Specify the environment file under the server service in order to pass in the environment variables for the connection
 
@@ -67,7 +70,7 @@ To run the database service:
    > To learn more about Neo4j, see the [Neo4j Official Docker Image](https://hub.docker.com/_/neo4j).
 
 4. Run the application. Inside the `docker-genai-sample` directory,
-run the following command in a terminal.
+   run the following command in a terminal.
 
    ```console
    $ docker compose up --build
@@ -80,12 +83,14 @@ run the following command in a terminal.
 ## Add a local or remote LLM service
 
 The sample application supports both [Ollama](https://ollama.ai/) and [OpenAI](https://openai.com/). This guide provides instructions for the following scenarios:
+
 - Run Ollama in a container
 - Run Ollama outside of a container
 - Use OpenAI
 
 While all platforms can use any of the previous scenarios, the performance and
 GPU support may vary. You can use the following guidelines to help you choose the appropriate option:
+
 - Run Ollama in a container if you're on Linux, and using a native installation of the Docker Engine, or Windows 10/11, and using Docker Desktop, you
   have a CUDA-supported GPU, and your system has at least 8 GB of RAM.
 - Run Ollama outside of a container if you're on an Apple silicon Mac.
@@ -99,6 +104,7 @@ Choose one of the following options for your LLM service.
 When running Ollama in a container, you should have a CUDA-supported GPU. While you can run Ollama in a container without a supported GPU, the performance may not be acceptable. Only Linux and Windows 11 support GPU access to containers.
 
 To run Ollama in a container and provide GPU access:
+
 1. Install the prerequisites.
    - For Docker Engine on Linux, install the [NVIDIA Container Toolkilt](https://github.com/NVIDIA/nvidia-container-toolkit).
    - For Docker Desktop on Windows 10/11, install the latest [NVIDIA driver](https://www.nvidia.com/Download/index.aspx) and make sure you are using the [WSL2 backend](/manuals/desktop/wsl/_index.md#turn-on-docker-desktop-wsl-2)
@@ -125,7 +131,11 @@ To run Ollama in a container and provide GPU access:
        environment:
          - NEO4J_AUTH=${NEO4J_USERNAME}/${NEO4J_PASSWORD}
        healthcheck:
-         test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider localhost:7474 || exit 1"]
+         test:
+           [
+             "CMD-SHELL",
+             "wget --no-verbose --tries=1 --spider localhost:7474 || exit 1",
+           ]
          interval: 5s
          timeout: 3s
          retries: 5
@@ -181,6 +191,7 @@ To run Ollama in a container and provide GPU access:
 {{< tab name="Run Ollama outside of a container" >}}
 
 To run Ollama outside of a container:
+
 1. [Install](https://github.com/jmorganca/ollama) and run Ollama on your host
    machine.
 2. Update the `OLLAMA_BASE_URL` value in your `.env` file to
@@ -208,6 +219,7 @@ To run Ollama outside of a container:
 ## Run your GenAI application
 
 At this point, you have the following services in your Compose file:
+
 - Server service for your main GenAI application
 - Database service to store vectors in a Neo4j database
 - (optional) Ollama service to run the LLM
@@ -237,11 +249,12 @@ In this section, you learned how to set up a development environment to provide
 access all the services that your GenAI application needs.
 
 Related information:
- - [Dockerfile reference](../../../reference/dockerfile.md)
- - [Compose file reference](/reference/compose-file/_index.md)
- - [Ollama Docker image](https://hub.docker.com/r/ollama/ollama)
- - [Neo4j Official Docker Image](https://hub.docker.com/_/neo4j)
- - [GenAI Stack demo applications](https://github.com/docker/genai-stack)
+
+- [Dockerfile reference](../../../reference/dockerfile.md)
+- [Compose file reference](/reference/compose-file/_index.md)
+- [Ollama Docker image](https://hub.docker.com/r/ollama/ollama)
+- [Neo4j Official Docker Image](https://hub.docker.com/_/neo4j)
+- [GenAI Stack demo applications](https://github.com/docker/genai-stack)
 
 ## Next steps
 

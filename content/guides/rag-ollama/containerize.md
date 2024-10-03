@@ -4,6 +4,8 @@ linkTitle: Containerize your app
 weight: 10
 keywords: python, generative ai, genai, llm, ollama, containerize, intitialize, qdrant
 description: Learn how to containerize a RAG application.
+aliases:
+  - /guides/use-case/rag-ollama/containerize/
 ---
 
 ## Overview
@@ -70,24 +72,24 @@ server-1  |   URL: http://0.0.0.0:8501
 server-1  |
 ```
 
-Open a browser and view the application at [http://localhost:8501](http://localhost:8501). You should see a simple Streamlit application. 
+Open a browser and view the application at [http://localhost:8501](http://localhost:8501). You should see a simple Streamlit application.
 
 The application requires a Qdrant database service and an LLM service to work properly. If you have access to services that you ran outside of Docker, specify the connection information in the `docker-compose.yaml`.
 
 ```yaml
 winy:
   build:
-    context: ./app 
+    context: ./app
     dockerfile: Dockerfile
   environment:
     - QDRANT_CLIENT=http://qdrant:6333 # Specifies the url for the qdrant database
     - OLLAMA=http://ollama:11434 # Specifies the url for the ollama service
-  container_name: winy 
+  container_name: winy
   ports:
-    - "8501:8501" 
+    - "8501:8501"
   depends_on:
-    - qdrant 
-    - ollama 
+    - qdrant
+    - ollama
 ```
 
 If you don't have the services running, continue with this guide to learn how you can run some or all of these services with Docker.

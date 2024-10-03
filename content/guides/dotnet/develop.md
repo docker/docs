@@ -5,7 +5,8 @@ weight: 20
 keywords: .net, development
 description: Learn how to develop your .NET application locally using containers.
 aliases:
-- /language/dotnet/develop/
+  - /language/dotnet/develop/
+  - /guides/language/dotnet/develop/
 ---
 
 ## Prerequisites
@@ -15,9 +16,10 @@ Complete [Containerize a .NET application](containerize.md).
 ## Overview
 
 In this section, you'll learn how to set up a development environment for your containerized application. This includes:
- - Adding a local database and persisting data
- - Configuring Compose to automatically update your running Compose services as you edit and save your code
- - Creating a development container that contains the .NET Core SDK tools and dependencies
+
+- Adding a local database and persisting data
+- Configuring Compose to automatically update your running Compose services as you edit and save your code
+- Creating a development container that contains the .NET Core SDK tools and dependencies
 
 ## Update the application
 
@@ -69,7 +71,6 @@ You should now have the following in your `docker-dotnet-sample` directory.
 │ └── README.md
 ```
 
-
 ## Add a local database and persist data
 
 You can use containers to set up local services, like a database. In this section, you'll update the `compose.yaml` file to define a database service and a volume to persist data.
@@ -109,7 +110,7 @@ services:
     expose:
       - 5432
     healthcheck:
-      test: [ "CMD", "pg_isready" ]
+      test: ["CMD", "pg_isready"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -233,7 +234,7 @@ Use Compose Watch to automatically update your running Compose services as you e
 
 Open your `compose.yaml` file in an IDE or text editor and then add the Compose Watch instructions. The following is the updated `compose.yaml` file.
 
-```yaml  {hl_lines="11-14"}
+```yaml {hl_lines="11-14"}
 services:
   server:
     build:
@@ -262,7 +263,7 @@ services:
     expose:
       - 5432
     healthcheck:
-      test: [ "CMD", "pg_isready" ]
+      test: ["CMD", "pg_isready"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -272,6 +273,7 @@ secrets:
   db-password:
     file: db/password.txt
 ```
+
 Run the following command to run your application with Compose Watch.
 
 ```console
@@ -335,7 +337,7 @@ ENTRYPOINT ["dotnet", "myWebApp.dll"]
 
 The following is the updated `compose.yaml` file.
 
-```yaml  {hl_lines="5"}
+```yaml {hl_lines="5"}
 services:
   server:
     build:
@@ -351,8 +353,8 @@ services:
         - action: rebuild
           path: .
     environment:
-       - ASPNETCORE_ENVIRONMENT=Development
-       - ASPNETCORE_URLS=http://+:80'
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80'
   db:
     image: postgres
     restart: always
@@ -367,7 +369,7 @@ services:
     expose:
       - 5432
     healthcheck:
-      test: [ "CMD", "pg_isready" ]
+      test: ["CMD", "pg_isready"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -386,9 +388,10 @@ In this section, you took a look at setting up your Compose file to add a local
 database and persist data. You also learned how to use Compose Watch to automatically rebuild and run your container when you update your code. And finally, you learned how to create a development container that contains the SDK tools and dependencies needed for development.
 
 Related information:
- - [Compose file reference](/reference/compose-file/)
- - [Compose file watch](/manuals/compose/how-tos/file-watch.md)
- - [Multi-stage builds](/manuals/build/building/multi-stage.md)
+
+- [Compose file reference](/reference/compose-file/)
+- [Compose file watch](/manuals/compose/how-tos/file-watch.md)
+- [Multi-stage builds](/manuals/build/building/multi-stage.md)
 
 ## Next steps
 

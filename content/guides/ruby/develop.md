@@ -5,7 +5,8 @@ weight: 20
 keywords: ruby, local, development
 description: Learn how to develop your Ruby on Rails application locally.
 aliases:
-- /language/ruby/develop/
+  - /language/ruby/develop/
+  - /guides/language/ruby/develop/
 ---
 
 ## Prerequisites
@@ -106,7 +107,7 @@ Now, run the following `docker compose up` command to start your application.
 $ docker compose up --build
 ```
 
-In Ruby on Rails, `db:migrate` is a Rake task that is used to run migrations on the database. Migrations are a way to alter the structure of your database schema over time in a consistent and easy way. 
+In Ruby on Rails, `db:migrate` is a Rake task that is used to run migrations on the database. Migrations are a way to alter the structure of your database schema over time in a consistent and easy way.
 
 ```console
 $ docker exec -it docker-ruby-on-rails-web-1 rake db:migrate RAILS_ENV=test
@@ -114,14 +115,14 @@ $ docker exec -it docker-ruby-on-rails-web-1 rake db:migrate RAILS_ENV=test
 
 You will see a similar message like this:
 
-``console
+`console
 == 20240710193146 CreateWhales: migrating =====================================
 -- create_table(:whales)
    -> 0.0126s
 == 20240710193146 CreateWhales: migrated (0.0127s) ============================
-``
+`
 
-Refresh <http://localhost:3000> in your browser and add the whales. 
+Refresh <http://localhost:3000> in your browser and add the whales.
 
 Press `ctrl+c` in the terminal to stop your application and run `docker compose up` again, the whales are being persisted.
 
@@ -192,9 +193,10 @@ In this section, you took a look at setting up your Compose file to add a local
 database and persist data. You also learned how to use Compose Watch to automatically rebuild and run your container when you update your code.
 
 Related information:
- - [Compose file reference](/reference/compose-file/)
- - [Compose file watch](/manuals/compose/how-tos/file-watch.md)
- - [Multi-stage builds](/manuals/build/building/multi-stage.md)
+
+- [Compose file reference](/reference/compose-file/)
+- [Compose file watch](/manuals/compose/how-tos/file-watch.md)
+- [Multi-stage builds](/manuals/build/building/multi-stage.md)
 
 ## Next steps
 

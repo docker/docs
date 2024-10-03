@@ -5,7 +5,8 @@ weight: 20
 keywords: php, development
 description: Learn how to develop your PHP application locally using containers.
 aliases:
-- /language/php/develop/
+  - /language/php/develop/
+  - /guides/language/php/develop/
 ---
 
 ## Prerequisites
@@ -15,16 +16,18 @@ Complete [Containerize a PHP application](containerize.md).
 ## Overview
 
 In this section, you'll learn how to set up a development environment for your containerized application. This includes:
- - Adding a local database and persisting data
- - Adding phpMyAdmin to interact with the database
- - Configuring Compose to automatically update your running Compose services as
-   you edit and save your code
- - Creating a development container that contains the dev dependencies
+
+- Adding a local database and persisting data
+- Adding phpMyAdmin to interact with the database
+- Configuring Compose to automatically update your running Compose services as
+  you edit and save your code
+- Creating a development container that contains the dev dependencies
 
 ## Add a local database and persist data
 
 You can use containers to set up local services, like a database.
 To do this for the sample application, you'll need to do the following:
+
 - Update the `Dockerfile` to install extensions to connect to the database
 - Update the `compose.yaml` file to add a database service and volume to persist data
 
@@ -63,6 +66,7 @@ already contains commented-out instructions for a PostgreSQL database and volume
 Open the `src/database.php` file in an IDE or text editor. You'll notice that it reads environment variables in order to connect to the database.
 
 In the `compose.yaml` file, you'll need to update the following:
+
 1. Uncomment and update the database instructions for MariaDB.
 2. Add a secret to the server service to pass in the database password.
 3. Add the database connection environment variables to the server service.
@@ -101,7 +105,14 @@ services:
     expose:
       - 3306
     healthcheck:
-      test:  ["CMD", "/usr/local/bin/healthcheck.sh", "--su-mysql", "--connect",  "--innodb_initialized"]
+      test:
+        [
+          "CMD",
+          "/usr/local/bin/healthcheck.sh",
+          "--su-mysql",
+          "--connect",
+          "--innodb_initialized",
+        ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -209,7 +220,14 @@ services:
     expose:
       - 3306
     healthcheck:
-      test:  ["CMD", "/usr/local/bin/healthcheck.sh", "--su-mysql", "--connect",  "--innodb_initialized"]
+      test:
+        [
+          "CMD",
+          "/usr/local/bin/healthcheck.sh",
+          "--su-mysql",
+          "--connect",
+          "--innodb_initialized",
+        ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -280,7 +298,14 @@ services:
     expose:
       - 3306
     healthcheck:
-      test:  ["CMD", "/usr/local/bin/healthcheck.sh", "--su-mysql", "--connect",  "--innodb_initialized"]
+      test:
+        [
+          "CMD",
+          "/usr/local/bin/healthcheck.sh",
+          "--su-mysql",
+          "--connect",
+          "--innodb_initialized",
+        ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -298,6 +323,7 @@ secrets:
   db-password:
     file: db/password.txt
 ```
+
 Run the following command to run your application with Compose Watch.
 
 ```console
@@ -320,6 +346,7 @@ Press `ctrl+c` in the terminal to stop Compose Watch. Run `docker compose down` 
 At this point, when you run your containerized application, Composer isn't installing the dev dependencies. While this small image is good for production, it lacks the tools and dependencies you may need when developing and it doesn't include the `tests` directory. You can use multi-stage builds to build stages for both development and production in the same Dockerfile. For more details, see [Multi-stage builds](/manuals/build/building/multi-stage.md).
 
 In the `Dockerfile`, you'll need to update the following:
+
 1. Split the `deps` staged into two stages. One stage for production
    (`prod-deps`) and one stage (`dev-deps`) to install development dependencies.
 2. Create a common `base` stage.
@@ -348,6 +375,7 @@ COPY --from=deps app/vendor/ /var/www/html/vendor
 COPY ./src /var/www/html
 USER www-data
 ```
+
 {{< /tab >}}
 {{< tab name="After" >}}
 
@@ -386,7 +414,6 @@ USER www-data
 {{< /tab >}}
 {{< /tabs >}}
 
-
 Update your `compose.yaml` file by adding an instruction to target the
 development stage.
 
@@ -421,10 +448,11 @@ In this section, you took a look at setting up your Compose file to add a local
 database and persist data. You also learned how to use Compose Watch to automatically sync your application when you update your code. And finally, you learned how to create a development container that contains the dependencies needed for development.
 
 Related information:
- - [Compose file reference](/reference/compose-file/)
- - [Compose file watch](/manuals/compose/how-tos/file-watch.md)
- - [Dockerfile reference](/reference/dockerfile.md)
- - [Official Docker Image for PHP](https://hub.docker.com/_/php)
+
+- [Compose file reference](/reference/compose-file/)
+- [Compose file watch](/manuals/compose/how-tos/file-watch.md)
+- [Dockerfile reference](/reference/dockerfile.md)
+- [Official Docker Image for PHP](https://hub.docker.com/_/php)
 
 ## Next steps
 

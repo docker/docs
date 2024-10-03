@@ -11,7 +11,8 @@ summary: |
 toc_min: 1
 toc_max: 2
 aliases:
-- /language/golang/
+  - /language/golang/
+  - /guides/language/golang/
 languages: [go]
 levels: [beginner]
 params:
@@ -28,24 +29,24 @@ This guide will show you how to create, test, and deploy containerized Go applic
 
 In this guide, you’ll learn how to:
 
-* Create a `Dockerfile` which contains the instructions for building a container image for a program written in Go.
-* Run the image as a container in your local Docker instance and manage the container's lifecycle.
-* Use multi-stage builds for building small images efficiently while keeping your Dockerfiles easy to read and maintain.
-* Use Docker Compose to orchestrate running of multiple related containers together in a development environment.
-* Configure a CI/CD pipeline for your application using [GitHub Actions](https://docs.github.com/en/actions)
-* Deploy your containerized Go application.
+- Create a `Dockerfile` which contains the instructions for building a container image for a program written in Go.
+- Run the image as a container in your local Docker instance and manage the container's lifecycle.
+- Use multi-stage builds for building small images efficiently while keeping your Dockerfiles easy to read and maintain.
+- Use Docker Compose to orchestrate running of multiple related containers together in a development environment.
+- Configure a CI/CD pipeline for your application using [GitHub Actions](https://docs.github.com/en/actions)
+- Deploy your containerized Go application.
 
 ## Prerequisites
 
-Some basic understanding of Go and its toolchain is assumed. This isn't a Go tutorial. If you are new to the : languages:, 
-the [Go website](https://golang.org/) is a great place to explore, 
-so *go* (pun intended) check it out!
+Some basic understanding of Go and its toolchain is assumed. This isn't a Go tutorial. If you are new to the : languages:,
+the [Go website](https://golang.org/) is a great place to explore,
+so _go_ (pun intended) check it out!
 
-You also must know some basic [Docker concepts](/get-started/docker-concepts/the-basics/what-is-a-container.md) as well as to 
+You also must know some basic [Docker concepts](/get-started/docker-concepts/the-basics/what-is-a-container.md) as well as to
 be at least vaguely familiar with the [Dockerfile format](/manuals/build/concepts/dockerfile.md).
 
-Your Docker set-up must have BuildKit enabled. BuildKit is enabled by default for all users on [Docker Desktop](/manuals/desktop/_index.md). 
-If you have installed Docker Desktop, you don’t have to manually enable BuildKit. If you are running Docker on Linux, 
+Your Docker set-up must have BuildKit enabled. BuildKit is enabled by default for all users on [Docker Desktop](/manuals/desktop/_index.md).
+If you have installed Docker Desktop, you don’t have to manually enable BuildKit. If you are running Docker on Linux,
 please check out BuildKit [getting started](/manuals/build/buildkit/_index.md#getting-started) page.
 
 Some familiarity with the command line is also expected.

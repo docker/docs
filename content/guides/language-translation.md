@@ -10,6 +10,8 @@ summary: |
 levels: [beginner]
 subjects: [ai]
 languages: [python]
+aliases:
+  - /guides/use-case/nlp/language-translation/
 params:
   time: 20 minutes
 ---
@@ -28,8 +30,8 @@ methods as detect and translate.
 
 ## Prerequisites
 
-* You have installed the latest version of [Docker Desktop](/get-started/get-docker.md). Docker adds new features regularly and some parts of this guide may work only with the latest version of Docker Desktop.
-* You have a [Git client](https://git-scm.com/downloads). The examples in this section use a command-line based Git client, but you can use any client.
+- You have installed the latest version of [Docker Desktop](/get-started/get-docker.md). Docker adds new features regularly and some parts of this guide may work only with the latest version of Docker Desktop.
+- You have a [Git client](https://git-scm.com/downloads). The examples in this section use a command-line based Git client, but you can use any client.
 
 ## Get the sample application
 
@@ -43,6 +45,7 @@ methods as detect and translate.
 2. Verify that you cloned the repository.
 
    You should see the following files in your `Docker-NLP` directory.
+
    ```text
    01_sentiment_analysis.py
    02_name_entity_recognition.py
@@ -66,15 +69,17 @@ in a text or code editor to explore its contents in the following steps.
    ```python
    from googletrans import Translator
    ```
-   
+
    This line imports the `Translator` class from `googletrans`.
    Googletrans is a Python library that provides an interface to Google
    Translate's AJAX API.
 
 2. Specify the main execution block.
+
    ```python
    if __name__ == "__main__":
    ```
+
    This Python idiom ensures that the following code block runs only if this
    script is the main program. It provides flexibility, allowing the script to
    function both as a standalone program and as an imported module.
@@ -112,7 +117,7 @@ in a text or code editor to explore its contents in the following steps.
    Here, the `translator.translate` method is called with the user input. The
    `dest='fr'` argument specifies that the destination language for translation
    is French. The `.text` attribute gets the translated string. For more details
-   about the available language codes, see the 
+   about the available language codes, see the
    [Googletrans docs](https://py-googletrans.readthedocs.io/en/latest/).
 
 6. Print the original and translated text.
@@ -237,10 +242,10 @@ The following steps explain each part of the `Dockerfile`. For more details, see
    ENTRYPOINT ["/app/entrypoint.sh"]
    ```
 
-    The `ENTRYPOINT` instruction configures the container to run `entrypoint.sh`
-    as its default executable. This means that when the container starts, it
-    automatically executes the script.
-   
+   The `ENTRYPOINT` instruction configures the container to run `entrypoint.sh`
+   as its default executable. This means that when the container starts, it
+   automatically executes the script.
+
    You can explore the `entrypoint.sh` script by opening it in a code or text
    editor. As the sample contains several applications, the script lets you
    specify which application to run when the container starts.
@@ -293,12 +298,12 @@ To run the application using Docker:
    - `docker run`: This is the primary command used to run a new container from
      a Docker image.
    - `-it`: This is a combination of two options:
-      - `-i` or `--interactive`: This keeps the standard input (STDIN) open even
-        if not attached. It lets the container remain running in the
-        foreground and be interactive.
-      - `-t` or `--tty`: This allocates a pseudo-TTY, essentially simulating a
-        terminal, like a command prompt or a shell. It's what lets you
-        interact with the application inside the container.
+     - `-i` or `--interactive`: This keeps the standard input (STDIN) open even
+       if not attached. It lets the container remain running in the
+       foreground and be interactive.
+     - `-t` or `--tty`: This allocates a pseudo-TTY, essentially simulating a
+       terminal, like a command prompt or a shell. It's what lets you
+       interact with the application inside the container.
    - `basic-nlp`: This specifies the name of the Docker image to use for
      creating the container. In this case, it's the image named `basic-nlp` that
      you created with the `docker build` command.
@@ -339,10 +344,10 @@ Docker.
 
 Related information:
 
-* [Docker CLI reference](/reference/cli/docker/)
-* [Dockerfile reference](/reference/dockerfile/)
-* [Googletrans](https://github.com/ssut/py-googletrans)
-* [Python documentation](https://docs.python.org/3/)
+- [Docker CLI reference](/reference/cli/docker/)
+- [Dockerfile reference](/reference/dockerfile/)
+- [Googletrans](https://github.com/ssut/py-googletrans)
+- [Python documentation](https://docs.python.org/3/)
 
 ## Next steps
 

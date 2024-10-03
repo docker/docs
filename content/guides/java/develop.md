@@ -5,7 +5,8 @@ weight: 20
 keywords: Java, local, development, run,
 description: Learn how to develop your application locally.
 aliases:
-- /language/java/develop/
+  - /language/java/develop/
+  - /guides/language/java/develop/
 ---
 
 ## Prerequisites
@@ -16,11 +17,11 @@ Work through the steps to containerize your application in [Containerize your ap
 
 In this section, you’ll walk through setting up a local development environment
 for the application you containerized in the previous section. This includes:
-  - Adding a local database and persisting data
-  - Creating a development container to connect a debugger
-  - Configuring Compose to automatically update your running Compose services as
-   you edit and save your code
 
+- Adding a local database and persisting data
+- Creating a development container to connect a debugger
+- Configuring Compose to automatically update your running Compose services as
+  you edit and save your code
 
 ## Add a local database and persist data
 
@@ -29,6 +30,7 @@ You can use containers to set up local services, like a database. In this sectio
 In the cloned repository's directory, open the `docker-compose.yaml` file in an IDE or text editor. Your Compose file has an example database service, but it'll require a few changes for your unique app.
 
 In the `docker-compose.yaml` file, you need to do the following:
+
 - Uncomment all of the database instructions. You'll now use a database service
   instead of local storage for the data.
 - Remove the top-level `secrets` element as well as the element inside the `db`
@@ -71,7 +73,7 @@ services:
     ports:
       - 5432:5432
     healthcheck:
-      test: [ "CMD", "pg_isready", "-U", "petclinic" ]
+      test: ["CMD", "pg_isready", "-U", "petclinic"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -83,7 +85,6 @@ Open the `Dockerfile` in an IDE or text editor. In the `ENTRYPOINT` instruction,
 update the instruction to pass in the system property as specified in the
 `spring-petclinic/src/resources/db/postgres/petclinic_db_setup_postgres.txt`
 file.
-
 
 ```diff
 - ENTRYPOINT [ "java", "org.springframework.boot.loader.launch.JarLauncher" ]
@@ -203,7 +204,7 @@ services:
     ports:
       - 5432:5432
     healthcheck:
-      test: [ "CMD", "pg_isready", "-U", "petclinic" ]
+      test: ["CMD", "pg_isready", "-U", "petclinic"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -228,7 +229,61 @@ $ curl  --request GET \
 You should receive the following response:
 
 ```json
-{"vetList":[{"id":1,"firstName":"James","lastName":"Carter","specialties":[],"nrOfSpecialties":0,"new":false},{"id":2,"firstName":"Helen","lastName":"Leary","specialties":[{"id":1,"name":"radiology","new":false}],"nrOfSpecialties":1,"new":false},{"id":3,"firstName":"Linda","lastName":"Douglas","specialties":[{"id":3,"name":"dentistry","new":false},{"id":2,"name":"surgery","new":false}],"nrOfSpecialties":2,"new":false},{"id":4,"firstName":"Rafael","lastName":"Ortega","specialties":[{"id":2,"name":"surgery","new":false}],"nrOfSpecialties":1,"new":false},{"id":5,"firstName":"Henry","lastName":"Stevens","specialties":[{"id":1,"name":"radiology","new":false}],"nrOfSpecialties":1,"new":false},{"id":6,"firstName":"Sharon","lastName":"Jenkins","specialties":[],"nrOfSpecialties":0,"new":false}]}
+{
+  "vetList": [
+    {
+      "id": 1,
+      "firstName": "James",
+      "lastName": "Carter",
+      "specialties": [],
+      "nrOfSpecialties": 0,
+      "new": false
+    },
+    {
+      "id": 2,
+      "firstName": "Helen",
+      "lastName": "Leary",
+      "specialties": [{ "id": 1, "name": "radiology", "new": false }],
+      "nrOfSpecialties": 1,
+      "new": false
+    },
+    {
+      "id": 3,
+      "firstName": "Linda",
+      "lastName": "Douglas",
+      "specialties": [
+        { "id": 3, "name": "dentistry", "new": false },
+        { "id": 2, "name": "surgery", "new": false }
+      ],
+      "nrOfSpecialties": 2,
+      "new": false
+    },
+    {
+      "id": 4,
+      "firstName": "Rafael",
+      "lastName": "Ortega",
+      "specialties": [{ "id": 2, "name": "surgery", "new": false }],
+      "nrOfSpecialties": 1,
+      "new": false
+    },
+    {
+      "id": 5,
+      "firstName": "Henry",
+      "lastName": "Stevens",
+      "specialties": [{ "id": 1, "name": "radiology", "new": false }],
+      "nrOfSpecialties": 1,
+      "new": false
+    },
+    {
+      "id": 6,
+      "firstName": "Sharon",
+      "lastName": "Jenkins",
+      "specialties": [],
+      "nrOfSpecialties": 0,
+      "new": false
+    }
+  ]
+}
 ```
 
 ## Connect a Debugger
@@ -301,7 +356,7 @@ services:
     ports:
       - 5432:5432
     healthcheck:
-      test: [ "CMD", "pg_isready", "-U", "petclinic" ]
+      test: ["CMD", "pg_isready", "-U", "petclinic"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -339,9 +394,9 @@ In this section, you took a look at running a database locally and persisting th
 
 Related information:
 
- - [Compose file reference](/reference/compose-file/)
- - [Compose Watch](/manuals/compose/how-tos/file-watch.md)
- - [Dockerfile reference](/reference/dockerfile/)
+- [Compose file reference](/reference/compose-file/)
+- [Compose Watch](/manuals/compose/how-tos/file-watch.md)
+- [Dockerfile reference](/reference/dockerfile/)
 
 ## Next steps
 

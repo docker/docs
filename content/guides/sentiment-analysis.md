@@ -11,6 +11,8 @@ summary: |
 subjects: [ai]
 languages: [python]
 levels: [beginner]
+aliases:
+  - /guides/use-case/nlp/sentiment-analysis/
 params:
   time: 20 minutes
 ---
@@ -27,8 +29,8 @@ negative, or neutral.
 
 ## Prerequisites
 
-* You have installed the latest version of [Docker Desktop](/get-started/get-docker.md). Docker adds new features regularly and some parts of this guide may work only with the latest version of Docker Desktop.
-* You have a [Git client](https://git-scm.com/downloads). The examples in this section use a command-line based Git client, but you can use any client.
+- You have installed the latest version of [Docker Desktop](/get-started/get-docker.md). Docker adds new features regularly and some parts of this guide may work only with the latest version of Docker Desktop.
+- You have a [Git client](https://git-scm.com/downloads). The examples in this section use a command-line based Git client, but you can use any client.
 
 ## Get the sample application
 
@@ -66,7 +68,7 @@ The source code for the sentiment analysis application is in the `Docker-NLP/01_
    from nltk.sentiment import SentimentIntensityAnalyzer
    import ssl
    ```
-   
+
    - `nltk`: This is the Natural Language Toolkit library used for working with
      human language data in Python.
    - `SentimentIntensityAnalyzer`: This is a specific tool from NLTK used for
@@ -84,7 +86,7 @@ The source code for the sentiment analysis application is in the `Docker-NLP/01_
    else:
        ssl._create_default_https_context = _create_unverified_https_context
    ```
-   
+
    This block is a workaround for certain environments where downloading data through NLTK might fail due to SSL certificate verification issues. It's telling Python to ignore SSL certificate verification for HTTPS requests.
 
 3. Download NLTK resources.
@@ -93,7 +95,7 @@ The source code for the sentiment analysis application is in the `Docker-NLP/01_
    nltk.download('vader_lexicon')
    nltk.download('punkt')
    ```
-   
+
    - `vader_lexicon`: This is a lexicon used by the `SentimentIntensityAnalyzer`
      for sentiment analysis.
    - `punkt`: This is used by NLTK for tokenizing sentences. It's necessary for
@@ -257,10 +259,10 @@ The following steps explain each part of the `Dockerfile`. For more details, see
    ENTRYPOINT ["/app/entrypoint.sh"]
    ```
 
-    The `ENTRYPOINT` instruction configures the container to run `entrypoint.sh`
-    as its default executable. This means that when the container starts, it
-    automatically executes the script.
-   
+   The `ENTRYPOINT` instruction configures the container to run `entrypoint.sh`
+   as its default executable. This means that when the container starts, it
+   automatically executes the script.
+
    You can explore the `entrypoint.sh` script by opening it in a code or text
    editor. As the sample contains several applications, the script lets you
    specify which application to run when the container starts.
@@ -313,12 +315,12 @@ To run the application using Docker:
    - `docker run`: This is the primary command used to run a new container from
      a Docker image.
    - `-it`: This is a combination of two options:
-      - `-i` or `--interactive`: This keeps the standard input (STDIN) open even
-        if not attached. It lets the container remain running in the
-        foreground and be interactive.
-      - `-t` or `--tty`: This allocates a pseudo-TTY, essentially simulating a
-        terminal, like a command prompt or a shell. It's what lets you
-        interact with the application inside the container.
+     - `-i` or `--interactive`: This keeps the standard input (STDIN) open even
+       if not attached. It lets the container remain running in the
+       foreground and be interactive.
+     - `-t` or `--tty`: This allocates a pseudo-TTY, essentially simulating a
+       terminal, like a command prompt or a shell. It's what lets you
+       interact with the application inside the container.
    - `basic-nlp`: This specifies the name of the Docker image to use for
      creating the container. In this case, it's the image named `basic-nlp` that
      you created with the `docker build` command.
@@ -327,7 +329,6 @@ To run the application using Docker:
      it when the container starts.
 
    For more details, see the [docker run CLI reference](/reference/cli/docker/container/run/).
-
 
    > [!NOTE]
    >
@@ -344,7 +345,7 @@ To run the application using Docker:
 3. Test the application.
 
    Enter a comment to get the sentiment analysis.
-   
+
    ```console
    Enter the text for semantic analysis (type 'exit' to end): I love containers!
    Sentiment: Positive
@@ -360,10 +361,10 @@ and then set up the environment and run the application using Docker.
 
 Related information:
 
-* [Docker CLI reference](/reference/cli/docker/)
-* [Dockerfile reference](/reference/dockerfile/)
-* [Natural Language Toolkit](https://www.nltk.org/)
-* [Python documentation](https://docs.python.org/3/)
+- [Docker CLI reference](/reference/cli/docker/)
+- [Dockerfile reference](/reference/dockerfile/)
+- [Natural Language Toolkit](https://www.nltk.org/)
+- [Python documentation](https://docs.python.org/3/)
 
 ## Next steps
 

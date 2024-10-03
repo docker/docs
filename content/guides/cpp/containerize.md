@@ -5,12 +5,13 @@ weight: 10
 keywords: C++, containerize, initialize
 description: Learn how to containerize a C++ application.
 aliases:
-- /language/cpp/containerize/
+  - /language/cpp/containerize/
+  - /guides/language/cpp/containerize/
 ---
 
 ## Prerequisites
 
-* You have a [Git client](https://git-scm.com/downloads). The examples in this section use a command-line based Git client, but you can use any client.
+- You have a [Git client](https://git-scm.com/downloads). The examples in this section use a command-line based Git client, but you can use any client.
 
 ## Overview
 
@@ -38,9 +39,10 @@ directory.
 ```
 
 To learn more about the files in the repository, see the following:
- - [Dockerfile](/reference/dockerfile.md)
- - [.dockerignore](/reference/dockerfile.md#dockerignore-file)
- - [compose.yml](/reference/compose-file/_index.md)
+
+- [Dockerfile](/reference/dockerfile.md)
+- [.dockerignore](/reference/dockerfile.md#dockerignore-file)
+- [compose.yml](/reference/compose-file/_index.md)
 
 ## Run the application
 
@@ -67,7 +69,6 @@ $ docker compose up --build -d
 
 Open a browser and view the application at [http://localhost:8080](http://localhost:8080).
 
-
 In the terminal, run the following command to stop the application.
 
 ```console
@@ -83,7 +84,8 @@ In this section, you learned how you can containerize and run your C++
 application using Docker.
 
 Related information:
- - [Docker Compose overview](/manuals/compose/_index.md)
+
+- [Docker Compose overview](/manuals/compose/_index.md)
 
 ## Next steps
 

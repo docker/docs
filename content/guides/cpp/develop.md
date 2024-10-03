@@ -5,7 +5,8 @@ weight: 20
 keywords: C++, local, development
 description: Learn how to develop your C++ application locally.
 aliases:
-- /language/cpp/develop/
+  - /language/cpp/develop/
+  - /guides/language/cpp/develop/
 ---
 
 ## Prerequisites
@@ -66,9 +67,10 @@ Press `ctrl+c` in the terminal to stop your application.
 In this section, you also learned how to use Compose Watch to automatically rebuild and run your container when you update your code.
 
 Related information:
- - [Compose file reference](/reference/compose-file/)
- - [Compose file watch](/manuals/compose/how-tos/file-watch.md)
- - [Multi-stage builds](/manuals/build/building/multi-stage.md)
+
+- [Compose file reference](/reference/compose-file/)
+- [Compose file watch](/manuals/compose/how-tos/file-watch.md)
+- [Multi-stage builds](/manuals/build/building/multi-stage.md)
 
 ## Next steps
 

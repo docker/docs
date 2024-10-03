@@ -3,7 +3,8 @@ title: Deploy to Kubernetes
 keywords: kubernetes, pods, deployments, kubernetes services
 description: Learn how to describe and deploy a simple application on Kubernetes.
 aliases:
-- /get-started/kube-deploy/
+  - /get-started/kube-deploy/
+  - /guides/deployment-orchestration/kube-deploy/
 summary: |
   Learn how to deploy and orchestrate Docker containers using Kubernetes, with
   step-by-step guidance on setup, configuration, and best practices to enhance
@@ -19,7 +20,7 @@ params:
 - Download and install Docker Desktop as described in [Get Docker](/get-started/get-docker.md).
 - Work through containerizing an application in [Part 2](02_our_app.md).
 - Make sure that Kubernetes is turned on in Docker Desktop:
-   If Kubernetes isn't running, follow the instructions in [Orchestration](orchestration.md) to finish setting it up.
+  If Kubernetes isn't running, follow the instructions in [Orchestration](orchestration.md) to finish setting it up.
 
 ## Introduction
 
@@ -37,43 +38,45 @@ You already wrote a basic Kubernetes YAML file in the Orchestration overview par
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-   name: bb-demo
-   namespace: default
+  name: bb-demo
+  namespace: default
 spec:
-   replicas: 1
-   selector:
-      matchLabels:
-         bb: web
-   template:
-      metadata:
-         labels:
-            bb: web
-      spec:
-         containers:
-            - name: bb-site
-              image: getting-started
-              imagePullPolicy: Never
+  replicas: 1
+  selector:
+    matchLabels:
+      bb: web
+  template:
+    metadata:
+      labels:
+        bb: web
+    spec:
+      containers:
+        - name: bb-site
+          image: getting-started
+          imagePullPolicy: Never
 ---
 apiVersion: v1
 kind: Service
 metadata:
-   name: bb-entrypoint
-   namespace: default
+  name: bb-entrypoint
+  namespace: default
 spec:
-   type: NodePort
-   selector:
-      bb: web
-   ports:
-      - port: 3000
-        targetPort: 3000
-        nodePort: 30001
+  type: NodePort
+  selector:
+    bb: web
+  ports:
+    - port: 3000
+      targetPort: 3000
+      nodePort: 30001
 ```
 
 In this Kubernetes YAML file, there are two objects, separated by the `---`:
+
 - A `Deployment`, describing a scalable group of identical pods. In this case, you'll get just one `replica`, or copy of your pod, and that pod (which is described under the `template:` key) has just one container in it, based off of your `getting-started` image from the previous step in this tutorial.
 - A `NodePort` service, which will route traffic from port 30001 on your host to port 3000 inside the pods it routes to, allowing you to reach your Todo app from the network.
 
- Also, notice that while Kubernetes YAML can appear long and complicated at first, it almost always follows the same pattern:
+Also, notice that while Kubernetes YAML can appear long and complicated at first, it almost always follows the same pattern:
+
 - The `apiVersion`, which indicates the Kubernetes API that parses this object
 - The `kind` indicating what sort of object this is
 - Some `metadata` applying things like names to your objects
@@ -83,49 +86,49 @@ In this Kubernetes YAML file, there are two objects, separated by the `---`:
 
 1. In a terminal, navigate to where you created `bb.yaml` and deploy your application to Kubernetes:
 
-    ```console
-    $ kubectl apply -f bb.yaml
-    ```
+   ```console
+   $ kubectl apply -f bb.yaml
+   ```
 
-    You should see output that looks like the following, indicating your Kubernetes objects were created successfully:
+   You should see output that looks like the following, indicating your Kubernetes objects were created successfully:
 
-    ```shell
-    deployment.apps/bb-demo created
-    service/bb-entrypoint created
-    ```
+   ```shell
+   deployment.apps/bb-demo created
+   service/bb-entrypoint created
+   ```
 
 2. Make sure everything worked by listing your deployments:
 
-    ```console
-    $ kubectl get deployments
-    ```
+   ```console
+   $ kubectl get deployments
+   ```
 
-    if all is well, your deployment should be listed as follows:
+   if all is well, your deployment should be listed as follows:
 
-    ```shell
-    NAME      READY   UP-TO-DATE   AVAILABLE   AGE
-    bb-demo   1/1     1            1           40s
-    ```
+   ```shell
+   NAME      READY   UP-TO-DATE   AVAILABLE   AGE
+   bb-demo   1/1     1            1           40s
+   ```
 
-    This indicates all one of the pods you asked for in your YAML are up and running. Do the same check for your services:
+   This indicates all one of the pods you asked for in your YAML are up and running. Do the same check for your services:
 
-    ```console
-    $ kubectl get services
+   ```console
+   $ kubectl get services
 
-    NAME            TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
-    bb-entrypoint   NodePort    10.106.145.116   <none>        3000:30001/TCP   53s
-    kubernetes      ClusterIP   10.96.0.1        <none>        443/TCP          138d
-    ```
+   NAME            TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+   bb-entrypoint   NodePort    10.106.145.116   <none>        3000:30001/TCP   53s
+   kubernetes      ClusterIP   10.96.0.1        <none>        443/TCP          138d
+   ```
 
-    In addition to the default `kubernetes` service, we see our `bb-entrypoint` service, accepting traffic on port 30001/TCP.
+   In addition to the default `kubernetes` service, we see our `bb-entrypoint` service, accepting traffic on port 30001/TCP.
 
 3. Open a browser and visit your Todo app at `localhost:30001`. You should see your Todo application, the same as when you ran it as a stand-alone container in [Part 2](02_our_app.md) of the tutorial.
 
 4. Once satisfied, tear down your application:
 
-    ```console
-    $ kubectl delete -f bb.yaml
-    ```
+   ```console
+   $ kubectl delete -f bb.yaml
+   ```
 
 ## Conclusion
 
@@ -137,6 +140,6 @@ In addition to deploying to Kubernetes, you have also described your application
 
 Further documentation for all new Kubernetes objects used in this article are available here:
 
- - [Kubernetes Pods](https://kubernetes.io/docs/concepts/workloads/pods/pod/)
- - [Kubernetes Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
- - [Kubernetes Services](https://kubernetes.io/docs/concepts/services-networking/service/)
+- [Kubernetes Pods](https://kubernetes.io/docs/concepts/workloads/pods/pod/)
+- [Kubernetes Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
+- [Kubernetes Services](https://kubernetes.io/docs/concepts/services-networking/service/)

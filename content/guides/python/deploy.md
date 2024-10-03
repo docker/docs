@@ -5,7 +5,8 @@ weight: 50
 keywords: deploy, kubernetes, python
 description: Learn how to develop locally using Kubernetes
 aliases:
-- /language/python/deploy/
+  - /language/python/deploy/
+  - /guides/language/python/deploy/
 ---
 
 ## Prerequisites
@@ -39,27 +40,27 @@ spec:
         app: postgres
     spec:
       containers:
-      - name: postgres
-        image: postgres
-        ports:
-        - containerPort: 5432
-        env:
-        - name: POSTGRES_DB
-          value: example
-        - name: POSTGRES_USER
-          value: postgres
-        - name: POSTGRES_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: postgres-secret
-              key: POSTGRES_PASSWORD
-        volumeMounts:
-        - name: postgres-data
-          mountPath: /var/lib/postgresql/data
+        - name: postgres
+          image: postgres
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_DB
+              value: example
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_PASSWORD
+          volumeMounts:
+            - name: postgres-data
+              mountPath: /var/lib/postgresql/data
       volumes:
-      - name: postgres-data
-        persistentVolumeClaim:
-          claimName: postgres-pvc
+        - name: postgres-data
+          persistentVolumeClaim:
+            claimName: postgres-pvc
 ---
 apiVersion: v1
 kind: Service
@@ -68,7 +69,7 @@ metadata:
   namespace: default
 spec:
   ports:
-  - port: 5432
+    - port: 5432
   selector:
     app: postgres
 ---
@@ -79,7 +80,7 @@ metadata:
   namespace: default
 spec:
   accessModes:
-  - ReadWriteOnce
+    - ReadWriteOnce
   resources:
     requests:
       storage: 1Gi
@@ -113,25 +114,25 @@ spec:
         service: fastapi
     spec:
       containers:
-      - name: fastapi-service
-        image: technox64/python-docker-dev-example-test:latest
-        imagePullPolicy: Always
-        env:
-        - name: POSTGRES_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: postgres-secret
-              key: POSTGRES_PASSWORD
-        - name: POSTGRES_USER
-          value: postgres
-        - name: POSTGRES_DB
-          value: example
-        - name: POSTGRES_SERVER
-          value: postgres
-        - name: POSTGRES_PORT
-          value: "5432"
-        ports:
-        - containerPort: 8001
+        - name: fastapi-service
+          image: technox64/python-docker-dev-example-test:latest
+          imagePullPolicy: Always
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_PASSWORD
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_DB
+              value: example
+            - name: POSTGRES_SERVER
+              value: postgres
+            - name: POSTGRES_PORT
+              value: "5432"
+          ports:
+            - containerPort: 8001
 ---
 apiVersion: v1
 kind: Service
@@ -143,30 +144,30 @@ spec:
   selector:
     service: fastapi
   ports:
-  - port: 8001
-    targetPort: 8001
-    nodePort: 30001
+    - port: 8001
+      targetPort: 8001
+      nodePort: 30001
 ```
 
 In these Kubernetes YAML file, there are various objects, separated by the `---`:
 
- - A Deployment, describing a scalable group of identical pods. In this case,
-   you'll get just one replica, or copy of your pod. That pod, which is
-   described under `template`, has just one container in it. The
-    container is created from the image built by GitHub Actions in [Configure CI/CD for
-    your Python application](configure-ci-cd.md).
- - A Service, which will define how the ports are mapped in the containers.
- - A PersistentVolumeClaim, to define a storage that will be persistent through restarts for the database.
- - A Secret, Keeping the database password as a example using secret kubernetes resource.
- - A NodePort service, which will route traffic from port 30001 on your host to
-   port 8001 inside the pods it routes to, allowing you to reach your app
-   from the network.
+- A Deployment, describing a scalable group of identical pods. In this case,
+  you'll get just one replica, or copy of your pod. That pod, which is
+  described under `template`, has just one container in it. The
+  container is created from the image built by GitHub Actions in [Configure CI/CD for
+  your Python application](configure-ci-cd.md).
+- A Service, which will define how the ports are mapped in the containers.
+- A PersistentVolumeClaim, to define a storage that will be persistent through restarts for the database.
+- A Secret, Keeping the database password as a example using secret kubernetes resource.
+- A NodePort service, which will route traffic from port 30001 on your host to
+  port 8001 inside the pods it routes to, allowing you to reach your app
+  from the network.
 
 To learn more about Kubernetes objects, see the [Kubernetes documentation](https://kubernetes.io/docs/home/).
 
 > [!NOTE]
 >
-> * The `NodePort` service is good for development/testing purposes. For production you should implement an [ingress-controller](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/).
+> - The `NodePort` service is good for development/testing purposes. For production you should implement an [ingress-controller](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/).
 
 ## Deploy and check your application
 
@@ -250,6 +251,7 @@ To learn more about Kubernetes objects, see the [Kubernetes documentation](https
 In this section, you learned how to use Docker Desktop to deploy your application to a fully-featured Kubernetes environment on your development machine.
 
 Related information:
-   - [Kubernetes documentation](https://kubernetes.io/docs/home/)
-   - [Deploy on Kubernetes with Docker Desktop](/manuals/desktop/kubernetes.md)
-   - [Swarm mode overview](/manuals/engine/swarm/_index.md)
+
+- [Kubernetes documentation](https://kubernetes.io/docs/home/)
+- [Deploy on Kubernetes with Docker Desktop](/manuals/desktop/kubernetes.md)
+- [Swarm mode overview](/manuals/engine/swarm/_index.md)

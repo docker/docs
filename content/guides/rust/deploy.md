@@ -5,7 +5,8 @@ weight: 50
 keywords: deploy, kubernetes, rust
 description: Learn how to test your Rust deployment locally using Kubernetes
 aliases:
-- /language/rust/deploy/
+  - /language/rust/deploy/
+  - /guides/language/rust/deploy/
 ---
 
 ## Prerequisites
@@ -47,7 +48,12 @@ spec:
       initContainers:
         - name: wait-for-db
           image: busybox:1.28
-          command: ['sh', '-c', 'until nc -zv db 5432; do echo "waiting for db"; sleep 2; done;']
+          command:
+            [
+              "sh",
+              "-c",
+              'until nc -zv db 5432; do echo "waiting for db"; sleep 2; done;',
+            ]
       containers:
         - image: DOCKER_USERNAME/REPO_NAME
           name: server
@@ -148,14 +154,14 @@ status:
 
 In this Kubernetes YAML file, there are four objects, separated by the `---`. In addition to a Service and Deployment for the database, the other two objects are:
 
- - A Deployment, describing a scalable group of identical pods. In this case,
-   you'll get just one replica, or copy of your pod. That pod, which is
-   described under `template`, has just one container in it. The container is
-    created from the image built by GitHub Actions in [Configure CI/CD for your
-    Rust application](configure-ci-cd.md).
- - A NodePort service, which will route traffic from port 30001 on your host to
-   port 5000 inside the pods it routes to, allowing you to reach your app
-   from the network.
+- A Deployment, describing a scalable group of identical pods. In this case,
+  you'll get just one replica, or copy of your pod. That pod, which is
+  described under `template`, has just one container in it. The container is
+  created from the image built by GitHub Actions in [Configure CI/CD for your
+  Rust application](configure-ci-cd.md).
+- A NodePort service, which will route traffic from port 30001 on your host to
+  port 5000 inside the pods it routes to, allowing you to reach your app
+  from the network.
 
 To learn more about Kubernetes objects, see the [Kubernetes documentation](https://kubernetes.io/docs/home/).
 
@@ -226,6 +232,7 @@ To learn more about Kubernetes objects, see the [Kubernetes documentation](https
 In this section, you learned how to use Docker Desktop to deploy your application to a fully-featured Kubernetes environment on your development machine.
 
 Related information:
-   - [Kubernetes documentation](https://kubernetes.io/docs/home/)
-   - [Deploy on Kubernetes with Docker Desktop](/manuals/desktop/kubernetes.md)
-   - [Swarm mode overview](/manuals/engine/swarm/_index.md)
+
+- [Kubernetes documentation](https://kubernetes.io/docs/home/)
+- [Deploy on Kubernetes with Docker Desktop](/manuals/desktop/kubernetes.md)
+- [Swarm mode overview](/manuals/engine/swarm/_index.md)

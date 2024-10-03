@@ -5,14 +5,15 @@ weight: 10
 keywords: php, containerize, initialize, apache, composer
 description: Learn how to containerize a PHP application.
 aliases:
-- /language/php/containerize/
+  - /language/php/containerize/
+  - /guides/language/php/containerize/
 ---
 
 ## Prerequisites
 
-* You have installed the latest version of [Docker
+- You have installed the latest version of [Docker
   Desktop](/get-started/get-docker.md).
-* You have a [git client](https://git-scm.com/downloads). The examples in this
+- You have a [git client](https://git-scm.com/downloads). The examples in this
   section use a command-line based git client, but you can use any client.
 
 ## Overview
@@ -80,9 +81,10 @@ directory.
 ```
 
 To learn more about the files that `docker init` added, see the following:
- - [Dockerfile](/reference/dockerfile.md)
- - [.dockerignore](/reference/dockerfile.md#dockerignore-file)
- - [compose.yaml](/reference/compose-file/_index.md)
+
+- [Dockerfile](/reference/dockerfile.md)
+- [.dockerignore](/reference/dockerfile.md#dockerignore-file)
+- [compose.yaml](/reference/compose-file/_index.md)
 
 ## Run the application
 
@@ -124,7 +126,8 @@ In this section, you learned how you can containerize and run a simple PHP
 application using Docker.
 
 Related information:
- - [docker init reference](/reference/cli/docker/init.md)
+
+- [docker init reference](/reference/cli/docker/init.md)
 
 ## Next steps
 

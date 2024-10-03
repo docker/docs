@@ -9,13 +9,14 @@ aliases:
   - /language/nodejs/build-images/
   - /language/nodejs/run-containers/
   - /language/nodejs/containerize/
+  - /guides/language/nodejs/containerize/
 ---
 
 ## Prerequisites
 
-* You have installed the latest version of [Docker
+- You have installed the latest version of [Docker
   Desktop](/get-started/get-docker.md).
-* You have a [git client](https://git-scm.com/downloads). The examples in this
+- You have a [git client](https://git-scm.com/downloads). The examples in this
   section use a command-line based git client, but you can use any client.
 
 ## Overview
@@ -135,7 +136,6 @@ services:
       NODE_ENV: production
     ports:
       - 3000:3000
-
 # The commented out section below is an example of how to define a PostgreSQL
 # database that your application can use. `depends_on` tells Docker Compose to
 # start the database before your application. The `db-data` volume persists the
@@ -212,7 +212,6 @@ README.md
 {{< /tab >}}
 {{< /tabs >}}
 
-
 You should now have at least the following contents in your
 `docker-nodejs-sample` directory.
 
@@ -230,10 +229,10 @@ You should now have at least the following contents in your
 ```
 
 To learn more about the files, see the following:
- - [Dockerfile](/reference/dockerfile.md)
- - [.dockerignore](/reference/dockerfile.md#dockerignore-file)
- - [compose.yaml](/reference/compose-file/_index.md)
 
+- [Dockerfile](/reference/dockerfile.md)
+- [.dockerignore](/reference/dockerfile.md#dockerignore-file)
+- [compose.yaml](/reference/compose-file/_index.md)
 
 ## Run the application
 
@@ -277,9 +276,10 @@ In this section, you learned how you can containerize and run your Node.js
 application using Docker.
 
 Related information:
- - [Dockerfile reference](/reference/dockerfile.md)
- - [.dockerignore file reference](/reference/dockerfile.md#dockerignore-file)
- - [Docker Compose overview](/manuals/compose/_index.md)
+
+- [Dockerfile reference](/reference/dockerfile.md)
+- [.dockerignore file reference](/reference/dockerfile.md#dockerignore-file)
+- [Docker Compose overview](/manuals/compose/_index.md)
 
 ## Next steps
 

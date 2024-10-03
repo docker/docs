@@ -4,6 +4,8 @@ linkTitle: Containerize your app
 weight: 10
 keywords: python, generative ai, genai, llm, neo4j, ollama, containerize, intitialize, langchain, openai
 description: Learn how to containerize a generative AI (GenAI) application.
+aliases:
+  - /guides/use-case/genai-pdf-bot/containerize/
 ---
 
 ## Prerequisites
@@ -12,8 +14,8 @@ description: Learn how to containerize a generative AI (GenAI) application.
 >
 > GenAI applications can often benefit from GPU acceleration. Currently Docker Desktop supports GPU acceleration only on [Windows with the WSL2 backend](/manuals/desktop/gpu.md#using-nvidia-gpus-with-wsl2). Linux users can also access GPU acceleration using a native installation of the [Docker Engine](/manuals/engine/install/_index.md).
 
-* You have installed the latest version of [Docker Desktop](/get-started/get-docker.md) or, if you are a Linux user and are planning to use GPU acceleration, [Docker Engine](/manuals/engine/install/_index.md). Docker adds new features regularly and some parts of this guide may work only with the latest version of Docker Desktop.
-* You have a [git client](https://git-scm.com/downloads). The examples in this section use a command-line based git client, but you can use any client.
+- You have installed the latest version of [Docker Desktop](/get-started/get-docker.md) or, if you are a Linux user and are planning to use GPU acceleration, [Docker Engine](/manuals/engine/install/_index.md). Docker adds new features regularly and some parts of this guide may work only with the latest version of Docker Desktop.
+- You have a [git client](https://git-scm.com/downloads). The examples in this section use a command-line based git client, but you can use any client.
 
 ## Overview
 
@@ -91,10 +93,10 @@ directory.
 ```
 
 To learn more about the files that `docker init` added, see the following:
- - [Dockerfile](../../../reference/dockerfile.md)
- - [.dockerignore](../../../reference/dockerfile.md#dockerignore-file)
- - [compose.yaml](/reference/compose-file/_index.md)
 
+- [Dockerfile](../../../reference/dockerfile.md)
+- [.dockerignore](../../../reference/dockerfile.md#dockerignore-file)
+- [compose.yaml](/reference/compose-file/_index.md)
 
 ## Run the application
 
@@ -130,7 +132,8 @@ In this section, you learned how you can containerize and run your GenAI
 application using Docker.
 
 Related information:
- - [docker init CLI reference](../../../reference/cli/docker/init.md)
+
+- [docker init CLI reference](../../../reference/cli/docker/init.md)
 
 ## Next steps
 

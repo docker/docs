@@ -8,11 +8,12 @@ aliases:
   - /language/R/build-images/
   - /language/R/run-containers/
   - /language/r/containerize/
+  - /guides/language/r/containerize/
 ---
 
 ## Prerequisites
 
-* You have a [git client](https://git-scm.com/downloads). The examples in this section use a command-line based git client, but you can use any client.
+- You have a [git client](https://git-scm.com/downloads). The examples in this section use a command-line based git client, but you can use any client.
 
 ## Overview
 
@@ -43,9 +44,10 @@ directory.
 ```
 
 To learn more about the files in the repository, see the following:
- - [Dockerfile](/reference/dockerfile.md)
- - [.dockerignore](/reference/dockerfile.md#dockerignore-file)
- - [compose.yaml](/reference/compose-file/_index.md)
+
+- [Dockerfile](/reference/dockerfile.md)
+- [.dockerignore](/reference/dockerfile.md#dockerignore-file)
+- [compose.yaml](/reference/compose-file/_index.md)
 
 ## Run the application
 
@@ -89,7 +91,8 @@ In this section, you learned how you can containerize and run your R
 application using Docker.
 
 Related information:
- - [Docker Compose overview](/manuals/compose/_index.md)
+
+- [Docker Compose overview](/manuals/compose/_index.md)
 
 ## Next steps
 

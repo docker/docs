@@ -5,14 +5,15 @@ weight: 20
 keywords: rust, local, development, run,
 description: Learn how to develop your Rust application locally.
 aliases:
-- /language/rust/develop/
+  - /language/rust/develop/
+  - /guides/language/rust/develop/
 ---
 
 ## Prerequisites
 
-* You have installed the latest version of [Docker Desktop](/get-started/get-docker.md).
-* You have completed the walkthroughs in the Docker Desktop [Learning Center](/manuals/desktop/get-started.md) to learn about Docker concepts.
-* You have a [git client](https://git-scm.com/downloads). The examples in this section use a command-line based git client, but you can use any client.
+- You have installed the latest version of [Docker Desktop](/get-started/get-docker.md).
+- You have completed the walkthroughs in the Docker Desktop [Learning Center](/manuals/desktop/get-started.md) to learn about Docker concepts.
+- You have a [git client](https://git-scm.com/downloads). The examples in this section use a command-line based git client, but you can use any client.
 
 ## Overview
 
@@ -69,7 +70,6 @@ postgres=#
 
 In the previous command, you logged in to the PostgreSQL database by passing the `psql` command to the `db` container. Press ctrl-d to exit the PostgreSQL interactive terminal.
 
-
 ## Get and run the sample application
 
 For the sample application, you'll use a variation of the backend from the react-rust-postgres application from [Awesome Compose](https://github.com/docker/awesome-compose/tree/master/react-rust-postgres).
@@ -109,19 +109,19 @@ For the sample application, you'll use a variation of the backend from the react
    # Comments are provided throughout this file to help you get started.
    # If you need more help, visit the Dockerfile reference guide at
    # https://docs.docker.com/reference/dockerfile/
-   
+
    ################################################################################
    # Create a stage for building the application.
-   
+
    ARG RUST_VERSION=1.70.0
    ARG APP_NAME=react-rust-postgres
    FROM rust:${RUST_VERSION}-slim-bullseye AS build
    ARG APP_NAME
    WORKDIR /app
-   
+
    # Build the application.
    # Leverage a cache mount to /usr/local/cargo/registry/
-   # for downloaded dependencies and a cache mount to /app/target/ for 
+   # for downloaded dependencies and a cache mount to /app/target/ for
    # compiled dependencies which will speed up subsequent builds.
    # Leverage a bind mount to the src directory to avoid having to copy the
    # source code into the container. Once built, copy the executable to an
@@ -137,7 +137,7 @@ For the sample application, you'll use a variation of the backend from the react
    cargo build --locked --release
    cp ./target/release/$APP_NAME /bin/server
    EOF
-   
+
    ################################################################################
    # Create a new stage for running the application that contains the minimal
    # runtime dependencies for the application. This often uses a different base
@@ -150,7 +150,7 @@ For the sample application, you'll use a variation of the backend from the react
    # reproducability is important, consider using a digest
    # (e.g.,    debian@sha256:ac707220fbd7b67fc19b112cee8170b41a9e97f703f588b2cdbbcdcecdd8af57).
    FROM debian:bullseye-slim AS final
-   
+
    # Create a non-privileged user that the app will run under.
    # See https://docs.docker.com/develop/develop-images/dockerfile_best-practices/   #user
    ARG UID=10001
@@ -163,13 +163,13 @@ For the sample application, you'll use a variation of the backend from the react
        --uid "${UID}" \
        appuser
    USER appuser
-   
+
    # Copy the executable from the "build" stage.
    COPY --from=build /bin/server /bin/
-   
+
    # Expose the port that the application listens on.
    EXPOSE 8000
-   
+
    # What the container should run when it is started.
    CMD ["/bin/server"]
    ```
@@ -206,7 +206,7 @@ For the sample application, you'll use a variation of the backend from the react
    You should get a response like the following.
 
    ```json
-   [{"id":1,"login":"root"}]
+   [{ "id": 1, "login": "root" }]
    ```
 
 ## Use Compose to develop locally
@@ -218,8 +218,9 @@ This Compose file is super convenient as you don't have to type all the paramete
 In the cloned repository's directory, open the `compose.yaml` file in an IDE or text editor. `docker init` handled creating most of the instructions, but you'll need to update it for your unique application.
 
 You need to update the following items in the `compose.yaml` file:
- - Uncomment all of the database instructions.
- - Add the environment variables under the server service.
+
+- Uncomment all of the database instructions.
+- Add the environment variables under the server service.
 
 The following is the updated `compose.yaml` file.
 
@@ -247,12 +248,12 @@ services:
       - PG_PASSWORD=mysecretpassword
       - ADDRESS=0.0.0.0:8000
       - RUST_LOG=debug
-# The commented out section below is an example of how to define a PostgreSQL
-# database that your application can use. `depends_on` tells Docker Compose to
-# start the database before your application. The `db-data` volume persists the
-# database data between container restarts. The `db-password` secret is used
-# to set the database password. You must create `db/password.txt` and add
-# a password of your choosing to it before running `docker compose up`.
+    # The commented out section below is an example of how to define a PostgreSQL
+    # database that your application can use. `depends_on` tells Docker Compose to
+    # start the database before your application. The `db-data` volume persists the
+    # database data between container restarts. The `db-password` secret is used
+    # to set the database password. You must create `db/password.txt` and add
+    # a password of your choosing to it before running `docker compose up`.
     depends_on:
       db:
         condition: service_healthy
@@ -270,7 +271,7 @@ services:
     expose:
       - 5432
     healthcheck:
-      test: [ "CMD", "pg_isready" ]
+      test: ["CMD", "pg_isready"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -310,7 +311,7 @@ $ curl http://localhost:8000/users
 You should receive the following response:
 
 ```json
-[{"id":1,"login":"root"}]
+[{ "id": 1, "login": "root" }]
 ```
 
 ## Summary
@@ -318,8 +319,9 @@ You should receive the following response:
 In this section, you took a look at setting up your Compose file to run your Rust application and database with a single command.
 
 Related information:
- - [Docker volumes](/manuals/engine/storage/volumes.md)
- - [Compose overview](/manuals/compose/_index.md)
+
+- [Docker volumes](/manuals/engine/storage/volumes.md)
+- [Compose overview](/manuals/compose/_index.md)
 
 ## Next steps
 

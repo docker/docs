@@ -5,12 +5,13 @@ weight: 10
 keywords: rust, run, image, container,
 description: Learn how to run your Rust image as a container.
 aliases:
-- /language/rust/run-containers/
+  - /language/rust/run-containers/
+  - /guides/language/rust/run-containers/
 ---
 
 ## Prerequisite
 
-You have completed  [Build your Rust image](build-images.md) and you have built an image.
+You have completed [Build your Rust image](build-images.md) and you have built an image.
 
 ## Overview
 
@@ -124,13 +125,13 @@ You can start, stop, and restart Docker containers. When you stop a container, i
 
 ```console
 $ docker ps -a
-CONTAINER ID   IMAGE                   COMMAND                  CREATED          STATUS                      PORTS                       
+CONTAINER ID   IMAGE                   COMMAND                  CREATED          STATUS                      PORTS
      NAMES
-3074745e412c   docker-rust-image       "/bin/server"            3 minutes ago    Exited (0) 6 seconds ago                                
+3074745e412c   docker-rust-image       "/bin/server"            3 minutes ago    Exited (0) 6 seconds ago
      wonderful_kalam
-6cfa26e2e3c9   docker-rust-image       "/bin/server"            14 minutes ago   Exited (0) 5 minutes ago                                
+6cfa26e2e3c9   docker-rust-image       "/bin/server"            14 minutes ago   Exited (0) 5 minutes ago
      friendly_montalcini
-4cbe94b2ea0e   docker-rust-image       "/bin/server"            15 minutes ago   Exited (0) 14 minutes ago                               
+4cbe94b2ea0e   docker-rust-image       "/bin/server"            15 minutes ago   Exited (0) 14 minutes ago
      tender_bose
 ```
 
@@ -146,12 +147,12 @@ Now list all the containers again using the `docker ps` command.
 
 ```console
 $ docker ps --all
-CONTAINER ID   IMAGE                   COMMAND                  CREATED          STATUS                      PORTS                       
+CONTAINER ID   IMAGE                   COMMAND                  CREATED          STATUS                      PORTS
      NAMES
 3074745e412c   docker-rust-image       "/bin/server"            6 minutes ago    Up 4 seconds                0.0.0.0:3001->8000/tcp           wonderful_kalam
-6cfa26e2e3c9   docker-rust-image       "/bin/server"            16 minutes ago   Exited (0) 7 minutes ago                                
+6cfa26e2e3c9   docker-rust-image       "/bin/server"            16 minutes ago   Exited (0) 7 minutes ago
      friendly_montalcini
-4cbe94b2ea0e   docker-rust-image       "/bin/server"            18 minutes ago   Exited (0) 17 minutes ago                               
+4cbe94b2ea0e   docker-rust-image       "/bin/server"            18 minutes ago   Exited (0) 17 minutes ago
      tender_bose
 ```
 
@@ -196,7 +197,8 @@ That’s better! You can now easily identify your container based on the name.
 In this section, you took a look at running containers. You also took a look at managing containers by starting, stopping, and restarting them. And finally, you looked at naming your containers so they are more easily identifiable.
 
 Related information:
- - [docker run CLI reference](/reference/cli/docker/container/run.md)
+
+- [docker run CLI reference](/reference/cli/docker/container/run.md)
 
 ## Next steps
 

@@ -5,8 +5,9 @@ weight: 20
 keywords: get started, go, golang, local, development
 description: Learn how to develop your application locally.
 aliases:
-- /get-started/golang/develop/
-- /language/golang/develop/
+  - /get-started/golang/develop/
+  - /language/golang/develop/
+  - /guides/language/golang/develop/
 ---
 
 ## Prerequisites
@@ -94,7 +95,7 @@ $ docker run -d \
 # ... output omitted ...
 ```
 
-Notice a clever use of the tag `latest-v20.1` to make sure that you're pulling the latest patch version of 20.1.  The diversity of available tags depend on the image maintainer. Here, your intent was to have the latest patched version of CockroachDB while not straying too far away from the known working version as the time goes by. To see the tags available for the CockroachDB image, you can go to the [CockroachDB page on Docker Hub](https://hub.docker.com/r/cockroachdb/cockroach/tags).
+Notice a clever use of the tag `latest-v20.1` to make sure that you're pulling the latest patch version of 20.1. The diversity of available tags depend on the image maintainer. Here, your intent was to have the latest patched version of CockroachDB while not straying too far away from the known working version as the time goes by. To see the tags available for the CockroachDB image, you can go to the [CockroachDB page on Docker Hub](https://hub.docker.com/r/cockroachdb/cockroach/tags).
 
 ### Configure the database engine
 
@@ -123,7 +124,7 @@ $ docker exec -it roach ./cockroach sql --insecure
    ```
 
 3. Give the new user the necessary permissions:
-   
+
    ```sql
    GRANT ALL ON DATABASE mydb TO totoro;
    ```
@@ -131,7 +132,6 @@ $ docker exec -it roach ./cockroach sql --insecure
 4. Type `quit` to exit the shell.
 
 The following is an example of interaction with the SQL shell.
-
 
 ```console
 $ sudo docker exec -it roach ./cockroach sql --insecure
@@ -164,15 +164,14 @@ root@:26257/defaultdb> quit
 oliver@hki:~$
 ```
 
-
 ### Meet the example application
 
 Now that you have started and configured the database engine, you can switch your attention to the application.
 
 The example application for this module is an extended version of `docker-gs-ping` application you've used in the previous modules. You have two options:
 
-* You can update your local copy of `docker-gs-ping` to match the new extended version presented in this chapter; or
-* You can clone the [docker/docker-gs-ping-dev](https://github.com/docker/docker-gs-ping-dev) repository. This latter approach is recommended.
+- You can update your local copy of `docker-gs-ping` to match the new extended version presented in this chapter; or
+- You can clone the [docker/docker-gs-ping-dev](https://github.com/docker/docker-gs-ping-dev) repository. This latter approach is recommended.
 
 To checkout the example application, run:
 
@@ -183,17 +182,17 @@ $ git clone https://github.com/docker/docker-gs-ping-dev.git
 
 The application's `main.go` now includes database initialization code, as well as the code to implement a new business requirement:
 
-* An HTTP `POST` request to `/send` containing a `{ "value" : string }` JSON must save the value to the database.
+- An HTTP `POST` request to `/send` containing a `{ "value" : string }` JSON must save the value to the database.
 
 You also have an update for another business requirement. The requirement was:
 
-* The application responds with a text message containing a heart symbol ("`<3`") on requests to `/`.
+- The application responds with a text message containing a heart symbol ("`<3`") on requests to `/`.
 
 And now it's going to be:
 
-* The application responds with the string containing the count of messages stored in the database, enclosed in the parentheses.
+- The application responds with the string containing the count of messages stored in the database, enclosed in the parentheses.
 
-   Example output: `Hello, Docker! (7)`
+  Example output: `Hello, Docker! (7)`
 
 The full source code listing of `main.go` follows.
 
@@ -375,7 +374,7 @@ $ docker run -it --rm -d \
 
 There are a few points to note about this command.
 
-* You map container port `8080` to host port `80` this time. Thus, for `GET` requests you can get away with literally `curl localhost`:
+- You map container port `8080` to host port `80` this time. Thus, for `GET` requests you can get away with literally `curl localhost`:
 
   ```console
   $ curl localhost
@@ -389,11 +388,11 @@ There are a few points to note about this command.
   Hello, Docker! (0)
   ```
 
-* The total number of stored messages is `0` for now. This is fine, because you haven't posted anything to your application yet.
-* You refer to the database container by its hostname, which is `db`. This is why you had `--hostname db` when you started the database container.
+- The total number of stored messages is `0` for now. This is fine, because you haven't posted anything to your application yet.
+- You refer to the database container by its hostname, which is `db`. This is why you had `--hostname db` when you started the database container.
 
-* The actual password doesn't matter, but it must be set to something to avoid confusing the example application.
-* The container you've just run is named `rest-server`. These names are useful for managing the container lifecycle:
+- The actual password doesn't matter, but it must be set to something to avoid confusing the example application.
+- The container you've just run is named `rest-server`. These names are useful for managing the container lifecycle:
 
   ```console
   # Don't do this just yet, it's only an example:
@@ -414,7 +413,7 @@ $ curl --request POST \
 The application responds with the contents of the message, which means it has been saved in the database:
 
 ```json
-{"value":"Hello, Docker!"}
+{ "value": "Hello, Docker!" }
 ```
 
 Send another message:
@@ -429,7 +428,7 @@ $ curl --request POST \
 And again, you get the value of the message back:
 
 ```json
-{"value":"Hello, Oliver!"}
+{ "value": "Hello, Oliver!" }
 ```
 
 Run curl and see what the message counter says:
@@ -524,9 +523,8 @@ In this section, you'll create a Docker Compose file to start your `docker-gs-pi
 
 In your application's directory, create a new text file named `docker-compose.yml` with the following content.
 
-
 ```yaml
-version: '3.8'
+version: "3.8"
 
 services:
   docker-gs-ping-roach:
@@ -570,7 +568,6 @@ networks:
     driver: bridge
 ```
 
-
 This Docker Compose configuration is super convenient as you don't have to type all the parameters to pass to the `docker run` command. You can declaratively do that in the Docker Compose file. The [Docker Compose documentation pages](/manuals/compose/_index.md) are quite extensive and include a full reference for the Docker Compose file format.
 
 ### The `.env` file
@@ -587,10 +584,10 @@ The exact value doesn't really matter for this example, because you run Cockroac
 
 The file name `docker-compose.yml` is the default file name which `docker compose` command recognizes if no `-f` flag is provided. This means you can have multiple Docker Compose files if your environment has such requirements. Furthermore, Docker Compose files are... composable (pun intended), so multiple files can be specified on the command line to merge parts of the configuration together. The following list is just a few examples of scenarios where such a feature would be very useful:
 
-* Using a bind mount for the source code for local development but not when running the CI tests;
-* Switching between using a pre-built image for the frontend for some API application vs creating a bind mount for source code;
-* Adding additional services for integration testing;
-* And many more...
+- Using a bind mount for the source code for local development but not when running the CI tests;
+- Switching between using a pre-built image for the frontend for some API application vs creating a bind mount for source code;
+- Adding additional services for integration testing;
+- And many more...
 
 You aren't going to cover any of these advanced use cases here.
 
@@ -598,8 +595,8 @@ You aren't going to cover any of these advanced use cases here.
 
 One of the really cool features of Docker Compose is [variable substitution](/reference/compose-file/interpolation.md). You can see some examples in the Compose file, `environment` section. By means of an example:
 
-* `PGUSER=${PGUSER:-totoro}` means that inside the container, the environment variable `PGUSER` shall be set to the same value as it has on the host machine where Docker Compose is run. If there is no environment variable with this name on the host machine, the variable inside the container gets the default value of `totoro`.
-* `PGPASSWORD=${PGPASSWORD:?database password not set}` means that if the environment variable `PGPASSWORD` isn't set on the host, Docker Compose will display an error. This is OK, because you don't want to hard-code default values for the password. You set the password value in the `.env` file, which is local to your machine. It is always a good idea to add `.env` to `.gitignore` to prevent the secrets being checked into the version control.
+- `PGUSER=${PGUSER:-totoro}` means that inside the container, the environment variable `PGUSER` shall be set to the same value as it has on the host machine where Docker Compose is run. If there is no environment variable with this name on the host machine, the variable inside the container gets the default value of `totoro`.
+- `PGPASSWORD=${PGPASSWORD:?database password not set}` means that if the environment variable `PGPASSWORD` isn't set on the host, Docker Compose will display an error. This is OK, because you don't want to hard-code default values for the password. You set the password value in the `.env` file, which is local to your machine. It is always a good idea to add `.env` to `.gitignore` to prevent the secrets being checked into the version control.
 
 Other ways of dealing with undefined or empty values exist, as documented in the [variable substitution](/reference/compose-file/interpolation.md) section of the Docker documentation.
 
@@ -724,8 +721,8 @@ Such distributed set-up offers interesting possibilities, such as applying Chaos
 
 If you are interested in experimenting with CockroachDB clusters, check out:
 
-* [Start a CockroachDB Cluster in Docker](https://www.cockroachlabs.com/docs/v20.2/start-a-local-cluster-in-docker-mac.html) article; and
-* Documentation for Docker Compose keywords [`deploy`](/reference/compose-file/legacy-versions.md) and [`replicas`](/reference/compose-file/legacy-versions.md).
+- [Start a CockroachDB Cluster in Docker](https://www.cockroachlabs.com/docs/v20.2/start-a-local-cluster-in-docker-mac.html) article; and
+- Documentation for Docker Compose keywords [`deploy`](/reference/compose-file/legacy-versions.md) and [`replicas`](/reference/compose-file/legacy-versions.md).
 
 ### Other databases
 

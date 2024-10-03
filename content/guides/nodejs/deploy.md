@@ -5,7 +5,8 @@ weight: 50
 keywords: deploy, kubernetes, node, node.js
 description: Learn how to deploy locally to test and debug your Kubernetes deployment
 aliases:
-- /language/nodejs/deploy/
+  - /language/nodejs/deploy/
+  - /guides/language/nodejs/deploy/
 ---
 
 ## Prerequisites
@@ -45,9 +46,9 @@ spec:
         todo: web
     spec:
       containers:
-      - name: todo-site
-        image: DOCKER_USERNAME/REPO_NAME
-        imagePullPolicy: Always
+        - name: todo-site
+          image: DOCKER_USERNAME/REPO_NAME
+          imagePullPolicy: Always
 ---
 apiVersion: v1
 kind: Service
@@ -59,21 +60,21 @@ spec:
   selector:
     todo: web
   ports:
-  - port: 3000
-    targetPort: 3000
-    nodePort: 30001
+    - port: 3000
+      targetPort: 3000
+      nodePort: 30001
 ```
 
 In this Kubernetes YAML file, there are two objects, separated by the `---`:
 
- - A Deployment, describing a scalable group of identical pods. In this case,
-   you'll get just one replica, or copy of your pod. That pod, which is
-   described under `template`, has just one container in it. The container is
-   created from the image built by GitHub Actions in [Configure CI/CD for your
-   Node.js application](configure-ci-cd.md).
- - A NodePort service, which will route traffic from port 30001 on your host to
-   port 3000 inside the pods it routes to, allowing you to reach your app
-   from the network.
+- A Deployment, describing a scalable group of identical pods. In this case,
+  you'll get just one replica, or copy of your pod. That pod, which is
+  described under `template`, has just one container in it. The container is
+  created from the image built by GitHub Actions in [Configure CI/CD for your
+  Node.js application](configure-ci-cd.md).
+- A NodePort service, which will route traffic from port 30001 on your host to
+  port 3000 inside the pods it routes to, allowing you to reach your app
+  from the network.
 
 To learn more about Kubernetes objects, see the [Kubernetes documentation](https://kubernetes.io/docs/home/).
 
@@ -136,6 +137,7 @@ To learn more about Kubernetes objects, see the [Kubernetes documentation](https
 In this section, you learned how to use Docker Desktop to deploy your application to a fully-featured Kubernetes environment on your development machine.
 
 Related information:
-   - [Kubernetes documentation](https://kubernetes.io/docs/home/)
-   - [Deploy on Kubernetes with Docker Desktop](/manuals/desktop/kubernetes.md)
-   - [Swarm mode overview](/manuals/engine/swarm/_index.md)
+
+- [Kubernetes documentation](https://kubernetes.io/docs/home/)
+- [Deploy on Kubernetes with Docker Desktop](/manuals/desktop/kubernetes.md)
+- [Swarm mode overview](/manuals/engine/swarm/_index.md)

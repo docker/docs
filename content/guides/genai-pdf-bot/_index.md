@@ -1,23 +1,23 @@
 ---
 title: PDF analysis and chat
 description: Containerize generative AI (GenAI) apps using Docker
-keywords:  python, generative ai, genai, llm, neo4j, ollama, langchain
-toc_min: 1
-toc_max: 2
+keywords: python, generative ai, genai, llm, neo4j, ollama, langchain
 summary: |
   This guide explains how to build a PDF bot using Docker and generative AI,
   focusing on setting up a containerized environment for parsing PDF documents
   and generating intelligent responses based on the content.
 levels: [beginner]
 subjects: [ai]
+aliases:
+  - /guides/use-case/genai-pdf-bot/
 params:
   time: 20 minutes
 ---
 
 The generative AI (GenAI) guide teaches you how to containerize an existing GenAI application using Docker. In this guide, you’ll learn how to:
 
-* Containerize and run a Python-based GenAI application
-* Set up a local environment to run the complete GenAI stack locally for development
+- Containerize and run a Python-based GenAI application
+- Set up a local environment to run the complete GenAI stack locally for development
 
 Start by containerizing an existing GenAI application.
 

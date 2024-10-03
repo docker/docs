@@ -5,13 +5,14 @@ weight: 5
 keywords: rust, build, images, dockerfile
 description: Learn how to build your first Rust Docker image
 aliases:
-- /language/rust/build-images/
+  - /language/rust/build-images/
+  - /guides/language/rust/build-images/
 ---
 
 ## Prerequisites
 
-* You have installed the latest version of [Docker Desktop](/get-started/get-docker.md).
-* You have a [git client](https://git-scm.com/downloads). The examples in this section use a command-line based git client, but you can use any client.
+- You have installed the latest version of [Docker Desktop](/get-started/get-docker.md).
+- You have a [git client](https://git-scm.com/downloads). The examples in this section use a command-line based git client, but you can use any client.
 
 ## Overview
 
@@ -55,10 +56,11 @@ Let's get started!
 
 You should now have the following new files in your `docker-rust-hello`
 directory:
- - Dockerfile
- - .dockerignore
- - compose.yaml
- - README.Docker.md
+
+- Dockerfile
+- .dockerignore
+- compose.yaml
+- README.Docker.md
 
 For building an image, only the Dockerfile is necessary. Open the Dockerfile
 in your favorite IDE or text editor and see what it contains. To learn more
@@ -91,19 +93,19 @@ You should see output like the following.
 ```console
 [+] Building 62.6s (14/14) FINISHED
  => [internal] load .dockerignore                                                                                                    0.1s
- => => transferring context: 2B                                                                                                      0.0s 
+ => => transferring context: 2B                                                                                                      0.0s
  => [internal] load build definition from Dockerfile                                                                                 0.1s
- => => transferring dockerfile: 2.70kB                                                                                               0.0s 
+ => => transferring dockerfile: 2.70kB                                                                                               0.0s
  => resolve image config for docker.io/docker/dockerfile:1                                                                           2.3s
  => CACHED docker-image://docker.io/docker/dockerfile:1@sha256:39b85bbfa7536a5feceb7372a0817649ecb2724562a38360f4d6a7782a409b14      0.0s
  => [internal] load metadata for docker.io/library/debian:bullseye-slim                                                              1.9s
- => [internal] load metadata for docker.io/library/rust:1.70.0-slim-bullseye                                                         1.7s 
+ => [internal] load metadata for docker.io/library/rust:1.70.0-slim-bullseye                                                         1.7s
  => [build 1/3] FROM docker.io/library/rust:1.70.0-slim-bullseye@sha256:585eeddab1ec712dade54381e115f676bba239b1c79198832ddda397c1f  0.0s
- => [internal] load build context                                                                                                    0.0s 
- => => transferring context: 35.29kB                                                                                                 0.0s 
- => [final 1/3] FROM docker.io/library/debian:bullseye-slim@sha256:7606bef5684b393434f06a50a3d1a09808fee5a0240d37da5d181b1b121e7637  0.0s 
+ => [internal] load build context                                                                                                    0.0s
+ => => transferring context: 35.29kB                                                                                                 0.0s
+ => [final 1/3] FROM docker.io/library/debian:bullseye-slim@sha256:7606bef5684b393434f06a50a3d1a09808fee5a0240d37da5d181b1b121e7637  0.0s
  => CACHED [build 2/3] WORKDIR /app                                                                                                  0.0s
- => [build 3/3] RUN --mount=type=bind,source=src,target=src     --mount=type=bind,source=Cargo.toml,target=Cargo.toml     --mount=  57.7s 
+ => [build 3/3] RUN --mount=type=bind,source=src,target=src     --mount=type=bind,source=Cargo.toml,target=Cargo.toml     --mount=  57.7s
  => CACHED [final 2/3] RUN adduser     --disabled-password     --gecos ""     --home "/nonexistent"     --shell "/sbin/nologin"      0.0s
  => CACHED [final 3/3] COPY --from=build /bin/server /bin/                                                                           0.0s
  => exporting to image                                                                                                               0.0s
@@ -175,11 +177,11 @@ Docker removed the image tagged with `:v1.0.0`, but the `docker-rust-image:lates
 This section showed how you can use `docker init` to create a Dockerfile and .dockerignore file for a Rust application. It then showed you how to build an image. And finally, it showed you how to tag an image and list all images.
 
 Related information:
- - [Dockerfile reference](/reference/dockerfile.md)
- - [.dockerignore file](/reference/dockerfile.md#dockerignore-file)
- - [docker init CLI reference](/reference/cli/docker/init.md)
- - [docker build CLI reference](/reference/cli/docker/buildx/build.md)
 
+- [Dockerfile reference](/reference/dockerfile.md)
+- [.dockerignore file](/reference/dockerfile.md#dockerignore-file)
+- [docker init CLI reference](/reference/cli/docker/init.md)
+- [docker build CLI reference](/reference/cli/docker/buildx/build.md)
 
 ## Next steps
 

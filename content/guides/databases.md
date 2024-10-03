@@ -8,6 +8,8 @@ summary: |
   streamline your development and deployment processes.
 levels: [beginner]
 subjects: [databases]
+aliases:
+  - /guides/use-case/databases/
 params:
   time: 20 minutes
 ---
@@ -69,7 +71,7 @@ In this command:
 - `mysql:latest` specifies that you want to use the latest version of the MySQL
   image.
 
- To verify that you container is running, run `docker ps` in a terminal
+To verify that you container is running, run `docker ps` in a terminal
 
 {{< /tab >}}
 {{< tab name="GUI" >}}
@@ -83,11 +85,12 @@ To run a container using the GUI:
    The **Run a new container** model appears.
 4. Expand **Optional settings**.
 5. In the optional settings, specify the following:
+
    - **Container name**: `my-mysql`
    - **Environment variables**:
-      - `MYSQL_ROOT_PASSWORD`:`my-secret-pw`
-      - `MYSQL_DATABASE`:`mydb`
-   
+     - `MYSQL_ROOT_PASSWORD`:`my-secret-pw`
+     - `MYSQL_DATABASE`:`mydb`
+
    ![The optional settings screen with the options specified.](images/databases-1.webp)
 
 6. Select `Run`.
@@ -186,7 +189,6 @@ guide. To stop and remove a container, either:
 - Or, in the Docker Dashboard, select the **Delete** icon next to your
   container in the **Containers** view.
 
-
 Next, you can use either the Docker Desktop GUI or CLI to run the container with
 the port mapped.
 
@@ -230,9 +232,9 @@ To run a container using the GUI:
    - **Container name**: `my-mysql`
    - **Host port** for the **3306/tcp** port: `3307`
    - **Environment variables**:
-      - `MYSQL_ROOT_PASSWORD`:`my-secret-pw`
-      - `MYSQL_DATABASE`:`mydb`
-      
+     - `MYSQL_ROOT_PASSWORD`:`my-secret-pw`
+     - `MYSQL_DATABASE`:`mydb`
+
    ![The optional settings screen with the options specified.](images/databases-2.webp)
 
 6. Select `Run`.
@@ -331,7 +333,7 @@ To run a database container with a volume attached, and then verify that the
 data persists:
 
 1. Run the container and attach the volume.
-   
+
    ```console
    $ docker run --name my-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -e MYSQL_DATABASE=mydb -v my-db-volume:/var/lib/mysql -d mysql:latest
    ```
@@ -340,11 +342,11 @@ data persists:
 
 2. Create some data in the database. Use the `docker exec` command to run
    `mysql` inside the container and create a table.
-   
+
    ```console
    $ docker exec my-mysql mysql -u root -pmy-secret-pw -e "CREATE TABLE IF NOT EXISTS mydb.mytable (column_name VARCHAR(255)); INSERT INTO mydb.mytable (column_name) VALUES ('value');"
    ```
-   
+
    This command uses the `mysql` tool in the container to create a table named
    `mytable` with a column named `column_name`, and finally inserts a value of
    `value`.
@@ -363,6 +365,7 @@ data persists:
    ```console
    $ docker run --name my-mysql -v my-db-volume:/var/lib/mysql -d mysql:latest
    ```
+
 5. Verify that the table you created still exists. Use the `docker exec` command
    again to run `mysql` inside the container.
 
@@ -374,6 +377,7 @@ data persists:
    records from the `mytable` table.
 
    You should see output like the following.
+
    ```console
    column_name
    value
@@ -386,32 +390,35 @@ To run a database container with a volume attached, and then verify that the
 data persists:
 
 1. Run a container with a volume attached.
+
    1. In the Docker Dashboard, select the global search at the top of the window.
    2. Specify `mysql` in the search box, and select the **Images** tab if not
-   already selected.
+      already selected.
    3. Hover over the **mysql** image and select **Run**.
-   The **Run a new container** model appears.
+      The **Run a new container** model appears.
    4. Expand **Optional settings**.
    5. In the optional settings, specify the following:
 
       - **Container name**: `my-mysql`
       - **Environment variables**:
-         - `MYSQL_ROOT_PASSWORD`:`my-secret-pw`
-         - `MYSQL_DATABASE`:`mydb`
+        - `MYSQL_ROOT_PASSWORD`:`my-secret-pw`
+        - `MYSQL_DATABASE`:`mydb`
       - **Volumes**:
-         - `my-db-volume`:`/var/lib/mysql`
+        - `my-db-volume`:`/var/lib/mysql`
 
       ![The optional settings screen with the options specified.](images/databases-3.webp)
 
       Here, the name of the volume is `my-db-volume` and it is mounted in the
-     container at `/var/lib/mysql`.
+      container at `/var/lib/mysql`.
 
    6. Select `Run`.
+
 2. Create some data in the database.
+
    1. In the **Containers** view, next to your container select the **Show
       container actions** icon, and then select **Open in terminal**.
    2. Run the following command in the container's terminal to add a table.
-      
+
       ```console
       # mysql -u root -pmy-secret-pw -e "CREATE TABLE IF NOT EXISTS mydb.mytable (column_name VARCHAR(255)); INSERT INTO mydb.mytable (column_name) VALUES ('value');"
       ```
@@ -420,42 +427,43 @@ data persists:
       named `mytable` with a column named `column_name`, and finally inserts a
       value of value`.
 
-
 3. In the **Containers** view, select the **Delete** icon next to your
    container, and then select **Delete forever**. Without a volume, the table
    you created would be lost when deleting the container.
 4. Run a container with a volume attached.
+
    1. In the Docker Dashboard, select the global search at the top of the window.
    2. Specify `mysql` in the search box, and select the **Images** tab if not
-   already selected.
+      already selected.
    3. Hover over the **mysql** image and select **Run**.
-   The **Run a new container** model appears.
+      The **Run a new container** model appears.
    4. Expand **Optional settings**.
    5. In the optional settings, specify the following:
 
       - **Container name**: `my-mysql`
       - **Environment variables**:
-         - `MYSQL_ROOT_PASSWORD`:`my-secret-pw`
-         - `MYSQL_DATABASE`:`mydb`
+        - `MYSQL_ROOT_PASSWORD`:`my-secret-pw`
+        - `MYSQL_DATABASE`:`mydb`
       - **Volumes**:
-         - `my-db-volume`:`/var/lib/mysql`
+        - `my-db-volume`:`/var/lib/mysql`
 
       ![The optional settings screen with the options specified.](images/databases-3.webp)
 
    6. Select `Run`.
+
 5. Verify that the table you created still exists.
+
    1. In the **Containers** view, next to your container select the **Show
       container actions** icon, and then select **Open in terminal**.
    2. Run the following command in the container's terminal to verify that table
       you created still exists.
-      
+
       ```console
       # mysql -u root -pmy-secret-pw -e "SELECT * FROM mydb.mytable;"
       ```
 
       This command uses the `mysql` tool in the container to select all the
       records from the `mytable` table.
-
 
       You should see output like the following.
 
@@ -489,6 +497,7 @@ guide. To stop and remove a container, either:
 To build and run your custom image:
 
 1. Create a Dockerfile.
+
    1. Create a file named `Dockerfile` in your project directory. For this
       example, you can create the `Dockerfile` in an empty directory of your
       choice. This file will define how to build your custom MySQL image.
@@ -521,13 +530,13 @@ To build and run your custom image:
       `scripts`, and then create a file named `create_table.sql` with the
       following content.
 
-     ```text
-     CREATE TABLE IF NOT EXISTS mydb.myothertable (
-       column_name VARCHAR(255)
-     );
+   ```text
+   CREATE TABLE IF NOT EXISTS mydb.myothertable (
+     column_name VARCHAR(255)
+   );
 
-     INSERT INTO mydb.myothertable (column_name) VALUES ('other_value');
-     ```
+   INSERT INTO mydb.myothertable (column_name) VALUES ('other_value');
+   ```
 
    You should now have the following directory structure.
 
@@ -539,6 +548,7 @@ To build and run your custom image:
    ```
 
 2. Build your image.
+
    1. In a terminal, change directory to the directory where your `Dockerfile`
       is located.
    2. Run the following command to build the image.
@@ -546,6 +556,7 @@ To build and run your custom image:
       ```console
       $ docker build -t my-custom-mysql .
       ```
+
       In this command, `-t my-custom-mysql` tags (names) your new image as
       `my-custom-mysql`. The period (.) at the end of the command specifies the
       current directory as the context for the build, where Docker looks for the
@@ -582,6 +593,7 @@ To build and run your custom image:
    ```
 
    You should see output like the following.
+
    ```console
    column_name
    other_value
@@ -600,10 +612,11 @@ you'll create a Compose file and use it to run a MySQL database container and a 
 To run your containers with Docker Compose:
 
 1. Create a Docker Compose file.
+
    1. Create a file named `compose.yaml` in your project directory. This file
       will define the services, networks, and volumes.
    2. Add the following content to the `compose.yaml` file.
-      
+
       ```yaml
       services:
         db:
@@ -643,7 +656,7 @@ To run your containers with Docker Compose:
         allowing you to connect to the database from your host machine.
       - `volumes` mounts `my-db-volume` to `/var/lib/mysql` inside the container
         to persist database data.
-    
+
       In addition to the database service, there is a phpMyAdmin service. By
       default Compose sets up a single network for your app. Each container for
       a service joins the default network and is both reachable by other
@@ -652,13 +665,15 @@ To run your containers with Docker Compose:
       service name, `db`, in order to connect to the database service. For more details about Compose, see the [Compose file reference](/reference/compose-file/).
 
 2. Run Docker Compose.
+
    1. Open a terminal and change directory to the directory where your
       `compose.yaml` file is located.
    2. Run Docker Compose using the following command.
+
       ```console
       $ docker compose up
       ```
-      
+
       You can now access phpMyAdmin at
       [http://localhost:8080](http://localhost:8080) and connect to your
       database using `root` as the username and `my-secret-pw` as the password.

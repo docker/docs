@@ -5,8 +5,9 @@ weight: 5
 keywords: containers, images, go, golang, dockerfiles, coding, build, push, run
 description: Learn how to build your first Docker image by writing a Dockerfile
 aliases:
-- /get-started/golang/build-images/
-- /language/golang/build-images/
+  - /get-started/golang/build-images/
+  - /language/golang/build-images/
+  - /guides/language/golang/build-images/
 ---
 
 ## Overview
@@ -31,8 +32,8 @@ The example application is a caricature of a microservice. It is purposefully tr
 
 The application offers two HTTP endpoints:
 
-* It responds with a string containing a heart symbol (`<3`) to requests to `/`.
-* It responds with `{"Status" : "OK"}` JSON to a request to `/health`.
+- It responds with a string containing a heart symbol (`<3`) to requests to `/`.
+- It responds with `{"Status" : "OK"}` JSON to a request to `/health`.
 
 It responds with HTTP error 404 to any other request.
 
@@ -49,7 +50,6 @@ $ git clone https://github.com/docker/docker-gs-ping
 ```
 
 The application's `main.go` file is straightforward, if you are familiar with Go:
-
 
 ```go
 package main
@@ -99,7 +99,7 @@ func IntMin(a, b int) int {
 
 To build a container image with Docker, a `Dockerfile` with build instructions is required.
 
-Begin your `Dockerfile` with the (optional) parser directive line that instructs BuildKit to 
+Begin your `Dockerfile` with the (optional) parser directive line that instructs BuildKit to
 interpret your file according to the grammar rules for the specified version of the syntax.
 
 You then tell Docker what base image you would like to use for your application:
@@ -183,7 +183,7 @@ COPY *.go ./
 
 This `COPY` command uses a wildcard to copy all files with `.go` extension
 located in the current directory on the host (the directory where the `Dockerfile`
-is located) into the current directory inside the image. 
+is located) into the current directory inside the image.
 
 Now, to compile your application, use the familiar `RUN` command:
 
@@ -274,7 +274,7 @@ Build your first Docker image.
 $ docker build --tag docker-gs-ping .
 ```
 
-The build process will print some diagnostic messages as it goes through the build steps. 
+The build process will print some diagnostic messages as it goes through the build steps.
 The following is just an example of what these messages may look like.
 
 ```console
@@ -406,7 +406,7 @@ gigabyte, which is a lot for a tiny compiled Go application. You may also be
 wondering what happened to the full suite of Go tools, including the compiler,
 after you had built your image.
 
-The answer is that the full toolchain is still there, in the container image. 
+The answer is that the full toolchain is still there, in the container image.
 Not only this is inconvenient because of the large file size, but it may also
 present a security risk when the container is deployed.
 
@@ -422,7 +422,6 @@ other optional components.
 
 The `Dockerfile.multistage` in the sample application's repository has the
 following content:
-
 
 ```dockerfile
 # syntax=docker/dockerfile:1
@@ -457,7 +456,6 @@ USER nonroot:nonroot
 ENTRYPOINT ["/docker-gs-ping"]
 ```
 
-
 Since you have two Dockerfiles now, you have to tell Docker what Dockerfile
 you'd like to use to build the image. Tag the new image with `multistage`. This
 tag (like any other, apart from `latest`) has no special meaning for Docker,
@@ -477,10 +475,10 @@ docker-gs-ping   multistage   e3fdde09f172   About a minute ago   28.1MB
 docker-gs-ping   latest       336a3f164d0f   About an hour ago    1.11GB
 ```
 
-This is so because the ["distroless"](https://github.com/GoogleContainerTools/distroless) 
+This is so because the ["distroless"](https://github.com/GoogleContainerTools/distroless)
 base image that you have used in the second stage of the build is very barebones and is designed for lean deployments of static binaries.
 
-There's much more to multi-stage builds, including the possibility of multi-architecture builds, 
+There's much more to multi-stage builds, including the possibility of multi-architecture builds,
 so feel free to check out [multi-stage builds](/manuals/build/building/multi-stage.md). This is, however, not essential for your progress here.
 
 ## Next steps

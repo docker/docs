@@ -5,7 +5,8 @@ weight: 30
 keywords: node.js, node, test
 description: Learn how to run your Node.js tests in a container.
 aliases:
-- /language/nodejs/run-tests/
+  - /language/nodejs/run-tests/
+  - /guides/language/nodejs/run-tests/
 ---
 
 ## Prerequisites
@@ -165,7 +166,8 @@ You should see output containing the following.
 In this section, you learned how to run tests when developing locally using Compose and how to run tests when building your image.
 
 Related information:
- - [docker compose run](/reference/cli/docker/compose/run/)
+
+- [docker compose run](/reference/cli/docker/compose/run/)
 
 ## Next steps
 

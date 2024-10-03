@@ -5,7 +5,8 @@ weight: 30
 keywords: .NET, test
 description: Learn how to run your .NET tests in a container.
 aliases:
-- /language/dotnet/run-tests/
+  - /language/dotnet/run-tests/
+  - /guides/language/dotnet/run-tests/
 ---
 
 ## Prerequisites
@@ -46,7 +47,7 @@ To run your tests when building, you need to update your Dockerfile. You can cre
 
 The following is the updated Dockerfile.
 
-```dockerfile  {hl_lines="9"}
+```dockerfile {hl_lines="9"}
 # syntax=docker/dockerfile:1
 
 FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:6.0-alpine AS build
@@ -109,7 +110,8 @@ You should see output containing the following.
 In this section, you learned how to run tests when developing locally using Compose and how to run tests when building your image.
 
 Related information:
- - [docker compose run](/reference/cli/docker/compose/run/)
+
+- [docker compose run](/reference/cli/docker/compose/run/)
 
 ## Next steps
 

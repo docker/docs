@@ -9,6 +9,8 @@ summary: |
 subjects: [ai]
 languages: [js]
 levels: [beginner]
+aliases:
+  - /guides/use-case/tensorflowjs/
 params:
   time: 20 minutes
 ---
@@ -30,9 +32,9 @@ perform face detection. In this guide, you'll explore how to:
 
 ## Prerequisites
 
-* You have installed the latest version of
+- You have installed the latest version of
   [Docker Desktop](/get-started/get-docker.md).
-* You have a [Git client](https://git-scm.com/downloads). The examples in this
+- You have a [Git client](https://git-scm.com/downloads). The examples in this
   guide use a command-line based Git client, but you can use any client.
 
 ## What is TensorFlow.js?
@@ -55,7 +57,6 @@ ML tasks accessible to web developers without deep ML expertise.
 - Isolation and enhanced security: Docker isolates TensorFlow.js applications in
   secure environments, minimizing conflicts and security vulnerabilities while
   running applications with limited permissions.
-
 
 ## Get and run the sample application
 
@@ -95,6 +96,7 @@ at [http://localhost:80](http://localhost:80). You may need to grant access to
 your webcam for the application.
 
 In the web application, you can change the backend to use one of the following:
+
 - WASM
 - WebGL
 - CPU
@@ -208,22 +210,28 @@ It also uses the following additional libraries:
 
 <body>
   <div id="main">
-    <video id="video" playsinline style="
+    <video
+      id="video"
+      playsinline
+      style="
       -webkit-transform: scaleX(-1);
       transform: scaleX(-1);
       width: auto;
       height: auto;
-      ">
-    </video>
+      "
+    ></video>
     <canvas id="output"></canvas>
-    <video id="video" playsinline style="
+    <video
+      id="video"
+      playsinline
+      style="
       -webkit-transform: scaleX(-1);
       transform: scaleX(-1);
       visibility: hidden;
       width: auto;
       height: auto;
-      ">
-    </video>
+      "
+    ></video>
   </div>
 </body>
 <script src="https://unpkg.com/@tensorflow/tfjs-core@2.1.0/dist/tf-core.js"></script>
@@ -270,7 +278,6 @@ breakdown of some of its key components and functionalities:
   feed. For each detected face, it draws a red rectangle around the face and
   blue dots for facial landmarks on a canvas overlaying the video.
 
-
 {{< accordion title="index.js" >}}
 
 ```javascript
@@ -281,41 +288,45 @@ document.body.prepend(stats.domElement);
 let model, ctx, videoWidth, videoHeight, video, canvas;
 
 const state = {
-  backend: 'wasm'
+  backend: "wasm",
 };
 
 const gui = new dat.GUI();
-gui.add(state, 'backend', ['wasm', 'webgl', 'cpu']).onChange(async backend => {
-  await tf.setBackend(backend);
-  addFlagLables();
-});
+gui
+  .add(state, "backend", ["wasm", "webgl", "cpu"])
+  .onChange(async (backend) => {
+    await tf.setBackend(backend);
+    addFlagLables();
+  });
 
 async function addFlagLables() {
-  if(!document.querySelector("#simd_supported")) {
+  if (!document.querySelector("#simd_supported")) {
     const simdSupportLabel = document.createElement("div");
     simdSupportLabel.id = "simd_supported";
     simdSupportLabel.style = "font-weight: bold";
-    const simdSupported = await tf.env().getAsync('WASM_HAS_SIMD_SUPPORT');
+    const simdSupported = await tf.env().getAsync("WASM_HAS_SIMD_SUPPORT");
     simdSupportLabel.innerHTML = `SIMD supported: <span class=${simdSupported}>${simdSupported}<span>`;
     document.querySelector("#description").appendChild(simdSupportLabel);
   }
 
-  if(!document.querySelector("#threads_supported")) {
+  if (!document.querySelector("#threads_supported")) {
     const threadSupportLabel = document.createElement("div");
     threadSupportLabel.id = "threads_supported";
     threadSupportLabel.style = "font-weight: bold";
-    const threadsSupported = await tf.env().getAsync('WASM_HAS_MULTITHREAD_SUPPORT');
+    const threadsSupported = await tf
+      .env()
+      .getAsync("WASM_HAS_MULTITHREAD_SUPPORT");
     threadSupportLabel.innerHTML = `Threads supported: <span class=${threadsSupported}>${threadsSupported}</span>`;
     document.querySelector("#description").appendChild(threadSupportLabel);
   }
 }
 
 async function setupCamera() {
-  video = document.getElementById('video');
+  video = document.getElementById("video");
 
   const stream = await navigator.mediaDevices.getUserMedia({
-    'audio': false,
-    'video': { facingMode: 'user' },
+    audio: false,
+    video: { facingMode: "user" },
   });
   video.srcObject = stream;
 
@@ -333,7 +344,11 @@ const renderPrediction = async () => {
   const flipHorizontal = true;
   const annotateBoxes = true;
   const predictions = await model.estimateFaces(
-    video, returnTensors, flipHorizontal, annotateBoxes);
+    video,
+    returnTensors,
+    flipHorizontal,
+    annotateBoxes,
+  );
 
   if (predictions.length > 0) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -382,10 +397,10 @@ const setupPage = async () => {
   video.width = videoWidth;
   video.height = videoHeight;
 
-  canvas = document.getElementById('output');
+  canvas = document.getElementById("output");
   canvas.width = videoWidth;
   canvas.height = videoHeight;
-  ctx = canvas.getContext('2d');
+  ctx = canvas.getContext("2d");
   ctx.fillStyle = "rgba(255, 0, 0, 0.5)";
 
   model = await blazeface.load();

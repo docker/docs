@@ -5,7 +5,8 @@ weight: 30
 keywords: php, test
 description: Learn how to run your PHP tests in a container.
 aliases:
-- /language/php/run-tests/
+  - /language/php/run-tests/
+  - /guides/language/php/run-tests/
 ---
 
 ## Prerequisites
@@ -109,7 +110,8 @@ You should see output containing the following.
 In this section, you learned how to run tests when developing locally using Compose and how to run tests when building your image.
 
 Related information:
- - [docker compose run](/reference/cli/docker/compose/run/)
+
+- [docker compose run](/reference/cli/docker/compose/run/)
 
 ## Next steps
 

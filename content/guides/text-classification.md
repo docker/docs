@@ -11,6 +11,8 @@ summary: |
 subjects: [ai]
 languages: [python]
 levels: [beginner]
+aliases:
+  - /guides/use-case/nlp/text-classification/
 params:
   time: 20 minutes
 ---
@@ -30,8 +32,8 @@ analysis model based on a predefined dataset.
 
 ## Prerequisites
 
-* You have installed the latest version of [Docker Desktop](/get-started/get-docker.md). Docker adds new features regularly and some parts of this guide may work only with the latest version of Docker Desktop.
-* You have a [Git client](https://git-scm.com/downloads). The examples in this section use a command-line based Git client, but you can use any client.
+- You have installed the latest version of [Docker Desktop](/get-started/get-docker.md). Docker adds new features regularly and some parts of this guide may work only with the latest version of Docker Desktop.
+- You have a [Git client](https://git-scm.com/downloads). The examples in this section use a command-line based Git client, but you can use any client.
 
 ## Get the sample application
 
@@ -71,7 +73,7 @@ The source code for the text classification application is in the `Docker-NLP/03
    from sklearn.model_selection import train_test_split
    import ssl
    ```
-   
+
    - `nltk`: A popular Python library for natural language processing (NLP).
    - `SentimentIntensityAnalyzer`: A component of `nltk` for sentiment analysis.
    - `accuracy_score`, `classification_report`: Functions from scikit-learn for
@@ -91,7 +93,7 @@ The source code for the text classification application is in the `Docker-NLP/03
    else:
        ssl._create_default_https_context = _create_unverified_https_context
    ```
-   
+
    This block is a workaround for certain environments where downloading data
    through NLTK might fail due to SSL certificate verification issues. It's
    telling Python to ignore SSL certificate verification for HTTPS requests.
@@ -101,10 +103,9 @@ The source code for the text classification application is in the `Docker-NLP/03
    ```python
    nltk.download('vader_lexicon')
    ```
-   
-   The `vader_lexicon` is a lexicon used by the `SentimentIntensityAnalyzer` for
-     sentiment analysis.
 
+   The `vader_lexicon` is a lexicon used by the `SentimentIntensityAnalyzer` for
+   sentiment analysis.
 
 4. Define text for testing and corresponding labels.
 
@@ -165,55 +166,56 @@ The source code for the text classification application is in the `Docker-NLP/03
 
 10. Create an infinite loop for continuous input.
 
-     ```python
-        while True:
-         input_text = input("Enter the text for classification (type 'exit' to end): ")
-     
-           if input_text.lower() == 'exit':
-              print("Exiting...")
-              break
-     ```
-     This while loop runs indefinitely until it's explicitly broken. It lets the
-     user continuously enter text for entity recognition until they decide to
-     exit.
+    ```python
+       while True:
+        input_text = input("Enter the text for classification (type 'exit' to end): ")
+
+          if input_text.lower() == 'exit':
+             print("Exiting...")
+             break
+    ```
+
+    This while loop runs indefinitely until it's explicitly broken. It lets the
+    user continuously enter text for entity recognition until they decide to
+    exit.
 
 11. Analyze the text.
 
-     ```python
-             input_text_score = sia.polarity_scores(input_text)["compound"]
-             input_text_classification = 0 if input_text_score > threshold else 1
-     ```
+    ```python
+            input_text_score = sia.polarity_scores(input_text)["compound"]
+            input_text_classification = 0 if input_text_score > threshold else 1
+    ```
 
 12. Print the VADER Classification Report and the sentiment analysis.
 
-     ```python
-             print(f"Accuracy: {accuracy:.2f}")
-             print("\nVADER Classification Report:")
-             print(report_vader)
-     
-             print(f"\nTest Text (Positive): '{input_text}'")
-             print(f"Predicted Sentiment: {'Positive' if input_text_classification == 0 else 'Negative'}")
-     ```
+    ```python
+            print(f"Accuracy: {accuracy:.2f}")
+            print("\nVADER Classification Report:")
+            print(report_vader)
+
+            print(f"\nTest Text (Positive): '{input_text}'")
+            print(f"Predicted Sentiment: {'Positive' if input_text_classification == 0 else 'Negative'}")
+    ```
 
 13. Create `requirements.txt`. The sample application already contains the
-   `requirements.txt` file to specify the necessary packages that the
-   application imports. Open `requirements.txt` in a code or text editor to
-   explore its contents.
+    `requirements.txt` file to specify the necessary packages that the
+    application imports. Open `requirements.txt` in a code or text editor to
+    explore its contents.
 
-     ```text
-     # 01 sentiment_analysis
-     nltk==3.6.5
+    ```text
+    # 01 sentiment_analysis
+    nltk==3.6.5
 
-     ...
+    ...
 
-     # 03 text_classification
-     scikit-learn==1.3.2
+    # 03 text_classification
+    scikit-learn==1.3.2
 
-     ...
-     ```
+    ...
+    ```
 
-     Both the `nltk` and `scikit-learn` modules are required for the text
-     classification application.
+    Both the `nltk` and `scikit-learn` modules are required for the text
+    classification application.
 
 ## Explore the application environment
 
@@ -316,14 +318,13 @@ The following steps explain each part of the `Dockerfile`. For more details, see
    ENTRYPOINT ["/app/entrypoint.sh"]
    ```
 
-    The `ENTRYPOINT` instruction configures the container to run `entrypoint.sh`
-    as its default executable. This means that when the container starts, it
-    automatically executes the script.
-   
+   The `ENTRYPOINT` instruction configures the container to run `entrypoint.sh`
+   as its default executable. This means that when the container starts, it
+   automatically executes the script.
+
    You can explore the `entrypoint.sh` script by opening it in a code or text
    editor. As the sample contains several applications, the script lets you
    specify which application to run when the container starts.
-
 
 ## Run the application
 
@@ -373,12 +374,12 @@ To run the application using Docker:
    - `docker run`: This is the primary command used to run a new container from
      a Docker image.
    - `-it`: This is a combination of two options:
-      - `-i` or `--interactive`: This keeps the standard input (STDIN) open even
-        if not attached. It lets the container remain running in the
-        foreground and be interactive.
-      - `-t` or `--tty`: This allocates a pseudo-TTY, essentially simulating a
-        terminal, like a command prompt or a shell. It's what lets you
-        interact with the application inside the container.
+     - `-i` or `--interactive`: This keeps the standard input (STDIN) open even
+       if not attached. It lets the container remain running in the
+       foreground and be interactive.
+     - `-t` or `--tty`: This allocates a pseudo-TTY, essentially simulating a
+       terminal, like a command prompt or a shell. It's what lets you
+       interact with the application inside the container.
    - `basic-nlp`: This specifies the name of the Docker image to use for
      creating the container. In this case, it's the image named `basic-nlp` that
      you created with the `docker build` command.
@@ -431,11 +432,11 @@ the application using Docker.
 
 Related information:
 
-* [Docker CLI reference](/reference/cli/docker/)
-* [Dockerfile reference](/reference/dockerfile/)
-* [Natural Language Toolkit](https://www.nltk.org/)
-* [Python documentation](https://docs.python.org/3/)
-* [scikit-learn](https://scikit-learn.org/)
+- [Docker CLI reference](/reference/cli/docker/)
+- [Dockerfile reference](/reference/dockerfile/)
+- [Natural Language Toolkit](https://www.nltk.org/)
+- [Python documentation](https://docs.python.org/3/)
+- [scikit-learn](https://scikit-learn.org/)
 
 ## Next steps
 

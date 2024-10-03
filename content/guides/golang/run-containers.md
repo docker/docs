@@ -5,8 +5,9 @@ weight: 10
 keywords: get started, go, golang, run, container
 description: Learn how to run the image as a container.
 aliases:
-- /get-started/golang/run-containers/
-- /language/golang/run-containers/
+  - /get-started/golang/run-containers/
+  - /language/golang/run-containers/
+  - /guides/language/golang/run-containers/
 ---
 
 ## Prerequisites

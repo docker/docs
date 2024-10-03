@@ -4,6 +4,8 @@ linkTitle: Develop your app
 weight: 10
 keywords: python, local, development, generative ai, genai, llm, rag, ollama
 description: Learn how to develop your generative RAG application locally.
+aliases:
+  - /guides/use-case/rag-ollama/develop/
 ---
 
 ## Prerequisites
@@ -57,11 +59,13 @@ To run the database service:
 ## Add a local or remote LLM service
 
 The sample application supports both [Ollama](https://ollama.ai/). This guide provides instructions for the following scenarios:
+
 - Run Ollama in a container
 - Run Ollama outside of a container
 
 While all platforms can use any of the previous scenarios, the performance and
 GPU support may vary. You can use the following guidelines to help you choose the appropriate option:
+
 - Run Ollama in a container if you're on Linux, and using a native installation of the Docker Engine, or Windows 10/11, and using Docker Desktop, you
   have a CUDA-supported GPU, and your system has at least 8 GB of RAM.
 - Run Ollama outside of a container if running Docker Desktop on a Linux Machine.
@@ -74,6 +78,7 @@ Choose one of the following options for your LLM service.
 When running Ollama in a container, you should have a CUDA-supported GPU. While you can run Ollama in a container without a supported GPU, the performance may not be acceptable. Only Linux and Windows 11 support GPU access to containers.
 
 To run Ollama in a container and provide GPU access:
+
 1. Install the prerequisites.
    - For Docker Engine on Linux, install the [NVIDIA Container Toolkilt](https://github.com/NVIDIA/nvidia-container-toolkit).
    - For Docker Desktop on Windows 10/11, install the latest [NVIDIA driver](https://www.nvidia.com/Download/index.aspx) and make sure you are using the [WSL2 backend](/manuals/desktop/wsl/_index.md#turn-on-docker-desktop-wsl-2)
@@ -122,7 +127,7 @@ To run Ollama outside of a container:
 3. Remove the `ollama` service from the `docker-compose.yaml` and update properly the connection variables in `winy` service:
 
    ```diff
-   - OLLAMA=http://ollama:11434 
+   - OLLAMA=http://ollama:11434
    + OLLAMA=<your-url>
    ```
 
@@ -132,6 +137,7 @@ To run Ollama outside of a container:
 ## Run your RAG application
 
 At this point, you have the following services in your Compose file:
+
 - Server service for your main RAG application
 - Database service to store vectors in a Qdrant database
 - (optional) Ollama service to run the LLM
@@ -148,10 +154,11 @@ In this section, you learned how to set up a development environment to provide
 access all the services that your GenAI application needs.
 
 Related information:
- - [Dockerfile reference](/reference/dockerfile.md)
- - [Compose file reference](/reference/compose-file/_index.md)
- - [Ollama Docker image](https://hub.docker.com/r/ollama/ollama)
- - [GenAI Stack demo applications](https://github.com/docker/genai-stack)
+
+- [Dockerfile reference](/reference/dockerfile.md)
+- [Compose file reference](/reference/compose-file/_index.md)
+- [Ollama Docker image](https://hub.docker.com/r/ollama/ollama)
+- [GenAI Stack demo applications](https://github.com/docker/genai-stack)
 
 ## Next steps
 

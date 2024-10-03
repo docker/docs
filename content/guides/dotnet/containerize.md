@@ -8,6 +8,7 @@ aliases:
 - /language/dotnet/build-images/
 - /language/dotnet/run-containers/
 - /language/dotnet/containerize/
+- /guides/language/dotnet/containerize/
 ---
 
 ## Prerequisites
