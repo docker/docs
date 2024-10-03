@@ -51,39 +51,47 @@ vulnerabilities. You can use policies to measure and track other aspects of
 supply chain management as well, such as open-source license usage and base
 image up-to-dateness.
 
-## Out-of-the-box policies
+## Policy types
 
-Docker Scout ships the following out-of-the-box policies:
+In Docker Scout, a *policy* is derived from a *policy type*. Policy types are
+templates that define the core parameters of a policy. You can compare policy
+types to classes in object-oriented programming, with each policy acting as an
+instance created from its corresponding policy type.
 
-- [No fixable critical or high vulnerabilities](#no-fixable-critical-or-high-vulnerabilities)
-- [No AGPL v3 licenses](#no-agpl-v3-licenses)
-- [No outdated base images](#no-outdated-base-images)
-- [No high-profile vulnerabilities](#no-high-profile-vulnerabilities)
-- [Supply chain attestations](#supply-chain-attestations)
-- [Default non-root user](#default-non-root-user)
-- [No unapproved base images](#no-unapproved-base-images)
+Docker Scout supports the following policy types:
 
-To give you a head start, Scout enables several policies by default for your
-Scout-enabled repositories. You can customize the default configurations to
-reflect internal requirements and standards. You can also disable a policy
-altogether if it isn't relevant to you. For more information, see [Configure
-policies](./configure.md).
+- [Severity-Based Vulnerability](#severity-based-vulnerability)
+- [Compliant Licenses](#compliant-licenses)
+- [Up-to-Date Base Images](#up-to-date-base-images)
+- [High-Profile Vulnerabilities](#high-profile-vulnerabilities)
+- [Supply Chain Attestations](#supply-chain-attestations)
+- [Default Non-Root User](#default-non-root-user)
+- [Approved Base Images](#approved-base-images)
+- [SonarQube Quality Gates](#sonarqube-quality-gates)
 
-There's also a set of [additional policies](#additional-policies) that can be
-optionally enabled for repositories.
+Docker Scout automatically provides default policies for repositories where it
+is enabled, except for the SonarQube Quality Gates policy, which requires
+[integration with SonarQube](/manuals/scout/integrations/code-quality/sonarqube.md)
+before use.
 
-### No fixable critical or high vulnerabilities
+You can create custom policies from any of the supported policy types, or
+delete a default policy if it isn't applicable to your project. For more
+information, refer to [Configure policies](./configure.md).
 
-The **No fixable critical or high vulnerabilities** policy requires that your
-artifacts aren't exposed to known vulnerabilities where there's a fix version
-available. Essentially, this means that there's an easy fix that you can deploy
-for images that fail this policy: upgrade the vulnerable package to a version
-containing a fix for the vulnerability.
+<!-- vale Docker.HeadingSentenceCase = NO -->
 
-By default, this policy only flags critical and high severity vulnerabilities.
+### Severity-Based Vulnerability
 
-This policy is violated if an artifact is affected by one or more critical-
-or high-severity vulnerability, where a fix version is available.
+The **Severity-Based Vulnerability** policy type checks whether your
+artifacts are exposed to known vulnerabilities.
+
+By default, this policy only flags critical and high severity vulnerabilities
+where there's a fix version available. Essentially, this means that there's an
+easy fix that you can deploy for images that fail this policy: upgrade the
+vulnerable package to a version containing a fix for the vulnerability.
+
+Images are deemed non-compliant with this policy if they contain one or more
+vulnerabilities that fall outside the specified policy criteria.
 
 You can configure the parameters of this policy by creating a custom version of the policy.
 The following policy parameters are configurable in a custom version:
@@ -109,31 +117,32 @@ The following policy parameters are configurable in a custom version:
 
 For more information about configuring policies, see [Configure policies](./configure.md).
 
-### No AGPL v3 licenses
+### Compliant Licenses
 
-The **No AGPL v3 licenses** policy requires that your artifacts don't contain
-packages distributed under an AGPLv3 license. This policy is violated if
-your artifacts contain one or more packages with this license.
+The **Compliant Licenses** policy type checks whether your images contain
+packages distributed under an inappropriate license. Images are considered
+non-compliant if they contain one or more packages with such a license.
 
 You can configure the list of licenses that this policy should look out for,
 and add exceptions by specifying an allow-list (in the form of PURLs).
 See [Configure policies](./configure.md).
 
-### No outdated base images
+### Up-to-Date Base Images
 
-The **No outdated base images** policy requires that the base images you use are
-up-to-date.
+The **Up-to-Date Base Images** policy type checks whether the base images you
+use are up-to-date.
 
-It's violated when the tag you used to build your image points to a
-different digest than what you're using. If there's a mismatch in digests, that
-means the base image you're using is out of date.
+Images are considered non-compliant with this policy if the tag you used to
+build your image points to a different digest than what you're using. If
+there's a mismatch in digests, that means the base image you're using is out of
+date.
 
 Your images need provenance attestations for this policy to successfully
 evaluate. For more information, see [No base image data](#no-base-image-data).
 
-### No high-profile vulnerabilities
+### High-Profile Vulnerabilities
 
-The **No high-profile vulnerabilities** policy requires that your artifacts don't
+The **High-Profile Vulnerabilities** policy type checks whether your images
 contain vulnerabilities from Docker Scout’s curated list. This list is kept
 up-to-date with newly disclosed vulnerabilities that are widely recognized to
 be risky.
@@ -150,8 +159,8 @@ The list includes the following vulnerabilities:
 - [CVE-2024-47175 (OpenPrinting - `libppd`)](https://scout.docker.com/v/CVE-2024-47175)
 - [CVE-2024-47177 (OpenPrinting - `cups-filters`)](https://scout.docker.com/v/CVE-2024-47177)
 
-You can configure the CVEs included in this list by creating a custom policy.
-Custom configuration options include:
+You can customize this policy to change which CVEs that are considered
+high-profile by configuring the policy. Custom configuration options include:
 
 - **Excluded CVEs**: Specify the CVEs that you want this policy to ignore.
 
@@ -167,14 +176,14 @@ Custom configuration options include:
 
 For more information on policy configuration, see [Configure policies](./configure.md).
 
-### Supply chain attestations
+### Supply Chain Attestations
 
-The **Supply chain attestations** policy requires that your artifacts have
+The **Supply Chain Attestations** policy type checks whether your images have
 [SBOM](/manuals/build/metadata/attestations/sbom.md) and
 [provenance](/manuals/build/metadata/attestations/slsa-provenance.md) attestations.
 
-This policy is violated if an artifact lacks either an SBOM attestation or a
-provenance attestation with max mode. To ensure compliance,
+Images are considered non-compliant if they lack either an SBOM attestation or
+a provenance attestation with *max mode* provenance. To ensure compliance,
 update your build command to attach these attestations at build-time:
 
 ```console
@@ -188,7 +197,7 @@ If you're using GitHub Actions to build and push your images,
 learn how you can [configure the action](/manuals/build/ci/github-actions/attestations.md)
 to apply SBOM and provenance attestations.
 
-### Default non-root user
+### Default Non-Root User
 
 By default, containers run as the `root` superuser with full system
 administration privileges inside the container, unless the Dockerfile specifies
@@ -196,10 +205,10 @@ a different default user. Running containers as a privileged user weakens their
 runtime security, as it means any code that runs in the container can perform
 administrative actions.
 
-The **Default non-root user** policy detects images that are set to run as the
-default `root` user. To comply with this policy, images must specify a non-root
-user in the image configuration. Images violate this policy if they don't
-specify a non-root default user for the runtime stage.
+The **Default Non-Root User** policy type detects images that are set to run as
+the default `root` user. To comply with this policy, images must specify a
+non-root user in the image configuration. Images are non-compliant with this
+policy if they don't specify a non-root default user for the runtime stage.
 
 For non-compliant images, evaluation results show whether or not the `root`
 user was set explicitly for the image. This helps you distinguish between
@@ -265,9 +274,9 @@ ENTRYPOINT ["/app/production"]
 {{< /tab >}}
 {{< /tabs >}}
 
-### No unapproved base images
+### Approved Base Images
 
-The **No unapproved base images** policy ensures that the base images you use
+The **Approved Base Images** policy type ensures that the base images you use
 in your builds are maintained and secure.
 
 This policy checks whether the base images used in your builds match any of the
@@ -322,18 +331,9 @@ This policy is configurable with the following options:
 Your images need provenance attestations for this policy to successfully
 evaluate. For more information, see [No base image data](#no-base-image-data).
 
-## Additional policies
+### SonarQube Quality Gates
 
-In addition to the [out-of-the-box policies](#out-of-the-box-policies) enabled
-by default, Docker Scout supports the following optional policies. Before you
-can enable these policies, you need to either configure the policies, or
-configure the integration that the policy requires.
-
-- [SonarQube quality gates passed](#sonarqube-quality-gates-passed)
-
-### SonarQube quality gates passed
-
-The **SonarQube quality gates passed** policy builds on the [SonarQube
+The **SonarQube Quality Gates** policy type builds on the [SonarQube
 integration](../integrations/code-quality/sonarqube.md) to assess the quality
 of your source code. This policy works by ingesting the SonarQube code analysis
 results into Docker Scout.
@@ -366,8 +366,8 @@ in the CLI.
 ## No base image data
 
 There are cases when it's not possible to determine information about the base
-images used in your builds. In such cases, the **No outdated base images** and
-**No unapproved base images** policies get flagged as having **No data**.
+images used in your builds. In such cases, the **Up-to-Date Base Images** and
+**Approved Base Images** policies get flagged as having **No data**.
 
 This "no data" state occurs when:
 

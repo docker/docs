@@ -8,6 +8,8 @@ aliases:
 tags: [Release notes]
 ---
 
+<!-- vale Docker.We = NO -->
+
 This page contains information about the new features, improvements, known
 issues, and bug fixes in Docker Scout releases. These release notes cover the
 Docker Scout platform, including the Dashboard. For CLI release notes, refer to
@@ -19,6 +21,16 @@ for what's coming next.
 ## Q3 2024
 
 New features and enhancements released in the third quarter of 2024.
+
+### 2024-09-30
+
+In this release, we've changed how custom policies work. Before, custom
+policies were created by copying an out-of-the-box policy. Now, you can
+customize policies either by editing the default policy from a **policy type**
+which acts as a template. The default policies in Docker Scout are also
+implemented based on these types.
+
+For more information, refer to [policy types](/manuals/scout/policy/_index.md#policy-types).
 
 ### 2024-09-09
 
@@ -42,10 +54,10 @@ The default out-of-the-box policies are now:
 
 - **No high-profile vulnerabilities**
 - **No fixable critical or high vulnerabilities**
-- **No unapproved base images**
+- **Approved Base Images**
 - **Default non-root user**
 - **Supply chain attestations**
-- **No outdated base images**
+- **Up-to-Date Base Images**
 - **No AGPL v3 licenses**
 
 The configurations for these policies are now the same as the configurations
@@ -114,13 +126,10 @@ For more information and setup instructions, see
 
 ### 2024-01-23
 
-New **No unapproved base images** policy, which lets you restrict which base
+New **Approved Base Images** policy, which lets you restrict which base
 images you allow in your builds. You define the allowed base images using a
 pattern. Base images whose image reference don't match the specified patterns
 cause the policy to fail.
-
-For more information, see
-[No unapproved base images](/scout/policy/#no-unapproved-base-images).
 
 ### 2024-01-12
 
@@ -128,8 +137,6 @@ New **Default non-root user** policy, which flags images that would run as the
 `root` superuser with full system administration privileges by default.
 Specifying a non-root default user for your images can help strengthen your
 runtime security.
-
-For more information, see [Default non-root user](/scout/policy/#default-non-root-user).
 
 ### 2024-01-11
 
@@ -176,11 +183,6 @@ gates as a policy evaluation in Docker Scout. Enable the integration, push your
 images, and see the SonarQube quality gate conditions surfaced in the new
 **SonarQube quality gates passed** policy.
 
-For more information, see:
-
-- [Integration and setup instructions](../integrations/code-quality/sonarqube.md)
-- [SonarQube quality gates passed policy](/scout/policy/#sonarqube-quality-gates-passed)
-
 ### 2023-12-01
 
 [Beta](../../release-lifecycle.md#beta) release of a new **Azure Container
@@ -210,16 +212,10 @@ images are built with SBOM and provenance attestations. Adding attestations to
 images is a good first step in improving your supply chain conduct, and is
 often a prerequisite for doing more.
 
-See [Supply chain attestations policy](/scout/policy/#supply-chain-attestations)
-for details.
-
 ### 2023-11-01
 
 New **No high-profile vulnerabilities** policy, which ensures your artifacts are
 free from a curated list of vulnerabilities widely recognized to be risky.
-
-For more information, see
-[No high-profile vulnerabilities policy](/scout/policy/#no-high-profile-vulnerabilities).
 
 ### 2023-10-04
 
