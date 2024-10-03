@@ -119,6 +119,7 @@ When pulling an image from an account linked to a verified domain, the attributi
 - If the user is part of only one organization, the pull is attributed to that specific organization.
 
 ### Multiple organization memberships
+
 If the user is part of multiple organizations under the company, the pull is attributed to the user's personal namespace.
 
 ## Rate limit
