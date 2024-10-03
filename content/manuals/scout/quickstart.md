@@ -155,7 +155,7 @@ $ docker scout config organization <ORG_NAME>
 
 Now you can run the `quickview` command to get an overview
 of the compliance status for the image you just built.
-The image is evaluated against the default, out-of-the-box policies.
+The image is evaluated against the default policy configurations.
 
 ```console
 $ docker scout quickview
@@ -240,7 +240,7 @@ The sidebar shows a compliance overview for the last pushed tag of a repository.
 > It might take a few minutes before the results appear if this is your
 > first time using the Docker Scout Dashboard.
 
-Inspect the **No outdated base images** policy.
+Inspect the **Up-to-Date Base Images** policy.
 This policy checks whether base images you use are up-to-date.
 It currently has a non-compliant status,
 because the example image uses an old version `alpine` as a base image.

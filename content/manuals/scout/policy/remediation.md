@@ -14,10 +14,15 @@ suggested actions you can take that improve policy compliance, or that add
 metadata to images which enables Docker Scout to provide better evaluation
 results and recommendations.
 
-Docker Scout provides remediation advice for the following policies:
+Docker Scout provides remediation advice for the default policies of the
+following policy types:
 
-- [No outdated base images](#no-outdated-base-image-remediation)
-- [Supply chain attestations](#supply-chain-attestations-remediation)
+- [Up-to-Date Base Images](#up-to-date-base-images-remediation)
+- [Supply Chain Attestations](#supply-chain-attestations-remediation)
+
+<!-- TODO(dvdksn): verify the following -->
+> [!NOTE]
+> Guided remediation is not supported for custom policies.
 
 For images that violate policy, the recommendations focus on addressing
 compliance issues and fixing violations. For images where Docker Scout is
@@ -59,9 +64,9 @@ temporary solution.
 The side panel may also contain one or more help sections related to the
 available recommendations.
 
-## No outdated base image remediation
+## Up-to-Date Base Images remediation
 
-The **No outdated base images** policy checks whether the base image you use is
+The **Up-to-Date Base Images** policy checks whether the base image you use is
 up-to-date. The recommended actions displayed in the remediation side panel
 depend on how much information Docker Scout has about your image. The more
 information that's available, the better the recommendations.
@@ -133,10 +138,10 @@ versions](/manuals/build/building/best-practices.md#pin-base-image-versions).
   https://github.com/docker/docs/pull/18961#discussion_r1447189475
 -->
 
-## Supply chain attestations remediation
+## Supply Chain Attestations remediation
 
-The **Supply chain attestations** policy requires full provenance and SBOM
-attestations on images. If your image is missing an attestation, or if an
+The default **Supply Chain Attestations** policy requires full provenance and
+SBOM attestations on images. If your image is missing an attestation, or if an
 attestation doesn't contain enough information, the policy is violated.
 
 The recommendations available in the remediation side panel helps guide you to
