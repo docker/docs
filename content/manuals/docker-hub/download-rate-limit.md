@@ -105,7 +105,8 @@ Pulls can be attributed to either a personal or organization [namespace](https:/
 ### Private pulls
 Pulls for private repositories are attributed to the repository’s namespace owner.
 
-**Public Pulls**
+### Public pulls
+
 When pulling images from a public repository, attribution is determined based on domain affiliation and organization membership.
 
 ### Verified domain ownership 
