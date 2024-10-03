@@ -114,6 +114,7 @@ When pulling images from a public repository, attribution is determined based on
 When pulling an image from an account linked to a verified domain, the attribution is set to be the owner of that [domain](https://docs.docker.com/security/faqs/single-sign-on/domain-faqs/)
 
 ### Single organization membership
+
 - If the owner of the verified domain is a company and the user is part of only one organization within that [company](https://docs.docker.com/admin/faqs/company-faqs/#what-features-are-supported-at-the-company-level), the pull is attributed to that specific organization.
 - If the user is part of only one organization, the pull is attributed to that specific organization.
 
