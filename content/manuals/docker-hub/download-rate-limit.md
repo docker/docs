@@ -108,7 +108,7 @@ Pulls for private repositories are attributed to the repository’s namespace ow
 **Public Pulls**
 When pulling images from a public repository, attribution is determined based on domain affiliation and organization membership.
 
-**Verified Domain Ownership** 
+### Verified domain ownership 
 When pulling an image from an account linked to a verified domain, the attribution is set to be the owner of that [domain](https://docs.docker.com/security/faqs/single-sign-on/domain-faqs/)
 
 **Single Organization Membership**
