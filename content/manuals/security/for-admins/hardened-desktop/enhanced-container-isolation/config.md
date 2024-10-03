@@ -195,13 +195,30 @@ A couple of caveats:
   from a repository). This is usually not a problem as the tools that need this
   feature (e.g., Paketo buildpacks) will do the pre-pull of the parent image.
 
-* The `allowDerivedImages` setting applies to all images in the `imageList`
-  specified with an explicit tag (e.g., `<name>:<tag>`). It does not apply to
-  images specified using the tag wildcard (e.g., `<name>:*`) described in the
-  prior section, because Docker Desktop needs to know the tag in order to
-  perform ancestor-descendant image checks. Therefore, if you want Docker socket
-  mounts to be allowed for images derived from a parent image in the
-  `imageList`, make sure the parent image is listed with name and tag.
+* For Docker Desktop versions 4.34 and 4.35 only: The `allowDerivedImages` setting
+  applies to all images in the `imageList` specified with an explicit tag (e.g.,
+  `<name>:<tag>`). It does not apply to images specified using the tag wildcard
+  (e.g., `<name>:*`) described in the prior section. In Docker Desktop 4.36 and
+  later, this caveat no longer applies, meaning that the `allowDerivedImages`
+  settings applies to images specified with or without a wildcard tag. This
+  makes it easier to manage the ECI Docker socket image list.
+
+### Allowing all containers to mount the Docker socket
+
+In Docker Desktop version 4.36 and later, it's possible to configure the image
+list to allow any container to mount the Docker socket. You do this by adding
+`"*"` to the `imageList`:
+
+```json
+"imageList": {
+  "images": [
+    "*"
+  ]
+}
+```
+
+It is recommended that you use this only in scenarios where explicitly listing
+allowed container images is not flexible enough.
 
 ### Command list
 
@@ -302,10 +319,13 @@ Whether to configure the list as an allow or deny list depends on the use case.
   this case, remove the local image and pull it again (e.g., `docker rm <image>`
   and `docker pull <image>`).
 
-* It's not possible to allow Docker socket bind-mounts on local images (i.e., images that are not on
-  a registry) unless they are [derived from an allowed image](#docker-socket-mount-permissions-for-derived-images).
-  That's because Docker Desktop pulls the digests for the allowed images from the
-  registry, and then uses that to compare against the local copy of the image.
+* It's not possible to allow Docker socket bind-mounts on containers using
+  local-only images (i.e., images that are not on a registry) unless they are
+  [derived from an allowed image](#docker-socket-mount-permissions-for-derived-images)
+  or you've [allowed all containers to mount the Docker socket](#allowing-all-containers-to-mount-the-docker-socket).
+  That is because Docker Desktop pulls the digests for the allowed images from
+  the registry, and then uses that to compare against the local copy of the
+  image.
 
 * The `commandList` configuration applies to all containers that are allowed to
   bind-mount the Docker socket. Therefore it can't be configured differently per
