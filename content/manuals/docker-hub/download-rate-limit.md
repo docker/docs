@@ -115,7 +115,7 @@ When pulling an image from an account linked to a verified domain, the attributi
 - If the owner of the verified domain is a company and the user is part of only one organization within that [company](https://docs.docker.com/admin/faqs/company-faqs/#what-features-are-supported-at-the-company-level), the pull is attributed to that specific organization.
 - If the user is part of only one organization, the pull is attributed to that specific organization.
 
-**Multiple Organization Memberships**
+### Multiple organization memberships
 If the user is part of multiple organizations under the company, the pull is attributed to the user's personal namespace.
 
 ## Rate limit
