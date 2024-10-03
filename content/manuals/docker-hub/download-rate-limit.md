@@ -103,6 +103,7 @@ both individuals and organizations.
 Pulls can be attributed to either a personal or organization [namespace](https://docs.docker.com/contribute/style/terminology/#namespace).
 
 ### Private pulls
+
 Pulls for private repositories are attributed to the repository’s namespace owner.
 
 ### Public pulls
