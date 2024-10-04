@@ -23,7 +23,7 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projects/51/views/1?filterQuery=) to see what's coming next.
 
-## 4.34.0
+## 4.35.0
 
 {{< release-date date="2024-10-02" >}}
 
