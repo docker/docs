@@ -35,7 +35,7 @@
 <meta name="twitter:url" content="https://twitter.com/docker_docs" />
 <meta
   name="twitter:image:src"
-  content="{{ "assets/images/thumbnail.webp" | absURL }}"
+  content="{{ (resources.Get "images/thumbnail.webp").Permalink }}"
 />
 <meta name="twitter:image:alt" content="Docker Documentation" />
 <meta property="og:title" content="{{ $title }}" />
@@ -49,7 +49,7 @@
 <meta
   property="og:image"
   itemprop="image primaryImageOfPage"
-  content="{{ "assets/images/thumbnail.webp" | absURL }}"
+  content="{{ (resources.Get "images/thumbnail.webp").Permalink }}"
 />
 <meta property="og:locale" content="en_US" />
 <meta property="og:url" content="{{ .Permalink }}" />

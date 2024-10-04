@@ -1,0 +1,11 @@
+{{- $currentPage := .page }}
+{{- $taxonomies := .taxonomies }}
+{{- $scratch := collections.NewScratch }}
+{{- range $taxo := $taxonomies }}
+  {{- $terms := slice }}
+  {{- range ($currentPage.GetTerms $taxo) }}
+    {{- $terms = $terms | append .Page.Data.Term }}
+  {{- end }}
+  {{ $scratch.SetInMap "filters" $taxo $terms }}
+{{- end }}
+{{- return ($scratch.Get "filters") }}

@@ -51,7 +51,3 @@ Docker recommends watching the video workshop from DockerCon 2022. Watch the ent
 If you'd like to see how containers are built from scratch, Liz Rice from Aqua Security has a fantastic talk in which she creates a container from scratch in Go. While the talk does not go into networking, using images for the filesystem, and other advanced topics, it gives a deep dive into how things are working.
 
 <iframe src="https://www.youtube-nocookie.com/embed/8fi7uSYlOdc" style="max-width: 100%; aspect-ratio: 16 / 9;" width="560" height="auto" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-## Language-specific guides
-
-If you are looking for information on how to containerize an application using your favorite language, see the [Language-specific guides](/guides/language/_index.md).
