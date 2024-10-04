@@ -23,6 +23,16 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projects/51/views/1?filterQuery=) to see what's coming next.
 
+## 4.34.3
+
+{{< release-date date="2024-10-07" >}}
+
+{{< desktop-install-v2 all=true beta_win_arm=true version="4.34.2" build_path="/TBD/" >}}
+
+### Upgrades
+
+- [NVIDIA Container Toolkit v1.16.2](https://github.com/NVIDIA/nvidia-container-toolkit/releases/tag/v1.16.2)
+
 ## 4.34.2
 
 {{< release-date date="2024-09-12" >}}
