@@ -53,7 +53,7 @@
     <input value="{{$term}}" type="checkbox" id="{{ $id }}"
       @change="toggleFilter('{{$taxonomy}}','{{$term}}')"
       :checked="selected['{{$taxonomy}}'].includes('{{$term}}')">
-    <label for="{{ $id }}">{{ .Page.LinkTitle }}</label>
+    <label class="select-none" for="{{ $id }}">{{ .Page.LinkTitle }}</label>
   </div>
   {{ end }}
 </fieldset>
