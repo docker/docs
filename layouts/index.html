@@ -115,7 +115,7 @@
               <h2 class="font-medium">Getting started</h2>
               <p class="text-xl">
                 Learn Docker basics and the benefits of containerizing your
-                applications.
+                applications
               </p>
             </div>
             <div>
@@ -134,27 +134,23 @@
           <div class="bg-pattern-purple rounded p-6">
             <div class="flex flex-col gap-12">
               <div class="flex flex-col gap-4">
-                <h2 class="font-medium">Featured</h2>
+                <h2 class="font-medium">Research</h2>
                 <p class="text-xl">
-                  Accelerate your builds with cloud capabilities.
+                  Docker State of Application Development survey
                 </p>
                 <p>
-                  End-to-end encryption, a shared build cache for teams, and
-                  native multi-platform builds. Get started today for free.
+                  Help us better understand and support the application development
+                  community by answering our community survey.
+                </p>
+                <p>
+                  The survey takes approximately 20-30 minutes to complete, and
+                  you can save your progress and return at any time. As a thank
+                  you, you can opt into a raffle for Docker swag and other
+                  prizes!
                 </p>
               </div>
-              <div class="grid grid-cols-2 gap-4 justify-self-end md:grid-cols-3">
-                <a href="https://build.docker.com/"
-                  class="cursor-pointer rounded bg-blue-light px-4 py-2 text-white transition duration-300 hover:bg-blue-light-400 dark:bg-blue-dark-400 dark:hover:bg-blue-dark">Dashboard</a>
-                <a href="/build/cloud/"
-                  class="cursor-pointer rounded bg-blue-light px-4 py-2 text-white transition duration-300 hover:bg-blue-light-400 dark:bg-blue-dark-400 dark:hover:bg-blue-dark">Docs</a>
-                <div class="ml-auto col-start-2 md:col-start-3">
-                  {{ $dbcLogoWhite := resources.Get "images/build-cloud-white.svg" }}
-                  {{ $dbcLogoLight := resources.Get "images/build-cloud-light.svg" }}
-                  <img class="hidden h-full w-full dark:block" alt="Docker Build Cloud logo" src="{{ $dbcLogoWhite.Permalink }}" />
-                  <img class="h-full w-full dark:hidden" alt="Docker Build Cloud logo" src="{{ $dbcLogoLight.Permalink }}" />
-                </div>
-              </div>
+              <a href="https://docker.qualtrics.com/jfe/form/SV_3IDfGscnmh99ex8"
+                class="max-w-fit cursor-pointer rounded bg-blue-light px-4 py-2 text-white transition duration-300 hover:bg-blue-light-400 dark:bg-blue-dark-400 dark:hover:bg-blue-dark">Take the survey</a>
             </div>
           </div>
         </div>

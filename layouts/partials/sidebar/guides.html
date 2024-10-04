@@ -1,0 +1,47 @@
+<div class="flex flex-col gap-4 px-4 pt-2">
+  {{- $root := . }}
+  {{- .Store.Set "multipage" false }}
+  {{- if ne .CurrentSection .FirstSection }}
+    {{- $root = .CurrentSection }}
+    {{- .Store.Set "multipage" true }}
+  {{- end }}
+  <div class="font-semibold">
+    <a href="{{ $root.Permalink }}">{{ $root.Title }}</a>
+  </div>
+  <div>{{ $root.Summary }}</div>
+  <div class="space-y-2">
+  {{- with ($root.GetTerms "levels") }}
+    <div class="flex gap-2 text-gray-light dark:text-gray-dark">
+      <span class="icon-svg">{{ partialCached "icon" "school" "school" }}</span>
+      <span>
+        {{- range $i, $e := . -}}
+          {{- if $i -}},{{ end -}}
+          {{- .Page.Title -}}
+        {{- end -}}
+      </span>
+    </div>
+  {{- end -}}
+  {{- with ($root.Params.time) }}
+    <div class="flex gap-2 text-gray-light dark:text-gray-dark">
+      <span class="icon-svg"
+        >{{ partialCached "icon" "schedule" "schedule" }}</span
+      >
+      <span>{{ . }}</span>
+    </div>
+  {{- end -}}
+  </div>
+  {{- if (.Store.Get "multipage") }}
+    {{- partial "guides-stepper.html" . }}
+  {{- end }}
+  {{- with $root.Params.resource_links }}
+  <div class="space-y-2">
+    <p>Resources:</p>
+    <ul class="ml-4 space-y-2">
+      {{- range . }}
+        <li><a href="{{ .url }}" class="link">{{ .title }}</a></li>
+      {{- end }}
+    </ul>
+  </div>
+  {{- end }}
+  <a href="/guides/" class="mt-2 link">« Back to all guides</a>
+</div>

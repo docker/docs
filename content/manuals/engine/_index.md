@@ -19,11 +19,11 @@ grid:
   link: /network
 - title: Container logs
   description: Learn how to view and read container logs.
-  icon: feed
+  icon: text_snippet
   link: /config/containers/logging/
 - title: Prune
   description: Tidy up unused resources.
-  icon: cut
+  icon: content_cut
   link: /config/pruning
 - title: Configure the daemon
   description: Delve into the configuration options of the Docker daemon.

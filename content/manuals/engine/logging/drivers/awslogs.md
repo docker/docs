@@ -127,6 +127,27 @@ $ docker run \
 > Your AWS IAM policy must include the `logs:CreateLogGroup` permission before
 > you attempt to use `awslogs-create-group`.
 
+### awslogs-create-stream
+
+By default, the log driver creates the AWS CloudWatch Logs stream used for container log persistence.
+
+Set `awslogs-create-stream` to `false` to disable log stream creation. When disabled, the Docker daemon assumes
+the log stream already exists. A use case where this is beneficial is when log stream creation is handled by 
+another process avoiding redundant AWS CloudWatch Logs API calls.
+
+If `awslogs-create-stream` is set to `false` and the log stream does not exist, log persistence to CloudWatch
+fails during container runtime, resulting in `Failed to put log events` error messages in daemon logs.
+
+```console
+$ docker run \
+    --log-driver=awslogs \
+    --log-opt awslogs-region=us-east-1 \
+    --log-opt awslogs-group=myLogGroup \
+    --log-opt awslogs-stream=myLogStream \
+    --log-opt awslogs-create-stream=false \
+    ...
+```
+
 ### awslogs-datetime-format
 
 The `awslogs-datetime-format` option defines a multi-line start pattern in [Python

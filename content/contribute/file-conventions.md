@@ -2,6 +2,7 @@
 title: Source file conventions
 description: How new .md files should be formatted
 keywords: source file, contribute, style guide
+weight: 30
 ---
 
 ## File name

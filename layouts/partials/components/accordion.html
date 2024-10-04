@@ -8,8 +8,8 @@
       {{- end }}
       {{ .title }}
     </div>
-    <span :class="{ 'hidden' : !open }" class="icon-svg">{{ partialCached "icon" "expand_less" "expand_less" }}</span>
-    <span :class="{ 'hidden' : open }" class="icon-svg">{{ partialCached "icon" "expand_more" "expand_more" }}</span>
+    <span :class="{ 'hidden' : !open }" class="icon-svg">{{ partialCached "icon" "arrow_drop_up" "arrow_drop_up" }}</span>
+    <span :class="{ 'hidden' : open }" class="icon-svg">{{ partialCached "icon" "arrow_drop_down" "arrow_drop_down" }}</span>
   </button>
   <div x-show="open" x-collapse class="px-4">
     {{ markdownify .body }}

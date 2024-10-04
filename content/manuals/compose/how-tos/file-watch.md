@@ -22,6 +22,8 @@ aliases:
 
 You don't need to switch on `watch` for all services in a Compose project. In some instances, only part of the project, for example the Javascript frontend, might be suitable for automatic updates.
 
+Compose Watch is designed to work with services built from local source code using the `build` attribute. It doesn't track changes for services that rely on pre-built images specified by the `image` attribute.
+
 ## Compose Watch versus bind mounts
 
 Compose supports sharing a host directory inside service containers. Watch mode does not replace this functionality but exists as a companion specifically suited to developing in containers.
@@ -96,7 +98,7 @@ If `action` is set to `sync+restart`, Compose synchronizes your changes with the
 `sync+restart` is ideal when config file changes, and you don't need to rebuild the image but just restart the main process of the service containers. 
 It will work well when you update a database configuration or your `nginx.conf` file for example
 
->**Tip**
+>[!TIP]
 >
 > Optimize your `Dockerfile` for speedy
 incremental rebuilds with [image layer caching](/build/cache)
@@ -187,12 +189,12 @@ This setup demonstrates how to use the `sync+restart` action in Docker Compose t
 
 {{< include "compose/configure-watch.md" >}}
 
-> [!TIP]
+> [!NOTE]
 >
 > Watch can also be used with the dedicated `docker compose watch` command if you don't want to 
 > get the application logs mixed with the (re)build logs and filesystem sync events.
 
-> **Looking for a sample project to test things out?**
+> [!TIP]
 >
 > Check out [`dockersamples/avatars`](https://github.com/dockersamples/avatars),
 > or [local setup for Docker docs](https://github.com/docker/docs/blob/main/CONTRIBUTING.md)

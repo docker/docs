@@ -10,7 +10,7 @@ toc_min: 1
 grid:
 - title: Version and name top-level element
   description: Understand version and name attributes for Compose.
-  icon: feed
+  icon: text_snippet
   link: /reference/compose-file/version-and-name/
 - title: Services top-level element
   description: Explore all services attributes for Compose.

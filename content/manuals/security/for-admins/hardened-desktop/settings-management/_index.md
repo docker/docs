@@ -47,6 +47,7 @@ Using the `admin-settings.json` file, admins can:
 - Turn off Docker Scout SBOM indexing
 - Turn off beta and experimental features
 - Turn off Docker Desktop's onboarding survey
+- Control whether developers can use the Docker terminal
 - Control the file sharing implementation for your developers on macOS
 - Specify which paths your developers can add file shares to
 - Configure Air-Gapped Containers

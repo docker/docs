@@ -36,7 +36,7 @@ In the `getting-started-app` directory, create a file named `compose.yaml`.
 
 ## Define the app service
 
-In [part 7](./07_multi_container.md), you used the following command to start the application service.
+In [part 6](./07_multi_container.md), you used the following command to start the application service.
 
 ```console
 $ docker run -dp 127.0.0.1:3000:3000 \

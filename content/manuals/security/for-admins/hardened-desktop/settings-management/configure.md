@@ -184,6 +184,10 @@ The following `admin-settings.json` code and table provides an example of the re
   "displayedOnboarding": {
     "locked": true,
     "value": true
+  },
+  "desktopTerminalEnabled": {
+    "locked": false,
+    "value": false
   }
 }
 ```
@@ -219,7 +223,7 @@ The following `admin-settings.json` code and table provides an example of the re
 | `useVirtualizationFrameworkRosetta`|  macOS only | If `value` is set to `true`, Docker Desktop turns on Rosetta to accelerate x86_64/amd64 binary emulation on Apple Silicon. Note: This also automatically enables `Use Virtualization framework`. |
 | `useGrpcfuse` | macOS only | If `value` is set to `true`, gRPC Fuse is set as the file sharing mechanism. |
 | `displayedOnboarding` |  | If `value` is set to `true`, the onboarding survey will not be displayed to new users. Setting `value` to `false` has no effect. |
-
+| `desktopTerminalEnabled` |  | If `value` is set to `false`, developers cannot use the Docker terminal to interact with the host machine and execute commands directly from Docker Desktop. |
 
 ### Step three: Re-launch Docker Desktop
 

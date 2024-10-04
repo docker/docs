@@ -9,7 +9,7 @@ On this page you can find instructions on how to install Compose standalone on L
 
 ### On Linux
 
-> **Compose standalone**
+> [!WARNING]
 >
 > Note that Compose standalone uses the `-compose` syntax instead of the current standard syntax `compose`.  
 >For example type `docker-compose up` when using Compose standalone, instead of `docker compose up`.
@@ -48,15 +48,13 @@ on Microsoft Windows Server and want to install Docker Compose.
     ```powershell
      Start-BitsTransfer -Source "https://github.com/docker/compose/releases/download/{{% param "compose_version" %}}/docker-compose-windows-x86_64.exe" -Destination $Env:ProgramFiles\Docker\docker-compose.exe
     ```
+    To install a different version of Compose, substitute `{{% param "compose_version" %}}` with the version of Compose you want to use.
 
     > [!NOTE]
     >
     > On Windows Server 2019 you can add the Compose executable to `$Env:ProgramFiles\Docker`.
      Because this directory is registered in the system `PATH`, you can run the `docker-compose --version` 
      command on the subsequent step with no additional configuration.
-
-    > To install a different version of Compose, substitute `{{% param "compose_version" %}}`
-    > with the version of Compose you want to use.
 
 4.  Test the installation.
 

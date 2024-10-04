@@ -32,7 +32,7 @@ If you want to downgrade a Docker Business subscription and your organization us
 
 ## Downgrade your Docker subscription
 
->**Important**
+>[!IMPORTANT]
 >
 >If you have a [sales-assisted Docker Business subscription](details.md#sales-assisted), contact your account manager to downgrade your subscription. 
 
