@@ -64,7 +64,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 - Fixed a bug where the **Push to Docker Hub** action in the **Images** view would result in an `invalid tag format` error. Fixes [docker/for-win#14258](https://github.com/docker/for-win/issues/14258).
 - Fixed an issue where Docker Desktop startup failed when ICMPv6 setup was not successful.
 - Added drivers that allow USB/IP to work.
-- Fixed a bug in Enhanced Container Isolation (ECI) [Docker socket mount permissions for derived images](/content/manuals/security/for-admins/hardened-desktop/enhanced-container-isolation/config.md) where it was incorrectly denying Docker socket mounts for some images when Docker Desktop uses the containerd image store.
+- Fixed a bug in Enhanced Container Isolation (ECI) [Docker socket mount permissions for derived images](/manuals/security/for-admins/hardened-desktop/enhanced-container-isolation/config.md) where it was incorrectly denying Docker socket mounts for some images when Docker Desktop uses the containerd image store.
 - Enable `NFT_NUMGEN`, `NFT_FIB_IPV4` and `NFT_FIB_IPV6` kernel modules.
 - Build UI:
   - Highlight build check warnings in the **Completed builds** list.
@@ -87,7 +87,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 #### For Windows
 
-- Users with versions 4.14.0 and prior could encounter issues using the in-app update. To update to the latest, download and install the latest Docker Desktop.
+- Users with versions 4.14.0 and earlier could encounter issues using the in-app update. To update to the latest version, download and install the latest Docker Desktop from this page.
 
 ## 4.34.3
 
