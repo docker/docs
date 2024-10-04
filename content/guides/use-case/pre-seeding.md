@@ -167,7 +167,7 @@ Now that you have learned how to launch Postgres and pre-seed the database using
 
 ### Stop the existing Postgres instance
 
-Make sure you stop any running Postgres containers(along with volumes) to prevent port conflicts before you follow the steps:
+Make sure you stop any running Postgres containers (along with volumes) to prevent port conflicts before you follow the steps:
 
 1. Create a named volume.
 
