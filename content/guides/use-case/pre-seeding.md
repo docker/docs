@@ -114,7 +114,7 @@ Assuming that you have an existing Postgres database instance up and running, fo
    psql -h localhost -U postgres -f seed.sql`
    ```
 
-   Enter `mysecretpassword` when prompted for the password and once the query is executed, you will see the following results:
+   Once the query is executed, you will see the following results:
 
    ```plaintext
    CREATE DATABASE
