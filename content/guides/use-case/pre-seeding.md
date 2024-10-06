@@ -55,7 +55,7 @@ Launch a quick demo of Postgres by using the following steps:
    The `psql` is the PostgreSQL interactive shell that is used to connect to a Postgres database and let you start executing SQL commands. Assuming that you already have `psql` utility installed on your local system, it's time to connect to the Postgres database. Run the following command on your local terminal:
 
    ```console
-   psql -h localhost -U postgres
+   $ docker exec -it postgres psql -h localhost -U postgres
    ```
 
    Enter `mysecretpassword` when prompted for the password.
