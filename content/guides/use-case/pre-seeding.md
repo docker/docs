@@ -204,7 +204,7 @@ Make sure you stop any running Postgres containers (along with volumes) to preve
   
     It maps port `5432` on the host to the container's `5432`, let you access to the Postgres database from outside the container. It also define `data_sql` for persisting the database data, ensuring that data is not lost when the container is stopped.
 
-
+    It is important to note that the port mapping to the host is only necessary if you want to connect to the database from non-containerized programs. If you containerize the service that connects to the DB, you should connect to the database over a custom bridge network.
 
 3.  Bring up the Compose service.
 
