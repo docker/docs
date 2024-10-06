@@ -23,7 +23,6 @@ The [official Docker image for Postgres](https://hub.docker.com/_/postgres) prov
 The following prerequisites are required to follow along with this how-to guide:
 
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/) 
-- [Download](https://www.postgresql.org/download/) and Install PostgreSQL Client (`psql`)
 
 ## Launching Postgres
 
