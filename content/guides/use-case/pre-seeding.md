@@ -95,7 +95,7 @@ Assuming that you have an existing Postgres database instance up and running, fo
      ('Gamma', 'gamma@example.com');
    ```
 
-   The SQL commands create a new database called `sampledb`, connect to it, and define a `users` table. The table includes an auto-incrementing `id` as the primary key, a `name` field with a maximum length of 50 characters, and a unique `email` field with up to 100 characters.
+   The SQL script creates a new database called `sampledb`, connects to it, and creates a `users` table. The table includes an auto-incrementing `id` as the primary key, a `name` field with a maximum length of 50 characters, and a unique `email` field with up to 100 characters.
 
    After creating the table, the commands insert three users into the `users` table with their respective names and emails. This setup forms a basic database structure to store user information with unique email addresses.
 
