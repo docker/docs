@@ -126,7 +126,7 @@ Assuming that you have an existing Postgres database instance up and running, fo
 3. Run the following `psql` command to verify if the table named users is populated in the database `sampledb` or not. 
 
    ```console
-   psql -h localhost -U postgres sampledb
+   $ docker exec -it postgres psql -h localhost -U postgres sampledb
    ```
 
    Enter `mysecretpassword` when prompted for the password. You can now run `\l` in the `psql` terminal to list all the databases on the Postgres server.
