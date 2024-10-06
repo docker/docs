@@ -78,7 +78,7 @@ Assuming that you have an existing Postgres database instance up and running, fo
 
 1. Create an empty file named `seed.sql` and add the following content.
 
-   ```plaintext
+   ```sql
    CREATE DATABASE sampledb;
 
    \c sampledb
