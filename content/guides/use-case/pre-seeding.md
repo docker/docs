@@ -129,7 +129,7 @@ Assuming that you have an existing Postgres database instance up and running, fo
    $ docker exec -it postgres psql -h localhost -U postgres sampledb
    ```
 
-   Enter `mysecretpassword` when prompted for the password. You can now run `\l` in the `psql` terminal to list all the databases on the Postgres server.
+   You can now run `\l` in the `psql` shell to list all the databases on the Postgres server.
 
    ```console
    sampledb=# \l
