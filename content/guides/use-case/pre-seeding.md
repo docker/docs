@@ -99,7 +99,7 @@ Assuming that you have an existing Postgres database instance up and running, fo
 
    After creating the table, the `INSERT` command inserts three users into the `users` table with their respective names and emails. This setup forms a basic database structure to store user information with unique email addresses.
 
-2. Run the following command to seed the database
+2. Seed the database.
 
    It’s time to feed the content of the `seed.sql` directly into the database by using the “<” operator. The command is used to execute a SQL script named `seed.sql` against a Postgres database named `sampledb`. 
 
