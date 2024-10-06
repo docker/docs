@@ -57,17 +57,7 @@ Launch a quick demo of Postgres by using the following steps:
    $ docker exec -it postgres psql -h localhost -U postgres
    ```
 
-   Enter `mysecretpassword` when prompted for the password.
-   
-   ```console
-   Password for user postgres:
-   psql (15.8 (Homebrew), server 16.4 (Debian 16.4-1.pgdg120+1))
-   WARNING: psql major version 15, server major version 16.
-            Some psql features might not work.
-   Type "help" for help.
-
-   postgres=#
-   ```
+   You can now execute any SQL queries or commands you need within the `psql` prompt.
 
 ## Pre-seed the Postgres database using a SQL script
 
