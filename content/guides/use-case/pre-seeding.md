@@ -96,13 +96,6 @@ Assuming that you have an existing Postgres database instance up and running, fo
    $ cat seed.sql | docker exec -i postgres psql -h localhost -U postgres -f-
    ```
 
-   > [!TIP] Running on Windows
-   > If you're using Windows, the < operator may result in an error. To avoid this, use the -f flag to specify the SQL file like this:
-
-   ```console
-   psql -h localhost -U postgres -f seed.sql`
-   ```
-
    Once the query is executed, you will see the following results:
 
    ```plaintext
