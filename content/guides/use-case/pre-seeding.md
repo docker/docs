@@ -104,7 +104,7 @@ Assuming that you have an existing Postgres database instance up and running, fo
    It’s time to feed the content of the `seed.sql` directly into the database by using the `<` operator. The command is used to execute a SQL script named `seed.sql` against a Postgres database named `sampledb`. 
 
    ```console
-   psql -h localhost -U postgres < seed.sql
+   $ cat seed.sql | docker exec -i postgres psql -h localhost -U postgres -f-
    ```
 
    > [!TIP] Running on Windows
