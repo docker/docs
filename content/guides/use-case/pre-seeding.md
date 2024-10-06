@@ -11,7 +11,7 @@ In this guide, you will learn how to:
 
 - Use Docker to launch up a Postgres container
 - Pre-seed Postgres using a SQL script
-- Pre-seed Postgres by using volumes to mount SQL files
+- Pre-seed Postgres by copying SQL files into Docker image
 - Pre-seed Postgres using JavaScript code
 
 ## Using Postgres with Docker
@@ -81,7 +81,7 @@ Assuming that you have an existing Postgres database instance up and running, fo
    INSERT INTO users (name, email) VALUES
      ('Alpha', 'alpha@example.com'),
      ('Beta', 'beta@example.com'),
-     ('Gamma', 'gamma@example.com');
+     ('Gamma', 'gamma@example.com');  
    ```
 
    The SQL script creates a new database called `sampledb`, connects to it, and creates a `users` table. The table includes an auto-incrementing `id` as the primary key, a `name` field with a maximum length of 50 characters, and a unique `email` field with up to 100 characters.
@@ -151,162 +151,76 @@ Now that you have learned how to launch Postgres and pre-seed the database using
 
 Make sure you stop any running Postgres containers (along with volumes) to prevent port conflicts before you follow the steps:
 
-1. Create a named volume.
+1. Modify the `seed.sql` with the following entries:
 
-   Use the `docker volume create` command to create a named volume.
-  
-   ```console
-   $ docker volume create data_sql
+   ```sql
+   CREATE TABLE IF NOT EXISTS users (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50),
+    email VARCHAR(100) UNIQUE
+   );
+
+   INSERT INTO users (name, email) VALUES
+    ('Alpha', 'alpha@example.com'),
+    ('Beta', 'beta@example.com'),
+    ('Gamma', 'gamma@example.com')
+   ON CONFLICT (email) DO NOTHING;
    ```
-
+   
 2. Create a text file named `Dockerfile` and copy the following content.
 
    ```plaintext
+   # syntax=docker/dockerfile:1
    FROM postgres:latest
-   VOLUME /docker-entrypoint-initdb.d
+   COPY seed.sql /docker-entrypoint-initdb.d/
    ```
 
-3. Build the custom Docker image called `mynewpostgres`.
-
-   ```console
-   $ docker build -t mynewpostgres .
-   ```
-
-4. Run the following command to successfully mount the volume and run the Postgres container.
-
-   Assuming that the existing `seed.sql` (used in previous steps) is placed under the same directory, run the following command:
-
-   ```console
-   $ docker run --rm \
-   -v $(pwd)/seed.sql:/sql-files/seed.sql \
-   -v data_sql:/docker-entrypoint-initdb.d \
-   mynewpostgres cp /sql-files/seed.sql /docker-entrypoint-initdb.d/
-   ```
-
-   This command mounts your `seed.sql` file from the current directory (`$(pwd)/seed.sql`) into the temporary container at `/sql-files`, and then copies it into the `data_sql` named volume.
-
-   > [!TIP] Running on Windows
-   > When running this command on Windows, use `${PWD}` (in uppercase and with curly brackets) instead of `$(pwd)`, and make sure to execute the command in PowerShell:
+   This Dockerfile copies the `seed.sql` script directly into the PostgreSQL container's initialization directory.
    
+
+3. Use Docker Compose.
    
-   ```console
-   $ docker run --rm \
-    -v ${PWD}/seed.sql:/sql-files/seed.sql \
-    -v data_sql:/docker-entrypoint-initdb.d \
-    mynewpostgres cp /sql-files/seed.sql /docker-entrypoint-initdb.d/
-   ```
-   
-   This ensures that the volume is mounted correctly on the Windows systems.
-
-5. Now that your `seed.sql` file is in the `data_sql` volume, you can run your `mynewpostgres` image and mount the named volume:
-
-   ```console
-   $ docker run --name mynewpostgres \
-   -p 5432:5432 \
-   -e POSTGRES_PASSWORD=mysecretpassword \
-   -v data_sql:/docker-entrypoint-initdb.d \
-   mynewpostgres
-   ```
-
-   Open a new terminal and run the following command to verify the database and tables seeded into the database.
-   ```console
-   psql -h localhost -U postgres sampledb
-   ```
-  
-   Enter `mysecretpassword` when prompted for the password. Run the following command to verify if the table named users is populated in the database `sampledb` or not. 
-
-   ```console
-   sampledb=# select * from users;
-    id | name  |       email
-   ----+-------+-------------------
-    1 | Alpha | alpha@example.com
-    2 | Beta  | beta@example.com
-    3 | Gamma | gamma@example.com
-    3 rows)
-   ```
-
-Now that you’ve been shown how to pre-seed a database by using volumes, let’s see how you can simplify the whole process of seeding by using a single Docker Compose file. 
-
-> [!TIP]
-> Make sure you stop any running Postgres containers(along with volumes) to prevent port conflicts before you follow the next steps.
-
-First, you will need to create the following project directory structure:
-
-```console
-$ tree
-.
-├── compose.yml
-└── sql_files
-    └── seed.sql
-```
-
-1. Start by writing the compose file
-
-   This compose.yml file defines a Postgres service named `db` using the latest Postgres image, which sets up a database with the name `sampledb`, along with a user `postgres` and a password `mysecretpassword`. 
+   Using Docker Compose makes it even easier to manage and deploy the PostgreSQL container with the seeded database. This compose.yml file defines a Postgres service named `db` using the latest Postgres image, which sets up a database with the name `sampledb`, along with a user `postgres` and a password `mysecretpassword`. 
 
    ```yaml
    services:
-      db:
-        image: postgres:latest
-        container_name: my_postgres_db
-        environment:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: mysecretpassword
-          POSTGRES_DB: sampledb
+     db:
+       build:
+         context: .
+         dockerfile: Dockerfile
+       container_name: my_postgres_db
+       environment:
+         POSTGRES_USER: postgres
+         POSTGRES_PASSWORD: mysecretpassword
+         POSTGRES_DB: sampledb
        ports:
          - "5432:5432"
        volumes:
          - data_sql:/var/lib/postgresql/data   # Persistent data storage
-         - ./sql_files:/docker-entrypoint-initdb.d  # Mount local sql file to seed the database
 
-    volumes:
-      data_sql:
+   volumes:
+     data_sql:
     ```
   
-    It maps port `5432` on the host to the container's `5432`, let you access to the Postgres database from outside the container. It also defines two volumes: one (`data_sql`) for persisting the database data, ensuring that data is not lost when the container is stopped, and another volume that mounts the local `sql_files` directory into `/docker-entrypoint-initdb.d` within the container. This mounted directory contains a SQL file that is automatically executed when the Postgres container is initialized, allowing pre-seeding of the database.
+    It maps port `5432` on the host to the container's `5432`, let you access to the Postgres database from outside the container. It also define `data_sql` for persisting the database data, ensuring that data is not lost when the container is stopped.
 
-2.  Create a new directory `sql_files/` and copy the following `seed.sql` to this new directory:
 
-    ```plaintext
-    -- Ensure the users table is created in the sampledb database
-
-    CREATE TABLE IF NOT EXISTS users (
-      id SERIAL PRIMARY KEY,
-      name VARCHAR(50),
-      email VARCHAR(100) UNIQUE
-    );
-
-    -- Insert sample data into the users table
-    INSERT INTO users (name, email) VALUES
-      ('Alpha', 'alpha@example.com'),
-      ('Beta', 'beta@example.com'),
-      ('Gamma', 'gamma@example.com')
-    ON CONFLICT (email) DO NOTHING;
-    ```
-
-    This SQL script ensures that the users table is created in the `sampledb` database if it doesn't already exist. The table includes three columns: id, which is a serial primary key, name (a VARCHAR of 50 characters), and email (a VARCHAR of 100 characters that must be unique). The script also inserts three user records into the users table, but if a conflict occurs on the email field (i.e., if the email already exists), the insertion is skipped, ensuring no duplicate emails are added.
 
 3.  Bring up the Compose service.
 
+    Assuming that you've placed the `seed.sql` file in the same directory as the Dockerfile, execute the following command:
+
     ```console
-    $ docker compose up -d
+    $ docker compose up -d --build
     ```
 
 4.  It’s time to verify if the table `users` get populated with the data. 
 
     ```console
-    psql -h localhost -U postgres sampledb
+    $ docker exec -it my_postgres_db psql -h localhost -U postgres sampledb
     ```
 
-    Enter `mysecretpassword` when prompted for the password.
-
-    ```plaintext
-    Password for user postgres:
-    psql (15.8 (Homebrew), server 16.4 (Debian 16.4-1.pgdg120+1))
-    WARNING: psql major version 15, server major version 16.
-             Some psql features might not work.
-    Type "help" for help.
- 
+    ``` 
     sampledb=# select * from users;
       id | name  |       email
     ----+-------+-------------------
@@ -318,15 +232,6 @@ $ tree
      sampledb=#
      ```
 
-     > [!TIP]
-     > If you're encountering the error 'more' is not recognized as an internal or external command when running queries in `psql` on a Windows system, this is likely due to an issue with the pager setting, which uses external programs like more or less to paginate query results. You can resolve this by turning off pagination within `psql` using the following command:
-      
-     ```console
-     \pset pager off
-     ```
-
-     To avoid running this command every time, you can permanently disable the pager by adding \pset pager off to your psqlrc.conf file, which is located in the `%APPDATA%\postgresql\` directory on Windows. This will ensure that query results are always displayed without invoking an external pager program.
-     
 
 ## Pre-seeding the database using JavaScript code
 
