@@ -101,7 +101,7 @@ Assuming that you have an existing Postgres database instance up and running, fo
 
 2. Seed the database.
 
-   It’s time to feed the content of the `seed.sql` directly into the database by using the “<” operator. The command is used to execute a SQL script named `seed.sql` against a Postgres database named `sampledb`. 
+   It’s time to feed the content of the `seed.sql` directly into the database by using the `<` operator. The command is used to execute a SQL script named `seed.sql` against a Postgres database named `sampledb`. 
 
    ```console
    psql -h localhost -U postgres < seed.sql
