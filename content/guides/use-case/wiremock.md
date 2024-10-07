@@ -11,6 +11,12 @@ WireMock is an open-source tool that helps developers to create a mock server th
 
 Imagine you have both an API and a frontend app, and you want to test how the frontend interacts with the API. Using WireMock, you can set up a mock server to simulate the API's responses, allowing you to test the frontend behavior without relying on the actual API. This can be particularly helpful when the API is still under development or when you want to test different scenarios without affecting the actual API. WireMock supports both HTTP and HTTPS protocols and can simulate various response scenarios, including delays, errors, and different HTTP status codes.
 
+In this guide, you'll learn how to:
+
+- Use Docker to launch up a WireMock container.
+- Set up a non-containerized Node app to route requests to the containerized WireMock.
+- Set up a non-containerized Node app to fetch data from the external AccuWeather API.
+
 ## Using WireMock with Docker
 
 The official [Docker image for WireMock](https://hub.docker.com/r/wiremock/wiremock) provides a convenient way to deploy and manage WireMock instances. WireMock is available for various CPU architectures, including amd64, armv7, and armv8, ensuring compatibility with different devices and platforms. You can learn more about WireMock standalone on the [WireMock docs site](https://wiremock.org/docs/standalone/docker/).
@@ -85,15 +91,8 @@ Now that you have tried WireMock, let’s use it in development and testing. In 
 
   ![Diagram showing the architecture of WireMock in development ](./images/wiremock-arch.webp)
 
-  * The API Request is sent from the Node.js backend to the External AccuWeather API, which then returns the API Response.
-  * Alternatively, when using WireMock, a Mocked API Request is sent to the WireMock server, and a Mocked API Response is returned.
-
-  In this guide, you’ll learn how to:
-
-  * Set up a non-containerized Node app to route requests to the containerized WireMock 
-  * Set up a non-containerized Node app to fetch data from the external AccuWeather API.
-
-  The application can be accessed at [dockersamples/wiremock-node-docker](https://github.com/dockersamples/wiremock-node-docker).
+  - The API Request is sent from the Node.js backend to the External AccuWeather API, which then returns the API Response.
+  - Alternatively, when using WireMock, a Mocked API Request is sent to the WireMock server, and a Mocked API Response is returned.
 
 
 ## Set up a non-containerized Node app to route requests to a containerized WireMock
