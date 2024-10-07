@@ -24,7 +24,7 @@ Some companies may have more than one [Docker organization](/manuals/admin/organ
 
 Docker offers a significant number of configuration parameters that can be preset. 
 
-The Docker organization owner and the development lead should review the settings to determine which of those settings to configure to create the company’s baseline configuration. You should also discuss [enforcing sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md) for your Docker Desktop users and whether you want to take advantage of the free trials of other Docker products. such as [Docker Scout](/manuals/scout/_index.md), which is included in the subscription. 
+The Docker organization owner and the development lead should review the settings to determine which of those settings to configure to create the company’s baseline configuration. You should also discuss [enforcing sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md) for your Docker Desktop users and whether you want to take advantage of the free trials of other Docker products such as [Docker Scout](/manuals/scout/_index.md), which is included in the subscription. 
 
 {{< accordion title="Baseline settings to review" >}}
 
@@ -64,7 +64,7 @@ Docker offers a number of security related features that have configuration para
 | windowsDockerdPort               | Windows only    | Exposes Docker Desktop's internal proxy locally on this port for the Windows Docker daemon to connect to. **Note**: Available for Windows containers only. |
 | filesharingAllowedDirectories    |                 | Specify which paths on the developer host machine or network your users can add container file shares to.|
 | enableKerberosNtlm               |                 | When set to true, Kerberos and NTLM authentication is enabled. Default is false. Available in Docker Desktop version 4.32 and later.|
-| containersProxy (Beta)           |                 | Allows you to create air-gapped containers. For more information, see [Air-Gapped Containers](/manual/security/for-admins/hardened-desktop/air-gapped-containers.md).|
+| containersProxy (Beta)           |                 | Allows you to create air-gapped containers. For more information, see [Air-Gapped Containers](/manuals/security/for-admins/hardened-desktop/air-gapped-containers.md).|
 | blockDockerLoad                  |                 | When this setting is enabled, users can no longer run the `docker load` command and will receive an error if they try.|
 | disableUpdate                    |                 | Users get notifications about new Docker Desktop versions. Enabling this setting removes those notifications. Helpful if corporate IT manages Docker Desktop version updates for users.|
 
