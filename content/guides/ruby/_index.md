@@ -5,8 +5,7 @@ description: Containerize Ruby on Rails apps using Docker
 keywords: Docker, getting started, ruby, language
 summary: |
   This guide explains how to containerize Ruby on Rails applications using
-  Docker, covering image building, dependency management, optimizing image
-  size, and best practices for deploying Ruby apps efficiently in containers.
+  Docker.
 toc_min: 1
 toc_max: 2
 aliases:

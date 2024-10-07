@@ -3,7 +3,7 @@ title: Securing your software supply chain with Docker Scout
 linkTitle: Docker Scout
 summary: |
   Enhance container security by automating vulnerability detection and
-  remediation, ensuring compliance, and protecting your development workflow.
+  remediation.
 description: |
   Learn how to use Docker Scout to enhance container security by automating
   vulnerability detection and remediation, ensuring compliance, and protecting

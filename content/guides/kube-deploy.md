@@ -6,9 +6,7 @@ aliases:
   - /get-started/kube-deploy/
   - /guides/deployment-orchestration/kube-deploy/
 summary: |
-  Learn how to deploy and orchestrate Docker containers using Kubernetes, with
-  step-by-step guidance on setup, configuration, and best practices to enhance
-  your application's scalability and reliability.
+  Learn how to deploy and orchestrate Docker containers using Kubernetes.
 subjects: [deploy]
 levels: [beginner]
 params:

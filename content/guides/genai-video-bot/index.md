@@ -4,9 +4,8 @@ linkTitle: Video transcription and chat
 description: Explore a generative AI video analysis app that uses Docker, OpenAI, and Pinecone.
 keywords: python, generative ai, genai, llm, whisper, pinecone, openai, whisper
 summary: |
-  Learn how to build and deploy a generative AI video bot using Docker, with
-  step-by-step instructions for setup, integration, and optimization to enhance
-  your AI development projects.
+  Learn how to build and deploy a generative AI video analysis and
+  transcription bot using Docker.
 subjects: [ai]
 levels: [beginner]
 aliases:

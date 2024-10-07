@@ -4,10 +4,7 @@ linkTitle: Java
 keywords: java, getting started
 description: Containerize Java apps using Docker
 summary: |
-  This guide demonstrates how to containerize Java applications using Docker,
-  covering image building, dependency management, optimizing image size with
-  multi-stage builds, and best practices for deploying Java apps efficiently in
-  containers.
+  This guide demonstrates how to containerize Java applications using Docker.
 toc_min: 1
 toc_max: 2
 aliases:
