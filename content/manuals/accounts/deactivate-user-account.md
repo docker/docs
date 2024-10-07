@@ -7,7 +7,7 @@ keywords: Docker Hub, delete, deactivate, account, account management
 
 You can deactivate an account at any time. This section describes the prerequisites and steps to deactivate a user account. For information on deactivating an organization, see [Deactivating an organization](../admin/deactivate-account.md).
 
->**Warning**
+>[!Warning]
 >
 > All Docker products and services that use your Docker account will be inaccessible after deactivating your account.
 
@@ -15,14 +15,15 @@ You can deactivate an account at any time. This section describes the prerequisi
 
 Before deactivating your Docker account, ensure that you meet the following requirements:
 
-- You must not be a member of a company or any teams or organizations. You must remove the account from all teams, organizations, or the company.
-
+- For owners, you must leave your organization or company before deactivating your Docker account.
     To do this:
-    1. Navigate to **Organizations** and then select the organization(s) you need to leave.
+    1. Sign in to your [Docker account](https://app.docker.com/)
+    2. Navigate to **Settings and administration** and select **Go to Admin Console**.
+    2. Select the organization(s) you need to leave from the top-right drop-down menu.
     2. Find your username in the **Members** tab.
     3. Select the **More options** menu and then select **Leave organization**.
 
-- If you are the sole owner of an organization, either assign another member of the organization the owner role and then remove yourself from the organization, or deactivate the organization. Similarly, if you are the sole owner of a company, either add someone else as a company owner and then remove yourself, or deactivate the company.
+- If you are the sole owner of an organization, you must assign the owner role to another member of the organization and then remove yourself from the organization, or deactivate the organization. Similarly, if you are the sole owner of a company, either add someone else as a company owner and then remove yourself, or deactivate the company.
 
 - If you have an active Docker subscription, [downgrade it to a Docker Personal subscription](../subscription/core-subscription/downgrade.md).
 
