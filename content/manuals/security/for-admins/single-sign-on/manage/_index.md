@@ -14,20 +14,9 @@ aliases:
 >
 > You must have a [company](/admin/company/) to manage more than one organization.
 
-{{< tabs >}}
-{{< tab name="Admin Console" >}}
-
 {{< include "admin-early-access.md" >}}
 
 {{% admin-sso-management-orgs product="admin" %}}
-
-{{< /tab >}}
-{{< tab name="Docker Hub" >}}
-
-{{% admin-sso-management-orgs product="hub" %}}
-
-{{< /tab >}}
-{{< /tabs >}}
 
 ## Manage domains
 

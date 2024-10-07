@@ -1,4 +1,4 @@
-A company provides a single point of visibility across multiple organizations. This view simplifies the management of Docker organizations and settings. It's available to Docker Business subscribers.
+A company provides a single point of visibility across multiple organizations. This view simplifies the management of Docker organizations and settings. Organization owners with a Docker Business subscription can create a company and then manage it through the [Docker Admin Console](https://app.docker.com/admin).
 
 The following diagram depicts the setup of a company and how it relates to associated organizations.
 

@@ -4,10 +4,7 @@ linkTitle: Node.js
 description: Containerize and develop Node.js apps using Docker
 keywords: getting started, node, node.js
 summary: |
-  This guide explains how to containerize Node.js applications using Docker,
-  covering image building, dependency management, optimizing image size with
-  multi-stage builds, and best practices for deploying Node.js apps efficiently
-  in containers.
+  This guide explains how to containerize Node.js applications using Docker.
 toc_min: 1
 toc_max: 2
 aliases:

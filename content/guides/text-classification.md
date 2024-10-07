@@ -5,9 +5,7 @@ keywords: nlp, natural language processing, sentiment analysis, python, nltk, sc
 description: Learn how to build and run a text recognition application using Python, NLTK, scikit-learn, and Docker.
 summary: |
   This guide details how to containerize text classification models using
-  Docker, focusing on configuring the environment, optimizing performance, and
-  running classification tasks for large datasets with reproducibility and
-  scalability.
+  Docker.
 subjects: [ai]
 languages: [python]
 levels: [beginner]

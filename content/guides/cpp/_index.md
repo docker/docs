@@ -4,9 +4,7 @@ linkTitle: C++
 description: Containerize and develop C++ applications using Docker.
 keywords: getting started, c++
 summary: |
-  This guide explains how to containerize C++ applications using Docker,
-  covering how to build Docker images, manage dependencies, and deploy C++ apps
-  efficiently in containers.
+  This guide explains how to containerize C++ applications using Docker.
 toc_min: 1
 toc_max: 2
 aliases:

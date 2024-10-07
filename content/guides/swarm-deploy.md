@@ -7,9 +7,7 @@ aliases:
   - /get-started/swarm-deploy/
   - /guides/deployment-orchestration/swarm-deploy/
 summary: |
-  Discover how to deploy and manage Docker containers using Docker Swarm, with
-  step-by-step guides on setup, scaling, networking, and best practices for
-  efficient container orchestration.
+  Discover how to deploy and manage Docker containers using Docker Swarm.
 subjects: [deploy]
 levels: [beginner]
 params:
