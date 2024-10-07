@@ -21,3 +21,7 @@ Once all of the settings have been entered to the files that need to be distribu
 
 Set up free tier Docker product entitlements included in the subscription
 Set up the cloud builder for free monthly minutes in Docker Build Cloud, and up to three repositories to monitor via Docker Scout.  Please note that your free entitlements stop when your limits are exceeded so there is no fear of a surprise cost overage.  The instructions on setting up the cloud builder are located on build.docker.com and there is a video walkthrough here, and the instructions on adding a repository for scout monitoring is here for Docker Hub repositories, and here for integration to other image registries.
+
+
+SSO domain verification
+The SSO process has multiple steps involving different teams, so it's recommended that the process is started right away.  The first step is domain verification.  This step ensures that the person setting up SSO actually controls the domain they are requesting.  The detailed steps to verify a domain are located here.  Your DNS team will need to be involved in this step.
