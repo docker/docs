@@ -42,9 +42,9 @@ If you want to downgrade a Docker Business subscription and your organization us
 
 3. Choose either your personal account or an organization to downgrade.
 
-4. In the **Plan** section, select **Change plan**.
+4. In the plan section, select **Change plan**.
 
-5. On the **Change Plan** page, select the plan you'd like to downgrade to.
+5. Select the plan you'd like to downgrade to.
 
 6. Review the downgrade warning and select **Continue**.
 

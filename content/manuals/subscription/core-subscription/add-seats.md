@@ -23,7 +23,7 @@ When you add seats to your subscription in the middle of your billing cycle, you
 
 2. Select your **avatar** to open the drop-down menu.
 
-3. Select the **Billing** tab from the drop-down menu and then **Add seats**.
+3. Select **Billing** from the drop-down menu and then **Add seats**.
 
 4. Specify the number of seats you want to add.
     Your prorated fee is automatically calculated.
