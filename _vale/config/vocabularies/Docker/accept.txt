@@ -69,6 +69,8 @@ IPs?
 IPv[46]
 IPvlan
 Intel
+Intune
+Jamf
 JFrog
 JetBrains
 Kitematic
@@ -80,14 +82,17 @@ Logstash
 MAC
 Mac
 Mail(chimp|gun)
+MDM
 Microsoft
 MySQL
 NAT
 Netplan
 Nginx
+NTLM
 Nuxeo
 OAuth
 OCI
+[Oo]nboarding
 OTel
 Okta
 Postgres
@@ -188,3 +193,4 @@ umask
 ungated
 vSphere
 virtiofs
+vpnkit

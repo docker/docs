@@ -14,13 +14,13 @@ Additionally, communicate that settings will be reviewed to optimize productivit
 
 ### MDM team communication
 
-Device management solutions, such as Intune and Jamf, are commonly used for software distribution across enterprises, typically managed by a dedicated MDM team. We recommend engaging with this team early in the process to understand their requirements and the lead time for deploying changes.
+Device management solutions, such as Intune and Jamf, are commonly used for software distribution across enterprises, typically managed by a dedicated MDM team. It is recommended that you engage with this team early in the process to understand their requirements and the lead time for deploying changes.
 
 Several key setup steps in this guide require the use of JSON files, registry keys, or .plist files that need to be distributed to developer machines. It’s a best practice to use MDM tools for deploying these configuration files and ensuring their integrity is preserved.
 
 ## Step two: Identify Docker organizations
 
-Some companies may have more than one [Docker organization](/manuals/admin/organization/_index.md) created.  These organizations may have been created for specific purposes, or may not be needed anymore.  If you suspect your company has more than one Docker organization, it's recommended you survey your teams to see if they have their own organizations. You can also contact your Docker Customer Success representative to get a list of organizations with users whose emails match your domain name.
+Some companies may have more than one [Docker organization](/manuals/admin/organization/_index.md) created. These organizations may have been created for specific purposes, or may not be needed anymore. If you suspect your company has more than one Docker organization, it's recommended you survey your teams to see if they have their own organizations. You can also contact your Docker Customer Success representative to get a list of organizations with users whose emails match your domain name.
 
 ## Step three: Gather requirements
 
@@ -37,9 +37,9 @@ The Docker organization owner and the development lead should review the setting
 | `proxy`               |                 |  This setting configures the proxy used by Docker Desktop to access the internet. The proxy can be set manually or get its value from the system.|
 | `wslEngineEnabled`    | Windows only    | This setting specifies whether the user should use WSL 2 or HyperV for the VM for Windows installations.|
 | `kubernetes`          |                 | Docker Desktop offers a Kubernetes single-node cluster for Kubernetes deployments locally. This setting controls whether it is started when Docker Desktop starts, and its configuration.|
-| `analyticsEnabled`   |                 | Docker allows users to opt out of sending usage data to Docker. The usage data feeds what admins are able to see about Docker Desktop usage, so it is highly recommended to enable and lock this setting.|
-| `useVirtualizationFrameworkVirtioFS`| macOS only      | VirtioFS is the newer higher performance file sharing framework for MacOS. It takes precedence over the older frameworks if it is enabled.|
-| `useVirtualizationFrameworkRosetta` | macOS only      | Rosetta is the Apple emulator for x86 chipsets. This setting allows Docker Desktop to use Rosetta when running containers built for the x86 chipset.|
+| `analyticsEnabled`   |                 | Docker lets users to opt out of sending usage data to Docker. The usage data feeds what admins are able to see about Docker Desktop usage, so it is highly recommended to enable and lock this setting.|
+| `useVirtualizationFrameworkVirtioFS`| macOS only      | Virtiofs is the newer higher performance file sharing framework for Mac. It takes precedence over the older frameworks if it is enabled.|
+| `useVirtualizationFrameworkRosetta` | macOS only      | Rosetta is the Apple emulator for x86 chipsets. This setting lets Docker Desktop to use Rosetta when running containers built for the x86 chipset.|
 | `allowExperimentalFeatures`  |           | Docker Desktop versions often contain experimental features for trial and feedback. If this setting is set to false, experimental features are disabled.|
 | `allowBetaFeatures`    |                 | Docker Desktop versions often contain beta features for trial and feedback. If this setting is set to false, beta features are disabled.|
 | `configurationFileVersion`      |             | Specifies the version of the configuration file format.|
