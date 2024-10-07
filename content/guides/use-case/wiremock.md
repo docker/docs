@@ -238,6 +238,13 @@ Follow the steps to setup a non-containerized Node application:
 
    It’s time to set the environment variables in the `.env` file:
 
+   ```plaintext
+   ACCUWEATHER_API_KEY=XXXXXX
+   API_ENDPOINT_BASE=http://dataservice.accuweather.com
+   ``` 
+
+   Make sure to populate `ACCUWEATHER_API_KEY` with the correct value.
+
 4. Install the dependencies
 
    Run the following command to install the required packages:
@@ -263,7 +270,7 @@ Follow the steps to setup a non-containerized Node application:
    > node src/index.js
 
    API_ENDPOINT_BASE: http://dataservice.accuweather.com
-   ACCUWEATHER_API_KEY: <your_api_key] 
+   ACCUWEATHER_API_KEY: <your_api_key 
    Listening: http://localhost:5000
    ``` 
    
