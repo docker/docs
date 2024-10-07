@@ -9,7 +9,7 @@ weight: 40
 
 ## Step one: Enforce SSO
 
-Enforcing SSO means that anyone who has a Docker profile with an email address that matches your verified domain must sign in using your SSO connection.  Make sure the Identity provider groups associated with your SSO connection cover all the developer groups that you want to have access to the Docker subscription.
+Enforcing SSO means that anyone who has a Docker profile with an email address that matches your verified domain must sign in using your SSO connection. Make sure the Identity provider groups associated with your SSO connection cover all the developer groups that you want to have access to the Docker subscription.
 
 ## Step two: Deploy configuration settings and enforce sign-in to users
 

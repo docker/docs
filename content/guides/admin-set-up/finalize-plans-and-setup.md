@@ -22,7 +22,7 @@ If you have more than one organization, it’s recommended that you either conso
 
 ### Set up single sign-on SSO domain verification
 
-Single sign-on (SSO) allows developers to authenticate using their identity providers (IdPs) to access Docker. SSO is available for a whole company, and all associated organizations, or an individual organization that has a Docker Business subscription. For more information, see the [documentation](/manuals/security/for-admins/single-sign-on/_index.md).
+Single sign-on (SSO) lets developers to authenticate using their identity providers (IdPs) to access Docker. SSO is available for a whole company, and all associated organizations, or an individual organization that has a Docker Business subscription. For more information, see the [documentation](/manuals/security/for-admins/single-sign-on/_index.md).
 
 You can also enable [SCIM] for further automation of provisioning and deprovisioning of users.
 
@@ -40,4 +40,4 @@ You can also enable [SCIM] for further automation of provisioning and deprovisio
 
 Existing users may be running outdated or unsupported versions of Docker Desktop. It is highly recommended all users update to a supported version. Docker Desktop versions released within the past 6 months from the latest release are supported.
 
-We recommend using a MDM solution to manage the version of Docker Desktop for users.  Users may also get Docker Desktop directly from Docker or through a company software portal.  
+It's recommended that you use us a MDM solution to manage the version of Docker Desktop for users. Users may also get Docker Desktop directly from Docker or through a company software portal.  

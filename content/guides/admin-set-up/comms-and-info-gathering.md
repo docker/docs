@@ -37,7 +37,7 @@ The Docker organization owner and the development lead should review the setting
 | `proxy`               |                 |  This setting configures the proxy used by Docker Desktop to access the internet. The proxy can be set manually or get its value from the system.|
 | `wslEngineEnabled`    | Windows only    | This setting specifies whether the user should use WSL 2 or HyperV for the VM for Windows installations.|
 | `kubernetes`          |                 | Docker Desktop offers a Kubernetes single-node cluster for Kubernetes deployments locally. This setting controls whether it is started when Docker Desktop starts, and its configuration.|
-| `analyticsEnabled`   |                 | Docker lets users to opt out of sending usage data to Docker. The usage data feeds what admins are able to see about Docker Desktop usage, so it is highly recommended to enable and lock this setting.|
+| `analyticsEnabled`   |                 | Docker lets users opt out of sending usage data to Docker. The usage data feeds what admins are able to see about Docker Desktop usage, so it is highly recommended to enable and lock this setting.|
 | `useVirtualizationFrameworkVirtioFS`| macOS only      | Virtiofs is the newer higher performance file sharing framework for Mac. It takes precedence over the older frameworks if it is enabled.|
 | `useVirtualizationFrameworkRosetta` | macOS only      | Rosetta is the Apple emulator for x86 chipsets. This setting lets Docker Desktop to use Rosetta when running containers built for the x86 chipset.|
 | `allowExperimentalFeatures`  |           | Docker Desktop versions often contain experimental features for trial and feedback. If this setting is set to false, experimental features are disabled.|
@@ -68,7 +68,7 @@ Docker also offers a number of security related features, again through [Setting
 | `windowsDockerdPort`               | Windows only    | Exposes Docker Desktop's internal proxy locally on this port for the Windows Docker daemon to connect to. It is available for Windows containers only. |
 | `filesharingAllowedDirectories`    |                 | Specify which paths on the developer host machine or network your users can add container file shares to.|
 | `enableKerberosNtlm`               |                 | When set to true, Kerberos and NTLM authentication is enabled. Default is false. Available in Docker Desktop version 4.32 and later.|
-| `containersProxy`          |                 | Allows you to create air-gapped containers. For more information, see [Air-Gapped Containers](/manuals/security/for-admins/hardened-desktop/air-gapped-containers.md).|
+| `containersProxy`          |                 | Lets you create air-gapped containers. For more information, see [Air-Gapped Containers](/manuals/security/for-admins/hardened-desktop/air-gapped-containers.md).|
 | `blockDockerLoad`    |                 | When this setting is enabled, users can no longer run the `docker load` command and will receive an error if they try.|
 | `disableUpdate`   |                 | Users get notifications about new Docker Desktop versions. Enabling this setting removes those notifications. Helpful if corporate IT manages Docker Desktop version updates for users.|
 
@@ -76,4 +76,4 @@ Docker also offers a number of security related features, again through [Setting
 
 ## Optional step four: Meet with the Docker Implementation team
 
-The Docker Implementation team can help you step through setting up your organization, configuring SSO, enforcing sign in, and configuring Docker.  You can reach out to set up a meeting by emailing successteam@docker.com.
+The Docker Implementation team can help you step through setting up your organization, configuring SSO, enforcing sign in, and configuring Docker. You can reach out to set up a meeting by emailing successteam@docker.com.
