@@ -50,7 +50,7 @@ Launch a quick demo of WireMock by using the following steps:
     ![Diagram showing the WireMock container running on Docker Desktop ](./images/wiremock-using-docker.webp)
 
 
-    You can check the logs by selecting the **WireMock** container:
+    You can check the logs by selecting the `wiremock-node-docker` container:
 
     ![Diagram showing the logs of WireMock container running on Docker Desktop ](./images/wiremock-logs-docker-desktop.webp)
 
