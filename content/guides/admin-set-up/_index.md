@@ -23,9 +23,9 @@ params:
     - title: Image Access Management
       url: /security/for-admins/hardened-desktop/image-access-management/
     - title: Docker Build Cloud subscription information
-      url: /manuals/subscription/build-cloud/build-details/
+      url: /subscription/build-cloud/build-details/
     - title: Docker Scout subscription information
-      url: /manuals/subscription/scout-details/
+      url: /subscription/scout-details/
 ---
 
 Docker's tools provide a scalable, secure platform that empowers your developers to create, ship, and run applications faster. As an administrator, you have the ability to streamline workflows, standardize development environments, and ensure smooth deployments across your organization.
