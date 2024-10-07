@@ -66,7 +66,12 @@ Launch a quick demo of WireMock by using the following steps:
     {"city":"Bengaluru","temperature":27.1,"conditions":"Mostly cloudy","forecasts":[{"date":"2024-09-02T07:00:00+05:30","temperature":83,"conditions":"Partly sunny w/ t-storms"},{"date":"2024-09-03T07:00:00+05:30","temperature":83,"conditions":"Thunderstorms"},{"date":"2024-09-04T07:00:00+05:30","temperature":83,"conditions":"Intermittent clouds"},{"date":"2024-09-05T07:00:00+05:30","temperature":82,"conditions":"Dreary"},{"date":"2024-09-06T07:00:00+05:30","temperature":82,"conditions":"Dreary"}]}
     ```
 
-    You get this response due to the mapping file in the `wiremock-endpoint/mappings/getWeather/getWeatherBengaluru.json` file. 
+    With WireMock, you define canned responses using mapping files.
+    For this request, the mock data is defined in the JSON file at
+    `wiremock-endpoint/mappings/getWeather/getWeatherBengaluru.json`.
+    
+    For more information about stubbing canned responses, refer to the
+    [WireMock documentation](https://wiremock.org/docs/stubbing/).
 
 
 ## Using WireMock in development
