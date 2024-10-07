@@ -120,31 +120,13 @@ Follow the steps to setup a non-containerized Node application:
 
    This will tell your Node.js application to use the WireMock server for API calls. 
 
-3. Start the Node server
+3. Examine the Application Entry Point
 
-   Before you start the Node server, ensure that you have already installed the node packages listed in the package.json file by running `npm install`. 
+   - The main file for the application is `index.js`, located in the `accuweather-api/src/api` directory.
+   - This file starts the `getWeather.js` module, which is essential for your Node.js application. It uses the `dotenv` package to load environment variables from the`.env` file.
+   - Based on the value of `API_ENDPOINT_BASE`, the application routes requests either to the WireMock server (`http://localhost:8080`) or the AccuWeather API. In this setup, it uses the WireMock server.
+   - The code ensures that the `ACCUWEATHER_API_KEY` is required only if the application is not using WireMock, enhancing efficiency and avoiding errors.
 
-   ```console
-   npm install 
-   npm run start
-   ```
- 
-   You should see the following output:
-
-    ```plaintext
-    > express-api-starter@1.2.0 start
-    > node src/index.js
-
-    API_ENDPOINT_BASE: http://localhost:8080
-    ..
-    Listening: http://localhost:5000
-    ```
-
-   The output indicates that your Node application has successfully started. It highlights the project name and the `index.js` file as the application's entry point. The `index.js` file initiates the `getWeather.js` file located within the `src/api/` directory by utilizing the `require` function to import the `api` module and subsequently invoking the `getWeather` function.
-
-   The `getWeather.js` file plays a pivotal role within your Node.js application. The code commences by incorporating the `dotenv` module, which instructs the application to load environment variables from a `.env` file. Depending on the value of the `API_ENDPOINT_BASE` variable, the application intelligently directs requests either to the WireMock server (if set to `http://localhost:8080`) or the AccuWeather API. In this scenario, the request is being routed to the WireMock server.
-
-    This code snippet ensures that the `ACCUWEATHER_API_KEY` is only required when the application is not using WireMock, preventing errors and improving efficiency.
 
     ```javascript
     require("dotenv").config();
@@ -166,18 +148,44 @@ Follow the steps to setup a non-containerized Node application:
     // Only check for API key if not using WireMock
     if (API_ENDPOINT_BASE !== 'http://localhost:8080' && !API_KEY) {
       throw new Error("ACCUWEATHER_API_KEY is not defined in environment variables");
-    } 
+    }
     // Function to fetch the location key for the city
     async function fetchLocationKey(townName) {
-      const { data: locationData } = await 
+      const { data: locationData } = await
     axios.get(`${API_ENDPOINT_BASE}/locations/v1/cities/search`, {
         params: { q: townName, details: false, apikey: API_KEY },
       });
       return locationData[0]?.Key;
     }
+    ```  
+
+
+3. Start the Node server
+
+   Before you start the Node server, ensure that you have already installed the node packages listed in the package.json file by running `npm install`. 
+
+   ```console
+   npm install 
+   npm run start
+   ```
+ 
+   You should see the following output:
+
+    ```plaintext
+    > express-api-starter@1.2.0 start
+    > node src/index.js
+
+    API_ENDPOINT_BASE: http://localhost:8080
+    ..
+    Listening: http://localhost:5000
     ```
-    
-    Keep this terminal window open. 
+
+   The output indicates that your Node application has successfully started. 
+   Keep this terminal window open. 
+
+
+
+
 
 4. Test the Mocked API
 
