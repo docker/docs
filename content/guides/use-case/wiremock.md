@@ -98,7 +98,13 @@ Now that you have tried WireMock, let’s use it in development and testing. In 
 
 ## Set up a non-containerized Node app to route requests to a containerized WireMock
 
-Let’s set up a non-containerized Node app to route requests to the WireMock container instead of the external AccuWeather API. Assuming that Node is already installed on your system, follow the steps:
+Let’s set up a non-containerized Node app to route requests to the WireMock container instead of the external AccuWeather API. 
+
+### Prerequisite
+
+- Install [Node and NPM](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+
+Follow the steps to setup a non-containerized Node application:
 
 1. Navigate to the `accuweather-api` directory
 
