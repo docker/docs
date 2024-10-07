@@ -5,9 +5,7 @@ title: Build a RAG application using Ollama and Docker
 linkTitle: RAG Ollama application
 summary: |
   This guide demonstrates how to use Docker to deploy Retrieval-Augmented
-  Generation (RAG) models with Ollama, covering environment setup for
-  integrating retrieval systems with generative AI models, and optimizing the
-  workflow for scalable, containerized deployments.
+  Generation (RAG) models with Ollama.
 subjects: [ai]
 levels: [beginner]
 aliases:

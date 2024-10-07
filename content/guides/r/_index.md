@@ -4,9 +4,7 @@ linkTitle: R
 description: Containerize R apps using Docker
 keywords: Docker, getting started, R, language
 summary: |
-  This guide details how to containerize R applications using Docker, covering
-  image building, dependency management, optimizing image size, and best
-  practices for deploying R applications efficiently in containers.
+  This guide details how to containerize R applications using Docker.
 toc_min: 1
 toc_max: 2
 aliases:

@@ -4,10 +4,7 @@ keywords: getting started, jupyter, notebook, python, jupyterlab, data science
 title: Data science with JupyterLab
 toc_max: 2
 summary: |
-  This guide explains how to use Docker to run Jupyter notebooks, covering
-  image setup, container management, and best practices for creating
-  reproducible and isolated development environments for data science and
-  machine learning tasks.
+  Use Docker to run Jupyter notebooks.
 languages: [python]
 levels: [beginner]
 subjects: [data-science]

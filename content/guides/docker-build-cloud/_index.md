@@ -5,7 +5,7 @@ description: |
   Learn how to build and deploy Docker images to the cloud with Docker Build
   Cloud.
 summary: |
-  Create applications up to 39x faster using cloud-based resources, shared team
+  Build applications up to 39x faster using cloud-based resources, shared team
   cache, and native multi-architecture support.
 levels: [beginner]
 products: [dbc]

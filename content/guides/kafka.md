@@ -4,9 +4,7 @@ keywords: kafka, container-supported development
 title: Developing event-driven applications with Kafka and Docker
 linktitle: Event-driven apps with Kafka
 summary: |
-  This guide explains how to run Apache Kafka in Docker containers, covering
-  setup, configuring Kafka clusters, managing services, and optimizing
-  deployment for real-time data streaming in a containerized environment.
+  This guide explains how to run Apache Kafka in Docker containers.
 subjects: [distributed-systems]
 languages: [js]
 levels: [intermediate]

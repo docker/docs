@@ -5,9 +5,7 @@ keywords: nlp, natural language processing, named entity recognition, python, sp
 description: Learn how to build and run a named entity recognition application using Python, spaCy, and Docker.
 summary: |
   This guide explains how to containerize named entity recognition (NER) models
-  using Docker, detailing environment setup for large-scale data processing,
-  optimizing NER model deployment, and managing high-performance containerized
-  NLP workflows.
+  using Docker.
 subjects: [ai]
 languages: [python]
 levels: [beginner]

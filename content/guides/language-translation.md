@@ -5,8 +5,7 @@ keywords: nlp, natural language processing, text summarization, python, language
 description: Learn how to build and run a language translation application using Python, Googletrans, and Docker.
 summary: |
   This guide demonstrates how to use Docker to deploy language translation
-  models for NLP tasks, covering setup, container management, and running
-  translation services efficiently in a containerized environment.
+  models for NLP tasks.
 levels: [beginner]
 subjects: [ai]
 languages: [python]
