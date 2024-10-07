@@ -19,7 +19,7 @@ The official [Docker image for WireMock](https://hub.docker.com/r/wiremock/wirem
 
 The following prerequisites are required to follow along with this how-to guide:
 
-* [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
 ### Launching WireMock
 
@@ -78,10 +78,10 @@ Launch a quick demo of WireMock by using the following steps:
 
 Now that you have tried WireMock, let’s use it in development and testing. In this example, you will use a sample application that has a Node.js backend. This app stack has the following configuration:
 
-  * **Local Development Environment**: The context in which the Node.js backend and WireMock are running.
-  * **Node.js Backend**: Represents the backend application that handles HTTP requests.
-  * **External AccuWeather API**: The real API from which live weather data is fetched.
-  * **WireMock**: The mock server that simulates the API responses during testing. It runs as a Docker container.
+  - Local Development Environment: The context in which the Node.js backend and WireMock are running.
+  - Node.js Backend: Represents the backend application that handles HTTP requests.
+  - External AccuWeather API: The real API from which live weather data is fetched.
+  - WireMock: The mock server that simulates the API responses during testing. It runs as a Docker container.
 
   ![Diagram showing the architecture of WireMock in development ](./images/wiremock-arch.webp)
 
