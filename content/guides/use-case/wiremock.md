@@ -76,7 +76,7 @@ Launch a quick demo of WireMock by using the following steps:
 
 ## Using WireMock in development
 
-   Now that you have tried WireMock, let’s use it in development and testing. In this example, you will use a sample application that has a Node.js backend. This app stack has the following configuration:
+Now that you have tried WireMock, let’s use it in development and testing. In this example, you will use a sample application that has a Node.js backend. This app stack has the following configuration:
 
   * **Local Development Environment**: The context in which the Node.js backend and WireMock are running.
   * **Node.js Backend**: Represents the backend application that handles HTTP requests.
