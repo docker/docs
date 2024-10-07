@@ -24,7 +24,7 @@ Some companies may have more than one [Docker organization](/manuals/admin/organ
 
 Docker offers a significant number of configuration parameters that can be preset. 
 
-The Docker organization owner and the development lead should review the settings to determine which of those settings to configure to create the company’s baseline configuration. You should also discuss [enforcing sign-in]() for your Docker Desktop users and whether you want to take advantage of the free trials of other Docker products. such as [Docker Scout](), which is included in the subscription. 
+The Docker organization owner and the development lead should review the settings to determine which of those settings to configure to create the company’s baseline configuration. You should also discuss [enforcing sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md) for your Docker Desktop users and whether you want to take advantage of the free trials of other Docker products. such as [Docker Scout](/manuals/scout/_index.md), which is included in the subscription. 
 
 {{< accordion title="Baseline settings to review" >}}
 
