@@ -6,9 +6,9 @@ weight: 20
 
 ## Step one: Send finalized settings files to the MDM team 
 
-After reaching an agreement with the relevant teams on your baseline and security configurations as outlined in module one, follow the instructions in the [Settings Management](/manuals/security/for-admins/hardened-desktop/settings-management/_index.md) documentation to create the admin-settings.json file that captures these configurations.
+After reaching an agreement with the relevant teams on your baseline and security configurations as outlined in module one, follow the instructions in the [Settings Management](/manuals/security/for-admins/hardened-desktop/settings-management/_index.md) documentation to create the `admin-settings.json` file that captures these configurations.
 
-Once the file is ready, collaborate with your MDM team to deploy the admin-settings.json file, along with your chosen method for [enforcing sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md)..
+Once the file is ready, collaborate with your MDM team to deploy the `admin-settings.json` file, along with your chosen method for [enforcing sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md)..
 
 > [!IMPORTANT]
 >
@@ -40,4 +40,4 @@ You can also enable [SCIM] for further automation of provisioning and deprovisio
 
 Existing users may be running outdated or unsupported versions of Docker Desktop. It is highly recommended all users update to a supported version. Docker Desktop versions released within the past 6 months from the latest release are supported.
 
-It's recommended that you use us a MDM solution to manage the version of Docker Desktop for users. Users may also get Docker Desktop directly from Docker or through a company software portal.  
+It's recommended that you use a MDM solution to manage the version of Docker Desktop for users. Users may also get Docker Desktop directly from Docker or through a company software portal.  
