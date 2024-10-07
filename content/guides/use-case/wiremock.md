@@ -103,6 +103,8 @@ Let’s set up a non-containerized Node app to route requests to the WireMock co
 ### Prerequisite
 
 - Install [Node and NPM](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+- Ensure that WireMock container is up and running. (created in the previous step).
+
 
 Follow the steps to setup a non-containerized Node application:
 
@@ -182,10 +184,6 @@ Follow the steps to setup a non-containerized Node application:
 
    The output indicates that your Node application has successfully started. 
    Keep this terminal window open. 
-
-
-
-
 
 4. Test the Mocked API
 
