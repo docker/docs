@@ -2,7 +2,8 @@
 title: .NET language-specific guide
 linkTitle: C# (.NET)
 description: Containerize and develop .NET apps using Docker
-summary: Learn how to containerize .NET applications using Docker, including building, running, and deploying .NET apps in Docker containers, with best practices and step-by-step examples.
+summary: |
+  Learn how to containerize .NET applications using Docker.
 keywords: getting started, .net
 aliases:
   - /language/dotnet/

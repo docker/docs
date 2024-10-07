@@ -3,9 +3,7 @@ description: Learn how to run, connect to, and persist data in a local container
 keywords: database, mysql
 title: Use containerized databases
 summary: |
-  Learn how to effectively run and manage databases using Docker containers,
-  with guides on setup, data persistence, networking, and best practices to
-  streamline your development and deployment processes.
+  Learn how to effectively run and manage databases as containers.
 levels: [beginner]
 subjects: [databases]
 aliases:

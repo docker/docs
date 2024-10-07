@@ -5,8 +5,7 @@ title: Develop and test AWS Cloud applications using LocalStack and Docker
 linktitle: AWS development with LocalStack
 summary: |
   This guide explains how to use Docker to run LocalStack, a local AWS cloud
-  stack emulator, covering setup, managing cloud service emulation, and testing
-  cloud-based applications locally in a containerized environment.
+  stack emulator.
 subjects: [cloud-services]
 languages: [js]
 levels: [intermediate]

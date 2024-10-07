@@ -4,9 +4,7 @@ linkTitle: PHP
 description: Containerize and develop PHP apps using Docker
 keywords: getting started, php, composer
 summary: |
-  This guide explains how to containerize PHP applications using Docker,
-  covering image building, dependency management, optimizing image size, and
-  best practices for deploying PHP apps efficiently in containers.
+  This guide explains how to containerize PHP applications using Docker.
 toc_min: 1
 toc_max: 2
 aliases:
