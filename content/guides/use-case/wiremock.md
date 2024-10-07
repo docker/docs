@@ -60,7 +60,7 @@ Launch a quick demo of WireMock by using the following steps:
     $ curl http://localhost:8080/api/v1/getWeather\?city\=Bengaluru
     ```
  
-    It will return the following response:
+    It will return the following canned response with mock data:
 
     ```plaintext
     {"city":"Bengaluru","temperature":27.1,"conditions":"Mostly cloudy","forecasts":[{"date":"2024-09-02T07:00:00+05:30","temperature":83,"conditions":"Partly sunny w/ t-storms"},{"date":"2024-09-03T07:00:00+05:30","temperature":83,"conditions":"Thunderstorms"},{"date":"2024-09-04T07:00:00+05:30","temperature":83,"conditions":"Intermittent clouds"},{"date":"2024-09-05T07:00:00+05:30","temperature":82,"conditions":"Dreary"},{"date":"2024-09-06T07:00:00+05:30","temperature":82,"conditions":"Dreary"}]}
