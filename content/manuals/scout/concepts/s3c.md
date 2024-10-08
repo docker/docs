@@ -4,6 +4,8 @@ description: Learn about software supply chain security (S3C), what it means, an
 keywords: docker scout, secure, software, supply, chain, security, sssc, sscs, s3c
 ---
 
+{{< youtube-embed YzNK6E7APv0 >}}
+
 The term "software supply chain" refers to the end-to-end process of developing
 and delivering software, from the development to deployment and maintenance.
 Software supply chain security, or "S3C" for short, is the practice for

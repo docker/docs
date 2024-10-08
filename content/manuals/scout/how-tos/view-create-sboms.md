@@ -7,6 +7,8 @@ aliases:
 - /scout/sbom/
 ---
 
+{{< youtube-embed FvAVgH-3YY4 >}}
+
 [Image analysis](/manuals/scout/explore/analysis.md) uses image SBOMs to understand what packages and versions an image contains.
 Docker Scout uses SBOM attestations if available on the image (recommended).
 If no SBOM attestation is available, Docker Scout creates one by indexing the image contents.
