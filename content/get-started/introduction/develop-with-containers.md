@@ -79,11 +79,11 @@ With this environment up and running, you’re ready to make a few changes to th
 
 The greeting at the top of the page is populated by an API call at `/api/greeting`. Currently, it always returns "Hello world!". You’ll now modify it to return one of three randomized messages (that you'll get to choose).
 
-1. Open the `backend/src/routes/getGreeting.js` file. This file provides the handler for the API endpoint.
+1. Open the `backend/src/routes/getGreeting.js` file in a text editor. This file provides the handler for the API endpoint.
 
-2. Modify the variable at the top to an array of greetings. Feel free to use the following modifications or customize it to your own liking.
+2. Modify the variable at the top to an array of greetings. Feel free to use the following modifications or customize it to your own liking. Also, update the endpoint to send a random greeting from this list.
 
-    ```js {linenos=table,hl_lines=["1-5"],linenostart=1}
+    ```js {linenos=table,hl_lines=["1-5",9],linenostart=1}
     const GREETINGS = [
         "Whalecome!",
         "All hands on deck!",
@@ -91,20 +91,13 @@ The greeting at the top of the page is populated by an API call at `/api/greetin
     ];
 
     module.exports = async (req, res) => {
-    ...
-    ```
-
-3. Now, update the endpoint to send a random greeting from this list by making the following change:
-
-    ```js {linenos=table,hl_lines=[3],linenostart=7}
-    module.exports = async (req, res) => {
         res.send({
             greeting: GREETINGS[ Math.floor( Math.random() * GREETINGS.length )],
         });
     };
     ```
 
-4. If you haven't done so yet, save the file. If you refresh your browser, you should see a new greeting. If you keep refreshing, you should see all of the messages appear.
+3. If you haven't done so yet, save the file. If you refresh your browser, you should see a new greeting. If you keep refreshing, you should see all of the messages appear.
 
     ![Screenshot of the to-do app with a new greeting](images/develop-app-with-greetings.webp)
 
