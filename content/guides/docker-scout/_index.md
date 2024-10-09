@@ -45,7 +45,7 @@ compliance with security standards.
 
 ## What you'll learn
 
-- Define secure software supply chain (SSSC)
+- Define Secure Software Supply Chain (SSSC)
 - Review SBOMs and how to use them
 - Detect and monitor vulnerabilities
 
