@@ -1,6 +1,6 @@
 ---
 title: Docker Scout demo
-description: Learn about Docke rScout's powerful features for enhanced supply chain security.
+description: Learn about Docker Scout's powerful features for enhanced supply chain security.
 weight: 20
 ---
 
