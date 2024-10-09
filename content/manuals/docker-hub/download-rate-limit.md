@@ -104,7 +104,7 @@ Pulls can be attributed to either a personal or organization [namespace](https:/
 
 ### Private pulls
 
-Pulls for private repositories are attributed to the repository’s namespace owner.
+Pulls for private repositories are attributed to the repository's namespace owner.
 
 ### Public pulls
 
