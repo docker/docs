@@ -21,6 +21,8 @@ The billing information provided appears on all your billing invoices. The email
 
 ### Personal account
 
+TBD
+
 1. Select your avatar in the top-right corner of Docker Hub.
 2. From the drop-down menu select **Billing**.
 3. Select **Billing Address**.
@@ -28,6 +30,8 @@ The billing information provided appears on all your billing invoices. The email
 5. Select **Submit**.
 
 ### Organization
+
+TBD
 
 > [!NOTE]
 >
@@ -55,6 +59,8 @@ You can update the email address that receives billing invoices at any time.
 
 ### Personal account
 
+TBD
+
 1. Select your avatar in the top-right corner of Docker Hub.
 2. From the drop-down menu select **Billing**.
 3. Select **Billing Address**.
@@ -62,6 +68,8 @@ You can update the email address that receives billing invoices at any time.
 5. Select **Submit**.
 
 ### Organizations
+
+TBD
 
 1. Select your avatar in the top-right corner of Docker Hub.
 2. From the drop-down menu select **Billing**.

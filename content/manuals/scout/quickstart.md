@@ -55,7 +55,6 @@ You can do this from Docker Hub, the Docker Scout Dashboard, and CLI.
 
    ```console
    $ docker scout enroll <ORG_NAME>
-       ✓ Successfully enrolled organization <ORG_NAME> with Docker Scout Free
    ```
 
 3. Enable Docker Scout for your image repository with the `docker scout repo enable` command.
