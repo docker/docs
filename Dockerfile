@@ -5,7 +5,7 @@
 ARG ALPINE_VERSION=3.20
 # GO_VERSION sets the Go version for the base stage
 ARG GO_VERSION=1.23
-# HTML_TEST_VERSION sets the wjdp/htmltest version for HTML testing
+# HTMLTEST_VERSION sets the wjdp/htmltest version for HTML testing
 ARG HTMLTEST_VERSION=0.17.0
 
 # base is the base stage with build dependencies
