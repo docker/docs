@@ -29,20 +29,19 @@ params:
 
 When container images are insecure, significant risks can arise. Around 60% of
 organizations have reported experiencing at least one security breach or
-vulnerability incident within a year, resulting in operational
-disruption.[^CSA] These incidents often result in considerable downtime, with
+vulnerability incident within a year, [resulting in operational
+disruption][CSA]. These incidents often result in considerable downtime, with
 44% of affected companies experiencing over an hour of downtime per event. The
-financial impact is substantial, with the average data breach cost reaching
-$4.45 million.[^IBM] This highlights the critical importance of maintaining
+financial impact is substantial, with [the average data breach cost reaching
+$4.45 million][IBM]. This highlights the critical importance of maintaining
 robust container security measures.
 
 Docker Scout enhances container security by providing automated vulnerability
 detection and remediation, addressing insecure container images, and ensuring
 compliance with security standards.
 
-[^CSA]: https://cloudsecurityalliance.org/blog/2023/09/21/2023-global-cloud-threat-report-cloud-attacks-are-lightning-fast
-
-[^IBM]: https://www.ibm.com/reports/data-breach
+[CSA]: https://cloudsecurityalliance.org/blog/2023/09/21/2023-global-cloud-threat-report-cloud-attacks-are-lightning-fast
+[IBM]: https://www.ibm.com/reports/data-breach
 
 ## What you'll learn
 
