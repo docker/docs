@@ -25,13 +25,23 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 ## 4.34.3
 
-{{< release-date date="2024-10-07" >}}
+{{< release-date date="2024-10-09" >}}
 
-{{< desktop-install-v2 all=true beta_win_arm=true version="4.34.2" build_path="/TBD/" >}}
+{{< desktop-install-v2 all=true beta_win_arm=true version="4.34.3" build_path="/170107/" >}}
 
 ### Upgrades
 
 - [NVIDIA Container Toolkit v1.16.2](https://github.com/NVIDIA/nvidia-container-toolkit/releases/tag/v1.16.2)
+- [Host networking](https://docs.docker.com/engine/network/drivers/host/#docker-desktop) support on Docker Desktop is now generally available
+- If you authenticate via the CLI without Docker Desktop installed, you can now authenticate through a browser-based flow, removing the need for manual PAT generation
+- Windows now supports automatic reclamation of disk space in Docker Desktop for WSL2 installations [using a managed virtual hard disk](https://docs.docker.com/desktop/wsl/best-practices/).
+- Windows registry key sign in enforcement method is now generally available
+- Fresh installations of Docker Desktop now use the containerd image store by default
+- Improved the output of `docker image list` to show multi-platform-related image information
+
+### Security
+
+- Fixed [CVE-2024-9348](https://www.cve.org/cverecord?id=CVE-2024-9348) which allows RCE via image build details source information
 
 ## 4.34.2
 
