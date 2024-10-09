@@ -21,7 +21,7 @@
 
 /content/manuals/engine/ @dvdksn
 
-/content/manuals/subscription/ @aevesdocker
+/content/manuals/subscription/ @sarahsanders-docker
 
 /content/manuals/security/ @aevesdocker
 
@@ -30,4 +30,10 @@
 /content/manuals/docker-hub/official_images/ @craig-osterhout
 
 /content/manuals/registry/ @dvdksn
+
+/content/manuals/admin/ @sarahsanders-docker
+
+/content/manuals/billing/ @sarahsanders-docker
+
+/content/manuals/accounts/ @sarahsanders-docker
 
