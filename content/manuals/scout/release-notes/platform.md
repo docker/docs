@@ -18,6 +18,22 @@ Docker Scout platform, including the Dashboard. For CLI release notes, refer to
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1)
 for what's coming next.
 
+## Q4 2024
+
+New features and enhancements released in the fourth quarter of 2024.
+
+### 2024-10-09
+
+Policy Evaluation has graduated form Early Access to General Availability.
+
+Docker Scout Dashboard UI changes:
+
+- On the Docker Scout Dashboard, selecting a policy card now opens the policy
+  details page instead of the policy results page.
+- The policy results page and the policy details side panel are now read-only.
+  Policy actions (edit, disable, delete) are now accessible from the policy
+  details page.
+
 ## Q3 2024
 
 New features and enhancements released in the third quarter of 2024.
