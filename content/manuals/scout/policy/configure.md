@@ -47,6 +47,20 @@ To add a policy:
    - Select **Save policy** to save the policy configuration without enabling
      it.
 
+## Edit a policy
+
+Editing a policy allows you to modify its configuration without creating 
+a new one from scratch. This can be useful when policy parameters need adjustments 
+due to evolving requirements or changes in your organization's compliance goals.
+
+To edit a policy:
+
+1. Go to the [Policies page](https://scout.docker.com/reports/policy) in the Docker Scout Dashboard.
+2. Select the policy you want to edit.
+3. Select the **Edit** button.
+4. Update the policy parameters.
+5. Save the changes.
+
 ## Disable a policy
 
 When you disable a policy, evaluation results for that policy are hidden, and
