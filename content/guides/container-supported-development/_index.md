@@ -8,7 +8,6 @@ description: |
 levels: [beginner]
 params:
   image: images/learning-paths/container-supported-development.png
-  skill: Beginner
   time: TBD
   resource_links: []
 ---
