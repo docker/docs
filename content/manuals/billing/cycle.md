@@ -20,12 +20,16 @@ When you change the billing cycle's duration:
 
 ## Personal account
 
+TBD
+
 1. Select your avatar in the top-right corner of Docker Hub.
 2. From the drop-down menu select **Billing**.
 3. In the bottom-right of the **Plan** tab, select **Switch to annual billing**.
 4. Review the information displayed on the **Change to an Annual subscription** page and select **Accept Terms and Purchase** to confirm.
 
 ## Organization
+
+TBD
 
 > [!NOTE]
 >
