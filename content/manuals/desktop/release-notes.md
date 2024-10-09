@@ -42,6 +42,8 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 ### Security
 
 - Fixed [CVE-2024-9348](https://www.cve.org/cverecord?id=CVE-2024-9348) which allows RCE via image build details source information
+- Fixed NVIDIA Container Toolkit [CVE-2024-0132](https://nvidia.custhelp.com/app/answers/detail/a_id/5582)
+- Fixed NVIDIA Container Toolkit [CVE-2024-0133](https://nvidia.custhelp.com/app/answers/detail/a_id/5582)
 
 ## 4.34.2
 
