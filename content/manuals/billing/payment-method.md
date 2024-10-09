@@ -4,7 +4,7 @@ weight: 20
 description: Learn how to add or update a payment method in Docker Hub
 keywords: payments, billing, subscription, supported payment methods, failed payments, coupons
 billing:
-- /billing/payment-method/
+- /billing/core-billing/payment-method/
 ---
 
 This page describes how to add or update a payment method for your personal account or for an organization.
@@ -13,7 +13,7 @@ You can add a payment method or update your account's existing payment method at
 
 > [!IMPORTANT]
 >
-> If you want to remove all payment methods, you must first downgrade your subscription to a free plan. See [Downgrade](../../subscription/core-subscription/downgrade.md).
+> If you want to remove all payment methods, you must first downgrade your subscription to a free plan. See [Downgrade](../subscription/change.md).
 
 The following payment methods are supported:
 
@@ -33,6 +33,8 @@ All currency, for example the amount listed on your billing invoice, is in Unite
 
 ### Personal account
 
+TBD
+
 1. Select your avatar in the top-right corner of Docker Hub.
 2. From the drop-down menu select **Billing**.
 3. Select the **Payment methods and billing history** link.
@@ -42,6 +44,8 @@ All currency, for example the amount listed on your billing invoice, is in Unite
 7. Optional. You can remove non-default payment methods by selecting the **Actions** icon. Then, select **Delete**.
 
 ### Organization
+
+TBD
 
 > [!NOTE]
 >
