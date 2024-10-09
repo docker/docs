@@ -1,4 +1,4 @@
-# syntax=docker/dockerfile-upstream:master
+# syntax=docker/dockerfile:1
 # check=skip=InvalidBaseImagePlatform
 
 # ALPINE_VERSION sets the Alpine Linux version for all Alpine stages
