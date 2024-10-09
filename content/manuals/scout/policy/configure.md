@@ -42,9 +42,9 @@ To add a policy:
 4. Update the policy parameters.
 5. Save the changes:
 
-   - Select **Save and enable** to commit the changes and enable the policy for
+   - Select **Save policy** to commit the changes and enable the policy for
      your current organization.
-   - Select **Save policy** to save the policy configuration without enabling
+   - Select **Save and disable** to save the policy configuration without enabling
      it.
 
 ## Disable a policy
