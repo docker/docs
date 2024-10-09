@@ -49,7 +49,7 @@ To add a policy:
 
 ## Edit a policy
 
-Editing a policy allows you to modify its configuration without creating 
+Editing a policy lets you to modify its configuration without creating 
 a new one from scratch. This can be useful when policy parameters need adjustments 
 due to evolving requirements or changes in your organization's compliance goals.
 
