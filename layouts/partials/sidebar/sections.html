@@ -34,7 +34,8 @@
       <div class="w-full py-2 truncate">
         {{- if .Permalink }}
           {{/* If the link is not empty, use it */}}
-          <a class="block select-none hover:text-blue-light hover:dark:text-blue-dark"
+          <a {{ if $isCurrent }}aria-current="page" id="sidebar-current-page" {{ end }}
+              class="block select-none hover:text-blue-light hover:dark:text-blue-dark"
             href="{{ .Permalink }}">
             {{ template "renderTitle" . }}
           </a>
@@ -74,7 +75,7 @@
     {{ $isCurrent := eq page . }}
     <li class="rounded px-4 hover:text-blue-light hover:dark:text-blue-dark
       {{ if $isCurrent }} bg-gray-light-200 dark:bg-gray-dark-200{{ end }}">
-      <a {{ if $isCurrent }}aria-current="page" {{ end }} class="py-2 w-full truncate block"
+      <a {{ if $isCurrent }}aria-current="page" id="sidebar-current-page" {{ end }} class="py-2 w-full truncate block"
         href="{{ .Permalink }}" title="{{ .LinkTitle }}">
         {{ template "renderTitle" . }}
       </a>
