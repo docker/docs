@@ -39,7 +39,7 @@ module.exports = {
             "--tw-prose-invert-hr": theme("colors.divider.dark"),
             "--tw-prose-invert-captions": theme("colors.gray.dark.600"),
             "--tw-prose-invert-th-borders": theme("colors.gray.dark.200"),
-            "--tw-prose-invert-td-borders": theme("colors.gray.dark.200"),
+            "--tw-prose-invert-td-borders": theme("colors.gray.dark.300"),
           },
         },
       }),
