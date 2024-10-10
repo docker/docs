@@ -24,55 +24,9 @@ Some companies may have more than one [Docker organization](/manuals/admin/organ
 
 ## Step three: Gather requirements
 
-### Baseline configuration
+Through [Settings Management](/manuals/security/for-admins/hardened-desktop/settings-management/_index.md), Docker provides numerous configuration parameters that can be preset. The Docker organization owner, development lead, and infosec representative should review these settings to establish the company’s baseline configuration, including security features and [enforcing sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md) for Docker Desktop users. Additionally, they should decide whether to take advantage of free trials for other Docker products, such as [Docker Scout](/manuals/scout/_index.md), which is included in the subscription.
 
-Through [Settings Management](/manuals/security/for-admins/hardened-desktop/settings-management/_index.md), Docker offers a significant number of configuration parameters that can be preset.
-
-The Docker organization owner and the development lead should review the settings to determine which of those settings to configure to create the company’s baseline configuration. You should also discuss [enforcing sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md) for your Docker Desktop users and whether you want to take advantage of the free trials of other Docker products such as [Docker Scout](/manuals/scout/_index.md), which is included in the subscription. 
-
-{{< accordion title="Baseline settings to review" >}}
-
-| Setting             | OS Requirements | Description     |
-|---------------------|-----------------|-----------------|
-| `proxy`               |                 |  This setting configures the proxy used by Docker Desktop to access the internet. The proxy can be set manually or get its value from the system.|
-| `wslEngineEnabled`    | Windows only    | This setting specifies whether the user should use WSL 2 or HyperV for the VM for Windows installations.|
-| `kubernetes`          |                 | Docker Desktop offers a Kubernetes single-node cluster for Kubernetes deployments locally. This setting controls whether it is started when Docker Desktop starts, and its configuration.|
-| `analyticsEnabled`   |                 | Docker lets users opt out of sending usage data to Docker. The usage data feeds what admins are able to see about Docker Desktop usage, so it is highly recommended to enable and lock this setting.|
-| `useVirtualizationFrameworkVirtioFS`| macOS only      | Virtiofs is the newer higher performance file sharing framework for Mac. It takes precedence over the older frameworks if it is enabled.|
-| `useVirtualizationFrameworkRosetta` | macOS only      | Rosetta is the Apple emulator for x86 chipsets. This setting lets Docker Desktop to use Rosetta when running containers built for the x86 chipset.|
-| `allowExperimentalFeatures`  |           | Docker Desktop versions often contain experimental features for trial and feedback. If this setting is set to false, experimental features are disabled.|
-| `allowBetaFeatures`    |                 | Docker Desktop versions often contain beta features for trial and feedback. If this setting is set to false, beta features are disabled.|
-| `configurationFileVersion`      |             | Specifies the version of the configuration file format.|
-| `dockerDaemonOptions` - Linux Containers |             | This setting overrides the options in the Docker Engine config file. For details, see the [Docker Engine reference](/reference/cli/dockerd.md#daemon-configuration-file). Note that for added security, a few of the config attributes may be overridden when Enhanced Container Isolation is enabled. |
-| `vpnkitCIDR`    |                 | Overrides the network range used for vpnkit DHCP/DNS for `*.docker.internal` |
-| `dockerDaemonOptions` - Windows Containers | Windows only    | This setting overrides the options in the daemon config file. For details, see the [Docker Engine reference](/reference/cli/dockerd.md#daemon-configuration-file).|
-| `extensionsEnabled`    |                 | Docker extensions are third-party add-ons for Docker Desktop. This setting affects if they are allowed.|
-| `useGrpcfuse`     | macOS only      | If the value is set to true, gRPC Fuse is set as the file sharing mechanism. |
-| `displayedOnboarding` |                 | There is an onboarding survey that displays when Docker Desktop is installed and opened for the first time. This setting can disable the survey.|
-
-{{< /accordion >}}
-
-### Security configuration
-
-Docker also offers a number of security related features, again through [Settings Management](/manuals/security/for-admins/hardened-desktop/settings-management/_index.md), that can be preset. The infosec representative, Docker organization owner, and the development lead should review those features to determine what should be enabled to meet your company’s security requirements.
-
-{{< accordion title="Security settings to review" >}}
-
-| Setting    | OS Requirements | Description  |
-|------------|-----------------|---------------|
-| Enhanced Container Isolation     |                 | When this setting is enabled, Docker Desktop runs all containers as unprivileged, via the Linux user-namespace, and prevents them from modifying sensitive configurations inside the Docker Desktop VM, and uses other advanced techniques to isolate them. For more information, see [Enhanced Container Isolation](/manuals/security/for-admins/hardened-desktop/enhanced-container-isolation/_index.md). |
-| Registry Access Management |                 | This parameter restricts the registries that `docker pull` and `docker push` commands can access. Note: This is not an endpoint security solution, but a guardrail for users working within company guidelines. For more information, see [Registry Access Management](/manuals/security/for-admins/hardened-desktop/registry-access-management.md).|
-| Image Access Management |                 | This parameter restricts the categories of images accessible within Docker Hub. Note: This is not an endpoint security solution; it's a guardrail for users working within company guidelines. For more information, see [Image Access Management](/manuals/security/for-admins/hardened-desktop/image-access-management.md).|
-| Scout  |                 | Settings related to how Scout creates SBOMs (Software Bill of Materials) and indexes vulnerabilities for images.|
-| `exposeDockerAPIOnTCP2375`         | Windows only    | Exposes the Docker API on a specified port. If the value is set to true, the Docker API is exposed on port `2375`. This is unauthenticated and should only be enabled if protected by suitable firewall rules.|
-| `windowsDockerdPort`               | Windows only    | Exposes Docker Desktop's internal proxy locally on this port for the Windows Docker daemon to connect to. It is available for Windows containers only. |
-| `filesharingAllowedDirectories`    |                 | Specify which paths on the developer host machine or network your users can add container file shares to.|
-| `enableKerberosNtlm`               |                 | When set to true, Kerberos and NTLM authentication is enabled. Default is false. Available in Docker Desktop version 4.32 and later.|
-| `containersProxy`          |                 | Lets you create air-gapped containers. For more information, see [Air-Gapped Containers](/manuals/security/for-admins/hardened-desktop/air-gapped-containers.md).|
-| `blockDockerLoad`    |                 | When this setting is enabled, users can no longer run the `docker load` command and will receive an error if they try.|
-| `disableUpdate`   |                 | Users get notifications about new Docker Desktop versions. Enabling this setting removes those notifications. Helpful if corporate IT manages Docker Desktop version updates for users.|
-
-{{< /accordion >}}
+To view the parameters that can be preset, see [Configure Settings Management](/manuals/security/for-admins/hardened-desktop/settings-management/configure.md#step-two-configure-the-settings-you-want-to-lock-in).
 
 ## Optional step four: Meet with the Docker Implementation team
 
