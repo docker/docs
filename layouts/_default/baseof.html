@@ -10,7 +10,22 @@
   {{ partial "header.html" . }}
   <main class="relative flex w-full max-w-[1920px]">
     <!-- Sidebar -->
-    <div x-data
+    <div style="scroll-behavior: smooth;" x-data x-init="$nextTick(() => {
+          const container = $el; // The div with overflow
+          const item = document.getElementById('sidebar-current-page')
+          if (item) {
+              const containerTop = container.scrollTop;
+              const containerBottom = containerTop + container.clientHeight;
+
+              const itemTop = item.offsetTop - container.offsetTop;
+              const itemBottom = itemTop + item.offsetHeight;
+
+              // Scroll only if the item is out of view
+              if (itemBottom > containerBottom - 200) {
+                  container.scrollTop = itemTop - (container.clientHeight / 2 - item.offsetHeight / 2);
+              }
+          }
+      })"
       class="md:h-[calc(100vh - 64px)] fixed md:sticky top-0 md:top-16 z-40 hidden h-screen flex-none overflow-y-auto overflow-x-hidden bg-background-light dark:bg-gray-dark-100 w-full md:z-auto md:block md:w-[300px]"
       :class="{ 'hidden': ! $store.showSidebar }">
       <!-- Gray backdrop on small screens -->
