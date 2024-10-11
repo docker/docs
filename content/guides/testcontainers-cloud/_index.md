@@ -10,7 +10,7 @@ levels: [Beginner]
 products: [testcontainers]
 params:
   featured: true
-  image: images/learning-paths/scout.png
+  image: images/learning-paths/testcontainers-cloud.png
   time: 10 minutes
   resource_links:
     - title: Testcontainers Guides
@@ -44,7 +44,7 @@ Docker Pro, Team, and Business subscriptions come with Testcontainers Cloud runt
 
 ## Who’s this for?
 
-- Teams that build cloud-native applications and are looking to streamline integration testing with Testcontainers Cloud by Docker.
+- Teams that build cloud-native applications and are already using Testcontainers open source.
 - DevOps Teams that integrate automated container-based testing into CI/CD pipelines for continuous testing.
 - QA Teams that seek scalable and consistent test environments for comprehensive integration and end-to-end testing.
 - Developers who need reliable, containerized test environments for testing microservices and databases.
