@@ -154,16 +154,16 @@
 
 {{- define "guide-metadata" }}
 <div class="flex items-center text-sm justify-between text-gray-light dark:text-gray-dark">
-  <div class="flex gap-2">
+  <div class="flex flex-wrap gap-2">
     {{- $taxoterms := .GetTerms "languages" }}
     {{- $taxoterms = $taxoterms | append (.GetTerms "levels") }}
     {{- $taxoterms = $taxoterms | append (.GetTerms "subjects") }}
     {{- range $taxoterms }}
-    <span>{{- .Page.LinkTitle }}</span>
+    <span class="rounded bg-gray-light-200 dark:bg-gray-dark-300 px-2">{{- .Page.LinkTitle }}</span>
     {{- end }}
   </div>
   {{- with .Params.time }}
-    <div class="flex gap-2">
+    <div class="flex whitespace-nowrap gap-2">
       <span class="icon-svg">{{ partialCached "icon" "schedule" "schedule" }}</span>
       <span>{{ . }}</span>
     </div>
