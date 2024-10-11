@@ -8,6 +8,6 @@ Many APIs require data from other data endpoints. In development, this adds comp
 
 This demo will demonstrate how using WireMock can make it easy to develop and test an application, including the APIs various error states.
 
-{{< youtube-embed 2EqarOM2V4U >}}
+{{< youtube-embed VXSmX6f8vo0 >}}
 
 <div id="container-supported-development-lp-survey-anchor"></div>

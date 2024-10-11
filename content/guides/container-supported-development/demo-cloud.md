@@ -8,6 +8,6 @@ When developing apps, it's often easier to outsource aspects of the application 
 
 With container-supported development, you can run local instances of these services during development and testing, removing the need for complex setups. In this demo, you'll see how LocalStack makes it easy to develop and test applications entirely from the developer's workstation.
 
-{{< youtube-embed 2EqarOM2V4U >}}
+{{< youtube-embed JtwUMvR5xlY >}}
 
 <div id="container-supported-development-lp-survey-anchor"></div>
