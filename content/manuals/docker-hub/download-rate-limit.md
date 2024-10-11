@@ -98,6 +98,31 @@ both individuals and organizations.
    - [Enforce sign-in](/security/for-admins/enforce-sign-in/) to ensure that you
      can monitor the usage of your users and users receive higher usage limits.
 
+## Pull attribution
+
+Pulls can be attributed to either a personal or organization [namespace](https://docs.docker.com/contribute/style/terminology/#namespace).
+
+### Private pulls
+
+Pulls for private repositories are attributed to the repository's namespace owner.
+
+### Public pulls
+
+When pulling images from a public repository, attribution is determined based on domain affiliation and organization membership.
+
+### Verified domain ownership
+
+When pulling an image from an account linked to a verified domain, the attribution is set to be the owner of that [domain](https://docs.docker.com/security/faqs/single-sign-on/domain-faqs/)
+
+### Single organization membership
+
+- If the owner of the verified domain is a company and the user is part of only one organization within that [company](https://docs.docker.com/admin/faqs/company-faqs/#what-features-are-supported-at-the-company-level), the pull is attributed to that specific organization.
+- If the user is part of only one organization, the pull is attributed to that specific organization.
+
+### Multiple organization memberships
+
+If the user is part of multiple organizations under the company, the pull is attributed to the user's personal namespace.
+
 ## Rate limit
 
 A user's rate limit is equal to the highest entitlement of their personal

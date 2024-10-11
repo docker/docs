@@ -1,7 +1,5 @@
 {{ $product_link := "[Docker Hub](https://hub.docker.com)" }}
-{{ $sso_navigation := `Navigate to the SSO settings page for your organization or company.
-   - Organization: Select **Organizations**, your organization, **Settings**, and then **Security**.
-   - Company: Select **Organizations**, your company, and then **Settings**.` }}
+{{ $sso_navigation := `Navigate to the SSO settings page for your organization. Select **Organizations**, your organization, **Settings**, and then **Security**.` }}
 
 {{ if eq (.Get "product") "admin" }}
   {{ $product_link = "the [Admin Console](https://admin.docker.com)" }}

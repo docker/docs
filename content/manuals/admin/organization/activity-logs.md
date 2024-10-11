@@ -90,3 +90,10 @@ Refer to the following section for a list of events and their descriptions:
 | Billing Cycle Changed | Occurs when there is a change in the recurring interval that your organization is charged.|
 | Plan Downgrade Canceled | Occurs when a scheduled plan downgrade for your organization is canceled.|
 | Seat Removal Canceled | Occurs when a scheduled seat removal for an organization’s billing plan is canceled. |
+| Plan Upgrade Requested | Occurs when a user in your organization requests a plan upgrade. |
+| Plan Downgrade Requested | Occurs when a user in your organization requests a plan downgrade. |
+| Seat Addition Requested | Occurs when a user in your organization requests an increase in the number of seats. |
+| Seat Removal Requested | Occurs when a user in your organization requests a decrease in the number of seats. |
+| Billing Cycle Change Requested | Occurs when a user in your organization requests a change in the billing cycle. |
+| Plan Downgrade Cancellation Requested | Occurs when a user in your organization requests a cancellation of a scheduled plan downgrade. |
+| Seat Removal Cancellation Requested | Occurs when a user in your organization requests a cancellation of a scheduled seat removal. |
