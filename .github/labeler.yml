@@ -158,6 +158,11 @@ area/accounts:
       - any-glob-to-any-file:
           - content/manuals/accounts/**
 
+area/copilot:
+  - changed-files:
+      - any-glob-to-any-file:
+          - content/manuals/copilot/**
+
 hugo:
   - changed-files:
       - any-glob-to-any-file:
