@@ -32,6 +32,8 @@ Here's what makes them awesome. Containers are:
 - Independent. Each container is independently managed. Deleting one container won't affect any others.
 - Portable. Containers can run anywhere! The container that runs on your development machine will work the same way in a data center or anywhere in the cloud!
 
+Note that "container" is an overloaded term. Whenever you use the word, check whether your audience uses the same definition.
+
 ### Containers versus virtual machines (VMs)
 
 Without getting too deep, a VM is an entire operating system with its own kernel, hardware drivers, programs, and applications. Spinning up a VM only to isolate a single application is a lot of overhead.
