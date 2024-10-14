@@ -39,5 +39,6 @@ To install the Docker for GitHub Copilot extension for your GitHub organization:
 
 ## Manage policies
 
-After installing the extension, you need to enable the Copilot Extensions
-policy. For instructions, see [Setting a policy for GitHub Copilot Extensions in your organization](https://docs.github.com/en/copilot/managing-copilot/managing-github-copilot-in-your-organization/setting-policies-for-copilot-in-your-organization/managing-policies-for-copilot-in-your-organization#setting-a-policy-for-github-copilot-extensions-in-your-organization).
+If you're enabling the extension for a GitHub organization, you also
+need to enable the Copilot Extensions policy. For instructions, see
+[Setting a policy for GitHub Copilot Extensions in your organization](https://docs.github.com/en/copilot/managing-copilot/managing-github-copilot-in-your-organization/setting-policies-for-copilot-in-your-organization/managing-policies-for-copilot-in-your-organization#setting-a-policy-for-github-copilot-extensions-in-your-organization).
