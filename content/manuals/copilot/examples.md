@@ -17,9 +17,9 @@ Here are some examples of the types of questions you can ask the Docker agent:
 
 You can ask general question about Docker. For example:
 
-- `@docker what is a Dockerfile`
-- `@docker how do I build a Docker image`
-- `@docker how do I run a Docker container`
+- `@docker what is a Dockerfile?`
+- `@docker how do I build a Docker image?`
+- `@docker how do I run a Docker container?`
 
 ### Ask questions about your project
 
