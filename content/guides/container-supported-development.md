@@ -35,7 +35,7 @@ And best of all, you can have these benefits regardless of whether the main app 
 
 ## Tools integration
 
-Works well with Docker Compose and Testcontainers
+Works well with Docker Compose and Testcontainers.
 
 ## Modules
 
