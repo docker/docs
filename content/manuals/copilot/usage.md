@@ -41,6 +41,9 @@ agent appear in the chat interface.
 
 ![Docker agent in chat](images/docker-agent-copilot.png)
 
+The first time you interact with the agent, you're prompted to sign in and
+authorize the Copilot extension with your Docker account.
+
 ## Asking Docker questions in your editor
 
 To interact with the Docker agent from within your editor or IDE:
