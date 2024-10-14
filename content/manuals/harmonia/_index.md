@@ -63,7 +63,7 @@ Project Harmonia supports the following values for `--type`:
 - `large-amd64`
 - `aiml-amd64`
 
-Standard size engines have 2 CPU cores and  4GB RAM, large and AI/ML engines have 4 CPU cores and 8GB RAM.
+Standard size engines have 2 CPU cores and 4GB RAM, large and AI/ML engines have 4 CPU cores and 8GB RAM.
 
 To verify you're using the newly created cloud engine, run:
 
