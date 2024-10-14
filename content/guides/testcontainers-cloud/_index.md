@@ -10,7 +10,7 @@ levels: [Beginner]
 products: [testcontainers]
 params:
   featured: true
-  image: images/learning-paths/testcontainers-cloud.png
+  image: images/learning-paths/testcontainers-cloud-learning-path.png
   time: 10 minutes
   resource_links:
     - title: Testcontainers Guides
