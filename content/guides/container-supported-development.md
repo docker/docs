@@ -8,7 +8,7 @@ description: |
 levels: [beginner]
 params:
   image: images/learning-paths/container-supported-development.png
-  time: 20 mins
+  time: 20 minutes
   resource_links: []
 ---
 
