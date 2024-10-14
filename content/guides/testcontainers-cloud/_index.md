@@ -48,5 +48,3 @@ Docker Pro, Team, and Business subscriptions come with Testcontainers Cloud runt
 - DevOps Teams that integrate automated container-based testing into CI/CD pipelines for continuous testing.
 - QA Teams that seek scalable and consistent test environments for comprehensive integration and end-to-end testing.
 - Developers who need reliable, containerized test environments for testing microservices and databases.
-
-<div id="scout-lp-survey-anchor"></div>

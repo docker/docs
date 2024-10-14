@@ -13,5 +13,3 @@ In this section, we will look at how Testcontainers Cloud can be seamlessly inte
 **Duration:** 3 minutes
 
 {{< youtube-embed "" >}}
-
-<div id="scout-lp-survey-anchor"></div>

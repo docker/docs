@@ -15,5 +15,3 @@ In this section, we’ll walk through the process of setting up Testcontainers C
 **Duration:** 3 minutes
 
 {{< youtube-embed "" >}}
-
-<div id="scout-lp-survey-anchor"></div>

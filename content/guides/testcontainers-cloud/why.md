@@ -18,5 +18,3 @@ Testcontainers Cloud streamlines integration testing by offloading container man
 **Duration:** 3 minutes
 
 {{< youtube-embed "" >}}
-
-<div id="scout-lp-survey-anchor"></div>

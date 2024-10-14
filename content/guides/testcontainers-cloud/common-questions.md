@@ -41,5 +41,3 @@ Testcontainers Cloud automatically handles container lifecycle management. This 
 ### Is there a free tier or pricing model for Testcontainers Cloud?
 
 Yes, Testcontainers Cloud typically offers a free tier for small-scale projects and testing environments. For larger teams and heavier usage, there are various pricing models based on container usage, resources, and features. You can find detailed pricing information on the Testcontainers Cloud website.
-
-<div id="scout-lp-survey-anchor"></div>
