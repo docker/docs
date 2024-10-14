@@ -57,8 +57,8 @@ afterward.
 
 ## Supported languages
 
-The Docker Extension for GitHub Copilot supports the following
-programming languages:
+The Docker Extension for GitHub Copilot supports the following programming
+languages for tasks involving containerizing a project from scratch:
 
 - Go
 - Java
