@@ -51,9 +51,9 @@ If the agent is requested to check for vulnerabilities or generate
 Docker-related assets, it will clone the referenced repository into in-memory
 storage to perform the necessary actions.
 
-Source code, questions, and responses are not persistently stored. The Docker
-agent processes data only to provide responses and discards it immediately
-afterward.
+Source code or project metadata is never persistently stored. Questions and
+answers are retained for analytics and troubleshooting. Data processed by the
+Docker agent is never shared with third parties.
 
 ## Supported languages
 
