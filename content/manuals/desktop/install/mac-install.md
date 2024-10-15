@@ -63,6 +63,10 @@ This page contains download URLs, information about system requirements, and ins
 
 ## Install and run Docker Desktop on Mac
 
+> [!TIP]
+>
+> See the [FAQs](/manuals/desktop/faqs/general.md#how-do-I-run-docker-desktop-without-administrator-privileges) on how to install and run Docker Desktop without needing administrator privileges.
+
 ### Install interactively
 
 1. Download the installer using the download buttons at the top of the page, or from the [release notes](../release-notes.md).
