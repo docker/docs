@@ -47,20 +47,20 @@ There are many ways to deploy the registry key, for example using an MDM solutio
 7. Test the GPO. Test the GPO on a small set of machines first to ensure it behaves as expected. You can use the `gpupdate /force` command on a test machine to manually refresh its group policy settings and check the registry to confirm the changes.
 8. Once verified, you can proceed with broader deployment. Monitor the deployment to ensure the settings are applied correctly across the organization's computers.
 
-## Configuration Profiles method (Mac only)
+## Configuration profiles method (Mac only)
 
 > [!NOTE]
 >
 > The configuration profiles method is available with Docker Desktop version 4.35 and later.
 
-Configuration Profiles are a feature of macOS that allows administrators to distribute
-configuration information to the Macs they manage. Is is the safest method to
+Configuration profiles are a feature of macOS that let administrators distribute
+configuration information to the Macs they manage. It is the safest method to
 enforce sign-in on macOS because the installed configuration profiles are
 protected by Apples' System Integrity Protection (SIP) and can therefore not be
 tampered with by the users.
 
-1. Save the the following XML code to a file with the suffix `.mobileconfig` (e.g.
-   `docker.mobileconfig`):
+1. Save the the following XML code to a file with the suffix `.mobileconfig`, for example
+   `docker.mobileconfig`:
 
 
    ```xml
@@ -109,7 +109,7 @@ tampered with by the users.
 
 2. Change the placeholder `Your Company Name` to the name of your company.
 
-3. The names of the allowed organizations are stored in the `allowedOrgs`
+3. Add your organization name. The names of the allowed organizations are stored in the `allowedOrgs`
    property. It can contain either the name of a single organization
 
    ```xml
@@ -126,7 +126,9 @@ tampered with by the users.
    ```
 
 4. Use a MDM solution to distribute your modified `.mobileconfig` file to your
-   macOS clients. Sign-in is now enforced on all of those devices.
+   macOS clients. 
+   
+   Sign-in is now enforced on all of those devices.
 
 
 ## plist method (Mac only)
