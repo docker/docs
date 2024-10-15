@@ -51,7 +51,8 @@ There are many ways to deploy the registry key, for example using an MDM solutio
 
 > [!NOTE]
 >
-> The configuration profiles method is available with Docker Desktop version 4.35 and later.
+> The configuration profiles method is in [Early Access](/manuals/release-lifecycle.md)
+> and is available with Docker Desktop version 4.36 and later.
 
 Configuration profiles are a feature of macOS that let administrators distribute
 configuration information to the Macs they manage. It is the safest method to
@@ -59,7 +60,7 @@ enforce sign-in on macOS because the installed configuration profiles are
 protected by Apples' System Integrity Protection (SIP) and can therefore not be
 tampered with by the users.
 
-1. Save the the following XML code to a file with the suffix `.mobileconfig`, for example
+1. Save the following XML code to a file with the suffix `.mobileconfig`, for example
    `docker.mobileconfig`:
 
 
@@ -110,15 +111,8 @@ tampered with by the users.
 2. Change the placeholder `Your Company Name` to the name of your company.
 
 3. Add your organization name. The names of the allowed organizations are stored in the `allowedOrgs`
-   property. It can contain either the name of a single organization
-
-   ```xml
-            <key>allowedOrgs</key>
-            <string>yourcompany</string>
-   ```
-
-  or a list of organization names, separated by semicolon:
-
+   property. It can contain either the name of a single organization or a list of organization names,
+   separated by semicolon:
 
    ```xml
             <key>allowedOrgs</key>
