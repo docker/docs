@@ -2,13 +2,7 @@
 description: Gain insights about your organization's users and their Docker usage.
 keywords: organization, insights
 title: Insights
-sitemap: false
 ---
-
-{{% restricted title="Early Access" %}}
-Insights is an [early access](/release-lifecycle#early-access-ea) feature and
-is only available to those in the early access feedback program.
-{{% /restricted %}}
 
 > [!NOTE]
 > Insights requires a [Docker Business
