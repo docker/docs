@@ -67,12 +67,12 @@ Logs will be available at the end of a job:
 
 You can provide a [BuildKit configuration](../../buildkit/toml-configuration.md)
 to your builder if you're using the [`docker-container` driver](/manuals/build/builders/drivers/docker-container.md)
-(default) with the `config` or `config-inline` inputs:
+(default) with the `config` or `buildkitd-config-inline` inputs:
 
 ### Registry mirror
 
 You can configure a registry mirror using an inline block directly in your
-workflow with the `config-inline` input:
+workflow with the `buildkitd-config-inline` input:
 
 ```yaml
 name: ci
@@ -87,7 +87,7 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
         with:
-          config-inline: |
+          buildkitd-config-inline: |
             [registry."docker.io"]
               mirrors = ["mirror.gcr.io"]
 ```
@@ -99,7 +99,7 @@ For more information about using a registry mirror, see [Registry mirror](../../
 You can limit the parallelism of the BuildKit solver which is particularly
 useful for low-powered machines.
 
-You can use the `config-inline` input like the previous example, or you can use
+You can use the `buildkitd-config-inline` input like the previous example, or you can use
 a dedicated BuildKit config file from your repository if you want with the
 `config` input:
 
