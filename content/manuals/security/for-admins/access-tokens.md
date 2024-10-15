@@ -10,6 +10,11 @@ linkTitle: Organization access tokens (Beta)
 The organization access tokens feature is currently in [Beta](../../release-lifecycle.md#beta).
 {{% /experimental %}}
 
+> [!WARNING]
+>
+> Organization access tokens aren't currently compatible with Docker Build Cloud. If you
+> are using Docker Build Cloud, you must use personal access tokens instead.
+
 An organization access token (OAT) is like a [personal access token
 (PAT)](/security/for-developers/access-tokens/), but an OAT is associated with
 an organization and not a single user account. Use an OAT instead of a PAT to
