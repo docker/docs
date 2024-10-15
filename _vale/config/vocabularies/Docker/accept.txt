@@ -92,6 +92,7 @@ Netplan
 Nginx
 NTLM
 Nuxeo
+OAT
 OAuth
 OCI
 OTel

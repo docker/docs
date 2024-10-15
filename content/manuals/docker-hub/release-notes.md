@@ -254,7 +254,7 @@ Each organization page now breaks down into these tabs:
 
 ### New features
 
-* You can now [create personal access tokens](access-tokens.md) in Docker Hub and use them to authenticate from the Docker CLI. Find them in your account settings, under the new **[Security](https://hub.docker.com/settings/security)** section.
+* You can now [create personal access tokens](/security/for-developers/access-tokens/) in Docker Hub and use them to authenticate from the Docker CLI. Find them in your account settings, under the new **[Security](https://hub.docker.com/settings/security)** section.
 
 ### Known Issues
 
