@@ -7,42 +7,27 @@ ARG ALPINE_VERSION=3.20
 ARG GO_VERSION=1.23
 # HTMLTEST_VERSION sets the wjdp/htmltest version for HTML testing
 ARG HTMLTEST_VERSION=0.17.0
+# HUGO_VERSION sets the version of Hugo to build the site with
+ARG HUGO_VERSION=0.136.0
 
-# base is the base stage with build dependencies
-FROM golang:${GO_VERSION}-alpine AS base
-WORKDIR /src
-RUN apk --update add nodejs npm git gcompat
-
-# node installs Node.js dependencies
-FROM base AS node
-COPY package*.json .
-ENV NODE_ENV=production
-RUN npm install
-
-# hugo downloads and extracts the Hugo binary
-FROM base AS hugo
-ARG HUGO_VERSION=0.134.3
-ARG TARGETARCH
-WORKDIR /tmp/hugo
-RUN wget -O "hugo.tar.gz" "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-${TARGETARCH}.tar.gz"
-RUN tar -xf "hugo.tar.gz" hugo
-
-# build-base is the base stage for building the site
-FROM base AS build-base
-COPY --from=hugo /tmp/hugo/hugo /bin/hugo
-COPY --from=node /src/node_modules /src/node_modules
+# build-base is the base stage used for building the site
+FROM ghcr.io/gohugoio/hugo:v${HUGO_VERSION} AS build-base
+USER root
+ENV NODE_ENV="production"
+RUN --mount=source=package.json,target=package.json \
+    --mount=source=package-lock.json,target=package-lock.json \
+    --mount=type=cache,target=/root/.npm \
+    npm ci
 COPY . .
-
-# dev is for local development with Docker Compose
-FROM build-base AS dev
 
 # build creates production builds with Hugo
 FROM build-base AS build
 # HUGO_ENV sets the hugo.Environment (production, development, preview)
-ARG HUGO_ENV
+ARG HUGO_ENV="development"
 # DOCS_URL sets the base URL for the site
-ARG DOCS_URL
-RUN hugo --gc --minify -d /out -e $HUGO_ENV -b $DOCS_URL
+ARG DOCS_URL="https://docs.docker.com"
+RUN --mount=type=cache,target=/cache \
+    hugo --gc --minify -d /out -e $HUGO_ENV -b $DOCS_URL
 
 # lint lints markdown files
 FROM davidanson/markdownlint-cli2:v0.14.0 AS lint
@@ -122,7 +107,7 @@ fi
 EOT
 
 # pagefind installs the Pagefind runtime
-FROM base AS pagefind
+FROM node:alpine${ALPINE_VERSION} AS pagefind
 ARG PAGEFIND_VERSION=1.1.1
 COPY --from=build /out ./public
 RUN --mount=type=bind,src=pagefind.yml,target=pagefind.yml \
