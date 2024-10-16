@@ -2,7 +2,7 @@ services:
   server:
     build:
       context: .
-      target: dev
+      target: build-base
     ports:
       - "1313:1313"
     entrypoint: ["hugo", "server", "--bind", "0.0.0.0"]
@@ -11,5 +11,3 @@ services:
         - action: sync
           path: .
           target: /src
-          ignore:
-            - node_modules/
