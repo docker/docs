@@ -59,7 +59,7 @@ filesystem you can share with containers. For details about accessing the settin
    bind mount.
 
    {{< tabs >}}
-   {{< tab name="Mac / Linux / PowerShell" >}}
+   {{< tab name="Mac / Linux" >}}
 
    ```console
    $ docker run -it --mount type=bind,src="$(pwd)",target=/src ubuntu bash
@@ -77,6 +77,13 @@ filesystem you can share with containers. For details about accessing the settin
 
    ```console
    $ docker run -it --mount type=bind,src="/$(pwd)",target=/src ubuntu bash
+   ```
+   
+   {{< /tab >}}
+   {{< tab name="PowerShell" >}}
+
+   ```console
+   $ docker run -it --mount "type=bind,src=$($pwd),target=/src" ubuntu bash
    ```
    
    {{< /tab >}}
