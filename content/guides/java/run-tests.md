@@ -25,7 +25,7 @@ Replace the contents of your Dockerfile with the following.
 ```dockerfile {hl_lines="3-19"}
 # syntax=docker/dockerfile:1
 
-FROM eclipse-temurin:17-jdk-jammy as base
+FROM eclipse-temurin:21-jre-jammy as base
 WORKDIR /build
 COPY --chmod=0755 mvnw mvnw
 COPY .mvn/ .mvn/
@@ -64,7 +64,7 @@ RUN cp -r /build/target/extracted/application/. ./
 ENV JAVA_TOOL_OPTIONS="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8000"
 CMD [ "java", "-Dspring.profiles.active=postgres", "org.springframework.boot.loader.launch.JarLauncher" ]
 
-FROM eclipse-temurin:17-jre-jammy AS final
+FROM eclipse-temurin:21-jre-jammy AS final
 ARG UID=10001
 RUN adduser \
     --disabled-password \
