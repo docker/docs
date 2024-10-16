@@ -169,11 +169,11 @@ scales on-demand, but on-demand rates do apply. You can [scale your
 limit](../subscription/scale.md) or [upgrade](../subscription/change.md) to get
 a higher limit.
 
-The following table describes the included pull limit per month
+The following table describes the included pull count per month
 for each subscription tier, subject to fair use:
 
 
-| User type                | Pull limit per month |
+| User type                | Pull count per month |
 |--------------------------|----------------------|
 | Business (authenticated) | 1M                   |
 | Team (authenticated)     | 100K                 |
