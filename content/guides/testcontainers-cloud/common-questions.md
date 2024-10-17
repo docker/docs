@@ -8,7 +8,7 @@ weight: 40
 
 ### How is Testcontainers Cloud different from the open-source Testcontainers framework?
 
-While the open-source Testcontainers framework runs containers locally on your development machine or CI server, Testcontainers Cloud moves this process to the cloud. This reduces the resource strain on local environments and provides more scalability, especially in CI/CD workflows.
+While the open-source Testcontainers is a library that provides a lightweight APIs for bootstrapping local development and test dependencies with real services wrapped in Docker containers, Testcontainers Cloud provides a cloud runtime for these containers. This reduces the resource strain on local environments and provides more scalability, especially in CI/CD workflows, that enables consistent Testcontainers experience across the organization.
 
 ### What types of containers can I run with Testcontainers Cloud?
 
@@ -20,24 +20,24 @@ No, you don't need to change your existing test code. Testcontainers Cloud integ
 
 ### How do I integrate Testcontainers Cloud into my project?
 
-To integrate Testcontainers Cloud, you need to install the Testcontainers Cloud CLI, configure your project for cloud integration, and ensure your containers are running through the cloud service. No major code changes are required beyond setting up the CLI and enabling cloud integration.
+To integrate Testcontainers Cloud, you need to install the Testcontainers Desktop app and select run with Testcontainers Cloud option in the menu. In CI you’ll need to add a workflow step that downloads Testcontainers Cloud agent. No code changes are required beyond enabling Cloud runtime via the Testcontainers Desktop app locally or installing Testcontainers Cloud agent in CI.
 
 ### Can I use Testcontainers Cloud in a CI/CD pipeline?
 
-Yes, Testcontainers Cloud is designed to work efficiently in CI/CD pipelines. It helps reduce build times and resource bottlenecks by offloading containerized tests to the cloud, making it a perfect fit for continuous testing environments.
+Yes, Testcontainers Cloud is designed to work efficiently in CI/CD pipelines. It helps reduce build times and resource bottlenecks by offloading containers that you spin up with Testcontainers library to the cloud, making it a perfect fit for continuous testing environments.
 
 ### What are the benefits of using Testcontainers Cloud?
 
-The key benefits include faster test execution, reduced resource usage on local machines and CI servers, scalability (run more containers without performance degradation), consistent testing environments, and simplified container management.
+The key benefits include reduced resource usage on local machines and CI servers, scalability (run more containers without performance degradation), consistent testing environments, centralized monitoring, ease of CI configuration with removed security concerns of running Docker-in-Docker or a privileged daemon.
 
 ### Does Testcontainers Cloud support all programming languages?
 
-Testcontainers Cloud supports any language that works with the open-source Testcontainers framework, including Java, Python, Node.js, and Go. As long as your project uses Testcontainers, it can be offloaded to Testcontainers Cloud.
+Testcontainers Cloud supports any language that works with the open-source Testcontainers libraries, including Java, Python, Node.js, Go, and others. As long as your project uses Testcontainers, it can be offloaded to Testcontainers Cloud.
 
 ### How is container cleanup handled in Testcontainers Cloud?
 
-Testcontainers Cloud automatically handles container lifecycle management. This means that containers are spun up, monitored, and cleaned up after tests are completed, freeing developers from manually managing containers.
+While Testcontainers library automatically handles container lifecycle management, Testcontainers Cloud manages the allocated cloud worker lifetime. This means that containers are spun up, monitored, and cleaned up after tests are completed by Testcontainers library, and the worker where these containers have being running will be removed automatically after the ~35 min idle period by Testcontainers Cloud. This approach frees developers from manually managing containers and assosiated cloud resources. 
 
 ### Is there a free tier or pricing model for Testcontainers Cloud?
 
-Yes, Testcontainers Cloud typically offers a free tier for small-scale projects and testing environments. For larger teams and heavier usage, there are various pricing models based on container usage, resources, and features. You can find detailed pricing information on the Testcontainers Cloud website.
+Yes, free Testcontainers Cloud minutes are available to use for Docker Desktop or in CI workflows and are included in the Docker Pro, Docker Team, and Docker Business subscriptions. Customers will have the option to add runtime minutes as their needs grow.
