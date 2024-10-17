@@ -47,6 +47,84 @@ There are many ways to deploy the registry key, for example using an MDM solutio
 7. Test the GPO. Test the GPO on a small set of machines first to ensure it behaves as expected. You can use the `gpupdate /force` command on a test machine to manually refresh its group policy settings and check the registry to confirm the changes.
 8. Once verified, you can proceed with broader deployment. Monitor the deployment to ensure the settings are applied correctly across the organization's computers.
 
+## Configuration profiles method (Mac only)
+
+> [!NOTE]
+>
+> The configuration profiles method is in [Early Access](/manuals/release-lifecycle.md)
+> and is available with Docker Desktop version 4.36 and later.
+
+Configuration profiles are a feature of macOS that let administrators distribute
+configuration information to the Macs they manage. It is the safest method to
+enforce sign-in on macOS because the installed configuration profiles are
+protected by Apples' System Integrity Protection (SIP) and can therefore not be
+tampered with by the users.
+
+1. Save the following XML code to a file with the suffix `.mobileconfig`, for example
+   `docker.mobileconfig`:
+
+
+   ```xml
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+    <plist version="1.0">
+      <dict>
+        <key>PayloadContent</key>
+        <array>
+          <dict>
+            <key>PayloadType</key>
+            <string>com.docker.config</string>
+            <key>PayloadVersion</key>
+            <integer>1</integer>
+            <key>PayloadIdentifier</key>
+            <string>com.docker.config</string>
+            <key>PayloadUUID</key>
+            <string>eed295b0-a650-40b0-9dda-90efb12be3c7</string>
+            <key>PayloadDisplayName</key>
+            <string>Docker Desktop Configuration</string>
+            <key>PayloadDescription</key>
+            <string>Configuration profile to manage Docker Desktop settings.</string>
+            <key>PayloadOrganization</key>
+            <string>Your Company Name</string>
+            <key>allowedOrgs</key>
+            <string>first_org;second_org</string>
+          </dict>
+        </array>
+        <key>PayloadType</key>
+        <string>Configuration</string>
+        <key>PayloadVersion</key>
+        <integer>1</integer>
+        <key>PayloadIdentifier</key>
+        <string>com.yourcompany.docker.config</string>
+        <key>PayloadUUID</key>
+        <string>0deedb64-7dc9-46e5-b6bf-69d64a9561ce</string>
+        <key>PayloadDisplayName</key>
+        <string>Docker Desktop Config Profile</string>
+        <key>PayloadDescription</key>
+        <string>Config profile to enforce Docker Desktop settings for allowed organizations.</string>
+        <key>PayloadOrganization</key>
+        <string>Your Company Name</string>
+      </dict>
+    </plist>
+   ```
+
+2. Change the placeholder `Your Company Name` to the name of your company.
+
+3. Add your organization name. The names of the allowed organizations are stored in the `allowedOrgs`
+   property. It can contain either the name of a single organization or a list of organization names,
+   separated by semicolon:
+
+   ```xml
+            <key>allowedOrgs</key>
+            <string>first_org;second_org</string>
+   ```
+
+4. Use a MDM solution to distribute your modified `.mobileconfig` file to your
+   macOS clients. 
+   
+   Sign-in is now enforced on all of those devices.
+
+
 ## plist method (Mac only)
 
 > [!NOTE]
