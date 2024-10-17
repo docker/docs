@@ -14,8 +14,8 @@ Imagine you have both an API and a frontend app, and you want to test how the fr
 In this guide, you'll learn how to:
 
 - Use Docker to launch up a WireMock container.
-- Set up a non-containerized Node app to route requests to the containerized WireMock.
-- Set up a non-containerized Node app to fetch data from the external AccuWeather API.
+- Use mock data in the local development without relying on an external API
+- Use a Live API in production to fetch real-time weather data from AccuWeather. 
 
 ## Using WireMock with Docker
 
@@ -91,18 +91,17 @@ Now that you have tried WireMock, let’s use it in development and testing. In 
 
   ![Diagram showing the architecture of WireMock in development ](./images/wiremock-arch.webp)
 
-  - The API Request is sent from the Node.js backend to the External AccuWeather API, which then returns the API Response.
-  - Alternatively, when using WireMock, a Mocked API Request is sent to the WireMock server, and a Mocked API Response is returned.
+  - In development, the Node.js backend sends a request to WireMock instead of the actual AccuWeather API.
+  - In production, it connects directly to the live AccuWeather API for real data.
 
+## Use mock data in local development
 
-## Set up a non-containerized Node app to route requests to a containerized WireMock
-
-Let’s set up a non-containerized Node app to route requests to the WireMock container instead of the external AccuWeather API. 
+Let’s set up a Node app to send requests to the WireMock container instead of the actual AccuWeather API.
 
 ### Prerequisite
 
 - Install [Node and NPM](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
-- Ensure that WireMock container is up and running. (created in the previous step).
+- Ensure that WireMock container is up and running. (as setup earlier).
 
 
 Follow the steps to setup a non-containerized Node application:
@@ -205,7 +204,7 @@ Follow the steps to setup a non-containerized Node application:
    > [!TIP]
    > Before you proceed to the next step, ensure that you stop the node application service.
 
-## Set up a non-containerized Node app to fetch data from the external AccuWeather API 
+## Use a Live API in production to fetch real-time weather data from AccuWeather.
 
    To enhance your Node.js application with real-time weather data, you can seamlessly integrate the AccuWeather API. This section of the guide will walk you through the steps involved in setting up a non-containerized Node.js application and fetching weather information directly from the AccuWeather API.
 
