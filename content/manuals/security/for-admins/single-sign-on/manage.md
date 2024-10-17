@@ -71,6 +71,6 @@ aliases:
 
 ## What's next?
 
-- [Set up SCIM](../../provisioning/scim.md)
-- [Enable Group mapping](../../provisioning/group-mapping.md)
+- [Set up SCIM](../provisioning/scim.md)
+- [Enable Group mapping](../provisioning/group-mapping.md)
 

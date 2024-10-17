@@ -164,6 +164,10 @@ again when you switch back.
 
 ## Install Docker Desktop on Windows
 
+> [!TIP]
+>
+> See the [FAQs](/manuals/desktop/faqs/general.md#how-do-I-run-docker-desktop-without-administrator-privileges) on how to install and run Docker Desktop without needing administrator privileges.
+
 ### Install interactively
 
 1. Download the installer using the download button at the top of the page, or from the [release notes](../release-notes.md).

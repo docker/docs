@@ -59,6 +59,7 @@ area/engine:
   - changed-files:
       - any-glob-to-any-file:
           - content/manuals/engine/**
+          - content/reference/api/engine/**
 
 area/install:
   - changed-files:

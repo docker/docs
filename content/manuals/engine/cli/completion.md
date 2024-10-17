@@ -89,8 +89,8 @@ $ docker completion zsh > ~/.docker/completions/_docker
 ```
 
 ```console
-$ cat <<EOT >> ~/.zshrc
-fpath=(~/.docker/completions \\$fpath)
+$ cat <<"EOT" >> ~/.zshrc
+FPATH="$HOME/.docker/completions:$FPATH"
 autoload -Uz compinit
 compinit
 EOT

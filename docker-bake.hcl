@@ -1,9 +1,9 @@
 variable "HUGO_ENV" {
-  default = "development"
+  default = null
 }
 
 variable "DOCS_URL" {
-  default = "https://docs.docker.com"
+  default = null
 }
 
 variable "DOCS_SITE_DIR" {

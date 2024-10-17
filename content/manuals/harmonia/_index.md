@@ -49,13 +49,21 @@ To verify creation, check the context switcher in the top-left corner of the Doc
 Run the following command: 
 
 ```console
-$ docker harmonia engine create cloudengine --arch "amd64"  --use
+$ docker harmonia engine create cloudengine --type "standard-amd64"  --use
 ```
 
 This creates an engine called `cloudengine` and:
 - Immediately switches you to the new cloud engine with the `--use` flag.
-- Sets the engine's CPU architecture to amd64 using the `--arch "amd64"` flag. You can choose between amd64 and arm64.
-- Configures the engine size with the `--size "standard"` flag. Options are standard (2 CPU cores, 4GB RAM, default) or large (4 CPU cores, 8GB RAM).
+- Sets the engine size to standard and the engine's CPU architecture to amd64 with the `--type` flag. 
+
+Project Harmonia supports the following values for `--type`:
+- `standard-arm64`
+- `standard-amd64` (default)
+- `large-arm64`
+- `large-amd64`
+- `aiml-amd64`
+
+Standard size engines have 2 CPU cores and 4GB RAM, large and AI/ML engines have 4 CPU cores and 8GB RAM.
 
 To verify you're using the newly created cloud engine, run:
 

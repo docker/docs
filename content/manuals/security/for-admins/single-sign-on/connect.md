@@ -50,4 +50,4 @@ The following videos demonstrate how to enforce SSO.
 
 ## What's next
 
-Learn how you can [manage your SSO connection](../manage/_index.md), domain, and users for your organization or company.
+Learn how you can [manage your SSO connection](../single-sign-on/manage.md), domain, and users for your organization or company.

@@ -84,7 +84,6 @@ import (
 	"io"
 	"os"
 
-	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
         "github.com/docker/docker/api/types/image"
 	"github.com/docker/docker/client"
@@ -113,7 +112,7 @@ func main() {
         panic(err)
     }
 
-    if err := cli.ContainerStart(ctx, resp.ID, types.ContainerStartOptions{}); err != nil {
+    if err := cli.ContainerStart(ctx, resp.ID, container.StartOptions{}); err != nil {
         panic(err)
     }
 
@@ -126,7 +125,7 @@ func main() {
     case <-statusCh:
     }
 
-    out, err := cli.ContainerLogs(ctx, resp.ID, types.ContainerLogsOptions{ShowStdout: true})
+    out, err := cli.ContainerLogs(ctx, resp.ID, container.LogsOptions{ShowStdout: true})
     if err != nil {
         panic(err)
     }
