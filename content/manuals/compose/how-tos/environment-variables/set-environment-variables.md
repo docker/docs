@@ -68,7 +68,7 @@ services:
     env_file: "webapp.env"
 ```
 
-Using an `.env` file lets you to use the same file for use by a plain `docker run --env-file ...` command, or to share the same `.env` file within multiple services without the need to duplicate a long `environment` YAML block.
+Using an `.env` file lets you use the same file for use by a plain `docker run --env-file ...` command, or to share the same `.env` file within multiple services without the need to duplicate a long `environment` YAML block.
 
 It can also help you keep your environment variables separate from your main configuration file, providing a more organized and secure way to manage sensitive information, as you do not need to place your `.env` file in the root of your project's directory.
 
@@ -85,7 +85,6 @@ The paths to your `.env` file, specified in the `env_file` attribute, are relati
 ### Additional information 
 
 - If multiple files are specified, they are evaluated in order and can override values set in previous files.
-- In addition, as the `.env` file supports [interpolation](variable-interpolation.md), it is possible to combine those with values set by `environment`. 
 - As of Docker Compose version 2.24.0, you can set your `.env` file, defined by the `env_file` attribute, to be optional by using the `required` field. When `required` is set to `false` and the `.env` file is missing, Compose silently ignores the entry.
   ```yaml
   env_file:

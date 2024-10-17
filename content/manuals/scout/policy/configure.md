@@ -31,9 +31,9 @@ To add a policy:
 1. Go to the [Policies page](https://scout.docker.com/reports/policy) in the Docker Scout Dashboard.
 2. Select the **Add policy** button to open the policy configuration screen.
 3. On the policy configuration screen, locate the policy type that you want to
-   configure, and select **Configure** to open the policy configuration panel.
+   configure, and select **Configure** to open the policy configuration page.
 
-   - If the **Configure** button is grayed out, it means the selected policy
+   - If the **Configure** button is grayed out, it means the current policy
      has no configurable parameters.
    - If the button reads **Integrate**, it indicates that setup is required
      before the policy can be enabled. Selecting **Integrate** will direct you
@@ -42,10 +42,24 @@ To add a policy:
 4. Update the policy parameters.
 5. Save the changes:
 
-   - Select **Save and enable** to commit the changes and enable the policy for
+   - Select **Save policy** to commit the changes and enable the policy for
      your current organization.
-   - Select **Save policy** to save the policy configuration without enabling
+   - Select **Save and disable** to save the policy configuration without enabling
      it.
+
+## Edit a policy
+
+Editing a policy lets you to modify its configuration without creating 
+a new one from scratch. This can be useful when policy parameters need adjustments 
+due to evolving requirements or changes in your organization's compliance goals.
+
+To edit a policy:
+
+1. Go to the [Policies page](https://scout.docker.com/reports/policy) in the Docker Scout Dashboard.
+2. Select the policy you want to edit.
+3. Select the **Edit** button.
+4. Update the policy parameters.
+5. Save the changes.
 
 ## Disable a policy
 
@@ -70,8 +84,7 @@ To delete a policy:
 
 1. Go to the [Policies page](https://scout.docker.com/reports/policy) in the Docker Scout Dashboard.
 2. Select the policy you want to delete.
-3. Select **View policy details**.
-4. Select the **Delete** button.
+3. Select the **Delete** button.
 
 ## Recover a deleted policy
 

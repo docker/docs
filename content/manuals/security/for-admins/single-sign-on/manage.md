@@ -14,20 +14,9 @@ aliases:
 >
 > You must have a [company](/admin/company/) to manage more than one organization.
 
-{{< tabs >}}
-{{< tab name="Admin Console" >}}
-
 {{< include "admin-early-access.md" >}}
 
 {{% admin-sso-management-orgs product="admin" %}}
-
-{{< /tab >}}
-{{< tab name="Docker Hub" >}}
-
-{{% admin-sso-management-orgs product="hub" %}}
-
-{{< /tab >}}
-{{< /tabs >}}
 
 ## Manage domains
 
@@ -82,6 +71,6 @@ aliases:
 
 ## What's next?
 
-- [Set up SCIM](../../provisioning/scim.md)
-- [Enable Group mapping](../../provisioning/group-mapping.md)
+- [Set up SCIM](../provisioning/scim.md)
+- [Enable Group mapping](../provisioning/group-mapping.md)
 
