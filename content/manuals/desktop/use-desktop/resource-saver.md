@@ -24,11 +24,11 @@ timer as shown below.
 
 If the values available aren't sufficient for your
 needs, you can reconfigure it to any value, as long as the value is larger than 30 seconds, by
-changing `autoPauseTimeoutSeconds` in the Docker Desktop `settings.json` file: 
+changing `autoPauseTimeoutSeconds` in the Docker Desktop `settings-store.json` file: 
 
-  - Mac: `~/Library/Group Containers/group.com.docker/settings.json`
-  - Windows: `C:\Users\[USERNAME]\AppData\Roaming\Docker\settings.json`
-  - Linux: `~/.docker/desktop/settings.json`
+  - Mac: `~/Library/Group Containers/group.com.docker/settings-store.json`
+  - Windows: `C:\Users\[USERNAME]\AppData\Roaming\Docker\settings-store.json`
+  - Linux: `~/.docker/desktop/settings-store.json`
 
 There's no need to restart Docker Desktop after reconfiguring. 
 
