@@ -17,7 +17,7 @@ A [Docker ID](/accounts/create-account/) grants you access to Docker Hub reposit
 
 > [!TIP]
 >
-> Explore [Docker's core subscriptions](https://www.docker.com/pricing/) to see what else Docker can offer you. 
+> Explore [Docker's subscriptions](https://www.docker.com/pricing/) to see what else Docker can offer you. 
 
 ### Step 2: Create your first repository
 
