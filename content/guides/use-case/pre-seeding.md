@@ -206,7 +206,7 @@ Make sure you stop any running Postgres containers (along with volumes) to preve
 
     It is important to note that the port mapping to the host is only necessary if you want to connect to the database from non-containerized programs. If you containerize the service that connects to the DB, you should connect to the database over a custom bridge network.
 
-3.  Bring up the Compose service.
+4.  Bring up the Compose service.
 
     Assuming that you've placed the `seed.sql` file in the same directory as the Dockerfile, execute the following command:
 
@@ -214,13 +214,13 @@ Make sure you stop any running Postgres containers (along with volumes) to preve
     $ docker compose up -d --build
     ```
 
-4.  It’s time to verify if the table `users` get populated with the data. 
+5.  It’s time to verify if the table `users` get populated with the data. 
 
     ```console
     $ docker exec -it my_postgres_db psql -h localhost -U postgres sampledb
     ```
 
-    ``` 
+    ```sql 
     sampledb=# select * from users;
       id | name  |       email
     ----+-------+-------------------
@@ -229,8 +229,8 @@ Make sure you stop any running Postgres containers (along with volumes) to preve
        3 | Gamma | gamma@example.com
      (3 rows)
 
-     sampledb=#
-     ```
+    sampledb=#
+    ```
 
 
 ## Pre-seeding the database using JavaScript code

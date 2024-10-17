@@ -160,7 +160,7 @@ Follow the steps to setup a non-containerized Node application:
     ```  
 
 
-3. Start the Node server
+4. Start the Node server
 
    Before you start the Node server, ensure that you have already installed the node packages listed in the package.json file by running `npm install`. 
 
@@ -183,7 +183,7 @@ Follow the steps to setup a non-containerized Node application:
    The output indicates that your Node application has successfully started. 
    Keep this terminal window open. 
 
-4. Test the Mocked API
+5. Test the Mocked API
 
    Open a new terminal window and run the following command to test the mocked API:
 
@@ -204,10 +204,9 @@ Follow the steps to setup a non-containerized Node application:
    > [!TIP]
    > Before you proceed to the next step, ensure that you stop the node application service.
 
-## Use a Live API in production to fetch real-time weather data from AccuWeather.
+## Use a Live API in production to fetch real-time weather data from AccuWeather
 
    To enhance your Node.js application with real-time weather data, you can seamlessly integrate the AccuWeather API. This section of the guide will walk you through the steps involved in setting up a non-containerized Node.js application and fetching weather information directly from the AccuWeather API.
-
 
 1. Create an AccuWeather API Key
 
