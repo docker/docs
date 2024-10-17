@@ -78,6 +78,35 @@ $ docker buildx bake --print
 }
 ```
 
+## Escape variable interpolation
+
+If you want to bypass variable interpolation when parsing the Bake definition,
+use double dollar signs (`$${VARIABLE}`).
+
+```hcl
+target "default" {
+  dockerfile-inline = <<EOF
+  FROM alpine
+  ARG TARGETARCH
+  RUN echo "Building for $${TARGETARCH/amd64/x64}"
+  EOF
+  platforms = ["linux/amd64", "linux/arm64"]
+}
+```
+
+```console
+$ docker buildx bake --progress=plain
+...
+#8 [linux/arm64 2/2] RUN echo "Building for arm64"
+#8 0.036 Building for arm64
+#8 DONE 0.0s
+
+#9 [linux/amd64 2/2] RUN echo "Building for x64"
+#9 0.046 Building for x64
+#9 DONE 0.1s
+...
+```
+
 ## Using variables in variables across files
 
 When multiple files are specified, one file can use variables defined in
