@@ -65,8 +65,30 @@
     {{- partial "breadcrumbs.html" . }}
     <h1 data-pagefind-weight="10" class="scroll-mt-36">{{ .Title }}</h1>
     {{ .Content }}
+      <h2>Featured</h2>
+      <div class="not-prose py-4 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
+        {{- $featured := where .Pages "Params.featured" true }}
+        {{- with $featured }}
+          {{- range . }}
+            <div class="flex flex-col h-full">
+              <a class="hover:underline" href="{{ .Permalink }}">
+                {{- $img := resources.Get (.Params.image | default "/images/thumbnail.webp") }}
+                {{- $img = $img.Process "resize 600x" }}
+                <img class="h-48 w-full object-cover rounded shadow" src="{{ $img.Permalink }}">
+                <p class="text-xl leading-snug my-4">{{ .Title }}</p>
+              </a>
+              <p class="flex-grow text-sm">{{ .Summary }}</p>
+              <div class="mt-4">
+                {{ template "guide-metadata" . }}
+              </div>
+            </div>
+            {{- end }}
+          {{- end }}
+        </div>
+      </ul>
+    <hr class="text-divider-light dark:text-divider-dark">
     {{- $taxonomies := slice "products" "subjects" "levels" "languages" }}
-    <div class="not-prose"
+    <div class="not-prose min-h-screen"
       x-data="{
         filters: { {{ delimit (apply $taxonomies "fmt.Printf" "%s: []," "." ) "" }} },
 
@@ -103,67 +125,38 @@
         }
       }"
       x-cloak
-      @guide-filter.window="filters = $event.detail.filters; window.scrollTo({ top: 0 });">
-      <div x-ref="container" class="pt-4 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-        {{- $featured := where .Pages "Params.featured" true }}
-        {{- with $featured }}
-          {{- range . }}
-            {{- $opts := dict "page" . "taxonomies" $taxonomies }}
-            {{- $filters := partial "utils/filter-terms.html" $opts }}
-            <div x-show="showItem({{ jsonify $filters }});" class="flex flex-col h-full">
-              <div class="text-xs font-semibold text-gray-light dark:text-gray-dark tracking-wider uppercase">Featured</div>
-              <a class="hover:underline" href="{{ .Permalink }}">
-                {{- $img := resources.Get (.Params.image | default "/images/thumbnail.webp") }}
-                {{- $img = $img.Process "resize 600x" }}
-                <img class="h-48 w-full object-cover rounded shadow" src="{{ $img.Permalink }}">
-                <p class="text-xl leading-snug my-4">{{ .Title }}</p>
-              </a>
-              <p class="flex-grow text-sm">{{ .Summary }}</p>
-              <hr class="text-divider-light dark:text-divider-dark">
-              {{ template "guide-metadata" . }}
-            </div>
-            {{- end }}
-          {{- end }}
-          {{- range (collections.Complement $featured .Pages) }}
-            {{- $opts := dict "page" . "taxonomies" $taxonomies }}
-            {{- $filters := partial "utils/filter-terms.html" $opts }}
-            <a href="{{ .Permalink }}" x-show="showItem({{ jsonify $filters }});" x-transition
-               class="group flex flex-col justify-between p-4 rounded border-2
-                      border-gray-light-100 bg-white dark:bg-gray-dark-200
-                      dark:border-gray-dark-400 drop-shadow transition
-                      hover:-translate-y-1 hover:border-blue-light-400
-                      dark:hover:border-blue-dark-500">
-              <div>
-                <div class="text-lg mb-4 group-hover:underline">{{ .Title }}</div>
-                <div
-                  class="text-sm line-clamp-5 group-hover:text-black dark:group-hover:text-white text-gray-light dark:text-gray-dark">
-                  {{- .Summary }}
-                </div>
-              </div>
-              <div>
-                <hr class="text-divider-light dark:text-divider-dark">
-                {{ template "guide-metadata" . }}
-              </div>
-            </a>
-        {{- end }}
-      </div>
-      </ul>
+      @guide-filter.window="filters = $event.detail.filters; document.getElementById('all-guides').scrollIntoView({ behavior: 'smooth' })">
+      <h2 id="all-guides" class="scroll-mt-36">All guides</h2>
+      {{- range .Pages }}
+        {{- $opts := dict "page" . "taxonomies" $taxonomies }}
+        {{- $filters := partial "utils/filter-terms.html" $opts }}
+        <a href="{{ .Permalink }}" x-show="showItem({{ jsonify $filters }});" x-transition
+           class="group flex flex-col justify-between p-4 border-b
+                  border-divider-light hover:bg-white
+                  hover:dark:bg-gray-dark-200 dark:border-divider-dark
+                  drop-shadow transition">
+          <div class="flex flex-col xl:flex-row justify-between">
+            <div class="text-lg group-hover:underline mb-2 xl:mb-0 truncate">{{ .Title }}</div>
+            {{ template "guide-metadata" . }}
+          </div>
+        </a>
+      {{- end }}
   </article>
 </div>
 {{ end }}
 
 {{- define "guide-metadata" }}
-<div class="flex items-center text-sm justify-between text-gray-light dark:text-gray-dark">
-  <div class="flex flex-wrap gap-2">
+<div class="flex gap-8 items-center text-sm justify-between text-gray-light dark:text-gray-dark">
+  <div class="flex flex-wrap md:flex-nowrap gap-2">
     {{- $taxoterms := .GetTerms "languages" }}
     {{- $taxoterms = $taxoterms | append (.GetTerms "levels") }}
     {{- $taxoterms = $taxoterms | append (.GetTerms "subjects") }}
     {{- range $taxoterms }}
-    <span class="rounded bg-gray-light-200 dark:bg-gray-dark-300 px-2">{{- .Page.LinkTitle }}</span>
+    <span class="rounded whitespace-nowrap bg-gray-light-200 dark:bg-gray-dark-300 px-2">{{- .Page.LinkTitle }}</span>
     {{- end }}
   </div>
   {{- with .Params.time }}
-    <div class="flex whitespace-nowrap gap-2">
+    <div class="flex whitespace-nowrap flex-shrink gap-2">
       <span class="icon-svg">{{ partialCached "icon" "schedule" "schedule" }}</span>
       <span>{{ . }}</span>
     </div>

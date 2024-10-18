@@ -26,7 +26,7 @@
               }
           }
       })"
-      class="md:h-[calc(100vh - 64px)] fixed md:sticky top-0 md:top-16 z-40 hidden h-screen flex-none overflow-y-auto overflow-x-hidden bg-background-light dark:bg-gray-dark-100 w-full md:z-auto md:block md:w-[300px]"
+      class="md:h-[calc(100vh-64px)] fixed md:sticky top-0 md:top-16 z-40 hidden h-screen flex-none overflow-y-auto overflow-x-hidden bg-background-light dark:bg-gray-dark-100 w-full md:z-auto md:block md:w-[300px]"
       :class="{ 'hidden': ! $store.showSidebar }">
       <!-- Gray backdrop on small screens -->
       <div class="fixed bg-black/50 md:hidden" x-show="$store.showSidebar" @click="openSidebar = false"
