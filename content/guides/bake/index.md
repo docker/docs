@@ -32,16 +32,16 @@ This guide assumes that you're familiar with:
 
 ## Prerequisites
 
-- A recent version of Docker is installed on your machine.
-- Git is installed for cloning repositories.
+- You have a recent version of Docker installed on your machine.
+- You have Git installed for cloning repositories.
 - You're using the [containerd](/manuals/desktop/containerd.md) image store.
 
 ## Introduction
 
 This guide uses an example project to demonstrate how Docker Buildx Bake can
-streamline your build and test workflows. This repository includes both a
-Dockerfile and `docker-bake.hcl`, giving you a ready-to-use setup to try out
-Bake commands.
+streamline your build and test workflows. The repository includes both a
+Dockerfile and a `docker-bake.hcl` file, giving you a ready-to-use setup to try
+out Bake commands.
 
 Start by cloning the example repository:
 
@@ -114,7 +114,7 @@ $ docker buildx build \
 
 ## Testing and linting
 
-Bake isn't just for defining build configurations, and running builds. You can
+Bake isn't just for defining build configurations and running builds. You can
 also use Bake to run your tests, effectively using BuildKit as a task runner.
 Running your tests in containers is great for ensuring reproducible results.
 This section shows how to add two types of tests:
@@ -133,7 +133,7 @@ target "test" {
 ```
 
 > [!TIP]
-> Using the `type=cacheonly` ensures that the build output is effectively
+> Using `type=cacheonly` ensures that the build output is effectively
 > discarded; the layers are saved to BuildKit's cache, but Buildx will not
 > attempt to load the result to the Docker Engine's image store.
 >
@@ -145,7 +145,7 @@ you'll receive an error indicating that the `test` stage does not exist in the
 Dockerfile.
 
 ```console
-$ docker buildx bake bake test
+$ docker buildx bake test
 [+] Building 1.2s (6/6) FINISHED
  => [internal] load local bake definitions
 ...
@@ -252,13 +252,12 @@ combinations to build:
 
 The `matrix` attribute defines the variants to build ("release" and "debug").
 The `name` attribute defines how the matrix gets expanded into multiple
-distinct build targets. In this case, it's relatively simple. The matrix
-attribute expands the build into two workflows: `image-release` and
-`image-debug`, each using different configuration parameters.
+distinct build targets. In this case, the matrix attribute expands the build
+into two workflows: `image-release` and `image-debug`, each using different
+configuration parameters.
 
-Next, when building the development variant, we'll pass in a `BUILD_TAGS`
-argument with the value of the matrix variable, which we'll later consume in
-the Dockerfile.
+Next, define a build argument named `BUILD_TAGS` which takes the value of the
+matrix variable.
 
 ```diff {title="docker-bake.hcl"}
    target = "image"
@@ -365,7 +364,7 @@ bakeme:latest           20065d2c4d22       44.4MB         25.9MB
 
 Exporting build artifacts like binaries can be useful for deploying to
 environments without Docker or Kubernetes. For example, if your programs are
-meant to be run on user's local machine.
+meant to be run on a user's local machine.
 
 > [!TIP]
 > The techniques discussed in this section can be applied not only to build
@@ -502,7 +501,7 @@ multi-platform builds, testing, and artifact export. By integrating Buildx Bake
 into your projects, you can simplify your Docker builds, make your build
 configuration portable, and wrangle complex configurations more easily.
 
-Experiment with different configurations and extend your Bake files to match
+Experiment with different configurations and extend your Bake files to suit
 your project's needs. You might consider integrating Bake into your CI/CD
 pipelines to automate builds, testing, and artifact deployment. The flexibility
 and power of Buildx Bake can significantly improve your development and
