@@ -73,10 +73,5 @@
       @apply text-lg;
       line-height: 1.75;
     }
-    table {
-      display: block;
-      overflow-x: auto;
-      max-width: 100%;
-    }
   }
 }
