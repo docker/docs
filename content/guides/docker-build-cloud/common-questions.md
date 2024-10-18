@@ -28,28 +28,14 @@ Build Cloud.
 Docker Compose works out of the box with Docker Build Cloud. Install the Docker
 Build Cloud-compatible client (buildx) and it works with both commands.
 
-### How many minutes are included in Docker Build Cloud Team plans?
-
-You receive 200 minutes per month per purchased seat. If you are also a Docker
-subscriber (Personal, Pro, Team, Business), you will also receive your included
-build minutes from that plan.
-
-For example, if a Docker Team customer purchases 5 Build Cloud Team seats, they
-will have 400 minutes from their Docker Team plan plus 1000 minutes (200 min/mo * 5 seats) 
-for a total of 1400 minutes per month.
-
-### I’m a Docker personal user. Can I try Docker Build Cloud?
+### I’m a Docker Personal user. Can I try Docker Build Cloud?
 
 Docker subscribers (Pro, Team, Business) receive a set number of minutes each
 month, shared across the account, to use Build Cloud.
 
-If you do not have a Docker subscription, you may sign up for a free Personal
-account and get 50 minutes per month. Personal accounts are limited to a single
-user.
-
 For teams to receive the shared cache benefit, they must either be on a Docker
-Team, Docker Business, or paid Build Cloud Team plan. You may buy a month of
-Build Cloud Team for the number of seats testing.
+Team, or Docker Business plan. Docker Personal users may start a trial of Build
+Cloud.
 
 ### Does Docker Build Cloud support CI platforms? Does it work with GitHub Actions?
 
