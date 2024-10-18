@@ -316,8 +316,7 @@ It is called at the end of the script to initiate the seeding process. The try..
 4.  Verify if the database is seeded correctly:
 
     ```console
-    psql -h localhost -U postgres sampledb
-    Password for user postgres:
+    $ docker exec -it postgres psql -h localhost -U postgres sampledb
     ```
 
     Enter `mysecretpassword` when prompted for the password. You should see the list of items added to the table.
