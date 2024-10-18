@@ -8,7 +8,7 @@ ARG GO_VERSION=1.23
 # HTMLTEST_VERSION sets the wjdp/htmltest version for HTML testing
 ARG HTMLTEST_VERSION=0.17.0
 # HUGO_VERSION sets the version of Hugo to build the site with
-ARG HUGO_VERSION=0.136.0
+ARG HUGO_VERSION=0.136.2
 
 # build-base is the base stage used for building the site
 FROM ghcr.io/gohugoio/hugo:v${HUGO_VERSION} AS build-base

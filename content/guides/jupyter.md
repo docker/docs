@@ -383,39 +383,42 @@ $ docker run --rm -p 8889:8888 YOUR-USER-NAME/my-jupyer-image start-notebook.py 
 
 ### Share your volume
 
-This example uses the Docker Desktop [Volumes Backup & Share](https://hub.docker.com/extensions/docker/volumes-backup-extension) extension. Alternatively, in the CLI you can [back up the volume](/engine/storage/volumes/#back-up-a-volume) and then [push it using the ORAS CLI](/manuals/docker-hub/oci-artifacts.md#push-a-volume).
+This example uses the Docker Desktop graphical user interface. Alternatively, in the command line interface you can [back up the volume](/engine/storage/volumes/#back-up-a-volume) and then [push it using the ORAS CLI](/manuals/docker-hub/oci-artifacts.md#push-a-volume).
 
-1. Install the Volumes Backup & Share extension.
-
-   1. Open the Docker Dashboard and select **Extensions**.
-   2. Search for `Volumes Backup & Share`.
-   3. In the search results select **Install** for the extension.
-
-2. Open the **Volumes Backup & Share** extension in the Docker Dashboard.
-3. Next to the **jupyter-data** volume, select the **Export volume** icon.
-4. In the **Export content** window, select **Registry**.
-5. In the text box under **Registry**, specify your Docker ID and a name for the
-   volume. For example, `YOUR-USERNAME/jupyter-data`.
-6. Select **Export**.
-7. Verify that you exported the volume to Docker Hub.
+1. Sign in to Docker Desktop.
+2. In the Docker Dashboard, select **Volumes**.
+3. Select the **jupyter-data** volume by selecting the name.
+4. Select the **Exports** tab.
+5. Select **Quick export**.
+6. For **Location**, select **Registry**.
+7. In the text box under **Registry**, specify your Docker ID, a name for the
+   volume, and a tag. For example, `YOUR-USERNAME/jupyter-data:latest`.
+8. Select **Save**.
+9. Verify that you exported the volume to Docker Hub.
    1. Go to [Docker Hub](https://hub.docker.com).
    2. Select **Repositories**.
    3. View the **Last pushed** time for your repository.
 
 Other users can now download and import your volume. To import the volume and then run it with your image:
 
-1. In the Volumes Backup & Share extension, select **Import into new volume**.
-2. In the **Import into a new volume** window, select **Registry**.
-3. In the text box under **Registry**, specify your Docker ID and the repository
-   name for the volume. For example, `YOUR-USERNAME/jupyter-data`.
-4. In **Volume name**, specify the name you want to give the
-   volume. This example uses `jupyter-data` as the name.
-5. Select **Import**.
-6. In a terminal, run `docker run` to run your image with the imported volume.
+1. Sign in to Docker Desktop.
+2. In the Docker Dashboard, select **Volumes**.
+3. Select **Create** to create a new volume.
+4. Specify a name for the new volume. For this example, use `jupyter-data-2`.
+5. Select **Create**.
+6. In the list of volumes, select the **jupyter-data-2** volume by selecting the
+   name.
+7. Select **Import**.
+8. For **Location**, select **Registry**.
+9. In the text box under **Registry**, specify the same name as the repository
+   that you exported your volume to. For example,
+   `YOUR-USERNAME/jupyter-data:latest`.
+10. Select **Import**.
+11. In a terminal, run `docker run` to run your image with the imported volume.
    Replace `YOUR-USER-NAME` with your Docker ID.
 
    ```console
-   $ docker run --rm -p 8889:8888 -v jupyter-data:/home/jovyan/work YOUR-USER-NAME/my-jupyter-image start-notebook.py --NotebookApp.token='my-token'
+   $ docker run --rm -p 8889:8888 -v jupyter-data-2:/home/jovyan/work YOUR-USER-NAME/my-jupyter-image start-notebook.py --NotebookApp.token='my-token'
    ```
 
 ## Summary
