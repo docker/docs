@@ -159,6 +159,26 @@ Follow the steps to setup a non-containerized Node application:
     }
     ```  
 
+   > [!TIP]
+   > For the production environment, it's recommended not to expose API keys details in logs. Instead, you can log a placeholder message to indicate whether the API key is loaded:
+
+     ```
+     const API_KEY = process.env.ACCUWEATHER_API_KEY;
+
+     console.log('API_ENDPOINT_BASE:', API_ENDPOINT_BASE);  // Log after it's defined
+     console.log('ACCUWEATHER_API_KEY is set:', !!API_KEY); // Log a boolean value instead of the actual key
+
+      if (!API_ENDPOINT_BASE) {
+        throw new Error("API_ENDPOINT_BASE is not defined in environment variables");
+      }
+
+      // Only check for API key if not using WireMock
+      if (API_ENDPOINT_BASE !== 'http://localhost:8080' && !API_KEY) {
+        throw new Error("ACCUWEATHER_API_KEY is not defined in environment variables");
+      }
+     ```
+
+     > This approach ensures that you only log whether the key is set without revealing its value.
 
 4. Start the Node server
 
