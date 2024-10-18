@@ -319,8 +319,6 @@ It is called at the end of the script to initiate the seeding process. The try..
     $ docker exec -it postgres psql -h localhost -U postgres sampledb
     ```
 
-    Enter `mysecretpassword` when prompted for the password. You should see the list of items added to the table.
-
     ```console
     sampledb=# select * from todos;
     id |      task      | completed
