@@ -236,7 +236,7 @@ $ docker container stop postgres
     ```
 
 
-## Pre-seeding the database using JavaScript code
+## Pre-seed the database using JavaScript code
 
 
 Now that you have learned how to seed the database using various methods like SQL script, mounting volumes etc., it's time to try to achieve it using JavaScript code. 
