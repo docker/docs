@@ -224,7 +224,7 @@ $ docker container stop postgres
     ```
 
     ```sql 
-    sampledb=# select * from users;
+    sampledb=# SELECT * FROM users;
       id | name  |       email
     ----+-------+-------------------
        1 | Alpha | alpha@example.com
