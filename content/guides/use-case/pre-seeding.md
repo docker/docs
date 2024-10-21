@@ -142,7 +142,7 @@ Assuming that you have an existing Postgres database instance up and running, fo
   
    Use `\q` or `\quit` to exit from the Postgres interactive shell.
 
-## Pre-seeding the database by using Volumes to mount SQL files
+## Pre-seed the database by bind-mounting a SQL script
 
 In Docker, mounting refers to making files or directories from the host system accessible within a container. This let you to share data or configuration files between the host and the container, enabling greater flexibility and persistence.
 
