@@ -197,7 +197,7 @@ Follow the steps to setup a non-containerized Node application:
 
     API_ENDPOINT_BASE: http://localhost:8080
     ..
-    Listening: http://localhost:5000
+    Listening: http://localhost:5001
     ```
 
    The output indicates that your Node application has successfully started. 
