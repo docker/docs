@@ -101,7 +101,7 @@ Let’s set up a Node app to send requests to the WireMock container instead of 
 ### Prerequisite
 
 - Install [Node.js and npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
-- Ensure that WireMock container is up and running. (as setup earlier).
+- Ensure that WireMock container is up and running (see [Launching Wiremock](#launching-wiremock)
 
 
 Follow the steps to setup a non-containerized Node application:
