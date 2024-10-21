@@ -288,7 +288,7 @@ Follow the steps to setup a non-containerized Node application:
    > node src/index.js
 
    API_ENDPOINT_BASE: http://dataservice.accuweather.com
-   ACCUWEATHER_API_KEY: <your_api_key 
+   ACCUWEATHER_API_KEY is set: true 
    Listening: http://localhost:5000
    ``` 
    
