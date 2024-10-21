@@ -289,7 +289,7 @@ Follow the steps to setup a non-containerized Node application:
 
    API_ENDPOINT_BASE: http://dataservice.accuweather.com
    ACCUWEATHER_API_KEY is set: true 
-   Listening: http://localhost:5000
+   Listening: http://localhost:5001
    ``` 
    
    Keep this terminal window open.
