@@ -60,6 +60,7 @@ Launch a quick demo of Postgres by using the following steps:
    You can now execute any SQL queries or commands you need within the `psql` prompt.
 
    Use `\q` or `\quit` to exit from the Postgres interactive shell.
+
 ## Pre-seed the Postgres database using a SQL script
 
 Now that you've familiarized yourself with Postgres, it's time to see how to pre-seed it with sample data. In this demonstration, you'll first create a script that holds SQL commands. The script defines the database, and table structure and inserts sample data. Then you will connect the database to verify the data.
