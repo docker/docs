@@ -323,7 +323,7 @@ It is called at the end of the script to initiate the seeding process. The try..
     ```
 
     ```console
-    sampledb=# select * from todos;
+    sampledb=# SELECT * FROM todos;
     id |      task      | completed
     ----+----------------+-----------
     1 | Watch netflix  | f
