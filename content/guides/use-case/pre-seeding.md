@@ -131,7 +131,7 @@ Assuming that you have an existing Postgres database instance up and running, fo
    To retrieve all the data from the users table, enter the following query:
 
    ```console
-   sampledb=# SELECT * from users;
+   sampledb=# SELECT * FROM users;
    id | name  |       email
    ----+-------+-------------------
     1 | Alpha | alpha@example.com
