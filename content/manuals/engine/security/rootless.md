@@ -592,7 +592,7 @@ For information about troubleshooting specific networking issues, see:
 - [Ping doesn't work](#ping-doesnt-work)
 - [`IPAddress` shown in `docker inspect` is unreachable](#ipaddress-shown-in-docker-inspect-is-unreachable)
 - [`--net=host` doesn't listen ports on the host network namespace](#--nethost-doesnt-listen-ports-on-the-host-network-namespace)
-- [Newtork is slow](#network-is-slow)
+- [Network is slow](#network-is-slow)
 - [`docker run -p` does not propagate source IP addresses](#docker-run--p-does-not-propagate-source-ip-addresses)
 
 #### `docker run -p` fails with `cannot expose privileged port`
