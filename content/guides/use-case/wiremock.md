@@ -208,7 +208,7 @@ Follow the steps to setup a non-containerized Node application:
    Open a new terminal window and run the following command to test the mocked API:
 
    ```console
-   $ curl "http://localhost:5000/api/v1/getWeather?city=Bengaluru"
+   $ curl "http://localhost:5001/api/v1/getWeather?city=Bengaluru"
    ```
 
    You should see the following output:
