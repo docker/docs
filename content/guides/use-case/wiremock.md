@@ -139,7 +139,7 @@ Follow the steps to setup a non-containerized Node application:
     const API_KEY = process.env.ACCUWEATHER_API_KEY;
 
     console.log('API_ENDPOINT_BASE:', API_ENDPOINT_BASE);  // Log after it's defined
-    console.log('ACCUWEATHER_API_KEY:', API_KEY);          // Log after it's defined
+    console.log('ACCUWEATHER_API_KEY is set:', !!API_KEY); // Log boolean instead of actual key
 
     if (!API_ENDPOINT_BASE) {
       throw new Error("API_ENDPOINT_BASE is not defined in environment variables");
