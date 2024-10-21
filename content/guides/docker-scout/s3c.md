@@ -2,7 +2,12 @@
 title: Software supply chain security
 description: Learn about software supply chain security (S3C), what it means, and why it is important.
 keywords: docker scout, secure, software, supply, chain, security, sssc, sscs, s3c
+aliases:
+  - /scout/concepts/s3c/
+weight: 30
 ---
+
+{{< youtube-embed YzNK6E7APv0 >}}
 
 The term "software supply chain" refers to the end-to-end process of developing
 and delivering software, from the development to deployment and maintenance.
@@ -39,7 +44,7 @@ day where software is built using multiple components from different sources.
 Organizations need to have a clear understanding of the software components
 they use, and the security risks associated with them.
 
-## Docker Scout
+## How Docker Scout is different
 
 Docker Scout is a platform designed to help organizations secure their software
 supply chain. It provides tools and services for identifying and managing
@@ -53,9 +58,11 @@ updated risk assessment is available within seconds, and earlier in the
 development process.
 
 Docker Scout works by analyzing the composition of your images to create a
-[Software Bill of Materials (SBOM)](/manuals/scout/concepts/sbom.md). The SBOM is
-cross-referenced against the security advisories to identify CVEs that affect
-your images. Docker Scout integrates with [over 20 different security
+Software Bill of Materials (SBOM). The SBOM is cross-referenced against the
+security advisories to identify CVEs that affect your images. Docker Scout
+integrates with [over 20 different security
 advisories](/manuals/scout/deep-dive/advisory-db-sources.md), and updates its
 vulnerability database in real-time. This ensures that your security posture is
 represented using the latest available information.
+
+<div id="scout-lp-survey-anchor"></div>

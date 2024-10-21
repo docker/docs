@@ -1,8 +1,11 @@
 ---
 title: Docker Scout demo
+linkTitle: Demo
 description: Learn about Docker Scout's powerful features for enhanced supply chain security.
 weight: 20
 ---
+
+{{< youtube-embed "TkLwJ0p46W8" >}}
 
 Docker Scout has powerful features for enhancing containerized application
 security and ensuring a robust software supply chain.
@@ -14,7 +17,5 @@ security and ensuring a robust software supply chain.
 - Implement remediation techniques: updating base images, applying patches,
   removing unnecessary packages
 - Verify and validate remediation efforts using Docker Scout
-
-{{< youtube-embed "TkLwJ0p46W8" >}}
 
 <div id="scout-lp-survey-anchor"></div>
