@@ -152,6 +152,10 @@ Now that you have learned how to launch Postgres and pre-seed the database using
 
 Make sure you stop any running Postgres containers (along with volumes) to prevent port conflicts before you follow the steps:
 
+```console
+$ docker container stop postgres
+```
+
 1. Modify the `seed.sql` with the following entries:
 
    ```sql
