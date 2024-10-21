@@ -16,6 +16,7 @@ BuildKit
 BusyBox
 CISA
 CNCF
+CORS
 CVEs?
 CentOS
 Ceph
@@ -126,6 +127,7 @@ TCP
 TLS
 TXT
 Testcontainers
+Traefik
 UDP
 URLs?
 UUID
@@ -137,6 +139,7 @@ VMware
 WSL
 Wasm
 Windows
+WireMock
 Zsh
 [Bb]uildx
 [Cc]odenames?
@@ -188,6 +191,7 @@ namespace
 npm
 osquery
 osxfs
+pgAdmin
 runc
 snapshotters?
 stdin
