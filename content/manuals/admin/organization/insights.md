@@ -5,8 +5,7 @@ title: Insights
 ---
 
 > [!NOTE]
-> Insights requires a [Docker Business
-> subscription](/subscription/core-subscription/details/#docker-business) and
+> Insights requires a [Docker Business subscription](../../subscription/details.md#docker-business) and
 > administrators must [enforce sign-in](/security/for-admins/enforce-sign-in/)
 > to ensure that users sign in with an account associated with their
 > organization.
@@ -43,12 +42,14 @@ Key benefits include:
 
 You can view data in the following charts:
 
- * [Docker Desktop users](#docker-desktop-users)
- * [Builds](#builds)
- * [Containers](#containers)
- * [Docker Desktop usage](#docker-desktop-usage)
- * [Docker Hub images](#docker-hub-images)
- * [Extensions](#extensions)
+- [View Insights for organization users](#view-insights-for-organization-users)
+  - [Docker Desktop users](#docker-desktop-users)
+  - [Builds](#builds)
+  - [Containers](#containers)
+  - [Docker Desktop usage](#docker-desktop-usage)
+  - [Docker Hub images](#docker-hub-images)
+  - [Extensions](#extensions)
+- [Troubleshoot Insights](#troubleshoot-insights)
 
 ### Docker Desktop users
 

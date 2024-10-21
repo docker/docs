@@ -30,10 +30,11 @@ see [Integrating Docker Scout with other systems](/manuals/scout/integrations/_i
 
 ## Activate Docker Scout on a repository
 
-The free tier of Docker Scout lets you use Docker Scout for up to 3
-repositories per Docker organization. You can update your Docker Scout plan if
-you need additional repositories, see [Docker Scout
-billing](/manuals/billing/scout-billing.md).
+Docker Personal comes with 1 Scout-enabled repository. You can upgrade your
+Docker subscription if you need additional repositories.
+See [Subscriptions and features](../../subscription/details.md)
+to learn how many Scout-enabled
+repositories come with each subscription tier.
 
 Before you can activate image analysis on a repository in a third-party registry,
 the registry must be integrated with Docker Scout for your Docker organization.

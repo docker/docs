@@ -73,8 +73,7 @@ seats for the user.
 Possible solutions:
 
  * Add more Docker Business subscription seats to the organization. For details,
-   see [Add seats to your
-  subscription](/subscription/core-subscription/add-seats/).
+   see [Add seats to your subscription](../../../subscription/manage-seats.md).
  * Remove some users or pending invitations from your organization to make more
    seats available. For more details, see [Manage organization
    members](/admin/organization/members/).

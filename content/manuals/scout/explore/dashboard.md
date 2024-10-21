@@ -124,7 +124,7 @@ included in your plan, compare it with other available plans, and change the
 plan if you're an organization owner.
 
 For more information about subscription plans, see
-[Docker Scout subscriptions and features](/manuals/subscription/scout-details.md)
+[Docker subscriptions and features](../../subscription/details.md)
 
 ### Repository settings
 
