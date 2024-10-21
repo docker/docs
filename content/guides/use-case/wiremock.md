@@ -219,7 +219,7 @@ Follow the steps to setup a non-containerized Node application:
 
    This indicates that your Node.js application is now successfully routing requests to the WireMock container and receiving the mocked responses
 
-   You might have noticed that you’re trying to use `http://localhost:5000` as the URL instead of port `8080`. This is because your Node.js application is running on port `5000`, and it's routing requests to the WireMock container that's listening on port `8080`.
+   You might have noticed that you’re trying to use `http://localhost:5001` as the URL instead of port `8080`. This is because your Node.js application is running on port `5001`, and it's routing requests to the WireMock container that's listening on port `8080`.
 
    > [!TIP]
    > Before you proceed to the next step, ensure that you stop the node application service.
