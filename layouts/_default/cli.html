@@ -11,38 +11,40 @@
     <article class="prose min-w-0 flex-[2_2_0%] max-w-4xl dark:prose-invert">
     {{ partial "breadcrumbs.html" . }}
     <h1 class="scroll-mt-36">{{ .Title }}</h1>
-    <table>
-      <tbody>
-        {{ with $data.short }}
-        <tr>
-          <th class="text-left w-32">Description</th>
-          <td>{{ . }}</th>
-        </tr>
-        {{ end }}
-        {{ with $data.usage }}
-        <tr>
-          <th class="text-left w-32">Usage</th>
-          <td><code>{{ . }}</code></td>
-        </tr>
-        {{ end }}
-        {{ with $data.aliases }}
-        {{ $aliases := strings.Replace . (fmt.Printf "%s, " page.Title) "" }}
-        <tr>
-          <th class="text-left w-32 flex items-center gap-2">
-            <span>Aliases</span>
-            {{ partialCached "tooltip.html" "An alias is a short or memorable alternative for a longer command." "cli-alias" }}
-          </th>
-          <td>
-            <div class="flex gap-3">
-            {{ range (strings.Split $aliases ", ") }}
-              <code>{{ . }}</code>
-            {{ end }}
-            </div>
-          </td>
-        </tr>
-        {{ end }}
-      </tbody>
-    </table>
+    <div class="overflow-x-auto">
+      <table>
+        <tbody>
+          {{ with $data.short }}
+          <tr>
+            <th class="text-left w-32">Description</th>
+            <td>{{ . }}</th>
+          </tr>
+          {{ end }}
+          {{ with $data.usage }}
+          <tr>
+            <th class="text-left w-32">Usage</th>
+            <td><code>{{ . }}</code></td>
+          </tr>
+          {{ end }}
+          {{ with $data.aliases }}
+          {{ $aliases := strings.Replace . (fmt.Printf "%s, " page.Title) "" }}
+          <tr>
+            <th class="text-left w-32 flex items-center gap-2">
+              <span>Aliases</span>
+              {{ partialCached "tooltip.html" "An alias is a short or memorable alternative for a longer command." "cli-alias" }}
+            </th>
+            <td>
+              <div class="flex gap-3">
+              {{ range (strings.Split $aliases ", ") }}
+                <code>{{ . }}</code>
+              {{ end }}
+              </div>
+            </td>
+          </tr>
+          {{ end }}
+        </tbody>
+      </table>
+    </div>
     {{ .Content }}
     {{ if $data.deprecated }}
       {{ markdownify `
@@ -96,62 +98,64 @@ can be removed entirely in a future release.
         {{ $heading := dict "level" 2 "text" "Options" }}
         {{ partialCached "heading.html" $heading "cli-options" }}
         {{ $.Scratch.Add "headings" $heading }}
-        <table>
-          <thead>
-            <tr>
-              <th>Option</th>
-              <th>Default</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            {{ range . }}
+        <div class="overflow-x-auto">
+          <table>
+            <thead class="bg-gray-light-100 dark:bg-gray-dark-200">
               <tr>
-                {{ $short := .shorthand }}
-                {{ $long := .option }}
-                <td>
-                  {{ with .details_url }}
-                  <a class="link" href="{{ . }}">
-                    <code>{{ with $short }}-{{ . }}, {{end}}--{{ $long }}</code>
-                  </a>
-                  {{ else }}
-                  <code>{{ with $short }}-{{ . }}, {{end}}--{{ $long }}</code>
-                  {{ end }}
-                </td>
-                {{ $skipDefault := `[],map[],false,0,0s,default,'',""` }}
-                <td>
-                  {{ with .default_value }}
-                    {{ cond (in $skipDefault .) "" (printf "<code>%s</code>" . | safeHTML) }}
-                  {{ end }}
-                </td>
-                <td>
-                  {{ with .min_api_version }}
-                    {{ partialCached "components/badge.html" (dict "color" "blue" "content" (printf "API %s+" .)) "api" . }}
-                  {{ end }}
-                  {{ with .deprecated }}
-                    {{ partialCached "components/badge.html" (dict "color" "red" "content" "Deprecated") "deprecated" }}
-                  {{ end }}
-                  {{ with .experimental }}
-                    {{ partialCached "components/badge.html" (dict "color" "amber" "content" "experimental (daemon)") "exp" }}
-                  {{ end }}
-                  {{ with .experimentalcli }}
-                    {{ partialCached "components/badge.html" (dict "color" "amber" "content" "experimental (CLI)") "exp-cli" }}
-                  {{ end }}
-                  {{ with .kubernetes }}
-                    {{ partialCached "components/badge.html" (dict "color" "blue" "content" "Kubernetes") "k8s" }}
-                  {{ end }}
-                  {{ with .swarm }}
-                    {{ partialCached "components/badge.html" (dict "color" "blue" "content" "Swarm") "swarm" }}
-                  {{ end }}
-                  {{ if .description }}
-                    {{/* replace newlines in long desc with break tags */}}
-                    {{ markdownify (strings.Replace .description "\n" "<br>") }}
-                  {{ end }}
-                </td>
+                <th class="p-2">Option</th>
+                <th class="p-2">Default</th>
+                <th class="p-2">Description</th>
               </tr>
-            {{ end }}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {{ range . }}
+                <tr class="p-2">
+                  {{ $short := .shorthand }}
+                  {{ $long := .option }}
+                  <td>
+                    {{ with .details_url }}
+                    <a class="link" href="{{ . }}">
+                      <code>{{ with $short }}-{{ . }}, {{end}}--{{ $long }}</code>
+                    </a>
+                    {{ else }}
+                    <code>{{ with $short }}-{{ . }}, {{end}}--{{ $long }}</code>
+                    {{ end }}
+                  </td>
+                  {{ $skipDefault := `[],map[],false,0,0s,default,'',""` }}
+                  <td>
+                    {{ with .default_value }}
+                      {{ cond (in $skipDefault .) "" (printf "<code>%s</code>" . | safeHTML) }}
+                    {{ end }}
+                  </td>
+                  <td>
+                    {{ with .min_api_version }}
+                      {{ partialCached "components/badge.html" (dict "color" "blue" "content" (printf "API %s+" .)) "api" . }}
+                    {{ end }}
+                    {{ with .deprecated }}
+                      {{ partialCached "components/badge.html" (dict "color" "red" "content" "Deprecated") "deprecated" }}
+                    {{ end }}
+                    {{ with .experimental }}
+                      {{ partialCached "components/badge.html" (dict "color" "amber" "content" "experimental (daemon)") "exp" }}
+                    {{ end }}
+                    {{ with .experimentalcli }}
+                      {{ partialCached "components/badge.html" (dict "color" "amber" "content" "experimental (CLI)") "exp-cli" }}
+                    {{ end }}
+                    {{ with .kubernetes }}
+                      {{ partialCached "components/badge.html" (dict "color" "blue" "content" "Kubernetes") "k8s" }}
+                    {{ end }}
+                    {{ with .swarm }}
+                      {{ partialCached "components/badge.html" (dict "color" "blue" "content" "Swarm") "swarm" }}
+                    {{ end }}
+                    {{ if .description }}
+                      {{/* replace newlines in long desc with break tags */}}
+                      {{ markdownify (strings.Replace .description "\n" "<br>") }}
+                    {{ end }}
+                  </td>
+                </tr>
+              {{ end }}
+            </tbody>
+          </table>
+        </div>
       {{ end }}
     {{ end }}
     {{ with $data.examples }}
