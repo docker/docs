@@ -427,7 +427,7 @@ Let's create an object with a post method
 
 ```console
 $ curl -X 'POST' \
-  'http://0.0.0.0:8001/heroes/' \
+  'http://localhost:8001/heroes/' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -453,7 +453,7 @@ Let's make a get request with the next curl command:
 
 ```console
 curl -X 'GET' \
-  'http://0.0.0.0:8001/heroes/' \
+  'http://localhost:8001/heroes/' \
   -H 'accept: application/json'
 ```
 
