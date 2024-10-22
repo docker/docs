@@ -120,7 +120,7 @@ To create an Azure Connect (OIDC) connection, you must create an app registratio
 4. Select **Add** to continue.
 5. Copy the secret **Value** field. You need this to continue configuring SSO in Docker.
 
-## Configure API permissions
+### Configure API permissions
 
 1. Open your app in Azure AD and navigate to your app settings.
 2. Select **API permission** and then **Grant admin consent for [your tenant name]**.
@@ -213,5 +213,5 @@ The following videos demonstrate how to enforce SSO.
 
 ## What's next
 
-- [Provision users](../provisioning/_index.md)
+- [Provision users](/manuals/security/for-admins/provisioning/_index.md)
 - [Enforce sign-in](../enforce-sign-in/_index.md)
