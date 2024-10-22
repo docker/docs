@@ -88,139 +88,139 @@ service, the local value replaces or extends the original value.
 
    - For single-value options like `image`, `command` or `mem_limit`, the new value replaces the old value.
 
-   original service:
+      original service:
 
-   ```yaml
-   services:
-     myservice:
-       # ...
-       command: python app.py
-   ```
+      ```yaml
+      services:
+        myservice:
+          # ...
+          command: python app.py
+      ```
 
-   local service:
+      local service:
 
-   ```yaml
-   services:
-     myservice:
-       # ...
-       command: python otherapp.py
-   ```
+      ```yaml
+      services:
+        myservice:
+          # ...
+          command: python otherapp.py
+      ```
 
-   result:
+      result:
 
-   ```yaml
-   services:
-     myservice:
-       # ...
-       command: python otherapp.py
-   ```
+      ```yaml
+      services:
+        myservice:
+          # ...
+          command: python otherapp.py
+      ```
 
    - For the multi-value options `ports`, `expose`, `external_links`, `dns`, `dns_search`, and `tmpfs`, Compose concatenates both sets of values:
 
-   original service:
+      original service:
 
-   ```yaml
-   services:
-     myservice:
-       # ...
-       expose:
-         - "3000"
-   ```
+      ```yaml
+      services:
+        myservice:
+          # ...
+          expose:
+            - "3000"
+      ```
 
-   local service:
+      local service:
 
-   ```yaml
-   services:
-     myservice:
-       # ...
-       expose:
-         - "4000"
-         - "5000"
-   ```
+      ```yaml
+      services:
+        myservice:
+          # ...
+          expose:
+            - "4000"
+            - "5000"
+      ```
 
-   result:
+      result:
 
-   ```yaml
-   services:
-     myservice:
-       # ...
-       expose:
-         - "3000"
-         - "4000"
-         - "5000"
-   ```
+      ```yaml
+      services:
+        myservice:
+          # ...
+          expose:
+            - "3000"
+            - "4000"
+            - "5000"
+      ```
 
    - In the case of `environment`, `labels`, `volumes`, and `devices`, Compose "merges" entries together with locally defined values taking precedence. For `environment` and `labels`, the environment variable or label name determines which value is used:
 
-   original service:
+      original service:
 
-   ```yaml
-   services:
-     myservice:
-       # ...
-       environment:
-         - FOO=original
-         - BAR=original
-   ```
+      ```yaml
+      services:
+        myservice:
+          # ...
+          environment:
+            - FOO=original
+            - BAR=original
+      ```
 
-   local service:
+      local service:
 
-   ```yaml
-   services:
-     myservice:
-       # ...
-       environment:
-         - BAR=local
-         - BAZ=local
-   ```
+      ```yaml
+      services:
+        myservice:
+          # ...
+          environment:
+            - BAR=local
+            - BAZ=local
+      ```
 
-   result:
+     result:
 
-   ```yaml
-   services:
-     myservice:
-       # ...
-       environment:
-         - FOO=original
-         - BAR=local
-         - BAZ=local
-   ```
+      ```yaml
+      services:
+        myservice:
+          # ...
+          environment:
+            - FOO=original
+            - BAR=local
+            - BAZ=local
+      ```
 
    - Entries for `volumes` and `devices` are merged using the mount path in the container:
 
-   original service:
+      original service:
 
-   ```yaml
-   services:
-     myservice:
-       # ...
-       volumes:
-         - ./original:/foo
-         - ./original:/bar
-   ```
+      ```yaml
+      services:
+        myservice:
+          # ...
+          volumes:
+            - ./original:/foo
+            - ./original:/bar
+      ```
 
-   local service:
+      local service:
 
-   ```yaml
-   services:
-     myservice:
-       # ...
-       volumes:
-         - ./local:/bar
-         - ./local:/baz
-   ```
+      ```yaml
+      services:
+        myservice:
+          # ...
+          volumes:
+            - ./local:/bar
+            - ./local:/baz
+      ```
 
-   result:
+      result:
 
-   ```yaml
-   services:
-     myservice:
-       # ...
-       volumes:
-         - ./original:/foo
-         - ./local:/bar
-         - ./local:/baz
-   ```
+      ```yaml
+      services:
+        myservice:
+          # ...
+          volumes:
+            - ./original:/foo
+            - ./local:/bar
+            - ./local:/baz
+      ```
 
 For more merging rules, see [Merge and override](/reference/compose-file/merge.md) in the Compose Specification. 
 
