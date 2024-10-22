@@ -34,6 +34,7 @@ SSO is configured using the following steps:
 Once your SSO configuration is complete, a first-time user can sign in to Docker Hub or Docker Desktop using their company's domain email address. Once they sign in, they are added to your company, assigned to an organization, and if necessary, assigned to a team.
 
 ## Prerequisites
+
 Before configuring SSO, ensure you meet the following prerequisites:
 * To ensure users are aware of the sign in change, you must first notify your company about the new SSO login procedures.
 * Verify that your members have Docker Desktop version 4.4.2 or later installed on their machines.
