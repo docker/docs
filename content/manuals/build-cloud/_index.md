@@ -61,6 +61,13 @@ need to provide a payment method to sign up for Docker Build Cloud. If you
 select the starter plan, there will be no charges on the provided payment
 method, it's only required for verification purposes.
 
+> [!NOTE]
+>
+> After November 15, 2024 ... if your organization isn't already on a paid Docker subscription, you can
+> activate a free-trial for 7 days. You need to provide a payment method in order
+> to claim 200 free minutes. There will be no charges on the provided payment
+> method, it's only required for verification purposes.
+
 Once you've signed up and created a builder, continue by
 [setting up the builder in your local environment](./setup.md).
 
