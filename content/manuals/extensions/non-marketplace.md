@@ -41,7 +41,7 @@ ID                  PROVIDER            VERSION             UI                  
 john/my-extension   John                latest              1 tab(My-Extension)   Running(1)          -
 ```
 
-Go to the Docker Desktop Dashboard, click on **Add Extensions** and on the **Managed** tab to see the new extension installed.
+Go to the Docker Desktop Dashboard, select **Add Extensions** and on the **Managed** tab to see the new extension installed.
 Notice that an `UNPUBLISHED` label displays which indicates that the extension has not been installed from the Marketplace.
 
 ## Update an extension 

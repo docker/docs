@@ -39,7 +39,7 @@ You can install extensions through the Marketplace or through the Extensions SDK
 
 ### See containers created by extensions
 
-By default, containers created by extensions are hidden from the list of containers in Docker Desktop Dashboard and the Docker CLI. To make them visible
+By default, containers created by extensions are hidden from the list of containers in the Docker Desktop Dashboard and the Docker CLI. To make them visible
 update your settings:
 
 1. Navigate to **Settings**.
