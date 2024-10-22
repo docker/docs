@@ -36,7 +36,7 @@ For additional details about supported attributes and SCIM, see [Docker Hub API 
 
 > [!IMPORTANT]
 >
-> SSO uses Just-in-Time (JIT) provisioning by default. If you [enable SCIM](scim.md#set-up-scim), JIT values still overwrite the attribute values set by SCIM provisioning whenever users log in. To avoid conflicts, make sure your JIT values match your SCIM values. For more information, see [SSO attributes](../single-sign-on/configure/configure-idp.md#sso-attributes).
+> SSO uses Just-in-Time (JIT) provisioning by default. If you [enable SCIM](scim.md#set-up-scim), JIT values still overwrite the attribute values set by SCIM provisioning whenever users log in. To avoid conflicts, make sure your JIT values match your SCIM values. For more information, see
 
 > [!TIP]
 >
