@@ -65,7 +65,7 @@ Launch a quick demo of LocalStack by using the following steps:
    $ docker compose -f compose-native.yml up -d
    ```
 
-   This Compose file also includes specifications for a required Mongo database. You can verify the services are up and running by visiting the Docker Dashboard.
+   This Compose file also includes specifications for a required Mongo database. You can verify the services are up and running by visiting the Docker Desktop Dashboard.
 
    ![Diagram showing the LocalStack and Mongo container up and running on Docker Desktop ](./images/launch-localstack.webp)
 
@@ -91,7 +91,7 @@ Launch a quick demo of LocalStack by using the following steps:
 
     The command `s3 mb s3://mysamplebucket` tells the AWS CLI to create a new S3 bucket (mb stands for `make bucket`) named `mysamplebucket`.
 
-    You can verify if the S3 bucket gets created or not by selecting the LocalStack container on the Docker Dashboard and viewing the logs. The logs indicates that your LocalStack environment is configured correctly and you can now use the `mysamplebucket` for storing and retrieving objects.
+    You can verify if the S3 bucket gets created or not by selecting the LocalStack container on the Docker Desktop Dashboard and viewing the logs. The logs indicates that your LocalStack environment is configured correctly and you can now use the `mysamplebucket` for storing and retrieving objects.
 
     ![Diagram showing the logs of LocalStack that highlights the S3 bucket being created successfully ](./images/localstack-s3put.webp)
 
@@ -287,7 +287,7 @@ Now that you have learnt how to connect a non-containerized Node.js application 
 
 3. Stop the running services
 
-   Ensure that you stop the Node frontend and backend service from the previous step by pressing “Ctrl+C” in the terminal. Also, you'll need to stop the LocalStack and Mongo containers by selecting them in the Docker Dashboard and selecting the "Delete" button. 
+   Ensure that you stop the Node frontend and backend service from the previous step by pressing “Ctrl+C” in the terminal. Also, you'll need to stop the LocalStack and Mongo containers by selecting them in the Docker Desktop Dashboard and selecting the "Delete" button. 
 
 
 4. Start the application stack by executing the following command at the root of your cloned project directory:

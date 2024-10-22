@@ -23,7 +23,7 @@ connected to the same cloud builder.
 
 ## Show build list
 
-Select the **Builds** view in the Docker Dashboard to open the build list.
+Select the **Builds** view in the Docker Desktop Dashboard to open the build list.
 
 The build list shows your completed and ongoing builds. The **Build history**
 tab shows completed historical builds, and from here you can inspect the build

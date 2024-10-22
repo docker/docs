@@ -76,7 +76,7 @@ To verify that you container is running, run `docker ps` in a terminal
 
 To run a container using the GUI:
 
-1. In the Docker Dashboard, select the global search at the top of the window.
+1. In the Docker Desktop Dashboard, select the global search at the top of the window.
 2. Specify `mysql` in the search box, and select the `Images` tab if not already
    selected.
 3. Hover over the `msyql` image and select `Run`.
@@ -92,7 +92,7 @@ To run a container using the GUI:
    ![The optional settings screen with the options specified.](images/databases-1.webp)
 
 6. Select `Run`.
-7. Open the **Container** view in the Docker Dashboard to verify that your
+7. Open the **Container** view in the Docker Desktop Dashboard to verify that your
    container is running.
 
 {{< /tab >}}
@@ -138,7 +138,7 @@ can run `exit` to return to your terminal.
 {{< /tab >}}
 {{< tab name="GUI" >}}
 
-1. Open the Docker Dashboard and select the **Containers** view.
+1. Open the Docker Desktop Dashboard and select the **Containers** view.
 2. In the **Actions** column for your container, select **Show container
    actions** and then select **Open in terminal**.
 
@@ -184,7 +184,7 @@ guide. To stop and remove a container, either:
 
 - In a terminal, run `docker remove --force my-mysql` to remove the container
   named `my-mysql`.
-- Or, in the Docker Dashboard, select the **Delete** icon next to your
+- Or, in the Docker Desktop Dashboard, select the **Delete** icon next to your
   container in the **Containers** view.
 
 Next, you can use either the Docker Desktop GUI or CLI to run the container with
@@ -219,7 +219,7 @@ CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS  
 
 To run a container using the GUI:
 
-1. In the Docker Dashboard, select the global search at the top of the window.
+1. In the Docker Desktop Dashboard, select the global search at the top of the window.
 2. Specify `mysql` in the search box, and select the `Images` tab if not already
    selected.
 3. Hover over the `msyql` image and select `Run`.
@@ -259,7 +259,7 @@ guide. To stop and remove a container, either:
 
 - In a terminal, run `docker remove --force my-mysql` to remove the container
   named `my-mysql`.
-- Or, in the Docker Dashboard, select the **Delete** icon next to your
+- Or, in the Docker Desktop Dashboard, select the **Delete** icon next to your
   container in the **Containers** view.
 
 To create a network and run containers on it:
@@ -314,7 +314,7 @@ guide. To stop and remove a container, either:
 
 - In a terminal, run `docker remove --force my-mysql` to remove the container
   named `my-mysql`.
-- Or, in the Docker Dashboard, select the **Delete** icon next to your
+- Or, in the Docker Desktop Dashboard, select the **Delete** icon next to your
   container in the **Containers** view.
 
 Next, you can use either the Docker Desktop GUI or CLI to run the container with a volume.
@@ -389,7 +389,7 @@ data persists:
 
 1. Run a container with a volume attached.
 
-   1. In the Docker Dashboard, select the global search at the top of the window.
+   1. In the Docker Desktop Dashboard, select the global search at the top of the window.
    2. Specify `mysql` in the search box, and select the **Images** tab if not
       already selected.
    3. Hover over the **mysql** image and select **Run**.
@@ -430,7 +430,7 @@ data persists:
    you created would be lost when deleting the container.
 4. Run a container with a volume attached.
 
-   1. In the Docker Dashboard, select the global search at the top of the window.
+   1. In the Docker Desktop Dashboard, select the global search at the top of the window.
    2. Specify `mysql` in the search box, and select the **Images** tab if not
       already selected.
    3. Hover over the **mysql** image and select **Run**.
@@ -489,7 +489,7 @@ guide. To stop and remove a container, either:
 
 - In a terminal, run `docker remove --force my-mysql` to remove the container
   named `my-mysql`.
-- Or, in the Docker Dashboard, select the **Delete** icon next to your
+- Or, in the Docker Desktop Dashboard, select the **Delete** icon next to your
   container in the **Containers** view.
 
 To build and run your custom image:

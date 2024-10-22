@@ -88,9 +88,9 @@ In this step, you will run a container and publish its port using the Docker CLI
 
     The first `8080` refers to the host port. This is the port on your local machine that will be used to access the application running inside the container. The second `80` refers to the container port. This is the port that the application inside the container listens on for incoming connections. Hence, the command binds to port `8080` of the host to port `80` on the container system.
 
-3. Verify the published port by going to the **Containers** view of the Docker Dashboard.
+3. Verify the published port by going to the **Containers** view of the Docker Desktop Dashboard.
 
-   ![A screenshot of Docker dashboard showing the published port](images/published-ports.webp?w=5000&border=true)
+   ![A screenshot of Docker Desktop Dashboard showing the published port](images/published-ports.webp?w=5000&border=true)
 
 4. Open the website by either selecting the link in the **Port(s)** column of your container or visiting [http://localhost:8080](http://localhost:8080) in your browser.
 

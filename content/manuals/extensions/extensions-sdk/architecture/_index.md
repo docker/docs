@@ -9,7 +9,7 @@ weight: 50
 ---
 
 Extensions are applications that run inside the Docker Desktop. They're packaged as Docker images, distributed
-through Docker Hub, and installed by users either through the Marketplace within Docker Dashboard or the
+through Docker Hub, and installed by users either through the Marketplace within the Docker Desktop Dashboard or the
 Docker Extensions CLI.
 
 Extensions can be composed of three (optional) components:

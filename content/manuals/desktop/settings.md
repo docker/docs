@@ -14,7 +14,7 @@ weight: 150
 To navigate to **Settings** either:
 
 - Select the Docker menu {{< inline-image src="images/whale-x.svg" alt="whale menu" >}} and then **Settings**
-- Select the **Settings** icon from the Docker Dashboard.
+- Select the **Settings** icon from the Docker Desktop Dashboard.
 
 You can also locate the `settings.json` file at:
  - Mac: `~/Library/Group Containers/group.com.docker/settings.json`
@@ -34,7 +34,7 @@ On the **General** tab, you can configure when to start Docker and specify other
 - **Choose theme for Docker Desktop**. Choose whether you want to apply a **Light** or **Dark** theme to Docker Desktop. Alternatively you can set Docker Desktop to **Use system settings**.
 
 - **Choose container terminal**. Determines which terminal is launched when opening the terminal from a container.
-If you choose the integrated terminal, you can run commands in a running container straight from the Docker Dashboard. For more information, see [Explore containers](/manuals/desktop/use-desktop/container.md).
+If you choose the integrated terminal, you can run commands in a running container straight from the Docker Desktop Dashboard. For more information, see [Explore containers](/manuals/desktop/use-desktop/container.md).
 
 - **Enable Docker terminal**. Interact with your host machine and execute commands directly from Docker Desktop.
 
@@ -432,14 +432,14 @@ select the **Release Notes** option to learn what's included in the updated vers
 
 Turn off the check for updates by clearing the **Automatically check for updates**
 check box. This disables notifications in the Docker menu and the notification
-badge that appears on the Docker Dashboard. To check for updates manually, select
+badge that appears on the Docker Desktop Dashboard. To check for updates manually, select
 the **Check for updates** option in the Docker menu.
 
 To allow Docker Desktop to automatically download new updates in the background,
 select **Always download updates**. This downloads newer versions of Docker Desktop
 when an update becomes available. After downloading the update, select
 **Apply and Restart** to install the update. You can do this either through the
-Docker menu or in the **Updates** section in the Docker Dashboard.
+Docker menu or in the **Updates** section in the Docker Desktop Dashboard.
 
 ## Extensions
 
@@ -485,7 +485,7 @@ Use the **Notifications** tab to turn on or turn off notifications for the follo
 
 By default, all notifications are turned on. You'll always receive error notifications and notifications about new Docker Desktop releases and updates.
 
-Notifications momentarily appear in the lower-right of the Docker Dashboard and then move to the **Notifications** drawer. To open the **Notifications** drawer, select {{< inline-image src="images/notifications.svg" alt="notifications" >}}.
+Notifications momentarily appear in the lower-right of the Docker Desktop Dashboard and then move to the **Notifications** drawer. To open the **Notifications** drawer, select {{< inline-image src="images/notifications.svg" alt="notifications" >}}.
 
 ## Advanced
 
