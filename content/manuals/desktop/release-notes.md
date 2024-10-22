@@ -508,7 +508,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
   - Removed non-official Docker image used for Rust cross-compilation.
 - The maximum number of files per [Synchronized file share](synchronized-file-sharing.md) now exceeds 2 million.
 - Fixed an issue that caused the warning: "_The value provided to Autocomplete is invalid._" when selecting the **Export to local image** field.
-- **Run Cloud** can now be accessed from the Docker Dashboard.
+- **Run Cloud** can now be accessed from the Docker Desktop Dashboard.
 - Opting out from sending analytics will now also disable collecting data for bug reports.
 - You can now share and unshare a port to the Cloud Engine in the **Containers** view.
 - Shared cloud can now be accessed from the footer in the right-hand side of the **Dashboard**.
@@ -967,7 +967,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 #### For Windows
 
-- Fixed a bug on Docker Desktop for Windows where the Docker Dashboard wouldn't display container logs correctly. Fixes [docker/for-win#13714](https://github.com/docker/for-win/issues/13714).
+- Fixed a bug on Docker Desktop for Windows where the Docker Desktop Dashboard wouldn't display container logs correctly. Fixes [docker/for-win#13714](https://github.com/docker/for-win/issues/13714).
 
 ## 4.24.0
 
@@ -975,10 +975,10 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 ### New
 
-- The new Notification center is now available to all users so you can be notified of new releases, installation progress updates, and more. Select the bell icon in the bottom-right corner of the Docker Dashboard to access the notification center.
+- The new Notification center is now available to all users so you can be notified of new releases, installation progress updates, and more. Select the bell icon in the bottom-right corner of the Docker Desktop Dashboard to access the notification center.
 - Compose Watch is now available to all users. For more information, see [Use Compose Watch](/manuals/compose/how-tos/file-watch.md).
 - Resource Saver is now available to all users and is enabled by default. To configure this feature, navigate to the **Resources** tab in **Settings**. For more information see [Docker Desktop's Resource Saver mode](use-desktop/resource-saver.md).
-- You can now view and manage the Docker Engine state, with pause, stop, and resume, directly from the Docker Dashboard.
+- You can now view and manage the Docker Engine state, with pause, stop, and resume, directly from the Docker Desktop Dashboard.
 
 ### Upgrades
 
@@ -1071,7 +1071,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
   - Enroll an organization with Docker scout with `docker scout enroll`.
   - Stop, analyze, and compare local file systems with `docker scout cves --type fs`.
 - Fixed a bug where `docker stats` would hang when Docker Desktop was in Resource Saver mode.
-- Fixed a bug where turning off experimental features via **Settings** in the Docker Dashboard would not fully turn off Resource Saver mode.
+- Fixed a bug where turning off experimental features via **Settings** in the Docker Desktop Dashboard would not fully turn off Resource Saver mode.
 - Fixed a bug where the **Containers list** action button was clipped.
 - containerd image store:
   - Fixed `failed to read config content` error when interacting with some images.
@@ -1591,7 +1591,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 - Fixed a bug where the user is prompted for new HTTP proxy credentials repeatedly until Docker Desktop is restarted.
 - Added a diagnostics command `com.docker.diagnose login` to check HTTP proxy configuration.
 - Fixed actions on compose stack not working properly. Fixes [docker/for-mac#6566](https://github.com/docker/for-mac/issues/6566).
-- Fixed the Docker dashboard trying at startup to get disk usage information and display an error banner before the engine was running.
+- Fixed the Docker Desktop Dashboard trying at startup to get disk usage information and display an error banner before the engine was running.
 - Added an informational banner with instructions on how to opt-out of experimental feature access next to all experimental features.
 - Docker Desktop now supports downloading Kubernetes images via an HTTP proxy.
 - Fixed tooltips to not block action buttons. Fixes [docker/for-mac#6516](https://github.com/docker/for-mac/issues/6516).
@@ -1631,7 +1631,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 - Docker Desktop for Mac no longer needs to install the privileged helper process `com.docker.vmnetd` on install or on the first run. For more information see [Permission requirements for Mac](https://docs.docker.com/desktop/mac/permission-requirements/).
 - Added [WebAssembly capabilities](wasm/_index.md). Use with the [containerd integration](containerd/_index.md).
 - Improved the descriptions for beta and experimental settings to clearly explain the differences and how people can access them.
-- Available disk space of VM now displays in the footer of Docker Dashboard for Mac and Linux.
+- Available disk space of VM now displays in the footer of Docker Desktop Dashboard for Mac and Linux.
 - A disk space warning now displays in the footer if available space is below 3GB.
 - Changes to Docker Desktop's interface as we become more ADA accessible and visually unified.
 - Added a **Build** tab inside **Extensions** which contains all the necessary resources to build an extension.
@@ -2085,7 +2085,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 ### New
 
 - Added additional guides on the homepage for: Elasticsearch, MariaDB, Memcached, MySQL, RabbitMQ and Ubuntu.
-- Added a footer to the Docker Dashboard with general information about the Docker Desktop update status and Docker Engine statistics
+- Added a footer to the Docker Desktop Dashboard with general information about the Docker Desktop update status and Docker Engine statistics
 - Re-designed the containers table, adding:
   - A button to copy a container ID to the clipboard
   - A pause button for each container
@@ -2108,7 +2108,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 - Fixed an issue which caused Docker Desktop to hang if you quit the app whilst Docker Desktop was paused.
 - Fixed the Kubernetes cluster not resetting properly after the PKI expires.
 - Fixed an issue where the Extensions Marketplace was not using the defined http proxies.
-- Improved the logs search functionality in Docker Dashboard to allow spaces.
+- Improved the logs search functionality in Docker Desktop Dashboard to allow spaces.
 - Middle-button mouse clicks on buttons in the Dashboard now behave as a left-button click instead of opening a blank window.
 
 #### For Mac
@@ -2307,7 +2307,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 #### For all platforms
 
-- The Docker Dashboard Volume Management feature now offers the ability to efficiently clean up volumes using multi-select checkboxes.
+- The Docker Desktop Dashboard Volume Management feature now offers the ability to efficiently clean up volumes using multi-select checkboxes.
 
 #### For Mac
 
@@ -2378,7 +2378,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 #### For Windows
 
 - Fixed an issue that caused new installations to default to the Hyper-V backend instead of WSL 2.
-- Fixed a crash in the Docker Dashboard which would make the systray menu disappear.
+- Fixed a crash in the Docker Desktop Dashboard which would make the systray menu disappear.
 
 If you are running Docker Desktop on Windows Home, installing 4.5.1 will switch it back to WSL 2 automatically. If you are running another version of Windows, and you want Docker Desktop to use the WSL 2 backend, you must manually switch by enabling the **Use the WSL 2 based engine** option in the **Settings > General** section.
 Alternatively, you can edit the Docker Desktop settings file located at `%APPDATA%\Docker\settings.json` and manually switch the value of the `wslEngineEnabled` field to `true`.
@@ -2416,7 +2416,7 @@ Alternatively, you can edit the Docker Desktop settings file located at `%APPDAT
 #### For Mac
 
 - Fixed an issue that caused the VM to become unresponsive during startup when using `osxfs` and when no host directories are shared with the VM.
-- Fixed an issue that didn't allow users to stop a Docker Compose application using Docker Dashboard if the application was started in a different version of Docker Compose. For example, if the user started a Docker Compose application in V1 and then switched to Docker Compose V2, attempts to stop the Docker Compose application would fail.
+- Fixed an issue that didn't allow users to stop a Docker Compose application using Docker Desktop Dashboard if the application was started in a different version of Docker Compose. For example, if the user started a Docker Compose application in V1 and then switched to Docker Compose V2, attempts to stop the Docker Compose application would fail.
 - Fixed an issue where Docker Desktop incorrectly prompted users to sign in after they quit Docker Desktop and start the application.
 - Fixed an issue where the **About Docker Desktop** window wasn't working anymore.
 - Limit the number of CPUs to 8 on Mac M1 to fix the startup problem. Fixes [docker/for-mac#6063](https://github.com/docker/for-mac/issues/6063).
@@ -2598,7 +2598,7 @@ CVE-2021-44228](https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/).
 
 ### Known issue
 
-Docker Dashboard incorrectly displays the container memory usage as zero on
+Docker Desktop Dashboard incorrectly displays the container memory usage as zero on
 Hyper-V based machines.
 You can use the [`docker stats`](/reference/cli/docker/container/stats.md)
 command on the command line as a workaround to view the
@@ -2624,7 +2624,7 @@ actual memory usage. See
 
 - Ships [Docker Public Roadmap#228](https://github.com/docker/roadmap/issues/228)
 
-**Window management**: The Docker Dashboard window size and position persists when you close and reopen Docker Desktop.
+**Window management**: The Docker Desktop Dashboard window size and position persists when you close and reopen Docker Desktop.
 
 ### Upgrades
 
@@ -2640,7 +2640,7 @@ actual memory usage. See
 #### For all platforms
 
 - Improved: Self-diagnose now also checks for overlap between host IPs and `docker networks`.
-- Fixed the position of the indicator that displays the availability of an update on the Docker Dashboard.
+- Fixed the position of the indicator that displays the availability of an update on the Docker Desktop Dashboard.
 
 #### For Mac
 
@@ -2667,7 +2667,7 @@ actual memory usage. See
 > When upgrading from 4.1.0, the Docker menu does not change to **Update and restart** so you can just wait for the download to complete (icon changes) and then select **Restart**. This bug is fixed in 4.1.1, for future upgrades.
 
 - Fixed a bug where a `Docker.qcow2` file would be ignored on upgrade and a fresh `Docker.raw` used instead, resulting in containers and images disappearing. If a system has both files (due to the previous bug), then the most recently modified file will be used to avoid recent containers and images disappearing again. To force the use of the old `Docker.qcow2`, delete the newer `Docker.raw` file. Fixes [docker/for-mac#5998](https://github.com/docker/for-mac/issues/5998).
-- Fixed the update notification overlay sometimes getting out of sync between the **Settings** button and the **Software update** button in the Docker Dashboard.
+- Fixed the update notification overlay sometimes getting out of sync between the **Settings** button and the **Software update** button in the Docker Desktop Dashboard.
 - Fixed the menu entry to install a newly downloaded Docker Desktop update. When an update is ready to install, the **Restart** option changes to **Update and restart**.
 
 #### For Windows
@@ -2729,7 +2729,7 @@ Docker Desktop may fail to start when upgrading to 4.1.0 on some WSL-based distr
 
 #### For all platforms
 
-- Fixed a bug where copy-paste was not available in the Docker Dashboard.
+- Fixed a bug where copy-paste was not available in the Docker Desktop Dashboard.
 
 #### For Windows
 

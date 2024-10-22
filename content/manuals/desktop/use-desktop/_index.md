@@ -1,6 +1,6 @@
 ---
-description: Learn how to use the Docker Dashboard within Docker Desktop, including Quick search, the Docker menu, and more
-keywords: Docker Dashboard, manage, containers, gui, dashboard, images, user manual,
+description: Learn how to use the Docker Desktop Dashboard within Docker Desktop, including Quick search, the Docker menu, and more
+keywords: Docker Desktop Dashboard, manage, containers, gui, dashboard, images, user manual,
   whale menu
 title: Explore Docker Desktop
 weight: 30
@@ -8,9 +8,9 @@ aliases:
 - /desktop/dashboard/
 ---
 
-When you open Docker Desktop, the Docker Dashboard displays.
+When you open Docker Desktop, the Docker Desktop Dashboard displays.
 
-![Docker Dashboard on Containers view](../images/dashboard.webp)
+![Docker Desktop Dashboard on Containers view](../images/dashboard.webp)
 
 The **Containers** view provides a runtime view of all your containers and applications. It allows you to interact with containers and applications, and manage the lifecycle of your applications directly from your machine. This view also provides an intuitive interface to perform common actions to inspect, interact with, and manage your Docker objects including containers and Docker Compose-based applications. For more information, see [Explore running containers and applications](container.md).
 
@@ -20,11 +20,11 @@ The **Volumes** view displays a list of volumes and allows you to easily create 
 
 The **Builds** view lets you inspect your build history and manage builders. By default, it displays a list of all your ongoing and completed builds. [Explore builds](builds.md).
 
-In addition, the Docker Dashboard allows you to:
+In addition, the Docker Desktop Dashboard allows you to:
 
 - Navigate to the **Settings** menu to configure your Docker Desktop settings. Select the **Settings** icon in the Dashboard header.
 - Access the **Troubleshoot** menu to debug and perform restart operations. Select the **Troubleshoot** icon in the Dashboard header.
-- Be notified of new releases, installation progress updates, and more in the **Notifications center**. Select the bell icon in the bottom-right corner of the Docker Dashboard to access the notification center.
+- Be notified of new releases, installation progress updates, and more in the **Notifications center**. Select the bell icon in the bottom-right corner of the Docker Desktop Dashboard to access the notification center.
 - Access the **Learning center** from the Dashboard header. It helps you get started with quick in-app walkthroughs and provides other resources for learning about Docker. 
 
   For a more detailed guide about getting started, see [Get started](/get-started/introduction/_index.md).
@@ -33,7 +33,7 @@ In addition, the Docker Dashboard allows you to:
 
 ## Quick search
 
-From the Docker Dashboard you can use Quick Search, which is located in the Dashboard header, to search for:
+From the Docker Desktop Dashboard you can use Quick Search, which is located in the Dashboard header, to search for:
 
 - Any container or Compose application on your local system. You can see an overview of associated environment variables or perform quick actions, such as start, stop, or delete.
 
@@ -51,7 +51,7 @@ Docker Desktop also provides an easy-access tray icon that appears in the taskba
 
 To display the Docker menu, select the {{< inline-image src="../../assets/images/whale-x.svg" alt="whale menu" >}} icon. It displays the following options:
 
-- **Dashboard**. This takes you to the Docker Dashboard.
+- **Dashboard**. This takes you to the Docker Desktop Dashboard.
 - **Sign in/Sign up**
 - **Settings**
 - **Check for updates**

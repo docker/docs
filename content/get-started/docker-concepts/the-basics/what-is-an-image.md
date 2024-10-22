@@ -48,17 +48,17 @@ In this hands-on, you will learn how to search and pull a container image using 
 
 ### Search for and download an image
 
-1. Open the Docker Dashboard and select the **Images** view in the left-hand navigation menu.
+1. Open the Docker Desktop Dashboard and select the **Images** view in the left-hand navigation menu.
 
-    ![A screenshot of the Docker Dashboard showing the image view on the left sidebar](images/click-image.webp?border=true&w=1050&h=400)
+    ![A screenshot of the Docker Desktop Dashboard showing the image view on the left sidebar](images/click-image.webp?border=true&w=1050&h=400)
 
 2. Select the **Search images to run** button. If you don't see it, select the _global search bar_ at the top of the screen.
 
-    ![A screenshot of the Docker Dashboard showing the search ta](images/search-image.webp?border)
+    ![A screenshot of the Docker Desktop Dashboard showing the search ta](images/search-image.webp?border)
 
 3. In the **Search** field, enter "welcome-to-docker". Once the search has completed, select the `docker/welcome-to-docker` image.
 
-    ![A screenshot of the Docker Dashboard showing the search results for the docker/welcome-to-docker image](images/select-image.webp?border=true&w=1050&h=400)
+    ![A screenshot of the Docker Desktop Dashboard showing the search results for the docker/welcome-to-docker image](images/select-image.webp?border=true&w=1050&h=400)
 
 4. Select **Pull** to download the image.
 
@@ -67,11 +67,11 @@ In this hands-on, you will learn how to search and pull a container image using 
 
 Once you have an image downloaded, you can learn quite a few details about the image either through the GUI or the CLI.
 
-1. In the Docker Dashboard, select the **Images** view.
+1. In the Docker Desktop Dashboard, select the **Images** view.
 
 2. Select the **docker/welcome-to-docker** image to open details about the image.
 
-    ![A screenshot of the Docker Dashboard showing the images view with an arrow pointing to the docker/welcome-to-docker image](images/pulled-image.webp?border=true&w=1050&h=400)
+    ![A screenshot of the Docker Desktop Dashboard showing the images view with an arrow pointing to the docker/welcome-to-docker image](images/pulled-image.webp?border=true&w=1050&h=400)
 
 3. The image details page presents you with information regarding the layers of the image, the packages and libraries installed in the image, and any discovered vulnerabilities.
 

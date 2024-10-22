@@ -28,7 +28,7 @@ To install an extension which is not present in the Marketplace, you can use the
 
 In a terminal, type `docker extension install IMAGE[:TAG]` to install an extension by its image reference and optionally a tag. Use the `-f` or `--force` flag to avoid interactive confirmation.
 
-Go to the Docker Dashboard to see the new extension installed.
+Go to the Docker Desktop Dashboard to see the new extension installed.
 
 ## List installed extensions
 
@@ -41,7 +41,7 @@ ID                  PROVIDER            VERSION             UI                  
 john/my-extension   John                latest              1 tab(My-Extension)   Running(1)          -
 ```
 
-Go to the Docker Dashboard, click on **Add Extensions** and on the **Managed** tab to see the new extension installed.
+Go to the Docker Desktop Dashboard, click on **Add Extensions** and on the **Managed** tab to see the new extension installed.
 Notice that an `UNPUBLISHED` label displays which indicates that the extension has not been installed from the Marketplace.
 
 ## Update an extension 
@@ -49,7 +49,7 @@ Notice that an `UNPUBLISHED` label displays which indicates that the extension h
 To update an extension which isn't present in the Marketplace, in a terminal type `docker extension update IMAGE[:TAG]` where the `TAG` should be different from the extension that's already installed.
 
 For instance, if you installed an extension with `docker extension install john/my-extension:0.0.1`, you can update it by running `docker extension update john/my-extension:0.0.2`.
-Go to the Docker Dashboard to see the new extension updated.
+Go to the Docker Desktop Dashboard to see the new extension updated.
 
 > [!NOTE]
 >

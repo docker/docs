@@ -345,14 +345,14 @@ Once built, you need to update it, or install it if you haven't already done so.
 docker extension update awesome-inc/my-extension:latest
 ```
 
-Now you can see the backend service running in the **Containers8* tab of the Docker Dashboard and watch the logs when you need to debug it.
+Now you can see the backend service running in the **Containers** view of the Docker Desktop Dashboard and watch the logs when you need to debug it.
 
 > [!TIP]
 >
 > You may need to turn on the **Show system containers** option in **Settings** to see the backend container running.
 > See [Show extension containers](../dev/test-debug.md#show-the-extension-containers) for more information.
 
-Open Docker Dashboard and select the **Containers** tab. You should see the response from the backend service
+Open the Docker Desktop Dashboard and select the **Containers** tab. You should see the response from the backend service
 call displayed.
 
 ## What's next?

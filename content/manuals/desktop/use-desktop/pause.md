@@ -1,6 +1,6 @@
 ---
-description: understand what pausing Docker Dashboard means
-keywords: Docker Dashboard, manage, containers, gui, dashboard, pause, user manual
+description: understand what pausing Docker Desktop Dashboard means
+keywords: Docker Desktop Dashboard, manage, containers, gui, dashboard, pause, user manual
 title: Pause Docker Desktop
 weight: 60
 ---
@@ -9,7 +9,7 @@ When Docker Desktop is paused, the Linux VM running Docker Engine is paused, the
 
 You can manually pause Docker Desktop by selecting the Docker menu {{< inline-image src="../images/whale-x.svg" alt="whale menu" >}} and then **Pause**. To manually resume Docker Desktop, select the **Resume** option in the Docker menu, or run any Docker CLI command.
 
-When you manually pause Docker Desktop, a paused status displays on the Docker menu and on the Docker Dashboard. You can still access the **Settings** and the **Troubleshoot** menu.
+When you manually pause Docker Desktop, a paused status displays on the Docker menu and on the Docker Desktop Dashboard. You can still access the **Settings** and the **Troubleshoot** menu.
 
 >**Tip**
 >

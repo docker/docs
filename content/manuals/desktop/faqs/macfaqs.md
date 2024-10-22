@@ -45,7 +45,7 @@ Docker Desktop stores Linux containers and images in a single, large "disk image
 
 #### Where is the disk image file?
 
-To locate the disk image file, select **Settings** from the Docker Dashboard then **Advanced** from the **Resources** tab.
+To locate the disk image file, select **Settings** from the Docker Desktop Dashboard then **Advanced** from the **Resources** tab.
 
 The **Advanced** tab displays the location of the disk image. It also displays the maximum size of the disk image and the actual space the disk image is consuming. Note that other tools might display space usage of the file in terms of the maximum file size, and not the actual file size.
 
