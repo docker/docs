@@ -67,7 +67,6 @@ webapp:
     - "/data"
   environment:
     - DEBUG=1
-    - ANOTHER_VARIABLE=value
 ```
 
 > [!IMPORTANT]
