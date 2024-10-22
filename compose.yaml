@@ -10,4 +10,4 @@ services:
       watch:
         - action: sync
           path: .
-          target: /src
+          target: /project
