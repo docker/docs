@@ -40,4 +40,4 @@ While Testcontainers library automatically handles container lifecycle managemen
 
 ### Is there a free tier or pricing model for Testcontainers Cloud?
 
-Yes, free Testcontainers Cloud minutes are available to use for Docker Desktop or in CI workflows and are included in the Docker Pro, Docker Team, and Docker Business subscriptions. Customers will have the option to add runtime minutes as their needs grow.
+Pricing details for Testcontainers Cloud can be found on the [pricing page](https://testcontainers.com/cloud/pricing/).
