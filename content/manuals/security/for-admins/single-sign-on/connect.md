@@ -174,8 +174,8 @@ After creating your connection in Docker and your IdP, you can cross-connect the
     - **Client Secret**
     - **Azure AD Domain**
 3. Select **Next**.
-7. Optional. Select a default team to provision users to and select **Next**.
-8. Verify your SSO connection details and select **Create Connection**.
+4. Optional. Select a default team to provision users to and select **Next**.
+5. Verify your SSO connection details and select **Create Connection**.
 
 {{< /tab >}}
 {{< /tabs >}}
