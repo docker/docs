@@ -72,7 +72,7 @@ In this hands-on guide, you'll unlock the power of multi-stage builds to create 
     For this demonstration, you’ve paired Maven build automation with Java, a Spring Web dependency, and Java 21 for your metadata.
 
 
-3. Navigate the project directory. Once you unzip the file, you'll see the following project directory structure:
+4. Navigate the project directory. Once you unzip the file, you'll see the following project directory structure:
 
 
     ```plaintext
@@ -109,7 +109,7 @@ In this hands-on guide, you'll unlock the power of multi-stage builds to create 
    contains most of the information needed to build a customized project. The POM is huge and can seem    
    daunting. Thankfully, you don't yet need to understand every intricacy to use it effectively. 
 
-4. Create a RESTful web service that displays "Hello World!". 
+5. Create a RESTful web service that displays "Hello World!". 
 
     
     Under the `src/main/java/com/example/spring_boot_docker/` directory, you can modify your  
