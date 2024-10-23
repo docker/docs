@@ -147,7 +147,9 @@ After creating your connection in Docker and your IdP, you can cross-connect the
 3. Open Docker Hub or the Admin Console. Your SSO configuration page should still be open from Step one of this guide.
 4. Select **Next** to open the **Update single-sign on connection** page.
 5. Paste your Okta **SAML Sign-in URL** and **x509 Certificate** values in Docker.
-6. Select **Next** to complete the SSO connection.
+6. Select **Next**.
+7. Optional. Select a default team to provision users to and select **Next**.
+8. Verify your SSO connection details and select **Create Connection**.
 
 {{< /tab >}}
 {{< tab name="Entra ID SAML 2.0" >}}
@@ -159,7 +161,9 @@ After creating your connection in Docker and your IdP, you can cross-connect the
     - Copy your the contents of your **Certificate (Base64)** file from your text editor
 4. Open Docker Hub or the Admin Console. Your SSO configuration page should still be open from Step one of this guide.
 5. Paste your **Login URL** and **Certificate (Base64)** values in Docker.
-6. Select **Next** to complete the SSO connection.
+6. Select **Next**.
+7. Optional. Select a default team to provision users to and select **Next**.
+8. Verify your SSO connection details and select **Create Connection**.
 
 {{< /tab >}}
 {{< tab name="Azure Connect (OIDC)" >}}
@@ -169,7 +173,9 @@ After creating your connection in Docker and your IdP, you can cross-connect the
     - **Client ID**
     - **Client Secret**
     - **Azure AD Domain**
-3. Select **Next** to complete the SSO connection.
+3. Select **Next**.
+7. Optional. Select a default team to provision users to and select **Next**.
+8. Verify your SSO connection details and select **Create Connection**.
 
 {{< /tab >}}
 {{< /tabs >}}
