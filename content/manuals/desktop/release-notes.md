@@ -27,7 +27,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 {{< release-date date="2024-10-24" >}}
 
-{{< desktop-install-v2 all=true beta_win_arm=true version="4.35.0" build_path="/TBD/" >}}
+{{< desktop-install-v2 all=true beta_win_arm=true version="4.35.0" build_path="/172508/" >}}
 
 ### New
 
@@ -74,6 +74,8 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 - Fixed a bug where auto-start containers could be misconfigured after changing filesharing type in settings.
 - Fixed a bug that would cause `~/.docker/cli-plugins` to not be populated on start-up.
+- Fixed a bug that prevented php composer or postgres to start as non root user. Fixes [docker/for-mac#7415](https://github.com/docker/for-mac/issues/7415).
+- Fixed a bug that could cause file changed on the host to appear truncated. Fixes [docker/for-mac#7438](https://github.com/docker/for-mac/issues/7438).
 
 #### For Windows
 
@@ -88,6 +90,9 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 - Ubuntu 24.04 is now supported on Docker Desktop.
 
 ### Known issues
+
+#### For Mac
+- Since version 4.34.0, the toggle "Allow privileged port mapping" in the Advanced settings does not work. For more information, see [docker/for-mac#7460](https://github.com/docker/for-mac/issues/7460).
 
 #### For Windows
 
