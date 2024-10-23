@@ -1,8 +1,17 @@
 ---
-title: Install and configure
+title: Use the MSI installer
 description: Understand how to use the MSI installer. Also explore additional configuration options.
 keywords: msi, windows, docker desktop, install, deploy, configure
+aliases:
+- /desktop/install/msi/install-and-configure/
+weight: 10
 ---
+
+> [!NOTE]
+>
+> The MSI installer is available to all company and organization owners with a Business subscription and Docker Desktop version 4.32 and later.
+
+The MSI package supports various MDM (Mobile Device Management) solutions, making it ideal for bulk installations and eliminating the need for manual setups by individual users. With this package, IT administrators can ensure standardized, policy-driven installations of Docker Desktop, enhancing efficiency and software management across their organizations.
 
 ## Install interactively
 
@@ -10,7 +19,7 @@ keywords: msi, windows, docker desktop, install, deploy, configure
 
 2. Under **Security and access**, select the **Deploy Docker Desktop** page. 
 
-3. Select the **Download MSI installer** button. 
+3. From the **Windows OS** tab, select the **Download MSI installer** button. 
 
 4. Once downloaded, double-click `Docker Desktop Installer.msi` to run the installer. 
 
@@ -42,7 +51,7 @@ If your administrator account is different to your user account, you must add th
 >
 > Docker Desktop notifies you when an update is available. To update Docker Desktop, download the latest installer from the Docker Admin Console. Navigate to the  **Deploy Docker Desktop** page > under **Security and access**. 
 >
-> To keep up to date with new releases, check the [release notes](https://docs.docker.com/desktop/release-notes/) page.
+> To keep up to date with new releases, check the [release notes](/manuals/desktop/release-notes.md) page.
 
 ## Install from the command line
 
