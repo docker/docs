@@ -41,7 +41,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 ### Upgrades
 
-- [Containerd v1.7.21](https://github.com/containerd/containerd/releases/tag/v1.7.21)
+- [containerd v1.7.21](https://github.com/containerd/containerd/releases/tag/v1.7.21)
 - [Docker Buildx v0.17.1](https://github.com/docker/buildx/releases/tag/v0.17.1)
 - [Docker Compose v2.29.7](https://github.com/docker/compose/releases/tag/v2.29.7)
 - [Docker Engine v27.3.1](https://docs.docker.com/engine/release-notes/27.3/#2731)
@@ -71,6 +71,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 - Improved efficiency of host-side disk utilization for fresh installations on Mac and Linux.
 - Fixed a bug that prevented the Sign in enforcement popup to be triggered when token expires.
 - Fixed a bug where containers would not be displayed in the GUI immediately after signing in when using [enforced sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md).
+- `settings.json` has been renamed to `settings-store.json`
 
 #### For Mac
 
