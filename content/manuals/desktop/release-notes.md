@@ -25,7 +25,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 ## 4.35.0
 
-{{< release-date date="2024-10-10" >}}
+{{< release-date date="2024-10-24" >}}
 
 {{< desktop-install-v2 all=true beta_win_arm=true version="4.35.0" build_path="/TBD/" >}}
 
@@ -34,12 +34,10 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 - Support for [Docker Desktop on Red Hat Enterprise Linux](/manuals/desktop/install/linux/rhel.md) is now generally available.
 - Volume Backup and Share is now generally available and can be found in the **Volumes** tab.
 - Terminal support within Docker Desktop using system shells is now generally available.
-- Enhanced support for IPv6, allowing users to configure their Docker VM for IPv4-only, dual-stack, or IPv6-only operation. See [IPv6 documentation](https://docs.docker.com/go/desktop-ipv6-only).
 - containerd image store:
   - Improved output of `docker image inspect` to account for multi-platform images.
   - Support multi-platform images via enabling users to pick a specific platform in `docker history`.
 - Beta release of Docker VMM - the faster alternative to Apple's Virtualization Framework on macOS (requires Apple Silicon and macOS 12.5 or later).
-- Configure CLI completion scripts on Mac.
 
 ### Upgrades
 
@@ -70,18 +68,28 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
   - Highlight build check warnings in the **Completed builds** list.
   - Improve visualization for the build time charts.
   - Image tags added to **Build results** section under the **Info** tab.
+- Improved efficiency of host-side disk utilization for fresh installations on Mac and Linux.
+- Fixed a bug that prevented the Sign in enforcement popup to be triggered when token expires.
+- Fixed a bug where containers would not be displayed in the GUI immediately after signing in when using [enforced sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md).
 
 #### For Mac
 
 - Fixed a bug where mount point permissions were `root:root`, using new virtualization mode.
 - Fixed a bug where auto-start containers could be misconfigured after changing filesharing type in settings.
 - Use `libkrun` virtualization on Apple Silicon Macs as an experimental feature. Note this is incompatible with Rosetta.
+- Fixed a bug that would cause `~/.docker/cli-plugins` to not get populated on start-up.
 
 #### For Windows
 
 - New installations of Docker Desktop for Windows now require a Windows version of 19045 or later.
 - Fixed an issue that caused a start failure if IPv6 is disabled either in the kernel config or via the kernel command-line in WSL. Fixes [docker/for-win#14240](https://github.com/docker/for-win/issues/14240)
 - Fixed the **Clean / Purge data** button on Windows. Fixes [docker/for-win#12650](https://github.com/docker/for-win/issues/14308).
+- Disk usage statistics is now displayed in the Dashboard footer installations.
+- Improved recovery for WSL distribution issues.
+
+#### For Linux
+
+- Ubuntu 24.04 is now supported on Docker Desktop.
 
 ### Known issues
 
