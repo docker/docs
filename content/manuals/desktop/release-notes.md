@@ -32,14 +32,12 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 ### New
 
 - Support for [Docker Desktop on Red Hat Enterprise Linux](/manuals/desktop/install/linux/rhel.md) is now generally available.
-- Volume Backup and Share is now generally available and can be found in the **Volumes** tab.
+- Volume Backup and Share is now generally available and can be found in the **Volumes** view.
 - Terminal support within Docker Desktop using system shells is now generally available.
 - containerd image store:
   - Improved output of `docker image inspect` to account for multi-platform images.
   - Support multi-platform images via enabling users to pick a specific platform in `docker history`.
-- Beta release of Docker VMM - the faster alternative to Apple's Virtualization Framework on macOS (requires Apple Silicon and macOS 12.5 or later).
-
-### Upgrades
+- Beta release of Docker VMM - the more performant alternative to Apple Virtualization Framework on macOS (requires Apple Silicon and macOS 12.5 or later).### Upgrades
 
 - [containerd v1.7.21](https://github.com/containerd/containerd/releases/tag/v1.7.21)
 - [Docker Buildx v0.17.1](https://github.com/docker/buildx/releases/tag/v0.17.1)
@@ -55,7 +53,6 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 - Fixed a bug where proxy settings in `daemon.json` would override proxies set in Docker Desktop settings.
 - Fixed a bug where some Docker subnet ranges were not able to be used.
-- Added Docker VMM, a new powerful backend for creating and managing Docker Desktop Linux VM.
 - Removed [docker-index](https://github.com/docker/index-cli-plugin) as it is now deprecated, you can use `docker scout cves fs://<path to binary>` instead.
 - Fixed a bug where images couldn't be sorted or filtered by tag. Fixes [docker/for-win#14297](https://github.com/docker/for-win/issues/14297).
 - Fixed a bug where the `docker` CLI did not work as expected when the `registry.json` file was malformed.
@@ -75,10 +72,8 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 #### For Mac
 
-- Fixed a bug where mount point permissions were `root:root`, using new virtualization mode.
 - Fixed a bug where auto-start containers could be misconfigured after changing filesharing type in settings.
-- Use `libkrun` virtualization on Apple Silicon Macs as an experimental feature. Note this is incompatible with Rosetta.
-- Fixed a bug that would cause `~/.docker/cli-plugins` to not get populated on start-up.
+- Fixed a bug that would cause `~/.docker/cli-plugins` to not be populated on start-up.
 
 #### For Windows
 
