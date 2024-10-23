@@ -9,6 +9,8 @@ ARG GO_VERSION=1.23
 ARG HTMLTEST_VERSION=0.17.0
 # HUGO_VERSION sets the version of Hugo to build the site with
 ARG HUGO_VERSION=0.136.2
+# NGINX_VERSION sets the version of Nginx to use in the runtime image
+ARG NGINX_VERSION=1.27
 
 # build-base is the base stage used for building the site
 FROM ghcr.io/gohugoio/hugo:v${HUGO_VERSION} AS build-base
@@ -131,3 +133,7 @@ EOT
 FROM scratch AS release
 COPY --from=build /out /
 COPY --from=pagefind /pagefind /pagefind
+
+# image creates a Docker image for the documentation site
+FROM nginx:${NGINX_VERSION}-alpine AS image
+COPY --from=release / /usr/share/nginx/html
