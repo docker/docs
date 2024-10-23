@@ -57,10 +57,12 @@ In this hands-on guide, you'll unlock the power of multi-stage builds to create 
 
 1. [Download and install](https://www.docker.com/products/docker-desktop/) Docker Desktop.
 
-2. Open this [pre-initialized project](https://start.spring.io/#!type=maven-project&language=java&platformVersion=3.3.0-M3&packaging=jar&jvmVersion=21&groupId=com.example&artifactId=spring-boot-docker&name=spring-boot-docker&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.spring-boot-docker&dependencies=web) to generate a ZIP file. Here’s how that looks:
+2. [Download and install](https://www.oracle.com/java/technologies/downloads/) Java.
+
+3. Open this [pre-initialized project](https://start.spring.io/#!type=maven-project&language=java&platformVersion=3.4.0-M3&packaging=jar&jvmVersion=21&groupId=com.example&artifactId=spring-boot-docker&name=spring-boot-docker&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.spring-boot-docker&dependencies=web) to generate a ZIP file. Here’s how that looks:
 
 
-    ![A screenshot of Spring Initializr tool selected with Java 21, Spring Web and Spring Boot 3.3.0](images/spring-initializr.webp?border=true)
+    ![A screenshot of Spring Initializr tool selected with Java 21, Spring Web and Spring Boot 3.4.0](images/multi-stage-builds-spring-initializer.webp?border=true)
 
 
     [Spring Initializr](https://start.spring.io/) is a quickstart generator for Spring projects. It provides an extensible API to generate JVM-based projects with implementations for several common concepts — like basic language generation for Java, Kotlin, and Groovy. 
@@ -70,7 +72,7 @@ In this hands-on guide, you'll unlock the power of multi-stage builds to create 
     For this demonstration, you’ve paired Maven build automation with Java, a Spring Web dependency, and Java 21 for your metadata.
 
 
-3. Navigate the project directory. Once you unzip the file, you'll see the following project directory structure:
+4. Navigate the project directory. Once you unzip the file, you'll see the following project directory structure:
 
 
     ```plaintext
@@ -107,7 +109,7 @@ In this hands-on guide, you'll unlock the power of multi-stage builds to create 
    contains most of the information needed to build a customized project. The POM is huge and can seem    
    daunting. Thankfully, you don't yet need to understand every intricacy to use it effectively. 
 
-4. Create a RESTful web service that displays "Hello World!". 
+5. Create a RESTful web service that displays "Hello World!". 
 
     
     Under the `src/main/java/com/example/spring_boot_docker/` directory, you can modify your  
