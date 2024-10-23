@@ -6,6 +6,7 @@ toc_min: 1
 toc_max: 2
 aliases:
 - /desktop/mac/release-notes/archive/
+sitemap: false
 ---
 
 This page contains release notes for older versions of Docker Desktop for Mac.
