@@ -18,7 +18,7 @@ You can also make a badge a link.
 
 ### Usage guidelines
 
-We use badges to indicate new content and product content in various stages of the release lifcycle: 
+We use badges to indicate new content and product content in various stages of the release lifecycle: 
 
 - The violet badge to highlight new early access or experimental content 
 - The blue badge to highlight beta content 

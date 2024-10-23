@@ -2,7 +2,7 @@
 title: Docker Scout metrics exporter
 description: |
   Learn how to scrape data from Docker Scout using Prometheus to create your own
-  vulnerability and policy dashboards wiht Grafana
+  vulnerability and policy dashboards with Grafana
 keywords: scout, exporter, prometheus, grafana, metrics, dashboard, api, compose
 aliases:
   - /scout/metrics-exporter/

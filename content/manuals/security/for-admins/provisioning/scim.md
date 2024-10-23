@@ -164,7 +164,7 @@ The external namespace to use to set up these attributes is `urn:ietf:params:sci
 1. Go to **Directory > People > YOUR GROUP > Applications > YOUR APPLICATION**, then select the **Edit** icon.
 2. Update the attributes to the desired values.
 
-If a user doesn't already have attributes set up, users who are added to the group will inherit these attributes upon provsioning.
+If a user doesn't already have attributes set up, users who are added to the group will inherit these attributes upon provisioning.
 
 {{< /tab >}}
 {{< tab name="Entra ID SAML 2.0" >}}

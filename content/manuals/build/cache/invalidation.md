@@ -1,6 +1,6 @@
 ---
 title: Build cache invalidation
-description: Dig into the details abouw how cache invalidation works for Docker's build cache
+description: Dig into the details about how cache invalidation works for Docker's build cache
 keywords: build, buildx, buildkit, cache, invalidation, cache miss
 ---
 
