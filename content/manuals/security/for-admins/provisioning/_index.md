@@ -16,7 +16,7 @@ on data from your identity provider (IdP). There are three methods for user prov
 different organization needs:
 
 | Provisioning method | Description | Default setting in Docker | Recommended for |
-| --- | --- | --- | --- |
+| :--- | :--- | :------------- | :--- |
 | Just-in-Time (JIT) | Automatically create and provisions user accounts when they first log in via SSO | Enabled by default | Best for organizations who need minimal setup, who have smaller teams, or low-security environments |
 | System for Cross-domain Identity Management (SCIM) | Continuously syncs user data between your IdP and Docker, ensuring user attributes remain updated without requiring manual updates | Disabled by default | Best for larger organizations or environments with frequent changes in user information or roles |
 | Group mapping | Maps user groups from your IdP to specific roles and permissions within Docker, enabling fine-tuned access control based on group membership | Disabled by default | Best for organizations that require strict access control and for managing users based on their roles and permissions |
