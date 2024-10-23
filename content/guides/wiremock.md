@@ -1,8 +1,13 @@
 ---
-description: Mocking API services in development and testing with WireMock
-keywords: WireMock, container-supported development
 title: Mocking API services in development and testing with WireMock
+description: &desc Mocking API services in development and testing with WireMock
+keywords: WireMock, container-supported development
 linktitle: Mocking API services with WireMock
+summary: *desc
+levels: [intermediate]
+subjects: [distributed-systems]
+params:
+  time: 20 minutes
 ---
 
 During local development and testing, it's quite common to encounter situations where your app is dependent on the remote APIs. Network issues, rate limits, or even downtime of the API provider can halt your progress. This can significantly hinder your productivity and make testing more challenging. This is where WireMock comes into play. 
