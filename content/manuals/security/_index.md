@@ -82,7 +82,7 @@ grid_resources:
   description: Understand the steps you can take to improve the security of your container.
   icon: category
   link: /develop/security-best-practices/
-- title: Supress CVEs with VEX
+- title: Suppress CVEs with VEX
   description: Learn how to suppress non-applicable or fixed vulnerabilities found in your images.
   icon: query_stats
   link: /scout/guides/vex/

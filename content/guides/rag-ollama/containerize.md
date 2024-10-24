@@ -2,7 +2,7 @@
 title: Containerize a RAG application
 linkTitle: Containerize your app
 weight: 10
-keywords: python, generative ai, genai, llm, ollama, containerize, intitialize, qdrant
+keywords: python, generative ai, genai, llm, ollama, containerize, initialize, qdrant
 description: Learn how to containerize a RAG application.
 aliases:
   - /guides/use-case/rag-ollama/containerize/

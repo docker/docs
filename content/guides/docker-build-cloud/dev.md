@@ -1,6 +1,6 @@
 ---
 title: "Demo: set up and use Docker Build Cloud in development"
-description: Learn how to use Docker Buld Cloud for local builds.
+description: Learn how to use Docker Build Cloud for local builds.
 weight: 20
 ---
 

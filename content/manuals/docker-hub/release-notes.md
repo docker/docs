@@ -236,7 +236,7 @@ Each organization page now breaks down into these tabs:
   * **New:** Teams - search by team or username, and open up any team page to
   manage the team
   * **New:** Invitees (conditional tab, only if an invite exists) - resend or
-  remove invitiations from this tab
+  remove invitations from this tab
   * Repositories
   * Settings
   * Billing

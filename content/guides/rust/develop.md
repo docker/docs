@@ -147,7 +147,7 @@ For the sample application, you'll use a variation of the backend from the react
    # The example below uses the debian bullseye image as the foundation for    running the app.
    # By specifying the "bullseye-slim" tag, it will also use whatever happens to    be the
    # most recent version of that tag when you build your Dockerfile. If
-   # reproducability is important, consider using a digest
+   # reproducibility is important, consider using a digest
    # (e.g.,    debian@sha256:ac707220fbd7b67fc19b112cee8170b41a9e97f703f588b2cdbbcdcecdd8af57).
    FROM debian:bullseye-slim AS final
 

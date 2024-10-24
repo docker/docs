@@ -13,7 +13,7 @@ People can install your extension by typing `docker extension install my/awesome
 
 However, this option doesn't provide a preview of the extension before it's installed.
 
-## Createa a share URL
+## Create a share URL
 
 Docker lets you share your extensions using a URL.
 

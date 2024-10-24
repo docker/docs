@@ -794,7 +794,7 @@ This release fixes a build issue with Docker Desktop for Windows introduced in C
 
 * Added support of the `privileged` attribute in the `service.build` section. Pull Request [compose#10112](https://github.com/docker/compose/pull/10112)
 * Introduced `--ignore-buildable` to ignore buildable images on pull. Fixed [compose#8805](https://github.com/docker/compose/issues/8805)
-* Introduceed `--no-attach` to ignore some service outputs. Fixed [compose#8546](https://github.com/docker/compose/issues/8546)
+* Introduced `--no-attach` to ignore some service outputs. Fixed [compose#8546](https://github.com/docker/compose/issues/8546)
 * Fixed issue with `logs` when `driver:none` is set. Fixed [compose#9030](https://github.com/docker/compose/issues/9030)
 * Compose now relies on dockerCLI.streams. Pull Request [compose#10082](https://github.com/docker/compose/pull/10082)
 * Fixed issue with service hash that MUST exclude replicas. Fixed [compose#10077](https://github.com/docker/compose/issues/10077)
@@ -955,7 +955,7 @@ For the full change log or additional information, check the [Compose repository
 - Fixed intermittent conflict errors when using `depends_on`. Fixes [compose#9014](https://github.com/docker/compose/issues/9014)
 - Cleared service `CMD` when entry point is overridden. Fixes [compose#9622](https://github.com/docker/compose/issues/9622)
 - Configured default builder export when no `build.platforms` defined. Fixes [compose#9856](https://github.com/docker/compose/issues/9856)
-- Fixed a bug to keep the platform defined, in priority, via DOCKER_DEFAULT_PLATFORM or the `service.platform` attribut. Fixes [compose#9864](https://github.com/docker/compose/issues/9864)
+- Fixed a bug to keep the platform defined, in priority, via DOCKER_DEFAULT_PLATFORM or the `service.platform` attribute. Fixes [compose#9864](https://github.com/docker/compose/issues/9864)
 - Removed support for `DOCKER_HOST` in `.env` files. Fixes [compose#9210](https://github.com/docker/compose/issues/9210)
 - Fixed a bug to ensure clean service command if entry point is overridden in run command. Fixes [compose#9622](https://github.com/docker/compose/issues/9622)
 - Deps: fixed race condition during graph traversal. Fixes [compose#9014](https://github.com/docker/compose/issues/9014)
@@ -1270,7 +1270,7 @@ For the full change log or additional information, check the [Compose repository
 - Provided checksums.txt file and added `--binary` to allow verification in different OS. Fixes [#9388](https://github.com/docker/compose/issues/9388).
 - Added changes so locally pulled image's ID is inspected and persisted to `com.docker.compose.image`. Fixes [#9357](https://github.com/docker/compose/issues/9357).
 - Fixed issue regarding IPAM gateway setup. Fixes [#9330](https://github.com/docker/compose/issues/9330).
-- Added support for ppc64le archictecture for docker compose binary.
+- Added support for ppc64le architecture for docker compose binary.
 - Fixed search/replace typo in `--no-TTY` documentation.
 
 For the full change log or additional information, check the [Compose repository 2.5.0 release page](https://github.com/docker/compose/releases/tag/v2.5.0).

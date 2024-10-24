@@ -1,6 +1,6 @@
 ---
 description: Find the answers to container security related FAQs
-keywords: Docker, Docker Hub, Docker Desktop secuirty FAQs, platform, Docker Scout, admin, security
+keywords: Docker, Docker Hub, Docker Desktop security FAQs, platform, Docker Scout, admin, security
 title: Container security FAQs
 linkTitle: Container
 weight: 20

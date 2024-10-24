@@ -222,7 +222,7 @@ import {
 } from "@mui/material";
 import { createDockerDesktopClient } from "@docker/extension-api-client";
 
-//obtain docker destkop extension client
+//obtain docker desktop extension client
 const ddClient = createDockerDesktopClient();
 
 export function App() {
