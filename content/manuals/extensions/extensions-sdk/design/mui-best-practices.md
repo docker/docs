@@ -1,13 +1,13 @@
 ---
 title: MUI best practices
-description: Guidelines for using MUI to maximise compatibility with Docker Desktop
+description: Guidelines for using MUI to maximize compatibility with Docker Desktop
 keywords: Docker, extensions, mui, theme, theming, material-ui, material
 aliases: 
  - /desktop/extensions-sdk/design/mui-best-practices/
 ---
 
 This article assumes you're following our recommended practice by using our [Material UI theme](https://www.npmjs.com/package/@docker/docker-mui-theme).
-Following the steps below maximises compatibility with Docker Desktop and minimises the work you need to do as an
+Following the steps below maximizes compatibility with Docker Desktop and minimizes the work you need to do as an
 extension author. They should be considered supplementary to the non-MUI-specific guidelines found in the
 [UI Styling overview](index.md).
 
