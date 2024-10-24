@@ -11,7 +11,6 @@ aliases:
   - /language/rust/
   - /guides/language/rust/
 languages: [rust]
-levels: [beginner]
 params:
   time: 20 minutes
 ---

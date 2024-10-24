@@ -6,8 +6,7 @@ summary: |
   Automate, scale, and optimize testing workflows with Testcontainers Cloud
 description: |
   Testcontainers Cloud by Docker streamlines integration testing by offloading container management to the cloud. It enables faster, consistent tests for containerized services like databases, improving performance and scalability in CI/CD pipelines without straining local or CI resources. Ideal for developers needing efficient, reliable testing environments.
-levels: [Beginner]
-products: [testcontainers]
+tags: [product-demo]
 params:
   featured: true
   image: images/learning-paths/testcontainers-cloud-learning-path.png

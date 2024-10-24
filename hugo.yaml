@@ -9,11 +9,7 @@ ignoreLogs:
 
 taxonomies:
   tag: tags
-  # filters for guides:
   language: languages
-  subject: subjects
-  level: levels
-  product: products
 
 permalinks:
   page:

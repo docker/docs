@@ -5,9 +5,8 @@ description: >
   Learn how to manage simple and complex build configurations with Buildx Bake.
 summary: >
   Learn to automate Docker builds and testing with declarative configurations using Buildx Bake.
+tags: [devops]
 languages: [go]
-subjects: [devops]
-levels: [advanced]
 params:
   time: 30 minutes
   featured: true

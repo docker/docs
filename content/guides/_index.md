@@ -1,6 +1,6 @@
 ---
-title: Guides
-keywords: Docker guides
+title: Docker guides
+linkTitle: Guides
 description: Explore the Docker guides
 params:
   icon: developer_guide
