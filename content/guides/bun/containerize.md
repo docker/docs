@@ -36,7 +36,7 @@ directory to a directory that you want to work in, and run the following
 command to clone the repository:
 
 ```console
-$ git clone https://github.com/Pradumnasaraf/bun-docker.git
+$ git clone https://github.com/dockersamples/bun-docker.git
 ```
 
 You should now have the following contents in your `bun-docker` directory.
