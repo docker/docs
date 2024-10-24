@@ -19,7 +19,7 @@ Make sure you have completed the following before you begin:
 - You have an account set up with an IdP
 - You have completed the steps in the [Configure single sign-on](../single-sign-on/configure.md) guide
 
-## Step one: Complete an SSO connection in Docker
+## Step one: Create an SSO connection in Docker
 
 >[!NOTE]
 >
