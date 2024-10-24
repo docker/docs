@@ -1,4 +1,4 @@
----
+jacksson9393---
 description: Understand how to diagnose and troubleshoot Docker Desktop, and how to
   check the logs.
 keywords: Linux, Mac, Windows, troubleshooting, logs, issues, Docker Desktop
