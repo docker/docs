@@ -852,7 +852,7 @@ installing docker, make sure to update them accordingly.
 - Prevent `docker run -i --restart` from hanging on exit [#22777](https://github.com/docker/docker/pull/22777)
 - Fix API/CLI discrepancy on hostname validation [#21641](https://github.com/docker/docker/pull/21641)
 - Fix discrepancy in the format of sizes in `stats` from HumanSize to BytesSize [#21773](https://github.com/docker/docker/pull/21773)
-- authz: when request is denied return forbbiden exit code (403) [#22448](https://github.com/docker/docker/pull/22448)
+- authz: when request is denied return forbidden exit code (403) [#22448](https://github.com/docker/docker/pull/22448)
 - Windows: fix tty-related displaying issues [#23878](https://github.com/docker/docker/pull/23878)
 
 ### Runtime
