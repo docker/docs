@@ -25,10 +25,7 @@ different organization needs:
 
 By default, Docker enables JIT provisioning when you configure an SSO connection. With JIT enabled, user accounts are automatically created the first time a user signs in using your SSO flow.
 
-JIT provisioning may not provide the level of control or security some organizations need. In such cases, SCIM or group mapping can be configured to give administrators more control over user access and attributes. Refer to the following guides to learn more about each provisioning method, and for steps to disable JIT if necessary:
-- Guide
-- Guide
-- Guide
+JIT provisioning may not provide the level of control or security some organizations need. In such cases, SCIM or group mapping can be configured to give administrators more control over user access and attributes.
 
 ## SSO attributes
 
