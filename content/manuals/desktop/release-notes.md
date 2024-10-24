@@ -37,7 +37,9 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 - containerd image store:
   - Improved output of `docker image inspect` to account for multi-platform images.
   - Support multi-platform images via enabling users to pick a specific platform in `docker history`.
-- Beta release of Docker VMM - the more performant alternative to Apple Virtualization Framework on macOS (requires Apple Silicon and macOS 12.5 or later).### Upgrades
+- Beta release of Docker VMM - the more performant alternative to Apple Virtualization Framework on macOS (requires Apple Silicon and macOS 12.5 or later).
+
+### Upgrades
 
 - [containerd v1.7.21](https://github.com/containerd/containerd/releases/tag/v1.7.21)
 - [Docker Buildx v0.17.1](https://github.com/docker/buildx/releases/tag/v0.17.1)
