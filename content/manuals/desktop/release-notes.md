@@ -23,6 +23,83 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projects/51/views/1?filterQuery=) to see what's coming next.
 
+## 4.35.0
+
+{{< release-date date="2024-10-24" >}}
+
+{{< desktop-install-v2 all=true beta_win_arm=true version="4.35.0" build_path="/172508/" >}}
+
+### New
+
+- Support for [Docker Desktop on Red Hat Enterprise Linux](/manuals/desktop/install/linux/rhel.md) is now generally available.
+- Volume Backup and Share is now generally available and can be found in the **Volumes** view.
+- Terminal support within Docker Desktop using system shells is now generally available.
+- containerd image store:
+  - Improved output of `docker image inspect` to account for multi-platform images.
+  - Support multi-platform images via enabling users to pick a specific platform in `docker history`.
+- Beta release of Docker VMM - the more performant alternative to Apple Virtualization Framework on macOS (requires Apple Silicon and macOS 12.5 or later).
+
+### Upgrades
+
+- [containerd v1.7.21](https://github.com/containerd/containerd/releases/tag/v1.7.21)
+- [Docker Buildx v0.17.1](https://github.com/docker/buildx/releases/tag/v0.17.1)
+- [Docker Compose v2.29.7](https://github.com/docker/compose/releases/tag/v2.29.7)
+- [Docker Engine v27.3.1](https://docs.docker.com/engine/release-notes/27.3/#2731)
+- [Docker Scout CLI v1.14.0](https://github.com/docker/scout-cli/releases/tag/v1.14.0)
+- Docker Debug `v0.0.37`
+- Linux kernel `v6.10.9`
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed a bug where proxy settings in `daemon.json` would override proxies set in Docker Desktop settings.
+- Fixed a bug where some Docker subnet ranges were not able to be used.
+- Removed [docker-index](https://github.com/docker/index-cli-plugin) as it is now deprecated, you can use `docker scout cves fs://<path to binary>` instead.
+- Fixed a bug where images couldn't be sorted or filtered by tag. Fixes [docker/for-win#14297](https://github.com/docker/for-win/issues/14297).
+- Fixed a bug where the `docker` CLI did not work as expected when the `registry.json` file was malformed.
+- Fixed a bug where the **Push to Docker Hub** action in the **Images** view would result in an `invalid tag format` error. Fixes [docker/for-win#14258](https://github.com/docker/for-win/issues/14258).
+- Fixed an issue where Docker Desktop startup failed when ICMPv6 setup was not successful.
+- Added drivers that allow USB/IP to work.
+- Fixed a bug in Enhanced Container Isolation (ECI) [Docker socket mount permissions for derived images](/manuals/security/for-admins/hardened-desktop/enhanced-container-isolation/config.md) where it was incorrectly denying Docker socket mounts for some images when Docker Desktop uses the containerd image store.
+- Enable `NFT_NUMGEN`, `NFT_FIB_IPV4` and `NFT_FIB_IPV6` kernel modules.
+- Build UI:
+  - Highlight build check warnings in the **Completed builds** list.
+  - Improve visualization for the build time charts.
+  - Image tags added to **Build results** section under the **Info** tab.
+- Improved efficiency of host-side disk utilization for fresh installations on Mac and Linux.
+- Fixed a bug that prevented the Sign in enforcement popup to be triggered when token expires.
+- Fixed a bug where containers would not be displayed in the GUI immediately after signing in when using [enforced sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md).
+- `settings.json` has been renamed to `settings-store.json`
+
+#### For Mac
+
+- Fixed a bug where auto-start containers could be misconfigured after changing filesharing type in settings.
+- Fixed a bug that would cause `~/.docker/cli-plugins` to not be populated on start-up.
+- Fixed a bug that prevented php composer or postgres to start as non root user. Fixes [docker/for-mac#7415](https://github.com/docker/for-mac/issues/7415).
+- Fixed a bug that could cause file changed on the host to appear truncated. Fixes [docker/for-mac#7438](https://github.com/docker/for-mac/issues/7438).
+
+#### For Windows
+
+- New installations of Docker Desktop for Windows now require a Windows version of 19045 or later.
+- Fixed an issue that caused a start failure if IPv6 is disabled either in the kernel config or via the kernel command-line in WSL. Fixes [docker/for-win#14240](https://github.com/docker/for-win/issues/14240)
+- Fixed the **Clean / Purge data** button on Windows. Fixes [docker/for-win#12650](https://github.com/docker/for-win/issues/14308).
+- Disk usage statistics is now displayed in the Dashboard footer installations.
+- Improved recovery for WSL distribution issues.
+
+#### For Linux
+
+- Ubuntu 24.04 is now supported on Docker Desktop.
+
+### Known issues
+
+#### For Mac
+- Since version 4.34.0, the toggle "Allow privileged port mapping" in the Advanced settings does not work. For more information, see [docker/for-mac#7460](https://github.com/docker/for-mac/issues/7460).
+
+#### For Windows
+
+- Users with versions 4.14.0 and earlier could encounter issues using the in-app update. To update to the latest version, download and install the latest Docker Desktop from this page.
+
 ## 4.34.3
 
 {{< release-date date="2024-10-09" >}}

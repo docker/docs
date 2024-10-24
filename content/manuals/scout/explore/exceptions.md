@@ -25,15 +25,14 @@ then that CVE is excluded from analysis results.
 To create an exception for an image, you can:
 
 - Create an exception in the [GUI](/manuals/scout/how-tos/create-exceptions-gui.md) of
-  Docker Scout Dashboard.
-
+  Docker Scout Dashboard or Docker Desktop.
 - Create a [VEX](/manuals/scout/how-tos/create-exceptions-vex.md) document and attach
   it to the image.
 
-The recommended way to create exceptions is to use Docker Scout Dashboard. The
-GUI provides a user-friendly interface for creating exceptions. It also lets
-you create exceptions for multiple images, or your entire organization, all at
-once.
+The recommended way to create exceptions is to use Docker Scout Dashboard or
+Docker Desktop. The GUI provides a user-friendly interface for creating
+exceptions. It also lets you create exceptions for multiple images, or your
+entire organization, all at once.
 
 ## View exceptions
 
@@ -46,7 +45,7 @@ To view exceptions for images, you need to have the appropriate permissions.
   are visible to anyone who can pull the image, since the VEX document is
   stored in the image manifest or on filesystem of the image.
 
-### View exceptions in Docker Scout Dashboard
+### View exceptions in Docker Scout Dashboard or Docker Desktop
 
 The [**Exceptions** tab](https://scout.docker.com/reports/vulnerabilities/exceptions)
 of the Vulnerabilities page in Docker Scout Dashboard lists all exceptions for
@@ -59,9 +58,23 @@ selecting the action menu lets you edit or remove the exception.
 
 To view all exceptions for a specific image tag:
 
+{{< tabs >}}
+{{< tab name="Docker Scout Dashboard" >}}
+
 1. Go to the [Images page](https://scout.docker.com/reports/images).
 2. Select the tag that you want to inspect.
 3. Open the **Exceptions** tab.
+
+{{< /tab >}}
+{{< tab name="Docker Desktop" >}}
+
+1. Open the **Images** view in Docker Desktop.
+2. Open the **Hub** tab.
+3. Select the tag you want to inspect.
+4. Open the **Exceptions** tab.
+
+{{< /tab >}}
+{{< /tabs >}}
 
 ### View exceptions in the CLI
 
