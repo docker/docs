@@ -16,10 +16,10 @@ To navigate to **Settings** either:
 - Select the Docker menu {{< inline-image src="images/whale-x.svg" alt="whale menu" >}} and then **Settings**
 - Select the **Settings** icon from the Docker Desktop Dashboard.
 
-You can also locate the `settings.json` file at:
- - Mac: `~/Library/Group Containers/group.com.docker/settings.json`
- - Windows: `C:\Users\[USERNAME]\AppData\Roaming\Docker\settings.json`
- - Linux: `~/.docker/desktop/settings.json`
+You can also locate the `settings-store.json` file (or `settings.json` for Docker Desktop versions 4.34 and earlier) at:
+ - Mac: `~/Library/Group Containers/group.com.docker/settings-store.json`
+ - Windows: `C:\Users\[USERNAME]\AppData\Roaming\Docker\settings-store.json`
+ - Linux: `~/.docker/desktop/settings-store.json`
 
 ## General
 
