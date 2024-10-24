@@ -5,57 +5,67 @@ title: Just-in-Time provisioning
 linkTitle: Just-in-Time
 ---
 
-Just-in-Time (JIT) provisioning runs after every successful single sign-on (SSO) sign-in. JIT verifies that the user that signs in is a member of the organization and teams that they are assigned to in the IdP. When you [create your SSO connection](../single-sign-on/_index.md), JIT provisioning is turned on by default.
+Just-in-Time (JIT) provisioning automatically creates and updates user accounts after every successful single sign-on (SSO) sign-in. JIT verifies that the user signing in is a member of the organization and teams that they are assigned to in your identity provider (IdP). When you [create your SSO connection](../single-sign-on/_index.md), JIT provisioning is turned on by default.
 
 ## SSO authentication with JIT provisioning enabled
 
-After every successful SSO sign-in authentication, the JIT provisioner performs the following actions:
+When a user signs in with SSO and JIT provisioning is enabled, the following steps occur automatically:
 
-1. Checks if there's an existing Docker account with the email address of the user that just authenticated.
+1. The system checks if a Docker account exists for the user's email address.
 
-   a) If no account is found with the same email address, it creates a new Docker account using basic user attributes (email, name, and surname). The JIT provisioner generates a new username for this new account by using the email, name, and random numbers to make sure that all account usernames are unique in the platform.
+    - **If an account exists**: The system uses the existing account and updates the user's full name if necessary.
+    - **If no account exists**: A new Docker account is created using basic user attributes (email, name, and surname). A unique username is generated based on the user's email, name, and random numbers to ensure all usernames are unique across the platform.
 
-   b) If an account exists for this email address, it uses this account and updates the full name of the user’s profile if needed.
+2. The system checks for any pending invitations to the SSO organization.
 
-2. Checks for any pending invitations to the SSO organization to auto-accept the invitation. If the invitation is specific to a group, the user is added to the invited group along with group mappings in the following step.
+    - **Invitation found**: The invitation is automatically accepted.
+    - **Invitation includes a specific group**: The user is added to that group within the SSO organization.
 
-3. Checks if the IdP shared group mappings while authenticating the user.
+3. The system verifies if the IdP has shared group mappings during authentication.
 
-   a) If the IdP provided group mappings for the user, the user gets added to the organizations and teams indicated by the group mappings.
+    - **Group mappings provided**: The user is assigned to the relevant organizations and teams.
+    - **No group mappings provided**: The system checks if the user is already part of the organization. If not, the user is added to the default organization and team configured in the SSO connection.
 
-   b) If the IdP didn't provide group mappings, it checks if the user is already a member of the organization, or if the SSO connection is for multiple organizations (only at company level) and if the user is a member of any of those organizations. If the user isn't a member, it adds the user to the default team and organization configured in the SSO connection.
-   
+The following graphic provides an overview of SSO authentication with JIT enabled:
+
    ![JIT provisioning enabled](../../images/jit-enabled-flow.svg)
 
 ## SSO authentication with JIT provisioning disabled
 
-When you opt to disable JIT provisioning in your SSO connection, the following actions occur:
+When JIT provisioning is disabled in your SSO connection, the following actions occur during authentication:
 
-1. Checks if there's an existing Docker account with the email address of the user that just authenticated.
+1. The system checks if a Docker account exists for the user's email address.
 
-   a) If no account is found with the same email address, it creates a new Docker account using basic user attributes (email, name, and surname). Authentication with SSO generates a new username for this new account by using the email, name, and random numbers to make sure that all account usernames are unique in the platform.
+    - **If an account exists**: The system uses the existing account and updates the user's full name if necessary.
 
-   b) If an account exists for this email address, it uses this account and updates the full name of the user’s profile if needed.
+    - **If no account exists**: A new Docker account is created using basic user attributes (email, name, and surname). A unique username is generated based on the user's email, name, and random numbers to ensure all usernames are unique across the platform.
 
-2. Checks if there are any pending invitations to the SSO organization (or, SSO organizations if the SSO connection is managed at the company level) in order to auto-accept the invitation.
+2. The system checks for any pending invitations to the SSO organization.
 
-   a) If the user isn't already a member of the organization, or doesn't have a pending invitation to join, sign in fails and the user encounters an `Access denied` error. This blocks the user from joining the organization. They need to contact an administrator to invite them to join.
+   - **Invitation found**: If the user is a member of the organization or has a pending invitation, sign-in is successful, and the invitation is automatically accepted.
 
-   b) If the user is a member of the organization, or has a pending invitation to join, then sign in is successful.
+   - **No invitation found**: If the user is not a member of the organization and has no pending invitation, the sign-in fails, and an `Access denied` error appears. The user must contact an administrator to be invited to the organization.
 
-If you disable JIT provisioning when you create or edit your SSO connection, you can still use group mapping as long as you have also [enabled SCIM](/security/for-admins/provisioning/scim/#enable-scim-in-docker). When JIT provisioning is disabled and SCIM isn't enabled, users won't be auto-provisioned to groups. For instructions on disabling JIT provisioning, see [Manage how users are provisioned](/security/for-admins/single-sign-on/manage/#manage-how-users-are-provisioned).
+With JIT disabled, group mapping is only available if you have [SCIM enabled](/security/for-admins/provisioning/scim/#enable-scim-in-docker). If SCIM is not enabled, users won't be auto-provisioned to groups.
+
+The following graphic provides an overview of SSO authentication with JIT disabled:
 
 ![JIT provisioning disabled](../../images/jit-disabled-flow.svg)
 
 ## Disable JIT provisioning
+
+> [!WARNING]
+>
+> Disabling JIT provisioning may disrupt your users' access and workflows. With JIT disabled, users will not be automatically added to your organization. Users must already be a member of the organization or have a pending invitation to successfully sign in through SSO.To auto-provision users with JIT disabled, [use SCIM](./scim.md).
 
 You may want to disable JIT provisioning for reasons such as the following:
 
 - You have multiple organizations, have SCIM enabled, and want SCIM to be the source of truth for provisioning
 - You want to control and restrict usage based on your organization's security configuration, and want to use SCIM to provision access
 
-> [!WARNING]
->
-> Disabling JIT provisioning could potentially disrupt your users' workflows. Users must already be a member of the organization or have an invitation to the organization when they authenticate with SSO in order to sign in successfully. To auto-provision users with JIT disabled, you can [use SCIM](./scim.md).
+Users are provisioned with JIT by default. If you enable SCIM, you can disable JIT:
 
-See [Manage how users are provisioned](../single-sign-on/manage/_index.md#manage-how-users-are-provisioned) to learn how to disable JIT provisioning.
+1. Sign in to the [Admin Console](https://app.docker.com/).
+2. Select your organization or company in the left-hand navigation drop-down, and then select **SSO and SCIM**.
+3. In the SSO connections table, select the **Action** icon and then **Disable JIT provisioning**.
+4. Select **Disable** to confirm.
