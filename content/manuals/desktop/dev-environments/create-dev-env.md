@@ -48,7 +48,7 @@ If your WSL 2 distribution doesn't have an `ssh-agent` running, you can append t
 ```bash
 SSH_ENV="$HOME/.ssh/agent-environment"
 function start_agent {
-    echo "Initialising new SSH agent..."
+    echo "Initializing new SSH agent..."
     /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
     echo succeeded
     chmod 600 "${SSH_ENV}"
