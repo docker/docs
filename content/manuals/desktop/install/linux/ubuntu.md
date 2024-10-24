@@ -27,7 +27,7 @@ This page contains information on how to install, launch and upgrade Docker Desk
 To install Docker Desktop successfully, you must:
 
 - Meet the [general system requirements](_index.md#general-system-requirements).
-- Have a 64-bit version of either the LTS version Ubuntu Jammy Jellyfish 22.04, Ubuntu Noble Numbat 24.04, or the current non-LTS version. Docker Desktop is supported on `x86_64` (or `amd64`) architecture.
+- Have a 64-bit LTS version of Ubuntu, either Jammy Jellyfish 22.04 or Noble Numbat 24.04, or a 64-bit of the current non-LTS version. Docker Desktop is supported on `x86_64` (or `amd64`) architecture.
 - For non-Gnome Desktop environments, `gnome-terminal` must be installed:
   ```console
   $ sudo apt install gnome-terminal
