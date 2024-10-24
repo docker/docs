@@ -135,7 +135,7 @@ To create an Azure Connect (OIDC) connection, you must create an app registratio
 
 ## Step three: Connect Docker and your IdP
 
-After creating your connection in Docker and your IdP, you can cross-connect them to complete your SSO connect:
+After creating your connection in Docker and your IdP, you can cross-connect them to complete your SSO connection:
 
 {{< tabs >}}
 {{< tab name="Okta SAML" >}}
