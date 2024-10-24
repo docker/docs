@@ -14,7 +14,7 @@ No. You can only configure Docker SSO to work with a single IdP. A domain can on
 
 ### Is it possible to change my identity provider after configuring SSO?
 
-Yes. You must delete your existing IdP configuration in your Docker SSO connection and then [configure SSO using your new IdP](/security/for-admins/single-sign-on/configure/configure-idp/). If you had already turned on enforcement, you should turn off enforcement before updating the provider SSO connection.
+Yes. You must delete your existing IdP configuration in your Docker SSO connection and then [configure SSO using your new IdP](/manuals/security/for-admins/single-sign-on/connect.md). If you had already turned on enforcement, you should turn off enforcement before updating the provider SSO connection.
 
 ### What information do I need from my identity provider to configure SSO?
 
