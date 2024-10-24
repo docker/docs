@@ -40,7 +40,11 @@ Docker Desktop for Linux runs a Virtual Machine (VM) for the following reasons:
 
 Docker Desktop for Linux uses [VirtioFS](https://virtio-fs.gitlab.io/) as the
 default (and currently only) mechanism to enable file sharing between the host
-and Docker Desktop VM. In order not to require elevated privileges, without
+and Docker Desktop VM. 
+
+{{< accordion title="Additional information for Docker Desktop version 4.34 and earlier" >}}
+
+In order not to require elevated privileges, without
 unnecessarily restricting operations on the shared files, Docker Desktop runs
 the file sharing service (`virtiofsd`) inside a user namespace (see
 `user_namespaces(7)`) with UID and GID mapping configured. As a result Docker
@@ -87,6 +91,8 @@ a user with a UID of 100999. This has the unfortunate side effect of preventing
 easy access to such a file on the host. The problem is resolved by creating
 a group with the new GID and adding our user to it, or by setting a recursive
 ACL (see `setfacl(1)`) for folders shared with the Docker Desktop VM.
+
+{{< /accordion >}}
 
 ### Where does Docker Desktop store Linux containers?
 

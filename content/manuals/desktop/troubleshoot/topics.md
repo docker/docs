@@ -42,13 +42,13 @@ Docker Desktop uses hardware-accelerated graphics by default, which may cause pr
 Docker Desktop will launch successfully, but some screens may appear green, distorted,
 or have some visual artifacts.
 
-To work around this issue, disable hardware acceleration by creating a `"disableHardwareAcceleration": true` entry in Docker Desktop's `settings.json` file. You can find this file at:
+To work around this issue, disable hardware acceleration by creating a `"disableHardwareAcceleration": true` entry in Docker Desktop's `settings-store.json` file (or `settings.json` for Docker Desktop versions 4.34 and earlier). You can find this file at:
 
-- Mac: `~/Library/Group Containers/group.com.docker/settings.json`
-- Windows: `C:\Users\[USERNAME]\AppData\Roaming\Docker\settings.json`
-- Linux: `~/.docker/desktop/settings.json.`
+- Mac: `~/Library/Group Containers/group.com.docker/settings-store.json`
+- Windows: `C:\Users\[USERNAME]\AppData\Roaming\Docker\settings-store.json`
+- Linux: `~/.docker/desktop/settings-store.json.`
 
-After updating the `settings.json` file, close and restart Docker Desktop to apply the changes.
+After updating the `settings-store.json` file, close and restart Docker Desktop to apply the changes.
 
 ## Topics for Linux and Mac
 
@@ -109,7 +109,7 @@ in the Apple documentation, and Docker Desktop [Mac system requirements](../inst
 
 In Docker Desktop version 4.19, gVisor replaced VPNKit to enhance the performance of VM networking when using the Virtualization framework on macOS 13 and above.
 
-To continue using VPNKit, add `"networkType":"vpnkit"` to your `settings.json` file located at `~/Library/Group Containers/group.com.docker/settings.json`.
+To continue using VPNKit, add `"networkType":"vpnkit"` to your `settings-store.json` file located at `~/Library/Group Containers/group.com.docker/settings-store.json`.
 
 ## Topics for Windows
 
