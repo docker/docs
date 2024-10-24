@@ -97,9 +97,7 @@ Possible solutions:
  * Make sure the IdP SSO connection is returning the correct UPN value as part
    of the assertion attributes (attributes mapping).
  * Add and verify all domains and subdomains that are used as UPN by your IdP
-   and associate them to your Docker SSO connection. For more details, see [Add
-   and verify your
-   domain](/security/for-admins/single-sign-on/configure/#step-one-add-and-verify-your-domain).
+   and associate them to your Docker SSO connection. For more details, see [Configure single sign-on](../single-sign-on/configure.md).
 
 ### Unable to find session
 

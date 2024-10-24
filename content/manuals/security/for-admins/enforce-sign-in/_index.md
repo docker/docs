@@ -39,8 +39,7 @@ following occurs:
 
 ## Enforcing sign-in versus enforcing single sign-on (SSO)
 
-[Enforcing
-SSO](/security/for-admins/single-sign-on/connect#optional-enforce-sso) and
+[Enforcing SSO](/manuals/security/for-admins/single-sign-on/connect.md) and
 enforcing sign-in are different features. The following table provides a
 description and benefits when using each feature.
 
