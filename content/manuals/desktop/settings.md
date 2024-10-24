@@ -260,8 +260,12 @@ The HTTPS proxy settings used for scanning images are set using the `HTTPS_PROXY
 > If you are using a PAC file hosted on a web server, make sure to add the MIME type `application/x-ns-proxy-autoconfig` for the `.pac` file extension on the server or website. Without this configuration, the PAC file may not be parsed correctly.
 
 > [!IMPORTANT]
+> You cannot configure the proxy settings using the Docker daemon configuration
+> file (`daemon.json`), and we recommend you do not configure the proxy
+> settings via the Docker CLI configuration file (`config.json`).
 >
-> You do not need to separately configure proxy settings for the Docker CLI or Docker daemon.
+> To manage proxy configurations for Docker Desktop, configure the settings in
+> the Docker Desktop app or use [Settings Management](/manuals/security/for-admins/hardened-desktop/settings-management/_index.md).
 
 #### Proxy authentication
 
