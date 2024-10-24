@@ -767,7 +767,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
   - Allow orchestrator selection from the UI in the "Kubernetes" pane, to allow "docker stack" commands to deploy to Swarm clusters, even if Kubernetes is enabled in Docker for Mac.
   
 * Bug fixes and minor changes
-  - Use Simple NTP to minimise clock drift between the virtual machine and the host. Fixes [docker/for-mac#2076](https://github.com/docker/for-mac/issues/2076)
+  - Use Simple NTP to minimize clock drift between the virtual machine and the host. Fixes [docker/for-mac#2076](https://github.com/docker/for-mac/issues/2076)
   - Fix filesystem event notifications for Swarm services and those using the new-style --mount option. Fixes [docker/for-mac#2216](https://github.com/docker/for-mac/issues/2216), [docker/for-mac#2375](https://github.com/docker/for-mac/issues/2375)
   - Fix filesystem event delivery to Kubernetes pods when the path to the bind mount is a symlink.
   - Fix a race between calling stat on a file and calling close of a file descriptor referencing the file that could result in the stat failing with EBADF (often presented as "File not found"). Fixes [docker/for-mac#2870](https://github.com/docker/for-mac/issues/2870)
@@ -824,7 +824,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 * Bug fixes and minor changes
   - Fix support for AUFS. Fixes [docker/for-win#1831](https://github.com/docker/for-win/issues/1831)
-  - Fix synchronisation between CLI `docker login` and GUI login.
+  - Fix synchronization between CLI `docker login` and GUI login.
 
 ### Docker Community Edition 18.03.0-ce-rc3-mac56 2018-03-13
 

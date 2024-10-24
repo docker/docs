@@ -94,6 +94,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 ### Known issues
 
 #### For Mac
+
 - Since version 4.34.0, the toggle "Allow privileged port mapping" in the Advanced settings does not work. For more information, see [docker/for-mac#7460](https://github.com/docker/for-mac/issues/7460).
 
 #### For Windows

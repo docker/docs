@@ -222,7 +222,7 @@ func main() {
 
 	db, err := initStore()
 	if err != nil {
-		log.Fatalf("failed to initialise the store: %s", err)
+		log.Fatalf("failed to initialize the store: %s", err)
 	}
 	defer db.Close()
 

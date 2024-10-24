@@ -41,7 +41,7 @@ $ export DOCKER_CONTENT_TRUST_ROOT_PASSPHRASE="rootpassphrase123"
 # Export the Repository Passphrase
 $ export DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE="repopassphrase123"
 
-# Initialise Repo and Push Delegation
+# Initialize Repo and Push Delegation
 $ docker trust signer add --key delegation.crt jeff registry.example.com/admin/demo
 Adding signer "jeff" to registry.example.com/admin/demo...
 Initializing signed repository for registry.example.com/admin/demo...

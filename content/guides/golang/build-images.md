@@ -265,7 +265,7 @@ build context is the set of files located in the specified path or URL. The
 Docker build process can access any of the files located in the context.
 
 The build command optionally takes a `--tag` flag. This flag is used to label
-the image with a string value, which is easy for humans to read and recognise.
+the image with a string value, which is easy for humans to read and recognize.
 If you don't pass a `--tag`, Docker will use `latest` as the default value.
 
 Build your first Docker image.
