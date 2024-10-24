@@ -413,6 +413,7 @@
       "outline-none",
       "overflow-clip",
       "overflow-hidden",
+      "overflow-x-auto",
       "overflow-x-hidden",
       "overflow-y-auto",
       "p-1",
