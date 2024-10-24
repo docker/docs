@@ -31,7 +31,7 @@ params:
     link: /extensions/
   services:
   - title: Docker Hub
-    description: Discover, share, and integrate container images
+    description: Discover, share, and integrate container images.
     icon: hub
     link: /docker-hub/
   - title: Docker Scout
