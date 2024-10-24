@@ -19,7 +19,7 @@ weight: 220
 
 This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases. For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/releases.md).
 
-Docker Desktop versions older than 6 months from the latest release are not available for download.
+Docker Desktop versions older than 6 months from the latest release are not available for download. Previous release notes are available in our [documentation repository](https://github.com/docker/docs/tree/main/content/manuals/desktop/previous-versions).
 
 Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projects/51/views/1?filterQuery=) to see what's coming next.
 
