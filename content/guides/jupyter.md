@@ -126,7 +126,7 @@ managed by Docker.
 When you remove a container, all data in that container is deleted. To save
 notebooks outside of the container, you can use a [volume](/engine/storage/volumes/).
 
-### Run a JupterLab container with a volume
+### Run a JupyterLab container with a volume
 
 To start the container with a volume, open a terminal and run the following command
 
@@ -378,7 +378,7 @@ To share your image and data, you'll use [Docker Hub](https://hub.docker.com/). 
 Other users can now download and run your image using the `docker run` command. They need to replace `YOUR-USER-NAME` with your Docker ID.
 
 ```console
-$ docker run --rm -p 8889:8888 YOUR-USER-NAME/my-jupyer-image start-notebook.py --NotebookApp.token='my-token'
+$ docker run --rm -p 8889:8888 YOUR-USER-NAME/my-jupyter-image start-notebook.py --NotebookApp.token='my-token'
 ```
 
 ### Share your volume

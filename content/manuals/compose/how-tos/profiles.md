@@ -2,7 +2,7 @@
 title: Using profiles with Compose
 linkTitle: Use service profiles
 weight: 20
-desription: How to use profiles with Docker Compose
+description: How to use profiles with Docker Compose
 keywords: cli, compose, profile, profiles reference
 aliases:
 - /compose/profiles/

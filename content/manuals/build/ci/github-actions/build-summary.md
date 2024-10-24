@@ -1,7 +1,7 @@
 ---
 title: GitHub Actions build summary
 linkTitle: Build summary
-descripion: Get an overview of your Docker Builds with GitHub Actions
+description: Get an overview of your Docker Builds with GitHub Actions
 keywords: github actions, gha, build, summary, annotation
 ---
 

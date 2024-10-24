@@ -19,7 +19,7 @@ weight: 220
 
 This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases. For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/releases.md).
 
-Docker Desktop versions older than 6 months from the latest release are not available for download.
+Docker Desktop versions older than 6 months from the latest release are not available for download. Previous release notes are available in our [documentation repository](https://github.com/docker/docs/tree/main/content/manuals/desktop/previous-versions).
 
 Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projects/51/views/1?filterQuery=) to see what's coming next.
 
@@ -97,7 +97,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 #### For all platforms
 
-- Fixed a bug that caused the CLI to become idle when a container was started with AutoRemove (`--rm`) but whose port bindings would be rejected by Docker Dekstop at start-up.
+- Fixed a bug that caused the CLI to become idle when a container was started with AutoRemove (`--rm`) but whose port bindings would be rejected by Docker Desktop at start-up.
 - Fixed a bug where diagnostics collection would fail sporadically on the **Support** screen.
 - Fixed a bug where folders wouldn't expand in a container's **File** tab. Fixes [docker/for-win#14204](https://github.com/docker/for-win/issues/14204).
 - In-app updates now respect the proxy settings.

@@ -1,6 +1,6 @@
 ---
 title: Package and release your extension
-description: Docker extension disctribution
+description: Docker extension distribution
 keywords: Docker, extensions, sdk, distribution
 aliases: 
  - /desktop/extensions-sdk/extensions/DISTRIBUTION/

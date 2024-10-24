@@ -85,18 +85,22 @@ You should see the following:
 
 ### Step two: Run and remove containers with the newly created cloud engine 
 
-1. Run an Nginx container in the cloud engine:
-   ```console
-   $ docker run -d -p 8080:80 nginx
-   ```
-   This maps the container's port `80` to the host's port `8080`. If port `8080` is already in use on your host, you can specify a different port.
-2. View the Nginx welcome page. Navigate to [`http://localhost:8080/`](http://localhost:8080/).
-3. Verify the running container:
-   - In the **Containers** tab in the Docker Desktop Dashboard, you should see your Nginx container listed. 
-   - Alternatively, list all running containers in the cloud engine via the terminal:
-      ```console
-      $ docker ps
-      ```
+1.  Run an Nginx container in the cloud engine:
+    ```console
+    $ docker run -d --name cloudnginx -p 8080:80 nginx
+    ```
+    This maps the container's port `80` to the host's port `8080`. If port `8080` is already in use on your host, you can specify a different port.
+2.  View the Nginx welcome page. Navigate to [`http://localhost:8080/`](http://localhost:8080/).
+3.  Verify the running container:
+    -   In the **Containers** tab in the Docker Desktop Dashboard, you should see your Nginx container listed.
+    -   Alternatively, list all running containers in the cloud engine via the terminal:
+        ```console
+        $ docker ps
+        ```
+4.  Shut down the container:
+    ```console
+    $ docker kill cloudnginx
+    ```
 
 Running a container with a cloud engine is just as straightforward as running it locally.
 
@@ -139,8 +143,8 @@ Project Harmonia takes advantage of [Synchronized file shares](/manuals/desktop/
 {{< tabs group="method" >}}
 {{< tab name="Docker Desktop">}}
 
-1. Clone the [Awesome Compose](https://github.com/docker/awesome-compose) repository. 
-2. In the Docker Desktop Dashboard, navigate to the **Project Harmonia** view. 
+1. Clone the [Awesome Compose](https://github.com/docker/awesome-compose) repository.
+2. In the Docker Desktop Dashboard, navigate to the **Project Harmonia** view.
 3. For the `cloudengine` cloud engine, select the **Actions** menu and then **Manage file syncs**.
 4. Select **Create file sync**.
 5. Navigate to the `awesome-compose/react-express-mysql` folder and select **Open**.
@@ -149,14 +153,14 @@ Project Harmonia takes advantage of [Synchronized file shares](/manuals/desktop/
    ```console
    $ docker compose up -d
    ```
-8. Test the application by visiting [`http://localhost:3000`](http://localhost:3000/).  
+8. Test the application by visiting [`http://localhost:3000`](http://localhost:3000/).
    You should see the home page. The code for this page is located in `react-express-mysql/frontend/src/App.js`.
 9. In an IDE or text editor, open the `App.js` file, change some text, and save. Watch as the code reloads live in your browser.
 
 {{< /tab >}}
 {{< tab name="CLI">}}
 
-1. Clone the [Awesome Compose](https://github.com/docker/awesome-compose) repository. 
+1. Clone the [Awesome Compose](https://github.com/docker/awesome-compose) repository.
 2. In your terminal, change into the `awesome-compose/react-express-mysql` directory.
 3. Create a file sync for `cloudengine`:
    ```console
@@ -165,23 +169,24 @@ Project Harmonia takes advantage of [Synchronized file shares](/manuals/desktop/
    ```console
    $ docker compose up -d
    ```
-5. Test the application by visiting [`http://localhost:3000`](http://localhost:3000/).  
+5. Test the application by visiting [`http://localhost:3000`](http://localhost:3000/).
    You should see the home page. The code for this page is located in `react-express-mysql/frontend/src/App.js`.
 6. In an IDE or text editor, open the `App.js` file, change some text, and save. Watch as the code reloads live in your browser.
 
 {{< /tab >}}
 {{< /tabs >}}
 
-### Step five: Share a container port 
+### Step five: Share a container port
 
 {{< tabs group="method" >}}
 {{< tab name="Docker Desktop">}}
 
-1. Make sure your Docker context is set to `cloudengine`. 
-2. In the Docker Desktop Dashboard, navigate to the **Containers** view. 
-3. Select the **lock** icon in the **Ports** column of your running container next to `3000:3000`. 
-   This creates a publicly accessible URL that you can share with teammates. 
-4. Select the **copy** icon, to copy this URL. 
+1.  Make sure your Docker context is set to `cloudengine`.
+2.  In the Docker Desktop Dashboard, navigate to the **Containers** view.
+3.  If necessary, expand the application listing to show all of its containers.
+4.  Select the **lock** icon in the **Ports** column of your running container next to `3000:3000`.
+    This creates a publicly accessible URL that you can share with teammates.
+5.  Select the **copy** icon, to copy this URL.
 
 To view all shared ports for your Docker context, select the **Shared ports** icon in the bottom-right corner of the Docker Desktop Dashboard.
 
@@ -208,6 +213,12 @@ $ docker harmonia engine share list
 {{< tabs group="method" >}}
 {{< tab name="Docker Desktop">}}
 
+To stop the running project:
+
+```console
+$ docker compose down
+```
+
 To remove a file sync session:
 1. Navigate to your cloud engine in the **Project Harmonia** view.
 2. Select the **Actions** menu and then **Manage file syncs**.
@@ -218,6 +229,12 @@ To remove a cloud engine, navigate to the **Project Harmonia** view and then sel
 
 {{< /tab >}}
 {{< tab name="CLI">}}
+
+To stop the running project:
+
+```console
+$ docker compose down
+```
 
 To remove the file sync session, run:
 
