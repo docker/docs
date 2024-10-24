@@ -1,8 +1,13 @@
 ---
-description: Pre-seeding database with schema and data at startup for development environment
-keywords: Pre-seeding, database, postgres, container-supported development
 title: Pre-seeding database with schema and data at startup for development environment
 linktitle: Pre-seeding database  
+description: &desc Pre-seeding database with schema and data at startup for development environment
+keywords: Pre-seeding, database, postgres, container-supported development
+summary: *desc
+levels: [intermediate]
+subjects: [databases]
+params:
+  time: 20 minutes
 ---
 
 Pre-seeding databases with essential data and schema during local development is a common practice to enhance the development and testing workflow. By simulating real-world scenarios, this practice helps catch frontend issues early, ensures alignment between Database Administrators and Software Engineers, and facilitates smoother collaboration. Pre-seeding offers benefits like confident deployments, consistency across environments, and early issue detection, ultimately improving the overall development process.

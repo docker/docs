@@ -39,7 +39,7 @@ You can install extensions through the Marketplace or through the Extensions SDK
 
 ### See containers created by extensions
 
-By default, containers created by extensions are hidden from the list of containers in Docker Dashboard and the Docker CLI. To make them visible
+By default, containers created by extensions are hidden from the list of containers in the Docker Desktop Dashboard and the Docker CLI. To make them visible
 update your settings:
 
 1. Navigate to **Settings**.
@@ -57,7 +57,7 @@ update your settings:
 
 Feedback can be given to an extension author through a dedicated Slack channel or GitHub. To submit feedback about a particular extension:
 
-1. Navigate to Docker Dashboard and select the **Manage** tab.
+1. Navigate to the Docker Desktop Dashboard and select the **Manage** tab.
    This displays a list of extensions you've installed.
 2. Select the extension you want to provide feedback on. 
 3. Scroll down to the bottom of the extension's description and, depending on the 

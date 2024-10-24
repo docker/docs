@@ -157,9 +157,9 @@ In this hands-on guide, you'll first see how to build and run a counter web appl
     008e0ecf4f36   redis     "docker-entrypoint.s…"   About a minute ago   Up About a minute   6379/tcp             redis
     ```
 
-7. If you look at the Docker Dashboard, you can see the containers and dive deeper into their configuration.
+7. If you look at the Docker Desktop Dashboard, you can see the containers and dive deeper into their configuration.
 
-   ![A screenshot of Docker Dashboard showing multi-container applications](images/multi-container-apps.webp?w=5000&border=true)
+   ![A screenshot of the Docker Desktop Dashboard showing multi-container applications](images/multi-container-apps.webp?w=5000&border=true)
 
 8. With everything up and running, you can open [http://localhost](http://localhost) in your browser to see the site. Refresh the page several times to see the host that’s handling the request and the total number of requests:
 
@@ -174,9 +174,9 @@ In this hands-on guide, you'll first see how to build and run a counter web appl
     >
     > You might have noticed that Nginx, acting as a reverse proxy, likely distributes incoming requests in a round-robin fashion between the two backend containers. This means each request might be directed to a different container (web1 and web2) on a rotating basis. The output shows consecutive increments for both the web1 and web2 containers and the actual counter value stored in Redis is updated only after the response is sent back to the client.
 
-9. You can use the Docker Dashboard to remove the containers by selecting the containers and selecting the **Delete** button.
+9. You can use the Docker Desktop Dashboard to remove the containers by selecting the containers and selecting the **Delete** button.
 
-   ![A screenshot of Docker Dashboard showing how to delete the multi-container applications](images/delete-multi-container-apps.webp?border=true)
+   ![A screenshot of Docker Desktop Dashboard showing how to delete the multi-container applications](images/delete-multi-container-apps.webp?border=true)
  
 ## Simplify the deployment using Docker Compose
 
@@ -204,14 +204,14 @@ Navigate to the root of the project directory. Inside this directory, you'll fin
     ✔ Container nginx-nodejs-redis-nginx-1  Started
     ```
 
-2. If you look at the Docker Dashboard, you can see the containers and dive deeper into their configuration.
+2. If you look at the Docker Desktop Dashboard, you can see the containers and dive deeper into their configuration.
 
 
-    ![A screenshot of Docker Dashboard showing the containers of the application stack deployed using Docker Compose](images/list-containers.webp?border=true)
+    ![A screenshot of the Docker Desktop Dashboard showing the containers of the application stack deployed using Docker Compose](images/list-containers.webp?border=true)
 
-3. Alternatively, you can use the Docker Dashboard to remove the containers by selecting the application stack and selecting the **Delete** button.
+3. Alternatively, you can use the Docker Desktop Dashboard to remove the containers by selecting the application stack and selecting the **Delete** button.
 
-   ![A screenshot of Docker Dashboard that shows how to remove the containers that you deployed using Docker Compose](images/delete-containers.webp?border=true)
+   ![A screenshot of Docker Desktop Dashboard that shows how to remove the containers that you deployed using Docker Compose](images/delete-containers.webp?border=true)
 
 
 In this guide, you learned how easy it is to use Docker Compose to start and stop a multi-container application compared to `docker run` which is error-prone and difficult to manage.

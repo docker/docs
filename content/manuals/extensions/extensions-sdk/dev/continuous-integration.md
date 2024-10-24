@@ -55,7 +55,7 @@ beforeAll(async () => {
 });
 ```
 
-Then open the Docker Dashboard and run some tests in your extension's UI:
+Then open the Docker Desktop Dashboard and run some tests in your extension's UI:
 
 ```ts
 describe("Test my extension", () => {
@@ -70,7 +70,7 @@ describe("Test my extension", () => {
 });
 ```
 
-Finally, close the Docker Dashboard and uninstall your extension:
+Finally, close the Docker Desktop Dashboard and uninstall your extension:
 
 ```ts
 afterAll(async () => {

@@ -56,7 +56,7 @@ Use the following instructions to run a container.
 
 2. Specify `welcome-to-docker` in the search input and then select the **Pull** button.
 
-    ![A screenshot of the Docker Dashboard showing the search result for welcome-to-docker Docker image ](images/search-the-docker-image.webp?border=true&w=1000&h=700)
+    ![A screenshot of the Docker Desktop Dashboard showing the search result for welcome-to-docker Docker image ](images/search-the-docker-image.webp?border=true&w=1000&h=700)
 
 3. Once the image is successfully pulled, select the **Run** button.
 
@@ -66,7 +66,7 @@ Use the following instructions to run a container.
 
 6. In the **Host port**, specify `8080`.
 
-    ![A screenshot of Docker Dashboard showing the container run dialog with welcome-to-docker typed in as the container name and 8080 specified as the port number](images/run-a-new-container.webp?border=true&w=550&h=400)
+    ![A screenshot of Docker Desktop Dashboard showing the container run dialog with welcome-to-docker typed in as the container name and 8080 specified as the port number](images/run-a-new-container.webp?border=true&w=550&h=400)
 
 7. Select **Run** to start your container.
 
@@ -74,7 +74,7 @@ Congratulations! You just ran your first container! 🎉
  
 ### View your container
 
-You can view all of your containers by going to the **Containers** view of the Docker Dashboard.
+You can view all of your containers by going to the **Containers** view of the Docker Desktop Dashboard.
 
 ![Screenshot of the container view of the Docker Desktop GUI showing the welcome-to-docker container running on the host port 8080](images/view-your-containers.webp?border=true&w=750&h=600)
 
@@ -92,25 +92,25 @@ For this container, the frontend is accessible on port `8080`. To open the websi
 
 Docker Desktop lets you explore and interact with different aspects of your container. Try it out yourself. 
 
-1. Go to the **Containers** view in the Docker Dashboard.
+1. Go to the **Containers** view in the Docker Desktop Dashboard.
 
 2. Select your container.
 
 3. Select the **Files** tab to explore your container's isolated file system.
 
-    ![Screenshot of the Docker Dashboard showing the files and directories inside a running container](images/explore-your-container.webp?border)
+    ![Screenshot of the Docker Desktop Dashboard showing the files and directories inside a running container](images/explore-your-container.webp?border)
 
 ### Stop your container
 
 The `docker/welcome-to-docker` container continues to run until you stop it. 
 
-1. Go to the **Containers** view in the Docker Dashboard.
+1. Go to the **Containers** view in the Docker Desktop Dashboard.
 
 2. Locate the container you'd like to stop.
 
 3. Select the **Stop** action in the **Actions** column.
 
-    ![Screenshot of the Docker Dashboard with the welcome container selected and being prepared to stop](images/stop-your-container.webp?border)
+    ![Screenshot of the Docker Desktop Dashboard with the welcome container selected and being prepared to stop](images/stop-your-container.webp?border)
 
 {{< /tab >}}
 {{< tab name="Using the CLI" >}}
