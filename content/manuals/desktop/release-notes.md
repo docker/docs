@@ -34,9 +34,6 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 - Support for [Docker Desktop on Red Hat Enterprise Linux](/manuals/desktop/install/linux/rhel.md) is now generally available.
 - Volume Backup and Share is now generally available and can be found in the **Volumes** view.
 - Terminal support within Docker Desktop using system shells is now generally available.
-- containerd image store:
-  - Improved output of `docker image inspect` to account for multi-platform images.
-  - Support multi-platform images via enabling users to pick a specific platform in `docker history`.
 - Beta release of Docker VMM - the more performant alternative to Apple Virtualization Framework on macOS (requires Apple Silicon and macOS 12.5 or later).
 
 ### Upgrades
