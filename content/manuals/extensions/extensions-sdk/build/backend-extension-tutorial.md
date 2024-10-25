@@ -282,7 +282,7 @@ Replace the `ui/src/App.tsx` file with the following code:
 import React, { useEffect } from 'react';
 import { createDockerDesktopClient } from "@docker/extension-api-client";
 
-//obtain docker destkop extension client
+//obtain docker desktop extension client
 const ddClient = createDockerDesktopClient();
 
 export function App() {
