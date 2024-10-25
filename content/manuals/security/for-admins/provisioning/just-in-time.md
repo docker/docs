@@ -5,11 +5,11 @@ title: Just-in-Time provisioning
 linkTitle: Just-in-Time
 ---
 
-Just-in-Time (JIT) provisioning automatically creates and updates user accounts after every successful single sign-on (SSO) sign-in. JIT verifies that the user signing in is a member of the organization and teams that they are assigned to in your identity provider (IdP). When you [create your SSO connection](../single-sign-on/_index.md), JIT provisioning is turned on by default.
+Just-in-Time (JIT) provisioning automatically creates and updates user accounts after every successful single sign-on (SSO) authentication. JIT verifies that the user signing in belongs to the organization and the teams assigned to them in your identity provider (IdP). When you [create your SSO connection](../single-sign-on/_index.md), JIT provisioning is turned on by default.
 
 ## SSO authentication with JIT provisioning enabled
 
-When a user signs in with SSO and JIT provisioning is enabled, the following steps occur automatically:
+When a user signs in with SSO and your SSO configuration has JIT provisioning enabled, the following steps occur automatically:
 
 1. The system checks if a Docker account exists for the user's email address.
 
@@ -56,7 +56,7 @@ The following graphic provides an overview of SSO authentication with JIT disabl
 
 > [!WARNING]
 >
-> Disabling JIT provisioning may disrupt your users' access and workflows. With JIT disabled, users will not be automatically added to your organization. Users must already be a member of the organization or have a pending invitation to successfully sign in through SSO.To auto-provision users with JIT disabled, [use SCIM](./scim.md).
+> Disabling JIT provisioning may disrupt your users' access and workflows. With JIT disabled, users will not be automatically added to your organization. Users must already be a member of the organization or have a pending invitation to successfully sign in through SSO. To auto-provision users with JIT disabled, [use SCIM](./scim.md).
 
 You may want to disable JIT provisioning for reasons such as the following:
 

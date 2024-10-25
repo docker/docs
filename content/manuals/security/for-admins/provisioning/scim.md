@@ -256,7 +256,7 @@ If SCIM is disabled, any user provisioned through SCIM will remain in the organi
 
 ## More resources
 
-The following videos demonstrate how to configure SCIM for your IdP.
+The following videos demonstrate how to configure SCIM for your IdP:
 
 - [Video: Configure SCIM with Okta](https://youtu.be/c56YECO4YP4?feature=shared&t=1314)
 - [Video: Attribute mapping with Okta](https://youtu.be/c56YECO4YP4?feature=shared&t=1998)

@@ -174,7 +174,7 @@ Once complete, a user who signs in to Docker through SSO is automatically added 
 
 ## More resources
 
-The following videos demonstrate how to use group mapping with your IdP with SCIM enabled.
+The following videos demonstrate how to use group mapping with your IdP with SCIM enabled:
 
 - [Video: Group mapping with Okta](https://youtu.be/c56YECO4YP4?feature=shared&t=3023)
 - [Video: Attribute and group mapping with Entra ID (Azure)](https://youtu.be/bGquA8qR9jU?feature=shared&t=2039)
