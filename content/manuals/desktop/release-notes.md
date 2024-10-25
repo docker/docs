@@ -41,7 +41,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 - [containerd v1.7.21](https://github.com/containerd/containerd/releases/tag/v1.7.21)
 - [Docker Buildx v0.17.1](https://github.com/docker/buildx/releases/tag/v0.17.1)
 - [Docker Compose v2.29.7](https://github.com/docker/compose/releases/tag/v2.29.7)
-- [Docker Engine v27.3.1](https://docs.docker.com/engine/release-notes/27.3/#2731)
+- [Docker Engine v27.3.1](https://docs.docker.com/engine/release-notes/27/#2731)
 - [Docker Scout CLI v1.14.0](https://github.com/docker/scout-cli/releases/tag/v1.14.0)
 - Docker Debug `v0.0.37`
 - Linux kernel `v6.10.9`
