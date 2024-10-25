@@ -34,9 +34,6 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 - Support for [Docker Desktop on Red Hat Enterprise Linux](/manuals/desktop/install/linux/rhel.md) is now generally available.
 - Volume Backup and Share is now generally available and can be found in the **Volumes** view.
 - Terminal support within Docker Desktop using system shells is now generally available.
-- containerd image store:
-  - Improved output of `docker image inspect` to account for multi-platform images.
-  - Support multi-platform images via enabling users to pick a specific platform in `docker history`.
 - Beta release of Docker VMM - the more performant alternative to Apple Virtualization Framework on macOS (requires Apple Silicon and macOS 12.5 or later).
 
 ### Upgrades
@@ -44,7 +41,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 - [containerd v1.7.21](https://github.com/containerd/containerd/releases/tag/v1.7.21)
 - [Docker Buildx v0.17.1](https://github.com/docker/buildx/releases/tag/v0.17.1)
 - [Docker Compose v2.29.7](https://github.com/docker/compose/releases/tag/v2.29.7)
-- [Docker Engine v27.3.1](https://docs.docker.com/engine/release-notes/27.3/#2731)
+- [Docker Engine v27.3.1](https://docs.docker.com/engine/release-notes/27/#2731)
 - [Docker Scout CLI v1.14.0](https://github.com/docker/scout-cli/releases/tag/v1.14.0)
 - Docker Debug `v0.0.37`
 - Linux kernel `v6.10.9`
