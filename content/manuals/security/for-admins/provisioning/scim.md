@@ -5,6 +5,7 @@ linkTitle: SCIM
 description: Learn how System for Cross-domain Identity Management works and how to set it up.
 aliases:
   - /security/for-admins/scim/
+weight: 30
 ---
 
 System for Cross-domain Identity Management (SCIM) is available for Docker Business customers. This guide provides an overview of SCIM provisioning.
