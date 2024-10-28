@@ -26,7 +26,7 @@ Before you turn on the Docker Desktop WSL 2 feature, ensure you have:
 - Met the Docker Desktop for Windows' [system requirements](https://docs.docker.com/desktop/install/windows-install/#system-requirements).
 - Installed the WSL 2 feature on Windows. For detailed instructions, refer to the [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
 
->**Tip**
+> [!TIP]
 >
 > For a better experience on WSL, consider enabling the WSL
 > [autoMemoryReclaim](https://learn.microsoft.com/en-us/windows/wsl/wsl-config#experimental-settings)
@@ -51,7 +51,7 @@ Before you turn on the Docker Desktop WSL 2 feature, ensure you have:
 
 Now `docker` commands work from Windows using the new WSL 2 engine.
 
->**Tip**
+> [!TIP]
 >
 > By default, Docker Desktop stores the data for the WSL 2 engine at `C:\Users\[USERNAME]\AppData\Local\Docker\wsl`.
 > If you want to change the location, for example, to another drive you can do so via the `Settings -> Resources -> Advanced` page from the Docker Dashboard.

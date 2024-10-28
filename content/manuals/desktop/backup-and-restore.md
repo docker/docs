@@ -8,7 +8,7 @@ weight: 130
 Use the following procedure to save and restore your images and container data. This is useful if you want to reset your VM disk or to move your Docker environment to a new
 computer, for example.
 
-> Should I back up my containers?
+> [!IMPORTANT]
 >
 > If you use volumes or bind-mounts to store your container data, backing up your containers may not be needed, but make sure to remember the options that were used when creating the container or use a [Docker Compose file](/reference/compose-file/_index.md) if you want to re-create your containers with the same configuration after re-installation.
 
