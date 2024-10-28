@@ -28,7 +28,7 @@ To assign users to Docker teams through your IdP, you must create groups in your
 
 You can also use this format to assign users to multiple organizations. For example, to add a user to the "backend" team in the "moby" organization and the "desktop" team in the "whale" organization, the group names would be `moby:backend` and `whale:desktop`.
 
->[!TIP]
+> [!TIP]
 >
 >Match the group names in your IdP with your Docker teams. When groups are synced, Docker creates a team if it doesn’t already exist.
 
