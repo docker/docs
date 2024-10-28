@@ -69,6 +69,10 @@ aliases:
 {{< /tab >}}
 {{< /tabs >}}
 
+## Manage provisioning
+
+Users are provisioned with Just-in-Time (JIT) provisioning by default. If you enable SCIM, you can disable JIT. For more information, see the [Provisioning overview](/manuals/security/for-admins/provisioning/_index.md) [Just-in-Time](/manuals/security/for-admins/provisioning/just-in-time.md) guides.
+
 ## What's next?
 
 - [Set up SCIM](../provisioning/scim.md)
