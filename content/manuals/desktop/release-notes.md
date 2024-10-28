@@ -68,7 +68,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 - Fixed a bug that prevented the Sign in enforcement popup to be triggered when token expires.
 - Fixed a bug where containers would not be displayed in the GUI immediately after signing in when using [enforced sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md).
 - `settings.json` has been renamed to `settings-store.json`
-- The host networking feature no longer requires the users to be signed-in in order to use it.
+- The host networking feature no longer requires users to be signed-in in order to use it.
 
 #### For Mac
 
