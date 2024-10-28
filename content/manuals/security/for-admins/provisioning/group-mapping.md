@@ -30,7 +30,7 @@ You can also use this format to assign users to multiple organizations. For exam
 
 > [!TIP]
 >
->Match the group names in your IdP with your Docker teams. When groups are synced, Docker creates a team if it doesn’t already exist.
+> Match the group names in your IdP with your Docker teams. When groups are synced, Docker creates a team if it doesn’t already exist.
 
 The following lists the supported group mapping attributes:
 
