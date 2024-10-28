@@ -64,7 +64,7 @@ You must [configure SSO](../single-sign-on/configure/_index.md) before you enabl
 
 ## Enable SCIM in your IdP
 
-The user interface for your IdP may differ slightly from the following steps. You can refer to the documentation for your IdP to verify. See the documentation for your IdP for additional details:
+The user interface for your IdP may differ slightly from the following steps. You can refer to the documentation for your IdP to verify.  For additional details, see the documentation for your IdP:
 
 - [Okta](https://help.okta.com/en-us/Content/Topics/Apps/Apps_App_Integration_Wizard_SCIM.htm)
 - [Entra ID (formerly Azure AD)](https://learn.microsoft.com/en-us/azure/active-directory/app-provisioning/user-provisioning)
