@@ -471,6 +471,7 @@
       "self-start",
       "shadow",
       "shadow-lg",
+      "sm:block",
       "sm:flex",
       "sm:flex-row",
       "sm:hidden",

@@ -10,8 +10,11 @@
       <div>
         {{/* main logo */}}
         <a title="Docker Docs home page" href="{{ site.BaseURL }}">
-          <div>
+          <div class="hidden sm:block">
             {{- (resources.Get "images/docker-docs-white.svg").Content | safe.HTML -}}
+          </div>
+          <div class="block sm:hidden">
+            {{- (resources.Get "images/docker-docs-white-condensed.svg").Content | safe.HTML -}}
           </div>
         </a>
       </div>
