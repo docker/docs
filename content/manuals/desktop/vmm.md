@@ -20,7 +20,7 @@ Docker VMM is a new, container-optimized hypervisor introduced in Docker Desktop
 Docker VMM brings exciting advancements specifically tailored for Apple Silicon machines. By optimizing both the Linux kernel and hypervisor layers, Docker VMM delivers significant performance enhancements across common developer tasks. 
 
 Some key performance enhancements provided by Docker VMM include:
- - Faster I/O operations: Iterating over a large shared filesystem with `find` is now 2x faster than in Docker Desktop 4.34 (with a cold cache).
+ - Faster I/O operations: With a cold cache, iterating over a large shared filesystem with `find` is 2x faster than when the Apple Virtualization Framework is used.
  - Improved caching: With a warm cache, performance can improve by as much as 25x, even surpassing native Mac operations.
 
 These improvements directly impact developers who rely on frequent file access, network interactions, and overall system responsiveness during containerized development. Docker VMM marks a significant leap in speed, enabling smoother workflows and faster iteration cycles.
