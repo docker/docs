@@ -47,7 +47,7 @@ File shares take a few seconds to initialize as files are copied into the Docker
 
 When the status indicator displays **Watching for filesystem changes**, your files are available to the VM through all the standard bind mount mechanisms, whether that's `-v` in the command line or specified in your `compose.yml` file.
 
->**Note**
+> [!NOTE]
 >
 > When you create a new service, setting the [bind mount option consistency](/reference/cli/docker/service/create.md#options-for-bind-mounts) to `:consistent` bypasses Synchronized file shares. 
 
