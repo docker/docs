@@ -13,18 +13,18 @@ When a user signs in with SSO and your SSO configuration has JIT provisioning en
 
 1. The system checks if a Docker account exists for the user's email address.
 
-    - **If an account exists**: The system uses the existing account and updates the user's full name if necessary.
-    - **If no account exists**: A new Docker account is created using basic user attributes (email, name, and surname). A unique username is generated based on the user's email, name, and random numbers to ensure all usernames are unique across the platform.
+    - If an account exists: The system uses the existing account and updates the user's full name if necessary.
+    - If no account exists: A new Docker account is created using basic user attributes (email, name, and surname). A unique username is generated based on the user's email, name, and random numbers to ensure all usernames are unique across the platform.
 
 2. The system checks for any pending invitations to the SSO organization.
 
-    - **Invitation found**: The invitation is automatically accepted.
-    - **Invitation includes a specific group**: The user is added to that group within the SSO organization.
+    - Invitation found: The invitation is automatically accepted.
+    - Invitation includes a specific group: The user is added to that group within the SSO organization.
 
 3. The system verifies if the IdP has shared group mappings during authentication.
 
-    - **Group mappings provided**: The user is assigned to the relevant organizations and teams.
-    - **No group mappings provided**: The system checks if the user is already part of the organization. If not, the user is added to the default organization and team configured in the SSO connection.
+    - Group mappings provided: The user is assigned to the relevant organizations and teams.
+    - No group mappings provided: The system checks if the user is already part of the organization. If not, the user is added to the default organization and team configured in the SSO connection.
 
 The following graphic provides an overview of SSO authentication with JIT enabled:
 
@@ -36,15 +36,13 @@ When JIT provisioning is disabled in your SSO connection, the following actions 
 
 1. The system checks if a Docker account exists for the user's email address.
 
-    - **If an account exists**: The system uses the existing account and updates the user's full name if necessary.
-
-    - **If no account exists**: A new Docker account is created using basic user attributes (email, name, and surname). A unique username is generated based on the user's email, name, and random numbers to ensure all usernames are unique across the platform.
+    - If an account exists: The system uses the existing account and updates the user's full name if necessary.
+    - If no account exists: A new Docker account is created using basic user attributes (email, name, and surname). A unique username is generated based on the user's email, name, and random numbers to ensure all usernames are unique across the platform.
 
 2. The system checks for any pending invitations to the SSO organization.
 
-   - **Invitation found**: If the user is a member of the organization or has a pending invitation, sign-in is successful, and the invitation is automatically accepted.
-
-   - **No invitation found**: If the user is not a member of the organization and has no pending invitation, the sign-in fails, and an `Access denied` error appears. The user must contact an administrator to be invited to the organization.
+   - Invitation found: If the user is a member of the organization or has a pending invitation, sign-in is successful, and the invitation is automatically accepted.
+   - No invitation found: If the user is not a member of the organization and has no pending invitation, the sign-in fails, and an `Access denied` error appears. The user must contact an administrator to be invited to the organization.
 
 With JIT disabled, group mapping is only available if you have [SCIM enabled](/security/for-admins/provisioning/scim/#enable-scim-in-docker). If SCIM is not enabled, users won't be auto-provisioned to groups.
 
