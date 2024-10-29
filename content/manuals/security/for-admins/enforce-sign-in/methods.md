@@ -81,7 +81,7 @@ To enforce sign-in for Docker Desktop on macOS, you can use a `plist` file that 
 
 ### Example deployment
 
-The following example outlines how to create and distribute the `plist` file to enforce sign-in on Docker Desktop using Group Policy. There are multiple ways to deploy this configuration depending on your organization's infrastructure, security policies, and management tools.
+The following example outlines how to create and distribute the `plist` file to enforce sign-in on Docker Desktop. There are multiple ways to deploy this configuration depending on your organization's infrastructure, security policies, and management tools.
 
 {{< tabs >}}
 {{< tab name="MDM" >}}
