@@ -13,6 +13,32 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.30.0
+
+{{< release-date date="2024-10-29" >}}
+
+### Update
+
+- Dependencies upgrade: bump compose-go to v2.4.1
+- Dependencies upgrade: bump docker engine and cli to v27.3.1
+
+### Bug fixes and enhancements
+
+- Introduction of service hooks support.
+- Addition of alpha `generate` command.
+- Addition of `export` command.
+- Added support for CDI device requests using `devices` in the Compose file.
+- A lot a bug fixes.
+
+## 2.29.7
+
+{{< release-date date="2024-09-20" >}}
+
+
+### Bug fixes and enhancements
+
+- Fixed a regression when using mount API for bind mounts.
+
 ## 2.29.6
 
 {{< release-date date="2024-09-19" >}}
