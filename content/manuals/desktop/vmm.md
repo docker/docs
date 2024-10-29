@@ -15,7 +15,7 @@ The Virtual Machine Manager (VMM) in Docker Desktop for Mac is responsible for c
 
 ## Docker VMM (Beta)
 
-Docker VMM is a new, container-optimized hypervisor introduced in Docker Desktop 4.35 and available on Apple Silicon Macs only. It has been designed to enhance speed and resource efficiency, making it an ideal choice for developers seeking to optimize their workflow efficiency. 
+Docker VMM is a new, container-optimized hypervisor introduced in Docker Desktop 4.35 and available on Apple Silicon Macs only. Its enhanced speed and resource efficiency makes it an ideal choice for optimizing your workflow. 
 
 Docker VMM brings exciting advancements specifically tailored for Apple Silicon machines. By optimizing both the Linux kernel and hypervisor layers, Docker VMM delivers significant performance enhancements across common developer tasks. 
 
@@ -23,14 +23,14 @@ Some key performance enhancements provided by Docker VMM include:
  - Faster I/O operations: With a cold cache, iterating over a large shared filesystem with `find` is 2x faster than when the Apple Virtualization Framework is used.
  - Improved caching: With a warm cache, performance can improve by as much as 25x, even surpassing native Mac operations.
 
-These improvements directly impact developers who rely on frequent file access, network interactions, and overall system responsiveness during containerized development. Docker VMM marks a significant leap in speed, enabling smoother workflows and faster iteration cycles.
+These improvements directly impact developers who rely on frequent file access and overall system responsiveness during containerized development. Docker VMM marks a significant leap in speed, enabling smoother workflows and faster iteration cycles.
 
 ### Known issues 
 
 As Docker VMM is still in Beta, there are a few known limitations:
 
 - Docker VMM does not currently support Rosetta, so emulation of amd64 architectures is slow. Docker is exploring potential solutions.
--  Certain databases, like MongoDB and Cassandra, may fail when using virtiofs with Docker VMM. This issue is expected to be resolved in a future release.
+- Certain databases, like MongoDB and Cassandra, may fail when using virtiofs with Docker VMM. This issue is expected to be resolved in a future release.
 
 ## Apple Virtualization Framework
 
@@ -40,11 +40,13 @@ The Apple Virtualization Framework is a stable and well-established option for m
 
 > [!NOTE]
 >
-> QEMU will be deprecated in a future release.
+> QEMU will be deprecated in a future release. 
 
 QEMU is a legacy virtualization option for Apple Silicon Macs, primarily supported for older use cases. 
 
 Docker recommends transitioning to newer alternatives, such as Docker VMM or the Apple Virtualization Framework, as they offer superior performance and ongoing support. Docker VMM, in particular, offers substantial speed improvements and a more efficient development environment, making it a compelling choice for developers working with Apple Silicon.
+
+Note that this is not related to using QEMU to emulate non-native architectures in [multi-platform builds](/manuals/build/building/multi-platform.md#qemu).
 
 ## HyperKit (Legacy) for Intel-based Macs
 
