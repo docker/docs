@@ -4,7 +4,7 @@ description: Use Testcontainers Cloud with GitHub Workflows to automate testing 
 weight: 30
 ---
 
-{{< youtube-embed "https://youtu.be/NlZY9aumKJU" >}}
+{{< youtube-embed "NlZY9aumKJU" >}}
 
 This demo shows how Testcontainers Cloud can be seamlessly integrated into a
 Continuous Integration (CI) pipeline using GitHub Workflows, providing a
