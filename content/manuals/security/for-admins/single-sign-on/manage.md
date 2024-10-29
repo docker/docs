@@ -54,20 +54,9 @@ aliases:
 
 ## Manage users
 
-{{< tabs >}}
-{{< tab name="Admin Console" >}}
-
 {{< include "admin-early-access.md" >}}
 
 {{% admin-sso-management-users product="admin" %}}
-
-{{< /tab >}}
-{{< tab name="Docker Hub" >}}
-
-{{% admin-sso-management-users product="hub" %}}
-
-{{< /tab >}}
-{{< /tabs >}}
 
 ## Manage provisioning
 
