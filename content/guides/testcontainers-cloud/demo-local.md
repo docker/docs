@@ -4,7 +4,7 @@ description: Set up Testcontainers Cloud by Docker in a local development enviro
 weight: 20
 ---
 
-{{< youtube-embed "https://youtu.be/7c3xLAG560U" >}}
+{{< youtube-embed "7c3xLAG560U" >}}
 
 This demo shows the process of setting up Testcontainers Cloud by Docker to
 work in your local development environment using the Testcontainers Desktop
