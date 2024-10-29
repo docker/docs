@@ -8,10 +8,10 @@
 {{ $provisioning_steps := "This feature is only available in the Admin Console."}}
 
 {{ if eq (.Get "product") "admin" }}
-  {{ $product_link = "the [Admin Console](https://admin.docker.com)" }}
+  {{ $product_link = "the [Admin Console](https://app.docker.com/admin)" }}
   {{ $invite_button = "**Invite**" }}
   {{ $sso_navigation = "Select your organization or company in the left navigation drop-down menu, and then select **SSO and SCIM**." }}
-  {{ $member_navigation = `Navigate to the user management page for your organization or company. 
+  {{ $member_navigation = `Navigate to the user management page for your organization or company.
     - Organization: Select your organization in the left navigation drop-down menu, and then select **Members**.
     - Company: Select your company in the left navigation drop-down menu, and then select **Users**.` }}
   {{ $remove_button = "**Remove member**, if you're an organization, or **Remove user**, if you're a company" }}
