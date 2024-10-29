@@ -6,37 +6,40 @@ weight: 20
 
 ## Development Environment Setup
 
-This guide demonstrates how to set up a development environment for a Laravel application using Docker Compose. This setup includes essential services such as PHP-FPM, Nginx, and a database (we will use Postgres, but MySQL/MariaDB can be easily set), which enable you to develop in an isolated and consistent environment.
+This guide demonstrates how to set up a development environment for a Laravel application using Docker and Docker Compose. This setup includes essential services like PHP-FPM, Nginx, and a database (using Postgres, with MySQL/MariaDB as alternatives), which enable you to develop in an isolated and consistent environment.
 
 > [!NOTE]
 > If you want to quickly test this setup without configuring everything manually, you can download the [Laravel Docker Examples](https://github.com/rw4lll/laravel-docker-examples) repository. It includes pre-configured examples for both development and production environments.
 
 ### Project Structure
 
-To start, create a project structure that will include both the Laravel application and Docker-related files:
+Start by creating a project structure that includes both the Laravel application and Docker-related files:
 
 ```
-example-app
-├── app, config, routes, tests, etc.
+my-laravel-app
+├── app/
+├── bootstrap/
+├── config/
+├── database/
+├── public/
 ├── docker/
 │   ├── php-fpm
 │   │   └── Dockerfile
 │   │   └── entrypoint.sh
 │   ├── workspace
 │   │   └── Dockerfile
-│   └── web
+│   └── nginx
 │       └── nginx.conf
 ├── compose.yaml
 ├── .dockerignore
-└── .env
-└── other files
+├── .env
+├── vendor/
+├── ...
 ```
 
+This structure includes a typical Laravel app, with a `docker` directory for Docker-related files like `php-fpm` and `workspace` Dockerfiles, the `nginx.conf` config file, and the `compose.yaml` file to define the services.
 
-This structure includes a typical Laravel app, with a `docker` directory for Docker-related files like `php-fpm` and `workspace` Dockerfiles, as well as `nginx.conf` config file, and the `compose.yaml` file to define the services.
-
-
-### Writing the Dockerfile for PHP-FPM
+### Create a Dockerfile for PHP-FPM
 
 The PHP-FPM Dockerfile defines the environment in which PHP will run. Here is an example:
 
@@ -45,9 +48,9 @@ The PHP-FPM Dockerfile defines the environment in which PHP will run. Here is an
 # For development environment we can use one-stage build for simplicity.
 FROM php:8.3-fpm
 
-# Install system dependencies and PHP extensions required for Laravel + MySQL/PostgreSQL support
-# Some dependencies are required for PHP extensions only in the build stage
-# We don't need to install Node.js or build assets, as it was done in the Nginx image
+# Install system dependencies and PHP extensions for Laravel with MySQL/PostgreSQL support.
+# Certain dependencies are only needed for PHP extensions in this build stage.
+# Node.js and asset building are handled in the Nginx container.
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     unzip \
@@ -126,7 +129,7 @@ CMD ["php-fpm"]
 
 This Dockerfile installs the necessary PHP extensions required by Laravel, including database drivers and the Xdebug extension for debugging.
 
-### Writing the Dockerfile for Workspace
+### Create a Dockerfile for Workspace
 
 The workspace container is used to run Artisan commands, Composer, and NPM. Here's the Dockerfile for the workspace:
 
@@ -197,7 +200,7 @@ RUN if getent group ${GID}; then \
 # Switch to the non-root user to install NVM and Node.js
 USER www
 
-# Install NVM as the www user
+# Install NVM (Node Version Manager) as the www user
 RUN export NVM_DIR="$HOME/.nvm" && \
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash && \
     [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" && \
@@ -220,19 +223,19 @@ ENTRYPOINT []
 CMD ["bash"]
 ```
 
-### Docker Compose Configuration for Development
+### Create Docker Compose Configuration for Development
 
 Here's the `compose.yaml` file to set up the development environment:
 
 ```yaml
 services:
   web:
-    image: nginx:latest # We don't need to customize the image. Just pass the configuration to the Dockerfile.
+    image: nginx:latest # Using the default Nginx image with custom configuration.
     volumes:
       # Mount the application code for live updates
       - ./:/var/www
       # Mount the Nginx configuration file
-      - ./docker/web/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
     ports:
       # Map port 80 inside the container to the port specified by 'NGINX_PORT' on the host machine
       - "${NGINX_PORT:-80}:80"
@@ -324,10 +327,10 @@ volumes:
 
 ### Running Your Development Environment
 
-To start your Laravel development environment, run the following command in your terminal:
+To start the development environment, use:
 
 ```sh
-$ docker compose up -d
+$ docker compose -f compose.yaml up --build -d
 ```
 
 This command will build and start all the required services, including PHP, Nginx, and the PostgreSQL database. You can now access your Laravel application at `http://localhost/`.

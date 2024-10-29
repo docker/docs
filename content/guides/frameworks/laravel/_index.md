@@ -1,5 +1,5 @@
 ---
-title: Develop and run Laravel applications with Docker Compose
+title: Develop and Deploy Laravel applications with Docker Compose
 linkTitle: Laravel applications with Docker Compose
 summary: Learn how to efficiently set up Laravel development and production environments using Docker Compose.
 description: A guide on using Docker Compose to manage Laravel applications for development and production, covering container configurations and service management.
@@ -23,9 +23,9 @@ params:
       external: true
 ---
 
-Laravel is a popular PHP framework that allows developers to build web applications quickly and effectively. Docker Compose helps manage development and production environments by defining all necessary services, like PHP, web server and database, in a single YAML file. This guide provides an overview of setting up a robust environment for Laravel using Docker Compose, with a focus on simplicity and efficiency.
+Laravel is a popular PHP framework that allows developers to build web applications quickly and effectively. Docker Compose simplifies the management of development and production environments by defining essential services, like PHP, a web server, and a database, in a single YAML file. This guide provides a streamlined approach to setting up a robust Laravel environment using Docker Compose, focusing on simplicity and efficiency.
 
-The demonstrated examples can be found in the [GitHub repository](https://github.com/rw4lll/laravel-docker-examples). Docker Compose is used as a straightforward way to connect multiple containers to meet Laravel's requirements, but similar techniques can also be applied using Docker Swarm, Kubernetes, or even individual Docker containers.
+The demonstrated examples can be found in the [GitHub repository](https://github.com/rw4lll/laravel-docker-examples). Docker Compose offers a straightforward approach to connecting multiple containers for Laravel, though similar setups can also be achieved using tools like Docker Swarm, Kubernetes, or individual Docker containers.
 
 This guide is intended for educational purposes, helping developers adapt and optimize configurations for their specific use cases. Additionally, there are existing tools that support Laravel in containers:
 
@@ -42,7 +42,3 @@ This guide is intended for educational purposes, helping developers adapt and op
 
 - Developers who work with Laravel and want to streamline environment management.
 - DevOps engineers seeking efficient ways to manage and deploy Laravel applications.
-
-## Tools integration
-
-Docker Compose integrates seamlessly with the Docker CLI, CI/CD tools, and container orchestration platforms like Docker Swarm and Kubernetes. This makes defining, managing, and orchestrating Laravel applications consistent across all environments.
