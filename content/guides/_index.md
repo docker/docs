@@ -7,6 +7,7 @@ params:
 layout: landing
 aliases:
   - /learning-paths/
+  - /language/
 ---
 
 Explore our collection of guides to learn how Docker can optimize your
