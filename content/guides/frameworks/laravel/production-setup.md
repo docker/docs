@@ -1,7 +1,7 @@
 ---
 title: Laravel Production Setup with Docker Compose
 description: Set up a production-ready environment for Laravel using Docker Compose.
-weight: 40
+weight: 30
 ---
 
 ## Production Environment Setup
