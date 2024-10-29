@@ -50,6 +50,10 @@ The following example outlines how to deploy a registry key to enforce sign-in o
 
 ## plist method (Mac only)
 
+> [!NOTE]
+>
+> The `plist` method is available with Docker Desktop version 4.32 and later.
+
 To enforce sign-in for Docker Desktop on macOS, you can use a `plist` file that defines the required settings. The following steps guide you through the process of creating and deploying the necessary `plist` file to enforce this policy:
 
 1. Create the file `/Library/Application Support/com.docker.docker/desktop.plist`.
