@@ -1,24 +1,32 @@
-command: docker compose alpha publish
-short: Publish compose application
-long: Publish compose application
-usage: docker compose alpha publish [OPTIONS] REPOSITORY[:TAG]
+command: docker compose alpha generate
+short: EXPERIMENTAL - Generate a Compose file from existing containers
+long: EXPERIMENTAL - Generate a Compose file from existing containers
+usage: docker compose alpha generate [OPTIONS] [CONTAINERS...]
 pname: docker compose alpha
 plink: docker_compose_alpha.yaml
 options:
-    - option: oci-version
+    - option: format
       value_type: string
-      description: |
-        OCI Image/Artifact specification version (automatically determined by default)
+      default_value: yaml
+      description: 'Format the output. Values: [yaml | json]'
       deprecated: false
       hidden: false
       experimental: false
       experimentalcli: false
       kubernetes: false
       swarm: false
-    - option: resolve-image-digests
-      value_type: bool
-      default_value: "false"
-      description: Pin image tags to digests
+    - option: name
+      value_type: string
+      description: Project name to set in the Compose file
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: project-dir
+      value_type: string
+      description: Directory to use for the project
       deprecated: false
       hidden: false
       experimental: false
