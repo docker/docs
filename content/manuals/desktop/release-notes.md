@@ -31,7 +31,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 #### For all platforms
 
-- Fixed a bug where Docker Desktop would erroneously bind to port 8888. Fixes [docker/for-win#14389](https://github.com/docker/for-win/issues/14389) and [docker/for-mac#7468](https://github.com/docker/for-mac/issues/7468)
+- Fixed a bug where Docker Desktop would incorrectly bind to port `8888`. Fixes [docker/for-win#14389](https://github.com/docker/for-win/issues/14389) and [docker/for-mac#7468](https://github.com/docker/for-mac/issues/7468)
 
 ## 4.35.0
 
