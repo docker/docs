@@ -45,10 +45,8 @@ To install Docker Desktop on Fedora:
 3. Install the package with dnf as follows:
 
    ```console
-   $ sudo dnf install ./docker-desktop-<arch>.rpm
+   $ sudo dnf install ./docker-desktop-x86_64.rpm
    ```
-
-   Don't forget to substitute `<arch>` with the architecture you want.
 
    By default, Docker Desktop is installed at `/opt/docker-desktop`.
 
