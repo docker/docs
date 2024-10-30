@@ -11,7 +11,6 @@ aliases:
   - /languages/r/
   - /guides/languages/r/
 languages: [r]
-levels: [beginner]
 params:
   time: 10 minutes
 ---

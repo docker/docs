@@ -9,11 +9,7 @@ ignoreLogs:
 
 taxonomies:
   tag: tags
-  # filters for guides:
   language: languages
-  subject: subjects
-  level: levels
-  product: products
 
 permalinks:
   page:
@@ -112,7 +108,7 @@ params:
 
   latest_engine_api_version: "1.47"
   docker_ce_version: "27.2.1"
-  compose_version: "v2.30.0"
+  compose_version: "v2.30.1"
   compose_file_v3: "3.8"
   compose_file_v2: "2.4"
   buildkit_version: "0.16.0"

@@ -1,10 +1,13 @@
 <!-- Main navigation for the sidebar -->
 <div class="py-2 px-4" x-data="{ expanded: false }">
   <div class="flex w-full items-center justify-between">
-    <!-- Current section: use menu, fall back to current page -->
-    {{- $curr := page }}
+    <!-- Current section: use menu, fall back to current section or page -->
+    {{- $curr := .FirstSection }}
+    {{- if eq $curr site.Home }}
+      {{- $curr = . }}
+    {{- end }}
     {{- range site.Menus.main }}
-      {{- if .Page.IsAncestor page }}
+      {{- if or (.Page.IsAncestor page) (eq .Page page) }}
         {{- $curr = .Page }}
       {{- end }}
     {{- end }}

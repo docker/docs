@@ -6,8 +6,7 @@ keywords: python, generative ai, genai, llm, whisper, pinecone, openai, whisper
 summary: |
   Learn how to build and deploy a generative AI video analysis and
   transcription bot using Docker.
-subjects: [ai]
-levels: [beginner]
+tags: [ai]
 aliases:
   - /guides/use-case/genai-video-bot/
 params:

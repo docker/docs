@@ -1,6 +1,5 @@
 ---
 title: FAQ
-icon: quiz
 description: Frequently asked questions
 ---
 

@@ -7,8 +7,7 @@ description: |
 summary: |
   Build applications up to 39x faster using cloud-based resources, shared team
   cache, and native multi-architecture support.
-levels: [beginner]
-products: [dbc]
+tags: [product-demo]
 aliases:
   - /learning-paths/docker-build-cloud/
 params:

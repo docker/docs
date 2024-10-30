@@ -2,10 +2,11 @@
 title: Set up your company for success with Docker
 linkTitle: Admin set up 
 summary: Get the most out of Docker by streamlining workflows, standardizing development environments, and ensuring smooth deployments across your company.
-description: Learn how to onboard your company and take advantage of all of the Docker products and features. 
-levels: [intermediate]
+description: Learn how to onboard your company and take advantage of all of the Docker products and features.
+tags: [admin]
 params:
   featured: true
+  time: 20 minutes
   image: 
   resource_links:
     - title: Overview of Administration in Docker

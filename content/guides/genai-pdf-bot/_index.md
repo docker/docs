@@ -5,8 +5,7 @@ keywords: python, generative ai, genai, llm, neo4j, ollama, langchain
 summary: |
   Learn how to build a PDF bot for parsing PDF documents and generating
   responses using Docker and generative AI.
-levels: [beginner]
-subjects: [ai]
+tags: [ai]
 aliases:
   - /guides/use-case/genai-pdf-bot/
 params:

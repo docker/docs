@@ -6,9 +6,8 @@ description: Learn how to build and run a text recognition application using Pyt
 summary: |
   This guide details how to containerize text classification models using
   Docker.
-subjects: [ai]
+tags: [ai]
 languages: [python]
-levels: [beginner]
 aliases:
   - /guides/use-case/nlp/text-classification/
 params:

@@ -1,6 +1,5 @@
 ---
 title: Best practices
-icon: star
 description: Optimal patterns for Docker
 ---
 

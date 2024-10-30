@@ -4,9 +4,8 @@ keywords: tensorflow.js, machine learning, ml, mediapipe, blazeface, face detect
 title: Face detection with TensorFlow.js
 summary: |
   This guide explains how to run TensorFlow.js in Docker containers.
-subjects: [ai]
+tags: [ai]
 languages: [js]
-levels: [beginner]
 aliases:
   - /guides/use-case/tensorflowjs/
 params:
