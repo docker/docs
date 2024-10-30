@@ -23,8 +23,8 @@ For more detailed information, see the [release notes in the Compose repo](https
 
 ### Bug fixes and enhancements
 
-- Fixed a regression when using stdin as input of `-f` flag
-- Fixed a regression when using multiple time the same YAML anchor in a Compose file
+- Fixed a regression when using stdin as input for `-f` flag
+- Fixed a regression when using the same YAML anchor multiple times in a Compose file
 
 ## 2.30.0
 
