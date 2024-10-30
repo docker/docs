@@ -15,7 +15,7 @@ This guide demonstrates how to set up a production-ready Laravel environment usi
 
 The project structure for production closely follows the development setup, with Dockerfiles and configurations tailored specifically for production.
 
-```
+```plaintext
 my-laravel-app/
 ├── app/
 ├── bootstrap/
