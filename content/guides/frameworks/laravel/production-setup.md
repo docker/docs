@@ -429,7 +429,7 @@ volumes:
 
 To start the production environment, use:
 
-```sh
+```console
 $ docker compose -f compose.yaml up --build -d
 ```
 
