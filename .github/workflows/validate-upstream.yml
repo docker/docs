@@ -20,7 +20,7 @@ on:
         required: false
         type: string
       create-placeholder-stubs:
-        type: boolean
+        type: boo
         required: false
 
 jobs:
