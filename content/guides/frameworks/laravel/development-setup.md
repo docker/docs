@@ -329,7 +329,7 @@ volumes:
 
 To start the development environment, use:
 
-```sh
+```console
 $ docker compose -f compose.yaml up --build -d
 ```
 
