@@ -13,6 +13,19 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.30.1
+
+{{< release-date date="2024-10-30" >}}
+
+### Update
+
+- Dependencies upgrade: bump compose-go to v2.4.2
+
+### Bug fixes and enhancements
+
+- Fixed a regression when using stdin as input of `-f` flag
+- Fixed a regression when using multiple time the same YAML anchor in a Compose file
+
 ## 2.30.0
 
 {{< release-date date="2024-10-29" >}}
