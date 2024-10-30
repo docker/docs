@@ -4,7 +4,7 @@ description: Learn how Testcontainers Cloud by Docker can help you optimize inte
 weight: 10
 ---
 
-{{< youtube-embed "https://youtu.be/6dRRlk5Vd0E" >}}
+{{< youtube-embed "6dRRlk5Vd0E" >}}
 
 Testcontainers Cloud is a powerful cloud-based solution designed to optimize integration testing with Testcontainers by offloading container management to the cloud. It helps developers and teams overcome the limitations of traditional local and CI-based testing, ensuring consistent environments, faster test execution, and scalable workflows. Whether you're new to Testcontainers or looking to enhance your existing setup, Testcontainers Cloud offers a seamless way to manage containerized tests, improving efficiency and reliability in your development pipeline.
 

@@ -2,6 +2,7 @@
 .github
 .gitignore
 .idea
+.hugo_build.lock
 _releaser
 CONTRIBUTING.md
 Dockerfile

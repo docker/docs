@@ -11,7 +11,6 @@ aliases:
   - /language/java/
   - /guides/language/java/
 languages: [java]
-levels: [beginner]
 params:
   time: 20 minutes
 ---

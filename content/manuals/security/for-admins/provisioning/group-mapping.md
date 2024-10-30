@@ -7,31 +7,30 @@ aliases:
 - /admin/organization/security-settings/group-mapping/
 - /docker-hub/group-mapping/
 - /security/for-admins/group-mapping/
+weight: 40
 ---
 
-With directory group-to-team provisioning from your IdP, user updates will automatically sync with your Docker organizations and teams. You can use group mapping once you have configured [single sign-on (SSO)](../single-sign-on/_index.md).
+Group mapping lets you sync user groups from your identity provider (IdP) with teams in your Docker organization. This automates team membership management, keeping your Docker teams up to date based on changes in your IdP. You can use group mapping once you have configured [single sign-on (SSO)](../single-sign-on/_index.md).
 
 > [!TIP]
 >
-> Group mapping is ideal for adding a user to multiple organizations or multiple teams within one organization. If you don't need to set up multi-organization or multi-team assignment, you can use [user-level attributes](scim.md#set-up-role-mapping).
+> Group mapping is ideal for adding users to multiple organizations or multiple teams within one organization. If you don't need to set up multi-organization or multi-team assignment, you can use SCIM [user-level attributes](scim.md#set-up-role-mapping).
 
 ## How group mapping works
 
-IdPs share with Docker the main attributes of every authorized user through SSO, such as email address, name, surname, and groups. Just-in-Time (JIT) Provisioning uses these attributes to create or update the user’s Docker profile and their associations with organizations and teams on Docker Hub.
+With group mapping enabled, when a user authenticates through SSO, your IdP shares key attributes with Docker, such as the user's email address, name, and groups. Docker uses these attributes to create or update the user's profile, as well as to manage their team and organization assignments. With group mapping, users’ team memberships in Docker automatically reflect changes made in your IdP groups.
 
-Docker uses the email address of the user to identify them on the platform. Every Docker account must have a unique email address at all times.
+It's important to note that Docker uses the user's email address as a unique identifier. Each Docker account must always have a unique email address.
 
 ## Use group mapping
 
-To correctly assign your users to Docker teams, you must create groups in your IdP following the naming pattern `organization:team`. For example, if you want to manage provisioning for the team "developers", and your organization name is "moby", you must create a group in your IdP with the name `moby:developers`.
+To assign users to Docker teams through your IdP, you must create groups in your IdP following the naming pattern: `organization:team`. For example, if your organization is called "moby" and you want to manage the "developers" team, the group name in your IdP should be `moby:developers`. In this example, any user added to this group in your IdP is automatically assigned to the "developers" team in Docker.
 
-Once you enable group mappings in your connection, users assigned to that group in your IdP will automatically be added to the team "developers" in Docker.
+You can also use this format to assign users to multiple organizations. For example, to add a user to the "backend" team in the "moby" organization and the "desktop" team in the "whale" organization, the group names would be `moby:backend` and `whale:desktop`.
 
-You can use this format to add a user to multiple organizations. For example, if you want to add a user to the "backend" team in the "moby" organization as well as the "desktop" team in the "whale" organization, the format would be: `moby:backend` and `whale:desktop`.
-
->**Tip**
+> [!TIP]
 >
->Use the same names for the Docker teams as your group names in the IdP to prevent further configuration. When you sync groups, this creates a group if it doesn’t already exist.
+> Match the group names in your IdP with your Docker teams. When groups are synced, Docker creates a team if it doesn’t already exist.
 
 The following lists the supported group mapping attributes:
 
@@ -66,14 +65,14 @@ The user interface for your IdP may differ slightly from the following steps. Yo
 
 To set up group mapping:
 
-1. Sign in to the Okta Console to go to your application.
-2. Go to the **SAML Settings** for your application.
+1. Sign in to Okta and open your application.
+2. Navigate to the **SAML Settings** page for your application.
 3. In the **Group Attribute Statements (optional)** section, configure like the following:
    - **Name**: `groups`
    - **Name format**: `Unspecified`
    - **Filter**: `Starts with` + `organization:` where `organization` is the name of your organization
    The filter option will filter out the groups that aren't affiliated with your Docker organization.
-4. Create your groups by navigating to **Directory > Groups**.
+4. Create your groups by selecting **Directory**, then **Groups**.
 5. Add your groups using the format `organization:team` that matches the names of your organization(s) and team(s) in Docker.
 6. Assign users to the group(s) that you create.
 
@@ -86,17 +85,17 @@ The user interface for your IdP may differ slightly from the following steps. Yo
 
 To set up group mapping:
 
-1. Sign in to Entra ID and go to your application.
-2. Go to **Manage > Single sign-on**.
+1. Sign in to Entra ID and open your application.
+2. Select **Manage**, then **Single sign-on**.
 3. Select **Add a group claim**.
-4. In **Group Claims**, select **Groups assigned to the application** with the source attribute **Cloud-only group display names (Preview)**.
+4. In the Group Claims section, select **Groups assigned to the application** with the source attribute **Cloud-only group display names (Preview)**.
 5. Select **Advanced options**, then the **Filter groups** option.
 6. Configure the attribute like the following:
    - **Attribute to match**: `Display name`
    - **Match with**: `Contains`
    - **String**: `:`
 7. Select **Save**.
-8. Go to **Groups > All groups** then select **New group** to create your group(s).
+8. Select **Groups**, **All groups**, then **New group** to create your group(s).
 9. Assign users to the group(s) that you create.
 
 The next time you sync your groups with Docker, your users will map to the Docker groups you defined.
@@ -115,15 +114,15 @@ The user interface for your IdP may differ slightly from the following steps. Yo
 
 To set up your groups:
 
-1. Sign in to the Okta Console to go to your application.
-2. Select **Applications > Provisioning > Integration**.
+1. Sign in to Okta and open your application.
+2. Select **Applications**, then **Provisioning**, and **Integration**.
 3. Select **Edit** to enable groups on your connection, then select **Push groups**.
 4. Select **Save**. Saving this configuration will add the **Push Groups** tab to your application.
-5. Create your groups by navigating to **Directory > Groups**.
+5. Create your groups by navigating to **Directory** and selecting **Groups**.
 6. Add your groups using the format `organization:team` that matches the names of your organization(s) and team(s) in Docker.
 7. Assign users to the group(s) that you create.
-8. Return to **Applications > Provisioning > Integration**, then select the **Push Groups** tab to open the view where you can control and manage how groups are provisioned.
-9. Select **Push Groups > Find groups by rule**.
+8. Return to the **Integration** page, then select the **Push Groups** tab to open the view where you can control and manage how groups are provisioned.
+9. Select **Push Groups**, then **Find groups by rule**.
 10. Configure the groups by rule like the following:
     - Enter a rule name, for example `Sync groups with Docker Hub`
     - Match group by name, for example starts with `docker:` or contains `:` for multi-organization
@@ -145,7 +144,7 @@ The user interface for your IdP may differ slightly from the following steps. Yo
 Complete the following before configuring group mapping:
 
 1. Sign in to Entra ID and go to your application.
-2. In your application, go to **Provisioning > Mappings**.
+2. In your application, select **Provisioning**, then **Mappings**.
 3. Select **Provision Microsoft Entra ID Groups**.
 4. Select **Show advanced options**, then **Edit attribute list**.
 5. Update the `externalId` type to `reference`, then select the **Multi-Value** checkbox and choose the referenced object attribute `urn:ietf:params:scim:schemas:core:2.0:Group`.
@@ -162,7 +161,7 @@ Next, set up group mapping:
 5. Assign the group to the provisioning group.
 6. Select **Start provisioning** to start the sync.
 
-To verify, go to **Monitor > Provisioning logs** to see that your groups were provisioned successfully. In your Docker organization, you can check that the groups were correctly provisioned and the members were added to the appropriate teams.
+To verify, select **Monitor**, then **Provisioning logs** to see that your groups were provisioned successfully. In your Docker organization, you can check that the groups were correctly provisioned and the members were added to the appropriate teams.
 
 {{< /tab >}}
 {{< /tabs >}}
@@ -175,7 +174,7 @@ Once complete, a user who signs in to Docker through SSO is automatically added 
 
 ## More resources
 
-The following videos demonstrate how to use group mapping with your IdP with SCIM enabled.
+The following videos demonstrate how to use group mapping with your IdP with SCIM enabled:
 
 - [Video: Group mapping with Okta](https://youtu.be/c56YECO4YP4?feature=shared&t=3023)
 - [Video: Attribute and group mapping with Entra ID (Azure)](https://youtu.be/bGquA8qR9jU?feature=shared&t=2039)

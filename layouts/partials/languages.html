@@ -1,0 +1,21 @@
+{{- /*
+  List of languages (taxonomy) chips with images
+  Context: page.Pages
+  */
+-}}
+{{- range . -}}
+  {{- if eq .File nil }}
+    {{- errorf "[languages] Undefined language: '%s' in %s" (urlize (strings.ToLower .Title)) page.File.Filename }}
+  {{- end }}
+  {{- if not .Page.Params.icon }}
+    {{- errorf "[languages] language is missing an icon: '%s' in %s" (urlize (strings.ToLower .Title)) page.File.Filename }}
+  {{- end }}
+  <span class="text-sm inline-flex gap-1 items-center rounded-full border
+               border-divider-light dark:border-divider-dark bg-gray-light-100
+               px-2 text-gray-light-800 dark:bg-gray-dark-200
+               dark:text-gray-dark-800 select-none">
+    <img class="py-1" height="18" width="18" title="{{ .Page.LinkTitle }}" src="{{ .Page.Params.icon }}">
+    <span>{{ .Page.LinkTitle }}</span>
+  </span>
+{{- end -}}
+

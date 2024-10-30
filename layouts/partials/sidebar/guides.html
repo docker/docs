@@ -9,18 +9,15 @@
     <a href="{{ $root.Permalink }}">{{ $root.Title }}</a>
   </div>
   <div>{{ $root.Summary }}</div>
-  <div class="space-y-2">
-  {{- with ($root.GetTerms "levels") }}
-    <div class="flex gap-2 text-gray-light dark:text-gray-dark">
-      <span class="icon-svg">{{ partialCached "icon" "school" "school" }}</span>
-      <span>
-        {{- range $i, $e := . -}}
-          {{- if $i -}},{{ end -}}
-          {{- .Page.Title -}}
-        {{- end -}}
-      </span>
-    </div>
-  {{- end -}}
+  <div class="space-y-4">
+  <div class="flex flex-wrap gap-2">
+    {{- with ($root.GetTerms "languages") }}
+        {{ partial "languages.html" . }}
+    {{- end }}
+    {{- with ($root.GetTerms "tags") }}
+        {{ partial "tags.html" . }}
+    {{- end }}
+  </div>
   {{- with ($root.Params.time) }}
     <div class="flex gap-2 text-gray-light dark:text-gray-dark">
       <span class="icon-svg"

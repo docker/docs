@@ -1,12 +1,13 @@
 ---
-title: Guides
-keywords: Docker guides
+title: Docker guides
+linkTitle: Guides
 description: Explore the Docker guides
 params:
   icon: developer_guide
 layout: landing
 aliases:
   - /learning-paths/
+  - /language/
 ---
 
 Explore our collection of guides to learn how Docker can optimize your

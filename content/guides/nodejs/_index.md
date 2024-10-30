@@ -11,7 +11,6 @@ aliases:
   - /language/nodejs/
   - /guides/language/nodejs/
 languages: [js]
-levels: [beginner]
 params:
   time: 20 minutes
 ---

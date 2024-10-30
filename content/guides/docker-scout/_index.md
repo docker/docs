@@ -8,8 +8,7 @@ description: |
   Learn how to use Docker Scout to enhance container security by automating
   vulnerability detection and remediation, ensuring compliance, and protecting
   your development workflow.
-levels: [Beginner]
-products: [scout]
+tags: [product-demo]
 aliases:
   - /learning-paths/docker-scout/
 params:

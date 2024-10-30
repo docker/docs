@@ -10,8 +10,11 @@
       <div>
         {{/* main logo */}}
         <a title="Docker Docs home page" href="{{ site.BaseURL }}">
-          <div>
+          <div class="hidden sm:block">
             {{- (resources.Get "images/docker-docs-white.svg").Content | safe.HTML -}}
+          </div>
+          <div class="block sm:hidden">
+            {{- (resources.Get "images/docker-docs-white-condensed.svg").Content | safe.HTML -}}
           </div>
         </a>
       </div>
@@ -37,15 +40,6 @@
         <span>Ask&nbsp;AI</span>
         <img src="{{ (resources.Get "images/ai-stars.svg").Permalink }}" alt="AI Stars" />
       </button>
-      <button aria-label="Theme switch" id="theme-switch" class="svg-icon"
-        x-data="{ theme: localStorage.getItem('theme-preference') }" x-init="$watch('theme', value => {
-        localStorage.setItem('theme-preference', value);
-        document.firstElementChild.className = value;
-      })" @click="theme = (theme === 'dark' ? 'light' : 'dark')">
-        <span class="icon-svg dark:hidden">{{ partialCached "icon" "light_mode" "light_mode"}}</span>
-        <span class="icon-svg hidden dark:block">{{ partialCached "icon" "dark_mode" "dark_mode"}}</span>
-      </button>
     </div>
   </div>
-
 </header>

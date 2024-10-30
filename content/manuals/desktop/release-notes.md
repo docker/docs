@@ -23,6 +23,16 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projects/51/views/1?filterQuery=) to see what's coming next.
 
+## 4.35.1
+
+{{< release-date date="2024-10-30" >}}
+
+{{< desktop-install-v2 all=true beta_win_arm=true version="4.35.1" build_path="/173168/" >}}
+
+#### For all platforms
+
+- Fixed a bug where Docker Desktop would incorrectly bind to port `8888`. Fixes [docker/for-win#14389](https://github.com/docker/for-win/issues/14389) and [docker/for-mac#7468](https://github.com/docker/for-mac/issues/7468)
+
 ## 4.35.0
 
 {{< release-date date="2024-10-24" >}}

@@ -1,6 +1,5 @@
 ---
 title: Secrets
-icon: password
 description: Use sensitive information in containers securely
 ---
 

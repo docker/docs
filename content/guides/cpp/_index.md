@@ -11,7 +11,6 @@ aliases:
   - /language/cpp/
   - /guides/language/cpp/
 languages: [cpp]
-levels: [beginner]
 params:
   time: 10 minutes
 ---

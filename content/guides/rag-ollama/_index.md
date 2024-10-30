@@ -6,8 +6,7 @@ linkTitle: RAG Ollama application
 summary: |
   This guide demonstrates how to use Docker to deploy Retrieval-Augmented
   Generation (RAG) models with Ollama.
-subjects: [ai]
-levels: [beginner]
+tags: [ai]
 aliases:
   - /guides/use-case/rag-ollama/
 params:

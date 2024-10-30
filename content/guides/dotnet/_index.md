@@ -9,7 +9,6 @@ aliases:
   - /language/dotnet/
   - /guides/language/dotnet/
 languages: [c-sharp]
-levels: [beginner]
 params:
   time: 20 minutes
   toc_min: 1

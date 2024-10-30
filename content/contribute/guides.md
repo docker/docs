@@ -47,9 +47,8 @@ summary: |
   This guide walks you through the steps to containerize a machine learning
   model and deploy it using Docker, enabling scalable and portable AI
   solutions.
+tags: [machine-learning, deployment]
 languages: [python]
-subjects: [machine-learning, deployment]
-levels: [intermediate]
 params:
   time: 30 minutes
 ---
@@ -61,16 +60,14 @@ params:
 - `linkTitle` (optional): A shorter title used in navigation menus.
 - `description` (required): A concise description for SEO purposes.
 - `summary` (required): A brief overview of the guide's content.
-- `languages` (optional): List of programming languages used.
-- `subjects` (optional): Domains or subject areas covered.
-- `levels` (optional): Intended audience experience level (`beginner`, `intermediate`, `advanced`).
-- `products` (optional): List of programming languages used.
+- `languages` \* (optional): List of programming languages used.
+- `tags` \* (optional): Domains or subject areas covered.
 - `params`
   - `time` (optional): Estimated reading or completion time.
 
-The `languages`, `subjects`, `levels`, and `products` keys are taxonomies, and
-the values are used to associate the page with the filter options on the guides
-landing page.
+\* Do apply at least one of the `languages` or `tags` taxonomies. The values
+are used to associate the page with the filter options on the guides landing
+page.
 
 ## Document structure
 

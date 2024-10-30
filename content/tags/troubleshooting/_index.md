@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting
-icon: troubleshoot
 description: Fix common issues
 ---
 

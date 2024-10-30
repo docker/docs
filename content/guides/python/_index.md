@@ -11,7 +11,6 @@ aliases:
   - /language/python/
   - /guides/language/python/
 languages: [python]
-levels: [beginner]
 params:
   time: 20 minutes
 ---

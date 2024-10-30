@@ -8,7 +8,7 @@ aliases:
  - /desktop/settings/mac/
  - /desktop/settings/windows/
  - /desktop/settings/linux/
-weight: 150
+weight: 160
 ---
 
 To navigate to **Settings** either:
@@ -17,7 +17,7 @@ To navigate to **Settings** either:
 - Select the **Settings** icon from the Docker Desktop Dashboard.
 
 You can also locate the `settings-store.json` file (or `settings.json` for Docker Desktop versions 4.34 and earlier) at:
- - Mac: `~/Library/Group Containers/group.com.docker/settings-store.json`
+ - Mac: `~/Library/Group\ Containers/group.com.docker/settings-store.json`
  - Windows: `C:\Users\[USERNAME]\AppData\Roaming\Docker\settings-store.json`
  - Linux: `~/.docker/desktop/settings-store.json`
 
@@ -65,6 +65,8 @@ If you choose the integrated terminal, you can run commands in a running contain
     >
     > Turn this setting on to make Docker Desktop run faster.
   - Alternatively, you can choose **Apple Virtualization framework**, **QEMU** (for Apple Silicon), or **HyperKit** (for Intel Macs). For macOS 12.5 and later, Apple Virtualization framework is the default setting.
+
+   For more information, see [Virtual Machine Manager](/manuals/desktop/vmm.md).
 
 - {{< badge color=blue text="Mac only" >}}**Choose file sharing implementation for your containers**. Choose whether you want to share files using **VirtioFS**, **gRPC FUSE**, or **osxfs (Legacy)**. VirtioFS is only available for macOS 12.5 and later, and is turned on by default.
     > [!TIP]

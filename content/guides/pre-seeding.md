@@ -4,8 +4,7 @@ linktitle: Pre-seeding database
 description: &desc Pre-seeding database with schema and data at startup for development environment
 keywords: Pre-seeding, database, postgres, container-supported development
 summary: *desc
-levels: [intermediate]
-subjects: [databases]
+tags: [app-dev, databases]
 params:
   time: 20 minutes
 ---

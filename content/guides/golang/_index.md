@@ -11,7 +11,6 @@ aliases:
   - /language/golang/
   - /guides/language/golang/
 languages: [go]
-levels: [beginner]
 params:
   time: 30 minutes
 ---

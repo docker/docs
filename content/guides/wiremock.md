@@ -4,8 +4,8 @@ description: &desc Mocking API services in development and testing with WireMock
 keywords: WireMock, container-supported development
 linktitle: Mocking API services with WireMock
 summary: *desc
-levels: [intermediate]
-subjects: [distributed-systems]
+tags: [app-dev, distributed-systems]
+languages: [js]
 params:
   time: 20 minutes
 ---

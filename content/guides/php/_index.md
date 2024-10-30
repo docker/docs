@@ -11,7 +11,6 @@ aliases:
   - /language/php/
   - /guides/language/php/
 languages: [php]
-levels: [beginner]
 params:
   time: 20 minutes
 ---

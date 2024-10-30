@@ -8,11 +8,10 @@ ARG GO_VERSION=1.23
 # HTMLTEST_VERSION sets the wjdp/htmltest version for HTML testing
 ARG HTMLTEST_VERSION=0.17.0
 # HUGO_VERSION sets the version of Hugo to build the site with
-ARG HUGO_VERSION=0.136.2
+ARG HUGO_VERSION=0.136.3
 
 # build-base is the base stage used for building the site
 FROM ghcr.io/gohugoio/hugo:v${HUGO_VERSION} AS build-base
-USER root
 ENV NODE_ENV="production"
 RUN --mount=source=package.json,target=package.json \
     --mount=source=package-lock.json,target=package-lock.json \
@@ -26,8 +25,7 @@ FROM build-base AS build
 ARG HUGO_ENV="development"
 # DOCS_URL sets the base URL for the site
 ARG DOCS_URL="https://docs.docker.com"
-RUN --mount=type=cache,target=/cache \
-    hugo --gc --minify -d /out -e $HUGO_ENV -b $DOCS_URL
+RUN hugo --gc --minify -e $HUGO_ENV -b $DOCS_URL
 
 # lint lints markdown files
 FROM davidanson/markdownlint-cli2:v0.14.0 AS lint
@@ -41,7 +39,7 @@ RUN --mount=type=bind,target=. \
 # test validates HTML output and checks for broken links
 FROM wjdp/htmltest:v${HTMLTEST_VERSION} AS test
 WORKDIR /test
-COPY --from=build /out ./public
+COPY --from=build /project/public ./public
 ADD .htmltest.yml .htmltest.yml
 RUN htmltest
 
@@ -76,12 +74,12 @@ ARG UPSTREAM_REPO
 ARG UPSTREAM_COMMIT
 # HUGO_MODULE_REPLACEMENTS is the replacement module for the upstream project
 ENV HUGO_MODULE_REPLACEMENTS="github.com/${UPSTREAM_MODULE_NAME} -> github.com/${UPSTREAM_REPO} ${UPSTREAM_COMMIT}"
-RUN hugo --ignoreVendorPaths "github.com/${UPSTREAM_MODULE_NAME}" -d /out
+RUN hugo --ignoreVendorPaths "github.com/${UPSTREAM_MODULE_NAME}"
 
 # validate-upstream validates HTML output for upstream builds
 FROM wjdp/htmltest:v${HTMLTEST_VERSION} AS validate-upstream
 WORKDIR /test
-COPY --from=build-upstream /out ./public
+COPY --from=build-upstream /project/public ./public
 ADD .htmltest.yml .htmltest.yml
 RUN htmltest
 
@@ -96,9 +94,9 @@ EOT
 
 # path-warnings checks for duplicate target paths
 FROM build-base AS path-warnings
-RUN hugo --printPathWarnings > /path-warnings.txt
+RUN hugo --printPathWarnings > ./path-warnings.txt
 RUN <<EOT
-DUPLICATE_TARGETS=$(grep "Duplicate target paths" /path-warnings.txt)
+DUPLICATE_TARGETS=$(grep "Duplicate target paths" ./path-warnings.txt)
 if [ ! -z "$DUPLICATE_TARGETS" ]; then
     echo "$DUPLICATE_TARGETS"
     echo "You probably have a duplicate alias defined. Please check your aliases."
@@ -109,7 +107,7 @@ EOT
 # pagefind installs the Pagefind runtime
 FROM node:alpine${ALPINE_VERSION} AS pagefind
 ARG PAGEFIND_VERSION=1.1.1
-COPY --from=build /out ./public
+COPY --from=build /project/public ./public
 RUN --mount=type=bind,src=pagefind.yml,target=pagefind.yml \
     npx pagefind@v${PAGEFIND_VERSION} --output-path "/pagefind"
 
@@ -121,7 +119,7 @@ COPY --from=pagefind /pagefind .
 FROM alpine:${ALPINE_VERSION} AS test-go-redirects
 WORKDIR /work
 RUN apk add yq
-COPY --from=build /out ./public
+COPY --from=build /project/public ./public
 RUN --mount=type=bind,target=. <<"EOT"
 set -ex
 ./scripts/test_go_redirects.sh
@@ -129,5 +127,5 @@ EOT
 
 # release is an empty scratch image with only compiled assets
 FROM scratch AS release
-COPY --from=build /out /
+COPY --from=build /project/public /
 COPY --from=pagefind /pagefind /pagefind

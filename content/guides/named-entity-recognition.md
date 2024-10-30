@@ -6,9 +6,8 @@ description: Learn how to build and run a named entity recognition application u
 summary: |
   This guide explains how to containerize named entity recognition (NER) models
   using Docker.
-subjects: [ai]
+tags: [ai]
 languages: [python]
-levels: [beginner]
 aliases:
   - /guides/use-case/nlp/named-entity-recognition/
 params:

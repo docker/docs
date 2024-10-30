@@ -5,8 +5,7 @@ summary: |
   Simplify the process of defining, configuring, and running multi-container
   Docker applications.
 description: Learn how to use Docker Compose to define and run multi-container Docker applications.
-levels: [beginner]
-products: [compose]
+tags: [product-demo]
 aliases:
   - /learning-paths/docker-compose/
 params:

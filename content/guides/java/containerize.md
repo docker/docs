@@ -98,7 +98,7 @@ Create a file named `Dockerfile` with the following contents.
 ################################################################################
 
 # Create a stage for resolving and downloading dependencies.
-FROM eclipse-temurin:21-jre-jammy as deps
+FROM eclipse-temurin:21-jdk-jammy as deps
 
 WORKDIR /build
 

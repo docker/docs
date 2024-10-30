@@ -8,8 +8,7 @@ aliases:
   - /guides/deployment-orchestration/swarm-deploy/
 summary: |
   Discover how to deploy and manage Docker containers using Docker Swarm.
-subjects: [deploy]
-levels: [beginner]
+tags: [deploy]
 params:
   time: 10 minutes
 ---
