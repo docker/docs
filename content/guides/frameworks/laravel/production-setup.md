@@ -427,7 +427,7 @@ volumes:
 
 ### Running Your Production Environment
 
-To start the production environment, use:
+To start the production environment, run:
 
 ```console
 $ docker compose -f compose.yaml up --build -d
