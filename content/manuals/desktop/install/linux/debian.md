@@ -46,7 +46,7 @@ Recommended approach to install Docker Desktop on Debian:
 
   ```console
   $ sudo apt-get update
-  $ sudo apt-get install ./docker-desktop-x86_64.deb
+  $ sudo apt-get install ./docker-desktop-amd64.deb
   ```
 
   > [!NOTE]
