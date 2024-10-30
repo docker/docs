@@ -15,7 +15,7 @@ This guide demonstrates how to set up a development environment for a Laravel ap
 
 Start by creating a project structure that includes both the Laravel application and Docker-related files:
 
-```
+```plaintext
 my-laravel-app
 ├── app/
 ├── bootstrap/
