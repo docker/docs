@@ -191,7 +191,13 @@ download a new file each time you want to upgrade Docker Engine.
    $ sudo systemctl start docker
    ```
 
-4. Verify that the Docker Engine installation is successful by running the
+4. Make Docker start automatically after reboot.
+
+   ```console
+   $ sudo systemctl enable docker
+   ```
+
+5. Verify that the Docker Engine installation is successful by running the
    `hello-world` image.
 
    ```console
