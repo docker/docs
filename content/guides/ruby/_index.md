@@ -12,7 +12,6 @@ aliases:
   - /language/ruby/
   - /guides/language/ruby/
 languages: [ruby]
-levels: [beginner]
 params:
   time: 20 minutes
 ---

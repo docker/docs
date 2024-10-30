@@ -5,9 +5,8 @@ title: Developing event-driven applications with Kafka and Docker
 linktitle: Event-driven apps with Kafka
 summary: |
   This guide explains how to run Apache Kafka in Docker containers.
-subjects: [distributed-systems]
+tags: [distributed-systems]
 languages: [js]
-levels: [intermediate]
 aliases:
   - /guides/use-case/kafka/
 params:

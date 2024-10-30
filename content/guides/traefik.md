@@ -4,8 +4,7 @@ description: &desc Use Traefik to easily route traffic between multiple containe
 keywords: traefik, container-supported development
 linktitle: HTTP routing with Traefik
 summary: *desc
-levels: [intermediate]
-subjects: [networking]
+tags: [networking]
 params:
   time: 20 minutes
 ---

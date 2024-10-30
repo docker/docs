@@ -5,9 +5,8 @@ keywords: nlp, natural language processing, text summarization, python, bert ext
 description: Learn how to build and run a text summarization application using Python, Bert Extractive Summarizer, and Docker.
 summary: |
   This guide shows how to containerize text summarization models with Docker.
-subjects: [ai]
+tags: [ai]
 languages: [python]
-levels: [beginner]
 aliases:
   - /guides/use-case/nlp/text-summarization/
 params:

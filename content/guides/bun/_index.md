@@ -5,7 +5,6 @@ title: Bun language-specific guide
 summary: |
   Learn how to containerize JavaScript applications with the Bun runtime.
 linkTitle: Bun
-levels: [beginner]
 languages: [js]
 params:
   time: 10 minutes
