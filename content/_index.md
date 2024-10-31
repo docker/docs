@@ -135,7 +135,7 @@ grid:
         url: "/security/for-admins/single-sign-on/"
       - text: "SCIM"
         url: "/security/for-admins/provisioning/scim/"
-  - title: Testcontainers cloud
+  - title: Testcontainers Cloud
     icon: cloud
     description: |
       Testcontainers Cloud lets you run heavy test workloads remotely.
