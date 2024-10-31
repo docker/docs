@@ -9,6 +9,19 @@ This page contains information about the new features, improvements, known
 issues, and bug fixes in the Docker Scout [CLI plugin](https://github.com/docker/scout-cli/)
 and the `docker/scout-action` [GitHub Action](https://github.com/docker/scout-action).
 
+## 1.14.0
+
+{{< release-date date="2024-09-24" >}}
+
+### New
+
+- Add suppression information at the CVE level in the `docker scout cves` command.
+
+### Bug fixes
+
+- Fix listing CVEs for dangling images, for example: `local://sha256:...`
+- Fix panic when analysing a file system input, for instance with `docker scout cves fs://.`
+
 ## 1.13.0
 
 {{< release-date date="2024-08-05" >}}
