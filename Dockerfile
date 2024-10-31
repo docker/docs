@@ -1,22 +1,43 @@
 # syntax=docker/dockerfile:1
 # check=skip=InvalidBaseImagePlatform
 
-# ALPINE_VERSION sets the Alpine Linux version for all Alpine stages
 ARG ALPINE_VERSION=3.20
-# GO_VERSION sets the Go version for the base stage
 ARG GO_VERSION=1.23
-# HTMLTEST_VERSION sets the wjdp/htmltest version for HTML testing
 ARG HTMLTEST_VERSION=0.17.0
-# HUGO_VERSION sets the version of Hugo to build the site with
-ARG HUGO_VERSION=0.136.3
+ARG HUGO_VERSION=0.136.5
+ARG NODE_VERSION=22
+ARG PAGEFIND_VERSION=1.1.1
 
-# build-base is the base stage used for building the site
-FROM ghcr.io/gohugoio/hugo:v${HUGO_VERSION} AS build-base
+# base defines the generic base stage
+FROM golang:${GO_VERSION}-alpine${ALPINE_VERSION} AS base
+RUN apk add --no-cache \
+    git \
+    nodejs \
+    npm \
+    gcompat
+
+# npm downloads Node.js dependencies
+FROM base AS npm
 ENV NODE_ENV="production"
+WORKDIR /out
 RUN --mount=source=package.json,target=package.json \
     --mount=source=package-lock.json,target=package-lock.json \
     --mount=type=cache,target=/root/.npm \
     npm ci
+
+# hugo downloads the Hugo binary
+FROM base AS hugo
+ARG TARGETARCH
+ARG HUGO_VERSION
+WORKDIR /out
+ADD https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-${TARGETARCH}.tar.gz .
+RUN tar xvf hugo_extended_${HUGO_VERSION}_linux-${TARGETARCH}.tar.gz
+
+# build-base is the base stage used for building the site
+FROM base AS build-base
+WORKDIR /project
+COPY --from=hugo /out/hugo /bin/hugo
+COPY --from=npm /out/node_modules node_modules
 COPY . .
 
 # build creates production builds with Hugo
@@ -25,7 +46,9 @@ FROM build-base AS build
 ARG HUGO_ENV="development"
 # DOCS_URL sets the base URL for the site
 ARG DOCS_URL="https://docs.docker.com"
-RUN hugo --gc --minify -e $HUGO_ENV -b $DOCS_URL
+ENV HUGO_CACHEDIR="/tmp/hugo_cache"
+RUN --mount=type=cache,target=/tmp/hugo_cache \
+    hugo --gc --minify -e $HUGO_ENV -b $DOCS_URL
 
 # lint lints markdown files
 FROM davidanson/markdownlint-cli2:v0.14.0 AS lint
@@ -105,8 +128,8 @@ fi
 EOT
 
 # pagefind installs the Pagefind runtime
-FROM node:alpine${ALPINE_VERSION} AS pagefind
-ARG PAGEFIND_VERSION=1.1.1
+FROM base AS pagefind
+ARG PAGEFIND_VERSION
 COPY --from=build /project/public ./public
 RUN --mount=type=bind,src=pagefind.yml,target=pagefind.yml \
     npx pagefind@v${PAGEFIND_VERSION} --output-path "/pagefind"
