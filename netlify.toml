@@ -2,7 +2,7 @@
 publish = "public"
 
 [context.deploy-preview.environment]
-NODE_VERSION = "20"
+NODE_VERSION = "22"
 NODE_ENV = "production"
 HUGO_VERSION = "0.136.5"
 HUGO_ENABLEGITINFO = "true"
