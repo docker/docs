@@ -3,13 +3,13 @@ description: How to configure Settings Management for Docker Desktop
 keywords: admin, controls, rootless, enhanced container isolation
 title: Configure Settings Management
 linkTitle: Configure
-aliases: 
+aliases:
  - /desktop/hardened-desktop/settings-management/configure/
 ---
 
->**Note**
+> [!NOTE]
 >
->Settings Management is available to Docker Business customers only.
+> Settings Management is available to Docker Business customers only.
 
 This page contains information for admins on how to configure Settings Management to specify and lock configuration parameters to create a standardized Docker Desktop environment across the organization.
 
@@ -48,9 +48,9 @@ To set it up manually:
 
 ### Step two: Configure the settings you want to lock in
 
->**Note**
+> [!NOTE]
 >
->Some of the configuration parameters only apply to Windows. This is highlighted in the table below.
+> Some of the configuration parameters only apply to Windows. This is highlighted in the table below.
 
 The `admin-settings.json` file requires a nested list of configuration parameters, each of which must contain the  `locked` parameter. You can add or remove configuration parameters as per your requirements.
 
@@ -227,15 +227,15 @@ The following `admin-settings.json` code and table provides an example of the re
 
 ### Step three: Re-launch Docker Desktop
 
->**Note**
+> [!NOTE]
 >
->Administrators should test the changes made through the `admin-settings.json` file locally to see if the settings work as expected.
+> Administrators should test the changes made through the `admin-settings.json` file locally to see if the settings work as expected.
 
 For settings to take effect:
 - On a new install, developers need to launch Docker Desktop and authenticate to their organization.
 - On an existing install, developers need to quit Docker Desktop through the Docker menu, and then relaunch Docker Desktop. If they are already signed in, they don't need to sign in again for the changes to take effect.
 
-  >[!IMPORTANT]
+  > [!IMPORTANT]
   >
   > Selecting **Restart** from the Docker menu isn't enough as it only restarts some components of Docker Desktop.
 

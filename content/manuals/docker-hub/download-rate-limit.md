@@ -213,7 +213,7 @@ docker-ratelimit-source
 
 These headers are returned on both GET and HEAD requests.
 
->**Note**
+> [!NOTE]
 >
 > Using GET emulates a real pull and counts towards the limit. Using HEAD won't.
 > To check your limits, you need `curl`, `grep`, and `jq` installed.

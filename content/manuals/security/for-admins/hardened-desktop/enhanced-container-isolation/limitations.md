@@ -16,7 +16,7 @@ Desktop was configured to use Windows Subsystem for Linux (aka WSL).
 Starting with Docker Desktop 4.20, ECI is supported when Docker Desktop is
 configured to use either Hyper-V or WSL 2.
 
->**Note**
+> [!NOTE]
 >
 > Docker Desktop requires WSL 2 version 1.1.3.0 or later. To get the current
 > version of WSL on your host, type `wsl --version`. If the command fails or if

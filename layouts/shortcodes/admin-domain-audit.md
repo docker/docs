@@ -22,7 +22,7 @@ To audit your domains:
 
 You can invite all the uncaptured users to your organization using the exported CSV file. For more details, see [Invite members](/admin/organization/members/). Optionally, enforce single sign-on or enable SCIM to add users to your organization automatically. For more details, see {{ $sso_link }} or {{ $scim_link }}.
 
-> **Note**
+> [!NOTE]
 >
 > Domain audit may identify accounts of users who are no longer a part of your organization. If you don't want to add a user to your organization and you don't want the user to appear in future domain audits, you must deactivate the account or update the associated email address.
 >
