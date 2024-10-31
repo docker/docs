@@ -47,8 +47,8 @@ be UPPERCASE to distinguish them from arguments more easily.
 Docker runs instructions in a Dockerfile in order. A Dockerfile **must
 begin with a `FROM` instruction**. This may be after [parser
 directives](#parser-directives), [comments](#format), and globally scoped
-[ARGs](#arg). The `FROM` instruction specifies the [parent
-image](https://docs.docker.com/glossary/#parent-image) from which you are
+[ARGs](#arg). The `FROM` instruction specifies the [base
+image](https://docs.docker.com/glossary/#base-image) from which you are
 building. `FROM` may only be preceded by one or more `ARG` instructions, which
 declare arguments that are used in `FROM` lines in the Dockerfile.
 
@@ -344,6 +344,11 @@ despite warnings. To make the build fail on warnings, set `#check=error=true`.
 ```dockerfile
 # check=error=true
 ```
+
+> [!NOTE]
+> When using the `check` directive, with `error=true` option, it is recommended
+> to pin the [Dockerfile syntax]((#syntax)) to a specific version. Otherwise, your build may
+> start to fail when new checks are added in the future versions.
 
 To combine both the `skip` and `error` options, use a semi-colon to separate
 them:
@@ -723,7 +728,7 @@ This can be used to:
 The supported mount types are:
 
 | Type                                     | Description                                                                                                              |
-| ---------------------------------------- | ---------------------------------------------------------------------------------------------------------                |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
 | [`bind`](#run---mounttypebind) (default) | Bind-mount context directories (read-only).                                                                              |
 | [`cache`](#run---mounttypecache)         | Mount a temporary directory to cache directories for compilers and package managers.                                     |
 | [`tmpfs`](#run---mounttypetmpfs)         | Mount a `tmpfs` in the build container.                                                                                  |
@@ -736,7 +741,7 @@ This mount type allows binding files or directories to the build container. A
 bind mount is read-only by default.
 
 | Option                             | Description                                                                                    |
-| ----------------                   | ---------------------------------------------------------------------------------------------- |
+| ---------------------------------- | ---------------------------------------------------------------------------------------------- |
 | `target`, `dst`, `destination`[^1] | Mount path.                                                                                    |
 | `source`                           | Source path in the `from`. Defaults to the root of the `from`.                                 |
 | `from`                             | Build stage, context, or image name for the root of the source. Defaults to the build context. |
@@ -748,7 +753,7 @@ This mount type allows the build container to cache directories for compilers
 and package managers.
 
 | Option                             | Description                                                                                                                                                                                                                                                                |
-| ---------------                    | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `id`                               | Optional ID to identify separate/different caches. Defaults to value of `target`.                                                                                                                                                                                          |
 | `target`, `dst`, `destination`[^1] | Mount path.                                                                                                                                                                                                                                                                |
 | `ro`,`readonly`                    | Read-only if set.                                                                                                                                                                                                                                                          |
@@ -797,7 +802,7 @@ case.
 This mount type allows mounting `tmpfs` in the build container.
 
 | Option                             | Description                                           |
-| ------------                       | ----------------------------------------------------- |
+| ---------------------------------- | ----------------------------------------------------- |
 | `target`, `dst`, `destination`[^1] | Mount path.                                           |
 | `size`                             | Specify an upper limit on the size of the filesystem. |
 
@@ -842,7 +847,7 @@ environment variable with the same name.
 # syntax=docker/dockerfile:1
 FROM alpine
 RUN --mount=type=secret,id=API_KEY,env=API_KEY \
-    some-command --token-from-env API_KEY
+    some-command --token-from-env $API_KEY
 ```
 
 Assuming that the `API_KEY` environment variable is set in the build
@@ -858,7 +863,7 @@ This mount type allows the build container to access SSH keys via SSH agents,
 with support for passphrases.
 
 | Option                         | Description                                                                                    |
-| ----------                     | ---------------------------------------------------------------------------------------------- |
+| ------------------------------ | ---------------------------------------------------------------------------------------------- |
 | `id`                           | ID of SSH agent socket or key. Defaults to "default".                                          |
 | `target`, `dst`, `destination` | SSH agent socket path. Defaults to `/run/buildkit/ssh_agent.${N}`.                             |
 | `required`                     | If set to `true`, the instruction errors out when the key is unavailable. Defaults to `false`. |
@@ -1012,7 +1017,7 @@ both the `CMD` and `ENTRYPOINT` instructions should be specified in the
 ## LABEL
 
 ```dockerfile
-LABEL <key>=<value> <key>=<value> <key>=<value> ...
+LABEL <key>=<value> [<key>=<value>...]
 ```
 
 The `LABEL` instruction adds metadata to an image. A `LABEL` is a
@@ -1047,9 +1052,9 @@ LABEL multi.label1="value1" \
 > using string interpolation (e.g. `LABEL example="foo-$ENV_VAR"`), single
 > quotes will take the string as is without unpacking the variable's value.
 
-Labels included in base or parent images (images in the `FROM` line) are
-inherited by your image. If a label already exists but with a different value,
-the most-recently-applied value overrides any previously-set value.
+Labels included in base images (images in the `FROM` line) are inherited by
+your image. If a label already exists but with a different value, the
+most-recently-applied value overrides any previously-set value.
 
 To view an image's labels, use the `docker image inspect` command. You can use
 the `--format` option to show just the labels;
@@ -1139,7 +1144,7 @@ port. For detailed information, see the
 ## ENV
 
 ```dockerfile
-ENV <key>=<value> ...
+ENV <key>=<value> [<key>=<value>...]
 ```
 
 The `ENV` instruction sets the environment variable `<key>` to the value
@@ -1232,7 +1237,7 @@ The available `[OPTIONS]` are:
 | [`--chown`](#add---chown---chmod)       |                            |
 | [`--chmod`](#add---chown---chmod)       | 1.2                        |
 | [`--link`](#add---link)                 | 1.4                        |
-| [`--exclude`](#add---exclude)           | 1.7                        |
+| [`--exclude`](#add---exclude)           | 1.7-labs                   |
 
 The `ADD` instruction copies new files or directories from `<src>` and adds
 them to the filesystem of the image at the path `<dest>`. Files and directories
@@ -1517,8 +1522,8 @@ The available `[OPTIONS]` are:
 | [`--chown`](#copy---chown---chmod) |                            |
 | [`--chmod`](#copy---chown---chmod) | 1.2                        |
 | [`--link`](#copy---link)           | 1.4                        |
-| [`--parents`](#copy---parents)     | 1.7                        |
-| [`--exclude`](#copy---exclude)     | 1.7                        |
+| [`--parents`](#copy---parents)     | 1.7-labs                   |
+| [`--exclude`](#copy---exclude)     | 1.7-labs                   |
 
 The `COPY` instruction copies new files or directories from `<src>` and adds
 them to the filesystem of the image at the path `<dest>`. Files and directories
@@ -1815,7 +1820,7 @@ COPY [--parents[=<boolean>]] <src> ... <dest>
 The `--parents` flag preserves parent directories for `src` entries. This flag defaults to `false`.
 
 ```dockerfile
-# syntax=docker/dockerfile:1.7-labs
+# syntax=docker/dockerfile:1-labs
 FROM scratch
 
 COPY ./x/a.txt ./y/a.txt /no_parents/
@@ -1835,7 +1840,7 @@ directories after it will be preserved. This may be especially useful copies bet
 with `--from` where the source paths need to be absolute.
 
 ```dockerfile
-# syntax=docker/dockerfile:1.7-labs
+# syntax=docker/dockerfile:1-labs
 FROM scratch
 
 COPY --parents ./x/./y/*.txt /parents/
@@ -1877,6 +1882,9 @@ supporting wildcards and matching using Go's
 For example, to add all files starting with "hom", excluding files with a `.txt` extension:
 
 ```dockerfile
+# syntax=docker/dockerfile:1-labs
+FROM scratch
+
 COPY --exclude=*.txt hom* /mydir/
 ```
 
@@ -1886,6 +1894,9 @@ even if the files paths match the pattern specified in `<src>`.
 To add all files starting with "hom", excluding files with either `.txt` or `.md` extensions:
 
 ```dockerfile
+# syntax=docker/dockerfile:1-labs
+FROM scratch
+
 COPY --exclude=*.txt --exclude=*.md hom* /mydir/
 ```
 
@@ -2305,7 +2316,7 @@ Therefore, to avoid unintended operations in unknown directories, it's best prac
 ## ARG
 
 ```dockerfile
-ARG <name>[=<default value>]
+ARG <name>[=<default value>] [<name>[=<default value>]...]
 ```
 
 The `ARG` instruction defines a variable that users can pass at build-time to
@@ -2349,9 +2360,8 @@ at build-time, the builder uses the default.
 
 ### Scope
 
-An `ARG` variable definition comes into effect from the line on which it is
-defined in the Dockerfile not from the argument's use on the command-line or
-elsewhere. For example, consider this Dockerfile:
+An `ARG` variable comes into effect from the line on which it is declared in
+the Dockerfile. For example, consider this Dockerfile:
 
 ```dockerfile
 FROM busybox
@@ -2367,24 +2377,22 @@ A user builds this file by calling:
 $ docker build --build-arg username=what_user .
 ```
 
-The `USER` at line 2 evaluates to `some_user` as the `username` variable is defined on the
-subsequent line 3. The `USER` at line 4 evaluates to `what_user`, as the `username` argument is
-defined and the `what_user` value was passed on the command line. Prior to its definition by an
-`ARG` instruction, any use of a variable results in an empty string.
+- The `USER` instruction on line 2 evaluates to the `some_user` fallback,
+  because the `username` variable is not yet declared.
+- The `username` variable is declared on line 3, and available for reference in
+  Dockerfile instruction from that point onwards.
+- The `USER` instruction on line 4 evaluates to `what_user`, since at that
+  point the `username` argument has a value of `what_user` which was passed on
+  the command line. Prior to its definition by an `ARG` instruction, any use of
+  a variable results in an empty string.
 
-An `ARG` instruction goes out of scope at the end of the build
-stage where it was defined. To use an argument in multiple stages, each stage must
-include the `ARG` instruction.
+An `ARG` variable declared within a build stage is automatically inherited by
+other stages based on that stage. Unrelated build stages do not have access to
+the variable. To use an argument in multiple distinct stages, each stage must
+include the `ARG` instruction, or they must both be based on a shared base
+stage in the same Dockerfile where the variable is declared.
 
-```dockerfile
-FROM busybox
-ARG SETTINGS
-RUN ./run/setup $SETTINGS
-
-FROM busybox
-ARG SETTINGS
-RUN ./run/other $SETTINGS
-```
+For more information, refer to [variable scoping](https://docs.docker.com/build/building/variables/#scoping).
 
 ### Using ARG variables
 
@@ -2622,8 +2630,6 @@ another build. The trigger will be executed in the context of the
 downstream build, as if it had been inserted immediately after the
 `FROM` instruction in the downstream Dockerfile.
 
-Any build instruction can be registered as a trigger.
-
 This is useful if you are building an image which will be used as a base
 to build other images, for example an application build environment or a
 daemon which may be customized with user-specific configuration.
@@ -2666,11 +2672,26 @@ ONBUILD ADD . /app/src
 ONBUILD RUN /usr/local/bin/python-build --dir /app/src
 ```
 
+### Copy or mount from stage, image, or context
+
+As of Dockerfile syntax 1.11, you can use `ONBUILD` with instructions that copy
+or mount files from other stages, images, or build contexts. For example:
+
+```dockerfile
+# syntax=docker/dockerfile:1.11
+FROM alpine AS baseimage
+ONBUILD COPY --from=build /usr/bin/app /app
+ONBUILD RUN --mount=from=config,target=/opt/appconfig ...
+```
+
+If the source of `from` is a build stage, the stage must be defined in the
+Dockerfile where `ONBUILD` gets triggered. If it's a named context, that
+context must be passed to the downstream build.
+
 ### ONBUILD limitations
 
 - Chaining `ONBUILD` instructions using `ONBUILD ONBUILD` isn't allowed.
 - The `ONBUILD` instruction may not trigger `FROM` or `MAINTAINER` instructions.
-- `ONBUILD COPY --from` is [not supported](https://github.com/moby/buildkit/issues/816).
 
 ## STOPSIGNAL
 
@@ -3002,10 +3023,9 @@ hello world
 
 For examples of Dockerfiles, refer to:
 
-- The ["build images" section](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
-- The ["get started" tutorial](https://docs.docker.com/get-started/)
-- The [language-specific getting started guides](https://docs.docker.com/language/)
-- The [build guide](https://docs.docker.com/build/guide/)
+- The [building best practices page](https://docs.docker.com/build/building/best-practices/)
+- The ["get started" tutorials](https://docs.docker.com/get-started/)
+- The [language-specific getting started guides](https://docs.docker.com/guides/language/)
 
 [^1]: Value required
 [^2]: For Docker-integrated [BuildKit](https://docs.docker.com/build/buildkit/#getting-started) and `docker buildx build`
