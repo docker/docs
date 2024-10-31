@@ -234,9 +234,10 @@ The following `admin-settings.json` code and table provides an example of the re
 For settings to take effect:
 - On a new install, developers need to launch Docker Desktop and authenticate to their organization.
 - On an existing install, developers need to quit Docker Desktop through the Docker menu, and then relaunch Docker Desktop. If they are already signed in, they don't need to sign in again for the changes to take effect.
-  >**Important**
+
+  >[!IMPORTANT]
   >
-  >Selecting **Restart** from the Docker menu isn't enough as it only restarts some components of Docker Desktop.
+  > Selecting **Restart** from the Docker menu isn't enough as it only restarts some components of Docker Desktop.
 
 Docker doesn't automatically mandate that developers re-launch and sign in once a change has been made so as not to disrupt your developers' workflow.
 
