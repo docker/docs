@@ -84,8 +84,8 @@ RUN hugo mod vendor
 
 # vendor is an empty stage with only vendored Hugo modules
 FROM scratch AS vendor
-COPY --from=update-modules /src/_vendor /_vendor
-COPY --from=update-modules /src/go.* /
+COPY --from=update-modules /project/_vendor /_vendor
+COPY --from=update-modules /project/go.* /
 
 # build-upstream builds an upstream project with a replacement module
 FROM build-base AS build-upstream
