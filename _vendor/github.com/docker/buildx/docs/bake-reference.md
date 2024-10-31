@@ -844,7 +844,7 @@ The following example forces the builder to always pull all images referenced in
 
 ```hcl
 target "default" {
-  pull = "always"
+  pull = true
 }
 ```
 
