@@ -1926,7 +1926,9 @@ events or unexpected unmounts.
 
 ### Beta 18.1 Release Notes (2016-07-07 1.12.0-rc3-beta18.1)
 
->**Note**: Docker 1.12.0 RC3 release introduces a backward incompatible change from RC2. You can fix this by recreating or updating your containers.
+>[!NOTE] 
+>
+> Docker 1.12.0 RC3 release introduces a backward incompatible change from RC2. You can fix this by recreating or updating your containers.
 
 **Hotfix**
 
