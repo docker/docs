@@ -52,7 +52,7 @@ The following diagram shows the relationship between a registry, repositories, a
 +---------------------------------------+
 ```
 
->**Note**
+> [!NOTE]
 >
 > You can create one private repository and unlimited public repositories using the free version of Docker Hub. For more information, visit the [Docker Hub subscription page](https://www.docker.com/pricing/).
 
@@ -112,7 +112,7 @@ Don't worry about the specifics of the Dockerfile, as you'll learn about that in
     docker build -t <YOUR_DOCKER_USERNAME>/docker-quickstart .
     ```
 
-    >**Note**
+    > [!NOTE]
     >
     > Make sure you include the dot (.) at the end of the `docker build` command. This tells Docker where to find the Dockerfile.
 

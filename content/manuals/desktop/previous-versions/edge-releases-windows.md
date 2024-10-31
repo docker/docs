@@ -1627,7 +1627,9 @@ registry access (fixes [docker/for-win#569](https://github.com/docker/for-win/is
 
 ### Beta 36 Release Notes (2017-01-12 1.13.0-rc6-beta36)
 
->**Important Note:** Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
+> [!IMPORTANT]
+>
+> Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
 
 **Upgrades**
 
@@ -1641,7 +1643,9 @@ registry access (fixes [docker/for-win#569](https://github.com/docker/for-win/is
 
 ### Beta 35 Release Notes (2017-01-06 1.13.0-rc5-beta35)
 
->**Important Note:** Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
+> [!IMPORTANT]
+>
+> Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
 
 **Upgrades**
 
@@ -1670,7 +1674,9 @@ registry access (fixes [docker/for-win#569](https://github.com/docker/for-win/is
 
 ### Beta 33 Release Notes (2016-12-15 1.13.0-rc3-beta33)
 
->**Important Note:** Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
+> [!IMPORTANT]
+>
+> Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
 
 **New**
 
@@ -1687,7 +1693,9 @@ registry access (fixes [docker/for-win#569](https://github.com/docker/for-win/is
 
 ### Beta 32.1 Release Notes (2016-12-09 1.13.0-rc3-beta32.1)
 
->**Important Note:** Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
+> [!IMPORTANT]
+>
+> Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
 
 **Hotfixes**
 
@@ -1717,9 +1725,9 @@ registry access (fixes [docker/for-win#569](https://github.com/docker/for-win/is
 
 ### Beta 32 Release Notes (2016-12-07 1.13.0-rc3-beta32)
 
->**Important Note**:
+> [!IMPORTANT]
 >
->  Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
+> Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
 
 **New**
 

@@ -20,10 +20,9 @@ The ZFS on Linux (ZoL) port is healthy and maturing. However, at this point in
 time it is not recommended to use the `zfs` Docker storage driver for production
 use unless you have substantial experience with ZFS on Linux.
 
-> ***Note***: There is also a FUSE implementation of ZFS on the Linux platform.
-> This is not recommended. The native ZFS driver (ZoL) is more tested, more
-> performant, and is more widely used. The remainder  of this document refers
-> to the native ZoL port.
+> [!NOTE]
+>
+> There is also a FUSE implementation of ZFS on the Linux platform. This is not recommended. The native ZFS driver (ZoL) is more tested, has better performance, and is more widely used. The remainder of this document refers to the native ZoL port.
 
 ## Prerequisites
 
@@ -38,8 +37,7 @@ use unless you have substantial experience with ZFS on Linux.
 
 > [!NOTE]
 >
-> There is no need to use `MountFlags=slave` because `dockerd` and `containerd`
-> are in different mount namespaces. 
+> There is no need to use `MountFlags=slave` because `dockerd` and `containerd` are in different mount namespaces.
 
 ## Configure Docker with the `zfs` storage driver
 

@@ -123,7 +123,7 @@ Docker image locally.
    efa9baa size: 526
    ```
 
-    >**Note**
+    > [!NOTE]
     >
     > You must be signed in to Docker Hub through Docker Desktop or the command line, and you must also name your images correctly, as per the above steps.
 

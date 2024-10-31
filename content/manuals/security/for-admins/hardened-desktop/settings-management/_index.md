@@ -9,9 +9,9 @@ aliases:
 weight: 10
 ---
 
->**Note**
+> [!NOTE]
 >
->Settings Management is available to Docker Business customers only.
+> Settings Management is available to Docker Business customers only.
 
 Settings Management is a feature that helps admins to control certain Docker Desktop settings on client machines within their organization.
 
