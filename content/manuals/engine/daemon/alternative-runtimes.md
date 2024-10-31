@@ -133,7 +133,7 @@ To add youki as a container runtime:
 1. Install youki and its dependencies.
 
    For instructions, refer to the
-   [official setup guide](https://containers.github.io/youki/user/basic_setup.html).
+   [official setup guide](https://youki-dev.github.io/youki/user/basic_setup.html).
 
 2. Register youki as a runtime for Docker by editing the Docker daemon
    configuration file, located at `/etc/docker/daemon.json` by default.
