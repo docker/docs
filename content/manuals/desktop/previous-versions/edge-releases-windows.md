@@ -2279,7 +2279,7 @@ This Beta release includes some significant changes:
 
 **Upgrades**
 
-* docker-compose 1.7.1  (see <a href="https://github.com/docker/compose/releases/tag/1.7.1" target="_blank"> changelog</a>)
+* docker-compose 1.7.1 (see [changelog](https://github.com/docker/compose/releases/tag/1.7.1))
 * Kernel 4.4.9
 
 **Bug fixes and minor changes**
