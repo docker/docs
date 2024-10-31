@@ -10,6 +10,36 @@ toc_max: 2
 This page contains information about the new features, improvements, and bug
 fixes in [Docker Buildx](https://github.com/docker/buildx).
 
+## 0.18.0
+
+### New
+
+- The `docker buildx inspect` command now displays BuildKit daemon configuration options set with a TOML file. [docker/buildx#2684](https://github.com/docker/buildx/pull/2684)
+- The `docker buildx ls` command output is now more compact by default by compacting the platform list. A new `--no-trunc` option can be used for the full list. [docker/buildx#2138](https://github.com/docker/buildx/pull/2138), [docker/buildx#2717](https://github.com/docker/buildx/pull/2717)
+- The `docker buildx prune` command now supports new `--max-used-space` and `--min-free-space` filters with BuildKit v0.17.0+ builders. [docker/buildx#2766](https://github.com/docker/buildx/pull/2766)
+
+### Enhancements
+
+- Allow capturing of CPU and memory profiles with `pprof` using the [`BUILDX_CPU_PROFILE`](/manuals/build/building/variables.md#buildx_cpu_profile) and [`BUILDX_MEM_PROFILE`](/manuals/build/building/variables.md#buildx_mem_profile) environment variables. [docker/buildx#2746](https://github.com/docker/buildx/pull/2746)
+- Maximum Dockerfile size from standard input has increased. [docker/buildx#2716](https://github.com/docker/buildx/pull/2716), [docker/buildx#2719](https://github.com/docker/buildx/pull/2719)
+- Memory allocations have been reduced. [docker/buildx#2724](https://github.com/docker/buildx/pull/2724), [docker/buildx#2713](https://github.com/docker/buildx/pull/2713)
+- The `--list-targets` and `--list-variables` flags for `docker buildx bake` no longer require initialization of the builder. [docker/buildx#2763](https://github.com/docker/buildx/pull/2763)
+
+### Bug fixes
+
+- Check warnings now print the full filepath to the offending Dockerfile, relative to the current working directory. [docker/buildx#2672](https://github.com/docker/buildx/pull/2672)
+- Fallback images for the `--check` and `--call` options have been updated to correct references. [docker/buildx#2705](https://github.com/docker/buildx/pull/2705)
+- Fix issue with the build details link not showing in experimental mode. [docker/buildx#2722](https://github.com/docker/buildx/pull/2722)
+- Fix validation issue with invalid target linking for Bake. [docker/buildx#2700](https://github.com/docker/buildx/pull/2700)
+- Fix missing error message when running an invalid command. [docker/buildx#2741](https://github.com/docker/buildx/pull/2741)
+- Fix possible false warnings for local state in `--call` requests. [docker/buildx#2754](https://github.com/docker/buildx/pull/2754)
+- Fix potential issues with entitlements when using linked targets in Bake. [docker/buildx#2701](https://github.com/docker/buildx/pull/2701)
+- Fix possible permission issues when accessing local state after running Buildx with `sudo`. [docker/buildx#2745](https://github.com/docker/buildx/pull/2745)
+
+### Packaging
+
+- Compose compatibility has been updated to v2.4.1. [docker/buildx#2760](https://github.com/docker/buildx/pull/2760)
+
 ## 0.17.1
 
 {{< release-date date="2024-09-13" >}}

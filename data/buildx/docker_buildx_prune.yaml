@@ -57,6 +57,36 @@ options:
       value_type: bytes
       default_value: "0"
       description: Amount of disk space to keep for cache
+      deprecated: true
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: max-used-space
+      value_type: bytes
+      default_value: "0"
+      description: Maximum amount of disk space allowed to keep for cache
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: min-free-space
+      value_type: bytes
+      default_value: "0"
+      description: Target amount of free disk space after pruning
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: reserved-space
+      value_type: bytes
+      default_value: "0"
+      description: Amount of disk space always allowed to keep for cache
       deprecated: false
       hidden: false
       experimental: false
