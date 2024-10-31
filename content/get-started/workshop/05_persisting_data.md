@@ -21,43 +21,37 @@ changes won't be seen in another container, even if they're using the same image
 
 ### See this in practice
 
-To see this in action, you're going to start two containers. In one container, you'll create a file. In the other container, you'll verify the file exists.
-What you'll see is that the file created in one container isn't available in another.
+To see this in action, you're going to start two containers. In one container,
+you'll create a file. In the other container, you'll check whether that same
+file exists.
 
-1. Start an Alpine container and access its shell.
-
-    ```console
-    $ docker run -ti --name=mytest alpine
-    ```
-
-2. In the container, create a `greeting.txt` file with `hello` inside.
+1. Start an Alpine container and create a new file in it.
 
     ```console
-    / # echo "hello" > greeting.txt
+    $ docker run --rm alpine touch greeting.txt
     ```
 
-3. Exit the container.
+    > [!TIP]
+    > Any commands you specify after the image name (in this case, `alpine`)
+    > are executed inside the container. In this case, the command `touch
+    > greeting.txt` puts a file named `greeting.txt` on the container's filesystem.
 
-   ```console
-   / # exit
-   ```
-
-4. Run a new Alpine container and use the `cat` command to verify that the
-   file does not exist.
+2. Run a new Alpine container and use the `stat` command to check whether the file exists.
    
    ```console
-   $ docker run alpine cat greeting.txt
+   $ docker run --rm alpine stat greeting.txt
    ```
 
    You should see output similar to the following that indicates the file does not exist in the new container.
 
    ```console
-   cat: can't open 'greeting.txt': No such file or directory
+   stat: can't stat 'greeting.txt': No such file or directory
    ```
 
-5. Go ahead and remove the containers using `docker ps --all` to get the IDs,
-   and then `docker rm -f <container-id>` to remove the containers.
-
+The `greeting.txt` file created by the first container did not exist in the
+second container. That is because the writeable "top layer" of each container
+is isolated. Even though both containers shared the same underlying layers that
+make up the base image, the writable layer is unique to each container.
 
 ## Container volumes
 
