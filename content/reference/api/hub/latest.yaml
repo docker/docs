@@ -23,7 +23,7 @@ tags:
     description: |
       The following resources are available to interact with the documented API:
 
-      - <a href="https://github.com/docker/hub-tool#readme" target="_blank">Docker Hub CLI tool</a> (currently experimental)
+      - <a href="https://github.com/docker/hub-tool#readme">Docker Hub CLI tool</a> (currently experimental)
   - name: rate-limiting
     x-displayName: Rate Limiting
     description: |
