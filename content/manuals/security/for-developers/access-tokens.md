@@ -4,7 +4,7 @@ linkTitle: Access tokens
 description: Learn how to create and manage your personal Docker access tokens
   to securely push and pull images programmatically.
 keywords: docker hub, hub, security, PAT, personal access token
-aliases: 
+aliases:
 - /docker-hub/access-tokens/
 ---
 
@@ -13,8 +13,8 @@ You can create a personal access token (PAT) to use as an alternative to your pa
 Compared to passwords, PATs provide the following advantages:
 
 - You can investigate when the PAT was last used and then disable or delete it if you find any suspicious activity.
-- When using an access token, you can't perform any admin activity on the account, including changing the password. It protects your account if your computer is compromised.
-  
+- When using an access token, you can't perform any administrative activity on the account, including changing the password. It protects your account if your computer is compromised.
+
 Access tokens are also valuable for building integrations, as you can issue multiple tokens, one for each integration, and revoke them at
 any time.
 
@@ -33,7 +33,7 @@ any time.
 4. Select **Generate new token**.
 
 5. Add a description for your token. Use something that indicates the use case or purpose of the token.
-   
+
 6. Set the access permissions.
    The access permissions are scopes that set restrictions in your
    repositories. For example, for Read & Write permissions, an automation
@@ -81,4 +81,4 @@ You can rename, activate, deactivate, or delete a token as needed. You can manag
 
 When you sign in to your Docker account with Docker Desktop, Docker Desktop generates an authentication token on your behalf. When you interact with Docker Hub using the Docker CLI, the CLI uses this token for authentication. The token scope has Read, Write, and Delete access. If your Docker Desktop session expires, the token is automatically removed locally.
 
-You can have up to 5 auto-generated tokens associated with your account. These are deleted and created automatically based on usage and creation dates. You can also delete your auto-generated tokens as needed. See [Modify existing tokens](#modify-existing-tokens).
+You can have up to 5 auto-generated tokens associated with your account. These are deleted and created automatically based on usage and creation dates. You can also delete your auto-generated tokens as needed. For more information, see [Modify existing tokens](#modify-existing-tokens).
