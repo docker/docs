@@ -132,7 +132,7 @@ spec:
             - name: POSTGRES_PORT
               value: "5432"
           ports:
-            - containerPort: 8001
+            - containerPort: 5001
 ---
 apiVersion: v1
 kind: Service
@@ -144,8 +144,8 @@ spec:
   selector:
     service: fastapi
   ports:
-    - port: 8001
-      targetPort: 8001
+    - port: 5001
+      targetPort: 5001
       nodePort: 30001
 ```
 
@@ -160,7 +160,7 @@ In these Kubernetes YAML file, there are various objects, separated by the `---`
 - A PersistentVolumeClaim, to define a storage that will be persistent through restarts for the database.
 - A Secret, Keeping the database password as a example using secret kubernetes resource.
 - A NodePort service, which will route traffic from port 30001 on your host to
-  port 8001 inside the pods it routes to, allowing you to reach your app
+  port 5001 inside the pods it routes to, allowing you to reach your app
   from the network.
 
 To learn more about Kubernetes objects, see the [Kubernetes documentation](https://kubernetes.io/docs/home/).
@@ -226,7 +226,7 @@ To learn more about Kubernetes objects, see the [Kubernetes documentation](https
    NAME                 TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
    kubernetes           ClusterIP   10.43.0.1      <none>        443/TCP          13h
    postgres             ClusterIP   10.43.209.25   <none>        5432/TCP         3m10s
-   service-entrypoint   NodePort    10.43.67.120   <none>        8001:30001/TCP   79s
+   service-entrypoint   NodePort    10.43.67.120   <none>        5001:30001/TCP   79s
    ```
 
    In addition to the default `kubernetes` service, you can see your `service-entrypoint` service, accepting traffic on port 30001/TCP and the internal `ClusterIP` `postgres` with the port `5432` open to accept connections from you python app.
