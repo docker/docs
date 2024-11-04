@@ -1505,6 +1505,35 @@ ports:
     mode: host
 ```
 
+## post_start
+
+`post_start` defines a sequence of lifecycle hooks to run after a container has started. The exact timing of when the command is run is not guaranteed.
+
+- `command`: The command to run after the container has started. This attribute is required.
+- `user`: The user to run the command. If not set, the command is run with the same user as the main service command.
+- `privileged`: Lets the `post_start` command run with privileged access.
+- `working_dir`: The working directory in which to run the command. If not set, it is run in the same working directory as the main service command.
+- `environment`: Sets environment variables specifically for the `post_start` command. While the command inherits the environment variables defined for the service’s main command, this section lets you add new variables or override existing ones.
+
+```yaml
+services:
+  test:
+    post_start:
+      - command: ./do_something_on_startup.sh
+        user: root
+        privileged: true
+        environment:
+          - FOO=BAR
+```
+
+For more information, see [Use lifecycle hooks](/manuals/compose/how-tos/lifecycle.md).
+
+## pre_stop
+
+`pre_stop` defines a sequence of lifecycle hooks to run before the container is stopped. These hooks won't run if the container stops by itself or is terminated suddenly.
+
+Configuration is equivalent to [`post_start](#post_start).
+
 ### privileged
 
 `privileged` configures the service container to run with elevated privileges. Support and actual impacts are platform specific.
