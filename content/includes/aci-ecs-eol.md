@@ -1,3 +1,3 @@
->[!IMPORTANT]
+> [!IMPORTANT]
 >
->Docker Compose's integration for ECS and ACI is retiring in November 2023.
+> Docker Compose's integration for ECS and ACI is retiring in November 2023.
