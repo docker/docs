@@ -66,5 +66,5 @@ services:
 
 ## Reference information
 
-- [`post_start`](/reference/compose-file/services.md#post-start)
-- [`pre_stop`](/reference/compose-file/services.md#pre-stop)
+- [`post_start`](/reference/compose-file/services.md#post_start)
+- [`pre_stop`](/reference/compose-file/services.md#pre_stop)
