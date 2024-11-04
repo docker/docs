@@ -12,7 +12,7 @@ weight: 10
 
 Before you begin setting up Laravel with Docker Compose, make sure you meet the following prerequisites:
 
-### 1. Docker and Docker Compose Installed
+## Docker and Docker Compose
 
 You need Docker and Docker Compose installed on your system. Docker allows you to containerize applications, and Docker Compose helps you manage multi-container applications.
 
