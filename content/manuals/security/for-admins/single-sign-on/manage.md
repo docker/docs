@@ -63,7 +63,7 @@ aliases:
 > - [Okta](https://help.okta.com/en-us/Content/Topics/Security/policies/configure-app-signon-policies.htm)
 > - [Entra ID (formerly Azure AD)](https://learn.microsoft.com/en-us/azure/active-directory/develop/howto-restrict-your-app-to-a-set-of-users)
 >
-> Alternatively, see [Manage how users are provisioned](/manuals/security/for-admins/single-sign-on/manage.md).
+> Alternatively, see the [Provisioning overview](/manuals/security/for-admins/provisioning/_index.md) guide.
 
 
 ### Add guest users when SSO is enabled
