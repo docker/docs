@@ -67,7 +67,7 @@ To move the disk image file to a different location:
 
 3. Select **Apply & Restart** for the changes to take effect.
 
->[!IMPORTANT]
+> [!IMPORTANT]
 >
 > Do not move the file directly in Finder as this can cause Docker Desktop to lose track of the file.
 
