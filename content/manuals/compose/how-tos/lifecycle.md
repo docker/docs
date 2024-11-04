@@ -63,3 +63,8 @@ services:
     pre_stop:
       - command: ./data_flush.sh
 ```
+
+## Reference information
+
+[`post_start`](/reference/compose-file/services.md#post-start)
+[`pre_stop`](/reference/compose-file/services.md#pre-stop)
