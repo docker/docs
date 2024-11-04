@@ -438,5 +438,3 @@ This command will build and start all the services in detached mode, providing a
 ### Summary
 
 By setting up a Docker Compose environment for Laravel in production, you ensure that your application is optimized for performance, scalable, and secure. This setup makes deployments consistent and easier to manage, reducing the likelihood of errors due to differences between environments.
-
-<div id="compose-lp-survey-anchor"></div>

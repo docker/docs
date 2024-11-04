@@ -35,6 +35,3 @@ It’s recommended to use `alpine`-based images in production for smaller image 
 Additionally, consider using **Docker Scout** to scan for vulnerabilities, especially in production environments. For more information, refer to the [Docker Scout documentation](/scout/).
 
 For additional information about using Docker Compose in production, see [this guide](/compose/how-tos/production/).
-
-<div id="compose-lp-survey-anchor"></div>
-
