@@ -23,7 +23,7 @@ There are two important principles of images:
 
 1. Images are immutable. Once an image is created, it can't be modified. You can only make a new image or add changes on top of it.
 
-2. Container images are composed of layers. Each layer represented a set of file system changes that add, remove, or modify files.
+2. Container images are composed of layers. Each layer represents a set of file system changes that add, remove, or modify files.
 
 These two principles let you to extend or add to existing images. For example, if you are building a Python app, you can start from the [Python image](https://hub.docker.com/_/python) and add additional layers to install your app's dependencies and add your code. This lets you focus on your app, rather than Python itself.
 
