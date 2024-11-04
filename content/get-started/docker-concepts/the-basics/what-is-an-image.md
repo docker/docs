@@ -11,7 +11,7 @@ aliases:
 
 ## Explanation
 
-Seeing a [container](./what-is-a-container) is an isolated process, where does it get its files and configuration? How do you share those environments?
+Seeing a [container](./what-is-a-container.md) is an isolated process, where does it get its files and configuration? How do you share those environments?
 
 That's where container images come in. A container image is a standardized package that includes all of the files, binaries, libraries, and configurations to run a container.
 
@@ -82,7 +82,7 @@ Follow the instructions to search and pull a Docker image using CLI to view its 
 
 ### Search for and download an image
 
-1. Open a terminal and search for images using the [`docker search`](/reference/cli/docker/search/) command:
+1. Open a terminal and search for images using the [`docker search`](/reference/cli/docker/search.md) command:
 
    ```console
    docker search docker/welcome-to-docker
@@ -97,7 +97,7 @@ Follow the instructions to search and pull a Docker image using CLI to view its 
 
    This output shows you information about relevant images available on Docker Hub.
 
-2. Pull the image using the [`docker pull`](/reference/cli/docker/image/pull/) command.
+2. Pull the image using the [`docker pull`](/reference/cli/docker/image/pull.md) command.
 
    ```console
    docker pull docker/welcome-to-docker
@@ -125,7 +125,7 @@ Follow the instructions to search and pull a Docker image using CLI to view its 
 
 ### Learn about the image
 
-1. List your downloaded images using the [`docker image ls`](/reference/cli/docker/image/ls/) command:
+1. List your downloaded images using the [`docker image ls`](/reference/cli/docker/image/ls.md) command:
 
    ```console
    docker image ls
@@ -144,7 +144,7 @@ Follow the instructions to search and pull a Docker image using CLI to view its 
    >
    > The image size represented here reflects the uncompressed size of the image, not the download size of the layers.
 
-2. List the image's layers using the [`docker image history`](/reference/cli/docker/image/history/) command:
+2. List the image's layers using the [`docker image history`](/reference/cli/docker/image/history.md) command:
 
    ```console
    docker image history docker/welcome-to-docker
@@ -187,12 +187,12 @@ In this walkthrough, you searched and pulled a Docker image. In addition to pull
 
 The following resources will help you learn more about exploring, finding, and building images:
 
-- [Docker Trusted Content](/trusted-content/)
-  - [Docker Official Images docs](/trusted-content/official-images/)
-  - [Docker Verified Publisher docs](/trusted-content/dvp-program/)
-  - [Docker-Sponsored Open Source Program docs](/trusted-content/dsos-program/)
-- [Explore the Image view in Docker Desktop](/desktop/use-desktop/images/)
-- [Packaging your software](/build/building/packaging/)
+- [Docker Trusted Content](/manuals/trusted-content/_index.md)
+  - [Docker Official Images docs](/manuals/trusted-content/official-images/_index.md)
+  - [Docker Verified Publisher docs](/manuals/trusted-content/dvp-program.md)
+  - [Docker-Sponsored Open Source Program docs](/manuals/trusted-content/dsos-program.md)
+- [Explore the Image view in Docker Desktop](/manuals/desktop/use-desktop/images.md)
+- [Docker Build overview](/manuals/build/concepts/overview.md)
 - [Docker Hub](https://hub.docker.com)
 
 ## Next steps
