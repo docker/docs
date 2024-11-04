@@ -23,7 +23,7 @@ You need Docker and Docker Compose installed on your system. Docker allows you t
 
 A fundamental understanding of Docker and how containers work will be helpful. If you're new to Docker, consider reviewing the [Docker Overview](/get-started/overview/) to familiarize yourself with containerization concepts.
 
-### 3. Basic Knowledge of Laravel
+## Basic knowledge of Laravel
 
 This guide assumes you have a basic understanding of Laravel and PHP. Familiarity with Laravel’s command-line tools, such as [Artisan](https://laravel.com/docs/11.x/artisan), and its project structure is important for following the instructions.
 
