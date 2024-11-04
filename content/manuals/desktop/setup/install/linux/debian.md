@@ -1,17 +1,15 @@
 ---
-description: Learn how to install, launch and upgrade Docker Desktop on Ubuntu. This
-  quick guide will cover prerequisites, installation methods, and more.
-keywords: install docker ubuntu, ubuntu install docker, install docker on ubuntu,
-  docker install ubuntu, how to install docker on ubuntu, ubuntu docker install, docker
-  installation on ubuntu, docker ubuntu install, docker installing ubuntu, installing
-  docker on ubuntu, docker desktop for ubuntu
-title: Install Docker Desktop on Ubuntu
-linkTitle: Ubuntu
-weight: 10
+description: Instructions for installing Docker Desktop on Debian
+keywords: debian, install, uninstall, upgrade, update, linux, desktop, docker desktop,
+  docker desktop for linux, dd4l
+title: Install Docker Desktop on Debian
+linkTitle: Debian
+weight: 20
 toc_max: 4
 aliases:
-- /desktop/linux/install/ubuntu/
-- /desktop/install/ubuntu/
+- /desktop/linux/install/debian/
+- /desktop/install/debian/
+- /desktop/install/linux/debian/
 ---
 
 > **Docker Desktop terms**
@@ -20,43 +18,46 @@ aliases:
 > employees OR more than $10 million USD in annual revenue) requires a [paid
 > subscription](https://www.docker.com/pricing/).
 
-This page contains information on how to install, launch and upgrade Docker Desktop on an Ubuntu distribution.
+This page contains information on how to install, launch, and upgrade Docker Desktop on a Debian distribution.
 
 ## Prerequisites
 
 To install Docker Desktop successfully, you must:
 
 - Meet the [general system requirements](_index.md#general-system-requirements).
-- Have an x86-64 system with Ubuntu 22.04, 24.04, or the latest non-LTS version.
+- Have a 64-bit version of Debian 12.
+- For a Gnome Desktop environment, you must also install AppIndicator and KStatusNotifierItem [Gnome extensions](https://extensions.gnome.org/extension/615/appindicator-support/).
+
 - For non-Gnome Desktop environments, `gnome-terminal` must be installed:
+
   ```console
   $ sudo apt install gnome-terminal
   ```
 
 ## Install Docker Desktop
 
-Recommended approach to install Docker Desktop on Ubuntu:
+Recommended approach to install Docker Desktop on Debian:
 
-1. Set up Docker's package repository.
-   See step one of [Install using the `apt` repository](/manuals/engine/install/ubuntu.md#install-using-the-repository).
+1. Set up Docker's `apt` repository.
+   See step one of [Install using the `apt` repository](/manuals/engine/install/debian.md#install-using-the-repository).
 
 2. Download the latest [DEB package](https://desktop.docker.com/linux/main/amd64/docker-desktop-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64). For checksums, see the [Release notes](/manuals/desktop/release-notes.md).
 
 3. Install the package with apt as follows:
 
-   ```console
-   $ sudo apt-get update
-   $ sudo apt-get install ./docker-desktop-amd64.deb
-   ```
+  ```console
+  $ sudo apt-get update
+  $ sudo apt-get install ./docker-desktop-amd64.deb
+  ```
 
-   > [!NOTE]
-   >
-   > At the end of the installation process, `apt` displays an error due to installing a downloaded package. You
-   > can ignore this error message.
-   >
-   > ```text
-   > N: Download is performed unsandboxed as root, as file '/home/user/Downloads/docker-desktop.deb' couldn't be accessed by user '_apt'. - pkgAcquire::Run (13: Permission denied)
-   > ```
+  > [!NOTE]
+  >
+  > At the end of the installation process, `apt` displays an error due to installing a downloaded package. You
+  > can ignore this error message.
+  >
+  > ```text
+  > N: Download is performed unsandboxed as root, as file '/home/user/Downloads/docker-desktop.deb' couldn't be accessed by user '_apt'. - pkgAcquire::Run (13: Permission denied)
+  > ```
 
    By default, Docker Desktop is installed at `/opt/docker-desktop`.
 

@@ -2,6 +2,8 @@
 title: Install and configure
 description: Understand how to use the MSI installer. Also explore additional configuration options.
 keywords: msi, windows, docker desktop, install, deploy, configure
+aliases: 
+- /desktop/install/msi/install-and-configure/
 ---
 
 ## Install interactively

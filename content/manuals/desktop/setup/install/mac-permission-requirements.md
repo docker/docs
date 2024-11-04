@@ -7,6 +7,7 @@ aliases:
 - /docker-for-mac/privileged-helper/
 - /desktop/mac/privileged-helper/
 - /desktop/mac/permission-requirements/
+- /desktop/install/mac-permission-requirements/
 weight: 20
 ---
 
@@ -134,7 +135,7 @@ On first run, Docker Desktop checks if `localhost` is resolved to `127.0.0.1`. I
 
 ## Installing from the command line
 
-In version 4.11 and later of Docker Desktop for Mac, privileged configurations are applied during the installation with the `--user` flag on the [install command](/manuals/desktop/install/mac-install.md#install-from-the-command-line). In this case, you are not prompted to grant root privileges on the first run of Docker Desktop. Specifically, the `--user` flag:
+In version 4.11 and later of Docker Desktop for Mac, privileged configurations are applied during the installation with the `--user` flag on the [install command](/manuals/desktop/setup/install/mac-install.md#install-from-the-command-line). In this case, you are not prompted to grant root privileges on the first run of Docker Desktop. Specifically, the `--user` flag:
 - Uninstalls the previous `com.docker.vmnetd` if present
 - Sets up symlinks
 - Ensures that `localhost` is resolved to `127.0.0.1`

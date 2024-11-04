@@ -41,7 +41,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 ### New
 
-- Support for [Docker Desktop on Red Hat Enterprise Linux](/manuals/desktop/install/linux/rhel.md) is now generally available.
+- Support for [Docker Desktop on Red Hat Enterprise Linux](/manuals/desktop/setup/install/linux/rhel.md) is now generally available.
 - Volume Backup and Share is now generally available and can be found in the **Volumes** view.
 - Terminal support within Docker Desktop using system shells is now generally available.
 - Beta release of Docker VMM - the more performant alternative to Apple Virtualization Framework on macOS (requires Apple Silicon and macOS 12.5 or later).
@@ -165,7 +165,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 - [Host networking](/manuals/engine/network/drivers/host.md#docker-desktop) support on Docker Desktop is now generally available.
 - If you authenticate via the CLI, you can now authenticate through a browser-based flow, removing the need for manual PAT generation.
 - Windows now supports automatic reclamation of disk space in Docker Desktop for WSL2 installations [using a managed virtual hard disk](/manuals/desktop/wsl/best-practices.md).
-- Deploying Docker Desktop via the [MSI installer](/manuals/desktop/install/msi/_index.md) is now generally available.
+- Deploying Docker Desktop via the [MSI installer](/manuals/desktop/setup/install/msi/_index.md) is now generally available.
 - Two new methods to [enforce sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md) (windows registry key and `.plist` file) are now generally available.
 - Fresh installations of Docker Desktop now use the containerd image store by default.
 - [Compose Bridge](/manuals/compose/bridge/_index.md) (Experimental) is now available from the Compose file viewer. Easily convert and deploy your Compose project to a Kubernetes cluster.
@@ -347,7 +347,7 @@ For more information, see [microsoft/WSL#11794](https://github.com/microsoft/WSL
 #### For Windows
 
 - Fixed an issue on the WSL 2 engine where Docker Desktop would not detect the existence of the `docker-desktop-data` distribution if it had been manually moved by the user.
-- The Windows on ARM installer and the [privileged service](/manuals/desktop/install/windows-permission-requirements.md#privileged-helper) are now built for ARM64.
+- The Windows on ARM installer and the [privileged service](/manuals/desktop/setup/install/windows-permission-requirements.md#privileged-helper) are now built for ARM64.
 
 #### For Mac
 
@@ -1406,7 +1406,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 - Improved `docker scout compare` command to compare two images, now also aliased under `docker scout diff`.
 - Added more details to dashboard errors when a `docker-compose` action fails ([docker/for-win#13378](https://github.com/docker/for-win/issues/13378)).
-- Added support for setting HTTP proxy configuration during installation. This can be done via the `--proxy-http-mode`, `--overrider-proxy-http`, `--override-proxy-https` and `--override-proxy-exclude` installer flags in the case of installation from the CLI on [Mac](install/mac-install.md#install-from-the-command-line) and [Windows](install/windows-install.md#install-from-the-command-line), or alternatively by setting the values in the `install-settings.json` file.
+- Added support for setting HTTP proxy configuration during installation. This can be done via the `--proxy-http-mode`, `--overrider-proxy-http`, `--override-proxy-https` and `--override-proxy-exclude` installer flags in the case of installation from the CLI on [Mac](/manuals/desktop/setup/install/mac-install.md#install-from-the-command-line) and [Windows](/manuals/desktop/setup/install/windows-install.md#install-from-the-command-line), or alternatively by setting the values in the `install-settings.json` file.
 - Docker Desktop now stops overriding .docker/config.json `credsStore` keys on application start. Note that if you use a custom credential helper then the CLI `docker login` and `docker logout` does not affect whether the UI is signed in to Docker or not. In general, it is better to sign into Docker via the UI since the UI supports multi-factor authentication.
 - Added a warning about the [forthcoming removal of Compose V1 from Docker Desktop](/manuals/compose/releases/migrate.md). Can be suppressed with `COMPOSE_V1_EOL_SILENT=1`.
 - In the Compose config, boolean fields in YAML should be either `true` or `false`. Deprecated YAML 1.1 values such as “on” or “no” now produce a warning.
@@ -2020,7 +2020,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 ### New
 
-- Docker Desktop is now fully supported for Docker Business customers inside VMware ESXi and Azure VMs. For more information, see [Run Docker Desktop inside a VM or VDI environment](/manuals/desktop/vm-vdi.md)
+- Docker Desktop is now fully supported for Docker Business customers inside VMware ESXi and Azure VMs. For more information, see [Run Docker Desktop inside a VM or VDI environment](/manuals/desktop/setup/vm-vdi.md)
 - Added two new extensions ([vcluster](https://hub.docker.com/extensions/loftsh/vcluster-dd-extension) and [PGAdmin4](https://hub.docker.com/extensions/mochoa/pgadmin4-docker-extension)) to the Extensions Marketplace.
 - The ability to sort extensions has been added to the Extensions Marketplace.
 - Fixed a bug that caused some users to be asked for feedback too frequently. You'll now only be asked for feedback twice a year.
@@ -2238,7 +2238,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 ### New
 
-- Released [Docker Desktop for Linux](/manuals/desktop/install/linux/_index.md).
+- Released [Docker Desktop for Linux](/manuals/desktop/setup/install/linux/_index.md).
 - Beta release of [Docker Extensions](/manuals/extensions/_index.md) and Extensions SDK.
 - Created a Docker Homepage where you can run popular images and discover how to use them.
 - [Compose V2 is now GA](https://www.docker.com/blog/announcing-compose-v2-general-availability/)
@@ -2259,7 +2259,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 ### New
 
-- Released [Docker Desktop for Linux](/manuals/desktop/install/linux/_index.md).
+- Released [Docker Desktop for Linux](/manuals/desktop/setup/install/linux/_index.md).
 - Beta release of [Docker Extensions](/manuals/extensions/_index.md) and Extensions SDK.
 - Created a Docker Homepage where you can run popular images and discover how to use them.
 - [Compose V2 is now GA](https://www.docker.com/blog/announcing-compose-v2-general-availability/)

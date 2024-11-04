@@ -61,7 +61,7 @@ Docker Desktop excludes support for the following types of issues:
 
 >Note
 >
-> Support for [running Docker Desktop in a VM or VDI environment](vm-vdi.md) is only available to Docker Business customers.
+> Support for [running Docker Desktop in a VM or VDI environment](/manuals/desktop/setup/vm-vdi.md) is only available to Docker Business customers.
 
 ### What versions are supported?
 
@@ -76,9 +76,9 @@ As a Team, you can get support for Docker Desktop for the number of machines equ
 
 Docker Desktop is available for Mac, Linux, and Windows. The supported version information can be found on the following pages:
 
-* [Mac system requirements](install/mac-install.md#system-requirements)
-* [Windows system requirements](install/windows-install.md#system-requirements)
-* [Linux system requirements](install/linux/_index.md#system-requirements)
+* [Mac system requirements](/manuals/desktop/setup/install/mac-install.md#system-requirements)
+* [Windows system requirements](/manuals/desktop/setup/install/windows-install.md#system-requirements)
+* [Linux system requirements](/manuals/desktop/setup/install/linux/_index.md#system-requirements)
 
 ### How is personal diagnostic data handled in Docker Desktop?
 

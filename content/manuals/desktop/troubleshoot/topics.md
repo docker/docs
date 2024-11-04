@@ -103,7 +103,7 @@ If not, the command prints `kern.hv_support: 0`.
 
 See also, [Hypervisor Framework
 Reference](https://developer.apple.com/library/mac/documentation/DriversKernelHardware/Reference/Hypervisor/)
-in the Apple documentation, and Docker Desktop [Mac system requirements](../install/mac-install.md#system-requirements).
+in the Apple documentation, and Docker Desktop [Mac system requirements](/manuals/desktop/setup/install/mac-install.md#system-requirements).
 
 ### VPNKit keeps breaking
 
@@ -298,7 +298,7 @@ Performance tab on the Task Manager. Alternatively, you can type 'systeminfo' in
 If you manually uninstall Hyper-V, WSL 2 or turn off virtualization,
 Docker Desktop cannot start. 
 
-To turn on nested virtualization, see [Run Docker Desktop for Windows in a VM or VDI environment](../vm-vdi.md#turn-on-nested-virtualization).
+To turn on nested virtualization, see [Run Docker Desktop for Windows in a VM or VDI environment](/manuals/desktop/setup/vm-vdi.md#turn-on-nested-virtualization).
 
 #### Hypervisor enabled at Windows startup
 
@@ -321,7 +321,7 @@ If you are using Hyper-V and you get the following error message when running Do
 The Virtual Machine Management Service failed to start the virtual machine 'DockerDesktopVM' because one of the Hyper-V components is not running
 ```
 
-Try [enabling nested virtualization](../vm-vdi.md#turn-on-nested-virtualization).
+Try [enabling nested virtualization](/manuals/desktop/setup/vm-vdi.md#turn-on-nested-virtualization).
 
 
 ### Windows containers and Windows Server

@@ -66,7 +66,7 @@ without it and the feature will take effect. Enforcing sign-in guarantees the
 feature always takes effect.
 
 
-Next, you must either manually [create and configure the admin-settings.json file](configure.md), or use the `--admin-settings` installer flag on [macOS](/manuals/desktop/install/mac-install.md#install-from-the-command-line) or [Windows](/manuals/desktop/install/windows-install.md#install-from-the-command-line) to automatically create the `admin-settings.json` and save it in the correct location.
+Next, you must either manually [create and configure the admin-settings.json file](configure.md), or use the `--admin-settings` installer flag on [macOS](/manuals/desktop/setup/install/mac-install.md#install-from-the-command-line) or [Windows](/manuals/desktop/setup/install/windows-install.md#install-from-the-command-line) to automatically create the `admin-settings.json` and save it in the correct location.
 
 Once this is done, Docker Desktop developers receive the changed settings when they either:
 - Quit, re-launch, and sign in to Docker Desktop

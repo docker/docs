@@ -8,6 +8,7 @@ linkTitle: Arch
 aliases:
 - /desktop/linux/install/archlinux/
 - /desktop/install/archlinux/
+- /desktop/install/linux/archlinux/
 ---
 
 > **Docker Desktop terms**

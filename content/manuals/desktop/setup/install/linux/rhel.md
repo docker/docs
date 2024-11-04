@@ -11,6 +11,8 @@ params:
     badge:
       color: green
       text: New
+aliases:
+- /desktop/install/linux/rhel/
 ---
 
 > **Docker Desktop terms**
