@@ -4,14 +4,14 @@ description: Set up a Laravel development environment using Docker Compose.
 weight: 20
 ---
 
-## Development Environment Setup
+## Development environment setup
 
 This guide demonstrates how to set up a development environment for a Laravel application using Docker and Docker Compose. This setup includes essential services like PHP-FPM, Nginx, and a database (using Postgres, with MySQL/MariaDB as alternatives), which enable you to develop in an isolated and consistent environment.
 
 > [!NOTE]
 > If you want to quickly test this setup without configuring everything manually, you can download the [Laravel Docker Examples](https://github.com/rw4lll/laravel-docker-examples) repository. It includes pre-configured examples for both development and production environments.
 
-### Project Structure
+### Project structure
 
 Start by creating a project structure that includes both the Laravel application and Docker-related files:
 
@@ -338,5 +338,3 @@ This command will build and start all the required services, including PHP, Ngin
 ### Summary
 
 By setting up a Docker Compose environment for Laravel development, you ensure that your development setup is consistent and easily reproducible. This makes it easier for you and your team to collaborate on the same project, without worrying about differences in local environments.
-
-<div id="compose-lp-survey-anchor"></div>

@@ -4,14 +4,14 @@ description: Set up a production-ready environment for Laravel using Docker Comp
 weight: 30
 ---
 
-## Production Environment Setup
+## Production environment setup
 
 This guide demonstrates how to set up a production-ready Laravel environment using Docker and Docker Compose. This configuration is designed for streamlined, scalable, and secure Laravel application deployments.
 
 > [!NOTE]
 > If you want to quickly test this setup without configuring everything manually, you can download the [Laravel Docker Examples](https://github.com/rw4lll/laravel-docker-examples) repository. It includes pre-configured examples for both development and production environments.
 
-### Project Structure
+### Project structure
 
 The project structure for production closely follows the development setup, with Dockerfiles and configurations tailored specifically for production.
 
@@ -40,7 +40,7 @@ my-laravel-app/
 
 This structure includes a typical Laravel app, with a `docker` directory for Docker-related files like `php-fpm`, `php-cli` and `nginx` Dockerfiles, as well as `nginx.conf` config file, and the `compose.yaml` file to define the services.
 
-### Create a Dockerfile for PHP-FPM (Production)
+### Create a Dockerfile for PHP-FPM (production)
 
 For production, the `php-fpm` Dockerfile creates an optimized image containing only necessary extensions and dependencies.
 
@@ -164,7 +164,7 @@ CMD ["php-fpm"]
 
 This Dockerfile uses a multi-stage build to separate the build environment from the production environment. The first stage installs the necessary PHP extensions and Composer dependencies, while the second stage sets up the production environment with only the runtime libraries required.
 
-### Create a Dockerfile for PHP-CLI (Production)
+### Create a Dockerfile for PHP-CLI (production)
 
 For production we often need a separate container to run Artisan commands, migrations, and other CLI tasks. This container will be very similar to the PHP-FPM container, and can look like this:
 
@@ -244,7 +244,7 @@ CMD ["bash"]
 This Dockerfile is similar to the PHP-FPM Dockerfile, but it uses the `php:8.3-cli` image as the base image and sets up the container for running CLI commands.
 
 
-### Create a Dockerfile for Nginx (Production)
+### Create a Dockerfile for Nginx (production)
 
 Nginx serves as the web server for the Laravel application. We can include static assets directly to the container. Here's an example of possible Dockerfile for Nginx:
 
