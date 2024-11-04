@@ -330,7 +330,7 @@ volumes:
 To start the development environment, use:
 
 ```console
-$ docker compose -f compose.yaml up --build -d
+$ docker compose up --build -d
 ```
 
 This command will build and start all the required services, including PHP, Nginx, and the PostgreSQL database. You can now access your Laravel application at `http://localhost/`.
