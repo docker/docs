@@ -2504,7 +2504,7 @@ are working on a solution.
 * Fix msi version
 * Don't truncate Toolbox link
 
->[!NOTE]
+> [!NOTE]
 >
 > Docker for Windows skipped from Beta 1 to Beta 5 at this point to synch up the version numbering with Docker for Mac, which went into beta cycles a little earlier.
 
