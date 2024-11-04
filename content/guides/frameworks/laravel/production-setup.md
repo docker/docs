@@ -295,7 +295,7 @@ CMD ["nginx", "-g", "daemon off;"]
 
 This Dockerfile uses a multi-stage build to separate the asset building process from the final production image. The first stage installs Node.js and builds the assets, while the second stage sets up the Nginx production image with the optimized configuration and the built assets.
 
-### Create Docker Compose Configuration for Production
+### Create Docker Compose configuration for production
 
 To bring all the services together, we need a `compose.yaml` file that defines the services, volumes, and networks for the production environment. Here's an example configuration:
 
