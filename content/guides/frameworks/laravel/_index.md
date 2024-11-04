@@ -12,14 +12,12 @@ params:
   resource_links:
     - title: Laravel
       url: https://laravel.com/
-      external: true
     - title: Docker Compose
       url: /compose/
     - title: Use Compose in production
       url: /compose/how-tos/production/
     - title: Repository with examples
       url: https://github.com/rw4lll/laravel-docker-examples
-      external: true
 ---
 
 Laravel is a popular PHP framework that allows developers to build web applications quickly and effectively. Docker Compose simplifies the management of development and production environments by defining essential services, like PHP, a web server, and a database, in a single YAML file. This guide provides a streamlined approach to setting up a robust Laravel environment using Docker Compose, focusing on simplicity and efficiency.

@@ -35,7 +35,7 @@
     <p>Resources:</p>
     <ul class="ml-4 space-y-2">
       {{- range . }}
-        <li><a href="{{ .url }}" {{- if .external }} target="_blank" {{- end }} class="link">{{ .title }}</a></li>
+        <li><a href="{{ .url }}" class="link">{{ .title }}</a></li>
       {{- end }}
     </ul>
   </div>
