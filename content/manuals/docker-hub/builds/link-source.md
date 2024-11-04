@@ -139,7 +139,6 @@ unlink it both from Docker Hub, and revoke authorization in your Bitbucket accou
 3. From the **Linked accounts** tab, select the **Plug** icon next to the source provider you want to remove.
 
 > [!IMPORTANT]
->
 > After unlinking the account on Docker Hub, you must also revoke the authorization on the Bitbucket end.
 
 To revoke authorization in your Bitbucket account:
