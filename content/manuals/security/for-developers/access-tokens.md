@@ -23,7 +23,7 @@ any time.
 >
 > Treat access tokens like your password and keep them secret. Store your tokens securely in a credential manager for example.
 
-Use the Docker Admin Console to create an access token:
+Use the Docker Admin Console to create an access token.
 
 1. Sign in to your [Docker account](https://app.docker.com/login).
 
