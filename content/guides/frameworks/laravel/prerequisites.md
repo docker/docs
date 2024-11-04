@@ -4,11 +4,6 @@ description: Ensure you have the required tools and knowledge before setting up 
 weight: 10
 ---
 
-<!-- vale Docker.HeadingLength = NO -->
-
----
-
-## Prerequisites
 
 Before you begin setting up Laravel with Docker Compose, make sure you meet the following prerequisites:
 
