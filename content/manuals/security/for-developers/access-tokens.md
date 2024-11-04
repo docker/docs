@@ -43,7 +43,7 @@ Use the Docker Admin Console to create an access token:
    pipeline can build an image and then push it to a repository. However, it
    can't delete the repository.
 
-9. Select **Generate** and then copy the token that appears on the screen and save it. You won't be able to retrieve the token once you close this prompt.
+8. Select **Generate** and then copy the token that appears on the screen and save it. You won't be able to retrieve the token once you close this prompt.
 
 ## Use an access token
 
