@@ -19,7 +19,7 @@ You need Docker and Docker Compose installed on your system. Docker allows you t
 - **Docker**: Make sure Docker is installed and running on your machine. Refer to the [Docker Installation Guide](/get-docker/) to install Docker.
 - **Docker Compose**: Docker Compose is often included with Docker Desktop, but you can also follow the [Docker Compose Installation Guide](/compose/install/) if needed.
 
-### 2. Basic Understanding of Docker and Containers
+## Basic understanding of Docker and containers
 
 A fundamental understanding of Docker and how containers work will be helpful. If you're new to Docker, consider reviewing the [Docker Overview](/get-started/overview/) to familiarize yourself with containerization concepts.
 
