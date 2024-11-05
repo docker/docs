@@ -1507,9 +1507,11 @@ ports:
 
 ## post_start
 
+{{< introduced compose 2.30.0 "../../manuals/compose/releases/release-notes.md#2300" >}}
+
 `post_start` defines a sequence of lifecycle hooks to run after a container has started. The exact timing of when the command is run is not guaranteed.
 
-- `command`: The command to run after the container has started. This attribute is required.
+- `command`: Specifies the command to run once the container starts. This attribute is required, and you can choose to use either the shell form or the exec form.
 - `user`: The user to run the command. If not set, the command is run with the same user as the main service command.
 - `privileged`: Lets the `post_start` command run with privileged access.
 - `working_dir`: The working directory in which to run the command. If not set, it is run in the same working directory as the main service command.
