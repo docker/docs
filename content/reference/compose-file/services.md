@@ -1532,6 +1532,8 @@ For more information, see [Use lifecycle hooks](/manuals/compose/how-tos/lifecyc
 
 ## pre_stop
 
+{{< introduced compose 2.30.0 "../../manuals/compose/releases/release-notes.md#2300" >}}
+
 `pre_stop` defines a sequence of lifecycle hooks to run before the container is stopped. These hooks won't run if the container stops by itself or is terminated suddenly.
 
 Configuration is equivalent to [`post_start](#post_start).
