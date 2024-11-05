@@ -30,7 +30,7 @@ You can also use runtimes designed as drop-in replacements for runc. Such
 runtimes depend on the runc containerd shim for invoking the runtime binary.
 You must manually register such runtimes in the daemon configuration.
 
-[youki](https://github.com/containers/youki)
+[youki](https://github.com/youki-dev/youki)
 is one example of a runtime that can function as a runc drop-in replacement.
 Refer to the [youki example](#youki) explaining the setup.
 

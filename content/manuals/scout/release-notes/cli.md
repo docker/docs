@@ -9,6 +9,43 @@ This page contains information about the new features, improvements, known
 issues, and bug fixes in the Docker Scout [CLI plugin](https://github.com/docker/scout-cli/)
 and the `docker/scout-action` [GitHub Action](https://github.com/docker/scout-action).
 
+## 1.15.0
+
+{{< release-date date="2024-10-31" >}}
+
+### New
+
+- New `--format=cyclonedx` flag for the `docker scout sbom` to output the SBOM in CycloneDX format.
+
+### Enhancements
+
+- Use high-to-low sort order for CVE summary.
+- Support for enabling and disabling repositories that enabled by `docker scout push` or `docker scout watch`.
+
+### Bug fixes
+
+- Improve messaging when analyzing `oci` directories without attestations.
+  Only single-platform images and multi-platform image _with attestations_ are supported.
+  Multi-platform images without attestations are not supported.
+- Improve classifiers and SBOM indexer:
+  - Add classifier for Liquibase `lpm`.
+  - Add Rakudo Star/MoarVM binary classifier.
+  - Add binary classifiers for silverpeas utilities.
+- Improve reading and caching of attestations with the containerd image store.
+
+## 1.14.0
+
+{{< release-date date="2024-09-24" >}}
+
+### New
+
+- Add suppression information at the CVE level in the `docker scout cves` command.
+
+### Bug fixes
+
+- Fix listing CVEs for dangling images, for example: `local://sha256:...`
+- Fix panic when analysing a file system input, for instance with `docker scout cves fs://.`
+
 ## 1.13.0
 
 {{< release-date date="2024-08-05" >}}
