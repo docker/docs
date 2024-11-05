@@ -23,6 +23,56 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projects/51/views/1?filterQuery=) to see what's coming next.
 
+## 4.36.0
+
+{{< release-date date="2024-11-18" >}}
+
+{{< desktop-install-v2 all=true beta_win_arm=true version="4.36.0" build_path="/175267/" >}}
+
+### New
+
+- WSL2 is now faster, more reliable, and has enhanced security
+- Enhance Container Isolation (ECI) has been improved to support images with wildcard tags
+- Admins can now:
+  - Allow any container to mount the Docker socket with ECI
+  - Enforce sign-in with macOS configuration profiles (Early Access)
+  - Enforce sign-in for more than one organization at a time (Early Access)
+  - Deploy Docker Desktop for Mac in bulk with the PKG installer (Early Access)
+  - Use Desktop Settings Management to manage and enforce defaults via admin.docker.com (Early Access)
+
+### Upgrades
+
+- [Docker Buildx v0.18.0](https://github.com/docker/buildx/releases/tag/v0.18.0)
+- [Docker Compose v2.30.1](https://github.com/docker/compose/releases/tag/v2.30.1)
+- [Kubernetes v1.30.2](https://github.com/kubernetes/kubernetes/releases/tag/v1.30.5)
+- [NVIDIA Container Toolkit v1.17.0](https://github.com/NVIDIA/nvidia-container-toolkit/releases/tag/v1.17.0)
+- [Docker Scout CLI v1.15.0](https://github.com/docker/scout-cli/releases/tag/v1.15.0)
+- Docker Init v1.4.0
+- Linux kernel `v6.10.13`
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed a bug where the `docker events` command would not terminate after streaming the events.
+- Docker Init: Improved Dockerfile caching for PHP applications that don't use Compose.
+- Synchronized file shares now respects the `filesharingAllowedDirectories` setting in `admin-settings.json`.
+- Fixed an issue where if Docker Desktop is configured to use a proxy, it fails to start due to an internal timeout while fetching authentication tokens.
+- Added a recovery banner to retry an update if the download failed.
+- Fixed an issue where if the `umask` is set to `577` it would cause `rpmbuild` failure. Fixes [docker/for-mac#6511](https://github.com/docker/for-mac/issues/6511).
+- Fixed a bug that caused ports open on the host to 18 for containers started with `--network=host`.
+- Fixed bind mount ownership for non-root containers. Fixes [docker/for-mac#6243](https://github.com/docker/for-mac/issues/6243).
+
+#### For Mac
+
+- Fixed a bug in Docker VMM that prevented MySQL and other databases containers to start. Fixes reports from [docker/for-mac#7464](https://github.com/docker/for-mac/issues/7464).
+- Fixed a bug where the advanced option **Allowed privileged port mapping** was not working as expected. Fixes [docker/for-mac#7460](https://github.com/docker/for-mac/issues/7460).
+- Docker Desktop can now automatically configure shell completion scripts for zsh, bash and fish inside the install wizard and settings screen.
+
+#### For Windows
+
+- Fixed a bug preventing UDP port 53 to be bound.
+
 ## 4.35.1
 
 {{< release-date date="2024-10-30" >}}
