@@ -9,6 +9,8 @@ aliases:
 
 Learn how to manage members for your organization in Docker Hub and the Docker Admin Console.
 
+## Invite members
+
 {{< tabs >}}
 {{< tab name="Docker Hub" >}}
 
@@ -24,9 +26,52 @@ Learn how to manage members for your organization in Docker Hub and the Docker A
 {{< /tab >}}
 {{< /tabs >}}
 
+## Accept invitation
+
+When an invitation is to a user's email address, they receive
+a link to [Docker Hub](https://hub.docker.com/) where they can accept or decline the invitation.
+
+1. Navigate to your email inbox and open the Docker email with an invitation to
+join the Docker organization.
+2. To open the link to Docker Hub, select the **click here** link.
+3. The Docker create an account page will open. If you already have an account, select **Already have an account? Sign in**.
+If you do not have an account yet, create an account using the same email
+address you received the invitation through.
+4. Optional. If you do not have an account and created one, you must navigate
+back to your email inbox and verify your email address using the Docker verification
+email.
+5. Once you are signed in to [Docker Hub](https://hub.docker.com/), under Docker Products, select the **Docker Hub** tab.
+6. Select **Organizations** from the top-level navigation menu.
+7. The organizations page will display your invitation. Select **Accept**.
+
+After accepting an invitation, you are now a member of the organization.
+
+## Manage invitations
+
+After inviting members, you can resend or remove invitations as needed.
+
+### Resend invitations
+
+You may need to resend an invitation if an invitation is pending or was declined:
+
+1. Sign in to Docker Hub.
+2. Select **Organizations**, your organization, and then **Members**.
+3. In the table, locate the invitee, select the **Actions** icon, and then select
+**Resend invitation**.
+4. Select **Invite** to confirm.
+
+### Remove an invitation
+
+To remove a member's invitation from an organization:
+
+1. Sign in to Docker Hub.
+2. Select **Organizations**, your organization, and then **Members**.
+3. In the table, select the **Action** icon, and then select **Remove member** or **Remove invitee**.
+4. Follow the on-screen instructions to remove the member or invitee.
+
 ## Manage members on a team
 
-Use Docker Hub to add a member to a team or remove a member from a team.
+Use Docker Hub or the Admin Console to add or remove team members.
 
 ### Add a member to a team
 
@@ -98,3 +143,37 @@ To remove a member from a specific team:
 
 {{< /tab >}}
 {{< /tabs >}}
+
+### Update a member role
+
+Organization owners can manage [roles](/security/for-admins/roles-and-permissions/)
+within an organization. If an organization is part of a company,
+the company owner can also manage that organization's roles. If you have SSO enabled, you can use {{ $role_mapping_link }}.
+
+> [!NOTE]
+>
+> If you're the only owner of an organization,
+> you need to assign a new owner before you can edit your role.
+
+To update a member role:
+
+1. Sign in to Docker Hub.
+2. Select **Organizations**, your organization, and then **Members**.
+3. Find the username of the member whose role you want to edit. In the table, select the **Actions** icon.
+4. Select **Edit role**.
+5. Select their organization, select the role you want to assign, and then select **Save**.
+
+## Export members CSV file
+
+Owners can export a CSV file containing all members. The CSV file for a company contains the following fields:
+- Name: The user's name.
+- Username: The user's Docker ID.
+- Email: The user's email address.
+- Member of Organizations: All organizations the user is a member of within a company.
+- Invited to Organizations: All organizations the user is an invitee of within a company.
+- Account Created: The time and date when the user account was created.
+
+To export a CSV file of the members:
+1. Sign in to Docker Hub.
+2. Select **Organizations**, your organization, and then **Members**.
+3. Select the **Action** icon and then select **Export users as CSV**.
