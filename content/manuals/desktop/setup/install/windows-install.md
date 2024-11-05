@@ -19,6 +19,7 @@ aliases:
 - /install/windows/ee-preview/
 - /installation/windows/
 - /desktop/win/configuring-wsl/
+- /desktop/install/windows-install/
 ---
 
 > **Docker Desktop terms**
@@ -32,7 +33,7 @@ This page contains the download URL, information about system requirements, and 
 {{< button text="Docker Desktop for Windows - x86_64" url="https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64" >}}
 {{< button text="Docker Desktop for Windows - Arm (Beta)" url="https://desktop.docker.com/win/main/arm64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-arm64" >}}
 
-_For checksums, see [Release notes](../release-notes.md)_
+_For checksums, see [Release notes](/manuals/desktop/release-notes.md)_
 
 ## System requirements
 
@@ -55,9 +56,9 @@ _For checksums, see [Release notes](../release-notes.md)_
   - 64-bit processor with [Second Level Address Translation (SLAT)](https://en.wikipedia.org/wiki/Second_Level_Address_Translation)
   - 4GB system RAM
   - Enable hardware virtualization in BIOS. For more information, see
-    [Virtualization](../troubleshoot/topics.md#virtualization).
+    [Virtualization](/manuals/desktop/troubleshoot/topics.md#virtualization).
 
-For more information on setting up WSL 2 with Docker Desktop, see [WSL](../wsl/_index.md).
+For more information on setting up WSL 2 with Docker Desktop, see [WSL](/manuals/desktop/wsl/_index.md).
 
 > [!NOTE]
 >
@@ -81,7 +82,7 @@ For more information on setting up WSL 2 with Docker Desktop, see [WSL](../wsl/_
   - 4GB system RAM
   - Turn on BIOS-level hardware virtualization support in the
     BIOS settings. For more information, see
-    [Virtualization](../troubleshoot/topics.md#virtualization).
+    [Virtualization](/manuals/desktop/troubleshoot/topics.md#virtualization).
 
 > [!NOTE]
 >
@@ -105,7 +106,7 @@ For more information on setting up WSL 2 with Docker Desktop, see [WSL](../wsl/_
   - 64-bit processor with [Second Level Address Translation (SLAT)](https://en.wikipedia.org/wiki/Second_Level_Address_Translation)
   - 4GB system RAM
   - Enable hardware virtualization in BIOS. For more information, see
-    [Virtualization](../troubleshoot/topics.md#virtualization).
+    [Virtualization](/manuals/desktop/troubleshoot/topics.md#virtualization).
 
 > [!IMPORTANT]
 >
@@ -120,7 +121,7 @@ accounts use the same VM to build and run containers. Note that it is not possib
 
 Running Docker Desktop inside a VMware ESXi or Azure VM is supported for Docker Business customers.
 It requires enabling nested virtualization on the hypervisor first.
-For more information, see [Running Docker Desktop in a VM or VDI environment](../vm-vdi.md).
+For more information, see [Running Docker Desktop in a VM or VDI environment](/manuals/desktop/setup/vm-vdi.md).
 
 {{< accordion title="How do I switch between Windows and Linux containers?" >}}
 
@@ -142,7 +143,7 @@ For more information on Windows containers, refer to the following documentation
   [forked here to use containers](https://github.com/friism/MusicStore), is a good example of a multi-container application.
 
 - To understand how to connect to Windows containers from the local host, see
-  [I want to connect to a container from Windows](../networking.md#i-want-to-connect-to-a-container-from-the-host)
+  [I want to connect to a container from Windows](/manuals/desktop/networking.md#i-want-to-connect-to-a-container-from-the-host)
 
 > [!NOTE]
 >
@@ -164,7 +165,7 @@ again when you switch back.
 
 ### Install interactively
 
-1. Download the installer using the download button at the top of the page, or from the [release notes](../release-notes.md).
+1. Download the installer using the download button at the top of the page, or from the [release notes](/manuals/desktop/release-notes.md).
 
 2. Double-click `Docker Desktop Installer.exe` to run the installer. By default, Docker Desktop is installed at `C:\Program Files\Docker\Docker`.
 
@@ -259,7 +260,7 @@ Docker Desktop does not start automatically after installation. To start Docker 
 
 > [!TIP]
 >
-> As an IT administrator, you can use endpoint management (MDM) software to identify the number of Docker Desktop instances and their versions within your environment. This can provide accurate license reporting, help ensure your machines use the latest version of Docker Desktop, and enable you to [enforce sign-in](../../security/for-admins/enforce-sign-in/_index.md).
+> As an IT administrator, you can use endpoint management (MDM) software to identify the number of Docker Desktop instances and their versions within your environment. This can provide accurate license reporting, help ensure your machines use the latest version of Docker Desktop, and enable you to [enforce sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md).
 > - [Intune](https://learn.microsoft.com/en-us/mem/intune/apps/app-discovered-apps)
 > - [Jamf](https://docs.jamf.com/10.25.0/jamf-pro/administrator-guide/Application_Usage.html)
 > - [Kandji](https://support.kandji.io/support/solutions/articles/72000559793-view-a-device-application-list)
@@ -270,9 +271,9 @@ Docker Desktop does not start automatically after installation. To start Docker 
 
 - Explore [Docker's core subscriptions](https://www.docker.com/pricing/) to see what Docker can offer you.
 - [Get started with Docker](/get-started/introduction/_index.md).
-- [Explore Docker Desktop](../use-desktop/_index.md) and all its features.
+- [Explore Docker Desktop](/manuals/desktop/use-desktop/_index.md) and all its features.
 - [Troubleshooting](/manuals/desktop/troubleshoot/_index.md) describes common problems, workarounds, and
   how to get support.
-- [FAQs](../faqs/general.md) provide answers to frequently asked questions.
-- [Release notes](../release-notes.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
-- [Back up and restore data](../backup-and-restore.md) provides instructions on backing up and restoring data related to Docker.
+- [FAQs](/manuals/desktop/faqs/general.md) provide answers to frequently asked questions.
+- [Release notes](/manuals/desktop/release-notes.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
+- [Back up and restore data](/manuals/desktop/backup-and-restore.md) provides instructions on backing up and restoring data related to Docker.

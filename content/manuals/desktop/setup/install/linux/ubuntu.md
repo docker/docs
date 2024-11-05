@@ -1,14 +1,18 @@
 ---
-description: Instructions for installing Docker Desktop on Fedora
-keywords: fedora, rpm, update install, uninstall, upgrade, update, linux, desktop,
-  docker desktop, docker desktop for linux, dd4l
-title: Install Docker Desktop on Fedora
-linkTitle: Fedora
-weight: 30
+description: Learn how to install, launch and upgrade Docker Desktop on Ubuntu. This
+  quick guide will cover prerequisites, installation methods, and more.
+keywords: install docker ubuntu, ubuntu install docker, install docker on ubuntu,
+  docker install ubuntu, how to install docker on ubuntu, ubuntu docker install, docker
+  installation on ubuntu, docker ubuntu install, docker installing ubuntu, installing
+  docker on ubuntu, docker desktop for ubuntu
+title: Install Docker Desktop on Ubuntu
+linkTitle: Ubuntu
+weight: 10
 toc_max: 4
 aliases:
-- /desktop/linux/install/fedora/
-- /desktop/install/fedora/
+- /desktop/linux/install/ubuntu/
+- /desktop/install/ubuntu/
+- /desktop/install/linux/ubuntu/
 ---
 
 > **Docker Desktop terms**
@@ -17,40 +21,47 @@ aliases:
 > employees OR more than $10 million USD in annual revenue) requires a [paid
 > subscription](https://www.docker.com/pricing/).
 
-This page contains information on how to install, launch and upgrade Docker Desktop on a Fedora distribution.
+This page contains information on how to install, launch and upgrade Docker Desktop on an Ubuntu distribution.
 
 ## Prerequisites
 
 To install Docker Desktop successfully, you must:
 
 - Meet the [general system requirements](_index.md#general-system-requirements).
-- Have a 64-bit version of Fedora 39 or Fedora 40.
-
-Additionally, for a GNOME desktop environment you must install AppIndicator and KStatusNotifierItem [GNOME extensions](https://extensions.gnome.org/extension/615/appindicator-support/).
-
-For non-GNOME desktop environments, `gnome-terminal` must be installed:
-
-```console
-$ sudo dnf install gnome-terminal
-```
+- Have an x86-64 system with Ubuntu 22.04, 24.04, or the latest non-LTS version.
+- For non-Gnome Desktop environments, `gnome-terminal` must be installed:
+  ```console
+  $ sudo apt install gnome-terminal
+  ```
 
 ## Install Docker Desktop
 
-To install Docker Desktop on Fedora:
+Recommended approach to install Docker Desktop on Ubuntu:
 
-1. Set up [Docker's package repository](/manuals/engine/install/fedora.md#set-up-the-repository).
+1. Set up Docker's package repository.
+   See step one of [Install using the `apt` repository](/manuals/engine/install/ubuntu.md#install-using-the-repository).
 
-2. Download the latest [RPM package](https://desktop.docker.com/linux/main/amd64/docker-desktop-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64). For checksums, see the [Release notes](/manuals/desktop/release-notes.md).
+2. Download the latest [DEB package](https://desktop.docker.com/linux/main/amd64/docker-desktop-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64). For checksums, see the [Release notes](/manuals/desktop/release-notes.md).
 
-3. Install the package with dnf as follows:
+3. Install the package with apt as follows:
 
    ```console
-   $ sudo dnf install ./docker-desktop-x86_64.rpm
+   $ sudo apt-get update
+   $ sudo apt-get install ./docker-desktop-amd64.deb
    ```
+
+   > [!NOTE]
+   >
+   > At the end of the installation process, `apt` displays an error due to installing a downloaded package. You
+   > can ignore this error message.
+   >
+   > ```text
+   > N: Download is performed unsandboxed as root, as file '/home/user/Downloads/docker-desktop.deb' couldn't be accessed by user '_apt'. - pkgAcquire::Run (13: Permission denied)
+   > ```
 
    By default, Docker Desktop is installed at `/opt/docker-desktop`.
 
-There are a few post-install configuration steps done through the post-install script contained in the RPM package.
+There are a few post-install configuration steps done through the post-install script contained in the deb package.
 
 The post-install script:
 
@@ -66,11 +77,10 @@ The post-install script:
 ## Upgrade Docker Desktop
 
 Once a new version for Docker Desktop is released, the Docker UI shows a notification.
-You need to first remove the previous version and then download the new package each time you want to upgrade Docker Desktop. Run:
+You need to download the new package each time you want to upgrade Docker Desktop and run:
 
 ```console
-$ sudo dnf remove docker-desktop
-$ sudo dnf install ./docker-desktop-<arch>.rpm
+$ sudo apt-get install ./docker-desktop-<arch>.deb
 ```
 
 Don't forget to substitute `<arch>` with the architecture you want.

@@ -1,7 +1,9 @@
 ---
 title: Use Intune
 description: Use Intune, Microsoft's cloud-based device management tool, to deploy Docker Desktop
-keywords: microsoft, windows, docker desktop, deploy, mdm, enterprise, administrator,
+keywords: microsoft, windows, docker desktop, deploy, mdm, enterprise, administrator
+aliases:
+- /desktop/install/msi/use-intune/
 ---
 
 Learn how to deploy Docker Desktop using Intune, Microsoft's cloud-based device management tool. 

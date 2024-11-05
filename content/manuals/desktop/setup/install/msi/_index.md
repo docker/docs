@@ -4,6 +4,8 @@ linkTitle: Use the MSI installer
 weight: 50
 description: If you're an IT admin, learn how to deploy Docker Desktop with Microsoft installer
 keywords: msi, docker desktop, windows, installation
+aliases:
+- /desktop/install/msi/
 ---
 
 > [!NOTE]

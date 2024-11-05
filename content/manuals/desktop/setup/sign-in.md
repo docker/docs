@@ -5,7 +5,7 @@ keywords: Docker Dashboard, manage, containers, gui, dashboard, images, user man
   learning center, guide, sign in
 title: Sign in to Docker Desktop
 linkTitle: Sign in
-weight: 20
+weight: 40
 aliases:
 - /desktop/linux/
 - /desktop/linux/index/
@@ -27,11 +27,12 @@ aliases:
 - /windows/
 - /winkit/
 - /winkit/getting-started/
+- /desktop/get-started/
 ---
 
 Docker recommends that you authenticate using the **Sign in** option in the top-right corner of the Docker Dashboard. 
 
-In large enterprises where admin access is restricted, administrators can [enforce sign-in](../security/for-admins/enforce-sign-in/_index.md). 
+In large enterprises where admin access is restricted, administrators can [enforce sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md). 
 
 > [!TIP]
 >
@@ -41,7 +42,7 @@ In large enterprises where admin access is restricted, administrators can [enfor
 
 - You can access your Docker Hub repositories directly from Docker Desktop.
 
-- Authenticated users also get a higher pull rate limit compared to anonymous users. For example, if you are authenticated, you get 200 pulls per 6 hour period, compared to 100 pulls per 6 hour period per IP address for anonymous users. For more information, see [Download rate limit](../docker-hub/download-rate-limit.md).
+- Authenticated users also get a higher pull rate limit compared to anonymous users. For example, if you are authenticated, you get 200 pulls per 6 hour period, compared to 100 pulls per 6 hour period per IP address for anonymous users. For more information, see [Download rate limit](/manuals/docker-hub/download-rate-limit.md).
 
 - Improve your organization’s security posture for containerized development by taking advantage of [Hardened Desktop](/manuals/security/for-admins/hardened-desktop/_index.md).
 
@@ -107,6 +108,6 @@ docker.io/molly/privateimage:latest
 
 ## What's next?
 
-- [Explore Docker Desktop](use-desktop/_index.md) and its features. 
+- [Explore Docker Desktop](/manuals/desktop/use-desktop/_index.md) and its features. 
 - Change your Docker Desktop settings
-- [Browse common FAQs](faqs/general.md)
+- [Browse common FAQs](/manuals/desktop/faqs/general.md)
