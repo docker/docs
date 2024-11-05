@@ -99,7 +99,7 @@ To remove a member's invitation from Docker Hub:
 
 To remove an invitation from the Admin Console:
 
-1. 1. Open the [Admin Console](https://app.docker.com/admin) and select your organization from
+1. Open the [Admin Console](https://app.docker.com/admin) and select your organization from
 top-left drop-down menu.
 2. Select **Members**.
 3. Select the **action menu** next to the invitee and select **Remove invitee**.
@@ -110,16 +110,14 @@ top-left drop-down menu.
 
 ## Manage members on a team
 
-Use Docker Hub or the Admin Console to add or remove team members.
+Use Docker Hub or the Admin Console to add or remove team members. Organization owners can add a member to one or more teams within an organization.
 
 ### Add a member to a team
-
-Organization owners can add a member to one or more teams within an organization.
 
 {{< tabs >}}
 {{< tab name="Docker Hub" >}}
 
-To add a member to a team:
+To add a member to a team with Docker Hub:
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
 2. Select **Organizations**, your organization, and then **Members**.
@@ -139,7 +137,7 @@ To add a member to a team:
 
 {{< include "admin-early-access.md" >}}
 
-To add a member to a team:
+To add a member to a team with the Admin Console:
 
 1. In the [Admin Console](https://app.docker.com/admin), select your organization.
 2. Select the team name.
@@ -159,9 +157,7 @@ Organization owners can remove a member from a team in Docker Hub or Admin Conso
 {{< tabs >}}
 {{< tab name="Docker Hub" >}}
 
-To add a member to a team:
-
-To remove a member from a specific team:
+To remove a member from a specific team with Docker Hub:
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
 2. Select **Organizations**, your organization, **Teams**, and then the team.
@@ -173,7 +169,7 @@ To remove a member from a specific team:
 
 {{< include "admin-early-access.md" >}}
 
-To remove a member from a specific team:
+To remove a member from a specific team with the Admin Console:
 
 1. In the [Admin Console](https://app.docker.com/admin), select your organization.
 2. Select the team name.
@@ -205,12 +201,12 @@ To update a member role:
 ## Export members CSV file
 
 Owners can export a CSV file containing all members. The CSV file for a company contains the following fields:
-- Name: The user's name.
-- Username: The user's Docker ID.
-- Email: The user's email address.
-- Member of Organizations: All organizations the user is a member of within a company.
-- Invited to Organizations: All organizations the user is an invitee of within a company.
-- Account Created: The time and date when the user account was created.
+- Name: The user's name
+- Username: The user's Docker ID
+- Email: The user's email address
+- Member of Organizations: All organizations the user is a member of within a company
+- Invited to Organizations: All organizations the user is an invitee of within a company
+- Account Created: The time and date when the user account was created
 
 To export a CSV file of the members:
 1. Sign in to [Docker Hub](https://hub.docker.com).
