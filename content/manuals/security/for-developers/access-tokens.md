@@ -14,8 +14,7 @@ Compared to passwords, PATs provide the following advantages:
 
 - You can investigate when the PAT was last used and then disable or delete it if you find any suspicious activity.
 - When using an access token, you can't perform any administrative activity on the account, including changing the password. It protects your account if your computer is compromised.
-
-Access tokens are also valuable for building integrations, as you can issue multiple tokens, one for each integration, and revoke them at
+- Access tokens are valuable for building integrations, as you can issue multiple tokens, one for each integration, and revoke them at
 any time.
 
 ## Create an access token
@@ -23,6 +22,8 @@ any time.
 > [!IMPORTANT]
 >
 > Treat access tokens like your password and keep them secret. Store your tokens securely in a credential manager for example.
+
+Use the Docker Admin Console to create an access token.
 
 1. Sign in to your [Docker account](https://app.docker.com/login).
 
@@ -34,14 +35,15 @@ any time.
 
 5. Add a description for your token. Use something that indicates the use case or purpose of the token.
 
-6. Set the access permissions.
+6. Select the expiration date for the token.
+
+7. Set the access permissions.
    The access permissions are scopes that set restrictions in your
    repositories. For example, for Read & Write permissions, an automation
    pipeline can build an image and then push it to a repository. However, it
    can't delete the repository.
 
-7. Select **Generate** and then copy the token that appears on the screen and save it. You won't be able
-   to retrieve the token once you close this prompt.
+8. Select **Generate** and then copy the token that appears on the screen and save it. You won't be able to retrieve the token once you close this prompt.
 
 ## Use an access token
 
@@ -62,6 +64,10 @@ When prompted for a password, enter your personal access token instead of a pass
 > optional, but more secure method of authentication.
 
 ## Modify existing tokens
+
+> [!NOTE]
+>
+> You can't edit the expiration date on an existing token. You must create a new PAT if you need to set a new expiration date.
 
 You can rename, activate, deactivate, or delete a token as needed. You can manage your tokens in your account settings.
 
