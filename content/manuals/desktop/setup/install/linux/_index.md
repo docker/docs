@@ -40,7 +40,7 @@ Docker Desktop for Linux provides a user-friendly graphical interface that simpl
 Docker Desktop for Linux and Docker Engine can be installed side-by-side on the
 same machine. Docker Desktop for Linux stores containers and images in an isolated
 storage location within a VM and offers
-controls to restrict [its resources](/manuals/desktop/settings.md#resources). Using a dedicated storage
+controls to restrict [its resources](/manuals/desktop/settings-and-maintenance/settings.md#resources). Using a dedicated storage
 location for Docker Desktop prevents it from interfering with a Docker Engine
 installation on the same machine.
 
@@ -140,10 +140,10 @@ To install Docker Desktop successfully, your Linux host must meet the following 
 - Gnome, KDE, or MATE Desktop environment.
   - For many Linux distros, the Gnome environment does not support tray icons. To add support for tray icons, you need to install a Gnome extension. For example, [AppIndicator](https://extensions.gnome.org/extension/615/appindicator-support/).
 - At least 4 GB of RAM.
-- Enable configuring ID mapping in user namespaces, see [File sharing](/manuals/desktop/faqs/linuxfaqs.md#how-do-i-enable-file-sharing). Note that for Docker Desktop version 4.35 and later, this is not required anymore.
+- Enable configuring ID mapping in user namespaces, see [File sharing](/manuals/desktop/troubleshoot-and-support/faqs/linuxfaqs.md#how-do-i-enable-file-sharing). Note that for Docker Desktop version 4.35 and later, this is not required anymore.
 - Recommended: [Initialize `pass`](/manuals/desktop/setup/sign-in.md#credentials-management-for-linux-users) for credentials management.
 
-Docker Desktop for Linux runs a Virtual Machine (VM). For more information on why, see [Why Docker Desktop for Linux runs a VM](/manuals/desktop/faqs/linuxfaqs.md#why-does-docker-desktop-for-linux-run-a-vm).
+Docker Desktop for Linux runs a Virtual Machine (VM). For more information on why, see [Why Docker Desktop for Linux runs a VM](/manuals/desktop/troubleshoot-and-support/faqs/linuxfaqs.md#why-does-docker-desktop-for-linux-run-a-vm).
 
 > [!NOTE]
 >

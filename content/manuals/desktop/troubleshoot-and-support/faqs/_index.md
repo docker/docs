@@ -2,5 +2,7 @@
 build:
   render: never
 title: FAQs
-weight: 190
+weight: 30
+aliases:
+ - /desktop/faqs/
 ---

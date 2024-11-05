@@ -8,12 +8,13 @@ aliases:
  - /desktop/settings/mac/
  - /desktop/settings/windows/
  - /desktop/settings/linux/
-weight: 160
+ - /desktop/settings/
+weight: 10
 ---
 
 To navigate to **Settings** either:
 
-- Select the Docker menu {{< inline-image src="images/whale-x.svg" alt="whale menu" >}} and then **Settings**
+- Select the Docker menu {{< inline-image src="../images/whale-x.svg" alt="whale menu" >}} and then **Settings**
 - Select the **Settings** icon from the Docker Desktop Dashboard.
 
 You can also locate the `settings-store.json` file (or `settings.json` for Docker Desktop versions 4.34 and earlier) at:
@@ -57,7 +58,7 @@ If you choose the integrated terminal, you can run commands in a running contain
   Turns on the containerd image store.
   This brings new features like faster container startup performance by lazy-pulling images,
   and the ability to run Wasm applications with Docker.
-  For more information, see [containerd image store](containerd.md).
+  For more information, see [containerd image store](/manuals/desktop/containerd.md).
 
 - {{< badge color=blue text="Mac only" >}} **Choose Virtual Machine Manager (VMM)**. Choose the Virtual Machine Manager for creating and managing the Docker Desktop Linux VM.
   - Select **Docker VMM** for the latest and most performant Hypervisor/Virtual Machine Manager. This option is available only on Apple Silicon Macs running macOS 12.5 or later and is currently in Beta.
@@ -98,7 +99,7 @@ If you choose the integrated terminal, you can run commands in a running contain
     - The symlink of the default Docker socket. 
   Additionally, Docker Desktop ensures that the context is switched to `desktop-linux` on startup.
   
-  You are notified if changes are found and are able to restore the configuration directly from the notification. For more information, see the [FAQs](/manuals/desktop/faqs/macfaqs.md#why-do-i-keep-getting-a-notification-telling-me-an-application-has-changed-my-desktop-configurations).
+  You are notified if changes are found and are able to restore the configuration directly from the notification. For more information, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/macfaqs.md#why-do-i-keep-getting-a-notification-telling-me-an-application-has-changed-my-desktop-configurations).
 
 ## Resources
 
@@ -213,7 +214,7 @@ File share settings are:
 >   once a file called `test` is created, attempts to create a second file called
 >   `Test` will fail.
 >
-> For more information, see [Volume mounting requires file sharing for any project directories outside of `/Users`](/manuals/desktop/troubleshoot/topics.md)
+> For more information, see [Volume mounting requires file sharing for any project directories outside of `/Users`](/manuals/desktop/troubleshoot-and-support/troubleshoot/topics.md)
 
 #### Shared folders on demand
 
@@ -226,7 +227,7 @@ popup asking if you want to share the specified folder.
 You can select to **Share it**, in which case it is added to your Docker Desktop Shared Folders list and available to
 containers. Alternatively, you can opt not to share it by selecting **Cancel**.
 
-![Shared folder on demand](images/shared-folder-on-demand.png)
+![Shared folder on demand](../images/shared-folder-on-demand.png)
 
 ### Proxies
 
@@ -493,7 +494,7 @@ Use the **Notifications** tab to turn on or turn off notifications for the follo
 
 By default, all notifications are turned on. You'll always receive error notifications and notifications about new Docker Desktop releases and updates.
 
-Notifications momentarily appear in the lower-right of the Docker Desktop Dashboard and then move to the **Notifications** drawer. To open the **Notifications** drawer, select {{< inline-image src="images/notifications.svg" alt="notifications" >}}.
+Notifications momentarily appear in the lower-right of the Docker Desktop Dashboard and then move to the **Notifications** drawer. To open the **Notifications** drawer, select {{< inline-image src="../images/notifications.svg" alt="notifications" >}}.
 
 ## Advanced
 

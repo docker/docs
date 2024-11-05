@@ -56,7 +56,7 @@ _For checksums, see [Release notes](/manuals/desktop/release-notes.md)_
   - 64-bit processor with [Second Level Address Translation (SLAT)](https://en.wikipedia.org/wiki/Second_Level_Address_Translation)
   - 4GB system RAM
   - Enable hardware virtualization in BIOS. For more information, see
-    [Virtualization](/manuals/desktop/troubleshoot/topics.md#virtualization).
+    [Virtualization](/manuals/desktop/troubleshoot-and-support/troubleshoot/topics.md#virtualization).
 
 For more information on setting up WSL 2 with Docker Desktop, see [WSL](/manuals/desktop/wsl/_index.md).
 
@@ -82,7 +82,7 @@ For more information on setting up WSL 2 with Docker Desktop, see [WSL](/manuals
   - 4GB system RAM
   - Turn on BIOS-level hardware virtualization support in the
     BIOS settings. For more information, see
-    [Virtualization](/manuals/desktop/troubleshoot/topics.md#virtualization).
+    [Virtualization](/manuals/desktop/troubleshoot-and-support/troubleshoot/topics.md#virtualization).
 
 > [!NOTE]
 >
@@ -106,7 +106,7 @@ For more information on setting up WSL 2 with Docker Desktop, see [WSL](/manuals
   - 64-bit processor with [Second Level Address Translation (SLAT)](https://en.wikipedia.org/wiki/Second_Level_Address_Translation)
   - 4GB system RAM
   - Enable hardware virtualization in BIOS. For more information, see
-    [Virtualization](/manuals/desktop/troubleshoot/topics.md#virtualization).
+    [Virtualization](/manuals/desktop/troubleshoot-and-support/troubleshoot/topics.md#virtualization).
 
 > [!IMPORTANT]
 >
@@ -161,7 +161,7 @@ again when you switch back.
 
 > [!TIP]
 >
-> See the [FAQs](/manuals/desktop/faqs/general.md#how-do-I-run-docker-desktop-without-administrator-privileges) on how to install and run Docker Desktop without needing administrator privileges.
+> See the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/general.md#how-do-I-run-docker-desktop-without-administrator-privileges) on how to install and run Docker Desktop without needing administrator privileges.
 
 ### Install interactively
 
@@ -272,8 +272,8 @@ Docker Desktop does not start automatically after installation. To start Docker 
 - Explore [Docker's core subscriptions](https://www.docker.com/pricing/) to see what Docker can offer you.
 - [Get started with Docker](/get-started/introduction/_index.md).
 - [Explore Docker Desktop](/manuals/desktop/use-desktop/_index.md) and all its features.
-- [Troubleshooting](/manuals/desktop/troubleshoot/_index.md) describes common problems, workarounds, and
+- [Troubleshooting](/manuals/desktop/troubleshoot-and-support/troubleshoot/_index.md) describes common problems, workarounds, and
   how to get support.
-- [FAQs](/manuals/desktop/faqs/general.md) provide answers to frequently asked questions.
+- [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/general.md) provide answers to frequently asked questions.
 - [Release notes](/manuals/desktop/release-notes.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
-- [Back up and restore data](/manuals/desktop/backup-and-restore.md) provides instructions on backing up and restoring data related to Docker.
+- [Back up and restore data](/manuals/desktop/settings-and-maintenance/backup-and-restore.md) provides instructions on backing up and restoring data related to Docker.

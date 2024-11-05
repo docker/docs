@@ -41,7 +41,7 @@ If you have already installed Docker Desktop, you can check which version of Com
 > $ sudo rm /usr/local/bin/docker-compose
 > $ sudo ln -s /Applications/Docker.app/Contents/Resources/cli-plugins/docker-compose /usr/local/bin/docker-compose
 > ```
-> Or enable [Automatically check configuration](/desktop/settings/) which will detect and fix it for you.
+> Or enable [Automatically check configuration](/manuals/desktop/settings-and-maintenance/settings.md) which will detect and fix it for you.
 
 ### Scenario two: Install the Compose plugin
 

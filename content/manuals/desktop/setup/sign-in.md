@@ -110,4 +110,4 @@ docker.io/molly/privateimage:latest
 
 - [Explore Docker Desktop](/manuals/desktop/use-desktop/_index.md) and its features. 
 - Change your Docker Desktop settings
-- [Browse common FAQs](/manuals/desktop/faqs/general.md)
+- [Browse common FAQs](/manuals/desktop/troubleshoot-and-support/faqs/general.md)

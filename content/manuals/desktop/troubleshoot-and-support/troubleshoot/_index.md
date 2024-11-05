@@ -15,8 +15,9 @@ aliases:
 - /docker-for-win/troubleshoot/
 - /docker-for-windows/troubleshoot/
 - /desktop/troubleshoot/overview/
+- /desktop/troubleshoot/
 tags: [ Troubleshooting ]
-weight: 160
+weight: 10
 ---
 
 This page contains information on how to diagnose and troubleshoot Docker Desktop, and how to check the logs.
@@ -25,14 +26,14 @@ This page contains information on how to diagnose and troubleshoot Docker Deskto
 
 To navigate to **Troubleshoot** either:
 
-- Select the Docker menu Docker menu {{< inline-image src="../images/whale-x.svg" alt="whale menu" >}} and then **Troubleshoot**.
+- Select the Docker menu Docker menu {{< inline-image src="../../images/whale-x.svg" alt="whale menu" >}} and then **Troubleshoot**.
 - Select the **Troubleshoot** icon near the top-right corner of Docker Dashboard.
 
 The **Troubleshooting** menu contains the following options:
 
 - **Restart Docker Desktop**.
 
-- **Reset Kubernetes cluster**. Select to delete all stacks and Kubernetes resources. For more information, see [Kubernetes](/manuals/desktop/settings.md#kubernetes).
+- **Reset Kubernetes cluster**. Select to delete all stacks and Kubernetes resources. For more information, see [Kubernetes](/manuals/desktop/settings-and-maintenance/settings.md#kubernetes).
 
 - **Clean / Purge data**. This option resets all Docker data without a
 reset to factory defaults. Selecting this option results in the loss of existing settings.
@@ -65,7 +66,7 @@ If you are a Mac or Linux user, you also have the option to **Uninstall** Docker
     - If you have a paid Docker subscription, select **Contact support**. This opens the Docker Desktop support form. Fill in the information required and add the ID you copied in step three to the **Diagnostics ID field**. Then, select **Submit ticket** to request Docker Desktop support.
         > [!NOTE]
         >
-        > You must be signed in to Docker Desktop to access the support form. For information on what's covered as part of Docker Desktop support, see [Support](../../support/_index.md).
+        > You must be signed in to Docker Desktop to access the support form. For information on what's covered as part of Docker Desktop support, see [Support](/manuals/desktop/troubleshoot-and-support/support.md).
     - If you don't have a paid Docker subscription, select **Report a Bug** to open a new Docker Desktop issue on GitHub. Complete the information required and ensure you add the diagnostic ID you copied in step three.
 
 ### Diagnose from an error message 
@@ -76,7 +77,7 @@ If you are a Mac or Linux user, you also have the option to **Uninstall** Docker
     - If you have a paid Docker subscription, select **Contact support**. This opens the Docker Desktop support form. Fill in the information required and add the ID you copied in step three to the **Diagnostics ID field**. Then, select **Submit ticket** to request Docker Desktop support.
         > [!NOTE]
         >
-        > You must be signed in to Docker Desktop to access the support form. For information on what's covered as part of Docker Desktop support, see [Support](../../support/_index.md).
+        > You must be signed in to Docker Desktop to access the support form. For information on what's covered as part of Docker Desktop support, see [Support](/manuals/desktop/troubleshoot-and-support/support.md).
     - If you don't have a paid Docker subscription, you can open a new Docker Desktop issue on GitHub for [Mac](https://github.com/docker/for-mac/issues), [Windows](https://github.com/docker/for-win/issues), or [Linux](https://github.com/docker/for-linux/issues). Complete the information required and ensure you add the diagnostic ID printed in step two. 
 
 ### Diagnose from the terminal

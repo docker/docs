@@ -24,7 +24,7 @@ grid:
 - title: Browse common FAQs
   description: Explore general FAQs or FAQs for specific platforms.
   icon: help
-  link: /desktop/faqs/
+  link: /desktop/troubleshoot-and-support/faqs/general/
 - title: Find additional resources
   description: |
     Find information on networking features, deploying on Kubernetes, and more.
@@ -33,7 +33,7 @@ grid:
 - title: Give feedback
   description: Provide feedback on Docker Desktop or Docker Desktop features.
   icon: sms
-  link: /desktop/feedback/
+  link: /desktop/troubleshoot-and-support/feedback/
 aliases:
 - /desktop/opensource/
 - /docker-for-mac/dashboard/
