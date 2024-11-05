@@ -19,17 +19,17 @@ cannot access features that require an active internet
 connection. Additionally, any functionality that requires you to sign in won't work while using Docker Desktop offline or in air-gapped environments.
 This includes:
 
-- The resources in the [Learning Center](../use-desktop/_index.md)
+- The resources in the [Learning Center](/manuals/desktop/use-desktop/_index.md)
 - Pulling or pushing an image to Docker Hub
-- [Image Access Management](../../security/for-developers/access-tokens.md)
-- [Static vulnerability scanning](../../docker-hub/vulnerability-scanning.md)
+- [Image Access Management](/manuals/security/for-developers/access-tokens.md)
+- [Static vulnerability scanning](/manuals/docker-hub/vulnerability-scanning.md)
 - Viewing remote images in the Docker Dashboard
-- Setting up [Dev Environments](../dev-environments/_index.md)
+- Setting up [Dev Environments](/manuals/desktop/dev-environments/_index.md)
 - Docker Build when using [BuildKit](/manuals/build/buildkit/_index.md#getting-started).
   You can work around this by disabling BuildKit. Run `DOCKER_BUILDKIT=0 docker build .` to disable BuildKit.
-- [Kubernetes](../kubernetes.md) (Images are download when you enable Kubernetes for the first time)
+- [Kubernetes](/manuals/desktop/kubernetes.md) (Images are download when you enable Kubernetes for the first time)
 - Checking for updates
-- [In-app diagnostics](/manuals/desktop/troubleshoot/_index.md#diagnose-from-the-app) (including the [Self-diagnose tool](/manuals/desktop/troubleshoot/_index.md#diagnose-from-the-app))
+- [In-app diagnostics](/manuals/desktop/troubleshoot-and-support/troubleshoot/_index.md#diagnose-from-the-app) (including the [Self-diagnose tool](/manuals/desktop/troubleshoot-and-support/troubleshoot/_index.md#diagnose-from-the-app))
 - Sending usage statistics
 
 ### How do I connect to the remote Docker Engine API?
@@ -59,7 +59,7 @@ The host has a changing IP address, or none if you have no network access.
 We recommend that you connect to the special DNS name `host.docker.internal`,
 which resolves to the internal IP address used by the host.
 
-For more information and examples, see [how to connect from a container to a service on the host](../networking.md#i-want-to-connect-from-a-container-to-a-service-on-the-host).
+For more information and examples, see [how to connect from a container to a service on the host](/manuals/desktop/networking.md#i-want-to-connect-from-a-container-to-a-service-on-the-host).
 
 ### Can I pass through a USB device to a container?
 

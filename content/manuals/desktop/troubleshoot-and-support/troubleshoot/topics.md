@@ -57,7 +57,7 @@ After updating the `settings-store.json` file, close and restart Docker Desktop 
 If you are using mounted volumes and get runtime errors indicating an
 application file is not found, access to a volume mount is denied, or a service
 cannot start, such as when using [Docker Compose](/manuals/compose/gettingstarted.md),
-you might need to turn on [file sharing](/manuals/desktop/settings.md#file-sharing).
+you might need to turn on [file sharing](/manuals/desktop/settings-and-maintenance/settings.md#file-sharing).
 
 Volume mounting requires shared drives for projects that live outside of the
 `/home/<user>` directory. From **Settings**, select **Resources** and then **File sharing**. Share the drive that contains the Dockerfile and volume.
@@ -117,7 +117,7 @@ To continue using VPNKit, add `"networkType":"vpnkit"` to your `settings-store.j
 
 #### Permissions errors on data directories for shared volumes
 
-When sharing files from Windows, Docker Desktop sets permissions on [shared volumes](/manuals/desktop/settings.md#file-sharing)
+When sharing files from Windows, Docker Desktop sets permissions on [shared volumes](/manuals/desktop/settings-and-maintenance/settings.md#file-sharing)
 to a default value of [0777](https://chmodcommand.com/chmod-0777/)
 (`read`, `write`, `execute` permissions for `user` and for `group`).
 
@@ -128,7 +128,7 @@ volumes or find a way to make the applications work with the default file
 permissions.
 
 See also,
-[Can I change permissions on shared volumes for container-specific deployment requirements?](../faqs/windowsfaqs.md#can-i-change-permissions-on-shared-volumes-for-container-specific-deployment-requirements)
+[Can I change permissions on shared volumes for container-specific deployment requirements?](/manuals/desktop/troubleshoot-and-support/faqs/windowsfaqs.md#can-i-change-permissions-on-shared-volumes-for-container-specific-deployment-requirements)
 in the FAQs.
 
 #### Volume mounting requires shared folders for Linux containers
@@ -136,14 +136,14 @@ in the FAQs.
 If you are using mounted volumes and get runtime errors indicating an
 application file is not found, access is denied to a volume mount, or a service
 cannot start, such as when using [Docker Compose](/manuals/compose/gettingstarted.md),
-you might need to turn on [shared folders](/manuals/desktop/settings.md#file-sharing).
+you might need to turn on [shared folders](/manuals/desktop/settings-and-maintenance/settings.md#file-sharing).
 
 With the Hyper-V backend, mounting files from Windows requires shared folders for Linux containers. From **Settings**, select **Shared Folders** and share the folder that contains the
 Dockerfile and volume.
 
 #### Support for symlinks
 
-Symlinks work within and across containers. To learn more, see [How do symlinks work on Windows?](../faqs/windowsfaqs.md#how-do-symlinks-work-on-windows).
+Symlinks work within and across containers. To learn more, see [How do symlinks work on Windows?](/manuals/desktop/troubleshoot-and-support/faqs/windowsfaqs.md#how-do-symlinks-work-on-windows).
 
 #### Avoid unexpected syntax errors, use Unix style line endings for files in containers
 
@@ -290,7 +290,7 @@ In the subsequent screen, verify that Hyper-V is enabled.
 
 #### Virtualization must be turned on
 
-In addition to [Hyper-V](#hyper-v) or [WSL 2](../wsl/_index.md), virtualization must be turned on. Check the
+In addition to [Hyper-V](#hyper-v) or [WSL 2](/manuals/desktop/wsl/_index.md), virtualization must be turned on. Check the
 Performance tab on the Task Manager. Alternatively, you can type 'systeminfo' into your terminal. If you see 'Hyper-V Requirements:   A hypervisor has been detected. Features required for Hyper-V will not be displayed', then virtualization is enabled.
 
 ![Task Manager](../images/virtualization-enabled.png)
@@ -327,7 +327,7 @@ Try [enabling nested virtualization](/manuals/desktop/setup/vm-vdi.md#turn-on-ne
 ### Windows containers and Windows Server
 
 Docker Desktop is not supported on Windows Server. If you have questions about how to run Windows containers on Windows 10, see
-[Switch between Windows and Linux containers](../faqs/windowsfaqs.md#how-do-i-switch-between-windows-and-linux-containers).
+[Switch between Windows and Linux containers](/manuals/desktop/troubleshoot-and-support/faqs/windowsfaqs.md#how-do-i-switch-between-windows-and-linux-containers).
 
 A full tutorial is available in [docker/labs](https://github.com/docker/labs) on
 [Getting Started with Windows Containers](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md).

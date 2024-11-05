@@ -54,7 +54,7 @@ This page contains download URLs, information about system requirements, and ins
   > Docker supports Docker Desktop on the most recent versions of macOS. That is, the current release of macOS and the previous two releases. As new major versions of macOS are made generally available, Docker stops supporting the oldest version and supports the newest version of macOS (in addition to the previous two releases).
 
 - At least 4 GB of RAM.
-- For the best experience, it's recommended that you install Rosetta 2. There is no longer a hard requirement to install Rosetta 2, however there are a few optional command line tools that still require Rosetta 2 when using Darwin/AMD64. See [Known issues](/manuals/desktop/troubleshoot/known-issues.md). To install Rosetta 2 manually from the command line, run the following command:
+- For the best experience, it's recommended that you install Rosetta 2. There is no longer a hard requirement to install Rosetta 2, however there are a few optional command line tools that still require Rosetta 2 when using Darwin/AMD64. See [Known issues](/manuals/desktop/troubleshoot-and-support/troubleshoot/known-issues.md). To install Rosetta 2 manually from the command line, run the following command:
 
    ```console
    $ softwareupdate --install-rosetta
@@ -66,7 +66,7 @@ This page contains download URLs, information about system requirements, and ins
 
 > [!TIP]
 >
-> See the [FAQs](/manuals/desktop/faqs/general.md#how-do-I-run-docker-desktop-without-administrator-privileges) on how to install and run Docker Desktop without needing administrator privileges.
+> See the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/general.md#how-do-I-run-docker-desktop-without-administrator-privileges) on how to install and run Docker Desktop without needing administrator privileges.
 
 ### Install interactively
 
@@ -92,7 +92,7 @@ This page contains download URLs, information about system requirements, and ins
 
 6. From the installation window, select either: 
    - **Use recommended settings (Requires password)**. This lets Docker Desktop automatically set the necessary configuration settings. 
-   - **Use advanced settings**. You can then set the location of the Docker CLI tools either in the system or user directory, enable the default Docker socket, and enable privileged port mapping. See [Settings](/manuals/desktop/settings.md#advanced), for more information and how to set the location of the Docker CLI tools.
+   - **Use advanced settings**. You can then set the location of the Docker CLI tools either in the system or user directory, enable the default Docker socket, and enable privileged port mapping. See [Settings](/manuals/desktop/settings-and-maintenance/settings.md#advanced), for more information and how to set the location of the Docker CLI tools.
 7. Select **Finish**. If you have applied any of the previous configurations that require a password in step 6, enter your password to confirm your choice.  
 
 ### Install from the command line
@@ -133,9 +133,9 @@ The `install` command accepts the following flags:
 - Explore [Docker's core subscriptions](https://www.docker.com/pricing/) to see what Docker can offer you. 
 - [Get started with Docker](/get-started/introduction/_index.md).
 - [Explore Docker Desktop](/manuals/desktop/use-desktop/_index.md) and all its features.
-- [Troubleshooting](/manuals/desktop/troubleshoot/_index.md) describes common problems, workarounds, how
+- [Troubleshooting](/manuals/desktop/troubleshoot-and-support/troubleshoot/_index.md) describes common problems, workarounds, how
   to run and submit diagnostics, and submit issues.
-- [FAQs](/manuals/desktop/faqs/general.md) provide answers to frequently asked questions.
+- [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/general.md) provide answers to frequently asked questions.
 - [Release notes](/manuals/desktop/release-notes.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
-- [Back up and restore data](/manuals/desktop/backup-and-restore.md) provides instructions
+- [Back up and restore data](/manuals/desktop/settings-and-maintenance/backup-and-restore.md) provides instructions
   on backing up and restoring data related to Docker.

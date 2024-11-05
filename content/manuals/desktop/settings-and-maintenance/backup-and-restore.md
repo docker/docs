@@ -2,7 +2,9 @@
 title: How to back up and restore your Docker Desktop data
 keywords: Docker Desktop, backup, restore, migration, reinstall, containers, images,
   volumes
-weight: 130
+weight: 20
+aliases:
+ - /desktop/backup-and-restore.md
 ---
 
 Use the following procedure to save and restore your images and container data. This is useful if you want to reset your VM disk or to move your Docker environment to a new
@@ -27,16 +29,16 @@ computer, for example.
    If you used a [named volume](/manuals/engine/storage/_index.md#more-details-about-mount-types) to store container data, such as databases, refer to the [back up, restore, or migrate data volumes](/manuals/engine/storage/volumes.md#back-up-restore-or-migrate-data-volumes) page in the storage section.
 
 2. Use [`docker push`](/reference/cli/docker/image/push.md) to push any
-   images you have built locally and want to keep to the [Docker Hub registry](../docker-hub/_index.md).
+   images you have built locally and want to keep to the [Docker Hub registry](/manuals/docker-hub/_index.md).
    
-   Make sure to configure the [repository's visibility as "private"](../docker-hub/repos/_index.md)
+   Make sure to configure the [repository's visibility as "private"](/manuals/docker-hub/repos/_index.md)
    for images that should not be publicly accessible. 
 
    Alternatively, use [`docker image save -o images.tar image1 [image2 ...]`](/reference/cli/docker/image/save.md)
    to save any images you want to keep to a local tar file. 
 
 After backing up your data, you can uninstall the current version of Docker Desktop
-and [install a different version](release-notes.md) or reset Docker Desktop to factory defaults.
+and [install a different version](/manuals/desktop/release-notes.md) or reset Docker Desktop to factory defaults.
 
 ## Restore your data
 
