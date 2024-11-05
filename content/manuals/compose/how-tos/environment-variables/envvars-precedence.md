@@ -83,9 +83,9 @@ Result 1: The local environment takes precedence, but the Compose file is not se
 
 Result 2: The `env_file` attribute in the Compose file defines an explicit value for `VALUE` so the container environment is set accordingly.
 
-Result 3: The `environment` attribute in the Compose file defines an explicit value for `VALUE`, so the container environment is set accordingly/
+Result 3: The `environment` attribute in the Compose file defines an explicit value for `VALUE`, so the container environment is set accordingly.
 
-Result 4: The image's `ENV` directive declares the variable `VALUE`, and since the Compose file is not set to override this value, this variable is defined by image
+Result 4: The image's `ENV` directive declares the variable `VALUE`, and since the Compose file is not set to override this value, this variable is defined by image.
 
 Result 5: The `docker compose run` command has the `--env` flag set which an explicit value, and overrides the value set by the image. 
 
