@@ -41,9 +41,8 @@ address you received the invitation through.
 4. Optional. If you do not have an account and created one, you must navigate
 back to your email inbox and verify your email address using the Docker verification
 email.
-5. Once you are signed in to [Docker Hub](https://hub.docker.com/), under Docker Products, select the **Docker Hub** tab.
-6. Select **Organizations** from the top-level navigation menu.
-7. The organizations page will display your invitation. Select **Accept**.
+5. Once you are signed in to Docker Hub, select **Organizations** from the top-level navigation menu.
+6. The organizations page will display your invitation. Select **Accept**.
 
 After accepting an invitation, you are now a member of the organization.
 
