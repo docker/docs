@@ -90,4 +90,8 @@ To reset your password, enter your email address on the [Sign in](https://login.
 
 ## Troubleshooting
 
-For support and troubleshooting information, see [Get support](../support.md).
+If you have a paid Docker subscription, you can [contact the Support team](https://hub.docker.com/support/contact/).
+
+All Docker users can seek troubleshooting information and support through the following resources, where Docker or the community respond on a best effort basis.
+   - [Docker Community Forums](https://forums.docker.com/)
+   - [Docker Community Slack](http://dockr.ly/comm-slack)

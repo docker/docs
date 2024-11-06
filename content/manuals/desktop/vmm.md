@@ -11,7 +11,7 @@ description: Discover Docker Desktop for Mac's Virtual Machine Manager (VMM) opt
 weight: 150
 ---
 
-The Virtual Machine Manager (VMM) in Docker Desktop for Mac is responsible for creating and managing the virtual machine used to run containers. Depending on your system architecture and performance needs, you can choose from multiple VMM options in Docker Desktop's [settings](/manuals/desktop/settings.md#general). This page provides an overview of the available options.
+The Virtual Machine Manager (VMM) in Docker Desktop for Mac is responsible for creating and managing the virtual machine used to run containers. Depending on your system architecture and performance needs, you can choose from multiple VMM options in Docker Desktop's [settings](/manuals/desktop/settings-and-maintenance/settings.md#general). This page provides an overview of the available options.
 
 ## Docker VMM (Beta)
 

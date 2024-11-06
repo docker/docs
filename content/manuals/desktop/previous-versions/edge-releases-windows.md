@@ -12,7 +12,7 @@ sitemap: false
 This page contains information about Docker Desktop Edge releases. Edge releases give you early access to our newest features. Note that some of the features may be experimental, and some of them may not ever reach the Stable release.
 
  For Docker Desktop system requirements, see
-[What to know before you install](../install/windows-install.md#system-requirements).
+[What to know before you install](/manuals/desktop/setup/install/windows-install.md#system-requirements).
 
 ## Docker Desktop Community 2.5.4
 2020-12-07
@@ -1723,7 +1723,7 @@ registry access (fixes [docker/for-win#569](https://github.com/docker/for-win/is
 **New**
 
 - Windows containers settings panel and options are working. In previous releases, settings were not implemented for
-[Windows containers mode](../faqs/windowsfaqs.md#how-do-i-switch-between-windows-and-linux-containers).
+[Windows containers mode](/manuals/desktop/troubleshoot-and-support/faqs/windowsfaqs.md#how-do-i-switch-between-windows-and-linux-containers).
 - Windows containers: Restart from the settings panel works
 - Windows containers: Factory default
 - Windows containers: `Daemon.json` can be modified
@@ -1992,7 +1992,7 @@ work. Some insider builds may not work.
 **Known issues**
 
 * Only UTF-8 passwords are supported for host filesystem sharing
-* Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc` as documented in [Troubleshooting](../troubleshoot/known-issues.md).
+* Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc` as documented in [Troubleshooting](/manuals/desktop/troubleshoot-and-support/troubleshoot/known-issues.md).
 
 ### Beta 22 Release (2016-08-11 1.12.0-beta22)
 
@@ -2000,13 +2000,13 @@ Unreleased. See Beta 23 for changes.
 
 **Known issues**
 
-* Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc` as documented in [Troubleshooting](../troubleshoot/known-issues.md).
+* Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc` as documented in [Troubleshooting](/manuals/desktop/troubleshoot-and-support/troubleshoot/known-issues.md).
 
 ### Beta 21 Release (2016-07-28 1.12.0-beta21)
 
 **New**
 
-* Docker for Windows is now available from two channels: **stable** and **beta**. New features and bug fixes go out first in auto-updates to users in the beta channel. Updates to the stable channel are much less frequent and happen in sync with major and minor releases of the Docker engine. Only features that are well-tested and ready for production are added to the stable channel releases. For downloads of both and more information, see [Install Docker Desktop on Windows](../install/windows-install.md).
+* Docker for Windows is now available from two channels: **stable** and **beta**. New features and bug fixes go out first in auto-updates to users in the beta channel. Updates to the stable channel are much less frequent and happen in sync with major and minor releases of the Docker Engine. Only features that are well-tested and ready for production are added to the stable channel releases. For downloads of both and more information, see [Install Docker Desktop on Windows](/manuals/desktop/setup/install/windows-install.md).
 
 * Removed the docker host name. Containers with exported ports are reachable via localhost.
 
@@ -2275,7 +2275,7 @@ This Beta release includes some significant changes:
 * The GUI now runs in non-elevated mode and connects to an elevated Windows service
 * Allocate virtual machine memory by 256 MB increments, instead of 1 GB
 * Show a meaningful error when the user has an empty password
-* Improved [Troubleshooting](../troubleshoot/_index.md) page
+* Improved [Troubleshooting](/manuals/desktop/troubleshoot-and-support/troubleshoot/_index.md) page
 
 **Upgrades**
 
@@ -2299,7 +2299,7 @@ This Beta release includes some significant changes:
 
 **Known issues**
 
-* Due to limitation in the Windows NAT implementation, co-existence with other NAT prefixes needs to be carefully managed. See [Troubleshooting](../troubleshoot/known-issues.md) for more details.
+* Due to limitation in the Windows NAT implementation, co-existence with other NAT prefixes needs to be carefully managed. See [Troubleshooting](/manuals/desktop/troubleshoot-and-support/troubleshoot/known-issues.md) for more details.
 
 * Logs for the windows service are not aggregated with logs from the GUI. This is expected to be fixed in future versions.
 
@@ -2327,7 +2327,7 @@ This Beta release includes some significant changes:
 
 **Known issues**
 
-*  Due to limitation in the Windows NAT implementation, co-existence with other NAT prefixes needs to be carefully managed. See [Troubleshooting](../troubleshoot/_index.md) for more details.
+*  Due to limitation in the Windows NAT implementation, co-existence with other NAT prefixes needs to be carefully managed. See [Troubleshooting](/manuals/desktop/troubleshoot-and-support/troubleshoot/_index.md) for more details.
 
 
 ### Beta 9 Release (2016-04-26 1.11.0-beta9)

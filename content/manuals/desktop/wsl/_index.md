@@ -23,7 +23,7 @@ Additionally, with WSL 2, the time required to start a Docker daemon after a col
 Before you turn on the Docker Desktop WSL 2 feature, ensure you have:
 
 - At a minimum WSL version 1.1.3.0., but ideally the latest version of WSL to [avoid Docker Desktop not working as expected](best-practices.md).
-- Met the Docker Desktop for Windows' [system requirements](https://docs.docker.com/desktop/install/windows-install/#system-requirements).
+- Met the Docker Desktop for Windows' [system requirements](/manuals/desktop/setup/install/windows-install.md#system-requirements).
 - Installed the WSL 2 feature on Windows. For detailed instructions, refer to the [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
 
 > [!TIP]
@@ -55,7 +55,7 @@ Now `docker` commands work from Windows using the new WSL 2 engine.
 >
 > By default, Docker Desktop stores the data for the WSL 2 engine at `C:\Users\[USERNAME]\AppData\Local\Docker\wsl`.
 > If you want to change the location, for example, to another drive you can do so via the `Settings -> Resources -> Advanced` page from the Docker Dashboard.
-> Read more about this and other Windows settings at [Changing settings](/manuals/desktop/settings.md)
+> Read more about this and other Windows settings at [Changing settings](/manuals/desktop/settings-and-maintenance/settings.md)
 
 ## Enabling Docker support in WSL 2 distros
 
