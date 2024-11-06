@@ -29,7 +29,7 @@ Learn how to manage members for your organization in Docker Hub and the Docker A
 ## Accept invitation
 
 When an invitation is to a user's email address, they receive
-a link to [Docker Hub](https://hub.docker.com/) where they can accept or decline the invitation.
+a link to Docker Hub where they can accept or decline the invitation.
 To accept an invitation:
 
 1. Navigate to your email inbox and open the Docker email with an invitation to
