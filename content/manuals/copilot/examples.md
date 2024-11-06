@@ -52,13 +52,11 @@ report whether you're vulnerable to any [known CVEs](/manuals/scout/deep-dive/ad
 
 ![Copilot vulnerabilities report](images/copilot-vuln-report.png?w=500px&border=1)
 
-## Performing actions on your behalf
+## Limitations
 
-Before the agent performs any actions on your behalf, such as opening a pull
-request for you, you're prompted to provide your consent to allow the
-operation. You can always roll back or back out of the changes.
-
-![Copilot action prompt](images/copilot-action-prompt.png?w=400px)
+- The agent is currently not able to access specific files in your repository,
+  such as the currently-opened file in your editor, or if you pass a file
+  reference with your message in the chat message.
 
 ## Feedback
 
