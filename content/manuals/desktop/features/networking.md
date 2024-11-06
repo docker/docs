@@ -10,7 +10,8 @@ aliases:
 - /docker-for-win/networking/
 - /docker-for-windows/networking/
 - /desktop/windows/networking/
-weight: 120
+- /desktop/networking/
+weight: 50
 ---
 
 Docker Desktop provides several networking features to make it easier to
@@ -50,7 +51,7 @@ See [Proxies](/manuals/desktop/settings-and-maintenance/settings.md#proxies)
 
 ### SOCKS5 proxy support 
 
-{{< introduced desktop 4.28.0 "release-notes.md#4280" >}}
+{{< introduced desktop 4.28.0 "../release-notes.md#4280" >}}
 
 > [!NOTE]
 >

@@ -80,7 +80,7 @@ Desktop 4.19 and on all supported platforms (Windows with WSL 2 or Hyper-V, Mac,
 and Linux).
 
 ECI does not yet protect Docker Desktop Kubernetes pods, Extension containers,
-and [Dev Environments containers](/manuals/desktop/dev-environments/_index.md).
+and [Dev Environments containers](/manuals/desktop/features/dev-environments/_index.md).
 
 ### Does ECI protect containers launched prior to enabling ECI?
 

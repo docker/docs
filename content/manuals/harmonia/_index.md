@@ -138,7 +138,7 @@ Running a container with a cloud engine is just as straightforward as running it
 
 ### Step four: Use a file sync for your cloud engine
 
-Project Harmonia takes advantage of [Synchronized file shares](/manuals/desktop/synchronized-file-sharing.md) to enable local-to-remote file shares and port mappings. 
+Project Harmonia takes advantage of [Synchronized file shares](/manuals/desktop/features/synchronized-file-sharing.md) to enable local-to-remote file shares and port mappings. 
 
 {{< tabs group="method" >}}
 {{< tab name="Docker Desktop">}}

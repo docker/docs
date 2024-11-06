@@ -171,7 +171,7 @@ When enabled, Compose displays a navigation menu where you can choose to open th
 
 > Available in Docker Compose version [2.26.0](/manuals/compose/releases/release-notes.md#2260) and later, and Docker Desktop version 4.29 and later.
 
-This is an opt-out variable. When turned off it deactivates the experimental features such as the navigation menu or [Synchronized file shares](/manuals/desktop/synchronized-file-sharing.md).
+This is an opt-out variable. When turned off it deactivates the experimental features such as the navigation menu or [Synchronized file shares](/manuals/desktop/features/synchronized-file-sharing.md).
 
 * Supported values:
   * `true` or `1`, to enable,

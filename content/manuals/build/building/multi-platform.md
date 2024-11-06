@@ -79,7 +79,7 @@ The steps for enabling the containerd image store depends on whether you're
 using Docker Desktop or Docker Engine standalone:
 
 - If you're using Docker Desktop, enable the containerd image store in the
-  [Docker Desktop settings](/manuals/desktop/containerd.md).
+  [Docker Desktop settings](/manuals/desktop/features/containerd.md).
 
 - If you're using Docker Engine standalone, enable the containerd image store
   using the [daemon configuration file](/manuals/engine/storage/containerd.md).

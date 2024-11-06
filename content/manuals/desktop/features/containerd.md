@@ -1,9 +1,11 @@
 ---
 title: containerd image store
-weight: 50
+weight: 10
 description: How to activate the containerd integration feature in Docker Desktop
 keywords: Docker, containerd, engine, image store, lazy-pull
 toc_max: 3
+aliases:
+- /desktop/containerd/
 ---
 
 This page provides information about the ongoing integration of `containerd` for
