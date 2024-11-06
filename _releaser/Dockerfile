@@ -19,6 +19,7 @@ RUN --mount=type=bind,target=. \
   go build -o /out/releaser .
 
 FROM base AS aws-s3-update-config
+ARG DRY_RUN=false
 ARG AWS_REGION
 ARG AWS_S3_BUCKET
 ARG AWS_S3_CONFIG
@@ -30,6 +31,7 @@ RUN --mount=type=bind,target=. \
   releaser aws s3-update-config
 
 FROM base AS aws-lambda-invoke
+ARG DRY_RUN=false
 ARG AWS_REGION
 ARG AWS_LAMBDA_FUNCTION
 RUN --mount=type=bind,from=releaser,source=/out/releaser,target=/usr/bin/releaser \
@@ -39,6 +41,7 @@ RUN --mount=type=bind,from=releaser,source=/out/releaser,target=/usr/bin/release
   releaser aws lambda-invoke
 
 FROM base AS aws-cloudfront-update
+ARG DRY_RUN=false
 ARG AWS_REGION
 ARG AWS_LAMBDA_FUNCTION
 ARG AWS_CLOUDFRONT_ID
