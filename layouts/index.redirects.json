@@ -12,5 +12,4 @@
 {{- $redirects.SetInMap "paths" . $target -}}
 {{- end -}}
 {{- end -}}
-{{- $opts := dict "noHTMLEscape" true }}
-{{- $redirects.Get "paths" | jsonify $opts }}
+{{ $redirects.Get "paths" | jsonify }}
