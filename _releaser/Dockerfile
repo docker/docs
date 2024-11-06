@@ -5,7 +5,7 @@ ARG GO_VERSION=1.19
 FROM scratch AS sitedir
 
 FROM golang:${GO_VERSION}-alpine AS base
-RUN apk add --no-cache jq openssl
+RUN apk add --no-cache openssl
 ENV CGO_ENABLED=0
 WORKDIR /src
 COPY go.mod go.sum ./
@@ -42,13 +42,13 @@ FROM base AS aws-cloudfront-update
 ARG AWS_REGION
 ARG AWS_LAMBDA_FUNCTION
 ARG AWS_CLOUDFRONT_ID
+ARG AWS_LAMBDA_FUNCTION_FILE="cloudfront-lambda-redirects.js"
+ARG REDIRECTS_FILE="/site/redirects.json"
+ARG REDIRECTS_PREFIXES_FILE="redirects-prefixes.json"
 RUN --mount=type=bind,target=. \
   --mount=type=bind,from=sitedir,target=/site \
   --mount=type=bind,from=releaser,source=/out/releaser,target=/usr/bin/releaser \
   --mount=type=secret,id=AWS_ACCESS_KEY_ID \
   --mount=type=secret,id=AWS_SECRET_ACCESS_KEY \
   --mount=type=secret,id=AWS_SESSION_TOKEN \
-  AWS_LAMBDA_FUNCTION_FILE=cloudfront-lambda-redirects.js \
-  REDIRECTS_JSON=$(jq -c '.' /site/redirects.json) \
-  REDIRECTS_PREFIXES_JSON=$(jq -c '.' redirects-prefixes.json) \
   releaser aws cloudfront-update

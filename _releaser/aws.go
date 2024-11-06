@@ -100,15 +100,15 @@ type AwsCloudfrontUpdateCmd struct {
 	Function              string `kong:"name='lambda-function',env='AWS_LAMBDA_FUNCTION'"`
 	FunctionFile          string `kong:"name='lambda-function-file',env='AWS_LAMBDA_FUNCTION_FILE'"`
 	CloudfrontID          string `kong:"name='cloudfront-id',env='AWS_CLOUDFRONT_ID'"`
-	RedirectsJSON         string `kong:"name='redirects-json',env='REDIRECTS_JSON'"`
-	RedirectsPrefixesJSON string `kong:"name='redirects-prefixes-json',env='REDIRECTS_PREFIXES_JSON'"`
+	RedirectsFile         string `kong:"name='redirects-file',env='REDIRECTS_FILE'"`
+	RedirectsPrefixesFile string `kong:"name='redirects-prefixes-file',env='REDIRECTS_PREFIXES_FILE'"`
 }
 
 func (s *AwsCloudfrontUpdateCmd) Run() error {
 	var err error
 	ver := time.Now().UTC().Format(time.RFC3339)
 
-	zipdt, err := getLambdaFunctionZip(s.FunctionFile, s.RedirectsJSON, s.RedirectsPrefixesJSON)
+	zipdt, err := getLambdaFunctionZip(s.FunctionFile, s.RedirectsFile, s.RedirectsPrefixesFile)
 	if err != nil {
 		return fmt.Errorf("cannot create lambda function zip: %w", err)
 	}
@@ -228,10 +228,20 @@ func (s *AwsCloudfrontUpdateCmd) Run() error {
 	return nil
 }
 
-func getLambdaFunctionZip(funcFilename string, redirectsJSON string, redirectsPrefixesJSON string) ([]byte, error) {
+func getLambdaFunctionZip(funcFilename, redirectsFile, redirectsPrefixesFile string) ([]byte, error) {
 	funcdt, err := os.ReadFile(funcFilename)
 	if err != nil {
 		return nil, fmt.Errorf("failed to read lambda function file %q: %w", funcFilename, err)
+	}
+
+	redirects, err := os.ReadFile(redirectsFile)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read redirects file %q: %w", redirectsFile, err)
+	}
+
+	redirectsPrefixes, err := os.ReadFile(redirectsPrefixesFile)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read redirects prefixes file %q: %w", redirectsPrefixesFile, err)
 	}
 
 	var funcbuf bytes.Buffer
@@ -240,8 +250,8 @@ func getLambdaFunctionZip(funcFilename string, redirectsJSON string, redirectsPr
 		RedirectsJSON         string
 		RedirectsPrefixesJSON string
 	}{
-		redirectsJSON,
-		redirectsPrefixesJSON,
+		string(redirects),
+		string(redirectsPrefixes),
 	}); err != nil {
 		return nil, err
 	}
