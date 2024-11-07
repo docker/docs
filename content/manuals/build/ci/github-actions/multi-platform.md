@@ -45,6 +45,59 @@ jobs:
           tags: user/app:latest
 ```
 
+## Build and load multi-platform images
+
+The default Docker setup for GitHub Actions runners does not support loading
+multi-platform images to the local image store of the runner after building
+them. To load a multi-platform image, you need to enable the containerd image
+store option for the Docker Engine.
+
+There is no way to configure the default Docker setup in the GitHub Actions
+runners directly, but you can use the `crazy-max/ghaction-setup-docker` action
+to customize the Docker Engine and CLI settings for a job.
+
+The following example workflow enables the containerd image store, builds a
+multi-platform image, and loads the results into the GitHub runner's local
+image store.
+
+```yaml
+name: ci
+
+on:
+  push:
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Docker
+        uses: crazy-max/ghaction-setup-docker@v3
+        with:
+          daemon-config: |
+            {
+              "debug": true,
+              "features": {
+                "containerd-snapshotter": true
+              }
+            }
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          platforms: linux/amd64,linux/arm64
+          load: true
+          tags: user/app:latest
+```
+
 ## Distribute build across multiple runners
 
 In the previous example, each platform is built on the same runner which can
