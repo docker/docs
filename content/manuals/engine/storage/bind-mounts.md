@@ -28,7 +28,7 @@ manage bind mounts.
 > [!TIP]
 >
 > Working with large repositories or monorepos, or with virtual file systems that are no longer scaling with your codebase?
-> Check out [Synchronized file shares](/manuals/desktop/synchronized-file-sharing.md). It provides fast and flexible host-to-VM file sharing by enhancing bind mount performance through the use of synchronized filesystem caches.
+> Check out [Synchronized file shares](/manuals/desktop/features/synchronized-file-sharing.md). It provides fast and flexible host-to-VM file sharing by enhancing bind mount performance through the use of synchronized filesystem caches.
 
 ## Choose the -v or --mount flag
 

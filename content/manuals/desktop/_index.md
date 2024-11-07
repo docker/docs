@@ -29,7 +29,7 @@ grid:
   description: |
     Find information on networking features, deploying on Kubernetes, and more.
   icon: category
-  link: /desktop/kubernetes/
+  link: /desktop/features/kubernetes/
 - title: Give feedback
   description: Provide feedback on Docker Desktop or Docker Desktop features.
   icon: sms

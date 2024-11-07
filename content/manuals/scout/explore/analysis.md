@@ -81,7 +81,7 @@ analysis is activated.
    > [!NOTE]
    >
    > The default `docker` driver only supports build attestations if you use the
-   > [containerd image store](/manuals/desktop/containerd.md).
+   > [containerd image store](/manuals/desktop/features/containerd.md).
 
 3. Go to the [Images page](https://scout.docker.com/reports/images) in the Docker Scout Dashboard.
 

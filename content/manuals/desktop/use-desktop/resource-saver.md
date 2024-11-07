@@ -71,7 +71,7 @@ utilization.
 
 To reduce memory utilization on WSL, we instead recommend that
 users enable WSL's `autoMemoryReclaim` feature as described in the
-[Docker  Desktop WSL docs](../wsl/_index.md). Finally, since Docker Desktop does not
+[Docker  Desktop WSL docs](/manuals/desktop/features/wsl/_index.md). Finally, since Docker Desktop does not
 stop the Linux VM on WSL, exit from Resource Saver mode is immediate (there's
 no exit delay).
 
