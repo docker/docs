@@ -4,6 +4,7 @@ import (
 	"archive/zip"
 	"bytes"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"log"
 	"os"
@@ -143,13 +144,14 @@ func (s *AwsCloudfrontUpdateCmd) Run() error {
 		FunctionName: aws.String(s.Function),
 	})
 	if err != nil {
-		if aerr, ok := err.(awserr.Error); ok && aerr.Code() != lambda.ErrCodeResourceNotFoundException {
+		var aerr awserr.Error
+		if errors.As(err, &aerr) && aerr.Code() != lambda.ErrCodeResourceNotFoundException {
 			return fmt.Errorf("cannot find lambda function %q: %w", s.Function, err)
 		}
 		_, err = svc.CreateFunction(&lambda.CreateFunctionInput{
 			FunctionName: aws.String(s.Function),
 		})
-		if aerr, ok := err.(awserr.Error); ok && aerr.Code() != lambda.ErrCodeResourceConflictException {
+		if errors.As(err, &aerr) && aerr.Code() != lambda.ErrCodeResourceConflictException {
 			return err
 		}
 	}
