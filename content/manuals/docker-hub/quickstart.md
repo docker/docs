@@ -211,7 +211,7 @@ You've now verified that your repository exists on Docker Hub, and you've
 discovered more options for it. View the next steps to learn more about some of
 these options.
 
-### Next steps
+## Next steps
 
 - Automatically build container images from code through
   [builds](builds/_index.md).
