@@ -50,7 +50,7 @@ If you choose the integrated terminal, you can run commands in a running contain
   execution attacks.
 
 - {{< badge color=blue text="Windows only" >}}**Use the WSL 2 based engine**. WSL 2 provides better performance than the
-  Hyper-V backend. For more information, see [Docker Desktop WSL 2 backend](/manuals/desktop/wsl/_index.md).
+  Hyper-V backend. For more information, see [Docker Desktop WSL 2 backend](/manuals/desktop/features/wsl/_index.md).
 
 - {{< badge color=blue text="Windows only" >}}**Add the `*.docker.internal` names to the host's `/etc/hosts` file (Password required)**. Lets you resolve `*.docker.internal` DNS names from both the host and your containers.
 
@@ -58,7 +58,7 @@ If you choose the integrated terminal, you can run commands in a running contain
   Turns on the containerd image store.
   This brings new features like faster container startup performance by lazy-pulling images,
   and the ability to run Wasm applications with Docker.
-  For more information, see [containerd image store](/manuals/desktop/containerd.md).
+  For more information, see [containerd image store](/manuals/desktop/features/containerd.md).
 
 - {{< badge color=blue text="Mac only" >}} **Choose Virtual Machine Manager (VMM)**. Choose the Virtual Machine Manager for creating and managing the Docker Desktop Linux VM.
   - Select **Docker VMM** for the latest and most performant Hypervisor/Virtual Machine Manager. This option is available only on Apple Silicon Macs running macOS 12.5 or later and is currently in Beta.
@@ -67,7 +67,7 @@ If you choose the integrated terminal, you can run commands in a running contain
     > Turn this setting on to make Docker Desktop run faster.
   - Alternatively, you can choose **Apple Virtualization framework**, **QEMU** (for Apple Silicon), or **HyperKit** (for Intel Macs). For macOS 12.5 and later, Apple Virtualization framework is the default setting.
 
-   For more information, see [Virtual Machine Manager](/manuals/desktop/vmm.md).
+   For more information, see [Virtual Machine Manager](/manuals/desktop/features/vmm.md).
 
 - {{< badge color=blue text="Mac only" >}}**Choose file sharing implementation for your containers**. Choose whether you want to share files using **VirtioFS**, **gRPC FUSE**, or **osxfs (Legacy)**. VirtioFS is only available for macOS 12.5 and later, and is turned on by default.
     > [!TIP]
@@ -171,7 +171,7 @@ the host while running and testing the code in a container.
 
 Synchronized file shares is an alternative file sharing mechanism that provides fast and flexible host-to-VM file sharing, enhancing bind mount performance through the use of synchronized filesystem caches. Available with Pro, Team, and Business subscriptions.
 
-To learn more, see [Synchronized file share](/manuals/desktop/synchronized-file-sharing.md).
+To learn more, see [Synchronized file share](/manuals/desktop/features/synchronized-file-sharing.md).
 
 #### Virtual file shares
 
@@ -231,7 +231,7 @@ containers. Alternatively, you can opt not to share it by selecting **Cancel**.
 
 ### Proxies
 
-Docker Desktop supports the use of HTTP/HTTPS and [SOCKS5 proxies](/manuals/desktop/networking.md#socks5-proxy-support).
+Docker Desktop supports the use of HTTP/HTTPS and [SOCKS5 proxies](/manuals/desktop/features/networking.md#socks5-proxy-support).
 
 HTTP/HTTPS proxies can be used when:
 
@@ -319,7 +319,7 @@ to set Ubuntu as your default WSL distro, run `wsl --set-default ubuntu`).
 You can also select any additional distributions you would like to enable the WSL 2 integration on.
 
 For more details on configuring Docker Desktop to use WSL 2, see
-[Docker Desktop WSL 2 backend](/manuals/desktop/wsl/_index.md).
+[Docker Desktop WSL 2 backend](/manuals/desktop/features/wsl/_index.md).
 
 ## Docker Engine
 
@@ -431,7 +431,7 @@ using Docker commands.
 Select **Reset Kubernetes cluster** to delete all stacks and Kubernetes resources.
 
 For more information about using the Kubernetes integration with Docker Desktop,
-see [Deploy on Kubernetes](/manuals/desktop/kubernetes.md).
+see [Deploy on Kubernetes](/manuals/desktop/features/kubernetes.md).
 
 ## Software Updates
 

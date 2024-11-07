@@ -84,4 +84,4 @@ The `FindProxyForURL` can return the following values:
 
 In this particular example, HTTP and HTTPS requests for `internal.corp` are sent via the HTTP proxy `10.0.0.1:3128`. Requests to connect to IPs on the subnet `192.168.0.0/24` connect directly. All other requests are blocked.
 
-To restrict traffic connecting to ports on the developers local machine, [match the special hostname `host.docker.internal`](/manuals/desktop/networking.md#i-want-to-connect-from-a-container-to-a-service-on-the-host).
+To restrict traffic connecting to ports on the developers local machine, [match the special hostname `host.docker.internal`](/manuals/desktop/features/networking.md#i-want-to-connect-from-a-container-to-a-service-on-the-host).

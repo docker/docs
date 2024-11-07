@@ -4,12 +4,14 @@ keywords: Dev Environments, share, local, Compose
 title: Overview of Dev Environments
 linkTitle: Dev Environments (Beta)
 weight: 40
+aliases:
+- /desktop/dev-environments/
 ---
 
 {{< include "dev-envs-changing.md" >}}
 
 {{% experimental title="Beta" %}}
-The Dev Environments feature is currently in [Beta](../../release-lifecycle.md#beta). 
+The Dev Environments feature is currently in [Beta](/manuals/release-lifecycle.md#beta). 
 {{% /experimental %}}
 
 Dev Environments let you create a configurable developer environment with all the code and tools you need to quickly get up and running. 

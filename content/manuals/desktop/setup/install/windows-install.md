@@ -58,7 +58,7 @@ _For checksums, see [Release notes](/manuals/desktop/release-notes.md)_
   - Enable hardware virtualization in BIOS. For more information, see
     [Virtualization](/manuals/desktop/troubleshoot-and-support/troubleshoot/topics.md#virtualization).
 
-For more information on setting up WSL 2 with Docker Desktop, see [WSL](/manuals/desktop/wsl/_index.md).
+For more information on setting up WSL 2 with Docker Desktop, see [WSL](/manuals/desktop/features/wsl/_index.md).
 
 > [!NOTE]
 >
@@ -143,7 +143,7 @@ For more information on Windows containers, refer to the following documentation
   [forked here to use containers](https://github.com/friism/MusicStore), is a good example of a multi-container application.
 
 - To understand how to connect to Windows containers from the local host, see
-  [I want to connect to a container from Windows](/manuals/desktop/networking.md#i-want-to-connect-to-a-container-from-the-host)
+  [I want to connect to a container from Windows](/manuals/desktop/features/networking.md#i-want-to-connect-to-a-container-from-the-host)
 
 > [!NOTE]
 >

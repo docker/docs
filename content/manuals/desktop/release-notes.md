@@ -164,7 +164,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 - [Host networking](/manuals/engine/network/drivers/host.md#docker-desktop) support on Docker Desktop is now generally available.
 - If you authenticate via the CLI, you can now authenticate through a browser-based flow, removing the need for manual PAT generation.
-- Windows now supports automatic reclamation of disk space in Docker Desktop for WSL2 installations [using a managed virtual hard disk](/manuals/desktop/wsl/best-practices.md).
+- Windows now supports automatic reclamation of disk space in Docker Desktop for WSL2 installations [using a managed virtual hard disk](/manuals/desktop/features/wsl/best-practices.md).
 - Deploying Docker Desktop via the [MSI installer](/manuals/desktop/setup/install/msi/_index.md) is now generally available.
 - Two new methods to [enforce sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md) (windows registry key and `.plist` file) are now generally available.
 - Fresh installations of Docker Desktop now use the containerd image store by default.
@@ -480,7 +480,7 @@ For more information, see [microsoft/WSL#11794](https://github.com/microsoft/WSL
 
 #### For all platforms
 
-- Docker Desktop now supports [SOCKS5 proxies](networking.md#socks5-proxy-support). Requires a Business subscription.
+- Docker Desktop now supports [SOCKS5 proxies](/manuals/desktop/features/networking.md#socks5-proxy-support). Requires a Business subscription.
 - Added a new setting to manage the onboarding survey in [Settings Management](/manuals/security/for-admins/hardened-desktop/settings-management/_index.md).
 
 #### For Windows
@@ -491,7 +491,7 @@ For more information, see [microsoft/WSL#11794](https://github.com/microsoft/WSL
 
 - [Docker Compose v2.27.0](https://github.com/docker/compose/releases/tag/v2.27.0)
 - [Docker Engine v26.1.1](https://docs.docker.com/engine/release-notes/26.1/#2611)
-- [Wasm](/manuals/desktop/wasm/_index.md) runtimes:
+- [Wasm](/manuals/desktop/features/wasm.md) runtimes:
   - Updated `runwasi` shims to `v0.4.0`
   - Updated `deislabs` shims to `v0.11.1`
   - Updated `spin` shim to `v0.13.1`
@@ -564,7 +564,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 - [Docker socket mount restrictions](/manuals/security/for-admins/hardened-desktop/enhanced-container-isolation/config.md) with ECI is now generally available.
 - Docker Engine and CLI updated to [Moby 26.0](https://github.com/moby/moby/releases/tag/v26.0.0). This includes Buildkit 0.13, sub volumes mounts, networking updates, and improvements to the containerd multi-platform image store UX.
 - New and improved Docker Desktop error screens: swift troubleshooting, easy diagnostics uploads, and actionable remediation.
-- Compose supports [Synchronized file shares (experimental)](synchronized-file-sharing.md).
+- Compose supports [Synchronized file shares (experimental)](/manuals/desktop/features/synchronized-file-sharing.md).
 - New [interactive Compose CLI (experimental)](/manuals/compose/how-tos/environment-variables/envvars.md#compose_menu).
 - Beta release of:
   - Air-Gapped Containers with [Settings Management](/manuals/security/for-admins/hardened-desktop/air-gapped-containers/_index.md).
@@ -592,7 +592,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
   - Fixed an issue with `.dockerignore` to avoid ignoring application files that start with "compose".
   - Improved how Java applications are started based on Spring Boot version. Fixes [docker/for-mac#7171](https://github.com/docker/for-mac/issues/7171).
   - Removed non-official Docker image used for Rust cross-compilation.
-- The maximum number of files per [Synchronized file share](synchronized-file-sharing.md) now exceeds 2 million.
+- The maximum number of files per [Synchronized file share](/manuals/desktop/features/synchronized-file-sharing.md) now exceeds 2 million.
 - Fixed an issue that caused the warning: "_The value provided to Autocomplete is invalid._" when selecting the **Export to local image** field.
 - **Run Cloud** can now be accessed from the Docker Desktop Dashboard.
 - Opting out from sending analytics will now also disable collecting data for bug reports.
@@ -639,7 +639,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 ### New
 
 - [Settings Management](/manuals/security/for-admins/hardened-desktop/settings-management/_index.md) now allows admins to set the default file-sharing implementation and specify which paths developer can add file shares to.
-- Added support for `socks5://` HTTP and HTTPS proxy URLs when the [`SOCKS` proxy support beta feature](networking.md) is enabled.
+- Added support for `socks5://` HTTP and HTTPS proxy URLs when the [`SOCKS` proxy support beta feature](/manuals/desktop/features/networking.md) is enabled.
 - Users can now filter volumes to see which ones are in use in the **Volumes** tab.
 
 ### Upgrades
@@ -648,7 +648,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 - [Docker Engine v25.0.3](https://docs.docker.com/engine/release-notes/25.0/#2503)
 - [Docker Scout CLI v1.5.0](https://github.com/docker/scout-cli/releases/tag/v1.5.0)
 - [Qemu 8.1.5](https://wiki.qemu.org/ChangeLog/8.1)
-- [Wasm](/manuals/desktop/wasm/_index.md) runtimes:
+- [Wasm](/manuals/desktop/features/wasm.md) runtimes:
   - Updated runwasi shims to `v0.4.0`, including:
     - wasmtime `v17.0`, with initial support for WASI preview 2
     - wasmedge `v0.13.5`
@@ -756,9 +756,9 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 ### New
 
 - Docker init now supports Java and is generally available to all users.
-- [Synchronized File Shares](synchronized-file-sharing.md) provides fast and flexible host-to-VM file sharing within Docker Desktop. Utilizing the technology behind [Docker’s acquisition of Mutagen](https://www.docker.com/blog/mutagen-acquisition/), this feature provides an alternative to virtual bind mounts that uses synchronized filesystem caches, improving performance for developers working with large codebases.
+- [Synchronized File Shares](/manuals/desktop/features/synchronized-file-sharing.md) provides fast and flexible host-to-VM file sharing within Docker Desktop. Utilizing the technology behind [Docker’s acquisition of Mutagen](https://www.docker.com/blog/mutagen-acquisition/), this feature provides an alternative to virtual bind mounts that uses synchronized filesystem caches, improving performance for developers working with large codebases.
 - Organization admins can now [configure Docker socket mount permissions](/manuals/security/for-admins/hardened-desktop/enhanced-container-isolation/config.md) when ECI is enabled.
-- [Containerd Image Store](containerd.md) support is now generally available to all users.
+- [Containerd Image Store](/manuals/desktop/features/containerd.md) support is now generally available to all users.
 - Get a debug shell into any container or image with the new [`docker debug` command](/reference/cli/docker/debug.md) (Beta).
 - Organization admins, with a Docker Business subscription, can now configure a custom list of extensions with [Private Extensions Marketplace](/manuals/extensions/private-marketplace.md) enabled (Beta)
 
@@ -868,7 +868,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 - [Compose v2.23.3](https://github.com/docker/compose/releases/tag/v2.23.3)
 - [Docker Scout CLI v1.2.0](https://github.com/docker/scout-cli/releases/tag/v1.2.0).
 - [Buildx v0.12.0](https://github.com/docker/buildx/releases/tag/v0.12.0)
-- [Wasm](/manuals/desktop/wasm/_index.md) runtimes:
+- [Wasm](/manuals/desktop/features/wasm.md) runtimes:
   - wasmtime, wasmedge and wasmer `v0.3.1`.
   - lunatic, slight, spin, and wws `v0.10.0`.
   - Wasmtime is now based on wasmtime `v14.0` and supports wasi preview-2 components
@@ -1070,7 +1070,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 - [Compose v2.22.0](https://github.com/docker/compose/releases/tag/v2.22.0)
 - [Go 1.21.1](https://github.com/golang/go/releases/tag/go1.21.1)
-- [Wasm](/manuals/desktop/wasm.md) runtimes:
+- [Wasm](/manuals/desktop/features/wasm.md) runtimes:
   - wasmtime, wasmedge `v0.2.0`.
   - lunatic, slight, spin, and wws`v0.9.1`.
   - Added wasmer wasm shims.
@@ -1131,7 +1131,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 - [Compose v2.21.0](https://github.com/docker/compose/releases/tag/v2.21.0)
 - [Docker Engine v24.0.6](https://docs.docker.com/engine/release-notes/24.0/#2406)
 - [Docker Scout CLI v0.24.1](https://github.com/docker/scout-cli/releases/tag/v0.24.1).
-- [Wasm](/manuals/desktop/wasm.md) runtimes:
+- [Wasm](/manuals/desktop/features/wasm.md) runtimes:
   - wasmtime, wasmedge revision `d0a1a1cd`.
   - slight and spin wasm `v0.9.0`.
 
@@ -1715,7 +1715,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 - Substantial performance improvements for macOS users with the option of enabling the new VirtioFS file sharing technology. Available for macOS 12.5 and above.
 - Docker Desktop for Mac no longer needs to install the privileged helper process `com.docker.vmnetd` on install or on the first run. For more information see [Permission requirements for Mac](https://docs.docker.com/desktop/mac/permission-requirements/).
-- Added [WebAssembly capabilities](wasm/_index.md). Use with the [containerd integration](containerd/_index.md).
+- Added [WebAssembly capabilities](/manuals/desktop/features/wasm.md). Use with the [containerd integration](/manuals/desktop/features/containerd.md).
 - Improved the descriptions for beta and experimental settings to clearly explain the differences and how people can access them.
 - Available disk space of VM now displays in the footer of Docker Desktop Dashboard for Mac and Linux.
 - A disk space warning now displays in the footer if available space is below 3GB.

@@ -5,11 +5,12 @@ keywords: wsl, wsl2, installing wsl2, wsl installation, docker wsl2, wsl docker,
   tech preview, wsl install docker, install docker wsl, how to install docker in wsl
 title: Docker Desktop WSL 2 backend on Windows
 linkTitle: WSL
-weight: 80
+weight: 100
 aliases:
 - /docker-for-windows/wsl/
 - /docker-for-windows/wsl-tech-preview/
 - /desktop/windows/wsl/
+- /desktop/wsl/
 ---
 
 Windows Subsystem for Linux (WSL) 2 is a full Linux kernel built by Microsoft, which lets Linux distributions run without managing virtual machines. With Docker Desktop running on WSL 2, users can leverage Linux workspaces and avoid maintaining both Linux and Windows build scripts. In addition, WSL 2 provides improvements to file system sharing and boot time.
@@ -106,4 +107,4 @@ Docker Desktop does not require any particular Linux distros to be installed. Th
 
 - [Explore best practices](best-practices.md)
 - [Understand how to develop with Docker and WSL 2](use-wsl.md)
-- [Learn about GPU support with WSL 2](../gpu.md)
+- [Learn about GPU support with WSL 2](/manuals/desktop/features/gpu.md)
