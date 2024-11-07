@@ -106,7 +106,7 @@
 "/reference/api/hub/dvp/":
   - /docker-hub/api/dvp/
 
-"/manuals/desktop/troubleshoot-and-support/support/"
+"/manuals/desktop/troubleshoot-and-support/support/":
   - /support/
 
 # feedback
