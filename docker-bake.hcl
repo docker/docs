@@ -10,6 +10,10 @@ variable "DOCS_SITE_DIR" {
   default = "public"
 }
 
+variable "DRY_RUN" {
+  default = null
+}
+
 group "default" {
   targets = ["release"]
 }
@@ -98,6 +102,7 @@ variable "AWS_LAMBDA_FUNCTION" {
 
 target "_common-aws" {
   args = {
+    DRY_RUN = DRY_RUN
     AWS_REGION = AWS_REGION
     AWS_S3_BUCKET = AWS_S3_BUCKET
     AWS_S3_CONFIG = AWS_S3_CONFIG
