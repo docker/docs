@@ -99,6 +99,7 @@ OCI
 OTel
 Okta
 PAT
+PEM
 Postgres
 PowerShell
 Python
@@ -140,6 +141,7 @@ WSL
 Wasm
 Windows
 WireMock
+Zscaler
 Zsh
 [Bb]uildx
 [Cc]odenames?
