@@ -72,23 +72,23 @@ To see the highest version of the API your Docker daemon and client support, use
 
 ```console
 $ docker version
-Client: Docker Engine - Community
- Version:           27.1.2
- API version:       1.46
- Go version:        go1.21.13
- Git commit:        d01f264
- Built:             Mon Aug 12 11:51:13 2024
- OS/Arch:           linux/amd64
- Context:           default
+Client:
+ Version:           27.3.1
+ API version:       1.47
+ Go version:        go1.22.7
+ Git commit:        ce12230
+ Built:             Fri Sep 20 11:38:18 2024
+ OS/Arch:           darwin/arm64
+ Context:           desktop-linux
 
-Server: Docker Engine - Community
+Server: Docker Desktop 4.36.0 (172961)
  Engine:
-  Version:          27.1.2
-  API version:      1.46 (minimum version 1.24)
-  Go version:       go1.21.13
-  Git commit:       f9522e5
-  Built:            Mon Aug 12 11:51:13 2024
-  OS/Arch:          linux/amd64
+  Version:          27.3.1
+  API version:      1.47 (minimum version 1.24)
+  Go version:       go1.22.7
+  Git commit:       41ca978
+  Built:            Fri Sep 20 11:41:19 2024
+  OS/Arch:          linux/arm64
   Experimental:     false
   ...
 ```
@@ -99,14 +99,14 @@ You can specify the API version to use in any of the following ways:
   that incorporates the API version with the features you need.
 - When using `curl` directly, specify the version as the first part of the URL.
   For instance, if the endpoint is `/containers/` you can use
-  `/v1.46/containers/`.
+  `/v1.47/containers/`.
 - To force the Docker CLI or the Docker Engine SDKs to use an older version
   of the API than the version reported by `docker version`, set the
   environment variable `DOCKER_API_VERSION` to the correct version. This works
   on Linux, Windows, or macOS clients.
 
   ```console
-  $ DOCKER_API_VERSION='1.44'
+  $ DOCKER_API_VERSION=1.46
   ```
 
   While the environment variable is set, that version of the API is used, even
@@ -127,6 +127,7 @@ You can specify the API version to use in any of the following ways:
 
 | Docker version | Maximum API version        | Change log                                                                   |
 |:---------------|:---------------------------|:-----------------------------------------------------------------------------|
+| 27.3           | [1.47](/reference/api/engine/version/v1.47/) | [changes](/reference/api/engine/version-history/#v147-api-changes) |
 | 27.2           | [1.47](/reference/api/engine/version/v1.47/) | [changes](/reference/api/engine/version-history/#v147-api-changes) |
 | 27.1           | [1.46](/reference/api/engine/version/v1.46/) | [changes](/reference/api/engine/version-history/#v146-api-changes) |
 | 27.0           | [1.46](/reference/api/engine/version/v1.46/) | [changes](/reference/api/engine/version-history/#v146-api-changes) |

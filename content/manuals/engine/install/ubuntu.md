@@ -50,6 +50,7 @@ To get started with Docker Engine on Ubuntu, make sure you
 To install Docker Engine, you need the 64-bit version of one of these Ubuntu
 versions:
 
+- Ubuntu Oracular 24.10
 - Ubuntu Noble 24.04 (LTS)
 - Ubuntu Jammy 22.04 (LTS)
 - Ubuntu Focal 20.04 (LTS)
@@ -157,8 +158,8 @@ Docker from the repository.
    # List the available versions:
    $ apt-cache madison docker-ce | awk '{ print $3 }'
 
-   5:27.1.1-1~ubuntu.24.04~noble
-   5:27.1.0-1~ubuntu.24.04~noble
+   5:27.3.1-1~ubuntu.24.04~noble
+   5:27.3.0-1~ubuntu.24.04~noble
    ...
    ```
 
