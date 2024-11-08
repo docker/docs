@@ -1,4 +1,3 @@
-A?GPL(v3)?
 APIs?
 Admin Console
 Amazon
