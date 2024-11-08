@@ -157,8 +157,8 @@ Docker from the repository.
    # List the available versions:
    $ apt-cache madison docker-ce | awk '{ print $3 }'
 
-   5:27.1.1-1~ubuntu.24.04~noble
-   5:27.1.0-1~ubuntu.24.04~noble
+   5:27.3.1-1~ubuntu.24.04~noble
+   5:27.3.0-1~ubuntu.24.04~noble
    ...
    ```
 
