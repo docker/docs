@@ -52,9 +52,9 @@ and ppc64le (ppc64el) architectures.
 
 Before you can install Docker Engine, you need to uninstall any conflicting packages.
 
-Distro maintainers provide unofficial distributions of Docker packages in
-their repositories. You must uninstall these packages before you can install the
-official version of Docker Engine.
+Your Linux distribution may provide unofficial Docker packages, which may conflict
+with the official packages provided by Docker. You must uninstall these packages
+before you install the official version of Docker Engine.
 
 The unofficial packages to uninstall are:
 
@@ -170,8 +170,7 @@ Docker from the repository.
    {{< /tab >}}
    {{< /tabs >}}
 
-3. Verify that the installation is successful by running the `hello-world`
-   image:
+3. Verify that the installation is successful by running the `hello-world` image:
 
    ```console
    $ sudo docker run hello-world
@@ -226,8 +225,7 @@ download a new file each time you want to upgrade Docker Engine.
 
    The Docker daemon starts automatically.
 
-6. Verify that the Docker Engine installation is successful by running the
-   `hello-world` image:
+6. Verify that the installation is successful by running the `hello-world` image:
 
    ```console
    $ sudo service docker start
@@ -250,26 +248,26 @@ To upgrade Docker Engine, download the newer package files and repeat the
 
 ## Uninstall Docker Engine
 
-1.  Uninstall the Docker Engine, CLI, containerd, and Docker Compose packages:
+1. Uninstall the Docker Engine, CLI, containerd, and Docker Compose packages:
 
-    ```console
-    $ sudo apt-get purge docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras
-    ```
+   ```console
+   $ sudo apt-get purge docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras
+   ```
 
-2.  Images, containers, volumes, or custom configuration files on your host
-    aren't automatically removed. To delete all images, containers, and volumes:
+2. Images, containers, volumes, or custom configuration files on your host
+   aren't automatically removed. To delete all images, containers, and volumes:
 
-    ```console
-    $ sudo rm -rf /var/lib/docker
-    $ sudo rm -rf /var/lib/containerd
-    ```
+   ```console
+   $ sudo rm -rf /var/lib/docker
+   $ sudo rm -rf /var/lib/containerd
+   ```
 
-3.  Remove source list and keyrings
+3. Remove source list and keyrings
 
-    ```console
-    $ sudo rm /etc/apt/sources.list.d/docker.list
-    $ sudo rm /etc/apt/keyrings/docker.asc
-    ```
+   ```console
+   $ sudo rm /etc/apt/sources.list.d/docker.list
+   $ sudo rm /etc/apt/keyrings/docker.asc
+   ```
 
 You have to delete any edited configuration files manually.
 
