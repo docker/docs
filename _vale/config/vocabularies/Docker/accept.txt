@@ -93,12 +93,10 @@ NTLM
 Netplan
 Nginx
 Nuxeo
-OAT
 OAuth
 OCI
 OTel
 Okta
-PAT
 PEM
 Postgres
 PowerShell
