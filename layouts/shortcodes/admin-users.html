@@ -3,7 +3,6 @@
 {{ $member_navigation := "Select **Organizations**, your organization, and then **Members**." }}
 {{ $remove_button := "**Remove member**" }}
 {{ $product_link := "[Docker Hub](https://hub.docker.com)" }}
-{{ $update_role := "Select the role you want to assign, then select **Save**." }}
 {{ $role_mapping_link := "[SCIM for role mapping](/security/for-admins/provisioning/scim/)" }}
 {{ $export_fields := `The CSV file for an organization contains the following fields:
 * **Name**: The user's name.
@@ -32,7 +31,6 @@
 * **Account Created**: The time and date when the user account was created.` }}
 {{ $member_navigation = "Select your company in the left navigation drop-down menu, and then select **Users**." }}
 {{ $remove_button = "**Remove user**" }}
-Select their organization, select the role you want to assign, and then select **Save**.{{ $update_role = "" }}
 {{ $role_mapping_link = "[SCIM for role mapping](/security/for-admins/provisioning/scim/)"}}
 {{ end }}
 {{ end }}
@@ -129,51 +127,3 @@ To invite multiple members to an organization via a CSV file containing email ad
 
 Pending invitations appear in the table. The invitees receive an email with a link to Docker Hub where they can accept
 or decline the invitation.
-
-## Resend invitations
-
-To resend an invitation if the invite is pending or declined:
-
-1. Sign in to {{ $product_link }}.
-2. {{ $member_navigation }}
-3. In the table, locate the invitee, select the **Action** icon, and then select **Resend invitation**.
-4. Select **Invite** to confirm.
-
-## Remove a member or invitee
-
-To remove a member from an organization:
-
-1. Sign in to {{ $product_link }}.
-2. {{ $member_navigation }}
-3. In the table, select the **Action** icon, and then select {{ $remove_button }} or **Remove invitee**.
-4. Follow the on-screen instructions to remove the member or invitee.
-
-## Update a member role
-
-Organization owners can manage [roles](/security/for-admins/roles-and-permissions/)
-within an organization. If an organization is part of a company,
-the company owner can also manage that organization's roles. If you have SSO enabled, you can use {{ $role_mapping_link }}.
-
-> **Note**
->
-> If you're the only owner of an organization,
-> you need to assign a new owner before you can edit your role.
-
-To update a member role:
-
-1. Sign in to {{ $product_link }}.
-2. {{ $member_navigation }}
-3. Find the username of the member whose role you want to edit. In the table, select the **Actions** icon.
-4. Select **Edit role**.
-5. {{ $update_role }}
-
-## Export members
-
-Owners can export a CSV file containing all members.
-{{ $export_fields }}
-
-To export a CSV file of the members:
-
-1. Sign in to {{ $product_link }}.
-2. {{ $member_navigation }}
-3. Select {{ $export_button }}.
