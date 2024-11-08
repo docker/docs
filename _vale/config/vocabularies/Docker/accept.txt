@@ -1,4 +1,4 @@
-APIs?
+(?-i)[A-Z]{3,}s
 Admin Console
 Amazon
 Anchore
@@ -10,7 +10,6 @@ Azure
 Btrfs
 BuildKit
 BusyBox
-CVEs?
 CentOS
 Ceph
 Chrome
@@ -44,7 +43,6 @@ Ethernet
 Fargate
 Fedora
 Flink
-GPUs?
 GeoNetwork
 Git
 GitHub( Actions)?
@@ -80,8 +78,6 @@ Postgres
 PowerShell
 Python
 S3
-SBOMs?
-SDKs?
 SQLite
 Slack
 Snyk
@@ -91,7 +87,6 @@ Syft
 Sysdig
 Testcontainers
 Traefik
-URLs?
 Ubuntu
 Unix
 VMware
