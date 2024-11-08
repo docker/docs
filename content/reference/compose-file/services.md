@@ -1505,7 +1505,7 @@ ports:
     mode: host
 ```
 
-## post_start
+### post_start
 
 {{< introduced compose 2.30.0 "../../manuals/compose/releases/release-notes.md#2300" >}}
 
@@ -1530,7 +1530,7 @@ services:
 
 For more information, see [Use lifecycle hooks](/manuals/compose/how-tos/lifecycle.md).
 
-## pre_stop
+### pre_stop
 
 {{< introduced compose 2.30.0 "../../manuals/compose/releases/release-notes.md#2300" >}}
 
