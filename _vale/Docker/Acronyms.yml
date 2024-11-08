@@ -32,6 +32,7 @@ exceptions:
   - GDB
   - GET
   - GHSA
+  - GNU
   - GPU
   - GTK
   - GUI
