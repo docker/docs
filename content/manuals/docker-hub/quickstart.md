@@ -40,12 +40,12 @@ To search or browse for content on Docker Hub:
 3. In the filters, select **Docker Official Image**.
 
    Filtering by Trusted Content ensures that you see only high-quality, secure
-   images, curated by Docker and verified publishing partners.
+   images curated by Docker and verified publishing partners.
 
-4. In the results, select the Nginx image.
+4. In the results, select the **nginx** image.
 
    Selecting the image opens the image's page where you can learn more about how
-   to use the image. In the page, you'll also find the `docker pull` command to
+   to use the image. On the page, you'll also find the `docker pull` command to
    pull the image.
 
 Now that you've found an image, it's time to pull and run it on your device.
@@ -161,7 +161,7 @@ customize your own images to suit specific needs.
 4. Visit [https://localhost:8080](https://localhost:8080) to view the page. You
    should see `Hello world from Docker!`.
 
-5. In the terminal, press ctrl+c to stop the container.
+5. In the terminal, press CTRL+C to stop the container.
 
 6. Sign in to Docker Desktop. You must be signed in before pushing an image to
    Docker Hub.
