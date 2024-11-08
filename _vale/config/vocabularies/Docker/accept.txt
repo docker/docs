@@ -4,7 +4,6 @@ ARM
 AWS
 Admin Console
 Amazon
-Ambassador
 Anchore
 Apple
 Artifactory
