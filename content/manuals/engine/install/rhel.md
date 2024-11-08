@@ -236,8 +236,8 @@ You have now successfully installed and started Docker Engine.
 #### Upgrade Docker Engine
 
 To upgrade Docker Engine, download the newer package files and repeat the
-[installation procedure](#install-from-a-package), using `yum -y upgrade`
-instead of `yum -y install`, and point to the new files.
+[installation procedure](#install-from-a-package), using `yum upgrade`
+instead of `yum install`, and point to the new files.
 
 {{< include "install-script.md" >}}
 
