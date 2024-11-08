@@ -31,6 +31,7 @@ swap:
   check box: checkbox
   check boxes: checkboxes
   click: select
+  distro: distribution
   ergo: therefore
   file name: filename
   keypress: keystroke

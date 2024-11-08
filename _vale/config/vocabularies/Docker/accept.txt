@@ -144,7 +144,6 @@ Zsh
 [Bb]uildx
 [Cc]odenames?
 [Cc]ompose
-[Dd]istros
 [Ff]ilepaths?
 [Ff]iletypes?
 [GgCc]oroutine
