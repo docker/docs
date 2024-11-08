@@ -313,8 +313,8 @@ On Windows in WSL 2 mode, you can configure which WSL 2 distributions will have 
 WSL integration.
 
 By default, the integration is enabled on your default WSL distribution.
-To change your default WSL distro, run `wsl --set-default <distro name>`. (For example,
-to set Ubuntu as your default WSL distro, run `wsl --set-default ubuntu`).
+To change your default WSL distribution, run `wsl --set-default <distribution name>`. (For example,
+to set Ubuntu as your default WSL distribution, run `wsl --set-default ubuntu`).
 
 You can also select any additional distributions you would like to enable the WSL 2 integration on.
 
