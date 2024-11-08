@@ -5,6 +5,7 @@ title: Get support
 weight: 20
 aliases:
  - /desktop/support/
+ - /support/
 ---
 
 Find information on how to get support, and the scope of Docker Desktop support.

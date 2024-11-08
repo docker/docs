@@ -13,6 +13,20 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.30.3
+
+{{< release-date date="2024-11-07" >}}
+
+### Update
+
+- Dependencies upgrade: bump compose-go to v2.4.4
+
+### Bug fixes and enhancements
+
+- Fixed an issue re-starting services that should not when using `--watch`
+- Improve the fix of using same YAML anchor multiple times in a Compose file
+
+
 ## 2.30.2
 
 {{< release-date date="2024-11-05" >}}
