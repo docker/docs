@@ -62,9 +62,9 @@ s390x, and ppc64le (ppc64el) architectures.
 
 Before you can install Docker Engine, you need to uninstall any conflicting packages.
 
-Distro maintainers provide unofficial distributions of Docker packages in
-APT. You must uninstall these packages before you can install the official
-version of Docker Engine.
+Your Linux distribution may provide unofficial Docker packages, which may conflict
+with the official packages provided by Docker. You must uninstall these packages
+before you install the official version of Docker Engine.
 
 The unofficial packages to uninstall are:
 
@@ -111,7 +111,7 @@ You can install Docker Engine in different ways, depending on your needs:
 ### Install using the `apt` repository {#install-using-the-repository}
 
 Before you install Docker Engine for the first time on a new host machine, you
-need to set up the Docker repository. Afterward, you can install and update
+need to set up the Docker `apt` repository. Afterward, you can install and update
 Docker from the repository.
 
 1. Set up Docker's `apt` repository.
@@ -173,8 +173,7 @@ Docker from the repository.
    {{< /tab >}}
    {{< /tabs >}}
 
-3. Verify that the Docker Engine installation is successful by running the
-   `hello-world` image.
+3. Verify that the installation is successful by running the `hello-world` image:
 
    ```console
    $ sudo docker run hello-world
@@ -229,8 +228,7 @@ download a new file each time you want to upgrade Docker Engine.
 
    The Docker daemon starts automatically.
 
-6. Verify that the Docker Engine installation is successful by running the
-   `hello-world` image.
+6. Verify that the installation is successful by running the `hello-world` image:
 
    ```console
    $ sudo service docker start

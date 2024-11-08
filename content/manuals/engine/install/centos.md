@@ -36,9 +36,11 @@ default. If you have disabled it, you need to re-enable it.
 
 ### Uninstall old versions
 
-Older versions of Docker went by `docker` or `docker-engine`.
-Uninstall any such older versions before attempting to install a new version,
-along with associated dependencies.
+Before you can install Docker Engine, you need to uninstall any conflicting packages.
+
+Your Linux distribution may provide unofficial Docker packages, which may conflict
+with the official packages provided by Docker. You must uninstall these packages
+before you install the official version of Docker Engine.
 
 ```console
 $ sudo dnf remove docker \
@@ -91,7 +93,7 @@ $ sudo dnf config-manager --add-repo {{% param "download-url-base" %}}/docker-ce
 
 #### Install Docker Engine
 
-1. Install Docker Engine, containerd, and Docker Compose:
+1. Install the Docker packages.
 
    {{< tabs >}}
    {{< tab name="Latest" >}}
@@ -152,8 +154,7 @@ $ sudo dnf config-manager --add-repo {{% param "download-url-base" %}}/docker-ce
    boot your system. If you don't want Docker to start automatically, use `sudo
    systemctl start docker` instead.
 
-3. Verify that the Docker Engine installation is successful by running the
-   `hello-world` image.
+3. Verify that the installation is successful by running the `hello-world` image:
 
    ```console
    $ sudo docker run hello-world
@@ -202,8 +203,7 @@ download a new file each time you want to upgrade Docker Engine.
    boot your system. If you don't want Docker to start automatically, use `sudo
    systemctl start docker` instead.
 
-4. Verify that the Docker Engine installation is successful by running the
-   `hello-world` image.
+4. Verify that the installation is successful by running the `hello-world` image:
 
    ```console
    $ sudo docker run hello-world
