@@ -1,7 +1,7 @@
 ---
 description: Learn how to install Docker Engine on CentOS. These instructions cover
   the different installation methods, how to uninstall, and next steps.
-keywords: requirements, yum, installation, centos, install, uninstall, docker engine, upgrade, update
+keywords: requirements, dnf, yum, installation, centos, install, uninstall, docker engine, upgrade, update
 title: Install Docker Engine on CentOS
 linkTitle: CentOS
 weight: 60
@@ -41,7 +41,7 @@ Uninstall any such older versions before attempting to install a new version,
 along with associated dependencies.
 
 ```console
-$ sudo yum remove docker \
+$ sudo dnf remove docker \
                   docker-client \
                   docker-client-latest \
                   docker-common \
@@ -51,7 +51,7 @@ $ sudo yum remove docker \
                   docker-engine
 ```
 
-`yum` might report that you have none of these packages installed.
+`dnf` might report that you have none of these packages installed.
 
 Images, containers, volumes, and networks stored in `/var/lib/docker/` aren't
 automatically removed when you uninstall Docker.
@@ -81,12 +81,12 @@ Docker from the repository.
 
 #### Set up the repository
 
-Install the `yum-utils` package (which provides the `yum-config-manager`
-utility) and set up the repository.
+Install the `dnf-plugins-core` package (which provides the commands to manage
+your DNF repositories) and set up the repository.
 
 ```console
-$ sudo yum install -y yum-utils
-$ sudo yum-config-manager --add-repo {{% param "download-url-base" %}}/docker-ce.repo
+$ sudo dnf -y install dnf-plugins-core
+$ sudo dnf config-manager --add-repo {{% param "download-url-base" %}}/docker-ce.repo
 ```
 
 #### Install Docker Engine
@@ -99,7 +99,7 @@ $ sudo yum-config-manager --add-repo {{% param "download-url-base" %}}/docker-ce
    To install the latest version, run:
 
    ```console
-   $ sudo yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+   $ sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
    ```
 
    If prompted to accept the GPG key, verify that the fingerprint matches
@@ -115,7 +115,7 @@ $ sudo yum-config-manager --add-repo {{% param "download-url-base" %}}/docker-ce
    the repository:
 
    ```console
-   $ yum list docker-ce --showduplicates | sort -r
+   $ dnf list docker-ce --showduplicates | sort -r
 
    docker-ce.x86_64    3:27.3.1-1.el9    docker-ce-stable
    docker-ce.x86_64    3:27.3.0-1.el9    docker-ce-stable
@@ -133,7 +133,7 @@ $ sudo yum-config-manager --add-repo {{% param "download-url-base" %}}/docker-ce
    command to install:
 
    ```console
-   $ sudo yum install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io docker-buildx-plugin docker-compose-plugin
+   $ sudo dnf install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io docker-buildx-plugin docker-compose-plugin
    ```
 
    This command installs Docker, but it doesn't start Docker. It also creates a
@@ -186,7 +186,7 @@ download a new file each time you want to upgrade Docker Engine.
    the Docker package.
 
    ```console
-   $ sudo yum install /path/to/package.rpm
+   $ sudo dnf install /path/to/package.rpm
    ```
 
    Docker is installed but not started. The `docker` group is created, but no
@@ -219,8 +219,8 @@ You have now successfully installed and started Docker Engine.
 #### Upgrade Docker Engine
 
 To upgrade Docker Engine, download the newer package files and repeat the
-[installation procedure](#install-from-a-package), using `yum upgrade`
-instead of `yum install`, and point to the new files.
+[installation procedure](#install-from-a-package), using `dnf upgrade`
+instead of `dnf install`, and point to the new files.
 
 {{< include "install-script.md" >}}
 
@@ -229,7 +229,7 @@ instead of `yum install`, and point to the new files.
 1. Uninstall the Docker Engine, CLI, containerd, and Docker Compose packages:
 
    ```console
-   $ sudo yum remove docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras
+   $ sudo dnf remove docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras
    ```
 
 2. Images, containers, volumes, or custom configuration files on your host
