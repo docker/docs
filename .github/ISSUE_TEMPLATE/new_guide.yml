@@ -22,4 +22,4 @@ body:
         and someone (a Docker employee, Docker captain, or community member)
         may pick it up and start working on it.
       options:
-        - label: Yes
+        - label: "Yes"
