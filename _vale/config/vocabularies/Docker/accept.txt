@@ -1,4 +1,4 @@
-(?-i)[A-Z]{3,}s
+(?-i)[A-Z]{2,}s
 Admin Console
 Amazon
 Anchore
