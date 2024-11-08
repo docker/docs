@@ -139,7 +139,7 @@ $ sudo dnf-3 config-manager --add-repo {{% param "download-url-base" %}}/docker-
    {{< /tab >}}
    {{< /tabs >}}
 
-2. Start Docker.
+2. Start Docker Engine.
 
    ```console
    $ sudo systemctl enable --now docker
@@ -189,7 +189,7 @@ download a new file each time you want to upgrade Docker Engine.
    Docker is installed but not started. The `docker` group is created, but no
    users are added to the group.
 
-3. Start Docker.
+3. Start Docker Engine.
 
    ```console
    $ sudo systemctl enable --now docker
