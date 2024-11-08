@@ -13,6 +13,21 @@ issues, and bug fixes in [Dockerfile reference](/reference/dockerfile.md).
 
 For usage, see the [Dockerfile frontend syntax](frontend.md) page.
 
+## 1.11.1
+
+{{< release-date date="2024-11-08" >}}
+
+The full release note for this release is available
+[on GitHub](https://github.com/moby/buildkit/releases/tag/dockerfile%2F1.11.1).
+
+```dockerfile
+# syntax=docker/dockerfile:1.11.1
+```
+
+- Fix regression when using the `ONBUILD` instruction in stages inherited within the same Dockerfile. [moby/buildkit#5490]
+
+[moby/buildkit#5490]: https://github.com/moby/buildkit/pull/5490
+
 ## 1.11.0
 
 {{< release-date date="2024-10-30" >}}

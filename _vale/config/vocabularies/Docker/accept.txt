@@ -76,6 +76,7 @@ Jamf
 JFrog
 JetBrains
 Kerberos
+[Kk]eyrings?
 Kitematic
 Kubernetes
 LTS
@@ -99,6 +100,7 @@ OCI
 OTel
 Okta
 PAT
+PEM
 Postgres
 PowerShell
 Python
@@ -136,10 +138,12 @@ Unix
 VLAN
 VM
 VMware
+VPN
 WSL
 Wasm
 Windows
 WireMock
+Zscaler
 Zsh
 [Bb]uildx
 [Cc]odenames?

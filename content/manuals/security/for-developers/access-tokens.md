@@ -4,7 +4,7 @@ linkTitle: Access tokens
 description: Learn how to create and manage your personal Docker access tokens
   to securely push and pull images programmatically.
 keywords: docker hub, hub, security, PAT, personal access token
-aliases: 
+aliases:
 - /docker-hub/access-tokens/
 ---
 
@@ -13,9 +13,8 @@ You can create a personal access token (PAT) to use as an alternative to your pa
 Compared to passwords, PATs provide the following advantages:
 
 - You can investigate when the PAT was last used and then disable or delete it if you find any suspicious activity.
-- When using an access token, you can't perform any admin activity on the account, including changing the password. It protects your account if your computer is compromised.
-  
-Access tokens are also valuable for building integrations, as you can issue multiple tokens, one for each integration, and revoke them at
+- When using an access token, you can't perform any administrative activity on the account, including changing the password. It protects your account if your computer is compromised.
+- Access tokens are valuable for building integrations, as you can issue multiple tokens, one for each integration, and revoke them at
 any time.
 
 ## Create an access token
@@ -23,6 +22,8 @@ any time.
 > [!IMPORTANT]
 >
 > Treat access tokens like your password and keep them secret. Store your tokens securely in a credential manager for example.
+
+Use the Docker Admin Console to create an access token.
 
 1. Sign in to your [Docker account](https://app.docker.com/login).
 
@@ -33,15 +34,16 @@ any time.
 4. Select **Generate new token**.
 
 5. Add a description for your token. Use something that indicates the use case or purpose of the token.
-   
-6. Set the access permissions.
+
+6. Select the expiration date for the token.
+
+7. Set the access permissions.
    The access permissions are scopes that set restrictions in your
    repositories. For example, for Read & Write permissions, an automation
    pipeline can build an image and then push it to a repository. However, it
    can't delete the repository.
 
-7. Select **Generate** and then copy the token that appears on the screen and save it. You won't be able
-   to retrieve the token once you close this prompt.
+8. Select **Generate** and then copy the token that appears on the screen and save it. You won't be able to retrieve the token once you close this prompt.
 
 ## Use an access token
 
@@ -63,6 +65,10 @@ When prompted for a password, enter your personal access token instead of a pass
 
 ## Modify existing tokens
 
+> [!NOTE]
+>
+> You can't edit the expiration date on an existing token. You must create a new PAT if you need to set a new expiration date.
+
 You can rename, activate, deactivate, or delete a token as needed. You can manage your tokens in your account settings.
 
 1. Sign in to your [Docker account](https://app.docker.com/login).
@@ -81,4 +87,4 @@ You can rename, activate, deactivate, or delete a token as needed. You can manag
 
 When you sign in to your Docker account with Docker Desktop, Docker Desktop generates an authentication token on your behalf. When you interact with Docker Hub using the Docker CLI, the CLI uses this token for authentication. The token scope has Read, Write, and Delete access. If your Docker Desktop session expires, the token is automatically removed locally.
 
-You can have up to 5 auto-generated tokens associated with your account. These are deleted and created automatically based on usage and creation dates. You can also delete your auto-generated tokens as needed. See [Modify existing tokens](#modify-existing-tokens).
+You can have up to 5 auto-generated tokens associated with your account. These are deleted and created automatically based on usage and creation dates. You can also delete your auto-generated tokens as needed. For more information, see [Modify existing tokens](#modify-existing-tokens).

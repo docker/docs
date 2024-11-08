@@ -3,7 +3,6 @@
 {{ $member_navigation := "Select **Organizations**, your organization, and then **Members**." }}
 {{ $remove_button := "**Remove member**" }}
 {{ $product_link := "[Docker Hub](https://hub.docker.com)" }}
-{{ $update_role := "Select the role you want to assign, then select **Save**." }}
 {{ $role_mapping_link := "[SCIM for role mapping](/security/for-admins/provisioning/scim/)" }}
 {{ $export_fields := `The CSV file for an organization contains the following fields:
 * **Name**: The user's name.
@@ -32,16 +31,13 @@
 * **Account Created**: The time and date when the user account was created.` }}
 {{ $member_navigation = "Select your company in the left navigation drop-down menu, and then select **Users**." }}
 {{ $remove_button = "**Remove user**" }}
-{{ $update_role = "Select their organization, select the role you want to assign, and then select **Save**." }}
 {{ $role_mapping_link = "[SCIM for role mapping](/security/for-admins/provisioning/scim/)"}}
 {{ end }}
 {{ end }}
 
-## Invite members
-
-Owners can invite new members to an organization via Docker ID, email address, or via a CSV file containing email
+Owners can invite new members to an organization via Docker ID, email address, or with a CSV file containing email
 addresses. If an invitee does not have a Docker account, they must create an account and verify their email address
-before they can accept the invitation to join the organization. When inviting members, their pending invitation occupies
+before they can accept an invitation to join the organization. When inviting members, their pending invitation occupies
 a seat.
 
 ### Invite members via Docker ID or email address
@@ -110,12 +106,12 @@ To invite multiple members to an organization via a CSV file containing email ad
    Valid email addresses and any email addresses that have issues appear.
    Email addresses may have the following issues:
 
-   - **Invalid email**: The email address is not a valid address.
+   - Invalid email: The email address is not a valid address.
      The email address will be ignored if you send invites.
      You can correct the email address in the CSV file and re-import the file.
-   - **Already invited**: The user has already been sent an invite email and another invite email will not be sent.
-   - **Member**: The user is already a member of your organization and an invite email will not be sent.
-   - **Duplicate**: The CSV file has multiple occurrences of the same email address.
+   - Already invited: The user has already been sent an invite email and another invite email will not be sent.
+   - Member: The user is already a member of your organization and an invite email will not be sent.
+   - Duplicate: The CSV file has multiple occurrences of the same email address.
      The user will be sent only one invite email.
 
 9. Follow the on-screen instructions to invite members.
@@ -153,7 +149,7 @@ Organization owners can manage [roles](/security/for-admins/roles-and-permission
 within an organization. If an organization is part of a company,
 the company owner can also manage that organization's roles. If you have SSO enabled, you can use {{ $role_mapping_link }}.
 
-> [!NOTE]
+> **Note**
 >
 > If you're the only owner of an organization,
 > you need to assign a new owner before you can edit your role.

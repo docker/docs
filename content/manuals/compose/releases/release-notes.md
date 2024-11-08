@@ -13,6 +13,33 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.30.3
+
+{{< release-date date="2024-11-07" >}}
+
+### Update
+
+- Dependencies upgrade: bump compose-go to v2.4.4
+
+### Bug fixes and enhancements
+
+- Fixed an issue re-starting services that should not when using `--watch`
+- Improve the fix of using same YAML anchor multiple times in a Compose file
+
+
+## 2.30.2
+
+{{< release-date date="2024-11-05" >}}
+
+### Update
+
+- Dependencies upgrade: bump compose-go to v2.4.3
+
+### Bug fixes and enhancements
+
+- Fixed an issue re-creating services when updating its profiles 
+- Fixed a regression when using the same YAML anchor multiple times in a Compose file
+
 ## 2.30.1
 
 {{< release-date date="2024-10-30" >}}
@@ -3851,7 +3878,7 @@ The highlights:
 
    This means the GitHub repository has moved to [https://github.com/docker/fig](https://github.com/docker/fig) and our IRC channel is now #docker-fig on Freenode.
 
- - Fig can be used with the [official Docker OS X installer](/manuals/desktop/install/mac-install.md). Boot2Docker will mount the home directory from your host machine so volumes work as expected.
+ - Fig can be used with the [official Docker OS X installer](/manuals/desktop/setup/install/mac-install.md). Boot2Docker will mount the home directory from your host machine so volumes work as expected.
 
  - Fig supports Docker 1.3.
 

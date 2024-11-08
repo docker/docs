@@ -88,7 +88,7 @@
 "/desktop/use-desktop/pause/":
   - /go/mac-desktop-pause/
   - /go/win-desktop-pause/
-"/desktop/settings/#file-sharing":
+"/desktop/settings-and-maintenance/settings/#file-sharing":
   - /go/mac-file-sharing/
 "/engine/security/rootless/":
   # Instructions on running docker in rootless mode. This redirect is currently
@@ -98,7 +98,7 @@
   - /go/storage-driver/
 "/docker-hub/vulnerability-scanning/":
   - /go/tip-scanning/
-"/desktop/windows/wsl/":
+"/desktop/windows/features/wsl/":
   # Link used by Docker Desktop to refer users on how to activate WSL 2
   - /go/wsl2/
 "/reference/api/hub/latest/":

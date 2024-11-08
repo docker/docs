@@ -83,7 +83,10 @@
         updateVisible() {
           const hiddenSet = new Set();
           // show if no filters have been selected
-          if (this.noFilters()) return;
+          if (this.noFilters()) {
+            this.hidden = [];
+            return;
+          };
           const guideContainer = this.$refs['guide-container'];
           const guides = guideContainer.children
 
