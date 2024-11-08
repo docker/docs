@@ -137,6 +137,7 @@ Unix
 VLAN
 VM
 VMware
+VPN
 WSL
 Wasm
 Windows
