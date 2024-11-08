@@ -76,6 +76,7 @@ Jamf
 JFrog
 JetBrains
 Kerberos
+[Kk]eyrings?
 Kitematic
 Kubernetes
 LTS

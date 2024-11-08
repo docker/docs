@@ -58,9 +58,11 @@ $ sudo zypper addrepo $opensuse_repo
 
 ### Uninstall old versions
 
-Older versions of Docker went by `docker` or `docker-engine`.
-Uninstall any such older versions before attempting to install a new version,
-along with associated dependencies.
+Before you can install Docker Engine, you need to uninstall any conflicting packages.
+
+Your Linux distribution may provide unofficial Docker packages, which may conflict
+with the official packages provided by Docker. You must uninstall these packages
+before you install the official version of Docker Engine.
 
 ```console
 $ sudo zypper remove docker \
@@ -112,7 +114,7 @@ $ sudo zypper addrepo {{% param "download-url-base" %}}/docker-ce.repo
 
 #### Install Docker Engine
 
-1. Install Docker Engine, containerd, and Docker Compose:
+1. Install the Docker packages.
 
    {{< tabs >}}
    {{< tab name="Latest" >}}
@@ -128,7 +130,7 @@ $ sudo zypper addrepo {{% param "download-url-base" %}}/docker-ce.repo
 
    This command installs Docker, but it doesn't start Docker. It also creates a
    `docker` group, however, it doesn't add any users to the group by default.
-  
+
    {{< /tab >}}
    {{< tab name="Specific version" >}}
 
@@ -162,14 +164,17 @@ $ sudo zypper addrepo {{% param "download-url-base" %}}/docker-ce.repo
    {{< /tab >}}
    {{< /tabs >}}
 
-2. Start Docker.
+2. Start Docker Engine.
 
    ```console
-   $ sudo systemctl start docker
+   $ sudo systemctl enable --now docker
    ```
 
-3. Verify that the Docker Engine installation is successful by running the
-   `hello-world` image.
+   This configures the Docker systemd service to start automatically when you
+   boot your system. If you don't want Docker to start automatically, use `sudo
+   systemctl start docker` instead.
+
+3. Verify that the installation is successful by running the `hello-world` image:
 
    ```console
    $ sudo docker run hello-world
@@ -208,14 +213,17 @@ download a new file each time you want to upgrade Docker Engine.
    Docker is installed but not started. The `docker` group is created, but no
    users are added to the group.
 
-3. Start Docker.
+3. Start Docker Engine.
 
    ```console
-   $ sudo systemctl start docker
+   $ sudo systemctl enable --now docker
    ```
 
-4. Verify that the Docker Engine installation is successful by running the
-   `hello-world` image.
+   This configures the Docker systemd service to start automatically when you
+   boot your system. If you don't want Docker to start automatically, use `sudo
+   systemctl start docker` instead.
+
+4. Verify that the installation is successful by running the `hello-world` image:
 
    ```console
    $ sudo docker run hello-world
