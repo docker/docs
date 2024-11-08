@@ -51,6 +51,7 @@ exceptions:
   - HTTPS
   - IAM
   - IDE
+  - IP
   - JAR
   - JSON
   - JSX

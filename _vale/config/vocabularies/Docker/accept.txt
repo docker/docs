@@ -50,7 +50,6 @@ Google
 Grafana
 Gravatar
 HyperKit
-IPs?
 IPv[46]
 IPvlan
 Intel
