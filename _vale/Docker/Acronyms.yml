@@ -14,13 +14,18 @@ exceptions:
   - AUFS
   - AWS
   - BIOS
+  - CISA
   - CLI
+  - CNCF
+  - CORS
   - CPU
   - CSS
   - CSV
   - CVE
   - DCT
   - DEBUG
+  - DHCP
+  - DNS
   - DOM
   - DPI
   - DSOS
@@ -33,53 +38,81 @@ exceptions:
   - GET
   - GHSA
   - GNU
+  - GPG
   - GPU
+  - GRUB
   - GTK
   - GUI
   - HEAD
   - HTML
   - HTTP
   - HTTPS
+  - IAM
   - IDE
   - JAR
   - JSON
   - JSX
   - LESS
   - LLDB
+  - LTS
+  - MAC
+  - MDM
+  - NAT
   - NET
   - NFS
   - NOTE
+  - NTLM
   - NVDA
+  - OCI
   - OSS
   - PATH
   - PDF
+  - PEM
   - PHP
   - POSIX
   - POST
+  - QEMU
   - RAM
   - REPL
   - REST
+  - RHEL
+  - RPM
   - RSA
+  - SAML
+  - SARIF
   - SBOM
+  - SCIM
   - SCM
   - SCSS
   - SDK
+  - SLES
+  - SLSA
+  - SPDX
   - SQL
   - SSD
   - SSH
   - SSL
+  - SSO
   - SVG
   - TBD
   - TCP
+  - TCP
   - TIP
+  - TLS
   - TODO
   - TTY
+  - TXT
+  - UDP
   - URI
   - URL
   - USB
   - USD
   - UTF
+  - UUID
   - VAT
+  - VLAN
+  - VM
+  - VPN
   - WSL
   - XML
   - XSS
