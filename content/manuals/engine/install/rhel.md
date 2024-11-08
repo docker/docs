@@ -212,8 +212,12 @@ download a new file each time you want to upgrade Docker Engine.
 6. Start Docker.
 
    ```console
-   $ sudo systemctl start docker
+   $ sudo systemctl enable --now docker
    ```
+
+   This configures the Docker systemd service to start automatically when you
+   boot your system. If you don't want Docker to start automatically, use `sudo
+   systemctl start docker` instead.
 
 7. Verify that the Docker Engine installation is successful by running the
    `hello-world` image.
