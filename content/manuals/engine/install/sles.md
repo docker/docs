@@ -162,11 +162,17 @@ $ sudo zypper addrepo {{% param "download-url-base" %}}/docker-ce.repo
    {{< /tab >}}
    {{< /tabs >}}
 
-2. Start Docker.
+2. Start Docker Engine.
+
+   Start the Docker Engine and containerd as a systemd service that will launch
+   on boot:
 
    ```console
-   $ sudo systemctl start docker
+   $ sudo systemctl enable --now containerd docker
    ```
+
+   If you prefer Docker to only start manually, use `sudo systemctl start docker`
+   instead, which runs it only for the current session.
 
 3. Verify that the Docker Engine installation is successful by running the
    `hello-world` image.
@@ -208,11 +214,17 @@ download a new file each time you want to upgrade Docker Engine.
    Docker is installed but not started. The `docker` group is created, but no
    users are added to the group.
 
-3. Start Docker.
+3. Start Docker Engine.
+
+   Start the Docker Engine and containerd as a systemd service that will launch
+   on boot:
 
    ```console
-   $ sudo systemctl start docker
+   $ sudo systemctl enable --now containerd docker
    ```
+
+   If you prefer Docker to only start manually, use `sudo systemctl start docker`
+   instead, which runs it only for the current session.
 
 4. Verify that the Docker Engine installation is successful by running the
    `hello-world` image.
