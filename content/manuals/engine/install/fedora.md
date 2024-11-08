@@ -130,7 +130,7 @@ $ sudo dnf-3 config-manager --add-repo {{% param "download-url-base" %}}/docker-
    command to install:
 
    ```console
-   $ sudo dnf -y install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io docker-buildx-plugin docker-compose-plugin
+   $ sudo dnf install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io docker-buildx-plugin docker-compose-plugin
    ```
 
    This command installs Docker, but it doesn't start Docker. It also creates a
@@ -142,8 +142,12 @@ $ sudo dnf-3 config-manager --add-repo {{% param "download-url-base" %}}/docker-
 2. Start Docker.
 
    ```console
-   $ sudo systemctl start docker
+   $ sudo systemctl enable --now docker
    ```
+
+   This configures the Docker systemd service to start automatically when you
+   boot your system. If you don't want Docker to start automatically, use `sudo
+   systemctl start docker` instead.
 
 3. Verify that the Docker Engine installation is successful by running the
    `hello-world` image.
@@ -179,7 +183,7 @@ download a new file each time you want to upgrade Docker Engine.
    the Docker package.
 
    ```console
-   $ sudo dnf -y install /path/to/package.rpm
+   $ sudo dnf install /path/to/package.rpm
    ```
 
    Docker is installed but not started. The `docker` group is created, but no
@@ -214,8 +218,8 @@ You have now successfully installed and started Docker Engine.
 #### Upgrade Docker Engine
 
 To upgrade Docker Engine, download the newer package files and repeat the
-[installation procedure](#install-from-a-package), using `dnf -y upgrade`
-instead of `dnf -y install`, and point to the new files.
+[installation procedure](#install-from-a-package), using `dnf upgrade`
+instead of `dnf install`, and point to the new files.
 
 {{< include "install-script.md" >}}
 
