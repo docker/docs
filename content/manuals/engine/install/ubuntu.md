@@ -123,7 +123,7 @@ Docker from the repository.
    sudo install -m 0755 -d /etc/apt/keyrings
    sudo curl -fsSL {{% param "download-url-base" %}}/gpg -o /etc/apt/keyrings/docker.asc
    sudo chmod a+r /etc/apt/keyrings/docker.asc
-   
+
    # Add the repository to Apt sources:
    echo \
      "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] {{% param "download-url-base" %}} \
@@ -169,7 +169,7 @@ Docker from the repository.
    $ VERSION_STRING=5:27.3.1-1~ubuntu.24.04~noble
    $ sudo apt-get install docker-ce=$VERSION_STRING docker-ce-cli=$VERSION_STRING containerd.io docker-buildx-plugin docker-compose-plugin
    ```
-  
+
    {{< /tab >}}
    {{< /tabs >}}
 

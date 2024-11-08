@@ -92,7 +92,7 @@ $ sudo dnf-3 config-manager --add-repo {{% param "download-url-base" %}}/docker-
 
    {{< tabs >}}
    {{< tab name="Latest" >}}
-   
+
    To install the latest version, run:
 
    ```console
@@ -135,7 +135,7 @@ $ sudo dnf-3 config-manager --add-repo {{% param "download-url-base" %}}/docker-
 
    This command installs Docker, but it doesn't start Docker. It also creates a
    `docker` group, however, it doesn't add any users to the group by default.
-   
+
    {{< /tab >}}
    {{< /tabs >}}
 
