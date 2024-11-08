@@ -24,7 +24,7 @@ Ubuntu, Debian:
    ```console
    $ sudo apt-get remove docker-compose-plugin
    ```
-RPM-based distros:
+RPM-based distributions:
 
    ```console
    $ sudo yum remove docker-compose-plugin

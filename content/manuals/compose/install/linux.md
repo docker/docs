@@ -25,7 +25,7 @@ For Compose standalone, see [Install Compose Standalone](standalone.md).
 
 ## Install using the repository
 
-1. Set up the repository. Find distro-specific instructions in:
+1. Set up the repository. Find distribution-specific instructions in:
 
     [Ubuntu](/manuals/engine/install/ubuntu.md#install-using-the-repository) |
     [CentOS](/manuals/engine/install/centos.md#set-up-the-repository) |
@@ -43,7 +43,7 @@ For Compose standalone, see [Install Compose Standalone](standalone.md).
         $ sudo apt-get update
         $ sudo apt-get install docker-compose-plugin
         ```
-    * For RPM-based distros, run:
+    * For RPM-based distributions, run:
 
         ```console
         $ sudo yum update
@@ -74,7 +74,7 @@ To update the Compose plugin, run the following commands:
     $ sudo apt-get update
     $ sudo apt-get install docker-compose-plugin
     ```
-* For RPM-based distros, run:
+* For RPM-based distributions, run:
 
     ```console
     $ sudo yum update

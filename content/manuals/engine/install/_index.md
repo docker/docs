@@ -54,32 +54,32 @@ through Docker Desktop. For instructions on how to install Docker Desktop, see:
 | [Ubuntu](ubuntu.md)                            |       ✅       |       ✅        |      ✅      |   ✅    |  ✅   |
 | [Binaries](binaries.md)                        |       ✅       |       ✅        |      ✅      |         |       |
 
-### Other Linux distros
+### Other Linux distributions
 
 > [!NOTE]
 >
 > While the following instructions may work, Docker doesn't test or verify
-> installation on distro derivatives.
+> installation on distribution derivatives.
 
 - If you use Debian derivatives such as "BunsenLabs Linux", "Kali Linux" or 
   "LMDE" (Debian-based Mint) should follow the installation instructions for
-  [Debian](debian.md), substitute the version of your distro for the
-  corresponding Debian release. Refer to the documentation of your distro to find
+  [Debian](debian.md), substitute the version of your distribution for the
+  corresponding Debian release. Refer to the documentation of your distribution to find
   which Debian release corresponds with your derivative version.
 - Likewise, if you use Ubuntu derivatives such as "Kubuntu", "Lubuntu" or "Xubuntu"
   you should follow the installation instructions for [Ubuntu](ubuntu.md),
-  substituting the version of your distro for the corresponding Ubuntu release.
-  Refer to the documentation of your distro to find which Ubuntu release
+  substituting the version of your distribution for the corresponding Ubuntu release.
+  Refer to the documentation of your distribution to find which Ubuntu release
   corresponds with your derivative version.
-- Some Linux distros provide a package of Docker Engine through their
+- Some Linux distributions provide a package of Docker Engine through their
   package repositories. These packages are built and maintained by the Linux
-  distro's package maintainers and may have differences in configuration
+  distribution's package maintainers and may have differences in configuration
   or are built from modified source code. Docker isn't involved in releasing these
   packages and you should report any bugs or issues involving these packages to
-  your Linux distro's issue tracker.
+  your Linux distribution's issue tracker.
 
 Docker provides [binaries](binaries.md) for manual installation of Docker Engine.
-These binaries are statically linked and you can use them on any Linux distro.
+These binaries are statically linked and you can use them on any Linux distribution.
 
 ## Release channels
 

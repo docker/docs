@@ -179,7 +179,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 
 ### Bug fixes and minor changes
 
-- Fixed an issue with Docker Desktop integration with other WSL 2 distros. See [docker/for-win#6894](https://github.com/docker/for-win/issues/6894)
+- Fixed an issue with Docker Desktop integration with other WSL 2 distributions. See [docker/for-win#6894](https://github.com/docker/for-win/issues/6894)
 - Fixed DNS resolution of short names. See [docker/for-win#4425](https://github.com/docker/for-win/issues/4425)
 
 ## Docker Desktop Community 2.3.5.1
@@ -354,7 +354,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 - Fixed an upgrade bug where users on versions still using the PowerShell-based VM management experience a silent un-installation crash leading to Docker Desktop being uninstalled instead of upgraded.
 - Fixed a crash when failing to login due to no Internet connection.
 - Fixed bug in handling shared volume paths with `..` characters. Fixes [docker/for-win#5375](https://github.com/docker/for-win/issues/5375).
-- WSL 2: Docker Desktop detects when the wsl-distro is stopped and displays an actionable error message.
+- WSL 2: Docker Desktop detects when the wsl-distribution is stopped and displays an actionable error message.
 - Fixed a bug in `ftruncate` which prevented [libgit2sharp](https://github.com/libgit2/libgit2sharp) from cloning repositories on shared volumes. See [docker/for-win#5808](https://github.com/docker/for-win/issues/5808#issuecomment-610996272).
 - Fixed a bug that caused starting and stopping of a Compose application from the UI to fail when the path contains whitespace.
 
@@ -423,7 +423,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 
 **WSL 2**
 - Docker Desktop only exposes host ports in Linux if the Windows port is available.
-- Docker Desktop now allows users to refresh the list of Linux distros.
+- Docker Desktop now allows users to refresh the list of Linux distributions.
 - Docker Desktop defaults to WSL 2 on install on compatible OS versions.
 - Docker Desktop detects missing Linux kernel and adds a pointer to the Microsoft documentation to download the kernel.
 
@@ -594,8 +594,8 @@ Added the ability to start and stop Compose-based applications and view combined
 - Fixed a container start error when a container has more than one port with an arbitrary or not-yet-configured external port number. For example, `docker run -p 80 -p 443 nginx`). Fixes [docker/for-win#4935](https://github.com/docker/for-win/issues/4935) and [docker/compose#6998](https://github.com/docker/compose/issues/6998).
 - Fixed an issue which caused Docker Desktop to crash when resetting to factory defaults while running Windows containers.
 - Fixed multiple issues related to Fast Startup.
-- Injected Docker CLI, CLI plugins, Docker Compose, Notary, and kubectl into WSL distros when Docker Desktop WSL integration is enabled.
-- Fixed an issue where bind mounts created with Docker Compose from a WSL distro were incorrectly translated. Fixes [docker/for-win#5084](https://github.com/docker/for-win/issues/5084).
+- Injected Docker CLI, CLI plugins, Docker Compose, Notary, and kubectl into WSL distributions when Docker Desktop WSL integration is enabled.
+- Fixed an issue where bind mounts created with Docker Compose from a WSL distribution were incorrectly translated. Fixes [docker/for-win#5084](https://github.com/docker/for-win/issues/5084).
 - Docker Desktop now supports inotify events on shared filesystems for Windows file sharing.
 - Fixed a cache invalidation bug when a file in a shared volume is renamed on the host for Windows file sharing.
 - Fixed a handle leak when calling `Mknod` on a shared volume for Windows file sharing.
