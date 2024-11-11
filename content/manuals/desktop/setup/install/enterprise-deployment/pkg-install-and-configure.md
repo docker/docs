@@ -7,7 +7,7 @@ params:
   sidebar:
     badge:
       color: violet
-      text: Early Access
+      text: EA
 ---
 
 > [!NOTE]
@@ -19,13 +19,9 @@ The PKG package supports various MDM (Mobile Device Management) solutions, makin
 ## Install interactively
 
 1. In the [Docker Admin Console](http://admin.docker.com/), navigate to your organization.
-
 2. Under **Security and access**, select the **Deploy Docker Desktop** page. 
-
 3. From the **macOS** tab, select the **Download PKG installer** button. 
-
 4. Once downloaded, double-click `Docker.pkg` to run the installer. 
-
 5. Follow the instructions on the installation wizard to authorize the installer and proceed with the install.
    - **Introduction**: Select `Continue`.
    - **License**: Review the license agreement and select `Agree`.
@@ -45,11 +41,8 @@ The PKG package supports various MDM (Mobile Device Management) solutions, makin
 ## Install from the command line
 
 1. In the [Docker Admin Console](http://admin.docker.com/), navigate to your organization.
-
 2. Under **Security and access**, select the **Deploy Docker Desktop** page. 
-
 3. From the **macOS** tab, select the **Download PKG installer** button.
-
 4. From your terminal, run the following command:
 
    ```console
