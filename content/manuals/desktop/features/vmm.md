@@ -29,7 +29,7 @@ These improvements directly impact developers who rely on frequent file access a
 
 > [!NOTE]
 >
-> Docker VMM requires a minimum of 4GB of memory to be allocated to the Docker Linux VM. The memory needs to be increased before Docker VMM is enabled, and this can be done from the **Resources** section in **Settings**.
+> Docker VMM requires a minimum of 4GB of memory to be allocated to the Docker Linux VM. The memory needs to be increased before Docker VMM is enabled, and this can be done from the **Resources** tab in **Settings**.
 
 ### Known issues 
 
