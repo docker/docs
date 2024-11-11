@@ -15,6 +15,18 @@ known issues for each Docker Hub release.
 
 Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projects/51/views/1?filterQuery=) to see what's coming next.
 
+## 2024-11-11
+
+### New
+
+- [Personal access tokens](/security/for-developers/access-tokens/) (PATs) now support expiration dates.
+
+## 2024-10-15
+
+### New
+
+- Beta: You can now create [organization access tokens](/security/for-admins/access-tokens/) (OATs) to enhance security for organizations and streamline access management for organizations.
+
 ## 2024-03-23
 
 ### New
