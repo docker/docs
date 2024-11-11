@@ -61,7 +61,7 @@ enforce sign-in on macOS because the installed configuration profiles are
 protected by Apples' System Integrity Protection (SIP) and therefore can't be
 tampered with by the users.
 
-1. Save the following XML code to a file with the suffix `.mobileconfig`, for example
+1. Save the following XML file with the extension `.mobileconfig`, for example
    `docker.mobileconfig`:
 
    ```xml
@@ -108,7 +108,7 @@ tampered with by the users.
     </plist>
    ```
 
-2. Change the placeholders `Your Company Name` to the name of your company.
+2. Change the placeholders `com.yourcompany.docker.config` and `Your Company Name` to the name of your company.
 
 3. Add your organization name. The names of the allowed organizations are stored in the `allowedOrgs`
    property. It can contain either the name of a single organization or a list of organization names,
