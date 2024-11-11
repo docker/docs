@@ -61,7 +61,7 @@ Look at the following Dockerfile you created for the getting started app.
 
 ```dockerfile
 # syntax=docker/dockerfile:1
-FROM node:18-alpine
+FROM node:lts-alpine
 WORKDIR /app
 COPY . .
 RUN yarn install --production
@@ -81,7 +81,7 @@ dependencies if there was a change to the `package.json`.
 
    ```dockerfile
    # syntax=docker/dockerfile:1
-   FROM node:18-alpine
+   FROM node:lts-alpine
    WORKDIR /app
    COPY package.json yarn.lock ./
    RUN yarn install --production
@@ -103,10 +103,10 @@ dependencies if there was a change to the `package.json`.
     => => transferring dockerfile: 175B
     => [internal] load .dockerignore
     => => transferring context: 2B
-    => [internal] load metadata for docker.io/library/node:18-alpine
+    => [internal] load metadata for docker.io/library/node:lts-alpine
     => [internal] load build context
     => => transferring context: 53.37MB
-    => [1/5] FROM docker.io/library/node:18-alpine
+    => [1/5] FROM docker.io/library/node:lts-alpine
     => CACHED [2/5] WORKDIR /app
     => [3/5] COPY package.json yarn.lock ./
     => [4/5] RUN yarn install --production
@@ -127,10 +127,10 @@ dependencies if there was a change to the `package.json`.
     => => transferring dockerfile: 37B
     => [internal] load .dockerignore
     => => transferring context: 2B
-    => [internal] load metadata for docker.io/library/node:18-alpine
+    => [internal] load metadata for docker.io/library/node:lts-alpine
     => [internal] load build context
     => => transferring context: 450.43kB
-    => [1/5] FROM docker.io/library/node:18-alpine
+    => [1/5] FROM docker.io/library/node:lts-alpine
     => CACHED [2/5] WORKDIR /app
     => CACHED [3/5] COPY package.json yarn.lock ./
     => CACHED [4/5] RUN yarn install --production
