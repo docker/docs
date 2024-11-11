@@ -27,6 +27,10 @@ Some key performance enhancements provided by Docker VMM include:
 
 These improvements directly impact developers who rely on frequent file access and overall system responsiveness during containerized development. Docker VMM marks a significant leap in speed, enabling smoother workflows and faster iteration cycles.
 
+> [!NOTE]
+>
+> Docker VMM requires a minimmum of 4GB of memory to be allocated to the Docker Linux VM. The memory needs to be increased before Docker VMM is enabled, and this can be done from the **Resources** section in **Settings**.
+
 ### Known issues 
 
 As Docker VMM is still in Beta, there are a few known limitations:
