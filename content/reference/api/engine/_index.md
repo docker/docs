@@ -99,15 +99,21 @@ You can specify the API version to use in any of the following ways:
   that incorporates the API version with the features you need.
 - When using `curl` directly, specify the version as the first part of the URL.
   For instance, if the endpoint is `/containers/` you can use
-  `/v1.47/containers/`.
+  `/v{{% param "latest_engine_api_version" %}}/containers/`.
 - To force the Docker CLI or the Docker Engine SDKs to use an older version
   of the API than the version reported by `docker version`, set the
   environment variable `DOCKER_API_VERSION` to the correct version. This works
   on Linux, Windows, or macOS clients.
 
+  {{% apiVersionPrevious.inline %}}
+  {{- $version := site.Params.latest_engine_api_version }}
+  {{- $parts := strings.Split $version "." }}
+  {{- $major := cast.ToInt (index $parts 0) }}
+  {{- $minor := cast.ToInt (index $parts 1) }}
   ```console
-  $ DOCKER_API_VERSION=1.46
+  $ DOCKER_API_VERSION={{ $major }}.{{ math.Sub $minor 1 }}
   ```
+  {{% /apiVersionPrevious.inline %}}
 
   While the environment variable is set, that version of the API is used, even
   if the Docker daemon supports a newer version. This environment variable

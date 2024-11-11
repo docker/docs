@@ -134,7 +134,7 @@ Docker from the repository.
 
    > [!NOTE]
    >
-   > If you use an Ubuntu derivative distro, such as Linux Mint,
+   > If you use an Ubuntu derivative distribution, such as Linux Mint,
    > you may need to use `UBUNTU_CODENAME` instead of `VERSION_CODENAME`.
 
 2. Install the Docker packages.

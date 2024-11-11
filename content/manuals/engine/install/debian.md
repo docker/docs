@@ -123,7 +123,7 @@ Docker from the repository.
 
    > [!NOTE]
    >
-   > If you use a derivative distro, such as Kali Linux,
+   > If you use a derivative distribution, such as Kali Linux,
    > you may need to substitute the part of this command that's expected to
    > print the version codename:
    >
