@@ -23,7 +23,7 @@ To enforce sign-in for Docker Desktop on Windows, you can configure a registry k
 2. Create a multi-string value `allowedOrgs`.
    > [!IMPORTANT]
    >
-   > Only one entry for `allowedOrgs` is currently supported. If you add more than one value, sign-in enforcement silently fails.
+   > As of Docker Desktop version 4.36 and later, you can add more than one organization. With Docker Desktop version 4.35 and earlier, if you add more than one organization sign-in enforcement silently fails.
 3. Use your organization's name, all lowercase as string data.
 4. Restart Docker Desktop.
 5. When Docker Desktop restarts, verify that the **Sign in required!** prompt appears.
@@ -43,10 +43,83 @@ The following example outlines how to deploy a registry key to enforce sign-in o
 3. Within the GPO, navigate to **Computer Configuration** and select **Preferences**.
 4. Select **Windows Settings** then **Registry**.
 5. To add the registry item, right-click on the **Registry** node, select **New**, and then **Registry Item**.
-6. Configure the new registry item to match the registry script you created, specifying the action as **Update**. Make sure you input the correct path, value name (`allowedOrgs`), and value data (your organization’s name).
+6. Configure the new registry item to match the registry script you created, specifying the action as **Update**. Make sure you input the correct path, value name (`allowedOrgs`), and value data (your organization names).
 7. Link the GPO to an Organizational Unit (OU) that contains the machines you want to apply this setting to.
 8. Test the GPO on a small set of machines first to ensure it behaves as expected. You can use the `gpupdate /force` command on a test machine to manually refresh its group policy settings and check the registry to confirm the changes.
 9. Once verified, you can proceed with broader deployment. Monitor the deployment to ensure the settings are applied correctly across the organization's computers.
+
+## Configuration profiles method (Mac only)
+
+> [!NOTE]
+>
+> The configuration profiles method is in [Early Access](/manuals/release-lifecycle.md)
+> and is available with Docker Desktop version 4.36 and later.
+
+Configuration profiles are a feature of macOS that let you distribute
+configuration information to the Macs you manage. It is the safest method to
+enforce sign-in on macOS because the installed configuration profiles are
+protected by Apples' System Integrity Protection (SIP) and therefore can't be
+tampered with by the users.
+
+1. Save the following XML code to a file with the suffix `.mobileconfig`, for example
+   `docker.mobileconfig`:
+
+   ```xml
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+    <plist version="1.0">
+      <dict>
+        <key>PayloadContent</key>
+        <array>
+          <dict>
+            <key>PayloadType</key>
+            <string>com.docker.config</string>
+            <key>PayloadVersion</key>
+            <integer>1</integer>
+            <key>PayloadIdentifier</key>
+            <string>com.docker.config</string>
+            <key>PayloadUUID</key>
+            <string>eed295b0-a650-40b0-9dda-90efb12be3c7</string>
+            <key>PayloadDisplayName</key>
+            <string>Docker Desktop Configuration</string>
+            <key>PayloadDescription</key>
+            <string>Configuration profile to manage Docker Desktop settings.</string>
+            <key>PayloadOrganization</key>
+            <string>Your Company Name</string>
+            <key>allowedOrgs</key>
+            <string>first_org;second_org</string>
+          </dict>
+        </array>
+        <key>PayloadType</key>
+        <string>Configuration</string>
+        <key>PayloadVersion</key>
+        <integer>1</integer>
+        <key>PayloadIdentifier</key>
+        <string>com.yourcompany.docker.config</string>
+        <key>PayloadUUID</key>
+        <string>0deedb64-7dc9-46e5-b6bf-69d64a9561ce</string>
+        <key>PayloadDisplayName</key>
+        <string>Docker Desktop Config Profile</string>
+        <key>PayloadDescription</key>
+        <string>Config profile to enforce Docker Desktop settings for allowed organizations.</string>
+        <key>PayloadOrganization</key>
+        <string>Your Company Name</string>
+      </dict>
+    </plist>
+   ```
+
+2. Change the placeholders `Your Company Name` to the name of your company.
+
+3. Add your organization name. The names of the allowed organizations are stored in the `allowedOrgs`
+   property. It can contain either the name of a single organization or a list of organization names,
+   separated by a semicolon:
+
+   ```xml
+            <key>allowedOrgs</key>
+            <string>first_org;second_org</string>
+   ```
+
+4. Use a MDM solution to distribute your modified `.mobileconfig` file to your macOS clients. 
 
 ## plist method (Mac only)
 
@@ -66,14 +139,15 @@ To enforce sign-in for Docker Desktop on macOS, you can use a `plist` file that 
      <dict>
 	     <key>allowedOrgs</key>
 	     <array>
-             <string>myorg</string>
+             <string>myorg1</string>
+             <string>myorg2</string>
          </array>
      </dict>
    </plist>
    ```
    > [!IMPORTANT]
    >
-   > Only one entry for `allowedOrgs` is currently supported. If you add more than one value, sign-in enforcement silently fails.
+   > As of Docker Desktop version 4.36 and later, you can add more than one organization. With Docker Desktop version 4.35 and earlier, sign-in enforcement silently fails if you add more than one organization.
 
 3. Modify the file permissions to ensure the file cannot be edited by any non-administrator users.
 4. Restart Docker Desktop.
@@ -140,12 +214,12 @@ details, see [Manage members](/admin/organization/members/).
 
     ```json
     {
-    "allowedOrgs": ["myorg"]
+    "allowedOrgs": ["myorg1", "myorg2"]
     }
     ```
    > [!IMPORTANT]
    >
-   > Only one entry for `allowedOrgs` is currently supported. If you add more than one value, sign-in enforcement silently fails.
+   > As of Docker Desktop version 4.36 and later, you can add more than one organization. With Docker Desktop version 4.35 and earlier, if you add more than one organization sign-in enforcement silently fails.
 
 4. Verify that sign-in is enforced.
 
@@ -182,6 +256,9 @@ If you're using the Windows Command Prompt:
 ```console
 C:\Users\Admin> "Docker Desktop Installer.exe" install --allowed-org=myorg
 ```
+> [!IMPORTANT]
+>
+> As of Docker Desktop version 4.36 and later, you can add more than one organization to a single `registry.json` file. With Docker Desktop version 4.35 and earlier, if you add more than one organization sign-in enforcement silently fails.
 
 {{< /tab >}}
 {{< tab name="Mac" >}}
@@ -231,6 +308,10 @@ Path          Owner                  Access
 registry.json BUILTIN\Administrators NT AUTHORITY\SYSTEM Allow  FullControl...
 ```
 
+> [!IMPORTANT]
+>
+> As of Docker Desktop version 4.36 and later, you can add more than one organization to a single `registry.json` file. With Docker Desktop version 4.35 and earlier, if you add more than one organization sign-in enforcement silently fails.
+
 {{< /tab >}}
 {{< tab name="Mac" >}}
 
@@ -264,6 +345,10 @@ $ sudo ls -l "/Library/Application Support/com.docker.docker/registry.json"
 -rw-r--r--  1 root  admin  26 Jul 27 22:01 /Library/Application Support/com.docker.docker/registry.json
 ```
 
+> [!IMPORTANT]
+>
+> As of Docker Desktop version 4.36 and later, you can add more than one organization to a single `registry.json` file. With Docker Desktop version 4.35 and earlier, if you add more than one organization sign-in enforcement silently fails.
+
 {{< /tab >}}
 {{< tab name="Linux" >}}
 
@@ -296,6 +381,10 @@ Verify that the file has the expected permissions (`-rw-r--r--`) and ownership
 $ sudo ls -l /usr/share/docker-desktop/registry/registry.json
 -rw-r--r--  1 root  root  26 Jul 27 22:01 /usr/share/docker-desktop/registry/registry.json
 ```
+
+> [!IMPORTANT]
+>
+> As of Docker Desktop version 4.36 and later, you can add more than one organization to a single `registry.json` file. With Docker Desktop version 4.35 and earlier, if you add more than one organization sign-in enforcement silently fails.
 
 {{< /tab >}}
 {{< /tabs >}}
