@@ -31,6 +31,7 @@ exceptions:
   - DPI
   - DSOS
   - DVP
+  - ECI
   - ELK
   - FAQ
   - FUSE
@@ -67,6 +68,7 @@ exceptions:
   - NTLM
   - NVDA
   - OCI
+  - OS
   - OSS
   - PATH
   - PDF
