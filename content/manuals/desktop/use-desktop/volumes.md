@@ -119,10 +119,6 @@ To empty a volume:
 
 ## Export a volume
 
-{{% experimental title="Beta feature" %}}
-The export volume feature is currently in [Beta](../../release-lifecycle.md#beta).
-{{% /experimental %}}
-
 You can export the content of a volume to a local file, a local image, an to an
 image in Docker Hub, or to a supported cloud provider. When exporting content
 from a volume used by one or more running containers, the containers are

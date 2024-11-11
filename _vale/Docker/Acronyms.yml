@@ -4,23 +4,29 @@ link: https://docs.docker.com/contribute/style/grammar/#acronyms-and-initialisms
 level: warning
 ignorecase: false
 # Ensures that the existence of 'first' implies the existence of 'second'.
-first: '\b([A-Z]{3,5})\b'
-second: '(?:\b[A-Z][a-z]+ )+\(([A-Z]{3,5})\)'
+first: '\b([A-Z]{2,5})\b'
+second: '(?:\b[A-Z][a-z]+ )+\(([A-Z]{2,5})\)'
 # ... with the exception of these:
 exceptions:
+  - AGPL
   - API
   - ARM
   - ASP
   - AUFS
   - AWS
   - BIOS
+  - CISA
   - CLI
+  - CNCF
+  - CORS
   - CPU
   - CSS
   - CSV
   - CVE
   - DCT
   - DEBUG
+  - DHCP
+  - DNS
   - DOM
   - DPI
   - DSOS
@@ -32,53 +38,84 @@ exceptions:
   - GDB
   - GET
   - GHSA
+  - GNU
+  - GPG
+  - GPL
   - GPU
+  - GRUB
   - GTK
   - GUI
   - HEAD
   - HTML
   - HTTP
   - HTTPS
+  - IAM
   - IDE
+  - IP
   - JAR
   - JSON
   - JSX
   - LESS
   - LLDB
+  - LTS
+  - MAC
+  - MDM
+  - NAT
   - NET
   - NFS
   - NOTE
+  - NTLM
   - NVDA
+  - OCI
   - OSS
   - PATH
   - PDF
+  - PEM
   - PHP
   - POSIX
   - POST
+  - QEMU
   - RAM
   - REPL
   - REST
+  - RHEL
+  - RPM
   - RSA
+  - SAML
+  - SARIF
   - SBOM
+  - SCIM
   - SCM
   - SCSS
   - SDK
+  - SLES
+  - SLSA
+  - SPDX
   - SQL
   - SSD
   - SSH
   - SSL
+  - SSO
   - SVG
   - TBD
   - TCP
+  - TCP
   - TIP
+  - TLS
   - TODO
   - TTY
+  - TXT
+  - UDP
   - URI
   - URL
   - USB
   - USD
   - UTF
+  - UUID
   - VAT
+  - VLAN
+  - VM
+  - VPN
   - WSL
   - XML
   - XSS

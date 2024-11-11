@@ -1750,7 +1750,7 @@ For a list of PRs and issues fixed in this release, see [Compose 1.28.3](https:/
 
 - Removed `None` entries on exec command.
 
-- Added `distro` package to get distro information.
+- Added `distribution` package to get distribution information.
 
 - Added `python-dotenv` to delegate `.env` file processing.
 
