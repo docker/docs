@@ -2,11 +2,14 @@
 title: Manage autobuilds
 description: How to manage autobuilds in Docker Hub
 keywords: autobuilds, automated, docker hub, registry
+aliases:
+- /docker-hub/builds/manage-builds/
 ---
 
 > [!NOTE]
 >
-> Automated builds require a [Docker Pro, Team, or Business subscription](../../subscription/_index.md).
+> Automated builds require a Docker Pro, Team, or Business subscription.
+
 
 ## Cancel or retry a build
 
@@ -35,7 +38,7 @@ repository and branch, or tag, the build logs, the build duration, creation time
 >
 > You can now view the progress of your builds every 30 seconds when you refresh the **Builds** page. With the in-progress build logs, you can debug your builds before they're finished.
 
-![Build report](/docker-hub/images/index-report.png)
+![Build report](./images/index-report.png)
 
 ## Disable an automated build
 

@@ -142,7 +142,6 @@ mfsymlinks
 minikube
 musl
 nameserver
-namespace
 npm
 osquery
 osxfs

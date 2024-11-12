@@ -29,7 +29,7 @@ Docker Personal includes:
 
 - Unlimited public repositories
 - Unlimited [Scoped Access Tokens](../../security/for-developers/access-tokens.md)
-- Unlimited [collaborators](../../docker-hub/repos/access.md#collaborators-and-their-role) for public repositories at no cost per month.
+- Unlimited [collaborators](../../docker-hub/repos/manage/access.md#collaborators-and-their-role) for public repositories at no cost per month.
 - Access to [Docker Scout Free](../scout-details.md#docker-scout-free) to get started with software supply chain security.
 
 Additionally, anonymous users get 100 pulls every 6 hours and users that sign in to Docker get 200 pulls every 6 hours.
@@ -44,8 +44,8 @@ Docker Pro includes:
 - All the features available in Personal
 - Unlimited private repositories
 - 5000 image [pulls per day](../../docker-hub/download-rate-limit.md)
-- [Auto Builds](../../docker-hub/builds/_index.md) with 5 concurrent builds
-- 300 [Vulnerability Scans](../../docker-hub/vulnerability-scanning.md)
+- [Auto Builds](../../docker-hub/repos/manage/builds/_index.md) with 5 concurrent builds
+- 300 [Vulnerability Scans](../../docker-hub/repos//manage/vulnerability-scanning.md)
 
 For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/).
 
@@ -56,8 +56,8 @@ For a list of features available in each tier, see [Docker Pricing](https://www.
 Docker Team includes:
 - Everything included in Docker Pro
 - Unlimited teams
-- [Auto Builds](../../docker-hub/builds/_index.md) with 15 concurrent builds
-- Unlimited [Vulnerability Scanning](../../docker-hub/vulnerability-scanning.md)
+- [Auto Builds](../../docker-hub/repos/manage/builds/_index.md) with 15 concurrent builds
+- Unlimited [Vulnerability Scanning](../../docker-hub/repos/manage/vulnerability-scanning.md)
 - 5000 image [pulls per day](../../docker-hub/download-rate-limit.md) for each team member
 
 There are also advanced collaboration and management tools, including organization and team management with [Role Based Access Control (RBAC)](../../security/for-admins/roles-and-permissions.md), [activity logs](../../admin/organization/activity-logs.md), and more.
