@@ -16,11 +16,11 @@ This page contains information on how to configure Settings Management to specif
 
 Settings Management is designed specifically for organizations who don’t give developers root access to their machines.
 
-### Prerequisites
+## Prerequisites
 
-You first need to [enforce sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md) to ensure that all Docker Desktop developers authenticate with your organization. Since the Settings Management feature requires a Docker Business subscription, enforced sign-in guarantees that only authenticated users have access and that the feature consistently takes effect across all users, even though it may still work without enforced sign-in.
+You first need to [enforce sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md) to ensure that all Docker Desktop developers authenticate with your organization. Since Settings Management requires a Docker Business subscription, enforced sign-in guarantees that only authenticated users have access and that the feature consistently takes effect across all users, even though it may still work without enforced sign-in.
 
-### Step one: Create the `admin-settings.json` file and save it in the correct location
+## Step one: Create the `admin-settings.json` file and save it in the correct location
 
 You can either use the `--admin-settings` installer flag on [macOS](/manuals/desktop/setup/install/mac-install.md#install-from-the-command-line) or [Windows](/manuals/desktop/setup/install/windows-install.md#install-from-the-command-line) to automatically create the `admin-settings.json` and save it in the correct location, or set it up manually.
 
@@ -37,7 +37,7 @@ To set it up manually:
    >
    > It is assumed that you have the ability to push the `admin-settings.json` settings file to the locations specified through a device management software such as [Jamf](https://www.jamf.com/lp/en-gb/apple-mobile-device-management-mdm-jamf-shared/?attr=google_ads-brand-search-shared&gclid=CjwKCAjw1ICZBhAzEiwAFfvFhEXjayUAi8FHHv1JJitFPb47C_q_RCySTmF86twF1qJc_6GST-YDmhoCuJsQAvD_BwE).
 
-### Step two: Configure the settings you want to lock in
+## Step two: Configure the settings you want to lock in
 
 > [!NOTE]
 >
@@ -183,7 +183,7 @@ The following `admin-settings.json` code and table provides an example of the re
 }
 ```
 
-#### General 
+### General 
 
 |Parameter|OS|Description|Version|
 |:-------------------------------|---|:-------------------------------|---|
@@ -196,7 +196,7 @@ The following `admin-settings.json` code and table provides an example of the re
 | `desktopTerminalEnabled` |  | If `value` is set to `false`, developers cannot use the Docker terminal to interact with the host machine and execute commands directly from Docker Desktop. |  |
 |`exposeDockerAPIOnTCP2375`| Windows only| Exposes the Docker API on a specified port. If `value` is set to true, the Docker API is exposed on port 2375. Note: This is unauthenticated and should only be enabled if protected by suitable firewall rules.|  |
 
-#### File sharing and emulation 
+### File sharing and emulation 
 
 |Parameter|OS|Description|Version|
 |:-------------------------------|---|:-------------------------------|---|
@@ -205,13 +205,13 @@ The following `admin-settings.json` code and table provides an example of the re
 | `useGrpcfuse` | macOS only | If `value` is set to `true`, gRPC Fuse is set as the file sharing mechanism. |  |
 | `useVirtualizationFrameworkRosetta`|  macOS only | If `value` is set to `true`, Docker Desktop turns on Rosetta to accelerate x86_64/amd64 binary emulation on Apple Silicon. Note: This also automatically enables `Use Virtualization framework`. | Docker Desktop version 4.29 and later. |
 
-#### Docker Scout
+### Docker Scout
 
 |Parameter|OS|Description|Version|
 |:-------------------------------|---|:-------------------------------|---|
 |`scout`| | Setting `useBackgroundIndexing` to `false` disables automatic indexing of images loaded to the image store. Setting `sbomIndexing` to `false` prevents users from being able to index image by inspecting them in Docker Desktop or using `docker scout` CLI commands. |  |
 
-#### Proxy
+### Proxy
 
 |Parameter|OS|Description|Version|
 |:-------------------------------|---|:-------------------------------|---|
@@ -219,13 +219,13 @@ The following `admin-settings.json` code and table provides an example of the re
 |&nbsp; &nbsp; &nbsp; &nbsp;`windowsDockerdPort`| Windows only | Exposes Docker Desktop's internal proxy locally on this port for the Windows Docker daemon to connect to. If it is set to 0, a random free port is chosen. If the value is greater than 0, use that exact value for the port. The default value is -1 which disables the option. Note: This is available for Windows containers only. |  |
 |&nbsp; &nbsp; &nbsp; &nbsp;`enableKerberosNtlm`|  |When set to `true`, Kerberos and NTLM authentication is enabled. Default is `false`. For more information, see the settings documentation. | Docker Desktop version 4.32 and later. |
 
-#### Container proxy
+### Container proxy
 
 |Parameter|OS|Description|Version|
 |:-------------------------------|---|:-------------------------------|---|
 |`containersProxy` | | Creates air-gapped containers. For more information see [Air-Gapped Containers](../air-gapped-containers.md).| Docker Desktop version 4.29 and later. |
 
-#### Linux VM
+### Linux VM
 
 |Parameter|OS|Description|Version|
 |:-------------------------------|---|:-------------------------------|---|
@@ -234,27 +234,27 @@ The following `admin-settings.json` code and table provides an example of the re
 | &nbsp; &nbsp; &nbsp; &nbsp;`dockerDaemonOptions` |  |If `value` is set to true, it overrides the options in the Docker Engine config file. See the [Docker Engine reference](/reference/cli/dockerd/#daemon-configuration-file). Note that for added security, a few of the config attributes may be overridden when Enhanced Container Isolation is enabled. |  |
 | &nbsp; &nbsp; &nbsp; &nbsp;`vpnkitCIDR` |  |Overrides the network range used for vpnkit DHCP/DNS for `*.docker.internal`  |  |
 
-#### Windows containers
+### Windows containers
 
 |Parameter|OS|Description|Version|
 |:-------------------------------|---|:-------------------------------|---|
 | `windowsContainers` |  | Parameters and settings related to `windowsContainers` options - grouped together here for convenience.  |  |
 | &nbsp; &nbsp; &nbsp; &nbsp;`dockerDaemonOptions` |  | Overrides the options in the Linux daemon config file. See the [Docker Engine reference](/reference/cli/dockerd/#daemon-configuration-file).|  |
 
-#### Kubernetes
+### Kubernetes
 
 |Parameter|OS|Description|Version|
 |:-------------------------------|---|:-------------------------------|---|
 |`kubernetes`|  | If `enabled` is set to true, a Kubernetes single-node cluster is started when Docker Desktop starts. If `showSystemContainers` is set to true, Kubernetes containers are displayed in the Docker Desktop Dashboard and when you run `docker ps`.  `imagesRepository` lets you specify which repository Docker Desktop pulls the Kubernetes images from. For example, `"imagesRepository": "registry-1.docker.io/docker"`.  |  |
 
-#### Features in development 
+### Features in development 
 
 |Parameter|OS|Description|Version|
 |:-------------------------------|---|:-------------------------------|---|
 | `allowExperimentalFeatures`| | If `value` is set to `false`, experimental features are disabled.|  |
 | `allowBetaFeatures`| | If `value` is set to `false`, beta features are disabled.|  |
 
-#### Enhanced Container Isolation 
+### Enhanced Container Isolation 
 
 |Parameter|OS|Description|Version|
 |:-------------------------------|---|:-------------------------------|---|
@@ -263,7 +263,7 @@ The following `admin-settings.json` code and table provides an example of the re
 | &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; `imageList` |  | Indicates which container images are allowed to bind-mount the Docker Engine socket. |  |
 | &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; `commandList` |  | Restricts the commands that containers can issue via the bind-mounted Docker Engine socket. |  |
 
-### Step three: Re-launch Docker Desktop
+## Step three: Re-launch Docker Desktop
 
 > [!NOTE]
 >

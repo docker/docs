@@ -17,19 +17,19 @@ Settings Management helps you control key Docker Desktop settings, like proxies 
 
 For an extra layer of security, you can also use Settings Management to enable and lock in [Enhanced Container Isolation](../enhanced-container-isolation/_index.md) which ensures that any configurations set with Settings Management cannot be modified by containers.
 
-### Who is it for?
+## Who is it for?
 
 - For organizations that want to configure Docker Desktop to be within their organization's centralized control.
 - For organizations that want to create a standardized Docker Desktop environment at scale.
 - For Docker Business customers who want to confidently manage their use of Docker Desktop within tightly regulated environments.
 
-### How does it work?
+## How does it work?
 
 You can configure several Docker Desktop settings using an `admin-settings.json` file. This file is located on the Docker Desktop host and can only be accessed by developers with root or administrator privileges.
 
 Values that are set to `locked: true` within the `admin-settings.json` override any previous values set by developers and ensure that these cannot be modified. For more information, see [Configure Settings Management](configure.md#step-two-configure-the-settings-you-want-to-lock-in).
 
-### What features can I configure with Settings Management?
+## What features can I configure with Settings Management?
 
 Using the `admin-settings.json` file, you can:
 
@@ -52,7 +52,7 @@ Using the `admin-settings.json` file, you can:
 
 For more details on the syntax and options, see [Configure Settings Management](configure.md).
 
-### How do I set up and enforce Settings Management?
+## How do I set up and enforce Settings Management?
 
 You first need to [enforce sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md) to ensure that all Docker Desktop developers authenticate with your organization. Since the Settings Management feature requires a Docker Business subscription, enforced sign-in guarantees that only authenticated users have access and that the feature consistently takes effect across all users, even though it may still work without enforced sign-in.
 
@@ -64,7 +64,7 @@ Once this is done, Docker Desktop developers receive the changed settings when t
 
 So as not to disrupt your developers' workflow, Docker doesn't automatically mandate that developers re-launch and re-authenticate once a change has been made.
 
-### What do developers see when the settings are enforced?
+## What do developers see when the settings are enforced?
 
 Enforced settings in Docker Desktop appear grayed out, making them uneditable through the Docker Desktop Dashboard, CLI, or the `settings-store.json` file (or `settings.json` for Docker Desktop versions 4.34 and earlier).
 
