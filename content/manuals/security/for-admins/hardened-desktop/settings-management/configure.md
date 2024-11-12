@@ -3,6 +3,7 @@ description: How to configure Settings Management for Docker Desktop
 keywords: admin, controls, rootless, enhanced container isolation
 title: Configure Settings Management
 linkTitle: Configure
+toc_max: 4
 aliases: 
  - /desktop/hardened-desktop/settings-management/configure/
 ---
@@ -230,8 +231,8 @@ The following `admin-settings.json` code and table provides an example of the re
 |:-------------------------------|---|:-------------------------------|---|
 | `linuxVM` |   |Parameters and settings related to Linux VM options - grouped together here for convenience. |  |
 | &nbsp; &nbsp; &nbsp; &nbsp;`wslEngineEnabled`  | Windows only | If `value` is set to true, Docker Desktop uses the WSL 2 based engine. This overrides anything that may have been set at installation using the `--backend=<backend name>` flag. |  |
-| &nbsp;&nbsp; &nbsp; &nbsp;`dockerDaemonOptions`|  |If `value` is set to true, it overrides the options in the Docker Engine config file. See the [Docker Engine reference](/reference/cli/dockerd/#daemon-configuration-file). Note that for added security, a few of the config attributes may be overridden when Enhanced Container Isolation is enabled. |  |
-| &nbsp;&nbsp; &nbsp; &nbsp;`vpnkitCIDR` |  |Overrides the network range used for vpnkit DHCP/DNS for `*.docker.internal`  |  |
+| &nbsp; &nbsp; &nbsp; &nbsp;`dockerDaemonOptions`|  |If `value` is set to true, it overrides the options in the Docker Engine config file. See the [Docker Engine reference](/reference/cli/dockerd/#daemon-configuration-file). Note that for added security, a few of the config attributes may be overridden when Enhanced Container Isolation is enabled. |  |
+| &nbsp; &nbsp; &nbsp; &nbsp;`vpnkitCIDR` |  |Overrides the network range used for vpnkit DHCP/DNS for `*.docker.internal`  |  |
 
 #### Windows containers
 
