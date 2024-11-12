@@ -11,7 +11,7 @@ grid:
     Install Docker Desktop on
     [Mac](/desktop/setup/install/mac-install/),
     [Windows](/desktop/setup/install/windows-install/), or
-    [Linux](/desktop/install/linux/).
+    [Linux](/desktop/setup/install/linux/).
   icon: download
 - title: Explore Docker Desktop
   description: Navigate Docker Desktop and learn about its key features.
