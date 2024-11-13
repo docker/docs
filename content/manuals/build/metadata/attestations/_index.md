@@ -8,6 +8,8 @@ aliases:
   - /build/attestations/
 ---
 
+{{< youtube-embed qOzcycbTs4o >}}
+
 Build attestations describe how an image was built, and what it contains. The
 attestations are created at build-time by BuildKit, and become attached to the
 final image as metadata.
