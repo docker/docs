@@ -172,6 +172,10 @@ customize your own images to suit specific needs.
    $ docker push <YOUR-USERNAME>/nginx-custom
    ```
 
+    > [!NOTE]
+    >
+    > You must be signed in to Docker Hub through Docker Desktop or the command line, and you must also name your images correctly, as per the above steps.
+
    The command pushes the image to Docker Hub and automatically
    creates the repository if it doesn't exist. To learn more about the command,
    see the [`docker push` CLI

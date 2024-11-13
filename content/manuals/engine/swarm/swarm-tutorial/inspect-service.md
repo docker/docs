@@ -35,7 +35,7 @@ the Docker CLI to see details about the service running in the swarm.
     Endpoint Mode:  vip
     ```
 
-    >**Tip**
+    > [!TIP]
     >
     > To return the service details in json format, run the same command
     without the `--pretty` flag.
@@ -110,7 +110,7 @@ the Docker CLI to see details about the service running in the swarm.
 4.  Run `docker ps` on the node where the task is running to see details about
     the container for the task.
 
-    >**Tip**
+    > [!TIP]
     >
     > If `helloworld` is running on a node other than your manager node,
     you must ssh to that node.
