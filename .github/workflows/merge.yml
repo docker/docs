@@ -2,7 +2,7 @@ name: merge
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: YOUR_SECRET_NAME
 
 # open or update publishing PR when there is a push to main
 on:
