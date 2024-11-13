@@ -25,9 +25,11 @@ For an extra layer of security, you can also use Settings Management to enable a
 
 ## How does it work?
 
-You can configure several Docker Desktop settings using an `admin-settings.json` file. This file is located on the Docker Desktop host and can only be accessed by developers with root or administrator privileges.
+You can configure several Docker Desktop settings using either:
+ - An `admin-settings.json` file. This file is located on the Docker Desktop host and can only be accessed by developers with root or administrator privileges.
+ - Creating a settings policy in the Docker Admin Console 
 
-Values that are set to `locked: true` within the `admin-settings.json` override any previous values set by developers and ensure that these cannot be modified. For more information, see [Configure Settings Management](configure.md#step-two-configure-the-settings-you-want-to-lock-in).
+Settings that are defined by an administrator override any previous values set by developers and ensure that these cannot be modified. 
 
 ## What features can I configure with Settings Management?
 
@@ -50,13 +52,15 @@ Using the `admin-settings.json` file, you can:
 - Specify which paths your developers can add file shares to
 - Configure Air-gapped containers
 
-For more details on the syntax and options, see [Configure Settings Management](configure.md).
+For more details on the syntax and options, see [Configure Settings Management](configure-json-file.md).
 
 ## How do I set up and enforce Settings Management?
 
 You first need to [enforce sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md) to ensure that all Docker Desktop developers authenticate with your organization. Since the Settings Management feature requires a Docker Business subscription, enforced sign-in guarantees that only authenticated users have access and that the feature consistently takes effect across all users, even though it may still work without enforced sign-in.
 
-Next, you must either manually [create and configure the admin-settings.json file](configure.md), or use the `--admin-settings` installer flag on [macOS](/manuals/desktop/setup/install/mac-install.md#install-from-the-command-line) or [Windows](/manuals/desktop/setup/install/windows-install.md#install-from-the-command-line) to automatically create the `admin-settings.json` and save it in the correct location.
+Next, you must either:
+ - Manually [create and configure the `admin-settings.json` file](configure-json-file.md), or use the `--admin-settings` installer flag on [macOS](/manuals/desktop/setup/install/mac-install.md#install-from-the-command-line) or [Windows](/manuals/desktop/setup/install/windows-install.md#install-from-the-command-line) to automatically create the `admin-settings.json` and save it in the correct location.
+ - Fill out the **Settings policy** creation form in the [Docker Admin Console](configure-admin-console.md).
 
 Once this is done, Docker Desktop developers receive the changed settings when they either:
 - Quit, re-launch, and sign in to Docker Desktop
@@ -72,6 +76,7 @@ In addition, if Enhanced Container Isolation is enforced, developers can't use p
 
 ![Proxy settings grayed out](/assets/images/grayed-setting.png)
 
-## More resources
+## What's next?
 
-- [Video: Settings Management](https://www.youtube.com/watch?v=I9oJOJ1P9PQ)
+- [Configure Settings Management with a `.json` file](configure-json-file.md)
+- [Configure Settings Management with the Docker Admin Console](configure-admin-console.md)

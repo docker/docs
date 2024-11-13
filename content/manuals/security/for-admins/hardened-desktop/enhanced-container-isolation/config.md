@@ -39,7 +39,7 @@ Starting with Docker Desktop 4.27, admins can optionally configure ECI to allow
 bind mounting the Docker Engine socket into containers, but in a controlled way.
 
 This can be done via the Docker Socket mount permissions section in the
-[admin-settings.json](../settings-management/configure.md) file. For example:
+[admin-settings.json](../settings-management/_index.md) file. For example:
 
 ```json
 {
@@ -63,6 +63,10 @@ This can be done via the Docker Socket mount permissions section in the
   }
 }
 ```
+
+> [!TIP]
+>
+> You can now also configure these settings in the [Docker Admin Console](/manuals/security/for-admins/hardened-desktop/settings-management/configure-admin-console.md).
 
 As shown above, there are two configurations for bind-mounting the Docker
 socket into containers: the `imageList` and the `commandList`. These are
