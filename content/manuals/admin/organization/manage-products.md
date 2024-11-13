@@ -5,7 +5,7 @@ description: Learn how to manage Docker products for your organization
 keywords: organization, tools, products
 ---
 
-In this section, learn how to manage access and view usage of the Docker
+In this section, learn how to manage access and view usage of Docker
 products for your organization. For more detailed information about each
 product, including how to set up and configure them, see the following manuals:
 
@@ -19,31 +19,28 @@ product, including how to set up and configure them, see the following manuals:
 
 Products included in your subscription, including Docker Hub, Docker Build
 Cloud, Docker Desktop, and Docker Scout access are enabled by default for all
-users. Testcontainers Cloud access by default is disabled. Use the following
+users. Testcontainers Cloud access is disabled by default. Use the following
 sections to learn how to enable or disable access for these products.
 
 ### Manage access to Docker Build Cloud
 
-To learn how to initially set up and configure Docker Build Cloud, sign in to
+- Enable access: To learn how to initially set up and configure Docker Build Cloud, sign in to
 the [Docker Build Cloud Dashboard](https://app.docker.com/build) and follow the
 on-screen instructions.
-
-To manage access for Docker Build Cloud, sign in to [Docker Build
+- Disable access: To manage access for Docker Build Cloud, sign in to [Docker Build
 Cloud](http://app.docker.com/build) as an organization owner, select **Account
 settings**, and then manage access under **Lock Docker Build Cloud**.
 
 ### Manage access to Docker Scout
 
-To learn how to initially set up and configure Docker Scout for remote
+- Enable access: To learn how to initially set up and configure Docker Scout for remote
 repositories, sign in to the [Docker Scout Dashboard](https://scout.docker.com/)
 and follow the on-screen instructions.
-
-To manage access for using Docker Scout on remote repositories, sign in to the
+- Disable access to remote repositories: To manage access for using Docker Scout on remote repositories, sign in to the
 [Docker Scout Dashboard](https://scout.docker.com/) and configure
 [integrations](../../scout/explore/dashboard.md#integrations) and [repository
 settings](../../scout/explore/dashboard.md#repository-settings).
-
-To manage access for using Docker Scout on local images in Docker Desktop, use
+- Disable access to local images: To manage access for using Docker Scout on local images in Docker Desktop, use
 [Settings
 Management](../../security/for-admins/hardened-desktop/settings-management/_index.md)
 and set `sbomIndexing` to `false` to disable, or to `true` to enable.
@@ -58,43 +55,40 @@ Management](../../security/for-admins/hardened-desktop/image-access-management.m
 
 ### Manage access to Testcontainers Cloud
 
-To learn how to initially set up and configure Testcontainers Cloud, sign in to
-[Testcontainers Cloud](https://app.testcontainers.cloud/) and follow the
+- Enable access: By default, Testcontainers Cloud is disabled. To learn how to initially set up and configure Testcontainers Cloud, sign in to [Testcontainers Cloud](https://app.testcontainers.cloud/) and follow the
 on-screen instructions.
-
-To manage access for Testcontainers Cloud, sign in to the [Testcontainers Cloud
+- Disable access: To manage access for Testcontainers Cloud, sign in to the [Testcontainers Cloud
 Settings page](https://app.testcontainers.cloud/dashboard/settings) as
 an organization owner, and then manage access under **Lock Testcontainers
 Cloud**.
 
 ### Manage access to Docker Desktop
 
-To manage access for Docker Desktop, you can [enforce
-sign-in](../../security/for-admins/enforce-sign-in/_index.md), then and manage
-members [manually](./members.md) or use
-[provisioning](../../security/for-admins/provisioning/_index.md). With sign-in
-enforced, only users who are a member of your organization can use Docker
+To manage access for Docker Desktop, you can either:
+- [Enforce sign-in](../../security/for-admins/enforce-sign-in/_index.md) and manage
+members [manually](./members.md).
+- Use [provisioning](../../security/for-admins/provisioning/_index.md).
+
+With sign-in enforced, only users who are a member of your organization can use Docker
 Desktop after signing in.
 
 ## View Docker product usage
 
 View usage for the products on the following pages:
 
-- Docker Build Cloud: View the **Build minutes** page in the [Docker Build Cloud
+- Docker Build Cloud: View the Build minutes page in the [Docker Build Cloud
   Dashboard](http://app.docker.com/build).
 
-- Docker Scout: View the [**Repository settings**
-  page](https://scout.docker.com/settings/repos) in the Docker Scout
+- Docker Scout: View the [Repository settings page](https://scout.docker.com/settings/repos) in the Docker Scout
   Dashboard.
 
-- Docker Hub: View the [**Usage** page](https://hub.docker.com/usage) in Docker
+- Docker Hub: View the [Usage page](https://hub.docker.com/usage) in Docker
   Hub.
 
-- Testcontainers Cloud: View the [**Billing**
-  page](https://app.testcontainers.cloud/dashboard/billing) in the
+- Testcontainers Cloud: View the [Billing page](https://app.testcontainers.cloud/dashboard/billing) in the
   Testcontainers Cloud Dashboard.
 
-- Docker Desktop: View the **Insights** page in the [Docker Admin
+- Docker Desktop: View the Insights page in the [Docker Admin
   Console](https://app.docker.com/admin). For more details, see
   [Insights](./insights.md).
 
