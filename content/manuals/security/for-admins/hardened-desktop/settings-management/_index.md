@@ -13,9 +13,9 @@ weight: 10
 >
 > Settings Management is available to Docker Business customers only.
 
-Settings Management helps you control key Docker Desktop settings, like proxies and network configurations, on your developer's machines within your organization.
+Settings Management helps you control key Docker Desktop settings, like proxies and network configurations, on your developers' machines within your organization.
 
-For an extra layer of security, you can also use Settings Management to enable and lock in [Enhanced Container Isolation](../enhanced-container-isolation/_index.md) which ensures that any configurations set with Settings Management cannot be modified by containers.
+For an extra layer of security, you can also use Settings Management to enable and lock in [Enhanced Container Isolation](../enhanced-container-isolation/_index.md), which prevents containers from modifying any Settings Management configurations.
 
 ## Who is it for?
 
@@ -62,13 +62,13 @@ Once this is done, Docker Desktop developers receive the changed settings when t
 - Quit, re-launch, and sign in to Docker Desktop
 - Launch and sign in to Docker Desktop for the first time
 
-So as not to disrupt your developers' workflow, Docker doesn't automatically mandate that developers re-launch and re-authenticate once a change has been made.
+To avoid disrupting your developers' workflows, Docker doesn't automatically require that developers re-launch and re-authenticate once a change has been made.
 
 ## What do developers see when the settings are enforced?
 
-Enforced settings in Docker Desktop appear grayed out, making them uneditable through the Docker Desktop Dashboard, CLI, or the `settings-store.json` file (or `settings.json` for Docker Desktop versions 4.34 and earlier).
+Enforced settings appear grayed out in Docker Desktop. They can't be edited via the Docker Desktop Dashboard, CLI, or `settings-store.json` (or `settings.json` for Docker Desktop 4.34 and earlier).
 
-In addition, if Enhanced Container Isolation is enforced, developers can't use privileged containers or similar techniques to modify enforced settings within the Docker Desktop Linux VM, for example, reconfigure proxy and networking of reconfigure Docker Engine.
+In addition, if Enhanced Container Isolation is enforced, developers can't use privileged containers or similar techniques to modify enforced settings within the Docker Desktop Linux VM. For example, they can't reconfigure proxy and networking, or Docker Engine.
 
 ![Proxy settings grayed out](/assets/images/grayed-setting.png)
 
