@@ -2,7 +2,7 @@
 description: How to configure Settings Management for Docker Desktop using the Docker Admin Console
 keywords: admin, controls, rootless, enhanced container isolation
 title: Configure Settings Management with the Admin Console
-linkTitle: Configure with the Admin Console
+linkTitle: Use the Admin Console
 weight: 20
 params:
   sidebar:

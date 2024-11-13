@@ -2,7 +2,7 @@
 description: How to configure Settings Management for Docker Desktop
 keywords: admin, controls, rootless, enhanced container isolation
 title: Configure Settings Management with a JSON file
-linkTitle: Configure with a JSON file
+linkTitle: Use a JSON file
 weight: 10
 aliases: 
  - /desktop/hardened-desktop/settings-management/configure/
