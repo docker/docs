@@ -108,6 +108,7 @@ Zsh
 [Mm]oby
 [Oo]nboarding
 [Pp]aravirtualization
+[Pp]roxied
 [Pp]roxying
 [Rr]eal-time
 [Rr]untimes?
@@ -156,5 +157,6 @@ tmpfs
 ufw
 umask
 ungated
+untrusted
 vSphere
 vpnkit
