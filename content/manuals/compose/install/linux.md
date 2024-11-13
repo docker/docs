@@ -111,7 +111,7 @@ To update the Compose plugin, run the following commands:
     or, if you chose to install Compose for all users:
 
     ```console
-    $ sudo chmod +x /usr/local/lib/docker/cli-plugins/docker-compose
+    $ sudo chmod +x /usr/local/lib/.docker/cli-plugins/docker-compose
     ```
 
 3. Test the installation.
