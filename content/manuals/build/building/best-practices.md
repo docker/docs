@@ -319,7 +319,7 @@ backslashes to make your Dockerfile more readable, understandable, and
 maintainable.
 
 For example, you can chain commands with the `&&` operator, and use
-use escape characters to break long commands into multiple lines.
+escape characters to break long commands into multiple lines.
 
 ```dockerfile
 RUN apt-get update && apt-get install -y \

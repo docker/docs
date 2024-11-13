@@ -31,6 +31,7 @@ exceptions:
   - DPI
   - DSOS
   - DVP
+  - ECI
   - ELK
   - FAQ
   - FUSE
@@ -60,6 +61,7 @@ exceptions:
   - LTS
   - MAC
   - MDM
+  - MDN
   - NAT
   - NET
   - NFS
@@ -67,6 +69,7 @@ exceptions:
   - NTLM
   - NVDA
   - OCI
+  - OS
   - OSS
   - PATH
   - PDF
@@ -90,6 +93,7 @@ exceptions:
   - SDK
   - SLES
   - SLSA
+  - SOCKS
   - SPDX
   - SQL
   - SSD

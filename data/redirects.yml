@@ -98,7 +98,7 @@
   - /go/storage-driver/
 "/docker-hub/vulnerability-scanning/":
   - /go/tip-scanning/
-"/desktop/windows/features/wsl/":
+"/desktop/features/wsl/":
   # Link used by Docker Desktop to refer users on how to activate WSL 2
   - /go/wsl2/
 "/reference/api/hub/latest/":
