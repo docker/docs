@@ -2,7 +2,6 @@
 description: Get an overview on Docker Hub to find and share container images
 keywords: docker hub, hub, repositories
 title: Docker Hub
-linkTitle: Docker Hub
 weight: 100
 grid:
 - title: Quickstart
