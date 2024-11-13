@@ -24,7 +24,7 @@ This page contains information for administrators on how to configure Settings M
 - [Enforce sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md). This is
 because the Settings Management feature requires a Docker Business
 subscription and therefore your Docker Desktop users must authenticate to your
-organifdzation for configurations to take effect. 
+organization for configurations to take effect. 
 
 ## Create a settings policy
 

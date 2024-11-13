@@ -968,7 +968,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 - Rosetta is now Generally Available for all users on macOS 13 or later. It provides faster emulation of Intel-based images on Apple Silicon. To use Rosetta, see [Settings](/manuals/desktop/settings-and-maintenance/settings.md). Rosetta is enabled by default on macOS 14.1 and later.
 - Docker Desktop now detects if a WSL version is out of date. If an out dated version of WSL is detected, you can allow Docker Desktop to automatically update the installation or you can manually update WSL outside of Docker Desktop.
 - New installations of Docker Desktop for Windows now require a Windows version of 19044 or later.
-- Administrators now have the ability to control Docker Scout image analysis  in [Settings Management](/manuals/security/for-admins/hardened-desktop/settings-management/_index.md).
+- Administrators now have the ability to control Docker Scout image analysis in [Settings Management](/manuals/security/for-admins/hardened-desktop/settings-management/_index.md).
 
 ### Upgrades
 
