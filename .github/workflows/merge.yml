@@ -1,4 +1,4 @@
-name: merge
+name : merger
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-24.04
     if: github.repository_owner == 'docker'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v1
         with:
           ref: published
       - name: Reset published branch
