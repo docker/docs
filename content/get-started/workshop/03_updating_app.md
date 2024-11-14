@@ -72,9 +72,9 @@ To remove a container, you first need to stop it. Once it has stopped, you can r
    $ docker rm <the-container-id>
    ```
 
->**Note**
+> [!NOTE]
 >
->You can stop and remove a container in a single command by adding the `force` flag to the `docker rm` command. For example: `docker rm -f <the-container-id>`
+> You can stop and remove a container in a single command by adding the `force` flag to the `docker rm` command. For example: `docker rm -f <the-container-id>`
 
 {{< /tab >}}
 {{< tab name="Docker Desktop" >}}

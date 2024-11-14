@@ -1,6 +1,5 @@
 ---
-title: Overview of Docker Build
-linkTitle: Docker Build
+title: Docker Build
 weight: 100
 description: Get an overview of Docker Build to package and bundle your code and ship it anywhere
 keywords: build, buildx, buildkit

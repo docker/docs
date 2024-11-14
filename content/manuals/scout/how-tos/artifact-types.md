@@ -56,7 +56,7 @@ You can use prefixes with the following commands:
 This section contains a few examples showing how you can use prefixes
 to specify artifacts for `docker scout` commands.
 
-## Analyze a local project
+### Analyze a local project
 
 The `fs://` prefix lets you analyze local source code directly,
 without having to build it into a container image.
@@ -112,7 +112,7 @@ pkg:npm/fastify@3.29.0
   CRITICAL  0
 ```
 
-## Compare a local project to an image
+### Compare a local project to an image
 
 With `docker scout compare`, you can compare the analysis of source code on
 your local filesystem with the analysis of a container image.

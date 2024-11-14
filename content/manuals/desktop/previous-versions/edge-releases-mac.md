@@ -1450,7 +1450,9 @@ TCP connection is idle for more than five minutes (related to
 
 ### Beta 36 Release Notes (2017-01-12 1.13.0-rc6-beta36)
 
->**Important Note:** Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
+> [!IMPORTANT]
+>
+> Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
 
 **Upgrades**
 
@@ -1464,7 +1466,9 @@ TCP connection is idle for more than five minutes (related to
 
 ### Beta 35 Release Notes (2017-01-06 1.13.0-rc5-beta35)
 
->**Important Note:** Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
+> [!IMPORTANT]
+>
+> Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
 
 **Upgrades**
 
@@ -1475,7 +1479,9 @@ TCP connection is idle for more than five minutes (related to
 
 ### Beta 34.1 Release Notes (2016-12-22 1.13.0-rc4-beta34.1)
 
->**Important Note:** Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
+> [!IMPORTANT]
+>
+> Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
 
 **Hotfix**
 
@@ -1487,7 +1493,9 @@ TCP connection is idle for more than five minutes (related to
 
 ### Beta 34 Release Notes (2016-12-20 1.13.0-rc4-beta34)
 
->**Important Note:** Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
+> [!IMPORTANT]
+>
+> Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
 
 **New**
 
@@ -1509,7 +1517,9 @@ TCP connection is idle for more than five minutes (related to
 
 ### Beta 33.1 Release Notes (2016-12-16 1.13.0-rc3-beta33.1)
 
->**Important Note:** Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
+> [!IMPORTANT]
+>
+> Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
 
 **Hotfix**
 
@@ -1517,7 +1527,9 @@ TCP connection is idle for more than five minutes (related to
 
 ### Beta 33 Release Notes (2016-12-15 1.13.0-rc3-beta33)
 
->**Important Note:** Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
+> [!IMPORTANT]
+>
+> Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
 
 **New**
 
@@ -1926,7 +1938,9 @@ events or unexpected unmounts.
 
 ### Beta 18.1 Release Notes (2016-07-07 1.12.0-rc3-beta18.1)
 
->**Note**: Docker 1.12.0 RC3 release introduces a backward incompatible change from RC2. You can fix this by recreating or updating your containers.
+> [!NOTE]
+>
+> Docker 1.12.0 RC3 release introduces a backward incompatible change from RC2. You can fix this by recreating or updating your containers.
 
 **Hotfix**
 

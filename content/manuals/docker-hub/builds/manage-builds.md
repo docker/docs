@@ -6,8 +6,7 @@ keywords: autobuilds, automated, docker hub, registry
 
 > [!NOTE]
 >
-> Automated builds require a
-> [Docker Pro, Team, or Business subscription](../../subscription/_index.md).
+> Automated builds require a [Docker Pro, Team, or Business subscription](../../subscription/_index.md).
 
 ## Cancel or retry a build
 
@@ -32,11 +31,9 @@ From either location, you can select a build job to view its build report. The
 build report shows information about the build job. This includes the source
 repository and branch, or tag, the build logs, the build duration, creation time and location, and the user account the build occurred in.
 
->**Note**
+> [!NOTE]
 >
-> You can now view the progress of your builds every 30 seconds when you
-> refresh the **Builds** page. With the in-progress build logs, you can debug your
-> builds before they're finished.
+> You can now view the progress of your builds every 30 seconds when you refresh the **Builds** page. With the in-progress build logs, you can debug your builds before they're finished.
 
 ![Build report](/docker-hub/images/index-report.png)
 

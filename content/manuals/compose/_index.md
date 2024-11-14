@@ -1,6 +1,5 @@
 ---
-title: Docker Compose overview
-linkTitle: Docker Compose
+title: Docker Compose
 weight: 100
 description: Learn how to use Docker Compose to define and run multi-container applications
   with this detailed introduction to the tool.

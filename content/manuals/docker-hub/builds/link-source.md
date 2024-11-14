@@ -10,8 +10,7 @@ aliases:
 
 > [!NOTE]
 >
-> Automated builds require a
-> [Docker Pro, Team, or Business subscription](../../subscription/_index.md).
+> Automated builds require a [Docker Pro, Team, or Business subscription](../../subscription/_index.md).
 
 To automate building and testing of your images, you link to your hosted source
 code service to Docker Hub so that it can access your source code
@@ -38,7 +37,7 @@ If you are linking a source code provider to create autobuilds for a team, follo
 
     ![Granting access to GitHub account](images/authorize-builder.png)
 
-    >**Note**
+    > [!NOTE]
     >
     > If you are the owner of any GitHub organizations, you might see
     options to grant Docker Hub access to them from this screen. You can also

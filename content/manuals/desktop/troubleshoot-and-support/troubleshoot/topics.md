@@ -6,6 +6,8 @@ linkTitle: Common topics
 toc_max: 4
 tags: [ Troubleshooting ]
 weight: 10 
+aliases:
+ - /desktop/troubleshoot/topics/
 ---
 
 > [!TIP]

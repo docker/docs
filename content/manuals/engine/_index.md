@@ -1,6 +1,5 @@
 ---
-title: Docker Engine overview
-linkTitle: Docker Engine
+title: Docker Engine
 weight: 100
 description: Find a comprehensive overview of Docker Engine, including how to install, storage details, networking, and more
 keywords: Engine

@@ -16,15 +16,13 @@ aliases:
 
 ## 1.13.1 (2017-02-08)
 
-**Important**: On Linux distributions where `devicemapper` was the default storage driver,
-the `overlay2`, or `overlay` is now used by default (if the kernel supports it).
-To use devicemapper, you can manually configure the storage driver to use through
-the `--storage-driver` daemon option, or by setting "storage-driver" in the `daemon.json`
-configuration file.
+> [!IMPORTANT]
+>
+> On Linux distributions where `devicemapper` was the default storage driver, the `overlay2`, or `overlay` is now used by default (if the kernel supports it). To use devicemapper, you can manually configure the storage driver to use through the `--storage-driver` daemon option, or by setting "storage-driver" in the `daemon.json` configuration file.
 
-**Important**: In Docker 1.13, the managed plugin api changed, as compared to the experimental
-version introduced in Docker 1.12. You must **uninstall** plugins which you installed with Docker 1.12
-_before_ upgrading to Docker 1.13. You can uninstall plugins using the `docker plugin rm` command.
+> [!IMPORTANT]
+>
+> In Docker 1.13, the managed plugin api changed, as compared to the experimental version introduced in Docker 1.12. You must **uninstall** plugins which you installed with Docker 1.12 _before_ upgrading to Docker 1.13. You can uninstall plugins using the `docker plugin rm` command.
 
 If you have already upgraded to Docker 1.13 without uninstalling
 previously-installed plugins, you may see this message when the Docker daemon
@@ -66,15 +64,13 @@ To manually remove all plugins and resolve this problem, take the following step
 
 ## 1.13.0 (2017-01-18)
 
-**Important**: On Linux distributions where `devicemapper` was the default storage driver,
-the `overlay2`, or `overlay` is now used by default (if the kernel supports it).
-To use devicemapper, you can manually configure the storage driver to use through
-the `--storage-driver` daemon option, or by setting "storage-driver" in the `daemon.json`
-configuration file.
+> [!IMPORTANT]
+>
+> On Linux distributions where `devicemapper` was the default storage driver, the `overlay2`, or `overlay` is now used by default (if the kernel supports it). To use devicemapper, you can manually configure the storage driver to use through the `--storage-driver` daemon option, or by setting "storage-driver" in the `daemon.json` configuration file.
 
-**Important**: In Docker 1.13, the managed plugin api changed, as compared to the experimental
-version introduced in Docker 1.12. You must **uninstall** plugins which you installed with Docker 1.12
-_before_ upgrading to Docker 1.13. You can uninstall plugins using the `docker plugin rm` command.
+> [!IMPORTANT]
+>
+> In Docker 1.13, the managed plugin api changed, as compared to the experimental version introduced in Docker 1.12. You must **uninstall** plugins which you installed with Docker 1.12 _before_ upgrading to Docker 1.13. You can uninstall plugins using the `docker plugin rm` command.
 
 If you have already upgraded to Docker 1.13 without uninstalling
 previously-installed plugins, you may see this message when the Docker daemon
@@ -299,16 +295,14 @@ To manually remove all plugins and resolve this problem, take the following step
 
 ## 1.12.6 (2017-01-10)
 
-**IMPORTANT**: Docker 1.12 ships with an updated systemd unit file for rpm
-based installs (which includes RHEL, Fedora, CentOS, and Oracle Linux 7). When
-upgrading from an older version of docker, the upgrade process may not
-automatically install the updated version of the unit file, or fail to start
-the docker service if;
+> [!IMPORTANT]
+>
+> Docker 1.12 ships with an updated systemd unit file for rpm
+based installs (which includes RHEL, Fedora, CentOS, and Oracle Linux 7). When upgrading from an older version of Docker, the upgrade process may not automatically install the updated version of the unit file, or fail to start the `docker service` if;
+> - the systemd unit file (`/usr/lib/systemd/system/docker.service`) contains local changes, or
+> - a systemd drop-in file is present, and contains `-H fd://` in the `ExecStart` directive
 
-- the systemd unit file (`/usr/lib/systemd/system/docker.service`) contains local changes, or
-- a systemd drop-in file is present, and contains `-H fd://` in the `ExecStart` directive
-
-Starting the docker service will produce an error:
+Starting the `docker service` will produce an error:
 
     Failed to start docker.service: Unit docker.socket failed to load: No such file or directory.
 
@@ -326,8 +320,9 @@ To resolve this:
 After making those changes, run `sudo systemctl daemon-reload`, and `sudo
 systemctl restart docker` to reload changes and (re)start the docker daemon.
 
-**NOTE**: Docker 1.12.5 will correctly validate that either an IPv6 subnet is provided or
-that the IPAM driver can provide one when you specify the `--ipv6` option.
+> [!NOTE]
+>
+> Docker 1.12.5 will correctly validate that either an IPv6 subnet is provided or that the IPAM driver can provide one when you specify the `--ipv6` option.
 
 If you are currently using the `--ipv6` option _without_ specifying the
 `--fixed-cidr-v6` option, the Docker daemon will refuse to start with the
@@ -369,16 +364,14 @@ which supports automatic allocation of IPv6 subnets.
 
 ## 1.12.5 (2016-12-15)
 
-**IMPORTANT**: Docker 1.12 ships with an updated systemd unit file for rpm
-based installs (which includes RHEL, Fedora, CentOS, and Oracle Linux 7). When
-upgrading from an older version of docker, the upgrade process may not
-automatically install the updated version of the unit file, or fail to start
-the docker service if;
+> [!IMPORTANT]
+>
+> Docker 1.12 ships with an updated systemd unit file for rpm
+based installs (which includes RHEL, Fedora, CentOS, and Oracle Linux 7). When upgrading from an older version of Docker, the upgrade process may not automatically install the updated version of the unit file, or fail to start the `docker service` if;
+> - the systemd unit file (`/usr/lib/systemd/system/docker.service`) contains local changes, or
+> - a systemd drop-in file is present, and contains `-H fd://` in the `ExecStart` directive
 
-- the systemd unit file (`/usr/lib/systemd/system/docker.service`) contains local changes, or
-- a systemd drop-in file is present, and contains `-H fd://` in the `ExecStart` directive
-
-Starting the docker service will produce an error:
+Starting the `docker service` will produce an error:
 
     Failed to start docker.service: Unit docker.socket failed to load: No such file or directory.
 
@@ -396,8 +389,9 @@ To resolve this:
 After making those changes, run `sudo systemctl daemon-reload`, and `sudo
 systemctl restart docker` to reload changes and (re)start the docker daemon.
 
-**NOTE**: Docker 1.12.5 will correctly validate that either an IPv6 subnet is provided or
-that the IPAM driver can provide one when you specify the `--ipv6` option.
+> [!NOTE]
+>
+> Docker 1.12.5 will correctly validate that either an IPv6 subnet is provided or that the IPAM driver can provide one when you specify the `--ipv6` option.
 
 If you are currently using the `--ipv6` option _without_ specifying the
 `--fixed-cidr-v6` option, the Docker daemon will refuse to start with the
@@ -447,16 +441,14 @@ which supports automatic allocation of IPv6 subnets.
 
 ## 1.12.4 (2016-12-12)
 
-**IMPORTANT**: Docker 1.12 ships with an updated systemd unit file for rpm
-based installs (which includes RHEL, Fedora, CentOS, and Oracle Linux 7). When
-upgrading from an older version of docker, the upgrade process may not
-automatically install the updated version of the unit file, or fail to start
-the docker service if;
+> [!IMPORTANT]
+>
+> Docker 1.12 ships with an updated systemd unit file for rpm
+based installs (which includes RHEL, Fedora, CentOS, and Oracle Linux 7). When upgrading from an older version of Docker, the upgrade process may not automatically install the updated version of the unit file, or fail to start the `docker service` if;
+> - the systemd unit file (`/usr/lib/systemd/system/docker.service`) contains local changes, or
+> - a systemd drop-in file is present, and contains `-H fd://` in the `ExecStart` directive
 
-- the systemd unit file (`/usr/lib/systemd/system/docker.service`) contains local changes, or
-- a systemd drop-in file is present, and contains `-H fd://` in the `ExecStart` directive
-
-Starting the docker service will produce an error:
+Starting the `docker service` will produce an error:
 
     Failed to start docker.service: Unit docker.socket failed to load: No such file or directory.
 
@@ -522,16 +514,14 @@ systemctl restart docker` to reload changes and (re)start the docker daemon.
 
 ## 1.12.3 (2016-10-26)
 
-**IMPORTANT**: Docker 1.12 ships with an updated systemd unit file for rpm
-based installs (which includes RHEL, Fedora, CentOS, and Oracle Linux 7). When
-upgrading from an older version of docker, the upgrade process may not
-automatically install the updated version of the unit file, or fail to start
-the docker service if;
+> [!IMPORTANT]
+>
+> Docker 1.12 ships with an updated systemd unit file for rpm
+based installs (which includes RHEL, Fedora, CentOS, and Oracle Linux 7). When upgrading from an older version of Docker, the upgrade process may not automatically install the updated version of the unit file, or fail to start the Docker service if;
+> - the systemd unit file (`/usr/lib/systemd/system/docker.service`) contains local changes, or
+> - a systemd drop-in file is present, and contains `-H fd://` in the `ExecStart` directive
 
-- the systemd unit file (`/usr/lib/systemd/system/docker.service`) contains local changes, or
-- a systemd drop-in file is present, and contains `-H fd://` in the `ExecStart` directive
-
-Starting the docker service will produce an error:
+Starting the `docker service` will produce an error:
 
     Failed to start docker.service: Unit docker.socket failed to load: No such file or directory.
 
@@ -589,16 +579,14 @@ systemctl restart docker` to reload changes and (re)start the docker daemon.
 
 ## 1.12.2 (2016-10-11)
 
-**IMPORTANT**: Docker 1.12 ships with an updated systemd unit file for rpm
-based installs (which includes RHEL, Fedora, CentOS, and Oracle Linux 7). When
-upgrading from an older version of docker, the upgrade process may not
-automatically install the updated version of the unit file, or fail to start
-the docker service if;
+> [!IMPORTANT]
+>
+> Docker 1.12 ships with an updated systemd unit file for rpm
+based installs (which includes RHEL, Fedora, CentOS, and Oracle Linux 7). When upgrading from an older version of Docker, the upgrade process may not automatically install the updated version of the unit file, or fail to start the `docker service` if;
+> - the systemd unit file (`/usr/lib/systemd/system/docker.service`) contains local changes, or
+> - a systemd drop-in file is present, and contains `-H fd://` in the `ExecStart` directive
 
-- the systemd unit file (`/usr/lib/systemd/system/docker.service`) contains local changes, or
-- a systemd drop-in file is present, and contains `-H fd://` in the `ExecStart` directive
-
-Starting the docker service will produce an error:
+Starting the `docker service` will produce an error:
 
     Failed to start docker.service: Unit docker.socket failed to load: No such file or directory.
 
@@ -663,16 +651,14 @@ systemctl restart docker` to reload changes and (re)start the docker daemon.
 
 ## 1.12.1 (2016-08-18)
 
-**IMPORTANT**: Docker 1.12 ships with an updated systemd unit file for rpm
-based installs (which includes RHEL, Fedora, CentOS, and Oracle Linux 7). When
-upgrading from an older version of docker, the upgrade process may not
-automatically install the updated version of the unit file, or fail to start
-the docker service if;
+> [!IMPORTANT]
+>
+> Docker 1.12 ships with an updated systemd unit file for rpm
+based installs (which includes RHEL, Fedora, CentOS, and Oracle Linux 7). When upgrading from an older version of Docker, the upgrade process may not automatically install the updated version of the unit file, or fail to start the `docker service` if;
+> - the systemd unit file (`/usr/lib/systemd/system/docker.service`) contains local changes, or
+> - a systemd drop-in file is present, and contains `-H fd://` in the `ExecStart` directive
 
-- the systemd unit file (`/usr/lib/systemd/system/docker.service`) contains local changes, or
-- a systemd drop-in file is present, and contains `-H fd://` in the `ExecStart` directive
-
-Starting the docker service will produce an error:
+Starting the `docker service` will produce an error:
 
     Failed to start docker.service: Unit docker.socket failed to load: No such file or directory.
 
@@ -755,16 +741,14 @@ systemctl restart docker` to reload changes and (re)start the docker daemon.
 ## 1.12.0 (2016-07-28)
 
 
-**IMPORTANT**: Docker 1.12.0 ships with an updated systemd unit file for rpm
-based installs (which includes RHEL, Fedora, CentOS, and Oracle Linux 7). When
-upgrading from an older version of docker, the upgrade process may not
-automatically install the updated version of the unit file, or fail to start
-the docker service if;
+> [!IMPORTANT]
+>
+> Docker 1.12.0 ships with an updated systemd unit file for rpm
+based installs (which includes RHEL, Fedora, CentOS, and Oracle Linux 7). When upgrading from an older version of Docker, the upgrade process may not automatically install the updated version of the unit file, or fail to start the `docker service` if;
+> - the systemd unit file (`/usr/lib/systemd/system/docker.service`) contains local changes, or
+> - a systemd drop-in file is present, and contains `-H fd://` in the `ExecStart` directive
 
-- the systemd unit file (`/usr/lib/systemd/system/docker.service`) contains local changes, or
-- a systemd drop-in file is present, and contains `-H fd://` in the `ExecStart` directive
-
-Starting the docker service will produce an error:
+Starting the `docker service` will produce an error:
 
     Failed to start docker.service: Unit docker.socket failed to load: No such file or directory.
 
@@ -782,9 +766,10 @@ To resolve this:
 After making those changes, run `sudo systemctl daemon-reload`, and `sudo
 systemctl restart docker` to reload changes and (re)start the docker daemon.
 
-**IMPORTANT**: With Docker 1.12, a Linux docker installation now has two
-additional binaries; `dockerd`, and `docker-proxy`. If you have scripts for
-installing docker, make sure to update them accordingly.
+> [!IMPORTANT]
+>
+> With Docker 1.12, a Linux `docker` installation now has two
+additional binaries; `dockerd`, and `docker-proxy`. If you have scripts for installing `docker`, make sure to update them accordingly.
 
 ### Builder
 
@@ -974,7 +959,9 @@ installing docker, make sure to update them accordingly.
 
 ## 1.11.0 (2016-04-13)
 
-**IMPORTANT**: With Docker 1.11, a Linux docker installation is now made of 4 binaries (`docker`, [`docker-containerd`](https://github.com/docker/containerd), [`docker-containerd-shim`](https://github.com/docker/containerd) and [`docker-runc`](https://github.com/opencontainers/runc)). If you have scripts relying on docker being a single static binaries, make sure to update them. Interaction with the daemon stay the same otherwise, the usage of the other binaries should be transparent. A Windows docker installation remains a single binary, `docker.exe`.
+> [!IMPORTANT]
+>
+> With Docker 1.11, a Linux Docker installation is now made of 4 binaries (`docker`, [`docker-containerd`](https://github.com/docker/containerd), [`docker-containerd-shim`](https://github.com/docker/containerd) and [`docker-runc`](https://github.com/opencontainers/runc)). If you have scripts relying on `docker` being a single static binaries, make sure to update them. Interaction with the daemon stay the same otherwise, the usage of the other binaries should be transparent. A Windows Docker installation remains a single binary, `docker.exe`.
 
 ### Builder
 
@@ -1223,9 +1210,11 @@ installing docker, make sure to update them accordingly.
 
 ## 1.10.0 (2016-02-04)
 
-**IMPORTANT**: Docker 1.10 uses a new content-addressable storage for images and layers.
-A migration is performed the first time docker is run, and can take a significant amount of time depending on the number of images present.
-Refer to this page on the wiki for more information: https://github.com/docker/docker/wiki/Engine-v1.10.0-content-addressability-migration
+> [!IMPORTANT]
+>
+> Docker 1.10 uses a new content-addressable storage for images and layers.
+
+A migration is performed the first time `docker` is run, and can take a significant amount of time depending on the number of images present. Refer to this page on the wiki for more information: https://github.com/docker/docker/wiki/Engine-v1.10.0-content-addressability-migration
 We also released a cool migration utility that enables you to perform the migration before updating to reduce downtime.
 Engine 1.10 migrator can be found on Docker Hub: https://hub.docker.com/r/docker/v1.10-migrator/
 

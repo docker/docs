@@ -14,7 +14,7 @@ swap:
   (?:sign on|log on|log in|logon|login): sign in
   above: previous
   adaptor: adapter
-  admin: administrator
+  admin(?! console): administrator
   administrate: administer
   afterwards: afterward
   allow: let
