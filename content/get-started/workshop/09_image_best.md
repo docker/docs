@@ -182,7 +182,7 @@ for your production build. You can ship the static resources in a static nginx c
 
 ```dockerfile
 # syntax=docker/dockerfile:1
-FROM node:18 AS build
+FROM node:lts AS build
 WORKDIR /app
 COPY package* yarn.lock ./
 RUN yarn install
@@ -194,7 +194,7 @@ FROM nginx:alpine
 COPY --from=build /app/build /usr/share/nginx/html
 ```
 
-In the previous Dockerfile example, it uses the `node:18` image to perform the build (maximizing layer caching) and then copies the output
+In the previous Dockerfile example, it uses the `node:lts` image to perform the build (maximizing layer caching) and then copies the output
 into an nginx container.
 
 ## Summary
