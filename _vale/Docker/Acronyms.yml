@@ -15,6 +15,7 @@ exceptions:
   - AUFS
   - AWS
   - BIOS
+  - CI
   - CISA
   - CLI
   - CNCF
