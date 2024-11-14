@@ -24,7 +24,7 @@ You can set up a Build Cloud subscription on a monthly or annual plan. To upgrad
 
 ### Existing account or organization
 
-1. Sign in to [Docker Build Cloud](https://build.docker.com/).
+1. Sign in to [Docker Build Cloud](https://app.docker.com/build/).
 2. Choose the user account you want to use to subscribe. This can be a personal account, or an organization account. To buy a subscription for an organization, you need to be an organization owner.
 3. Review the plans, then select **Buy now**.
 4. For organizations: Select the number of seats you want to buy, then select **Continue to payment**.
@@ -40,7 +40,7 @@ You can buy a Docker Build Cloud Team subscription if you haven’t created an o
 >
 > To create a new organization and start a Docker Build Cloud Team subscription, you need a personal Docker account. You can [sign up](https://hub.docker.com/signup) for free.
 
-1. Sign in to [Docker Build Cloud](https://build.docker.com/).
+1. Sign in to [Docker Build Cloud](https://app.docker.com/build/).
 2. Select **Create a new team**.
 3. On the **Build Cloud Team** card, select **Buy now**.
 4. To create your team, enter an organization namespace, company name, and the number of seats you want to buy.
@@ -57,7 +57,7 @@ You can manage your subscription in the Build Cloud dashboard in the **Settings 
 
 You can view your billing history at any time.
 
-1. Sign in to [Docker Build Cloud](https://build.docker.com/).
+1. Sign in to [Docker Build Cloud](https://app.docker.com/build/).
 2. Select **Settings and billing**.
 3. Select the **Payment methods and billing history** link to go to the billing portal.
 
@@ -67,7 +67,7 @@ Here you can find your invoice history, download your invoices, and manage your 
 
 You can upgrade your Docker Build Cloud Starter subscription to a Docker Build Cloud Team subscription in the Build Cloud dashboard.
 
-1. Sign in to [Docker Build Cloud](https://build.docker.com/).
+1. Sign in to [Docker Build Cloud](https://app.docker.com/build/).
 2. Select **Settings and billing**.
 3. Next to the name of your current plan, select **Upgrade plan**.
 4. Select **Upgrade now**.
@@ -77,7 +77,7 @@ You can upgrade your Docker Build Cloud Starter subscription to a Docker Build C
 
 You can downgrade your subscription at any time.
 
-1. Sign in to [Docker Build Cloud](https://build.docker.com/).
+1. Sign in to [Docker Build Cloud](https://app.docker.com/build/).
 2. Select **Settings and billing**.
 3. Select **Change plan**.
 4. Select **Downgrade**.
