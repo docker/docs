@@ -17,6 +17,6 @@
 7. Select **Next** to confirm or change the default organization and team provisioning selections.
 8. Review the **Connection Summary** and select **Update connection**.
 
-> [!Note]
+> [!NOTE]
 >
 > If you want to re-add the domain, a new TXT record value is assigned. You must then complete the verification steps with the new TXT record value.

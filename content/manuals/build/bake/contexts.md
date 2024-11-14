@@ -93,14 +93,14 @@ multiple Dockerfiles that can't be easily merged into one.
 
 ## Deduplicate context transfer
 
-> **Note**
+> [!NOTE]
 >
-> As of Buildx version 0.17.0 and later, Bake automatically deduplicates
+> As of Buildx version 0.17.0 and later, Bake automatically de-duplicates
 > context transfer for targets that share the same context. In addition to
 > Buildx version 0.17.0, the builder must be running BuildKit version 0.16.0 or
 > later, and the Dockerfile syntax must be `docker/dockerfile:1.10` or later.
 >
-> If you meet these requirements, you don't need to manually deduplicate
+> If you meet these requirements, you don't need to manually de-duplicate
 > context transfer as described in this section.
 >
 > - To check your Buildx version, run `docker buildx version`.

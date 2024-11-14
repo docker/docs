@@ -1276,9 +1276,10 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 TCP connection is idle for more than 5 minutes (related to
 [docker/for-mac#1374](https://github.com/docker/for-mac/issues/1374))
 
-> [!NOTE]: The link above goes to Docker for Mac issues because a
-Mac user reported this problem, which applied to both Mac and Windows
-and was fixed on both.
+> [!NOTE]
+>
+> The link above goes to Docker for Mac issues because a
+Mac user reported this problem, which applied to both Mac and Windows and was fixed on both.
 
 ### Docker Community Edition 17.07.0-rc3-win23 Release Notes (2017-08-21 17.07.0-win23)
 
@@ -1626,7 +1627,9 @@ registry access (fixes [docker/for-win#569](https://github.com/docker/for-win/is
 
 ### Beta 36 Release Notes (2017-01-12 1.13.0-rc6-beta36)
 
->**Important Note:** Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
+> [!IMPORTANT]
+>
+> Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
 
 **Upgrades**
 
@@ -1640,7 +1643,9 @@ registry access (fixes [docker/for-win#569](https://github.com/docker/for-win/is
 
 ### Beta 35 Release Notes (2017-01-06 1.13.0-rc5-beta35)
 
->**Important Note:** Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
+> [!IMPORTANT]
+>
+> Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
 
 **Upgrades**
 
@@ -1669,7 +1674,9 @@ registry access (fixes [docker/for-win#569](https://github.com/docker/for-win/is
 
 ### Beta 33 Release Notes (2016-12-15 1.13.0-rc3-beta33)
 
->**Important Note:** Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
+> [!IMPORTANT]
+>
+> Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
 
 **New**
 
@@ -1686,7 +1693,9 @@ registry access (fixes [docker/for-win#569](https://github.com/docker/for-win/is
 
 ### Beta 32.1 Release Notes (2016-12-09 1.13.0-rc3-beta32.1)
 
->**Important Note:** Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
+> [!IMPORTANT]
+>
+> Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
 
 **Hotfixes**
 
@@ -1716,9 +1725,9 @@ registry access (fixes [docker/for-win#569](https://github.com/docker/for-win/is
 
 ### Beta 32 Release Notes (2016-12-07 1.13.0-rc3-beta32)
 
->**Important Note**:
+> [!IMPORTANT]
 >
->  Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
+> Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
 
 **New**
 
@@ -2070,7 +2079,9 @@ Unreleased. See Beta 23 for changes.
 
 ### Beta 18.1 Release (2016-07-07 1.12.0-rc3-beta18.1)
 
->**Note**: Docker 1.12.0 RC3 release introduces a backward incompatible change from RC2. You can fix this by recreating or updating your containers.
+> [!NOTE]
+>
+> Docker 1.12.0 RC3 release introduces a backward incompatible change from RC2. You can fix this by recreating or updating your containers.
 
 **Hotfix**
 
@@ -2493,7 +2504,9 @@ are working on a solution.
 * Fix msi version
 * Don't truncate Toolbox link
 
->**Note**: Docker for Windows skipped from Beta 1 to Beta 5 at this point to synch up the version numbering with Docker for Mac, which went into beta cycles a little earlier.
+> [!NOTE]
+>
+> Docker for Windows skipped from Beta 1 to Beta 5 at this point to synch up the version numbering with Docker for Mac, which went into beta cycles a little earlier.
 
 ### Beta 1 Release (2016-03-24 1.10.6)
 

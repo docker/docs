@@ -1,5 +1,4 @@
 (?-i)[A-Z]{2,}s
-Admin Console
 Amazon
 Anchore
 Apple
