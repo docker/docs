@@ -224,47 +224,47 @@ Now that you have learnt how to connect a non-containerized Node.js application 
 
    ```yaml
    services:
-      backend:
-        build:
-          context: ./backend
-          dockerfile: Dockerfile
-        ports:
-          - 5000:5000
-        depends_on:
-          - localstack
-          - mongodb
-        env_file:
-          - backend/.env
+     backend:
+       build:
+         context: ./backend
+         dockerfile: Dockerfile
+       ports:
+         - 5000:5000
+       depends_on:
+         - localstack
+         - mongodb
+       env_file:
+         - backend/.env
 
-       frontend:
-         build:
-           context: ./frontend
-           dockerfile: Dockerfile
-         ports:
-           - 5173:5173
-         depends_on:
-           - backend
-         environment:
-           - REACT_APP_API_URL=http://backend:5000/api
+     frontend:
+       build:
+         context: ./frontend
+         dockerfile: Dockerfile
+       ports:
+         - 5173:5173
+       depends_on:
+         - backend
+       environment:
+         - REACT_APP_API_URL=http://backend:5000/api
 
-        mongodb:
-          image: mongo
-          container_name: mongodb
-          volumes:
-            - mongodbdata:/data/db
-          ports:
-            - 27017:27017
+     mongodb:
+       image: mongo
+       container_name: mongodb
+       volumes:
+         - mongodbdata:/data/db
+       ports:
+         - 27017:27017
 
-          localstack:
-            image: localstack/localstack
-            container_name: localstack
-            ports:
-              - 4566:4566
-            environment:
-              - SERVICES=s3
-              - GATEWAY_LISTEN=0.0.0.0:4566
-            volumes:
-              - ./localstack:/docker-entrypoint-initaws.d"
+     localstack:
+       image: localstack/localstack
+       container_name: localstack
+       ports:
+         - 4566:4566
+       environment:
+         - SERVICES=s3
+         - GATEWAY_LISTEN=0.0.0.0:4566
+       volumes:
+         - ./localstack:/docker-entrypoint-initaws.d"
 
    volumes:
      mongodbdata:
