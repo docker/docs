@@ -3,7 +3,6 @@ Amazon
 Anchore
 Apple
 Artifactory
-Autobuild
 Autotest
 Azure
 Btrfs
@@ -93,6 +92,7 @@ Windows
 WireMock
 Zscaler
 Zsh
+[Aa]utobuild
 [Bb]uildx
 [Cc]odenames?
 [Cc]ompose
@@ -105,6 +105,7 @@ Zsh
 [Kk]eyrings?
 [Ll]oopback
 [Mm]oby
+[Nn]amespace
 [Oo]nboarding
 [Pp]aravirtualization
 [Pp]roxied
