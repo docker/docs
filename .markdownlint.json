@@ -1,7 +1,7 @@
 {
   "default": false,
   "blanks-around-headings": true,
-  "hr-style": true,
+  "pr-style": true,
   "heading-start-left": true,
   "single-h1": true,
   "no-trailing-punctuation": true,
