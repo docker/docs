@@ -14,7 +14,7 @@ Single sign-on (SSO) lets users access Docker by authenticating using their iden
 
 ## How SSO works
 
-When you enable SSO, Docker supports a IdP-initiated SSO flow for user login. Instead of users authenticating using their Docker username and password, they are redirected to your identity provider's authentication page to sign in. Users must sign in to Docker Hub or Docker Desktop to initiate the SSO authentication process.
+When you enable SSO, Docker supports a non-IdP-initiated SSO flow for user login. Instead of users authenticating using their Docker username and password, they are redirected to your identity provider's authentication page to sign in. Users must sign in to Docker Hub or Docker Desktop to initiate the SSO authentication process.
 
 The following diagram shows how SSO operates and is managed in Docker Hub and Docker Desktop. In addition, it provides information on how to authenticate between your IdP.
 
