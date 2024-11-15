@@ -5,6 +5,7 @@ keywords: concepts, build, images, container, docker desktop
 description: What is an image
 aliases:
   - /guides/docker-concepts/the-basics/what-is-an-image/
+  - /get-started/run-docker-hub-images/
 ---
 
 {{< youtube-embed NyvT9REqLe4 >}}
