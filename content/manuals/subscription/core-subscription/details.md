@@ -45,7 +45,7 @@ Docker Pro includes:
 - Unlimited private repositories
 - 5000 image [pulls per day](../../docker-hub/download-rate-limit.md)
 - [Auto Builds](../../docker-hub/repos/manage/builds/_index.md) with 5 concurrent builds
-- 300 [Vulnerability Scans](../../docker-hub/repos//manage/vulnerability-scanning.md)
+- 300 [Vulnerability Scans](../../docker-hub/repos/manage/vulnerability-scanning.md)
 
 For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/).
 

@@ -16,14 +16,20 @@ organized under the correct accounts or namespaces.
 
 When consolidating personal repositories, you can pull private images from the initial repository and push them into another repository owned by you. To avoid losing your private images, perform the following steps:
 
-1. Navigate to [Docker Hub](https://hub.docker.com) create a new Docker account and select a personal subscription.
-2. Using `docker login` from the CLI, sign in using your original Docker account and pull your private images.
-3. Tag your private images with your newly created Docker  username, for example:
+1. [Sign up](https://app.docker.com/signup) for a new Docker account with a personal subscription.
+2. Sign in to [Docker](https://app.docker.com/login) using your original Docker account
+3. Pull your images:
+
+   ```console
+   $ docker pull namespace1/docker101tutorial
+   ```
+
+4. Tag your private images with your newly created Docker username, for example:
 
    ```console
    $ docker tag namespace1/docker101tutorial new_namespace/docker101tutorial
    ```
-4. Using `docker login` from the CLI, sign in with your newly created Docker account, and push your newly tagged private images to your new Docker account namespace:
+5. Using `docker login` from the CLI, sign in with your newly created Docker account, and push your newly tagged private images to your new Docker account namespace:
 
    ```console
    $ docker push new_namespace/docker101tutorial

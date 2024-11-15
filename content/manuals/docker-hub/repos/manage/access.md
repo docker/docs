@@ -31,11 +31,10 @@ roles, teams, or organization access tokens.
 
 ### Change repository visibility
 
-When creating a repository in Docker Hub, you are given the option to set the
-repository visibility. In addition, you can set the default repository
-visibility when a repository is created in your personal repository settings.
-The following describes how to change the visibility after the repository has
-been created.
+When creating a repository in Docker Hub, you can set the repository visibility.
+In addition, you can set the default repository visibility when a repository is
+created in your personal repository settings. The following describes how to
+change the visibility after the repository has been created.
 
 To change repository visibility:
 
@@ -104,8 +103,8 @@ access.
 
 ### Configure team repository permissions
 
-You must create a team before you are able to assign in permissions. For more
-details, see [Create and manage a
+You must create a team before you are able to configure repository permissions.
+For more details, see [Create and manage a
 team](/manuals/admin/organization/manage-a-team.md).
 
 To configure team repository permissions:
