@@ -57,7 +57,7 @@ You can manage the security settings for your account in Docker Home.
 
 For information on two-factor authentication (2FA) for your account, see [Enable two-factor authentication](../security/for-developers/2fa/_index.md) to get started.
 
-For information on personal access tokens (PATs), see [Create and manage access tokens](../security/for-developers/access-tokens.md).
+For information on personal access tokens, see [Create and manage access tokens](../security/for-developers/access-tokens.md).
 
 ## Account management
 
