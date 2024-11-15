@@ -110,10 +110,7 @@ RUN htmltest
 FROM alpine:${ALPINE_VERSION} AS unused-media
 RUN apk add --no-cache fd ripgrep
 WORKDIR /test
-RUN --mount=type=bind,target=. <<"EOT"
-set -ex
-./hack/test/unused_media
-EOT
+RUN --mount=type=bind,target=. ./hack/test/unused_media
 
 # path-warnings checks for duplicate target paths
 FROM build-base AS path-warnings
