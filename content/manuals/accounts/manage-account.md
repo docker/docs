@@ -5,11 +5,11 @@ description: Learn how to manage settings for your Docker account.
 keywords: accounts, docker ID, account settings, account management, docker home
 ---
 
-You can centrally manage the settings for your Docker account. Here you can also take administrative actions for your account and manage your account security.
+You can centrally manage the settings for your Docker account using Docker Home. Here you can also take administrative actions for your account and manage your account security.
 
 > [!TIP]
 >
-> If your account is associated with an organization that enforces single sign-on (SSO), you may not have permissions to update your account settings. You need to contact your administrator to update your settings.
+> If your account is associated with an organization that enforces single sign-on (SSO), you may not have permissions to update your account settings. You must contact your administrator to update your settings.
 
 ## Update general settings
 
@@ -17,7 +17,7 @@ You can centrally manage the settings for your Docker account. Here you can also
 2. In Docker Home, select your avatar in the top-right corner to open the drop-down.
 3. Select **Account settings**.
 
-From here, you can take any of the following actions.
+From the Account settings page, you can take any of the following actions.
 
 ### Update account information
 
@@ -57,7 +57,7 @@ You can manage the security settings for your account in Docker Home.
 
 For information on two-factor authentication (2FA) for your account, see [Enable two-factor authentication](../security/for-developers/2fa/_index.md) to get started.
 
-For information on personal access tokens (PAT), see [Create and manage access tokens](../security/for-developers/access-tokens.md).
+For information on personal access tokens, see [Create and manage access tokens](../security/for-developers/access-tokens.md).
 
 ## Account management
 
