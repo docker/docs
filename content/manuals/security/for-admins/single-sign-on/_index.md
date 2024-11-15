@@ -38,7 +38,7 @@ Once your SSO configuration is complete, a first-time user can sign in to Docker
 Before configuring SSO, ensure you meet the following prerequisites:
 * Notify your company about the new SSO sign in procedures.
 * Verify that all users have Docker Desktop version 4.4.2 or later installed.
-* If your organization is planning to [enforce SSO](../enforce-sign-in/_index.md), members using the Docker CLI are required to [create a Personal Access Token (PAT)](/docker-hub/access-tokens/). The PAT will be used instead of their username and password. Docker plans to deprecate signing in to the CLI with a password in the future, so using a PAT will be required to prevent issues with authentication. For more details see the [security announcement](/security/security-announcements/#deprecation-of-password-logins-on-cli-when-sso-enforced).
+* If your organization is planning to [enforce SSO](/manuals/security/for-admins/single-sign-on/connect.md#optional-enforce-sso), members using the Docker CLI are required to [create a Personal Access Token (PAT)](/docker-hub/access-tokens/). The PAT will be used instead of their username and password. Docker plans to deprecate signing in to the CLI with a password in the future, so using a PAT will be required to prevent issues with authentication. For more details see the [security announcement](/security/security-announcements/#deprecation-of-password-logins-on-cli-when-sso-enforced).
 * Ensure all your Docker users have a valid user on your IdP with the same email address as their Unique Primary Identifier (UPN).
 * Confirm that all CI/CD pipelines have replaced their passwords with PATs.
 * For your service accounts, add your additional domains or enable it in your IdP.
