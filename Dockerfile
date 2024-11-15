@@ -112,7 +112,7 @@ RUN apk add --no-cache fd ripgrep
 WORKDIR /test
 RUN --mount=type=bind,target=. <<"EOT"
 set -ex
-./scripts/test_unused_media.sh
+./hack/test/unused_media
 EOT
 
 # path-warnings checks for duplicate target paths
@@ -145,7 +145,7 @@ RUN apk add yq
 COPY --from=build /project/public ./public
 RUN --mount=type=bind,target=. <<"EOT"
 set -ex
-./scripts/test_go_redirects.sh
+./hack/test/go_redirects
 EOT
 
 # release is an empty scratch image with only compiled assets

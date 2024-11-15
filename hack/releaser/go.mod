@@ -1,4 +1,4 @@
-module github.com/docker/docs/_releaser
+module github.com/docker/docs/hack/releaser
 
 go 1.22
 
