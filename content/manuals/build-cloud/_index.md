@@ -54,7 +54,7 @@ data between cloud builders.
 To get started with Docker Build Cloud,
 [create a Docker account](/accounts/create-account/)
 and sign up for the starter plan on the
-[Docker Build Cloud Dashboard](https://build.docker.com/).
+[Docker Build Cloud Dashboard](https://app.docker.com/build/).
 
 If your organization isn't already on a paid Docker subscription, you will
 need to provide a payment method to sign up for Docker Build Cloud. If you
