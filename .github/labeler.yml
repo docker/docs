@@ -2,7 +2,7 @@ area/release:
   - changed-files:
       - any-glob-to-any-file:
           - .github/**
-          - _releaser/**
+          - hack/releaser/**
           - netlify.toml
 
 area/config:
@@ -14,6 +14,7 @@ area/config:
           - docker-bake.hcl
           - hugo.yaml
           - pagefind.yml
+          - hack/vendor
 
 area/contrib:
   - changed-files:
@@ -28,7 +29,7 @@ area/tests:
           - .markdownlint.json
           - .vale.ini
           - _vale/**
-          - scripts/test_*
+          - hack/test/*
 
 area/build:
   - changed-files:
@@ -183,3 +184,4 @@ dependencies:
           - go.sum
           - package*.json
           - _vendor/**
+          - hack/vendor

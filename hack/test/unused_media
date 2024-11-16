@@ -1,0 +1,33 @@
+#!/usr/bin/env sh
+
+echo "checking for unused media files..."
+FORMATS="svg png webp mp4 jpg jpeg"
+DIRECTORIES="content static"
+
+FORMAT_FLAGS=""
+for format in $FORMATS; do
+  FORMAT_FLAGS="$FORMAT_FLAGS -e $format"
+done
+
+echo "Searching for media with formats: $FORMATS"
+echo "Searching in directories: $DIRECTORIES"
+
+MEDIA=$(fd . $FORMAT_FLAGS $DIRECTORIES)
+
+UNUSED_COUNT=0
+
+for file in $MEDIA; do
+  rg -q "$(basename $file)" .
+  if [ $? -ne 0 ]; then
+    echo "$file"
+    UNUSED_COUNT=$((UNUSED_COUNT + 1))
+  fi
+done
+
+if [ $UNUSED_COUNT -eq 0 ]; then
+  echo "No unused media files."
+  exit 0
+else
+  echo "$UNUSED_COUNT unused media files found. Please remove them."
+  exit 1
+fi
