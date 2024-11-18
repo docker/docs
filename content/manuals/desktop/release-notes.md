@@ -43,7 +43,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 ### Upgrades
 
 - [Docker Buildx v0.18.0](https://github.com/docker/buildx/releases/tag/v0.18.0)
-- [Docker Compose v2.30.1](https://github.com/docker/compose/releases/tag/v2.30.1)
+- [Docker Compose v2.30.3](https://github.com/docker/compose/releases/tag/v2.30.3)
 - [Kubernetes v1.30.2](https://github.com/kubernetes/kubernetes/releases/tag/v1.30.5)
 - [NVIDIA Container Toolkit v1.17.0](https://github.com/NVIDIA/nvidia-container-toolkit/releases/tag/v1.17.0)
 - [Docker Scout CLI v1.15.0](https://github.com/docker/scout-cli/releases/tag/v1.15.0)
@@ -62,16 +62,20 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 - Fixed an issue where if the `umask` is set to `577` it would cause `rpmbuild` failure. Fixes [docker/for-mac#6511](https://github.com/docker/for-mac/issues/6511).
 - Fixed a bug that caused ports open on the host to 18 for containers started with `--network=host`.
 - Fixed bind mount ownership for non-root containers. Fixes [docker/for-mac#6243](https://github.com/docker/for-mac/issues/6243).
+- Docker Desktop will not unpause automatically after a manual pause. The system will stay paused until the user presses the Resume button in the Dashboard or the menu entry. This fixes a bug where other software would accidentally trigger a resume by running a CLI command in the background. Fixes [for-mac/#6908](https://github.com/docker/for-mac/issues/6908)
 
 #### For Mac
 
 - Fixed a bug in Docker VMM that prevented MySQL and other databases containers to start. Fixes reports from [docker/for-mac#7464](https://github.com/docker/for-mac/issues/7464).
+- The minimum memory requirement is now automatically adjusted for Docker VMM, improving the user experience and addressing reports from [docker/for-mac#7464](https://github.com/docker/for-mac/issues/7464), [docker/for-mac#7482](https://github.com/docker/for-mac/issues/7482).
 - Fixed a bug where the advanced option **Allowed privileged port mapping** was not working as expected. Fixes [docker/for-mac#7460](https://github.com/docker/for-mac/issues/7460).
 - Docker Desktop can now automatically configure shell completion scripts for zsh, bash and fish inside the install wizard and settings screen.
+- Fixed a bug where the in-app update would fail if Docker Desktop was installed by a non-admin user or if the current user was previously an administrator. Fixes [for-mac/#7403](https://github.com/docker/for-mac/issues/7403) and [for-mac/#6920](https://github.com/docker/for-mac/issues/6920)
 
 #### For Windows
 
 - Fixed a bug preventing UDP port 53 to be bound.
+- Fixed a bug where Windows daemon options where overwritten at startup.
 
 ## 4.35.1
 
