@@ -55,14 +55,14 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 #### For all platforms
 
 - Fixed a bug where the `docker events` command would not terminate after streaming the events.
-- Docker Init: Improved Dockerfile caching for PHP applications that don't use Compose.
+- Docker Init: Improved Dockerfile caching for PHP applications that don't use Docker Compose.
 - Synchronized file shares now respects the `filesharingAllowedDirectories` setting in `admin-settings.json`.
 - Fixed an issue where if Docker Desktop is configured to use a proxy, it fails to start due to an internal timeout while fetching authentication tokens.
 - Added a recovery banner to retry an update if the download failed.
 - Fixed an issue where if the `umask` is set to `577` it would cause `rpmbuild` failure. Fixes [docker/for-mac#6511](https://github.com/docker/for-mac/issues/6511).
 - Fixed a bug that caused ports open on the host to 18 for containers started with `--network=host`.
 - Fixed bind mount ownership for non-root containers. Fixes [docker/for-mac#6243](https://github.com/docker/for-mac/issues/6243).
-- Docker Desktop will not unpause automatically after a manual pause. The system will stay paused until the user presses the Resume button in the Dashboard or the menu entry. This fixes a bug where other software would accidentally trigger a resume by running a CLI command in the background. Fixes [for-mac/#6908](https://github.com/docker/for-mac/issues/6908)
+- Docker Desktop will not unpause automatically after a manual pause. The system will stay paused until you manually resume the Docker engine. This fixes a bug where other software would accidentally trigger a resume by running a CLI command in the background. Fixes [for-mac/#6908](https://github.com/docker/for-mac/issues/6908)
 
 #### For Mac
 
@@ -75,7 +75,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 #### For Windows
 
 - Fixed a bug preventing UDP port 53 to be bound.
-- Fixed a bug where Windows daemon options where overwritten at startup.
+- Fixed a bug where Windows daemon options were overwritten at startup.
 
 ## 4.35.1
 
