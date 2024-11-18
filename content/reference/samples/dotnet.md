@@ -6,4 +6,5 @@ aliases:
 - /samples/dotnetcore/
 - /compose/aspnet-mssql-compose/
 - /samples/aspnet-mssql-compose/
+- /samples/dotnet/
 ---

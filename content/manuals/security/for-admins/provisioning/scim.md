@@ -5,6 +5,7 @@ linkTitle: SCIM
 description: Learn how System for Cross-domain Identity Management works and how to set it up.
 aliases:
   - /security/for-admins/scim/
+  - /docker-hub/scim/
 weight: 30
 ---
 
