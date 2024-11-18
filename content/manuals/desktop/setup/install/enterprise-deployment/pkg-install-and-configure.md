@@ -25,7 +25,7 @@ The PKG package supports various MDM (Mobile Device Management) solutions, makin
 5. Follow the instructions on the installation wizard to authorize the installer and proceed with the install.
    - **Introduction**: Select `Continue`.
    - **License**: Review the license agreement and select `Agree`.
-   - **Destination Select**: This step is optional. It is recommended that you do not change the default installation destination (usually `Macintosh HD`). Select `Continue`.
+   - **Destination Select**: This step is optional. It is recommended that you don't change the default installation destination (usually `Macintosh HD`). Select `Continue`.
    - **Installation Type**: Select `Install`.
    - **Installation**: Authenticate using your administrator password or Touch ID.
    - **Summary**: After the installation completes, select `Close`.
