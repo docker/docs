@@ -59,7 +59,7 @@ Make sure you have:
    @app.route('/')
    def hello():
        count = get_hit_count()
-       return 'Hello World! I have been seen {} times.\n'.format(count)
+       return f'Hello World! I have been seen {count} times.\n'
     ```
 
    In this example, `redis` is the hostname of the redis container on the
@@ -273,7 +273,7 @@ To see Compose Watch in action:
 message to `Hello from Docker!`:
 
    ```python
-   return 'Hello from Docker! I have been seen {} times.\n'.format(count)
+   return f'Hello from Docker! I have been seen {count} times.\n'
    ```
 
 2. Refresh the app in your browser. The greeting should be updated, and the
