@@ -110,10 +110,7 @@ RUN htmltest
 FROM alpine:${ALPINE_VERSION} AS unused-media
 RUN apk add --no-cache fd ripgrep
 WORKDIR /test
-RUN --mount=type=bind,target=. <<"EOT"
-set -ex
-./scripts/test_unused_media.sh
-EOT
+RUN --mount=type=bind,target=. ./hack/test/unused_media
 
 # path-warnings checks for duplicate target paths
 FROM build-base AS path-warnings
@@ -145,7 +142,7 @@ RUN apk add yq
 COPY --from=build /project/public ./public
 RUN --mount=type=bind,target=. <<"EOT"
 set -ex
-./scripts/test_go_redirects.sh
+./hack/test/go_redirects
 EOT
 
 # release is an empty scratch image with only compiled assets

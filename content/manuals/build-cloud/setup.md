@@ -16,7 +16,7 @@ environment.
 To get started with Docker Build Cloud, you need to:
 
 - Download and install Docker Desktop version 4.26.0 or later.
-- Sign up for a Docker Build Cloud subscription in the [Docker Build Cloud Dashboard](https://build.docker.com/).
+- Sign up for a Docker Build Cloud subscription in the [Docker Build Cloud Dashboard](https://app.docker.com/build/).
 
 ### Use Docker Build Cloud without Docker Desktop
 

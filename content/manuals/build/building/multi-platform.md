@@ -342,7 +342,7 @@ Steps:
    $ docker build \
       --builder <cloud-builder> \
       --platform linux/amd64,linux/arm64 \
-      --output ./bin
+      --output ./bin .
    ```
 
    This command builds the image using the cloud builder and exports the
