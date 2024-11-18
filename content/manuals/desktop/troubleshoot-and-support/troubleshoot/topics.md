@@ -265,7 +265,7 @@ Your machine must have the following features for Docker Desktop to function cor
    Note that many Windows devices already have virtualization enabled, so this may not apply.
 4. Hypervisor enabled at Windows startup
 
-![WSL 2 enabled](../images/wsl2-enabled.png)
+![WSL 2 enabled](../../images/wsl2-enabled.png)
 
 #### Hyper-V
 
@@ -277,7 +277,7 @@ On Windows 10 Pro or Enterprise, you can also use Hyper-V with the following fea
    Note that many Windows devices already have virtualization enabled, so this may not apply.
 3. Hypervisor enabled at Windows startup
 
-![Hyper-V on Windows features](../images/hyperv-enabled.png)
+![Hyper-V on Windows features](../../images/hyperv-enabled.png)
 
 Docker Desktop requires Hyper-V as well as the Hyper-V Module for Windows
 PowerShell to be installed and enabled. The Docker Desktop installer enables
@@ -295,7 +295,7 @@ In the subsequent screen, verify that Hyper-V is enabled.
 In addition to [Hyper-V](#hyper-v) or [WSL 2](/manuals/desktop/features/wsl/_index.md), virtualization must be turned on. Check the
 Performance tab on the Task Manager. Alternatively, you can type 'systeminfo' into your terminal. If you see 'Hyper-V Requirements:   A hypervisor has been detected. Features required for Hyper-V will not be displayed', then virtualization is enabled.
 
-![Task Manager](../images/virtualization-enabled.png)
+![Task Manager](../../images/virtualization-enabled.png)
 
 If you manually uninstall Hyper-V, WSL 2 or turn off virtualization,
 Docker Desktop cannot start. 
