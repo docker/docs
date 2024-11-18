@@ -285,7 +285,7 @@ Spotlight Search.
 
 To read the Docker app log messages, type `docker` in the Console window search bar and press Enter. Then select `ANY` to expand the drop-down list next to your `docker` search entry, and select `Process`.
 
-![Mac Console search for Docker app](../images/console.png)
+![Mac Console search for Docker app](../../images/console.png)
 
 You can use the Console Log Query to search logs, filter the results in various
 ways, and create reports.
