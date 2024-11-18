@@ -3,16 +3,15 @@
 exports.handler = (event, context, callback) => {
     //console.log("event", JSON.stringify(event));
     const request = event.Records[0].cf.request;
-    // Trim trailing slash and collapse redundant slashes
-    const normalizedUri = request.uri.replace(/\/$/, "").replaceAll(/\/{2,}/g, "/")
+    const requestUrl = request.uri.replace(/\/$/, "")
 
     const redirects = JSON.parse(`{{.RedirectsJSON}}`);
     for (let key in redirects) {
         const redirectTarget = key.replace(/\/$/, "")
-        if (redirectTarget !== normalizedUri) {
+        if (redirectTarget !== requestUrl) {
             continue;
         }
-        //console.log(`redirect: ${normalizedUri} to ${redirects[key]}`);
+        //console.log(`redirect: ${requestUrl} to ${redirects[key]}`);
         const response = {
             status: '301',
             statusDescription: 'Moved Permanently',
@@ -53,6 +52,5 @@ exports.handler = (event, context, callback) => {
         return
     }
 
-    request.uri = normalizedUri
     callback(null, request);
 };
