@@ -42,7 +42,7 @@ This guide will walk you through the installation process, enabling you to exper
 
 {{< card
   title="Docker Desktop for Linux"
-  description="[Install instructions](/desktop/install/linux/)"
+  description="[Install instructions](/desktop/setup/install/linux/)"
   icon="/assets/images/linux_48.svg" >}}
 
 Once it's installed, complete the setup process and you're all set to run a Docker container.
