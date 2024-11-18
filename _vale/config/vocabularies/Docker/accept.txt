@@ -71,6 +71,7 @@ Nuxeo
 OAuth
 OTel
 Okta
+PKG
 Postgres
 PowerShell
 Python

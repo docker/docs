@@ -219,7 +219,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 - [Host networking](/manuals/engine/network/drivers/host.md#docker-desktop) support on Docker Desktop is now generally available.
 - If you authenticate via the CLI, you can now authenticate through a browser-based flow, removing the need for manual PAT generation.
 - Windows now supports automatic reclamation of disk space in Docker Desktop for WSL2 installations [using a managed virtual hard disk](/manuals/desktop/features/wsl/best-practices.md).
-- Deploying Docker Desktop via the [MSI installer](/manuals/desktop/setup/install/msi/_index.md) is now generally available.
+- Deploying Docker Desktop via the [MSI installer](/manuals/desktop/setup/install/enterprise-deployment/msi-install-and-configure.md) is now generally available.
 - Two new methods to [enforce sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md) (windows registry key and `.plist` file) are now generally available.
 - Fresh installations of Docker Desktop now use the containerd image store by default.
 - [Compose Bridge](/manuals/compose/bridge/_index.md) (Experimental) is now available from the Compose file viewer. Easily convert and deploy your Compose project to a Kubernetes cluster.

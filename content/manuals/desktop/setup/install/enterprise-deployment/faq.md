@@ -1,11 +1,14 @@
 ---
-title: MSI FAQs
-description: Frequently asked questions for deploying Docker Desktop with Microsoft installer
-keywords: msi, deploy, docker desktop, faqs
+title: FAQs
+description: Frequently asked questions for deploying Docker Desktop at scale
+keywords: msi, deploy, docker desktop, faqs, pkg
 tags: [FAQ]
 aliases:
 - /desktop/install/msi/faq/
+- /desktop/setup/install/msi/faq/
 ---
+
+## MSI
 
 ### What happens to user data if they have an older Docker Desktop installation (i.e. `.exe`)?
 
