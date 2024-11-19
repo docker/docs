@@ -39,6 +39,7 @@ Docker Scout uses the following package repositories and security trackers:
   exploitation](https://github.com/gmatuz/inthewilddb)
 - [National Vulnerability Database](https://nvd.nist.gov/)
 - [Oracle Linux Security](https://linux.oracle.com/security/)
+- [Photon OS 3.0 Security Advisories](https://github.com/vmware/photon/wiki/Security-Updates-3)
 - [Python Packaging Advisory
   Database](https://github.com/pypa/advisory-database)
 - [RedHat Security Data](https://www.redhat.com/security/data/metrics/)
