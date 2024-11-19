@@ -33,7 +33,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 - Docker Desktop on WSL is now faster, more reliable, and has enhanced security
 - Enhance Container Isolation (ECI) has been improved to support images with wildcard tags
-- Admins on business can now:
+- Administrators can now:
   - Allow any container to mount the Docker socket with ECI
   - Enforce sign-in with macOS configuration profiles (Early Access)
   - Enforce sign-in for more than one organization at a time (Early Access)
