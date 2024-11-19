@@ -60,7 +60,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 - Fixed an issue where if Docker Desktop is configured to use a proxy, it fails to start due to an internal timeout while fetching authentication tokens.
 - Added a recovery banner to retry an update if the download failed.
 - Fixed an issue where if the `umask` is set to `577` it would cause `rpmbuild` failure. Fixes [docker/for-mac#6511](https://github.com/docker/for-mac/issues/6511).
-- Fixed a bug that caused ports open on the host to 18 for containers started with `--network=host`.
+- Fixed a bug that limited ports open on the host to 18 for containers started with `--network=host`.
 - Fixed bind mount ownership for non-root containers. Fixes [docker/for-mac#6243](https://github.com/docker/for-mac/issues/6243).
 - Docker Desktop will not unpause automatically after a manual pause. The system will stay paused until you manually resume the Docker engine. This fixes a bug where other software would accidentally trigger a resume by running a CLI command in the background. Fixes [for-mac/#6908](https://github.com/docker/for-mac/issues/6908)
 
