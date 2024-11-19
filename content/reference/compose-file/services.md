@@ -618,6 +618,12 @@ i.e. overridden to be empty.
 env_file: .env
 ```
 
+Relative paths are resolved from the Compose file's parent folder. As absolute paths prevent the Compose
+file from being portable, Compose warns you when such a path is used to set `env_file`.
+
+Environment variables declared in the [environment](#environment) section override these values. This holds true even if those values are
+empty or undefined.
+
 `env_file` can also be a list. The files in the list are processed from the top down. For the same variable
 specified in two env files, the value from the last file in the list stands.
 
@@ -627,9 +633,14 @@ env_file:
   - ./b.env
 ```
 
-List elements can also be declared as a mapping, which then lets you set an additional
-attribute `required`. This defaults to `true`. When `required` is set to `false` and the `.env` file is missing,
-Compose silently ignores the entry.
+List elements can also be declared as a mapping, which then lets you sets additional
+attributes.
+
+#### required
+
+{{< introduced compose 2.24.0 "/manuals/compose/releases/release-notes.md#2240" >}}
+
+The `required` attribute defaults to `true`. When `required` is set to `false` and the `.env` file is missing, Compose silently ignores the entry.
 
 ```yml
 env_file:
@@ -638,13 +649,21 @@ env_file:
   - path: ./override.env
     required: false
 ```
-> `required` attribute is available with Docker Compose version 2.24.0 or later.
 
-Relative path are resolved from the Compose file's parent folder. As absolute paths prevent the Compose
-file from being portable, Compose warns you when such a path is used to set `env_file`.
+#### format
 
-Environment variables declared in the [environment](#environment) section override these values. This holds true even if those values are
-empty or undefined.
+{{< introduced compose 2.30.0 "/manuals/compose/releases/release-notes.md#2300" >}}
+
+The `format` attribute lets you use an alternative file format for the `env_file`. When not set, `env_file` is parsed according to the Compose rules outlined in [Env_file format](#env_file-format).
+
+`raw` format lets you use an `env_file` with key=value items, but without any attempt from Compose to parse the value for interpolation. 
+This let you pass values as-is, including quotes and `$` signs.
+
+```yml
+env_file:
+  - path: ./default.env
+    format: raw
+```
 
 #### Env_file format
 
@@ -1772,13 +1791,26 @@ parameters (sysctls) at runtime](/reference/cli/docker/container/run.md#sysctl).
 `tmpfs` mounts a temporary file system inside the container. It can be a single value or a list.
 
 ```yml
-tmpfs: /run
+tmpfs:
+ - <path>
+ - <path>:<options>
 ```
 
+- <path>: The path inside the container where the tmpfs will be mounted.
+- <options>: Comma-separated list of options for the tmpfs mount.
+
+Available options:
+
+- `mode`: Sets the file system permissions.
+- `uid`: Sets the user ID that owns the mounted tmpfs.
+- `gid`: Sets the group ID that owns the mounted tmpfs.
+
 ```yml
-tmpfs:
-  - /run
-  - /tmp
+services:
+  app:
+    tmpfs:
+      - /data:mode=755,uid=1009,gid=1009
+      - /run
 ```
 
 ### tty
