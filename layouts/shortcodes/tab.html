@@ -4,9 +4,9 @@
 
 {{ $name := trim (.Get "name") " " }}
 
-{{ if not (.Parent.Scratch.Get "tabs") }}
-  {{ .Parent.Scratch.Set "tabs" slice }}
+{{ if not (.Parent.Store.Get "tabs") }}
+  {{ .Parent.Store.Set "tabs" slice }}
 {{ end }}
 {{ with .Inner }}
-  {{ $.Parent.Scratch.Add "tabs" (dict "name" $name "content" . ) }}
+  {{ $.Parent.Store.Add "tabs" (dict "name" $name "content" . ) }}
 {{ end }}
