@@ -13,7 +13,7 @@ aliases:
 >
 > Settings Management is available to Docker Business customers only.
 
-This page contains information on how to configure Settings Management with an `admin-settings.json` file to specify and lock configuration parameters to create a standardized Docker Desktop environment across the organization.
+This page contains information on how to configure Settings Management with an `admin-settings.json` file. You can specify and lock configuration parameters to create a standardized Docker Desktop environment across your company or organization.
 
 Settings Management is designed specifically for organizations who don’t give developers root access to their machines.
 

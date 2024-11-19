@@ -15,15 +15,14 @@ params:
 Settings Management in the Docker Admin Console is an [early access](/release-lifecycle#early-access-ea) feature and is available to Docker Business customers only.
 {{% /restricted %}}
 
-This page contains information for administrators on how to configure Settings Management with the Docker Admin Console to specify and lock configuration parameters to create a standardized Docker Desktop environment across your Docker company or organization.
+This page contains information for administrators on how to configure Settings Management with the Docker Admin Console. You can specify and lock configuration parameters to create a standardized Docker Desktop environment across your Docker company or organization.
 
 ## Prerequisites
 
 - [Download and install Docker Desktop 4.36.0 or later](/manuals/desktop/release-notes.md).
-- Make sure you have [verified your domain](/manuals/security/for-admins/single-sign-on/configure.md#step-one-add-and-verify-your-domain)
-- [Enforce sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md). This is
-because the Settings Management feature requires a Docker Business
-subscription and therefore your Docker Desktop users must authenticate to your
+- [Verify your domain](/manuals/security/for-admins/single-sign-on/configure.md#step-one-add-and-verify-your-domain).
+- [Enforce sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md). The Settings Management feature requires a Docker Business
+subscription, therefore your Docker Desktop users must authenticate to your
 organization for configurations to take effect. 
 
 ## Create a settings policy
@@ -50,7 +49,7 @@ organization for configurations to take effect.
    >
    > Before setting a global settings policy, it is recommended that you first test it as a user-specific policy to make sure you're happy with the changes before proceeding. 
 
-6. Configure the settings for the policy. Go through each setting and select your chosen setting state. You can choose
+6. Configure the settings for the policy. Go through each setting and select your chosen setting state. You can choose:
    - **User-defined**. Your developers are able to control and change this setting. 
    - **Always enabled**. This means the setting is turned on and your users won't be able to edit this setting from Docker Desktop or the CLI.
    - **Enabled**. The setting is turned on and users can edit this setting from Docker Desktop or the CLI.
@@ -71,6 +70,7 @@ To avoid disrupting your users' workflows, Docker doesn't automatically require 
 > [!NOTE]
 >
 > Settings are synced to Docker Desktop and the CLI when a user is signed in and starts Docker Desktop, and then every 60 minutes. 
+
 If your settings policy needs to be rolled back, either delete the policy or edit the policy to set individual settings to **User-defined**.
 
 ## Settings policy actions
