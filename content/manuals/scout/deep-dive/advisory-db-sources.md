@@ -22,6 +22,8 @@ is represented using the latest available information, in real-time.
 
 Docker Scout uses the following package repositories and security trackers:
 
+<!-- vale off -->
+
 - [AlmaLinux Security Advisory](https://errata.almalinux.org/)
 - [Alpine secdb](https://secdb.alpinelinux.org/)
 - [Amazon Linux Security Center](https://alas.aws.amazon.com/)
@@ -45,6 +47,8 @@ Docker Scout uses the following package repositories and security trackers:
 - [Ubuntu CVE Tracker](https://people.canonical.com/~ubuntu-security/cve/)
 - [Wolfi Security Feed](https://packages.wolfi.dev/os/security.json)
 - [inTheWild, a community-driven open database of vulnerability exploitation](https://github.com/gmatuz/inthewilddb)
+
+<!-- vale on -->
 
 When you enable Docker Scout for your Docker organization,
 a new database instance is provisioned on the Docker Scout platform.
