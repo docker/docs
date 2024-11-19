@@ -22,33 +22,29 @@ is represented using the latest available information, in real-time.
 
 Docker Scout uses the following package repositories and security trackers:
 
-- [Alpine secdb](https://secdb.alpinelinux.org/)
 - [AlmaLinux Security Advisory](https://errata.almalinux.org/)
+- [Alpine secdb](https://secdb.alpinelinux.org/)
 - [Amazon Linux Security Center](https://alas.aws.amazon.com/)
 - [Bitnami Vulnerability Database](https://github.com/bitnami/vulndb)
-- [CISA Known Exploited Vulnerability
-  Catalog](https://www.cisa.gov/known-exploited-vulnerabilities-catalog)
+- [CISA Known Exploited Vulnerability Catalog](https://www.cisa.gov/known-exploited-vulnerabilities-catalog)
 - [CISA Vulnrichment](https://github.com/cisagov/vulnrichment)
+- [Chainguard Security Feed](https://packages.cgr.dev/chainguard/osv/all.json)
 - [Debian Security Bug Tracker](https://security-tracker.debian.org/tracker/)
 - [Exploit Prediction Scoring System (EPSS)](https://api.first.org/epss/)
 - [GitHub Advisory Database](https://github.com/advisories/)
-- [GitLab Advisory
-  Database](https://gitlab.com/gitlab-org/advisories-community/)
+- [GitLab Advisory Database](https://gitlab.com/gitlab-org/advisories-community/)
 - [Golang VulnDB](https://github.com/golang/vulndb)
-- [inTheWild, a community-driven open database of vulnerability
-  exploitation](https://github.com/gmatuz/inthewilddb)
 - [National Vulnerability Database](https://nvd.nist.gov/)
 - [Oracle Linux Security](https://linux.oracle.com/security/)
 - [Photon OS 3.0 Security Advisories](https://github.com/vmware/photon/wiki/Security-Updates-3)
-- [Python Packaging Advisory
-  Database](https://github.com/pypa/advisory-database)
+- [Python Packaging Advisory Database](https://github.com/pypa/advisory-database)
 - [RedHat Security Data](https://www.redhat.com/security/data/metrics/)
 - [Rocky Linux Security Advisory](https://errata.rockylinux.org/)
 - [RustSec Advisory Database](https://github.com/rustsec/advisory-db)
 - [SUSE Security CVRF](http://ftp.suse.com/pub/projects/security/cvrf/)
 - [Ubuntu CVE Tracker](https://people.canonical.com/~ubuntu-security/cve/)
 - [Wolfi Security Feed](https://packages.wolfi.dev/os/security.json)
-- [Chainguard Security Feed](https://packages.cgr.dev/chainguard/osv/all.json)
+- [inTheWild, a community-driven open database of vulnerability exploitation](https://github.com/gmatuz/inthewilddb)
 
 When you enable Docker Scout for your Docker organization,
 a new database instance is provisioned on the Docker Scout platform.
