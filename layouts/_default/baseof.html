@@ -40,7 +40,7 @@
         <!-- Actual Sidebar Content -->
         {{ block "left" . }}
           {{ partial "sidebar/mainnav.html" . }}
-          {{ partial "sidebar/sections.html" . }}
+          {{ partial "sidebar/sections.html" (dict "Page" . "Site" .Site) }}
         {{ end }}
       </div>
     </div>

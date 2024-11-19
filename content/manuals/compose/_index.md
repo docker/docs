@@ -47,6 +47,7 @@ aliases:
 - /compose/overview/
 - /compose/swarm/
 - /compose/completion/
+group: "Open source tools"
 ---
 
 Docker Compose is a tool for defining and running multi-container applications. 

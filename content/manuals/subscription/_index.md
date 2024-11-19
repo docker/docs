@@ -37,6 +37,7 @@ grid_resources:
 aliases:
 - /docker-hub/billing/
 - /docker-hub/billing/faq/
+group: "Platform"
 ---
 
 A Docker Core subscription includes licensing for commercial use of Docker components including Docker Desktop and Docker Hub.

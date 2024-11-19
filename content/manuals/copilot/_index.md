@@ -12,6 +12,7 @@ description: |
   vulnerabilities, and automate containerization through GitHub Copilot Chat in
   various development environments.
 keywords: Docker, GitHub Copilot, extension, Visual Studio Code, chat, ai, containerization
+group: "Products"
 ---
 
 {{% restricted title="Early Access" %}}

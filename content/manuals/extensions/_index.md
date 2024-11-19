@@ -1,10 +1,11 @@
 ---
 title: Docker Extensions
-weight: 100
+weight: 999
 description: Extensions
 keywords: Docker Extensions, Docker Desktop, Linux, Mac, Windows
 aliases:
  - /desktop/extensions/
+group: "Move?"
 ---
 
 Docker Extensions let you use third-party tools within Docker Desktop to extend its functionality.

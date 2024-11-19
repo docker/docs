@@ -16,6 +16,7 @@ grid:
   description: High-quality images from non-commercial open source projects.
   icon: /trusted-content/images/dsos-icon.svg
   link: /trusted-content/dsos-program/
+group: "Move?"
 ---
 
 Trusted content is a selection of high-quality, secure images, curated by

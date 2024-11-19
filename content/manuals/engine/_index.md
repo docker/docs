@@ -46,6 +46,7 @@ aliases:
 - /engine/migration/
 - /engine/misc/
 - /linux/
+group: "Open source tools"
 ---
 
 Docker Engine is an open source containerization technology for building and

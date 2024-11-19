@@ -37,6 +37,7 @@ aliases:
   - /registry/storage-drivers/oss/
   - /registry/storage-drivers/s3/
   - /registry/storage-drivers/swift/
+group: "Open source tools"
 ---
 
 > [!IMPORTANT]

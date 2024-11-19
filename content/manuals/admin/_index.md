@@ -30,6 +30,7 @@ grid:
   link: /security/
 aliases:
 - /docker-hub/admin-overview
+group: "Platform"
 ---
 
 Administrators can manage companies and organizations using the Docker Admin Console, or manage organizations in Docker Hub.

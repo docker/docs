@@ -11,4 +11,7 @@
       }
     }
   }
+  .group-header {
+    @apply text-gray-light-500 dark:text-gray-dark-700;
+  }
 }

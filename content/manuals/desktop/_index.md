@@ -39,6 +39,7 @@ aliases:
 - /docker-for-mac/opensource/
 - /docker-for-windows/dashboard/
 - /docker-for-windows/opensource/
+group: "Products"
 ---
 
 Docker Desktop is a one-click-install application for your Mac, Linux, or Windows environment

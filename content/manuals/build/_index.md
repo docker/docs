@@ -42,6 +42,7 @@ grid:
 aliases:
 - /buildx/working-with-buildx/
 - /develop/develop-images/build_enhancements/
+group: "Open source tools"
 ---
 
 Docker Build is one of Docker Engine's most used features. Whenever you are

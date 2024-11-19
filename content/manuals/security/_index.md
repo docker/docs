@@ -86,6 +86,7 @@ grid_resources:
   description: Learn how to suppress non-applicable or fixed vulnerabilities found in your images.
   icon: query_stats
   link: /scout/guides/vex/
+group: "Platform"
 ---
 
 Docker provides security guardrails for both administrators and developers.

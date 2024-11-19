@@ -39,6 +39,7 @@ grid:
     description: |
       The free plan includes up to 3 repositories. Upgrade for more.
     icon: upgrade
+group: "Products"
 ---
 
 Container images consist of layers and software packages, which are susceptible to vulnerabilities.

@@ -4,6 +4,7 @@ linkTitle: Release lifecycle
 description: Describes the various stages of feature lifecycle from beta
   to GA.
 keywords: beta, GA, Early Access,
+group: "Products"
 ---
 
 This page details Docker's product release lifecycle and how Docker defines each stage. It also provides information on the product retirement process. Features and products may progress through some or all of these phases. 

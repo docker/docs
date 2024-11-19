@@ -8,11 +8,28 @@ layout: wide
 params:
   icon: description
   notoc: true
-  development:
+  products:
   - title: Docker Desktop
     description: Your command center for container development.
     icon: /assets/icons/Whale.svg
     link: /desktop/
+  - title: Docker Hub
+    description: Discover, share, and integrate container images.
+    icon: hub
+    link: /docker-hub/
+  - title: Docker Scout
+    description: Image analysis and policy evaluation.
+    icon: /assets/icons/Scout.svg
+    link: /scout/
+  - title: Build Cloud
+    description: Build your images faster in the cloud.
+    icon: /assets/images/logo-build-cloud.svg
+    link: /build-cloud/
+  - title: Testcontainers Cloud
+    description: Automate container-based testing with enhanced performance and scalability.
+    icon: rule
+    link: https://testcontainers.com/cloud/docs/
+  tools:
   - title: Docker Compose
     description: Define and run multi-container applications.
     icon: /assets/icons/Compose.svg
@@ -25,27 +42,10 @@ params:
     description: The industry-leading container runtime.
     icon: developer_board
     link: /engine/
-  - title: Docker Extensions
-    description: Customize your Docker Desktop workflow.
-    icon: extension
-    link: /extensions/
-  services:
-  - title: Docker Hub
-    description: Discover, share, and integrate container images.
-    icon: hub
-    link: /docker-hub/
-  - title: Docker Scout
-    description: Image analysis and policy evaluation.
-    icon: /assets/icons/Scout.svg
-    link: /scout/
-  - title: Trusted content
-    description: Curated, high-quality content from trusted sources.
-    icon: verified
-    link: /trusted-content/
-  - title: Build Cloud
-    description: Build your images faster in the cloud.
-    icon: /assets/images/logo-build-cloud.svg
-    link: /build-cloud/
+  - title: Registry
+    description: Store and distribute container images.
+    icon: storage
+    link: /registry/
   admin:
   - title: Administration
     description: Centralized observability for companies and organizations.
@@ -68,20 +68,24 @@ params:
 This section contains user guides on how to install, set up, configure, and use
 Docker products.
 
-## Developer tools
+## Products
 
-Software development and containerization technologies.
+Explore Docker's flagship products, including tools for container development,
+image sharing, security analysis, and accelerated builds.
 
-{{< grid items=development >}}
+{{< grid items=products >}}
 
-## Services
+## Open source tools
 
-Artifact management and supply chain security.
+Discover how to leverage Docker’s open-source tools for orchestrating
+multi-container applications, building images, running containers, and managing
+container registries.
 
-{{< grid items=services >}}
+{{< grid items=tools >}}
 
-## Administration and accounts
+## Platform
 
-Administration and subscription management for organizations.
+Find resources for managing Docker organizations, accounts, subscriptions,
+billing, and security.
 
 {{< grid items=admin >}}

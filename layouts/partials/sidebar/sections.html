@@ -1,13 +1,55 @@
 <!-- section tree -->
 <nav class="md:text-sm flex flex-col">
-  <div
-    class="block py-4 md:hidden text-gray-light dark:text-gray-dark">This section</div>
-  {{/* The current page is in the table of contents */}}
+  <div class="block py-4 md:hidden text-gray-light dark:text-gray-dark">This section</div>
+
   <ul>
-    {{ template "renderChildren" .FirstSection }}
+    {{ $page := .Page }}
+
+    <!-- Check if the page belongs to `/manuals/` -->
+    {{ if and $page.File (strings.HasPrefix $page.File.Path "manuals/") }}
+      <!-- Set $parent explicitly to /manuals/ -->
+      {{ $parent := .Site.GetPage "section" "manuals" }}
+
+      <!-- Initialize groups and matched items -->
+      {{ $groups := slice }}
+      {{ $matched := slice }}
+
+      <!-- Collect Groups -->
+      {{ range (union $parent.Sections $parent.RegularPages).ByParam "weight" }}
+        {{ if and (not (eq .Params.sitemap false)) .Params.group }}
+          {{ if not (in $groups .Params.group) }}
+            {{ $groups = $groups | append .Params.group }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+
+
+      <!-- Render Grouped Items -->
+      {{ range $groups }}
+      {{ $group := . }}
+      <li>
+        <div class="group-header font-semibold uppercase py-2">{{ $group }}</div>
+        <ul>
+          {{ range (union $parent.Sections $parent.RegularPages).ByParam "weight" }}
+            {{ if eq (trim .Params.group " ") (trim $group " ") }}
+              {{ $matched = $matched | append . }}
+              {{ if .IsSection }}
+                {{ template "renderList" . }}
+              {{ else }}
+                {{ template "renderSingle" . }}
+              {{ end }}
+            {{ end }}
+          {{ end }}
+        </ul>
+      </li>
+    {{ end }}
+    
+    {{ else }}
+      <!-- Default Navigation for Other Sections -->
+      {{ template "renderChildren" $page.FirstSection }}
+    {{ end }}
   </ul>
 </nav>
-
 {{ define "renderChildren" }}
   {{- $pages := .Pages }}
   {{- if .Params.sidebar.reverse }}
