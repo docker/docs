@@ -242,6 +242,10 @@ The following `admin-settings.json` code and table provides an example of the re
 | `windowsContainers` |  | Parameters and settings related to `windowsContainers` options - grouped together here for convenience.  |  |
 | &nbsp; &nbsp; &nbsp; &nbsp;`dockerDaemonOptions` |  | Overrides the options in the Linux daemon config file. See the [Docker Engine reference](/reference/cli/dockerd/#daemon-configuration-file).|  |
 
+> [!NOTE]
+> 
+> This setting is not available to configure via the Docker Admin Console.
+
 ### Kubernetes
 
 |Parameter|OS|Description|Version|
