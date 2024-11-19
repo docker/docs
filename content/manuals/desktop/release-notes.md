@@ -31,14 +31,14 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 ### New
 
-- WSL2 is now faster, more reliable, and has enhanced security
-- Enhance Container Isolation (ECI) has been improved to support images with wildcard tags
-- Admins can now:
-  - Allow any container to mount the Docker socket with ECI
-  - Enforce sign-in with macOS configuration profiles (Early Access)
-  - Enforce sign-in for more than one organization at a time (Early Access)
-  - Deploy Docker Desktop for Mac in bulk with the PKG installer (Early Access)
-  - Use Desktop Settings Management to manage and enforce defaults via admin.docker.com (Early Access)
+- Existing Docker Desktop installations using the WSL2 engine on Windows are now automatically migrated to a unified single-distribution architecture for enhanced consistency and performance.
+- Enhance Container Isolation (ECI) has been improved to support images with wildcard tags.
+- Administrators can now:
+  - Allow any container to mount the Docker socket with ECI.
+  - Enforce sign-in with macOS [configuration profiles](/manuals/security/for-admins/enforce-sign-in/methods.md#configuration-profiles-method-mac-only) (Early Access).
+  - Enforce sign-in for more than one organization at a time (Early Access).
+  - Deploy Docker Desktop for Mac in bulk with the [PKG installer](/manuals/desktop/setup/install/enterprise-deployment/pkg-install-and-configure.md) (Early Access).
+  - Use Desktop Settings Management to manage and enforce defaults via admin.docker.com (Early Access).
 
 ### Upgrades
 
