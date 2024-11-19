@@ -31,7 +31,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 ### New
 
-- Docker Desktop on WSL is now faster, more reliable, and has enhanced security
+- Existing Docker Desktop installations using the WSL2 engine on Windows are now automatically migrated to a unified single-distribution architecture for enhanced consistency and performance.
 - Enhance Container Isolation (ECI) has been improved to support images with wildcard tags
 - Administrators can now:
   - Allow any container to mount the Docker socket with ECI
