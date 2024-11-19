@@ -1,5 +1,5 @@
 {{ with .Inner }}{{/* don't do anything, just call it */}}{{ end }}
-{{ $first := urlize (index (.Scratch.Get "tabs") 0).name }}
+{{ $first := urlize (index (.Store.Get "tabs") 0).name }}
 {{ $group := .Get "group" }}
 {{ $groupID := fmt.Printf "tabgroup-%s" (urlize $group) }}
 {{ $persist := .Get "persist" }}
@@ -19,7 +19,7 @@
   {{ end }}
   aria-role="tabpanel">
   <div aria-role="tablist" class="space-x-2">
-    {{ range (.Scratch.Get "tabs") }}
+    {{ range (.Store.Get "tabs") }}
       <button
         class="p-1"
         :class="selected === '{{ .name | urlize }}' &&
@@ -37,7 +37,7 @@
   </div>
   <hr class="!mt-0" />
   <div>
-    {{ range (.Scratch.Get "tabs") }}
+    {{ range (.Store.Get "tabs") }}
       <div
         aria-role="tab"
         :class="selected !== '{{ .name | urlize }}' && 'hidden'"
