@@ -633,7 +633,7 @@ env_file:
   - ./b.env
 ```
 
-List elements can also be declared as a mapping, which then lets you sets additional
+List elements can also be declared as a mapping, which then lets you set additional
 attributes.
 
 #### required

@@ -33,7 +33,7 @@ supported by Compose.
 
 Compose processes any string following a `$` sign as long as it makes it
 a valid variable definition - either an alphanumeric name (`[_a-z][_a-z0-9]*`)
-or a braced string starting with `${`. In other circumstances, it will be preserved without attempt to interpolate a value.
+or a braced string starting with `${`. In other circumstances, it will be preserved without attempting to interpolate a value.
 
 You can use a `$$` (double-dollar sign) when your configuration needs a literal
 dollar sign. This also prevents Compose from interpolating a value, so a `$$`
