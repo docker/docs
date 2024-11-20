@@ -8,14 +8,6 @@ weight: 50
 
 ### ECI support for WSL
 
-Prior to Docker Desktop 4.20, Enhanced Container Isolation (ECI) on
-Windows hosts was only supported when Docker Desktop was configured to use
-Hyper-V to create the Docker Desktop Linux VM. ECI was not supported when Docker
-Desktop was configured to use Windows Subsystem for Linux (aka WSL).
-
-Starting with Docker Desktop 4.20, ECI is supported when Docker Desktop is
-configured to use either Hyper-V or WSL 2.
-
 > [!NOTE]
 >
 > Docker Desktop requires WSL 2 version 1.1.3.0 or later. To get the current
@@ -23,29 +15,28 @@ configured to use either Hyper-V or WSL 2.
 > it returns a version number prior to 1.1.3.0, update WSL to the latest version
 > by typing `wsl --update` in a Windows command or PowerShell terminal.
 
-Note however that ECI on WSL is not as secure as on Hyper-V because:
+ECI on WSL is not as secure as on Hyper-V because:
 
-* While ECI on WSL still hardens containers so that malicious workloads can't
+- While ECI on WSL still hardens containers so that malicious workloads can't
   easily breach Docker Desktop's Linux VM, ECI on WSL can't prevent Docker
   Desktop users from breaching the Docker Desktop Linux VM. Such users can
   trivially access that VM (as root) with the `wsl -d docker-desktop` command,
   and use that access to modify Docker Engine settings inside the VM. This gives
-  Docker Desktop users control of the Docker Desktop VM and allows them to
-  bypass Docker Desktop configs set by admins via the
+  Docker Desktop users control of the Docker Desktop VM and lets them bypass Docker Desktop configs set by administrators via the
   [settings-management](../settings-management/_index.md) feature. In contrast,
-  ECI on Hyper-V does not allow Docker Desktop users to breach the Docker
+  ECI on Hyper-V does not let Docker Desktop users to breach the Docker
   Desktop Linux VM.
 
-* With WSL 2, all WSL 2 distributions on the same Windows host share the same instance
+- With WSL 2, all WSL 2 distributions on the same Windows host share the same instance
   of the Linux kernel. As a result, Docker Desktop can't ensure the integrity of
   the kernel in the Docker Desktop Linux VM since another WSL 2 distribution could
   modify shared kernel settings. In contrast, when using Hyper-V, the Docker
   Desktop Linux VM has a dedicated kernel that is solely under the control of
   Docker Desktop.
 
-The table below summarizes this.
+The following table summarizes this.
 
-| Security Feature                                   | ECI on WSL   | ECI on Hyper-V   | Comment               |
+| Security feature                                   | ECI on WSL   | ECI on Hyper-V   | Comment               |
 | -------------------------------------------------- | ------------ | ---------------- | --------------------- |
 | Strongly secure containers                         | Yes          | Yes              | Makes it harder for malicious container workloads to breach the Docker Desktop Linux VM and host. |
 | Docker Desktop Linux VM protected from user access | No           | Yes              | On WSL, users can access Docker Engine directly or bypass Docker Desktop security settings. |
@@ -54,10 +45,9 @@ The table below summarizes this.
 In general, using ECI with Hyper-V is more secure than with WSL 2. But WSL 2
 offers advantages for performance and resource utilization on the host machine,
 and it's an excellent way for users to run their favorite Linux distribution on
-Windows hosts and access Docker from within (see Docker Desktop's WSL distribution
-integration feature, enabled via the Dashboard's **Settings** > **Resources** > **WSL Integration**).
+Windows hosts and access Docker from within.
 
-### ECI protection for Docker Builds with the "Docker" driver
+### ECI protection for Docker builds with the "docker" driver
 
 Prior to Docker Desktop 4.30, `docker build` commands that use the buildx
 `docker` driver (the default) are not protected by ECI (i.e., the build runs
@@ -66,14 +56,11 @@ rootful inside the Docker Desktop VM).
 Starting with Docker Desktop 4.30, `docker build` commands that use the buildx
 `docker` driver are protected by ECI (i.e., the build runs rootless inside
 the Docker Desktop VM), except when Docker Desktop is configured to use WSL 2
-(on Windows hosts). We expect to improve on this in future versions of Docker
-Desktop.
+(on Windows hosts).
 
 Note that `docker build` commands that use the `docker-container` driver are
 always protected by ECI (i.e., the build runs inside a rootless Docker
-container). This is true since Docker Desktop 4.19 (when ECI was introduced) and
-on all platforms where Docker Desktop is supported (Windows with WSL or Hyper-V,
-Mac, and Linux).
+container). 
 
 ### Docker Build and Buildx have some restrictions
 
@@ -98,17 +85,15 @@ arrangements are needed, just enable ECI and run the KinD tool as usual.
 Extension containers are also not yet protected by ECI. Ensure you extension
 containers come from trusted entities to avoid issues.
 
-### Docker Desktop dev environments are not yet protected
+### Docker Desktop Dev Environments are not yet protected
 
 Containers launched by the Docker Desktop Dev Environments feature are not yet
-protected either. We expect to improve on this in future versions of Docker
-Desktop.
+protected.
 
 ### Docker Debug containers are not yet protected
 
 [Docker Debug](https://docs.docker.com/reference/cli/docker/debug/) containers
-are not yet protected by ECI. We expect to improve on this in future versions of
-Docker Desktop.
+are not yet protected by ECI. 
 
 ### Native Windows containers are not supported
 
