@@ -217,9 +217,6 @@ these options.
 
 ## Next steps
 
-- Automatically build container images from code through
-  [builds](builds/_index.md).
-- Use [webhooks](./webhooks.md) to cause an action in another service in
-  response to a push event in the repository.
-- Manage [repository settings](./repos/_index.md) to set the default privacy for
-  your repositories.
+Add [repository information](./repos/manage/information.md) to help users find and use
+your image.
+

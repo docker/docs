@@ -3,12 +3,14 @@ title: Troubleshoot your autobuilds
 description: How to troubleshoot Automated builds
 keywords: docker hub, troubleshoot, automated builds, autobuilds
 tags: [ Troubleshooting ]
+aliases:
+- /docker-hub/builds/troubleshoot/
 ---
 
 > [!NOTE]
 >
 > Automated builds require a
-> [Docker Pro, Team, or Business subscription](../../subscription/_index.md).
+> Docker Pro, Team, or Business subscription.
 
 ## Failing builds
 

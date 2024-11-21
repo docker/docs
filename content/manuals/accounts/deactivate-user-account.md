@@ -32,7 +32,7 @@ Before deactivating your Docker account, ensure you meet the following requireme
 
 - Download any images and tags you want to keep. Use `docker pull -a <image>:<tag>`.
 
-- Unlink your [GitHub and Bitbucket accounts](../docker-hub/builds/link-source.md#unlink-a-github-user-account).
+- Unlink your [GitHub and Bitbucket accounts](../docker-hub/repos/manage/builds/link-source.md#unlink-a-github-user-account).
 
 ## Deactivate
 

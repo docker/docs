@@ -6,11 +6,13 @@ title: Configure automated builds from GitHub and BitBucket
 aliases:
 - /docker-hub/github/
 - /docker-hub/bitbucket/
+- /docker-hub/builds/link-source/
 ---
 
 > [!NOTE]
 >
-> Automated builds require a [Docker Pro, Team, or Business subscription](../../subscription/_index.md).
+> Automated builds require a Docker Pro, Team, or Business subscription.
+
 
 To automate building and testing of your images, you link to your hosted source
 code service to Docker Hub so that it can access your source code
@@ -25,7 +27,7 @@ If you are linking a source code provider to create autobuilds for a team, follo
 
 2. Select the **Settings** icon in the top-right navigation, then select **Repository Settings**.
 
-    ![Repository settings menu](../images/docker-hub-repo-settings-menu.png)
+    ![Repository settings menu](./images/docker-hub-repo-settings-menu.png)
 
 
 3. From the **Linked accounts** tab, select **Link provider** for the source provider you want to link.
