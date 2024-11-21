@@ -32,13 +32,14 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 ### New
 
 - Existing Docker Desktop installations using the WSL2 engine on Windows are now automatically migrated to a unified single-distribution architecture for enhanced consistency and performance.
-- Enhance Container Isolation (ECI) has been improved to support images with wildcard tags.
 - Administrators can now:
-  - Allow any container to mount the Docker socket with ECI.
   - Enforce sign-in with macOS [configuration profiles](/manuals/security/for-admins/enforce-sign-in/methods.md#configuration-profiles-method-mac-only) (Early Access).
   - Enforce sign-in for more than one organization at a time (Early Access).
   - Deploy Docker Desktop for Mac in bulk with the [PKG installer](/manuals/desktop/setup/install/enterprise-deployment/pkg-install-and-configure.md) (Early Access).
   - Use Desktop Settings Management to manage and enforce defaults via admin.docker.com (Early Access).
+- Enhance Container Isolation (ECI) has been improved to:
+  - Allow admins to [turn off Docker socket mount restrictions](/manuals/security/for-admins/hardened-desktop/enhanced-container-isolation/config.md#allowing-all-containers-to-mount-the-docker-socket).
+  - Support wildcard tags when using the [`allowedDerivedImages` setting](/manuals/security/for-admins/hardened-desktop/enhanced-container-isolation/config.md#docker-socket-mount-permissions-for-derived-images).
 
 ### Upgrades
 
@@ -60,7 +61,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 - Fixed an issue where if Docker Desktop is configured to use a proxy, it fails to start due to an internal timeout while fetching authentication tokens.
 - Added a recovery banner to retry an update if the download failed.
 - Fixed an issue where if the `umask` is set to `577` it would cause `rpmbuild` failure. Fixes [docker/for-mac#6511](https://github.com/docker/for-mac/issues/6511).
-- Fixed a bug that caused ports open on the host to 18 for containers started with `--network=host`.
+- Fixed a bug that restricted containers using `--network=host` to 18 open host ports.
 - Fixed bind mount ownership for non-root containers. Fixes [docker/for-mac#6243](https://github.com/docker/for-mac/issues/6243).
 - Docker Desktop will not unpause automatically after a manual pause. The system will stay paused until you manually resume the Docker engine. This fixes a bug where other software would accidentally trigger a resume by running a CLI command in the background. Fixes [for-mac/#6908](https://github.com/docker/for-mac/issues/6908)
 
@@ -614,7 +615,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 ### New
 
-- You can now enforce Rosetta usage via [Settings Management](/manuals/security/for-admins/hardened-desktop/settings-management/configure.md).
+- You can now enforce Rosetta usage via [Settings Management](/manuals/security/for-admins/hardened-desktop/settings-management/_index.md).
 - [Docker socket mount restrictions](/manuals/security/for-admins/hardened-desktop/enhanced-container-isolation/config.md) with ECI is now generally available.
 - Docker Engine and CLI updated to [Moby 26.0](https://github.com/moby/moby/releases/tag/v26.0.0). This includes Buildkit 0.13, sub volumes mounts, networking updates, and improvements to the containerd multi-platform image store UX.
 - New and improved Docker Desktop error screens: swift troubleshooting, easy diagnostics uploads, and actionable remediation.
@@ -912,7 +913,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 ### New
 
-- Administrators can now control access to beta and experimental features in the **Features in development** tab with [Settings Management](/manuals/security/for-admins/hardened-desktop/settings-management/configure.md).
+- Administrators can now control access to beta and experimental features in the **Features in development** tab with [Settings Management](/manuals/security/for-admins/hardened-desktop/settings-management/_index.md).
 - Introduced four new version update states in the footer.
 - `docker init` (Beta) now supports PHP with Apache + Composer.
 - The [**Builds** view](use-desktop/builds.md) is now GA. You can now inspect builds, troubleshoot errors, and optimize build speed.
@@ -1022,7 +1023,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 - Rosetta is now Generally Available for all users on macOS 13 or later. It provides faster emulation of Intel-based images on Apple Silicon. To use Rosetta, see [Settings](/manuals/desktop/settings-and-maintenance/settings.md). Rosetta is enabled by default on macOS 14.1 and later.
 - Docker Desktop now detects if a WSL version is out of date. If an out dated version of WSL is detected, you can allow Docker Desktop to automatically update the installation or you can manually update WSL outside of Docker Desktop.
 - New installations of Docker Desktop for Windows now require a Windows version of 19044 or later.
-- Administrators now have the ability to control Docker Scout image analysis  in [Settings Management](/manuals/security/for-admins/hardened-desktop/settings-management/configure.md).
+- Administrators now have the ability to control Docker Scout image analysis in [Settings Management](/manuals/security/for-admins/hardened-desktop/settings-management/_index.md).
 
 ### Upgrades
 
