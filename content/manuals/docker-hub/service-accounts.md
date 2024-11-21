@@ -20,10 +20,6 @@ weight: 50
 
 A service account is a Docker ID used for automated management of container images or containerized applications. Service accounts are typically used in automated workflows, and don't share Docker IDs with the members in the organization. Common use cases for service accounts include mirroring content on Docker Hub, or tying in image pulls from your CI/CD process.
 
-> [!NOTE]
->
-> All paid Docker subscriptions include up to 5000 pulls per day per authenticated user. If you require a higher number of pulls, you can purchase an Enhanced Service Account add-on. Note that you can only purchase an Enhanced Service Account add-on if you are on a current Service Account agreement.
-
 ## Enhanced Service Account add-on tiers
 
 Refer to the following table for details on the Enhanced Service Account add-ons:
