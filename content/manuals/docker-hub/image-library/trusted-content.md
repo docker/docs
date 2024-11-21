@@ -1,18 +1,62 @@
 ---
-title: Using Docker Official Images
-description: |
-  Learn about building applications with Docker Official images
-  and how to interpret the tag names they use.
-keywords: docker official images, doi, tags, slim, feedback, troubleshooting
-weight: 10
+description: Learn about Docker Hub's trusted content.
+keywords: Docker Hub, Hub, trusted content
+title: Trusted content
+weight: 15
+aliases:
+- /trusted-content/official-images/using/
+- /trusted-content/official-images/
 ---
 
-Docker recommends you use the Docker Official Images in your projects.
-These images have clear documentation, promote best practices, and are regularly updated.
-Docker Official Images support most common use cases, making them perfect for new Docker users.
-Advanced users can benefit from more specialized image variants as well as review Docker Official Images as part of your `Dockerfile` learning process.
+Docker Hub's trusted content provides a curated selection of high-quality,
+secure images designed to give developers confidence in the reliability and
+security of the resources they use. These images are stable, regularly updated,
+and adhere to industry best practices, making them a strong foundation for
+building and deploying applications. Docker Hub's trusted content includes,
+Docker Official Images, Verified Publisher images, and Docker Sponsored Open
+Source Software images.
 
-## Tags
+## Docker Official Images
+
+The Docker Official Images are a curated set of Docker repositories hosted on
+Docker Hub.
+
+Docker recommends you use the Docker Official Images in your projects. These
+images have clear documentation, promote best practices, and are regularly
+updated. Docker Official Images support most common use cases, making them
+perfect for new Docker users. Advanced users can benefit from more specialized
+image variants as well as review Docker Official Images as part of your
+`Dockerfile` learning process.
+
+> [!NOTE]
+>
+> Use of Docker Official Images is subject to [Docker's Terms of Service](https://www.docker.com/legal/docker-terms-service/).
+
+These images provide essential base repositories that serve as the starting
+point for the majority of users.
+
+These include operating systems such as
+[Ubuntu](https://hub.docker.com/_/ubuntu/) and
+[Alpine](https://hub.docker.com/_/alpine/), programming language runtimes such as
+[Python](https://hub.docker.com/_/python) and
+[Node](https://hub.docker.com/_/node), and other essential tools such as
+[memcached](https://hub.docker.com/_/memcached) and
+[MySQL](https://hub.docker.com/_/mysql).
+
+The images are some of the [most secure images](https://www.docker.com/blog/enhancing-security-and-transparency-with-docker-official-images/)
+on Docker Hub. This is particularly important as Docker Official Images are
+some of the most popular on Docker Hub. Typically, Docker Official images have
+few or no packages containing CVEs.
+
+The images exemplify [Dockerfile best practices](/manuals/build/building/best-practices.md)
+and provide clear documentation to serve as a reference for other Dockerfile authors.
+
+Images that are part of this program have a special badge on Docker Hub making
+it easier for you to identify projects that are part of Docker Official Images.
+
+![Docker official image badge](../images/official-image-badge-iso.png)
+
+### Supported tags and respective Dockerfile links
 
 The repository description for each Docker Official Image contains a
 **Supported tags and respective Dockerfile links** section that lists all the
@@ -34,7 +78,7 @@ use or are unfamiliar with the underlying software, you should probably start wi
 the `latest` image. As your understanding of the software and image variants advances,
 you may find other image variants better suit your needs.
 
-## Slim images
+### Slim images
 
 A number of language stacks such as
 [Node.js](https://hub.docker.com/_/node/),
@@ -62,7 +106,7 @@ COPY --from=build /app /app
 CMD ["node", "app.js"]
 ```
 
-## Alpine images
+### Alpine images
 
 Many Docker Official Images repositories also offer `alpine` variants. These
 images are built on top of the [Alpine Linux](https://www.alpinelinux.org/)
@@ -90,7 +134,7 @@ to make your program compatible with Alpine Linux and musl:
 Refer to the `alpine` image [description](https://hub.docker.com/_/alpine) on
 Docker Hub for examples on how to install packages if you are unfamiliar.
 
-## Codenames
+### Codenames
 
 Tags with words that look like Toy Story characters (for example, `bookworm`,
 `bullseye`, and `trixie`) or adjectives (such as `focal`, `jammy`, and
@@ -103,11 +147,37 @@ Linux distribution indicators are helpful because many Docker Official Images
 provide variants built upon multiple underlying distribution versions (for
 example, `postgres:bookworm` and `postgres:bullseye`).
 
-## Other tags
+### Other tags
 
 Docker Official Images tags may contain other hints to the purpose of
 their image variant in addition to those described here. Often these
 tag variants are explained in the Docker Official Images repository
-documentation. Reading through the “How to use this image” and
-“Image Variants” sections will help you to understand how to use these
+documentation. Reading through the "How to use this image" and
+"Image Variants" sections will help you to understand how to use these
 variants.
+
+## Verified Publisher images
+
+The Docker Verified Publisher program provides high-quality images from
+commercial publishers verified by Docker.
+
+These images help development teams build secure software supply chains,
+minimizing exposure to malicious content early in the process to save time and
+money later.
+
+Images that are part of this program have a special badge on Docker Hub making
+it easier for users to identify projects that Docker has verified as
+high-quality commercial publishers.
+
+![Docker-Sponsored Open Source badge](../images/verified-publisher-badge-iso.png)
+
+## Docker Sponsored Open Source Software images
+
+The Docker Sponsored Open Source Software (OSS) program provides images that are
+published and maintained by open-source projects sponsored by Docker.
+
+Images that are part of this program have a special badge on Docker Hub making
+it easier for users to identify projects that Docker has verified as trusted,
+secure, and active open-source projects.
+
+![Docker-Sponsored Open Source badge](../images/sponsored-badge-iso.png)

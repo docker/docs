@@ -76,10 +76,6 @@ params:
     description: Commercial use licenses for Docker products.
     icon: card_membership
     link: /subscription/
-  - title: Trusted content
-    description: Curated, high-quality content from trusted sources.
-    icon: verified
-    link: /trusted-content/
 ---
 
 This section contains user guides on how to install, set up, configure, and use

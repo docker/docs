@@ -24,7 +24,7 @@ Contact the [Docker Sales Team](https://www.docker.com/company/contact).
 ### What ways can I contribute to Docker content?
 
 Docker offers two programs:
-- [Docker-Sponsored Open Source Program (DSOS)](../trusted-content/dsos-program.md)
-- [Docker Verified Publisher (DVP)](../trusted-content/dvp-program.md)
+- [Docker-Sponsored Open Source Program (DSOS)](../docker-hub/repos/manage/trusted-content/dsos-program.md)
+- [Docker Verified Publisher (DVP)](../docker-hub/repos/manage/trusted-content/dvp-program.md)
 
 You can also join the [Developer Preview Program](https://www.docker.com/community/get-involved/developer-preview/) or sign up for early access programs for specific products to participate in research and try out new features.
