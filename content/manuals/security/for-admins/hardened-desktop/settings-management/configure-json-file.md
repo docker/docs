@@ -1,18 +1,19 @@
 ---
 description: How to configure Settings Management for Docker Desktop
 keywords: admin, controls, rootless, enhanced container isolation
-title: Configure Settings Management
-linkTitle: Configure
-toc_min: 4
+title: Configure Settings Management with a JSON file
+linkTitle: Use a JSON file
+weight: 10
 aliases: 
  - /desktop/hardened-desktop/settings-management/configure/
+ - /security/for-admins/hardened-desktop/settings-management/configure/
 ---
 
 > [!NOTE]
 >
 > Settings Management is available to Docker Business customers only.
 
-This page contains information on how to configure Settings Management to specify and lock configuration parameters to create a standardized Docker Desktop environment across the organization.
+This page contains information on how to configure Settings Management with an `admin-settings.json` file. You can specify and lock configuration parameters to create a standardized Docker Desktop environment across your company or organization.
 
 Settings Management is designed specifically for organizations who don’t give developers root access to their machines.
 
@@ -41,7 +42,7 @@ To set it up manually:
 
 > [!NOTE]
 >
-> Some of the configuration parameters only apply to Windows or to specific Docker Desktop versions. This is highlighted in the following table.
+> Some of the configuration parameters only apply to certain platforms or to specific Docker Desktop versions. This is highlighted in the following table.
 
 The `admin-settings.json` file requires a nested list of configuration parameters, each of which must contain the `locked` parameter. You can add or remove configuration parameters as per your requirements.
 
@@ -240,6 +241,10 @@ The following `admin-settings.json` code and table provides an example of the re
 |:-------------------------------|---|:-------------------------------|---|
 | `windowsContainers` |  | Parameters and settings related to `windowsContainers` options - grouped together here for convenience.  |  |
 | &nbsp; &nbsp; &nbsp; &nbsp;`dockerDaemonOptions` |  | Overrides the options in the Linux daemon config file. See the [Docker Engine reference](/reference/cli/dockerd/#daemon-configuration-file).|  |
+
+> [!NOTE]
+> 
+> This setting is not available to configure via the Docker Admin Console.
 
 ### Kubernetes
 
