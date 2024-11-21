@@ -38,8 +38,8 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
   - Deploy Docker Desktop for Mac in bulk with the [PKG installer](/manuals/desktop/setup/install/enterprise-deployment/pkg-install-and-configure.md) (Early Access).
   - Use Desktop Settings Management to manage and enforce defaults via admin.docker.com (Early Access).
 - Enhance Container Isolation (ECI) has been improved to:
-  - Allow admins to [disable Docker socket mount restrictions](https://docs.docker.com/security/for-admins/hardened-desktop/enhanced-container-isolation/config/#allowing-all-containers-to-mount-the-docker-socket).
-  - Support wildcard tags when using the [allowedDerivedImages setting](https://docs.docker.com/security/for-admins/hardened-desktop/enhanced-container-isolation/config/#docker-socket-mount-permissions-for-derived-images).
+  - Allow admins to [turn off Docker socket mount restrictions](/manuals/security/for-admins/hardened-desktop/enhanced-container-isolation/config.md#allowing-all-containers-to-mount-the-docker-socket).
+  - Support wildcard tags when using the [`allowedDerivedImages` setting](/manuals/security/for-admins/hardened-desktop/enhanced-container-isolation/config.md#docker-socket-mount-permissions-for-derived-images).
 
 ### Upgrades
 
