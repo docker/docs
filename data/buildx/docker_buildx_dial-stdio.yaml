@@ -37,6 +37,17 @@ inherited_options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: debug
+      shorthand: D
+      value_type: bool
+      default_value: "false"
+      description: Enable debug logging
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
 examples: |-
     Example go program that uses the dial-stdio command wire up a buildkit client.
     This is for example use only and may not be suitable for production use.

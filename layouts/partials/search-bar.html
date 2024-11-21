@@ -1,0 +1,114 @@
+<!-- search button, mobile (link off to the search page for now) -->
+<a href="/search" class="sm:hidden">
+  <span class="icon-svg">{{ partialCached "icon" "search" "search" }}</span>
+</a>
+<!-- search button -->
+<div x-ref="searchBarRef" x-data="{ open: false }" @click.outside="open = false;"
+  @keyup.escape.window="open = false" id="search-bar"
+  class="hidden min-w-0 sm:flex relative bg-white/10 rounded items-center p-2 sm:w-full xl:w-[400px]">
+  {{ (resources.Get "images/search-ai.svg").Content | safeHTML }}
+  <input x-ref="searchBarInput" type="search" id="search-bar-input" @focus="open = true;"
+    @keyup.enter.prevent="window.location.href = '/search/?q=' + $event.target.value;"
+    @keyup.escape.prevent="open = false;" @keydown.window="(e) => {
+          switch(e.key) {
+          case 'k':
+            if (e.metaKey || e.ctrlKey) {
+              e.preventDefault();
+              $el.focus();
+            }
+            break;
+          }
+        }" class="flex-grow px-2 bg-transparent min-w-0 text-white placeholder:text-white outline-none" placeholder="Search"
+    tabindex="0" />
+  <div x-cloak :class="open && 'hidden'" class="hidden lg:flex border px-1 text-sm border-white rounded items-center">
+    <div class="-mt-0.5">
+      <span x-show="navigator.platform == 'MacIntel'" class="icon-svg icon-sm">{{ partialCached "icon" "keyboard_command_key" "keyboard_command_key" }}</span>
+      <span x-show="navigator.platform != 'MacIntel'" class="icon-svg icon-sm">{{ partialCached "icon" "keyboard_control_key" "keyboard_control_key" }}</span>
+    </div>
+    <span>K</span>
+  </div>
+  <div x-cloak :class="open || 'hidden'">
+    <button @click="$refs.searchBarInput.value = ''; open = false" class="text-white hover:text-white">
+      <span class="icon-svg">{{ partialCached "icon" "close" "close" }}</span>
+    </button>
+  </div>
+  <div x-show="open" x-cloak
+    class="absolute px-6 py-4 right-0 w-screen max-w-xl top-full bg-background-light dark:bg-background-dark rounded shadow-lg z-50">
+    <div id="search-bar-results">
+      {{- $emptyState := `<div class="p-2 text-gray-light dark:text-gray-dark">Start typing to search… or try <button @click="open=false" class="open-kapa-widget link">Ask AI</button></div>` }}
+      {{- $emptyState | safe.HTML }}
+      <!-- results -->
+    </div>
+  </div>
+  <script type="module">
+    window.addEventListener("load", async function () {
+      const pagefind = await import("/pagefind/pagefind.js");
+
+      const searchBarInput = document.querySelector("#search-bar-input");
+      const searchBarResults = document.querySelector(
+        "#search-bar-results",
+      );
+
+      async function search(e) {
+        const query = e.target.value;
+        if (query === "") {
+          searchBarResults.innerHTML = `{{ $emptyState | safe.HTML }}`;
+          return;
+        }
+        const search = await pagefind.debouncedSearch(query);
+        if (search === null) {
+          return;
+        } else {
+          const resultsLength = search.results.length
+          const resultsData = await Promise.all(search.results.slice(0, 5).map(r => r.data()));
+          const results = resultsData.map((item, index) => ({...item, index: index + 1}));
+
+          if (query) {
+            searchBarResults.classList.remove("hidden");
+          } else {
+            searchBarResults.classList.add("hidden");
+          }
+
+          let resultsHTML = `<div class="p-2 text-gray-light dark:text-gray-dark">${resultsLength} results</div>`;
+          resultsHTML += results
+            .map((item) => {
+              return `<div class="p-2">
+              <div class="flex flex-col">
+                <a class="link" href="${item.url}" data-query="${query}" data-index="${item.index}">${item.meta.title}</a>
+                <p class="text-black dark:text-white overflow-hidden">…${item.excerpt}…</p>
+              </div>
+              </div>`;
+            })
+            .join("");
+          if (resultsLength > 5) {
+            resultsHTML += `<div class="w-fit ml-auto px-4 py-2"><a href="/search/?q=${query}" class="link">Show all results</a></div>`;
+          }
+
+          searchBarResults.innerHTML = resultsHTML;
+        }
+      }
+
+      searchBarInput.addEventListener("input", search);
+
+      // Event delegation for tracking link clicks
+      if (window.heap !== undefined) {
+        searchBarResults.addEventListener('click', function (event) {
+          if (event.target.tagName === 'A' && event.target.closest('.link')) {
+            const searchQuery = event.target.getAttribute('data-query');
+            const resultIndex = event.target.getAttribute('data-index');
+            const url = new URL(event.target.href);
+            const properties = {
+              docs_search_target_path: url.pathname,
+              docs_search_target_title: event.target.textContent,
+              docs_search_query_text: searchQuery,
+              docs_search_target_index: resultIndex,
+              docs_search_source_path: window.location.pathname,
+              docs_search_source_title: document.title,
+            };
+            heap.track("Docs - Search - Click - Result Link", properties);
+          }
+        });
+      }
+    });
+  </script>
+</div>

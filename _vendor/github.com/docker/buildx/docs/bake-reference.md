@@ -443,8 +443,7 @@ COPY --from=src . .
 
 #### Use another target as base
 
-> **Note**
->
+> [!NOTE]
 > You should prefer to use regular multi-stage builds over this option. You can
 > Use this feature when you have multiple Dockerfiles that can't be easily
 > merged into one.
@@ -505,6 +504,25 @@ $ docker buildx bake --print -f - <<< 'target "default" {}'
   }
 }
 ```
+
+### `target.entitlements`
+
+Entitlements are permissions that the build process requires to run.
+
+Currently supported entitlements are:
+
+- `network.host`: Allows the build to use commands that access the host network. In Dockerfile, use [`RUN --network=host`](https://docs.docker.com/reference/dockerfile/#run---networkhost) to run a command with host network enabled.
+
+- `security.insecure`: Allows the build to run commands in privileged containers that are not limited by the default security sandbox. Such container may potentially access and modify system resources. In Dockerfile, use [`RUN --security=insecure`](https://docs.docker.com/reference/dockerfile/#run---security) to run a command in a privileged container.
+
+```hcl
+target "integration-tests" {
+  # this target requires privileged containers to run nested containers
+  entitlements = ["security.insecure"]
+}
+```
+
+Entitlements are enabled with a two-step process. First, a target must declare the entitlements it requires. Secondly, when invoking the `bake` command, the user must grant the entitlements by passing the `--allow` flag or confirming the entitlements when prompted in an interactive terminal. This is to ensure that the user is aware of the possibly insecure permissions they are granting to the build process.
 
 ### `target.inherits`
 
@@ -750,6 +768,27 @@ target "app" {
 }
 ```
 
+### `target.network`
+
+Specify the network mode for the whole build request. This will override the default network mode
+for all the `RUN` instructions in the Dockerfile. Accepted values are `default`, `host`, and `none`.
+
+Usually, a better approach to set the network mode for your build steps is to instead use `RUN --network=<value>`
+in your Dockerfile. This way, you can set the network mode for individual build steps and everyone building
+the Dockerfile gets consistent behavior without needing to pass additional flags to the build command.
+
+If you set network mode to `host` in your Bake file, you must also grant `network.host` entitlement when
+invoking the `bake` command. This is because `host` network mode requires elevated privileges and can be a security risk.
+You can pass `--allow=network.host` to the `docker buildx bake` command to grant the entitlement, or you can
+confirm the entitlement when prompted if you are using an interactive terminal.
+
+```hcl
+target "app" {
+  # make sure this build does not access internet
+  network = "none"
+}
+```
+
 ### `target.no-cache-filter`
 
 Don't use build cache for the specified stages.
@@ -805,7 +844,7 @@ The following example forces the builder to always pull all images referenced in
 
 ```hcl
 target "default" {
-  pull = "always"
+  pull = true
 }
 ```
 
@@ -832,8 +871,8 @@ This lets you [mount the secret][run_mount_secret] in your Dockerfile.
 ```dockerfile
 RUN --mount=type=secret,id=aws,target=/root/.aws/credentials \
     aws cloudfront create-invalidation ...
-RUN --mount=type=secret,id=KUBECONFIG \
-    KUBECONFIG=$(cat /run/secrets/KUBECONFIG) helm upgrade --install
+RUN --mount=type=secret,id=KUBECONFIG,env=KUBECONFIG \
+    helm upgrade --install
 ```
 
 ### `target.shm-size`
@@ -853,8 +892,7 @@ target "default" {
 }
 ```
 
-> **Note**
->
+> [!NOTE]
 > In most cases, it is recommended to let the builder automatically determine
 > the appropriate configurations. Manual adjustments should only be considered
 > when specific performance tuning is required for complex build scenarios.
@@ -919,14 +957,12 @@ target "app" {
 }
 ```
 
-> **Note**
->
+> [!NOTE]
 > If you do not provide a `hard limit`, the `soft limit` is used
 > for both values. If no `ulimits` are set, they are inherited from
 > the default `ulimits` set on the daemon.
 
-> **Note**
->
+> [!NOTE]
 > In most cases, it is recommended to let the builder automatically determine
 > the appropriate configurations. Manual adjustments should only be considered
 > when specific performance tuning is required for complex build scenarios.
@@ -1114,8 +1150,7 @@ target "webapp-dev" {
 }
 ```
 
-> **Note**
->
+> [!NOTE]
 > See [User defined HCL functions][hcl-funcs] page for more details.
 
 <!-- external links -->

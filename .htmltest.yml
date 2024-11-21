@@ -7,11 +7,9 @@ IgnoreAltEmpty: true
 IgnoreEmptyHref: true
 IgnoreDirectoryMissingTrailingSlash: true
 IgnoreURLs:
-- "^/docker-hub/api/latest/.*$"
-- "^/engine/api/v.+/#.*$"
-- "^/glossary/.*$"
+- "^/reference/api/hub/.*$"
+- "^/reference/api/engine/v.+/#.*$"
 IgnoreDirs:
-- "engine/api"
 - "registry/configuration"
 - "compose/compose-file" # temporarily ignore until upstream is fixed
 CacheExpires: "6h"

@@ -1,0 +1,43 @@
+extends: substitution
+message: "Consider using '%s' instead of '%s'"
+link: https://docs.docker.com/contribute/style/recommended-words/
+ignorecase: true
+level: suggestion
+action:
+  name: replace
+swap:
+  '\b(?:eg|e\.g\.)[\s,]': for example
+  '\b(?:ie|i\.e\.)[\s,]': that is
+  (?:account name|accountname|user name): username
+  (?:drop down|dropdown): drop-down
+  (?:log out|logout): sign out
+  (?:sign on|log on|log in|logon|login): sign in
+  above: previous
+  adaptor: adapter
+  admin(?! console): administrator
+  administrate: administer
+  afterwards: afterward
+  allow: let
+  allows: lets
+  alphabetic: alphabetical
+  alphanumerical: alphanumeric
+  anti-aliasing: antialiasing
+  anti-malware: antimalware
+  anti-spyware: antispyware
+  anti-virus: antivirus
+  appendixes: appendices
+  assembler: assembly
+  below: following
+  check box: checkbox
+  check boxes: checkboxes
+  click: select
+  distro: distribution
+  ergo: therefore
+  file name: filename
+  keypress: keystroke
+  mutices: mutexes
+  repo: repository
+  scroll: navigate
+  url: URL
+  vs: versus
+  wish: want

@@ -57,6 +57,7 @@ Options:
       --exec-opt list                         Runtime execution options
       --exec-root string                      Root directory for execution state files (default "/var/run/docker")
       --experimental                          Enable experimental features
+      --feature map                           Enable feature in the daemon
       --fixed-cidr string                     IPv4 subnet for fixed IPs
       --fixed-cidr-v6 string                  IPv6 subnet for fixed IPs
   -G, --group string                          Group for the unix socket (default "docker")
@@ -79,6 +80,7 @@ Options:
       --label list                            Set key=value labels to the daemon
       --live-restore                          Enable live restore of docker when containers are still running
       --log-driver string                     Default driver for container logs (default "json-file")
+      --log-format string                     Set the logging format ("text"|"json") (default "text")
   -l, --log-level string                      Set the logging level ("debug"|"info"|"warn"|"error"|"fatal") (default "info")
       --log-opt map                           Default log driver options for containers (default map[])
       --max-concurrent-downloads int          Set the max concurrent downloads (default 3)
@@ -124,6 +126,7 @@ type `dockerd`.
 To run the daemon with debug output, use `dockerd --debug` or add `"debug": true`
 to [the `daemon.json` file](#daemon-configuration-file).
 
+> [!NOTE]
 > **Enabling experimental features**
 >
 > Enable experimental features by starting `dockerd` with the `--experimental`
@@ -133,16 +136,15 @@ to [the `daemon.json` file](#daemon-configuration-file).
 
 The following list of environment variables are supported by the `dockerd` daemon.
 Some of these environment variables are supported both by the Docker Daemon and
-the `docker` CLI. Refer to [Environment variables](https://docs.docker.com/engine/reference/commandline/cli/#environment-variables)
-in the CLI section to learn about environment variables supported by the
-`docker` CLI.
+the `docker` CLI. Refer to [Environment variables](https://docs.docker.com/reference/cli/docker/#environment-variables)
+to learn about environment variables supported by the `docker` CLI.
 
 | Variable            | Description                                                                                                                                                                             |
 | :------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `DOCKER_CERT_PATH`  | Location of your authentication keys. This variable is used both by the [`docker` CLI](https://docs.docker.com/engine/reference/commandline/cli/) and the `dockerd` daemon.             |
+| `DOCKER_CERT_PATH`  | Location of your authentication keys. This variable is used both by the [`docker` CLI](https://docs.docker.com/reference/cli/docker/) and the `dockerd` daemon.             |
 | `DOCKER_DRIVER`     | The storage driver to use.                                                                                                                                                              |
 | `DOCKER_RAMDISK`    | If set this disables `pivot_root`.                                                                                                                                                      |
-| `DOCKER_TLS_VERIFY` | When set Docker uses TLS and verifies the remote. This variable is used both by the [`docker` CLI](https://docs.docker.com/engine/reference/commandline/cli/) and the `dockerd` daemon. |
+| `DOCKER_TLS_VERIFY` | When set Docker uses TLS and verifies the remote. This variable is used both by the [`docker` CLI](https://docs.docker.com/reference/cli/docker/) and the `dockerd` daemon. |
 | `DOCKER_TMPDIR`     | Location for temporary files created by the daemon.                                                                                                                                     |
 | `HTTP_PROXY`        | Proxy URL for HTTP requests unless overridden by NoProxy. See the [Go specification](https://pkg.go.dev/golang.org/x/net/http/httpproxy#Config) for details.                            |
 | `HTTPS_PROXY`       | Proxy URL for HTTPS requests unless overridden by NoProxy. See the [Go specification](https://pkg.go.dev/golang.org/x/net/http/httpproxy#Config) for details.                           |
@@ -153,8 +155,7 @@ in the CLI section to learn about environment variables supported by the
 
 ### Proxy configuration
 
-> **Note**
->
+> [!NOTE]
 > Refer to the [Docker Desktop manual](https://docs.docker.com/desktop/networking/#httphttps-proxy-support)
 > if you are running [Docker Desktop](https://docs.docker.com/desktop/).
 
@@ -170,7 +171,7 @@ in three ways:
    options. (Docker Engine version 23.0 or later).
 
 The command-line and configuration file options take precedence over environment
-variables. Refer to [control and configure Docker with systemd](https://docs.docker.com/config/daemon/systemd/#httphttps-proxy)
+variables. Refer to [control and configure Docker with systemd](https://docs.docker.com/engine/daemon/proxy/)
 to set these environment variables on a host using `systemd`.
 
 ### Daemon socket option
@@ -192,8 +193,7 @@ interface using its IP address: `-H tcp://192.168.59.103:2375`. It is
 conventional to use port `2375` for un-encrypted, and port `2376` for encrypted
 communication with the daemon.
 
-> **Note**
->
+> [!NOTE]
 > If you're using an HTTPS encrypted socket, keep in mind that only
 > TLS version 1.0 and higher is supported. Protocols SSLv3 and below are not
 > supported for security reasons.
@@ -260,8 +260,7 @@ supported. If your key is protected with passphrase, you need to set up
 
 #### Bind Docker to another host/port or a Unix socket
 
-> **Warning**
->
+> [!WARNING]
 > Changing the default `docker` daemon binding to a TCP port or Unix `docker`
 > user group introduces security risks, as it may allow non-root users to gain
 > root access on the host. Make sure you control access to `docker`. If you are
@@ -333,7 +332,7 @@ drivers: `overlay2`, `fuse-overlayfs`, `btrfs`, and `zfs`.
 and is selected by default. Unless users have a strong reason to prefer another storage driver,
 `overlay2` should be used.
 
-You can find out more about storage drivers and how to select one in [Select a storage driver](https://docs.docker.com/storage/storagedriver/select-storage-driver/).
+You can find out more about storage drivers and how to select one in [Select a storage driver](https://docs.docker.com/engine/storage/drivers/select-storage-driver/).
 
 On Windows, the Docker daemon only supports the `windowsfilter` storage driver.
 
@@ -425,7 +424,7 @@ installed outside of `PATH`, must be registered with the daemon, either via the
 configuration file or using the `--add-runtime` command line flag.
 
 For examples on how to use other container runtimes, see
-[Alternative container runtimes](https://docs.docker.com/engine/alternative-runtimes/)
+[Alternative container runtimes](https://docs.docker.com/engine/daemon/alternative-runtimes/)
 
 ##### Configure runtimes using `daemon.json`
 
@@ -610,7 +609,7 @@ $ sudo dockerd --add-runtime <runtime>=<path>
 Defining runtime arguments via the command line is not supported.
 
 For an example configuration for a runc drop-in replacment, see
-[Alternative container runtimes > youki](https://docs.docker.com/engine/alternative-runtimes/#youki)
+[Alternative container runtimes > youki](https://docs.docker.com/engine/daemon/alternative-runtimes/#youki)
 
 ##### Configure the default container runtime
 
@@ -710,8 +709,7 @@ This option is useful when pushing images containing non-distributable artifacts
 to a registry on an air-gapped network so hosts on that network can pull the
 images without connecting to another server.
 
-> **Warning**
->
+> [!WARNING]
 > Non-distributable artifacts typically have restrictions on how
 > and where they can be distributed and shared. Only use this feature to push
 > artifacts to private registries and ensure that you are in compliance with
@@ -784,7 +782,7 @@ Docker host's configuration:
 
 This only adds the proxy and authentication to the Docker daemon's requests.
 To use the proxy when building images and running containers, see
-[Configure Docker to use a proxy server](https://docs.docker.com/network/proxy/)
+[Configure Docker to use a proxy server](https://docs.docker.com/engine/cli/proxy/)
 
 ### Default `ulimit` settings
 
@@ -859,8 +857,7 @@ PING host.docker.internal (192.0.2.0): 56 data bytes
 
 ### Enable CDI devices
 
-> **Note**
->
+> [!NOTE]
 > This is experimental feature and as such doesn't represent a stable API.
 >
 > This feature isn't enabled by default. To this feature, set `features.cdi` to
@@ -894,6 +891,33 @@ Alternatively, you can set custom locations for CDI specifications using the
 
 When CDI is enabled for a daemon, you can view the configured CDI specification
 directories using the `docker info` command.
+
+#### <a name="log-format"></a> Daemon logging format
+
+The `--log-format` option or "log-format" option in the [daemon configuration file](#daemon-configuration-file)
+lets you set the format for logs produced by the daemon. The logging format should
+only be configured either through the `--log-format` command line option or
+through the "log-format" field in the configuration file; using both
+the command-line option and the "log-format" field in the configuration
+file produces an error. If this option is not set, the default is "text".
+
+The following example configures the daemon through the `--log-format` command
+line option to use `json` formatted logs;
+
+```console
+$ dockerd --log-format=json
+# ...
+{"level":"info","msg":"API listen on /var/run/docker.sock","time":"2024-09-16T11:06:08.558145428Z"}
+```
+
+The following example shows a `daemon.json` configuration file with the
+"log-format" set;
+
+```json
+{
+  "log-format": "json"
+}
+```
 
 ### Miscellaneous options
 
@@ -953,7 +977,7 @@ to avoid collisions with other Prometheus exporters and services.
 
 If you are running a Prometheus server you can add this address to your scrape configs
 to have Prometheus collect metrics on Docker. For more information, see
-[Collect Docker metrics with Prometheus](https://docs.docker.com/config/daemon/prometheus/).
+[Collect Docker metrics with Prometheus](https://docs.docker.com/engine/daemon/prometheus/).
 
 #### Node generic resources
 
@@ -973,6 +997,36 @@ Example of usage:
     "NVIDIA-GPU=UUID1",
     "NVIDIA-GPU=UUID2"
   ]
+}
+```
+
+### <a name="feature"></a> Enable feature in the daemon (--feature)
+
+The `--feature` option lets you enable or disable a feature in the daemon.
+This option corresponds with the "features" field in the [daemon.json configuration file](#daemon-configuration-file).
+Features should only be configured either through the `--feature` command line
+option or through the "features" field in the configuration file; using both
+the command-line option and the "features" field in the configuration
+file produces an error. The feature option can be specified multiple times
+to configure multiple features. The `--feature` option accepts a name and
+optional boolean value. When omitting the value, the default is `true`.
+
+The following example runs the daemon with the `cdi` and `containerd-snapshotter`
+features enabled. The `cdi` option is provided with a value;
+
+```console
+$ dockerd --feature cdi=true --feature containerd-snapshotter
+```
+
+The following example is the equivalent using the `daemon.json` configuration
+file;
+
+```json
+{
+  "features": {
+    "cdi": true,
+    "containerd-snapshotter": true
+  }
 }
 ```
 
@@ -1070,7 +1124,10 @@ The following is a full example of the allowed configuration options on Linux:
   "exec-opts": [],
   "exec-root": "",
   "experimental": false,
-  "features": {},
+  "features": {
+    "cdi": true,
+    "containerd-snapshotter": true
+  },
   "fixed-cidr": "",
   "fixed-cidr-v6": "",
   "group": "",
@@ -1094,6 +1151,7 @@ The following is a full example of the allowed configuration options on Linux:
   "labels": [],
   "live-restore": true,
   "log-driver": "json-file",
+  "log-format": "text",
   "log-level": "",
   "log-opts": {
     "cache-disabled": "false",
@@ -1146,13 +1204,12 @@ The following is a full example of the allowed configuration options on Linux:
 }
 ```
 
-> **Note**
->
+> [!NOTE]
 > You can't set options in `daemon.json` that have already been set on
 > daemon startup as a flag.
 > On systems that use systemd to start the Docker daemon, `-H` is already set, so
 > you can't use the `hosts` key in `daemon.json` to add listening addresses.
-> See [custom Docker daemon options](https://docs.docker.com/config/daemon/systemd/#custom-docker-daemon-options)
+> See [custom Docker daemon options](https://docs.docker.com/engine/daemon/proxy/#systemd-unit-file)
 > for an example on how to configure the daemon using systemd drop-in files.
 
 ##### On Windows
@@ -1189,6 +1246,7 @@ The following is a full example of the allowed configuration options on Windows:
   "insecure-registries": [],
   "labels": [],
   "log-driver": "",
+  "log-format": "text",
   "log-level": "",
   "max-concurrent-downloads": 3,
   "max-concurrent-uploads": 5,
@@ -1235,7 +1293,7 @@ The list of feature options include:
 - `containerd-snapshotter`: when set to `true`, the daemon uses containerd
   snapshotters instead of the classic storage drivers for storing image and
   container data. For more information, see
-  [containerd storage](https://docs.docker.com/storage/containerd/).
+  [containerd storage](https://docs.docker.com/engine/storage/containerd/).
 - `windows-dns-proxy`: when set to `true`, the daemon's internal DNS resolver
   will forward requests to external servers. Without this, most applications
   running in the container will still be able to use secondary DNS servers
@@ -1243,7 +1301,7 @@ The list of feature options include:
   external names. The current default is `false`, it will change to `true` in
   a future release. This option is only allowed on Windows.
 
-  > **Warning**
+  > [!WARNING]
   > The `windows-dns-proxy` feature flag will be removed in a future release.
 
 #### Configuration reload behavior
@@ -1261,7 +1319,7 @@ The list of currently supported options that can be reconfigured is this:
 | ---------------------------------- | ----------------------------------------------------------------------------------------------------------- |
 | `debug`                            | Toggles debug mode of the daemon.                                                                           |
 | `labels`                           | Replaces the daemon labels with a new set of labels.                                                        |
-| `live-restore`                     | Toggles [live restore](https://docs.docker.com/config/containers/live-restore/).                            |
+| `live-restore`                     | Toggles [live restore](https://docs.docker.com/engine/containers/live-restore/).                            |
 | `max-concurrent-downloads`         | Configures the max concurrent downloads for each pull.                                                      |
 | `max-concurrent-uploads`           | Configures the max concurrent uploads for each push.                                                        |
 | `max-download-attempts`            | Configures the max download attempts for each pull.                                                         |
@@ -1276,8 +1334,7 @@ The list of currently supported options that can be reconfigured is this:
 
 ### Run multiple daemons
 
-> **Note**
->
+> [!NOTE]
 > Running multiple daemons on a single host is considered experimental.
 > You may encounter unsolved problems, and things may not work as expected in some cases.
 
@@ -1363,7 +1420,7 @@ using the `daemon.json` file.
 ```
 
 This example uses the `bridge` network driver. Refer to the
-[bridge network driver page](https://docs.docker.com/network/drivers/bridge/#options)
+[bridge network driver page](https://docs.docker.com/engine/network/drivers/bridge/#options)
 for an overview of available driver options.
 
 After changing the configuration and restarting the daemon, new networks that

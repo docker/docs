@@ -1,0 +1,12 @@
+<ul class="md:text-sm">
+  {{- range site.Taxonomies.tags }}
+    <li class="pl-4 hover:text-blue-light hover:dark:text-blue-dark
+    {{ if eq .Page page }} bg-gray-light-200 dark:bg-gray-dark-200{{ end }}">
+      <a class="py-2 w-full truncate block"
+         href="{{ .Page.Permalink }}"
+         title="{{ .Page.LinkTitle }}">
+        {{ .Page.LinkTitle }}
+      </a>
+    </li>
+  {{- end }}
+</ul>

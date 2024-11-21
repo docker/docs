@@ -1260,8 +1260,7 @@ examples: |-
     those with `--network=host`, have their own UTS namespace. Setting `--uts` to
     `host` results in the container using the same UTS namespace as the host.
 
-    > **Note**
-    >
+    > [!NOTE]
     > Docker disallows combining the `--hostname` and `--domainname` flags with
     > `--uts=host`. This is to prevent containers running in the host's UTS
     > namespace from attempting to change the hosts' configuration.
@@ -1319,8 +1318,7 @@ examples: |-
     do. This flag exists to allow special use-cases, like running Docker within
     Docker.
 
-    > **Warning**
-    >
+    > [!WARNING]
     > Use the `--privileged` flag with caution.
     > A container with `--privileged` is not a securely sandboxed process.
     > Containers in this mode can get a root shell on the host
@@ -1332,7 +1330,7 @@ examples: |-
     > for example by adding individual kernel capabilities with `--cap-add`.
     >
     > For more information, see
-    > [Runtime privilege and Linux capabilities](/engine/reference/run/#runtime-privilege-and-linux-capabilities)
+    > [Runtime privilege and Linux capabilities](/engine/containers/run/#runtime-privilege-and-linux-capabilities)
     { .warning }
 
     The following example doesn't work, because by default, Docker drops most
@@ -1502,8 +1500,7 @@ examples: |-
     page](/network/) explains in detail how to publish ports
     with Docker.
 
-    > **Note**
-    >
+    > [!NOTE]
     > If you don't specify an IP address (i.e., `-p 80:80` instead of `-p
     > 127.0.0.1:80:80`) when publishing a container's ports, Docker publishes the
     > port on all interfaces (address `0.0.0.0`) by default. These ports are
@@ -1684,8 +1681,7 @@ examples: |-
     connectivity, containers connected to the same multi-host network but launched
     from different Engines can also communicate in this way.
 
-    > **Note**
-    >
+    > [!NOTE]
     > The default bridge network only allows containers to communicate with each other using
     > internal IP addresses. User-created bridge networks provide DNS resolution between
     > containers using container names.
@@ -1753,8 +1749,7 @@ examples: |-
     $ docker run -itd --network=name=my-net,\"driver-opt=com.docker.network.endpoint.sysctls=net.ipv4.conf.IFNAME.log_martians=1,net.ipv4.conf.IFNAME.forwarding=0\",ip=192.0.2.42 busybox
     ```
 
-    > **Note**
-    >
+    > [!NOTE]
     > Network drivers may restrict the sysctl settings that can be modified and, to protect
     > the operation of the network, new restrictions may be added in the future.
 
@@ -1838,7 +1833,7 @@ examples: |-
 
     These `a`, `ctrl-a`, `X`, or `ctrl-\\` values are all examples of valid key
     sequences. To configure a different configuration default key sequence for all
-    containers, see [**Configuration file** section](/engine/reference/commandline/cli/#configuration-files).
+    containers, see [**Configuration file** section](/reference/cli/docker/#configuration-files).
 
     ### Add host device to container (--device) {#device}
 
@@ -1881,8 +1876,7 @@ examples: |-
     fdisk: unable to open /dev/xvdc: Operation not permitted
     ```
 
-    > **Note**
-    >
+    > [!NOTE]
     > The `--device` option cannot be safely used with ephemeral devices. You shouldn't
     > add block devices that may be removed to untrusted containers with `--device`.
 
@@ -1904,15 +1898,13 @@ examples: |-
     PS C:\> docker run --device=class/86E0D1E0-8089-11D0-9CE4-08003E301F73 mcr.microsoft.com/windows/servercore:ltsc2019
     ```
 
-    > **Note**
-    >
+    > [!NOTE]
     > The `--device` option is only supported on process-isolated Windows containers,
     > and produces an error if the container isolation is `hyperv`.
 
     #### CDI devices
 
-    > **Note**
-    >
+    > [!NOTE]
     > The CDI feature is experimental, and potentially subject to change.
     > CDI is currently only supported for Linux containers.
 
@@ -1979,8 +1971,7 @@ examples: |-
     $ cat somefile | docker run -i -a stdin mybuilder dobuild
     ```
 
-    > **Note**
-    >
+    > [!NOTE]
     > A process running as PID 1 inside a container is treated specially by
     > Linux: it ignores any signal with the default action. So, the process
     > doesn't terminate on `SIGINT` or `SIGTERM` unless it's coded to do so.
@@ -2093,7 +2084,8 @@ examples: |-
     Then, a user could ask `udev` to execute a script that would `docker exec my-container mknod newDevX c 42 <minor>`
     the required device when it is added.
 
-    > **Note**: You still need to explicitly add initially present devices to the
+    > [!NOTE]
+    > You still need to explicitly add initially present devices to the
     > `docker run` / `docker create` command.
 
     ### Access an NVIDIA GPU {#gpus}
@@ -2101,8 +2093,7 @@ examples: |-
     The `--gpus` flag allows you to access NVIDIA GPU resources. First you need to
     install the [nvidia-container-runtime](https://nvidia.github.io/nvidia-container-runtime/).
 
-    > **Note**
-    >
+    > [!NOTE]
     > You can also specify a GPU as a CDI device with the `--device` flag, see
     > [CDI devices](#cdi-devices).
 
@@ -2135,12 +2126,12 @@ examples: |-
     policy controls whether the Docker daemon restarts a container after exit.
     Docker supports the following restart policies:
 
-    | Policy                     | Result                                                                                                                                                                                                                                                           |
-    |:---------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-    | `no`                       | Do not automatically restart the container when it exits. This is the default.                                                                                                                                                                                   |
-    | `on-failure[:max-retries]` | Restart only if the container exits with a non-zero exit status. Optionally, limit the number of restart retries the Docker daemon attempts.                                                                                                                     |
-    | `unless-stopped`           | Restart the container unless it's explicitly stopped or Docker itself is stopped or restarted.                                                                                                                                                                  |
-    | `always`                   | Always restart the container regardless of the exit status. When you specify always, the Docker daemon tries to restart the container indefinitely. The container always starts on daemon startup, regardless of the current state of the container. |
+    | Flag                       | Description                                                                                                                                                                                                                                                                                                                                                           |
+    | :------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    | `no`                       | Don't automatically restart the container. (Default)                                                                                                                                                                                                                                                                                                                  |
+    | `on-failure[:max-retries]` | Restart the container if it exits due to an error, which manifests as a non-zero exit code. Optionally, limit the number of times the Docker daemon attempts to restart the container using the `:max-retries` option. The `on-failure` policy only prompts a restart if the container exits with a failure. It doesn't restart the container if the daemon restarts. |
+    | `always`                   | Always restart the container if it stops. If it's manually stopped, it's restarted only when Docker daemon restarts or the container itself is manually restarted.                                                                                                                                                                                                    |
+    | `unless-stopped`           | Similar to `always`, except that when the container is stopped (manually or otherwise), it isn't restarted even after Docker daemon restarts.                                                                                                                                                                                                                         |
 
     ```console
     $ docker run --restart=always redis
@@ -2212,11 +2203,10 @@ examples: |-
     `--rm` flag:
 
     ```text
-    --rm=false: Automatically remove the container when it exits
+    --rm: Automatically remove the container when it exits
     ```
 
-    > **Note**
-    >
+    > [!NOTE]
     > If you set the `--rm` flag, Docker also removes the anonymous volumes
     > associated with the container when the container is removed. This is similar
     > to running `docker rm -v my-container`. Only volumes that are specified
@@ -2262,7 +2252,7 @@ examples: |-
 
     It's conventional to use `host.docker.internal` as the hostname referring to
     `host-gateway`. Docker Desktop automatically resolves this hostname, see
-    [Explore networking features](/desktop/networking/#i-want-to-connect-from-a-container-to-a-service-on-the-host).
+    [Explore networking features](/desktop/features/networking/#i-want-to-connect-from-a-container-to-a-service-on-the-host).
 
     The following example shows how the special `host-gateway` value works. The
     example runs an HTTP server that serves a file from host to container over the
@@ -2291,7 +2281,7 @@ examples: |-
     container's logging driver.
 
     To learn about the supported logging drivers and how to use them, refer to
-    [Configure logging drivers](/config/containers/logging/configure/).
+    [Configure logging drivers](/engine/logging/configure/).
 
     To disable logging for a container, set the `--log-driver` flag to `none`:
 
@@ -2314,14 +2304,12 @@ examples: |-
     1024
     ```
 
-    > **Note**
-    >
+    > [!NOTE]
     > If you don't provide a hard limit value, Docker uses the soft limit value
     > for both values. If you don't provide any values, they are inherited from
     > the default `ulimits` set on the daemon.
 
-    > **Note**
-    >
+    > [!NOTE]
     > The `as` option is deprecated.
     > In other words, the following script is not supported:
     >
@@ -2386,8 +2374,7 @@ examples: |-
     $ docker run --security-opt label=level:s0:c100,c200 -it fedora bash
     ```
 
-    > **Note**
-    >
+    > [!NOTE]
     > Automatic translation of MLS labels isn't supported.
 
     To disable the security labeling for a container entirely, you can use
@@ -2405,8 +2392,7 @@ examples: |-
     $ docker run --security-opt label=type:svirt_apache_t -it ubuntu bash
     ```
 
-    > **Note**
-    >
+    > [!NOTE]
     > You would have to write policy defining a `svirt_apache_t` type.
 
     To prevent your container processes from gaining additional privileges, you can
@@ -2527,8 +2513,7 @@ examples: |-
     $ docker run --sysctl net.ipv4.ip_forward=1 someimage
     ```
 
-    > **Note**
-    >
+    > [!NOTE]
     > Not all sysctls are namespaced. Docker does not support changing sysctls
     > inside of a container that also modify the host system. As the kernel
     > evolves we expect to see more sysctls become namespaced.

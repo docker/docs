@@ -1,0 +1,21 @@
+<div class="flex gap-8 w-full">
+  <article class="prose min-w-0 flex-[2_2_0%] max-w-4xl dark:prose-invert">
+    {{ partial "breadcrumbs.html" . }}
+    <h1 data-pagefind-weight="10" class="scroll-mt-36">{{ .Title }}</h1>
+    {{- if ne .Type "guides" }}
+      {{ with .GetTerms "tags" }}
+        <div class="not-prose">
+          {{- partial "tags.html" . }}
+        </div>
+      {{- end }}
+    {{- end }}
+    <div class="block lg:hidden">
+      {{ partialCached "pagemeta.html" . . }}
+      <hr />
+    </div>
+    {{ .Content }}
+  </article>
+  <div class="hidden flex-1 min-w-52 lg:block -mr-8 -mt-8">
+    {{ partial "aside.html" . }}
+  </div>
+</div>

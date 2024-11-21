@@ -2,8 +2,7 @@ command: docker image build
 aliases: docker image build, docker build, docker builder build
 short: Build an image from a Dockerfile
 long: |-
-    > **Note**
-    >
+    > [!IMPORTANT]
     > This page refers to the **legacy implementation** of `docker build`,
     > using the legacy (pre-BuildKit) build backend.
     > This configuration is only relevant if you're building Windows containers.
@@ -48,7 +47,7 @@ long: |-
 
     When using the legacy builder, it's therefore extra important that you
     carefully consider what files you include in the context you specify. Use a
-    [`.dockerignore`](/build/building/context/#dockerignore-files)
+    [`.dockerignore`](/build/concepts/context/#dockerignore-files)
     file to exclude files and directories that you don't require in your build from
     being sent as part of the build context.
 
@@ -420,7 +419,7 @@ examples: |-
 
     #### Overview
 
-    > **Note**
+    > [!NOTE]
     > The `--squash` option is an experimental feature, and should not be considered
     > stable.
 

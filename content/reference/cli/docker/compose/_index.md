@@ -6,6 +6,7 @@ aliases:
 - /compose/reference/docker-compose/
 - /compose/reference/help/
 - /engine/reference/commandline/compose/
+- /compose/reference/
 layout: cli
 ---
 

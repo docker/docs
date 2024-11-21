@@ -1,6 +1,7 @@
 ---
 title: LegacyKeyValueFormat
-description: Legacy key/value format with whitespace separator should not be used
+description: >-
+  Legacy key/value format with whitespace separator should not be used
 aliases:
   - /go/dockerfile/rule/legacy-key-value-format/
 ---
@@ -34,5 +35,23 @@ ARG foo bar
 ```dockerfile
 FROM alpine
 ARG foo=bar
+```
+
+❌ Bad: multi-line variable declaration with a space separator.
+
+```dockerfile
+ENV DEPS \
+    curl \
+    git \
+    make
+```
+
+✅ Good: use an equals sign and wrap the value in quotes.
+
+```dockerfile
+ENV DEPS="\
+    curl \
+    git \
+    make"
 ```
 

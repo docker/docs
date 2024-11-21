@@ -3,29 +3,38 @@
 
 # For more details, see https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
 
-/content/build/ @crazy-max @dvdksn
+/content/manuals/build/ @crazy-max @dvdksn
 
-/content/build-cloud/ @dvdksn
+/content/manuals/build-cloud/ @dvdksn
 
-/content/compose/ @aevesdocker
+/content/manuals/compose/ @aevesdocker
 
-/content/desktop/ @aevesdocker
+/content/manuals/desktop/ @aevesdocker
 
-/content/desktop/extensions/ @aevesdocker
+/content/manuals/extensions/ @aevesdocker
 
-/content/desktop/extensions-sdk/ @aevesdocker
+/content/manuals/extensions-sdk/ @aevesdocker
 
-/content/scout/ @dvdksn
+/content/manuals/scout/ @dvdksn
 
-/content/docker-hub/ @aevesdocker @craig-osterhout @stephaurelio
+/content/manuals/docker-hub/ @craig-osterhout
 
-/content/engine/ @dvdksn
+/content/manuals/engine/ @dvdksn
 
-/content/subscription/ @aevesdocker @stephaurelio
+/content/manuals/subscription/ @sarahsanders-docker
 
-/content/docker-hub/publish/ @aevesdocker
+/content/manuals/security/ @aevesdocker
 
-/content/docker-hub/official_images/ @aevesdocker
+/content/manuals/trusted-content/ @craig-osterhout
 
-/content/registry/ @dvdksn
+/content/manuals/docker-hub/official_images/ @craig-osterhout
 
+/content/manuals/registry/ @dvdksn
+
+/content/manuals/admin/ @sarahsanders-docker
+
+/content/manuals/billing/ @sarahsanders-docker
+
+/content/manuals/accounts/ @sarahsanders-docker
+
+/hack @dvdksn

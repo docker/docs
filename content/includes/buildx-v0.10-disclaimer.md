@@ -1,4 +1,4 @@
-> **Note**
+> [!NOTE]
 >
 > Buildx v0.10 enables support for a minimal [SLSA Provenance](https://slsa.dev/provenance/)
 > attestation, which requires support for [OCI-compliant](https://github.com/opencontainers/image-spec)

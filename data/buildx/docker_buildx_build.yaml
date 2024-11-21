@@ -543,6 +543,17 @@ inherited_options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: debug
+      shorthand: D
+      value_type: bool
+      default_value: "false"
+      description: Enable debug logging
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
 examples: |-
     ### Add entries to container hosts file (--add-host) {#add-host}
 
@@ -623,7 +634,7 @@ examples: |-
     --attest=type=provenance,...
     ```
 
-    Create [image attestations](/build/attestations/).
+    Create [image attestations](/build/metadata/attestations/).
     BuildKit currently supports:
 
     - `sbom` - Software Bill of Materials.
@@ -631,7 +642,7 @@ examples: |-
       Use `--attest=type=sbom` to generate an SBOM for an image at build-time.
       Alternatively, you can use the [`--sbom` shorthand](#sbom).
 
-      For more information, see [here](/build/attestations/sbom/).
+      For more information, see [here](/build/metadata/attestations/sbom/).
 
     - `provenance` - SLSA Provenance
 
@@ -641,7 +652,7 @@ examples: |-
       By default, a minimal provenance attestation will be created for the build
       result, which will only be attached for images pushed to registries.
 
-      For more information, see [here](/build/attestations/slsa-provenance/).
+      For more information, see [here](/build/metadata/attestations/slsa-provenance/).
 
     ### Allow extra privileged entitlement (--allow) {#allow}
 
@@ -1060,15 +1071,19 @@ examples: |-
     }
     ```
 
-    > **Note**
-    >
-    > Build record [provenance](/build/attestations/slsa-provenance/#provenance-attestation-example)
+    > [!NOTE]
+    > Build record [provenance](/build/metadata/attestations/slsa-provenance/#provenance-attestation-example)
     > (`buildx.build.provenance`) includes minimal provenance by default. Set the
     > `BUILDX_METADATA_PROVENANCE` environment variable to customize this behavior:
     >
     > - `min` sets minimal provenance (default).
     > - `max` sets full provenance.
     > - `disabled`, `false` or `0` doesn't set any provenance.
+
+    > [!NOTE]
+    > Build warnings (`buildx.build.warnings`) are not included by default. Set the
+    > `BUILDX_METADATA_WARNINGS` environment variable to `1` or `true` to
+    > include them.
 
     ### Set the networking mode for the RUN instructions during build (--network) {#network}
 
@@ -1079,12 +1094,6 @@ examples: |-
     - `host`: Run in the host’s network environment.
 
     Find more details in the [Dockerfile reference](/reference/dockerfile/#run---network).
-
-    > **Note**
-    >
-    > Build warnings (`buildx.build.warnings`) are not included by default. Set the
-    > `BUILDX_METADATA_WARNINGS` environment variable to `1` or `true` to
-    > include them.
 
     ### Ignore build cache for specific stages (--no-cache-filter) {#no-cache-filter}
 
@@ -1106,7 +1115,7 @@ examples: |-
     ```dockerfile
     # syntax=docker/dockerfile:1
 
-    FROM oven/bun:1 as base
+    FROM oven/bun:1 AS base
     WORKDIR /app
 
     FROM base AS install
@@ -1148,7 +1157,7 @@ examples: |-
     ```
 
     Sets the export action for the build result. The default output, when using the
-    `docker` [build driver](/build/drivers/), is a container
+    `docker` [build driver](/build/builders/drivers/), is a container
     image exported to the local image store. The `--output` flag makes this step
     configurable allows export of results directly to the client's filesystem, an
     OCI image tarball, a registry, and more.
@@ -1311,8 +1320,7 @@ examples: |-
     Set type of progress output (`auto`, `plain`, `tty`, `rawjson`). Use `plain` to show container
     output (default `auto`).
 
-    > **Note**
-    >
+    > [!NOTE]
     > You can also use the `BUILDKIT_PROGRESS` environment variable to set its value.
 
     The following example uses `plain` output during the build:
@@ -1330,8 +1338,7 @@ examples: |-
     ...
     ```
 
-    > **Note**
-    >
+    > [!NOTE]
     > Check also the [`BUILDKIT_COLORS`](/build/building/variables/#buildkit_colors)
     > environment variable for modifying the colors of the terminal output.
 
@@ -1356,7 +1363,7 @@ examples: |-
     to using the containerd image store.
 
     For more information about provenance attestations, see
-    [here](/build/attestations/slsa-provenance/).
+    [here](/build/metadata/attestations/slsa-provenance/).
 
     ### Push the build result to a registry (--push) {#push}
 
@@ -1378,7 +1385,7 @@ examples: |-
     to a registry if you use the default image store. Alternatively, you can switch
     to using the containerd image store.
 
-    For more information, see [here](/build/attestations/sbom/).
+    For more information, see [here](/build/metadata/attestations/sbom/).
 
     ### Secret to expose to the build (--secret) {#secret}
 
@@ -1394,17 +1401,39 @@ examples: |-
 
     Supported types are:
 
-    - [`file`](#file)
-    - [`env`](#env)
+    - [`type=file`](#typefile)
+    - [`type=env`](#typeenv)
 
-    Buildx attempts to detect the `type` automatically if unset.
+    Buildx attempts to detect the `type` automatically if unset. If an environment
+    variable with the same key as `id` is set, then Buildx uses `type=env` and the
+    variable value becomes the secret. If no such environment variable is set, and
+    `type` is not set, then Buildx falls back to `type=file`.
 
-    #### `file`
+    #### `type=file`
 
-    Attribute keys:
+    Source a build secret from a file.
 
-    - `id` - ID of the secret. Defaults to base name of the `src` path.
-    - `src`, `source` - Secret filename. `id` used if unset.
+    ##### `type=file` synopsis
+
+    ```console
+    $ docker buildx build --secret [type=file,]id=<ID>[,src=<FILEPATH>] .
+    ```
+
+    ##### `type=file` attributes
+
+    | Key             | Description                                                                                           | Default                    |
+    | --------------- | ----------------------------------------------------------------------------------------------------- | -------------------------- |
+    | `id`            | ID of the secret.                                                                                     | N/A (this key is required) |
+    | `src`, `source` | Filepath of the file containing the secret value (absolute or relative to current working directory). | `id` if unset.             |
+
+    ###### `type=file` usage
+
+    In the following example, `type=file` is automatically detected because no
+    environment variable mathing `aws` (the ID) is set.
+
+    ```console
+    $ docker buildx build --secret id=aws,src=$HOME/.aws/credentials .
+    ```
 
     ```dockerfile
     # syntax=docker/dockerfile:1
@@ -1414,28 +1443,59 @@ examples: |-
       aws s3 cp s3://... ...
     ```
 
+    #### `type=env`
+
+    Source a build secret from an environment variable.
+
+    ##### `type=env` synopsis
+
     ```console
-    $ docker buildx build --secret id=aws,src=$HOME/.aws/credentials .
+    $ docker buildx build --secret [type=env,]id=<ID>[,env=<VARIABLE>] .
     ```
 
-    #### `env`
+    ##### `type=env` attributes
 
-    Attribute keys:
+    | Key                    | Description                                     | Default                    |
+    | ---------------------- | ----------------------------------------------- | -------------------------- |
+    | `id`                   | ID of the secret.                               | N/A (this key is required) |
+    | `env`, `src`, `source` | Environment variable to source the secret from. | `id` if unset.             |
 
-    - `id` - ID of the secret. Defaults to `env` name.
-    - `env` - Secret environment variable. `id` used if unset, otherwise will look for `src`, `source` if `id` unset.
+    ##### `type=env` usage
+
+    In the following example, `type=env` is automatically detected because an
+    environment variable matching `id` is set.
+
+    ```console
+    $ SECRET_TOKEN=token docker buildx build --secret id=SECRET_TOKEN .
+    ```
 
     ```dockerfile
     # syntax=docker/dockerfile:1
     FROM node:alpine
     RUN --mount=type=bind,target=. \
-      --mount=type=secret,id=SECRET_TOKEN \
-      SECRET_TOKEN=$(cat /run/secrets/SECRET_TOKEN) yarn run test
+      --mount=type=secret,id=SECRET_TOKEN,env=SECRET_TOKEN \
+      yarn run test
     ```
 
+    In the following example, the build argument `SECRET_TOKEN` is set to contain
+    the value of the environment variable `API_KEY`.
+
     ```console
-    $ SECRET_TOKEN=token docker buildx build --secret id=SECRET_TOKEN .
+    $ API_KEY=token docker buildx build --secret id=SECRET_TOKEN,env=API_KEY .
     ```
+
+    You can also specify the name of the environment variable with `src` or `source`:
+
+    ```console
+    $ API_KEY=token docker buildx build --secret type=env,id=SECRET_TOKEN,src=API_KEY .
+    ```
+
+    > [!NOTE]
+    > Specifying the environment variable name with `src` or `source`, you are
+    > required to set `type=env` explicitly, or else Buildx assumes that the secret
+    > is `type=file`, and looks for a file with the name of `src` or `source` (in
+    > this case, a file named `API_KEY` relative to the location where the `docker
+    > buildx build` command was executed.
 
     ### Shared memory size for build containers (--shm-size) {#shm-size}
 
@@ -1446,8 +1506,7 @@ examples: |-
     optional and can be `b` (bytes), `k` (kilobytes), `m` (megabytes), or `g`
     (gigabytes). If you omit the unit, the system uses bytes.
 
-    > **Note**
-    >
+    > [!NOTE]
     > In most cases, it is recommended to let the builder automatically determine
     > the appropriate configurations. Manual adjustments should only be considered
     > when specific performance tuning is required for complex build scenarios.
@@ -1533,14 +1592,12 @@ examples: |-
     $ docker buildx build --ulimit nofile=1024:1024 .
     ```
 
-    > **Note**
-    >
+    > [!NOTE]
     > If you don't provide a `hard limit`, the `soft limit` is used
     > for both values. If no `ulimits` are set, they're inherited from
     > the default `ulimits` set on the daemon.
 
-    > **Note**
-    >
+    > [!NOTE]
     > In most cases, it is recommended to let the builder automatically determine
     > the appropriate configurations. Manual adjustments should only be considered
     > when specific performance tuning is required for complex build scenarios.

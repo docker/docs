@@ -7,7 +7,7 @@ long: |-
     the container, `docker export` exports the contents of the underlying
     directory, not the contents of the volume.
 
-    Refer to [Backup, restore, or migrate data volumes](/storage/volumes/#back-up-restore-or-migrate-data-volumes)
+    Refer to [Backup, restore, or migrate data volumes](/engine/storage/volumes/#back-up-restore-or-migrate-data-volumes)
     in the user guide for examples on exporting data in a volume.
 usage: docker container export [OPTIONS] CONTAINER
 pname: docker container

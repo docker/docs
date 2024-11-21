@@ -1,19 +1,23 @@
+{{ define "left" }}
+  {{ partial "sidebar/mainnav.html" . }}
+  {{ partial "sidebar/tags.html" . }}
+{{ end }}
+
 {{ define "main" }}
-  {{ partial "breadcrumbs.html" . }}
-  <article class="DocSearch-content prose max-w-none dark:prose-invert">
-    <h1 class="scroll-mt-36">{{ .Title }}</h1>
+  <article class="prose max-w-none dark:prose-invert">
+    {{ partial "breadcrumbs.html" . }}
+    <h1 class="scroll-mt-36 flex items-center">
+      <span class="icon-svg icon-lg pb-2">{{ partialCached "icon" "tag" "tag" }}</span>
+      <span>{{ .Title }}</span>
+    </h1>
     {{ .Content }}
-    <div class="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3">
+    <ul>
     {{ range site.Taxonomies.tags }}
-    {{ partial "components/card.html"
-      (dict
-        "link" .Page.Permalink
-        "title" .Page.Title
-        "description" .Page.Description
-        "icon" .Page.Params.icon
-      )
-    }}
+      <li>
+        <a href="{{ .Page.Permalink }}">{{ .Page.Title }}</a>
+        ({{ (len .Pages) }} {{ cond (gt (len .Pages) 1) "pages" "page" }})
+      </li>
     {{ end }}
-    </div>
+    </ul>
   </article>
 {{ end }}

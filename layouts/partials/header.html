@@ -1,34 +1,45 @@
-<header
-  class="sticky top-0 z-20 h-16 px-4 text-white bg-gradient-to-r from-accent-light to-blue-light-500 dark:from-accent-dark dark:to-blue-dark-100">
-  <div class="mx-auto flex h-full max-w-[1400px] items-center justify-between">
-    <div class="flex h-full items-center md:gap-8 gap-2">
-      {{ if not .IsHome }}
-      <button x-data @click="$dispatch('togglesidebar')"
+<header class="w-full sticky top-0 z-20 h-16 px-6 text-white bg-gradient-to-r from-blue-light-600 to-blue-light dark:from-blue-dark-200 to-50% dark:to-blue-dark-100">
+  <div class="max-w-[1920px] mx-auto flex lg:gap-8 gap-2 h-full items-center justify-between">
+    <div class="flex h-full items-center lg:gap-8 gap-2">
+      {{- if not .IsHome }}
+      <button x-data @click="$store.showSidebar = true"
         class="icon-svg block px-4 md:hidden h-full" aria-label="Menu">
         {{ partialCached "icon" "menu" "menu" }}
       </button>
-      {{ end }}
+      {{- end }}
       <div>
         {{/* main logo */}}
         <a title="Docker Docs home page" href="{{ site.BaseURL }}">
-          <div>
+          <div class="hidden sm:block">
             {{- (resources.Get "images/docker-docs-white.svg").Content | safe.HTML -}}
+          </div>
+          <div class="block sm:hidden">
+            {{- (resources.Get "images/docker-docs-white-condensed.svg").Content | safe.HTML -}}
           </div>
         </a>
       </div>
-      {{ partial "top-nav.html" . }}
+      <nav class="mt-1 hidden md:block">
+        <ul class="flex text-sm md:text-base lg:gap-4">
+          {{ range site.Menus.main }}
+          <li
+            {{- if or (eq page.Permalink .Page.Permalink) (page.IsDescendant .Page) }}
+              class="border-b-4"
+            {{- else }}
+              class="border-b-4 border-transparent hover:border-white/20"
+            {{- end }}>
+            <a class="block px-2 py-1 whitespace-nowrap" href="{{ .URL }}">{{ .Name }}</a>
+          </li>
+          {{ end }}
+        </ul>
+      </nav>
     </div>
-    <div class="flex items-center gap-6">
-      {{ partialCached "search.html" "-" }}
-      <button aria-label="Theme switch" id="theme-switch" class="svg-icon"
-        x-data="{ theme: localStorage.getItem('theme-preference') }" x-init="$watch('theme', value => {
-        localStorage.setItem('theme-preference', value);
-        document.firstElementChild.className = value;
-      })" @click="theme = (theme === 'dark' ? 'light' : 'dark')">
-        <span class="icon-svg dark:hidden">{{ partialCached "icon" "light_mode" "light_mode"}}</span>
-        <span class="icon-svg hidden dark:block">{{ partialCached "icon" "dark_mode" "dark_mode"}}</span>
+    <div class="flex min-w-0 items-center gap-4 flex-grow justify-end">
+      {{ partialCached "search-bar.html" "-" }}
+      <button @click="open = false"
+        class="dark:text-white py-1 px-2 rounded open-kapa-widget flex gap-1 items-center hover:bg-white/20 transition">
+        <span>Ask&nbsp;AI</span>
+        <img src="{{ (resources.Get "images/ai-stars.svg").Permalink }}" alt="AI Stars" />
       </button>
     </div>
   </div>
-
 </header>

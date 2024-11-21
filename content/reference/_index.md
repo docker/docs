@@ -1,66 +1,47 @@
 ---
 title: Reference documentation
+linkTitle: Reference
+layout: wide
 description: Find reference documentation for the Docker platform’s various APIs, CLIs, and file formats
-notoc: true
-grid_files:
-- title: Dockerfile
-  description: Defines the contents and startup behavior of a single container.
-  icon: edit_document
-  link: /reference/dockerfile/
-- title: Compose file
-  description: Defines a multi-container application.
-  icon: polyline
-  link: /compose/compose-file/
-grid_clis:
-- title: Docker CLI
-  description: The main Docker CLI, includes all `docker` commands.
+params:
   icon: terminal
-  link: /engine/reference/commandline/cli/
-- title: Compose CLI
-  description: The CLI for Docker Compose, for building and running multi-container
-    applications.
-  icon: subtitles
-  link: /compose/reference/
-- title: Daemon CLI (dockerd)
-  description: Persistent process that manages containers.
-  icon: developer_board
-  link: /reference/cli/dockerd/
-grid_apis:
-- title: Engine API
-  description: The main API for Docker, provides programmatic access to a daemon.
-  icon: api
-  link: /engine/api/
-- title: Registry API
-  description: Facilitates distribution of images to the engine.
-  icon: storage
-  link: /registry/spec/api/
-- title: Docker Hub API
-  description: API to interact with Docker Hub.
-  icon: communities
-  link: /docker-hub/api/latest/
-- title: DVP Data API
-  description: API for Docker Verified Publishers to fetch analytics data.
-  icon: area_chart
-  link: /docker-hub/api/dvp/
-aliases:
-- /app/working-with-app/
-- /engine/reference/commandline/app/
-- /engine/reference/commandline/app_bundle/
-- /engine/reference/commandline/app_completion/
-- /engine/reference/commandline/app_init/
-- /engine/reference/commandline/app_inspect/
-- /engine/reference/commandline/app_install/
-- /engine/reference/commandline/app_list/
-- /engine/reference/commandline/app_merge/
-- /engine/reference/commandline/app_pull/
-- /engine/reference/commandline/app_push/
-- /engine/reference/commandline/app_render/
-- /engine/reference/commandline/app_split/
-- /engine/reference/commandline/app_status/
-- /engine/reference/commandline/app_uninstall/
-- /engine/reference/commandline/app_upgrade/
-- /engine/reference/commandline/app_validate/
-- /engine/reference/commandline/app_version/
+  notoc: true
+  grid_files:
+  - title: Dockerfile
+    description: Defines the contents and startup behavior of a single container.
+    icon: edit_document
+    link: /reference/dockerfile/
+  - title: Compose file
+    description: Defines a multi-container application.
+    icon: polyline
+    link: /reference/compose-file/
+  grid_clis:
+  - title: Docker CLI
+    description: The main Docker CLI, includes all `docker` commands.
+    icon: terminal
+    link: /reference/cli/docker/
+  - title: Compose CLI
+    description: The CLI for Docker Compose, for building and running multi-container
+      applications.
+    icon: subtitles
+    link: /reference/cli/docker/compose/
+  - title: Daemon CLI (dockerd)
+    description: Persistent process that manages containers.
+    icon: developer_board
+    link: /reference/cli/dockerd/
+  grid_apis:
+  - title: Engine API
+    description: The main API for Docker, provides programmatic access to a daemon.
+    icon: api
+    link: /reference/api/engine/
+  - title: Docker Hub API
+    description: API to interact with Docker Hub.
+    icon: communities
+    link: /reference/api/hub/latest/
+  - title: DVP Data API
+    description: API for Docker Verified Publishers to fetch analytics data.
+    icon: area_chart
+    link: /reference/api/hub/dvp/
 ---
 
 This section includes the reference documentation for the Docker platform's

@@ -13,6 +13,17 @@ keywords: "API, Docker, rcli, REST, documentation"
      will be rejected.
 -->
 
+## v1.47 API changes
+
+[Docker Engine API v1.47](https://docs.docker.com/engine/api/v1.47/) documentation
+
+* `GET /images/json` response now includes `Manifests` field, which contains
+  information about the sub-manifests included in the image index. This
+  includes things like platform-specific manifests and build attestations.
+  The new field will only be populated if the request also sets the `manifests`
+  query parameter to `true`.
+  WARNING: This is experimental and may change at any time without any backward
+  compatibility.
 
 ## v1.46 API changes
 
@@ -29,7 +40,7 @@ keywords: "API, Docker, rcli, REST, documentation"
   `net.ipv4.config.eth0.log_martians=1`, use
   `net.ipv4.config.IFNAME.log_martians=1`. In API versions up-to 1.46, top level
   `--sysctl` settings for `eth0` will be migrated to `DriverOpts` when possible. 
-  This automatic migration will be removed for API versions 1.47 and greater.
+  This automatic migration will be removed in a future release.
 * `GET /containers/json` now returns the annotations of containers.
 * `POST /images/{name}/push` now supports a `platform` parameter (JSON encoded
   OCI Platform type) that allows selecting a specific platform manifest from
@@ -128,7 +139,7 @@ are not part of the underlying image's Config, and deprecated:
   interval for health checks during the start period.
 * `GET /info` now includes a `CDISpecDirs` field indicating the configured CDI
   specifications directories. The use of the applied setting requires the daemon
-  to have expermental enabled, and for non-experimental daemons an empty list is
+  to have experimental enabled, and for non-experimental daemons an empty list is
   always returned.
 * `POST /networks/create` now returns a 400 if the `IPAMConfig` has invalid
   values. Note that this change is _unversioned_ and applied to all API
@@ -414,7 +425,7 @@ are not part of the underlying image's Config, and deprecated:
   to return those without the specified labels.
 * `POST /containers/create` now accepts a `fluentd-async` option in `HostConfig.LogConfig.Config`
   when using the Fluentd logging driver. This option deprecates the `fluentd-async-connect`
-  option, which remains funtional, but will be removed in a future release. Users
+  option, which remains functional, but will be removed in a future release. Users
   are encouraged to use the `fluentd-async` option going forward. This change is
   not versioned, and affects all API versions if the daemon has this patch.
 * `POST /containers/create` now accepts a `fluentd-request-ack` option in

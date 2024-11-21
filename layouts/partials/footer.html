@@ -1,4 +1,4 @@
-<div class="flex justify-center py-20 px-4 bg-gray-light-200/50 dark:bg-gray-dark-300/50">
+<div class="flex justify-center py-20 px-4 bg-gray-light-100 dark:bg-gray-dark-200">
   <div class="flex w-full max-w-[840px] flex-col gap-10">
     <div class="flex flex-col md:flex-row gap-4 items-center justify-evenly">
       <a class="underline-offset-2 hover:underline" href="https://www.docker.com/">Product offerings</a>
@@ -60,6 +60,34 @@
           title="Docker Legal Terms"
           href="https://www.docker.com/legal"
           >Legal</a>
+      </div>
+    </div>
+    <div class="flex justify-between items-center">
+      <button type="button" id="ot-sdk-btn" class="ot-sdk-show-settings">
+        Cookies Settings
+      </button>
+      <div class="flex items-center gap-2">
+        <span>Theme:</span>
+        <button
+          aria-label="Theme switch"
+          id="theme-switch"
+          class="rounded bg-blue-light px-4 py-1 text-white transition
+          hover:bg-blue-light-400 dark:bg-blue-dark-400
+          dark:hover:bg-blue-dark"
+          x-data="{ theme: localStorage.getItem('theme-preference') }"
+          x-init="$watch('theme', value => {
+                localStorage.setItem('theme-preference', value);
+                document.firstElementChild.className = value;
+              })"
+          @click="theme = (theme === 'dark' ? 'light' : 'dark')"
+        >
+          <span class="icon-svg icon-sm dark:hidden"
+            >Light {{ partialCached "icon" "light_mode" "light_mode" }}</span
+          >
+          <span class="icon-svg icon-sm hidden dark:block"
+            >Dark {{ partialCached "icon" "dark_mode" "dark_mode" }}</span
+          >
+        </button>
       </div>
     </div>
   </div>

@@ -1,7 +1,3 @@
-{{ define "left" }}
-  {{ partial "sidebar.html" . }}
-{{ end }}
-
 {{ define "main" }}
   {{ $data := "" }}
   {{ if .Params.datafolder }}
@@ -9,65 +5,68 @@
   {{ else }}
     {{ $data = index site.Data .Params.datafile }}
   {{ end }}
-  {{ .Scratch.Set "headings" slice }}
-  {{ .Scratch.Set "subheadings" slice }}
-  {{ partial "breadcrumbs.html" . }}
-  <article class="prose max-w-none dark:prose-invert">
+  {{ .Store.Set "headings" slice }}
+  {{ .Store.Set "subheadings" slice }}
+  <div class="flex w-full">
+    <article class="prose min-w-0 flex-[2_2_0%] max-w-4xl dark:prose-invert">
+    {{ partial "breadcrumbs.html" . }}
     <h1 class="scroll-mt-36">{{ .Title }}</h1>
-    <table>
-      <tbody>
-        {{ with $data.short }}
-        <tr>
-          <th class="text-left w-32">Description</th>
-          <td>{{ . }}</th>
-        </tr>
-        {{ end }}
-        {{ with $data.usage }}
-        <tr>
-          <th class="text-left w-32">Usage</th>
-          <td><code>{{ . }}</code></td>
-        </tr>
-        {{ end }}
-        {{ with $data.aliases }}
-        {{ $aliases := strings.Replace . (fmt.Printf "%s, " page.Title) "" }}
-        <tr>
-          <th class="text-left w-32 flex items-center gap-2">
-            <span>Aliases</span>
-            {{ partialCached "tooltip.html" "An alias is a short or memorable alternative for a longer command." "cli-alias" }}
-          </th>
-          <td>
-            <div class="flex gap-3">
-            {{ range (strings.Split $aliases ", ") }}
-              <code>{{ . }}</code>
-            {{ end }}
-            </div>
-          </td>
-        </tr>
-        {{ end }}
-      </tbody>
-    </table>
+    <div class="overflow-x-auto">
+      <table>
+        <tbody>
+          {{ with $data.short }}
+          <tr>
+            <th class="text-left w-32">Description</th>
+            <td>{{ . }}</th>
+          </tr>
+          {{ end }}
+          {{ with $data.usage }}
+          <tr>
+            <th class="text-left w-32">Usage</th>
+            <td><code>{{ . }}</code></td>
+          </tr>
+          {{ end }}
+          {{ with $data.aliases }}
+          {{ $aliases := strings.Replace . (fmt.Printf "%s, " page.Title) "" }}
+          <tr>
+            <th class="text-left w-32 flex items-center gap-2">
+              <span>Aliases</span>
+              {{ partialCached "tooltip.html" "An alias is a short or memorable alternative for a longer command." "cli-alias" }}
+            </th>
+            <td>
+              <div class="flex gap-3">
+              {{ range (strings.Split $aliases ", ") }}
+                <code>{{ . }}</code>
+              {{ end }}
+              </div>
+            </td>
+          </tr>
+          {{ end }}
+        </tbody>
+      </table>
+    </div>
     {{ .Content }}
     {{ if $data.deprecated }}
-      <blockquote class="warning">
-        <p><strong>This command is deprecated</strong></p>
-        <p>
-          It may be removed in a future Docker version. For more information,
-          see the
-          <a href="https://github.com/docker/roadmap/issues/209"
-            >Docker roadmap</a
-          >
-        </p>
-      </blockquote>
+      {{ markdownify `
+> [!WARNING]
+> This command is deprecated
+>
+> It may be removed in a future Docker version. For more information, see the
+> [Docker roadmap](https://github.com/docker/roadmap/issues/209)`
+      }}
     {{ end }}
     {{ if or $data.experimental $data.experimentalcli }}
-      <blockquote class="important">
-        <p><strong>This command is experimental</strong></p>
-        <p>
-          Experimental features are intended for testing and feedback as their
-          functionality or design may change between releases without warning or
-          can be removed entirely in a future release.
-        </p>
-      </blockquote>
+      {{ markdownify `
+{{% experimental %}}
+
+**This command is experimental.**
+
+Experimental features are intended for testing and feedback as their
+functionality or design may change between releases without warning or
+can be removed entirely in a future release.
+
+{{% /experimental %}}`
+      }}
     {{ end }}
     {{ with $data.kubernetes }}
       <p>
@@ -85,11 +84,11 @@
       {{ $heading := dict "level" 2 "text" "Description" }}
       {{ partialCached "heading.html" $heading "cli-description" }}
       {{ $subHeadings := (strings.FindRE `(?m:#{3,4} .*)` .) }}
-      {{ $.Scratch.Add "headings" $heading }}
+      {{ $.Store.Add "headings" $heading }}
       {{ range $subHeadings }}
         {{ $lvl := strings.Count "#" . }}
         {{ $txt := strings.TrimLeft "# " . }}
-        {{ $.Scratch.Add "headings" (dict "level" $lvl "text" $txt) }}
+        {{ $.Store.Add "headings" (dict "level" $lvl "text" $txt) }}
       {{ end }}
       {{ . | $.RenderString (dict "display" "block") }}
     {{ end }}
@@ -98,81 +97,83 @@
       {{ with $opts }}
         {{ $heading := dict "level" 2 "text" "Options" }}
         {{ partialCached "heading.html" $heading "cli-options" }}
-        {{ $.Scratch.Add "headings" $heading }}
-        <table>
-          <thead>
-            <tr>
-              <th>Option</th>
-              <th>Default</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            {{ range . }}
+        {{ $.Store.Add "headings" $heading }}
+        <div class="overflow-x-auto">
+          <table>
+            <thead class="bg-gray-light-100 dark:bg-gray-dark-200">
               <tr>
-                {{ $short := .shorthand }}
-                {{ $long := .option }}
-                <td>
-                  {{ with .details_url }}
-                  <a class="link" href="{{ . }}">
-                    <code>{{ with $short }}-{{ . }}, {{end}}--{{ $long }}</code>
-                  </a>
-                  {{ else }}
-                  <code>{{ with $short }}-{{ . }}, {{end}}--{{ $long }}</code>
-                  {{ end }}
-                </td>
-                {{ $skipDefault := `[],map[],false,0,0s,default,'',""` }}
-                <td>
-                  {{ with .default_value }}
-                    {{ cond (in $skipDefault .) "" (printf "<code>%s</code>" . | safeHTML) }}
-                  {{ end }}
-                </td>
-                <td>
-                  {{ with .min_api_version }}
-                    {{ partialCached "components/badge.html" (dict "color" "blue" "content" (printf "API %s+" .)) "api" . }}
-                  {{ end }}
-                  {{ with .deprecated }}
-                    {{ partialCached "components/badge.html" (dict "color" "red" "content" "Deprecated") "deprecated" }}
-                  {{ end }}
-                  {{ with .experimental }}
-                    {{ partialCached "components/badge.html" (dict "color" "amber" "content" "experimental (daemon)") "exp" }}
-                  {{ end }}
-                  {{ with .experimentalcli }}
-                    {{ partialCached "components/badge.html" (dict "color" "amber" "content" "experimental (CLI)") "exp-cli" }}
-                  {{ end }}
-                  {{ with .kubernetes }}
-                    {{ partialCached "components/badge.html" (dict "color" "blue" "content" "Kubernetes") "k8s" }}
-                  {{ end }}
-                  {{ with .swarm }}
-                    {{ partialCached "components/badge.html" (dict "color" "blue" "content" "Swarm") "swarm" }}
-                  {{ end }}
-                  {{ if .description }}
-                    {{/* replace newlines in long desc with break tags */}}
-                    {{ markdownify (strings.Replace .description "\n" "<br>") }}
-                  {{ end }}
-                </td>
+                <th class="p-2">Option</th>
+                <th class="p-2">Default</th>
+                <th class="p-2">Description</th>
               </tr>
-            {{ end }}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {{ range . }}
+                <tr class="p-2">
+                  {{ $short := .shorthand }}
+                  {{ $long := .option }}
+                  <td>
+                    {{ with .details_url }}
+                    <a class="link" href="{{ . }}">
+                      <code>{{ with $short }}-{{ . }}, {{end}}--{{ $long }}</code>
+                    </a>
+                    {{ else }}
+                    <code>{{ with $short }}-{{ . }}, {{end}}--{{ $long }}</code>
+                    {{ end }}
+                  </td>
+                  {{ $skipDefault := `[],map[],false,0,0s,default,'',""` }}
+                  <td>
+                    {{ with .default_value }}
+                      {{ cond (in $skipDefault .) "" (printf "<code>%s</code>" . | safeHTML) }}
+                    {{ end }}
+                  </td>
+                  <td>
+                    {{ with .min_api_version }}
+                      {{ partialCached "components/badge.html" (dict "color" "blue" "content" (printf "API %s+" .)) "api" . }}
+                    {{ end }}
+                    {{ with .deprecated }}
+                      {{ partialCached "components/badge.html" (dict "color" "red" "content" "Deprecated") "deprecated" }}
+                    {{ end }}
+                    {{ with .experimental }}
+                      {{ partialCached "components/badge.html" (dict "color" "amber" "content" "experimental (daemon)") "exp" }}
+                    {{ end }}
+                    {{ with .experimentalcli }}
+                      {{ partialCached "components/badge.html" (dict "color" "amber" "content" "experimental (CLI)") "exp-cli" }}
+                    {{ end }}
+                    {{ with .kubernetes }}
+                      {{ partialCached "components/badge.html" (dict "color" "blue" "content" "Kubernetes") "k8s" }}
+                    {{ end }}
+                    {{ with .swarm }}
+                      {{ partialCached "components/badge.html" (dict "color" "blue" "content" "Swarm") "swarm" }}
+                    {{ end }}
+                    {{ if .description }}
+                      {{/* replace newlines in long desc with break tags */}}
+                      {{ markdownify (strings.Replace .description "\n" "<br>") }}
+                    {{ end }}
+                  </td>
+                </tr>
+              {{ end }}
+            </tbody>
+          </table>
+        </div>
       {{ end }}
     {{ end }}
     {{ with $data.examples }}
       {{ $heading := dict "level" 2 "text" "Examples" }}
       {{ partialCached "heading.html" $heading "cli-examples" }}
       {{ $subHeadings := (strings.FindRE `(?m:#{3,4} .*)` .) }}
-      {{ $.Scratch.Add "headings" $heading }}
+      {{ $.Store.Add "headings" $heading }}
       {{ range $subHeadings }}
         {{ $lvl := strings.Count "#" . }}
         {{ $txt := strings.TrimLeft "# " . }}
-        {{ $.Scratch.Add "headings" (dict "level" $lvl "text" $txt) }}
+        {{ $.Store.Add "headings" (dict "level" $lvl "text" $txt) }}
       {{ end }}
       {{ $.RenderString (dict "display" "block") . }}
     {{ end }}
     {{ if eq .Kind "section" }}
       {{ $heading := dict "level" 2 "text" "Subcommands" }}
       {{ partialCached "heading.html" $heading "cli-subcommands" }}
-      {{ $.Scratch.Add "headings" $heading }}
+      {{ $.Store.Add "headings" $heading }}
       <table>
         <thead>
           <tr>
@@ -192,8 +193,34 @@
       </table>
     {{ end }}
   </article>
-{{ end }}
 
-{{ define "right" }}
-  {{ partial "cli-aside.html" . }}
+  <div class="hidden flex-1 min-w-52 lg:block">
+    <aside
+      class="sticky top-16 h-[calc(100vh-64px)] min-w-52 space-y-4 overflow-y-auto py-4 w-full"
+      >
+      <div id="TableOfContents">
+        <div class="text-lg pb-2">{{ T "tableOfContents" }}</div>
+        <nav class="toc">
+          <ul>
+            {{ range (.Store.Get "headings") }}
+              {{/* add left padding depending on level (pl-2, pl-3, pl-4) */}}
+              {{ $slice := strings.Split .text "{#" }}
+              {{ $text := index $slice 0 }}
+              {{ $anchor := index $slice 1 | strings.TrimRight "}" }}
+              <li{{ with .level }} class="pl-{{ . }}"{{ end }}>
+                <a
+                  {{ if $anchor }}
+                    href="#{{ $anchor }}"
+                  {{ else }}
+                    href="#{{ $text | anchorize }}"
+                  {{ end }}
+                  >{{ markdownify $text }}</a>
+              </li>
+            {{ end }}
+          </ul>
+        </nav>
+      </div>
+    </aside>
+  </div>
+
 {{ end }}

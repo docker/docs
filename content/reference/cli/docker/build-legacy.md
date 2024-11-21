@@ -1,7 +1,6 @@
 ---
 datafolder: engine-cli
 datafile: docker_image_build
-linkTitle: docker build
 title: docker build (legacy builder)
 layout: cli
 ---

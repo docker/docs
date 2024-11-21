@@ -1,11 +1,9 @@
 {{ $product_link := "[Docker Hub](https://hub.docker.com)" }}
-{{ $sso_navigation := `Navigate to the SSO settings page for your organization or company.
-   - Organization: Select **Organizations**, your organization, **Settings**, and then **Security**.
-   - Company: Select **Organizations**, your company, and then **Settings**.` }}
+{{ $sso_navigation := `Navigate to the SSO settings page for your organization. Select **Organizations**, your organization, **Settings**, and then **Security**.` }}
 
 {{ if eq (.Get "product") "admin" }}
   {{ $product_link = "the [Admin Console](https://admin.docker.com)" }}
-  {{ $sso_navigation = "Select your organization or company in the left navigation drop-down menu, and then select **SSO and SCIM.**" }}
+  {{ $sso_navigation = "Select your organization or company in the left navigation drop-down menu, and then select **SSO and SCIM**. Note that when an organization is part of a company, you must select the company and configure SSO for that organization at the company level. Each organization can have its own SSO configuration and domain, but it must be configured at the company level." }}
 {{ end }}
 
 1. In {{ $product_link }}, select the verified domains you want to apply the connection to.
@@ -19,7 +17,7 @@ After you’ve completed the SSO configuration process in Docker, you can test t
 1. Authenticate through email instead of using your Docker ID, and test the login process.
 2. To authenticate through CLI, your users must have a PAT before you enforce SSO for CLI users.
 
->**Important**
+> [!IMPORTANT]
 >
 > SSO has Just-in-Time (JIT) provisioning enabled by default, unless you have [disabled it](/security/for-admins/provisioning/just-in-time/#sso-authentication-with-jit-provisioning-disabled). This means your users are auto-provisioned to your organization.
 >
@@ -28,8 +26,7 @@ After you’ve completed the SSO configuration process in Docker, you can test t
 > - [Okta](https://help.okta.com/en-us/Content/Topics/Security/policies/configure-app-signon-policies.htm)
 > - [Entra ID (formerly Azure AD)](https://learn.microsoft.com/en-us/azure/active-directory/develop/howto-restrict-your-app-to-a-set-of-users)
 >
-> Alternatively, see [Manage how users are provisioned](/security/for-admins/single-sign-on/manage/#manage-how-users-are-provisioned).
-{ .important}
+> Alternatively, see [Manage how users are provisioned](/security/for-admins/single-sign-on/manage/).
 
 The SSO connection is now created. You can continue to set up SCIM without enforcing SSO log-in. For more information about setting up SCIM, see [Set up SCIM](/security/for-admins/provisioning/scim/).
 
@@ -46,7 +43,6 @@ The SSO connection is now created. You can continue to set up SCIM without enfor
 
 Your users must now sign in to Docker with SSO.
 
-> **Important**
+> [!IMPORTANT]
 >
 > If SSO isn't enforced, users can choose to sign in with either their Docker ID or SSO.
-{ .important}

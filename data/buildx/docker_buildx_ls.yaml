@@ -39,6 +39,28 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: no-trunc
+      value_type: bool
+      default_value: "false"
+      description: Don't truncate output
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+inherited_options:
+    - option: debug
+      shorthand: D
+      value_type: bool
+      default_value: "false"
+      description: Enable debug logging
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
 examples: |-
     ### Format the output (--format) {#format}
 

@@ -57,7 +57,7 @@ grid:
       - text: "Try Docker Compose"
         url: "/compose/gettingstarted/"
       - text: "Release notes"
-        url: "/compose/release-notes/"
+        url: "/compose/releases/release-notes/"
   - title: Docker Hub
     icon: device_hub
     description: |
@@ -66,7 +66,7 @@ grid:
       - text: "Overview"
         url: "/docker-hub/"
       - text: "Create an account"
-        url: "/docker-id/"
+        url: "/accounts/create-account/"
       - text: "Create a repository"
         url: "/docker-hub/repos/create/"
   - title: Docker Scout
@@ -135,4 +135,15 @@ grid:
         url: "/security/for-admins/single-sign-on/"
       - text: "SCIM"
         url: "/security/for-admins/provisioning/scim/"
+  - title: Testcontainers Cloud
+    icon: cloud
+    description: |
+      Testcontainers Cloud lets you run heavy test workloads remotely.
+    links:
+      - text: "Overview"
+        url: "https://testcontainers.com/cloud/docs/"
+      - text: "Getting started"
+        url: "https://testcontainers.com/cloud/docs/#getting-started"
+      - text: "TCC for CI"
+        url: "https://testcontainers.com/cloud/docs/#tcc-for-ci"
 ---

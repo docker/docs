@@ -4,7 +4,6 @@
   <a
     class="link"
     href="{{ $url | safeURL }}"
-    target="_blank"
     rel="noopener">
       {{- .Text | safeHTML -}}
       <span class="pl-1 icon-svg icon-sm">
@@ -13,21 +12,10 @@
 {{- else if (strings.HasPrefix $url "/") -}}
   {{ if (strings.HasSuffix (urls.Parse $url).Path ".md") }}
     {{/* abs path to markdown file, use ref */}}
-    {{ $url = (ref .Page $url) }}
+    {{ $url = (ref page $url) }}
   {{ end }}
   <a class="link" href="{{ $url }}">{{ .Text | safeHTML }}</a>
 {{- else -}}
-  {{/* check if the file links to index.md */}}
-  {{- if (strings.FindRE `([^_]|^)index.md` $url 1) -}}
-    <a
-      class="link"
-      href="{{ ref .Page (strings.Replace $url "index.md" "_index.md") }}"
-      >{{ .Text | safeHTML }}</a
-    >
-  {{- else -}}
-    {{/* relative link, use ref */}}
-    <a class="link" href="{{ ref .Page $url }}"
-      >{{ .Text | safeHTML }}</a
-    >
-  {{- end -}}
+  {{/* relative link, use ref */}}
+  <a class="link" href="{{ ref page $url }}">{{ .Text | safeHTML }}</a>
 {{- end -}}

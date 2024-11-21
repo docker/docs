@@ -14,7 +14,6 @@ for the script is open source, and you can find it in the
 Always examine scripts downloaded from the internet before running them locally.
 Before installing, make yourself familiar with potential risks and limitations
 of the convenience script:
-{ .warning }
 
 - The script requires `root` or `sudo` privileges to run.
 - The script attempts to detect your Linux distribution and version and
@@ -31,9 +30,9 @@ of the convenience script:
   using the script to update an existing installation, dependencies may not be
   updated to the expected version, resulting in outdated versions.
 
-> **Tip: preview script steps before running**
+> [!TIP]
 >
-> You can run the script with the `--dry-run` option to learn what steps the
+> Preview script steps before running. You can run the script with the `--dry-run` option to learn what steps the
 > script will run when invoked:
 >
 > ```console

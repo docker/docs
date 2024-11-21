@@ -1,6 +1,7 @@
 command: docker buildx
 short: Docker Buildx
 long: Extended build capabilities with BuildKit
+usage: docker buildx
 pname: docker
 plink: docker.yaml
 cname:
@@ -38,6 +39,17 @@ options:
       value_type: string
       description: Override the configured builder instance
       details_url: '#builder'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: debug
+      shorthand: D
+      value_type: bool
+      default_value: "false"
+      description: Enable debug logging
       deprecated: false
       hidden: false
       experimental: false

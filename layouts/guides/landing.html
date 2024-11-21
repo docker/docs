@@ -1,0 +1,224 @@
+{{ define "left" }}
+{{- partial "sidebar/mainnav.html" . }}
+<div class="p-4 flex flex-col gap-2 text-sm">
+  <p>Filter guides by tag or programming language.<p>
+  <div class="space-y-4" x-data="{
+      filters: { tags: [], languages: [] },
+      toggleFilter(grp, tag) {
+        this.filters[grp].includes(tag)
+          ? this.filters[grp] = this.filters[grp].filter(el => el != tag)
+          : this.filters[grp].push(tag);
+
+        // Update URL
+        const url = new URL(window.location.href);
+        if (this.filters[grp].length > 0) {
+          url.searchParams.set(grp, this.filters[grp].join('~'));
+        } else {
+          url.searchParams.delete(grp);
+        }
+        window.history.replaceState({}, '', url);
+
+        this.$dispatch('guide-filter', { filters: this.filters });
+      },
+      
+      init() {
+        const url = new URL(window.location.href);
+        const tags = url.searchParams.get('tags')
+        const langs = url.searchParams.get('languages')
+        if (tags != null) {
+          this.filters['tags'] = tags.split('~');
+        }
+        if (langs != null) {
+          this.filters['languages'] = langs.split('~');
+        }
+      }
+    }" @guide-filter.window="filters = $event.detail.filters;">
+    <div class="pl-2"><strong>Tags</strong></div>
+    <fieldset class="flex flex-col gap-2">
+      {{- range $name, $taxonomy := where site.Taxonomies.tags ".Page.Type" "guides" }}
+        {{- $id := anchorize (fmt.Printf "tag-%s" $name) }}
+        <div class="pl-2 flex gap-2">
+          <input value="{{ $name }}" type="checkbox" id="{{ $id }}" @change="toggleFilter('tags', '{{ $name }}')"
+            :checked="filters['tags'].includes('{{ $name }}')">
+          <label class="select-none" for="{{ $id }}">{{ .Page.LinkTitle }}</label>
+        </div>
+      {{ end }}
+    </fieldset>
+    <div class="pl-2"><strong>Languages</strong></div>
+    <fieldset class="pl-2 flex flex-wrap gap-2">
+      {{- range $name, $taxonomy := where site.Taxonomies.languages ".Page.Type" "guides" }}
+        {{- $id := anchorize (fmt.Printf "lang-%s" $name) }}
+        <button
+          class="px-2 py-1 rounded-full flex gap-1 bg-white dark:bg-gray-dark-300 border border-divider-light dark:border-divider-dark"
+          :class="{ 'ring-2 ring-blue-light-400 dark:ring-blue-dark-400': filters['languages'].includes('{{ $name }}') }"
+          @click="toggleFilter('languages', '{{ $name }}')">
+          <img height="18" width="18" title="{{ .Page.LinkTitle }}" src="{{ .Page.Params.icon }}">
+          <span>{{ .Page.LinkTitle }}</span>
+        </button>
+      {{ end }}
+    </fieldset>
+  </div>
+</div>
+{{ end }}
+
+{{ define "main" }}
+<div class="flex gap-8 w-full">
+  <article class="prose min-w-0 max-w-none dark:prose-invert">
+    {{- partial "breadcrumbs.html" . }}
+    <h1 data-pagefind-weight="10" class="scroll-mt-36">{{ .Title }}</h1>
+    {{ .Content }}
+    <div class="not-prose min-h-screen" x-data="{
+        filters: { tags: [], languages: [] },
+        hidden: [],
+        total: {{ len .Pages }},
+
+        noFilters() {
+          return Object.values(this.filters).every(arr=> Array.isArray(arr) && arr.length === 0);
+        },
+
+        isVisible(el) {
+          return !this.hidden.includes(el.id);
+        },
+
+        updateVisible() {
+          const hiddenSet = new Set();
+          // show if no filters have been selected
+          if (this.noFilters()) {
+            this.hidden = [];
+            return;
+          };
+          const guideContainer = this.$refs['guide-container'];
+          const guides = guideContainer.children
+
+          // Loop over the filters object
+          for (const [key, value] of Object.entries(this.filters)) {
+            if (!value || value.length === 0) continue;
+
+            for (const g of guides) {
+              // Get the dataset for the current guide (e.g., languages or tags)
+              const terms = JSON.parse(g.dataset[key]);
+
+              // Check if any of the filter values exist in the terms
+              const containsSome = terms.some(term => this.filters[key].includes(term));
+
+              // If none of the terms match the filter, mark the guide as hidden
+              if (!containsSome) {
+                hiddenSet.add(g.id)
+              }
+            }
+          }
+
+          this.hidden = Array.from(hiddenSet)
+        },
+
+        init() {
+          const url = new URL(window.location.href);
+          const tags = url.searchParams.get('tags')
+          const langs = url.searchParams.get('languages')
+          if (tags != null) {
+            this.filters['tags'] = tags.split('~');
+          }
+          if (langs != null) {
+            this.filters['languages'] = langs.split('~');
+          }
+          this.updateVisible();
+        }
+      }" x-cloak
+         @guide-filter.window="filters = $event.detail.filters; updateVisible(); $nextTick(() => { window.scrollTo({ top: 0 }) })">
+      <div x-show="noFilters()">
+        <h2>Featured guides</h2>
+        <div class="not-prose py-4 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
+          {{- $featured := where .Pages "Params.featured" true }}
+          {{- with $featured }}
+            {{- range . }}
+              <div class="flex flex-col h-full">
+                <a class="hover:underline" href="{{ .Permalink }}">
+                  {{- $img := resources.Get (.Params.image | default "/images/thumbnail.webp") }}
+                  {{- $img = $img.Process "resize 600x" }}
+                  <img class="h-48 w-full object-cover rounded shadow" src="{{ $img.Permalink }}">
+                  <p class="text-xl leading-snug my-4">{{ .Title }}</p>
+                </a>
+                <p class="flex-grow text-sm">{{ .Summary }}</p>
+                <div class="mt-4">
+                  {{ template "guide-metadata" . }}
+                </div>
+              </div>
+            {{- end }}
+          {{- end }}
+        </div>
+        <hr class="text-divider-light dark:text-divider-dark">
+      </div>
+      <h2 x-show="noFilters()" id="all-guides" class="scroll-mt-36">All guides</h2>
+      <div x-show="!noFilters()" class="pb-8 flex flex-col gap-2">
+        <div class="flex gap-2 items-center">
+          <span class="mb-1 icon-svg icon-sm">{{ partialCached "icon" "filter_alt" "filter_alt" }}</span>
+          <p>Filtered results: showing <span x-text="total - hidden.length"></span> out of <span x-text="total"></span> guides.</p>
+        </div>
+        <div class="pl-4 flex gap-2 items-center">
+        {{- range $name, $taxonomy := site.Taxonomies.tags }}
+          <div x-show="filters.tags.includes('{{$name}}')">{{ template "termchip" $taxonomy.Page.LinkTitle }}</div>
+        {{- end }}
+        {{- range $name, $taxonomy := site.Taxonomies.languages }}
+          <div x-show="filters.languages.includes('{{$name}}')"
+                class="text-sm inline-flex gap-1 items-center rounded-full border
+                       border-divider-light dark:border-divider-dark bg-gray-light-100
+                       px-2 text-gray-light-800 dark:bg-gray-dark-200
+                       dark:text-gray-dark-800 select-none">
+            <img class="py-1" height="18" width="18" title="{{ .Page.LinkTitle }}" src="{{ .Page.Params.icon }}">
+            <span>{{ .Page.LinkTitle }}</span>
+          </div>
+        {{- end }}
+        </div>
+      </div>
+      <div x-ref="guide-container">
+        {{- range .Pages }}
+          <div
+              id="guide-{{ math.Counter }}"
+              data-languages='{{ jsonify (.Params.languages | default slice) }}'
+              data-tags='{{ jsonify (.Params.tags | default slice) }}'
+              x-show="isVisible($el);"
+            class="flex flex-col justify-between p-4 border-b border-divider-light
+                   hover:bg-gray-light-100 hover:dark:bg-gray-dark-200
+                   dark:border-divider-dark">
+            <div class="flex flex-col xl:flex-row justify-between">
+              <a href="{{ .Permalink }}" class="text-lg hover:underline mb-2 xl:mb-0 truncate">{{ .Title }}</a>
+              {{ template "guide-metadata" . }}
+            </div>
+          </div>
+        {{- end }}
+      </div>
+    </div>
+  </article>
+</div>
+{{ end }}
+
+{{- define "guide-metadata" }}
+<div class="text-sm flex gap-8 items-center justify-between text-gray-light dark:text-gray-dark">
+  <div class="flex flex-wrap md:flex-nowrap gap-2">
+    {{- $langs := .GetTerms "languages" }}
+    {{ partial "languages" $langs }}
+    {{- $tags := .GetTerms "tags" }}
+    {{- range $tags }}
+      {{ template "termchip" .Page.LinkTitle }}
+    {{- end }}
+  </div>
+  {{- with .Params.time }}
+  <div class="flex whitespace-nowrap flex-shrink gap-2">
+    <span class="icon-svg">{{ partialCached "icon" "schedule" "schedule" }}</span>
+    <span>{{ . }}</span>
+  </div>
+  {{- end }}
+</div>
+{{- end }}
+
+{{- define "termchip" }}
+  <span class="whitespace-nowrap inline-flex text-sm min-w-0 items-center rounded-full
+               border border-divider-light dark:border-divider-dark
+               bg-gray-light-100 px-2 text-gray-light-800 dark:bg-gray-dark-200
+               dark:text-gray-dark-800 select-none">
+    <span class="icon-svg icon-sm pb-0.5">
+      {{ partialCached "icon" "tag" "tag" }}
+    </span>
+    {{ . }}
+  </span>
+{{- end }}

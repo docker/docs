@@ -36,7 +36,7 @@ The parameters for this shortcode are:
 | link        | (Optional) The link target of the card, when clicked                 |
 | description | A description text, in Markdown                                      |
 
-> **Note**
+> [!NOTE]
 >
 > There's a known limitation with the Markdown description of cards,
 > in that they can't contain relative links, pointing to other .md documents.

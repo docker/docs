@@ -1,64 +1,68 @@
 # syntax=docker/dockerfile:1
+# check=skip=InvalidBaseImagePlatform
 
-# ALPINE_VERSION sets the Alpine Linux version for all Alpine stages
 ARG ALPINE_VERSION=3.20
-# GO_VERSION sets the Go version for the base stage
-ARG GO_VERSION=1.22
-# HTML_TEST_VERSION sets the wjdp/htmltest version for HTML testing
+ARG GO_VERSION=1.23
 ARG HTMLTEST_VERSION=0.17.0
+ARG HUGO_VERSION=0.139.0
+ARG NODE_VERSION=22
+ARG PAGEFIND_VERSION=1.1.1
 
-# base is the base stage with build dependencies
-FROM golang:${GO_VERSION}-alpine AS base
-WORKDIR /src
-RUN apk --update add nodejs npm git gcompat
+# base defines the generic base stage
+FROM golang:${GO_VERSION}-alpine${ALPINE_VERSION} AS base
+RUN apk add --no-cache \
+    git \
+    nodejs \
+    npm \
+    gcompat
 
-# node installs Node.js dependencies
-FROM base AS node
-COPY package*.json .
-ENV NODE_ENV=production
-RUN npm install
+# npm downloads Node.js dependencies
+FROM base AS npm
+ENV NODE_ENV="production"
+WORKDIR /out
+RUN --mount=source=package.json,target=package.json \
+    --mount=source=package-lock.json,target=package-lock.json \
+    --mount=type=cache,target=/root/.npm \
+    npm ci
 
-# hugo downloads and extracts the Hugo binary
+# hugo downloads the Hugo binary
 FROM base AS hugo
-ARG HUGO_VERSION=0.127.0
 ARG TARGETARCH
-WORKDIR /tmp/hugo
-RUN wget -O "hugo.tar.gz" "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-${TARGETARCH}.tar.gz"
-RUN tar -xf "hugo.tar.gz" hugo
+ARG HUGO_VERSION
+WORKDIR /out
+ADD https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-${TARGETARCH}.tar.gz .
+RUN tar xvf hugo_extended_${HUGO_VERSION}_linux-${TARGETARCH}.tar.gz
 
-FROM scratch AS ctx
-COPY --link . .
-
-# build-base is the base stage for building the site
+# build-base is the base stage used for building the site
 FROM base AS build-base
-COPY --from=hugo /tmp/hugo/hugo /bin/hugo
-COPY --from=node /src/node_modules /src/node_modules
-COPY --from=ctx . .
-
-# dev is for local development with Docker Compose
-FROM build-base AS dev
+WORKDIR /project
+COPY --from=hugo /out/hugo /bin/hugo
+COPY --from=npm /out/node_modules node_modules
+COPY . .
 
 # build creates production builds with Hugo
 FROM build-base AS build
 # HUGO_ENV sets the hugo.Environment (production, development, preview)
-ARG HUGO_ENV
+ARG HUGO_ENV="development"
 # DOCS_URL sets the base URL for the site
-ARG DOCS_URL
-RUN hugo --gc --minify -d /out -e $HUGO_ENV -b $DOCS_URL
+ARG DOCS_URL="https://docs.docker.com"
+ENV HUGO_CACHEDIR="/tmp/hugo_cache"
+RUN --mount=type=cache,target=/tmp/hugo_cache \
+    hugo --gc --minify -e $HUGO_ENV -b $DOCS_URL
 
 # lint lints markdown files
-FROM davidanson/markdownlint-cli2:v0.12.1 AS lint
+FROM davidanson/markdownlint-cli2:v0.14.0 AS lint
 USER root
-RUN --mount=type=bind,from=ctx,target=. \
+RUN --mount=type=bind,target=. \
     /usr/local/bin/markdownlint-cli2 \
     "content/**/*.md" \
-    "#content/engine/release-notes/*.md" \
-    "#content/desktop/previous-versions/*.md"
+    "#content/manuals/engine/release-notes/*.md" \
+    "#content/manuals/desktop/previous-versions/*.md"
 
 # test validates HTML output and checks for broken links
 FROM wjdp/htmltest:v${HTMLTEST_VERSION} AS test
 WORKDIR /test
-COPY --from=build /out ./public
+COPY --from=build /project/public ./public
 ADD .htmltest.yml .htmltest.yml
 RUN htmltest
 
@@ -80,8 +84,8 @@ RUN hugo mod vendor
 
 # vendor is an empty stage with only vendored Hugo modules
 FROM scratch AS vendor
-COPY --from=update-modules /src/_vendor /_vendor
-COPY --from=update-modules /src/go.* /
+COPY --from=update-modules /project/_vendor /_vendor
+COPY --from=update-modules /project/go.* /
 
 # build-upstream builds an upstream project with a replacement module
 FROM build-base AS build-upstream
@@ -93,12 +97,12 @@ ARG UPSTREAM_REPO
 ARG UPSTREAM_COMMIT
 # HUGO_MODULE_REPLACEMENTS is the replacement module for the upstream project
 ENV HUGO_MODULE_REPLACEMENTS="github.com/${UPSTREAM_MODULE_NAME} -> github.com/${UPSTREAM_REPO} ${UPSTREAM_COMMIT}"
-RUN hugo --ignoreVendorPaths "github.com/${UPSTREAM_MODULE_NAME}" -d /out
+RUN hugo --ignoreVendorPaths "github.com/${UPSTREAM_MODULE_NAME}"
 
 # validate-upstream validates HTML output for upstream builds
 FROM wjdp/htmltest:v${HTMLTEST_VERSION} AS validate-upstream
 WORKDIR /test
-COPY --from=build-upstream /out ./public
+COPY --from=build-upstream /project/public ./public
 ADD .htmltest.yml .htmltest.yml
 RUN htmltest
 
@@ -106,16 +110,25 @@ RUN htmltest
 FROM alpine:${ALPINE_VERSION} AS unused-media
 RUN apk add --no-cache fd ripgrep
 WORKDIR /test
-RUN --mount=type=bind,from=ctx,target=. <<"EOT"
-set -ex
-./scripts/test_unused_media.sh
+RUN --mount=type=bind,target=. ./hack/test/unused_media
+
+# path-warnings checks for duplicate target paths
+FROM build-base AS path-warnings
+RUN hugo --printPathWarnings > ./path-warnings.txt
+RUN <<EOT
+DUPLICATE_TARGETS=$(grep "Duplicate target paths" ./path-warnings.txt)
+if [ ! -z "$DUPLICATE_TARGETS" ]; then
+    echo "$DUPLICATE_TARGETS"
+    echo "You probably have a duplicate alias defined. Please check your aliases."
+    exit 1
+fi
 EOT
 
 # pagefind installs the Pagefind runtime
 FROM base AS pagefind
-ARG PAGEFIND_VERSION=1.1.0
-COPY --from=build /out ./public
-RUN --mount=type=bind,from=ctx,src=pagefind.yml,target=pagefind.yml \
+ARG PAGEFIND_VERSION
+COPY --from=build /project/public ./public
+RUN --mount=type=bind,src=pagefind.yml,target=pagefind.yml \
     npx pagefind@v${PAGEFIND_VERSION} --output-path "/pagefind"
 
 # index generates a Pagefind index
@@ -126,13 +139,13 @@ COPY --from=pagefind /pagefind .
 FROM alpine:${ALPINE_VERSION} AS test-go-redirects
 WORKDIR /work
 RUN apk add yq
-COPY --from=build /out ./public
-RUN --mount=type=bind,from=ctx,target=. <<"EOT"
+COPY --from=build /project/public ./public
+RUN --mount=type=bind,target=. <<"EOT"
 set -ex
-./scripts/test_go_redirects.sh
+./hack/test/go_redirects
 EOT
 
 # release is an empty scratch image with only compiled assets
 FROM scratch AS release
-COPY --from=build /out /
+COPY --from=build /project/public /
 COPY --from=pagefind /pagefind /pagefind

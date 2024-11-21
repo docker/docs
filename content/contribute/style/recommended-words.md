@@ -2,6 +2,7 @@
 title: Recommended word list
 description: Recommended word list for Technical documentation
 keywords: recommended word list, style guide, contribute
+weight: 30
 ---
 
 To help ensure consistency across documentation, the Technical Writing team recommends these wording choices.
@@ -57,10 +58,6 @@ Select applies to more devices, while click is more specific to a mouse.
 #### currently
 
 Don't use `currently` when talking about the product or its features. The documentation describes the product as it is today.
-
-#### deselect
-
-Don’t use `deselect`. Instead, use `clear`.
 
 #### disable
 

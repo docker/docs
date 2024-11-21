@@ -8,8 +8,7 @@ long: |-
     Read [High-level build options with Bake](/build/bake/)
     guide for introduction to writing bake files.
 
-    > **Note**
-    >
+    > [!NOTE]
     > `buildx bake` command may receive backwards incompatible features in the future
     > if needed. We are looking for feedback on improving the command and extending
     > the functionality further.
@@ -17,6 +16,16 @@ usage: docker buildx bake [OPTIONS] [TARGET...]
 pname: docker buildx
 plink: docker_buildx.yaml
 options:
+    - option: allow
+      value_type: stringArray
+      default_value: '[]'
+      description: Allow build to access specified resources
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: call
       value_type: string
       default_value: build
@@ -187,6 +196,17 @@ inherited_options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: debug
+      shorthand: D
+      value_type: bool
+      default_value: "false"
+      description: Enable debug logging
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
 examples: |-
     ### Override the configured builder instance (--builder) {#builder}
 
@@ -302,17 +322,15 @@ examples: |-
     }
     ```
 
-    > **Note**
-    >
-    > Build record [provenance](/build/attestations/slsa-provenance/#provenance-attestation-example)
+    > [!NOTE]
+    > Build record [provenance](/build/metadata/attestations/slsa-provenance/#provenance-attestation-example)
     > (`buildx.build.provenance`) includes minimal provenance by default. Set the
     > `BUILDX_METADATA_PROVENANCE` environment variable to customize this behavior:
     > * `min` sets minimal provenance (default).
     > * `max` sets full provenance.
     > * `disabled`, `false` or `0` does not set any provenance.
 
-    > **Note**
-    >
+    > [!NOTE]
     > Build warnings (`buildx.build.warnings`) are not included by default. Set the
     > `BUILDX_METADATA_WARNINGS` environment variable to `1` or `true` to
     > include them.

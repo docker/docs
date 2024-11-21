@@ -2,7 +2,7 @@
 {{- $src := $u.String -}}
 {{ if not (or $u.IsAbs (strings.HasPrefix $u.String "/")) }}
   {{ $base := urls.Parse .Page.Permalink }}
-  {{ if eq .Page.Kind "section" }}
+  {{ if strings.HasSuffix .Page.File.BaseFileName "index" }}
     {{ $src = $base.JoinPath $u.Path -}}
   {{ else }}
     {{ $src = $base.JoinPath "../" $u.Path -}}

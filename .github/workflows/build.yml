@@ -15,8 +15,30 @@ permissions:
   contents: read # to fetch code (actions/checkout)
 
 jobs:
+  releaser:
+    runs-on: ubuntu-24.04
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v4
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      -
+        name: Build
+        uses: docker/bake-action@v5
+        with:
+          files: |
+            docker-bake.hcl
+          targets: releaser-build
+          set: |
+            *.cache-from=type=gha,scope=releaser
+            *.cache-to=type=gha,scope=releaser,mode=max
+
   build:
     runs-on: ubuntu-24.04
+    needs:
+      - releaser
     steps:
       -
         name: Checkout
@@ -34,6 +56,16 @@ jobs:
           set: |
             *.cache-from=type=gha,scope=build
             *.cache-to=type=gha,scope=build,mode=max
+      -
+        name: Check Cloudfront config
+        uses: docker/bake-action@v5
+        with:
+          targets: aws-cloudfront-update
+        env:
+          DRY_RUN: true
+          AWS_REGION: us-east-1
+          AWS_CLOUDFRONT_ID: 0123456789ABCD
+          AWS_LAMBDA_FUNCTION: DockerDocsRedirectFunction-dummy
 
   vale:
     if: ${{ github.event_name == 'pull_request' }}
@@ -56,6 +88,8 @@ jobs:
           - test
           - unused-media
           - test-go-redirects
+          - dockerfile-lint
+          - path-warnings
     steps:
       -
         name: Checkout
@@ -74,25 +108,3 @@ jobs:
             *.cache-to=type=gha,scope=validate-${{ matrix.target }},mode=max
             *.cache-from=type=gha,scope=validate-${{ matrix.target }}
             *.cache-from=type=gha,scope=build
-
-  # build-releaser builds the _releaser used for AWS deployment in publish workflow.
-  # It's just to be sure it builds correctly.
-  build-releaser:
-    runs-on: ubuntu-24.04
-    steps:
-      -
-        name: Checkout
-        uses: actions/checkout@v4
-      -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-      -
-        name: Build
-        uses: docker/bake-action@v5
-        with:
-          files: |
-            docker-bake.hcl
-          targets: releaser-build
-          set: |
-            *.cache-from=type=gha,scope=releaser
-            *.cache-to=type=gha,scope=releaser,mode=max

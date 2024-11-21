@@ -4,9 +4,18 @@ refLinksErrorLevel: ERROR
 enableGitInfo: true
 disablePathToLower: true
 enableInlineShortcodes: true
+ignoreLogs:
+  - cascade-pattern-with-extension
 
 taxonomies:
   tag: tags
+  language: languages
+
+permalinks:
+  page:
+    manuals: /:sections[1:]/:slugorfilename/
+  section:
+    manuals: /:sections[1:]/:slugorfilename/
 
 markup:
   tableOfContents:
@@ -87,7 +96,7 @@ params:
       prod: 3169877
       stage: 3218181
     google: GTM-WL2QLG5
-    onetrust: 8e0ebfd9-035d-4ec2-9b2f-a2de9c09f906
+    onetrust: 65425fb0-7b36-4317-9f10-7b3e08039af0
     vwo: 723167
   algolia:
     appid: 3XRLW0LZH9
@@ -97,15 +106,14 @@ params:
   repo: https://github.com/docker/docs
   docs_url: https://docs.docker.com
 
-  latest_engine_api_version: "1.46"
-  docker_ce_version: "27.0.2"
-  compose_version: "v2.29.0"
+  latest_engine_api_version: "1.47"
+  docker_ce_version: "27.3.1"
+  compose_version: "v2.30.3"
   compose_file_v3: "3.8"
   compose_file_v2: "2.4"
-  buildkit_version: "0.14.1"
+  buildkit_version: "0.16.0"
 
-  example_go_version: "1.21"
-  example_golangci_lint_version: "v1.52"
+  example_go_version: "1.23"
   example_alpine_version: "3.20"
   example_node_version: "20"
 
@@ -120,15 +128,18 @@ params:
 
 menus:
   main:
-  - name: Guides
-    url: /guides/
+  - name: Get started
+    pageRef: /get-started/
     weight: 1
-  - name: Manuals
-    url: /manuals/
+  - name: Guides
+    pageRef: /guides/
     weight: 2
-  - name: Reference
-    url: /reference/
+  - name: Manuals
+    pageRef: /manuals/
     weight: 3
+  - name: Reference
+    pageRef: /reference/
+    weight: 4
 
   footer:
     - url: https://www.docker.com/products
@@ -233,7 +244,7 @@ module:
   proxy: https://proxy.golang.org,direct
   hugoVersion:
     extended: false
-    min: "0.124.1"
+    min: "0.139.0"
   mounts:
     - source: assets
       target: assets
@@ -246,11 +257,12 @@ module:
 
     - path: github.com/moby/moby
       mounts:
+        - source: docs/api/v1.24.md
+          target: content/reference/api/engine/version/v1.24.md
+        - source: docs/api/version-history.md
+          target: content/reference/api/engine/version-history.md
         - source: docs/api
-          target: content/engine/api
-          includeFiles: "*.md"
-        - source: docs/api
-          target: static/reference/engine
+          target: content/reference/api/engine/version
           includeFiles: "*.yaml"
 
     - path: github.com/moby/buildkit
@@ -261,30 +273,29 @@ module:
           target: content/reference/build-checks
           includeFiles: "*.md"
         - source: docs/buildkitd.toml.md
-          target: content/build/buildkit/toml-configuration.md
+          target: content/manuals/build/buildkit/toml-configuration.md
         - source: docs/attestations/slsa-definitions.md
-          target: content/build/attestations/slsa-definitions.md
+          target: content/manuals/build/metadata/attestations/slsa-definitions.md
         - source: docs/attestations/attestation-storage.md
-          target: content/build/attestations/attestation-storage.md
+          target: content/manuals/build/metadata/attestations/attestation-storage.md
 
     - path: github.com/docker/buildx
       mounts:
         - source: docs/bake-reference.md
-          target: content/build/bake/reference.md
+          target: content/manuals/build/bake/reference.md
 
     - path: github.com/docker/cli
       mounts:
         - source: docs/extend
-          target: content/engine/extend
-          excludefiles: "index.md"
-        - source: docs/extend/index.md
-          target: content/engine/extend/_index.md
+          target: content/manuals/engine/extend
+          excludeFiles:
+            - "EBS_volume.md"
+            - "plugins_metrics.md"
+            - "plugins_services.md"
         - source: docs/deprecated.md
-          target: content/engine/deprecated.md
+          target: content/manuals/engine/deprecated.md
         - source: docs/reference/run.md
-          target: content/engine/reference/run.md
-        - source: docs/reference/commandline/cli.md
-          target: content/engine/reference/commandline/cli.md
+          target: content/manuals/engine/containers/run.md
         - source: docs/reference/dockerd.md
           target: content/reference/cli/dockerd.md
 

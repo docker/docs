@@ -6,6 +6,7 @@ aliases:
 - /edge/engine/reference/commandline/container_logs/
 - /engine/reference/commandline/container_logs/
 - /engine/reference/commandline/logs/
+- /reference/cli/docker/logs/
 layout: cli
 ---
 

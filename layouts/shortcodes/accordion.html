@@ -1,3 +1,13 @@
 {{ $title := .Get "title" }}
-{{ $body := .Inner }}
-{{ partial "components/accordion.html" (dict "title" $title "body" $body "page" .Page) }}
+{{ $icon := .Get "icon" }}
+{{ $open := .Get "open" }}
+{{ $large := .Get "large" }}
+{{ $body := .InnerDeindent }}
+{{ partial "components/accordion.html"
+   (dict "title" $title
+         "body" $body
+         "icon" $icon
+         "open" $open
+         "large" $large
+   )
+}}

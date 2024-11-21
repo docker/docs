@@ -1,0 +1,41 @@
+{{- $icons := dict
+  "caution" "dangerous"
+  "important" "report"
+  "note" "info"
+  "tip" "lightbulb"
+  "warning" "warning"
+}}
+{{- $borders := dict
+  "caution" "border-red-light dark:border-red-dark"
+  "important" "border-violet-light dark:border-violet-dark"
+  "note" "border-blue-light dark:border-blue-dark"
+  "tip" "border-green-light dark:border-green-dark"
+  "warning" "border-amber-light dark:border-amber-dark"
+}}
+{{- $textColors := dict
+  "caution" "text-red-light dark:text-red-dark"
+  "important" "text-violet-light dark:text-violet-dark"
+  "note" "text-blue-light dark:text-blue-dark"
+  "tip" "text-green-light dark:text-green-dark"
+  "warning" "text-amber-light dark:text-amber-dark"
+}}
+
+{{ if eq .Type "alert" }}
+  <blockquote
+    {{ with .Attributes.id }}id="{{ . }}"{{ end }}
+    class="px-4 border-l-4 {{ index $borders .AlertType }}">
+    <p class="flex gap-2 items-center {{ index $textColors .AlertType }}">
+      <span class="icon-svg pb-1">{{ $i := index $icons .AlertType }}
+        {{ partialCached "icon.html" $i $i }}
+      </span>
+      <strong>{{ i18n .AlertType }}</strong>
+    </p>
+    {{ .Text | safeHTML }}
+  </blockquote>
+{{ else }}
+<blockquote
+  {{ with .Attributes.id }}id="{{ . }}"{{ end }}
+  class="px-4 border-l-4 text-gray-light dark:text-gray-dark">
+    {{ .Text | safeHTML }}
+  </blockquote>
+{{ end }}

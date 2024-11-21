@@ -4,6 +4,7 @@ long: |-
     The `imagetools` commands contains subcommands for working with manifest lists
     in container registries. These commands are useful for inspecting manifests
     to check multi-platform configuration and attestations.
+usage: docker buildx imagetools
 pname: docker buildx
 plink: docker_buildx.yaml
 cname:
@@ -17,6 +18,17 @@ inherited_options:
       value_type: string
       description: Override the configured builder instance
       details_url: '#builder'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: debug
+      shorthand: D
+      value_type: bool
+      default_value: "false"
+      description: Enable debug logging
       deprecated: false
       hidden: false
       experimental: false

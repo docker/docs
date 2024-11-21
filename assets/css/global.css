@@ -1,8 +1,14 @@
 /* global styles */
 
 @layer base {
-  [x-cloak] {
+  [x-cloak=""] {
     display: none !important;
+  }
+  /* alpine cloak for small screens only */
+  [x-cloak="sm"] {
+    @media (width <= 768px) {
+      display: none !important;
+    }
   }
 
   :root {
@@ -16,7 +22,24 @@
   }
 
   mark {
-    @apply bg-amber-light-200 dark:bg-amber-dark-600/25 dark:text-white;
+    @apply bg-transparent font-bold text-blue-light dark:text-blue-dark;
+  }
+
+  /* Hide the clear (X) button for search inputs */
+  /* Chrome, Safari, Edge, and Opera */
+  input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  
+  /* Firefox */
+  input[type="search"]::-moz-search-cancel-button {
+    display: none;
+  }
+  
+  /* Internet Explorer and Edge (legacy) */
+  input[type="search"]::-ms-clear {
+    display: none;
   }
 }
 
@@ -29,14 +52,6 @@
 
   .invertible {
     @apply dark:hue-rotate-180 dark:invert dark:filter;
-  }
-
-  .sidebar-hover {
-    @apply hover:bg-gray-light-200 hover:dark:bg-gray-dark-200;
-  }
-
-  .sidebar-underline {
-    @apply underline decoration-blue-light decoration-4 underline-offset-4 dark:decoration-blue-dark;
   }
 
   .bg-pattern-blue {

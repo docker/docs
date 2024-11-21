@@ -1,24 +1,3 @@
-{{ define "left" }}
-  {{ partial "sidebar.html" . }}
-{{ end }}
-
 {{ define "main" }}
-  {{ partial "breadcrumbs.html" . }}
-  <article class="prose max-w-none dark:prose-invert">
-    {{ with .Title }}
-    <h1 data-pagefind-weight="10" class="scroll-mt-36">{{ . }}</h1>
-    {{ end }}
-    {{ if eq .CurrentSection.Layout "series" }}
-      {{ partial "guides-stepper.html" . }}
-    {{ end }}
-    <div class="block lg:hidden">
-      {{ partial "pagemeta.html" . }}
-      <hr>
-    </div>
-    {{ .Content }}
-  </article>
-{{ end }}
-
-{{ define "right" }}
-  {{ partial "aside.html" . }}
+  {{ partial "content-default.html" . }}
 {{ end }}

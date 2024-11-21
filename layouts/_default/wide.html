@@ -1,0 +1,11 @@
+{{ define "main" }}
+<article class="prose min-w-0 flex-[2_2_0%] max-w-4xl dark:prose-invert">
+    {{ partial "breadcrumbs.html" . }}
+    <h1 data-pagefind-weight="10" class="scroll-mt-36">{{ .Title }}</h1>
+    <div class="block lg:hidden">
+      {{ partialCached "pagemeta.html" . . }}
+      <hr />
+    </div>
+    {{ .Content }}
+  </article>
+{{ end }}
