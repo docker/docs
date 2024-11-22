@@ -37,6 +37,8 @@ network.**
 
 - **User-defined bridges provide automatic DNS resolution between containers**.
 
+  > **See also**: Learn how to communicate between containers by name (containername:port instead of localhost:port) in: [Container to container communication in Docker Compose](/manuals/compose/how-tos/networking.md#container-to-container-communication).
+
   Containers on the default bridge network can only access each other by IP
   addresses, unless you use the [`--link` option](../links.md), which is
   considered legacy. On a user-defined bridge network, containers can resolve
