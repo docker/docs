@@ -8,9 +8,6 @@ aliases:
  - /support/
 ---
 
-Find information on how to get support, and the scope of Docker Desktop support.
-
-
 > [!NOTE]
 > 
 > Docker Desktop offers support for developers with a [Pro, Team, or Business subscription](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_desktop_support).
