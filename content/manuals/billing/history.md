@@ -48,9 +48,9 @@ You receive your invoice when the subscription renews. To verify your renewal da
 You receive your invoice when the subscription renews. To verify your renewal date:
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
-3. Select your user avatar to open the drop-down menu.
-2. Select **Billing**.
-3. Select the user or organization account to view the billing details. Here you can find your renewal date and the renewal amount.
+2. Select your user avatar to open the drop-down menu.
+3. Select **Billing**.
+4. Select the user or organization account to view the billing details. Here you can find your renewal date and the renewal amount.
 
 {{< /tab >}}
 {{< /tabs >}}

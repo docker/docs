@@ -68,9 +68,9 @@ The Billing Console's plans and usage page will now reflect your new annual plan
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
 2. Select **Organizations** from the top-level navigation.
-2. Select the organization that you want to change the payment method for.
-3. In the bottom-right of the **Plan** tab, select **Switch to annual billing**.
-4. Review the information displayed on the **Change to an Annual subscription** page and select **Accept Terms and Purchase** to confirm.
+3. Select the organization that you want to change the payment method for.
+4. In the bottom-right of the **Plan** tab, select **Switch to annual billing**.
+5. Review the information displayed on the **Change to an Annual subscription** page and select **Accept Terms and Purchase** to confirm.
 
 {{< /tab >}}
 {{< /tabs >}}
