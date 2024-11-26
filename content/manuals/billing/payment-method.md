@@ -36,6 +36,8 @@ All currency, for example the amount listed on your billing invoice, is in Unite
 {{< tabs >}}
 {{< tab name="Docker subscription" >}}
 
+To add a payment method:
+
 1. Sign in to the [Docker Billing Console](https://app.docker.com/billing).
 2. Select **Payment methods** from the left-hand menu.
 3. Select **Add payment method**.
@@ -46,6 +48,8 @@ All currency, for example the amount listed on your billing invoice, is in Unite
 
 {{< /tab >}}
 {{< tab name="Legacy Docker subscription" >}}
+
+To add a payment method:
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
 2. Select your avatar in the top-right corner.
@@ -68,6 +72,8 @@ All currency, for example the amount listed on your billing invoice, is in Unite
 {{< tabs >}}
 {{< tab name="Docker subscription" >}}
 
+To add a payment method:
+
 1. Sign in to the [Docker Billing Console](https://app.docker.com/billing).
 2. Choose your organization from the top-left drop-down.
 3. Select **Payment methods** from the left-hand menu.
@@ -79,6 +85,8 @@ All currency, for example the amount listed on your billing invoice, is in Unite
 
 {{< /tab >}}
 {{< tab name="Legacy Docker subscription" >}}
+
+To add a payment method:
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
 2. Select your avatar in the top-right corner.

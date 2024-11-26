@@ -67,12 +67,10 @@ When you downgrade your subscription, access to paid features is available until
 > - Team size: You may need to reduce the number of team members and convert any private repositories to public repositories or delete them. For information on features available in each tier, see [Docker Pricing](https://www.docker.com/pricing).
 > - SSO and SCIM: If you want to downgrade a Docker Business subscription and your organization uses single sign-on (SSO) for user authentication, you need to remove your SSO connection and verified domains before downgrading. After removing the SSO connection, any organization members that were auto-provisioned (for example, with SCIM) need to set up a password to sign in without SSO. To do this, users can [reset their password at sign in](/accounts/create-account/#reset-your-password-at-sign-in).
 
-> [!IMPORTANT]
->
-> If you have a [sales-assisted Docker Business subscription](details.md#sales-assisted), contact your account manager to downgrade your subscription.
-
 {{< tabs >}}
 {{< tab name="Docker subscription" >}}
+
+If you have a [sales-assisted Docker Business subscription](details.md#sales-assisted), contact your account manager to downgrade your subscription.
 
 To downgrade your Docker subscription:
 
@@ -83,6 +81,8 @@ To downgrade your Docker subscription:
 
 {{< /tab >}}
 {{< tab name="Legacy Docker subscription" >}}
+
+If you have a [sales-assisted Docker Business subscription](details.md#sales-assisted), contact your account manager to downgrade your subscription.
 
 To downgrade your legacy Docker subscription:
 

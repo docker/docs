@@ -1,5 +1,5 @@
 ---
-title: Update the billing information
+title: Update billing information
 weight: 30
 description: Learn how to update your billing information in Docker Hub
 keywords: payments, billing, subscription, invoices
@@ -20,6 +20,8 @@ The billing information provided appears on all your billing invoices. The email
 {{< tabs >}}
 {{< tab name="Docker subscription" >}}
 
+To update your billing information:
+
 1. Sign in to the [Docker Billing Console](https://app.docker.com/billing).
 2. Select **Billing information** from the left-hand navigation.
 3. On your billing information card, select **Change**.
@@ -27,6 +29,8 @@ The billing information provided appears on all your billing invoices. The email
 
 {{< /tab >}}
 {{< tab name="Legacy Docker subscription" >}}
+
+To update your billing information:
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
 2. Select your avatar in the top-right corner.
@@ -46,6 +50,8 @@ The billing information provided appears on all your billing invoices. The email
 {{< tabs >}}
 {{< tab name="Docker subscription" >}}
 
+To update your billing information:
+
 1. Sign in to the [Docker Billing Console](https://app.docker.com//billing).
 2. Select **Billing information** from the left-hand navigation.
 3. On your billing information card, select **Change**.
@@ -53,6 +59,8 @@ The billing information provided appears on all your billing invoices. The email
 
 {{< /tab >}}
 {{< tab name="Legacy Docker subscription" >}}
+
+To update your billing information:
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
 2. Select your avatar in the top-right corner.
@@ -83,6 +91,8 @@ You can update the email address that receives billing invoices at any time.
 {{< tabs >}}
 {{< tab name="Docker subscription" >}}
 
+To update your billing email address:
+
 1. Sign in to the [Docker Billing Console](https://app.docker.com/billing).
 2. Select **Billing information** from the left-hand navigation.
 3. On your billing information card, select **Change**.
@@ -90,6 +100,8 @@ You can update the email address that receives billing invoices at any time.
 
 {{< /tab >}}
 {{< tab name="Legacy Docker subscription" >}}
+
+To update your billing email address:
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
 2. Select your avatar in the top-right corner.
@@ -106,6 +118,8 @@ You can update the email address that receives billing invoices at any time.
 {{< tabs >}}
 {{< tab name="Docker subscription" >}}
 
+To update your billing email address:
+
 1. Sign in to the [Docker Billing Console](https://app.docker.com/billing).
 2. Select **Billing information** from the left-hand navigation.
 3. On your billing information card, select **Change**.
@@ -113,6 +127,8 @@ You can update the email address that receives billing invoices at any time.
 
 {{< /tab >}}
 {{< tab name="Legacy Docker subscription" >}}
+
+To update your billing email address:
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
 2. Select your avatar in the top-right corner.

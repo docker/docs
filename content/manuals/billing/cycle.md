@@ -9,7 +9,11 @@ aliases:
 
 You can pay for a Pro or Team subscription on a monthly or yearly billing cycle. You select your preferred billing cycle when you buy your subscription.
 
-If you have a monthly billing cycle, you can choose to switch to an annual billing cycle. Note that it's not possible to switch from an annual billing cycle to monthly.
+If you have a monthly billing cycle, you can choose to switch to an annual billing cycle.
+
+> [!NOTE]
+>
+> You can't switch from an annual billing cycle to a monthly cycle.
 
 When you change the billing cycle's duration:
 
@@ -24,6 +28,8 @@ When you change the billing cycle's duration:
 {{< tabs >}}
 {{< tab name="Docker subscription" >}}
 
+To change your billing cycle:
+
 1. Sign in to the [Docker Billing Console](https://app.docker.com/billing).
 2. Select the **Actions icon** to open the switch to Annual page.
 3. Select the **Annual** option and review your billing information.
@@ -36,6 +42,8 @@ The Billing Console's plans and usage page will now reflect your new annual plan
 
 {{< /tab >}}
 {{< tab name="Legacy Docker subscription" >}}
+
+To change your billing cycle:
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
 2. Select your avatar in the top-right corner.
@@ -55,6 +63,8 @@ The Billing Console's plans and usage page will now reflect your new annual plan
 {{< tabs >}}
 {{< tab name="Docker subscription" >}}
 
+To change your organization's billing cycle:
+
 1. Sign in to the [Docker Billing Console](https://app.docker.com/billing).
 2. Select the **Actions icon** to open the switch to Annual page.
 3. Select the **Annual** option and review your billing information.
@@ -65,6 +75,8 @@ The Billing Console's plans and usage page will now reflect your new annual plan
 
 {{< /tab >}}
 {{< tab name="Legacy Docker subscription" >}}
+
+To change your organization's billing cycle:
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
 2. Select **Organizations** from the top-level navigation.

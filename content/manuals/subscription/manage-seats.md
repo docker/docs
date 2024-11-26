@@ -13,17 +13,19 @@ aliases:
 weight: 20
 ---
 
-## Add seats
-
-{{< include "tax-compliance.md" >}}
-
 You can add seats at anytime to your existing subscription.
 
 When you add seats to your subscription in the middle of your billing cycle, you are charged a prorated amount for the additional seats.
 
+{{< include "tax-compliance.md" >}}
+
+## Add seats
+
 > [!IMPORTANT]
 >
 > If you have a [sales-assisted Docker Business subscription](details.md#sales-assisted), contact your account manager to add seats to your subscription.
+
+To add seats to your subscription:
 
 1. Sign in to the [Docker Billing Console](https://app.docker.com/billing/).
 2. Select your account from the drop-down menu in the top-left.
@@ -42,7 +44,6 @@ You can now add more members to your organization. For more information, see [Ma
 ### Volume pricing
 
 Docker offers volume pricing for Docker Business subscriptions starting at 25 seats. Contact the [Docker Sales Team](https://www.docker.com/pricing/contact-sales/) for more information.
-
 
 ## Remove seats
 

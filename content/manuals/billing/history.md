@@ -18,16 +18,14 @@ Your invoice includes the following:
 - Invoice number
 - Date of issue
 - Date due
-- Your bill to information
-- Amount due
-- Description of your order, quantity if applicable, unit price, and amount
+- Your "Bill to" information
+- Amount due (in USD)
+- Description of your order, quantity if applicable, unit price, and amount (in USD)
 
-Amounts are in USD.
+The information listed in the **Bill to** section of your invoice is based on your billing information. Not all fields are required. The billing information includes the following:
 
-The information listed in the **Bill** to section is based on your billing information. Not all fields are required. The billing information includes the following:
-
-- Name (required) - the name of the administrator or company.
-- Email address (required) - the email address that receives all billing-related emails for the account.
+- Name (required): The name of the administrator or company
+- Email address (required): The email address that receives all billing-related emails for the account
 - Address (required)
 - Phone number
 - Tax ID or VAT
@@ -64,6 +62,8 @@ You receive your invoice when the subscription renews. To verify your renewal da
 {{< tabs >}}
 {{< tab name="Docker subscription" >}}
 
+To add or update your VAT number:
+
 1. Sign in to the [Docker Billing Console](https://app.docker.com/billing).
 2. Select **Billing information** from the left-hand menu.
 3. Select **Change** on your billing information card.
@@ -71,10 +71,12 @@ You receive your invoice when the subscription renews. To verify your renewal da
 5. In the Tax ID section, select the **ID type** and enter your VAT number.
 6. Select **Update**.
 
+Your VAT number will be included on your next invoice.
+
 {{< /tab >}}
 {{< tab name="Legacy Docker subscription" >}}
 
-Update your billing information to include your VAT number:
+To add or update your VAT number:
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
 2. For user accounts, Select your avatar in the top-right corner, then **Billing**. For organizations, select the name of the organization.
@@ -97,14 +99,17 @@ You can view the billing history and download past invoices for a personal accou
 {{< tabs >}}
 {{< tab name="Docker subscription" >}}
 
+To view billing history:
+
 1. Sign in to the [Docker Billing Console](https://app.docker.com/billing).
 2. Select **Invoices** from the left-hand menu.
 3. Optional. Select the **date link** to open invoice details.
 4. Optional. Select the **download** button to download an invoice.
 
-
 {{< /tab >}}
 {{< tab name="Legacy Docker subscription" >}}
+
+To view billing history:
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
 2. Select your avatar in the top-right corner.
@@ -126,6 +131,8 @@ From here you can download an invoice.
 {{< tabs >}}
 {{< tab name="Docker subscription" >}}
 
+To view billing history:
+
 1. Sign in to the [Docker Billing Console](https://app.docker.com/billing).
 2. Select **Invoices** from the left-hand menu.
 3. Optional. Select the **date link** to open invoice details.
@@ -133,6 +140,8 @@ From here you can download an invoice.
 
 {{< /tab >}}
 {{< tab name="Legacy Docker subscription" >}}
+
+To view billing history:
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
 2. Select your avatar in the top-right corner.
