@@ -72,6 +72,7 @@ Before you downgrade, consider the following aspects before you downgrade your s
 >[!IMPORTANT]
 >
 > If you have a [sales-assisted Docker Business subscription](details.md#sales-assisted), contact your account manager to downgrade your subscription.
+
 {{< tabs >}}
 {{< tab name="Docker subscription" >}}
 
