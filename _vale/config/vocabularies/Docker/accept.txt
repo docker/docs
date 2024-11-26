@@ -1,4 +1,4 @@
-(?-i)[A-Z]{2,}s
+(?-i)[A-Z]{2,}'?s
 Amazon
 Anchore
 Apple
@@ -93,7 +93,7 @@ Traefik
 Ubuntu
 Unix
 VMware
-VM's
+VM
 Wasm
 Windows
 WireMock
