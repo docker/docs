@@ -55,7 +55,7 @@ stages:
                 # Install the Docker Scout CLI
                 curl -sSfL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh | sh -s --
                 # Login to Docker Hub required for Docker Scout CLI
-                docker login -u $(DOCKER_HUB_USER) -p $(DOCKER_HUB_PAT)
+                echo $(DOCKER_HUB_PAT) | docker login -u $(DOCKER_HUB_USER) --password-stdin
                 # Get a CVE report for the built image and fail the pipeline when critical or high CVEs are detected
                 docker scout cves $(image):$(tag) --exit-code --only-severity critical,high
 ```
