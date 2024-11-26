@@ -220,7 +220,7 @@ for each subscription tier, subject to fair use:
 > Always sign in to Docker. Authenticated Docker Personal users receive
 > increased rate limits, while authenticated Docker Pro, Team, and Business
 > users are not rate limited. For more information, see [How do I authenticate
-> pulls](#how-do-i-authenticate-pull-requests).
+> pulls](#how-do-i-authenticate-pulls).
 
 #### How do I know my pulls are being limited?
 
@@ -291,7 +291,7 @@ pull limit that can be viewed in the Docker Hub [usage dashboard](#view-docker-h
 #### I'm being limited to a lower rate even though I have a paid Docker subscription
 
 To take advantage of the unlimited limits included in a paid Docker subscription,
-you must [authenticate pulls](#how-do-i-authenticate-pull-requests) with your
+you must [authenticate pulls](#how-do-i-authenticate-pulls) with your
 user account.
 
 A Pro, Team, or a Business tier doesn't increase limits on your images for other
