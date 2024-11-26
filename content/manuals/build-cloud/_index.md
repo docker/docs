@@ -1,8 +1,11 @@
 ---
 title: Docker Build Cloud
-weight: 100
+weight: 20
 description: Find documentation on Docker Build Cloud to help you build your container images faster, both locally and in CI
 keywords: build, cloud, cloud build, remote builder
+params:
+  sidebar:
+    group: Products
 aliases:
   - /build/cloud/faq/
   - /build/cloud/

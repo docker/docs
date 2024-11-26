@@ -2,6 +2,9 @@
 title: Registry
 description: The Docker Hub registry implementation 
 keywords: registry, distribution, docker hub, spec, schema, api, manifest, auth
+params:
+  sidebar:
+    group: Open source
 aliases:
   - /registry/compatibility/
   - /registry/configuration/

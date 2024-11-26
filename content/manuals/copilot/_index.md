@@ -2,10 +2,11 @@
 title: Docker for GitHub Copilot
 params:
   sidebar:
+    group: Products
     badge:
       color: violet
       text: EA
-weight: 100
+weight: 50
 description: |
   Learn how to streamline Docker-related tasks with the Docker for GitHub
   Copilot extension. This integration helps you generate Docker assets, analyze

@@ -1,8 +1,11 @@
 ---
 title: Docker Extensions
-weight: 100
+weight: 60
 description: Extensions
 keywords: Docker Extensions, Docker Desktop, Linux, Mac, Windows
+params:
+  sidebar:
+    group: Products
 aliases:
  - /desktop/extensions/
 ---

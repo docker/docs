@@ -3,6 +3,9 @@ title: Project Harmonia
 description: Learn how you can run your applications in the cloud with Project Harmonia
 keywords: run, cloud, docker desktop, resources
 sitemap: false
+params:
+  sidebar:
+    group: Products
 aliases:
 - /run-cloud/
 ---

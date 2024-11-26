@@ -7,6 +7,11 @@ url: /manuals/
 layout: wide
 params:
   icon: description
+  sidebar:
+    groups:
+      - Open source
+      - Products
+      - Platform
   notoc: true
   development:
   - title: Docker Desktop

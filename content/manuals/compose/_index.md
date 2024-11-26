@@ -1,11 +1,14 @@
 ---
 title: Docker Compose
-weight: 100
+weight: 30
 description: Learn how to use Docker Compose to define and run multi-container applications
   with this detailed introduction to the tool.
 keywords: docker compose, docker-compose, docker compose command, docker compose files,
   docker compose documentation, using docker compose, compose container, docker compose
   service
+params:
+  sidebar:
+    group: Open source
 grid:
 - title: Why use Compose?
   description: Understand Docker Compose's key benefits

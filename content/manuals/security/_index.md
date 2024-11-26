@@ -1,8 +1,10 @@
 ---
 title: Security
-weight: 200
 description: Learn about security features Docker has to offer and explore best practices
 keywords: docker, docker hub, docker desktop, security
+params:
+  sidebar:
+    group: Platform
 grid_admins:
 - title: Settings Management
   description: Learn how Settings Management can secure your developers' workflows.
