@@ -144,7 +144,6 @@ minikube
 monorepos?
 musl
 nameserver
-namespace
 npm
 osquery
 osxfs

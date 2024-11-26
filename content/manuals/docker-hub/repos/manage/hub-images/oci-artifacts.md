@@ -1,14 +1,16 @@
 ---
-title: OCI artifacts on Docker Hub
-linkTitle: OCI artifacts
-weight: 100
+title: Software artifacts on Docker Hub
+linkTitle: Software artifacts
+weight: 20
 keywords: oci, artifacts, docker hub
 description: You can use Docker Hub to store software artifacts packaged as OCI artifacts.
 ---
 
 You can use Docker Hub to store any kind of software artifact, not just
-container images. Docker Hub supports OCI artifacts by leveraging the config
-property on the image manifest.
+container images. A software artifact is any item produced during the software
+development process that contributes to the creation, maintenance, or
+understanding of the software. Docker Hub supports OCI artifacts by leveraging
+the config property on the image manifest.
 
 ## What are OCI artifacts?
 
@@ -77,7 +79,7 @@ Steps:
    Successfully packaged chart and saved it to: /Users/hubuser/demo-0.1.0.tgz
    ```
 
-3. Sign in to Docker Hub with Helm, using your Docker ID credentials.
+3. Sign in to Docker Hub with Helm, using your Docker credentials.
 
    ```console
    $ helm registry login registry-1.docker.io -u hubuser

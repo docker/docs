@@ -41,7 +41,7 @@ aliases:
 
 > [!IMPORTANT]
 >
-> The ability to push [deprecated Docker image manifest version 2, schema 1](https://distribution.github.io/distribution/spec/deprecated-schema-v1/) images to Docker Hub will be deprecated on November 4th, 2024.
+> The ability to push [deprecated Docker image manifest version 2, schema 1](https://distribution.github.io/distribution/spec/deprecated-schema-v1/) images to Docker Hub is deprecated as of November 4th, 2024.
 
 Registry, the open source implementation for storing and distributing container
 images and other content, has been donated to the CNCF. Registry now goes under
@@ -84,7 +84,7 @@ For documentation related to authentication to the Docker Hub registry, see:
 [specification]: https://github.com/opencontainers/distribution-spec/blob/v1.0.1/spec.md
 [OCI image manifest]: https://github.com/opencontainers/image-spec/blob/main/manifest.md
 [Docker image manifest version 2, schema 2]: https://distribution.github.io/distribution/spec/manifest-v2-2/
-[OCI artifacts]: /docker-hub/oci-artifacts/
+[OCI artifacts]: /docker-hub/repos/manage/hub-images/oci-artifacts/
 [oauth2]: https://distribution.github.io/distribution/spec/auth/oauth/
 [jwt]: https://distribution.github.io/distribution/spec/auth/jwt/
 [token]: https://distribution.github.io/distribution/spec/auth/token/
