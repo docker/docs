@@ -1,12 +1,10 @@
 ---
 description: Learn about usage and rate limits for Docker Hub.
-keywords: Docker Hub, pulls, download, limit, usage
+keywords: Docker Hub, pulls, download, limit, usage, storage
 title: Docker Hub usage and rate limits
 linkTitle: Usage and rate limits
 weight: 30
 ---
-
-{{< include "new-plans.md" >}}
 
 Docker may impose usage and rate limits for Docker Hub to ensure fair resource
 consumption and maintain service quality. Understanding your usage helps you
@@ -98,11 +96,11 @@ both individuals and organizations.
    - Automate manual workflows: Avoid unnecessary pulls by configuring automated
      systems to pull only when a new version of an image is available.
 
-4. Optimize the size of repositories by regularly auditing and removing
-   untagged, unused, or outdated images.
+4. Optimize the your repositories by regularly auditing and removing
+   repositories with untagged, unused, or outdated images.
 
-5. Increase your limits by upgrading or purchasing add-ons. For details, see
-   [Docker pricing](https://www.docker.com/pricing/).
+5. Increase your limits by upgrading or purchasing additional consumption. For
+   details, see [Scale your subscription](../subscription/scale.md).
 
 6. For organizations, monitor and enforce organizational policies by doing the
    following:
@@ -111,28 +109,68 @@ both individuals and organizations.
    - [Enforce sign-in](/security/for-admins/enforce-sign-in/) to ensure that you
      can monitor the usage of your users and users receive higher usage limits.
 
-## Pull attribution
+## Storage and repository limits
+
+{{< include "hub-limits.md" >}}
+
+The following storage and repository limits apply based on your subscription, subject to fair use:
+
+| Plan     | Public repositories | Public repository storage | Private repositories       | Private repository storage |
+|----------|---------------------|---------------------------|----------------------------|----------------------------|
+| Personal | Unlimited           | Unlimited                 | Up to 1 private repository | Up to 2 GB                 |
+| Pro      | Unlimited           | Unlimited                 | Unlimited                  | Up to 5 GB                 |
+| Team     | Unlimited           | Unlimited                 | Unlimited                  | Up to 50 GB                |
+| Business | Unlimited           | Unlimited                 | Unlimited                  | Up to 500 GB               |
+
+
+Private repository storage is calculated on a monthly basis based on the average
+storage used throughout the month per namespace. Docker measures your storage
+usage in the amount of Bytes stored per hour, which are accumulated throughout
+the month to determine your monthly storage. If a repository is private at any
+point within an hour, it is counted as private for the full hour. The total
+hours are calculated based on the actual number of days in the month. Any
+storage usage beyond the included amounts in each paid subscription tier will be
+charged at an on-demand rate. You can [scale your
+limit](../subscription/scale.md) or [upgrade](../subscription/change.md) to get
+a higher limit.
+
+## Pull request limit and rate limit
+
+A pull request is defined as the following:
+
+ - A Docker pull request includes both a version check and any download that
+   occurs as a result of the pull. Depending on the client, a `docker pull` can
+   verify the existence of an image or tag without downloading it by performing
+   a version check.
+ - A pull request for a normal image makes one pull for a [single
+   manifest](https://github.com/opencontainers/image-spec/blob/main/manifest.md).
+ - A pull request for a multi-arch image will count as one pull for each
+   different architecture.
+ - Pulls are attributed to the user doing the pull, not to the owner of the
+   image.
+
+### Pull attribution
 
 Pulls can be attributed to either a personal or organization [namespace](https://docs.docker.com/contribute/style/terminology/#namespace).
 
-### Private pulls
+#### Private pulls
 
 Pulls for private repositories are attributed to the repository's namespace owner.
 
-### Public pulls
+#### Public pulls
 
 When pulling images from a public repository, attribution is determined based on domain affiliation and organization membership.
 
-### Verified domain ownership
+#### Verified domain ownership
 
 When pulling an image from an account linked to a verified domain, the attribution is set to be the owner of that [domain](https://docs.docker.com/security/faqs/single-sign-on/domain-faqs/)
 
-### Single organization membership
+#### Single organization membership
 
 - If the owner of the verified domain is a company and the user is part of only one organization within that [company](https://docs.docker.com/admin/faqs/company-faqs/#what-features-are-supported-at-the-company-level), the pull is attributed to that specific organization.
 - If the user is part of only one organization, the pull is attributed to that specific organization.
 
-### Multiple organization memberships
+#### Multiple organization memberships
 
 If the user is part of multiple organizations under the company, the pull is attributed to the user's personal namespace.
 
@@ -212,7 +250,7 @@ You have reached your pull rate limit. You may increase the limit by authenticat
 
 This error message appears in the Docker CLI or in the Docker Engine logs.
 
-### How can I check my current rate?
+#### How can I check my current rate?
 
 Valid API requests to Hub usually include the following rate limit headers in
 the response:
@@ -260,19 +298,16 @@ docker-ratelimit-source: 192.0.2.1
 In the previous example, the pull limit is 100 pulls per 21600 seconds (6
 hours), and there are 76 pulls remaining.
 
-#### I don't see any RateLimit headers
-
 If you don't see any RateLimit header, it could be because the image or your IP
 is unlimited in partnership with a publisher, provider, or an open source
 organization. It could also mean that the user you are pulling as is part of a
-paid Docker plan. Pulling that image won’t count toward pull limits if you don’t
-see these headers. However, users with a paid Docker subscription pulling more
-than 5000 times daily require a [Service
-Account](../docker-hub/service-accounts.md) subscription.
+paid Docker plan. Pulling that image won’t count toward pull rate limits if you
+don't see these headers. Note that users with a paid subscription have a monthly
+pull limit that can be viewed in the Docker Hub [usage dashboard](#view-docker-hub-usage).
 
-### I'm being limited to a lower rate even though I have a paid Docker subscription
+#### I'm being limited to a lower rate even though I have a paid Docker subscription
 
-To take advantage of the higher limits included in a paid Docker subscription,
+To take advantage of the unlimited limits included in a paid Docker subscription,
 you must [authenticate pulls](#how-do-i-authenticate-pull-requests) with your
 user account.
 
@@ -282,7 +317,7 @@ Source](https://www.docker.com/blog/expanded-support-for-open-source-software-pr
 [Publisher](https://www.docker.com/partners/programs), or [Large
 Organization](https://www.docker.com/pricing) offerings.
 
-### Other limits
+#### Other limits
 
 Docker Hub also has an overall rate limit to protect the application and
 infrastructure. This limit applies to all requests to Hub properties including
@@ -295,12 +330,12 @@ You can differentiate between these limits by looking at the error code. The
 "overall limit" returns a simple `429 Too Many Requests` response. The pull
 limit returns a longer error message that includes a link to this page.
 
-## How do I authenticate pull requests?
+### How do I authenticate pull requests?
 
 The following section contains information on how to sign in to Docker Hub to
 authenticate pull requests.
 
-### Docker Desktop
+#### Docker Desktop
 
 If you are using Docker Desktop, you can sign in to Docker Hub from the Docker
 Desktop menu.
@@ -308,13 +343,13 @@ Desktop menu.
 Select **Sign in / Create Docker ID** from the Docker Desktop menu and follow
 the on-screen instructions to complete the sign-in process.
 
-### Docker Engine
+#### Docker Engine
 
 If you're using a standalone version of Docker Engine, run the `docker login`
 command from a terminal to authenticate with Docker Hub. For information on how
 to use the command, see [docker login](/reference/cli/docker/login.md).
 
-### Docker Swarm
+#### Docker Swarm
 
 If you're running Docker Swarm, you must use the `--with-registry-auth` flag to
 authenticate with Docker Hub. For more information, see [Create a
@@ -322,21 +357,21 @@ service](/reference/cli/docker/service/create.md#with-registry-auth). If you
 are using a Docker Compose file to deploy an application stack, see [docker
 stack deploy](/reference/cli/docker/stack/deploy.md).
 
-### GitHub Actions
+#### GitHub Actions
 
 If you're using GitHub Actions to build and push Docker images to Docker Hub,
 see [login action](https://github.com/docker/login-action#dockerhub). If you are
 using another Action, you must add your username and access token in a similar
 way for authentication.
 
-### Kubernetes
+#### Kubernetes
 
 If you're running Kubernetes, follow the instructions in [Pull an Image from a
 Private
 Registry](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/)
 for information on authentication.
 
-### Third-party platforms
+#### Third-party platforms
 
 If you're using any third-party platforms, follow your provider’s instructions on using registry authentication.
 

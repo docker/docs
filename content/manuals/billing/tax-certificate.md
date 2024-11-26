@@ -5,7 +5,7 @@ keywords: billing, renewal, payments, tax
 weight: 50
 ---
 
-If you're a customer in the United States and you're exempt from sales tax, you can register a valid tax exemption certificate with Docker's Support team. If you're a global customer subject to VAT, make sure that you provide your [VAT number](/billing/core-billing/history/#include-your-vat-number-on-your-invoice).
+If you're a customer in the United States and you're exempt from sales tax, you can register a valid tax exemption certificate with Docker's Support team. If you're a global customer subject to VAT, make sure that you provide your [VAT number](/billing/history/#include-your-vat-number-on-your-invoice).
 
 {{< include "tax-compliance.md" >}}
 
@@ -22,9 +22,9 @@ Before you submit your tax exemption certificate, ensure the following.
 
 You can use the following for Docker's contact information on your tax exemption certificate.
 
-Docker, Inc.  
-3790 El Camino Real #1052  
-Palo Alto, CA 94306  
+Docker, Inc.
+3790 El Camino Real #1052
+Palo Alto, CA 94306
 (415) 941-0376
 
 ## Register a tax certificate

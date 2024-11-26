@@ -20,10 +20,29 @@ When you change the billing cycle's duration:
 
 ## Personal account
 
+{{< tabs >}}
+{{< tab name="Docker subscription" >}}
+
+1. Sign in to the [Docker Billing Console](https://app.docker.com/billing).
+2. Select the **Actions icon** to open the switch to Annual page.
+3. Select the **Annual** option and review your billing information.
+4. Optional. If needed, select **Change** to update your billing information.
+5. Select **Continue to payment**.
+6. Confirm or **Change** your payment method.
+7. Review your new plan details on the right-hand side of the page, and select **Update subscription**.
+
+The Billing Console's Plans and usage page will now reflect your new annual plan details.
+
+{{< /tab >}}
+{{< tab name="Legacy Docker subscription" >}}
+
 1. Select your avatar in the top-right corner of Docker Hub.
 2. From the drop-down menu select **Billing**.
 3. In the bottom-right of the **Plan** tab, select **Switch to annual billing**.
 4. Review the information displayed on the **Change to an Annual subscription** page and select **Accept Terms and Purchase** to confirm.
+
+{{< /tab >}}
+{{< /tabs >}}
 
 ## Organization
 
@@ -31,7 +50,24 @@ When you change the billing cycle's duration:
 >
 > You must be an organization owner to make changes to the payment information.
 
+{{< tabs >}}
+{{< tab name="Docker subscription" >}}
+
+1. Sign in to the [Docker Billing Console](https://app.docker.com/billing).
+2. Select the **Actions icon** to open the switch to Annual page.
+3. Select the **Annual** option and review your billing information.
+4. Optional. If needed, select **Change** to update your billing information.
+5. Select **Continue to payment**.
+6. Confirm or **Change** your payment method.
+7. Review your new plan details on the right-hand side of the page, and select **Update subscription**.
+
+{{< /tab >}}
+{{< tab name="Legacy Docker subscription" >}}
+
 1. In Docker Hub, select **Organizations**.
 2. Select the organization that you want to change the payment method for.
 3. In the bottom-right of the **Plan** tab, select **Switch to annual billing**.
 4. Review the information displayed on the **Change to an Annual subscription** page and select **Accept Terms and Purchase** to confirm.
+
+{{< /tab >}}
+{{< /tabs >}}
