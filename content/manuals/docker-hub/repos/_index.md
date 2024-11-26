@@ -5,7 +5,6 @@ title: Repositories
 weight: 20
 aliases:
 - /engine/tutorials/dockerrepos/
-- /docker-hub/repos/
 - /docker-hub/repos/configure/
 ---
 
