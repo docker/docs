@@ -28,6 +28,7 @@ subscription plan or legacy Docker subscription plan.
 > [billing history](../billing/history.md). For more details about legacy
 > subscriptions, see [Announcing Upgraded Docker
 > Plans](https://www.docker.com/blog/november-2024-updated-plans-announcement/).
+
 ## Upgrade your subscription
 
 When you upgrade to a paid subscription, you immediately have access to all the features and entitlements available in your new chosen subscription. For detailed information on features available in each subscription, see [Docker Pricing](https://www.docker.com/pricing).

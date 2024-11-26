@@ -23,7 +23,7 @@ params:
       url: /security/for-admins/hardened-desktop/registry-access-management/
     - title: Image Access Management
       url: /security/for-admins/hardened-desktop/image-access-management/
-    title: Docker subscription information
+    - title: Docker subscription information
       url: /subscription/details/
 ---
 

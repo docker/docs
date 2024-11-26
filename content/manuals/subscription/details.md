@@ -190,7 +190,7 @@ their customers.
 Legacy Docker Pro includes:
 - Unlimited public repositories
 - Unlimited [Scoped Access Tokens](/security/for-developers/access-tokens/)
-- Unlimited [collaborators](/docker-hub/repos/access/#collaborators-and-their-role) for public repositories at no cost per month.
+- Unlimited [collaborators](/docker-hub/repos/manage/access/#collaborators) for public repositories at no cost per month.
 - Access to [Legacy Docker Scout Free](#legacy-docker-scout-free) to get started with software supply chain security.
 - Unlimited private repositories
 - 5000 image [pulls per day](/docker-hub/download-rate-limit/)
@@ -303,6 +303,7 @@ Scout.
 > 15th, 2024, your legacy Docker subscriptions still apply to your account until
 > you renew. For more details, see [Announcing Upgraded Docker
 > Plans](https://www.docker.com/blog/november-2024-updated-plans-announcement/).
+
 ### Legacy Docker Scout Free
 
 Legacy Docker Scout Free is available for organizations. If you have a legacy Docker Core subscription, you automatically have access to legacy Docker Scout Free.
@@ -355,6 +356,7 @@ For a list of features available in each tier, see [Docker Pricing](https://www.
 > November 15, 2024, you will see an increase in your included Build Cloud
 > minutes each month. For more details, see [Announcing Upgraded Docker
 > Plans](https://www.docker.com/blog/november-2024-updated-plans-announcement/).
+
 ### Legacy Docker Build Cloud Starter
 
 If you have a legacy Docker Core subscription, a base level of Build Cloud
