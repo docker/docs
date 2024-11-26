@@ -24,7 +24,8 @@ When you add seats to your subscription in the middle of your billing cycle, you
 > [!IMPORTANT]
 >
 > If you have a [sales-assisted Docker Business subscription](details.md#sales-assisted), contact your account manager to add seats to your subscription.
-1. Sign in to [Docker Billing](https://app.docker.com/billing/).
+
+1. Sign in to the [Docker Billing Console](https://app.docker.com/billing/).
 2. Select your account from the drop-down menu in the top-left.
 
    > [!NOTE]
@@ -32,6 +33,7 @@ When you add seats to your subscription in the middle of your billing cycle, you
    > Accounts with a legacy subscription must be managed in Docker Hub. After
    > selecting your account, select the link to **Manage this subscription on
    > Docker Hub**.
+
 3. Select **Add seats**.
 4. Follow the on-screen instructions to complete adding seats.
 
@@ -53,9 +55,10 @@ For example, if you receive your billing on the 8th of every month for 10 seats 
 > [!IMPORTANT]
 >
 > If you have a [sales-assisted Docker Business subscription](details.md#sales-assisted), contact your account manager to remove seats from your subscription.
+
 To remove seats:
 
-1. Sign in to [Docker Billing](https://app.docker.com/billing/).
+1. Sign in to the [Docker Billing Console](https://app.docker.com/billing/).
 2. Select your account from the drop-down menu in the top-left.
 
    > [!NOTE]
@@ -63,12 +66,14 @@ To remove seats:
    > Accounts with a legacy subscription must be managed in Docker Hub. After
    > selecting your account, select the link to **Manage this subscription on
    > Docker Hub**.
+
 3. Select the action icon and then select **Remove seats**.
 
    > [!NOTE]
    >
    > Accounts with a legacy subscription, that are managed in Docker Hub, can
    > directly select **Remove seats**.
+
 4. Follow the on-screen instructions to complete removing seats.
 
 You can cancel the removal of seats before your next billing cycle. To do so, select **Cancel change**.

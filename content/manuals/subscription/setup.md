@@ -13,7 +13,6 @@ In this section, learn how to get started with a Docker subscription for individ
 
 ## Set up a Docker subscription for a personal account
 
-
 After you [create your Docker ID](../accounts/create-account.md), you have a Docker Personal plan. To continue using this plan, no further action is necessary. For additional features, you can upgrade to a Docker Pro plan.
 
 To upgrade from Docker Personal to Docker Pro, see [Upgrade your subscription](./change.md#upgrade-your-subscription).

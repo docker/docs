@@ -33,32 +33,65 @@ All currency, for example the amount listed on your billing invoice, is in Unite
 
 ### Personal account
 
-TBD
+{{< tabs >}}
+{{< tab name="Docker subscription" >}}
 
-1. Select your avatar in the top-right corner of Docker Hub.
-2. From the drop-down menu select **Billing**.
-3. Select the **Payment methods and billing history** link.
-4. In the **Payment method** section, select **Add payment method**.
-5. Enter your new payment information, then select **Add**.
-6. Select the **Actions** icon, then select **Make default** to ensure that your new payment method applies to all purchases and subscriptions.
-7. Optional. You can remove non-default payment methods by selecting the **Actions** icon. Then, select **Delete**.
+1. Sign in to the [Docker Billing Console](https://app.docker.com/billing).
+2. Select **Payment methods** from the left-hand menu.
+3. Select **Add payment method**.
+4. Enter your new payment information.
+5. Optional. Select the **Use as default payment method** checkbox.
+6. Select **Add**.
+7. Optional. You can remove non-default payment methods by selecting the **Delete** action.
+
+{{< /tab >}}
+{{< tab name="Legacy Docker subscription" >}}
+
+1. Sign in to [Docker Hub](https://hub.docker.com).
+2. Select your avatar in the top-right corner.
+3. From the drop-down menu select **Billing**.
+4. Select the **Payment methods and billing history** link.
+5. In the **Payment method** section, select **Add payment method**.
+6. Enter your new payment information, then select **Add**.
+7. Select the **Actions** icon, then select **Make default** to ensure that your new payment method applies to all purchases and subscriptions.
+8. Optional. You can remove non-default payment methods by selecting the **Actions** icon. Then, select **Delete**.
+
+{{< /tab >}}
+{{< /tabs >}}
 
 ### Organization
-
-TBD
 
 > [!NOTE]
 >
 > You must be an organization owner to make changes to the payment information.
 
-1. Select your avatar in the top-right corner of Docker Hub.
-2. From the drop-down menu select **Billing**.
-3. Select the organization account you want to update.
-4. Select the **Payment methods and billing history** link.
-5. In the **Payment Method** section, select **Add payment method**.
-6. Enter your new payment information, then select **Add**.
-7. Select the **Actions** icon, then select **Make default** to ensure that your new payment method applies to all purchases and subscriptions.
-8. Optional. You can remove non-default payment methods by selecting the **Actions** icon. Then, select **Delete**.
+{{< tabs >}}
+{{< tab name="Docker subscription" >}}
+
+1. Sign in to the [Docker Billing Console](https://app.docker.com/billing).
+2. Choose your organization from the top-left drop-down.
+3. Select **Payment methods** from the left-hand menu.
+4. Select **Add payment method**.
+5. Enter your new payment information.
+6. Optional. Select the **Use as default payment method** checkbox.
+7. Select **Add**.
+8. Optional. You can remove non-default payment methods by selecting the **Delete** action.
+
+{{< /tab >}}
+{{< tab name="Legacy Docker subscription" >}}
+
+1. Sign in to [Docker Hub](https://hub.docker.com).
+2. Select your avatar in the top-right corner.
+3. From the drop-down menu select **Billing**.
+4. Select the organization account you want to update.
+5. Select the **Payment methods and billing history** link.
+6. In the **Payment Method** section, select **Add payment method**.
+7. Enter your new payment information, then select **Add**.
+8. Select the **Actions** icon, then select **Make default** to ensure that your new payment method applies to all purchases and subscriptions.
+9. Optional. You can remove non-default payment methods by selecting the **Actions** icon. Then, select **Delete**.
+
+{{< /tab >}}
+{{< /tabs >}}
 
 ## Failed payments
 
@@ -68,7 +101,7 @@ If your subscription payment fails, there is a grace period of 15 days, includin
 - 5 days after the previous attempt
 - 7 days after the previous attempt
 
-Docker also sends an email notification `Action Required - Credit Card Payment Failed` with an attached unpaid invoice after each failed payment attempt. 
+Docker also sends an email notification `Action Required - Credit Card Payment Failed` with an attached unpaid invoice after each failed payment attempt.
 
 Once the grace period is over and the invoice is still not paid, the subscription downgrades to a free plan and all paid features are disabled.
 

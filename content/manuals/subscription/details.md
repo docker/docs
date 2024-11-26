@@ -50,12 +50,12 @@ tools as well as trials for powerful tools that'll level up your development loo
 
 Docker Personal includes:
 
-- 1 included repository with continuous vulnerability analysis in Docker Scout.
-- Unlimited public Docker Hub repositories.
-- 1 private Docker Hub repository with 2GB storage.
-- 40 pulls per hour Docker Hub image pull rate limit.
-- 7-day Docker Build Cloud trial.
-- 30-day Testcontainers Cloud trial.
+- 1 included repository with continuous vulnerability analysis in Docker Scout
+- Unlimited public Docker Hub repositories
+- 1 private Docker Hub repository with 2GB storage
+- 40 pulls per hour Docker Hub image pull rate limit
+- 7-day Docker Build Cloud trial
+- 7-day Testcontainers Cloud trial
 
 Docker Personal users who want to continue using Docker Build Cloud or Docker
 Testcontainers Cloud after their trial can upgrade to a Docker Pro plan at any
@@ -197,7 +197,7 @@ Legacy Docker Pro includes:
 - [Auto Builds](/docker-hub/builds/) with 5 concurrent builds
 - 300 [Vulnerability Scans](/docker-hub/vulnerability-scanning/)
 
-For a list of features available in each legacy tier, see [TBD](https://www.docker.com/pricing/).
+For a list of features available in each legacy tier, see [Docker Pricing](https://www.docker.com/pricing/).
 
 #### New Docker Pro plan
 
@@ -229,7 +229,7 @@ Legacy Docker Team includes:
 
 There are also advanced collaboration and management tools, including organization and team management with [Role Based Access Control (RBAC)](/security/for-admins/roles-and-permissions/), [activity logs](/admin/organization/activity-logs/), and more.
 
-For a list of features available in each legacy tier, see [TBD](https://www.docker.com/pricing/).
+For a list of features available in each legacy tier, see [Docker Pricing]](https://www.docker.com/pricing/).
 
 #### New Docker Team plan
 
@@ -262,7 +262,7 @@ Legacy Docker Business includes:
 - [Single Sign-On](/security/for-admins/single-sign-on/)
 - [System for Cross-domain Identity Management](/security/for-admins/provisioning/scim/) and more.
 
-For a list of features available in each tier, see [TBD](https://www.docker.com/pricing/).
+For a list of features available in each tier, see [Docker Pricing]](https://www.docker.com/pricing/).
 
 #### New Docker Business plan
 

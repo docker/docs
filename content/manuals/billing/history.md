@@ -36,11 +36,24 @@ You can’t make changes to a paid or unpaid billing invoice. When you update yo
 
 ### View renewal date
 
-You receive your invoice when the subscription renews. To verify your renewal date, sign in to Hub, then:
+{{< tabs >}}
+{{< tab name="Docker subscription" >}}
 
-1. Select your user avatar to open the drop-down menu.
+You receive your invoice when the subscription renews. To verify your renewal date, sign in to the [Docker Billing Console](https://app.docker.com/billing). Your renewal date and amount are displayed on your subscription plan card.
+
+
+{{< /tab >}}
+{{< tab name="Legacy Docker subscription" >}}
+
+You receive your invoice when the subscription renews. To verify your renewal date:
+
+1. Sign in to [Docker Hub](https://hub.docker.com).
+3. Select your user avatar to open the drop-down menu.
 2. Select **Billing**.
 3. Select the user or organization account to view the billing details. Here you can find your renewal date and the renewal amount.
+
+{{< /tab >}}
+{{< /tabs >}}
 
 ### Include your VAT number on your invoice
 
@@ -48,16 +61,32 @@ You receive your invoice when the subscription renews. To verify your renewal da
 >
 > If the VAT number field is not available, complete the [Contact Support form](https://hub.docker.com/support/contact/). This field may need to be manually added.
 
+{{< tabs >}}
+{{< tab name="Docker subscription" >}}
+
+1. Sign in to the [Docker Billing Console](https://app.docker.com/billing).
+2. Select **Billing information** from the left-hand menu.
+3. Select **Change** on your billing information card.
+4. Ensure the **I'm purchasing as a business** checkbox is checked.
+5. In the Tax ID section, select the **ID type** and enter your VAT number.
+6. Select **Update**.
+
+{{< /tab >}}
+{{< tab name="Legacy Docker subscription" >}}
+
 Update your billing information to include your VAT number:
 
-1. Sign in to Docker Hub.
+1. Sign in to [Docker Hub](https://hub.docker.com).
 2. For user accounts, Select your avatar in the top-right corner, then **Billing**. For organizations, select the name of the organization.
 3. Select the **Billing address** link.
 4. In the **Billing Information** section, select **Update information**.
-5. In the **Tax ID** section, select the ID type and enter your VAT number.
+5. In the Tax ID section, select the **ID type** and enter your VAT number.
 6. Select **Save**.
 
 Your VAT number will be included on your next invoice.
+
+{{< /tab >}}
+{{< /tabs >}}
 
 ## View billing history
 
@@ -65,27 +94,53 @@ You can view the billing history and download past invoices for a personal accou
 
 ### Personal account
 
-TBD
+{{< tabs >}}
+{{< tab name="Docker subscription" >}}
 
-1. Select your avatar in the top-right corner of Docker Hub.
-2. From the drop-down menu select **Billing**.
-3. Select the **Payment methods and billing history** link.
+1. Sign in to the [Docker Billing Console](https://app.docker.com/billing).
+2. Select **Invoices** from the left-hand menu.
+3. Optional. Select the **date link** to open invoice details.
+4. Optional. Select the **download** button to download an invoice.
+
+
+{{< /tab >}}
+{{< tab name="Legacy Docker subscription" >}}
+
+1. Sign in to [Docker Hub](https://hub.docker.com).
+2. Select your avatar in the top-right corner.
+3. From the drop-down menu select **Billing**.
+4. Select the **Payment methods and billing history** link.
     You can find your past invoices in the **Invoice History** section.
 
 From here you can download an invoice.
 
-### Organization
+{{< /tab >}}
+{{< /tabs >}}
 
-TBD
+### Organization
 
 > [!NOTE]
 >
 > You must be an owner of the organization to view the billing history.
 
-1. Select your avatar in the top-right corner of Docker Hub.
-2. From the drop-down menu select **Billing**.
-3. Select the organization that you want to change the payment method for.
+{{< tabs >}}
+{{< tab name="Docker subscription" >}}
+
+1. Sign in to the [Docker Billing Console](https://app.docker.com/billing).
+2. Select **Invoices** from the left-hand menu.
+3. Optional. Select the **date link** to open invoice details.
+4. Optional. Select the **download** button to download an invoice.
+
+{{< /tab >}}
+{{< tab name="Legacy Docker subscription" >}}
+
+1. Sign in to [Docker Hub](https://hub.docker.com).
+2. Select your avatar in the top-right corner.
+3. From the drop-down menu select **Billing**.
 4. Select the **Payment methods and billing history** link.
     You can find your past invoices in the **Invoice History** section.
 
 From here you can download an invoice.
+
+{{< /tab >}}
+{{< /tabs >}}

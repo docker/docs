@@ -11,12 +11,13 @@ weight: 17
 > Docker subscription plan in order to scale their subscription.
 >
 > Legacy subscriptions apply to Docker subscribers who last purchased or renewed
-> their subscription before November 15th, 2024. These subscribers will keep
+> their subscription before December 10, 2024. These subscribers will keep
 > their current plan and pricing until their next renewal date that falls on or
-> after November 15, 2024. To see purchase or renewal history, view your
+> after December 10, 2024. To see purchase or renewal history, view your
 > [billing history](../billing/history.md). For more details about legacy
 > subscriptions, see [Announcing Upgraded Docker
 > Plans](https://www.docker.com/blog/november-2024-updated-plans-announcement/).
+
 Docker subscriptions let you scale your consumption as your needs evolve. Except
 for legacy Docker subscription plans, all paid Docker subscriptions come with
 access to Docker Hub, Docker Build Cloud, and Testcontainers Cloud with a base
@@ -37,8 +38,6 @@ usage](../admin/organization/manage-products.md#view-docker-product-usage).
 
 ## Add Docker Build Cloud minutes
 
-TBD
-
 You can pre-purchase build minutes by [contacting
 sales](https://www.docker.com/pricing/contact-sales/). There is no overage or
 on-demand option available.
@@ -53,8 +52,6 @@ is billed at a higher rate than pre-purchased capacity. To avoid on-demand
 charges, pre-purchase additional minutes.
 
 ## Add Docker Hub storage or image pulls
-
-TBD
 
 {{< include "hub-limits.md" >}}
 

@@ -36,20 +36,16 @@ When you upgrade to a paid subscription, you immediately have access to all the 
 {{< tabs >}}
 {{< tab name="Docker subscription" >}}
 
-TBD
+To upgrade your Docker subscription:
 
-To upgrade your subscription:
-
-1. Sign in to [Docker Billing](https://app.docker.com/billing).
-2. Optional. If you're upgrading from a free user account to a Team subscription and want to keep your account name, [convert your user account into an organization](../admin/convert-account.md).
+1. Sign in to the [Docker Billing Console](https://app.docker.com/billing).
+2. Optional. If you're upgrading from a free user account to a Team subscription and want to keep your username, [convert your user account into an organization](../admin/convert-account.md).
 3. Select the account you want to upgrade in the drop-down at the top-left of the page.
-4. Select the upgrade button.
+4. Select **Upgrade**.
 5. Follow the on-screen instructions to complete your upgrade.
 
 {{< /tab >}}
 {{< tab name="Legacy Docker subscription" >}}
-
-TBD
 
 You can upgrade a legacy Docker Core, Docker Build Cloud, or Docker Scout subscription plan to a Docker subscription plan that includes access to all tools.
 
@@ -79,21 +75,17 @@ Before you downgrade, consider the following aspects before you downgrade your s
 {{< tabs >}}
 {{< tab name="Docker subscription" >}}
 
-TBD
+To downgrade your Docker subscription:
 
-To downgrade your subscription:
-
-1. Sign in to [Docker Billing](https://app.docker.com/billing).
+1. Sign in to the [Docker Billing Console](https://app.docker.com/billing).
 2. Select the account you want to downgrade in the drop-down at the top-left of the page.
-3. Select the action icon and then TBD.
+3. Select the action icon and then **Cancel subscription**.
 4. Follow the on-screen instructions to complete your downgrade.
 
 {{< /tab >}}
 {{< tab name="Legacy Docker subscription" >}}
 
-TBD
-
-To downgrade your legacy Docker Core subscription:
+To downgrade your legacy Docker subscription:
 
 1. Sign in to [Docker Hub Billing](https://hub.docker.com/billing).
 2. Select the account you want to downgrade in the drop-down at the top-left of the page.
