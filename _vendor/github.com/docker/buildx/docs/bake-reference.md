@@ -359,6 +359,21 @@ target "app" {
 }
 ```
 
+### `target.call`
+
+Specifies the frontend method to use. Frontend methods let you, for example,
+execute build checks only, instead of running a build. This is the same as the
+`--call` flag.
+
+```hcl
+target "app" {
+  call = "check"
+}
+```
+
+For more information about frontend methods, refer to the CLI reference for
+[`docker buildx build --call`](https://docs.docker.com/reference/cli/docker/buildx/build/#call).
+
 ### `target.context`
 
 Specifies the location of the build context to use for this target.
