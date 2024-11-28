@@ -28,7 +28,7 @@ to breach the Docker Desktop Virtual Machine (VM) or other containers.
 > `--runtime` flag is ignored. Docker's default runtime continues to be `runc`,
 > but all user containers are implicitly launched with Sysbox.
 
-Enhanced Container Isolation is not the same as [Docker Engine's userns-remap mode or Rootless Docker](#enhanced-container-isolation-versus-docker-userns-remap-mode).
+Enhanced Container Isolation is not the same as [Docker Engine's userns-remap mode or Rootless Docker](#enhanced-container-isolation-versus-user-namespace-remapping).
 
 ### Under the hood
 
@@ -51,7 +51,7 @@ container and the Linux kernel inside the Docker Desktop VM.
 
 For more information, see [Key features and benefits](features-benefits.md).
 
-### Enhanced Container Isolation versus user namespeace remapping
+### Enhanced Container Isolation versus user namespace remapping
 
 The Docker Engine includes a feature called [userns-remap mode](/engine/security/userns-remap/)
 that enables the user namespace in all containers. However it suffers from a few
