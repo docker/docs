@@ -13,6 +13,25 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.31.0
+
+{{< release-date date="2024-11-28" >}}
+
+### Update
+
+- Dependencies upgrade: bump compose-go to v2.4.5
+- Dependencies upgrade: bump docker engine and cli to v27.4.0-rc.2
+- Dependencies upgrade: bump buildx to v0.18.0
+- Dependencies upgrade: bump buildkit to v0.17.1
+
+### Bug fixes and enhancements
+
+- Added the ability to use Docker Buildx Bake to build Docker Compose services
+- Added `commit` command to create new images from running containers
+- Fixed an issue where network changes were not detected
+- Fixed an issue where containers stopped sequentially which slowed down the restart process
+
+
 ## 2.30.3
 
 {{< release-date date="2024-11-07" >}}
