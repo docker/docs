@@ -1,9 +1,11 @@
 ---
 title: Billing and payments
 linkTitle: Billing
-weight: 200
 description: Discover information on billing and payment processes for Docker subscriptions.
 keywords: billing, invoice, payment, subscription
+params:
+  sidebar:
+    group: Platform
 grid_core:
 - title: Get started
   description: Learn how to set up a Docker Core subscription for a personal account or organization.

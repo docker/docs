@@ -2,7 +2,6 @@
 <nav class="md:text-sm flex flex-col">
   <div
     class="block py-4 md:hidden text-gray-light dark:text-gray-dark">This section</div>
-  {{/* The current page is in the table of contents */}}
   <ul>
     {{ template "renderChildren" .FirstSection }}
   </ul>
@@ -13,14 +12,24 @@
   {{- if .Params.sidebar.reverse }}
     {{ $pages = .Pages.Reverse }}
   {{- end }}
-  {{- range $pages }}
-    {{- if eq .Params.sitemap false }}
-      {{- continue }}
-    {{- end }}
+  {{- $pages = where .Pages "Params.sitemap" "ne" "false" }}
+  {{- $ungrouped := where $pages "Params.sidebar.group" "==" nil }}
+  {{- range $ungrouped }}
     {{- if .IsSection }}
       {{- template "renderList" . }}
     {{- else }}
       {{- template "renderSingle" . }}
+    {{- end }}
+  {{- end }}
+  {{- range .Params.sidebar.groups }}
+    <li class="px-2 py-2 pb-2 text-gray-light dark:text-gray-dark uppercase
+      text-xs font-semibold">{{ . }}</li>
+    {{- range where $pages "Params.sidebar.group" . }}
+      {{- if .IsSection }}
+        {{- template "renderList" . }}
+      {{- else }}
+        {{- template "renderSingle" . }}
+      {{- end }}
     {{- end }}
   {{- end }}
 {{ end }}
