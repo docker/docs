@@ -12,6 +12,11 @@ fixes in [Docker Buildx](https://github.com/docker/buildx).
 
 ## 0.18.0
 
+{{< release-date date="2024-10-31" >}}
+
+The full release note for this release is available
+[on GitHub](https://github.com/docker/buildx/releases/tag/v0.18.0).
+
 ### New
 
 - The `docker buildx inspect` command now displays BuildKit daemon configuration options set with a TOML file. [docker/buildx#2684](https://github.com/docker/buildx/pull/2684)
