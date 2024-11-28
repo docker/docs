@@ -55,7 +55,7 @@ container-to-host and cross-container isolation.
 
 Privileged containers `docker run --privileged ...` are insecure because they
 give the container full access to the Linux kernel. That is, the container runs
-as true root with all capabilities enabled, Seccomp and AppArmor restrictions
+as true root with all capabilities enabled, seccomp and AppArmor restrictions
 are disabled, all hardware devices are exposed, for example.
 
 Organizations aiming to secure Docker Desktop on developers' machines face challenges with privileged containers. These containers, whether running benign or malicious workloads, can gain control of the Linux kernel within the Docker Desktop VM, potentially altering security related settings, for example registry

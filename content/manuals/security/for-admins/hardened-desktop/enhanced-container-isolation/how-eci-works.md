@@ -51,10 +51,10 @@ container and the Linux kernel inside the Docker Desktop VM.
 
 For more information, see [Key features and benefits](features-benefits.md).
 
-### Enhanced Container Isolation versus Docker Userns-Remap Mode
+### Enhanced Container Isolation versus user namespeace remapping
 
 The Docker Engine includes a feature called [userns-remap mode](/engine/security/userns-remap/)
-that enables the user-namespace in all containers. However it suffers from a few
+that enables the user namespace in all containers. However it suffers from a few
 [limitations](/engine/security/userns-remap/) and it's
 not supported within Docker Desktop.
 

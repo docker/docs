@@ -21,7 +21,7 @@ Enhanced Container Isolation ensures stronger container isolation and also locks
 
 > [!NOTE]
 >
-> ECI is in addition to other container security techniques used by Docker. For example, reduced Linux Capabilities, Seccomp, AppArmor.
+> ECI is in addition to other container security techniques used by Docker. For example, reduced Linux Capabilities, seccomp, and AppArmor.
 
 ## Who is it for?
 

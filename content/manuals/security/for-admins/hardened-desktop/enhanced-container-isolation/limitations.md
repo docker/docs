@@ -50,17 +50,15 @@ Windows hosts and access Docker from within.
 ### ECI protection for Docker builds with the "docker" driver
 
 Prior to Docker Desktop 4.30, `docker build` commands that use the buildx
-`docker` driver (the default) are not protected by ECI (i.e., the build runs
-rootful inside the Docker Desktop VM).
+`docker` driver (the default) are not protected by ECI, in other words the build runs
+rootful inside the Docker Desktop VM.
 
 Starting with Docker Desktop 4.30, `docker build` commands that use the buildx
-`docker` driver are protected by ECI (i.e., the build runs rootless inside
-the Docker Desktop VM), except when Docker Desktop is configured to use WSL 2
+`docker` driver are protected by ECI, except when Docker Desktop is configured to use WSL 2
 (on Windows hosts).
 
 Note that `docker build` commands that use the `docker-container` driver are
-always protected by ECI (i.e., the build runs inside a rootless Docker
-container). 
+always protected by ECI. 
 
 ### Docker Build and Buildx have some restrictions
 

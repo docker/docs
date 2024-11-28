@@ -176,7 +176,7 @@ A couple of caveats:
 
 * The `allowDerivedImages` setting only applies to local-only images built from
   an allowed image. That is, the derived image must not be present in a remote
-  repository because if it were, you would just list it's name in the `imageList`.
+  repository because if it were, you would just list its name in the `imageList`.
 
 * For derived image checking to work, the parent image (i.e., the image in the
   `imageList`) must be present locally (i.e., must have been explicitly pulled
@@ -329,9 +329,8 @@ Whether to configure the list as an allow or deny list depends on the use case.
 | `feedback`             | Send feedback to Docker |
 | `init`                 | Creates Docker-related starter files |
 | `manifest`             | Manages Docker image manifests |
-| `plugins`              | Manages plugins |
+| `plugin`              | Manages plugins |
 | `sbom`                 | View Software Bill of Materials (SBOM) |
-| `scan`                 | Docker Scan |
 | `scout`                | Docker Scout |
 | `trust`                | Manage trust on Docker images |
 

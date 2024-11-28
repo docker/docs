@@ -79,7 +79,6 @@ Postgres
 PowerShell
 Python
 S3
-Seccomp
 SQLite
 Slack
 Snyk
@@ -93,7 +92,6 @@ Traefik
 Ubuntu
 Unix
 VMware
-VM
 Wasm
 Windows
 WireMock
@@ -122,6 +120,7 @@ Zsh
 [Rr]eal-time
 [Rr]untimes?
 [Ss]andbox(ed)?
+[Ss]eccomp
 [Ss]wappable
 [Ss]warm
 [Ss]ysfs
