@@ -15,6 +15,7 @@ exceptions:
   - AUFS
   - AWS
   - BIOS
+  - BPF
   - CI
   - CISA
   - CLI
@@ -52,6 +53,7 @@ exceptions:
   - HTTP
   - HTTPS
   - IAM
+  - ID
   - IDE
   - IP
   - JAR
@@ -75,6 +77,7 @@ exceptions:
   - PATH
   - PDF
   - PEM
+  - PID
   - PHP
   - POSIX
   - POST
