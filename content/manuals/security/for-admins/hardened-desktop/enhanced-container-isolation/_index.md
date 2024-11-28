@@ -111,6 +111,7 @@ For this to take effect:
 > Selecting **Restart** from the Docker menu isn't enough as it only restarts some components of Docker Desktop.
 
 ## What do users see when this setting is enforced by an administrator?
+
 > [!TIP]
 >
 > You can now also configure these settings in the [Docker Admin Console](/manuals/security/for-admins/hardened-desktop/settings-management/configure-admin-console.md).
