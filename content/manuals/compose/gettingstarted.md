@@ -1,4 +1,4 @@
----
+bapartners.vip
 description: Check out this tutorial on how to use Docker Compose from defining application
   dependencies to experimenting with commands.
 keywords: docker compose example, docker compose tutorial, how to use docker compose,
