@@ -30,8 +30,10 @@ Rails 7.1 generates multistage Dockerfile out of the box, below is an example of
 
 > Multistage Dockerfiles help create smaller, more efficient images by separating build and runtime dependencies, ensuring only necessary components are included in the final image. Read more about multi-stage builds [in a dedicated article](/get-started/docker-concepts/building-images/multi-stage-builds/)
 
+Even though the Dockerfile is generated for you, it's a good idea to understand what it does and how it works, so we recommend reading the following example.
 
-```dockerfile {collapse=true,title=Dockerfile}
+
+```dockerfile {title=Dockerfile}
 # syntax=docker/dockerfile:1
 # check=error=true
 
@@ -49,9 +51,9 @@ FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
 WORKDIR /rails
 
 # Install base packages
-# Replace sqlite3 with libpq-dev if using PostgreSQL, or libmysqlclient-dev if using MySQL
+# Replace libpq-dev with sqlite3 if using SQLite, or libmysqlclient-dev if using MySQL
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl libjemalloc2 libvips sqlite3 && \
+    apt-get install --no-install-recommends -y curl libjemalloc2 libvips libpq-dev && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Set production environment
@@ -124,6 +126,79 @@ ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 EXPOSE 80
 CMD ["./bin/thrust", "./bin/rails", "server"]
 ```
+
+The Dockerfile above assumes you are using Thruster and Puma as the application server. In case you are using any other server, you can replace the last three lines with the following:
+
+```dockerfile
+# Start the application server
+EXPOSE 3000
+CMD ["./bin/rails", "server"]
+```
+
+Besides the Dockerfile you will also need a `.dockerignore` file. This file is used to exclude files and directories from the context of the build. Below is an example of a `.dockerignore` file.
+
+```text {collapse=true,title=".dockerignore"}
+# See https://docs.docker.com/engine/reference/builder/#dockerignore-file for more about ignoring files.
+
+# Ignore git directory.
+/.git/
+/.gitignore
+
+# Ignore bundler config.
+/.bundle
+
+# Ignore all environment files.
+/.env*
+
+# Ignore all default key files.
+/config/master.key
+/config/credentials/*.key
+
+# Ignore all logfiles and tempfiles.
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+
+# Ignore pidfiles, but keep the directory.
+/tmp/pids/*
+!/tmp/pids/.keep
+
+# Ignore storage (uploaded files in development and any SQLite databases).
+/storage/*
+!/storage/.keep
+/tmp/storage/*
+!/tmp/storage/.keep
+
+# Ignore assets.
+/node_modules/
+/app/assets/builds/*
+!/app/assets/builds/.keep
+/public/assets
+
+# Ignore CI service files.
+/.github
+
+# Ignore development files
+/.devcontainer
+
+# Ignore Docker-related files
+/.dockerignore
+/Dockerfile*
+```
+
+The last thing that may be necessary, but not always required is `compose.yml` file, used by Docker Compose to define the services that make up your application. Since we are using SQLite as the database, we don't need to define a separate service for the database, and the only service we need is the Rails application itself.
+
+```yaml {collapse=true,title=compose.yaml}
+services:
+  web:
+    build: .
+    volumes:
+      - .:/myapp
+    ports:
+      - "3000:80"
+```
+
 
 Now that you have an application, you can create the necessary Docker assets to
 containerize your application. You can use Docker Desktop's built-in Docker Init
