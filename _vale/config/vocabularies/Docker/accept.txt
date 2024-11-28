@@ -5,7 +5,6 @@ Apple
 Artifactory
 Autotest
 Azure
-Berkely
 Btrfs
 BuildKit
 BusyBox

@@ -71,7 +71,7 @@ access resources assigned to the container.
 > Enhanced Container Isolation does not prevent users from launching privileged
 > containers, but rather runs them securely by ensuring that they can only
 > modify resources associated with the container. Privileged workloads that
-> modify global kernel settings, for example loading a kernel module or changing Berkely Packet Filters (BPF)
+> modify global kernel settings, for example loading a kernel module or changing Berkeley Packet Filters (BPF)
 > settings will not work properly as they will receive "permission
 > denied" error when attempting such operations.
 
