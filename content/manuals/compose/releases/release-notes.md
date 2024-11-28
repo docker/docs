@@ -26,10 +26,10 @@ For more detailed information, see the [release notes in the Compose repo](https
 
 ### Bug fixes and enhancements
 
-- Added ability to use buildx bake to build Compose services
+- Added the ability to use Docker Buildx Bake to build Docker Compose services
 - Added `commit` command to create new images from running containers
-- Fixed an issue with network changes not detected
-- Fixed an issue with containers stopping sequentially slowing down the restart process
+- Fixed an issue where network changes were not detected
+- Fixed an issue where containers stopped sequentially which slowed down the restart process
 
 
 ## 2.30.3
