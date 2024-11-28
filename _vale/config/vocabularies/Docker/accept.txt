@@ -1,4 +1,4 @@
-(?-i)[A-Z]{2,}s
+(?-i)[A-Z]{2,}'?s
 Amazon
 Anchore
 Apple
@@ -21,6 +21,7 @@ Datadog
 Ddosify
 Debootstrap
 Dev Environments?
+Dev
 Django
 Docker Build Cloud
 Docker Business
@@ -71,6 +72,7 @@ Nuxeo
 OAuth
 OTel
 Okta
+Paketo
 PKG
 Postgres
 PowerShell
@@ -82,6 +84,7 @@ Snyk
 Solr
 SonarQube
 Syft
+Sysbox
 Sysdig
 Testcontainers
 Traefik
@@ -95,6 +98,7 @@ Zscaler
 Zsh
 [Aa]utobuild
 [Bb]uildx
+[Bb]uildpack(s)?
 [Cc]odenames?
 [Cc]ompose
 [Dd]istroless
@@ -109,13 +113,16 @@ Zsh
 [Nn]amespace
 [Oo]nboarding
 [Pp]aravirtualization
+[Pp]rocfs
 [Pp]roxied
 [Pp]roxying
 [Rr]eal-time
 [Rr]untimes?
 [Ss]andbox(ed)?
+[Ss]eccomp
 [Ss]wappable
 [Ss]warm
+[Ss]ysfs
 [Tt]oolchains?
 [Vv]irtiofs
 [Vv]irtualize
@@ -144,10 +151,13 @@ minikube
 monorepos?
 musl
 nameserver
+namespace
+namespacing
 npm
 osquery
 osxfs
 pgAdmin
+rootful
 runc
 snapshotters?
 stdin

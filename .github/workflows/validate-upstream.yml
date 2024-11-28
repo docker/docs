@@ -23,6 +23,11 @@ on:
         type: boolean
         required: false
 
+env:
+  # Use edge release of buildx (latest RC, fallback to latest stable)
+  SETUP_BUILDX_VERSION: edge
+  SETUP_BUILDKIT_IMAGE: "moby/buildkit:latest"
+
 jobs:
   run:
     runs-on: ubuntu-24.04
@@ -80,6 +85,9 @@ jobs:
       -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
+        with:
+          version: ${{ env.SETUP_BUILDX_VERSION }}
+          driver-opts: image=${{ env.SETUP_BUILDKIT_IMAGE }}
       -
         name: Validate
         uses: docker/bake-action@v5
