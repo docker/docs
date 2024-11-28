@@ -26,8 +26,8 @@ Some companies may have more than one [Docker organization](/manuals/admin/organ
 
 Through [Settings Management](/manuals/security/for-admins/hardened-desktop/settings-management/_index.md), Docker provides numerous configuration parameters that can be preset. The Docker organization owner, development lead, and infosec representative should review these settings to establish the company’s baseline configuration, including security features and [enforcing sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md) for Docker Desktop users. Additionally, they should decide whether to take advantage of free trials for other Docker products, such as [Docker Scout](/manuals/scout/_index.md), which is included in the subscription.
 
-To view the parameters that can be preset, see [Configure Settings Management](/manuals/security/for-admins/hardened-desktop/settings-management/configure.md#step-two-configure-the-settings-you-want-to-lock-in).
+To view the parameters that can be preset, see [Configure Settings Management](/manuals/security/for-admins/hardened-desktop/settings-management/configure-json-file.md#step-two-configure-the-settings-you-want-to-lock-in).
 
 ## Optional step four: Meet with the Docker Implementation team
 
-The Docker Implementation team can help you step through setting up your organization, configuring SSO, enforcing sign in, and configuring Docker. You can reach out to set up a meeting by emailing successteam@docker.com.
+The Docker Implementation team can help you step through setting up your organization, configuring SSO, enforcing sign-in, and configuring Docker. You can reach out to set up a meeting by emailing successteam@docker.com.

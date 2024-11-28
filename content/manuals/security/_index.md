@@ -64,7 +64,7 @@ grid_developers:
 - title: Static vulnerability scanning
   description: Automatically run a point-in-time scan on your Docker images for vulnerabilities.
   icon: image_search
-  link: /docker-hub/vulnerability-scanning/
+  link: /docker-hub/repos/manage/vulnerability-scanning/
 - title: Docker Engine security
   description: Understand how to keep Docker Engine secure.
   icon: security

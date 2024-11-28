@@ -6,9 +6,9 @@ weight: 20
 
 ## Step one: Send finalized settings files to the MDM team 
 
-After reaching an agreement with the relevant teams on your baseline and security configurations as outlined in module one, follow the instructions in the [Settings Management](/manuals/security/for-admins/hardened-desktop/settings-management/_index.md) documentation to create the `admin-settings.json` file that captures these configurations.
+After reaching an agreement with the relevant teams about your baseline and security configurations as outlined in module one, configure Settings Management using either the [Docker Admin Console](/manuals/security/for-admins/hardened-desktop/settings-management/configure-admin-console.md) or an [`admin-settings.json` file](/manuals/security/for-admins/hardened-desktop/settings-management/configure-json-file.md).
 
-Once the file is ready, collaborate with your MDM team to deploy the `admin-settings.json` file, along with your chosen method for [enforcing sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md).
+Once the file is ready, collaborate with your MDM team to deploy your chosen settings, along with your chosen method for [enforcing sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md).
 
 > [!IMPORTANT]
 >

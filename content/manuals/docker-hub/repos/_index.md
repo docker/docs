@@ -1,88 +1,53 @@
 ---
 description: Learn how to manage repositories on Docker Hub
-keywords: Docker, docker, trusted, registry, accounts, plans, Dockerfile, Docker Hub,
-  webhooks, docs, documentation, manage, repos
-title: Manage repositories
+keywords: Docker Hub, Hub, repositories
+title: Repositories
 weight: 20
 aliases:
 - /engine/tutorials/dockerrepos/
+- /docker-hub/repos/configure/
 ---
 
-## Manage default repository settings
+A Docker Hub repository is a collection of container images, enabling you to
+store, manage, and share Docker images publicly or privately. Each repository
+serves as a dedicated space where you can store images associated with a
+particular application, microservice, or project. Content in repositories is
+organized by tags, which represent different versions of the same application,
+allowing users to pull the right version when needed.
 
-You can manage the default repository settings for your personal account in Docker Hub. Select the **Settings** icon, then select **Repository Settings**.
+In this section, learn how to:
 
-![Repository settings menu](../images/docker-hub-repo-settings-menu.png)
+- [Create](./create.md) a repository.
+- Manage a repository, including how to manage:
 
-Here you can manage the following:
+   - [Repository information](./manage/information.md): Add descriptions,
+     overviews, and categories to help users understand the purpose and usage of
+     your repository. Clear repository information aids discoverability and
+     usability.
 
-- Default privacy: set the default repository privacy to either **Public** or **Private**.
-- Linked accounts: for users with a Docker Pro, Team, or Business subscription, manage your source provider accounts to enable Automated Builds.
-- Notifications: for users with a Docker Pro, Team, or Business subscription, manage how you receive notifications from autobuilds.
+   - [Access](./manage/access.md): Control who can access your repositories with
+     flexible options. Make repositories public or private, add collaborators,
+     and, for organizations, manage roles and teams to maintain security and
+     control.
 
-## Change a repository from public to private
+   - [Images](./manage/hub-images/_index.md): Repositories support diverse
+     content types, including OCI artifacts, and allow version control through
+     tagging. Push new images and manage existing content across repositories
+     for flexibility.
 
-1. Navigate to your repository.
-2. Select the **Settings** tab.
-3. Select **Make private**.
-4. Enter the name of your repository to confirm. 
+   - [Image security insights](./manage/vulnerability-scanning.md): Utilize
+     continuous Docker Scout analysis and static vulnerability scanning to
+     detect, understand, and address security issues within container images.
 
-You get one free private repository with your Docker Hub user account (not
-available for organizations you're a member of). If you need more private
-repositories for your user account, upgrade your Docker Hub subscription from your [Billing Information](https://hub.docker.com/billing/plan) page.
+   - [Webhooks](./manage/webhooks.md): Automate responses to repository events
+     like image pushes or updates by setting up webhooks, which can trigger
+     notifications or actions in external systems, streamlining workflows.
 
-## Move images between repositories
-
-### Personal to personal
-
-When consolidating personal repositories, you can pull private images from the initial repository and push them into another repository owned by you. To avoid losing your private images, perform the following steps:
-
-1. Navigate to [Docker Hub](https://hub.docker.com) create a new Docker ID and select a personal subscription.
-2. Using `docker login` from the CLI, sign in using your original Docker ID and pull your private images.
-3. Tag your private images with your newly created Docker ID, for example:
-
-   ```console
-   $ docker tag namespace1/docker101tutorial new_namespace/docker101tutorial
-   ```
-4. Using `docker login` from the CLI, sign in with your newly created Docker ID, and push your newly tagged private images to your new Docker ID namespace:
-
-   ```console
-   $ docker push new_namespace/docker101tutorial
-   ```
-
-The private images that existed in your previous account are now available in your new account.
-
-### Personal to an organization
-
-To avoid losing your private images, you can pull your private images from your personal account and push them to an organization that's owned by you.
-
-1. Navigate to [Docker Hub](https://hub.docker.com) and select **Organizations**.
-2. Select the applicable organization and verify that your user account is a member of the organization.
-3. Sign in to [Docker Hub](https://hub.docker.com) using your original Docker ID, and pull your images:
-
-   ```console
-   $ docker pull namespace1/docker101tutorial
-   ```
-4. Tag your images with your new organization namespace:
-
-   ```console
-   $ docker tag namespace1/docker101tutorial <new_org>/docker101tutorial
-   ```
-5. Push your newly tagged images to your new org namespace:
-
-   ```console
-   $ docker push new_org/docker101tutorial
-   ```
-
-The private images that existed in your user account are now available for your organization.
-
-## Delete a repository
-
-> [!WARNING]
->
-> Deleting a repository deletes all the images it contains and its build settings. This action can't be undone.
-
-1. Navigate to your repository.
-2. Select the **Settings** tab.
-3. Select **Delete repository**.
-4. Enter the name of your repository to confirm.
+   - [Automated builds](./manage/builds/_index.md): Integrate with GitHub or
+     Bitbucket for automated builds. Every code change triggers an image
+     rebuild, supporting continuous integration and delivery.
+  
+- [Delete](./delete.md) a repository.
+- [Manage personal settings](./settings.md): For your account, you can set personal
+  settings for repositories, including default repository privacy and autobuild
+  notifications.

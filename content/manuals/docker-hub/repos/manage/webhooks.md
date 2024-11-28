@@ -2,7 +2,9 @@
 description: Docker Hub Webhooks
 keywords: Docker, webhooks, hub, builds
 title: Webhooks
-weight: 40
+weight: 80
+aliases:
+- /docker-hub/webhooks/
 ---
 
 You can use webhooks to cause an action in another service in response to a push event in the repository. Webhooks are POST requests sent to a URL you define in Docker Hub.

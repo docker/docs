@@ -34,7 +34,7 @@ docker-build:
       apk del curl 
       rm -rf /var/cache/apk/*
     # Login to Docker Hub required for Docker Scout CLI
-    - docker login -u "$DOCKER_HUB_USER" -p "$DOCKER_HUB_PAT"
+    - echo "$DOCKER_HUB_PAT" | docker login -u "$DOCKER_HUB_USER" --password-stdin
 ```
 
 This sets up the workflow to build Docker images with Docker-in-Docker mode,

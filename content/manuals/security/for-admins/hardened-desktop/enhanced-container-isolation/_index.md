@@ -81,7 +81,7 @@ You first need to [enforce sign-in](/manuals/security/for-admins/enforce-sign-in
 
 #### Setup
 
-[Create and configure the `admin-settings.json` file](../settings-management/configure.md) and specify:
+[Create and configure the `admin-settings.json` file](/manuals/security/for-admins/hardened-desktop/settings-management/configure-json-file.md) and specify:
 
 ```json
 {
@@ -111,6 +111,9 @@ For this to take effect:
 > Selecting **Restart** from the Docker menu isn't enough as it only restarts some components of Docker Desktop.
 
 ## What do users see when this setting is enforced by an administrator?
+> [!TIP]
+>
+> You can now also configure these settings in the [Docker Admin Console](/manuals/security/for-admins/hardened-desktop/settings-management/configure-admin-console.md).
 
 When Enhanced Container Isolation is enabled, users see:
 - **Use Enhanced Container Isolation** toggled on in **Settings** > **General**.

@@ -2,12 +2,14 @@
 description: Automated builds
 keywords: automated, build, images
 title: Advanced options for Autobuild and Autotest
+aliases:
+- /docker-hub/builds/advanced/
 ---
 
 > [!NOTE]
 >
 > Automated builds require a
-> [Docker Pro, Team, or Business subscription](../../subscription/_index.md).
+> Docker Pro, Team, or Business subscription.
 
 The following options allow you to customize your automated build and automated
 test processes.

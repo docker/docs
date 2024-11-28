@@ -3,16 +3,17 @@ description: Set up Automated builds
 keywords: automated, build, images, Docker Hub
 title: Set up Automated Builds
 linkTitle: Automated builds
-weight: 60
+weight: 90
 aliases:
 - /docker-hub/builds/automated-build/
 - /docker-hub/builds/classic/
+- /docker-hub/builds/
 ---
 
 > [!NOTE]
 >
 > Automated builds require a
-> [Docker Pro, Team, or Business subscription](../../subscription/_index.md).
+> Docker Pro, Team, or Business subscription.
 
 This page contains information on:
 - [Configuring Automated builds](#configure-automated-builds)

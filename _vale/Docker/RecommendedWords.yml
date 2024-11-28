@@ -37,7 +37,6 @@ swap:
   keypress: keystroke
   mutices: mutexes
   repo: repository
-  scan: analyze
   scroll: navigate
   url: URL
   vs: versus
