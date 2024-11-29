@@ -63,8 +63,7 @@ For more information and examples, see [how to connect from a container to a ser
 
 ### Can I pass through a USB device to a container?
 
-It is not possible to pass through a USB device (or a
-serial port) to a container as it requires support at the hypervisor level.
+Docker Desktop does not support direct USB device passthrough. However, you can use USB over IP to connect common USB devices to the Docker Desktop VM and in turn be forwarded to a container. For more details, see [Using USB/IP with Docker Desktop](/manuals/desktop/features/usbip.md).
 
 ### How do I run Docker Desktop without administrator privileges?
 
