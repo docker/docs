@@ -278,3 +278,10 @@ experimental checks, the experimental checks will still run:
 # syntax=docker/dockerfile:1
 # check=skip=all;experimental=all
 ```
+
+## Further reading
+
+For more information about using build checks, see:
+
+- [Build checks reference](/reference/build-checks/)
+- [Validating build configuration with GitHub Actions](/manuals/build/ci/github-actions/checks.md)
