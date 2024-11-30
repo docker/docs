@@ -120,9 +120,9 @@ memory. Then, when a container is started with a Docker socket bind-mount,
 Docker Desktop checks if the container's image digest matches one of the allowed
 digests. If so, the container is allowed to start, otherwise it's blocked.
 
-Due to the digest comparison, it's not possible to bypass the Docker socket mount permissions by re-tagging a
-disallowed image to the name of an allowed one. In other words, if a user
-does:
+Due to the digest comparison, it's not possible to bypass the Docker socket
+mount permissions by re-tagging a disallowed image to the name of an allowed
+one. In other words, if a user does:
 
 ```console
 $ docker image rm <allowed_image>
@@ -174,12 +174,15 @@ When the buildpack runs, it will create an ephemeral image derived from
 allow this because it will notice that the ephemeral image is derived from an
 allowed image.
 
-The behavior is enabled by default. It can be disabled by setting
-`allowDerivedImages=false` in the `admin-settings.json` file. In general it is
-not recommended that you disable this setting unless you know it won't be
-required.
+The behavior is disabled by default and must be explicitly enabled by setting
+`"allowDerivedImages": true` as shown above. In general it is recommended that
+you disable this setting unless you know it's required.
 
-A couple of caveats:
+A few caveats:
+
+* Setting `"allowedDerivedImages" :true` will impact the startup time of
+  containers by up to 1 extra second, as Docker Desktop needs to perform
+  some more checks on the container image.
 
 * The `allowDerivedImages` setting only applies to local-only images built from
   an allowed image. That is, the derived image must not be present in a remote
@@ -211,6 +214,10 @@ list to allow any container to mount the Docker socket. You do this by adding
   ]
 }
 ```
+
+This tells Docker Desktop to allow all containers to mount the Docker socket
+which increases flexibility but reduces security. It also improves container
+startup time when using Enhanced Container Isolation.
 
 It is recommended that you use this only in scenarios where explicitly listing
 allowed container images is not flexible enough.
