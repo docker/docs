@@ -47,7 +47,8 @@ This can be done via the Docker Socket mount permissions section in the
           "docker.io/localstack/localstack:*",
           "docker.io/testcontainers/ryuk:*",
           "docker:cli"
-        ]
+        ],
+        "allowDerivedImages": true
       },
       "commandList": {
         "type": "deny",
@@ -135,7 +136,7 @@ ones in the repository.
 
 ### Docker Socket Mount Permissions for derived images
 
-{{ introduced desktop 4.34.0 "../../../../desktop/release-notes.md#4340" }}
+{{< introduced desktop 4.34.0 "../../../../desktop/release-notes.md#4340" >}}
 
 As described in the prior section, administrators can configure the list of container
 images that are allowed to mount the Docker socket via the `imageList`.
@@ -162,7 +163,7 @@ simply add the following image to the `imageList`:
 ```json
 "imageList": {
   "images": [
-    "paketobuildpacks/builder:base",
+    "paketobuildpacks/builder:base"
   ],
   "allowDerivedImages": true
 }
