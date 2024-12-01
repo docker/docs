@@ -88,13 +88,16 @@ to Docker Hub.
            with:
              username: ${{ vars.DOCKER_USERNAME }}
              password: ${{ secrets.DOCKERHUB_TOKEN }}
+
          - name: Set up Docker Buildx
            uses: docker/setup-buildx-action@v3
+
          - name: Build and test
            uses: docker/build-push-action@v6
            with:
              target: test
              load: true
+
          - name: Build and push
            uses: docker/build-push-action@v6
            with:

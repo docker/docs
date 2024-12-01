@@ -24,13 +24,13 @@ jobs:
     steps:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-      
+
       - name: Build and export
         uses: docker/build-push-action@v6
         with:
           tags: myimage:latest
           outputs: type=docker,dest=/tmp/myimage.tar
-      
+
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
@@ -46,7 +46,7 @@ jobs:
         with:
           name: myimage
           path: /tmp
-      
+
       - name: Load image
         run: |
           docker load --input /tmp/myimage.tar

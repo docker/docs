@@ -94,15 +94,15 @@ jobs:
 
     runs-on: ubuntu-latest
     steps:
-      - name: Setup Docker buildx
-        uses: docker/setup-buildx-action@v3
-
       - name: Log into registry ${{ env.REGISTRY }}
         uses: docker/login-action@v3
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ secrets.REGISTRY_USER }}
           password: ${{ secrets.REGISTRY_TOKEN }}
+      
+      - name: Setup Docker buildx
+        uses: docker/setup-buildx-action@v3
 
       - name: Extract metadata
         id: meta
