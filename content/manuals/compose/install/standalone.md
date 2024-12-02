@@ -22,7 +22,7 @@ On this page you can find instructions on how to install Compose standalone on L
    ```console
    $ chmod +x /usr/local/bin/docker-compose
    ```
-4. Test and execute compose commands using `docker-compose`.
+3. Test and execute Compose commands using `docker-compose`.
 
    > [!TIP]
    >
