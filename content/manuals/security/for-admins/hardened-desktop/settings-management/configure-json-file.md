@@ -258,6 +258,7 @@ The following `admin-settings.json` code and table provides an example of the re
 |:-------------------------------|---|:-------------------------------|---|
 | `allowExperimentalFeatures`| | If `value` is set to `false`, experimental features are disabled.|  |
 | `allowBetaFeatures`| | If `value` is set to `false`, beta features are disabled.|  |
+| `enableDockerAI` | | If `value` is set to `false`, Docker AI (Ask Gordon) features are disabled. |  |
 
 ### Enhanced Container Isolation 
 
