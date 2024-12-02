@@ -69,10 +69,10 @@ The file contains the following comma separated values:
 | `version_checks`     | The number of version checks accumulated for the date and hour of each image repository. Depending on the client, a pull can do a version check to verify the existence of an image or tag without downloading it. | This helps identify the frequency of version checks, which you can use to analyze usage trends and potential unexpected behaviors.                                                  |
 | `pulls`              | The number of pulls accumulated for the date and hour of each image repository.                                                                                                                                            | This helps identify the frequency of repository pulls, which you can use to analyze usage trends and potential unexpected behaviors.                                                |
 
-### Optimize and manage Docker Hub usage
+### Best practices for managing Docker Hub usage
 
 Use the following steps to help optimize and manage your Docker Hub usage for
-both individuals and organizations.
+both individuals and organizations:
 
 1. [View your Docker Hub usage](#view-docker-hub-usage).
 
@@ -97,7 +97,8 @@ both individuals and organizations.
      systems to pull only when a new version of an image is available.
 
 4. Optimize the your repositories by regularly auditing and removing
-   repositories with untagged, unused, or outdated images.
+   repositories with untagged, unused, or outdated images. Look for private repositories in
+   Hub storage that exceed your plan's limits.
 
 5. Increase your limits by upgrading or purchasing additional consumption. For
    details, see [Scale your subscription](../subscription/scale.md).
@@ -108,6 +109,8 @@ both individuals and organizations.
    - Routinely [view Docker Hub usage](#view-docker-hub-usage) to monitor usage.
    - [Enforce sign-in](/security/for-admins/enforce-sign-in/) to ensure that you
      can monitor the usage of your users and users receive higher usage limits.
+  - Look for duplicate user accounts in Docker and remove accounts from your organization
+  as needed.
 
 ## Storage and repository limits
 
