@@ -46,7 +46,8 @@ In this section, learn how to:
    - [Automated builds](./manage/builds/_index.md): Integrate with GitHub or
      Bitbucket for automated builds. Every code change triggers an image
      rebuild, supporting continuous integration and delivery.
-  
+
+- [Archive](./archive.md) an outdated or unsupported repository.
 - [Delete](./delete.md) a repository.
 - [Manage personal settings](./settings.md): For your account, you can set personal
   settings for repositories, including default repository privacy and autobuild
