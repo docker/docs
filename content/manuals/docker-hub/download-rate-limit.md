@@ -109,8 +109,8 @@ both individuals and organizations:
    - Routinely [view Docker Hub usage](#view-docker-hub-usage) to monitor usage.
    - [Enforce sign-in](/security/for-admins/enforce-sign-in/) to ensure that you
      can monitor the usage of your users and users receive higher usage limits.
-  - Look for duplicate user accounts in Docker and remove accounts from your organization
-  as needed.
+   - Look for duplicate user accounts in Docker and remove accounts from your organization
+   as needed.
 
 ## Storage and repository limits
 
