@@ -38,9 +38,17 @@ usage](../admin/organization/manage-products.md#view-docker-product-usage).
 
 ## Add Docker Build Cloud minutes
 
-You can pre-purchase build minutes by [contacting
-sales](https://www.docker.com/pricing/contact-sales/). There is no overage or
-on-demand option available.
+You can pre-purchase Docker Build Cloud minutes in Docker Build Cloud:
+
+1. Sign in to the [Docker Billing Console](https://app.docker.com/billing).
+2. On the plans and usage page, select **View build minutes**.
+    This will launch the Docker Build Cloud settings page.
+3. Select **Add minutes**.
+4. Select your additional minute amount, then **Continue to payment**.
+5. Enter your payment details and billing address.
+6. Review your order and select **Pay**.
+
+Your additional minutes will now display on the Build minutes page.
 
 ## Add Docker Testcontainers Cloud runtime minutes
 

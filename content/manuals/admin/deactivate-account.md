@@ -1,5 +1,5 @@
 ---
-title: Deactivating an organization
+title: Deactivate an organization
 description: Learn how to deactivate a Docker organization.
 keywords: Docker Hub, delete, deactivate organization, account, organization management
 aliases:
