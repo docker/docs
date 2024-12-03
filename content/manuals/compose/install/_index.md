@@ -43,20 +43,21 @@ If you have already installed Docker Desktop, you can check which version of Com
 > ```
 > Or enable [Automatically check configuration](/manuals/desktop/settings-and-maintenance/settings.md) which will detect and fix it for you.
 
-### Scenario two: Install the Compose plugin
-
-If you already have Docker Engine and Docker CLI installed, you can install the Compose plugin from the command line, by either:
-- [Using Docker's repository](linux.md#install-using-the-repository)
-- [Downloading and installing manually](linux.md#install-the-plugin-manually)
+### Scenario two: Install the Docker Compose plugin
 
 > [!IMPORTANT]
 >
->This is only available on Linux
+> This is only available on Linux
 
-### Scenario three: Install the Compose standalone 
+If you already have Docker Engine and Docker CLI installed, you can install the Docker Compose plugin from the command line, by either:
+- [Using Docker's repository](linux.md#install-using-the-repository)
+- [Downloading and installing manually](linux.md#install-the-plugin-manually)
 
-You can [install the Compose standalone](standalone.md) on Linux or on Windows Server.
+### Scenario three: Install the Docker Compose standalone 
 
 > [!WARNING]
 >
->This install scenario is not recommended and is only supported for backward compatibility purposes.
+> This install scenario is not recommended and is only supported for backward compatibility purposes.
+
+You can [install the Docker Compose standalone](standalone.md) on Linux or on Windows Server.
+
