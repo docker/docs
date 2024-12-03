@@ -208,7 +208,7 @@ Besides the two files above you will also need a `.dockerignore` file. This file
 
 The last thing that may be necessary, but not always required is `compose.yml` file, used by Docker Compose to define the services that make up your application. Since we are using SQLite as the database, we don't need to define a separate service for the database, and the only service we need is the Rails application itself.
 
-```yaml {collapse=true,title=compose.yaml}
+```yaml {title=compose.yaml}
 services:
   web:
     build: .
@@ -218,23 +218,23 @@ services:
       - "3000:80"
 ```
 
-You should now have the following three files in your `docker-ruby-on-rails`
-directory.
+You should now have the following files in your application folder:
 
-- .dockerignore
-- compose.yaml
-- Dockerfile
+- `.dockerignore`
+- `compose.yaml`
+- `Dockerfile`
+- `bin/docker-entrypoint`
 
 To learn more about the files, see the following:
 
-- [Dockerfile](/reference/dockerfile.md)
-- [.dockerignore](/reference/dockerfile.md#dockerignore-file)
+- [Dockerfile](/reference/dockerfile)
+- [.dockerignore](/reference/dockerfile#dockerignore-file)
 - [compose.yaml](/reference/compose-file/_index.md)
+- [docker-entrypoint](/reference/dockerfile/#entrypoint)
 
 ## Run the application
 
-Inside the `docker-ruby-on-rails` directory, run the following command in a
-terminal.
+To run the application, run the following command in a terminal inside the application's directory.
 
 ```console
 $ docker compose up --build
