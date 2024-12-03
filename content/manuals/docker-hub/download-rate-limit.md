@@ -37,9 +37,11 @@ exhibiting excessive data and storage consumption.
 4. The usage page displays **Pulls** and **Storage** usage.
 5. Select a usage type and use the available filters to view usage.
 
-### Download Docker Hub usage
+### Download Docker Hub pulls usage
 
-You can download a CSV file of your or your organization's Docker Hub usage. To download the file:
+You can download a CSV file of your or your organization's Docker Hub pulls usage. You can't download a CSV file for storage usage.
+
+To download the pulls usage file:
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
 
@@ -88,7 +90,7 @@ both individuals and organizations:
      pipelines, may be causing higher pull rates, and configure them to avoid
      unnecessary image pulls.
 
-3. Optimize image pulls by doing the following:
+3. Optimize image pulls by:
 
    - Use caching: Implement local image caching via
      [mirroring](/docker-hub/mirror/) or within your CI/CD pipelines to reduce
@@ -96,9 +98,10 @@ both individuals and organizations:
    - Automate manual workflows: Avoid unnecessary pulls by configuring automated
      systems to pull only when a new version of an image is available.
 
-4. Optimize the your repositories by regularly auditing and removing
-   repositories with untagged, unused, or outdated images. Look for private repositories in
-   Hub storage that exceed your plan's limits.
+4. Optimize your storage by:
+
+    - Regularly audit and remove repositories with untagged, unused, or outdated images.
+    - Look for private repositories in Hub storage that exceed your plan's limits.
 
 5. Increase your limits by upgrading or purchasing additional consumption. For
    details, see [Scale your subscription](../subscription/scale.md).
@@ -150,8 +153,6 @@ A pull is defined as the following:
    manifest](https://github.com/opencontainers/image-spec/blob/main/manifest.md).
  - A pull for a multi-arch image will count as one pull for each
    different architecture.
- - Pulls are attributed to the user doing the pull, not to the owner of the
-   image.
 
 ### Pull attribution
 
@@ -305,15 +306,15 @@ Organization](https://www.docker.com/pricing) offerings.
 
 #### Other limits
 
-Docker Hub also has an overall rate limit to protect the application and
+Docker Hub also has an abuse rate limit to protect the application and
 infrastructure. This limit applies to all requests to Hub properties including
 web pages, APIs, and image pulls. The limit is applied per-IP, and while the
 limit changes over time depending on load and other factors, it's in the order
-of thousands of requests per minute. The overall rate limit applies to all users
+of thousands of requests per minute. The abuse limit applies to all users
 equally regardless of account level.
 
 You can differentiate between these limits by looking at the error code. The
-"overall limit" returns a simple `429 Too Many Requests` response. The pull
+"abuse limit" returns a simple `429 Too Many Requests` response. The pull
 limit returns a longer error message that includes a link to this page.
 
 ### How do I authenticate pulls?
