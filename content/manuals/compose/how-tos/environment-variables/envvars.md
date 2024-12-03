@@ -67,7 +67,7 @@ See also the [command-line options overview](/reference/cli/docker/compose/_inde
 
 Specifies the path to a Compose file. Specifying multiple Compose files is supported.
 
-- Default behavior: If not provided, Compose looks for a file named `compose.yaml` or `docker-compose.yaml` in the current directory and, if not found, then Compose searches each parent directory recursively until a file by that name is found.
+- Default behavior: If not provided, Compose looks for a file named `compose.yaml` in the current directory and, if not found, then Compose searches each parent directory recursively until a file by that name is found.
 - When specifying multiple Compose files, the path separators are, by default, on:
    - Mac and Linux: `:` (colon)
    - Windows: `;` (semicolon)
@@ -89,7 +89,7 @@ Services with matching profiles are started as well as any services for which no
 For example, calling `docker compose up`with `COMPOSE_PROFILES=frontend` selects services with the 
 `frontend` profile as well as any services without a profile specified.
 
-If specifying multiple profiles, use a comma as separator.
+If specifying multiple profiles, use a comma as a separator.
 
 This following example enables all services matching both the `frontend` and `debug` profiles and services without a profile. 
 
@@ -127,11 +127,11 @@ When enabled, Compose doesn't try to detect orphaned containers for the project.
 
 ### COMPOSE\_REMOVE\_ORPHANS
 
-When enabled, Compose automatically removes orphaned containers when updating a service or stack. Orphaned containers are those that were created by a previous configuration but are no longer defined in the current `compose.yml` file.
+When enabled, Compose automatically removes orphaned containers when updating a service or stack. Orphaned containers are those that were created by a previous configuration but are no longer defined in the current `compose.yaml` file.
 
 - Supported values:
    - `true` or `1`, to enable automatic removal of orphaned containers
-   - `false` or `0`, to disable automatic removal. Compose displays a warning about orphaned containers instead
+   - `false` or `0`, to disable automatic removal. Compose displays a warning about orphaned containers instead.
 - Defaults to: `0`
 
 ### COMPOSE\_PARALLEL\_LIMIT

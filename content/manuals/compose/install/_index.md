@@ -47,7 +47,7 @@ If you have already installed Docker Desktop, you can check which version of Com
 
 > [!IMPORTANT]
 >
-> This is only available on Linux
+> This install scenario is only available on Linux.
 
 If you already have Docker Engine and Docker CLI installed, you can install the Docker Compose plugin from the command line, by either:
 - [Using Docker's repository](linux.md#install-using-the-repository)
