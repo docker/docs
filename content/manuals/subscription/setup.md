@@ -21,6 +21,6 @@ To upgrade from Docker Personal to Docker Pro, see [Upgrade your subscription](.
 
 You can subscribe a new or existing organization to a Docker plan. Only organization owners can manage billing for the organization.
 
-After you [create your Docker ID](../accounts/create-account.md), you have a Docker Personal plan. You must then create an organization and choose a subscription for it. For more details, see [Create your organization](../admin/organization/orgs.md)
+After you [create your Docker ID](../accounts/create-account.md), you have a Docker Personal plan. You must then create an organization and choose a subscription for it. For more details, see [Create your organization](../admin/organization/orgs.md).
 
 To learn how to upgrade a Docker subscription for an existing organization, see [Upgrade your subscription](./change.md#upgrade-your-subscription).

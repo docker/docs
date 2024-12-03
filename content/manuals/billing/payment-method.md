@@ -42,8 +42,8 @@ To add a payment method:
 2. Select **Payment methods** from the left-hand menu.
 3. Select **Add payment method**.
 4. Enter your new payment information.
-5. Optional. Select the **Use as default payment method** checkbox.
-6. Select **Add**.
+5. Select **Add**.
+6. Optional. You can set a new default payment method by selecting the **Set as default** action.
 7. Optional. You can remove non-default payment methods by selecting the **Delete** action.
 
 {{< /tab >}}
@@ -79,8 +79,8 @@ To add a payment method:
 3. Select **Payment methods** from the left-hand menu.
 4. Select **Add payment method**.
 5. Enter your new payment information.
-6. Optional. Select the **Use as default payment method** checkbox.
-7. Select **Add**.
+6. Select **Add**.
+7. Optional. You can set a new default payment method by selecting the **Set as default** action.
 8. Optional. You can remove non-default payment methods by selecting the **Delete** action.
 
 {{< /tab >}}
