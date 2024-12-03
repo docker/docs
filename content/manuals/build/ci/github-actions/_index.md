@@ -1,5 +1,5 @@
 ---
-title: Introduction to GitHub Actions
+title: Docker Build GitHub Actions
 linkTitle: GitHub Actions
 description: Docker maintains a set of official GitHub Actions for building Docker images.
 keywords: ci, github actions, gha,  build, introduction, tutorial
