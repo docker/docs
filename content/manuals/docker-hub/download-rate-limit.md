@@ -186,6 +186,8 @@ more information, see [How do I authenticate pull
 requests](#how-do-i-authenticate-pull-requests). Unauthenticated (anonymous)
 users will have the limits enforced via IP.
 
+Pull limit refers to the total number of image pulls allowed within a specific time frame. For example, a Business plan has a total pull limit of 1M pulls per month.
+
 The pull limit is calculated on a per month basis and only applies to
 Docker Pro, Docker Team, and Docker Business users. The limit automatically
 scales on-demand, but on-demand rates do apply. You can [scale your
@@ -202,6 +204,8 @@ a higher limit.
 | Unauthenticated users    | Not applicable       |
 
 ### Pull rate limit
+
+Pull rate limit refers to the frequency of image pulls per unit of time, specifying how quickly you can pull images within a specific time.
 
 The pull rate limit is calculated on a per hour basis. There is no
 pull rate limit for users or automated systems with a paid subscription.
