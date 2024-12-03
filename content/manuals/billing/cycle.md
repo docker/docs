@@ -31,12 +31,10 @@ When you change the billing cycle's duration:
 To change your billing cycle:
 
 1. Sign in to the [Docker Billing Console](https://app.docker.com/billing).
-2. Select the **Actions icon** to open the switch to Annual page.
-3. Select the **Annual** option and review your billing information.
-4. Optional. If needed, select **Change** to update your billing information.
+2. On the plans and usage page, select **Switch to annual billing**.
+3. Verify your billing information.
 5. Select **Continue to payment**.
-6. Confirm or **Change** your payment method.
-7. Review your new plan details on the right-hand side of the page, and select **Update subscription**.
+6. Verify payment information and select **Upgrade subscription**.
 
 The Billing Console's plans and usage page will now reflect your new annual plan details.
 
@@ -66,12 +64,10 @@ To change your billing cycle:
 To change your organization's billing cycle:
 
 1. Sign in to the [Docker Billing Console](https://app.docker.com/billing).
-2. Select the **Actions icon** to open the switch to Annual page.
-3. Select the **Annual** option and review your billing information.
-4. Optional. If needed, select **Change** to update your billing information.
+2. On the plans and usage page, select **Switch to annual billing**.
+3. Verify your billing information.
 5. Select **Continue to payment**.
-6. Confirm or **Change** your payment method.
-7. Review your new plan details on the right-hand side of the page, and select **Update subscription**.
+6. Verify payment information and select **Upgrade subscription**.
 
 {{< /tab >}}
 {{< tab name="Legacy Docker subscription" >}}
