@@ -68,7 +68,7 @@ To add or update your VAT number:
 2. Select **Billing information** from the left-hand menu.
 3. Select **Change** on your billing information card.
 4. Ensure the **I'm purchasing as a business** checkbox is checked.
-5. In the Tax ID section, select the **ID type** and enter your VAT number.
+5. Enter your VAT number in the Tax ID section.
 6. Select **Update**.
 
 Your VAT number will be included on your next invoice.
@@ -82,7 +82,7 @@ To add or update your VAT number:
 2. For user accounts, Select your avatar in the top-right corner, then **Billing**. For organizations, select the name of the organization.
 3. Select the **Billing address** link.
 4. In the **Billing Information** section, select **Update information**.
-5. In the Tax ID section, select the **ID type** and enter your VAT number.
+5. Enter your VAT number in the Tax ID section.
 6. Select **Save**.
 
 Your VAT number will be included on your next invoice.
@@ -103,7 +103,7 @@ To view billing history:
 
 1. Sign in to the [Docker Billing Console](https://app.docker.com/billing).
 2. Select **Invoices** from the left-hand menu.
-3. Optional. Select the **date link** to open invoice details.
+3. Optional. Select the **invoice number** to open invoice details.
 4. Optional. Select the **download** button to download an invoice.
 
 {{< /tab >}}
@@ -135,7 +135,7 @@ To view billing history:
 
 1. Sign in to the [Docker Billing Console](https://app.docker.com/billing).
 2. Select **Invoices** from the left-hand menu.
-3. Optional. Select the **date link** to open invoice details.
+3. Optional. Select the **invoice number** to open invoice details.
 4. Optional. Select the **download** button to download an invoice.
 
 {{< /tab >}}
