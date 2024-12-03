@@ -7,11 +7,16 @@ toc_max: 3
 weight: 35
 ---
 
-You can archive a repository to avoid using outdated or unsupported images in
-your workflow. Docker Hub helps you identify outdated repositories that haven't
-been updated in over a year by displaying an icon ({{< inline-image
-src="./images/outdated-icon.webp" alt="outdated icon" >}}) next to the
-repositories on the [**Repositories** page](https://hub.docker.com/repositories/).
+You can archive a repository on Docker Hub to mark it as read-only and indicate
+that it's no longer actively maintained. This helps prevent the use of outdated
+or unsupported images in workflows. Archived repositories can also be unarchived
+if needed.
+
+Docker Hub highlights repositories that haven't been updated in over a year by
+displaying an icon ({{< inline-image src="./images/outdated-icon.webp"
+alt="outdated icon" >}}) next to them on the [**Repositories**
+page](https://hub.docker.com/repositories/). Consider reviewing these
+highlighted repositories and archiving them if necessary.
 
 When a repository is archived, the following occurs:
 
