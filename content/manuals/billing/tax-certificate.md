@@ -22,10 +22,10 @@ Before you submit your tax exemption certificate, ensure the following.
 
 You can use the following for Docker's contact information on your tax exemption certificate.
 
-Docker, Inc.
-3790 El Camino Real #1052
-Palo Alto, CA 94306
-(415) 941-0376
+Docker, Inc.  
+3790 El Camino Real #1052  
+Palo Alto, CA 94306  
+(415) 941-0376  
 
 ## Register a tax certificate
 

@@ -43,8 +43,6 @@ A Docker subscription includes licensing for commercial use of Docker components
 including Docker Desktop, Docker Hub, Docker Build Cloud, Docker Scout, and
 Testcontainers Cloud.
 
-Use the resources here to decide what subscription you need, manage an existing subscription, or explore additional products like Docker Scout or Docker Build Cloud.
-
 Use the resources here to decide what subscription you need, or manage an existing subscription.
 
 {{< grid items="grid_subscriptions" >}}

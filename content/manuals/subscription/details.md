@@ -28,9 +28,9 @@ Docker subscription or legacy Docker subscription.
 > [!NOTE]
 >
 > Legacy plans apply to Docker subscribers who last purchased or renewed
-> their subscription before November 15th, 2024. These subscribers will keep
+> their subscription before December 10, 2024. These subscribers will keep
 > their current plan and pricing until their next renewal date that falls on or
-> after November 15, 2024. To see purchase or renewal history, view your
+> after December 10, 2024. To see purchase or renewal history, view your
 > [billing history](../billing/history.md). For more details about legacy
 > subscriptions, see [Announcing Upgraded Docker
 > Plans](https://www.docker.com/blog/november-2024-updated-plans-announcement/).
@@ -165,10 +165,10 @@ managed by a dedicated Docker account manager.
 
 > [!IMPORTANT]
 >
-> As of November 15th, 2024, Docker Core, Docker Build Cloud, and Docker Scout
+> As of December 10, 2024, Docker Core, Docker Build Cloud, and Docker Scout
 > subscription plans are no longer available and have been replaced by consolidated
 > plans that provide access to all tools. If you subscribed or renewed
-> your subscriptions before November 15th, 2024, your legacy Docker
+> your subscriptions before December 10, 2024, your legacy Docker
 > plans still apply to your account until you renew. For more details,
 > see [Announcing Upgraded Docker
 > Plans](https://www.docker.com/blog/november-2024-updated-plans-announcement/).
@@ -297,10 +297,9 @@ Scout.
 
 > [!IMPORTANT]
 >
-> As of November 15th, 2024, Docker Scout subscriptions are no longer available
+> As of December 10, 2024, Docker Scout subscriptions are no longer available
 > and have been replaced by consolidated subscriptions that provide access to
-> all tools. If you subscribed or renewed your subscriptions before November
-> 15th, 2024, your legacy Docker subscriptions still apply to your account until
+> all tools. If you subscribed or renewed your subscriptions before December 10, 2024, your legacy Docker subscriptions still apply to your account until
 > you renew. For more details, see [Announcing Upgraded Docker
 > Plans](https://www.docker.com/blog/november-2024-updated-plans-announcement/).
 
@@ -351,9 +350,9 @@ For a list of features available in each tier, see [Docker Pricing](https://www.
 
 > [!IMPORTANT]
 >
-> As of November 15th, 2024, Docker Build Cloud is only available with the
+> As of December 10, 2024, Docker Build Cloud is only available with the
 > new Docker Pro, Team, and Business plans. When your plan renews on or after
-> November 15, 2024, you will see an increase in your included Build Cloud
+> December 10, 2024, you will see an increase in your included Build Cloud
 > minutes each month. For more details, see [Announcing Upgraded Docker
 > Plans](https://www.docker.com/blog/november-2024-updated-plans-announcement/).
 
@@ -413,4 +412,4 @@ a new consolidated plan, your plan includes the following changes:
 
 ## Support for subscriptions
 
-All Docker Pro, Team, and Business subscribers receive email support for their subscriptions. Additional premium support is available for Docker Business customers. [Contact sales](https://www.docker.com/pricing/contact-sales/) for more information about premium support programs.
+All Docker Pro, Team, and Business subscribers receive email support for their subscriptions.
