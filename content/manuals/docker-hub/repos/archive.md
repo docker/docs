@@ -1,7 +1,7 @@
 ---
-description: Learn how to archive or activate a repository on Docker Hub
-keywords: Docker Hub, Hub, repositories, archive, activate
-title: Archive or activate a repository
+description: Learn how to archive or unarchive a repository on Docker Hub
+keywords: Docker Hub, Hub, repositories, archive, unarchive
+title: Archive or unarchive a repository
 linkTitle: Archive
 toc_max: 3
 weight: 35
@@ -25,8 +25,8 @@ When a repository is archived, the following occurs:
 - An **Archived** label is displayed on the public repository page.
 - Users can still pull the images.
 
-You can activate an archived repository to remove the archived state. When
-activated, the following occurs:
+You can unarchive an archived repository to remove the archived state. When
+unarchived, the following occurs:
 
 - The repository information can be modified.
 - New images can be pushed to the repository.
@@ -48,7 +48,7 @@ activated, the following occurs:
 6. Enter the name of your repository to confirm.
 7. Select **Archive**.
 
-## Activate an archived repository
+## Unarchive a repository
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
 2. Select **Repositories**.
@@ -60,4 +60,4 @@ activated, the following occurs:
    The **General** page for the repository appears.
 
 4. Select the **Settings** tab.
-5. Select **Activate image**.
+5. Select **Unarchive repository**.

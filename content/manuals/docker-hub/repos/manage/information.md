@@ -12,11 +12,9 @@ Each repository can include a description, an overview, and categories to help
 users understand its purpose and usage. Adding clear repository information
 ensures that others can find your images and use them effectively.
 
-You can only modify the repository information of active repositories. If a
-repository is archived, you must activate it to modify the information. For more
-details, see [Activate an archived
-repository](../archive.md#activate-an-archived-repository).
-
+You can only modify the repository information of repositories that aren't
+achived. If a repository is archived, you must unarchive it to modify the
+information. For more details, see [Unarchive a repository](../archive.md#unarchive-a-repository).
 
 ## Repository description
 

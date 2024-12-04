@@ -124,6 +124,7 @@ Zsh
 [Ss]warm
 [Ss]ysfs
 [Tt]oolchains?
+[Uu]narchived?
 [Vv]irtiofs
 [Vv]irtualize
 [Ww]alkthrough
@@ -165,7 +166,6 @@ stdout
 subnet
 systemd
 tmpfs
-unarchived?
 ufw
 umask
 ungated
