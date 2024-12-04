@@ -113,6 +113,7 @@ Zsh
 [Nn]amespace
 [Oo]nboarding
 [Pp]aravirtualization
+[Pp]repend
 [Pp]rocfs
 [Pp]roxied
 [Pp]roxying
