@@ -5,8 +5,8 @@ weight: 60
 keywords: C++, containerize, multi-stage
 description: Learn how to create a multi-stage build for a C++ application.
 aliases:
-- /language/cpp/containerize/
-- /guides/language/cpp/containerize/
+- /language/cpp/multistage/
+- /guides/language/cpp/multistage/
 ---
 
 ## Prerequisites
