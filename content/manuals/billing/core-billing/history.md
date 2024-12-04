@@ -44,11 +44,15 @@ You receive your invoice when the subscription renews. To verify your renewal da
 
 ### Include your VAT number on your invoice
 
+> [!NOTE]
+>
+> If the VAT number field is not available, complete the [Contact Support form](https://hub.docker.com/support/contact/). This field may need to be manually added.
+
 Update your billing information to include your VAT number:
 
 1. Sign in to Docker Hub.
 2. For user accounts, Select your avatar in the top-right corner, then **Billing**. For organizations, select the name of the organization.
-3. Select the **Payment methods and billing history** link.
+3. Select the **Billing address** link.
 4. In the **Billing Information** section, select **Update information**.
 5. In the **Tax ID** section, select the ID type and enter your VAT number.
 6. Select **Save**.
