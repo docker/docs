@@ -45,7 +45,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 - [Docker Buildx v0.18.0](https://github.com/docker/buildx/releases/tag/v0.18.0)
 - [Docker Compose v2.30.3](https://github.com/docker/compose/releases/tag/v2.30.3)
-- [Kubernetes v1.30.2](https://github.com/kubernetes/kubernetes/releases/tag/v1.30.5)
+- [Kubernetes v1.30.5](https://github.com/kubernetes/kubernetes/releases/tag/v1.30.5)
 - [NVIDIA Container Toolkit v1.17.0](https://github.com/NVIDIA/nvidia-container-toolkit/releases/tag/v1.17.0)
 - [Docker Scout CLI v1.15.0](https://github.com/docker/scout-cli/releases/tag/v1.15.0)
 - Docker Init v1.4.0
