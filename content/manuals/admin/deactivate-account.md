@@ -25,6 +25,8 @@ Before deactivating an organization, complete the following:
 
 - Unlink your [Github and Bitbucket accounts](../docker-hub/repos/manage/builds/link-source.md#unlink-a-github-user-account).
 
+- For Business organizations, [remove your SSO connection](../security/for-admins/single-sign-on/manage/#remove-an-organization).
+
 ## Deactivate
 
 Once you have completed all the previous steps, you can deactivate your organization.
