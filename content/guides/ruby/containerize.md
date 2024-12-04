@@ -212,8 +212,8 @@ The last thing that may be necessary, but not always required is `compose.yml` f
 services:
   web:
     build: .
-    volumes:
-      - .:/myapp
+    environment:
+      - RAILS_MASTER_KEY
     ports:
       - "3000:80"
 ```
@@ -237,7 +237,7 @@ To learn more about the files, see the following:
 To run the application, run the following command in a terminal inside the application's directory.
 
 ```console
-$ docker compose up --build
+$ RAILS_MASTER_KEY=<master_key_value> docker compose up --build
 ```
 
 Open a browser and view the application at [http://localhost:3000](http://localhost:3000). You should see a simple Ruby on Rails application.
