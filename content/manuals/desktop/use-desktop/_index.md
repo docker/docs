@@ -65,3 +65,7 @@ To display the Docker menu, select the {{< inline-image src="../../assets/images
 - **Kubernetes**
 - **Restart**
 - **Quit Docker Desktop**
+
+> [!TIP]
+>
+> Use the Docker Desktop CLI to  start, stop, or restart Docker Desktop directly from the command line.
