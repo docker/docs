@@ -36,7 +36,7 @@ If you want to downgrade a Docker Business subscription and your organization us
 >
 >If you have a [sales-assisted Docker Business subscription](details.md#sales-assisted), contact your account manager to downgrade your subscription.
 
-1. Sign in to [Docker Home](https://app.docker.com).
+1. Sign in to [Docker Hub](https://hub.docker.com).
 
 2. Select your **avatar** and from the drop-down menu select **Billing**.
 
