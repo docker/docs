@@ -123,7 +123,6 @@ If you have multiple organizations that you want to merge into one, complete the
 > [!TIP]
 >
 > If your organization has a Docker Business subscription with a purchase order, contact Support or your Account Manager at Docker.
->
 
 ## More resources
 
