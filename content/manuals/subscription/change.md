@@ -84,6 +84,8 @@ To downgrade your Docker subscription:
 
 If you have a [sales-assisted Docker Business subscription](details.md#sales-assisted), contact your account manager to downgrade your subscription.
 
+### Downgrade Docker Core subscription
+
 To downgrade your legacy Docker subscription:
 
 1. Sign in to [Docker Hub Billing](https://hub.docker.com/billing).
@@ -91,6 +93,15 @@ To downgrade your legacy Docker subscription:
 3. Select the link to **Manage this account on Docker Hub**.
 4. In the plan section, select **Change plan**.
 5. Follow the on-screen instructions to complete your downgrade.
+
+### Downgrade Docker Build Cloud subscription
+
+To downgrade your Docker Build Cloud subscription:
+
+1. Sign in to [Docker Home](https://app.docker.com) and open **Docker Build Cloud**.
+2. Select **Account settings**, then **Downgrade**.
+3. To confirm your downgrade, type **DOWNGRADE** in the text field and select **Yes, continue**.
+4. The account settings page will update with a notification bar notifying you of your downgrade date (start of next billing cycle).
 
 {{< /tab >}}
 {{< /tabs >}}
