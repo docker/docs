@@ -185,7 +185,7 @@ If the user is part of multiple organizations under the company, the pull is att
 
 Rate limits apply to pull usage. A user's rate limit is equal to the highest entitlement of their personal account or any organization they belong to. To take advantage of this, you must sign in to [Docker Hub](https://hub.docker.com/) as an authenticated user. For
 more information, see [How do I authenticate pull
-requests](#how-do-i-authenticate-pull-requests). Unauthenticated (anonymous)
+requests](#how-do-i-authenticate-pulls). Unauthenticated (anonymous)
 users will have the limits enforced via IP.
 
 Pull limit refers to the total number of image pulls allowed within a specific time frame. For example, a Business plan has a total pull limit of 1M pulls per month.
