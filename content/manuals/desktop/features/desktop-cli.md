@@ -37,6 +37,6 @@ docker desktop COMMAND [OPTIONS]
 | `restart`            | Restarts Docker Desktop                  |
 | `status`             | Displays whether Docker Desktop is running or stopped.       |
 | `engine ls`          | Lists available engines (Windows only)   |
-| `engine use `        | Switch between Linux and Windows containers (Windows only) |
+| `engine use`        | Switch between Linux and Windows containers (Windows only) |
 
 For more details on each command, see the [Docker Desktop CLI reference](/reference/cli/docker/desktop/_index.md).
