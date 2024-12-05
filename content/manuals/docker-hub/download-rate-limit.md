@@ -140,6 +140,8 @@ charged at an on-demand rate. You can [scale your
 limit](../subscription/scale.md) or [upgrade](../subscription/change.md) to get
 a higher limit.
 
+For more information on how Docker Hub storage pricing is calculated, see the [Docker Hub storage pricing](/manuals/billing/docker-hub-pricing.md) guide.
+
 ## Pull limit and rate limit
 
 A pull is defined as the following:
