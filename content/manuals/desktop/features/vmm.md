@@ -8,7 +8,7 @@ params:
       text: New
 keywords: virtualization software, resource allocation, mac, docker desktop, vm monitoring, vm performance, apple silicon
 description: Discover Docker Desktop for Mac's Virtual Machine Manager (VMM) options, including the new Docker VMM for Apple Silicon, offering enhanced performance and efficiency
-weight: 90
+weight: 110
 aliases:
 - /desktop/vmm/
 ---
