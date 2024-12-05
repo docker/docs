@@ -36,13 +36,18 @@ The metrics endpoint exposes the following metrics:
 
 ## Creating an access token
 
-To export metrics from your organization, first make sure your organization is enrolled in Docker Scout.
-Then, create a Personal Access Token (PAT) - a secret token that allows the exporter to authenticate with the Docker Scout API.
+To export metrics from your organization, first make sure your organization is
+enrolled in Docker Scout. Then, create either an organization access token or a
+personal access token. These tokens are used to authenticate to Docker Scout.
 
-The PAT does not require any specific permissions, but it must be created by a user who is an owner of the Docker organization.
-To create a PAT, follow the steps in [Create an access token](/security/for-developers/access-tokens/#create-an-access-token).
+The access token does not require any specific permissions, but if you choose
+to use a personal access token, it must be created by a user who is an owner of
+the Docker organization.
 
-Once you have created the PAT, store it in a secure location.
+For instructions on how to create an access token, follow the steps in [Create
+an access token](/security/for-developers/access-tokens/#create-an-access-token).
+
+Once you have created the access token, store it in a secure location.
 You will need to provide this token to the exporter when scraping metrics.
 
 ## Prometheus
@@ -70,11 +75,11 @@ Make sure that there's no firewall rule in place preventing the server from comm
 
 ### Add bearer token authentication
 
-To scrape metrics from the Docker Scout Exporter endpoint using Prometheus, you need to configure Prometheus to use the PAT as a bearer token.
-The exporter requires the PAT to be passed in the `Authorization` header of the request.
+To scrape metrics from the Docker Scout Exporter endpoint using Prometheus, you need to configure Prometheus to use the Docker access token as a bearer token.
+The exporter requires the access token to be passed in the `Authorization` header of the request.
 
 Update the Prometheus configuration file to include the `authorization` configuration block.
-This block defines the PAT as a bearer token stored in a file:
+This block defines the access token as a bearer token stored in a file:
 
 ```yaml
 scrape_configs:
@@ -84,10 +89,10 @@ scrape_configs:
       credentials_file: /etc/prometheus/token
 ```
 
-The content of the file should be the PAT in plain text:
+The content of the file should be the access token in plain text:
 
 ```console
-dckr_pat_...
+dckr_oat_...
 ```
 
 If you are running Prometheus in a Docker container or Kubernetes pod, mount the file into the container using a volume or secret.
@@ -112,7 +117,7 @@ alongside Grafana with a pre-configured dashboard to visualize the vulnerability
    and store it in a plain text file at `/prometheus/prometheus/token` under the template directory.
 
    ```plaintext {title=token}
-   $ echo $DOCKER_PAT > ./prometheus/token
+   $ echo $DOCKER_TOKEN > ./prometheus/token
    ```
 
 3. In the Prometheus configuration file at `/prometheus/prometheus/prometheus.yml`,
@@ -245,7 +250,7 @@ and a Datadog site.
    and store it in a plain text file at `/datadog/token` under the template directory.
 
    ```plaintext {title=token}
-   $ echo $DOCKER_PAT > ./token
+   $ echo $DOCKER_TOKEN > ./token
    ```
 
 3. In the `/datadog/compose.yaml` file, update the `DD_API_KEY` and `DD_SITE` environment variables
@@ -346,8 +351,8 @@ To change the scrape interval:
 
 ## Revoke an access token
 
-If you suspect that your PAT has been compromised or is no longer needed, you can revoke it at any time.
-To revoke a PAT, follow the steps in the [Create and manage access tokens](/security/for-developers/access-tokens/#modify-existing-tokens).
+If you suspect that your access token has been compromised or is no longer needed, you can revoke it at any time.
+To revoke an access token, follow the steps in the [Create and manage access tokens](/security/for-developers/access-tokens/#modify-existing-tokens).
 
-Revoking a PAT immediately invalidates the token, and prevents Prometheus from scraping metrics using that token.
-You will need to create a new PAT and update the Prometheus configuration to use the new token.
+Revoking an access token immediately invalidates the token, and prevents Prometheus from scraping metrics using that token.
+You will need to create a new access token and update the Prometheus configuration to use the new token.

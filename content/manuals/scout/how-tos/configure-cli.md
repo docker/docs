@@ -18,9 +18,9 @@ CLI commands, and the corresponding `docker/scout-cli` container image:
 | DOCKER_SCOUT_OFFLINE                    | Boolean | Use [offline mode](#offline-mode) when indexing SBOM                                        |
 | DOCKER_SCOUT_REGISTRY_TOKEN             | String  | Token for authenticating to a registry when pulling images                                  |
 | DOCKER_SCOUT_REGISTRY_USER              | String  | Username for authenticating to a registry when pulling images                               |
-| DOCKER_SCOUT_REGISTRY_PASSWORD          | String  | Password or personal access token for authenticating to a registry when pulling images      |
+| DOCKER_SCOUT_REGISTRY_PASSWORD          | String  | Password or access token for authenticating to a registry when pulling images               |
 | DOCKER_SCOUT_HUB_USER                   | String  | Docker Hub username for authenticating to the Docker Scout backend                          |
-| DOCKER_SCOUT_HUB_PASSWORD               | String  | Docker Hub password or personal access token for authenticating to the Docker Scout backend |
+| DOCKER_SCOUT_HUB_PASSWORD               | String  | Docker Hub password or access token for authenticating to the Docker Scout backend          |
 | DOCKER_SCOUT_NEW_VERSION_WARN           | Boolean | Warn about new versions of the Docker Scout CLI                                             |
 | DOCKER_SCOUT_EXPERIMENTAL_WARN          | Boolean | Warn about experimental features                                                            |
 | DOCKER_SCOUT_EXPERIMENTAL_POLICY_OUTPUT | Boolean | Disable experimental output for policy evaluation                                           |

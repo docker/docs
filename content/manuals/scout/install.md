@@ -115,8 +115,8 @@ Use the `docker/scout-cli` to run `docker scout` commands without installing the
 
 ```console
 $ docker run -it \
-  -e DOCKER_SCOUT_HUB_USER=<your Docker Hub user name> \
-  -e DOCKER_SCOUT_HUB_PASSWORD=<your Docker Hub PAT>  \
+  -e DOCKER_SCOUT_HUB_USER=<your-docker-username> \
+  -e DOCKER_SCOUT_HUB_PASSWORD=<your-docker-token>  \
   docker/scout-cli <command>
 ```
 

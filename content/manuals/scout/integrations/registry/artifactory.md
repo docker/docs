@@ -90,12 +90,18 @@ The configuration file includes the following properties:
 | --------------------------- | ------------------------------------------------------------------------------- |
 | `agent_id`                  | Unique identifier for the agent.                                                |
 | `docker.organization_name`  | Name of the Docker organization.                                                |
-| `docker.username`           | Username of the admin user in the Docker organization.                          |
-| `docker.pat`                | Personal access token of the admin user with read and write permissions.        |
+| `docker.username`           | Docker organization, or the username of a Docker organization owner.            |
+| `docker.pat`                | Docker access token. [^1]                                                       |
 | `artifactory.base_url`      | Base URL of the Artifactory instance.                                           |
 | `artifactory.username`      | Username of the Artifactory user with read permissions that the agent will use. |
 | `artifactory.password`      | Password or API token for the Artifactory user.                                 |
 | `artifactory.image_filters` | Optional: List of repositories and images to analyze.                           |
+
+[^1]:
+    If you specify a Docker organization as `docker.username`, you must use an
+    organization access token for `docker.pat`. If `docker.username` refers to
+    the username of an organization owner, `docker.pat` must be a personal
+    access token created for that user.
 
 If you don't specify any repositories in `artifactory.image_filters`, the agent
 runs image analysis on all images in your Artifactory instance.
