@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 # check=skip=InvalidBaseImagePlatform
 
-ARG ALPINE_VERSION=3.20
+ARG ALPINE_VERSION=3.21
 ARG GO_VERSION=1.23
 ARG HTMLTEST_VERSION=0.17.0
 ARG HUGO_VERSION=0.139.0
@@ -9,7 +9,7 @@ ARG NODE_VERSION=22
 ARG PAGEFIND_VERSION=1.1.1
 
 # base defines the generic base stage
-FROM golang:${GO_VERSION}-alpine${ALPINE_VERSION} AS base
+FROM golang:${GO_VERSION}-alpine AS base
 RUN apk add --no-cache \
     git \
     nodejs \
