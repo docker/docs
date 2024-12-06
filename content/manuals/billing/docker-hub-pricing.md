@@ -53,7 +53,7 @@ at the end of your billing cycle.
 
 If you pre-pay for storage, your purchased storage is valid for the entire subscription period. You can use it any time during that period, and any unused portion will roll over to the next month until the subscription period ends.
 
-In the following example, a customer with a Business plan pre-pays for 500GB of storage for the year. Their plan includes a base allocation of 500GB of storage per month.
+In the following example, a customer with an annual Business plan pre-pays for 500GB of storage for the year. Their plan includes a base allocation of 500GB of storage per month.
 - In January, they use 510 GB-month, exceed their base allocation, and use 10GB from their pre-paid storage. Their remaining pre-paid
 storage is 490GB.
 - In February, they use 450 GB-month, and do not exceed their base allocation. They do not use any of their pre-paid storage, so it remains at 490GB.
