@@ -114,7 +114,7 @@ params:
   buildkit_version: "0.16.0"
 
   example_go_version: "1.23"
-  example_alpine_version: "3.20"
+  example_alpine_version: "3.21"
   example_node_version: "20"
 
   min_version_thresholds:
