@@ -49,6 +49,25 @@ There are two billing models for paying for additional Docker Hub storage:
 - Post-pay: Receive an overage invoice for storage usage that exceeds your subscription plan's included amount
 at the end of your billing cycle.
 
+### Storage carryover
+
+If you pre-pay for storage, your purchased storage is valid for the entire subscription period. You can use it any time during that period, and any unused portion will roll over to the next month until the subscription period ends.
+
+In the following example, a customer with a Business plan pre-pays for 500GB of storage for the year. Their plan includes a base allocation of 500GB of storage per month.
+- In January, they use 510 GB-month, exceed their base allocation, and use 10GB from their pre-paid storage. Their remaining pre-paid
+storage is 490GB.
+- In February, they use 450 GB-month, and do not exceed their base allocation. They do not use any of their pre-paid storage, so it remains at 490GB.
+- In March, they use 600 GB-month, exceed their base allocation, and use 100GB from their pre-paid storage. Their remaining pre-paid storage is 390GB.
+
+|                                 | January  | February | March   |
+|---------------------------------|----------|----------|---------|
+| Included GB-month	              | 500	     | 500      | 500     |
+| Used storage in month	          | 510	     | 450	    | 600     |
+| Overage in GB-month	          | 10	     | 0	    | 100     |
+| Remaining pre-purchased storage |	490	     | 490	    | 390     |
+
+At the end of March, the customer has 390GB of pre-purchased storage left to use for the rest of the year.
+
 ## Examples
 
 ### Business plan with pre-pay
@@ -57,7 +76,7 @@ In the following example, a customer with a Business plan has 500GB included in 
 for 1700 GB.
 - In January, they use 100 GB-month, meaning they did not use any of their pre-pay storage. Their pre-pay storage rolls over to the next month.
 - In February, they use 650 GB-month, exceed their base allocation, and use 150GB from their pre-pay storage.
-- In March, they use 1800 GB-month, exceed their base allocation, and use 1300GBs from their pre-pay storage.
+- In March, they use 1800 GB-month, exceed their base allocation, and use 1300GB from their pre-pay storage.
 - In April, they use 950 GB-month, exceed their base allocation, and going over their pre-pay storage. This results in an invoice of $14.00 for the storage overage.
 
 |                          | January | February | March | April  |
@@ -82,11 +101,11 @@ an overage invoice for $91.00.
 - In April, they use 950 GB-month, going over their base allocation by 450 GB-month. They are sent an
 overage invoice for $31.50.
 
-| Metric                            | January | February | March  | April  |
-|-----------------------------------|---------|----------|--------|--------|
-| Included GB-month                 | 500     | 500      | 500    | 500    |
-| Used storage in month             | 100     | 650      | 1800   | 950    |
-| Overage in GB-month               | 0       | 150      | 1300   | 450    |
-| Overage invoice                   | $0.00   | $10.50   | $91.00 | $31.50 |
+|                                   | January | February | March   | April  |
+|-----------------------------------|---------|----------|---------|--------|
+| Included GB-month                 | 500     | 500      | 500     | 500    |
+| Used storage in month             | 100     | 650      | 1800    | 950    |
+| Overage in GB-month               | 0       | 150      | 1300    | 450    |
+| Overage invoice                   | $0.00   | $10.50   | $130.00 | $45.00 |
 
 For information on storage pricing, see the [Docker Pricing](https://www.docker.com/pricing/) page.
