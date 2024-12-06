@@ -26,7 +26,7 @@ When you change the billing cycle's duration:
 ## Personal account
 
 {{< tabs >}}
-{{< tab name="Docker subscription" >}}
+{{< tab name="Docker subscription plan" >}}
 
 To change your billing cycle:
 
@@ -39,7 +39,7 @@ To change your billing cycle:
 The Billing Console's plans and usage page will now reflect your new annual plan details.
 
 {{< /tab >}}
-{{< tab name="Legacy Docker subscription" >}}
+{{< tab name="Legacy Docker plan" >}}
 
 To change your billing cycle:
 
@@ -59,7 +59,7 @@ To change your billing cycle:
 > You must be an organization owner to make changes to the payment information.
 
 {{< tabs >}}
-{{< tab name="Docker subscription" >}}
+{{< tab name="Docker subscription plan" >}}
 
 To change your organization's billing cycle:
 
@@ -70,7 +70,7 @@ To change your organization's billing cycle:
 5. Verify payment information and select **Upgrade subscription**.
 
 {{< /tab >}}
-{{< tab name="Legacy Docker subscription" >}}
+{{< tab name="Legacy Docker plan" >}}
 
 To change your organization's billing cycle:
 

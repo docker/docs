@@ -34,7 +34,7 @@ All currency, for example the amount listed on your billing invoice, is in Unite
 ### Personal account
 
 {{< tabs >}}
-{{< tab name="Docker subscription" >}}
+{{< tab name="Docker subscription plan" >}}
 
 To add a payment method:
 
@@ -47,7 +47,7 @@ To add a payment method:
 7. Optional. You can remove non-default payment methods by selecting the **Delete** action.
 
 {{< /tab >}}
-{{< tab name="Legacy Docker subscription" >}}
+{{< tab name="Legacy Docker plan" >}}
 
 To add a payment method:
 
@@ -70,7 +70,7 @@ To add a payment method:
 > You must be an organization owner to make changes to the payment information.
 
 {{< tabs >}}
-{{< tab name="Docker subscription" >}}
+{{< tab name="Docker subscription plan" >}}
 
 To add a payment method:
 
@@ -84,7 +84,7 @@ To add a payment method:
 8. Optional. You can remove non-default payment methods by selecting the **Delete** action.
 
 {{< /tab >}}
-{{< tab name="Legacy Docker subscription" >}}
+{{< tab name="Legacy Docker plan" >}}
 
 To add a payment method:
 

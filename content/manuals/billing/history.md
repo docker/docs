@@ -35,13 +35,13 @@ You can’t make changes to a paid or unpaid billing invoice. When you update yo
 ### View renewal date
 
 {{< tabs >}}
-{{< tab name="Docker subscription" >}}
+{{< tab name="Docker subscription plan" >}}
 
 You receive your invoice when the subscription renews. To verify your renewal date, sign in to the [Docker Billing Console](https://app.docker.com/billing). Your renewal date and amount are displayed on your subscription plan card.
 
 
 {{< /tab >}}
-{{< tab name="Legacy Docker subscription" >}}
+{{< tab name="Legacy Docker plan" >}}
 
 You receive your invoice when the subscription renews. To verify your renewal date:
 
@@ -60,7 +60,7 @@ You receive your invoice when the subscription renews. To verify your renewal da
 > If the VAT number field is not available, complete the [Contact Support form](https://hub.docker.com/support/contact/). This field may need to be manually added.
 
 {{< tabs >}}
-{{< tab name="Docker subscription" >}}
+{{< tab name="Docker subscription plan" >}}
 
 To add or update your VAT number:
 
@@ -74,7 +74,7 @@ To add or update your VAT number:
 Your VAT number will be included on your next invoice.
 
 {{< /tab >}}
-{{< tab name="Legacy Docker subscription" >}}
+{{< tab name="Legacy Docker plan" >}}
 
 To add or update your VAT number:
 
@@ -97,7 +97,7 @@ You can view the billing history and download past invoices for a personal accou
 ### Personal account
 
 {{< tabs >}}
-{{< tab name="Docker subscription" >}}
+{{< tab name="Docker subscription plan" >}}
 
 To view billing history:
 
@@ -107,7 +107,7 @@ To view billing history:
 4. Optional. Select the **download** button to download an invoice.
 
 {{< /tab >}}
-{{< tab name="Legacy Docker subscription" >}}
+{{< tab name="Legacy Docker plan" >}}
 
 To view billing history:
 
@@ -129,7 +129,7 @@ From here you can download an invoice.
 > You must be an owner of the organization to view the billing history.
 
 {{< tabs >}}
-{{< tab name="Docker subscription" >}}
+{{< tab name="Docker subscription plan" >}}
 
 To view billing history:
 
@@ -139,7 +139,7 @@ To view billing history:
 4. Optional. Select the **download** button to download an invoice.
 
 {{< /tab >}}
-{{< tab name="Legacy Docker subscription" >}}
+{{< tab name="Legacy Docker plan" >}}
 
 To view billing history:
 

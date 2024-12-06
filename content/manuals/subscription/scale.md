@@ -10,7 +10,7 @@ weight: 17
 > Owners of legacy Docker subscription plans must upgrade their subscription to a new
 > Docker subscription plan in order to scale their subscription.
 >
-> Legacy subscriptions apply to Docker subscribers who last purchased or renewed
+> Legacy Docker plans apply to Docker subscribers who last purchased or renewed
 > their subscription before December 10, 2024. These subscribers will keep
 > their current plan and pricing until their next renewal date that falls on or
 > after December 10, 2024. To see purchase or renewal history, view your

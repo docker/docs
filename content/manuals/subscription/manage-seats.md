@@ -22,7 +22,7 @@ When you add seats to your subscription in the middle of your billing cycle, you
 ## Add seats
 
 {{< tabs >}}
-{{< tab name="Docker subscription" >}}
+{{< tab name="Docker subscription plan" >}}
 
 > [!IMPORTANT]
 >
@@ -38,7 +38,7 @@ To add seats to your subscription:
 You can now add more members to your organization. For more information, see [Manage organization members](../admin/organization/members.md).
 
 {{< /tab >}}
-{{< tab name="Legacy Docker subscription" >}}
+{{< tab name="Legacy Docker plan" >}}
 
 > [!IMPORTANT]
 >
@@ -73,7 +73,7 @@ If you remove seats in the middle of the billing cycle, changes apply in the nex
 For example, if you receive your billing on the 8th of every month for 10 seats and you want to remove 2 seats on the 15th of the month, the 2 seats will be removed from your subscription the next month. Your payment for 8 seats begins on the next billing cycle. If you're on the annual subscription, the 2 seats are still available until the next year, and your payment for the 8 seats begins on the next billing cycle.
 
 {{< tabs >}}
-{{< tab name="Docker subscription" >}}
+{{< tab name="Docker subscription plan" >}}
 
 > [!IMPORTANT]
 >
@@ -89,7 +89,7 @@ To remove seats:
 You can cancel the removal of seats before your next billing cycle. To do so, select **Cancel change**.
 
 {{< /tab >}}
-{{< tab name="Legacy Docker subscription" >}}
+{{< tab name="Legacy Docker plan" >}}
 
 > [!IMPORTANT]
 >
