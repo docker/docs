@@ -63,6 +63,10 @@ When prompted for a password, enter your personal access token instead of a pass
 > use a personal access token when logging in from the Docker CLI. 2FA is an
 > optional, but more secure method of authentication.
 
+### Fair use
+
+When utilizing PATs, users should be aware that excessive creation of PATs could lead to throttling, or additional charges. To ensure fair resource usage and maintain service quality, Docker reserves the right to impose restrictions or apply additional charges to accounts exhibiting excessive use of PATs.
+
 ## Modify existing tokens
 
 > [!NOTE]

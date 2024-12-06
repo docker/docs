@@ -99,9 +99,9 @@ grid:
       - text: "Overview"
         url: "/subscription/"
       - text: "Subscriptions and features"
-        url: "/subscription/core-subscription/details/"
-      - text: "Upgrade"
-        url: "/subscription/core-subscription/upgrade/"
+        url: "/subscription/details/"
+      - text: "Change subscription"
+        url: "/subscription/change/"
   - title: Billing
     icon: payments
     description: |
@@ -110,9 +110,9 @@ grid:
       - text: "Overview"
         url: "/billing/"
       - text: "Update payment method"
-        url: "/billing/core-billing/payment-method/"
+        url: "/billing/payment-method/"
       - text: "View billing history"
-        url: "/billing/core-billing/history/"
+        url: "/billing/history/"
   - title: Administration
     icon: admin_panel_settings
     description: |
