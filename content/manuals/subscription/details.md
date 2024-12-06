@@ -43,7 +43,7 @@ features are in development, as well as request new capabilities.
 
 ## Docker Personal
 
-**Docker Personal** is ideal for open-source communities, individual developers,
+**Docker Personal** is ideal for open source communities, individual developers,
 education, and small businesses. It includes the free use of essential Docker
 tools as well as trials for powerful tools that'll level up your development loops.
 
