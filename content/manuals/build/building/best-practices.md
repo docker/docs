@@ -57,7 +57,7 @@ it small.
 
 - [Docker-Sponsored Open Source](https://hub.docker.com/search?image_filter=open_source)
   are published and maintained by open source projects sponsored by Docker
-  through an [open source program](../../trusted-content/dsos-program).
+  through an [open source program](../../docker-hub/image-library/trusted-content.md#docker-sponsored-open-source-software-images).
 
 When you pick your base image, look out for the badges indicating that the
 image is part of these programs.

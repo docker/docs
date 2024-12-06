@@ -1,9 +1,11 @@
 ---
-title: Contributing to Docker Official Images
+title: Docker Official Images
 description: |
   This article describes how Docker Official Images are created,
   and how you can contribute or leave feedback.
 keywords: docker official images, doi, contributing, upstream, open source
+aliases:
+- /trusted-content/official-images/contributing/
 ---
 
 Docker, Inc. sponsors a dedicated team that's responsible for reviewing and

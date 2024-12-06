@@ -11,6 +11,10 @@ grid:
   description: Step-by-step instructions on getting started on Docker Hub.
   icon: explore
   link: /docker-hub/quickstart
+- title: Library
+  description: Explore the container image library, featuring millions of images for operating systems, frameworks, databases, and more.
+  icon: book
+  link: /docker-hub/image-library/
 - title: Repositories
   description: Create a repository to share your images with your team, customers,
     or the Docker community.

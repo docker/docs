@@ -2,12 +2,13 @@
 description: Setting-up a local mirror for Docker Hub images
 keywords: registry, on-prem, images, tags, repository, distribution, mirror, Hub,
   recipe, advanced
-title: Registry as a pull through cache
-linkTitle: Mirroring
+title: Mirror the Docker Hub library
+linkTitle: Mirror
 weight: 80
 aliases:
 - /engine/admin/registry_mirror/
 - /registry/recipes/mirror/
+- /docker-hub/mirror/
 ---
 
 ## Use-case
@@ -37,7 +38,7 @@ Hub can be mirrored.
 
 > [!NOTE]
 >
-> Mirrors of Docker Hub are still subject to Docker's [fair use policy](./download-rate-limit.md#fair-use).
+> Mirrors of Docker Hub are still subject to Docker's [fair use policy](/manuals/docker-hub/download-rate-limit.md#fair-use).
 
 ### Solution
 

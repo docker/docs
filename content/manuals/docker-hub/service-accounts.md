@@ -64,5 +64,5 @@ official images and other public images, you don't have to grant any access perm
 
 Refer to the following topics for additional information:
 
-- [Mirroring Docker Hub](./mirror.md)
+- [Mirroring Docker Hub](./image-library/mirror.md)
 - [Docker pricing FAQs](https://www.docker.com/pricing/faq/)

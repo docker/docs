@@ -80,17 +80,6 @@ grid:
         url: "/scout/quickstart/"
       - text: "Image analysis"
         url: "/scout/image-analysis/"
-  - title: Trusted content
-    icon: verified
-    description: |
-      High-quality, secure images from Docker and verified partners.
-    links:
-      - text: "Overview"
-        url: "/trusted-content/"
-      - text: "Official images"
-        url: "/trusted-content/official-images/"
-      - text: "Verified publisher program"
-        url: "/trusted-content/dvp-program/"
   - title: Subscription
     icon: card_membership
     description: |
