@@ -136,9 +136,9 @@ In addition, you gain access to enterprise-grade features, such as:
 For a list of features available in each tier, see [Docker
 Pricing](https://www.docker.com/pricing/).
 
-### Self-serve
+## Self-serve
 
-A self-serve Docker Business subscription is where everything is set up by you.
+A self-serve Docker subscription is where everything is set up by you.
 You can:
 
 - Manage your own invoices
@@ -146,9 +146,9 @@ You can:
 - Update billing and payment information
 - Downgrade your subscription at any time
 
-### Sales-assisted
+## Sales-assisted
 
-A sales-assisted Docker Business subscription where everything is set up and
+A sales-assisted plan refers to a Docker Business or Team subscription where everything is set up and
 managed by a dedicated Docker account manager.
 
 {{< /tab >}}

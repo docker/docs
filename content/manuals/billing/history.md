@@ -105,8 +105,8 @@ To view billing history:
 1. Sign in to [Docker Home](https://app.docker.com/).
 2. Under Settings and administration, select **Billing**.
 3. Select **Invoices** from the left-hand menu.
-4. Optional. Select the **invoice number** to open invoice details.
-5. Optional. Select the **download** button to download an invoice.
+4. Optional. Select the **Invoice number** to open invoice details.
+5. Optional. Select the **Download** button to download an invoice.
 
 {{< /tab >}}
 {{< tab name="Legacy Docker plan" >}}

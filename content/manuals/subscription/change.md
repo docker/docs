@@ -31,7 +31,7 @@ subscription plan or legacy Docker subscription plan.
 
 ## Upgrade your subscription
 
-When you upgrade from a free Personal subscription to a paid subscription, you immediately have access to all the features and entitlements available in your Docker subscription plan. For detailed information on features available in each subscription, see [Docker Pricing](https://www.docker.com/pricing).
+When you upgrade a Docker plan, you immediately have access to all the features and entitlements available in your Docker subscription plan. For detailed information on features available in each subscription, see [Docker Pricing](https://www.docker.com/pricing).
 
 {{< tabs >}}
 {{< tab name="Docker plan" >}}
@@ -40,7 +40,7 @@ To upgrade your Docker subscription:
 
 1. Sign in to [Docker Home](https://app.docker.com/).
 2. Under Settings and administration, select **Billing**.
-3. Optional. If you're upgrading from a free user account to a Team subscription and want to keep your username, [convert your user account into an organization](../admin/convert-account.md).
+3. Optional. If you're upgrading from a free Personal plan to a Team plan and want to keep your username, [convert your user account into an organization](../admin/convert-account.md).
 4. Select the account you want to upgrade in the drop-down at the top-left of the page.
 5. Select **Upgrade**.
 6. Follow the on-screen instructions to complete your upgrade.
@@ -79,7 +79,8 @@ To downgrade your Docker subscription:
 2. Under Settings and administration, select **Billing**.
 3. Select the account you want to downgrade in the drop-down at the top-left of the page.
 4. Select the action icon and then **Cancel subscription**.
-5. Follow the on-screen instructions to complete your downgrade.
+5. Review the cancellation warnings, then select **Confirm cancellation**.
+6. Optional. Fill out the feedback survey, or select **Skip**.
 
 {{< /tab >}}
 {{< tab name="Legacy Docker plan" >}}
