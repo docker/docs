@@ -96,6 +96,7 @@ Windows
 WireMock
 Zscaler
 Zsh
+[Aa]nonymized?
 [Aa]utobuild
 [Bb]uildx
 [Bb]uildpack(s)?
