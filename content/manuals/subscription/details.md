@@ -166,7 +166,7 @@ managed by a dedicated Docker account manager.
 > [!IMPORTANT]
 >
 > As of December 10, 2024, Docker Core, Docker Build Cloud, and Docker Scout
-> subscription plans are no longer available and have been replaced by consolidated
+> subscription plans are no longer available and have been replaced by Docker subscription
 > plans that provide access to all tools. If you subscribed or renewed
 > your subscriptions before December 10, 2024, your legacy Docker
 > plans still apply to your account until you renew. For more details,
@@ -298,7 +298,7 @@ Scout.
 > [!IMPORTANT]
 >
 > As of December 10, 2024, Docker Scout subscriptions are no longer available
-> and have been replaced by consolidated subscriptions that provide access to
+> and have been replaced by Docker subscription plans that provide access to
 > all tools. If you subscribed or renewed your subscriptions before December 10, 2024, your legacy Docker subscriptions still apply to your account until
 > you renew. For more details, see [Announcing Upgraded Docker
 > Plans](https://www.docker.com/blog/november-2024-updated-plans-announcement/).
@@ -333,7 +333,7 @@ Legacy Docker Scout Business includes:
 ### New Docker Scout plan
 
 You no longer need to subscribe to a separate Docker Scout plan. When you upgrade
-your legacy Docker Scout plan to a new consolidated subscription, your
+your Legacy Docker Scout plan to a Docker subscription plan, your
 plan includes the following changes:
 
 - Docker Business: Unlimited repositories with continuous vulnerability analysis, an increase from 3.
@@ -399,8 +399,8 @@ For more details about your enterprise subscription, [contact sales](https://www
 ### New Docker Build Cloud plan
 
 You no longer need to subscribe to a separate Docker Build Cloud plan to access
-Docker Build Cloud or to scale your minutes. When you upgrade your legacy plan to
-a new consolidated plan, your plan includes the following changes:
+Docker Build Cloud or to scale your minutes. When you upgrade your Docker Legacy plan to
+a Docker subscription plan, your plan includes the following changes:
 
 - Docker Business: Included minutes are increased from 800/mo to 1500/mo with the option to scale more minutes.
 - Docker Team: Included minutes are increased from 400/mo to 500/mo with the option to scale more minutes.

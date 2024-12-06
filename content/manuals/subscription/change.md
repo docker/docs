@@ -31,7 +31,7 @@ subscription plan or legacy Docker subscription plan.
 
 ## Upgrade your subscription
 
-When you upgrade from a free Personal subscription to a paid subscription, you immediately have access to all the features and entitlements available in your new subscription plan. For detailed information on features available in each subscription, see [Docker Pricing](https://www.docker.com/pricing).
+When you upgrade from a free Personal subscription to a paid subscription, you immediately have access to all the features and entitlements available in your Docker subscription plan. For detailed information on features available in each subscription, see [Docker Pricing](https://www.docker.com/pricing).
 
 {{< tabs >}}
 {{< tab name="Docker subscription" >}}
