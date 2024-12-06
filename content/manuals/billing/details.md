@@ -52,7 +52,7 @@ To update your billing information:
 
 To update your billing information:
 
-1. Sign in to the [Docker Billing Console](https://app.docker.com//billing).
+1. Sign in to the [Docker Billing Console](https://app.docker.com/billing).
 2. Select **Billing information** from the left-hand navigation.
 3. On your billing information card, select **Change**.
 4. Update your billing contact and billing address information, then select **Update**.
