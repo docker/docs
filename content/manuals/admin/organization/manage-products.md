@@ -17,10 +17,16 @@ product, including how to set up and configure them, see the following manuals:
 
 ## Manage access to Docker products
 
-Products included in your subscription, including Docker Hub, Docker Build
-Cloud, Docker Desktop, and Docker Scout access are enabled by default for all
-users. Testcontainers Cloud access by default is disabled. Use the following
-sections to learn how to enable or disable access for these products.
+Access to Docker products included in your subscription is enabled by default
+for all users. The included products are:
+
+- Docker Hub
+- Docker Build Cloud
+- Docker Desktop
+- Docker Scout
+
+Testcontainers Cloud is not included and can't be accessed by default. The
+following sections describe how to enable or disable access for these products.
 
 ### Manage access to Docker Build Cloud
 
