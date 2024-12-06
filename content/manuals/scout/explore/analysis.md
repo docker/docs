@@ -20,8 +20,7 @@ If you run image analysis as a one-off task using the CLI or Docker Desktop,
 Docker Scout won't store any data about your image.
 If you enable Docker Scout for your container image repositories however,
 Docker Scout saves a metadata snapshot of your images after the analysis.
-As new vulnerability data becomes available, Docker Scout recalibrates the analysis using the metadata snapshot,
-which means your security status for images is updated in real-time.
+As new vulnerability data becomes available, Docker Scout recalibrates the analysis using the metadata snapshot, which means your security status for images is updated in real-time.
 This dynamic evaluation means there's no need to re-analyze images when new CVE information is disclosed.
 
 Docker Scout image analysis is available by default for Docker Hub repositories.
@@ -88,6 +87,10 @@ analysis is activated.
 
    The image appears in the list shortly after you push it to the registry.
    It may take a few minutes for the analysis results to appear.
+
+### Fair use
+
+When utilizing the Docker Scout's advanced analysis for registry images, users should be aware that excessive image updates (pushes) can lead to throttling, or additional charges. To ensure fair resource usage and maintain service quality, Docker reserves the right to impose restrictions or apply additional charges to accounts exhibiting excessive use of Docker Scout's advanced analysis for registry images.
 
 ## Analyze images locally
 
