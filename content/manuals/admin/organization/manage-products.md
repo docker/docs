@@ -49,7 +49,7 @@ To manage access for using Docker Scout on remote repositories, sign in to the
 [integrations](../../scout/explore/dashboard.md#integrations) and [repository
 settings](../../scout/explore/dashboard.md#repository-settings).
 
-To manage access for using Docker Scout on local images in Docker Desktop, use
+To manage access to Docker Scout for use on local images with Docker Desktop, use
 [Settings
 Management](../../security/for-admins/hardened-desktop/settings-management/_index.md)
 and set `sbomIndexing` to `false` to disable, or to `true` to enable.
