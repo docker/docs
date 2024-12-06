@@ -38,7 +38,7 @@ usage](../admin/organization/manage-products.md#view-docker-product-usage).
 
 ## Add Docker Build Cloud minutes
 
-You can pre-purchase Docker Build Cloud minutes in Docker Build Cloud:
+You can pre-purchase Docker Build Cloud minutes in the Docker Build Cloud Dashboard:
 
 1. Sign in to the [Docker Billing Console](https://app.docker.com/billing).
 2. On the plans and usage page, select **View build minutes**.
