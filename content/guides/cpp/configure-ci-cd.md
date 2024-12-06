@@ -124,7 +124,8 @@ In this section, you learned how to set up a GitHub Actions workflow for your C+
 
 Related information:
 
-- [Introduction to GitHub Actions](/manuals/build/ci/github-actions/_index.md)
+- [Introduction to GitHub Actions](/guides/gha.md)
+- [Docker Build GitHub Actions](/manuals/build/ci/github-actions/_index.md)
 - [Workflow syntax for GitHub Actions](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions)
 
 ## Next steps
