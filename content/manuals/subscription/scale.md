@@ -40,13 +40,14 @@ usage](../admin/organization/manage-products.md#view-docker-product-usage).
 
 You can pre-purchase Docker Build Cloud minutes in the Docker Build Cloud Dashboard:
 
-1. Sign in to the [Docker Billing Console](https://app.docker.com/billing).
-2. On the plans and usage page, select **View build minutes**.
+1. Sign in to [Docker Home](https://app.docker.com/).
+2. Under Settings and administration, select **Billing**.
+3. On the plans and usage page, select **View build minutes**.
     This will launch the Docker Build Cloud settings page.
-3. Select **Add minutes**.
-4. Select your additional minute amount, then **Continue to payment**.
-5. Enter your payment details and billing address.
-6. Review your order and select **Pay**.
+4. Select **Add minutes**.
+5. Select your additional minute amount, then **Continue to payment**.
+6. Enter your payment details and billing address.
+7. Review your order and select **Pay**.
 
 Your additional minutes will now display on the Build minutes page.
 

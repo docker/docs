@@ -22,7 +22,7 @@ When you add seats to your subscription in the middle of your billing cycle, you
 ## Add seats
 
 {{< tabs >}}
-{{< tab name="Docker subscription plan" >}}
+{{< tab name="Docker plan" >}}
 
 > [!IMPORTANT]
 >
@@ -30,10 +30,11 @@ When you add seats to your subscription in the middle of your billing cycle, you
 
 To add seats to your subscription:
 
-1. Sign in to the [Docker Billing Console](https://app.docker.com/billing/).
-2. Select your account from the drop-down menu in the top-left.
-3. Select **Add seats**.
-4. Follow the on-screen instructions to complete adding seats.
+1. Sign in to [Docker Home](https://app.docker.com/).
+2. Under Settings and administration, select **Billing**.
+3. Select your account from the drop-down menu in the top-left.
+4. Select **Add seats**.
+5. Follow the on-screen instructions to complete adding seats.
 
 You can now add more members to your organization. For more information, see [Manage organization members](../admin/organization/members.md).
 
@@ -73,7 +74,7 @@ If you remove seats in the middle of the billing cycle, changes apply in the nex
 For example, if you receive your billing on the 8th of every month for 10 seats and you want to remove 2 seats on the 15th of the month, the 2 seats will be removed from your subscription the next month. Your payment for 8 seats begins on the next billing cycle. If you're on the annual subscription, the 2 seats are still available until the next year, and your payment for the 8 seats begins on the next billing cycle.
 
 {{< tabs >}}
-{{< tab name="Docker subscription plan" >}}
+{{< tab name="Docker plan" >}}
 
 > [!IMPORTANT]
 >
@@ -81,10 +82,11 @@ For example, if you receive your billing on the 8th of every month for 10 seats 
 
 To remove seats:
 
-1. Sign in to the [Docker Billing Console](https://app.docker.com/billing/).
-2. Select your account from the drop-down menu in the top-left.
-3. Select the action icon and then select **Remove seats**.
-4. Follow the on-screen instructions to complete removing seats.
+1. Sign in to [Docker Home](https://app.docker.com/).
+2. Under Settings and administration, select **Billing**.
+3. Select your account from the drop-down menu in the top-left.
+4. Select the action icon and then select **Remove seats**.
+5. Follow the on-screen instructions to complete removing seats.
 
 You can cancel the removal of seats before your next billing cycle. To do so, select **Cancel change**.
 

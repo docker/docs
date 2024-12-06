@@ -31,7 +31,7 @@ Docker subscription plan or Legacy Docker plan.
 features are in development, as well as request new capabilities.
 
 {{< tabs >}}
-{{< tab name="Docker subscription plan" >}}
+{{< tab name="Docker plan" >}}
 
 ## Docker Personal
 

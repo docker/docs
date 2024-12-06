@@ -18,14 +18,15 @@ The billing information provided appears on all your billing invoices. The email
 ### Personal account
 
 {{< tabs >}}
-{{< tab name="Docker subscription plan" >}}
+{{< tab name="Docker plan" >}}
 
 To update your billing information:
 
-1. Sign in to the [Docker Billing Console](https://app.docker.com/billing).
-2. Select **Billing information** from the left-hand navigation.
-3. On your billing information card, select **Change**.
-4. Update your billing contact and billing address information, then select **Update**.
+1. Sign in to [Docker Home](https://app.docker.com/).
+2. Under Settings and administration, select **Billing**.
+3. Select **Billing information** from the left-hand navigation.
+4. On your billing information card, select **Change**.
+5. Update your billing contact and billing address information, then select **Update**.
 
 {{< /tab >}}
 {{< tab name="Legacy Docker plan" >}}
@@ -48,14 +49,15 @@ To update your billing information:
 > You must be an organization owner to make changes to the billing information.
 
 {{< tabs >}}
-{{< tab name="Docker subscription plan" >}}
+{{< tab name="Docker plan" >}}
 
 To update your billing information:
 
-1. Sign in to the [Docker Billing Console](https://app.docker.com/billing).
-2. Select **Billing information** from the left-hand navigation.
-3. On your billing information card, select **Change**.
-4. Update your billing contact and billing address information, then select **Update**.
+1. Sign in to [Docker Home](https://app.docker.com/).
+2. Under Settings and administration, select **Billing**.
+3. Select **Billing information** from the left-hand navigation.
+4. On your billing information card, select **Change**.
+5. Update your billing contact and billing address information, then select **Update**.
 
 {{< /tab >}}
 {{< tab name="Legacy Docker plan" >}}
@@ -89,14 +91,15 @@ You can update the email address that receives billing invoices at any time.
 ### Personal account
 
 {{< tabs >}}
-{{< tab name="Docker subscription plan" >}}
+{{< tab name="Docker plan" >}}
 
 To update your billing email address:
 
-1. Sign in to the [Docker Billing Console](https://app.docker.com/billing).
-2. Select **Billing information** from the left-hand navigation.
-3. On your billing information card, select **Change**.
-4. Update your billing contact information and select **Update**.
+1. Sign in to [Docker Home](https://app.docker.com/).
+2. Under Settings and administration, select **Billing**.
+3. Select **Billing information** from the left-hand navigation.
+4. On your billing information card, select **Change**.
+5. Update your billing contact information and select **Update**.
 
 {{< /tab >}}
 {{< tab name="Legacy Docker plan" >}}
@@ -116,14 +119,15 @@ To update your billing email address:
 ### Organizations
 
 {{< tabs >}}
-{{< tab name="Docker subscription plan" >}}
+{{< tab name="Docker plan" >}}
 
 To update your billing email address:
 
-1. Sign in to the [Docker Billing Console](https://app.docker.com/billing).
-2. Select **Billing information** from the left-hand navigation.
-3. On your billing information card, select **Change**.
-4. Update your billing contact information and select **Update**.
+1. Sign in to [Docker Home](https://app.docker.com/).
+2. Under Settings and administration, select **Billing**.
+3. Select **Billing information** from the left-hand navigation.
+4. On your billing information card, select **Change**.
+5. Update your billing contact information and select **Update**.
 
 {{< /tab >}}
 {{< tab name="Legacy Docker plan" >}}

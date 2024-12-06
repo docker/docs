@@ -34,17 +34,18 @@ All currency, for example the amount listed on your billing invoice, is in Unite
 ### Personal account
 
 {{< tabs >}}
-{{< tab name="Docker subscription plan" >}}
+{{< tab name="Docker plan" >}}
 
 To add a payment method:
 
-1. Sign in to the [Docker Billing Console](https://app.docker.com/billing).
-2. Select **Payment methods** from the left-hand menu.
-3. Select **Add payment method**.
-4. Enter your new payment information.
-5. Select **Add**.
-6. Optional. You can set a new default payment method by selecting the **Set as default** action.
-7. Optional. You can remove non-default payment methods by selecting the **Delete** action.
+1. Sign in to [Docker Home](https://app.docker.com/).
+2. Under Settings and administration, select **Billing**.
+3. Select **Payment methods** from the left-hand menu.
+4. Select **Add payment method**.
+5. Enter your new payment information.
+6. Select **Add**.
+7. Optional. You can set a new default payment method by selecting the **Set as default** action.
+8. Optional. You can remove non-default payment methods by selecting the **Delete** action.
 
 {{< /tab >}}
 {{< tab name="Legacy Docker plan" >}}
@@ -70,18 +71,19 @@ To add a payment method:
 > You must be an organization owner to make changes to the payment information.
 
 {{< tabs >}}
-{{< tab name="Docker subscription plan" >}}
+{{< tab name="Docker plan" >}}
 
 To add a payment method:
 
-1. Sign in to the [Docker Billing Console](https://app.docker.com/billing).
-2. Choose your organization from the top-left drop-down.
-3. Select **Payment methods** from the left-hand menu.
-4. Select **Add payment method**.
-5. Enter your new payment information.
-6. Select **Add**.
-7. Optional. You can set a new default payment method by selecting the **Set as default** action.
-8. Optional. You can remove non-default payment methods by selecting the **Delete** action.
+1. Sign in to [Docker Home](https://app.docker.com/).
+2. Under Settings and administration, select **Billing**.
+3. Choose your organization from the top-left drop-down.
+4. Select **Payment methods** from the left-hand menu.
+5. Select **Add payment method**.
+6. Enter your new payment information.
+7. Select **Add**.
+8. Optional. You can set a new default payment method by selecting the **Set as default** action.
+9. Optional. You can remove non-default payment methods by selecting the **Delete** action.
 
 {{< /tab >}}
 {{< tab name="Legacy Docker plan" >}}
