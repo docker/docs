@@ -53,8 +53,8 @@ them. To load a multi-platform image, you need to enable the containerd image
 store option for the Docker Engine.
 
 There is no way to configure the default Docker setup in the GitHub Actions
-runners directly, but you can use the `crazy-max/ghaction-setup-docker` action
-to customize the Docker Engine and CLI settings for a job.
+runners directly, but you can use `docker/setup-docker-action` to customize the
+Docker Engine and CLI settings for a job.
 
 The following example workflow enables the containerd image store, builds a
 multi-platform image, and loads the results into the GitHub runner's local
@@ -71,7 +71,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Docker
-        uses: crazy-max/ghaction-setup-docker@v3
+        uses: docker/setup-docker-action@v4
         with:
           daemon-config: |
             {
