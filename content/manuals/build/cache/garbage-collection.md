@@ -16,6 +16,10 @@ cache when the cache size becomes too big, or when the cache age expires. The
 following sections describe how you can configure both the size and age
 parameters by defining garbage collection policies.
 
+Each of the policy's parameters corresponds with a `docker buildx prune` command line
+argument. Details can be found in the 
+`docker buildx prune` [documentation](/reference/cli/docker/buildx/prune.md).
+
 ## Configuration
 
 Depending on the [driver](../builders/drivers/_index.md) used by your builder instance,
