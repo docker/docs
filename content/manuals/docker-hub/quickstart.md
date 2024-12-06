@@ -22,14 +22,16 @@ through creating a custom image and sharing it through Docker Hub.
 ## Step 1: Find an image in Docker Hub's library
 
 You can search for content in Docker Hub itself, in the Docker Desktop
-Dashboard, or by using the `docker search` CLI command. Searching on Docker Hub
-itself offers the most options to explore content.
+Dashboard, or by using the command line interface (CLI).
 
 To search or browse for content on Docker Hub:
 
+{{< tabs >}}
+{{< tab name="Docker Hub" >}}
+
 1. Navigate to the [Docker Hub Explore page](https://hub.docker.com/explore).
 
-   On the Explore page, you can browse by catalog or category, or use the search
+   On the **Explore** page, you can browse by catalog or category, or use the search
    to quickly find content.
 
 2. Under **Categories**, select **Web servers**.
@@ -48,11 +50,88 @@ To search or browse for content on Docker Hub:
    to use the image. On the page, you'll also find the `docker pull` command to
    pull the image.
 
+{{< /tab >}}
+{{< tab name="Docker Desktop" >}}
+
+1. Open the Docker Desktop Dashboard.
+2. Select the **Docker Hub** view.
+
+   In the **Docker Hub** view, you can browse by catalog or category, or use the search
+   to quickly find content.
+
+3. Leave the search box empty and then select **Search**.
+
+   The search results are shown with additional filters now next to the search box.
+
+4. Select the search filter icon, and then select **Docker Official Image** and **Web Servers**.
+5. In the results, select the **nginx** image.
+
+{{< /tab >}}
+{{< tab name="CLI" >}}
+
+1. Open a terminal window.
+
+   > [!TIP]
+   >
+   > The Docker Desktop Dashboard contains a built-in terminal. At the bottom of
+   > the Dashboard, select **>_ Terminal** to open it.
+
+2. In the terminal, run the following command.
+
+   ```console
+   $ docker search --filter is-official=true nginx
+   ```
+
+   Unlike the Docker Hub and Docker Desktop interfaces, you can't browse by
+   category using the `docker search` command. For more details about the
+   command, see [docker search](/reference/cli/docker/search/).
+
+{{< /tab >}}
+{{< /tabs >}}
+
 Now that you've found an image, it's time to pull and run it on your device.
 
 ## Step 2: Pull and run an image from Docker Hub
 
-1. In your terminal, run the following command to pull and run the Nginx image.
+You can run images from Docker Hub using the CLI or Docker Desktop Dashboard.
+
+{{< tabs >}}
+{{< tab name="Docker Desktop" >}}
+
+1. In the Docker Desktop Dashboard, select the **nginx** image in the **Docker
+   Hub** view. For more details, see [Step 1: Find an image in Docker Hub's
+   library](#step-1-find-an-image-in-docker-hubs-library).
+
+2. On the **nginx** screen, select **Run**.
+
+   If the image doesn't exist on your device, it is automatically pulled from
+   Docker Hub. Pulling the image may take a few seconds or minutes depending on
+   your connection. After the image has been pulled, a window appears in Docker
+   Desktop and you can specify run options.
+
+3. In the **Host port** option, specify `8080`.
+4. Select **Run**.
+
+   The container logs appear after the container starts.
+
+5. Select the **8080:80** link to open the server, or visit
+   [https://localhost:8080](https://localhost:8080) in your web browser.
+
+6. In the Docker Desktop Dashboard, select the **Stop** button to stop the
+   container.
+
+
+{{< /tab >}}
+{{< tab name="CLI" >}}
+
+1. Open a terminal window.
+
+   > [!TIP]
+   >
+   > The Docker Desktop Dashboard contains a built-in terminal. At the bottom of
+   > the Dashboard, select **>_ Terminal** to open it.
+
+2. In your terminal, run the following command to pull and run the Nginx image.
 
    ```console
    $ docker run -p 8080:80 --rm nginx
@@ -95,21 +174,25 @@ Now that you've found an image, it's time to pull and run it on your device.
    ...
    ```
 
-2. Visit [https://localhost:8080](https://localhost:8080) to view the default
+3. Visit [https://localhost:8080](https://localhost:8080) to view the default
    Nginx page and verify that the container is running.
 
-3. In the terminal, press CTRL+C to stop the container.
+4. In the terminal, press CTRL+C to stop the container.
 
-You've now run a web server without any set up or configuration, all from a
-single command. Docker Hub provides instant access to pre-built, ready-to-use
-container images, letting you quickly pull and run applications without needing
-to install or configure software manually. With Docker Hub's vast library of
-images, you can experiment with and deploy applications effortlessly, boosting
-productivity and making it easy to try out new tools, set up development
-environments, or build on top of existing software.
+{{< /tab >}}
+{{< /tabs >}}
+
+You've now run a web server without any set up or configuration. Docker Hub
+provides instant access to pre-built, ready-to-use container images, letting you
+quickly pull and run applications without needing to install or configure
+software manually. With Docker Hub's vast library of images, you can experiment
+with and deploy applications effortlessly, boosting productivity and making it
+easy to try out new tools, set up development environments, or build on top of
+existing software.
 
 You can also extend images from Docker Hub, letting you quickly build and
 customize your own images to suit specific needs.
+
 
 ## Step 3: Build and push an image to Docker Hub
 
@@ -201,6 +284,11 @@ customize your own images to suit specific needs.
 
 ## Step 4: View your repository on Docker Hub and explore options
 
+You can view your Docker Hub repositories in the Docker Hub or Docker Desktop interface.
+
+{{< tabs >}}
+{{< tab name="Docker Hub" >}}
+
 1. Go to [Docker Hub](https://hub.docker.com) and sign in.
 
    After signing in, you should be on the **Repositories** page. If not, then go
@@ -210,6 +298,22 @@ customize your own images to suit specific needs.
 
    After selecting the repository, you should see more details and options for
    your repository.
+
+{{< /tab >}}
+{{< tab name="Docker Desktop" >}}
+
+1. Sign in to Docker Desktop.
+2. Select the **Images** view.
+3. Select the **Hub repositories** tab.
+
+   A list of your Docker Hub repositories appears.
+
+4. Find the **nginx-custom** repository, hover over the row, and then select **View in Hub**.
+
+   Docker Hub opens and you are able to view more details about the image.
+
+{{< /tab >}}
+{{< /tabs >}}
 
 You've now verified that your repository exists on Docker Hub, and you've
 discovered more options for it. View the next steps to learn more about some of
