@@ -7,7 +7,7 @@ weight: 40
 
 > [!NOTE]
 >
-> [Docker subscription](../subscription/setup.md) payments support 3D secure authentication.
+> [Docker subscription plan](../subscription/setup.md) payments support 3D secure authentication.
 
 3D Secure (3DS) authentication incorporates an additional security layer for credit card transactions. If you’re making payments for your Docker billing in a region that requires 3DS, or using a payment method that requires 3DS, you’ll need to verify your identity to complete any transactions. The method used to verify your identity varies depending on your banking institution.
 

@@ -33,6 +33,6 @@ grid_core:
   icon: wallet
 ---
 
-Use the resources in this section to manage your billing and payment settings for your Docker subscriptions.
+Use the resources in this section to manage your billing and payment settings for your Docker subscription plans.
 
 {{< grid items="grid_core" >}}
