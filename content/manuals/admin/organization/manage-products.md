@@ -44,7 +44,7 @@ To learn how to initially set up and configure Docker Scout for remote
 repositories, sign in to the [Docker Scout Dashboard](https://scout.docker.com/)
 and follow the on-screen instructions.
 
-To manage access for using Docker Scout on remote repositories, sign in to the
+To manage access to Docker Scout for use on remote repositories, sign in to the
 [Docker Scout Dashboard](https://scout.docker.com/) and configure
 [integrations](../../scout/explore/dashboard.md#integrations) and [repository
 settings](../../scout/explore/dashboard.md#repository-settings).
