@@ -34,7 +34,7 @@ To learn how to initially set up and configure Docker Build Cloud, sign in to
 the [Docker Build Cloud Dashboard](https://app.docker.com/build) and follow the
 on-screen instructions.
 
-To manage access for Docker Build Cloud, sign in to [Docker Build
+To manage access to Docker Build Cloud, sign in to [Docker Build
 Cloud](http://app.docker.com/build) as an organization owner, select **Account
 settings**, and then manage access under **Lock Docker Build Cloud**.
 
