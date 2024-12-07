@@ -263,7 +263,7 @@ Run `docker harmonia doctor` to print helpful troubleshooting information.
 - KinD does not run on Project Harmonia due to some hard-coded assumptions to ensure it's running in a privileged container. K3d is a good alternative.
 - Containers cannot access host through DNS `host.docker.internal`.
 - File binds (non-directory binds) are currently static, meaning changes will not be reflected until the container is restarted. This also affects Compose configs and secrets directives.
-- Bind _mounts_, such as `-v /localpath:/incontainer` in the `docker run` command, require starting a file-sync.
+- Bind _mounts_, such as `-v /localpath:/incontainer` in the `docker run` command, require creating a file-sync.
 - Starting a file-sync for a directory with a large amount of may take extra time to sync and become ready for use in a container.
 - Bind _volumes_, such as those created with `docker volume create --driver local --opt type=none --opt o=bind --opt device=/some/host/path myvolname` or via the compose equivalent, are not supported.
 - Port-forwarding for UDP is not supported. 
