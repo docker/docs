@@ -21,6 +21,10 @@
 
 /content/manuals/engine/ @dvdksn
 
+/content/reference/api/engine/ @dvdksn
+
+/content/reference/cli/ @dvdksn
+
 /content/manuals/subscription/ @sarahsanders-docker
 
 /content/manuals/security/ @aevesdocker
