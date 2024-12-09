@@ -26,7 +26,7 @@ You can scale consumption for the following:
 
 - Docker Build Cloud minutes
 - Docker Testcontainers Cloud runtime minutes
-- Docker Hub storage and image pull\
+- Docker Hub storage and image pull
 
 ## Add Docker Build Cloud minutes
 
