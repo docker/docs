@@ -88,10 +88,6 @@ analysis is activated.
    The image appears in the list shortly after you push it to the registry.
    It may take a few minutes for the analysis results to appear.
 
-### Fair use
-
-When utilizing the Docker Scout's advanced analysis for registry images, users should be aware that excessive image updates (pushes) can lead to throttling, or additional charges. To ensure fair resource usage and maintain service quality, Docker reserves the right to impose restrictions or apply additional charges to accounts exhibiting excessive use of Docker Scout's advanced analysis for registry images.
-
 ## Analyze images locally
 
 You can analyze local images with Docker Scout using Docker Desktop or the
