@@ -87,7 +87,7 @@ To downgrade your Docker subscription:
 
 If you have a [sales-assisted Docker Business subscription](details.md#sales-assisted), contact your account manager to downgrade your subscription.
 
-### Downgrade Docker Core subscription
+### Downgrade Legacy Docker plan
 
 To downgrade your legacy Docker subscription:
 

@@ -25,8 +25,9 @@ for all users. The included products are:
 - Docker Desktop
 - Docker Scout
 
-Testcontainers Cloud is not included and can't be accessed by default. The
-following sections describe how to enable or disable access for these products.
+Testcontainers Cloud is not enabled by default. To enable Testcontainers Cloud, see the Testcontainers [Getting Started](https://testcontainers.com/cloud/docs/#getting-started) guide.
+
+The following sections describe how to enable or disable access for these products.
 
 ### Manage access to Docker Build Cloud
 

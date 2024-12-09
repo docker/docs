@@ -163,8 +163,7 @@ managed by a dedicated Docker account manager.
 > plans still apply to your account until you renew. For more details,
 > see [Announcing Upgraded Docker
 > Plans](https://www.docker.com/blog/november-2024-updated-plans-announcement/).
-The following describes some of the key features included with your legacy
-Docker Core, Docker Build Cloud, and Docker Scout subscriptions:
+The following describes some of the key features included with your Legacy Docker plans:
 
 ![Docker Core subscription diagram](./images/subscription-diagram.webp)
 
@@ -296,7 +295,7 @@ Scout.
 
 ### Legacy Docker Scout Free
 
-Legacy Docker Scout Free is available for organizations. If you have a legacy Docker Core subscription, you automatically have access to legacy Docker Scout Free.
+Legacy Docker Scout Free is available for organizations. If you have a Legacy Docker plan, you automatically have access to legacy Docker Scout Free.
 
 Legacy Docker Scout Free includes:
 
@@ -349,9 +348,9 @@ For a list of features available in each tier, see [Docker Pricing](https://www.
 
 ### Legacy Docker Build Cloud Starter
 
-If you have a legacy Docker Core subscription, a base level of Build Cloud
+If you have a Legacy Docker plan, a base level of Build Cloud
 minutes and cache are included. The features available vary depending on your
-legacy Docker Core subscription tier.
+Legacy Docker plan subscription tier.
 
 #### Legacy Docker Pro
 

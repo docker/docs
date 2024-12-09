@@ -45,7 +45,7 @@ You can now add more members to your organization. For more information, see [Ma
 >
 > If you have a [sales-assisted Docker Business subscription](details.md#sales-assisted), contact your account manager to add seats to your subscription.
 
-### Add seats to Docker Core subscription
+### Add seats to Legacy Docker plan
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
 2. Select your avatar in the top-left, and select **Billing** from the drop-down menu.
@@ -97,7 +97,7 @@ You can cancel the removal of seats before your next billing cycle. To do so, se
 >
 > If you have a [sales-assisted Docker Business subscription](details.md#sales-assisted), contact your account manager to remove seats from your subscription.
 
-### Remove seats from Docker Core subscription
+### Remove seats from Legacy Docker plan
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
 2. Select your avatar in the top-left, and select **Billing** from the drop-down menu.

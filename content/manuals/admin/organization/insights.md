@@ -6,8 +6,7 @@ title: Insights
 
 > [!NOTE]
 >
-> Insights requires a [Docker Business subscription](../../subscription/details.md#docker-business) and
-> administrators must [enforce sign-in](/security/for-admins/enforce-sign-in/)
+> Insights requires a [Docker Business subscription](../../subscription/details.md#docker-business) and administrators must [enforce sign-in](/security/for-admins/enforce-sign-in/). This ensures users sign in with an account associated with their organization.
 
 Insights helps administrators visualize and understand how Docker is used within
 their organizations. With Insights, administrators can ensure their teams are

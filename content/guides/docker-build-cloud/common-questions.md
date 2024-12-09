@@ -42,7 +42,7 @@ account and start a trial of Build Cloud. Personal accounts are limited to a
 single user.
 
 For teams to receive the shared cache benefit, they must either be on a Docker
-Team, or Docker Business plan.
+Team or Docker Business plan.
 
 ### Does Docker Build Cloud support CI platforms? Does it work with GitHub Actions?
 

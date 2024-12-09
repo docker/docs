@@ -22,7 +22,7 @@ A service account is a Docker ID used for automated management of container imag
 
 > [!NOTE]
 >
-> All paid Docker subscriptions include up to 5000 pulls per day per authenticated user. If you require a higher number of pulls, you can purchase an Enhanced Service Account add-on.
+> All paid Docker subscriptions include up to 5000 pulls per day per authenticated user. If you require a higher number of pulls, you can purchase an Enhanced Service Account add-on. Note that you can only purchase an Enhanced Service Account add-on if you are on a current Service Account agreement.
 
 ## Enhanced Service Account add-on tiers
 
