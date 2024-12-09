@@ -132,6 +132,7 @@ Zsh
 [Ss]yscalls?
 [Ss]ysfs
 [Tt]oolchains?
+[Uu]narchived?
 [Vv]irtiofs
 [Vv]irtualize
 [Ww]alkthrough
