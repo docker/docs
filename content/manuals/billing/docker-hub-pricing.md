@@ -8,6 +8,11 @@ weight: 55
 This guide explains how Docker Hub storage is measured, calculated, and billed
 to help you understand your storage consumption and costs.
 
+> [!NOTE]
+>
+> Docker Hub plan limits will take effect on March 1, 2025. No charge on Docker Hub image pulls
+or storage will be incurred from December 10, 2024 and February 28, 2025.
+
 ## How storage is measured
 
 Docker Hub measures storage using:
