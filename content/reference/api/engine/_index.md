@@ -72,23 +72,23 @@ To see the highest version of the API your Docker daemon and client support, use
 
 ```console
 $ docker version
-Client:
- Version:           27.3.1
+Client: Docker Engine - Community
+ Version:           27.4.0
  API version:       1.47
- Go version:        go1.22.7
- Git commit:        ce12230
- Built:             Fri Sep 20 11:38:18 2024
- OS/Arch:           darwin/arm64
- Context:           desktop-linux
+ Go version:        go1.22.10
+ Git commit:        bde2b89
+ Built:             Sat Dec  7 10:38:33 2024
+ OS/Arch:           linux/amd64
+ Context:           default
 
-Server: Docker Desktop 4.36.0 (172961)
+Server: Docker Engine - Community
  Engine:
-  Version:          27.3.1
+  Version:          27.4.0
   API version:      1.47 (minimum version 1.24)
-  Go version:       go1.22.7
-  Git commit:       41ca978
-  Built:            Fri Sep 20 11:41:19 2024
-  OS/Arch:          linux/arm64
+  Go version:       go1.22.10
+  Git commit:       92a8393
+  Built:            Sat Dec  7 10:38:33 2024
+  OS/Arch:          linux/amd64
   Experimental:     false
   ...
 ```
@@ -133,6 +133,7 @@ You can specify the API version to use in any of the following ways:
 
 | Docker version | Maximum API version        | Change log                                                                   |
 |:---------------|:---------------------------|:-----------------------------------------------------------------------------|
+| 27.4           | [1.47](/reference/api/engine/version/v1.47/) | [changes](/reference/api/engine/version-history/#v147-api-changes) |
 | 27.3           | [1.47](/reference/api/engine/version/v1.47/) | [changes](/reference/api/engine/version-history/#v147-api-changes) |
 | 27.2           | [1.47](/reference/api/engine/version/v1.47/) | [changes](/reference/api/engine/version-history/#v147-api-changes) |
 | 27.1           | [1.46](/reference/api/engine/version/v1.46/) | [changes](/reference/api/engine/version-history/#v146-api-changes) |
