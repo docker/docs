@@ -26,7 +26,7 @@ Depending on the [driver](../builders/drivers/_index.md) used by your builder in
 the garbage collection will use a different configuration file.
 
 If you're using the [`docker` driver](../builders/drivers/docker.md), garbage collection
-can be configured in the [Docker Daemon configuration](/reference/cli/dockerd.md#daemon-configuration-file).
+can be configured in the [Docker Daemon configuration](/reference/cli/dockerd.md#daemon-configuration-file)
 file:
 
 ```json
@@ -94,3 +94,37 @@ GC Policy rule#3:
 >
 > `Keep Bytes` defaults to 10% of the size of the disk. If the disk size cannot
 > be determined, it uses 2GB as a fallback.
+
+The policies above can be represented in the [Docker Daemon configuration](/reference/cli/dockerd.md#daemon-configuration-file) file with the following json:
+
+```
+{
+  "builder": {
+    "gc": {
+      "enabled": true,
+      "policy": [
+        {
+          "filter": [
+            "unused-for=48h",
+            "type=source.local,type=exec.cachemount,type=source.git.checkout"
+          ],
+          "keepStorage": "512MB"
+        },
+        {
+          "filter": [
+            "unused-for=1440h"
+          ],
+          "keepStorage": "26GB"
+        },
+        {
+          "all": true,
+          "keepStorage": "26GB"
+        },
+        {
+          "keepStorage": "26GB"
+        }
+      ]
+    }
+  }
+}
+```
