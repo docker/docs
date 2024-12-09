@@ -148,7 +148,7 @@ The `local` exporter unpacks the filesystem into a directory structure in the
 specified location. The `tar` exporter creates a tarball archive file.
 
 ```console
-$ docker buildx build --output type=tar,dest=<path/to/output> .
+$ docker buildx build --output type=local,dest=<path/to/output> .
 ```
 
 The `local` exporter is useful in [multi-stage builds](../building/multi-stage.md)
