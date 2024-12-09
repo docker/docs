@@ -130,7 +130,7 @@ The following storage and repository limits apply based on your subscription, su
 
 
 Private repository storage is calculated on a monthly basis based on the average
-storage used throughout the month per namespace. Docker measures your storage
+storage used throughout the month per organization. Docker measures your storage
 usage in the amount of Bytes stored per hour, which are accumulated throughout
 the month to determine your monthly storage. If a repository is private at any
 point within an hour, it is counted as private for the full hour. The total
