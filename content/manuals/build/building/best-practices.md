@@ -145,7 +145,7 @@ database, and an in-memory cache in a decoupled manner.
 
 Limiting each container to one process is a good rule of thumb, but it's not a
 hard and fast rule. For example, not only can containers be
-[spawned with an init process](/manuals/engine/containers/run.md#specify-an-init-process),
+[spawned with an init process](/manuals/engine/containers/multi-service_container.md),
 some programs might spawn additional processes of their own accord. For
 instance, [Celery](https://docs.celeryproject.org/) can spawn multiple worker
 processes, and [Apache](https://httpd.apache.org/) can create one process per
