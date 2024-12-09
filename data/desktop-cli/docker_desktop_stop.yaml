@@ -1,0 +1,22 @@
+command: docker desktop stop
+short: Stop Docker Desktop
+usage: docker desktop stop [OPTIONS]
+pname: docker desktop
+plink: docker_desktop.yaml
+options:
+    - option: force
+      value_type: stringArray
+      default_value: '[]'
+      description: Immediately terminate all Docker Desktop processes.
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false

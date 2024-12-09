@@ -1,0 +1,11 @@
+command: docker desktop status
+short:  Display Docker Desktop's status
+usage: docker desktop status
+pname: docker desktop
+plink: docker_desktop.yaml
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
