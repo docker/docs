@@ -176,6 +176,7 @@ tmpfs
 ufw
 umask
 ungated
+userland
 untrusted
 vSphere
 vpnkit
