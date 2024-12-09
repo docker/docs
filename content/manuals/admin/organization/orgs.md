@@ -110,8 +110,10 @@ configure your organization.
 
 > [!WARNING]
 >
-> If you are merging organizations, it is recommended to do so at the *end* of your billing cycle. When you merge
-an organization and downgrade another, you will lose seats on your downgraded organization. Docker does not offer refunds for downgrades.
+> If you are merging organizations, it is recommended to do so at the *end* of
+> your billing cycle. When you merge an organization and downgrade another, you
+> will lose seats on your downgraded organization. Docker does not offer
+> refunds for downgrades.
 
 If you have multiple organizations that you want to merge into one, complete the following:
 
