@@ -68,7 +68,7 @@ To learn how to initially set up and configure Testcontainers Cloud, sign in to
 [Testcontainers Cloud](https://app.testcontainers.cloud/) and follow the
 on-screen instructions.
 
-To manage access for Testcontainers Cloud, sign in to the [Testcontainers Cloud
+To manage access to Testcontainers Cloud, sign in to the [Testcontainers Cloud
 Settings page](https://app.testcontainers.cloud/dashboard/settings) as
 an organization owner, and then manage access under **Lock Testcontainers
 Cloud**.
