@@ -7,7 +7,11 @@ aliases:
 - /billing/cycle/
 ---
 
-You can pay for a Pro or Team subscription plan on a monthly or yearly billing cycle. You select your preferred billing cycle when you buy your subscription.
+You can pay for a subscription plan on a monthly or yearly billing cycle. You select your preferred billing cycle when you buy your subscription.
+
+> [!NOTE]
+>
+> Business plan is available only on yearly billing cycle.
 
 If you have a monthly billing cycle, you can choose to switch to an annual billing cycle.
 
