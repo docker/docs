@@ -120,7 +120,7 @@ If you have multiple organizations that you want to merge into one, complete the
 1. Based on the number of seats from the secondary organization, [purchase additional seats](../../subscription/manage-seats.md) for the primary organization account that you want to keep.
 2. Manually add users to the primary organization and remove existing users from the secondary organization.
 3. Manually move over your data, including all repositories.
-4. Once you're done moving all of your users and data, [downgrade](../../subscription/change.md) the secondary account to a free subscription. Note, Docker does not offer refunds for downgrading organizations mid-billing cycle.
+4. Once you're done moving all of your users and data, [downgrade](../../subscription/change.md) the secondary account to a free subscription. Note that Docker does not offer refunds for downgrading organizations mid-billing cycle.
 
 > [!TIP]
 >
