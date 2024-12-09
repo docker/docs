@@ -17,9 +17,9 @@ or storage will be incurred from December 10, 2024 and February 28, 2025.
 
 Docker Hub measures storage using:
 - Hourly measurement: Storage usage is recorded every hour and expressed in **GB-hours**. This value represents the total storage your repositories consume during each hour.
-- Monthly aggregation: At the end of each month, all hourly storage usage values for the month are summed up:
-    - The total is divided by the number of hours in that month. For example, 730 hours for 30 days or 744 hours for 31 days.
-    - The result is the average monthly usage, expressed in **GB-month**.
+- Monthly aggregation: At the end of each month, hourly storage usage is divided by the number of hours in that month.
+
+  For example, 900 GB-hours of storage in a 30-day month (720 hours) equates to 900 / 720 = 1.25 gigabytes of monthly storage (GB-month).
 
 ## How storage is calculated
 
