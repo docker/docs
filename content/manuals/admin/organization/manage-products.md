@@ -75,7 +75,7 @@ Cloud**.
 
 ### Manage access to Docker Desktop
 
-To manage access for Docker Desktop, you can [enforce
+To manage access to Docker Desktop, you can [enforce
 sign-in](../../security/for-admins/enforce-sign-in/_index.md), then and manage
 members [manually](./members.md) or use
 [provisioning](../../security/for-admins/provisioning/_index.md). With sign-in
