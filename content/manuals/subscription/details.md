@@ -187,7 +187,7 @@ Legacy Docker Pro includes:
 - [Auto Builds](/docker-hub/builds/) with 5 concurrent builds
 - 300 [Vulnerability Scans](/docker-hub/vulnerability-scanning/)
 
-For a list of features available in each legacy tier, see [Docker Pricing](https://www.docker.com/pricing/).
+For a list of features available in each legacy tier, see [Docker Pricing](https://www.docker.com/legacy-pricing/).
 
 #### Docker Pro subscription plan
 
@@ -219,7 +219,7 @@ Legacy Docker Team includes:
 
 There are also advanced collaboration and management tools, including organization and team management with [Role Based Access Control (RBAC)](/security/for-admins/roles-and-permissions/), [activity logs](/admin/organization/activity-logs/), and more.
 
-For a list of features available in each legacy tier, see [Docker Pricing]](https://www.docker.com/pricing/).
+For a list of features available in each legacy tier, see [Docker Pricing](https://www.docker.com/legacy-pricing/).
 
 #### Docker Team subscription plan
 
@@ -252,7 +252,7 @@ Legacy Docker Business includes:
 - [Single Sign-On](/security/for-admins/single-sign-on/)
 - [System for Cross-domain Identity Management](/security/for-admins/provisioning/scim/) and more.
 
-For a list of features available in each tier, see [Docker Pricing]](https://www.docker.com/pricing/).
+For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/legacy-pricing/).
 
 #### Docker Business subscription plan
 
