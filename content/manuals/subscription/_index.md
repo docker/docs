@@ -39,7 +39,7 @@ aliases:
 - /docker-hub/billing/faq/
 ---
 
-A Docker subscription includes licensing for commercial use of Docker components
+A Docker subscription includes licensing for commercial use of Docker products
 including Docker Desktop, Docker Hub, Docker Build Cloud, Docker Scout, and
 Testcontainers Cloud.
 
