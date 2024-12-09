@@ -37,6 +37,7 @@ The following table describes the available parameters that you can pass to
 | `force-compression`    | `true`,`false`                         | `false` | Forcefully apply compression, see [compression][1]                                                                                                                                                                                  |
 | `rewrite-timestamp`    | `true`,`false`                         | `false` | Rewrite the file timestamps to the `SOURCE_DATE_EPOCH` value. See [build reproducibility][4] for how to specify the `SOURCE_DATE_EPOCH` value.                                                                                      |
 | `oci-mediatypes`       | `true`,`false`                         | `false` | Use OCI media types in exporter manifests, see [OCI Media types][2]                                                                                                                                                                 |
+| `oci-artifact`         | `true`,`false`                         | `false` | Attestations are formatted as OCI artifacts, see [OCI Media types][2]                                                                                                                                                               |
 | `unpack`               | `true`,`false`                         | `false` | Unpack image after creation (for use with containerd)                                                                                                                                                                               |
 | `store`                | `true`,`false`                         | `true`  | Store the result images to the worker's (for example, containerd) image store, and ensures that the image has all blobs in the content store. Ignored if the worker doesn't have image store (when using OCI workers, for example). |
 | `annotation.<key>`     | String                                 |         | Attach an annotation with the respective `key` and `value` to the built image,see [annotations][3]                                                                                                                                  |
@@ -45,6 +46,7 @@ The following table describes the available parameters that you can pass to
 [2]: _index.md#oci-media-types
 [3]: #annotations
 [4]: https://github.com/moby/buildkit/blob/master/docs/build-repro.md
+[5]: /manuals/build/metadata/attestations/_index.md#attestations-as-oci-artifacts
 
 ## Annotations
 
