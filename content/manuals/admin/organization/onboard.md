@@ -15,7 +15,7 @@ aliases:
 
 Learn how to onboard your organization using Docker Hub or the Docker Admin Console.
 
-Onboarding your organization lets you gain visibility into the activity of your users and enforce security settings. In addition, members of your organization receive increased pull limits and other organization wide benefits. For more details, see [Docker subscriptions and features](../../subscription/details.md).
+Onboarding your organization lets administrators gain visibility into the activity of your users and enforce security settings. In addition, members of your organization receive increased pull limits and other organization wide benefits. For more details, see [Docker subscriptions and features](../../subscription/details.md).
 
 In this guide, you'll learn how to get started with the following:
 
