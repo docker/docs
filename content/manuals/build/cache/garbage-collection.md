@@ -97,7 +97,7 @@ GC Policy rule#3:
 
 The policies above can be represented in the [Docker Daemon configuration](/reference/cli/dockerd.md#daemon-configuration-file) file with the following json:
 
-```
+```json
 {
   "builder": {
     "gc": {
@@ -106,7 +106,7 @@ The policies above can be represented in the [Docker Daemon configuration](/refe
         {
           "filter": [
             "unused-for=48h",
-            "type=source.local,type=exec.cachemount,type=source.git.checkout"
+            "type=source.local,type==exec.cachemount,type==source.git.checkout"
           ],
           "keepStorage": "512MB"
         },
@@ -128,3 +128,6 @@ The policies above can be represented in the [Docker Daemon configuration](/refe
   }
 }
 ```
+> [!NOTE] 
+> https://github.com/moby/buildkit/issues/5581 is currently opening asking why the second and third `type`
+> in the filter requires two ='s.
