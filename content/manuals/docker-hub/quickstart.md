@@ -177,7 +177,7 @@ You can run images from Docker Hub using the CLI or Docker Desktop Dashboard.
 3. Visit [https://localhost:8080](https://localhost:8080) to view the default
    Nginx page and verify that the container is running.
 
-4. In the terminal, press CTRL+C to stop the container.
+4. In the terminal, press <kdb>Ctrl+C</kbd> to stop the container.
 
 {{< /tab >}}
 {{< /tabs >}}
