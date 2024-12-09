@@ -38,7 +38,7 @@ Docker subscribers (Pro, Team, Business) receive a set number of minutes each
 month, shared across the account, to use Build Cloud.
 
 If you do not have a Docker subscription, you may sign up for a free Personal
-account and start a trial of Build Cloud. Personal accounts are limited to a
+account and start a trial of Docker Build Cloud. Personal accounts are limited to a
 single user.
 
 For teams to receive the shared cache benefit, they must either be on a Docker
