@@ -22,7 +22,7 @@ through creating a custom image and sharing it through Docker Hub.
 ## Step 1: Find an image in Docker Hub's library
 
 You can search for content in Docker Hub itself, in the Docker Desktop
-Dashboard, or by using the command line interface (CLI).
+Dashboard, or by using the CLI.
 
 To search or browse for content on Docker Hub:
 
