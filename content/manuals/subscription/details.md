@@ -187,9 +187,9 @@ Legacy Docker Pro includes:
 - [Auto Builds](/docker-hub/builds/) with 5 concurrent builds
 - 300 [Vulnerability Scans](/docker-hub/vulnerability-scanning/)
 
-For a list of features available in each legacy tier, see [Docker Pricing](https://www.docker.com/legacy-pricing/).
+For a list of features available in each legacy tier, see [Legacy Docker Pricing](https://www.docker.com/legacy-pricing/).
 
-#### Docker Pro subscription plan
+#### Upgrade your Legacy Docker Pro plan
 
 When you upgrade your Legacy Docker Pro plan to a Docker Pro subscription plan, your plan includes the following changes:
 
@@ -219,9 +219,9 @@ Legacy Docker Team includes:
 
 There are also advanced collaboration and management tools, including organization and team management with [Role Based Access Control (RBAC)](/security/for-admins/roles-and-permissions/), [activity logs](/admin/organization/activity-logs/), and more.
 
-For a list of features available in each legacy tier, see [Docker Pricing](https://www.docker.com/legacy-pricing/).
+For a list of features available in each legacy tier, see [Legacy Docker Pricing](https://www.docker.com/legacy-pricing/).
 
-#### Docker Team subscription plan
+#### Upgrade your Legacy Docker Team plan
 
 When you upgrade your Legacy Docker Team plan to a Docker Team subscription plan, your plan includes the following changes:
 
@@ -252,9 +252,9 @@ Legacy Docker Business includes:
 - [Single Sign-On](/security/for-admins/single-sign-on/)
 - [System for Cross-domain Identity Management](/security/for-admins/provisioning/scim/) and more.
 
-For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/legacy-pricing/).
+For a list of features available in each tier, see [Legacy Docker Pricing](https://www.docker.com/legacy-pricing/).
 
-#### Docker Business subscription plan
+#### Upgrade your Legacy Docker Business plan
 
 When you upgrade your Legacy Docker Business plan to a Docker Business subscription plan, your plan includes the following changes:
 
@@ -302,7 +302,6 @@ Legacy Docker Scout Free includes:
 - Unlimited local image analysis
 - Up to 3 Docker Scout-enabled repositories
 - SDLC integration, including policy evaluation and workload integration
-
 - On-prem and cloud container registry integrations
 - Security posture reporting
 
@@ -320,10 +319,9 @@ Legacy Docker Scout Business includes:
 - All the features available in legacy Docker Scout Team
 - Unlimited Docker Scout-enabled repositories
 
-### Docker Scout subscription plan
+### Upgrade your Legacy Docker Scout plan
 
-You no longer need to subscribe to a separate Docker Scout plan. When you upgrade
-your Legacy Docker Scout plan to a Docker subscription plan, your
+When you upgrade your Legacy Docker Scout plan to a Docker subscription plan, your
 plan includes the following changes:
 
 - Docker Business: Unlimited repositories with continuous vulnerability analysis, an increase from 3.
@@ -386,7 +384,7 @@ the organization associated with the subscription. See Manage seats and invites.
 
 For more details about your enterprise subscription, [contact sales](https://www.docker.com/products/build-cloud/#contact_sales).
 
-### Docker Build Cloud subscription plan
+### Upgrade your Legacy Docker Build Cloud plan
 
 You no longer need to subscribe to a separate Docker Build Cloud plan to access
 Docker Build Cloud or to scale your minutes. When you upgrade your Legacy Docker plan to
