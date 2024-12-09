@@ -66,6 +66,7 @@ Mac
 Mail(chimp|gun)
 Microsoft
 MySQL
+NFSv\d
 Netplan
 Nginx
 Nuxeo
@@ -121,10 +122,17 @@ Zsh
 [Rr]untimes?
 [Ss]andbox(ed)?
 [Ss]eccomp
+[Ss]ubmounts?
+[Ss]ubpaths?
+[Ss]ubtrees?
+[Ss]wappable
 [Ss]wappable
 [Ss]warm
+[Ss]warm
+[Ss]yscalls?
 [Ss]ysfs
 [Tt]oolchains?
+[Uu]narchived?
 [Vv]irtiofs
 [Vv]irtualize
 [Ww]alkthrough
@@ -169,6 +177,7 @@ tmpfs
 ufw
 umask
 ungated
+userland
 untrusted
 vSphere
 vpnkit

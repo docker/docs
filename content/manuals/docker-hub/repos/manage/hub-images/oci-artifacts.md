@@ -4,6 +4,8 @@ linkTitle: Software artifacts
 weight: 20
 keywords: oci, artifacts, docker hub
 description: You can use Docker Hub to store software artifacts packaged as OCI artifacts.
+aliases:
+- /docker-hub/oci-artifacts/
 ---
 
 You can use Docker Hub to store any kind of software artifact, not just

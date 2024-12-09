@@ -5,7 +5,7 @@ title: Scale your subscription
 weight: 17
 ---
 
->[!NOTE]
+> [!NOTE]
 >
 > Owners of legacy Docker subscription plans must upgrade their subscription to a new
 > Docker subscription plan in order to scale their subscription.
@@ -15,6 +15,7 @@ weight: 17
 > their current plan and pricing until their next renewal date that falls on or
 > after December 10, 2024. To see purchase or renewal history, view your
 > [billing history](../billing/history.md). For more details about legacy
+> after December 10, 2024. For more details about legacy
 > subscriptions, see [Announcing Upgraded Docker
 > Plans](https://www.docker.com/blog/november-2024-updated-plans-announcement/).
 
@@ -25,6 +26,7 @@ amount of consumption. See [Docker subscriptions and features](./details.md) to
 learn how much base consumption comes with each subscription. You can scale your
 consumption at any time during your subscription period. All purchased
 consumption expires at the end of your subscription term.
+amount of consumption. You can scale your consumption at any time during your subscription period. All purchased consumption expires at the end of your subscription term.
 
 You can scale consumption for the following:
 

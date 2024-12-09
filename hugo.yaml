@@ -107,14 +107,14 @@ params:
   docs_url: https://docs.docker.com
 
   latest_engine_api_version: "1.47"
-  docker_ce_version: "27.3.1"
+  docker_ce_version: "27.4.0"
   compose_version: "v2.30.3"
   compose_file_v3: "3.8"
   compose_file_v2: "2.4"
   buildkit_version: "0.16.0"
 
   example_go_version: "1.23"
-  example_alpine_version: "3.20"
+  example_alpine_version: "3.21"
   example_node_version: "20"
 
   min_version_thresholds:
