@@ -57,7 +57,7 @@ and set `sbomIndexing` to `false` to disable, or to `true` to enable.
 
 ### Manage access to Docker Hub
 
-To manage access for Docker Hub, sign in to the [Docker Admin Console](https://app.docker.com/admin) and configure [Registry Access
+To manage access to Docker Hub, sign in to the [Docker Admin Console](https://app.docker.com/admin) and configure [Registry Access
 Management](../../security/for-admins/hardened-desktop/registry-access-management.md)
 or [Image Access
 Management](../../security/for-admins/hardened-desktop/image-access-management.md).
