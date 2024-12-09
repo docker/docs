@@ -15,7 +15,7 @@
 
 /content/manuals/extensions-sdk/ @aevesdocker
 
-/content/manuals/scout/ @dvdksn
+/content/manuals/scout/ @craig-osterhout
 
 /content/manuals/docker-hub/ @craig-osterhout
 
@@ -29,7 +29,7 @@
 
 /content/manuals/docker-hub/official_images/ @craig-osterhout
 
-/content/manuals/registry/ @dvdksn
+/content/manuals/registry/ @craig-osterhout
 
 /content/manuals/admin/ @sarahsanders-docker
 
