@@ -128,4 +128,5 @@ exceptions:
   - XML
   - XSS
   - YAML
+  - ZFS
   - ZIP
