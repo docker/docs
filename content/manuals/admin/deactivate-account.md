@@ -1,5 +1,5 @@
 ---
-title: Deactivating an organization
+title: Deactivate an organization
 description: Learn how to deactivate a Docker organization.
 keywords: Docker Hub, delete, deactivate organization, account, organization management
 aliases:
@@ -19,13 +19,13 @@ Before deactivating an organization, complete the following:
 - Download any images and tags you want to keep:
   `docker pull -a <image>:<tag>`.
 
-- If you have an active Docker subscription, [downgrade it to a free subscription](../subscription/core-subscription/downgrade.md).
-
-- If you have an active Docker Scout subscription, [downgrade it to a Docker Scout Free subscription](../billing/scout-billing.md#downgrade-your-subscription).
+- If you have an active Docker subscription, [downgrade it to a free subscription](../subscription/change.md).
 
 - Remove all other members within the organization.
 
 - Unlink your [Github and Bitbucket accounts](../docker-hub/repos/manage/builds/link-source.md#unlink-a-github-user-account).
+
+- For Business organizations, [remove your SSO connection](../security/for-admins/single-sign-on/manage/#remove-an-organization).
 
 ## Deactivate
 
