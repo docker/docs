@@ -98,7 +98,7 @@ WireMock
 Zscaler
 Zsh
 [Aa]utobuilds?
-[Aa]tests?
+[Aa]utotests?
 [Bb]uildx
 [Bb]uildpack(s)?
 [Cc]odenames?
