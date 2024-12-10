@@ -38,9 +38,9 @@ grid:
       Ensure that your artifacts align with supply chain best practices.
     icon: policy
   - title: Upgrade
-    link: /billing/scout-billing/
+    link: /subscription/change/
     description: |
-      The free plan includes up to 3 repositories. Upgrade for more.
+      The free plan includes up to 1 repository. Upgrade for more.
     icon: upgrade
 ---
 
