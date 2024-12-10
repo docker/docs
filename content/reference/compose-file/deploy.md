@@ -50,7 +50,11 @@ services:
 
 ### mode
 
-`mode` defines the replication model used to run the service on the  platform. Either `global`, exactly one container per physical node, or `replicated`, a specified number of containers. The default is `replicated`.
+`mode` defines the replication model used to run the service on the platform. Either `global`, exactly one container per physical node, or `replicated`, a specified number of containers. The default is `replicated`.
+
+Two additional modes are available for jobs:
+- `replicated-job`: A job that runs a specified number of tasks with controlled parallelism
+- `global-job`: A job that runs once on each swarm node
 
 ```yml
 services:
@@ -59,6 +63,27 @@ services:
     deploy:
       mode: global
 ```
+
+For job modes, additional parameters can be specified:
+
+```yml
+services:
+  batch-job:
+    image: example/processor
+    deploy:
+      mode: replicated-job
+      replicas: 1
+      max_concurrent: 2      # Maximum parallel job tasks
+      total_completions: 10  # Total number of times to run
+
+  maintenance:
+    image: example/updater
+    deploy:
+      mode: global-job      # Runs once on each node
+```
+
+Note: Job modes are designed for tasks that have a finite completion state, unlike services which run continuously. Once a job completes, its containers exit but the service remains in the swarm until removed.
+
 
 ### placement
 
