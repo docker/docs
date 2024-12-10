@@ -3,8 +3,6 @@ title: Update billing information
 weight: 30
 description: Learn how to update your billing information in Docker Hub
 keywords: payments, billing, subscription, invoices
-aliases:
-- /billing/details/
 ---
 
 You can update the billing information for your personal account or for an organization. When you update your billing information, these changes apply to future billing invoices. Note that you can't update an existing invoice, including paid and unpaid invoices.
