@@ -3,8 +3,6 @@ title: Change your billing cycle
 weight: 50
 description: Learn to change your billing cycle for your Docker subscription
 keywords: billing, cycle, payments, subscription
-aliases:
-- /billing/cycle/
 ---
 
 You can pay for a subscription plan on a monthly or yearly billing cycle. You select your preferred billing cycle when you buy your subscription.
