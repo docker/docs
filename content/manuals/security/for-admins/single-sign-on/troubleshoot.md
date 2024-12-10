@@ -16,8 +16,7 @@ their service.
 ## View SSO and SCIM error logs
 
 1. Sign in to the [Admin Console](https://app.docker.com/admin/).
-2. Select your organization or company in the left navigation drop-down menu,
-   and then select **SSO and SCIM**.
+2. Select your organization or company from the Choose profile page, and then select **SSO and SCIM**.
 
    > [!NOTE]
    >

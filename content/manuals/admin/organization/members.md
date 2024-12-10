@@ -70,8 +70,7 @@ To resend an invitation from Docker Hub:
 
 To resend an invitation from the Admin Console:
 
-1. Open the [Admin Console](https://app.docker.com/admin) and select your organization from
-top-left drop-down menu.
+1. In the [Admin Console](https://app.docker.com/admin), select your organization.
 2. Select **Members**.
 3. Select the **action menu** next to the invitee and select **Resend invitation**.
 4. Select **Invite** to confirm.
@@ -98,8 +97,7 @@ To remove a member's invitation from Docker Hub:
 
 To remove an invitation from the Admin Console:
 
-1. Open the [Admin Console](https://app.docker.com/admin) and select your organization from
-top-left drop-down menu.
+1. In the [Admin Console](https://app.docker.com/admin), select your organization.
 2. Select **Members**.
 3. Select the **action menu** next to the invitee and select **Remove invitee**.
 4. Select **Remove** to confirm.
