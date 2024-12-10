@@ -3,7 +3,6 @@ Amazon
 Anchore
 Apple
 Artifactory
-Autotest
 Azure
 Btrfs
 BuildKit
@@ -97,8 +96,10 @@ Windows
 WireMock
 Zscaler
 Zsh
-[Aa]utobuild
 [Aa]llowlist
+[Aa]utobuilds?
+[Aa]utotests?
+[Bb]uildx
 [Bb]uildpack(s)?
 [Bb]uildx
 [Cc]odenames?
@@ -121,6 +122,7 @@ Zsh
 [Pp]roxied
 [Pp]roxying
 [Rr]eal-time
+[Rr]egex(es)?
 [Rr]untimes?
 [Ss]andbox(ed)?
 [Ss]eccomp
