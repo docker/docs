@@ -3,8 +3,6 @@ title: View billing history
 weight: 40
 description: Discover how to view your billing history in Docker Hub
 keywords: payments, billing, subscription, invoices, renewals, invoice management, billing administration
-aliases:
-- /billing/history/
 ---
 
 In this section, learn how you can view your billing history, manage your invoices, and verify your renewal date. All monthly and annual subscriptions are automatically renewed at the end of the term using the original form of payment.
