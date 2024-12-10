@@ -15,7 +15,6 @@ The organization access tokens feature is currently in [Beta](../../release-life
 > Organization access tokens aren't currently compatible with the following services:
 >
 > - Docker Build Cloud
-> - Docker Scout
 > - Docker REST APIs
 >
 > If you use these services, you must use personal access tokens instead.
