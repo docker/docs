@@ -9,7 +9,7 @@ ARG NODE_VERSION=22
 ARG PAGEFIND_VERSION=1.1.1
 
 # base defines the generic base stage
-FROM golang:${GO_VERSION}-alpine AS base
+FROM golang:${GO_VERSION}-alpine${ALPINE_VERSION} AS base
 RUN apk add --no-cache \
     git \
     nodejs \
