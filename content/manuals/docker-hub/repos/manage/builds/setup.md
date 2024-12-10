@@ -37,7 +37,7 @@ when the tests succeed.
    >
    > You may be redirected to the settings page to [link](link-source.md) the
    > code repository service. Otherwise, if you are editing the build settings
-   > for an existing automated build, click **Configure automated builds**.
+   > for an existing automated build, select **Configure automated builds**.
 
 4. Select the **source repository** to build the Docker images from.
 
@@ -289,9 +289,9 @@ variable to automated builds associated with the account. For more information, 
 
     > [!NOTE]
     >
-    > You may need to log out of your individual account on the source code provider to create the link to the service account.
+    > You may need to sign out of your individual account on the source code provider to create the link to the service account.
 
-6. Optional: Use the SSH keys you generated to set up any builds with private submodules, using the service account and [the instructions above](troubleshoot.md#build-repositories-with-linked-private-submodules).
+6. Optional: Use the SSH keys you generated to set up any builds with private submodules, using the service account and [the previous instructions](troubleshoot.md#build-repositories-with-linked-private-submodules).
 
 ## What's Next?
 

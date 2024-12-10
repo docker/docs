@@ -37,7 +37,7 @@ services:
     command: run_tests.sh
 ```
 
-The example above builds the repository, and runs the `run_tests.sh` file inside
+The previous example builds the repository, and runs the `run_tests.sh` file inside
 a container using the built image.
 
 You can define any number of linked services in this file. The only requirement
