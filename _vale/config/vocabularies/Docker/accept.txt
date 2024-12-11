@@ -97,7 +97,8 @@ Windows
 WireMock
 Zscaler
 Zsh
-[Aa]utobuild
+[Aa]utobuilds?
+[Aa]utotests?
 [Bb]uildx
 [Bb]uildpack(s)?
 [Cc]odenames?
@@ -119,6 +120,7 @@ Zsh
 [Pp]roxied
 [Pp]roxying
 [Rr]eal-time
+[Rr]egex(es)?
 [Rr]untimes?
 [Ss]andbox(ed)?
 [Ss]eccomp
