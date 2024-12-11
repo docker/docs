@@ -90,6 +90,7 @@ Docker Desktop does not require any particular Linux distributions to be install
      ```console
     $ wsl --set-default <distribution name>
     ```
+   If **WSL Integrations** isn't available in the resources panel, Docker may be in Windows container mode. In the task bar, right click on the Docker icon and select "switch to Linux containers".
 
 3. Select **Apply & Restart**.
 
