@@ -15,11 +15,6 @@ aliases:
 > Automated builds require a
 > Docker Pro, Team, or Business subscription.
 
-This page contains information on:
-- [Configuring automated builds](#configure-automated-builds)
-- [Advanced automated build options](#advanced-automated-build-options)
-- [Automated builds for teams](#autobuild-for-teams)
-
 ## Configure automated builds
 
 You can configure repositories in Docker Hub so that they automatically
@@ -47,7 +42,7 @@ when the tests succeed.
    > the source code provider. Once you select a user, source code
    > repositories appear in the **Select repository** drop-down list.
 
-5. Optional: Enable [autotests](automated-testing.md#enable-automated-tests-on-a-repository).
+5. Optional. Enable [autotests](automated-testing.md#enable-automated-tests-on-a-repository).
 
 6. Review the default **Build Rules**.
 
@@ -56,10 +51,11 @@ when the tests succeed.
     within the Docker repository.
 
     A default build rule is set up for you, which you can edit or delete. This
-    default rule sets builds from the `Branch` in your source code repository called
-    `master` or `main`, and creates a Docker image tagged with `latest`. For more information, see [set up build rules](#set-up-build-rules)
+    default rule sets builds from the `Branch` in your source code repository
+    called `master` or `main`, and creates a Docker image tagged with `latest`.
+    For more information, see [set up build rules](#set-up-build-rules).
 
-7. Optional: Select the **plus** icon to add and [configure more build rules](#set-up-build-rules).
+7. Optional. Select the **plus** icon to add and [configure more build rules](#set-up-build-rules).
 
 8. For each branch or tag, enable or disable the **Autobuild** toggle.
 
@@ -279,9 +275,11 @@ variable to automated builds associated with the account. For more information, 
 2. Create a "build" team in your organization.
 3. Ensure that the new "build" team has access to each repository and submodule you need to build.
 
-    Go to the repository's **Settings** page. On GitHub, add the new "build" team
-    to the list of **Collaborators and Teams**. On Bitbucket, add the "build" team
-    to the list of approved users on the **Access management** screen.
+    1. On GitHub or Bitbucket, go to the repository's **Settings** page.
+    2. Add the new "build" team to the list of approved users.
+
+        - GitHub: Add the team in **Collaborators and Teams**.
+        - Bitbucket: Add the team in  **Access management**.
 
 4. Add the service user to the "build" team on the source provider.
 
@@ -291,7 +289,7 @@ variable to automated builds associated with the account. For more information, 
     >
     > You may need to sign out of your individual account on the source code provider to create the link to the service account.
 
-6. Optional: Use the SSH keys you generated to set up any builds with private submodules, using the service account and [the previous instructions](troubleshoot.md#build-repositories-with-linked-private-submodules).
+6. Optional. Use the SSH keys you generated to set up any builds with private submodules, using the service account and [the previous instructions](troubleshoot.md#build-repositories-with-linked-private-submodules).
 
 ## What's Next?
 
