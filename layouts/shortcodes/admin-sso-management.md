@@ -3,7 +3,7 @@
 
 {{ if eq (.Get "product") "admin" }}
   {{ $product_link = "the [Admin Console](https://app.docker.com/admin)" }}
-  {{ $sso_navigation = "Select your organization or company in the left navigation drop-down menu, and then select **SSO and SCIM**." }}
+  {{ $sso_navigation = "Select your organization or company from the Choose profile page, and then select **SSO and SCIM**." }}
 {{ end }}
 
 ### Remove a domain from an SSO connection
