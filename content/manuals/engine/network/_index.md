@@ -145,6 +145,14 @@ direct routing to containers, see
 
 ## IP address and hostname
 
+When creating a network, IPv4 address allocation is enabled by default, it
+can be disabled using `--ipv4=false`. IPv6 address allocation can be enabled
+using `--ipv6`.
+
+```console
+$ docker network create --ipv6 --ipv4=false v6net
+```
+
 By default, the container gets an IP address for every Docker network it attaches to.
 A container receives an IP address out of the IP subnet of the network.
 The Docker daemon performs dynamic subnetting and IP address allocation for containers.
