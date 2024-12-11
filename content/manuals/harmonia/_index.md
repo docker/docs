@@ -264,7 +264,7 @@ Run `docker harmonia doctor` to print helpful troubleshooting information.
 - Containers cannot access host through DNS `host.docker.internal`.
 - File binds (non-directory binds) are currently static, meaning changes will not be reflected until the container is restarted. This also affects Compose configs and secrets directives.
 - Bind _mounts_, such as `-v /localpath:/incontainer` in the `docker run` command, require creating a file-sync.
-- Starting a file-sync for a directory with a large amount of may take extra time to sync and become ready for use in a container.
+- Creating a [synchronized file share](/manuals/desktop/features/synchronized-file-sharing.md) for a directory with a large amount of may take extra time to sync and become ready for use in a container.
 - Bind _volumes_, such as those created with `docker volume create --driver local --opt type=none --opt o=bind --opt device=/some/host/path myvolname` or via the compose equivalent, are not supported.
 - Port-forwarding for UDP is not supported. 
 - Docker Compose projects relying on `watch` in `sync` mode are not working with the `tar` synchronizer. Configure it to use `docker cp` instead, disable tar sync by setting `COMPOSE_EXPERIMENTAL_WATCH_TAR=0` in your environment.
