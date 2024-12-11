@@ -64,6 +64,41 @@ networking functionality:
 For more information about the different drivers, see [Network drivers
 overview](./drivers/_index.md).
 
+### Connecting to multiple networks
+
+A container can be connected to multiple networks.
+
+For example, a frontend container may be connected to a bridge network
+with external access, and a
+[`--internal`](/reference/cli/docker/network/create/#internal) network
+to communicate with containers running backend services that do not need
+external network access.
+
+A container may also be connected to different types of network. For example,
+an `ipvlan` network to provide internet access, and a `bridge` network for
+access to local services.
+
+When sending packets, if the destination is an address in a directly connected
+network, packets are sent to that network. Otherwise, packets are sent to
+a default gateway for routing to their destination. In the example above,
+the `ipvlan` network's gateway must be the default gateway.
+
+The default gateway is selected by Docker, and may change whenever a
+container's network connections change.
+To make Docker choose a specific default gateway when creating the container
+or connecting a new network, set a gateway priority. See option `gw-priority`
+for the [`docker run`](/reference/cli/docker/container/run.md) and
+[`docker network connect`](/reference/cli/docker/network/connect.md) commands.
+
+The default `gw-priority` is `0` and the gateway in the network with the
+highest priority is the default gateway. So, when a network should always
+be the default gateway, it is enough to set its `gw-priority` to `1`.
+
+```console
+$ docker run --network name=gwnet,gw-priority=1 --network anet1 --name myctr myimage
+$ docker network connect anet2 myctr
+```
+
 ## Container networks
 
 In addition to user-defined networks, you can attach a container to another
