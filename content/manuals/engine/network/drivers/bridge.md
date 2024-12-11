@@ -229,6 +229,9 @@ When you create your network, you can specify the `--ipv6` flag to enable IPv6.
 $ docker network create --ipv6 --subnet 2001:db8:1234::/64 my-net
 ```
 
+If you do not provide a `--subnet` option, a Unique Local Address (ULA) prefix
+will be chosen automatically.
+
 ## Use the default bridge network
 
 The default `bridge` network is considered a legacy detail of Docker and is not
@@ -259,7 +262,12 @@ the settings you need to customize.
 }
 ```
 
-Restart Docker for the changes to take effect.
+In this example:
+
+- The bridge's address is "192.168.1.1/24" (from `bip`).
+- The bridge network's subnet is "192.168.1.0/24" (from `bip`).
+- Container addresses will be allocated from "192.168.1.0/25" (from `fixed-cidr`).
+
 
 ### Use IPv6 with the default bridge network
 
@@ -270,21 +278,33 @@ These three options only affect the default bridge, they are not used by
 user-defined networks. The addresses in below are examples from the
 IPv6 documentation range.
 
-- Option `ipv6` is required
-- Option `fixed-cidr-v6` is required, it specifies the network prefix to be used.
+- Option `ipv6` is required.
+- Option `bip6` is optional, it specifies the address of the default bridge, which
+  will be used as the default gateway by containers. It also specifies the subnet
+  for the bridge network.
+- Option `fixed-cidr-v6` is optional, it specifies the address range Docker may
+  automatically allocate to containers.
   - The prefix should normally be `/64` or shorter.
   - For experimentation on a local network, it is better to use a Unique Local
-    prefix (matching `fd00::/8`) than a Link Local prefix (matching `fe80::/10`).
+    Address (ULA) prefix (matching `fd00::/8`) than a Link Local prefix (matching
+    `fe80::/10`).
 - Option `default-gateway-v6` is optional. If unspecified, the default is the first
   address in the `fixed-cidr-v6` subnet.
 
 ```json
 {
   "ipv6": true,
+  "bip6": "2001:db8::1111/64",
   "fixed-cidr-v6": "2001:db8::/64",
   "default-gateway-v6": "2001:db8:abcd::89"
 }
 ```
+
+If no `bip6` is specified, `fixed-cidr-v6` defines the subnet for the bridge
+network. If no `bip6` or `fixed-cidr-v6` is specified, a ULA prefix will be
+chosen.
+
+Restart Docker for changes to take effect.
 
 ## Connection limit for bridge networks
 
