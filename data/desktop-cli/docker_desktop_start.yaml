@@ -14,16 +14,6 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
-    - option: force
-      value_type: stringArray
-      default_value: '[]'
-      description: Immediately terminate all Docker Desktop processes
-      deprecated: false
-      hidden: false
-      experimental: false
-      experimentalcli: false
-      kubernetes: false
-      swarm: false
     - option: timeout
       value_type: string
       default_value: '[]'
