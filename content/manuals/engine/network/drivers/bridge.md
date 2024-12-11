@@ -232,6 +232,17 @@ $ docker network create --ipv6 --subnet 2001:db8:1234::/64 my-net
 If you do not provide a `--subnet` option, a Unique Local Address (ULA) prefix
 will be chosen automatically.
 
+## IPv6-only bridge networks
+
+To skip IPv4 address configuration on the bridge and in its containers, create
+the network with option `--ipv4=false`, and enable IPv6 using `--ipv6`.
+
+```console
+$ docker network create --ipv6 --ipv4=false v6net
+```
+
+IPv4 address configuration cannot be disabled in the default bridge network.
+
 ## Use the default bridge network
 
 The default `bridge` network is considered a legacy detail of Docker and is not
