@@ -5,8 +5,8 @@ pname: docker desktop
 plink: docker_desktop.yaml
 options:
     - option: detach
-      value_type: stringArray
-      default_value: '[]'
+      value_type: bool
+      default_value: false
       description: Start Docker Desktop in the background
       deprecated: false
       hidden: false
@@ -15,8 +15,8 @@ options:
       kubernetes: false
       swarm: false
     - option: timeout
-      value_type: string
-      default_value: '[]'
+      value_type: init
+      default_value: 0
       description: Specify in seconds how long to wait for Docker Desktop to start before timing out
       deprecated: false
       hidden: false
