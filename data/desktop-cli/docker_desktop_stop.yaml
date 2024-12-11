@@ -4,10 +4,29 @@ usage: docker desktop stop [OPTIONS]
 pname: docker desktop
 plink: docker_desktop.yaml
 options:
+    - option: detach
+      value_type: stringArray
+      default_value: '[]'
+      description: Start Docker Desktop in the background
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: force
       value_type: stringArray
       default_value: '[]'
-      description: Immediately terminate all Docker Desktop processes.
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: timeout
+      value_type: string
+      default_value: '[]'
+      description: Specify in seconds how long to wait for Docker Desktop to start before timing out
       deprecated: false
       hidden: false
       experimental: false
