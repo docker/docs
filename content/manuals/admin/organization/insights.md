@@ -28,8 +28,7 @@ Key benefits include:
 
 1. Go to the [Admin Console](https://app.docker.com/admin/) and sign in to an
    account that is an organization owner.
-2. In the Admin Console, select your organization from the drop-down in the left
-   navigation.
+2. Select your company on the **Choose profile** page.
 3. Select **Insights**.
 4. On the **Insights** page, select the period of time for the data.
 
