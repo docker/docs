@@ -3,7 +3,7 @@
 
 {{ if eq (.Get "product") "admin" }}
   {{ $product_link = "the [Admin Console](https://admin.docker.com)" }}
-  {{ $sso_navigation = "Select your organization or company in the left navigation drop-down menu, and then select **SSO and SCIM**. Note that when an organization is part of a company, you must select the company and configure SSO for that organization at the company level. Each organization can have its own SSO configuration and domain, but it must be configured at the company level." }}
+  {{ $sso_navigation = "Select your organization or company from the **Choose profile** page, and then select **SSO and SCIM**. Note that when an organization is part of a company, you must select the company and configure SSO for that organization at the company level. Each organization can have its own SSO configuration and domain, but it must be configured at the company level." }}
 {{ end }}
 
 > [!IMPORTANT]
