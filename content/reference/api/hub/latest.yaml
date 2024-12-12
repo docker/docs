@@ -118,7 +118,7 @@ paths:
 
         Most Docker Hub APIs require this token either to consume or to get detailed information. For example, to list images in a private repository.
 
-        _**As of Monday, September 16, 2024, this route requires a PAT instead of a password if your organization has SSO enforced.**_
+        _**As of September 16, 2024, this route requires a PAT instead of a password if your organization has SSO enforced.**_
       requestBody:
         content:
           application/json:
