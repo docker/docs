@@ -15,7 +15,7 @@ aliases:
 
 Learn how to onboard your organization using Docker Hub or the Docker Admin Console.
 
-Onboarding your organization lets you gain visibility into the activity of your users and enforce security settings. In addition, members of your organization receive increased pull limits and other organization wide benefits. For more details, see [Docker subscriptions and features](/subscription/core-subscription/details/).
+Onboarding your organization lets administrators gain visibility into the activity of your users and enforce security settings. In addition, members of your organization receive increased pull limits and other organization wide benefits. For more details, see [Docker subscriptions and features](../../subscription/details.md).
 
 In this guide, you'll learn how to get started with the following:
 
@@ -81,8 +81,7 @@ You can manage your members in your identity provider and automatically provisio
 
 By default, members of your organization can use Docker Desktop without signing
 in. When users don’t sign in as a member of your organization, they don’t
-receive the [benefits of your organization’s
-subscription](/subscription/core-subscription/details/) and they can circumvent
+receive the [benefits of your organization’s subscription](../../subscription/details.md) and they can circumvent
 [Docker’s security features](/security/for-admins/hardened-desktop/) for your
 organization.
 
@@ -94,8 +93,7 @@ set up and preferences:
 
 ## What's next
 
-- [Create](/docker-hub/repos/create/) and [manage](/docker-hub/repos/) repositories.
-- Create [teams](/admin/organization/manage-a-team/) for fine-grained repository access.
+- [Manage Docker products](./manage-products.md) to configure access and view usage.
 - Configure [Hardened Docker Desktop](/desktop/hardened-desktop/) to improve your organization’s security posture for containerized development.
 - [Audit your domains](/docker-hub/domain-audit/) to ensure that all Docker users in your domain are part of your organization.
 

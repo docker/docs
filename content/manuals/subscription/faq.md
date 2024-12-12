@@ -15,7 +15,7 @@ Subscriptions are non-transferable.
 
 ### Can I pause or delay my Docker subscription?
 
-You can't pause or delay a subscription, but you can [downgrade](downgrade.md). If a subscription invoice hasn't been paid on the due date, there's a 15 day grace period, including the due date.
+You can't pause or delay a subscription, but you can [downgrade](change.md). If a subscription invoice hasn't been paid on the due date, there's a 15 day grace period, including the due date.
 
 ### Does Docker offer academic pricing?
 

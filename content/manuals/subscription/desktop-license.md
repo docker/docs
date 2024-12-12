@@ -27,4 +27,4 @@ GNU General Public License. Select [here](https://download.docker.com/opensource
 
 > [!TIP]
 >
-> Explore [Docker subscriptions](https://www.docker.com/pricing/) to see what else Docker can offer you. 
+> Explore [Docker subscriptions](https://www.docker.com/pricing/) to see what else Docker can offer you.

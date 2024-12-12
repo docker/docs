@@ -18,17 +18,13 @@ Before deactivating your Docker account, ensure you meet the following requireme
 - For owners, you must leave your organization or company before deactivating your Docker account.
     To do this:
     1. Sign in to the [Docker Admin Console](https://app.docker.com/admin).
-    2. Select the organization you need to leave from the top-left drop-down menu.
+    2. Select the organization you need to leave from the **Choose profile** page.
     3. Find your username in the **Members** tab.
     4. Select the **More options** menu and then select **Leave organization**.
 
 - If you are the sole owner of an organization, you must assign the owner role to another member of the organization and then remove yourself from the organization, or deactivate the organization. Similarly, if you are the sole owner of a company, either add someone else as a company owner and then remove yourself, or deactivate the company.
 
-- If you have an active Docker subscription, [downgrade it to a Docker Personal subscription](../subscription/core-subscription/downgrade.md).
-
-- If you have an active Docker Build Cloud Paid subscription, [downgrade it to a Docker Build Cloud Starter subscription](../billing/build-billing.md#downgrade-your-subscription).
-
-- If you have an active Docker Scout subscription, [downgrade it to a Docker Scout Free subscription](../billing/scout-billing.md#downgrade-your-subscription).
+- If you have an active Docker subscription, [downgrade it to a Docker Personal subscription](../subscription/change.md).
 
 - Download any images and tags you want to keep. Use `docker pull -a <image>:<tag>`.
 

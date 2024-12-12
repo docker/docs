@@ -37,6 +37,7 @@ exceptions:
   - ELK
   - FAQ
   - FUSE
+  - GB
   - GCC
   - GDB
   - GET
@@ -128,4 +129,5 @@ exceptions:
   - XML
   - XSS
   - YAML
+  - ZFS
   - ZIP

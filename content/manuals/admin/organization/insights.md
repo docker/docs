@@ -5,11 +5,8 @@ title: Insights
 ---
 
 > [!NOTE]
-> Insights requires a [Docker Business
-> subscription](/subscription/core-subscription/details/#docker-business) and
-> administrators must [enforce sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md)
-> to ensure that users sign in with an account associated with their
-> organization.
+>
+> Insights requires a [Docker Business subscription](../../subscription/details.md#docker-business) and administrators must [enforce sign-in](/security/for-admins/enforce-sign-in/). This ensures users sign in with an account associated with their organization.
 
 Insights helps administrators visualize and understand how Docker is used within
 their organizations. With Insights, administrators can ensure their teams are
@@ -31,8 +28,7 @@ Key benefits include:
 
 1. Go to the [Admin Console](https://app.docker.com/admin/) and sign in to an
    account that is an organization owner.
-2. In the Admin Console, select your organization from the drop-down in the left
-   navigation.
+2. Select your company on the **Choose profile** page.
 3. Select **Insights**.
 4. On the **Insights** page, select the period of time for the data.
 

@@ -23,6 +23,49 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projects/51/views/1?filterQuery=) to see what's coming next.
 
+## 4.37.0
+
+{{< release-date date="2024-12-12" >}}
+
+{{< desktop-install-v2 all=true beta_win_arm=true version="4.37.0" build_path="/178034/" >}}
+
+### New
+
+- You can now perform key operations such as starting, stopping, restarting, and checking the status of Docker Desktop directly from the command line.
+- The AI Catalog in Docker Hub is available directly through Docker Desktop.
+
+### Upgrades
+
+- [Docker Buildx v0.19.2](https://github.com/docker/buildx/releases/tag/v0.19.2)
+- [Docker Compose v2.31.0](https://github.com/docker/compose/releases/tag/v2.31.0)
+- [Docker Engine v27.4.0](https://docs.docker.com/engine/release-notes/27/#2740)
+- [Docker Scout CLI v1.15.1](https://github.com/docker/scout-cli/releases/tag/v1.15.1)
+- [NVIDIA Container Toolkit v1.17.2](https://github.com/NVIDIA/nvidia-container-toolkit/releases/tag/v1.17.2)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- The default disk usage limit for Docker Engine in new installations is now 1TB.
+- Fixed an issue where containers could not establish loopback `AF_VSOCK` connections.
+- Fixed a bug where resetting default settings would also reset the CLI context.
+- Fixed a bug where the Docker Desktop Dashboard would get out of sync with the Docker daemon after restarting the engine while in Resource Saver mode (Windows with WSL2 backend only) or after switching engines (macOS).
+- Fixed a bug where Resource Saver mode would fail to re-engage after restarting the engine while in Resource Saver mode.
+
+#### For Mac
+
+- Fixed a bug that would create certain user directories with root permission when running the uninstaller binary twice with `sudo`.
+- Fixed a bug where the in-app update would fail if Docker Desktop was installed by a non-admin user or if the current user was previously an administrator. Fixes [docker/for-mac#7403](https://github.com/docker/for-mac/issues/7403) and [docker/for-mac#6920](https://github.com/docker/for-mac/issues/6920).
+
+#### For Windows
+
+- Added support for Windows on ARM using WSL 2 version 2.3.24 and later to single distribution mode on WSL 2.
+- Fixed an issue where Docker Desktop would fail to start. Fixes [docker/for-win#14453](https://github.com/docker/for-win/issues/14453)
+
+### Known issues
+
+- Kubernetes cluster may not start if **Registry Access Manager** is enabled. As a workaround, add `registry.k8s.io` and `<geo>-docker.pkg.dev` to **Registry Access Management** policies.
+
 ## 4.36.0
 
 {{< release-date date="2024-11-18" >}}
@@ -45,7 +88,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 - [Docker Buildx v0.18.0](https://github.com/docker/buildx/releases/tag/v0.18.0)
 - [Docker Compose v2.30.3](https://github.com/docker/compose/releases/tag/v2.30.3)
-- [Kubernetes v1.30.2](https://github.com/kubernetes/kubernetes/releases/tag/v1.30.5)
+- [Kubernetes v1.30.5](https://github.com/kubernetes/kubernetes/releases/tag/v1.30.5)
 - [NVIDIA Container Toolkit v1.17.0](https://github.com/NVIDIA/nvidia-container-toolkit/releases/tag/v1.17.0)
 - [Docker Scout CLI v1.15.0](https://github.com/docker/scout-cli/releases/tag/v1.15.0)
 - Docker Init v1.4.0
