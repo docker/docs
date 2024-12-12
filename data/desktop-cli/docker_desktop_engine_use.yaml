@@ -1,0 +1,11 @@
+command: docker desktop engine use
+short: Switch to Windows or Linux containers (Windows only)
+usage: docker desktop engine use NAME
+pname: docker desktop engine
+plink: docker_desktop_engine.yaml
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false

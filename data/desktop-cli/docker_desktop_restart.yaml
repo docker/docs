@@ -1,0 +1,11 @@
+command: docker desktop restart
+short: Restart Docker Desktop
+usage: docker desktop restart
+pname: docker desktop
+plink: docker_desktop.yaml
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
