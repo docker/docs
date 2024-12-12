@@ -787,7 +787,6 @@ paths:
       description: |
         Return all pending invites for a given org, only team owners can call this endpoint
       tags:
-        - orgs
         - invites
       responses:
         '200':
