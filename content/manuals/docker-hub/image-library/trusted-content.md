@@ -13,7 +13,7 @@ secure images designed to give developers confidence in the reliability and
 security of the resources they use. These images are stable, regularly updated,
 and adhere to industry best practices, making them a strong foundation for
 building and deploying applications. Docker Hub's trusted content includes,
-Docker Official Images, Verified Publisher images, and Docker Sponsored Open
+Docker Official Images, Verified Publisher images, and Docker-Sponsored Open
 Source Software images.
 
 ## Docker Official Images
@@ -171,9 +171,9 @@ high-quality commercial publishers.
 
 ![Docker-Sponsored Open Source badge](../images/verified-publisher-badge-iso.png)
 
-## Docker Sponsored Open Source Software images
+## Docker-Sponsored Open Source Software images
 
-The Docker Sponsored Open Source Software (OSS) program provides images that are
+The Docker-Sponsored Open Source Software (OSS) program provides images that are
 published and maintained by open-source projects sponsored by Docker.
 
 Images that are part of this program have a special badge on Docker Hub making

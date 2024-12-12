@@ -1,12 +1,12 @@
 ---
 description: Learn about Docker Hub's library of images, extensions, and plugins.
 keywords: Docker Hub, Hub, content library
-title: Container image library
+title: Content library
 linkTitle: Library
 weight: 20
 ---
 
-Docker Hub's container image library is the world's largest collection of
+Docker Hub's content library is the world's largest collection of
 container images, extensions, and plugins. It provides a central location to
 discover pre-built images and tools designed to streamline your container
 workflows, making it easier to share and collaborate.

@@ -12,7 +12,7 @@ grid:
   icon: explore
   link: /docker-hub/quickstart
 - title: Library
-  description: Explore the container image library, featuring millions of images for operating systems, frameworks, databases, and more.
+  description: Explore the content library, featuring millions of images for operating systems, frameworks, databases, and more.
   icon: book
   link: /docker-hub/image-library/
 - title: Repositories

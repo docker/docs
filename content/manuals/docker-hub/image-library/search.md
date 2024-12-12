@@ -92,7 +92,7 @@ secure images designed to give developers confidence in the reliability and
 security of the resources they use. These images are stable, regularly updated,
 and adhere to industry best practices, making them a strong foundation for
 building and deploying applications. Docker Hub's trusted content includes,
-Docker Official Images, Verified Publisher images, and Docker Sponsored Open
+Docker Official Images, Verified Publisher images, and Docker-Sponsored Open
 Source Software images.
 
 For more details, see [Trusted content](./trusted-content.md).

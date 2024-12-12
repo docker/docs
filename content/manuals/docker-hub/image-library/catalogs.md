@@ -37,19 +37,19 @@ into key areas to support diverse AI development needs:
   demos provide a hands-on way to explore AI tools and frameworks, making it
   easier to understand how they can be integrated into real-world applications.
 - Models: Pre-trained AI models for tasks like text generation,
-  natural language processing (NLP), and conversational AI. These models
+  Natural Language Processing (NLP), and conversational AI. These models
   provide a foundation for
   AI applications without requiring developers to train models from scratch.
 - Applications and end-to-end platforms: Comprehensive platforms and tools that
   simplify AI application development, including low-code solutions and
-  frameworks for building multi-agent and retrieval-augmented generation (RAG)
+  frameworks for building multi-agent and Retrieval-Augmented Generation (RAG)
   applications.
 - Model deployment and serving: Tools and frameworks that enable developers to
   efficiently deploy and serve AI models in production environments. These
   resources include pre-configured stacks for GPUs and other specialized
   hardware, ensuring performance at scale.
 - Orchestration: Solutions for managing complex AI workflows, such as workflow
-  engines, large language model (LLM) application frameworks, and lifecycle management
+  engines, Large Language Model (LLM) application frameworks, and lifecycle management
   tools, to help streamline development and operations.
 - Machine learning frameworks: Popular frameworks like TensorFlow and PyTorch
   that provide the building blocks for creating, training, and fine-tuning
