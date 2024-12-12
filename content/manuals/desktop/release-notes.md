@@ -32,7 +32,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 ### New
 
 - You can now perform key operations such as starting, stopping, restarting, and checking the status of Docker Desktop directly from the command line.
-- The AI Catalog in Docker Hub is directly available through Docker Desktop.
+- The AI Catalog in Docker Hub is available directly through Docker Desktop.
 
 ### Upgrades
 
