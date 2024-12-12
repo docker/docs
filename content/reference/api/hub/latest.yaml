@@ -22,7 +22,7 @@ tags:
     x-displayName: Resources
     description: |
       The following resources are available to interact with the documented API:
-      - [Docker Hub CLI tool]("https://github.com/docker/hub-tool#readme) (currently experimental)
+      - [Docker Hub CLI tool](https://github.com/docker/hub-tool#readme) (currently experimental)
   - name: rate-limiting
     x-displayName: Rate Limiting
     description: |
