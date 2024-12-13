@@ -70,8 +70,8 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 #### For Mac
 
-- QEMU (Legacy) as a VMM on Apple Silicon will be removed in a future version. Please switch to virtualization.framework for increased performance and stability. If you encounter an issue, [contact support](https://www.docker.com/support/) or file a [github issue](https://github.com/docker/for-mac/issues).
-- osxfs (Legacy) will be removed in a future version. Please switch to VirtioFS for increased performance. If you encounter an issue, [contact support](https://www.docker.com/support/) or file a [github issue](https://github.com/docker/for-mac/issues).
+- QEMU (Legacy) as a VMM on Apple Silicon will be removed in a future version. It is recommended that you switch to the Apple Virtualization Framework for increased performance and stability. If you encounter an issue, [contact Docker Support](https://www.docker.com/support/) or [file a GitHub issue](https://github.com/docker/for-mac/issues).
+- osxfs (Legacy) will be removed in a future version. It is recommended that you switch to VirtioFS for increased performance. If you encounter an issue, [contact Docker Support](https://www.docker.com/support/) or [file a GitHub issue](https://github.com/docker/for-mac/issues).
 
 ## 4.36.0
 
