@@ -15,9 +15,9 @@ This section describes how to create an organization. Before you begin:
 
 ## Create an organization
 
-There are multiple ways to create an organization. You can:
-- create a new organization using the **Create Organization** option in Docker Hub.
-- or you can convert an existing user account to an organization.
+There are multiple ways to create an organization. You can either:
+- Create a new organization using the **Create Organization** option in Docker Hub
+- Convert an existing user account to an organization
 
 The following section contains instructions on how to create a new organization. For prerequisites and
 detailed instructions on converting an existing user account to an organization, see
