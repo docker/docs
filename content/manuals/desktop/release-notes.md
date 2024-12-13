@@ -66,6 +66,13 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 - Kubernetes cluster may not start if **Registry Access Manager** is enabled. As a workaround, add `registry.k8s.io` and `<geo>-docker.pkg.dev` to **Registry Access Management** policies.
 
+### Deprecation
+
+#### For Mac
+
+- QEMU (Legacy) as a VMM on Apple Silicon will be removed in a future version. It is recommended that you switch to the Apple Virtualization Framework for increased performance and stability. If you encounter an issue, [contact Docker Support](https://www.docker.com/support/) or [file a GitHub issue](https://github.com/docker/for-mac/issues).
+- osxfs (Legacy) will be removed in a future version. It is recommended that you switch to VirtioFS for increased performance. If you encounter an issue, [contact Docker Support](https://www.docker.com/support/) or [file a GitHub issue](https://github.com/docker/for-mac/issues).
+
 ## 4.36.0
 
 {{< release-date date="2024-11-18" >}}
