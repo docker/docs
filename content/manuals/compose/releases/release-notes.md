@@ -13,6 +13,31 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.32.0
+
+{{< release-date date="2024-12-13" >}}
+
+### Update
+
+- Dependencies upgrade: bump docker + buildx to latest release
+- Dependencies upgrade: bump otel dependencies to v1.28.0 and v0.53.0
+- Dependencies upgrade: bump golang.org/x/sys 0.28.0
+- Dependencies upgrade: bump golang.org/x/crypto to 0.31.0
+- Dependencies upgrade: bump google.golang.org/grpc to 1.68.1
+- Dependencies upgrade: bump golang.org/x/sync 0.10.0
+- Dependencies upgrade: bump xx to v1.6.1
+
+### Bug fixes and enhancements
+
+- Improve support to build with [bake](/build/bake/)
+- Added `restart` and `sync+exec` watch actions
+- Compose now recreates containers when the volume or network configuration changes
+- Fixed support for `mac_address`
+- Fixed `pull --quiet` to only hide progress, not global status
+- Fixed an issue where only the `rebuild` watch action now requires a build declaration
+- Compose now los `watch` configuration error when enabled through the Compose menu
+
+
 ## 2.31.0
 
 {{< release-date date="2024-11-28" >}}
