@@ -30,7 +30,7 @@ This page contains information on how you can set or change the following pre-de
 ## Methods to override 
 
 You can set or change the pre-defined environment variables:
-- With an [`.env` file located in your working director](/manuals/compose/how-tos/environment-variables/variable-interpolation.md) 
+- With an [`.env` file located in your working directory](/manuals/compose/how-tos/environment-variables/variable-interpolation.md) 
 - From the command line
 - From your [shell](variable-interpolation.md#substitute-from-the-shell)
 
