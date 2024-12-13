@@ -31,7 +31,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 ### New
 
-- You can now perform key operations such as starting, stopping, restarting, and checking the status of Docker Desktop directly from the command line.
+- You can now perform key operations such as starting, stopping, restarting, and checking the status of Docker Desktop directly from the [command line](/manuals/desktop/features/desktop-cli.md) (Beta).
 - The AI Catalog in Docker Hub is available directly through Docker Desktop.
 
 ### Upgrades
@@ -65,6 +65,13 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 ### Known issues
 
 - Kubernetes cluster may not start if **Registry Access Manager** is enabled. As a workaround, add `registry.k8s.io` and `<geo>-docker.pkg.dev` to **Registry Access Management** policies.
+
+### Deprecation
+
+#### For Mac
+
+- QEMU (Legacy) as a VMM on Apple Silicon will be removed in a future version. It is recommended that you switch to the Apple Virtualization Framework for increased performance and stability. If you encounter an issue, [contact Docker Support](https://www.docker.com/support/) or [file a GitHub issue](https://github.com/docker/for-mac/issues).
+- osxfs (Legacy) will be removed in a future version. It is recommended that you switch to VirtioFS for increased performance. If you encounter an issue, [contact Docker Support](https://www.docker.com/support/) or [file a GitHub issue](https://github.com/docker/for-mac/issues).
 
 ## 4.36.0
 
