@@ -2759,5 +2759,5 @@ x-tagGroups:
       - repositories
       - scim
       - orgs 
-      - invites
       - groups
+      - invites
