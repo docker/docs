@@ -38,6 +38,11 @@ the CLI plugin from source, or grab a binary from the GitHub repository and
 install it manually. See [Buildx README](https://github.com/docker/buildx#manual-download)
 on GitHub for more information.
 
+> [!NOTE]
+> While `docker build` invokes Buildx under the hood, there are subtle
+> differences between this command and the canonical `docker buildx build`.
+> For details, see [Difference between `docker build` and `docker buildx build`](../builders/_index.md#difference-between-docker-build-and-docker-buildx-build).
+
 ## BuildKit
 
 BuildKit is the daemon process that executes the build workloads.
