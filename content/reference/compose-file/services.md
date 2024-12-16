@@ -1152,6 +1152,27 @@ Compose creates containers with canonical labels:
 The `com.docker.compose` label prefix is reserved. Specifying labels with this prefix in the Compose file
 results in a runtime error.
 
+### label_file
+
+{{< introduced compose 2.23.2 "/manuals/compose/releases/release-notes.md#2232" >}}
+
+The `label_file property` attribute lets you load labels for a service from an external file or a list of files. This provides a convenient way to manage multiple labels without cluttering the Compose file.
+
+The file uses a key-value format, similar to `env_file`. You can specify multiple files as a list. When using multiple files, they are processed in the order they appear in the list. If the same label is defined in multiple files, the value from the last file in the list overrides earlier ones.
+
+```yaml
+services:
+  one:
+    label_file: ./app.labels 
+  
+  two:
+    label_file:               
+      - ./app.labels
+      - ./additional.labels
+```
+
+If a label is defined in both the `label_file` and the `labels` attribute, the value in [`labels](#labels) takes precedence.
+
 ### links
 
 `links` defines a network link to containers in another service. Either specify both the service name and
