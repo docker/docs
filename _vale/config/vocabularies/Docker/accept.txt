@@ -110,6 +110,7 @@ Zsh
 [Ii]nfosec
 [Kk]eyrings?
 [Ll]oopback
+[Mm]emcached
 [Mm]oby
 [Nn]amespace
 [Oo]nboarding
@@ -153,6 +154,7 @@ kubectl
 kubefwd
 kubelet
 lookup
+label_file
 macOS
 macvlan
 mfsymlinks

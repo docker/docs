@@ -40,7 +40,7 @@ The Docker Engine API is a RESTful API accessed by an HTTP client such as `wget`
 ## View the API reference
 
 You can
-[view the reference for the latest version of the API](latest/index.html)
+[view the reference for the latest version of the API](/reference/api/engine/version/v{{% param latest_engine_api_version %}}.md)
 or [choose a specific version](/reference/api/engine/version-history/).
 
 ## Versioned API and SDK

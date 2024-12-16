@@ -9,6 +9,7 @@ second: '(?:\b[A-Z][a-z]+ )+\(([A-Z]{2,5})\)'
 # ... with the exception of these:
 exceptions:
   - AGPL
+  - AI
   - API
   - ARM
   - ASP
@@ -54,6 +55,7 @@ exceptions:
   - HTTP
   - HTTPS
   - IAM
+  - IBM
   - ID
   - IDE
   - IP
