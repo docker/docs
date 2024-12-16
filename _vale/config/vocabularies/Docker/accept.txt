@@ -153,6 +153,7 @@ kubectl
 kubefwd
 kubelet
 lookup
+label_file
 macOS
 macvlan
 mfsymlinks
