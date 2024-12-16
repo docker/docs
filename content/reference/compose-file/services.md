@@ -913,12 +913,12 @@ services:
   common:
     image: busybox
     security_opt:
-      - label:role:ROLE
+      - label=role:ROLE
   cli:
     extends:
       service: common
     security_opt:
-      - label:user:USER
+      - label=user:USER
 ```
 
 Produces the following configuration for the `cli` service.
@@ -926,8 +926,8 @@ Produces the following configuration for the `cli` service.
 ```yaml
 image: busybox
 security_opt:
-- label:role:ROLE
-- label:user:USER
+- label=role:ROLE
+- label=user:USER
 ```
 
 In case list syntax is used, the following keys should also be treated as sequences:
@@ -1715,8 +1715,8 @@ secrets:
 
 ```yml
 security_opt:
-  - label:user:USER
-  - label:role:ROLE
+  - label=user:USER
+  - label=role:ROLE
 ```
 
 For further default labeling schemes you can override, see [Security configuration](/reference/cli/docker/container/run.md#security-opt).
