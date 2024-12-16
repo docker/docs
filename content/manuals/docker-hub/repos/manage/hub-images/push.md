@@ -36,7 +36,7 @@ images with others or use them in different environments.
    Example:
 
    ```console
-   $ docker push my-app my-namespace/my-repo:v1.0
+   $ docker push my-namespace/my-repo:v1.0
    ```
 
    This command pushes the image tagged `v1.0` to the `my-namespace/my-repo` repository.
