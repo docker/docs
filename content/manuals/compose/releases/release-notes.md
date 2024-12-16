@@ -29,13 +29,13 @@ For more detailed information, see the [release notes in the Compose repo](https
 
 ### Bug fixes and enhancements
 
-- Improve support to build with [bake](/build/bake/)
+- Improved support when building with [Bake](/manuals/build/bake.md)
 - Added `restart` and `sync+exec` watch actions
 - Compose now recreates containers when the volume or network configuration changes
 - Fixed support for `mac_address`
 - Fixed `pull --quiet` to only hide progress, not global status
 - Fixed an issue where only the `rebuild` watch action now requires a build declaration
-- Compose now los `watch` configuration error when enabled through the Compose menu
+- Compose now logs `watch` configuration error when enabled through the Compose menu
 
 
 ## 2.31.0
