@@ -13,8 +13,7 @@ aliases:
 
 ### What is a Docker ID?
 
-A Docker ID is a username for your Docker account that lets you access Docker products. All you need is an email address to create a Docker ID, or you can sign up with your Google or GitHub account. Your Docker ID must be between 4 and 30 characters long, and can only contain
-numbers and lowercase letters. You can't use any special characters or spaces.
+A Docker ID is a username for your Docker account that lets you access Docker products. To create a Docker ID, you need an email address or you can sign up with your social or GitHub accounts. Your Docker ID must be between 4 and 30 characters long, and can only contain numbers and lowercase letters. You can't use any special characters or spaces.
 
 For more information, see [Docker ID](/accounts/create-account/). If your administrator enforces [single sign-on (SSO)](../../security/for-admins/single-sign-on/_index.md), this provisions a Docker ID for new users.
 
@@ -65,6 +64,10 @@ Docker SSO allows only one IdP configuration per organization. For more
 information, see [Configure SSO](../../security/for-admins/single-sign-on/configure/_index.md) and [SSO FAQs](../../security/faqs/single-sign-on/faqs.md).
 
 ### What is a service account?
+
+> [!IMPORTANT]
+>
+> As of December 10, 2024, service accounts are no longer available. Existing Service Account agreements will be honored until their current term expires, but new purchases or renewals of service accounts no longer available and customers must renew under a new subscription plan. It is recommended to transition to Organization Access Tokens (OATs), which can provide similar functionality. For more information, see [Organization access tokens (Beta)](/manuals/security/for-admins/access-tokens.md).
 
 A [service account](../../docker-hub/service-accounts.md) is a Docker ID used for automated management of container images or containerized applications. Service accounts are typically used in automated workflows, and don't share Docker IDs with the members in the Team or Business plan. Common use cases for service accounts include mirroring content on Docker Hub, or tying in image pulls from your CI/CD process.
 

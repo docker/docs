@@ -2,6 +2,7 @@
 description: Convert your Docker Hub user account into an organization
 title: Convert an account into an organization
 keywords: docker hub, hub, organization, convert account, migrate account
+weight: 35
 aliases:
 - /docker-hub/convert-account/
 ---
@@ -12,7 +13,7 @@ When you convert a user account to an organization, the account is migrated to a
 
 > [!IMPORTANT]
 >
-> Once you convert your account to an organization, you can’t revert it to a user account. 
+> Once you convert your account to an organization, you can’t revert it to a user account.
 
 ## Prerequisites
 
