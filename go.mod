@@ -5,7 +5,7 @@ go 1.23.1
 require (
 	github.com/docker/buildx v0.19.2 // indirect
 	github.com/docker/cli v27.4.0+incompatible // indirect
-	github.com/docker/compose/v2 v2.31.0 // indirect
+	github.com/docker/compose/v2 v2.32.0 // indirect
 	github.com/docker/scout-cli v1.15.0 // indirect
 	github.com/moby/buildkit v0.18.0 // indirect
 	github.com/moby/moby v27.4.0+incompatible // indirect
