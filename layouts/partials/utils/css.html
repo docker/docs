@@ -1,7 +1,7 @@
 {{ $styles := resources.Get "css/styles.css" }}
-{{ $styles = $styles | css.PostCSS }}
+{{ $styles = $styles | css.TailwindCSS }}
 {{ if hugo.IsProduction }}
-  {{ $styles = $styles | minify | fingerprint | resources.PostProcess }}
+  {{ $styles = $styles | minify | fingerprint }}
 <style>
 /* hide img injected by prod scripts */
 body > img { display: none }

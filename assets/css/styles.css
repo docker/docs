@@ -1,16 +1,12 @@
 /* see also: tailwind.config.js */
+@import "tailwindcss";
+/* @config "tailwind.config.js"; */
 
-@import "tailwindcss/base";
-@import "/assets/css/global";
-@import "/assets/css/typography";
-@import "/assets/css/hack";
-
-@import "tailwindcss/components";
-@import "/assets/css/code";
-@import "/assets/css/toc";
-@import "/assets/css/kapa";
-
-@import "tailwindcss/utilities";
-@import "/assets/css/syntax-light";
-@import "/assets/css/syntax-dark";
-@import "/assets/css/icons";
+@import "fonts.css";
+@import "palette.css";
+@import "global.css";
+@import "typography.css";
+@import "syntax-light.css";
+@import "syntax-dark.css";
+@import "icons.css";
+@import "hack.css";

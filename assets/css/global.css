@@ -1,4 +1,5 @@
 /* global styles */
+@import "tailwindcss";
 
 @layer base {
   [x-cloak=""] {
@@ -41,49 +42,61 @@
   input[type="search"]::-ms-clear {
     display: none;
   }
+
+  /* Styles for built-in Table of Contents markup */
+  #TableOfContents {
+    .toc a {
+      @apply block max-w-full truncate py-1 pl-2 hover:font-medium hover:no-underline;
+      &[aria-current="true"],
+      &:hover {
+        @apply border-l-2 border-l-gray-light bg-gradient-to-r from-gray-light-100 font-medium text-black dark:border-l-gray-dark dark:from-gray-dark-200 dark:text-white;
+      }
+      &:not([aria-current="true"]) {
+        @apply text-gray-light-600 hover:text-black dark:text-gray-dark-700 dark:hover:text-white;
+      }
+    }
+  }
 }
 
 /* utility classes */
 
-@layer utilities {
-  .link {
-    @apply text-blue-light underline underline-offset-2 dark:text-blue-dark;
-  }
+@utility link {
+  @apply text-blue-light underline underline-offset-2 dark:text-blue-dark;
+}
 
-  .invertible {
-    @apply dark:hue-rotate-180 dark:invert dark:filter;
-  }
+@utility invertible {
+  @apply dark:hue-rotate-180 dark:invert dark:filter;
+}
 
-  .bg-pattern-blue {
-    background-color: theme(colors.white / 50%);
-    background-image: url('/assets/images/bg-pattern-blue.webp');
-    background-blend-mode: overlay;
-    background-size: cover;
-    background-repeat: none;
-    .dark & {
-      background-color: theme(colors.black / 70%);
-    }
+@utility bg-pattern-blue {
+  background-color: theme(colors.white / 50%);
+  background-image: url('/assets/images/bg-pattern-blue.webp');
+  background-blend-mode: overlay;
+  background-size: cover;
+  background-repeat: none;
+  .dark & {
+    background-color: theme(colors.black / 70%);
   }
+}
 
-  .bg-pattern-purple {
-    background-color: theme(colors.white / 50%);
-    background-image: url('/assets/images/bg-pattern-purple.webp');
-    background-blend-mode: overlay;
-    background-size: cover;
-    background-repeat: none;
-    .dark & {
-      background-color: theme(colors.black / 70%);
-    }
+@utility bg-pattern-purple {
+  background-color: theme(colors.white / 50%);
+  background-image: url('/assets/images/bg-pattern-purple.webp');
+  background-blend-mode: overlay;
+  background-size: cover;
+  background-repeat: none;
+  .dark & {
+    background-color: theme(colors.black / 70%);
   }
+}
 
-  .bg-pattern-verde {
-    background-color: theme(colors.white / 50%);
-    background-image: url('/assets/images/bg-pattern-verde.webp');
-    background-blend-mode: overlay;
-    background-size: cover;
-    background-repeat: none;
-    .dark & {
-      background-color: theme(colors.black / 70%);
-    }
+@utility bg-pattern-verde {
+  background-color: theme(colors.white / 50%);
+  background-image: url('/assets/images/bg-pattern-verde.webp');
+  background-blend-mode: overlay;
+  background-size: cover;
+  background-repeat: none;
+  .dark & {
+    background-color: theme(colors.black / 70%);
   }
 }
