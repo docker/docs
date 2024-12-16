@@ -17,11 +17,13 @@ The organization owner can add additional organization owners to help them manag
 ## Organization owner
 
 An organization owner is an administrator who has the following permissions:
-- Manage repositories and add team members to the organization
-- Full access to private repositories, all teams, billing information, and organization settings
-- Can specify [permissions](#permissions-reference) for each team in the organization
-- Only organization owners can enable [SSO](../../security/for-admins/single-sign-on/_index.md)
-for the organization. When SSO is enabled for your organization, the organization owner can
+
+- Manage repositories and add team members to the organization.
+- Access private repositories, all teams, billing information, and organization settings.
+- Specify [permissions](#permissions-reference) for each team in the organization.
+- Enable [SSO](../../security/for-admins/single-sign-on/_index.md) for the organization.
+
+When SSO is enabled for your organization, the organization owner can
 also manage users. Docker can auto-provision Docker IDs for new end-users or
 users who'd like to have a separate Docker ID for company use through SSO
 enforcement.
