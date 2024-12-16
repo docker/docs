@@ -47,6 +47,11 @@ In this section, learn how to:
      Bitbucket for automated builds. Every code change triggers an image
      rebuild, supporting continuous integration and delivery.
 
+   - [Trusted content](./manage/trusted-content/_index.md): Contribute to Docker
+     Official Images or manage repositories in the Verified Publisher and
+     Sponsored Open Source programs, including tasks like setting logos,
+     accessing analytics, and enabling vulnerability scanning.
+
 - [Archive](./archive.md) an outdated or unsupported repository.
 - [Delete](./delete.md) a repository.
 - [Manage personal settings](./settings.md): For your account, you can set personal
