@@ -48,8 +48,10 @@ Add the following configuration:
 Save the file, or in the case of Docker Desktop for Mac or Docker Desktop for
 Windows, save the configuration. Restart Docker.
 
-Docker now exposes Prometheus-compatible metrics on port 9323 on the loopback
-interface.
+Docker now exposes Prometheus-compatible metrics on port 9323 via the loopback
+interface. You can configure it to use the wildcard address `0.0.0.0` instead,
+but this will expose the Prometheus port to the wider network. Consider your
+threat model carefully when deciding which option best suits your environment.
 
 ### Create a Prometheus configuration
 
