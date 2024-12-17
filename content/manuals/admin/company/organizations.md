@@ -14,9 +14,11 @@ You can manage the organizations in a company in the Docker Admin Console.
 2. Select your company on the **Choose profile** page.
 3. Under **Organizations**, select **Overview**.
 
+The organization overview page displays all organizations under your company.
+
 ## Add seats to an organization
 
-When you have a [self-serve](../../subscription/details.md#self-serve) subscription that has no pending subscription changes, you can add seats using the following steps.
+When you have a [self-serve](../../subscription/details.md#self-serve) subscription that has no pending subscription changes, you can add seats using the following steps. If you have a sales-assisted subscription, you can contact Docker support or sales to add seats.
 
 For more information about adding seats, see [Manage seats](/manuals/subscription/manage-seats.md#add-seats).
 

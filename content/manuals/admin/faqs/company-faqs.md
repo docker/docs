@@ -32,7 +32,7 @@ You can add a maximum of 10 company owners to a single company account.
 
 ### Do company owners occupy a subscription seat?
 
-Company owners don't occupy a seat in any organization unless they are added as
+Company owners don't occupy a seat in any organization unless they are added as a
 member of the organization. Since company owners have the same access as
 organization owners for all organizations associated with the company, it is not
 necessary to add company owners to an organization.
@@ -66,7 +66,7 @@ A company name must be unique to that of its child organization. If a child orga
 
 You can add organizations to a company in the Admin Console. For more information, see [Add organizations to a company](../../admin/company/organizations.md#add-organizations-to-a-company.md).
 
-### How does a company owner manage SSO/SCIM settings from a company?
+### How does a company owner manage SSO/SCIM settings for a company?
 
 See your [SCIM](scim.md) and [SSO](../../security/for-admins/single-sign-on/configure/_index.md) settings.
 
