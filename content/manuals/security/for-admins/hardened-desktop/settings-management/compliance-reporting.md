@@ -1,22 +1,22 @@
 ---
-description: Understand how to use the Desktop Settings Compliance reporting dashboard
-keywords: Settings Management, docker desktop, hardened desktop, compliance reporting
-title: Compliance reporting
-linkTitle: Compliance Reporting
+description: Understand how to use the Desktop settings reporting dashboard
+keywords: Settings Management, docker desktop, hardened desktop, reporting, compliance
+title: Desktop settings reporting
+linkTitle: Desktop Settings Reporting
 weight: 30
 ---
 
-Compliance reporting is a feature of Desktop Settings Management that tracks and reports user compliance with the settings that are assigned to them. This lets administrators to track the application of settings and monitor what actions they need to take to make users compliant.
+Desktop settings reporting is a feature of Desktop Settings Management that tracks and reports user compliance with the settings that are assigned to them. This lets administrators to track the application of settings and monitor what actions they need to take to make users compliant.
 
 This guide provides steps for accessing the reporting dashboard, viewing compliance status, and resolving non-compliant users.
 
-## Access compliance reporting dashboard
+## Access Desktop settings reporting
 
 1. Sign in to the [Admin Console](https://app.docker.com/admin).
 2. Select your **organization** from the **Choose profile** page.
-3. Under Security and access, select **Desktop Settings reporting**.
+3. Under Docker Desktop, select **Reporting**.
 
-This opens the Desktop Settings Management Compliance dashboard. From here you can:
+This opens the Desktop settings reporting dashboard. From here you can:
 
 - Use the **Search bar** to search by username or email address
 - Filter by policies
@@ -28,16 +28,16 @@ This opens the Desktop Settings Management Compliance dashboard. From here you c
 
 1. Sign in to the [Admin Console](https://app.docker.com/admin).
 2. Select your **organization** from the **Choose profile** page.
-3. Under Security and access, select **Desktop Settings reporting**.
+3. Under Docker Desktop, select **Reporting**.
 4. By default, non-compliant users are displayed.
-5. Optional. Select the **Hide compliant users** checkbox to show compliant and non-compliant users.
+5. Optional. Select the **Hide compliant users** checkbox to show both compliant and non-compliant users.
 6. Use the search bar to search by username or email address.
 7. Hover over a user’s compliance status indicator to quickly view their status.
 8. Select a **username** to view more details about their compliance status, and for steps to resolve non-compliant users.
 
 ## Resolve compliance status
 
-To resolve compliance status, you must open a user's compliance status details. This window provides the following information:
+To resolve compliance status, you must view a user's compliance status details by selecting their username from the Desktop settings reporting page. These details include the following information:
 
 - **Compliance status**: Indicates whether the user is compliant with the settings applied to them
 - **Domain status**: Indicates whether the user’s email address is associated with a verified domain
@@ -46,7 +46,7 @@ To resolve compliance status, you must open a user's compliance status details. 
 
 ### Compliant
 
-When a user is compliant, a Compliant icon appears next to their name on the Desktop Settings Management Compliance ****dashboard. Select a compliant user to open their compliance status details, they will have the following status details:
+When a user is compliant, a "Compliant" icon appears next to their name on the Desktop settings reporting dashboard. Select a compliant user to open their compliance status details. Compliant users will have the following status details:
 
 - **Compliance status**: Compliant
 - **Domain status**: Verified domain
@@ -57,5 +57,9 @@ No resolution steps are needed for compliant users.
 
 ### Non-compliant
 
-When a user is non-compliant, a Non-compliant or Unknown icon appears next to their name on the Desktop Settings Management Compliance dashboard. Non-compliant and Unknown statuses need resolved to become compliant.
+When a user is non-compliant, a "Non-compliant" or "Unknown" icon appears next to their name on the Desktop settings reporting dashboard. Non-compliant users must have their compliance status resolved:
+
+1. Select a username from the Desktop settings reporting dashboard.
+2. On the compliance status details page, follow the resolution steps provided to resolve the compliance status.
+3. Refresh the page to ensure the resolution steps resolved the compliance status.
 
