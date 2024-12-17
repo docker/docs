@@ -13,7 +13,7 @@ This guide provides steps for accessing the reporting dashboard, viewing complia
 ## Access Desktop settings reporting
 
 1. Sign in to the [Admin Console](https://app.docker.com/admin).
-2. Select your **organization** from the **Choose profile** page.
+2. Select your **organization** or **company** from the **Choose profile** page.
 3. Under Docker Desktop, select **Reporting**.
 
 This opens the Desktop settings reporting dashboard. From here you can:
@@ -27,7 +27,7 @@ This opens the Desktop settings reporting dashboard. From here you can:
 ## View compliance status
 
 1. Sign in to the [Admin Console](https://app.docker.com/admin).
-2. Select your **organization** from the **Choose profile** page.
+2. Select your **organization** or **company** from the **Choose profile** page.
 3. Under Docker Desktop, select **Reporting**.
 4. By default, non-compliant users are displayed.
 5. Optional. Select the **Hide compliant users** checkbox to show both compliant and non-compliant users.
@@ -62,4 +62,3 @@ When a user is non-compliant, a "Non-compliant" or "Unknown" icon appears next t
 1. Select a username from the Desktop settings reporting dashboard.
 2. On the compliance status details page, follow the resolution steps provided to resolve the compliance status.
 3. Refresh the page to ensure the resolution steps resolved the compliance status.
-
