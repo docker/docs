@@ -17,6 +17,7 @@ exceptions:
   - AWS
   - BIOS
   - BPF
+  - BSD
   - CI
   - CISA
   - CLI
@@ -73,6 +74,7 @@ exceptions:
   - NFS
   - NOTE
   - NTLM
+  - NUMA
   - NVDA
   - OCI
   - OS
