@@ -5,7 +5,7 @@ level: warning
 ignorecase: false
 # Ensures that the existence of 'first' implies the existence of 'second'.
 first: '\b([A-Z]{2,5})\b'
-second: '(?:\b[A-Z][a-z]+ )+\(([A-Z]{2,5})\)'
+second: '(?:\b[A-Z][a-z]+ )+\(([A-Z]{2,5})s?\)'
 # ... with the exception of these:
 exceptions:
   - AGPL
