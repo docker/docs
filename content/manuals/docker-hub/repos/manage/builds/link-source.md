@@ -3,6 +3,8 @@ description: Link to GitHub and BitBucket
 keywords: Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, trusted,
   builds, trusted builds, automated builds, GitHub
 title: Configure automated builds from GitHub and BitBucket
+linkTitle: Link accounts
+weight: 20
 aliases:
 - /docker-hub/github/
 - /docker-hub/bitbucket/
