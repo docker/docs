@@ -11,6 +11,15 @@ params:
       text: EA
 ---
 
+{{< summary-bar
+    subscription="domain"
+    subscriptionText="Business"
+    lifecycle="rocket_launch"
+    lifecycleText="EA"
+    admin="admin_panel_settings"
+    adminText="Admin"
+>}}
+
 {{% restricted title="Early Access" %}}
 Settings Management in the Docker Admin Console is an [early access](/release-lifecycle#early-access-ea) feature and is available to Docker Business customers only.
 {{% /restricted %}}
