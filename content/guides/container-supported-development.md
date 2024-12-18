@@ -51,6 +51,10 @@ With container-supported development, it's easy to run databases locally. In thi
 
 {{< youtube-embed VieWeXOwKLU >}}
 
+> [!TIP]
+>
+> Learn more about running databases in containers in the [Use containerized databases](/guides/databases.md) guide.
+
 ### Demo: mocking API endpoints
 
 Many APIs require data from other data endpoints. In development, this adds complexities such as the sharing of credentials, uptime/availability, and rate limiting. Instead of relying on those services directly, your application can interact with a mock API server.
@@ -59,6 +63,10 @@ This demo will demonstrate how using WireMock can make it easy to develop and te
 
 {{< youtube-embed VXSmX6f8vo0 >}}
 
+> [!TIP]
+>
+> Learn more about using WireMock to mock API in the [Mocking API services with WireMock](/guides/wiremock.md) guide.
+
 ### Demo: developing the cloud locally
 
 When developing apps, it's often easier to outsource aspects of the application to cloud services, such as Amazon S3. However, connecting to those services in local development introduces IAM policies, networking constraints, and provisioning complications. While these requirements are important in a production setting, they complicate development environments significantly. 
@@ -66,6 +74,10 @@ When developing apps, it's often easier to outsource aspects of the application 
 With container-supported development, you can run local instances of these services during development and testing, removing the need for complex setups. In this demo, you'll see how LocalStack makes it easy to develop and test applications entirely from the developer's workstation.
 
 {{< youtube-embed JtwUMvR5xlY >}}
+
+> [!TIP]
+>
+> Learn more about using LocalStack in the [Develop and test AWS Cloud applications using LocalStack](/guides/localstack.md) guide.
 
 ### Demo: adding additional debug and troubleshooting tools
 
