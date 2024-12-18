@@ -28,34 +28,34 @@ Summary bar icon library:
     <span class="text-base font-semibold text-white">Available for:</span>
     {{ if .Get "subscription" }}
         <div class="flex items-center gap-2">
-            <span class="material-symbols-rounded text-lg text-white">
+            <span class="material-symbols-rounded text-sm text-white">
                 {{ .Get "subscription" }}
             </span>
-            <span class="text-sm font-medium text-white">{{ .Get "subscriptionText" }}</span>
+            <span class="text-sm text-white">{{ .Get "subscriptionText" }}</span>
         </div>
     {{ end }}
     {{ if .Get "lifecycle" }}
         <div class="flex items-center gap-2">
-            <span class="material-symbols-rounded text-lg text-white">
+            <span class="material-symbols-rounded text-sm text-white">
                 {{ .Get "lifecycle" }}
             </span>
-            <span class="text-sm font-medium text-white">{{ .Get "lifecycleText" }}</span>
+            <span class="text-sm text-white">{{ .Get "lifecycleText" }}</span>
         </div>
     {{ end }}
     {{ if .Get "version" }}
         <div class="flex items-center gap-2">
-            <span class="material-symbols-rounded text-lg text-white">
+            <span class="material-symbols-rounded text-sm text-white">
                 {{ .Get "version" }}
             </span>
-            <span class="text-sm font-medium text-white">{{ .Get "versionText" }}</span>
+            <span class="text-sm text-white">{{ .Get "versionText" }}</span>
         </div>
     {{ end }}
     {{ if .Get "admin" }}
         <div class="flex items-center gap-2">
-            <span class="material-symbols-rounded text-lg text-white">
+            <span class="material-symbols-rounded text-sm text-white">
                 {{ .Get "admin" }}
             </span>
-            <span class="text-sm font-medium text-white">{{ .Get "adminText" }}</span>
+            <span class="text-sm text-white">{{ .Get "adminText" }}</span>
         </div>
     {{ end }}
 </div>
