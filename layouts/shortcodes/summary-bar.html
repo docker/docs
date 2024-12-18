@@ -22,34 +22,40 @@ Summary bar icon library:
     - Label: Admin                      | Icon: admin_panel_settings
 -->
 
-{{ $styles := resources.Get "css/summary-bar.css" | resources.Minify }}
-<link rel="stylesheet" href="{{ $styles.RelPermalink }}">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet">
 
-<div class="summary-bar">
-    <span class="summary-title">Available for:</span>
+<div class="flex items-center gap-4 p-4 bg-blue-light-500 rounded-md">
+    <span class="text-base font-semibold text-white">Available for:</span>
     {{ if .Get "subscription" }}
-        <div class="summary-icon">
-            <span class="material-symbols-outlined">{{ .Get "subscription" }}</span>
-            <span class="summary-label">{{ .Get "subscriptionText" }}</span>
+        <div class="flex items-center gap-2">
+            <span class="material-symbols-rounded text-lg text-white">
+                {{ .Get "subscription" }}
+            </span>
+            <span class="text-sm font-medium text-white">{{ .Get "subscriptionText" }}</span>
         </div>
     {{ end }}
     {{ if .Get "lifecycle" }}
-        <div class="summary-icon">
-            <span class="material-symbols-outlined">{{ .Get "lifecycle" }}</span>
-            <span class="summary-label">{{ .Get "lifecycleText" }}</span>
+        <div class="flex items-center gap-2">
+            <span class="material-symbols-rounded text-lg text-white">
+                {{ .Get "lifecycle" }}
+            </span>
+            <span class="text-sm font-medium text-white">{{ .Get "lifecycleText" }}</span>
         </div>
     {{ end }}
     {{ if .Get "version" }}
-        <div class="summary-icon">
-            <span class="material-symbols-outlined">{{ .Get "version" }}</span>
-            <span class="summary-label">{{ .Get "versionText" }}</span>
+        <div class="flex items-center gap-2">
+            <span class="material-symbols-rounded text-lg text-white">
+                {{ .Get "version" }}
+            </span>
+            <span class="text-sm font-medium text-white">{{ .Get "versionText" }}</span>
         </div>
     {{ end }}
     {{ if .Get "admin" }}
-        <div class="summary-icon">
-            <span class="material-symbols-outlined">{{ .Get "admin" }}</span>
-            <span class="summary-label">{{ .Get "adminText" }}</span>
+        <div class="flex items-center gap-2">
+            <span class="material-symbols-rounded text-lg text-white">
+                {{ .Get "admin" }}
+            </span>
+            <span class="text-sm font-medium text-white">{{ .Get "adminText" }}</span>
         </div>
     {{ end }}
 </div>
