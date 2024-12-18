@@ -12,7 +12,7 @@ aliases:
 
 ### What if the Docker ID I want for my organization or company is taken?
 
-All Docker IDs are first-come, first-served except for companies that have a US Trademark on a username. If you have a trademark for your namespace, [Docker Support](https://hub.docker.com/support/contact/) can retrieve the Docker ID for you.
+All Docker IDs are first-come, first-served except for companies that have a U.S. Trademark on a username. If you have a trademark for your namespace, [Docker Support](https://hub.docker.com/support/contact/) can retrieve the Docker ID for you.
 
 ### How do I add an organization owner?
 
@@ -24,11 +24,11 @@ If your organization uses a Software Asset Management tool, you can use it to fi
 
 ### Do users first need to authenticate with Docker before an owner can add them to an organization?
 
-No. Organization owners can invite users with their email address, and also assign them to a team during the invite process.
+No. Organization owners can invite users with their email addresses, and also assign them to a team during the invite process.
 
 ### Can I force my organization's members to authenticate before using Docker Desktop and are there any benefits?
 
-Yes. You can [enforce sign-in](../../security/for-admins/enforce-sign-in/_index.md) and some benefits are:
+Yes. You can [enforce sign-in](../../security/for-admins/enforce-sign-in/_index.md). Some benefits of enforcing sign-in are:
 
 - Administrators can enforce features like [Image Access Management](/manuals/security/for-admins/hardened-desktop/image-access-management.md) and [Registry Access Management](../../security/for-admins/hardened-desktop/registry-access-management.md).
  - Administrators can ensure compliance by blocking Docker Desktop usage for users who don't sign in as members of the organization.
@@ -46,9 +46,7 @@ revert it to a personal user account. For prerequisites and instructions, see
 
 ### Our users create Docker Hub accounts through self-service. How do we know when the total number of users for the requested licenses has been met? Is it possible to add more members to the organization than the total number of licenses?
 
-There isn't any automatic notification when the total number of users for the requested licenses has been met. However, if the number of team
-members exceed the number of licenses, you will receive an error informing you
-to contact the administrator due to lack of seats. You can [add seats](../../subscription/manage-seats.md) if needed.
+There isn't any automatic notification when the total number of users for the requested licenses has been met. However, if the number of team members exceed the number of licenses, you will receive an error informing you to contact the administrator due to lack of seats. You can [add seats](../../subscription/manage-seats.md) if needed.
 
 ### How can I merge organization accounts?
 
@@ -66,13 +64,13 @@ Yes. Organization owners will take up a seat.
 
 ### What is the difference between user, invitee, seat, and member?
 
-User may refer to a Docker user with a Docker ID.
+User refers to a Docker user with a Docker ID.
 
-An invitee is a user that an administrator has invited to join an organization, but has not yet accepted their invitation.
+An invitee is a user that an administrator has invited to join an organization but has not yet accepted their invitation.
 
-Seats is the number of planned members within an organization.
+Seats are the number of planned members within an organization.
 
-Member may refer to a user that has received and accepted an invitation to join an organization. Member can also refer to a member of a team within an organization.
+Member may refer to a user who has received and accepted an invitation to join an organization. Member can also refer to a member of a team within an organization.
 
 ### If there are two organizations and a user belongs to both organizations, do they take up two seats?
 
