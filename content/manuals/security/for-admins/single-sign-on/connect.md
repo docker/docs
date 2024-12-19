@@ -186,15 +186,20 @@ After you've completed the SSO connection process in Docker, we recommend testin
 
 1. Open an incognito browser.
 2. Sign in to the Admin Console using your **domain email address**.
-3. The browser will redirect to your IdP's login page to authenticate.
+3. The browser will redirect to your identity provider's sign in page to authenticate. If you have [multiple IdPs](#optional-configure-multiple-idps), the browser will prompt your to choose your identity provider.
 4. Authenticate through your domain email instead of using your Docker ID.
 
 You can also test your SSO connection through the command-line interface (CLI). If you want to test through the CLI, your users must have a personal access token (PAT).
 
+## Optional: Configure multiple IdPs
+
+Docker supports multiple IdP configurations. With multiple IdPs configured, one domain can be associated with multiple SSO identity providers. To configure multiple IdPs, repeat steps 1-4 in this guide for each IdP. Ensure each IdP configuration uses the same domain.
+
+When a user signs in to a Docker organization that has multiple IdPs, the user is prompted to choose their identity provider. Once they have chosen their identity provider, they will authenticate through their domain email.
 
 ## Optional: Enforce SSO
 
->[!IMPORTANT]
+> [!IMPORTANT]
 >
 > If SSO isn't enforced, users can choose to sign in with either their Docker username and password or SSO.
 

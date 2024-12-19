@@ -8,6 +8,10 @@
 
 ### Remove a domain from an SSO connection
 
+> [!IMPORTANT]
+>
+> Docker supports multiple IdP configurations, where a single domain is used for multiple SSO identity providers. If you want to remove a domain from multiple SSO connections, you must remove it from each connection individually.
+
 1. Sign in to {{ $product_link }}.
 2. {{ $sso_navigation }}
 3. In the SSO connections table, select the **Action** icon and then **Edit connection**.

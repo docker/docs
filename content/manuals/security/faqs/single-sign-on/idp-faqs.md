@@ -10,7 +10,7 @@ aliases:
 
 ### Is it possible to use more than one IdP with Docker SSO?
 
-No. You can only configure Docker SSO to work with a single IdP. A domain can only be associated with a single IdP. Docker supports Entra ID (formerly Azure AD) and identity providers that support SAML 2.0.
+Yes. Docker supports multiple IdP configurations. A domain can be associated with multiple IdPs. Docker supports Entra ID (formerly Azure AD) and identity providers that support SAML 2.0.
 
 ### Is it possible to change my identity provider after configuring SSO?
 
@@ -56,4 +56,4 @@ Yes, Entra ID (formerly Azure AD) is supported with SSO for Docker Business, bot
 
 ### My SSO connection with Entra ID isn't working and I receive an error that the application is misconfigured. How can I troubleshoot this?
 
-Confirm that you've configured the necessary API permissions in Entra ID (formerly Azure AD) for your SSO connection. You need to grant admin consent within your Entra ID (formerly Azure AD) tenant. See [Entra ID (formerly Azure AD) documentation](https://learn.microsoft.com/en-us/azure/active-directory/manage-apps/grant-admin-consent?pivots=portal#grant-admin-consent-in-app-registrations).
+Confirm that you've configured the necessary API permissions in Entra ID (formerly Azure AD) for your SSO connection. You need to grant administrator consent within your Entra ID (formerly Azure AD) tenant. See [Entra ID (formerly Azure AD) documentation](https://learn.microsoft.com/en-us/azure/active-directory/manage-apps/grant-admin-consent?pivots=portal#grant-admin-consent-in-app-registrations).
