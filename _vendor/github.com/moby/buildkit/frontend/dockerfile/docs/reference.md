@@ -3017,7 +3017,7 @@ For examples of Dockerfiles, refer to:
 
 - The [building best practices page](https://docs.docker.com/build/building/best-practices/)
 - The ["get started" tutorials](https://docs.docker.com/get-started/)
-- The [language-specific getting started guides](https://docs.docker.com/guides/language/)
+- The [language-specific getting started guides](https://docs.docker.com/guides/?languages=c-sharp%7Ecpp%7Ego%7Ejava%7Ejs%7Ephp%7Epython%7Erust%7Er%7Eruby)
 
 [^1]: Value required
 [^2]: For Docker-integrated [BuildKit](https://docs.docker.com/build/buildkit/#getting-started) and `docker buildx build`
