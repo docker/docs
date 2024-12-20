@@ -162,6 +162,14 @@ $ docker run -d \
   nginx:latest
 ```
 
+Verify that the mount is a `tmpfs` mount by looking in the `Mounts` section of
+the `docker inspect` output:
+
+```console
+$ docker inspect tmptest --format '{{ json .Mounts }}'
+[{"Type":"tmpfs","Source":"","Destination":"/app","Mode":"","RW":true,"Propagation":""}]
+```
+
 {{< /tab >}}
 {{< tab name="`--tmpfs`" >}}
 
@@ -173,16 +181,16 @@ $ docker run -d \
   nginx:latest
 ```
 
-{{< /tab >}}
-{{< /tabs >}}
-
 Verify that the mount is a `tmpfs` mount by looking in the `Mounts` section of
 the `docker inspect` output:
 
 ```console
 $ docker inspect tmptest --format '{{ json .Mounts }}'
-[{"Type":"tmpfs","Source":"","Destination":"/app","Mode":"","RW":true,"Propagation":""}]
+{"/app":""}
 ```
+
+{{< /tab >}}
+{{< /tabs >}}
 
 Stop and remove the container:
 
