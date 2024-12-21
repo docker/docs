@@ -21,7 +21,7 @@ Developers may have multiple Docker IDs in order to separate their Docker IDs as
 
 ### What if my Docker ID is taken?
 
-All Docker IDs are first-come, first-served except for companies that have a US Trademark on a username. If you have a trademark for your namespace, [Docker Support](https://hub.docker.com/support/contact/) can retrieve the Docker ID for you.
+All Docker IDs are first-come, first-served except for companies that have a U.S. Trademark on a username. If you have a trademark for your namespace, [Docker Support](https://hub.docker.com/support/contact/) can retrieve the Docker ID for you.
 
 ### What’s an organization?
 
@@ -60,7 +60,7 @@ The organization owner can also add additional owners to help them manage users,
 
 ### Can I configure multiple SSO identity providers (IdPs) to authenticate users to a single org?
 
-Docker SSO allows only one IdP configuration per organization. For more
+Yes. Docker SSO supports multiple IdP configurations. For more
 information, see [Configure SSO](../../security/for-admins/single-sign-on/configure/_index.md) and [SSO FAQs](../../security/faqs/single-sign-on/faqs.md).
 
 ### What is a service account?
