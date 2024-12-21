@@ -73,6 +73,7 @@ exceptions:
   - NET
   - NFS
   - NOTE
+  - NTFS
   - NTLM
   - NUMA
   - NVDA
