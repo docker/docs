@@ -33,7 +33,7 @@ This opens the Desktop settings reporting dashboard. From here you can:
 5. Optional. Select the **Hide compliant users** checkbox to show both compliant and non-compliant users.
 6. Use the search bar to search by username or email address.
 7. Hover over a user’s compliance status indicator to quickly view their status.
-8. Select a **username** to view more details about their compliance status, and for steps to resolve non-compliant users.
+8. Select a username to view more details about their compliance status, and for steps to resolve non-compliant users.
 
 ## Resolve compliance status
 
