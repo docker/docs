@@ -46,7 +46,7 @@ To resolve compliance status, you must view a user's compliance status details b
 
 ### Compliant
 
-When a user is compliant, a "Compliant" icon appears next to their name on the Desktop settings reporting dashboard. Select a compliant user to open their compliance status details. Compliant users will have the following status details:
+When a user is compliant, a **Compliant** icon appears next to their name on the Desktop settings reporting dashboard. Select a compliant user to open their compliance status details. Compliant users have the following status details:
 
 - **Compliance status**: Compliant
 - **Domain status**: Verified domain
