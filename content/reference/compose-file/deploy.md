@@ -50,11 +50,15 @@ services:
 
 ### mode
 
-`mode` defines the replication model used to run the service on the platform. Either `global`, exactly one container per physical node, or `replicated`, a specified number of containers. The default is `replicated`.
+`mode` defines the replication model used to run a service or job. Options include:
 
-Two additional modes are available for jobs:
-- `replicated-job`: A job that runs a specified number of tasks with controlled parallelism
-- `global-job`: A job that runs once on each swarm node
+1. **`global`**: Ensures exactly one task continuously runs per physical node until stopped.
+2. **`replicated`**: Continuously runs a specified number of tasks across nodes until stopped (default).
+3. **`replicated-job`**: Executes a defined number of tasks until a completion state (exits with code 0)'.
+   - Total tasks are determined by `replicas`. 
+   - Concurrency can be limited using the `max-concurrent` option (CLI only).
+4. **`global-job`**: Executes one task per physical node with a completion state (exits with code 0).
+   - Automatically runs on new nodes as they are added.
 
 ```yml
 services:
@@ -62,28 +66,24 @@ services:
     image: example/webapp
     deploy:
       mode: global
-```
 
-For job modes, additional parameters can be specified:
-
-```yml
-services:
   batch-job:
     image: example/processor
     deploy:
       mode: replicated-job
-      replicas: 1
-      max_concurrent: 2      # Maximum parallel job tasks
-      total_completions: 10  # Total number of times to run
+      replicas: 5
 
   maintenance:
     image: example/updater
     deploy:
-      mode: global-job      # Runs once on each node
+      mode: global-job
 ```
 
-Note: Job modes are designed for tasks that have a finite completion state, unlike services which run continuously. Once a job completes, its containers exit but the service remains in the swarm until removed.
-
+**Note**: 
+- Job modes (`replicated-job` and `global-job`) are designed for tasks that complete and exit with code 0.
+- Completed tasks remain until explicitly removed.
+- Options like `max-concurrent` for controlling concurrency are supported only via the CLI and are not available in Compose YAML.
+- For more detailed information about job options and behavior, see the [Docker CLI documentation](/reference/cli/docker/service/create/#running-as-a-job)
 
 ### placement
 
