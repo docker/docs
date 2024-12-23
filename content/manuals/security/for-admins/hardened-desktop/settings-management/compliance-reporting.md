@@ -13,7 +13,7 @@ This guide provides steps for accessing the reporting dashboard, viewing complia
 ## Access Desktop settings reporting
 
 1. Sign in to the [Admin Console](https://app.docker.com/admin).
-2. Select your **organization** or **company** from the **Choose profile** page.
+2. Select your organization or company from the **Choose profile** page.
 3. Under Docker Desktop, select **Reporting**.
 
 This opens the Desktop settings reporting dashboard. From here you can:
