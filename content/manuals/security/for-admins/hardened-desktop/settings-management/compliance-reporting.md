@@ -57,7 +57,7 @@ No resolution steps are needed for compliant users.
 
 ### Non-compliant
 
-When a user is non-compliant, a "Non-compliant" or "Unknown" icon appears next to their name on the Desktop settings reporting dashboard. Non-compliant users must have their compliance status resolved:
+When a user is non-compliant, a **Non-compliant** or **Unknown** icon appears next to their name on the Desktop settings reporting dashboard. Non-compliant users must have their compliance status resolved:
 
 1. Select a username from the Desktop settings reporting dashboard.
 2. On the compliance status details page, follow the resolution steps provided to resolve the compliance status.
