@@ -18,7 +18,7 @@ This guide provides steps for accessing the reporting dashboard, viewing complia
 
 This opens the Desktop settings reporting dashboard. From here you can:
 
-- Use the **Search bar** to search by username or email address
+- Use the **Search** field to search by username or email address
 - Filter by policies
 - Hide or un-hide compliant users
 - View a user’s compliance status and what policy is assigned to the user
