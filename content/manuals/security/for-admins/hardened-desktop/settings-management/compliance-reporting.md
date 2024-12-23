@@ -27,7 +27,7 @@ This opens the Desktop settings reporting dashboard. From here you can:
 ## View compliance status
 
 1. Sign in to the [Admin Console](https://app.docker.com/admin).
-2. Select your **organization** or **company** from the **Choose profile** page.
+2. Select your organization or company from the **Choose profile** page.
 3. Under Docker Desktop, select **Reporting**.
 4. By default, non-compliant users are displayed.
 5. Optional. Select the **Hide compliant users** checkbox to show both compliant and non-compliant users.
