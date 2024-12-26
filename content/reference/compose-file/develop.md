@@ -56,10 +56,36 @@ Compose to monitor source code for changes. For more information, see [Use Compo
 `action` defines the action to take when changes are detected. If `action` is set to:
 
 - `rebuild`, Compose rebuilds the service image based on the `build` section and recreates the service with the updated image.
+- `restart`, Compose restarts the service container. Available with Docker Compose version 2.32.0 and later.
 - `sync`, Compose keeps the existing service container(s) running, but synchronizes source files with container content according to the `target` attribute.
-- `sync+restart`, Compose synchronizes source files with container content according to the `target` attribute, and then restarts the container.
+- `sync+restart`, Compose synchronizes source files with container content according to the `target` attribute, and then restarts the container. Available with Docker Compose version 2.23.0 and later.
+- `sync+exec`, Compose synchronizes source files with container content according to the `target` attribute, and then executes a command inside the container. Available with Docker Compose version 2.32.0 and later.
 
-> `sync+restart` attribute is available with Docker Compose version 2.23.0 and later.
+#### exec
+
+{{< introduced compose 2.23.2 "/manuals/compose/releases/release-notes.md#2232" >}}
+
+`exec` is only relevant when `action` is set to `sync+exec`. Like [service hooks](services.md#post_start), `exec` is used to define the command to be run inside the container once it has started. 
+
+- `command`: Specifies the command to run once the container starts. This attribute is required, and you can choose to use either the shell form or the exec form.
+- `user`: The user to run the command. If not set, the command is run with the same user as the main service command.
+- `privileged`: Lets the command run with privileged access.
+- `working_dir`: The working directory in which to run the command. If not set, it is run in the same working directory as the main service command.
+- `environment`: Sets the environment variables to run the command. While the command inherits the environment variables defined for the service’s main command, this section lets you add new variables or override existing ones.
+
+```yaml
+services:
+  frontend:
+    image: ...
+    develop:
+      watch: 
+        # sync content then run command to reload service without interruption
+        - path: ./etc/config
+          action: sync+exec
+          target: /etc/config/
+          exec:
+            command: app reload
+```
 
 #### ignore
 

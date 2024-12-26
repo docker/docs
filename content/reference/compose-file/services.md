@@ -184,7 +184,7 @@ an integer value using microseconds as unit or a [duration](extension.md#specify
 
 ```yml
  cpu_rt_runtime: '400ms'
- cpu_rt_runtime: 95000`
+ cpu_rt_runtime: '95000'
 ```
 
 ### cpu_rt_period
@@ -194,7 +194,7 @@ an integer value using microseconds as unit or a [duration](extension.md#specify
 
 ```yml
  cpu_rt_period: '1400us'
- cpu_rt_period: 11000`
+ cpu_rt_period: '11000'
 ```
 
 ### cpus
@@ -618,6 +618,12 @@ i.e. overridden to be empty.
 env_file: .env
 ```
 
+Relative paths are resolved from the Compose file's parent folder. As absolute paths prevent the Compose
+file from being portable, Compose warns you when such a path is used to set `env_file`.
+
+Environment variables declared in the [environment](#environment) section override these values. This holds true even if those values are
+empty or undefined.
+
 `env_file` can also be a list. The files in the list are processed from the top down. For the same variable
 specified in two env files, the value from the last file in the list stands.
 
@@ -627,9 +633,14 @@ env_file:
   - ./b.env
 ```
 
-List elements can also be declared as a mapping, which then lets you set an additional
-attribute `required`. This defaults to `true`. When `required` is set to `false` and the `.env` file is missing,
-Compose silently ignores the entry.
+List elements can also be declared as a mapping, which then lets you set additional
+attributes.
+
+#### required
+
+{{< introduced compose 2.24.0 "/manuals/compose/releases/release-notes.md#2240" >}}
+
+The `required` attribute defaults to `true`. When `required` is set to `false` and the `.env` file is missing, Compose silently ignores the entry.
 
 ```yml
 env_file:
@@ -638,13 +649,21 @@ env_file:
   - path: ./override.env
     required: false
 ```
-> `required` attribute is available with Docker Compose version 2.24.0 or later.
 
-Relative path are resolved from the Compose file's parent folder. As absolute paths prevent the Compose
-file from being portable, Compose warns you when such a path is used to set `env_file`.
+#### format
 
-Environment variables declared in the [environment](#environment) section override these values. This holds true even if those values are
-empty or undefined.
+{{< introduced compose 2.30.0 "/manuals/compose/releases/release-notes.md#2300" >}}
+
+The `format` attribute lets you use an alternative file format for the `env_file`. When not set, `env_file` is parsed according to the Compose rules outlined in [Env_file format](#env_file-format).
+
+`raw` format lets you use an `env_file` with key=value items, but without any attempt from Compose to parse the value for interpolation. 
+This let you pass values as-is, including quotes and `$` signs.
+
+```yml
+env_file:
+  - path: ./default.env
+    format: raw
+```
 
 #### Env_file format
 
@@ -894,12 +913,12 @@ services:
   common:
     image: busybox
     security_opt:
-      - label:role:ROLE
+      - label=role:ROLE
   cli:
     extends:
       service: common
     security_opt:
-      - label:user:USER
+      - label=user:USER
 ```
 
 Produces the following configuration for the `cli` service.
@@ -907,8 +926,8 @@ Produces the following configuration for the `cli` service.
 ```yaml
 image: busybox
 security_opt:
-- label:role:ROLE
-- label:user:USER
+- label=role:ROLE
+- label=user:USER
 ```
 
 In case list syntax is used, the following keys should also be treated as sequences:
@@ -1132,6 +1151,27 @@ Compose creates containers with canonical labels:
 
 The `com.docker.compose` label prefix is reserved. Specifying labels with this prefix in the Compose file
 results in a runtime error.
+
+### label_file
+
+{{< introduced compose 2.23.2 "/manuals/compose/releases/release-notes.md#2232" >}}
+
+The `label_file` attribute lets you load labels for a service from an external file or a list of files. This provides a convenient way to manage multiple labels without cluttering the Compose file.
+
+The file uses a key-value format, similar to `env_file`. You can specify multiple files as a list. When using multiple files, they are processed in the order they appear in the list. If the same label is defined in multiple files, the value from the last file in the list overrides earlier ones.
+
+```yaml
+services:
+  one:
+    label_file: ./app.labels 
+  
+  two:
+    label_file:               
+      - ./app.labels
+      - ./additional.labels
+```
+
+If a label is defined in both the `label_file` and the `labels` attribute, the value in [labels](#labels) takes precedence.
 
 ### links
 
@@ -1505,6 +1545,39 @@ ports:
     mode: host
 ```
 
+### post_start
+
+{{< introduced compose 2.30.0 "../../manuals/compose/releases/release-notes.md#2300" >}}
+
+`post_start` defines a sequence of lifecycle hooks to run after a container has started. The exact timing of when the command is run is not guaranteed.
+
+- `command`: Specifies the command to run once the container starts. This attribute is required, and you can choose to use either the shell form or the exec form.
+- `user`: The user to run the command. If not set, the command is run with the same user as the main service command.
+- `privileged`: Lets the `post_start` command run with privileged access.
+- `working_dir`: The working directory in which to run the command. If not set, it is run in the same working directory as the main service command.
+- `environment`: Sets environment variables specifically for the `post_start` command. While the command inherits the environment variables defined for the service’s main command, this section lets you add new variables or override existing ones.
+
+```yaml
+services:
+  test:
+    post_start:
+      - command: ./do_something_on_startup.sh
+        user: root
+        privileged: true
+        environment:
+          - FOO=BAR
+```
+
+For more information, see [Use lifecycle hooks](/manuals/compose/how-tos/lifecycle.md).
+
+### pre_stop
+
+{{< introduced compose 2.30.0 "../../manuals/compose/releases/release-notes.md#2300" >}}
+
+`pre_stop` defines a sequence of lifecycle hooks to run before the container is stopped. These hooks won't run if the container stops by itself or is terminated suddenly.
+
+Configuration is equivalent to [post_start](#post_start).
+
 ### privileged
 
 `privileged` configures the service container to run with elevated privileges. Support and actual impacts are platform specific.
@@ -1663,8 +1736,8 @@ secrets:
 
 ```yml
 security_opt:
-  - label:user:USER
-  - label:role:ROLE
+  - label=user:USER
+  - label=role:ROLE
 ```
 
 For further default labeling schemes you can override, see [Security configuration](/reference/cli/docker/container/run.md#security-opt).
@@ -1739,13 +1812,26 @@ parameters (sysctls) at runtime](/reference/cli/docker/container/run.md#sysctl).
 `tmpfs` mounts a temporary file system inside the container. It can be a single value or a list.
 
 ```yml
-tmpfs: /run
+tmpfs:
+ - <path>
+ - <path>:<options>
 ```
 
+- `path`: The path inside the container where the tmpfs will be mounted.
+- `options`: Comma-separated list of options for the tmpfs mount.
+
+Available options:
+
+- `mode`: Sets the file system permissions.
+- `uid`: Sets the user ID that owns the mounted tmpfs.
+- `gid`: Sets the group ID that owns the mounted tmpfs.
+
 ```yml
-tmpfs:
-  - /run
-  - /tmp
+services:
+  app:
+    tmpfs:
+      - /data:mode=755,uid=1009,gid=1009
+      - /run
 ```
 
 ### tty
@@ -1874,7 +1960,7 @@ expressed in the short form.
 > [!TIP]
 >
 > Working with large repositories or monorepos, or with virtual file systems that are no longer scaling with your codebase? 
-> Compose now takes advantage of [Synchronized file shares](/manuals/desktop/synchronized-file-sharing.md) and automatically creates file shares for bind mounts. 
+> Compose now takes advantage of [Synchronized file shares](/manuals/desktop/features/synchronized-file-sharing.md) and automatically creates file shares for bind mounts. 
 > Ensure you're signed in to Docker with a paid subscription and have enabled both **Access experimental features** and **Manage Synchronized file shares with Compose** in Docker Desktop's settings.
 
 ### volumes_from

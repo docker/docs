@@ -31,7 +31,7 @@ Make sure you have completed the following before you begin:
 {{< include "admin-early-access.md" >}}
 
 1. Sign in to the [Admin Console](https://admin.docker.com/).
-2. Select your organization or company from the left-hand drop-down menu. Note that when an organization is part of a company, you must select the company and configure the domain for the organization at the company level.
+2. Select your organization or company from the **Choose profile** page. Note that when an organization is part of a company, you must select the company and configure the domain for the organization at the company level.
 3. Under Security and access, select **SSO and SCIM**.
 4. Select **Create Connection** and provide a name for the connection.
 5. Select an authentication method, **SAML** or **Azure AD (OIDC)**.
@@ -201,7 +201,7 @@ You can also test your SSO connection through the command-line interface (CLI). 
 Enforcing SSO requires users to use SSO when signing into Docker. This centralizes authentication and enforces policies set by the IdP.
 
 1. Sign in to the [Admin Console](https://admin.docker.com/).
-2. Select your organization or company from the left-hand drop-down menu. Note that when an organization is part of a company, you must select the company and configure the domain for the organization at the company level.
+2. Select your organization or company from the **Choose profile** page. Note that when an organization is part of a company, you must select the company and configure the domain for the organization at the company level.
 3. Under Security and access, select **SSO and SCIM**.
 4. In the SSO connections table, select the **Action** icon and then **Enable enforcement**. When SSO is enforced, your users are unable to modify their email address and password, convert a user account to an organization, or set up 2FA through Docker Hub. If you want to use 2FA, you must enable 2FA through your IdP.
 5. Continue with the on-screen instructions and verify you've completed all tasks.

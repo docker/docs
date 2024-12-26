@@ -1,8 +1,10 @@
 ---
 title: Security
-weight: 200
 description: Learn about security features Docker has to offer and explore best practices
 keywords: docker, docker hub, docker desktop, security
+params:
+  sidebar:
+    group: Platform
 grid_admins:
 - title: Settings Management
   description: Learn how Settings Management can secure your developers' workflows.
@@ -64,7 +66,7 @@ grid_developers:
 - title: Static vulnerability scanning
   description: Automatically run a point-in-time scan on your Docker images for vulnerabilities.
   icon: image_search
-  link: /docker-hub/vulnerability-scanning/
+  link: /docker-hub/repos/manage/vulnerability-scanning/
 - title: Docker Engine security
   description: Understand how to keep Docker Engine secure.
   icon: security

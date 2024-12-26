@@ -1,4 +1,4 @@
-{{ $redirects := newScratch }}
+{{- $redirects := newScratch }}
 {{- range $i, $e := site.AllPages -}} 
   {{- if .Params.aliases -}}
     {{- $target := .RelPermalink -}}
@@ -12,4 +12,5 @@
 {{- $redirects.SetInMap "paths" . $target -}}
 {{- end -}}
 {{- end -}}
-{{ $redirects.Get "paths" | jsonify }}
+{{- $opts := dict "noHTMLEscape" true }}
+{{- $redirects.Get "paths" | jsonify $opts }}

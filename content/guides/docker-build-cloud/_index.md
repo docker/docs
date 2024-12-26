@@ -20,7 +20,7 @@ params:
     - title: Docker Build Cloud overview
       url: /build-cloud/
     - title: Subscriptions and features
-      url: /subscription/build-cloud/build-details/
+      url: /subscription/details/
     - title: Using Docker Build Cloud
       url: /build-cloud/usage/
 ---

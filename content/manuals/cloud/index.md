@@ -2,6 +2,9 @@
 title: Cloud integrations
 description: ACI and ECS integration information
 keywords: compose, ACI, ECS, amazon, cloud integration
+params:
+  sidebar:
+    group: Products
 aliases:
 - /engine/context/aci-integration/
 - /cloud/aci-integration/

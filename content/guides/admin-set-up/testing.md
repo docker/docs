@@ -23,10 +23,10 @@ If you plan to use [Registry Access Management (RAM)](/manuals/security/for-admi
 
 Deploy the Docker settings and enforce sign-in for a small group of test users via MDM. Have this group test their development workflows with containers on Docker Desktop and Docker Hub to ensure all settings and the sign-in enforcement function as expected.
 
-## Test Build Cloud capabilities
+## Test Docker Build Cloud capabilities
 
 Have one of your Docker Desktop testers [connect to the cloud builder you created and use it to build](/manuals/build-cloud/usage.md). 
 
-## Verify Scout monitoring of repositories
+## Verify Docker Scout monitoring of repositories
 
 Check the [Docker Scout dashboard](https://scout.docker.com/) to confirm that data is being properly received for the repositories where Docker Scout has been enabled.

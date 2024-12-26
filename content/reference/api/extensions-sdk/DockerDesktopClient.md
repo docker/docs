@@ -21,7 +21,7 @@ The `window.ddClient.backend` object can be used to communicate with the backend
 the extension metadata.
 The client is already connected to the backend.
 
->**Warning**
+> [!WARNING]
 >
 > It will be removed in a future version. Use [extension](DockerDesktopClient.md#extension) instead.
 
@@ -88,7 +88,7 @@ You can use the option `{"all": true}` to list all the running and stopped conta
 const containers = await window.ddClient.listContainers();
 ```
 
->**Warning**
+> [!WARNING]
 >
 > It will be removed in a future version. Use [listContainers](Docker.md#listcontainers) instead.
 
@@ -121,7 +121,7 @@ const images = await window.ddClient.listImages();
 ```
 
 > [!WARNING]
-> 
+>
 > It will be removed in a future version. Use [listImages](Docker.md#listimages) instead.
 
 #### Parameters
@@ -152,7 +152,7 @@ window.ddClient.navigateToContainers();
 ```
 
 > [!WARNING]
-> 
+>
 > It will be removed in a future version. Use [viewContainers](NavigationIntents.md#viewcontainers) instead.
 
 #### Returns
@@ -269,7 +269,7 @@ await window.ddClient.navigateToContainerStats(id);
 ```
 
 > [!WARNING]
-> 
+>
 > It will be removed in a future version.
 
 #### Parameters
@@ -412,7 +412,7 @@ window.ddClient.navigateToDevEnvironments();
 ```
 
 > [!WARNING]
-> 
+>
 > It will be removed in a future version. Use [viewDevEnvironments](NavigationIntents.md#viewdevenvironments) instead.
 
 #### Returns
@@ -440,7 +440,7 @@ window.ddClient.execHostCmd(`cliShippedOnHost xxx`).then((cmdResult: any) => {
 ```
 
 > [!WARNING]
-> 
+>
 > It will be removed in a future version. Use [exec](ExtensionCli.md#exec) instead.
 
 #### Parameters
@@ -590,7 +590,7 @@ Opens an external URL with the system default browser.
 window.ddClient.openExternal("https://docker.com");
 ```
 
-**Warning**
+> [!WARNING]
 >
 > It will be removed in a future version. Use [openExternal](Host.md#openexternal) instead.
 
@@ -682,7 +682,7 @@ Display a toast message of type error.
 window.ddClient.toastError("message");
 ```
 
->**Warning**
+> [!WARNING]
 >
 > It will be removed in a future version. Use [error](Toast.md#error) instead.
 

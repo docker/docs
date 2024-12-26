@@ -10,8 +10,8 @@ aliases:
 
 Docker Compose lets you merge and override a set of Compose files together to create a composite Compose file.
 
-By default, Compose reads two files, a `compose.yml` and an optional
-`compose.override.yml` file. By convention, the `compose.yml`
+By default, Compose reads two files, a `compose.yaml` and an optional
+`compose.override.yaml` file. By convention, the `compose.yaml`
 contains your base configuration. The override file can
 contain configuration overrides for existing services or entirely new
 services.
@@ -32,10 +32,10 @@ add to their predecessors.
 For example:
 
 ```console
-$ docker compose -f compose.yml -f compose.admin.yml run backup_db
+$ docker compose -f compose.yaml -f compose.admin.yaml run backup_db
 ```
 
-The `compose.yml` file might specify a `webapp` service.
+The `compose.yaml` file might specify a `webapp` service.
 
 ```yaml
 webapp:
@@ -46,7 +46,7 @@ webapp:
     - "/data"
 ```
 
-The `compose.admin.yml` may also specify this same service: 
+The `compose.admin.yaml` may also specify this same service: 
 
 ```yaml
 webapp:
@@ -226,7 +226,7 @@ For more merging rules, see [Merge and override](/reference/compose-file/merge.m
 
 ### Additional information
 
-- Using `-f` is optional. If not provided, Compose searches the working directory and its parent directories for a `compose.yml` and a `compose.override.yml` file. You must supply at least the `compose.yml` file. If both files exist on the same directory level, Compose combines them into a single configuration.
+- Using `-f` is optional. If not provided, Compose searches the working directory and its parent directories for a `compose.yaml` and a `compose.override.yaml` file. You must supply at least the `compose.yaml` file. If both files exist on the same directory level, Compose combines them into a single configuration.
 
 - You can use a `-f` with `-` (dash) as the filename to read the configuration from `stdin`. For example: 
    ```console
@@ -246,12 +246,12 @@ For more merging rules, see [Merge and override](/reference/compose-file/merge.m
    
 - You can use the `-f` flag to specify a path to a Compose file that is not located in the current directory, either from the command line or by setting up a [COMPOSE_FILE environment variable](../environment-variables/envvars.md#compose_file) in your shell or in an environment file.
 
-   For example, if you are running the [Compose Rails sample](https://github.com/docker/awesome-compose/tree/master/official-documentation-samples/rails/README.md), and have a `compose.yml` file in a directory called `sandbox/rails`. You can use a command like [docker compose pull](/reference/cli/docker/compose/pull.md) to get the postgres image for the `db` service from anywhere by using the `-f` flag as follows: `docker compose -f ~/sandbox/rails/compose.yml pull db`
+   For example, if you are running the [Compose Rails sample](https://github.com/docker/awesome-compose/tree/master/official-documentation-samples/rails/README.md), and have a `compose.yaml` file in a directory called `sandbox/rails`. You can use a command like [docker compose pull](/reference/cli/docker/compose/pull.md) to get the postgres image for the `db` service from anywhere by using the `-f` flag as follows: `docker compose -f ~/sandbox/rails/compose.yaml pull db`
 
    Here's the full example:
 
    ```console
-   $ docker compose -f ~/sandbox/rails/compose.yml pull db
+   $ docker compose -f ~/sandbox/rails/compose.yaml pull db
    Pulling db (postgres:latest)...
    latest: Pulling from library/postgres
    ef0380f84d05: Pull complete
@@ -281,7 +281,7 @@ a few different files:
 Start with a base file that defines the canonical configuration for the
 services.
 
-`compose.yml`
+`compose.yaml`
 
 ```yaml
 services:
@@ -301,7 +301,7 @@ services:
 In this example the development configuration exposes some ports to the
 host, mounts our code as a volume, and builds the web image.
 
-`compose.override.yml`
+`compose.override.yaml`
 
 ```yaml
 services:
@@ -329,7 +329,7 @@ When you run `docker compose up` it reads the overrides automatically.
 To use this Compose app in a production environment, another override file is created, which might be stored in a different git
 repository or managed by a different team.
 
-`compose.prod.yml`
+`compose.prod.yaml`
 
 ```yaml
 services:
@@ -347,12 +347,12 @@ services:
 To deploy with this production Compose file you can run
 
 ```console
-$ docker compose -f compose.yml -f compose.prod.yml up -d
+$ docker compose -f compose.yaml -f compose.prod.yaml up -d
 ```
 
 This deploys all three services using the configuration in
-`compose.yml` and `compose.prod.yml` but not the
-dev configuration in `compose.override.yml`.
+`compose.yaml` and `compose.prod.yaml` but not the
+dev configuration in `compose.override.yaml`.
 
 For more information, see [Using Compose in production](../production.md). 
 

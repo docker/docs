@@ -19,7 +19,7 @@ the build process:
   invalidation.
 - [Keep the context small](#keep-the-context-small): The context is the set of
   files and directories that are sent to the builder to process a build
-  instruction. Keeping the context as small reduces the amount of data that
+  instruction. Keeping the context as small as possible reduces the amount of data that
   needs to be sent to the builder, and reduces the likelihood of cache
   invalidation.
 - [Use bind mounts](#use-bind-mounts): Bind mounts let you mount a file or
@@ -323,15 +323,15 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-      
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
       - name: Build and push
         uses: docker/build-push-action@v6
         with:

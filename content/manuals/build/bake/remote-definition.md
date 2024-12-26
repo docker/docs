@@ -173,8 +173,7 @@ remote definition and the local "metadata-only" Bake file, specify both files
 and use the `cwd://` prefix for the metadata Bake file:
 
 ```yml
-      -
-        name: Build
+      - name: Build
         uses: docker/bake-action@v4
         with:
           source: "${{ github.server_url }}/${{ github.repository }}.git#${{ github.ref }}"

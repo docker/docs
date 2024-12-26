@@ -264,8 +264,8 @@ pkg:apk/alpine/zlib@1.2.12-r1?arch=aarch64&distro=alpine-3.16.1
     ...
 
 11 vulnerabilities found in 2 packages
-  LOW       0
-  MEDIUM    8
-  HIGH      2
   CRITICAL  1
+  HIGH      2
+  MEDIUM    8
+  LOW       0
 ```

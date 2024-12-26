@@ -24,9 +24,9 @@ The easiest and recommended way to get Docker Compose is to install Docker Deskt
 includes Docker Compose along with Docker Engine and Docker CLI which are Compose prerequisites. 
 
 Docker Desktop is available on:
-- [Linux](/manuals/desktop/install/linux/_index.md)
-- [Mac](/manuals/desktop/install/mac-install.md)
-- [Windows](/manuals/desktop/install/windows-install.md)
+- [Linux](/manuals/desktop/setup/install/linux/_index.md)
+- [Mac](/manuals/desktop/setup/install/mac-install.md)
+- [Windows](/manuals/desktop/setup/install/windows-install.md)
 
 If you have already installed Docker Desktop, you can check which version of Compose you have by selecting **About Docker Desktop** from the Docker menu {{< inline-image src="../../desktop/images/whale-x.svg" alt="whale menu" >}}.
 
@@ -41,22 +41,23 @@ If you have already installed Docker Desktop, you can check which version of Com
 > $ sudo rm /usr/local/bin/docker-compose
 > $ sudo ln -s /Applications/Docker.app/Contents/Resources/cli-plugins/docker-compose /usr/local/bin/docker-compose
 > ```
-> Or enable [Automatically check configuration](/desktop/settings/) which will detect and fix it for you.
+> Or enable [Automatically check configuration](/manuals/desktop/settings-and-maintenance/settings.md) which will detect and fix it for you.
 
-### Scenario two: Install the Compose plugin
-
-If you already have Docker Engine and Docker CLI installed, you can install the Compose plugin from the command line, by either:
-- [Using Docker's repository](linux.md#install-using-the-repository)
-- [Downloading and installing manually](linux.md#install-the-plugin-manually)
+### Scenario two: Install the Docker Compose plugin
 
 > [!IMPORTANT]
 >
->This is only available on Linux
+> This install scenario is only available on Linux.
 
-### Scenario three: Install the Compose standalone 
+If you already have Docker Engine and Docker CLI installed, you can install the Docker Compose plugin from the command line, by either:
+- [Using Docker's repository](linux.md#install-using-the-repository)
+- [Downloading and installing manually](linux.md#install-the-plugin-manually)
 
-You can [install the Compose standalone](standalone.md) on Linux or on Windows Server.
+### Scenario three: Install the Docker Compose standalone 
 
 > [!WARNING]
 >
->This install scenario is not recommended and is only supported for backward compatibility purposes.
+> This install scenario is not recommended and is only supported for backward compatibility purposes.
+
+You can [install the Docker Compose standalone](standalone.md) on Linux or on Windows Server.
+

@@ -33,7 +33,7 @@ This page shows you how to customize the Docker daemon, `dockerd`.
 > [!NOTE]
 >
 > This page is for users who've installed Docker Engine manually. If you're
-> using Docker Desktop, refer to the [settings page](/manuals/desktop/settings.md#docker-engine).
+> using Docker Desktop, refer to the [settings page](/manuals/desktop/settings-and-maintenance/settings.md#docker-engine).
 
 ## Configure the Docker daemon
 

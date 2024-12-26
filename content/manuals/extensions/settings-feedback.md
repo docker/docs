@@ -19,9 +19,9 @@ Docker Extensions is switched on by default. To change your settings:
 3. Next to **Enable Docker Extensions**, select or clear the checkbox to set your desired state.
 4. In the bottom-right corner, select **Apply & Restart**.
 
->**Note**
+> [!NOTE]
 >
-> If you are an [organization owner](/manuals/admin/organization/manage-a-team.md#organization-owner), you can turn off extensions for your users. Open the `settings-store.json` file, and set `"extensionsEnabled"` to `false`. 
+> If you are an [organization owner](/manuals/admin/organization/manage-a-team.md#organization-owner), you can turn off extensions for your users. Open the `settings-store.json` file, and set `"extensionsEnabled"` to `false`.
 > The `settings-store.json` file (or `settings.json` for Docker Desktop versions 4.34 and earlier) is located at:
 >   - `~/Library/Group Containers/group.com.docker/settings-store.json` on Mac
 >   - `C:\Users\[USERNAME]\AppData\Roaming\Docker\settings-store.json` on Windows

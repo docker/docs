@@ -1,9 +1,11 @@
 ---
-title: Overview of Docker Build
-linkTitle: Docker Build
-weight: 100
+title: Docker Build
+weight: 20
 description: Get an overview of Docker Build to package and bundle your code and ship it anywhere
 keywords: build, buildx, buildkit
+params:
+  sidebar:
+    group: Open source
 grid:
 - title: Packaging your software
   description: 'Build and package your application to run it anywhere: locally or

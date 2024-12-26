@@ -63,15 +63,15 @@ feature, as it results in much better CPU and memory savings.
 
 Resource Saver works a bit differently on Windows with WSL. Instead of
 stopping the WSL VM, it only pauses the Docker Engine inside the
-`docker-desktop` WSL distro. That's because in WSL there's a single Linux VM
-shared by all WSL distros, so Docker Desktop can't stop the Linux VM (i.e.,
+`docker-desktop` WSL distribution. That's because in WSL there's a single Linux VM
+shared by all WSL distributions, so Docker Desktop can't stop the Linux VM (i.e.,
 the WSL Linux VM is not owned by Docker Desktop). As a result, Resource Saver
 reduces CPU utilization on WSL, but it does not reduce Docker's memory
 utilization. 
 
 To reduce memory utilization on WSL, we instead recommend that
 users enable WSL's `autoMemoryReclaim` feature as described in the
-[Docker  Desktop WSL docs](../wsl/_index.md). Finally, since Docker Desktop does not
+[Docker  Desktop WSL docs](/manuals/desktop/features/wsl/_index.md). Finally, since Docker Desktop does not
 stop the Linux VM on WSL, exit from Resource Saver mode is immediate (there's
 no exit delay).
 

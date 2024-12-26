@@ -19,6 +19,12 @@ Docker host. After you have read the [storage driver overview](./_index.md), the
 next step is to choose the best storage driver for your workloads. Use the storage
 driver with the best overall performance and stability in the most usual scenarios.
 
+> [!NOTE]
+> This page discusses storage drivers for Docker Engine on Linux. If you're
+> running the Docker daemon with Windows as the host OS, the only supported
+> storage driver is windowsfilter. For more information, see
+> [windowsfilter](windowsfilter-driver.md).
+
 The Docker Engine provides the following storage drivers on Linux:
 
 | Driver            | Description                                                                                                                                                                                                                                                                                                                                          |
@@ -53,7 +59,7 @@ the final decision.
 >
 > Modifying the storage driver by editing the daemon configuration file isn't
 > supported on Docker Desktop. Only the default `overlay2` driver or the
-> [containerd storage](/manuals/desktop/containerd.md) are supported. The
+> [containerd storage](/manuals/desktop/features/containerd.md) are supported. The
 > following table is also not applicable for the Docker Engine in rootless
 > mode. For the drivers available in rootless mode, see the [Rootless mode
 > documentation](/manuals/engine/security/rootless.md).
@@ -189,7 +195,8 @@ to physical or logical disks on the Docker host.
 
 ## Related information
 
-- [About images, containers, and storage drivers](./_index.md)
-- [`overlay2` storage driver in practice](overlayfs-driver.md)
-- [`btrfs` storage driver in practice](btrfs-driver.md)
-- [`zfs` storage driver in practice](zfs-driver.md)
+- [Storage drivers](./_index.md)
+- [`overlay2` storage driver](overlayfs-driver.md)
+- [`btrfs` storage driver](btrfs-driver.md)
+- [`zfs` storage driver](zfs-driver.md)
+- [`windowsfilter` storage driver](windowsfilter-driver.md)

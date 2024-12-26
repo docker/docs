@@ -10,6 +10,10 @@ variable "DOCS_SITE_DIR" {
   default = "public"
 }
 
+variable "DRY_RUN" {
+  default = null
+}
+
 group "default" {
   targets = ["release"]
 }
@@ -69,12 +73,12 @@ target "path-warnings" {
 }
 
 #
-# releaser targets are defined in _releaser/Dockerfile
+# releaser targets are defined in hack/releaser/Dockerfile
 # and are used for AWS S3 deployment
 #
 
 target "releaser-build" {
-  context = "_releaser"
+  context = "hack/releaser"
   target = "releaser"
   output = ["type=cacheonly"]
   provenance = false
@@ -98,6 +102,7 @@ variable "AWS_LAMBDA_FUNCTION" {
 
 target "_common-aws" {
   args = {
+    DRY_RUN = DRY_RUN
     AWS_REGION = AWS_REGION
     AWS_S3_BUCKET = AWS_S3_BUCKET
     AWS_S3_CONFIG = AWS_S3_CONFIG
@@ -114,7 +119,7 @@ target "_common-aws" {
 
 target "aws-s3-update-config" {
   inherits = ["_common-aws"]
-  context = "_releaser"
+  context = "hack/releaser"
   target = "aws-s3-update-config"
   no-cache-filter = ["aws-update-config"]
   output = ["type=cacheonly"]
@@ -122,7 +127,7 @@ target "aws-s3-update-config" {
 
 target "aws-lambda-invoke" {
   inherits = ["_common-aws"]
-  context = "_releaser"
+  context = "hack/releaser"
   target = "aws-lambda-invoke"
   no-cache-filter = ["aws-lambda-invoke"]
   output = ["type=cacheonly"]
@@ -130,7 +135,7 @@ target "aws-lambda-invoke" {
 
 target "aws-cloudfront-update" {
   inherits = ["_common-aws"]
-  context = "_releaser"
+  context = "hack/releaser"
   target = "aws-cloudfront-update"
   contexts = {
     sitedir = DOCS_SITE_DIR

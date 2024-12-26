@@ -38,7 +38,7 @@ CPU, memory, and block I/O usage. You can access those metrics and
 obtain network usage metrics as well. This is relevant for "pure" LXC
 containers, as well as for Docker containers.
 
-Control groups are exposed through a pseudo-filesystem. In modern distros, you
+Control groups are exposed through a pseudo-filesystem. In modern distributions, you
 should find this filesystem under `/sys/fs/cgroup`. Under that directory, you
 see multiple sub-directories, called `devices`, `freezer`, `blkio`, and so on.
 Each sub-directory actually corresponds to a different cgroup hierarchy.
@@ -151,7 +151,7 @@ more pseudo-files exist and contain statistics.
 
 Memory metrics are found in the `memory` cgroup. The memory
 control group adds a little overhead, because it does very fine-grained
-accounting of the memory usage on your host. Therefore, many distros
+accounting of the memory usage on your host. Therefore, many distributions
 chose to not enable it by default. Generally, to enable it, all you have
 to do is to add some kernel command-line parameters:
 `cgroup_enable=memory swapaccount=1`.

@@ -12,7 +12,7 @@ aliases:
 ## Prerequisites
 
 - Complete all the previous sections of this guide, starting with [Use containers for python development](develop.md).
-- [Turn on Kubernetes](/desktop/kubernetes/#install-and-turn-on-kubernetes) in Docker Desktop.
+- [Turn on Kubernetes](/manuals/desktop/features/kubernetes.md#install-and-turn-on-kubernetes) in Docker Desktop.
 
 ## Overview
 
@@ -115,7 +115,7 @@ spec:
     spec:
       containers:
         - name: fastapi-service
-          image: technox64/python-docker-dev-example-test:latest
+          image: DOCKER_USERNAME/REPO_NAME
           imagePullPolicy: Always
           env:
             - name: POSTGRES_PASSWORD
@@ -253,5 +253,5 @@ In this section, you learned how to use Docker Desktop to deploy your applicatio
 Related information:
 
 - [Kubernetes documentation](https://kubernetes.io/docs/home/)
-- [Deploy on Kubernetes with Docker Desktop](/manuals/desktop/kubernetes.md)
+- [Deploy on Kubernetes with Docker Desktop](/manuals/desktop/features/kubernetes.md)
 - [Swarm mode overview](/manuals/engine/swarm/_index.md)

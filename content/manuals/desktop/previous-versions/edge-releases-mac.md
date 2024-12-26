@@ -12,7 +12,7 @@ sitemap: false
 This page contains information about Docker Desktop Edge releases. Edge releases give you early access to our newest features. Note that some of the features may be experimental, and some of them may not ever reach the Stable release. 
 
 For Docker Desktop system requirements, see
-[What to know before you install](../install/mac-install.md#system-requirements).
+[What to know before you install](/manuals/desktop/setup/install/mac-install.md#system-requirements).
 
 ## Docker Desktop Community 2.5.4
 2020-12-07
@@ -82,7 +82,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 ### New
 
-- If you have enabled [Vulnerability Scanning](/docker-hub/vulnerability-scanning/) in Docker Hub, the scan results will now appear in Docker Desktop.
+- If you have enabled [Vulnerability Scanning](/docker-hub/repos/manage/vulnerability-scanning/) in Docker Hub, the scan results will now appear in Docker Desktop.
 
 ### Upgrades
 
@@ -924,7 +924,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
   - [Docker 17.12.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce)
 
 * New
-  - Experimental Kubernetes Support. You can now run a single-node Kubernetes cluster from the "Kubernetes" Pane in Docker For Mac Preferences and use kubectl commands as well as docker commands. See [the Kubernetes section](../kubernetes.md)
+  - Experimental Kubernetes Support. You can now run a single-node Kubernetes cluster from the "Kubernetes" Pane in Docker For Mac Preferences and use kubectl commands as well as docker commands. See [the Kubernetes section](/manuals/desktop/features/kubernetes.md)
   - DNS name `docker.for.mac.host.internal` should be used instead of `docker.for.mac.localhost` (still valid) for host resolution from containers, since since there is an RFC banning the use of subdomains of localhost (See https://tools.ietf.org/html/draft-west-let-localhost-be-localhost-06).
 
 * Bug fixes and minor changes
@@ -1450,7 +1450,9 @@ TCP connection is idle for more than five minutes (related to
 
 ### Beta 36 Release Notes (2017-01-12 1.13.0-rc6-beta36)
 
->**Important Note:** Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
+> [!IMPORTANT]
+>
+> Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
 
 **Upgrades**
 
@@ -1464,7 +1466,9 @@ TCP connection is idle for more than five minutes (related to
 
 ### Beta 35 Release Notes (2017-01-06 1.13.0-rc5-beta35)
 
->**Important Note:** Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
+> [!IMPORTANT]
+>
+> Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
 
 **Upgrades**
 
@@ -1475,7 +1479,9 @@ TCP connection is idle for more than five minutes (related to
 
 ### Beta 34.1 Release Notes (2016-12-22 1.13.0-rc4-beta34.1)
 
->**Important Note:** Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
+> [!IMPORTANT]
+>
+> Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
 
 **Hotfix**
 
@@ -1487,7 +1493,9 @@ TCP connection is idle for more than five minutes (related to
 
 ### Beta 34 Release Notes (2016-12-20 1.13.0-rc4-beta34)
 
->**Important Note:** Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
+> [!IMPORTANT]
+>
+> Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
 
 **New**
 
@@ -1509,7 +1517,9 @@ TCP connection is idle for more than five minutes (related to
 
 ### Beta 33.1 Release Notes (2016-12-16 1.13.0-rc3-beta33.1)
 
->**Important Note:** Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
+> [!IMPORTANT]
+>
+> Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
 
 **Hotfix**
 
@@ -1517,7 +1527,9 @@ TCP connection is idle for more than five minutes (related to
 
 ### Beta 33 Release Notes (2016-12-15 1.13.0-rc3-beta33)
 
->**Important Note:** Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
+> [!IMPORTANT]
+>
+> Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
 
 **New**
 
@@ -1560,9 +1572,9 @@ TCP connection is idle for more than five minutes (related to
 
 **New**
 
-- Dedicated preference pane for advanced configuration of the docker daemon (edit daemon.json). See [Daemon Advanced (JSON configuration file)](/manuals/desktop/settings.md#docker-engine).
+- Dedicated preference pane for advanced configuration of the docker daemon (edit daemon.json). See [Daemon Advanced (JSON configuration file)](/manuals/desktop/settings-and-maintenance/settings.md#docker-engine).
 
-- Docker Experimental mode can be toggled. See [Daemon Basic (experimental mode and registries)](/manuals/desktop/settings.md#docker-engine).
+- Docker Experimental mode can be toggled. See [Daemon Basic (experimental mode and registries)](/manuals/desktop/settings-and-maintenance/settings.md#docker-engine).
 
 **Upgrades**
 
@@ -1718,7 +1730,7 @@ issue is being investigated. The workaround is to restart Docker.app.
 traversals of large directories are currently slow. Additionally, containers
 that perform large numbers of directory operations, such as repeated scans of
 large directory trees, may suffer from poor performance. More information is
-available in [Known Issues](../troubleshoot/known-issues.md) in Troubleshooting.
+available in [Known Issues](/manuals/desktop/troubleshoot-and-support/troubleshoot/known-issues.md) in Troubleshooting.
 
 * Under some unhandled error conditions, `inotify` event delivery can fail and become permanently disabled. The workaround is to restart `Docker.app`.
 
@@ -1748,7 +1760,7 @@ with `osxfs`. In particular, writes of small blocks and traversals of large
 directories are currently slow. Additionally, containers that perform large
 numbers of directory operations, such as repeated scans of large directory
 trees, may suffer from poor performance. More information is available in
-[Known Issues](../troubleshoot/known-issues.md) in Troubleshooting.
+[Known Issues](/manuals/desktop/troubleshoot-and-support/troubleshoot/known-issues.md) in Troubleshooting.
 
 * Under some unhandled error conditions, `inotify` event delivery can fail and become permanently disabled. The workaround is to restart Docker.app.
 
@@ -1782,7 +1794,7 @@ trees, may suffer from poor performance. More information is available in
 * There are a number of issues with the performance of directories bind-mounted with `osxfs`. In particular, writes of small blocks and traversals of large
 directories are currently slow. Additionally, containers that perform large
 numbers of directory operations, such as repeated scans of large directory
-trees, may suffer from poor performance. For more information and workarounds, see the bullet on performance of bind-mounted directories in [Known Issues](../troubleshoot/known-issues.md) in Troubleshooting.
+trees, may suffer from poor performance. For more information and workarounds, see the bullet on performance of bind-mounted directories in [Known Issues](/manuals/desktop/troubleshoot-and-support/troubleshoot/known-issues.md) in Troubleshooting.
 
 * Under some unhandled error conditions, `inotify` event delivery can fail and become permanently disabled. The workaround is to restart `Docker.app`.
 
@@ -1808,7 +1820,7 @@ trees, may suffer from poor performance. For more information and workarounds, s
 
 * Docker.app sometimes uses 200% CPU after macOS wakes up from sleep mode. The issue is being investigated. The workaround is to restart Docker.app
 
-* There are a number of issues with the performance of directories bind-mounted with `osxfs`. In particular, writes of small blocks and traversals of large directories are currently slow. Additionally, containers that perform large numbers of directory operations, such as repeated scans of large directory trees, may suffer from poor performance. For more information and workarounds, see the bullet on performance of bind-mounted directories in [Known Issues](../troubleshoot/known-issues.md) in Troubleshooting.
+* There are a number of issues with the performance of directories bind-mounted with `osxfs`. In particular, writes of small blocks and traversals of large directories are currently slow. Additionally, containers that perform large numbers of directory operations, such as repeated scans of large directory trees, may suffer from poor performance. For more information and workarounds, see the bullet on performance of bind-mounted directories in [Known Issues](/manuals/desktop/troubleshoot-and-support/troubleshoot/known-issues.md) in Troubleshooting.
 
 * Under some unhandled error conditions, `inotify` event delivery can fail and become permanently disabled. The workaround is to restart Docker.app
 
@@ -1831,7 +1843,7 @@ trees, may suffer from poor performance. For more information and workarounds, s
 
 * Docker.app sometimes uses 200% CPU after macOS wakes up from sleep mode. The issue is being investigated. The workaround is to restart Docker.app
 
-* There are a number of issues with the performance of directories bind-mounted with `osxfs`. In particular, writes of small blocks and traversals of large directories are currently slow. Additionally, containers that perform large numbers of directory operations, such as repeated scans of large directory trees, may suffer from poor performance. More information is available in [Known Issues](../troubleshoot/known-issues.md).
+* There are a number of issues with the performance of directories bind-mounted with `osxfs`. In particular, writes of small blocks and traversals of large directories are currently slow. Additionally, containers that perform large numbers of directory operations, such as repeated scans of large directory trees, may suffer from poor performance. More information is available in [Known Issues](/manuals/desktop/troubleshoot-and-support/troubleshoot/known-issues.md).
 
 * Under some unhandled error conditions, `inotify` event delivery can fail and become permanently disabled. The workaround is to restart Docker.app
 
@@ -1855,7 +1867,7 @@ events or unexpected unmounts.
 
 **New**
 
-* Docker for Mac is now available from 2 channels: **stable** and **beta**. New features and bug fixes will go out first in auto-updates to users in the beta channel. Updates to the stable channel are much less frequent and happen in sync with major and minor releases of the Docker engine. Only features that are well-tested and ready for production are added to the stable channel releases. For downloads of both and more information, see the [installation guide](../install/mac-install.md).
+* Docker for Mac is now available from 2 channels: **stable** and **beta**. New features and bug fixes will go out first in auto-updates to users in the beta channel. Updates to the stable channel are much less frequent and happen in sync with major and minor releases of the Docker Engine. Only features that are well-tested and ready for production are added to the stable channel releases. For downloads of both and more information, see the [installation guide](/manuals/desktop/setup/install/mac-install.md).
 
 **Upgrades**
 
@@ -1878,7 +1890,7 @@ events or unexpected unmounts.
 
 * Docker.app sometimes uses 200% CPU after macOS wakes up from sleep mode. The issue is being investigated. The workaround is to restart Docker.app
 
-* There are a number of issues with the performance of directories bind-mounted with `osxfs`.  In particular, writes of small blocks, and traversals of large directories are currently slow.  Additionally, containers that perform large numbers of directory operations, such as repeated scans of large directory trees, may suffer from poor performance. For more information and workarounds, see [Known Issues](../troubleshoot/known-issues.md) in [Logs and Troubleshooting](../troubleshoot/_index.md).
+* There are a number of issues with the performance of directories bind-mounted with `osxfs`.  In particular, writes of small blocks, and traversals of large directories are currently slow.  Additionally, containers that perform large numbers of directory operations, such as repeated scans of large directory trees, may suffer from poor performance. For more information and workarounds, see [Known Issues](/manuals/desktop/troubleshoot-and-support/troubleshoot/known-issues.md) in [Logs and Troubleshooting](/manuals/desktop/troubleshoot-and-support/troubleshoot/_index.md).
 
 * Under some unhandled error conditions, `inotify` event delivery can fail and become permanently disabled. The workaround is to restart Docker.app
 
@@ -1922,11 +1934,13 @@ events or unexpected unmounts.
 
 **Known issues**
 
-* See [Known Issues](../troubleshoot/known-issues.md).
+* See [Known Issues](/manuals/desktop/troubleshoot-and-support/troubleshoot/known-issues.md).
 
 ### Beta 18.1 Release Notes (2016-07-07 1.12.0-rc3-beta18.1)
 
->**Note**: Docker 1.12.0 RC3 release introduces a backward incompatible change from RC2. You can fix this by recreating or updating your containers.
+> [!NOTE]
+>
+> Docker 1.12.0 RC3 release introduces a backward incompatible change from RC2. You can fix this by recreating or updating your containers.
 
 **Hotfix**
 
@@ -1948,7 +1962,7 @@ events or unexpected unmounts.
 
 **Known issues**
 
-* See [Known Issues](../troubleshoot/known-issues.md).
+* See [Known Issues](/manuals/desktop/troubleshoot-and-support/troubleshoot/known-issues.md).
 
 ### Beta 18 Release Notes (2016-07-06 1.12.0-rc3-beta18)
 
@@ -1969,7 +1983,7 @@ events or unexpected unmounts.
 
 **Known issues**
 
-* See [Known Issues](../troubleshoot/known-issues.md).
+* See [Known Issues](/manuals/desktop/troubleshoot-and-support/troubleshoot/known-issues.md).
 
 ### Beta 17 Release Notes (2016-06-29 1.12.0-rc2-beta17)
 
@@ -1988,7 +2002,7 @@ events or unexpected unmounts.
 
 **Known issues**
 
-* See [Known Issues](../troubleshoot/known-issues.md).
+* See [Known Issues](/manuals/desktop/troubleshoot-and-support/troubleshoot/known-issues.md).
 
 ### Beta 16 Release Notes (2016-06-17 1.12.0-rc2-beta16)
 
@@ -2010,7 +2024,7 @@ events or unexpected unmounts.
 
 **Known issues**
 
-* See [Known Issues](../troubleshoot/known-issues.md).
+* See [Known Issues](/manuals/desktop/troubleshoot-and-support/troubleshoot/known-issues.md).
 
 ### Beta 15 Release Notes (2016-06-10 1.11.2-beta15)
 
@@ -2034,7 +2048,7 @@ events or unexpected unmounts.
 
 **Known issues**
 
-* See [Known Issues](../troubleshoot/known-issues.md).
+* See [Known Issues](/manuals/desktop/troubleshoot-and-support/troubleshoot/known-issues.md).
 
 ### Beta 14 Release Notes (2016-06-02 1.11.1-beta14)
 

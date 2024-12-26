@@ -17,7 +17,6 @@ code. Each recovery code is unique and specific to your account. You can use
 this code to recover your account in case you lose access to your authenticator
 app. See [Recover your Docker account](recover-hub-account/).
 
-
 ## Prerequisites
 
 You need a mobile phone with a time-based one-time password (TOTP) authenticator
@@ -27,11 +26,11 @@ Authenticator with a registered YubiKey.
 ## Enable two-factor authentication
 
 1. Sign in to your [Docker account](https://app.docker.com/login).
-2. Select your avatar and then from the drop-down menu, select **Account settings**. 
+2. Select your avatar and then from the drop-down menu, select **Account settings**.
 3. Navigate to the **Security** section, then select **Two-factor authentication**.
 4. Enter your account password, then select **Confirm**.
 5. Save your recovery code and store it somewhere safe. You can use your recovery code to recover your account in the event you lose access to your authenticator app.
-6. Use a TOTP mobile app to scan the QR code or enter the text code.
+6. Use a Time-based One-time password (TOTP) mobile app to scan the QR code or enter the text code.
 7. Once you've linked your authenticator app, enter the six-digit code in the text-field.
 8. Select **Enable 2FA**.
 

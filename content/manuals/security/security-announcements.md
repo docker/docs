@@ -59,7 +59,7 @@ If you are using affected versions of runc, BuildKit, Moby, or Docker Desktop, m
 
 If you are unable to update to an unaffected version promptly, follow these best practices to mitigate risk: 
 
-* Only use trusted Docker images (such as [Docker Official Images](../trusted-content/official-images/_index.md)).
+* Only use trusted Docker images (such as [Docker Official Images](../docker-hub/image-library/trusted-content.md#docker-official-images)).
 * Don’t build Docker images from untrusted sources or untrusted Dockerfiles.
 * If you are a Docker Business customer using Docker Desktop and unable to update to v4.27.1, make sure to enable [Hardened Docker Desktop](/manuals/security/for-admins/hardened-desktop/_index.md) features such as:
   * [Enhanced Container Isolation](/manuals/security/for-admins/hardened-desktop/enhanced-container-isolation/_index.md), which mitigates the impact of CVE-2024-21626 in the case of running containers from malicious images.
@@ -111,7 +111,7 @@ _The issue has been fixed in Moby >= v25.0.2 and >= v24.0.9._
 
 Docker Desktop v4.27.0 and earlier are affected. Docker Desktop v4.27.1 was released on February 1 and includes runc, BuildKit, and dockerd binaries patches. In addition to updating to this new version, we encourage all Docker users to diligently use Docker images and Dockerfiles and ensure you only use trusted content in your builds.
 
-As always, you should check Docker Desktop system requirements for your operating system ([Windows](/manuals/desktop/install/windows-install.md#system-requirements), [Linux](/manuals/desktop/install/linux/_index.md#general-system-requirements), [Mac](/manuals/desktop/install/mac-install.md#system-requirements)) before updating to ensure full compatibility.
+As always, you should check Docker Desktop system requirements for your operating system ([Windows](/manuals/desktop/setup/install/windows-install.md#system-requirements), [Linux](/manuals/desktop/setup/install/linux/_index.md#general-system-requirements), [Mac](/manuals/desktop/setup/install/mac-install.md#system-requirements)) before updating to ensure full compatibility.
 
 #### Docker Build Cloud
 
@@ -145,11 +145,11 @@ Docker Hub security scans triggered after 1200 UTC 21 October 2021 are now
 correctly identifying the Text4Shell CVE. Scans before this date do not
 currently reflect the status of this vulnerability. Therefore, we recommend that
 you trigger scans by pushing new images to Docker Hub to view the status of
-the Text4Shell CVE in the vulnerability report. For detailed instructions, see [Scan images on Docker Hub](../docker-hub/vulnerability-scanning.md).
+the Text4Shell CVE in the vulnerability report. For detailed instructions, see [Scan images on Docker Hub](../docker-hub/repos/manage/vulnerability-scanning.md).
 
 ### Docker Official Images impacted by CVE-2022-42889
 
-A number of [Docker Official Images](../trusted-content/official-images/_index.md) contain the vulnerable versions of
+A number of [Docker Official Images](../docker-hub/image-library/trusted-content.md#docker-official-images) contain the vulnerable versions of
 Apache Commons Text. The following lists Docker Official Images that
 may contain the vulnerable versions of Apache Commons Text:
 
@@ -195,13 +195,13 @@ Docker Hub security scans triggered after 1700 UTC 13 December 2021 are now
 correctly identifying the Log4j 2 CVEs. Scans before this date do not
 currently reflect the status of this vulnerability. Therefore, we recommend that
 you trigger scans by pushing new images to Docker Hub to view the status of
-Log4j 2 CVE in the vulnerability report. For detailed instructions, see [Scan images on Docker Hub](../docker-hub/vulnerability-scanning.md).
+Log4j 2 CVE in the vulnerability report. For detailed instructions, see [Scan images on Docker Hub](../docker-hub/repos/manage/vulnerability-scanning.md).
 
 ## Docker Official Images impacted by Log4j 2 CVE
 
 _Last updated December 2021_
 
-A number of [Docker Official Images](../trusted-content/official-images/_index.md) contain the vulnerable versions of
+A number of [Docker Official Images](../docker-hub/image-library/trusted-content.md#docker-official-images) contain the vulnerable versions of
 Log4j 2 CVE-2021-44228. The following table lists Docker Official Images that
 may contained the vulnerable versions of Log4j 2. We updated Log4j 2 in these images to the latest version. Some of these images may not be
 vulnerable for other reasons. We recommend that you also review the guidelines published on the upstream websites.

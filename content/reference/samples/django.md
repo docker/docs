@@ -4,4 +4,5 @@ description: Docker samples for Django.
 service: django
 aliases:
 - /compose/django/
+- /samples/django/
 ---
