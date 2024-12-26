@@ -184,7 +184,7 @@ an integer value using microseconds as unit or a [duration](extension.md#specify
 
 ```yml
  cpu_rt_runtime: '400ms'
- cpu_rt_runtime: 95000`
+ cpu_rt_runtime: '95000'
 ```
 
 ### cpu_rt_period
@@ -194,7 +194,7 @@ an integer value using microseconds as unit or a [duration](extension.md#specify
 
 ```yml
  cpu_rt_period: '1400us'
- cpu_rt_period: 11000`
+ cpu_rt_period: '11000'
 ```
 
 ### cpus
@@ -1171,7 +1171,7 @@ services:
       - ./additional.labels
 ```
 
-If a label is defined in both the `label_file` and the `labels` attribute, the value in [`labels](#labels) takes precedence.
+If a label is defined in both the `label_file` and the `labels` attribute, the value in [labels](#labels) takes precedence.
 
 ### links
 
@@ -1576,7 +1576,7 @@ For more information, see [Use lifecycle hooks](/manuals/compose/how-tos/lifecyc
 
 `pre_stop` defines a sequence of lifecycle hooks to run before the container is stopped. These hooks won't run if the container stops by itself or is terminated suddenly.
 
-Configuration is equivalent to [`post_start](#post_start).
+Configuration is equivalent to [post_start](#post_start).
 
 ### privileged
 
@@ -1817,8 +1817,8 @@ tmpfs:
  - <path>:<options>
 ```
 
-- <path>: The path inside the container where the tmpfs will be mounted.
-- <options>: Comma-separated list of options for the tmpfs mount.
+- `path`: The path inside the container where the tmpfs will be mounted.
+- `options`: Comma-separated list of options for the tmpfs mount.
 
 Available options:
 
