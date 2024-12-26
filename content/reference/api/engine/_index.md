@@ -40,7 +40,7 @@ The Docker Engine API is a RESTful API accessed by an HTTP client such as `wget`
 ## View the API reference
 
 You can
-[view the reference for the latest version of the API](latest/index.html)
+[view the reference for the latest version of the API](/reference/api/engine/version/v{{% param latest_engine_api_version %}}.md)
 or [choose a specific version](/reference/api/engine/version-history/).
 
 ## Versioned API and SDK
@@ -73,21 +73,21 @@ To see the highest version of the API your Docker daemon and client support, use
 ```console
 $ docker version
 Client: Docker Engine - Community
- Version:           27.1.2
- API version:       1.46
- Go version:        go1.21.13
- Git commit:        d01f264
- Built:             Mon Aug 12 11:51:13 2024
+ Version:           27.4.0
+ API version:       1.47
+ Go version:        go1.22.10
+ Git commit:        bde2b89
+ Built:             Sat Dec  7 10:38:33 2024
  OS/Arch:           linux/amd64
  Context:           default
 
 Server: Docker Engine - Community
  Engine:
-  Version:          27.1.2
-  API version:      1.46 (minimum version 1.24)
-  Go version:       go1.21.13
-  Git commit:       f9522e5
-  Built:            Mon Aug 12 11:51:13 2024
+  Version:          27.4.0
+  API version:      1.47 (minimum version 1.24)
+  Go version:       go1.22.10
+  Git commit:       92a8393
+  Built:            Sat Dec  7 10:38:33 2024
   OS/Arch:          linux/amd64
   Experimental:     false
   ...
@@ -99,15 +99,21 @@ You can specify the API version to use in any of the following ways:
   that incorporates the API version with the features you need.
 - When using `curl` directly, specify the version as the first part of the URL.
   For instance, if the endpoint is `/containers/` you can use
-  `/v1.46/containers/`.
+  `/v{{% param "latest_engine_api_version" %}}/containers/`.
 - To force the Docker CLI or the Docker Engine SDKs to use an older version
   of the API than the version reported by `docker version`, set the
   environment variable `DOCKER_API_VERSION` to the correct version. This works
   on Linux, Windows, or macOS clients.
 
+  {{% apiVersionPrevious.inline %}}
+  {{- $version := site.Params.latest_engine_api_version }}
+  {{- $parts := strings.Split $version "." }}
+  {{- $major := cast.ToInt (index $parts 0) }}
+  {{- $minor := cast.ToInt (index $parts 1) }}
   ```console
-  $ DOCKER_API_VERSION='1.44'
+  $ DOCKER_API_VERSION={{ $major }}.{{ math.Sub $minor 1 }}
   ```
+  {{% /apiVersionPrevious.inline %}}
 
   While the environment variable is set, that version of the API is used, even
   if the Docker daemon supports a newer version. This environment variable
@@ -127,6 +133,8 @@ You can specify the API version to use in any of the following ways:
 
 | Docker version | Maximum API version        | Change log                                                                   |
 |:---------------|:---------------------------|:-----------------------------------------------------------------------------|
+| 27.4           | [1.47](/reference/api/engine/version/v1.47/) | [changes](/reference/api/engine/version-history/#v147-api-changes) |
+| 27.3           | [1.47](/reference/api/engine/version/v1.47/) | [changes](/reference/api/engine/version-history/#v147-api-changes) |
 | 27.2           | [1.47](/reference/api/engine/version/v1.47/) | [changes](/reference/api/engine/version-history/#v147-api-changes) |
 | 27.1           | [1.46](/reference/api/engine/version/v1.46/) | [changes](/reference/api/engine/version-history/#v146-api-changes) |
 | 27.0           | [1.46](/reference/api/engine/version/v1.46/) | [changes](/reference/api/engine/version-history/#v146-api-changes) |

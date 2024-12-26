@@ -11,7 +11,7 @@ This section describes how to manage organization settings in the Docker Admin C
 
 ## Configure general information
 
-General organization information appears on your organization landing page in Docker Hub.
+General organization information appears on your organization landing page in the Admin Console.
 
 This information includes:
  - Organization Name
@@ -23,7 +23,7 @@ This information includes:
 To edit this information:
 
 1. Sign in to the [Admin Console](https://admin.docker.com).
-2. In the left navigation, select your organization in the drop-down menu.
+2. Select your company on the **Choose profile** page.
 3. Under **Organization settings**, select **General**.
 4. Specify the organization information and select **Save**.
 

@@ -27,7 +27,7 @@ UIDs/GIDs to be used in the user namespace.
 ## Prerequisites
 
 -  You must install `newuidmap` and `newgidmap` on the host. These commands
-  are provided by the `uidmap` package on most distros.
+  are provided by the `uidmap` package on most distributions.
 
 - `/etc/subuid` and `/etc/subgid` should contain at least 65,536 subordinate
   UIDs/GIDs for the user. In the following example, the user `testuser` has
@@ -123,7 +123,7 @@ testuser:231072:65536
   This step is not required on openSUSE Tumbleweed.
 
 - `sudo modprobe ip_tables iptable_mangle iptable_nat iptable_filter` is required.
-  This might be required on other distros as well depending on the configuration.
+  This might be required on other distributions as well depending on the configuration.
 
 - Known to work on openSUSE 15 and SLES 15.
 {{< /tab >}}

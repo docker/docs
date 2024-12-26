@@ -1,11 +1,14 @@
 ---
 title: Docker Scout
-weight: 100
+weight: 40
 keywords: scout, supply chain, vulnerabilities, packages, cves, scan, analysis, analyze
 description:
   Get an overview on Docker Scout to proactively enhance your software supply chain security
 aliases:
   - /engine/scan/
+params:
+  sidebar:
+    group: Products
 grid:
   - title: Quickstart
     link: /scout/quickstart/
@@ -35,9 +38,9 @@ grid:
       Ensure that your artifacts align with supply chain best practices.
     icon: policy
   - title: Upgrade
-    link: /billing/scout-billing/
+    link: /subscription/change/
     description: |
-      The free plan includes up to 3 repositories. Upgrade for more.
+      The free plan includes up to 1 repository. Upgrade for more.
     icon: upgrade
 ---
 

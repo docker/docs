@@ -1,0 +1,25 @@
+# https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/syntax-for-githubs-form-schema
+name: New guide
+description: Propose a new guide for Docker docs
+labels:
+  - area/guides
+  - kind/proposal
+
+body:
+  - type: textarea
+    attributes:
+      label: Description
+      description: |
+        Briefly describe the topic that you would like us to cover.
+    validations:
+      required: true
+  - type: checkboxes
+    attributes:
+      label: Would you like to contribute this guide?
+      description: |
+        If you select this checkbox, you indicate that you're willing to
+        contribute this guide. If not, we will treat this issue as a request,
+        and someone (a Docker employee, Docker captain, or community member)
+        may pick it up and start working on it.
+      options:
+        - label: "Yes"

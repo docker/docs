@@ -69,9 +69,8 @@ select the item in the list.
 To disable job summaries, set the `DOCKER_BUILD_SUMMARY` environment variable
 in the YAML configuration for your build step:
 
-```yaml {hl_lines=5}
-      -
-        name: Build
+```yaml {hl_lines=4}
+      - name: Build
         uses: docker/docker-build-push-action@v6
         env:
           DOCKER_BUILD_SUMMARY: false
@@ -86,9 +85,8 @@ To disable the upload of the build record archive to GitHub, set the
 `DOCKER_BUILD_RECORD_UPLOAD` environment variable in the YAML configuration for
 your build step:
 
-```yaml {hl_lines=5}
-      -
-        name: Build
+```yaml {hl_lines=4}
+      - name: Build
         uses: docker/docker-build-push-action@v6
         env:
           DOCKER_BUILD_RECORD_UPLOAD: false

@@ -10,6 +10,98 @@ toc_max: 2
 This page contains information about the new features, improvements, and bug
 fixes in [Docker Buildx](https://github.com/docker/buildx).
 
+## 0.19.1
+
+{{< release-date date="2024-11-27" >}}
+
+The full release note for this release is available
+[on GitHub](https://github.com/docker/buildx/releases/tag/v0.19.1).
+
+### Bug fixes
+
+- Reverted the change in v0.19.0 that added new object notation for the fields
+  that previously required CSV strings in Bake definition. This enhancement was
+  reverted because of backwards incompatibility issues were discovered in some
+  edge cases. This feature has now been postponed to the v0.20.0 release.
+  [docker/buildx#2824](https://github.com/docker/buildx/pull/2824)
+
+## 0.19.0
+
+{{< release-date date="2024-11-27" >}}
+
+The full release note for this release is available
+[on GitHub](https://github.com/docker/buildx/releases/tag/v0.19.0).
+
+### New
+
+- Bake now requires you to allow filesystem entitlements when your build needs
+  to read or write files outside of your current working directory.
+  [docker/buildx#2796](https://github.com/docker/buildx/pull/2796),
+  [docker/buildx#2812](https://github.com/docker/buildx/pull/2812).
+
+  To allow filesystem entitlements, use the `--allow fs.read=<path>` flag for
+  the `docker buildx bake` command.
+
+  This feature currently only reports a warning when using a local Bake
+  definition, but will start to produce an error starting from the v0.20
+  release. To enable the error in the current release, you can set
+  `BUILDX_BAKE_ENTITLEMENTS_FS=1`.
+
+### Enhancements
+
+- Bake definition now supports new object notation for the fields that previously required CSV strings as inputs. [docker/buildx#2758](https://github.com/docker/buildx/pull/2758)
+
+  > [!NOTE]
+  > This enhancement was reverted in [v0.19.1](#0191) due to a bug.
+
+- Bake definition now allows defining validation conditions to variables. [docker/buildx#2794](https://github.com/docker/buildx/pull/2794)
+- Metadata file values can now contain JSON array values. [docker/buildx#2777](https://github.com/docker/buildx/pull/2777)
+- Improved error messages when using an incorrect format for labels. [docker/buildx#2778](https://github.com/docker/buildx/pull/2778)
+- FreeBSD and OpenBSD artifacts are now included in the release. [docker/buildx#2774](https://github.com/docker/buildx/pull/2774), [docker/buildx#2775](https://github.com/docker/buildx/pull/2775), [docker/buildx#2781](https://github.com/docker/buildx/pull/2781)
+
+### Bug fixes
+
+- Fixed an issue with printing Bake definitions containing empty Compose networks. [docker/buildx#2790](https://github.com/docker/buildx/pull/2790).
+
+### Packaging
+
+- Compose support has been updated to v2.4.4. [docker/buildx#2806](https://github.com/docker/buildx/pull/2806) [docker/buildx#2780](https://github.com/docker/buildx/pull/2780).
+
+## 0.18.0
+
+{{< release-date date="2024-10-31" >}}
+
+The full release note for this release is available
+[on GitHub](https://github.com/docker/buildx/releases/tag/v0.18.0).
+
+### New
+
+- The `docker buildx inspect` command now displays BuildKit daemon configuration options set with a TOML file. [docker/buildx#2684](https://github.com/docker/buildx/pull/2684)
+- The `docker buildx ls` command output is now more compact by default by compacting the platform list. A new `--no-trunc` option can be used for the full list. [docker/buildx#2138](https://github.com/docker/buildx/pull/2138), [docker/buildx#2717](https://github.com/docker/buildx/pull/2717)
+- The `docker buildx prune` command now supports new `--max-used-space` and `--min-free-space` filters with BuildKit v0.17.0+ builders. [docker/buildx#2766](https://github.com/docker/buildx/pull/2766)
+
+### Enhancements
+
+- Allow capturing of CPU and memory profiles with `pprof` using the [`BUILDX_CPU_PROFILE`](/manuals/build/building/variables.md#buildx_cpu_profile) and [`BUILDX_MEM_PROFILE`](/manuals/build/building/variables.md#buildx_mem_profile) environment variables. [docker/buildx#2746](https://github.com/docker/buildx/pull/2746)
+- Maximum Dockerfile size from standard input has increased. [docker/buildx#2716](https://github.com/docker/buildx/pull/2716), [docker/buildx#2719](https://github.com/docker/buildx/pull/2719)
+- Memory allocations have been reduced. [docker/buildx#2724](https://github.com/docker/buildx/pull/2724), [docker/buildx#2713](https://github.com/docker/buildx/pull/2713)
+- The `--list-targets` and `--list-variables` flags for `docker buildx bake` no longer require initialization of the builder. [docker/buildx#2763](https://github.com/docker/buildx/pull/2763)
+
+### Bug fixes
+
+- Check warnings now print the full filepath to the offending Dockerfile, relative to the current working directory. [docker/buildx#2672](https://github.com/docker/buildx/pull/2672)
+- Fallback images for the `--check` and `--call` options have been updated to correct references. [docker/buildx#2705](https://github.com/docker/buildx/pull/2705)
+- Fix issue with the build details link not showing in experimental mode. [docker/buildx#2722](https://github.com/docker/buildx/pull/2722)
+- Fix validation issue with invalid target linking for Bake. [docker/buildx#2700](https://github.com/docker/buildx/pull/2700)
+- Fix missing error message when running an invalid command. [docker/buildx#2741](https://github.com/docker/buildx/pull/2741)
+- Fix possible false warnings for local state in `--call` requests. [docker/buildx#2754](https://github.com/docker/buildx/pull/2754)
+- Fix potential issues with entitlements when using linked targets in Bake. [docker/buildx#2701](https://github.com/docker/buildx/pull/2701)
+- Fix possible permission issues when accessing local state after running Buildx with `sudo`. [docker/buildx#2745](https://github.com/docker/buildx/pull/2745)
+
+### Packaging
+
+- Compose compatibility has been updated to v2.4.1. [docker/buildx#2760](https://github.com/docker/buildx/pull/2760)
+
 ## 0.17.1
 
 {{< release-date date="2024-09-13" >}}

@@ -12,6 +12,7 @@ aliases:
 - /examples/
 - /samples/runnning_riak_service/
 - /samples/apt-cacher-ng/
+- /samples/
 ---
 
 Learn how to containerize different types of services by walking through Official Docker samples.

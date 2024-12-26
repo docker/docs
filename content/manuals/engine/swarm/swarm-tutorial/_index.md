@@ -39,11 +39,9 @@ Amazon EC2 instances, or hosted in some other way. Check out
 One of these machines is a manager (called `manager1`) and two of them are
 workers (`worker1` and `worker2`).
 
->**Note**
+> [!NOTE]
 >
-> You can follow many of the tutorial steps to test single-node swarm
-> as well, in which case you need only one host. Multi-node commands do not
-> work, but you can initialize a swarm, create services, and scale them.
+> You can follow many of the tutorial steps to test single-node swarm as well, in which case you need only one host. Multi-node commands do not work, but you can initialize a swarm, create services, and scale them.
 
 #### Install Docker Engine on Linux machines
 

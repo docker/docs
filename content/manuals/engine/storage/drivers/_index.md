@@ -48,7 +48,7 @@ CMD python /app/app.py
 ```
 
 This Dockerfile contains four commands. Commands that modify the filesystem create
-a layer. The `FROM` statement starts out by creating a layer from the `ubuntu:22.04`
+a new layer. The `FROM` statement starts out by creating a layer from the `ubuntu:22.04`
 image. The `LABEL` command only modifies the image's metadata, and doesn't produce
 a new layer. The `COPY` command adds some files from your Docker client's current
 directory. The first `RUN` command builds your application using the `make` command,

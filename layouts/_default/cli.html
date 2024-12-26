@@ -5,8 +5,8 @@
   {{ else }}
     {{ $data = index site.Data .Params.datafile }}
   {{ end }}
-  {{ .Scratch.Set "headings" slice }}
-  {{ .Scratch.Set "subheadings" slice }}
+  {{ .Store.Set "headings" slice }}
+  {{ .Store.Set "subheadings" slice }}
   <div class="flex w-full">
     <article class="prose min-w-0 flex-[2_2_0%] max-w-4xl dark:prose-invert">
     {{ partial "breadcrumbs.html" . }}
@@ -84,11 +84,11 @@ can be removed entirely in a future release.
       {{ $heading := dict "level" 2 "text" "Description" }}
       {{ partialCached "heading.html" $heading "cli-description" }}
       {{ $subHeadings := (strings.FindRE `(?m:#{3,4} .*)` .) }}
-      {{ $.Scratch.Add "headings" $heading }}
+      {{ $.Store.Add "headings" $heading }}
       {{ range $subHeadings }}
         {{ $lvl := strings.Count "#" . }}
         {{ $txt := strings.TrimLeft "# " . }}
-        {{ $.Scratch.Add "headings" (dict "level" $lvl "text" $txt) }}
+        {{ $.Store.Add "headings" (dict "level" $lvl "text" $txt) }}
       {{ end }}
       {{ . | $.RenderString (dict "display" "block") }}
     {{ end }}
@@ -97,7 +97,7 @@ can be removed entirely in a future release.
       {{ with $opts }}
         {{ $heading := dict "level" 2 "text" "Options" }}
         {{ partialCached "heading.html" $heading "cli-options" }}
-        {{ $.Scratch.Add "headings" $heading }}
+        {{ $.Store.Add "headings" $heading }}
         <div class="overflow-x-auto">
           <table>
             <thead class="bg-gray-light-100 dark:bg-gray-dark-200">
@@ -162,18 +162,18 @@ can be removed entirely in a future release.
       {{ $heading := dict "level" 2 "text" "Examples" }}
       {{ partialCached "heading.html" $heading "cli-examples" }}
       {{ $subHeadings := (strings.FindRE `(?m:#{3,4} .*)` .) }}
-      {{ $.Scratch.Add "headings" $heading }}
+      {{ $.Store.Add "headings" $heading }}
       {{ range $subHeadings }}
         {{ $lvl := strings.Count "#" . }}
         {{ $txt := strings.TrimLeft "# " . }}
-        {{ $.Scratch.Add "headings" (dict "level" $lvl "text" $txt) }}
+        {{ $.Store.Add "headings" (dict "level" $lvl "text" $txt) }}
       {{ end }}
       {{ $.RenderString (dict "display" "block") . }}
     {{ end }}
     {{ if eq .Kind "section" }}
       {{ $heading := dict "level" 2 "text" "Subcommands" }}
       {{ partialCached "heading.html" $heading "cli-subcommands" }}
-      {{ $.Scratch.Add "headings" $heading }}
+      {{ $.Store.Add "headings" $heading }}
       <table>
         <thead>
           <tr>
@@ -202,7 +202,7 @@ can be removed entirely in a future release.
         <div class="text-lg pb-2">{{ T "tableOfContents" }}</div>
         <nav class="toc">
           <ul>
-            {{ range (.Scratch.Get "headings") }}
+            {{ range (.Store.Get "headings") }}
               {{/* add left padding depending on level (pl-2, pl-3, pl-4) */}}
               {{ $slice := strings.Split .text "{#" }}
               {{ $text := index $slice 0 }}

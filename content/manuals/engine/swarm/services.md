@@ -762,7 +762,7 @@ $ docker service create \
   --replicas 9 \
   --name redis_2 \
   --placement-pref 'spread=node.labels.datacenter' \
-  redis:3.0.6
+  redis:7.4.0
 ```
 
 > [!NOTE]
@@ -786,7 +786,7 @@ $ docker service create \
   --name redis_2 \
   --placement-pref 'spread=node.labels.datacenter' \
   --placement-pref 'spread=node.labels.rack' \
-  redis:3.0.6
+  redis:7.4.0
 ```
 
 You can also use placement preferences in conjunction with placement constraints

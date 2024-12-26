@@ -119,10 +119,6 @@ To empty a volume:
 
 ## Export a volume
 
-{{% experimental title="Beta feature" %}}
-The export volume feature is currently in [Beta](../../release-lifecycle.md#beta).
-{{% /experimental %}}
-
 You can export the content of a volume to a local file, a local image, an to an
 image in Docker Hub, or to a supported cloud provider. When exporting content
 from a volume used by one or more running containers, the containers are
@@ -148,15 +144,12 @@ You can either [export a volume now](#export-a-volume-now) or [schedule a recurr
    - **Local image**: Select a local image to export the content to. Any
     existing data in the image will be replaced by the exported content.
    - **New image**: Specify a name for the new image.
-   - **Registry**: Specify a Docker Hub repository. Note that Docker Hub
-     repositories can be publicly accessible which means your data can be
-     publicly accessible. For more details, see
-     [Change a repository from public to private](/docker-hub/repos/#change-a-repository-from-public-to-private).
+   - **Registry**: Specify a Docker Hub repository.
 
    {{< /tab >}}
    {{< tab name="External cloud storage" >}}
 
-   You must have a [Docker Business subscription](../../subscription/core-subscription/details.md) to export to an external cloud provider.
+   You must have a [Docker Business subscription](../../subscription/details.md) to export to an external cloud provider.
 
    Select your cloud provider and then specify the URL to upload to the storage.
    Refer to the following documentation for your cloud provider to learn how to
@@ -173,7 +166,7 @@ You can either [export a volume now](#export-a-volume-now) or [schedule a recurr
 
 ### Schedule a volume export
 
-1. Sign in to Docker Desktop. You must be signed in and have a paid [Docker subscription](../../subscription/core-subscription/details.md) to schedule a volume export.
+1. Sign in to Docker Desktop. You must be signed in and have a paid [Docker subscription](../../subscription/details.md) to schedule a volume export.
 2. In the **Volumes** view, select the volume you want to export.
 3. Select the **Exports** tab.
 4. Select **Schedule export**.
@@ -197,15 +190,12 @@ You can either [export a volume now](#export-a-volume-now) or [schedule a recurr
    - **Local image**: Select a local image to export the content to. Any
     existing data in the image will be replaced by the exported content.
    - **New image**: Specify a name for the new image.
-   - **Registry**: Specify a Docker Hub repository. Note that Docker Hub
-     repositories can be publicly accessible which means your data can be
-     publicly accessible. For more details, see
-     [Change a repository from public to private](/docker-hub/repos/#change-a-repository-from-public-to-private).
+   - **Registry**: Specify a Docker Hub repository.
 
    {{< /tab >}}
    {{< tab name="External cloud storage" >}}
 
-   You must have a [Docker Business subscription](../../subscription/core-subscription/details.md) to export to an external cloud provider.
+   You must have a [Docker Business subscription](../../subscription/details.md) to export to an external cloud provider.
 
    Select your cloud provider and then specify the URL to upload to the storage.
    Refer to the following documentation for your cloud provider to learn how to

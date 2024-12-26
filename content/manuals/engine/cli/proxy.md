@@ -12,7 +12,7 @@ This page describes how to configure the Docker CLI to use proxies via
 environment variables in containers.
 
 This page doesn't describe how to configure proxies for Docker Desktop.
-For instructions, see [configuring Docker Desktop to use HTTP/HTTPS proxies](/manuals/desktop/settings.md#proxies).
+For instructions, see [configuring Docker Desktop to use HTTP/HTTPS proxies](/manuals/desktop/settings-and-maintenance/settings.md#proxies).
 
 If you're running Docker Engine without Docker Desktop, refer to
 [Configure the Docker daemon to use a proxy](/manuals/engine/daemon/proxy.md)

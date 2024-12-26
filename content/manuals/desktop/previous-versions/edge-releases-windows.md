@@ -12,7 +12,7 @@ sitemap: false
 This page contains information about Docker Desktop Edge releases. Edge releases give you early access to our newest features. Note that some of the features may be experimental, and some of them may not ever reach the Stable release.
 
  For Docker Desktop system requirements, see
-[What to know before you install](../install/windows-install.md#system-requirements).
+[What to know before you install](/manuals/desktop/setup/install/windows-install.md#system-requirements).
 
 ## Docker Desktop Community 2.5.4
 2020-12-07
@@ -74,7 +74,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 ### New
 
-- If you have enabled [Vulnerability Scanning](../../docker-hub/vulnerability-scanning.md) in Docker Hub, the scan results will now appear in Docker Desktop.
+- If you have enabled [Vulnerability Scanning](../../docker-hub/repos/manage/vulnerability-scanning.md) in Docker Hub, the scan results will now appear in Docker Desktop.
 
 ### Upgrades
 
@@ -179,7 +179,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 
 ### Bug fixes and minor changes
 
-- Fixed an issue with Docker Desktop integration with other WSL 2 distros. See [docker/for-win#6894](https://github.com/docker/for-win/issues/6894)
+- Fixed an issue with Docker Desktop integration with other WSL 2 distributions. See [docker/for-win#6894](https://github.com/docker/for-win/issues/6894)
 - Fixed DNS resolution of short names. See [docker/for-win#4425](https://github.com/docker/for-win/issues/4425)
 
 ## Docker Desktop Community 2.3.5.1
@@ -354,7 +354,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 - Fixed an upgrade bug where users on versions still using the PowerShell-based VM management experience a silent un-installation crash leading to Docker Desktop being uninstalled instead of upgraded.
 - Fixed a crash when failing to login due to no Internet connection.
 - Fixed bug in handling shared volume paths with `..` characters. Fixes [docker/for-win#5375](https://github.com/docker/for-win/issues/5375).
-- WSL 2: Docker Desktop detects when the wsl-distro is stopped and displays an actionable error message.
+- WSL 2: Docker Desktop detects when the wsl-distribution is stopped and displays an actionable error message.
 - Fixed a bug in `ftruncate` which prevented [libgit2sharp](https://github.com/libgit2/libgit2sharp) from cloning repositories on shared volumes. See [docker/for-win#5808](https://github.com/docker/for-win/issues/5808#issuecomment-610996272).
 - Fixed a bug that caused starting and stopping of a Compose application from the UI to fail when the path contains whitespace.
 
@@ -423,7 +423,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 
 **WSL 2**
 - Docker Desktop only exposes host ports in Linux if the Windows port is available.
-- Docker Desktop now allows users to refresh the list of Linux distros.
+- Docker Desktop now allows users to refresh the list of Linux distributions.
 - Docker Desktop defaults to WSL 2 on install on compatible OS versions.
 - Docker Desktop detects missing Linux kernel and adds a pointer to the Microsoft documentation to download the kernel.
 
@@ -480,7 +480,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 ### Bug fixes and minor changes
 
 - Added a prerequisite check in the installer for the `LanmanServer` service. Fixes [docker/for-win#5150](https://github.com/docker/for-win/issues/5150).
-- DockerNAT has been removed from Docker Desktop as using an IP address to communicate from the host to a container is not a supported feature. To communicate from a container to the host, you must use the special DNS name `host.docker.internal`. We also recommend using ports to communicate from the host to a container. For more information, see [Networking](../networking.md).
+- DockerNAT has been removed from Docker Desktop as using an IP address to communicate from the host to a container is not a supported feature. To communicate from a container to the host, you must use the special DNS name `host.docker.internal`. We also recommend using ports to communicate from the host to a container. For more information, see [Networking](/manuals/desktop/features/networking.md).
 - Ceph support has been removed from Docker Desktop to save disk space.
 - Fixed an issue that caused the Windows log file archive to grow indefinitely. Fixes [docker/for-win#5113](https://github.com/docker/for-win/issues/5113).
 
@@ -516,7 +516,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 ### Known issues
 
-- DockerNAT has been removed from Docker Desktop 2.2.0.0 as using an IP address to communicate from the host to a container is not a supported feature. To communicate from a container to the host, you must use the special DNS name `host.docker.internal`. We also recommend using ports to communicate from the host to a container. For more information, see [Networking](../networking.md).
+- DockerNAT has been removed from Docker Desktop 2.2.0.0 as using an IP address to communicate from the host to a container is not a supported feature. To communicate from a container to the host, you must use the special DNS name `host.docker.internal`. We also recommend using ports to communicate from the host to a container. For more information, see [Networking](/manuals/desktop/features/networking.md).
 
   However, if your current setup relies on IP addresses for communication, you can use a temporary workaround to reinstate DockerNAT. To do this, open
 `C:\Program Files\Docker\Docker\resources\MobyLinux.ps1` and add `$SwitchName = "DockerNAT"` between line 175 and 176. Note that the temporary workaround to reinstate DockerNAT may be removed from future releases.
@@ -594,8 +594,8 @@ Added the ability to start and stop Compose-based applications and view combined
 - Fixed a container start error when a container has more than one port with an arbitrary or not-yet-configured external port number. For example, `docker run -p 80 -p 443 nginx`). Fixes [docker/for-win#4935](https://github.com/docker/for-win/issues/4935) and [docker/compose#6998](https://github.com/docker/compose/issues/6998).
 - Fixed an issue which caused Docker Desktop to crash when resetting to factory defaults while running Windows containers.
 - Fixed multiple issues related to Fast Startup.
-- Injected Docker CLI, CLI plugins, Docker Compose, Notary, and kubectl into WSL distros when Docker Desktop WSL integration is enabled.
-- Fixed an issue where bind mounts created with Docker Compose from a WSL distro were incorrectly translated. Fixes [docker/for-win#5084](https://github.com/docker/for-win/issues/5084).
+- Injected Docker CLI, CLI plugins, Docker Compose, Notary, and kubectl into WSL distributions when Docker Desktop WSL integration is enabled.
+- Fixed an issue where bind mounts created with Docker Compose from a WSL distribution were incorrectly translated. Fixes [docker/for-win#5084](https://github.com/docker/for-win/issues/5084).
 - Docker Desktop now supports inotify events on shared filesystems for Windows file sharing.
 - Fixed a cache invalidation bug when a file in a shared volume is renamed on the host for Windows file sharing.
 - Fixed a handle leak when calling `Mknod` on a shared volume for Windows file sharing.
@@ -624,7 +624,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
   To access the Dashboard UI, select the Docker menu from the system tray and then click **Dashboard**.
 
-- **WSL 2 backend:** The new Docker Desktop WSL 2 backend replaces the Docker Desktop WSL 2 Tech Preview. The WSL 2 backend architecture introduces support for Kubernetes, provides an updated Docker daemon, offers VPN-friendly networking, and additional features. For more information, see [Docker Desktop WSL 2 backend](../wsl/_index.md).
+- **WSL 2 backend:** The new Docker Desktop WSL 2 backend replaces the Docker Desktop WSL 2 Tech Preview. The WSL 2 backend architecture introduces support for Kubernetes, provides an updated Docker daemon, offers VPN-friendly networking, and additional features. For more information, see [Docker Desktop WSL 2 backend](/manuals/desktop/features/wsl/_index.md).
 
 - **New file sharing implementation:** Docker Desktop introduces a new file sharing implementation which uses gRPC, FUSE, and Hypervisor sockets instead of Samba, CIFS, and Hyper-V networking. The new implementation  offers improved I/O performance. Additionally, when using the new file system:
 
@@ -699,7 +699,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 #### New
 
-- [Docker Desktop WSL 2 Tech Preview](../wsl/_index.md)
+- [Docker Desktop WSL 2 Tech Preview](/manuals/desktop/features/wsl/_index.md)
 
 #### Bug fixes and minor changes
 
@@ -1094,7 +1094,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
   - [Docker 18.02.0-ce-rc1](https://github.com/docker/docker-ce/releases/tag/v18.02.0-ce-rc1)
 
 * New
-  - Experimental Kubernetes Support. You can now run a single-node Kubernetes cluster from the "Kubernetes" Pane in Docker for Windows settings and use kubectl commands as well as docker commands. See [the Kubernetes section](../kubernetes.md).
+  - Experimental Kubernetes Support. You can now run a single-node Kubernetes cluster from the "Kubernetes" Pane in Docker for Windows settings and use kubectl commands as well as docker commands. See [the Kubernetes section](/manuals/desktop/features/kubernetes.md).
   - LCOW containers can now be run next to Windows containers (on Windows RS3 build 16299 and later). Use `--platform=linux` in Windows container mode to run Linux Containers On Windows. Note that LCOW is still experimental, and requires daemon `experimental` option.
 
 * Bug fixes and minor changes
@@ -1276,9 +1276,10 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 TCP connection is idle for more than 5 minutes (related to
 [docker/for-mac#1374](https://github.com/docker/for-mac/issues/1374))
 
-> [!NOTE]: The link above goes to Docker for Mac issues because a
-Mac user reported this problem, which applied to both Mac and Windows
-and was fixed on both.
+> [!NOTE]
+>
+> The link above goes to Docker for Mac issues because a
+Mac user reported this problem, which applied to both Mac and Windows and was fixed on both.
 
 ### Docker Community Edition 17.07.0-rc3-win23 Release Notes (2017-08-21 17.07.0-win23)
 
@@ -1626,7 +1627,9 @@ registry access (fixes [docker/for-win#569](https://github.com/docker/for-win/is
 
 ### Beta 36 Release Notes (2017-01-12 1.13.0-rc6-beta36)
 
->**Important Note:** Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
+> [!IMPORTANT]
+>
+> Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
 
 **Upgrades**
 
@@ -1640,7 +1643,9 @@ registry access (fixes [docker/for-win#569](https://github.com/docker/for-win/is
 
 ### Beta 35 Release Notes (2017-01-06 1.13.0-rc5-beta35)
 
->**Important Note:** Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
+> [!IMPORTANT]
+>
+> Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
 
 **Upgrades**
 
@@ -1669,7 +1674,9 @@ registry access (fixes [docker/for-win#569](https://github.com/docker/for-win/is
 
 ### Beta 33 Release Notes (2016-12-15 1.13.0-rc3-beta33)
 
->**Important Note:** Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
+> [!IMPORTANT]
+>
+> Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
 
 **New**
 
@@ -1686,7 +1693,9 @@ registry access (fixes [docker/for-win#569](https://github.com/docker/for-win/is
 
 ### Beta 32.1 Release Notes (2016-12-09 1.13.0-rc3-beta32.1)
 
->**Important Note:** Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
+> [!IMPORTANT]
+>
+> Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
 
 **Hotfixes**
 
@@ -1716,14 +1725,14 @@ registry access (fixes [docker/for-win#569](https://github.com/docker/for-win/is
 
 ### Beta 32 Release Notes (2016-12-07 1.13.0-rc3-beta32)
 
->**Important Note**:
+> [!IMPORTANT]
 >
->  Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
+> Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
 
 **New**
 
 - Windows containers settings panel and options are working. In previous releases, settings were not implemented for
-[Windows containers mode](../faqs/windowsfaqs.md#how-do-i-switch-between-windows-and-linux-containers).
+[Windows containers mode](/manuals/desktop/troubleshoot-and-support/faqs/windowsfaqs.md#how-do-i-switch-between-windows-and-linux-containers).
 - Windows containers: Restart from the settings panel works
 - Windows containers: Factory default
 - Windows containers: `Daemon.json` can be modified
@@ -1992,7 +2001,7 @@ work. Some insider builds may not work.
 **Known issues**
 
 * Only UTF-8 passwords are supported for host filesystem sharing
-* Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc` as documented in [Troubleshooting](../troubleshoot/known-issues.md).
+* Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc` as documented in [Troubleshooting](/manuals/desktop/troubleshoot-and-support/troubleshoot/known-issues.md).
 
 ### Beta 22 Release (2016-08-11 1.12.0-beta22)
 
@@ -2000,13 +2009,13 @@ Unreleased. See Beta 23 for changes.
 
 **Known issues**
 
-* Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc` as documented in [Troubleshooting](../troubleshoot/known-issues.md).
+* Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc` as documented in [Troubleshooting](/manuals/desktop/troubleshoot-and-support/troubleshoot/known-issues.md).
 
 ### Beta 21 Release (2016-07-28 1.12.0-beta21)
 
 **New**
 
-* Docker for Windows is now available from two channels: **stable** and **beta**. New features and bug fixes go out first in auto-updates to users in the beta channel. Updates to the stable channel are much less frequent and happen in sync with major and minor releases of the Docker engine. Only features that are well-tested and ready for production are added to the stable channel releases. For downloads of both and more information, see [Install Docker Desktop on Windows](../install/windows-install.md).
+* Docker for Windows is now available from two channels: **stable** and **beta**. New features and bug fixes go out first in auto-updates to users in the beta channel. Updates to the stable channel are much less frequent and happen in sync with major and minor releases of the Docker Engine. Only features that are well-tested and ready for production are added to the stable channel releases. For downloads of both and more information, see [Install Docker Desktop on Windows](/manuals/desktop/setup/install/windows-install.md).
 
 * Removed the docker host name. Containers with exported ports are reachable via localhost.
 
@@ -2070,7 +2079,9 @@ Unreleased. See Beta 23 for changes.
 
 ### Beta 18.1 Release (2016-07-07 1.12.0-rc3-beta18.1)
 
->**Note**: Docker 1.12.0 RC3 release introduces a backward incompatible change from RC2. You can fix this by recreating or updating your containers.
+> [!NOTE]
+>
+> Docker 1.12.0 RC3 release introduces a backward incompatible change from RC2. You can fix this by recreating or updating your containers.
 
 **Hotfix**
 
@@ -2275,11 +2286,11 @@ This Beta release includes some significant changes:
 * The GUI now runs in non-elevated mode and connects to an elevated Windows service
 * Allocate virtual machine memory by 256 MB increments, instead of 1 GB
 * Show a meaningful error when the user has an empty password
-* Improved [Troubleshooting](../troubleshoot/_index.md) page
+* Improved [Troubleshooting](/manuals/desktop/troubleshoot-and-support/troubleshoot/_index.md) page
 
 **Upgrades**
 
-* docker-compose 1.7.1  (see <a href="https://github.com/docker/compose/releases/tag/1.7.1" target="_blank"> changelog</a>)
+* docker-compose 1.7.1 (see [changelog](https://github.com/docker/compose/releases/tag/1.7.1))
 * Kernel 4.4.9
 
 **Bug fixes and minor changes**
@@ -2299,7 +2310,7 @@ This Beta release includes some significant changes:
 
 **Known issues**
 
-* Due to limitation in the Windows NAT implementation, co-existence with other NAT prefixes needs to be carefully managed. See [Troubleshooting](../troubleshoot/known-issues.md) for more details.
+* Due to limitation in the Windows NAT implementation, co-existence with other NAT prefixes needs to be carefully managed. See [Troubleshooting](/manuals/desktop/troubleshoot-and-support/troubleshoot/known-issues.md) for more details.
 
 * Logs for the windows service are not aggregated with logs from the GUI. This is expected to be fixed in future versions.
 
@@ -2327,7 +2338,7 @@ This Beta release includes some significant changes:
 
 **Known issues**
 
-*  Due to limitation in the Windows NAT implementation, co-existence with other NAT prefixes needs to be carefully managed. See [Troubleshooting](../troubleshoot/_index.md) for more details.
+*  Due to limitation in the Windows NAT implementation, co-existence with other NAT prefixes needs to be carefully managed. See [Troubleshooting](/manuals/desktop/troubleshoot-and-support/troubleshoot/_index.md) for more details.
 
 
 ### Beta 9 Release (2016-04-26 1.11.0-beta9)
@@ -2493,7 +2504,9 @@ are working on a solution.
 * Fix msi version
 * Don't truncate Toolbox link
 
->**Note**: Docker for Windows skipped from Beta 1 to Beta 5 at this point to synch up the version numbering with Docker for Mac, which went into beta cycles a little earlier.
+> [!NOTE]
+>
+> Docker for Windows skipped from Beta 1 to Beta 5 at this point to synch up the version numbering with Docker for Mac, which went into beta cycles a little earlier.
 
 ### Beta 1 Release (2016-03-24 1.10.6)
 

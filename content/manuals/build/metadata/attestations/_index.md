@@ -8,6 +8,8 @@ aliases:
   - /build/attestations/
 ---
 
+{{< youtube-embed qOzcycbTs4o >}}
+
 Build attestations describe how an image was built, and what it contains. The
 attestations are created at build-time by BuildKit, and become attached to the
 final image as metadata.
@@ -60,7 +62,7 @@ $ docker buildx build --sbom=true --provenance=true .
 >
 > - Use a `docker-container` driver with the `--push` flag to push the image to
 >   a registry directly.
-> - Enable the [containerd image store](/manuals/desktop/containerd.md).
+> - Enable the [containerd image store](/manuals/desktop/features/containerd.md).
 
 > [!NOTE]
 >

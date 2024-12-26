@@ -14,7 +14,7 @@ aliases:
 params:
   featured: true
   image: images/learning-paths/scout.png
-  time: 10 minutes
+  time: 20 minutes
   resource_links:
     - title: Docker Scout overview
       url: /scout/
@@ -22,8 +22,6 @@ params:
       url: /scout/quickstart/
     - title: Install Docker Scout
       url: /scout/install/
-    - title: Software Bill of Materials
-      url: /scout/concepts/sbom/
 ---
 
 When container images are insecure, significant risks can arise. Around 60% of

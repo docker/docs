@@ -1,7 +1,6 @@
 ---
 title: Common challenges and questions
 description: Explore common challenges and questions related to Docker Scout.
-weight: 30
 ---
 
 <!-- vale Docker.HeadingLength = NO -->

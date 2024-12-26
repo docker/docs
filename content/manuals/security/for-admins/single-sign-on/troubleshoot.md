@@ -16,8 +16,7 @@ their service.
 ## View SSO and SCIM error logs
 
 1. Sign in to the [Admin Console](https://app.docker.com/admin/).
-2. Select your organization or company in the left navigation drop-down menu,
-   and then select **SSO and SCIM**.
+2. Select your organization or company from the **Choose profile** page, and then select **SSO and SCIM**.
 
    > [!NOTE]
    >
@@ -73,8 +72,7 @@ seats for the user.
 Possible solutions:
 
  * Add more Docker Business subscription seats to the organization. For details,
-   see [Add seats to your
-  subscription](/subscription/core-subscription/add-seats/).
+   see [Add seats to your subscription](../../../subscription/manage-seats.md).
  * Remove some users or pending invitations from your organization to make more
    seats available. For more details, see [Manage organization
    members](/admin/organization/members/).

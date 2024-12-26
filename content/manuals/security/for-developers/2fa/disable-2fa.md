@@ -4,7 +4,7 @@ keywords: Docker, docker, registry, security, Docker Hub, authentication, two-fa
   authentication, account security,
 title: Disable two-factor authentication on your Docker account
 linkTitle: Disable two-factor authentication
-aliases: 
+aliases:
 - /docker-hub/2fa/disable-2fa/
 weight: 30
 ---

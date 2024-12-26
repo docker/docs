@@ -13,6 +13,77 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.32.0
+
+{{< release-date date="2024-12-13" >}}
+
+### Update
+
+- Dependencies upgrade: bump docker + buildx to latest release
+- Dependencies upgrade: bump otel dependencies to v1.28.0 and v0.53.0
+- Dependencies upgrade: bump golang.org/x/sys 0.28.0
+- Dependencies upgrade: bump golang.org/x/crypto to 0.31.0
+- Dependencies upgrade: bump google.golang.org/grpc to 1.68.1
+- Dependencies upgrade: bump golang.org/x/sync 0.10.0
+- Dependencies upgrade: bump xx to v1.6.1
+
+### Bug fixes and enhancements
+
+- Improved support when building with [Bake](/manuals/build/bake.md)
+- Added `restart` and `sync+exec` watch actions
+- Compose now recreates containers when the volume or network configuration changes
+- Fixed support for `mac_address`
+- Fixed `pull --quiet` to only hide progress, not global status
+- Fixed an issue where only the `rebuild` watch action now requires a build declaration
+- Compose now logs `watch` configuration error when enabled through the Compose menu
+
+
+## 2.31.0
+
+{{< release-date date="2024-11-28" >}}
+
+### Update
+
+- Dependencies upgrade: bump compose-go to v2.4.5
+- Dependencies upgrade: bump docker engine and cli to v27.4.0-rc.2
+- Dependencies upgrade: bump buildx to v0.18.0
+- Dependencies upgrade: bump buildkit to v0.17.1
+
+### Bug fixes and enhancements
+
+- Added the ability to use Docker Buildx Bake to build Docker Compose services
+- Added `commit` command to create new images from running containers
+- Fixed an issue where network changes were not detected
+- Fixed an issue where containers stopped sequentially which slowed down the restart process
+
+
+## 2.30.3
+
+{{< release-date date="2024-11-07" >}}
+
+### Update
+
+- Dependencies upgrade: bump compose-go to v2.4.4
+
+### Bug fixes and enhancements
+
+- Fixed an issue re-starting services that should not when using `--watch`
+- Improve the fix of using same YAML anchor multiple times in a Compose file
+
+
+## 2.30.2
+
+{{< release-date date="2024-11-05" >}}
+
+### Update
+
+- Dependencies upgrade: bump compose-go to v2.4.3
+
+### Bug fixes and enhancements
+
+- Fixed an issue re-creating services when updating its profiles 
+- Fixed a regression when using the same YAML anchor multiple times in a Compose file
+
 ## 2.30.1
 
 {{< release-date date="2024-10-30" >}}
@@ -977,9 +1048,9 @@ For the full change log or additional information, check the [Compose repository
 
 {{< release-date date="2022-09-27" >}}
 
-> [!NOTE]     
-> 
-> - Updates on environment file syntax & interpolation: see [compose#9879](https://github.com/docker/compose/issues/9879)  
+> [!NOTE]
+>
+> - Updates on environment file syntax & interpolation: see [compose#9879](https://github.com/docker/compose/issues/9879)
 > - Setting `DOCKER_HOST` via `.env` files is not supported in Compose v2
 
 ### Updates
@@ -1118,10 +1189,9 @@ For the full change log, check the [Compose repository 2.10.0 release page](http
 > [!IMPORTANT]
 >
 > Compose v2.9.0 contains changes to the environment variable's precedence that have since been reverted. We recommend using v2.10+ to avoid compatibility issues.
->
 
 > [!NOTE]
-> 
+>
 > This release reverts the breaking changes introduced in [Compose v2.8.0](#280) by [`compose-go v1.3.0`](https://github.com/compose-spec/compose-go/releases/tag/v1.3.0).
 
 ### Updates
@@ -1724,7 +1794,7 @@ For a list of PRs and issues fixed in this release, see [Compose 1.28.3](https:/
 
 - Removed `None` entries on exec command.
 
-- Added `distro` package to get distro information.
+- Added `distribution` package to get distribution information.
 
 - Added `python-dotenv` to delegate `.env` file processing.
 
@@ -1949,8 +2019,9 @@ This release contains minor improvements and bug fixes.
 
 - Reverted a 1.23.0 change that appended random strings to container names
   created by `docker-compose up`, causing addressability issues.
-  > [!NOTE]: Containers created by `docker-compose run` will continue to use
-  randomly generated names to avoid collisions during parallel runs.
+  > [!NOTE]
+  >
+  > Containers created by `docker-compose run` will continue to use randomly generated names to avoid collisions during parallel runs.
 
 - Fixed an issue where some `dockerfile` paths would fail unexpectedly when
   attempting to build on Windows.
@@ -2954,7 +3025,10 @@ naming scheme accordingly before upgrading.
 - Containers dependencies can now be set up to wait on positive healthchecks
   when declared using `depends_on`. See the documentation for the updated
   syntax.
-  **Note**: This feature will not be ported to version 3 Compose files.
+
+  > [!NOTE]
+  >
+  > This feature will not be ported to version 3 Compose files.
 
 - Added support for the `sysctls` parameter in service definitions
 
@@ -3848,7 +3922,7 @@ The highlights:
 
    This means the GitHub repository has moved to [https://github.com/docker/fig](https://github.com/docker/fig) and our IRC channel is now #docker-fig on Freenode.
 
- - Fig can be used with the [official Docker OS X installer](/manuals/desktop/install/mac-install.md). Boot2Docker will mount the home directory from your host machine so volumes work as expected.
+ - Fig can be used with the [official Docker OS X installer](/manuals/desktop/setup/install/mac-install.md). Boot2Docker will mount the home directory from your host machine so volumes work as expected.
 
  - Fig supports Docker 1.3.
 

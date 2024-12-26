@@ -15,11 +15,23 @@ known issues for each Docker Hub release.
 
 Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projects/51/views/1?filterQuery=) to see what's coming next.
 
+## 2024-11-11
+
+### New
+
+- [Personal access tokens](/security/for-developers/access-tokens/) (PATs) now support expiration dates.
+
+## 2024-10-15
+
+### New
+
+- Beta: You can now create [organization access tokens](/security/for-admins/access-tokens/) (OATs) to enhance security for organizations and streamline access management for organizations.
+
 ## 2024-03-23
 
 ### New
 
- - You can tag Docker Hub repositories with [categories](./repos/categories.md).
+ - You can tag Docker Hub repositories with [categories](./repos/manage/information.md#repository-categories).
 
 ## 2023-12-11
 
@@ -68,7 +80,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 ### New
 
-- The new [autobuild feature](../docker-hub/builds/manage-builds.md#check-your-active-builds) lets you view your in-progress logs every 30 seconds instead of when the build is complete.
+- The new [autobuild feature](../docker-hub/repos/manage/builds/manage-builds.md#check-your-active-builds) lets you view your in-progress logs every 30 seconds instead of when the build is complete.
 
 ## 2022-09-21
 
@@ -116,7 +128,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 ### New
 
-- You can now purchase or upgrade to a Docker Business subscription using a credit card. To learn more, see [Upgrade your subscription](../subscription/core-subscription/upgrade.md).
+- You can now purchase or upgrade to a Docker Business subscription using a credit card. To learn more, see [Upgrade your subscription](../subscription//change.md).
 
 ## 2021-08-31
 
@@ -179,7 +191,7 @@ For more information about this feature and for instructions on how to use it, s
 
 ### New feature
 
-The **Repositories** view now shows which images have gone stale because they haven't been pulled or pushed recently. For more information, see [repository tags](repos/access/_index.md#view-repository-tags).
+The **Repositories** view now shows which images have gone stale because they haven't been pulled or pushed recently. For more information, see [repository tags](repos/manage/access/_index.md#view-repository-tags).
 
 ## 2020-10-07
 
@@ -265,7 +277,7 @@ Each organization page now breaks down into these tabs:
 
 ### Enhancements
 
-* The [billing page](../subscription/core-subscription/upgrade.md) for personal accounts has been updated. You can access the page at its new URL: [https://hub.docker.com/billing/plan](https://hub.docker.com/billing/plan).
+* The [billing page](../subscription/change.md) for personal accounts has been updated. You can access the page at its new URL: [https://hub.docker.com/billing/plan](https://hub.docker.com/billing/plan).
 
 ### Known Issues
 
