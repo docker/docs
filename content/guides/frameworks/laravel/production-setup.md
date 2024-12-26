@@ -1,7 +1,7 @@
 ---
 title: Laravel Production Setup with Docker Compose
 description: Set up a production-ready environment for Laravel using Docker Compose.
-weight: 30
+weight: 20
 ---
 
 ## Production environment setup
@@ -13,7 +13,6 @@ This guide demonstrates how to set up a production-ready Laravel environment usi
 
 ### Project structure
 
-The project structure for production closely follows the development setup, with Dockerfiles and configurations tailored specifically for production.
 
 ```plaintext
 my-laravel-app/
@@ -23,26 +22,29 @@ my-laravel-app/
 ├── database/
 ├── public/
 ├── docker/
-│   ├── php-fpm
-│   │   └── Dockerfile
-│   │   └── entrypoint.sh
-│   ├── php-cli
-│   │   └── Dockerfile
-│   ├── nginx
-│       └── Dockerfile
-│       └── nginx.conf
-├── compose.yaml
+│   ├── common/
+│   │   └── php-fpm/
+│   │       └── Dockerfile
+│   ├── development/
+│   ├── production/
+│   │   ├── php-fpm/
+│   │   │   └── entrypoint.sh
+│   │   └── nginx
+│   │       ├── Dockerfile
+│   │       └── nginx.conf
+├── compose.dev.yaml
+├── compose.prod.yaml
 ├── .dockerignore
 ├── .env
 ├── vendor/
 ├── ...
 ```
 
-This structure includes a typical Laravel app, with a `docker` directory for Docker-related files like `php-fpm`, `php-cli` and `nginx` Dockerfiles, as well as `nginx.conf` config file, and the `compose.yaml` file to define the services.
+This structure includes a typical Laravel app, with a unified `docker` directory for all Docker-related configurations and scripts. Two separate `compose.dev.yaml` and `compose.prod.yaml` files are provided for development and production environments, simplifying configuration management.
 
 ### Create a Dockerfile for PHP-FPM (production)
 
-For production, the `php-fpm` Dockerfile creates an optimized image containing only necessary extensions and dependencies.
+For production, the `php-fpm` Dockerfile creates an optimized image with only the PHP extensions and libraries your application needs. As demonstrated in the [GitHub example](https://github.com/rw4lll/laravel-docker-examples), we use a single Dockerfile with multi-stage builds to maintain consistency and reduce duplication between development and production. The snippet below shows only the production-related stages:
 
 ```dockerfile
 # Stage 1: Build environment and Composer dependencies
@@ -162,11 +164,15 @@ EXPOSE 9000
 CMD ["php-fpm"]
 ```
 
-This Dockerfile uses a multi-stage build to separate the build environment from the production environment. The first stage installs the necessary PHP extensions and Composer dependencies, while the second stage sets up the production environment with only the runtime libraries required.
-
 ### Create a Dockerfile for PHP-CLI (production)
 
-For production we often need a separate container to run Artisan commands, migrations, and other CLI tasks. This container will be very similar to the PHP-FPM container, and can look like this:
+For production we often need a separate container to run Artisan commands, migrations, and other CLI tasks. In most cases you can simply run these commands by reusing existing php-fpm container:
+
+```console
+$ docker compose -f compose.prod.yaml exec php-fpm php artisan route:list
+```
+
+If you need a separate CLI container with different extensions or strict separation of concerns, consider a php-cli Dockerfile:
 
 ```dockerfile
 # Stage 1: Build environment and Composer dependencies
@@ -297,14 +303,14 @@ This Dockerfile uses a multi-stage build to separate the asset building process 
 
 ### Create Docker Compose configuration for production
 
-To bring all the services together, we need a `compose.yaml` file that defines the services, volumes, and networks for the production environment. Here's an example configuration:
+To bring all the services together, we need a `compose.prod.yaml` file that defines the services, volumes, and networks for the production environment. Here's an example configuration:
 
 ```yaml
 services:
   web:
     build:
       context: .
-      dockerfile: ./docker/nginx/Dockerfile
+      dockerfile: ./docker/production/nginx/Dockerfile
     restart: unless-stopped # Automatically restart unless the service is explicitly stopped
     volumes:
       # Mount the 'laravel-storage' volume to '/var/www/storage' inside the container.
@@ -313,9 +319,9 @@ services:
       # The ':ro' option mounts it as read-only in the 'web' service because Nginx only needs to read these files.
       # The 'php-fpm' service mounts the same volume without ':ro' to allow write operations.
       # -----------------------------------------------------------
-      - laravel-storage:/var/www/storage:ro
+      - laravel-storage-production:/var/www/storage:ro
     networks:
-      - laravel
+      - laravel-production
     ports:
       # Map port 80 inside the container to the port specified by 'NGINX_PORT' on the host machine.
       # -----------------------------------------------------------
@@ -331,14 +337,15 @@ services:
     # For the php-fpm service, we will create a custom image to install the necessary PHP extensions and setup proper permissions.
     build:
       context: .
-      dockerfile: ./docker/php-fpm/Dockerfile
+      dockerfile: ./docker/common/php-fpm/Dockerfile
+      target: production # Use the 'production' stage in the Dockerfile
     restart: unless-stopped
     volumes:
-      - laravel-storage:/var/www/storage  # Mount the storage volume
+      - laravel-storage-production:/var/www/storage  # Mount the storage volume
     env_file:
       - .env
     networks:
-      - laravel
+      - laravel-production
     healthcheck:
       test: ["CMD-SHELL", "php-fpm-healthcheck || exit 1"]
       interval: 10s
@@ -378,9 +385,9 @@ services:
       - POSTGRES_USER=${POSTGRES_USERNAME}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - postgres-data-production:/var/lib/postgresql/data
     networks:
-      - laravel
+      - laravel-production
     # Health check for PostgreSQL
     # -----------------------------------------------------------
     # Health checks allow Docker to determine if a service is operational.
@@ -397,7 +404,7 @@ services:
     image: redis:alpine
     restart: unless-stopped  # Automatically restart unless the service is explicitly stopped
     networks:
-      - laravel
+      - laravel-production
     # Health check for Redis
     # -----------------------------------------------------------
     # Checks if Redis is responding to the 'PING' command.
@@ -410,16 +417,16 @@ services:
       retries: 3
 
 networks:
-  # Attach the service to the 'laravel' network.
+  # Attach the service to the 'laravel-production' network.
   # -----------------------------------------------------------
   # This custom network allows all services within it to communicate using their service names as hostnames.
   # For example, 'php-fpm' can connect to 'postgres' by using 'postgres' as the hostname.
   # -----------------------------------------------------------
-  laravel:
+  laravel-production:
 
 volumes:
-  postgres-data:
-  laravel-storage:
+  postgres-data-production:
+  laravel-storage-production:
 ```
 
 > [!NOTE]
@@ -430,7 +437,7 @@ volumes:
 To start the production environment, run:
 
 ```console
-$ docker compose -f compose.yaml up --build -d
+$ docker compose -f compose.prod.yaml up --build -d
 ```
 
 This command will build and start all the services in detached mode, providing a scalable and production-ready setup for your Laravel application.
