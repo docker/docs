@@ -13,38 +13,16 @@ This guide demonstrates how to set up a development environment for a Laravel ap
 
 ### Project structure
 
-Start by creating a project structure that includes both the Laravel application and Docker-related files:
+The examples are designed to apply it quickly to a new or existing Laravel project. It includes the `docker` directory with subdirectories for each environment (production, development), each containing environment-specific service configurations (e.g. `docker/development/php-fpm` includes php-fpm service Dockerfile and with its entrypoint). Additionally, for each environment, its own `compose.yaml` file is included. This structure allows you to easily switch between different environments by running `docker compose -f compose.dev.yaml up` or `docker compose -f compose.prod.yaml up`.
 
-```plaintext
-my-laravel-app
-├── app/
-├── bootstrap/
-├── config/
-├── database/
-├── public/
-├── docker/
-│   ├── php-fpm
-│   │   └── Dockerfile
-│   │   └── entrypoint.sh
-│   ├── workspace
-│   │   └── Dockerfile
-│   └── nginx
-│       └── nginx.conf
-├── compose.yaml
-├── .dockerignore
-├── .env
-├── vendor/
-├── ...
-```
-
-This structure includes a typical Laravel app, with a `docker` directory for Docker-related files like `php-fpm` and `workspace` Dockerfiles, the `nginx.conf` config file, and the `compose.yaml` file to define the services.
+This example is designed to demonstrate Nginx with Php-fpm as a web server and Postgres as a primary database with Redis for cache. Development environment also includes a workspace service for running artisan commands, composer, and npm. Using workspace sidecar for Laravel is a common practice, implemented also in official Laravel Sail and popular Laradock community project. Also for development environment we're including Xdebug extension for debugging.
 
 ### Create a Dockerfile for PHP-FPM
 
 The PHP-FPM Dockerfile defines the environment in which PHP will run. Here is an example:
 
 ```dockerfile
-# docker/php-fpm/Dockerfile
+# docker/development/php-fpm/Dockerfile
 # For development environment we can use one-stage build for simplicity.
 FROM php:8.3-fpm
 
@@ -116,7 +94,7 @@ RUN sed -i "s/user = www-data/user = www/g" /usr/local/etc/php-fpm.d/www.conf &&
 WORKDIR /var/www
 
 # Copy the entrypoint script
-COPY ./docker/php-fpm/entrypoint.sh /usr/local/bin/entrypoint.sh
+COPY ./docker/development/php-fpm/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
 # Change the default command to run the entrypoint script
@@ -134,7 +112,7 @@ This Dockerfile installs the necessary PHP extensions required by Laravel, inclu
 The workspace container is used to run Artisan commands, Composer, and NPM. Here's the Dockerfile for the workspace:
 
 ```dockerfile
-# docker/workspace/Dockerfile
+# docker/development/workspace/Dockerfile
 # Use the official PHP CLI image as the base
 FROM php:8.3-cli
 
@@ -235,14 +213,14 @@ services:
       # Mount the application code for live updates
       - ./:/var/www
       # Mount the Nginx configuration file
-      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./docker/development/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
     ports:
       # Map port 80 inside the container to the port specified by 'NGINX_PORT' on the host machine
-      - "${NGINX_PORT:-80}:80"
+      - "80:80"
     environment:
-      - NGINX_HOST=${NGINX_HOST}
+      - NGINX_HOST=localhost
     networks:
-      - laravel
+      - laravel-development
     depends_on:
       php-fpm:
         condition: service_started  # Wait for php-fpm to start
@@ -251,25 +229,25 @@ services:
     # For the php-fpm service, we will create a custom image to install the necessary PHP extensions and setup proper permissions.
     build:
       context: .
-      dockerfile: ./docker/php-fpm/Dockerfile
+      dockerfile: ./docker/development/php-fpm/Dockerfile
       args:
-        UID: ${UID}
-        GID: ${GID}
-        XDEBUG_ENABLED: ${XDEBUG_ENABLED}
-        XDEBUG_MODE: ${XDEBUG_MODE}
-        XDEBUG_HOST: ${XDEBUG_HOST}
-        XDEBUG_IDE_KEY: ${XDEBUG_IDE_KEY}
-        XDEBUG_LOG: ${XDEBUG_LOG}
-        XDEBUG_LOG_LEVEL: ${XDEBUG_LOG_LEVEL}
+        UID: ${UID:-1000}
+        GID: ${GID:-1000}
+        XDEBUG_ENABLED: ${XDEBUG_ENABLED:-true}
+        XDEBUG_MODE: develop,coverage,debug,profile
+        XDEBUG_HOST: ${XDEBUG_HOST:-host.docker.internal}
+        XDEBUG_IDE_KEY: ${XDEBUG_IDE_KEY:-DOCKER}
+        XDEBUG_LOG: /dev/stdout
+        XDEBUG_LOG_LEVEL: 0
     env_file:
       # Load the environment variables from the Laravel application
       - .env
-    user: "${UID}:${GID}"
+    user: "${UID:-1000}:${GID:-1000}"
     volumes:
       # Mount the application code for live updates
       - ./:/var/www
     networks:
-      - laravel
+      - laravel-development
     depends_on:
       postgres:
         condition: service_started  # Wait for postgres to start
@@ -278,16 +256,16 @@ services:
    # For the workspace service, we will also create a custom image to install and setup all the necessary stuff.
     build:
       context: .
-      dockerfile: ./docker/workspace/Dockerfile
+      dockerfile: ./docker/development/workspace/Dockerfile
       args:
-        UID: ${UID}
-        GID: ${GID}
-        XDEBUG_ENABLED: ${XDEBUG_ENABLED}
-        XDEBUG_MODE: ${XDEBUG_MODE}
-        XDEBUG_HOST: ${XDEBUG_HOST}
-        XDEBUG_IDE_KEY: ${XDEBUG_IDE_KEY}
-        XDEBUG_LOG: ${XDEBUG_LOG}
-        XDEBUG_LOG_LEVEL: ${XDEBUG_LOG_LEVEL}
+        UID: ${UID:-1000}
+        GID: ${GID:-1000}
+        XDEBUG_ENABLED: ${XDEBUG_ENABLED:-true}
+        XDEBUG_MODE: develop,coverage,debug,profile
+        XDEBUG_HOST: ${XDEBUG_HOST:-host.docker.internal}
+        XDEBUG_IDE_KEY: ${XDEBUG_IDE_KEY:-DOCKER}
+        XDEBUG_LOG: /dev/stdout
+        XDEBUG_LOG_LEVEL: 0
     tty: true  # Enables an interactive terminal
     stdin_open: true  # Keeps standard input open for 'docker exec'
     env_file:
@@ -295,42 +273,42 @@ services:
     volumes:
       - ./:/var/www
     networks:
-      - laravel
+      - laravel-development
 
   postgres:
     image: postgres:16
     ports:
-      - "${POSTGRES_PORT}:5432"
+      - "${POSTGRES_PORT:-5432}:5432"
     environment:
-      - POSTGRES_DB=${POSTGRES_DATABASE}
-      - POSTGRES_USER=${POSTGRES_USERNAME}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=app
+      - POSTGRES_USER=laravel
+      - POSTGRES_PASSWORD=secret
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - postgres-data-development:/var/lib/postgresql/data
     networks:
-      - laravel
+      - laravel-development
 
   redis:
     image: redis:alpine
     networks:
-      - laravel
+      - laravel-development
 
 networks:
-  laravel:
+  laravel-development:
 
 volumes:
-  postgres-data:
+  postgres-data-development:
 ```
 
 > [!NOTE]
-> Ensure you have an `.env` file at the root of your Laravel project with the necessary configurations (e.g., database and Xdebug settings) to match the Docker Compose setup.
+> Ensure you have an `.env` file at the root of your Laravel project with the necessary configurations. You can use the `.env.example` file as a template.
 
 ### Running Your Development Environment
 
 To start the development environment, use:
 
 ```console
-$ docker compose up --build -d
+$ docker compose -f compose.dev.yaml up --build -d
 ```
 
 This command will build and start all the required services, including PHP, Nginx, and the PostgreSQL database. You can now access your Laravel application at `http://localhost/`.
