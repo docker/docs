@@ -1,67 +1,73 @@
 ---
 title: Laravel Development Setup with Docker Compose
 description: Set up a Laravel development environment using Docker Compose.
-weight: 20
+weight: 30
 ---
 
 ## Development environment setup
 
-This guide demonstrates how to set up a development environment for a Laravel application using Docker and Docker Compose. This setup includes essential services like PHP-FPM, Nginx, and a database (using Postgres, with MySQL/MariaDB as alternatives), which enable you to develop in an isolated and consistent environment.
+This guide demonstrates how to configure a **development** environment for a Laravel application using Docker and Docker Compose. It builds **on top of** the production image for PHP-FPM and then adds developer-focused features—like Xdebug—to streamline debugging. By basing the development container on a known production image, you keep both environments closely aligned.
+
+This setup includes **PHP-FPM**, **Nginx**, and **PostgreSQL** services (although you can easily swap PostgreSQL for MySQL or MariaDB). Everything runs in containers, so you can develop in isolation without altering your host system.
 
 > [!NOTE]
-> If you want to quickly test this setup without configuring everything manually, you can download the [Laravel Docker Examples](https://github.com/rw4lll/laravel-docker-examples) repository. It includes pre-configured examples for both development and production environments.
+> To experiment with a ready-to-run configuration, download the [Laravel Docker Examples](https://github.com/rw4lll/laravel-docker-examples) repository. It contains pre-configured setups for both development and production.
 
 ### Project structure
 
-The examples are designed to apply it quickly to a new or existing Laravel project. It includes the `docker` directory with subdirectories for each environment (production, development), each containing environment-specific service configurations (e.g. `docker/development/php-fpm` includes php-fpm service Dockerfile and with its entrypoint). Additionally, for each environment, its own `compose.yaml` file is included. This structure allows you to easily switch between different environments by running `docker compose -f compose.dev.yaml up` or `docker compose -f compose.prod.yaml up`.
+```plaintext
+my-laravel-app/
+├── app/
+├── bootstrap/
+├── config/
+├── database/
+├── public/
+├── docker/
+│   ├── common/
+│   │   └── php-fpm/
+│   │       └── Dockerfile
+│   ├── development/
+│   │   ├── php-fpm/
+│   │   │   └── entrypoint.sh
+│   │   ├── workspace/
+│   │   │   └── Dockerfile
+│   │   └── nginx
+│   │       ├── Dockerfile
+│   │       └── nginx.conf
+│   └── production/
+├── compose.dev.yaml
+├── compose.prod.yaml
+├── .dockerignore
+├── .env
+├── vendor/
+├── ...
+```
 
-This example is designed to demonstrate Nginx with Php-fpm as a web server and Postgres as a primary database with Redis for cache. Development environment also includes a workspace service for running artisan commands, composer, and npm. Using workspace sidecar for Laravel is a common practice, implemented also in official Laravel Sail and popular Laradock community project. Also for development environment we're including Xdebug extension for debugging.
+This layout represents a typical Laravel project, with Docker configurations stored in a unified `docker` directory. You’ll find **two** Compose files — `compose.dev.yaml` (for development) and `compose.prod.yaml` (for production) — to keep your environments separate and manageable.
+
+The environment includes a `workspace` service, a sidecar container for tasks like building front-end assets, running Artisan commands, and other CLI tools your project may require. While this extra container may seem unusual, it’s a familiar pattern in solutions like **Laravel Sail** and **Laradock**. We also install **Xdebug** here to aid in debugging.
 
 ### Create a Dockerfile for PHP-FPM
 
-The PHP-FPM Dockerfile defines the environment in which PHP will run. Here is an example:
+This Dockerfile **extends** the production image by installing Xdebug and adjusting user permissions to ease local development. That way, your dev environment stays consistent with production while still offering extra debug features and improved file mounting.
 
 ```dockerfile
-# docker/development/php-fpm/Dockerfile
-# For development environment we can use one-stage build for simplicity.
-FROM php:8.3-fpm
+# Builds a dev-only layer on top of the production image
+FROM production AS development
 
-# Install system dependencies and PHP extensions for Laravel with MySQL/PostgreSQL support.
-# Certain dependencies are only needed for PHP extensions in this build stage.
-# Node.js and asset building are handled in the Nginx container.
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    curl \
-    unzip \
-    libpq-dev \
-    libonig-dev \
-    libssl-dev \
-    libxml2-dev \
-    libcurl4-openssl-dev \
-    libicu-dev \
-    libzip-dev \
-    && docker-php-ext-install -j$(nproc) \
-    pdo_mysql \
-    pdo_pgsql \
-    pgsql \
-    opcache \
-    intl \
-    zip \
-    bcmath \
-    soap \
-    && pecl install redis xdebug \
-    && docker-php-ext-enable redis \
-    && apt-get autoremove -y && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+# Use ARGs to define environment variables passed from the Docker build command or Docker Compose.
+ARG XDEBUG_ENABLED=true
+ARG XDEBUG_MODE=develop,coverage,debug,profile
+ARG XDEBUG_HOST=host.docker.internal
+ARG XDEBUG_IDE_KEY=DOCKER
+ARG XDEBUG_LOG=/dev/stdout
+ARG XDEBUG_LOG_LEVEL=0
 
-# Use ARG to define environment variables passed from the Docker build command or Docker Compose.
-ARG XDEBUG_ENABLED
-ARG XDEBUG_MODE
-ARG XDEBUG_HOST
-ARG XDEBUG_IDE_KEY
-ARG XDEBUG_LOG
-ARG XDEBUG_LOG_LEVEL
+USER root
 
 # Configure Xdebug if enabled
 RUN if [ "${XDEBUG_ENABLED}" = "true" ]; then \
+    pecl install xdebug && \
     docker-php-ext-enable xdebug && \
     echo "xdebug.mode=${XDEBUG_MODE}" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
     echo "xdebug.idekey=${XDEBUG_IDE_KEY}" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
@@ -71,7 +77,7 @@ RUN if [ "${XDEBUG_ENABLED}" = "true" ]; then \
     echo "xdebug.start_with_request=yes" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini ; \
 fi
 
-# Set environment variables for user and group ID
+# Add ARGs for syncing permissions
 ARG UID=1000
 ARG GID=1000
 
@@ -97,6 +103,9 @@ WORKDIR /var/www
 COPY ./docker/development/php-fpm/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
+# Switch back to the non-privileged user to run the application
+USER www-data
+
 # Change the default command to run the entrypoint script
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
@@ -105,11 +114,10 @@ EXPOSE 9000
 CMD ["php-fpm"]
 ```
 
-This Dockerfile installs the necessary PHP extensions required by Laravel, including database drivers and the Xdebug extension for debugging.
 
 ### Create a Dockerfile for Workspace
 
-The workspace container is used to run Artisan commands, Composer, and NPM. Here's the Dockerfile for the workspace:
+A **workspace** container provides a dedicated shell for asset compilation, Artisan/Composer commands, and other CLI tasks. This approach follows patterns from Laravel Sail and Laradock, consolidating all development tools into one container for convenience.
 
 ```dockerfile
 # docker/development/workspace/Dockerfile
@@ -201,6 +209,9 @@ ENTRYPOINT []
 CMD ["bash"]
 ```
 
+> [!NOTE]
+> If you prefer a **one-service-per-container** approach, simply omit the workspace container and run separate containers for each task. For example, you could use a dedicated `php-cli` container for your PHP scripts, and a `node` container to handle the asset building.
+
 ### Create Docker Compose Configuration for Development
 
 Here's the `compose.yaml` file to set up the development environment:
@@ -226,10 +237,11 @@ services:
         condition: service_started  # Wait for php-fpm to start
 
   php-fpm:
-    # For the php-fpm service, we will create a custom image to install the necessary PHP extensions and setup proper permissions.
+    # For the php-fpm service, we will use our common PHP-FPM Dockerfile with the development target
     build:
       context: .
-      dockerfile: ./docker/development/php-fpm/Dockerfile
+      dockerfile: ./docker/common/php-fpm/Dockerfile
+      target: development
       args:
         UID: ${UID:-1000}
         GID: ${GID:-1000}
@@ -311,8 +323,8 @@ To start the development environment, use:
 $ docker compose -f compose.dev.yaml up --build -d
 ```
 
-This command will build and start all the required services, including PHP, Nginx, and the PostgreSQL database. You can now access your Laravel application at `http://localhost/`.
+Run this command to build and start the dev environment in detached mode. When the containers finish initializing, visit [http://localhost/](http://localhost/) to see your Laravel app in action!
 
 ### Summary
 
-By setting up a Docker Compose environment for Laravel development, you ensure that your development setup is consistent and easily reproducible. This makes it easier for you and your team to collaborate on the same project, without worrying about differences in local environments.
+By **building on top** of the production image and adding debug tools like Xdebug, you create a Laravel development workflow that closely mirrors production. The optional workspace container simplifies tasks like asset building and running Artisan commands. If you prefer a separate container for every service (e.g., a dedicated `php-cli` and `node` container), you can skip the workspace approach. Either way, Docker Compose provides an efficient, consistent way to develop your Laravel project.
