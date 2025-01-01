@@ -126,6 +126,17 @@ the source and destination. For instance, if the Docker host has addresses
 `2001:db8:1111::2` and `2001:db8:2222::2`, you can make rules specific to
 `2001:db8:1111::2` and leave `2001:db8:2222::2` open.
 
+You may need to allow responses from servers outside the permitted external address
+ranges. For example, containers may send DNS or HTTP requests to hosts that are
+not allowed to access the container's services. The following rule accepts any
+incoming or outgoing packet belonging to a flow that has already been accepted
+by other rules. It must be placed before `DROP` rules that restrict access from
+external address ranges.
+
+```console
+$ iptables -I DOCKER-USER -m state --state RELATED,ESTABLISHED -j ACCEPT
+```
+
 `iptables` is complicated. There is a lot more information at [Netfilter.org HOWTO](https://www.netfilter.org/documentation/HOWTO/NAT-HOWTO.html).
 
 ### Direct routing
