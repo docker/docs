@@ -194,6 +194,36 @@ You should see output like the following:
 The `Mountpoint` is the actual location of the data on the disk. Note that on most machines, you will
 need to have root access to access this directory from the host.
 
+This path is relative to Linux host machine and also in case you are running containers on Windows OS,
+it means you are using Linux containers. Although, Windows containers have limited image support comapred
+to Linux containers (such as contiki-ng), you can try to switch from Linux Container to Windows containers
+and run following command to witness the relative path of volume changes on Linux based based to Windows based path.
+
+```console
+    docker volume create todo-app
+    docker volume ls
+```
+
+you will see volume by name todo-app, now perform volume inspection to see it's path
+
+```console
+    docker volume inspect todo-app
+```
+your output will look like
+```
+[
+    {
+        "CreatedAt": "2024-12-16T11:24:56+01:00",
+        "Driver": "local",
+        "Labels": null,
+        "Mountpoint": "C:\\ProgramData\\Docker\\volumes\\abc\\_data",
+        "Name": "abc",
+        "Options": null,
+        "Scope": "local"
+    }
+]
+```
+
 ## Summary
 
 In this section, you learned how to persist container data.
