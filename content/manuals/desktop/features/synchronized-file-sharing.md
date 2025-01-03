@@ -80,6 +80,12 @@ Some example of things you might want to add to your `.syncignore` file are:
 
 In general, use your `.syncignore` file to exclude items that aren't critical to your workflow, especially those that would be slow to sync or use significant storage.
 
+## Symbolic links (symlinks)
+
+If your user does not have permissions to create symbolic links and your container attempts to create symbolic links in your file share instance, a **Problem** indicator with an `unable to create symbolic link` error will result.
+
+See [Create symbolic links](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/create-symbolic-links) for best practices and location of the "Create symbolic links" security policy setting.
+
 ## Known issues
 
 - Changes made to `.syncignore` don't lead to immediate deletions unless the file share is recreated. In other words, files that are newly ignored due to modifications in the `.syncignore` file remain in their current location, but are no longer updated during synchronization.
