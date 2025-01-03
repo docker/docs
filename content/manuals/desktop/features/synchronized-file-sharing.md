@@ -80,7 +80,7 @@ Some example of things you might want to add to your `.syncignore` file are:
 
 In general, use your `.syncignore` file to exclude items that aren't critical to your workflow, especially those that would be slow to sync or use significant storage.
 
-## Symbolic links (symlinks)
+## Symbolic links
 
 If your user does not have permissions to create symbolic links and your container attempts to create symbolic links in your file share instance, a **Problem** indicator with an `unable to create symbolic link` error will result.
 
