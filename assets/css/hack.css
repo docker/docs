@@ -2,3 +2,24 @@
 .ot-floating-button__close {
   @apply flex justify-center items-center;
 }
+
+/* Kapa overrides */
+.mantine-Modal-root {
+  .mantine-Modal-inner { inset: 0; }
+
+  ol {
+    list-style-type: decimal;
+  }
+
+  .mantine-List-root {
+    min-width: 100%;
+  }
+
+  .mantine-List-itemWrapper {
+    max-width: 100%;
+  }
+
+  .mantine-Prism-copy {
+    background-color: rgb(20, 21, 23)
+  }
+}
