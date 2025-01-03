@@ -52,6 +52,10 @@ work.
 Docker Desktop's file sharing setting. This setting defines which parts of your
 filesystem you can share with containers. For details about accessing the setting, see [File sharing](/manuals/desktop/settings-and-maintenance/settings.md#file-sharing).
 
+    > [!Note]
+    > The File sharing tab is only available in Hyper-V mode, because in WSL 2 mode 
+    > and Windows container mode all files are automatically shared by Windows.
+
 2. Open a terminal and change directory to the `getting-started-app`
    directory.
 
