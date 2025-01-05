@@ -21,7 +21,7 @@ changes won't be seen in another container, even if they're using the same image
 
 ### See this in practice
 
-To see this in action, you're going to start two containers. In one container,
+To see this in action, you're going to start two container's. In one container,
 you'll create a file. In the other container, you'll check whether that same
 file exists.
 
