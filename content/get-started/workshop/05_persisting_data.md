@@ -21,7 +21,7 @@ changes won't be seen in another container, even if they're using the same image
 
 ### See this in practice
 
-To see this in action, you're going to start two container's. In one container,
+To see this in action, you're going to start two containers. In one container,
 you'll create a file. In the other container, you'll check whether that same
 file exists.
 
@@ -194,10 +194,7 @@ You should see output like the following:
 The `Mountpoint` is the actual location of the data on the disk. Note that on most machines, you will
 need to have root access to access this directory from the host.
 
-This path is relative to Linux host machine and also in case you are running containers on Windows OS,
-it means you are using Linux containers. Although, Windows containers have limited image support comapred
-to Linux containers (such as contiki-ng), you can try to switch from Linux Container to Windows containers
-and run following command to witness the relative path of volume changes on Linux based based to Windows based path.
+This path is relative to the Linux host machine. If you're running containers on Windows OS, you're likely using Linux containers. While Windows containers have limited image support compared to Linux containers, you can switch to Windows containers and run the following command to observe how the relative path of volumes changes from Linux-based to Windows-based paths.
 
 ```console
     docker volume create todo-app
