@@ -98,9 +98,6 @@ testuser:231072:65536
 {{< tab name="Debian GNU/Linux" >}}
 - Install `dbus-user-session` package if not installed. Run `sudo apt-get install -y dbus-user-session` and relogin.
 
-- For Debian 10, add `kernel.unprivileged_userns_clone=1` to `/etc/sysctl.conf` (or
-  `/etc/sysctl.d`) and run `sudo sysctl --system`. This step is not required on Debian 11.
-
 - For Debian 11, installing `fuse-overlayfs` is recommended. Run `sudo apt-get install -y fuse-overlayfs`.
   This step is not required on Debian 12.
 
