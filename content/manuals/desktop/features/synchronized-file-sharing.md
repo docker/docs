@@ -82,7 +82,7 @@ In general, use your `.syncignore` file to exclude items that aren't critical to
 
 ## Symbolic links
 
-If your user does not have permissions to create symbolic links and your container attempts to create symbolic links in your file share instance, a **Problem** indicator with an `unable to create symbolic link` error will result.
+If you don't have the correct permissions to create symbolic links and your container attempts to create symbolic links in your file share instance, an **unable to create symbolic link** error message displays.
 
 See Microsoft's [Create symbolic links documentation](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/create-symbolic-links) for best practices and location of the **Create symbolic links** security policy setting.
 
