@@ -1,4 +1,4 @@
-(?-i)[A-Z]{2,}'?s
+(?i)[A-Z]{2,}'?s
 Amazon
 Anchore
 Apple
