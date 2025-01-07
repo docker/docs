@@ -6,9 +6,9 @@ linkTitle: Desktop Settings Reporting
 weight: 30
 ---
 
-Desktop settings reporting is a feature of Desktop Settings Management that tracks and reports user compliance with the settings that are assigned to them. This lets you track the application of settings and monitor what actions they need to take to make users compliant.
+Desktop settings reporting is a feature of Desktop Settings Management that tracks and reports user compliance with the settings policies that are assigned to them. This lets administrators to track the application of settings and monitor what actions they need to take to make users compliant.
 
-This guide provides steps for accessing the reporting dashboard, viewing compliance status, and resolving non-compliant users.
+This guide provides steps for accessing Desktop settings reporting, viewing compliance status, and resolving non-compliant users.
 
 ## Access Desktop settings reporting
 
