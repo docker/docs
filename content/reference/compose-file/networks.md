@@ -64,7 +64,7 @@ The advanced example shows a Compose file which defines two custom networks. The
 
 ## Attributes
 
-### driver
+### `driver`
 
 `driver` specifies which driver should be used for this network. Compose returns an error if the
 driver is not available on the platform.
@@ -77,7 +77,7 @@ networks:
 
 For more information on drivers and available options, see [Network drivers](/manuals/engine/network/drivers/_index.md).
 
-### driver_opts
+### `driver_opts`
 
 `driver_opts` specifies a list of options as key-value pairs to pass to the driver. These options are
 driver-dependent.
@@ -92,7 +92,7 @@ networks:
 
 Consult the [network drivers documentation](/manuals/engine/network/_index.md) for more information.
 
-### attachable
+### `attachable`
 
 If `attachable` is set to `true`, then standalone containers should be able to attach to this network, in addition to services.
 If a standalone container attaches to the network, it can communicate with services and other standalone containers
@@ -105,18 +105,18 @@ networks:
     attachable: true
 ```
 
-### enable_ipv6
+### `enable_ipv6`
 
 `enable_ipv6` enables IPv6 networking. For an example, see step four of [Create an IPv6 network](/manuals/engine/daemon/ipv6.md).
 
-### external
+### `external`
 
 If set to `true`:
  - `external` specifies that this network’s lifecycle is maintained outside of that of the application.
 Compose doesn't attempt to create these networks, and returns an error if one doesn't exist.
  - All other attributes apart from name are irrelevant. If Compose detects any other attribute, it rejects the Compose file as invalid.
 
-In the example below, `proxy` is the gateway to the outside world. Instead of attempting to create a network, Compose
+In the following example, `proxy` is the gateway to the outside world. Instead of attempting to create a network, Compose
 queries the platform for an existing network simply called `outside` and connects the
 `proxy` service's containers to it.
 
@@ -137,7 +137,7 @@ networks:
     external: true
 ```
 
-### ipam
+### `ipam`
 
 `ipam` specifies a custom IPAM configuration. This is an object with several properties, each of which is optional:
 
@@ -167,12 +167,12 @@ networks:
         baz: "0"
 ```
 
-### internal
+### `internal`
 
-By default, Compose provides external connectivity to networks. `internal`, when set to `true`, allows you to
+By default, Compose provides external connectivity to networks. `internal`, when set to `true`, lets you
 create an externally isolated network.
 
-### labels
+### `labels`
 
 Add metadata to containers using `labels`. You can use either an array or a dictionary.
 
@@ -198,7 +198,7 @@ networks:
 
 Compose sets `com.docker.compose.project` and `com.docker.compose.network` labels.
 
-### name
+### `name`
 
 `name` sets a custom name for the network. The name field can be used to reference networks which contain special characters.
 The name is used as is and is not scoped with the project name.

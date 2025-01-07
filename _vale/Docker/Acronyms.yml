@@ -18,7 +18,9 @@ exceptions:
   - BIOS
   - BPF
   - BSD
+  - CFS
   - CI
+  - CIDR
   - CISA
   - CLI
   - CNCF
@@ -26,6 +28,7 @@ exceptions:
   - CPU
   - CSS
   - CSV
+  - CUDA
   - CVE
   - DCT
   - DEBUG
@@ -60,6 +63,8 @@ exceptions:
   - ID
   - IDE
   - IP
+  - IPAM
+  - IPC
   - JAR
   - JSON
   - JSX
@@ -78,6 +83,7 @@ exceptions:
   - NVDA
   - OCI
   - OS
+  - OSI
   - OSS
   - PATH
   - PDF
@@ -90,6 +96,7 @@ exceptions:
   - RAM
   - REPL
   - REST
+  - RFC
   - RHEL
   - RPM
   - RSA
@@ -124,8 +131,10 @@ exceptions:
   - USB
   - USD
   - UTF
+  - UTS
   - UUID
   - VAT
+  - VIP
   - VLAN
   - VM
   - VPN

@@ -11,7 +11,7 @@ weight: 140
 
 ## Attributes
 
-### endpoint_mode
+### `endpoint_mode`
 
 `endpoint_mode` specifies a service discovery method for external clients connecting to a service. The Compose Deploy Specification defines two canonical values:
 
@@ -34,7 +34,7 @@ services:
       endpoint_mode: vip
 ```
 
-### labels
+### `labels`
 
 `labels` specifies metadata for the service. These labels are only set on the service and not on any containers for the service.
 This assumes the platform has some native concept of "service" that can match the Compose application model.
@@ -48,9 +48,9 @@ services:
         com.example.description: "This label will appear on the web service"
 ```
 
-### mode
+### `mode`
 
-`mode` defines the replication model used to run the service on the  platform. Either `global`, exactly one container per physical node, or `replicated`, a specified number of containers. The default is `replicated`.
+`mode` defines the replication model used to run the service on the platform. Either `global`, exactly one container per physical node, or `replicated`, a specified number of containers. The default is `replicated`.
 
 ```yml
 services:
@@ -60,11 +60,11 @@ services:
       mode: global
 ```
 
-### placement
+### `placement`
 
 `placement` specifies constraints and preferences for the platform to select a physical node to run service containers.
 
-#### constraints
+#### `constraints`
 
 `constraints` defines a required property the platform's node must fulfill to run the service container. For a further example, see the [CLI reference docs](/reference/cli/docker/service/create.md#constraint).
 
@@ -75,7 +75,7 @@ deploy:
       - disktype=ssd
 ```
 
-#### preferences
+#### `preferences`
 
 `preferences` defines a strategy (currently `spread` is the only supported strategy) to spread tasks evenly 
 over the values of the datacenter node label. For a further example, see the [CLI reference docs](/reference/cli/docker/service/create.md#placement-pref)
@@ -87,7 +87,7 @@ deploy:
       - spread: node.labels.zone
 ```
 
-### replicas
+### `replicas`
 
 If the service is `replicated` (which is the default), `replicas` specifies the number of containers that should be
 running at any given time.
@@ -101,7 +101,7 @@ services:
       replicas: 6
 ```
 
-### resources
+### `resources`
 
 `resources` configures physical resource constraints for container to run on platform. Those constraints can be configured
 as:
@@ -124,25 +124,25 @@ services:
           memory: 20M
 ```
 
-#### cpus
+#### `cpus`
 
 `cpus` configures a limit or reservation for how much of the available CPU resources, as number of cores, a container can use.
 
-#### memory
+#### `memory`
 
 `memory` configures a limit or reservation on the amount of memory a container can allocate, set as a string expressing a [byte value](extension.md#specifying-byte-values).
 
-#### pids
+#### `pids`
 
 `pids` tunes a container’s PIDs limit, set as an integer.
 
-#### devices
+#### `devices`
 
 `devices` configures reservations of the devices a container can use. It contains a list of reservations, each set as an object with the following parameters: `capabilities`, `driver`, `count`, `device_ids` and `options`.
 
 Devices are reserved using a list of capabilities, making `capabilities` the only required field. A device must satisfy all the requested capabilities for a successful reservation.
 
-##### capabilities
+##### `capabilities`
 
 `capabilities` are set as a list of strings, expressing both generic and driver specific capabilities.
 The following generic capabilities are recognized today:
@@ -151,7 +151,7 @@ The following generic capabilities are recognized today:
 - `tpu`: AI accelerator
 
 To avoid name clashes, driver specific capabilities must be prefixed with the driver name.
-For example, reserving an nVidia CUDA-enabled accelerator might look like this:
+For example, reserving an NVIDIA CUDA-enabled accelerator might look like this:
 
 ```yml
 deploy:
@@ -161,7 +161,7 @@ deploy:
         - capabilities: ["nvidia-compute"]
 ```
 
-##### driver
+##### `driver`
 
 A different driver for the reserved device(s) can be requested using `driver` field. The value is specified as a string.
 
@@ -174,7 +174,7 @@ deploy:
           driver: nvidia
 ```
 
-##### count
+##### `count`
 
 If `count` is set to `all` or not specified, Compose reserves all devices that satisfy the requested capabilities. Otherwise, Compose reserves at least the number of devices specified. The value is specified as an integer.
 
@@ -189,7 +189,7 @@ deploy:
 
 `count` and `device_ids` fields are exclusive. Compose returns an error if both are specified.
 
-##### device_ids
+##### `device_ids`
 
 If `device_ids` is set, Compose reserves devices with the specified IDs provided they satisfy the requested capabilities. The value is specified as a list of strings.
 
@@ -204,7 +204,7 @@ deploy:
 
 `count` and `device_ids` fields are exclusive. Compose returns an error if both are specified.
 
-##### options
+##### `options`
 
 Driver specific options can be set with `options` as key-value pairs.
 
@@ -219,7 +219,7 @@ deploy:
             virtualization: false
 ```
 
-### restart_policy
+### `restart_policy`
 
 `restart_policy` configures if and how to restart containers when they exit. If `restart_policy` is not set, Compose considers the `restart` field set by the service configuration.
 
@@ -243,7 +243,7 @@ deploy:
     window: 120s
 ```
 
-### rollback_config
+### `rollback_config`
 
 `rollback_config` configures how the service should be rollbacked in case of a failing update.
 
@@ -255,7 +255,7 @@ deploy:
 - `order`: Order of operations during rollbacks. One of `stop-first` (old task is stopped before starting new one),
    or `start-first` (new task is started first, and the running tasks briefly overlap) (default `stop-first`).
 
-### update_config
+### `update_config`
 
 `update_config` configures how the service should be updated. Useful for configuring rolling updates.
 
