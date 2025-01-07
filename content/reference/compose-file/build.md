@@ -378,7 +378,7 @@ Composes reports an error in the following cases:
       - "linux/amd64"
       - "unsupported/unsupported"
   ```
-- When the list is non-empty and does not contain the service's platform
+- When the list is non-empty and does not contain the service's platform.
 
   ```yml
   services:
