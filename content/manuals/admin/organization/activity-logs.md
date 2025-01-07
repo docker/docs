@@ -45,6 +45,10 @@ Refer to the following section for a list of events and their descriptions:
 
 ### Organization events
 
+> [!NOTE]
+>
+> Access token activity logs include both personal acess tokens (PATs) and organization access tokens (OATs).
+
 | Event                                                          | Description                                   |
 |:------------------------------------------------------------------|:------------------------------------------------|
 | Team Created | Activities related to the creation of a team |
