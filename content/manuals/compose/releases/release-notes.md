@@ -13,6 +13,29 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.32.2
+
+{{< release-date date="2025-01-07" >}}
+
+### Update
+
+- Dependencies upgrade: bump compose-go to v2.4.7
+- Dependencies upgrade: bump golang to v1.22.10
+
+### Bug fixes and enhancements
+
+- Added `--pull` flag to the `docker compose run` command
+- Fixed a bug which meant the `restart` action of `watch` mode didn't monitor bind mounts
+- Fixed an issue recreating containers when using anonymous volumes
+
+## 2.32.1
+
+{{< release-date date="2024-12-16" >}}
+
+### Bug fixes and enhancements
+
+- Fixed a bug recreating containers when not needed
+
 ## 2.32.0
 
 {{< release-date date="2024-12-13" >}}
