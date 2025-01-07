@@ -24,8 +24,8 @@ For more detailed information, see the [release notes in the Compose repo](https
 
 ### Bug fixes and enhancements
 
-- Added `--pull` flag to run command
-- Fixed a bug in restart action of watch mode not monitoring bind mounts
+- Added `--pull` flag to the `docker compose run` command
+- Fixed a bug which meant the `restart` action of `watch` mode didn't monitor bind mounts
 - Fixed an issue recreating containers when using anonymous volumes
 
 ## 2.32.1
