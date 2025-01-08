@@ -80,10 +80,8 @@ Once a new version for Docker Desktop is released, the Docker UI shows a notific
 You need to download the new package each time you want to upgrade Docker Desktop and run:
 
 ```console
-$ sudo apt-get install ./docker-desktop-<arch>.deb
+$ sudo apt-get install ./docker-desktop-amd64.deb
 ```
-
-Don't forget to substitute `<arch>` with the architecture you want.
 
 ## Next steps
 
