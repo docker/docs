@@ -2,7 +2,7 @@
 title: FAQs
 description: Frequently asked questions for deploying Docker Desktop at scale
 keywords: msi, deploy, docker desktop, faqs, pkg
-tags: [FAQ, administration]
+tags: [FAQ, Administration]
 aliases:
 - /desktop/install/msi/faq/
 - /desktop/setup/install/msi/faq/

@@ -2,7 +2,7 @@
 title: Use Jamf Pro
 description: Use Jamf Pro to deploy Docker Desktop
 keywords: jamf, mac, docker desktop, deploy, mdm, enterprise, administrator
-tags: [administration]
+tags: [Administration]
 weight: 40
 ---
 

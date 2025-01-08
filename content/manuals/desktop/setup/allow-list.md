@@ -2,7 +2,7 @@
 description: Allowlist for Docker Desktop for Business customers
 keywords: Docker Desktop, allowlist, allow list, firewall
 title: Allowlist for Docker Desktop
-tags: [administration]
+tags: [Administration]
 linkTitle: Allowlist
 weight: 100
 aliases:
