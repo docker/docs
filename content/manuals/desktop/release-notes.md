@@ -23,6 +23,18 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projects/51/views/1?filterQuery=) to see what's coming next.
 
+## 4.37.2
+
+{{< release-date date="2025-01-08" >}}
+
+{{< desktop-install-v2 mac=true version="4.37.2" build_path="/TBD/" >}}
+
+### Bug fixes and enhancements
+
+#### For Mac
+
+- Fixed a bug that caused Docker Desktop to not update the following components to newer versions `com.docker.vmnetd` or `com.docker.socket`.
+
 ## 4.37.1
 
 {{< release-date date="2024-12-17" >}}
