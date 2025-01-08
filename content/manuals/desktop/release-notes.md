@@ -38,9 +38,9 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 ### Known issues
 
-#### For macOS
+#### For Mac
 
-- Docker Desktop for Mac might fail to start with macOS reporting either `com.docker.vmnetd` or `com.docker.socket` is malware.
+- Docker Desktop for Mac might fail to start with macOS reporting either `com.docker.vmnetd` or `com.docker.socket` is malware. As a workaround, follow the steps below:
   1. Quit Docker and kill and related processes using the Activity Monitor
   2. Run: `sudo cp /Applications/Docker.app/Contents/Library/LaunchServices/com.docker.vmnetd /Library/PrivilegedHelperTools/`
   3. Run: `sudo cp /Applications/Docker.app/Contents/MacOS/com.docker.socket /Library/PrivilegedHelperTools/`
