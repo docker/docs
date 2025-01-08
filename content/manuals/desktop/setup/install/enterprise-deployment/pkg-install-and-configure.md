@@ -2,7 +2,7 @@
 title: Use the PKG installer
 description: Understand how to use the PKG installer. Also explore additional configuration options.
 keywords: PKG, mac, docker desktop, install, deploy, configure
-tags: [Administration]
+tags: [admin]
 weight: 20
 params:
   sidebar:

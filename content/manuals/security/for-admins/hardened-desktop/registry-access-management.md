@@ -2,7 +2,7 @@
 description: Registry Access Management
 keywords: registry, access, management, permissions, Docker Business feature
 title: Registry Access Management
-tags: [Administration]
+tags: [admin]
 aliases:
  - /desktop/hardened-desktop/registry-access-management/
  - /admin/organization/registry-access/
