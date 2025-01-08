@@ -41,7 +41,7 @@ To upgrade your Docker subscription:
 
 1. Sign in to [Docker Home](https://app.docker.com/).
 2. Under Settings and administration, select **Billing**.
-3. Optional. If you're upgrading from a free Personal plan to a Team plan and want to keep your username, [convert your user account into an organization](../admin/convert-account.md).
+3. Optional. If you're upgrading from a free Personal plan to a Team plan and want to keep your username, [convert your user account into an organization](../admin/organization/convert-account.md).
 4. Select the account you want to upgrade in the drop-down at the top-left of the page.
 5. Select **Upgrade**.
 6. Follow the on-screen instructions to complete your upgrade.

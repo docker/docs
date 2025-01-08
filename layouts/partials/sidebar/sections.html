@@ -8,11 +8,10 @@
 </nav>
 
 {{ define "renderChildren" }}
-  {{- $pages := .Pages }}
+  {{- $pages := where .Pages "Params.sitemap" "ne" "false" }}
   {{- if .Params.sidebar.reverse }}
     {{ $pages = .Pages.Reverse }}
   {{- end }}
-  {{- $pages = where .Pages "Params.sitemap" "ne" "false" }}
   {{- $ungrouped := where $pages "Params.sidebar.group" "==" nil }}
   {{- range $ungrouped }}
     {{- if .IsSection }}

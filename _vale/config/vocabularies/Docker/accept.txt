@@ -1,4 +1,4 @@
-(?-i)[A-Z]{2,}'?s
+(?i)[A-Z]{2,}'?s
 Amazon
 Anchore
 Apple
@@ -20,8 +20,8 @@ Couchbase
 Datadog
 Ddosify
 Debootstrap
-Dev Environments?
 Dev
+Dev Environments?
 Django
 Docker Build Cloud
 Docker Business
@@ -73,8 +73,8 @@ Nuxeo
 OAuth
 OTel
 Okta
-Paketo
 PKG
+Paketo
 Postgres
 PowerShell
 Python
@@ -97,20 +97,27 @@ Windows
 WireMock
 Zscaler
 Zsh
+[Aa]nonymized?
 [Aa]utobuild
-[Bb]uildx
+[Aa]llowlist
 [Bb]uildpack(s)?
+[Bb]uildx
 [Cc]odenames?
 [Cc]ompose
+[Cc]onfigs
 [Dd]istroless
 [Ff]ilepaths?
 [Ff]iletypes?
 [GgCc]oroutine
+[Hh]ealthcheck
 [Hh]ostname
 [Ii]nfosec
+[Ii]nline
 [Kk]eyrings?
 [Ll]oopback
+[Mm]emcached
 [Mm]oby
+[Mm]ountpoint
 [Nn]amespace
 [Oo]nboarding
 [Pp]aravirtualization
@@ -123,6 +130,7 @@ Zsh
 [Ss]andbox(ed)?
 [Ss]eccomp
 [Ss]ubmounts?
+[Ss]ubnet
 [Ss]ubpaths?
 [Ss]ubtrees?
 [Ss]wappable
@@ -133,12 +141,17 @@ Zsh
 [Ss]ysfs
 [Tt]oolchains?
 [Uu]narchived?
+[Uu]ngated
+[Uu]ntrusted
+[Uu]serland
+[Uu]serspace
 [Vv]irtiofs
 [Vv]irtualize
 [Ww]alkthrough
 cgroup
 config
 containerd
+datacenter
 deprovisioning
 deserialization
 deserialize
@@ -166,18 +179,19 @@ npm
 osquery
 osxfs
 pgAdmin
+rollback
 rootful
 runc
 snapshotters?
 stdin
 stdout
-subnet
+syntaxes
+sysctls
 systemd
 tmpfs
 ufw
+uid
 umask
-ungated
-userland
-untrusted
 vSphere
 vpnkit
+windowsfilter

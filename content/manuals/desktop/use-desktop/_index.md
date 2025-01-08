@@ -20,7 +20,7 @@ The **Volumes** view displays a list of volumes and allows you to easily create 
 
 The **Builds** view lets you inspect your build history and manage builders. By default, it displays a list of all your ongoing and completed builds. [Explore builds](builds.md).
 
-In addition, the Docker Desktop Dashboard let you:
+In addition, the Docker Desktop Dashboard lets you:
 
 - Navigate to the **Settings** menu to configure your Docker Desktop settings. Select the **Settings** icon in the Dashboard header.
 - Access the **Troubleshoot** menu to debug and perform restart operations. Select the **Troubleshoot** icon in the Dashboard header.
@@ -30,6 +30,8 @@ In addition, the Docker Desktop Dashboard let you:
   For a more detailed guide about getting started, see [Get started](/get-started/introduction/_index.md).
 - Get to the [Docker Scout](../../scout/_index.md) dashboard.
 - Check the status of Docker services.
+- Access [Docker Hub](/manuals/docker-hub/_index.md) to search, browse, pull, run, or view details
+  of images.
 
 ## Quick search
 

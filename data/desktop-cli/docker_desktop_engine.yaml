@@ -1,0 +1,17 @@
+command: docker desktop engine
+short: Commands to list and switch containers (Windows only)
+usage: docker desktop engine
+pname: docker desktop
+plink: docker_desktop.yaml
+cname:
+    - docker desktop engine ls
+    - docker desktop engine use
+clink:
+    - docker_desktop_engine_ls.yaml
+    - docker_desktop_engine_use.yaml
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
