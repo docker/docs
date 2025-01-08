@@ -7,14 +7,13 @@ aliases:
 weight: 150
 ---
 
-> **Note:** 
+> [!NOTE] 
 >
 > Develop is an optional part of the Compose Specification. It is available with Docker Compose version 2.22.0 and later.
 
 {{< include "compose/develop.md" >}}
 
-This page defines how Compose behaves to efficiently assist you and defines the development constraints and workflows set by Compose. Only a subset of
-Compose file services may require a `develop` subsection.
+This page defines how Compose behaves to efficiently assist you and defines the development constraints and workflows set by Compose. Only a subset of Compose file services may require a `develop` subsection.
 
 ## Illustrative example
 
@@ -44,24 +43,26 @@ services:
 
 ## Attributes
 
+<!-- vale Docker.HeadingSentenceCase = NO ) -->
+
 The `develop` subsection defines configuration options that are applied by Compose to assist you during development of a service with optimized workflows.
 
-### watch
+### `watch`
 
 The `watch` attribute defines a list of rules that control automatic service updates based on local file changes. `watch` is a sequence, each individual item in the sequence defines a rule to be applied by 
 Compose to monitor source code for changes. For more information, see [Use Compose Watch](/manuals/compose/how-tos/file-watch.md).
 
-#### action
+#### `action`
 
 `action` defines the action to take when changes are detected. If `action` is set to:
 
-- `rebuild`, Compose rebuilds the service image based on the `build` section and recreates the service with the updated image.
-- `restart`, Compose restarts the service container. Available with Docker Compose version 2.32.0 and later.
-- `sync`, Compose keeps the existing service container(s) running, but synchronizes source files with container content according to the `target` attribute.
-- `sync+restart`, Compose synchronizes source files with container content according to the `target` attribute, and then restarts the container. Available with Docker Compose version 2.23.0 and later.
-- `sync+exec`, Compose synchronizes source files with container content according to the `target` attribute, and then executes a command inside the container. Available with Docker Compose version 2.32.0 and later.
+- `rebuild`: Compose rebuilds the service image based on the `build` section and recreates the service with the updated image.
+- `restart`: Compose restarts the service container. Available with Docker Compose version 2.32.0 and later.
+- `sync`: Compose keeps the existing service container(s) running, but synchronizes source files with container content according to the `target` attribute.
+- `sync+restart`: Compose synchronizes source files with container content according to the `target` attribute, and then restarts the container. Available with Docker Compose version 2.23.0 and later.
+- `sync+exec`: Compose synchronizes source files with container content according to the `target` attribute, and then executes a command inside the container. Available with Docker Compose version 2.32.0 and later.
 
-#### exec
+#### `exec`
 
 {{< introduced compose 2.23.2 "/manuals/compose/releases/release-notes.md#2232" >}}
 
@@ -87,26 +88,25 @@ services:
             command: app reload
 ```
 
-#### ignore
+#### `ignore`
 
 The `ignore` attribute can be used to define a list of patterns for paths to be ignored. Any updated file
 that matches a pattern, or belongs to a folder that matches a pattern, won't trigger services to be re-created. 
 The syntax is the same as `.dockerignore` file: 
 
-- `*` matches 0 or more characters in a file name. 
-- `?` matches a single character in file name. 
+- `*` matches 0 or more characters in a filename. 
+- `?` matches a single character in filename. 
 - `*/*` matches two nested folders with arbitrary names
 - `**` matches an arbitrary number of nested folders
 
 If the build context includes a `.dockerignore` file, the patterns in this file is loaded as implicit content
 for the `ignores` file, and values set in the Compose model are appended.
 
-#### path
+#### `path`
 
 `path` attribute defines the path to source code (relative to the project directory) to monitor for changes. Updates to any file
 inside the path, which doesn't match any `ignore` rule, triggers the configured action.
 
-#### target
+#### `target`
 
-`target` attribute only applies when `action` is configured for `sync`. Files within `path` with changes are synchronized
-with container filesystem, so that the latter is always running with up-to-date content.
+`target` attribute only applies when `action` is configured for `sync`. Files within `path` that have changes are synchronized with the container's filesystem, so that the latter is always running with up-to-date content.
