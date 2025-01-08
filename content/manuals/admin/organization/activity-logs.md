@@ -69,6 +69,10 @@ Refer to the following section for a list of events and their descriptions:
 | Access token created | Access token created in organization |
 | Access token updated | Access token updated in organization |
 | Access token deleted | Access token deleted in organization |
+| Policy created | Details of adding an admin settings policy |
+| Policy updated | Details of updating an admin settings policy |
+| Policy deleted | Details of deleting an admin settings policy |
+| Policy transferred | Details of transferring an admin settings policy to another owner |
 
 ### Repository events
 
