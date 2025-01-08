@@ -5,7 +5,7 @@ description: Overview of what Hardened Docker Desktop is and its key features
 keywords: security, hardened desktop, enhanced container isolation, registry access
   management, settings management root access, admins, docker desktop, image access
   management
-tags: [Security]
+tags: [FAQ]
 aliases:
  - /desktop/hardened-desktop/
 grid:
