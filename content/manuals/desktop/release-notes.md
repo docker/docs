@@ -602,6 +602,8 @@ For more information, see [microsoft/WSL#11794](https://github.com/microsoft/WSL
 
 {{< release-date date="2024-05-06" >}}
 
+{{< desktop-install all=true beta_win_arm=true version="4.30.0" build_path="/149282/" >}}
+
 ### New
 
 #### For all platforms
@@ -681,6 +683,8 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 ## 4.29.0
 
 {{< release-date date="2024-04-08" >}}
+
+{{< desktop-install all=true beta_win_arm=true version="4.29.0" build_path="/145265/" >}}
 
 ### New
 
