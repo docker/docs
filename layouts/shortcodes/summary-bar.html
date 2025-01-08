@@ -22,38 +22,38 @@ Summary bar icon library:
 
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet">
 
-<div class="flex items-center gap-4 p-4 bg-blue-light-500 rounded-none">
-    <span class="text-base text-white">Available for:</span>
+<div class="flex items-center gap-4 p-4 bg-background-light dark:bg-background-dark rounded-none">
+    <span class="text-base text-black dark:text-white">Available for:</span>
     {{ if .Get "subscription" }}
         <div class="flex items-center gap-2">
-            <span class="material-symbols-rounded text-sm text-white">
+            <span class="material-symbols-rounded text-sm text-black dark:text-white">
                 {{ .Get "subscription" }}
             </span>
-            <span class="text-sm text-white">{{ .Get "subscriptionText" }}</span>
+            <span class="text-sm text-black dark:text-white">{{ .Get "subscriptionText" }}</span>
         </div>
     {{ end }}
     {{ if .Get "lifecycle" }}
         <div class="flex items-center gap-2">
-            <span class="material-symbols-rounded text-sm text-white">
+            <span class="material-symbols-rounded text-sm text-black dark:text-white">
                 {{ .Get "lifecycle" }}
             </span>
-            <span class="text-sm text-white">{{ .Get "lifecycleText" }}</span>
+            <span class="text-sm text-black dark:text-white">{{ .Get "lifecycleText" }}</span>
         </div>
     {{ end }}
     {{ if .Get "version" }}
         <div class="flex items-center gap-2">
-            <span class="material-symbols-rounded text-sm text-white">
+            <span class="material-symbols-rounded text-sm text-black dark:text-white">
                 {{ .Get "version" }}
             </span>
-            <span class="text-sm text-white">{{ .Get "versionText" }}</span>
+            <span class="text-sm text-black dark:text-white">{{ .Get "versionText" }}</span>
         </div>
     {{ end }}
     {{ if .Get "admin" }}
         <div class="flex items-center gap-2">
-            <span class="material-symbols-rounded text-sm text-white">
+            <span class="material-symbols-rounded text-sm text-black dark:text-white">
                 {{ .Get "admin" }}
             </span>
-            <span class="text-sm text-white">{{ .Get "adminText" }}</span>
+            <span class="text-sm text-black dark:text-white">{{ .Get "adminText" }}</span>
         </div>
     {{ end }}
 </div>
