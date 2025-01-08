@@ -40,12 +40,17 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 #### For Mac
 
-- Docker Desktop for Mac might fail to start with macOS reporting either `com.docker.vmnetd` or `com.docker.socket` is malware. As a workaround, follow the steps below:
-  1. Quit Docker and kill and related processes using the Activity Monitor.
-  2. Run: `sudo cp /Applications/Docker.app/Contents/Library/LaunchServices/com.docker.vmnetd /Library/PrivilegedHelperTools/`.
-  3. Run: `sudo cp /Applications/Docker.app/Contents/MacOS/com.docker.socket /Library/PrivilegedHelperTools/`.
-  4. Restart Docker Desktop.
-  5. If this doesn't work, update to a later version and rerun the steps. See [docker/for-mac#7520](https://github.com/docker/for-mac/issues/7520)
+- An issue with the updater caused certain binaries (specifically `com.docker.vmnetd` and `com.docker.socket`) to not be updated during the release process. As a result, when signing certificates were rotated, these binaries remained signed with the old certificates. This issue, which manifested after release, may cause macOS to incorrectly report either `com.docker.vmnetd` or `com.docker.socket` as malware on installed versions of Docker Desktop for Mac.
+  1. Stop the vmnetd service: `sudo launchctl bootout system/com.docker.vmnetd`
+  2. Stop the socket service: `sudo launchctl bootout system/com.docker.socket`
+  3. Remove vmnetd binary: `sudo rm -f /Library/PrivilegedHelperTools/com.docker.vmnetd`
+  4. Remove socket binary: `sudo rm -f /Library/PrivilegedHelperTools/com.docker.socket`
+  5. Stop any remaining Docker process: `sudo pkill [dD]ocker`
+  6. Install new binaries
+      ```
+     sudo cp /Applications/Docker.app/Contents/Library/LaunchServices/com.docker.vmnetd /Library/PrivilegedHelperTools/
+     sudo cp /Applications/Docker.app/Contents/MacOS/com.docker.socket /Library/PrivilegedHelperTools/
+      ```
 
 ## 4.37.0
 
