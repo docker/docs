@@ -36,6 +36,17 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 - Fixed an issue that caused the AI Catalog in Docker Hub to be unavailable in Docker Desktop.
 - Fixed an issue that caused Docker Desktop to panic with `index out of range [0] with length 0` when using [Enhanced Container Isolation](/manuals/security/for-admins/hardened-desktop/enhanced-container-isolation/_index.md).
 
+### Known issues
+
+#### For macOS
+
+- Docker Desktop for Mac might fail to start with macOS reporting either `com.docker.vmnetd` or `com.docker.socket` is malware.
+  1. Quit Docker and kill and related processes using the Activity Monitor
+  2. Run: `sudo cp /Applications/Docker.app/Contents/Library/LaunchServices/com.docker.vmnetd /Library/PrivilegedHelperTools/`
+  3. Run: `sudo cp /Applications/Docker.app/Contents/MacOS/com.docker.socket /Library/PrivilegedHelperTools/`
+  4. Restart Docker Desktop
+  5. If this did not work, update to a newer version and rerun the steps. See [docker/for-mac#7520](https://github.com/docker/for-mac/issues/7520)
+
 ## 4.37.0
 
 {{< release-date date="2024-12-12" >}}
