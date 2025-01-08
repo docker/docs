@@ -50,7 +50,15 @@ services:
 
 ### `mode`
 
-`mode` defines the replication model used to run the service on the platform. Either `global`, exactly one container per physical node, or `replicated`, a specified number of containers. The default is `replicated`.
+`mode` defines the replication model used to run a service or job. Options include:
+
+- `global`: Ensures exactly one task continuously runs per physical node until stopped.
+- `replicated`: Continuously runs a specified number of tasks across nodes until stopped (default).
+- `replicated-job`: Executes a defined number of tasks until a completion state (exits with code 0)'.
+   - Total tasks are determined by `replicas`. 
+   - Concurrency can be limited using the `max-concurrent` option (CLI only).
+- `global-job`: Executes one task per physical node with a completion state (exits with code 0).
+   - Automatically runs on new nodes as they are added.
 
 ```yml
 services:
@@ -58,7 +66,25 @@ services:
     image: example/webapp
     deploy:
       mode: global
+
+  batch-job:
+    image: example/processor
+    deploy:
+      mode: replicated-job
+      replicas: 5
+
+  maintenance:
+    image: example/updater
+    deploy:
+      mode: global-job
 ```
+
+> [!NOTE] 
+> - Job modes (`replicated-job` and `global-job`) are designed for tasks that complete and exit with code 0.
+> - Completed tasks remain until explicitly removed.
+> - Options like `max-concurrent` for controlling concurrency are supported only via the CLI and are not available in Compose.
+
+For more detailed information about job options and behavior, see the [Docker CLI documentation](/reference/cli/docker/service/create.md#running-as-a-job)
 
 ### `placement`
 
