@@ -174,9 +174,8 @@ and use the `cwd://` prefix for the metadata Bake file:
 
 ```yml
       - name: Build
-        uses: docker/bake-action@v4
+        uses: docker/bake-action@v6
         with:
-          source: "${{ github.server_url }}/${{ github.repository }}.git#${{ github.ref }}"
           files: |
             ./docker-bake.hcl
             cwd://${{ steps.meta.outputs.bake-file }}

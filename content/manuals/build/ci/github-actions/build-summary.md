@@ -20,7 +20,7 @@ or [Docker Buildx Bake](https://github.com/marketplace/actions/docker-buildx-bak
 GitHub Actions:
 
 - `docker/build-push-action@v6`
-- `docker/bake-action@v5`
+- `docker/bake-action@v6`
 
 To view the job summary, open the details page for the job in GitHub after the
 job has finished. The summary is available for both failed and successful

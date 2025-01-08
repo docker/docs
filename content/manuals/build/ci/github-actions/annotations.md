@@ -72,9 +72,6 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
@@ -91,12 +88,12 @@ jobs:
           images: ${{ env.IMAGE_NAME }}
 
       - name: Build
-        uses: docker/bake-action@v5
+        uses: docker/bake-action@v6
         with:
           files: |
             ./docker-bake.hcl
-            ${{ steps.meta.outputs.bake-file-tags }}
-            ${{ steps.meta.outputs.bake-file-annotations }}
+            cwd://${{ steps.meta.outputs.bake-file-tags }}
+            cwd://${{ steps.meta.outputs.bake-file-annotations }}
           push: true
 ```
 
