@@ -2,6 +2,7 @@
 description: Image Access Management
 keywords: image, access, management, trusted content, permissions, Docker Business feature
 title: Image Access Management
+tags: [administration]
 aliases:
  - /docker-hub/image-access-management/
  - /desktop/hardened-desktop/image-access-management/

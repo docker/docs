@@ -2,6 +2,7 @@
 description: Understand how Settings Management works, who it is for, and what the
   benefits are
 keywords: Settings Management, rootless, docker desktop, hardened desktop
+tags: [administration]
 title: What is Settings Management?
 linkTitle: Settings Management
 aliases:

@@ -2,6 +2,7 @@
 description: How to configure and use Docker Extensions' private marketplace
 keywords: Docker Extensions, Docker Desktop, Linux, Mac, Windows, Marketplace, private, security
 title: Configure a private marketplace for extensions
+tags: [administration]
 linkTitle: Configure a private marketplace
 weight: 30
 aliases: 
