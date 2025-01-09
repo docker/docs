@@ -41,11 +41,13 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 #### For Mac
 
 - An issue with the updater caused certain binaries (specifically `com.docker.vmnetd` and `com.docker.socket`) to not be updated during the release process. As a result, when signing certificates were rotated, these binaries remained signed with the old certificates. This issue, which manifested after release, may cause macOS to incorrectly report either `com.docker.vmnetd` or `com.docker.socket` as malware on installed versions of Docker Desktop for Mac.
-  1. Stop the vmnetd service: `sudo launchctl bootout system/com.docker.vmnetd`
+
+To resolve this issue, a fresh installation (uninstall and reinstall) is required. As a workaround, follow the steps below:
+  1. Stop the `vmnetd` service: `sudo launchctl bootout system/com.docker.vmnetd`
   2. Stop the socket service: `sudo launchctl bootout system/com.docker.socket`
   3. Remove vmnetd binary: `sudo rm -f /Library/PrivilegedHelperTools/com.docker.vmnetd`
   4. Remove socket binary: `sudo rm -f /Library/PrivilegedHelperTools/com.docker.socket`
-  5. Stop any remaining Docker process: `sudo pkill [dD]ocker`
+  5. Stop any remaining Docker processes: `sudo pkill [dD]ocker`
   6. Install new binaries
       ```
      sudo cp /Applications/Docker.app/Contents/Library/LaunchServices/com.docker.vmnetd /Library/PrivilegedHelperTools/
