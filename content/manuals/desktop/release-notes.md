@@ -421,6 +421,24 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 - When [Enhanced Container Isolation (ECI)](/manuals/security/for-admins/hardened-desktop/enhanced-container-isolation/_index.md) is enabled, Docker Desktop may not enter Resource Saver mode. This will be fixed in a future Docker Desktop release.
 - The new [ECI Docker socket mount permissions for derived images](/manuals/security/for-admins/hardened-desktop/enhanced-container-isolation/config.md#docker-socket-mount-permissions-for-derived-images) feature does not yet work when Docker Desktop is configured with the  **Use containerd for pulling and storing images**. This will be fixed in the next Docker Desktop release.
 
+## 4.33.2
+
+{{< release-date date="2025-01-09" >}}
+
+{{< desktop-install-v2 mac=true version="4.33.2" build_path="/179689/" >}}
+
+### Bug fixes and enhancements
+
+#### For Mac
+
+- Prevents a bug that caused Docker Desktop to not update `com.docker.vmnetd` or `com.docker.socket` to newer versions.
+
+### Known issues
+
+#### For Mac
+
+- If you’re seeing a security popup about malware on `com.docker.vmnetd` or `com.docker.socket`, follow the steps documented in [docker/for-mac#7527](https://github.com/docker/for-mac/issues/7527).
+
 ## 4.33.1
 
 {{< release-date date="2024-07-31" >}}
