@@ -33,7 +33,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 #### For Mac
 
-- Fixed a bug that caused Docker Desktop to not update the following components to newer versions `com.docker.vmnetd` or `com.docker.socket`.
+- Fixed a bug that caused Docker Desktop to not update `com.docker.vmnetd` or `com.docker.socket` to newer versions.
 
 ## 4.37.1
 
