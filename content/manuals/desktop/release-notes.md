@@ -35,6 +35,10 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 - Prevents a bug that caused Docker Desktop to not update `com.docker.vmnetd` or `com.docker.socket` to newer versions.
 
+### Known issues
+
+- If you’re seeing a security popup about a malware on `com.docker.vmnetd` or `com.docker.socket` you need to follow extra steps as documented in [docker/for-mac#7527](https://github.com/docker/for-mac/issues/7527).
+
 ## 4.37.1
 
 {{< release-date date="2024-12-17" >}}
