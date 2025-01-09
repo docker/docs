@@ -27,7 +27,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 {{< release-date date="2025-01-08" >}}
 
-{{< desktop-install-v2 mac=true version="4.37.2" build_path="/TBD/" >}}
+{{< desktop-install-v2 mac=true version="4.37.2" build_path="/179585/" >}}
 
 ### Bug fixes and enhancements
 
