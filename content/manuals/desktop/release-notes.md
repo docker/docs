@@ -37,6 +37,8 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 ### Known issues
 
+#### For Mac
+
 - If you’re seeing a security popup about malware on `com.docker.vmnetd` or `com.docker.socket`, follow the steps documented in [docker/for-mac#7527](https://github.com/docker/for-mac/issues/7527).
 
 ## 4.37.1
