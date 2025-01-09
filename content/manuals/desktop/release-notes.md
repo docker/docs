@@ -23,6 +23,10 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projects/51/views/1?filterQuery=) to see what's coming next.
 
+> [!WARNING]
+>
+> If you're experiencing malware detection issues on Mac, follow the steps documented in [docker/for-mac#7527](https://github.com/docker/for-mac/issues/7527).
+
 ## 4.37.2
 
 {{< release-date date="2025-01-08" >}}
@@ -34,6 +38,12 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 #### For Mac
 
 - Prevents a bug that caused Docker Desktop to not update `com.docker.vmnetd` or `com.docker.socket` to newer versions.
+
+### Known issues
+
+#### For Mac
+
+- If you’re seeing a security popup about malware on `com.docker.vmnetd` or `com.docker.socket`, follow the steps documented in [docker/for-mac#7527](https://github.com/docker/for-mac/issues/7527).
 
 ## 4.37.1
 
@@ -52,12 +62,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 #### For Mac
 
-- Docker Desktop for Mac might fail to start with macOS reporting either `com.docker.vmnetd` or `com.docker.socket` is malware. As a workaround, follow the steps below:
-  1. Quit Docker and kill and related processes using the Activity Monitor.
-  2. Run: `sudo cp /Applications/Docker.app/Contents/Library/LaunchServices/com.docker.vmnetd /Library/PrivilegedHelperTools/`.
-  3. Run: `sudo cp /Applications/Docker.app/Contents/MacOS/com.docker.socket /Library/PrivilegedHelperTools/`.
-  4. Restart Docker Desktop.
-  5. If this doesn't work, update to a later version and rerun the steps. See [docker/for-mac#7520](https://github.com/docker/for-mac/issues/7520)
+- If you’re seeing a security popup about a malware on `com.docker.vmnetd` or `com.docker.socket`, follow the steps documented in [docker/for-mac#7527](https://github.com/docker/for-mac/issues/7527).
 
 ## 4.37.0
 
@@ -99,7 +104,13 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 ### Known issues
 
+#### For all platforms
+
 - Kubernetes cluster may not start if **Registry Access Manager** is enabled. As a workaround, add `registry.k8s.io` and `<geo>-docker.pkg.dev` to **Registry Access Management** policies.
+
+#### For Mac
+
+- If you’re seeing a security popup about a malware on `com.docker.vmnetd` or `com.docker.socket`, follow the steps documented in [docker/for-mac#7527](https://github.com/docker/for-mac/issues/7527).
 
 ### Deprecation
 
