@@ -72,6 +72,10 @@ Refer to the following section for a list of events and their descriptions:
 
 ### Repository events
 
+> [!NOTE]
+>
+> Event descriptions that include a user action can refer to a Docker username, personal access token (PAT) or organization access token (OAT). For example, if a user pushes a tag to a repository, the event would include the description: `<user-access-token>` pushed the tag to the repository.
+
 | Event                                                          | Description                                   |
 |:------------------------------------------------------------------|:------------------------------------------------|
 | Repository Created | Activities related to the creation of a new repository |

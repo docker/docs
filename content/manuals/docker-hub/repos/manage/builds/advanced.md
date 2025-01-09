@@ -1,7 +1,9 @@
 ---
 description: Automated builds
 keywords: automated, build, images
-title: Advanced options for Autobuild and Autotest
+title: Advanced options for autobuild and autotest
+linkTitle: Advanced options
+weight: 40
 aliases:
 - /docker-hub/builds/advanced/
 ---

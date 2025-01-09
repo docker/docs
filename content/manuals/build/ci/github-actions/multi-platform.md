@@ -350,9 +350,6 @@ jobs:
           platform=${{ matrix.platform }}
           echo "PLATFORM_PAIR=${platform//\//-}" >> $GITHUB_ENV
 
-      - name: Checkout
-        uses: actions/checkout@v4
-
       - name: Download meta bake definition
         uses: actions/download-artifact@v4
         with:
@@ -373,11 +370,11 @@ jobs:
 
       - name: Build
         id: bake
-        uses: docker/bake-action@v5
+        uses: docker/bake-action@v6
         with:
           files: |
             ./docker-bake.hcl
-            /tmp/bake-meta.json
+            cwd:///tmp/bake-meta.json
           targets: image
           set: |
             *.tags=
