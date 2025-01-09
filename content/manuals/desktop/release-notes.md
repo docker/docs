@@ -44,9 +44,9 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 To resolve this issue, a fresh installation (uninstall and reinstall) is required. As a workaround, follow the steps below:
   1. Stop the `vmnetd` service: `sudo launchctl bootout system/com.docker.vmnetd`
-  2. Stop the socket service: `sudo launchctl bootout system/com.docker.socket`
-  3. Remove vmnetd binary: `sudo rm -f /Library/PrivilegedHelperTools/com.docker.vmnetd`
-  4. Remove socket binary: `sudo rm -f /Library/PrivilegedHelperTools/com.docker.socket`
+  2. Stop the `socket` service: `sudo launchctl bootout system/com.docker.socket`
+  3. Remove `vmnetd` binary: `sudo rm -f /Library/PrivilegedHelperTools/com.docker.vmnetd`
+  4. Remove `socket` binary: `sudo rm -f /Library/PrivilegedHelperTools/com.docker.socket`
   5. Stop any remaining Docker processes: `sudo pkill [dD]ocker`
   6. Install new binaries
       ```
