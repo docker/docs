@@ -174,6 +174,24 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 - Fixed a bug preventing UDP port 53 to be bound.
 - Fixed a bug where Windows daemon options were overwritten at startup.
 
+## 4.35.2
+
+{{< release-date date="2025-01-09" >}}
+
+{{< desktop-install-v2 mac=true version="4.35.2" build_path="/179656/" >}}
+
+### Bug fixes and enhancements
+
+#### For Mac
+
+- Prevents a bug that caused Docker Desktop to not update `com.docker.vmnetd` or `com.docker.socket` to newer versions.
+
+### Known issues
+
+#### For Mac
+
+- If you’re seeing a security popup about malware on `com.docker.vmnetd` or `com.docker.socket`, follow the steps documented in [docker/for-mac#7527](https://github.com/docker/for-mac/issues/7527).
+
 ## 4.35.1
 
 {{< release-date date="2024-10-30" >}}
