@@ -296,6 +296,24 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 - Users with versions 4.14.0 and earlier could encounter issues using the in-app update. To update to the latest version, download and install the latest Docker Desktop from this page.
 
+## 4.34.4
+
+{{< release-date date="2025-01-09" >}}
+
+{{< desktop-install-v2 mac=true version="4.34.4" build_path="/179671/" >}}
+
+### Bug fixes and enhancements
+
+#### For Mac
+
+- Prevents a bug that caused Docker Desktop to not update `com.docker.vmnetd` or `com.docker.socket` to newer versions.
+
+### Known issues
+
+#### For Mac
+
+- If you’re seeing a security popup about malware on `com.docker.vmnetd` or `com.docker.socket`, follow the steps documented in [docker/for-mac#7527](https://github.com/docker/for-mac/issues/7527).
+
 ## 4.34.3
 
 {{< release-date date="2024-10-09" >}}
