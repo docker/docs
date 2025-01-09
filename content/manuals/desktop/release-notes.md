@@ -453,6 +453,24 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 - Docker Desktop fails to start with WSL pre-releases `v2.3.11.0` and `v2.3.12.0`, which is included in Windows 11 Insider. To fix this ensure WSL `v2.2.4.0` is installed.
 For more information, see [microsoft/WSL#11794](https://github.com/microsoft/WSL/issues/11794). This affects Docker Desktop 4.33.0 and earlier.
 
+## 4.32.1
+
+{{< release-date date="2025-01-08" >}}
+
+{{< desktop-install-v2 mac=true version="4.32.1" build_path="/TBD/" >}}
+
+### Bug fixes and enhancements
+
+#### For Mac
+
+- Prevents a bug that caused Docker Desktop to not update `com.docker.vmnetd` or `com.docker.socket` to newer versions.
+
+### Known issues
+
+#### For Mac
+
+- If you’re seeing a security popup about malware on `com.docker.vmnetd` or `com.docker.socket`, follow the steps documented in [docker/for-mac#7527](https://github.com/docker/for-mac/issues/7527).
+
 ## 4.32.0
 
 {{< release-date date="2024-07-04" >}}
