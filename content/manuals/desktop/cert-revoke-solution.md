@@ -43,7 +43,7 @@ If possible, update directly through the app. If not, and you’re still seeing 
 
 You should now see the Docker Desktop Dashboard.
 
-### Install a patch if you have version 4.34 - 4.36
+### Install a patch if you have version 4.32 - 4.36
 
 If you can’t upgrade to the latest version and you’re seeing the malware pop-up, follow the steps below:
 
@@ -61,36 +61,6 @@ If you can’t upgrade to the latest version and you’re seeing the malware pop
 2. Make sure the malware pop-up is permanently closed.
 
 3. [Download and install the patched installer](/manuals/desktop/release-notes.md) that matches your current base version. For example if you have version 4.36.0, install 4.36.1.
-
-4. Launch Docker Desktop. A privileged pop-up message displays after 5 to 10 seconds.
-
-5. Enter your password.
-
-You should now see the Docker Desktop Dashboard.
-
-### Wait for a patch for versions 4.32 - 4.33
-
-For versions 4.32 - 4.33, a patch fix is in progress. If you need an immediate solution, you can use the following workaround:
-
-1. Kill the Docker process that cannot start properly:
-   ```console
-   $ sudo launchctl bootout system/com.docker.vmnetd 2>/dev/null || true
-   $ sudo launchctl bootout system/com.docker.socket 2>/dev/null || true
-    
-   $ sudo rm /Library/PrivilegedHelperTools/com.docker.vmnetd || true
-   $ sudo rm /Library/PrivilegedHelperTools/com.docker.socket || true
- 
-   $ ps aux | grep -i docker | awk '{print $2}' | sudo xargs kill -9 2>/dev/null
-   ```
-
-2. Download and install a re-signed installer matching your exact version of Docker Desktop from the [Release notes](/manuals/desktop/release-notes.md).
-
-3. Install new binaries:
-
-   ```console
-   $ sudo cp /Applications/Docker.app/Contents/Library/LaunchServices/com.docker.vmnetd /Library/PrivilegedHelperTools/
-   $ sudo cp /Applications/Docker.app/Contents/MacOS/com.docker.socket /Library/PrivilegedHelperTools/
-   ```
 
 4. Launch Docker Desktop. A privileged pop-up message displays after 5 to 10 seconds.
 
