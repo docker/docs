@@ -30,7 +30,7 @@ If possible, update directly through the app. If not, and you’re still seeing 
    $ sudo rm /Library/PrivilegedHelperTools/com.docker.vmnetd || true
    $ sudo rm /Library/PrivilegedHelperTools/com.docker.socket || true
  
-   $ ps aux | grep docker | awk '{print $2}' | sudo xargs kill -9 2>/dev/null
+   $ ps aux | grep -i docker | awk '{print $2}' | sudo xargs kill -9 2>/dev/null
    ```
     
 2. Make sure the malware pop-up is permanently closed. 
@@ -80,7 +80,7 @@ For versions 4.32 - 4.33, a patch fix is in progress. If you need an immediate s
    $ sudo rm /Library/PrivilegedHelperTools/com.docker.vmnetd || true
    $ sudo rm /Library/PrivilegedHelperTools/com.docker.socket || true
  
-   $ ps aux | grep docker | awk '{print $2}' | sudo xargs kill -9 2>/dev/null
+   $ ps aux | grep -i docker | awk '{print $2}' | sudo xargs kill -9 2>/dev/null
    ```
 
 2. Download and install a re-signed installer matching your exact version of Docker Desktop from the [Release notes](/manuals/desktop/release-notes.md).
