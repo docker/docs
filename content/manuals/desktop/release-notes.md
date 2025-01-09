@@ -369,9 +369,9 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 ## 4.33.2
 
-{{< release-date date="2025-01-08" >}}
+{{< release-date date="2025-01-09" >}}
 
-{{< desktop-install-v2 mac=true version="4.33.2" build_path="/TBD/" >}}
+{{< desktop-install-v2 mac=true version="4.33.2" build_path="/179689/" >}}
 
 ### Bug fixes and enhancements
 
