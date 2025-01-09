@@ -455,9 +455,9 @@ For more information, see [microsoft/WSL#11794](https://github.com/microsoft/WSL
 
 ## 4.32.1
 
-{{< release-date date="2025-01-08" >}}
+{{< release-date date="2025-01-09" >}}
 
-{{< desktop-install-v2 mac=true version="4.32.1" build_path="/TBD/" >}}
+{{< desktop-install-v2 mac=true version="4.32.1" build_path="/179691/" >}}
 
 ### Bug fixes and enhancements
 
