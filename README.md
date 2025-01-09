@@ -49,4 +49,4 @@ contribute, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Copyright and license
 
-Copyright 2013-2024 Docker, Inc., released under the <a href="https://github.com/docker/docs/blob/main/LICENSE">Apache 2.0 license</a> .
+Copyright 2013-2025 Docker, Inc., released under the <a href="https://github.com/docker/docs/blob/main/LICENSE">Apache 2.0 license</a> .
