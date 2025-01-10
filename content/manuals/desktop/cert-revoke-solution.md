@@ -100,3 +100,16 @@ echo "Install new binaries..."
 sudo cp /Applications/Docker.app/Contents/Library/LaunchServices/com.docker.vmnetd /Library/PrivilegedHelperTools/
 sudo cp /Applications/Docker.app/Contents/MacOS/com.docker.socket /Library/PrivilegedHelperTools/
 ```
+
+## Homebrew casks
+
+If you installed Docker Desktop using Homebrew casks, the recommended solution is to perform a full reinstall to resolve the issue.
+
+To reinstall Docker Desktop, run the following commands in your terminal:
+
+```console
+$ brew update
+$ brew reinstall --cask docker
+```
+
+These commands will update Homebrew and completely reinstall Docker Desktop, ensuring you have the latest version with the fix applied.
