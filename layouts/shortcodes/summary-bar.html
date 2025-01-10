@@ -1,59 +1,37 @@
-<!--
-Summary bar icon library:
-
-1. Subscription:
-    - Label: Business                   | Icon: domain
-    - Label: Team                       | Icon: groups
-    - Label: Pro                        | Icon: person_add
-    - Label: Personal                   | Icon: person
-    - Label: Available to all           | Icon: public
-
-2. Release lifecycle:
-    - Label: Experimental               | Icon: science
-    - Label: Beta                       | Icon: bolt
-    - Label: EA                         | Icon: rocket_launch
-    - Label: GA                         | Icon: check_circle
-    - Label: Retired                    | Icon: package_2
-
-3. Minimum version:
-    - Label: Version [version_number]   | Icon: browser_updated
-
--->
-
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet">
 
-<div class="flex items-center gap-4 p-4 bg-background-light dark:bg-background-dark rounded-none">
-    <span class="text-base text-black dark:text-white">Available for:</span>
-    {{ if .Get "subscription" }}
-        <div class="flex items-center gap-2">
-            <span class="material-symbols-rounded text-sm text-black dark:text-white">
-                {{ .Get "subscription" }}
+{{ $featureName := .Get "feature_name" }}
+{{ $feature := index (where site.Data.summary.features "name" $featureName) 0 }}
+{{ if $feature }}
+<div class="flex flex-col p-4 bg-background-light dark:bg-background-dark rounded-none summary-bar"
+     style="border-left: 4px solid #677285; padding-left: 16px; padding-top: 8px; padding-bottom: 8px; margin-top: 8px; margin-bottom: 8px;">
+
+    <div class="flex flex-col gap-0.5">
+        <div class="flex items-center gap-1">
+            <span class="text-black dark:text-white font-bold">Subscription:</span>
+            <span class="text-black dark:text-white">{{ $feature.subscriptionText }}</span>
+            <span class="material-symbols-rounded text-black dark:text-white">
+             s   {{ $feature.subscriptionIcon }}
             </span>
-            <span class="text-sm text-black dark:text-white">{{ .Get "subscriptionText" }}</span>
         </div>
-    {{ end }}
-    {{ if .Get "lifecycle" }}
-        <div class="flex items-center gap-2">
-            <span class="material-symbols-rounded text-sm text-black dark:text-white">
-                {{ .Get "lifecycle" }}
+
+        <div class="flex items-center gap-1">
+            <span class="text-black dark:text-white font-bold">Availability:</span>
+            <span class="text-black dark:text-white">{{ $feature.availabilityText }}</span>
+            <span class="material-symbols-rounded text-black dark:text-white">
+                {{ $feature.availabilityIcon }}
             </span>
-            <span class="text-sm text-black dark:text-white">{{ .Get "lifecycleText" }}</span>
         </div>
-    {{ end }}
-    {{ if .Get "version" }}
-        <div class="flex items-center gap-2">
-            <span class="material-symbols-rounded text-sm text-black dark:text-white">
-                {{ .Get "version" }}
+
+        {{ if $feature.versionText }}
+        <div class="flex items-center gap-1">
+            <span class="text-black dark:text-white font-bold">Minimum version:</span>
+            <span class="text-black dark:text-white">{{ $feature.versionText }}</span>
+            <span class="material-symbols-rounded text-black dark:text-white">
+                {{ $feature.versionIcon }}
             </span>
-            <span class="text-sm text-black dark:text-white">{{ .Get "versionText" }}</span>
         </div>
-    {{ end }}
-    {{ if .Get "admin" }}
-        <div class="flex items-center gap-2">
-            <span class="material-symbols-rounded text-sm text-black dark:text-white">
-                {{ .Get "admin" }}
-            </span>
-            <span class="text-sm text-black dark:text-white">{{ .Get "adminText" }}</span>
-        </div>
-    {{ end }}
+        {{ end }}
+    </div>
 </div>
+{{ end }}
