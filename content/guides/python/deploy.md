@@ -11,7 +11,7 @@ aliases:
 
 ## Prerequisites
 
-- Complete all the previous sections of this guide, starting with [Use containers for python development](develop.md).
+- Complete all the previous sections of this guide, starting with [Use containers for Python development](develop.md).
 - [Turn on Kubernetes](/manuals/desktop/features/kubernetes.md#install-and-turn-on-kubernetes) in Docker Desktop.
 
 ## Overview
