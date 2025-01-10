@@ -76,7 +76,7 @@ If you are an IT administrator and your developers are seeing the malware pop-up
 2. Run the following script:
 
    ```console
-  #!/bin/bash
+   #!/bin/bash
 
    # Stop the docker services
    echo "Stopping Docker..."
