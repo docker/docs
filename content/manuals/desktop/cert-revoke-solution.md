@@ -70,36 +70,39 @@ You should now see the Docker Desktop Dashboard.
 
 ## MDM script
 
-If you are an IT administrator, you can use the following script as a workaround for your developers if they have a re-signed version of Docker Desktop version 4.35 or later.
+If you are an IT administrator and your developers are seeing the malware pop-up:
 
-```console
-#!/bin/bash
+1. Make sure your developers have a re-signed version of Docker Desktop version 4.32 or later.
+2. Run the following script:
 
-# Stop the docker services
-echo "Stopping Docker..."
-sudo pkill [dD]ocker
+   ```console
+  #!/bin/bash
 
-# Stop the vmnetd service
-echo "Stopping com.docker.vmnetd service..."
-sudo launchctl bootout system /Library/LaunchDaemons/com.docker.vmnetd.plist
+   # Stop the docker services
+   echo "Stopping Docker..."
+   sudo pkill [dD]ocker
 
-# Stop the socket service
-echo "Stopping com.docker.socket service..."
-sudo launchctl bootout system /Library/LaunchDaemons/com.docker.socket.plist
+   # Stop the vmnetd service
+   echo "Stopping com.docker.vmnetd service..."
+   sudo launchctl bootout system /Library/LaunchDaemons/com.docker.vmnetd.plist
 
-# Remove vmnetd binary
-echo "Removing com.docker.vmnetd binary..."
-sudo rm -f /Library/PrivilegedHelperTools/com.docker.vmnetd
+   # Stop the socket service
+   echo "Stopping com.docker.socket service..."
+   sudo launchctl bootout system /Library/LaunchDaemons/com.docker.socket.plist
 
-# Remove socket binary
-echo "Removing com.docker.socket binary..."
-sudo rm -f /Library/PrivilegedHelperTools/com.docker.socket
+   # Remove vmnetd binary
+   echo "Removing com.docker.vmnetd binary..."
+   sudo rm -f /Library/PrivilegedHelperTools/com.docker.vmnetd
 
-# Install new binaries
-echo "Install new binaries..."
-sudo cp /Applications/Docker.app/Contents/Library/LaunchServices/com.docker.vmnetd /Library/PrivilegedHelperTools/
-sudo cp /Applications/Docker.app/Contents/MacOS/com.docker.socket /Library/PrivilegedHelperTools/
-```
+   # Remove socket binary
+   echo "Removing com.docker.socket binary..."
+   sudo rm -f /Library/PrivilegedHelperTools/com.docker.socket
+
+   # Install new binaries
+   echo "Install new binaries..."
+   sudo cp /Applications/Docker.app/Contents/Library/LaunchServices/com.docker.vmnetd /Library/PrivilegedHelperTools/
+   sudo cp /Applications/Docker.app/Contents/MacOS/com.docker.socket /Library/PrivilegedHelperTools/
+   ```
 
 ## Homebrew casks
 
