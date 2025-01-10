@@ -108,8 +108,8 @@ If you installed Docker Desktop using Homebrew casks, the recommended solution i
 To reinstall Docker Desktop, run the following commands in your terminal:
 
 ```console
-brew update
-brew reinstall --cask docker
+$ brew update
+$ brew reinstall --cask docker
 ```
 
 These commands will update Homebrew and completely reinstall Docker Desktop, ensuring you have the latest version with the fix applied.
