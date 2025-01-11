@@ -43,6 +43,10 @@ If possible, update directly through the app. If not, and you’re still seeing 
 
 You should now see the Docker Desktop Dashboard.
 
+> [!TIP]
+>
+> If the malware pop-up persists after completing these steps, empty `docker.app` from your Trash and rerun the steps.
+
 ### Install a patch if you have version 4.32 - 4.36
 
 If you can’t upgrade to the latest version and you’re seeing the malware pop-up, follow the steps below:
@@ -67,6 +71,10 @@ If you can’t upgrade to the latest version and you’re seeing the malware pop
 5. Enter your password.
 
 You should now see the Docker Desktop Dashboard.
+
+> [!TIP]
+>
+> If the malware pop-up persists after completing these steps, empty `docker.app` from your Trash and rerun the steps.
 
 ## MDM script
 
