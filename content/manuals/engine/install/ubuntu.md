@@ -85,6 +85,9 @@ Run the following command to uninstall all conflicting packages:
 $ for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
 ```
 
+> These commands require a POSIX compatible shell like bash.
+> For other shells like fish, temporarily run `bash -i`.
+
 `apt-get` might report that you have none of these packages installed.
 
 Images, containers, volumes, and networks stored in `/var/lib/docker/` aren't
@@ -132,6 +135,9 @@ Docker from the repository.
    sudo apt-get update
    ```
 
+   > These commands require a POSIX compatible shell like bash.
+   > For other shells like fish, temporarily run `bash -i`.
+
    > [!NOTE]
    >
    > If you use an Ubuntu derivative distribution, such as Linux Mint,
@@ -147,7 +153,7 @@ Docker from the repository.
    ```console
    $ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
    ```
-  
+
    {{< /tab >}}
    {{< tab name="Specific version" >}}
 
