@@ -14,14 +14,13 @@ params:
 
 ## Introduction
 
-Retrieval-Augmented Generation (RAG) is a powerful framework that enhances large language models (LLMs) by integrating information retrieval from external knowledge sources. This guide focuses on a specialized RAG implementation using graph databases like Neo4j, which excel in managing highly connected, relational data. Unlike traditional RAG setups with vector databases, combining RAG with graph databases offers better context-awareness and relationship-driven insights, making it ideal for domains like recommendation systems, compliance tracking, and social networks.
+Retrieval-Augmented Generation (RAG) is a powerful framework that enhances large language models (LLMs) by integrating information retrieval from external knowledge sources. This guide focuses on a specialized RAG implementation using graph databases like Neo4j, which excel in managing highly connected, relational data. Unlike traditional RAG setups with vector databases, combining RAG with graph databases offers better context-awareness and relationship-driven insights.
 
 In this guide, you will:
 
-- Understand the benefits of integrating graph databases into a RAG system.
-- Set up a GenAI stack using Docker, including Neo4j and an AI model.
-- Explore a case study demonstrating the system’s effectiveness with real-world queries.
-
+* Explore the advantages of integrating graph databases into a RAG framework.
+* Configure a GenAI stack with Docker, incorporating Neo4j and an AI model.
+* Analyze a real-world case study that highlights the effectiveness of this approach for handling specialized queries.
 
 ## Understanding RAG (Retrieval-Augmented Generation) 
 
@@ -34,51 +33,26 @@ RAG (Retrieval-Augmented Generation) is a hybrid framework that enhances the cap
 In a Retrieval-Augmented Generation (RAG) system, vector embeddings are used to represent the semantic meaning of text in a way that a machine can understand and process. For instance, the words "dog" and "puppy" will have similar embeddings because they share similar meanings. By integrating these embeddings into the RAG framework, the system can combine the generative power of large language models with the ability to pull in highly relevant, contextually-aware data from external sources.
 
 The system operates as follows:  
-1. Queries are transformed into vector embeddings to capture semantic meaning.  
-2. Relevant information is retrieved from the knowledge base using these embeddings.  
-3. The retrieved data is used to augment the input prompt for the LLM.  
-4. The LLM generates responses that blend the model's inherent knowledge with the retrieved context.  
+1. Questions get turned into mathematical patterns that capture their meaning  
+2. These patterns help find matching information in a database
+3. The found information gets added to the original question before passed to LLM 
+4. The LLM generates responses that blend the model's inherent knowledge with the this extra information.  
 
 To hold this vector information in a efficient manner, we need a special type of database.
-
 
 ## Introduction to Graph Databases 
 
 Graph databases, such as Neo4j, are specifically designed for managing highly connected data. Unlike traditional relational databases, graph databases prioritize both the entities and the relationships between them, making them ideal for tasks where connections are as important as the data itself.
 
-In the broader landscape of NoSQL databases, there are four main categories:
+Graph databases stand out for their unique approach to data storage and querying. They use nodes (or vertices) to represent entities and edges to represent the relationships between these entities. This structure allows for efficient handling of highly connected data and complex queries, which are difficult to manage in traditional database systems.
 
-* Document-based databases
-* Key-value stores
-* Column-oriented databases
-* Graph-based databases
+SQL databases and graph databases differ significantly in their data models. SQL databases use a tabular structure with rows and columns, where relationships between entities are established using foreign keys. This approach works well for structured data and predefined relationships. In contrast, graph databases represent data as nodes (entities) and edges (relationships), making the representation of relationships more intuitive and flexible. This structure is particularly advantageous for complex, interconnected data.
 
-As one of these core categories, graph databases stand out for their unique approach to data storage and querying. They use nodes (or vertices) to represent entities and edges to represent the relationships between these entities. This structure allows for efficient handling of highly connected data and complex queries, which are difficult to manage in traditional database systems.
+Another key difference lies in schema flexibility. SQL databases operate on a rigid schema, meaning any changes to the data structure, such as adding new columns or altering relationships, typically require careful planning and migration processes. Graph databases, however, are schema-optional, allowing for much greater flexibility. New nodes, edges, or properties can be introduced without disrupting existing data, enabling faster adaptation to changing requirements.
 
-### Graph Databases vs SQL Databases 
-
-1. Data Model:
-   - SQL: Uses tables with rows and columns, relationships expressed through foreign keys
-   - Graph: Uses nodes and edges, relationships are much more flexible
-
-2. Schema Flexibility:
-   - SQL: Rigid schema, changes require extra steps
-   - Graph: Flexible schema, can add new relationships without migrations
-
-3. Use Cases:
-   - SQL: Structured data with fixed relationships
-   - Graph: Social networks, recommendation engines, knowledge graphs
-
-
-
-
-## Practical Implementation: A Case Study in RAG Effectiveness
+## Practical Implementation: Testing RAG Effectiveness
 
 To illustrate the power of RAG systems in practice, let's examine a real-world implementation using Apache NiFi as our subject matter. This case study demonstrates how RAG can enhance an AI's ability to provide accurate, contextual information about specialized technical topics.
-
-
-
-## A Case Study in RAG Implementation 
 
 ### Teaching AI About New Technologies
 
@@ -86,6 +60,10 @@ Apache NiFi serves as an excellent example of the limitations of traditional LLM
 
 Without RAG, the LLM may provide broad responses or acknowledge its limited knowledge when asked about information that is beyond its cutoff date.
 
+   Question: What important events happened in 2024?
+   RAG: Disabled
+
+   I'm happy to help! Unfortunately, I'm a large language model, I don't have access to real-time information or events that occurred after my training data cutoff in 2024. Therefore, I cannot provide you with any important events that happened in 2024. My apologize for any inconvenience this may cause. Is there anything else I can help you with?
 
 ## Setting Up GenAI Stack with GPU Acceleration on Linux 
 
@@ -106,8 +84,6 @@ Make sure following lines are commented out. Set your own credentials for securi
     NEO4J_PASSWORD=password
     OLLAMA_BASE_URL=http://llm-gpu:11434
 
-
-
 ### CPU powered
 
 ```bash
@@ -123,17 +99,17 @@ Make sure following lines are commented out. Set your own credentials for securi
     NEO4J_PASSWORD=password
     OLLAMA_BASE_URL=http://llm:11434
 
-
 ### Setting Up on Other Platforms 
 
 For instructions on how to set up the stack on other platforms, refer to [this page](https://github.com/docker/genai-stack). 
 
----
+
 ### Initial Startup
 
 The first startup may take some time because the system needs to download a large language model (LLM).
 
 ### Monitoring Progress
+
 We can monitor the download and initialization progress by viewing the logs. Run the following command to view the logs:
 
 ```bash
@@ -150,7 +126,6 @@ Wait for specific lines in the logs indicating that the download is complete and
 
 
     You can now access the interface at [http://localhost:8501/](http://localhost:8501/) to ask questions. For example, you can try the sample question:
-
 
 When we see those lines in the logs, web apps are ready to be used.
 
@@ -173,13 +148,11 @@ Now it's time to teach the AI some new tricks. First, connect to [http://localho
 ![alt text](image-1.png)
 
 
-
 After the import is successful, we can access Neo4j to verify the data. 
 
 After logging in to [http://localhost:7474/](http://localhost:7474/) using the credentials from the `.env` file, you can run queries on Neo4j. Using the Neo4j Cypher query language, you can check for the data stored in the database.
 
 To count the data, run the following query:
-
 
 ```cypher
 MATCH (n)
