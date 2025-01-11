@@ -45,7 +45,7 @@ You should now see the Docker Desktop Dashboard.
 
 > [!TIP]
 >
-> If the malware pop-up persists after completing these steps, empty `docker.app` from your Trash and rerun the steps.
+> If the malware pop-up persists after completing these steps and Docker is in the Trash, try emptying the Trash and rerunning the steps.
 
 ### Install a patch if you have version 4.32 - 4.36
 
