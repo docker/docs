@@ -1468,7 +1468,7 @@ platform: linux/arm64/v8
 
 > [!NOTE]
 >
-> Port mapping must not be used with `network_mode: host`. This causes a runtime error because `network_mode: host` already exposes container ports directly to the host network, so port mapping isn’t needed.
+> Port mapping must not be used with `network_mode: host`. Doing so causes a runtime error because `network_mode: host` already exposes container ports directly to the host network, so port mapping isn’t needed.
 
 #### Short syntax
 
@@ -1481,15 +1481,15 @@ in the form:
 - `CONTAINER` is `port | range`.
 - `PROTOCOL` restricts ports to a specified protocol either `tcp` or `upd`(optional). Default is `tcp`.
 
-Ports can be either a single value or a range. Host and container must use equivalent ranges. 
+Ports can be either a single value or a range. `HOST` and `CONTAINER` must use equivalent ranges. 
 
-Either specify both ports (`HOST:CONTAINER`), or just the container port. In the latter case,
+You can either specify both ports (`HOST:CONTAINER`), or just the container port. In the latter case,
 the container runtime automatically allocates any unassigned port of the host.
 
 `HOST:CONTAINER` should always be specified as a (quoted) string, to avoid conflicts
 with [YAML base-60 float](https://yaml.org/type/float.html).
 
-IPv6 addresses can optionally be enclosed in square brackets.
+IPv6 addresses can be enclosed in square brackets.
 
 Examples:
 
@@ -1510,7 +1510,7 @@ ports:
 
 > [!NOTE]
 >
-> If Host IP mapping is not supported by a container engine, Compose rejects
+> If host IP mapping is not supported by a container engine, Compose rejects
 > the Compose file and ignores the specified host IP.
 
 #### Long syntax
