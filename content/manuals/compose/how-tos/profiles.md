@@ -153,7 +153,7 @@ $ docker compose up -d
 # by implicitly enabling profiles `dev`
 $ docker compose up -d mock-backend
 
-# This fails because profiles "dev" is not enabled
+# This fails because profiles "debug" is not enabled
 $ docker compose up phpmyadmin
 ```
 
