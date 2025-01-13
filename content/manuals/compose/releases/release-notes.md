@@ -13,6 +13,17 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.32.3
+
+{{< release-date date="2025-01-13" >}}
+
+
+### Bug fixes and enhancements
+
+- Fixed a bug overriding mac address
+- Fixed a log rendering issue during concurrent builds
+
+
 ## 2.32.2
 
 {{< release-date date="2025-01-07" >}}
