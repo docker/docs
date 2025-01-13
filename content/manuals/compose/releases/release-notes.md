@@ -17,12 +17,10 @@ For more detailed information, see the [release notes in the Compose repo](https
 
 {{< release-date date="2025-01-13" >}}
 
-
 ### Bug fixes and enhancements
 
-- Fixed a bug overriding mac address
+- Fixed an issue where Compose would override a service-level MAC address with the main network MAC address
 - Fixed a log rendering issue during concurrent builds
-
 
 ## 2.32.2
 
