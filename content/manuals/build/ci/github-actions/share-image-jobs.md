@@ -29,13 +29,13 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           tags: myimage:latest
-          outputs: type=docker,dest=/tmp/myimage.tar
+          outputs: type=docker,dest=${{ runner.temp }}/myimage.tar
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: myimage
-          path: /tmp/myimage.tar
+          path: ${{ runner.temp }}/myimage.tar
 
   use:
     runs-on: ubuntu-latest
@@ -45,10 +45,10 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: myimage
-          path: /tmp
+          path: ${{ runner.temp }}
 
       - name: Load image
         run: |
-          docker load --input /tmp/myimage.tar
+          docker load --input ${{ runner.temp }}/myimage.tar
           docker image ls -a
 ```
