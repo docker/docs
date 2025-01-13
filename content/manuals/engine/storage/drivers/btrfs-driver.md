@@ -20,8 +20,7 @@ Btrfs Filesystem as Btrfs.
 
 > [!NOTE]
 >
-> The `btrfs` storage driver is only supported with Docker Engine CE on SLES,
-> Ubuntu, and Debian systems.
+> The `btrfs` storage driver is only supported with Docker Engine CE on Ubuntu and Debian systems.
 
 ## Prerequisites
 

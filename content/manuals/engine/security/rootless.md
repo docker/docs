@@ -115,14 +115,14 @@ testuser:231072:65536
 - Add `kernel.unprivileged_userns_clone=1` to `/etc/sysctl.conf` (or
   `/etc/sysctl.d`) and run `sudo sysctl --system`
 {{< /tab >}}
-{{< tab name="openSUSE and SLES" >}}
-- For openSUSE 15 and SLES 15, Installing `fuse-overlayfs` is recommended. Run `sudo zypper install -y fuse-overlayfs`.
+{{< tab name="openSUSE" >}}
+- For openSUSE 15, Installing `fuse-overlayfs` is recommended. Run `sudo zypper install -y fuse-overlayfs`.
   This step is not required on openSUSE Tumbleweed.
 
 - `sudo modprobe ip_tables iptable_mangle iptable_nat iptable_filter` is required.
   This might be required on other distributions as well depending on the configuration.
 
-- Known to work on openSUSE 15 and SLES 15.
+- Known to work on openSUSE 15.
 {{< /tab >}}
 {{< tab name="CentOS, RHEL, and Fedora" >}}
 - For RHEL 8 and similar distributions, installing `fuse-overlayfs` is recommended. Run `sudo dnf install -y fuse-overlayfs`.
