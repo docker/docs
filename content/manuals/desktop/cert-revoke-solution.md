@@ -88,7 +88,7 @@ If you are an IT administrator and your developers are seeing the malware pop-up
 
    # Stop the docker services
    echo "Stopping Docker..."
-   sudo pkill [dD]ocker
+   sudo pkill -i docker
 
    # Stop the vmnetd service
    echo "Stopping com.docker.vmnetd service..."
