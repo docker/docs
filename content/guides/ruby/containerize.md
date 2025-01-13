@@ -22,15 +22,15 @@ This section walks you through containerizing and running a [Ruby on Rails](http
 
 Starting from Rails 7.1 [Docker is supported out of the box](https://guides.rubyonrails.org/7_1_release_notes.html#generate-dockerfiles-for-new-rails-applications). This means that you will get a `Dockerfile`, `.dockerignore` and `bin/docker-entrypoint` files generated for you when you create a new Rails application.
 
-If you have an existing Rails application, you will need to create the Docker assets manually. Unfortunately `docker init` command  does not yet support Rails. This means that if you are working with Rails, you'll need to copy Dockerfile and other related configurations manually from the examples below.
+If you have an existing Rails application, you will need to create the Docker assets manually. Unfortunately `docker init` command does not yet support Rails. This means that if you are working with Rails, you'll need to copy Dockerfile and other related configurations manually from the examples below.
 
 ## Initialize Docker assets
 
 Rails 7.1 generates multistage Dockerfile out of the box, below is an example of such file generated from a Rails template.
 
-> Multistage Dockerfiles help create smaller, more efficient images by separating build and runtime dependencies, ensuring only necessary components are included in the final image. Read more about multi-stage builds [in a dedicated article](/get-started/docker-concepts/building-images/multi-stage-builds/)
+> Multistage Dockerfiles help create smaller, more efficient images by separating build and runtime dependencies, ensuring only necessary components are included in the final image. Read more in the [Multi-stage builds guide](/get-started/docker-concepts/building-images/multi-stage-builds/).
 
-Even though the Dockerfile is generated for you, it's a good idea to understand what it does and how it works, so we recommend reading the following example.
+Although the Dockerfile is generated automatically, understanding its purpose and functionality is important. Reviewing the following example is highly recommended.
 
 
 ```dockerfile {title=Dockerfile}
@@ -135,7 +135,7 @@ EXPOSE 3000
 CMD ["./bin/rails", "server"]
 ```
 
-We specified the Docker entrypoint as `./bin/docker-entrypoint` which is a script that prepares the database and runs the application server. Below is an example of such a script.
+This Dockerfile uses a script at `./bin/docker-entrypoint` as the container's entrypiont. This script prepares the database and runs the application server. Below is an example of such a script.
 
 ```bash {title=docker-entrypoint}
 #!/bin/bash -e
@@ -206,7 +206,7 @@ Besides the two files above you will also need a `.dockerignore` file. This file
 /Dockerfile*
 ```
 
-The last thing that may be necessary, but not always required is `compose.yml` file, used by Docker Compose to define the services that make up your application. Since we are using SQLite as the database, we don't need to define a separate service for the database, and the only service we need is the Rails application itself.
+The last optional file that you may want is the `compose.yaml` file, which is used by Docker Compose to define the services that make up the application. Since SQLite is being used as the database, there is no need to define a separate service for the database. The only service required is the Rails application itself.
 
 ```yaml {title=compose.yaml}
 services:
