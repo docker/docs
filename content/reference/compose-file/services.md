@@ -1468,7 +1468,7 @@ platform: linux/arm64/v8
 
 > [!NOTE]
 >
-> Port mapping must not be used with `network_mode: host` otherwise a runtime error occurs.
+> Port mapping must not be used with `network_mode: host`. Doing so causes a runtime error because `network_mode: host` already exposes container ports directly to the host network, so port mapping isn’t needed.
 
 #### Short syntax
 
@@ -1477,19 +1477,19 @@ in the form:
 
 `[HOST:]CONTAINER[/PROTOCOL]` where:
 
-- `HOST` is `[IP:](port | range)`
-- `CONTAINER` is `port | range`
-- `PROTOCOL` to restrict port to specified protocol. `tcp` and `udp` values are defined by the Specification,
-  Compose offers support for platform-specific protocol names.
+- `HOST` is `[IP:](port | range)` (optional). If it is not set, it binds to all network interfaces (`0.0.0.0`). 
+- `CONTAINER` is `port | range`.
+- `PROTOCOL` restricts ports to a specified protocol either `tcp` or `upd`(optional). Default is `tcp`.
 
-If host IP is not set, it binds to all network interfaces. Ports can be either a single
-value or a range. Host and container must use equivalent ranges.
+Ports can be either a single value or a range. `HOST` and `CONTAINER` must use equivalent ranges. 
 
-Either specify both ports (`HOST:CONTAINER`), or just the container port. In the latter case,
+You can either specify both ports (`HOST:CONTAINER`), or just the container port. In the latter case,
 the container runtime automatically allocates any unassigned port of the host.
 
 `HOST:CONTAINER` should always be specified as a (quoted) string, to avoid conflicts
 with [YAML base-60 float](https://yaml.org/type/float.html).
+
+IPv6 addresses can be enclosed in square brackets.
 
 Examples:
 
@@ -1502,13 +1502,15 @@ ports:
   - "49100:22"
   - "8000-9000:80"
   - "127.0.0.1:8001:8001"
-  - "127.0.0.1:5000-5010:5000-5010"
-  - "6060:6060/udp"
+  - "127.0.0.1:5000-5010:5000-5010"  
+  - "::1:6000:6000"   
+  - "[::1]:6001:6001" 
+  - "6060:6060/udp"    
 ```
 
 > [!NOTE]
 >
-> If Host IP mapping is not supported by a container engine, Compose rejects
+> If host IP mapping is not supported by a container engine, Compose rejects
 > the Compose file and ignores the specified host IP.
 
 #### Long syntax
@@ -1516,12 +1518,12 @@ ports:
 The long form syntax lets you configure additional fields that can't be
 expressed in the short form.
 
-- `target`: The container port
+- `target`: The container port.
 - `published`: The publicly exposed port. It is defined as a string and can be set as a range using syntax `start-end`. It means the actual port is assigned a remaining available port, within the set range.
-- `host_ip`: The Host IP mapping, unspecified means all network interfaces (`0.0.0.0`).
+- `host_ip`: The host IP mapping. If it is not set, it binds to all network interfaces (`0.0.0.0`).
 - `protocol`: The port protocol (`tcp` or `udp`). Defaults to `tcp`.
 - `app_protocol`: The application protocol (TCP/IP level 4 / OSI level 7) this port is used for. This is optional and can be used as a hint for Compose to offer richer behavior for protocols that it understands. Introduced in Docker Compose version [2.26.0](/manuals/compose/releases/release-notes.md#2260).
-- `mode`: `host`: For publishing a host port on each node, or `ingress` for a port to be load balanced. Defaults to `ingress`.
+- `mode`: Specifies how the port is published in a Swarm setup. If set to `host`, it publishes the port on every node in Swarm. If set to `ingress`, it allows load balancing across the nodes in Swarm. Defaults to `ingress`.
 - `name`: A human-readable name for the port, used to document it's usage within the service.
 
 ```yml
