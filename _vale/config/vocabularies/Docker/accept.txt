@@ -58,6 +58,8 @@ JetBrains
 Kerberos
 Kitematic
 Kubernetes
+Laravel
+Laradock
 Linux
 LinuxKit
 Logstash
@@ -94,6 +96,7 @@ VMware
 Wasm
 Windows
 WireMock
+Xdebug
 Zscaler
 Zsh
 [Aa]nonymized?
