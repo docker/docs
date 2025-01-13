@@ -58,6 +58,11 @@ versions:
 Docker Engine for Ubuntu is compatible with x86_64 (or amd64), armhf, arm64,
 s390x, and ppc64le (ppc64el) architectures.
 
+> [!NOTE]
+> 
+> Installation on Ubuntu derivative distributions, such as Linux Mint, is not officially
+> supported (though it may work).
+
 ### Uninstall old versions
 
 Before you can install Docker Engine, you need to uninstall any conflicting packages.
@@ -132,7 +137,7 @@ Docker from the repository.
    sudo apt-get update
    ```
 
-2. Install the Docker packages.
+3. Install the Docker packages.
 
    {{< tabs >}}
    {{< tab name="Latest" >}}
@@ -168,7 +173,7 @@ Docker from the repository.
    {{< /tab >}}
    {{< /tabs >}}
 
-3. Verify that the installation is successful by running the `hello-world` image:
+4. Verify that the installation is successful by running the `hello-world` image:
 
    ```console
    $ sudo docker run hello-world
