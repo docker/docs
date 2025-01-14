@@ -1,7 +1,8 @@
 ---
-description: Registry Access Management
-keywords: registry, access, management, permissions, Docker Business feature
+description: Control access to approved registries with Registry Access Management, ensuring secure Docker Desktop usage
+keywords: registry, access, management, permissions, Docker Business feature, security, admin
 title: Registry Access Management
+tags: [admin]
 aliases:
  - /desktop/hardened-desktop/registry-access-management/
  - /admin/organization/registry-access/

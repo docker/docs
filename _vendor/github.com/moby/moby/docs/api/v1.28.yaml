@@ -730,6 +730,7 @@ definitions:
               - "default"
               - "process"
               - "hyperv"
+              - ""
 
   Config:
     description: "Configuration for a container that is portable between hosts"
@@ -5401,7 +5402,7 @@ paths:
             type: "string"
             example: "OK"
           headers:
-            API-Version:
+            Api-Version:
               type: "string"
               description: "Max API Version the server supports"
             Docker-Experimental:
