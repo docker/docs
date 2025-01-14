@@ -37,18 +37,6 @@ markup:
     # Use custom CSS for syntax highlighting
     noClasses: false
 
-related:
-  includeNewer: true
-  indices:
-  - name: keywords
-    weight: 80
-  - name: fragmentrefs
-    applyFilter: false
-    type: fragments
-    weight: 80
-  threshold: 20
-  toLower: false
-
 build:
   # Generate hugo_stats.json - Tailwind uses this to detect classes
   buildStats:
@@ -113,14 +101,9 @@ params:
     google: GTM-WL2QLG5
     onetrust: 65425fb0-7b36-4317-9f10-7b3e08039af0
     vwo: 723167
-  algolia:
-    appid: 3XRLW0LZH9
-    apikey: 2899036ce47dba191b8dc1758e4bc6a4
-    indexname: docker
 
   # Docs repository URL
   repo: https://github.com/docker/docs
-  docs_url: https://docs.docker.com
 
   # === Example versions ===
   # The following parameters are used in various ways in content and templates.
@@ -136,8 +119,6 @@ params:
   docker_ce_version_prev: "27.4.1"
   # Latest Docker Compose version
   compose_version: "v2.32.3"
-  compose_file_v3: "3.8"
-  compose_file_v2: "2.4"
   # Latest BuildKit version
   buildkit_version: "0.16.0"
 
