@@ -4,7 +4,7 @@
 {{ $feature := index (where site.Data.summary.features "name" $featureName) 0 }}
 {{ if $feature }}
 <div class="flex flex-col p-4 bg-background-light dark:bg-background-dark rounded-none summary-bar"
-     style="border-left: 4px solid #677285; padding-left: 16px; padding-top: 8px; padding-bottom: 8px; margin-top: 8px; margin-bottom: 8px;">
+     style="border-left: 4px solid #677285; padding-left: 16px; padding-top: 1px; padding-bottom: 1px; margin-top: 1px; margin-bottom: 1px;">
 
     <div class="flex flex-col gap-0.5">
         {{ if $feature.subscriptionText }}

@@ -8,6 +8,8 @@ aliases:
 - /desktop/setup/install/msi/use-intune/
 ---
 
+{{< summary-bar feature_name="Intune" >}}
+
 Learn how to deploy Docker Desktop for Windows and Mac using Intune, Microsoft's cloud-based device management tool. 
 
 {{< tabs >}}

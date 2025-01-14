@@ -1,24 +1,27 @@
 # Summary bar icon library:
 # 1. Subscription:
-  #  - Label: Business                  | Icon: domain
-   # - Label: Team                      | Icon: groups
-   # - Label: Pro                       | Icon: person_add
-   # - Label: Personal                  | Icon: person
-   # - Label: Available to all          | Icon: public
+  #  - Label: Business                              | Icon: domain
+   # - Label: Team                                  | Icon: groups
+   # - Label: Pro                                   | Icon: person_add
+   # - Label: Personal                              | Icon: person
+   # - Label: Available to all                      | Icon: public
 # 2. Availability:
-  #  - Label: Experimental              | Icon: science
-  #  - Label: Beta                      | Icon: bolt
-  #  - Label: Early access              | Icon: rocket_launch
-  #  - Label: GA                        | Icon: check_circle
-  #  - Label: Retired                   | Icon: package_2
+  #  - Label: Experimental                          | Icon: science
+  #  - Label: Beta                                  | Icon: bolt
+  #  - Label: Early access                          | Icon: rocket_launch
+  #  - Label: GA                                    | Icon: check_circle
+  #  - Label: Retired                               | Icon: package_2
 # 3. Minimum version:
-  #  - Label: [version_number]          | Icon: browser_updated
+  #  - Label: [product] [version_number] and later  | Icon: browser_updated
 # 4. For:
-  #  - Label: Administrators            | Icon: admin_panel_settings
+  #  - Label: Administrators                        | Icon: admin_panel_settings
 
 # Instructions for adding summary bar: Create a new feature and fill out each
 # line as needed. In your markdown file, use the following syntax to call the
-# summary bar: {{< summary-bar feature_name="your feature name here" >}
+# summary bar: {{< summary-bar feature_name="your feature name here, case sensitive" >}}
+
+# To add an ADMIN ONLY summary bar: In your markdown file, use the following
+# syntax to call the summary bar: {{< summary-bar feature_name="General admin" >}}
 
 features:
   - name: Admin Console
@@ -28,8 +31,18 @@ features:
     availabilityText: Early access
     versionIcon: null
     versionText: null
-    forText: null
     forIcon: null
+    forText: null
+
+  - name: Allow list
+    subscriptionIcon: null
+    subscriptionText: null
+    availabilityIcon: null
+    availabilityText: null
+    versionIcon: null
+    versionText: null
+    forIcon: admin_panel_settings
+    forText: Administrators
 
   - name: Ask Gordon
     subscriptionIcon: null
@@ -38,8 +51,18 @@ features:
     availabilityText: Beta
     versionIcon: null
     versionText: null
-    forText: null
     forIcon: null
+    forText: null
+
+  - name: Build checks
+    subscriptionIcon: null
+    subscriptionText: null
+    availabilityIcon: bolt
+    availabilityText: Beta
+    versionIcon: browser_updated
+    versionText: Buildx 0.15.0 and later
+    forIcon: null
+    forText: null
 
   - name: Dev Environments
     subscriptionIcon: null
@@ -48,8 +71,18 @@ features:
     availabilityText: Beta
     versionIcon: null
     versionText: null
-    forText: null
     forIcon: null
+    forText: null
+
+  - name: docker compose alpha
+    subscriptionIcon: null
+    subscriptionText: null
+    availabilityIcon: science
+    availabilityText: Experimental
+    versionIcon: null
+    versionText: null
+    forIcon: null
+    forText: null
 
   - name: Docker Desktop CLI
     subscriptionIcon: null
@@ -57,9 +90,29 @@ features:
     availabilityIcon: bolt
     availabilityText: Beta
     versionIcon: browser_updated
-    versionText: 4.37 and later
-    forText: null
+    versionText: Docker Desktop 4.37 and later
     forIcon: null
+    forText: null
+
+  - name: Docker GitHub Copilot
+    subscriptionIcon: null
+    subscriptionText: null
+    availabilityIcon: rocket_launch
+    availabilityText: Early access
+    versionIcon: null
+    versionText: null
+    forIcon: null
+    forText: null
+
+  - name: Docker Scout health scores
+    subscriptionIcon: null
+    subscriptionText: null
+    availabilityIcon: bolt
+    availabilityText: Beta
+    versionIcon: null
+    versionText: null
+    forIcon: null
+    forText: null
 
   - name: Docker VMM
     subscriptionIcon: null
@@ -67,19 +120,89 @@ features:
     availabilityIcon: bolt
     availabilityText: Beta
     versionIcon: browser_updated
-    versionText: 4.35.0 and later
-    forText: null
+    versionText: Docker Desktop 4.35.0 and later
     forIcon: null
+    forText: null
 
-  - name: MSI Installer
+  - name: General admin
+    subscriptionIcon: null
+    subscriptionText: null
+    availabilityIcon: null
+    availabilityText: null
+    versionIcon: null
+    versionText: null
+    forIcon: admin_panel_settings
+    forText: Administrators
+
+  - name: Import builds
     subscriptionIcon: null
     subscriptionText: null
     availabilityIcon: bolt
     availabilityText: Beta
+    versionIcon: null
+    versionText: null
+    forIcon: null
+    forText: null
+
+  - name: Intune
+    subscriptionIcon: null
+    subscriptionText: null
+    availabilityIcon: null
+    availabilityText: null
+    versionIcon: null
+    versionText: null
+    forIcon: admin_panel_settings
+    forText: Administrators
+
+  - name: Jamf Pro
+    subscriptionIcon: null
+    subscriptionText: null
+    availabilityIcon: null
+    availabilityText: null
+    versionIcon: null
+    versionText: null
+    forIcon: admin_panel_settings
+    forText: Administrators
+
+  - name: MSI Installer
+    subscriptionIcon: null
+    subscriptionText: null
+    availabilityIcon: null
+    availabilityText: null
     versionIcon: browser_updated
-    versionText: 4.32 and later
+    versionText: Docker Desktop 4.32 and later
     forIcon: admin_panel_settings
     forText: Administrator
+
+  - name: PKG Installer
+    subscriptionIcon: null
+    subscriptionText: null
+    availabilityIcon: rocket_launch
+    availabilityText: Early access
+    versionIcon: browser_updated
+    versionText: Docker Desktop 4.36 and later
+    forIcon: admin_panel_settings
+    forText: Administrator
+
+  - name: Private marketplace
+    subscriptionIcon: null
+    subscriptionText: null
+    availabilityIcon: bolt
+    availabilityText: Beta
+    versionIcon: null
+    versionText: null
+    forIcon: admin_panel_settings
+    forText: Administrator
+
+  - name: Remediation with Docker Scout
+    subscriptionIcon: null
+    subscriptionText: null
+    availabilityIcon: bolt
+    availabilityText: Beta
+    versionIcon: null
+    versionText: null
+    forIcon: null
+    forText: null
 
   - name: USB/IP support
     subscriptionIcon: null
@@ -87,9 +210,9 @@ features:
     availabilityIcon: null
     availabilityText: null
     versionIcon: browser_updated
-    versionText: 4.35.0 and later
-    forText: null
+    versionText: Docker Desktop 4.35.0 and later
     forIcon: null
+    forText: null
 
   - name: Wasm workloads
     subscriptionIcon: null
@@ -98,5 +221,5 @@ features:
     availabilityText: Beta
     versionIcon: null
     versionText: null
-    forText: null
     forIcon: null
+    forText: null
