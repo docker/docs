@@ -73,7 +73,6 @@ Error: unlinkat /Users/<USER_HOME>/Library/Containers/com.docker.docker/.com.app
 The operation not permitted error is reported either on the file `.com.apple.containermanagerd.metadata.plist` or on the parent directory `/Users/<USER_HOME>/Library/Containers/com.docker.docker/`. This error can be ignored as you have successfully uninstalled Docker Desktop.
 You can remove the directory `/Users/<USER_HOME>/Library/Containers/com.docker.docker/` later by allowing **Full Disk Access** to the terminal application you are using (**System Settings** > **Privacy & Security** > **Full Disk Access**).
 
-
 After uninstalling Docker Desktop, there may be some residual files left behind which you can remove:
 
 ```console
