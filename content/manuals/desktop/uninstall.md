@@ -63,15 +63,15 @@ You can also uninstall Docker Desktop from the CLI. Run:
 $ /Applications/Docker.app/Contents/MacOS/uninstall
 ```
 
-You may encounter the below error when uninstalling Docker Desktop using uninstall command.
+You may encounter the following error when uninstalling Docker Desktop using the uninstall command.
 ```console
 $ /Applications/Docker.app/Contents/MacOS/uninstall
 Password:
 Uninstalling Docker Desktop...
 Error: unlinkat /Users/<USER_HOME>/Library/Containers/com.docker.docker/.com.apple.containermanagerd.metadata.plist: operation not permitted
 ```
-The operation not permitted error is reported either on the file `.com.apple.containermanagerd.metadata.plist` or on the parent directory `/Users/<USER_HOME>/Library/Containers/com.docker.docker/`. This error can be ignored. Docker Desktop uninstall at this point has completed successfully.
-You can remove the directory `/Users/<USER_HOME>/Library/Containers/com.docker.docker/` later by allowing "Full Disk Access" to the terminal application you are using (System Settings --> Privacy & Security --> Full Disk Access").
+The operation not permitted error is reported either on the file `.com.apple.containermanagerd.metadata.plist` or on the parent directory `/Users/<USER_HOME>/Library/Containers/com.docker.docker/`. This error can be ignored as you have successfully uninstalled Docker Desktop.
+You can remove the directory `/Users/<USER_HOME>/Library/Containers/com.docker.docker/` later by allowing **Full Disk Access** to the terminal application you are using (**System Settings** > **Privacy & Security** > **Full Disk Access**).
 
 
 After uninstalling Docker Desktop, there may be some residual files left behind which you can remove:
