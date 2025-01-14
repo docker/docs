@@ -1,4 +1,4 @@
-# github.com/moby/moby v27.4.0+incompatible
+# github.com/moby/moby v27.5.0+incompatible
 # github.com/moby/buildkit v0.18.1
 # github.com/docker/buildx v0.19.2
 # github.com/docker/cli v27.4.0+incompatible
