@@ -2,6 +2,7 @@
 title: Administration
 description: Discover manuals on administration for accounts, organizations, and companies.
 keywords: admin, administration, company, organization, Admin Console, user accounts, account management
+weight: 10
 params:
   sidebar:
     group: Platform
