@@ -107,8 +107,8 @@ params:
   docs_url: https://docs.docker.com
 
   latest_engine_api_version: "1.47"
-  docker_ce_version: "27.4.0"
-  docker_ce_version_prev: "27.3.1"
+  docker_ce_version: "27.5.0"
+  docker_ce_version_prev: "27.4.1"
   compose_version: "v2.32.3"
   compose_file_v3: "3.8"
   compose_file_v2: "2.4"
