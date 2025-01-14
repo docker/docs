@@ -7,7 +7,7 @@ weight: 60
 params:
   sidebar:
     group: Platform
-tags: [Release notes]
+tags: [Release notes, admin]
 ---
 
 This page provides details on new features, enhancements, known issues, and bug fixes across Docker Home, the Admin Console, billing, security, and subscription functionalities.
@@ -25,6 +25,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
   - [Use Desktop Settings Management via the Docker Admin Console](/manuals/security/for-admins/hardened-desktop/settings-management/configure-admin-console.md) (Early Access).
 
 ### Bug fixes and enhancements
+
 - Enhance Container Isolation (ECI) has been improved to:
   - Permit admins to [turn off Docker socket mount restrictions](/manuals/security/for-admins/hardened-desktop/enhanced-container-isolation/config.md#allowing-all-containers-to-mount-the-docker-socket).
   - Support wildcard tags when using the [`allowedDerivedImages` setting](/manuals/security/for-admins/hardened-desktop/enhanced-container-isolation/config.md#docker-socket-mount-permissions-for-derived-images).
