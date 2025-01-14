@@ -10,7 +10,7 @@ params:
 tags: [Release notes]
 ---
 
-This page contains information about the new features, improvements, known issues, and bug fixes in Docker Home, the Admin Console, billing, security, and subscription features.
+This page provides details on new features, enhancements, known issues, and bug fixes across Docker Home, the Admin Console, billing, security, and subscription functionalities.
 
 Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projects/51/views/1?filterQuery=) to see what's coming next.
 
