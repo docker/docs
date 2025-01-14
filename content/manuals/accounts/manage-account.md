@@ -27,7 +27,7 @@ To update your account information, select the arrow icon. You can edit the foll
 - Company
 - Location
 - Website
-- Gravatar email
+- Gravatar email: To add an avatar to your Docker account, create a [Gravatar account](https://gravatar.com/) and create your avatar. Next, add your Gravatar email to your Docker account settings. It may take some time for your avatar to update in Docker.
 
 This information is visible on your account profile in Docker Hub.
 
