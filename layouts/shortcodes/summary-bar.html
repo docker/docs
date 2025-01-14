@@ -7,6 +7,7 @@
      style="border-left: 4px solid #677285; padding-left: 16px; padding-top: 8px; padding-bottom: 8px; margin-top: 8px; margin-bottom: 8px;">
 
     <div class="flex flex-col gap-0.5">
+        {{ if $feature.subscriptionText }}
         <div class="flex items-center gap-1">
             <span class="text-black dark:text-white font-bold">Subscription:</span>
             <span class="text-black dark:text-white">{{ $feature.subscriptionText }}</span>
@@ -14,7 +15,9 @@
                 {{ $feature.subscriptionIcon }}
             </span>
         </div>
+        {{ end }}
 
+        {{ if $feature.availabilityText }}
         <div class="flex items-center gap-1">
             <span class="text-black dark:text-white font-bold">Availability:</span>
             <span class="text-black dark:text-white">{{ $feature.availabilityText }}</span>
@@ -22,6 +25,7 @@
                 {{ $feature.availabilityIcon }}
             </span>
         </div>
+        {{ end }}
 
         {{ if $feature.versionText }}
         <div class="flex items-center gap-1">
@@ -29,6 +33,16 @@
             <span class="text-black dark:text-white">{{ $feature.versionText }}</span>
             <span class="material-symbols-rounded text-black dark:text-white">
                 {{ $feature.versionIcon }}
+            </span>
+        </div>
+        {{ end }}
+
+        {{ if $feature.forText }}
+        <div class="flex items-center gap-1">
+            <span class="text-black dark:text-white font-bold">For:</span>
+            <span class="text-black dark:text-white">{{ $feature.forText }}</span>
+            <span class="material-symbols-rounded text-black dark:text-white">
+                {{ $feature.forIcon }}
             </span>
         </div>
         {{ end }}

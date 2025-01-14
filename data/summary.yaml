@@ -12,7 +12,9 @@
   #  - Label: GA                        | Icon: check_circle
   #  - Label: Retired                   | Icon: package_2
 # 3. Minimum version:
-  #  - Label: Version [version_number]  | Icon: browser_updated
+  #  - Label: [version_number]          | Icon: browser_updated
+# 4. For:
+  #  - Label: Administrators            | Icon: admin_panel_settings
 
 # Instructions for adding summary bar: Create a new feature and fill out each
 # line as needed. In your markdown file, use the following syntax to call the
@@ -26,3 +28,75 @@ features:
     availabilityText: Early access
     versionIcon: null
     versionText: null
+    forText: null
+    forIcon: null
+
+  - name: Ask Gordon
+    subscriptionIcon: null
+    subscriptionText: null
+    availabilityIcon: bolt
+    availabilityText: Beta
+    versionIcon: null
+    versionText: null
+    forText: null
+    forIcon: null
+
+  - name: Dev Environments
+    subscriptionIcon: null
+    subscriptionText: null
+    availabilityIcon: bolt
+    availabilityText: Beta
+    versionIcon: null
+    versionText: null
+    forText: null
+    forIcon: null
+
+  - name: Docker Desktop CLI
+    subscriptionIcon: null
+    subscriptionText: null
+    availabilityIcon: bolt
+    availabilityText: Beta
+    versionIcon: browser_updated
+    versionText: 4.37 and later
+    forText: null
+    forIcon: null
+
+  - name: Docker VMM
+    subscriptionIcon: null
+    subscriptionText: null
+    availabilityIcon: bolt
+    availabilityText: Beta
+    versionIcon: browser_updated
+    versionText: 4.35.0 and later
+    forText: null
+    forIcon: null
+
+  - name: MSI Installer
+    subscriptionIcon: null
+    subscriptionText: null
+    availabilityIcon: bolt
+    availabilityText: Beta
+    versionIcon: browser_updated
+    versionText: 4.32 and later
+    forIcon: admin_panel_settings
+    forText: Administrator
+
+  - name: USB/IP support
+    subscriptionIcon: null
+    subscriptionText: null
+    availabilityIcon: null
+    availabilityText: null
+    versionIcon: browser_updated
+    versionText: 4.35.0 and later
+    forText: null
+    forIcon: null
+
+  - name: Wasm workloads
+    subscriptionIcon: null
+    subscriptionText: null
+    availabilityIcon: bolt
+    availabilityText: Beta
+    versionIcon: null
+    versionText: null
+    forText: null
+    forIcon: null
