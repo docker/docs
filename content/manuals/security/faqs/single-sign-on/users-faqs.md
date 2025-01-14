@@ -1,7 +1,7 @@
 ---
 description: Single sign-on user management FAQs
 keywords: Docker, Docker Hub, SSO FAQs, single sign-on
-title: Manage users
+title: FAQs on SSO and managing users
 tags: [FAQ]
 aliases:
 - /single-sign-on/users-faqs/
