@@ -15,7 +15,7 @@ The Kubernetes server runs as a single-node cluster within a Docker container. T
 
 Kubernetes on Docker Desktop runs alongside other workloads, including Swarm services and standalone containers.
 
-## What happens when I enable Kubernetes in Docker Desktop?
+## What happens when I enable Kubernetes in Docker Desktop?
 
 When you enable Kubernetes in Docker Desktop, the following actions are triggered in the Docker Desktop backend and VM:
 
