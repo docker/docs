@@ -42,9 +42,7 @@ Docker Desktop settings.
 
 ### Import builds
 
-{{% experimental title="Beta feature" %}}
-Import builds is currently in [Beta](../../release-lifecycle.md#Beta).
-{{% /experimental %}}
+{{< summary-bar feature_name="Import builds" >}}
 
 The **Import builds** button lets you import build records for builds by other
 people, or builds in a CI environment. When you've imported a build record, it

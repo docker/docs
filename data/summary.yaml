@@ -1,3 +1,6 @@
+Activity logs:
+  subscription: [Team, Business]
+  for: Administrators
 Admin Console:
   subscription: [Business]
   availability: Early access
@@ -21,31 +24,39 @@ Docker GitHub Copilot:
 Docker Scout GitHub:
   availability: Beta
 Docker Scout health scores:
+  subscription: [Pro, Team, Business]
   availability: Beta
 General admin:
   for: Administrators
 Import builds:
   availability: Beta
   requires: Docker Desktop 4.31 and later
+Insights:
+  subscription: [Business]
+  for: Administrators
 Intune:
   for: Administrators
 Jamf Pro:
   for: Administrators
 MSI Installer:
   availability: Docker Desktop 4.32 and later
-  for: Administrator
+  for: Administrators
 OATs:
   subscription: [Team, Business]
   availability: Beta
-PKG Installer:
+PKG installer:
+  subscription: [Business]
   availability: Early access
   requires: Docker Desktop 4.36 and later
-  for: Administrator
+  for: Administrators
 Private marketplace:
   availability: Beta
-  for: Administrator
+  for: Administrators
 Remediation with Docker Scout:
   availability: Beta
+Registry access management:
+  subscription: [Business]
+  for: Administrators
 SSO:
   subscription: [Business]
   for: Administrators
