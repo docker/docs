@@ -154,6 +154,7 @@ Zsh
 [Vv]irtiofs
 [Vv]irtualize
 [Ww]alkthrough
+bootup
 cgroup
 config
 containerd

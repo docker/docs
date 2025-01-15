@@ -23,6 +23,7 @@ exceptions:
   - CIDR
   - CISA
   - CLI
+  - CMD
   - CNCF
   - CORS
   - CPU
