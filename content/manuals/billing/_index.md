@@ -3,6 +3,7 @@ title: Billing and payments
 linkTitle: Billing
 description: Discover information on billing and payment processes for Docker subscriptions.
 keywords: billing, invoice, payment, subscription
+weight: 20
 params:
   sidebar:
     group: Platform

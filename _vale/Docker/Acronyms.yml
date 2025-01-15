@@ -75,6 +75,7 @@ exceptions:
   - MAC
   - MDM
   - MDN
+  - MSI
   - NAT
   - NET
   - NFS
