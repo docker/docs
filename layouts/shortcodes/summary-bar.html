@@ -10,10 +10,12 @@
         {{ if $feature.subscriptionText }}
         <div class="flex items-center gap-1">
             <span class="text-black dark:text-white font-bold">Subscription:</span>
-            <span class="text-black dark:text-white">{{ $feature.subscriptionText }}</span>
+            {{ range $i, $text := $feature.subscriptionText }}
+            <span class="text-black dark:text-white">{{ $text }}</span>
             <span class="material-symbols-rounded text-black dark:text-white">
-                {{ $feature.subscriptionIcon }}
+                {{ index $feature.subscriptionIcon $i }}
             </span>
+            {{ end }}
         </div>
         {{ end }}
 

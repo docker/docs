@@ -25,14 +25,16 @@
 
 features:
   - name: Admin Console
-    subscriptionIcon: domain
-    subscriptionText: Business
+    subscriptionIcon:
+      - domain
+    subscriptionText:
+      - Business
     availabilityIcon: rocket_launch
     availabilityText: Early access
     versionIcon: null
     versionText: null
-    forIcon: null
-    forText: null
+    forIcon: admin_panel_settings
+    forText: Administrators
 
   - name: Allow list
     subscriptionIcon: null
@@ -104,6 +106,16 @@ features:
     forIcon: null
     forText: null
 
+  - name: Docker Scout GitHub
+    subscriptionIcon: null
+    subscriptionText: null
+    availabilityIcon: bolt
+    availabilityText: Beta
+    versionIcon: null
+    versionText: null
+    forIcon: null
+    forText: null
+
   - name: Docker Scout health scores
     subscriptionIcon: null
     subscriptionText: null
@@ -139,8 +151,8 @@ features:
     subscriptionText: null
     availabilityIcon: bolt
     availabilityText: Beta
-    versionIcon: null
-    versionText: null
+    versionIcon: browser_updated
+    versionText: Docker Desktop 4.31 and later
     forIcon: null
     forText: null
 
@@ -174,6 +186,20 @@ features:
     forIcon: admin_panel_settings
     forText: Administrator
 
+  - name: OATs
+    subscriptionIcon:
+      - group
+      - domain
+    subscriptionText:
+      - Team
+      - Business
+    availabilityIcon: bolt
+    availabilityText: Beta
+    versionIcon: null
+    versionText: null
+    forIcon: null
+    forText: null
+
   - name: PKG Installer
     subscriptionIcon: null
     subscriptionText: null
@@ -204,11 +230,33 @@ features:
     forIcon: null
     forText: null
 
+  - name: SSO
+    subscriptionIcon:
+      - domain
+    subscriptionText:
+      - Business
+    availabilityIcon: null
+    availabilityText: null
+    versionIcon: null
+    versionText: null
+    forIcon: admin_panel_settings
+    forText: Administrators
+
   - name: USB/IP support
     subscriptionIcon: null
     subscriptionText: null
     availabilityIcon: null
     availabilityText: null
+    versionIcon: browser_updated
+    versionText: Docker Desktop 4.35.0 and later
+    forIcon: null
+    forText: null
+
+  - name: VMM
+    subscriptionIcon: null
+    subscriptionText: null
+    availabilityIcon: bolt
+    availabilityText: Beta
     versionIcon: browser_updated
     versionText: Docker Desktop 4.35.0 and later
     forIcon: null
