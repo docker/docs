@@ -1,53 +1,77 @@
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet">
-
 {{ $featureName := .Get "feature_name" }}
-{{ $feature := index (where site.Data.summary.features "name" $featureName) 0 }}
+{{ $feature := index site.Data.summary $featureName }}
+{{ if not $feature }}
+  {{ errorf "[summary-bar] invalid feature: %s %v" $featureName .Position }}
+{{ end }}
 {{ if $feature }}
-<div class="flex flex-col p-4 bg-background-light dark:bg-background-dark rounded-none summary-bar"
-     style="border-left: 4px solid #677285; padding-left: 16px; padding-top: 1px; padding-bottom: 1px; margin-top: 1px; margin-bottom: 1px;">
+{{ $subscriptionIcons := dict
+  "Business" "domain"
+  "Team" "groups"
+  "Pro" "person_add"
+  "Personal" "person"
+  "Available to all" "public"
+}}
+{{ $availabilityIcons := dict
+  "Experimental" "science"
+  "Beta" "bolt"
+  "Early access" "rocket_launch"
+  "GA" "check_circle"
+  "Retired" "package_2"
+}}
+{{ $requiresIcon := "browser_updated" }}
+{{ $forIcon := "admin_panel_settings" }}
 
-    <div class="flex flex-col gap-0.5">
-        {{ if $feature.subscriptionText }}
-        <div class="flex items-center gap-1">
-            <span class="text-black dark:text-white font-bold">Subscription:</span>
-            {{ range $i, $text := $feature.subscriptionText }}
-            <span class="text-black dark:text-white">{{ $text }}</span>
-            <span class="material-symbols-rounded text-black dark:text-white">
-                {{ index $feature.subscriptionIcon $i }}
-            </span>
-            {{ end }}
-        </div>
-        {{ end }}
+<div class="flex flex-col bg-background-light dark:bg-background-dark border-l-4 border-gray-light-200 px-4 py-1 my-1 not-prose">
+  {{ with $feature.subscription }}
+  <div class="flex items-center gap-1">
+      <span class="font-bold">Subscription:</span>
+      {{ range . }}
+      <span>{{ . }}</span>
+      <span class="icon-svg">
+          {{ $icon := index $subscriptionIcons . }}
+          {{ if $icon }}
+            {{ partial "icon" $icon }}
+          {{ else }}
+            {{ partial "icon" "default_icon" }}
+          {{ end }}
+      </span>
+      {{ end }}
+  </div>
+  {{ end }}
 
-        {{ if $feature.availabilityText }}
-        <div class="flex items-center gap-1">
-            <span class="text-black dark:text-white font-bold">Availability:</span>
-            <span class="text-black dark:text-white">{{ $feature.availabilityText }}</span>
-            <span class="material-symbols-rounded text-black dark:text-white">
-                {{ $feature.availabilityIcon }}
-            </span>
-        </div>
-        {{ end }}
+  {{ with $feature.availability }}
+  <div class="flex items-center gap-1">
+      <span class="font-bold">Availability:</span>
+      <span>{{ . }}</span>
+      <span class="icon-svg">
+          {{ $icon := index $availabilityIcons . }}
+          {{ if $icon }}
+            {{ partial "icon" $icon }}
+          {{ else }}
+            {{ partial "icon" "default_icon" }}
+          {{ end }}
+      </span>
+  </div>
+  {{ end }}
 
-        {{ if $feature.versionText }}
-        <div class="flex items-center gap-1">
-            <span class="text-black dark:text-white font-bold">Minimum version:</span>
-            <span class="text-black dark:text-white">{{ $feature.versionText }}</span>
-            <span class="material-symbols-rounded text-black dark:text-white">
-                {{ $feature.versionIcon }}
-            </span>
-        </div>
-        {{ end }}
+  {{ with $feature.requires }}
+  <div class="flex items-center gap-1">
+      <span class="font-bold">Requires:</span>
+      <span>{{ . }}</span>
+      <span class="icon-svg">
+          {{ partial "icon" $requiresIcon }}
+      </span>
+  </div>
+  {{ end }}
 
-        {{ if $feature.forText }}
-        <div class="flex items-center gap-1">
-            <span class="text-black dark:text-white font-bold">For:</span>
-            <span class="text-black dark:text-white">{{ $feature.forText }}</span>
-            <span class="material-symbols-rounded text-black dark:text-white">
-                {{ $feature.forIcon }}
-            </span>
-        </div>
-        {{ end }}
-    </div>
+  {{ with $feature.for }}
+  <div class="flex items-center gap-1">
+      <span class="font-bold">For:</span>
+      <span>{{ . }}</span>
+      <span class="icon-svg">
+          {{ partial "icon" $forIcon }}
+      </span>
+  </div>
+  {{ end }}
 </div>
 {{ end }}
