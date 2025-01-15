@@ -62,7 +62,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 ### New
 
-- Administrations can now view [organization insights](/manuals/admin/organization/insights.md) (Early Access).
+- Administrators can now view [organization insights](/manuals/admin/organization/insights.md) (Early Access).
 
 ## 2024-07-17
 
