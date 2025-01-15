@@ -28,6 +28,10 @@ Key benefits include:
 
 {{< include "admin-early-access.md" >}}
 
+To access Insights, you must contact your Customer Success Manager to have the
+feature enabled. Once the feature is enabled, access Insights using the following
+steps:
+
 1. Go to the [Admin Console](https://app.docker.com/admin/) and sign in to an
    account that is an organization owner.
 2. Select your company on the **Choose profile** page.

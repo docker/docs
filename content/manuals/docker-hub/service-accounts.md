@@ -9,10 +9,11 @@ weight: 50
 
 > [!IMPORTANT]
 >
-> As of December 10, 2024, service accounts are no longer available. Existing
-> Service Account agreements will be honored until their current term expires,
-> but new purchases or renewals of service accounts no longer available and
-> customers must renew under a new subscription plan.
+> As of December 10, 2024, Enhanced Service Account add-ons are no longer
+> available. Existing Service Account agreements will be honored until their
+> current term expires, but new purchases or renewals of Enhanced Service
+> Account add-ons are no longer available and customers must renew under a new
+> subscription plan.
 >
 > Docker recommends transitioning to [Organization Access Tokens
 > (OATs)](../security/for-admins/access-tokens.md), which can provide similar

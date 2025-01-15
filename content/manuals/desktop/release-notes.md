@@ -23,11 +23,33 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projects/51/views/1?filterQuery=) to see what's coming next.
 
+> [!WARNING]
+>
+> If you're experiencing malware detection issues on Mac, follow the steps documented in [docker/for-mac#7527](https://github.com/docker/for-mac/issues/7527).
+
+## 4.37.2
+
+{{< release-date date="2025-01-09" >}}
+
+{{< desktop-install-v2 mac=true version="4.37.2" build_path="/179585/" >}}
+
+### Bug fixes and enhancements
+
+#### For Mac
+
+- Prevents a bug that caused Docker Desktop to not update `com.docker.vmnetd` or `com.docker.socket` to newer versions.
+
+### Known issues
+
+#### For Mac
+
+- If you’re seeing a security popup about malware on `com.docker.vmnetd` or `com.docker.socket`, follow the steps documented in [docker/for-mac#7527](https://github.com/docker/for-mac/issues/7527).
+
 ## 4.37.1
 
 {{< release-date date="2024-12-17" >}}
 
-{{< desktop-install-v2 all=true beta_win_arm=true version="4.37.1" build_path="/178498/" >}}
+{{< desktop-install-v2 all=true beta_win_arm=true version="4.37.1" build_path="/178610/" >}}
 
 ### Bug fixes and enhancements
 
@@ -35,6 +57,12 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 - Fixed an issue that caused the AI Catalog in Docker Hub to be unavailable in Docker Desktop.
 - Fixed an issue that caused Docker Desktop to panic with `index out of range [0] with length 0` when using [Enhanced Container Isolation](/manuals/security/for-admins/hardened-desktop/enhanced-container-isolation/_index.md).
+
+### Known issues
+
+#### For Mac
+
+- If you’re seeing a security popup about a malware on `com.docker.vmnetd` or `com.docker.socket`, follow the steps documented in [docker/for-mac#7527](https://github.com/docker/for-mac/issues/7527).
 
 ## 4.37.0
 
@@ -76,7 +104,13 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 ### Known issues
 
+#### For all platforms
+
 - Kubernetes cluster may not start if **Registry Access Manager** is enabled. As a workaround, add `registry.k8s.io` and `<geo>-docker.pkg.dev` to **Registry Access Management** policies.
+
+#### For Mac
+
+- If you’re seeing a security popup about a malware on `com.docker.vmnetd` or `com.docker.socket`, follow the steps documented in [docker/for-mac#7527](https://github.com/docker/for-mac/issues/7527).
 
 ### Deprecation
 
@@ -84,6 +118,24 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 - QEMU (Legacy) as a VMM on Apple Silicon will be removed in a future version. It is recommended that you switch to the Apple Virtualization Framework for increased performance and stability. If you encounter an issue, [contact Docker Support](https://www.docker.com/support/) or [file a GitHub issue](https://github.com/docker/for-mac/issues).
 - osxfs (Legacy) will be removed in a future version. It is recommended that you switch to VirtioFS for increased performance. If you encounter an issue, [contact Docker Support](https://www.docker.com/support/) or [file a GitHub issue](https://github.com/docker/for-mac/issues).
+
+## 4.36.1
+
+{{< release-date date="2025-01-09" >}}
+
+{{< desktop-install-v2 mac=true version="4.36.1" build_path="/179655/" >}}
+
+### Bug fixes and enhancements
+
+#### For Mac
+
+- Prevents a bug that caused Docker Desktop to not update `com.docker.vmnetd` or `com.docker.socket` to newer versions.
+
+### Known issues
+
+#### For Mac
+
+- If you’re seeing a security popup about malware on `com.docker.vmnetd` or `com.docker.socket`, follow the steps documented in [docker/for-mac#7527](https://github.com/docker/for-mac/issues/7527).
 
 ## 4.36.0
 
@@ -139,6 +191,24 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 - Fixed a bug preventing UDP port 53 to be bound.
 - Fixed a bug where Windows daemon options were overwritten at startup.
+
+## 4.35.2
+
+{{< release-date date="2025-01-09" >}}
+
+{{< desktop-install-v2 mac=true version="4.35.2" build_path="/179656/" >}}
+
+### Bug fixes and enhancements
+
+#### For Mac
+
+- Prevents a bug that caused Docker Desktop to not update `com.docker.vmnetd` or `com.docker.socket` to newer versions.
+
+### Known issues
+
+#### For Mac
+
+- If you’re seeing a security popup about malware on `com.docker.vmnetd` or `com.docker.socket`, follow the steps documented in [docker/for-mac#7527](https://github.com/docker/for-mac/issues/7527).
 
 ## 4.35.1
 
@@ -225,6 +295,24 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 #### For Windows
 
 - Users with versions 4.14.0 and earlier could encounter issues using the in-app update. To update to the latest version, download and install the latest Docker Desktop from this page.
+
+## 4.34.4
+
+{{< release-date date="2025-01-09" >}}
+
+{{< desktop-install-v2 mac=true version="4.34.4" build_path="/179671/" >}}
+
+### Bug fixes and enhancements
+
+#### For Mac
+
+- Prevents a bug that caused Docker Desktop to not update `com.docker.vmnetd` or `com.docker.socket` to newer versions.
+
+### Known issues
+
+#### For Mac
+
+- If you’re seeing a security popup about malware on `com.docker.vmnetd` or `com.docker.socket`, follow the steps documented in [docker/for-mac#7527](https://github.com/docker/for-mac/issues/7527).
 
 ## 4.34.3
 
@@ -333,6 +421,24 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 - When [Enhanced Container Isolation (ECI)](/manuals/security/for-admins/hardened-desktop/enhanced-container-isolation/_index.md) is enabled, Docker Desktop may not enter Resource Saver mode. This will be fixed in a future Docker Desktop release.
 - The new [ECI Docker socket mount permissions for derived images](/manuals/security/for-admins/hardened-desktop/enhanced-container-isolation/config.md#docker-socket-mount-permissions-for-derived-images) feature does not yet work when Docker Desktop is configured with the  **Use containerd for pulling and storing images**. This will be fixed in the next Docker Desktop release.
 
+## 4.33.2
+
+{{< release-date date="2025-01-09" >}}
+
+{{< desktop-install-v2 mac=true version="4.33.2" build_path="/179689/" >}}
+
+### Bug fixes and enhancements
+
+#### For Mac
+
+- Prevents a bug that caused Docker Desktop to not update `com.docker.vmnetd` or `com.docker.socket` to newer versions.
+
+### Known issues
+
+#### For Mac
+
+- If you’re seeing a security popup about malware on `com.docker.vmnetd` or `com.docker.socket`, follow the steps documented in [docker/for-mac#7527](https://github.com/docker/for-mac/issues/7527).
+
 ## 4.33.1
 
 {{< release-date date="2024-07-31" >}}
@@ -418,6 +524,24 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 - Docker Desktop fails to start with WSL pre-releases `v2.3.11.0` and `v2.3.12.0`, which is included in Windows 11 Insider. To fix this ensure WSL `v2.2.4.0` is installed.
 For more information, see [microsoft/WSL#11794](https://github.com/microsoft/WSL/issues/11794). This affects Docker Desktop 4.33.0 and earlier.
+
+## 4.32.1
+
+{{< release-date date="2025-01-09" >}}
+
+{{< desktop-install-v2 mac=true version="4.32.1" build_path="/179691/" >}}
+
+### Bug fixes and enhancements
+
+#### For Mac
+
+- Prevents a bug that caused Docker Desktop to not update `com.docker.vmnetd` or `com.docker.socket` to newer versions.
+
+### Known issues
+
+#### For Mac
+
+- If you’re seeing a security popup about malware on `com.docker.vmnetd` or `com.docker.socket`, follow the steps documented in [docker/for-mac#7527](https://github.com/docker/for-mac/issues/7527).
 
 ## 4.32.0
 
@@ -591,6 +715,8 @@ For more information, see [microsoft/WSL#11794](https://github.com/microsoft/WSL
 
 {{< release-date date="2024-05-06" >}}
 
+{{< desktop-install all=true beta_win_arm=true version="4.30.0" build_path="/149282/" >}}
+
 ### New
 
 #### For all platforms
@@ -670,6 +796,8 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 ## 4.29.0
 
 {{< release-date date="2024-04-08" >}}
+
+{{< desktop-install all=true beta_win_arm=true version="4.29.0" build_path="/145265/" >}}
 
 ### New
 

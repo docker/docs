@@ -90,8 +90,9 @@ jobs:
           driver-opts: image=${{ env.SETUP_BUILDKIT_IMAGE }}
       -
         name: Validate
-        uses: docker/bake-action@v5
+        uses: docker/bake-action@v6
         with:
+          source: .
           files: |
             docker-bake.hcl
           targets: validate-upstream

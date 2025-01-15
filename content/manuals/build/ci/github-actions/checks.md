@@ -78,9 +78,6 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
@@ -91,12 +88,12 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Validate build configuration
-        uses: docker/bake-action@v5
+        uses: docker/bake-action@v6
         with:
           targets: validate-build
 
       - name: Build
-        uses: docker/bake-action@v5
+        uses: docker/bake-action@v6
         with:
           targets: build
           push: true

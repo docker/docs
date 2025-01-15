@@ -2,6 +2,7 @@
 description: Automated tests
 keywords: Automated, testing, repository
 title: Automated repository tests
+weight: 30
 aliases:
 - /docker-hub/builds/automated-testing/
 ---
@@ -36,7 +37,7 @@ services:
     command: run_tests.sh
 ```
 
-The example above builds the repository, and runs the `run_tests.sh` file inside
+The previous example builds the repository, and runs the `run_tests.sh` file inside
 a container using the built image.
 
 You can define any number of linked services in this file. The only requirement
@@ -58,18 +59,18 @@ to further customize your test behavior.
 
 > [!NOTE]
 >
-> If you enable Automated builds, they also run any tests defined
+> If you enable automated builds, they also run any tests defined
 in the `test.yml` files.
 
-## Enable Automated tests on a repository
+## Enable automated tests on a repository
 
 To enable testing on a source code repository, you must first create an
 associated build-repository in Docker Hub. Your `Autotest` settings are
 configured on the same page as [automated builds](index.md), however
-you do not need to enable Autobuilds to use `Autotest`. Autobuild is enabled per
+you do not need to enable autobuilds to use autotest. Autobuild is enabled per
 branch or tag, and you do not need to enable it at all.
 
-Only branches that are configured to use Autobuild push images to the
+Only branches that are configured to use autobuild push images to the
 Docker repository, regardless of the Autotest settings.
 
 1. Sign in to Docker Hub and select **Repositories**.
@@ -80,7 +81,7 @@ Docker repository, regardless of the Autotest settings.
 
 4. Select **Configure automated builds**.
 
-5. Configure the automated build settings as explained in [Automated Builds](index.md).
+5. Configure the automated build settings as explained in [Automated builds](index.md).
 
     At minimum you must configure:
 

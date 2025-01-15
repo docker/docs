@@ -71,10 +71,8 @@ You need to first remove the previous version and then download the new package 
 
 ```console
 $ sudo dnf remove docker-desktop
-$ sudo dnf install ./docker-desktop-<arch>.rpm
+$ sudo dnf install ./docker-desktop-x86_64.rpm
 ```
-
-Don't forget to substitute `<arch>` with the architecture you want.
 
 ## Next steps
 

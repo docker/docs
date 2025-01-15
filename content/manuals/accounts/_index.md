@@ -2,6 +2,7 @@
 title: Docker accounts
 description: Learn how to create and manage your Docker account.
 keywords: accounts, docker ID, account management, account settings, docker account, docker home
+weight: 30
 params:
   sidebar:
     group: Platform
