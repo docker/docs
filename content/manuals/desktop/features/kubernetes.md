@@ -24,14 +24,14 @@ When you enable Kubernetes in Docker Desktop, the following actions are triggere
 - Cluster bootup
 - Installation of additional controllers for networking and storage
 
-Turning on or off the Kubernetes server in Docker Desktop does not affect your other workloads.
+Turning the Kubernetes server on or off in Docker Desktop does not affect your other workloads.
 
 ## Install and turn on Kubernetes
 
 1. Open the Docker Desktop Dashboard and navigate to **Settings**.
 2. Select the **Kubernetes** tab. 
 3. Select the **Enable Kubernetes** checkbox.
-4. Select **Apply & Restart** to save the settings and then select **Install** to confirm. This instantiates images required to run the Kubernetes server as containers, and installs the `kubectl` command-line tool on your system at `/usr/local/bin/kubectl` (Mac) or `C:\Program Files\Docker\Docker\Resources\bin\kubectl.exe` (Windows).
+4. Select **Apply & Restart** to save the settings and then select **Install** to confirm. This sets up the images required to run the Kubernetes server as containers, and installs the `kubectl` command-line tool on your system at `/usr/local/bin/kubectl` (Mac) or `C:\Program Files\Docker\Docker\Resources\bin\kubectl.exe` (Windows).
 
    > [!NOTE]
    >
