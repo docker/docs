@@ -14,11 +14,15 @@ specific target.
 The following list of attributes can be overridden:
 
 - `args`
+- `attest`
 - `cache-from`
 - `cache-to`
 - `context`
+- `contexts`
 - `dockerfile`
+- `entitlements`
 - `labels`
+- `network`
 - `no-cache`
 - `output`
 - `platform`
@@ -220,11 +224,15 @@ $ docker buildx bake --set foo*.no-cache               # bypass caching only for
 Complete list of attributes that can be overridden with `--set` are:
 
 - `args`
+- `attest`
 - `cache-from`
 - `cache-to`
 - `context`
+- `contexts`
 - `dockerfile`
+- `entitlements`
 - `labels`
+- `network`
 - `no-cache`
 - `output`
 - `platform`
