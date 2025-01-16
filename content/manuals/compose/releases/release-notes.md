@@ -19,7 +19,7 @@ For more detailed information, see the [release notes in the Compose repo](https
 
 ### Bug fixes and enhancements
 
-- Fixed an issue not displaying properly the Compose when using `docker compose version`
+- Fixed an issue where the Compose version did not display properly when using `docker compose version`
 
 ## 2.32.3
 
