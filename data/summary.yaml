@@ -9,9 +9,19 @@ Allow list:
   for: Administrators
 Ask Gordon:
   availability: Beta
+Azure blob:
+  availability: Experimental
+Build bake:
+  availability: Experimental
 Build checks:
   availability: Beta
   requires: Buildx v0.15.0 and later
+Cache backend API:
+  availability: Experimental
+Compose bridge:
+  availability: Experimental
+containerd:
+  availability: Experimental
 Dev Environments:
   availability: Beta
 docker compose alpha:
@@ -21,6 +31,9 @@ Docker Desktop CLI:
   requires: Docker Desktop 4.37 and later
 Docker GitHub Copilot:
   availability: Early access
+Docker Scout exceptions:
+  availability: Experimental
+  requires: Docker Scout CLI 1.15.0 and later
 Docker Scout GitHub:
   availability: Beta
 Docker Scout health scores:

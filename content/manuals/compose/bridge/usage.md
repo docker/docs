@@ -6,7 +6,7 @@ description: Learn about and use the Compose Bridge default transformation
 keywords: compose, bridge, kubernetes
 ---
 
-{{< include "compose-bridge-experimental.md" >}}
+{{< summary-bar feature_name="Compose bridge" >}}
 
 Compose Bridge supplies an out-of-the box transformation for your Compose configuration file. Based on an arbitrary `compose.yaml` file, Compose Bridge produces:
 
