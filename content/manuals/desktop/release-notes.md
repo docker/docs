@@ -2592,7 +2592,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 - Update Docker Engine to v20.10.14 to address [CVE-2022-24769](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24769)
 - Update containerd to v1.5.11 to address [CVE-2022-24769](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24769)
 
-### Bug fixes and enahncements
+### Bug fixes and enhancements
 
 #### For all platforms
 
@@ -2620,7 +2620,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 - [Buildx 0.8.1](https://github.com/docker/buildx/releases/tag/v0.8.1)
 
-### Bug fixes and enahncements
+### Bug fixes and enhancements
 
 - Prevented spinning in vpnkit-forwarder filling the logs with error messages.
 - Fixed diagnostics upload when there is no HTTP proxy set. Fixes [docker/for-mac#6234](https://github.com/docker/for-mac/issues/6234).
