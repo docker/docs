@@ -129,31 +129,69 @@ clients. No routes are normally set up in the host's network for container
 addresses that exist within a host.
 
 But, particularly with IPv6 you may prefer to avoid using NAT and instead
-arrange for external routing to container addresses.
+arrange for external routing to container addresses ("direct routing").
 
 To access containers on a bridge network from outside the Docker host,
 you must set up routing to the bridge network via an address on the Docker
 host. This can be achieved using static routes, Border Gateway Protocol
 (BGP), or any other means appropriate for your network.
 
-The bridge network driver has options
-`com.docker.network.bridge.gateway_mode_ipv6=<nat|routed>` and
-`com.docker.network.bridge.gateway_mode_ipv4=<nat|routed>`.
+Within a local layer 2 network, remote hosts can set up static routes
+to a container network using the Docker daemon host's address on the local
+network. Those hosts can access containers directly. For remote hosts
+outside the local network, direct access to containers requires router
+configuration to enable the necessary routing.
+
+#### Gateway modes
+
+The bridge network driver has the following options:
+- `com.docker.network.bridge.gateway_mode_ipv6`
+- `com.docker.network.bridge.gateway_mode_ipv4`
+
+Each of these can be set to one of the gateway modes:
+- `nat`
+- `nat-unprotected`
+- `routed`
 
 The default is `nat`, NAT and masquerading rules are set up for each
-published container port. With mode `routed`, no NAT or masquerading rules
-are set up, but `iptables` are still set up so that only published container
-ports are accessible.
+published container port. Packets leaving the host will use a host address.
+
+With mode `routed`, no NAT or masquerading rules are set up, but `iptables`
+are still set up so that only published container ports are accessible.
+Outgoing packets from the container will use the container's address,
+not a host address.
+
+In `nat` mode, when a port is published to a specific host address, that
+port is only accessible via the host interface with that address. So,
+for example, publishing a port to an address on the loopback interface
+means remote hosts cannot access it.
+
+However, using direct routing, published container ports are always
+accessible from remote hosts, unless the Docker host's firewall has
+additional restrictions. Hosts on the local layer-2 network can set up
+direct routing without needing any additional network configuration.
+Hosts outside the local network can only use direct routing to the
+container if the network's routers are configured to enable it.
+
+In `nat-unprotected` mode, unpublished container ports are also
+accessible using direct routing, no port filtering rules are set up.
+This mode is included for compatibility with legacy default behaviour.
+
+The gateway mode also affects communication between containers that
+are connected to different Docker networks on the same host.
+- In `nat` and `nat-unprotected` modes, containers in other bridge
+  networks can only access published ports via the host addresses they
+  are published to. Direct routing from other networks is not allowed.
+- In `routed` mode containers in other networks can use direct
+  routing to access ports, without going via a host address.
 
 In `routed` mode, a host port in a `-p` or `--publish` port mapping is
 not used, and the host address is only used to decide whether to apply
 the mapping to IPv4 or IPv6. So, when a mapping only applies to `routed`
-mode, only addresses `0.0.0.0` or `::1` are allowed, and a host port
-must not be given.
-
-Mapped container ports, in `nat` or `routed` mode, are accessible from
-any remote address, if routing is set up in the network, unless the
-Docker host's firewall has additional restrictions.
+mode, only addresses `0.0.0.0` or `::` should be used, and a host port
+should not be given. If a specific address or port is given, it will
+have no effect on the published port and a warning message will be
+logged.
 
 #### Example
 
