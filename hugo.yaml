@@ -11,6 +11,7 @@ taxonomies:
   tag: tags
   language: languages
 
+# Remove the /manuals prefix for content in the manuals section
 permalinks:
   page:
     manuals: /:sections[1:]/:slugorfilename/
@@ -27,29 +28,22 @@ markup:
     parser:
       wrapStandAloneImageWithinParagraph: false
       attribute:
+        # Allow setting attributes on block-level elements
         block: true
     renderer:
+      # Allow inline HTML
       unsafe: true
   highlight:
+    # Use custom CSS for syntax highlighting
     noClasses: false
 
-related:
-  includeNewer: true
-  indices:
-  - name: keywords
-    weight: 80
-  - name: fragmentrefs
-    applyFilter: false
-    type: fragments
-    weight: 80
-  threshold: 20
-  toLower: false
-
 build:
+  # Generate hugo_stats.json - Tailwind uses this to detect classes
   buildStats:
     enable: true
     disableIDs: true
     disableTags: true
+  # Ensure that CSS/assets changes trigger a dev server rebuild
   cachebusters:
     - source: assets/watching/hugo_stats\.json
       target: styles\.css
@@ -60,23 +54,29 @@ build:
     - source: (assets|layouts)/.*\.(.*)$
       target: "$2"
 
+# Additional output formats (e.g. custom JSON files)
 outputFormats:
+  # File containing all redirects, see: layouts/index.redirects.json
   redirects:
     baseName: redirects
     isPlainText: true
     mediaType: "application/json"
     notAlternative: true
+  # Metadata file used by DD global search, see: layouts/index.metadata.json
   metadata:
     baseName: metadata
     isPlainText: true
     mediaType: "application/json"
     notAlternative: true
+  # robots.txt, see: layouts/index.robots.json
   robots:
     baseName: robots
     isPlainText: true
     mediaType: "text/plain"
     notAlternative: true
 
+# Enable custom output formats for the home page only
+# (only generate the custom output files once)
 outputs:
   home:
     - html
@@ -88,6 +88,9 @@ languages:
   en:
     languageName: English
 
+# Site-wide parameters
+# Can be accessed in content with {{% param "param_name" %}}
+# Or in layouts/partials with site.Params.param_name
 params:
   kapa:
     id: ba5c2cbc-6535-4334-a72e-050f7a681c8a
@@ -98,26 +101,34 @@ params:
     google: GTM-WL2QLG5
     onetrust: 65425fb0-7b36-4317-9f10-7b3e08039af0
     vwo: 723167
-  algolia:
-    appid: 3XRLW0LZH9
-    apikey: 2899036ce47dba191b8dc1758e4bc6a4
-    indexname: docker
 
+  # Docs repository URL
   repo: https://github.com/docker/docs
-  docs_url: https://docs.docker.com
 
+  # === Example versions ===
+  # The following parameters are used in various ways in content and templates.
+  # Mostly as examples in code snippets, but also in other exotic ways.
+  # Use `grep` to figure out how they might be used.
+
+  # Latest version of the Docker Engine API
   latest_engine_api_version: "1.47"
+  # Latest version of Docker Engine
   docker_ce_version: "27.5.0"
+  # Previous version of the Docker Engine
+  # (Used to show e.g., "latest" and "latest"-1 in engine install examples
   docker_ce_version_prev: "27.4.1"
+  # Latest Docker Compose version
   compose_version: "v2.32.3"
-  compose_file_v3: "3.8"
-  compose_file_v2: "2.4"
+  # Latest BuildKit version
   buildkit_version: "0.16.0"
 
+  # Example runtime/library/os versions
   example_go_version: "1.23"
   example_alpine_version: "3.21"
   example_node_version: "20"
 
+  # Minimum version thresholds (used together with the "introduced" shortcode
+  # See layouts/shortcodes/introduced.html
   min_version_thresholds:
     buildx: "0.10.0"
     buildkit: "0.11.0"
@@ -128,6 +139,7 @@ params:
     scout: "1.0.0"
 
 menus:
+  # Site header menu
   main:
   - name: Get started
     pageRef: /get-started/
@@ -142,6 +154,7 @@ menus:
     pageRef: /reference/
     weight: 4
 
+  # Footer links
   footer:
     - url: https://www.docker.com/products
       name: Product offerings
@@ -241,21 +254,28 @@ menus:
       name: Newsletter
       parent: About us
 
+# Hugo modules - for fetching docs from upstream repos
+# NOTE: we always vendor upstream docs in _vendor/
+# Versions are declared in go.mod
 module:
   proxy: https://proxy.golang.org,direct
   hugoVersion:
     extended: false
     min: "0.139.0"
   mounts:
+    # Mount the assets directory so it doesn't get overwritten
     - source: assets
       target: assets
+    # Mount hugo_stats.json to the assets dir to trigger cachebust
     - source: hugo_stats.json
       target: assets/watching/hugo_stats.json
+    # Mount the icon files to assets so we can access them with resources.Get
     - source: node_modules/@material-symbols/svg-400/rounded
       target: assets/icons
 
   imports:
 
+    # Docker Engine
     - path: github.com/moby/moby
       mounts:
         - source: docs/api/v1.24.md
@@ -266,6 +286,7 @@ module:
           target: content/reference/api/engine/version
           includeFiles: "*.yaml"
 
+    # BuildKit
     - path: github.com/moby/buildkit
       mounts:
         - source: frontend/dockerfile/docs/reference.md
@@ -280,11 +301,13 @@ module:
         - source: docs/attestations/attestation-storage.md
           target: content/manuals/build/metadata/attestations/attestation-storage.md
 
+    # Buildx CLI plugin
     - path: github.com/docker/buildx
       mounts:
         - source: docs/bake-reference.md
           target: content/manuals/build/bake/reference.md
 
+    # Docker CLI
     - path: github.com/docker/cli
       mounts:
         - source: docs/extend
@@ -300,12 +323,14 @@ module:
         - source: docs/reference/dockerd.md
           target: content/reference/cli/dockerd.md
 
+    # Compose
     - path: github.com/docker/compose/v2
       mounts:
         - source: docs/reference
           target: data/compose-cli
           includeFiles: "*.yaml"
 
+    # Scout CLI plugin (public dist repo)
     - path: github.com/docker/scout-cli
       mounts:
         - source: docs
