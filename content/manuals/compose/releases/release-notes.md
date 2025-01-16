@@ -27,8 +27,8 @@ For more detailed information, see the [release notes in the Compose repo](https
 
 > [!NOTE]
 >
-> Binaries from the Compose GitHub repository may not display properly the version number, so if you rely on `docker compose version`
-> in your development or CI processes please upgrade to `v2.32.4`
+> Binaries from the Compose GitHub repository may not display the version number properly. If you rely on `docker compose version`
+> in your development or CI processes, upgrade to Compose version 2.32.4.
 
 ### Bug fixes and enhancements
 
