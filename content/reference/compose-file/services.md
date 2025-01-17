@@ -257,7 +257,20 @@ cgroup_parent: m-executor-abcd
 command: bundle exec thin -p 3000
 ```
 
-The value can also be a list, in a manner similar to [Dockerfile](https://docs.docker.com/reference/dockerfile/#cmd):
+> [!NOTE]
+>
+> Unlike the `CMD` instruction of an image, the [shell-form syntax](https://docs.docker.com/reference/dockerfile/#shell-form) for `command` 
+> does not implicitly run in the context of the [`SHELL` instruction](https://docs.docker.com/reference/dockerfile/#shell).
+> 
+> If you expect the command to rely on features of a shell environment such as environment variables, then ensure the command is run within a shell:
+> 
+> ```yaml
+> command: /bin/sh -c 'echo "hello $$HOSTNAME"'
+> ```
+> 
+> When the `entrypoint` (or image `ENTRYPOINT`) is configured to run the shell instead, to ensure `command` is processed correctly you should use the exec-form described bellow.
+
+The value can also be a list, in a manner similar to the [exec-form syntax](/reference/dockerfile.md#exec-form) used by the [Dockerfile](/reference/dockerfile.md#cmd):
 
 ```yaml
 command: [ "bundle", "exec", "thin", "-p", "3000" ]
@@ -765,6 +778,8 @@ extends:
 
 - `service`: Defines the name of the service being referenced as a base, for example `web` or `database`.
 - `file`: The location of a Compose configuration file defining that service.
+
+#### Restrictions 
 
 When a service uses `extends`, it can also specify dependencies on other resources, an explicit `volumes` declaration for instance. However, it's important to note that `extends` does not automatically incorporate the target volume definition into the extending Compose file. Instead, you are responsible for ensuring that an equivalent resource exists for the service being extended to maintain consistency. Docker Compose verifies that a resource with the referenced ID is present within the Compose model.
 
