@@ -7,8 +7,12 @@ Admin Console:
   for: Administrators
 Allow list:
   for: Administrators
+Amazon S3 cache:
+  availability: Experimental
 Ask Gordon:
   availability: Beta
+Automated builds:
+  subscription: [Pro, Team, Business]
 Azure blob:
   availability: Experimental
 Build bake:
@@ -18,6 +22,9 @@ Build checks:
   requires: Buildx v0.15.0 and later
 Cache backend API:
   availability: Experimental
+Company:
+  subscription: [Business]
+  for: Administrators
 Compose bridge:
   availability: Experimental
 containerd:
@@ -25,6 +32,8 @@ containerd:
 Dev Environments:
   availability: Beta
 docker compose alpha:
+  availability: Experimental
+Docker Desktop Archlinux:
   availability: Experimental
 Docker Desktop CLI:
   availability: Beta
@@ -39,8 +48,13 @@ Docker Scout GitHub:
 Docker Scout health scores:
   subscription: [Pro, Team, Business]
   availability: Beta
+Domain audit:
+  subscription: [Business]
+  for: Administrators
 General admin:
   for: Administrators
+GitHub Actions cache:
+  availability: Experimental
 Import builds:
   availability: Beta
   requires: Docker Desktop 4.31 and later
@@ -80,3 +94,5 @@ VMM:
   requires: Docker Desktop 4.35.0 and later
 Wasm workloads:
   availability: Beta
+Wasmtime:
+  availability: Experimental

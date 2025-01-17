@@ -23,6 +23,7 @@ Key benefits include:
   features provided by a Docker subscription.
 
 ## Prerequisites
+
 - [Docker Business subscription](../../subscription/details.md#docker-business)
 - Administrators must [enforce sign-in](/security/for-admins/enforce-sign-in/) for users
 - Insights enabled by your Customer Success Manager
