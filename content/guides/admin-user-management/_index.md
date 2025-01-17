@@ -1,7 +1,7 @@
 ---
-title: Use and access management Set up your company for success with Docker
-summary: Designed to help IT administrators efficiently set up, manage, and monitor user access within Docker.
-description: Learn how to onboard your users and take advantage of all of the Docker products and features.
+title: Mastering Docker user and access management
+summary: Simplify user access while ensuring security and efficiency in Docker.
+description: A guide for managing roles, provisioning users, and optimizing Docker access with tools like SSO and activity logs.
 tags: [admin]
 params:
   featured: true
@@ -12,37 +12,30 @@ params:
       url: /admin/
     - title: Single sign-on
       url: /security/for-admins/single-sign-on/
-    - title: Enforce sign-in
-      url: /security/for-admins/enforce-sign-in/
+    - title: Onboard your organization
+      url: /admin/organization/onboard/
     - title: Roles and permissions
       url: /security/for-admins/roles-and-permissions/
-    - title: Settings Management
-      url: /security/for-admins/hardened-desktop/settings-management/
-    - title: Registry Access Management
-      url: /security/for-admins/hardened-desktop/registry-access-management/
-    - title: Image Access Management
-      url: /security/for-admins/hardened-desktop/image-access-management/
-    - title: Docker Build Cloud subscription information
-      url: /subscription/build-cloud/build-details/
-    - title: Docker Scout subscription information
-      url: /subscription/scout-details/
+    - title: Insights
+      url: /admin/organization/insights/
+    - title: Activity logs
+      url: /admin/organization/activity-logs/
 ---
 
-This guide is designed to help organizations set up, manage, and monitor user access efficiently and securely. Learn how to assign roles, configure teams, implement Single Sign-On (SSO), and leverage tools like audit logs to keep your organization running smoothly.
+Managing roles and permissions is key to securing your Docker environment while enabling seamless collaboration and operational efficiency. This guide walks IT administrators through the essentials of user and access management, offering strategies for assigning roles, provisioning users, and leveraging tools like activity logs and insights to monitor and optimize Docker usage.
 
 ## Who's this for?
 
-- IT teams: Responsible for setting up and maintaining access controls.
+- IT teams: Tasked with configuring and maintaining secure user access.
 - Security professionals: Focused on enforcing secure access practices.
-- Project managers: Overseeing team collaboration and resource access.
+- Project managers: Overseeing team collaboration and resource management.
 
 ## What you'll learn
 
-- Roles and permissions: Assign the right access levels to ensure users have what they need without overprovisioning.
-- User onboarding: Add and manage users effectively to streamline their experience.
-- Team organization: Group users into teams for scalable access control.
-- Single sign-on: Enhance security and simplify authentication with Single Sign-On.
-- Monitoring and compliance: Track user activity and enforce policies with audit logs.
+- How to assess and manage Docker user access and align accounts with organizational needs.
+- When to use team configurations for scalable access control.
+- How to automate and streamline user provisioning with SSO, SCIM, and JIT.
+- How monitoring tools like audit logs can bolster compliance.
 
 ## Tools integration 
 

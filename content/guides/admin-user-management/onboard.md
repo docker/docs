@@ -1,99 +1,86 @@
 ---
-title: Onboard your users
-description:
-weight: 10
+title: Onboarding and managing roles and ermissions in Docker
+description: Learn how to manage roles, invite members, and implement scalable access control in Docker for secure and efficient collaboration.
+keywords: sso, scim, jit, invite members, docker hub, docker admin console, onboarding, security
+weight: 20
 ---
 
-Efficiently onboarding users and managing access is critical to maintaining security and productivity with Docker.
+Learn how to invite owners, add members, and implement advanced tools like SSO and SCIM for secure and efficient access control when onboarding your organization and developers.
 
-This page provides a top-level look at th tools and techniques to simplify user onboarding and ensure your organization remains secure and scalable.
+## Step 1: Invite owners
 
-Step 1: Identify your Docker users and their Docker accounts
-Identifying your users will ensure that you allocate your subscription seats efficiently and that all your Docker users receive the benefits of your subscription.
+When you create a Docker organization, you automatically become its sole owner. While optional, adding additional owners can significantly ease the process of onboarding and managing your organization by distributing administrative responsibilities.
 
-Identify the Docker users in your organization.
-If your organization uses device management software, like MDM or JAMF, you may use the device management software to help identify Docker users. See your device management software's documentation for details. You can identify Docker users by checking if Docker Desktop is installed at the following location on each user's machine:
-Mac: /Applications/Docker.app
-Windows: C:\Program Files\Docker\Docker
-Linux: /opt/docker-desktop
-If your organization doesn't use device management software or your users haven't installed Docker Desktop yet, you may survey your users.
-Instruct all your Docker users in your organization to update their existing Docker account's email address to an address that's in your organization's domain, or to create a new account using an email address in your organization's domain.
-To update an account's email address, instruct your users to sign in to Docker Hub, and update the email address to their email address in your organization's domain.
-To create a new account, instruct your users to go sign up using their email address in your organization's domain.
-Ask your Docker sales representative or contact sales to get a list of Docker accounts that use an email address in your organization's domain.
+### Why add owners?
 
+ - Shared responsibilities: Distribute administrative tasks, such as managing roles and permissions.
 
+ - Improved continuity: Ensure seamless operations in case the primary owner is unavailable.
 
-## Step one: Secure user authentication with Single Sign-On (SSO)
+For detailed information on owners, see [Roles and permissions](/manuals/security/for-admins/roles-and-permissions.md)
 
-Single Sign-On (SSO) is essential for centralized and secure user authentication. By integrating Docker with your identity provider, you can enforce compliance and streamline user access.
+## Step 2: Invite members
 
-### Benefits of SSO
+Members are granted controlled access to resources and enjoy enhanced organizational benefits.
 
-Centralized Authentication: Users log in with their organizational credentials.
-Improved Security: Eliminates password-related vulnerabilities.
-Simplified Onboarding: SSO works seamlessly with SCIM and group mapping for automated user provisioning.
+### Why invite members?
 
-### Steps to Configure SSO
+ - Enhanced visibility: Gain insights into user activity, making it easier to monitor access and enforce security policies.
 
-Enable SSO in the Admin Console under Organization Settings.
-Connect your identity provider using SAML or OIDC.
-Test the SSO setup with a small group of users before rolling it out organization-wide.
+ - Streamlined collaboration: Help members collaborate effectively by granting access to shared resources and repositories.
 
-[Detailed SSO setup documentation](/manuals/security/for-admins/)
+ - Improved resource management: Organize and track users within your organization, ensuring optimal allocation of resources.
 
-## Step two: Onboarding Users
-Adding users to your Docker Business organization involves a mix of manual invitations and automated provisioning methods. Choose the approach that best suits your organization’s needs.
+ - Access to enhanced features: Members benefit from organization-wide perks, such as increased pull limits and access to premium Docker features.
 
-### Manual User Onboarding
+ - Security control: Apply and enforce security settings at an organizational level, reducing risks associated with unmanaged accounts.
 
-Access the Admin Console: Use the Admin Console in Docker Hub to invite and manage users.
-→ Admin Console Overview
-Send Invitations: Select Invite Users and enter their email addresses. Assign a default role during the invitation process.
-→ How to Invite Users
-Monitor Invitations: Regularly check pending invitations to ensure all users complete the sign-up process.
+For detailed information, see [Manage organization members](/manuals/admin/organization/members.md)
 
-### Automated User Provisioning with SCIM
+## Step 3: Future-proof user management
 
-For larger organizations, System for Cross-domain Identity Management (SCIM) automates user provisioning and de-provisioning, reducing manual workload and minimizing errors.
+A robust, future-proof approach to user management combines automated provisioning, centralized authentication, and dynamic access control. Implementing these practices ensures a scalable, secure, and efficient environment.
 
-How SCIM Works: SCIM connects Docker to your identity provider (e.g., Okta, Azure AD) to automatically add, update, or remove users based on changes in your directory.
-Steps to Enable SCIM:
-Configure SCIM in your identity provider.
-Generate a SCIM token in the Docker Admin Console.
-Link the token to your identity provider.
+### Secure user authentication with single sign-on (SSO)
 
-## Step three: Streamlining User Access with Group Mapping
-Group mapping simplifies access management by linking identity provider groups to Docker roles and teams. This feature ensures users are automatically assigned the correct permissions based on their directory group membership.
+Integrating Docker with your identity provider streamlines user access and enhances security.
 
-### How Group Mapping Works
-Identity provider groups (e.g., “Developers” or “Admins”) are mapped to specific Docker roles and teams.
-When users are added to these groups in your directory, their Docker permissions are automatically updated.
-### Benefits of Group Mapping
-Reduces manual assignment errors.
-Ensures consistent access control policies.
-Simplifies scaling permissions as teams grow or change.
+SSO: 
 
-## Step four: Future proofing onboarding with Just-in-Time (JIT) Provisioning
-Just-in-time provisioning ensures that users are added to your Docker organization the first time they log in, based on their identity provider credentials. This feature eliminates the need for pre-inviting users while still enforcing role-based access control.
+ - Simplifies sign in, as users sign in with their organizational credentials.
 
-### How JIT Works
-Users authenticate via SSO.
-During their first login, they are automatically added to your Docker organization and assigned roles based on group mapping.
-### Benefits of JIT Provisioning
-Streamlines onboarding for large or distributed teams.
-Reduces admin overhead by removing the need for manual user invites.
-Works seamlessly with SCIM and SSO for a fully automated provisioning process.
+ - Reduces password-related vulnerabilities.
 
+ - Simplifies onboarding as it works seamlessly with SCIM and group mapping for automated provisioning.
 
-## Best Practices for User Management
-Combine SCIM and Group Mapping: Use SCIM for user synchronization and group mapping to automate role assignments.
-Leverage JIT Provisioning: Enable JIT for dynamic onboarding without manual invites.
-Monitor Activity: Regularly review audit logs to track access and changes.
-→ Using Audit Logs
-Regularly Review Permissions: Periodically check and adjust group mappings and roles to align with organizational changes.
+[SSO documentation](/manuals/security/for-admins/single-sign-on/_index.md)
 
+### Automate onboarding with SCIM and JIT provisioning
 
-## More resources
+Streamline user provisioning and role management with [SCIM](/manuals/security/for-admins/provisioning/scim.md) and [Just-in-Time (JIT) provisioning](/manuals/security/for-admins/provisioning/just-in-time.md).
 
-https://docs.docker.com/admin/organization/onboard/
+With SCIM you can:
+
+ - Sync users and roles automatically with your identity provider.
+
+ - Automate adding, updating, or removing users based on directory changes.
+
+With JIT provisioning you can:
+
+ - Automatically add users upon first sign in based on [group mapping](#simplify-access-with-group-mapping).
+
+ - Reduce overhead by eliminating pre-invite steps.
+
+### Simplify access with group mapping
+
+Group mapping automates permissions management by linking identity provider groups to Docker roles and teams.
+
+It also:
+
+ - Reduces manual errors in role assignments.
+
+ - Ensures consistent access control policies.
+
+ - Help you scale permissions as teams grow or change.
+
+For more information on how it works, see [Group mapping](/manuals/security/for-admins/provisioning/group-mapping.md)

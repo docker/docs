@@ -52,9 +52,12 @@ exceptions:
   - HTTP
   - HTTPS
   - IAM
+  - ID
   - IDE
   - IP
+  - IT
   - JAR
+  - JIT
   - JSON
   - JSX
   - LESS
@@ -78,6 +81,7 @@ exceptions:
   - PHP
   - POSIX
   - POST
+  - QA
   - QEMU
   - RAM
   - REPL
