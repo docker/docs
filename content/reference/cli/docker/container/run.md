@@ -1,7 +1,6 @@
 ---
 datafolder: engine-cli
 datafile: docker_container_run
-linkTitle: docker run
 title: docker container run
 aliases:
 - /engine/reference/commandline/container_run/

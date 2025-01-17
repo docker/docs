@@ -12,13 +12,15 @@ The organization access tokens feature is currently in [Beta](../../release-life
 
 > [!WARNING]
 >
-> Organization access tokens aren't currently compatible with the following services:
+> Organization access tokens (OATs) are not intended to be used with Docker Desktop, and are incompatible.
+>
+> OATs are also currently incompatible with the following services:
 >
 > - Docker Build Cloud
 > - Docker Scout
 > - Docker REST APIs
 >
-> If you use these services, you must use personal access tokens instead.
+> If you use Docker Desktop or one of these services, you must use personal access tokens instead.
 
 An organization access token (OAT) is like a [personal access token
 (PAT)](/security/for-developers/access-tokens/), but an OAT is associated with

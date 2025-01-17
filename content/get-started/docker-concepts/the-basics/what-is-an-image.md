@@ -188,10 +188,7 @@ In this walkthrough, you searched and pulled a Docker image. In addition to pull
 
 The following resources will help you learn more about exploring, finding, and building images:
 
-- [Docker Trusted Content](/manuals/trusted-content/_index.md)
-  - [Docker Official Images docs](/manuals/trusted-content/official-images/_index.md)
-  - [Docker Verified Publisher docs](/manuals/trusted-content/dvp-program.md)
-  - [Docker-Sponsored Open Source Program docs](/manuals/trusted-content/dsos-program.md)
+- [Docker trusted content](/manuals/docker-hub/image-library/trusted-content.md)
 - [Explore the Image view in Docker Desktop](/manuals/desktop/use-desktop/images.md)
 - [Docker Build overview](/manuals/build/concepts/overview.md)
 - [Docker Hub](https://hub.docker.com)

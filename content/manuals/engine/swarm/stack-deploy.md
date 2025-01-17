@@ -56,7 +56,7 @@ a throwaway registry, which you can discard afterward.
 3.  Check that it's working with `curl`:
 
     ```console
-    $ curl http://localhost:5000/v2/
+    $ curl http://127.0.0.1:5000/v2/
 
     {}
     ```

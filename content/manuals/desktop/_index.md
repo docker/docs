@@ -1,9 +1,12 @@
 ---
 title: Docker Desktop
-weight: 100
+weight: 10
 description: Explore Docker Desktop, what it has to offer, and its key features. Take the next step by downloading or find additional resources
 keywords: how to use docker desktop, what is docker desktop used for, what does docker
   desktop do, using docker desktop
+params:
+  sidebar:
+    group: Products
 grid:
 - title: Install Docker Desktop
   description: |

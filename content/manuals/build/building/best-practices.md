@@ -57,7 +57,7 @@ it small.
 
 - [Docker-Sponsored Open Source](https://hub.docker.com/search?image_filter=open_source)
   are published and maintained by open source projects sponsored by Docker
-  through an [open source program](../../trusted-content/dsos-program).
+  through an [open source program](../../docker-hub/image-library/trusted-content.md#docker-sponsored-open-source-software-images).
 
 When you pick your base image, look out for the badges indicating that the
 image is part of these programs.
@@ -98,7 +98,7 @@ download of base images and dependencies.
 ```dockerfile
 # syntax=docker/dockerfile:1
 FROM ubuntu:24.04
-RUN apt-get -y update && apt-get install -y python
+RUN apt-get -y update && apt-get install -y --no-install-recommends python3
 ```
 
 Also consider [pinning base image versions](#pin-base-image-versions).
@@ -145,7 +145,7 @@ database, and an in-memory cache in a decoupled manner.
 
 Limiting each container to one process is a good rule of thumb, but it's not a
 hard and fast rule. For example, not only can containers be
-[spawned with an init process](/manuals/engine/containers/run.md#specify-an-init-process),
+[spawned with an init process](/manuals/engine/containers/multi-service_container.md),
 some programs might spawn additional processes of their own accord. For
 instance, [Celery](https://docs.celeryproject.org/) can spawn multiple worker
 processes, and [Apache](https://httpd.apache.org/) can create one process per
@@ -165,7 +165,7 @@ review. Adding a space before a backslash (`\`) helps as well.
 Here’s an example from the [buildpack-deps image](https://github.com/docker-library/buildpack-deps):
 
 ```dockerfile
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
   bzr \
   cvs \
   git \
@@ -322,7 +322,7 @@ For example, you can chain commands with the `&&` operator, and use
 escape characters to break long commands into multiple lines.
 
 ```dockerfile
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     package-bar \
     package-baz \
     package-foo
@@ -337,7 +337,7 @@ with a pipeline operator:
 ```dockerfile
 RUN <<EOF
 apt-get update
-apt-get install -y \
+apt-get install -y --no-install-recommends \
     package-bar \
     package-baz \
     package-foo
@@ -356,7 +356,7 @@ Always combine `RUN apt-get update` with `apt-get install` in the same `RUN`
 statement. For example:
 
 ```dockerfile
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     package-bar \
     package-baz \
     package-foo
@@ -370,7 +370,7 @@ subsequent `apt-get install` instructions to fail. For example, this issue will 
 
 FROM ubuntu:22.04
 RUN apt-get update
-RUN apt-get install -y curl
+RUN apt-get install -y --no-install-recommends curl
 ```
 
 After building the image, all layers are in the Docker cache. Suppose you later
@@ -381,7 +381,7 @@ modify `apt-get install` by adding an extra package as shown in the following Do
 
 FROM ubuntu:22.04
 RUN apt-get update
-RUN apt-get install -y curl nginx
+RUN apt-get install -y --no-install-recommends curl nginx
 ```
 
 Docker sees the initial and modified instructions as identical and reuses the
@@ -390,14 +390,14 @@ because the build uses the cached version. Because the `apt-get update` isn't
 run, your build can potentially get an outdated version of the `curl` and
 `nginx` packages.
 
-Using `RUN apt-get update && apt-get install -y` ensures your Dockerfile
+Using `RUN apt-get update && apt-get install -y --no-install-recommends` ensures your Dockerfile
 installs the latest package versions with no further coding or manual
 intervention. This technique is known as cache busting. You can also achieve
 cache busting by specifying a package version. This is known as version pinning.
 For example:
 
 ```dockerfile
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     package-bar \
     package-baz \
     package-foo=1.3.*
@@ -411,7 +411,7 @@ Below is a well-formed `RUN` instruction that demonstrates all the `apt-get`
 recommendations.
 
 ```dockerfile
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     aufs-tools \
     automake \
     build-essential \

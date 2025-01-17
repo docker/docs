@@ -8,7 +8,7 @@ params:
       text: New
 keywords: virtualization software, resource allocation, mac, docker desktop, vm monitoring, vm performance, apple silicon
 description: Discover Docker Desktop for Mac's Virtual Machine Manager (VMM) options, including the new Docker VMM for Apple Silicon, offering enhanced performance and efficiency
-weight: 90
+weight: 110
 aliases:
 - /desktop/vmm/
 ---
@@ -30,6 +30,8 @@ These improvements directly impact developers who rely on frequent file access a
 > [!NOTE]
 >
 > Docker VMM requires a minimum of 4GB of memory to be allocated to the Docker Linux VM. The memory needs to be increased before Docker VMM is enabled, and this can be done from the **Resources** tab in **Settings**.
+
+Docker VMM is based on [libkrun](https://github.com/containers/libkrun).
 
 ### Known issues 
 

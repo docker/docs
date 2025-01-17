@@ -5,7 +5,9 @@
       <a class="underline-offset-2 hover:underline" href="https://www.docker.com/pricing/">Pricing</a>
       <a class="underline-offset-2 hover:underline" href="https://www.docker.com/company/">About us</a>
       <a class="underline-offset-2 hover:underline" href="https://www.docker.com/support/">Support</a>
-      <a class="underline-offset-2 hover:underline" href="https://github.com/docker/docs/blob/main/CONTRIBUTING.md">Contribute</a>
+      {{- with .GetPage "/contribute" }}
+        <a class="underline-offset-2 hover:underline" href="{{ .Permalink }}">{{ .LinkTitle }}</a>
+      {{- end }}
     </div>
     <hr class="text-divider-light dark:text-divider-dark" />
     <div class="grid lg:grid-cols-3 place-items-center gap-8 grid-cols-1">

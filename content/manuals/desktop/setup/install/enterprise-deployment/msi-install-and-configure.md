@@ -1,7 +1,8 @@
 ---
 title: Use the MSI installer
 description: Understand how to use the MSI installer. Also explore additional configuration options.
-keywords: msi, windows, docker desktop, install, deploy, configure
+keywords: msi, windows, docker desktop, install, deploy, configure, admin, mdm
+tags: [admin]
 weight: 10
 aliases: 
 - /desktop/install/msi/install-and-configure/

@@ -172,23 +172,19 @@ represents a single build.
     "result": {
       "context": "result",
       "dockerfile": "Dockerfile",
-      "network": ""
     },
     "seed": {
       "context": "seed-data",
       "dockerfile": "Dockerfile",
-      "network": ""
     },
     "vote": {
       "context": "vote",
       "dockerfile": "Dockerfile",
       "target": "dev",
-      "network": ""
     },
     "worker": {
       "context": "worker",
       "dockerfile": "Dockerfile",
-      "network": ""
     }
   }
 }

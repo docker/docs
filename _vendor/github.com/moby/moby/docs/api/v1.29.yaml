@@ -736,6 +736,7 @@ definitions:
               - "default"
               - "process"
               - "hyperv"
+              - ""
 
   Config:
     description: "Configuration for a container that is portable between hosts"
@@ -3696,10 +3697,12 @@ paths:
           type: "string"
         - name: "h"
           in: "query"
+          required: true
           description: "Height of the tty session in characters"
           type: "integer"
         - name: "w"
           in: "query"
+          required: true
           description: "Width of the tty session in characters"
           type: "integer"
       tags: ["Container"]
@@ -5432,7 +5435,7 @@ paths:
             type: "string"
             example: "OK"
           headers:
-            API-Version:
+            Api-Version:
               type: "string"
               description: "Max API Version the server supports"
             Docker-Experimental:
@@ -5951,10 +5954,12 @@ paths:
           type: "string"
         - name: "h"
           in: "query"
+          required: true
           description: "Height of the TTY session in characters"
           type: "integer"
         - name: "w"
           in: "query"
+          required: true
           description: "Width of the TTY session in characters"
           type: "integer"
       tags: ["Exec"]

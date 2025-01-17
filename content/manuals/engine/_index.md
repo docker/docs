@@ -1,8 +1,11 @@
 ---
 title: Docker Engine
-weight: 100
+weight: 10
 description: Find a comprehensive overview of Docker Engine, including how to install, storage details, networking, and more
 keywords: Engine
+params:
+  sidebar:
+    group: Open source
 grid:
 - title: Install Docker Engine
   description: Learn how to install the open source Docker Engine for your distribution.

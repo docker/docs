@@ -1,7 +1,8 @@
 ---
-description: Image Access Management
-keywords: image, access, management, trusted content, permissions, Docker Business feature
+description: Manage Docker Hub image access with Image Access Management, restricting developers to trusted images for enhanced security
+keywords: image, access, management, trusted content, permissions, Docker Business feature, security, admin
 title: Image Access Management
+tags: [admin]
 aliases:
  - /docker-hub/image-access-management/
  - /desktop/hardened-desktop/image-access-management/
@@ -12,7 +13,7 @@ weight: 40
 
 > [!NOTE]
 >
-> Image Access Management is available to [Docker Business](/manuals/subscription/core-subscription/details.md#docker-business) customers only.
+> Image Access Management is available to [Docker Business](/manuals/subscription/details.md#docker-business) customers only.
 
 Image Access Management gives you control over which types of images, such as Docker Official Images, Docker Verified Publisher Images, or community images, your developers can pull from Docker Hub.
 

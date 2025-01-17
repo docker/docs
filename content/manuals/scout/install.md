@@ -46,10 +46,15 @@ $ sh install-scout.sh
    ```json
    {
      "cliPluginsExtraDirs": [
-       "$HOME/.docker/scout"
+       "/home/<USER>/.docker/scout"
      ]
    }
    ```
+
+   Substitute `<USER>` with your username on the system.
+
+   > [!NOTE]
+   > The path for `cliPluginsExtraDirs` must be an absolute path.
 
 {{< /tab >}}
 {{< tab name="macOS" >}}
@@ -65,13 +70,13 @@ $ sh install-scout.sh
 4. Make the binary executable:
 
    ```console
-   $ chmod +x $HOME/.docker/scout/docker-scout`
+   $ chmod +x $HOME/.docker/scout/docker-scout
    ```
 
 5. Authorize the binary to be executable on macOS:
 
    ```console
-   xattr -d com.apple.quarantine $HOME/.docker/scout/docker-scout`.
+   xattr -d com.apple.quarantine $HOME/.docker/scout/docker-scout.
    ```
 
 6. Add the `scout` subdirectory to your `.docker/config.json` as a plugin directory:
@@ -79,10 +84,15 @@ $ sh install-scout.sh
    ```json
    {
      "cliPluginsExtraDirs": [
-       "$HOME/.docker/scout"
+       "/Users/<USER>/.docker/scout"
      ]
    }
    ```
+
+   Substitute `<USER>` with your username on the system.
+
+   > [!NOTE]
+   > The path for `cliPluginsExtraDirs` must be an absolute path.
 
 {{< /tab >}}
 {{< tab name="Windows" >}}
@@ -100,10 +110,15 @@ $ sh install-scout.sh
    ```json
    {
      "cliPluginsExtraDirs": [
-       "C:\Users\MobyWhale\.docker\scout"
+       "C:\Users\<USER>\.docker\scout"
      ]
    }
    ```
+
+   Substitute `<USER>` with your username on the system.
+
+   > [!NOTE]
+   > The path for `cliPluginsExtraDirs` must be an absolute path.
 
 {{< /tab >}}
 {{< /tabs >}}

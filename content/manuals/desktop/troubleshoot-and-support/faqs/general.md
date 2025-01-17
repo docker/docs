@@ -63,8 +63,7 @@ For more information and examples, see [how to connect from a container to a ser
 
 ### Can I pass through a USB device to a container?
 
-It is not possible to pass through a USB device (or a
-serial port) to a container as it requires support at the hypervisor level.
+Docker Desktop does not support direct USB device passthrough. However, you can use USB over IP to connect common USB devices to the Docker Desktop VM and in turn be forwarded to a container. For more details, see [Using USB/IP with Docker Desktop](/manuals/desktop/features/usbip.md).
 
 ### How do I run Docker Desktop without administrator privileges?
 
@@ -83,7 +82,7 @@ You can then sign in to your machine with the user ID specified, and launch Dock
 
 > [!NOTE]
 > 
-> Before launching Docker Desktop, if a `settings.json` file already exists in the `~/Library/Group Containers/group.com.docker/` directory, you will see a **Finish setting up Docker Desktop** window that prompts for administrator privileges when you select **Finish**. To avoid this, ensure you delete the `settings.json` file left behind from any previous installations before launching the application.
+> Before launching Docker Desktop, if a `settings-store.json` file (or `settings.json` for Docker Desktop versions 4.34 and earlier) already exists in the `~/Library/Group Containers/group.com.docker/` directory, you will see a **Finish setting up Docker Desktop** window that prompts for administrator privileges when you select **Finish**. To avoid this, ensure you delete the `settings-store.json` file (or `settings.json` for Docker Desktop versions 4.34 and earlier) left behind from any previous installations before launching the application.
 
 {{< /tab >}}
 {{< tab name="Windows" >}}

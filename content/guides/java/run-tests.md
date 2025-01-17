@@ -95,7 +95,7 @@ fail if the tests fail.
 Finally, you updated the deps stage to be based on the base stage and removed
 the instructions that are now in the base stage.
 
-Run the following command to build a new image using the test stage as the target and view the test results. Include `--progress=plain` to view the build output, `--no-cache` to ensure the tests always run, and `--target-test` to target the test stage.
+Run the following command to build a new image using the test stage as the target and view the test results. Include `--progress=plain` to view the build output, `--no-cache` to ensure the tests always run, and `--target test` to target the test stage.
 
 Now, build your image and run your tests. You'll run the `docker build` command and add the `--target test` flag so that you specifically run the test build stage.
 

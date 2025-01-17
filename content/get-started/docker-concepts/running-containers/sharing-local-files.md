@@ -101,7 +101,7 @@ Using a bind mount, you can map the configuration file on your host computer to 
     $ mkdir public_html
     ```
 
-3. Change the directory to `public_html` and create a file called `index.html` with the following content. This is a basic HTML document that creates a simple webpage that welcomes you with a friendly whale.
+3. Navigate into the newly created directory `public_html` and create a file called `index.html` with the following content. This is a basic HTML document that creates a simple webpage that welcomes you with a friendly whale.
 
     ```html
     <!DOCTYPE html>

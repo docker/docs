@@ -1,7 +1,6 @@
 ---
 datafolder: engine-cli
 datafile: docker_image_pull
-linkTitle: docker pull
 title: docker image pull
 aliases:
 - /edge/engine/reference/commandline/image_pull/

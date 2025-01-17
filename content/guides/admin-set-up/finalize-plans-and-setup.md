@@ -6,9 +6,9 @@ weight: 20
 
 ## Step one: Send finalized settings files to the MDM team 
 
-After reaching an agreement with the relevant teams on your baseline and security configurations as outlined in module one, follow the instructions in the [Settings Management](/manuals/security/for-admins/hardened-desktop/settings-management/_index.md) documentation to create the `admin-settings.json` file that captures these configurations.
+After reaching an agreement with the relevant teams about your baseline and security configurations as outlined in module one, configure Settings Management using either the [Docker Admin Console](/manuals/security/for-admins/hardened-desktop/settings-management/configure-admin-console.md) or an [`admin-settings.json` file](/manuals/security/for-admins/hardened-desktop/settings-management/configure-json-file.md).
 
-Once the file is ready, collaborate with your MDM team to deploy the `admin-settings.json` file, along with your chosen method for [enforcing sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md).
+Once the file is ready, collaborate with your MDM team to deploy your chosen settings, along with your chosen method for [enforcing sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md).
 
 > [!IMPORTANT]
 >
@@ -26,7 +26,7 @@ Single sign-on (SSO) lets developers authenticate using their identity providers
 
 You can also enable [SCIM](/manuals/security/for-admins/provisioning/scim.md) for further automation of provisioning and deprovisioning of users.
 
-### Set up free tier Docker product entitlements included in the subscription
+### Set up Docker product entitlements included in the subscription
 
 [Docker Build Cloud](/manuals/build-cloud/_index.md) significantly reduces build times, both locally and in CI, by providing a dedicated remote builder and shared cache. Powered by the cloud, developer time and local resources are freed up so your team can focus on more important things, like innovation. To get started, [set up a cloud builder](https://app.docker.com/build/). 
 

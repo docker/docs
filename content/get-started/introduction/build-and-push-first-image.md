@@ -33,7 +33,7 @@ If you’re new to container images, think of them as a standardized package tha
 
 To share your Docker images, you need a place to store them. This is where registries come in. While there are many registries, Docker Hub is the default and go-to registry for images. Docker Hub provides both a place for you to store your own images and to find images from others to either run or use as the bases for your own images.
 
-In [Develop with containers](develop-with-containers.md), you used the following images that came from Docker Hub, each of which are [Docker Official Images](/trusted-content/official-images/):
+In [Develop with containers](develop-with-containers.md), you used the following images that came from Docker Hub, each of which are [Docker Official Images](/manuals/docker-hub/image-library/trusted-content.md#docker-official-images):
 
 - [node](https://hub.docker.com/_/node) - provides a Node environment and is used as the base of your development efforts. This image is also used as the base for the final application image.
 - [mysql](https://hub.docker.com/_/mysql) - provides a MySQL database to store the to-do list items
@@ -144,32 +144,36 @@ Now that you have a repository, you are ready to build and push your image. An i
 {{< /tab >}}
 {{< tab name="VS Code" >}}
 
-1. Open Visual Studio Code. In the **File** menu, select **Open Folder**. Choose **Clone Git Repository** and paste this URL: [https://github.com/docker/getting-started-todo-app](https://github.com/docker/getting-started-todo-app)
+1. Open Visual Studio Code. Ensure you have the **Docker extension for VS Code** installed from [Extension Marketplace](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker).
+
+   ![Screenshot of VS code extension marketplace](images/install-docker-extension.webp)
+
+2. In the **File** menu, select **Open Folder**. Choose **Clone Git Repository** and paste this URL: [https://github.com/docker/getting-started-todo-app](https://github.com/docker/getting-started-todo-app)
 
     ![Screenshot of VS code showing how to clone a repository](images/clone-the-repo.webp?border=true)
 
 
 
-2. Right-click the `Dockerfile` and select the **Build Image...** menu item.
+3. Right-click the `Dockerfile` and select the **Build Image...** menu item.
 
 
     ![Screenshot of VS Code showing the right-click menu and "Build Image" menu item](images/build-vscode-menu-item.webp?border=true)
 
-3. In the dialog that appears, enter a name of `DOCKER_USERNAME/getting-started-todo-app`, replacing `DOCKER_USERNAME` with your Docker username. 
+4. In the dialog that appears, enter a name of `DOCKER_USERNAME/getting-started-todo-app`, replacing `DOCKER_USERNAME` with your Docker username. 
 
-4. After pressing **Enter**, you'll see a terminal appear where the build will occur. Once it's completed, feel free to close the terminal.
+5. After pressing **Enter**, you'll see a terminal appear where the build will occur. Once it's completed, feel free to close the terminal.
 
-5. Open the Docker Extension for VS Code by selecting the Docker logo in the left nav menu.
+6. Open the Docker Extension for VS Code by selecting the Docker logo in the left nav menu.
 
-6. Find the image you created. It'll have a name of `docker.io/DOCKER_USERNAME/getting-started-todo-app`. 
+7. Find the image you created. It'll have a name of `docker.io/DOCKER_USERNAME/getting-started-todo-app`. 
 
-7. Expand the image to view the tags (or different versions) of the image. You should see a tag named `latest`, which is the default tag given to an image.
+8. Expand the image to view the tags (or different versions) of the image. You should see a tag named `latest`, which is the default tag given to an image.
 
-8. Right-click on the **latest** item and select the **Push...** option.
+9. Right-click on the **latest** item and select the **Push...** option.
 
     ![Screenshot of the Docker Extension and the right-click menu to push an image](images/build-vscode-push-image.webp)
 
-9. Press **Enter** to confirm and then watch as your image is pushed to Docker Hub. Depending on your upload speeds, it might take a moment to push the image.
+10. Press **Enter** to confirm and then watch as your image is pushed to Docker Hub. Depending on your upload speeds, it might take a moment to push the image.
 
     Once the upload is finished, feel free to close the terminal.
 

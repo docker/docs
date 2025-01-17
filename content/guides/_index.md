@@ -6,8 +6,9 @@ params:
   icon: developer_guide
 layout: landing
 aliases:
-  - /learning-paths/
+  - /guides/language/
   - /language/
+  - /learning-paths/
 ---
 
 Explore our collection of guides to learn how Docker can optimize your

@@ -1,7 +1,6 @@
 ---
 datafolder: engine-cli
 datafile: docker_container_ls
-linkTitle: docker ps
 title: docker container ls
 aliases:
 - /edge/engine/reference/commandline/container_ls/

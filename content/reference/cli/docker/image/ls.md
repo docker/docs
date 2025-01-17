@@ -1,7 +1,6 @@
 ---
 datafolder: engine-cli
 datafile: docker_image_ls
-linkTitle: docker images
 title: docker image ls
 aliases:
 - /edge/engine/reference/commandline/image_ls/

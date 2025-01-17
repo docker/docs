@@ -5,8 +5,6 @@ title: Create a repository
 linkTitle: Create
 toc_max: 3
 weight: 20
-aliases:
-- /docker-hub/repos/create/
 ---
 
 1. Sign in to [Docker Hub](https://hub.docker.com).

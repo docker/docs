@@ -15,11 +15,15 @@
 
 /content/manuals/extensions-sdk/ @aevesdocker
 
-/content/manuals/scout/ @dvdksn
+/content/manuals/scout/ @craig-osterhout
 
 /content/manuals/docker-hub/ @craig-osterhout
 
 /content/manuals/engine/ @dvdksn
+
+/content/reference/api/engine/ @dvdksn
+
+/content/reference/cli/ @dvdksn
 
 /content/manuals/subscription/ @sarahsanders-docker
 
@@ -29,7 +33,7 @@
 
 /content/manuals/docker-hub/official_images/ @craig-osterhout
 
-/content/manuals/registry/ @dvdksn
+/content/manuals/registry/ @craig-osterhout
 
 /content/manuals/admin/ @sarahsanders-docker
 
@@ -38,3 +42,5 @@
 /content/manuals/accounts/ @sarahsanders-docker
 
 /hack @dvdksn
+
+/_vendor @dvdksn

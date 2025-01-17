@@ -123,7 +123,7 @@ older systems with older versions of the LXC userland tools, the name of
 the cgroup is the name of the container. With more recent versions
 of the LXC tools, the cgroup is `lxc/<container_name>.`
 
-For Docker containers using cgroups, the container name is the full
+For Docker containers using cgroups, the cgroup name is the full
 ID or long ID of the container. If a container shows up as ae836c95b4c3
 in `docker ps`, its long ID might be something like
 `ae836c95b4c3c9e9179e0e91015512da89fdec91612f63cebae57df9a5444c79`. You can

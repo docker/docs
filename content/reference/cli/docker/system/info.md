@@ -1,7 +1,6 @@
 ---
 datafolder: engine-cli
 datafile: docker_system_info
-linkTitle: docker info
 title: docker system info
 aliases:
 - /edge/engine/reference/commandline/system_info/

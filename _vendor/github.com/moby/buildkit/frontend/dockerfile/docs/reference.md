@@ -192,11 +192,6 @@ following lines are all treated identically:
 #	  dIrEcTiVe=value
 ```
 
-The following parser directives are supported:
-
-- `syntax`
-- `escape`
-
 ### syntax
 
 <a name="external-implementation-features"><!-- included for deep-links to old section --></a>
@@ -2221,7 +2216,8 @@ Keep the following things in mind about volumes in the Dockerfile.
   - a drive other than `C:`
 
 - **Changing the volume from within the Dockerfile**: If any build steps change the
-  data within the volume after it has been declared, those changes will be discarded.
+  data within the volume after it has been declared, those changes will be discarded
+  when using the legacy builder. When using Buildkit, the changes will instead be kept.
 
 - **JSON formatting**: The list is parsed as a JSON array.
   You must enclose words with double quotes (`"`) rather than single quotes (`'`).

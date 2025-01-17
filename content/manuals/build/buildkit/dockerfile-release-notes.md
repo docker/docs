@@ -13,6 +13,21 @@ issues, and bug fixes in [Dockerfile reference](/reference/dockerfile.md).
 
 For usage, see the [Dockerfile frontend syntax](frontend.md) page.
 
+## 1.12.0
+
+{{< release-date date="2024-11-27" >}}
+
+The full release note for this release is available
+[on GitHub](https://github.com/moby/buildkit/releases/tag/dockerfile%2F1.12.0).
+
+```dockerfile
+# syntax=docker/dockerfile:1.12.0
+```
+
+- Fix incorrect description in History line of image configuration with multiple `ARG` instructions. [moby/buildkit#5508]
+
+[moby/buildkit#5508]: https://github.com/moby/buildkit/pull/5508
+
 ## 1.11.1
 
 {{< release-date date="2024-11-08" >}}

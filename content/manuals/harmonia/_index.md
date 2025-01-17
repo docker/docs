@@ -3,6 +3,9 @@ title: Project Harmonia
 description: Learn how you can run your applications in the cloud with Project Harmonia
 keywords: run, cloud, docker desktop, resources
 sitemap: false
+params:
+  sidebar:
+    group: Products
 aliases:
 - /run-cloud/
 ---
@@ -260,7 +263,9 @@ Run `docker harmonia doctor` to print helpful troubleshooting information.
 - KinD does not run on Project Harmonia due to some hard-coded assumptions to ensure it's running in a privileged container. K3d is a good alternative.
 - Containers cannot access host through DNS `host.docker.internal`.
 - File binds (non-directory binds) are currently static, meaning changes will not be reflected until the container is restarted. This also affects Compose configs and secrets directives.
-- Bind volumes are not supported.
+- Bind _mounts_, such as `-v /localpath:/incontainer` in the `docker run` command, require creating a file-sync.
+- Creating a [synchronized file share](/manuals/desktop/features/synchronized-file-sharing.md) for a directory with a large amount of may take extra time to sync and become ready for use in a container.
+- Bind _volumes_, such as those created with `docker volume create --driver local --opt type=none --opt o=bind --opt device=/some/host/path myvolname` or via the compose equivalent, are not supported.
 - Port-forwarding for UDP is not supported. 
 - Docker Compose projects relying on `watch` in `sync` mode are not working with the `tar` synchronizer. Configure it to use `docker cp` instead, disable tar sync by setting `COMPOSE_EXPERIMENTAL_WATCH_TAR=0` in your environment.
 - Some Docker Engine features that let you access the underlying host, such as `--pid=host`, `--network=host`, and `--ipc=host`, are currently disabled.

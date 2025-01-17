@@ -20,7 +20,7 @@ or [Docker Buildx Bake](https://github.com/marketplace/actions/docker-buildx-bak
 GitHub Actions:
 
 - `docker/build-push-action@v6`
-- `docker/bake-action@v5`
+- `docker/bake-action@v6`
 
 To view the job summary, open the details page for the job in GitHub after the
 job has finished. The summary is available for both failed and successful
@@ -69,9 +69,8 @@ select the item in the list.
 To disable job summaries, set the `DOCKER_BUILD_SUMMARY` environment variable
 in the YAML configuration for your build step:
 
-```yaml {hl_lines=5}
-      -
-        name: Build
+```yaml {hl_lines=4}
+      - name: Build
         uses: docker/docker-build-push-action@v6
         env:
           DOCKER_BUILD_SUMMARY: false
@@ -86,9 +85,8 @@ To disable the upload of the build record archive to GitHub, set the
 `DOCKER_BUILD_RECORD_UPLOAD` environment variable in the YAML configuration for
 your build step:
 
-```yaml {hl_lines=5}
-      -
-        name: Build
+```yaml {hl_lines=4}
+      - name: Build
         uses: docker/docker-build-push-action@v6
         env:
           DOCKER_BUILD_RECORD_UPLOAD: false

@@ -85,8 +85,10 @@ to Docker Hub.
            with:
              username: ${{ vars.DOCKER_USERNAME }}
              password: ${{ secrets.DOCKERHUB_TOKEN }}
+
          - name: Set up Docker Buildx
            uses: docker/setup-buildx-action@v3
+
          - name: Build and push
            uses: docker/build-push-action@v6
            with:
@@ -122,7 +124,8 @@ In this section, you learned how to set up a GitHub Actions workflow for your Py
 
 Related information:
 
-- [Introduction to GitHub Actions](/manuals/build/ci/github-actions/_index.md)
+- [Introduction to GitHub Actions](/guides/gha.md)
+- [Docker Build GitHub Actions](/manuals/build/ci/github-actions/_index.md)
 - [Workflow syntax for GitHub Actions](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions)
 
 ## Next steps

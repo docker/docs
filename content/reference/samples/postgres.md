@@ -5,5 +5,5 @@ service: postgresql
 aliases:
 - /engine/examples/postgresql_service/
 - /samples/postgresql_service/
-- /samples/postgresql/
+- /samples/postgres/
 ---

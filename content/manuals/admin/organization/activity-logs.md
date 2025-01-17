@@ -69,8 +69,16 @@ Refer to the following section for a list of events and their descriptions:
 | Access token created | Access token created in organization |
 | Access token updated | Access token updated in organization |
 | Access token deleted | Access token deleted in organization |
+| Policy created | Details of adding a settings policy |
+| Policy updated | Details of updating a settings policy |
+| Policy deleted | Details of deleting a settings policy |
+| Policy transferred | Details of transferring a settings policy to another owner |
 
 ### Repository events
+
+> [!NOTE]
+>
+> Event descriptions that include a user action can refer to a Docker username, personal access token (PAT) or organization access token (OAT). For example, if a user pushes a tag to a repository, the event would include the description: `<user-access-token>` pushed the tag to the repository.
 
 | Event                                                          | Description                                   |
 |:------------------------------------------------------------------|:------------------------------------------------|

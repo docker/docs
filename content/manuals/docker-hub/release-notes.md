@@ -15,17 +15,11 @@ known issues for each Docker Hub release.
 
 Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projects/51/views/1?filterQuery=) to see what's coming next.
 
-## 2024-11-11
+## 2024-12-12
 
 ### New
 
-- [Personal access tokens](/security/for-developers/access-tokens/) (PATs) now support expiration dates.
-
-## 2024-10-15
-
-### New
-
-- Beta: You can now create [organization access tokens](/security/for-admins/access-tokens/) (OATs) to enhance security for organizations and streamline access management for organizations.
+- The AI Catalog in Docker Hub is available directly through Docker Desktop.
 
 ## 2024-03-23
 
@@ -128,7 +122,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 ### New
 
-- You can now purchase or upgrade to a Docker Business subscription using a credit card. To learn more, see [Upgrade your subscription](../subscription/core-subscription/upgrade.md).
+- You can now purchase or upgrade to a Docker Business subscription using a credit card. To learn more, see [Upgrade your subscription](../subscription//change.md).
 
 ## 2021-08-31
 
@@ -277,7 +271,7 @@ Each organization page now breaks down into these tabs:
 
 ### Enhancements
 
-* The [billing page](../subscription/core-subscription/upgrade.md) for personal accounts has been updated. You can access the page at its new URL: [https://hub.docker.com/billing/plan](https://hub.docker.com/billing/plan).
+* The [billing page](../subscription/change.md) for personal accounts has been updated. You can access the page at its new URL: [https://hub.docker.com/billing/plan](https://hub.docker.com/billing/plan).
 
 ### Known Issues
 

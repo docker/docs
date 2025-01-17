@@ -231,7 +231,7 @@ Now that you have the project, you’re ready to create the `Dockerfile`.
 1. Now that you have an image built, it's time to run the container.
 
     ```console
-    $ docker run -d -p 8080:8080 spring-helloworld
+    $ docker run -p 8080:8080 spring-helloworld
     ```
 
     You'll then see output similar to the following in the container log:

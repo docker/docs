@@ -17,7 +17,7 @@
 {{ if eq (.Get "product") "admin" }}
 {{ $invite_button = "**Invite**" }}
 {{ $export_button = "the **Action** icon and then select **Export users as CSV**" }}
-{{ $member_navigation = "Select your organization in the left navigation drop-down menu, and then select **Members**." }}
+{{ $member_navigation = "Select your organization from the **Choose profile** page, and then select **Members**." }}
 {{ $remove_button = "**Remove member**" }}
 {{ $product_link = "the [Admin Console](https://admin.docker.com)" }}
 {{ $role_mapping_link = "[SCIM for role mapping](/security/for-admins/provisioning/scim/)" }}
@@ -29,7 +29,7 @@
 * **Member of Organizations**: All organizations the user is a member of within a company.
 * **Invited to Organizations**: All organizations the user is an invitee of within a company.
 * **Account Created**: The time and date when the user account was created.` }}
-{{ $member_navigation = "Select your company in the left navigation drop-down menu, and then select **Users**." }}
+{{ $member_navigation = "Select your organization from the **Choose profile** page, and then select **Members**." }}
 {{ $remove_button = "**Remove user**" }}
 {{ $role_mapping_link = "[SCIM for role mapping](/security/for-admins/provisioning/scim/)"}}
 {{ end }}

@@ -203,7 +203,7 @@ $ docker compose --env-file ./config/.env.dev up
   $ docker compose --env-file .env.dev up -e DATABASE_URL=mysql://new_user:new_password@new_db:3306/new_database
   ```
 
-### local `.env` file versus <project directory> `.env` file
+### local `.env` file versus &lt;project directory&gt; `.env` file
 
 An `.env` file can also be used to declare [pre-defined environment variables](envvars.md) used to control Compose behavior and files to be loaded. 
 

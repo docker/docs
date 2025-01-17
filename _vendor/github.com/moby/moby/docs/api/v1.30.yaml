@@ -738,6 +738,7 @@ definitions:
               - "default"
               - "process"
               - "hyperv"
+              - ""
 
   ContainerConfig:
     description: |
@@ -3921,10 +3922,12 @@ paths:
           type: "string"
         - name: "h"
           in: "query"
+          required: true
           description: "Height of the tty session in characters"
           type: "integer"
         - name: "w"
           in: "query"
+          required: true
           description: "Width of the tty session in characters"
           type: "integer"
       tags: ["Container"]
@@ -5679,7 +5682,7 @@ paths:
             type: "string"
             example: "OK"
           headers:
-            API-Version:
+            Api-Version:
               type: "string"
               description: "Max API Version the server supports"
             Docker-Experimental:
@@ -6205,10 +6208,12 @@ paths:
           type: "string"
         - name: "h"
           in: "query"
+          required: true
           description: "Height of the TTY session in characters"
           type: "integer"
         - name: "w"
           in: "query"
+          required: true
           description: "Width of the TTY session in characters"
           type: "integer"
       tags: ["Exec"]
@@ -7578,6 +7583,7 @@ paths:
             example:
               ListenAddr: "0.0.0.0:2377"
               AdvertiseAddr: "192.168.1.1:2377"
+              DataPathAddr: "192.168.1.1"
               RemoteAddrs:
                 - "node1:2377"
               JoinToken: "SWMTKN-1-3pu6hszjas19xyp7ghgosyx9k8atbfcr8p2is99znpy26u2lkl-7p73s1dx5in4tatdymyhg9hu2"
