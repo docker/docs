@@ -1,3 +1,8 @@
+{{- /*
+  Processes and links the main CSS file (`assets/css/styles.css`).
+  - Applies PostCSS, minification, fingerprinting, and post-processing in production.
+  - Adds inline CSS to hide injected images in production builds.
+*/ -}}
 {{ $styles := resources.Get "css/styles.css" }}
 {{ $styles = $styles | css.PostCSS }}
 {{ if hugo.IsProduction }}

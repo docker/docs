@@ -43,6 +43,14 @@
   <script type="module">
     window.addEventListener("load", async function () {
       const pagefind = await import("/pagefind/pagefind.js");
+      await pagefind.options({
+        ranking: {
+          termFrequency: 0.2,
+          pageLength: 0.75,
+          termSaturation: 1.4,
+          termSimilarity: 6.0,
+        },
+      });
 
       const searchBarInput = document.querySelector("#search-bar-input");
       const searchBarResults = document.querySelector(

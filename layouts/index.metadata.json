@@ -1,6 +1,6 @@
 [
 {{- range where site.Pages "Params.sitemap" "!=" false -}}
-  {{- $title := partialCached "utils/title.html" . . -}}
+  {{- $title := .LinkTitle -}}
   {{- $desc := partialCached "utils/description.html" . . -}}
   {{- $kwd := partialCached "utils/keywords.html" . . -}}
   {{- $tags := slice -}}
