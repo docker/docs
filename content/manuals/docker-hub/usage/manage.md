@@ -33,7 +33,7 @@ both individuals and organizations:
 
 4. Optimize your storage by:
 
-    - Regularly audit and remove repositories with untagged, unused, or outdated images.
+    - Regularly auditing and removing repositories with untagged, unused, or outdated images.
     - Look for private repositories in Hub storage that exceed your plan's limits.
 
 5. Increase your limits by upgrading or purchasing additional consumption. For
