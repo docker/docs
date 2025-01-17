@@ -259,16 +259,13 @@ command: bundle exec thin -p 3000
 
 > [!NOTE]
 >
-> Unlike the `CMD` instruction of an image, the [shell-form syntax](https://docs.docker.com/reference/dockerfile/#shell-form) for `command` 
-> does not implicitly run in the context of the [`SHELL` instruction](https://docs.docker.com/reference/dockerfile/#shell).
-> 
-> If you expect the command to rely on features of a shell environment such as environment variables, then ensure the command is run within a shell:
+> Unlike the `CMD` instruction in a Dockerfile, the `command` field doesn't automatically run within the context of the [`SHELL`](/reference/dockerfile/#shell-form) instruction defined in the image. If your `command` relies shell-specific features, such as environment variable expansion, you need to explicitly run it within a shell. For example:
 > 
 > ```yaml
 > command: /bin/sh -c 'echo "hello $$HOSTNAME"'
 > ```
 > 
-> When the `entrypoint` (or image `ENTRYPOINT`) is configured to run the shell instead, to ensure `command` is processed correctly you should use the exec-form described bellow.
+>If the `entrypoint`, (or the image's `ENTRYPOINT`) is configured to invoke a shell, use the exec form syntax for `command` to ensure proper processing. 
 
 The value can also be a list, in a manner similar to the [exec-form syntax](/reference/dockerfile.md#exec-form) used by the [Dockerfile](/reference/dockerfile.md#cmd):
 
