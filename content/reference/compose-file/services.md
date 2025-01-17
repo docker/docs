@@ -257,6 +257,10 @@ cgroup_parent: m-executor-abcd
 command: bundle exec thin -p 3000
 ```
 
+If the value is `null`, the default command from the image is used.
+
+If the value is `[]` (empty list) or `''` (empty string), the default command declared by the image is ignored, or in other words overridden to be empty.
+
 > [!NOTE]
 >
 > Unlike the `CMD` instruction in a Dockerfile, the `command` field doesn't automatically run within the context of the [`SHELL`](/reference/dockerfile/#shell-form) instruction defined in the image. If your `command` relies shell-specific features, such as environment variable expansion, you need to explicitly run it within a shell. For example:
@@ -265,17 +269,11 @@ command: bundle exec thin -p 3000
 > command: /bin/sh -c 'echo "hello $$HOSTNAME"'
 > ```
 > 
->If the `entrypoint`, (or the image's `ENTRYPOINT`) is configured to invoke a shell, use the exec form syntax for `command` to ensure proper processing. 
-
-The value can also be a list, in a manner similar to the [exec-form syntax](/reference/dockerfile.md#exec-form) used by the [Dockerfile](/reference/dockerfile.md#cmd):
-
-```yaml
-command: [ "bundle", "exec", "thin", "-p", "3000" ]
-```
-
-If the value is `null`, the default command from the image is used.
-
-If the value is `[]` (empty list) or `''` (empty string), the default command declared by the image is ignored, or in other words overridden to be empty.
+> If the `entrypoint`, (or the image's `ENTRYPOINT`) is configured to invoke a shell, use the exec form syntax for `command` to ensure proper processing. For example:
+>
+> ```yaml
+> command: [ "bundle", "exec", "thin", "-p", "3000" ]
+> ```
 
 ### `configs`
 
