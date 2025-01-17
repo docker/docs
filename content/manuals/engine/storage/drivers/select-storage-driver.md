@@ -75,7 +75,6 @@ distribution:
 | Debian               | `overlay2`                   | `vfs`                |
 | CentOS               | `overlay2`                   | `zfs`, `vfs`         |
 | Fedora               | `overlay2`                   | `zfs`, `vfs`         |
-| SLES 15              | `overlay2`                   | `vfs`                |
 | RHEL                 | `overlay2`                   | `vfs`                |
 
 When in doubt, the best all-around configuration is to use a modern Linux
