@@ -25,7 +25,7 @@ both individuals and organizations:
 
 3. Optimize image pulls by:
 
-   - Use caching: Implement local image caching via
+   - Using caching: Implement local image caching via
      [mirroring](/docker-hub/mirror/) or within your CI/CD pipelines to reduce
      redundant pulls.
    - Automate manual workflows: Avoid unnecessary pulls by configuring automated
