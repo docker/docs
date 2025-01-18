@@ -94,7 +94,7 @@ docker build -t my-username/my-image .
 If you've already built an image, you can add another tag to the image by using the [`docker image tag`](https://docs.docker.com/engine/reference/commandline/image_tag/) command:
 
 ```console
-docker image tag my-username/my-image another-username/another-image:v1
+docker image tag already-present-image:tag my-username/my-image:tag
 ```
 
 ### Publishing images
