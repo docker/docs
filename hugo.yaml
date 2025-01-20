@@ -261,7 +261,7 @@ module:
   proxy: https://proxy.golang.org,direct
   hugoVersion:
     extended: false
-    min: "0.139.0"
+    min: "0.141.0"
   mounts:
     # Mount the assets directory so it doesn't get overwritten
     - source: assets

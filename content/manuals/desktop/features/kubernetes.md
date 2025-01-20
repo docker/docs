@@ -9,44 +9,57 @@ aliases:
 weight: 60
 ---
 
-Docker Desktop includes a standalone Kubernetes server and client,
-as well as Docker CLI integration that runs on your machine. 
+Docker Desktop includes a standalone Kubernetes server and client, as well as Docker CLI integration, enabling local Kubernetes development and testing directly on your machine. 
 
-The Kubernetes server runs locally within your Docker instance, is not configurable, and is a single-node cluster. It runs within a Docker container on your local system, and
-is only for local testing. 
+The Kubernetes server runs as a single-node cluster within a Docker container. This lightweight setup helps you explore Kubernetes features, test workloads, and work with container orchestration in parallel with other Docker functionalities.
 
-Turning on Kubernetes allows you to deploy
-your workloads in parallel, on Kubernetes, Swarm, and as standalone containers. Turning on or off the Kubernetes server does not affect your other
-workloads.
+Kubernetes on Docker Desktop runs alongside other workloads, including Swarm services and standalone containers.
+
+## What happens when I enable Kubernetes in Docker Desktop?
+
+When you enable Kubernetes in Docker Desktop, the following actions are triggered in the Docker Desktop backend and VM:
+
+- Generation of certificates and cluster configuration
+- Download and installation of Kubernetes internal components
+- Cluster bootup
+- Installation of additional controllers for networking and storage
+
+Turning the Kubernetes server on or off in Docker Desktop does not affect your other workloads.
 
 ## Install and turn on Kubernetes
 
-1. From the Docker Desktop Dashboard, select the **Settings**.
-2. Select **Kubernetes** from the left sidebar. 
-3. Next to **Enable Kubernetes**, select the checkbox.
-4. Select **Apply & Restart** to save the settings and then select **Install** to confirm. This instantiates images required to run the Kubernetes server as containers, and installs the `/usr/local/bin/kubectl` command on your machine.
+1. Open the Docker Desktop Dashboard and navigate to **Settings**.
+2. Select the **Kubernetes** tab. 
+3. Select the **Enable Kubernetes** checkbox.
+4. Select **Apply & Restart** to save the settings and then select **Install** to confirm. This sets up the images required to run the Kubernetes server as containers, and installs the `kubectl` command-line tool on your system at `/usr/local/bin/kubectl` (Mac) or `C:\Program Files\Docker\Docker\Resources\bin\kubectl.exe` (Windows).
 
-   > [!IMPORTANT]
+   > [!NOTE]
    >
-   > The `kubectl` binary is not automatically packaged with Docker Desktop for Linux. To install the kubectl command for Linux, see [Kubernetes documentation](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/). It should be installed at `/usr/local/bin/kubectl`.
+   > Docker Desktop for Linux does not include `kubectl` by default. You can install it separately by following the [Kubernetes installation guide](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/). Ensure the `kubectl` binary is installed at `/usr/local/bin/kubectl`.
 
-By default, Kubernetes containers are hidden from commands like `docker ps`, because managing them manually is not supported. Most users do not need this option. To see these internal containers, select **Show system containers (advanced)**. 
+When Kubernetes is enabled, its status is displayed in the Docker Desktop Dashboard footer and the Docker menu. 
 
-When Kubernetes is turned on and running, an additional status bar in the Docker Desktop Dashboard footer and Docker menu displays. 
+You can check which version of Kubernetes you're on with:
 
-> [!NOTE]
->
-> Docker Desktop does not upgrade your Kubernetes cluster automatically after a new update. To upgrade your Kubernetes cluster to the latest version, select **Reset Kubernetes Cluster**.
+```console
+$ kubectl version
+```
 
-## Use the kubectl command
+### Viewing system containers
 
-Kubernetes integration provides the Kubernetes CLI command
+By default, Kubernetes system containers are hidden. To inspect these containers, navigate to **Settings** > **Kubernetes** and then enable **Show system containers (advanced)**.
+
+You can now view the running Kubernetes containers with `docker ps` or in the Docker Desktop Dashboard.
+
+## Using the kubectl command
+
+Kubernetes integration automatically installs the Kubernetes CLI command
 at `/usr/local/bin/kubectl` on Mac and at `C:\Program Files\Docker\Docker\Resources\bin\kubectl.exe` on Windows. This location may not be in your shell's `PATH`
 variable, so you may need to type the full path of the command or add it to
 the `PATH`.
 
 If you have already installed `kubectl` and it is
-pointing to some other environment, such as `minikube` or a GKE cluster, ensure you change the context so that `kubectl` is pointing to `docker-desktop`:
+pointing to some other environment, such as `minikube` or a Google Kubernetes Engine cluster, ensure you change the context so that `kubectl` is pointing to `docker-desktop`:
 
 ```console
 $ kubectl config get-contexts
@@ -55,29 +68,46 @@ $ kubectl config use-context docker-desktop
 
 > [!TIP]
 >
-> Run the `kubectl` command in a CMD or PowerShell terminal, otherwise `kubectl config get-contexts` may return an empty result. 
->
-> If you are using a different terminal and this happens, you can try setting the `kubeconfig` environment variable to the location of the `.kube/config` file. 
+> If the `kubectl` config get-contexts command returns an empty result, try:
+> 
+> - Running the command in the Command Prompt or PowerShell.
+> - Setting the `KUBECONFIG` environment variable to point to your `.kube/config` file.
 
-If you installed `kubectl` using Homebrew, or by some other method, and
-experience conflicts, remove `/usr/local/bin/kubectl`.
+### Verify installation
 
-You can test the command by listing the available nodes:
+To confirm that Kubernetes is running, list the available nodes:
 
 ```console
 $ kubectl get nodes
-
 NAME                 STATUS    ROLES            AGE       VERSION
 docker-desktop       Ready     control-plane    3h        v1.29.1
 ```
 
+If you installed `kubectl` using Homebrew, or by some other method, and
+experience conflicts, remove `/usr/local/bin/kubectl`.
+
 For more information about `kubectl`, see the
 [`kubectl` documentation](https://kubernetes.io/docs/reference/kubectl/overview/).
+
+## Upgrade your cluster
+
+Kubernetes clusters are not automatically upgraded with Docker Desktop updates. To upgrade the cluster, you must manually select **Reset Kubernetes Cluster** in settings.
+
+## Troubleshooting
+
+- If Kubernetes fails to start, make sure Docker Desktop is running with enough allocated resources. Check **Settings** > **Resources**.
+- If the `kubectl` commands return errors, confirm the context is set to `docker-desktop`
+   ```console
+   $ kubectl config use-context docker-desktop
+   ```
+   You can then try checking the logs of the [Kubernetes system containers](#viewing-system-containers) if you have enabled that setting.
+- If you're experiencing cluster issues after updating, reset your Kubernetes cluster. Resetting a Kubernetes cluster can help resolve issues by essentially reverting the cluster to a clean state, and clearing out misconfigurations, corrupted data, or stuck resources that may be causing problems. If the issue still persists, you may need to clean and purge data, and then restart Docker Desktop. 
 
 ## Turn off and uninstall Kubernetes
 
 To turn off Kubernetes in Docker Desktop:
+
 1. From the Docker Desktop Dashboard, select the **Settings** icon.
-2. Select **Kubernetes** from the left sidebar. 
-3. Next to **Enable Kubernetes**, clear the checkbox
-4. Select **Apply & Restart** to save the settings.This stops and removes Kubernetes containers, and also removes the `/usr/local/bin/kubectl` command.
+2. Select the **Kubernetes** tab. 
+3. Deselect the **Enable Kubernetes** checkbox.
+4. Select **Apply & Restart** to save the settings. This stops and removes Kubernetes containers, and also removes the `/usr/local/bin/kubectl` command.
