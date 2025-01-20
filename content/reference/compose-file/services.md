@@ -268,12 +268,9 @@ If the value is `[]` (empty list) or `''` (empty string), the default command de
 > ```yaml
 > command: /bin/sh -c 'echo "hello $$HOSTNAME"'
 > ```
-> 
-> If the `entrypoint` (or the image's `ENTRYPOINT`) is configured to invoke a shell, use the exec form syntax for `command` to ensure proper processing. For example:
->
-> ```yaml
-> command: [ "bundle", "exec", "thin", "-p", "3000" ]
-> ```
+
+The value can also be a list, similar to the [exec-form syntax](/reference/dockerfile.md#exec-form) 
+used by the [Dockerfile](/manuals/engine/reference.md#cmd).
 
 ### `configs`
 
