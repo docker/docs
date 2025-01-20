@@ -1,3 +1,11 @@
+{{- /*
+  Renders a sidebar for pages in the `/guides` section.
+  - Detects if the current page is part of a multipage guide (`.Store.Set "multipage"`).
+  - Displays the section's title, summary, languages, tags, and estimated time (`Params.time`).
+  - Includes a stepper navigation (`guides-stepper.html`) for multipage guides.
+  - Optionally lists resource links from `Params.resource_links`.
+  - Provides a link back to the main `/guides/` index.
+*/ -}}
 <div class="flex flex-col gap-4 px-4 pt-2">
   {{- $root := . }}
   {{- .Store.Set "multipage" false }}

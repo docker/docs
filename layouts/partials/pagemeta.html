@@ -1,3 +1,10 @@
+{{- /*
+  Renders a table of contents (ToC) for the page.
+  - Uses `.Fragments.Headings` to generate a nested ToC if headings exist and `notoc` is not set to `true`.
+  - Limits heading levels to a min and max range (`$min` and `$max`).
+  - Wraps the ToC in a `data-pagefind-ignore` container to exclude it from search indexing.
+  - Includes a recursive template (`walkHeadingFragments`) to handle nested headings.
+*/ -}}
 {{- $toc := false }}
 {{- with .Fragments }}
   {{- $toc = and (ne page.Params.notoc true) .Headings }}

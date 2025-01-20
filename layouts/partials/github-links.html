@@ -1,3 +1,8 @@
+{{- /*
+  Adds links for editing the page or requesting changes:
+  - "Edit this page": Only in production, skips files from `_vendor/` (upstream repositories).
+  - "Request changes": Links to a pre-filled issue form.
+*/ -}}
 {{ if hugo.IsProduction }}
 {{ with .File }}
 {{ if not (in .Filename "/_vendor/") }}

@@ -1,3 +1,8 @@
+{{- /*
+  Requires the file `static/sitemap.xsl` to exist for the XSL styling to work.
+  If missing, the sitemap will lack the associated styling.
+  */
+-}}
 {{ printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
 {{ printf "<?xml-stylesheet type=\"text/xsl\" href=\"%s\"?>" (urls.AbsURL "sitemap.xsl") | safeHTML }}
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

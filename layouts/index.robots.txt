@@ -1,3 +1,9 @@
+{{- /*
+	For Netlify deployments, we disallow all routes to prevent search
+	engines from indexing our preview sites.
+	*/
+-}}
+
 {{- if hugo.IsProduction -}}
 User-agent: *
 

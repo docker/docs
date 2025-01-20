@@ -1,10 +1,9 @@
-{{ $title := partial "utils/title.html" . }}
 {{ $description := partial "utils/description.html" . }}
 {{ if .IsHome }}
   <title>{{ site.Title }}</title>
 {{ else }}
   <title>
-    {{ printf "%s | %s" $title site.Title }}
+    {{ printf "%s | %s" .LinkTitle site.Title }}
   </title>
 {{ end }}
 {{ if or (eq .Params.sitemap false) (not hugo.IsProduction) }}
@@ -22,7 +21,7 @@
 <meta name="theme-color" content="#2496ed" />
 
 <!-- SEO -->
-<meta name="twitter:title" itemprop="title name" content="{{ $title }}" />
+<meta name="twitter:title" itemprop="title name" content="{{ .LinkTitle }}" />
 <meta
   name="twitter:description"
   property="og:description"
@@ -38,7 +37,7 @@
   content="{{ (resources.Get "images/thumbnail.webp").Permalink }}"
 />
 <meta name="twitter:image:alt" content="Docker Documentation" />
-<meta property="og:title" content="{{ $title }}" />
+<meta property="og:title" content="{{ .LinkTitle }}" />
 <meta property="og:description" content="{{ $description }}" />
 <meta property="og:type" content="website" />
 <meta
@@ -59,4 +58,4 @@
   itemprop="datePublished"
   content="{{ .PublishDate | default .Lastmod }}"
 />
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":{{ $title | jsonify }},"description":{{ $description | jsonify }},"url":"{{ .Permalink }}"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":{{ .LinkTitle | jsonify }},"description":{{ $description | jsonify }},"url":"{{ .Permalink }}"}</script>

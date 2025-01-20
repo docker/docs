@@ -43,12 +43,6 @@ module.exports = {
           },
         },
       }),
-
-      gridTemplateColumns: {
-        'main-xl': 'minmax(300px, 1fr) minmax(100ch, 1fr) 1fr',
-        'main-lg': '300px minmax(75ch, 2fr) 1fr',
-        'main-md': '250px 1fr',
-      },
     },
 
     // theme values

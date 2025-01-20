@@ -1,3 +1,9 @@
+{{- /*
+  Complements the section-specific sidebar navigation.
+  - Renders the main navigation for site sections, linking to the current or ancestor section/page.
+  - Uses the `site.Menus.main` configuration to determine primary navigation structure.
+  - Toggles visibility of nested menu items for the main sections.
+*/ -}}
 <!-- Main navigation for the sidebar -->
 <div class="py-2 px-4" x-data="{ expanded: false }">
   <div class="flex w-full items-center justify-between">

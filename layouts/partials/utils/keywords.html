@@ -1,3 +1,9 @@
+{{- /*
+  Utility template to extract keywords for the current page.
+  - Uses `.Keywords` if available or falls back to front matter in `site.Data.frontmatter`.
+  - Cleans and trims keywords, joining them into a comma-separated string.
+  - Intended for reuse in meta tags or other keyword-based contexts.
+*/ -}}
 {{ $keywords := "" }}
 {{ if .Keywords }}
   {{ $keywords = collections.Apply .Keywords "strings.Trim" "." ", " }}
