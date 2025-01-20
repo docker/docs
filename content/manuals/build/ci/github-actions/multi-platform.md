@@ -100,11 +100,13 @@ jobs:
 
 ## Distribute build across multiple runners
 
-In the previous example, each platform is built on the same runner which can
-take a long time depending on the number of platforms and your Dockerfile.
-
-To solve this issue you can use a matrix strategy to distribute the build for
-each platform across multiple runners and create manifest list using the
+Building multiple platforms on the same runner can significantly extend build
+times, particularly when dealing with complex Dockerfiles or a high number of
+target platforms. By distributing platform-specific builds across multiple
+runners using a matrix strategy, you can drastically reduce build durations and
+streamline your CI pipeline. These examples demonstrate how to allocate each
+platform build to a dedicated runner, including ARM-native runners where
+applicable, and create a unified manifest list using the
 [`buildx imagetools create` command](/reference/cli/docker/buildx/imagetools/create.md).
 
 The following workflow will build the image for each platform on a dedicated
@@ -123,13 +125,15 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        platform:
-          - linux/amd64
-          - linux/arm64
+        include:
+        - platform: linux/amd64
+          runner: ubuntu-latest
+        - platform: linux/arm64
+          runner: ubuntu-24.04-arm
+    runs-on: ${{ matrix.runner }}
     steps:
       - name: Prepare
         run: |
@@ -311,13 +315,13 @@ jobs:
           retention-days: 1
 
   build:
-    runs-on: ubuntu-latest
     needs:
       - prepare
     strategy:
       fail-fast: false
       matrix:
         platform: ${{ fromJson(needs.prepare.outputs.matrix) }}
+    runs-on: ${{ startsWith(matrix.platform, 'linux/arm') && 'ubuntu-24.04-arm' || 'ubuntu-latest' }}
     steps:
       - name: Prepare
         run: |
@@ -329,15 +333,12 @@ jobs:
         with:
           name: bake-meta
           path: ${{ runner.temp }}
-      
+
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
