@@ -12,7 +12,7 @@ aliases:
 {{< include "compose/watch.md" >}}
 
 `watch` adheres to the following file path rules:
-* All paths are relative to the project directory
+* All paths are relative to the project directory, apart from ignore path
 * Directories are watched recursively
 * Glob patterns aren't supported
 * Rules from `.dockerignore` apply
@@ -114,6 +114,10 @@ For `path: ./app/html` and a change to `./app/html/index.html`:
 * `target: /app/static` -> `/app/static/index.html`
 * `target: /assets` -> `/assets/index.html`
 
+### `ignore`
+
+The `ignore` paths are relative to the `path` defined in the same `watch` rule, not to the project directory. In the following Example  1, the ignore path would be relative to the `./web` directory specified in the `path` attribute.
+
 ## Example 1
 
 This minimal example targets a Node.js application with the following structure:
@@ -121,7 +125,8 @@ This minimal example targets a Node.js application with the following structure:
 myproject/
 ├── web/
 │   ├── App.jsx
-│   └── index.js
+│   ├── index.js
+│   └── node_modules/
 ├── Dockerfile
 ├── compose.yaml
 └── package.json
@@ -151,6 +156,8 @@ Then, whenever a source file in the `web/` directory is changed, Compose syncs t
 For example, `./web/App.jsx` is copied to `/src/web/App.jsx`.
 
 Once copied, the bundler updates the running application without a restart.
+
+And in this case, the `ignore` rule would apply to `myproject/web/node_modules/`, not `myproject/node_modules/`.
 
 Unlike source code files, adding a new dependency can’t be done on-the-fly, so whenever `package.json` is changed, Compose
 rebuilds the image and recreates the `web` service container.
