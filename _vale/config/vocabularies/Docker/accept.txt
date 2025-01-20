@@ -198,6 +198,7 @@ systemd
 tmpfs
 ufw
 uid
+unmanaged
 umask
 vSphere
 vpnkit
