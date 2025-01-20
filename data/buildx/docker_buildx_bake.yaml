@@ -59,24 +59,34 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: list
+      value_type: string
+      description: List targets or variables
+      details_url: '#list'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: list-targets
       value_type: bool
       default_value: "false"
       description: List available targets
-      deprecated: false
+      deprecated: true
       hidden: true
       experimental: false
-      experimentalcli: true
+      experimentalcli: false
       kubernetes: false
       swarm: false
     - option: list-variables
       value_type: bool
       default_value: "false"
       description: List defined variables
-      deprecated: false
+      deprecated: true
       hidden: true
       experimental: false
-      experimentalcli: true
+      experimentalcli: false
       kubernetes: false
       swarm: false
     - option: load
@@ -125,7 +135,7 @@ options:
       value_type: string
       default_value: auto
       description: |
-        Set type of progress output (`auto`, `plain`, `tty`, `rawjson`). Use plain to show container output
+        Set type of progress output (`auto`, `quiet`, `plain`, `tty`, `rawjson`). Use plain to show container output
       details_url: '#progress'
       deprecated: false
       hidden: false
@@ -258,6 +268,42 @@ examples: |-
 
     See the [Bake file reference](/build/bake/reference/)
     for more details.
+
+    ### List targets and variables (--list) {#list}
+
+    The `--list` flag displays all available targets or variables in the Bake
+    configuration, along with a description (if set using the `description`
+    property in the Bake file).
+
+    To list all targets:
+
+    ```console {title="List targets"}
+    $ docker buildx bake --list=targets
+    TARGET              DESCRIPTION
+    binaries
+    default             binaries
+    update-docs
+    validate
+    validate-golangci   Validate .golangci.yml schema (does not run Go linter)
+    ```
+
+    To list variables:
+
+    ```console
+    $ docker buildx bake --list=variables
+    VARIABLE      VALUE                DESCRIPTION
+    REGISTRY      docker.io/username   Registry and namespace
+    IMAGE_NAME    my-app               Image name
+    GO_VERSION    <null>
+    ```
+
+    By default, the output of `docker buildx bake --list` is presented in a table
+    format. Alternatively, you can use a long-form CSV syntax and specify a
+    `format` attribute to output the list in JSON.
+
+    ```console
+    $ docker buildx bake --list=type=targets,format=json
+    ```
 
     ### Write build results metadata to a file (--metadata-file) {#metadata-file}
 
