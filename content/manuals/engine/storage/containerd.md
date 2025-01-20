@@ -8,11 +8,7 @@ aliases:
   - /storage/containerd/
 ---
 
-> [!NOTE]
->
-> The containerd image store is an experimental feature of Docker Engine.
-> If you're using Docker Desktop, refer to the instructions on the
-> [containerd image store with Docker Desktop page](/manuals/desktop/features/containerd.md).
+{{< summary-bar feature_name="containerd" >}}
 
 containerd, the industry-standard container runtime, uses snapshotters instead
 of the classic storage drivers for storing image and container data.

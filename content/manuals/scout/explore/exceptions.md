@@ -78,11 +78,7 @@ To view all exceptions for a specific image tag:
 
 ### View exceptions in the CLI
 
-{{% experimental %}}
-Viewing exceptions in the CLI is an experimental feature.
-It requires the latest version of the Docker Scout CLI plugin.
-Some exceptions may not appear correctly in the CLI.
-{{% /experimental %}}
+{{< summary-bar feature_name="Docker Scout exceptions" >}}
 
 Vulnerability exceptions are highlighted in the CLI when you run `docker scout
 cves <image>`. If a CVE is suppressed by an exception, a `SUPPRESSED` label

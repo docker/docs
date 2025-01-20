@@ -7,10 +7,7 @@ aliases:
 - /docker-hub/builds/how-builds-work/
 ---
 
-> [!NOTE]
->
-> Automated builds require a
-> Docker Pro, Team, or Business subscription.
+{{< summary-bar feature_name="Automated builds" >}}
 
 Docker Hub can automatically build images from source code in an external
 repository and automatically push the built image to your Docker repositories.

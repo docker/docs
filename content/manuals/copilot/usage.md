@@ -8,9 +8,7 @@ description: |
 weight: 20
 ---
 
-{{% restricted title="Early Access" %}}
-The Docker for GitHub Copilot extension is an [early access](/release-lifecycle#early-access-ea) product.
-{{% /restricted %}}
+{{< summary-bar feature_name="Docker GitHub Copilot" >}}
 
 The Docker Extension for GitHub Copilot provides a chat interface that you can
 use to interact with the Docker agent. You can ask questions and get help

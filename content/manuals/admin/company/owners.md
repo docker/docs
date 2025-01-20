@@ -6,6 +6,8 @@ aliases:
 - /docker-hub/company-owner/
 ---
 
+{{< summary-bar feature_name="Company" >}}
+
 A company can have multiple owners. Company owners have company-wide
 observability and can manage company-wide settings that apply to all associated
 organizations. In addition, company owners have the same access as organization

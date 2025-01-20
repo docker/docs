@@ -6,7 +6,7 @@ linkTitle: Compose Bridge
 weight: 50
 ---
 
-{{< include "compose-bridge-experimental.md" >}}
+{{< summary-bar feature_name="Compose bridge" >}}
 
 Compose Bridge lets you transform your Compose configuration file into configuration files for different platforms, primarily focusing on Kubernetes. The default transformation generates Kubernetes manifests and a Kustomize overlay which are designed for deployment on Docker Desktop with Kubernetes enabled.  
 

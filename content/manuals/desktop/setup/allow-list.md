@@ -9,6 +9,8 @@ aliases:
  - /desktop/allow-list/
 ---
 
+{{< summary-bar feature_name="Allow list" >}}
+
 This page contains the domain URLs that you need to add to a firewall allowlist to ensure Docker Desktop works properly within your organization.
 
 ## Domain URLs to allow

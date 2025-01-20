@@ -15,9 +15,7 @@ description: |
 keywords: Docker, GitHub Copilot, extension, Visual Studio Code, chat, ai, containerization
 ---
 
-{{% restricted title="Early Access" %}}
-The Docker for GitHub Copilot extension is an [early access](/release-lifecycle#early-access-ea) product.
-{{% /restricted %}}
+{{< summary-bar feature_name="Docker GitHub Copilot" >}}
 
 The [Docker for GitHub Copilot](https://github.com/marketplace/docker-for-github-copilot)
 extension integrates Docker's capabilities with GitHub Copilot, providing

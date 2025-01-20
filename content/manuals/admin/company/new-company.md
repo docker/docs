@@ -6,6 +6,8 @@ aliases:
 - /docker-hub/new-company/
 ---
 
+{{< summary-bar feature_name="Company" >}}
+
 You can create a new company in the Docker Admin Console. Before you begin, you must:
 - Be the owner of the organization you want to add to your company
 - Have a Docker Business subscription

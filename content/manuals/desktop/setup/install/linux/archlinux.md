@@ -19,9 +19,7 @@ aliases:
 
 This page contains information on how to install, launch and upgrade Docker Desktop on an Arch-based distribution. 
 
-> [!IMPORTANT]
->
-> This is an experimental installation package. Docker has not tested or verified the installation.
+{{< summary-bar feature_name="Docker Desktop Archlinux" >}}
 
 ## Prerequisites
 
