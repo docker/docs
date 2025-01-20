@@ -270,7 +270,7 @@ If the value is `[]` (empty list) or `''` (empty string), the default command de
 > ```
 
 The value can also be a list, similar to the [exec-form syntax](/reference/dockerfile.md#exec-form) 
-used by the [Dockerfile](/manuals/engine/reference.md#cmd).
+used by the [Dockerfile](/reference/dockerfile.md#exec-form).
 
 ### `configs`
 
