@@ -257,15 +257,20 @@ cgroup_parent: m-executor-abcd
 command: bundle exec thin -p 3000
 ```
 
-The value can also be a list, in a manner similar to [Dockerfile](https://docs.docker.com/reference/dockerfile/#cmd):
-
-```yaml
-command: [ "bundle", "exec", "thin", "-p", "3000" ]
-```
-
 If the value is `null`, the default command from the image is used.
 
 If the value is `[]` (empty list) or `''` (empty string), the default command declared by the image is ignored, or in other words overridden to be empty.
+
+> [!NOTE]
+>
+> Unlike the `CMD` instruction in a Dockerfile, the `command` field doesn't automatically run within the context of the [`SHELL`](/reference/dockerfile.md#shell-form) instruction defined in the image. If your `command` relies on shell-specific features, such as environment variable expansion, you need to explicitly run it within a shell. For example:
+> 
+> ```yaml
+> command: /bin/sh -c 'echo "hello $$HOSTNAME"'
+> ```
+
+The value can also be a list, similar to the [exec-form syntax](/reference/dockerfile.md#exec-form) 
+used by the [Dockerfile](/reference/dockerfile.md#exec-form).
 
 ### `configs`
 
@@ -766,11 +771,11 @@ extends:
 - `service`: Defines the name of the service being referenced as a base, for example `web` or `database`.
 - `file`: The location of a Compose configuration file defining that service.
 
-When a service uses `extends`, it can also specify dependencies on other resources, an explicit `volumes` declaration for instance. However, it's important to note that `extends` does not automatically incorporate the target volume definition into the extending Compose file. Instead, you are responsible for ensuring that an equivalent resource exists for the service being extended to maintain consistency. Docker Compose verifies that a resource with the referenced ID is present within the Compose model.
+#### Restrictions 
 
-Dependencies on other resources in an `extends` target can be:
-- An explicit reference by `volumes`, `networks`, `configs`, `secrets`, `links`, `volumes_from` or `depends_on`
-- A reference to another service using the `service:{name}` syntax in namespace declaration (`ipc`, `pid`, `network_mode`)
+When a service is referenced using `extends`, it can declare dependencies on other resources. These dependencies may be explicitly defined through attributes like `volumes`, `networks`, `configs`, `secrets`, `links`, `volumes_from`, or `depends_on`. Alternatively, dependencies can reference another service using the `service:{name}` syntax in namespace declarations such as `ipc`, `pid`, or `network_mode`.
+
+Compose does not automatically import these referenced resources into the extended model. It is your responsibility to ensure all required resources are explicitly declared in the model that relies on extends.
 
 Circular references with `extends` are not supported, Compose returns an error when one is detected.
 
