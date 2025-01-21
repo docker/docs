@@ -6,6 +6,8 @@ tags: [admin]
 linkTitle: Methods
 ---
 
+{{< summary-bar feature_name="Enforce sign-in" >}}
+
 This page outlines the different methods for enforcing sign-in for Docker Desktop.
 
 ## Registry key method (Windows only)

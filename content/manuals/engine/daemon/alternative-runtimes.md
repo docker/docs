@@ -166,6 +166,8 @@ $ docker run --rm --runtime youki hello-world
 
 ### Wasmtime
 
+{{< summary-bar feature_name="Wasmtime" >}}
+
 Wasmtime is a
 [Bytecode Alliance](https://bytecodealliance.org/)
 project, and a Wasm runtime that lets you run Wasm containers.
@@ -177,10 +179,6 @@ To add Wasmtime as a container runtime, follow these steps:
 
 1. Turn on the [containerd image store](/manuals/engine/storage/containerd.md)
    feature in the daemon configuration file.
-
-   > [!NOTE]
-   >
-   > This is an experimental feature.
 
    ```json
    {

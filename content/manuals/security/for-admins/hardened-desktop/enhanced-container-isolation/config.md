@@ -8,6 +8,8 @@ aliases:
 weight: 30
 ---
 
+{{< summary-bar feature_name="Hardened Docker Desktop" >}}
+
 ## Docker socket mount permissions
 
 By default, when Enhanced Container Isolation (ECI) is enabled, Docker Desktop does not allow bind-mounting the

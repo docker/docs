@@ -7,9 +7,7 @@ aliases:
 - /desktop/synchronized-file-sharing/
 ---
 
-> [!NOTE]
->
-> Synchronized file shares is available with Docker Desktop version 4.27 and later. It is available for customers with a Docker Pro, Team, or Business subscription. 
+{{< summary-bar feature_name="Synchronized file sharing" >}}
 
 Synchronized file shares is an alternative file sharing mechanism that provides fast and flexible host-to-VM file sharing, enhancing bind mount performance through the use of synchronized filesystem caches. 
 

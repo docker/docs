@@ -2,10 +2,12 @@
 description: How Enhanced Container Isolation works
 title: How does it work?
 keywords: set up, enhanced container isolation, rootless, security
-aliases: 
+aliases:
  - /desktop/hardened-desktop/enhanced-container-isolation/how-eci-works/
 weight: 10
 ---
+
+{{< summary-bar feature_name="Hardened Docker Desktop" >}}
 
 Docker implements Enhanced Container Isolation by using the [Sysbox
 container runtime](https://github.com/nestybox/sysbox). Sysbox is a fork of the

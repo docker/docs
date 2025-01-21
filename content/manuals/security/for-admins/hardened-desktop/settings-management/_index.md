@@ -10,9 +10,7 @@ aliases:
 weight: 10
 ---
 
-> [!NOTE]
->
-> Settings Management is available to Docker Business customers only.
+{{< summary-bar feature_name="Hardened Docker Desktop" >}}
 
 Settings Management helps you control key Docker Desktop settings, like proxies and network configurations, on your developers' machines within your organization.
 

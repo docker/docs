@@ -10,6 +10,8 @@ aliases:
 weight: 40
 ---
 
+{{< summary-bar feature_name="SSO" >}}
+
 Group mapping lets you sync user groups from your identity provider (IdP) with teams in your Docker organization. This automates team membership management, keeping your Docker teams up to date based on changes in your IdP. You can use group mapping once you have configured [single sign-on (SSO)](../single-sign-on/_index.md).
 
 > [!TIP]

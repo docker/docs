@@ -5,6 +5,4 @@ title: docker desktop (Beta)
 layout: cli
 ---
 
-{{% experimental title="Beta" %}}
-Docker Desktop CLI is currently in [Beta](/manuals/release-lifecycle.md#beta).
-{{% /experimental %}}
+{{< summary-bar feature_name="Docker Desktop CLI" >}}

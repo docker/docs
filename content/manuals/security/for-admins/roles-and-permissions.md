@@ -2,12 +2,14 @@
 description: >
   Use roles in your organization to control who has access to content,
   registry, and organization management permissions.
-keywords: members, teams, organization, company, roles, access, docker hub, admin console, security 
+keywords: members, teams, organization, company, roles, access, docker hub, admin console, security
 title: Roles and permissions
 aliases:
 - /docker-hub/roles-and-permissions/
 weight: 40
 ---
+
+{{< summary-bar feature_name="General admin" >}}
 
 Organization and company owners can assign roles to individuals giving them different permissions in the organization. This guide outlines Docker's organization roles and their permission scopes.
 

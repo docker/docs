@@ -11,6 +11,8 @@ aliases:
   - /build/cloud/
 ---
 
+{{< summary-bar feature_name="Docker Build Cloud" >}}
+
 Docker Build Cloud is a service that lets you build your container images
 faster, both locally and in CI. Builds run on cloud infrastructure optimally
 dimensioned for your workloads, no configuration required. The service uses a
