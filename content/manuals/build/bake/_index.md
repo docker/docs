@@ -21,7 +21,7 @@ A Bake file can be written in HCL, JSON, or YAML formats, where the YAML format
 is an extension of a Docker Compose file. Here's an example Bake file in HCL
 format:
 
-```hcl
+```hcl {title=docker-bake.hcl}
 group "default" {
   targets = ["frontend", "backend"]
 }

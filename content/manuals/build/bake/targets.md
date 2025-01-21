@@ -9,7 +9,7 @@ keywords: bake, target, targets, buildx, docker, buildkit, default
 A target in a Bake file represents a build invocation. It holds all the
 information you would normally pass to a `docker build` command using flags.
 
-```hcl
+```hcl {title=docker-bake.hcl}
 target "webapp" {
   dockerfile = "webapp.Dockerfile"
   tags = ["docker.io/username/webapp:latest"]
@@ -35,7 +35,7 @@ $ docker buildx bake webapp api tests
 If you don't specify a target when running `docker buildx bake`, Bake will
 build the target named `default`.
 
-```hcl
+```hcl {title=docker-bake.hcl}
 target "default" {
   dockerfile = "webapp.Dockerfile"
   tags = ["docker.io/username/webapp:latest"]
@@ -61,7 +61,7 @@ For all the properties you can set for a target, see the [Bake reference](/build
 You can group targets together using the `group` block. This is useful when you
 want to build multiple targets at once.
 
-```hcl
+```hcl {title=docker-bake.hcl}
 group "all" {
   targets = ["webapp", "api", "tests"]
 }

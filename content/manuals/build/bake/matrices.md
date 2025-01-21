@@ -19,7 +19,7 @@ should resolve, use the name attribute.
 The following example resolves the app target to `app-foo` and `app-bar`. It
 also uses the matrix value to define the [target build stage](/build/bake/reference/#targettarget).
 
-```hcl
+```hcl {title=docker-bake.hcl}
 target "app" {
   name = "app-${tgt}"
   matrix = {
@@ -73,7 +73,7 @@ The following example builds four targets:
 - `app-bar-1-0`
 - `app-bar-2-0`
 
-```hcl
+```hcl {title=docker-bake.hcl}
 target "app" {
   name = "app-${tgt}-${replace(version, ".", "-")}"
   matrix = {
@@ -98,7 +98,7 @@ The following example builds two targets:
 - `app-foo-1-0`
 - `app-bar-2-0`
 
-```hcl
+```hcl {title=docker-bake.hcl}
 target "app" {
   name = "app-${item.tgt}-${replace(item.version, ".", "-")}"
   matrix = {

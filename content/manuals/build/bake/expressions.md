@@ -30,7 +30,7 @@ Printing the Bake file with the `--print` flag shows the evaluated value for
 the `answer` build argument.
 
 ```console
-$ docker buildx bake --print app
+$ docker buildx bake --print
 ```
 
 ```json
@@ -76,13 +76,8 @@ $ docker buildx bake --print
 
 ```json
 {
-  "group": {
-    "default": {
-      "targets": ["default"]
-    }
-  },
   "target": {
-    "webapp": {
+    "default": {
       "context": ".",
       "dockerfile": "Dockerfile",
       "tags": ["my-image:latest"]
