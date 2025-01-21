@@ -241,8 +241,6 @@ $ docker buildx bake -f vars.hcl -f docker-bake.hcl --print app
 ```json
 {
   "target": {
-  printf("Hello, %s!\n\n", name_0);
-  printf("Hello, %s!\n\n", name_0);
     "webapp": {
       "context": ".",
       "contexts": {
