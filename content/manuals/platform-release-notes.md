@@ -14,6 +14,15 @@ This page provides details on new features, enhancements, known issues, and bug 
 
 Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projects/51/views/1?filterQuery=) to see what's coming next.
 
+## 2024-12-10
+
+### New
+
+- New Docker subscriptions are now available. For more information, see [Docker
+  subscriptions and features](/manuals/subscription/details.md) and [Announcing
+  Upgraded Docker Plans: Simpler, More Value, Better Development and
+  Productivity](https://www.docker.com/blog/november-2024-updated-plans-announcement/).
+
 ## 2024-11-18
 
 ### New
@@ -48,3 +57,15 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 
 - Deploying Docker Desktop via the [MSI installer](/manuals/desktop/setup/install/enterprise-deployment/msi-install-and-configure.md) is now generally available.
 - Two new methods to [enforce sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md) (Windows registry key and `.plist` file) are now generally available.
+
+## 2024-08-24
+
+### New
+
+- Administrators can now view [organization insights](/manuals/admin/organization/insights.md) (Early Access).
+
+## 2024-07-17
+
+### New
+
+- You can now centrally access and manage Docker products in [Docker Home](https://app.docker.com) (Early Access).

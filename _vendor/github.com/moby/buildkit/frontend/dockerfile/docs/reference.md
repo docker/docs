@@ -1280,11 +1280,11 @@ relative to the build context. For example, if the build context is the current
 directory, `ADD file.txt /` adds the file at `./file.txt` to the root of the
 filesystem in the build container.
 
-When adding source files from the build context, their paths are interpreted as
-relative to the root of the context. If you specify a relative path leading
-outside of the build context, such as `ADD ../something /something`, parent
-directory paths are stripped out automatically. The effective source path in
-this example becomes `ADD something /something`.
+Specifying a source path with a leading slash or one that navigates outside the
+build context, such as `ADD ../something /something`, automatically removes any
+parent directory navigation (`../`). Trailing slashes in the source path are
+also disregarded, making `ADD something/ /something` equivalent to `ADD
+something /something`.
 
 If the source is a directory, the contents of the directory are copied,
 including filesystem metadata. The directory itself isn't copied, only its
@@ -1476,8 +1476,8 @@ ADD [--checksum=<hash>] <src> ... <dir>
 ```
 
 The `--checksum` flag lets you verify the checksum of a remote resource. The
-checksum is formatted as `<algorithm>:<hash>`. The supported algorithms are
-`sha256`, `sha384`, and `sha512`.
+checksum is formatted as `sha256:<hash>`. SHA-256 is the only supported hash
+algorithm.
 
 ```dockerfile
 ADD --checksum=sha256:24454f830cdb571e2c4ad15481119c43b3cafd48dd869a9b2945d1036d1dc68d https://mirrors.edge.kernel.org/pub/linux/kernel/Historic/linux-0.01.tar.gz /
@@ -1556,11 +1556,14 @@ For more information about copying from named sources, see the
 
 #### Copying from the build context
 
-When copying source files from the build context, their paths are interpreted as
-relative to the root of the context. If you specify a relative path leading
-outside of the build context, such as `COPY ../something /something`, parent
-directory paths are stripped out automatically. The effective source path in
-this example becomes `COPY something /something`.
+When copying source files from the build context, paths are interpreted as
+relative to the root of the context.
+
+Specifying a source path with a leading slash or one that navigates outside the
+build context, such as `COPY ../something /something`, automatically removes
+any parent directory navigation (`../`). Trailing slashes in the source path
+are also disregarded, making `COPY something/ /something` equivalent to `COPY
+something /something`.
 
 If the source is a directory, the contents of the directory are copied,
 including filesystem metadata. The directory itself isn't copied, only its

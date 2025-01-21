@@ -118,7 +118,7 @@ params:
   # (Used to show e.g., "latest" and "latest"-1 in engine install examples
   docker_ce_version_prev: "27.4.1"
   # Latest Docker Compose version
-  compose_version: "v2.32.3"
+  compose_version: "v2.32.4"
   # Latest BuildKit version
   buildkit_version: "0.16.0"
 
@@ -261,7 +261,7 @@ module:
   proxy: https://proxy.golang.org,direct
   hugoVersion:
     extended: false
-    min: "0.139.0"
+    min: "0.141.0"
   mounts:
     # Mount the assets directory so it doesn't get overwritten
     - source: assets
