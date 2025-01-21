@@ -5,6 +5,11 @@ Admin Console:
   subscription: [Business]
   availability: Early access
   for: Administrators
+Admin orgs:
+  subscription: [Team, Business]
+  for: Administrators
+Air-gapped containers:
+  requires: Docker Desktop 4.29.0 and later
 Allow list:
   for: Administrators
 Amazon S3 cache:
@@ -31,6 +36,8 @@ containerd:
   availability: Experimental
 Dev Environments:
   availability: Beta
+Docker Build Cloud:
+  subscription: [Pro, Team, Business]
 docker compose alpha:
   availability: Experimental
 Docker Desktop Archlinux:
@@ -51,10 +58,16 @@ Docker Scout health scores:
 Domain audit:
   subscription: [Business]
   for: Administrators
+Enforce sign-in:
+  subscription: [Business]
+  for: Administrators
 General admin:
   for: Administrators
 GitHub Actions cache:
   availability: Experimental
+Hardened Docker Desktop:
+  subscription: [Business]
+  for: Administrators
 Import builds:
   availability: Beta
   requires: Docker Desktop 4.31 and later
@@ -87,6 +100,9 @@ Registry access management:
 SSO:
   subscription: [Business]
   for: Administrators
+Synchronized file sharing:
+  subscription: [Pro, Team, Business]
+  requires: Docker Desktop 4.27 and later
 USB/IP support:
   requires: Docker Desktop 4.35.0 and later
 VMM:

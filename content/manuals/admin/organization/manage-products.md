@@ -5,6 +5,8 @@ description: Learn how to manage Docker products for your organization
 keywords: organization, tools, products
 ---
 
+{{< summary-bar feature_name="Admin orgs" >}}
+
 In this section, learn how to manage access and view usage of the Docker
 products for your organization. For more detailed information about each
 product, including how to set up and configure them, see the following manuals:

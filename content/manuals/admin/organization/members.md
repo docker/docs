@@ -197,6 +197,8 @@ To update a member role:
 
 ## Export members CSV file
 
+{{< summary-bar feature_name="Admin orgs" >}}
+
 Owners can export a CSV file containing all members. The CSV file for a company contains the following fields:
 - Name: The user's name
 - Username: The user's Docker ID

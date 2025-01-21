@@ -5,6 +5,8 @@ title: Just-in-Time provisioning
 linkTitle: Just-in-Time
 ---
 
+{{< summary-bar feature_name="SSO" >}}
+
 Just-in-Time (JIT) provisioning automatically creates and updates user accounts after every successful single sign-on (SSO) authentication. JIT verifies that the user signing in belongs to the organization and the teams assigned to them in your identity provider (IdP). When you [create your SSO connection](../single-sign-on/_index.md), JIT provisioning is turned on by default.
 
 ## SSO authentication with JIT provisioning enabled

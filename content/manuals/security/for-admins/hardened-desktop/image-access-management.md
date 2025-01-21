@@ -11,9 +11,7 @@ aliases:
 weight: 40
 ---
 
-> [!NOTE]
->
-> Image Access Management is available to [Docker Business](/manuals/subscription/details.md#docker-business) customers only.
+{{< summary-bar feature_name="Hardened Docker Desktop" >}}
 
 Image Access Management gives you control over which types of images, such as Docker Official Images, Docker Verified Publisher Images, or community images, your developers can pull from Docker Hub.
 

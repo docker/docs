@@ -9,9 +9,7 @@ aliases:
  - /security/for-admins/hardened-desktop/settings-management/configure/
 ---
 
-> [!NOTE]
->
-> Settings Management is available to Docker Business customers only.
+{{< summary-bar feature_name="Hardened Docker Desktop" >}}
 
 This page contains information on how to configure Settings Management with an `admin-settings.json` file. You can specify and lock configuration parameters to create a standardized Docker Desktop environment across your company or organization.
 
