@@ -1,0 +1,38 @@
+command: docker buildx history inspect
+short: Inspect a build
+long: Inspect a build
+usage: docker buildx history inspect [OPTIONS] [REF]
+pname: docker buildx history
+plink: docker_buildx_history.yaml
+cname:
+    - docker buildx history inspect attachment
+clink:
+    - docker_buildx_history_inspect_attachment.yaml
+inherited_options:
+    - option: builder
+      value_type: string
+      description: Override the configured builder instance
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: debug
+      shorthand: D
+      value_type: bool
+      default_value: "false"
+      description: Enable debug logging
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

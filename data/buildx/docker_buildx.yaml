@@ -11,6 +11,7 @@ cname:
     - docker buildx debug
     - docker buildx dial-stdio
     - docker buildx du
+    - docker buildx history
     - docker buildx imagetools
     - docker buildx inspect
     - docker buildx ls
@@ -26,6 +27,7 @@ clink:
     - docker_buildx_debug.yaml
     - docker_buildx_dial-stdio.yaml
     - docker_buildx_du.yaml
+    - docker_buildx_history.yaml
     - docker_buildx_imagetools.yaml
     - docker_buildx_inspect.yaml
     - docker_buildx_ls.yaml

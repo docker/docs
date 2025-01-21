@@ -1,0 +1,46 @@
+command: docker buildx history
+short: Commands to work on build records
+long: Commands to work on build records
+usage: docker buildx history
+pname: docker buildx
+plink: docker_buildx.yaml
+cname:
+    - docker buildx history inspect
+    - docker buildx history logs
+    - docker buildx history ls
+    - docker buildx history open
+    - docker buildx history rm
+clink:
+    - docker_buildx_history_inspect.yaml
+    - docker_buildx_history_logs.yaml
+    - docker_buildx_history_ls.yaml
+    - docker_buildx_history_open.yaml
+    - docker_buildx_history_rm.yaml
+inherited_options:
+    - option: builder
+      value_type: string
+      description: Override the configured builder instance
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: debug
+      shorthand: D
+      value_type: bool
+      default_value: "false"
+      description: Enable debug logging
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+
