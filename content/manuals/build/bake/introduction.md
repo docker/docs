@@ -71,7 +71,7 @@ $ docker build \
 
 The Bake equivalent would be:
 
-```hcl
+```hcl {title=docker-bake.hcl}
 target "myapp" {
   context = "."
   dockerfile = "Dockerfile"
