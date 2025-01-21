@@ -355,7 +355,7 @@ options:
       value_type: string
       default_value: auto
       description: |
-        Set type of progress output (`auto`, `plain`, `tty`, `rawjson`). Use plain to show container output
+        Set type of progress output (`auto`, `quiet`, `plain`, `tty`, `rawjson`). Use plain to show container output
       details_url: '#progress'
       deprecated: false
       hidden: false
@@ -1317,8 +1317,12 @@ examples: |-
     --progress=VALUE
     ```
 
-    Set type of progress output (`auto`, `plain`, `tty`, `rawjson`). Use `plain` to show container
-    output (default `auto`).
+    Set type of progress output. Supported values are:
+    - `auto` (default): Uses the `tty` mode if the client is a TTY, or `plain` otherwise
+    - `tty`: An interactive stream of the output with color and redrawing
+    - `plain`: Prints the raw build progress in a plaintext format
+    - `quiet`: Suppress the build output and print image ID on success (same as `--quiet`)
+    - `rawjson`: Prints the raw build progress as JSON lines
 
     > [!NOTE]
     > You can also use the `BUILDKIT_PROGRESS` environment variable to set its value.
