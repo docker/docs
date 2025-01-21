@@ -5,7 +5,7 @@ keywords: Docker roles, permissions management, access control, IT administratio
 weight: 10
 ---
 
-Managing roles and permissions is a fundamental aspect of maintaining security, collaboration, and operational efficiency in Docker. With the right configurations, IT administrators can ensure developers have seamless access to necessary resources while preventing unauthorized access. This guide is tailored to help you identify Docker users, allocate subscription seats efficiently, and strategically assign roles to align with your organization's structure. By following these steps, you can enhance productivity and maintain robust access control.
+With the right configurations, you can ensure your developers have easy access to necessary resources while preventing unauthorized access. This page guides you through identifying Docker users, so you can allocate subscription seats efficiently, and assigning roles to align with your organization's structure. 
 
 ## Step one: Identify your Docker users and accounts
 
@@ -46,6 +46,6 @@ For more information, see [Create and manage a team](/manuals/admin/organization
 
 ### Best practices
 
-- Apply the principle of least privilege: Assign users only the minimum permissions necessary for their roles.
+- Apply the principle of least privilege. Assign users only the minimum permissions necessary for their roles.
 
-- Conduct regular audits: Plan to conduct regulars reviews of role assignments to ensure they align with evolving team structures and organizational responsibilities.
+- Plan to conduct regulars reviews of role assignments to ensure they align with evolving team structures and organizational responsibilities.

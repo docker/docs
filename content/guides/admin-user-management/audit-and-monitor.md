@@ -5,19 +5,19 @@ keywords: organizational insights, user management, access control, security, mo
 weight: 30
 ---
 
-Activity logs and insights are essential for user and access management in Docker. They provide visibility into user actions, team workflows, and organizational trends, helping enhance security, ensure compliance, and boost productivity.
+Activity logs and Insights are useful tools for user and access management in Docker. They provide visibility into user actions, team workflows, and organizational trends, helping enhance security, ensure compliance, and boost productivity.
 
 ## Activity logs
 
 Activity logs track events at the organization and repository levels, offering a clear view of activities like repository changes, team updates, and billing adjustments.
+
+It is available for Docker Team or Docker Business plans, with data retained for three months.
 
 ### Key features
 
  - Change tracking: View what changed, who made the change, and when.
 
  - Comprehensive reporting: Monitor critical events such as repository creation, deletion, privacy changes, and role assignments.
-
- - Requirements: Available for Docker Team or Docker Business plans, with data retained for three months.
 
 ### Example scenarios
 

@@ -1,21 +1,15 @@
 ---
-title: Onboarding and managing roles and ermissions in Docker
+title: Onboarding and managing roles and permissions in Docker
 description: Learn how to manage roles, invite members, and implement scalable access control in Docker for secure and efficient collaboration.
 keywords: sso, scim, jit, invite members, docker hub, docker admin console, onboarding, security
 weight: 20
 ---
 
-Learn how to invite owners, add members, and implement advanced tools like SSO and SCIM for secure and efficient access control when onboarding your organization and developers.
+This page guides you through onboarding owners and members, and using tools like SSO and SCIM to future-proof onboarding going forward.
 
 ## Step 1: Invite owners
 
-When you create a Docker organization, you automatically become its sole owner. While optional, adding additional owners can significantly ease the process of onboarding and managing your organization by distributing administrative responsibilities.
-
-### Why add owners?
-
- - Shared responsibilities: Distribute administrative tasks, such as managing roles and permissions.
-
- - Improved continuity: Ensure seamless operations in case the primary owner is unavailable.
+When you create a Docker organization, you automatically become its sole owner. While optional, adding additional owners can significantly ease the process of onboarding and managing your organization by distributing administrative responsibilities. It also ensures continuity and does not cause a blocker if the primary own is unavailable.
 
 For detailed information on owners, see [Roles and permissions](/manuals/security/for-admins/roles-and-permissions.md)
 
