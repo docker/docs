@@ -20,10 +20,12 @@ FROM debian
 
 For most cases, you don't need to create your own base image. Docker Hub
 contains a vast library of Docker images that are suitable for use as a base
-image in your build. [Docker Official Images](../../trusted-content/official-images/_index.md)
+image in your build. [Docker Official
+Images](../../docker-hub/image-library/trusted-content.md#docker-official-images)
 are specifically designed as a set of hardened, battle-tested images that
 support a wide variety of platforms, languages, and frameworks. There are also
-[Docker Verified Publisher](https://hub.docker.com/search?q=&image_filter=store)
+[Docker Verified
+Publisher](../../docker-hub/image-library/trusted-content.md#verified-publisher-images)
 images, created by trusted publishing partners, verified by Docker.
 
 ## Create a base image
@@ -123,4 +125,4 @@ For more information about building images and writing Dockerfiles, see:
 
 * [Dockerfile reference](/reference/dockerfile.md)
 * [Dockerfile best practices](/manuals/build/building/best-practices.md)
-* [Docker Official Images](../../trusted-content/official-images/_index.md)
+* [Docker Official Images](../../docker-hub/image-library/trusted-content.md#docker-official-images)

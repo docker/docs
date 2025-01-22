@@ -56,9 +56,6 @@ jobs:
       pull-requests: write
 
     steps:
-      - name: Setup Docker buildx
-        uses: docker/setup-buildx-action@v3
-
       # Authenticate to the container registry
       - name: Authenticate to registry ${{ env.REGISTRY }}
         uses: docker/login-action@v3
@@ -66,6 +63,9 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ secrets.REGISTRY_USER }}
           password: ${{ secrets.REGISTRY_TOKEN }}
+      
+      - name: Setup Docker buildx
+        uses: docker/setup-buildx-action@v3
 
       # Extract metadata (tags, labels) for Docker
       - name: Extract Docker metadata

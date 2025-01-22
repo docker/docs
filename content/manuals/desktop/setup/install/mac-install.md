@@ -31,6 +31,10 @@ This page contains download URLs, information about system requirements, and ins
 
 *For checksums, see [Release notes](/manuals/desktop/release-notes.md).*
 
+> [!WARNING]
+>
+> If you're experiencing malware detection issues, follow the steps documented in [docker/for-mac#7527](https://github.com/docker/for-mac/issues/7527).
+
 ## System requirements
 
 {{< tabs >}}
@@ -128,9 +132,9 @@ The `install` command accepts the following flags:
 > - [Kolide](https://www.kolide.com/features/device-inventory/properties/mac-apps)
 > - [Workspace One](https://blogs.vmware.com/euc/2022/11/how-to-use-workspace-one-intelligence-to-manage-app-licenses-and-reduce-costs.html)
 
-## Where to go next 
+## Where to go next
 
-- Explore [Docker's core subscriptions](https://www.docker.com/pricing/) to see what Docker can offer you. 
+- Explore [Docker's subscriptions](https://www.docker.com/pricing/) to see what Docker can offer you.
 - [Get started with Docker](/get-started/introduction/_index.md).
 - [Explore Docker Desktop](/manuals/desktop/use-desktop/_index.md) and all its features.
 - [Troubleshooting](/manuals/desktop/troubleshoot-and-support/troubleshoot/_index.md) describes common problems, workarounds, how

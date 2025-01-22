@@ -5,6 +5,8 @@ title: Just-in-Time provisioning
 linkTitle: Just-in-Time
 ---
 
+{{< summary-bar feature_name="SSO" >}}
+
 Just-in-Time (JIT) provisioning automatically creates and updates user accounts after every successful single sign-on (SSO) authentication. JIT verifies that the user signing in belongs to the organization and the teams assigned to them in your identity provider (IdP). When you [create your SSO connection](../single-sign-on/_index.md), JIT provisioning is turned on by default.
 
 ## SSO authentication with JIT provisioning enabled
@@ -63,7 +65,7 @@ You may want to disable JIT provisioning for reasons such as the following:
 
 Users are provisioned with JIT by default. If you enable SCIM, you can disable JIT:
 
-1. Sign in to the [Admin Console](https://app.docker.com/).
-2. Select your organization or company in the left-hand navigation drop-down, and then select **SSO and SCIM**.
+1. In the [Admin Console](https://app.docker.com/admin), select your organization.
+2. Select **SSO and SCIM**.
 3. In the SSO connections table, select the **Action** icon and then **Disable JIT provisioning**.
 4. Select **Disable** to confirm.

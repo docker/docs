@@ -51,7 +51,7 @@ When used to build service images from source, the Compose file creates three Do
 
 * `example/webapp`: A Docker image is built using `webapp` sub-directory, within the Compose file's parent folder, as the Docker build context. Lack of a `Dockerfile` within this folder throws an error.
 * `example/database`: A Docker image is built using `backend` sub-directory within the Compose file parent folder. `backend.Dockerfile` file is used to define build steps, this file is searched relative to the context path, which means `..` resolves to the Compose file's parent folder, so `backend.Dockerfile` is a sibling file.
-* A Docker image is built using the `custom` directory with the user's HOME as the Docker context. Compose displays a warning about the non-portable path used to build image.
+* A Docker image is built using the `custom` directory with the user's `$HOME` as the Docker context. Compose displays a warning about the non-portable path used to build image.
 
 On push, both `example/webapp` and `example/database` Docker images are pushed to the default registry. The `custom` service image is skipped as no `image` attribute is set and Compose displays a warning about this missing attribute.
 
@@ -81,7 +81,7 @@ The second part represents a subdirectory inside the repository that is used as 
 
 Alternatively `build` can be an object with fields defined as follows:
 
-### additional_contexts
+### `additional_contexts`
 
 {{< introduced compose 2.17.0 "/manuals/compose/releases/release-notes.md#2170" >}}
 
@@ -118,9 +118,9 @@ the unused contexts.
 Illustrative examples of how this is used in Buildx can be found
 [here](https://github.com/docker/buildx/blob/master/docs/reference/buildx_build.md#-additional-build-contexts---build-context).
 
-### args
+### `args`
 
-`args` define build arguments, i.e. Dockerfile `ARG` values.
+`args` define build arguments, that is Dockerfile `ARG` values.
 
 Using the following Dockerfile as an example:
 
@@ -146,16 +146,16 @@ build:
 ```
 
 Values can be omitted when specifying a build argument, in which case its value at build time must be obtained by user interaction,
-otherwise the build arg won't be set when building the Docker image.
+otherwise the build argument won't be set when building the Docker image.
 
 ```yml
 args:
   - GIT_COMMIT
 ```
 
-### context
+### `context`
 
-`context` defines either a path to a directory containing a Dockerfile, or a URL to a git repository.
+`context` defines either a path to a directory containing a Dockerfile, or a URL to a Git repository.
 
 When the value supplied is a relative path, it is interpreted as relative to the project directory.
 Compose warns you about the absolute path used to define the build context as those prevent the Compose file
@@ -174,7 +174,7 @@ services:
 
 If not set explicitly, `context` defaults to project directory (`.`). 
 
-### cache_from
+### `cache_from`
 
 `cache_from` defines a list of sources the image builder should use for cache resolution.
 
@@ -196,7 +196,7 @@ build:
 
 Unsupported caches are ignored and don't prevent you from building images.
 
-### cache_to
+### `cache_to`
 
 `cache_to` defines a list of export locations to be used to share build cache with future builds.
 
@@ -212,7 +212,7 @@ Cache target is defined using the same `type=TYPE[,KEY=VALUE]` syntax defined by
 
 Unsupported caches are ignored and don't prevent you from building images.
 
-### dockerfile
+### `dockerfile`
 
 `dockerfile` sets an alternate Dockerfile. A relative path is resolved from the build context.
 Compose warns you about the absolute path used to define the Dockerfile as it prevents Compose files
@@ -227,7 +227,7 @@ build:
   dockerfile: webapp.Dockerfile
 ```
 
-### dockerfile_inline
+### `dockerfile_inline`
 
 {{< introduced compose 2.17.0 "/manuals/compose/releases/release-notes.md#2170" >}}
 
@@ -244,7 +244,7 @@ build:
     RUN some command
 ```
 
-### entitlements
+### `entitlements`
 
 {{< introduced compose 2.27.1 "/manuals/compose/releases/release-notes.md#2271" >}}
 
@@ -256,9 +256,9 @@ build:
    - security.insecure
  ```
 
-### extra_hosts
+### `extra_hosts`
 
-`extra_hosts` adds hostname mappings at build-time. Use the same syntax as [extra_hosts](services.md#extra_hosts).
+`extra_hosts` adds hostname mappings at build-time. Use the same syntax as [`extra_hosts`](services.md#extra_hosts).
 
 ```yml
 extra_hosts:
@@ -290,12 +290,12 @@ configuration, which means for Linux `/etc/hosts` will get extra lines:
 ::1             myhostv6
 ```
 
-### isolation
+### `isolation`
 
 `isolation` specifies a build’s container isolation technology. Like [isolation](services.md#isolation), supported values
 are platform specific.
 
-### labels
+### `labels`
 
 `labels` add metadata to the resulting image. `labels` can be set either as an array or a map.
 
@@ -319,7 +319,7 @@ build:
     - "com.example.label-with-empty-value"
 ```
 
-### network
+### `network`
 
 Set the network containers connect to for the `RUN` instructions during build.
 
@@ -343,13 +343,13 @@ build:
   network: none
 ```
 
-### no_cache
+### `no_cache`
 
 `no_cache` disables image builder cache and enforces a full rebuild from source for all image layers. This only
 applies to layers declared in the Dockerfile, referenced images can be retrieved from local image store whenever tag
 has been updated on registry (see [pull](#pull)).
 
-### platforms
+### `platforms`
 
 `platforms` defines a list of target [platforms](services.md#platform).
 
@@ -368,8 +368,8 @@ When the `platforms` attribute is defined, Compose includes the service's
 platform, otherwise users won't be able to run images they built.
 
 Composes reports an error in the following cases:
-* When the list contains multiple platforms but the implementation is incapable of storing multi-platform images.
-* When the list contains an unsupported platform.
+- When the list contains multiple platforms but the implementation is incapable of storing multi-platform images.
+- When the list contains an unsupported platform.
 
   ```yml
   build:
@@ -378,7 +378,7 @@ Composes reports an error in the following cases:
       - "linux/amd64"
       - "unsupported/unsupported"
   ```
-* When the list is non-empty and does not contain the service's platform
+- When the list is non-empty and does not contain the service's platform.
 
   ```yml
   services:
@@ -390,7 +390,7 @@ Composes reports an error in the following cases:
           - "linux/arm64"
   ```
 
-### privileged
+### `privileged`
 
 {{< introduced compose 2.15.0 "/manuals/compose/releases/release-notes.md#2" >}}
 
@@ -402,12 +402,12 @@ build:
   privileged: true
 ```
 
-### pull
+### `pull`
 
 `pull` requires the image builder to pull referenced images (`FROM` Dockerfile directive), even if those are already
 available in the local image store.
 
-### secrets
+### `secrets`
 
 `secrets` grants access to sensitive data defined by [secrets](services.md#secrets) on a per-service build basis. Two
 different syntax variants are supported: the short syntax and the long syntax.
@@ -446,8 +446,8 @@ the service's containers.
 - `source`: The name of the secret as it exists on the platform.
 - `target`: The name of the file to be mounted in `/run/secrets/` in the
   service's task containers. Defaults to `source` if not specified.
-- `uid` and `gid`: The numeric UID or GID that owns the file within
-  `/run/secrets/` in the service's task containers. Default value is USER running container.
+- `uid` and `gid`: The numeric uid or gid that owns the file within
+  `/run/secrets/` in the service's task containers. Default value is `USER`.
 - `mode`: The [permissions](https://wintelguy.com/permissions-calc.pl) for the file to be mounted in `/run/secrets/`
   in the service's task containers, in octal notation.
   Default value is world-readable permissions (mode `0444`).
@@ -478,7 +478,7 @@ Service builds may be granted access to multiple secrets. Long and short syntax 
 same Compose file. Defining a secret in the top-level `secrets` must not imply granting any service build access to it.
 Such grant must be explicit within service specification as [secrets](services.md#secrets) service element.
 
-### ssh
+### `ssh`
 
 `ssh` defines SSH authentications that the image builder should use during image build (e.g., cloning private repository).
 
@@ -515,7 +515,7 @@ For illustration, [SSH mounts](https://github.com/moby/buildkit/blob/master/fron
 RUN --mount=type=ssh,id=myproject git clone ...
 ```
 
-### shm_size
+### `shm_size`
 
 `shm_size` sets the size of the shared memory (`/dev/shm` partition on Linux) allocated for building Docker images. Specify
 as an integer value representing the number of bytes or as a string expressing a [byte value](extension.md#specifying-byte-values).
@@ -532,7 +532,7 @@ build:
   shm_size: 10000000
 ```
 
-### tags
+### `tags`
 
 `tags` defines a list of tag mappings that must be associated to the build image. This list comes in addition to
 the `image` [property defined in the service section](services.md#image)
@@ -543,7 +543,7 @@ tags:
   - "registry/username/myrepos:my-other-tag"
 ```
 
-### target
+### `target`
 
 `target` defines the stage to build as defined inside a multi-stage `Dockerfile`.
 
@@ -553,11 +553,11 @@ build:
   target: prod
 ```
 
-### ulimits
+### `ulimits`
 
 {{< introduced compose 2.23.1 "/manuals/compose/releases/release-notes.md#2231" >}}
 
-`ulimits` overrides the default ulimits for a container. It's specified either as an integer for a single limit
+`ulimits` overrides the default `ulimits` for a container. It's specified either as an integer for a single limit
 or as mapping for soft/hard limits.
 
 ```yml
@@ -571,5 +571,3 @@ services:
           soft: 20000
           hard: 40000
 ```
-
-

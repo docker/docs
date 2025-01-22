@@ -1,7 +1,7 @@
 ---
 description: Single sign-on enforcement FAQs
 keywords: Docker, Docker Hub, SSO FAQs, single sign-on, enforce SSO, SSO enforcement
-title: Enforcement
+title: FAQs on SSO and enforcement
 tags: [FAQ]
 aliases:
 - /single-sign-on/enforcement-faqs/
@@ -10,7 +10,7 @@ aliases:
 
 ### We currently have a Docker Team subscription. How do we enable SSO?
 
-SSO is available with a Docker Business subscription. To enable SSO, you must first upgrade your subscription to a Docker Business subscription. To learn how to upgrade your existing account, see [Upgrade your subscription](../../../subscription/core-subscription/upgrade.md).
+SSO is available with a Docker Business subscription. To enable SSO, you must first upgrade your subscription to a Docker Business subscription. To learn how to upgrade your existing account, see [Upgrade your subscription](../../../subscription/change.md).
 
 ### How do service accounts work with SSO?
 

@@ -19,8 +19,8 @@ By default, Bake uses the following lookup order to find the configuration file:
 3. `docker-compose.yml`
 4. `docker-compose.yaml`
 5. `docker-bake.json`
-6. `docker-bake.override.json`
-7. `docker-bake.hcl`
+6. `docker-bake.hcl`
+7. `docker-bake.override.json`
 8. `docker-bake.override.hcl`
 
 You can specify the file location explicitly using the `--file` flag:
@@ -358,6 +358,21 @@ target "app" {
   ]
 }
 ```
+
+### `target.call`
+
+Specifies the frontend method to use. Frontend methods let you, for example,
+execute build checks only, instead of running a build. This is the same as the
+`--call` flag.
+
+```hcl
+target "app" {
+  call = "check"
+}
+```
+
+For more information about frontend methods, refer to the CLI reference for
+[`docker buildx build --call`](https://docs.docker.com/reference/cli/docker/buildx/build/#call).
 
 ### `target.context`
 

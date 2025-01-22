@@ -13,15 +13,14 @@ Compose already comes with pre-defined environment variables. It also inherits c
 
 This page contains information on how you can set or change the following pre-defined environment variables if you need to:
 
-- `COMPOSE_CONVERT_WINDOWS_PATHS`
+- `COMPOSE_PROJECT_NAME`
 - `COMPOSE_FILE`
 - `COMPOSE_PROFILES`
-- `COMPOSE_PROJECT_NAME`
-- `DOCKER_CERT_PATH`
-- `COMPOSE_PARALLEL_LIMIT`
+- `COMPOSE_CONVERT_WINDOWS_PATHS`
+- `COMPOSE_PATH_SEPARATOR`
 - `COMPOSE_IGNORE_ORPHANS`
 - `COMPOSE_REMOVE_ORPHANS`
-- `COMPOSE_PATH_SEPARATOR`
+- `COMPOSE_PARALLEL_LIMIT`
 - `COMPOSE_ANSI`
 - `COMPOSE_STATUS_STDOUT`
 - `COMPOSE_ENV_FILES`
@@ -31,7 +30,7 @@ This page contains information on how you can set or change the following pre-de
 ## Methods to override 
 
 You can set or change the pre-defined environment variables:
-- With an [`.env` file located in your working director](/manuals/compose/how-tos/environment-variables/variable-interpolation.md) 
+- With an [`.env` file located in your working directory](/manuals/compose/how-tos/environment-variables/variable-interpolation.md) 
 - From the command line
 - From your [shell](variable-interpolation.md#substitute-from-the-shell)
 
@@ -68,29 +67,35 @@ See also the [command-line options overview](/reference/cli/docker/compose/_inde
 
 Specifies the path to a Compose file. Specifying multiple Compose files is supported.
 
-- Default behavior: If not provided, Compose looks for a file named `compose.yaml` or `docker-compose.yaml` in the current directory and, if not found, then Compose searches each parent directory recursively until a file by that name is found.
-- Default separator: When specifying multiple Compose files, the path separators are, by default, on:
-    * Mac and Linux: `:` (colon),
-    * Windows: `;` (semicolon).
+- Default behavior: If not provided, Compose looks for a file named `compose.yaml` in the current directory and, if not found, then Compose searches each parent directory recursively until a file by that name is found.
+- When specifying multiple Compose files, the path separators are, by default, on:
+   - Mac and Linux: `:` (colon)
+   - Windows: `;` (semicolon)
+   For example:
 
-The path separator can also be customized using `COMPOSE_PATH_SEPARATOR`.  
-
-Example: `COMPOSE_FILE=docker-compose.yml:docker-compose.prod.yml`.  
+      ```console
+      COMPOSE_FILE=docker-compose.yml:docker-compose.prod.yml
+      ```  
+   The path separator can also be customized using [`COMPOSE_PATH_SEPARATOR`](#compose_path_separator).  
 
 See also the [command-line options overview](/reference/cli/docker/compose/_index.md#command-options-overview-and-help) and [using `-f` to specify name and path of one or more Compose files](/reference/cli/docker/compose/_index.md#use--f-to-specify-name-and-path-of-one-or-more-compose-files).
 
 ### COMPOSE\_PROFILES
 
-Specifies one or more profiles to be enabled on `compose up` execution.
+Specifies one or more profiles to be enabled when `docker compose up` is run.
+
 Services with matching profiles are started as well as any services for which no profile has been defined.
 
 For example, calling `docker compose up`with `COMPOSE_PROFILES=frontend` selects services with the 
 `frontend` profile as well as any services without a profile specified.
 
-* Default separator: specify a list of profiles using a comma as separator.
+If specifying multiple profiles, use a comma as a separator.
 
-Example: `COMPOSE_PROFILES=frontend,debug`  
-This example enables all services matching both the `frontend` and `debug` profiles and services without a profile.
+This following example enables all services matching both the `frontend` and `debug` profiles and services without a profile. 
+
+```console
+COMPOSE_PROFILES=frontend,debug
+```
 
 See also [Using profiles with Compose](../profiles.md) and the [`--profile` command-line option](/reference/cli/docker/compose/_index.md#use---profile-to-specify-one-or-more-active-profiles).
 
@@ -98,27 +103,36 @@ See also [Using profiles with Compose](../profiles.md) and the [`--profile` comm
 
 When enabled, Compose performs path conversion from Windows-style to Unix-style in volume definitions.
 
-* Supported values: 
-    * `true` or `1`, to enable,
-    * `false` or `0`, to disable.
-* Defaults to: `0`.
+- Supported values: 
+    - `true` or `1`, to enable
+    - `false` or `0`, to disable
+- Defaults to: `0`
 
 ### COMPOSE\_PATH\_SEPARATOR
 
 Specifies a different path separator for items listed in `COMPOSE_FILE`.
 
-* Defaults to:
-    * On macOS and Linux to `:`,
-    * On Windows to`;`.
+- Defaults to:
+    - On macOS and Linux to `:`
+    - On Windows to`;`
 
 ### COMPOSE\_IGNORE\_ORPHANS
 
 When enabled, Compose doesn't try to detect orphaned containers for the project.
 
-* Supported values: 
-    * `true` or `1`, to enable,
-    * `false` or `0`, to disable.
-* Defaults to: `0`.
+- Supported values: 
+   - `true` or `1`, to enable
+   - `false` or `0`, to disable
+- Defaults to: `0`
+
+### COMPOSE\_REMOVE\_ORPHANS
+
+When enabled, Compose automatically removes orphaned containers when updating a service or stack. Orphaned containers are those that were created by a previous configuration but are no longer defined in the current `compose.yaml` file.
+
+- Supported values:
+   - `true` or `1`, to enable automatic removal of orphaned containers
+   - `false` or `0`, to disable automatic removal. Compose displays a warning about orphaned containers instead.
+- Defaults to: `0`
 
 ### COMPOSE\_PARALLEL\_LIMIT
 
@@ -128,27 +142,27 @@ Specifies the maximum level of parallelism for concurrent engine calls.
 
 Specifies when to print ANSI control characters. 
 
-* Supported values:
-  * `auto`, Compose detects if TTY mode can be used. Otherwise, use plain text mode.
-  * `never`, use plain text mode.
-  * `always` or `0`, use TTY mode.
-* Defaults to: `auto`.
+- Supported values:
+   - `auto`, Compose detects if TTY mode can be used. Otherwise, use plain text mode
+   - `never`, use plain text mode
+   - `always` or `0`, use TTY mode
+- Defaults to: `auto`
 
 ### COMPOSE\_STATUS\_STDOUT
 
 When enabled, Compose writes its internal status and progress messages to `stdout` instead of `stderr`. 
 The default value is false to clearly separate the output streams between Compose messages and your container's logs.
 
-* Supported values:
-  * `true` or `1`, to enable,
-  * `false` or `0`, to disable.
-* Defaults to: `0`.
+- Supported values:
+   - `true` or `1`, to enable
+   - `false` or `0`, to disable
+- Defaults to: `0`
 
 ### COMPOSE\_ENV\_FILES
 
 Lets you specify which environment files Compose should use if `--env-file` isn't used.
 
-When using multiple environment files, use a comma as a separator. For example, 
+When using multiple environment files, use a comma as a separator. For example: 
 
 ```console
 COMPOSE_ENV_FILES=.env.envfile1, .env.envfile2
@@ -158,25 +172,25 @@ If `COMPOSE_ENV_FILES` is not set, and you don't provide `--env-file` in the CLI
 
 ### COMPOSE\_MENU
 
-> Available in Docker Compose version [2.26.0](/manuals/compose/releases/release-notes.md#2260) and later, and Docker Desktop version 4.29 and later.
+{{< introduced compose 2.26.0 "/manuals/compose/releases/release-notes.md#2260" >}}
 
 When enabled, Compose displays a navigation menu where you can choose to open the Compose stack in Docker Desktop, switch on [`watch` mode](../file-watch.md), or use [Docker Debug](/reference/cli/docker/debug.md).
 
-* Supported values:
-  * `true` or `1`, to enable,
-  * `false` or `0`, to disable.
-* Defaults to: `1` if you obtained Docker Compose through Docker Desktop, otherwise default is `0`.
+- Supported values:
+   - `true` or `1`, to enable
+   - `false` or `0`, to disable
+- Defaults to: `1` if you obtained Docker Compose through Docker Desktop, otherwise default is `0`
 
 ### COMPOSE\_EXPERIMENTAL
 
-> Available in Docker Compose version [2.26.0](/manuals/compose/releases/release-notes.md#2260) and later, and Docker Desktop version 4.29 and later.
+{{< introduced compose 2.26.0 "/manuals/compose/releases/release-notes.md#2260" >}}
 
 This is an opt-out variable. When turned off it deactivates the experimental features such as the navigation menu or [Synchronized file shares](/manuals/desktop/features/synchronized-file-sharing.md).
 
-* Supported values:
-  * `true` or `1`, to enable,
-  * `false` or `0`, to disable.
-* Defaults to: `1`.
+- Supported values:
+   - `true` or `1`, to enable
+   - `false` or `0`, to disable
+- Defaults to: `1`
 
 ## Unsupported in Compose V2
 

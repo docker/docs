@@ -8,16 +8,11 @@ aliases:
 weight: 30
 ---
 
-> [!NOTE]
->
-> This feature is available with Docker Desktop version 4.27 (and later) on Mac, Linux, and Windows (Hyper-V).
-> For Windows with WSL 2, this feature requires Docker Desktop 4.28 and later.
-
-This page describes optional, advanced configurations for ECI, once ECI is enabled.
+{{< summary-bar feature_name="Hardened Docker Desktop" >}}
 
 ## Docker socket mount permissions
 
-By default, when ECI is enabled, Docker Desktop does not allow bind-mounting the
+By default, when Enhanced Container Isolation (ECI) is enabled, Docker Desktop does not allow bind-mounting the
 Docker Engine socket into containers:
 
 ```console
@@ -25,8 +20,8 @@ $ docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock docker:cli
 docker: Error response from daemon: enhanced container isolation: docker socket mount denied for container with image "docker.io/library/docker"; image is not in the allowed list; if you wish to allow it, configure the docker socket image list in the Docker Desktop settings.
 ```
 This prevents malicious containers from gaining access to the Docker Engine, as
-such access could allow them to perform supply chain attacks (e.g., build and
-push malicious images into the organization's repositories) or similar.
+such access could allow them to perform supply chain attacks. For example, build and
+push malicious images into the organization's repositories or similar.
 
 However, some legitimate use cases require containers to have access to the
 Docker Engine socket. For example, the popular [Testcontainers](https://testcontainers.com/)
@@ -35,11 +30,12 @@ manage them or perform post-test cleanup. Similarly, some Buildpack frameworks,
 for example [Paketo](https://paketo.io/), require Docker socket bind-mounts into
 containers.
 
-Starting with Docker Desktop 4.27, admins can optionally configure ECI to allow
+Administrators can optionally configure ECI to allow
 bind mounting the Docker Engine socket into containers, but in a controlled way.
 
 This can be done via the Docker Socket mount permissions section in the
-[admin-settings.json](../settings-management/_index.md) file. For example:
+[`admin-settings.json`](../settings-management/configure-json-file.md) file. For example:
+
 
 ```json
 {
@@ -53,7 +49,8 @@ This can be done via the Docker Socket mount permissions section in the
           "docker.io/localstack/localstack:*",
           "docker.io/testcontainers/ryuk:*",
           "docker:cli"
-        ]
+        ],
+        "allowDerivedImages": true
       },
       "commandList": {
         "type": "deny",
@@ -75,8 +72,8 @@ described below.
 ### Image list
 
 The `imageList` is a list of container images that are allowed to bind-mount the
-Docker socket. By default the list is empty (i.e., no containers are allowed to
-bind-mount the Docker socket when ECI is enabled). However, an admin can add
+Docker socket. By default the list is empty, no containers are allowed to
+bind-mount the Docker socket when ECI is enabled. However, an administrator can add
 images to the list, using either of these formats:
 
 | Image Reference Format  | Description |
@@ -87,7 +84,7 @@ images to the list, using either of these formats:
 The image name follows the standard convention, so it can point to any registry
 and repository.
 
-In the example above, the image list was configured with three images:
+In the previous example, the image list was configured with three images:
 
 ```json
 "imageList": {
@@ -111,11 +108,10 @@ $ docker run -it -v /var/run/docker.sock:/var/run/docker.sock docker:cli sh
 
 > [!TIP]
 >
-> Be restrictive on the images you allow, as described in [Recommendations](#recommendations) below.
+> Be restrictive with the images you allow, as described in [Recommendations](#recommendations).
 
-In general, it's easier to specify the image using the tag wildcard format
-(e.g., `<image-name>:*`) because then `imageList` doesn't need to be updated whenever a new version of the
-image is used. Alternatively, you can use an immutable tag (e.g., `:latest`),
+In general, it's easier to specify the image using the tag wildcard format, for example `<image-name>:*`, because then `imageList` doesn't need to be updated whenever a new version of the
+image is used. Alternatively, you can use an immutable tag, for example `:latest`,
 but it does not always work as well as the wildcard because, for example,
 Testcontainers uses specific versions of the image, not necessarily the latest
 one.
@@ -126,10 +122,9 @@ memory. Then, when a container is started with a Docker socket bind-mount,
 Docker Desktop checks if the container's image digest matches one of the allowed
 digests. If so, the container is allowed to start, otherwise it's blocked.
 
-Note that due to the digest comparison mentioned in the prior paragraph, it's
-not possible to bypass the Docker socket mount permissions by retagging a
-disallowed image to the name of an allowed one. In other words, if a user
-does:
+Due to the digest comparison, it's not possible to bypass the Docker socket
+mount permissions by re-tagging a disallowed image to the name of an allowed
+one. In other words, if a user does:
 
 ```console
 $ docker image rm <allowed_image>
@@ -143,11 +138,9 @@ ones in the repository.
 
 ### Docker Socket Mount Permissions for derived images
 
-> [!NOTE]
->
-> This feature is available with Docker Desktop version 4.34 and later.
+{{< introduced desktop 4.34.0 "../../../../desktop/release-notes.md#4340" >}}
 
-As described in the prior section, admins can configure the list of container
+As described in the prior section, administrators can configure the list of container
 images that are allowed to mount the Docker socket via the `imageList`.
 
 This works for most scenarios, but not always, because it requires knowing upfront
@@ -164,7 +157,7 @@ also apply to any local images derived (i.e., built from) an image in the
 That is, if a local image called "myLocalImage" is built from "myBaseImage"
 (i.e., has a Dockerfile with a `FROM myBaseImage`), then if "myBaseImage" is in
 the `imageList`, both "myBaseImage" and "myLocalImage" are allowed to mount the
-Docker socket (i.e., ECI won't block the mount).
+Docker socket.
 
 For example, to enable Paketo buildpacks to work with Docker Desktop and ECI,
 simply add the following image to the `imageList`:
@@ -172,7 +165,7 @@ simply add the following image to the `imageList`:
 ```json
 "imageList": {
   "images": [
-    "paketobuildpacks/builder:base",
+    "paketobuildpacks/builder:base"
   ],
   "allowDerivedImages": true
 }
@@ -183,16 +176,19 @@ When the buildpack runs, it will create an ephemeral image derived from
 allow this because it will notice that the ephemeral image is derived from an
 allowed image.
 
-The behavior is enabled by default. It can be disabled by setting
-`allowDerivedImages=false` in the `admin-settings.json` file. In general it is
-not recommended that you disable this setting unless you know it won't be
-required.
+The behavior is disabled by default and must be explicitly enabled by setting
+`"allowDerivedImages": true` as shown above. In general it is recommended that
+you disable this setting unless you know it's required.
 
-A couple of caveats:
+A few caveats:
+
+* Setting `"allowedDerivedImages" :true` will impact the startup time of
+  containers by up to 1 extra second, as Docker Desktop needs to perform
+  some more checks on the container image.
 
 * The `allowDerivedImages` setting only applies to local-only images built from
   an allowed image. That is, the derived image must not be present in a remote
-  repository (because if it were, you would just list it's name in the `imageList`).
+  repository because if it were, you would just list its name in the `imageList`.
 
 * For derived image checking to work, the parent image (i.e., the image in the
   `imageList`) must be present locally (i.e., must have been explicitly pulled
@@ -220,6 +216,10 @@ list to allow any container to mount the Docker socket. You do this by adding
   ]
 }
 ```
+
+This tells Docker Desktop to allow all containers to mount the Docker socket
+which increases flexibility but reduces security. It also improves container
+startup time when using Enhanced Container Isolation.
 
 It is recommended that you use this only in scenarios where explicitly listing
 allowed container images is not flexible enough.
@@ -339,17 +339,16 @@ Whether to configure the list as an allow or deny list depends on the use case.
 
 | Unsupported command  | Description |
 | :------------------- | :---------- |
-| compose              | Docker compose |
-| dev                  | Docker dev environments |
-| extension            | Manages Docker extensions |
-| feedback             | Send feedback to Docker |
-| init                 | Creates Docker-related starter files |
-| manifest             | Manages Docker image manifests |
-| plugins              | Manages plugins |
-| sbom                 | View Software Bill of Materials (SBOM) |
-| scan                 | Docker Scan |
-| scout                | Docker Scout |
-| trust                | Manage trust on Docker images |
+| `compose`              | Docker Compose |
+| `dev`                  | Dev environments |
+| `extension`            | Manages Docker Extensions |
+| `feedback`             | Send feedback to Docker |
+| `init`                 | Creates Docker-related starter files |
+| `manifest`             | Manages Docker image manifests |
+| `plugin`              | Manages plugins |
+| `sbom`                 | View Software Bill of Materials (SBOM) |
+| `scout`                | Docker Scout |
+| `trust`                | Manage trust on Docker images |
 
 > [!NOTE]
 >

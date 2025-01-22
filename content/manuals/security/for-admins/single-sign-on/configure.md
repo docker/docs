@@ -1,6 +1,6 @@
 ---
 description: Learn how to configure single sign-on for your organization or company.
-keywords: configure, sso, docker hub, hub, docker admin, admin, security 
+keywords: configure, sso, docker hub, hub, docker admin, admin, security
 title: Configure single sign-on
 linkTitle: Configure
 aliases:
@@ -12,6 +12,8 @@ aliases:
 - /admin/organization/security-settings/sso-configuration/
 ---
 
+{{< summary-bar feature_name="SSO" >}}
+
 Get started creating a single sign-on (SSO) connection for your organization or company. This guide walks through the steps to add and verify the domains your members use to sign in to Docker.
 
 ## Step one: Add your domain
@@ -22,7 +24,7 @@ Get started creating a single sign-on (SSO) connection for your organization or 
 {{< include "admin-early-access.md" >}}
 
 1. Sign in to the [Admin Console](https://admin.docker.com/).
-2. Select your organization or company from the left-hand drop-down menu. Note that when an organization is part of a company, you must select the company and configure the domain for the organization at the company level.
+2. Select your organization or company from the **Choose profile** page. Note that when an organization is part of a company, you must select the company and configure the domain for the organization at the company level.
 3. Under **Security and access**, select **Domain management**.
 4. Select **Add a domain**.
 5. Enter your domain in the text box and select **Add domain**.

@@ -5,7 +5,7 @@ keywords: wsl, wsl2, installing wsl2, wsl installation, docker wsl2, wsl docker,
   tech preview, wsl install docker, install docker wsl, how to install docker in wsl
 title: Docker Desktop WSL 2 backend on Windows
 linkTitle: WSL
-weight: 100
+weight: 90
 aliases:
 - /docker-for-windows/wsl/
 - /docker-for-windows/wsl-tech-preview/
@@ -90,6 +90,7 @@ Docker Desktop does not require any particular Linux distributions to be install
      ```console
     $ wsl --set-default <distribution name>
     ```
+   If **WSL integrations** isn't available under **Resources**, Docker may be in Windows container mode. In your taskbar, select the Docker menu and then **Switch to Linux containers**.
 
 3. Select **Apply & Restart**.
 

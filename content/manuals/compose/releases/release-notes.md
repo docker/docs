@@ -13,6 +13,95 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.32.4
+
+{{< release-date date="2025-01-16" >}}
+
+### Bug fixes and enhancements
+
+- Fixed an issue where the Compose version did not display properly when using `docker compose version`
+
+## 2.32.3
+
+{{< release-date date="2025-01-13" >}}
+
+> [!NOTE]
+>
+> Binaries from the Compose GitHub repository may not display the version number properly. If you rely on `docker compose version`
+> in your development or CI processes, upgrade to Compose version 2.32.4.
+
+### Bug fixes and enhancements
+
+- Fixed an issue where Compose would override a service-level MAC address with the main network MAC address
+- Fixed a log rendering issue during concurrent builds
+
+## 2.32.2
+
+{{< release-date date="2025-01-07" >}}
+
+### Update
+
+- Dependencies upgrade: bump compose-go to v2.4.7
+- Dependencies upgrade: bump golang to v1.22.10
+
+### Bug fixes and enhancements
+
+- Added `--pull` flag to the `docker compose run` command
+- Fixed a bug which meant the `restart` action of `watch` mode didn't monitor bind mounts
+- Fixed an issue recreating containers when using anonymous volumes
+
+## 2.32.1
+
+{{< release-date date="2024-12-16" >}}
+
+### Bug fixes and enhancements
+
+- Fixed a bug recreating containers when not needed
+
+## 2.32.0
+
+{{< release-date date="2024-12-13" >}}
+
+### Update
+
+- Dependencies upgrade: bump docker + buildx to latest release
+- Dependencies upgrade: bump otel dependencies to v1.28.0 and v0.53.0
+- Dependencies upgrade: bump golang.org/x/sys 0.28.0
+- Dependencies upgrade: bump golang.org/x/crypto to 0.31.0
+- Dependencies upgrade: bump google.golang.org/grpc to 1.68.1
+- Dependencies upgrade: bump golang.org/x/sync 0.10.0
+- Dependencies upgrade: bump xx to v1.6.1
+
+### Bug fixes and enhancements
+
+- Improved support when building with [Bake](/manuals/build/bake.md)
+- Added `restart` and `sync+exec` watch actions
+- Compose now recreates containers when the volume or network configuration changes
+- Fixed support for `mac_address`
+- Fixed `pull --quiet` to only hide progress, not global status
+- Fixed an issue where only the `rebuild` watch action now requires a build declaration
+- Compose now logs `watch` configuration error when enabled through the Compose menu
+
+
+## 2.31.0
+
+{{< release-date date="2024-11-28" >}}
+
+### Update
+
+- Dependencies upgrade: bump compose-go to v2.4.5
+- Dependencies upgrade: bump docker engine and cli to v27.4.0-rc.2
+- Dependencies upgrade: bump buildx to v0.18.0
+- Dependencies upgrade: bump buildkit to v0.17.1
+
+### Bug fixes and enhancements
+
+- Added the ability to use Docker Buildx Bake to build Docker Compose services
+- Added `commit` command to create new images from running containers
+- Fixed an issue where network changes were not detected
+- Fixed an issue where containers stopped sequentially which slowed down the restart process
+
+
 ## 2.30.3
 
 {{< release-date date="2024-11-07" >}}

@@ -7,9 +7,7 @@ aliases:
 - /desktop/synchronized-file-sharing/
 ---
 
-> [!NOTE]
->
-> Synchronized file shares is available with Docker Desktop version 4.27 and later. It is available for customers with a Docker Pro, Team, or Business subscription. 
+{{< summary-bar feature_name="Synchronized file sharing" >}}
 
 Synchronized file shares is an alternative file sharing mechanism that provides fast and flexible host-to-VM file sharing, enhancing bind mount performance through the use of synchronized filesystem caches. 
 
@@ -93,6 +91,8 @@ In general, use your `.syncignore` file to exclude items that aren't critical to
 - If you switch from WSL2 to Hyper-V on Windows, Docker Desktop needs to be fully restarted.
 
 - POSIX-style Windows paths are not supported. Avoid setting the [`COMPOSE_CONVERT_WINDOWS_PATHS`](/manuals/compose/how-tos/environment-variables/envvars.md#compose_convert_windows_paths) environment variable in Docker Compose.
+
+- If you don't have the correct permissions to create symbolic links and your container attempts to create symbolic links in your file share instance, an **unable to create symbolic link** error message displays. For Windows users, see Microsoft's [Create symbolic links documentation](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/create-symbolic-links) for best practices and location of the **Create symbolic links** security policy setting. For Mac and Linux users, check that you have write permissions on the folder.
 
 ## Feedback and support
 

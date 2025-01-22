@@ -7,6 +7,8 @@ aliases:
 - /docker-hub/audit-log/
 ---
 
+{{< summary-bar feature_name="Activity logs" >}}
+
 Activity logs display a chronological list of activities that occur at organization and repository levels. It provides a report to owners on all their member activities.
 
 With activity logs, owners can view and track:
@@ -17,10 +19,6 @@ With activity logs, owners can view and track:
 For example, activity logs display activities such as the date when a repository was created or deleted, the member who created the repository, the name of the repository, and when there was a change to the privacy settings.
 
 Owners can also see the activity logs for their repository if the repository is part of the organization subscribed to a Docker Business or Team plan.
-
-> [!NOTE]
->
-> Activity logs requires a [Docker Team or Business subscription](/manuals/subscription/_index.md).
 
 ## Manage activity logs
 
@@ -69,8 +67,16 @@ Refer to the following section for a list of events and their descriptions:
 | Access token created | Access token created in organization |
 | Access token updated | Access token updated in organization |
 | Access token deleted | Access token deleted in organization |
+| Policy created | Details of adding a settings policy |
+| Policy updated | Details of updating a settings policy |
+| Policy deleted | Details of deleting a settings policy |
+| Policy transferred | Details of transferring a settings policy to another owner |
 
 ### Repository events
+
+> [!NOTE]
+>
+> Event descriptions that include a user action can refer to a Docker username, personal access token (PAT) or organization access token (OAT). For example, if a user pushes a tag to a repository, the event would include the description: `<user-access-token>` pushed the tag to the repository.
 
 | Event                                                          | Description                                   |
 |:------------------------------------------------------------------|:------------------------------------------------|

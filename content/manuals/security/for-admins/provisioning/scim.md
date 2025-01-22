@@ -9,6 +9,8 @@ aliases:
 weight: 30
 ---
 
+{{< summary-bar feature_name="SSO" >}}
+
 System for Cross-domain Identity Management (SCIM) is available for Docker Business customers. This guide provides an overview of SCIM provisioning.
 
 ## How SCIM works

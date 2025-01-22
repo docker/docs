@@ -407,8 +407,6 @@ examples: |-
     | `process` | Namespace isolation only.                                                                                                                                                      |
     | `hyperv`  | Hyper-V hypervisor partition-based isolation.                                                                                                                                  |
 
-    Specifying the `--isolation` flag without a value is the same as setting `--isolation="default"`.
-
     ### Optional security options (--security-opt) {#security-opt}
 
     This flag is only supported on a daemon running on Windows, and only supports

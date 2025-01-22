@@ -6,6 +6,8 @@ aliases:
 - /docker-hub/company-owner/
 ---
 
+{{< summary-bar feature_name="Company" >}}
+
 A company can have multiple owners. Company owners have company-wide
 observability and can manage company-wide settings that apply to all associated
 organizations. In addition, company owners have the same access as organization
@@ -18,7 +20,7 @@ member in an organization, they don't occupy a seat.
 ## Add a company owner
 
 1. Sign in to the [Admin Console](https://admin.docker.com).
-2. In the left navigation, select your company in the drop-down menu.
+2. Select your company on the **Choose profile** page.
 3. Select **Company owners**.
 4. Select **Add owner**.
 5. Specify the user's Docker ID to search for the user.
@@ -27,7 +29,7 @@ member in an organization, they don't occupy a seat.
 ## Remove a company owner
 
 1. Sign in to the [Admin Console](https://admin.docker.com).
-2. In the left navigation, select your company in the drop-down menu.
+2. Select your company on the **Choose profile** page.
 3. Select **Company owners**.
 4. Select the **Action** icon in the row of the company owner that your want to remove.
 5. Select **Remove as company owner**.

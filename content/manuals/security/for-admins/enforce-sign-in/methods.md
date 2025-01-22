@@ -1,9 +1,12 @@
 ---
-description: Learn about the different ways you can force users to sign in to Docker Desktop
-keywords: authentication, registry.json, configure, enforce sign-in, docker desktop, security 
+description: Learn about the different ways you can force your developers to sign in to Docker Desktop
+keywords: authentication, registry.json, configure, enforce sign-in, docker desktop, security, .plist. registry key, mac, windows
 title: Ways to enforce sign-in for Docker Desktop
+tags: [admin]
 linkTitle: Methods
 ---
+
+{{< summary-bar feature_name="Enforce sign-in" >}}
 
 This page outlines the different methods for enforcing sign-in for Docker Desktop.
 

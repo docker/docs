@@ -15,7 +15,7 @@ environment variables.
 
 Use the `variable` block to define a variable.
 
-```hcl
+```hcl {title=docker-bake.hcl}
 variable "TAG" {
   default = "docker.io/username/webapp:latest"
 }
@@ -23,8 +23,8 @@ variable "TAG" {
 
 The following example shows how to use the `TAG` variable in a target.
 
-```hcl
-target "default" {
+```hcl {title=docker-bake.hcl}
+target "webapp" {
   context = "."
   dockerfile = "Dockerfile"
   tags = [ TAG ]
@@ -37,7 +37,7 @@ Bake supports string interpolation of variables into values. You can use the
 `${}` syntax to interpolate a variable into a value. The following example
 defines a `TAG` variable with a value of `latest`.
 
-```hcl
+```hcl {title=docker-bake.hcl}
 variable "TAG" {
   default = "latest"
 }
@@ -46,8 +46,16 @@ variable "TAG" {
 To interpolate the `TAG` variable into the value of an attribute, use the
 `${TAG}` syntax.
 
-```hcl
-target "default" {
+```hcl {title=docker-bake.hcl}
+group "default" {
+  targets = [ "webapp" ]
+}
+
+variable "TAG" {
+  default = "latest"
+}
+
+target "webapp" {
   context = "."
   dockerfile = "Dockerfile"
   tags = ["docker.io/username/webapp:${TAG}"]
@@ -78,13 +86,101 @@ $ docker buildx bake --print
 }
 ```
 
+## Validating variables
+
+To verify that the value of a variable conforms to an expected type, value
+range, or other condition, you can define custom validation rules using the
+`validation` block.
+
+In the following example, validation is used to enforce a numeric constraint on
+a variable value; the `PORT` variable must be 1024 or higher.
+
+```hcl {title=docker-bake.hcl}
+# Define a variable `PORT` with a default value and a validation rule
+variable "PORT" {
+  default = 3000  # Default value assigned to `PORT`
+
+  # Validation block to ensure `PORT` is a valid number within the acceptable range
+  validation {
+    condition = PORT >= 1024  # Ensure `PORT` is at least 1024
+    error_message = "The variable 'PORT' must be 1024 or higher."  # Error message for invalid values
+  }
+}
+```
+
+If the `condition` expression evaluates to `false`, the variable value is
+considered invalid, whereby the build invocation fails and `error_message` is
+emitted. For example, if `PORT=443`, the condition evaluates to `false`, and
+the error is raised.
+
+Values are coerced into the expected type before the validation is set. This
+ensures that any overrides set with environment variables work as expected.
+
+### Validate multiple conditions
+
+To evaluate more than one condition, define multiple `validation` blocks for
+the variable. All conditions must be `true`.
+
+Here’s an example:
+
+```hcl {title=docker-bake.hcl}
+# Define a variable `VAR` with multiple validation rules
+variable "VAR" {
+  # First validation block: Ensure the variable is not empty
+  validation {
+    condition = VAR != ""
+    error_message = "The variable 'VAR' must not be empty."
+  }
+
+  # Second validation block: Ensure the value contains only alphanumeric characters
+  validation {
+    # VAR and the regex match must be identical:
+    condition = VAR == regex("[a-zA-Z0-9]+", VAR)
+    error_message = "The variable 'VAR' can only contain letters and numbers."
+  }
+}
+```
+
+This example enforces:
+
+- The variable must not be empty.
+- The variable must match a specific character set.
+
+For invalid inputs like `VAR="hello@world"`, the validation would fail.
+
+### Validating variable dependencies
+
+You can reference other Bake variables in your condition expression, enabling
+validations that enforce dependencies between variables. This ensures that
+dependent variables are set correctly before proceeding.
+
+Here’s an example:
+
+```hcl {title=docker-bake.hcl}
+# Define a variable `FOO`
+variable "FOO" {}
+
+# Define a variable `BAR` with a validation rule that references `FOO`
+variable "BAR" {
+  # Validation block to ensure `FOO` is set if `BAR` is used
+  validation {
+    condition = FOO != ""  # Check if `FOO` is not an empty string
+    error_message = "The variable 'BAR' requires 'FOO' to be set."
+  }
+}
+```
+
+This configuration ensures that the `BAR` variable can only be used if `FOO`
+has been assigned a non-empty value. Attempting to build without setting `FOO`
+will trigger the validation error.
+
 ## Escape variable interpolation
 
 If you want to bypass variable interpolation when parsing the Bake definition,
 use double dollar signs (`$${VARIABLE}`).
 
-```hcl
-target "default" {
+```hcl {title=docker-bake.hcl}
+target "webapp" {
   dockerfile-inline = <<EOF
   FROM alpine
   ARG TARGETARCH
@@ -127,7 +223,7 @@ variable "BASE_LATEST" {
   default = "${BASE_IMAGE}:latest"
 }
 
-target "default" {
+target "webapp" {
   contexts = {
     base = BASE_LATEST
   }
@@ -145,7 +241,7 @@ $ docker buildx bake -f vars.hcl -f docker-bake.hcl --print app
 ```json
 {
   "target": {
-    "default": {
+    "webapp": {
       "context": ".",
       "contexts": {
         "base": "docker.io/library/alpine:latest"

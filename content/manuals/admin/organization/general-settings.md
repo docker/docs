@@ -11,19 +11,19 @@ This section describes how to manage organization settings in the Docker Admin C
 
 ## Configure general information
 
-General organization information appears on your organization landing page in Docker Hub.
+General organization information appears on your organization landing page in the Admin Console.
 
 This information includes:
  - Organization Name
  - Company
  - Location
  - Website
- - Avatar
+ - Gravatar email: To add an avatar to your Docker account, create a [Gravatar account](https://gravatar.com/) and create your avatar. Next, add your Gravatar email to your Docker account settings. It may take some time for your avatar to update in Docker.
 
 To edit this information:
 
 1. Sign in to the [Admin Console](https://admin.docker.com).
-2. In the left navigation, select your organization in the drop-down menu.
+2. Select your company on the **Choose profile** page.
 3. Under **Organization settings**, select **General**.
 4. Specify the organization information and select **Save**.
 

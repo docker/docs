@@ -18,214 +18,160 @@ aliases:
 
 ## Overview
 
-This section walks you through containerizing and running a Ruby on Rails application.
+This section walks you through containerizing and running a [Ruby on Rails](https://rubyonrails.org/) application.
 
-## Get the sample application
+Starting from Rails 7.1 [Docker is supported out of the box](https://guides.rubyonrails.org/7_1_release_notes.html#generate-dockerfiles-for-new-rails-applications). This means that you will get a `Dockerfile`, `.dockerignore` and `bin/docker-entrypoint` files generated for you when you create a new Rails application.
 
-The sample application uses the popular [Ruby on Rails](https://rubyonrails.org/) framework.
-
-Clone the sample application to use with this guide. Open a terminal, change directory to a directory that you want to work in, and run the following command to clone the repository:
-
-```console
-$ git clone https://github.com/falconcr/docker-ruby-on-rails.git
-```
+If you have an existing Rails application, you will need to create the Docker assets manually. Unfortunately `docker init` command does not yet support Rails. This means that if you are working with Rails, you'll need to copy Dockerfile and other related configurations manually from the examples below.
 
 ## Initialize Docker assets
 
-Now that you have an application, you can create the necessary Docker assets to
-containerize your application. You can use Docker Desktop's built-in Docker Init
-feature to help streamline the process, or you can manually create the assets.
+Rails 7.1 generates multistage Dockerfile out of the box, below is an example of such file generated from a Rails template.
 
-`docker init`, the command for bootstrapping the Docker-related assets for a project, does not yet support the Ruby programming language. This means that if you are working with Ruby, you'll need to create Dockerfiles and other related configurations manually.
+> Multistage Dockerfiles help create smaller, more efficient images by separating build and runtime dependencies, ensuring only necessary components are included in the final image. Read more in the [Multi-stage builds guide](/get-started/docker-concepts/building-images/multi-stage-builds/).
 
-Inside the `docker-ruby-on-rails` directory, create the following files:
+Although the Dockerfile is generated automatically, understanding its purpose and functionality is important. Reviewing the following example is highly recommended.
 
-Create a file named `Dockerfile` with the following contents.
 
-```dockerfile {collapse=true,title=Dockerfile}
+```dockerfile {title=Dockerfile}
 # syntax=docker/dockerfile:1
+# check=error=true
 
-# Use the official Ruby image with version 3.2.0
-FROM ruby:3.2.0
+# This Dockerfile is designed for production, not development.
+# docker build -t app .
+# docker run -d -p 80:80 -e RAILS_MASTER_KEY=<value from config/master.key> --name app app
 
-# Install dependencies
-RUN apt-get update -qq && apt-get install -y \
-  nodejs \
-  postgresql-client \
-  libssl-dev \
-  libreadline-dev \
-  zlib1g-dev \
-  build-essential \
-  curl
+# For a containerized dev environment, see Dev Containers: https://guides.rubyonrails.org/getting_started_with_devcontainer.html
 
-# Install rbenv
-RUN git clone https://github.com/rbenv/rbenv.git ~/.rbenv && \
-  echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc && \
-  echo 'eval "$(rbenv init -)"' >> ~/.bashrc && \
-  git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build && \
-  echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc
+# Make sure RUBY_VERSION matches the Ruby version in .ruby-version
+ARG RUBY_VERSION=3.3.6
+FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
 
-# Install the specified Ruby version using rbenv
-ENV PATH="/root/.rbenv/bin:/root/.rbenv/shims:$PATH"
-RUN rbenv install 3.2.0 && rbenv global 3.2.0
+# Rails app lives here
+WORKDIR /rails
 
-# Set the working directory
-WORKDIR /myapp
+# Install base packages
+# Replace libpq-dev with sqlite3 if using SQLite, or libmysqlclient-dev if using MySQL
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y curl libjemalloc2 libvips libpq-dev && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
-# Copy the Gemfile and Gemfile.lock
-COPY Gemfile /myapp/Gemfile
-COPY Gemfile.lock /myapp/Gemfile.lock
+# Set production environment
+ENV RAILS_ENV="production" \
+    BUNDLE_DEPLOYMENT="1" \
+    BUNDLE_PATH="/usr/local/bundle" \
+    BUNDLE_WITHOUT="development"
 
-# Install Gems dependencies
-RUN gem install bundler && bundle install
+# Throw-away build stage to reduce size of final image
+FROM base AS build
 
-# Copy the application code
-COPY . /myapp
+# Install packages needed to build gems
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y build-essential curl git pkg-config libyaml-dev && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
-# Precompile assets (optional, if using Rails with assets)
-RUN bundle exec rake assets:precompile
+# Install JavaScript dependencies and Node.js for asset compilation
+#
+# Uncomment the following lines if you are using NodeJS need to compile assets
+#
+# ARG NODE_VERSION=18.12.0
+# ARG YARN_VERSION=1.22.19
+# ENV PATH=/usr/local/node/bin:$PATH
+# RUN curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz -C /tmp/ && \
+#     /tmp/node-build-master/bin/node-build "${NODE_VERSION}" /usr/local/node && \
+#     npm install -g yarn@$YARN_VERSION && \
+#     npm install -g mjml && \
+#     rm -rf /tmp/node-build-master
 
-# Expose the port the app runs on
+# Install application gems
+COPY Gemfile Gemfile.lock ./
+RUN bundle install && \
+    rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
+    bundle exec bootsnap precompile --gemfile
+
+# Install node modules
+#
+# Uncomment the following lines if you are using NodeJS need to compile assets
+#
+# COPY package.json yarn.lock ./
+# RUN --mount=type=cache,id=yarn,target=/rails/.cache/yarn YARN_CACHE_FOLDER=/rails/.cache/yarn \
+#     yarn install --frozen-lockfile
+
+# Copy application code
+COPY . .
+
+# Precompile bootsnap code for faster boot times
+RUN bundle exec bootsnap precompile app/ lib/
+
+# Precompiling assets for production without requiring secret RAILS_MASTER_KEY
+RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
+
+# Final stage for app image
+FROM base
+
+# Copy built artifacts: gems, application
+COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
+COPY --from=build /rails /rails
+
+# Run and own only the runtime files as a non-root user for security
+RUN groupadd --system --gid 1000 rails && \
+    useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash && \
+    chown -R rails:rails db log storage tmp
+USER 1000:1000
+
+# Entrypoint prepares the database.
+ENTRYPOINT ["/rails/bin/docker-entrypoint"]
+
+# Start server via Thruster by default, this can be overwritten at runtime
+EXPOSE 80
+CMD ["./bin/thrust", "./bin/rails", "server"]
+```
+
+The Dockerfile above assumes you are using Thruster together with Puma as an application server. In case you are using any other server, you can replace the last three lines with the following:
+
+```dockerfile
+# Start the application server
 EXPOSE 3000
-
-# Command to run the server
-CMD ["rails", "server", "-b", "0.0.0.0"]
+CMD ["./bin/rails", "server"]
 ```
 
-Create a file named `compose.yaml` with the following contents.
+This Dockerfile uses a script at `./bin/docker-entrypoint` as the container's entrypiont. This script prepares the database and runs the application server. Below is an example of such a script.
 
-```yaml {collapse=true,title=compose.yaml}
-services:
-  web:
-    build: .
-    command: bundle exec rails s -b '0.0.0.0'
-    volumes:
-      - .:/myapp
-    ports:
-      - "3000:3000"
+```bash {title=docker-entrypoint}
+#!/bin/bash -e
+
+# Enable jemalloc for reduced memory usage and latency.
+if [ -z "${LD_PRELOAD+x}" ]; then
+    LD_PRELOAD=$(find /usr/lib -name libjemalloc.so.2 -print -quit)
+    export LD_PRELOAD
+fi
+
+# If running the rails server then create or migrate existing database
+if [ "${@: -2:1}" == "./bin/rails" ] && [ "${@: -1:1}" == "server" ]; then
+  ./bin/rails db:prepare
+fi
+
+exec "${@}"
 ```
 
-Create a file named `.dockerignore` with the following contents.
+Besides the two files above you will also need a `.dockerignore` file. This file is used to exclude files and directories from the context of the build. Below is an example of a `.dockerignore` file.
 
 ```text {collapse=true,title=".dockerignore"}
-git
-.gitignore
+# See https://docs.docker.com/engine/reference/builder/#dockerignore-file for more about ignoring files.
 
-# Created by https://www.gitignore.io/api/git,ruby,rails,jetbrains+all
-# Edit at https://www.gitignore.io/?templates=git,ruby,rails,jetbrains+all
+# Ignore git directory.
+/.git/
+/.gitignore
 
-### Git ###
-# Created by git for backups. To disable backups in Git:
-# $ git config --global mergetool.keepBackup false
-*.orig
+# Ignore bundler config.
+/.bundle
 
-# Created by git when using merge tools for conflicts
-*.BACKUP.*
-*.BASE.*
-*.LOCAL.*
-*.REMOTE.*
-*_BACKUP_*.txt
-*_BASE_*.txt
-*_LOCAL_*.txt
-*_REMOTE_*.txt
+# Ignore all environment files.
+/.env*
 
-### JetBrains+all ###
-# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm
-# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
-
-# User-specific stuff
-.idea/**/workspace.xml
-.idea/**/tasks.xml
-.idea/**/usage.statistics.xml
-.idea/**/dictionaries
-.idea/**/shelf
-
-# Generated files
-.idea/**/contentModel.xml
-
-# Sensitive or high-churn files
-.idea/**/dataSources/
-.idea/**/dataSources.ids
-.idea/**/dataSources.local.xml
-.idea/**/sqlDataSources.xml
-.idea/**/dynamic.xml
-.idea/**/uiDesigner.xml
-.idea/**/dbnavigator.xml
-
-# Gradle
-.idea/**/gradle.xml
-.idea/**/libraries
-
-# Gradle and Maven with auto-import
-# When using Gradle or Maven with auto-import, you should exclude module files,
-# since they will be recreated, and may cause churn.  Uncomment if using
-# auto-import.
-# .idea/modules.xml
-# .idea/*.iml
-# .idea/modules
-# *.iml
-# *.ipr
-
-# CMake
-cmake-build-*/
-
-# Mongo Explorer plugin
-.idea/**/mongoSettings.xml
-
-# File-based project format
-*.iws
-
-# IntelliJ
-out/
-
-# mpeltonen/sbt-idea plugin
-.idea_modules/
-
-# JIRA plugin
-atlassian-ide-plugin.xml
-
-# Cursive Clojure plugin
-.idea/replstate.xml
-
-# Crashlytics plugin (for Android Studio and IntelliJ)
-com_crashlytics_export_strings.xml
-crashlytics.properties
-crashlytics-build.properties
-fabric.properties
-
-# Editor-based Rest Client
-.idea/httpRequests
-
-# Android studio 3.1+ serialized cache file
-.idea/caches/build_file_checksums.ser
-
-### JetBrains+all Patch ###
-# Ignores the whole .idea folder and all .iml files
-# See https://github.com/joeblau/gitignore.io/issues/186 and https://github.com/joeblau/gitignore.io/issues/360
-
-.idea/
-
-# Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-249601023
-
-*.iml
-modules.xml
-.idea/misc.xml
-*.ipr
-
-# Sonarlint plugin
-.idea/sonarlint
-
-### Rails ###
-*.rbc
-capybara-*.html
-.rspec
-/db/*.sqlite3
-/db/*.sqlite3-journal
-/public/system
-/coverage/
-/spec/tmp
-rerun.txt
-pickle-email-*.html
+# Ignore all default key files.
+/config/master.key
+/config/credentials/*.key
 
 # Ignore all logfiles and tempfiles.
 /log/*
@@ -233,126 +179,65 @@ pickle-email-*.html
 !/log/.keep
 !/tmp/.keep
 
-# TODO Comment out this rule if you are OK with secrets being uploaded to the repo
-config/initializers/secret_token.rb
-config/master.key
+# Ignore pidfiles, but keep the directory.
+/tmp/pids/*
+!/tmp/pids/.keep
 
-# Only include if you have production secrets in this file, which is no longer a Rails default
-# config/secrets.yml
-
-# dotenv
-# TODO Comment out this rule if environment variables can be committed
-.env
-
-## Environment normalization:
-/.bundle
-/vendor/bundle
-
-# these should all be checked in to normalize the environment:
-# Gemfile.lock, .ruby-version, .ruby-gemset
-
-# unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
-.rvmrc
-
-# if using bower-rails ignore default bower_components path bower.json files
-/vendor/assets/bower_components
-*.bowerrc
-bower.json
-
-# Ignore pow environment settings
-.powenv
-
-# Ignore Byebug command history file.
-.byebug_history
-
-# Ignore node_modules
-node_modules/
-
-# Ignore precompiled javascript packs
-/public/packs
-/public/packs-test
-/public/assets
-
-# Ignore yarn files
-/yarn-error.log
-yarn-debug.log*
-.yarn-integrity
-
-# Ignore uploaded files in development
+# Ignore storage (uploaded files in development and any SQLite databases).
 /storage/*
 !/storage/.keep
+/tmp/storage/*
+!/tmp/storage/.keep
 
-### Ruby ###
-*.gem
-/.config
-/InstalledFiles
-/pkg/
-/spec/reports/
-/spec/examples.txt
-/test/tmp/
-/test/version_tmp/
-/tmp/
+# Ignore assets.
+/node_modules/
+/app/assets/builds/*
+!/app/assets/builds/.keep
+/public/assets
 
-# Used by dotenv library to load environment variables.
-# .env
+# Ignore CI service files.
+/.github
 
-# Ignore Byebug command history file.
+# Ignore development files
+/.devcontainer
 
-## Specific to RubyMotion:
-.dat*
-.repl_history
-build/
-*.bridgesupport
-build-iPhoneOS/
-build-iPhoneSimulator/
-
-## Specific to RubyMotion (use of CocoaPods):
-#
-# We recommend against adding the Pods directory to your .gitignore. However
-# you should judge for yourself, the pros and cons are mentioned at:
-# https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
-# vendor/Pods/
-
-## Documentation cache and generated files:
-/.yardoc/
-/_yardoc/
-/doc/
-/rdoc/
-
-/.bundle/
-/lib/bundler/man/
-
-# for a library or gem, you might want to ignore these files since the code is
-# intended to run in multiple environments; otherwise, check them in:
-# Gemfile.lock
-# .ruby-version
-# .ruby-gemset
-
-# unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
-
-# End of https://www.gitignore.io/api/git,ruby,rails,jetbrains+all
+# Ignore Docker-related files
+/.dockerignore
+/Dockerfile*
 ```
 
-You should now have the following three files in your `docker-ruby-on-rails`
-directory.
+The last optional file that you may want is the `compose.yaml` file, which is used by Docker Compose to define the services that make up the application. Since SQLite is being used as the database, there is no need to define a separate service for the database. The only service required is the Rails application itself.
 
-- .dockerignore
-- compose.yaml
-- Dockerfile
+```yaml {title=compose.yaml}
+services:
+  web:
+    build: .
+    environment:
+      - RAILS_MASTER_KEY
+    ports:
+      - "3000:80"
+```
+
+You should now have the following files in your application folder:
+
+- `.dockerignore`
+- `compose.yaml`
+- `Dockerfile`
+- `bin/docker-entrypoint`
 
 To learn more about the files, see the following:
 
-- [Dockerfile](/reference/dockerfile.md)
-- [.dockerignore](/reference/dockerfile.md#dockerignore-file)
+- [Dockerfile](/reference/dockerfile)
+- [.dockerignore](/reference/dockerfile#dockerignore-file)
 - [compose.yaml](/reference/compose-file/_index.md)
+- [docker-entrypoint](/reference/dockerfile/#entrypoint)
 
 ## Run the application
 
-Inside the `docker-ruby-on-rails` directory, run the following command in a
-terminal.
+To run the application, run the following command in a terminal inside the application's directory.
 
 ```console
-$ docker compose up --build
+$ RAILS_MASTER_KEY=<master_key_value> docker compose up --build
 ```
 
 Open a browser and view the application at [http://localhost:3000](http://localhost:3000). You should see a simple Ruby on Rails application.

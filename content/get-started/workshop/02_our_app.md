@@ -104,7 +104,7 @@ Now that you have an image, you can run the application in a container using the
 
    The `-d` flag (short for `--detach`) runs the container in the background.
    This means that Docker starts your container and returns you to the terminal
-   prompt.
+   prompt. Also, it does not display logs in the terminal.
 
    The `-p` flag (short for `--publish`) creates a port mapping between the
    host and the container. The `-p` flag takes a string value in the format of

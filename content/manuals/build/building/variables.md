@@ -158,7 +158,7 @@ COPY . .
 CMD ["node", "app.js"]
 ```
 
-With this Dockerfile, you can use `--build-arg` to override the default value of `ENV`:
+With this Dockerfile, you can use `--build-arg` to override the default value of `NODE_ENV`:
 
 ```console
 $ docker build --build-arg NODE_ENV=development .
@@ -375,6 +375,7 @@ Sets the type of the BuildKit progress output. Valid values are:
 - `auto` (default)
 - `plain`
 - `tty`
+- `quiet`
 - `rawjson`
 
 Usage:

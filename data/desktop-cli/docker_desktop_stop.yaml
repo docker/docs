@@ -1,0 +1,41 @@
+command: docker desktop stop
+short: Stop Docker Desktop
+usage: docker desktop stop [OPTIONS]
+pname: docker desktop
+plink: docker_desktop.yaml
+options:
+    - option: detach
+      value_type: bool
+      default_value: false
+      description: Stop Docker Desktop in the background
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: force
+      value_type: bool
+      default_value: false
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: timeout
+      value_type: init
+      default_value: 0
+      description: Specify in seconds how long to wait for Docker Desktop to stop before timing out
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false

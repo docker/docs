@@ -1,12 +1,15 @@
 ---
-description: Allowlist for Docker Desktop for Business customers
-keywords: Docker Desktop, allowlist, allow list, firewall
+description: A list of domain URLs required for Docker Desktop to function correctly within an organization.
+keywords: Docker Desktop, allowlist, allow list, firewall, authentication URLs, analytics, 
 title: Allowlist for Docker Desktop
+tags: [admin]
 linkTitle: Allowlist
 weight: 100
 aliases:
  - /desktop/allow-list/
 ---
+
+{{< summary-bar feature_name="Allow list" >}}
 
 This page contains the domain URLs that you need to add to a firewall allowlist to ensure Docker Desktop works properly within your organization.
 

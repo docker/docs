@@ -11,7 +11,7 @@ description: Learn how to use build checks to validate your build configuration.
 keywords: build, buildx, buildkit, checks, validate, configuration, lint
 ---
 
-{{< introduced buildx 0.15.0 >}}
+{{< summary-bar feature_name="Build checks" >}}
 
 Build checks are a feature introduced in Dockerfile 1.8. It lets you validate
 your build configuration and conduct a series of checks prior to executing your
@@ -278,3 +278,10 @@ experimental checks, the experimental checks will still run:
 # syntax=docker/dockerfile:1
 # check=skip=all;experimental=all
 ```
+
+## Further reading
+
+For more information about using build checks, see:
+
+- [Build checks reference](/reference/build-checks/)
+- [Validating build configuration with GitHub Actions](/manuals/build/ci/github-actions/checks.md)

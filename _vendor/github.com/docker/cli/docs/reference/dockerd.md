@@ -92,7 +92,6 @@ Options:
       --no-new-privileges                     Set no-new-privileges by default for new containers
       --no-proxy string                       Comma-separated list of hosts or IP addresses for which the proxy is skipped
       --node-generic-resource list            Advertise user-defined resource
-      --oom-score-adjust int                  Set the oom_score_adj for the daemon
   -p, --pidfile string                        Path to use for daemon PID file (default "/var/run/docker.pid")
       --raw-logs                              Full timestamps without ANSI coloring
       --registry-mirror list                  Preferred registry mirror
@@ -892,7 +891,7 @@ Alternatively, you can set custom locations for CDI specifications using the
 When CDI is enabled for a daemon, you can view the configured CDI specification
 directories using the `docker info` command.
 
-#### <a name="log-format"></a> Daemon logging format
+#### Daemon logging format {#log-format}
 
 The `--log-format` option or "log-format" option in the [daemon configuration file](#daemon-configuration-file)
 lets you set the format for logs produced by the daemon. The logging format should
@@ -1000,7 +999,7 @@ Example of usage:
 }
 ```
 
-### <a name="feature"></a> Enable feature in the daemon (--feature)
+### Enable feature in the daemon (--feature) {#feature}
 
 The `--feature` option lets you enable or disable a feature in the daemon.
 This option corresponds with the "features" field in the [daemon.json configuration file](#daemon-configuration-file).
@@ -1172,7 +1171,6 @@ The following is a full example of the allowed configuration options on Linux:
     "NVIDIA-GPU=UUID1",
     "NVIDIA-GPU=UUID2"
   ],
-  "oom-score-adjust": 0,
   "pidfile": "",
   "raw-logs": false,
   "registry-mirrors": [],

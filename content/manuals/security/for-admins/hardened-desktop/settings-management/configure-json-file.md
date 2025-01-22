@@ -9,9 +9,7 @@ aliases:
  - /security/for-admins/hardened-desktop/settings-management/configure/
 ---
 
-> [!NOTE]
->
-> Settings Management is available to Docker Business customers only.
+{{< summary-bar feature_name="Hardened Docker Desktop" >}}
 
 This page contains information on how to configure Settings Management with an `admin-settings.json` file. You can specify and lock configuration parameters to create a standardized Docker Desktop environment across your company or organization.
 
@@ -258,6 +256,7 @@ The following `admin-settings.json` code and table provides an example of the re
 |:-------------------------------|---|:-------------------------------|---|
 | `allowExperimentalFeatures`| | If `value` is set to `false`, experimental features are disabled.|  |
 | `allowBetaFeatures`| | If `value` is set to `false`, beta features are disabled.|  |
+| `enableDockerAI` | | If `value` is set to `false`, Docker AI (Ask Gordon) features are disabled. |  |
 
 ### Enhanced Container Isolation 
 

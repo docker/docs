@@ -4,12 +4,7 @@ keywords: organization, insights
 title: Insights
 ---
 
-> [!NOTE]
-> Insights requires a [Docker Business
-> subscription](/subscription/core-subscription/details/#docker-business) and
-> administrators must [enforce sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md)
-> to ensure that users sign in with an account associated with their
-> organization.
+{{< summary-bar feature_name="Insights" >}}
 
 Insights helps administrators visualize and understand how Docker is used within
 their organizations. With Insights, administrators can ensure their teams are
@@ -18,37 +13,49 @@ productivity and efficiency across the organization.
 
 Key benefits include:
 
-* Uniform working environment. Establish and maintain standardized
+- Uniform working environment. Establish and maintain standardized
   configurations across teams.
-* Best practices. Promote and enforce usage guidelines to ensure optimal
+- Best practices. Promote and enforce usage guidelines to ensure optimal
   performance.
-* Increased visibility. Monitor and drive adoption of organizational
+- Increased visibility. Monitor and drive adoption of organizational
   configurations and policies.
-* Optimized license use. Ensure that developers have access to advanced
+- Optimized license use. Ensure that developers have access to advanced
   features provided by a Docker subscription.
+
+## Prerequisites
+
+- [Docker Business subscription](../../subscription/details.md#docker-business)
+- Administrators must [enforce sign-in](/security/for-admins/enforce-sign-in/) for users
+- Insights enabled by your Customer Success Manager
 
 ## View Insights for organization users
 
+{{< include "admin-early-access.md" >}}
+
+To access Insights, you must contact your Customer Success Manager to have the
+feature enabled. Once the feature is enabled, access Insights using the following
+steps:
+
 1. Go to the [Admin Console](https://app.docker.com/admin/) and sign in to an
    account that is an organization owner.
-2. In the Admin Console, select your organization from the drop-down in the left
-   navigation.
+2. Select your company on the **Choose profile** page.
 3. Select **Insights**.
 4. On the **Insights** page, select the period of time for the data.
 
 > [!NOTE]
+>
 > Insights data is not real-time and is updated daily. At the top-right of the
 > Insights page, view the **Last updated** date to understand when the data was
 > last updated.
 
 You can view data in the following charts:
 
- * [Docker Desktop users](#docker-desktop-users)
- * [Builds](#builds)
- * [Containers](#containers)
- * [Docker Desktop usage](#docker-desktop-usage)
- * [Docker Hub images](#docker-hub-images)
- * [Extensions](#extensions)
+ - [Docker Desktop users](#docker-desktop-users)
+ - [Builds](#builds)
+ - [Containers](#containers)
+ - [Docker Desktop usage](#docker-desktop-usage)
+ - [Docker Hub images](#docker-hub-images)
+ - [Extensions](#extensions)
 
 ### Docker Desktop users
 
@@ -60,13 +67,12 @@ counts.
 
 The chart contains the following data.
 
-| Data                         | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| Data | Description |
 |:-----------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Total active users           | The number of users that have actively used Docker Desktop and either signed in with a Docker account that has a license in your organization or signed in to a Docker account with an email address from a domain associated with your organization. <br><br>Users who don’t sign in to an account associated with your organization are not represented in the data. To ensure users sign in with an account associated with your organization, you can [enforce sign-in](/security/for-admins/enforce-sign-in/).                                                                                                                                                                                                                                                     |
-| Active with license          | The number of users that have actively used Docker Desktop and have signed in to a Docker account with a license in your organization.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| Active without license       | The number of users that have actively used Docker Desktop, are linked to a Docker account with an email address from a domain associated with your organization, and don’t have a license assigned to their account. <br><br>Users without a license don’t receive the benefits of your subscription. You can use [domain audit](/security/for-admins/domain-audit/) to identify users without a license. You can also use [Just-in-Time provisioning](/security/for-admins/provisioning/just-in-time/) or [SCIM](/security/for-admins/provisioning/scim/) to help automatically provision users with a license. Note that when SSO is configured and enforced, active without license will be 0. |
-| Users opted out of analytics | The number of users that are a member of your organization that have opted out of sending analytics. <br><br>When users opt out of sending analytics, you won't see any of their data in Insights. To ensure that the data includes all users, you can use [Settings Management](/desktop/hardened-desktop/settings-management/) to set `analyticsEnabled` for all your users.                                                                                                                                                                                                                                                                                                                                                                                          |
-| Active users (graph)         | The view over time for total active users.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| Active user | The number of users that have actively used Docker Desktop and either signed in with a Docker account that has a license in your organization or signed in to a Docker account with an email address from a domain associated with your organization. <br><br>Users who don’t sign in to an account associated with your organization are not represented in the data. To ensure users sign in with an account associated with your organization, you can [enforce sign-in](/security/for-admins/enforce-sign-in/). |
+| Total organization members | The number of users that have used Docker Desktop, regardless of their Insights activity. |
+| Users opted out of analytics | The number of users that are a member of your organization that have opted out of sending analytics. <br><br>When users opt out of sending analytics, you won't see any of their data in Insights. To ensure that the data includes all users, you can use [Settings Management](/desktop/hardened-desktop/settings-management/) to set `analyticsEnabled` for all your users. |
+| Active users (graph) | The view over time for total active users. |
 
 
 ### Builds

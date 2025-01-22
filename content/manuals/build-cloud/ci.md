@@ -65,18 +65,19 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Log in to Docker Hub
+      - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ vars.DOCKER_USER }}
           password: ${{ secrets.DOCKER_PAT }}
+      
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
         with:
-          version: "lab:latest"
           driver: cloud
           endpoint: "<ORG>/default"
           install: true
+      
       - name: Build and push
         uses: docker/build-push-action@v6
         with:

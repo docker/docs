@@ -5,17 +5,22 @@ level: warning
 ignorecase: false
 # Ensures that the existence of 'first' implies the existence of 'second'.
 first: '\b([A-Z]{2,5})\b'
-second: '(?:\b[A-Z][a-z]+ )+\(([A-Z]{2,5})\)'
+second: '(?:\b[A-Z][a-z]+ )+\(([A-Z]{2,5})s?\)'
 # ... with the exception of these:
 exceptions:
   - AGPL
+  - AI
   - API
   - ARM
   - ASP
   - AUFS
   - AWS
   - BIOS
+  - BPF
+  - BSD
+  - CFS
   - CI
+  - CIDR
   - CISA
   - CLI
   - CNCF
@@ -23,6 +28,7 @@ exceptions:
   - CPU
   - CSS
   - CSV
+  - CUDA
   - CVE
   - DCT
   - DEBUG
@@ -35,7 +41,9 @@ exceptions:
   - ECI
   - ELK
   - FAQ
+  - FPM
   - FUSE
+  - GB
   - GCC
   - GDB
   - GET
@@ -52,9 +60,12 @@ exceptions:
   - HTTP
   - HTTPS
   - IAM
+  - IBM
   - ID
   - IDE
   - IP
+  - IPAM
+  - IPC
   - IT
   - JAR
   - JIT
@@ -66,18 +77,23 @@ exceptions:
   - MAC
   - MDM
   - MDN
+  - MSI
   - NAT
   - NET
   - NFS
   - NOTE
+  - NTFS
   - NTLM
+  - NUMA
   - NVDA
   - OCI
   - OS
+  - OSI
   - OSS
   - PATH
   - PDF
   - PEM
+  - PID
   - PHP
   - POSIX
   - POST
@@ -86,6 +102,7 @@ exceptions:
   - RAM
   - REPL
   - REST
+  - RFC
   - RHEL
   - RPM
   - RSA
@@ -120,8 +137,10 @@ exceptions:
   - USB
   - USD
   - UTF
+  - UTS
   - UUID
   - VAT
+  - VIP
   - VLAN
   - VM
   - VPN
@@ -129,4 +148,5 @@ exceptions:
   - XML
   - XSS
   - YAML
+  - ZFS
   - ZIP

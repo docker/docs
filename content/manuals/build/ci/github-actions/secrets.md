@@ -44,10 +44,10 @@ jobs:
     steps:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
-      
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-      
+
       - name: Build
         uses: docker/build-push-action@v6
         with:
@@ -176,7 +176,7 @@ jobs:
           host: github.com
           private-key: ${{ secrets.SSH_GITHUB_PPK }}
           private-key-name: github-ppk
-      
+
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
@@ -198,18 +198,15 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      
       - name: Set up SSH
         uses: MrSquaare/ssh-setup-action@2d028b70b5e397cf8314c6eaea229a6c3e34977a # v3.1.0
         with:
           host: github.com
           private-key: ${{ secrets.SSH_GITHUB_PPK }}
           private-key-name: github-ppk
-      
+
       - name: Build
-        uses: docker/bake-action@v5
+        uses: docker/bake-action@v6
         with:
           set: |
             *.ssh=default

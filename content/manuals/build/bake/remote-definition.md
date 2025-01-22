@@ -91,7 +91,7 @@ execution context as named contexts.
 The following example defines the `docs` context as `./src/docs/content`,
 relative to the current working directory where Bake is run as a named context.
 
-```hcl
+```hcl {title=docker-bake.hcl}
 target "default" {
   contexts = {
     docs = "cwd://src/docs/content"
@@ -173,11 +173,9 @@ remote definition and the local "metadata-only" Bake file, specify both files
 and use the `cwd://` prefix for the metadata Bake file:
 
 ```yml
-      -
-        name: Build
-        uses: docker/bake-action@v4
+      - name: Build
+        uses: docker/bake-action@v6
         with:
-          source: "${{ github.server_url }}/${{ github.repository }}.git#${{ github.ref }}"
           files: |
             ./docker-bake.hcl
             cwd://${{ steps.meta.outputs.bake-file }}
