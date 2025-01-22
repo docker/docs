@@ -6,16 +6,16 @@ toc_max: 2
 title: Troubleshoot Docker Desktop
 linkTitle: Troubleshoot and diagnose
 aliases:
-- /desktop/linux/troubleshoot/
-- /desktop/mac/troubleshoot/
-- /desktop/windows/troubleshoot/
-- /docker-for-mac/troubleshoot/
-- /mackit/troubleshoot/
-- /windows/troubleshoot/
-- /docker-for-win/troubleshoot/
-- /docker-for-windows/troubleshoot/
-- /desktop/troubleshoot/overview/
-- /desktop/troubleshoot/
+ - /desktop/linux/troubleshoot/
+ - /desktop/mac/troubleshoot/
+ - /desktop/windows/troubleshoot/
+ - /docker-for-mac/troubleshoot/
+ - /mackit/troubleshoot/
+ - /windows/troubleshoot/
+ - /docker-for-win/troubleshoot/
+ - /docker-for-windows/troubleshoot/
+  - /desktop/troubleshoot/overview/
+ - /desktop/troubleshoot/
 tags: [ Troubleshooting ]
 weight: 10
 ---
