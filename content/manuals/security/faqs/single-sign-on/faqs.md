@@ -61,4 +61,4 @@ securely](/security/for-admins/provisioning/group-mapping/#use-group-mapping-wit
 
 ### Are there any firewall rules required for SSO configuration?
 
-No. There are no specific firewall rules required for configuring SSO, as long as the domain login.docker.com is accessible. This domain is commonly accessible by default. However, in rare cases, some organizations may have firewall restrictions in place that block this domain. If you encounter issues during SSO setup, ensure that login.docker.com is allowed in your network's firewall settings.
+No. There are no specific firewall rules required for configuring SSO, as long as the domain `login.docker.com` is accessible. This domain is commonly accessible by default. However, in rare cases, some organizations may have firewall restrictions in place that block this domain. If you encounter issues during SSO setup, ensure that `login.docker.com` is allowed in your network's firewall settings.
