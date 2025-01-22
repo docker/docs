@@ -15,7 +15,7 @@ environment variables.
 
 Use the `variable` block to define a variable.
 
-```hcl
+```hcl {title=docker-bake.hcl}
 variable "TAG" {
   default = "docker.io/username/webapp:latest"
 }
@@ -23,8 +23,8 @@ variable "TAG" {
 
 The following example shows how to use the `TAG` variable in a target.
 
-```hcl
-target "default" {
+```hcl {title=docker-bake.hcl}
+target "webapp" {
   context = "."
   dockerfile = "Dockerfile"
   tags = [ TAG ]
@@ -37,7 +37,7 @@ Bake supports string interpolation of variables into values. You can use the
 `${}` syntax to interpolate a variable into a value. The following example
 defines a `TAG` variable with a value of `latest`.
 
-```hcl
+```hcl {title=docker-bake.hcl}
 variable "TAG" {
   default = "latest"
 }
@@ -46,8 +46,16 @@ variable "TAG" {
 To interpolate the `TAG` variable into the value of an attribute, use the
 `${TAG}` syntax.
 
-```hcl
-target "default" {
+```hcl {title=docker-bake.hcl}
+group "default" {
+  targets = [ "webapp" ]
+}
+
+variable "TAG" {
+  default = "latest"
+}
+
+target "webapp" {
   context = "."
   dockerfile = "Dockerfile"
   tags = ["docker.io/username/webapp:${TAG}"]
@@ -87,7 +95,7 @@ range, or other condition, you can define custom validation rules using the
 In the following example, validation is used to enforce a numeric constraint on
 a variable value; the `PORT` variable must be 1024 or higher.
 
-```hcl
+```hcl {title=docker-bake.hcl}
 # Define a variable `PORT` with a default value and a validation rule
 variable "PORT" {
   default = 3000  # Default value assigned to `PORT`
@@ -115,7 +123,7 @@ the variable. All conditions must be `true`.
 
 Here’s an example:
 
-```hcl
+```hcl {title=docker-bake.hcl}
 # Define a variable `VAR` with multiple validation rules
 variable "VAR" {
   # First validation block: Ensure the variable is not empty
@@ -148,7 +156,7 @@ dependent variables are set correctly before proceeding.
 
 Here’s an example:
 
-```hcl
+```hcl {title=docker-bake.hcl}
 # Define a variable `FOO`
 variable "FOO" {}
 
@@ -171,8 +179,8 @@ will trigger the validation error.
 If you want to bypass variable interpolation when parsing the Bake definition,
 use double dollar signs (`$${VARIABLE}`).
 
-```hcl
-target "default" {
+```hcl {title=docker-bake.hcl}
+target "webapp" {
   dockerfile-inline = <<EOF
   FROM alpine
   ARG TARGETARCH
@@ -215,7 +223,7 @@ variable "BASE_LATEST" {
   default = "${BASE_IMAGE}:latest"
 }
 
-target "default" {
+target "webapp" {
   contexts = {
     base = BASE_LATEST
   }
@@ -233,7 +241,7 @@ $ docker buildx bake -f vars.hcl -f docker-bake.hcl --print app
 ```json
 {
   "target": {
-    "default": {
+    "webapp": {
       "context": ".",
       "contexts": {
         "base": "docker.io/library/alpine:latest"

@@ -6,7 +6,7 @@ description: Learn about how Compose Bridge can function a kubectl plugin
 keywords: kubernetes, compose, compose bridge, plugin, advanced
 ---
 
-{{< include "compose-bridge-experimental.md" >}}
+{{< summary-bar feature_name="Compose bridge" >}}
 
 Compose Bridge can also function as a `kubectl` plugin, allowing you to integrate its capabilities directly into your Kubernetes command-line operations. This integration simplifies the process of converting and deploying applications from Docker Compose to Kubernetes.
 

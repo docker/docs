@@ -1,6 +1,6 @@
 ---
 description: Learn how to configure single sign-on for your organization or company.
-keywords: configure, sso, docker hub, hub, docker admin, admin, security 
+keywords: configure, sso, docker hub, hub, docker admin, admin, security
 title: Configure single sign-on
 linkTitle: Configure
 aliases:
@@ -11,6 +11,8 @@ aliases:
 - /admin/company/settings/sso-configuration/
 - /admin/organization/security-settings/sso-configuration/
 ---
+
+{{< summary-bar feature_name="SSO" >}}
 
 Get started creating a single sign-on (SSO) connection for your organization or company. This guide walks through the steps to add and verify the domains your members use to sign in to Docker.
 

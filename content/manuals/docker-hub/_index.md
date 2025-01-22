@@ -24,10 +24,10 @@ grid:
   description: Learn about organization administration.
   icon: store
   link: /admin/
-- title: Usage
+- title: Usage and limits
   description: Explore usage limits and how to better utilize Docker Hub.
   icon: leaderboard
-  link: /docker-hub/download-rate-limit/
+  link: /docker-hub/usage/
 - title: Release notes
   description: Find out about new features, improvements, and bug fixes.
   icon: note_add

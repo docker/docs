@@ -13,13 +13,15 @@ aliases:
 - /desktop/vmm/
 ---
 
+{{< summary-bar feature_name="VMM" >}}
+
 The Virtual Machine Manager (VMM) in Docker Desktop for Mac is responsible for creating and managing the virtual machine used to run containers. Depending on your system architecture and performance needs, you can choose from multiple VMM options in Docker Desktop's [settings](/manuals/desktop/settings-and-maintenance/settings.md#general). This page provides an overview of the available options.
 
-## Docker VMM (Beta)
+## Docker VMM
 
-Docker VMM is a new, container-optimized hypervisor introduced in Docker Desktop 4.35 and available on Apple Silicon Macs only. Its enhanced speed and resource efficiency makes it an ideal choice for optimizing your workflow. 
+Docker VMM is a new, container-optimized hypervisor introduced in Docker Desktop 4.35 and available on Apple Silicon Macs only. Its enhanced speed and resource efficiency makes it an ideal choice for optimizing your workflow.
 
-Docker VMM brings exciting advancements specifically tailored for Apple Silicon machines. By optimizing both the Linux kernel and hypervisor layers, Docker VMM delivers significant performance enhancements across common developer tasks. 
+Docker VMM brings exciting advancements specifically tailored for Apple Silicon machines. By optimizing both the Linux kernel and hypervisor layers, Docker VMM delivers significant performance enhancements across common developer tasks.
 
 Some key performance enhancements provided by Docker VMM include:
  - Faster I/O operations: With a cold cache, iterating over a large shared filesystem with `find` is 2x faster than when the Apple Virtualization Framework is used.
@@ -31,9 +33,7 @@ These improvements directly impact developers who rely on frequent file access a
 >
 > Docker VMM requires a minimum of 4GB of memory to be allocated to the Docker Linux VM. The memory needs to be increased before Docker VMM is enabled, and this can be done from the **Resources** tab in **Settings**.
 
-Docker VMM is based on [libkrun](https://github.com/containers/libkrun).
-
-### Known issues 
+### Known issues
 
 As Docker VMM is still in Beta, there are a few known limitations:
 

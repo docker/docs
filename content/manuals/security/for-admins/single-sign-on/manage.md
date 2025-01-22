@@ -8,6 +8,8 @@ aliases:
 - /single-sign-on/manage/
 ---
 
+{{< summary-bar feature_name="SSO" >}}
+
 ## Manage organizations
 
 > [!NOTE]

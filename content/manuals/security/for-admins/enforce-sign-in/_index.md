@@ -11,6 +11,8 @@ aliases:
 weight: 30
 ---
 
+{{< summary-bar feature_name="Enforce sign-in" >}}
+
 By default, members of your organization can use Docker Desktop without signing
 in. When users don’t sign in as a member of your organization, they don’t
 receive the [benefits of your organization’s

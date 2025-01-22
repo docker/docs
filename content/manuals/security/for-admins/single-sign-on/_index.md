@@ -10,6 +10,8 @@ aliases:
 weight: 10
 ---
 
+{{< summary-bar feature_name="SSO" >}}
+
 Single sign-on (SSO) lets users access Docker by authenticating using their identity providers (IdPs). SSO is available for a whole company, and all associated organizations within that company, or an individual organization that has a Docker Business subscription. To upgrade your existing account to a Docker Business subscription, see [Upgrade your subscription](/subscription/upgrade/).
 
 ## How SSO works

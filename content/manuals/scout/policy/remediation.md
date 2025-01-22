@@ -4,9 +4,7 @@ description: Learn how Docker Scout can help you improve your software quality a
 keywords: scout, supply chain, security, remediation, automation
 ---
 
-{{% experimental title="Beta feature" %}}
-Remediation with Docker Scout is currently in [Beta](../../release-lifecycle.md#Beta).
-{{% /experimental %}}
+{{< summary-bar feature_name="Remediation with Docker Scout" >}}
 
 Docker Scout helps you remediate supply chain or security issues by providing
 recommendations based on policy evaluation results. Recommendations are

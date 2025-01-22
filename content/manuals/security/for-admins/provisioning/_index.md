@@ -6,6 +6,8 @@ linkTitle: Provision
 weight: 20
 ---
 
+{{< summary-bar feature_name="SSO" >}}
+
 Once you've configured your SSO connection, the next step is to provision users. This process ensures that users can access your organization.
 This guide provides an overview of user provisioning and supported provisioning methods.
 

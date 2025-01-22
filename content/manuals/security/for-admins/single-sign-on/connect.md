@@ -5,6 +5,8 @@ title: Create an SSO connection
 linkTitle: Connect
 ---
 
+{{< summary-bar feature_name="SSO" >}}
+
 Creating a single sign-on (SSO) connection requires setting up the connection in Docker first, followed by setting up the connection in your identity provider (IdP). This guide provides steps for setting up your SSO connection in Docker and your IdP.
 
 > [!TIP]

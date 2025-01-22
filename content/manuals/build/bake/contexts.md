@@ -29,14 +29,13 @@ Supported context values are:
 
 ## Pinning alpine image
 
-```dockerfile
+```dockerfile {title=Dockerfile}
 # syntax=docker/dockerfile:1
 FROM alpine
 RUN echo "Hello world"
 ```
 
-```hcl
-# docker-bake.hcl
+```hcl {title=docker-bake.hcl}
 target "app" {
   contexts = {
     alpine = "docker-image://alpine:3.13"
@@ -46,16 +45,14 @@ target "app" {
 
 ## Using a secondary source directory
 
-```dockerfile
-# syntax=docker/dockerfile:1
-FROM scratch AS src
-
+```dockerfile {title=Dockerfile}
 FROM golang
 COPY --from=src . .
 ```
 
-```hcl
-# docker-bake.hcl
+```hcl {title=docker-bake.hcl}
+# Running `docker buildx bake app` will result in `src` not pointing
+# to some previous build stage but to the client filesystem, not part of the context.
 target "app" {
   contexts = {
     src = "../path/to/source"
@@ -68,14 +65,16 @@ target "app" {
 To use a result of one target as a build context of another, specify the target
 name with `target:` prefix.
 
-```dockerfile
+```dockerfile {title=baseapp.Dockerfile}
+FROM scratch
+```
+```dockerfile {title=Dockerfile}
 # syntax=docker/dockerfile:1
 FROM baseapp
 RUN echo "Hello world"
 ```
 
-```hcl
-# docker-bake.hcl
+```hcl {title=docker-bake.hcl}
 target "base" {
   dockerfile = "baseapp.Dockerfile"
 }
@@ -119,7 +118,7 @@ result in significant impact on build time, depending on your build
 configuration. For example, say you have a Bake file that defines the following
 group of targets:
 
-```hcl
+```hcl {title=docker-bake.hcl}
 group "default" {
   targets = ["target1", "target2"]
 }
@@ -148,7 +147,7 @@ context that only loads the context files, and have each target that needs
 those files reference that named context. For example, the following Bake file
 defines a named target `ctx`, which is used by both `target1` and `target2`:
 
-```hcl
+```hcl {title=docker-bake.hcl}
 group "default" {
   targets = ["target1", "target2"]
 }
@@ -177,7 +176,7 @@ The named context `ctx` represents a Dockerfile stage, which copies the files
 from its context (`.`). Other stages in the Dockerfile can now reference the
 `ctx` named context and, for example, mount its files with `--mount=from=ctx`.
 
-```dockerfile
+```dockerfile {title=Dockerfile}
 FROM scratch AS ctx
 COPY --link . .
 

@@ -7,6 +7,8 @@ aliases:
 - /docker-hub/convert-account/
 ---
 
+{{< summary-bar feature_name="Admin orgs" >}}
+
 You can convert an existing user account to an organization. This is useful if you need multiple users to access your account and the repositories that it’s connected to. Converting it to an organization gives you better control over permissions for these users through [teams](manage-a-team.md) and [roles](roles-and-permissions.md).
 
 When you convert a user account to an organization, the account is migrated to a Docker Team plan.

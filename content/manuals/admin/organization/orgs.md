@@ -8,6 +8,8 @@ aliases:
 - /docker-hub/orgs/
 ---
 
+{{< summary-bar feature_name="Admin orgs" >}}
+
 This section describes how to create an organization. Before you begin:
 
 - You need a [Docker ID](/accounts/create-account/)
