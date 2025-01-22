@@ -84,14 +84,10 @@ Following are the examples of errors on MacOS which indicate that the startup fa
 
 ### Incompatible CPU detected
 
-> [!TIP]
->
-> If you are seeing this error, check you've installed the correct Docker Desktop for your architecture. 
-
 Docker Desktop requires a processor (CPU) that supports virtualization and, more
 specifically, the [Apple Hypervisor
 framework](https://developer.apple.com/library/mac/documentation/DriversKernelHardware/Reference/Hypervisor/).
-Docker Desktop is only compatible with Mac systems that have a CPU that supports the Hypervisor framework. Most Macs built in 2010 and later support it, as described in the Apple Hypervisor Framework documentation about supported hardware:
+Docker Desktop is only compatible with Mac systems that have a CPU that supports the Hypervisor framework. Most Macs built in 2010 and later support it,as described in the Apple Hypervisor Framework documentation about supported hardware:
 
 *Generally, machines with an Intel VT-x feature set that includes Extended Page
 Tables (EPT) and Unrestricted Mode are supported.*
