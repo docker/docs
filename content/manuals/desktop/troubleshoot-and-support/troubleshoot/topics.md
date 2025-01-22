@@ -8,7 +8,6 @@ tags: [ Troubleshooting ]
 weight: 10 
 aliases:
  - /desktop/troubleshoot/topics/
- - /desktop/mac/troubleshoot/#incompatible-cpu-detected
 ---
 
 > [!TIP]
