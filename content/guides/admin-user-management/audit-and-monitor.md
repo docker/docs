@@ -27,7 +27,7 @@ It is available for Docker Team or Docker Business plans, with data retained for
 
  - Billing adjustments: Track who added or removed subscription seats to maintain budgetary control and compliance.
 
-For more information, see [Activity logs](/manuals/admin/organization/activity-logs.md)
+For more information, see [Activity logs](/manuals/admin/organization/activity-logs.md).
 
 ## Insights
 
@@ -49,4 +49,4 @@ Insights provide data-driven views of Docker usage to improve team productivity 
 
  - Container utilization: Analyze container activity across departments to ensure proper resource distribution and cost efficiency.
 
- For more information, see [Insights](/manuals/admin/organization/insights.md)
+ For more information, see [Insights](/manuals/admin/organization/insights.md).

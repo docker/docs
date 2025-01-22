@@ -9,15 +9,15 @@ This page guides you through onboarding owners and members, and using tools like
 
 ## Step 1: Invite owners
 
-When you create a Docker organization, you automatically become its sole owner. While optional, adding additional owners can significantly ease the process of onboarding and managing your organization by distributing administrative responsibilities. It also ensures continuity and does not cause a blocker if the primary own is unavailable.
+When you create a Docker organization, you automatically become its sole owner. While optional, adding additional owners can significantly ease the process of onboarding and managing your organization by distributing administrative responsibilities. It also ensures continuity and does not cause a blocker if the primary owner is unavailable.
 
-For detailed information on owners, see [Roles and permissions](/manuals/security/for-admins/roles-and-permissions.md)
+For detailed information on owners, see [Roles and permissions](/manuals/security/for-admins/roles-and-permissions.md).
 
-## Step 2: Invite members
+## Step 2: Invite members and assign roles
 
-Members are granted controlled access to resources and enjoy enhanced organizational benefits.
+Members are granted controlled access to resources and enjoy enhanced organizational benefits. When you invite members to join you Docker organization, you immediately assign them a role.
 
-### Why invite members?
+### Benefits of inviting members
 
  - Enhanced visibility: Gain insights into user activity, making it easier to monitor access and enforce security policies.
 
@@ -29,7 +29,7 @@ Members are granted controlled access to resources and enjoy enhanced organizati
 
  - Security control: Apply and enforce security settings at an organizational level, reducing risks associated with unmanaged accounts.
 
-For detailed information, see [Manage organization members](/manuals/admin/organization/members.md)
+For detailed information, see [Manage organization members](/manuals/admin/organization/members.md).
 
 ## Step 3: Future-proof user management
 
@@ -47,7 +47,7 @@ SSO:
 
  - Simplifies onboarding as it works seamlessly with SCIM and group mapping for automated provisioning.
 
-[SSO documentation](/manuals/security/for-admins/single-sign-on/_index.md)
+[SSO documentation](/manuals/security/for-admins/single-sign-on/_index.md).
 
 ### Automate onboarding with SCIM and JIT provisioning
 
@@ -77,4 +77,4 @@ It also:
 
  - Help you scale permissions as teams grow or change.
 
-For more information on how it works, see [Group mapping](/manuals/security/for-admins/provisioning/group-mapping.md)
+For more information on how it works, see [Group mapping](/manuals/security/for-admins/provisioning/group-mapping.md).

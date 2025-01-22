@@ -5,15 +5,17 @@ keywords: Docker roles, permissions management, access control, IT administratio
 weight: 10
 ---
 
-With the right configurations, you can ensure your developers have easy access to necessary resources while preventing unauthorized access. This page guides you through identifying Docker users, so you can allocate subscription seats efficiently, and assigning roles to align with your organization's structure. 
+With the right configurations, you can ensure your developers have easy access to necessary resources while preventing unauthorized access. This page guides you through identifying Docker users, so you can allocate subscription seats efficiently within your Docker organization, and assigning roles to align with your organization's structure. 
 
-## Step one: Identify your Docker users and accounts
+## Step 1: Identify your Docker users and accounts
 
 Before setting up roles and permissions, it’s important to have a clear understanding of who in your organization requires Docker access. Focus on gathering a comprehensive view of active users, their roles within projects, and how they interact with Docker resources. This process can be supported by tools like device management software or manual assessments. Encourage all users to update their Docker accounts to use organizational email addresses, ensuring seamless integration with your subscription.
 
 For steps on how you can do this, see [step 1 of onboarding your organization](/manuals/admin/organization/onboard.md).
 
 ## Step 2: Assign roles strategically
+
+When you invite members to join you Docker organization, you assign them a role. 
 
 Docker’s predefined roles offer flexibility for various organizational needs. Assigning roles effectively ensures a balance of accessibility and security.
 
