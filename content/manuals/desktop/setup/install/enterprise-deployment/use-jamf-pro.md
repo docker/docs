@@ -6,6 +6,8 @@ tags: [admin]
 weight: 40
 ---
 
+{{< summary-bar feature_name="Jamf Pro" >}}
+
 Learn how to deploy Docker Desktop for Mac using Jamf Pro.
 
 First, upload the package:
