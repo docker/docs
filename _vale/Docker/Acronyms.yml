@@ -66,7 +66,9 @@ exceptions:
   - IP
   - IPAM
   - IPC
+  - IT
   - JAR
+  - JIT
   - JSON
   - JSX
   - LESS
@@ -95,6 +97,7 @@ exceptions:
   - PHP
   - POSIX
   - POST
+  - QA
   - QEMU
   - RAM
   - REPL
