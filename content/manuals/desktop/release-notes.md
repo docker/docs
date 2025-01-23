@@ -92,6 +92,11 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 - Fixed a bug where resetting default settings would also reset the CLI context.
 - Fixed a bug where the Docker Desktop Dashboard would get out of sync with the Docker daemon after restarting the engine while in Resource Saver mode (Windows with WSL2 backend only) or after switching engines (macOS).
 - Fixed a bug where Resource Saver mode would fail to re-engage after restarting the engine while in Resource Saver mode.
+- Build UI:
+  - Fixed a bug where the source file could not be found for some builds.
+  - Fixed a bug where error logs were not displayed in the **Source** tab.
+  - Fixed a bug where users had to scroll to the bottom for error logs in **Source** tab.
+  - Fixed a bug where timestamps would be broken in the **Logs** tab.
 
 #### For Mac
 
@@ -178,6 +183,13 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 - Fixed a bug that restricted containers using `--network=host` to 18 open host ports.
 - Fixed bind mount ownership for non-root containers. Fixes [docker/for-mac#6243](https://github.com/docker/for-mac/issues/6243).
 - Docker Desktop will not unpause automatically after a manual pause. The system will stay paused until you manually resume the Docker engine. This fixes a bug where other software would accidentally trigger a resume by running a CLI command in the background. Fixes [for-mac/#6908](https://github.com/docker/for-mac/issues/6908)
+- Build UI:
+  - The **Source** tab now supports multiple source files.
+  - Links for image dependencies in the **Info** tab now support other well-known registries such as GitHub, Google, and GitLab.
+  - Disabled the **Delete** button if only cloud builds are selected.
+  - Fixed an issue where users were unable to delete builds.
+  - Fixed malformed Jaeger traces that were missing events and links.
+  - Fixed missing export attributes when building with the cloud driver.
 
 #### For Mac
 
