@@ -10,6 +10,18 @@ toc_max: 2
 This page contains information about the new features, improvements, and bug
 fixes in [Docker Buildx](https://github.com/docker/buildx).
 
+## 0.20.1
+
+{{< release-date date="2025-01-23" >}}
+
+The full release note for this release is available
+[on GitHub](https://github.com/docker/buildx/releases/tag/v0.20.1).
+
+### Bug fixes
+
+- Fix `bake --print` output missing some attributes for attestations [docker/buildx#2937](https://github.com/docker/buildx/pull/2937)
+- Fix allowing comma separated image reference strings for cache import and export values [docker/buildx#2944](https://github.com/docker/buildx/pull/2944)
+
 ## 0.20.0
 
 {{< release-date date="2025-01-20" >}}
