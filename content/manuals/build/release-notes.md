@@ -17,6 +17,16 @@ fixes in [Docker Buildx](https://github.com/docker/buildx).
 The full release note for this release is available
 [on GitHub](https://github.com/docker/buildx/releases/tag/v0.20.0).
 
+> [!NOTE]
+> This version of buildx enables filesystem entitlement checks for `buildx bake`
+> command by default. If your Bake definition needs to read or write files
+> outside your current working directory, you need to allow access to these
+> paths with `--allow fs=<path|*>`. On the terminal, you can also interactively
+> approve these paths with the provided prompt. Optionally, you can disable
+> these checks by setting `BUILDX_BAKE_ENTITLEMENTS_FS=0`. This validation
+> produced a warning in Buildx v0.19.0+, but starting from current release it
+> produces an error. [docs](/reference/cli/docker/buildx/bake.md#allow)
+
 ### New
 
 - New `buildx history` command has been added that allows working with build records of completed and running builds. You can use these commands to list, inspect, remove your builds, replay the logs of already completed builds, and quickly open your builds in Docker Desktop Build UI for further debugging. This is an early version of this command and we expect to add more features in the future releases. [#2891](https://github.com/docker/buildx/pull/2891), [#2925](https://github.com/docker/buildx/pull/2925)
