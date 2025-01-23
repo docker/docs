@@ -9,7 +9,7 @@ aliases:
 - /desktop/setup/install/msi/install-and-configure/
 ---
 
-{{< summary-bar feature_name="MSI installer" >}}
+{{< summary-bar feature_name="MSI Installer" >}}
 
 The MSI package supports various MDM (Mobile Device Management) solutions, making it ideal for bulk installations and eliminating the need for manual setups by individual users. With this package, IT administrators can ensure standardized, policy-driven installations of Docker Desktop, enhancing efficiency and software management across their organizations.
 
