@@ -58,3 +58,7 @@ other sensitive data in the directory. Due to potential security risks, Docker
 doesn't support this configuration. Instead, Docker recommends [configuring SCIM
 to enable group sync
 securely](/security/for-admins/provisioning/group-mapping/#use-group-mapping-with-scim).
+
+### Are there any firewall rules required for SSO configuration?
+
+No. There are no specific firewall rules required for configuring SSO, as long as the domain `login.docker.com` is accessible. This domain is commonly accessible by default. However, in rare cases, some organizations may have firewall restrictions in place that block this domain. If you encounter issues during SSO setup, ensure that `login.docker.com` is allowed in your network's firewall settings.
