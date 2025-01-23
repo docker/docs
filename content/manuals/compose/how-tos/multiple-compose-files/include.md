@@ -6,7 +6,7 @@ aliases:
 - /compose/multiple-compose-files/include/
 ---
 
-{{< introduced compose 2.20.3 "/manuals/compose/releases/release-notes.md#2203" >}}
+{{< summary-bar feature_name="Compose include" >}}
 
 {{< include "compose/include.md" >}}
 

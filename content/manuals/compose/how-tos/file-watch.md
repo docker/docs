@@ -7,7 +7,7 @@ aliases:
 - /compose/file-watch/
 ---
 
-{{< introduced compose 2.22.0 "/manuals/compose/releases/release-notes.md#2220" >}}
+{{< summary-bar feature_name="Compose file watch" >}}
 
 {{< include "compose/watch.md" >}}
 

@@ -6,7 +6,7 @@ aliases:
   - /config/otel/
 ---
 
-{{< introduced engine 26.1.0 >}}
+{{< summary-bar feature_name="Docker CLI OpenTelemetry" >}}
 
 The Docker CLI supports [OpenTelemetry](https://opentelemetry.io/docs/) instrumentation
 for emitting metrics about command invocations. This is disabled by default.

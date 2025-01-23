@@ -20,24 +20,94 @@ Automated builds:
   subscription: [Pro, Team, Business]
 Azure blob:
   availability: Experimental
+Build additional contexts:
+  requires: Docker Compose 2.17.0 and later
 Build bake:
   availability: Experimental
 Build checks:
   availability: Beta
   requires: Buildx v0.15.0 and later
+Build dockerfile inline:
+  requires: Docker Compose 2.17.0 and later
+Build entitlements:
+  requires: Docker Compose 2.27.1 and later
+Build multiple exporters:
+  requires: Docker Buildx 0.13.0 and later
+Buildkit host:
+  requires: Docker Buildx 0.9.0 and later
+Build privileged:
+  requires: Docker Compose 2.15.0 and later
+Build ulimits:
+  requires: Docker Compose 2.23.1 and later
+Buildx bake Git auth token:
+  requires: Docker Buildx 0.14.0 and later
+Buildx bake Git SSH:
+  requires: Docker Buildx 0.14.0 and later
+Buildx CPU profile:
+  requires: Docker Buildx 0.18.0 and later
+Buildx Git check dirty:
+  requires: Docker Buildx 0.10.4 and later
+Buildx Git info:
+  requires: Docker Buildx 0.10.0 and later
+Buildx Git labels:
+  requires: Docker Buildx 0.10.0 and later
+Buildx mem profile:
+  requires: Docker Buildx 0.18.0 and later
+Buildx no default:
+  requires: Docker Buildx 0.10.4 and later
 Cache backend API:
   availability: Experimental
 Company:
   subscription: [Business]
   for: Administrators
+Compose attach:
+  requires: Docker Compose 2.20.0 and later
 Compose bridge:
   availability: Experimental
+Compose cgroup:
+  requires: Docker Compose 2.15.0 and later
+Compose develop:
+  requires: Docker Compose 2.22.0 and later
+Compose driver opts:
+  requires: Docker Compose 2.27.1 and later
+Compose exec:
+  requires: Docker Compose 2.32.2 and later
+Compose experimental:
+  requires: Docker Compose 2.26.0 and later
+Compose file watch:
+  requires: Docker Compose 2.22.0 and later
+Compose format:
+  requires: Docker Compose 2.30.0 and later
+Compose include:
+  requires: Docker Compose 2.20.3 and later
+Compose label file:
+  requires: Docker Compose 2.32.2 and later
+Compose lifecycle hooks:
+  requires: Docker Compose 2.30.0 and later
+Compose mac address:
+  requires: Docker Compose 2.23.2 and later
+Compose menu:
+  requires: Docker Compose 2.26.0 and later
+Compose replace file:
+  requires: Docker Compose 2.24.4 and later
+Compose required:
+  requires: Docker Compose 2.24.0 and later
+Compose post start:
+  requires: Docker Compose 2.30.0 and later
+Compose pre stop:
+  requires: Docker Compose 2.30.0 and later
+Compose uts:
+  requires: Docker Compose 2.15.1 and later
+Composefile include:
+  requires: Docker Compose 2.20.0 and later
 containerd:
   availability: Experimental
 Dev Environments:
   availability: Beta
 Docker Build Cloud:
   subscription: [Pro, Team, Business]
+Docker CLI OpenTelemetry:
+  requires: Docker Engine 26.1.0 and later
 docker compose alpha:
   availability: Experimental
 Docker Desktop Archlinux:
@@ -55,6 +125,8 @@ Docker Scout GitHub:
 Docker Scout health scores:
   subscription: [Pro, Team, Business]
   availability: Beta
+Docker Scout Mount Permissions:
+  requires: Docker Desktop 4.34.0 and later
 Domain audit:
   subscription: [Business]
   for: Administrators
@@ -78,8 +150,10 @@ Intune:
   for: Administrators
 Jamf Pro:
   for: Administrators
-MSI Installer:
-  availability: Docker Desktop 4.32 and later
+Load by default:
+  requires: Docker Buildx 0.14.0 and later
+MSI installer:
+  requires: Docker Desktop 4.32 and later
   for: Administrators
 OATs:
   subscription: [Team, Business]
@@ -97,6 +171,8 @@ Remediation with Docker Scout:
 Registry access management:
   subscription: [Business]
   for: Administrators
+SOCKS5 proxy support:
+  requires: Docker Desktop 4.28.0 and later
 SSO:
   subscription: [Business]
   for: Administrators

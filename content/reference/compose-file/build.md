@@ -83,7 +83,7 @@ Alternatively `build` can be an object with fields defined as follows:
 
 ### `additional_contexts`
 
-{{< introduced compose 2.17.0 "/manuals/compose/releases/release-notes.md#2170" >}}
+{{< summary-bar feature_name="Build additional contexts" >}}
 
 `additional_contexts` defines a list of named contexts the image builder should use during image build.
 
@@ -229,7 +229,7 @@ build:
 
 ### `dockerfile_inline`
 
-{{< introduced compose 2.17.0 "/manuals/compose/releases/release-notes.md#2170" >}}
+{{< summary-bar feature_name="Build dockerfile inline" >}}
 
 `dockerfile_inline` defines the Dockerfile content as an inlined string in a Compose file. When set, the `dockerfile`
 attribute is not allowed and Compose rejects any Compose file having both set.
@@ -246,7 +246,7 @@ build:
 
 ### `entitlements`
 
-{{< introduced compose 2.27.1 "/manuals/compose/releases/release-notes.md#2271" >}}
+{{< summary-bar feature_name="Build entitlements" >}}
 
 `entitlements` defines extra privileged entitlements to be allowed during the build.
 
@@ -392,7 +392,7 @@ Composes reports an error in the following cases:
 
 ### `privileged`
 
-{{< introduced compose 2.15.0 "/manuals/compose/releases/release-notes.md#2" >}}
+{{< summary-bar feature_name="Build privileged" >}}
 
 `privileged` configures the service image to build with elevated privileges. Support and actual impacts are platform specific.
 
@@ -555,7 +555,7 @@ build:
 
 ### `ulimits`
 
-{{< introduced compose 2.23.1 "/manuals/compose/releases/release-notes.md#2231" >}}
+{{< summary-bar feature_name="Build ulimits" >}}
 
 `ulimits` overrides the default `ulimits` for a container. It's specified either as an integer for a single limit
 or as mapping for soft/hard limits.
