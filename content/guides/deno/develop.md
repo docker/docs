@@ -23,7 +23,7 @@ In this section, you'll learn how to set up a development environment for your c
 Clone the sample application to use with this guide. Open a terminal, change directory to a directory that you want to work in, and run the following command to clone the repository:
 
 ```console
-$ git clone https://github.com/Pradumnasaraf/deno-docker.git
+$ git clone https://github.com/dockersamples/deno-docker.git
 ```
 
 ## Automatically update services
