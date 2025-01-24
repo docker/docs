@@ -72,7 +72,7 @@ see [`ENV` usage example](#env-usage-example).
 Build arguments are commonly used to specify versions of components,
 such as image variants or package versions, used in a build.
 
-Specifying versions as build arguments lets build with different versions
+Specifying versions as build arguments lets you build with different versions
 without having to manually update the Dockerfile.
 It also makes it easier to maintain the Dockerfile,
 since it lets you declare versions at the top of the file.
