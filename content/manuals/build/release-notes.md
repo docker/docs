@@ -18,6 +18,7 @@ The full release note for this release is available
 [on GitHub](https://github.com/docker/buildx/releases/tag/v0.20.0).
 
 > [!NOTE]
+>
 > This version of buildx enables filesystem entitlement checks for `buildx bake`
 > command by default. If your Bake definition needs to read or write files
 > outside your current working directory, you need to allow access to these
@@ -25,7 +26,7 @@ The full release note for this release is available
 > approve these paths with the provided prompt. Optionally, you can disable
 > these checks by setting `BUILDX_BAKE_ENTITLEMENTS_FS=0`. This validation
 > produced a warning in Buildx v0.19.0+, but starting from current release it
-> produces an error. [docs](/reference/cli/docker/buildx/bake.md#allow)
+> produces an error. For more information, see the [reference documentation](/reference/cli/docker/buildx/bake.md#allow).
 
 ### New
 
