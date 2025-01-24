@@ -19,8 +19,8 @@ The full release note for this release is available
 
 ### Bug fixes
 
-- Fix `bake --print` output missing some attributes for attestations [docker/buildx#2937](https://github.com/docker/buildx/pull/2937)
-- Fix allowing comma separated image reference strings for cache import and export values [docker/buildx#2944](https://github.com/docker/buildx/pull/2944)
+- Fix `bake --print` output after missing some attributes for attestations. [docker/buildx#2937](https://github.com/docker/buildx/pull/2937)
+- Fix allowing comma-separated image reference strings for cache import and export values. [docker/buildx#2944](https://github.com/docker/buildx/pull/2944)
 
 ## 0.20.0
 
