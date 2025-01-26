@@ -1,44 +1,7 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
 @layer base {
-
-  /*
-   * Font faces for Roboto Flex and Roboto Mono.
-   *
-   * - https://fonts.google.com/specimen/Roboto+Flex
-   * - https://fonts.google.com/specimen/Roboto+Mono
-   *
-   * The TTF fonts have been compressed to woff2,
-   * preserving the latin character subset.
-   *
-   * */
-
-  /* Roboto Flex */
-  @font-face {
-    font-family: 'Roboto Flex';
-    src: url('/assets/fonts/RobotoFlex.woff2') format('woff2');
-    font-weight: 100 1000; /* Range of weights Roboto Flex supports */
-    font-stretch: 100%; /* Range of width Roboto Flex supports */
-    font-style: oblique 0deg 10deg; /* Range of oblique angle Roboto Flex supports */
-    font-display: fallback;
-  }
-
-  /* Roboto Mono */
-  @font-face {
-    font-family: 'Roboto Mono';
-    src: url('/assets/fonts/RobotoMono-Regular.woff2') format('woff2');
-    font-weight: 100 700; /* Define the range of weight the variable font supports */
-    font-style: normal;
-    font-display: fallback;
-  }
-
-  /* Roboto Mono Italic */
-  @font-face {
-    font-family: 'Roboto Mono';
-    src: url('/assets/fonts/RobotoMono-Italic.woff2') format('woff2');
-    font-weight: 100 700; /* Define the range of weight the variable font supports */
-    font-style: italic;
-    font-display: fallback;
-  }
-
   .prose {
     li {
       @apply my-2;
@@ -72,6 +35,85 @@
     h5 {
       @apply text-lg;
       line-height: 1.75;
+    }
+
+    /* Code */
+    .highlight,
+    :not(pre) > code {
+      font-size: 0.875em;
+      border: 1px solid;
+      border-radius: theme("spacing.1");
+      background: theme("colors.white");
+      border-color: theme("colors.gray.light.300");
+      .dark & {
+        background: theme("colors.gray.dark.200");
+        border-color: theme("colors.gray.dark.300");
+      }
+    }
+
+    :not(pre) > code {
+      background: theme("colors.gray.light.200");
+      display: inline-block;
+      margin: 0;
+      font-weight: 400;
+      overflow-wrap: anywhere;
+      padding: 0 4px;
+    }
+
+    table:not(.lntable) code {
+      overflow-wrap: unset;
+      white-space: nowrap;
+    }
+
+    /* Indented code blocks */
+    pre:not(.chroma) {
+      @apply my-4 overflow-x-auto p-3;
+      font-size: 0.875em;
+      border: 1px solid;
+      border-radius: theme("spacing.1");
+      background: theme("colors.white");
+      border-color: theme("colors.gray.light.300");
+      .dark & {
+        background: theme("colors.gray.dark.200");
+        border-color: theme("colors.gray.dark.300");
+      }
+    }
+
+    .highlight {
+      @apply my-4 overflow-x-auto p-3;
+
+      /* LineTableTD */
+      .lntd {
+        vertical-align: top;
+        padding: 0;
+        margin: 0;
+        font-weight: 400;
+        padding: 0 4px;
+        &:first-child {
+          width: 0;
+        }
+      }
+
+      /* LineTableTD */
+      .lntd {
+        vertical-align: top;
+        padding: 0;
+        margin: 0;
+        border: 0;
+      }
+      /* LineTable */
+      .lntable {
+        display: table;
+        width: 100%;
+        border-spacing: 0;
+        padding: 0;
+        margin: 0;
+        border: 0;
+        /* LineNumberColumnHighlight */
+        .lntd:first-child .hl {
+          display: block;
+        }
+      }
     }
   }
 }
