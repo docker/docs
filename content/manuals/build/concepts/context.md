@@ -567,3 +567,193 @@ README-secret.md
 
 All of the README files are included. The middle line has no effect because
 `!README*.md` matches `README-secret.md` and comes last.
+
+## Named contexts
+
+In addition to the default build context (the positional argument to the
+`docker build` command), you can also pass additional named contexts to builds.
+
+Named contexts are specified using the `--build-context` flag, followed by a
+name-value pair. This lets you include files and directories from multiple
+sources during the build, while keeping them logically separated.
+
+```console
+$ docker build --build-context docs=./docs .
+```
+
+In this example:
+
+- The named `docs` context points to the `./docs` directory.
+- The default context (`.`) points to the current working directory.
+
+### Using named contexts in a Dockerfile
+
+Dockerfile instructions can reference named contexts as if they are stages in a
+multi-stage build.
+
+For example, the following Dockerfile:
+
+1. Uses a `COPY` instruction to copy files from the default context into the
+   current build stage.
+2. Bind mounts the files in a named context to process the files as part of the
+   build.
+
+```dockerfile
+# syntax=docker/dockerfile:1
+FROM buildbase
+WORKDIR /app
+
+# Copy all files from the default context into /app/src in the build container
+COPY . /app/src
+RUN make bin
+
+# Mount the files from the named "docs" context to build the documentation
+RUN --mount=from=docs,target=/app/docs \
+    make manpages
+```
+
+### Use cases for named contexts
+
+Using named contexts allows for greater flexibility and efficiency when
+building Docker images. Here are some scenarios where using named contexts can
+be useful:
+
+#### Example: combine local and remote sources
+
+You can define separate named contexts for different types of sources. For
+example, consider a project where the application source code is local, but the
+deployment scripts are stored in a Git repository:
+
+```console
+$ docker build --build-context scripts=https://github.com/user/deployment-scripts.git .
+```
+
+In the Dockerfile, you can use these contexts independently:
+
+```dockerfile
+# syntax=docker/dockerfile:1
+FROM alpine:latest
+
+# Copy application code from the main context
+COPY . /opt/app
+
+# Run deployment scripts using the remote "scripts" context
+RUN --mount=from=scripts,target=/scripts /scripts/main.sh
+```
+
+#### Example: dynamic builds with custom dependencies
+
+In some scenarios, you might need to dynamically inject configuration files or
+dependencies into the build from external sources. Named contexts make this
+straightforward by allowing you to mount different configurations without
+modifying the default build context.
+
+```console
+$ docker build --build-context config=./configs/prod .
+```
+
+Example Dockerfile:
+
+```dockerfile
+# syntax=docker/dockerfile:1
+FROM nginx:alpine
+
+# Use the "config" context for environment-specific configurations
+COPY --from=config nginx.conf /etc/nginx/nginx.conf
+```
+
+#### Example: pin or override images
+
+You can refer to named contexts in a Dockerfile the same way you can refer to
+an image. That means you can change an image reference in your Dockerfile by
+overriding it with a named context. For example, given the following
+Dockerfile:
+
+```dockerfile
+FROM alpine:{{% param example_alpine_version %}}
+```
+
+If you want to force image reference to resolve to a different version, without
+changing the Dockerfile, you can pass a context with the same name to the
+build. For example:
+
+```console
+docker buildx build --build-context alpine:{{% param example_alpine_version %}}=docker-image://alpine:edge .
+```
+
+The `docker-image://` prefix marks the context as an image reference. The
+reference can be a local image or an image in your registry.
+
+### Named contexts with Bake
+
+[Bake](/manuals/build/bake/_index.md) is a tool built into `docker build` that
+lets you manage your build configuration with a configuration file. Bake fully
+supports named contexts.
+
+To define named contexts in a Bake file:
+
+```hcl {title=docker-bake.hcl}
+target "app" {
+  contexts = {
+    docs = "./docs"
+  }
+}
+```
+
+This is equivalent to the following CLI invocation:
+
+```console
+$ docker build --build-context docs=./docs .
+```
+
+#### Linking targets with named contexts
+
+In addition to making complex builds more manageable, Bake also provides
+additional features on top of what you can do with `docker build` on the CLI.
+You can use named contexts to create build pipelines, where one target depends
+on and builds on top of another. For example, consider a Docker build setup
+where you have two Dockerfiles:
+
+- `base.Dockerfile`: for building a base image
+- `app.Dockerfile`: for building an application image
+
+The `app.Dockerfile` uses the image produced by `base.Dockerfile` as it's base
+image:
+
+```dockerfile {title=app.Dockerfile}
+FROM mybaseimage
+```
+
+Normally, you would have to build the base image first, and then either load it
+to Docker Engine's local image store or push it to a registry. With Bake, you
+can reference other targets directly, creating a dependency between the `app`
+target and the `base` target.
+
+```hcl {title=docker-bake.hcl}
+target "base" {
+  dockerfile = "base.Dockerfile"
+}
+
+target "app" {
+  dockerfile = "app.Dockerfile"
+  contexts = {
+    # the target: prefix indicates that 'base' is a Bake target
+    mybaseimage = "target:base"
+  }
+}
+```
+
+With this configuration, references to `mybaseimage` in `app.Dockerfile` use
+the results from building the `base` target. Building the `app` target will
+also trigger a rebuild of `mybaseimage`, if necessary:
+
+```console
+$ docker buildx bake app
+```
+
+### Further reading
+
+For more information about working with named contexts, see:
+
+- [`--build-context` CLI reference](/reference/cli/docker/buildx/build.md#build-context)
+- [Using Bake with additional contexts](/manuals/build/bake/contexts.md)
