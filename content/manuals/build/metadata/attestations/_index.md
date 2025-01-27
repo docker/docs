@@ -95,6 +95,8 @@ the attestations to an image manifest, since it's outputting a directory of
 files or a tarball, not an image. Instead, these exporters write the
 attestations to one or more JSON files in the root directory of the export.
 
+## Example
+
 The following example shows a truncated in-toto JSON representation of an SBOM
 attestation.
 
@@ -160,6 +162,85 @@ attestation.
 
 To deep-dive into the specifics about how attestations are stored, see
 [Image Attestation Storage (BuildKit)](attestation-storage.md).
+
+## Attestation manifest format
+
+Attestations are stored as manifests, referenced by the image's index. Each
+_attestation manifest_ refers to a single _image manifest_ (one
+platform-variant of the image). Attestation manifests contain a single layer,
+the "value" of the attestation.
+
+The following example shows the structure of an attestation manifest:
+
+```json
+{
+  "schemaVersion": 2,
+  "mediaType": "application/vnd.oci.image.manifest.v1+json",
+  "config": {
+    "mediaType": "application/vnd.oci.image.config.v1+json",
+    "size": 167,
+    "digest": "sha256:916d7437a36dd0e258e64d9c5a373ca5c9618eeb1555e79bd82066e593f9afae"
+  },
+  "layers": [
+    {
+      "mediaType": "application/vnd.in-toto+json",
+      "size": 1833349,
+      "digest": "sha256:3138024b98ed5aa8e3008285a458cd25a987202f2500ce1a9d07d8e1420f5491",
+      "annotations": {
+        "in-toto.io/predicate-type": "https://spdx.dev/Document"
+      }
+    }
+  ]
+}
+```
+
+### Attestations as OCI artifacts
+
+You can configure the format of the attestation manifest using the
+[`oci-artifact` option](/manuals/build/exporters/image-registry.md#synopsis)
+for the `image` and `registry` exporters. If set to `true`, the structure of
+the attestation manifest changes as follows:
+
+- An `artifactType` field is added to the attestation manifest, with a value of `application/vnd.docker.attestation.manifest.v1+json`.
+- The `config` field is an [empty descriptor] instead of a "dummy" config.
+- A `subject` field is also added, pointing to the image manifest that the attestation refers to.
+
+[empty descriptor]: https://github.com/opencontainers/image-spec/blob/main/manifest.md#guidance-for-an-empty-descriptor
+
+The following example shows an attestation with the OCI artifact format:
+
+```json
+{
+  "schemaVersion": 2,
+  "mediaType": "application/vnd.oci.image.manifest.v1+json",
+  "artifactType": "application/vnd.docker.attestation.manifest.v1+json",
+  "config": {
+    "mediaType": "application/vnd.oci.empty.v1+json",
+    "size": 2,
+    "digest": "sha256:44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "data": "e30="
+  },
+  "layers": [
+    {
+      "mediaType": "application/vnd.in-toto+json",
+      "size": 2208,
+      "digest": "sha256:6d2f2c714a6bee3cf9e4d3cb9a966b629efea2dd8556ed81f19bd597b3325286",
+      "annotations": {
+        "in-toto.io/predicate-type": "https://slsa.dev/provenance/v0.2"
+      }
+    }
+  ],
+  "subject": {
+    "mediaType": "application/vnd.oci.image.manifest.v1+json",
+    "size": 1054,
+    "digest": "sha256:bc2046336420a2852ecf915786c20f73c4c1b50d7803aae1fd30c971a7d1cead",
+    "platform": {
+      "architecture": "amd64",
+      "os": "linux"
+    }
+  }
+}
+```
 
 ## What's next
 
