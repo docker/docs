@@ -9,7 +9,7 @@ You can update the billing information for your personal account or for an organ
 
 The billing information provided appears on all your billing invoices. The email address provided is where Docker sends all invoices and other [billing-related communication](#update-your-billing-invoice-email-address).
 
-{{< include "tax-compliance.md" >}}
+{{% include "tax-compliance.md" %}}
 
 ## Manage billing information
 

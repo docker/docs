@@ -23,7 +23,7 @@ When you change the billing cycle's duration:
 - The subscription's start date resets. For example, if the start date of the monthly subscription is March 1st and the end date is April 1st, then after switching the billing duration to March 15th, 2024 the new start date is March 15th, 2024, and the new end date is March 15th, 2025.
 - Any unused monthly subscription is prorated and applied as credit towards the new annual period. For example, if you switch from a $10 monthly subscription to a $100 annual plan, deducting the unused monthly value (in this case $5), the migration cost becomes $95 ($100 - $5). The renewal cost after March 15, 2025 is $100.
 
-{{< include "tax-compliance.md" >}}
+{{% include "tax-compliance.md" %}}
 
 ## Personal account
 

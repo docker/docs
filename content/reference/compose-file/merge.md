@@ -7,7 +7,7 @@ aliases:
 weight: 100
 ---
 
-{{< include "compose/merge.md" >}}
+{{% include "compose/merge.md" %}}
 
 These rules are outlined below. 
 

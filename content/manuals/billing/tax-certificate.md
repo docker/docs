@@ -7,7 +7,7 @@ weight: 50
 
 If you're a customer in the United States and you're exempt from sales tax, you can register a valid tax exemption certificate with Docker's Support team. If you're a global customer subject to VAT, make sure that you provide your [VAT number](/billing/history/#include-your-vat-number-on-your-invoice).
 
-{{< include "tax-compliance.md" >}}
+{{% include "tax-compliance.md" %}}
 
 ## Prerequisites
 

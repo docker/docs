@@ -104,7 +104,7 @@ Categories group images based on their primary use case, helping you quickly
 locate the tools and resources you need to build, deploy, and run your
 applications.
 
-{{< include "hub-categories.md" >}}
+{{% include "hub-categories.md" %}}
 
 ### Operating systems
 

@@ -45,7 +45,7 @@ grid:
   icon: help
 ---
 
-{{< include "admin-org-overview.md" >}}
+{{% include "admin-org-overview.md" %}}
 
 To create an organization, see [Create your organization](../organization/orgs.md).
 
