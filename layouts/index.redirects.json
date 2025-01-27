@@ -1,3 +1,25 @@
+{{- /*
+
+  This template generates the redirects.json file used to generate 301
+  redirects in production. It takes all the redirects defined in
+  data/redirects.yml, as well as all the aliases defined in front matter, and
+  outputs a simple key-value JSON file:
+
+  {
+    "<request-path>": "<redirect-path>",
+    ...
+  }
+
+  e.g.
+
+  {
+    "/engine/reference/builder/": "/reference/dockerfile/",
+    ...
+  }
+
+  */
+-}}
+
 {{- $redirects := newScratch }}
 {{- range $i, $e := site.AllPages -}} 
   {{- if .Params.aliases -}}

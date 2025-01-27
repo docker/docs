@@ -1,3 +1,8 @@
+{{- /*
+  Renders a flat list of tags for the "tags" taxonomy.
+  - Unlike `sections.html`, this template is based on taxonomy terms, not section pages.
+  - Highlights the current tag page and links to all tag pages.
+*/ -}}
 <ul class="md:text-sm">
   {{- range site.Taxonomies.tags }}
     <li class="pl-4 hover:text-blue-light hover:dark:text-blue-dark

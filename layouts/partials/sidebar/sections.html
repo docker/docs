@@ -1,3 +1,11 @@
+{{- /*
+  This template recursively renders the sidebar navigation, grouping pages by `Params.sidebar.groups`.
+  Highlights:
+  - Supports hierarchical navigation with collapsible sections (`renderList` template).
+  - Dynamically applies current page highlighting and expanded states.
+  - Handles external links via `Params.sidebar.goto` in `renderSingle`.
+  - Requires `Params.sitemap` and `Params.sidebar` for filtering and behavior.
+*/ -}}
 <!-- section tree -->
 <nav class="md:text-sm flex flex-col">
   <div
