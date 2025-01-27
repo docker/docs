@@ -133,6 +133,23 @@ If you're using any third-party platforms, follow your provider’s instructions
 - [LayerCI](https://layerci.com/docs/advanced-workflows#logging-in-to-docker)
 - [TeamCity](https://www.jetbrains.com/help/teamcity/integrating-teamcity-with-docker.html#Conforming+with+Docker+download+rate+limits)
 
+## Rate limiting on third-party platforms
+
+When pulling images via a third-party platform, the platform may use the same
+IPv4 address or IPv6 /64 subnet to pull images for multiple users. Even if you
+are authenticated, pulls attributed to a single IPv4 address or IPv6 /64 subnet
+may cause [abuse rate limiting](./_index.md#abuse-rate-limit).
+
+This issue is more common when using IPv6. To workaround the issue, you can
+disable IPv6 in the Docker daemon. Use the following to disable IPv6 in Docker Engine or
+Docker Desktop.
+  - Docker Engine: Add the `"ipv6": false` key and value in your
+  [`daemon.json`
+file](/reference/cli/dockerd/#daemon-configuration-file). Restart Docker after
+  modifying the configuration.
+  - Docker Desktop: Add the `"ipv6": false` key and value in your [Docker Engine settings](/manuals/desktop/settings-and-maintenance/settings.md#docker-engine). Restart Docker after modifying the
+  configuration.
+
 ## View monthly pulls and included usage
 
 You can view your monthly pulls on the [Usage page](https://hub.docker.com/usage/pulls) in Docker Hub.
@@ -152,7 +169,6 @@ separated file with the following detailed information.
 | `digest`             | The unique image digest for the image.                                                                                                                                                                             | This helps in identifying the image.                                                                                                                                                |
 | `version_checks`     | The number of version checks accumulated for the date and hour of each image repository. Depending on the client, a pull can do a version check to verify the existence of an image or tag without downloading it. | This helps identify the frequency of version checks, which you can use to analyze usage trends and potential unexpected behaviors.                                                  |
 | `pulls`              | The number of pulls accumulated for the date and hour of each image repository.                                                                                                                                            | This helps identify the frequency of repository pulls, which you can use to analyze usage trends and potential unexpected behaviors.                                                |
-
 
 ## View hourly pull rate and limit
 
@@ -216,3 +232,4 @@ To view your current pull rate and limit:
    organization. It could also mean that the user you are pulling as is part of a
    paid Docker plan. Pulling that image won't count toward pull rate limits if you
    don't see these headers.
+

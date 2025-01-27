@@ -45,10 +45,10 @@ exhibiting excessive data and storage consumption.
 
 Docker Hub has an abuse rate limit to protect the application and
 infrastructure. This limit applies to all requests to Hub properties including
-web pages, APIs, and image pulls. The limit is applied per-IP, and while the
-limit changes over time depending on load and other factors, it's in the order
-of thousands of requests per minute. The abuse limit applies to all users
-equally regardless of account level.
+web pages, APIs, and image pulls. The limit is applied per IPv4 address or per
+IPv6 /64 subnet, and while the limit changes over time depending on load and
+other factors, it's in the order of thousands of requests per minute. The abuse
+limit applies to all users equally regardless of account level.
 
 You can differentiate between the pull rate limit and abuse rate limit by
 looking at the error code. The abuse limit returns a simple `429 Too Many
