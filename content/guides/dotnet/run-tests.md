@@ -36,7 +36,7 @@ You should see output that contains the following.
 Starting test execution, please wait...
 A total of 1 test files matched the specified pattern.
 
-Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: < 1 ms - /source/tests/bin/Debug/net6.0/tests.dll (net6.0)
+Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: < 1 ms - /source/tests/bin/Debug/net8.0/tests.dll (net8.0)
 ```
 
 To learn more about the command, see [docker compose run](/reference/cli/docker/compose/run/).
@@ -50,7 +50,7 @@ The following is the updated Dockerfile.
 ```dockerfile {hl_lines="9"}
 # syntax=docker/dockerfile:1
 
-FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:6.0-alpine AS build
+FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build
 ARG TARGETARCH
 COPY . /source
 WORKDIR /source/src
@@ -58,12 +58,12 @@ RUN --mount=type=cache,id=nuget,target=/root/.nuget/packages \
     dotnet publish -a ${TARGETARCH/amd64/x64} --use-current-runtime --self-contained false -o /app
 RUN dotnet test /source/tests
 
-FROM mcr.microsoft.com/dotnet/sdk:6.0-alpine AS development
+FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS development
 COPY . /source
 WORKDIR /source/src
 CMD dotnet run --no-launch-profile
 
-FROM mcr.microsoft.com/dotnet/aspnet:6.0-alpine AS final
+FROM mcr.microsoft.com/dotnet/aspnet:8.0-alpine AS final
 WORKDIR /app
 COPY --from=build /app .
 ARG UID=10001
@@ -92,16 +92,16 @@ You should see output containing the following.
 #11 1.564   Determining projects to restore...
 #11 3.421   Restored /source/src/myWebApp.csproj (in 1.02 sec).
 #11 19.42   Restored /source/tests/tests.csproj (in 17.05 sec).
-#11 27.91   myWebApp -> /source/src/bin/Debug/net6.0/myWebApp.dll
-#11 28.47   tests -> /source/tests/bin/Debug/net6.0/tests.dll
-#11 28.49 Test run for /source/tests/bin/Debug/net6.0/tests.dll (.NETCoreApp,Version=v6.0)
+#11 27.91   myWebApp -> /source/src/bin/Debug/net8.0/myWebApp.dll
+#11 28.47   tests -> /source/tests/bin/Debug/net8.0/tests.dll
+#11 28.49 Test run for /source/tests/bin/Debug/net8.0/tests.dll (.NETCoreApp,Version=v8.0)
 #11 28.67 Microsoft (R) Test Execution Command Line Tool Version 17.3.3 (x64)
 #11 28.67 Copyright (c) Microsoft Corporation.  All rights reserved.
 #11 28.68
 #11 28.97 Starting test execution, please wait...
 #11 29.03 A total of 1 test files matched the specified pattern.
 #11 32.07
-#11 32.08 Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: < 1 ms - /source/tests/bin/Debug/net6.0/tests.dll (net6.0)
+#11 32.08 Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: < 1 ms - /source/tests/bin/Debug/net8.0/tests.dll (net8.0)
 #11 DONE 32.2s
 ```
 

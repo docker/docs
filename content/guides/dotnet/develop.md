@@ -307,19 +307,19 @@ The following is the updated Dockerfile.
 ```Dockerfile {hl_lines="10-13"}
 # syntax=docker/dockerfile:1
 
-FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:6.0-alpine AS build
+FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build
 ARG TARGETARCH
 COPY . /source
 WORKDIR /source/src
 RUN --mount=type=cache,id=nuget,target=/root/.nuget/packages \
     dotnet publish -a ${TARGETARCH/amd64/x64} --use-current-runtime --self-contained false -o /app
 
-FROM mcr.microsoft.com/dotnet/sdk:6.0-alpine AS development
+FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS development
 COPY . /source
 WORKDIR /source/src
 CMD dotnet run --no-launch-profile
 
-FROM mcr.microsoft.com/dotnet/aspnet:6.0-alpine AS final
+FROM mcr.microsoft.com/dotnet/aspnet:8.0-alpine AS final
 WORKDIR /app
 COPY --from=build /app .
 ARG UID=10001
@@ -380,7 +380,7 @@ secrets:
     file: db/password.txt
 ```
 
-Your containerized application will now use the `mcr.microsoft.com/dotnet/sdk:6.0-alpine` image, which includes development tools like `dotnet test`. Continue to the next section to learn how you can run `dotnet test`.
+Your containerized application will now use the `mcr.microsoft.com/dotnet/sdk:8.0-alpine` image, which includes development tools like `dotnet test`. Continue to the next section to learn how you can run `dotnet test`.
 
 ## Summary
 
