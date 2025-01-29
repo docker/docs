@@ -36,7 +36,7 @@ docker desktop COMMAND [OPTIONS]
 | `status`             | Displays whether Docker Desktop is running or stopped.       |
 | `engine ls`          | Lists available engines (Windows only)   |
 | `engine use`         | Switch between Linux and Windows containers (Windows only) |
-| `update`             | Manage Docker Desktop updates. Available with Docker Desktop version 4.38 and later. |
+| `update`             | Manage Docker Desktop updates. Available for Mac only and with Docker Desktop version 4.38 and later. |
 
 
 For more details on each command, see the [Docker Desktop CLI reference](/reference/cli/docker/desktop/_index.md).

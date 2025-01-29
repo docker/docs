@@ -1,5 +1,5 @@
 command: docker desktop update
-short: Manage Docker Desktop updates
+short: Manage Docker Desktop updates (Mac only)
 usage: docker desktop update [OPTIONS]
 pname: docker desktop
 plink: docker_desktop.yaml
