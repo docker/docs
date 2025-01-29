@@ -45,6 +45,8 @@ Docker Desktop Archlinux:
 Docker Desktop CLI:
   availability: Beta
   requires: Docker Desktop 4.37 and later
+Docker Desktop CLI update:
+  requires: Docker Desktop 4.38 and later
 Docker GitHub Copilot:
   availability: Early access
 Docker Scout exceptions:
