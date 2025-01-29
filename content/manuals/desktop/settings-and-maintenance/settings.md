@@ -425,6 +425,12 @@ deploying your Docker workloads on Kubernetes. To turn on Kubernetes support and
 install a standalone instance of Kubernetes running as a Docker container,
 select **Enable Kubernetes**.
 
+With Docker Desktop version 4.38 and later, you can choose your cluster provisioning method:
+ - **Kubeadm** creates a single-node cluster and the version is set by Docker Desktop.
+ - **kind** creates a multi-node cluster and you can set the version and number of nodes. 
+
+Docker Desktop version 4.38 and later also lets you install the Kubernetes Dashboard within an existing Kubernetes cluster with the **Deploy the Kubernetes Dashboard into cluster** setting. It provides real-time visibility into workloads and nodes and helps you manage and monitor your Kubernetes clusters and applications easily.
+
 Select **Show system containers (advanced)** to view internal containers when
 using Docker commands.
 

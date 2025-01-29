@@ -11,7 +11,7 @@ weight: 60
 
 Docker Desktop includes a standalone Kubernetes server and client, as well as Docker CLI integration, enabling local Kubernetes development and testing directly on your machine. 
 
-The Kubernetes server runs as a single-node cluster within a Docker container. This lightweight setup helps you explore Kubernetes features, test workloads, and work with container orchestration in parallel with other Docker functionalities.
+The Kubernetes server runs as a single or multi-node cluster within a Docker container. This lightweight setup helps you explore Kubernetes features, test workloads, and work with container orchestration in parallel with other Docker functionalities.
 
 Kubernetes on Docker Desktop runs alongside other workloads, including Swarm services and standalone containers.
 
@@ -30,8 +30,11 @@ Turning the Kubernetes server on or off in Docker Desktop does not affect your o
 
 1. Open the Docker Desktop Dashboard and navigate to **Settings**.
 2. Select the **Kubernetes** tab. 
-3. Select the **Enable Kubernetes** checkbox.
-4. Select **Apply & Restart** to save the settings and then select **Install** to confirm. This sets up the images required to run the Kubernetes server as containers, and installs the `kubectl` command-line tool on your system at `/usr/local/bin/kubectl` (Mac) or `C:\Program Files\Docker\Docker\Resources\bin\kubectl.exe` (Windows).
+3. Toggle on **Enable Kubernetes**.
+4. Choose your cluster provisioning method. You can choose either **Kubeadm** or **kind** if you are signed in and are using Docker Desktop version 4.38 or later. 
+
+   If you select **kind** you can also choose the Kubernetes version and the number of nodes. 
+5. Select **Apply & Restart** to save the settings. This sets up the images required to run the Kubernetes server as containers, and installs the `kubectl` command-line tool on your system at `/usr/local/bin/kubectl` (Mac) or `C:\Program Files\Docker\Docker\Resources\bin\kubectl.exe` (Windows).
 
    > [!NOTE]
    >
@@ -45,9 +48,15 @@ You can check which version of Kubernetes you're on with:
 $ kubectl version
 ```
 
-### Viewing system containers
+### Additional settings
 
-By default, Kubernetes system containers are hidden. To inspect these containers, navigate to **Settings** > **Kubernetes** and then enable **Show system containers (advanced)**.
+#### Kubernetes dashboard
+
+Once Kubernetes is installed and setup, you can select the **Deploy the Kubernetes Dashboard into cluster** setting so you can  manage and monitor your Kubernetes clusters and applications more easily. 
+
+#### Viewing system containers
+
+By default, Kubernetes system containers are hidden. To inspect these containers, enable **Show system containers (advanced)**.
 
 You can now view the running Kubernetes containers with `docker ps` or in the Docker Desktop Dashboard.
 
