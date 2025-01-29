@@ -127,17 +127,6 @@ params:
   example_alpine_version: "3.21"
   example_node_version: "20"
 
-  # Minimum version thresholds (used together with the "introduced" shortcode
-  # See layouts/shortcodes/introduced.html
-  min_version_thresholds:
-    buildx: "0.10.0"
-    buildkit: "0.11.0"
-    engine: "24.0.0"
-    api: "1.41"
-    desktop: "4.20.0"
-    compose: "2.14.0"
-    scout: "1.0.0"
-
 menus:
   # Site header menu
   main:
