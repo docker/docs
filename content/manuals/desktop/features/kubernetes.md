@@ -2,6 +2,7 @@
 description: See how you can deploy to Kubernetes on Docker Desktop
 keywords: deploy, kubernetes, kubectl, orchestration, Docker Desktop
 title: Deploy on Kubernetes with Docker Desktop
+linkTitle: Deploy on Kubernetes
 aliases:
 - /docker-for-windows/kubernetes/
 - /docker-for-mac/kubernetes/
@@ -52,7 +53,7 @@ $ kubectl version
 
 #### Kubernetes dashboard
 
-Once Kubernetes is installed and setup, you can select the **Deploy the Kubernetes Dashboard into cluster** setting so you can  manage and monitor your Kubernetes clusters and applications more easily. 
+Once Kubernetes is installed and set up, you can select the **Deploy the Kubernetes Dashboard into cluster** setting so you can manage and monitor your Kubernetes clusters and applications more easily. 
 
 #### Viewing system containers
 

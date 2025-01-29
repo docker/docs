@@ -57,6 +57,7 @@ Jamf
 JetBrains
 Kerberos
 Kitematic
+Kubeadm
 Kubernetes
 Laravel
 Laradock
