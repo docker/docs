@@ -84,13 +84,13 @@ like this:
 
 ```dockerfile
 FROM debian:bookworm
-COPY zscaler-cert.pem /usr/local/share/ca-certificates/zscaler-cert.pem
+COPY zscaler-root-ca.crt /usr/local/share/ca-certificates/zscaler-root-ca.crt
 RUN apt-get update && \
     apt-get install -y ca-certificates && \
     update-ca-certificates
 ```
 
-Here, `zscaler-cert.pem` is the root certificate, located at the root of the
+Here, `zscaler-root-ca.crt` is the root certificate, located at the root of the
 build context (often within the application's Git repository).
 
 If you use an artifact repository, you can fetch the certificate directly using
@@ -100,7 +100,7 @@ the content digest of the certificate is correct.
 ```dockerfile
 FROM debian:bookworm
 ADD --checksum=sha256:24454f830cdb571e2c4ad15481119c43b3cafd48dd869a9b2945d1036d1dc68d \
-    https://artifacts.example/certs/zscaler-cert.pem /usr/local/share/ca-certificates/zscaler-cert.pem
+    https://artifacts.example/certs/zscaler-root-ca.crt /usr/local/share/ca-certificates/zscaler-root-ca.crt
 RUN apt-get update && \
     apt-get install -y ca-certificates && \
     update-ca-certificates
@@ -123,7 +123,7 @@ RUN --mount=target=. cmake -B output/
 
 FROM debian:bookworm-slim AS final
 ADD --checksum=sha256:24454f830cdb571e2c4ad15481119c43b3cafd48dd869a9b2945d1036d1dc68d \
-    https://artifacts.example/certs/zscaler-cert.pem /usr/local/share/ca-certificates/zscaler-cert.pem
+    https://artifacts.example/certs/zscaler-root-ca.crt /usr/local/share/ca-certificates/zscaler-root-ca.crt
 RUN apt-get update && \
     apt-get install -y ca-certificates && \
     update-ca-certificates
