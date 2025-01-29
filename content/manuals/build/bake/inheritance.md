@@ -59,7 +59,7 @@ attributes:
 target "lint" {
   inherits = ["_common"]
   dockerfile = "./dockerfiles/lint.Dockerfile"
-  output = ["type=cacheonly"]
+  output = [{ type = "cacheonly" }]
 }
 
 target "docs" {
