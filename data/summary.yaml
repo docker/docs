@@ -32,6 +32,8 @@ Company:
   for: Administrators
 Compose bridge:
   availability: Experimental
+Config profiles:
+  requires: Docker Desktop 4.36 and later
 containerd:
   availability: Experimental
 Dev Environments:
@@ -86,7 +88,6 @@ OATs:
   availability: Beta
 PKG installer:
   subscription: [Business]
-  availability: Early access
   requires: Docker Desktop 4.36 and later
   for: Administrators
 Private marketplace:
