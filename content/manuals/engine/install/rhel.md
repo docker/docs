@@ -183,7 +183,7 @@ download a new file each time you want to upgrade Docker Engine.
 
 2. Select your RHEL version in the list.
 
-3. Select the applicable architecture (`x86_64`, `aarch64`, or `s390x`), and
+3. Select the applicable architecture (`x86_64` or `aarch64`), and
    then go to `stable/Packages/`.
 
 4. Download the following `rpm` files for the Docker Engine, CLI, containerd,

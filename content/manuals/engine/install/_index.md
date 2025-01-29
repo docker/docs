@@ -46,8 +46,7 @@ see: [Overview of Docker Desktop](/manuals/desktop/_index.md).
 | [Debian](debian.md)                            |       ✅       |       ✅        |      ✅      |   ✅    |       |
 | [Fedora](fedora.md)                            |       ✅       |       ✅        |              |   ✅    |       |
 | [Raspberry Pi OS (32-bit)](raspberry-pi-os.md) |                |                 |      ✅      |         |       |
-| [RHEL](rhel.md)                                |       ✅       |       ✅        |              |         |  ✅   |
-| [SLES](sles.md)                                |                |                 |              |         |  ✅   |
+| [RHEL](rhel.md)                                |       ✅       |       ✅        |              |         |         |
 | [Ubuntu](ubuntu.md)                            |       ✅       |       ✅        |      ✅      |   ✅    |  ✅   |
 | [Binaries](binaries.md)                        |       ✅       |       ✅        |      ✅      |         |       |
 
