@@ -450,6 +450,10 @@ when an update becomes available. After downloading the update, select
 **Apply and Restart** to install the update. You can do this either through the
 Docker menu or in the **Updates** section in the Docker Desktop Dashboard.
 
+> [!TIP]
+> 
+> With Docker Desktop version 4.38 and later, components of Docker Desktop, such as Docker Compose, Docker Scout and the Docker CLI, can be updated independently without the need for full restart. This feature is still in Beta. 
+
 ## Extensions
 
 Use the **Extensions** tab to:
