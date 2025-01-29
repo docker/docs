@@ -136,7 +136,7 @@ services:
       watch:
         - action: sync
           path: ./web
-          target: /src/web
+          target: /app/web
           ignore:
             - node_modules/
         - action: rebuild
