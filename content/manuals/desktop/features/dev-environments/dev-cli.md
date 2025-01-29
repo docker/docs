@@ -6,7 +6,7 @@ aliases:
 - /desktop/dev-environments/dev-cli/
 ---
 
-{{< include "dev-envs-changing.md" >}}
+{{% include "dev-envs-changing.md" %}}
 
 Use the new `docker dev` CLI plugin to get the full Dev Environments experience from the terminal in addition to the Dashboard.
 

@@ -52,7 +52,7 @@ Before you audit your domains, review the following required prerequisites:
 {{< /tab >}}
 {{< tab name="Admin Console" >}}
 
-{{< include "admin-early-access.md" >}}
+{{% include "admin-early-access.md" %}}
 
 {{% admin-domain-audit product="admin" %}}
 

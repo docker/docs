@@ -27,7 +27,7 @@ The following payment methods are supported:
 
 All currency, for example the amount listed on your billing invoice, is in United States dollar (USD).
 
-{{< include "tax-compliance.md" >}}
+{{% include "tax-compliance.md" %}}
 
 ## Manage payment method
 

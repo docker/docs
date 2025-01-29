@@ -250,7 +250,7 @@ Docker Desktop does not start automatically after installation. To start Docker 
 
 2. The Docker menu ({{< inline-image src="images/whale-x.svg" alt="whale menu" >}}) displays the Docker Subscription Service Agreement.
 
-   {{< include "desktop-license-update.md" >}}
+   {{% include "desktop-license-update.md" %}}
 
 3. Select **Accept** to continue. Docker Desktop starts after you accept the terms.
 
