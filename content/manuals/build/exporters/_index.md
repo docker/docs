@@ -184,7 +184,7 @@ WARNING: No output specified with docker-container driver.
 
 ## Multiple exporters
 
-{{< introduced buildx 0.13.0 >}}
+{{< summary-bar feature_name="Build multiple exporters" >}}
 
 You can use multiple exporters for any given build by specifying the `--output`
 flag multiple times. This requires **both Buildx and BuildKit** version 0.13.0

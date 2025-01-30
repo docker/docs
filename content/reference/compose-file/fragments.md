@@ -7,7 +7,7 @@ aliases:
 weight: 70
 ---
 
-{{< include "compose/fragments.md" >}}
+{{% include "compose/fragments.md" %}}
 
 Anchors are created using the `&` sign. The sign is followed by an alias name. You can use this alias with the `*` sign later to reference the value following the anchor. Make sure there is no space between the `&` and the `*` characters and the following alias name. 
 

@@ -72,7 +72,7 @@ The post-install script:
 
 ## Launch Docker Desktop
 
-{{< include "desktop-linux-launch.md" >}}
+{{% include "desktop-linux-launch.md" %}}
 
 ## Upgrade Docker Desktop
 

@@ -6,7 +6,7 @@ linkTitle: Pulls
 weight: 10
 ---
 
-{{< include "hub-limits.md" >}}
+{{% include "hub-limits.md" %}}
 
 Unauthenticated and Docker Personal users are subject to hourly pull rate limits
 on Docker Hub. In contrast, Docker Pro, Team, and Business users benefit from a

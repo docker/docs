@@ -47,6 +47,6 @@ For further information, see [Architecture](architecture/_index.md).
 You distribute extensions through Docker Hub. However, you can develop them locally without the need to push 
 the extension to Docker Hub. See [Extensions distribution](extensions/DISTRIBUTION.md) for further details.
 
-{{< include "extensions-form.md" >}}
+{{% include "extensions-form.md" %}}
 
 {{< grid >}}

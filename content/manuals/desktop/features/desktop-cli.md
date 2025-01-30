@@ -13,7 +13,7 @@ params:
 
 {{< summary-bar feature_name="Docker Desktop CLI" >}}
 
-The Docker Desktop CLI lets you perform key operations such as starting, stopping, restarting, and checking the status of Docker Desktop directly from the command line. It is available with Docker Desktop version 4.37 and later.
+The Docker Desktop CLI lets you perform key operations such as starting, stopping, restarting, and checking the status of Docker Desktop directly from the command line.
 
 The Docker Desktop CLI provides:
 

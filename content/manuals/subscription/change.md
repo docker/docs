@@ -15,7 +15,7 @@ aliases:
 weight: 30
 ---
 
-{{< include "tax-compliance.md" >}}
+{{% include "tax-compliance.md" %}}
 
 The following sections describe how to change plans when you have a Docker
 subscription plan or legacy Docker subscription plan.
