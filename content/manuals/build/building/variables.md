@@ -352,7 +352,7 @@ Setting `NO_COLOR` to anything turns off colorized output, as recommended by
 
 ### BUILDKIT_HOST
 
-{{< introduced buildx 0.9.0 "../release-notes.md#090" >}}
+{{< summary-bar feature_name="Buildkit host" >}}
 
 You use the `BUILDKIT_HOST` to specify the address of a BuildKit daemon to use
 as a remote builder. This is the same as specifying the address as a positional
@@ -438,7 +438,7 @@ Example:
 
 ### BUILDX_BAKE_GIT_AUTH_HEADER
 
-{{< introduced buildx 0.14.0 >}}
+{{< summary-bar feature_name="Buildx bake Git auth token" >}}
 
 Sets the HTTP authentication scheme when using a remote Bake definition in a private Git repository.
 This is equivalent to the [`GIT_AUTH_HEADER` secret](./secrets#http-authentication-scheme),
@@ -453,7 +453,7 @@ $ export BUILDX_BAKE_GIT_AUTH_HEADER=basic
 
 ### BUILDX_BAKE_GIT_AUTH_TOKEN
 
-{{< introduced buildx 0.14.0 >}}
+{{< summary-bar feature_name="Buildx bake Git auth token" >}}
 
 Sets the HTTP authentication token when using a remote Bake definition in a private Git repository.
 This is equivalent to the [`GIT_AUTH_TOKEN` secret](./secrets#git-authentication-for-remote-contexts),
@@ -467,7 +467,7 @@ $ export BUILDX_BAKE_GIT_AUTH_TOKEN=$(cat git-token.txt)
 
 ### BUILDX_BAKE_GIT_SSH
 
-{{< introduced buildx 0.14.0 >}}
+{{< summary-bar feature_name="Buildx bake Git SSH" >}}
 
 Lets you specify a list of SSH agent socket filepaths to forward to Bake
 for authenticating to a Git server when using a remote Bake definition in a private repository.
@@ -512,7 +512,7 @@ $ export BUILDX_CONFIG=/usr/local/etc
 
 ### BUILDX_CPU_PROFILE
 
-{{< introduced buildx 0.18.0 >}}
+{{< summary-bar feature_name="Buildx CPU profile" >}}
 
 If specified, Buildx generates a `pprof` CPU profile at the specified location.
 
@@ -538,7 +538,7 @@ $ export BUILDX_EXPERIMENTAL=1
 
 ### BUILDX_GIT_CHECK_DIRTY
 
-{{< introduced buildx 0.10.4 "../release-notes.md#0104" >}}
+{{< summary-bar feature_name="Buildx Git check dirty" >}}
 
 When set to true, checks for dirty state in source control information for
 [provenance attestations](/manuals/build/metadata/attestations/slsa-provenance.md).
@@ -551,7 +551,7 @@ $ export BUILDX_GIT_CHECK_DIRTY=1
 
 ### BUILDX_GIT_INFO
 
-{{< introduced buildx 0.10.0 "../release-notes.md#0100" >}}
+{{< summary-bar feature_name="Buildx Git info" >}}
 
 When set to false, removes source control information from
 [provenance attestations](/manuals/build/metadata/attestations/slsa-provenance.md).
@@ -564,7 +564,7 @@ $ export BUILDX_GIT_INFO=0
 
 ### BUILDX_GIT_LABELS
 
-{{< introduced buildx 0.10.0 "../release-notes.md#0100" >}}
+{{< summary-bar feature_name="Buildx Git labels" >}}
 
 Adds provenance labels, based on Git information, to images that you build. The
 labels are:
@@ -593,7 +593,7 @@ If the repository is in a dirty state, the `revision` gets a `-dirty` suffix.
 
 ### BUILDX_MEM_PROFILE
 
-{{< introduced buildx 0.18.0 >}}
+{{< summary-bar feature_name="Buildx mem profile" >}}
 
 If specified, Buildx generates a `pprof` memory profile at the specified
 location.
@@ -610,7 +610,7 @@ $ export BUILDX_MEM_PROFILE=buildx_mem.prof
 
 ### BUILDX_NO_DEFAULT_ATTESTATIONS
 
-{{< introduced buildx 0.10.4 "../release-notes.md#0104" >}}
+{{< summary-bar feature_name="Buildx no default" >}}
 
 By default, BuildKit v0.11 and later adds
 [provenance attestations](/manuals/build/metadata/attestations/slsa-provenance.md) to images you

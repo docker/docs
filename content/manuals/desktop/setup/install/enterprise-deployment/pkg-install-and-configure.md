@@ -4,11 +4,6 @@ description: Understand how to use the PKG installer. Also explore additional co
 keywords: pkg, mac, docker desktop, install, deploy, configure, admin, mdm
 tags: [admin]
 weight: 20
-params:
-  sidebar:
-    badge:
-      color: violet
-      text: EA
 ---
 
 {{< summary-bar feature_name="PKG installer" >}}
