@@ -44,7 +44,7 @@ aliases:
 
 {{< summary-bar feature_name="Company" >}}
 
-{{< include "admin-company-overview.md" >}}
+{{% include "admin-company-overview.md" %}}
 
 Learn how to administer a company in the following sections.
 

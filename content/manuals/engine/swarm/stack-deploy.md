@@ -8,7 +8,7 @@ When running Docker Engine in swarm mode, you can use `docker stack deploy` to
 deploy a complete application stack to the swarm. The `deploy` command accepts
 a stack description in the form of a [Compose file](/reference/compose-file/legacy-versions.md).
 
-{{< include "swarm-compose-compat.md" >}}
+{{% include "swarm-compose-compat.md" %}}
 
 To run through this tutorial, you need:
 

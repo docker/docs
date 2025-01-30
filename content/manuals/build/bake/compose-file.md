@@ -57,15 +57,35 @@ $ docker buildx bake --print
       "context": ".",
       "dockerfile": "Dockerfile.webapp",
       "tags": ["docker.io/username/webapp:latest"],
-      "cache-from": ["docker.io/username/webapp:cache"],
-      "cache-to": ["docker.io/username/webapp:cache"]
+      "cache-from": [
+        {
+          "ref": "docker.io/username/webapp:cache",
+          "type": "registry"
+        }
+      ],
+      "cache-to": [
+        {
+          "ref": "docker.io/username/webapp:cache",
+          "type": "registry"
+        }
+      ]
     },
     "webapp-release": {
       "context": ".",
       "dockerfile": "Dockerfile.webapp",
       "tags": ["docker.io/username/webapp:latest"],
-      "cache-from": ["docker.io/username/webapp:cache"],
-      "cache-to": ["docker.io/username/webapp:cache"],
+      "cache-from": [
+        {
+          "ref": "docker.io/username/webapp:cache",
+          "type": "registry"
+        }
+      ],
+      "cache-to": [
+        {
+          "ref": "docker.io/username/webapp:cache",
+          "type": "registry"
+        }
+      ],
       "platforms": ["linux/amd64", "linux/arm64"]
     }
   }
@@ -180,7 +200,7 @@ $ docker buildx bake --print
 {
   "group": {
     "default": {
-      "targets": ["aws", "addon"]
+      "targets": ["addon", "aws"]
     }
   },
   "target": {
@@ -192,8 +212,22 @@ $ docker buildx bake --print
         "CT_TAG": "bar"
       },
       "tags": ["ct-addon:foo", "ct-addon:alp"],
-      "cache-from": ["user/app:cache", "type=local,src=path/to/cache"],
-      "cache-to": ["type=local,dest=path/to/cache"],
+      "cache-from": [
+        {
+          "ref": "user/app:cache",
+          "type": "registry"
+        },
+        {
+          "src": "path/to/cache",
+          "type": "local"
+        }
+      ],
+      "cache-to": [
+        {
+          "dest": "path/to/cache",
+          "type": "local"
+        }
+      ],
       "platforms": ["linux/amd64", "linux/arm64"],
       "pull": true
     },
@@ -205,9 +239,22 @@ $ docker buildx bake --print
         "CT_TAG": "bar"
       },
       "tags": ["ct-fake-aws:bar"],
-      "secret": ["id=mysecret,src=./secret", "id=mysecret2,src=./secret2"],
+      "secret": [
+        {
+          "id": "mysecret",
+          "src": "./secret"
+        },
+        {
+          "id": "mysecret2",
+          "src": "./secret2"
+        }
+      ],
       "platforms": ["linux/arm64"],
-      "output": ["type=docker"],
+      "output": [
+        {
+          "type": "docker"
+        }
+      ],
       "no-cache": true
     }
   }

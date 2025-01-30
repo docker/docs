@@ -7,7 +7,7 @@ aliases:
 weight: 80
 ---
 
-{{< include "compose/extension.md" >}}
+{{% include "compose/extension.md" %}}
 
 Extensions can also be used with [anchors and aliases](fragments.md).
 

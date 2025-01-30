@@ -7,7 +7,7 @@ aliases:
 weight: 20
 ---
 
-{{< include "compose/services.md" >}}
+{{% include "compose/services.md" %}}
 
 A Compose file must declare a `services` top-level element as a map whose keys are string representations of service names,
 and whose values are service definitions. A service definition contains the configuration that is applied to each
@@ -405,7 +405,7 @@ configs:
 
 ### `depends_on`
 
-{{< include "compose/services-depends-on.md" >}}
+{{% include "compose/services-depends-on.md" %}}
 
 #### Short syntax
 
@@ -617,7 +617,7 @@ If the value is `[]` (empty list) or `''` (empty string), the default entrypoint
 
 ### `env_file`
 
-{{< include "compose/services-env-file.md" >}} 
+{{% include "compose/services-env-file.md" %}}
 
 ```yml
 env_file: .env
@@ -709,7 +709,7 @@ VAR="quoted"
 
 ### `environment`
 
-{{< include "compose/services-environment.md" >}}
+{{% include "compose/services-environment.md" %}}
 
 Environment variables can be declared by a single key (no value to equals sign). In this case Compose
 relies on you to resolve the value. If the value is not resolved, the variable
@@ -1026,7 +1026,7 @@ been the case if `group_add` were not declared.
 
 ### `healthcheck`
 
-{{< include "compose/services-healthcheck.md" >}} 
+{{% include "compose/services-healthcheck.md" %}}
 
 For more information on `HEALTHCHECK`, see the [Dockerfile reference](/reference/dockerfile.md#healthcheck).
 
@@ -1280,7 +1280,7 @@ Compose file containing both attributes.
 
 ### `networks`
 
-{{< include "compose/services-networks.md" >}}
+{{% include "compose/services-networks.md" %}}
 
 ```yml
 services:
@@ -1469,7 +1469,7 @@ platform: linux/arm64/v8
 
 ### `ports`
 
-{{< include "compose/services-ports.md" >}}
+{{% include "compose/services-ports.md" %}}
 
 > [!NOTE]
 >
@@ -1668,7 +1668,7 @@ When both are set, `scale` must be consistent with the `replicas` attribute in t
 
 ### `secrets`
 
-{{< include "compose/services-secrets.md" >}}
+{{% include "compose/services-secrets.md" %}}
 
 Two different syntax variants are supported; the short syntax and the long syntax. Long and short syntax for secrets may be used in the same Compose file.
 
@@ -1887,7 +1887,7 @@ it is the runtime's decision to assign a UTS namespace, if supported. Available 
 
 ### `volumes`
 
-{{< include "compose/services-volumes.md" >}}
+{{% include "compose/services-volumes.md" %}}
 
 The following example shows a named volume (`db-data`) being used by the `backend` service,
 and a bind mount defined for a single service.

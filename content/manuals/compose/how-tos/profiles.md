@@ -8,7 +8,7 @@ aliases:
 - /compose/profiles/
 ---
 
-{{< include "compose/profiles.md" >}}
+{{% include "compose/profiles.md" %}}
 
 ## Assigning profiles to services
 

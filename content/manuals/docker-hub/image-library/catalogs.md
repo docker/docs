@@ -36,6 +36,8 @@ into key areas to support diverse AI development needs:
 - Demos: Ready-to-deploy examples showcasing generative AI capabilities. These
   demos provide a hands-on way to explore AI tools and frameworks, making it
   easier to understand how they can be integrated into real-world applications.
+- Model Context Protocol (MCP) servers: MCP servers provide reusable toolsets
+  that can be used across clients, like Claude Desktop.
 - Models: Pre-trained AI models for tasks like text generation,
   Natural Language Processing (NLP), and conversational AI. These models
   provide a foundation for
@@ -57,3 +59,8 @@ into key areas to support diverse AI development needs:
 - Databases: Databases optimized for AI workloads, including vector databases
   for similarity search, time-series databases for analytics, and NoSQL
   solutions for handling unstructured data.
+
+> [!NOTE]
+>
+> For publishers, [contact us](https://www.docker.com/partners/programs/) to
+> join the generative AI catalog.

@@ -18,6 +18,11 @@ aliases:
   - /cloud/ecs-integration/
   - /engine/context/aci-integration/
   - /engine/context/ecs-integration/
+  - /machine/
+  - /machine/drivers/hyper-v/
+  - /machine/get-started/
+  - /machine/install-machine/
+  - /machine/overview/
   - /registry/
   - /registry/compatibility/
   - /registry/configuration/
@@ -53,6 +58,10 @@ aliases:
   - /registry/storage-drivers/oss/
   - /registry/storage-drivers/s3/
   - /registry/storage-drivers/swift/
+  - /toolbox/
+  - /toolbox/overview/
+  - /toolbox/toolbox_install_mac/
+  - /toolbox/toolbox_install_windows/
 ---
 
 This document provides an overview of Docker features, products, and

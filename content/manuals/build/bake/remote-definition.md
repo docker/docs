@@ -157,7 +157,9 @@ docker buildx bake -f bake.hcl -f cwd://local.hcl "https://github.com/crazy-max/
       },
       "target": "build",
       "output": [
-        "type=cacheonly"
+        {
+          "type": "cacheonly"
+        }
       ]
     }
   }

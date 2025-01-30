@@ -184,7 +184,7 @@ Docker from the repository.
 
 You have now successfully installed and started Docker Engine.
 
-{{< include "root-errors.md" >}}
+{{% include "root-errors.md" %}}
 
 #### Upgrade Docker Engine
 
@@ -240,14 +240,14 @@ download a new file each time you want to upgrade Docker Engine.
 
 You have now successfully installed and started Docker Engine.
 
-{{< include "root-errors.md" >}}
+{{% include "root-errors.md" %}}
 
 #### Upgrade Docker Engine
 
 To upgrade Docker Engine, download the newer package files and repeat the
 [installation procedure](#install-from-a-package), pointing to the new files.
 
-{{< include "install-script.md" >}}
+{{% include "install-script.md" %}}
 
 ## Uninstall Docker Engine
 

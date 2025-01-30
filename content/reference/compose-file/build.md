@@ -7,7 +7,7 @@ aliases:
 weight: 130
 ---
 
-{{< include "compose/build.md" >}}
+{{% include "compose/build.md" %}}
 
 In the former case, the whole path is used as a Docker context to execute a Docker build, looking for a canonical
 `Dockerfile` at the root of the directory. The path can be absolute or relative. If it is relative, it is resolved
