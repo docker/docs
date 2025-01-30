@@ -107,7 +107,7 @@ After signing in to your Docker Account, enable the Docker AI feature:
 3. Check the **Enable Docker AI** checkbox.
 
    The Docker AI terms of service agreement is displayed. You must agree to the
-   terms before you can enable the feature.
+   terms before you can enable the feature. Review the terms and select **Accept and enable** to continue.
 
 4. Select **Apply & restart**.
 
