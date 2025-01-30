@@ -53,10 +53,7 @@ The following example outlines how to deploy a registry key to enforce sign-in o
 
 ## Configuration profiles method (Mac only)
 
-> [!NOTE]
->
-> The configuration profiles method is in [Early Access](/manuals/release-lifecycle.md)
-> and is available with Docker Desktop version 4.36 and later.
+{{< summary-bar feature_name="Config profiles" >}}
 
 Configuration profiles are a feature of macOS that let you distribute
 configuration information to the Macs you manage. It is the safest method to

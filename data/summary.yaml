@@ -64,6 +64,8 @@ Compose attach:
   requires: Docker Compose [2.20.0](/manuals/compose/releases/release-notes.md#2200) and later
 Compose bridge:
   availability: Experimental
+Config profiles:
+  requires: Docker Desktop 4.36 and later
 Compose cgroup:
   requires: Docker Compose [2.15.0](/manuals/compose/releases/release-notes.md#2200) and later
 Compose develop:
@@ -163,7 +165,6 @@ OATs:
   availability: Beta
 PKG installer:
   subscription: [Business]
-  availability: Early access
   requires: Docker Desktop [4.36](/manuals/desktop/release-notes.md#4360) and later
   for: Administrators
 Private marketplace:
