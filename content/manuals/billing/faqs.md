@@ -35,7 +35,7 @@ Once the grace period is over and the invoice is still not paid, the subscriptio
 
 ### Does Docker collect sales tax and/or VAT?
 
-Docker began collection sales tax on subscription fees for United States customers on July 1, 2024. For European customers, Docker will begin collecting VAT on March 1, 2025.
+Docker began collecting sales tax on subscription fees for United States customers on July 1, 2024. For European customers, Docker will begin collecting VAT on March 1, 2025.
 
 To ensure that tax assessments are correct, make sure that your billing information and VAT/Tax ID, if applicable, are updated. See [Update the billing information](/billing/details/).
 
