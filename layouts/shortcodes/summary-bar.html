@@ -57,7 +57,7 @@
   {{ with $feature.requires }}
   <div class="flex items-center gap-1">
       <span class="font-bold">Requires:</span>
-      <span>{{ . }}</span>
+      <span>{{ . | markdownify }}</span>
       <span class="icon-svg">
           {{ partial "icon" $requiresIcon }}
       </span>
