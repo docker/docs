@@ -41,7 +41,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 - The new `update` command has been added to the Docker Desktop CLI (Mac only).
 - [Bake](/manuals//build/bake/_index.md) is now GA, with support for entitlements and composable attributes.
 - You can now create multi-node Kubernetes clusters in Docker Desktop.
-- [Ask Gordon](/desktop/features/gordon.md) is more widely available. It is still in Beta.
+- [Ask Gordon](/manuals/desktop/features/gordon.md) is more widely available. It is still in Beta.
 
 ### Upgrades
 
