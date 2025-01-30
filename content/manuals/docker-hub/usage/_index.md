@@ -8,7 +8,7 @@ aliases:
   /docker-hub/download-rate-limit/
 ---
 
-{{< include "hub-limits.md" >}}
+{{% include "hub-limits.md" %}}
 
 When using Docker Hub, unauthenticated and Docker Personal users are subject to
 strict limits. In contrast, Docker Pro, Team, and Business users benefit from a

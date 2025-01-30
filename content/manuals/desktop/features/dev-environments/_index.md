@@ -8,7 +8,7 @@ aliases:
 - /desktop/dev-environments/
 ---
 
-{{< include "dev-envs-changing.md" >}}
+{{% include "dev-envs-changing.md" %}}
 
 {{< summary-bar feature_name="Dev Environments" >}}
 

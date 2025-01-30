@@ -46,7 +46,7 @@ aliases:
 - /swarm/swarm_at_scale/troubleshoot/
 ---
 
-{{< include "swarm-mode.md" >}}
+{{% include "swarm-mode.md" %}}
 
 Current versions of Docker include Swarm mode for natively managing a cluster
 of Docker Engines called a swarm. Use the Docker CLI to create a swarm, deploy

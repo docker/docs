@@ -7,7 +7,7 @@ aliases:
 weight: 90
 ---
 
-{{< include "compose/interpolation.md" >}}
+{{% include "compose/interpolation.md" %}}
 
 For braced expressions, the following formats are supported:
 - Direct substitution
