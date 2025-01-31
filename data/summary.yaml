@@ -5,6 +5,8 @@ Admin Console:
   subscription: [Business]
   availability: Early access
   for: Administrators
+Admin console early access:
+  availability: The Admin Console is in Early access
 Admin orgs:
   subscription: [Team, Business]
   for: Administrators

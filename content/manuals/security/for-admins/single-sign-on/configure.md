@@ -18,10 +18,10 @@ Get started creating a single sign-on (SSO) connection for your organization or 
 
 ## Step one: Add your domain
 
+{{< summary-bar feature_name="Admin console early access" >}}
+
 {{< tabs >}}
 {{< tab name="Admin Console" >}}
-
-{{% include "admin-early-access.md" %}}
 
 1. Sign in to the [Admin Console](https://admin.docker.com/).
 2. Select your organization or company from the **Choose profile** page. Note that when an organization is part of a company, you must select the company and configure the domain for the organization at the company level.
@@ -50,7 +50,7 @@ Verifying your domain ensures Docker knows you own it. Domain verification is do
 {{< tabs >}}
 {{< tab name="Admin Console" >}}
 
-{{% include "admin-early-access.md" %}}
+{{< summary-bar feature_name="Admin console early access" >}}
 
 1. Navigate to your domain host, create a new TXT record, and paste the **TXT Record Value** from Docker.
 2. TXT record verification can take 72 hours. Once you have waited for TXT record verification, return to the **Domain management** page of the Admin Console and select **Verify** next to your domain name.

@@ -23,14 +23,14 @@ Make sure you have completed the following before you begin:
 
 ## Step one: Create an SSO connection in Docker
 
+{{< summary-bar feature_name="Admin console early access" >}}
+
 >[!NOTE]
 >
 > Before creating an SSO connection in Docker, you must verify at least one domain.
 
 {{< tabs >}}
 {{< tab name="Admin Console" >}}
-
-{{% include "admin-early-access.md" %}}
 
 1. Sign in to the [Admin Console](https://admin.docker.com/).
 2. Select your organization or company from the **Choose profile** page. Note that when an organization is part of a company, you must select the company and configure the domain for the organization at the company level.

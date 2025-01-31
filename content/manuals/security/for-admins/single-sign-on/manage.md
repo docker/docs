@@ -12,20 +12,20 @@ aliases:
 
 ## Manage organizations
 
+{{< summary-bar feature_name="Admin console early access" >}}
+
 > [!NOTE]
 >
 > You must have a [company](/admin/company/) to manage more than one organization.
-
-{{% include "admin-early-access.md" %}}
 
 {{% admin-sso-management-orgs product="admin" %}}
 
 ## Manage domains
 
+{{< summary-bar feature_name="Admin console early access" >}}
+
 {{< tabs >}}
 {{< tab name="Admin Console" >}}
-
-{{% include "admin-early-access.md" %}}
 
 {{% admin-sso-management product="admin" %}}
 
@@ -39,10 +39,10 @@ aliases:
 
 ## Manage SSO connections
 
+{{< summary-bar feature_name="Admin console early access" >}}
+
 {{< tabs >}}
 {{< tab name="Admin Console" >}}
-
-{{% include "admin-early-access.md" %}}
 
 {{% admin-sso-management-connections product="admin" %}}
 

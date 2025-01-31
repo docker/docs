@@ -30,7 +30,7 @@ Key benefits include:
 
 ## View Insights for organization users
 
-{{% include "admin-early-access.md" %}}
+{{< summary-bar feature_name="Admin console early access" >}}
 
 To access Insights, you must contact your Customer Success Manager to have the
 feature enabled. Once the feature is enabled, access Insights using the following
