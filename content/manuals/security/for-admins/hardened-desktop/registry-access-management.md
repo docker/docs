@@ -38,6 +38,8 @@ feature always takes effect.
 
 ## Configure Registry Access Management permissions
 
+{{< summary-bar feature_name="Admin console early access" >}}
+
 {{< tabs >}}
 {{< tab name="Docker Hub" >}}
 
@@ -45,8 +47,6 @@ feature always takes effect.
 
 {{< /tab >}}
 {{< tab name="Admin Console" >}}
-
-{{% include "admin-early-access.md" %}}
 
 {{% admin-registry-access product="admin" %}}
 

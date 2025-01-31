@@ -14,7 +14,7 @@
 {{ $availabilityIcons := dict
   "Experimental" "science"
   "Beta" "bolt"
-  "Early access" "rocket_launch"
+  "Early Access" "rocket_launch"
   "GA" "check_circle"
   "Retired" "package_2"
 }}
@@ -40,19 +40,19 @@
   {{ end }}
 
   {{ with $feature.availability }}
+  {{ $availabilityText := . }}
   <div class="flex items-center gap-1">
       <span class="font-bold">Availability:</span>
-      <span>{{ . }}</span>
-      <span class="icon-svg">
-          {{ $icon := index $availabilityIcons . }}
-          {{ if $icon }}
-            {{ partial "icon" $icon }}
-          {{ else }}
-            {{ partial "icon" "default_icon" }}
+      <span>
+          {{ $availabilityText }}
+          {{ range $key, $icon := $availabilityIcons }}
+            {{ if in $availabilityText $key }}
+              <span class="icon-svg">{{ partial "icon" $icon }}</span>
+            {{ end }}
           {{ end }}
       </span>
   </div>
-  {{ end }}
+{{ end }}
 
   {{ with $feature.requires }}
   <div class="flex items-center gap-1">
