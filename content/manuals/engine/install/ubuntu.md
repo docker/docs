@@ -137,7 +137,7 @@ Docker from the repository.
    sudo apt-get update
    ```
 
-3. Install the Docker packages.
+2. Install the Docker packages.
 
    {{< tabs >}}
    {{< tab name="Latest" >}}
@@ -173,7 +173,7 @@ Docker from the repository.
    {{< /tab >}}
    {{< /tabs >}}
 
-4. Verify that the installation is successful by running the `hello-world` image:
+3. Verify that the installation is successful by running the `hello-world` image:
 
    ```console
    $ sudo docker run hello-world
