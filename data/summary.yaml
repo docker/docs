@@ -16,7 +16,7 @@ Amazon S3 cache:
   availability: Experimental
 Ask Gordon:
   availability: Beta
-  requires: Docker Desktop 4.38 or later
+  requires: Docker Desktop [4.38.0](/manuals/desktop/release-notes.md#4380) or later
 Automated builds:
   subscription: [Pro, Team, Business]
 Azure blob:
