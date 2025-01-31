@@ -121,6 +121,13 @@ for information on authentication.
 
 If you're using any third-party platforms, follow your provider’s instructions on using registry authentication.
 
+> [!NOTE]
+>
+> When pulling images via a third-party platform, the platform may use the same
+> IPv4 address or IPv6 /64 subnet to pull images for multiple users. Even if you
+> are authenticated, pulls attributed to a single IPv4 address or IPv6 /64 subnet
+> may cause [abuse rate limiting](./_index.md#abuse-rate-limit).
+
 - [Artifactory](https://www.jfrog.com/confluence/display/JFROG/Advanced+Settings#AdvancedSettings-RemoteCredentials)
 - [AWS CodeBuild](https://aws.amazon.com/blogs/devops/how-to-use-docker-images-from-a-private-registry-in-aws-codebuild-for-your-build-environment/)
 - [AWS ECS/Fargate](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/private-auth.html)
@@ -132,23 +139,6 @@ If you're using any third-party platforms, follow your provider’s instructions
 - [GitLab](https://docs.gitlab.com/ee/user/packages/container_registry/#authenticate-with-the-container-registry)
 - [LayerCI](https://layerci.com/docs/advanced-workflows#logging-in-to-docker)
 - [TeamCity](https://www.jetbrains.com/help/teamcity/integrating-teamcity-with-docker.html#Conforming+with+Docker+download+rate+limits)
-
-## Rate limiting on third-party platforms
-
-When pulling images via a third-party platform, the platform may use the same
-IPv4 address or IPv6 /64 subnet to pull images for multiple users. Even if you
-are authenticated, pulls attributed to a single IPv4 address or IPv6 /64 subnet
-may cause [abuse rate limiting](./_index.md#abuse-rate-limit).
-
-This issue is more common when using IPv6. To workaround the issue, you can
-disable IPv6 in the Docker daemon. Use the following to disable IPv6 in Docker Engine or
-Docker Desktop.
-  - Docker Engine: Add the `"ipv6": false` key and value in your
-  [`daemon.json`
-file](/reference/cli/dockerd/#daemon-configuration-file). Restart Docker after
-  modifying the configuration.
-  - Docker Desktop: Add the `"ipv6": false` key and value in your [Docker Engine settings](/manuals/desktop/settings-and-maintenance/settings.md#docker-engine). Restart Docker after modifying the
-  configuration.
 
 ## View monthly pulls and included usage
 
