@@ -9,6 +9,7 @@ aliases:
 - /docker-for-mac/faqs/
 - /docker-for-windows/faqs/
 - /desktop/faqs/
+- /desktop/faqs/general/
 weight: 10
 ---
 
