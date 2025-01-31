@@ -4,7 +4,7 @@ keywords: Docker Desktop, backup, restore, migration, reinstall, containers, ima
   volumes
 weight: 20
 aliases:
- - /desktop/backup-and-restore.md
+ - /desktop/backup-and-restore/
 ---
 
 Use the following procedure to save and restore your images and container data. This is useful if you want to reset your VM disk or to move your Docker environment to a new

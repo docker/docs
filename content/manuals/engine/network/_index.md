@@ -7,6 +7,7 @@ keywords: networking, container, standalone, IP address, DNS resolution
 aliases:
 - /articles/networking/
 - /config/containers/container-networking/
+- /engine/tutorials/networkingcontainers/
 - /engine/userguide/networking/
 - /engine/userguide/networking/configure-dns/
 - /engine/userguide/networking/default_network/binding/

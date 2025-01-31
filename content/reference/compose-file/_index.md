@@ -36,6 +36,7 @@ aliases:
  - /compose/yaml/
  - /compose/compose-file/compose-file-v1/
  - /compose/compose-file/
+ - /compose/reference/overview/
 ---
 
 >**New to Docker Compose?**
