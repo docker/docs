@@ -19,7 +19,7 @@ Learn how to manage members for your organization in Docker Hub and the Docker A
 {{< /tab >}}
 {{< tab name="Admin Console" >}}
 
-{{< include "admin-early-access.md" >}}
+{{% include "admin-early-access.md" %}}
 
 {{% admin-users product="admin" %}}
 
@@ -66,7 +66,7 @@ To resend an invitation from Docker Hub:
 {{< /tab >}}
 {{< tab name="Admin Console" >}}
 
-{{< include "admin-early-access.md" >}}
+{{% include "admin-early-access.md" %}}
 
 To resend an invitation from the Admin Console:
 
@@ -93,7 +93,7 @@ To remove a member's invitation from Docker Hub:
 {{< /tab >}}
 {{< tab name="Admin Console" >}}
 
-{{< include "admin-early-access.md" >}}
+{{% include "admin-early-access.md" %}}
 
 To remove an invitation from the Admin Console:
 
@@ -132,7 +132,7 @@ To add a member to a team with Docker Hub:
 {{< /tab >}}
 {{< tab name="Admin Console" >}}
 
-{{< include "admin-early-access.md" >}}
+{{% include "admin-early-access.md" %}}
 
 To add a member to a team with the Admin Console:
 
@@ -164,7 +164,7 @@ To remove a member from a specific team with Docker Hub:
 {{< /tab >}}
 {{< tab name="Admin Console" >}}
 
-{{< include "admin-early-access.md" >}}
+{{% include "admin-early-access.md" %}}
 
 To remove a member from a specific team with the Admin Console:
 
@@ -197,6 +197,8 @@ To update a member role:
 
 ## Export members CSV file
 
+{{< summary-bar feature_name="Admin orgs" >}}
+
 Owners can export a CSV file containing all members. The CSV file for a company contains the following fields:
 - Name: The user's name
 - Username: The user's Docker ID
@@ -217,7 +219,7 @@ To export a CSV file of your members:
 {{< /tab >}}
 {{< tab name="Admin Console" >}}
 
-{{< include "admin-early-access.md" >}}
+{{% include "admin-early-access.md" %}}
 
 To export a CSV file of your members:
 

@@ -1,18 +1,12 @@
 ---
 title: Use the PKG installer
 description: Understand how to use the PKG installer. Also explore additional configuration options.
-keywords: PKG, mac, docker desktop, install, deploy, configure
+keywords: pkg, mac, docker desktop, install, deploy, configure, admin, mdm
+tags: [admin]
 weight: 20
-params:
-  sidebar:
-    badge:
-      color: violet
-      text: EA
 ---
 
-{{% restricted title="Early Access" %}}
-The PKG installer is currently an [Early Access](/manuals/release-lifecycle.md) feature and is available to all company and organization owners with a Business subscription and Docker Desktop version 4.36 and later.
-{{% /restricted %}}
+{{< summary-bar feature_name="PKG installer" >}}
 
 The PKG package supports various MDM (Mobile Device Management) solutions, making it ideal for bulk installations and eliminating the need for manual setups by individual users. With this package, IT administrators can ensure standardized, policy-driven installations of Docker Desktop, enhancing efficiency and software management across their organizations.
 

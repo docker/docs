@@ -8,6 +8,8 @@ aliases:
 - /docker-hub/orgs/
 ---
 
+{{< summary-bar feature_name="Admin orgs" >}}
+
 This section describes how to create an organization. Before you begin:
 
 - You need a [Docker ID](/accounts/create-account/)
@@ -51,7 +53,7 @@ You've now created an organization.
 {{< /tab >}}
 {{< tab name="Admin Console" >}}
 
-{{< include "admin-early-access.md" >}}
+{{% include "admin-early-access.md" %}}
 
 To create an organization:
 
@@ -136,7 +138,7 @@ configure your organization.
 {{< /tab >}}
 {{< tab name="Admin Console" >}}
 
-{{< include "admin-early-access.md" >}}
+{{% include "admin-early-access.md" %}}
 
 To view an organization in the Admin Console:
 

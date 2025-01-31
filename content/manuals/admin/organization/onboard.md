@@ -11,7 +11,9 @@ aliases:
 - /docker-hub/onboard-business/
 ---
 
-{{< include "admin-early-access.md" >}}
+{{< summary-bar feature_name="Admin orgs" >}}
+
+{{% include "admin-early-access.md" %}}
 
 Learn how to onboard your organization using Docker Hub or the Docker Admin Console.
 

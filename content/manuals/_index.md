@@ -51,7 +51,7 @@ params:
     description: Customize your Docker Desktop workflow.
     icon: extension
     link: /extensions/
-  - title: Testcontainers cloud
+  - title: Testcontainers Cloud
     description: Run integration tests, with real dependencies, in the cloud.
     icon: package_2
     link: https://testcontainers.com/cloud/docs/

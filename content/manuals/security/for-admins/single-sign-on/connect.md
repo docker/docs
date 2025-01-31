@@ -5,6 +5,8 @@ title: Create an SSO connection
 linkTitle: Connect
 ---
 
+{{< summary-bar feature_name="SSO" >}}
+
 Creating a single sign-on (SSO) connection requires setting up the connection in Docker first, followed by setting up the connection in your identity provider (IdP). This guide provides steps for setting up your SSO connection in Docker and your IdP.
 
 > [!TIP]
@@ -28,7 +30,7 @@ Make sure you have completed the following before you begin:
 {{< tabs >}}
 {{< tab name="Admin Console" >}}
 
-{{< include "admin-early-access.md" >}}
+{{% include "admin-early-access.md" %}}
 
 1. Sign in to the [Admin Console](https://admin.docker.com/).
 2. Select your organization or company from the **Choose profile** page. Note that when an organization is part of a company, you must select the company and configure the domain for the organization at the company level.

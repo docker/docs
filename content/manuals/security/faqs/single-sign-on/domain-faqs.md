@@ -1,7 +1,7 @@
 ---
 description: Single sign-on domain FAQs
 keywords: Docker, Docker Hub, SSO FAQs, single sign-on, domains, domain verification, domain management
-title: Domains
+title: FAQS on SSO and domains
 tags: [FAQ]
 aliases:
 - /single-sign-on/domain-faqs/
@@ -23,3 +23,7 @@ Adding and verifying a domain is required to enable and enforce SSO. See [Config
 ### Is IdP-initiated authentication supported?
 
 IdP-initiated authentication isn't supported by Docker SSO. Users must initiate sign-in through Docker Desktop or Hub.
+
+### Can I verify the same domain on multiple organizations?
+
+You can't verify the same domain for multiple orgnaizations at the organization level. If you want to verify one domain for multiple organizations, you must have a Docker Business subscription, and [create a company](/manuals/admin/company/new-company.md). A company enables centralized management of organizations and allows domain verification at the company level.

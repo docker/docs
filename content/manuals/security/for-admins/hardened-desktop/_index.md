@@ -5,6 +5,7 @@ description: Overview of what Hardened Docker Desktop is and its key features
 keywords: security, hardened desktop, enhanced container isolation, registry access
   management, settings management root access, admins, docker desktop, image access
   management
+tags: [admin]
 aliases:
  - /desktop/hardened-desktop/
 grid:
@@ -31,9 +32,7 @@ grid:
 weight: 60
 ---
 
-> [!NOTE]
->
-> Hardened Docker Desktop is available to Docker Business customers only.
+{{< summary-bar feature_name="Hardened Docker Desktop" >}}
 
 Hardened Docker Desktop is a group of security features, designed to improve the security of developer environments with minimal impact on developer experience or productivity.
 

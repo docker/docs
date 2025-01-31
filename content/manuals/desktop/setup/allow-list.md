@@ -1,12 +1,15 @@
 ---
-description: Allowlist for Docker Desktop for Business customers
-keywords: Docker Desktop, allowlist, allow list, firewall
+description: A list of domain URLs required for Docker Desktop to function correctly within an organization.
+keywords: Docker Desktop, allowlist, allow list, firewall, authentication URLs, analytics, 
 title: Allowlist for Docker Desktop
+tags: [admin]
 linkTitle: Allowlist
 weight: 100
 aliases:
  - /desktop/allow-list/
 ---
+
+{{< summary-bar feature_name="Allow list" >}}
 
 This page contains the domain URLs that you need to add to a firewall allowlist to ensure Docker Desktop works properly within your organization.
 
@@ -26,5 +29,6 @@ This page contains the domain URLs that you need to add to a firewall allowlist 
 |https://hub.docker.com| Docker Pull/Push |
 |https://registry-1.docker.io| Docker Pull/Push |
 |https://production.cloudflare.docker.com| Docker Pull/Push |
+|https://docker-images-prod.r2.cloudflarestorage.com| Docker Pull/Push |
 |https://docker-pinata-support.s3.amazonaws.com| Troubleshooting |
 |https://api.dso.docker.com| Docker Scout service |

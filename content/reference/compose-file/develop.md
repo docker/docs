@@ -11,7 +11,7 @@ weight: 150
 >
 > Develop is an optional part of the Compose Specification. It is available with Docker Compose version 2.22.0 and later.
 
-{{< include "compose/develop.md" >}}
+{{% include "compose/develop.md" %}}
 
 This page defines how Compose behaves to efficiently assist you and defines the development constraints and workflows set by Compose. Only a subset of Compose file services may require a `develop` subsection.
 
@@ -64,9 +64,9 @@ Compose to monitor source code for changes. For more information, see [Use Compo
 
 #### `exec`
 
-{{< introduced compose 2.23.2 "/manuals/compose/releases/release-notes.md#2232" >}}
+{{< summary-bar feature_name="Compose exec" >}}
 
-`exec` is only relevant when `action` is set to `sync+exec`. Like [service hooks](services.md#post_start), `exec` is used to define the command to be run inside the container once it has started. 
+`exec` is only relevant when `action` is set to `sync+exec`. Like [service hooks](services.md#post_start), `exec` is used to define the command to be run inside the container once it has started.
 
 - `command`: Specifies the command to run once the container starts. This attribute is required, and you can choose to use either the shell form or the exec form.
 - `user`: The user to run the command. If not set, the command is run with the same user as the main service command.

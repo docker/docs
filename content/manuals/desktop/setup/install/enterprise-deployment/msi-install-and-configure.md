@@ -1,25 +1,24 @@
 ---
 title: Use the MSI installer
 description: Understand how to use the MSI installer. Also explore additional configuration options.
-keywords: msi, windows, docker desktop, install, deploy, configure
+keywords: msi, windows, docker desktop, install, deploy, configure, admin, mdm
+tags: [admin]
 weight: 10
-aliases: 
+aliases:
 - /desktop/install/msi/install-and-configure/
 - /desktop/setup/install/msi/install-and-configure/
 ---
 
-> [!NOTE]
->
-> The MSI installer is available to all company and organization owners with a Business subscription and Docker Desktop version 4.32 and later.
+{{< summary-bar feature_name="MSI installer" >}}
 
 The MSI package supports various MDM (Mobile Device Management) solutions, making it ideal for bulk installations and eliminating the need for manual setups by individual users. With this package, IT administrators can ensure standardized, policy-driven installations of Docker Desktop, enhancing efficiency and software management across their organizations.
 
 ## Install interactively
 
-1. In the [Docker Admin Console](http://admin.docker.com/), navigate to your organization.   
-2. Under **Security and access**, select the **Deploy Docker Desktop** page. 
-3. From the **Windows OS** tab, select the **Download MSI installer** button. 
-4. Once downloaded, double-click `Docker Desktop Installer.msi` to run the installer. 
+1. In the [Docker Admin Console](http://admin.docker.com/), navigate to your organization.
+2. Under **Security and access**, select the **Deploy Docker Desktop** page.
+3. From the **Windows OS** tab, select the **Download MSI installer** button.
+4. Once downloaded, double-click `Docker Desktop Installer.msi` to run the installer.
 5. Once you've accepted the license agreement, you can choose the install location. By default, Docker Desktop is installed at `C:\Program Files\Docker\Docker`.
 6. Configure the Docker Desktop installation. You can:
 
@@ -35,7 +34,7 @@ The MSI package supports various MDM (Mobile Device Management) solutions, makin
 
 If your administrator account is different to your user account, you must add the user to the **docker-users** group:
 1. Run **Computer Management** as an **administrator**.
-2. Navigate to **Local Users and Groups** > **Groups** > **docker-users**. 
+2. Navigate to **Local Users and Groups** > **Groups** > **docker-users**.
 3. Right-click to add the user to the group.
 4. Sign out and sign back in for the changes to take effect.
 
@@ -43,7 +42,7 @@ If your administrator account is different to your user account, you must add th
 >
 > When installing Docker Desktop with the MSI, in-app updates are automatically disabled. This feature ensures your organization maintains the required Docker Desktop version. For Docker Desktop installed with the .exe installer, in-app updates remain supported.
 >
-> Docker Desktop notifies you when an update is available. To update Docker Desktop, download the latest installer from the Docker Admin Console. Navigate to the  **Deploy Docker Desktop** page > under **Security and access**. 
+> Docker Desktop notifies you when an update is available. To update Docker Desktop, download the latest installer from the Docker Admin Console. Navigate to the  **Deploy Docker Desktop** page > under **Security and access**.
 >
 > To keep up to date with new releases, check the [release notes](/manuals/desktop/release-notes.md) page.
 
@@ -51,9 +50,9 @@ If your administrator account is different to your user account, you must add th
 
 This section covers command line installations of Docker Desktop using PowerShell. It provides common installation commands that you can run. You can also add additional arguments which are outlined in [configuration options](#configuration-options).
 
-When installing Docker Desktop, you can choose between interactive or non-interactive installations. 
+When installing Docker Desktop, you can choose between interactive or non-interactive installations.
 
-Interactive installations, without specifying `/quiet` or `/qn`, display the user interface and let you select your own properties. 
+Interactive installations, without specifying `/quiet` or `/qn`, display the user interface and let you select your own properties.
 
 When installing via the user interface it's possible to:
 
@@ -238,7 +237,7 @@ The registry key is as follows:
 SOFTWARE\Docker Inc.\Docker Desktop\DisableMsiAnalytics
 ```
 
-When analytics is disabled, this key has a value of `1`. 
+When analytics is disabled, this key has a value of `1`.
 
 ## Additional resources
 

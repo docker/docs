@@ -8,6 +8,8 @@ aliases:
 weight: 30
 ---
 
+{{< summary-bar feature_name="Hardened Docker Desktop" >}}
+
 ## Docker socket mount permissions
 
 By default, when Enhanced Container Isolation (ECI) is enabled, Docker Desktop does not allow bind-mounting the
@@ -136,7 +138,7 @@ ones in the repository.
 
 ### Docker Socket Mount Permissions for derived images
 
-{{< introduced desktop 4.34.0 "../../../../desktop/release-notes.md#4340" >}}
+{{< summary-bar feature_name="Docker Scout Mount Permissions" >}}
 
 As described in the prior section, administrators can configure the list of container
 images that are allowed to mount the Docker socket via the `imageList`.

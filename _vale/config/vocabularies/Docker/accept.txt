@@ -57,6 +57,7 @@ Jamf
 JetBrains
 Kerberos
 Kitematic
+Kubeadm
 Kubernetes
 Laravel
 Laradock
@@ -154,6 +155,7 @@ Zsh
 [Vv]irtiofs
 [Vv]irtualize
 [Ww]alkthrough
+bootup
 cgroup
 config
 containerd
@@ -198,6 +200,7 @@ tmpfs
 ufw
 uid
 umask
+unmanaged
 vSphere
 vpnkit
 windowsfilter

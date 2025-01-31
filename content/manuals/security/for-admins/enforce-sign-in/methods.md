@@ -1,9 +1,12 @@
 ---
-description: Learn about the different ways you can force users to sign in to Docker Desktop
-keywords: authentication, registry.json, configure, enforce sign-in, docker desktop, security 
+description: Learn about the different ways you can force your developers to sign in to Docker Desktop
+keywords: authentication, registry.json, configure, enforce sign-in, docker desktop, security, .plist. registry key, mac, windows
 title: Ways to enforce sign-in for Docker Desktop
+tags: [admin]
 linkTitle: Methods
 ---
+
+{{< summary-bar feature_name="Enforce sign-in" >}}
 
 This page outlines the different methods for enforcing sign-in for Docker Desktop.
 
@@ -50,10 +53,7 @@ The following example outlines how to deploy a registry key to enforce sign-in o
 
 ## Configuration profiles method (Mac only)
 
-> [!NOTE]
->
-> The configuration profiles method is in [Early Access](/manuals/release-lifecycle.md)
-> and is available with Docker Desktop version 4.36 and later.
+{{< summary-bar feature_name="Config profiles" >}}
 
 Configuration profiles are a feature of macOS that let you distribute
 configuration information to the Macs you manage. It is the safest method to

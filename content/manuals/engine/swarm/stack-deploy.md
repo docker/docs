@@ -8,7 +8,7 @@ When running Docker Engine in swarm mode, you can use `docker stack deploy` to
 deploy a complete application stack to the swarm. The `deploy` command accepts
 a stack description in the form of a [Compose file](/reference/compose-file/legacy-versions.md).
 
-{{< include "swarm-compose-compat.md" >}}
+{{% include "swarm-compose-compat.md" %}}
 
 To run through this tutorial, you need:
 
@@ -56,7 +56,7 @@ a throwaway registry, which you can discard afterward.
 3.  Check that it's working with `curl`:
 
     ```console
-    $ curl http://localhost:5000/v2/
+    $ curl http://127.0.0.1:5000/v2/
 
     {}
     ```

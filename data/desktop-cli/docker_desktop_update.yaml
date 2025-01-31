@@ -1,0 +1,34 @@
+command: docker desktop update
+short: Manage Docker Desktop updates (Mac only)
+usage: docker desktop update [OPTIONS]
+pname: docker desktop
+plink: docker_desktop.yaml
+options:
+    - option: check-only
+      shorthand: k
+      value_type: bool
+      default_value: false
+      description: Check for updates without applying them
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: quiet
+      shorthand: q
+      value_type: bool
+      default_value: false
+      description: Queitly check and apply updates
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false

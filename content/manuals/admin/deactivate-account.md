@@ -6,6 +6,8 @@ aliases:
 - /docker-hub/deactivate-account/
 ---
 
+{{< summary-bar feature_name="General admin" >}}
+
 You can deactivate an account at any time. This section describes the prerequisites and steps to deactivate an organization account. For information on deactivating a user account, see [Deactivate a user account](../accounts/deactivate-user-account.md).
 
 > [!WARNING]

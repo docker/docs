@@ -6,7 +6,7 @@ desription: How to use lifecycle hooks with Docker Compose
 keywords: cli, compose, lifecycle, hooks reference
 ---
 
-{{< introduced compose 2.30.0 "../releases/release-notes.md#2300" >}}
+{{< summary-bar feature_name="Compose lifecycle hooks" >}}
 
 ## Services lifecycle hooks
 

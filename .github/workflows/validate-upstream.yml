@@ -96,6 +96,7 @@ jobs:
           files: |
             docker-bake.hcl
           targets: validate-upstream
+          provenance: false
           set: |
             *.cache-from=type=gha,scope=docs-upstream
             *.cache-to=type=gha,scope=docs-upstream

@@ -69,7 +69,7 @@ Testcontainers Cloud.
 
 Docker Pro includes:
 
-- 200 Docker Build Cloud minutes per month.
+- 200 Docker Build Cloud build minutes per month.
 - 2 included repositories with continuous vulnerability analysis in Docker Scout.
 - 100 Testcontainers Cloud runtime minutes per month for use either in Docker Desktop or for CI.
 - No Docker Hub image pull rate limits.
@@ -89,7 +89,7 @@ Docker Hub, Docker Scout, Docker Build Cloud, and Testcontainers Cloud.
 
 Docker Team includes:
 
-- 500 Docker Build Cloud minutes per month.
+- 500 Docker Build Cloud build minutes per month.
 - Unlimited Docker Scout repositories with continuous vulnerability analysis.
 - 500 Testcontainers Cloud runtime minutes per month for use either in Docker Desktop or for CI.
 - No Docker Hub image pull rate limits.
@@ -113,7 +113,7 @@ Build Cloud, and Testcontainers Cloud.
 
 Docker Business includes:
 
-- 1500 Docker Build Cloud minutes per month.
+- 1500 Docker Build Cloud build minutes per month.
 - Unlimited Docker Scout repositories with continuous vulnerability analysis.
 - 1500 Testcontainers Cloud runtime minutes per month for use either in Docker Desktop or
   for CI.
@@ -183,7 +183,7 @@ Legacy Docker Pro includes:
 - Unlimited [collaborators](/docker-hub/repos/manage/access/#collaborators) for public repositories at no cost per month.
 - Access to [Legacy Docker Scout Free](#legacy-docker-scout-free) to get started with software supply chain security.
 - Unlimited private repositories
-- 5000 image [pulls per day](/docker-hub/download-rate-limit/)
+- 5000 image [pulls per day](/manuals/docker-hub/usage/pulls.md)
 - [Auto Builds](/docker-hub/builds/) with 5 concurrent builds
 - 300 [Vulnerability Scans](/docker-hub/vulnerability-scanning/)
 
@@ -193,7 +193,7 @@ For a list of features available in each legacy tier, see [Legacy Docker Pricing
 
 When you upgrade your Legacy Docker Pro plan to a Docker Pro subscription plan, your plan includes the following changes:
 
-- Docker Build Cloud minutes increased from 100/month to 200/month and no monthly fee.
+- Docker Build Cloud build minutes increased from 100/month to 200/month and no monthly fee.
 - 2 included repositories with continuous vulnerability analysis in Docker Scout.
 - 100 Testcontainers Cloud runtime minutes are now included for use either in Docker Desktop or for CI.
 - Docker Hub image pull rate limits are removed.
@@ -215,7 +215,7 @@ Legacy Docker Team includes:
 - Unlimited teams
 - [Auto Builds](/docker-hub/builds/) with 15 concurrent builds
 - Unlimited [Vulnerability Scanning](/docker-hub/vulnerability-scanning/)
-- 5000 image [pulls per day](/docker-hub/download-rate-limit/) for each team member
+- 5000 image [pulls per day](/manuals/docker-hub/usage/pulls.md) for each team member
 
 There are also advanced collaboration and management tools, including organization and team management with [Role Based Access Control (RBAC)](/security/for-admins/roles-and-permissions/), [activity logs](/admin/organization/activity-logs/), and more.
 
@@ -226,7 +226,7 @@ For a list of features available in each legacy tier, see [Legacy Docker Pricing
 When you upgrade your Legacy Docker Team plan to a Docker Team subscription plan, your plan includes the following changes:
 
 - Instead of paying an additional per-seat fee, Docker Build Cloud is now available to all users in your Docker plan.
-- Docker Build Cloud minutes increase from 400/mo to 500/mo.
+- Docker Build Cloud build minutes increase from 400/mo to 500/mo.
 - Docker Scout now includes unlimited repositories with continuous vulnerability analysis, an increase from 3.
 - 500 Testcontainers Cloud runtime minutes are now included for use either in Docker Desktop or for CI.
 - Docker Hub image pull rate limits are removed.

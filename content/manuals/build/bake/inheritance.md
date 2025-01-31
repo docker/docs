@@ -10,7 +10,7 @@ Targets can inherit attributes from other targets, using the `inherits`
 attribute. For example, imagine that you have a target that builds a Docker
 image for a development environment:
 
-```hcl
+```hcl {title=docker-bake.hcl}
 target "app-dev" {
   args = {
     GO_VERSION = "{{% param example_go_version %}}"
@@ -28,7 +28,7 @@ slightly different attributes for a production build. In this example, the
 `app-release` target inherits the `app-dev` target, but overrides the `tags`
 attribute and adds a new `platforms` attribute:
 
-```hcl
+```hcl {title=docker-bake.hcl}
 target "app-release" {
   inherits = ["app-dev"]
   tags = ["docker.io/username/myapp:latest"]
@@ -43,7 +43,7 @@ shared attributes for all or many of the build targets in the project. For
 example, the following `_common` target defines a common set of build
 arguments:
 
-```hcl
+```hcl {title=docker-bake.hcl}
 target "_common" {
   args = {
     GO_VERSION = "{{% param example_go_version %}}"
@@ -55,11 +55,11 @@ target "_common" {
 You can then inherit the `_common` target in other targets to apply the shared
 attributes:
 
-```hcl
+```hcl {title=docker-bake.hcl}
 target "lint" {
   inherits = ["_common"]
   dockerfile = "./dockerfiles/lint.Dockerfile"
-  output = ["type=cacheonly"]
+  output = [{ type = "cacheonly" }]
 }
 
 target "docs" {
@@ -88,7 +88,7 @@ When a target inherits another target, it can override any of the inherited
 attributes. For example, the following target overrides the `args` attribute
 from the inherited target:
 
-```hcl
+```hcl {title=docker-bake.hcl}
 target "app-dev" {
   inherits = ["_common"]
   args = {
@@ -110,7 +110,7 @@ The `inherits` attribute is a list, meaning you can reuse attributes from
 multiple other targets. In the following example, the app-release target reuses
 attributes from both the `app-dev` and `_common` targets.
 
-```hcl
+```hcl {title=docker-bake.hcl}
 target "_common" {
   args = {
     GO_VERSION = "{{% param example_go_version %}}"

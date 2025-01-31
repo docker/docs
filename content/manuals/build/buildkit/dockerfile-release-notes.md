@@ -13,6 +13,37 @@ issues, and bug fixes in [Dockerfile reference](/reference/dockerfile.md).
 
 For usage, see the [Dockerfile frontend syntax](frontend.md) page.
 
+## 1.13.0
+
+{{< release-date date="2025-01-20" >}}
+
+The full release note for this release is available
+[on GitHub](https://github.com/moby/buildkit/releases/tag/dockerfile%2F1.13.0).
+
+```dockerfile
+# syntax=docker/dockerfile:1.13.0
+```
+
+- New `TARGETOSVERSION`, `BUILDOSVERSION` builtin build-args are available for Windows builds, and `TARGETPLATFORM` value now also contains `OSVersion` value. [moby/buildkit#5614](https://github.com/moby/buildkit/pull/5614)
+- Allow syntax forwarding for external frontends for files starting with a Byte Order Mark (BOM). [moby/buildkit#5645](https://github.com/moby/buildkit/pull/5645)
+- Default `PATH` in Windows Containers has been updated with `powershell.exe` directory. [moby/buildkit#5446](https://github.com/moby/buildkit/pull/5446)
+- Fix Dockerfile directive parsing to not allow invalid syntax. [moby/buildkit#5646](https://github.com/moby/buildkit/pull/5646)
+- Fix case where `ONBUILD` command may have run twice on inherited stage. [moby/buildkit#5593](https://github.com/moby/buildkit/pull/5593)
+- Fix possible missing named context replacement for child stages in Dockerfile. [moby/buildkit#5596](https://github.com/moby/buildkit/pull/5596)
+
+## 1.13.0-labs
+
+{{< release-date date="2025-01-20" >}}
+
+The full release note for this release is available
+[on GitHub](https://github.com/moby/buildkit/releases/tag/dockerfile%2F1.13.0-labs).
+
+```dockerfile
+# syntax=docker.io/docker/dockerfile-upstream:1.13.0-labs
+```
+
+- Fix support for non-octal values for `COPY --chmod`. [moby/buildkit#5626](https://github.com/moby/buildkit/pull/5626)
+
 ## 1.12.0
 
 {{< release-date date="2024-11-27" >}}
@@ -246,7 +277,7 @@ The following features have graduated from the labs channel to stable:
 
 {{< release-date date="2023-01-10" >}}
 
-{{< include "dockerfile-labs-channel.md" >}}
+{{% include "dockerfile-labs-channel.md" %}}
 
 ### New
 
@@ -340,7 +371,7 @@ The following features have graduated from the labs channel to stable:
 
 {{< release-date date="2021-07-16" >}}
 
-{{< include "dockerfile-labs-channel.md" >}}
+{{% include "dockerfile-labs-channel.md" %}}
 
 ### New
 
@@ -371,7 +402,7 @@ The following features have graduated from the labs channel to stable:
 
 {{< release-date date="2020-12-12" >}}
 
-{{< include "dockerfile-labs-channel.md" >}}
+{{% include "dockerfile-labs-channel.md" %}}
 
 ### Bug fixes and enhancements
 
@@ -392,7 +423,7 @@ The following features have graduated from the labs channel to stable:
 
 {{< release-date date="2020-12-03" >}}
 
-{{< include "dockerfile-labs-channel.md" >}}
+{{% include "dockerfile-labs-channel.md" %}}
 
 ### Bug fixes and enhancements
 
@@ -429,7 +460,7 @@ The following features have graduated from the labs channel to stable:
 
 {{< release-date date="2019-07-31" >}}
 
-{{< include "dockerfile-labs-channel.md" >}}
+{{% include "dockerfile-labs-channel.md" %}}
 
 ### Bug fixes and enhancements
 

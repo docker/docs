@@ -6,10 +6,7 @@ aliases:
   - /build/building/cache/backends/gha/
 ---
 
-{{% restricted %}}
-This is an experimental feature. The interface and behavior are unstable and
-may change in future releases.
-{{% /restricted %}}
+{{< summary-bar feature_name="GitHub Actions cache" >}}
 
 The GitHub Actions cache utilizes the
 [GitHub-provided Action's cache](https://github.com/actions/cache) or other

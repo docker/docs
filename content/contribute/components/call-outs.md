@@ -6,18 +6,25 @@ toc_max: 3
 
 We support these broad categories of callouts:
 
-- Alerts (Note, Tip, Important, Warning, Caution)
-- Version callouts
-- Experimental, which use the `{{%/* experimental */%}}` shortcode
-- Restricted, which use the `{{%/* restricted */%}}` shortcode
+- Alerts: Note, Tip, Important, Warning, Caution
 
-The experimental and restricted shortcodes take a title as an argument. The
-title is optional, defaults to "Experimental" or "Restricted" respectively, and
-is displayed in the callout.
+We also support summary bars, which represent a feature's required subscription, version, or Adminstrator role.
+To add a summary bar:
+
+Add the feature name to the `/data/summary.yaml` file. Use the following attributes:
+
+| Attribute      | Description                                            | Possible values                                         |
+|----------------|--------------------------------------------------------|---------------------------------------------------------|
+| `subscription` | Notes the subscription required to use the feature     | All, Personal, Pro, Team, Business                      |
+| `availability` | Notes what product development stage the feature is in | Experimental, Beta, Early access, GA, Retired           |
+| `requires`     | Notes what minimum version is required for the feature | No specific value, use a string to describe the version and link to relevant release notes |
+| `for`          | Notes if the feature is intended for IT Administrators | Administrators                                          |
+
+Then, add the `summary-bar` shortcode on the page you want to add the summary bar to. Note, the feature name is case sensitive. The icons that appear in the summary bar are automatically rendered.
 
 ## Examples
 
-{{< introduced buildx 0.16.0 >}}
+{{< summary-bar feature_name="PKG installer" >}}
 
 > [!NOTE]
 >
@@ -54,18 +61,10 @@ is displayed in the callout.
 
 For both of the following callouts, consult [the Docker release lifecycle](/release-lifecycle) for more information on when to use them.
 
-{{% experimental title="Beta feature" %}}
-The Builds view is currently in Beta. This feature may change or be removed from future releases.
-{{% /experimental %}}
-
-{{% restricted %}}
-Docker Scout is an [early access](/release-lifecycle/#early-access-ea) product.
-{{% /restricted %}}
-
-## Formatting 
+## Formatting
 
 ```go
-{{</* introduced buildx 0.10.4 "../../release-notes.md#0104" */>}}
+> {{< summary-bar feature_name="PKG installer" >}}
 ```
 
 ```html
@@ -101,14 +100,4 @@ Docker Scout is an [early access](/release-lifecycle/#early-access-ea) product.
 > [!CAUTION]
 >
 > Here be dragons.
-```
-
-```go
-{{%/* experimental title="Beta feature" */%}}
-The Builds view is currently in Beta. This feature may change or be removed from future releases.
-{{%/* /experimental */%}}
-
-{{%/* restricted */%}}
-Docker Scout is an [early access](/release-lifecycle/#early-access-ea) product.
-{{%/* /restricted */%}}
 ```

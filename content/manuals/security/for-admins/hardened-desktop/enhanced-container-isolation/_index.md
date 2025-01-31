@@ -9,13 +9,11 @@ aliases:
 weight: 20
 ---
 
-> [!NOTE]
->
-> Enhanced Container Isolation is available to Docker Business customers only.
+{{< summary-bar feature_name="Hardened Docker Desktop" >}}
 
 Enhanced Container Isolation (ECI) provides an additional layer of security to prevent malicious workloads running in containers from compromising Docker Desktop or the host.
 
-It uses a variety of advanced techniques to harden container isolation, but without impacting developer productivity. 
+It uses a variety of advanced techniques to harden container isolation, but without impacting developer productivity.
 
 Enhanced Container Isolation ensures stronger container isolation and also locks in any security configurations that have been created by administrators, for instance through [Registry Access Management policies](/manuals/security/for-admins/hardened-desktop/registry-access-management.md) or with [Settings Management](../settings-management/_index.md).
 

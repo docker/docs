@@ -30,7 +30,7 @@ amount of consumption. You can scale your consumption at any time during your su
 
 You can scale consumption for the following:
 
-- Docker Build Cloud minutes
+- Docker Build Cloud build minutes
 - Docker Testcontainers Cloud runtime minutes
 - Docker Hub storage and image pulls
 
@@ -38,9 +38,9 @@ To better understand your needs, you can view your consumption at any time. For
 more details, see [View Docker product
 usage](../admin/organization/manage-products.md#view-docker-product-usage).
 
-## Add Docker Build Cloud minutes
+## Add Docker Build Cloud build minutes
 
-You can pre-purchase Docker Build Cloud minutes in the Docker Build Cloud Dashboard:
+You can pre-purchase Docker Build Cloud build minutes in the Docker Build Cloud Dashboard:
 
 1. Sign in to [Docker Home](https://app.docker.com/).
 2. Under Settings and administration, select **Billing**.
@@ -64,7 +64,7 @@ charges, pre-purchase additional minutes.
 
 ## Add Docker Hub storage or image pulls
 
-{{< include "hub-limits.md" >}}
+{{% include "hub-limits.md" %}}
 
 You can pre-purchase images pulls and storage by [contacting
 sales](https://www.docker.com/pricing/contact-sales/).

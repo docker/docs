@@ -4,9 +4,11 @@ keywords: company, multiple organizations, manage organizations
 title: Manage company organizations
 ---
 
+{{< summary-bar feature_name="Company" >}}
+
 You can manage the organizations in a company in the Docker Admin Console.
 
-{{< include "admin-early-access.md" >}}
+{{% include "admin-early-access.md" %}}
 
 ## View all organizations
 

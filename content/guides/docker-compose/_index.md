@@ -9,7 +9,6 @@ tags: [product-demo]
 aliases:
   - /learning-paths/docker-compose/
 params:
-  featured: true
   image: images/learning-paths/compose.png
   time: 10 minutes
   resource_links:

@@ -1,9 +1,12 @@
 ---
 title: Use Jamf Pro
 description: Use Jamf Pro to deploy Docker Desktop
-keywords: jamf, mac, docker desktop, deploy, mdm, enterprise, administrator,
+keywords: jamf, mac, docker desktop, deploy, mdm, enterprise, administrator, pkg
+tags: [admin]
 weight: 40
 ---
+
+{{< summary-bar feature_name="Jamf Pro" >}}
 
 Learn how to deploy Docker Desktop for Mac using Jamf Pro.
 

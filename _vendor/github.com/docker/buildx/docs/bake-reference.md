@@ -19,8 +19,8 @@ By default, Bake uses the following lookup order to find the configuration file:
 3. `docker-compose.yml`
 4. `docker-compose.yaml`
 5. `docker-bake.json`
-6. `docker-bake.override.json`
-7. `docker-bake.hcl`
+6. `docker-bake.hcl`
+7. `docker-bake.override.json`
 8. `docker-bake.override.hcl`
 
 You can specify the file location explicitly using the `--file` flag:
@@ -221,8 +221,10 @@ The following table shows the complete list of attributes that you can assign to
 | [`attest`](#targetattest)                       | List    | Build attestations                                                   |
 | [`cache-from`](#targetcache-from)               | List    | External cache sources                                               |
 | [`cache-to`](#targetcache-to)                   | List    | External cache destinations                                          |
+| [`call`](#targetcall)                           | String  | Specify the frontend method to call for the target.                  |
 | [`context`](#targetcontext)                     | String  | Set of files located in the specified path or URL                    |
 | [`contexts`](#targetcontexts)                   | Map     | Additional build contexts                                            |
+| [`description`](#targetdescription)             | String  | Description of a target                                              |
 | [`dockerfile-inline`](#targetdockerfile-inline) | String  | Inline Dockerfile string                                             |
 | [`dockerfile`](#targetdockerfile)               | String  | Dockerfile location                                                  |
 | [`inherits`](#targetinherits)                   | List    | Inherit attributes from other targets                                |
@@ -371,6 +373,13 @@ target "app" {
 }
 ```
 
+Supported values are:
+
+- `build` builds the target (default)
+- `check`: evaluates [build checks](https://docs.docker.com/build/checks/) for the target
+- `outline`: displays the target's build arguments and their default values if available
+- `targets`: lists all Bake targets in the loaded definition, along with its [description](#targetdescription).
+
 For more information about frontend methods, refer to the CLI reference for
 [`docker buildx build --call`](https://docs.docker.com/reference/cli/docker/buildx/build/#call).
 
@@ -480,6 +489,25 @@ target "app" {
 FROM baseapp
 RUN echo "Hello world"
 ```
+
+### `target.description`
+
+Defines a human-readable description for the target, clarifying its purpose or
+functionality.
+
+```hcl
+target "lint" {
+    description = "Runs golangci-lint to detect style errors"
+    args = {
+        GOLANGCI_LINT_VERSION = null
+    }
+    dockerfile = "lint.Dockerfile"
+}
+```
+
+This attribute is useful when combined with the `docker buildx bake --list=targets`
+option, providing a more informative output when listing the available build
+targets in a Bake file.
 
 ### `target.dockerfile-inline`
 

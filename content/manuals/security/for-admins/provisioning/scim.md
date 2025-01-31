@@ -9,6 +9,8 @@ aliases:
 weight: 30
 ---
 
+{{< summary-bar feature_name="SSO" >}}
+
 System for Cross-domain Identity Management (SCIM) is available for Docker Business customers. This guide provides an overview of SCIM provisioning.
 
 ## How SCIM works
@@ -51,7 +53,7 @@ You must [configure SSO](../single-sign-on/configure/_index.md) before you enabl
 {{< tabs >}}
 {{< tab name="Admin Console" >}}
 
-{{< include "admin-early-access.md" >}}
+{{% include "admin-early-access.md" %}}
 
 {{% admin-scim product="admin" %}}
 
@@ -243,7 +245,7 @@ If SCIM is disabled, any user provisioned through SCIM will remain in the organi
 {{< tabs >}}
 {{< tab name="Admin Console" >}}
 
-{{< include "admin-early-access.md" >}}
+{{% include "admin-early-access.md" %}}
 
 {{% admin-scim-disable product="admin" %}}
 

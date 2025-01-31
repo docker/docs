@@ -13,9 +13,22 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.32.4
+
+{{< release-date date="2025-01-16" >}}
+
+### Bug fixes and enhancements
+
+- Fixed an issue where the Compose version did not display properly when using `docker compose version`
+
 ## 2.32.3
 
 {{< release-date date="2025-01-13" >}}
+
+> [!NOTE]
+>
+> Binaries from the Compose GitHub repository may not display the version number properly. If you rely on `docker compose version`
+> in your development or CI processes, upgrade to Compose version 2.32.4.
 
 ### Bug fixes and enhancements
 

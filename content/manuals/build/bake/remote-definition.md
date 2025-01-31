@@ -91,7 +91,7 @@ execution context as named contexts.
 The following example defines the `docs` context as `./src/docs/content`,
 relative to the current working directory where Bake is run as a named context.
 
-```hcl
+```hcl {title=docker-bake.hcl}
 target "default" {
   contexts = {
     docs = "cwd://src/docs/content"
@@ -157,7 +157,9 @@ docker buildx bake -f bake.hcl -f cwd://local.hcl "https://github.com/crazy-max/
       },
       "target": "build",
       "output": [
-        "type=cacheonly"
+        {
+          "type": "cacheonly"
+        }
       ]
     }
   }

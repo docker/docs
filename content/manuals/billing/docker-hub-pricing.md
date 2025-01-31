@@ -10,7 +10,7 @@ to help you understand your storage consumption and costs.
 
 > [!NOTE]
 >
-> Docker Hub plan limits will take effect on March 1, 2025. No charge on Docker Hub image pulls
+> Docker Hub plan limits will take effect on March 1, 2025. No charges on Docker Hub pulls
 or storage will be incurred from December 10, 2024 and February 28, 2025.
 
 ## How storage is measured
@@ -23,7 +23,7 @@ Docker Hub measures storage using:
 
 ## How storage is calculated
 
-Docker subscription plans include a specific amount of allocated
+[Docker subscription plans](/manuals/subscription/details.md) include a specific amount of allocated
 private repository storage:
 
 - Personal plan: Includes up to 2GB of storage.
@@ -31,10 +31,10 @@ private repository storage:
 - Team plan: Includes up to 50GB of storage.
 - Business plan: Includes up to 500GB of storage.
 
-Docker Hub determines additional charges based on your average monthly usage of private repository storage.
+Docker Hub determines additional charges based on your average monthly usage of private repository storage. If a repository is private at any point within an hour, it is counted as private for the full hour.
 
 If you go over your allocated private repository storage, you will incur overage
-costs. To calculate overage costs the included storage for your plan is subtracted from your average monthly
+costs. To calculate overage costs, the included storage for your plan is subtracted from your average monthly
 usage.
 
 ## Docker Hub consumption pricing
@@ -56,7 +56,7 @@ at the end of your billing cycle.
 
 ### Storage carryover
 
-If you pre-pay for storage, your purchased storage is valid for the entire subscription period. You can use it any time during that period, and any unused portion will roll over to the next month until the subscription period ends.
+If you pre-pay for storage, your purchased storage is valid for your entire subscription period. You can use it any time during that period, and any unused portion will roll over to the next month until the subscription period ends.
 
 In the following example, a customer with an annual Business plan pre-pays for 500GB of storage for the year. Their plan includes a base allocation of 500GB of storage per month.
 - In January, they use 510 GB-month, exceed their base allocation, and use 10GB from their pre-paid storage. Their remaining pre-paid
@@ -68,7 +68,7 @@ storage is 490GB.
 |---------------------------------|----------|----------|---------|
 | Included GB-month	              | 500	     | 500      | 500     |
 | Used storage in month	          | 510	     | 450	    | 600     |
-| Overage in GB-month	          | 10	     | 0	    | 100     |
+| Overage in GB-month	            | 10	     | 0	      | 100     |
 | Remaining pre-purchased storage |	490	     | 490	    | 390     |
 
 At the end of March, the customer has 390GB of pre-purchased storage left to use for the rest of the year.

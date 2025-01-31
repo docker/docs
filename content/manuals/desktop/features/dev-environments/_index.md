@@ -8,11 +8,9 @@ aliases:
 - /desktop/dev-environments/
 ---
 
-{{< include "dev-envs-changing.md" >}}
+{{% include "dev-envs-changing.md" %}}
 
-{{% experimental title="Beta" %}}
-The Dev Environments feature is currently in [Beta](/manuals/release-lifecycle.md#beta). 
-{{% /experimental %}}
+{{< summary-bar feature_name="Dev Environments" >}}
 
 Dev Environments let you create a configurable developer environment with all the code and tools you need to quickly get up and running. 
 

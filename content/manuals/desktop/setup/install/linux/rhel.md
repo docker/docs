@@ -93,7 +93,7 @@ To install Docker Desktop on RHEL:
    $ sudo dnf config-manager --add-repo {{% param "download-url-base" %}}/docker-ce.repo
    ```
 
-2. Download the latest [RPM package](https://desktop.docker.com/linux/main/amd64/docker-desktop-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64).
+2. Download the latest [RPM package](https://desktop.docker.com/linux/main/amd64/docker-desktop-x86_64-rhel.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64).
 
 3. Install the package with dnf as follows:
 
@@ -113,7 +113,7 @@ The post-install script:
 
 ## Launch Docker Desktop
 
-{{< include "desktop-linux-launch.md" >}}
+{{% include "desktop-linux-launch.md" %}}
 
 > [!IMPORTANT]
 >

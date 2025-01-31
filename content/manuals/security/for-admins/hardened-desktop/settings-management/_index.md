@@ -2,6 +2,7 @@
 description: Understand how Settings Management works, who it is for, and what the
   benefits are
 keywords: Settings Management, rootless, docker desktop, hardened desktop
+tags: [admin]
 title: What is Settings Management?
 linkTitle: Settings Management
 aliases:
@@ -9,9 +10,7 @@ aliases:
 weight: 10
 ---
 
-> [!NOTE]
->
-> Settings Management is available to Docker Business customers only.
+{{< summary-bar feature_name="Hardened Docker Desktop" >}}
 
 Settings Management helps you control key Docker Desktop settings, like proxies and network configurations, on your developers' machines within your organization.
 

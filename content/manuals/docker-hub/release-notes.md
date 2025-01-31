@@ -15,17 +15,11 @@ known issues for each Docker Hub release.
 
 Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projects/51/views/1?filterQuery=) to see what's coming next.
 
-## 2024-11-11
+## 2024-12-12
 
 ### New
 
-- [Personal access tokens](/security/for-developers/access-tokens/) (PATs) now support expiration dates.
-
-## 2024-10-15
-
-### New
-
-- Beta: You can now create [organization access tokens](/security/for-admins/access-tokens/) (OATs) to enhance security for organizations and streamline access management for organizations.
+- The AI Catalog in Docker Hub is available directly through Docker Desktop.
 
 ## 2024-03-23
 
@@ -205,7 +199,7 @@ Docker introduces Hub Vulnerability Scanning which enables you to automatically 
 
 * Docker has announced a new, per-seat pricing model to accelerate developer workflows for cloud-native development. The previous private repository/concurrent autobuild-based plans have been replaced with new **Pro** and **Team** plans that include unlimited private repositories. For more information, see [Docker subscription](../subscription/_index.md).
 
-* Docker has enabled download rate limits for downloads and pull requests on Docker Hub. This caps the number of objects that users can download within a specified timeframe. For more information, see [Download rate limit](download-rate-limit.md).
+* Docker has enabled download rate limits for downloads and pull requests on Docker Hub. This caps the number of objects that users can download within a specified timeframe. For more information, see [Usage and limits](/manuals/docker-hub/usage/_index.md).
 
 ## 2019-11-04
 

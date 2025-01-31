@@ -35,20 +35,3 @@ apiPropReq:
   other: Required
 apiPropDesc:
   other: Description
-
-## component names
-
-buildx:
-  other: Buildx
-buildkit:
-  other: BuildKit
-engine:
-  other: Docker Engine
-api:
-  other: Engine API
-desktop:
-  other: Docker Desktop
-compose:
-  other: Docker Compose
-scout:
-  other: Docker Scout
