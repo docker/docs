@@ -38,7 +38,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 - Installing Docker Desktop via the PKG installer is now generally available.
 - Enforcing sign-in via configuration profiles is now generally available.
 - Docker Compose, Docker Scout, the Docker CLI, and Ask Gordon can now be updated independently of Docker Desktop and without a full restart (Beta).
-- The new [`update` command](/reference/cli/desktop/update.md) has been added to the Docker Desktop CLI (Mac only).
+- The new [`update` command](/reference/cli/docker/desktop/update.md) has been added to the Docker Desktop CLI (Mac only).
 - [Bake](/manuals//build/bake/_index.md) is now GA, with support for entitlements and composable attributes.
 - You can now create [multi-node Kubernetes clusters](/manuals/desktop/settings-and-maintenance/settings.md#kubernetes) in Docker Desktop.
 - [Ask Gordon](/manuals/desktop/features/gordon.md) is more widely available. It is still in Beta.
