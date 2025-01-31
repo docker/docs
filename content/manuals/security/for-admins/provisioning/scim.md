@@ -240,12 +240,12 @@ See the documentation for your IdP for additional details:
 
 ## Disable SCIM
 
+{{< summary-bar feature_name="Admin console early access" >}}
+
 If SCIM is disabled, any user provisioned through SCIM will remain in the organization. Future changes for your users will not sync from your IdP. User de-provisioning is only possible when manually removing the user from the organization.
 
 {{< tabs >}}
 {{< tab name="Admin Console" >}}
-
-{{< summary-bar feature_name="Admin console early access" >}}
 
 {{% admin-scim-disable product="admin" %}}
 
