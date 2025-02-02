@@ -59,6 +59,14 @@ Within the `web` container, your connection string to `db` would look like
 `postgres://db:5432`, and from the host machine, the connection string would
 look like `postgres://{DOCKER_IP}:8001` for example `postgres://localhost:8001` if your container is running locally.
 
+## Container to container communication
+
+Those familiar with using `http://localhost:3000` to reference a local development URL, use `http://servicename:3000` instead when using docker compose.
+
+Example: In local development you have a frontend node app running at `http://localhost:3000` which references a backend api running at `http://localhost:8080/api`.  In Docker networking, you would replace the node app api reference to the backend api with `http://apiservice:8080/api`. Similarly, the frontend app would be referenced by service name `http://myapp:3000`
+
+This DNS resolution only works between compose services. For example, if you would like to view your node frontend app in your browser running at container port 80 and host port 3000, you would still need to publish the port from the container to the host then you can view the node app at `http://localhost:3000`.
+
 ## Update containers on the network
 
 If you make a configuration change to a service and run `docker compose up` to update it, the old container is removed and the new one joins the network under a different IP address but the same name. Running containers can look up that name and connect to the new address, but the old address stops working.
@@ -178,7 +186,7 @@ networks:
 
 Instead of attempting to create a network called `[projectname]_default`, Compose looks for a network called `my-pre-existing-network` and connects your app's containers to it.
 
-## Further reference information 
+## Further reference information
 
 For full details of the network configuration options available, see the following references:
 
