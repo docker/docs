@@ -58,6 +58,11 @@ versions:
 Docker Engine for Ubuntu is compatible with x86_64 (or amd64), armhf, arm64,
 s390x, and ppc64le (ppc64el) architectures.
 
+> [!NOTE]
+> 
+> Installation on Ubuntu derivative distributions, such as Linux Mint, is not officially
+> supported (though it may work).
+
 ### Uninstall old versions
 
 Before you can install Docker Engine, you need to uninstall any conflicting packages.
@@ -127,15 +132,10 @@ Docker from the repository.
    # Add the repository to Apt sources:
    echo \
      "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] {{% param "download-url-base" %}} \
-     $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+     $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
      sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
    sudo apt-get update
    ```
-
-   > [!NOTE]
-   >
-   > If you use an Ubuntu derivative distribution, such as Linux Mint,
-   > you may need to use `UBUNTU_CODENAME` instead of `VERSION_CODENAME`.
 
 2. Install the Docker packages.
 
@@ -184,7 +184,7 @@ Docker from the repository.
 
 You have now successfully installed and started Docker Engine.
 
-{{< include "root-errors.md" >}}
+{{% include "root-errors.md" %}}
 
 #### Upgrade Docker Engine
 
@@ -240,14 +240,14 @@ download a new file each time you want to upgrade Docker Engine.
 
 You have now successfully installed and started Docker Engine.
 
-{{< include "root-errors.md" >}}
+{{% include "root-errors.md" %}}
 
 #### Upgrade Docker Engine
 
 To upgrade Docker Engine, download the newer package files and repeat the
 [installation procedure](#install-from-a-package), pointing to the new files.
 
-{{< include "install-script.md" >}}
+{{% include "install-script.md" %}}
 
 ## Uninstall Docker Engine
 

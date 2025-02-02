@@ -46,7 +46,7 @@ To install Docker Desktop successfully, you must meet the [general system requir
 
 ## Launch Docker Desktop
 
-{{< include "desktop-linux-launch.md" >}}
+{{% include "desktop-linux-launch.md" %}}
 
 ## Next steps
 

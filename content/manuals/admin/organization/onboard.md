@@ -13,8 +13,6 @@ aliases:
 
 {{< summary-bar feature_name="Admin orgs" >}}
 
-{{< include "admin-early-access.md" >}}
-
 Learn how to onboard your organization using Docker Hub or the Docker Admin Console.
 
 Onboarding your organization lets administrators gain visibility into user activity and enforce security settings. In addition, members of your organization receive increased pull limits and other organization wide benefits. For more details, see [Docker subscriptions and features](../../subscription/details.md).
@@ -88,8 +86,7 @@ By default, members of your organization can use Docker Desktop without signing
 in. When users don’t sign in as a member of your organization, they don’t
 receive the [benefits of your organization’s subscription](../../subscription/details.md) and they can circumvent [Docker’s security features](/security/for-admins/hardened-desktop/).
 
-There are multiple ways you can enforce sign-in, depending on your company's
-set up and preferences:
+There are multiple ways you can enforce sign-in, depending on your company's setup and preferences:
 - [Registry key method (Windows only)](/security/for-admins/enforce-sign-in/methods/#registry-key-method-windows-only)
 - [`.plist` method (Mac only)](/security/for-admins/enforce-sign-in/methods/#plist-method-mac-only)
 - [`registry.json` method (All)](/security/for-admins/enforce-sign-in/methods/#registryjson-method-all)

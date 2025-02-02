@@ -10,8 +10,6 @@ You can manage users at the company-level in the Docker Admin Console.
 
 {{% admin-users product="admin" layer="company" %}}
 
-{{< include "admin-early-access.md" >}}
-
 ## Manage members on a team
 
 Use Docker Hub to add a member to a team or remove a member from a team. For more details, see [Manage members in Docker Hub](../organization/members.md#manage-members-on-a-team).

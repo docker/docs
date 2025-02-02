@@ -1,16 +1,5 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<script type="module">
-const pagefind = await import("/pagefind/pagefind.js");
-await pagefind.options({
-  ranking: {
-    termFrequency: 0.2,
-    pageLength: 0.75,
-    termSaturation: 1.4,
-    termSimilarity: 6.0,
-  },
-});
-</script>
 {{ partial "meta.html" . }}
 {{- if hugo.IsProduction -}}
   <script
@@ -64,7 +53,6 @@ await pagefind.options({
 <script async src="https://widget.kapa.ai/kapa-widget.bundle.js"
 data-button-hide="true"
 data-font-family="Roboto Flex,sans-serif"
-data-modal-close-button-hide="true"
 data-modal-disclaimer-bg-color="#e5f2fc"
 data-modal-disclaimer-text-color="#086dd7"
 data-modal-disclaimer="This is a custom LLM for answering questions about Docker. Answers are based on the contents of the documentation. Rate the answers to let us know what you think!"

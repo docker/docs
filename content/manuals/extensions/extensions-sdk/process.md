@@ -42,7 +42,7 @@ Docker Desktop displays published extensions in the Extensions Marketplace. The 
 
 If you want your extension published in the Marketplace, read the [publish documentation](extensions/publish.md).
 
-{{< include "extensions-form.md" >}}
+{{% include "extensions-form.md" %}}
 
 ## What’s next?
 

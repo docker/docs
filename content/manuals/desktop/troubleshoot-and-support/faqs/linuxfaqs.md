@@ -6,6 +6,7 @@ linkTitle: Linux
 tags: [FAQ]
 aliases:
 - /desktop/linux/space/
+- /desktop/faqs/linuxfaqs/
 weight: 40
 ---
 

@@ -12,9 +12,9 @@ You can create a new company in the Docker Admin Console. Before you begin, you 
 - Be the owner of the organization you want to add to your company
 - Have a Docker Business subscription
 
-{{< include "admin-early-access.md" >}}
-
 ## Create a company
+
+{{< summary-bar feature_name="Admin console early access" >}}
 
 To create a new company:
 

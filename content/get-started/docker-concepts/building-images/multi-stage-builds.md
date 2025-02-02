@@ -325,9 +325,7 @@ Now that you have the project, you’re ready to create the `Dockerfile`.
     Your final image is just 428 MB, compared to the original build size of 880 MB.
 
 
-    By optimizing each stage and only including what's necessary, you were able to significantly reduce the   
-    overall image size while still achieving the same functionality. This not only improves performance but   
-    also makes your Docker images more lightweight, more secure, and easier to manage.
+    By optimizing each stage and only including what's necessary, you were able to significantly reduce the overall image size while still achieving the same functionality. This not only improves performance but also makes your Docker images more lightweight, more secure, and easier to manage.
 
 ## Additional resources
 

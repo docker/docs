@@ -17,6 +17,8 @@ This section describes how to create an organization. Before you begin:
 
 ## Create an organization
 
+{{< summary-bar feature_name="Admin console early access" >}}
+
 There are multiple ways to create an organization. You can either:
 - Create a new organization using the **Create Organization** option in Docker Hub
 - Convert an existing user account to an organization
@@ -53,8 +55,6 @@ You've now created an organization.
 {{< /tab >}}
 {{< tab name="Admin Console" >}}
 
-{{< include "admin-early-access.md" >}}
-
 To create an organization:
 
 1. Sign in to [Docker Home](https://app.docker.com/).
@@ -84,6 +84,8 @@ You've now created an organization.
 {{< /tabs >}}
 
 ## View an organization
+
+{{< summary-bar feature_name="Admin console early access" >}}
 
 {{< tabs >}}
 {{< tab name="Docker Hub" >}}
@@ -137,8 +139,6 @@ configure your organization.
 
 {{< /tab >}}
 {{< tab name="Admin Console" >}}
-
-{{< include "admin-early-access.md" >}}
 
 To view an organization in the Admin Console:
 

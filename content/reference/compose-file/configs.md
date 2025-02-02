@@ -7,7 +7,7 @@ aliases:
 weight: 50
 ---
 
-{{< include "compose/configs.md" >}}
+{{% include "compose/configs.md" %}}
 
 Services can only access configs when explicitly granted by a [`configs`](services.md#configs) attribute within the `services` top-level element.
 

@@ -23,14 +23,14 @@ Make sure you have completed the following before you begin:
 
 ## Step one: Create an SSO connection in Docker
 
+{{< summary-bar feature_name="Admin console early access" >}}
+
 >[!NOTE]
 >
 > Before creating an SSO connection in Docker, you must verify at least one domain.
 
 {{< tabs >}}
 {{< tab name="Admin Console" >}}
-
-{{< include "admin-early-access.md" >}}
 
 1. Sign in to the [Admin Console](https://admin.docker.com/).
 2. Select your organization or company from the **Choose profile** page. Note that when an organization is part of a company, you must select the company and configure the domain for the organization at the company level.
@@ -211,6 +211,10 @@ Enforcing SSO requires users to use SSO when signing into Docker. This centraliz
 
 Your users must now sign in to Docker with SSO.
 
+> [!NOTE]
+>
+> When SSO is enforced, [users can't use passwords to access the Docker CLI](/security/security-announcements/#deprecation-of-password-logins-on-cli-when-sso-enforced). Users must use a [personal access token](/manuals/security/for-admins/access-tokens.md) (PAT) for authentication to access the Docker CLI.
+
 ## More resources
 
 The following videos demonstrate how to enforce SSO.
@@ -223,3 +227,4 @@ The following videos demonstrate how to enforce SSO.
 
 - [Provision users](/manuals/security/for-admins/provisioning/_index.md)
 - [Enforce sign-in](../enforce-sign-in/_index.md)
+- [Create access tokens](/manuals/security/for-admins/access-tokens.md)

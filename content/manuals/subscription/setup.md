@@ -9,7 +9,7 @@ Docker subscriptions offer features and benefits to support both new and profess
 
 In this section, learn how to get started with a Docker subscription for individuals or for organizations. Before you begin, make sure you have a [Docker ID](../accounts/create-account.md).
 
-{{< include "tax-compliance.md" >}}
+{{% include "tax-compliance.md" %}}
 
 ## Set up a Docker subscription for a personal account
 

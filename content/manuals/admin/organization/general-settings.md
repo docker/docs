@@ -5,7 +5,7 @@ description: Learn how to manage settings for organizations using Docker Admin C
 keywords: organization, settings, Admin Console
 ---
 
-{{< include "admin-early-access.md" >}}
+{{< summary-bar feature_name="Admin console early access" >}}
 
 This section describes how to manage organization settings in the Docker Admin Console.
 

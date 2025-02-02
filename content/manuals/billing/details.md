@@ -9,7 +9,7 @@ You can update the billing information for your personal account or for an organ
 
 The billing information provided appears on all your billing invoices. The email address provided is where Docker sends all invoices and other [billing-related communication](#update-your-billing-invoice-email-address).
 
-{{< include "tax-compliance.md" >}}
+{{% include "tax-compliance.md" %}}
 
 ## Manage billing information
 
@@ -24,7 +24,9 @@ To update your billing information:
 2. Under Settings and administration, select **Billing**.
 3. Select **Billing information** from the left-hand navigation.
 4. On your billing information card, select **Change**.
-5. Update your billing contact and billing address information, then select **Update**.
+5. Update your billing contact and billing address information.
+6. Optional. To add or update a VAT ID, select the **I'm purchasing as a business** checkbox and enter your Tax ID.
+7. Select **Update**.
 
 {{< /tab >}}
 {{< tab name="Legacy Docker plan" >}}
@@ -35,7 +37,8 @@ To update your billing information:
 2. Select your avatar in the top-right corner.
 3. From the drop-down menu, select **Billing**.
 4. Select **Billing Address** and enter your updated billing information.
-5. Select **Submit**.
+5. Optional. To add or update a VAT ID, enter your **Tax ID/VAT**.
+6. Select **Submit**.
 
 {{< /tab >}}
 {{< /tabs >}}
@@ -55,7 +58,9 @@ To update your billing information:
 2. Under Settings and administration, select **Billing**.
 3. Select **Billing information** from the left-hand navigation.
 4. On your billing information card, select **Change**.
-5. Update your billing contact and billing address information, then select **Update**.
+5. Update your billing contact and billing address information.
+6. Optional. To add or update a VAT ID, select the **I'm purchasing as a business** checkbox and enter your Tax ID.
+7. Select **Update**.
 
 {{< /tab >}}
 {{< tab name="Legacy Docker plan" >}}
@@ -67,7 +72,7 @@ To update your billing information:
 3. From the drop-down menu select **Billing**.
 4. Select the organization that you want to change the payment method for.
 5. Select **Billing Address**.
-6. Enter your updated billing information.
+6. Optional. To add or update a VAT ID, enter your **Tax ID/VAT**.
 7. Select **Submit**.
 
 {{< /tab >}}

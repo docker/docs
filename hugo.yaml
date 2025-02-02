@@ -113,10 +113,10 @@ params:
   # Latest version of the Docker Engine API
   latest_engine_api_version: "1.47"
   # Latest version of Docker Engine
-  docker_ce_version: "27.5.0"
+  docker_ce_version: "27.5.1"
   # Previous version of the Docker Engine
   # (Used to show e.g., "latest" and "latest"-1 in engine install examples
-  docker_ce_version_prev: "27.4.1"
+  docker_ce_version_prev: "27.5.0"
   # Latest Docker Compose version
   compose_version: "v2.32.4"
   # Latest BuildKit version
@@ -126,17 +126,6 @@ params:
   example_go_version: "1.23"
   example_alpine_version: "3.21"
   example_node_version: "20"
-
-  # Minimum version thresholds (used together with the "introduced" shortcode
-  # See layouts/shortcodes/introduced.html
-  min_version_thresholds:
-    buildx: "0.10.0"
-    buildkit: "0.11.0"
-    engine: "24.0.0"
-    api: "1.41"
-    desktop: "4.20.0"
-    compose: "2.14.0"
-    scout: "1.0.0"
 
 menus:
   # Site header menu
