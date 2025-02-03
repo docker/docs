@@ -12,7 +12,7 @@ aliases:
 {{< include "compose/watch.md" >}}
 
 `watch` adheres to the following file path rules:
-* All paths are relative to the project directory, apart from ignore path
+* All paths are relative to the project directory, apart from ignore file patterns
 * Directories are watched recursively
 * Glob patterns aren't supported
 * Rules from `.dockerignore` apply
@@ -116,7 +116,7 @@ For `path: ./app/html` and a change to `./app/html/index.html`:
 
 ### `ignore`
 
-The `ignore` paths are relative to the `path` defined in the same `watch` rule, not to the project directory. In the following Example  1, the ignore path would be relative to the `./web` directory specified in the `path` attribute.
+The `ignore` patterns are relative to the `path` defined in the current `watch` action, not to the project directory. In the following Example  1, the ignore path would be relative to the `./web` directory specified in the `path` attribute.
 
 ## Example 1
 
