@@ -23,13 +23,13 @@ The following pull usage and limits apply based on your subscription, subject to
 fair use:
 
 
-| User type                | Pulls per month | Pull rate limit per hour |
-|--------------------------|-----------------|--------------------------|
-| Business (authenticated) | 1M              | Unlimited                |
-| Team (authenticated)     | 100K            | Unlimited                |
-| Pro (authenticated)      | 25K             | Unlimited                |
-| Personal (authenticated) | Not applicable  | 40                       |
-| Unauthenticated Users    | Not applicable  | 10 per IP address        |
+| User type                | Pulls per month | Pull rate limit per hour               |
+|--------------------------|-----------------|----------------------------------------|
+| Business (authenticated) | 1M              | Unlimited                              |
+| Team (authenticated)     | 100K            | Unlimited                              |
+| Pro (authenticated)      | 25K             | Unlimited                              |
+| Personal (authenticated) | Not applicable  | 40                                     |
+| Unauthenticated Users    | Not applicable  | 10 per IPv4 address or IPv6 /64 subnet |
 
 ## Pull definition
 
@@ -121,6 +121,13 @@ for information on authentication.
 
 If you're using any third-party platforms, follow your provider’s instructions on using registry authentication.
 
+> [!NOTE]
+>
+> When pulling images via a third-party platform, the platform may use the same
+> IPv4 address or IPv6 /64 subnet to pull images for multiple users. Even if you
+> are authenticated, pulls attributed to a single IPv4 address or IPv6 /64 subnet
+> may cause [abuse rate limiting](./_index.md#abuse-rate-limit).
+
 - [Artifactory](https://www.jfrog.com/confluence/display/JFROG/Advanced+Settings#AdvancedSettings-RemoteCredentials)
 - [AWS CodeBuild](https://aws.amazon.com/blogs/devops/how-to-use-docker-images-from-a-private-registry-in-aws-codebuild-for-your-build-environment/)
 - [AWS ECS/Fargate](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/private-auth.html)
@@ -152,7 +159,6 @@ separated file with the following detailed information.
 | `digest`             | The unique image digest for the image.                                                                                                                                                                             | This helps in identifying the image.                                                                                                                                                |
 | `version_checks`     | The number of version checks accumulated for the date and hour of each image repository. Depending on the client, a pull can do a version check to verify the existence of an image or tag without downloading it. | This helps identify the frequency of version checks, which you can use to analyze usage trends and potential unexpected behaviors.                                                  |
 | `pulls`              | The number of pulls accumulated for the date and hour of each image repository.                                                                                                                                            | This helps identify the frequency of repository pulls, which you can use to analyze usage trends and potential unexpected behaviors.                                                |
-
 
 ## View hourly pull rate and limit
 
@@ -216,3 +222,4 @@ To view your current pull rate and limit:
    organization. It could also mean that the user you are pulling as is part of a
    paid Docker plan. Pulling that image won't count toward pull rate limits if you
    don't see these headers.
+

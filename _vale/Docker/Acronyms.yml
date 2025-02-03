@@ -75,6 +75,7 @@ exceptions:
   - LLDB
   - LTS
   - MAC
+  - MCP
   - MDM
   - MDN
   - MSI
