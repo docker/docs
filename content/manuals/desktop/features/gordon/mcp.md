@@ -12,9 +12,9 @@ Gordon, along with other MCP clients like Claude Desktop, can interact with MCP 
 
 ## Simple MCP server usage with Gordon
 
-When you run the `docker ai` command in your terminal to ask a question, Gordon will look for a `gordon-mcp.yml` file **in your working directry** for a list of MCP servers that should be used when in that context. The `gordon-mcp.yml` file is a Docker Compose file that configures MCP servers as Compose services for Gordon to access.
+When you run the `docker ai` command in your terminal to ask a question, Gordon looks for a `gordon-mcp.yml` file in your working directory for a list of MCP servers that should be used when in that context. The `gordon-mcp.yml` file is a Docker Compose file that configures MCP servers as Compose services for Gordon to access.
 
-As a minimal example, let’s take a look at how you can use the [mcp-time server](https://hub.docker.com/r/mcp/time) to provide temporal capabilities to Gordon. (Source code and documentation is available [here](https://github.com/modelcontextprotocol/servers/tree/main/src/time)).
+The following minimal example shows how you can use the [mcp-time server](https://hub.docker.com/r/mcp/time) to provide temporal capabilities to Gordon. For more information, you can check out the [source code and documentation](https://github.com/modelcontextprotocol/servers/tree/main/src/time).
 
 1. Create the `gordon-mcp.yml` file and add the time server:
     
@@ -40,7 +40,7 @@ As you can see, Gordon found the MCP time server and called its tool when needed
 
 ## Advanced usage
 
-Some MCP servers need access to your filesystem or system environment variables. Docker Compose can help with this. Since `gordon-mcp.yml` is a Compose file you can add bind mounts using the regular Docker Compose syntax, which will make your filesystem resources available to the container:
+Some MCP servers need access to your filesystem or system environment variables. Docker Compose can help with this. Since `gordon-mcp.yml` is a Compose file you can add bind mounts using the regular Docker Compose syntax, which makes your filesystem resources available to the container:
 
 ```yaml
 services:
@@ -52,9 +52,9 @@ services:
       - .:/rootfs
 ```
 
-This `gordon-mcp.yml` file adds filesystem access capabilities to Gordon, since everything runs inside a container Gordon will **only have access to the directories you specify**.
+The `gordon-mcp.yml` file adds filesystem access capabilities to Gordon and since everything runs inside a container Gordon only has access to the directories you specify.
 
-Gordon can handle any number of MCP servers, for example we can give Gordon access to the internet with the `mcp/fetch` server:
+Gordon can handle any number of MCP servers. For example, if you give Gordon access to the internet with the `mcp/fetch` server:
 
 ```yaml
 services:
@@ -68,7 +68,7 @@ services:
       - .:/rootfs
 ```
 
-We can now combine these and ask things like
+You can now ask things like:
 
 ```bash
 $ docker ai can you fetch rumpl.dev and write the summary to a file test.txt 
@@ -100,16 +100,16 @@ The website rumpl.dev features a variety of blog posts and articles authored by 
 
 Now that you’ve learned how to use MCP servers with Gordon, here are a few ways you can get started:
 
-- **Experiment**: Try integrating one or more of the tested MCP servers into your `gordon-mcp.yml` file and explore their capabilities.
-1. **Explore the ecosystem**: Check out the [reference implementations on GitHub](https://github.com/modelcontextprotocol/servers/) or browse the [Docker Hub MCP namespace](https://hub.docker.com/u/mcp) for additional servers that might suit your needs.
-2. **Build your own**: If none of the existing servers meet your needs, or you’re curious about exploring how they work in more detail, consider developing a custom MCP server. Use the [MCP specification](https://www.anthropic.com/news/model-context-protocol) as a guide.
-3. **Share your feedback**: If you discover new servers that work well with Gordon or encounter issues with existing ones, [share your findings to help improve the ecosystem.](https://docker.qualtrics.com/jfe/form/SV_9tT3kdgXfAa6cWa)
+- Experiment: Try integrating one or more of the tested MCP servers into your `gordon-mcp.yml` file and explore their capabilities.
+1. Explore the ecosystem: Check out the [reference implementations on GitHub](https://github.com/modelcontextprotocol/servers/) or browse the [Docker Hub MCP namespace](https://hub.docker.com/u/mcp) for additional servers that might suit your needs.
+2. Build your own: If none of the existing servers meet your needs, or you’re curious about exploring how they work in more detail, consider developing a custom MCP server. Use the [MCP specification](https://www.anthropic.com/news/model-context-protocol) as a guide.
+3. Share your feedback: If you discover new servers that work well with Gordon or encounter issues with existing ones, [share your findings to help improve the ecosystem.](https://docker.qualtrics.com/jfe/form/SV_9tT3kdgXfAa6cWa)
 
-With MCP support, Gordon offers powerful extensibility and flexibility to meet your specific use cases. Whether you’re adding temporal awareness, file management, or internet access, the possibilities are endless.
+With MCP support, Gordon offers powerful extensibility and flexibility to meet your specific use cases whether you’re adding temporal awareness, file management, or internet access.
 
 ### List of known working MCP Servers
 
-These are the MCP servers that we have tested successfully with Gordon
+These are the MCP servers that have been tested successfully with Gordon:
 
 - `mcp/time`
 - `mcp/fetch`
@@ -121,7 +121,7 @@ These are the MCP servers that we have tested successfully with Gordon
 
 ### List of untested MCP servers
 
-These are the MCP servers that were not tested but should work if given the appropriate API tokens
+These are the MCP servers that were not tested but should work if given the appropriate API tokens:
 
 - `mcp/brave-search`
 - `mcp/gdrive`
@@ -134,7 +134,7 @@ These are the MCP servers that were not tested but should work if given the appr
 
 ### List of MCP servers that don’t work with Gordon
 
-These are the MCP servers that are currently unsupported
+These are the MCP servers that are currently unsupported:
 
 - `mcp/sequentialthinking` - The tool description is too long
 - `mcp/puppeteer` - Puppeteer sends back images and Gordon doesn’t know how to handle them, it only handles text responses from tools
