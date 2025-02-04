@@ -35,7 +35,7 @@ Keep the following things in mind:
 ## Options
 
 The following table describes the driver-specific options that you can pass to
-`--option` when creating a network using the `macvlan` driver.
+`--opt` when creating a network using the `macvlan` driver.
 
 | Option         | Default  | Description                                                                   |
 | -------------- | -------- | ----------------------------------------------------------------------------- |
