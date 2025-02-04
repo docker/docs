@@ -7,6 +7,8 @@ params:
     badge:
       color: blue
       text: Beta
+aliases:
+ - /desktop/features/gordon/
 ---
 
 {{< summary-bar feature_name="Ask Gordon" >}}
