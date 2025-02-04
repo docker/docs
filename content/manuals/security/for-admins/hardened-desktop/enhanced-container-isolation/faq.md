@@ -93,7 +93,7 @@ platforms supported by Docker Desktop except Windows with WSL 2.
 Prior to Docker Desktop 4.38, ECI did not protect the Kubernetes cluster
 integrated in Docker Desktop.
 
-Since Docker Desktop 4.38, ECI protects the integreated Kubernetes cluster
+Since Docker Desktop 4.38, ECI protects the integrated Kubernetes cluster
 when using the new **kind** provisioner (see [Deploy On Kubernetes](/manuals/desktop/features/kubernetes.md)).
 In this case, each node in the multi-node Kubernetes cluster is actually an ECI
 protected container. With ECI disabled, each node in the Kubernetes cluster is
