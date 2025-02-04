@@ -174,7 +174,7 @@ examples use `localhost`, but any hostname would work.
 > for example: `http:/v{{% param "latest_engine_api_version" %}}/containers/1c6594faf5/start`.
 
 {{< /tab >}}
-{{< /tabs >}}
+{{< /tabs >}} 
 
 For more examples, take a look at the [SDK examples](examples.md).
 
