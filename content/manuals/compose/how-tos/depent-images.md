@@ -115,7 +115,7 @@ and to orchestrate build execution in the most efficient way.
 
 To enable this feature, run Compose with the `COMPOSE_BAKE=true` variable set in your environment.
 
-```
+```console
 $ COMPOSE_BAKE=true docker compose build
 [+] Building 0.0s (0/1)                                                         
  => [internal] load local bake definitions                                 0.0s
