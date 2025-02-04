@@ -118,6 +118,28 @@ the unused contexts.
 Illustrative examples of how this is used in Buildx can be found
 [here](https://github.com/docker/buildx/blob/master/docs/reference/buildx_build.md#-additional-build-contexts---build-context).
 
+`additional_contexts` can also refer to an image built by another service.
+This allows a service image to be built using another service image as a base image, and to share
+layers between service images.
+
+```yaml
+services:
+ base:
+  build:
+    context: .
+    dockerfile_inline: |
+      FROM alpine
+      RUN ...
+ base:
+  build:
+    context: .
+    dockerfile_inline: |
+      FROM base # image built for service base
+      RUN ...
+    additional_contexts:
+      base: service:base
+```
+
 ### `args`
 
 `args` define build arguments, that is Dockerfile `ARG` values.
