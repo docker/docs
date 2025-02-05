@@ -103,7 +103,7 @@ flag.
 ## Options
 
 The following table describes the driver-specific options that you can pass to
-`--option` when creating a custom network using the `bridge` driver.
+`--opt` when creating a custom network using the `bridge` driver.
 
 | Option                                                                                          | Default                     | Description                                                                                    |
 |-------------------------------------------------------------------------------------------------|-----------------------------|------------------------------------------------------------------------------------------------|
