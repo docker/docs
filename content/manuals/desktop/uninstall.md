@@ -80,6 +80,13 @@ $ rm -rf ~/Library/Group\ Containers/group.com.docker
 $ rm -rf ~/.docker
 ```
 
+With Docker Desktop version 4.36 and earlier, the following files can also be left on the file system. You can remove these with administrative privileges:
+
+```console
+/Library/PrivilegedHelperTools/com.docker.vmnetd
+/Library/PrivilegedHelperTools/com.docker.socket
+```
+
 You can also move the Docker application to the trash. 
 
 {{< /tab >}}
