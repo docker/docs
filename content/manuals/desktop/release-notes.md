@@ -65,6 +65,10 @@ Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projec
 - Fixed a bug in Enhanced Container Isolation when mounting the Docker socket into a container, and then creating Docker containers with bind-mounts from within that container.
 - Fixed an issue that caused a discrepancy between the GUI and the CLI, the former forcing the `0.0.0.0` HostIP in port-mappings. This caused default binding IPs configured through Engine's `ip` flag, or through the bridge option `com.docker.network.bridge.host_binding_ipv4`, to not be used.
 - Fixed a bug where the `pac` setting was ignored in `admin-settings.json`.
+- Build UI:
+  - Adds progress status when importing a build.
+  - Fixed a bug where users were unable to import builds.
+  - Fixed a bug where some builders using SSH endpoints were not skipped.
 
 #### For Mac
 
