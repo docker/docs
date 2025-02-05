@@ -152,6 +152,7 @@ Each of these can be set to one of the gateway modes:
 - `nat`
 - `nat-unprotected`
 - `routed`
+- `isolated`
 
 The default is `nat`, NAT and masquerading rules are set up for each
 published container port. Packets leaving the host will use a host address.
@@ -192,6 +193,14 @@ mode, only addresses `0.0.0.0` or `::` should be used, and a host port
 should not be given. If a specific address or port is given, it will
 have no effect on the published port and a warning message will be
 logged.
+
+Mode `isolated` can only be used when the network is also created with
+CLI flag `--internal`, or equivalent. An address is normally assigned to the
+bridge device in an `internal` network. So, processes on the docker host can
+access the network, and containers in the network can access host services
+listening on that bridge address (including services listening on "any" host
+address, `0.0.0.0` or `::`). No address is assigned to the bridge when the
+network is created with gateway mode `isolated`.
 
 #### Example
 
