@@ -3,9 +3,9 @@
 
 # For more details, see https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
 
-/content/manuals/build/ @crazy-max @dvdksn
+/content/manuals/build/ @crazy-max @aevesdocker
 
-/content/manuals/build-cloud/ @dvdksn
+/content/manuals/build-cloud/ @crazy-max @aevesdocker 
 
 /content/manuals/compose/ @aevesdocker
 
@@ -19,15 +19,15 @@
 
 /content/manuals/docker-hub/ @craig-osterhout
 
-/content/manuals/engine/ @dvdksn
+/content/manuals/engine/ @thaJeztah @aevesdocker 
 
-/content/reference/api/engine/ @dvdksn
+/content/reference/api/engine/ @thaJeztah @aevesdocker 
 
-/content/reference/cli/ @dvdksn
+/content/reference/cli/ @thaJeztah @aevesdocker 
 
 /content/manuals/subscription/ @sarahsanders-docker
 
-/content/manuals/security/ @aevesdocker
+/content/manuals/security/ @aevesdocker @sarahsanders-docker
 
 /content/manuals/trusted-content/ @craig-osterhout
 
@@ -41,6 +41,4 @@
 
 /content/manuals/accounts/ @sarahsanders-docker
 
-/hack @dvdksn
-
-/_vendor @dvdksn
+/_vendor @sarahsanders-docker
