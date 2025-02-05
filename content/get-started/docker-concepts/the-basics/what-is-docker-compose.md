@@ -117,8 +117,6 @@ Since this application was started using Docker Compose, it's easy to tear it al
     >
     > ```console
     > docker compose down --volumes
-    > ```
-    > ```console
     > [+] Running 1/0
     > ✔ Volume todo-list-app_todo-mysql-data  Removed
     > ```
