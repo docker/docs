@@ -32,6 +32,7 @@ This includes:
 - Checking for updates
 - [In-app diagnostics](/manuals/desktop/troubleshoot-and-support/troubleshoot/_index.md#diagnose-from-the-app) (including the [Self-diagnose tool](/manuals/desktop/troubleshoot-and-support/troubleshoot/_index.md#diagnose-from-the-app))
 - Sending usage statistics
+- When `networkMode` is set to `mirrored`
 
 ### How do I connect to the remote Docker Engine API?
 
