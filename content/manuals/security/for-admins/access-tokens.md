@@ -20,7 +20,6 @@ params:
 > OATs are also currently incompatible with the following services:
 >
 > - Docker Build Cloud
-> - Docker Scout
 > - Docker REST APIs
 >
 > If you use Docker Desktop or one of these services, you must use personal access tokens instead.
