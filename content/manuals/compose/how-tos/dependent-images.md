@@ -5,6 +5,8 @@ title: Build dependent images
 weight: 50
 ---
 
+{{< summary-bar feature_name="Compose dependent images" >}}
+
 To reduce push/pull time and image weight, a common practice for Compose applications is to have services
 share base layers as much as possible. You will typically select the same operating system base image for
 all services. But you also can get one step further sharing image layers when your images share the same
@@ -18,7 +20,6 @@ image and install system package `openssl`.
 
 The recommended approach is to group the shared declaration in a single Dockerfile, and use multi-stage features
 so that service images are built from this shared declaration.
-
 
 Dockerfile:
 
@@ -53,7 +54,6 @@ A popular pattern is to reuse a service image as a base image in another service
 As Compose does not parse the Dockerfile, it can't automatically detect this dependency 
 between services to correctly order the build execution.
 
-
 a.Dockerfile:
 
 ```dockerfile
@@ -82,7 +82,6 @@ services:
        dockerfile: b.Dockerfile
 ```
 
-
 Legacy Docker Compose v1 used to build images sequentially, which made this pattern usable
 out of the box. Compose v2 uses BuildKit to optimise builds and build images in parallel 
 and requires an explicit declaration.
@@ -106,7 +105,6 @@ services:
          # `FROM service_a` will be resolved as a dependency on service a which has to be built first
          service_a: "service:a"  
 ```
-
 
 ## Build with Bake
 
