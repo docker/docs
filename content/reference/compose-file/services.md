@@ -1005,6 +1005,29 @@ configuration, which means for Linux `/etc/hosts` get extra lines:
 ::1             myhostv6
 ```
 
+### `gpus`
+
+{{< summary-bar feature_name="Compose gpus" >}}
+
+`gpus` specifies GPU devices to be allocated for container usage. This is equivalent to a [device request](deploy.md#devices) with
+an implicit `gpu` capability.
+
+```yaml
+services:
+  model:
+    gpus: 
+      - driver: 3dfx
+        count: 2
+```
+
+`gpus` also can be set as string `all` to allocate all available GPU devices to the container.
+
+```yaml
+services:
+  model:
+    gpus: all
+```
+
 ### `group_add`
 
 `group_add` specifies additional groups, by name or number, which the user inside the container must be a member of.

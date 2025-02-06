@@ -107,8 +107,8 @@ While these types are modeled in a Compose file as a sequence, they have special
 | Attribute   | Unique key               |
 |-------------|--------------------------|
 | volumes     |  target                  |
-| secrets     |  source                  |
-| configs     |  source                  |
+| secrets     |  target                  |
+| configs     |  target                  |
 | ports       |  {ip, target, published, protocol}   |
 
 When merging Compose files, Compose appends new entries that do not violate a uniqueness constraint and merge entries that share a unique key.
