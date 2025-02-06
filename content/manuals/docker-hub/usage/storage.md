@@ -17,6 +17,8 @@ The following storage and repository limits apply based on your subscription, su
 | Team     | Unlimited           | Unlimited                 | Unlimited                  | Up to 50 GB                |
 | Business | Unlimited           | Unlimited                 | Unlimited                  | Up to 500 GB               |
 
+Personal plans exceeding 2 GB of storage will be blocked from pushing and pulling content from their private repository. To unblock, delete unused content to stay within the 2 GB limit or upgrade to a higher plan.
+
 Any storage usage beyond the included amounts in each paid subscription tier
 will be charged at an on-demand rate. For more details about storage
 calcultations and billing, see [Docker Hub storage
