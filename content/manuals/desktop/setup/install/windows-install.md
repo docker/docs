@@ -7,6 +7,11 @@ keywords: docker for windows, docker windows, docker desktop for windows, docker
 title: Install Docker Desktop on Windows
 linkTitle: Windows
 weight: 30
+params:
+  sidebar:
+    badge:
+      color: amber
+      text: Updated
 aliases:
 - /desktop/windows/install/
 - /docker-ee-for-windows/install/

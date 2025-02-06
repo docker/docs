@@ -20,9 +20,10 @@ You can also make a badge a link.
 
 We use badges to indicate new content and product content in various stages of the release lifecycle: 
 
-- The violet badge to highlight new early access or experimental content 
-- The blue badge to highlight beta content 
-- The green badge to highlight new content that is either GA or not product-related content, such as guides/learning paths
+- The violet badge to highlight new pages with early access or experimental features
+- The blue badge to highlight new pages with beta features
+- The green badge to highlight new pages that have features that are either GA or not product-related content, such as guides/learning paths with new pages 
+- The amber badge to highlight existing pages that have been updated to detail a new feature
 
 Best practice is to use this badge for no longer than 2 months post release of the feature.
 
