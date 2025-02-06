@@ -29,7 +29,7 @@ Use the Docker Admin Console to create an access token.
 
 2. Select your avatar in the top-right corner and from the drop-down menu select **Account settings**.
 
-3. In the **Security** section, select **Personal access tokens**.
+3. Select **Personal access tokens**.
 
 4. Select **Generate new token**.
 
@@ -79,13 +79,17 @@ You can rename, activate, deactivate, or delete a token as needed. You can manag
 
 2. Select your avatar in the top-right corner and from the drop-down menu select **Account settings**.
 
-3. In the **Security** section, select **Personal access tokens**.
-   This page shows an overview of all your tokens, and lists if the token was generated manually or if it was [auto-generated](#auto-generated-tokens). You can also view the number
-   of tokens that are activated and deactivated in the toolbar.
+3. Select **Personal access tokens**.
 
-4. Select the actions menu on the far right of a token row, then select **Deactivate**, **Edit**, or **Delete** to modify the token.
+   This page shows an overview of all your
+   tokens, and lists if the token was generated manually or if it was
+   [auto-generated](#auto-generated-tokens). You can also view the scope of the
+   tokens, which tokens are activate and inactive, when they were created, when
+   they were last used, and their expiration date.
 
-5. After modifying the token, select **Save token**.
+4. Select the actions menu on the far right of a token row, then select **Deactivate** or **Activate**, **Edit**, or **Delete** to modify the token.
+
+5. After editing the token, select **Save token**.
 
 ## Auto-generated tokens
 
