@@ -75,9 +75,14 @@ With this environment, you as the developer don’t need to install or configure
 
 With this environment up and running, you’re ready to make a few changes to the application and see how Docker helps provide a fast feedback loop.
 
+### Note
+Docker won't auto-detect code changes, it is not a live-reloading environment. So, after doing the changes in any of the files, you might:
+1. Run `docker-compose up --build` in a terminal/console inside your docker repo
+2. Use [Compose Watch](https://docs.docker.com/compose/how-tos/file-watch/)
+
 ### Change the greeting
 
-The greeting at the top of the page is populated by an API call at `/api/greeting`. Currently, it always returns "Hello world!". You’ll now modify it to return one of three randomized messages (that you'll get to choose).
+The greeting at the top of the page is populated by an API call at `backend/src/api/greeting`. Currently, it always returns "Hello world!". You’ll now modify it to return one of three randomized messages (that you'll get to choose).
 
 1. Open the `backend/src/routes/getGreeting.js` file in a text editor. This file provides the handler for the API endpoint.
 
