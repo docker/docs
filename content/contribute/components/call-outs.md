@@ -16,7 +16,7 @@ Add the feature name to the `/data/summary.yaml` file. Use the following attribu
 | Attribute      | Description                                            | Possible values                                         |
 |----------------|--------------------------------------------------------|---------------------------------------------------------|
 | `subscription` | Notes the subscription required to use the feature     | All, Personal, Pro, Team, Business                      |
-| `availability` | Notes what product development stage the feature is in | Experimental, Beta, Early access, GA, Retired           |
+| `availability` | Notes what product development stage the feature is in | Experimental, Beta, Early Access, GA, Retired           |
 | `requires`     | Notes what minimum version is required for the feature | No specific value, use a string to describe the version and link to relevant release notes |
 | `for`          | Notes if the feature is intended for IT Administrators | Administrators                                          |
 

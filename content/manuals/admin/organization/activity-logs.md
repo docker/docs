@@ -22,8 +22,6 @@ Owners can also see the activity logs for their repository if the repository is 
 
 ## Manage activity logs
 
-{{< summary-bar feature_name="Admin console early access" >}}
-
 {{< tabs >}}
 {{< tab name="Docker Hub" >}}
 

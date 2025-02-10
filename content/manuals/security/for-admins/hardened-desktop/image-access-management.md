@@ -23,8 +23,6 @@ You first need to [enforce sign-in](/manuals/security/for-admins/enforce-sign-in
 
 ## Configure
 
-{{< summary-bar feature_name="Admin console early access" >}}
-
 {{< tabs >}}
 {{< tab name="Docker Hub" >}}
 

@@ -34,8 +34,6 @@ The organization owner can also add additional organization owners to help them 
 
 ## Create a team
 
-{{< summary-bar feature_name="Admin console early access" >}}
-
 {{< tabs >}}
 {{< tab name="Docker Hub" >}}
 
@@ -116,8 +114,6 @@ To view a team's permissions across all repositories:
 4. Select the **Permissions** tab, where you can view the repositories this team can access.
 
 ## Delete a team
-
-{{< summary-bar feature_name="Admin console early access" >}}
 
 Organization owners can delete a team in Docker Hub or Admin Console. When you remove a team from your organization, this action revokes the members' access to the team's permitted resources. It won't remove users from other teams that they belong to, nor will it delete any resources.
 

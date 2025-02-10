@@ -44,8 +44,6 @@ Before you audit your domains, review the following required prerequisites:
 
 ## Audit your domains for uncaptured users
 
-{{< summary-bar feature_name="Admin console early access" >}}
-
 {{< tabs >}}
 {{< tab name="Docker Hub" >}}
 

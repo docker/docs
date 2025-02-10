@@ -23,8 +23,6 @@ Make sure you have completed the following before you begin:
 
 ## Step one: Create an SSO connection in Docker
 
-{{< summary-bar feature_name="Admin console early access" >}}
-
 >[!NOTE]
 >
 > Before creating an SSO connection in Docker, you must verify at least one domain.

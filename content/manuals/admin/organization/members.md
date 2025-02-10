@@ -11,8 +11,6 @@ Learn how to manage members for your organization in Docker Hub and the Docker A
 
 ## Invite members
 
-{{< summary-bar feature_name="Admin console early access" >}}
-
 {{< tabs >}}
 {{< tab name="Docker Hub" >}}
 
@@ -52,8 +50,6 @@ After inviting members, you can resend or remove invitations as needed.
 
 ### Resend an invitation
 
-{{< summary-bar feature_name="Admin console early access" >}}
-
 {{< tabs >}}
 {{< tab name="Docker Hub" >}}
 
@@ -79,8 +75,6 @@ To resend an invitation from the Admin Console:
 {{< /tabs >}}
 
 ### Remove an invitation
-
-{{< summary-bar feature_name="Admin console early access" >}}
 
 {{< tabs >}}
 {{< tab name="Docker Hub" >}}
@@ -110,8 +104,6 @@ To remove an invitation from the Admin Console:
 Use Docker Hub or the Admin Console to add or remove team members. Organization owners can add a member to one or more teams within an organization.
 
 ### Add a member to a team
-
-{{< summary-bar feature_name="Admin console early access" >}}
 
 {{< tabs >}}
 {{< tab name="Docker Hub" >}}
@@ -148,8 +140,6 @@ To add a member to a team with the Admin Console:
 {{< /tabs >}}
 
 ### Remove a member from a team
-
-{{< summary-bar feature_name="Admin console early access" >}}
 
 Organization owners can remove a member from a team in Docker Hub or Admin Console. Removing the member from the team will revoke their access to the permitted resources.
 

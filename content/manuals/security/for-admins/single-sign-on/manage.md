@@ -12,8 +12,6 @@ aliases:
 
 ## Manage organizations
 
-{{< summary-bar feature_name="Admin console early access" >}}
-
 > [!NOTE]
 >
 > You must have a [company](/admin/company/) to manage more than one organization.
@@ -21,8 +19,6 @@ aliases:
 {{% admin-sso-management-orgs product="admin" %}}
 
 ## Manage domains
-
-{{< summary-bar feature_name="Admin console early access" >}}
 
 {{< tabs >}}
 {{< tab name="Admin Console" >}}
@@ -38,8 +34,6 @@ aliases:
 {{< /tabs >}}
 
 ## Manage SSO connections
-
-{{< summary-bar feature_name="Admin console early access" >}}
 
 {{< tabs >}}
 {{< tab name="Admin Console" >}}
@@ -70,8 +64,6 @@ aliases:
 
 ### Add guest users when SSO is enabled
 
-{{< summary-bar feature_name="Admin console early access" >}}
-
 To add a guest that isn't verified through your IdP:
 
 1. Sign in to the [Admin Console](https://app.docker.com/admin).
@@ -80,8 +72,6 @@ To add a guest that isn't verified through your IdP:
 4. Follow the on-screen instructions to invite the user.
 
 ### Remove users from the SSO company
-
-{{< summary-bar feature_name="Admin console early access" >}}
 
 To remove a user:
 

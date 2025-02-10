@@ -38,8 +38,6 @@ feature always takes effect.
 
 ## Configure Registry Access Management permissions
 
-{{< summary-bar feature_name="Admin console early access" >}}
-
 {{< tabs >}}
 {{< tab name="Docker Hub" >}}
 
