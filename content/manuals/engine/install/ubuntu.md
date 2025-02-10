@@ -19,7 +19,7 @@ aliases:
 - /install/linux/docker-ee/ubuntu/
 - /install/linux/ubuntu/
 - /installation/ubuntulinux/
-- /linux/step_one
+- /linux/step_one/
 download-url-base: https://download.docker.com/linux/ubuntu
 ---
 
