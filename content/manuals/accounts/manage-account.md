@@ -17,7 +17,7 @@ You can centrally manage the settings for your Docker account using Docker Home.
 2. In Docker Home, select your avatar in the top-right corner to open the drop-down.
 3. Select **Account settings**.
 
-From the Account settings page, you can take any of the following actions.
+From the Account Center page, you can take any of the following actions.
 
 ### Update account information
 
@@ -35,7 +35,7 @@ Make your changes here, then select **Save** to save your settings.
 
 ### Update email address
 
-To update your email address, select the arrow icon.
+To update your email address, select **Email**.
 
 1. Enter your new email address.
 2. Enter your password to confirm the change.
@@ -47,22 +47,22 @@ Once you verify your email address, your account information will update.
 
 You can change your password by initiating a password reset via email.
 
-To change your password, select **Reset password**.
+To change your password, select **Password** and then **Reset password**.
 
 Follow the instructions in the password reset email.
 
 ## Manage security settings
 
-You can manage the security settings for your account in Docker Home.
-
+To update your two-factor authentication (2FA) settings, select **2FA**.
 For information on two-factor authentication (2FA) for your account, see [Enable two-factor authentication](../security/for-developers/2fa/_index.md) to get started.
 
+To manage personal access tokens, select **Personal access tokens**.
 For information on personal access tokens, see [Create and manage access tokens](../security/for-developers/access-tokens.md).
 
 ## Account management
 
-You can take administrative actions for your account in Docker Home.
-
+To convert your account into an organization, select **Convert**.
 For more information on converting your account, see [Convert an account into an organization](../admin/organization/convert-account.md).
 
+To deactivate your account, select **Deactivate**.
 For information on deactivating your account, see [Deactivating a user account](./deactivate-user-account.md).

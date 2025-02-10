@@ -41,5 +41,6 @@ Once you have completed all the previous steps, you can deactivate your account.
 1. Sign in to [Docker Home](https://app.docker.com/login).
 2. Select your avatar to open the drop-down menu.
 3. Select **Account settings**.
-4. In the **Account management** section, select **Deactivate account**.
-5. To confirm, select **Deactivate account**.
+4. Select **Deactivate**.
+5. Select **Deactivate account**.
+6. To confirm, select **Deactivate account**.
