@@ -18,8 +18,6 @@ Get started creating a single sign-on (SSO) connection for your organization or 
 
 ## Step one: Add your domain
 
-{{< summary-bar feature_name="Admin console early access" >}}
-
 {{< tabs >}}
 {{< tab name="Admin Console" >}}
 
@@ -44,8 +42,6 @@ Get started creating a single sign-on (SSO) connection for your organization or 
 {{< /tabs >}}
 
 ## Step two: Verify your domain
-
-{{< summary-bar feature_name="Admin console early access" >}}
 
 Verifying your domain ensures Docker knows you own it. Domain verification is done by adding your Docker TXT Record Value to your domain host. The TXT Record Value proves ownership, which signals the Domain Name System (DNS) to add this record. It can take up to 72 hours for DNS to recognize the change. When the change is reflected in DNS, Docker will automatically check the record to confirm your ownership.
 

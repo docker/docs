@@ -3,10 +3,7 @@ Activity logs:
   for: Administrators
 Admin Console:
   subscription: [Business]
-  availability: Early Access
   for: Administrators
-Admin console early access:
-  availability: The Admin Console is in Early Access
 Admin orgs:
   subscription: [Team, Business]
   for: Administrators
