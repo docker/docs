@@ -34,9 +34,6 @@ Use the following steps to replicate this issue:
 The recommended solution is to update group names in your IdP:
 1. Go to your IdP's group management section.
 2. Check the groups assigned to the affected user.
-3. Ensure each group follows the required format:
-```bash
-<organization>:<team>
-```
+3. Ensure each group follows the required format: `<organization>:<team>`
 4. Update any incorrectly formatted groups to match this pattern.
 5. Save changes and retry signing in with SSO.
