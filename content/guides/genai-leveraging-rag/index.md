@@ -30,7 +30,7 @@ RAG is a hybrid framework that enhances the capabilities of large language model
 - **Large Language Model (LLM)** for generating responses  
 - **Vector embeddings** to enable semantic search  
 
-In a Retrieval-Augmented Generation (RAG) system, vector embeddings are used to represent the semantic meaning of text in a way that a machine can understand and process. For instance, the words "dog" and "puppy" will have similar embeddings because they share similar meanings. By integrating these embeddings into the RAG framework, the system can combine the generative power of large language models with the ability to pull in highly relevant, contextually-aware data from external sources.
+In a RAG system, vector embeddings are used to represent the semantic meaning of text in a way that a machine can understand and process. For instance, the words "dog" and "puppy" will have similar embeddings because they share similar meanings. By integrating these embeddings into the RAG framework, the system can combine the generative power of large language models with the ability to pull in highly relevant, contextually-aware data from external sources.
 
 The system operates as follows:  
 1. Questions get turned into mathematical patterns that capture their meaning  
