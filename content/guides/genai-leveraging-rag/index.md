@@ -99,7 +99,7 @@ In the `.env` file, make sure following lines are commented out. Set your own cr
     NEO4J_PASSWORD=password
     OLLAMA_BASE_URL=http://llm:11434
 
-### Setting Up on Other Platforms 
+### Setting up on other platforms 
 
 For instructions on how to set up the stack on other platforms, refer to [this page](https://github.com/docker/genai-stack). 
 
