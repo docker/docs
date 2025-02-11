@@ -77,7 +77,7 @@ docker compose --profile linux-gpu up -d
 mv env.example .env
 nano .env
 ```
-Make sure following lines are commented out. Set your own credentials for security
+In the `.env` file, make sure following lines are commented out. Set your own credentials for security
 
     NEO4J_URI=neo4j://database:7687
     NEO4J_USERNAME=neo4j
