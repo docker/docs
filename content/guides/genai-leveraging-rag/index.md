@@ -142,7 +142,7 @@ Since our goal is to teach AI about things it does not yet know, we begin by ask
 
 As we can see, AI does not know anything about this subject because it did not exist during the time of its training, also known as the information cutoff point.
 
-Now it's time to teach the AI some new tricks. First, connect to [http://localhost:8502/](http://localhost:8502/). Instead of using the "neo4j" tag, change it to the "apache-nifi" tag, then click the **Import** button. 
+Now it's time to teach the AI some new tricks. First, connect to [http://localhost:8502/](http://localhost:8502/). Instead of using the "neo4j" tag, change it to the "apache-nifi" tag, then select the **Import** button. 
 
 
 ![alt text](image-1.png)
