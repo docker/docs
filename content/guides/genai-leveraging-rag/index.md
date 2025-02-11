@@ -67,7 +67,7 @@ Without RAG, the LLM may provide broad responses or acknowledge its limited know
 
 ## Setting up GenAI stack with GPU acceleration on Linux 
 
-To set up and run the GenAI stack on a Linux host, execute the following command:
+To set up and run the GenAI stack on a Linux host, execute one of the following commands, either for GPU or CPU powered:
 
 ### GPU powered
 
