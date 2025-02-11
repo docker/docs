@@ -104,7 +104,7 @@ In the `.env` file, make sure following lines are commented out. Set your own cr
 For instructions on how to set up the stack on other platforms, refer to [this page](https://github.com/docker/genai-stack). 
 
 
-### Initial Startup
+### Initial startup
 
 The first startup may take some time because the system needs to download a large language model (LLM).
 
