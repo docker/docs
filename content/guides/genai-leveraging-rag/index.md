@@ -160,7 +160,7 @@ RETURN DISTINCT labels(n) AS NodeTypes, count(*) AS Count
 ORDER BY Count DESC;
 ```
 
-To execute this query, write in the box on the top and click the blue run button.
+To execute this query, write in the box on the top and select the blue run button.
 
 ![alt text](image-2.png)
 
