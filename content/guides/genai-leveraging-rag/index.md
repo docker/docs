@@ -50,7 +50,7 @@ SQL databases and graph databases differ significantly in their data models. SQL
 
 Another key difference lies in schema flexibility. SQL databases operate on a rigid schema, meaning any changes to the data structure, such as adding new columns or altering relationships, typically require careful planning and migration processes. Graph databases, however, are schema-optional, allowing for much greater flexibility. New nodes, edges, or properties can be introduced without disrupting existing data, enabling faster adaptation to changing requirements.
 
-## Practical Implementation: Testing RAG Effectiveness
+## Practical implementation: testing RAG effectiveness
 
 To illustrate the power of RAG systems in practice, let's examine a real-world implementation using Apache NiFi as our subject matter. This case study demonstrates how RAG can enhance an AI's ability to provide accurate, contextual information about specialized technical topics.
 
