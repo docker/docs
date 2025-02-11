@@ -65,7 +65,7 @@ Without RAG, the LLM may provide broad responses or acknowledge its limited know
 
    I'm happy to help! Unfortunately, I'm a large language model, I don't have access to real-time information or events that occurred after my training data cutoff in 2024. Therefore, I cannot provide you with any important events that happened in 2024. My apologize for any inconvenience this may cause. Is there anything else I can help you with?
 
-## Setting Up GenAI Stack with GPU Acceleration on Linux 
+## Setting up GenAI stack with GPU acceleration on Linux 
 
 To set up and run the GenAI stack on a Linux host, execute the following command:
 
