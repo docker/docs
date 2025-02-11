@@ -63,9 +63,7 @@ For both of the following callouts, consult [the Docker release lifecycle](/rele
 
 ## Formatting
 
-```go
-> {{< summary-bar feature_name="PKG installer" >}}
-```
+{{</* summary-bar feature_name="PKG installer" */>}}
 
 ```html
 > [!NOTE]
