@@ -40,7 +40,7 @@ The system operates as follows:
 
 To hold this vector information in a efficient manner, we need a special type of database.
 
-## Introduction to Graph Databases 
+## Introduction to Graph databases 
 
 Graph databases, such as Neo4j, are specifically designed for managing highly connected data. Unlike traditional relational databases, graph databases prioritize both the entities and the relationships between them, making them ideal for tasks where connections are as important as the data itself.
 
