@@ -54,7 +54,7 @@ Another key difference lies in schema flexibility. SQL databases operate on a ri
 
 To illustrate the power of RAG systems in practice, let's examine a real-world implementation using Apache NiFi as our subject matter. This case study demonstrates how RAG can enhance an AI's ability to provide accurate, contextual information about specialized technical topics.
 
-### Teaching AI About New Technologies
+### Teaching AI about new technologies
 
 Apache NiFi serves as an excellent example of the limitations of traditional LLMs and how RAG can overcome them. As a relatively recent technology, many LLMs have limited or outdated knowledge about it, making it a perfect candidate for demonstrating RAG's capabilities.
 
