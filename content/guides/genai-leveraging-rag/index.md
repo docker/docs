@@ -22,7 +22,7 @@ In this guide, you will:
 * Configure a GenAI stack with Docker, incorporating Neo4j and an AI model.
 * Analyze a real-world case study that highlights the effectiveness of this approach for handling specialized queries.
 
-## Understanding RAG (Retrieval-Augmented Generation) 
+## Understanding RAG 
 
 RAG (Retrieval-Augmented Generation) is a hybrid framework that enhances the capabilities of large language models by integrating information retrieval. It combines three core components:  
 
