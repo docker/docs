@@ -164,7 +164,7 @@ To execute this query, write in the box on the top and select the blue run butto
 
 ![alt text](image-2.png)
 
-Results will appera below. What we are seeing here is the information system downloaded from Stack Overflow and saved in the graph database. RAG will utilize this information to enhance its responses.
+Results will appear below. What we are seeing here is the information system downloaded from Stack Overflow and saved in the graph database. RAG will utilize this information to enhance its responses.
 
 You can also run the following query to visualize the data:
 
