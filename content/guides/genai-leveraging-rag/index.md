@@ -108,7 +108,7 @@ For instructions on how to set up the stack on other platforms, refer to [this p
 
 The first startup may take some time because the system needs to download a large language model (LLM).
 
-### Monitoring Progress
+### Monitoring progress
 
 We can monitor the download and initialization progress by viewing the logs. Run the following command to view the logs:
 
