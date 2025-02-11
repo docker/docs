@@ -1,6 +1,3 @@
----
----
-
 > [!NOTE]
 >
 > Docker will begin charging for Docker Hub pull overages on April 1, 2025. No charges on Docker Hub pulls will be
