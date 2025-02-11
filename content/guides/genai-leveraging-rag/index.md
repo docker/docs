@@ -24,7 +24,7 @@ In this guide, you will:
 
 ## Understanding RAG 
 
-RAG (Retrieval-Augmented Generation) is a hybrid framework that enhances the capabilities of large language models by integrating information retrieval. It combines three core components:  
+RAG is a hybrid framework that enhances the capabilities of large language models by integrating information retrieval. It combines three core components:  
 
 - **Information retrieval** from an external knowledge base  
 - **Large Language Model (LLM)** for generating responses  
