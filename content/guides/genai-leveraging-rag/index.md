@@ -59,11 +59,11 @@ To illustrate the power of RAG systems in practice, let's examine a real-world i
 Apache NiFi serves as an excellent example of the limitations of traditional LLMs and how RAG can overcome them. As a relatively recent technology, many LLMs have limited or outdated knowledge about it, making it a perfect candidate for demonstrating RAG's capabilities.
 
 Without RAG, the LLM may provide broad responses or acknowledge its limited knowledge when asked about information that is beyond its cutoff date. The following example demonstrates this.
-
-   Question: What important events happened in 2024?
-   RAG: Disabled
-
-   I'm happy to help! Unfortunately, I'm a large language model, I don't have access to real-time information or events that occurred after my training data cutoff in 2024. Therefore, I cannot provide you with any important events that happened in 2024. My apologize for any inconvenience this may cause. Is there anything else I can help you with?
+```
+Question: What important events happened in 2024?
+RAG: Disabled
+I'm happy to help! Unfortunately, I'm a large language model, I don't have access to real-time information or events that occurred after my training data cutoff in 2024. Therefore, I cannot provide you with any important events that happened in 2024. My apologize for any inconvenience this may cause. Is there anything else I can help you with?
+```
 
 ## Setting up GenAI stack with GPU acceleration on Linux 
 
@@ -133,12 +133,11 @@ Since our goal is to teach AI about things it does not yet know, we begin by ask
 [http://localhost:8501/](http://localhost:8501/).
 ![alt text](image.png)
 
-
-    Question: What is Apache Nifi? 
-    RAG: Disabled
-
-    Hello! I'm here to help you with your question about Apache NiFi. Unfortunately, I don't know the answer to that question. I'm just an AI and my knowledge cutoff is December 2022, so I may not be familiar with the latest technologies or software. Can you please provide more context or details about Apache NiFi? Maybe there's something I can help you with related to it.
-
+```
+Question: What is Apache Nifi? 
+RAG: Disabled
+Hello! I'm here to help you with your question about Apache NiFi. Unfortunately, I don't know the answer to that question. I'm just an AI and my knowledge cutoff is December 2022, so I may not be familiar with the latest technologies or software. Can you please provide more context or details about Apache NiFi? Maybe there's something I can help you with related to it.
+```
 
 As we can see, AI does not know anything about this subject because it did not exist during the time of its training, also known as the information cutoff point.
 
@@ -185,24 +184,20 @@ Now, we are ready to enable our LLM to use this information. Go back to [http://
 ![alt text](image-3.png)
 
 The system delivers comprehensive, accurate information by pulling from current technical documentation.
+```
+Question: What is Apache Nifi? 
+RAG: Enabled
 
-    Question: What is Apache Nifi? 
-    RAG: Enabled
+Answer:
+Apache NiFi is an open-source, distributed data processing system that allows you to collect, transform, and transport data across various sources and sinks. It provides a graphical user interface for designing and managing data flows, as well as a set of APIs for integrating with other systems.
+According to this Stack Overflow question, the free Neo4J JDBC driver doesn't understand SQL, only Cypher, so you would need to use a non-free BI Connector to connect to Neo4j from Apache Drill.
+Additionally, this Stack Overflow question suggests that Apache POI does work in a Neo4j User Defined Function. However, there may be an unknown glitch in the standalone UDF mentioned in the initial question.
+To export data from Neo4j to Excel using APOC Extended procedures, you can use apoc.export.xls.query which takes a Cypher query and exports the results to an Excel file.
 
-    Answer:
-
-    Apache NiFi is an open-source, distributed data processing system that allows you to collect, transform, and transport data across various sources and sinks. It provides a graphical user interface for designing and managing data flows, as well as a set of APIs for integrating with other systems.
-
-    According to this Stack Overflow question, the free Neo4J JDBC driver doesn't understand SQL, only Cypher, so you would need to use a non-free BI Connector to connect to Neo4j from Apache Drill.
-
-    Additionally, this Stack Overflow question suggests that Apache POI does work in a Neo4j User Defined Function. However, there may be an unknown glitch in the standalone UDF mentioned in the initial question.
-
-    To export data from Neo4j to Excel using APOC Extended procedures, you can use apoc.export.xls.query which takes a Cypher query and exports the results to an Excel file.
-
-    References:
-
-    How to connect and query Neo4j Database on Apache Drill?
-    Is a Neo4j UDF compatible with Apache POI?
+References:
+How to connect and query Neo4j Database on Apache Drill?
+Is a Neo4j UDF compatible with Apache POI?
+```
 
 Keep in mind that new questions will be added to Stack Overflow, and due to the inherent randomness in most AI models, the answers may vary and won't be identical to those in this example.
 
@@ -217,20 +212,36 @@ DETACH DELETE n;
 For optimal results, choose a tag that the LLM is not familiar with.
 
 
-### When RAG is Effective 
+### When to leverage RAG for optimal results
 
-1. Knowledge Limitations:
-   - LLMs have fixed knowledge cutoffs
-   - Cannot access real-time or specialized information
-   - May hallucinate or provide outdated information
+Retrieval-Augmented Generation (RAG) is particularly effective in scenarios where standard Large Language Models (LLMs) fall short. The three key areas where RAG excels are knowledge limitations, business requirements, and cost efficiency. Below, we explore these aspects in more detail.
 
-2. Business Requirements:
-   - Need for accurate, up-to-date information
-   - Compliance and auditability
-   - Domain-specific knowledge integration
+1. Overcoming Knowledge Limitations
 
-3. Cost Efficiency:
-   - Reduced need for model fine-tuning
-   - Smaller models can perform well with good context
-   - Lower computational requirements
+LLMs are trained on a fixed dataset up until a certain point in time. This means they lack access to:
 
+* Real-time information: LLMs do not continuously update their knowledge, so they may not be aware of recent events, newly released research, or emerging technologies.
+* Specialized knowledge: Many niche subjects, proprietary frameworks, or industry-specific best practices may not be well-documented in the model’s training corpus.
+* Accurate contextual understanding: LLMs can struggle with nuances or evolving terminologies that frequently change within dynamic fields like finance, cybersecurity, or medical research.
+
+By incorporating RAG with a graph database such as Neo4j, AI models can access and retrieve the latest, relevant, and highly connected data before generating a response. This ensures that answers are up-to-date and grounded in factual information rather than inferred approximations.
+
+2. Addressing Business and Compliance Needs
+
+Organizations in industries like healthcare, legal services, and financial analysis require their AI-driven solutions to be:
+
+* Accurate: Businesses need AI-generated content that is factual and relevant to their specific domain.
+* Compliant: Many industries must adhere to strict regulations regarding data usage and security.
+* Traceable: Enterprises often require AI responses to be auditable, meaning they need to reference source material.
+
+By using RAG, AI-generated answers can be sourced from trusted databases, ensuring higher accuracy and compliance with industry standards. This mitigates risks such as misinformation or regulatory violations.
+
+3. Enhancing Cost Efficiency and Performance
+
+Training and fine-tuning large AI models can be computationally expensive and time-consuming. However, integrating RAG provides:
+
+* Reduced fine-tuning needs: Instead of retraining an AI model every time new data emerges, RAG allows the model to fetch and incorporate updated information dynamically.
+* Better performance with smaller models: With the right retrieval techniques, even compact AI models can perform well by leveraging external knowledge efficiently.
+* Lower operational costs: Instead of investing in expensive infrastructure to support large-scale retraining, businesses can optimize resources by utilizing RAG’s real-time retrieval capabilities.
+
+By following this guide, you now have the foundational knowledge to implement RAG with Neo4j, enabling your AI system to deliver more accurate, relevant, and insightful responses. The next step is experimentation—choose a dataset, configure your stack, and start enhancing your AI with the power of retrieval-augmented generation.
