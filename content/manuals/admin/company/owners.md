@@ -17,8 +17,6 @@ member in an organization, they don't occupy a seat.
 
 ## Add a company owner
 
-{{< summary-bar feature_name="Admin console early access" >}}
-
 1. Sign in to the [Admin Console](https://admin.docker.com).
 2. Select your company on the **Choose profile** page.
 3. Select **Company owners**.
@@ -27,8 +25,6 @@ member in an organization, they don't occupy a seat.
 6. After you find the user, select **Add company owner**.
 
 ## Remove a company owner
-
-{{< summary-bar feature_name="Admin console early access" >}}
 
 1. Sign in to the [Admin Console](https://admin.docker.com).
 2. Select your company on the **Choose profile** page.

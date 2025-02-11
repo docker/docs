@@ -14,8 +14,6 @@ You can create a new company in the Docker Admin Console. Before you begin, you 
 
 ## Create a company
 
-{{< summary-bar feature_name="Admin console early access" >}}
-
 To create a new company:
 
 1. Sign in to the [Admin Console](https://app.docker.com/admin).

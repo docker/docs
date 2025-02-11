@@ -48,8 +48,6 @@ For additional details about supported attributes and SCIM, see [Docker Hub API 
 
 ## Enable SCIM in Docker
 
-{{< summary-bar feature_name="Admin console early access" >}}
-
 You must [configure SSO](../single-sign-on/configure/_index.md) before you enable SCIM. Enforcing SSO isn't required to use SCIM.
 
 {{< tabs >}}
@@ -239,8 +237,6 @@ See the documentation for your IdP for additional details:
 - [Entra ID (formerly Azure AD)](https://learn.microsoft.com/en-us/azure/active-directory/app-provisioning/customize-application-attributes#provisioning-a-custom-extension-attribute-to-a-scim-compliant-application)
 
 ## Disable SCIM
-
-{{< summary-bar feature_name="Admin console early access" >}}
 
 If SCIM is disabled, any user provisioned through SCIM will remain in the organization. Future changes for your users will not sync from your IdP. User de-provisioning is only possible when manually removing the user from the organization.
 

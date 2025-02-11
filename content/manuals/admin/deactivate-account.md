@@ -31,8 +31,6 @@ Before deactivating an organization, complete the following:
 
 ## Deactivate
 
-{{< summary-bar feature_name="Admin console early access" >}}
-
 Once you have completed all the previous steps, you can deactivate your organization.
 
 > [!WARNING]
