@@ -53,8 +53,10 @@ The following table provides an overview of the current status of deprecated fea
 
 | Status     | Feature                                                                                                                            | Deprecated | Remove |
 |------------|------------------------------------------------------------------------------------------------------------------------------------|------------|--------|
+| Deprecated | [Configuration for pushing  non-distributable artifacts](#configuration-for-pushing-non-distributable-artifacts)                   | v28.0      | v29.0  |
+| Deprecated | [`--time` option on `docker stop` and `docker restart`](#--time-option-on-docker-stop-and-docker-restart)                          | v28.0      | -      |
 | Deprecated | [Non-standard fields in image inspect](#non-standard-fields-in-image-inspect)                                                      | v27.0      | v28.0  |
-| Deprecated | [API CORS headers](#api-cors-headers)                                                                                              | v27.0      | v28.0  |
+| Removed    | [API CORS headers](#api-cors-headers)                                                                                              | v27.0      | v28.0  |
 | Deprecated | [Graphdriver plugins (experimental)](#graphdriver-plugins-experimental)                                                            | v27.0      | v28.0  |
 | Deprecated | [Unauthenticated TCP connections](#unauthenticated-tcp-connections)                                                                | v26.0      | v28.0  |
 | Deprecated | [`Container` and `ContainerConfig` fields in Image inspect](#container-and-containerconfig-fields-in-image-inspect)                | v25.0      | v26.0  |
@@ -78,7 +80,7 @@ The following table provides an overview of the current status of deprecated fea
 | Deprecated | [CLI plugins support](#cli-plugins-support)                                                                                        | v20.10     | -      |
 | Deprecated | [Dockerfile legacy `ENV name value` syntax](#dockerfile-legacy-env-name-value-syntax)                                              | v20.10     | -      |
 | Removed    | [`docker build --stream` flag (experimental)](#docker-build---stream-flag-experimental)                                            | v20.10     | v20.10 |
-| Deprecated | [`fluentd-async-connect` log opt](#fluentd-async-connect-log-opt)                                                                  | v20.10     | -      |
+| Deprecated | [`fluentd-async-connect` log opt](#fluentd-async-connect-log-opt)                                                                  | v20.10     | v28.0  |
 | Removed    | [Configuration options for experimental CLI features](#configuration-options-for-experimental-cli-features)                        | v19.03     | v23.0  |
 | Deprecated | [Pushing and pulling with image manifest v2 schema 1](#pushing-and-pulling-with-image-manifest-v2-schema-1)                        | v19.03     | v27.0  |
 | Removed    | [`docker engine` subcommands](#docker-engine-subcommands)                                                                          | v19.03     | v20.10 |
@@ -117,6 +119,55 @@ The following table provides an overview of the current status of deprecated fea
 | Removed    | [`--api-enable-cors` flag on `dockerd`](#--api-enable-cors-flag-on-dockerd)                                                        | v1.6       | v17.09 |
 | Removed    | [`--run` flag on `docker commit`](#--run-flag-on-docker-commit)                                                                    | v0.10      | v1.13  |
 | Removed    | [Three arguments form in `docker import`](#three-arguments-form-in-docker-import)                                                  | v0.6.7     | v1.12  |
+
+## Configuration for pushing non-distributable artifacts
+
+**Deprecated in Release: v28.0**
+**Target For Removal In Release: v29.0**
+
+Non-distributable artifacts (also called foreign layers) were introduced in
+docker v1.12 to accommodate Windows images for which the EULA did not allow
+layers to be distributed through registries other than those hosted by Microsoft.
+The concept of foreign / non-distributable layers was adopted by the OCI distribution
+spec in [oci#233]. These restrictions were relaxed later to allow distributing
+these images through non-public registries, for which a configuration was added
+in Docker v17.0.6.0.
+
+In 2022, Microsoft updated the EULA and [removed these restrictions][msft-3645201],
+followed by the OCI distribution specification deprecating foreign layers in [oci#965].
+In 2023, Microsoft [removed the use of foreign data layers][msft-3846833] for their images,
+making this functionality obsolete.
+
+Docker v28.0 deprecates the `--allow-nondistributable-artifacts` daemon flag and
+corresponding `allow-nondistributable-artifacts` field in `daemon.json`. Setting
+either option no longer takes an effect, but a deprecation warning log is added
+to raise awareness about the deprecation. This warning is planned to become an
+error in the Docker v29.0.
+
+Users currently using these options are therefore recommended to remove this
+option from their configuration to prevent the daemon from starting when
+upgrading to Docker v29.0.
+
+The `AllowNondistributableArtifactsCIDRs` and `AllowNondistributableArtifactsHostnames`
+fields in the `RegistryConfig` of the `GET /info` API response are also deprecated.
+For API version v1.48 and lower, the fields are still included in the response
+but always `null`. In API version v1.49 and higher, the field will be omitted
+entirely.
+
+[oci#233]: https://github.com/opencontainers/image-spec/pull/233
+[oci#965]: https://github.com/opencontainers/image-spec/pull/965
+[msft-3645201]: https://techcommunity.microsoft.com/blog/containers/announcing-windows-container-base-image-redistribution-rights-change/3645201
+[msft-3846833]: https://techcommunity.microsoft.com/blog/containers/announcing-removal-of-foreign-layers-from-windows-container-images/3846833
+
+### `--time` option on `docker stop` and `docker restart`
+
+**Deprecated in Release: v28.0**
+
+The `--time` option for the `docker stop`, `docker container stop`, `docker restart`,
+and `docker container restart` commands has been renamed to `--timeout` for
+consistency with other uses of timeout options. The `--time` option is now
+deprecated and hidden, but remains functional for backward compatibility.
+Users are encouraged to migrate to using the `--timeout` option instead.
 
 ### Non-standard fields in image inspect
 
@@ -177,18 +228,19 @@ and a custom [snapshotter](https://github.com/containerd/containerd/tree/v1.7.18
 ### API CORS headers
 
 **Deprecated in Release: v27.0**
-**Target For Removal In Release: v28.0**
+**Disabled by default in Release: v27.0**
+**Removed in release: v28.0**
 
 The `api-cors-header` configuration option for the Docker daemon is insecure,
 and is therefore deprecated and scheduled for removal.
 Incorrectly setting this option could leave a window of opportunity
 for unauthenticated cross-origin requests to be accepted by the daemon.
 
-Starting in Docker Engine v27.0, this flag can still be set,
+In Docker Engine v27.0, this flag can still be set,
 but it has no effect unless the environment variable
 `DOCKERD_DEPRECATED_CORS_HEADER` is also set to a non-empty value.
 
-This flag will be removed altogether in v28.0.
+This flag has been removed altogether in v28.0.
 
 This is a breaking change for authorization plugins and other programs
 that depend on this option for accessing the Docker API from a browser.
@@ -666,6 +718,7 @@ files.
 ### `fluentd-async-connect` log opt
 
 **Deprecated in Release: v20.10**
+**Removed in Release: v28.0**
 
 The `--log-opt fluentd-async-connect` option for the fluentd logging driver is
 [deprecated in favor of `--log-opt fluentd-async`](https://github.com/moby/moby/pull/39086).
