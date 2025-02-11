@@ -106,7 +106,7 @@ For instructions on how to set up the stack on other platforms, refer to [this p
 
 ### Initial startup
 
-The first startup may take some time because the system needs to download a large language model (LLM).
+The first startup may take some time because the system needs to download a large language model.
 
 ### Monitoring progress
 
