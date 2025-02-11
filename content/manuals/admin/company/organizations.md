@@ -10,8 +10,6 @@ You can manage the organizations in a company in the Docker Admin Console.
 
 ## View all organizations
 
-{{< summary-bar feature_name="Admin console early access" >}}
-
 1. Sign in to the [Admin Console](https://admin.docker.com).
 2. Select your company on the **Choose profile** page.
 3. Under **Organizations**, select **Overview**.
@@ -25,8 +23,6 @@ When you have a [self-serve](../../subscription/details.md#self-serve) subscript
 For more information about adding seats, see [Manage seats](/manuals/subscription/manage-seats.md#add-seats).
 
 ## Add organizations to a company
-
-{{< summary-bar feature_name="Admin console early access" >}}
 
 You must be a company owner to add an organization to a company. You must also be an organization owner of the organization you want to add. There is no limit to the number of organizations you can have under a company layer. All organizations must have a Business subscription.
 
@@ -42,8 +38,6 @@ You must be a company owner to add an organization to a company. You must also b
 6. Select **Add organization** to confirm.
 
 ## Manage an organization
-
-{{< summary-bar feature_name="Admin console early access" >}}
 
 1. Sign in to the [Admin Console](https://admin.docker.com).
 2. Select your company on the **Choose profile** page.
