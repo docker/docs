@@ -19,6 +19,18 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: platform
+      value_type: string
+      description: |
+        Load only the given platform variant. Formatted as `os[/arch[/variant]]` (e.g., `linux/amd64`)
+      details_url: '#platform'
+      deprecated: false
+      hidden: false
+      min_api_version: "1.48"
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: quiet
       shorthand: q
       value_type: bool
@@ -75,6 +87,35 @@ examples: |-
     fedora              20                  58394af37342        7 weeks ago         385.5 MB
     fedora              heisenbug           58394af37342        7 weeks ago         385.5 MB
     fedora              latest              58394af37342        7 weeks ago         385.5 MB
+    ```
+
+
+    ### Load a specific platform (--platform) {#platform}
+
+    The `--platform` option allows you to specify which platform variant of the
+    image to load. By default, `docker load` loads all platform variants that
+    are present in the archive. Use the `--platform` option to specify which
+    platform variant of the image to load. An error is produced if the given
+    platform is not present in the archive.
+
+    The platform option takes the `os[/arch[/variant]]` format; for example,
+    `linux/amd64` or `linux/arm64/v8`. Architecture and variant are optional,
+    and default to the daemon's native architecture if omitted.
+
+    The following example loads the `linux/amd64` variant of an `alpine` image
+    from an archive that contains multiple platform variants.
+
+    ```console
+    $ docker image load -i image.tar --platform=linux/amd64
+    Loaded image: alpine:latest
+    ```
+
+    The following example attempts to load a `linux/ppc64le` image from an
+    archive, but the given platform is not present in the archive;
+
+    ```console
+    $ docker image load -i image.tar --platform=linux/ppc64le
+    requested platform (linux/ppc64le) not found: image might be filtered out
     ```
 deprecated: false
 hidden: false

@@ -158,7 +158,7 @@ options:
     - option: password
       shorthand: p
       value_type: string
-      description: Password
+      description: Password or Personal Access Token (PAT)
       deprecated: false
       hidden: false
       experimental: false
@@ -168,7 +168,7 @@ options:
     - option: password-stdin
       value_type: bool
       default_value: "false"
-      description: Take the password from stdin
+      description: Take the Password or Personal Access Token (PAT) from stdin
       details_url: '#password-stdin'
       deprecated: false
       hidden: false

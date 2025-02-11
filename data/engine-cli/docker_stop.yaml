@@ -17,6 +17,17 @@ options:
       kubernetes: false
       swarm: false
     - option: time
+      value_type: int
+      default_value: "0"
+      description: |
+        Seconds to wait before killing the container (deprecated: use --timeout)
+      deprecated: true
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: timeout
       shorthand: t
       value_type: int
       default_value: "0"
