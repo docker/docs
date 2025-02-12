@@ -55,7 +55,7 @@ Create a GitHub repository, configure the Docker Hub credentials, and push your 
 
 ## Step two: Set up the workflow
 
-Set up your GitHub Actions workflow for building, testing, and pushing the image
+Set up your GitHub Actions workflow for building and pushing the image
 to Docker Hub.
 
 1. Go to your repository on GitHub and then select the **Actions** tab.
