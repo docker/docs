@@ -193,7 +193,7 @@ paths:
         If successful, the access token returned should be used in the HTTP Authorization header like 
         `Authorization: Bearer {access_token}`.
 
-        _**If your organization has SSO enforced, you must use a PAT instead of a password.**_
+        _**If your organization has SSO enforced, you must use a personal access token (PAT) instead of a password.**_
       requestBody:
         content:
           application/json:
