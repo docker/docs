@@ -90,7 +90,7 @@ CMD ["run", "--allow-net", "server.ts"]
 
 Aside from specifying `denoland/deno:latest` as the base image, the Dockerfile:
 
-- Sets the working directory in the container to `/app`
+- Sets the working directory in the container to `/app`.
 - Copies `server.ts` into the container.
 - Sets the user to `deno` to run the application as a non-root user.
 - Exposes port 8000 to allow traffic to the application.
