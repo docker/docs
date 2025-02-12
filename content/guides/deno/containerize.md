@@ -95,7 +95,7 @@ Aside from specifying `denoland/deno:latest` as the base image, the Dockerfile:
 - Sets the user to `deno` to run the application as a non-root user.
 - Exposes port 8000 to allow traffic to the application.
 - Runs the Deno server using the `CMD` instruction.
-- The `--allow-net` flag is used to allow network access to the application. The `server.ts` file uses the Oak framework to create a simple API that listens on port 8000.
+- Uses the `--allow-net` flag to allow network access to the application. The `server.ts` file uses the Oak framework to create a simple API that listens on port 8000.
 
 ## Run the application
 
