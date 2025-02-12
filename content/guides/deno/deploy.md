@@ -69,7 +69,7 @@ In this Kubernetes YAML file, there are two objects, separated by the `---`:
     container is created from the image built by GitHub Actions in [Configure CI/CD for
     your Deno application](configure-ci-cd.md).
  - A NodePort service, which will route traffic from port 30001 on your host to
-   port 3000 inside the pods it routes to, allowing you to reach your app
+   port 8000 inside the pods it routes to, allowing you to reach your app
    from the network.
 
 To learn more about Kubernetes objects, see the [Kubernetes documentation](https://kubernetes.io/docs/home/).
