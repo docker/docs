@@ -226,7 +226,7 @@ LLMs are trained on a fixed dataset up until a certain point in time. This means
 
 By incorporating RAG with a graph database such as Neo4j, AI models can access and retrieve the latest, relevant, and highly connected data before generating a response. This ensures that answers are up-to-date and grounded in factual information rather than inferred approximations.
 
-2. Addressing Business and Compliance Needs
+#### Addressing business and compliance needs
 
 Organizations in industries like healthcare, legal services, and financial analysis require their AI-driven solutions to be:
 
