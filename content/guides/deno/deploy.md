@@ -57,7 +57,7 @@ spec:
     app: deno-api
   ports:
   - port: 3000
-    targetPort: 3000
+    targetPort: 8000
     nodePort: 30001
 ```
 
