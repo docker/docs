@@ -133,7 +133,7 @@ Since our goal is to teach AI about things it does not yet know, we begin by ask
 [http://localhost:8501/](http://localhost:8501/).
 ![alt text](image.png)
 
-```
+```text
 Question: What is Apache Nifi? 
 RAG: Disabled
 Hello! I'm here to help you with your question about Apache NiFi. Unfortunately, I don't know the answer to that question. I'm just an AI and my knowledge cutoff is December 2022, so I may not be familiar with the latest technologies or software. Can you please provide more context or details about Apache NiFi? Maybe there's something I can help you with related to it.
