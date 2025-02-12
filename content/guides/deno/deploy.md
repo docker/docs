@@ -114,7 +114,7 @@ To learn more about Kubernetes objects, see the [Kubernetes documentation](https
    ```shell
    NAME                 TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
    kubernetes           ClusterIP   10.96.0.1        <none>        443/TCP          88m
-   service-entrypoint   NodePort    10.105.145.223   <none>        3000:30001/TCP   83s
+   service-entrypoint   NodePort    10.105.145.223   <none>        8000:30001/TCP   83s
    ```
 
    In addition to the default `kubernetes` service, you can see your `service-entrypoint` service, accepting traffic on port 30001/TCP.
