@@ -88,7 +88,7 @@ EXPOSE 8000
 CMD ["run", "--allow-net", "server.ts"]
 ```
 
-Aside from specifying `denoland/deno:latest` as the base image, the Dockerfile
+Aside from specifying `denoland/deno:latest` as the base image, the Dockerfile:
 
 - Sets the working directory in the container to `/app`
 - Copies `server.ts` into the container.
