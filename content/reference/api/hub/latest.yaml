@@ -120,7 +120,7 @@ paths:
 
         The returned token is used in the HTTP Authorization header like `Authorization: Bearer {TOKEN}`.
 
-        _As of September 16, 2024, this route requires a PAT instead of a password if your organization has SSO enforced._
+        _**As of September 16, 2024, this route requires a personal access token (PAT) instead of a password if your organization has SSO enforced.**_
         
         <div style="background-color:rgb(255, 165, 0, .25); padding:5px; border-radius:4px">
           <strong>Deprecated</strong>: Use [<a href="#tag/authentication/operation/AuthCreateAccessToken">Create access token</a>] instead.
