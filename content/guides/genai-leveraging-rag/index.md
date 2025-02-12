@@ -184,7 +184,7 @@ Now, we are ready to enable our LLM to use this information. Go back to [http://
 ![alt text](image-3.png)
 
 The system delivers comprehensive, accurate information by pulling from current technical documentation.
-```
+```text
 Question: What is Apache Nifi? 
 RAG: Enabled
 
