@@ -24,9 +24,9 @@ Docker Hub measures storage using:
 private repository storage:
 
 - Personal plan: Includes up to 2GB of storage.
-- Pro plan: Includes up to 5GB of storage.
-- Team plan: Includes up to 50GB of storage.
-- Business plan: Includes up to 500GB of storage.
+- Pro plan: Includes up to 50GB of storage.
+- Team plan: Includes up to 500GB of storage.
+- Business plan: Includes up to 5000GB of storage.
 
 Docker Hub determines additional charges based on your average monthly usage of private repository storage. If a repository is private at any point within an hour, it is counted as private for the full hour.
 

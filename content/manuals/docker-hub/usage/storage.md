@@ -13,9 +13,9 @@ The following storage and repository limits apply based on your subscription, su
 | Plan     | Public repositories | Public repository storage | Private repositories       | Private repository storage |
 |----------|---------------------|---------------------------|----------------------------|----------------------------|
 | Personal | Unlimited           | Unlimited                 | Up to 1 private repository | Up to 2 GB                 |
-| Pro      | Unlimited           | Unlimited                 | Unlimited                  | Up to 5 GB                 |
-| Team     | Unlimited           | Unlimited                 | Unlimited                  | Up to 50 GB                |
-| Business | Unlimited           | Unlimited                 | Unlimited                  | Up to 500 GB               |
+| Pro      | Unlimited           | Unlimited                 | Unlimited                  | Up to 50 GB                 |
+| Team     | Unlimited           | Unlimited                 | Unlimited                  | Up to 500 GB                |
+| Business | Unlimited           | Unlimited                 | Unlimited                  | Up to 5000 GB               |
 
 Any storage usage beyond the included amounts in each paid subscription tier
 will be charged at an on-demand rate. For more details about storage
