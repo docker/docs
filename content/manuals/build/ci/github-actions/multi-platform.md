@@ -175,7 +175,7 @@ jobs:
         with:
           platforms: ${{ matrix.platform }}
           labels: ${{ steps.meta.outputs.labels }}
-          outputs: type=image,"name=${{ env.DOCKERHUB_REPO }},${{ env.GHCR_REPO }}",push-by-digest=true,name-canonical=true,push=true
+          outputs: type=image,"name=${{ env.DOCKERHUB_REPO }}:latest,${{ env.GHCR_REPO }}:latest",push-by-digest=true,name-canonical=true,push=true
 
       - name: Export digest
         run: |
