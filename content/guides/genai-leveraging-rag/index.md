@@ -236,7 +236,7 @@ Organizations in industries like healthcare, legal services, and financial analy
 
 By using RAG, AI-generated answers can be sourced from trusted databases, ensuring higher accuracy and compliance with industry standards. This mitigates risks such as misinformation or regulatory violations.
 
-3. Enhancing Cost Efficiency and Performance
+#### Enhancing cost efficiency and performance
 
 Training and fine-tuning large AI models can be computationally expensive and time-consuming. However, integrating RAG provides:
 
