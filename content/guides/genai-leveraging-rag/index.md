@@ -216,7 +216,7 @@ For optimal results, choose a tag that the LLM is not familiar with.
 
 Retrieval-Augmented Generation (RAG) is particularly effective in scenarios where standard Large Language Models (LLMs) fall short. The three key areas where RAG excels are knowledge limitations, business requirements, and cost efficiency. Below, we explore these aspects in more detail.
 
-1. Overcoming Knowledge Limitations
+#### Overcoming knowledge limitations
 
 LLMs are trained on a fixed dataset up until a certain point in time. This means they lack access to:
 
