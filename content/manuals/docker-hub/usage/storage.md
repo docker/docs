@@ -13,9 +13,9 @@ The following storage and repository limits apply based on your subscription, su
 | Plan     | Public repositories | Public repository storage | Private repositories       | Private repository storage |
 |----------|---------------------|---------------------------|----------------------------|----------------------------|
 | Personal | Unlimited           | Unlimited                 | Up to 1 private repository | Up to 2 GB                 |
-| Pro      | Unlimited           | Unlimited                 | Unlimited                  | Up to 5 GB                 |
-| Team     | Unlimited           | Unlimited                 | Unlimited                  | Up to 50 GB                |
-| Business | Unlimited           | Unlimited                 | Unlimited                  | Up to 500 GB               |
+| Pro      | Unlimited           | Unlimited                 | Unlimited                  | Up to 50 GB                 |
+| Team     | Unlimited           | Unlimited                 | Unlimited                  | Up to 500 GB                |
+| Business | Unlimited           | Unlimited                 | Unlimited                  | Up to 5000 GB               |
 
 Personal plans exceeding 2 GB of storage will be blocked from pushing and pulling content from their private repository. To unblock, delete unused content to stay within the 2 GB limit or upgrade to a higher plan.
 
