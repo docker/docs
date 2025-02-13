@@ -51,8 +51,8 @@ For more information on how Enhanced Container Isolation work, see [How does it 
 
 > [!IMPORTANT]
 >
-> ECI protection for Docker builds and the [integrated Kubernetes](../../../../desktop/features/kubernetes.md) varies according to the
-> Docker Desktop version (i.e., later versions include more protection than earlier versions). Also, ECI does not yet
+> ECI protection for Docker builds and [Kubernetes in Docker Desktop](/manuals/desktop/features/kubernetes.md) varies according to the
+> Docker Desktop version. Later versions include more protection than earlier versions. Also, ECI does not yet
 > protect extension containers. For more information on known limitations and workarounds, see [FAQs](faq.md).
 
 ## How do I enable Enhanced Container Isolation?
