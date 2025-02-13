@@ -7,6 +7,8 @@ weight: 10
 aliases:
 - /desktop/install/msi/install-and-configure/
 - /desktop/setup/install/msi/install-and-configure/
+- /desktop/install/msi/
+- /desktop/setup/install/msi/
 ---
 
 {{< summary-bar feature_name="MSI installer" >}}
