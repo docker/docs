@@ -103,7 +103,7 @@ Docker Desktop does not require any particular Linux distributions to be install
 >
 > Note that Docker Desktop version 4.30 and later keeps using the `docker-desktop-data` distribution if it was already created by an earlier version of Docker Desktop and has not been freshly installed or factory reset.
 
-### WSL 2 security in Docker Desktop
+## WSL 2 security in Docker Desktop
 
 Docker Desktop’s WSL 2 integration operates within the existing security model of WSL and does not introduce additional security risks beyond standard WSL behavior.
 
