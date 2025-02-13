@@ -19,24 +19,24 @@ For more detailed information, see the [release notes in the Compose repo](https
 
 ### Bug fixes and enhancements
 
-- Introduced a hint to promote use of [Bake](/build/bake/)
-- Introduced support for `additional_context` reference to another service
+- Introduced a hint to promote the use of [Bake](/build/bake/)
+- Introduced support for the `additional_context` attribute referencing another service
 - Added support for `BUILDKIT_PROGRESS`
-- Warn user when published compose application includes environment
-- Added `--with-env` to publish a compose application with environment
+- Compose now warns you when a published Compose application includes environment variables
+- Added a `--with-env` flag to publish a Compose application with environment variables
 - Updated `ls --quiet` help description
 - Fixed multiple issues delegating build to Bake
 - Updated help in `stats` command
 - Fixed support for "builtin" seccomp profile
-- Fixed support for watch with multiple services
+- Fixed support for `watch` with multiple services
 - Removed exit code per error type used by legacy metrics system
 - Fixed test coverage for `compatibility`
-- Removed raw os.Args sent to opentelemetry
+- Removed raw os.Args sent to OpenTelemetry
 - Enabled copyloopvar linter
-- Fixed provenance for binaries and generate sbom
-- use main branch for docs upstream validation
+- Fixed provenance for binaries and generate SBOM
+- Main branch for docs upstream validation is now used
 - Added codeowners file
-- Added docker engine v28.x to the test-matrix
+- Added Docker Engine v28.x to the test-matrix
 
 ### Update
 
