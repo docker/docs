@@ -13,6 +13,45 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.33.0
+
+{{< release-date date="2025-02-13" >}}
+
+### Bug fixes and enhancements
+
+- Introduced a hint to promote use of [Bake](/build/bake/)
+- Introduced support for `additional_context` reference to another service
+- Added support for `BUILDKIT_PROGRESS`
+- Warn user when published compose application includes environment
+- Added `--with-env` to publish a compose application with environment
+- Updated `ls --quiet` help description
+- Fixed multiple issues delegating build to Bake
+- Updated help in `stats` command
+- Fixed support for "builtin" seccomp profile
+- Fixed support for watch with multiple services
+- Removed exit code per error type used by legacy metrics system
+- Fixed test coverage for `compatibility`
+- Removed raw os.Args sent to opentelemetry
+- Enabled copyloopvar linter
+- Fixed provenance for binaries and generate sbom
+- use main branch for docs upstream validation
+- Added codeowners file
+- Added docker engine v28.x to the test-matrix
+
+### Update
+
+- Dependencies upgrade: Bump compose-go v2.4.8
+- Dependencies upgrade: Bump buildx v0.20.1
+- Dependencies upgrade: Bump docker to v27.5.1
+- Dependencies upgrade: Bump golangci-lint to v1.63.4
+- Dependencies upgrade: Bump golang.org/x/sys from 0.28.0 to 0.30.0
+- Dependencies upgrade: Bump github.com/moby/term v0.5.2
+- Dependencies upgrade: Bump github.com/otiai10/copy from 1.14.0 to 1.14.1
+- Dependencies upgrade: Bump github.com/jonboulle/clockwork from 0.4.0 to 0.5.0
+- Dependencies upgrade: Bump github.com/spf13/pflag from 1.0.5 to 1.0.6
+- Dependencies upgrade: Bump golang.org/x/sync from 0.10.0 to 0.11.0
+- Dependencies upgrade: Bump gotest.tools/v3 from 3.5.1 to 3.5.2
+
 ## 2.32.4
 
 {{< release-date date="2025-01-16" >}}
