@@ -27,7 +27,7 @@ Authenticator with a registered YubiKey.
 
 1. Sign in to your [Docker account](https://app.docker.com/login).
 2. Select your avatar and then from the drop-down menu, select **Account settings**.
-3. Navigate to the **Security** section, then select **Two-factor authentication**.
+3. Select **2FA**.
 4. Enter your account password, then select **Confirm**.
 5. Save your recovery code and store it somewhere safe. You can use your recovery code to recover your account in the event you lose access to your authenticator app.
 6. Use a Time-based One-time password (TOTP) mobile app to scan the QR code or enter the text code.

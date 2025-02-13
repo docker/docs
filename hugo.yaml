@@ -118,7 +118,7 @@ params:
   # (Used to show e.g., "latest" and "latest"-1 in engine install examples
   docker_ce_version_prev: "27.5.0"
   # Latest Docker Compose version
-  compose_version: "v2.32.4"
+  compose_version: "v2.33.0"
   # Latest BuildKit version
   buildkit_version: "0.16.0"
 
