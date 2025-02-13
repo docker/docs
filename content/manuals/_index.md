@@ -55,6 +55,10 @@ params:
     description: Run integration tests, with real dependencies, in the cloud.
     icon: package_2
     link: https://testcontainers.com/cloud/docs/
+  - title: Docker Projects
+    description: Use a unified, project-based workflow to run your containerized projects. 
+    icon: folder
+    link: /projects/
   platform:
   - title: Administration
     description: Centralized observability for companies and organizations.
