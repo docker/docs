@@ -55,8 +55,8 @@ If you don't specify any files, Bake will use the following lookup order:
 3. `docker-compose.yml`
 4. `docker-compose.yaml`
 5. `docker-bake.json`
-6. `docker-bake.override.json`
-7. `docker-bake.hcl`
+6. `docker-bake.hcl`
+7. `docker-bake.override.json`
 8. `docker-bake.override.hcl`
 
 If more than one Bake file is found, all files are loaded and merged into a
