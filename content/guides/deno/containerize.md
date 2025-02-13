@@ -25,7 +25,7 @@ directory to a directory that you want to work in, and run the following
 command to clone the repository:
 
 ```console
-$ git clone https://github.com/dockersamples/deno-docker.git
+$ git clone https://github.com/dockersamples/docker-deno.git
 ```
 
 You should now have the following contents in your `deno-docker` directory.
