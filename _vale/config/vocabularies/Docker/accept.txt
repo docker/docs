@@ -64,7 +64,6 @@ Laradock
 Linux
 LinuxKit
 Logstash
-MAC
 Mac
 Mail(chimp|gun)
 Microsoft
