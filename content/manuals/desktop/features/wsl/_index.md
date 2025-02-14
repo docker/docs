@@ -111,7 +111,7 @@ Docker Desktop runs within its own dedicated WSL distribution, `docker-desktop`,
 
 WSL is designed to facilitate interoperability between Windows and Linux environments. Its file system is accessible from the Windows host `\\wsl$`, meaning Windows processes can read and modify files within WSL. This behavior is not specific to Docker Desktop, but rather a core aspect of WSL itself.
 
-For organizations concerned about security risks related to WSL and want stricter isolation and security controls, run Docker Desktop in Hyper-V mode instead of WSL 2.
+For organizations concerned about security risks related to WSL and want stricter isolation and security controls, run Docker Desktop in Hyper-V mode instead of WSL 2. Alternatively, run your container workloads with [Enhanced Container Isolation](/manuals/security/for-admins/hardened-desktop/enhanced-container-isolation/_index.md) enabled.
 
 ## Additional resources
 
