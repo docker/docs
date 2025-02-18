@@ -49,7 +49,10 @@ There are two billing models for paying for additional Docker Hub storage:
 
     > [!NOTE]
     >
-    > Pre-purchased storage expires at the end of your subscription period.
+    > Pre-purchased storage expires at the end of your subscription period. Subscriptions
+    > periods are either monthly or annually. For example, if you are on a monthly plan,
+    > unused storage from each month does not roll over into the next. If you are on an
+    > annual plan, unused storage from each year does not roll over into the next.
 
 - Post-pay: Receive an overage invoice for storage usage that exceeds your subscription plan's included amount
 at the end of your billing cycle.
