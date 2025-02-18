@@ -76,7 +76,7 @@ tags:
 
       ## Organization Access Token (OAT)
       Organization access tokens are scoped to specific resources and scopes 
-      within an organization and are managed by organization owners. 
+      in an organization. They are managed by organization owners. 
       
       These tokens are meant for automation and are not meant to be used by 
       users.
