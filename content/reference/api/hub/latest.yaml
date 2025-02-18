@@ -59,7 +59,7 @@ tags:
 
       ## Password
       Using a username and password is the most powerful, yet least secure way 
-      to authenticate with Docker as a user. It allows for access to resources 
+      to authenticate with Docker as a user. It allows access to resources 
       for the user without scopes. 
 
       _In general, it is recommended to use a personal access token (PAT) instead._
