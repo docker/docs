@@ -42,7 +42,7 @@ The following objects are shown in the diagram.
    > Images that haven't been pulled in over 6 months are marked as **Stale** in
    > the **Status** column.
 
-6. (Optional) Delete one or more items.
+6. Optional. Delete one or more items.
    1. Select the checkboxes next to the items in the list. Selecting any
       top-level index also removes any underlying images that aren't referenced
       elsewhere.
