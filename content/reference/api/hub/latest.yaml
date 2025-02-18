@@ -53,10 +53,9 @@ tags:
 
       # Types
 
-      These are the types of authentication available for the Docker Hub API.
+      The Docker Hub API supports the following authentication types.
 
-      Each authentication type should be used with the [Create access token](#tag/authentication-api/operation/AuthCreateAccessToken) 
-      route to obtain a bearer token to be used.
+      You must use each authentication type with the [Create access token](#tag/authentication-api/operation/AuthCreateAccessToken) route to obtain a bearer token.
 
       ## Password
       Using a username and password is the most powerful, yet least secure way 
