@@ -64,7 +64,7 @@ tags:
 
       _In general, it is recommended to use a personal access token (PAT) instead._
 
-      _**This is not available if your organization has SSO enforced.**_
+      _**The password authentication type is not available if your organization has SSO enforced.**_
 
       ## Personal Access Token (PAT)
       Using a username and PAT is the most secure way to authenticate with 
