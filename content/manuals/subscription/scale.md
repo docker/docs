@@ -32,7 +32,7 @@ You can scale consumption for the following:
 
 - Docker Build Cloud build minutes
 - Docker Testcontainers Cloud runtime minutes
-- Docker Hub storage and image pulls
+- Docker Hub storage and pulls
 
 To better understand your needs, you can view your consumption at any time. For
 more details, see [View Docker product
@@ -62,21 +62,20 @@ usage will be billed at the end of each monthly billing cycle. On-demand usage
 is billed at a higher rate than pre-purchased capacity. To avoid on-demand
 charges, pre-purchase additional minutes.
 
-## Add Docker Hub storage or image pulls
+## Add Docker Hub storage or pulls
 
 {{% include "hub-limits.md" %}}
 
-You can pre-purchase image pulls and storage by [contacting
+You can pre-purchase pulls and storage by [contacting
 sales](https://www.docker.com/pricing/contact-sales/). For more information on Docker
 Hub storage pricing, see [Docker Hub storage pricing](/manuals/billing/docker-hub-pricing.md).
 
 > [!WARNING]
 >
-> Once purchased, you can't adjust your pre-paid image pulls, only remove them. To change
-> the amount of pre-paid image pulls you must remove them, wait for the billing cycle to
+> Once purchased, you can't adjust your pre-paid pulls, only remove them. To change
+> the amount of pre-paid pulls you must remove them, wait for the billing cycle to
 > end, and then purchase a new amount.
 
 In addition to pre-purchase, you are able to use as much resources as you need
 on-demand. On-demand usage is billed at a higher rate than pre-purchased
-capacity. To avoid on-demand charges, pre-purchase additional storage or image
-pulls.
+capacity. To avoid on-demand charges, pre-purchase additional storage or pulls.
