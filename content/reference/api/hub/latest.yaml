@@ -83,8 +83,8 @@ tags:
 
       # Labels
 
-      These labels will show up on routes in this document that allow for bearer 
-      tokens issued from them to be used.
+      These labels will show up on routes in this reference that allow for use of bearer 
+      tokens issued from them.
 
       <span class="pat"></span>
       <span class="oat"></span>
