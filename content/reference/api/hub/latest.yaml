@@ -50,7 +50,6 @@ tags:
       Additionally, similar to the Docker Hub UI features, API endpoint responses may vary depending on your plan (Personal, Pro, or Team) and your account's permissions.
 
       To learn more about the features available in each plan and to upgrade your existing plan, see [Docker Pricing](https://www.docker.com/pricing).
-      This section describes the different types of authentication available.
 
       # Types
 
