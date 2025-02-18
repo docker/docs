@@ -50,6 +50,50 @@ tags:
       Additionally, similar to the Docker Hub UI features, API endpoint responses may vary depending on your plan (Personal, Pro, or Team) and your account's permissions.
 
       To learn more about the features available in each plan and to upgrade your existing plan, see [Docker Pricing](https://www.docker.com/pricing).
+
+      # Types
+
+      The Docker Hub API supports the following authentication types.
+
+      You must use each authentication type with the [Create access token](#tag/authentication-api/operation/AuthCreateAccessToken) route to obtain a bearer token.
+
+      ## Password
+      Using a username and password is the most powerful, yet least secure way 
+      to authenticate with Docker as a user. It allows access to resources 
+      for the user without scopes. 
+
+      _In general, it is recommended to use a personal access token (PAT) instead._
+
+      _**The password authentication type is not available if your organization has SSO enforced.**_
+
+      ## Personal Access Token (PAT)
+      Using a username and PAT is the most secure way to authenticate with 
+      Docker as a user. PATs are scoped to specific resources and scopes.
+
+      Currently, a PAT is a more secure password due to limited functionality. 
+      In the future, we may add fine-grained access like organization 
+      access tokens for enhanced usage and security.
+
+      ## Organization Access Token (OAT)
+      Organization access tokens are scoped to specific resources and scopes 
+      in an organization. They are managed by organization owners. 
+      
+      These tokens are meant for automation and are not meant to be used by 
+      users.
+
+      # Labels
+
+      These labels will show up on routes in this reference that allow for use of bearer 
+      tokens issued from them.
+
+      <span class="pat"></span>
+      <span class="oat"></span>
+  - name: authentication-api
+    x-displayName: Authentication
+    description: |
+      The authentication endpoints allow you to authenticate with Docker Hub APIs.
+
+      For more information, see [Authentication](#tag/authentication).
   - name: access-tokens
     x-displayName: Personal Access Tokens
     description: |
@@ -110,7 +154,7 @@ paths:
   /v2/users/login:
     post:
       tags:
-        - authentication
+        - authentication-api
       summary: Create an authentication token
       operationId: PostUsersLogin
       security: []
@@ -123,7 +167,7 @@ paths:
         _**As of September 16, 2024, this route requires a personal access token (PAT) instead of a password if your organization has SSO enforced.**_
         
         <div style="background-color:rgb(255, 165, 0, .25); padding:5px; border-radius:4px">
-          <strong>Deprecated</strong>: Use [<a href="#tag/authentication/operation/AuthCreateAccessToken">Create access token</a>] instead.
+          <strong>Deprecated</strong>: Use [<a href="#tag/authentication-api/operation/AuthCreateAccessToken">Create access token</a>] instead.
         </div>
       requestBody:
         content:
@@ -148,7 +192,7 @@ paths:
   /v2/users/2fa-login:
     post:
       tags:
-        - authentication
+        - authentication-api
       summary: Second factor authentication
       operationId: PostUsers2FALogin
       security: []
@@ -183,7 +227,7 @@ paths:
   /v2/auth/token:
     post:
       tags:
-        - authentication
+        - authentication-api
       security: []
       summary: Create access token
       operationId: AuthCreateAccessToken
@@ -709,7 +753,9 @@ paths:
     get:
       summary: List org members
       description: |
-        Returns a list of members for an organization"
+        Returns a list of members for an organization
+
+        <span class="oat"></span>
       tags:
         - orgs
       security: 
@@ -739,6 +785,8 @@ paths:
       summary: Export org members CSV
       description: |
         Export members of an organization as a CSV
+
+        <span class="oat"></span>
       tags:
         - orgs
       security: 
@@ -812,6 +860,8 @@ paths:
       description: |
         Updates the role of a member in the organization.
         ***Only users in the "owners" group of the organization can use this endpoint.***
+
+        <span class="oat"></span>
       tags:
         - orgs
       security: 
@@ -850,6 +900,8 @@ paths:
       summary: Remove member from org
       description: |
         Removes the member from the org, ie. all groups in the org, unless they're the last owner
+
+        <span class="oat"></span>
       tags:
         - orgs
       security: 
@@ -873,6 +925,8 @@ paths:
       summary: List org invites
       description: |
         Return all pending invites for a given org, only team owners can call this endpoint
+
+        <span class="oat"></span>
       tags:
         - invites
       security: 
@@ -901,6 +955,8 @@ paths:
       - $ref: '#/components/parameters/org_name'
     get:
       summary: Get groups of an organization
+      description: |
+        <span class="oat"></span>
       tags:
         - groups
       security: 
@@ -946,7 +1002,10 @@ paths:
           $ref: '#/components/responses/not_found'
     post:
       summary: Create a new group
-      description: Create a new group within an organization.
+      description: |
+        Create a new group within an organization.
+
+        <span class="oat"></span>
       tags:
         - groups
       security: 
@@ -982,6 +1041,8 @@ paths:
       - $ref: '#/components/parameters/group_name'
     get:
       summary: Get a group of an organization
+      description: |
+        <span class="oat"></span>
       tags:
         - groups
       security: 
@@ -1001,6 +1062,8 @@ paths:
           $ref: '#/components/responses/not_found'
     put:
       summary: Update the details for an organization group
+      description: |
+        <span class="oat"></span>
       tags:
         - groups
       security: 
@@ -1031,6 +1094,8 @@ paths:
           $ref: '#/components/responses/not_found'
     patch:
       summary: Update some details for an organization group
+      description: |
+        <span class="oat"></span>
       tags:
         - groups
       security: 
@@ -1059,6 +1124,8 @@ paths:
           $ref: '#/components/responses/not_found'
     delete:
       summary: Delete an organization group
+      description: |
+        <span class="oat"></span>
       tags:
         - groups
       security: 
@@ -1091,6 +1158,8 @@ paths:
       description: |
         List the members (users) that are in a group.
         If user is owner of the org or has otherwise elevated permissions, they can search by email and the result will also contain emails.
+
+        <span class="oat"></span>
       tags:
         - groups
       responses:
@@ -1123,7 +1192,9 @@ paths:
       parameters:
         - $ref: '#/components/parameters/org_name'
         - $ref: '#/components/parameters/group_name'
-      summary: Adds a member to a group
+      summary: Add a member to a group
+      description: |
+        <span class="oat"></span>
       tags:
         - groups
       security: 
@@ -1148,7 +1219,9 @@ paths:
       - $ref: '#/components/parameters/group_name'
       - $ref: '#/components/parameters/username'
     delete:
-      summary: Removes a user from a group
+      summary: Remove a user from a group
+      description: |
+        <span class="oat"></span>
       tags:
         - groups
       security: 
@@ -1174,6 +1247,8 @@ paths:
       summary: Cancel an invite
       description: |
         Mark the invite as cancelled so it doesn't show up on the list of pending invites
+
+        <span class="oat"></span>
       tags:
         - invites
       security: 
@@ -1199,6 +1274,8 @@ paths:
       summary: Resend an invite
       description: |
         Resend a pending invite to the user, any org owner can resend an invite
+
+        <span class="oat"></span>
       tags:
         - invites
       security: 
@@ -1220,6 +1297,8 @@ paths:
       summary: Bulk create invites
       description: |
         Create multiple invites by emails or DockerIDs. Only a team owner can create invites.
+
+        <span class="oat"></span>
       tags:
         - invites
       requestBody:
@@ -2878,9 +2957,10 @@ x-tagGroups:
     tags:
       - resources
       - rate-limiting
+      - authentication
   - name: API
     tags:
-      - authentication
+      - authentication-api
       - access-tokens
       - images
       - audit-logs
