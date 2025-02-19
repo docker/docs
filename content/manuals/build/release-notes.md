@@ -10,6 +10,23 @@ toc_max: 2
 This page contains information about the new features, improvements, and bug
 fixes in [Docker Buildx](https://github.com/docker/buildx).
 
+## 0.21.0
+
+{{< release-date date="2025-02-19" >}}
+
+The full release note for this release is available
+[on GitHub](https://github.com/docker/buildx/releases/tag/v0.21.0).
+
+### Enhancements
+
+- `COPY --chmod` now allows non-octal values. This feature was previously in the labs channel and is now available in the main release. [docker/buildx#5734](https://github.com/docker/buildx/pull/5734)
+
+### Bug fixes
+
+- Fix handling of "os.version" platform property if one is set by the base image [docker/buildx#5714](https://github.com/docker/buildx/pull/5714)
+- Fix errors where a named context metadata could be resolved even if it was not reachable by the current build configuration, leading to build error [docker/buildx#5688](https://github.com/docker/buildx/pull/5688)
+- Fix silently ignoring `RUN --device` flag when not in labs channel [docker/buildx#5738](https://github.com/docker/buildx/pull/5738)
+
 ## 0.20.1
 
 {{< release-date date="2025-01-23" >}}
