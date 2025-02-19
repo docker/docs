@@ -19,6 +19,32 @@
       background-color: #086dd7;
       padding: 16px;
     }
+
+    .auth-tag,.pat,.oat {
+      border-radius: 4px;
+      color: #fff;
+      padding: 5px; 
+    }
+    
+    .pat {
+      background-color: rgb(149, 80, 124);
+    }
+
+    .pat::after {
+      content: "personal access token";
+    }
+
+    .oat::after {
+      content: "org access token";
+    }
+    
+    .oat {
+      background-color: rgb(24, 111, 175); 
+    }
+
+    .auth-tag:not(:last-child) {
+      margin-right: 5px;
+    }
   </style>
 </head>
 
