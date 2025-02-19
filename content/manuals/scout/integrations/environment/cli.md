@@ -20,7 +20,7 @@ refer to the [CLI reference](/reference/cli/docker/scout/environment.md).
 Before you start, set the following environment variables in your CI system:
 
 - `DOCKER_SCOUT_HUB_USER`: your Docker Hub username
-- `DOCKER_SCOUT_HUB_PASSWORD`: your Docker Hub personal access token
+- `DOCKER_SCOUT_HUB_PASSWORD`: your Docker Hub access token
 
 Make sure the variables are accessible to your project.
 
