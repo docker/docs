@@ -17,7 +17,7 @@ repositories, and supported software artifacts.
   your images within a single repository. This topic explains tagging and
   provides guidance on how to create, view, and delete tags in Docker Hub.
 - [Image Management](./manage.md): Manage your images and image indexes to
-  optimize your repoistory storage.
+  optimize your repository storage.
 - [Software artifacts](./oci-artifacts.md): Docker Hub supports OCI (Open
   Container Initiative) artifacts, allowing you to store, manage, and distribute
   a range of content beyond standard Docker images, including Helm charts,
