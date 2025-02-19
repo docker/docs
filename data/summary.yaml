@@ -150,6 +150,8 @@ GitHub Actions cache:
 Hardened Docker Desktop:
   subscription: [Business]
   for: Administrators
+Image management:
+  availability: Beta
 Import builds:
   availability: Beta
   requires: Docker Desktop [4.31](/manuals/desktop/release-notes.md#4310) and later
