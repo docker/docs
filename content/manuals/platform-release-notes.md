@@ -12,8 +12,6 @@ tags: [Release notes, admin]
 
 This page provides details on new features, enhancements, known issues, and bug fixes across Docker Home, the Admin Console, billing, security, and subscription functionalities.
 
-Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projects/51/views/1?filterQuery=) to see what's coming next.
-
 ## 2025-01-30
 
 ### New

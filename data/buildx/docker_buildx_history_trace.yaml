@@ -1,37 +1,23 @@
-command: docker load
-aliases: docker image load, docker load
-short: Load an image from a tar archive or STDIN
-long: Load an image from a tar archive or STDIN
-usage: docker load [OPTIONS]
-pname: docker
-plink: docker.yaml
+command: docker buildx history trace
+short: Show the OpenTelemetry trace of a build record
+long: Show the OpenTelemetry trace of a build record
+usage: docker buildx history trace [OPTIONS] [REF]
+pname: docker buildx history
+plink: docker_buildx_history.yaml
 options:
-    - option: input
-      shorthand: i
+    - option: addr
       value_type: string
-      description: Read from tar archive file, instead of STDIN
+      default_value: 127.0.0.1:0
+      description: Address to bind the UI server
       deprecated: false
       hidden: false
       experimental: false
       experimentalcli: false
       kubernetes: false
       swarm: false
-    - option: platform
+    - option: compare
       value_type: string
-      description: |
-        Load only the given platform variant. Formatted as `os[/arch[/variant]]` (e.g., `linux/amd64`)
-      deprecated: false
-      hidden: false
-      min_api_version: "1.48"
-      experimental: false
-      experimentalcli: false
-      kubernetes: false
-      swarm: false
-    - option: quiet
-      shorthand: q
-      value_type: bool
-      default_value: "false"
-      description: Suppress the load output
+      description: Compare with another build reference
       deprecated: false
       hidden: false
       experimental: false
@@ -39,12 +25,22 @@ options:
       kubernetes: false
       swarm: false
 inherited_options:
-    - option: help
+    - option: builder
+      value_type: string
+      description: Override the configured builder instance
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: debug
+      shorthand: D
       value_type: bool
       default_value: "false"
-      description: Print usage
+      description: Enable debug logging
       deprecated: false
-      hidden: true
+      hidden: false
       experimental: false
       experimentalcli: false
       kubernetes: false

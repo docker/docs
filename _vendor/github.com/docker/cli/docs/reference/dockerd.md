@@ -24,10 +24,9 @@ A self-sufficient runtime for containers.
 
 Options:
       --add-runtime runtime                   Register an additional OCI compatible runtime (default [])
-      --allow-nondistributable-artifacts list Allow push of nondistributable artifacts to registry
-      --api-cors-header string                Set CORS headers in the Engine API
       --authorization-plugin list             Authorization plugins to load
-      --bip string                            Specify network bridge IP
+      --bip string                            Specify default-bridge IPv4 network
+      --bip6 string                           Specify default-bridge IPv6 network
   -b, --bridge string                         Attach containers to a network bridge
       --cdi-spec-dir list                     CDI specification directories to use
       --cgroup-parent string                  Set parent cgroup for all containers
@@ -63,8 +62,8 @@ Options:
   -G, --group string                          Group for the unix socket (default "docker")
       --help                                  Print usage
   -H, --host list                             Daemon socket(s) to connect to
-      --host-gateway-ip ip                    IP address that the special 'host-gateway' string in --add-host resolves to.
-                                              Defaults to the IP address of the default bridge
+      --host-gateway-ip list                  IP addresses that the special 'host-gateway' string in --add-host resolves to.
+                                              Defaults to the IP addresses of the default bridge
       --http-proxy string                     HTTP proxy URL to use for outgoing traffic
       --https-proxy string                    HTTPS proxy URL to use for outgoing traffic
       --icc                                   Enable inter-container communication (default true)
@@ -72,7 +71,8 @@ Options:
       --init-path string                      Path to the docker-init binary
       --insecure-registry list                Enable insecure registry communication
       --ip ip                                 Default IP when binding container ports (default 0.0.0.0)
-      --ip-forward                            Enable net.ipv4.ip_forward (default true)
+      --ip-forward                            Enable IP forwarding in system configuration (default true)
+      --ip-forward-no-drop                    Do not set the filter-FORWARD policy to DROP when enabling IP forwarding
       --ip-masq                               Enable IP masquerading (default true)
       --ip6tables                             Enable addition of ip6tables rules (experimental)
       --iptables                              Enable addition of iptables rules (default true)
@@ -687,34 +687,6 @@ To set the DNS search domain for all Docker containers, use:
 $ sudo dockerd --dns-search example.com
 ```
 
-### Allow push of non-distributable artifacts
-
-Some images (e.g., Windows base images) contain artifacts whose distribution is
-restricted by license. When these images are pushed to a registry, restricted
-artifacts are not included.
-
-To override this behavior for specific registries, use the
-`--allow-nondistributable-artifacts` option in one of the following forms:
-
-* `--allow-nondistributable-artifacts myregistry:5000` tells the Docker daemon
-  to push non-distributable artifacts to myregistry:5000.
-* `--allow-nondistributable-artifacts 10.1.0.0/16` tells the Docker daemon to
-  push non-distributable artifacts to all registries whose resolved IP address
-  is within the subnet described by the CIDR syntax.
-
-This option can be used multiple times.
-
-This option is useful when pushing images containing non-distributable artifacts
-to a registry on an air-gapped network so hosts on that network can pull the
-images without connecting to another server.
-
-> [!WARNING]
-> Non-distributable artifacts typically have restrictions on how
-> and where they can be distributed and shared. Only use this feature to push
-> artifacts to private registries and ensure that you are in compliance with
-> any terms that cover redistributing non-distributable artifacts.
-{ .warning }
-
 ### Insecure registries
 
 In this section, "registry" refers to a private registry, and `myregistry:5000`
@@ -837,21 +809,34 @@ For details about how to use this feature, as well as limitations, see
 
 The Docker daemon supports a special `host-gateway` value for the `--add-host`
 flag for the `docker run` and `docker build` commands. This value resolves to
-the host's gateway IP and lets containers connect to services running on the
+addresses on the host, so that containers can connect to services running on the
 host.
 
-By default, `host-gateway` resolves to the IP address of the default bridge.
+By default, `host-gateway` resolves to the IPv4 address of the default bridge,
+and its IPv6 address if it has one.
+
 You can configure this to resolve to a different IP using the `--host-gateway-ip`
 flag for the dockerd command line interface, or the `host-gateway-ip` key in
 the daemon configuration file.
 
+To supply both IPv4 and IPv6 addresses on the command line, use two
+`--host-gateway-ip` options.
+
+To supply addresses in the daemon configuration file, use `"host-gateway-ips"`
+with a JSON array, as shown below. For compatibility with older versions of the
+daemon, a single IP address can also be specified as a JSON string in option
+`"host-gateway-ip"`.
+
 ```console
 $ cat > /etc/docker/daemon.json
-{ "host-gateway-ip": "192.0.2.0" }
+{ "host-gateway-ips": ["192.0.2.1", "2001:db8::1111"]}
 $ sudo systemctl restart docker
 $ docker run -it --add-host host.docker.internal:host-gateway \
   busybox ping host.docker.internal 
-PING host.docker.internal (192.0.2.0): 56 data bytes
+PING host.docker.internal (192.0.2.1): 56 data bytes
+$ docker run -it --add-host host.docker.internal:host-gateway \
+  busybox ping -6 host.docker.internal
+PING host.docker.internal (2001:db8::1111): 56 data bytes
 ```
 
 ### Enable CDI devices
@@ -1072,10 +1057,9 @@ The following is a full example of the allowed configuration options on Linux:
 
 ```json
 {
-  "allow-nondistributable-artifacts": [],
-  "api-cors-header": "",
   "authorization-plugins": [],
   "bip": "",
+  "bip6": "",
   "bridge": "",
   "builder": {
     "gc": {
@@ -1220,7 +1204,6 @@ The following is a full example of the allowed configuration options on Windows:
 
 ```json
 {
-  "allow-nondistributable-artifacts": [],
   "authorization-plugins": [],
   "bridge": "",
   "containerd": "\\\\.\\pipe\\containerd-containerd",
@@ -1324,7 +1307,6 @@ The list of currently supported options that can be reconfigured is this:
 | `default-runtime`                  | Configures the runtime to be used if not is specified at container creation.                                |
 | `runtimes`                         | Configures the list of available OCI runtimes that can be used to run containers.                           |
 | `authorization-plugin`             | Specifies the authorization plugins to use.                                                                 |
-| `allow-nondistributable-artifacts` | Specifies a list of registries to which the daemon will push non-distributable artifacts.                   |
 | `insecure-registries`              | Specifies a list of registries that the daemon should consider insecure.                                    |
 | `registry-mirrors`                 | Specifies a list of registry mirrors.                                                                       |
 | `shutdown-timeout`                 | Configures the daemon's existing configuration timeout with a new timeout for shutting down all containers. |

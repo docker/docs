@@ -183,6 +183,8 @@ musl
 nameserver
 namespace
 namespacing
+netfilter
+netlabel
 npm
 osquery
 osxfs
