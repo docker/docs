@@ -29,6 +29,17 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: gw-priority
+      value_type: int
+      default_value: "0"
+      description: |
+        Highest gw-priority provides the default gateway. Accepts positive and negative values.
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: ip
       value_type: string
       description: IPv4 address (e.g., `172.30.100.104`)
