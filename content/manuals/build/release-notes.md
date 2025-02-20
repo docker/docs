@@ -19,7 +19,7 @@ The full release note for this release is available
 
 ### New
 
-- New command `buildx history trace` allows inspecting traces of a build in a Jaeger UI-based viewer and comparing one trace with another. [docker/buildx#2904](https://github.com/docker/buildx/pull/2904)
+- New command `buildx history trace` lets you inspect traces of a build in a Jaeger UI-based viewer and compare one trace with another. [docker/buildx#2904](https://github.com/docker/buildx/pull/2904)
 
 ### Enhancements
 
