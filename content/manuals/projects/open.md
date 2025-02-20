@@ -91,7 +91,7 @@ To clone and open a remote project:
 
 2. Open your project by selecting your project under **Recents**, or by selecting the specific owner that your project is associated with and then select your project. 
 
-## Open an existing remote project
+### Open an existing remote project
 
 In the Projects page in Docker Desktop, existing remote projects display No local copy under the project. 
 

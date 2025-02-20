@@ -2,7 +2,7 @@
 title: Add or edit your run commands
 description: Learn how to add or edit your run commands in Docker Projects
 keywords: Docker, projects, docker deskotp, containerization, open, remote, local, run commands
-weight: 20
+weight: 30
 ---
 
 ## Add a run command to a project

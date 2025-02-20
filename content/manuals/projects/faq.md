@@ -3,6 +3,7 @@ title: Docker Projects FAQs
 linkTitle: FAQs
 description: Find common FAQs for Docker Projects
 keywords: faqs, docker projects, local, remote
+weight: 60
 ---
 
 ## Why is a Compose file required?
