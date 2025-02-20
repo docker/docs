@@ -31,8 +31,9 @@ The following table describes the available CSV parameters that you can pass to
 `--cache-to` and `--cache-from`.
 
 | Name           | Option                  | Type        | Default                  | Description                                                          |
-| -------------- | ----------------------- | ----------- | ------------------------ | -------------------------------------------------------------------- |
+|----------------|-------------------------|-------------|--------------------------|----------------------------------------------------------------------|
 | `url`          | `cache-to`,`cache-from` | String      | `$ACTIONS_CACHE_URL`     | Cache server URL, see [authentication][1].                           |
+| `url_v2`       | `cache-to`,`cache-from` | String      | `$ACTIONS_CACHE_URL`     | Cache v2 server URL, see [authentication][1].                        |
 | `token`        | `cache-to`,`cache-from` | String      | `$ACTIONS_RUNTIME_TOKEN` | Access token, see [authentication][1].                               |
 | `scope`        | `cache-to`,`cache-from` | String      | `buildkit`               | Which scope cache object belongs to, see [scope][2]                  |
 | `mode`         | `cache-to`              | `min`,`max` | `min`                    | Cache layers to export, see [cache mode][3].                         |
@@ -47,10 +48,10 @@ The following table describes the available CSV parameters that you can pass to
 
 ## Authentication
 
-If the `url` or `token` parameters are left unspecified, the `gha` cache backend
-will fall back to using environment variables. If you invoke the `docker buildx`
-command manually from an inline step, then the variables must be manually
-exposed. Consider using the
+If the `url`, `url_v2` or `token` parameters are left unspecified, the `gha`
+cache backend will fall back to using environment variables. If you invoke the
+`docker buildx` command manually from an inline step, then the variables must
+be manually exposed. Consider using the
 [`crazy-max/ghaction-github-runtime`](https://github.com/crazy-max/ghaction-github-runtime),
 GitHub Action as a helper for exposing the variables.
 
