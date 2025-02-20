@@ -2,7 +2,7 @@
 title: View your project
 description: View information about your project or the services within your project.
 keywords: containers, docker projects, local, remote, docker desktop
-weight: 20
+weight: 30
 ---
 
 

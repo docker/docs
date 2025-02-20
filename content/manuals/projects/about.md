@@ -2,6 +2,7 @@
 title: How it works
 description: Understand how Docker Projects works 
 keywords: docker projects
+weight: 10
 ---
 
 Docker Projects requires a Compose file (docker-compose.yml) to define your application's services, networks, and configurations. When you open a project, Docker Projects automatically detects the Compose file, allowing you to configure and run services with pre-set commands. 

@@ -2,7 +2,7 @@
 title: Manage your projects
 description: Learn how to delete or completely remove a project.
 keywords: Docker, projects, docker deskotp, containerization, open, remote, local
-weight: 40
+weight: 50
 ---
 
 ## Run a project or service

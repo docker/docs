@@ -36,6 +36,8 @@ grid:
   link: /projects/faq/
 ---
 
+{{< summary-bar feature_name="Docker Projects" >}}
+
 Docker Projects provides a simplified, project-based workflow for running and managing containerized applications. It organizes your code, configurations, and logs across local and cloud environments into a single view, making it easy to collaborate and share across teams.
 
 A project organizes your code and Docker artifacts into a single object. These artifacts include logs as well as customizable run commands. These artifacts can persist remotely in the cloud, which lets you access your projects from any device that has Docker Desktop.

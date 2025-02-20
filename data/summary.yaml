@@ -123,6 +123,8 @@ Docker Desktop CLI update:
   requires: Docker Desktop 4.38 and later
 Docker GitHub Copilot:
   availability: Early Access
+Docker Projects:
+  availability: Beta
 Docker Scout exceptions:
   availability: Experimental
   requires: Docker Scout CLI [1.15.0](/manuals/scout/release-notes/cli.md#1150) and later

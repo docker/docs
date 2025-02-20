@@ -2,7 +2,7 @@
 title: Open a new project
 description: Learn how to open a new local or remote project, or an existing project in Docker Projects. 
 keywords: Docker, projects, docker deskotp, containerization, open, remote, local
-weight: 10
+weight: 20
 ---
 
 ## New projects
