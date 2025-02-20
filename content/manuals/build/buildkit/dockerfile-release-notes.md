@@ -13,6 +13,34 @@ issues, and bug fixes in [Dockerfile reference](/reference/dockerfile.md).
 
 For usage, see the [Dockerfile frontend syntax](frontend.md) page.
 
+## 1.14.0
+
+{{< release-date date="2025-02-19" >}}
+
+The full release note for this release is available
+[on GitHub](https://github.com/moby/buildkit/releases/tag/dockerfile%2F1.14.0).
+
+```dockerfile
+# syntax=docker/dockerfile:1.14.0
+```
+
+- `COPY --chmod` now allows non-octal values. This feature was previously in the labs channel and is now available in the main release. [moby/buildkit#5734](https://github.com/moby/buildkit/pull/5734)
+- Fix handling of "os.version" platform property if one is set by the base image [moby/buildkit#5714](https://github.com/moby/buildkit/pull/5714)
+- Fix errors where a named context metadata could be resolved even if it was not reachable by the current build configuration, leading to build error [moby/buildkit#5688](https://github.com/moby/buildkit/pull/5688)
+
+## 1.14.0-labs
+
+{{< release-date date="2025-02-19" >}}
+
+The full release note for this release is available
+[on GitHub](https://github.com/moby/buildkit/releases/tag/dockerfile%2F1.14.0-labs).
+
+```dockerfile
+# syntax=docker.io/docker/dockerfile-upstream:1.14.0-labs
+```
+
+- New `RUN --device=name,[required]` flag allows build to request CDI devices to be available to the build step. Requires BuildKit v0.20.0+ [moby/buildkit#4056](https://github.com/moby/buildkit/pull/4056), [moby/buildkit#5738](https://github.com/moby/buildkit/pull/5738)
+
 ## 1.13.0
 
 {{< release-date date="2025-01-20" >}}
