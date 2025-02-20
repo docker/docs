@@ -25,8 +25,8 @@ The full release note for this release is available
 ```
 
 - `COPY --chmod` now allows non-octal values. This feature was previously in the labs channel and is now available in the main release. [moby/buildkit#5734](https://github.com/moby/buildkit/pull/5734)
-- Fix handling of "os.version" platform property if one is set by the base image [moby/buildkit#5714](https://github.com/moby/buildkit/pull/5714)
-- Fix errors where a named context metadata could be resolved even if it was not reachable by the current build configuration, leading to build error [moby/buildkit#5688](https://github.com/moby/buildkit/pull/5688)
+- Fix handling of OSVersion platform property if one is set by the base image [moby/buildkit#5714](https://github.com/moby/buildkit/pull/5714)
+- Fix errors where a named context metadata could be resolved even if it was not reachable by the current build configuration, leading to build errors [moby/buildkit#5688](https://github.com/moby/buildkit/pull/5688)
 
 ## 1.14.0-labs
 
@@ -39,7 +39,7 @@ The full release note for this release is available
 # syntax=docker.io/docker/dockerfile-upstream:1.14.0-labs
 ```
 
-- New `RUN --device=name,[required]` flag allows build to request CDI devices to be available to the build step. Requires BuildKit v0.20.0+ [moby/buildkit#4056](https://github.com/moby/buildkit/pull/4056), [moby/buildkit#5738](https://github.com/moby/buildkit/pull/5738)
+- New `RUN --device=name,[required]` flag lets builds request CDI devices are available to the build step. Requires BuildKit v0.20.0+ [moby/buildkit#4056](https://github.com/moby/buildkit/pull/4056), [moby/buildkit#5738](https://github.com/moby/buildkit/pull/5738)
 
 ## 1.13.0
 
