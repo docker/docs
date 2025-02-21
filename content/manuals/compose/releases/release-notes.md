@@ -13,6 +13,20 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.33.1 
+
+{{< release-date date="2025-02-21" >}}
+
+### Bug fixes and enhancements
+
+- Added support for gw_priority, enable_ipv4 (requires docker v28.0) 
+- Fixed an issue with navigation menu
+- Improved error message when using non-file secret/config with read-only service
+
+### Update
+
+- Dependencies upgrade: bump docker engine and cli to v28.0.0
+
 ## 2.33.0
 
 {{< release-date date="2025-02-13" >}}
