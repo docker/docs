@@ -75,7 +75,6 @@ Docker Pro includes:
 - 2 included repositories with continuous vulnerability analysis in Docker Scout.
 - 100 Testcontainers Cloud runtime minutes per month for use either in Docker Desktop or for CI.
 - No Docker Hub image pull rate limits.
-- 25K Docker Hub pulls per month are included.
 
 For a list of features available in each tier, see [Docker
 Pricing](https://www.docker.com/pricing/).
@@ -97,7 +96,6 @@ Docker Team includes:
 - Unlimited Docker Scout repositories with continuous vulnerability analysis.
 - 500 Testcontainers Cloud runtime minutes per month for use either in Docker Desktop or for CI.
 - No Docker Hub image pull rate limits.
-- 100K Docker Hub pulls per month.
 
 There are also advanced collaboration and management tools, including
 organization and team management with [Role Based Access Control
@@ -124,7 +122,6 @@ Docker Business includes:
 - 1500 Testcontainers Cloud runtime minutes per month for use either in Docker Desktop or
   for CI.
 - No Docker Hub image pull rate limits.
-- 1M Docker Hub pulls per month.
 
 In addition, you gain access to enterprise-grade features, such as:
 - [Hardened Docker Desktop](../security/for-admins/hardened-desktop/_index.md)
