@@ -9,26 +9,18 @@ weight: 10
 {{% include "hub-limits.md" %}}
 
 Unauthenticated and Docker Personal users are subject to hourly pull rate limits
-on Docker Hub. In contrast, Docker Pro, Team, and Business users benefit from a
-base number of included pulls per month without hourly rate restrictions. This
-included usage is flexible, allowing you to scale or upgrade your subscription
-to accommodate additional pulls or utilize on-demand pulls as needed.
-
-Any pulls exceeding the included amounts in each subscription tier will be
-charged at an on-demand rate. To increase your monthly pull allowance and avoid
-on-demand charges, you can [scale](/manuals/subscription/scale.md) or
-[upgrade](/manuals/subscription/change.md) your subscription.
+on Docker Hub. In contrast, Docker Pro, Team, and Business users benefit from
+unlimited pulls per hour.
 
 The following pull usage and limits apply based on your subscription, subject to
 fair use:
-
 
 | User type                | Pulls per month | Pull rate limit per hour               |
 |--------------------------|-----------------|----------------------------------------|
 | Business (authenticated) | 1M              | Unlimited                              |
 | Team (authenticated)     | 100K            | Unlimited                              |
 | Pro (authenticated)      | 25K             | Unlimited                              |
-| Personal (authenticated) | Not applicable  | 40                                     |
+| Personal (authenticated) | Not applicable  | 100                                     |
 | Unauthenticated Users    | Not applicable  | 10 per IPv4 address or IPv6 /64 subnet |
 
 ## Pull definition

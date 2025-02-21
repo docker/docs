@@ -3,6 +3,9 @@
 
 > [!NOTE]
 >
-> The Docker Hub plan limits will take effect on March 1, 2025. No charges on
-> Docker Hub pulls or storage will be incurred between December 10, 2024,
-> and February 28, 2025.
+> Starting April 1, 2025, all users with a Pro, Team, or Business
+> subscription will have unlimited Docker Hub pulls with fair use.
+> Unauthenticated users and users with a free Personal account have the
+> following pull limits:
+>    - Unauthenticated users: 10 pulls/hour
+>    - Authenticated users with a free account: 100 pulls/hour
