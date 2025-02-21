@@ -16,9 +16,9 @@ user type, subject to fair use:
 
 | User type                | Pulls per month | Pull rate limit per hour               | Public repositories | Public repository storage | Private repositories |
 |--------------------------|-----------------|----------------------------------------|---------------------|---------------------------|----------------------|
-| Business (authenticated) | 1M              | Unlimited                              | Unlimited           | Unlimited                 | Unlimited            |
-| Team (authenticated)     | 100K            | Unlimited                              | Unlimited           | Unlimited                 | Unlimited            |
-| Pro (authenticated)      | 25K             | Unlimited                              | Unlimited           | Unlimited                 | Unlimited            |
+| Business (authenticated) | Unlimited              | Unlimited                              | Unlimited           | Unlimited                 | Unlimited            |
+| Team (authenticated)     | Unlimited            | Unlimited                              | Unlimited           | Unlimited                 | Unlimited            |
+| Pro (authenticated)      | Unlimited             | Unlimited                              | Unlimited           | Unlimited                 | Unlimited            |
 | Personal (authenticated) | Not applicable  | 100                                     | Unlimited           | Unlimited                 | Up to 1              |
 | Unauthenticated users    | Not applicable  | 10 per IPv4 address or IPv6 /64 subnet | Not applicable      | Not applicable            | Not applicable       |
 
