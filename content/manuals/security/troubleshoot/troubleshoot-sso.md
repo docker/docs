@@ -28,7 +28,7 @@ If you experience issues with SSO, check both the Docker Admin Console and your 
 
 1. Review your IdP’s logs or audit trails for any failed authentication or provisioning attempts.
 2. Confirm that your IdP’s SSO settings match the values provided in Docker.
-3. Confirm that you have configured SCIM correctly and that it is enabled in your IdP.
+3. If applicable, confirm that you have configured user provisioning correctly and that it is enabled in your IdP.
 4. If applicable, verify that your IdP correctly maps Docker's required user attributes.
 5. Try provisioning a test user from your IdP and verify if they appear in Docker.
 
