@@ -6,8 +6,6 @@ linkTitle: Storage
 weight: 20
 ---
 
-{{% include "hub-limits.md" %}}
-
 The following storage and repository limits apply based on your subscription, subject to fair use:
 
 | Plan     | Public repositories | Public repository storage | Private repositories       |
