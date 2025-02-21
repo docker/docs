@@ -200,7 +200,6 @@ When you upgrade your Legacy Docker Pro plan to a Docker Pro subscription plan, 
 - 2 included repositories with continuous vulnerability analysis in Docker Scout.
 - 100 Testcontainers Cloud runtime minutes are now included for use either in Docker Desktop or for CI.
 - Docker Hub image pull rate limits are removed.
-- 25K Docker Hub pulls per month are included.
 
 For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/).
 
@@ -233,7 +232,6 @@ When you upgrade your Legacy Docker Team plan to a Docker Team subscription plan
 - Docker Scout now includes unlimited repositories with continuous vulnerability analysis, an increase from 3.
 - 500 Testcontainers Cloud runtime minutes are now included for use either in Docker Desktop or for CI.
 - Docker Hub image pull rate limits are removed.
-- 100K Docker Hub pulls per month are included.
 - The minimum number of users is 1 (lowered from 5).
 
 For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/).
@@ -266,7 +264,6 @@ When you upgrade your Legacy Docker Business plan to a Docker Business subscript
 - Docker Scout now includes unlimited repositories with continuous vulnerability analysis, an increase from 3.
 - 1500 Testcontainers Cloud runtime minutes are now included for use either in Docker Desktop or for CI.
 - Docker Hub image pull rate limits are removed.
-- 1M Docker Hub pulls per month are included.
 
 For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/).
 
