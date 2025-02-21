@@ -17,11 +17,6 @@ The following storage and repository limits apply based on your subscription, su
 | Team     | Unlimited           | Unlimited                 | Unlimited                  |
 | Business | Unlimited           | Unlimited                 | Unlimited                  |
 
-Any storage usage beyond the included amounts in each paid subscription tier
-will be charged at an on-demand rate. For more details about storage
-calcultations and billing, see [Docker Hub storage
-pricing](/manuals/billing/docker-hub-pricing.md).
-
 ## View storage usage and repositories
 
 You can view your storage usage on the [Usage page](https://hub.docker.com/usage/storage) in Docker Hub.

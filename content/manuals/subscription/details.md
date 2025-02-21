@@ -44,7 +44,7 @@ Docker Personal includes:
 - 1 included repository with continuous vulnerability analysis in Docker Scout
 - Unlimited public Docker Hub repositories
 - 1 private Docker Hub repository with 2GB storage
-- 40 pulls per hour Docker Hub image pull rate limit
+- 100 pulls per hour Docker Hub image pull rate limit (for authenticated users)
 - 7-day Docker Build Cloud trial
 - 7-day Testcontainers Cloud trial
 
@@ -52,12 +52,14 @@ Docker Personal users who want to continue using Docker Build Cloud or Docker
 Testcontainers Cloud after their trial can upgrade to a Docker Pro plan at any
 time.
 
-All unauthenticated user, including unauthenticated Docker Personal users, get
+All unauthenticated users, including unauthenticated Docker Personal users, get
 10 pulls per hour per IP address.
 
 For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/).
 
 ## Docker Pro
+
+{{% include "hub-limits.md" %}}
 
 **Docker Pro** enables individual developers to get more control of their
 development environment and provides an integrated and reliable developer
@@ -79,6 +81,8 @@ For a list of features available in each tier, see [Docker
 Pricing](https://www.docker.com/pricing/).
 
 ## Docker Team
+
+{{% include "hub-limits.md" %}}
 
 **Docker Team** offers capabilities for collaboration, productivity, and
 security across organizations. It enables groups of developers to unlock the
@@ -103,6 +107,8 @@ For a list of features available in each tier, see [Docker
 Pricing](https://www.docker.com/pricing/).
 
 ## Docker Business
+
+{{% include "hub-limits.md" %}}
 
 **Docker Business** offers centralized management and advanced security features
 for enterprises that use Docker at scale. It empowers leaders to manage their
@@ -171,6 +177,8 @@ The following describes some of the key features included with your Legacy Docke
 
 ### Legacy Docker Pro
 
+{{% include "hub-limits.md" %}}
+
 **Legacy Docker Pro** enables individual developers to get more control of their
 development environment and provides an integrated and reliable developer
 experience. It reduces the amount of time developers spend on mundane and
@@ -202,6 +210,8 @@ When you upgrade your Legacy Docker Pro plan to a Docker Pro subscription plan, 
 For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/).
 
 ### Legacy Docker Team
+
+{{% include "hub-limits.md" %}}
 
 **Legacy Docker Team** offers capabilities for collaboration, productivity, and
 security across organizations. It enables groups of developers to unlock the
@@ -236,6 +246,8 @@ When you upgrade your Legacy Docker Team plan to a Docker Team subscription plan
 For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/).
 
 ### Legacy Docker Business
+
+{{% include "hub-limits.md" %}}
 
 **Legacy Docker Business** offers centralized management and advanced security features
 for enterprises that use Docker at scale. It empowers leaders to manage their
