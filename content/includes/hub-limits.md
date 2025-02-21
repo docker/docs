@@ -1,6 +1,3 @@
----
----
-
 > [!NOTE]
 >
 > Starting April 1, 2025, all users with a Pro, Team, or Business
