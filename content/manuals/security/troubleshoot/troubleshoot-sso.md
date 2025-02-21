@@ -10,9 +10,29 @@ aliases:
 
 While configuring or using single sign-on (SSO), you may encounter issues that
 can stem from your identity provider (IdP) or Docker configuration. The
-following sections describe some common SSO errors and possible solutions. You can also see
-your identity provider's documentation to learn if you can view error logs in
-their service.
+following sections describe some common SSO errors and possible solutions.
+
+## Check for errors
+
+If you experience issues with SSO, check both the Docker Admin Console and your identity provider (IdP) for errors first.
+
+#### Check Docker error logs
+
+1. Sign in to the [Admin Console](https://app.docker.com/admin/) and select your organization.
+2. Select **SSO and SCIM**.
+3. In the SSO connections table, select the **Action** menu and then **View error logs**.
+4. For more details on specific errors, select **View error details** next to an error message.
+5. Note any errors you see on this page for further troubleshooting.
+
+#### Check for errors in your IdP
+
+1. Review your IdP’s logs or audit trails for any failed authentication or provisioning attempts.
+2. Confirm that your IdP’s SSO settings match the values provided in Docker.
+3. Confirm that you have configured SCIM correctly and that it is enabled in your IdP.
+4. If applicable, verify that your IdP correctly maps Docker's required user attributes.
+5. Try provisioning a test user from your IdP and verify if they appear in Docker.
+
+For further troubleshooting, check your IdP’s documentation. You can also contact their support team for guidance on error messages.
 
 ## Groups are not formatted correctly
 
@@ -73,7 +93,7 @@ to re-enable it:
 
 1. Sign in to the [Admin Console](https://app.docker.com/admin) and select your organization.
 2. Select **SSO and SCIM**.
-3. In the SSO connections table, select the **Action** icon and then **Enable JIT provisioning**.
+3. In the SSO connections table, select the **Action** menu and then **Enable JIT provisioning**.
 4. Select **Enable** to confirm.
 
 **Manually invite users**
@@ -87,7 +107,7 @@ If you have SCIM enabled, troubleshoot your SCIM connection using the following 
 
 1. Sign in to the [Admin Console](https://app.docker.com/admin) and select your organization.
 2. Select **SSO and SCIM**.
-3. In the SSO connections table, select the **Action** icon and then **View error logs**. For more details on specific errors, select **View error details** next to an error message. Note any errors you see on this page.
+3. In the SSO connections table, select the **Action** menu and then **View error logs**. For more details on specific errors, select **View error details** next to an error message. Note any errors you see on this page.
 4. Navigate back to the **SSO and SCIM** page of the Admin Console and verify your SCIM configuration:
     - Ensure that the SCIM Base URL and API Token in your IdP match those provided in the Docker Admin Console.
     - Verify that SCIM is enabled in both Docker and your IdP.
