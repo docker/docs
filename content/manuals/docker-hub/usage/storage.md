@@ -2,7 +2,7 @@
 description: Learn about storage usage limits for Docker Hub.
 keywords: Docker Hub, usage, storage, repository
 title: Docker Hub repositories
-linkTitle: Storage
+linkTitle: Number of repositories
 weight: 20
 aliases:
     - /docker-hub/usage/storage/
