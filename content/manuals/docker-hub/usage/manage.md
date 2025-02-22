@@ -36,10 +36,7 @@ both individuals and organizations:
     - Regularly auditing and [removing entire repositories](../repos/delete.md) with untagged, unused, or outdated images.
     - Using [Image Management](../repos/manage/hub-images/manage.md) to remove stale and outdated images within a repository.
 
-5. Increase your limits by upgrading or purchasing additional consumption. For
-   details, see [Scale your subscription](/manuals/subscription/scale.md).
-
-6. For organizations, monitor and enforce organizational policies by doing the
+5. For organizations, monitor and enforce organizational policies by doing the
    following:
 
    - Routinely [view Docker Hub usage](https://hub.docker.com/usage) to monitor usage.
