@@ -14,18 +14,18 @@ The following table provides an overview of the included usage and limits for ea
 user type, subject to fair use:
 
 
-| User type                | Pull rate limit per hour               | Public repositories | Public repository storage | Private repositories |
-|--------------------------|----------------------------------------|---------------------|---------------------------|----------------------|
-| Business (authenticated) | Unlimited                              | Unlimited           | Unlimited                 | Unlimited            |
-| Team (authenticated)     | Unlimited                              | Unlimited           | Unlimited                 | Unlimited            |
-| Pro (authenticated)      | Unlimited                              | Unlimited           | Unlimited                 | Unlimited            |
-| Personal (authenticated) | 100                                     | Unlimited           | Unlimited                 | Up to 1              |
-| Unauthenticated users    | 10 per IPv4 address or IPv6 /64 subnet | Not applicable      | Not applicable            | Not applicable       |
+| User type                | Pull rate limit per hour               | Number of public repositories | Number of private repositories |
+|--------------------------|----------------------------------------|---------------------|----------------------|
+| Business (authenticated) | Unlimited                              | Unlimited           | Unlimited            |
+| Team (authenticated)     | Unlimited                              | Unlimited           | Unlimited            |
+| Pro (authenticated)      | Unlimited                              | Unlimited           | Unlimited            |
+| Personal (authenticated) | 100                                    | Unlimited           | Up to 1              |
+| Unauthenticated users    | 10 per IPv4 address or IPv6 /64 subnet | Not applicable      | Not applicable       |
 
 For more details, see the following:
 
 - [Pull usage and limits](./pulls.md)
-- [Storage usage and limits](./storage.md)
+- [Docker Hub repositories](./repositories.md)
 
 ## Fair use
 
