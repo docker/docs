@@ -32,6 +32,8 @@ grid_core:
   description: Discover how Docker billing supports 3DS and how to troubleshoot potential issues.
   link: /billing/3d-secure/
   icon: wallet
+aliases:
+  - /billing/docker-hub-pricing/
 ---
 
 Use the resources in this section to manage your billing and payment settings for your Docker subscription plans.
