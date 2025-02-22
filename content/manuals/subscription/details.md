@@ -43,7 +43,6 @@ Docker Personal includes:
 
 - 1 included repository with continuous vulnerability analysis in Docker Scout
 - Unlimited public Docker Hub repositories
-- 1 private Docker Hub repository with 2GB storage
 - 100 pulls per hour Docker Hub image pull rate limit for authenticated users
 - 7-day Docker Build Cloud trial
 - 7-day Testcontainers Cloud trial

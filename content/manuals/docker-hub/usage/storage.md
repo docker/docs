@@ -1,19 +1,21 @@
 ---
 description: Learn about storage usage limits for Docker Hub.
 keywords: Docker Hub, usage, storage, repository
-title: Docker Hub storage usage and limits
+title: Docker Hub repositories
 linkTitle: Storage
 weight: 20
+aliases:
+    - /docker-hub/usage/storage/
 ---
 
-The following storage and repository limits apply based on your subscription, subject to fair use:
+The following number of repositories apply based on your subscription, subject to fair use:
 
-| Plan     | Public repositories | Public repository storage | Private repositories       |
-|----------|---------------------|---------------------------|----------------------------|
-| Personal | Unlimited           | Unlimited                 | Up to 1 private repository |
-| Pro      | Unlimited           | Unlimited                 | Unlimited                  |
-| Team     | Unlimited           | Unlimited                 | Unlimited                  |
-| Business | Unlimited           | Unlimited                 | Unlimited                  |
+| Plan     | Number of public repositories | Number of private repositories       |
+|----------|-------------------------------|----------------------------|
+| Personal | Unlimited                     | Up to 1 private repository |
+| Pro      | Unlimited                     | Unlimited                  |
+| Team     | Unlimited                     | Unlimited                  |
+| Business | Unlimited                     | Unlimited                  |
 
 ## View storage usage and repositories
 

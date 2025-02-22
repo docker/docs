@@ -15,13 +15,13 @@ unlimited pulls per hour.
 The following pull usage and limits apply based on your subscription, subject to
 fair use:
 
-| User type                | Pulls per month | Pull rate limit per hour               |
-|--------------------------|-----------------|----------------------------------------|
-| Business (authenticated) | Unlimited       | Unlimited                              |
-| Team (authenticated)     | Unlimited       | Unlimited                              |
-| Pro (authenticated)      | Unlimited       | Unlimited                              |
-| Personal (authenticated) | Not applicable  | 100                                     |
-| Unauthenticated Users    | Not applicable  | 10 per IPv4 address or IPv6 /64 subnet |
+| User type                | Pull rate limit per hour               |
+|--------------------------|----------------------------------------|
+| Business (authenticated) | Unlimited                              |
+| Team (authenticated)     | Unlimited                              |
+| Pro (authenticated)      | Unlimited                              |
+| Personal (authenticated) | 100                                     |
+| Unauthenticated Users    | 10 per IPv4 address or IPv6 /64 subnet |
 
 ## Pull definition
 
