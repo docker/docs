@@ -308,15 +308,35 @@ Alternatively, you can use the `dockerd --ip` flag when starting the daemon.
 
 ## Docker on a router
 
-Docker sets the policy for the `FORWARD` chain to `DROP`. This will prevent
-your Docker host from acting as a router.
+On Linux, Docker needs "IP Forwarding" enabled on the host. So, it enables
+the `sysctl` settings `net.ipv4.ip_forward` and `net.ipv6.conf.all.forwarding`
+it they are not already enabled when it starts. When it does that, it also
+sets the policy of the iptables `FORWARD` chain to `DROP`.
 
-If you want your system to function as a router, you must add explicit
-`ACCEPT` rules to the `DOCKER-USER` chain. For example:
+If Docker sets the policy for the `FORWARD` chain to `DROP`. This will prevent
+your Docker host from acting as a router, it is the recommended setting when
+IP Forwarding is enabled.
+
+To stop Docker from setting the `FORWARD` chain's policy to `DROP`, include
+`"ip-forward-no-drop": true` in `/etc/docker/daemon.json`, or add option
+`--ip-forward-no-drop` to the `dockerd` command line.
+
+Alternatively, you may add `ACCEPT` rules to the `DOCKER-USER` chain for the
+packets you want to forward. For example:
 
 ```console
 $ iptables -I DOCKER-USER -i src_if -o dst_if -j ACCEPT
 ```
+
+> [!WARNING]
+>
+> In releases older than 28.0.0, Docker always set the default policy of the
+> IPv6 `FORWARD` chain to `DROP`. In release 28.0.0 and newer, it will only
+> set that policy if it enables IPv6 forwarding itself. This has always been
+> the behaviour for IPv4 forwarding.
+>
+> If IPv6 forwarding is enabled on your host before Docker starts, check your
+> host's configuration to make sure it is still secure.
 
 ## Prevent Docker from manipulating iptables
 
