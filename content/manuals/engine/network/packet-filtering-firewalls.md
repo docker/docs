@@ -32,17 +32,22 @@ following custom `iptables` chains:
 
 * `DOCKER-USER`
   * A placeholder for user-defined rules that will be processed before rules
-    in the `DOCKER` chain.
+    in the `DOCKER-FORWARD` and `DOCKER` chains.
+* `DOCKER-FORWARD`
+  * The first stage of processing for Docker's networks. Rules that pass packets
+    that are not related to established connections to the other Docker chains,
+    as well as rules to accept packets that are part of established connections.
 * `DOCKER`
   * Rules that determine whether a packet that is not part of an established
     connection should be accepted, based on the port forwarding configuration
     of running containers.
 * `DOCKER-ISOLATION-STAGE-1` and `DOCKER-ISOLATION-STAGE-2`
   * Rules to isolate Docker networks from each other.
+* `DOCKER-INGRESS`
+  * Rules related to Swarm networking. 
 
-In the `FORWARD` chain, Docker adds rules that pass packets that are not related
-to established connections to these custom chains, as well as rules to accept
-packets that are part of established connections.
+In the `FORWARD` chain, Docker adds rules that unconditionally jump to the
+`DOCKER-USER`, `DOCKER-FORWARD` and `DOCKER-INGRESS` chains.
 
 In the `nat` table, Docker creates chain `DOCKER` and adds rules to implement
 masquerading and port-mapping.
@@ -52,6 +57,8 @@ masquerading and port-mapping.
 Packets that get accepted or rejected by rules in these custom chains will not
 be seen by user-defined rules appended to the `FORWARD` chain. So, to add
 additional rules to filter these packets, use the `DOCKER-USER` chain.
+
+Rules appended to the `FORWARD` chain will be processed after Docker's rules.
 
 ### Match the original IP and ports for requests
 
