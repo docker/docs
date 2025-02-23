@@ -268,9 +268,9 @@ configure the daemon to use the loopback address (`127.0.0.1`) instead.
 
 > [!WARNING]
 >
-> Hosts within the same L2 segment (for example, hosts connected to the same
-> network switch) can reach ports published to localhost.
-> For more information, see
+> In releases older than 28.0.0, hosts within the same L2 segment (for example,
+> hosts connected to the same network switch) can reach ports published to
+> localhost. For more information, see
 > [moby/moby#45610](https://github.com/moby/moby/issues/45610)
 
 To configure this setting for user-defined bridge networks, use
