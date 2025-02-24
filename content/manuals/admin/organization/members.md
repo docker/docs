@@ -33,6 +33,14 @@ To accept an invitation:
 1. Navigate to your email inbox and open the Docker email with an invitation to
 join the Docker organization.
 2. To open the link to Docker Hub, select the **click here** link.
+
+   > [!WARNING]
+   >
+   > Invitation links expire after 14 days. If a user's invitation has expired,
+   > they can sign in to [Docker Hub](https://hub.docker.com/) with the email
+   > address the link was sent to and accept the invite from the
+   > **Notifications** panel.
+
 3. The Docker create an account page will open. If you already have an account, select **Already have an account? Sign in**.
 If you do not have an account yet, create an account using the same email
 address you received the invitation through.
