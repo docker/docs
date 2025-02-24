@@ -1425,12 +1425,46 @@ networks:
 
 `mac_address` sets the Mac address used by the service container when connecting to this particular network.
 
+#### `gw_priority`
+
+{{< summary-bar feature_name="Compose gw priority" >}}
+
+The network with the highest `gw_priority` is selected as the default gateway for the service container.
+If unspecified, the default value is 0.
+
+In the following example, `app_net_2` will be selected as the default gateway.
+
+```yaml
+services:
+  app:
+    image: busybox
+    command: top
+    networks:
+      app_net_1:
+      app_net_2:
+        gw_priority: 1
+      app_net_3:
+networks:
+  app_net_1:
+  app_net_2:
+  app_net_3:
+```
+
 #### `priority`
 
 `priority` indicates in which order Compose connects the service’s containers to its
 networks. If unspecified, the default value is 0.
 
-In the following example, the app service connects to `app_net_1` first as it has the highest priority. It then connects to `app_net_3`, then `app_net_2`, which uses the default priority value of 0.
+If the container runtime accepts a `mac_address` attribute at service level, it is
+applied to the network with the highest `priority`. In other cases, use attribute
+`networks.mac_address`.
+
+`priority` does not affect which network is selected as the default gateway. Use the
+[`gw_priority`](#gw_priority) attribute instead.
+
+`priority` does not control the order in which networks connections are added to
+the container, it cannot be used to determine the device name (`eth0` etc.) in the
+container.
 
 ```yaml
 services:
