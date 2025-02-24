@@ -36,9 +36,9 @@ join the Docker organization.
 
    > [!WARNING]
    >
-   > Invitation links expire after 14 days. If a user's invitation has expired,
+   > Invitation email links expire after 14 days. If a user's email link has expired,
    > they can sign in to [Docker Hub](https://hub.docker.com/) with the email
-   > address the link was sent to and accept the invite from the
+   > address the link was sent to and accept the invitation from the
    > **Notifications** panel.
 
 3. The Docker create an account page will open. If you already have an account, select **Already have an account? Sign in**.
