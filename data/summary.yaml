@@ -127,7 +127,7 @@ Docker Desktop Archlinux:
 Docker Desktop CLI:
   requires: Docker Desktop [4.37](/manuals/desktop/release-notes.md#4370) and later
 Docker Desktop CLI update:
-  requires: Docker Desktop 4.38 and later
+  requires: Docker Desktop 4.39 and later
 Docker Desktop CLI logs:
   requires: Docker Desktop 4.39 and later
 Docker GitHub Copilot:
