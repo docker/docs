@@ -118,6 +118,9 @@ Docker CLI OpenTelemetry:
   requires: Docker Engine [26.1.0](/manuals/engine/release-notes/26.1.md#2610) and later
 docker compose alpha:
   availability: Experimental
+Docker Debug:
+  subscription: [Pro, Team, Business]
+  requires: Docker Desktop [4.33.0](/manuals/desktop/release-notes.md#4330) and later
 Docker Desktop Archlinux:
   availability: Experimental
 Docker Desktop CLI:
@@ -127,6 +130,8 @@ Docker Desktop CLI update:
   requires: Docker Desktop 4.38 and later
 Docker GitHub Copilot:
   availability: Early Access
+Docker Init:
+  requires: Docker Desktop [4.27](/manuals/desktop/release-notes.md#4270) and later
 Docker Scout exceptions:
   availability: Experimental
   requires: Docker Scout CLI [1.15.0](/manuals/scout/release-notes/cli.md#1150) and later
