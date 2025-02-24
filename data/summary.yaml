@@ -125,10 +125,11 @@ docker compose alpha:
 Docker Desktop Archlinux:
   availability: Experimental
 Docker Desktop CLI:
-  availability: Beta
   requires: Docker Desktop [4.37](/manuals/desktop/release-notes.md#4370) and later
 Docker Desktop CLI update:
   requires: Docker Desktop 4.38 and later
+Docker Desktop CLI logs:
+  requires: Docker Desktop 4.39 and later
 Docker GitHub Copilot:
   availability: Early Access
 Docker Scout exceptions:
