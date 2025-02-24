@@ -105,7 +105,7 @@ networks:
     attachable: true
 ```
 
-### enable_ipv4
+### `enable_ipv4`
 
 {{< summary-bar feature_name="Compose enable ipv4" >}}
 

@@ -1425,7 +1425,7 @@ networks:
 
 `mac_address` sets the Mac address used by the service container when connecting to this particular network.
 
-#### gw_priority
+#### `gw_priority`
 
 {{< summary-bar feature_name="Compose gw priority" >}}
 
