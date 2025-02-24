@@ -19,8 +19,8 @@ For more detailed information, see the [release notes in the Compose repo](https
 
 ### Bug fixes and enhancements
 
-- Added support for gw_priority, enable_ipv4 (requires docker v28.0) 
-- Fixed an issue with navigation menu
+- Added support for `gw_priority`, `enable_ipv4` (requires Docker v28.0) 
+- Fixed an issue with the navigation menu
 - Improved error message when using non-file secret/config with read-only service
 
 ### Update
