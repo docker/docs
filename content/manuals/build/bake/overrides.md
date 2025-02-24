@@ -63,7 +63,7 @@ If more than one Bake file is found, all files are loaded and merged into a
 single definition. Files are merged according to the lookup order.
 
 ```console
-$ docker buildx bake bake --print
+$ docker buildx bake --print
 [+] Building 0.0s (1/1) FINISHED                                                                                                                                                                                            
  => [internal] load local bake definitions                                                                                                                                                                             0.0s
  => => reading compose.yaml 45B / 45B                                                                                                                                                                                  0.0s
