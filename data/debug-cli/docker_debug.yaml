@@ -1,11 +1,6 @@
 command: docker debug
 short: Get a shell into any container or image. An alternative to debugging with `docker exec`.
 long: |-
-  > **Note**
-  >
-  > Docker Debug requires a [Pro, Team, or Business subcription](/subscription/details/).
-  > You must [sign in](/desktop/get-started/) to use this command.
-
   Docker Debug is a CLI command that helps you follow best practices by keeping your images small and secure. 
   With Docker Debug, you can debug your images while they contain the bare minimum to run your application.
   It does this by letting you create and work with slim images or containers that are often difficult to debug because all tools have been removed. 
@@ -27,7 +22,7 @@ long: |-
   - `entrypoint`: Print, lint, or run the entrypoint, see [example](#understanding-the-default-startup-command-of-a-container-entry-points).
   - `builtins`: Show custom builtin tools.
   
-  > **Note**
+  > [!NOTE]
   >
   > For images and stopped containers, all changes are discarded when leaving the shell. 
   > At no point, do changes affect the actual image or container. 

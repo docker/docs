@@ -80,12 +80,16 @@ Compose exec:
   requires: Docker Compose [2.32.2](/manuals/compose/releases/release-notes.md#2232) and later
 Compose experimental:
   requires: Docker Compose [2.26.0](/manuals/compose/releases/release-notes.md#2260) and later
+Compose enable ipv4:
+  requires: Docker Compose [2.33.1](/manuals/compose/releases/release-notes.md#2331) and later
 Compose file watch:
   requires: Docker Compose [2.22.0](/manuals/compose/releases/release-notes.md#2220) and later
 Compose format:
   requires: Docker Compose [2.30.0](/manuals/compose/releases/release-notes.md#2300) and later
 Compose gpus:
   requires: Docker Compose [2.30.0](/manuals/compose/releases/release-notes.md#2300) and later
+Compose gw priority:
+  requires: Docker Compose [2.33.1](/manuals/compose/releases/release-notes.md#2331) and later
 Compose include:
   requires: Docker Compose [2.20.3](/manuals/compose/releases/release-notes.md#2203) and later
 Compose label file:
@@ -118,6 +122,9 @@ Docker CLI OpenTelemetry:
   requires: Docker Engine [26.1.0](/manuals/engine/release-notes/26.1.md#2610) and later
 docker compose alpha:
   availability: Experimental
+Docker Debug:
+  subscription: [Pro, Team, Business]
+  requires: Docker Desktop [4.33.0](/manuals/desktop/release-notes.md#4330) and later
 Docker Desktop Archlinux:
   availability: Experimental
 Docker Desktop CLI:
@@ -127,6 +134,8 @@ Docker Desktop CLI update:
   requires: Docker Desktop 4.38 and later
 Docker GitHub Copilot:
   availability: Early Access
+Docker Init:
+  requires: Docker Desktop [4.27](/manuals/desktop/release-notes.md#4270) and later
 Docker Scout exceptions:
   availability: Experimental
   requires: Docker Scout CLI [1.15.0](/manuals/scout/release-notes/cli.md#1150) and later
