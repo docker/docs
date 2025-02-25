@@ -1,8 +1,8 @@
 ---
 title: Share and collaborate on a project
 linkTitle: Collaborate
-description: TBD
-keywords: TBD
+description: Learn how to collaborate on a project
+keywords: collaborate, projects, docker desktop, local, remote
 weight: 60
 ---
 
