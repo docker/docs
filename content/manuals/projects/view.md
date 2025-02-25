@@ -64,7 +64,7 @@ can also:
    - Delete unnecessary files when you right-click on a file
    - Download files and folders from the container straight to the host
 
-### Network
+### Network
 
 The **Network** tab in Docker Projects provides an overview of how the containerized services communicate with each other and the host system. It displays the assigned network name, connected services, and mapped container ports.
 

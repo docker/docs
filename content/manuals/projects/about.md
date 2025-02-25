@@ -38,7 +38,7 @@ Docker Projects works as follows:
    - View logs to debug issues and track service activity.
    - Edit configurations and run commands as requirements change.
 
-## What's next?
+## What's next
 
  - [Learn how to open a new project](/manuals/projects/open.md)
  - [Explore common FAQs](/manuals/projects/faq.md)
