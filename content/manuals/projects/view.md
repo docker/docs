@@ -58,11 +58,11 @@ It also provides quick access to inspect the image or open the Dockerfile for mo
 Select **Files** to explore the filesystem of running or stopped containers in your project. You
 can also:
 
-- See which files have been recently added, modified, or deleted
-- Edit a file straight from the built-in editor
-- Drag and drop files and folders between the host and the container
-- Delete unnecessary files when you right-click on a file
-- Download files and folders from the container straight to the host
+   - See which files have been recently added, modified, or deleted
+   - Edit a file straight from the built-in editor
+   - Drag and drop files and folders between the host and the container
+   - Delete unnecessary files when you right-click on a file
+   - Download files and folders from the container straight to the host
 
 ### Network
 
