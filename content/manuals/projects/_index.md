@@ -45,8 +45,8 @@ A project organizes your code and Docker artifacts into a single object. These a
 ### Key features and benefits
 
  - One-click project setup: Open a local folder or clone a Git repository and run your project instantly.
- - Minimal Docker expertise required: Ideal for both beginners and experienced engineers.
+ - Minimal Docker expertise required: Ideal for both beginners and experienced developers.
  - Custom `run` commands for your projects: Define and store preconfigured `run` commands that are equivalent to running `docker compose up`.
- - Local & remote projects:  Work on projects locally or sync artifacts to the cloud for cross-device access and easy collaboration.
+ - Local and remote projects: Work on projects locally or sync artifacts to the cloud for cross-device access and easy collaboration.
 
 {{< grid >}}
