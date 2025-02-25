@@ -14,36 +14,16 @@ aliases:
 
 Complete all the previous sections of this guide, starting with [Containerize a Ruby on Rails application](containerize.md). You must have a [GitHub](https://github.com/signup) account and a [Docker](https://hub.docker.com/signup) account to complete this section.
 
-If you didn't create a GitHub repository for your project yet, it is time to do it. You also need to configure Docker Hub credentials, make a commit and push the source code.
+If you didn't create a [GitHub repository](https://github.com/new) for your project yet, it is time to do it. After creating the repository, don't forget to [add a remote](https://docs.github.com/en/get-started/getting-started-with-git/managing-remote-repositories) and ensure you can commit and [push your code](https://docs.github.com/en/get-started/using-git/pushing-commits-to-a-remote-repository#about-git-push) to GitHub.
 
-1. [Create a new repository](https://github.com/new) on GitHub.
+1. In your project's GitHub repository, open **Settings**, and go to **Secrets and variables** > **Actions**.
 
-2. Open the repository **Settings**, and go to **Secrets and variables** >
-   **Actions**.
+2. Under the `Variables` tab, create a new **Repository variable** named `DOCKER_USERNAME` and your Docker ID as a value.
 
-3. Under the `Variables` tab, create a new **Repository variable** named `DOCKER_USERNAME` and your Docker ID as a value.
+3. Create a new [Personal Access Token (PAT)](/manuals/security/for-developers/access-tokens.md#create-an-access-token) for Docker Hub. You can name this token `docker-tutorial`. Make sure access permissions include Read and Write.
 
-4. Create a new [Personal Access Token (PAT)](/manuals/security/for-developers/access-tokens.md#create-an-access-token) for Docker Hub. You can name this token `docker-tutorial`. Make sure access permissions include Read and Write.
-
-5. Add the PAT as a **Repository secret** in your GitHub repository, with the name
+4. Add the PAT as a **Repository secret** in your GitHub repository, with the name
    `DOCKERHUB_TOKEN`.
-
-6. In your local repository on your machine, run the following command to change
-   the origin to the repository you just created. Make sure you change
-   `your-username` to your GitHub username and `your-repository` to the name of
-   the repository you created.
-
-   ```console
-   $ git remote set-url origin https://github.com/your-username/your-repository.git
-   ```
-
-7. Run the following commands to stage, commit, and push your local repository to GitHub.
-
-   ```console
-   $ git add -A
-   $ git commit -m "my commit"
-   $ git push -u origin main
-
 
 ## Overview
 
@@ -51,44 +31,10 @@ GitHub Actions is a CI/CD (Continuous Integration and Continuous Deployment) aut
 
 In this section, you'll learn how to set up and use GitHub Actions to build your Docker image as well as push it to Docker Hub. You will complete the following steps:
 
-1. Create a new repository on GitHub.
-2. Define the GitHub Actions workflow.
-3. Run the workflow.
+1. Define the GitHub Actions workflow.
+2. Run the workflow.
 
-## 1. Create the repository
-
-If you didn't create the repository for your project yet, it is time to do it. You also need to configure Docker Hub credentials, make a commit and push the source code.
-
-1. [Create a new repository](https://github.com/new) on GitHub.
-
-2. Open the repository **Settings**, and go to **Secrets and variables** >
-   **Actions**.
-
-3. Create a new **Repository variable** named `DOCKER_USERNAME` and your Docker ID as value.
-
-4. Create a new [Personal Access Token (PAT)](/manuals/security/for-developers/access-tokens.md#create-an-access-token) for Docker Hub. You can name this token `docker-tutorial`. Make sure access permissions include Read and Write.
-
-5. Add the PAT as a **Repository secret** in your GitHub repository, with the name
-   `DOCKERHUB_TOKEN`.
-
-6. In your local repository on your machine, run the following command to change
-   the origin to the repository you just created. Make sure you change
-   `your-username` to your GitHub username and `your-repository` to the name of
-   the repository you created.
-
-   ```console
-   $ git remote set-url origin https://github.com/your-username/your-repository.git
-   ```
-
-7. Run the following commands to stage, commit, and push your local repository to GitHub.
-
-   ```console
-   $ git add -A
-   $ git commit -m "my commit"
-   $ git push -u origin main
-   ```
-
-## 2. Set up the workflow
+## 1. Set up the workflow
 
 Set up your GitHub Actions workflow for building, testing, and pushing the image
 to Docker Hub.
@@ -133,7 +79,7 @@ to Docker Hub.
    For more information about the YAML syntax for `docker/build-push-action`,
    refer to the [GitHub Action README](https://github.com/docker/build-push-action/blob/master/README.md).
 
-## 3. Run the workflow
+## 2. Run the workflow
 
 Save the workflow file and run the job.
 
