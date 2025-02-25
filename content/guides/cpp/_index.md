@@ -26,6 +26,7 @@ The C++ getting started guide teaches you how to create a containerized C++ appl
 - Set up a local environment to develop a C++ application using containers
 - Configure a CI/CD pipeline for a containerized C++ application using GitHub Actions
 - Deploy your containerized application locally to Kubernetes to test and debug your deployment
+- Use BuildKit to generate SBOM attestations during the build process
 
 After completing the C++ getting started modules, you should be able to containerize your own C++ application based on the examples and instructions provided in this guide.
 
