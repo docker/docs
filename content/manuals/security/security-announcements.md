@@ -30,6 +30,16 @@ On September 16, 2024 the grace period will end and passwords will no longer be 
 
 At Docker, we want the experience to be the most secure for our developers and organizations and this deprecation is an essential step in that direction.
 
+## SOC 2 Type 2 attestation and ISO 27001 certification
+
+_Last updated June, 2024_
+
+Docker is pleased to announce that we have received our SOC 2 Type 2 attestation and ISO 27001 certification with no exceptions or major non-conformities. 
+
+Security is a fundamental pillar to Docker’s operations, which is embedded into our overall mission and company strategy. Docker’s products are core to our user community and our SOC 2 Type 2 attestation and ISO 27001 certification demonstrate Docker’s ongoing commitment to security to our user base.
+
+For more information, see the [Blog announcement](https://www.docker.com/blog/docker-announces-soc-2-type-2-attestation-iso-27001-certification/).
+
 ## Docker Security Advisory: Multiple Vulnerabilities in runc, BuildKit, and Moby
 
 _Last updated February 2, 2024_
