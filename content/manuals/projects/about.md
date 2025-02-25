@@ -40,6 +40,6 @@ Docker Projects works as follows:
 
 ## What's next?
 
- - [Learn how to open a new project](/manuals/projects/new.md)
+ - [Learn how to open a new project](/manuals/projects/open.md)
  - [Explore common FAQs](/manuals/projects/faq.md)
 
