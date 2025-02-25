@@ -1,7 +1,7 @@
 ---
 title: Use containers for Ruby on Rails development
 linkTitle: Develop your app
-weight: 20
+weight: 40
 keywords: ruby, local, development
 description: Learn how to develop your Ruby on Rails application locally.
 aliases:
