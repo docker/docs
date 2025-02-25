@@ -145,6 +145,12 @@ In this hands-on guide, you'll unlock the power of multi-stage builds to create 
 
 ### Create the Dockerfile
 
+> [!WARNING]
+> Docker Desktop v4.38 and earlier are affected by a bug that prevent completing this tutorial on Macbook M4.
+>
+> Upgrade to v4.39 or later if you're running a Macbook M4.
+{ .warning }
+
 Now that you have the project, you’re ready to create the `Dockerfile`.
 
  1. Create a file named `Dockerfile` in the same folder that contains all the other folders and files (like src, pom.xml, etc.).
