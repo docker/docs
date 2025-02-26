@@ -51,13 +51,13 @@ You can check which version of Kubernetes you're on with:
 $ kubectl version
 ```
 
-### Cluster Provisioning Method
+### Cluster provisioning method
 
 Docker Desktop Kubernetes can be provisioned with either the `kubeadm` or `kind`
 provisioners.
 
 `kubeadm` is the older provisioner. It supports a single-node cluster, you can't select the kubernetes
-version, it's slower to provision than `kind`, and it's not supported by [Enhanced Container Isolation](../../security/for-admins/hardened-desktop/enhanced-container-isolation/index.md) (ECI),
+version, it's slower to provision than `kind`, and it's not supported by [Enhanced Container Isolation](/manuals/security/for-admins/hardened-desktop/enhanced-container-isolation/index.md) (ECI),
 meaning that if ECI is enabled the cluster works but it's not protected by ECI.
 
 `kind` is the newer provisioner, and it's available if you are signed in and are
@@ -69,9 +69,9 @@ making it more secure). Note however that `kind` requires that Docker Desktop be
 configured to use the [containerd image store](containerd.md) (the default image
 store in Docker Desktop 4.34 and later).
 
-The table below summarizes this comparison.
+The following table summarizes this comparison.
 
-| Feature | kubeadm | kind |
+| Feature | `kubeadm` | `kind` |
 | :------ | :-----: | :--: |
 | Availability | Docker Desktop 4.0+ | Docker Desktop 4.38+ (requires sign in) |
 | Multi-node cluster support | No | Yes |
