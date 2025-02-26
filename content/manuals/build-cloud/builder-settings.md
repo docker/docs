@@ -4,7 +4,7 @@ description: Set your builder settings relating to private registries, disk allo
 keywords: build, cloud build, optimize, remote, local, cloud, registry, package repository, vpn
 ---
 
-The **Builder settings** page in Docker Build Cloud lets you configure disk allocation, private resource access, and firewall settings for your cloud builders in your organization. These configurations help optimize storage, enable access to private registries, and secure outbound network traffic.
+The [**Builder settings** page](https://app.docker.com/build/settings/builder) in Docker Build Cloud lets you configure disk allocation, private resource access, and firewall settings for your cloud builders in your organization. These configurations help optimize storage, enable access to private registries, and secure outbound network traffic.
 
 ## Disk allocation
 
