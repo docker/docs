@@ -10,7 +10,7 @@ The [**Builder settings** page](https://app.docker.com/build/settings/builder) i
 
 The **Disk allocation** setting lets you control how much of the available storage is dedicated to the build cache. A lower allocation increases storage available for active builds.
 
-To make disk allocation changes, navigate Builder settings in Docker Build Cloud and then adjust the Disk Allocation slider to specify the percentage of storage used for build caching.
+To make disk allocation changes, navigate to [**Builder settings**](https://app.docker.com/build/settings/builder) in Docker Build Cloud and then adjust the **Disk allocation** slider to specify the percentage of storage used for build caching.
 
 Any changes take effect immediately.
 
@@ -22,9 +22,9 @@ Any changes take effect immediately.
 
 Private resource access lets cloud builders pull images and packages from private resources. This feature is useful when builds rely on self-hosted artifact repositories or private OCI registries.
 
-For example, if your organization hosts a private [PyPI](https://pypi.org/) repository on a private network, Docker Build Cloud would not be able to access it by default, since the DBC builder is not connected to your private network.
+For example, if your organization hosts a private [PyPI](https://pypi.org/) repository on a private network, Docker Build Cloud would not be able to access it by default, since the cloud builder is not connected to your private network.
 
-To enable your cloud builders to access your private resources, enter the host name and port of your private rescource and then select **Add** to allow your cloud builders to access it.
+To enable your cloud builders to access your private resources, enter the host name and port of your private rescource and then select **Add**.
 
 ### Authentication 
 
