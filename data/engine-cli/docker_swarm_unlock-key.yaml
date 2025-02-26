@@ -22,6 +22,7 @@ options:
       value_type: bool
       default_value: "false"
       description: Only display token
+      details_url: '#quiet'
       deprecated: false
       hidden: false
       experimental: false
@@ -32,6 +33,7 @@ options:
       value_type: bool
       default_value: "false"
       description: Rotate unlock key
+      details_url: '#rotate'
       deprecated: false
       hidden: false
       experimental: false
@@ -87,12 +89,12 @@ examples: |-
     SWMKEY-1-7c37Cc8654o6p38HnroywCi19pllOnGtbdZEgtKxZu8
     ```
 
-    ### `--rotate`
+    ### `--rotate` {#rotate}
 
     This flag rotates the unlock key, replacing it with a new randomly-generated
     key. The old unlock key will no longer be accepted.
 
-    ### `--quiet`
+    ### `--quiet` {#quiet}
 
     Only print the unlock key, without instructions.
 deprecated: false
