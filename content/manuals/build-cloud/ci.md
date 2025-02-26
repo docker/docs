@@ -32,8 +32,21 @@ See [Loading build results](./usage/#loading-build-results) for details.
 > Builds on Docker Build Cloud have a timeout limit of two hours. Builds that
 > run for longer than two hours are automatically cancelled.
 
-{{< tabs >}}
-{{< tab name="GitHub Actions" >}}
+## CI Platform Examples
+
+Choose your CI platform to see detailed setup instructions:
+
+- [GitHub Actions](#github-actions)
+- [GitLab](#gitlab)
+- [Circle CI](#circle-ci)
+- [Buildkite](#buildkite)
+- [Jenkins](#jenkins)
+- [Travis CI](#travis-ci)
+- [BitBucket Pipelines](#bitbucket-pipelines)
+- [Shell Script](#shell-script)
+- [Docker Compose](#docker-compose)
+
+### GitHub Actions {#github-actions}
 
 > [!NOTE]
 >
@@ -87,8 +100,7 @@ jobs:
           outputs: ${{ github.event_name == 'pull_request' && 'type=cacheonly' || 'type=registry' }}
 ```
 
-{{< /tab >}}
-{{< tab name="GitLab" >}}
+### GitLab {#gitlab}
 
 ```yaml
 default:
@@ -133,8 +145,7 @@ build_cache:
         .
 ```
 
-{{< /tab >}}
-{{< tab name="Circle CI" >}}
+### Circle CI {#circle-ci}
 
 ```yaml
 version: 2.1
@@ -195,8 +206,7 @@ workflows:
       - build_push
 ```
 
-{{< /tab >}}
-{{< tab name="Buildkite" >}}
+### Buildkite {#buildkite}
 
 The following example sets up a Buildkite pipeline using Docker Build Cloud. The
 example assumes that the pipeline name is `build-push-docker` and that you
@@ -273,8 +283,7 @@ docker buildx build \
     .
 ```
 
-{{< /tab >}}
-{{< tab name="Jenkins" >}}
+### Jenkins {#jenkins}
 
 ```groovy
 pipeline {
@@ -309,8 +318,7 @@ pipeline {
 }
 ```
 
-{{< /tab >}}
-{{< tab name="Travis CI" >}}
+### Travis CI {#travis-ci}
 
 ```yaml
 language: minimal 
@@ -341,8 +349,7 @@ script: |
   --tag "$IMAGE_NAME" .
 ```
 
-{{< /tab >}}
-{{< tab name="BitBucket Pipelines" >}}
+### BitBucket Pipelines {#bitbucket-pipelines}
 
 ```yaml
 # Prerequisites: $DOCKER_USER, $DOCKER_PAT setup as deployment variables
@@ -372,8 +379,7 @@ pipelines:
           - docker
 ```
 
-{{< /tab >}}
-{{< tab name="Shell" >}}
+### Shell Script {#shell-script}
 
 ```bash
 #!/bin/bash
@@ -407,8 +413,7 @@ docker buildx build \
     .
 ```
 
-{{< /tab >}}
-{{< tab name="Docker Compose" >}}
+### Docker Compose {#docker-compose}
 
 Use this implementation if you want to use `docker compose build` with
 Docker Build Cloud in CI.
@@ -442,6 +447,3 @@ docker buildx create --use --driver cloud "<ORG>/default"
 # Build the image build
 docker compose build
 ```
-
-{{< /tab >}}
-{{< /tabs >}}
