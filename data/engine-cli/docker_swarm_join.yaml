@@ -11,6 +11,7 @@ options:
     - option: advertise-addr
       value_type: string
       description: 'Advertised address (format: `<ip|interface>[:port]`)'
+      details_url: '#advertise-addr'
       deprecated: false
       hidden: false
       experimental: false
@@ -21,6 +22,7 @@ options:
       value_type: string
       default_value: active
       description: Availability of the node (`active`, `pause`, `drain`)
+      details_url: '#availability'
       deprecated: false
       hidden: false
       experimental: false
@@ -31,6 +33,7 @@ options:
       value_type: string
       description: |
         Address or interface to use for data path traffic (format: `<ip|interface>`)
+      details_url: '#data-path-addr'
       deprecated: false
       hidden: false
       min_api_version: "1.31"
@@ -42,6 +45,7 @@ options:
       value_type: node-addr
       default_value: 0.0.0.0:2377
       description: 'Listen address (format: `<ip|interface>[:port]`)'
+      details_url: '#listen-addr'
       deprecated: false
       hidden: false
       experimental: false
@@ -51,6 +55,7 @@ options:
     - option: token
       value_type: string
       description: Token for entry into the swarm
+      details_url: '#token'
       deprecated: false
       hidden: false
       experimental: false
@@ -102,7 +107,7 @@ examples: |-
     dvfxp4zseq4s0rih1selh0d20 *  manager1  Ready   Active        Leader
     ```
 
-    ### `--listen-addr value`
+    ### `--listen-addr value` {#listen-addr}
 
     If the node is a manager, it will listen for inbound swarm manager traffic on this
     address. The default is to listen on 0.0.0.0:2377. It is also possible to specify a
@@ -113,7 +118,7 @@ examples: |-
 
     This flag is generally not necessary when joining an existing swarm.
 
-    ### `--advertise-addr value`
+    ### `--advertise-addr value` {#advertise-addr}
 
     This flag specifies the address that will be advertised to other members of the
     swarm for API access. If unspecified, Docker will check if the system has a
@@ -133,7 +138,7 @@ examples: |-
     ensure the node advertises its IP address and not the IP address of the load
     balancer.
 
-    ### `--data-path-addr`
+    ### `--data-path-addr` {#data-path-addr}
 
     This flag specifies the address that global scope network drivers will publish towards
     other nodes in order to reach the containers running on this node.
@@ -142,11 +147,11 @@ examples: |-
     If unspecified, Docker will use the same IP address or interface that is used for the
     advertise address.
 
-    ### `--token string`
+    ### `--token string` {#token}
 
     Secret value required for nodes to join the swarm
 
-    ### `--availability`
+    ### `--availability` {#availability}
 
     This flag specifies the availability of the node at the time the node joins a master.
     Possible availability values are `active`, `pause`, or `drain`.

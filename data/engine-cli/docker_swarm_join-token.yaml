@@ -21,6 +21,7 @@ options:
       value_type: bool
       default_value: "false"
       description: Only display token
+      details_url: '#quiet'
       deprecated: false
       hidden: false
       experimental: false
@@ -31,6 +32,7 @@ options:
       value_type: bool
       default_value: "false"
       description: Rotate join token
+      details_url: '#rotate'
       deprecated: false
       hidden: false
       experimental: false
@@ -97,7 +99,7 @@ examples: |-
     SWMTKN-1-3pu6hszjas19xyp7ghgosyx9k8atbfcr8p2is99znpy26u2lkl-b30ljddcqhef9b9v4rs7mel7t
     ```
 
-    ### `--rotate`
+    ### `--rotate` {#rotate}
 
     Because tokens allow new nodes to join the swarm, you should keep them secret.
     Be particularly careful with manager tokens since they allow new manager nodes
@@ -116,7 +118,7 @@ examples: |-
     using the old token. Rotation does not affect existing nodes in the swarm
     because the join token is only used for authorizing new nodes joining the swarm.
 
-    ### `--quiet`
+    ### `--quiet` {#quiet}
 
     Only print the token. Do not print a complete command for joining.
 deprecated: false

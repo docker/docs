@@ -34,10 +34,10 @@ Turning the Kubernetes server on or off in Docker Desktop does not affect your o
 1. Open the Docker Desktop Dashboard and navigate to **Settings**.
 2. Select the **Kubernetes** tab.
 3. Toggle on **Enable Kubernetes**.
-4. Choose your cluster provisioning method. You can choose either **Kubeadm** or **kind** if you are signed in and are using Docker Desktop version 4.38 or later.
+4. Choose your [cluster provisioning method](#cluster-provisioning-method).
+5. Select **Apply & Restart** to save the settings.
 
-   If you select **kind** you can also choose the Kubernetes version and the number of nodes.
-5. Select **Apply & Restart** to save the settings. This sets up the images required to run the Kubernetes server as containers, and installs the `kubectl` command-line tool on your system at `/usr/local/bin/kubectl` (Mac) or `C:\Program Files\Docker\Docker\Resources\bin\kubectl.exe` (Windows).
+This sets up the images required to run the Kubernetes server as containers, and installs the `kubectl` command-line tool on your system at `/usr/local/bin/kubectl` (Mac) or `C:\Program Files\Docker\Docker\Resources\bin\kubectl.exe` (Windows).
 
    > [!NOTE]
    >
@@ -50,6 +50,36 @@ You can check which version of Kubernetes you're on with:
 ```console
 $ kubectl version
 ```
+
+### Cluster provisioning method
+
+Docker Desktop Kubernetes can be provisioned with either the `kubeadm` or `kind`
+provisioners.
+
+`kubeadm` is the older provisioner. It supports a single-node cluster, you can't select the kubernetes
+version, it's slower to provision than `kind`, and it's not supported by [Enhanced Container Isolation](/manuals/security/for-admins/hardened-desktop/enhanced-container-isolation/index.md) (ECI),
+meaning that if ECI is enabled the cluster works but it's not protected by ECI.
+
+`kind` is the newer provisioner, and it's available if you are signed in and are
+using Docker Desktop version 4.38 or later. It supports multi-node clusters (for
+a more realistic Kubernetes setup), you can choose the Kubernetes version, it's
+faster to provision than `kubeadm`, and it's supported by ECI (i.e., when ECI is
+enabled, the Kubernetes cluster runs in unprivileged Docker containers, thus
+making it more secure). Note however that `kind` requires that Docker Desktop be
+configured to use the [containerd image store](containerd.md) (the default image
+store in Docker Desktop 4.34 and later).
+
+The following table summarizes this comparison.
+
+| Feature | `kubeadm` | `kind` |
+| :------ | :-----: | :--: |
+| Availability | Docker Desktop 4.0+ | Docker Desktop 4.38+ (requires sign in) |
+| Multi-node cluster support | No | Yes |
+| Kubernetes version selector | No | Yes |
+| Speed to provision | ~1 min | ~30 seconds |
+| Supported by ECI | No | Yes |
+| Works with containerd image store | Yes | Yes |
+| Works with Docker image store | Yes | No |
 
 ### Additional settings
 

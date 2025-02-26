@@ -32,17 +32,22 @@ following custom `iptables` chains:
 
 * `DOCKER-USER`
   * A placeholder for user-defined rules that will be processed before rules
-    in the `DOCKER` chain.
+    in the `DOCKER-FORWARD` and `DOCKER` chains.
+* `DOCKER-FORWARD`
+  * The first stage of processing for Docker's networks. Rules that pass packets
+    that are not related to established connections to the other Docker chains,
+    as well as rules to accept packets that are part of established connections.
 * `DOCKER`
   * Rules that determine whether a packet that is not part of an established
     connection should be accepted, based on the port forwarding configuration
     of running containers.
 * `DOCKER-ISOLATION-STAGE-1` and `DOCKER-ISOLATION-STAGE-2`
   * Rules to isolate Docker networks from each other.
+* `DOCKER-INGRESS`
+  * Rules related to Swarm networking. 
 
-In the `FORWARD` chain, Docker adds rules that pass packets that are not related
-to established connections to these custom chains, as well as rules to accept
-packets that are part of established connections.
+In the `FORWARD` chain, Docker adds rules that unconditionally jump to the
+`DOCKER-USER`, `DOCKER-FORWARD` and `DOCKER-INGRESS` chains.
 
 In the `nat` table, Docker creates chain `DOCKER` and adds rules to implement
 masquerading and port-mapping.
@@ -52,6 +57,8 @@ masquerading and port-mapping.
 Packets that get accepted or rejected by rules in these custom chains will not
 be seen by user-defined rules appended to the `FORWARD` chain. So, to add
 additional rules to filter these packets, use the `DOCKER-USER` chain.
+
+Rules appended to the `FORWARD` chain will be processed after Docker's rules.
 
 ### Match the original IP and ports for requests
 
@@ -261,9 +268,9 @@ configure the daemon to use the loopback address (`127.0.0.1`) instead.
 
 > [!WARNING]
 >
-> Hosts within the same L2 segment (for example, hosts connected to the same
-> network switch) can reach ports published to localhost.
-> For more information, see
+> In releases older than 28.0.0, hosts within the same L2 segment (for example,
+> hosts connected to the same network switch) can reach ports published to
+> localhost. For more information, see
 > [moby/moby#45610](https://github.com/moby/moby/issues/45610)
 
 To configure this setting for user-defined bridge networks, use
@@ -301,15 +308,35 @@ Alternatively, you can use the `dockerd --ip` flag when starting the daemon.
 
 ## Docker on a router
 
-Docker sets the policy for the `FORWARD` chain to `DROP`. This will prevent
-your Docker host from acting as a router.
+On Linux, Docker needs "IP Forwarding" enabled on the host. So, it enables
+the `sysctl` settings `net.ipv4.ip_forward` and `net.ipv6.conf.all.forwarding`
+it they are not already enabled when it starts. When it does that, it also
+sets the policy of the iptables `FORWARD` chain to `DROP`.
 
-If you want your system to function as a router, you must add explicit
-`ACCEPT` rules to the `DOCKER-USER` chain. For example:
+If Docker sets the policy for the `FORWARD` chain to `DROP`. This will prevent
+your Docker host from acting as a router, it is the recommended setting when
+IP Forwarding is enabled.
+
+To stop Docker from setting the `FORWARD` chain's policy to `DROP`, include
+`"ip-forward-no-drop": true` in `/etc/docker/daemon.json`, or add option
+`--ip-forward-no-drop` to the `dockerd` command line.
+
+Alternatively, you may add `ACCEPT` rules to the `DOCKER-USER` chain for the
+packets you want to forward. For example:
 
 ```console
 $ iptables -I DOCKER-USER -i src_if -o dst_if -j ACCEPT
 ```
+
+> [!WARNING]
+>
+> In releases older than 28.0.0, Docker always set the default policy of the
+> IPv6 `FORWARD` chain to `DROP`. In release 28.0.0 and newer, it will only
+> set that policy if it enables IPv6 forwarding itself. This has always been
+> the behaviour for IPv4 forwarding.
+>
+> If IPv6 forwarding is enabled on your host before Docker starts, check your
+> host's configuration to make sure it is still secure.
 
 ## Prevent Docker from manipulating iptables
 
