@@ -19,7 +19,7 @@ The C++ getting started guide teaches you how to create a containerized C++ appl
 
 > **Acknowledgment**
 >
-> Docker would like to thank [Pradumna Saraf](https://twitter.com/pradumna_saraf) and [Mohammad-Ali A'râbi](https://twitter.com/MohammadAliEN) for his contribution to this guide.
+> Docker would like to thank [Pradumna Saraf](https://twitter.com/pradumna_saraf) and [Mohammad-Ali A'râbi](https://twitter.com/MohammadAliEN) for their contribution to this guide.
 
 - Containerize and run a C++ application using a multi-stage Docker build
 - Build and run a C++ application using Docker Compose
