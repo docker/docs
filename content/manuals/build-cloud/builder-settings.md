@@ -16,21 +16,21 @@ Any changes take effect immediately.
 
 > [!TIP]
 > 
-> If you build very large images, consider allocating more storage for caching.
+> If you build very large images, consider allocating less storage for caching.
 
 ## Private resource access
 
-Private resource access lets cloud builders pull images and packages from private registries that are not publicly accessible. This feature is useful when builds rely on self-hosted artifact repositories or private OCI registries.
+Private resource access lets cloud builders pull images and packages from private resources. This feature is useful when builds rely on self-hosted artifact repositories or private OCI registries.
 
-For example, if your organization hosts a private [PyPI](https://pypi.org/) repository on a VPN, Docker Build Cloud would not be able to access it by default, since it isn't on the same network as your VPN.
+For example, if your organization hosts a private [PyPI](https://pypi.org/) repository on a private network, Docker Build Cloud would not be able to access it by default, since the DBC builder is not connected to your private network.
 
-To enable your cloud builders to access your private registries, enter the host name and port of your private registry and then select **Add** to allow your cloud builders to access it.
+To enable your cloud builders to access your private resources, enter the host name and port of your private rescource and then select **Add** to allow your cloud builders to access it.
 
 ### Authentication 
 
 If your internal artifacts require authentication, make sure that you
 authenticate with the repository either before or during the build. For
-internal packages like npm or PyPI, use [build secrets](/manuals/build/building/secrets.md)
+internal package repositories for npm or PyPI, use [build secrets](/manuals/build/building/secrets.md)
 to authenticate during the build. For internal OCI registries, use `docker
 login` to authenticate before building.
 
@@ -47,9 +47,9 @@ $ docker build --builder <cloud-builder> --tag registry.example.com/<image> --pu
 
 ## Firewall
 
-Firewall settings let you restrict cloud builder egress traffic to specific IP addresses. This helps enhance security by limiting external access.
+Firewall settings let you restrict cloud builder egress traffic to specific IP addresses. This helps enhance security by limiting external network egress from the builder.
 
-1. Select the **Enable firewall: Restrict cloud builder egress to specific public IP Address** checkbox.
+1. Select the **Enable firewall: Restrict cloud builder egress to specific public IP address** checkbox.
 
 2. Enter the IP address you want to allow.
 

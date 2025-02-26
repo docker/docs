@@ -187,4 +187,4 @@ It only changes the builder that's automatically selected to run your builds.
 ## Registries on internal networks
 
 It is possible to use Docker Build Cloud with a [private registry](/manuals/build-cloud/builder-settings.md#private-resource-access)
-or registry mirror on an internal network behind a VPN.
+or registry mirror on an internal network.
