@@ -27,8 +27,7 @@ Docker subscription plan or Legacy Docker plan.
 
 > [!NOTE]
 >
-> Legacy Docker plans apply to Docker subscribers who last purchased or renewed their subscription before December 10, 2024. These subscribers will keep their current plan and pricing until their next renewal date that falls on or after December 10, 2024. To see purchase or renewal history, view your [billing history](../billing/history.md). For more details about Docker legacy plans, see [Announcing Upgraded Docker Plans](https://www.docker.com/blog/november-2024-updated-plans-announcement/). In addition to current features, Docker maintains a [public roadmap](https://github.com/docker/roadmap) so subscribers can see what new
-features are in development, as well as request new capabilities.
+> Legacy Docker plans apply to Docker subscribers who last purchased or renewed their subscription before December 10, 2024. These subscribers will keep their current plan and pricing until their next renewal date that falls on or after December 10, 2024. To see purchase or renewal history, view your [billing history](../billing/history.md). For more details about Docker legacy plans, see [Announcing Upgraded Docker Plans](https://www.docker.com/blog/november-2024-updated-plans-announcement/).
 
 {{< tabs >}}
 {{< tab name="Docker plan" >}}
