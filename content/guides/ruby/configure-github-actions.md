@@ -34,68 +34,66 @@ In this section, you'll learn how to set up and use GitHub Actions to build your
 1. Define the GitHub Actions workflow.
 2. Run the workflow.
 
-## 1. Set up the workflow
+## 1. Define the GitHub Actions workflow
 
-Set up your GitHub Actions workflow for building, testing, and pushing the image
-to Docker Hub.
+You can create a GitHub Actions workflow by creating a YAML file in the `.github/workflows/` directory of your repository. To do this use your favorite text editor or the GitHub web interface. The following steps show you how to create a workflow file using the GitHub web interface.
+
+If you prefer to use the GitHub web interface, follow these steps:
 
 1. Go to your repository on GitHub and then select the **Actions** tab.
 
 2. Select **set up a workflow yourself**.
 
    This takes you to a page for creating a new GitHub actions workflow file in
-   your repository, under `.github/workflows/main.yml` by default.
+   your repository. By default, the file is created under `.github/workflows/main.yml`, let's change it name to `build.yml`.
 
-3. In the editor window, copy and paste the following YAML configuration.
+If you prefer to use your text editor, create a new file named `build.yml` in the `.github/workflows/` directory of your repository.
 
-   ```yaml
-   name: ci
+Add the following content to the file:
 
-   on:
-     push:
-       branches:
-         - main
+```yaml
+name: Build and push Docker image
 
-   jobs:
-     build:
-       runs-on: ubuntu-latest
-       steps:
-         - name: Login to Docker Hub
-           uses: docker/login-action@v3
-           with:
-             username: ${{ vars.DOCKER_USERNAME }}
-             password: ${{ secrets.DOCKERHUB_TOKEN }}
+on:
+  push:
+    branches:
+      - main
 
-         - name: Set up Docker Buildx
-           uses: docker/setup-buildx-action@v3
+jobs:
+  build_and_push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ vars.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-         - name: Build and push
-           uses: docker/build-push-action@v6
-           with:
-             push: true
-             tags: ${{ vars.DOCKER_USERNAME }}/${{ github.event.repository.name }}:latest
-   ```
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
-   For more information about the YAML syntax for `docker/build-push-action`,
-   refer to the [GitHub Action README](https://github.com/docker/build-push-action/blob/master/README.md).
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          push: true
+          tags: ${{ vars.DOCKER_USERNAME }}/${{ github.event.repository.name }}:latest
+```
+
+Each GitHub Actions workflow includes one or several jobs. Each job consists of steps. Each step can either run a set of commands or use already [existing actions](https://github.com/marketplace?type=actions). The action above has three steps:
+
+1. [**Login to Docker Hub**](https://github.com/docker/login-action): Action logs in to Docker Hub using the Docker ID and Personal Access Token (PAT) you created earlier.
+
+2. [**Set up Docker Buildx**](https://github.com/docker/setup-buildx-action): Action sets up Docker [Buildx](https://github.com/docker/buildx), a CLI plugin that extends the capabilities of the Docker CLI.
+
+3. [**Build and push**](https://github.com/docker/build-push-action): Action builds and pushes the Docker image to Docker Hub. The `tags` parameter specifies the image name and tag. The `latest` tag is used in this example.
 
 ## 2. Run the workflow
 
-Save the workflow file and run the job.
+Let's commit the changes, push them to the `main` branch. In the workflow above, the trigger is set to `push` events on the `main` branch. This means that the workflow will run every time you push changes to the `main` branch. You can find more information about the workflow triggers [here](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows).
 
-1. Select **Commit changes...** and push the changes to the `main` branch.
+Go to the **Actions** tab of you GitHub repository. It displays the workflow. Selecting the workflow shows you the breakdown of all the steps.
 
-   After pushing the commit, the workflow starts automatically.
-
-2. Go to the **Actions** tab. It displays the workflow.
-
-   Selecting the workflow shows you the breakdown of all the steps.
-
-3. When the workflow is complete, go to your
-   [repositories on Docker Hub](https://hub.docker.com/repositories).
-
-   If you see the new repository in that list, it means the GitHub Actions
-   successfully pushed the image to Docker Hub.
+When the workflow is complete, go to your [repositories on Docker Hub](https://hub.docker.com/repositories). If you see the new repository in that list, it means the GitHub Actions workflow successfully pushed the image to Docker Hub.
 
 ## Summary
 
