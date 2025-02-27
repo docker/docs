@@ -9,9 +9,6 @@ aliases:
 ---
 
 {{< tabs >}}
-{{< tab name="For all platforms" >}}
-* IPv6 is not yet supported on Docker Desktop.
-{{< /tab >}}
 {{< tab name="For Mac with Intel chip" >}}
 * The Mac Activity Monitor reports that Docker is using twice the amount of memory it's actually using. This is due to a bug in MacOS. We have written [a detailed report](https://docs.google.com/document/d/17ZiQC1Tp9iH320K-uqVLyiJmk4DHJ3c4zgQetJiKYQM/edit?usp=sharing) on this.
 
@@ -19,8 +16,6 @@ aliases:
   whale icon to become unresponsive, Docker tasks to show as not responding in
   the Activity Monitor, and for some processes to consume a large amount of CPU
   resources. Reboot and restart Docker to resolve these issues.
-
-* Docker doesn't auto-start after sign in even when it's enabled in **Settings**. This is related to a   set of issues with Docker helper, registration, and versioning.
 
 * Docker Desktop uses the `HyperKit` hypervisor
   (https://github.com/docker/hyperkit) in macOS 10.10 Yosemite and higher. If
@@ -73,7 +68,6 @@ aliases:
    However, attempts to run Intel-based containers on Apple silicon machines under emulation can crash as qemu sometimes fails to run the container. In addition, filesystem change notification APIs (`inotify`) do not work under qemu emulation. Even when the containers do run correctly under emulation, they will be slower and use more memory than the native equivalent.
 
    In summary, running Intel-based containers on Arm-based machines should be regarded as "best effort" only. We recommend running arm64 containers on Apple silicon machines whenever possible, and encouraging container authors to produce arm64, or multi-arch, versions of their containers. This issue should become less common over time, as more and more images are rebuilt [supporting multiple architectures](https://www.docker.com/blog/multi-arch-build-and-images-the-simple-way/).
-- `ping` from inside a container to the Internet does not work as expected.  To test the network, use `curl` or `wget`. See [docker/for-mac#5322](https://github.com/docker/for-mac/issues/5322#issuecomment-809392861).
 - Users may occasionally experience data drop when a TCP stream is half-closed.
 {{< /tab >}}
 {{< /tabs >}}

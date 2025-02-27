@@ -8,6 +8,7 @@ tags: [ Troubleshooting ]
 weight: 10 
 aliases:
  - /desktop/troubleshoot/topics/
+ - /manuals/desktop/troubleshoot-and-support/troubleshoot/workarounds/
 ---
 
 > [!TIP]
@@ -90,6 +91,37 @@ Enable file sharing in Docker Desktop for Windows:
 1. From **Settings**, select **Shared Folders**. 
 2. Share the folder that contains the Dockerfile and volume mount paths.
 
+### Issue: `port already allocated` errors
+
+#### Error message
+
+When starting a container, you may see an error like:
+
+```text
+Bind for 0.0.0.0:8080 failed: port is already allocated
+```
+
+Or
+
+```text
+listen tcp:0.0.0.0:8080: bind: address is already in use
+```
+
+#### Cause
+
+- Another application on your system is already using the specified port.
+- A previously running container was not stopped properly and is still bound to the port.
+
+#### Solution
+
+To discover the identity of this software, either:
+- Use the `resmon.exe` GUI, select **Network** and then **Listening Ports**
+- In PowerShell, use `netstat -aon | find /i "listening "` to discover the PID of the process
+currently using the port (the PID is the number in the rightmost column). 
+
+Then, decide whether to shut the other process down, or to use a different port in your
+Docker app.
+
 ## Topics for Linux and Mac
 
 ### Issue: Docker Desktop fails to start on Mac or Linux platforms
@@ -123,6 +155,26 @@ Ensure your username is short enough to keep paths within the allowed limit:
  - Linux: Username should be ≤ 55 characters
 
 ## Topics for Mac
+
+### Issue: Persistent notification telling me an application has changed my Desktop configurations
+
+#### Cause 
+
+You receive this notification because the Configuration integrity check feature has detected that a third-party application has altered your Docker Desktop configuration. This usually happens due to incorrect or missing symlinks. The notification ensures you are aware of these changes so you can review and repair any potential issues to maintain system reliability.
+
+Opening the notification presents a pop-up window which provides detailed information about the detected integrity issues.
+
+#### Solution
+
+If you choose to ignore the notification, it will be shown again only at the next Docker Desktop startup. If you choose to repair your configuration, you won't be prompted again.
+
+If you want to switch off Configuration integrity check notifications, navigate to Docker Desktop's settings and in the **General** tab, clear the **Automatically check configuration** setting. 
+
+### Issue: `com.docker.vmnetd` is still running after I quit the app
+
+The privileged helper process `com.docker.vmnetd` is started by `launchd` and
+runs in the background. The process does not consume any resources unless
+`Docker.app` connects to it, so it's safe to ignore.
 
 ### Issue: Incompatible CPU detected
 
@@ -168,6 +220,20 @@ To continue using VPNKit:
 3. Save the file and restart Docker Desktop.
 
 ## Topics for Windows
+
+### Issue: Docker Desktop fails to start when anti-virus software is installed
+
+#### Cause
+
+Some anti-virus software may be incompatible with Hyper-V and Microsoft
+Windows 10 builds. The conflict
+typically occurs after a Windows update and
+manifests as an error response from the Docker daemon and a Docker Desktop start failure.
+
+#### Solution
+
+For a temporary workaround, uninstall the anti-virus software, or
+add Docker to the exclusions/exceptions in your antivirus software.
 
 ### Issue: Permissions errors on data directories for shared volumes
 
