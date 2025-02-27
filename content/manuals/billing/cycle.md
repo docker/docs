@@ -79,9 +79,9 @@ To change your organization's billing cycle:
 To change your organization's billing cycle:
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
-2. Select **Organizations** from the top-level navigation.
-3. Select the organization that you want to change the payment method for.
-4. In the bottom-right of the **Plan** tab, select **Switch to annual billing**.
+2. Select **My Hub** from the top-level navigation.
+3. Select the organization that you want to change the payment method for, and then select **Billing**.
+4. Select **Switch to annual billing**.
 5. Review the information displayed on the **Change to an Annual subscription** page and select **Accept Terms and Purchase** to confirm.
 
 {{< /tab >}}

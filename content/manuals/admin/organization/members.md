@@ -47,8 +47,8 @@ address you received the invitation through.
 4. Optional. If you do not have an account and created one, you must navigate
 back to your email inbox and verify your email address using the Docker verification
 email.
-5. Once you are signed in to Docker Hub, select **Organizations** from the top-level navigation menu.
-6. The organizations page will display your invitation. Select **Accept**.
+5. Once you are signed in to Docker Hub, select **My Hub** from the top-level navigation menu.
+6. Select **Accept** on your invitation.
 
 After accepting an invitation, you are now a member of the organization.
 
@@ -64,7 +64,7 @@ After inviting members, you can resend or remove invitations as needed.
 To resend an invitation from Docker Hub:
 
 1. Sign in to [Docker Hub](https://hub.docker.com/).
-2. Select **Organizations**, your organization, and then **Members**.
+2. Select **My Hub**, your organization, and then **Members**.
 3. In the table, locate the invitee, select the **Actions** icon, and then select
 **Resend invitation**.
 4. Select **Invite** to confirm.
@@ -93,7 +93,7 @@ To resend an invitation from the Admin Console:
 To remove a member's invitation from Docker Hub:
 
 1. Sign in to [Docker Hub](https://hub.docker.com/).
-2. Select **Organizations**, your organization, and then **Members**.
+2. Select **My Hub**, your organization, and then **Members**.
 3. In the table, select the **Action** icon, and then select **Remove member** or **Remove invitee**.
 4. Follow the on-screen instructions to remove the member or invitee.
 
@@ -125,12 +125,12 @@ Use Docker Hub or the Admin Console to add or remove team members. Organization 
 To add a member to a team with Docker Hub:
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
-2. Select **Organizations**, your organization, and then **Members**.
+2. Select **My Hub**, your organization, and then **Members**.
 3. Select the **Action** icon, and then select **Add to team**.
 
    > [!NOTE]
    >
-   > You can also navigate to **Organizations** > **Your Organization** > **Teams** > **Your Team Name** and select **Add Member**. Select a member from the drop-down list to add them to the team or search by Docker ID or email.
+   > You can also navigate to **My Hub** > **Your Organization** > **Teams** > **Your Team Name** and select **Add Member**. Select a member from the drop-down list to add them to the team or search by Docker ID or email.
 4. Select the team and then select **Add**.
 
    > [!NOTE]
@@ -167,7 +167,7 @@ Organization owners can remove a member from a team in Docker Hub or Admin Conso
 To remove a member from a specific team with Docker Hub:
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
-2. Select **Organizations**, your organization, **Teams**, and then the team.
+2. Select **My Hub**, your organization, **Teams**, and then the team.
 3. Select the **X** next to the user’s name to remove them from the team.
 4. When prompted, select **Remove** to confirm.
 
@@ -198,7 +198,7 @@ the company owner can also manage that organization's roles. If you have SSO ena
 To update a member role:
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
-2. Select **Organizations**, your organization, and then **Members**.
+2. Select **My Hub**, your organization, and then **Members**.
 3. Find the username of the member whose role you want to edit. In the table, select the **Actions** icon.
 4. Select **Edit role**.
 5. Select their organization, select the role you want to assign, and then select **Save**.
@@ -221,7 +221,7 @@ Owners can export a CSV file containing all members. The CSV file for a company 
 To export a CSV file of your members:
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
-2. Select **Organizations**, your organization, and then **Members**.
+2. Select **My Hub**, your organization, and then **Members**.
 3. Select the **Action** icon and then select **Export users as CSV**.
 
 {{< /tab >}}
