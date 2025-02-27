@@ -106,4 +106,3 @@ application using Docker.
 
 In the next section, you'll learn how to properly configure the application with your preferred LLM model, completely locally, using Docker.
 
-{{< button text="Develop your application" url="develop.md" >}}
