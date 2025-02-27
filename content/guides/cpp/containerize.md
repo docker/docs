@@ -1,9 +1,9 @@
 ---
 title: Containerize a C++ application
-linkTitle: Containerize your app
+linkTitle: Build and run a C++ application using Docker Compose
 weight: 10
 keywords: C++, containerize, initialize
-description: Learn how to containerize a C++ application.
+description: Learn how to use Docker Compose to build and run a C++ application.
 aliases:
   - /language/cpp/containerize/
   - /guides/language/cpp/containerize/
@@ -15,17 +15,17 @@ aliases:
 
 ## Overview
 
-This section walks you through containerizing and running a C++ application.
+This section walks you through containerizing and running a C++ application, using Docker Compose.
 
 ## Get the sample application
 
-Clone the sample application to use with this guide. Open a terminal, change directory to a directory that you want to work in, and run the following command to clone the repository:
+We're using the same sample repository that you used in the previous sections of this guide. If you haven't already cloned the repository, clone it now:
 
 ```console
 $ git clone https://github.com/dockersamples/c-plus-plus-docker.git
 ```
 
-You should now have the following contents in your `c-plus-plus-docker`
+You should now have the following contents in your `c-plus-plus-docker` (root)
 directory.
 
 ```text

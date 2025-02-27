@@ -26,7 +26,6 @@ amount of consumption. See [Docker subscriptions and features](./details.md) to
 learn how much base consumption comes with each subscription. You can scale your
 consumption at any time during your subscription period. All purchased
 consumption expires at the end of your subscription term.
-amount of consumption. You can scale your consumption at any time during your subscription period. All purchased consumption expires at the end of your subscription term.
 
 You can scale consumption for the following:
 
