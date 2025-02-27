@@ -24,7 +24,7 @@ Private resource access lets cloud builders pull images and packages from privat
 
 For example, if your organization hosts a private [PyPI](https://pypi.org/) repository on a private network, Docker Build Cloud would not be able to access it by default, since the cloud builder is not connected to your private network.
 
-To enable your cloud builders to access your private resources, enter the host name and port of your private rescource and then select **Add**.
+To enable your cloud builders to access your private resources, enter the host name and port of your private resource and then select **Add**.
 
 ### Authentication 
 
