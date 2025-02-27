@@ -2,14 +2,11 @@
 title: Glossary
 description: Glossary of terms used around Docker
 keywords: glossary, docker, terms, definitions
-layout: glossary
 notoc: true
 aliases:
 - /engine/reference/glossary/
 - /glossary/
 ---
 
-<!--
-To edit/add/remove glossary entries, visit the YAML file at:
-https://github.com/docker/docs/blob/main/data/glossary.yaml
--->
+Need a definition? Docker's AI-powered assistant can help. Select **Ask AI** in the
+top navigation and ask it to define a term.
