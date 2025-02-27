@@ -42,7 +42,7 @@ The private images that existed in your previous account are now available in yo
 To avoid losing your private images, you can pull your private images from your
 personal account and push them to an organization that's owned by you.
 
-1. Navigate to [Docker Hub](https://hub.docker.com) and select **Organizations**.
+1. Navigate to [Docker Hub](https://hub.docker.com) and select **My Hub**.
 2. Select the applicable organization and verify that your user account is a member of the organization.
 3. Sign in to [Docker Hub](https://hub.docker.com) using your original Docker account, and pull your images:
 

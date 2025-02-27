@@ -24,7 +24,7 @@ Before you convert a user account to an organization, ensure that you meet the f
 - The user account that you want to convert must not be a member of a company or any teams or organizations. You must remove the account from all teams, organizations, or the company.
 
     To do this:
-    1. Navigate to **Organizations** and then select the organization(s) you need to leave.
+    1. Navigate to **My Hub** and then select the organization you need to leave.
     2. Find your username in the **Members** tab.
     3. Select the **More options** menu and then select **Leave organization**.
 

@@ -38,8 +38,8 @@ The organization owner can also add additional organization owners to help them 
 {{< tab name="Docker Hub" >}}
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
-2. Select **Organizations** and choose your organization.
-3. Select the **Teams** tab and then select **Create Team**.
+2. Select **My Hub** and choose your organization.
+3. Select the **Teams** and then select **Create Team**.
 4. Fill out your team's information and select **Create**.
 5. [Add members to your team](members.md#add-a-member-to-a-team).
 
@@ -65,8 +65,8 @@ access. Note that organization owners have full administrative access to all rep
 To give a team access to a repository:
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
-2. Select **Organizations** and choose your organization.
-3. Select the **Teams** tab and select the team that you'd like to configure repository access to.
+2. Select **My Hub** and choose your organization.
+3. Select the **Teams** and select the team that you'd like to configure repository access to.
 4. Select the **Permissions** tab and select a repository from the
    **Repository** drop-down.
 5. Choose a permission from the **Permissions** drop-down list and select
@@ -109,7 +109,7 @@ you automatically have "Read-only" permissions:
 To view a team's permissions across all repositories:
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
-2. Select **Organizations** and choose your organization.
+2. Select **My Hub** and choose your organization.
 3. Select **Teams** and choose your team name.
 4. Select the **Permissions** tab, where you can view the repositories this team can access.
 
@@ -121,8 +121,8 @@ Organization owners can delete a team in Docker Hub or Admin Console. When you r
 {{< tab name="Docker Hub" >}}
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
-2. Select **Organizations** and choose your organization.
-3. Select the **Teams** tab.
+2. Select **My Hub** and choose your organization.
+3. Select **Teams**.
 4. Select the name of the team that you want to delete.
 5. Select **Settings**.
 6. Select **Delete Team**.
