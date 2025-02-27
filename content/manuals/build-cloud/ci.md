@@ -32,21 +32,11 @@ See [Loading build results](./usage/#loading-build-results) for details.
 > Builds on Docker Build Cloud have a timeout limit of two hours. Builds that
 > run for longer than two hours are automatically cancelled.
 
-## CI Platform Examples
+## CI platform examples
 
-Choose your CI platform to see detailed setup instructions:
 
-- [GitHub Actions](#github-actions)
-- [GitLab](#gitlab)
-- [Circle CI](#circle-ci)
-- [Buildkite](#buildkite)
-- [Jenkins](#jenkins)
-- [Travis CI](#travis-ci)
-- [BitBucket Pipelines](#bitbucket-pipelines)
-- [Shell Script](#shell-script)
-- [Docker Compose](#docker-compose)
 
-### GitHub Actions {#github-actions}
+### GitHub Actions
 
 > [!NOTE]
 >
@@ -100,7 +90,7 @@ jobs:
           outputs: ${{ github.event_name == 'pull_request' && 'type=cacheonly' || 'type=registry' }}
 ```
 
-### GitLab {#gitlab}
+### GitLab
 
 ```yaml
 default:
@@ -145,7 +135,7 @@ build_cache:
         .
 ```
 
-### Circle CI {#circle-ci}
+### Circle CI
 
 ```yaml
 version: 2.1
@@ -206,7 +196,7 @@ workflows:
       - build_push
 ```
 
-### Buildkite {#buildkite}
+### Buildkite
 
 The following example sets up a Buildkite pipeline using Docker Build Cloud. The
 example assumes that the pipeline name is `build-push-docker` and that you
@@ -283,7 +273,7 @@ docker buildx build \
     .
 ```
 
-### Jenkins {#jenkins}
+### Jenkins
 
 ```groovy
 pipeline {
@@ -318,7 +308,7 @@ pipeline {
 }
 ```
 
-### Travis CI {#travis-ci}
+### Travis CI
 
 ```yaml
 language: minimal 
@@ -349,7 +339,7 @@ script: |
   --tag "$IMAGE_NAME" .
 ```
 
-### BitBucket Pipelines {#bitbucket-pipelines}
+### BitBucket Pipelines 
 
 ```yaml
 # Prerequisites: $DOCKER_USER, $DOCKER_PAT setup as deployment variables
@@ -379,7 +369,7 @@ pipelines:
           - docker
 ```
 
-### Shell Script {#shell-script}
+### Shell script
 
 ```bash
 #!/bin/bash
@@ -413,7 +403,7 @@ docker buildx build \
     .
 ```
 
-### Docker Compose {#docker-compose}
+### Docker Compose
 
 Use this implementation if you want to use `docker compose build` with
 Docker Build Cloud in CI.
