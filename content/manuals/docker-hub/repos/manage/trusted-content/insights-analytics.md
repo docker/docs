@@ -72,9 +72,9 @@ can analyze it manually as a spreadsheet.
 
 Export usage data for your organization's images using the Docker Hub website by following these steps:
 
-1.  Sign in to [Docker Hub](https://hub.docker.com/) and select **Organizations**.
+1.  Sign in to [Docker Hub](https://hub.docker.com/) and select **My Hub**.
 
-2.  Choose your organization and select **Insights and analytics**.
+2.  Choose your organization and select **Analytics**.
 
     ![Organization overview page, with the Insights and Analytics tab](../../../images/organization-tabs.png)
 

@@ -27,7 +27,7 @@ The following objects are shown in the diagram.
 ## Manage repository images and image indexes
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
-2. Select **Repositories**.
+2. Select **My Hub** > **Repositories**.
 3. In the list, select a repository.
 4. Select **Image Management**.
 5. Search, filter, or sort the items.
