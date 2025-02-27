@@ -185,7 +185,7 @@ Legacy Docker Pro includes:
 - Unlimited [collaborators](/docker-hub/repos/manage/access/#collaborators) for public repositories at no cost per month.
 - Access to [Legacy Docker Scout Free](#legacy-docker-scout-free) to get started with software supply chain security.
 - Unlimited private repositories
-- 5000 image [pulls per day](/manuals/docker-hub/usage/pulls.md)
+- 5000 image [pulls per day](/manuals/docker-hub/usage.md)
 - [Auto Builds](/docker-hub/builds/) with 5 concurrent builds
 - 300 [Vulnerability Scans](/docker-hub/vulnerability-scanning/)
 
@@ -216,7 +216,7 @@ Legacy Docker Team includes:
 - Unlimited teams
 - [Auto Builds](/docker-hub/builds/) with 15 concurrent builds
 - Unlimited [Vulnerability Scanning](/docker-hub/vulnerability-scanning/)
-- 5000 image [pulls per day](/manuals/docker-hub/usage/pulls.md) for each team member
+- 5000 image [pulls per day](/manuals/docker-hub/usage.md) for each team member
 
 There are also advanced collaboration and management tools, including organization and team management with [Role Based Access Control (RBAC)](/security/for-admins/roles-and-permissions/), [activity logs](/admin/organization/activity-logs/), and more.
 
