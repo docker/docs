@@ -34,8 +34,6 @@ See [Loading build results](./usage/#loading-build-results) for details.
 
 ## CI platform examples
 
-
-
 ### GitHub Actions
 
 > [!NOTE]
