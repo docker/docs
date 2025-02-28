@@ -4,6 +4,9 @@ keywords: Docker Hub, pulls, usage, limit
 title: Docker Hub pull usage and limits
 linkTitle: Pulls
 weight: 10
+aliases:
+  - /docker-hub/usage/storage/
+  - /docker-hub/usage/repositories/
 ---
 
 {{% include "hub-limits.md" %}}
@@ -181,8 +184,8 @@ To view your current pull rate and limit:
       $ TOKEN=$(curl "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
       ```
 
-   - To get a token with a user account, if you are authenticated (insert your
-     username and password in the following command):
+   - To get a token with a user account, if you are authenticated, insert your
+     username and password in the following command:
 
       ```console
       $ TOKEN=$(curl --user 'username:password' "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
@@ -200,13 +203,13 @@ To view your current pull rate and limit:
 3. Examine the headers. You should see the following headers.
 
    ```text
-   ratelimit-limit: 100;w=21600
-   ratelimit-remaining: 76;w=21600
+   ratelimit-limit: 100;w=3600
+   ratelimit-remaining: 20;w=3600
    docker-ratelimit-source: 192.0.2.1
    ```
 
-   In the previous example, the pull limit is 100 pulls per 21600 seconds (6
-   hours), and there are 76 pulls remaining.
+   In the previous example, the pull limit is 100 pulls per 3600 seconds (1
+   hour), and there are 20 pulls remaining.
 
    If you don't see any `ratelimit` header, it could be because the image or your IP
    is unlimited in partnership with a publisher, provider, or an open source
