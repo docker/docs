@@ -21,7 +21,7 @@ Below is a simple example:
 ```console
 $ cat .env
 TAG=v1.5
-$ cat compose.yml
+$ cat compose.yaml
 services:
   web:
     image: "webapp:${TAG}"
@@ -98,7 +98,7 @@ services:
 
 #### Additional information 
 
-- If you define a variable in your `.env` file, you can reference it directly in your `compose.yml` with the [`environment` attribute](/reference/compose-file/services.md#environment). For example, if your `.env` file contains the environment variable `DEBUG=1` and your `compose.yml` file looks like this:
+- If you define a variable in your `.env` file, you can reference it directly in your `compose.yaml` with the [`environment` attribute](/reference/compose-file/services.md#environment). For example, if your `.env` file contains the environment variable `DEBUG=1` and your `compose.yaml` file looks like this:
    ```yaml
     services:
       webapp:
@@ -163,14 +163,14 @@ $ docker compose --env-file ./config/.env.dev up
 
 #### Additional information 
 
-- This method is useful if you want to temporarily override an `.env` file that is already referenced in your `compose.yml` file. For example you may have different `.env` files for production ( `.env.prod`) and testing (`.env.test`).
+- This method is useful if you want to temporarily override an `.env` file that is already referenced in your `compose.yaml` file. For example you may have different `.env` files for production ( `.env.prod`) and testing (`.env.test`).
   In the following example, there are two environment files, `.env` and `.env.dev`. Both have different values set for `TAG`. 
   ```console
   $ cat .env
   TAG=v1.5
   $ cat ./config/.env.dev
   TAG=v1.6
-  $ cat compose.yml
+  $ cat compose.yaml
   services:
     web:
       image: "webapp:${TAG}"

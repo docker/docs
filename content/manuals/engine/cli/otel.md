@@ -63,7 +63,7 @@ The following Docker Compose file bootstraps a set of services to get started wi
 It includes an OpenTelemetry collector that the CLI can send metrics to,
 and a Prometheus backend that scrapes the metrics off the collector.
 
-```yaml {collapse=true,title=compose.yml}
+```yaml {collapse=true,title=compose.yaml}
 name: cli-otel
 services:
   prometheus:
@@ -95,7 +95,7 @@ volumes:
 ```
 
 This service assumes that the following two configuration files exist alongside
-`compose.yml`:
+`compose.yaml`:
 
 - ```yaml {collapse=true,title=otelcol.yml}
   # Receive signals over gRPC and HTTP

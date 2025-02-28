@@ -10,7 +10,7 @@ Bake supports the [Compose file format](/reference/compose-file/_index.md)
 to parse a Compose file and translate each service to a [target](reference.md#target).
 
 ```yaml
-# docker-compose.yml
+# compose.yaml
 services:
   webapp-dev:
     build: &build-dev
@@ -106,7 +106,7 @@ where the command is executed and applied to compose definitions passed
 with `-f`.
 
 ```yaml
-# docker-compose.yml
+# compose.yaml
 services:
   webapp:
     image: docker.io/username/webapp:${TAG:-v1.0.0}
@@ -152,7 +152,7 @@ the [special extension](/reference/compose-file/extension.md) field
 `x-bake` in your compose file to evaluate extra fields:
 
 ```yaml
-# docker-compose.yml
+# compose.yaml
 services:
   addon:
     image: ct-addon:bar
