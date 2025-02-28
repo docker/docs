@@ -38,4 +38,4 @@ automatically after the test execution is complete by using the Ryuk sidecar con
 While starting the required containers, Testcontainers attaches a set of labels to the 
 created resources (containers, volumes, networks etc) and Ryuk automatically performs 
 resource clean up by matching those labels. 
-This works reliably even when the test process exits abnormally (e.g. sending a SIGKILL).
+This works reliably even when the test process exits abnormally (for example sending a SIGKILL).

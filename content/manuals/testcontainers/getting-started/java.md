@@ -16,8 +16,8 @@ weight: 20
 
 It's easy to add Testcontainers to your project - let's walk through a quick example to see how.
 
-Let's imagine we have a simple program that has a dependency on Redis, and we want to add some tests for it.
-In our imaginary program, there is a `RedisBackedCache` class which stores data in Redis.
+Let's imagine you have a simple program that has a dependency on Redis, and you want to add some tests for it.
+In your imaginary program, there is a `RedisBackedCache` class which stores data in Redis.
  
 You can see an example test that could have been written for it (without using Testcontainers):
 
@@ -43,8 +43,8 @@ public class RedisBackedCacheIntTestStep0 {
 ```
 
 Notice that the existing test has a problem - it's relying on a local installation of Redis, which is a red flag for test reliability.
-This may work if we were sure that every developer and CI machine had Redis installed, but would fail otherwise.
-We might also have problems if we attempted to run tests in parallel, such as state bleeding between tests, or port clashes.
+This may work if you were sure that every developer and CI machine had Redis installed, but would fail otherwise.
+You might also have problems if you attempted to run tests in parallel, such as state bleeding between tests, or port clashes.
 
 Let's start from here, and see how to improve the test with Testcontainers:  
 
@@ -74,9 +74,9 @@ testImplementation "org.testcontainers:testcontainers:{{latest_version}}"
 {{< /tab >}}
 {{< /tabs >}}
 
-### Step 2: Get Testcontainers to run a Redis container during our tests
+### Step 2: Run a Redis container in the tests
 
-Simply add the following to the body of our test class:
+Simply add the following to the body of your test class:
 
 ```java
 @Rule
@@ -85,22 +85,22 @@ public GenericContainer redis = new GenericContainer(DockerImageName.parse("redi
 ```
 
 The `@Rule` annotation tells JUnit to notify this field about various events in the test lifecycle.
-In this case, our rule object is a Testcontainers `GenericContainer`, configured to use a specific Redis image from Docker Hub, and configured to expose a port.
+In this case, the rule object is a Testcontainers `GenericContainer`, configured to use a specific Redis image from Docker Hub, and configured to expose a port.
 
-If we run our test as-is, then regardless of the actual test outcome, we'll see logs showing us that Testcontainers:
+If you run your test as-is, then regardless of the actual test outcome, you'll see logs showing you that Testcontainers:
 
-* was activated before our test method ran
-* discovered and quickly tested our local Docker setup
+* was activated before the test method ran
+* discovered and quickly tested the local Docker setup
 * pulled the image if necessary
 * started a new container and waited for it to be ready
 * shut down and deleted the container after the test
 
-### Step 3: Make sure our code can talk to the container
+### Step 3: Make sure the code can talk to the container
 
-Before Testcontainers, we might have hardcoded an address like `localhost:6379` into our tests.
+Before Testcontainers, you might have hard-coded an address like `localhost:6379` into your tests.
 
 Testcontainers uses *randomized ports* for each container it starts, but makes it easy to obtain the actual port at runtime.
-We can do this in our test `setUp` method, to set up our component under test:
+You can do this in your test `setUp` method, to set up your component under test:
 
 ```java
 String address = redis.getHost();
@@ -112,16 +112,14 @@ underTest = new RedisBackedCache(address, port);
 
 > [!TIP]
 >
-> Notice that we also ask Testcontainers for the container's actual address with `redis.getHost();`, 
+> Notice that the previous code also asks Testcontainers for the container's actual address with `redis.getHost();`, 
 > rather than hard-coding `localhost`. `localhost` may work in some environments but not others - for example it may
 > not work on your current or future CI environment. As such, **avoid hard-coding** the address, and use 
 > `getHost()` instead.
 
 ### Step 4: Run the tests
 
-That's it!
-
-Let's look at our complete test class to see how little we had to add to get up and running with Testcontainers:
+Let's look at the complete test class to see how little you had to add to get up and running with Testcontainers:
 
 ```java
 public class RedisBackedCacheIntTest {
@@ -158,8 +156,8 @@ public class RedisBackedCacheIntTest {
 
 It's easy to add Testcontainers to your project - let's walk through a quick example to see how.
 
-Let's imagine we have a simple program that has a dependency on Redis, and we want to add some tests for it.
-In our imaginary program, there is a `RedisBackedCache` class which stores data in Redis.
+Let's imagine you have a simple program that has a dependency on Redis, and you want to add some tests for it.
+In your imaginary program, there is a `RedisBackedCache` class which stores data in Redis.
  
 You can see an example test that could have been written for it (without using Testcontainers):
 
@@ -185,8 +183,8 @@ public class RedisBackedCacheIntTestStep0 {
 ```
 
 Notice that the existing test has a problem - it's relying on a local installation of Redis, which is a red flag for test reliability.
-This may work if we were sure that every developer and CI machine had Redis installed, but would fail otherwise.
-We might also have problems if we attempted to run tests in parallel, such as state bleeding between tests, or port clashes.
+This may work if you were sure that every developer and CI machine had Redis installed, but would fail otherwise.
+You might also have problems if you attempted to run tests in parallel, such as state bleeding between tests, or port clashes.
 
 Let's start from here, and see how to improve the test with Testcontainers:  
 
@@ -230,9 +228,9 @@ testImplementation "org.testcontainers:junit-jupiter:{{latest_version}}"
 {{< /tab >}}
 {{< /tabs >}}
 
-### Step 2: Get Testcontainers to run a Redis container during our tests
+### Step 2: Get Testcontainers to run a Redis container during the tests
 
-First, you'll need to annotate the test class with `@Testcontainers`. Furthermore, add the following to the body of our test class:
+First, you'll need to annotate the test class with `@Testcontainers`. Furthermore, add the following to the body of the test class:
 
 ```java
 @Container
@@ -241,22 +239,22 @@ public GenericContainer redis = new GenericContainer(DockerImageName.parse("redi
 ```
 
 The `@Container` annotation tells JUnit to notify this field about various events in the test lifecycle.
-In this case, our rule object is a Testcontainers `GenericContainer`, configured to use a specific Redis image from Docker Hub, and configured to expose a port.
+In this case, the rule object is a Testcontainers `GenericContainer`, configured to use a specific Redis image from Docker Hub, and configured to expose a port.
 
-If we run our test as-is, then regardless of the actual test outcome, we'll see logs showing us that Testcontainers:
+If you run your test as-is, then regardless of the actual test outcome, you'll see logs showing you that Testcontainers:
 
-* was activated before our test method ran
-* discovered and quickly tested our local Docker setup
+* was activated before the test method ran
+* discovered and quickly tested the local Docker setup
 * pulled the image if necessary
 * started a new container and waited for it to be ready
 * shut down and deleted the container after the test
 
-### Step 3: Make sure our code can talk to the container
+### Step 3: Make sure the code can talk to the container
 
-Before Testcontainers, we might have hardcoded an address like `localhost:6379` into our tests.
+Before Testcontainers, you might have hard-coded an address like `localhost:6379` into your tests.
 
 Testcontainers uses *randomized ports* for each container it starts, but makes it easy to obtain the actual port at runtime.
-We can do this in our test `setUp` method, to set up our component under test:
+You can do this in your test `setUp` method, to set up your component under test:
 
 ```java
 String address = redis.getHost();
@@ -268,7 +266,7 @@ underTest = new RedisBackedCache(address, port);
 
 > [!TIP]
 >
-> Notice that we also ask Testcontainers for the container's actual address with `redis.getHost();`, 
+> Notice that the previous code also asks Testcontainers for the container's actual address with `redis.getHost();`, 
 > rather than hard-coding `localhost`. `localhost` may work in some environments but not others - for example it may
 > not work on your current or future CI environment. As such, **avoid hard-coding** the address, and use 
 > `getHost()` instead.
@@ -284,9 +282,7 @@ current environment. Set `disabledWithoutDocker` to `true`.
 
 ### Step 5: Run the tests
 
-That's it!
-
-Let's look at our complete test class to see how little we had to add to get up and running with Testcontainers:
+Let's look at the complete test class to see how little you had to add to get up and running with Testcontainers:
 
 ```java
 @Testcontainers
@@ -324,8 +320,8 @@ public class RedisBackedCacheIntTest {
 
 It's easy to add Testcontainers to your project - let's walk through a quick example to see how.
 
-Let's imagine we have a simple program that has a dependency on Redis, and we want to add some tests for it.
-In our imaginary program, there is a `RedisBackedCache` class which stores data in Redis.
+Let's imagine you have a simple program that has a dependency on Redis, and you want to add some tests for it.
+In your imaginary program, there is a `RedisBackedCache` class which stores data in Redis.
  
 You can see an example test that could have been written for it (without using Testcontainers):
 
@@ -352,8 +348,8 @@ class RedisBackedCacheIntTestStep0 extends Specification {
 ```
 
 Notice that the existing test has a problem - it's relying on a local installation of Redis, which is a red flag for test reliability.
-This may work if we were sure that every developer and CI machine had Redis installed, but would fail otherwise.
-We might also have problems if we attempted to run tests in parallel, such as state bleeding between tests, or port clashes.
+This may work if you were sure that every developer and CI machine had Redis installed, but would fail otherwise.
+You might also have problems if you attempted to run tests in parallel, such as state bleeding between tests, or port clashes.
 
 Let's start from here, and see how to improve the test with Testcontainers:  
 
@@ -383,7 +379,7 @@ testImplementation "org.testcontainers:spock:{{latest_version}}"
 {{< /tab >}}
 {{< /tabs >}}
 
-### Step 2: Get Testcontainers to run a Redis container during our tests
+### Step 2: Get Testcontainers to run a Redis container during the tests
 
 Annotate the Spock specification class with the Testcontainers extension:
 
@@ -392,7 +388,7 @@ Annotate the Spock specification class with the Testcontainers extension:
 class RedisBackedCacheIntTest extends Specification {
 ```
 
-And add the following field to the body of our test class:
+And add the following field to the body of the test class:
 
 ```groovy
 GenericContainer redis = new GenericContainer<>("redis:6-alpine")
@@ -401,20 +397,20 @@ GenericContainer redis = new GenericContainer<>("redis:6-alpine")
 
 This tells Spock to start a Testcontainers `GenericContainer`, configured to use a specific Redis image from Docker Hub, and configured to expose a port.
 
-If we run our test as-is, then regardless of the actual test outcome, we'll see logs showing us that Testcontainers:
+If you run the test as-is, then regardless of the actual test outcome, you'll see logs showing you that Testcontainers:
 
-* was activated before our test method ran
-* discovered and quickly tested our local Docker setup
+* was activated before the test method ran
+* discovered and quickly tested the local Docker setup
 * pulled the image if necessary
 * started a new container and waited for it to be ready
 * shut down and deleted the container after the test
 
-### Step 3: Make sure our code can talk to the container
+### Step 3: Make sure the code can talk to the container
 
-Before Testcontainers, we might have hardcoded an address like `localhost:6379` into our tests.
+Before Testcontainers, you might have hard-coded an address like `localhost:6379` in the tests.
 
 Testcontainers uses *randomized ports* for each container it starts, but makes it easy to obtain the actual port at runtime.
-We can do this in our test `setup` method, to set up our component under test:
+You can do this in your test `setup` method, to set up your component under test:
 
 ```groovy
 String address = redis.host
@@ -426,16 +422,14 @@ underTest = new RedisBackedCache(address, port)
 
 > [!TIP]
 >
-> Notice that we also ask Testcontainers for the container's actual address with `redis.containerIpAddress`, 
+> Notice that the previous code also asks Testcontainers for the container's actual address with `redis.containerIpAddress`, 
 > rather than hard-coding `localhost`. `localhost` may work in some environments but not others - for example it may
 > not work on your current or future CI environment. As such, **avoid hard-coding** the address, and use 
 > `containerIpAddress` instead.
 
 ### Step 4: Run the tests
 
-That's it!
-
-Let's look at our complete test class to see how little we had to add to get up and running with Testcontainers:
+Let's look at the complete test class to see how little you had to add to get up and running with Testcontainers:
 
 ```groovy
 @org.testcontainers.spock.Testcontainers
