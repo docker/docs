@@ -117,7 +117,7 @@ underTest = new RedisBackedCache(address, port);
 > not work on your current or future CI environment. As such, **avoid hard-coding** the address, and use 
 > `getHost()` instead.
 
-### Step 4: Run the tests!
+### Step 4: Run the tests
 
 That's it!
 
@@ -282,7 +282,7 @@ Those attributes can be helpful when:
 current environment. Set `disabledWithoutDocker` to `true`.
 * Enable parallel container initialization instead of sequential (by default). Set `parallel` to `true`.
 
-### Step 5: Run the tests!
+### Step 5: Run the tests
 
 That's it!
 
@@ -431,7 +431,7 @@ underTest = new RedisBackedCache(address, port)
 > not work on your current or future CI environment. As such, **avoid hard-coding** the address, and use 
 > `containerIpAddress` instead.
 
-### Step 4: Run the tests!
+### Step 4: Run the tests
 
 That's it!
 

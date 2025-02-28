@@ -8,7 +8,7 @@ aliases:
 - /testcontainers/benefits/
 ---
 
-### Benefits of using Testcontainers:
+### Benefits of using Testcontainers
 
 * **On-demand isolated infrastructure provisioning:**
 You don't need to have a pre-provisioned integration testing infrastructure. 

@@ -28,7 +28,7 @@ _Testcontainers for Go_ is tested against those two latest Go releases, therefor
 
 _Testcontainers for Go_ uses [go mod](https://blog.golang.org/using-go-modules) and you can get it installed via:
 
-```
+```bash
 go get github.com/testcontainers/testcontainers-go
 ```
 
@@ -93,7 +93,7 @@ automatically handles nil container so is safe to use even in the error case.
 
 > [!TIP]
 >
-> Look at [features/garbage_collector](/features/garbage_collector/) to know another
+> Look at [features/garbage_collector](https://golang.testcontainers.org/features/garbage_collector/) to know another
 > way to clean up resources.
 
 ## Step 3: Make your code talk to the container
