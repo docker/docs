@@ -15,12 +15,12 @@ weight: 20
 
 HyperKit is a hypervisor built on top of the Hypervisor.framework in macOS. It runs entirely in userspace and has no other dependencies.
 
-We use HyperKit to eliminate the need for other VM products, such as Oracle
-VirtualBox or VMWare Fusion.
+Docker uses HyperKit to eliminate the need for other VM products, such as Oracle
+VirtualBox or VMware Fusion.
 
 ### What is the benefit of HyperKit?
 
-HyperKit is thinner than VirtualBox and VMWare fusion, and the version included is customized for Docker workloads on Mac.
+HyperKit is thinner than VirtualBox and VMware fusion, and the version included is customized for Docker workloads on Mac.
 
 ### Where does Docker Desktop store Linux containers and images? 
 

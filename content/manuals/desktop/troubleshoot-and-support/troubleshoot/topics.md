@@ -205,7 +205,7 @@ in the Apple documentation, and Docker Desktop [Mac system requirements](/manual
 
 #### Cause
 
-In Docker Desktop version 4.19, gVisor replaced VPNKit to enhance the performance of VM networking when using the Virtualization framework on macOS 13 and above.
+In Docker Desktop version 4.19, gVisor replaced VPNKit to enhance the performance of VM networking when using the Virtualization framework on macOS 13 and later.
 
 #### Solution
 
@@ -308,7 +308,7 @@ $ docker run --rm -ti -v /c/Users/user/work:/work alpine ls /work
 
 ### Issue: Docker commands failing in Git Bash
 
-#### Error message:
+#### Error message
 
 ```console
 $ docker run --rm -ti -v C:\Users\user\work:/work alpine
@@ -399,7 +399,7 @@ To turn on nested virtualization, see [Run Docker Desktop for Windows in a VM or
 
 ##### Hypervisor enabled at Windows startup
 
-If you have completed the steps described above and are still experiencing
+If you have completed the previous steps and are still experiencing
 Docker Desktop startup issues, this could be because the Hypervisor is installed,
 but not launched during Windows startup. Some tools (such as older versions of 
 Virtual Box) and video game installers turn off hypervisor on boot. To turn it back on:
