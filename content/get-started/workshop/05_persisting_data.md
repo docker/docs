@@ -114,7 +114,7 @@ You can create the volume and start the container using the CLI or Docker Deskto
    > ```
    >
    > For more details about Git Bash's syntax differences, see
-   > [Working with Git Bash](/desktop/troubleshoot-and-support/troubleshoot/topics/#working-with-git-bash).
+   > [Working with Git Bash](/desktop/troubleshoot-and-support/troubleshoot/topics/#issue-docker-commands-failing-in-git-bash).
 
 
 {{< /tab >}}
