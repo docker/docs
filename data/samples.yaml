@@ -37,7 +37,7 @@ samples:
       - mysql
   - title: NGINX / ASP.NET / MySQL
     url: https://github.com/docker/awesome-compose/tree/master/nginx-aspnet-mysql
-    description: A sample Nginx reverse proxy with an C# backend using ASP.NET.
+    description: A sample Nginx reverse proxy with a C# backend using ASP.NET.
     services: 
       - nginx
       - .net

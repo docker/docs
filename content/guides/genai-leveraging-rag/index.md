@@ -38,7 +38,7 @@ The system operates as follows:
 3. The found information gets added to the original question before passed to LLM 
 4. The LLM generates responses that blend the model's inherent knowledge with the this extra information.  
 
-To hold this vector information in a efficient manner, we need a special type of database.
+To hold this vector information in an efficient manner, we need a special type of database.
 
 ## Introduction to Graph databases 
 

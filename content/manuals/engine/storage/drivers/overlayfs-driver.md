@@ -104,7 +104,7 @@ its compatibility with different backing filesystems.
 OverlayFS layers two directories on a single Linux host and presents them as
 a single directory. These directories are called layers, and the unification
 process is referred to as a union mount. OverlayFS refers to the lower directory
-as `lowerdir` and the upper directory a `upperdir`. The unified view is exposed
+as `lowerdir` and the upper directory as `upperdir`. The unified view is exposed
 through its own directory called `merged`.
 
 The `overlay2` driver natively supports up to 128 lower OverlayFS layers. This
