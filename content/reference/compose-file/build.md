@@ -130,7 +130,7 @@ services:
     dockerfile_inline: |
       FROM alpine
       RUN ...
- base:
+ my-service:
   build:
     context: .
     dockerfile_inline: |
