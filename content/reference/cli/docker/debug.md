@@ -6,3 +6,5 @@ layout: cli
 aliases:
 - /engine/reference/commandline/debug/
 ---
+
+{{< summary-bar feature_name="Docker Debug" >}}

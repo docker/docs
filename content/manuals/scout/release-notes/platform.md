@@ -15,9 +15,6 @@ issues, and bug fixes in Docker Scout releases. These release notes cover the
 Docker Scout platform, including the Dashboard. For CLI release notes, refer to
 [Docker Scout CLI release notes](./cli.md).
 
-Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1)
-for what's coming next.
-
 ## Q4 2024
 
 New features and enhancements released in the fourth quarter of 2024.

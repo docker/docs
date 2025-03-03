@@ -92,7 +92,7 @@ services:
       context: .
       target: final
     ports:
-      - 8080:80
+      - 8080:8080
     depends_on:
       db:
         condition: service_healthy

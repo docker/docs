@@ -33,6 +33,14 @@ To accept an invitation:
 1. Navigate to your email inbox and open the Docker email with an invitation to
 join the Docker organization.
 2. To open the link to Docker Hub, select the **click here** link.
+
+   > [!WARNING]
+   >
+   > Invitation email links expire after 14 days. If your email link has expired,
+   > you can sign in to [Docker Hub](https://hub.docker.com/) with the email
+   > address the link was sent to and accept the invitation from the
+   > **Notifications** panel.
+
 3. The Docker create an account page will open. If you already have an account, select **Already have an account? Sign in**.
 If you do not have an account yet, create an account using the same email
 address you received the invitation through.
@@ -140,6 +148,10 @@ To add a member to a team with the Admin Console:
 {{< /tabs >}}
 
 ### Remove a member from a team
+
+> [!NOTE]
+>
+> If your organization uses single sign-on (SSO) with [SCIM](/manuals/security/for-admins/provisioning/scim.md) enabled, you should remove members from your identity provider (IdP). This will automatically remove members from Docker. If SCIM is disabled, you must manually manage members in Docker.
 
 Organization owners can remove a member from a team in Docker Hub or Admin Console. Removing the member from the team will revoke their access to the permitted resources.
 

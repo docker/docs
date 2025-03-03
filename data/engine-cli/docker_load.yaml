@@ -16,6 +16,17 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: platform
+      value_type: string
+      description: |
+        Load only the given platform variant. Formatted as `os[/arch[/variant]]` (e.g., `linux/amd64`)
+      deprecated: false
+      hidden: false
+      min_api_version: "1.48"
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: quiet
       shorthand: q
       value_type: bool

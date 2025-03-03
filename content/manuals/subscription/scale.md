@@ -26,13 +26,11 @@ amount of consumption. See [Docker subscriptions and features](./details.md) to
 learn how much base consumption comes with each subscription. You can scale your
 consumption at any time during your subscription period. All purchased
 consumption expires at the end of your subscription term.
-amount of consumption. You can scale your consumption at any time during your subscription period. All purchased consumption expires at the end of your subscription term.
 
 You can scale consumption for the following:
 
 - Docker Build Cloud build minutes
 - Docker Testcontainers Cloud runtime minutes
-- Docker Hub storage and image pulls
 
 To better understand your needs, you can view your consumption at any time. For
 more details, see [View Docker product
@@ -61,15 +59,3 @@ pre-purchase, you are able to use as many minutes as you need on-demand. The
 usage will be billed at the end of each monthly billing cycle. On-demand usage
 is billed at a higher rate than pre-purchased capacity. To avoid on-demand
 charges, pre-purchase additional minutes.
-
-## Add Docker Hub storage or image pulls
-
-{{% include "hub-limits.md" %}}
-
-You can pre-purchase images pulls and storage by [contacting
-sales](https://www.docker.com/pricing/contact-sales/).
-
-In addition to pre-purchase, you are able to use as much resources as you need
-on-demand. On-demand usage is billed at a higher rate than pre-purchased
-capacity. To avoid on-demand charges, pre-purchase additional storage or image
-pulls.

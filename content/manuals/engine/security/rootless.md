@@ -490,7 +490,7 @@ The value is automatically set to `/run/user/$UID` and cleaned up on every logou
 
 **`systemctl --user` fails with "Failed to connect to bus: No such file or directory"**
 
-This error occurs mostly when you switch from the root user to an non-root user with `sudo`:
+This error occurs mostly when you switch from the root user to a non-root user with `sudo`:
 
 ```console
 # sudo -iu testuser

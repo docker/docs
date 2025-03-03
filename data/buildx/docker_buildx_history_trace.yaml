@@ -1,0 +1,54 @@
+command: docker buildx history trace
+short: Show the OpenTelemetry trace of a build record
+long: Show the OpenTelemetry trace of a build record
+usage: docker buildx history trace [OPTIONS] [REF]
+pname: docker buildx history
+plink: docker_buildx_history.yaml
+options:
+    - option: addr
+      value_type: string
+      default_value: 127.0.0.1:0
+      description: Address to bind the UI server
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: compare
+      value_type: string
+      description: Compare with another build reference
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+inherited_options:
+    - option: builder
+      value_type: string
+      description: Override the configured builder instance
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: debug
+      shorthand: D
+      value_type: bool
+      default_value: "false"
+      description: Enable debug logging
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

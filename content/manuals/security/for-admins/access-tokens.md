@@ -15,13 +15,12 @@ params:
 
 > [!WARNING]
 >
-> Organization access tokens (OATs) are not intended to be used with Docker Desktop, and are incompatible.
+> Organization access tokens (OATs) are not intended to be used with Docker 
+> Desktop, and are incompatible.
 >
 > OATs are also currently incompatible with the following services:
 >
-> - Docker Build Cloud
 > - Docker Scout
-> - Docker REST APIs
 >
 > If you use Docker Desktop or one of these services, you must use personal access tokens instead.
 
@@ -38,8 +37,8 @@ OATs provide the following advantages:
   if you find any suspicious activity.
 - You can limit what each OAT has access to, which limits the impact if an OAT
   is compromised.
-- All organization owners can manage OATs. If one owner leaves the organization,
-  the remaining owners can still manage the OATs.
+- All company or organization owners can manage OATs. If one owner leaves the 
+  organization, the remaining owners can still manage the OATs.
 - OATs have their own Docker Hub usage limits that don't count towards your
   personal account's limits.
 
@@ -55,18 +54,19 @@ If you have existing [service accounts](/docker-hub/service-accounts/), Docker r
   it.
 - OATs are not associated with a single user. If a user with access to the
   service account leaves your organization, you may lose access to the service
-  account. OATs can be managed by any organization owner.
+  account. OATs can be managed by any company or organization owner.
 
 ## Create an organization access token
 
 > [!IMPORTANT]
 >
-> Treat access tokens like a password and keep them secret. Store your tokens securely in a credential manager for example.
+> Treat access tokens like a password and keep them secret. Store your tokens 
+> securely in a credential manager for example.
 
-Organization owners can create up to 10 organization access tokens (OATs) for
-organizations with a Team subscription and up to 100 OATs for organizations with
-a Business subscription. Expired tokens count towards the total amount of
-tokens.
+Company or organization owners can create up to 10 organization access tokens 
+(OATs) for organizations with a Team subscription and up to 100 OATs for 
+organizations with a Business subscription. Expired tokens count towards the 
+total amount of tokens.
 
 To create an OAT:
 

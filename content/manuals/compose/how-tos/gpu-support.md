@@ -15,7 +15,7 @@ You can use either `docker-compose` or `docker compose` commands. For more infor
 
 ## Enabling GPU access to service containers
 
-GPUs are referenced in a `compose.yml` file using the [device](/reference/compose-file/deploy.md#devices) attribute from the Compose Deploy specification, within your services that need them. 
+GPUs are referenced in a `compose.yaml` file using the [device](/reference/compose-file/deploy.md#devices) attribute from the Compose Deploy specification, within your services that need them.
 
 This provides more granular control over a GPU reservation as custom values can be set for the following device properties: 
 

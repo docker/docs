@@ -105,9 +105,28 @@ networks:
     attachable: true
 ```
 
+### `enable_ipv4`
+
+{{< summary-bar feature_name="Compose enable ipv4" >}}
+
+`enable_ipv4` can be used to disable IPv4 address assignment.
+
+```yml
+  networks:
+    ip6net:
+      enable_ipv4: false
+      enable_ipv6: true
+```
+
 ### `enable_ipv6`
 
-`enable_ipv6` enables IPv6 networking. For an example, see step four of [Create an IPv6 network](/manuals/engine/daemon/ipv6.md).
+`enable_ipv6` enables IPv6 address assignment.
+
+```yml
+  networks:
+    ip6net:
+      enable_ipv6: true
+```
 
 ### `external`
 

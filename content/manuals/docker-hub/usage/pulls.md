@@ -4,32 +4,27 @@ keywords: Docker Hub, pulls, usage, limit
 title: Docker Hub pull usage and limits
 linkTitle: Pulls
 weight: 10
+aliases:
+  - /docker-hub/usage/storage/
+  - /docker-hub/usage/repositories/
 ---
 
 {{% include "hub-limits.md" %}}
 
 Unauthenticated and Docker Personal users are subject to hourly pull rate limits
-on Docker Hub. In contrast, Docker Pro, Team, and Business users benefit from a
-base number of included pulls per month without hourly rate restrictions. This
-included usage is flexible, allowing you to scale or upgrade your subscription
-to accommodate additional pulls or utilize on-demand pulls as needed.
-
-Any pulls exceeding the included amounts in each subscription tier will be
-charged at an on-demand rate. To increase your monthly pull allowance and avoid
-on-demand charges, you can [scale](/manuals/subscription/scale.md) or
-[upgrade](/manuals/subscription/change.md) your subscription.
+on Docker Hub. In contrast, Docker Pro, Team, and Business users benefit from
+unlimited pulls per hour.
 
 The following pull usage and limits apply based on your subscription, subject to
 fair use:
 
-
-| User type                | Pulls per month | Pull rate limit per hour               |
-|--------------------------|-----------------|----------------------------------------|
-| Business (authenticated) | 1M              | Unlimited                              |
-| Team (authenticated)     | 100K            | Unlimited                              |
-| Pro (authenticated)      | 25K             | Unlimited                              |
-| Personal (authenticated) | Not applicable  | 40                                     |
-| Unauthenticated Users    | Not applicable  | 10 per IPv4 address or IPv6 /64 subnet |
+| User type                | Pull rate limit per hour               |
+|--------------------------|----------------------------------------|
+| Business (authenticated) | Unlimited                              |
+| Team (authenticated)     | Unlimited                              |
+| Pro (authenticated)      | Unlimited                              |
+| Personal (authenticated) | 100                                     |
+| Unauthenticated Users    | 10 per IPv4 address or IPv6 /64 subnet |
 
 ## Pull definition
 
@@ -48,8 +43,7 @@ A pull is defined as the following:
 ## Pull attribution
 
 Pulls from authenticated users can be attributed to either a personal or an
-organization
-[namespace](/reference/glossary/#organization-name).
+[organization namespace](/manuals/admin/faqs/general-faqs.md#whats-an-organization-name-or-namespace).
 
 Attribution is based on the following:
 
@@ -190,8 +184,8 @@ To view your current pull rate and limit:
       $ TOKEN=$(curl "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
       ```
 
-   - To get a token with a user account, if you are authenticated (insert your
-     username and password in the following command):
+   - To get a token with a user account, if you are authenticated, insert your
+     username and password in the following command:
 
       ```console
       $ TOKEN=$(curl --user 'username:password' "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
@@ -209,13 +203,13 @@ To view your current pull rate and limit:
 3. Examine the headers. You should see the following headers.
 
    ```text
-   ratelimit-limit: 100;w=21600
-   ratelimit-remaining: 76;w=21600
+   ratelimit-limit: 100;w=3600
+   ratelimit-remaining: 20;w=3600
    docker-ratelimit-source: 192.0.2.1
    ```
 
-   In the previous example, the pull limit is 100 pulls per 21600 seconds (6
-   hours), and there are 76 pulls remaining.
+   In the previous example, the pull limit is 100 pulls per 3600 seconds (1
+   hour), and there are 20 pulls remaining.
 
    If you don't see any `ratelimit` header, it could be because the image or your IP
    is unlimited in partnership with a publisher, provider, or an open source

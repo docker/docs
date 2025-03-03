@@ -178,7 +178,7 @@ able to help you get set up:
 In the _Run a new container_ dialog that opens, you should see a message about
 **Ask Gordon**.
 
-![Ask Gordon hint in Docker Desktop](../images/gordon-run-ctr.png)
+![Ask Gordon hint in Docker Desktop](../../images/gordon-run-ctr.png)
 
 The linked text in the hint is a suggested prompt to start a conversation with
 Ask Gordon.

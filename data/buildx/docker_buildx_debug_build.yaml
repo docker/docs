@@ -17,7 +17,7 @@ options:
       kubernetes: false
       swarm: false
     - option: allow
-      value_type: stringSlice
+      value_type: stringArray
       default_value: '[]'
       description: |
         Allow extra privileged entitlement (e.g., `network.host`, `security.insecure`)
