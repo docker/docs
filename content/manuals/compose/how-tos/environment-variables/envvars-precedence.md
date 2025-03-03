@@ -30,7 +30,7 @@ In the following example, a different value for the same environment variable in
 $ cat ./webapp.env
 NODE_ENV=test
 
-$ cat compose.yml
+$ cat compose.yaml
 services:
   webapp:
     image: 'webapp'

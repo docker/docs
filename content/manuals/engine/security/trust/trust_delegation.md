@@ -122,7 +122,7 @@ Successfully generated and loaded private key. Corresponding public key availabl
 
 ### Manually generating keys
 
-If you need to manually generate a private key (either RSA or ECDSA) and a x509 
+If you need to manually generate a private key (either RSA or ECDSA) and an X.509
 certificate containing the public key, you can use local tools like openssl or 
 cfssl along with a local or company-wide Certificate Authority. 
 

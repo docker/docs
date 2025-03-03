@@ -712,7 +712,7 @@ $ docker service create \
   nginx
 ```
 
-You can also use the `constraint` service-level key in a `compose.yml`
+You can also use the `constraint` service-level key in a `compose.yaml`
 file.
 
 If you specify multiple placement constraints, the service only deploys onto

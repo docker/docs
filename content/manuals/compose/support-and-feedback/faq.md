@@ -11,16 +11,16 @@ aliases:
 
 ### What is the difference between `docker compose` and `docker-compose`
 
-Version one of the Docker Compose command-line binary was first released in 2014. It was written in Python, and is invoked with `docker-compose`. Typically, Compose V1 projects include a top-level version element in the compose.yml file, with values ranging from 2.0 to 3.8, which refer to the specific file formats.
+Version one of the Docker Compose command-line binary was first released in 2014. It was written in Python, and is invoked with `docker-compose`. Typically, Compose V1 projects include a top-level version element in the compose.yaml file, with values ranging from 2.0 to 3.8, which refer to the specific file formats.
 
-Version two of the Docker Compose command-line binary was announced in 2020, is written in Go, and is invoked with `docker compose`. Compose V2 ignores the version top-level element in the compose.yml file.
+Version two of the Docker Compose command-line binary was announced in 2020, is written in Go, and is invoked with `docker compose`. Compose V2 ignores the version top-level element in the compose.yaml file.
 
 For further information, see [History and development of Compose](/manuals/compose/intro/history.md).
 
 ### What's the difference between `up`, `run`, and `start`?
 
 Typically, you want `docker compose up`. Use `up` to start or restart all the
-services defined in a `compose.yml`. In the default "attached"
+services defined in a `compose.yaml`. In the default "attached"
 mode, you see all the logs from all the containers. In "detached" mode (`-d`),
 Compose exits after starting the containers, but the containers continue to run
 in the background.
