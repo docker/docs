@@ -111,7 +111,7 @@ counter whenever you visit it.
     CMD ["python", "app.py"]
     ```
 
-5.  Create a file called `compose.yml` and paste this in:
+5.  Create a file called `compose.yaml` and paste this in:
 
     ```yaml
       services:
@@ -220,7 +220,7 @@ The stack is now ready to be deployed.
 1.  Create the stack with `docker stack deploy`:
 
     ```console
-    $ docker stack deploy --compose-file compose.yml stackdemo
+    $ docker stack deploy --compose-file compose.yaml stackdemo
 
     Ignoring unsupported options: build
 

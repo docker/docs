@@ -64,9 +64,9 @@ Usually, the backend is made of one container that runs within the Docker Deskto
 a Docker Compose project, creates the container from the `image` option of the `vm` section of the `metadata.json`, and
 attaches it to the Compose project. See the [ui metadata section](metadata.md#vm-section) for more details.
 
-In some cases, a `compose.yml` file can be used instead of an `image`. This is useful when the backend container
+In some cases, a `compose.yaml` file can be used instead of an `image`. This is useful when the backend container
 needs more specific options, such as mounting volumes or requesting [capabilities](https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities)
-that can't be expressed just with a Docker image. The `compose.yml` file can also be used to add multiple containers
+that can't be expressed just with a Docker image. The `compose.yaml` file can also be used to add multiple containers
 needed by the extension, like a database or a message broker. 
 Note that, if the Compose file defines many services, the SDK can only contact the first of them.
 

@@ -29,15 +29,15 @@ production. These changes might include:
 - Adding extra services such as a log aggregator
 
 For this reason, consider defining an additional Compose file, for example
-`production.yml`, which specifies production-appropriate
+`compose.production.yaml`, which specifies production-appropriate
 configuration. This configuration file only needs to include the changes you want to make from the original Compose file. The additional Compose file
-is then applied over the original `compose.yml` to create a new configuration.
+is then applied over the original `compose.yaml` to create a new configuration.
 
 Once you have a second configuration file, you can use it with the
 `-f` option:
 
 ```console
-$ docker compose -f compose.yml -f production.yml up -d
+$ docker compose -f compose.yaml -f compose.production.yaml up -d
 ```
 
 See [Using multiple compose files](multiple-compose-files/_index.md) for a more complete example, and other options.
