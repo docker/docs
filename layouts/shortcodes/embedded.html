@@ -1,0 +1,65 @@
+{{ $language := .Get "language" }}
+{{ $source := .Get "source" }}
+{{ $options := .Get "options" }}
+{{ $id := .Get "id" }}
+{{ $startTag := printf "START %s" $id }}
+{{ $endTag := printf "END %s" $id }}
+
+{{ if and $source (strings.Contains $source "testcontainers-go") }}
+    {{/*
+        If the source is a testcontainers-go file, we need to use a different tag. In example:
+
+        // runRedisContainer {
+        //     ...
+        // }
+    */}}
+    {{ $startTag = printf "// %s {" $id }}
+    {{ $endTag = printf "// }" }}
+{{ end }}
+
+{{ with $source | readFile }}
+    {{ $snippet := . }}
+
+    {{ if $id }}
+        {{ $lines := split $snippet "\n" }}
+
+        {{ $startl := -1 }}
+        {{ $endl := -1 }}
+
+        {{/* Find the lines that ends with the start and end tags. */}}
+        {{ range $index, $line := $lines }}
+            {{ if hasSuffix (strings.TrimSpace $line) $startTag }}
+                {{ $startl = $index }}
+            {{ else if hasSuffix (strings.TrimSpace $line) $endTag }}
+                {{ $endl = $index }}
+            {{ end }}
+        {{ end }}
+ 
+        {{/* Let's add some basic assertions. */}}
+        {{ if lt $startl 0 }}
+            {{ errorf "Named snippet '%s' is missing START tag (searched %d lines)" $id (len $lines) }}
+        {{ end }}
+
+        {{ if lt $endl 0 }}
+            {{ errorf "Named snippet '%s' is missing END tag (searched %d lines)" $id (len $lines) }}
+        {{ end }}
+
+        {{ if le $endl $startl }}
+            {{ errorf "Named snippet '%s': END tag (line %d) must come after START tag (line %d)" $id $endl $startl }}
+        {{ end }}
+
+        {{/* Size of the snippet in number of lines. */}}
+        {{ $snippetLen := sub (sub $endl $startl) 1 }}
+
+        {{/* Create slice with only the lines between the tags. */}}
+        {{ $includedLines := first $snippetLen (after (add $startl 1) $lines) }}
+
+        {{/* Join the lines into the final snippet. */}}
+        {{ $snippet = delimit $includedLines "\n" }}
+        {{ $markdown := printf "```%s\n%s\n```" $language $snippet }}
+        {{ $markdown | markdownify }}
+    {{ else }}
+        {{ $markdown := printf "```%s\n%s\n```" $language . }}
+        {{ $markdown | markdownify }}
+    {{ end }}
+{{ end }}
