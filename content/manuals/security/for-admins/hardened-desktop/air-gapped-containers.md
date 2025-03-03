@@ -34,7 +34,7 @@ Assuming [enforced sign-in](/manuals/security/for-admins/enforce-sign-in/_index.
     "mode": "manual",
     "http": "",
     "https": "",
-    "exclude": "",
+    "exclude": [],
     "pac": "http://192.168.1.16:62039/proxy.pac",
     "transparentPorts": "*"
   }
