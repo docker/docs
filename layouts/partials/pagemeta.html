@@ -20,8 +20,8 @@
 {{- end }}
 
 {{- define "walkHeadingFragments" }}
-  {{- $min := 2 }}
-  {{- $max := 3 }}
+  {{- $min := default 2 page.Params.toc_min }}
+  {{- $max := default 3 page.Params.toc_max }}
   <ul class="pl-2">
     {{- range . }}
       {{- if and (ge .Level $min) (le .Level $max) }}
