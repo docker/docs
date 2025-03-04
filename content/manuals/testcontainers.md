@@ -1,6 +1,6 @@
 ---
-title: Testcontainers OSS
-description: Learn how to use Testcontainers OSS to run containers programmatically in your preferred programming language.
+title: Testcontainers
+description: Learn how to use Testcontainers to run containers programmatically in your preferred programming language.
 keywords: docker APIs, docker, testcontainers documentation, testcontainers, testcontainers oss, testcontainers oss documentation,
   docker compose, docker-compose, java, golang, go
 params:
