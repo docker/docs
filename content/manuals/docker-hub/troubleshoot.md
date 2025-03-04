@@ -5,6 +5,7 @@ title: Troubleshoot Docker Hub
 linkTitle: Troubleshoot
 weight: 60
 tags: [Troubleshooting]
+toc_max: 2
 ---
 
 If you experience issues with Docker Hub, refer to the following solutions.
