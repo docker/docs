@@ -53,6 +53,12 @@ Your additional minutes will now display on the Build minutes page.
 
 ## Add Docker Testcontainers Cloud runtime minutes
 
+> [!NOTE]
+>
+> Testcontainers Cloud runtime minutes do not rollover. If you do not use
+> your allocated minutes, you can't roll them over to the next month or
+> subscription period.
+
 You can pre-purchase Testcontainers Cloud runtime minutes by [contacting
  sales](https://www.docker.com/pricing/contact-sales/). In addition to
 pre-purchase, you are able to use as many minutes as you need on-demand. The
