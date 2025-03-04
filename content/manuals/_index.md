@@ -26,7 +26,7 @@ params:
     description: Define and run multi-container applications.
     icon: /assets/icons/Compose.svg
     link: /compose/
-  - title: Testcontainers OSS
+  - title: Testcontainers
     description: Run containers programmatically in your preferred programming language.
     icon: /assets/icons/Testcontainers.svg
     link: /testcontainers/
