@@ -21,7 +21,7 @@ aliases:
 
 ## Topics for all platforms
 
-### Issue: Certificates not set up correctly 
+### Certificates not set up correctly 
 
 #### Error message 
 
@@ -49,7 +49,7 @@ Additionally, logs from the registry may show:
 - If your registry is self-signed, configure Docker to trust the certificate by adding it to Docker’s certificates directory (/etc/docker/certs.d/ on Linux).
 - If the issue persists, check your Docker daemon configuration and enable TLS authentication.
 
-### Issue: Docker Desktop's UI appears green, distorted, or has visual artifacts
+### Docker Desktop's UI appears green, distorted, or has visual artifacts
 
 #### Cause
 
@@ -73,7 +73,7 @@ Disable hardware acceleration:
 
 3. Save the file and restart Docker Desktop.
 
-### Issue: Using mounted volumes and getting runtime errors indicating an application file is not found, access to a volume mount is denied, or a service cannot start
+### Using mounted volumes and getting runtime errors indicating an application file is not found, access to a volume mount is denied, or a service cannot start
 
 #### Cause
 
@@ -91,7 +91,7 @@ Enable file sharing in Docker Desktop for Windows:
 1. From **Settings**, select **Shared Folders**. 
 2. Share the folder that contains the Dockerfile and volume mount paths.
 
-### Issue: `port already allocated` errors
+### `port already allocated` errors
 
 #### Error message
 
@@ -124,7 +124,7 @@ Docker app.
 
 ## Topics for Linux and Mac
 
-### Issue: Docker Desktop fails to start on Mac or Linux platforms
+### Docker Desktop fails to start on Mac or Linux platforms
 
 #### Error message 
 
@@ -156,7 +156,7 @@ Ensure your username is short enough to keep paths within the allowed limit:
 
 ## Topics for Mac
 
-### Issue: Persistent notification telling me an application has changed my Desktop configurations
+### Persistent notification telling me an application has changed my Desktop configurations
 
 #### Cause 
 
@@ -170,19 +170,21 @@ If you choose to ignore the notification, it will be shown again only at the nex
 
 If you want to switch off Configuration integrity check notifications, navigate to Docker Desktop's settings and in the **General** tab, clear the **Automatically check configuration** setting. 
 
-### Issue: `com.docker.vmnetd` is still running after I quit the app
+### `com.docker.vmnetd` is still running after I quit the app
 
 The privileged helper process `com.docker.vmnetd` is started by `launchd` and
 runs in the background. The process does not consume any resources unless
 `Docker.app` connects to it, so it's safe to ignore.
 
-### Issue: Incompatible CPU detected
+### Incompatible CPU detected
 
-#### Solution
+#### Cause
 
 Docker Desktop requires a processor (CPU) that supports virtualization and, more
 specifically, the [Apple Hypervisor
 framework](https://developer.apple.com/library/mac/documentation/DriversKernelHardware/Reference/Hypervisor/).
+
+#### Solution
 
 Check that: 
 
@@ -201,7 +203,7 @@ See also, [Hypervisor Framework
 Reference](https://developer.apple.com/library/mac/documentation/DriversKernelHardware/Reference/Hypervisor/)
 in the Apple documentation, and Docker Desktop [Mac system requirements](/manuals/desktop/setup/install/mac-install.md#system-requirements).
 
-### Issue: VPNKit keeps breaking
+### VPNKit keeps breaking
 
 #### Cause
 
@@ -221,7 +223,7 @@ To continue using VPNKit:
 
 ## Topics for Windows
 
-### Issue: Docker Desktop fails to start when anti-virus software is installed
+### Docker Desktop fails to start when anti-virus software is installed
 
 #### Cause
 
@@ -235,7 +237,7 @@ manifests as an error response from the Docker daemon and a Docker Desktop start
 For a temporary workaround, uninstall the anti-virus software, or
 add Docker to the exclusions/exceptions in your antivirus software.
 
-### Issue: Permissions errors on data directories for shared volumes
+### Permissions errors on data directories for shared volumes
 
 #### Cause 
 
@@ -252,7 +254,7 @@ working with applications that require different permissions, either:
  - Use non-host-mounted volumes  
  - Find a way to make the applications work with the default file permissions
 
-### Issue: Unexpected syntax errors, use Unix style line endings for files in containers
+### Unexpected syntax errors, use Unix style line endings for files in containers
 
 #### Cause 
 
@@ -273,7 +275,7 @@ are used, `docker run` fails with syntax errors.
    ```
 - In VS Code, set line endings to `LF` (Unix) instead of `CRLF` (Windows).
 
-### Issue: Path conversion errors on Windows
+### Path conversion errors on Windows
 
 #### Cause
 
@@ -306,7 +308,7 @@ Docker Desktop also allows you to use Unix-style path to the appropriate format.
 $ docker run --rm -ti -v /c/Users/user/work:/work alpine ls /work
 ```
 
-### Issue: Docker commands failing in Git Bash
+### Docker commands failing in Git Bash
 
 #### Error message
 
@@ -341,7 +343,7 @@ Also, the `\` character has a special meaning in Git Bash.
 
 Portability of the scripts is not affected as Linux treats multiple `/` as a single entry.
 
-### Issue: Docker Desktop fails due to Virtualization settings
+### Docker Desktop fails due to Virtualization settings
 
 #### Cause
 
@@ -420,7 +422,7 @@ The Virtual Machine Management Service failed to start the virtual machine 'Dock
 
 Try [enabling nested virtualization](/manuals/desktop/setup/vm-vdi.md#turn-on-nested-virtualization).
 
-### Issue: `Docker Desktop Access Denied` error message when starting Docker Desktop
+### `Docker Desktop Access Denied` error message when starting Docker Desktop
 
 #### Error message
 
