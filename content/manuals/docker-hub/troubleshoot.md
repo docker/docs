@@ -50,7 +50,7 @@ Too Many Requests
 
 ### Possible causes
 
-- You have reached the [Abuse rate limit](./usage/_index.md#abuse-rate-limit)
+- You have reached the [Abuse rate limit](./usage/_index.md#abuse-rate-limit).
 
 ### Solution
 
