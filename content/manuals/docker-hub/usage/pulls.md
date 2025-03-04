@@ -65,9 +65,6 @@ Attribution is based on the following:
   organizations under the company, the pull is attributed to the user's personal
   namespace.
 
-When pulling Docker Verified Publisher images, attribution towards rate limiting
-is not applied. For more details, see [Docker Verified Publisher
-Program](/manuals/docker-hub/repos/manage/trusted-content/dvp-program.md).
 
 ### Authentication
 
