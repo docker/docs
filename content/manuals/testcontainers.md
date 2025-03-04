@@ -26,7 +26,7 @@ quickstart:
   link: https://java.testcontainers.org/
 ---
 
-Testcontainers is set libraries that provides easy and lightweight APIs for bootstrapping local development and test dependencies with real services wrapped in Docker containers.
+Testcontainers is a set of open source libraries that provides easy and lightweight APIs for bootstrapping local development and test dependencies with real services wrapped in Docker containers.
 Using Testcontainers, you can write tests that depend on the same services you use in production without mocks or in-memory services.
 
 {{< grid items=intro >}}
@@ -38,7 +38,7 @@ Using Testcontainers, you can write tests that depend on the same services you u
 Testcontainers provide support for the most popular languages, and Docker sponsors the development of the following Testcontainers implementations:
 
 - [Go](https://golang.testcontainers.org/quickstart/)
-- [Java](https://java.testcontainers.org/quickstart/)
+- [Java](https://java.testcontainers.org/quickstart/junit_5_quickstart/)
 
 The rest are community-driven and maintained by independent contributors.
 
