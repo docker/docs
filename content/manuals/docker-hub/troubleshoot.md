@@ -3,7 +3,7 @@ description: Learn how to troubleshoot common Docker Hub issues.
 keywords: hub, troubleshoot
 title: Troubleshoot Docker Hub
 linkTitle: Troubleshoot
-weight: 40
+weight: 60
 tags: [Troubleshooting]
 ---
 
