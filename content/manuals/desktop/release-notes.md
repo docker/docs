@@ -38,7 +38,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ### New
 
 - The [Docker Desktop CLI](/manuals/desktop/features/desktop-cli.md) is now generally available. You can now also print logs with the new `docker desktop logs` command.
-- Docker Desktop now supports the `--platform` flag on [`docker load`](/reference/cli/docker/image/load.md) and [`docker save`](/reference/cli/docker/image/save.md). This enables users to import and export a subset of multi-platform images.
+- Docker Desktop now supports the `--platform` flag on [`docker load`](/reference/cli/docker/image/load.md) and [`docker save`](/reference/cli/docker/image/save.md). This helps you import and export a subset of multi-platform images.
 
 ### Upgrades
 
@@ -52,10 +52,10 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 #### For all platforms
 
-- Ask Gordon now offers deeper context on docker images, containers, and volumes, delivers faster support, and enables more user actions via Docker Desktop and the Docker CLI.
+- Ask Gordon now offers deeper context on Docker images, containers, and volumes, delivers faster support, and enables more user actions via Docker Desktop and the Docker CLI.
 - Support multi-platform images via enabling users to pick a specific platform in `docker history`
 - Fixed an issue that caused clients other than the CLI and Docker Desktop to see a delay of 3 seconds whenever a container with port-mappings exists. See [docker/for-mac#7575](https://github.com/docker/for-mac/issues/7575)
-- Fixed a bug in the ECI Docker socket permissions which was causing it to sometimes block Docker socket mounts on containers with allowed images, or images derived from allowed images.
+- Fixed a bug in the ECI Docker socket permissions which caused it to sometimes block Docker socket mounts on containers with allowed images, or images derived from allowed images.
 - Fixed a bug that prevented Docker Desktop from entering Resource Saver mode again immediately after an engine restart.
 
 #### For Mac
@@ -1475,7 +1475,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 #### For Mac
 
-- Fixed a kernel panic on Apple Silicon Macs with macOS version below 12.5. Fixes [docker/for-mac#6975](https://github.com/docker/for-mac/issues/6975).
+- Fixed a kernel panic on Apple Silicon Macs with macOS version earlier than 12.5. Fixes [docker/for-mac#6975](https://github.com/docker/for-mac/issues/6975).
 - Fixed a bug where Docker Desktop failed to start if invalid directories were included in `filesharingDirectories`. Fixes [docker/for-mac#6980](https://github.com/docker/for-mac/issues/6980).
 - Fixed a bug where installer is creating root-owned directories. Fixes [docker/for-mac#6984](https://github.com/docker/for-mac/issues/6984).
 - Fixed a bug where installer is failing on setting up the docker socket when missing `/Library/LaunchDaemons`. Fixes [docker/for-mac#6967](https://github.com/docker/for-mac/issues/6967).
