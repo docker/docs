@@ -69,7 +69,8 @@ Testcontainers Cloud.
 
 Docker Pro includes:
 
-- 200 Docker Build Cloud build minutes per month.
+- 200 Docker Build Cloud build minutes per month. Docker Build Cloud minutes do not
+rollover month to month.
 - 2 included repositories with continuous vulnerability analysis in Docker Scout.
 - 100 Testcontainers Cloud runtime minutes per month for use either in Docker Desktop or for CI. Testcontainers Cloud runtime minutes do not rollover month to month.
 - No Docker Hub image pull rate limits.
@@ -90,7 +91,8 @@ Docker Hub, Docker Scout, Docker Build Cloud, and Testcontainers Cloud.
 
 Docker Team includes:
 
-- 500 Docker Build Cloud build minutes per month.
+- 500 Docker Build Cloud build minutes per month. Docker Build Cloud minutes do not
+rollover month to month.
 - Unlimited Docker Scout repositories with continuous vulnerability analysis.
 - 500 Testcontainers Cloud runtime minutes per month for use either in Docker Desktop or for CI. Testcontainers Cloud runtime minutes do not rollover month to month.
 - No Docker Hub image pull rate limits.
@@ -115,7 +117,8 @@ Build Cloud, and Testcontainers Cloud.
 
 Docker Business includes:
 
-- 1500 Docker Build Cloud build minutes per month.
+- 1500 Docker Build Cloud build minutes per month. Docker Build Cloud minutes do not
+rollover month to month.
 - Unlimited Docker Scout repositories with continuous vulnerability analysis.
 - 1500 Testcontainers Cloud runtime minutes per month for use either in Docker Desktop or for CI. Testcontainers Cloud runtime minutes do not rollover month to month.
 - No Docker Hub image pull rate limits.
@@ -193,7 +196,7 @@ For a list of features available in each legacy tier, see [Legacy Docker Pricing
 
 When you upgrade your Legacy Docker Pro plan to a Docker Pro subscription plan, your plan includes the following changes:
 
-- Docker Build Cloud build minutes increased from 100/month to 200/month and no monthly fee.
+- Docker Build Cloud build minutes increased from 100/month to 200/month and no monthly fee. Docker Build Cloud minutes do not rollover month to month.
 - 2 included repositories with continuous vulnerability analysis in Docker Scout.
 - 100 Testcontainers Cloud runtime minutes are now included for use either in Docker Desktop or for CI. Testcontainers Cloud runtime minutes do not rollover month to month.
 - Docker Hub image pull rate limits are removed.
@@ -225,7 +228,7 @@ For a list of features available in each legacy tier, see [Legacy Docker Pricing
 When you upgrade your Legacy Docker Team plan to a Docker Team subscription plan, your plan includes the following changes:
 
 - Instead of paying an additional per-seat fee, Docker Build Cloud is now available to all users in your Docker plan.
-- Docker Build Cloud build minutes increase from 400/mo to 500/mo.
+- Docker Build Cloud build minutes increase from 400/mo to 500/mo. Docker Build Cloud minutes do not rollover month to month.
 - Docker Scout now includes unlimited repositories with continuous vulnerability analysis, an increase from 3.
 - 500 Testcontainers Cloud runtime minutes are now included for use either in Docker Desktop or for CI. Testcontainers Cloud runtime minutes do not rollover month to month.
 - Docker Hub image pull rate limits are removed.
@@ -257,7 +260,7 @@ For a list of features available in each tier, see [Legacy Docker Pricing](https
 When you upgrade your Legacy Docker Business plan to a Docker Business subscription plan, your plan includes the following changes:
 
 - Instead of paying an additional per-seat fee, Docker Build Cloud is now available to all users in your Docker plan.
-- Docker Build Cloud included minutes increase from 800/mo to 1500/mo.
+- Docker Build Cloud included minutes increase from 800/mo to 1500/mo. Docker Build Cloud minutes do not rollover month to month.
 - Docker Scout now includes unlimited repositories with continuous vulnerability analysis, an increase from 3.
 - 1500 Testcontainers Cloud runtime minutes are now included for use either in Docker Desktop or for CI. Testcontainers Cloud runtime minutes do not rollover month to month.
 - Docker Hub image pull rate limits are removed.

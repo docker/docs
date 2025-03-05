@@ -24,8 +24,7 @@ for legacy Docker subscription plans, all paid Docker subscriptions come with
 access to Docker Hub, Docker Build Cloud, and Testcontainers Cloud with a base
 amount of consumption. See [Docker subscriptions and features](./details.md) to
 learn how much base consumption comes with each subscription. You can scale your
-consumption at any time during your subscription period. All purchased
-consumption expires at the end of your subscription term.
+consumption at any time during your subscription period.
 
 You can scale consumption for the following:
 
@@ -35,6 +34,10 @@ You can scale consumption for the following:
 To better understand your needs, you can view your consumption at any time. For
 more details, see [View Docker product
 usage](../admin/organization/manage-products.md#view-docker-product-usage).
+
+> [!WARNING]
+>
+> Docker Build Cloud and Testcontainers minutes do not rollover. If you do not use the allocated minutes from your subscription plan, you can't roll them over to the next month or subscription period.
 
 ## Add Docker Build Cloud build minutes
 
@@ -52,12 +55,6 @@ You can pre-purchase Docker Build Cloud build minutes in the Docker Build Cloud 
 Your additional minutes will now display on the Build minutes page.
 
 ## Add Docker Testcontainers Cloud runtime minutes
-
-> [!NOTE]
->
-> Testcontainers Cloud runtime minutes do not rollover. If you do not use
-> your allocated minutes, you can't roll them over to the next month or
-> subscription period.
 
 You can pre-purchase Testcontainers Cloud runtime minutes by [contacting
  sales](https://www.docker.com/pricing/contact-sales/). In addition to
