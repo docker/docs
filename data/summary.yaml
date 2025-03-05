@@ -135,6 +135,8 @@ Docker Desktop CLI logs:
   requires: Docker Desktop 4.39 and later
 Docker GitHub Copilot:
   availability: Early Access
+Docker Projects:
+  availability: Beta
 Docker Init:
   requires: Docker Desktop [4.27](/manuals/desktop/release-notes.md#4270) and later
 Docker Scout exceptions:
