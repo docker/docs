@@ -523,6 +523,13 @@ devices:
   - "/dev/sda:/dev/xvda:rwm"
 ```
 
+`devices` can also rely on the [CDI](https://github.com/cncf-tags/container-device-interface) syntax to let the container runtime select a device:
+
+```yml
+devices:
+  - "vendor1.com/device=gpu"
+```
+
 ### `dns`
 
 `dns` defines custom DNS servers to set on the container network interface configuration. It can be a single value or a list.
