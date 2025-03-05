@@ -38,7 +38,7 @@ Testcontainers Cloud is a cloud-based solution designed to streamline and enhanc
 
 Works well with Docker Desktop, GitHub Actions, Jenkins, Kubernetes, and other CI solutions
 
-Docker Pro, Team, and Business subscriptions come with Testcontainers Cloud runtime minutes, and additional minutes are available via consumption pricing.
+Docker Pro, Team, and Business subscriptions come with Testcontainers Cloud runtime minutes, and additional minutes are available via consumption pricing. Testcontainers Cloud runtime minutes do not rollover month to month.
 
 ## Who’s this for?
 
