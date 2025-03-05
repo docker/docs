@@ -4,6 +4,7 @@ keywords: sso, troubleshoot, single sign-on
 title: Troubleshoot single sign-on
 linkTitle: Troubleshoot SSO
 tags: [Troubleshooting]
+toc_max: 2
 aliases:
     - "/security/for-admins/single-sign-on/troubleshoot/"
 ---
@@ -16,7 +17,7 @@ following sections describe some common SSO errors and possible solutions.
 
 If you experience issues with SSO, check both the Docker Admin Console and your identity provider (IdP) for errors first.
 
-#### Check Docker error logs
+### Check Docker error logs
 
 1. Sign in to the [Admin Console](https://app.docker.com/admin/) and select your organization.
 2. Select **SSO and SCIM**.
@@ -24,7 +25,7 @@ If you experience issues with SSO, check both the Docker Admin Console and your 
 4. For more details on specific errors, select **View error details** next to an error message.
 5. Note any errors you see on this page for further troubleshooting.
 
-#### Check for errors in your IdP
+### Check for errors in your IdP
 
 1. Review your IdP’s logs or audit trails for any failed authentication or provisioning attempts.
 2. Confirm that your IdP’s SSO settings match the values provided in Docker.
@@ -36,31 +37,31 @@ For further troubleshooting, check your IdP’s documentation. You can also cont
 
 ## Groups are not formatted correctly
 
-#### Error message
+### Error message
 
 When this issue occurs, the following error message is common:
 ```text
 Some of the groups assigned to the user are not formatted as '<organization name>:<team name>'. Directory groups will be ignored and user will be provisioned into the default organization and team.
 ```
 
-#### Possible causes
+### Possible causes
 
 - Incorrect group name formatting in your identity provider (IdP): Docker requires groups to follow the format `<organization>:<team>`. If the groups assigned to a user do not follow this format, they will be ignored.
 - Non-matching groups between IdP and Docker organization: If a group in your IdP does not have a corresponding team in Docker, it will not be recognized, and the user will be placed in the default organization and team.
 
-#### Affected environments
+### Affected environments
 
 - Docker single sign-on setup using IdPs such as Okta or Azure AD
 - Organizations using group-based role assignments in Docker
 
-#### Steps to replicate
+### Steps to replicate
 
 To replicate this issue:
 1. Attempt to sign in to Docker using SSO.
 2. The user is assigned groups in the IdP but does not get placed in the expected Docker Team.
 3. Review Docker logs or IdP logs to find the error message.
 
-#### Solutions
+### Solutions
 
 Update group names in your IdP:
 1. Go to your IdP's group management section.
@@ -71,20 +72,20 @@ Update group names in your IdP:
 
 ## User is not assigned to the organization
 
-#### Error message
+### Error message
 
 When this issue occurs, the following error message is common:
 ```text
 User '$username' is not assigned to this SSO organization. Contact your administrator. TraceID: XXXXXXXXXXXXX
 ```
 
-#### Possible causes
+### Possible causes
 
 - User is not assigned to the organization: If Just-in-Time (JIT) provisioning is disabled, the user may not be assigned to your organization.
 - User is not invited to the organization: If JIT is disabled and you do not want to enable it, the user must be manually invited.
 - SCIM provisioning is misconfigured: If you use SCIM for user provisioning, it may not be correctly syncing users from your IdP.
 
-#### Solutions
+### Solutions
 
 **Enable JIT provisioning**
 
@@ -116,18 +117,18 @@ If you have SCIM enabled, troubleshoot your SCIM connection using the following 
 
 ## IdP-initiated sign in is not enabled for connection
 
-#### Error message
+### Error message
 
 When this issue occurs, the following error message is common:
 ```text
 IdP-Initiated sign in is not enabled for connection '$ssoConnection'.
 ```
 
-#### Possible causes
+### Possible causes
 
 Docker does not support an IdP-initiated SAML flow. This error occurs when a user attempts to authenticate from your IdP, such as using the Docker SSO app tile on the sign in page.
 
-#### Solutions
+### Solutions
 
 **Authenticate from Docker apps**
 
@@ -139,18 +140,18 @@ You can hide the Docker SSO app from users in your IdP. This prevents users from
 
 ## Not enough seats in organization
 
-#### Error message
+### Error message
 
 When this issue occurs, the following error message is common:
 ```text
 Not enough seats in organization '$orgName'. Add more seats or contact your administrator.
 ```
 
-#### Possible causes
+### Possible causes
 
 This error occurs when the organization has no available seats for the user when provisioning via Just-in-Time (JIT) provisioning or SCIM.
 
-#### Solutions
+### Solutions
 
 **Add more seats to the organization**
 
@@ -162,20 +163,20 @@ Review your organization members and pending invitations. Remove inactive users 
 
 ## Domain is not verified for SSO connection
 
-#### Error message
+### Error message
 
 When this issue occurs, the following error message is common:
 ```text
 Domain '$emailDomain' is not verified for your SSO connection. Contact your company administrator. TraceID: XXXXXXXXXXXXXX
 ```
 
-#### Possible causes
+### Possible causes
 
 This error occurs if the IdP authenticated a user through SSO and the User Principal Name (UPN)
 returned to Docker doesn’t match any of the verified domains associated to the
 SSO connection configured in Docker.
 
-#### Solutions
+### Solutions
 
 **Verify UPN attribute mapping**
 
@@ -187,20 +188,20 @@ Add and verify all domains and subdomains used as UPN by your IdP and associate 
 
 ## Unable to find session
 
-#### Error message
+### Error message
 
 When this issue occurs, the following error message is common:
 ```text
 We couldn't find your session. You may have pressed the back button, refreshed the page, opened too many sign-in dialogs, or there is some issue with cookies. Try signing in again. If the issue persists, contact your administrator.
 ```
 
-#### Possible causes
+### Possible causes
 
 The following causes may create this issue:
 - The user pressed the back or refresh button during authentication.
 - The authentication flow lost track of the initial request, preventing completion.
 
-#### Solutions
+### Solutions
 
 **Do not disrupt the authentication flow**
 
@@ -212,20 +213,20 @@ Close the browser tab and restart the authentication flow from the Docker applic
 
 ## Name ID is not an email address
 
-#### Error message
+### Error message
 
 When this issue occurs, the following error message is common:
 ```text
 The name ID sent by the identity provider is not an email address. Contact your company administrator.
 ```
 
-#### Possible causes
+### Possible causes
 
 The following causes may create this issue:
 - The IdP sends a Name ID (UPN) that does not comply with the email format required by Docker.
 - Docker SSO requires the Name ID to be the primary email address of the user.
 
-#### Solutions
+### Solutions
 
 In your IdP, ensure the Name ID attribute format is correct:
 1. Verify that the Name ID attribute format in your IdP is set to `EmailAddress`.
