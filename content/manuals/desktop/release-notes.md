@@ -29,6 +29,56 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 >
 > If you're experiencing malware detection issues on Mac, follow the steps documented in [docker/for-mac#7527](https://github.com/docker/for-mac/issues/7527).
 
+## 4.39.0
+
+{{< release-date date="2025-03-05" >}}
+
+{{< desktop-install-v2 all=true beta_win_arm=true version="4.39.0" build_path="/184744/" >}}
+
+### New
+
+- The [Docker Desktop CLI](/manuals/desktop/features/desktop-cli.md) is now generally available. You can now also print logs with the new `docker desktop logs` command.
+- Docker Desktop now supports the `--platform` flag on [`docker load`](/reference/cli/docker/image/load.md) and [`docker save`](/reference/cli/docker/image/save.md). This helps you import and export a subset of multi-platform images.
+
+### Upgrades
+
+- [Docker Compose v2.33.1](https://github.com/docker/compose/releases/tag/v2.33.1)
+- [Docker Buildx v0.21.1](https://github.com/docker/buildx/releases/tag/v0.21.1)
+- [Kubernetes v1.32.2](https://github.com/kubernetes/kubernetes/releases/tag/v1.32.2)
+- [Docker Engine v28.0.1](https://docs.docker.com/engine/release-notes/28/#2801)
+- [Docker Scout CLI v1.16.3](https://github.com/docker/scout-cli/releases/tag/v1.16.3)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Ask Gordon now offers deeper context on Docker images, containers, and volumes, delivers faster support, and enables more user actions via Docker Desktop and the Docker CLI.
+- Support multi-platform images via enabling users to pick a specific platform in `docker history`
+- Fixed an issue that caused clients other than the CLI and Docker Desktop to see a delay of 3 seconds whenever a container with port-mappings exists. See [docker/for-mac#7575](https://github.com/docker/for-mac/issues/7575)
+- Fixed a bug in the ECI Docker socket permissions which caused it to sometimes block Docker socket mounts on containers with allowed images, or images derived from allowed images.
+- Fixed a bug that prevented Docker Desktop from entering Resource Saver mode again immediately after an engine restart.
+
+#### For Mac
+
+- Downgraded Linux kernel to `v6.10.14` to fix a bug in OpenJDK that causes Java containers to terminate due to cgroups controller misidentification. See [docker/for-mac#7573](https://github.com/docker/for-mac/issues/7573).
+- Added `/usr/share/misc/usb.ids` in the root mount namespace to fix `usbip`.
+- Fixed an issue where the display of the CPU limit was capped at 8 when using Docker VMM.
+- Fixed an issue where startup would hang and the `com.docker.backend` process consumed 100% of the CPU. See [docker/for-mac#6951](https://github.com/docker/for-mac/issues/6951).
+- Fixed a bug that caused all Java programs running on M4 Macbook Pro to emit a SIGILL error. See [docker/for-mac#7583](https://github.com/docker/for-mac/issues/7583).
+- Blocked startup on macOS 15.4 beta 1 since starting VMs will cause the host to crash, see https://developer.apple.com/documentation/macos-release-notes/macos-15_4-release-notes#Virtual-Machines.
+- Fixed an issue where the myIPAddress PAC file function retrieved the host IP from the wrong interface, causing incorrect proxy selection.
+
+#### For Windows
+
+- Fixed a bug that prevented `docker compose log` to stream when running apps in WSL.
+- Fixed a bug where Paketo buildpacks failed with Enhanced Container Isolation when Docker Desktop uses WSL.
+- Fixed a bug where the WSL 2 integration would fail if WSL Version 1 distributions are installed.
+- Fixed a bug that caused some CLI plugins update to fail if WSL distributions were enabled.
+
+#### For Linux
+
+- The **Software Updates** page in settings, now points to the latest available version available.
+
 ## 4.38.0
 
 {{< release-date date="2025-01-30" >}}
@@ -1425,7 +1475,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 #### For Mac
 
-- Fixed a kernel panic on Apple silicon Macs with macOS version below 12.5. Fixes [docker/for-mac#6975](https://github.com/docker/for-mac/issues/6975).
+- Fixed a kernel panic on Apple Silicon Macs with macOS version earlier than 12.5. Fixes [docker/for-mac#6975](https://github.com/docker/for-mac/issues/6975).
 - Fixed a bug where Docker Desktop failed to start if invalid directories were included in `filesharingDirectories`. Fixes [docker/for-mac#6980](https://github.com/docker/for-mac/issues/6980).
 - Fixed a bug where installer is creating root-owned directories. Fixes [docker/for-mac#6984](https://github.com/docker/for-mac/issues/6984).
 - Fixed a bug where installer is failing on setting up the docker socket when missing `/Library/LaunchDaemons`. Fixes [docker/for-mac#6967](https://github.com/docker/for-mac/issues/6967).
