@@ -617,7 +617,7 @@ resources, and a protocol for parsing branches, tags, and subdirectories from
 >
 > `ADD` redownloads the file every time the image is built to verify the checksum 
 > and moitor changes to bust the cache whereas the `RUN curl` equivalent only busts 
-> the cache and redownloads the file on the command text content changing 
+> the cache and redownloads the file when the text content changes
 > (e.g. the URL in the curl command is changed). 
 > This may be significant if the file to be downloaded is large.
 
