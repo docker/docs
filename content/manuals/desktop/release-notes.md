@@ -48,6 +48,10 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - [Docker Engine v28.0.1](https://docs.docker.com/engine/release-notes/28/#2801)
 - [Docker Scout CLI v1.16.3](https://github.com/docker/scout-cli/releases/tag/v1.16.3)
 
+### Security
+
+- Fixed [CVE-2025-1696](https://www.cve.org/CVERecord?id=CVE-2025-1696) which could disclose proxy authentication credentials in plaintext in log files.
+
 ### Bug fixes and enhancements
 
 #### For all platforms

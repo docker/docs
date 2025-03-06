@@ -206,7 +206,7 @@ By default, the installer reboots the machine after a successful installation. W
 
 ## Analytics
 
-The MSI installer collects anonymous usage statistics to better understand user behaviour and to improve the user experience by identifying and addressing issues or optimizing popular features.
+The MSI installer collects anonymous usage statistics relating to install only. This is to better understand user behaviour and to improve the user experience by identifying and addressing issues or optimizing popular features.
 
 ### How to opt-out
 
