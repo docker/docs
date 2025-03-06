@@ -613,9 +613,10 @@ resources, and a protocol for parsing branches, tags, and subdirectories from
 
 > [!NOTE]
 >
-> `ADD` redownloads the file every time the image is built to verify the checksum 
-> and moitor changes to bust the cache whereas the `RUN curl` equivalent only busts 
-> the cache and redownloads the file when the text content changes
+> `ADD` redownloads the file (or uses a HEAD request with [ETag](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/ETag)s
+> if the remote server supports it) every time the image is built to verify the checksum 
+> and monitor changes to bust the cache whereas the `RUN curl` equivalent only busts 
+> the cache and redownloads the file when the process arguments change
 > (e.g. the URL in the curl command is changed). 
 > This may be significant if the file to be downloaded is large.
 
