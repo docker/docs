@@ -613,8 +613,6 @@ resources, and a protocol for parsing branches, tags, and subdirectories from
 
 > [!NOTE]
 >
-> Consider an explicit UID/GID.
->
 > `ADD` redownloads the file every time the image is built to verify the checksum 
 > and moitor changes to bust the cache whereas the `RUN curl` equivalent only busts 
 > the cache and redownloads the file when the text content changes
