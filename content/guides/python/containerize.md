@@ -27,7 +27,7 @@ The sample application uses the popular [FastAPI](https://fastapi.tiangolo.com) 
 Clone the sample application to use with this guide. Open a terminal, change directory to a directory that you want to work in, and run the following command to clone the repository:
 
 ```console
-$ git clone https://github.com/estebanx64/python-docker-example
+$ git clone https://github.com/estebanx64/python-docker-example && cd python-docker-example
 ```
 
 ## Initialize Docker assets
