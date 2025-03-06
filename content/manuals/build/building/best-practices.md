@@ -600,12 +600,31 @@ temporarily for a single `RUN` instruction, and don't persist in the final
 image. If you need to include files from the build context in the final image,
 use `COPY`.
 
+#### ADD or `curl`/`wget` and equivalents
+
 The `ADD` instruction is best for when you need to download a remote artifact
-as part of your build. `ADD` is better than manually adding files using
+as part of your build. 
+
+`ADD` is better than manually adding files using
 something like `wget` and `tar`, because it ensures a more precise build cache.
 `ADD` also has built-in support for checksum validation of the remote
 resources, and a protocol for parsing branches, tags, and subdirectories from
 [Git URLs](/reference/cli/docker/buildx/build.md#git-repositories).
+
+> [!NOTE]
+>
+> Consider an explicit UID/GID.
+>
+> `ADD` redownloads the file every time the image is built to verify the checksum 
+> and moitor changes to bust the cache whereas the `RUN curl` equivalent only busts 
+> the cache and redownloads the file on the command text content changing 
+> (e.g. the URL in the curl command is changed). 
+> This may be significant if the file to be downloaded is large.
+
+If the file being downloaded is supposed to be part of the image and is okay to be redownloaded on each build (to verify changes), using `ADD` as part of the image build is more suitable.
+
+If the file is an archive being extracted, or not supposed to be part of the final image, using `ADD` by itself would add an additional layer and subsequently removing it using `RUN rm` will not decrease the image size. In this case, look at the below example to use a multi stage build with a `scratch` image to download the file using `ADD` and bind mounting it where needed in the final image.
+  * Same note from above applies regarding file sizes and redownloads.
 
 The following example uses `ADD` to download a .NET installer. Combined with
 multi-stage builds, only the .NET runtime remains in the final stage, no
