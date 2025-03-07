@@ -11,34 +11,16 @@ aliases:
 weight: 20
 ---
 
-### Why do I keep getting a notification telling me an application has changed my Desktop configurations?
-
-You receive this notification because the Configuration integrity check feature has detected that a third-party application has altered your Docker Desktop configuration. This usually happens due to incorrect or missing symlinks. The notification ensures you are aware of these changes so you can review and repair any potential issues to maintain system reliability.
-
-Opening the notification presents a pop-up window which provides detailed information about the detected integrity issues.
-
-If you choose to ignore the notification, it will be shown again only at the next Docker Desktop startup. If you choose to repair your configuration, you won't be prompted again.
-
-If you want to switch off Configuration integrity check notifications, navigate to Docker Desktop's settings and in the **General** tab, clear the **Automatically check configuration** setting. 
-
-If you have feedback on how to further improve the Configuration integrity check feature, [fill out the feedback form](https://docs.google.com/forms/d/e/1FAIpQLSeD_Odqc__4ihRXDtH_ba52QJuaKZ00qGnNa_tM72MmH32CZw/viewform).
-
 ### What is HyperKit?
 
 HyperKit is a hypervisor built on top of the Hypervisor.framework in macOS. It runs entirely in userspace and has no other dependencies.
 
-We use HyperKit to eliminate the need for other VM products, such as Oracle
-VirtualBox or VMWare Fusion.
+Docker uses HyperKit to eliminate the need for other VM products, such as Oracle
+VirtualBox or VMware Fusion.
 
 ### What is the benefit of HyperKit?
 
-HyperKit is thinner than VirtualBox and VMWare fusion, and the version included is customized for Docker workloads on Mac.
-
-### Why is com.docker.vmnetd still running after I quit the app?
-
-The privileged helper process `com.docker.vmnetd` is started by `launchd` and
-runs in the background. The process does not consume any resources unless
-`Docker.app` connects to it, so it's safe to ignore.
+HyperKit is thinner than VirtualBox and VMware fusion, and the version included is customized for Docker workloads on Mac.
 
 ### Where does Docker Desktop store Linux containers and images? 
 
