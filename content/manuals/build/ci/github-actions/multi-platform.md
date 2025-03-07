@@ -109,13 +109,8 @@ each platform across multiple runners and create manifest list using the
 
 The following workflow will build the image for each platform on a dedicated
 runner using a matrix strategy and push by digest. Then, the `merge` job will
-create manifest lists and push them to two registries:
-
-- Docker Hub: `docker.io/docker-user/my-app`
-- GitHub Container Registry: `ghcr.io/gh-user/my-app`
-
-This example also uses the [`metadata` action](https://github.com/docker/metadata-action)
-to set tags and labels.
+create manifest lists and push them to Docker Hub. The [`metadata` action](https://github.com/docker/metadata-action)
+is used to set tags and labels.
 
 ```yaml
 name: ci
