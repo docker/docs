@@ -116,8 +116,6 @@ containerd:
   availability: Experimental
 Dev Environments:
   availability: Beta
-Dockerfile experimental lab:
-  availability: The labs channel gives you access to Experimental Dockerfile features not yet available in the stable channel.
 Docker Build Cloud:
   subscription: [Pro, Team, Business]
 Docker CLI OpenTelemetry:

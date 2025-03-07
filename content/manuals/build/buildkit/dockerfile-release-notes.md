@@ -32,7 +32,7 @@ The full release note for this release is available
 
 {{< release-date date="2025-02-19" >}}
 
-{{< summary-bar feature_name="Dockerfile experimental lab" >}}
+{{% include "dockerfile-labs-channel.md" %}}
 
 The full release note for this release is available
 [on GitHub](https://github.com/moby/buildkit/releases/tag/dockerfile%2F1.14.0-labs).
@@ -65,7 +65,7 @@ The full release note for this release is available
 
 {{< release-date date="2025-01-20" >}}
 
-{{< summary-bar feature_name="Dockerfile experimental lab" >}}
+{{% include "dockerfile-labs-channel.md" %}}
 
 The full release note for this release is available
 [on GitHub](https://github.com/moby/buildkit/releases/tag/dockerfile%2F1.13.0-labs).
@@ -127,7 +127,7 @@ The full release note for this release is available
 
 ## 1.11.0 (labs)
 
-{{< summary-bar feature_name="Dockerfile experimental lab" >}}
+{{% include "dockerfile-labs-channel.md" %}}
 
 - `COPY --chmod` now supports non-octal values. [moby/buildkit#5380]
 
@@ -311,7 +311,7 @@ The following features have graduated from the labs channel to stable:
 
 {{< release-date date="2023-01-10" >}}
 
-{{< summary-bar feature_name="Dockerfile experimental lab" >}}
+{{% include "dockerfile-labs-channel.md" %}}
 
 ### New
 
@@ -405,7 +405,7 @@ The following features have graduated from the labs channel to stable:
 
 {{< release-date date="2021-07-16" >}}
 
-{{< summary-bar feature_name="Dockerfile experimental lab" >}}
+{{% include "dockerfile-labs-channel.md" %}}
 
 ### New
 
@@ -436,7 +436,7 @@ The following features have graduated from the labs channel to stable:
 
 {{< release-date date="2020-12-12" >}}
 
-{{< summary-bar feature_name="Dockerfile experimental lab" >}}
+{{% include "dockerfile-labs-channel.md" %}}
 
 ### Bug fixes and enhancements
 
@@ -457,7 +457,7 @@ The following features have graduated from the labs channel to stable:
 
 {{< release-date date="2020-12-03" >}}
 
-{{< summary-bar feature_name="Dockerfile experimental lab" >}}
+{{% include "dockerfile-labs-channel.md" %}}
 
 ### Bug fixes and enhancements
 
@@ -494,7 +494,7 @@ The following features have graduated from the labs channel to stable:
 
 {{< release-date date="2019-07-31" >}}
 
-{{< summary-bar feature_name="Dockerfile experimental lab" >}}
+{{% include "dockerfile-labs-channel.md" %}}
 
 ### Bug fixes and enhancements
 
