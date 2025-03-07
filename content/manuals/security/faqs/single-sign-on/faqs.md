@@ -62,3 +62,13 @@ securely](/security/for-admins/provisioning/group-mapping/#use-group-mapping-wit
 ### Are there any firewall rules required for SSO configuration?
 
 No. There are no specific firewall rules required for configuring SSO, as long as the domain `login.docker.com` is accessible. This domain is commonly accessible by default. However, in rare cases, some organizations may have firewall restrictions in place that block this domain. If you encounter issues during SSO setup, ensure that `login.docker.com` is allowed in your network's firewall settings.
+
+### Does Docker use my IdP's default session timeout?
+
+No. Currently, Docker does not support your IdP's default session timeout for
+SSO users.
+
+Docker's default user session timeouts are as follows:
+
+- Docker Desktop signs you out after 90 days, or 30 days of inactivity.
+- Docker Hub and Docker Home sign you out after 24 hours.
