@@ -28,9 +28,11 @@ The full release note for this release is available
 - Fix handling of OSVersion platform property if one is set by the base image [moby/buildkit#5714](https://github.com/moby/buildkit/pull/5714)
 - Fix errors where a named context metadata could be resolved even if it was not reachable by the current build configuration, leading to build errors [moby/buildkit#5688](https://github.com/moby/buildkit/pull/5688)
 
-## 1.14.0-labs
+## 1.14.0 (labs)
 
 {{< release-date date="2025-02-19" >}}
+
+{{% include "dockerfile-labs-channel.md" %}}
 
 The full release note for this release is available
 [on GitHub](https://github.com/moby/buildkit/releases/tag/dockerfile%2F1.14.0-labs).
@@ -59,9 +61,11 @@ The full release note for this release is available
 - Fix case where `ONBUILD` command may have run twice on inherited stage. [moby/buildkit#5593](https://github.com/moby/buildkit/pull/5593)
 - Fix possible missing named context replacement for child stages in Dockerfile. [moby/buildkit#5596](https://github.com/moby/buildkit/pull/5596)
 
-## 1.13.0-labs
+## 1.13.0 (labs)
 
 {{< release-date date="2025-01-20" >}}
+
+{{% include "dockerfile-labs-channel.md" %}}
 
 The full release note for this release is available
 [on GitHub](https://github.com/moby/buildkit/releases/tag/dockerfile%2F1.13.0-labs).
@@ -121,7 +125,9 @@ The full release note for this release is available
 - Enhanced progress output for secret values mounted as environment variables. [moby/buildkit#5336]
 - Added built-in build argument `TARGETSTAGE` to expose the name of the (final) target stage for the current build. [moby/buildkit#5431]
 
-### 1.11.0-labs
+## 1.11.0 (labs)
+
+{{% include "dockerfile-labs-channel.md" %}}
 
 - `COPY --chmod` now supports non-octal values. [moby/buildkit#5380]
 
@@ -484,7 +490,7 @@ The following features have graduated from the labs channel to stable:
 
 - Forward `FrontendInputs` to the gateway
 
-## 1.1.2 (experimental)
+## 1.1.2 (labs)
 
 {{< release-date date="2019-07-31" >}}
 
