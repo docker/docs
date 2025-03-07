@@ -89,12 +89,14 @@ To create an OAT:
    an image and then push it to a repository. However, it can't delete the
    repository. You can select one of the following options:
 
-   - **Public repositories (read only)**
-   - **All repositories**: You can select read access, or read and write access.
+   - **Read public repositories**
+   - **All repositories**: You can select **Image Push** or **Image Pull**.
    - **Select repositories**: You can select up to 50 repositories, and then
-     select read access, or read and write access for each repository.
+     select **Image Push** or **Image Pull** for each repository.
 
-8. Select **Generate token** and then copy the token that appears on the screen
+8. Optional. Select **Allow management access to organization's resources** and choose **Organization access scopes**.
+
+9. Select **Generate token** and then copy the token that appears on the screen
    and save it. You won't be able to retrieve the token once you exit the
    screen.
 
