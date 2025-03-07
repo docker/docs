@@ -78,6 +78,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Fixed a bug where Paketo buildpacks failed with Enhanced Container Isolation when Docker Desktop uses WSL.
 - Fixed a bug where the WSL 2 integration would fail if WSL Version 1 distributions are installed.
 - Fixed a bug that caused some CLI plugins update to fail if WSL distributions were enabled.
+- Fixed a bug where Docker Desktop sign-in would hang when using a PAC file for proxy configuration, causing a blurred UI and blocking access.
 
 #### For Linux
 
