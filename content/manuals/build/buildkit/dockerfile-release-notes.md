@@ -32,6 +32,8 @@ The full release note for this release is available
 
 {{< release-date date="2025-02-19" >}}
 
+{{< summary-bar feature_name="Dockerfile experimental lab" >}}
+
 The full release note for this release is available
 [on GitHub](https://github.com/moby/buildkit/releases/tag/dockerfile%2F1.14.0-labs).
 
@@ -62,6 +64,8 @@ The full release note for this release is available
 ## 1.13.0 (labs)
 
 {{< release-date date="2025-01-20" >}}
+
+{{< summary-bar feature_name="Dockerfile experimental lab" >}}
 
 The full release note for this release is available
 [on GitHub](https://github.com/moby/buildkit/releases/tag/dockerfile%2F1.13.0-labs).
@@ -121,7 +125,9 @@ The full release note for this release is available
 - Enhanced progress output for secret values mounted as environment variables. [moby/buildkit#5336]
 - Added built-in build argument `TARGETSTAGE` to expose the name of the (final) target stage for the current build. [moby/buildkit#5431]
 
-### 1.11.0 (labs)
+## 1.11.0 (labs)
+
+{{< summary-bar feature_name="Dockerfile experimental lab" >}}
 
 - `COPY --chmod` now supports non-octal values. [moby/buildkit#5380]
 
@@ -484,7 +490,7 @@ The following features have graduated from the labs channel to stable:
 
 - Forward `FrontendInputs` to the gateway
 
-## 1.1.2 (experimental)
+## 1.1.2 (labs)
 
 {{< release-date date="2019-07-31" >}}
 
