@@ -116,6 +116,8 @@ containerd:
   availability: Experimental
 Dev Environments:
   availability: Beta
+Dockerfile experimental lab:
+  availability: Experimental
 Docker Build Cloud:
   subscription: [Pro, Team, Business]
 Docker CLI OpenTelemetry:
