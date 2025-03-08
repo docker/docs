@@ -16,6 +16,7 @@ ports open between the swarm nodes before you enable Swarm mode:
 
 * Port `7946` TCP/UDP for container network discovery.
 * Port `4789` UDP (configurable) for the container ingress network.
+  * If your node run as VM on VMWare esxi, change this port like that 'docker swarm init --data-path-port=7789' for example.
 
 When setting up networking in a Swarm, special care should be taken. Consult
 the [tutorial](swarm-tutorial/_index.md#open-protocols-and-ports-between-the-hosts)
