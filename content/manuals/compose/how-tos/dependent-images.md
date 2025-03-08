@@ -99,11 +99,38 @@ services:
   b:
      image: service_b
      build:
-       context: b/
        dockerfile: b.Dockerfile
        additional_contexts:
-         # `FROM service_a` will be resolved as a dependency on service a which has to be built first
-         service_a: "service:a"  
+         # `FROM service_a` will be resolved as a dependency on service "a" which has to be built first
+         service_a: "service:a"
+```
+
+Using additional context, you can refer to image built by another service without the need to explictly name it:
+
+b.Dockerfile:
+
+```dockerfile
+
+FROM base_image  
+# `base_image` doesn't resolve to an actual image. This is used to point to a named additional context
+
+# build service b
+```
+
+Compose file:
+
+```yaml
+services:
+  a:
+     build: 
+       dockerfile: a.Dockerfile
+       # built image will be tagged <project_name>_a
+  b:
+     build:
+       dockerfile: b.Dockerfile
+       additional_contexts:
+         # `FROM base_image` will be resolved as a dependency on service "a" which has to be built first
+         base_image: "service:a"
 ```
 
 ## Build with Bake
