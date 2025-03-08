@@ -1,0 +1,48 @@
+command: docker plugin enable
+short: Enable a plugin
+long: |-
+  Enables a plugin. The plugin must be installed before it can be enabled,
+  see [`docker plugin install`](plugin_install.md).
+usage: docker plugin enable [OPTIONS] PLUGIN
+pname: docker plugin
+plink: docker_plugin.yaml
+options:
+- option: timeout
+  value_type: int
+  default_value: "30"
+  description: HTTP client timeout (in seconds)
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+examples: |-
+  The following example shows that the `sample-volume-plugin` plugin is installed,
+  but disabled:
+
+  ```bash
+  $ docker plugin ls
+
+  ID                  NAME                             TAG                 DESCRIPTION                ENABLED
+  69553ca1d123        tiborvass/sample-volume-plugin   latest              A test plugin for Docker   false
+  ```
+
+  To enable the plugin, use the following command:
+
+  ```bash
+  $ docker plugin enable tiborvass/sample-volume-plugin
+
+  tiborvass/sample-volume-plugin
+
+  $ docker plugin ls
+
+  ID                  NAME                             TAG                 DESCRIPTION                ENABLED
+  69553ca1d123        tiborvass/sample-volume-plugin   latest              A test plugin for Docker   true
+  ```
+deprecated: false
+min_api_version: "1.25"
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

@@ -1,127 +1,128 @@
-# Contributing to Docker Documentation
+## Contributing
 
-We value documentation contributions from the Docker community. We'd like to
-make it as easy as possible for you to work in this repository.
+We value your documentation contributions, and we want to make it as easy
+as possible to work in this repository. One of the first things to decide is
+which branch to base your work on. If you get confused, just ask and we will
+help. If a reviewer realizes you have based your work on the wrong branch, we'll
+let you know so that you can rebase it.
 
-Our style guide and instructions on using our page templates and components is
-available in the [contribution section](https://docs.docker.com/contribute/) on
-the website.
+>**Note**: To contribute code to Docker projects, see the
+[Contribution guidelines](opensource/).
 
-The following guidelines describe the ways in which you can contribute to the
-Docker documentation at <https://docs.docker.com/>, and how to get started.
+### Files not edited here
 
-## Reporting issues
+Files and directories listed in the `path:` keys in
+[`.NOT_EDITED_HERE.yaml`](/_data/not_edited_here.yaml) are maintained in other
+repositories and should not be edited in this one. Pull requests against these
+files will be rejected. Make your edits to the files in the repository and path
+in the `source:` key in the YAML file.
 
-If you encounter a problem with the content, or the site in general, feel free
-to [submit an issue](https://github.com/docker/docs/issues/new/choose) in our
-[GitHub issue tracker](https://github.com/docker/docs/issues). You can also use
-the issue tracker to raise requests on improvements, or suggest new content
-that you think is missing or that you would like to see.
+### Quickstart
 
-## Editing content
+If you spot a problem while reading the documentation and want to try to fix it
+yourself, click the **Edit this page** link at the bottom of that page. The
+page will open in the Github editor, which means you don't need to know a lot
+about Git, or even about Markdown.
 
-The website is built using [Hugo](https://gohugo.io/). The content is primarily
-Markdown files in the `/content` directory of this repository (with a few
-exceptions, see [Content not edited here](#content-not-edited-here)).
+When you save, you will be prompted to create a fork if you don't already have
+one, and to create a branch in your fork and submit the pull request. We hope
+you give it a try!
 
-The structure of the sidebar navigation on the site is defined by the site's
-section hierarchy in the `contents` directory. The titles of the pages are
-defined in the front matter of the Markdown files. You can use `title` and
-`linkTitle` to define the title of the page. `title` is used for the page
-title, and `linkTitle` is used for the sidebar title. If `linkTitle` is not
-defined, the `title` is used for both.
+### Overall doc improvements
 
-You must fork this repository to create a pull request to propose changes. For more details, see [Local setup](#local-setup).
+Most commits will be made against the `master` branch. This include:
 
-### General guidelines
+- Conceptual and task-based information not specific to new features
+- Restructuring / rewriting
+- Doc bug fixing
+- Typos and grammar errors
 
-Help make reviewing easier by following these guidelines:
+One quirk of this project is that the `master` branch is where the live docs are
+published from, so upcoming features can't be documented there. See
+[Specific new features for a project](#specific-new-features-for-a-project)
+for how to document upcoming features. These feature branches will be periodically
+merged with `master`, so don't worry about fixing typos and documentation bugs
+there.
+
+>Do you enjoy creating graphics? Good graphics are key to great documentation,
+and we especially value contributions in this area.
+
+### Specific new features for a project
+
+Our docs cover many projects which release at different times. **If, and only if,
+your pull request relates to a currently unreleased feature of a project, base
+your work on that project's `vnext` branch.** These branches were created by
+cloning `master` and then importing a project's `master` branch's docs into it
+(at the time of the migration), in a way that preserved the commit history. When
+a project has a release, its `vnext` branch will be merged into `master` and your
+work will be visible on [https://docs.docker.com/](/).
+
+The following `vnext` branches currently exist:
+
+- **[vnext-engine](https://github.com/docker/docker.github.io/tree/vnext-engine):**
+  docs for upcoming features in the [docker/docker](https://github.com/moby/moby/)
+  project
+
+- **[vnext-compose](https://github.com/docker/docker.github.io/tree/vnext-compose):**
+  docs for upcoming features in the [docker/compose](https://github.com/docker/compose/)
+  project
+
+- **[vnext-distribution](https://github.com/docker/docker.github.io/tree/vnext-distribution):**
+  docs for upcoming features in the [docker/distribution](https://github.com/docker/distribution/)
+  project
+
+- **[vnext-opensource](https://github.com/docker/docker.github.io/tree/vnext-opensource):**
+  docs for upcoming features in the [docker/opensource](https://github.com/docker/opensource/)
+  project
+
+- **[vnext-swarm](https://github.com/docker/docker.github.io/tree/vnext-swarm):**
+  docs for upcoming features in the [docker/swarm](https://github.com/docker/swarm/)
+  project
+
+- **[vnext-toolbox](https://github.com/docker/docker.github.io/tree/vnext-toolbox):**
+  docs for upcoming features in the [docker/toolbox](https://github.com/docker/toolbox/)
+  project
+
+- **[vnext-kitematic](https://github.com/docker/docker.github.io/tree/vnext-kitematic):**
+  docs for upcoming features in the [docker/kitematic](https://github.com/docker/kitematic/)
+  project
+
+## Collaborate on a pull request
+
+Unless the PR author specifically disables it, you can push commits into another
+contributor's PR. You can do it from the command line by adding and fetching
+their remote, checking out their branch, and adding commits to it. Even easier,
+you can add commits from the Github web UI, by clicking the pencil icon for a
+given file in the **Files** view.
+
+If a PR consists of multiple small addendum commits on top of a more significant
+one, the commit will usually be "squash-merged", so that only one commit is
+merged in. On occasion this is not appropriate and all commits will be kept
+separate when merging.
+
+## Pull request guidelines
+
+Help us review your PRs more quickly by following these guidelines.
 
 - Try not to touch a large number of files in a single PR if possible.
-- Don't change whitespace or line wrapping in parts of a file you aren't
-  editing for other reasons. Make sure your text editor isn't configured to
+
+- Don't change whitespace or line wrapping in parts of a file you are not
+  editing for other reasons. Make sure your text editor is not configured to
   automatically reformat the whole file when saving.
-- We use GitHub Actions for testing and creating preview deployments for each
-  pull request. The URL of the preview deployment is added as a comment on the
-  pull request. Check the staging site to verify how your changes look and fix
-  issues, if necessary.
 
-### Local setup
+- A Netlify test runs for each PR that is against one of our long-lived
+  branches like `master` and the `vnext` branches, and deploys the result of
+  your PR to a staging site. The URL will be available at the bottom of the PR
+  in the **Conversation** view. Check the staging site for problems and fix them
+  if necessary. Reviewers will check the staging site too.
 
-You can use Docker (surprise) to build and serve the files locally.
+If you can think of other ways we could streamline the review process, let us
+know.
 
-> [!IMPORTANT]
-> This requires Docker Desktop version **4.24** or later, or Docker Engine with Docker
-> Compose version [**2.22**](https://docs.docker.com/compose/how-tos/file-watch/) or later.
+## Style guide
 
-1. [Fork the docker/docs repository.](https://github.com/docker/docs/fork)
-
-2. Clone your forked docs repository:
-
-   ```console
-   $ git clone https://github.com/<your-username>/docs
-   $ cd docs
-   ```
-
-3. Configure Git to sync your docs fork with the upstream docker/docs
-   repository and prevent accidental pushes to the upstream repository:
-
-   ```console
-   $ git remote add upstream https://github.com/docker/docs.git
-   $ git remote set-url --push upstream no_pushing
-   ```
-
-4. Check out a branch:
-
-   ```console
-   $ git checkout -b <branch>
-   ```
-
-5. Start the local development server:
-
-   ```console
-   $ docker compose watch
-   ```
-
-The site will be served for local preview at <http://localhost:1313>. The
-development server watches for changes and automatically rebuilds your site.
-
-To stop the development server:
-
-1. In your terminal, press `<Ctrl+C>` to exit the file watch mode of Compose.
-2. Stop the Compose service with the `docker compose down` command.
-
-### Testing
-
-Before you push your changes and open a pull request, we recommend that you
-test your site locally first. Local tests check for broken links, incorrectly
-formatted markup, and other things. To run the tests:
-
-```console
-$ docker buildx bake validate
-```
-
-If this command doesn't result in any errors, you're good to go!
-
-## Content not edited here
-
-CLI reference documentation is maintained in upstream repositories. It's
-partially generated from code, and is only vendored here for publishing. To
-update the CLI reference docs, refer to the corresponding repository:
-
-- [docker/cli](https://github.com/docker/cli)
-- [docker/buildx](https://github.com/docker/buildx)
-- [docker/compose](https://github.com/docker/compose)
-
-Feel free to raise an issue on this repository if you're not sure how to
-proceed, and we'll help out.
-
-Other content that appears on the site, but that's not edited here, includes:
-
-- Dockerfile reference
-- Docker Engine API reference
-- Compose specification
-- Buildx Bake reference
-
-If you spot an issue in any of these pages, feel free to raise an issue here
-and we'll make sure it gets fixed in the upstream source.
+If you have questions about how to write for Docker's documentation, have a look
+at the [style guide](/opensource/doc-style/). The style
+guide provides guidance about grammar, syntax, formatting, styling, language, or
+tone. If something isn't clear in the guide, submit an issue to let us
+know or submit a pull request to help us improve it.

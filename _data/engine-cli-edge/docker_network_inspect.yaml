@@ -1,0 +1,34 @@
+command: docker network inspect
+short: Display detailed information on one or more networks
+long: |-
+  Returns information about one or more networks. By default, this command renders
+  all results in a JSON object.
+usage: docker network inspect [OPTIONS] NETWORK [NETWORK...]
+pname: docker network
+plink: docker_network.yaml
+options:
+- option: format
+  shorthand: f
+  value_type: string
+  description: Format the output using the given Go template
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: verbose
+  shorthand: v
+  value_type: bool
+  default_value: "false"
+  description: Verbose output for diagnostics
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

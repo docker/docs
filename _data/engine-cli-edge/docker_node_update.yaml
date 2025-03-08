@@ -1,0 +1,79 @@
+command: docker node update
+short: Update a node
+long: Update metadata about a node, such as its availability, labels, or roles.
+usage: docker node update [OPTIONS] NODE
+pname: docker node
+plink: docker_node.yaml
+options:
+- option: availability
+  value_type: string
+  description: Availability of the node ("active"|"pause"|"drain")
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: label-add
+  value_type: list
+  description: Add or update a node label (key=value)
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: label-rm
+  value_type: list
+  description: Remove a node label if exists
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: role
+  value_type: string
+  description: Role of the node ("worker"|"manager")
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+examples: |-
+  ### Add label metadata to a node
+
+  Add metadata to a swarm node using node labels. You can specify a node label as
+  a key with an empty value:
+
+  ``` bash
+  $ docker node update --label-add foo worker1
+  ```
+
+  To add multiple labels to a node, pass the `--label-add` flag for each label:
+
+  ```bash
+  $ docker node update --label-add foo --label-add bar worker1
+  ```
+
+  When you [create a service](service_create.md),
+  you can use node labels as a constraint. A constraint limits the nodes where the
+  scheduler deploys tasks for a service.
+
+  For example, to add a `type` label to identify nodes where the scheduler should
+  deploy message queue service tasks:
+
+  ``` bash
+  $ docker node update --label-add type=queue worker1
+  ```
+
+  The labels you set for nodes using `docker node update` apply only to the node
+  entity within the swarm. Do not confuse them with the docker daemon labels for
+  [dockerd](https://docs.docker.com/engine/userguide/labels-custom-metadata/#daemon-labels).
+
+  For more information about labels, refer to [apply custom
+  metadata](https://docs.docker.com/engine/userguide/labels-custom-metadata/).
+deprecated: false
+min_api_version: "1.24"
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: true
+

@@ -1,0 +1,33 @@
+command: docker swarm unlock-key
+short: Manage the unlock key
+long: Manage the unlock key
+usage: docker swarm unlock-key [OPTIONS]
+pname: docker swarm
+plink: docker_swarm.yaml
+options:
+- option: quiet
+  shorthand: q
+  value_type: bool
+  default_value: "false"
+  description: Only display token
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: rotate
+  value_type: bool
+  default_value: "false"
+  description: Rotate unlock key
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+deprecated: false
+min_api_version: "1.24"
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: true
+

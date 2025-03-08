@@ -1,0 +1,78 @@
+/*
+*
+* Buttons ***********************************************************************
+*
+*/
+
+ul.buttons {
+    list-style: none;
+    width: 450px;
+    margin: 0 auto;
+}
+
+a.button {
+    color: #fff;
+}
+
+a.button.outline-btn {
+    color: #0087C8;
+    float: none;
+    margin-bottom: 30px;
+    display: inline-block;
+}
+
+a.button.outline-btn.min-hgt {
+    min-height: 85px;
+}
+
+.button {
+    margin: 10px 10px 10px 0;
+    font-family: Geomanist Book;
+    padding: 12px 35px 10px;
+    min-width: 200px;
+    box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1);
+    float: left;
+    text-align: center;
+    &:hover {
+        color: #fff;
+        opacity: 0.7;
+    }
+}
+
+.primary-btn {
+    background: #1488C6;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    text-shadow: 0 1px rgba(0, 0, 0, 0.2);
+}
+
+.secondary-btn {
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-shadow: 0 1px rgba(0, 0, 0, 0.2);
+}
+
+.transparent-btn {
+    background-color: rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    text-shadow: 0 1px rgba(0, 0, 0, 0.2);
+}
+
+.outline-btn {
+    background: #fff;
+    border: 1px solid;
+    border-color: #0087C8;
+    text-decoration: none;
+    margin: 0;
+}
+
+.outline-btn:hover,
+.primary-btn:hover,
+.secondary-btn:hover {
+    opacity: 0.8;
+}
+
+.outline-btn:hover {
+    color: #1488C6;
+}

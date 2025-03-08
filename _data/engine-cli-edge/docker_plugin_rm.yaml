@@ -1,0 +1,42 @@
+command: docker plugin rm
+aliases: remove
+short: Remove one or more plugins
+long: |-
+  Removes a plugin. You cannot remove a plugin if it is enabled, you must disable
+  a plugin using the [`docker plugin disable`](plugin_disable.md) before removing
+  it (or use --force, use of force is not recommended, since it can affect
+  functioning of running containers using the plugin).
+usage: docker plugin rm [OPTIONS] PLUGIN [PLUGIN...]
+pname: docker plugin
+plink: docker_plugin.yaml
+options:
+- option: force
+  shorthand: f
+  value_type: bool
+  default_value: "false"
+  description: Force the removal of an active plugin
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+examples: |-
+  The following example disables and removes the `sample-volume-plugin:latest`
+  plugin:
+
+  ```bash
+  $ docker plugin disable tiborvass/sample-volume-plugin
+
+  tiborvass/sample-volume-plugin
+
+  $ docker plugin rm tiborvass/sample-volume-plugin:latest
+
+  tiborvass/sample-volume-plugin
+  ```
+deprecated: false
+min_api_version: "1.25"
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

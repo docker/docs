@@ -1,0 +1,50 @@
+command: docker container commit
+short: Create a new image from a container's changes
+long: Create a new image from a container's changes
+usage: docker container commit [OPTIONS] CONTAINER [REPOSITORY[:TAG]]
+pname: docker container
+plink: docker_container.yaml
+options:
+- option: author
+  shorthand: a
+  value_type: string
+  description: Author (e.g., "John Hannibal Smith <hannibal@a-team.com>")
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: change
+  shorthand: c
+  value_type: list
+  description: Apply Dockerfile instruction to the created image
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: message
+  shorthand: m
+  value_type: string
+  description: Commit message
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: pause
+  shorthand: p
+  value_type: bool
+  default_value: "true"
+  description: Pause container during commit
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

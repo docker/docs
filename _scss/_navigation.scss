@@ -1,0 +1,374 @@
+/*
+*
+* Primary navigation - top header **********************************************************
+*
+*/
+.nav-container {
+    height: 55px;
+}
+
+.primary {
+    padding: 5px 0 0 20px;
+}
+
+.nav-primary {
+    background: transparent;
+    max-width: 1024px;
+    margin: 0 auto;
+    a {
+        color: #fff;
+    }
+    li:nth-child(5n) {
+        padding-right: 50px;
+    }
+}
+
+.sidebar-toggle {
+    margin: 4px 0 0 0;
+    float: right;
+    padding: 16px 15px 0 0;
+}
+
+/*
+*
+* user-nav ***********************************************************************
+*
+*/
+
+.user-nav {
+    padding: 20px 0 0;
+    float: right;
+    ul {
+        li {
+            list-style-type: none;
+            display: inline;
+            padding-right: 10px;
+            a {
+                display: inline;
+            }
+        }
+    }
+}
+
+/*
+*
+* Secondary Navigation  **********************************************************
+*
+*/
+
+.nav-secondary {
+    background: $bg-secondary;
+    box-shadow: 0 1px 13px rgba(0, 0, 0, 0.24);
+    height: 55px;
+}
+
+
+/*
+*
+* nav-secondary-tabs  ***********************************************************************
+*
+*/
+
+.nav-secondary-tabs {
+    background-color: $bg-secondary-tabs;
+    bottom: 0;
+    height: 55px;
+    position: absolute;
+    width: 100%;
+    &.affix {
+        background: $bg-secondary;
+        box-shadow: 0 1px 13px rgba(0, 0, 0, 0.24);
+        top: 0;
+        position: fixed;
+        z-index: 100;
+    }
+    .search-form {
+        margin: 5px 27px 0 -10px;
+        width: 240px;
+    }
+}
+
+/*
+*
+* NAV SIDEBAR ***********************************************************************
+*
+*/
+
+.nav-sidebar>li>a {
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+.nav-sidebar>.active>a,
+.nav-sidebar>.active>a:focus,
+.nav-sidebar>.active>a:hover {
+    color: #2089C4;
+    background-color: #428bca;
+}
+
+.nav-sidebar ul {
+    list-style: none;
+    padding: 0px;
+    text-align: left;
+    li {
+        display: block;
+    }
+}
+
+.nav-sidebar .nav ul {
+  padding: 0px 0px 0px 15px;
+}
+
+.nav-sidebar ul li a:hover {
+    opacity: 0.7;
+    background: transparent;
+}
+
+.nav-sidebar ul li a,
+.nav-sidebar ul li a:focus,
+.nav-sidebar ul li a:hover {
+    border-bottom: none;
+    text-decoration: none;
+}
+
+.nav-sidebar ul li a.active,
+.nav-sidebar.nav>li>a:focus {
+    cursor: default;
+    background: #F3F4F4;
+    color: #2089C4;
+    border-left: 4px solid #077CBC;
+    font-weight: 600;
+}
+
+.nav-sidebar ul li li a {
+    border-left: 1px solid #077CBC;
+    font-size: 12px;
+    margin-left: 15px;
+}
+
+.nav-sidebar .caret {
+    float: right;
+    margin-top: 10px;
+}
+
+.leftnav {
+    padding: 0 20px 20px 0;
+}
+
+
+/*
+*
+* Table of contents menu  ***********************************************************************
+*
+*/
+
+.toc-toggle {
+    width: 25px;
+    height: 25px;
+    float: right;
+}
+
+.toc-nav ul {
+    list-style: none;
+    margin: 0;
+    padding-left: 10px;
+    line-height: 20px;
+    li {
+        padding: 2px 8px 2px 0;
+        width: 100%;
+        a {
+            display: inline-block;
+            font-size: 12px;
+            padding: 5px 10px 5px 10px;
+            text-decoration: none;
+        }
+    }
+}
+
+.toc-nav li a.active {
+    color: #2089C4;
+    border-left: 4px solid #2089C4;
+    font-weight: bold;
+}
+
+.toc-nav i.fa {
+    font-size: 14px;
+    margin: 0px 8px 0 0;
+    color: #4fa1d0;
+}
+
+i.fa.fa-question {
+    font-size: 21px;
+    margin: 0 11px 0 0;
+}
+
+div#side-toc-title {
+    font-size: 12px;
+    font-weight: bold;
+    margin: 11px 0 10px 13px;
+}
+
+.edit {
+    margin: 10px 0 20px 15px;
+}
+
+/*
+*
+* Toggle Switches **************************************************************
+*
+*/
+
+.toggle-mode {
+    float: left;
+    padding: 0 0 0 10px;
+    width: 100%;
+    .icon {
+        width: 25px;
+        float: left;
+        font-size: 1.5rem;
+    }
+}
+
+
+.toggle-switch {
+    float: left;
+    height: 40px;
+    width: 60px;
+    padding: 3px 7px 0 2px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 47px;
+    height: 19px;
+}
+
+.switch input {
+    display: none;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $slider-bg;
+    border: 1px solid #c3e4f7;
+    // transition: 0.4s;
+}
+
+.slider:before {
+    background-color: $slider-btn;
+    position: absolute;
+    content: "";
+    height: 15px;
+    width: 15px;
+    left: 2px;
+    bottom: 1px;
+    // transition: 0.4s;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+
+/*
+*
+* Tabs ***********************************************************************
+*
+*/
+#tabs {
+    float: left;
+    margin: 0;
+    padding-left: 8px; 
+    ul {
+        padding: 0;
+    }
+}
+
+
+
+.tabs {
+
+    li {
+        float: left;
+        list-style: none;
+        a {
+            color: $white;
+            padding: 17px 19px 14px 15px;
+            float: left;
+            font-weight: 600;
+            &:hover {
+                background: rgba(0, 0, 0, 0.17) !important;
+                border-bottom: 4px solid #fff;
+            }
+        }
+    }
+}
+
+.tabs li.active a {
+    background: transparent !important;
+    color: #fff;
+    cursor: default;
+    border-bottom: 4px solid #fff;
+}
+
+/*
+*
+* feedback links ***********************************************************************
+*
+*/
+
+#sidebar-right.affix .feedback-links {
+    margin: 50px 0 10px 0;
+}
+
+/* polldaddy */
+
+#rating_info_8453675 {
+    display: none !important;
+}
+
+.rating-msg {
+    font: inherit !important;
+    color: inherit !important;
+}
+
+/*
+*
+* Controls ***********************************************************************
+*
+*/
+
+.ctrl-left {
+    float: left;
+    width: 20px;
+    margin: 3px 0px 0px 0;
+}
+
+.ctrl-right {
+    float: right;
+    padding: 5px 0px;
+}
+
+.ctrl-right .btn-group {
+    float: left;
+    margin: 2px 0 0;
+}

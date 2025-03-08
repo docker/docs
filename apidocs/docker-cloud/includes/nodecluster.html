@@ -1,0 +1,582 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Documentation</title>
+
+    <link href="../stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="../stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
+    <script type="text/javascript">
+    !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="4.0.0";
+    analytics.load("IWj9D0UpZHZdZUZX9jl98PcpBFWBnBMy");
+    analytics.page();
+    }}();
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+      <script src="../javascripts/all_nosearch.js" type="text/javascript"></script>
+
+  </head>
+
+  <body class="includes includes_nodecluster">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="../images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <img src="../images/logo.png" />
+      <div id="toc">
+      </div>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id="node-clusters">Node Clusters</h1>
+
+<h2 id="node-cluster">Node Cluster</h2>
+
+<blockquote>
+<p>Example</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"current_num_nodes"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"deployed_datetime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tue, 16 Sep 2014 17:01:15 +0000"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"destroyed_datetime"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"disk"</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my test cluster"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TestCluster"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"node_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/infra/v1/nodetype/aws/t2.micro/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"nodes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"/api/infra/v1/user_namespace/node/75d20367-0948-4f10-8ba4-ffb4d16ed3c6/"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"region"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/infra/v1/region/aws/us-east-1/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"resource_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/infra/v1/user_namespace/nodecluster/5516df0b-721e-4470-b350-741ff22e63a0/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deployed"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tag_one"</span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tag-two"</span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tagthree3"</span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"target_num_nodes"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5516df0b-721e-4470-b350-741ff22e63a0"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"provider_options"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"vpc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vpc-aa1c70d4"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"subnets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"subnet-aaa7d94f"</span><span class="p">,</span><span class="w"> </span><span class="s2">"subnet-aa15fa64"</span><span class="p">],</span><span class="w">
+            </span><span class="nt">"security_groups"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"sg-aa1c70d4"</span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"iam"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"instance_profile_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my_instance_profile"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>A node cluster is a group of nodes that share the same provider, region and/or availability zone, and node type. They are on the same private network.</p>
+
+<p>This is a <a href="#namespaced-endpoints">namespaced endpoint</a>.</p>
+
+<h3 id="attributes">Attributes</h3>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>uuid</td>
+<td>A unique identifier for the node cluster generated automatically on creation</td>
+</tr>
+<tr>
+<td>resource_uri</td>
+<td>A unique API endpoint that represents the node cluster</td>
+</tr>
+<tr>
+<td>name</td>
+<td>A user provided name for the node cluster</td>
+</tr>
+<tr>
+<td>state</td>
+<td>The state of the node cluster. See the below table for a list of possible states.</td>
+</tr>
+<tr>
+<td>node_type</td>
+<td>The resource URI of the node type used for the node cluster</td>
+</tr>
+<tr>
+<td>disk</td>
+<td>The size of the disk where images and containers are stored (in GB)</td>
+</tr>
+<tr>
+<td>nodes</td>
+<td>A list of resource URIs of the <code class="prettyprint">Node</code> objects on the node cluster</td>
+</tr>
+<tr>
+<td>region</td>
+<td>The resource URI of the <code class="prettyprint">Region</code> object where the node cluster is deployed</td>
+</tr>
+<tr>
+<td>target_num_nodes</td>
+<td>The desired number of nodes for the node cluster</td>
+</tr>
+<tr>
+<td>current_num_nodes</td>
+<td>The actual number of nodes in the node cluster. This may differ from <code class="prettyprint">target_num_nodes</code> if the node cluster is being deployed or scaled</td>
+</tr>
+<tr>
+<td>deployed_datetime</td>
+<td>The date and time when this node cluster was deployed</td>
+</tr>
+<tr>
+<td>destroyed_datetime</td>
+<td>The date and time when this node cluster was terminated (if applicable)</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>List of tags to identify the node cluster nodes when deploying services (see <a href="/docker-cloud/apps/deploy-tags/">Tags</a> for more information)</td>
+</tr>
+<tr>
+<td>provider_options</td>
+<td>Provider-specific extra options for the deployment of the node (see <code class="prettyprint">Provider options</code> table below for more information)</td>
+</tr>
+<tr>
+<td>nickname</td>
+<td>A user-friendly name for the node cluster (<code class="prettyprint">name</code> by default)</td>
+</tr>
+</tbody></table>
+
+<h3 id="node-cluster-states">Node Cluster states</h3>
+
+<table><thead>
+<tr>
+<th>State</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Init</td>
+<td>The node cluster has been created and has no deployed containers yet. Possible actions in this state: <code class="prettyprint">deploy</code>, <code class="prettyprint">terminate</code>.</td>
+</tr>
+<tr>
+<td>Deploying</td>
+<td>All nodes in the cluster are either deployed or being deployed. No actions allowed in this state.</td>
+</tr>
+<tr>
+<td>Deployed</td>
+<td>All nodes in the cluster are deployed and provisioned. Possible actions in this state: <code class="prettyprint">terminate</code>.</td>
+</tr>
+<tr>
+<td>Partly deployed</td>
+<td>One or more nodes of the cluster are deployed and running. Possible actions in this state: <code class="prettyprint">terminate</code>.</td>
+</tr>
+<tr>
+<td>Scaling</td>
+<td>The cluster is either deploying new nodes or terminating existing ones responding to a scaling request. No actions allowed in this state.</td>
+</tr>
+<tr>
+<td>Terminating</td>
+<td>All nodes in the cluster are either being terminated or already terminated. No actions allowed in this state.</td>
+</tr>
+<tr>
+<td>Terminated</td>
+<td>The node cluster and all its nodes have been terminated. No actions allowed in this state.</td>
+</tr>
+<tr>
+<td>Empty cluster</td>
+<td>There are no nodes deployed in this cluster. Possible actions in this state: <code class="prettyprint">terminate</code>.</td>
+</tr>
+</tbody></table>
+
+<h3 id="provider-options">Provider options</h3>
+
+<p>You can specify the following options when using the Amazon Web Services provider:</p>
+
+<ul>
+<li><code class="prettyprint">vpc</code>: VPC-related options (optional)
+
+<ul>
+<li><code class="prettyprint">id</code>: AWS VPC identifier of the target VPC where the nodes of the cluster will be deployed (required)</li>
+<li><code class="prettyprint">subnets</code>: a list of target subnet indentifiers inside selected VPC. If you specify more than one subnet, Docker Cloud will balance among all of them following a high-availability schema (optional)</li>
+<li><code class="prettyprint">security_groups</code>: the security group that will be applied to every node of the cluster (optional)</li>
+</ul></li>
+<li><code class="prettyprint">iam</code>: IAM-related options (optional)
+
+<ul>
+<li><code class="prettyprint">instance_profile_name</code>: name of the instance profile (container for instance an IAM role) to attach to every node of the cluster (required)</li>
+</ul></li>
+</ul>
+
+<h2 id="list-all-node-clusters">List all node clusters</h2>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">dockercloud</span>
+
+<span class="n">nodeclusters</span> <span class="o">=</span> <span class="n">dockercloud</span><span class="o">.</span><span class="n">NodeCluster</span><span class="o">.</span><span class="nb">list</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight go"><code><span class="k">import</span><span class="x"> </span><span class="s">"github.com/docker/go-dockercloud/dockercloud"</span><span class="x">
+
+</span><span class="n">nodeclusters</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">dockercloud</span><span class="o">.</span><span class="n">ListNodeClusters</span><span class="p">()</span><span class="x">
+
+</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">nodeclusters</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/infra/v1/nodecluster/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">cloud.docker.com</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Basic dXNlcm5hbWU6YXBpa2V5</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+</code></pre>
+<pre class="highlight shell"><code>docker-cloud nodecluster ls
+</code></pre>
+
+<p>Lists all current and recently terminated node clusters. Returns a list of <code class="prettyprint">NodeCluster</code> objects.</p>
+
+<h3 id="endpoint-type">Endpoint Type</h3>
+
+<p>Available in Docker Cloud&rsquo;s <strong>REST API</strong></p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /api/infra/v1/[optional_namespace/]nodecluster/</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>uuid</td>
+<td>Filter by UUID</td>
+</tr>
+<tr>
+<td>state</td>
+<td>Filter by state. Possible values: <code class="prettyprint">Init</code>, <code class="prettyprint">Deploying</code>, <code class="prettyprint">Deployed</code>, <code class="prettyprint">Partly deployed</code>, <code class="prettyprint">Scaling</code>, <code class="prettyprint">Terminating</code>, <code class="prettyprint">Terminated</code>, <code class="prettyprint">Empty cluster</code></td>
+</tr>
+<tr>
+<td>name</td>
+<td>Filter by node cluster name</td>
+</tr>
+<tr>
+<td>region</td>
+<td>Filter by resource URI of the target region</td>
+</tr>
+<tr>
+<td>node_type</td>
+<td>Filter by resource URI of the target node type</td>
+</tr>
+</tbody></table>
+
+<h2 id="create-a-new-node-cluster">Create a new node cluster</h2>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">dockercloud</span>
+
+<span class="n">region</span> <span class="o">=</span> <span class="n">dockercloud</span><span class="o">.</span><span class="n">Region</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="s">"digitalocean/lon1"</span><span class="p">)</span>
+<span class="n">node_type</span> <span class="o">=</span> <span class="n">dockercloud</span><span class="o">.</span><span class="n">NodeType</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="s">"digitalocean/1gb"</span><span class="p">)</span>
+<span class="n">nodecluster</span> <span class="o">=</span> <span class="n">dockercloud</span><span class="o">.</span><span class="n">NodeCluster</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">"my_cluster"</span><span class="p">,</span> <span class="n">node_type</span><span class="o">=</span><span class="n">node_type</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="n">region</span><span class="p">,</span> <span class="n">disk</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
+<span class="n">nodecluster</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight go"><code><span class="k">import</span><span class="x"> </span><span class="s">"github.com/docker/go-dockercloud/dockercloud"</span><span class="x">
+
+</span><span class="n">nodecluster</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">dockercloud</span><span class="o">.</span><span class="n">CreateNodeCluster</span><span class="p">(</span><span class="n">dockercloud</span><span class="o">.</span><span class="n">NodeCreateRequest</span><span class="p">{</span><span class="n">Name</span><span class="o">:</span><span class="x"> </span><span class="s">"my_cluster"</span><span class="p">,</span><span class="x"> </span><span class="n">Region</span><span class="o">:</span><span class="x"> </span><span class="s">"/api/infra/v1/region/digitalocean/lon1/"</span><span class="p">,</span><span class="x"> </span><span class="n">NodeType</span><span class="o">:</span><span class="x"> </span><span class="s">"/api/infra/v1/nodetype/digitalocean/1gb/"</span><span class="p">,</span><span class="x"> </span><span class="n">Target_num_nodes</span><span class="o">:</span><span class="x"> </span><span class="m">2</span><span class="p">})</span><span class="x">
+
+</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">nodecluster</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<pre class="highlight http"><code><span class="nf">POST</span> <span class="nn">/api/infra/v1/nodecluster/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">cloud.docker.com</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Basic dXNlcm5hbWU6YXBpa2V5</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+
+<span class="p">{</span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my_cluster"</span><span class="p">,</span><span class="w"> </span><span class="nt">"region"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/infra/v1/region/digitalocean/lon1/"</span><span class="p">,</span><span class="w"> </span><span class="nt">"node_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/infra/v1/nodetype/digitalocean/1gb/"</span><span class="p">,</span><span class="w"> </span><span class="nt">"disk"</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<pre class="highlight shell"><code>docker-cloud nodecluster create my_cluster digitalocean lon1 1gb
+</code></pre>
+
+<p>Creates a new node cluster without deploying it.</p>
+
+<h3 id="endpoint-type">Endpoint Type</h3>
+
+<p>Available in Docker Cloud&rsquo;s <strong>REST API</strong></p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST /api/infra/v1/[optional_namespace/]nodecluster/</code></p>
+
+<h3 id="json-parameters">JSON Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>(required) A user provided name for the node cluster</td>
+</tr>
+<tr>
+<td>node_type</td>
+<td>(required) The resource URI of the node type to be used for the node cluster</td>
+</tr>
+<tr>
+<td>region</td>
+<td>(required) The resource URI of the region where the node cluster is to be deployed</td>
+</tr>
+<tr>
+<td>disk</td>
+<td>(optional) The size of the volume to create where images and containers will be stored, in GB (default: <code class="prettyprint">60</code>). Not available for Digital Ocean. To create Softlayer nodes you must select one of the following sizes (in GBs): 10, 20, 25, 30, 40, 50, 75, 100, 125, 150, 175, 200, 250, 300, 350, 400, 500, 750, 1000, 1500 or 2000</td>
+</tr>
+<tr>
+<td>nickname</td>
+<td>(optional) A user-friendly name for the node cluster (<code class="prettyprint">name</code> by default)</td>
+</tr>
+<tr>
+<td>target_num_nodes</td>
+<td>(optional) The desired number of nodes for the node cluster (default: <code class="prettyprint">1</code>)</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>(optional) List of tags of the node cluster to be used when deploying services see <a href="/docker-cloud/apps/deploy-tags/">Tags</a> for more information) (default: <code class="prettyprint">[]</code>)</td>
+</tr>
+<tr>
+<td>provider_options</td>
+<td>Provider-specific extra options for the deployment of the node (see table <code class="prettyprint">Provider options</code> above for more information)</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-an-existing-node-cluster">Get an existing node cluster</h2>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">dockercloud</span>
+
+<span class="n">service</span> <span class="o">=</span> <span class="n">dockercloud</span><span class="o">.</span><span class="n">NodeCluster</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="s">"7eaf7fff-882c-4f3d-9a8f-a22317ac00ce"</span><span class="p">)</span>
+</code></pre>
+<pre class="highlight go"><code><span class="k">import</span><span class="x"> </span><span class="s">"github.com/docker/go-dockercloud/dockercloud"</span><span class="x">
+
+</span><span class="n">nodecluster</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">dockercloud</span><span class="o">.</span><span class="n">GetNodeCluster</span><span class="p">(</span><span class="s">"7eaf7fff-882c-4f3d-9a8f-a22317ac00ce"</span><span class="p">)</span><span class="x">
+
+</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">nodecluster</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/infra/v1/nodecluster/7eaf7fff-882c-4f3d-9a8f-a22317ac00ce/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">cloud.docker.com</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Basic dXNlcm5hbWU6YXBpa2V5</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+</code></pre>
+<pre class="highlight shell"><code>docker-cloud nodecluster inspect 7eaf7fff
+</code></pre>
+
+<p>Get all the details of an specific node cluster</p>
+
+<h3 id="endpoint-type">Endpoint Type</h3>
+
+<p>Available in Docker Cloud&rsquo;s <strong>REST API</strong></p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /api/infra/v1/[optional_namespace/]nodecluster/(uuid)/</code></p>
+
+<h3 id="path-parameters">Path Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>uuid</td>
+<td>The UUID of the node cluster to retrieve</td>
+</tr>
+</tbody></table>
+
+<h2 id="deploy-a-node-cluster">Deploy a node cluster</h2>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">dockercloud</span>
+
+<span class="n">nodecluster</span> <span class="o">=</span> <span class="n">dockercloud</span><span class="o">.</span><span class="n">NodeCluster</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="s">"7eaf7fff-882c-4f3d-9a8f-a22317ac00ce"</span><span class="p">)</span>
+<span class="n">nodecluster</span><span class="o">.</span><span class="n">deploy</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight go"><code><span class="k">import</span><span class="x"> </span><span class="s">"github.com/docker/go-dockercloud/dockercloud"</span><span class="x">
+
+</span><span class="n">nodecluster</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">dockercloud</span><span class="o">.</span><span class="n">GetNodeCluster</span><span class="p">(</span><span class="s">"7eaf7fff-882c-4f3d-9a8f-a22317ac00ce"</span><span class="p">)</span><span class="x">
+
+</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">nodecluster</span><span class="o">.</span><span class="n">Deploy</span><span class="p">();</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+   </span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre>
+<pre class="highlight http"><code><span class="nf">POST</span> <span class="nn">/api/infra/v1/nodecluster/7eaf7fff-882c-4f3d-9a8f-a22317ac00ce/deploy/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">cloud.docker.com</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Basic dXNlcm5hbWU6YXBpa2V5</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+</code></pre>
+
+<p>Deploys and provisions a recently created node cluster in the specified region and cloud provider.</p>
+
+<h3 id="endpoint-type">Endpoint Type</h3>
+
+<p>Available in Docker Cloud&rsquo;s <strong>REST API</strong></p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST /api/infra/v1/[optional_namespace/]nodecluster/(uuid)/deploy/</code></p>
+
+<h3 id="path-parameters">Path Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>uuid</td>
+<td>The UUID of the node cluster to deploy</td>
+</tr>
+</tbody></table>
+
+<h2 id="update-an-existing-node-cluster">Update an existing node cluster</h2>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">dockercloud</span>
+
+<span class="n">nodecluster</span> <span class="o">=</span> <span class="n">dockercloud</span><span class="o">.</span><span class="n">NodeCluster</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="s">"7eaf7fff-882c-4f3d-9a8f-a22317ac00ce"</span><span class="p">)</span>
+<span class="n">nodecluster</span><span class="o">.</span><span class="n">target_num_nodes</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">nodecluster</span><span class="o">.</span><span class="n">tags</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">"tag-1"</span><span class="p">)</span>
+<span class="n">nodecluster</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight go"><code><span class="k">import</span><span class="x"> </span><span class="s">"github.com/docker/go-dockercloud/dockercloud"</span><span class="x">
+
+</span><span class="n">nodecluster</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">dockercloud</span><span class="o">.</span><span class="n">GetNodeCluster</span><span class="p">(</span><span class="s">"7eaf7fff-882c-4f3d-9a8f-a22317ac00ce"</span><span class="p">)</span><span class="x">
+
+</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">nodecluster</span><span class="o">.</span><span class="n">Update</span><span class="p">(</span><span class="n">dockercloud</span><span class="o">.</span><span class="n">NodeCreateRequest</span><span class="p">{</span><span class="n">Target_num_nodes</span><span class="o">:</span><span class="x"> </span><span class="m">4</span><span class="p">});</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+   </span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre>
+<pre class="highlight http"><code><span class="nf">PATCH</span> <span class="nn">/api/infra/v1/nodecluster/7eaf7fff-882c-4f3d-9a8f-a22317ac00ce/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">cloud.docker.com</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Basic dXNlcm5hbWU6YXBpa2V5</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+
+<span class="p">{</span><span class="nt">"target_num_nodes"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="nt">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tag-1"</span><span class="p">}]}</span><span class="w">
+</span></code></pre>
+<pre class="highlight shell"><code>docker-cloud nodecluster scale 7eaf7fff 3
+docker-cloud tag add -t tag-1 7eaf7fff
+docker-cloud tag <span class="nb">set</span> -t tag-2 7eaf7fff
+</code></pre>
+
+<p>Updates the node cluster details and applies the changes automatically.</p>
+
+<h3 id="endpoint-type">Endpoint Type</h3>
+
+<p>Available in Docker Cloud&rsquo;s <strong>REST API</strong></p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">PATCH /api/infra/v1/[optional_namespace/]nodecluster/(uuid)/</code></p>
+
+<h3 id="path-parameters">Path Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>uuid</td>
+<td>The UUID of the node cluster to update</td>
+</tr>
+</tbody></table>
+
+<h3 id="json-parameters">JSON Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>target_num_nodes</td>
+<td>(optional) The number of nodes to scale this node cluster to</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>(optional) List of tags the node cluster (and nodes within the node cluster) will have. This operation replaces the user tag list.</td>
+</tr>
+</tbody></table>
+
+<h2 id="terminate-a-node-cluster">Terminate a node cluster</h2>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">dockercloud</span>
+
+<span class="n">nodecluster</span> <span class="o">=</span> <span class="n">dockercloud</span><span class="o">.</span><span class="n">NodeCluster</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="s">"7eaf7fff-882c-4f3d-9a8f-a22317ac00ce"</span><span class="p">)</span>
+<span class="n">nodecluster</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight go"><code><span class="k">import</span><span class="x"> </span><span class="s">"github.com/docker/go-dockercloud/dockercloud"</span><span class="x">
+
+</span><span class="n">nodecluster</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">dockercloud</span><span class="o">.</span><span class="n">GetNodeCluster</span><span class="p">(</span><span class="s">"7eaf7fff-882c-4f3d-9a8f-a22317ac00ce"</span><span class="p">)</span><span class="x">
+
+</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">nodecluster</span><span class="o">.</span><span class="n">Terminate</span><span class="p">();</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+   </span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre>
+<pre class="highlight http"><code><span class="nf">DELETE</span> <span class="nn">/api/infra/v1/nodecluster/7eaf7fff-882c-4f3d-9a8f-a22317ac00ce/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">cloud.docker.com</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Basic dXNlcm5hbWU6YXBpa2V5</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+</code></pre>
+<pre class="highlight shell"><code>dockercloud nodecluster rm 7eaf7fff
+</code></pre>
+
+<p>Terminates all the nodes in a node cluster and the node cluster itself. This is not reversible.</p>
+
+<h3 id="endpoint-type">Endpoint Type</h3>
+
+<p>Available in Docker Cloud&rsquo;s <strong>REST API</strong></p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">DELETE /api/infra/v1/[optional_namespace/]nodecluster/(uuid)/</code></p>
+
+<h3 id="path-parameters">Path Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>uuid</td>
+<td>The UUID of the node cluster to terminate</td>
+</tr>
+</tbody></table>
+
+      </div>
+      <div class="dark-box">
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,40 @@
+command: docker container cp
+short: Copy files/folders between a container and the local filesystem
+long: |-
+  Copy files/folders between a container and the local filesystem
+
+  Use '-' as the source to read a tar archive from stdin
+  and extract it to a directory destination in a container.
+  Use '-' as the destination to stream a tar archive of a
+  container source to stdout.
+usage: "docker container cp [OPTIONS] CONTAINER:SRC_PATH DEST_PATH|-\n\tdocker cp
+  [OPTIONS] SRC_PATH|- CONTAINER:DEST_PATH"
+pname: docker container
+plink: docker_container.yaml
+options:
+- option: archive
+  shorthand: a
+  value_type: bool
+  default_value: "false"
+  description: Archive mode (copy all uid/gid information)
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: follow-link
+  shorthand: L
+  value_type: bool
+  default_value: "false"
+  description: Always follow symbol link in SRC_PATH
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

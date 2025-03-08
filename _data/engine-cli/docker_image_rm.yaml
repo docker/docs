@@ -1,0 +1,33 @@
+command: docker image rm
+aliases: rmi, remove
+short: Remove one or more images
+long: Remove one or more images
+usage: docker image rm [OPTIONS] IMAGE [IMAGE...]
+pname: docker image
+plink: docker_image.yaml
+options:
+- option: force
+  shorthand: f
+  value_type: bool
+  default_value: "false"
+  description: Force removal of the image
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: no-prune
+  value_type: bool
+  default_value: "false"
+  description: Do not delete untagged parents
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

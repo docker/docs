@@ -1,0 +1,24 @@
+command: docker trust signer remove
+short: Remove a signer
+long: Remove a signer
+usage: docker trust signer remove [OPTIONS] NAME REPOSITORY [REPOSITORY...]
+pname: docker trust signer
+plink: docker_trust_signer.yaml
+options:
+- option: force
+  shorthand: f
+  value_type: bool
+  default_value: "false"
+  description: |
+    Do not prompt for confirmation before removing the most recent signer
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

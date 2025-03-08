@@ -1,0 +1,28 @@
+
+#TODO: work out how to add a data dir to any repo that has documentation
+# atm, repo's have a docs dir that is akin to the hugo content dir.
+
+
+# Define Advisory texts
+# can be used in page frontmatter, e.g.:
+#       advisory: experimental
+
+texts:
+  experimental: "The functionality described on this page is marked as Experimental, and as such, may change before it becomes generally available."
+  rc: "The Swarm mode feature included in Docker Engine 1.12 is a release candidate feature and might be subject to non backward-compatible changes. Some functionality may change before the feature becomes generally available."
+  docker4mac-beta: "Docker for Mac is currently in public beta. Some functionality may change before the product becomes generally available."
+  docker4win-beta: "Docker for Windows is currently in public beta. Some functionality may change before the product becomes generally available."
+  toolbox: "**Legacy desktop solution.** Docker Toolbox is for older Mac and Windows systems that do not meet the requirements of [Docker for Mac](/docker-for-mac/) and [Docker for Windows](/docker-for-windows/). We recommend updating to the newer applications, if possible."
+  kitematic: "**Legacy desktop solution.** Kitematic is a legacy solution, bundled with [Docker Toolbox](/toolbox/overview/). We recommend updating to [Docker for Mac](/docker-for-mac/) or [Docker for Windows](/docker-for-windows/) if your system meets the requirements for one of those applications."
+  swarm: "See [Swarm mode overview](/engine/swarm/) for the orchestration features introduced in Docker Engine 1.12. Only refer to the Docker Swarm documents below for information on the standalone Swarm product."
+  swarm-standalone: "**You are viewing docs for legacy standalone Swarm.** These topics describe standalone Docker Swarm. In Docker 1.12 and higher, [Swarm mode](/engine/swarm/) is integrated with Docker Engine. Most users should use integrated Swarm mode &#8212; a good place to start is [Getting started with swarm mode](/engine/swarm/swarm-tutorial/), [Swarm mode CLI commands](/engine/swarm/index.md#swarm-mode-cli-commands), and the [Get started with Docker walkthrough](/get-started/)). Standalone Docker Swarm is not integrated into the Docker Engine API and CLI commands."
+  engine: "This site contains documentation for the v1.12 release candidate version of Docker Engine. For the Docker Engine v1.11 docs, see [https://docs.docker.com/v1.11/](https://docs.docker.com/v1.11/). Docker for Mac and Docker for Windows are currently in Beta."
+  cloud-swarm: "**Beta Feature.** Swarm Mode for Docker Cloud is currently a public Beta."
+
+
+# URL based advisories
+# any URL that begins with "/engine/" will get the "engine" advisory
+# will be over-ridden by the `advisory` frontmatter in the topic
+# [paths]
+# "/engine/" = "engine"
+# "/swarm/" = "swarm"

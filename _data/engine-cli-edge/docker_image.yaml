@@ -1,0 +1,38 @@
+command: docker image
+short: Manage images
+long: Manage images.
+usage: docker image
+pname: docker
+plink: docker.yaml
+cname:
+- docker image build
+- docker image history
+- docker image import
+- docker image inspect
+- docker image load
+- docker image ls
+- docker image prune
+- docker image pull
+- docker image push
+- docker image rm
+- docker image save
+- docker image tag
+clink:
+- docker_image_build.yaml
+- docker_image_history.yaml
+- docker_image_import.yaml
+- docker_image_inspect.yaml
+- docker_image_load.yaml
+- docker_image_ls.yaml
+- docker_image_prune.yaml
+- docker_image_pull.yaml
+- docker_image_push.yaml
+- docker_image_rm.yaml
+- docker_image_save.yaml
+- docker_image_tag.yaml
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

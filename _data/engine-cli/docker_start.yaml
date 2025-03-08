@@ -1,0 +1,61 @@
+command: docker start
+short: Start one or more stopped containers
+long: Start one or more stopped containers
+usage: docker start [OPTIONS] CONTAINER [CONTAINER...]
+pname: docker
+plink: docker.yaml
+options:
+- option: attach
+  shorthand: a
+  value_type: bool
+  default_value: "false"
+  description: Attach STDOUT/STDERR and forward signals
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: checkpoint
+  value_type: string
+  description: Restore from this checkpoint
+  deprecated: false
+  experimental: true
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: checkpoint-dir
+  value_type: string
+  description: Use a custom checkpoint storage directory
+  deprecated: false
+  experimental: true
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: detach-keys
+  value_type: string
+  description: Override the key sequence for detaching a container
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: interactive
+  shorthand: i
+  value_type: bool
+  default_value: "false"
+  description: Attach container's STDIN
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+examples: |-
+  ```bash
+  $ docker start my_container
+  ```
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

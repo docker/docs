@@ -1,0 +1,23 @@
+command: docker checkpoint ls
+aliases: list
+short: List checkpoints for a container
+long: List checkpoints for a container
+usage: docker checkpoint ls [OPTIONS] CONTAINER
+pname: docker checkpoint
+plink: docker_checkpoint.yaml
+options:
+- option: checkpoint-dir
+  value_type: string
+  description: Use a custom checkpoint storage directory
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+deprecated: false
+min_api_version: "1.25"
+experimental: true
+experimentalcli: false
+kubernetes: false
+swarm: false
+

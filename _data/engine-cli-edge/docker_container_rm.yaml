@@ -1,0 +1,43 @@
+command: docker container rm
+short: Remove one or more containers
+long: Remove one or more containers
+usage: docker container rm [OPTIONS] CONTAINER [CONTAINER...]
+pname: docker container
+plink: docker_container.yaml
+options:
+- option: force
+  shorthand: f
+  value_type: bool
+  default_value: "false"
+  description: Force the removal of a running container (uses SIGKILL)
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: link
+  shorthand: l
+  value_type: bool
+  default_value: "false"
+  description: Remove the specified link
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: volumes
+  shorthand: v
+  value_type: bool
+  default_value: "false"
+  description: Remove the volumes associated with the container
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

@@ -1,0 +1,75 @@
+command: docker stack ls
+aliases: list
+short: List stacks
+long: Lists the stacks.
+usage: docker stack ls
+pname: docker stack
+plink: docker_stack.yaml
+options:
+- option: format
+  value_type: string
+  description: Pretty-print stacks using a Go template
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+inherited_options:
+- option: kubeconfig
+  value_type: string
+  description: Kubernetes config file
+  deprecated: false
+  experimental: false
+  experimentalcli: true
+  kubernetes: true
+  swarm: false
+- option: namespace
+  value_type: string
+  default_value: default
+  description: Kubernetes namespace to use
+  deprecated: false
+  experimental: false
+  experimentalcli: true
+  kubernetes: true
+  swarm: false
+examples: |-
+  The following command shows all stacks and some additional information:
+
+  ```bash
+  $ docker stack ls
+
+  ID                 SERVICES
+  vossibility-stack  6
+  myapp              2
+  ```
+
+  ### Formatting
+
+  The formatting option (`--format`) pretty-prints stacks using a Go template.
+
+  Valid placeholders for the Go template are listed below:
+
+  | Placeholder | Description        |
+  | ----------- | ------------------ |
+  | `.Name`     | Stack name         |
+  | `.Services` | Number of services |
+
+  When using the `--format` option, the `stack ls` command either outputs
+  the data exactly as the template declares or, when using the
+  `table` directive, includes column headers as well.
+
+  The following example uses a template without headers and outputs the
+  `Name` and `Services` entries separated by a colon for all stacks:
+
+  ```bash
+  $ docker stack ls --format "{{.Name}}: {{.Services}}"
+  web-server: 1
+  web-cache: 4
+  ```
+deprecated: false
+min_api_version: "1.25"
+experimental: false
+experimentalcli: false
+kubernetes: true
+swarm: true
+

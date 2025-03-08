@@ -1,0 +1,18 @@
+command: docker trust signer
+short: Manage entities who can sign Docker images
+long: Manage entities who can sign Docker images
+usage: docker trust signer
+pname: docker trust
+plink: docker_trust.yaml
+cname:
+- docker trust signer add
+- docker trust signer remove
+clink:
+- docker_trust_signer_add.yaml
+- docker_trust_signer_remove.yaml
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

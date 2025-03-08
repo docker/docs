@@ -1,0 +1,51 @@
+- archive:
+  name: v18.03
+  image: docs/docker.github.io:latest
+  current: true
+# When you make a new stable archive version, move the edge one to be second in
+# the list. The image for edge should be the same as latest.
+- archive:
+  name: edge
+  image: docs/docker.github.io:latest
+- archive:
+  name: v17.12
+  image: docs/docker.github.io:v17.12
+- archive:
+  name: v17.09
+  image: docs/docker.github.io:v17.09
+- archive:
+  name: v17.06
+  image: docs/docker.github.io:v17.06
+- archive:
+  name: v17.03
+  image: docs/docker.github.io:v17.03
+- archive:
+  name: v1.13
+  image: docs/docker.github.io:v1.13
+- archive:
+  name: v1.12
+  image: docs/docker.github.io:v1.12
+- archive:
+  name: v1.11
+  image: docs/docker.github.io:v1.11
+- archive:
+  name: v1.10
+  image: docs/docker.github.io:v1.10
+- archive:
+  name: v1.9
+  image: docs/docker.github.io:v1.9
+- archive:
+  name: v1.8
+  image: docs/docker.github.io:v1.8
+- archive:
+  name: v1.7
+  image: docs/docker.github.io:v1.7
+- archive:
+  name: v1.6
+  image: docs/docker.github.io:v1.6
+- archive:
+  name: v1.5
+  image: docs/docker.github.io:v1.5
+- archive:
+  name: v1.4
+  image: docs/docker.github.io:v1.4

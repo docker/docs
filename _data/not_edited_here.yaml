@@ -1,0 +1,47 @@
+# Files and directories here are not edited in the docker.github.io repo.
+# Instead, they are edited in the appropriate upstream repo and pulled
+# into this repo periodically, or they are automatically generated. The intent
+# is that if you submit a PR with changes to these files or directories, a CI
+# job will fail in the PR, indicating that it should not be merged. THIS IS NOT
+# YET IMPLEMENTED!! The PR reviewer should make sure no files here are in the PR.
+
+# If you need to edit these files or directories, submit a PR in the repo and
+# directory listed in "source" below.
+
+# Make sure directories have the trailing slash, keep the list alphabetical
+
+overrides:
+- path: /apidocs/
+  description: "Auto-generated API docs for Docker Cloud, DTR, UCP. File an issue."
+
+- path: /engine/api/
+  description: "ReDoc/Swagger API specs"
+  source: https://github.com/docker/docker-ce/tree/master/components/engine/api
+
+- path: /engine/deprecated.md
+  description: Docker Engine deprecation reference
+  source: https://github.com/docker/cli/tree/master/docs/deprecated.md
+
+- path: /engine/extend/
+  description: References for Docker Engine plugin system
+  source: https://github.com/docker/cli/tree/master/docs/extend/
+
+- path: /engine/reference/
+  description: Docker Engine CLI and API references
+  source: https://github.com/docker/cli/tree/master/docs/reference/
+
+- path: /notary/reference/
+  description: Reference docs for Docker Notary
+  source: https://github.com/docker/notary/tree/master/docs/reference/
+
+- path: /registry/configuration/
+  description: Reference docs for configuring Docker Registry
+  source: https://github.com/docker/distribution/tree/release/2.5/docs/configuration.md
+
+- path: /registry/spec/
+  description: Docker Registry API references
+  source: https://github.com/docker/distribution/tree/release/2.5/docs/spec/
+
+- path: /compliance/
+  description: Docker compliance
+  source: https://github.com/docker/compliance/tree/master/docs/compliance

@@ -1,6 +1,0 @@
----
-cascade:
-  build:
-    render: never
----
-

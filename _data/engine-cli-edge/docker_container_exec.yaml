@@ -1,0 +1,89 @@
+command: docker container exec
+short: Run a command in a running container
+long: Run a command in a running container
+usage: docker container exec [OPTIONS] CONTAINER COMMAND [ARG...]
+pname: docker container
+plink: docker_container.yaml
+options:
+- option: detach
+  shorthand: d
+  value_type: bool
+  default_value: "false"
+  description: 'Detached mode: run command in the background'
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: detach-keys
+  value_type: string
+  description: Override the key sequence for detaching a container
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: env
+  shorthand: e
+  value_type: list
+  description: Set environment variables
+  deprecated: false
+  min_api_version: "1.25"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: interactive
+  shorthand: i
+  value_type: bool
+  default_value: "false"
+  description: Keep STDIN open even if not attached
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: privileged
+  value_type: bool
+  default_value: "false"
+  description: Give extended privileges to the command
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: tty
+  shorthand: t
+  value_type: bool
+  default_value: "false"
+  description: Allocate a pseudo-TTY
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: user
+  shorthand: u
+  value_type: string
+  description: 'Username or UID (format: <name|uid>[:<group|gid>])'
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: workdir
+  shorthand: w
+  value_type: string
+  description: Working directory inside the container
+  deprecated: false
+  min_api_version: "1.35"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

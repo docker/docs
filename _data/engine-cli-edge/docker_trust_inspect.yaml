@@ -1,0 +1,173 @@
+command: docker trust inspect
+short: Return low-level information about keys and signatures
+long: |-
+  `docker trust inspect` provides low-level JSON information on signed repositories.
+  This includes all image tags that are signed, who signed them, and who can sign
+  new tags.
+usage: docker trust inspect IMAGE[:TAG] [IMAGE[:TAG]...]
+pname: docker trust
+plink: docker_trust.yaml
+options:
+- option: pretty
+  value_type: bool
+  default_value: "false"
+  description: Print the information in a human friendly format
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+examples: "### Get low-level details about signatures for a single image tag\n\nUse
+  the `docker trust inspect` to get trust information about an image. The\nfollowing
+  example prints trust information for the `alpine:latest` image:\n\n```bash\n$ docker
+  trust inspect alpine:latest\n[\n  {\n    \"Name\": \"alpine:latest\",\n    \"SignedTags\":
+  [\n      {\n        \"SignedTag\": \"latest\",\n        \"Digest\": \"d6bfc3baf615dc9618209a8d607ba2a8103d9c8a405b3bd8741d88b4bef36478\",\n
+  \       \"Signers\": [\n          \"Repo Admin\"\n        ]\n      }\n    ],\n    \"Signers\":
+  [],\n    \"AdminstrativeKeys\": [\n      {\n        \"Name\": \"Repository\",\n
+  \       \"Keys\": [\n            {\n                \"ID\": \"5a46c9aaa82ff150bb7305a2d17d0c521c2d784246807b2dc611f436a69041fd\"\n
+  \           }\n        ]\n      },\n      {\n        \"Name\": \"Root\",\n        \"Keys\":
+  [\n            {\n                \"ID\": \"a2489bcac7a79aa67b19b96c4a3bf0c675ffdf00c6d2fabe1a5df1115e80adce\"\n
+  \           }\n        ]\n      }\n    ]\n  }\n]\n```\n\nThe `SignedTags` key will
+  list the `SignedTag` name, its `Digest`,\nand the `Signers` responsible for the
+  signature.\n\n`AdministrativeKeys` will list the `Repository` and `Root` keys.\n\nIf
+  signers are set up for the repository via other `docker trust`\ncommands, `docker
+  trust inspect` includes a `Signers` key:\n\n```bash\n$ docker trust inspect my-image:purple\n[\n
+  \ {\n    \"Name\": \"my-image:purple\",\n    \"SignedTags\": [\n      {\n        \"SignedTag\":
+  \"purple\",\n        \"Digest\": \"941d3dba358621ce3c41ef67b47cf80f701ff80cdf46b5cc86587eaebfe45557\",\n
+  \       \"Signers\": [\n          \"alice\",\n          \"bob\",\n          \"carol\"\n
+  \       ]\n      }\n    ],\n    \"Signers\": [\n      {\n        \"Name\": \"alice\",\n
+  \       \"Keys\": [\n            {\n                \"ID\": \"04dd031411ed671ae1e12f47ddc8646d98f135090b01e54c3561e843084484a3\"\n
+  \           },\n            {\n                \"ID\": \"6a11e4898a4014d400332ab0e096308c844584ff70943cdd1d6628d577f45fd8\"\n
+  \           }\n        ]\n      },\n      {\n        \"Name\": \"bob\",\n        \"Keys\":
+  [\n            {\n                \"ID\": \"433e245c656ae9733cdcc504bfa560f90950104442c4528c9616daa45824ccba\"\n
+  \           }\n        ]\n      },\n      {\n        \"Name\": \"carol\",\n        \"Keys\":
+  [\n            {\n                \"ID\": \"d32fa8b5ca08273a2880f455fcb318da3dc80aeae1a30610815140deef8f30d9\"\n
+  \           },\n            {\n                \"ID\": \"9a8bbec6ba2af88a5fad6047d428d17e6d05dbdd03d15b4fc8a9a0e8049cd606\"\n
+  \           }\n        ]\n      }\n    ],\n    \"AdminstrativeKeys\": [\n      {\n
+  \       \"Name\": \"Repository\",\n        \"Keys\": [\n            {\n                \"ID\":
+  \"27df2c8187e7543345c2e0bf3a1262e0bc63a72754e9a7395eac3f747ec23a44\"\n            }\n
+  \       ]\n      },\n      {\n        \"Name\": \"Root\",\n        \"Keys\": [\n
+  \           {\n                \"ID\": \"40b66ccc8b176be8c7d365a17f3e046d1c3494e053dd57cfeacfe2e19c4f8e8f\"\n
+  \           }\n        ]\n      }\n    ]\n  }\n]\n```\n\nIf the image tag is unsigned
+  or unavailable, `docker trust inspect` does not\ndisplay any signed tags.\n\n```bash\n$
+  docker trust inspect unsigned-img\nNo signatures or cannot access unsigned-img\n```\n\nHowever,
+  if other tags are signed in the same image repository,\n`docker trust inspect` reports
+  relevant key information:\n\n```bash\n$ docker trust inspect alpine:unsigned\n[\n
+  \ {\n    \"Name\": \"alpine:unsigned\",\n    \"Signers\": [],\n    \"AdminstrativeKeys\":
+  [\n      {\n        \"Name\": \"Repository\",\n        \"Keys\": [\n            {\n
+  \               \"ID\": \"5a46c9aaa82ff150bb7305a2d17d0c521c2d784246807b2dc611f436a69041fd\"\n
+  \           }\n        ]\n      },\n      {\n        \"Name\": \"Root\",\n        \"Keys\":
+  [\n            {\n                \"ID\": \"a2489bcac7a79aa67b19b96c4a3bf0c675ffdf00c6d2fabe1a5df1115e80adce\"\n
+  \           }\n        ]\n      }\n    ]\n  }\n]\n```\n\n### Get details about signatures
+  for all image tags in a repository\n\nIf no tag is specified, `docker trust inspect`
+  will report details for all\nsigned tags in the repository:\n\n```bash\n$ docker
+  trust inspect alpine\n[\n    {\n        \"Name\": \"alpine\",\n        \"SignedTags\":
+  [\n            {\n                \"SignedTag\": \"3.5\",\n                \"Digest\":
+  \"b007a354427e1880de9cdba533e8e57382b7f2853a68a478a17d447b302c219c\",\n                \"Signers\":
+  [\n                    \"Repo Admin\"\n                ]\n            },\n            {\n
+  \               \"SignedTag\": \"3.6\",\n                \"Digest\": \"d6bfc3baf615dc9618209a8d607ba2a8103d9c8a405b3bd8741d88b4bef36478\",\n
+  \               \"Signers\": [\n                    \"Repo Admin\"\n                ]\n
+  \           },\n            {\n                \"SignedTag\": \"edge\",\n                \"Digest\":
+  \"23e7d843e63a3eee29b6b8cfcd10e23dd1ef28f47251a985606a31040bf8e096\",\n                \"Signers\":
+  [\n                    \"Repo Admin\"\n                ]\n            },\n            {\n
+  \               \"SignedTag\": \"latest\",\n                \"Digest\": \"d6bfc3baf615dc9618209a8d607ba2a8103d9c8a405b3bd8741d88b4bef36478\",\n
+  \               \"Signers\": [\n                    \"Repo Admin\"\n                ]\n
+  \           }\n        ],\n        \"Signers\": [],\n        \"AdminstrativeKeys\":
+  [\n            {\n                \"Name\": \"Repository\",\n                \"Keys\":
+  [\n                    {\n                        \"ID\": \"5a46c9aaa82ff150bb7305a2d17d0c521c2d784246807b2dc611f436a69041fd\"\n
+  \                   }\n                ]\n            },\n            {\n                \"Name\":
+  \"Root\",\n                \"Keys\": [\n                    {\n                        \"ID\":
+  \"a2489bcac7a79aa67b19b96c4a3bf0c675ffdf00c6d2fabe1a5df1115e80adce\"\n                    }\n
+  \               ]\n            }\n        ]\n    }\n]\n```\n\n\n### Get details
+  about signatures for multiple images\n\n`docker trust inspect` can take multiple
+  repositories and images as arguments,\nand reports the results in an ordered list:\n\n```bash\n$
+  docker trust inspect alpine notary\n[\n    {\n        \"Name\": \"alpine\",\n        \"SignedTags\":
+  [\n            {\n                \"SignedTag\": \"3.5\",\n                \"Digest\":
+  \"b007a354427e1880de9cdba533e8e57382b7f2853a68a478a17d447b302c219c\",\n                \"Signers\":
+  [\n                    \"Repo Admin\"\n                ]\n            },\n            {\n
+  \               \"SignedTag\": \"3.6\",\n                \"Digest\": \"d6bfc3baf615dc9618209a8d607ba2a8103d9c8a405b3bd8741d88b4bef36478\",\n
+  \               \"Signers\": [\n                    \"Repo Admin\"\n                ]\n
+  \           },\n            {\n                \"SignedTag\": \"edge\",\n                \"Digest\":
+  \"23e7d843e63a3eee29b6b8cfcd10e23dd1ef28f47251a985606a31040bf8e096\",\n                \"Signers\":
+  [\n                    \"Repo Admin\"\n                ]\n            },\n            {\n
+  \               \"SignedTag\": \"integ-test-base\",\n                \"Digest\":
+  \"3952dc48dcc4136ccdde37fbef7e250346538a55a0366e3fccc683336377e372\",\n                \"Signers\":
+  [\n                    \"Repo Admin\"\n                ]\n            },\n            {\n
+  \               \"SignedTag\": \"latest\",\n                \"Digest\": \"d6bfc3baf615dc9618209a8d607ba2a8103d9c8a405b3bd8741d88b4bef36478\",\n
+  \               \"Signers\": [\n                    \"Repo Admin\"\n                ]\n
+  \           }\n        ],\n        \"Signers\": [],\n        \"AdminstrativeKeys\":
+  [\n            {\n                \"Name\": \"Repository\",\n                \"Keys\":
+  [\n                    {\n                        \"ID\": \"5a46c9aaa82ff150bb7305a2d17d0c521c2d784246807b2dc611f436a69041fd\"\n
+  \                   }\n                ]\n            },\n            {\n                \"Name\":
+  \"Root\",\n                \"Keys\": [\n                    {\n                        \"ID\":
+  \"a2489bcac7a79aa67b19b96c4a3bf0c675ffdf00c6d2fabe1a5df1115e80adce\"\n                    }\n
+  \               ]\n            }\n        ]\n    },\n    {\n        \"Name\": \"notary\",\n
+  \       \"SignedTags\": [\n            {\n                \"SignedTag\": \"server\",\n
+  \               \"Digest\": \"71f64ab718a3331dee103bc5afc6bc492914738ce37c2d2f127a8133714ecf5c\",\n
+  \               \"Signers\": [\n                    \"Repo Admin\"\n                ]\n
+  \           },\n            {\n                \"SignedTag\": \"signer\",\n                \"Digest\":
+  \"a6122d79b1e74f70b5dd933b18a6d1f99329a4728011079f06b245205f158fe8\",\n                \"Signers\":
+  [\n                    \"Repo Admin\"\n                ]\n            }\n        ],\n
+  \       \"Signers\": [],\n        \"AdminstrativeKeys\": [\n            {\n                \"Name\":
+  \"Root\",\n                \"Keys\": [\n                    {\n                        \"ID\":
+  \"8cdcdef5bd039f4ab5a029126951b5985eebf57cabdcdc4d21f5b3be8bb4ce92\"\n                    }\n
+  \               ]\n            },\n            {\n                \"Name\": \"Repository\",\n
+  \               \"Keys\": [\n                    {\n                        \"ID\":
+  \"85bfd031017722f950d480a721f845a2944db26a3dc084040a70f1b0d9bbb3df\"\n                    }\n
+  \               ]\n            }\n        ]\n    }\n]\n```\n\n### Formatting\n\nYou
+  can print the inspect output in a human-readable format instead of the default\nJSON
+  output, by using the `--pretty` option:\n\n### Get details about signatures for
+  a single image tag\n\n```bash\n$ docker trust inspect --pretty alpine:latest\n\nSIGNED
+  TAG          DIGEST                                                             SIGNERS\nlatest
+  \             1072e499f3f655a032e88542330cf75b02e7bdf673278f701d7ba61629ee3ebe   (Repo
+  Admin)\n\nAdministrative keys for alpine:latest:\nRepository Key:\t5a46c9aaa82ff150bb7305a2d17d0c521c2d784246807b2dc611f436a69041fd\nRoot
+  Key:\ta2489bcac7a79aa67b19b96c4a3bf0c675ffdf00c6d2fabe1a5df1115e80adce\n```\n\nThe
+  `SIGNED TAG` is the signed image tag with a unique content-addressable\n`DIGEST`.
+  `SIGNERS` lists all entities who have signed.\n\nThe administrative keys listed
+  specify the root key of trust, as well as\nthe administrative repository key. These
+  keys are responsible for modifying\nsigners, and rotating keys for the signed repository.\n\nIf
+  signers are set up for the repository via other `docker trust` commands,\n`docker
+  trust inspect --pretty` displays them appropriately as a `SIGNER`\nand specify their
+  `KEYS`:\n\n```bash\n$ docker trust inspect --pretty my-image:purple\nSIGNED TAG
+  \         DIGEST                                                              SIGNERS\npurple
+  \             941d3dba358621ce3c41ef67b47cf80f701ff80cdf46b5cc86587eaebfe45557    alice,
+  bob, carol\n\nList of signers and their keys:\n\nSIGNER              KEYS\nalice
+  \              47caae5b3e61, a85aab9d20a4\nbob                 034370bcbd77, 82a66673242c\ncarol
+  \              b6f9f8e1aab0\n\nAdministrative keys for my-image:\nRepository Key:\t27df2c8187e7543345c2e0bf3a1262e0bc63a72754e9a7395eac3f747ec23a44\nRoot
+  Key:\t40b66ccc8b176be8c7d365a17f3e046d1c3494e053dd57cfeacfe2e19c4f8e8f\n```\n\nHowever,
+  if other tags are signed in the same image repository,\n`docker trust inspect` reports
+  relevant key information.\n\n```bash\n$ docker trust inspect --pretty alpine:unsigned\n\nNo
+  signatures for alpine:unsigned\n\n\nAdministrative keys for alpine:unsigned:\nRepository
+  Key:\t5a46c9aaa82ff150bb7305a2d17d0c521c2d784246807b2dc611f436a69041fd\nRoot Key:\ta2489bcac7a79aa67b19b96c4a3bf0c675ffdf00c6d2fabe1a5df1115e80adce\n```\n\n###
+  Get details about signatures for all image tags in a repository\n\n```bash\n$ docker
+  trust inspect --pretty alpine\nSIGNED TAG          DIGEST                                                             SIGNERS\n2.6
+  \                9ace551613070689a12857d62c30ef0daa9a376107ec0fff0e34786cedb3399b
+  \  (Repo Admin)\n2.7                 9f08005dff552038f0ad2f46b8e65ff3d25641747d3912e3ea8da6785046561a
+  \  (Repo Admin)\n3.1                 d9477888b78e8c6392e0be8b2e73f8c67e2894ff9d4b8e467d1488fcceec21c8
+  \  (Repo Admin)\n3.2                 19826d59171c2eb7e90ce52bfd822993bef6a6fe3ae6bb4a49f8c1d0a01e99c7
+  \  (Repo Admin)\n3.3                 8fd4b76819e1e5baac82bd0a3d03abfe3906e034cc5ee32100d12aaaf3956dc7
+  \  (Repo Admin)\n3.4                 833ad81ace8277324f3ca8c91c02bdcf1d13988d8ecf8a3f97ecdd69d0390ce9
+  \  (Repo Admin)\n3.5                 af2a5bd2f8de8fc1ecabf1c76611cdc6a5f1ada1a2bdd7d3816e121b70300308
+  \  (Repo Admin)\n3.6                 1072e499f3f655a032e88542330cf75b02e7bdf673278f701d7ba61629ee3ebe
+  \  (Repo Admin)\nedge                79d50d15bd7ea48ea00cf3dd343b0e740c1afaa8e899bee475236ef338e1b53b
+  \  (Repo Admin)\nlatest              1072e499f3f655a032e88542330cf75b02e7bdf673278f701d7ba61629ee3ebe
+  \  (Repo Admin)\n\nAdministrative keys for alpine:\nRepository Key:\t5a46c9aaa82ff150bb7305a2d17d0c521c2d784246807b2dc611f436a69041fd\nRoot
+  Key:\ta2489bcac7a79aa67b19b96c4a3bf0c675ffdf00c6d2fabe1a5df1115e80adce\n```\n\nHere's
+  an example with signers that are set up by `docker trust` commands:\n\n```bash\n$
+  docker trust inspect --pretty my-image\nSIGNED TAG          DIGEST                                                              SIGNERS\nred
+  \                852cc04935f930a857b630edc4ed6131e91b22073bcc216698842e44f64d2943
+  \   alice\nblue                f1c38dbaeeb473c36716f6494d803fbfbe9d8a76916f7c0093f227821e378197
+  \   alice, bob\ngreen               cae8fedc840f90c8057e1c24637d11865743ab1e61a972c1c9da06ec2de9a139
+  \   alice, bob\nyellow              9cc65fc3126790e683d1b92f307a71f48f75fa7dd47a7b03145a123eaf0b45ba
+  \   carol\npurple              941d3dba358621ce3c41ef67b47cf80f701ff80cdf46b5cc86587eaebfe45557
+  \   alice, bob, carol\norange              d6c271baa6d271bcc24ef1cbd65abf39123c17d2e83455bdab545a1a9093fc1c
+  \   alice\n\nList of signers and their keys for my-image:\n\nSIGNER              KEYS\nalice
+  \              47caae5b3e61, a85aab9d20a4\nbob                 034370bcbd77, 82a66673242c\ncarol
+  \              b6f9f8e1aab0\n\nAdministrative keys for my-image:\nRepository Key:\t27df2c8187e7543345c2e0bf3a1262e0bc63a72754e9a7395eac3f747ec23a44\nRoot
+  Key:\t40b66ccc8b176be8c7d365a17f3e046d1c3494e053dd57cfeacfe2e19c4f8e8f\n```"
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

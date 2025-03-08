@@ -1,0 +1,32 @@
+command: docker image load
+short: Load an image from a tar archive or STDIN
+long: Load an image from a tar archive or STDIN
+usage: docker image load [OPTIONS]
+pname: docker image
+plink: docker_image.yaml
+options:
+- option: input
+  shorthand: i
+  value_type: string
+  description: Read from tar archive file, instead of STDIN
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: quiet
+  shorthand: q
+  value_type: bool
+  default_value: "false"
+  description: Suppress the load output
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

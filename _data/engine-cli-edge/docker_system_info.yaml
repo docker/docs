@@ -1,0 +1,22 @@
+command: docker system info
+short: Display system-wide information
+long: Display system-wide information
+usage: docker system info [OPTIONS]
+pname: docker system
+plink: docker_system.yaml
+options:
+- option: format
+  shorthand: f
+  value_type: string
+  description: Format the output using the given Go template
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

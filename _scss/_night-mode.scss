@@ -1,0 +1,340 @@
+/*
+*
+* night mode
+*
+*/
+
+body.night {
+    background-color: $bg-body-night;
+    color: $body-text-color-night;
+    p,
+    .rating-nero-value,
+    .reading-time {
+        color: $body-text-color-night!important;
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    .component h3 {
+        color: $white!important;
+    }
+    a,
+    .toc-nav i.fa {
+        color: $primary-links-night;
+    }
+    ol,
+    ul {
+        color: #c7c9ca !important;
+    }
+    .header {
+        background-color: #101c29!important;
+        animation: none!important;
+    }
+    hr {
+        border-top: 1px solid #4f6071;
+    }
+    .hero-text h1,
+    div#side-toc-title {
+        color: $white;
+    }
+    .nav-secondary {
+        background: $bg-secondary-night;
+    }
+    .nav-secondary input[type=search] {
+        background: rgba(76, 76, 76, 0.47) url(/images/search.png) no-repeat;
+        background-position: 10px 9px;
+        color: $white;
+    }
+    .nav-secondary-tabs .search-form input[type=search] {
+        background: rgba(16, 28, 41, 0.6) url(/images/search.png) no-repeat;
+        background-position: 10px 9px;
+    }
+    .nav-secondary-tabs .search-form input[type=search]:focus {
+        background: rgba(255,255,255,0.17) url(/images/search.png) no-repeat;
+        background-position: 10px 9px;
+    }
+    .nav-secondary .search-form input[type=search]:focus {
+        background: rgba(255, 255, 255, 0.17) url(/images/search.png) no-repeat!important;
+        background-position: 10px 9px!important;
+    }
+    .sidebar-home,
+    .sidebar,
+    #sidebar-wrapper,
+    #sidebar-wrapper-home,
+    .sidebar-home .affix,
+    #sidebar-right,
+    #sidebar-right.affix,
+    .col-toc,
+    .col-nav {
+        background-color: $bg-sidebar-night;
+        border: none;
+    }
+    .nav-secondary-tabs {
+        background-color: rgba(15, 28, 42, 0.35);
+        border-top: 1px solid rgba(68, 77, 87, 0.38);
+        border-bottom: 1px solid #29343f;
+    }
+    .nav-secondary-tabs.affix {
+        background: $bg-secondary-night;
+    }
+    .nav-sidebar ul li a.active,
+    .nav-sidebar.nav>li>a:focus,
+    .toc-nav li a.active {
+        color: $active-sidebar-night;
+        background: #0a151a;
+        border-left: 4px solid #077CBC;//add to variables
+    }
+    .tabs li.active a {
+        border-bottom: 4px solid #077CBC;//add to variables
+    }
+    .slider {
+        background-color: #344658;
+        border: 1px solid #192837;
+    }
+    ul {
+        color: $body-text-night;
+    }
+    blockquote {
+        background: #1f3341;
+    }
+    table {
+        border: 1px solid #1b1a1a;
+        color: #cbdbe6;
+    }
+    table>tbody>tr:nth-of-type(even) {
+        background-color: #1f3341;
+    }
+    thead {
+        background: #2b4252;
+    }
+    pre {
+        display: block;
+        padding: 9.5px;
+        margin: 0 0 10px;
+        font-size: 13px;
+        line-height: 1.42857143;
+        color: #f3f3f3;
+        word-break: break-all;
+        word-wrap: break-word;
+        background-color: #0a121b !important;
+        border: 1px solid $black;
+        border-radius: 4px;
+    }
+    code {
+        padding: 3px 7px;
+        color: #c1f1f0 !important;
+        border-radius: 2px;
+        background: #0a121b !important;
+    }
+    pre>code {
+        padding: 0px;
+    }
+    .nav-secondary .dropdown-btn {
+        color: #d0e8ff;
+    }
+    .outline-btn {
+        background: #101c29;
+        border: 1px solid;
+        border-color: #37404a;
+        text-decoration: none;
+        margin: 0;
+    }
+    a.button.outline-btn {
+        color: #a7e2ff;
+        float: none;
+        margin-bottom: 30px;
+        display: inline-block;
+    }
+    .component img, .component-full-icon img {
+        opacity: 1;
+        -webkit-filter: grayscale(100%);
+        filter: grayscale(100%);
+    }
+    .hljs {
+        color: #f5f5f5!important;
+    }
+    .hljs-tag,
+    .hljs-name,
+    .hljs-attribute {
+        color: #e3e3f2!important;
+        font-weight: normal;
+    }
+    .hljs-keyword,
+    .hljs-selector-tag,
+    .hljs-subst {
+        color: #f5f5f5!important;
+    }
+    div#autocompleteResults {
+        background: $bg-search-results-night;
+        border: 1px solid $black;
+        color: $white;
+        padding: 20px 0 15px 0px;
+        margin: 10px 0 0 0;
+        position: absolute;
+        width: 800px;
+    }
+    ul.autocompleteList {
+        list-style: none;
+    }
+    .autocompleteList li {
+        color: #b4c3d2;
+        padding: 5px 0 7px 0;
+    }
+    div#autocompleteResults span {
+        color: #b7a4de;
+    }
+    .autocompleteTitle {
+        font-weight: bold;
+    }
+    .autocompleteUrl,
+    .autocompleteKeywords,
+    .autocompleteDescription {
+        line-height: normal;
+    }
+    span.reading-time {
+        font-style: italic;
+        font-size: 12px;
+        display: block;
+        color: #bfabe5;
+    }
+    /** for google results styles - forgive us css gods **/
+    .gsc-control-cse {
+        border-color: #192837!important;
+        background-color: #192837!important;
+    }
+    .gsc-webResult.gsc-result, .gsc-results .gsc-imageResult {
+        border-color: #192837!important;
+        background-color: #192837!important;
+    }
+    .gsc-webResult.gsc-result:hover, .gsc-imageResult:hover {
+        border-color: #25374a!important;
+        background-color: #192837!important;
+    }
+    a.gs-title {
+        color: #cccccc !important;
+        text-decoration: none;
+    }
+    .gs-webResult .gs-snippet, .gs-imageResult .gs-snippet, .gs-fileFormatType {
+        color: #a8b0b7!important;
+    }
+    .gs-webResult.gs-result a.gs-title:link, .gs-webResult.gs-result a.gs-title:link b, .gs-imageResult a.gs-title:link, .gs-imageResult a.gs-title:link b {
+        color: #a9e4ff!important;
+    }
+    .component {
+        background: #101c29;
+    }
+    .component-full {
+        background: #101c29;
+    }
+    .transparent-btn {
+        background-color: rgb(0, 135, 200);
+        box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        text-shadow: 0 1px rgba(0, 0, 0, 0.2);
+    }
+    .footer {
+        background-color: $bg-footer-night;
+        border-top: 1px solid rgb(31, 52, 66);
+    }
+    .footer_links li a {
+        color: #b2b2b2;
+    }
+    .bottom_footer {
+        border-top: 1px solid rgb(78, 93, 106);
+    }
+    .footer_social_nav ul li a {
+        background-color: #2f2f2f;
+    }
+    /** force blockquote styles **/
+    blockquote.warning {
+        color: #ff7e7a!important;
+    }
+    blockquote.warning p:first-child {
+        color: #ff7e7a!important;
+    }
+    blockquote.important {
+        border-left-color: #f5ac45!important;
+    }
+    blockquote.important p:first-child {
+        color: #f5ac45!important;
+    }
+    /** syntax highlighting **/
+    .highlight .nt {
+        color: #e8a0e8;
+    }
+    .highlight .k {
+        color: #da5ada;
+    }
+    /*
+    *
+    * Primary Global Menu Overrides
+    *
+    */
+    .dropdown-menu{
+        background: $black;
+    }
+    .dropdown-menu>li>a {
+        color: #d0e8ff!important;
+    }
+    h6.dropdown-header {
+        color: $white;
+    }
+    /** apply to images with garbled text **/
+    img.white-bg {
+	  background-color: white;
+    }
+}
+
+
+/*
+*
+* night mode component overrides
+*
+*/
+
+body.night {
+    /* accordion */
+.panel {
+    color: #d3d4d4;
+    margin-bottom: 20px;
+    background-color: #24394c;
+    }
+    .panel-default {
+        border-color: #374656;
+        >.panel-heading {
+            color: #c0c3c4;
+            background-color: #101c29;
+            border-color: #2f4050;
+        }
+    }
+    .panel-body {
+        padding: 15px;
+        background: rgb(35, 54, 72);
+        color: #bcbfc3;
+    }
+    /** tabs **/
+    .nav-tabs {
+        border-bottom: 1px solid #4f6071;
+    }
+    .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+        color: $white;
+        cursor: default;
+        background-color: #4e6071;
+        border: 1px solid transparent;
+        border-bottom-color: transparent;
+    }
+    .popover {
+        color: $black;
+    }
+    .pagination>li>a, .pagination>li>span {
+        background-color: #0f1c2a!important;
+        border: 1px solid #0f1c2a!important;
+    }
+    .pagination>.active>a {
+        background: #000!important;
+        color: $white!important;
+    }
+}

@@ -1,0 +1,225 @@
+command: docker update
+short: Update configuration of one or more containers
+long: |-
+  The `docker update` command dynamically updates container configuration.
+  You can use this command to prevent containers from consuming too many
+  resources from their Docker host.  With a single command, you can place
+  limits on a single container or on many. To specify more than one container,
+  provide space-separated list of container names or IDs.
+
+  With the exception of the `--kernel-memory` option, you can specify these
+  options on a running or a stopped container. On kernel version older than
+  4.6, you can only update `--kernel-memory` on a stopped container or on
+  a running container with kernel memory initialized.
+
+  > **Warning**: The `docker update` and `docker container update` commands are
+  > not supported for Windows containers.
+  {: .warning }
+usage: docker update [OPTIONS] CONTAINER [CONTAINER...]
+pname: docker
+plink: docker.yaml
+options:
+- option: blkio-weight
+  value_type: uint16
+  default_value: "0"
+  description: |
+    Block IO (relative weight), between 10 and 1000, or 0 to disable (default 0)
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: cpu-period
+  value_type: int64
+  default_value: "0"
+  description: Limit CPU CFS (Completely Fair Scheduler) period
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: cpu-quota
+  value_type: int64
+  default_value: "0"
+  description: Limit CPU CFS (Completely Fair Scheduler) quota
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: cpu-rt-period
+  value_type: int64
+  default_value: "0"
+  description: Limit the CPU real-time period in microseconds
+  deprecated: false
+  min_api_version: "1.25"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: cpu-rt-runtime
+  value_type: int64
+  default_value: "0"
+  description: Limit the CPU real-time runtime in microseconds
+  deprecated: false
+  min_api_version: "1.25"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: cpu-shares
+  shorthand: c
+  value_type: int64
+  default_value: "0"
+  description: CPU shares (relative weight)
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: cpus
+  value_type: decimal
+  description: Number of CPUs
+  deprecated: false
+  min_api_version: "1.29"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: cpuset-cpus
+  value_type: string
+  description: CPUs in which to allow execution (0-3, 0,1)
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: cpuset-mems
+  value_type: string
+  description: MEMs in which to allow execution (0-3, 0,1)
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: kernel-memory
+  value_type: bytes
+  default_value: "0"
+  description: Kernel memory limit
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: memory
+  shorthand: m
+  value_type: bytes
+  default_value: "0"
+  description: Memory limit
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: memory-reservation
+  value_type: bytes
+  default_value: "0"
+  description: Memory soft limit
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: memory-swap
+  value_type: bytes
+  default_value: "0"
+  description: |
+    Swap limit equal to memory plus swap: '-1' to enable unlimited swap
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: restart
+  value_type: string
+  description: Restart policy to apply when a container exits
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+examples: |-
+  The following sections illustrate ways to use this command.
+
+  ### Update a container's cpu-shares
+
+  To limit a container's cpu-shares to 512, first identify the container
+  name or ID. You can use `docker ps` to find these values. You can also
+  use the ID returned from the `docker run` command.  Then, do the following:
+
+  ```bash
+  $ docker update --cpu-shares 512 abebf7571666
+  ```
+
+  ### Update a container with cpu-shares and memory
+
+  To update multiple resource configurations for multiple containers:
+
+  ```bash
+  $ docker update --cpu-shares 512 -m 300M abebf7571666 hopeful_morse
+  ```
+
+  ### Update a container's kernel memory constraints
+
+  You can update a container's kernel memory limit using the `--kernel-memory`
+  option. On kernel version older than 4.6, this option can be updated on a
+  running container only if the container was started with `--kernel-memory`.
+  If the container was started *without* `--kernel-memory` you need to stop
+  the container before updating kernel memory.
+
+  For example, if you started a container with this command:
+
+  ```bash
+  $ docker run -dit --name test --kernel-memory 50M ubuntu bash
+  ```
+
+  You can update kernel memory while the container is running:
+
+  ```bash
+  $ docker update --kernel-memory 80M test
+  ```
+
+  If you started a container *without* kernel memory initialized:
+
+  ```bash
+  $ docker run -dit --name test2 --memory 300M ubuntu bash
+  ```
+
+  Update kernel memory of running container `test2` will fail. You need to stop
+  the container before updating the `--kernel-memory` setting. The next time you
+  start it, the container uses the new value.
+
+  Kernel version newer than (include) 4.6 does not have this limitation, you
+  can use `--kernel-memory` the same way as other options.
+
+  ### Update a container's restart policy
+
+  You can change a container's restart policy on a running container. The new
+  restart policy takes effect instantly after you run `docker update` on a
+  container.
+
+  To update restart policy for one or more containers:
+
+  ```bash
+  $ docker update --restart=on-failure:3 abebf7571666 hopeful_morse
+  ```
+
+  Note that if the container is started with "--rm" flag, you cannot update the restart
+  policy for it. The `AutoRemove` and `RestartPolicy` are mutually exclusive for the
+  container.
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

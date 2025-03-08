@@ -1,0 +1,124 @@
+command: docker exec
+short: Run a command in a running container
+long: |-
+  The `docker exec` command runs a new command in a running container.
+
+  The command started using `docker exec` only runs while the container's primary
+  process (`PID 1`) is running, and it is not restarted if the container is
+  restarted.
+
+  COMMAND will run in the default directory of the container. If the
+  underlying image has a custom directory specified with the WORKDIR directive
+  in its Dockerfile, this will be used instead.
+
+  COMMAND should be an executable, a chained or a quoted command
+  will not work. Example: `docker exec -ti my_container "echo a && echo b"` will
+  not work, but `docker exec -ti my_container sh -c "echo a && echo b"` will.
+usage: docker exec [OPTIONS] CONTAINER COMMAND [ARG...]
+pname: docker
+plink: docker.yaml
+options:
+- option: detach
+  shorthand: d
+  value_type: bool
+  default_value: "false"
+  description: 'Detached mode: run command in the background'
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: detach-keys
+  value_type: string
+  description: Override the key sequence for detaching a container
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: env
+  shorthand: e
+  value_type: list
+  description: Set environment variables
+  deprecated: false
+  min_api_version: "1.25"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: interactive
+  shorthand: i
+  value_type: bool
+  default_value: "false"
+  description: Keep STDIN open even if not attached
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: privileged
+  value_type: bool
+  default_value: "false"
+  description: Give extended privileges to the command
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: tty
+  shorthand: t
+  value_type: bool
+  default_value: "false"
+  description: Allocate a pseudo-TTY
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: user
+  shorthand: u
+  value_type: string
+  description: 'Username or UID (format: <name|uid>[:<group|gid>])'
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: workdir
+  shorthand: w
+  value_type: string
+  description: Working directory inside the container
+  deprecated: false
+  min_api_version: "1.35"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+examples: "### Run `docker exec` on a running container\n\nFirst, start a container.\n\n```bash\n$
+  docker run --name ubuntu_bash --rm -i -t ubuntu bash\n```\n\nThis will create a
+  container named `ubuntu_bash` and start a Bash session.\n\nNext, execute a command
+  on the container.\n\n```bash\n$ docker exec -d ubuntu_bash touch /tmp/execWorks\n```\n\nThis
+  will create a new file `/tmp/execWorks` inside the running container\n`ubuntu_bash`,
+  in the background.\n\nNext, execute an interactive `bash` shell on the container.\n\n```bash\n$
+  docker exec -it ubuntu_bash bash\n```\n\nThis will create a new Bash session in
+  the container `ubuntu_bash`.\n\nNext, set an environment variable in the current
+  bash session.\n\n```bash\n$ docker exec -it -e VAR=1 ubuntu_bash bash\n```\n\nThis
+  will create a new Bash session in the container `ubuntu_bash` with environment \nvariable
+  `$VAR` set to \"1\". Note that this environment variable will only be valid \non
+  the current Bash session.\n\nBy default `docker exec` command runs in the same working
+  directory set when container was created.\n\n```bash\n$ docker exec -it ubuntu_bash
+  pwd\n/\n```\n\nYou can select working directory for the command to execute into\n\n```bash\n$
+  docker exec -it -w /root ubuntu_bash pwd\n/root\n```\n\n\n### Try to run `docker
+  exec` on a paused container\n\nIf the container is paused, then the `docker exec`
+  command will fail with an error:\n\n```bash\n$ docker pause test\n\ntest\n\n$ docker
+  ps\n\nCONTAINER ID        IMAGE               COMMAND             CREATED             STATUS
+  \                  PORTS               NAMES\n1ae3b36715d2        ubuntu:latest
+  \      \"bash\"              17 seconds ago      Up 16 seconds (Paused)                       test\n\n$
+  docker exec test ls\n\nFATA[0000] Error response from daemon: Container test is
+  paused, unpause the container before exec\n\n$ echo $?\n1\n```"
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

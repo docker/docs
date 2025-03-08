@@ -1,0 +1,23 @@
+command: docker container restart
+short: Restart one or more containers
+long: Restart one or more containers
+usage: docker container restart [OPTIONS] CONTAINER [CONTAINER...]
+pname: docker container
+plink: docker_container.yaml
+options:
+- option: time
+  shorthand: t
+  value_type: int
+  default_value: "10"
+  description: Seconds to wait for stop before killing the container
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

@@ -1,0 +1,14 @@
+command: docker config rm
+aliases: remove
+short: Remove one or more configs
+long: Remove one or more configs
+usage: docker config rm CONFIG [CONFIG...]
+pname: docker config
+plink: docker_config.yaml
+deprecated: false
+min_api_version: "1.30"
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: true
+

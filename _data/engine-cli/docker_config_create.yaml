@@ -1,0 +1,31 @@
+command: docker config create
+short: Create a config from a file or STDIN
+long: Create a config from a file or STDIN
+usage: docker config create [OPTIONS] CONFIG file|-
+pname: docker config
+plink: docker_config.yaml
+options:
+- option: label
+  shorthand: l
+  value_type: list
+  description: Config labels
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: template-driver
+  value_type: string
+  description: Template driver
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+deprecated: false
+min_api_version: "1.30"
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: true
+

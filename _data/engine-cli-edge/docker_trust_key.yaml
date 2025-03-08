@@ -1,0 +1,18 @@
+command: docker trust key
+short: Manage keys for signing Docker images
+long: Manage keys for signing Docker images
+usage: docker trust key
+pname: docker trust
+plink: docker_trust.yaml
+cname:
+- docker trust key generate
+- docker trust key load
+clink:
+- docker_trust_key_generate.yaml
+- docker_trust_key_load.yaml
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

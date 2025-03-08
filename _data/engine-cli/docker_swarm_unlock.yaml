@@ -1,0 +1,22 @@
+command: docker swarm unlock
+short: Unlock swarm
+long: |-
+  Unlocks a locked manager using a user-supplied unlock key. This command must be
+  used to reactivate a manager after its Docker daemon restarts if the autolock
+  setting is turned on. The unlock key is printed at the time when autolock is
+  enabled, and is also available from the `docker swarm unlock-key` command.
+usage: docker swarm unlock
+pname: docker swarm
+plink: docker_swarm.yaml
+examples: |-
+  ```bash
+  $ docker swarm unlock
+  Please enter unlock key:
+  ```
+deprecated: false
+min_api_version: "1.24"
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: true
+

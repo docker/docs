@@ -1,0 +1,25 @@
+/**
+ * Styles for the Swagger API documentation (engine/api/v1.x/index.html)
+ */
+
+
+/* ReDoc doesn't change outer page styles */
+body {
+    margin: 0;
+    padding: 0;
+}
+api-logo {
+    background-image: linear-gradient(0deg, #15A4D7 0%, #1488C6 100%);
+    height: 100px;
+    text-align: left !important;
+}
+api-logo img {
+    width: 136px !important;
+    margin: 32px 0 0 50px;
+}
+/**
+ * Disable request-type badges, see https://github.com/Rebilly/ReDoc/issues/61
+ */
+redoc .operation-type {
+    display: none !important;
+}

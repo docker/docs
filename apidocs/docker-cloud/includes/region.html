@@ -1,0 +1,209 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Documentation</title>
+
+    <link href="../stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="../stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
+    <script type="text/javascript">
+    !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="4.0.0";
+    analytics.load("IWj9D0UpZHZdZUZX9jl98PcpBFWBnBMy");
+    analytics.page();
+    }}();
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+      <script src="../javascripts/all_nosearch.js" type="text/javascript"></script>
+
+  </head>
+
+  <body class="includes includes_region">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="../images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <img src="../images/logo.png" />
+      <div id="toc">
+      </div>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id="regions">Regions</h1>
+
+<h2 id="region">Region</h2>
+
+<blockquote>
+<p>Example</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"availability_zones"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="nt">"available"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amsterdam 2"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ams2"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"node_types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"/api/infra/v1/nodetype/digitalocean/1gb/"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"/api/infra/v1/nodetype/digitalocean/2gb/"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"/api/infra/v1/nodetype/digitalocean/4gb/"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"/api/infra/v1/nodetype/digitalocean/8gb/"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"/api/infra/v1/nodetype/digitalocean/16gb/"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"/api/infra/v1/nodetype/digitalocean/32gb/"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"/api/infra/v1/nodetype/digitalocean/48gb/"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"/api/infra/v1/nodetype/digitalocean/64gb/"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/infra/v1/provider/digitalocean/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"resource_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/infra/v1/region/digitalocean/ams2/"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>A region is a representation of an entire or a subset of a data center of a cloud provider. It can contain availability zones (depending on the provider) and one or more node types.</p>
+
+<h3 id="attributes">Attributes</h3>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>resource_uri</td>
+<td>A unique API endpoint that represents the region</td>
+</tr>
+<tr>
+<td>name</td>
+<td>An identifier for the region</td>
+</tr>
+<tr>
+<td>label</td>
+<td>A user-friendly name for the region</td>
+</tr>
+<tr>
+<td>node_types</td>
+<td>A list of resource URIs of the node types available in the region</td>
+</tr>
+<tr>
+<td>availability_zones</td>
+<td>A list of resource URIs of the availability zones available in the region</td>
+</tr>
+<tr>
+<td>provider</td>
+<td>The resource URI of the provider of the region</td>
+</tr>
+<tr>
+<td>available</td>
+<td>Whether the region is currently available for new node deployments</td>
+</tr>
+</tbody></table>
+
+<h2 id="list-all-regions">List all regions</h2>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">dockercloud</span>
+
+<span class="n">regions</span> <span class="o">=</span> <span class="n">dockercloud</span><span class="o">.</span><span class="n">Region</span><span class="o">.</span><span class="nb">list</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/infra/v1/region/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">cloud.docker.com</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Basic dXNlcm5hbWU6YXBpa2V5</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+</code></pre>
+<pre class="highlight go"><code><span class="k">import</span><span class="x"> </span><span class="s">"github.com/docker/go-dockercloud/dockercloud"</span><span class="x">
+
+</span><span class="n">regionList</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">dockercloud</span><span class="o">.</span><span class="n">ListRegions</span><span class="p">()</span><span class="x">
+
+</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">regionList</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<pre class="highlight shell"><code>docker-cloud nodecluster region
+</code></pre>
+
+<p>Lists all regions of all supported cloud providers. Returns a list of <code class="prettyprint">Region</code> objects.</p>
+
+<h3 id="endpoint-type">Endpoint Type</h3>
+
+<p>Available in Docker Cloud&rsquo;s <strong>REST API</strong></p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /api/infra/v1/region/</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>Filter by region name</td>
+</tr>
+<tr>
+<td>provider</td>
+<td>Filter by resource URI of the target provider</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-an-individual-region">Get an individual region</h2>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">dockercloud</span>
+
+<span class="n">region</span> <span class="o">=</span> <span class="n">dockercloud</span><span class="o">.</span><span class="n">Region</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="s">"digitalocean/lon1"</span><span class="p">)</span>
+</code></pre>
+<pre class="highlight go"><code><span class="k">import</span><span class="x"> </span><span class="s">"github.com/docker/go-dockercloud/dockercloud"</span><span class="x">
+
+</span><span class="n">region</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">dockercloud</span><span class="o">.</span><span class="n">GetRegion</span><span class="p">(</span><span class="s">"digitalocean"</span><span class="p">,</span><span class="s">"lon1"</span><span class="p">)</span><span class="x">
+
+</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">region</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/infra/v1/region/digitalocean/lon1/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">cloud.docker.com</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Basic dXNlcm5hbWU6YXBpa2V5</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+</code></pre>
+
+<p>Get all the details of a specific region</p>
+
+<h3 id="endpoint-type">Endpoint Type</h3>
+
+<p>Available in Docker Cloud&rsquo;s <strong>REST API</strong></p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /api/infra/v1/region/(provider.name)/(name)/</code></p>
+
+<h3 id="path-parameters">Path Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>The name of the region to retrieve</td>
+</tr>
+<tr>
+<td>provider.name</td>
+<td>The name of the provider of the region</td>
+</tr>
+</tbody></table>
+
+      </div>
+      <div class="dark-box">
+      </div>
+    </div>
+  </body>
+</html>

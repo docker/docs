@@ -1,0 +1,12 @@
+command: docker image tag
+short: Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+long: Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+usage: docker image tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
+pname: docker image
+plink: docker_image.yaml
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

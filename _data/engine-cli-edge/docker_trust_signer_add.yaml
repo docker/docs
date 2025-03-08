@@ -1,0 +1,21 @@
+command: docker trust signer add
+short: Add a signer
+long: Add a signer
+usage: 'docker trust signer add OPTIONS NAME REPOSITORY [REPOSITORY...] '
+pname: docker trust signer
+plink: docker_trust_signer.yaml
+options:
+- option: key
+  value_type: list
+  description: Path to the signer's public key file
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

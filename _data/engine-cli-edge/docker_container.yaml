@@ -1,0 +1,64 @@
+command: docker container
+short: Manage containers
+long: Manage containers.
+usage: docker container
+pname: docker
+plink: docker.yaml
+cname:
+- docker container attach
+- docker container commit
+- docker container cp
+- docker container create
+- docker container diff
+- docker container exec
+- docker container export
+- docker container inspect
+- docker container kill
+- docker container logs
+- docker container ls
+- docker container pause
+- docker container port
+- docker container prune
+- docker container rename
+- docker container restart
+- docker container rm
+- docker container run
+- docker container start
+- docker container stats
+- docker container stop
+- docker container top
+- docker container unpause
+- docker container update
+- docker container wait
+clink:
+- docker_container_attach.yaml
+- docker_container_commit.yaml
+- docker_container_cp.yaml
+- docker_container_create.yaml
+- docker_container_diff.yaml
+- docker_container_exec.yaml
+- docker_container_export.yaml
+- docker_container_inspect.yaml
+- docker_container_kill.yaml
+- docker_container_logs.yaml
+- docker_container_ls.yaml
+- docker_container_pause.yaml
+- docker_container_port.yaml
+- docker_container_prune.yaml
+- docker_container_rename.yaml
+- docker_container_restart.yaml
+- docker_container_rm.yaml
+- docker_container_run.yaml
+- docker_container_start.yaml
+- docker_container_stats.yaml
+- docker_container_stop.yaml
+- docker_container_top.yaml
+- docker_container_unpause.yaml
+- docker_container_update.yaml
+- docker_container_wait.yaml
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

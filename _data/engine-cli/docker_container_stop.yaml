@@ -1,0 +1,23 @@
+command: docker container stop
+short: Stop one or more running containers
+long: Stop one or more running containers
+usage: docker container stop [OPTIONS] CONTAINER [CONTAINER...]
+pname: docker container
+plink: docker_container.yaml
+options:
+- option: time
+  shorthand: t
+  value_type: int
+  default_value: "10"
+  description: Seconds to wait for stop before killing it
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

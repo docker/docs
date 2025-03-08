@@ -1,151 +1,91 @@
-# syntax=docker/dockerfile:1
-# check=skip=InvalidBaseImagePlatform
+# This Dockerfile builds the docs for https://docs.docker.com/
+# from the master branch of https://github.com/docker/docker.github.io
+#
+# Here is the sequence:
+# 1.  Set up the build
+# 2.  Fetch upstream resources
+# 3.  Build static HTML from master
+# 4.  Reset to clean tiny nginx image
+# 5.  Copy Nginx config and archive HTML, which don't change often and can be cached
+# 6.  Copy static HTML from previous build stage (step 3)
+#
+# When the image is run, it starts Nginx and serves the docs at port 4000
 
-ARG ALPINE_VERSION=3.21
-ARG GO_VERSION=1.23
-ARG HTMLTEST_VERSION=0.17.0
-ARG HUGO_VERSION=0.141.0
-ARG NODE_VERSION=22
-ARG PAGEFIND_VERSION=1.3.0
+# Get basic configs and Jekyll env
+FROM docs/docker.github.io:docs-builder AS builder
 
-# base defines the generic base stage
-FROM golang:${GO_VERSION}-alpine${ALPINE_VERSION} AS base
-RUN apk add --no-cache \
-    git \
-    nodejs \
-    npm \
-    gcompat
+# Set the target again
+ENV TARGET=/usr/share/nginx/html
 
-# npm downloads Node.js dependencies
-FROM base AS npm
-ENV NODE_ENV="production"
-WORKDIR /out
-RUN --mount=source=package.json,target=package.json \
-    --mount=source=package-lock.json,target=package-lock.json \
-    --mount=type=cache,target=/root/.npm \
-    npm ci
+# Set the source directory to md_source
+ENV SOURCE=md_source
 
-# hugo downloads the Hugo binary
-FROM base AS hugo
-ARG TARGETARCH
-ARG HUGO_VERSION
-WORKDIR /out
-ADD https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-${TARGETARCH}.tar.gz .
-RUN tar xvf hugo_extended_${HUGO_VERSION}_linux-${TARGETARCH}.tar.gz
+# Get the current docs from the checked out branch
+# ${SOURCE} will contain a directory for each archive
+COPY . ${SOURCE}
 
-# build-base is the base stage used for building the site
-FROM base AS build-base
-WORKDIR /project
-COPY --from=hugo /out/hugo /bin/hugo
-COPY --from=npm /out/node_modules node_modules
-COPY . .
+####### START UPSTREAM RESOURCES ########
+# Set vars used by fetch-upstream-resources.sh script
+## Branch to pull from, per ref doc
+## To get master from svn the svn branch needs to be 'trunk'. To get a branch from svn it needs to be 'branches/branchname'
 
-# build creates production builds with Hugo
-FROM build-base AS build
-# HUGO_ENV sets the hugo.Environment (production, development, preview)
-ARG HUGO_ENV="development"
-# DOCS_URL sets the base URL for the site
-ARG DOCS_URL="https://docs.docker.com"
-ENV HUGO_CACHEDIR="/tmp/hugo_cache"
-RUN --mount=type=cache,target=/tmp/hugo_cache \
-    hugo --gc --minify -e $HUGO_ENV -b $DOCS_URL
+# Engine
+ENV ENGINE_SVN_BRANCH="branches/17.09.x"
+ENV ENGINE_BRANCH="17.09.x"
 
-# lint lints markdown files
-FROM davidanson/markdownlint-cli2:v0.14.0 AS lint
-USER root
-RUN --mount=type=bind,target=. \
-    /usr/local/bin/markdownlint-cli2 \
-    "content/**/*.md" \
-    "#content/manuals/engine/release-notes/*.md" \
-    "#content/manuals/desktop/previous-versions/*.md"
+# Distribution
+ENV DISTRIBUTION_SVN_BRANCH="branches/release/2.6"
+ENV DISTRIBUTION_BRANCH="release/2.6"
 
-# test validates HTML output and checks for broken links
-FROM wjdp/htmltest:v${HTMLTEST_VERSION} AS test
-WORKDIR /test
-COPY --from=build /project/public ./public
-ADD .htmltest.yml .htmltest.yml
-RUN htmltest
+# Fetch upstream resources
+RUN bash ./${SOURCE}/_scripts/fetch-upstream-resources.sh ${SOURCE}
+####### END UPSTREAM RESOURCES ########
 
-# update-modules downloads and vendors Hugo modules
-FROM build-base AS update-modules
-# MODULE is the Go module path and version of the module to update
-ARG MODULE
-RUN <<"EOT"
-set -ex
-if [ -n "$MODULE" ]; then
-    hugo mod get ${MODULE}
-    RESOLVED=$(cat go.mod | grep -m 1 "${MODULE/@*/}" | awk '{print $1 "@" $2}')
-    go mod edit -replace "${MODULE/@*/}=${RESOLVED}";
-else
-    echo "no module set";
-fi
-EOT
-RUN hugo mod vendor
 
-# vendor is an empty stage with only vendored Hugo modules
-FROM scratch AS vendor
-COPY --from=update-modules /project/_vendor /_vendor
-COPY --from=update-modules /project/go.* /
+# Build the static HTML, now that everything is in place
 
-# build-upstream builds an upstream project with a replacement module
-FROM build-base AS build-upstream
-# UPSTREAM_MODULE_NAME is the canonical upstream repository name and namespace (e.g. moby/buildkit)
-ARG UPSTREAM_MODULE_NAME
-# UPSTREAM_REPO is the repository of the project to validate (e.g. dvdksn/buildkit)
-ARG UPSTREAM_REPO
-# UPSTREAM_COMMIT is the commit hash of the upstream project to validate
-ARG UPSTREAM_COMMIT
-# HUGO_MODULE_REPLACEMENTS is the replacement module for the upstream project
-ENV HUGO_MODULE_REPLACEMENTS="github.com/${UPSTREAM_MODULE_NAME} -> github.com/${UPSTREAM_REPO} ${UPSTREAM_COMMIT}"
-RUN hugo --ignoreVendorPaths "github.com/${UPSTREAM_MODULE_NAME}"
+RUN jekyll build -s ${SOURCE} -d ${TARGET} --config ${SOURCE}/_config.yml
 
-# validate-upstream validates HTML output for upstream builds
-FROM wjdp/htmltest:v${HTMLTEST_VERSION} AS validate-upstream
-WORKDIR /test
-COPY --from=build-upstream /project/public ./public
-ADD .htmltest.yml .htmltest.yml
-RUN htmltest
+# Fix up some links, don't touch the archives
+RUN find ${TARGET} -type f -name '*.html' | grep -vE "v[0-9]+\." | while read i; do sed -i 's#href="https://docs.docker.com/#href="/#g' "$i"; done
 
-# unused-media checks for unused graphics and other media
-FROM alpine:${ALPINE_VERSION} AS unused-media
-RUN apk add --no-cache fd ripgrep
-WORKDIR /test
-RUN --mount=type=bind,target=. ./hack/test/unused_media
+# BUILD OF MASTER DOCS IS NOW DONE!
 
-# path-warnings checks for duplicate target paths
-FROM build-base AS path-warnings
-RUN hugo --printPathWarnings > ./path-warnings.txt
-RUN <<EOT
-DUPLICATE_TARGETS=$(grep "Duplicate target paths" ./path-warnings.txt)
-if [ ! -z "$DUPLICATE_TARGETS" ]; then
-    echo "$DUPLICATE_TARGETS"
-    echo "You probably have a duplicate alias defined. Please check your aliases."
-    exit 1
-fi
-EOT
+# Reset to alpine so we don't get any docs source or extra apps
+FROM nginx:alpine
 
-# pagefind installs the Pagefind runtime
-FROM base AS pagefind
-ARG PAGEFIND_VERSION
-COPY --from=build /project/public ./public
-RUN --mount=type=bind,src=pagefind.yml,target=pagefind.yml \
-    npx pagefind@v${PAGEFIND_VERSION} --output-path "/pagefind"
+# Set the target again
+ENV TARGET=/usr/share/nginx/html
 
-# index generates a Pagefind index
-FROM scratch AS index
-COPY --from=pagefind /pagefind .
+# Get the nginx config from the nginx-onbuild image
+# This hardly ever changes so should usually be cached
+COPY --from=docs/docker.github.io:nginx-onbuild /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
 
-# test-go-redirects checks that the /go/ redirects are valid
-FROM alpine:${ALPINE_VERSION} AS test-go-redirects
-WORKDIR /work
-RUN apk add yq
-COPY --from=build /project/public ./public
-RUN --mount=type=bind,target=. <<"EOT"
-set -ex
-./hack/test/go_redirects
-EOT
+# Get all the archive static HTML and put it into place
+# Go oldest-to-newest to take advantage of the fact that we change older
+# archives less often than new ones.
+# To add a new archive, add it here
+# AND ALSO edit _data/docsarchives/archives.yaml to add it to the drop-down
+COPY --from=docs/docker.github.io:v1.4 ${TARGET} ${TARGET}
+COPY --from=docs/docker.github.io:v1.5 ${TARGET} ${TARGET}
+COPY --from=docs/docker.github.io:v1.6 ${TARGET} ${TARGET}
+COPY --from=docs/docker.github.io:v1.7 ${TARGET} ${TARGET}
+COPY --from=docs/docker.github.io:v1.8 ${TARGET} ${TARGET}
+COPY --from=docs/docker.github.io:v1.9 ${TARGET} ${TARGET}
+COPY --from=docs/docker.github.io:v1.10 ${TARGET} ${TARGET}
+COPY --from=docs/docker.github.io:v1.11 ${TARGET} ${TARGET}
+COPY --from=docs/docker.github.io:v1.12 ${TARGET} ${TARGET}
+COPY --from=docs/docker.github.io:v1.13 ${TARGET} ${TARGET}
+COPY --from=docs/docker.github.io:v17.03 ${TARGET} ${TARGET}
+COPY --from=docs/docker.github.io:v17.06 ${TARGET} ${TARGET}
+COPY --from=docs/docker.github.io:v17.09 ${TARGET} ${TARGET}
+COPY --from=docs/docker.github.io:v17.12 ${TARGET} ${TARGET}
 
-# release is an empty scratch image with only compiled assets
-FROM scratch AS release
-COPY --from=build /project/public /
-COPY --from=pagefind /pagefind /pagefind
+# Get the built docs output from the previous build stage
+# This ordering means all previous layers can come from cache unless an archive
+# changes
+
+COPY --from=builder ${TARGET} ${TARGET}
+
+# Serve the site (target), which is now all static HTML
+CMD echo -e "Docker docs are viewable at:\nhttp://0.0.0.0:4000"; exec nginx -g 'daemon off;'

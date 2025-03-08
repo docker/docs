@@ -1,0 +1,952 @@
+command: docker service create
+short: Create a new service
+long: |-
+  Creates a service as described by the specified parameters. You must run this
+  command on a manager node.
+usage: docker service create [OPTIONS] IMAGE [COMMAND] [ARG...]
+pname: docker service
+plink: docker_service.yaml
+options:
+- option: config
+  value_type: config
+  description: Specify configurations to expose to the service
+  deprecated: false
+  min_api_version: "1.30"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: constraint
+  value_type: list
+  description: Placement constraints
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: container-label
+  value_type: list
+  description: Container labels
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: credential-spec
+  value_type: credential-spec
+  description: Credential spec for managed service account (Windows only)
+  deprecated: false
+  min_api_version: "1.29"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: detach
+  shorthand: d
+  value_type: bool
+  default_value: "false"
+  description: |
+    Exit immediately instead of waiting for the service to converge
+  deprecated: false
+  min_api_version: "1.29"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: dns
+  value_type: list
+  description: Set custom DNS servers
+  deprecated: false
+  min_api_version: "1.25"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: dns-option
+  value_type: list
+  description: Set DNS options
+  deprecated: false
+  min_api_version: "1.25"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: dns-search
+  value_type: list
+  description: Set custom DNS search domains
+  deprecated: false
+  min_api_version: "1.25"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: endpoint-mode
+  value_type: string
+  default_value: vip
+  description: Endpoint mode (vip or dnsrr)
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: entrypoint
+  value_type: command
+  description: Overwrite the default ENTRYPOINT of the image
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: env
+  shorthand: e
+  value_type: list
+  description: Set environment variables
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: env-file
+  value_type: list
+  description: Read in a file of environment variables
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: generic-resource
+  value_type: list
+  description: User defined resources
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: group
+  value_type: list
+  description: Set one or more supplementary user groups for the container
+  deprecated: false
+  min_api_version: "1.25"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: health-cmd
+  value_type: string
+  description: Command to run to check health
+  deprecated: false
+  min_api_version: "1.25"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: health-interval
+  value_type: duration
+  description: Time between running the check (ms|s|m|h)
+  deprecated: false
+  min_api_version: "1.25"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: health-retries
+  value_type: int
+  default_value: "0"
+  description: Consecutive failures needed to report unhealthy
+  deprecated: false
+  min_api_version: "1.25"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: health-start-period
+  value_type: duration
+  description: |
+    Start period for the container to initialize before counting retries towards unstable (ms|s|m|h)
+  deprecated: false
+  min_api_version: "1.29"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: health-timeout
+  value_type: duration
+  description: Maximum time to allow one check to run (ms|s|m|h)
+  deprecated: false
+  min_api_version: "1.25"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: host
+  value_type: list
+  description: Set one or more custom host-to-IP mappings (host:ip)
+  deprecated: false
+  min_api_version: "1.25"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: hostname
+  value_type: string
+  description: Container hostname
+  deprecated: false
+  min_api_version: "1.25"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: isolation
+  value_type: string
+  description: Service container isolation mode
+  deprecated: false
+  min_api_version: "1.35"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: label
+  shorthand: l
+  value_type: list
+  description: Service labels
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: limit-cpu
+  value_type: decimal
+  description: Limit CPUs
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: limit-memory
+  value_type: bytes
+  default_value: "0"
+  description: Limit Memory
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: log-driver
+  value_type: string
+  description: Logging driver for service
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: log-opt
+  value_type: list
+  description: Logging driver options
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: mode
+  value_type: string
+  default_value: replicated
+  description: Service mode (replicated or global)
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: mount
+  value_type: mount
+  description: Attach a filesystem mount to the service
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: name
+  value_type: string
+  description: Service name
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: network
+  value_type: network
+  description: Network attachments
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: no-healthcheck
+  value_type: bool
+  default_value: "false"
+  description: Disable any container-specified HEALTHCHECK
+  deprecated: false
+  min_api_version: "1.25"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: no-resolve-image
+  value_type: bool
+  default_value: "false"
+  description: |
+    Do not query the registry to resolve image digest and supported platforms
+  deprecated: false
+  min_api_version: "1.30"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: placement-pref
+  value_type: pref
+  description: Add a placement preference
+  deprecated: false
+  min_api_version: "1.28"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: publish
+  shorthand: p
+  value_type: port
+  description: Publish a port as a node port
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: quiet
+  shorthand: q
+  value_type: bool
+  default_value: "false"
+  description: Suppress progress output
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: read-only
+  value_type: bool
+  default_value: "false"
+  description: Mount the container's root filesystem as read only
+  deprecated: false
+  min_api_version: "1.28"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: replicas
+  value_type: uint
+  description: Number of tasks
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: reserve-cpu
+  value_type: decimal
+  description: Reserve CPUs
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: reserve-memory
+  value_type: bytes
+  default_value: "0"
+  description: Reserve Memory
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: restart-condition
+  value_type: string
+  description: |
+    Restart when condition is met ("none"|"on-failure"|"any") (default "any")
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: restart-delay
+  value_type: duration
+  description: Delay between restart attempts (ns|us|ms|s|m|h) (default 5s)
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: restart-max-attempts
+  value_type: uint
+  description: Maximum number of restarts before giving up
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: restart-window
+  value_type: duration
+  description: Window used to evaluate the restart policy (ns|us|ms|s|m|h)
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: rollback-delay
+  value_type: duration
+  default_value: 0s
+  description: Delay between task rollbacks (ns|us|ms|s|m|h) (default 0s)
+  deprecated: false
+  min_api_version: "1.28"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: rollback-failure-action
+  value_type: string
+  description: |
+    Action on rollback failure ("pause"|"continue") (default "pause")
+  deprecated: false
+  min_api_version: "1.28"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: rollback-max-failure-ratio
+  value_type: float
+  default_value: "0"
+  description: Failure rate to tolerate during a rollback (default 0)
+  deprecated: false
+  min_api_version: "1.28"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: rollback-monitor
+  value_type: duration
+  default_value: 0s
+  description: |
+    Duration after each task rollback to monitor for failure (ns|us|ms|s|m|h) (default 5s)
+  deprecated: false
+  min_api_version: "1.28"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: rollback-order
+  value_type: string
+  description: |
+    Rollback order ("start-first"|"stop-first") (default "stop-first")
+  deprecated: false
+  min_api_version: "1.29"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: rollback-parallelism
+  value_type: uint64
+  default_value: "1"
+  description: |
+    Maximum number of tasks rolled back simultaneously (0 to roll back all at once)
+  deprecated: false
+  min_api_version: "1.28"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: secret
+  value_type: secret
+  description: Specify secrets to expose to the service
+  deprecated: false
+  min_api_version: "1.25"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: stop-grace-period
+  value_type: duration
+  description: |
+    Time to wait before force killing a container (ns|us|ms|s|m|h) (default 10s)
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: stop-signal
+  value_type: string
+  description: Signal to stop the container
+  deprecated: false
+  min_api_version: "1.28"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: tty
+  shorthand: t
+  value_type: bool
+  default_value: "false"
+  description: Allocate a pseudo-TTY
+  deprecated: false
+  min_api_version: "1.25"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: update-delay
+  value_type: duration
+  default_value: 0s
+  description: Delay between updates (ns|us|ms|s|m|h) (default 0s)
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: update-failure-action
+  value_type: string
+  description: |
+    Action on update failure ("pause"|"continue"|"rollback") (default "pause")
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: update-max-failure-ratio
+  value_type: float
+  default_value: "0"
+  description: Failure rate to tolerate during an update (default 0)
+  deprecated: false
+  min_api_version: "1.25"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: update-monitor
+  value_type: duration
+  default_value: 0s
+  description: |
+    Duration after each task update to monitor for failure (ns|us|ms|s|m|h) (default 5s)
+  deprecated: false
+  min_api_version: "1.25"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: update-order
+  value_type: string
+  description: |
+    Update order ("start-first"|"stop-first") (default "stop-first")
+  deprecated: false
+  min_api_version: "1.29"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: update-parallelism
+  value_type: uint64
+  default_value: "1"
+  description: |
+    Maximum number of tasks updated simultaneously (0 to update all at once)
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: user
+  shorthand: u
+  value_type: string
+  description: 'Username or UID (format: <name|uid>[:<group|gid>])'
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: with-registry-auth
+  value_type: bool
+  default_value: "false"
+  description: Send registry authentication details to swarm agents
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: workdir
+  shorthand: w
+  value_type: string
+  description: Working directory inside the container
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+examples: "### Create a service\n\n```bash\n$ docker service create --name redis redis:3.0.6\n\ndmu1ept4cxcfe8k8lhtux3ro3\n\n$
+  docker service create --mode global --name redis2 redis:3.0.6\n\na8q9dasaafudfs8q8w32udass\n\n$
+  docker service ls\n\nID            NAME    MODE        REPLICAS  IMAGE\ndmu1ept4cxcf
+  \ redis   replicated  1/1       redis:3.0.6\na8q9dasaafud  redis2  global      1/1
+  \      redis:3.0.6\n```\n\n#### Create a service using an image on a private registry\n\nIf
+  your image is available on a private registry which requires login, use the\n`--with-registry-auth`
+  flag with `docker service create`, after logging in. If\nyour image is stored on
+  `registry.example.com`, which is a private registry, use\na command like the following:\n\n```bash\n$
+  docker login registry.example.com\n\n$ docker service  create \\\n  --with-registry-auth
+  \\\n  --name my_service \\\n  registry.example.com/acme/my_image:latest\n```\n\nThis
+  passes the login token from your local client to the swarm nodes where the\nservice
+  is deployed, using the encrypted WAL logs. With this information, the\nnodes are
+  able to log into the registry and pull the image.\n\n### Create a service with 5
+  replica tasks (--replicas)\n\nUse the `--replicas` flag to set the number of replica
+  tasks for a replicated\nservice. The following command creates a `redis` service
+  with `5` replica tasks:\n\n```bash\n$ docker service create --name redis --replicas=5
+  redis:3.0.6\n\n4cdgfyky7ozwh3htjfw0d12qv\n```\n\nThe above command sets the *desired*
+  number of tasks for the service. Even\nthough the command returns immediately, actual
+  scaling of the service may take\nsome time. The `REPLICAS` column shows both the
+  *actual* and *desired* number\nof replica tasks for the service.\n\nIn the following
+  example the desired state is  `5` replicas, but the current\nnumber of `RUNNING`
+  tasks is `3`:\n\n```bash\n$ docker service ls\n\nID            NAME   MODE        REPLICAS
+  \ IMAGE\n4cdgfyky7ozw  redis  replicated  3/5       redis:3.0.7\n```\n\nOnce all
+  the tasks are created and `RUNNING`, the actual number of tasks is\nequal to the
+  desired number:\n\n```bash\n$ docker service ls\n\nID            NAME   MODE        REPLICAS
+  \ IMAGE\n4cdgfyky7ozw  redis  replicated  5/5       redis:3.0.7\n```\n\n### Create
+  a service with secrets\n\nUse the `--secret` flag to give a container access to
+  a\n[secret](secret_create.md).\n\nCreate a service specifying a secret:\n\n```bash\n$
+  docker service create --name redis --secret secret.json redis:3.0.6\n\n4cdgfyky7ozwh3htjfw0d12qv\n```\n\nCreate
+  a service specifying the secret, target, user/group ID, and mode:\n\n```bash\n$
+  docker service create --name redis \\\n    --secret source=ssh-key,target=ssh \\\n
+  \   --secret source=app-key,target=app,uid=1000,gid=1001,mode=0400 \\\n    redis:3.0.6\n\n4cdgfyky7ozwh3htjfw0d12qv\n```\n\nTo
+  grant a service access to multiple secrets, use multiple `--secret` flags.\n\nSecrets
+  are located in `/run/secrets` in the container.  If no target is\nspecified, the
+  name of the secret will be used as the in memory file in the\ncontainer.  If a target
+  is specified, that will be the filename.  In the\nexample above, two files will
+  be created: `/run/secrets/ssh` and\n`/run/secrets/app` for each of the secret targets
+  specified.\n\n### Create a service with a rolling update policy\n\n```bash\n$ docker
+  service create \\\n  --replicas 10 \\\n  --name redis \\\n  --update-delay 10s \\\n
+  \ --update-parallelism 2 \\\n  redis:3.0.6\n```\n\nWhen you run a [service update](service_update.md),
+  the scheduler updates a\nmaximum of 2 tasks at a time, with `10s` between updates.
+  For more information,\nrefer to the [rolling updates\ntutorial](https://docs.docker.com/engine/swarm/swarm-tutorial/rolling-update/).\n\n###
+  Set environment variables (-e, --env)\n\nThis sets an environmental variable for
+  all tasks in a service. For example:\n\n```bash\n$ docker service create \\\n  --name
+  redis_2 \\\n  --replicas 5 \\\n  --env MYVAR=foo \\\n  redis:3.0.6\n```\n\nTo specify
+  multiple environment variables, specify multiple `--env` flags, each\nwith a separate
+  key-value pair.\n\n```bash\n$ docker service create \\\n  --name redis_2 \\\n  --replicas
+  5 \\\n  --env MYVAR=foo \\\n  --env MYVAR2=bar \\\n  redis:3.0.6\n```\n\n### Create
+  a service with specific hostname (--hostname)\n\nThis option sets the docker service
+  containers hostname to a specific string.\nFor example:\n\n```bash\n$ docker service
+  create --name redis --hostname myredis redis:3.0.6\n```\n\n### Set metadata on a
+  service (-l, --label)\n\nA label is a `key=value` pair that applies metadata to
+  a service. To label a\nservice with two labels:\n\n```bash\n$ docker service create
+  \\\n  --name redis_2 \\\n  --label com.example.foo=\"bar\"\n  --label bar=baz \\\n
+  \ redis:3.0.6\n```\n\nFor more information about labels, refer to [apply custom\nmetadata](https://docs.docker.com/engine/userguide/labels-custom-metadata/).\n\n###
+  Add bind mounts, volumes or memory filesystems\n\nDocker supports three different
+  kinds of mounts, which allow containers to read\nfrom or write to files or directories,
+  either on the host operating system, or\non memory filesystems. These types are
+  _data volumes_ (often referred to simply\nas volumes), _bind mounts_, and _tmpfs_.\n\nA
+  **bind mount** makes a file or directory on the host available to the\ncontainer
+  it is mounted within. A bind mount may be either read-only or\nread-write. For example,
+  a container might share its host's DNS information by\nmeans of a bind mount of
+  the host's `/etc/resolv.conf` or a container might\nwrite logs to its host's `/var/log/myContainerLogs`
+  directory. If you use\nbind mounts and your host and containers have different notions
+  of permissions,\naccess controls, or other such details, you will run into portability
+  issues.\n\nA **named volume** is a mechanism for decoupling persistent data needed
+  by your\ncontainer from the image used to create the container and from the host
+  machine.\nNamed volumes are created and managed by Docker, and a named volume persists\neven
+  when no container is currently using it. Data in named volumes can be\nshared between
+  a container and the host machine, as well as between multiple\ncontainers. Docker
+  uses a _volume driver_ to create, manage, and mount volumes.\nYou can back up or
+  restore volumes using Docker commands.\n\nA **tmpfs** mounts a tmpfs inside a container
+  for volatile data.\n\nConsider a situation where your image starts a lightweight
+  web server. You could\nuse that image as a base image, copy in your website's HTML
+  files, and package\nthat into another image. Each time your website changed, you'd
+  need to update\nthe new image and redeploy all of the containers serving your website.
+  A better\nsolution is to store the website in a named volume which is attached to
+  each of\nyour web server containers when they start. To update the website, you
+  just\nupdate the named volume.\n\nFor more information about named volumes, see\n[Data
+  Volumes](https://docs.docker.com/engine/tutorials/dockervolumes/).\n\nThe following
+  table describes options which apply to both bind mounts and named\nvolumes in a
+  service:\n\n<table>\n  <tr>\n    <th>Option</th>\n    <th>Required</th>\n    <th>Description</th>\n
+  \ </tr>\n  <tr>\n    <td><b>types</b></td>\n    <td></td>\n    <td>\n      <p>The
+  type of mount, can be either <tt>volume</tt>, <tt>bind</tt>, or <tt>tmpfs</tt>.
+  Defaults to <tt>volume</tt> if no type is specified.\n      <ul>\n        <li><tt>volume</tt>:
+  mounts a <a href=\"https://docs.docker.com/engine/reference/commandline/volume_create/\">managed
+  volume</a>\n        into the container.</li> <li><tt>bind</tt>:\n        bind-mounts
+  a directory or file from the host into the container.</li>\n        <li><tt>tmpfs</tt>:
+  mount a tmpfs in the container</li>\n      </ul></p>\n    </td>\n  </tr>\n  <tr>\n
+  \   <td><b>src</b> or <b>source</b></td>\n    <td>for <tt>type=bind</tt> only></td>\n
+  \   <td>\n      <ul>\n        <li>\n         <tt>type=volume</tt>: <tt>src</tt>
+  is an optional way to specify the name of the volume (for example, <tt>src=my-volume</tt>).\n
+  \         If the named volume does not exist, it is automatically created. If no
+  <tt>src</tt> is specified, the volume is\n          assigned a random name which
+  is guaranteed to be unique on the host, but may not be unique cluster-wide.\n          A
+  randomly-named volume has the same lifecycle as its container and is destroyed when
+  the <i>container</i>\n          is destroyed (which is upon <tt>service update</tt>,
+  or when scaling or re-balancing the service)\n        </li>\n        <li>\n          <tt>type=bind</tt>:
+  <tt>src</tt> is required, and specifies an absolute path to the file or directory
+  to bind-mount\n          (for example, <tt>src=/path/on/host/</tt>). An error is
+  produced if the file or directory does not exist.\n        </li>\n        <li>\n
+  \         <tt>type=tmpfs</tt>: <tt>src</tt> is not supported.\n        </li>\n      </ul>\n
+  \   </td>\n  </tr>\n  <tr>\n    <td><p><b>dst</b> or <b>destination</b> or <b>target</b></p></td>\n
+  \   <td>yes</td>\n    <td>\n      <p>Mount path inside the container, for example
+  <tt>/some/path/in/container/</tt>.\n      If the path does not exist in the container's
+  filesystem, the Engine creates\n      a directory at the specified location before
+  mounting the volume or bind mount.</p>\n    </td>\n  </tr>\n  <tr>\n    <td><p><b>readonly</b>
+  or <b>ro</b></p></td>\n    <td></td>\n    <td>\n      <p>The Engine mounts binds
+  and volumes <tt>read-write</tt> unless <tt>readonly</tt> option\n      is given
+  when mounting the bind or volume.\n      <ul>\n        <li><tt>true</tt> or <tt>1</tt>
+  or no value: Mounts the bind or volume read-only.</li>\n        <li><tt>false</tt>
+  or <tt>0</tt>: Mounts the bind or volume read-write.</li>\n      </ul></p>\n    </td>\n
+  \ </tr>\n  <tr>\n    <td><b>consistency</b></td>\n    <td></td>\n    <td>\n      <p>The
+  consistency requirements for the mount; one of\n         <ul>\n           <li><tt>default</tt>:
+  Equivalent to <tt>consistent</tt>.</li>\n           <li><tt>consistent</tt>: Full
+  consistency.  The container runtime and the host maintain an identical view of the
+  mount at all times.</li>\n           <li><tt>cached</tt>: The host's view of the
+  mount is authoritative.  There may be delays before updates made on the host are
+  visible within a container.</li>\n           <li><tt>delegated</tt>: The container
+  runtime's view of the mount is authoritative.  There may be delays before updates
+  made in a container are visible on the host.</li>\n        </ul>\n     </p>\n    </td>\n
+  \ </tr>\n</table>\n\n#### Bind Propagation\n\nBind propagation refers to whether
+  or not mounts created within a given\nbind mount or named volume can be propagated
+  to replicas of that mount. Consider\na mount point `/mnt`, which is also mounted
+  on `/tmp`. The propation settings\ncontrol whether a mount on `/tmp/a` would also
+  be available on `/mnt/a`. Each\npropagation setting has a recursive counterpoint.
+  In the case of recursion,\nconsider that `/tmp/a` is also mounted as `/foo`. The
+  propagation settings\ncontrol whether `/mnt/a` and/or `/tmp/a` would exist.\n\nThe
+  `bind-propagation` option defaults to `rprivate` for both bind mounts and\nvolume
+  mounts, and is only configurable for bind mounts. In other words, named\nvolumes
+  do not support bind propagation.\n\n- **`shared`**: Sub-mounts of the original mount
+  are exposed to replica mounts,\n                and sub-mounts of replica mounts
+  are also propagated to the\n                original mount.\n- **`slave`**: similar
+  to a shared mount, but only in one direction. If the\n               original mount
+  exposes a sub-mount, the replica mount can see it.\n               However, if the
+  replica mount exposes a sub-mount, the original\n               mount cannot see
+  it.\n- **`private`**: The mount is private. Sub-mounts within it are not exposed
+  to\n                 replica mounts, and sub-mounts of replica mounts are not\n
+  \                exposed to the original mount.\n- **`rshared`**: The same as shared,
+  but the propagation also extends to and from\n                 mount points nested
+  within any of the original or replica mount\n                 points.\n- **`rslave`**:
+  The same as `slave`, but the propagation also extends to and from\n                 mount
+  points nested within any of the original or replica mount\n                 points.\n-
+  **`rprivate`**: The default. The same as `private`, meaning that no mount points\n
+  \                 anywhere within the original or replica mount points propagate\n
+  \                 in either direction.\n\nFor more information about bind propagation,
+  see the\n[Linux kernel documentation for shared subtree](https://www.kernel.org/doc/Documentation/filesystems/sharedsubtree.txt).\n\n####
+  Options for Named Volumes\n\nThe following options can only be used for named volumes
+  (`type=volume`):\n\n\n<table>\n  <tr>\n    <th>Option</th>\n    <th>Description</th>\n
+  \ </tr>\n  <tr>\n    <td><b>volume-driver</b></td>\n    <td>\n      <p>Name of the
+  volume-driver plugin to use for the volume. Defaults to\n      <tt>\"local\"</tt>,
+  to use the local volume driver to create the volume if the\n      volume does not
+  exist.</p>\n    </td>\n  </tr>\n  <tr>\n    <td><b>volume-label</b></td>\n    <td>\n
+  \     One or more custom metadata (\"labels\") to apply to the volume upon\n      creation.
+  For example,\n      <tt>volume-label=mylabel=hello-world,my-other-label=hello-mars</tt>.
+  For more\n      information about labels, refer to\n      <a href=\"https://docs.docker.com/engine/userguide/labels-custom-metadata/\">apply
+  custom metadata</a>.\n    </td>\n  </tr>\n  <tr>\n    <td><b>volume-nocopy</b></td>\n
+  \   <td>\n      By default, if you attach an empty volume to a container, and files
+  or\n      directories already existed at the mount-path in the container (<tt>dst</tt>),\n
+  \     the Engine copies those files and directories into the volume, allowing\n
+  \     the host to access them. Set <tt>volume-nocopy</tt> to disable copying files\n
+  \     from the container's filesystem to the volume and mount the empty volume.<br
+  />\n\n      A value is optional:\n\n      <ul>\n        <li><tt>true</tt> or <tt>1</tt>:
+  Default if you do not provide a value. Disables copying.</li>\n        <li><tt>false</tt>
+  or <tt>0</tt>: Enables copying.</li>\n      </ul>\n    </td>\n  </tr>\n  <tr>\n
+  \   <td><b>volume-opt</b></td>\n    <td>\n      Options specific to a given volume
+  driver, which will be passed to the\n      driver when creating the volume. Options
+  are provided as a comma-separated\n      list of key/value pairs, for example,\n
+  \     <tt>volume-opt=some-option=some-value,volume-opt=some-other-option=some-other-value</tt>.\n
+  \     For available options for a given driver, refer to that driver's\n      documentation.\n
+  \   </td>\n  </tr>\n</table>\n\n\n#### Options for tmpfs\n\nThe following options
+  can only be used for tmpfs mounts (`type=tmpfs`);\n\n\n<table>\n  <tr>\n    <th>Option</th>\n
+  \   <th>Description</th>\n  </tr>\n  <tr>\n    <td><b>tmpfs-size</b></td>\n    <td>Size
+  of the tmpfs mount in bytes. Unlimited by default in Linux.</td>\n  </tr>\n  <tr>\n
+  \   <td><b>tmpfs-mode</b></td>\n    <td>File mode of the tmpfs in octal. (e.g. <tt>\"700\"</tt>
+  or <tt>\"0700\"</tt>.) Defaults to <tt>\"1777\"</tt> in Linux.</td>\n  </tr>\n</table>\n\n\n####
+  Differences between \"--mount\" and \"--volume\"\n\nThe `--mount` flag supports
+  most options that are supported by the `-v`\nor `--volume` flag for `docker run`,
+  with some important exceptions:\n\n- The `--mount` flag allows you to specify a
+  volume driver and volume driver\n  options *per volume*, without creating the volumes
+  in advance. In contrast,\n  `docker run` allows you to specify a single volume driver
+  which is shared\n  by all volumes, using the `--volume-driver` flag.\n\n- The `--mount`
+  flag allows you to specify custom metadata (\"labels\") for a volume,\n  before
+  the volume is created.\n\n- When you use `--mount` with `type=bind`, the host-path
+  must refer to an *existing*\n  path on the host. The path will not be created for
+  you and the service will fail\n  with an error if the path does not exist.\n\n-
+  The `--mount` flag does not allow you to relabel a volume with `Z` or `z` flags,\n
+  \ which are used for `selinux` labeling.\n\n#### Create a service using a named
+  volume\n\nThe following example creates a service that uses a named volume:\n\n```bash\n$
+  docker service create \\\n  --name my-service \\\n  --replicas 3 \\\n  --mount type=volume,source=my-volume,destination=/path/in/container,volume-label=\"color=red\",volume-label=\"shape=round\"
+  \\\n  nginx:alpine\n```\n\nFor each replica of the service, the engine requests
+  a volume named \"my-volume\"\nfrom the default (\"local\") volume driver where the
+  task is deployed. If the\nvolume does not exist, the engine creates a new volume
+  and applies the \"color\"\nand \"shape\" labels.\n\nWhen the task is started, the
+  volume is mounted on `/path/in/container/` inside\nthe container.\n\nBe aware that
+  the default (\"local\") volume is a locally scoped volume driver.\nThis means that
+  depending on where a task is deployed, either that task gets a\n*new* volume named
+  \"my-volume\", or shares the same \"my-volume\" with other tasks\nof the same service.
+  Multiple containers writing to a single shared volume can\ncause data corruption
+  if the software running inside the container is not\ndesigned to handle concurrent
+  processes writing to the same location. Also take\ninto account that containers
+  can be re-scheduled by the Swarm orchestrator and\nbe deployed on a different node.\n\n####
+  Create a service that uses an anonymous volume\n\nThe following command creates
+  a service with three replicas with an anonymous\nvolume on `/path/in/container`:\n\n```bash\n$
+  docker service create \\\n  --name my-service \\\n  --replicas 3 \\\n  --mount type=volume,destination=/path/in/container
+  \\\n  nginx:alpine\n```\n\nIn this example, no name (`source`) is specified for
+  the volume, so a new volume\nis created for each task. This guarantees that each
+  task gets its own volume,\nand volumes are not shared between tasks. Anonymous volumes
+  are removed after\nthe task using them is complete.\n\n#### Create a service that
+  uses a bind-mounted host directory\n\nThe following example bind-mounts a host directory
+  at `/path/in/container` in\nthe containers backing the service:\n\n```bash\n$ docker
+  service create \\\n  --name my-service \\\n  --mount type=bind,source=/path/on/host,destination=/path/in/container
+  \\\n  nginx:alpine\n```\n\n### Set service mode (--mode)\n\nThe service mode determines
+  whether this is a _replicated_ service or a _global_\nservice. A replicated service
+  runs as many tasks as specified, while a global\nservice runs on each active node
+  in the swarm.\n\nThe following command creates a global service:\n\n```bash\n$ docker
+  service create \\\n --name redis_2 \\\n --mode global \\\n redis:3.0.6\n```\n\n###
+  Specify service constraints (--constraint)\n\nYou can limit the set of nodes where
+  a task can be scheduled by defining\nconstraint expressions. Multiple constraints
+  find nodes that satisfy every\nexpression (AND match). Constraints can match node
+  or Docker Engine labels as\nfollows:\n\n\n<table>\n  <tr>\n    <th>node attribute</th>\n
+  \   <th>matches</th>\n    <th>example</th>\n  </tr>\n  <tr>\n    <td><tt>node.id</tt></td>\n
+  \   <td>Node ID</td>\n    <td><tt>node.id==2ivku8v2gvtg4</tt></td>\n  </tr>\n  <tr>\n
+  \   <td><tt>node.hostname</tt></td>\n    <td>Node hostname</td>\n    <td><tt>node.hostname!=node-2</tt></td>\n
+  \ </tr>\n  <tr>\n    <td><tt>node.role</tt></td>\n    <td>Node role</td>\n    <td><tt>node.role==manager</tt></td>\n
+  \ </tr>\n  <tr>\n    <td><tt>node.labels</tt></td>\n    <td>user defined node labels</td>\n
+  \   <td><tt>node.labels.security==high</tt></td>\n  </tr>\n  <tr>\n    <td><tt>engine.labels</tt></td>\n
+  \   <td>Docker Engine's labels</td>\n    <td><tt>engine.labels.operatingsystem==ubuntu
+  14.04</tt></td>\n  </tr>\n</table>\n\n\n`engine.labels` apply to Docker Engine labels
+  like operating system,\ndrivers, etc. Swarm administrators add `node.labels` for
+  operational purposes by\nusing the [`docker node update`](node_update.md) command.\n\nFor
+  example, the following limits tasks for the redis service to nodes where the\nnode
+  type label equals queue:\n\n```bash\n$ docker service create \\\n  --name redis_2
+  \\\n  --constraint 'node.labels.type == queue' \\\n  redis:3.0.6\n```\n\n### Specify
+  service placement preferences (--placement-pref)\n\nYou can set up the service to
+  divide tasks evenly over different categories of\nnodes. One example of where this
+  can be useful is to balance tasks over a set\nof datacenters or availability zones.
+  The example below illustrates this:\n\n```bash\n$ docker service create \\\n  --replicas
+  9 \\\n  --name redis_2 \\\n  --placement-pref 'spread=node.labels.datacenter' \\\n
+  \ redis:3.0.6\n```\n\nThis uses `--placement-pref` with a `spread` strategy (currently
+  the only\nsupported strategy) to spread tasks evenly over the values of the `datacenter`\nnode
+  label. In this example, we assume that every node has a `datacenter` node\nlabel
+  attached to it. If there are three different values of this label among\nnodes in
+  the swarm, one third of the tasks will be placed on the nodes\nassociated with each
+  value. This is true even if there are more nodes with one\nvalue than another. For
+  example, consider the following set of nodes:\n\n- Three nodes with `node.labels.datacenter=east`\n-
+  Two nodes with `node.labels.datacenter=south`\n- One node with `node.labels.datacenter=west`\n\nSince
+  we are spreading over the values of the `datacenter` label and the\nservice has
+  9 replicas, 3 replicas will end up in each datacenter. There are\nthree nodes associated
+  with the value `east`, so each one will get one of the\nthree replicas reserved
+  for this value. There are two nodes with the value\n`south`, and the three replicas
+  for this value will be divided between them,\nwith one receiving two replicas and
+  another receiving just one. Finally, `west`\nhas a single node that will get all
+  three replicas reserved for `west`.\n\nIf the nodes in one category (for example,
+  those with\n`node.labels.datacenter=south`) can't handle their fair share of tasks
+  due to\nconstraints or resource limitations, the extra tasks will be assigned to
+  other\nnodes instead, if possible.\n\nBoth engine labels and node labels are supported
+  by placement preferences. The\nexample above uses a node label, because the label
+  is referenced with\n`node.labels.datacenter`. To spread over the values of an engine
+  label, use\n`--placement-pref spread=engine.labels.<labelname>`.\n\nIt is possible
+  to add multiple placement preferences to a service. This\nestablishes a hierarchy
+  of preferences, so that tasks are first divided over\none category, and then further
+  divided over additional categories. One example\nof where this may be useful is
+  dividing tasks fairly between datacenters, and\nthen splitting the tasks within
+  each datacenter over a choice of racks. To add\nmultiple placement preferences,
+  specify the `--placement-pref` flag multiple\ntimes. The order is significant, and
+  the placement preferences will be applied\nin the order given when making scheduling
+  decisions.\n\nThe following example sets up a service with multiple placement preferences.\nTasks
+  are spread first over the various datacenters, and then over racks\n(as indicated
+  by the respective labels):\n\n```bash\n$ docker service create \\\n  --replicas
+  9 \\\n  --name redis_2 \\\n  --placement-pref 'spread=node.labels.datacenter' \\\n
+  \ --placement-pref 'spread=node.labels.rack' \\\n  redis:3.0.6\n```\n\nWhen updating
+  a service with `docker service update`, `--placement-pref-add`\nappends a new placement
+  preference after all existing placement preferences.\n`--placement-pref-rm` removes
+  an existing placement preference that matches the\nargument.\n\n### Attach a service
+  to an existing network (--network)\n\nYou can use overlay networks to connect one
+  or more services within the swarm.\n\nFirst, create an overlay network on a manager
+  node the docker network create\ncommand:\n\n```bash\n$ docker network create --driver
+  overlay my-network\n\netjpu59cykrptrgw0z0hk5snf\n```\n\nAfter you create an overlay
+  network in swarm mode, all manager nodes have\naccess to the network.\n\nWhen you
+  create a service and pass the `--network` flag to attach the service to\nthe overlay
+  network:\n\n```bash\n$ docker service create \\\n  --replicas 3 \\\n  --network
+  my-network \\\n  --name my-web \\\n  nginx\n\n716thylsndqma81j6kkkb5aus\n```\n\nThe
+  swarm extends my-network to each node running the service.\n\nContainers on the
+  same network can access each other using\n[service discovery](https://docs.docker.com/engine/swarm/networking/#use-swarm-mode-service-discovery).\n\nLong
+  form syntax of `--network` allows to specify list of aliases and driver options:
+  \ \n`--network name=my-network,alias=web1,driver-opt=field1=value1`\n\n### Publish
+  service ports externally to the swarm (-p, --publish)\n\nYou can publish service
+  ports to make them available externally to the swarm\nusing the `--publish` flag.
+  The `--publish` flag can take two different styles\nof arguments. The short version
+  is positional, and allows you to specify the\npublished port and target port separated
+  by a colon.\n\n```bash\n$ docker service create --name my_web --replicas 3 --publish
+  8080:80 nginx\n```\n\nThere is also a long format, which is easier to read and allows
+  you to specify\nmore options. The long format is preferred. You cannot specify the
+  service's\nmode when using the short format. Here is an example of using the long
+  format\nfor the same service as above:\n\n```bash\n$ docker service create --name
+  my_web --replicas 3 --publish published=8080,target=80 nginx\n```\n\nThe options
+  you can specify are:\n\n<table>\n<thead>\n<tr>\n  <th>Option</th>\n  <th>Short syntax</th>\n
+  \ <th>Long syntax</th>\n  <th>Description</th>\n</tr>\n</thead>\n<tr>\n  <td>published
+  and target port</td>\n  <td><tt>--publish 8080:80</tt></td>\n  <td><tt>--publish
+  published=8080,target=80</tt></td>\n  <td><p>\n    The target port within the container
+  and the port to map it to on the\n    nodes, using the routing mesh (<tt>ingress</tt>)
+  or host-level networking.\n    More options are available, later in this table.
+  The key-value syntax is\n    preferred, because it is somewhat self-documenting.\n
+  \ </p></td>\n</tr>\n<tr>\n  <td>mode</td>\n  <td>Not possible to set using short
+  syntax.</td>\n  <td><tt>--publish published=8080,target=80,mode=host</tt></td>\n
+  \ <td><p>\n    The mode to use for binding the port, either <tt>ingress</tt> or
+  <tt>host</tt>.\n    Defaults to <tt>ingress</tt> to use the routing mesh.\n  </p></td>\n</tr>\n<tr>\n
+  \ <td>protocol</td>\n  <td><tt>--publish 8080:80/tcp</tt></td>\n  <td><tt>--publish
+  published=8080,target=80,protocol=tcp</tt></td>\n  <td><p>\n    The protocol to
+  use, <tt>tcp</tt> , <tt>udp</tt>, or <tt>sctp</tt>. Defaults to\n    <tt>tcp</tt>.
+  To bind a port for both protocols, specify the <tt>-p</tt> or\n    <tt>--publish</tt>
+  flag twice.\n  </p></td>\n</tr>\n</table>\n\nWhen you publish a service port using
+  `ingress` mode, the swarm routing mesh\nmakes the service accessible at the published
+  port on every node regardless if\nthere is a task for the service running on the
+  node. If you use `host` mode,\nthe port is only bound on nodes where the service
+  is running, and a given port\non a node can only be bound once. You can only set
+  the publication mode using\nthe long syntax. For more information refer to\n[Use
+  swarm mode routing mesh](https://docs.docker.com/engine/swarm/ingress/).\n\n###
+  Provide credential specs for managed service accounts (Windows only)\n\nThis option
+  is only used for services using Windows containers. The\n`--credential-spec` must
+  be in the format `file://<filename>` or\n`registry://<value-name>`.\n\nWhen using
+  the `file://<filename>` format, the referenced file must be\npresent in the `CredentialSpecs`
+  subdirectory in the docker data directory,\nwhich defaults to `C:\\ProgramData\\Docker\\`
+  on Windows. For example,\nspecifying `file://spec.json` loads `C:\\ProgramData\\Docker\\CredentialSpecs\\spec.json`.\n\nWhen
+  using the `registry://<value-name>` format, the credential spec is\nread from the
+  Windows registry on the daemon's host. The specified\nregistry value must be located
+  in:\n\n    HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Virtualization\\Containers\\CredentialSpecs\n\n\n###
+  Create services using templates\n\nYou can use templates for some flags of `service
+  create`, using the syntax\nprovided by the Go's [text/template](http://golang.org/pkg/text/template/)
+  package.\n\nThe supported flags are the following :\n\n- `--hostname`\n- `--mount`\n-
+  `--env`\n\nValid placeholders for the Go template are listed below:\n\n\n<table>\n
+  \ <tr>\n    <th>Placeholder</th>\n    <th>Description</th>\n  </tr>\n  <tr>\n    <td><tt>.Service.ID</tt></td>\n
+  \   <td>Service ID</td>\n  </tr>\n  <tr>\n    <td><tt>.Service.Name</tt></td>\n
+  \   <td>Service name</td>\n  </tr>\n  <tr>\n    <td><tt>.Service.Labels</tt></td>\n
+  \   <td>Service labels</td>\n  </tr>\n  <tr>\n    <td><tt>.Node.ID</tt></td>\n    <td>Node
+  ID</td>\n  </tr>\n  <tr>\n    <td><tt>.Node.Hostname</tt></td>\n    <td>Node Hostname</td>\n
+  \ </tr>\n  <tr>\n    <td><tt>.Task.ID</tt></td>\n    <td>Task ID</td>\n  </tr>\n
+  \ <tr>\n    <td><tt>.Task.Name</tt></td>\n    <td>Task name</td>\n  </tr>\n  <tr>\n
+  \   <td><tt>.Task.Slot</tt></td>\n    <td>Task slot</td>\n  </tr>\n</table>\n\n\n####
+  Template example\n\nIn this example, we are going to set the template of the created
+  containers based on the\nservice's name, the node's ID and hostname where it sits.\n\n```bash\n$
+  docker service create --name hosttempl \\\n                        --hostname=\"{{.Node.Hostname}}-{{.Node.ID}}-{{.Service.Name}}\"\\\n
+  \                        busybox top\n\nva8ew30grofhjoychbr6iot8c\n\n$ docker service
+  ps va8ew30grofhjoychbr6iot8c\n\nID            NAME         IMAGE                                                                                   NODE
+  \         DESIRED STATE  CURRENT STATE               ERROR  PORTS\nwo41w8hg8qan
+  \ hosttempl.1  busybox:latest@sha256:29f5d56d12684887bdfa50dcd29fc31eea4aaf4ad3bec43daf19026a7ce69912
+  \ 2e7a8a9c4da2  Running        Running about a minute ago\n\n$ docker inspect --format=\"{{.Config.Hostname}}\"
+  2e7a8a9c4da2-wo41w8hg8qanxwjwsg4kxpprj-hosttempl\n\nx3ti0erg11rjpg64m75kej2mz-hosttempl\n```\n\n###
+  Specify isolation mode (Windows)\n\nBy default, tasks scheduled on Windows nodes
+  are run using the default isolation mode\nconfigured for this particular node. To
+  force a specific isolation mode, you can use\nthe `--isolation` flag:\n\n```bash\n$
+  docker service create --name myservice --isolation=process microsoft/nanoserver\n```\n\nSupported
+  isolation modes on Windows are:\n- `default`: use default settings specified on
+  the node running the task\n- `process`: use process isolation (Windows server only)\n-
+  `hyperv`: use Hyper-V isolation\n\n### Create services requesting Generic Resources\n\nYou
+  can narrow the kind of nodes your task can land on through the using the\n`--generic-resource`
+  flag (if the nodes advertise these resources):\n\n```bash\n$ docker service create
+  --name cuda \\\n                        --generic-resource \"NVIDIA-GPU=2\" \\\n
+  \                       --generic-resource \"SSD=1\" \\\n                        nvidia/cuda\n```"
+deprecated: false
+min_api_version: "1.24"
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: true
+

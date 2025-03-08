@@ -1,0 +1,1154 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Documentation</title>
+
+    <link href="../stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="../stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
+    <script type="text/javascript">
+    !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="4.0.0";
+    analytics.load("IWj9D0UpZHZdZUZX9jl98PcpBFWBnBMy");
+    analytics.page();
+    }}();
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+      <script src="../javascripts/all_nosearch.js" type="text/javascript"></script>
+
+  </head>
+
+  <body class="includes includes_container">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="../images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <img src="../images/logo.png" />
+      <div id="toc">
+      </div>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id="containers">Containers</h1>
+
+<h2 id="container">Container</h2>
+
+<blockquote>
+<p>Example</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"autodestroy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OFF"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"autorestart"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OFF"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"bindings"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/infra/v1/user_namespace/volume/1863e34d-6a7d-4945-aefc-8f27a4ab1a9e/"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"host_path"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"container_path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/data"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"rewritable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"volume"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"host_path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/etc"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"container_path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/etc"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"rewritable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"cap_add"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"ALL"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"cap_drop"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"NET_ADMIN"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"SYS_ADMIN"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"container_envvars"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DB_1_ENV_DEBIAN_FRONTEND"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"noninteractive"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DB_1_ENV_MYSQL_PASS"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"**Random**"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DB_1_ENV_MYSQL_USER"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DB_1_ENV_PATH"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DB_1_ENV_REPLICATION_MASTER"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"**False**"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DB_1_ENV_REPLICATION_PASS"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"replica"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DB_1_ENV_REPLICATION_SLAVE"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"**False**"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DB_1_ENV_REPLICATION_USER"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"replica"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DB_1_PORT"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tcp://172.16.0.3:3306"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DB_1_PORT_3306_TCP"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tcp://172.16.0.3:3306"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DB_1_PORT_3306_TCP_ADDR"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"172.16.0.3"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DB_1_PORT_3306_TCP_PORT"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3306"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DB_1_PORT_3306_TCP_PROTO"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tcp"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DB_ENV_DEBIAN_FRONTEND"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"noninteractive"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DB_ENV_MYSQL_PASS"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"**Random**"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DB_ENV_MYSQL_USER"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DB_ENV_PATH"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DB_ENV_REPLICATION_MASTER"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"**False**"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DB_ENV_REPLICATION_PASS"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"replica"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DB_ENV_REPLICATION_SLAVE"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"**False**"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DB_ENV_REPLICATION_USER"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"replica"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DB_PASS"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"szVaPz925B7I"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DB_PORT"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tcp://172.16.0.3:3306"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DB_PORT_3306_TCP"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tcp://172.16.0.3:3306"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DB_PORT_3306_TCP_ADDR"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"172.16.0.3"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DB_PORT_3306_TCP_PORT"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3306"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DB_PORT_3306_TCP_PROTO"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tcp"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DB_DOCKERCLOUD_API_URL"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://cloud.docker.com/api/app/v1/user_namespace/service/c0fed1dc-c528-40c9-aa4c-dc00672ebcbf/"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"container_ports"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"endpoint_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://wordpress-stackable-1.admin.cont.dockerapp.io:49153/"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"inner_port"</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"outer_port"</span><span class="p">:</span><span class="w"> </span><span class="mi">49153</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"port_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tcp"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"published"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"uri_protocol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"cpu_shares"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"cpuset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0,1"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"cgroup_parent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m-executor-abcd"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"deployed_datetime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Thu, 16 Oct 2014 12:04:08 +0000"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"destroyed_datetime"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"devices"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"/dev/ttyUSB0:/dev/ttyUSB0"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"dns"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"8.8.8.8"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"dns_search"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"example.com"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"c1dd4e1e-1356-411c-8613-e15146633640.local.dockerapp.io"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"domainname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"domainname"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"entrypoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"exit_code"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"exit_code_msg"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"extra_hosts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"onehost:50.31.209.229"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"hostname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hostname"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"image_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tutum/wordpress-stackable:latest"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"labels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"com.example.description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Accounting webapp"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"com.example.department"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Finance"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"com.example.label-with-empty-value"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"linked_to_container"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"endpoints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"3306/tcp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tcp://172.16.0.3:3306"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nt">"from_container"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/app/v1/user_namespace/container/c1dd4e1e-1356-411c-8613-e15146633640/"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DB_1"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"to_container"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/app/v1/user_namespace/container/ba434e1e-1234-411c-8613-e15146633640/"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"link_variables"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"WORDPRESS_STACKABLE_1_ENV_DB_HOST"</span><span class="p">:</span><span class="w"> </span><span class="s2">"**LinkMe**"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"WORDPRESS_STACKABLE_1_ENV_DB_NAME"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wordpress"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"WORDPRESS_STACKABLE_1_ENV_DB_PASS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"szVaPz925B7I"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"WORDPRESS_STACKABLE_1_ENV_DB_PORT"</span><span class="p">:</span><span class="w"> </span><span class="s2">"**LinkMe**"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"WORDPRESS_STACKABLE_1_ENV_DB_USER"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"WORDPRESS_STACKABLE_1_ENV_DEBIAN_FRONTEND"</span><span class="p">:</span><span class="w"> </span><span class="s2">"noninteractive"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"WORDPRESS_STACKABLE_1_ENV_HOME"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"WORDPRESS_STACKABLE_1_ENV_PATH"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"WORDPRESS_STACKABLE_1_PORT"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tcp://172.16.0.2:80"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"WORDPRESS_STACKABLE_1_PORT_80_TCP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tcp://172.16.0.2:80"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"WORDPRESS_STACKABLE_1_PORT_80_TCP_ADDR"</span><span class="p">:</span><span class="w"> </span><span class="s2">"172.16.0.2"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"WORDPRESS_STACKABLE_1_PORT_80_TCP_PORT"</span><span class="p">:</span><span class="w"> </span><span class="s2">"80"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"WORDPRESS_STACKABLE_1_PORT_80_TCP_PROTO"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tcp"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"WORDPRESS_STACKABLE_ENV_DB_HOST"</span><span class="p">:</span><span class="w"> </span><span class="s2">"**LinkMe**"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"WORDPRESS_STACKABLE_ENV_DB_NAME"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wordpress"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"WORDPRESS_STACKABLE_ENV_DB_PASS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"szVaPz925B7I"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"WORDPRESS_STACKABLE_ENV_DB_PORT"</span><span class="p">:</span><span class="w"> </span><span class="s2">"**LinkMe**"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"WORDPRESS_STACKABLE_ENV_DB_USER"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"WORDPRESS_STACKABLE_ENV_DEBIAN_FRONTEND"</span><span class="p">:</span><span class="w"> </span><span class="s2">"noninteractive"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"WORDPRESS_STACKABLE_ENV_HOME"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"WORDPRESS_STACKABLE_ENV_PATH"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"WORDPRESS_STACKABLE_PORT"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tcp://172.16.0.2:80"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"WORDPRESS_STACKABLE_PORT_80_TCP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tcp://172.16.0.2:80"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"WORDPRESS_STACKABLE_PORT_80_TCP_ADDR"</span><span class="p">:</span><span class="w"> </span><span class="s2">"172.16.0.2"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"WORDPRESS_STACKABLE_PORT_80_TCP_PORT"</span><span class="p">:</span><span class="w"> </span><span class="s2">"80"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"WORDPRESS_STACKABLE_PORT_80_TCP_PROTO"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tcp"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"mac_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"02:42:ac:11:65:43"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"memory"</span><span class="p">:</span><span class="w"> </span><span class="mi">1024</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"memory_swap"</span><span class="p">:</span><span class="w"> </span><span class="mi">4096</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wordpress-stackable"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"net"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bridge"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"node"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/infra/v1/user_namespace/node/9691c44e-3155-4ca2-958d-c9571aac0a14/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"pid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"none"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"private_ip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.7.0.1"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"privileged"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"public_dns"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wordpress-stackable-1.admin.cont.dockerapp.io"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"read_only"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"resource_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/app/v1/user_namespace/container/c1dd4e1e-1356-411c-8613-e15146633640/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"roles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"global"</span><span class="p">],</span><span class="w">
+    </span><span class="nt">"run_command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/run-wordpress.sh"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"security_opt"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"label:user:USER"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"label:role:ROLE"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"service"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/app/v1/user_namespace/service/adeebc1b-1b81-4af0-b8f2-cefffc69d7fb/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"started_datetime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Thu, 16 Oct 2014 12:04:08 +0000"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Running"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"stdin_open"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"stopped_datetime"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"synchronized"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"tty"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="s2">"root"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c1dd4e1e-1356-411c-8613-e15146633640"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"working_dir"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/app"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>A container is a representation of a Docker container in a node.</p>
+
+<p>This is a <a href="#namespaced-endpoints">namespaced endpoint</a>.</p>
+
+<h3 id="attributes">Attributes</h3>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>uuid</td>
+<td>A unique identifier for the container generated automatically on creation</td>
+</tr>
+<tr>
+<td>resource_uri</td>
+<td>A unique API endpoint that represents the container</td>
+</tr>
+<tr>
+<td>image_name</td>
+<td>The Docker image name and tag of the container</td>
+</tr>
+<tr>
+<td>bindings</td>
+<td>A list of volume bindings that the container has mounted (see table <code class="prettyprint">Container Binding attributes</code> below)</td>
+</tr>
+<tr>
+<td>name</td>
+<td>A user provided name for the container (inherited from the service)</td>
+</tr>
+<tr>
+<td>node</td>
+<td>The resource URI of the node where this container is running</td>
+</tr>
+<tr>
+<td>service</td>
+<td>The resource URI of the service which this container is part of</td>
+</tr>
+<tr>
+<td>public_dns</td>
+<td>The external FQDN of the container</td>
+</tr>
+<tr>
+<td>state</td>
+<td>The state of the container (see table <code class="prettyprint">Container states</code> below)</td>
+</tr>
+<tr>
+<td>synchronized</td>
+<td>Flag indicating if the container is synchronized with the current service definition.</td>
+</tr>
+<tr>
+<td>exit_code</td>
+<td>The numeric exit code of the container (if applicable, <code class="prettyprint">null</code> otherwise)</td>
+</tr>
+<tr>
+<td>exit_code_msg</td>
+<td>A string representation of the exit code of the container (if applicable, <code class="prettyprint">null</code> otherwise)</td>
+</tr>
+<tr>
+<td>deployed_datetime</td>
+<td>The date and time of the last deployment of the container (if applicable, <code class="prettyprint">null</code> otherwise)</td>
+</tr>
+<tr>
+<td>started_datetime</td>
+<td>The date and time of the last <code class="prettyprint">start</code> operation on the container (if applicable, <code class="prettyprint">null</code> otherwise)</td>
+</tr>
+<tr>
+<td>stopped_datetime</td>
+<td>The date and time of the last <code class="prettyprint">stop</code> operation on the container (if applicable, <code class="prettyprint">null</code> otherwise)</td>
+</tr>
+<tr>
+<td>destroyed_datetime</td>
+<td>The date and time of the <code class="prettyprint">terminate</code> operation on the container (if applicable, <code class="prettyprint">null</code> otherwise)</td>
+</tr>
+<tr>
+<td>container_ports</td>
+<td>List of published ports of this container (see table <code class="prettyprint">Container Port attributes</code> below)</td>
+</tr>
+<tr>
+<td>container_envvars</td>
+<td>List of user-defined environment variables set on the containers of the service, which will override the container environment variables (see table <code class="prettyprint">Container Environment Variable attributes</code> below)</td>
+</tr>
+<tr>
+<td>labels</td>
+<td>Container metadata in form of dictionary</td>
+</tr>
+<tr>
+<td>working_dir</td>
+<td>Working directory for running binaries within a container</td>
+</tr>
+<tr>
+<td>user</td>
+<td>User used on the container on launch</td>
+</tr>
+<tr>
+<td>hostname</td>
+<td>Hostname used on the container on launch</td>
+</tr>
+<tr>
+<td>domainname</td>
+<td>Domainname used on the container on launch</td>
+</tr>
+<tr>
+<td>mac_address</td>
+<td>Ethernet device&rsquo;s MAC address used on the container on launch</td>
+</tr>
+<tr>
+<td>cgroup_name</td>
+<td>Optional parent cgroup for the container.</td>
+</tr>
+<tr>
+<td>tty</td>
+<td>If the container has the tty enable</td>
+</tr>
+<tr>
+<td>stdin_open</td>
+<td>If the container has stdin opened</td>
+</tr>
+<tr>
+<td>dns</td>
+<td>Container custom DNS servers</td>
+</tr>
+<tr>
+<td>dns_search</td>
+<td>Container custom DNS search domain</td>
+</tr>
+<tr>
+<td>cap_add</td>
+<td>Container added capabilities</td>
+</tr>
+<tr>
+<td>cap_drop</td>
+<td>Container dropped capabilities</td>
+</tr>
+<tr>
+<td>devices</td>
+<td>List of container device mappings</td>
+</tr>
+<tr>
+<td>extra_hosts</td>
+<td>List of container hostname mappings</td>
+</tr>
+<tr>
+<td>secuirty_opt</td>
+<td>Labeling scheme of this container</td>
+</tr>
+<tr>
+<td>entrypoint</td>
+<td>Entrypoint used on the container on launch</td>
+</tr>
+<tr>
+<td>run_command</td>
+<td>Run command used on the container on launch</td>
+</tr>
+<tr>
+<td>cpu_shares</td>
+<td>The relative CPU priority of the container (see <a href="/engine/reference/run/#runtime-constraints-on-cpu-and-memory">Runtime Constraints on CPU and Memory</a> for more information)</td>
+</tr>
+<tr>
+<td>cpuset</td>
+<td>CPUs in which execution is allowed</td>
+</tr>
+<tr>
+<td>memory</td>
+<td>The memory limit of the container in MB (see <a href="/engine/reference/run/#runtime-constraints-on-cpu-and-memory">Runtime Constraints on CPU and Memory</a> for more information)</td>
+</tr>
+<tr>
+<td>memory_swap</td>
+<td>Total memory limit (memory + swap) of the container in MB</td>
+</tr>
+<tr>
+<td>autorestart</td>
+<td>Whether to restart the container automatically if it stops (see <a href="/docker-cloud/apps/autorestart/">Crash recovery</a> for more information)</td>
+</tr>
+<tr>
+<td>autodestroy</td>
+<td>Whether to terminate the container automatically if it stops (see <a href="/docker-cloud/apps/auto-destroy/">Autodestroy</a> for more information)</td>
+</tr>
+<tr>
+<td>roles</td>
+<td>List of Docker Cloud roles asigned to this container (see <a href="/docker-cloud/apps/api-roles/">API roles</a> for more information))</td>
+</tr>
+<tr>
+<td>linked_to_container</td>
+<td>List of IP addresses of the linked containers (see table <code class="prettyprint">Container Link attributes</code> below and <a href="/docker-cloud/apps/service-links/">Service links</a> for more information)</td>
+</tr>
+<tr>
+<td>link_variables</td>
+<td>List of environment variables that would be exposed in any container that is linked to this one</td>
+</tr>
+<tr>
+<td>privileged</td>
+<td>Whether the container has Docker&rsquo;s <code class="prettyprint">privileged</code> flag set or not (see <a href="/engine/reference/run/#runtime-privilege-linux-capabilities-and-lxc-configuration">Runtime privilege</a> for more information)</td>
+</tr>
+<tr>
+<td>read_only</td>
+<td>Whether the container filesystem is read-only or not</td>
+</tr>
+<tr>
+<td>private_ip</td>
+<td>IP address of the container on the overlay network. This IP will be reachable from any other container.</td>
+</tr>
+<tr>
+<td>net</td>
+<td>Network mode set on the container (see table <code class="prettyprint">Network Modes</code> below, <a href="/engine/reference/run/#network-settings">more information</a>)</td>
+</tr>
+<tr>
+<td>pid</td>
+<td>PID (Process) Namespace mode for the container (<a href="/engine/reference/run/#pid-settings-pid">more information</a>)</td>
+</tr>
+</tbody></table>
+
+<h3 id="container-binding-attributes">Container Binding attributes</h3>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>host_path</td>
+<td>The host path of the volume</td>
+</tr>
+<tr>
+<td>container_path</td>
+<td>The container path where the volume is mounted</td>
+</tr>
+<tr>
+<td>rewritable</td>
+<td><code class="prettyprint">true</code> is the volume has writable permissions</td>
+</tr>
+<tr>
+<td>volume</td>
+<td>The resource URI of the volume</td>
+</tr>
+</tbody></table>
+
+<h3 id="container-port-attributes">Container Port attributes</h3>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>protocol</td>
+<td>The protocol of the port, either <code class="prettyprint">tcp</code> or <code class="prettyprint">udp</code></td>
+</tr>
+<tr>
+<td>inner_port</td>
+<td>The published port number inside the container</td>
+</tr>
+<tr>
+<td>outer_port</td>
+<td>The published port number in the node public network interface</td>
+</tr>
+<tr>
+<td>port_name</td>
+<td>Name of the service associated to this port</td>
+</tr>
+<tr>
+<td>uri_protocol</td>
+<td>The protocol to be used in the endpoint for this port (i.e. <code class="prettyprint">http</code>)</td>
+</tr>
+<tr>
+<td>endpoint_uri</td>
+<td>The URI of the endpoint for this port</td>
+</tr>
+<tr>
+<td>published</td>
+<td>Whether the port has been published in the host public network interface or not. Non-published ports can only be accessed via links.</td>
+</tr>
+</tbody></table>
+
+<h3 id="container-environment-variable-attributes">Container Environment Variable attributes</h3>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>key</td>
+<td>The name of the environment variable</td>
+</tr>
+<tr>
+<td>value</td>
+<td>The value of the environment variable</td>
+</tr>
+</tbody></table>
+
+<h3 id="container-states">Container States</h3>
+
+<table><thead>
+<tr>
+<th>State</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Starting</td>
+<td>The container is being deployed or started (from Stopped). No actions allowed in this state.</td>
+</tr>
+<tr>
+<td>Running</td>
+<td>The container is deployed and running. Possible actions in this state: <code class="prettyprint">stop</code>, <code class="prettyprint">terminate</code>.</td>
+</tr>
+<tr>
+<td>Stopping</td>
+<td>The container is being stopped. No actions allowed in this state.</td>
+</tr>
+<tr>
+<td>Stopped</td>
+<td>The container is stopped. Possible actions in this state: <code class="prettyprint">start</code>, <code class="prettyprint">terminate</code>.</td>
+</tr>
+<tr>
+<td>Terminating</td>
+<td>The container is being deleted. No actions allowed in this state.</td>
+</tr>
+<tr>
+<td>Terminated</td>
+<td>The container has been deleted. No actions allowed in this state.</td>
+</tr>
+</tbody></table>
+
+<h3 id="network-modes">Network Modes</h3>
+
+<table><thead>
+<tr>
+<th>Strategy</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>bridge</td>
+<td>Creates a new network stack for the container on the docker bridge.</td>
+</tr>
+<tr>
+<td>host</td>
+<td>Uses the host network stack inside the container.</td>
+</tr>
+</tbody></table>
+
+<h3 id="container-link-attributes">Container Link attributes</h3>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>The name given to the link</td>
+</tr>
+<tr>
+<td>from_container</td>
+<td>The resource URI of the &ldquo;client&rdquo; container</td>
+</tr>
+<tr>
+<td>to_container</td>
+<td>The resource URI of the &ldquo;server&rdquo; container being linked</td>
+</tr>
+<tr>
+<td>endpoints</td>
+<td>A dictionary with the endpoints (protocol, IP and port) to be used to reach each of the &ldquo;server&rdquo; container exposed ports</td>
+</tr>
+</tbody></table>
+
+<h2 id="list-all-containers">List all containers</h2>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">dockercloud</span>
+
+<span class="n">containers</span> <span class="o">=</span> <span class="n">dockercloud</span><span class="o">.</span><span class="n">Container</span><span class="o">.</span><span class="nb">list</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight go"><code><span class="k">import</span><span class="x"> </span><span class="s">"github.com/docker/go-dockercloud/dockercloud"</span><span class="x">
+
+</span><span class="n">containerList</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">dockercloud</span><span class="o">.</span><span class="n">ListContainers</span><span class="p">()</span><span class="x">
+
+</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">containerList</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/app/v1/container/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">cloud.docker.com</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Basic dXNlcm5hbWU6YXBpa2V5</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+</code></pre>
+<pre class="highlight shell"><code>docker-cloud container ps
+</code></pre>
+
+<p>Lists all current and recently terminated containers. Returns a list of <code class="prettyprint">Container</code> objects.</p>
+
+<h3 id="endpoint-type">Endpoint Type</h3>
+
+<p>Available in Docker Cloud&rsquo;s <strong>REST API</strong></p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /api/app/v1/[optional_namespace/]container/</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>uuid</td>
+<td>Filter by UUID</td>
+</tr>
+<tr>
+<td>state</td>
+<td>Filter by state. Possible values: <code class="prettyprint">Starting</code>, <code class="prettyprint">Running</code>, <code class="prettyprint">Stopping</code>, <code class="prettyprint">Stopped</code>, <code class="prettyprint">Terminating</code>, <code class="prettyprint">Terminated</code></td>
+</tr>
+<tr>
+<td>name</td>
+<td>Filter by container name</td>
+</tr>
+<tr>
+<td>service</td>
+<td>Filter by resource URI of the target service.</td>
+</tr>
+<tr>
+<td>node</td>
+<td>Filter by resource URI of the target node.</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-an-existing-container">Get an existing container</h2>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">dockercloud</span>
+
+<span class="n">container</span> <span class="o">=</span> <span class="n">dockercloud</span><span class="o">.</span><span class="n">Container</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="s">"7eaf7fff-882c-4f3d-9a8f-a22317ac00ce"</span><span class="p">)</span>
+</code></pre>
+<pre class="highlight go"><code><span class="k">import</span><span class="x"> </span><span class="s">"github.com/docker/go-dockercloud/dockercloud"</span><span class="x">
+
+</span><span class="n">container</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">dockerckoud</span><span class="o">.</span><span class="n">GetContainer</span><span class="p">(</span><span class="s">"7eaf7fff-882c-4f3d-9a8f-a22317ac00ce"</span><span class="p">)</span><span class="x">
+
+</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">container</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/app/v1/container/7eaf7fff-882c-4f3d-9a8f-a22317ac00ce/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">cloud.docker.com</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Basic dXNlcm5hbWU6YXBpa2V5</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+</code></pre>
+<pre class="highlight shell"><code>docker-cloud container inspect 7eaf7fff
+</code></pre>
+
+<p>Get all the details of an specific container</p>
+
+<h3 id="endpoint-type">Endpoint Type</h3>
+
+<p>Available in Docker Cloud&rsquo;s <strong>REST API</strong></p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /api/app/v1/[optional_namespace/]container/(uuid)/</code></p>
+
+<h3 id="path-parameters">Path Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>uuid</td>
+<td>The UUID of the container to retrieve</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-the-logs-of-a-container">Get the logs of a container</h2>
+
+<blockquote>
+<p>Example log line</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"log"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"log"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Log line from the container"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"streamType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stdout"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1433779324</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">dockercloud</span>
+
+<span class="k">def</span> <span class="nf">log_handler</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
+    <span class="k">print</span> <span class="n">message</span>
+
+<span class="n">container</span> <span class="o">=</span> <span class="n">dockercloud</span><span class="o">.</span><span class="n">Container</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="s">"7eaf7fff-882c-4f3d-9a8f-a22317ac00ce"</span><span class="p">)</span>
+<span class="n">container</span><span class="o">.</span><span class="n">logs</span><span class="p">(</span><span class="n">tail</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">follow</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">log_handler</span><span class="o">=</span><span class="n">log_handler</span><span class="p">)</span>
+</code></pre>
+<pre class="highlight go"><code><span class="k">import</span><span class="x"> </span><span class="s">"github.com/docker/go-dockercloud/dockercloud"</span><span class="x">
+
+</span><span class="n">container</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">dockercloud</span><span class="o">.</span><span class="n">GetContainer</span><span class="p">(</span><span class="s">"447ecddc-2890-4ea2-849b-99392e0dd7a6"</span><span class="p">)</span><span class="x">
+
+</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="n">log</span><span class="o">.</span><span class="n">Fatal</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span><span class="n">c</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="nb">make</span><span class="p">(</span><span class="k">chan</span><span class="x"> </span><span class="n">dockercloud</span><span class="o">.</span><span class="n">Logs</span><span class="p">)</span><span class="x">
+
+</span><span class="k">go</span><span class="x"> </span><span class="n">container</span><span class="o">.</span><span class="n">Logs</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="x">
+    </span><span class="k">for</span><span class="x"> </span><span class="p">{</span><span class="x">
+        </span><span class="n">s</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="o">&lt;-</span><span class="n">c</span><span class="x">
+        </span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="x">
+    </span><span class="p">}</span><span class="x">
+</span></code></pre>
+<pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/app/v1/container/7eaf7fff-882c-4f3d-9a8f-a22317ac00ce/logs/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">ws.cloud.docker.com</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Basic dXNlcm5hbWU6YXBpa2V5</span>
+<span class="na">Connection</span><span class="p">:</span> <span class="s">Upgrade</span>
+<span class="na">Upgrade</span><span class="p">:</span> <span class="s">websocket</span>
+</code></pre>
+<pre class="highlight shell"><code>docker-cloud container logs 7eaf7fff
+</code></pre>
+
+<p>Get the logs of the specified container.</p>
+
+<h3 id="endpoint-type">Endpoint Type</h3>
+
+<p>Available in Docker Cloud&rsquo;s <strong>STREAM API</strong></p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /api/app/v1/[optional_namespace/]container/(uuid)/logs/</code></p>
+
+<h3 id="path-parameters">Path Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>uuid</td>
+<td>The UUID of the container to retrieve logs</td>
+</tr>
+</tbody></table>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>tail</td>
+<td>Number of lines to show from the end of the logs (default: <code class="prettyprint">300</code>)</td>
+</tr>
+<tr>
+<td>follow</td>
+<td>Whether to stream logs or close the connection immediately (default: true)</td>
+</tr>
+<tr>
+<td>service</td>
+<td>Filter by service (resource URI)</td>
+</tr>
+</tbody></table>
+
+<h2 id="start-a-container">Start a container</h2>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">dockercloud</span>
+
+<span class="n">container</span> <span class="o">=</span> <span class="n">dockercloud</span><span class="o">.</span><span class="n">Container</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="s">"7eaf7fff-882c-4f3d-9a8f-a22317ac00ce"</span><span class="p">)</span>
+<span class="n">container</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight go"><code><span class="k">import</span><span class="x"> </span><span class="s">"github.com/docker/go-dockercloud/dockercloud"</span><span class="x">
+
+</span><span class="n">container</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">dockercloud</span><span class="o">.</span><span class="n">GetContainer</span><span class="p">(</span><span class="s">"7eaf7fff-882c-4f3d-9a8f-a22317ac00ce"</span><span class="p">)</span><span class="x">
+
+</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">container</span><span class="o">.</span><span class="n">Start</span><span class="p">();</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre>
+<pre class="highlight http"><code><span class="nf">POST</span> <span class="nn">/api/app/v1/container/7eaf7fff-882c-4f3d-9a8f-a22317ac00ce/start/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">cloud.docker.com</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Basic dXNlcm5hbWU6YXBpa2V5</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+</code></pre>
+<pre class="highlight shell"><code>docker-cloud container start 7eaf7fff
+</code></pre>
+
+<p>Starts a stopped container.</p>
+
+<h3 id="endpoint-type">Endpoint Type</h3>
+
+<p>Available in Docker Cloud&rsquo;s <strong>REST API</strong></p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST /api/app/v1/[optional_namespace/]container/(uuid)/start/</code></p>
+
+<h3 id="path-parameters">Path Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>uuid</td>
+<td>The UUID of the container to start</td>
+</tr>
+</tbody></table>
+
+<h2 id="stop-a-container">Stop a container</h2>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">dockercloud</span>
+
+<span class="n">container</span> <span class="o">=</span> <span class="n">dockerlcoud</span><span class="o">.</span><span class="n">Container</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="s">"7eaf7fff-882c-4f3d-9a8f-a22317ac00ce"</span><span class="p">)</span>
+<span class="n">container</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight go"><code><span class="k">import</span><span class="x"> </span><span class="s">"github.com/docker/go-dockercloud/dockercloud"</span><span class="x">
+
+</span><span class="n">container</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">dockercloud</span><span class="o">.</span><span class="n">GetContainer</span><span class="p">(</span><span class="s">"7eaf7fff-882c-4f3d-9a8f-a22317ac00ce"</span><span class="p">)</span><span class="x">
+
+</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">container</span><span class="o">.</span><span class="n">Stop</span><span class="p">();</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+       </span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
+   </span><span class="p">}</span><span class="x">
+</span></code></pre>
+<pre class="highlight http"><code><span class="nf">POST</span> <span class="nn">/api/app/v1/container/7eaf7fff-882c-4f3d-9a8f-a22317ac00ce/stop/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">cloud.docker.com</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Basic dXNlcm5hbWU6YXBpa2V5</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+</code></pre>
+<pre class="highlight shell"><code>docker-cloud container stop 7eaf7fff
+</code></pre>
+
+<p>Stops a running container.</p>
+
+<h3 id="endpoint-type">Endpoint Type</h3>
+
+<p>Available in Docker Cloud&rsquo;s <strong>REST API</strong></p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST /api/app/v1/[optional_namespace/]container/(uuid)/stop/</code></p>
+
+<h3 id="path-parameters">Path Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>uuid</td>
+<td>The UUID of the container to stop</td>
+</tr>
+</tbody></table>
+
+<h2 id="redeploy-a-container">Redeploy a container</h2>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">dockercloud</span>
+
+<span class="n">container</span> <span class="o">=</span> <span class="n">dockercloud</span><span class="o">.</span><span class="n">Container</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="s">"7eaf7fff-882c-4f3d-9a8f-a22317ac00ce"</span><span class="p">)</span>
+<span class="n">container</span><span class="o">.</span><span class="n">redeploy</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight go"><code><span class="k">import</span><span class="x"> </span><span class="s">"github.com/docker/go-dockercloud/dockercloud"</span><span class="x">
+
+</span><span class="n">container</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">dockercloud</span><span class="o">.</span><span class="n">GetContainer</span><span class="p">(</span><span class="s">"7eaf7fff-882c-4f3d-9a8f-a22317ac00ce"</span><span class="p">)</span><span class="x">
+
+</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span><span class="c">//Redeploy(dockercloud.ReuseVolumesOption{Reuse: true) to reuse the existing volumes</span><span class="x">
+</span><span class="c">//Redeploy(dockercloud.ReuseVolumesOption{Reuse: false}) to not reuse the existing volumes</span><span class="x">
+</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">container</span><span class="o">.</span><span class="n">Redeploy</span><span class="p">(</span><span class="n">dockercloud</span><span class="o">.</span><span class="n">ReuseVolumesOption</span><span class="p">{</span><span class="n">Reuse</span><span class="o">:</span><span class="x"> </span><span class="no">false</span><span class="p">});</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre>
+<pre class="highlight http"><code><span class="nf">POST</span> <span class="nn">/api/app/v1/container/7eaf7fff-882c-4f3d-9a8f-a22317ac00ce/start/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">cloud.docker.com</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Basic dXNlcm5hbWU6YXBpa2V5</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+</code></pre>
+<pre class="highlight shell"><code>docker-cloud container redeploy 7eaf7fff
+</code></pre>
+
+<p>Redeploys a container.</p>
+
+<h3 id="endpoint-type">Endpoint Type</h3>
+
+<p>Available in Docker Cloud&rsquo;s <strong>REST API</strong></p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST /api/app/v1/[optional_namespace/]container/(uuid)/redeploy/</code></p>
+
+<h3 id="path-parameters">Path Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>uuid</td>
+<td>The UUID of the container to redeploy</td>
+</tr>
+</tbody></table>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>reuse_volumes</td>
+<td>Wheather to reuse container volumes for this redeploy operation or not (default: <code class="prettyprint">true</code>).</td>
+</tr>
+</tbody></table>
+
+<h2 id="terminate-a-container">Terminate a container</h2>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">dockercloud</span>
+
+<span class="n">container</span> <span class="o">=</span> <span class="n">dockercloud</span><span class="o">.</span><span class="n">Container</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="s">"7eaf7fff-882c-4f3d-9a8f-a22317ac00ce"</span><span class="p">)</span>
+<span class="n">container</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight go"><code><span class="k">import</span><span class="x"> </span><span class="s">"github.com/docker/go-dockercloud/dockercloud"</span><span class="x">
+
+</span><span class="n">container</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">dockercloud</span><span class="o">.</span><span class="n">GetContainer</span><span class="p">(</span><span class="s">"7eaf7fff-882c-4f3d-9a8f-a22317ac00ce"</span><span class="p">)</span><span class="x">
+
+</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">container</span><span class="o">.</span><span class="n">Terminate</span><span class="p">();</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+       </span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
+   </span><span class="p">}</span><span class="x">
+</span></code></pre>
+<pre class="highlight http"><code><span class="nf">DELETE</span> <span class="nn">/api/app/v1/container/7eaf7fff-882c-4f3d-9a8f-a22317ac00ce/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">cloud.docker.com</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Basic dXNlcm5hbWU6YXBpa2V5</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+</code></pre>
+<pre class="highlight shell"><code>docker-cloud container terminate 7eaf7fff
+</code></pre>
+
+<p>Terminates the specified container. This is not reversible. All data stored in the container will be permanently deleted.</p>
+
+<h3 id="endpoint-type">Endpoint Type</h3>
+
+<p>Available in Docker Cloud&rsquo;s <strong>REST API</strong></p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">DELETE /api/app/v1/[optional_namespace/]container/(uuid)/</code></p>
+
+<h3 id="path-parameters">Path Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>uuid</td>
+<td>The UUID of the container to terminate</td>
+</tr>
+</tbody></table>
+
+<h2 id="execute-command-inside-a-container">Execute command inside a container</h2>
+<pre class="highlight plaintext"><code>import dockercloud
+
+def msg_handler(message):
+    print message
+
+container = dockercloud.Container.fetch("7eaf7fff-882c-4f3d-9a8f-a22317ac00ce")
+container.execute("ls", handler=msg_handler)
+</code></pre>
+<pre class="highlight go"><code><span class="k">import</span><span class="x"> </span><span class="s">"github.com/docker/go-dockercloud/dockercloud"</span><span class="x">
+
+</span><span class="n">container</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">dockercloud</span><span class="o">.</span><span class="n">GetContainer</span><span class="p">(</span><span class="s">"7eaf7fff-882c-4f3d-9a8f-a22317ac00ce"</span><span class="p">)</span><span class="x">
+
+</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="n">c</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="nb">make</span><span class="p">(</span><span class="k">chan</span><span class="x"> </span><span class="n">dockercloud</span><span class="o">.</span><span class="n">Exec</span><span class="p">)</span><span class="x">
+
+</span><span class="n">container</span><span class="o">.</span><span class="n">Exec</span><span class="p">(</span><span class="s">"ls"</span><span class="p">,</span><span class="x"> </span><span class="n">c</span><span class="p">)</span><span class="x">
+
+</span></code></pre>
+<pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/app/v1/container/(uuid)/exec/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">ws.cloud.docker.com</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Basic dXNlcm5hbWU6YXBpa2V5</span>
+<span class="na">Connection</span><span class="p">:</span> <span class="s">Upgrade</span>
+<span class="na">Upgrade</span><span class="p">:</span> <span class="s">websocket</span>
+</code></pre>
+<pre class="highlight plaintext"><code>docker-cloud exec 7eaf7fff ls
+</code></pre>
+
+<p>Executes a command inside the specified running container, creating a bi-directional stream for the process&rsquo; standard input and output. This endpoint can be connected to using a bi-directional Secure Web Socket <code class="prettyprint">wss://ws.cloud.docker.com/api/app/v1/container/(uuid)/exec/</code></p>
+
+<h3 id="endpoint-type">Endpoint Type</h3>
+
+<p>Available in Docker Cloud&rsquo;s <strong>STREAM API</strong></p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /api/app/v1/[optional_namespace/]container/(uuid)/exec/</code></p>
+
+<h3 id="path-parameters">Path Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>uuid</td>
+<td>The UUID of the container where the command will be executed</td>
+</tr>
+</tbody></table>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>command</td>
+<td>Command to be executed (default: <code class="prettyprint">sh</code>)</td>
+</tr>
+</tbody></table>
+
+      </div>
+      <div class="dark-box">
+      </div>
+    </div>
+  </body>
+</html>

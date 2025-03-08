@@ -1,0 +1,23 @@
+command: docker config
+short: Manage Docker configs
+long: Manage Docker configs
+usage: docker config
+pname: docker
+plink: docker.yaml
+cname:
+- docker config create
+- docker config inspect
+- docker config ls
+- docker config rm
+clink:
+- docker_config_create.yaml
+- docker_config_inspect.yaml
+- docker_config_ls.yaml
+- docker_config_rm.yaml
+deprecated: false
+min_api_version: "1.30"
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: true
+

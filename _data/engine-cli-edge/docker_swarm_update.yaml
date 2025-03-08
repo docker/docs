@@ -1,0 +1,83 @@
+command: docker swarm update
+short: Update the swarm
+long: Updates a swarm with new parameter values. This command must target a manager
+  node.
+usage: docker swarm update [OPTIONS]
+pname: docker swarm
+plink: docker_swarm.yaml
+options:
+- option: autolock
+  value_type: bool
+  default_value: "false"
+  description: Change manager autolocking setting (true|false)
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: cert-expiry
+  value_type: duration
+  default_value: 2160h0m0s
+  description: Validity period for node certificates (ns|us|ms|s|m|h)
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: dispatcher-heartbeat
+  value_type: duration
+  default_value: 5s
+  description: Dispatcher heartbeat period (ns|us|ms|s|m|h)
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: external-ca
+  value_type: external-ca
+  description: Specifications of one or more certificate signing endpoints
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: max-snapshots
+  value_type: uint64
+  default_value: "0"
+  description: Number of additional Raft snapshots to retain
+  deprecated: false
+  min_api_version: "1.25"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: snapshot-interval
+  value_type: uint64
+  default_value: "10000"
+  description: Number of log entries between Raft snapshots
+  deprecated: false
+  min_api_version: "1.25"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: task-history-limit
+  value_type: int64
+  default_value: "5"
+  description: Task history retention limit
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+examples: |-
+  ```bash
+  $ docker swarm update --cert-expiry 720h
+  ```
+deprecated: false
+min_api_version: "1.24"
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: true
+

@@ -1,0 +1,139 @@
+command: docker service logs
+short: Fetch the logs of a service or task
+long: |-
+  The `docker service logs` command batch-retrieves logs present at the time of execution.
+
+  The `docker service logs` command can be used with either the name or ID of a
+  service, or with the ID of a task. If a service is passed, it will display logs
+  for all of the containers in that service. If a task is passed, it will only
+  display logs from that particular task.
+
+  > **Note**: This command is only functional for services that are started with
+  > the `json-file` or `journald` logging driver.
+
+  For more information about selecting and configuring logging drivers, refer to
+  [Configure logging drivers](https://docs.docker.com/engine/admin/logging/overview/).
+
+  The `docker service logs --follow` command will continue streaming the new output from
+  the service's `STDOUT` and `STDERR`.
+
+  Passing a negative number or a non-integer to `--tail` is invalid and the
+  value is set to `all` in that case.
+
+  The `docker service logs --timestamps` command will add an [RFC3339Nano timestamp](https://golang.org/pkg/time/#pkg-constants)
+  , for example `2014-09-16T06:17:46.000000000Z`, to each
+  log entry. To ensure that the timestamps are aligned the
+  nano-second part of the timestamp will be padded with zero when necessary.
+
+  The `docker service logs --details` command will add on extra attributes, such as
+  environment variables and labels, provided to `--log-opt` when creating the
+  service.
+
+  The `--since` option shows only the service logs generated after
+  a given date. You can specify the date as an RFC 3339 date, a UNIX
+  timestamp, or a Go duration string (e.g. `1m30s`, `3h`). Besides RFC3339 date
+  format you may also use RFC3339Nano, `2006-01-02T15:04:05`,
+  `2006-01-02T15:04:05.999999999`, `2006-01-02Z07:00`, and `2006-01-02`. The local
+  timezone on the client will be used if you do not provide either a `Z` or a
+  `+-00:00` timezone offset at the end of the timestamp. When providing Unix
+  timestamps enter seconds[.nanoseconds], where seconds is the number of seconds
+  that have elapsed since January 1, 1970 (midnight UTC/GMT), not counting leap
+  seconds (aka Unix epoch or Unix time), and the optional .nanoseconds field is a
+  fraction of a second no more than nine digits long. You can combine the
+  `--since` option with either or both of the `--follow` or `--tail` options.
+usage: docker service logs [OPTIONS] SERVICE|TASK
+pname: docker service
+plink: docker_service.yaml
+options:
+- option: details
+  value_type: bool
+  default_value: "false"
+  description: Show extra details provided to logs
+  deprecated: false
+  min_api_version: "1.30"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: follow
+  shorthand: f
+  value_type: bool
+  default_value: "false"
+  description: Follow log output
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: no-resolve
+  value_type: bool
+  default_value: "false"
+  description: Do not map IDs to Names in output
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: no-task-ids
+  value_type: bool
+  default_value: "false"
+  description: Do not include task IDs in output
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: no-trunc
+  value_type: bool
+  default_value: "false"
+  description: Do not truncate output
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: raw
+  value_type: bool
+  default_value: "false"
+  description: Do not neatly format logs
+  deprecated: false
+  min_api_version: "1.30"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: since
+  value_type: string
+  description: |
+    Show logs since timestamp (e.g. 2013-01-02T13:23:37) or relative (e.g. 42m for 42 minutes)
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: tail
+  value_type: string
+  default_value: all
+  description: Number of lines to show from the end of the logs
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: timestamps
+  shorthand: t
+  value_type: bool
+  default_value: "false"
+  description: Show timestamps
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+deprecated: false
+min_api_version: "1.29"
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: true
+

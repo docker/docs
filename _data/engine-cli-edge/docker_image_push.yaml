@@ -1,0 +1,22 @@
+command: docker image push
+short: Push an image or a repository to a registry
+long: Push an image or a repository to a registry
+usage: docker image push [OPTIONS] NAME[:TAG]
+pname: docker image
+plink: docker_image.yaml
+options:
+- option: disable-content-trust
+  value_type: bool
+  default_value: "true"
+  description: Skip image signing
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

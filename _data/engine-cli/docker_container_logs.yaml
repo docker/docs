@@ -1,0 +1,70 @@
+command: docker container logs
+short: Fetch the logs of a container
+long: Fetch the logs of a container
+usage: docker container logs [OPTIONS] CONTAINER
+pname: docker container
+plink: docker_container.yaml
+options:
+- option: details
+  value_type: bool
+  default_value: "false"
+  description: Show extra details provided to logs
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: follow
+  shorthand: f
+  value_type: bool
+  default_value: "false"
+  description: Follow log output
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: since
+  value_type: string
+  description: |
+    Show logs since timestamp (e.g. 2013-01-02T13:23:37) or relative (e.g. 42m for 42 minutes)
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: tail
+  value_type: string
+  default_value: all
+  description: Number of lines to show from the end of the logs
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: timestamps
+  shorthand: t
+  value_type: bool
+  default_value: "false"
+  description: Show timestamps
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: until
+  value_type: string
+  description: |
+    Show logs before a timestamp (e.g. 2013-01-02T13:23:37) or relative (e.g. 42m for 42 minutes)
+  deprecated: false
+  min_api_version: "1.35"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

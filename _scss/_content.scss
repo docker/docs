@@ -1,0 +1,147 @@
+/*
+*
+* Custom Content Docs  ******************************************
+*
+*/
+
+/*
+*
+* images
+*
+*/
+
+.content img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+/** code formatting **/
+
+pre {
+    background-color: #F5F8FA!important;
+    display: block;
+    padding: 20.5px!important;
+    margin: 0 0 10px;
+    font-size: 13px;
+    line-height: 1.42857143;
+    color: #333;
+    word-break: normal !important;
+    word-wrap: break-word;
+    border: 0!important;
+    border-radius: 4px;
+}
+
+code {
+    background-color: #F5F8FA!important;
+    border-radius: 2px;
+    color: #0c5176 !important;
+    font-size: 90%;
+    padding: 3px 7px;
+    overflow-x: scroll;
+    white-space: nowrap;
+}
+
+pre code {
+    overflow-x: auto;
+    overflow-wrap: normal;
+    white-space: pre;
+}
+
+/*
+*
+* Guides : components
+*
+*/
+
+.component-container {
+    padding: 0;
+    margin: 0 0 50px;
+    width: 100%;
+}
+
+.component {
+    padding: 15px 25px 5px 15px;
+    text-align: center;
+    margin: 0 8px 15px;
+    float: left;
+    height: 250px;
+    width: 100%;
+}
+
+.component-full {
+    padding: 5px 0 10px 20px;
+    float: left;
+    min-height: 100px;
+    margin: 0px 0 15px 0;
+    width: 100%;
+}
+
+.component,
+.component-full {
+    background: $bg-component;
+}
+
+.component-full-icon {
+    float: left;
+    padding: 5px 15px 0 7px;
+}
+
+.component-full p {
+    margin: 0;
+}
+
+.component-full h3 {
+    margin-top: 10px;
+}
+
+.component img,
+.component-full-icon img {
+    width: 70px;
+    height: 70px;
+}
+
+.component-icon {
+    margin: 0 auto;
+    width: 70px;
+}
+
+.component-full-copy {
+    float: left;
+    width: 80%;
+}
+
+.component h3,
+.component p {
+    margin: 0;
+}
+
+a.anchorLink {
+    margin-left: 5px;
+    visibility: hidden;
+}
+
+.highlighter-rouge {
+    margin: 15px 0;
+}
+
+code {
+    padding: 3px 7px;
+    font-size: 90%;
+    color: #0c5176!important;
+    background-color: rgba(12, 81, 118, 0.1);
+    border-radius: 2px;
+}
+
+pre {
+    display: block;
+    padding: 9.5px;
+    margin: 0 0 10px;
+    font-size: 13px;
+    line-height: 1.42857143;
+    color: #333;
+    word-break: normal!important;
+    word-wrap: break-word;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}

@@ -1,0 +1,21 @@
+command: docker trust key generate
+short: Generate and load a signing key-pair
+long: Generate and load a signing key-pair
+usage: docker trust key generate NAME
+pname: docker trust key
+plink: docker_trust_key.yaml
+options:
+- option: dir
+  value_type: string
+  description: Directory to generate key in, defaults to current directory
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

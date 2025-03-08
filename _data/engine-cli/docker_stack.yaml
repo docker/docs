@@ -1,0 +1,43 @@
+command: docker stack
+short: Manage Docker stacks
+long: Manage stacks.
+usage: docker stack
+pname: docker
+plink: docker.yaml
+cname:
+- docker stack deploy
+- docker stack ls
+- docker stack ps
+- docker stack rm
+- docker stack services
+clink:
+- docker_stack_deploy.yaml
+- docker_stack_ls.yaml
+- docker_stack_ps.yaml
+- docker_stack_rm.yaml
+- docker_stack_services.yaml
+options:
+- option: kubeconfig
+  value_type: string
+  description: Kubernetes config file
+  deprecated: false
+  experimental: false
+  experimentalcli: true
+  kubernetes: true
+  swarm: false
+- option: namespace
+  value_type: string
+  default_value: default
+  description: Kubernetes namespace to use
+  deprecated: false
+  experimental: false
+  experimentalcli: true
+  kubernetes: true
+  swarm: false
+deprecated: false
+min_api_version: "1.25"
+experimental: false
+experimentalcli: false
+kubernetes: true
+swarm: true
+

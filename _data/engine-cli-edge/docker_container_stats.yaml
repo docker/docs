@@ -1,0 +1,49 @@
+command: docker container stats
+short: Display a live stream of container(s) resource usage statistics
+long: Display a live stream of container(s) resource usage statistics
+usage: docker container stats [OPTIONS] [CONTAINER...]
+pname: docker container
+plink: docker_container.yaml
+options:
+- option: all
+  shorthand: a
+  value_type: bool
+  default_value: "false"
+  description: Show all containers (default shows just running)
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: format
+  value_type: string
+  description: Pretty-print images using a Go template
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: no-stream
+  value_type: bool
+  default_value: "false"
+  description: Disable streaming stats and only pull the first result
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: no-trunc
+  value_type: bool
+  default_value: "false"
+  description: Do not truncate output
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

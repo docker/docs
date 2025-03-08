@@ -1,0 +1,174 @@
+/*
+*
+* Bootstrap Overrides ***********************************************************************
+*
+*/
+
+.nav-secondary-tabs .dropdown-btn {
+    background: transparent;
+    color: #fff;
+    padding: 5px 11px 0px 0px;
+    margin-top: 7px;
+    border: 0;
+    font-size: 12px;
+    font-weight: 600;
+}
+.nav-secondary .dropdown-btn {
+    background: transparent;
+    color: #b4d4e4;
+    padding: 5px 11px 0px 0px;
+    margin-top: 7px;
+    border: 0;
+    font-size: 12px;
+    font-weight: 600;
+}
+.navbar-toggle {
+    padding: 0;
+    margin: 0;
+}
+
+@media (max-width: 767px) {
+    .navbar-nav .open .dropdown-menu .dropdown-header,
+    .navbar-nav .open .dropdown-menu>li>a {
+        padding: 5px 15px 5px 25px;
+        color: #fff;
+        text-align: center;
+    }
+}
+
+.navbar-collapse,
+.navbar-form {
+    border-color: transparent;
+}
+
+.navbar-toggle .icon-bar {
+    background-color: #fff !important;
+}
+
+.nav>li>a:focus,
+.nav>li>a:hover {
+    background-color: transparent;
+}
+
+.dropdown-menu>li>a {
+    font-size: 13.5px;
+    line-height: 16px;
+    color: #1488c6;
+    padding: 5px 15px;
+    display: block;
+}
+
+.btn-default:hover {
+    color: #fff!important;
+    background-color: transparent!important;
+    border-color: none!important;
+    box-shadow: none!important;
+    opacity: .8;
+}
+
+.btn-group.open .dropdown-toggle {
+    -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+    background: trr;
+    background: transparent;
+    color: #fff;
+    box-shadow: none;
+}
+
+.btn-default:focus,
+.btn-default.active,
+.btn-default:active,
+.open>.dropdown-toggle.btn-default:focus,
+.open>.dropdown-toggle.btn-default:hover {
+    color: #fff!important;
+    background-color: transparent!important;
+    border-color: none!important;
+    box-shadow: none!important
+}
+
+.nav .open>a,
+.nav .open>a:focus,
+.nav .open>a:hover {
+    background-color: transparent;
+    border-color: #337ab7;
+}
+
+.dropdown-menu>li>a:focus,
+.dropdown-menu>li>a:hover {
+    color: #ffffff;
+    text-decoration: none;
+    background-color: #0c5176;
+}
+
+/*
+*
+* Bootstrap expand/collapse accordions
+*
+*/
+
+.panel-heading .chevron:after {
+    content: "\f0d8";
+}
+
+.panel-heading.collapsed .chevron:after {
+    content: "\f0d7";
+}
+
+.panel-heading:hover{
+    background-color: #fafdfe;
+}
+
+
+/*
+*
+* override google results +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*
+*/
+.gs-webResult .gs-snippet, .gs-imageResult .gs-snippet, .gs-fileFormatType {
+    color: #27343B!important;
+    line-height: 23px!important;
+}
+.gsc-webResult .gsc-result {
+    padding: 20px 0 20px 20px!important;
+}
+
+a.gs-title {
+    color: #2089C4!important;
+    text-decoration: none;
+}
+
+.gs-webResult.gs-result a.gs-title:visited, .gs-webResult.gs-result a.gs-title:visited b, .gs-imageResult a.gs-title:visited, .gs-imageResult a.gs-title:visited b {
+    color: #F993A6!important;
+}
+.gs-webResult div.gs-visibleUrl, .gs-imageResult div.gs-visibleUrl {
+    color: #82949E!important;
+}
+
+.gs-webResult .gs-snippet, .gs-imageResult .gs-snippet, .gs-fileFormatType {
+    font-size: 14px!important;
+}
+
+.gsc-tabHeader.gsc-tabhActive, .gsc-tabsArea {
+    border-color: #f7f7f761 !important;
+    background: transparent;
+}
+
+img.with-border {
+  border: 1px solid #eaeaea;
+}
+
+.cse input.gsc-search-button:focus,
+input.gsc-search-button:focus {
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,0.5);
+  -webkit-box-shadow:inset 0 0 0 1px rgba(255,255,255,0.5);
+  -moz-box-shadow:inset 0 0 0 1px rgba(255,255,255,0.5);
+}
+
+.cse .gsc-search-button input.gsc-search-button-v2,
+input.gsc-search-button-v2 {
+  width: 13px;
+  height: 13px;
+  padding: 6px 27px;
+  min-width: 13px;
+  margin-top: 2px;
+}

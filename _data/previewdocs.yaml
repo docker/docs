@@ -1,0 +1,13 @@
+# Define Advisory texts
+# can be used in page frontmatter, e.g.:
+#       previewflag: cloud-swarm
+# modeled on advisories
+
+texts:
+
+  cloud-swarm: "**Beta Feature.** Swarm Mode for Docker Cloud is currently a public Beta."
+
+
+# URL based previewdocs
+# any URL that begins with "/engine/" will get the "engine" preview
+# will be over-ridden by the `previewdocs` frontmatter in the topic

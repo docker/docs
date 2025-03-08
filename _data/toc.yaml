@@ -1,0 +1,3717 @@
+horizontalnav:
+- title: Guides
+  path: /
+  node: guides
+- title: Product manuals
+  path: /ee/
+  node: manuals
+- title: Glossary
+  path: /glossary/
+  node: glossary
+- title: Reference
+  path: /reference/
+  node: reference
+- title: Samples
+  path: /samples/
+  node: samples
+
+guides:
+- sectiontitle: Get Docker
+  section:
+  - path: /install/overview/
+    title: Overview of Docker editions
+  - sectiontitle: Docker CE
+    section:
+    - title: About Docker CE
+      path: /install/
+    - sectiontitle: Cloud
+      section:
+      - sectiontitle: Docker for AWS
+        section:
+        - path: /docker-for-aws/why/
+          title: Why Docker for AWS?
+        - path: /docker-for-aws/
+          title: Setup & prerequisites
+        - path: /docker-for-aws/iam-permissions/
+          title: IAM permissions
+        - path: /docker-for-aws/scaling/
+          title: Scaling
+        - path: /docker-for-aws/upgrade/
+          title: Upgrading
+        - path: /docker-for-aws/deploy/
+          title: Deploy your app
+        - path: /docker-for-aws/persistent-data-volumes/
+          title: Persistent data volumes
+        - path: /docker-for-aws/load-balancer/
+          title: Load balancer
+        - path: /docker-for-aws/faqs/
+          title: FAQs
+        - path: /docker-for-aws/opensource/
+          title: Open source licensing
+        - path: /docker-for-aws/release-notes/
+          title: Release notes
+        - path: /docker-for-aws/archive/
+          title: Template archive
+      - sectiontitle: Docker for Azure
+        section:
+        - path: /docker-for-azure/why/
+          title: Why Docker for Azure?
+        - path: /docker-for-azure/
+          title: Setup & prerequisites
+        - path: /docker-for-azure/upgrade/
+          title: Upgrading
+        - path: /docker-for-azure/deploy/
+          title: Deploy your app
+        - path: /docker-for-azure/persistent-data-volumes/
+          title: Persistent data volumes
+        - path: /docker-for-azure/faqs/
+          title: FAQs
+        - path: /docker-for-azure/opensource/
+          title: Open source licensing
+        - path: /docker-for-azure/release-notes/
+          title: Release notes
+        - path: /docker-for-azure/archive/
+          title: Template archive
+    - sectiontitle: Linux
+      section:
+      - path: /install/linux/docker-ce/centos/
+        title: CentOS
+      - path: /install/linux/docker-ce/debian/
+        title: Debian
+      - path: /install/linux/docker-ce/fedora/
+        title: Fedora
+      - path: /install/linux/docker-ce/ubuntu/
+        title: Ubuntu
+      - path: /install/linux/docker-ce/binaries/
+        title: Binaries
+      - path: /install/linux/linux-postinstall/
+        title: Optional Linux post-installation steps
+    - title: MacOS
+      path: /docker-for-mac/install/
+      nosync: true
+    - title: Microsoft Windows
+      path: /docker-for-windows/install/
+      nosync: true
+    - sectiontitle: Docker CE Edge releases
+      section:
+      - path: /edge/
+        title: Overview
+      - path: /edge/engine/reference/commandline/docker/
+        title: Docker Edge CLI reference
+        nosync: true
+    - sectiontitle: Docker Toolbox (legacy)
+      section:
+      - path: /toolbox/overview/
+        title: Toolbox overview
+      - path: /toolbox/toolbox_install_mac/
+        title: Install Toolbox on Mac
+      - path: /toolbox/toolbox_install_windows/
+        title: Install Toolbox on Windows
+      - sectiontitle: Kitematic
+        section:
+        - path: /kitematic/userguide/
+          title: "Kitematic user guide: intro &amp; overview"
+        - path: /kitematic/nginx-web-server/
+          title: Set up an Nginx web server
+        - path: /kitematic/minecraft-server/
+          title: Set up a Minecraft Server
+        - path: /kitematic/rethinkdb-dev-database/
+          title: Creating a local RethinkDB database for development
+        - path: /kitematic/faq/
+          title: Frequently asked questions
+        - path: /kitematic/known-issues/
+          title: Known issues
+      - path: /toolbox/faqs/troubleshoot/
+        title: Troubleshooting
+    - title: Release notes
+      path: /release-notes/docker-ce/
+      nosync: true
+  - sectiontitle: Docker EE
+    section:
+    - title: About Docker EE
+      path: /ee/supported-platforms/
+    - sectiontitle: Linux
+      section:
+      - path: /install/linux/docker-ee/centos/
+        title: CentOS
+      - path: /install/linux/docker-ee/oracle/
+        title: Oracle Linux
+      - path: /install/linux/docker-ee/rhel/
+        title: RHEL
+      - path: /install/linux/docker-ee/suse/
+        title: SLES
+      - path: /install/linux/docker-ee/ubuntu/
+        title: Ubuntu
+    - path: /install/windows/docker-ee/
+      title: Microsoft Windows Server
+    - title: Release notes
+      path: /ee/engine/release-notes/
+      nosync: true
+  - sectiontitle: Compatibility between Docker versions
+    section:
+      - path: /engine/migration/
+        title: Migrate to Docker 1.10
+      - path: /engine/breaking_changes/
+        title: Breaking changes
+      - path: /engine/deprecated/
+        title: Deprecated Docker features
+      - path: /engine/faq/
+        title: FAQ
+- sectiontitle: Get started
+  section:
+  - sectiontitle: Get started with Docker
+    section:
+    - title: "Part 1: Orientation"
+      path: /get-started/
+    - title: "Part 2: Containers"
+      path: /get-started/part2/
+    - title: "Part 3: Services"
+      path: /get-started/part3/
+    - title: "Part 4: Swarms"
+      path: /get-started/part4/
+    - title: "Part 5: Stacks"
+      path: /get-started/part5/
+    - title: "Part 6: Deploy your app"
+      path: /get-started/part6/
+  - path: /engine/docker-overview/
+    title: Docker overview
+- sectiontitle: Develop with Docker
+  section:
+    - sectiontitle: Develop your apps on Docker
+      section:
+        - path: /develop/
+          title: App development overview
+        - path: /develop/dev-best-practices/
+          title: App development best practices
+        - sectiontitle: Develop images
+          section:
+          - path: /develop/develop-images/dockerfile_best-practices/
+            title: Best practices for writing Dockerfiles
+          - path: /develop/develop-images/baseimages/
+            title: Create a base image
+          - path: /develop/develop-images/multistage-build/
+            title: Use multi-stage builds
+          - path: /engine/reference/builder/
+            title: Dockerfile reference
+            nosync: true
+          - path: /develop/develop-images/image_management/
+            title: Manage images
+        - path: /samples/
+          title: Docker app examples
+          nosync: true
+    - sectiontitle: Develop using the Docker Engine SDKs and API
+      section:
+        - path: /develop/sdk/
+          title: Overview
+        - path: /develop/sdk/examples/
+          title: SDK and API examples
+- sectiontitle: Configure networking
+  section:
+    - path: /network/
+      title: Networking overview
+    - path: /network/bridge/
+      title: Use bridge networks
+    - path: /network/overlay/
+      title: Use overlay networks
+    - path: /network/host/
+      title: Use host networking
+    - path: /network/macvlan/
+      title: Use Macvlan networks
+    - path: /network/none/
+      title: Disable networking for a container
+    - sectiontitle: Networking tutorials
+      section:
+      - path: /network/network-tutorial-standalone/
+        title: Bridge network tutorial
+      - path: /network/network-tutorial-host/
+        title: Host networking tutorial
+      - path: /network/network-tutorial-overlay/
+        title: Overlay networking tutorial
+      - path: /network/network-tutorial-macvlan/
+        title: Macvlan network tutorial
+    - sectiontitle: Configure the daemon and containers
+      section:
+      - path: /config/daemon/ipv6/
+        title: Configure the daemon for IPv6
+      - path: /network/iptables/
+        title: Docker and iptables
+      - path: /config/containers/container-networking/
+        title: Container networking
+      - path: /network/proxy/
+        title: Configure Docker to use a proxy server
+    - sectiontitle: Legacy networking content
+      section:
+      - path: /network/links/
+        title: (Legacy) Container links
+      - path: /network/overlay-standalone.swarm/
+        title: Overlay networks for Swarm Classic
+
+- sectiontitle: Manage application data
+  section:
+    - path: /storage/
+      title: Storage overview
+    - path: /storage/volumes/
+      title: Volumes
+    - path: /storage/bind-mounts/
+      title: Bind mounts
+    - path: /storage/tmpfs/
+      title: tmpfs mounts
+    - path: /storage/troubleshooting_volume_errors/
+      title: Troubleshoot volume problems
+    - sectiontitle: Store data within containers
+      section:
+      - path: /storage/storagedriver/
+        title: About storage drivers
+      - path: /storage/storagedriver/select-storage-driver/
+        title: Select a storage driver
+      - path: /storage/storagedriver/aufs-driver/
+        title: Use the AUFS storage driver
+      - path: /storage/storagedriver/btrfs-driver/
+        title: Use the Btrfs storage driver
+      - path: /storage/storagedriver/device-mapper-driver/
+        title: Use the Device mapper storage driver
+      - path: /storage/storagedriver/overlayfs-driver/
+        title: Use the OverlayFS storage driver
+      - path: /storage/storagedriver/zfs-driver/
+        title: Use the ZFS storage driver
+      - path: /storage/storagedriver/vfs-driver/
+        title: Use the VFS storage driver
+- sectiontitle: Run your app in production
+  section:
+  - sectiontitle: Configure all objects
+    section:
+    - path: /config/labels-custom-metadata/
+      title: Apply custom metadata to objects
+    - path: /config/pruning/
+      title: Prune unused objects
+    - path: /config/formatting/
+      title: Format command and log output
+  - sectiontitle: Configure the daemon
+    section:
+    - path: /config/daemon/
+      title: Configure and run Docker
+    - path: /config/daemon/systemd/
+      title: Control Docker with systemd
+    - path: /config/labels-custom-metadata/
+      title: Apply custom metadata to daemons
+      nosync: true
+    - path: /config/containers/logging/configure/
+      title: Configuring default drivers
+      nosync: true
+    - path: /config/thirdparty/prometheus/
+      title: Collect Docker metrics with Prometheus
+  - sectiontitle: Configure containers
+    section:
+    - path: /config/containers/start-containers-automatically/
+      title: Start containers automatically
+    - path: /config/containers/live-restore/
+      title: Keep containers alive during daemon downtime
+    - path: /config/containers/multi-service_container/
+      title: Run multiple services in a container
+    - path: /config/containers/runmetrics/
+      title: Container runtime metrics
+    - path: /config/containers/resource_constraints/
+      title: Limit a container's resources
+    - path: /config/labels-custom-metadata/
+      title: Apply custom metadata to containers
+      nosync: true
+    - path: /config/pruning/
+      title: Prune unused containers
+      nosync: true
+    - sectiontitle: Logging
+      section:
+      - path: /config/containers/logging/
+        title: View a container's logs
+      - path: /config/containers/logging/configure/
+        title: Configure logging drivers
+      - path: /config/containers/logging/plugins/
+        title: Use a logging driver plugin
+      - path: /config/containers/logging/log_tags/
+        title: Customize log driver output
+      - sectiontitle: Logging driver details
+        section:
+        - path: /config/containers/logging/logentries/
+          title: Logentries logging driver
+        - path: /config/containers/logging/json-file/
+          title: JSON File logging driver
+        - path: /config/containers/logging/gelf/
+          title: Graylog Extended Format (GELF) logging driver
+        - path: /config/containers/logging/syslog/
+          title: Syslog logging driver
+        - path: /config/containers/logging/awslogs/
+          title: Amazon CloudWatch logs logging driver
+        - path: /config/containers/logging/etwlogs/
+          title: ETW logging driver
+        - path: /config/containers/logging/fluentd/
+          title: Fluentd logging driver
+        - path: /config/containers/logging/gcplogs/
+          title: Google Cloud logging driver
+        - path: /config/containers/logging/journald/
+          title: Journald logging driver
+        - path: /config/containers/logging/splunk/
+          title: Splunk logging driver
+    - path: /registry/recipes/mirror/
+      title: Run a local registry mirror
+      nosync: true
+    - sectiontitle: Work with external tools
+      section:
+      - path: /config/thirdparty/dsc/
+        title: PowerShell DSC usage
+      - path: /config/thirdparty/ansible/
+        title: Ansible
+      - path: /config/thirdparty/chef/
+        title: Chef
+      - path: /config/thirdparty/puppet/
+        title: Puppet
+      - path: /config/thirdparty/ambassador_pattern_linking/
+        title: (Obsolete) Link via an ambassador container
+    - sectiontitle: Security
+      section:
+      - path: /engine/security/security/
+        title: Docker security
+      - path: /engine/security/non-events/
+        title: Docker security non-events
+      - path: /engine/security/https/
+        title: Protect the Docker daemon socket
+      - path: /engine/security/certificates/
+        title: Using certificates for repository client verification
+      - sectiontitle: Use trusted images
+        section:
+        - path: /engine/security/trust/content_trust/
+          title: Content trust in Docker
+        - path: /engine/security/trust/trust_automation/
+          title: Automation with content trust
+        - path: /engine/security/trust/trust_delegation/
+          title: Delegations for content trust
+        - path: /engine/security/trust/deploying_notary/
+          title: Deploying Notary
+        - path: /engine/security/trust/trust_key_mng/
+          title: Manage keys for content trust
+        - path: /engine/security/trust/trust_sandbox/
+          title: Play in a content trust sandbox
+      - path: /engine/security/antivirus/
+        title: Antivirus software and Docker
+      - path: /engine/security/apparmor/
+        title: AppArmor security profiles for Docker
+      - path: /engine/security/seccomp/
+        title: Seccomp security profiles for Docker
+      - path: /engine/security/userns-remap/
+        title: Isolate containers with a user namespace
+    - sectiontitle: Scale your app
+      section:
+      - path: /engine/swarm/
+        title: Swarm mode overview
+      - path: /engine/swarm/key-concepts/
+        title: Swarm mode key concepts
+      - sectiontitle: Get started with swarm mode
+        section:
+        - path: /engine/swarm/swarm-tutorial/
+          title: Set up for the tutorial
+        - path: /engine/swarm/swarm-tutorial/create-swarm/
+          title: Create a swarm
+        - path: /engine/swarm/swarm-tutorial/add-nodes/
+          title: Add nodes to the swarm
+        - path: /engine/swarm/swarm-tutorial/deploy-service/
+          title: Deploy a service
+        - path: /engine/swarm/swarm-tutorial/inspect-service/
+          title: Inspect the service
+        - path: /engine/swarm/swarm-tutorial/scale-service/
+          title: Scale the service
+        - path: /engine/swarm/swarm-tutorial/delete-service/
+          title: Delete the service
+        - path: /engine/swarm/swarm-tutorial/rolling-update/
+          title: Apply rolling updates
+        - path: /engine/swarm/swarm-tutorial/drain-node/
+          title: Drain a node
+        - path: /engine/swarm/ingress/
+          title: Use swarm mode routing mesh
+      - sectiontitle: How swarm mode works
+        section:
+        - path: /engine/swarm/how-swarm-mode-works/nodes/
+          title: How nodes work
+        - path: /engine/swarm/how-swarm-mode-works/services/
+          title: How services work
+        - path: /engine/swarm/how-swarm-mode-works/pki/
+          title: Manage swarm security with PKI
+        - path: /engine/swarm/how-swarm-mode-works/swarm-task-states/
+          title: Swarm task states
+      - path: /engine/swarm/swarm-mode/
+        title: Run Docker in swarm mode
+      - path: /engine/swarm/join-nodes/
+        title: Join nodes to a swarm
+      - path: /engine/swarm/manage-nodes/
+        title: Manage nodes in a swarm
+      - path: /engine/swarm/services/
+        title: Deploy services to a swarm
+      - path: /engine/swarm/configs/
+        title: Store service configuration data
+      - path: /engine/swarm/secrets/
+        title: Manage sensitive data with Docker secrets
+      - path: /engine/swarm/swarm_manager_locking/
+        title: Lock your swarm
+      - path: /engine/swarm/networking/
+        title: Manage swarm service networks
+      - path: /engine/swarm/admin_guide/
+        title: Swarm administration guide
+      - path: /engine/swarm/raft/
+        title: Raft consensus in swarm mode
+    - sectiontitle: Extend Docker
+      section:
+      - path: /engine/extend/
+        title: Managed plugin system
+      - path: /engine/extend/plugins_authorization/
+        title: Access authorization plugin
+      - path: /engine/extend/legacy_plugins/
+        title: Extending Docker with plugins
+      - path: /engine/extend/plugins_network/
+        title: Docker network driver plugins
+      - path: /engine/extend/plugins_volume/
+        title: Volume plugins
+      - title: Plugin configuration
+        path: /engine/extend/config/
+      - path: /engine/extend/plugin_api/
+        title: Plugins API
+- sectiontitle: Standards and compliance
+  section:
+  - path: /compliance/
+    title: Docker standards and compliance
+  - sectiontitle: NIST
+    section:
+    - path: /compliance/nist/800_37/
+      title: NIST SP 800-37 (RMF)
+    - path: /compliance/nist/800_53/
+      title: NIST SP 800-53
+    - path: /compliance/nist/800_190/
+      title: NIST SP 800-190
+    - path: /compliance/nist/nistir_8176/
+      title: NISTIR 8176
+    - path: /compliance/nist/itl_october2017/
+      title: NIST ITL Bulletin October 2017
+  - sectiontitle: CIS Benchmarks
+    section:
+    - path: /compliance/cis/docker_ee/
+      title: Docker EE Benchmark
+    - path: /compliance/cis/docker_ce/
+      title: Docker CE Benchmark
+    - path: /compliance/cis/k8s/
+      title: Kubernetes Benchmark
+  - path: /compliance/fedramp/
+    title: FedRAMP
+  - path: /compliance/fisma/
+    title: FISMA
+
+- sectiontitle: Open source at Docker
+  section:
+  - path: /opensource/
+    title: Contribute to documentation
+  - path: /opensource/ways/
+    title: Other ways to contribute
+
+- sectiontitle: Documentation archive
+  section:
+  - path: /docsarchive/
+    title: View the docs archives
+  - path: /hackathon/
+    title: Docs hackathon results
+
+reference:
+- sectiontitle: File formats
+  section:
+  - title: Dockerfile reference
+    path: /engine/reference/builder/
+  - title: Compose file reference
+    path: /compose/compose-file/
+    nosync: true
+  - title: Cloud stack file reference
+    path: /docker-cloud/apps/stack-yaml-reference/
+    nosync: true
+
+- sectiontitle: Command-Line Interfaces (CLIs)
+  section:
+  - sectiontitle: Docker CLI (docker)
+    section:
+    - sectiontitle: Stable
+      section:
+      - path: /engine/reference/run/
+        title: Docker run reference
+      - path: /engine/reference/commandline/cli/
+        title: Use the Docker command line
+      - path: /engine/reference/commandline/docker/
+        title: docker (base command)
+      - path: /engine/reference/commandline/attach/
+        title: docker attach
+      - path: /engine/reference/commandline/build/
+        title: docker build
+      - sectiontitle: docker checkpoint *
+        section:
+        - path: /engine/reference/commandline/checkpoint/
+          title: docker checkpoint
+        - path: /engine/reference/commandline/checkpoint_create/
+          title: docker checkpoint create
+        - path: /engine/reference/commandline/checkpoint_ls/
+          title: docker checkpoint ls
+        - path: /engine/reference/commandline/checkpoint_rm/
+          title: docker checkpoint rm
+      - path: /engine/reference/commandline/commit/
+        title: docker commit
+      - sectiontitle: docker config *
+        section:
+        - path: /engine/reference/commandline/config/
+          title: docker config
+        - path: /engine/reference/commandline/config_create/
+          title: docker config create
+        - path: /engine/reference/commandline/config_inspect/
+          title: docker config inspect
+        - path: /engine/reference/commandline/config_ls/
+          title: docker config ls
+        - path: /engine/reference/commandline/config_rm/
+          title: docker config rm
+      - sectiontitle: docker container *
+        section:
+        - path: /engine/reference/commandline/container/
+          title: docker container
+        - path: /engine/reference/commandline/container_attach/
+          title: docker container attach
+        - path: /engine/reference/commandline/container_commit/
+          title: docker container commit
+        - path: /engine/reference/commandline/container_cp/
+          title: docker container cp
+        - path: /engine/reference/commandline/container_create/
+          title: docker container create
+        - path: /engine/reference/commandline/container_diff/
+          title: docker container diff
+        - path: /engine/reference/commandline/container_exec/
+          title: docker container exec
+        - path: /engine/reference/commandline/container_export/
+          title: docker container export
+        - path: /engine/reference/commandline/container_inspect/
+          title: docker container inspect
+        - path: /engine/reference/commandline/container_kill/
+          title: docker container kill
+        - path: /engine/reference/commandline/container_logs/
+          title: docker container logs
+        - path: /engine/reference/commandline/container_ls/
+          title: docker container ls
+        - path: /engine/reference/commandline/container_pause/
+          title: docker container pause
+        - path: /engine/reference/commandline/container_port/
+          title: docker container port
+        - path: /engine/reference/commandline/container_prune/
+          title: docker container prune
+        - path: /engine/reference/commandline/container_rename/
+          title: docker container rename
+        - path: /engine/reference/commandline/container_restart/
+          title: docker container restart
+        - path: /engine/reference/commandline/container_rm/
+          title: docker container rm
+        - path: /engine/reference/commandline/container_run/
+          title: docker container run
+        - path: /engine/reference/commandline/container_start/
+          title: docker container start
+        - path: /engine/reference/commandline/container_stats/
+          title: docker container stats
+        - path: /engine/reference/commandline/container_stop/
+          title: docker container stop
+        - path: /engine/reference/commandline/container_top/
+          title: docker container top
+        - path: /engine/reference/commandline/container_unpause/
+          title: docker container unpause
+        - path: /engine/reference/commandline/container_update/
+          title: docker container update
+        - path: /engine/reference/commandline/container_wait/
+          title: docker container wait
+      - path: /engine/reference/commandline/cp/
+        title: docker cp
+      - path: /engine/reference/commandline/create/
+        title: docker create
+      - path: /engine/reference/commandline/deploy/
+        title: docker deploy
+      - path: /engine/reference/commandline/diff/
+        title: docker diff
+      - path: /engine/reference/commandline/events/
+        title: docker events
+      - path: /engine/reference/commandline/exec/
+        title: docker exec
+      - path: /engine/reference/commandline/export/
+        title: docker export
+      - path: /engine/reference/commandline/history/
+        title: docker history
+      - sectiontitle: docker image *
+        section:
+        - path: /engine/reference/commandline/image/
+          title: docker image
+        - path: /engine/reference/commandline/image_build/
+          title: docker image build
+        - path: /engine/reference/commandline/image_history/
+          title: docker image history
+        - path: /engine/reference/commandline/image_import/
+          title: docker image import
+        - path: /engine/reference/commandline/image_inspect/
+          title: docker image inspect
+        - path: /engine/reference/commandline/image_load/
+          title: docker image load
+        - path: /engine/reference/commandline/image_ls/
+          title: docker image ls
+        - path: /engine/reference/commandline/image_prune/
+          title: docker image prune
+        - path: /engine/reference/commandline/image_pull/
+          title: docker image pull
+        - path: /engine/reference/commandline/image_push/
+          title: docker image push
+        - path: /engine/reference/commandline/image_rm/
+          title: docker image rm
+        - path: /engine/reference/commandline/image_save/
+          title: docker image save
+        - path: /engine/reference/commandline/image_tag/
+          title: docker image tag
+      - path: /engine/reference/commandline/images/
+        title: docker images
+      - path: /engine/reference/commandline/import/
+        title: docker import
+      - path: /engine/reference/commandline/info/
+        title: docker info
+      - path: /engine/reference/commandline/inspect/
+        title: docker inspect
+      - path: /engine/reference/commandline/kill/
+        title: docker kill
+      - path: /engine/reference/commandline/load/
+        title: docker load
+      - path: /engine/reference/commandline/login/
+        title: docker login
+      - path: /engine/reference/commandline/logout/
+        title: docker logout
+      - path: /engine/reference/commandline/logs/
+        title: docker logs
+      - sectiontitle: docker manifest *
+        section:
+        - path: /engine/reference/commandline/manifest/
+          title: docker manifest
+        - path: /engine/reference/commandline/manifest_annotate/
+          title: docker manifest annotate
+        - path: /engine/reference/commandline/manifest_create/
+          title: docker manifest create
+        - path: /engine/reference/commandline/manifest_inspect/
+          title: docker manifest inspect
+        - path: /engine/reference/commandline/manifest_push/
+          title: docker manifest push
+      - sectiontitle: docker network *
+        section:
+        - path: /engine/reference/commandline/network/
+          title: docker network
+        - path: /engine/reference/commandline/network_connect/
+          title: docker network connect
+        - path: /engine/reference/commandline/network_create/
+          title: docker network create
+        - path: /engine/reference/commandline/network_disconnect/
+          title: docker network disconnect
+        - path: /engine/reference/commandline/network_inspect/
+          title: docker network inspect
+        - path: /engine/reference/commandline/network_ls/
+          title: docker network ls
+        - path: /engine/reference/commandline/network_prune/
+          title: docker network prune
+        - path: /engine/reference/commandline/network_rm/
+          title: docker network rm
+      - sectiontitle: docker node *
+        section:
+        - path: /engine/reference/commandline/node/
+          title: docker node
+        - path: /engine/reference/commandline/node_demote/
+          title: docker node demote
+        - path: /engine/reference/commandline/node_inspect/
+          title: docker node inspect
+        - path: /engine/reference/commandline/node_ls/
+          title: docker node ls
+        - path: /engine/reference/commandline/node_promote/
+          title: docker node promote
+        - path: /engine/reference/commandline/node_ps/
+          title: docker node ps
+        - path: /engine/reference/commandline/node_rm/
+          title: docker node rm
+        - path: /engine/reference/commandline/node_update/
+          title: docker node update
+      - path: /engine/reference/commandline/pause/
+        title: docker pause
+      - sectiontitle: docker plugin *
+        section:
+        - path: /engine/reference/commandline/plugin/
+          title: docker plugin
+        - path: /engine/reference/commandline/plugin_create/
+          title: docker plugin create
+        - path: /engine/reference/commandline/plugin_disable/
+          title: docker plugin disable
+        - path: /engine/reference/commandline/plugin_enable/
+          title: docker plugin enable
+        - path: /engine/reference/commandline/plugin_inspect/
+          title: docker plugin inspect
+        - path: /engine/reference/commandline/plugin_install/
+          title: docker plugin install
+        - path: /engine/reference/commandline/plugin_ls/
+          title: docker plugin ls
+        - path: /engine/reference/commandline/plugin_rm/
+          title: docker plugin rm
+        - path: /engine/reference/commandline/plugin_set/
+          title: docker plugin set
+        - path: /engine/reference/commandline/plugin_upgrade/
+          title: docker plugin upgrade
+      - path: /engine/reference/commandline/port/
+        title: docker port
+      - path: /engine/reference/commandline/ps/
+        title: docker ps
+      - path: /engine/reference/commandline/pull/
+        title: docker pull
+      - path: /engine/reference/commandline/push/
+        title: docker push
+      - path: /engine/reference/commandline/rename/
+        title: docker rename
+      - path: /engine/reference/commandline/restart/
+        title: docker restart
+      - path: /engine/reference/commandline/rm/
+        title: docker rm
+      - path: /engine/reference/commandline/rmi/
+        title: docker rmi
+      - path: /engine/reference/commandline/run/
+        title: docker run
+      - path: /engine/reference/commandline/save/
+        title: docker save
+      - path: /engine/reference/commandline/search/
+        title: docker search
+      - sectiontitle: docker secret *
+        section:
+        - path: /engine/reference/commandline/secret/
+          title: docker secret
+        - path: /engine/reference/commandline/secret_create/
+          title: docker secret create
+        - path: /engine/reference/commandline/secret_inspect/
+          title: docker secret inspect
+        - path: /engine/reference/commandline/secret_ls/
+          title: docker secret ls
+        - path: /engine/reference/commandline/secret_rm/
+          title: docker secret rm
+      - sectiontitle: docker service *
+        section:
+        - path: /engine/reference/commandline/service/
+          title: docker service
+        - path: /engine/reference/commandline/service_create/
+          title: docker service create
+        - path: /engine/reference/commandline/service_inspect/
+          title: docker service inspect
+        - path: /engine/reference/commandline/service_logs/
+          title: docker service logs
+        - path: /engine/reference/commandline/service_ls/
+          title: docker service ls
+        - path: /engine/reference/commandline/service_ps/
+          title: docker service ps
+        - path: /engine/reference/commandline/service_rollback/
+          title: docker service rollback
+        - path: /engine/reference/commandline/service_rm/
+          title: docker service rm
+        - path: /engine/reference/commandline/service_scale/
+          title: docker service scale
+        - path: /engine/reference/commandline/service_update/
+          title: docker service update
+      - sectiontitle: docker stack *
+        section:
+        - path: /engine/reference/commandline/stack/
+          title: docker stack
+        - path: /engine/reference/commandline/stack_deploy/
+          title: docker stack deploy
+        - path: /engine/reference/commandline/stack_ps/
+          title: docker stack ps
+        - path: /engine/reference/commandline/stack_rm/
+          title: docker stack rm
+        - path: /engine/reference/commandline/stack_services/
+          title: docker stack services
+      - path: /engine/reference/commandline/start/
+        title: docker start
+      - path: /engine/reference/commandline/stats/
+        title: docker stats
+      - path: /engine/reference/commandline/stop/
+        title: docker stop
+      - sectiontitle: docker swarm *
+        section:
+        - path: /engine/reference/commandline/swarm/
+          title: docker swarm
+        - path: /engine/reference/commandline/swarm_ca/
+          title: docker swarm ca
+        - path: /engine/reference/commandline/swarm_init/
+          title: docker swarm init
+        - path: /engine/reference/commandline/swarm_join-token/
+          title: docker swarm join-token
+        - path: /engine/reference/commandline/swarm_join/
+          title: docker swarm join
+        - path: /engine/reference/commandline/swarm_leave/
+          title: docker swarm leave
+        - path: /engine/reference/commandline/swarm_unlock-key/
+          title: docker swarm unlock-key
+        - path: /engine/reference/commandline/swarm_unlock/
+          title: docker swarm unlock
+        - path: /engine/reference/commandline/swarm_update/
+          title: docker swarm update
+      - sectiontitle: docker system *
+        section:
+        - path: /engine/reference/commandline/system/
+          title: docker system
+        - path: /engine/reference/commandline/system_df/
+          title: docker system df
+        - path: /engine/reference/commandline/system_events/
+          title: docker system events
+        - path: /engine/reference/commandline/system_info/
+          title: docker system info
+        - path: /engine/reference/commandline/system_prune/
+          title: docker system prune
+      - path: /engine/reference/commandline/tag/
+        title: docker tag
+      - path: /engine/reference/commandline/top/
+        title: docker top
+      - sectiontitle: docker trust *
+        section:
+        - path: /engine/reference/commandline/trust/
+          title: docker trust
+        - path: /engine/reference/commandline/trust_inspect/
+          title: docker trust inspect
+        - path: /engine/reference/commandline/trust_key/
+          title: docker trust key
+        - path: /engine/reference/commandline/trust_key_generate/
+          title: docker trust key generate
+        - path: /engine/reference/commandline/trust_key_load/
+          title: docker trust key load
+        - path: /engine/reference/commandline/trust_revoke/
+          title: docker trust revoke
+        - path: /engine/reference/commandline/trust_sign/
+          title: docker trust sign
+        - path: /engine/reference/commandline/trust_signer/
+          title: docker trust signer
+        - path: /engine/reference/commandline/trust_signer_add/
+          title: docker trust signer add
+        - path: /engine/reference/commandline/trust_signer_remove/
+          title: docker trust signer remove
+      - path: /engine/reference/commandline/unpause/
+        title: docker unpause
+      - path: /engine/reference/commandline/update/
+        title: docker update
+      - path: /engine/reference/commandline/version/
+        title: docker version
+      - sectiontitle: docker volume *
+        section:
+        - path: /engine/reference/commandline/volume_create/
+          title: docker volume create
+        - path: /engine/reference/commandline/volume_inspect/
+          title: docker volume inspect
+        - path: /engine/reference/commandline/volume_ls/
+          title: docker volume ls
+        - path: /engine/reference/commandline/volume_prune/
+          title: docker volume prune
+        - path: /engine/reference/commandline/volume_rm/
+          title: docker volume rm
+      - path: /engine/reference/commandline/wait/
+        title: docker wait
+
+    - sectiontitle: Edge
+      section:
+      - path: /edge/engine/reference/run/
+        title: Docker run reference
+      - path: /edge/engine/reference/commandline/cli/
+        title: Use the Docker command line
+      - path: /edge/engine/reference/commandline/docker/
+        title: docker (base command)
+      - path: /edge/engine/reference/commandline/attach/
+        title: docker attach
+      - path: /edge/engine/reference/commandline/build/
+        title: docker build
+      - sectiontitle: docker checkpoint *
+        section:
+        - path: /edge/engine/reference/commandline/checkpoint/
+          title: docker checkpoint
+        - path: /edge/engine/reference/commandline/checkpoint_create/
+          title: docker checkpoint create
+        - path: /edge/engine/reference/commandline/checkpoint_ls/
+          title: docker checkpoint ls
+        - path: /edge/engine/reference/commandline/checkpoint_rm/
+          title: docker checkpoint rm
+      - path: /edge/engine/reference/commandline/commit/
+        title: docker commit
+      - sectiontitle: docker config *
+        section:
+        - path: /edge/engine/reference/commandline/config/
+          title: docker config
+        - path: /edge/engine/reference/commandline/config_create/
+          title: docker config create
+        - path: /edge/engine/reference/commandline/config_inspect/
+          title: docker config inspect
+        - path: /edge/engine/reference/commandline/config_ls/
+          title: docker config ls
+        - path: /edge/engine/reference/commandline/config_rm/
+          title: docker config rm
+      - sectiontitle: docker container *
+        section:
+        - path: /edge/engine/reference/commandline/container/
+          title: docker container
+        - path: /edge/engine/reference/commandline/container_attach/
+          title: docker container attach
+        - path: /edge/engine/reference/commandline/container_commit/
+          title: docker container commit
+        - path: /edge/engine/reference/commandline/container_cp/
+          title: docker container cp
+        - path: /edge/engine/reference/commandline/container_create/
+          title: docker container create
+        - path: /edge/engine/reference/commandline/container_diff/
+          title: docker container diff
+        - path: /edge/engine/reference/commandline/container_exec/
+          title: docker container exec
+        - path: /edge/engine/reference/commandline/container_export/
+          title: docker container export
+        - path: /edge/engine/reference/commandline/container_inspect/
+          title: docker container inspect
+        - path: /edge/engine/reference/commandline/container_kill/
+          title: docker container kill
+        - path: /edge/engine/reference/commandline/container_logs/
+          title: docker container logs
+        - path: /edge/engine/reference/commandline/container_ls/
+          title: docker container ls
+        - path: /edge/engine/reference/commandline/container_pause/
+          title: docker container pause
+        - path: /edge/engine/reference/commandline/container_port/
+          title: docker container port
+        - path: /edge/engine/reference/commandline/container_prune/
+          title: docker container prune
+        - path: /edge/engine/reference/commandline/container_rename/
+          title: docker container rename
+        - path: /edge/engine/reference/commandline/container_restart/
+          title: docker container restart
+        - path: /edge/engine/reference/commandline/container_rm/
+          title: docker container rm
+        - path: /edge/engine/reference/commandline/container_run/
+          title: docker container run
+        - path: /edge/engine/reference/commandline/container_start/
+          title: docker container start
+        - path: /edge/engine/reference/commandline/container_stats/
+          title: docker container stats
+        - path: /edge/engine/reference/commandline/container_stop/
+          title: docker container stop
+        - path: /edge/engine/reference/commandline/container_top/
+          title: docker container top
+        - path: /edge/engine/reference/commandline/container_unpause/
+          title: docker container unpause
+        - path: /edge/engine/reference/commandline/container_update/
+          title: docker container update
+        - path: /edge/engine/reference/commandline/container_wait/
+          title: docker container wait
+      - path: /edge/engine/reference/commandline/cp/
+        title: docker cp
+      - path: /edge/engine/reference/commandline/create/
+        title: docker create
+      - path: /edge/engine/reference/commandline/deploy/
+        title: docker deploy
+      - path: /edge/engine/reference/commandline/diff/
+        title: docker diff
+      - path: /edge/engine/reference/commandline/events/
+        title: docker events
+      - path: /edge/engine/reference/commandline/exec/
+        title: docker exec
+      - path: /edge/engine/reference/commandline/export/
+        title: docker export
+      - path: /edge/engine/reference/commandline/history/
+        title: docker history
+      - sectiontitle: docker image *
+        section:
+        - path: /edge/engine/reference/commandline/image/
+          title: docker image
+        - path: /edge/engine/reference/commandline/image_build/
+          title: docker image build
+        - path: /edge/engine/reference/commandline/image_history/
+          title: docker image history
+        - path: /edge/engine/reference/commandline/image_import/
+          title: docker image import
+        - path: /edge/engine/reference/commandline/image_inspect/
+          title: docker image inspect
+        - path: /edge/engine/reference/commandline/image_load/
+          title: docker image load
+        - path: /edge/engine/reference/commandline/image_ls/
+          title: docker image ls
+        - path: /edge/engine/reference/commandline/image_prune/
+          title: docker image prune
+        - path: /edge/engine/reference/commandline/image_pull/
+          title: docker image pull
+        - path: /edge/engine/reference/commandline/image_push/
+          title: docker image push
+        - path: /edge/engine/reference/commandline/image_rm/
+          title: docker image rm
+        - path: /edge/engine/reference/commandline/image_save/
+          title: docker image save
+        - path: /edge/engine/reference/commandline/image_tag/
+          title: docker image tag
+      - path: /edge/engine/reference/commandline/images/
+        title: docker images
+      - path: /edge/engine/reference/commandline/import/
+        title: docker import
+      - path: /edge/engine/reference/commandline/info/
+        title: docker info
+      - path: /edge/engine/reference/commandline/inspect/
+        title: docker inspect
+      - path: /edge/engine/reference/commandline/kill/
+        title: docker kill
+      - path: /edge/engine/reference/commandline/load/
+        title: docker load
+      - path: /edge/engine/reference/commandline/login/
+        title: docker login
+      - path: /edge/engine/reference/commandline/logout/
+        title: docker logout
+      - path: /edge/engine/reference/commandline/logs/
+        title: docker logs
+      - sectiontitle: docker manifest *
+        section:
+        - path: /edge/engine/reference/commandline/manifest/
+          title: docker manifest
+        - path: /edge/engine/reference/commandline/manifest_annotate/
+          title: docker manifest annotate
+        - path: /edge/engine/reference/commandline/manifest_create/
+          title: docker manifest create
+        - path: /edge/engine/reference/commandline/manifest_inspect/
+          title: docker manifest inspect
+        - path: /edge/engine/reference/commandline/manifest_push/
+          title: docker manifest push
+      - sectiontitle: docker network *
+        section:
+        - path: /edge/engine/reference/commandline/network/
+          title: docker network
+        - path: /edge/engine/reference/commandline/network_connect/
+          title: docker network connect
+        - path: /edge/engine/reference/commandline/network_create/
+          title: docker network create
+        - path: /edge/engine/reference/commandline/network_disconnect/
+          title: docker network disconnect
+        - path: /edge/engine/reference/commandline/network_inspect/
+          title: docker network inspect
+        - path: /edge/engine/reference/commandline/network_ls/
+          title: docker network ls
+        - path: /edge/engine/reference/commandline/network_prune/
+          title: docker network prune
+        - path: /edge/engine/reference/commandline/network_rm/
+          title: docker network rm
+      - sectiontitle: docker node *
+        section:
+        - path: /edge/engine/reference/commandline/node/
+          title: docker node
+        - path: /edge/engine/reference/commandline/node_demote/
+          title: docker node demote
+        - path: /edge/engine/reference/commandline/node_inspect/
+          title: docker node inspect
+        - path: /edge/engine/reference/commandline/node_ls/
+          title: docker node ls
+        - path: /edge/engine/reference/commandline/node_promote/
+          title: docker node promote
+        - path: /edge/engine/reference/commandline/node_ps/
+          title: docker node ps
+        - path: /edge/engine/reference/commandline/node_rm/
+          title: docker node rm
+        - path: /edge/engine/reference/commandline/node_update/
+          title: docker node update
+      - path: /edge/engine/reference/commandline/pause/
+        title: docker pause
+      - sectiontitle: docker plugin *
+        section:
+        - path: /edge/engine/reference/commandline/plugin/
+          title: docker plugin
+        - path: /edge/engine/reference/commandline/plugin_create/
+          title: docker plugin create
+        - path: /edge/engine/reference/commandline/plugin_disable/
+          title: docker plugin disable
+        - path: /edge/engine/reference/commandline/plugin_enable/
+          title: docker plugin enable
+        - path: /edge/engine/reference/commandline/plugin_inspect/
+          title: docker plugin inspect
+        - path: /edge/engine/reference/commandline/plugin_install/
+          title: docker plugin install
+        - path: /edge/engine/reference/commandline/plugin_ls/
+          title: docker plugin ls
+        - path: /edge/engine/reference/commandline/plugin_rm/
+          title: docker plugin rm
+        - path: /edge/engine/reference/commandline/plugin_set/
+          title: docker plugin set
+        - path: /edge/engine/reference/commandline/plugin_upgrade/
+          title: docker plugin upgrade
+      - path: /edge/engine/reference/commandline/port/
+        title: docker port
+      - path: /edge/engine/reference/commandline/ps/
+        title: docker ps
+      - path: /edge/engine/reference/commandline/pull/
+        title: docker pull
+      - path: /edge/engine/reference/commandline/push/
+        title: docker push
+      - path: /edge/engine/reference/commandline/rename/
+        title: docker rename
+      - path: /edge/engine/reference/commandline/restart/
+        title: docker restart
+      - path: /edge/engine/reference/commandline/rm/
+        title: docker rm
+      - path: /edge/engine/reference/commandline/rmi/
+        title: docker rmi
+      - path: /edge/engine/reference/commandline/run/
+        title: docker run
+      - path: /edge/engine/reference/commandline/save/
+        title: docker save
+      - path: /edge/engine/reference/commandline/search/
+        title: docker search
+      - sectiontitle: docker secret *
+        section:
+        - path: /edge/engine/reference/commandline/secret/
+          title: docker secret
+        - path: /edge/engine/reference/commandline/secret_create/
+          title: docker secret create
+        - path: /edge/engine/reference/commandline/secret_inspect/
+          title: docker secret inspect
+        - path: /edge/engine/reference/commandline/secret_ls/
+          title: docker secret ls
+        - path: /edge/engine/reference/commandline/secret_rm/
+          title: docker secret rm
+      - sectiontitle: docker service *
+        section:
+        - path: /edge/engine/reference/commandline/service/
+          title: docker service
+        - path: /edge/engine/reference/commandline/service_create/
+          title: docker service create
+        - path: /edge/engine/reference/commandline/service_inspect/
+          title: docker service inspect
+        - path: /edge/engine/reference/commandline/service_logs/
+          title: docker service logs
+        - path: /edge/engine/reference/commandline/service_ls/
+          title: docker service ls
+        - path: /edge/engine/reference/commandline/service_ps/
+          title: docker service ps
+        - path: /edge/engine/reference/commandline/service_rollback/
+          title: docker service rollback
+        - path: /edge/engine/reference/commandline/service_rm/
+          title: docker service rm
+        - path: /edge/engine/reference/commandline/service_scale/
+          title: docker service scale
+        - path: /edge/engine/reference/commandline/service_update/
+          title: docker service update
+      - sectiontitle: docker stack *
+        section:
+        - path: /edge/engine/reference/commandline/stack/
+          title: docker stack
+        - path: /edge/engine/reference/commandline/stack_deploy/
+          title: docker stack deploy
+        - path: /edge/engine/reference/commandline/stack_ps/
+          title: docker stack ps
+        - path: /edge/engine/reference/commandline/stack_rm/
+          title: docker stack rm
+        - path: /edge/engine/reference/commandline/stack_services/
+          title: docker stack services
+      - path: /edge/engine/reference/commandline/start/
+        title: docker start
+      - path: /edge/engine/reference/commandline/stats/
+        title: docker stats
+      - path: /edge/engine/reference/commandline/stop/
+        title: docker stop
+      - sectiontitle: docker swarm *
+        section:
+        - path: /edge/engine/reference/commandline/swarm/
+          title: docker swarm
+        - path: /edge/engine/reference/commandline/swarm_ca/
+          title: docker swarm ca
+        - path: /edge/engine/reference/commandline/swarm_init/
+          title: docker swarm init
+        - path: /edge/engine/reference/commandline/swarm_join-token/
+          title: docker swarm join-token
+        - path: /edge/engine/reference/commandline/swarm_join/
+          title: docker swarm join
+        - path: /edge/engine/reference/commandline/swarm_leave/
+          title: docker swarm leave
+        - path: /edge/engine/reference/commandline/swarm_unlock-key/
+          title: docker swarm unlock-key
+        - path: /edge/engine/reference/commandline/swarm_unlock/
+          title: docker swarm unlock
+        - path: /edge/engine/reference/commandline/swarm_update/
+          title: docker swarm update
+      - sectiontitle: docker system *
+        section:
+        - path: /edge/engine/reference/commandline/system/
+          title: docker system
+        - path: /edge/engine/reference/commandline/system_df/
+          title: docker system df
+        - path: /edge/engine/reference/commandline/system_events/
+          title: docker system events
+        - path: /edge/engine/reference/commandline/system_info/
+          title: docker system info
+        - path: /edge/engine/reference/commandline/system_prune/
+          title: docker system prune
+      - path: /edge/engine/reference/commandline/tag/
+        title: docker tag
+      - path: /edge/engine/reference/commandline/top/
+        title: docker top
+      - sectiontitle: docker trust *
+        section:
+        - path: /edge/engine/reference/commandline/trust/
+          title: docker trust
+        - path: /edge/engine/reference/commandline/trust_inspect/
+          title: docker trust inspect
+        - path: /edge/engine/reference/commandline/trust_key/
+          title: docker trust key
+        - path: /edge/engine/reference/commandline/trust_key_generate/
+          title: docker trust key generate
+        - path: /edge/engine/reference/commandline/trust_key_load/
+          title: docker trust key load
+        - path: /edge/engine/reference/commandline/trust_revoke/
+          title: docker trust revoke
+        - path: /edge/engine/reference/commandline/trust_sign/
+          title: docker trust sign
+        - path: /edge/engine/reference/commandline/trust_signer/
+          title: docker trust signer
+        - path: /edge/engine/reference/commandline/trust_signer_add/
+          title: docker trust signer add
+        - path: /edge/engine/reference/commandline/trust_signer_remove/
+          title: docker trust signer remove
+      - path: /edge/engine/reference/commandline/unpause/
+        title: docker unpause
+      - path: /edge/engine/reference/commandline/update/
+        title: docker update
+      - path: /edge/engine/reference/commandline/version/
+        title: docker version
+      - sectiontitle: docker volume *
+        section:
+        - path: /edge/engine/reference/commandline/volume_create/
+          title: docker volume create
+        - path: /edge/engine/reference/commandline/volume_inspect/
+          title: docker volume inspect
+        - path: /edge/engine/reference/commandline/volume_ls/
+          title: docker volume ls
+        - path: /edge/engine/reference/commandline/volume_prune/
+          title: docker volume prune
+        - path: /edge/engine/reference/commandline/volume_rm/
+          title: docker volume rm
+      - path: /edge/engine/reference/commandline/wait/
+        title: docker wait
+  - sectiontitle: Daemon CLI (dockerd)
+    section:
+    - title: Daemon CLI (dockerd) - Stable
+      path: /engine/reference/commandline/dockerd/
+    - title: Daemon CLI (dockerd) - Edge
+      path: /edge/engine/reference/commandline/dockerd/
+  - title: Machine (docker-machine) CLI
+    path: /machine/reference/
+    nosync: true
+  - title: Compose (docker-compose) CLI
+    path: /compose/reference/overview/
+    nosync: true
+  - sectiontitle: DTR CLI
+    section:
+    - path: /reference/dtr/2.5/cli/
+      title: Overview
+    - path: /reference/dtr/2.5/cli/backup/
+      title: backup
+    - path: /reference/dtr/2.5/cli/destroy/
+      title: destroy
+    - path: /reference/dtr/2.5/cli/emergency-repair/
+      title: emergency-repair
+    - path: /reference/dtr/2.5/cli/install/
+      title: install
+    - path: /reference/dtr/2.5/cli/join/
+      title: join
+    - path: /reference/dtr/2.5/cli/reconfigure/
+      title: reconfigure
+    - path: /reference/dtr/2.5/cli/remove/
+      title: remove
+    - path: /reference/dtr/2.5/cli/restore/
+      title: restore
+    - path: /reference/dtr/2.5/cli/upgrade/
+      title: upgrade
+  - sectiontitle: UCP CLI
+    section:
+    - path: /reference/ucp/3.0/cli/
+      title: docker/ucp overview
+    - path: /reference/ucp/3.0/cli/backup/
+      title: backup
+    - path: /reference/ucp/3.0/cli/dump-certs/
+      title: dump-certs
+    - path: /reference/ucp/3.0/cli/example-config/
+      title: example-config
+    - path: /reference/ucp/3.0/cli/id/
+      title: id
+    - path: /reference/ucp/3.0/cli/images/
+      title: images
+    - path: /reference/ucp/3.0/cli/install/
+      title: install
+    - path: /reference/ucp/3.0/cli/restart/
+      title: restart
+    - path: /reference/ucp/3.0/cli/restore/
+      title: restore
+    - path: /reference/ucp/3.0/cli/stop/
+      title: stop
+    - path: /reference/ucp/3.0/cli/support/
+      title: support
+    - path: /reference/ucp/3.0/cli/uninstall-ucp/
+      title: uninstall-ucp
+    - path: /reference/ucp/3.0/cli/upgrade/
+      title: upgrade
+
+- sectiontitle: Application Programming Interfaces (APIs)
+  section:
+  - sectiontitle: Docker Engine API
+    section:
+    - path: /engine/api/
+      title: Overview
+    - path: /engine/api/get-started/
+      title: Get started
+    - path: /engine/api/sdks/
+      title: SDKs
+    - path: /engine/api/latest/
+      title: v{{ site.latest_stable_docker_engine_api_version }} reference (latest stable)
+    - sectiontitle: API reference by version
+      section:
+      - path: /engine/api/version-history/
+        title: Version history overview
+      - path: /engine/api/v1.37/
+        title: v1.37 reference
+      - path: /engine/api/v1.36/
+        title: v1.36 reference
+      - path: /engine/api/v1.35/
+        title: v1.35 reference
+      - path: /engine/api/v1.34/
+        title: v1.34 reference
+      - path: /engine/api/v1.33/
+        title: v1.33 reference
+      - path: /engine/api/v1.32/
+        title: v1.32 Reference
+      - path: /engine/api/v1.31/
+        title: v1.31 Reference
+      - path: /engine/api/v1.30/
+        title: v1.30 Reference
+      - path: /engine/api/v1.29/
+        title: v1.29 Reference
+      - path: /engine/api/v1.28/
+        title: v1.28 reference
+      - path: /engine/api/v1.27/
+        title: v1.27 reference
+      - path: /engine/api/v1.26/
+        title: v1.26 reference
+      - path: /engine/api/v1.25/
+        title: v1.25 reference
+      - path: /engine/api/v1.24/
+        title: v1.24 reference
+      - path: /engine/api/v1.23/
+        title: v1.23 reference
+      - path: /engine/api/v1.22/
+        title: v1.22 reference
+      - path: /engine/api/v1.21/
+        title: v1.21 reference
+      - path: /engine/api/v1.20/
+        title: v1.20 reference
+      - path: /engine/api/v1.19/
+        title: v1.19 reference
+      - path: /engine/api/v1.18/
+        title: v1.18 reference
+  - title: DTR API
+    path: /reference/dtr/2.5/api/
+  - title: UCP API
+    path: /reference/ucp/3.0/api/
+  - title: Registry API
+    path: /registry/spec/api/
+    nosync: true
+  - title: Cloud API
+    path: /apidocs/docker-cloud/
+    nosync: true
+
+- sectiontitle: Drivers and specifications
+  section:
+  - title: Image specification
+    path: /registry/spec/manifest-v2-2/
+  - title: Machine drivers
+    path: /machine/drivers/os-base/
+  - title: Registry token authentication
+    path: /registry/spec/auth/
+  - title: Registry storage drivers
+    path: /registry/storage-drivers/
+
+- sectiontitle: Compliance control references
+  section:
+  - sectiontitle: NIST 800-53
+    section:
+    - path: /compliance/reference/800-53/
+      title: Overview
+    - path: /compliance/reference/800-53/ac/
+      title: Access control
+    - path: /compliance/reference/800-53/au/
+      title: Audit and accountability
+    - path: /compliance/reference/800-53/at/
+      title: Awareness and training
+    - path: /compliance/reference/800-53/cm/
+      title: Configuration management
+    - path: /compliance/reference/800-53/cp/
+      title: Contingency planning
+    - path: /compliance/reference/800-53/ia/
+      title: Identification and authentication
+    - path: /compliance/reference/800-53/ir/
+      title: Incident response
+    - path: /compliance/reference/800-53/ma/
+      title: Maintenance
+    - path: /compliance/reference/800-53/mp/
+      title: Media protection
+    - path: /compliance/reference/800-53/ps/
+      title: Personnel security
+    - path: /compliance/reference/800-53/pe/
+      title: Physical and environmental protection
+    - path: /compliance/reference/800-53/pl/
+      title: Planning
+    - path: /compliance/reference/800-53/pm/
+      title: Program management
+    - path: /compliance/reference/800-53/ra/
+      title: Risk assessment
+    - path: /compliance/reference/800-53/ca/
+      title: Security assessment and authorization
+    - path: /compliance/reference/800-53/sc/
+      title: System and communications protection
+    - path: /compliance/reference/800-53/si/
+      title: System and information integrity
+    - path: /compliance/reference/800-53/sa/
+      title: System and services acquisition
+
+
+
+
+samples:
+- path: /samples/#tutorial-labs
+  title: Tutorial labs
+- sectiontitle: Library references
+  section:
+  - generateTOC: library
+- sectiontitle: Sample applications
+  section:
+  - path: /samples/
+    title: Samples home
+  - path: /engine/examples/apt-cacher-ng/
+    title: apt-cacher-ng
+  - path: /engine/examples/dotnetcore/
+    title: .NET Core application
+  - path: /compose/aspnet-mssql-compose/
+    title: ASP.NET Core + SQL Server on Linux
+  - path: /engine/examples/couchdb_data_volumes/
+    title: CouchDB
+  - path: /compose/django/
+    title: Django and PostgreSQL
+  - path: /engine/examples/postgresql_service/
+    title: PostgreSQL
+  - path: /compose/rails/
+    title: Rails and PostgreSQL
+  - path: /engine/examples/running_riak_service/
+    title: Riak
+  - path: /engine/examples/running_ssh_service/
+    title: SSHd
+
+manuals:
+- sectiontitle: Docker Enterprise Edition
+  section:
+  - path: /ee/
+    title: About Docker EE
+  - title: Try Docker EE on the cloud
+    path: https://trial.docker.com
+  - path: /ee/supported-platforms/
+    title: Supported platforms
+    nosync: true
+  - path: /ee/end-to-end-install/
+    title: Deploy Docker EE standard
+  - path: /ee/backup/
+    title: Backup Docker EE
+  - path: /ee/upgrade/
+    title: Upgrade Docker EE
+  - path: /ee/docker-ee-architecture/
+    title: Docker EE Architecture
+  - path: /ee/telemetry/
+    title: Manage usage data collection
+  - sectiontitle: Docker EE Engine
+    section:
+    - path: /ee/supported-platforms/
+      title: Install Docker EE Engine
+      nosync: true
+    - title: Release notes
+      path: /ee/engine/release-notes/
+  - sectiontitle: Universal Control Plane
+    section:
+    - path: /ee/ucp/
+      title: Universal Control Plane overview
+    - path: /ee/ucp/ucp-architecture/
+      title: UCP Architecture
+    - sectiontitle: Administration
+      section:
+      - sectiontitle: Install
+        section:
+        - path: /ee/ucp/admin/install/system-requirements/
+          title: System requirements
+        - path: /ee/ucp/admin/install/plan-installation/
+          title: Plan your installation
+        - path: /ee/ucp/admin/install/
+          title: Install
+        - path: /ee/ucp/admin/install/install-offline/
+          title: Install offline
+        - path: /ee/ucp/admin/install/install-on-azure/
+          title: Install on Azure
+        - path: /ee/ucp/admin/install/upgrade/
+          title: Upgrade
+        - path: /ee/ucp/admin/install/upgrade-offline/
+          title: Upgrade offline
+        - path: /ee/ucp/admin/install/uninstall/
+          title: Uninstall
+        - path: /ee/ucp/admin/install/architecture-specific-images/
+          title: Architecture-specific images
+      - sectiontitle: Configure
+        section:
+        - path: /ee/ucp/admin/configure/add-labels-to-cluster-nodes/
+          title: Add labels to cluster nodes
+        - path: /ee/ucp/admin/configure/add-sans-to-cluster/
+          title: Add SANs to cluster certificates
+        - path: /ee/ucp/admin/configure/external-auth/
+          title: Integrate with LDAP
+        - path: /ee/ucp/admin/configure/external-auth/enable-ldap-config-file/
+          title: Integrate with LDAP by using a configuration file
+        - path: /ee/ucp/admin/configure/license-your-installation/
+          title: License your installation
+        - path: /ee/ucp/admin/configure/restrict-services-to-worker-nodes/
+          title: Restrict services to worker nodes
+        - path: /ee/ucp/admin/configure/run-only-the-images-you-trust/
+          title: Run only the images you trust
+        - path: /ee/ucp/admin/configure/set-session-timeout/
+          title: Set the user's session timeout
+        - path: /ee/ucp/admin/configure/store-logs-in-an-external-system/
+          title: Store logs in an external system
+        - path: /ee/ucp/admin/configure/ucp-configuration-file/
+          title: UCP configuration file
+        - path: /ee/ucp/admin/configure/use-node-local-network-in-swarm/
+          title: Use a local node network in a swarm
+        - path: /ee/ucp/admin/configure/use-nfs-volumes/
+          title: Use NFS persistent storage
+        - path: /ee/ucp/admin/configure/use-your-own-tls-certificates/
+          title: Use your own TLS certificates
+        - path: /ee/ucp/admin/configure/manage-and-deploy-private-images/
+          title: Manage and deploy private images
+        - path: /ee/ucp/admin/configure/set-orchestrator-type/
+          title: Set the orchestrator type for a node
+        - path: /ee/ucp/admin/configure/view-namespace-resources/
+          title: View Kubernetes objects in a namespace
+        - sectiontitle: Join nodes to your cluster
+          section:
+          - path: /ee/ucp/admin/configure/join-nodes/
+            title: Set up high availability
+          - path: /ee/ucp/admin/configure/join-nodes/join-linux-nodes-to-cluster/
+            title: Join nodes to your cluster
+          - path: /ee/ucp/admin/configure/join-nodes/join-windows-nodes-to-cluster/
+            title: Join Windows worker nodes to your cluster
+          - path: /ee/ucp/admin/configure/join-nodes/use-a-load-balancer/
+            title: Use a load balancer
+        - path: /ee/ucp/admin/configure/integrate-with-multiple-registries/
+          title: Integrate with multiple registries
+      - sectiontitle: Monitor and troubleshoot
+        section:
+        - path: /ee/ucp/admin/monitor-and-troubleshoot/
+          title: Monitor the cluster status
+        - path: /ee/ucp/admin/monitor-and-troubleshoot/troubleshoot-node-messages/
+          title: Troubleshoot node messages
+        - path: /ee/ucp/admin/monitor-and-troubleshoot/troubleshoot-with-logs/
+          title: Troubleshoot with logs
+        - path: /ee/ucp/admin/monitor-and-troubleshoot/troubleshoot-configurations/
+          title: Troubleshoot configurations
+      - path: /ee/ucp/admin/backups-and-disaster-recovery/
+        title: Backups and disaster recovery
+      - title: CLI reference
+        path: /reference/ucp/3.0/cli/
+        nosync: true
+    - sectiontitle: Authorize role-based access
+      section:
+      - path: /ee/ucp/authorization/
+        title: Access control model overview
+      - sectiontitle: The basics
+        section:
+        - path: /ee/ucp/authorization/create-users-and-teams-manually/
+          title: Create users and teams manually
+        - path: /ee/ucp/authorization/create-teams-with-ldap/
+          title: Create teams with LDAP
+        - path: /ee/ucp/authorization/define-roles/
+          title: Define roles with authorized API operations
+        - path: /ee/ucp/authorization/group-resources/
+          title: Group and isolate cluster resources
+        - path: /ee/ucp/authorization/grant-permissions/
+          title: Grant role-access to cluster resources
+        - path: /ee/ucp/authorization/reset-user-password/
+          title: Reset user passwords
+      - sectiontitle: Tutorials and use cases
+        section:
+        - path: /ee/ucp/authorization/deploy-stateless-app/
+          title: Deploy stateless app with RBAC
+        - path: /ee/ucp/authorization/isolate-volumes/
+          title: Isolate volumes
+        - path: /ee/ucp/authorization/isolate-nodes/
+          title: Isolate nodes
+        - path: /ee/ucp/authorization/migrate-kubernetes-roles/
+          title: Migrate Kubernetes roles to Docker EE authorization
+        - path: /ee/ucp/authorization/ee-standard/
+          title: Docker EE Standard use case
+        - path: /ee/ucp/authorization/ee-advanced/
+          title: Docker EE Advanced use case
+    - sectiontitle: Access UCP
+      section:
+      - path: /ee/ucp/user-access/
+        title: Web-based access
+      - path: /ee/ucp/user-access/cli/
+        title: CLI-based access
+      - path: /ee/ucp/user-access/kubectl/
+        title: Install the Kubernetes CLI
+    - sectiontitle: Deploy apps with Swarm
+      section:
+      - title: Deploy a single service
+        path: /ee/ucp/swarm/
+      - title: Deploy a multi-service app
+        path: /ee/ucp/swarm/deploy-multi-service-app/
+      - title: Deploy application resources to a collection
+        path: /ee/ucp/swarm/deploy-to-collection/
+      - title: Use secrets in your services
+        path: /ee/ucp/swarm/use-secrets/
+      - sectiontitle: Layer 7 routing
+        section:
+        - title: Overview
+          path: /ee/ucp/interlock/
+        - title: Architecture
+          path: /ee/ucp/interlock/architecture/
+        - sectiontitle: Deploy
+          section:
+          - title: Simple deployment
+            path: /ee/ucp/interlock/deploy/
+          - title: Configure your deployment
+            path: /ee/ucp/interlock/deploy/configure/
+          - title: Production deployment
+            path: /ee/ucp/interlock/deploy/production/
+          - title: Host mode networking
+            path: /ee/ucp/interlock/deploy/host-mode-networking/
+          - title: Configuration reference
+            path: /ee/ucp/interlock/deploy/configuration-reference/
+        - sectiontitle: Route traffic to services
+          section:
+          - title: Simple swarm service
+            path: /ee/ucp/interlock/usage/
+          - title: Set a default service
+            path: /ee/ucp/interlock/usage/default-service/
+          - title: Applications with TLS
+            path: /ee/ucp/interlock/usage/tls/
+          - title: Application redirects
+            path: /ee/ucp/interlock/usage/redirects/
+          - title: Persistent (sticky) sessions
+            path: /ee/ucp/interlock/usage/sessions/
+          - title: Websockets
+            path: /ee/ucp/interlock/usage/websockets/
+          - title: Canary application instances
+            path: /ee/ucp/interlock/usage/canary/
+          - title: Service clusters
+            path: /ee/ucp/interlock/usage/service-clusters/
+          - title: Context/Path based routing
+            path: /ee/ucp/interlock/usage/context/
+          - title: Service labels reference
+            path: /ee/ucp/interlock/usage/labels-reference/
+        - title: Layer 7 routing upgrade
+          path: /ee/ucp/interlock/upgrade/
+    - sectiontitle: Deploy apps with Kubernetes
+      section:
+      - title: Deploy a workload
+        path: /ee/ucp/kubernetes/
+      - title: Deploy a Compose-based app
+        path: /ee/ucp/kubernetes/deploy-with-compose/
+      - title: Deploy an ingress controller
+        path: /ee/ucp/kubernetes/deploy-ingress-controller/
+      - title: Create a service account for a Kubernetes app
+        path: /ee/ucp/kubernetes/create-service-account/
+      - title: Install a CNI plugin
+        path: /ee/ucp/kubernetes/install-cni-plugin/
+    - title: API reference
+      path: /reference/ucp/3.0/api/
+      nosync: true
+    - path: /ee/ucp/release-notes/
+      title: Release notes
+    - sectiontitle: Previous versions
+      section:
+      - sectiontitle: Universal Control Plane 2.2
+        section:
+        - path: /datacenter/ucp/2.2/guides/
+          title: Universal Control Plane overview
+        - path: /datacenter/ucp/2.2/guides/architecture/
+          title: Architecture
+        - sectiontitle: Administration
+          section:
+          - sectiontitle: Install
+            section:
+            - path: /datacenter/ucp/2.2/guides/admin/install/system-requirements/
+              title: System requirements
+            - path: /datacenter/ucp/2.2/guides/admin/install/plan-installation/
+              title: Plan your installation
+            - path: /datacenter/ucp/2.2/guides/admin/install/
+              title: Install
+            - path: /datacenter/ucp/2.2/guides/admin/install/install-offline/
+              title: Install offline
+            - path: /datacenter/ucp/2.2/guides/admin/install/upgrade/
+              title: Upgrade
+            - path: /datacenter/ucp/2.2/guides/admin/install/upgrade-offline/
+              title: Upgrade offline
+            - path: /datacenter/ucp/2.2/guides/admin/install/uninstall/
+              title: Uninstall
+            - path: /datacenter/ucp/2.2/guides/admin/install/architecture-specific-images/
+              title: Architecture-specific images
+          - sectiontitle: Configure
+            section:
+            - path: /datacenter/ucp/2.2/guides/admin/configure/add-labels-to-cluster-nodes/
+              title: Add labels to cluster nodes
+            - path: /datacenter/ucp/2.2/guides/admin/configure/add-sans-to-cluster/
+              title: Add SANs to cluster certificates
+            - path: /datacenter/ucp/2.2/guides/admin/configure/join-windows-worker-nodes/
+              title: Join Windows worker nodes to a swarm
+            - path: /datacenter/ucp/2.2/guides/admin/configure/integrate-with-dtr/
+              title: Integrate with Docker Trusted Registry
+            - path: /datacenter/ucp/2.2/guides/admin/configure/external-auth/
+              title: Integrate with LDAP
+            - path: /datacenter/ucp/2.2/guides/admin/configure/external-auth/enable-ldap-config-file/
+              title: Integrate with LDAP by using a configuration file
+            - path: /datacenter/ucp/2.2/guides/admin/configure/license-your-installation/
+              title: License your installation
+            - path: /datacenter/ucp/2.2/guides/admin/configure/restrict-services-to-worker-nodes/
+              title: Restrict services to worker nodes
+            - path: /datacenter/ucp/2.2/guides/admin/configure/run-only-the-images-you-trust/
+              title: Run only the images you trust
+            - path: /datacenter/ucp/2.2/guides/admin/configure/scale-your-cluster/
+              title: Scale your cluster
+            - path: /datacenter/ucp/2.2/guides/admin/configure/set-session-timeout/
+              title: Set the user's session timeout
+            - path: /datacenter/ucp/2.2/guides/admin/configure/set-up-high-availability/
+              title: Set up high availability
+            - path: /datacenter/ucp/2.2/guides/admin/configure/store-logs-in-an-external-system/
+              title: Store logs in an external system
+            - path: /datacenter/ucp/2.2/guides/admin/configure/ucp-configuration-file/
+              title: UCP configuration file
+            - path: /datacenter/ucp/2.2/guides/admin/configure/use-a-load-balancer/
+              title: Use a load balancer
+            - path: /datacenter/ucp/2.2/guides/admin/configure/use-node-local-network-in-swarm/
+              title: Use a local node network in a swarm
+            - path: /datacenter/ucp/2.2/guides/admin/configure/use-domain-names-to-access-services/
+              title: Use domain names to access services
+            - path: /datacenter/ucp/2.2/guides/admin/configure/use-your-own-tls-certificates/
+              title: Use your own TLS certificates
+          - sectiontitle: Monitor and troubleshoot
+            section:
+            - path: /datacenter/ucp/2.2/guides/admin/monitor-and-troubleshoot/
+              title: Monitor the cluster status
+            - path: /datacenter/ucp/2.2/guides/admin/monitor-and-troubleshoot/troubleshoot-node-messages/
+              title: Troubleshoot node messages
+            - path: /datacenter/ucp/2.2/guides/admin/monitor-and-troubleshoot/troubleshoot-with-logs/
+              title: Troubleshoot with logs
+            - path: /datacenter/ucp/2.2/guides/admin/monitor-and-troubleshoot/troubleshoot-configurations/
+              title: Troubleshoot configurations
+          - path: /datacenter/ucp/2.2/guides/admin/backups-and-disaster-recovery/
+            title: Backups and disaster recovery
+          - sectiontitle: CLI reference
+            section:
+            - path: /datacenter/ucp/2.2/reference/cli/
+              title: docker/ucp overview
+            - path: /datacenter/ucp/2.2/reference/cli/backup/
+              title: backup
+            - path: /datacenter/ucp/2.2/reference/cli/dump-certs/
+              title: dump-certs
+            - path: /datacenter/ucp/2.2/reference/cli/example-config/
+              title: example-config
+            - path: /datacenter/ucp/2.2/reference/cli/id/
+              title: id
+            - path: /datacenter/ucp/2.2/reference/cli/images/
+              title: images
+            - path: /datacenter/ucp/2.2/reference/cli/install/
+              title: install
+            - path: /datacenter/ucp/2.2/reference/cli/restart/
+              title: restart
+            - path: /datacenter/ucp/2.2/reference/cli/restore/
+              title: restore
+            - path: /datacenter/ucp/2.2/reference/cli/stop/
+              title: stop
+            - path: /datacenter/ucp/2.2/reference/cli/support/
+              title: support
+            - path: /datacenter/ucp/2.2/reference/cli/uninstall-ucp/
+              title: uninstall-ucp
+            - path: /datacenter/ucp/2.2/reference/cli/upgrade/
+              title: upgrade
+        - sectiontitle: Access control
+          section:
+          - path: /datacenter/ucp/2.2/guides/access-control/
+            title: Access control model
+          - path: /datacenter/ucp/2.2/guides/access-control/create-and-manage-users/
+            title: Create and manage users
+          - path: /datacenter/ucp/2.2/guides/access-control/create-and-manage-teams/
+            title: Create and manage teams
+          - path: /datacenter/ucp/2.2/guides/access-control/deploy-view-only-service/
+            title: Deploy a service with view-only access across an organization
+          - path: /datacenter/ucp/2.2/guides/access-control/grant-permissions/
+            title: Grant permissions to users based on roles
+          - path: /datacenter/ucp/2.2/guides/access-control/isolate-nodes-between-teams/
+            title: Isolate swarm nodes to a specific team
+          - path: /datacenter/ucp/2.2/guides/access-control/isolate-volumes-between-teams/
+            title: Isolate volumes between two different teams
+          - path: /datacenter/ucp/2.2/guides/access-control/manage-access-with-collections/
+            title: Manage access to resources by using collections
+          - path: /datacenter/ucp/2.2/guides/access-control/access-control-node/
+            title: Node access control
+          - path: /datacenter/ucp/2.2/guides/access-control/permission-levels/
+            title: Permission levels
+          - path: /datacenter/ucp/2.2/guides/access-control/access-control-design-ee-standard/
+            title: Access control design with Docker EE Standard
+          - path: /datacenter/ucp/2.2/guides/access-control/access-control-design-ee-advanced/
+            title: Access control design with Docker EE Advanced
+          - path: /datacenter/ucp/2.2/guides/access-control/recover-a-user-password/
+            title: Recover a user password
+        - sectiontitle: User guides
+          section:
+          - sectiontitle: Access UCP
+            section:
+            - path: /datacenter/ucp/2.2/guides/user/access-ucp/
+              title: Web-based access
+            - path: /datacenter/ucp/2.2/guides/user/access-ucp/cli-based-access/
+              title: CLI-based access
+          - sectiontitle: Deploy an application
+            section:
+            - path: /datacenter/ucp/2.2/guides/user/services/deploy-a-service/
+              title: Deploy a service
+            - path: /datacenter/ucp/2.2/guides/user/services/use-domain-names-to-access-services/
+              title: Use domain names to access services
+            - path: /datacenter/ucp/2.2/guides/user/services/
+              title: Deploy an app from the UI
+            - path: /datacenter/ucp/2.2/guides/user/services/deploy-app-cli/
+              title: Deploy an app from the CLI
+            - path: /datacenter/ucp/2.2/guides/user/services/deploy-stack-to-collection/
+              title: Deploy application resources to a collection
+          - sectiontitle: Secrets
+            section:
+            - path: /datacenter/ucp/2.2/guides/user/secrets/
+              title: Manage secrets
+            - path: /datacenter/ucp/2.2/guides/user/secrets/grant-revoke-access/
+              title: Grant access to secrets
+        - path: /datacenter/ucp/2.2/reference/api/
+          title: API reference
+        - path: /ee/ucp/release-notes/
+          title: Release notes
+        - path: /datacenter/ucp/2.2/guides/get-support/
+          title: Get support
+      - sectiontitle: Universal Control Plane 2.1
+        section:
+        - path: /datacenter/ucp/2.1/guides/
+          title: Universal Control Plane overview
+        - path: /datacenter/ucp/2.1/guides/architecture/
+          title: Architecture
+        - sectiontitle: Administration
+          section:
+          - sectiontitle: Install
+            section:
+            - path: /datacenter/ucp/2.1/guides/admin/install/system-requirements/
+              title: System requirements
+            - path: /datacenter/ucp/2.1/guides/admin/install/plan-installation/
+              title: Plan your installation
+            - path: /datacenter/ucp/2.1/guides/admin/install/
+              title: Install
+            - path: /datacenter/ucp/2.1/guides/admin/install/install-offline/
+              title: Install offline
+            - path: /datacenter/ucp/2.1/guides/admin/upgrade/
+              title: Upgrade
+            - path: /datacenter/ucp/2.1/guides/admin/upgrade-offline/
+              title: Upgrade offline
+            - path: /datacenter/ucp/2.1/guides/admin/install/uninstall/
+              title: Uninstall
+          - sectiontitle: Configure
+            section:
+            - path: /datacenter/ucp/2.1/guides/admin/configure/license-your-installation/
+              title: License your installation
+            - path: /datacenter/ucp/2.1/guides/admin/configure/scale-your-cluster/
+              title: Scale your cluster
+            - path: /datacenter/ucp/2.1/guides/admin/configure/set-up-high-availability/
+              title: Set up high availability
+            - path: /datacenter/ucp/2.1/guides/admin/configure/use-a-load-balancer/
+              title: Use a load balancer
+            - path: /datacenter/ucp/2.1/guides/admin/configure/add-labels-to-cluster-nodes/
+              title: Add labels to cluster nodes
+            - path: /datacenter/ucp/2.1/guides/admin/configure/add-sans-to-cluster/
+              title: Add SANs to cluster certificates
+            - path: /datacenter/ucp/2.1/guides/admin/configure/store-logs-in-an-external-system/
+              title: Store logs in an external system
+            - path: /datacenter/ucp/2.1/guides/admin/configure/restrict-services-to-worker-nodes/
+              title: Restrict services to worker nodes
+            - path: /datacenter/ucp/2.1/guides/admin/configure/use-domain-names-to-access-services/
+              title: Use domain names to access services
+            - path: /datacenter/ucp/2.1/guides/admin/configure/run-only-the-images-you-trust/
+              title: Run only the images you trust
+            - path: /datacenter/ucp/2.1/guides/admin/configure/integrate-with-dtr/
+              title: Integrate with Docker Trusted Registry
+            - path: /datacenter/ucp/2.1/guides/admin/configure/external-auth/
+              title: Integrate with LDAP
+            - path: /datacenter/ucp/2.1/guides/admin/configure/use-your-own-tls-certificates/
+              title: Use your own TLS certificates
+          - sectiontitle: Manage users
+            section:
+            - path: /datacenter/ucp/2.1/guides/admin/manage-users/
+              title: Authentication and authorization
+            - path: /datacenter/ucp/2.1/guides/admin/manage-users/create-and-manage-users/
+              title: Create and manage users
+            - path: /datacenter/ucp/2.1/guides/admin/manage-users/create-and-manage-teams/
+              title: Create and manage teams
+            - path: /datacenter/ucp/2.1/guides/admin/manage-users/permission-levels/
+              title: Permission levels
+            - path: /datacenter/ucp/2.1/guides/admin/manage-users/recover-a-user-password/
+              title: Recover a user password
+          - sectiontitle: Monitor and troubleshoot
+            section:
+            - path: /datacenter/ucp/2.1/guides/admin/monitor-and-troubleshoot/
+              title: Monitor the cluster status
+            - path: /datacenter/ucp/2.1/guides/admin/monitor-and-troubleshoot/troubleshoot-node-messages/
+              title: Troubleshoot node messages
+            - path: /datacenter/ucp/2.1/guides/admin/monitor-and-troubleshoot/troubleshoot-with-logs/
+              title: Troubleshoot with logs
+            - path: /datacenter/ucp/2.1/guides/admin/monitor-and-troubleshoot/troubleshoot-configurations/
+              title: Troubleshoot configurations
+          - path: /datacenter/ucp/2.1/guides/admin/backups-and-disaster-recovery/
+            title: Backups and disaster recovery
+          - sectiontitle: CLI reference
+            section:
+            - path: /datacenter/ucp/2.1/reference/cli/
+              title: docker/ucp overview
+            - path: /datacenter/ucp/2.1/reference/cli/backup/
+              title: backup
+            - path: /datacenter/ucp/2.1/reference/cli/dump-certs/
+              title: dump-certs
+            - path: /datacenter/ucp/2.1/reference/cli/fingerprint/
+              title: fingerprint
+            - path: /datacenter/ucp/2.1/reference/cli/id/
+              title: id
+            - path: /datacenter/ucp/2.1/reference/cli/images/
+              title: images
+            - path: /datacenter/ucp/2.1/reference/cli/install/
+              title: install
+            - path: /datacenter/ucp/2.1/reference/cli/restart/
+              title: restart
+            - path: /datacenter/ucp/2.1/reference/cli/restore/
+              title: restore
+            - path: /datacenter/ucp/2.1/reference/cli/stop/
+              title: stop
+            - path: /datacenter/ucp/2.1/reference/cli/support/
+              title: support
+            - path: /datacenter/ucp/2.1/reference/cli/uninstall-ucp/
+              title: uninstall-ucp
+            - path: /datacenter/ucp/2.1/reference/cli/upgrade/
+              title: upgrade
+        - sectiontitle: User guides
+          section:
+          - sectiontitle: Access UCP
+            section:
+            - path: /datacenter/ucp/2.1/guides/user/access-ucp/
+              title: Web-based access
+            - path: /datacenter/ucp/2.1/guides/user/access-ucp/cli-based-access/
+              title: CLI-based access
+          - sectiontitle: Deploy an application
+            section:
+            - path: /datacenter/ucp/2.1/guides/user/services/deploy-a-service/
+              title: Deploy a service
+            - path: /datacenter/ucp/2.1/guides/user/services/use-domain-names-to-access-services/
+              title: Use domain names to access services
+            - path: /datacenter/ucp/2.1/guides/user/services/
+              title: Deploy an app from the UI
+            - path: /datacenter/ucp/2.1/guides/user/services/deploy-app-cli/
+              title: Deploy an app from the CLI
+          - sectiontitle: Secrets
+            section:
+            - path: /datacenter/ucp/2.1/guides/user/secrets/
+              title: Manage secrets
+            - path: /datacenter/ucp/2.1/guides/user/secrets/grant-revoke-access/
+              title: Grant access to secrets
+        - sectiontitle: Release notes
+          section:
+          - path: /datacenter/ucp/2.1/guides/release-notes/
+            title: Release notes
+          - path: /datacenter/ucp/2.1/guides/release-notes/incompatibilities-and-breaking-changes/
+            title: Incompatibilities and breaking changes
+        - path: /datacenter/ucp/2.1/guides/get-support/
+          title: Get support
+      - sectiontitle: Universal Control Plane 2.0
+        section:
+        - path: /datacenter/ucp/2.0/guides/
+          title: Universal Control Plane overview
+        - path: /datacenter/ucp/2.0/guides/architecture/
+          title: Architecture
+        - sectiontitle: Installation
+          section:
+          - path: /datacenter/ucp/2.0/guides/installation/system-requirements/
+            title: System requirements
+          - path: /datacenter/ucp/2.0/guides/installation/plan-production-install/
+            title: Plan a production installation
+          - path: /datacenter/ucp/2.0/guides/installation/
+            title: Install UCP for production
+          - path: /datacenter/ucp/2.0/guides/installation/install-offline/
+            title: Install offline
+          - path: /datacenter/ucp/2.0/guides/installation/license/
+            title: License UCP
+          - path: /datacenter/ucp/2.0/guides/installation/scale-your-cluster/
+            title: Scale your cluster
+          - path: /datacenter/ucp/2.0/guides/installation/upgrade/
+            title: Upgrade UCP
+          - path: /datacenter/ucp/2.0/guides/installation/uninstall/
+            title: Uninstall UCP
+        - sectiontitle: Access UCP
+          section:
+          - path: /datacenter/ucp/2.0/guides/access-ucp/
+            title: Web-based access
+          - path: /datacenter/ucp/2.0/guides/access-ucp/cli-based-access/
+            title: CLI-based access
+        - sectiontitle: Configuration
+          section:
+          - path: /datacenter/ucp/2.0/guides/configuration/
+            title: Use externally-signed certificates
+          - path: /datacenter/ucp/2.0/guides/configuration/configure-logs/
+            title: Configure UCP logging
+          - path: /datacenter/ucp/2.0/guides/configuration/integrate-with-dtr/
+            title: Integrate with Docker Trusted Registry
+          - path: /datacenter/ucp/2.0/guides/configuration/integrate-with-ldap/
+            title: Integrate with LDAP
+          - path: /datacenter/ucp/2.0/guides/configuration/route-hostnames/
+            title: Route hostnames to services
+        - sectiontitle: Monitor and troubleshoot
+          section:
+          - path: /datacenter/ucp/2.0/guides/monitor/
+            title: Monitor your cluster
+          - path: /datacenter/ucp/2.0/guides/monitor/troubleshoot/
+            title: Troubleshoot your cluster
+          - path: /datacenter/ucp/2.0/guides/monitor/troubleshoot-configurations/
+            title: Troubleshoot cluster configurations
+        - sectiontitle: High-availability
+          section:
+          - path: /datacenter/ucp/2.0/guides/high-availability/
+            title: Set up high availability
+          - path: /datacenter/ucp/2.0/guides/high-availability/backups-and-disaster-recovery/
+            title: Backups and disaster recovery
+        - sectiontitle: User management
+          section:
+          - path: /datacenter/ucp/2.0/guides/user-management/
+            title: Authentication and authorization
+          - path: /datacenter/ucp/2.0/guides/user-management/create-and-manage-users/
+            title: Create and manage users
+          - path: /datacenter/ucp/2.0/guides/user-management/create-and-manage-teams/
+            title: Create and manage teams
+          - path: /datacenter/ucp/2.0/guides/user-management/permission-levels/
+            title: Permission levels
+        - sectiontitle: Applications
+          section:
+          - path: /datacenter/ucp/2.0/guides/applications/
+            title: Deploy an app from the UI
+          - path: /datacenter/ucp/2.0/guides/applications/deploy-app-cli/
+            title: Deploy an app from the CLI
+        - sectiontitle: Content trust
+          section:
+          - path: /datacenter/ucp/2.0/guides/content-trust/
+            title: Run only images you trust
+          - path: /datacenter/ucp/2.0/guides/content-trust/manage-trusted-repositories/
+            title: Manage trusted repositories
+          - path: /datacenter/ucp/2.0/guides/content-trust/continuous-integration/
+            title: Use trusted images for continuous integration
+        - sectiontitle: CLI reference
+          section:
+          - path: /datacenter/ucp/2.0/reference/cli/
+            title: docker/ucp overview
+          - path: /datacenter/ucp/2.0/reference/cli/backup/
+            title: backup
+          - path: /datacenter/ucp/2.0/reference/cli/dump-certs/
+            title: dump-certs
+          - path: /datacenter/ucp/2.0/reference/cli/fingerprint/
+            title: fingerprint
+          - path: /datacenter/ucp/2.0/reference/cli/id/
+            title: id
+          - path: /datacenter/ucp/2.0/reference/cli/images/
+            title: images
+          - path: /datacenter/ucp/2.0/reference/cli/install/
+            title: install
+          - path: /datacenter/ucp/2.0/reference/cli/restart/
+            title: restart
+          - path: /datacenter/ucp/2.0/reference/cli/restore/
+            title: restore
+          - path: /datacenter/ucp/2.0/reference/cli/stop/
+            title: stop
+          - path: /datacenter/ucp/2.0/reference/cli/support/
+            title: support
+          - path: /datacenter/ucp/2.0/reference/cli/uninstall-ucp/
+            title: uninstall-ucp
+          - path: /datacenter/ucp/2.0/reference/cli/upgrade/
+            title: upgrade
+        - path: /datacenter/ucp/2.0/guides/support/
+          title: Get support
+        - path: /datacenter/ucp/2.0/guides/release-notes/
+          title: Release notes
+      - sectiontitle: Universal Control Plane 1.0
+        section:
+        - path: /datacenter/ucp/1.1/overview/
+          title: Universal Control Plane overview
+        - path: /datacenter/ucp/1.1/install-sandbox/
+          title: Install DDC in a sandbox for evaluation
+        - path: /datacenter/ucp/1.1/install-sandbox-2/
+          title: Evaluate DDC in a sandbox deployment
+        - path: /datacenter/ucp/1.1/architecture/
+          title: Architecture
+        - sectiontitle: Installation
+          section:
+          - path: /datacenter/ucp/1.1/installation/system-requirements/
+            title: System requirements
+          - path: /datacenter/ucp/1.1/installation/plan-production-install/
+            title: Plan a production installation
+          - path: /datacenter/ucp/1.1/installation/install-production/
+            title: Install UCP for production
+          - path: /datacenter/ucp/1.1/installation/install-offline/
+            title: Install offline
+          - path: /datacenter/ucp/1.1/installation/license/
+            title: License UCP
+          - path: /datacenter/ucp/1.1/installation/upgrade/
+            title: Upgrade UCP
+          - path: /datacenter/ucp/1.1/installation/uninstall/
+            title: Uninstall UCP
+        - sectiontitle: Access UCP
+          section:
+          - path: /datacenter/ucp/1.1/access-ucp/web-based-access/
+            title: Web-based access
+          - path: /datacenter/ucp/1.1/access-ucp/cli-based-access/
+            title: CLI-based access
+        - sectiontitle: Configuration
+          section:
+          - path: /datacenter/ucp/1.1/configuration/use-externally-signed-certs/
+            title: Use externally-signed certificates
+          - path: /datacenter/ucp/1.1/configuration/configure-logs/
+            title: Configure UCP logging
+          - path: /datacenter/ucp/1.1/configuration/dtr-integration/
+            title: Integrate with Docker Trusted Registry
+          - path: /datacenter/ucp/1.1/configuration/ldap-integration/
+            title: Integrate with LDAP
+          - path: /datacenter/ucp/1.1/configuration/multi-host-networking/
+            title: Set up container networking
+        - sectiontitle: Monitor and troubleshoot
+          section:
+          - path: /datacenter/ucp/1.1/monitor/monitor-ucp/
+            title: Monitor your cluster
+          - path: /datacenter/ucp/1.1/monitor/troubleshoot-ucp/
+            title: Troubleshoot your cluster
+          - path: /datacenter/ucp/1.1/monitor/troubleshoot-configurations/
+            title: Troubleshoot cluster configurations
+        - sectiontitle: High-availability
+          section:
+          - path: /datacenter/ucp/1.1/high-availability/set-up-high-availability/
+            title: Set up high availability
+          - path: /datacenter/ucp/1.1/high-availability/replicate-cas/
+            title: Replicate CAs for high availability
+          - path: /datacenter/ucp/1.1/high-availability/backups-and-disaster-recovery/
+            title: Backups and disaster recovery
+        - sectiontitle: User management
+          section:
+          - path: /datacenter/ucp/1.1/user-management/authentication-and-authorization/
+            title: Authentication and authorization
+          - path: /datacenter/ucp/1.1/user-management/create-and-manage-users/
+            title: Create and manage users
+          - path: /datacenter/ucp/1.1/user-management/create-and-manage-teams/
+            title: Create and manage teams
+          - path: /datacenter/ucp/1.1/user-management/permission-levels/
+            title: Permission levels
+        - sectiontitle: Applications
+          section:
+          - path: /datacenter/ucp/1.1/applications/deploy-app-ui/
+            title: Deploy an app from the UI
+          - path: /datacenter/ucp/1.1/applications/deploy-app-cli/
+            title: Deploy an app from the CLI
+        - sectiontitle: UCP tool CLI
+          section:
+          - path: /datacenter/ucp/1.1/reference/
+            title: UCP tool v1.1 overview
+          - path: /datacenter/ucp/1.1/reference/backup/
+            title: backup
+          - path: /datacenter/ucp/1.1/reference/dump-certs/
+            title: dump-certs
+          - path: /datacenter/ucp/1.1/reference/engine-discovery/
+            title: engine-discovery
+          - path: /datacenter/ucp/1.1/reference/fingerprint/
+            title: fingerprint
+          - path: /datacenter/ucp/1.1/reference/help/
+            title: help
+          - path: /datacenter/ucp/1.1/reference/id/
+            title: id
+          - path: /datacenter/ucp/1.1/reference/images/
+            title: images
+          - path: /datacenter/ucp/1.1/reference/install/
+            title: install
+          - path: /datacenter/ucp/1.1/reference/join/
+            title: join
+          - path: /datacenter/ucp/1.1/reference/regen-certs/
+            title: regen-certs
+          - path: /datacenter/ucp/1.1/reference/restart/
+            title: restart
+          - path: /datacenter/ucp/1.1/reference/restore/
+            title: restore
+          - path: /datacenter/ucp/1.1/reference/stop/
+            title: stop
+          - path: /datacenter/ucp/1.1/reference/support/
+            title: support
+          - path: /datacenter/ucp/1.1/reference/uninstall/
+            title: uninstall
+          - path: /datacenter/ucp/1.1/reference/upgrade/
+            title: upgrade
+          - path: /datacenter/ucp/1.1/support/
+            title: Get support
+          - path: /datacenter/ucp/1.1/release_notes/
+          title: Release notes
+  - sectiontitle: Docker Trusted Registry
+    section:
+    - path: /ee/dtr/
+      title: Docker Trusted Registry overview
+    - path: /ee/dtr/architecture/
+      title: Architecture
+    - sectiontitle: Administration
+      section:
+      - sectiontitle: Install
+        section:
+        - path: /ee/dtr/admin/install/system-requirements/
+          title: System requirements
+        - path: /ee/dtr/admin/install/
+          title: Install
+        - path: /ee/dtr/admin/install/install-offline/
+          title: Install offline
+        - path: /ee/dtr/admin/upgrade/
+          title: Upgrade
+        - path: /ee/dtr/admin/install/uninstall/
+          title: Uninstall
+      - sectiontitle: Configure
+        section:
+        - path: /ee/dtr/admin/configure/license-your-installation/
+          title: License your installation
+        - path: /ee/dtr/admin/configure/use-your-own-tls-certificates/
+          title: Use your own TLS certificates
+        - path: /ee/dtr/admin/configure/enable-single-sign-on/
+          title: Enable single sign-on
+        - sectiontitle: External storage
+          section:
+          - path: /ee/dtr/admin/configure/external-storage/
+            title: Overview
+          - path: /ee/dtr/admin/configure/external-storage/s3/
+            title: S3
+          - path: /ee/dtr/admin/configure/external-storage/nfs/
+            title: NFS
+        - path: /ee/dtr/admin/configure/set-up-high-availability/
+          title: Set up high availability
+        - path: /ee/dtr/admin/configure/use-a-load-balancer/
+          title: Use a load balancer
+        - path: /ee/dtr/admin/configure/set-up-vulnerability-scans/
+          title: Set up vulnerability scans
+        - sectiontitle: Deploy caches
+          section:
+          - title: Cache overview
+            path: /ee/dtr/admin/configure/deploy-caches/
+          - title: Cache deployment strategy
+            path: /ee/dtr/admin/configure/deploy-caches/strategy/
+          - title: Deploy a DTR cache
+            path: /ee/dtr/admin/configure/deploy-caches/simple/
+          - title: Configure caches for high availability
+            path: /ee/dtr/admin/configure/deploy-caches/high-availability/
+          - title: Cache configuration reference
+            path: /ee/dtr/admin/configure/deploy-caches/configuration-reference/
+        - path: /ee/dtr/admin/configure/garbage-collection/
+          title: Garbage collection
+        - title: Allow users to create repositories when pushing
+          path: /ee/dtr/admin/configure/allow-creation-on-push/
+        - path: /ee/dtr/admin/configure/use-a-web-proxy/
+          title: Use a web proxy
+      - sectiontitle: Manage users
+        section:
+        - path: /ee/dtr/admin/manage-users/
+          title: Authentication and authorization
+        - path: /ee/dtr/admin/manage-users/create-and-manage-users/
+          title: Create and manage users
+        - path: /ee/dtr/admin/manage-users/create-and-manage-teams/
+          title: Create and manage teams
+        - path: /ee/dtr/admin/manage-users/create-and-manage-orgs/
+          title: Create and manage organizations
+        - path: /ee/dtr/admin/manage-users/permission-levels/
+          title: Permission levels
+      - sectiontitle: Monitor and troubleshoot
+        section:
+        - path: /ee/dtr/admin/monitor-and-troubleshoot/
+          title: Monitor the cluster status
+        - path: /ee/dtr/admin/monitor-and-troubleshoot/notary-audit-logs/
+          title: Check Notary audit logs
+        - path: /ee/dtr/admin/monitor-and-troubleshoot/troubleshoot-with-logs/
+          title: Troubleshoot with logs
+        - path: /ee/dtr/admin/monitor-and-troubleshoot/troubleshoot-batch-jobs/
+          title: Troubleshoot batch jobs
+      - sectiontitle: Disaster recovery
+        section:
+        - title: Overview
+          path: /ee/dtr/admin/disaster-recovery/
+        - title: Repair a single replica
+          path: /ee/dtr/admin/disaster-recovery/repair-a-single-replica/
+        - title: Repair a cluster
+          path: /ee/dtr/admin/disaster-recovery/repair-a-cluster/
+        - title: Create a backup
+          path: /ee/dtr/admin/disaster-recovery/create-a-backup/
+        - title: Restore from a backup
+          path: /ee/dtr/admin/disaster-recovery/restore-from-backup/
+      - title: CLI reference
+        path: /reference/dtr/2.5/cli/
+        nosync: true
+    - sectiontitle: User guides
+      section:
+      - sectiontitle: Access DTR
+        section:
+        - path: /ee/dtr/user/access-dtr/
+          title: Configure your Docker daemon
+        - path: /ee/dtr/user/access-dtr/configure-your-notary-client/
+          title: Configure your Notary client
+        - path: /ee/dtr/user/access-dtr/use-a-cache/
+          title: Use a cache
+      - sectiontitle: Manage images
+        section:
+        - path: /ee/dtr/user/manage-images/
+          title: Create a repository
+        - path: /ee/dtr/user/manage-images/pull-and-push-images/
+          title: Pull and push images
+        - path: /ee/dtr/user/manage-images/delete-images/
+          title: Delete images
+        - path: /ee/dtr/user/manage-images/scan-images-for-vulnerabilities/
+          title: Scan images for vulnerabilities
+        - title: Override a vulnerability
+          path: /ee/dtr/user/manage-images/override-a-vulnerability/
+        - path: /ee/dtr/user/manage-images/prevent-tags-from-being-overwritten/
+          title: Prevent tags from being overwritten
+        - sectiontitle: Sign images
+          section:
+          - path: /ee/dtr/user/manage-images/sign-images/
+            title: Sign an image
+          - path: /ee/dtr/user/manage-images/sign-images/delegate-image-signing/
+            title: Delegate image signing
+          - path: /ee/dtr/user/manage-images/sign-images/manage-trusted-repositories/
+            title: Manage trusted repositories
+      - sectiontitle: Promotion policies and mirroring
+        section:
+          - title: Overview
+            path: /ee/dtr/user/promotion-policies/
+          - title: Promote an image using policies
+            path: /ee/dtr/user/promotion-policies/internal-promotion/
+          - title: Mirror images to another registry
+            path: /ee/dtr/user/promotion-policies/push-mirror/
+          - title: Mirror images from another registry
+            path: /ee/dtr/user/promotion-policies/pull-mirror/
+          - title: Template reference
+            path: /ee/dtr/user/promotion-policies/templates/
+      - path: /ee/dtr/user/create-and-manage-webhooks/
+        title: Create and manage webhooks
+      - title: Manage access tokens
+        path: /ee/dtr/user/access-tokens/
+    - title: API reference
+      path: /reference/dtr/2.5/api/
+      nosync: true
+    - path: /ee/dtr/release-notes/
+      title: Release notes
+    - sectiontitle: Previous versions
+      section:
+      - sectiontitle: Docker Trusted Registry 2.4
+        section:
+        - path: /datacenter/dtr/2.4/guides/
+          title: Docker Trusted Registry overview
+        - path: /datacenter/dtr/2.4/guides/architecture/
+          title: Architecture
+        - sectiontitle: Administration
+          section:
+          - sectiontitle: Install
+            section:
+            - path: /datacenter/dtr/2.4/guides/admin/install/system-requirements/
+              title: System requirements
+            - path: /datacenter/dtr/2.4/guides/admin/install/
+              title: Install
+            - path: /datacenter/dtr/2.4/guides/admin/install/install-offline/
+              title: Install offline
+            - path: /datacenter/dtr/2.4/guides/admin/upgrade/
+              title: Upgrade
+            - path: /datacenter/dtr/2.4/guides/admin/install/uninstall/
+              title: Uninstall
+          - sectiontitle: Configure
+            section:
+            - path: /datacenter/dtr/2.4/guides/admin/configure/license-your-installation/
+              title: License your installation
+            - path: /datacenter/dtr/2.4/guides/admin/configure/use-your-own-tls-certificates/
+              title: Use your own TLS certificates
+            - path: /datacenter/dtr/2.4/guides/admin/configure/enable-single-sign-on/
+              title: Enable single sign-on
+            - sectiontitle: External storage
+              section:
+              - path: /datacenter/dtr/2.4/guides/admin/configure/external-storage/
+                title: Overview
+              - path: /datacenter/dtr/2.4/guides/admin/configure/external-storage/s3/
+                title: S3
+              - path: /datacenter/dtr/2.4/guides/admin/configure/external-storage/nfs/
+                title: NFS
+            - path: /datacenter/dtr/2.4/guides/admin/configure/set-up-high-availability/
+              title: Set up high availability
+            - path: /datacenter/dtr/2.4/guides/admin/configure/use-a-load-balancer/
+              title: Use a load balancer
+            - path: /datacenter/dtr/2.4/guides/admin/configure/set-up-vulnerability-scans/
+              title: Set up vulnerability scans
+            - sectiontitle: Deploy caches
+              section:
+              - path: /datacenter/dtr/2.4/guides/admin/configure/deploy-caches/
+                title: Overview
+              - path: /datacenter/dtr/2.4/guides/admin/configure/deploy-caches/tls/
+                title: Deploy caches with TLS
+              - path: /datacenter/dtr/2.4/guides/admin/configure/deploy-caches/chaining/
+                title: Chain multiple caches
+            - path: /datacenter/dtr/2.4/guides/admin/configure/garbage-collection/
+              title: Garbage collection
+            - path: /datacenter/dtr/2.4/guides/admin/configure/use-a-web-proxy/
+              title: Use a web proxy
+          - sectiontitle: Manage users
+            section:
+            - path: /datacenter/dtr/2.4/guides/admin/manage-users/
+              title: Authentication and authorization
+            - path: /datacenter/dtr/2.4/guides/admin/manage-users/create-and-manage-users/
+              title: Create and manage users
+            - path: /datacenter/dtr/2.4/guides/admin/manage-users/create-and-manage-teams/
+              title: Create and manage teams
+            - path: /datacenter/dtr/2.4/guides/admin/manage-users/create-and-manage-orgs/
+              title: Create and manage organizations
+            - path: /datacenter/dtr/2.4/guides/admin/manage-users/permission-levels/
+              title: Permission levels
+          - sectiontitle: Monitor and troubleshoot
+            section:
+            - path: /datacenter/dtr/2.4/guides/admin/monitor-and-troubleshoot/
+              title: Monitor the cluster status
+            - path: /datacenter/dtr/2.4/guides/admin/monitor-and-troubleshoot/notary-audit-logs/
+              title: Check Notary audit logs
+            - path: /datacenter/dtr/2.4/guides/admin/monitor-and-troubleshoot/troubleshoot-with-logs/
+              title: Troubleshoot with logs
+            - path: /datacenter/dtr/2.4/guides/admin/monitor-and-troubleshoot/troubleshoot-batch-jobs/
+              title: Troubleshoot batch jobs
+          - path: /datacenter/dtr/2.4/guides/admin/backups-and-disaster-recovery/
+            title: Backups and disaster recovery
+          - sectiontitle: CLI reference
+            section:
+            - path: /datacenter/dtr/2.4/reference/cli/
+              title: Overview
+            - path: /datacenter/dtr/2.4/reference/cli/backup/
+              title: backup
+            - path: /datacenter/dtr/2.4/reference/cli/destroy/
+              title: destroy
+            - path: /datacenter/dtr/2.4/reference/cli/images/
+              title: images
+            - path: /datacenter/dtr/2.4/reference/cli/install/
+              title: install
+            - path: /datacenter/dtr/2.4/reference/cli/join/
+              title: join
+            - path: /datacenter/dtr/2.4/reference/cli/reconfigure/
+              title: reconfigure
+            - path: /datacenter/dtr/2.4/reference/cli/remove/
+              title: remove
+            - path: /datacenter/dtr/2.4/reference/cli/restore/
+              title: restore
+            - path: /datacenter/dtr/2.4/reference/cli/upgrade/
+              title: upgrade
+        - sectiontitle: User guides
+          section:
+          - sectiontitle: Access DTR
+            section:
+            - path: /datacenter/dtr/2.4/guides/user/access-dtr/
+              title: Configure your Docker daemon
+            - path: /datacenter/dtr/2.4/guides/user/access-dtr/configure-your-notary-client/
+              title: Configure your Notary client
+            - path: /datacenter/dtr/2.4/guides/user/access-dtr/use-a-cache/
+              title: Use a cache
+          - sectiontitle: Manage images
+            section:
+            - path: /datacenter/dtr/2.4/guides/user/manage-images/
+              title: Create a repository
+            - path: /datacenter/dtr/2.4/guides/user/manage-images/pull-and-push-images/
+              title: Pull and push images
+            - path: /datacenter/dtr/2.4/guides/user/manage-images/delete-images/
+              title: Delete images
+            - path: /datacenter/dtr/2.4/guides/user/manage-images/scan-images-for-vulnerabilities/
+              title: Scan images for vulnerabilities
+            - path: /datacenter/dtr/2.4/guides/user/manage-images/prevent-tags-from-being-overwritten/
+              title: Prevent tags from being overwritten
+            - sectiontitle: Sign images
+              section:
+              - path: /datacenter/dtr/2.4/guides/user/manage-images/sign-images/
+                title: Sign an image
+              - path: /datacenter/dtr/2.4/guides/user/manage-images/sign-images/delegate-image-signing/
+                title: Delegate image signing
+              - path: /datacenter/dtr/2.4/guides/user/manage-images/sign-images/manage-trusted-repositories/
+                title: Manage trusted repositories
+          - path: /datacenter/dtr/2.4/guides/user/create-and-manage-webhooks/
+            title: Create and manage webhooks
+          - path: /datacenter/dtr/2.4/guides/user/create-promotion-policies/
+            title: Create promotion policies
+        - path: /datacenter/dtr/2.4/reference/api/
+          title: API reference
+        - path: /ee/dtr/release-notes/
+          title: Release notes
+        - path: /datacenter/dtr/2.4/guides/support/
+          title: Get support
+      - sectiontitle: Docker Trusted Registry 2.3
+        section:
+        - path: /datacenter/dtr/2.3/guides/
+          title: Docker Trusted Registry overview
+        - path: /datacenter/dtr/2.3/guides/architecture/
+          title: Architecture
+        - sectiontitle: Administration
+          section:
+          - sectiontitle: Install
+            section:
+            - path: /datacenter/dtr/2.3/guides/admin/install/system-requirements/
+              title: System requirements
+            - path: /datacenter/dtr/2.3/guides/admin/install/
+              title: Install
+            - path: /datacenter/dtr/2.3/guides/admin/install/install-offline/
+              title: Install offline
+            - path: /datacenter/dtr/2.3/guides/admin/upgrade/
+              title: Upgrade
+            - path: /datacenter/dtr/2.3/guides/admin/install/uninstall/
+              title: Uninstall
+          - sectiontitle: Configure
+            section:
+            - path: /datacenter/dtr/2.3/guides/admin/configure/license-your-installation/
+              title: License your installation
+            - path: /datacenter/dtr/2.3/guides/admin/configure/use-your-own-tls-certificates/
+              title: Use your own TLS certificates
+            - path: /datacenter/dtr/2.3/guides/admin/configure/enable-single-sign-on/
+              title: Enable single sign-on
+            - sectiontitle: External storage
+              section:
+              - path: /datacenter/dtr/2.3/guides/admin/configure/external-storage/
+                title: Overview
+              - path: /datacenter/dtr/2.3/guides/admin/configure/external-storage/s3/
+                title: S3
+              - path: /datacenter/dtr/2.3/guides/admin/configure/external-storage/nfs/
+                title: NFS
+            - path: /datacenter/dtr/2.3/guides/admin/configure/set-up-high-availability/
+              title: Set up high availability
+            - path: /datacenter/dtr/2.3/guides/admin/configure/use-a-load-balancer/
+              title: Use a load balancer
+            - path: /datacenter/dtr/2.3/guides/admin/configure/set-up-vulnerability-scans/
+              title: Set up vulnerability scans
+            - sectiontitle: Deploy caches
+              section:
+              - path: /datacenter/dtr/2.3/guides/admin/configure/deploy-caches/
+                title: Overview
+              - path: /datacenter/dtr/2.3/guides/admin/configure/deploy-caches/tls/
+                title: Deploy caches with TLS
+              - path: /datacenter/dtr/2.3/guides/admin/configure/deploy-caches/chaining/
+                title: Chain multiple caches
+            - path: /datacenter/dtr/2.3/guides/admin/configure/garbage-collection/
+              title: Garbage collection
+            - path: /datacenter/dtr/2.3/guides/admin/configure/use-a-web-proxy/
+              title: Use a web proxy
+          - sectiontitle: Manage users
+            section:
+            - path: /datacenter/dtr/2.3/guides/admin/manage-users/
+              title: Authentication and authorization
+            - path: /datacenter/dtr/2.3/guides/admin/manage-users/create-and-manage-users/
+              title: Create and manage users
+            - path: /datacenter/dtr/2.3/guides/admin/manage-users/create-and-manage-teams/
+              title: Create and manage teams
+            - path: /datacenter/dtr/2.3/guides/admin/manage-users/create-and-manage-orgs/
+              title: Create and manage organizations
+            - path: /datacenter/dtr/2.3/guides/admin/manage-users/permission-levels/
+              title: Permission levels
+          - sectiontitle: Monitor and troubleshoot
+            section:
+            - path: /datacenter/dtr/2.3/guides/admin/monitor-and-troubleshoot/
+              title: Monitor the cluster status
+            - path: /datacenter/dtr/2.3/guides/admin/monitor-and-troubleshoot/troubleshoot-with-logs/
+              title: Troubleshoot with logs
+            - path: /datacenter/dtr/2.3/guides/admin/monitor-and-troubleshoot/troubleshoot-batch-jobs/
+              title: Troubleshoot batch jobs
+          - path: /datacenter/dtr/2.3/guides/admin/backups-and-disaster-recovery/
+            title: Backups and disaster recovery
+          - sectiontitle: CLI reference
+            section:
+            - path: /datacenter/dtr/2.3/reference/cli/
+              title: Overview
+            - path: /datacenter/dtr/2.3/reference/cli/backup/
+              title: backup
+            - path: /datacenter/dtr/2.3/reference/cli/destroy/
+              title: destroy
+            - path: /datacenter/dtr/2.3/reference/cli/dumpcerts/
+              title: dumpcerts
+            - path: /datacenter/dtr/2.3/reference/cli/images/
+              title: images
+            - path: /datacenter/dtr/2.3/reference/cli/install/
+              title: install
+            - path: /datacenter/dtr/2.3/reference/cli/join/
+              title: join
+            - path: /datacenter/dtr/2.3/reference/cli/reconfigure/
+              title: reconfigure
+            - path: /datacenter/dtr/2.3/reference/cli/remove/
+              title: remove
+            - path: /datacenter/dtr/2.3/reference/cli/restore/
+              title: restore
+            - path: /datacenter/dtr/2.3/reference/cli/upgrade/
+              title: upgrade
+        - sectiontitle: User guides
+          section:
+          - sectiontitle: Access DTR
+            section:
+            - path: /datacenter/dtr/2.3/guides/user/access-dtr/
+              title: Configure your Docker daemon
+            - path: /datacenter/dtr/2.3/guides/user/access-dtr/configure-your-notary-client/
+              title: Configure your Notary client
+            - path: /datacenter/dtr/2.3/guides/user/access-dtr/use-a-cache/
+              title: Use a cache
+          - sectiontitle: Manage images
+            section:
+            - path: /datacenter/dtr/2.3/guides/user/manage-images/
+              title: Create a repository
+            - path: /datacenter/dtr/2.3/guides/user/manage-images/pull-and-push-images/
+              title: Pull and push images
+            - path: /datacenter/dtr/2.3/guides/user/manage-images/delete-images/
+              title: Delete images
+            - path: /datacenter/dtr/2.3/guides/user/manage-images/scan-images-for-vulnerabilities/
+              title: Scan images for vulnerabilities
+            - path: /datacenter/dtr/2.3/guides/user/manage-images/prevent-tags-from-being-overwritten/
+              title: Prevent tags from being overwritten
+            - sectiontitle: Sign images
+              section:
+              - path: /datacenter/dtr/2.3/guides/user/manage-images/sign-images/
+                title: Sign an image
+              - path: /datacenter/dtr/2.3/guides/user/manage-images/sign-images/delegate-image-signing/
+                title: Delegate image signing
+              - path: /datacenter/dtr/2.3/guides/user/manage-images/sign-images/manage-trusted-repositories/
+                title: Manage trusted repositories
+          - path: /datacenter/dtr/2.3/guides/user/create-and-manage-webhooks/
+            title: Create and manage webhooks
+          - path: /datacenter/dtr/2.3/guides/user/create-promotion-policies/
+            title: Create promotion policies
+        - path: /datacenter/dtr/2.3/reference/api/
+          title: API reference
+        - path: /datacenter/dtr/2.3/guides/release-notes/
+          title: Release notes
+        - path: /datacenter/dtr/2.3/guides/support/
+          title: Get support
+      - sectiontitle: Docker Trusted Registry 2.2
+        section:
+        - path: /datacenter/dtr/2.2/guides/
+          title: Docker Trusted Registry overview
+        - path: /datacenter/dtr/2.2/guides/architecture/
+          title: Architecture
+        - sectiontitle: Administration
+          section:
+          - sectiontitle: Install
+            section:
+            - path: /datacenter/dtr/2.2/guides/admin/install/system-requirements/
+              title: System requirements
+            - path: /datacenter/dtr/2.2/guides/admin/install/
+              title: Install
+            - path: /datacenter/dtr/2.2/guides/admin/install/install-offline/
+              title: Install offline
+            - path: /datacenter/dtr/2.2/guides/admin/upgrade/
+              title: Upgrade
+            - path: /datacenter/dtr/2.2/guides/admin/install/uninstall/
+              title: Uninstall
+          - sectiontitle: Configure
+            section:
+            - path: /datacenter/dtr/2.2/guides/admin/configure/license-your-installation/
+              title: License your installation
+            - path: /datacenter/dtr/2.2/guides/admin/configure/use-your-own-tls-certificates/
+              title: Use your own TLS certificates
+            - sectiontitle: External storage
+              section:
+              - path: /datacenter/dtr/2.2/guides/admin/configure/external-storage/
+                title: Overview
+              - path: /datacenter/dtr/2.2/guides/admin/configure/external-storage/s3/
+                title: S3
+              - path: /datacenter/dtr/2.2/guides/admin/configure/external-storage/nfs/
+                title: NFS
+            - path: /datacenter/dtr/2.2/guides/admin/configure/set-up-high-availability/
+              title: Set up high availability
+            - path: /datacenter/dtr/2.2/guides/admin/configure/use-a-load-balancer/
+              title: Use a load balancer
+            - path: /datacenter/dtr/2.2/guides/admin/configure/set-up-vulnerability-scans/
+              title: Set up vulnerability scans
+            - sectiontitle: Deploy caches
+              section:
+              - path: /datacenter/dtr/2.2/guides/admin/configure/deploy-caches/
+                title: Overview
+              - path: /datacenter/dtr/2.2/guides/admin/configure/deploy-caches/tls/
+                title: Deploy caches with TLS
+              - path: /datacenter/dtr/2.2/guides/admin/configure/deploy-caches/chaining/
+                title: Chain multiple caches
+            - path: /datacenter/dtr/2.2/guides/admin/configure/garbage-collection/
+              title: Garbage collection
+          - sectiontitle: Manage users
+            section:
+            - path: /datacenter/dtr/2.2/guides/admin/manage-users/
+              title: Create and manage users
+            - path: /datacenter/dtr/2.2/guides/admin/manage-users/create-and-manage-users/
+              title: Create and manage users
+            - path: /datacenter/dtr/2.2/guides/admin/manage-users/create-and-manage-teams/
+              title: Create and manage teams
+            - path: /datacenter/dtr/2.2/guides/admin/manage-users/permission-levels/
+              title: Permission levels
+          - sectiontitle: Monitor and troubleshoot
+            section:
+            - path: /datacenter/dtr/2.2/guides/admin/monitor-and-troubleshoot/
+              title: Monitor the cluster status
+            - path: /datacenter/dtr/2.2/guides/admin/monitor-and-troubleshoot/troubleshoot-with-logs/
+              title: Troubleshoot with logs
+            - path: /datacenter/dtr/2.2/guides/admin/monitor-and-troubleshoot/troubleshoot-batch-jobs/
+              title: Troubleshoot batch jobs
+          - path: /datacenter/dtr/2.2/guides/admin/backups-and-disaster-recovery/
+            title: Backups and disaster recovery
+          - sectiontitle: CLI reference
+            section:
+            - path: /datacenter/dtr/2.2/reference/cli/
+              title: Overview
+            - path: /datacenter/dtr/2.2/reference/cli/backup/
+              title: backup
+            - path: /datacenter/dtr/2.2/reference/cli/destroy/
+              title: destroy
+            - path: /datacenter/dtr/2.2/reference/cli/dumpcerts/
+              title: dumpcerts
+            - path: /datacenter/dtr/2.2/reference/cli/images/
+              title: images
+            - path: /datacenter/dtr/2.2/reference/cli/install/
+              title: install
+            - path: /datacenter/dtr/2.2/reference/cli/join/
+              title: join
+            - path: /datacenter/dtr/2.2/reference/cli/reconfigure/
+              title: reconfigure
+            - path: /datacenter/dtr/2.2/reference/cli/remove/
+              title: remove
+            - path: /datacenter/dtr/2.2/reference/cli/restore/
+              title: restore
+            - path: /datacenter/dtr/2.2/reference/cli/upgrade/
+              title: upgrade
+        - sectiontitle: User guides
+          section:
+          - sectiontitle: Access DTR
+            section:
+            - path: /datacenter/dtr/2.2/guides/user/access-dtr/
+              title: Configure your Docker daemon
+            - path: /datacenter/dtr/2.2/guides/user/access-dtr/configure-your-notary-client/
+              title: Configure your Notary client
+            - path: /datacenter/dtr/2.2/guides/user/access-dtr/use-a-cache/
+              title: Use a cache
+          - sectiontitle: Manage images
+            section:
+            - path: /datacenter/dtr/2.2/guides/user/manage-images/
+              title: Create a repository
+            - path: /datacenter/dtr/2.2/guides/user/manage-images/pull-and-push-images/
+              title: Pull and push images
+            - path: /datacenter/dtr/2.2/guides/user/manage-images/delete-images/
+              title: Delete images
+            - path: /datacenter/dtr/2.2/guides/user/manage-images/scan-images-for-vulnerabilities/
+              title: Scan images for vulnerabilities
+            - sectiontitle: Sign images
+              section:
+              - path: /datacenter/dtr/2.2/guides/user/manage-images/sign-images/
+                title: Sign an image
+              - path: /datacenter/dtr/2.2/guides/user/manage-images/sign-images/delegate-image-signing/
+                title: Delegate image signing
+              - path: /datacenter/dtr/2.2/guides/user/manage-images/sign-images/manage-trusted-repositories/
+                title: Manage trusted repositories
+          - path: /datacenter/dtr/2.2/guides/user/create-and-manage-webhooks/
+            title: Create and manage webhooks
+        - path: /datacenter/dtr/2.2/reference/api/
+          title: API reference
+        - sectiontitle: Release notes
+          section:
+          - path: /datacenter/dtr/2.2/guides/release-notes/
+            title: Release notes
+          - path: /datacenter/dtr/2.2/guides/release-notes/incompatibilities-and-breaking-changes/
+            title: Incompatibilities and breaking changes
+        - path: /datacenter/dtr/2.2/guides/support/
+          title: Get support
+      - sectiontitle: Docker Trusted Registry 2.1
+        section:
+        - path: /datacenter/dtr/2.1/guides/
+          title: Docker Trusted Registry overview
+        - path: /datacenter/dtr/2.1/guides/architecture/
+          title: Architecture
+        - sectiontitle: Installation
+          section:
+          - path: /datacenter/dtr/2.1/guides/install/system-requirements/
+            title: System requirements
+          - path: /datacenter/dtr/2.1/guides/install/
+            title: Install Docker Trusted Registry
+          - path: /datacenter/dtr/2.1/guides/install/install-offline/
+            title: Install offline
+          - path: /datacenter/dtr/2.1/guides/install/license/
+            title: License your deployment
+          - path: /datacenter/dtr/2.1/guides/install/scale-your-deployment/
+            title: Scale your deployment
+          - path: /datacenter/dtr/2.1/guides/install/upgrade/
+            title: Upgrade
+          - path: /datacenter/dtr/2.1/guides/install/uninstall/
+            title: Uninstall
+        - sectiontitle: Configuration
+          section:
+          - path: /datacenter/dtr/2.1/guides/configure/
+            title: Use your own certificates
+          - path: /datacenter/dtr/2.1/guides/configure/configure-storage/
+            title: Storage configuration
+          - path: /datacenter/dtr/2.1/guides/configure/use-nfs/
+            title: Use NFS
+        - sectiontitle: Monitor and troubleshoot
+          section:
+          - path: /datacenter/dtr/2.1/guides/monitor-troubleshoot/
+            title: Monitor DTR
+          - path: /datacenter/dtr/2.1/guides/monitor-troubleshoot/troubleshoot/
+            title: Troubleshoot DTR
+        - sectiontitle: High-availability
+          section:
+          - path: /datacenter/dtr/2.1/guides/high-availability/
+            title: Set up high availability
+          - path: /datacenter/dtr/2.1/guides/high-availability/backups-and-disaster-recovery/
+            title: Backups and disaster recovery
+        - sectiontitle: User management
+          section:
+          - path: /datacenter/dtr/2.1/guides/user-management/
+            title: Authentication and authorization
+          - path: /datacenter/dtr/2.1/guides/user-management/create-and-manage-users/
+            title: Create and manage users
+          - path: /datacenter/dtr/2.1/guides/user-management/create-and-manage-orgs/
+            title: Create and manage organizations
+          - path: /datacenter/dtr/2.1/guides/user-management/create-and-manage-teams/
+            title: Create and manage teams
+          - path: /datacenter/dtr/2.1/guides/user-management/permission-levels/
+            title: Permission levels
+        - sectiontitle: Repositories and images
+          section:
+          - path: /datacenter/dtr/2.1/guides/repos-and-images/
+            title: Configure your Docker daemon
+          - path: /datacenter/dtr/2.1/guides/repos-and-images/pull-an-image/
+            title: Pull an image
+          - path: /datacenter/dtr/2.1/guides/repos-and-images/push-an-image/
+            title: Push an image
+          - path: /datacenter/dtr/2.1/guides/repos-and-images/delete-an-image/
+            title: Delete an image
+        - sectiontitle: API and CLI reference
+          section:
+          - path: /datacenter/dtr/2.1/reference/api/
+            title: API reference
+          - sectiontitle: CLI reference
+            section:
+            - path: /datacenter/dtr/2.1/reference/cli/
+              title: Overview
+            - path: /datacenter/dtr/2.1/reference/cli/backup/
+              title: backup
+            - path: /datacenter/dtr/2.1/reference/cli/dumpcerts/
+              title: dumpcerts
+            - path: /datacenter/dtr/2.1/reference/cli/images/
+              title: images
+            - path: /datacenter/dtr/2.1/reference/cli/install/
+              title: install
+            - path: /datacenter/dtr/2.1/reference/cli/join/
+              title: join
+            - path: /datacenter/dtr/2.1/reference/cli/reconfigure/
+              title: reconfigure
+            - path: /datacenter/dtr/2.1/reference/cli/remove/
+              title: remove
+            - path: /datacenter/dtr/2.1/reference/cli/restore/
+              title: restore
+            - path: /datacenter/dtr/2.1/reference/cli/upgrade/
+              title: upgrade
+        - path: /datacenter/dtr/2.1/guides/release-notes/
+          title: Release notes
+        - path: /datacenter/dtr/2.1/guides/support/
+          title: Get support
+      - sectiontitle: Docker Trusted Registry 2.0
+        section:
+        - path: /datacenter/dtr/2.0/
+          title: Docker Trusted Registry overview
+        - path: /datacenter/dtr/2.0/architecture/
+          title: Architecture
+        - sectiontitle: Installation
+          section:
+          - path: /datacenter/dtr/2.0/install/system-requirements/
+            title: System requirements
+          - path: /datacenter/dtr/2.0/install/
+            title: Install Docker Trusted Registry
+          - path: /datacenter/dtr/2.0/install/install-dtr-offline/
+            title: Install offline
+          - path: /datacenter/dtr/2.0/install/license/
+            title: License DTR
+          - sectiontitle: Upgrade
+            section:
+            - path: /datacenter/dtr/2.0/install/upgrade/upgrade-major/
+              title: Upgrade from 1.4.3
+            - path: /datacenter/dtr/2.0/install/upgrade/
+              title: Upgrade from 2.0.0
+          - path: /datacenter/dtr/2.0/install/uninstall/
+            title: Uninstall
+          - sectiontitle: docker/dtr image reference
+            section:
+            - path: /datacenter/dtr/2.0/reference/
+              title: Overview
+            - path: /datacenter/dtr/2.0/reference/backup/
+              title: backup
+            - path: /datacenter/dtr/2.0/reference/dumpcerts/
+              title: dumpcerts
+            - path: /datacenter/dtr/2.0/reference/images/
+              title: images
+            - path: /datacenter/dtr/2.0/reference/install/
+              title: install
+            - path: /datacenter/dtr/2.0/reference/join/
+              title: join
+            - path: /datacenter/dtr/2.0/reference/migrate/
+              title: migrate
+            - path: /datacenter/dtr/2.0/reference/reconfigure/
+              title: reconfigure
+            - path: /datacenter/dtr/2.0/reference/remove/
+              title: remove
+            - path: /datacenter/dtr/2.0/reference/restore/
+              title: restore
+            - path: /datacenter/dtr/2.0/reference/upgrade/
+              title: upgrade
+        - sectiontitle: Configuration
+          section:
+          - path: /datacenter/dtr/2.0/configure/configuration/
+            title: Configuration overview
+          - path: /datacenter/dtr/2.0/configure/config-general/
+            title: Configure general settings
+          - path: /datacenter/dtr/2.0/configure/config-security/
+            title: Security configuration
+          - path: /datacenter/dtr/2.0/configure/config-storage/
+            title: Storage configuration
+        - sectiontitle: Monitor and troubleshoot
+          section:
+          - path: /datacenter/dtr/2.0/monitor-troubleshoot/
+            title: Monitor DTR
+          - path: /datacenter/dtr/2.0/monitor-troubleshoot/troubleshoot/
+            title: Troubleshoot DTR
+        - sectiontitle: High-availability
+          section:
+          - path: /datacenter/dtr/2.0/high-availability/
+            title: Set up high availability
+          - path: /datacenter/dtr/2.0/high-availability/backups-and-disaster-recovery/
+            title: Backups and disaster recovery
+        - sectiontitle: User management
+          section:
+          - path: /datacenter/dtr/2.0/user-management/
+            title: Authentication and authorization
+          - path: /datacenter/dtr/2.0/user-management/create-and-manage-users/
+            title: Create and manage users
+          - path: /datacenter/dtr/2.0/user-management/create-and-manage-orgs/
+            title: Create and manage organizations
+          - path: /datacenter/dtr/2.0/user-management/create-and-manage-teams/
+            title: Create and manage teams
+          - path: /datacenter/dtr/2.0/user-management/permission-levels/
+            title: Permission levels
+        - sectiontitle: Repositories and images
+          section:
+          - path: /datacenter/dtr/2.0/repos-and-images/
+            title: Configure your Docker daemon
+          - path: /datacenter/dtr/2.0/repos-and-images/pull-an-image/
+            title: Pull an image
+          - path: /datacenter/dtr/2.0/repos-and-images/push-an-image/
+            title: Push an image
+          - path: /datacenter/dtr/2.0/repos-and-images/delete-an-image/
+            title: Delete an image
+        - sectiontitle: Release notes
+          section:
+          - path: /datacenter/dtr/2.0/release-notes/
+            title: Trusted Registry release notes
+          - path: /datacenter/dtr/2.0/release-notes/prior-release-notes/
+            title: Prior Trusted Registry release notes
+        - sectiontitle: Trusted Registry API
+          section:
+          - path: /apidocs/v2.0.1/
+            title: API v2.0.1
+          - path: /apidocs/v2.0.0/
+            title: API v2.0.0
+          - path: /apidocs/v1.4.0/
+            title: API v1.4.0
+          - path: /apidocs/v1.3.3/
+            title: API v1.3.3
+        - path: /datacenter/dtr/2.0/support/
+          title: Get support
+  - title: Get support
+    path: /ee/get-support/
+- sectiontitle: Docker Cloud
+  section:
+  - sectiontitle: Migration
+    section:
+    - path: /docker-cloud/migration/
+      title: Migration overview
+    - path: /docker-cloud/migration/cloud-to-swarm/
+      title: Migrate to Docker CE
+    - path: /docker-cloud/migration/cloud-to-kube-aks/
+      title: Migration to AKS
+    - path: /docker-cloud/migration/cloud-to-kube-gke/
+      title: Migrate to GKE
+    - path: /docker-cloud/migration/deregister-swarms/
+      title: Deregister swarms
+    - path: /docker-cloud/migration/kube-primer/
+      title: Kubernetes primer
+  - path: /docker-cloud/
+    title: About Docker Cloud
+  - path: /docker-cloud/dockerid/
+    title: Docker Cloud settings and Docker ID
+  - path: /docker-cloud/orgs/
+    title: Organizations and teams
+  - sectiontitle: Manage builds and images
+    section:
+    - path: /docker-cloud/builds/
+      title: Builds and images overview
+    - path: /docker-cloud/builds/repos/
+      title: Docker Cloud repositories
+    - path: /docker-cloud/builds/link-source/
+      title: Link to a source code repository
+    - path: /docker-cloud/builds/push-images/
+      title: Push images to Docker Cloud
+    - path: /docker-cloud/builds/automated-build/
+      title: Automated builds
+    - path: /docker-cloud/builds/automated-testing/
+      title: Automated repository tests
+    - path: /docker-cloud/builds/advanced/
+      title: Advanced options for autobuild and autotest
+  - sectiontitle: Manage swarms (beta swarm mode)
+    section:
+    - path: /docker-cloud/cloud-swarm/
+      title: Overview
+    - path: /docker-cloud/cloud-swarm/using-swarm-mode/
+      title: Using Swarm mode
+    - path: /docker-cloud/cloud-swarm/register-swarms/
+      title: Register existing swarms
+    - path: /docker-cloud/cloud-swarm/create-cloud-swarm-aws/
+      title: Create a new swarm on Amazon Web Services in Docker Cloud
+    - path: /docker-cloud/cloud-swarm/create-cloud-swarm-azure/
+      title: Create a new swarm on Microsoft Azure in Docker Cloud
+    - path: /docker-cloud/cloud-swarm/connect-to-swarm/
+      title: Connect to a swarm through Docker Cloud
+    - path: /docker-cloud/cloud-swarm/link-aws-swarm/
+      title: Link Amazon Web Services to Docker Cloud
+    - path: /docker-cloud/cloud-swarm/link-azure-swarm/
+      title: Link Microsoft Azure Cloud Services to Docker Cloud
+    - path: /docker-cloud/cloud-swarm/ssh-key-setup/
+      title: Set up SSH keys
+  - sectiontitle: Manage Infrastructure (standard mode)
+    section:
+    - path: /docker-cloud/infrastructure/
+      title: Infrastructure overview
+    - path: /docker-cloud/infrastructure/deployment-strategies/
+      title: Container distribution strategies
+    - path: /docker-cloud/infrastructure/link-aws/
+      title: Link to Amazon Web Services hosts
+    - path: /docker-cloud/infrastructure/link-do/
+      title: Link to DigitalOcean hosts
+    - path: /docker-cloud/infrastructure/link-azure/
+      title: Link to Microsoft Azure hosts
+    - path: /docker-cloud/infrastructure/link-packet/
+      title: Link to Packet hosts
+    - path: /docker-cloud/infrastructure/link-softlayer/
+      title: Link to SoftLayer hosts
+    - path: /docker-cloud/infrastructure/ssh-into-a-node/
+      title: SSH into a Docker Cloud-managed node
+    - path: /docker-cloud/infrastructure/docker-upgrade/
+      title: Upgrade Docker on a node
+    - path: /docker-cloud/infrastructure/byoh/
+      title: Use the Docker Cloud agent
+    - path: /docker-cloud/infrastructure/cloud-on-packet.net-faq/
+      title: Use Docker Cloud and Packet.net
+    - path: /docker-cloud/infrastructure/cloud-on-aws-faq/
+      title: Use Docker Cloud on AWS
+  - sectiontitle: Manage nodes and apps (standard mode)
+    section:
+    - path: /docker-cloud/standard/
+      title: Overview
+    - sectiontitle: Getting started
+      section:
+      - path: /docker-cloud/getting-started/
+        title: Getting started with Docker Cloud
+      - path: /docker-cloud/getting-started/intro_cloud/
+        title: Introducing Docker Cloud
+      - path: /docker-cloud/getting-started/connect-infra/
+        title: Link to your infrastructure
+      - path: /docker-cloud/getting-started/your_first_node/
+        title: Deploy your first node
+      - path: /docker-cloud/getting-started/your_first_service/
+        title: Deploy your first service
+      - sectiontitle: Deploy an application
+        section:
+        - path: /docker-cloud/getting-started/deploy-app/1_introduction/
+          title: Introduction to deploying an app in Docker Cloud
+        - path: /docker-cloud/getting-started/deploy-app/2_set_up/
+          title: Set up your environment
+        - path: /docker-cloud/getting-started/deploy-app/3_prepare_the_app/
+          title: Prepare the application
+        - path: /docker-cloud/getting-started/deploy-app/4_push_to_cloud_registry/
+          title: Push the image to Docker Cloud's Registry
+        - path: /docker-cloud/getting-started/deploy-app/5_deploy_the_app_as_a_service/
+          title: Deploy the app as a Docker Cloud service
+        - path: /docker-cloud/getting-started/deploy-app/6_define_environment_variables/
+          title: Define environment variables
+        - path: /docker-cloud/getting-started/deploy-app/7_scale_the_service/
+          title: Scale the service
+        - path: /docker-cloud/getting-started/deploy-app/8_view_logs/
+          title: View service logs
+        - path: /docker-cloud/getting-started/deploy-app/9_load-balance_the_service/
+          title: Load-balance the service
+        - path: /docker-cloud/getting-started/deploy-app/10_provision_a_data_backend_for_your_service/
+          title: Provision a data backend for the service
+        - path: /docker-cloud/getting-started/deploy-app/11_service_stacks/
+          title: Stackfiles for your service
+        - path: /docker-cloud/getting-started/deploy-app/12_data_management_with_volumes/
+          title: Data management with volumes
+    - sectiontitle: Manage applications
+      section:
+      - path: /docker-cloud/apps/
+        title: Applications in Docker Cloud
+      - path: /docker-cloud/apps/deploy-to-cloud-btn/
+        title: Add a deploy to Docker Cloud button
+      - path: /docker-cloud/apps/auto-destroy/
+        title: Automatic container destroy
+      - path: /docker-cloud/apps/autorestart/
+        title: Automatic container restart
+      - path: /docker-cloud/apps/auto-redeploy/
+        title: Automatic service redeploy
+      - path: /docker-cloud/apps/load-balance-hello-world/
+        title: Create a proxy or load balancer
+      - path: /docker-cloud/apps/deploy-tags/
+        title: Deployment tags
+      - path: /docker-cloud/apps/stacks/
+        title: Manage service stacks
+      - path: /docker-cloud/apps/ports/
+        title: Publish and expose service or container ports
+      - path: /docker-cloud/apps/service-redeploy/
+        title: Redeploy running services
+      - path: /docker-cloud/apps/service-scaling/
+        title: Scale your service
+      - path: /docker-cloud/apps/api-roles/
+        title: Service API roles
+      - path: /docker-cloud/apps/service-links/
+        title: Service discovery and links
+      - path: /docker-cloud/apps/triggers/
+        title: Use triggers
+      - path: /docker-cloud/apps/volumes/
+        title: Work with data volumes
+    - path: /docker-cloud/apps/stack-yaml-reference/
+      title: Cloud stack file YAML reference
+  - path: /docker-cloud/slack-integration/
+    title: Docker Cloud notifications in Slack
+  - path: /apidocs/docker-cloud/
+    title: Docker Cloud API
+    nosync: true
+  - path: /docker-cloud/installing-cli/
+    title: The Docker Cloud CLI
+  - path: /docker-cloud/docker-errors-faq/
+    title: Known issues in Docker Cloud
+  - path: /docker-cloud/release-notes/
+    title: Release notes
+- sectiontitle: Docker Compose
+  section:
+  - path: /compose/overview/
+    title: Overview of Docker Compose
+  - path: /compose/install/
+    title: Install Compose
+  - path: /compose/gettingstarted/
+    title: Getting started
+  - sectiontitle: Compose (docker-compose) CLI reference
+    section:
+    - path: /compose/reference/overview/
+      title: Overview of docker-compose CLI
+    - path: /compose/reference/envvars/
+      title: CLI environment variables
+    - path: /compose/completion/
+      title: Command-line completion
+    - path: /compose/reference/build/
+      title: build
+    - path: /compose/reference/bundle/
+      title: bundle
+    - path: /compose/reference/config/
+      title: config
+    - path: /compose/reference/create/
+      title: create
+    - path: /compose/reference/down/
+      title: down
+    - path: /compose/reference/events/
+      title: events
+    - path: /compose/reference/exec/
+      title: exec
+    - path: /compose/reference/help/
+      title: help
+    - path: /compose/reference/kill/
+      title: kill
+    - path: /compose/reference/logs/
+      title: logs
+    - path: /compose/reference/pause/
+      title: pause
+    - path: /compose/reference/port/
+      title: port
+    - path: /compose/reference/ps/
+      title: ps
+    - path: /compose/reference/pull/
+      title: pull
+    - path: /compose/reference/push/
+      title: push
+    - path: /compose/reference/restart/
+      title: restart
+    - path: /compose/reference/rm/
+      title: rm
+    - path: /compose/reference/run/
+      title: run
+    - path: /compose/reference/scale/
+      title: scale
+    - path: /compose/reference/start/
+      title: start
+    - path: /compose/reference/stop/
+      title: stop
+    - path: /compose/reference/top/
+      title: top
+    - path: /compose/reference/unpause/
+      title: unpause
+    - path: /compose/reference/up/
+      title: up
+  - sectiontitle: Compose file reference
+    section:
+    - path: /compose/compose-file/
+      title: Version 3
+    - path: /compose/compose-file/compose-file-v2/
+      title: Version 2
+    - path: /compose/compose-file/compose-file-v1/
+      title: Version 1
+    - path: /compose/compose-file/compose-versioning/
+      title: About versions and upgrading
+    - path: /compose/faq/
+      title: Frequently asked questions
+  - path: /compose/bundles/
+    title: Docker stacks and distributed application bundles
+  - path: /compose/swarm/
+    title: Using Compose with Swarm
+  - path: /compose/env-file/
+    title: Environment file
+  - path: /compose/environment-variables/
+    title: Environment variables in Compose
+  - path: /compose/extends/
+    title: Extend services in Compose
+  - path: /compose/networking/
+    title: Networking in Compose
+  - path: /compose/production/
+    title: Using Compose in production
+  - path: /compose/link-env-deprecated/
+    title: Link environment variables (deprecated)
+  - path: /compose/startup-order/
+    title: Control startup order
+  - path: /compose/samples-for-compose/
+    title: Sample apps with Compose
+  - path: /release-notes/docker-compose/
+    title: Docker Compose release notes
+- sectiontitle: Docker for Mac
+  section:
+  - path: /docker-for-mac/
+    title: Getting started
+  - path: /docker-for-mac/install/
+    title: Install Docker for Mac
+  - path: /docker-for-mac/kubernetes/
+    title: Deploy on Kubernetes
+  - path: /docker-for-mac/docker-toolbox/
+    title: Docker for Mac vs. Docker Toolbox
+  - path: /docker-for-mac/multi-arch/
+    title: Leveraging Multi-CPU architecture support
+  - path: /docker-for-mac/networking/
+    title: Networking
+  - path: /docker-for-mac/osxfs/
+    title: File system sharing
+  - path: /docker-for-mac/osxfs-caching/
+    title: Performance tuning for volume mounts (shared filesystems)
+  - path: /docker-for-mac/troubleshoot/
+    title: Logs and troubleshooting
+  - path: /docker-for-mac/faqs/
+    title: FAQs
+  - path: /docker-for-mac/opensource/
+    title: Open source licensing
+  - path: /docker-for-mac/release-notes/
+    title: Stable release notes
+  - path: /docker-for-mac/edge-release-notes/
+    title: Edge release notes
+- sectiontitle: Docker for Windows
+  section:
+  - path: /docker-for-windows/
+    title: Getting started
+  - path: /docker-for-windows/install/
+    title: Install Docker for Windows
+  - path: /docker-for-windows/kubernetes/
+    title: Deploy on Kubernetes
+  - path: /docker-for-windows/networking/
+    title: Networking
+  - path: /docker-for-windows/docker-toolbox/
+    title: Migrate Docker Toolbox
+  - path: /docker-for-windows/troubleshoot/
+    title: Logs and troubleshooting
+  - path: /docker-for-windows/faqs/
+    title: FAQs
+  - path: /docker-for-windows/opensource/
+    title: Open source licensing
+  - path: /docker-for-windows/release-notes/
+    title: Stable release notes
+  - path: /docker-for-windows/edge-release-notes/
+    title: Edge release notes
+- title: Docker ID accounts
+  path: /docker-id/
+- sectiontitle: Docker Machine
+  section:
+  - path: /machine/overview/
+    title: Machine overview
+  - path: /machine/install-machine/
+    title: Install Machine
+  - path: /machine/get-started/
+    title: Get started with a local VM
+  - path: /machine/get-started-cloud/
+    title: Provision hosts in the cloud
+  - sectiontitle: Learn by example
+    section:
+    - path: /machine/examples/ocean/
+      title: Provision Digital Ocean Droplets
+    - path: /machine/examples/aws/
+      title: Provision AWS EC2 instances
+  - path: /machine/concepts/
+    title: Machine concepts and help
+  - sectiontitle: Machine (docker-machine) CLI
+    section:
+    - path: /machine/reference/
+      title: Machine CLI overview
+    - path: /machine/completion/
+      title: Machine command-line completion
+    - path: /machine/reference/active/
+      title: active
+    - path: /machine/reference/config/
+      title: config
+    - path: /machine/reference/create/
+      title: create
+    - path: /machine/reference/env/
+      title: env
+    - path: /machine/reference/help/
+      title: help
+    - path: /machine/reference/inspect/
+      title: inspect
+    - path: /machine/reference/ip/
+      title: ip
+    - path: /machine/reference/kill/
+      title: kill
+    - path: /machine/reference/ls/
+      title: ls
+    - path: /machine/reference/mount/
+      title: mount
+    - path: /machine/reference/provision/
+      title: provision
+    - path: /machine/reference/regenerate-certs/
+      title: regenerate-certs
+    - path: /machine/reference/restart/
+      title: restart
+    - path: /machine/reference/rm/
+      title: rm
+    - path: /machine/reference/scp/
+      title: scp
+    - path: /machine/reference/ssh/
+      title: ssh
+    - path: /machine/reference/start/
+      title: start
+    - path: /machine/reference/status/
+      title: status
+    - path: /machine/reference/stop/
+      title: stop
+    - path: /machine/reference/upgrade/
+      title: upgrade
+    - path: /machine/reference/url/
+      title: url
+  - sectiontitle: Machine drivers
+    section:
+    - path: /machine/drivers/
+      title: Drivers overview
+    - path: /machine/drivers/os-base/
+      title: Driver options and operating system defaults
+    - path: /machine/drivers/aws/
+      title: Amazon Web Services
+    - path: /machine/drivers/digital-ocean/
+      title: Digital Ocean
+    - path: /machine/drivers/exoscale/
+      title: Exoscale
+    - path: /machine/drivers/generic/
+      title: Generic
+    - path: /machine/drivers/gce/
+      title: Google Compute Engine
+    - path: /machine/drivers/soft-layer/
+      title: IBM Softlayer
+    - path: /machine/drivers/azure/
+      title: Microsoft Azure
+    - path: /machine/drivers/hyper-v/
+      title: Microsoft Hyper-V
+    - path: /machine/drivers/openstack/
+      title: OpenStack
+    - path: /machine/drivers/virtualbox/
+      title: Oracle VirtualBox
+    - path: /machine/drivers/rackspace/
+      title: Rackspace
+    - path: /machine/drivers/vm-fusion/
+      title: VMware Fusion
+    - path: /machine/drivers/vm-cloud/
+      title: VMware vCloud Air
+    - path: /machine/drivers/vsphere/
+      title: VMware vSphere
+  - path: /machine/migrate-to-machine/
+    title: Migrate from Boot2Docker to Machine
+  - path: /release-notes/docker-machine/
+    title: Docker Machine release notes
+- sectiontitle: Docker Store
+  section:
+  - path: /docker-store/
+    title: About Docker Store
+  - sectiontitle: Docker Store FAQs
+    section:
+    - path: /docker-store/customer_faq/
+      title: Customer FAQs
+    - path: /docker-store/publisher_faq/
+      title: Publisher FAQs
+  - sectiontitle: For Publishers
+    section:
+    - path: /docker-store/publish/
+      title: Publish content on Docker Store
+    - path: /docker-store/certify-images/
+      title: Certify Docker images
+    - path: /docker-store/certify-plugins-logging/
+      title: Certify Docker logging plugins
+    - path: /docker-store/trustchain/
+      title: Docker Store trust chain
+    - path: /docker-store/byol/
+      title: Bring Your Own License (BYOL)
+- sectiontitle: Docker Hub
+  section:
+  - path: /docker-hub/
+    title: Overview of Docker Hub
+  - path: /docker-hub/accounts/
+    title: Use Docker Hub with Docker ID
+  - path: /docker-hub/orgs/
+    title: Teams &amp; organizations
+  - path: /docker-hub/repos/
+    title: Repositories on Docker Hub
+  - path: /docker-hub/builds/
+    title: Automated builds
+  - path: /docker-hub/webhooks/
+    title: Webhooks for automated builds
+  - path: /docker-hub/bitbucket/
+    title: Automated builds with Bitbucket
+  - path: /docker-hub/github/
+    title: Automated builds from GitHub
+  - path: /docker-hub/official_repos/
+    title: Official repositories on Docker Hub
+- sectiontitle: Open-source projects
+  section:
+  - sectiontitle: Docker Notary
+    section:
+    - path: /notary/getting_started/
+      title: Getting started with Notary
+    - path: /notary/advanced_usage/
+      title: Use the Notary client
+    - path: /notary/service_architecture/
+      title: Understand the service architecture
+    - path: /notary/running_a_service/
+      title: Running a Notary service
+    - path: /notary/changelog/
+      title: Notary changelog
+    - sectiontitle: Configuration files
+      section:
+      - path: /notary/reference/server-config/
+        title: Server configuration
+      - path: /notary/reference/signer-config/
+        title: Signer configuration
+      - path: /notary/reference/client-config/
+        title: Client configuration
+      - path: /notary/reference/common-configs/
+        title: Common Server and signer configurations
+  - sectiontitle: Docker Registry
+    section:
+    - path: /registry/
+      title: Registry overview
+    - path: /registry/introduction/
+      title: Understanding the Registry
+    - path: /registry/deploying/
+      title: Deploy a registry server
+    - path: /registry/configuration/
+      title: Configuring a registry
+    - path: /registry/notifications/
+      title: Working with notifications
+    - sectiontitle: Recipes
+      section:
+      - path: /registry/recipes/
+        title: Recipes overview
+      - path: /registry/recipes/apache/
+        title: Authenticating proxy with apache
+      - path: /registry/recipes/nginx/
+        title: Authenticating proxy with nginx
+      - path: /registry/recipes/mirror/
+        title: Mirroring Docker Hub
+      - path: /registry/recipes/osx-setup-guide/
+        title: Running on macOS
+      - path: /registry/garbage-collection/
+        title: Garbage collection
+      - path: /registry/insecure/
+        title: Testing an insecure registry
+    - path: /registry/deprecated/
+      title: Deprecated features
+    - path: /registry/compatibility/
+      title: Compatibility
+    - path: /registry/help/
+      title: Getting help
+    - sectiontitle: Registry reference
+      section:
+      - path: /registry/spec/api/
+        title: Registry HTTP API v2
+      - sectiontitle: Registry image manifests
+        section:
+        - path: /registry/spec/manifest-v2-1/
+          title: Image manifest v 2, schema 1
+        - path: /registry/spec/manifest-v2-2/
+          title: Image manifest v 2, schema 2
+      - sectiontitle: Registry storage drivers
+        section:
+        - path: /registry/storage-drivers/
+          title: Storage driver overview
+        - path: /registry/storage-drivers/oss/
+          title: Aliyun OSS storage driver
+        - path: /registry/storage-drivers/filesystem/
+          title: Filesystem storage driver
+        - path: /registry/storage-drivers/gcs/
+          title: GCS storage driver
+        - path: /registry/storage-drivers/inmemory/
+          title: In-memory storage driver
+        - path: /registry/storage-drivers/azure/
+          title: Microsoft Azure storage driver
+        - path: /registry/storage-drivers/s3/
+          title: S3 storage driver
+        - path: /registry/storage-drivers/swift/
+          title: Swift storage driver
+      - sectiontitle: Registry specifications
+        section:
+        - path: /registry/spec/auth/
+          title: Docker Registry token authentication
+        - path: /registry/spec/auth/jwt/
+          title: Token authentication implementation
+        - path: /registry/spec/auth/oauth/
+          title: Oauth2 token authentication
+        - path: /registry/spec/auth/scope/
+          title: Token scope documentation
+        - path: /registry/spec/auth/token/
+          title: Token authentication specification
+- sectiontitle: Release notes
+  section:
+    - path: /release-notes/
+      title: Overview
+    - path: /ee/engine/release-notes/
+      title: Docker EE
+      nosync: true
+    - path: /release-notes/docker-ce/
+      title: Docker CE
+    - path: /cs-engine/1.13/release-notes/
+      title: CS Docker Engine
+      nosync: true
+    - path: /release-notes/docker-engine/
+      title: Docker (1.13 and earlier)
+    - path: /docker-for-mac/release-notes/
+      title: Docker for Mac
+      nosync: true
+    - path: /docker-for-windows/release-notes/
+      title: Docker for Windows
+      nosync: true
+    - path: /release-notes/docker-compose/
+      title: Docker Compose
+      nosync: true
+    - path: /docker-cloud/release-notes/
+      title: Docker Cloud
+      nosync: true
+    - path: /docker-for-aws/release-notes/
+      title: Docker for AWS
+      nosync: true
+    - path: /docker-for-azure/release-notes/
+      title: Docker for Azure
+      nosync: true
+    - path: /release-notes/docker-machine/
+      title: Docker Machine release notes
+      nosync: true
+    - path: /release-notes/docker-swarm/
+      title: Docker Swarm release notes
+      nosync: true
+- sectiontitle: Superseded products and tools
+  section:
+  - sectiontitle: Commercially supported Docker Engine
+    section:
+    - sectiontitle: 1.13
+      section:
+      - path: /cs-engine/1.13/
+        title: Install
+      - path: /cs-engine/1.13/upgrade/
+        title: Upgrade
+      - path: /cs-engine/1.13/release-notes/
+        title: Release notes
+    - sectiontitle: 1.12
+      section:
+      - path: /cs-engine/1.12/
+        title: Install
+      - path: /cs-engine/1.12/upgrade/
+        title: Upgrade
+      - sectiontitle: Release notes
+        section:
+        - path: /cs-engine/1.12/release-notes/release-notes/
+          title: CS Engine release notes
+        - path: /cs-engine/1.12/release-notes/prior-release-notes/
+          title: Prior CS Engine release notes
+  - sectiontitle: Docker Swarm (standalone)
+    section:
+    - path: /swarm/overview/
+      title: Swarm overview
+    - path: /swarm/get-swarm/
+      title: How to get Swarm
+    - path: /swarm/install-w-machine/
+      title: Evaluate Swarm in a sandbox
+    - path: /swarm/plan-for-production/
+      title: Plan for Swarm in production
+    - path: /swarm/install-manual/
+      title: Build a Swarm cluster for production
+    - sectiontitle: Try Swarm at scale
+      section:
+      - path: /swarm/swarm_at_scale/about/
+        title: Learn the application architecture
+      - path: /swarm/swarm_at_scale/deploy-infra/
+        title: Deploy application infrastructure
+      - path: /swarm/swarm_at_scale/deploy-app/
+        title: Deploy the application
+      - path: /swarm/swarm_at_scale/troubleshoot/
+        title: Troubleshoot the application
+    - path: /swarm/multi-manager-setup/
+      title: High availability in Swarm
+    - path: /swarm/networking/
+      title: Swarm and container networks
+    - path: /swarm/discovery/
+      title: Discovery
+    - path: /swarm/provision-with-machine/
+      title: Provision with Machine
+    - sectiontitle: Scheduling
+      section:
+      - path: /swarm/scheduler/filter/
+        title: Filters
+      - path: /swarm/scheduler/rescheduling/
+        title: Rescheduling
+      - path: /swarm/scheduler/strategy/
+        title: Strategies
+    - path: /swarm/secure-swarm-tls/
+      title: Overview Docker Swarm with TLS
+    - path: /swarm/configure-tls/
+      title: Configure Docker Swarm for TLS
+    - sectiontitle: Command line reference
+      section:
+      - path: /swarm/reference/create/
+        title: create
+      - path: /swarm/reference/help/
+        title: help
+      - path: /swarm/reference/join/
+        title: join
+      - path: /swarm/reference/list/
+        title: list
+      - path: /swarm/reference/manage/
+        title: manage
+      - path: /swarm/reference/swarm/
+        title: swarm
+    - path: /swarm/status-code-comparison-to-docker/
+      title: API response codes
+    - path: /swarm/swarm-api/
+      title: Docker Swarm API
+    - path: /release-notes/docker-swarm/
+      title: Docker Swarm release notes

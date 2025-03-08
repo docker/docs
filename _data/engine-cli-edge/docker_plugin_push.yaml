@@ -1,0 +1,39 @@
+command: docker plugin push
+short: Push a plugin to a registry
+long: |-
+  After you have created a plugin using `docker plugin create` and the plugin is
+  ready for distribution, use `docker plugin push` to share your images to Docker
+  Hub or a self-hosted registry.
+
+  Registry credentials are managed by [docker login](login.md).
+usage: docker plugin push [OPTIONS] PLUGIN[:TAG]
+pname: docker plugin
+plink: docker_plugin.yaml
+options:
+- option: disable-content-trust
+  value_type: bool
+  default_value: "true"
+  description: Skip image signing
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+examples: |-
+  The following example shows how to push a sample `user/plugin`.
+
+  ```bash
+  $ docker plugin ls
+
+  ID                  NAME                  TAG                 DESCRIPTION                ENABLED
+  69553ca1d456        user/plugin           latest              A sample plugin for Docker false
+
+  $ docker plugin push user/plugin
+  ```
+deprecated: false
+min_api_version: "1.25"
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

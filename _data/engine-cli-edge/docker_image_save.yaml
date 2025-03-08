@@ -1,0 +1,22 @@
+command: docker image save
+short: Save one or more images to a tar archive (streamed to STDOUT by default)
+long: Save one or more images to a tar archive (streamed to STDOUT by default)
+usage: docker image save [OPTIONS] IMAGE [IMAGE...]
+pname: docker image
+plink: docker_image.yaml
+options:
+- option: output
+  shorthand: o
+  value_type: string
+  description: Write to a file, instead of STDOUT
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

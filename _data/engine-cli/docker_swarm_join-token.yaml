@@ -1,0 +1,33 @@
+command: docker swarm join-token
+short: Manage join tokens
+long: Manage join tokens
+usage: docker swarm join-token [OPTIONS] (worker|manager)
+pname: docker swarm
+plink: docker_swarm.yaml
+options:
+- option: quiet
+  shorthand: q
+  value_type: bool
+  default_value: "false"
+  description: Only display token
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: rotate
+  value_type: bool
+  default_value: "false"
+  description: Rotate join token
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+deprecated: false
+min_api_version: "1.24"
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: true
+

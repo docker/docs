@@ -1,0 +1,32 @@
+command: docker container inspect
+short: Display detailed information on one or more containers
+long: Display detailed information on one or more containers
+usage: docker container inspect [OPTIONS] CONTAINER [CONTAINER...]
+pname: docker container
+plink: docker_container.yaml
+options:
+- option: format
+  shorthand: f
+  value_type: string
+  description: Format the output using the given Go template
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: size
+  shorthand: s
+  value_type: bool
+  default_value: "false"
+  description: Display total file sizes
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

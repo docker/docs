@@ -1,0 +1,41 @@
+command: docker image pull
+short: Pull an image or a repository from a registry
+long: Pull an image or a repository from a registry
+usage: docker image pull [OPTIONS] NAME[:TAG|@DIGEST]
+pname: docker image
+plink: docker_image.yaml
+options:
+- option: all-tags
+  shorthand: a
+  value_type: bool
+  default_value: "false"
+  description: Download all tagged images in the repository
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: disable-content-trust
+  value_type: bool
+  default_value: "true"
+  description: Skip image verification
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: platform
+  value_type: string
+  description: Set platform if server is multi-platform capable
+  deprecated: false
+  min_api_version: "1.32"
+  experimental: true
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

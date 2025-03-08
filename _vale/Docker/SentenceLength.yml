@@ -1,7 +1,0 @@
-extends: occurrence
-message: "Write short, concise sentences. (<=40 words)"
-scope: sentence
-link: https://docs.docker.com/contribute/checklist/
-level: warning
-max: 40
-token: \b(\w+)\b

@@ -1,0 +1,1472 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Documentation</title>
+
+    <link href="../stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="../stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
+    <script type="text/javascript">
+    !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="4.0.0";
+    analytics.load("IWj9D0UpZHZdZUZX9jl98PcpBFWBnBMy");
+    analytics.page();
+    }}();
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+      <script src="../javascripts/all_nosearch.js" type="text/javascript"></script>
+
+  </head>
+
+  <body class="includes includes_service">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="../images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <img src="../images/logo.png" />
+      <div id="toc">
+      </div>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id="services">Services</h1>
+
+<h2 id="service">Service</h2>
+
+<blockquote>
+<p>Example</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"autodestroy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OFF"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"autoredeploy"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"autorestart"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ON_FAILURE"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"bindings"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"host_path"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"container_path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/tmp"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"rewritable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"volumes_from"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"host_path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/etc"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"container_path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/etc"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"rewritable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"volumes_from"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"host_path"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"container_path"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"rewritable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"volumes_from"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/app/v1/user_namespace/service/2f4f54e5-9d3b-4ac1-85ad-a2d4ff25a179/"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"cap_add"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"ALL"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"cap_drop"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"NET_ADMIN"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"SYS_ADMIN"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"container_envvars"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DB_PASS"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"container_ports"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"endpoint_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://wordpress-stackable.admin.srv.dockerapp.io:80/"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"inner_port"</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"outer_port"</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"port_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tcp"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"published"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"containers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"/api/app/v1/user_namespace/container/6f8ee454-9dc3-4387-80c3-57aac1be3cc6/"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"/api/app/v1/user_namespace/container/fdf9c116-7c08-4a60-b0ce-c54ca72c2f25/"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"cpu_shares"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"cpuset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0,1"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"cgroup_parent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m-executor-abcd"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"current_num_containers"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"deployed_datetime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mon, 13 Oct 2014 11:01:43 +0000"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"deployment_strategy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EMPTIEST_NODE"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"destroyed_datetime"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"devices"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"/dev/ttyUSB0:/dev/ttyUSB0"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"dns"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"8.8.8.8"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"dns_search"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"example.com"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"domainname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"domainname"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"entrypoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"extra_hosts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"onehost:50.31.209.229"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"hostname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hostname"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"image_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tutum/wordpress-stackable:latest"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wordpress-stackable"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"labels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"com.example.description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Accounting webapp"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"com.example.department"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Finance"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"com.example.label-with-empty-value"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"link_variables"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"WORDPRESS_STACKABLE_1_ENV_DB_HOST"</span><span class="p">:</span><span class="w"> </span><span class="s2">"**LinkMe**"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"WORDPRESS_STACKABLE_1_ENV_DB_NAME"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wordpress"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"WORDPRESS_STACKABLE_1_ENV_DB_PASS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"szVaPz925B7I"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"WORDPRESS_STACKABLE_1_ENV_DB_PORT"</span><span class="p">:</span><span class="w"> </span><span class="s2">"**LinkMe**"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"WORDPRESS_STACKABLE_1_ENV_DB_USER"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"WORDPRESS_STACKABLE_1_ENV_DEBIAN_FRONTEND"</span><span class="p">:</span><span class="w"> </span><span class="s2">"noninteractive"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"WORDPRESS_STACKABLE_1_ENV_HOME"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"WORDPRESS_STACKABLE_1_ENV_PATH"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"WORDPRESS_STACKABLE_1_PORT"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tcp://wordpress-stackable-1.admin.cont.dockerapp.io:49153"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"WORDPRESS_STACKABLE_1_PORT_80_TCP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tcp://wordpress-stackable-1.admin.cont.dockerapp.io:49153"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"WORDPRESS_STACKABLE_1_PORT_80_TCP_ADDR"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wordpress-stackable-1.admin.cont.dockerapp.io"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"WORDPRESS_STACKABLE_1_PORT_80_TCP_PORT"</span><span class="p">:</span><span class="w"> </span><span class="s2">"49153"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"WORDPRESS_STACKABLE_1_PORT_80_TCP_PROTO"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tcp"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"WORDPRESS_STACKABLE_2_ENV_DB_HOST"</span><span class="p">:</span><span class="w"> </span><span class="s2">"**LinkMe**"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"WORDPRESS_STACKABLE_2_ENV_DB_NAME"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wordpress"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"WORDPRESS_STACKABLE_2_ENV_DB_PASS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"szVaPz925B7I"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"WORDPRESS_STACKABLE_2_ENV_DB_PORT"</span><span class="p">:</span><span class="w"> </span><span class="s2">"**LinkMe**"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"WORDPRESS_STACKABLE_2_ENV_DB_USER"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"WORDPRESS_STACKABLE_2_ENV_DEBIAN_FRONTEND"</span><span class="p">:</span><span class="w"> </span><span class="s2">"noninteractive"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"WORDPRESS_STACKABLE_2_ENV_HOME"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"WORDPRESS_STACKABLE_2_ENV_PATH"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"WORDPRESS_STACKABLE_2_PORT"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tcp://wordpress-stackable-2.admin.cont.dockerapp.io:49154"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"WORDPRESS_STACKABLE_2_PORT_80_TCP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tcp://wordpress-stackable-2.admin.cont.dockerapp.io:49154"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"WORDPRESS_STACKABLE_2_PORT_80_TCP_ADDR"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wordpress-stackable-2.admin.cont.dockerapp.io"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"WORDPRESS_STACKABLE_2_PORT_80_TCP_PORT"</span><span class="p">:</span><span class="w"> </span><span class="s2">"49154"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"WORDPRESS_STACKABLE_2_PORT_80_TCP_PROTO"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tcp"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"WORDPRESS_STACKABLE_ENV_DB_HOST"</span><span class="p">:</span><span class="w"> </span><span class="s2">"**LinkMe**"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"WORDPRESS_STACKABLE_ENV_DB_NAME"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wordpress"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"WORDPRESS_STACKABLE_ENV_DB_PASS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"szVaPz925B7I"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"WORDPRESS_STACKABLE_ENV_DB_PORT"</span><span class="p">:</span><span class="w"> </span><span class="s2">"**LinkMe**"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"WORDPRESS_STACKABLE_ENV_DB_USER"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"WORDPRESS_STACKABLE_ENV_DEBIAN_FRONTEND"</span><span class="p">:</span><span class="w"> </span><span class="s2">"noninteractive"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"WORDPRESS_STACKABLE_ENV_HOME"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"WORDPRESS_STACKABLE_ENV_PATH"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"WORDPRESS_STACKABLE_PORT"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tcp://wordpress-stackable-1.admin.cont.dockerapp.io:49153"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"WORDPRESS_STACKABLE_PORT_80_TCP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tcp://wordpress-stackable-1.admin.cont.dockerapp.io:49153"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"WORDPRESS_STACKABLE_PORT_80_TCP_ADDR"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wordpress-stackable-1.admin.cont.dockerapp.io"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"WORDPRESS_STACKABLE_PORT_80_TCP_PORT"</span><span class="p">:</span><span class="w"> </span><span class="s2">"49153"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"WORDPRESS_STACKABLE_PORT_80_TCP_PROTO"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tcp"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"WORDPRESS_STACKABLE_DOCKERCLOUD_API_URL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://cloud.docker.com/api/app/v1/user_namespace/service/adeebc1b-1b81-4af0-b8f2-cefffc69d7fb/"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"linked_from_service"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"linked_to_service"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"from_service"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/app/v1/user_namespace/service/09cbcf8d-a727-40d9-b420-c8e18b7fa55b/"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DB"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"to_service"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/app/v1/user_namespace/service/72f175bd-390b-46e3-9463-830aca32ce3e/"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"mac_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"02:42:ac:11:65:43"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"memory"</span><span class="p">:</span><span class="w"> </span><span class="mi">2048</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"memory_swap"</span><span class="p">:</span><span class="w"> </span><span class="mi">8192</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wordpress-stackable"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"net"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bridge"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"privileged"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"public_dns"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wordpress-stackable.admin.svc.dockerapp.io"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"read_only"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"resource_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/app/v1/user_namespace/service/09cbcf8d-a727-40d9-b420-c8e18b7fa55b/"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"roles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"global"</span><span class="p">],</span><span class="w">
+  </span><span class="nt">"run_command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/run-wordpress.sh"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"running_num_containers"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"security_opt"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"sequential_deployment"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"started_datetime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mon, 13 Oct 2014 11:01:43 +0000"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Partly running"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"stack"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/app/v1/user_namespace/stack/46aca402-2109-4a70-a378-760cfed43816/"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"stdin_open"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"stopped_datetime"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"stopped_num_containers"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"synchronized"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tag_one"</span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tag-two"</span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tagthree3"</span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"target_num_containers"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"tty"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="s2">"root"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"09cbcf8d-a727-40d9-b420-c8e18b7fa55b"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"working_dir"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/app"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>A service is a template used to deploy one or more containers.</p>
+
+<p>This is a <a href="#namespaced-endpoints">namespaced endpoint</a>.</p>
+
+<h3 id="attributes">Attributes</h3>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>uuid</td>
+<td>A unique identifier for the service generated automatically on creation</td>
+</tr>
+<tr>
+<td>resource_uri</td>
+<td>A unique API endpoint that represents the service</td>
+</tr>
+<tr>
+<td>image_name</td>
+<td>The Docker image name and tag used for the service containers</td>
+</tr>
+<tr>
+<td>name</td>
+<td>A user provided name for the service. This name will be inherited by the service containers and will be used in endpoint URLs, environment variable names, etc.</td>
+</tr>
+<tr>
+<td>public_dns</td>
+<td>An external FQDN that resolves to all IPs of the nodes where the service containers are running on (as an <code class="prettyprint">A</code> record with multiple IP entries which will be used by clients in a <a href="http://en.wikipedia.org/wiki/Round-robin_DNS">round-robin fashion</a>). If the service is not publishing any ports, this FQDN will fail to resolve.</td>
+</tr>
+<tr>
+<td>state</td>
+<td>The state of the service (see table <code class="prettyprint">Service states</code> below)</td>
+</tr>
+<tr>
+<td>net</td>
+<td>Network mode to set on the containers (see table <code class="prettyprint">Network Modes</code> below, more information /docker-cloud/apps/service-links/)</td>
+</tr>
+<tr>
+<td>pid</td>
+<td>Set the PID (Process) Namespace mode for the containers (<a href="/engine/reference/run/#pid-settings-pid">more information</a>)</td>
+</tr>
+<tr>
+<td>synchronized</td>
+<td>Flag indicating if the current service definition is synchronized with the current containers.</td>
+</tr>
+<tr>
+<td>deployed_datetime</td>
+<td>The date and time of the last deployment of the service (if applicable, <code class="prettyprint">null</code> otherwise)</td>
+</tr>
+<tr>
+<td>started_datetime</td>
+<td>The date and time of the last <code class="prettyprint">start</code> operation on the service (if applicable, <code class="prettyprint">null</code> otherwise)</td>
+</tr>
+<tr>
+<td>stopped_datetime</td>
+<td>The date and time of the last <code class="prettyprint">stop</code> operation on the service (if applicable, <code class="prettyprint">null</code> otherwise)</td>
+</tr>
+<tr>
+<td>destroyed_datetime</td>
+<td>The date and time of the <code class="prettyprint">terminate</code> operation on the service (if applicable, <code class="prettyprint">null</code> otherwise)</td>
+</tr>
+<tr>
+<td>target_num_containers</td>
+<td>The requested number of containers to deploy for the service</td>
+</tr>
+<tr>
+<td>current_num_containers</td>
+<td>The actual number of containers deployed for the service</td>
+</tr>
+<tr>
+<td>running_num_containers</td>
+<td>The actual number of containers deployed for the service in <code class="prettyprint">Running</code> state</td>
+</tr>
+<tr>
+<td>stopped_num_containers</td>
+<td>The actual number of containers deployed for the service in <code class="prettyprint">Stopped</code> state</td>
+</tr>
+<tr>
+<td>stack</td>
+<td>Resource URIs of the stack that the service belongs to</td>
+</tr>
+<tr>
+<td>containers</td>
+<td>List of resource URIs of the containers launched as part of the service</td>
+</tr>
+<tr>
+<td>container_ports</td>
+<td>List of ports to be published on the containers of this service (see table <code class="prettyprint">Service Port attributes</code> below)</td>
+</tr>
+<tr>
+<td>container_envvars</td>
+<td>List of user-defined environment variables to set on the containers of the service, which will override the image environment variables (see table <code class="prettyprint">Service Environment Variable attributes</code> below)</td>
+</tr>
+<tr>
+<td>labels</td>
+<td>Metadata in form of dictionary used for every container of this service</td>
+</tr>
+<tr>
+<td>working_dir</td>
+<td>Working directory for running binaries within a container of this service</td>
+</tr>
+<tr>
+<td>user</td>
+<td>Set the user used on containers of this service (<code class="prettyprint">root</code> by default)</td>
+</tr>
+<tr>
+<td>hostname</td>
+<td>Set the hostname used on containers of this service</td>
+</tr>
+<tr>
+<td>domainname</td>
+<td>Set the domainname used on containers of this service</td>
+</tr>
+<tr>
+<td>mac_address</td>
+<td>Ethernet device&rsquo;s MAC address used on containers of this service</td>
+</tr>
+<tr>
+<td>cgroup_name</td>
+<td>Optional parent cgroup used on containers of this service.</td>
+</tr>
+<tr>
+<td>tty</td>
+<td>If the containers of this service have the tty enable (<code class="prettyprint">false</code> by default)</td>
+</tr>
+<tr>
+<td>stdin_open</td>
+<td>If the containers of this service have stdin opened (<code class="prettyprint">false</code> by default)</td>
+</tr>
+<tr>
+<td>dns</td>
+<td>Custom DNS servers for containers of this service</td>
+</tr>
+<tr>
+<td>dns_search</td>
+<td>Custom DNS search domain for containers of this service</td>
+</tr>
+<tr>
+<td>cap_add</td>
+<td>Added capabilities for containers of this service</td>
+</tr>
+<tr>
+<td>cap_drop</td>
+<td>Dropped capabilities for containers of this service</td>
+</tr>
+<tr>
+<td>devices</td>
+<td>List of device mappings for containers of this service</td>
+</tr>
+<tr>
+<td>extra_hosts</td>
+<td>List of hostname mappings for containers of this service</td>
+</tr>
+<tr>
+<td>secuirty_opt</td>
+<td>Labeling scheme for containers of this service</td>
+</tr>
+<tr>
+<td>entrypoint</td>
+<td>Entrypoint to be set on the containers launched as part of the service, which will override the image entrypoint</td>
+</tr>
+<tr>
+<td>run_command</td>
+<td>Run command to be set on the containers launched as part of the service, which will override the image run command</td>
+</tr>
+<tr>
+<td>sequential_deployment</td>
+<td>Whether the containers for this service should be deployed in sequence, linking each of them to the previous containers (see <a href="/docker-cloud/apps/service-scaling/">Service scaling</a> for more information)</td>
+</tr>
+<tr>
+<td>cpu_shares</td>
+<td>The relative CPU priority of the containers of the service (see <a href="/engine/reference/run/#runtime-constraints-on-cpu-and-memory">Runtime Constraints on CPU and Memory</a> for more information)</td>
+</tr>
+<tr>
+<td>cpuset</td>
+<td>CPUs in which to allow execution</td>
+</tr>
+<tr>
+<td>memory</td>
+<td>The memory limit of the containers of the service in MB (see <a href="/engine/reference/run/#runtime-constraints-on-cpu-and-memory">Runtime Constraints on CPU and Memory</a> for more information)</td>
+</tr>
+<tr>
+<td>memory_swap</td>
+<td>Total memory limit (memory + swap) of the containers of the service in MB</td>
+</tr>
+<tr>
+<td>linked_from_service</td>
+<td>A list of services that are linked to this one (see table <code class="prettyprint">Related services attributes</code> below)</td>
+</tr>
+<tr>
+<td>linked_to_service</td>
+<td>A list of services that the service is linked to (see table <code class="prettyprint">Related services attributes</code> below)</td>
+</tr>
+<tr>
+<td>bindings</td>
+<td>A list of volume bindings that the service has mounted (see table <code class="prettyprint">Service binding attributes</code> below)</td>
+</tr>
+<tr>
+<td>autorestart</td>
+<td>Whether to restart the containers of the service automatically if they stop (see <a href="/docker-cloud/apps/autorestart/">Crash recovery</a> for more information)</td>
+</tr>
+<tr>
+<td>autodestroy</td>
+<td>Whether to terminate the containers of the service automatically if they stop (see <a href="/docker-cloud/apps/auto-destroy/">Autodestroy</a> for more information)</td>
+</tr>
+<tr>
+<td>roles</td>
+<td>List of Docker Cloud roles assigned to this service (see <a href="/docker-cloud/apps/service-links/">Service links</a> for more information)</td>
+</tr>
+<tr>
+<td>link_variables</td>
+<td>List of environment variables that would be exposed in the containers if they are linked to this service</td>
+</tr>
+<tr>
+<td>privileged</td>
+<td>Whether to start the containers with Docker&rsquo;s <code class="prettyprint">privileged</code> flag set or not, which allows containers to access all devices on the host among other things (see <a href="/engine/reference/run/#runtime-privilege-linux-capabilities-and-lxc-configuration">Runtime privilege</a> for more information)</td>
+</tr>
+<tr>
+<td>read_only</td>
+<td>Whether the filesystem of every service container is read-only or not (<code class="prettyprint">false</code> by default)</td>
+</tr>
+<tr>
+<td>deployment_strategy</td>
+<td>Container distribution among nodes (see table <code class="prettyprint">Deployment strategies</code> below and <a href="/docker-cloud/infrastructure/deployment-strategies/">Deployment strategies</a> for more information)</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>List of tags to be used to deploy the service (see <a href="/docker-cloud/apps/deploy-tags/">Tags</a> for more information)</td>
+</tr>
+<tr>
+<td>autoredeploy</td>
+<td>Whether to redeploy the containers of the service when its image is updated in Docker Cloud registry (see <a href="/docker-cloud/apps/auto-redeploy/">Docker Cloud&rsquo;s private registry</a> for more information)</td>
+</tr>
+<tr>
+<td>nickname</td>
+<td>A user-friendly name for the service (<code class="prettyprint">name</code> by default)</td>
+</tr>
+</tbody></table>
+
+<h3 id="service-binding-attributes">Service binding attributes</h3>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>host_path</td>
+<td>The host path of the volume</td>
+</tr>
+<tr>
+<td>container_path</td>
+<td>The container path where the volume is mounted</td>
+</tr>
+<tr>
+<td>rewritable</td>
+<td><code class="prettyprint">true</code> is the volume has writable permissions</td>
+</tr>
+<tr>
+<td>volumes_from</td>
+<td>The resource URI of the service</td>
+</tr>
+</tbody></table>
+
+<h3 id="service-port-attributes">Service Port attributes</h3>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>protocol</td>
+<td>The protocol of the port, either <code class="prettyprint">tcp</code> or <code class="prettyprint">udp</code></td>
+</tr>
+<tr>
+<td>inner_port</td>
+<td>The published port number inside the container</td>
+</tr>
+<tr>
+<td>outer_port</td>
+<td>The published port number in the node public network interface</td>
+</tr>
+<tr>
+<td>port_name</td>
+<td>Name of the service associated to this port</td>
+</tr>
+<tr>
+<td>endpoint_uri</td>
+<td>The URI of the service endpoint for this port</td>
+</tr>
+<tr>
+<td>published</td>
+<td>Whether the port has been published in the host public network interface or not. Non-published ports can only be accessed via links.</td>
+</tr>
+</tbody></table>
+
+<h3 id="service-environment-variable-attributes">Service Environment Variable attributes</h3>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>key</td>
+<td>The name of the environment variable</td>
+</tr>
+<tr>
+<td>value</td>
+<td>The value of the environment variable</td>
+</tr>
+</tbody></table>
+
+<h3 id="related-services-attributes">Related services attributes</h3>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>The link name</td>
+</tr>
+<tr>
+<td>from_service</td>
+<td>The resource URI of the origin of the link</td>
+</tr>
+<tr>
+<td>to_service</td>
+<td>The resource URI of the target of the link</td>
+</tr>
+</tbody></table>
+
+<h3 id="service-states">Service states</h3>
+
+<table><thead>
+<tr>
+<th>State</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Not running</td>
+<td>The service has been created and has no deployed containers yet. Possible actions in this state: <code class="prettyprint">start</code>, <code class="prettyprint">terminate</code>.</td>
+</tr>
+<tr>
+<td>Starting</td>
+<td>All containers for the service are either starting or already running. No actions allowed in this state.</td>
+</tr>
+<tr>
+<td>Running</td>
+<td>All containers for the service are deployed and running. Possible actions in this state: <code class="prettyprint">stop</code>, <code class="prettyprint">redeploy</code>, <code class="prettyprint">terminate</code>.</td>
+</tr>
+<tr>
+<td>Partly running</td>
+<td>One or more containers of the service are deployed and running. Possible actions in this state: <code class="prettyprint">stop</code>, <code class="prettyprint">redeploy</code>, <code class="prettyprint">terminate</code>.</td>
+</tr>
+<tr>
+<td>Scaling</td>
+<td>The service is either deploying new containers or destroying existing ones responding to a scaling request. No actions allowed in this state.</td>
+</tr>
+<tr>
+<td>Redeploying</td>
+<td>The service is redeploying all its containers with the updated configuration. No actions allowed in this state.</td>
+</tr>
+<tr>
+<td>Stopping</td>
+<td>All containers for the service are either stopping or already stopped. No actions allowed in this state.</td>
+</tr>
+<tr>
+<td>Stopped</td>
+<td>All containers for the service are stopped. Possible actions in this state: <code class="prettyprint">start</code>, <code class="prettyprint">redeploy</code>, <code class="prettyprint">terminate</code>.</td>
+</tr>
+<tr>
+<td>Terminating</td>
+<td>All containers for the service are either being terminated or already terminated. No actions allowed in this state.</td>
+</tr>
+<tr>
+<td>Terminated</td>
+<td>The service and all its containers have been terminated. No actions allowed in this state.</td>
+</tr>
+</tbody></table>
+
+<h3 id="deployment-strategies">Deployment strategies</h3>
+
+<table><thead>
+<tr>
+<th>Strategy</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>EMPTIEST_NODE</td>
+<td>It will deploy containers to the node with the lower total amount of running containers (default).</td>
+</tr>
+<tr>
+<td>HIGH_AVAILABILITY</td>
+<td>It will deploy containers to the node with the lower amount of running containers of the same service.</td>
+</tr>
+<tr>
+<td>EVERY_NODE</td>
+<td>It will deploy one container on every node. The service won&rsquo;t be able to scale manually. New containers will be deployed to new nodes automatically.</td>
+</tr>
+</tbody></table>
+
+<h3 id="network-modes">Network Modes</h3>
+
+<table><thead>
+<tr>
+<th>Strategy</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>bridge</td>
+<td>Creates a new network stack for the container on the docker bridge.</td>
+</tr>
+<tr>
+<td>host</td>
+<td>Uses the host network stack inside the container.</td>
+</tr>
+</tbody></table>
+
+<h2 id="list-all-services">List all services</h2>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">dockercloud</span>
+
+<span class="n">services</span> <span class="o">=</span> <span class="n">dockercloud</span><span class="o">.</span><span class="n">Service</span><span class="o">.</span><span class="nb">list</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight go"><code><span class="k">import</span><span class="x"> </span><span class="s">"github.com/docker/go-dockercloud/dockercloud"</span><span class="x">
+
+</span><span class="n">serviceList</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">dockercloud</span><span class="o">.</span><span class="n">ListServices</span><span class="p">()</span><span class="x">
+
+</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">serviceList</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/app/v1/service/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">cloud.docker.com</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Basic dXNlcm5hbWU6YXBpa2V5</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+</code></pre>
+<pre class="highlight shell"><code>docker-cloud service ps
+</code></pre>
+
+<p>Lists all current and recently terminated services. Returns a list of <code class="prettyprint">Service</code> objects.</p>
+
+<h3 id="endpoint-type">Endpoint Type</h3>
+
+<p>Available in Docker Cloud&rsquo;s <strong>REST API</strong></p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /api/app/v1/[optional_namespace/]service/</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>uuid</td>
+<td>Filter by UUID</td>
+</tr>
+<tr>
+<td>state</td>
+<td>Filter by state. Possible values: <code class="prettyprint">Not running</code>, <code class="prettyprint">Starting</code>, <code class="prettyprint">Running</code>, <code class="prettyprint">Partly running</code>, <code class="prettyprint">Scaling</code>, <code class="prettyprint">Redeploying</code>, <code class="prettyprint">Stopping</code>, <code class="prettyprint">Stopped</code>, <code class="prettyprint">Terminating</code>, <code class="prettyprint">Terminated</code></td>
+</tr>
+<tr>
+<td>name</td>
+<td>Filter by service name</td>
+</tr>
+<tr>
+<td>stack</td>
+<td>Filter by resource URI of the target stack.</td>
+</tr>
+</tbody></table>
+
+<h2 id="create-a-new-service">Create a new service</h2>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">dockercloud</span>
+
+<span class="n">service</span> <span class="o">=</span> <span class="n">dockercloud</span><span class="o">.</span><span class="n">Service</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="s">"tutum/hello-world"</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">"my-new-app"</span><span class="p">,</span> <span class="n">target_num_containers</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">service</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight go"><code><span class="k">import</span><span class="x"> </span><span class="s">"github.com/docker/go-dockercloud/dockercloud"</span><span class="x">
+
+</span><span class="n">service</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">dockercloud</span><span class="o">.</span><span class="n">CreateService</span><span class="p">(</span><span class="n">dockercloud</span><span class="o">.</span><span class="n">ServiceCreateRequest</span><span class="p">{</span><span class="n">Image</span><span class="o">:</span><span class="x"> </span><span class="s">"tutum/hello-world"</span><span class="p">,</span><span class="x">  </span><span class="n">Name</span><span class="o">:</span><span class="x"> </span><span class="s">"my-new-app"</span><span class="p">,</span><span class="x"> </span><span class="n">Target_num_containers</span><span class="o">:</span><span class="x"> </span><span class="m">2</span><span class="p">})</span><span class="x">
+
+</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">service</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<pre class="highlight http"><code><span class="nf">POST</span> <span class="nn">/api/app/v1/service/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">cloud.docker.com</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Basic dXNlcm5hbWU6YXBpa2V5</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+
+<span class="p">{</span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tutum/hello-world"</span><span class="p">,</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my-new-app"</span><span class="p">,</span><span class="w"> </span><span class="nt">"target_num_containers"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<pre class="highlight shell"><code>docker-cloud service create -t 2 --name my-new-app tutum/hello-world
+</code></pre>
+
+<p>Creates a new service without starting it.</p>
+
+<h3 id="endpoint-type">Endpoint Type</h3>
+
+<p>Available in Docker Cloud&rsquo;s <strong>REST API</strong></p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST /api/app/v1/[optional_namespace/]service/</code></p>
+
+<h3 id="json-parameters">JSON Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>image</td>
+<td>(required) The image used to deploy this service in docker format, i.e. <code class="prettyprint">tutum/hello-world</code></td>
+</tr>
+<tr>
+<td>name</td>
+<td>(optional) A human-readable name for the service, i.e. <code class="prettyprint">my-hello-world-app</code> (default: <code class="prettyprint">image</code> without namespace)</td>
+</tr>
+<tr>
+<td>target_num_containers</td>
+<td>(optional) The number of containers to run for this service initially (default: 1)</td>
+</tr>
+<tr>
+<td>run_command</td>
+<td>(optional) The command used to start the containers of this service, overriding the value specified in the image, i.e. <code class="prettyprint">/run.sh</code> (default: <code class="prettyprint">null</code>)</td>
+</tr>
+<tr>
+<td>entrypoint</td>
+<td>(optional) The command prefix used to start the containers of this service, overriding the value specified in the image, i.e. <code class="prettyprint">/usr/sbin/sshd</code> (default: <code class="prettyprint">null</code>)</td>
+</tr>
+<tr>
+<td>container_ports</td>
+<td>(optional) An array of objects with port information to be published in the containers for this service, which will be added to the image port information, i.e. <code class="prettyprint">[{&quot;protocol&quot;: &quot;tcp&quot;, &quot;inner_port&quot;: 80, &quot;outer_port&quot;: 80}]</code> (default: <code class="prettyprint">[]</code>) (See table <code class="prettyprint">Service Port attributes</code> below)</td>
+</tr>
+<tr>
+<td>container_envvars</td>
+<td>(optional) An array of objects with environment variables to be added in the service containers on launch (overriding any image-defined environment variables), i.e. <code class="prettyprint">[{&quot;key&quot;: &quot;DB_PASSWORD&quot;, &quot;value&quot;: &quot;mypass&quot;}]</code> (default: <code class="prettyprint">[]</code>) (See table <code class="prettyprint">Service Environment Variable attributes</code> below)</td>
+</tr>
+<tr>
+<td>linked_to_service</td>
+<td>(optional) An array of service resource URIs to link this service to, including the link name, i.e. <code class="prettyprint">[{&quot;to_service&quot;: &quot;/api/app/v1/service/80ff1635-2d56-478d-a97f-9b59c720e513/&quot;, &quot;name&quot;: &quot;db&quot;}]</code> (default: <code class="prettyprint">[]</code>) (See table <code class="prettyprint">Related services attributes</code> below)</td>
+</tr>
+<tr>
+<td>bindings</td>
+<td>(optional) An array of bindings this service has to mount, i.e. <code class="prettyprint">[{&quot;volumes_from&quot;: &quot;/api/app/v1/service/80ff1635-2d56-478d-a97f-9b59c720e513/&quot;, &quot;rewritable&quot;: true}]</code> (default: <code class="prettyprint">[]</code>) (See table <code class="prettyprint">Related bindings attributes</code> below)</td>
+</tr>
+<tr>
+<td>autorestart</td>
+<td>(optional) Whether the containers for this service should be restarted if they stop, i.e. <code class="prettyprint">ALWAYS</code> (default: <code class="prettyprint">OFF</code>, possible values: <code class="prettyprint">OFF</code>, <code class="prettyprint">ON_FAILURE</code>, <code class="prettyprint">ALWAYS</code>) (see <a href="/docker-cloud/apps/autorestart/">Crash recovery</a> for more information)</td>
+</tr>
+<tr>
+<td>autodestroy</td>
+<td>(optional) Whether the containers should be terminated if they stop, i.e. <code class="prettyprint">OFF</code> (default: <code class="prettyprint">OFF</code>, possible values: <code class="prettyprint">OFF</code>, <code class="prettyprint">ON_SUCCESS</code>, <code class="prettyprint">ALWAYS</code>) (see <a href="/docker-cloud/apps/auto-destroy/">Autodestroy</a> for more information)</td>
+</tr>
+<tr>
+<td>sequential_deployment</td>
+<td>(optional) Whether the containers should be launched and scaled in sequence, i.e. <code class="prettyprint">true</code> (default: <code class="prettyprint">false</code>) (see <a href="/docker-cloud/apps/service-scaling/">Service scaling</a> for more information)</td>
+</tr>
+<tr>
+<td>roles</td>
+<td>(optional) A list of Docker Cloud API roles to grant the service, i.e. <code class="prettyprint">[&quot;global&quot;]</code> (default: <code class="prettyprint">[]</code>, possible values: <code class="prettyprint">global</code>) (see <a href="/docker-cloud/apps/service-links/">Service links</a> for more information)</td>
+</tr>
+<tr>
+<td>privileged</td>
+<td>(optional) Whether to start the containers with Docker&rsquo;s <code class="prettyprint">privileged</code> flag set or not, i.e. <code class="prettyprint">false</code> (default: <code class="prettyprint">false</code>) (see <a href="/engine/reference/run/#runtime-privilege-linux-capabilities-and-lxc-configuration">Runtime privilege</a> for more information)</td>
+</tr>
+<tr>
+<td>deployment_strategy</td>
+<td>(optional) Container distribution among nodes (default: <code class="prettyprint">EMPTIEST_NODE</code>, see table <code class="prettyprint">Deployment strategies</code> above and <a href="/docker-cloud/infrastructure/deployment-strategies/">Deployment strategies</a> for more information)</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>(optional) A list of tags to be used to deploy the service (see <a href="/docker-cloud/apps/deploy-tags/">Tags</a> for more information) (default: <code class="prettyprint">[]</code>)</td>
+</tr>
+<tr>
+<td>autoredeploy</td>
+<td>(optional) Whether to redeploy the containers of the service when its image is updated in Docker Cloud registry (default: <code class="prettyprint">false</code>) (see <a href="/docker-cloud/apps/auto-redeploy/">Docker Cloud&rsquo;s private registry</a> for more information)</td>
+</tr>
+<tr>
+<td>net</td>
+<td>(optional) Set the network mode to the containers (default: <code class="prettyprint">bridge</code>, possible values: <code class="prettyprint">bridge</code>, <code class="prettyprint">host</code>)</td>
+</tr>
+<tr>
+<td>pid</td>
+<td>(optional) Set the PID (Process) Namespace mode for the containers (default: <code class="prettyprint">none</code> value, possible values: <code class="prettyprint">none</code>, <code class="prettyprint">host</code>)</td>
+</tr>
+<tr>
+<td>working_dir</td>
+<td>(optional) Working directory for running binaries within a container of this service (default: <code class="prettyprint">/</code>)</td>
+</tr>
+<tr>
+<td>nickname</td>
+<td>(optional) A user-friendly name for the service (<code class="prettyprint">name</code> by default)</td>
+</tr>
+</tbody></table>
+
+<h3 id="related-bindings-attributes">Related bindings attributes</h3>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>host_path</td>
+<td>(optional) The host path of the volume</td>
+</tr>
+<tr>
+<td>container_path</td>
+<td>(required if <code class="prettyprint">volumes_from</code> is omitted) The container path where the volume is mounted</td>
+</tr>
+<tr>
+<td>rewritable</td>
+<td>(optional) <code class="prettyprint">true</code> is the volume has writable permissions (default: <code class="prettyprint">true</code>)</td>
+</tr>
+<tr>
+<td>volumes_from</td>
+<td>(required if <code class="prettyprint">container_path</code> is omitted) The resource URI of the service</td>
+</tr>
+</tbody></table>
+
+<h3 id="service-port-attributes">Service Port attributes</h3>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>protocol</td>
+<td>(required) The protocol of the port, either <code class="prettyprint">tcp</code> or <code class="prettyprint">udp</code></td>
+</tr>
+<tr>
+<td>inner_port</td>
+<td>(required) The port number inside the container to be published</td>
+</tr>
+<tr>
+<td>outer_port</td>
+<td>(optional) The port number in the node public network interface to be published (default: dynamic allocation if <code class="prettyprint">published</code> is <code class="prettyprint">true</code>)</td>
+</tr>
+<tr>
+<td>published</td>
+<td>(optional) Whether to publish the port in the host public network interface or not. Non-published ports can only be accessed via links. (default: <code class="prettyprint">false</code>)</td>
+</tr>
+</tbody></table>
+
+<h3 id="service-environment-variable-attributes">Service Environment Variable attributes</h3>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>key</td>
+<td>(required) The name of the environment variable</td>
+</tr>
+<tr>
+<td>value</td>
+<td>(required) The value of the environment variable</td>
+</tr>
+</tbody></table>
+
+<h3 id="related-services-attributes">Related services attributes</h3>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>to_service</td>
+<td>(required) The resource URI of the target of the link</td>
+</tr>
+<tr>
+<td>name</td>
+<td>(optional) The link name</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-an-existing-service">Get an existing service</h2>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">dockercloud</span>
+
+<span class="n">service</span> <span class="o">=</span> <span class="n">dockercloud</span><span class="o">.</span><span class="n">Service</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="s">"7eaf7fff-882c-4f3d-9a8f-a22317ac00ce"</span><span class="p">)</span>
+</code></pre>
+<pre class="highlight go"><code><span class="k">import</span><span class="x"> </span><span class="s">"github.com/docker/go-dockercloud/dockercloud"</span><span class="x">
+
+</span><span class="n">service</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">dockercloud</span><span class="o">.</span><span class="n">GetService</span><span class="p">(</span><span class="s">"7eaf7fff-882c-4f3d-9a8f-a22317ac00ce"</span><span class="p">)</span><span class="x">
+
+</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">service</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/app/v1/service/7eaf7fff-882c-4f3d-9a8f-a22317ac00ce/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">cloud.docker.com</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Basic dXNlcm5hbWU6YXBpa2V5</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+</code></pre>
+<pre class="highlight shell"><code>docker-cloud service inspect 7eaf7fff
+</code></pre>
+
+<p>Get all the details of an specific service</p>
+
+<h3 id="endpoint-type">Endpoint Type</h3>
+
+<p>Available in Docker Cloud&rsquo;s <strong>REST API</strong></p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /api/app/v1/[optional_namespace/]service/(uuid)/</code></p>
+
+<h3 id="path-parameters">Path Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>uuid</td>
+<td>The UUID of the service to retrieve</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-the-logs-of-a-service">Get the logs of a service</h2>
+
+<blockquote>
+<p>Example log line</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"log"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wordpress-stackable-1"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"log"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Log line from the container indicated by 'source'"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"streamType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stdout"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1433779324</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">dockercloud</span>
+
+<span class="k">def</span> <span class="nf">log_handler</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
+    <span class="k">print</span> <span class="n">message</span>
+
+<span class="n">service</span> <span class="o">=</span> <span class="n">dockercloud</span><span class="o">.</span><span class="n">Service</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="s">"7eaf7fff-882c-4f3d-9a8f-a22317ac00ce"</span><span class="p">)</span>
+<span class="n">service</span><span class="o">.</span><span class="n">logs</span><span class="p">(</span><span class="n">tail</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">follow</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">log_handler</span><span class="o">=</span><span class="n">log_handler</span><span class="p">)</span>
+</code></pre>
+<pre class="highlight go"><code><span class="k">import</span><span class="x"> </span><span class="s">"github.com/docker/go-dockercloud/dockercloud"</span><span class="x">
+
+</span><span class="n">service</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">dockercloud</span><span class="o">.</span><span class="n">GetService</span><span class="p">(</span><span class="s">"7eaf7fff-882c-4f3d-9a8f-a22317ac00ce"</span><span class="p">)</span><span class="x">
+
+</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="n">c</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="nb">make</span><span class="p">(</span><span class="k">chan</span><span class="x"> </span><span class="n">Logs</span><span class="p">)</span><span class="x">
+
+</span><span class="k">go</span><span class="x"> </span><span class="n">service</span><span class="o">.</span><span class="n">Logs</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="x">
+    </span><span class="k">for</span><span class="x"> </span><span class="p">{</span><span class="x">
+        </span><span class="n">s</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="o">&lt;-</span><span class="n">c</span><span class="x">
+        </span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="x">
+    </span><span class="p">}</span><span class="x">
+</span></code></pre>
+<pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/app/v1/service/7eaf7fff-882c-4f3d-9a8f-a22317ac00ce/logs/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">ws.cloud.docker.com</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Basic dXNlcm5hbWU6YXBpa2V5</span>
+<span class="na">Connection</span><span class="p">:</span> <span class="s">Upgrade</span>
+<span class="na">Upgrade</span><span class="p">:</span> <span class="s">websocket</span>
+</code></pre>
+<pre class="highlight shell"><code>docker-cloud service logs 7eaf7fff
+</code></pre>
+
+<p>Get the aggregated logs of all the containers of the service.</p>
+
+<h3 id="endpoint-type">Endpoint Type</h3>
+
+<p>Available in Docker Cloud&rsquo;s <strong>STREAM API</strong></p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /api/app/v1/[optional_namespace/]service/(uuid)/logs/</code></p>
+
+<h3 id="path-parameters">Path Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>uuid</td>
+<td>The UUID of the service to retrieve logs</td>
+</tr>
+</tbody></table>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>tail</td>
+<td>Number of lines to show from the end of the logs (default: <code class="prettyprint">300</code>)</td>
+</tr>
+<tr>
+<td>follow</td>
+<td>Whether to stream logs or close the connection immediately (default: true)</td>
+</tr>
+</tbody></table>
+
+<h2 id="update-an-existing-service">Update an existing service</h2>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">dockercloud</span>
+
+<span class="n">service</span> <span class="o">=</span> <span class="n">dockercloud</span><span class="o">.</span><span class="n">Service</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="s">"7eaf7fff-882c-4f3d-9a8f-a22317ac00ce"</span><span class="p">)</span>
+<span class="n">service</span><span class="o">.</span><span class="n">target_num_containers</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">service</span><span class="o">.</span><span class="n">tags</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s">"name"</span><span class="p">:</span><span class="s">"tag-1"</span><span class="p">})</span>
+<span class="n">service</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight go"><code><span class="k">import</span><span class="x"> </span><span class="s">"github.com/docker/go-dockercloud/dockercloud"</span><span class="x">
+
+</span><span class="n">service</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">dockercloud</span><span class="o">.</span><span class="n">GetService</span><span class="p">(</span><span class="s">"7eaf7fff-882c-4f3d-9a8f-a22317ac00ce"</span><span class="p">)</span><span class="x">
+
+</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">service</span><span class="o">.</span><span class="n">Update</span><span class="p">(</span><span class="n">dockercloud</span><span class="o">.</span><span class="n">ServiceCreateRequest</span><span class="p">{</span><span class="n">Target_num_containers</span><span class="o">:</span><span class="x"> </span><span class="m">3</span><span class="p">});</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+   </span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre>
+<pre class="highlight http"><code><span class="nf">PATCH</span> <span class="nn">/api/app/v1/service/7eaf7fff-882c-4f3d-9a8f-a22317ac00ce/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">cloud.docker.com</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Basic dXNlcm5hbWU6YXBpa2V5</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+
+<span class="p">{</span><span class="nt">"autorestart"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ON_FAILURE"</span><span class="p">,</span><span class="w"> </span><span class="nt">"autodestroy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OFF"</span><span class="p">,</span><span class="w"> </span><span class="nt">"container_envvars"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DB_PASSWORD"</span><span class="p">,</span><span class="w"> </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mypass"</span><span class="p">}],</span><span class="w">
+</span><span class="nt">"container_ports"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tcp"</span><span class="p">,</span><span class="w"> </span><span class="nt">"inner_port"</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w"> </span><span class="nt">"outer_port"</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">}],</span><span class="w"> </span><span class="nt">"cpu_shares"</span><span class="p">:</span><span class="w"> </span><span class="mi">512</span><span class="p">,</span><span class="w">
+</span><span class="nt">"entrypoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/usr/sbin/sshd"</span><span class="p">,</span><span class="w"> </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tutum/hello-world"</span><span class="p">,</span><span class="w">
+</span><span class="nt">"linked_to_service"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">"to_service"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/app/v1/service/80ff1635-2d56-478d-a97f-9b59c720e513/"</span><span class="p">,</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"db"</span><span class="p">}],</span><span class="w">
+</span><span class="nt">"memory"</span><span class="p">:</span><span class="w"> </span><span class="mi">2048</span><span class="p">,</span><span class="w"> </span><span class="nt">"privileged"</span><span class="p">:</span><span class="w"> </span><span class="err">True</span><span class="p">,</span><span class="w"> </span><span class="nt">"roles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"global"</span><span class="p">],</span><span class="w"> </span><span class="nt">"run_command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/run.sh"</span><span class="p">,</span><span class="w"> </span><span class="nt">"sequential_deployment"</span><span class="p">:</span><span class="w"> </span><span class="err">False</span><span class="p">,</span><span class="w">
+</span><span class="nt">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tag-1"</span><span class="p">}],</span><span class="w"> </span><span class="nt">"target_num_containers"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="nt">"autoredeploy"</span><span class="p">:</span><span class="w"> </span><span class="err">False</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<pre class="highlight shell"><code>docker-cloud service scale 7eaf7fff 3
+docker-cloud tag add -t tag-1 7eaf7fff
+docker-cloud tag <span class="nb">set</span> -t tag-2 7eaf7fff
+</code></pre>
+
+<p>Updates the service details.</p>
+
+<h3 id="endpoint-type">Endpoint Type</h3>
+
+<p>Available in Docker Cloud&rsquo;s <strong>REST API</strong></p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">PATCH /api/app/v1/[optional_namespace/]service/(uuid)/</code></p>
+
+<h3 id="path-parameters">Path Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>uuid</td>
+<td>The UUID of the service to update</td>
+</tr>
+</tbody></table>
+
+<h3 id="json-parameters">JSON Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>autorestart</td>
+<td>(optional) Whether the containers for this service should be restarted if they stop, i.e. <code class="prettyprint">ALWAYS</code> (possible values: <code class="prettyprint">OFF</code>, <code class="prettyprint">ON_FAILURE</code>, <code class="prettyprint">ALWAYS</code>) (see <a href="/docker-cloud/apps/autorestart/">Crash recovery</a> for more information)</td>
+</tr>
+<tr>
+<td>autodestroy</td>
+<td>(optional) Whether the containers should be terminated if they stop, i.e. <code class="prettyprint">OFF</code> (possible values: <code class="prettyprint">OFF</code>, <code class="prettyprint">ON_SUCCESS</code>, <code class="prettyprint">ALWAYS</code>) (see <a href="/docker-cloud/apps/auto-destroy/">Autodestroy</a> for more information)</td>
+</tr>
+<tr>
+<td>container_envvars</td>
+<td>(optional) An array of objects with environment variables to be added in the service containers on launch (overriding any image-defined environment variables), i.e. <code class="prettyprint">[{&quot;key&quot;: &quot;DB_PASSWORD&quot;, &quot;value&quot;: &quot;mypass&quot;}]</code> (See table <code class="prettyprint">Service Environment Variable attributes</code>)</td>
+</tr>
+<tr>
+<td>container_ports</td>
+<td>(optional) An array of objects with port information to be published in the containers for this service, which will be added to the image port information, i.e. <code class="prettyprint">[{&quot;protocol&quot;: &quot;tcp&quot;, &quot;inner_port&quot;: 80, &quot;outer_port&quot;: 80}]</code> (See table <code class="prettyprint">Service Port attributes</code>)</td>
+</tr>
+<tr>
+<td>cpu_shares</td>
+<td>(optional) The relative CPU priority of the containers the service describes (see <a href="/engine/reference/run/#runtime-constraints-on-cpu-and-memory">Runtime Constraints on CPU and Memory</a> for more information)</td>
+</tr>
+<tr>
+<td>entrypoint</td>
+<td>(optional) The command prefix used to start the containers of this service, overriding the value specified in the image, i.e. <code class="prettyprint">/usr/sbin/sshd</code></td>
+</tr>
+<tr>
+<td>image</td>
+<td>(optional) The image used to deploy this service in docker format, i.e. <code class="prettyprint">tutum/hello-world</code>, <code class="prettyprint">tutum/ubuntu:5.6</code>. If no tag is indicated, it will be set to <code class="prettyprint">latest</code> by default</td>
+</tr>
+<tr>
+<td>linked_to_service</td>
+<td>(optional) An array of service resource URIs to link this service to, including the link name, i.e. <code class="prettyprint">[{&quot;to_service&quot;: &quot;/api/app/v1/service/80ff1635-2d56-478d-a97f-9b59c720e513/&quot;, &quot;name&quot;: &quot;db&quot;}]</code> (See table <code class="prettyprint">Related services attributes</code> below)</td>
+</tr>
+<tr>
+<td>memory</td>
+<td>(optional) The memory limit of the containers of the service in MB (see <a href="/engine/reference/run/#runtime-constraints-on-cpu-and-memory">Runtime Constraints on CPU and Memory</a> for more information)</td>
+</tr>
+<tr>
+<td>privileged</td>
+<td>(optional) Whether to start the containers with Docker&rsquo;s <code class="prettyprint">privileged</code> flag set or not, i.e. <code class="prettyprint">false</code> (see <a href="/engine/reference/run/#runtime-privilege-linux-capabilities-and-lxc-configuration">Runtime privilege</a> for more information)</td>
+</tr>
+<tr>
+<td>roles</td>
+<td>(optional) A list of Docker Cloud API roles to grant the service, i.e. <code class="prettyprint">[&quot;global&quot;]</code> (possible values: <code class="prettyprint">global</code>) (see <a href="/docker-cloud/apps/service-links/">Service links</a> for more information)</td>
+</tr>
+<tr>
+<td>run_command</td>
+<td>(optional) The command used to start the containers of this service, overriding the value specified in the image, i.e. <code class="prettyprint">/run.sh</code></td>
+</tr>
+<tr>
+<td>sequential_deployment</td>
+<td>(optional) Whether the containers should be launched and scaled in sequence, i.e. <code class="prettyprint">true</code> (see <a href="/docker-cloud/apps/service-scaling/">Service scaling</a> for more information)</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>(optional) List of new tags the service will have. This operation replaces the tag list</td>
+</tr>
+<tr>
+<td>target_num_containers</td>
+<td>(optional) The number of containers to scale this service to</td>
+</tr>
+<tr>
+<td>deployment_strategy</td>
+<td>(optional) Container distribution among nodes. A service cannot be updated to or from a deployment strategy of <code class="prettyprint">EVERY_NODE</code>. (See table <code class="prettyprint">Deployment strategies</code> above and <a href="/docker-cloud/infrastructure/deployment-strategies/">Deployment strategies</a> for more information)</td>
+</tr>
+<tr>
+<td>autoredeploy</td>
+<td>Whether to redeploy the containers of the service when its image is updated in Docker Cloud registry (see <a href="/docker-cloud/apps/auto-redeploy/">Docker Cloud&rsquo;s private registry</a> for more information)</td>
+</tr>
+<tr>
+<td>net</td>
+<td>(optional) Set the network mode to the containers (default: <code class="prettyprint">bridge</code>, possible values: <code class="prettyprint">bridge</code>, <code class="prettyprint">host</code>)</td>
+</tr>
+<tr>
+<td>pid</td>
+<td>(optional) Set the PID (Process) Namespace mode for the containers (default: <code class="prettyprint">none</code> value, possible values: <code class="prettyprint">none</code>, <code class="prettyprint">host</code>)</td>
+</tr>
+<tr>
+<td>working_dir</td>
+<td>(optional) Working directory for running binaries within a container of this service (default: <code class="prettyprint">/</code>)</td>
+</tr>
+<tr>
+<td>nickname</td>
+<td>(optional) A user-friendly name for the service (<code class="prettyprint">name</code> by default)</td>
+</tr>
+</tbody></table>
+
+<h2 id="start-a-service">Start a service</h2>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">dockercloud</span>
+
+<span class="n">service</span> <span class="o">=</span> <span class="n">dockercloud</span><span class="o">.</span><span class="n">Service</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="s">"7eaf7fff-882c-4f3d-9a8f-a22317ac00ce"</span><span class="p">)</span>
+<span class="n">service</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight go"><code><span class="k">import</span><span class="x"> </span><span class="s">"github.com/docker/go-dockercloud/dockercloud"</span><span class="x">
+
+</span><span class="n">service</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">dockercloud</span><span class="o">.</span><span class="n">GetService</span><span class="p">(</span><span class="s">"7eaf7fff-882c-4f3d-9a8f-a22317ac00ce"</span><span class="p">)</span><span class="x">
+
+</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">service</span><span class="o">.</span><span class="n">Start</span><span class="p">();</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+   </span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre>
+<pre class="highlight http"><code><span class="nf">POST</span> <span class="nn">/api/app/v1/service/7eaf7fff-882c-4f3d-9a8f-a22317ac00ce/start/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">cloud.docker.com</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Basic dXNlcm5hbWU6YXBpa2V5</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+</code></pre>
+<pre class="highlight shell"><code>docker-cloud service start 7eaf7fff
+</code></pre>
+
+<p>Starts all containers in a stopped or partly running service.</p>
+
+<h3 id="endpoint-type">Endpoint Type</h3>
+
+<p>Available in Docker Cloud&rsquo;s <strong>REST API</strong></p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST /api/app/v1/[optional_namespace/]service/(uuid)/start/</code></p>
+
+<h3 id="path-parameters">Path Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>uuid</td>
+<td>The UUID of the service to start</td>
+</tr>
+</tbody></table>
+
+<h2 id="stop-a-service">Stop a service</h2>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">dockercloud</span>
+
+<span class="n">service</span> <span class="o">=</span> <span class="n">dockercloud</span><span class="o">.</span><span class="n">Service</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="s">"7eaf7fff-882c-4f3d-9a8f-a22317ac00ce"</span><span class="p">)</span>
+<span class="n">service</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight go"><code><span class="k">import</span><span class="x"> </span><span class="s">"github.com/docker/go-dockercloud/dockercloud"</span><span class="x">
+
+</span><span class="n">service</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">dockercloud</span><span class="o">.</span><span class="n">GetService</span><span class="p">(</span><span class="s">"7eaf7fff-882c-4f3d-9a8f-a22317ac00ce"</span><span class="p">)</span><span class="x">
+
+</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">service</span><span class="o">.</span><span class="n">Stop</span><span class="p">();</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+   </span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre>
+<pre class="highlight http"><code><span class="nf">POST</span> <span class="nn">/api/app/v1/service/7eaf7fff-882c-4f3d-9a8f-a22317ac00ce/stop/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">cloud.docker.com</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Basic dXNlcm5hbWU6YXBpa2V5</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+</code></pre>
+<pre class="highlight shell"><code>docker-cloud service stop 7eaf7fff
+</code></pre>
+
+<p>Stops all containers in a running or partly running service.</p>
+
+<h3 id="endpoint-type">Endpoint Type</h3>
+
+<p>Available in Docker Cloud&rsquo;s <strong>REST API</strong></p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST /api/app/v1/[optional_namespace/]service/(uuid)/stop/</code></p>
+
+<h3 id="path-parameters">Path Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>uuid</td>
+<td>The UUID of the service to stop</td>
+</tr>
+</tbody></table>
+
+<h2 id="scale-a-service">Scale a service</h2>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">dockercloud</span>
+
+<span class="n">service</span> <span class="o">=</span> <span class="n">dockercloud</span><span class="o">.</span><span class="n">Service</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="s">"7eaf7fff-882c-4f3d-9a8f-a22317ac00ce"</span><span class="p">)</span>
+<span class="n">service</span><span class="o">.</span><span class="n">target_num_containers</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">service</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+<span class="n">service</span><span class="o">.</span><span class="n">scale</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight http"><code><span class="nf">POST</span> <span class="nn">/api/app/v1/service/7eaf7fff-882c-4f3d-9a8f-a22317ac00ce/scale/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">cloud.docker.com</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Basic dXNlcm5hbWU6YXBpa2V5</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+</code></pre>
+<pre class="highlight shell"><code>docker-cloud service scale 7eaf7fff-882c-4f3d-9a8f-a22317ac00ce 3
+</code></pre>
+
+<p>Scales the service to its current <code class="prettyprint">target_num_containers</code> field.</p>
+
+<h3 id="endpoint-type">Endpoint Type</h3>
+
+<p>Available in Docker Cloud&rsquo;s <strong>REST API</strong></p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST /api/app/v1/[optional_namespace/]service/(uuid)/scale/</code></p>
+
+<h3 id="path-parameters">Path Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>uuid</td>
+<td>The UUID of the service to scale</td>
+</tr>
+</tbody></table>
+
+<h2 id="redeploy-a-service">Redeploy a service</h2>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">dockercloud</span>
+
+<span class="n">service</span> <span class="o">=</span> <span class="n">dockercloud</span><span class="o">.</span><span class="n">Service</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="s">"7eaf7fff-882c-4f3d-9a8f-a22317ac00ce"</span><span class="p">)</span>
+<span class="n">service</span><span class="o">.</span><span class="n">redeploy</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight go"><code><span class="k">import</span><span class="x"> </span><span class="s">"github.com/docker/go-dockercloud/dockercloud"</span><span class="x">
+
+</span><span class="n">service</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">dockercloud</span><span class="o">.</span><span class="n">GetService</span><span class="p">(</span><span class="s">"7eaf7fff-882c-4f3d-9a8f-a22317ac00ce"</span><span class="p">)</span><span class="x">
+
+</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="c">//Redeploy(dockercloud.ReuseVolumesOption{Reuse: true}) to reuse the existing volumes</span><span class="x">
+</span><span class="c">//Redeploy(dockercloud.ReuseVolumesOption{Reuse: false}) to not reuse the existing volumes</span><span class="x">
+</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">service</span><span class="o">.</span><span class="n">Redeploy</span><span class="p">(</span><span class="n">dockercloud</span><span class="o">.</span><span class="n">ReuseVolumesOption</span><span class="p">{</span><span class="n">Reuse</span><span class="o">:</span><span class="x"> </span><span class="no">false</span><span class="p">});</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+   </span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre>
+<pre class="highlight http"><code><span class="nf">POST</span> <span class="nn">/api/app/v1/service/7eaf7fff-882c-4f3d-9a8f-a22317ac00ce/redeploy/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">cloud.docker.com</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Basic dXNlcm5hbWU6YXBpa2V5</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+</code></pre>
+<pre class="highlight shell"><code>docker-cloud service redeploy 7eaf7fff
+</code></pre>
+
+<p>Redeploys all containers in the service with the current service configuration.</p>
+
+<h3 id="endpoint-type">Endpoint Type</h3>
+
+<p>Available in Docker Cloud&rsquo;s <strong>REST API</strong></p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST /api/app/v1/[optional_namespace/]service/(uuid)/redeploy/</code></p>
+
+<h3 id="path-parameters">Path Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>uuid</td>
+<td>The UUID of the service to redeploy</td>
+</tr>
+</tbody></table>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>reuse_volumes</td>
+<td>Wheather to reuse container volumes for this redeploy operation or not (default: <code class="prettyprint">true</code>).</td>
+</tr>
+</tbody></table>
+
+<h2 id="terminate-a-service">Terminate a service</h2>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">dockercloud</span>
+
+<span class="n">service</span> <span class="o">=</span> <span class="n">dockercloud</span><span class="o">.</span><span class="n">Service</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="s">"7eaf7fff-882c-4f3d-9a8f-a22317ac00ce"</span><span class="p">)</span>
+<span class="n">service</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight go"><code><span class="k">import</span><span class="x"> </span><span class="s">"github.com/docker/go-dockercloud/dockercloud"</span><span class="x">
+
+</span><span class="n">service</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">dockercloud</span><span class="o">.</span><span class="n">GetService</span><span class="p">(</span><span class="s">"7eaf7fff-882c-4f3d-9a8f-a22317ac00ce"</span><span class="p">)</span><span class="x">
+
+</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">service</span><span class="o">.</span><span class="n">Terminate</span><span class="p">();</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+   </span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre>
+<pre class="highlight http"><code><span class="nf">DELETE</span> <span class="nn">/api/app/v1/service/7eaf7fff-882c-4f3d-9a8f-a22317ac00ce/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">cloud.docker.com</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Basic dXNlcm5hbWU6YXBpa2V5</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+</code></pre>
+<pre class="highlight shell"><code>docker-cloud service terminate 7eaf7fff
+</code></pre>
+
+<p>Terminate all the containers in a service and the service itself. This is not reversible. All the data stored in all containers of the service will be permanently deleted.</p>
+
+<h3 id="endpoint-type">Endpoint Type</h3>
+
+<p>Available in Docker Cloud&rsquo;s <strong>REST API</strong></p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">DELETE /api/app/v1/[optional_namespace/]service/(uuid)/</code></p>
+
+<h3 id="path-parameters">Path Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>uuid</td>
+<td>The UUID of the service to terminate</td>
+</tr>
+</tbody></table>
+
+      </div>
+      <div class="dark-box">
+      </div>
+    </div>
+  </body>
+</html>

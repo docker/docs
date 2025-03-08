@@ -1,0 +1,29 @@
+command: docker node
+short: Manage Swarm nodes
+long: Manage nodes.
+usage: docker node
+pname: docker
+plink: docker.yaml
+cname:
+- docker node demote
+- docker node inspect
+- docker node ls
+- docker node promote
+- docker node ps
+- docker node rm
+- docker node update
+clink:
+- docker_node_demote.yaml
+- docker_node_inspect.yaml
+- docker_node_ls.yaml
+- docker_node_promote.yaml
+- docker_node_ps.yaml
+- docker_node_rm.yaml
+- docker_node_update.yaml
+deprecated: false
+min_api_version: "1.24"
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: true
+

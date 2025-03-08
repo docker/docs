@@ -1,0 +1,31 @@
+command: docker checkpoint create
+short: Create a checkpoint from a running container
+long: Create a checkpoint from a running container
+usage: docker checkpoint create [OPTIONS] CONTAINER CHECKPOINT
+pname: docker checkpoint
+plink: docker_checkpoint.yaml
+options:
+- option: checkpoint-dir
+  value_type: string
+  description: Use a custom checkpoint storage directory
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: leave-running
+  value_type: bool
+  default_value: "false"
+  description: Leave the container running after checkpoint
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+deprecated: false
+min_api_version: "1.25"
+experimental: true
+experimentalcli: false
+kubernetes: false
+swarm: false
+

@@ -1,0 +1,93 @@
+command: docker node ls
+aliases: list
+short: List nodes in the swarm
+long: |-
+  Lists all the nodes that the Docker Swarm manager knows about. You can filter
+  using the `-f` or `--filter` flag. Refer to the [filtering](#filtering) section
+  for more information about available filter options.
+usage: docker node ls [OPTIONS]
+pname: docker node
+plink: docker_node.yaml
+options:
+- option: filter
+  shorthand: f
+  value_type: filter
+  description: Filter output based on conditions provided
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: format
+  value_type: string
+  description: Pretty-print nodes using a Go template
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: quiet
+  shorthand: q
+  value_type: bool
+  default_value: "false"
+  description: Only display IDs
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+examples: "```bash\n$ docker node ls\n\nID                           HOSTNAME        STATUS
+  \ AVAILABILITY  MANAGER STATUS\n1bcef6utixb0l0ca7gxuivsj0    swarm-worker2   Ready
+  \  Active\n38ciaotwjuritcdtn9npbnkuz    swarm-worker1   Ready   Active\ne216jshn25ckzbvmwlnh5jr3g
+  *  swarm-manager1  Ready   Active        Leader\n```\n> **Note**:\n> In the above
+  example output, there is a hidden column of `.Self` that indicates if the\n> node
+  is the same node as the current docker daemon. A `*` (e.g., `e216jshn25ckzbvmwlnh5jr3g
+  *`)\n> means this node is the current docker daemon.\n\n\n### Filtering\n\nThe filtering
+  flag (`-f` or `--filter`) format is of \"key=value\". If there is more\nthan one
+  filter, then pass multiple flags (e.g., `--filter \"foo=bar\" --filter \"bif=baz\"`)\n\nThe
+  currently supported filters are:\n\n* [id](node_ls.md#id)\n* [label](node_ls.md#label)\n*
+  [membership](node_ls.md#membership)\n* [name](node_ls.md#name)\n* [role](node_ls.md#role)\n\n####
+  id\n\nThe `id` filter matches all or part of a node's id.\n\n```bash\n$ docker node
+  ls -f id=1\n\nID                         HOSTNAME       STATUS  AVAILABILITY  MANAGER
+  STATUS\n1bcef6utixb0l0ca7gxuivsj0  swarm-worker2  Ready   Active\n```\n\n#### label\n\nThe
+  `label` filter matches nodes based on engine labels and on the presence of a `label`
+  alone or a `label` and a value. Node labels are currently not used for filtering.\n\nThe
+  following filter matches nodes with the `foo` label regardless of its value.\n\n```bash\n$
+  docker node ls -f \"label=foo\"\n\nID                         HOSTNAME       STATUS
+  \ AVAILABILITY  MANAGER STATUS\n1bcef6utixb0l0ca7gxuivsj0  swarm-worker2  Ready
+  \  Active\n```\n\n#### membership\n\nThe `membership` filter matches nodes based
+  on the presence of a `membership` and a value\n`accepted` or `pending`.\n\nThe following
+  filter matches nodes with the `membership` of `accepted`.\n\n```bash\n$ docker node
+  ls -f \"membership=accepted\"\n\nID                           HOSTNAME        STATUS
+  \ AVAILABILITY  MANAGER STATUS\n1bcef6utixb0l0ca7gxuivsj0    swarm-worker2   Ready
+  \  Active\n38ciaotwjuritcdtn9npbnkuz    swarm-worker1   Ready   Active\n```\n\n####
+  name\n\nThe `name` filter matches on all or part of a node hostname.\n\nThe following
+  filter matches the nodes with a name equal to `swarm-master` string.\n\n```bash\n$
+  docker node ls -f name=swarm-manager1\n\nID                           HOSTNAME        STATUS
+  \ AVAILABILITY  MANAGER STATUS\ne216jshn25ckzbvmwlnh5jr3g *  swarm-manager1  Ready
+  \  Active        Leader\n```\n\n#### role\n\nThe `role` filter matches nodes based
+  on the presence of a `role` and a value `worker` or `manager`.\n\nThe following
+  filter matches nodes with the `manager` role.\n\n```bash\n$ docker node ls -f \"role=manager\"\n\nID
+  \                          HOSTNAME        STATUS  AVAILABILITY  MANAGER STATUS\ne216jshn25ckzbvmwlnh5jr3g
+  *  swarm-manager1  Ready   Active        Leader\n```\n\n### Formatting\n\nThe formatting
+  options (`--format`) pretty-prints nodes output\nusing a Go template.\n\nValid placeholders
+  for the Go template are listed below:\n\nPlaceholder      | Description\n-----------------|------------------------------------------------------------------------------------------\n`.ID`
+  \           | Node ID\n`.Self`          | Node of the daemon (`true/false`, `true`indicates
+  that the node is the same as current docker daemon)\n`.Hostname`      | Node hostname\n`.Status`
+  \       | Node status\n`.Availability`  | Node availability (\"active\", \"pause\",
+  or \"drain\")\n`.ManagerStatus` | Manager status of the node\n`.TLSStatus`     |
+  TLS status of the node (\"Ready\", or \"Needs Rotation\" has TLS certificate signed
+  by an old CA)\n`.EngineVersion` | Engine version\n\nWhen using the `--format` option,
+  the `node ls` command will either\noutput the data exactly as the template declares
+  or, when using the\n`table` directive, includes column headers as well.\n\nThe following
+  example uses a template without headers and outputs the\n`ID`, `Hostname`, and `TLS
+  Status` entries separated by a colon for all nodes:\n\n```bash\n$ docker node ls
+  --format \"{{.ID}}: {{.Hostname}} {{.TLSStatus}}\"\ne216jshn25ckzbvmwlnh5jr3g: swarm-manager1
+  Ready\n35o6tiywb700jesrt3dmllaza: swarm-worker1 Needs Rotation  \n```"
+deprecated: false
+min_api_version: "1.24"
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: true
+

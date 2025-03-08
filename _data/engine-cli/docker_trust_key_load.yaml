@@ -1,0 +1,22 @@
+command: docker trust key load
+short: Load a private key file for signing
+long: Load a private key file for signing
+usage: docker trust key load [OPTIONS] KEYFILE
+pname: docker trust key
+plink: docker_trust_key.yaml
+options:
+- option: name
+  value_type: string
+  default_value: signer
+  description: Name for the loaded key
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

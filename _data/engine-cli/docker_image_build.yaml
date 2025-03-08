@@ -1,0 +1,291 @@
+command: docker image build
+short: Build an image from a Dockerfile
+long: Build an image from a Dockerfile
+usage: docker image build [OPTIONS] PATH | URL | -
+pname: docker image
+plink: docker_image.yaml
+options:
+- option: add-host
+  value_type: list
+  description: Add a custom host-to-IP mapping (host:ip)
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: build-arg
+  value_type: list
+  description: Set build-time variables
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: cache-from
+  value_type: stringSlice
+  default_value: '[]'
+  description: Images to consider as cache sources
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: cgroup-parent
+  value_type: string
+  description: Optional parent cgroup for the container
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: compress
+  value_type: bool
+  default_value: "false"
+  description: Compress the build context using gzip
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: cpu-period
+  value_type: int64
+  default_value: "0"
+  description: Limit the CPU CFS (Completely Fair Scheduler) period
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: cpu-quota
+  value_type: int64
+  default_value: "0"
+  description: Limit the CPU CFS (Completely Fair Scheduler) quota
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: cpu-shares
+  shorthand: c
+  value_type: int64
+  default_value: "0"
+  description: CPU shares (relative weight)
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: cpuset-cpus
+  value_type: string
+  description: CPUs in which to allow execution (0-3, 0,1)
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: cpuset-mems
+  value_type: string
+  description: MEMs in which to allow execution (0-3, 0,1)
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: disable-content-trust
+  value_type: bool
+  default_value: "true"
+  description: Skip image verification
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: file
+  shorthand: f
+  value_type: string
+  description: Name of the Dockerfile (Default is 'PATH/Dockerfile')
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: force-rm
+  value_type: bool
+  default_value: "false"
+  description: Always remove intermediate containers
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: iidfile
+  value_type: string
+  description: Write the image ID to the file
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: isolation
+  value_type: string
+  description: Container isolation technology
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: label
+  value_type: list
+  description: Set metadata for an image
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: memory
+  shorthand: m
+  value_type: bytes
+  default_value: "0"
+  description: Memory limit
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: memory-swap
+  value_type: bytes
+  default_value: "0"
+  description: |
+    Swap limit equal to memory plus swap: '-1' to enable unlimited swap
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: network
+  value_type: string
+  default_value: default
+  description: |
+    Set the networking mode for the RUN instructions during build
+  deprecated: false
+  min_api_version: "1.25"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: no-cache
+  value_type: bool
+  default_value: "false"
+  description: Do not use cache when building the image
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: platform
+  value_type: string
+  description: Set platform if server is multi-platform capable
+  deprecated: false
+  min_api_version: "1.32"
+  experimental: true
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: pull
+  value_type: bool
+  default_value: "false"
+  description: Always attempt to pull a newer version of the image
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: quiet
+  shorthand: q
+  value_type: bool
+  default_value: "false"
+  description: Suppress the build output and print image ID on success
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: rm
+  value_type: bool
+  default_value: "true"
+  description: Remove intermediate containers after a successful build
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: security-opt
+  value_type: stringSlice
+  default_value: '[]'
+  description: Security options
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: shm-size
+  value_type: bytes
+  default_value: "0"
+  description: Size of /dev/shm
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: squash
+  value_type: bool
+  default_value: "false"
+  description: Squash newly built layers into a single new layer
+  deprecated: false
+  min_api_version: "1.25"
+  experimental: true
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: stream
+  value_type: bool
+  default_value: "false"
+  description: Stream attaches to server to negotiate build context
+  deprecated: false
+  min_api_version: "1.31"
+  experimental: true
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: tag
+  shorthand: t
+  value_type: list
+  description: Name and optionally a tag in the 'name:tag' format
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: target
+  value_type: string
+  description: Set the target build stage to build.
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: ulimit
+  value_type: ulimit
+  default_value: '[]'
+  description: Ulimit options
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

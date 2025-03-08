@@ -1,0 +1,30 @@
+command: docker network
+short: Manage networks
+long: |-
+  Manage networks. You can use subcommands to create, inspect, list, remove,
+  prune, connect, and disconnect networks.
+usage: docker network
+pname: docker
+plink: docker.yaml
+cname:
+- docker network connect
+- docker network create
+- docker network disconnect
+- docker network inspect
+- docker network ls
+- docker network prune
+- docker network rm
+clink:
+- docker_network_connect.yaml
+- docker_network_create.yaml
+- docker_network_disconnect.yaml
+- docker_network_inspect.yaml
+- docker_network_ls.yaml
+- docker_network_prune.yaml
+- docker_network_rm.yaml
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+
