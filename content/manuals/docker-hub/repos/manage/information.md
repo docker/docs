@@ -46,7 +46,7 @@ effective in search results, driving more relevant traffic to your repository.
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
 
-2. Select **Repositories**.
+2. Select **My Hub** > **Repositories**.
 
    A list of your repositories appears.
 
@@ -86,7 +86,7 @@ Consider the following repository overview best practices.
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
 
-2. Select **Repositories**.
+2. Select **My Hub** > **Repositories**.
 
    A list of your repositories appears.
 
@@ -142,7 +142,7 @@ You can tag a repository with up to three categories.
 To edit the categories of a repository:
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
-2. Select **Repositories**.
+2. Select **My Hub** > **Repositories**.
 
    A list of your repositories appears.
 
