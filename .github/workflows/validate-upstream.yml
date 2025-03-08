@@ -6,7 +6,6 @@
 # - https://github.com/docker/buildx/blob/master/.github/workflows/docs-upstream.yml
 # - https://github.com/docker/compose/blob/main/.github/workflows/docs-upstream.yml
 name: validate-upstream
-
 on:
   workflow_call:
     inputs:
@@ -22,33 +21,25 @@ on:
       create-placeholder-stubs:
         type: boolean
         required: false
-
 env:
-  # Use edge release of buildx (latest RC, fallback to latest stable)
+#    Use edge release of buildx (latest RC,fallback to latest stable)
   SETUP_BUILDX_VERSION: edge
   SETUP_BUILDKIT_IMAGE: "moby/buildkit:latest"
-
 jobs:
   run:
-    runs-on: ubuntu-24.04
+    runs-on: windows
     steps:
-      -
         name: Checkout
         uses: actions/checkout@v4
         with:
           repository: docker/docs
-      -
         name: Download data files
         uses: actions/download-artifact@v4
         if: ${{ inputs.data-files-id != '' && inputs.data-files-folder != '' }}
         with:
           name: ${{ inputs.data-files-id }}
           path: /tmp/data/${{ inputs.data-files-folder }}
-      -
-        # Copy data files from /tmp/data/${{ inputs.data-files-folder }} to
-        # data/${{ inputs.data-files-folder }}. If create-placeholder-stubs
-        # is set to true, then check if a placeholder file exists for each data file in
-        # that folder. If not, create a placeholder stub file for the data file.
+         Copy data files from /tmp/data/${{ inputs.data-files-folder }} to data/${{ inputs.data-files-folder }}. If create-placeholder-stubs is set to true, then check if a placeholder file exists for each data file in that folder. If not, create a placeholder stub file for the data file.
         name: Copy data files
         if: ${{ inputs.data-files-id != '' && inputs.data-files-folder != '' }}
         uses: actions/github-script@v7
@@ -56,6 +47,8 @@ jobs:
           script: |
             const fs = require('fs');
             const path = require('path');
+            const glob = require('@actions/glob');
+            const core = require('@actions/core');
             const globber = await glob.create(`/tmp/data/${{ inputs.data-files-folder }}/*.yaml`);
             for await (const yamlSrcPath of globber.globGenerator()) {
               const yamlSrcFilename = path.basename(yamlSrcPath);
@@ -65,15 +58,15 @@ jobs:
               let placeholderPath = path.join("content/reference/cli", yamlSrcFilename.replace('_', '/').replace(/\.yaml$/, '.md'));
               if (hasSubCommands) {
                 placeholderPath = placeholderPath.replace('.md', '/_index.md');
-              };
+              }
               if (`${{ inputs.create-placeholder-stubs }}` && !fs.existsSync(placeholderPath)) {
                 fs.mkdirSync(path.dirname(placeholderPath), { recursive: true });
                 const placeholderContent = `---
-            datafolder: ${{ inputs.data-files-folder }}
-            datafile: ${yamlSrcFilename.replace(/\.[^/.]+$/, '')}
-            title: ${yamlSrcFilename.replace(/\.[^/.]+$/, "").replaceAll('_', ' ')}
-            layout: cli
-            ---`;
+datafolder: ${{ inputs.data-files-folder }}
+datafile: ${yamlSrcFilename.replace(/\.[^/.]+$/, '')}
+title: ${yamlSrcFilename.replace(/\.[^/.]+$/, "").replaceAll('_', ' ')}
+layout: cli
+---';'
                 await core.group(`creating ${placeholderPath}`, async () => {
                   core.info(placeholderContent);
                 });
@@ -82,14 +75,26 @@ jobs:
               core.info(`${yamlSrcPath} => ${yamlDestPath}`);
               await fs.copyFileSync(yamlSrcPath, yamlDestPath);
             }
-      -
+      datafolder: ${{ inputs.data-files-folder }}
+            datafile: ${yamlSrcFilename.replace(/\.[^/.]+$/, '')}
+            title: ${yamlSrcFilename.replace(/\.[^/.]+$/, "").replaceAll('_', ' ')}
+            layout: cli
+            ---`;';'
+                await core.group(`creating ${placeholderPath}`, async () => {
+                  core.info(placeholderContent);
+                });
+                await fs.writeFileSync(placeholderPath, placeholderContent);
+              }
+              core.info(`${yamlSrcPath} => ${yamlDestPath}`);
+              await fs.copyFileSync(yamlSrcPath, yamlDestPath);
+            }
+      +
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
         with:
           version: ${{ env.SETUP_BUILDX_VERSION }}
           driver-opts: image=${{ env.SETUP_BUILDKIT_IMAGE }}
-      -
-        name: Validate
+      + name: Validate
         uses: docker/bake-action@v6
         with:
           source: .
