@@ -61,6 +61,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Fixed an issue that caused clients other than the CLI and Docker Desktop to see a delay of 3 seconds whenever a container with port-mappings exists. See [docker/for-mac#7575](https://github.com/docker/for-mac/issues/7575)
 - Fixed a bug in the ECI Docker socket permissions which caused it to sometimes block Docker socket mounts on containers with allowed images, or images derived from allowed images.
 - Fixed a bug that prevented Docker Desktop from entering Resource Saver mode again immediately after an engine restart.
+- Fixed an issue that caused Kubernetes clusters to stop working due to expired PKI certificates
 
 #### For Mac
 
