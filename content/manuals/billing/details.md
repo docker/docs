@@ -26,6 +26,12 @@ To update your billing information:
 4. On your billing information card, select **Change**.
 5. Update your billing contact and billing address information.
 6. Optional. To add or update a VAT ID, select the **I'm purchasing as a business** checkbox and enter your Tax ID.
+
+    > [!IMPORTANT]
+    >
+    > Your VAT number must include your country prefix. For example, if you are
+    entering a VAT number for Germany, you would enter `DE123456789`.
+
 7. Select **Update**.
 
 {{< /tab >}}
@@ -38,6 +44,12 @@ To update your billing information:
 3. From the drop-down menu, select **Billing**.
 4. Select **Billing Address** and enter your updated billing information.
 5. Optional. To add or update a VAT ID, enter your **Tax ID/VAT**.
+
+    > [!IMPORTANT]
+    >
+    > Your VAT number must include your country prefix. For example, if you are
+    entering a VAT number for Germany, you would enter `DE123456789`.
+
 6. Select **Submit**.
 
 {{< /tab >}}
@@ -60,6 +72,12 @@ To update your billing information:
 4. On your billing information card, select **Change**.
 5. Update your billing contact and billing address information.
 6. Optional. To add or update a VAT ID, select the **I'm purchasing as a business** checkbox and enter your Tax ID.
+
+    > [!IMPORTANT]
+    >
+    > Your VAT number must include your country prefix. For example, if you are
+    entering a VAT number for Germany, you would enter `DE123456789`.
+
 7. Select **Update**.
 
 {{< /tab >}}
@@ -73,6 +91,12 @@ To update your billing information:
 4. Select the organization that you want to change the payment method for.
 5. Select **Billing Address**.
 6. Optional. To add or update a VAT ID, enter your **Tax ID/VAT**.
+
+    > [!IMPORTANT]
+    >
+    > Your VAT number must include your country prefix. For example, if you are
+    entering a VAT number for Germany, you would enter `DE123456789`.
+
 7. Select **Submit**.
 
 {{< /tab >}}
