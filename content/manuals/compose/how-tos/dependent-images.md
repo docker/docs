@@ -105,7 +105,7 @@ services:
          service_a: "service:a"
 ```
 
-Using additional context, you can refer to image built by another service without the need to explictly name it:
+With the `additional_contexts` attribute, you can refer to an image built by another service without needing to explicitly name it:
 
 b.Dockerfile:
 
