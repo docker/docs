@@ -5,7 +5,7 @@ description: Learn how to manage settings for your Docker account.
 keywords: accounts, docker ID, account settings, account management, docker home
 ---
 
-You can centrally manage the settings for your Docker account using Docker Home. Here you can also take administrative actions for your account and manage your account security.
+You can centrally manage your Docker account settings using Docker Home. Here you can also take administrative actions for your account and manage your account security.
 
 > [!TIP]
 >
@@ -21,7 +21,7 @@ From the Account Center page, you can take any of the following actions.
 
 ### Update account information
 
-To update your account information, select the arrow icon. You can edit the following settings here:
+Account information is visible on your account profile in Docker Hub. You can update the following account information:
 
 - Full name
 - Company
@@ -29,13 +29,11 @@ To update your account information, select the arrow icon. You can edit the foll
 - Website
 - Gravatar email: To add an avatar to your Docker account, create a [Gravatar account](https://gravatar.com/) and create your avatar. Next, add your Gravatar email to your Docker account settings. It may take some time for your avatar to update in Docker.
 
-This information is visible on your account profile in Docker Hub.
-
 Make your changes here, then select **Save** to save your settings.
 
 ### Update email address
 
-To update your email address, select **Email**.
+To update your email address, select **Email**:
 
 1. Enter your new email address.
 2. Enter your password to confirm the change.
@@ -47,9 +45,7 @@ Once you verify your email address, your account information will update.
 
 You can change your password by initiating a password reset via email.
 
-To change your password, select **Password** and then **Reset password**.
-
-Follow the instructions in the password reset email.
+To change your password, select **Password** and then **Reset password**. Follow the instructions in the password reset email.
 
 ## Manage security settings
 
@@ -58,6 +54,16 @@ For information on two-factor authentication (2FA) for your account, see [Enable
 
 To manage personal access tokens, select **Personal access tokens**.
 For information on personal access tokens, see [Create and manage access tokens](../security/for-developers/access-tokens.md).
+
+## Manage connected accounts
+
+You can unlink Google or GitHub accounts that are linked to your Docker account
+using the Account Center page:
+
+1. Select **Connected accounts**.
+2. Select **Disconnect** on your connected account.
+3. To fully unlink your Docker account, you must also unlink Docker from Google or
+GitHub. See Google or GitHub's documentation for removing third-party apps.
 
 ## Account management
 
