@@ -67,7 +67,7 @@ in the YAML configuration for your build step:
 
 ```yaml {hl_lines=4}
       - name: Build
-        uses: docker/docker-build-push-action@v6
+        uses: docker/build-push-action@v6
         env:
           DOCKER_BUILD_SUMMARY: false
         with:
@@ -83,7 +83,7 @@ your build step:
 
 ```yaml {hl_lines=4}
       - name: Build
-        uses: docker/docker-build-push-action@v6
+        uses: docker/build-push-action@v6
         env:
           DOCKER_BUILD_RECORD_UPLOAD: false
         with:

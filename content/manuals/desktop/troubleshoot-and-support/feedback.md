@@ -4,6 +4,8 @@ keywords: Feedback, Docker Desktop, Linux, Mac, Windows, Dev Environments, Exten
   Community forum, bugs, problems, issues
 title: Give feedback
 weight: 40
+aliases:
+ - /desktop/feedback/
 ---
 
 There are many ways you can provide feedback on Docker Desktop or Docker Desktop features.
