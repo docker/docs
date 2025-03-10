@@ -101,7 +101,28 @@ formatted markup, and other things. To run the tests:
 $ docker buildx bake validate
 ```
 
+or, using the Makefile:
+
+```console
+$ make validate
+```
+
 If this command doesn't result in any errors, you're good to go!
+
+#### Running Vale
+
+Vale is a tool that checks for spelling and grammar errors in your text. To run Vale
+for the content in the `content` directory, use the following command:
+
+```console
+$ make vale
+```
+
+You can also specify a different directory for Vale to check. For example:
+
+```console
+$ CONTENT_DIR="content/manuals/compose" make vale
+```
 
 ## Content not edited here
 
