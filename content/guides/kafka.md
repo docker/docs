@@ -235,7 +235,7 @@ To add it to your own project (it’s already in the demo application), you only
 ```yaml
 services:
   kafka-ui:
-    image: ghcr.io/kafbat/kafka-ui:latest
+    image: kafbat/kafka-ui:main
     ports:
       - 8080:8080
     environment:
