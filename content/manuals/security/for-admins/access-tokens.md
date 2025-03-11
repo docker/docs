@@ -87,7 +87,7 @@ To create an OAT:
    The access permissions are scopes that set restrictions in your repositories.
    For example, for Read & Write permissions, an automation pipeline can build
    an image and then push it to a repository. However, it can't delete the
-   repository. You can select one of the following options:
+   repository. Select at least one of the following options:
 
    - **Read public repositories**
    - **All repositories**: You can select **Image Push** or **Image Pull**.
