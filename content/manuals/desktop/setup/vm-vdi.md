@@ -49,7 +49,7 @@ If using Windows container mode, confirm that the Nutanix environment supports H
 
 ### Supported configurations
 
-Docker Desktop follows the VDI support definitions outlined [above](#virtual-desktop-support):
+Docker Desktop follows the VDI support definitions outlined [previously](#virtual-desktop-support):
 
  - Persistent VDI environments (Supported): You receive the same virtual desktop instance across sessions, preserving installed software and configurations.
 

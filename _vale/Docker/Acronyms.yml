@@ -145,6 +145,7 @@ exceptions:
   - UTS
   - UUID
   - VAT
+  - VDI
   - VIP
   - VLAN
   - VM
