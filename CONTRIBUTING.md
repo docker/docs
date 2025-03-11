@@ -101,12 +101,6 @@ formatted markup, and other things. To run the tests:
 $ docker buildx bake validate
 ```
 
-or, using the Makefile:
-
-```console
-$ make validate
-```
-
 If this command doesn't result in any errors, you're good to go!
 
 #### Running Vale

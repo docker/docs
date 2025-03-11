@@ -13,10 +13,6 @@ vale: ## run vale
 		-e PIP_BREAK_SYSTEM_PACKAGES=1 \
 		$(VALE_IMAGE) $(CONTENT_DIR)
 
-.PHONY: validate
-validate: ## run validations
-	docker buildx bake validate
-
 .PHONY: vendor
 vendor: ## vendor hugo modules
 	./hack/vendor
