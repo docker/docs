@@ -33,6 +33,14 @@ Docker also sends an email notification `Action Required - Credit Card Payment F
 
 Once the grace period is over and the invoice is still not paid, the subscription downgrades to a free plan and all paid features are disabled.
 
+### Can I manually retry a failed payment?
+
+No. Docker retries failed payments on a [retry schedule](/manuals/billing/faqs.md#what-happens-if-my-subscription-payment-fails).
+
+To ensure a retired payment is successful, verify your default payment is
+updated. If you need to update your default payment method, see
+[Manage payment method](/manuals/billing/payment-method.md#manage-payment-method).
+
 ### Does Docker collect sales tax and/or VAT?
 
 Docker began collecting sales tax on subscription fees for United States customers on July 1, 2024. For European customers, Docker will begin collecting VAT on March 1, 2025.

@@ -18,7 +18,7 @@ The MSI package supports various MDM (Mobile Device Management) solutions, makin
 ## Install interactively
 
 1. In the [Docker Admin Console](http://admin.docker.com/), navigate to your organization.
-2. Under **Security and access**, select the **Deploy Docker Desktop** page.
+2. Under **Docker Desktop**, select the **Deploy** page.
 3. From the **Windows OS** tab, select the **Download MSI installer** button.
 4. Once downloaded, double-click `Docker Desktop Installer.msi` to run the installer.
 5. Once you've accepted the license agreement, you can choose the install location. By default, Docker Desktop is installed at `C:\Program Files\Docker\Docker`.
@@ -44,7 +44,7 @@ If your administrator account is different to your user account, you must add th
 >
 > When installing Docker Desktop with the MSI, in-app updates are automatically disabled. This feature ensures your organization maintains the required Docker Desktop version. For Docker Desktop installed with the .exe installer, in-app updates remain supported.
 >
-> Docker Desktop notifies you when an update is available. To update Docker Desktop, download the latest installer from the Docker Admin Console. Navigate to the  **Deploy Docker Desktop** page > under **Security and access**.
+> Docker Desktop notifies you when an update is available. To update Docker Desktop, download the latest installer from the Docker Admin Console. Navigate to the  **Deploy** page > under **Docker Desktop**.
 >
 > To keep up to date with new releases, check the [release notes](/manuals/desktop/release-notes.md) page.
 
@@ -117,7 +117,7 @@ msiexec /i "DockerDesktop.msi" /L*V ".\msi.log" /passive /norestart
 > [!TIP]
 >
 > Some useful tips to remember when creating a value that expects a JSON string as it’s value:
-> 
+>
 > - The property expects a JSON formatted string
 > - The string should be wrapped in double quotes
 > - The string shouldn't contain any whitespace
@@ -174,7 +174,7 @@ msiexec /x "DockerDesktop.msi" /L*V ".\msi.log" /quiet
 msiexec /x "DockerDesktop.msi" /quiet
 ```
 
-### Configuration options 
+### Configuration options
 
 > [!IMPORTANT]
 >
@@ -184,7 +184,7 @@ msiexec /x "DockerDesktop.msi" /quiet
 | :--- | :--- | :--- |
 | `ENABLEDESKTOPSHORTCUT` | Creates a desktop shortcut. | 1 |
 | `INSTALLFOLDER` | Specifies a custom location where Docker Desktop will be installed. | C:\Program Files\Docker |
-| `ADMINSETTINGS` | Automatically creates an `admin-settings.json` file which is used to [control certain Docker Desktop settings](/manuals/security/for-admins/hardened-desktop/settings-management/_index.md) on client machines within organizations. It must be used together with the `ALLOWEDORG` property. | None |
+| `ADMINSETTINGS` | Automatically creates an `admin-settings.json` file which is used to [control certain Docker Desktop settings](/manuals/security/for-admins/hardened-desktop/settings-management/_index.md) on client machines within organizations. It must be used together with the `ALLOWEDORG` property. | None |
 | `ALLOWEDORG` | Requires the user to sign in and be part of the specified Docker Hub organization when running the application. This creates a registry key called `allowedOrgs` in `HKLM\Software\Policies\Docker\Docker Desktop`. | None |
 | `ALWAYSRUNSERVICE` | Lets users switch to Windows containers without needing admin rights | 0 |
 | `DISABLEWINDOWSCONTAINERS` | Disables the Windows containers integration | 0 |
@@ -206,7 +206,7 @@ By default, the installer reboots the machine after a successful installation. W
 
 ## Analytics
 
-The MSI installer collects anonymous usage statistics to better understand user behaviour and to improve the user experience by identifying and addressing issues or optimizing popular features.
+The MSI installer collects anonymous usage statistics relating to install only. This is to better understand user behaviour and to improve the user experience by identifying and addressing issues or optimizing popular features.
 
 ### How to opt-out
 

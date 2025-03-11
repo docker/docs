@@ -13,11 +13,11 @@ params:
 
 {{< summary-bar feature_name="Docker Desktop CLI" >}}
 
-The Docker Desktop CLI lets you perform key operations such as starting, stopping, restarting, and checking the status of Docker Desktop directly from the command line.
+The Docker Desktop CLI lets you perform key operations such as starting, stopping, restarting, and updating Docker Desktop directly from the command line.
 
 The Docker Desktop CLI provides:
 
-- Enhanced automation and CI/CD integration: Perform Docker Desktop operations directly in CI/CD pipelines for better workflow automation.
+- Simplified automation for local development: Execute Docker Desktop operations more efficiently in scripts and tests. 
 - An improved developer experience: Restart, quit, or reset Docker Desktop from the command line, reducing dependency on the Docker Desktop Dashboard and improving flexibility and efficiency.
 
 ## Usage
@@ -36,7 +36,8 @@ docker desktop COMMAND [OPTIONS]
 | `status`             | Displays whether Docker Desktop is running or stopped.       |
 | `engine ls`          | Lists available engines (Windows only)   |
 | `engine use`         | Switch between Linux and Windows containers (Windows only) |
-| `update`             | Manage Docker Desktop updates. Available for Mac only and with Docker Desktop version 4.38 and later. |
+| `update`             | Manage Docker Desktop updates. Available for Mac only with Docker Desktop version 4.38, or all OSs with Docker Desktop version 4.39 and later. |
+| `logs`               | Print log entries                        |
 
 
 For more details on each command, see the [Docker Desktop CLI reference](/reference/cli/docker/desktop/_index.md).

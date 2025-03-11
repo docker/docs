@@ -74,7 +74,7 @@ Specifies the path to a Compose file. Specifying multiple Compose files is suppo
    For example:
 
       ```console
-      COMPOSE_FILE=docker-compose.yml:docker-compose.prod.yml
+      COMPOSE_FILE=compose.yaml:compose.prod.yaml
       ```  
    The path separator can also be customized using [`COMPOSE_PATH_SEPARATOR`](#compose_path_separator).  
 

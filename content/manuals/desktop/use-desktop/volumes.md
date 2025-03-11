@@ -119,7 +119,7 @@ To empty a volume:
 
 ## Export a volume
 
-You can export the content of a volume to a local file, a local image, an to an
+You can export the content of a volume to a local file, a local image, and to an
 image in Docker Hub, or to a supported cloud provider. When exporting content
 from a volume used by one or more running containers, the containers are
 temporarily stopped while Docker exports the content, and then restarted when

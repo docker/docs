@@ -289,7 +289,7 @@ For more detailed information, see the [release notes in the Compose repo](https
 
 - Fixed the docs on `docker compose kill` usage.
 - Fixed redundant condition from `toAPIBuildOptions` in build.go.
-- Fixed initial Watch `sync` after Compose restarts with introduction of `x-initSync`.
+- Fixed initial Watch `sync` after Compose restarts with introduction of `x-initialSync`.
 - Fixed an issue which stopped the Compose process for a single container on `sync-restart` Watch action.
 
 ## 2.29.1

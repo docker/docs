@@ -19,18 +19,6 @@ Docker Desktop uses the Windows Hyper-V features. While older Windows versions h
 
 No, running Docker Desktop on Windows Server is not supported.
 
-### Can I change permissions on shared volumes for container-specific deployment requirements?
-
-Docker Desktop does not enable you to control (`chmod`)
-the Unix-style permissions on [shared volumes](/manuals/desktop/settings-and-maintenance/settings.md#file-sharing) for
-deployed containers, but rather sets permissions to a default value of
-[0777](https://chmodcommand.com/chmod-0777/)
-(`read`, `write`, `execute` permissions for `user` and for
-`group`) which is not configurable.
-
-For workarounds and to learn more, see
-[Permissions errors on data directories for shared volumes](/manuals/desktop/troubleshoot-and-support/troubleshoot/topics.md#permissions-errors-on-data-directories-for-shared-volumes).
-
 ### How do symlinks work on Windows?
 
 Docker Desktop supports two types of symlinks: Windows native symlinks and symlinks created inside a container.

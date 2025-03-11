@@ -55,7 +55,7 @@ _For checksums, see [Release notes](/manuals/desktop/release-notes.md)_
   WSL 2 on Windows 10 or Windows 11:
   - 64-bit processor with [Second Level Address Translation (SLAT)](https://en.wikipedia.org/wiki/Second_Level_Address_Translation)
   - 4GB system RAM
-  - Enable hardware virtualization in BIOS. For more information, see
+  - Enable hardware virtualization in BIOS/UEFI. For more information, see
     [Virtualization](/manuals/desktop/troubleshoot-and-support/troubleshoot/topics.md#virtualization).
 
 For more information on setting up WSL 2 with Docker Desktop, see [WSL](/manuals/desktop/features/wsl/_index.md).
@@ -80,8 +80,8 @@ For more information on setting up WSL 2 with Docker Desktop, see [WSL](/manuals
 
   - 64 bit processor with [Second Level Address Translation (SLAT)](https://en.wikipedia.org/wiki/Second_Level_Address_Translation)
   - 4GB system RAM
-  - Turn on BIOS-level hardware virtualization support in the
-    BIOS settings. For more information, see
+  - Turn on BIOS/UEFI-level hardware virtualization support in the
+    BIOS/UEFI settings. For more information, see
     [Virtualization](/manuals/desktop/troubleshoot-and-support/troubleshoot/topics.md#virtualization).
 
 > [!NOTE]
@@ -105,7 +105,7 @@ For more information on setting up WSL 2 with Docker Desktop, see [WSL](/manuals
   WSL 2 on Windows 10 or Windows 11:
   - 64-bit processor with [Second Level Address Translation (SLAT)](https://en.wikipedia.org/wiki/Second_Level_Address_Translation)
   - 4GB system RAM
-  - Enable hardware virtualization in BIOS. For more information, see
+  - Enable hardware virtualization in BIOS/UEFI. For more information, see
     [Virtualization](/manuals/desktop/troubleshoot-and-support/troubleshoot/topics.md#virtualization).
 
 > [!IMPORTANT]

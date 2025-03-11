@@ -317,5 +317,4 @@ to learn how to view the Docker Daemon logs.
 ## Further resources
 
 - View specific [troubleshoot topics](topics.md).
-- Implement [workarounds for common problems](workarounds.md)
 - View information on [known issues](known-issues.md)

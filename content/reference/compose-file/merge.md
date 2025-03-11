@@ -161,7 +161,7 @@ services:
       FOO: BAR           
 ```
 
-And an `compose.override.yaml` file:
+And a `compose.override.yaml` file:
 
 ```yaml
 services:

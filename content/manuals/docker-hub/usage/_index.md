@@ -22,10 +22,7 @@ user type, subject to fair use:
 | Personal (authenticated) | 100                                    | Unlimited           | Up to 1              |
 | Unauthenticated users    | 10 per IPv4 address or IPv6 /64 subnet | Not applicable      | Not applicable       |
 
-For more details, see the following:
-
-- [Pull usage and limits](./pulls.md)
-- [Docker Hub repositories](./repositories.md)
+For more details, see [Pull usage and limits](./pulls.md).
 
 ## Fair use
 
