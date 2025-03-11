@@ -23,10 +23,10 @@
 
 <div class="flex flex-col bg-gray-light-200 bg-opacity-75 dark:bg-gray-dark-300 dark:bg-opacity-75 border-l-4 border-gray-light-200 px-4 py-1 my-1 not-prose">
   {{ with $feature.subscription }}
-  <div class="flex flex-wrap items-start gap-1">
-      <span class="font-bold whitespace-nowrap">Subscription:</span>
+  <div class="flex flex-wrap gap-1">
+      <span class="font-bold">Subscription:</span>
       {{ range . }}
-      <span class="flex-1">{{ . }}</span>
+      <span>{{ . }}</span>
       <span class="icon-svg">
           {{ $icon := index $subscriptionIcons . }}
           {{ if $icon }}
@@ -41,9 +41,9 @@
 
   {{ with $feature.availability }}
   {{ $availabilityText := . }}
-  <div class="flex flex-wrap items-start gap-1">
-      <span class="font-bold whitespace-nowrap">Availability:</span>
-      <span class="flex-1">
+  <div class="flex flex-wrap gap-1">
+      <span class="font-bold">Availability:</span>
+      <span>
           {{ $availabilityText }}
           {{ range $key, $icon := $availabilityIcons }}
             {{ if in $availabilityText $key }}
@@ -55,9 +55,9 @@
 {{ end }}
 
   {{ with $feature.requires }}
-  <div class="flex flex-wrap items-start gap-1">
-      <span class="font-bold whitespace-nowrap">Requires:</span>
-      <span class="flex-1">{{ . | markdownify }}</span>
+  <div class="flex flex-wrap gap-1">
+      <span class="font-bold">Requires:</span>
+      <span>{{ . | markdownify }}</span>
       <span class="icon-svg">
           {{ partial "icon" $requiresIcon }}
       </span>
@@ -65,9 +65,9 @@
   {{ end }}
 
   {{ with $feature.for }}
-  <div class="flex flex-wrap items-start gap-1">
-      <span class="font-bold whitespace-nowrap">For:</span>
-      <span class="flex-1">{{ . }}</span>
+  <div class="flex flex-wrap gap-1">
+      <span class="font-bold">For:</span>
+      <span>{{ . }}</span>
       <span class="icon-svg">
           {{ partial "icon" $forIcon }}
       </span>
