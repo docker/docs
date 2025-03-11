@@ -40,3 +40,23 @@ For steps on how to expose hardware-assisted virtualization to the guest OS, [se
 Nested virtualization is supported by Microsoft for running Hyper-V inside an Azure VM.
 
 For Azure virtual machines, [check that the VM size chosen supports nested virtualization](https://docs.microsoft.com/en-us/azure/virtual-machines/sizes). Microsoft provides [a helpful list on Azure VM sizes](https://docs.microsoft.com/en-us/azure/virtual-machines/acu) and highlights the sizes that currently support nested virtualization. For internal testing, we used D4s_v5 machines. We recommend this specification or above for optimal performance of Docker Desktop.
+
+## Docker Desktop support on Nutanix-powered VDI
+
+Docker Desktop can be used within Nutanix-powered VDI environments provided that the underlying Windows environment supports WSL 2 or Windows container mode. Since Nutanix officially supports WSL 2, Docker Desktop should function as expected, as long as WSL 2 operates correctly within the VDI environment.
+
+If using Windows container mode, confirm that the Nutanix environment supports Hyper-V or alternative Windows container backends.
+
+### Supported configurations
+
+Docker Desktop follows the VDI support definitions outlined [above](#virtual-desktop-support):
+
+ - Persistent VDI environments (Supported): You receive the same virtual desktop instance across sessions, preserving installed software and configurations.
+
+ - Non-persistent VDI environments (Not supported): Docker Desktop does not support environments where the OS resets between sessions, requiring re-installation or reconfiguration each time. 
+
+### Support scope and responsibilities
+
+If WSL 2 encounters issues - it crashes, fails to start, or experiences performance degradation, for example - contact Nutanix support.
+
+If Docker Desktop itself encounters issues, contact Docker support.
