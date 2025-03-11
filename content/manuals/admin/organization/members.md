@@ -69,6 +69,9 @@ To resend an invitation from Docker Hub:
 **Resend invitation**.
 4. Select **Invite** to confirm.
 
+You can also resend an invitation using the Docker Hub API. For more information,
+see the [Resend an invite](https://docs.docker.com/reference/api/hub/latest/#tag/invites/paths/~1v2~1invites~1%7Bid%7D~1resend/patch) API endpoint.
+
 {{< /tab >}}
 {{< tab name="Admin Console" >}}
 
@@ -93,6 +96,9 @@ To remove a member's invitation from Docker Hub:
 2. Select **Organizations**, your organization, and then **Members**.
 3. In the table, select the **Action** icon, and then select **Remove member** or **Remove invitee**.
 4. Follow the on-screen instructions to remove the member or invitee.
+
+You can also remove an invitation using the Docker Hub API. For more information,
+see the [Cancel an invite](https://docs.docker.com/reference/api/hub/latest/#tag/invites/paths/~1v2~1invites~1%7Bid%7D/delete) API endpoint.
 
 {{< /tab >}}
 {{< tab name="Admin Console" >}}
