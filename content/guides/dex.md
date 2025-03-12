@@ -112,7 +112,7 @@ docker-compose logs -f dex
 ```
 You should see output indicating that Dex is listening on the specified port.
 
-#### Using Dex OAuth testing in GHA
+### Using Dex OAuth testing in GHA
 
 To test the OAuth flow, you'll need a client application configured to authenticate against Dex. One of the most typical use cases is to use it inside Github Actions. Since Dex supports mock authentication, you can predefine test users as suggests in the [docs](https://dexidp.io/docs). The `config.yaml` file should looks like:
 
@@ -159,7 +159,8 @@ jobs:
           nohup ./dex serve config.yaml > dex.log 2>&1 &
           sleep 5  # Give Dex time to start
 [...]
-
 ```
 
 
+### Conclusion
+By following this guide, you've set up Dex as an OAuth mock server using Docker. This setup is invaluable for testing and development, allowing you to simulate OAuth flows without relying on external identity providers. For more advanced configurations and integrations, refer to the [Dex documentation](https://dexidp.io/docs/).
