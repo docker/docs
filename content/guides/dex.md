@@ -17,7 +17,7 @@ Nowadays OAuth is the preferred choice to authenticate in web services, the high
 In this guide, you'll learn how to:
 
 - Use Docker to launch up a Dex container.
-- Use mock OAuth in the local development without relying on an external OAuth provider.
+- Use mock OAuth in the GHA without relying on an external OAuth provider.
 
 ## Using Dex with Docker
 
@@ -44,7 +44,6 @@ dex-mock-server/
 ```
 
 Create the Dex Configuration File:
-
 The config.yaml file defines Dex's settings, including connectors, clients, and storage. For a mock server setup, you can use the following minimal configuration:
 
 ```yaml
@@ -69,7 +68,6 @@ staticPasswords:
 ```
 
 Explanation:
-
 - issuer: The public URL for Dex.
 
 - storage: Using in-memory storage for simplicity.
@@ -83,15 +81,9 @@ Explanation:
 - staticPasswords: Defines a static user for authentication. The hash is a bcrypt hash of the password.
 
 > Note: Ensure the hash is a valid bcrypt hash of your desired password. You can generate this using tools like [bcrypt-generator.com](https://bcrypt-generator.com/)
-or use CLI tools like [htpasswd](https://httpd.apache.org/docs/2.4/programs/htpasswd.html) like in this following example:
-```bash
-echo password | htpasswd -BinC 10 admin | cut -d: -f2
-```
-
-Running Dex
+or use CLI tools like [htpasswd](https://httpd.apache.org/docs/2.4/programs/htpasswd.html) like in this following example:`echo password | htpasswd -BinC 10 admin | cut -d: -f2`
 
 With Docker Compose configured, start Dex:
-
 ```yaml
 # docker-compose.yaml
 
@@ -115,16 +107,59 @@ This command will download the Dex Docker image (if not already available) and s
 
 
 To Verify that Dex is running, check the logs to ensure Dex started successfully:
-
 ```bash
 docker-compose logs -f dex
 ```
 You should see output indicating that Dex is listening on the specified port.
 
-Testing the OAuth Flow
-Prepare a Test Application:
+#### Using Dex OAuth testing in GHA
 
-To test the OAuth flow, you'll need a client application configured to authenticate against Dex. Dex provides an example app that you can use for this purpose.
+To test the OAuth flow, you'll need a client application configured to authenticate against Dex. One of the most typical use cases is to use it inside Github Actions. Since Dex supports mock authentication, you can predefine test users as suggests in the [docs](https://dexidp.io/docs). The `config.yaml` file should looks like:
 
-Clone the Dex Repository:
+```yaml
+issuer: http://127.0.0.1:5556/dex
+
+storage:
+  type: memory
+
+web:
+  http: 0.0.0.0:5556
+
+oauth2:
+  skipApprovalScreen: true
+
+staticClients:
+  - name: TestClient
+    id: client_test_id
+    secret: client_test_secret
+    redirectURIs:
+      - http://{ip-your-app}/path/to/callback/ # example: http://localhost:5555/callback
+
+connectors:
+# mockCallback connector always returns the user 'kilgore@kilgore.trout'.
+- type: mockCallback
+  id: mock
+  name: Mock
+```
+Now you can insert the Dex service inside your `~/.github/workflows/ci.yaml` file:
+
+```yaml
+[...]
+jobs:
+  test-oauth:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Dex
+        run: |
+          curl -L https://github.com/dexidp/dex/releases/download/v2.37.0/dex_linux_amd64 -o dex
+          chmod +x dex
+
+      - name: Start Dex Server
+        run: |
+          nohup ./dex serve config.yaml > dex.log 2>&1 &
+          sleep 5  # Give Dex time to start
+[...]
+
+```
+
 
