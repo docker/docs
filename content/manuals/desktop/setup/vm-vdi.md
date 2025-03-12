@@ -57,6 +57,6 @@ Docker Desktop follows the VDI support definitions outlined [previously](#virtua
 
 ### Support scope and responsibilities
 
-If WSL 2 encounters issues - it crashes, fails to start, or experiences performance degradation, for example - contact Nutanix support.
+If WSL 2 encounters issues - for example, it crashes, fails to start, or experiences performance degradation - contact Nutanix support.
 
 If Docker Desktop itself encounters issues, contact Docker support.
