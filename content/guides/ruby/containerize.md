@@ -24,7 +24,7 @@ Starting from Rails 7.1 [Docker is supported out of the box](https://guides.ruby
 
 If you have an existing Rails application, you will need to create the Docker assets manually. Unfortunately `docker init` command does not yet support Rails. This means that if you are working with Rails, you'll need to copy Dockerfile and other related configurations manually from the examples below.
 
-## Initialize Docker assets
+## 1. Initialize Docker assets
 
 Rails 7.1 generates multistage Dockerfile out of the box, below is an example of such file generated from a Rails template.
 
@@ -232,7 +232,7 @@ To learn more about the files, see the following:
 - [compose.yaml](/reference/compose-file/_index.md)
 - [docker-entrypoint](/reference/dockerfile/#entrypoint)
 
-## Run the application
+## 2. Run the application
 
 To run the application, run the following command in a terminal inside the application's directory.
 
@@ -244,7 +244,7 @@ Open a browser and view the application at [http://localhost:3000](http://localh
 
 In the terminal, press `ctrl`+`c` to stop the application.
 
-### Run the application in the background
+## 3. Run the application in the background
 
 You can run the application detached from the terminal by adding the `-d`
 option. Inside the `docker-ruby-on-rails` directory, run the following command
@@ -278,5 +278,4 @@ Related information:
 
 ## Next steps
 
-In the next section, you'll learn how you can develop your application using
-containers.
+In the next section, you'll take a look at how to set up a CI/CD pipeline using GitHub Actions.
