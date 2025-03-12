@@ -754,15 +754,15 @@ paths:
       description: |
         Returns a list of members for an organization.
 
-        <span class="oat"></span>
-        
         _The following fields are only visible to orgs with insights enabled._
 
         - `last_logged_in_at`
         - `last_seen_at`
         - `last_desktop_version`
 
-        To enable this, please see [View Insights for organization users](https://docs.docker.com/admin/organization/insights/#view-insights-for-organization-users).
+        To make visible, please see [View Insights for organization users](https://docs.docker.com/admin/organization/insights/#view-insights-for-organization-users).
+
+        <span class="oat"></span>
       tags:
         - orgs
       security: 
