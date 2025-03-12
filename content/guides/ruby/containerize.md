@@ -278,5 +278,4 @@ Related information:
 
 ## Next steps
 
-In the next section, you'll learn how you can develop your application using
-containers.
+In the next section, you'll take a look at how to set up a CI/CD pipeline using GitHub Actions.

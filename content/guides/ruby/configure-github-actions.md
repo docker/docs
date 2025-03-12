@@ -18,7 +18,7 @@ If you didn't create a [GitHub repository](https://github.com/new) for your proj
 
 1. In your project's GitHub repository, open **Settings**, and go to **Secrets and variables** > **Actions**.
 
-2. Under the `Variables` tab, create a new **Repository variable** named `DOCKER_USERNAME` and your Docker ID as a value.
+2. Under the **Variables** tab, create a new **Repository variable** named `DOCKER_USERNAME` and your Docker ID as a value.
 
 3. Create a new [Personal Access Token (PAT)](/manuals/security/for-developers/access-tokens.md#create-an-access-token) for Docker Hub. You can name this token `docker-tutorial`. Make sure access permissions include Read and Write.
 
@@ -44,7 +44,7 @@ If you prefer to use the GitHub web interface, follow these steps:
 
 2. Select **set up a workflow yourself**.
 
-   This takes you to a page for creating a new GitHub actions workflow file in
+   This takes you to a page for creating a new GitHub Actions workflow file in
    your repository. By default, the file is created under `.github/workflows/main.yml`, let's change it name to `build.yml`.
 
 If you prefer to use your text editor, create a new file named `build.yml` in the `.github/workflows/` directory of your repository.
@@ -107,4 +107,5 @@ Related information:
 
 ## Next steps
 
-Next, learn how you can locally test and debug your workloads on Kubernetes before deploying.
+In the next section, you'll learn how you can develop your application using containers.
+
