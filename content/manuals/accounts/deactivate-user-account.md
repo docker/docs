@@ -5,7 +5,7 @@ description: Learn how to deactivate a Docker user account.
 keywords: Docker Hub, delete, deactivate, account, account management
 ---
 
-You can deactivate an account at any time. This section describes the prerequisites and steps to deactivate a user account. For information on deactivating an organization, see [Deactivating an organization](../admin/deactivate-account.md).
+You can deactivate an account at any time. This section describes the prerequisites and steps to deactivate a user account. For information on deactivating an organization, see [Deactivating an organization](../admin/organizations/deactivate-account.md).
 
 >[!WARNING]
 >
