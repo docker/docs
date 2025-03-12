@@ -25,7 +25,7 @@ dependencies, and any other file system objects required.
 Clone the sample application to use with this guide. Open a terminal, change directory to a directory that you want to work in, and run the following command to clone the repository:
 
 ```console
-$ git clone https://github.com/docker/docker-rust-hello
+$ git clone https://github.com/docker/docker-rust-hello && cd docker-rust-hello
 ```
 
 ## Create a Dockerfile for Rust

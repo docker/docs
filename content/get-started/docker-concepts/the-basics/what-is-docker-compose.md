@@ -59,12 +59,13 @@ Follow the instructions to run the to-do list app on your system.
     When you run this command, you should see an output like this:
 
     ```console
-    [+] Running 4/4
-    ✔ app 3 layers [⣿⣿⣿]      0B/0B            Pulled           7.1s
+    [+] Running 5/5
+    ✔ app 3 layers [⣿⣿⣿]      0B/0B            Pulled          7.1s
       ✔ e6f4e57cc59e Download complete                          0.9s
       ✔ df998480d81d Download complete                          1.0s
       ✔ 31e174fedd23 Download complete                          2.5s
-    [+] Running 2/4
+      ✔ 43c47a581c29 Download complete                          2.0s
+    [+] Running 4/4
       ⠸ Network todo-list-app_default           Created         0.3s
       ⠸ Volume "todo-list-app_todo-mysql-data"  Created         0.3s
       ✔ Container todo-list-app-app-1           Started         0.3s
@@ -102,7 +103,7 @@ Since this application was started using Docker Compose, it's easy to tear it al
     You'll see output similar to the following:
 
     ```console
-    [+] Running 2/2
+    [+] Running 3/3
     ✔ Container todo-list-app-mysql-1  Removed        2.9s
     ✔ Container todo-list-app-app-1    Removed        0.1s
     ✔ Network todo-list-app_default    Removed        0.1s
@@ -116,6 +117,8 @@ Since this application was started using Docker Compose, it's easy to tear it al
     >
     > ```console
     > docker compose down --volumes
+    > [+] Running 1/0
+    > ✔ Volume todo-list-app_todo-mysql-data  Removed
     > ```
 
 2. Alternatively, you can use the Docker Desktop GUI to remove the containers by selecting the application stack and selecting the **Delete** button.

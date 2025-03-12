@@ -4,32 +4,27 @@ keywords: Docker Hub, pulls, usage, limit
 title: Docker Hub pull usage and limits
 linkTitle: Pulls
 weight: 10
+aliases:
+  - /docker-hub/usage/storage/
+  - /docker-hub/usage/repositories/
 ---
 
-{{< include "hub-limits.md" >}}
+{{% include "hub-limits.md" %}}
 
 Unauthenticated and Docker Personal users are subject to hourly pull rate limits
-on Docker Hub. In contrast, Docker Pro, Team, and Business users benefit from a
-base number of included pulls per month without hourly rate restrictions. This
-included usage is flexible, allowing you to scale or upgrade your subscription
-to accommodate additional pulls or utilize on-demand pulls as needed.
-
-Any pulls exceeding the included amounts in each subscription tier will be
-charged at an on-demand rate. To increase your monthly pull allowance and avoid
-on-demand charges, you can [scale](/manuals/subscription/scale.md) or
-[upgrade](/manuals/subscription/change.md) your subscription.
+on Docker Hub. In contrast, Docker Pro, Team, and Business users benefit from
+unlimited pulls per hour.
 
 The following pull usage and limits apply based on your subscription, subject to
 fair use:
 
-
-| User type                | Pulls per month | Pull rate limit per hour |
-|--------------------------|-----------------|--------------------------|
-| Business (authenticated) | 1M              | Unlimited                |
-| Team (authenticated)     | 100K            | Unlimited                |
-| Pro (authenticated)      | 25K             | Unlimited                |
-| Personal (authenticated) | Not applicable  | 40                       |
-| Unauthenticated Users    | Not applicable  | 10 per IP address        |
+| User type                | Pull rate limit per hour               |
+|--------------------------|----------------------------------------|
+| Business (authenticated) | Unlimited                              |
+| Team (authenticated)     | Unlimited                              |
+| Pro (authenticated)      | Unlimited                              |
+| Personal (authenticated) | 100                                     |
+| Unauthenticated Users    | 10 per IPv4 address or IPv6 /64 subnet |
 
 ## Pull definition
 
@@ -48,8 +43,7 @@ A pull is defined as the following:
 ## Pull attribution
 
 Pulls from authenticated users can be attributed to either a personal or an
-organization
-[namespace](/reference/glossary/#organization-name).
+[organization namespace](/manuals/admin/faqs/general-faqs.md#whats-an-organization-name-or-namespace).
 
 Attribution is based on the following:
 
@@ -71,9 +65,6 @@ Attribution is based on the following:
   organizations under the company, the pull is attributed to the user's personal
   namespace.
 
-When pulling Docker Verified Publisher images, attribution towards rate limiting
-is not applied. For more details, see [Docker Verified Publisher
-Program](/manuals/docker-hub/repos/manage/trusted-content/dvp-program.md).
 
 ### Authentication
 
@@ -121,6 +112,13 @@ for information on authentication.
 
 If you're using any third-party platforms, follow your provider’s instructions on using registry authentication.
 
+> [!NOTE]
+>
+> When pulling images via a third-party platform, the platform may use the same
+> IPv4 address or IPv6 /64 subnet to pull images for multiple users. Even if you
+> are authenticated, pulls attributed to a single IPv4 address or IPv6 /64 subnet
+> may cause [abuse rate limiting](./_index.md#abuse-rate-limit).
+
 - [Artifactory](https://www.jfrog.com/confluence/display/JFROG/Advanced+Settings#AdvancedSettings-RemoteCredentials)
 - [AWS CodeBuild](https://aws.amazon.com/blogs/devops/how-to-use-docker-images-from-a-private-registry-in-aws-codebuild-for-your-build-environment/)
 - [AWS ECS/Fargate](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/private-auth.html)
@@ -153,7 +151,6 @@ separated file with the following detailed information.
 | `version_checks`     | The number of version checks accumulated for the date and hour of each image repository. Depending on the client, a pull can do a version check to verify the existence of an image or tag without downloading it. | This helps identify the frequency of version checks, which you can use to analyze usage trends and potential unexpected behaviors.                                                  |
 | `pulls`              | The number of pulls accumulated for the date and hour of each image repository.                                                                                                                                            | This helps identify the frequency of repository pulls, which you can use to analyze usage trends and potential unexpected behaviors.                                                |
 
-
 ## View hourly pull rate and limit
 
 The pull rate limit is calculated on a per hour basis. There is no pull rate
@@ -184,8 +181,8 @@ To view your current pull rate and limit:
       $ TOKEN=$(curl "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
       ```
 
-   - To get a token with a user account, if you are authenticated (insert your
-     username and password in the following command):
+   - To get a token with a user account, if you are authenticated, insert your
+     username and password in the following command:
 
       ```console
       $ TOKEN=$(curl --user 'username:password' "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
@@ -203,16 +200,17 @@ To view your current pull rate and limit:
 3. Examine the headers. You should see the following headers.
 
    ```text
-   ratelimit-limit: 100;w=21600
-   ratelimit-remaining: 76;w=21600
+   ratelimit-limit: 100;w=3600
+   ratelimit-remaining: 20;w=3600
    docker-ratelimit-source: 192.0.2.1
    ```
 
-   In the previous example, the pull limit is 100 pulls per 21600 seconds (6
-   hours), and there are 76 pulls remaining.
+   In the previous example, the pull limit is 100 pulls per 3600 seconds (1
+   hour), and there are 20 pulls remaining.
 
    If you don't see any `ratelimit` header, it could be because the image or your IP
    is unlimited in partnership with a publisher, provider, or an open source
    organization. It could also mean that the user you are pulling as is part of a
    paid Docker plan. Pulling that image won't count toward pull rate limits if you
    don't see these headers.
+

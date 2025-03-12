@@ -10,12 +10,14 @@ cname:
     - docker buildx history ls
     - docker buildx history open
     - docker buildx history rm
+    - docker buildx history trace
 clink:
     - docker_buildx_history_inspect.yaml
     - docker_buildx_history_logs.yaml
     - docker_buildx_history_ls.yaml
     - docker_buildx_history_open.yaml
     - docker_buildx_history_rm.yaml
+    - docker_buildx_history_trace.yaml
 inherited_options:
     - option: builder
       value_type: string

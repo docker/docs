@@ -103,18 +103,18 @@ flag.
 ## Options
 
 The following table describes the driver-specific options that you can pass to
-`--option` when creating a custom network using the `bridge` driver.
+`--opt` when creating a custom network using the `bridge` driver.
 
-| Option                                                                                          | Default                     | Description                                                                                    |
-|-------------------------------------------------------------------------------------------------|-----------------------------|------------------------------------------------------------------------------------------------|
-| `com.docker.network.bridge.name`                                                                |                             | Interface name to use when creating the Linux bridge.                                          |
-| `com.docker.network.bridge.enable_ip_masquerade`                                                | `true`                      | Enable IP masquerading.                                                                        |
-| `com.docker.network.bridge.gateway_mode_ipv4`<br/>`com.docker.network.bridge.gateway_mode_ipv6` | `nat`                       | Enable NAT and masquerading (`nat`), or only allow direct routing to the container (`routed`). |
-| `com.docker.network.bridge.enable_icc`                                                          | `true`                      | Enable or Disable inter-container connectivity.                                                |
-| `com.docker.network.bridge.host_binding_ipv4`                                                   | all IPv4 and IPv6 addresses | Default IP when binding container ports.                                                       |
-| `com.docker.network.driver.mtu`                                                                 | `0` (no limit)              | Set the containers network Maximum Transmission Unit (MTU).                                    |
-| `com.docker.network.container_iface_prefix`                                                     | `eth`                       | Set a custom prefix for container interfaces.                                                  |
-| `com.docker.network.bridge.inhibit_ipv4`                                                        | `false`                     | Prevent Docker from [assigning an IP address](#skip-ip-address-configuration) to the network.  |
+| Option                                                                                          | Default                     | Description                                                                                         |
+|-------------------------------------------------------------------------------------------------|-----------------------------|-----------------------------------------------------------------------------------------------------|
+| `com.docker.network.bridge.name`                                                                |                             | Interface name to use when creating the Linux bridge.                                               |
+| `com.docker.network.bridge.enable_ip_masquerade`                                                | `true`                      | Enable IP masquerading.                                                                             |
+| `com.docker.network.bridge.gateway_mode_ipv4`<br/>`com.docker.network.bridge.gateway_mode_ipv6` | `nat`                       | Control external connectivity. See [Packet filtering and firewalls](packet-filtering-firewalls.md). |
+| `com.docker.network.bridge.enable_icc`                                                          | `true`                      | Enable or Disable inter-container connectivity.                                                     |
+| `com.docker.network.bridge.host_binding_ipv4`                                                   | all IPv4 and IPv6 addresses | Default IP when binding container ports.                                                            |
+| `com.docker.network.driver.mtu`                                                                 | `0` (no limit)              | Set the containers network Maximum Transmission Unit (MTU).                                         |
+| `com.docker.network.container_iface_prefix`                                                     | `eth`                       | Set a custom prefix for container interfaces.                                                       |
+| `com.docker.network.bridge.inhibit_ipv4`                                                        | `false`                     | Prevent Docker from [assigning an IP address](#skip-bridge-ip-address-configuration) to the bridge. |
 
 Some of these options are also available as flags to the `dockerd` CLI, and you
 can use them to configure the default `docker0` bridge when starting the Docker
@@ -229,6 +229,20 @@ When you create your network, you can specify the `--ipv6` flag to enable IPv6.
 $ docker network create --ipv6 --subnet 2001:db8:1234::/64 my-net
 ```
 
+If you do not provide a `--subnet` option, a Unique Local Address (ULA) prefix
+will be chosen automatically.
+
+## IPv6-only bridge networks
+
+To skip IPv4 address configuration on the bridge and in its containers, create
+the network with option `--ipv4=false`, and enable IPv6 using `--ipv6`.
+
+```console
+$ docker network create --ipv6 --ipv4=false v6net
+```
+
+IPv4 address configuration cannot be disabled in the default bridge network.
+
 ## Use the default bridge network
 
 The default `bridge` network is considered a legacy detail of Docker and is not
@@ -259,7 +273,12 @@ the settings you need to customize.
 }
 ```
 
-Restart Docker for the changes to take effect.
+In this example:
+
+- The bridge's address is "192.168.1.1/24" (from `bip`).
+- The bridge network's subnet is "192.168.1.0/24" (from `bip`).
+- Container addresses will be allocated from "192.168.1.0/25" (from `fixed-cidr`).
+
 
 ### Use IPv6 with the default bridge network
 
@@ -270,21 +289,33 @@ These three options only affect the default bridge, they are not used by
 user-defined networks. The addresses in below are examples from the
 IPv6 documentation range.
 
-- Option `ipv6` is required
-- Option `fixed-cidr-v6` is required, it specifies the network prefix to be used.
+- Option `ipv6` is required.
+- Option `bip6` is optional, it specifies the address of the default bridge, which
+  will be used as the default gateway by containers. It also specifies the subnet
+  for the bridge network.
+- Option `fixed-cidr-v6` is optional, it specifies the address range Docker may
+  automatically allocate to containers.
   - The prefix should normally be `/64` or shorter.
   - For experimentation on a local network, it is better to use a Unique Local
-    prefix (matching `fd00::/8`) than a Link Local prefix (matching `fe80::/10`).
+    Address (ULA) prefix (matching `fd00::/8`) than a Link Local prefix (matching
+    `fe80::/10`).
 - Option `default-gateway-v6` is optional. If unspecified, the default is the first
   address in the `fixed-cidr-v6` subnet.
 
 ```json
 {
   "ipv6": true,
+  "bip6": "2001:db8::1111/64",
   "fixed-cidr-v6": "2001:db8::/64",
   "default-gateway-v6": "2001:db8:abcd::89"
 }
 ```
+
+If no `bip6` is specified, `fixed-cidr-v6` defines the subnet for the bridge
+network. If no `bip6` or `fixed-cidr-v6` is specified, a ULA prefix will be
+chosen.
+
+Restart Docker for changes to take effect.
 
 ## Connection limit for bridge networks
 
@@ -295,20 +326,22 @@ to a single network.
 For more information about this limitation, see
 [moby/moby#44973](https://github.com/moby/moby/issues/44973#issuecomment-1543747718).
 
-## Skip IP address configuration
+## Skip Bridge IP address configuration
+
+The bridge is normally assigned the network's `--gateway` address, which is
+used as the default route from the bridge network to other networks.
 
 The `com.docker.network.bridge.inhibit_ipv4` option lets you create a network
-that uses an existing bridge and have Docker skip configuring the IPv4 address
-on the bridge. This is useful if you want to configure the IP address for the
-bridge manually. For instance if you add a physical interface to your bridge,
-and need to move its IP address to the bridge interface.
+without the IPv4 gateway address being assigned to the bridge. This is useful
+if you want to configure the gateway IP address for the bridge manually. For
+instance if you add a physical interface to your bridge, and need it to have
+the gateway address.
 
-To use this option, you should first configure the Docker daemon to use a
-self-managed bridge, using the `bridge` option in the `daemon.json` or the
-`dockerd --bridge` flag.
+With this configuration, north-south traffic (to and from the bridge network)
+won't work unless you've manually configured the gateway address on the bridge,
+or a device attached to it.
 
-With this configuration, north-south traffic won't work unless you've manually
-configured the IP address for the bridge.
+This option can only be used with user-defined bridge networks.
 
 ## Next steps
 

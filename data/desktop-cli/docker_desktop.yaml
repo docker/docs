@@ -10,12 +10,14 @@ cname:
     - docker desktop restart
     - docker desktop status
     - docker desktop engine
+    - docker desktop update
 clink:
     - docker_desktop_start.yaml
     - docker_desktop_stop.yaml
     - docker_desktop_restart.yaml
     - docker_desktop_status.yaml
     - docker_desktop_engine.yaml
+    - docker_desktop_update.yaml
 deprecated: false
 hidden: false
 experimental: false

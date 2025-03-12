@@ -13,6 +13,59 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.33.1 
+
+{{< release-date date="2025-02-21" >}}
+
+### Bug fixes and enhancements
+
+- Added support for `gw_priority`, `enable_ipv4` (requires Docker v28.0) 
+- Fixed an issue with the navigation menu
+- Improved error message when using non-file secret/config with read-only service
+
+### Update
+
+- Dependencies upgrade: bump docker engine and cli to v28.0.0
+
+## 2.33.0
+
+{{< release-date date="2025-02-13" >}}
+
+### Bug fixes and enhancements
+
+- Introduced a hint to promote the use of [Bake](/build/bake/)
+- Introduced support for the `additional_context` attribute referencing another service
+- Added support for `BUILDKIT_PROGRESS`
+- Compose now warns you when a published Compose application includes environment variables
+- Added a `--with-env` flag to publish a Compose application with environment variables
+- Updated `ls --quiet` help description
+- Fixed multiple issues delegating build to Bake
+- Updated help in `stats` command
+- Fixed support for "builtin" seccomp profile
+- Fixed support for `watch` with multiple services
+- Removed exit code per error type used by legacy metrics system
+- Fixed test coverage for `compatibility`
+- Removed raw os.Args sent to OpenTelemetry
+- Enabled copyloopvar linter
+- Fixed provenance for binaries and generate SBOM
+- Main branch for docs upstream validation is now used
+- Added codeowners file
+- Added Docker Engine v28.x to the test-matrix
+
+### Update
+
+- Dependencies upgrade: Bump compose-go v2.4.8
+- Dependencies upgrade: Bump buildx v0.20.1
+- Dependencies upgrade: Bump docker to v27.5.1
+- Dependencies upgrade: Bump golangci-lint to v1.63.4
+- Dependencies upgrade: Bump golang.org/x/sys from 0.28.0 to 0.30.0
+- Dependencies upgrade: Bump github.com/moby/term v0.5.2
+- Dependencies upgrade: Bump github.com/otiai10/copy from 1.14.0 to 1.14.1
+- Dependencies upgrade: Bump github.com/jonboulle/clockwork from 0.4.0 to 0.5.0
+- Dependencies upgrade: Bump github.com/spf13/pflag from 1.0.5 to 1.0.6
+- Dependencies upgrade: Bump golang.org/x/sync from 0.10.0 to 0.11.0
+- Dependencies upgrade: Bump gotest.tools/v3 from 3.5.1 to 3.5.2
+
 ## 2.32.4
 
 {{< release-date date="2025-01-16" >}}
@@ -236,7 +289,7 @@ For more detailed information, see the [release notes in the Compose repo](https
 
 - Fixed the docs on `docker compose kill` usage.
 - Fixed redundant condition from `toAPIBuildOptions` in build.go.
-- Fixed initial Watch `sync` after Compose restarts with introduction of `x-initSync`.
+- Fixed initial Watch `sync` after Compose restarts with introduction of `x-initialSync`.
 - Fixed an issue which stopped the Compose process for a single container on `sync-restart` Watch action.
 
 ## 2.29.1

@@ -13,7 +13,11 @@ tags: [Release notes]
 Here you can learn about the latest changes, new features, bug fixes, and
 known issues for each Docker Hub release.
 
-Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projects/51/views/1?filterQuery=) to see what's coming next.
+## 2025-02-18
+
+### New
+
+- You can delete images and image indexes using [Image Management](./repos/manage/hub-images/manage.md).
 
 ## 2024-12-12
 

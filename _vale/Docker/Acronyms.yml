@@ -12,6 +12,7 @@ exceptions:
   - AI
   - API
   - ARM
+  - ARP
   - ASP
   - AUFS
   - AWS
@@ -30,6 +31,7 @@ exceptions:
   - CSV
   - CUDA
   - CVE
+  - DAD
   - DCT
   - DEBUG
   - DHCP
@@ -55,6 +57,7 @@ exceptions:
   - GRUB
   - GTK
   - GUI
+  - GUID
   - HEAD
   - HTML
   - HTTP
@@ -75,6 +78,7 @@ exceptions:
   - LLDB
   - LTS
   - MAC
+  - MCP
   - MDM
   - MDN
   - MSI
@@ -112,6 +116,7 @@ exceptions:
   - SCIM
   - SCM
   - SCSS
+  - SCTP
   - SDK
   - SLES
   - SLSA

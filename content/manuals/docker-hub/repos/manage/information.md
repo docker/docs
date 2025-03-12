@@ -114,7 +114,7 @@ explore content for the problem domain that they're interested in.
 
 The Docker Hub content team maintains a curated list of categories.
 
-{{< include "hub-categories.md" >}}
+{{% include "hub-categories.md" %}}
 
 ### Auto-generated categories
 

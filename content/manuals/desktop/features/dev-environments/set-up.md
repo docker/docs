@@ -7,7 +7,7 @@ aliases:
 - /desktop/dev-environments/set-up/
 ---
 
-{{< include "dev-envs-changing.md" >}}
+{{% include "dev-envs-changing.md" %}}
 
 >**Changes to Dev Environments with Docker Desktop 4.13**
 >
@@ -18,7 +18,7 @@ aliases:
 
 To set up a dev environment, there are additional configuration steps to tell Docker Desktop how to build, start, and use the right image for your services.
 
-Dev Environments use an `compose-dev.yaml` file located at the root of your project. This file allows you to define the image required for a dedicated service, the ports you'd like to expose, along with additional configuration options.
+Dev Environments use a `compose-dev.yaml` file located at the root of your project. This file allows you to define the image required for a dedicated service, the ports you'd like to expose, along with additional configuration options.
 
 The following is an example `compose-dev.yaml` file.
 

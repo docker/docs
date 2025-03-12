@@ -49,9 +49,9 @@ syntax for `-p` is `HOST_PORT:CLIENT_PORT`.
 
 See [Proxies](/manuals/desktop/settings-and-maintenance/settings.md#proxies)
 
-### SOCKS5 proxy support 
+### SOCKS5 proxy support
 
-{{< introduced desktop 4.28.0 "../release-notes.md#4280" >}}
+{{< summary-bar feature_name="SOCKS5 proxy support" >}}
 
 > [!NOTE]
 >

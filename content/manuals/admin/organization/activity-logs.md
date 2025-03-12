@@ -30,8 +30,6 @@ Owners can also see the activity logs for their repository if the repository is 
 {{< /tab >}}
 {{< tab name="Admin Console" >}}
 
-{{< include "admin-early-access.md" >}}
-
 {{% admin-org-audit-log product="admin" %}}
 
 {{< /tab >}}

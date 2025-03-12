@@ -7,7 +7,7 @@ aliases:
 weight: 20
 ---
 
-{{< include "compose/services.md" >}}
+{{% include "compose/services.md" %}}
 
 A Compose file must declare a `services` top-level element as a map whose keys are string representations of service names,
 and whose values are service definitions. A service definition contains the configuration that is applied to each
@@ -91,7 +91,7 @@ annotations:
 
 ### `attach`
 
-{{< introduced compose 2.20.0 "/manuals/compose/releases/release-notes.md#2200" >}}
+{{< summary-bar feature_name="Compose attach" >}}
 
 When `attach` is defined and set to `false` Compose does not collect service logs,
 until you explicitly request it to.
@@ -233,7 +233,7 @@ cap_drop:
 
 ### `cgroup`
 
-{{< introduced compose 2.15.0 "/manuals/compose/releases/release-notes.md#2150" >}}
+{{< summary-bar feature_name="Compose cgroup" >}}
 
 `cgroup` specifies the cgroup namespace to join. When unset, it is the container runtime's decision to
 select which cgroup namespace to use, if supported.
@@ -264,17 +264,17 @@ If the value is `[]` (empty list) or `''` (empty string), the default command de
 > [!NOTE]
 >
 > Unlike the `CMD` instruction in a Dockerfile, the `command` field doesn't automatically run within the context of the [`SHELL`](/reference/dockerfile.md#shell-form) instruction defined in the image. If your `command` relies on shell-specific features, such as environment variable expansion, you need to explicitly run it within a shell. For example:
-> 
+>
 > ```yaml
 > command: /bin/sh -c 'echo "hello $$HOSTNAME"'
 > ```
 
-The value can also be a list, similar to the [exec-form syntax](/reference/dockerfile.md#exec-form) 
+The value can also be a list, similar to the [exec-form syntax](/reference/dockerfile.md#exec-form)
 used by the [Dockerfile](/reference/dockerfile.md#exec-form).
 
 ### `configs`
 
-`configs` let services adapt their behaviour without the need to rebuild a Docker image. 
+`configs` let services adapt their behaviour without the need to rebuild a Docker image.
 Services can only access configs when explicitly granted by the `configs` attribute. Two different syntax variants are supported.
 
 Compose reports an error if `config` doesn't exist on the platform or isn't defined in the
@@ -287,7 +287,7 @@ You can grant a service access to multiple configs, and you can mix long and sho
 #### Short syntax
 
 The short syntax variant only specifies the config name. This grants the
-container access to the config and mounts it as files into a service’s container’s filesystem. The location of the mount point within the container defaults to `/<config_name>` in Linux containers, and `C:\<config-name>` in Windows containers. 
+container access to the config and mounts it as files into a service’s container’s filesystem. The location of the mount point within the container defaults to `/<config_name>` in Linux containers, and `C:\<config-name>` in Windows containers.
 
 The following example uses the short syntax to grant the `redis` service
 access to the `my_config` and `my_other_config` configs. The value of
@@ -405,7 +405,7 @@ configs:
 
 ### `depends_on`
 
-{{< include "compose/services-depends-on.md" >}}
+{{% include "compose/services-depends-on.md" %}}
 
 #### Short syntax
 
@@ -496,7 +496,7 @@ Compose guarantees dependency services marked with
 
 ### `develop`
 
-{{< introduced compose 2.22.0 "/manuals/compose/releases/release-notes.md#2220" >}}
+{{< summary-bar feature_name="Compose develop" >}}
 
 `develop` specifies the development configuration for maintaining a container in sync with source, as defined in the [Development Section](develop.md).
 
@@ -521,6 +521,13 @@ device_cgroup_rules:
 devices:
   - "/dev/ttyUSB0:/dev/ttyUSB0"
   - "/dev/sda:/dev/xvda:rwm"
+```
+
+`devices` can also rely on the [CDI](https://github.com/cncf-tags/container-device-interface) syntax to let the container runtime select a device:
+
+```yml
+devices:
+  - "vendor1.com/device=gpu"
 ```
 
 ### `dns`
@@ -567,7 +574,7 @@ dns_search:
 
 ### `driver_opts`
 
-{{< introduced compose 2.27.1 "/manuals/compose/releases/release-notes.md#2271" >}}
+{{< summary-bar feature_name="Compose driver opts" >}}
 
 `driver_opts` specifies a list of options as key-value pairs to pass to the driver. These options are
 driver-dependent.
@@ -617,7 +624,7 @@ If the value is `[]` (empty list) or `''` (empty string), the default entrypoint
 
 ### `env_file`
 
-{{< include "compose/services-env-file.md" >}} 
+{{% include "compose/services-env-file.md" %}}
 
 ```yml
 env_file: .env
@@ -643,7 +650,7 @@ attributes.
 
 #### `required`
 
-{{< introduced compose 2.24.0 "/manuals/compose/releases/release-notes.md#2240" >}}
+{{< summary-bar feature_name="Compose required" >}}
 
 The `required` attribute defaults to `true`. When `required` is set to `false` and the `.env` file is missing, Compose silently ignores the entry.
 
@@ -657,7 +664,7 @@ env_file:
 
 #### `format`
 
-{{< introduced compose 2.30.0 "/manuals/compose/releases/release-notes.md#2300" >}}
+{{< summary-bar feature_name="Compose format" >}}
 
 The `format` attribute lets you use an alternative file format for the `env_file`. When not set, `env_file` is parsed according to the Compose rules outlined in [`Env_file` format](#env_file-format).
 
@@ -709,7 +716,7 @@ VAR="quoted"
 
 ### `environment`
 
-{{< include "compose/services-environment.md" >}}
+{{% include "compose/services-environment.md" %}}
 
 Environment variables can be declared by a single key (no value to equals sign). In this case Compose
 relies on you to resolve the value. If the value is not resolved, the variable
@@ -1005,6 +1012,29 @@ configuration, which means for Linux `/etc/hosts` get extra lines:
 ::1             myhostv6
 ```
 
+### `gpus`
+
+{{< summary-bar feature_name="Compose gpus" >}}
+
+`gpus` specifies GPU devices to be allocated for container usage. This is equivalent to a [device request](deploy.md#devices) with
+an implicit `gpu` capability.
+
+```yaml
+services:
+  model:
+    gpus: 
+      - driver: 3dfx
+        count: 2
+```
+
+`gpus` also can be set as string `all` to allocate all available GPU devices to the container.
+
+```yaml
+services:
+  model:
+    gpus: all
+```
+
 ### `group_add`
 
 `group_add` specifies additional groups, by name or number, which the user inside the container must be a member of.
@@ -1026,7 +1056,7 @@ been the case if `group_add` were not declared.
 
 ### `healthcheck`
 
-{{< include "compose/services-healthcheck.md" >}} 
+{{% include "compose/services-healthcheck.md" %}}
 
 For more information on `HEALTHCHECK`, see the [Dockerfile reference](/reference/dockerfile.md#healthcheck).
 
@@ -1158,7 +1188,7 @@ results in a runtime error.
 
 ### `label_file`
 
-{{< introduced compose 2.23.2 "/manuals/compose/releases/release-notes.md#2232" >}}
+{{< summary-bar feature_name="Compose label file" >}}
 
 The `label_file` attribute lets you load labels for a service from an external file or a list of files. This provides a convenient way to manage multiple labels without cluttering the Compose file.
 
@@ -1167,10 +1197,10 @@ The file uses a key-value format, similar to `env_file`. You can specify multipl
 ```yaml
 services:
   one:
-    label_file: ./app.labels 
-  
+    label_file: ./app.labels
+
   two:
-    label_file:               
+    label_file:
       - ./app.labels
       - ./additional.labels
 ```
@@ -1280,7 +1310,7 @@ Compose file containing both attributes.
 
 ### `networks`
 
-{{< include "compose/services-networks.md" >}}
+{{% include "compose/services-networks.md" %}}
 
 ```yml
 services:
@@ -1398,16 +1428,50 @@ networks:
 
 #### `mac_address`
 
-{{< introduced compose 2.23.2 "/manuals/compose/releases/release-notes.md#2232" >}}
+{{< summary-bar feature_name="Compose mac address" >}}
 
 `mac_address` sets the Mac address used by the service container when connecting to this particular network.
+
+#### `gw_priority`
+
+{{< summary-bar feature_name="Compose gw priority" >}}
+
+The network with the highest `gw_priority` is selected as the default gateway for the service container.
+If unspecified, the default value is 0.
+
+In the following example, `app_net_2` will be selected as the default gateway.
+
+```yaml
+services:
+  app:
+    image: busybox
+    command: top
+    networks:
+      app_net_1:
+      app_net_2:
+        gw_priority: 1
+      app_net_3:
+networks:
+  app_net_1:
+  app_net_2:
+  app_net_3:
+```
 
 #### `priority`
 
 `priority` indicates in which order Compose connects the service’s containers to its
 networks. If unspecified, the default value is 0.
 
-In the following example, the app service connects to `app_net_1` first as it has the highest priority. It then connects to `app_net_3`, then `app_net_2`, which uses the default priority value of 0.
+If the container runtime accepts a `mac_address` attribute at service level, it is
+applied to the network with the highest `priority`. In other cases, use attribute
+`networks.mac_address`.
+
+`priority` does not affect which network is selected as the default gateway. Use the
+[`gw_priority`](#gw_priority) attribute instead.
+
+`priority` does not control the order in which networks connections are added to
+the container, it cannot be used to determine the device name (`eth0` etc.) in the
+container.
 
 ```yaml
 services:
@@ -1469,7 +1533,7 @@ platform: linux/arm64/v8
 
 ### `ports`
 
-{{< include "compose/services-ports.md" >}}
+{{% include "compose/services-ports.md" %}}
 
 > [!NOTE]
 >
@@ -1552,7 +1616,7 @@ ports:
 
 ### `post_start`
 
-{{< introduced compose 2.30.0 "../../manuals/compose/releases/release-notes.md#2300" >}}
+{{< summary-bar feature_name="Compose post start" >}}
 
 `post_start` defines a sequence of lifecycle hooks to run after a container has started. The exact timing of when the command is run is not guaranteed.
 
@@ -1577,7 +1641,7 @@ For more information, see [Use lifecycle hooks](/manuals/compose/how-tos/lifecyc
 
 ### `pre_stop`
 
-{{< introduced compose 2.30.0 "../../manuals/compose/releases/release-notes.md#2300" >}}
+{{< summary-bar feature_name="Compose pre stop" >}}
 
 `pre_stop` defines a sequence of lifecycle hooks to run before the container is stopped. These hooks won't run if the container stops by itself or is terminated suddenly.
 
@@ -1668,7 +1732,7 @@ When both are set, `scale` must be consistent with the `replicas` attribute in t
 
 ### `secrets`
 
-{{< include "compose/services-secrets.md" >}}
+{{% include "compose/services-secrets.md" %}}
 
 Two different syntax variants are supported; the short syntax and the long syntax. Long and short syntax for secrets may be used in the same Compose file.
 
@@ -1729,7 +1793,7 @@ services:
         target: server.cert
         uid: "103"
         gid: "103"
-        mode: "0440"
+        mode: "0o440"
 secrets:
   server-certificate:
     file: ./server.cert
@@ -1874,7 +1938,7 @@ userns_mode: "host"
 
 ### `uts`
 
-{{< introduced compose 2.15.1 "/manuals/compose/releases/release-notes.md#2151" >}}
+{{< summary-bar feature_name="Compose uts" >}}
 
 `uts` configures the UTS namespace mode set for the service container. When unspecified
 it is the runtime's decision to assign a UTS namespace, if supported. Available values are:
@@ -1887,7 +1951,7 @@ it is the runtime's decision to assign a UTS namespace, if supported. Available 
 
 ### `volumes`
 
-{{< include "compose/services-volumes.md" >}}
+{{% include "compose/services-volumes.md" %}}
 
 The following example shows a named volume (`db-data`) being used by the `backend` service,
 and a bind mount defined for a single service.

@@ -8,7 +8,7 @@ aliases:
 - /compose/networking/
 ---
 
-{{< include "compose-eol.md" >}}
+{{% include "compose-eol.md" %}}
 
 By default Compose sets up a single
 [network](/reference/cli/docker/network/create.md) for your app. Each
@@ -22,7 +22,7 @@ other containers on that network, and discoverable by the service's name.
 > project name with either the [`--project-name` flag](/reference/cli/docker/compose.md)
 > or the [`COMPOSE_PROJECT_NAME` environment variable](environment-variables/envvars.md#compose_project_name).
 
-For example, suppose your app is in a directory called `myapp`, and your `compose.yml` looks like this:
+For example, suppose your app is in a directory called `myapp`, and your `compose.yaml` looks like this:
 
 ```yaml
 services:

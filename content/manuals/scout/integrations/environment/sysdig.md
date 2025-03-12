@@ -5,7 +5,7 @@ description: Integrate your runtime environments with Docker Scout using Sysdig
 keywords: scout, sysdig, integration, image analysis, environments, supply chain
 ---
 
-{{< include "scout-early-access.md" >}}
+{{% include "scout-early-access.md" %}}
 
 The Sysdig integration enables Docker Scout to automatically detect the images
 you're using for your running workloads. Activating this integration gives you

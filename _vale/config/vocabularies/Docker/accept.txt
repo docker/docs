@@ -55,8 +55,10 @@ Intune
 JFrog
 Jamf
 JetBrains
+JUnit
 Kerberos
 Kitematic
+Kubeadm
 Kubernetes
 Laravel
 Laradock
@@ -79,6 +81,7 @@ Paketo
 Postgres
 PowerShell
 Python
+Ryuk
 S3
 SQLite
 Slack
@@ -182,6 +185,8 @@ musl
 nameserver
 namespace
 namespacing
+netfilter
+netlabel
 npm
 osquery
 osxfs

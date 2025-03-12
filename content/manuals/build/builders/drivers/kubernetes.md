@@ -246,7 +246,7 @@ that you want to support.
 ## Rootless mode
 
 The Kubernetes driver supports rootless mode. For more information on how
-rootless mode works, and it's requirements, see
+rootless mode works, and its requirements, see
 [here](https://github.com/moby/buildkit/blob/master/docs/rootless.md).
 
 To turn it on in your cluster, you can use the `rootless=true` driver option:

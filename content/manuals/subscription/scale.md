@@ -24,19 +24,25 @@ for legacy Docker subscription plans, all paid Docker subscriptions come with
 access to Docker Hub, Docker Build Cloud, and Testcontainers Cloud with a base
 amount of consumption. See [Docker subscriptions and features](./details.md) to
 learn how much base consumption comes with each subscription. You can scale your
-consumption at any time during your subscription period. All purchased
-consumption expires at the end of your subscription term.
-amount of consumption. You can scale your consumption at any time during your subscription period. All purchased consumption expires at the end of your subscription term.
+consumption at any time during your subscription period.
 
 You can scale consumption for the following:
 
 - Docker Build Cloud build minutes
 - Docker Testcontainers Cloud runtime minutes
-- Docker Hub storage and image pulls
 
 To better understand your needs, you can view your consumption at any time. For
 more details, see [View Docker product
 usage](../admin/organization/manage-products.md#view-docker-product-usage).
+
+> [!WARNING]
+>
+> The number of Docker Build Cloud and Testcontainers minutes included in your
+subscription do not rollover. Additional minutes expire at the end of your
+subscription period (monthly or annually). For example, if you have an annual
+Docker Team subscription with 500 included minutes, and purchase 500 additional
+minutes, only the 500 additional minutes rollover until the end of your annual
+subscription period.
 
 ## Add Docker Build Cloud build minutes
 
@@ -61,15 +67,3 @@ pre-purchase, you are able to use as many minutes as you need on-demand. The
 usage will be billed at the end of each monthly billing cycle. On-demand usage
 is billed at a higher rate than pre-purchased capacity. To avoid on-demand
 charges, pre-purchase additional minutes.
-
-## Add Docker Hub storage or image pulls
-
-{{< include "hub-limits.md" >}}
-
-You can pre-purchase images pulls and storage by [contacting
-sales](https://www.docker.com/pricing/contact-sales/).
-
-In addition to pre-purchase, you are able to use as much resources as you need
-on-demand. On-demand usage is billed at a higher rate than pre-purchased
-capacity. To avoid on-demand charges, pre-purchase additional storage or image
-pulls.

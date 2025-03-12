@@ -27,7 +27,7 @@ The following payment methods are supported:
 
 All currency, for example the amount listed on your billing invoice, is in United States dollar (USD).
 
-{{< include "tax-compliance.md" >}}
+{{% include "tax-compliance.md" %}}
 
 ## Manage payment method
 
@@ -104,6 +104,11 @@ To add a payment method:
 {{< /tabs >}}
 
 ## Failed payments
+
+> [!NOTE]
+>
+> You can't manually retry a failed payment. Docker will retry failed payments
+based on the retry schedule.
 
 If your subscription payment fails, there is a grace period of 15 days, including the due date. Docker retries to collect the payment 3 times using the following schedule:
 

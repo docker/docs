@@ -26,6 +26,10 @@ params:
     description: Define and run multi-container applications.
     icon: /assets/icons/Compose.svg
     link: /compose/
+  - title: Testcontainers
+    description: Run containers programmatically in your preferred programming language.
+    icon: /assets/icons/Testcontainers.svg
+    link: /testcontainers/
   products:
   - title: Docker Desktop
     description: Your command center for container development.
@@ -55,6 +59,10 @@ params:
     description: Run integration tests, with real dependencies, in the cloud.
     icon: package_2
     link: https://testcontainers.com/cloud/docs/
+  - title: Docker Projects
+    description: Use a unified, project-based workflow to run your containerized projects. 
+    icon: folder
+    link: /projects/
   platform:
   - title: Administration
     description: Centralized observability for companies and organizations.

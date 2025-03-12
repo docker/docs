@@ -4,11 +4,6 @@ keywords: admin, controls, rootless, enhanced container isolation
 title: Configure Settings Management with the Admin Console
 linkTitle: Use the Admin Console
 weight: 20
-params:
-  sidebar:
-    badge:
-      color: violet
-      text: EA
 ---
 
 {{< summary-bar feature_name="Admin Console" >}}
