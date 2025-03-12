@@ -285,16 +285,8 @@ The key takes a list of annotations, in the format of `KEY=VALUE`.
 
 ```hcl
 target "default" {
-  output = ["type=image,name=foo"]
+  output = [{ type = "image", name = "foo" }]
   annotations = ["org.opencontainers.image.authors=dvdksn"]
-}
-```
-
-is the same as
-
-```hcl
-target "default" {
-  output = ["type=image,name=foo,annotation.org.opencontainers.image.authors=dvdksn"]
 }
 ```
 
@@ -305,7 +297,7 @@ example adds annotations to both the image index and manifests.
 
 ```hcl
 target "default" {
-  output = ["type=image,name=foo"]
+  output = [{ type = "image", name = "foo" }]
   annotations = ["index,manifest:org.opencontainers.image.authors=dvdksn"]
 }
 ```
@@ -321,8 +313,13 @@ This attribute accepts the long-form CSV version of attestation parameters.
 ```hcl
 target "default" {
   attest = [
-    "type=provenance,mode=min",
-    "type=sbom"
+    {
+      type = "provenance",
+      mode = "max",
+    },
+    {
+      type = "sbom",
+    }
   ]
 }
 ```
@@ -338,8 +335,15 @@ This takes a list value, so you can specify multiple cache sources.
 ```hcl
 target "app" {
   cache-from = [
-    "type=s3,region=eu-west-1,bucket=mybucket",
-    "user/repo:cache",
+    {
+      type = "s3",
+      region = "eu-west-1",
+      bucket = "mybucket"
+    },
+    {
+      type = "registry",
+      ref = "user/repo:cache"
+    }
   ]
 }
 ```
@@ -355,8 +359,14 @@ This takes a list value, so you can specify multiple cache export targets.
 ```hcl
 target "app" {
   cache-to = [
-    "type=s3,region=eu-west-1,bucket=mybucket",
-    "type=inline"
+    {
+      type = "s3",
+      region = "eu-west-1",
+      bucket = "mybucket"
+    },
+    {
+      type = "inline",
+    }
   ]
 }
 ```
@@ -863,7 +873,7 @@ The following example configures the target to use a cache-only output,
 
 ```hcl
 target "default" {
-  output = ["type=cacheonly"]
+  output = [{ type = "cacheonly" }]
 }
 ```
 
@@ -903,8 +913,8 @@ variable "HOME" {
 
 target "default" {
   secret = [
-    "type=env,id=KUBECONFIG",
-    "type=file,id=aws,src=${HOME}/.aws/credentials"
+    { type = "env", id = "KUBECONFIG" },
+    { type = "file", id = "aws", src = "${HOME}/.aws/credentials" },
   ]
 }
 ```
@@ -948,7 +958,7 @@ This can be useful if you need to access private repositories during a build.
 
 ```hcl
 target "default" {
-  ssh = ["default"]
+  ssh = [{ id = "default" }]
 }
 ```
 

@@ -73,23 +73,22 @@ To see the highest version of the API your Docker daemon and client support, use
 ```console
 $ docker version
 Client: Docker Engine - Community
- Version:           27.4.0
- API version:       1.47
- Go version:        go1.22.10
- Git commit:        bde2b89
- Built:             Sat Dec  7 10:38:33 2024
+ Version:           28.0.0
+ API version:       1.48
+ Go version:        go1.23.6
+ Git commit:        f9ced58
+ Built:             Wed Feb 19 22:11:04 2025
  OS/Arch:           linux/amd64
  Context:           default
 
 Server: Docker Engine - Community
  Engine:
-  Version:          27.4.0
-  API version:      1.47 (minimum version 1.24)
-  Go version:       go1.22.10
-  Git commit:       92a8393
-  Built:            Sat Dec  7 10:38:33 2024
+  Version:          28.0.0
+  API version:      1.48 (minimum version 1.24)
+  Go version:       go1.23.6
+  Git commit:       af898ab
+  Built:            Wed Feb 19 22:11:04 2025
   OS/Arch:          linux/amd64
-  Experimental:     false
   ...
 ```
 
@@ -131,8 +130,10 @@ You can specify the API version to use in any of the following ways:
 
 ### API version matrix
 
-| Docker version | Maximum API version        | Change log                                                                   |
-|:---------------|:---------------------------|:-----------------------------------------------------------------------------|
+| Docker version | Maximum API version                          | Change log                                                         |
+|:---------------|:---------------------------------------------|:-------------------------------------------------------------------|
+| 28.0           | [1.48](/reference/api/engine/version/v1.48/) | [changes](/reference/api/engine/version-history/#v148-api-changes) |
+| 27.5           | [1.47](/reference/api/engine/version/v1.47/) | [changes](/reference/api/engine/version-history/#v147-api-changes) |
 | 27.4           | [1.47](/reference/api/engine/version/v1.47/) | [changes](/reference/api/engine/version-history/#v147-api-changes) |
 | 27.3           | [1.47](/reference/api/engine/version/v1.47/) | [changes](/reference/api/engine/version-history/#v147-api-changes) |
 | 27.2           | [1.47](/reference/api/engine/version/v1.47/) | [changes](/reference/api/engine/version-history/#v147-api-changes) |

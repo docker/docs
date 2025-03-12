@@ -17,15 +17,140 @@ aliases:
 weight: 220
 ---
 
-This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases. For frequently asked questions about Docker Desktop releases, see [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
+This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases. 
+
+Releases are gradually rolled out to ensure quality control. If the latest version is not yet available to you, allow some time — updates typically become available within a week of the release date.
 
 Docker Desktop versions older than 6 months from the latest release are not available for download. Previous release notes are available in our [documentation repository](https://github.com/docker/docs/tree/main/content/manuals/desktop/previous-versions).
 
-Take a look at the [Docker Public Roadmap](https://github.com/orgs/docker/projects/51/views/1?filterQuery=) to see what's coming next.
+For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
 > [!WARNING]
 >
 > If you're experiencing malware detection issues on Mac, follow the steps documented in [docker/for-mac#7527](https://github.com/docker/for-mac/issues/7527).
+
+## 4.39.0
+
+{{< release-date date="2025-03-05" >}}
+
+{{< desktop-install-v2 all=true beta_win_arm=true version="4.39.0" build_path="/184744/" >}}
+
+### New
+
+- The [Docker Desktop CLI](/manuals/desktop/features/desktop-cli.md) is now generally available. You can now also print logs with the new `docker desktop logs` command.
+- Docker Desktop now supports the `--platform` flag on [`docker load`](/reference/cli/docker/image/load.md) and [`docker save`](/reference/cli/docker/image/save.md). This helps you import and export a subset of multi-platform images.
+
+### Upgrades
+
+- [Docker Compose v2.33.1](https://github.com/docker/compose/releases/tag/v2.33.1)
+- [Docker Buildx v0.21.1](https://github.com/docker/buildx/releases/tag/v0.21.1)
+- [Kubernetes v1.32.2](https://github.com/kubernetes/kubernetes/releases/tag/v1.32.2)
+- [Docker Engine v28.0.1](https://docs.docker.com/engine/release-notes/28/#2801)
+- [Docker Scout CLI v1.16.3](https://github.com/docker/scout-cli/releases/tag/v1.16.3)
+
+### Security
+
+- Fixed [CVE-2025-1696](https://www.cve.org/CVERecord?id=CVE-2025-1696) which could disclose proxy authentication credentials in plaintext in log files.
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Ask Gordon now offers deeper context on Docker images, containers, and volumes, delivers faster support, and enables more user actions via Docker Desktop and the Docker CLI.
+- Support multi-platform images via enabling users to pick a specific platform in `docker history`
+- Fixed an issue that caused clients other than the CLI and Docker Desktop to see a delay of 3 seconds whenever a container with port-mappings exists. See [docker/for-mac#7575](https://github.com/docker/for-mac/issues/7575)
+- Fixed a bug in the ECI Docker socket permissions which caused it to sometimes block Docker socket mounts on containers with allowed images, or images derived from allowed images.
+- Fixed a bug that prevented Docker Desktop from entering Resource Saver mode again immediately after an engine restart.
+- Fixed an issue that caused Kubernetes clusters to stop working due to expired PKI certificates.
+
+#### For Mac
+
+- Downgraded Linux kernel to `v6.10.14` to fix a bug in OpenJDK that causes Java containers to terminate due to cgroups controller misidentification. See [docker/for-mac#7573](https://github.com/docker/for-mac/issues/7573).
+- Added `/usr/share/misc/usb.ids` in the root mount namespace to fix `usbip`.
+- Fixed an issue where the display of the CPU limit was capped at 8 when using Docker VMM.
+- Fixed an issue where startup would hang and the `com.docker.backend` process consumed 100% of the CPU. See [docker/for-mac#6951](https://github.com/docker/for-mac/issues/6951).
+- Fixed a bug that caused all Java programs running on M4 Macbook Pro to emit a SIGILL error. See [docker/for-mac#7583](https://github.com/docker/for-mac/issues/7583).
+- Blocked startup on macOS 15.4 beta 1 since starting VMs will cause the host to crash, see https://developer.apple.com/documentation/macos-release-notes/macos-15_4-release-notes#Virtual-Machines.
+- Fixed an issue where the myIPAddress PAC file function retrieved the host IP from the wrong interface, causing incorrect proxy selection.
+
+#### For Windows
+
+- Fixed a bug that prevented `docker compose log` to stream when running apps in WSL.
+- Fixed a bug where Paketo buildpacks failed with Enhanced Container Isolation when Docker Desktop uses WSL.
+- Fixed a bug where the WSL 2 integration would fail if WSL Version 1 distributions are installed.
+- Fixed a bug that caused some CLI plugins update to fail if WSL distributions were enabled.
+- Fixed a bug where Docker Desktop sign-in would hang when using a PAC file for proxy configuration, causing a blurred UI and blocking access.
+
+#### For Linux
+
+- The **Software Updates** page in settings, now points to the latest available version available.
+
+## 4.38.0
+
+{{< release-date date="2025-01-30" >}}
+
+{{< desktop-install-v2 all=true beta_win_arm=true version="4.38.0" build_path="/181591/" >}}
+
+### New
+
+- Installing Docker Desktop via the PKG installer is now generally available.
+- Enforcing sign-in via configuration profiles is now generally available.
+- Docker Compose, Docker Scout, the Docker CLI, and Ask Gordon can now be updated independently of Docker Desktop and without a full restart (Beta).
+- The new [`update` command](/reference/cli/docker/desktop/update.md) has been added to the Docker Desktop CLI (Mac only).
+- [Bake](/manuals//build/bake/_index.md) is now generally available, with support for entitlements and composable attributes.
+- You can now create [multi-node Kubernetes clusters](/manuals/desktop/settings-and-maintenance/settings.md#kubernetes) in Docker Desktop.
+- [Ask Gordon](/manuals/desktop/features/gordon.md) is more widely available. It is still in Beta.
+
+### Upgrades
+
+- [containerd v1.7.24](https://github.com/containerd/containerd/releases/tag/v1.7.24)
+- [Docker Buildx v0.20.1](https://github.com/docker/buildx/releases/tag/v0.20.1)
+- [Docker Compose v2.32.4](https://github.com/docker/compose/releases/tag/v2.32.4)
+- [Docker Engine v27.5.1](https://docs.docker.com/engine/release-notes/27/#2751)
+- [Docker Scout CLI v1.16.1](https://github.com/docker/scout-cli/releases/tag/v1.16.1)
+- [Runc v1.2.2](https://github.com/opencontainers/runc/releases/tag/v1.2.2)
+- [NVIDIA Container Toolkit v1.17.4](https://github.com/NVIDIA/nvidia-container-toolkit/releases/tag/v1.17.4)
+- [Kubernetes v1.31.4](https://github.com/kubernetes/kubernetes/releases/tag/v1.31.4)
+- Docker Debug `v0.0.38`
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed a bug where access tokens generated by the `docker login` web flow could not be refreshed by Docker Desktop.
+- Fixed a bug where container creation via the Docker API using `curl` failed when [Enhanced Container Isolation](/manuals/security/for-admins/hardened-desktop/enhanced-container-isolation/_index.md) was enabled.
+- Fixed a bug where the RAM policy was not refreshed after the refresh period had elapsed.
+- Fixed a bug in Enhanced Container Isolation when mounting the Docker socket into a container, and then creating Docker containers with bind-mounts from within that container.
+- Fixed an issue that caused a discrepancy between the GUI and the CLI, the former forcing the `0.0.0.0` HostIP in port-mappings. This caused default binding IPs configured through Engine's `ip` flag, or through the bridge option `com.docker.network.bridge.host_binding_ipv4`, to not be used.
+- Fixed a bug where the `pac` setting was ignored in `admin-settings.json`.
+- Build UI:
+  - Added a progress status when importing a build.
+  - Fixed a bug where users were unable to import builds.
+  - Fixed a bug where some builders using SSH endpoints were not skipped.
+
+#### For Mac
+
+- Fixed a bug in Docker VMM where bind-mounts from non-root volumes would weren't working as expected.
+- Fixed an issue that caused startup failures on systems without IPv6. Fixes [docker/for-mac#14298](https://github.com/docker/for-win/issues/14298).
+- Fixed a bug that caused Docker Desktop to hang. See [docker/for-mac#7493](https://github.com/docker/for-mac/issues/7493#issuecomment-2568594070).
+- Fixed an issue where the uninstaller would fail if the settings file is missing.
+- Fixed a bug where config profiles deployed via Workspace One were ignored.
+
+#### For Windows
+
+- The Docker Desktop installer will now present a UAC prompt when launched.
+- Fixed an issue where Docker Desktop would fail to start for data disks created with old WSL versions that shared the same identifier as other WSL distros.
+- Docker Desktop now restarts when WSL integration settings are changed. This ensures proper setup of WSL integration when using Enhanced Container Isolation.
+
+#### For Linux
+
+- Added support for gvisor networking. Users with an incompatible version of qemu (8.x) will stay on qemu networking, and others will be migrated automatically.
+
+### Deprecation
+
+#### For all platforms
+
+- Deprecated `com.docker.diagnose check|check-dot|check-hypervisordetect-host-hypervisor`.
 
 ## 4.37.2
 
@@ -1356,7 +1481,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 #### For Mac
 
-- Fixed a kernel panic on Apple silicon Macs with macOS version below 12.5. Fixes [docker/for-mac#6975](https://github.com/docker/for-mac/issues/6975).
+- Fixed a kernel panic on Apple Silicon Macs with macOS version earlier than 12.5. Fixes [docker/for-mac#6975](https://github.com/docker/for-mac/issues/6975).
 - Fixed a bug where Docker Desktop failed to start if invalid directories were included in `filesharingDirectories`. Fixes [docker/for-mac#6980](https://github.com/docker/for-mac/issues/6980).
 - Fixed a bug where installer is creating root-owned directories. Fixes [docker/for-mac#6984](https://github.com/docker/for-mac/issues/6984).
 - Fixed a bug where installer is failing on setting up the docker socket when missing `/Library/LaunchDaemons`. Fixes [docker/for-mac#6967](https://github.com/docker/for-mac/issues/6967).

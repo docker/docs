@@ -6,6 +6,7 @@ weight: 40
 aliases:
   - /storage/storagedriver/imagesandcontainers/
   - /storage/storagedriver/
+  - /engine/userguide/storagedriver/imagesandcontainers/
 ---
 
 To use storage drivers effectively, it's important to know how Docker builds and

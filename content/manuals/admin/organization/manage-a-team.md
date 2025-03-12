@@ -46,8 +46,6 @@ The organization owner can also add additional organization owners to help them 
 {{< /tab >}}
 {{< tab name="Admin Console" >}}
 
-{{< include "admin-early-access.md" >}}
-
 1. In Admin Console, select your organization.
 2. In the **User management** section, select **Teams**.
 3. Select **Create team**.
@@ -132,8 +130,6 @@ Organization owners can delete a team in Docker Hub or Admin Console. When you r
 
 {{< /tab >}}
 {{< tab name="Admin Console" >}}
-
-{{< include "admin-early-access.md" >}}
 
 1. In the [Admin Console](https://app.docker.com/admin), select your organization.
 2. In the **User management** section, select **Teams**.

@@ -19,8 +19,6 @@ Learn how to manage members for your organization in Docker Hub and the Docker A
 {{< /tab >}}
 {{< tab name="Admin Console" >}}
 
-{{< include "admin-early-access.md" >}}
-
 {{% admin-users product="admin" %}}
 
 {{< /tab >}}
@@ -35,6 +33,14 @@ To accept an invitation:
 1. Navigate to your email inbox and open the Docker email with an invitation to
 join the Docker organization.
 2. To open the link to Docker Hub, select the **click here** link.
+
+   > [!WARNING]
+   >
+   > Invitation email links expire after 14 days. If your email link has expired,
+   > you can sign in to [Docker Hub](https://hub.docker.com/) with the email
+   > address the link was sent to and accept the invitation from the
+   > **Notifications** panel.
+
 3. The Docker create an account page will open. If you already have an account, select **Already have an account? Sign in**.
 If you do not have an account yet, create an account using the same email
 address you received the invitation through.
@@ -63,10 +69,11 @@ To resend an invitation from Docker Hub:
 **Resend invitation**.
 4. Select **Invite** to confirm.
 
+You can also resend an invitation using the Docker Hub API. For more information,
+see the [Resend an invite](https://docs.docker.com/reference/api/hub/latest/#tag/invites/paths/~1v2~1invites~1%7Bid%7D~1resend/patch) API endpoint.
+
 {{< /tab >}}
 {{< tab name="Admin Console" >}}
-
-{{< include "admin-early-access.md" >}}
 
 To resend an invitation from the Admin Console:
 
@@ -90,10 +97,11 @@ To remove a member's invitation from Docker Hub:
 3. In the table, select the **Action** icon, and then select **Remove member** or **Remove invitee**.
 4. Follow the on-screen instructions to remove the member or invitee.
 
+You can also remove an invitation using the Docker Hub API. For more information,
+see the [Cancel an invite](https://docs.docker.com/reference/api/hub/latest/#tag/invites/paths/~1v2~1invites~1%7Bid%7D/delete) API endpoint.
+
 {{< /tab >}}
 {{< tab name="Admin Console" >}}
-
-{{< include "admin-early-access.md" >}}
 
 To remove an invitation from the Admin Console:
 
@@ -132,8 +140,6 @@ To add a member to a team with Docker Hub:
 {{< /tab >}}
 {{< tab name="Admin Console" >}}
 
-{{< include "admin-early-access.md" >}}
-
 To add a member to a team with the Admin Console:
 
 1. In the [Admin Console](https://app.docker.com/admin), select your organization.
@@ -149,6 +155,10 @@ To add a member to a team with the Admin Console:
 
 ### Remove a member from a team
 
+> [!NOTE]
+>
+> If your organization uses single sign-on (SSO) with [SCIM](/manuals/security/for-admins/provisioning/scim.md) enabled, you should remove members from your identity provider (IdP). This will automatically remove members from Docker. If SCIM is disabled, you must manually manage members in Docker.
+
 Organization owners can remove a member from a team in Docker Hub or Admin Console. Removing the member from the team will revoke their access to the permitted resources.
 
 {{< tabs >}}
@@ -163,8 +173,6 @@ To remove a member from a specific team with Docker Hub:
 
 {{< /tab >}}
 {{< tab name="Admin Console" >}}
-
-{{< include "admin-early-access.md" >}}
 
 To remove a member from a specific team with the Admin Console:
 
@@ -218,8 +226,6 @@ To export a CSV file of your members:
 
 {{< /tab >}}
 {{< tab name="Admin Console" >}}
-
-{{< include "admin-early-access.md" >}}
 
 To export a CSV file of your members:
 

@@ -7,7 +7,7 @@ aliases:
 weight: 140
 ---
 
-{{< include "compose/deploy.md" >}}
+{{% include "compose/deploy.md" %}}
 
 ## Attributes
 

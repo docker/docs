@@ -74,7 +74,7 @@ Specifies the path to a Compose file. Specifying multiple Compose files is suppo
    For example:
 
       ```console
-      COMPOSE_FILE=docker-compose.yml:docker-compose.prod.yml
+      COMPOSE_FILE=compose.yaml:compose.prod.yaml
       ```  
    The path separator can also be customized using [`COMPOSE_PATH_SEPARATOR`](#compose_path_separator).  
 
@@ -172,7 +172,7 @@ If `COMPOSE_ENV_FILES` is not set, and you don't provide `--env-file` in the CLI
 
 ### COMPOSE\_MENU
 
-{{< introduced compose 2.26.0 "/manuals/compose/releases/release-notes.md#2260" >}}
+{{< summary-bar feature_name="Compose menu" >}}
 
 When enabled, Compose displays a navigation menu where you can choose to open the Compose stack in Docker Desktop, switch on [`watch` mode](../file-watch.md), or use [Docker Debug](/reference/cli/docker/debug.md).
 
@@ -183,7 +183,7 @@ When enabled, Compose displays a navigation menu where you can choose to open th
 
 ### COMPOSE\_EXPERIMENTAL
 
-{{< introduced compose 2.26.0 "/manuals/compose/releases/release-notes.md#2260" >}}
+{{< summary-bar feature_name="Compose experimental" >}}
 
 This is an opt-out variable. When turned off it deactivates the experimental features such as the navigation menu or [Synchronized file shares](/manuals/desktop/features/synchronized-file-sharing.md).
 

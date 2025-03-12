@@ -32,7 +32,7 @@ is no need for port mappings in these scenarios.
 ## Options
 
 The following table describes the driver-specific options that you can pass to
-`--option` when creating a network using the `ipvlan` driver.
+`--opt` when creating a network using the `ipvlan` driver.
 
 | Option        | Default  | Description                                                           |
 | ------------- | -------- | --------------------------------------------------------------------- |

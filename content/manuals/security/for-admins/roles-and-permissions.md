@@ -110,12 +110,8 @@ The following table outlines Docker Build Cloud management permissions for membe
 
 | Permission                   | Member | Editor | Organization owner |
 | ---------------------------- | :----- | :----- | :----------------- |
-| Sign up for starter plan     | ✅     | ✅     | ✅                 |
-| Use a cloud builder          | ✅ \*  | ✅ \*  | ✅ \*              |
-| Manage seat allocation       | ✅     | ✅     | ✅                 |
+| Use a cloud builder          | ✅     | ✅     | ✅                 |
 | Create and remove builders   | ✅     | ✅     | ✅                 |
-| Buy seats or reduce seat cap | ❌     | ❌     | ✅                 |
+| Configure builder settings   | ✅     | ✅     | ✅                 |
 | Buy minutes                  | ❌     | ❌     | ✅                 |
 | Manage subscription          | ❌     | ❌     | ✅                 |
-
-_\* Requires a Docker Build Cloud seat allocation_

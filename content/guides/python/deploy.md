@@ -161,7 +161,7 @@ In these Kubernetes YAML file, there are various objects, separated by the `---`
   your Python application](configure-ci-cd.md).
 - A Service, which will define how the ports are mapped in the containers.
 - A PersistentVolumeClaim, to define a storage that will be persistent through restarts for the database.
-- A Secret, Keeping the database password as a example using secret kubernetes resource.
+- A Secret, Keeping the database password as an example using secret kubernetes resource.
 - A NodePort service, which will route traffic from port 30001 on your host to
   port 8001 inside the pods it routes to, allowing you to reach your app
   from the network.

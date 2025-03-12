@@ -15,8 +15,6 @@ owners for all associated organizations. Unlike organization owners, company
 owners don't need to be member of an organization. When company owners aren't a
 member in an organization, they don't occupy a seat.
 
-{{< include "admin-early-access.md" >}}
-
 ## Add a company owner
 
 1. Sign in to the [Admin Console](https://admin.docker.com).

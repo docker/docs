@@ -45,8 +45,8 @@ grid:
         url: "/build-cloud/"
       - text: "Setup"
         url: "/build-cloud/setup/"
-      - text: "Optimization"
-        url: "/build-cloud/optimization/"
+      - text: "Release notes"
+        url: "/build-cloud/release-notes/"
   - title: Docker Compose
     icon: polyline
     description: |

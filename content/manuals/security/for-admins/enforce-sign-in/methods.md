@@ -27,7 +27,7 @@ To enforce sign-in for Docker Desktop on Windows, you can configure a registry k
    > [!IMPORTANT]
    >
    > As of Docker Desktop version 4.36 and later, you can add more than one organization. With Docker Desktop version 4.35 and earlier, if you add more than one organization sign-in enforcement silently fails.
-3. Use your organization's name, all lowercase as string data.
+3. Use your organization's name, all lowercase as string data. If you're adding more than one organization, make sure there is an empty space between each organization name.
 4. Restart Docker Desktop.
 5. When Docker Desktop restarts, verify that the **Sign in required!** prompt appears.
 
@@ -53,10 +53,7 @@ The following example outlines how to deploy a registry key to enforce sign-in o
 
 ## Configuration profiles method (Mac only)
 
-> [!NOTE]
->
-> The configuration profiles method is in [Early Access](/manuals/release-lifecycle.md)
-> and is available with Docker Desktop version 4.36 and later.
+{{< summary-bar feature_name="Config profiles" >}}
 
 Configuration profiles are a feature of macOS that let you distribute
 configuration information to the Macs you manage. It is the safest method to

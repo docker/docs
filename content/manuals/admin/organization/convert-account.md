@@ -60,10 +60,10 @@ Consider the following effects of converting your account:
 
 4. Select **Account settings**.
 
-5. In the **Account management** section, select **Convert account**.
+5. Select **Convert**.
 
 6. Review the warning displayed about converting a user account. This action cannot be undone and has considerable implications for your assets and the account.
 
-7. Enter a **Docker ID** to set an organization owner. This is the user account that will manage the organization, and the only way to access the organization settings after conversion. You cannot use the same Docker ID as the account you are trying to convert.
+7. Enter a **Username of new owner** to set an organization owner. This is the user account that will manage the organization, and the only way to access the organization settings after conversion. You cannot use the same Docker ID as the account you are trying to convert.
 
-8. Select **Confirm and purchase** to confirm. The new owner receives a notification email. Use that owner account to sign in and manage the new organization.
+8. Select **Confirm**. The new owner receives a notification email. Use that owner account to sign in and manage the new organization.

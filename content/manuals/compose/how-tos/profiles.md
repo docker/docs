@@ -8,7 +8,7 @@ aliases:
 - /compose/profiles/
 ---
 
-{{< include "compose/profiles.md" >}}
+{{% include "compose/profiles.md" %}}
 
 ## Assigning profiles to services
 
@@ -61,7 +61,7 @@ $ COMPOSE_PROFILES=debug docker compose up
 ```
 
 Both commands start the services with the `debug` profile enabled.
-In the previous `compose.yml` file, this starts the services
+In the previous `compose.yaml` file, this starts the services
 `db`, `backend` and `phpmyadmin`.
 
 ### Start multiple profiles
@@ -187,7 +187,7 @@ $ docker compose --profile debug down
 $ COMPOSE_PROFILES=debug docker compose down
 ```
 
-Both commands stop and remove services with the `debug` profile. In the following `compose.yml` file, this stops the services `db` and `phpmyadmin`.
+Both commands stop and remove services with the `debug` profile. In the following `compose.yaml` file, this stops the services `db` and `phpmyadmin`.
 
 ```yaml
 services:

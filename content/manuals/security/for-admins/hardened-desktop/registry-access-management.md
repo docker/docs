@@ -46,8 +46,6 @@ feature always takes effect.
 {{< /tab >}}
 {{< tab name="Admin Console" >}}
 
-{{< include "admin-early-access.md" >}}
-
 {{% admin-registry-access product="admin" %}}
 
 {{< /tab >}}

@@ -30,8 +30,6 @@ Make sure you have completed the following before you begin:
 {{< tabs >}}
 {{< tab name="Admin Console" >}}
 
-{{< include "admin-early-access.md" >}}
-
 1. Sign in to the [Admin Console](https://admin.docker.com/).
 2. Select your organization or company from the **Choose profile** page. Note that when an organization is part of a company, you must select the company and configure the domain for the organization at the company level.
 3. Under Security and access, select **SSO and SCIM**.
@@ -146,6 +144,12 @@ After creating your connection in Docker and your IdP, you can cross-connect the
 2. Copy the following values from the Okta SAML setup instruction page:
     - **SAML Sign-in URL**
     - **x509 Certificate**
+
+        > [!IMPORTANT]
+        >
+        > You must copy the entire contents of your **x509 Certificate**,
+        including the `----BEGIN CERTIFICATE----` and `----END CERTIFICATE----` lines.
+
 3. Open Docker Hub or the Admin Console. Your SSO configuration page should still be open from Step one of this guide.
 4. Select **Next** to open the **Update single-sign on connection** page.
 5. Paste your Okta **SAML Sign-in URL** and **x509 Certificate** values in Docker.
@@ -160,7 +164,13 @@ After creating your connection in Docker and your IdP, you can cross-connect the
 2. Open your downloaded **Certificate (Base64)** in a text editor.
 3. Copy the following values:
     - From Azure AD: **Login URL**
-    - Copy your the contents of your **Certificate (Base64)** file from your text editor
+    - Copy the contents of your **Certificate (Base64)** file from your text editor
+
+        > [!IMPORTANT]
+        >
+        > You must copy the entire contents of your **Certificate (base64)**,
+        including the `----BEGIN CERTIFICATE----` and `----END CERTIFICATE----` lines.
+
 4. Open Docker Hub or the Admin Console. Your SSO configuration page should still be open from Step one of this guide.
 5. Paste your **Login URL** and **Certificate (Base64)** values in Docker.
 6. Select **Next**.
@@ -211,6 +221,10 @@ Enforcing SSO requires users to use SSO when signing into Docker. This centraliz
 
 Your users must now sign in to Docker with SSO.
 
+> [!NOTE]
+>
+> When SSO is enforced, [users can't use passwords to access the Docker CLI](/security/security-announcements/#deprecation-of-password-logins-on-cli-when-sso-enforced). Users must use a [personal access token](/manuals/security/for-admins/access-tokens.md) (PAT) for authentication to access the Docker CLI.
+
 ## More resources
 
 The following videos demonstrate how to enforce SSO.
@@ -223,3 +237,4 @@ The following videos demonstrate how to enforce SSO.
 
 - [Provision users](/manuals/security/for-admins/provisioning/_index.md)
 - [Enforce sign-in](../enforce-sign-in/_index.md)
+- [Create access tokens](/manuals/security/for-admins/access-tokens.md)

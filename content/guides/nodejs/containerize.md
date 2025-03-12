@@ -31,7 +31,7 @@ directory to a directory that you want to work in, and run the following command
 to clone the repository:
 
 ```console
-$ git clone https://github.com/docker/docker-nodejs-sample
+$ git clone https://github.com/docker/docker-nodejs-sample && cd docker-nodejs-sample
 ```
 
 ## Initialize Docker assets

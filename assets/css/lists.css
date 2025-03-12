@@ -1,0 +1,12 @@
+.prose ol {
+    list-style-type: decimal;
+}
+
+.prose ol ol {
+    list-style-type: lower-alpha;
+}
+
+.prose ol ol ol {
+    list-style-type: lower-roman;
+}
+

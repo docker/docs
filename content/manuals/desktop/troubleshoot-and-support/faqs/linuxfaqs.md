@@ -6,6 +6,7 @@ linkTitle: Linux
 tags: [FAQ]
 aliases:
 - /desktop/linux/space/
+- /desktop/faqs/linuxfaqs/
 weight: 40
 ---
 
@@ -54,11 +55,11 @@ and `/etc/subgid` (see `subgid(5)`) must be present. Docker Desktop only
 supports subordinate ID delegation configured via files. Docker Desktop maps the
 current user ID and GID to 0 in the containers. It uses the first entry
 corresponding to the current user in `/etc/subuid` and `/etc/subgid` to set up
-mappings for IDs above 0 in the containers.
+mappings for IDs greater than 0 in the containers.
 
 | ID in container | ID on host                                                                       |
 | --------------- | -------------------------------------------------------------------------------- |
-| 0 (root)        | ID of the user running DD (e.g. 1000)                                            |
+| 0 (root)        | ID of the user running Docker Desktop (e.g. 1000)                                            |
 | 1               | 0 + beginning of ID range specified in `/etc/subuid`/`/etc/subgid` (e.g. 100000) |
 | 2               | 1 + beginning of ID range specified in `/etc/subuid`/`/etc/subgid` (e.g. 100001) |
 | 3               | 2 + beginning of ID range specified in `/etc/subuid`/`/etc/subgid` (e.g. 100002) |

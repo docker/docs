@@ -7,7 +7,7 @@ aliases:
 weight: 100
 ---
 
-{{< include "compose/merge.md" >}}
+{{% include "compose/merge.md" %}}
 
 These rules are outlined below. 
 
@@ -107,8 +107,8 @@ While these types are modeled in a Compose file as a sequence, they have special
 | Attribute   | Unique key               |
 |-------------|--------------------------|
 | volumes     |  target                  |
-| secrets     |  source                  |
-| configs     |  source                  |
+| secrets     |  target                  |
+| configs     |  target                  |
 | ports       |  {ip, target, published, protocol}   |
 
 When merging Compose files, Compose appends new entries that do not violate a uniqueness constraint and merge entries that share a unique key.
@@ -161,7 +161,7 @@ services:
       FOO: BAR           
 ```
 
-And an `compose.override.yaml` file:
+And a `compose.override.yaml` file:
 
 ```yaml
 services:
@@ -182,9 +182,9 @@ services:
 
 ### Replace value
 
-{{< introduced compose 2.24.4 "/manuals/compose/releases/release-notes.md#2244" >}}
+{{< summary-bar feature_name="Compose replace file" >}}
 
-While `!reset` can be used to remove a declaration from a Compose file using an override file, `!override` allows you 
+While `!reset` can be used to remove a declaration from a Compose file using an override file, `!override` allows you
 to fully replace an attribute, bypassing the standard merge rules. A typical example is to fully replace a resource definition, to rely on a distinct model but using the same name.
 
 A base `compose.yaml` file:
@@ -194,7 +194,7 @@ services:
   app:
     image: myapp
     ports:
-      - "8080:80"            
+      - "8080:80"
 ```
 
 To remove the original port, but expose a new one, the following override file is used:

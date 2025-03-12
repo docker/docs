@@ -30,7 +30,7 @@ included with Docker, you can also implement and use [logging driver plugins](pl
 > output, which can lead to disk space exhaustion.
 >
 > Docker keeps the json-file logging driver (without log-rotation) as a default
-> to remain backward compatibility with older versions of Docker, and for situations
+> to remain backwards compatible with older versions of Docker, and for situations
 > where Docker is used as runtime for Kubernetes.
 >
 > For other situations, the `local` logging driver is recommended as it performs

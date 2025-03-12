@@ -81,7 +81,7 @@ and kept indefinitely. Therefore, the size of the local cache will continue to
 grow (see [`moby/buildkit#1896`](https://github.com/moby/buildkit/issues/1896)
 for more information).
 
-When importing cache using `--cache-to`, you can specify the `digest` parameter
+When importing cache using `--cache-from`, you can specify the `digest` parameter
 to force loading an older version of the cache, for example:
 
 ```console

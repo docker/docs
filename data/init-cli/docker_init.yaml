@@ -16,12 +16,11 @@ long: |-
     init` can overwrite it, using `docker-compose.yaml` as the name for the
     Compose file.
     
-    > **Warning**
+    > [!WARNING]
     >
     > You can't recover overwritten files.
     > To back up an existing file before selecting to overwrite it, rename the file or copy it to another directory.
-    { .warning }
-  
+
   After running `docker init`, you can choose one of the following templates:
     
     * ASP.NET Core: Suitable for an ASP.NET Core application.
