@@ -19,6 +19,12 @@ For more information, see [Docker ID](/accounts/create-account/). If your admini
 
 Developers may have multiple Docker IDs in order to separate their Docker IDs associated with an organization with a Docker Business or Team subscription, and their personal use Docker IDs.
 
+### Can I change my Docker ID?
+
+No. You can't change your Docker ID once it's created. If you need a different Docker ID, you must create a new Docker account with a new Docker ID.
+
+Additionally, you can't reuse a Docker ID in the future if you deactivate your account.
+
 ### What if my Docker ID is taken?
 
 All Docker IDs are first-come, first-served except for companies that have a US Trademark on a username. If you have a trademark for your namespace, [Docker Support](https://hub.docker.com/support/contact/) can retrieve the Docker ID for you.
@@ -73,7 +79,7 @@ A [service account](../../docker-hub/service-accounts.md) is a Docker ID used fo
 
 ### Can I delete or deactivate a Docker account for another user?
 
-Only someone with access to the Docker account can deactivate the account. For more details, see [Deactivating an account](../../admin/deactivate-account.md).
+Only someone with access to the Docker account can deactivate the account. For more details, see [Deactivating an account](../../admin/organization/deactivate-account.md).
 
 If the user is a member of your organization, you can remove the user from your organization. For more details, see [Remove a member or invitee](../../admin/organization/members.md#remove-a-member-from-a-team).
 

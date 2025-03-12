@@ -2,13 +2,14 @@
 title: Deactivate an organization
 description: Learn how to deactivate a Docker organization.
 keywords: Docker Hub, delete, deactivate organization, account, organization management
+weight: 42
 aliases:
 - /docker-hub/deactivate-account/
 ---
 
 {{< summary-bar feature_name="General admin" >}}
 
-You can deactivate an account at any time. This section describes the prerequisites and steps to deactivate an organization account. For information on deactivating a user account, see [Deactivate a user account](../accounts/deactivate-user-account.md).
+You can deactivate an account at any time. This section describes the prerequisites and steps to deactivate an organization account. For information on deactivating a user account, see [Deactivate a user account](../../accounts/deactivate-user-account.md).
 
 > [!WARNING]
 >
@@ -21,13 +22,13 @@ Before deactivating an organization, complete the following:
 - Download any images and tags you want to keep:
   `docker pull -a <image>:<tag>`.
 
-- If you have an active Docker subscription, [downgrade it to a free subscription](../subscription/change.md).
+- If you have an active Docker subscription, [downgrade it to a free subscription](../../subscription/change.md).
 
 - Remove all other members within the organization.
 
-- Unlink your [Github and Bitbucket accounts](../docker-hub/repos/manage/builds/link-source.md#unlink-a-github-user-account).
+- Unlink your [Github and Bitbucket accounts](../../docker-hub/repos/manage/builds/link-source.md#unlink-a-github-user-account).
 
-- For Business organizations, [remove your SSO connection](../security/for-admins/single-sign-on/manage/#remove-an-organization).
+- For Business organizations, [remove your SSO connection](../../security/for-admins/single-sign-on/manage/#remove-an-organization).
 
 ## Deactivate
 
