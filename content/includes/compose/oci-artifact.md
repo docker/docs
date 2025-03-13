@@ -1,0 +1,1 @@
+Docker Compose supports working with [OCI artifacts](https://docs.docker.com/docker-hub/repos/manage/hub-images/oci-artifacts/), allowing you to package and distribute your Compose applications through container registries. This means you can store your Compose files alongside your container images, making it easier to version, share, and deploy your multi-container applications.
