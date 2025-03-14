@@ -13,6 +13,25 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.34.0
+
+{{< release-date date="2025-03-14" >}}
+
+### Bug fixes and enhancements
+
+- Added support of refresh `pull_policy` values `daily`, `weekly` and `every_<duration>`
+- Introduced `include` attribut to `watch` definition to match file patterns
+- Introduced `--env-from-file` in flag for the `docker compose run` command
+- Promoted `publish` as a regular command of Compose
+- Fixed a bug by loading `env_file` after services have been selected
+
+### Update
+
+- Dependencies upgrade: bump docker engine and cli to v28.0.1
+- Dependencies upgrade: bump buildkit to v0.17.1
+- Dependencies upgrade: Bump compose-go v2.4.9
+- Dependencies upgrade: Bump buildx v0.21.2
+
 ## 2.33.1 
 
 {{< release-date date="2025-02-21" >}}
