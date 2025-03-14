@@ -21,7 +21,7 @@ For more detailed information, see the [release notes in the Compose repo](https
 
 - Added support of refresh `pull_policy` values `daily`, `weekly` and `every_<duration>`
 - Introduced `include` attribut to `watch` definition to match file patterns
-- Introduced `--env-from-file` in docker compose run command
+- Introduced `--env-from-file` in flag for the `docker compose run` command
 - Promoted `publish` as a regular command of Compose
 - Fixed a bug by loading `env_file` after services have been selected
 
