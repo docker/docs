@@ -33,7 +33,7 @@ The image is then uploaded and available for use in Docker Hub.
 You can view the available tags and the size of the associated image.
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
-2. Select **Repositories**.
+2. Select **My Hub** > **Repositories**.
 
    A list of your repositories appears.
 
@@ -51,7 +51,7 @@ Only the repository owner or other team members with granted permissions can
 delete tags.
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
-2. Select **Repositories**.
+2. Select **My Hub** > **Repositories**.
 
    A list of your repositories appears.
 

@@ -533,7 +533,7 @@ developer ecosystem. To share your image:
 
 4. Verify that you pushed the image to Docker Hub.
    1. Go to [Docker Hub](https://hub.docker.com).
-   2. Select **Repositories**.
+   2. Select **My Hub** > **Repositories**.
    3. View the **Last pushed** time for your repository.
 
 Other users can now download and run your image using the `docker run` command. They need to replace `YOUR-USER-NAME` with your Docker ID.
