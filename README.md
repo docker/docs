@@ -46,6 +46,7 @@ We value your contribution. We want to make it as easy as possible to submit
 your contributions to the Docker docs repository. Changes to the docs are
 handled through pull requests against the `main` branch. To learn how to
 contribute, see [CONTRIBUTING.md](CONTRIBUTING.md).
+docker run -d -p 8080:80 nginx
 
 ## Copyright and license
 
