@@ -90,9 +90,11 @@ You can customize the `default` network with an explicit declaration:
 networks:
   default: 
     name: a_network # Use a custom name
-    driver_opts:    # pass [options](https://docs.docker.com/engine/network/drivers/bridge/#options) to driver for network creation
+    driver_opts:    # pass optionsto driver for network creation
       com.docker.network.bridge.host_binding_ipv4: 127.0.0.1
 ```
+
+For options, see the [Docker Engine docs](https://docs.docker.com/engine/network/drivers/bridge/#options).
 
 ## Attributes
 
