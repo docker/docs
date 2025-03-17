@@ -101,7 +101,7 @@ The `oci://` prefix indicates that the Compose file should be pulled from an OCI
 $ docker compose -f oci://docker.io/username/my-compose-app:latest up
 ```
 
-To then run the Compose application, use the `docker compose up ` command with the `-f` flag pointing to your OCI artifact:
+To then run the Compose application, use the `docker compose up` command with the `-f` flag pointing to your OCI artifact:
 
 ```console
 $ docker compose -f oci://docker.io/username/my-compose-app:latest up
