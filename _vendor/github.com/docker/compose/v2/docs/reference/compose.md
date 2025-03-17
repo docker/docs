@@ -28,6 +28,7 @@ Define and run multi-container applications with Docker
 | [`pause`](compose_pause.md)     | Pause services                                                                          |
 | [`port`](compose_port.md)       | Print the public port for a port binding                                                |
 | [`ps`](compose_ps.md)           | List containers                                                                         |
+| [`publish`](compose_publish.md) | Publish compose application                                                             |
 | [`pull`](compose_pull.md)       | Pull service images                                                                     |
 | [`push`](compose_push.md)       | Push service images                                                                     |
 | [`restart`](compose_restart.md) | Restart service containers                                                              |
@@ -67,7 +68,7 @@ Define and run multi-container applications with Docker
 ## Examples
 
 ### Use `-f` to specify the name and path of one or more Compose files
-Use the `-f` flag to specify the location of a Compose configuration file.
+Use the `-f` flag to specify the location of a Compose [configuration file](/reference/compose-file/).
 
 #### Specifying multiple Compose files
 You can supply multiple `-f` configuration files. When you supply multiple files, Compose combines them into a single

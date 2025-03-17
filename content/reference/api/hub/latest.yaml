@@ -113,7 +113,7 @@ tags:
     description: |
       The Audit Logs API endpoints allow you to query audit log events across a namespace.
 
-      For more information, see [Audit Log](https://docs.docker.com/admin/organization/activity-logs/).
+      For more information, see [Audit Logs](https://docs.docker.com/admin/organization/activity-logs/).
   - name: org-settings
     x-displayName: Org Settings
     description: |
@@ -272,7 +272,7 @@ paths:
           $ref: '#/components/responses/unauthorized'
   /v2/access-tokens:
     post:
-      summary: Create a personal access token
+      summary: Create personal access token
       description: Creates and returns a personal access token.
       tags:
         - access-tokens
@@ -296,7 +296,7 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
     get:
-      summary: Get a list of personal access tokens
+      summary: List personal access tokens
       description: Returns a paginated list of personal access tokens.
       tags:
         - access-tokens
@@ -332,7 +332,7 @@ paths:
         schema:
           type: string
     patch:
-      summary: Update a personal access token
+      summary: Update personal access token
       description: |
         Updates a personal access token partially. You can either update the token's label or enable/disable it.
       tags:
@@ -357,7 +357,7 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
     get:
-      summary: Get a personal access token
+      summary: Get personal access token
       description: Returns a personal access token by UUID.
       tags:
         - access-tokens
@@ -381,7 +381,7 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
     delete:
-      summary: Delete a personal access token
+      summary: Delete personal access token
       description: |
         Deletes a personal access token permanently. This cannot be undone.
       tags:
@@ -395,11 +395,102 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+  /v2/auditlogs/{account}/actions:
+    get:
+      summary: List audit log actions
+      description: |
+        List audit log actions for a namespace to be used as a filter for querying audit log events.
+      operationId: AuditLogs_ListAuditActions
+      security: 
+        - bearerAuth: []
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAuditActionsResponse'
+              examples:
+                response:
+                  value:
+                    actions:
+                      org:
+                        actions:
+                          - name: team.create
+                            description: contains team create events
+                            label: Team Created
+                          - name: team.delete
+                            description: contains team delete events
+                            label: Team Deleted
+                          - name: team.member.add
+                            description: contains team member add events
+                            label: Team Member Added
+                          - name: team.member.remove
+                            description: contains team member remove events
+                            label: Team Member Removed
+                          - name: team.member.invite
+                            description: contains team member invite events
+                            label: Team Member Invited
+                          - name: member.removed
+                            description: contains org member remove events
+                            label: Organization Member Removed
+                          - name: create
+                            description: contains organization create events
+                            label: Organization Created
+                        label: Organization
+                      repo:
+                        actions:
+                          - name: create
+                            description: contains repository create events
+                            label: Repository Created
+                          - name: delete
+                            description: contains repository delete events
+                            label: Repository Deleted
+                          - name: change_privacy
+                            description: contains repository privacy change events
+                            label: Privacy Changed
+                          - name: tag.push
+                            description: contains image tag push events
+                            label: Tag Pushed
+                          - name: tag.delete
+                            description: contains image tag delete events
+                            label: Tag Deleted
+                        label: Repository
+        '429':
+          description: ''
+          content:
+            application/json:
+              schema: {}
+              examples:
+                response:
+                  value:
+                    detail: Rate limit exceeded
+                    error: false
+        '500':
+          description: ''
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      parameters:
+        - name: account
+          description: Namespace to query audit log actions for.
+          in: path
+          required: true
+          schema:
+            type: string
+      tags:
+        - audit-logs
   /v2/auditlogs/{account}:
     get:
-      summary: Returns list of audit log events
-      description: Get audit log events for a given namespace.
-      operationId: AuditLogs_GetAuditLogs
+      summary: List audit log events
+      description: List audit log events for a given namespace.
+      operationId: AuditLogs_ListAuditLogs
       security:
         - bearerAuth: []
       responses:
@@ -502,97 +593,6 @@ paths:
             type: integer
             format: int32
             default: 25
-      tags:
-        - audit-logs
-  /v2/auditlogs/{account}/actions:
-    get:
-      summary: Returns list of audit log actions
-      description: |
-        Get audit log actions for a namespace to be used as a filter for querying audit events.
-      operationId: AuditLogs_GetAuditActions
-      security: 
-        - bearerAuth: []
-      responses:
-        '200':
-          description: A successful response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetAuditActionsResponse'
-              examples:
-                response:
-                  value:
-                    actions:
-                      org:
-                        actions:
-                          - name: team.create
-                            description: contains team create events
-                            label: Team Created
-                          - name: team.delete
-                            description: contains team delete events
-                            label: Team Deleted
-                          - name: team.member.add
-                            description: contains team member add events
-                            label: Team Member Added
-                          - name: team.member.remove
-                            description: contains team member remove events
-                            label: Team Member Removed
-                          - name: team.member.invite
-                            description: contains team member invite events
-                            label: Team Member Invited
-                          - name: member.removed
-                            description: contains org member remove events
-                            label: Organization Member Removed
-                          - name: create
-                            description: contains organization create events
-                            label: Organization Created
-                        label: Organization
-                      repo:
-                        actions:
-                          - name: create
-                            description: contains repository create events
-                            label: Repository Created
-                          - name: delete
-                            description: contains repository delete events
-                            label: Repository Deleted
-                          - name: change_privacy
-                            description: contains repository privacy change events
-                            label: Privacy Changed
-                          - name: tag.push
-                            description: contains image tag push events
-                            label: Tag Pushed
-                          - name: tag.delete
-                            description: contains image tag delete events
-                            label: Tag Deleted
-                        label: Repository
-        '429':
-          description: ''
-          content:
-            application/json:
-              schema: {}
-              examples:
-                response:
-                  value:
-                    detail: Rate limit exceeded
-                    error: false
-        '500':
-          description: ''
-          content:
-            application/json:
-              schema: {}
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/rpcStatus'
-      parameters:
-        - name: account
-          description: Namespace to query audit log actions for.
-          in: path
-          required: true
-          schema:
-            type: string
       tags:
         - audit-logs
   /v2/orgs/{name}/settings:
@@ -741,7 +741,6 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
   /v2/orgs/{org_name}/members:
-    x-audience: public
     parameters:
       - $ref: '#/components/parameters/org_name'
       - $ref: '#/components/parameters/search'
@@ -753,7 +752,15 @@ paths:
     get:
       summary: List org members
       description: |
-        Returns a list of members for an organization
+        Returns a list of members for an organization.
+
+        _The following fields are only visible to orgs with insights enabled._
+
+        - `last_logged_in_at`
+        - `last_seen_at`
+        - `last_desktop_version`
+
+        To make visible, please see [View Insights for organization users](https://docs.docker.com/admin/organization/insights/#view-insights-for-organization-users).
 
         <span class="oat"></span>
       tags:
@@ -778,7 +785,6 @@ paths:
         '404':
           $ref: '#/components/responses/not_found'
   /v2/orgs/{org_name}/members/export:
-    x-audience: public
     parameters:
       - $ref: '#/components/parameters/org_name'
     get:
@@ -2439,13 +2445,34 @@ components:
             - owners
         is_guest:
           type: boolean
-          description: If the organization has verfied domains, members that have email addresses outside of those domains will be flagged as Guest member
+          description: If the organization has verfied domains, members that have email addresses outside of those domains will be flagged as guests.
           example: false
         primary_email:
           type: string
-          description: User's email primary address
+          description: The user's email primary address.
           example: example@docker.com
           deprecated: true
+        last_logged_in_at:
+          type: string
+          format: date-time
+          description: |
+            Last time the user logged in. To access this field, you must have insights visible for your organization. See 
+            [Insights](https://docs.docker.com/admin/organization/insights/#view-insights-for-organization-users).
+          example: '2021-01-05T21:06:53.506400Z'
+        last_seen_at:
+          type: string
+          format: date-time
+          description: |
+            Last time the user was seen. To access this field, you must have insights visible for your organization. See 
+            [Insights](https://docs.docker.com/admin/organization/insights/#view-insights-for-organization-users).
+          example: '2021-01-05T21:06:53.506400Z'
+        last_desktop_version:
+          type: string
+          description: |
+            Last desktop version the user used. To access this field, you must have insights visible for your organization. See 
+            [Insights](https://docs.docker.com/admin/organization/insights/#view-insights-for-organization-users).
+          example: 4.29.0
+        
     org_member_paginated:
       type: object
       properties:
@@ -2500,6 +2527,7 @@ components:
           example: Docker Inc
         date_joined:
           type: string
+          format: date-time
           example: '2021-01-05T21:06:53.506400Z'
         full_name:
           type: string
@@ -2753,10 +2781,12 @@ components:
               example: https://hub.docker.com/v2/scim/2.0/Users/d80f7c79-7730-49d8-9a41-7c42fb622d9c
             created:
               type: string
+              format: date-time
               description: The creation date for the user as a RFC3339 formatted string.
               example: '2022-05-20T00:54:18Z'
             lastModified:
               type: string
+              format: date-time
               description: The date the user was last modified as a RFC3339 formatted string.
               example: '2022-05-20T00:54:18Z'
   parameters:
