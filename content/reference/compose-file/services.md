@@ -1321,7 +1321,7 @@ services:
 ```
 For more information about the `networks` top-level element, see [Networks](networks.md).
 
-### implicit default network
+### Implicit default network
 
 If `networks` is empty or absent from the Compose file, Compose considers an implicit definition for the service to be
 connected to the `default` network: 
