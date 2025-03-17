@@ -29,7 +29,7 @@ detailed instructions on converting an existing user account to an organization,
 {{< tab name="Docker Hub" >}}
 
 1. Sign in to [Docker Hub](https://hub.docker.com/) using your Docker ID, your email address, or your social provider.
-2. Select **Organizations** and then **Create Organization** to create a new organization.
+2. Select **My Hub**, select the account drop-down, and then **Create Organization** to create a new organization.
 3. Choose a plan for your organization, a billing cycle, and specify how many seats you need. See [Docker Pricing](https://www.docker.com/pricing/) for details on the features offered in the Team and Business plan.
 4. Select **Continue to profile**.
 5. Enter an **Organization namespace**. This is the official, unique name for
@@ -103,7 +103,7 @@ To view an organization:
       > then you are neither a member or an owner of it. An organization
       > administrator needs to add you as a member of the organization.
 
-2. Select **Organizations** in the top navigation bar, then choose your
+2. Select **My Hub** in the top navigation bar, then choose your
    organization from the list.
 
 The organization landing page displays various options that let you to

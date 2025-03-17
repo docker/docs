@@ -13,7 +13,7 @@ weight: 40
 > settings. This action can't be undone.
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
-2. Select **Repositories**.
+2. Select **My Hub** > **Repositories**.
 
    A list of your repositories appears.
 

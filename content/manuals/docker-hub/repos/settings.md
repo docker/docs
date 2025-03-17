@@ -22,9 +22,8 @@ creates the repository with your default repository privacy.
 ### Configure default repository privacy
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
-2. Select **Repositories**.
-3. Near the top-right corner, select the settings icon and then **Repository Settings**.
-4. Select the **Default privacy** for any new repository created.
+2. Select **My Hub** > **Settings** > **Default privacy**.
+3. Select the **Default privacy** for any new repository created.
 
    - **Public**: All new repositories appear in Docker Hub search results and can be
      pulled by everyone.
@@ -33,7 +32,7 @@ creates the repository with your default repository privacy.
      repository is created in an organization's namespace, then the repository
      is accessible to those with applicable roles or permissions.
 
-5. Select **Save**.
+4. Select **Save**.
 
 ## Autobuild notifications
 
@@ -43,13 +42,11 @@ autobuilds.
 ### Configure autobuild notifications
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
-2. Select **Repositories**.
-3. Near the top-right corner, select the settings icon and then **Repository Settings**.
-4. Select the **Notifications**
-5. Select the notifications to receive by email.
+2. Select **My Hub** > **Repositories** > **Settings** > **Notifications**.
+3. Select the notifications to receive by email.
 
    - **Off**: No notifications.
    - **Only failures**: Only notifications about failed builds.
    - **Everything**: Notifications for successful and failed builds.
 
-6. Select **Save**.
+4. Select **Save**.

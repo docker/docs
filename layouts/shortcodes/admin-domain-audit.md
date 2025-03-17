@@ -1,5 +1,5 @@
 {{ $product_link := "[Docker Hub](https://hub.docker.com)" }}
-{{ $domain_navigation := "Select **Organizations**, your organization, **Settings**, and then **Security**." }}
+{{ $domain_navigation := "Select **My Hub**, your organization, **Settings**, and then **Security**." }}
 {{ $sso_link := "[SSO](/security/for-admins/single-sign-on/)" }}
 {{ $scim_link := "[SCIM](/security/for-admins/provisioning/scim/)" }}
 

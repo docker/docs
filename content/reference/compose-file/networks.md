@@ -62,6 +62,40 @@ networks:
 
 The advanced example shows a Compose file which defines two custom networks. The `proxy` service is isolated from the `db` service, because they do not share a network in common. Only `app` can talk to both.
 
+## The default network
+
+When a Compose file doesn't declare explicit networks, Compose uses an implicit `default` network. Services without an explicit [`networks`](services.md#networks) declaration are connected by Compose to this `default` network:
+
+
+```yml
+services:
+  some-service:
+    image: foo
+```
+This example is actually equivalent to:
+
+```yml
+services:
+  some-service:
+    image: foo
+    networks:
+      default: {}  
+networks:
+  default: {}      
+```
+
+You can customize the `default` network with an explicit declaration:
+
+```yml
+networks:
+  default: 
+    name: a_network # Use a custom name
+    driver_opts:    # pass options to driver for network creation
+      com.docker.network.bridge.host_binding_ipv4: 127.0.0.1
+```
+
+For options, see the [Docker Engine docs](https://docs.docker.com/engine/network/drivers/bridge/#options).
+
 ## Attributes
 
 ### `driver`

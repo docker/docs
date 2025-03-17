@@ -142,7 +142,7 @@ services:
 
 In addition to the previously described mechanism, an override Compose file can also be used to remove elements from your application model.
 For this purpose, the custom [YAML tag](https://yaml.org/spec/1.2.2/#24-tags) `!reset` can be set to
-override a value set by the overriden Compose file. A valid value for attribute must be provided,
+override a value set by the overridden Compose file. A valid value for attribute must be provided,
 but will be ignored and target attribute will be set with type's default value or `null`. 
 
 For readability, it is recommended to explicitly set the attribute value to the null (`null`) or empty
