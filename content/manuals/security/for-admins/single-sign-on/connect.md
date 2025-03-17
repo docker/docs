@@ -44,7 +44,7 @@ Make sure you have completed the following before you begin:
 {{< tab name="Docker Hub" >}}
 
 1. Sign in to Docker Hub.
-2. Select **Organizations** and then your organization from the list.
+2. Select **My Hub** and then your organization from the list.
 3. On your organization page, select **Settings** and then **Security**.
 4. In the SSO connection table, select **Create Connection** and provide a name for the connection.
 5. Select an authentication method, **SAML** or **Azure AD (OIDC)**.

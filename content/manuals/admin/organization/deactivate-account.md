@@ -49,9 +49,9 @@ Once you have completed all the previous steps, you can deactivate your organiza
 {{< /tab >}}
 {{< tab name="Docker Hub" >}}
 
-1. On Docker Hub, select **Organizations**.
+1. On Docker Hub, select **My Hub**.
 2. Choose the organization you want to deactivate.
-3. In **Settings**, select the **Deactivate Org** tab and then **Deactivate organization**.
+3. In **Settings**, select the **Deactivate org** and then **Deactivate organization**.
 
 {{< /tab >}}
 {{< /tabs >}}
