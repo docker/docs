@@ -86,10 +86,10 @@ If you decline, the publish process stops without sending anything to the regist
 
 ### Limitations
 
-There is limitations to publishing Compose applications as OCI artifacts. You can't publish a Compose configuration with:
+There is limitations to publishing Compose applications as OCI artifacts. You can't publish a Compose configuration:
 - With service(s) containing bind mounts
 - With service(s) containing only a `build` section
-- That that includes local files using the `include` attribute. To publish successfully, ensure that any included local files are also published. Alternatively, use remote file references, as remote `include` is supported.
+- That includes local files with the `include` attribute. To publish successfully, ensure that any included local files are also published. You can then `include` to reference these files as remote `include` is supported.
 
 ## Start an OCI artifact application
 
