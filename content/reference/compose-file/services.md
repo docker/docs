@@ -1321,6 +1321,28 @@ services:
 ```
 For more information about the `networks` top-level element, see [Networks](networks.md).
 
+### implicit default network
+
+If `networks` is empty or absent from the Compose file, Compose considers an implicit definition for the service to be
+connected to the `default` network: 
+
+```yml
+services:
+  some-service:
+    image: foo
+```
+This example is actually equivalent to:
+
+```yml
+services:
+  some-service:
+    image: foo  
+    networks:
+      default: {}  
+```
+
+If you want the service to not be connected a network, you must set [`network_mode: none`](#network_mode).
+
 #### `aliases`
 
 `aliases` declares alternative hostnames for the service on the network. Other containers on the same
@@ -1675,13 +1697,23 @@ services:
 
 `pull_policy` defines the decisions Compose makes when it starts to pull images. Possible values are:
 
-* `always`: Compose always pulls the image from the registry.
-* `never`: Compose doesn't pull the image from a registry and relies on the platform cached image.
+- `always`: Compose always pulls the image from the registry.
+- `never`: Compose doesn't pull the image from a registry and relies on the platform cached image.
    If there is no cached image, a failure is reported.
-* `missing`: Compose pulls the image only if it's not available in the platform cache.
+- `missing`: Compose pulls the image only if it's not available in the platform cache.
    This is the default option if you are not also using the [Compose Build Specification](build.md).
   `if_not_present` is considered an alias for this value for backward compatibility.
-* `build`: Compose builds the image. Compose rebuilds the image if it's already present.
+- `build`: Compose builds the image. Compose rebuilds the image if it's already present.
+- `daily`: Compose checks the registry for image updates if the last pull took place more than 24 hours ago.
+- `weekly`: Compose checks the registry for image updates if the last pull took place more than 7 days ago.
+- `every_<duration>`: Compose checks the registry for image updates if the last pull took place before `<duration>`. Duration can be expressed in weeks (`w`), days (`d`), hours (`h`), minutes (`m`), seconds (`s`) or a combination of these.
+
+```yaml
+services:
+  test:
+    image: nginx
+    pull_policy: every_12h
+```
 
 ### `read_only`
 
@@ -1778,6 +1810,8 @@ the service's containers.
   in the service's task containers, in octal notation.
   The default value is world-readable permissions (mode `0444`).
   The writable bit must be ignored if set. The executable bit may be set. 
+
+Note that support for `uid`, `gid`, and `mode` attributes are not implemented in Docker Compose when the source of the secret is a [`file`](09-secrets.md). This is because bind-mounts used under the hood don't allow uid remapping.
 
 The following example sets the name of the `server-certificate` secret file to `server.cert`
 within the container, sets the mode to `0440` (group-readable), and sets the user and group
