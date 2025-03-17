@@ -64,7 +64,7 @@ spec:
           name: server
           imagePullPolicy: Always
           ports:
-            - containerPort: 80
+            - containerPort: 8080
               hostPort: 8080
               protocol: TCP
           resources: {}
@@ -117,7 +117,7 @@ spec:
   ports:
     - name: "8080"
       port: 8080
-      targetPort: 80
+      targetPort: 8080
       nodePort: 30001
   selector:
     service: server

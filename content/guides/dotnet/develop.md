@@ -183,7 +183,7 @@ You should see output like the following.
 
 ```console
 CONTAINER ID   IMAGE                  COMMAND                  CREATED              STATUS                        PORTS                  NAMES
-cb36e310aa7e   docker-dotnet-server   "dotnet myWebApp.dll"    About a minute ago   Up About a minute             0.0.0.0:8080->80/tcp   docker-dotnet-server-1
+cb36e310aa7e   docker-dotnet-server   "dotnet myWebApp.dll"    About a minute ago   Up About a minute             0.0.0.0:8080->8080/tcp   docker-dotnet-server-1
 39fdcf0aff7b   postgres               "docker-entrypoint.s…"   About a minute ago   Up About a minute (healthy)   5432/tcp               docker-dotnet-db-1
 ```
 
@@ -241,7 +241,7 @@ services:
       context: .
       target: final
     ports:
-      - 8080:80
+      - 8080:8080
     depends_on:
       db:
         condition: service_healthy
@@ -337,14 +337,14 @@ ENTRYPOINT ["dotnet", "myWebApp.dll"]
 
 The following is the updated `compose.yaml` file.
 
-```yaml {hl_lines="5"}
+```yaml {hl_lines=[5,16]}
 services:
   server:
     build:
       context: .
       target: development
     ports:
-      - 8080:80
+      - 8080:8080
     depends_on:
       db:
         condition: service_healthy
@@ -354,7 +354,6 @@ services:
           path: .
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:80'
   db:
     image: postgres
     restart: always
