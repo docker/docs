@@ -337,7 +337,7 @@ ENTRYPOINT ["dotnet", "myWebApp.dll"]
 
 The following is the updated `compose.yaml` file.
 
-```yaml {hl_lines=[5,16]}
+```yaml {hl_lines=[5,15,16]}
 services:
   server:
     build:
