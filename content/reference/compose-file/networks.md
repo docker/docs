@@ -90,7 +90,7 @@ You can customize the `default` network with an explicit declaration:
 networks:
   default: 
     name: a_network # Use a custom name
-    driver_opts:    # pass optionsto driver for network creation
+    driver_opts:    # pass options to driver for network creation
       com.docker.network.bridge.host_binding_ipv4: 127.0.0.1
 ```
 
