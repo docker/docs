@@ -1,9 +1,9 @@
-command: docker compose alpha publish
+command: docker compose publish
 short: Publish compose application
 long: Publish compose application
-usage: docker compose alpha publish [OPTIONS] REPOSITORY[:TAG]
-pname: docker compose alpha
-plink: docker_compose_alpha.yaml
+usage: docker compose publish [OPTIONS] REPOSITORY[:TAG]
+pname: docker compose
+plink: docker_compose.yaml
 options:
     - option: oci-version
       value_type: string
@@ -60,7 +60,7 @@ inherited_options:
 deprecated: false
 hidden: false
 experimental: false
-experimentalcli: true
+experimentalcli: false
 kubernetes: false
 swarm: false
 
