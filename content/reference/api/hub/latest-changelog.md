@@ -3,7 +3,7 @@ description: Docker Hub API Changelog
 keywords: hub, api, changelog
 title: Docker Hub API Changelog
 keywords: docker hub, whats new, release notes, api, changelog
-weight: 1
+weight: 2
 toc_min: 1
 toc_max: 2
 ---
