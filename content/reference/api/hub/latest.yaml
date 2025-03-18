@@ -23,7 +23,7 @@ tags:
   - name: changelog
     x-displayName: Changelog
     description: |
-      Check out the [Changelog](/reference/api/hub/latest-changelog)!
+      See the [Changelog](/reference/api/hub/latest-changelog) for a summary of changes across Docker Hub API versions.
   - name: resources
     x-displayName: Resources
     description: |
