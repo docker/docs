@@ -20,6 +20,10 @@ servers:
     x-audience: public
     url: https://hub.docker.com
 tags:
+  - name: changelog
+    x-displayName: Changelog
+    description: |
+      Check out the [Changelog](/reference/api/hub/latest-changelog)!
   - name: resources
     x-displayName: Resources
     description: |
@@ -2997,6 +3001,7 @@ components:
 x-tagGroups:
   - name: General
     tags:
+      - changelog
       - resources
       - rate-limiting
       - authentication
