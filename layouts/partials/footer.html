@@ -1,10 +1,12 @@
-<div class="flex justify-center py-20 px-4 bg-gray-light-100 dark:bg-gray-dark-200">
+<div class="flex justify-center py-8 px-4 bg-gray-light-100 dark:bg-gray-dark-200">
+  {{ partialCached "components/support-button.html" . }}
+</div>
+<div class="flex justify-center pt-10 pb-20 px-4 bg-gray-light-100 dark:bg-gray-dark-200">
   <div class="flex w-full max-w-[840px] flex-col gap-10">
     <div class="flex flex-col md:flex-row gap-4 items-center justify-evenly">
       <a class="underline-offset-2 hover:underline" href="https://www.docker.com/">Product offerings</a>
       <a class="underline-offset-2 hover:underline" href="https://www.docker.com/pricing/">Pricing</a>
       <a class="underline-offset-2 hover:underline" href="https://www.docker.com/company/">About us</a>
-      <a class="underline-offset-2 hover:underline" href="https://www.docker.com/support/">Support</a>
       {{- with .GetPage "/contribute" }}
         <a class="underline-offset-2 hover:underline" href="{{ .Permalink }}">{{ .LinkTitle }}</a>
       {{- end }}
