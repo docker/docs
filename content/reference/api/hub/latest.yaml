@@ -675,6 +675,69 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/NotFound'
+  /v2/orgs/{name}/access-tokens:
+    post:
+      summary: Create access token
+      description: |
+        Create an access token for an organization.
+      tags:
+        - access-tokens
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createOrgAccessTokenRequest'
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createOrgAccessTokenResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    get:
+      summary: List access tokens
+      description: |
+        List access tokens for an organization.
+      tags:
+        - access-tokens
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: number
+            default: 1
+        - in: query
+          name: page_size
+          schema:
+            type: number
+            default: 10
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getOrgAccessTokensResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
   /v2/namespaces/{namespace}/repositories/{repository}/tags:
     parameters:
       - $ref: '#/components/parameters/namespace'
@@ -2798,6 +2861,112 @@ components:
               format: date-time
               description: The date the user was last modified as a RFC3339 formatted string.
               example: '2022-05-20T00:54:18Z'
+    orgAccessToken:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "a7a5ef25-8889-43a0-8cc7-f2a94268e861"
+        label:
+          type: string
+          example: "My organization token"
+        created_by:
+          type: string
+          example: "johndoe"
+        is_active:
+          type: boolean
+          example: true
+        created_at:
+          type: string
+          format: date-time
+          example: "2022-05-20T00:54:18Z"
+        expires_at:
+          type: string
+          format: date-time
+          example: "2023-05-20T00:54:18Z"
+          nullable: true
+        last_used_at:
+          type: string
+          format: date-time
+          example: "2022-06-15T12:30:45Z"
+          nullable: true
+    orgAccessTokenResource:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - TYPE_REPO
+            - TYPE_ORG
+          example: "TYPE_REPO"
+          description: The type of resource
+          required: true
+        path:
+          type: string
+          example: "myorg/myrepo"
+          description: The path of the resource. The format of this will change depending on the type of resource.
+          required: true
+        scopes:
+          type: array
+          description: The scopes this token has access to
+          items:
+            type: string
+            example: "repo-pull"
+          required: true
+    getOrgAccessTokensResponse:
+      type: object
+      properties:
+        total:
+          type: number
+          example: 10
+        next:
+          type: string
+          example: https://hub.docker.com/v2/orgs/docker/access-tokens?page=2&page_size=10
+        previous:
+          type: string
+          example: https://hub.docker.com/v2/orgs/docker/access-tokens?page=1&page_size=10
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/orgAccessToken'
+    createOrgAccessTokenRequest:
+      type: object
+      properties:
+        label:
+          type: string
+          description: Label for the access token
+          example: "My organization token"
+          required: true
+        description:
+          type: string
+          description: Description of the access token
+          example: "Token for CI/CD pipeline"
+        resources:
+          type: array
+          description: Resources this token has access to
+          items:
+            $ref: '#/components/schemas/orgAccessTokenResource'
+        expires_at:
+          type: string
+          format: date-time
+          description: Expiration date for the token
+          example: "2023-05-20T00:54:18Z"
+          nullable: true          
+    createOrgAccessTokenResponse:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/orgAccessToken'
+        - type: object
+          properties:
+            token:
+              type: string
+              description: The actual token value that can be used for authentication
+              example: "dckr_oat_7awgM4jG5SQvxcvmNzhKj8PQjxo"
+            resources:
+              type: array
+              items:
+                $ref: '#/components/schemas/orgAccessTokenResource'
+          
   parameters:
     namespace:
       in: path
