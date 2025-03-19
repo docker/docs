@@ -133,6 +133,11 @@ tags:
       The organization endpoints allow you to interact with and manage your organizations.
 
       For more information, see [Organization administration overview](https://docs.docker.com/admin/organization/).
+  - name: org-access-tokens
+    x-displayName: Organization Access Tokens
+    x-audience: public
+    description: |
+      The organization access token endpoints allow you to manage organization access tokens, see [Organization access tokens](https://docs.docker.com/security/for-admins/access-tokens/) for more information.
   - name: groups
     x-displayName: Groups (Teams)
     x-audience: public
