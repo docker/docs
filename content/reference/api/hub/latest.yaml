@@ -738,6 +738,81 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
+  /v2/orgs/{org_name}/access-tokens/{access_token_id}:
+    parameters:
+      - $ref: '#/components/parameters/org_name'
+      - in: path
+        name: access_token_id
+        required: true
+        schema:
+          type: string
+        description: The ID of the access token to retrieve
+        example: "a7a5ef25-8889-43a0-8cc7-f2a94268e861"
+    get:
+      summary: Get access token
+      description: |
+        Get details of a specific access token for an organization.
+      tags:
+        - access-tokens
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getOrgAccessTokenResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      summary: Update access token
+      description: |
+        Update a specific access token for an organization.
+      tags:
+        - access-tokens
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/updateOrgAccessTokenRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/updateOrgAccessTokenResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      summary: Delete access token
+      description: |
+        Delete a specific access token for an organization. This action cannot be undone.
+      tags:
+        - access-tokens
+      security:
+        - bearerAuth: []
+      responses:
+        '204':
+          description: Access token deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
   /v2/namespaces/{namespace}/repositories/{repository}/tags:
     parameters:
       - $ref: '#/components/parameters/namespace'
@@ -2929,6 +3004,16 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/orgAccessToken'
+    getOrgAccessTokenResponse:
+      allOf:
+        - $ref: '#/components/schemas/orgAccessToken'
+        - type: object
+          properties:
+            resources:
+              type: array
+              description: Resources this token has access to
+              items:
+                $ref: '#/components/schemas/orgAccessTokenResource'
     createOrgAccessTokenRequest:
       type: object
       properties:
@@ -2966,7 +3051,17 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/orgAccessTokenResource'
-          
+    updateOrgAccessTokenResponse:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/orgAccessToken'
+        - type: object
+          properties:
+            resources:
+              type: array
+              description: Resources this token has access to
+              items:
+                $ref: '#/components/schemas/orgAccessTokenResource'
   parameters:
     namespace:
       in: path
