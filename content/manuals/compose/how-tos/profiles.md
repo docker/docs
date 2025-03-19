@@ -175,7 +175,7 @@ $ docker compose --profile dev up phpmyadmin
 $ COMPOSE_PROFILES=dev docker compose up phpmyadmin
 ```
 
-## Stop specific profiles
+## Stop application and services with specific profiles
 
 As with starting specific profiles, you can use the `--profile` [command-line option](/reference/cli/docker/compose.md#use--p-to-specify-a-project-name) or
 use the [`COMPOSE_PROFILES` environment variable](environment-variables/envvars.md#compose_profiles):
@@ -187,7 +187,7 @@ $ docker compose --profile debug down
 $ COMPOSE_PROFILES=debug docker compose down
 ```
 
-Both commands stop and remove services with the `debug` profile. In the following `compose.yaml` file, this stops the services `db` and `phpmyadmin`.
+Both commands stop and remove services with the `debug` profile and services without a profile. In the following `compose.yaml` file, this stops the services `db`, `backend` and `phpmyadmin`.
 
 ```yaml
 services:
@@ -205,6 +205,15 @@ services:
 
   db:
     image: mysql
+```
+
+if you only want to stop the `phpmyadmin` service, you can run 
+```console 
+$ docker compose down phpmyadmin
+``` 
+or 
+```console 
+$ docker compose stop phpmyadmin
 ```
 
 > [!NOTE]
