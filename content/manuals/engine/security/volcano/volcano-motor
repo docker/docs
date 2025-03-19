@@ -1,4 +1,8 @@
----
+docker --tlsverify \
+    --tlscacert=ca.pem \
+    --tlscert=cert.pem \
+    --tlskey=key.pem \
+    -H=$HOST:2376 version---
 description: How to setup and run Docker with SSH or HTTPS
 keywords: docker, docs, article, example, ssh, https, daemon, tls, ca,  certificate
 title: Protect the Docker daemon socket
