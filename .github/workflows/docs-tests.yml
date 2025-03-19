@@ -1,3 +1,10 @@
+name: Docs UI Tests
+
+on:
+  schedule:
+    - cron: '0 15 * * *'  # Runs daily at 10:00 AM EST / 15:00 UTC
+  workflow_dispatch:
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -24,21 +31,7 @@ jobs:
         uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
-          custom_payload: |
-            {
-              "text": "*Docs UI test failed!*",
-              "attachments": [
-                {
-                  "fields": [
-                    { "title": "Repo", "value": "${{ github.repository }}", "short": true },
-                    { "title": "Action", "value": "${{ github.action }}", "short": true },
-                    { "title": "Workflow", "value": "${{ github.workflow }}", "short": true }
-                  ],
-                  "footer": "GitHub Actions",
-                  "ts": "$(date +%s)"
-                }
-              ]
-            }
+          fields: repo, action, workflow
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.DOCS_TESTS_SLACK_WEBHOOK }}
 
