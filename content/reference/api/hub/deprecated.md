@@ -2,6 +2,7 @@
 description: Docker Hub API v1 (deprecated)
 keywords: kitematic, deprecated
 title: Docker Hub API v1 (deprecated)
+weight: 3
 aliases:
   - /docker-hub/api/deprecated/
 ---
