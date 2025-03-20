@@ -49,3 +49,8 @@ INFO[0000] Listening for HTTP on unix (/var/run/docker.sock)
 
 To stop Docker when you have started it manually, issue a `Ctrl+C` in your
 terminal.
+
+* [PS] it may also be that upon installion docker fails to properly added the appropriate executable folders to your paths in this case you would have to find the root installation folder for docker and the following paths to your PATH variable in order to properly access the commands
+			[ROOT_PATH]/
+			[ROOT_PATH]/resources
+			[ROOT_PATH]/resources/bin
