@@ -4,7 +4,7 @@ keywords: admin, controls, rootless, enhanced container isolation
 title: Configure Settings Management with a JSON file
 linkTitle: Use a JSON file
 weight: 10
-aliases: 
+aliases:
  - /desktop/hardened-desktop/settings-management/configure/
  - /security/for-admins/hardened-desktop/settings-management/configure/
 ---
