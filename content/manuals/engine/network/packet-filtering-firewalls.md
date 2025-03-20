@@ -126,6 +126,11 @@ the source and destination. For instance, if the Docker host has addresses
 `2001:db8:1111::2` and `2001:db8:2222::2`, you can make rules specific to
 `2001:db8:1111::2` and leave `2001:db8:2222::2` open.
 
+If your containers are also querying DNS, you should add this rule as well to allow them to work:
+```
+$ iptables -I DOCKER-USER -m state --state RELATED,ESTABLISHED -j ACCEPT
+```
+
 `iptables` is complicated. There is a lot more information at [Netfilter.org HOWTO](https://www.netfilter.org/documentation/HOWTO/NAT-HOWTO.html).
 
 ### Direct routing
