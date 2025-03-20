@@ -102,6 +102,25 @@ The syntax is the same as `.dockerignore` file:
 If the build context includes a `.dockerignore` file, the patterns in this file is loaded as implicit content
 for the `ignores` file, and values set in the Compose model are appended.
 
+#### `include`
+
+It is sometimes easier to select files to be watched instead of declaring those that shouldn't be watched with `ignore`.
+
+The `include` attribute can be used to define a pattern, or a list of patterns, for paths to be considered for watching.
+Only files that match these patterns will be considered when applying a watch rule. The syntax is the same as `ignore`.
+
+```yaml
+services:
+  backend:
+    image: example/backend
+    develop:
+      watch: 
+        # rebuild image and recreate service
+        - path: ./src
+          include: *.go  
+          action: rebuild
+```
+
 #### `path`
 
 `path` attribute defines the path to source code (relative to the project directory) to monitor for changes. Updates to any file
