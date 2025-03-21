@@ -7,11 +7,6 @@ keywords: usb, usbip, docker desktop, macos, windows, linux
 toc_max: 3
 aliases:
 - /desktop/usbip/
-params:
-  sidebar:
-    badge:
-      color: green
-      text: New
 ---
 
 {{< summary-bar feature_name="USB/IP support" >}}
