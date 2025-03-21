@@ -101,14 +101,15 @@ jobs:
 ## Distribute build across multiple runners
 
 In the previous example, each platform is built on the same runner which can
-take a long time depending on the number of platforms and your Dockerfile.
+take a long time depending on the number of platforms and your Dockerfile and
+because emulating aarch64 (arm64) on x86_64 can take a long time.
 
 To solve this issue you can use a matrix strategy to distribute the build for
 each platform across multiple runners and create manifest list using the
 [`buildx imagetools create` command](/reference/cli/docker/buildx/imagetools/create.md).
 
 The following workflow will build the image for each platform on a dedicated
-runner using a matrix strategy and push by digest. Then, the `merge` job will
+runner (adapted to each platform) using a matrix strategy and push by digest. Then, the `merge` job will
 create manifest lists and push them to Docker Hub. The [`metadata` action](https://github.com/docker/metadata-action)
 is used to set tags and labels.
 
@@ -123,13 +124,16 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        platform:
-          - linux/amd64
-          - linux/arm64
+        os: [ubuntu-24.04, ubuntu-24.04-arm]
+        include:
+          - platform: linux/amd64
+            os: ubuntu-24.04
+          - platform: linux/arm64
+            os: ubuntu-24.04-arm
     steps:
       - name: Prepare
         run: |
@@ -178,7 +182,7 @@ jobs:
           retention-days: 1
 
   merge:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs:
       - build
     steps:
