@@ -1,0 +1,40 @@
+name: Docs UI Tests
+
+on:
+  schedule:
+    - cron: '0 15 * * *'  # Runs daily at 10:00 AM EST / 15:00 UTC
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
+      - name: Set environment variables from GitHub Secrets
+        run: |
+          echo "ENV_APP_USERNAME=${{ secrets.ENV_APP_USERNAME }}" >> $GITHUB_ENV
+          echo "ENV_APP_PASSWORD=${{ secrets.ENV_APP_PASSWORD }}" >> $GITHUB_ENV
+
+      - name: Run Playwright tests
+        run: npx playwright test --trace on
+
+      - name: Send Slack notification on failure
+        if: failure()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: repo, action, workflow
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.DOCS_TESTS_SLACK_WEBHOOK }}
+
+      - name: Cleanup app-auth.json
+        if: always()
+        run: rm -f ${{ github.workspace }}/app-auth.json
