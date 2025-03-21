@@ -2,10 +2,15 @@
 description: Dev Environments
 keywords: Dev Environments, share, local, Compose
 title: Overview of Dev Environments
-linkTitle: Dev Environments (Beta)
+linkTitle: Dev Environments 
 weight: 40
 aliases:
 - /desktop/dev-environments/
+params:
+  sidebar:
+    badge:
+      color: blue
+      text: Beta
 ---
 
 {{% include "dev-envs-changing.md" %}}

@@ -1,11 +1,16 @@
 ---
-title: Wasm workloads (Beta)
+title: Wasm workloads 
 weight: 20
 description: How to run Wasm workloads with Docker Desktop
 keywords: Docker, WebAssembly, wasm, containerd, engine
 toc_max: 3
 aliases: 
 - /desktop/wasm/
+params:
+  sidebar:
+    badge:
+      color: blue
+      text: Beta
 ---
 
 {{< summary-bar feature_name="Wasm workloads" >}}
