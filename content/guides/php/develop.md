@@ -189,7 +189,7 @@ You can easily add services to your application stack by updating the `compose.y
 
 Update your `compose.yaml` to add a new service for phpMyAdmin. For more details, see the [phpMyAdmin Official Docker Image](https://hub.docker.com/_/phpmyadmin). The following is the updated `compose.yaml` file.
 
-```yaml {hl_lines="35-42"}
+```yaml {hl_lines="42-49"}
 services:
   server:
     build:
