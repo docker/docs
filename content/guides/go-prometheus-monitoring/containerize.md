@@ -8,6 +8,8 @@ aliases:
   - /guides/go-prometheus-monitoring/containerize/
 ---
 
+Containerization helps us bundle the application and its dependencies into a single package called a container. This package can run on any platform without worrying about the environment. In this section, we will learn how to containerize a Golang application using Docker.
+
 To containerize a Golang application, we first need to create a Dockerfile. The Dockerfile contains instructions to build and run the application in a container. Also, when creating a Dockerfile, we can follow different sets of best practices to optimize the image size and make it more secure.
 
 ## Creating a Dockerfile
@@ -59,13 +61,13 @@ The Dockerfile consists of two stages:
 
 1. **Build stage**: This stage uses the official Golang image as the base and sets the necessary environment variables. It also sets the working directory inside the container, copies the `go.mod` and `go.sum` files for dependency installation, downloads the dependencies, copies the entire application source, and builds the Go binary.
 
-We use the `golang:1.24-alpine` image as the base image for the build stage. The `CGO_ENABLED=0` environment variable disables CGO, which is useful for building static binaries. We also set the `GOOS` and `GOARCH` environment variables to `linux` and `amd64`, respectively, to build the binary for the Linux platform.
+    We use the `golang:1.24-alpine` image as the base image for the build stage. The `CGO_ENABLED=0` environment variable disables CGO, which is useful for building static binaries. We also set the `GOOS` and `GOARCH` environment variables to `linux` and `amd64`, respectively, to build the binary for the Linux platform.
 
 2. **Final stage**: This stage uses the official Alpine image as the base and copies the compiled binary from the build stage. It also exposes the application's port and runs the application.
 
-We use the `alpine:3.17` image as the base image for the final stage. We copy the compiled binary from the build stage to the final image. We expose the application's port using the `EXPOSE` instruction and run the application using the `CMD` instruction.
+    We use the `alpine:3.17` image as the base image for the final stage. We copy the compiled binary from the build stage to the final image. We expose the application's port using the `EXPOSE` instruction and run the application using the `CMD` instruction.
 
-Apart from the multi-stage build, the Dockerfile also follows best practices such as using the official images, setting the working directory, and copying only the necessary files to the final image. We can further optimize the Dockerfile by other best practices.
+    Apart from the multi-stage build, the Dockerfile also follows best practices such as using the official images, setting the working directory, and copying only the necessary files to the final image. We can further optimize the Dockerfile by other best practices.
 
 ## Build the Docker image and run the application
 
@@ -97,8 +99,6 @@ Related information:
 
  - [Dockerfile reference](/reference/dockerfile.md)
  - [.dockerignore file](/reference/dockerfile.md#dockerignore-file)
- - [Docker Compose overview](/manuals/compose/_index.md)
- - [Compose file reference](/reference/compose-file/_index.md)
 
 ## Next steps
 

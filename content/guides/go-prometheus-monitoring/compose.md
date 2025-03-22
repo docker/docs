@@ -151,4 +151,17 @@ The services will start running, and you can access the Golang application at `h
 $ docker ps
 ```
 
+## Summary
+
+In this section, you learned how to connect services together using Docker Compose. You created a Docker Compose file to run multiple services together and connect them using networks. You also learned how to build and run the services using Docker Compose.
+
+Related information:
+
+ - [Docker Compose overview](/manuals/compose/_index.md)
+ - [Compose file reference](/reference/compose-file/_index.md)
+
 Next, we will learn how to develop the Golang application with Docker Compose and monitor it with Prometheus and Grafana.
+
+## Next steps
+
+In the next section, you will learn how to develop the Golang application with Docker. You will also learn how to use Docker Compose Watch to rebuild the image whenever you make changes to the code. Lastly, you will test the application and visualize the metrics in Grafana using Prometheus as the datasource.

@@ -12,9 +12,7 @@ aliases:
 
 * You have a [Git client](https://git-scm.com/downloads). The examples in this section use a command-line based Git client, but you can use any client.
 
-## Overview
-
-To make sure our application is working an intended, monitoring is really important. In this guide, you'll learn how to containerize a Golang application and monitor it with Prometheus and Grafana. In this guide, you'll learn how to:
+We will be creating a Golang server with some endpoints to simulate a real-world application. Then we will expose metrics from the server using Prometheus.
 
 ## Getting the sample application
 
@@ -34,6 +32,7 @@ go-prometheus-monitoring
 ├── Docker
 │   ├── grafana.yml
 │   └── prometheus.yml
+├── dashboard.json
 ├── Dockerfile
 ├── LICENSE
 ├── README.md
@@ -42,6 +41,16 @@ go-prometheus-monitoring
 ├── go.sum
 └── main.go
 ```
+
+- **main.go** - The entry point of the application.
+- **go.mod and go.sum** - Go module files.
+- **Dockerfile** - Dockerfile used to build the app.
+- **Docker/** - Contains the Docker Compose configuration files for Grafana and Prometheus.
+- **compose.yaml** - Compose file to launch everything (Golang app, Prometheus, and Grafana).
+- **dashboard.json** - Grafana dashboard configuration file.
+- **Dockerfile** - Dockerfile used to build the Golang app.
+- **compose.yaml** - Docker Compose file to launch everything (Golang app, Prometheus, and Grafana).
+- Other files are for licensing and documentation purposes.
 
 ## Understanding the application
 
@@ -217,7 +226,7 @@ Make sure you are still inside `go-prometheus-monitoring` directory in the termi
 Now let's check our application's metrics by accessing the `/metrics` endpoint. 
 Open `http://localhost:8000/metrics` in your browser. You should see similar output to the one below.
 
-```text
+```sh
 # HELP api_http_request_error_total Total number of errors returned by the API
 # TYPE api_http_request_error_total counter
 api_http_request_error_total{path="/",status="404"} 1
@@ -229,11 +238,10 @@ api_http_request_total{path="/health",status="200"} 2
 api_http_request_total{path="/v1/users",status="200"} 1
 ```
 
-In the terminal, press `ctrl`+`c` to stop the application.
+In the terminal, press `ctrl` + `c` to stop the application.
 
-:::note
-If you don't want to run the application locally, and want to run it in a Docker container, skip to next page where we create a Dockerfile and containerize the application.
-:::
+> [!Note]
+> If you don't want to run the application locally, and want to run it in a Docker container, skip to next page where we create a Dockerfile and containerize the application.
 
 ## Summary
 
