@@ -1827,7 +1827,7 @@ services:
         target: server.cert
         uid: "103"
         gid: "103"
-        mode: "0o440"
+        mode: "0440"
 secrets:
   server-certificate:
     file: ./server.cert
