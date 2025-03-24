@@ -51,4 +51,9 @@ The Compose Specification on Docker Docs is the Docker Compose implementation. I
 
 Use the following links to navigate key sections of the Compose Specification. 
 
+> [!TIP]
+>
+> Want a better editing experience for Compose files in VS Code?
+> Check out the [Docker VS Code Extension (experimental)](https://github.com/docker/vscode-extension) for linting, code navigation, and vulnerability scanning.
+
 {{< grid >}}

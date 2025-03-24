@@ -257,6 +257,11 @@ automatically build and tag a Docker image and test it.
 Follow these recommendations on how to properly use the [Dockerfile instructions](/reference/dockerfile.md)
 to create an efficient and maintainable Dockerfile.
 
+> [!TIP]
+>
+> Want a better editing experience for Dockerfiles in VS Code?
+> Check out the [Docker VS Code Extension (experimental)](https://github.com/docker/vscode-extension) for linting, code navigation, and vulnerability scanning.
+
 ### FROM
 
 Whenever possible, use current official images as the basis for your

@@ -278,3 +278,8 @@ $ docker run -p 127.0.0.1:8000:8000 test:latest
 
 This publishes the container's port 8000 to `http://localhost:8000` on the
 Docker host.
+
+> [!TIP]
+>
+> Want a better editing experience for Dockerfiles in VS Code?
+> Check out the [Docker VS Code Extension (experimental)](https://github.com/docker/vscode-extension) for linting, code navigation, and vulnerability scanning.

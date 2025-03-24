@@ -36,6 +36,11 @@ Build checks are useful for:
 - Identifying potential issues or anti-patterns in your Dockerfile and build
   options.
 
+> [!TIP]
+>
+> Want a better editing experience for Dockerfiles in VS Code?
+> Check out the [Docker VS Code Extension (experimental)](https://github.com/docker/vscode-extension) for linting, code navigation, and vulnerability scanning.
+
 ## Build with checks
 
 Build checks are supported in:
