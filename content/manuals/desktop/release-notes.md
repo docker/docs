@@ -29,6 +29,49 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 >
 > If you're experiencing malware detection issues on Mac, follow the steps documented in [docker/for-mac#7527](https://github.com/docker/for-mac/issues/7527).
 
+## 4.40.0
+
+{{< release-date date="2025-03-27" >}}
+
+{{< desktop-install-v2 all=true beta_win_arm=true version="4.40.0" build_path="/TBD/" >}}
+
+### New
+
+- You can now pull, run, and manage AI models from Docker Hub directly in Docker Desktop with Docker Model Runner (Beta). Currently available for Docker Desktop for Mac with Apple Silicon.
+
+### Upgrades
+
+- [Docker Buildx v0.22.0](https://github.com/docker/buildx/releases/tag/v0.22.0)
+- [Docker Compose v2.34.0](https://github.com/docker/compose/releases/tag/v2.34.0)
+- [Docker Engine v28.0.2](https://docs.docker.com/engine/release-notes/28/#2802)
+- [Docker Scout CLI v1.17.0](https://github.com/docker/scout-cli/releases/tag/v1.17.0)
+- [compose-bridge v0.0.18](https://github.com/docker/compose-bridge-binaries/releases/tag/v0.0.18)
+- [NVIDIA Container Toolkit v1.17.5](https://github.com/NVIDIA/nvidia-container-toolkit/releases/tag/v1.17.5)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- You can now get quick access to the Kubernetes Dashboard with the **Launch Dashboard** button on the **Kubernetes** settings page.
+- Fixed a bug that caused `docker-proxy` to stop forwarding UDP datagrams to containers.
+- Fixed a bug that caused docker-proxy to close UDP connections to containers eagerly and resulting in the source address to change needlessly
+- Fixed a race condition that prevented Docker Desktop Kubernetes from starting in some scenarios.
+- Improved the way ECI collects image digest info from a repository in environments where proxies are configured.
+- Users can now to specify a timeout when generating  a private Extension Marketplace using the new `--timeout` flag.
+- Removed unused internal helper tool `com.docker.admin`.
+
+#### For Mac
+
+- Fixed an issue where stale directory cache in Docker VMM that prevented detecting moved or new files.
+- Removed Continue/Restart pop up when Time Machine utility is restricted.
+- Docker Desktop now allows Unix domain sockets to be shared with containers via `docker run -v /path/to/unix.sock:/unix.sock`. The full socket path must be specified in the bind-mount. See [for-mac/#483](https://github.com/docker/for-mac/issues/483).
+- Fixed a bug that caused the `docker-credential-osxkeychain` and `docker-credential-desktop` to return malformed URIs when a token was stored for a server with a port specified.
+
+#### For Windows
+
+- The Windows MSI and `.exe` installers now disable Windows Containers by default when installing with the GUI.
+- Improved port-mapping throughput on WSL2.
+
 ## 4.39.0
 
 {{< release-date date="2025-03-05" >}}
