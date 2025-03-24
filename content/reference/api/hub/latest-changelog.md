@@ -15,7 +15,7 @@ issues for Docker Service APIs.
 
 ### New
 
-- Add [apis](/reference/api/hub/latest/#tag/org-access-tokens) for org access token management.
+- Add [APIs](/reference/api/hub/latest/#tag/org-access-tokens) for organization access token (OATs) management.
 
 ## 2025-03-18
 

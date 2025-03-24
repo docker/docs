@@ -158,7 +158,7 @@ tags:
     x-displayName: Organization Access Tokens
     x-audience: public
     description: |
-      The organization access token endpoints allow you to manage organization access tokens, see [Organization access tokens](https://docs.docker.com/security/for-admins/access-tokens/) for more information.
+      The organization access token endpoints allow you to manage organization access tokens (OATs). See [Organization access tokens](https://docs.docker.com/security/for-admins/access-tokens/) for more information.
 paths:
   /v2/users/login:
     post:
