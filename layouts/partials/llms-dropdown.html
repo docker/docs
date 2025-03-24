@@ -1,0 +1,61 @@
+<div class="my-4 p-4 rounded-lg bg-transparent">
+    <details class="inline-block group">
+      <summary class="inline-flex items-center gap-2 rounded bg-blue-light dark:bg-blue-dark text-white py-2 px-4 cursor-pointer font-semibold">
+        <span>Copy llms.txt file</span>
+        <svg
+          class="h-2 w-2 transform transition-transform group-open:rotate-180"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </summary>
+      <div class="mt-3 space-y-4 text-sm pl-5">
+        <div>
+          <button onclick="copyMarkdown()" class="text-left text-blue-500 hover:text-blue-600 font-semibold">Copy page</button>
+          <div class="text-gray-500 dark:text-gray-400">Copy this page as Markdown for LLMs</div>
+        </div>
+        <div>
+          <button onclick="viewPlainText()" class="text-left text-blue-500 hover:text-blue-600 font-semibold">View as Markdown</button>
+          <div class="text-gray-500 dark:text-gray-400">View this page as plain text</div>
+        </div>
+        <div>
+          <button onclick="openInDocsAI()" class="text-left text-blue-500 hover:text-blue-600 font-semibold">Open in Docker Docs AI</button>
+          <div class="text-gray-500 dark:text-gray-400">Ask questions about this page with Docker Docs AI</div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <script>
+  function getCurrentPlaintextUrl() {
+    const currentUrl = window.location.href.split('#')[0].replace(/\/$/, '');
+    return `${currentUrl}/llms.txt`;
+  }
+
+  function copyMarkdown() {
+    fetch(getCurrentPlaintextUrl())
+      .then(response => response.text())
+      .then(text => {
+        navigator.clipboard.writeText(text)
+          .then(() => alert('Markdown copied to clipboard!'))
+          .catch(err => alert('Failed to copy markdown: ', err));
+      })
+      .catch(err => alert('Error fetching markdown: ', err));
+  }
+
+  function viewPlainText() {
+    window.open(getCurrentPlaintextUrl(), '_blank');
+  }
+
+  function openInDocsAI() {
+  const kapaButton = document.querySelector('.open-kapa-widget');
+  if (kapaButton) {
+    kapaButton.click();
+  } else {
+    alert("Couldn't find the DocsAI button.");
+  }
+}
+  </script>
