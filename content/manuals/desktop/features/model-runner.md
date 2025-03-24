@@ -1,6 +1,7 @@
 ---
 title: Docker Model Runner
 params:
+  sidebar:
     badge:
       color: blue
       text: Beta
@@ -327,6 +328,6 @@ $ ln -s /Applications/Docker.app/Contents/Resources/cli-plugins/docker-model ~/.
 
 Once linked, re-run the command.
 
-## Get support and share feedback
+## Share feedback
 
 Thanks for trying out Docker Model Runner. Give feedback or report any bugs you may find through the **Give feedback** link next to the **Enable Docker Model Runner** setting. 
