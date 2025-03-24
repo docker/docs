@@ -11,6 +11,12 @@ toc_max: 2
 Here you can learn about the latest changes, new features, bug fixes, and known
 issues for Docker Service APIs.
 
+## 2025-03-25
+
+### New
+
+- Add [apis](/reference/api/hub/latest/#tag/org-access-tokens) for org access token management.
+
 ## 2025-03-18
 
 ### New
