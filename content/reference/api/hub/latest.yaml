@@ -3304,6 +3304,6 @@ x-tagGroups:
       - repositories
       - scim
       - orgs
+      - org-access-tokens
       - groups
       - invites
-      - org-access-tokens
