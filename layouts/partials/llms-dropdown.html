@@ -22,10 +22,15 @@
           <div class="text-gray-500 dark:text-gray-400">View this page as plain text</div>
         </div>
         <div>
-          <button onclick="openInDocsAI()" class="text-left text-blue-500 hover:text-blue-600 font-semibold">Open in Docker Docs AI</button>
-          <div class="text-gray-500 dark:text-gray-400">Ask questions about this page with Docker Docs AI</div>
+          <button onclick="openInDocsAI()" class="text-left text-blue-500 hover:text-blue-600 font-semibold">Search Docs AI</button>
+          <div class="text-gray-500 dark:text-gray-400">Ask questions with Docs AI</div>
+        </div>
+        <div>
+          <button onclick="openInChatGPT()" class="text-left text-blue-500 hover:text-blue-600 font-semibold">Open in ChatGPT</button>
+          <div class="text-gray-500 dark:text-gray-400">Ask questions about this page with ChatGPT</div>
         </div>
       </div>
+    </div>
     </details>
   </div>
 
@@ -55,7 +60,14 @@
   if (kapaButton) {
     kapaButton.click();
   } else {
-    alert("Couldn't find the DocsAI button.");
+    alert("Couldn't find the Docs AI button.");
   }
 }
+
+  function openInChatGPT() {
+    const markdownURL = getCurrentPlaintextUrl();
+    const prompt = `Read ${markdownURL} so I can ask questions about it`;
+    const chatGPTUrl = `https://chat.openai.com/?model=gpt-4&prompt=${encodeURIComponent(prompt)}`;
+    window.open(chatGPTUrl, '_blank');
+  }
   </script>
