@@ -17,7 +17,7 @@ The Docker Model Runner plugin lets you:
 - Pull models from Docker Hub
 - Run AI models directly from the command line
 - Manage local models (add, list, remove)
-- Interact with models in prompt or chat mode
+- Interact with models using a submitted prompt or in chat mode
 
 Models are pulled from Docker Hub the first time they're used and stored locally. They're loaded into memory only at runtime when a request is made, and unloaded when not in use to optimize resources. Since models can be large, the initial pull may take some time — but after that, they're cached locally for faster access. You can interact with the model using [OpenAI-compatible APIs](#what-api-endpoints-are-available).
 
@@ -100,7 +100,7 @@ ignaciolopezluna020/gemma-3-it:4B-Q4_K_M  3.88 B      IQ2_XXS/Q4_K_M  gemma3    
 
 ### Run a model
 
-Runs a model with an optional prompt or in interactive mode.
+Run a model and interact with it using a submitted prompt or in chat mode.
 
 #### One-time prompt
 
