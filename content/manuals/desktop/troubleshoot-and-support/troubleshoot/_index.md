@@ -47,10 +47,6 @@ Docker Desktop to their initial state, the same as when Docker Desktop was first
 
 If you are a Mac or Linux user, you also have the option to **Uninstall** Docker Desktop from your system.
 
-> [!TIP]
->
-> If you need to contact support, select the **Question mark** icon near the top-right corner of Docker Dashboard, and then select **Contact support**. Users with a paid Docker subscription can use this option to send a support request.
-
 ## Diagnose
  
 > [!TIP]
