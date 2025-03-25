@@ -38,9 +38,7 @@ When a user signs in through SSO, Docker obtains several attributes from your Id
 - **Docker Org**: Optional. Specifies the organization the user belongs to
 - **Docker Team**: Optional. Defines the team the user belongs to within the organization
 - **Docker Role**: Optional. Determines the user's permission within Docker
-- **Docker session minutes**: Optional. Determine's the user's session limit.
-You can set the session minutes to support your IdP's default session timeout.
-The attribute must be a positive integer > 0.
+- **Docker session minutes**: Optional. Sets the duration of a user’s session before they must re-authenticate with their identity provider (IdP). The value must be a positive integer greater than 0.
 If this is attribute is not provided, by default:
     - Docker Desktop signs you out after 90 days, or 30 days of inactivity.
     - Docker Hub and Docker Home sign you out after 24 hours.
