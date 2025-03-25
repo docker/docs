@@ -21,34 +21,34 @@ aliases:
 If you have a paid Docker subscription, you can [contact the Support team](https://hub.docker.com/support/contact/).
 
 All Docker users can seek support through the following resources, where Docker or the community respond on a best effort basis.
-   - [Docker Desktop for Windows GitHub repo](https://github.com/docker/for-win) 
-   - [Docker Desktop for Mac GitHub repo](https://github.com/docker/for-mac)
-   - [Docker Desktop for Linux GitHub repo](https://github.com/docker/desktop-linux)
-   - [Docker Community Forums](https://forums.docker.com/)
-   - [Docker Community Slack](http://dockr.ly/comm-slack)
+- [Docker Desktop for Windows GitHub repo](https://github.com/docker/for-win) 
+- [Docker Desktop for Mac GitHub repo](https://github.com/docker/for-mac)
+- [Docker Desktop for Linux GitHub repo](https://github.com/docker/desktop-linux)
+- [Docker Community Forums](https://forums.docker.com/)
+- [Docker Community Slack](http://dockr.ly/comm-slack)
 
 
 ### What support can I get?
 
 - Account management related issues
-   - Automated builds
-   - Basic product 'how to' questions
-   - Billing or subscription issues
-   - Configuration issues
-   - Desktop installation issues
-      - Installation crashes
-      - Failure to launch Docker Desktop on first run
-   - Desktop update issues
-   - Sign-in issues in both the command line interface and Docker Hub user interface
-   - Push or pull issues, including rate limiting
-   - Usage issues
-      - Crash closing software
-      - Docker Desktop not behaving as expected
+- Automated builds
+- Basic product 'how to' questions
+- Billing or subscription issues
+- Configuration issues
+- Desktop installation issues
+   - Installation crashes
+   - Failure to launch Docker Desktop on first run
+- Desktop update issues
+- Sign-in issues in both the command line interface and Docker Hub user interface
+- Push or pull issues, including rate limiting
+- Usage issues
+   - Crash closing software
+   - Docker Desktop not behaving as expected
 
-   For Windows users, you can also request support on:
-   - Turning on virtualization in BIOS
-   - Turning on Windows features
-   - Running inside [certain VM or VDI environments](/manuals/desktop/setup/vm-vdi.md) (Docker Business customers only)
+For Windows users, you can also request support on:
+- Turning on virtualization in BIOS
+- Turning on Windows features
+- Running inside [certain VM or VDI environments](/manuals/desktop/setup/vm-vdi.md) (Docker Business customers only)
 
 ### What is not supported?
 
@@ -57,7 +57,7 @@ Docker Desktop excludes support for the following types of issues:
 - Use on or in conjunction with hardware or software other than that specified in the applicable documentation
 - Running on unsupported operating systems, including beta/preview versions of operating systems
 - Running containers of a different architecture using emulation
-- Support for the Docker engine, Docker CLI, or other bundled Linux components
+- Support for Docker Engine, Docker CLI, or other bundled Linux components
 - Support for Kubernetes
 - Features labeled as experimental
 - System/Server administration activities
