@@ -14,13 +14,12 @@ keywords: Docker, ai, model runner, docker deskotp,
 
 The Docker Model Runner plugin lets you:
 
-- Run AI models directly from the command line
 - Pull models from Docker Hub
-- Manage local models (list, remove)
+- Run AI models directly from the command line
+- Manage local models (add, list, remove)
 - Interact with models in prompt or chat mode
 
-Models are pulled from Docker Hub and then loaded dynamically into memory based on request usage.
-The first pull may take a while; after that, model files are cached locally. You can interact with the model using [OpenAI-compatible APIs](#what-api-endpoints-are-available).
+Models are pulled from Docker Hub the first time they're used and stored locally. They're loaded into memory only at runtime when a request is made, and unloaded when not in use to optimize resources. Since models can be large, the initial pull may take some time — but after that, they're cached locally for faster access. You can interact with the model using [OpenAI-compatible APIs](#what-api-endpoints-are-available).
 
 ## Enable the feature
 
@@ -92,25 +91,11 @@ Lists all models currently pulled to your local environment.
 $ docker model list
 ```
 
-If no models have been pulled yet, you will see:
+If no models have been pulled yet, you will something similar to:
 
-```json
-{"object":"list","data":[]}
-```
-
-For better readability, format the output using `jq`:
-
-```console
-$ docker model list | jq .
-```
-
-Expected formatted output:
-
-```json
-{
-  "object": "list",
-  "data": []
-}
+```text
+MODEL                                     PARAMETERS  QUANTIZATION    ARCHITECTURE  MODEL ID      CREATED       SIZE
+ignaciolopezluna020/gemma-3-it:4B-Q4_K_M  3.88 B      IQ2_XXS/Q4_K_M  gemma3        adea14bef2fe  55 years ago  2.31 GiB
 ```
 
 ### Run a model
