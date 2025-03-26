@@ -31,9 +31,9 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ## 4.40.0
 
-{{< release-date date="2025-03-27" >}}
+{{< release-date date="2025-03-31" >}}
 
-{{< desktop-install-v2 all=true beta_win_arm=true version="4.40.0" build_path="/TBD/" >}}
+{{< desktop-install-v2 all=true beta_win_arm=true version="4.40.0" build_path="/187762/" >}}
 
 ### New
 
@@ -43,7 +43,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 - [Docker Buildx v0.22.0](https://github.com/docker/buildx/releases/tag/v0.22.0)
 - [Docker Compose v2.34.0](https://github.com/docker/compose/releases/tag/v2.34.0)
-- [Docker Engine v28.0.2](https://docs.docker.com/engine/release-notes/28/#2802)
+- [Docker Engine v28.0.4](https://docs.docker.com/engine/release-notes/28/#2804)
 - [Docker Scout CLI v1.17.0](https://github.com/docker/scout-cli/releases/tag/v1.17.0)
 - [compose-bridge v0.0.18](https://github.com/docker/compose-bridge-binaries/releases/tag/v0.0.18)
 - [NVIDIA Container Toolkit v1.17.5](https://github.com/NVIDIA/nvidia-container-toolkit/releases/tag/v1.17.5)
@@ -71,6 +71,12 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 - The Windows MSI and `.exe` installers now disable Windows Containers by default when installing with the GUI.
 - Improved port-mapping throughput on WSL2.
+
+### Known issues
+
+#### For Windows
+
+- Switching to Windows Containers while the privileged helper error message is displayed could cause inconsistent state. As a workaround, quit Docker Desktop, change `UseWindowsContainers` to `false` in `settings-store.json` and restart Docker Desktop.
 
 ## 4.39.0
 
