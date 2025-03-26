@@ -71,7 +71,7 @@ In this hands-on guide, you'll see how to use the `docker run` command to overri
 
 1. [Download and install](/get-started/get-docker/) Docker Desktop.
 
-### Run multiple instance of the Postgres database
+### Run multiple instances of the Postgres database
 
 1.  Start a container using the [Postgres image](https://hub.docker.com/_/postgres) with the following command:
     
