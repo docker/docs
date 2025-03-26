@@ -72,6 +72,12 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - The Windows MSI and `.exe` installers now disable Windows Containers by default when installing with the GUI.
 - Improved port-mapping throughput on WSL2.
 
+### Known issues
+
+#### For Windows
+
+- Switching to Windows Containers while the privileged helper error message is displayed could cause inconsistent state. As a workaround, quit Docker Desktop, change `UseWindowsContainers` to `false` in `settings-store.json` and restart Docker Desktop.
+
 ## 4.39.0
 
 {{< release-date date="2025-03-05" >}}
