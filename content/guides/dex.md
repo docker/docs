@@ -80,7 +80,9 @@ Explanation:
 
 - staticPasswords: Defines a static user for authentication. The hash is a bcrypt hash of the password.
 
-> Note: Ensure the hash is a valid bcrypt hash of your desired password. You can generate this using tools like [bcrypt-generator.com](https://bcrypt-generator.com/)
+> [!NOTE]
+>
+> Ensure the hash is a valid bcrypt hash of your desired password. You can generate this using tools like [bcrypt-generator.com](https://bcrypt-generator.com/).
 or use CLI tools like [htpasswd](https://httpd.apache.org/docs/2.4/programs/htpasswd.html) like in this following example:`echo password | htpasswd -BinC 10 admin | cut -d: -f2`
 
 With Docker Compose configured, start Dex:
