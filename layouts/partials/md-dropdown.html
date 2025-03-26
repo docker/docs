@@ -69,3 +69,35 @@
       </button>
     </div>
   </details>
+
+<script>
+  function getCurrentPlaintextUrl() {
+  const url = window.location.href.split("#")[0].replace(/\/$/, "");
+  return `${url}/index.md`;
+}
+
+  function copyMarkdown() {
+    fetch(getCurrentPlaintextUrl())
+      .then((response) => response.text())
+      .then((text) => {
+        navigator.clipboard
+          .writeText(text)
+          .then(() => alert("Markdown copied to clipboard!"))
+          .catch((err) => alert("Failed to copy markdown: " + err));
+      })
+      .catch((err) => alert("Error fetching markdown: " + err));
+  }
+
+  function viewPlainText() {
+    window.open(getCurrentPlaintextUrl(), "_blank");
+  }
+
+  function openInDocsAI() {
+    const kapaButton = document.querySelector(".open-kapa-widget");
+    if (kapaButton) {
+      kapaButton.click();
+    } else {
+      alert("Couldn't find Docs AI.");
+    }
+  }
+</script>
