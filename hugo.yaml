@@ -81,6 +81,13 @@ outputFormats:
     isPlainText: true
     isHTML: false
     permalinkable: true
+  # llms.txt
+  llms:
+    baseName: llms
+    isPlainText: true
+    mediaType: "text/plain"
+    notAlternative: true
+    permalinkable: false
 
 # Enable custom output formats
 # (only generate the custom output files once)
@@ -90,6 +97,7 @@ outputs:
     - redirects
     - metadata
     - robots
+    - llms
   page:
     - html
     - Markdown

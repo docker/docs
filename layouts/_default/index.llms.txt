@@ -1,0 +1,11 @@
+{{- $pages := .Site.RegularPages -}}
+{{- $sorted := sort $pages "RelPermalink" -}}
+{{- $grouped := $sorted.GroupBy "Section" -}}
+
+# Docker Documentation
+
+{{ range $grouped }}
+## {{ humanize .Key }}
+{{ range .Pages }}
+- [{{ .Title }}]({{ .Permalink }}){{ end }}
+{{ end -}}
