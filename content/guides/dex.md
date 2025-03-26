@@ -110,7 +110,7 @@ This command will download the Dex Docker image (if not already available) and s
 
 To Verify that Dex is running, check the logs to ensure Dex started successfully:
 ```bash
-docker-compose logs -f dex
+docker compose logs -f dex
 ```
 You should see output indicating that Dex is listening on the specified port.
 
