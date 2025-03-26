@@ -68,7 +68,7 @@ staticPasswords:
 ```
 
 Explanation:
-- issuer: The public URL for Dex.
+- issuer: The public URL of Dex.
 
 - storage: Using in-memory storage for simplicity.
 
