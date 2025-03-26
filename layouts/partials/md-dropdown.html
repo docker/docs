@@ -4,13 +4,9 @@
       data-heap-id="markdown-dropdown-toggle"
     >
       <span>Copy page</span>
-      <svg
-        class="h-2 w-2 transform transition-transform group-open:rotate-180"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
+      <span class="icon-svg transition-transform group-open:rotate-180">
+        {{ partialCached "icon" "arrow_drop_down" "arrow_drop_down" }}
+      </span>
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
       </svg>
     </summary>
@@ -28,8 +24,11 @@
         <span class="icon-svg mt-[2px] text-base leading-none">
           {{ partial "icon" "content_copy" }}
         </span>
+        <span class="icon-svg hidden mt-[2px] text-base leading-none">
+          {{ partial "icon" "check_circle" }}
+        </span>
         <div class="leading-tight">
-          <div class="text-base font-bold">Copy page</div>
+          <div class="text-base">Copy page</div>
           <div class="text-sm text-gray-light-500 dark:text-gray-dark-500">
             Copy this page as Markdown for LLMs
           </div>
@@ -45,7 +44,7 @@
           {{ partial "icon" "description" }}
         </span>
         <div class="leading-tight">
-          <div class="text-base font-bold">View as Markdown</div>
+          <div class="text-base">View as Markdown</div>
           <div class="text-sm text-gray-light-500 dark:text-gray-dark-500">
             View this page as plain text
           </div>
@@ -61,7 +60,7 @@
           {{ partial "icon" "search" }}
         </span>
         <div class="leading-tight">
-          <div class="text-base font-bold">Search Docs AI</div>
+          <div class="text-base">Ask AI</div>
           <div class="text-sm text-gray-light-500 dark:text-gray-dark-500">
             Ask questions with Docs AI
           </div>
@@ -70,47 +69,60 @@
     </div>
   </details>
 
-<script>
-  function getCurrentPlaintextUrl() {
-  const url = window.location.href.split("#")[0].replace(/\/$/, "");
-  return `${url}/index.md`;
-}
-
-  function copyMarkdown() {
-    fetch(getCurrentPlaintextUrl())
-      .then((response) => response.text())
-      .then((text) => {
-        navigator.clipboard
-          .writeText(text)
-          .then(() => alert("Markdown copied to clipboard!"))
-          .catch((err) => alert("Failed to copy markdown: " + err));
-      })
-      .catch((err) => alert("Error fetching markdown: " + err));
-  }
-
-  function viewPlainText() {
-    window.open(getCurrentPlaintextUrl(), "_blank");
-  }
-
-  function openInDocsAI() {
-    const kapaButton = document.querySelector(".open-kapa-widget");
-    if (kapaButton) {
-      kapaButton.click();
-    } else {
-      alert("Couldn't find Docs AI.");
+  <script>
+    function getCurrentPlaintextUrl() {
+      const url = window.location.href.split("#")[0].replace(/\/$/, "");
+      return `${url}/index.md`;
     }
-  }
 
-  document.addEventListener('click', function (event) {
-    const dropdown = document.getElementById('markdownDropdown');
+    function copyMarkdown() {
+      fetch(getCurrentPlaintextUrl())
+        .then((response) => response.text())
+        .then((text) => {
+          navigator.clipboard.writeText(text).then(() => {
+            const button = document.querySelector('[data-heap-id="copy-markdown-button"]');
+            if (!button) return;
 
-    if (!dropdown) return;
+            const icons = button.querySelectorAll(".icon-svg");
+            const copyIcon = icons[0];
+            const checkIcon = icons[1];
 
-    const isClickInside = dropdown.contains(event.target);
+            copyIcon.classList.add("hidden");
+            checkIcon.classList.remove("hidden");
 
-    // If dropdown is open and click was outside, close it
-    if (!isClickInside && dropdown.hasAttribute('open')) {
-      dropdown.removeAttribute('open');
+            setTimeout(() => {
+              copyIcon.classList.remove("hidden");
+              checkIcon.classList.add("hidden");
+            }, 2000);
+          });
+        })
+        .catch((err) => {
+          console.error("Error copying markdown:", err);
+        });
     }
-  });
-</script>
+
+    function viewPlainText() {
+      window.open(getCurrentPlaintextUrl(), "_blank");
+    }
+
+    function openInDocsAI() {
+      const kapaButton = document.querySelector(".open-kapa-widget");
+      if (kapaButton) {
+        kapaButton.click();
+      } else {
+        alert("Couldn't find Docs AI.");
+      }
+    }
+
+    document.addEventListener("click", function (event) {
+      const dropdown = document.getElementById("markdownDropdown");
+
+      if (!dropdown) return;
+
+      const isClickInside = dropdown.contains(event.target);
+
+      if (!isClickInside && dropdown.hasAttribute("open")) {
+        dropdown.removeAttribute("open");
+      }
+    });
+  </script>
