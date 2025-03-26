@@ -100,7 +100,7 @@ services:
     command: ["dex", "serve", "/etc/dex/config.yaml"]
 ```
 
-Now it is possible to run the container using `docker compose` command.
+Now it is possible to run the container using the `docker compose` command.
 ```bash
 docker compose up -d
 ```
