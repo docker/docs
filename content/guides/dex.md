@@ -25,7 +25,7 @@ The official [Docker image for Dex](https://hub.docker.com/r/dexidp/dex/) provid
 
 ### Prerequisites
 
-[Docker Compose](https://docs.docker.com/compose/): Recommended for managing multi-container Docker applications.
+[Docker Compose](/compose/): Recommended for managing multi-container Docker applications.
 
 ### Setting Up Dex with Docker
 
