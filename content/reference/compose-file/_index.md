@@ -54,6 +54,6 @@ Use the following links to navigate key sections of the Compose Specification.
 > [!TIP]
 >
 > Want a better editing experience for Compose files in VS Code?
-> Check out the [Docker VS Code Extension (experimental)](https://github.com/docker/vscode-extension) for linting, code navigation, and vulnerability scanning.
+> Check out the [Docker VS Code Extension (Beta)](https://marketplace.visualstudio.com/items?itemName=docker.docker) for linting, code navigation, and vulnerability scanning.
 
 {{< grid >}}

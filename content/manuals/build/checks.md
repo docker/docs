@@ -39,7 +39,7 @@ Build checks are useful for:
 > [!TIP]
 >
 > Want a better editing experience for Dockerfiles in VS Code?
-> Check out the [Docker VS Code Extension (experimental)](https://github.com/docker/vscode-extension) for linting, code navigation, and vulnerability scanning.
+> Check out the [Docker VS Code Extension (Beta)](https://marketplace.visualstudio.com/items?itemName=docker.docker) for linting, code navigation, and vulnerability scanning.
 
 ## Build with checks
 
