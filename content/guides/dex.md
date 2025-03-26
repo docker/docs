@@ -116,7 +116,7 @@ You should see output indicating that Dex is listening on the specified port.
 
 ### Using Dex OAuth testing in GHA
 
-To test the OAuth flow, you'll need a client application configured to authenticate against Dex. One of the most typical use cases is to use it inside Github Actions. Since Dex supports mock authentication, you can predefine test users as suggests in the [docs](https://dexidp.io/docs). The `config.yaml` file should looks like:
+To test the OAuth flow, you'll need a client application configured to authenticate against Dex. One of the most typical use cases is to use it inside GitHub Actions. Since Dex supports mock authentication, you can predefine test users as suggested in the [docs](https://dexidp.io/docs). The `config.yaml` file should looks like:
 
 ```yaml
 issuer: http://127.0.0.1:5556/dex
