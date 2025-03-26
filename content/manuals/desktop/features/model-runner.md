@@ -73,14 +73,14 @@ $ docker model pull <model>
 Example: 
 
 ```console
-$ docker model pull ignaciolopezluna020/llama3.2:1b
+$ docker model pull ai/llama3.2:1b
 ```
 
 Output:
 
 ```text
 Downloaded: 626.05 MB
-Model ignaciolopezluna020/llama3.2:1b pulled successfully
+Model ai/llama3.2:1b pulled successfully
 ```
 
 ### List available models
@@ -91,7 +91,7 @@ Lists all models currently pulled to your local environment.
 $ docker model list
 ```
 
-If no models have been pulled yet, you will something similar to:
+You will something similar to:
 
 ```text
 MODEL                                     PARAMETERS  QUANTIZATION    ARCHITECTURE  MODEL ID      CREATED       SIZE
@@ -105,7 +105,7 @@ Run a model and interact with it using a submitted prompt or in chat mode.
 #### One-time prompt
 
 ```console
-$ docker model run ignaciolopezluna020/llama3.2:1b "Hi"
+$ docker model run ai/llama3.2:1b "Hi"
 ```
 
 Output:
@@ -117,7 +117,7 @@ Hi! How can I assist you today
 #### Interactive chat
 
 ```console
-docker model run ignaciolopezluna020/llama3.2:1b
+docker model run ai/llama3.2:1b
 ```
 
 Output:
@@ -152,7 +152,7 @@ If you want to try an existing GenAI application, follow these instructions.
 1. Pull the required model from Docker Hub so it's ready for use in your app.
 
    ```console
-   $ docker model pull ignaciolopezluna020/llama3.2:1b
+   $ docker model pull ai/llama3.2:1b
    ```
 
 2. Set up the sample app. Download and unzip the following folder:
@@ -176,7 +176,7 @@ You can now interact with your own GenAI app, powered by a local model. Try a fe
 
 ### What models are available?
 
-Currently, all models are hosted in the public Docker Hub namespace of <CHANGE>. You can pull and use any of the following:
+All the available models are hosted in the [public Docker Hub namespace of `ai`](https://hub.docker.com/u/ai). 
 
 ### What API endpoints are available?
 
@@ -222,7 +222,7 @@ Examples of calling an OpenAI endpoint (`chat/completions`) from within another 
 curl http://model-runner.docker.internal/engines/llama.cpp/v1/chat/completions \
     -H "Content-Type: application/json" \
     -d '{
-        "model": "ignaciolopezluna020/llama3.2:1b",
+        "model": "ai/llama3.2:1b",
         "messages": [
             {
                 "role": "system",
@@ -248,7 +248,7 @@ curl --unix-socket $HOME/.docker/run/docker.sock \
     localhost/exp/vDD4.40/engines/llama.cpp/v1/chat/completions \
     -H "Content-Type: application/json" \
     -d '{
-        "model": "ignaciolopezluna020/llama3.2:1b",
+        "model": "ai/llama3.2:1b",
         "messages": [
             {
                 "role": "system",
@@ -279,7 +279,7 @@ Afterwards, interact with it as previously documented using `localhost` and the 
 	curl http://localhost:8080/engines/llama.cpp/v1/chat/completions \
     -H "Content-Type: application/json" \
     -d '{
-        "model": "ignaciolopezluna020/llama3.2:1b",
+        "model": "ai/llama3.2:1b",
         "messages": [
             {
                 "role": "system",
