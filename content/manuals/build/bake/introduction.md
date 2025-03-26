@@ -84,6 +84,11 @@ target "myapp" {
 }
 ```
 
+> [!TIP]
+>
+> Want a better editing experience for Bake files in VS Code?
+> Check out the [Docker VS Code Extension (Beta)](https://marketplace.visualstudio.com/items?itemName=docker.docker) for linting, code navigation, and vulnerability scanning.
+
 ## Next steps
 
 To learn more about using Bake, see the following topics:
