@@ -17,7 +17,7 @@ Nowadays OAuth is the preferred choice to authenticate in web services, the high
 In this guide, you'll learn how to:
 
 - Use Docker to launch up a Dex container.
-- Use mock OAuth in the GHA without relying on an external OAuth provider.
+- Use mock OAuth in the GitHub Action (GHA) without relying on an external OAuth provider.
 
 ## Using Dex with Docker
 
