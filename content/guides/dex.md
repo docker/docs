@@ -40,7 +40,7 @@ Organize your project with the following structure:
 ```bash
 dex-mock-server/
 ├── config.yaml
-└── docker-compose.yaml
+└── compose.yaml
 ```
 
 Create the Dex Configuration File:
