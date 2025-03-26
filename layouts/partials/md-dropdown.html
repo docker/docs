@@ -72,9 +72,9 @@
 
 <script>
   function getCurrentPlaintextUrl() {
-    const url = window.location.href.split("#")[0].replace(/\/$/, "");
-    return `${url}.md`;
-  }
+  const url = window.location.href.split("#")[0].replace(/\/$/, "");
+  return `${url}/index.md`;
+}
 
   function copyMarkdown() {
     fetch(getCurrentPlaintextUrl())
