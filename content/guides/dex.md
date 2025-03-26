@@ -108,7 +108,7 @@ docker compose up -d
 This command will download the Dex Docker image (if not already available) and start the container in detached mode.
 
 
-To Verify that Dex is running, check the logs to ensure Dex started successfully:
+To verify that Dex is running, check the logs to ensure Dex started successfully:
 ```bash
 docker compose logs -f dex
 ```
