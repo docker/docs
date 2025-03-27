@@ -27,7 +27,7 @@ compliance status, and resolving non-compliant users.
 2. Select your organization or company from the **Choose profile** page.
 3. Under Docker Desktop, select **Reporting**.
 
-This opens the Desktop settings reporting dashboard. From here you can:
+This opens the Desktop settings reporting page. From here you can:
 
 - Use the **Search** field to search by username or email address
 - Filter by policies
