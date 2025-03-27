@@ -23,6 +23,11 @@ compliance status, and resolving non-compliant users.
 
 ## Access Desktop settings reporting
 
+> [!IMPORTANT]
+>
+> Desktop settings reporting is in Early Access and is being rolled out
+> gradually. You may not see this setting in the Admin Console yet.
+
 1. Sign in to the [Admin Console](https://app.docker.com/admin).
 2. Select your organization or company from the **Choose profile** page.
 3. Under Docker Desktop, select **Reporting**.
@@ -39,18 +44,19 @@ This opens the Desktop settings reporting page. From here you can:
 
 > [!WARNING]
 >
-> Users may show up as non-compliant if they are not using Docker Desktop
-> version 4.40 and later.
+> Users on Docker Desktop versions older than 4.40 may appear non-compliant
+> because older versions can't report compliance. To ensure accurate
+> compliance status, users must update to Docker Desktop version 4.40 and later.
 
 1. Sign in to the [Admin Console](https://app.docker.com/admin).
 2. Select your organization or company from the **Choose profile** page.
-3. Under Docker Desktop, select **Reporting**.
-4. By default, non-compliant users are displayed.
-5. Optional. Select the **Hide compliant users** checkbox to show both compliant
+3. Under Docker Desktop, select **Reporting**. By default, non-compliant users
+are displayed.
+4. Optional. Select the **Hide compliant users** checkbox to show both compliant
 and non-compliant users.
-6. Use the **Search** field to search by username or email address.
-7. Hover over a user’s compliance status indicator to quickly view their status.
-8. Select a username to view more details about their compliance status, and for
+5. Use the **Search** field to search by username or email address.
+6. Hover over a user’s compliance status indicator to quickly view their status.
+7. Select a username to view more details about their compliance status, and for
 steps to resolve non-compliant users.
 
 ## Resolve compliance status
