@@ -3,11 +3,9 @@
     {{ partial "breadcrumbs.html" . }}
     <h1 data-pagefind-weight="10" class="flex scroll-mt-36 items-center">
       <span>{{ .Title }}</span>
-      {{ if .IsPage }}
         <span class="ml-auto">
           {{ partial "md-dropdown.html" . }}
         </span>
-      {{ end }}
     </h1>
 
     <div class="block lg:hidden">

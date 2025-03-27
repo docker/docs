@@ -80,7 +80,7 @@ outputFormats:
     mediaType: "text/markdown"
     isPlainText: true
     isHTML: false
-    permalinkable: true
+    permalinkable: false
   # llms.txt
   llms:
     baseName: llms
@@ -99,6 +99,9 @@ outputs:
     - robots
     - llms
   page:
+    - html
+    - Markdown
+  section:
     - html
     - Markdown
 
