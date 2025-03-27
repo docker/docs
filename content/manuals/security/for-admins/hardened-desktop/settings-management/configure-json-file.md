@@ -282,6 +282,4 @@ For settings to take effect:
 
 So as not to disrupt your developers' workflow, Docker doesn't automatically mandate that developers re-launch and re-authenticate once a change has been made.
 
-In Docker Desktop, developers see the relevant settings grayed out and the message **Locked by your administrator**.
-
-![Proxy settings grayed out with Settings Management](/assets/images/grayed-setting.png)
+In Docker Desktop, developers see the relevant settings grayed out.
