@@ -15,7 +15,7 @@ params:
 
 Desktop settings reporting is a feature of Desktop Settings Management that
 tracks and reports user compliance with the settings policies that are assigned
-to them. This lets administrators to track the application of settings and
+to them. This lets administrators track the application of settings and
 monitor what actions they need to take to make users compliant.
 
 This guide provides steps for accessing Desktop settings reporting, viewing
