@@ -10,6 +10,7 @@
       {{- with .GetPage "/contribute" }}
         <a class="underline-offset-2 hover:underline" href="{{ .Permalink }}">{{ .LinkTitle }}</a>
       {{- end }}
+      <a href="{{ "llms.txt" | relURL }}">Read llms.txt</a>
     </div>
     <hr class="text-divider-light dark:text-divider-dark" />
     <div class="grid lg:grid-cols-3 place-items-center gap-8 grid-cols-1">
