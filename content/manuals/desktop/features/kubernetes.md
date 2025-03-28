@@ -83,9 +83,13 @@ The following table summarizes this comparison.
 
 ### Additional settings
 
-#### Kubernetes dashboard
+#### Kubernetes Dashboard
 
-Once Kubernetes is installed and set up, you can select the **Deploy the Kubernetes Dashboard into cluster** setting so you can manage and monitor your Kubernetes clusters and applications more easily.
+Once Kubernetes is installed and set up, you can select the **Deploy the Kubernetes Dashboard into cluster** setting.
+
+This setting installs the Kubernetes Dashboard in Docker Desktop and gives you the option to open the Dashboard web UI in an external browser with the **Launch Dashboard** button located at the top-right of the settings page. 
+
+The Kubernetes Dashboard helps you manage and monitor your Kubernetes clusters and applications more easily.
 
 #### Viewing system containers
 
