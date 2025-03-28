@@ -7,14 +7,14 @@ params:
       text: Beta
 weight: 20
 description: Learn how to use Docker Model Runner to manage and run AI models. 
-keywords: Docker, ai, model runner, docker deskotp,
+keywords: Docker, ai, model runner, docker deskotp, llm
 ---
 
 {{< summary-bar feature_name="Docker Model Runner" >}}
 
 The Docker Model Runner plugin lets you:
 
-- Pull models from Docker Hub
+- [Pull models from Docker Hub](https://hub.docker.com/u/ai)
 - Run AI models directly from the command line
 - Manage local models (add, list, remove)
 - Interact with models using a submitted prompt or in chat mode
@@ -73,14 +73,14 @@ $ docker model pull <model>
 Example: 
 
 ```console
-$ docker model pull ai/llama3.2:1b
+$ docker model pull ai/smollm2
 ```
 
 Output:
 
 ```text
-Downloaded: 626.05 MB
-Model ai/llama3.2:1b pulled successfully
+Downloaded: 257.71 MB
+Model ai/smo11m2 pulled successfully
 ```
 
 ### List available models
@@ -91,11 +91,11 @@ Lists all models currently pulled to your local environment.
 $ docker model list
 ```
 
-You will something similar to:
+You will see something similar to:
 
 ```text
-MODEL                                     PARAMETERS  QUANTIZATION    ARCHITECTURE  MODEL ID      CREATED       SIZE
-ignaciolopezluna020/gemma-3-it:4B-Q4_K_M  3.88 B      IQ2_XXS/Q4_K_M  gemma3        adea14bef2fe  55 years ago  2.31 GiB
++MODEL       PARAMETERS  QUANTIZATION    ARCHITECTURE  MODEL ID      CREATED     SIZE
++ai/smollm2  361.82 M    IQ2_XXS/Q4_K_M  llama         354bf30d0aa3  3 days ago  256.35 MiB
 ```
 
 ### Run a model
@@ -105,19 +105,19 @@ Run a model and interact with it using a submitted prompt or in chat mode.
 #### One-time prompt
 
 ```console
-$ docker model run ai/llama3.2:1b "Hi"
+$ docker model run ai/smo11m2 "Hi"
 ```
 
 Output:
 
 ```text
-Hi! How can I assist you today
+Hello! How can I assist you today?
 ```
 
 #### Interactive chat
 
 ```console
-docker model run ai/llama3.2:1b
+docker model run ai/smo11m2
 ```
 
 Output:
@@ -125,8 +125,9 @@ Output:
 ```text
 Interactive chat mode started. Type '/bye' to exit.
 > Hi
-Hi! How are you doing today?
+Hi there! It's SmolLM, AI assistant. How can I help you today?
 > /bye
+Chat session ended.
 ```
 
 ### Remove a model
@@ -149,24 +150,17 @@ You can now start building your Generative AI application powered by the Docker 
 
 If you want to try an existing GenAI application, follow these instructions.
 
-1. Pull the required model from Docker Hub so it's ready for use in your app.
+1. Set up the sample app. Clone and run the following repository:
 
    ```console
-   $ docker model pull ai/llama3.2:1b
+   $ git clone https://github.com/docker/hello-genai.git
    ```
 
-2. Set up the sample app. Download and unzip the following folder:
-   
-   [myapp.zip](attachment:abc104c4-e0c9-4163-b90b-e1f06caab687:myapp.zip)
+2. In your terminal, navigate to the `hello-genai` directory.
 
-3. In your terminal, navigate to the `myapp` folder.
-4. Start the app with Docker Compose:
+3. Run `run.sh` for pulling the chosen model and run the app(s):
 
-   ```console
-   $ docker compose up 
-   ```
-
-5. Open you app in the browser at `http://localhost:3000`. 
+4. Open you app in the browser at the addresses specified in the repository [README](https://github.com/docker/hello-genai).
 
 You'll see the GenAI app's interface where you can start typing your prompts. 
 
@@ -193,20 +187,20 @@ http://model-runner.docker.internal/
     GET /models/{namespace}/{name}
     DELETE /models/{namespace}/{name}
 
-    # OpenAI endpoints (per-backend)
-    GET /engines/{backend}/v1/models
-    GET /engines/{backend}/v1/models/{namespace}/{name}
-    POST /engines/{backend}/v1/chat/completions
-    POST /engines/{backend}/v1/completions
-    POST /engines/{backend}/v1/embeddings
-    Note: You can also omit {backend} and it will default to llama.cpp
+    # OpenAI endpoints
+    GET /engines/llama.cpp/v1/models
+    GET /engines/llama.cpp/v1/models/{namespace}/{name}
+    POST /engines/llama.cpp/v1/chat/completions
+    POST /engines/llama.cpp/v1/completions
+    POST /engines/llama.cpp/v1/embeddings
+    Note: You can also omit llama.cpp.
     E.g., POST /engines/v1/chat/completions.
 
 #### Inside or outside containers (host) ####
 
 Same endpoints on /var/run/docker.sock
 
-    # Until stable...
+    # While still in Beta
     Prefixed with /exp/vDD4.40
 ```
 
@@ -222,7 +216,7 @@ Examples of calling an OpenAI endpoint (`chat/completions`) from within another 
 curl http://model-runner.docker.internal/engines/llama.cpp/v1/chat/completions \
     -H "Content-Type: application/json" \
     -d '{
-        "model": "ai/llama3.2:1b",
+        "model": "ai/smo11m2",
         "messages": [
             {
                 "role": "system",
@@ -248,7 +242,7 @@ curl --unix-socket $HOME/.docker/run/docker.sock \
     localhost/exp/vDD4.40/engines/llama.cpp/v1/chat/completions \
     -H "Content-Type: application/json" \
     -d '{
-        "model": "ai/llama3.2:1b",
+        "model": "ai/smo11m2",
         "messages": [
             {
                 "role": "system",
@@ -265,21 +259,17 @@ curl --unix-socket $HOME/.docker/run/docker.sock \
 
 #### From the host using TCP
 
-In case you want to interact with the API from the host, but use TCP instead of a Docker socket, it is recommended you use a helper container as a reverse-proxy. For example, in order to forward the API to `8080`:
+In case you want to interact with the API from the host, but use TCP instead of a Docker socket, you can enable the host-side TCP support from the Docker Desktop GUI, or via the [Docker Desktop CLI](/manuals/desktop/features/desktop-cli.md). For example, using `docker desktop enable model-runner --tcp <port>`.
 
-```bash
-docker run -d --name model-runner-proxy -p 8080:80 alpine/socat tcp-listen:80,fork,reuseaddr tcp:model-runner.docker.internal:80
-```
-
-Afterwards, interact with it as previously documented using `localhost` and the forward port, in this case `8080`:
+Afterwards, interact with it as previously documented using `localhost` and the chosen, or the default port.
 
 ```bash
 #!/bin/sh
 
-	curl http://localhost:8080/engines/llama.cpp/v1/chat/completions \
+	curl http://localhost:12434/engines/llama.cpp/v1/chat/completions \
     -H "Content-Type: application/json" \
     -d '{
-        "model": "ai/llama3.2:1b",
+        "model": "ai/smo11m2",
         "messages": [
             {
                 "role": "system",
@@ -312,6 +302,24 @@ $ ln -s /Applications/Docker.app/Contents/Resources/cli-plugins/docker-model ~/.
 ```
 
 Once linked, re-run the command.
+
+### No safeguard for running oversized models
+
+Currently, Docker Model Runner doesn't include safeguards to prevent you from launching models that exceed their system’s available resources. Attempting to run a model that is too large for the host machine may result in severe slowdowns or render the system temporarily unusable. This issue is particularly common when running LLMs models without sufficient GPU memory or system RAM. 
+
+### `model run` drops into chat even if pull fails
+
+If a model image fails to pull successfully, for example due to network issues or lack of disk space, the `docker model run` command will still drop you into the chat interface, even though the model isn’t actually available. This can lead to confusion, as the chat will not function correctly without a running model. 
+
+You can manually retry the `docker model pull` command to ensure the image is available before running it again.
+
+### No consistent digest support in Model CLI
+
+The Docker Model CLI currently lacks consistent support for specifying models by image digest. As a temporary workaround, you should refer to models by name instead of digest.
+
+### Misleading pull progress after failed initial attempt
+
+In some cases, if an initial `docker model pull` fails partway through, a subsequent successful pull may misleadingly report “0 bytes” downloaded even though data is being fetched in the background. This can give the impression that nothing is happening, when in fact the model is being retrieved. Despite the incorrect progress output, the pull typically completes as expected.
 
 ## Share feedback
 
