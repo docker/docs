@@ -82,7 +82,7 @@ Prior to Docker Desktop 4.19, ECI did not protect containers used implicitly
 by `docker build` during the build process.
 
 Since Docker Desktop 4.19, ECI protects containers used by `docker build`
-when using the [Docker container build driver](/manuals/build/builders/drivers/_index.md).
+when using the [Docker container driver](/manuals/build/builders/drivers/_index.md).
 
 In addition, since Docker Desktop 4.30, ECI also protects containers used by
 `docker build` when using the default "docker" build driver, on all
