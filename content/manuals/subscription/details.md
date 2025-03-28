@@ -42,7 +42,7 @@ Docker Personal includes:
 
 - 1 included repository with continuous vulnerability analysis in Docker Scout
 - Unlimited public Docker Hub repositories
-- 100 pulls per hour Docker Hub image pull rate limit for authenticated users
+- 100 pulls per 6 hours Docker Hub image pull rate limit for authenticated users
 - 7-day Docker Build Cloud trial
 - 7-day Testcontainers Cloud trial
 
@@ -51,13 +51,11 @@ Testcontainers Cloud after their trial can upgrade to a Docker Pro plan at any
 time.
 
 All unauthenticated users, including unauthenticated Docker Personal users, get
-10 pulls per hour per IP address.
+100 pulls per 6 hours per IPv4 address or IPv6 /64 subnet.
 
 For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/).
 
 ## Docker Pro
-
-{{% include "hub-limits.md" %}}
 
 **Docker Pro** enables individual developers to get more control of their
 development environment and provides an integrated and reliable developer
@@ -79,8 +77,6 @@ For a list of features available in each tier, see [Docker
 Pricing](https://www.docker.com/pricing/).
 
 ## Docker Team
-
-{{% include "hub-limits.md" %}}
 
 **Docker Team** offers capabilities for collaboration, productivity, and
 security across organizations. It enables groups of developers to unlock the
@@ -105,8 +101,6 @@ For a list of features available in each tier, see [Docker
 Pricing](https://www.docker.com/pricing/).
 
 ## Docker Business
-
-{{% include "hub-limits.md" %}}
 
 **Docker Business** offers centralized management and advanced security features
 for enterprises that use Docker at scale. It empowers leaders to manage their

@@ -11,6 +11,7 @@ linkTitle: Plugin
 aliases:
 - /compose/compose-plugin/
 - /compose/compose-linux/
+- /compose/install/compose-plugin/
 weight: 10
 ---
 

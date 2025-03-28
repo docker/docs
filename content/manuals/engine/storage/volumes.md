@@ -13,6 +13,7 @@ aliases:
   - /engine/userguide/dockervolumes/
   - /engine/admin/volumes/volumes/
   - /storage/volumes/
+  - /engine/admin/volumes/backing-up/
 ---
 
 Volumes are persistent data stores for containers, created and managed by

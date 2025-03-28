@@ -6,6 +6,7 @@ aliases:
 - /compose/reference/config/
 - /engine/reference/commandline/compose_convert/
 - /engine/reference/commandline/compose_config/
+- /compose/config/
 layout: cli
 ---
 
