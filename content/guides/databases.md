@@ -78,8 +78,8 @@ To run a container using the GUI:
 1. In the Docker Desktop Dashboard, select the global search at the top of the window.
 2. Specify `mysql` in the search box, and select the `Images` tab if not already
    selected.
-3. Hover over the `msyql` image and select `Run`.
-   The **Run a new container** model appears.
+3. Hover over the `mysql` image and select `Run`.
+   The **Run a new container** modal appears.
 4. Expand **Optional settings**.
 5. In the optional settings, specify the following:
 
@@ -181,7 +181,7 @@ interact with your MySQL database.
 Before you begin, you must remove any containers you previously ran for this
 guide. To stop and remove a container, either:
 
-- In a terminal, run `docker remove --force my-mysql` to remove the container
+- In a terminal, run `docker rm --force my-mysql` to remove the container
   named `my-mysql`.
 - Or, in the Docker Desktop Dashboard, select the **Delete** icon next to your
   container in the **Containers** view.
@@ -221,8 +221,8 @@ To run a container using the GUI:
 1. In the Docker Desktop Dashboard, select the global search at the top of the window.
 2. Specify `mysql` in the search box, and select the `Images` tab if not already
    selected.
-3. Hover over the `msyql` image and select `Run`.
-   The **Run a new container** model appears.
+3. Hover over the `mysql` image and select `Run`.
+   The **Run a new container** modal appears.
 4. Expand **Optional settings**.
 5. In the optional settings, specify the following:
 
@@ -392,7 +392,7 @@ data persists:
    2. Specify `mysql` in the search box, and select the **Images** tab if not
       already selected.
    3. Hover over the **mysql** image and select **Run**.
-      The **Run a new container** model appears.
+      The **Run a new container** modal appears.
    4. Expand **Optional settings**.
    5. In the optional settings, specify the following:
 
@@ -433,7 +433,7 @@ data persists:
    2. Specify `mysql` in the search box, and select the **Images** tab if not
       already selected.
    3. Hover over the **mysql** image and select **Run**.
-      The **Run a new container** model appears.
+      The **Run a new container** modal appears.
    4. Expand **Optional settings**.
    5. In the optional settings, specify the following:
 
