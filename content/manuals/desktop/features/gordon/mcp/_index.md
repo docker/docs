@@ -2,8 +2,6 @@
 title: MCP
 description: Learn how to use MCP servers with Gordon
 keywords: ai, mcp, gordon, docker desktop, docker, llm, 
-aliases:
- - /desktop/features/gordon/mcp/
 grid:
 - title: Built-in tools
   description: Use the built-in tools.
