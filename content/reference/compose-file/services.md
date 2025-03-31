@@ -400,7 +400,7 @@ services:
 
 configs:
   my_credentials_spec:
-    file: ./my-credential-spec.json|
+    file: ./my-credential-spec.json
 ```
 
 ### `depends_on`
