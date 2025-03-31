@@ -1,12 +1,12 @@
 ---
 title: Built-in tools
-description: Built-in tools
+description: How to use Gordon's built-in tools
 keywords: ai, mcp, gordon
 ---
 
 Gordon comes with an integrated toolbox providing access to various system tools
 and capabilities. These tools extend Gordon's functionality by allowing it to
-interact with the Docker Engine, Kubernetes, Docker Scout (security scanning),
+interact with the Docker Engine, Kubernetes, Docker Scout's security scanning,
 and other developer utilities. This documentation covers the available tools,
 their configuration, and usage patterns.
 
@@ -15,23 +15,26 @@ their configuration, and usage patterns.
 Tools can be configured globally in the toolbox, making them accessible
 throughout the Gordon interfaces, including both Docker Desktop and the CLI.
 
-Click on the `Toolbox` button in the bottom left of the input area
+To configure:
 
-![Gordon page with the toolbox button](../images/gordon.webp)
+1. On the **Ask Gordon** view in Docker Desktop, select the `Toolbox` button in the bottom left of the input area.
 
-Choose the tools you want to make available - by clicking on each card you
-   can view extra information regarding each tool and what it does.
+   ![Gordon page with the toolbox button](../images/gordon.webp)
 
-![Gordon's Toolbox](../images/toolbox.webp)
+2. Choose the tools you want to make available. Selecting a card lets you view extra information regarding each tool and what it does.
 
-## Usage Examples
+   ![Gordon's Toolbox](../images/toolbox.webp)
+
+   For more information on the possible tools, see [Reference](#reference).
+
+## Usage examples
 
 This section provides task-oriented examples for common operations with Gordon
 tools.
 
-### Managing Docker Containers
+### Managing Docker containers
 
-#### List and Monitor Containers
+#### List and monitor containers
 
 ```console
 # List all running containers
@@ -57,7 +60,7 @@ $ docker ai "Stop my database container"
 $ docker ai "Remove all stopped containers"
 ```
 
-### Working with Docker Images
+### Working with Docker images
 
 ```console
 # List available images
@@ -73,7 +76,7 @@ $ docker ai "Build an image from my current directory and tag it as myapp:latest
 $ docker ai "Remove all my unused images"
 ```
 
-### Managing Docker Volumes
+### Managing Docker volumes
 
 ```console
 # List volumes
@@ -86,7 +89,7 @@ $ docker ai "Create a new volume called postgres-data"
 $ docker ai "Create a backup of my postgres container data to a new volume"
 ```
 
-### Kubernetes Operations
+### Kubernetes operations
 
 ```console
 # Create a deployment
@@ -99,7 +102,7 @@ $ docker ai "Show me all deployments in the default namespace"
 $ docker ai "Show me logs from the auth-service pod"
 ```
 
-### Security Analysis
+### Security analysis
 
 
 ```console
@@ -110,7 +113,7 @@ $ docker ai "Scan my application for security vulnerabilities"
 $ docker ai "Give me recommendations for improving the security of my nodejs-app image"
 ```
 
-### Development Workflows
+### Development workflows
 
 ```console
 # Analyze and commit changes
@@ -127,7 +130,7 @@ in Gordon's toolbox.
 
 ### Docker tools
 
-Tools to interact with your Docker containers, images and volumes.
+Tools to interact with your Docker containers, images, and volumes.
 
 #### Container management
 
@@ -231,47 +234,3 @@ Catalog](https://open.docker.com/extensions/marketplace?extensionId=docker/labs-
 Docker Desktop extension is installed, all the tools enabled in the catalog are
 available for Gordon to use. After installation, you can enable the usage of the
 AI Tool Catalog tools in the toolbox section of Gordon.
-
-
-## Gordon as an MCP server
-
-In addition to functioning as an MCP client, Gordon can also act as an MCP
-server. This means that all the tools configured in the toolbox section of
-Gordon can be exposed to another MCP client like Claude Desktop, Cursor and
-others.
-
-To use Gordon’s built-in tools in other MCP clients, configure your client of
-choice to use the `docker ai mcpserver` command. This allows Gordon to serve its
-built-in tools via the MCP protocol for various clients.
-
-For example, to enable Gordon’s tools in Claude Desktop, add the following
-configuration to the Claude configuration file:
-
-```json
-{
-  "mcpServers": {
-    "gordon": {
-      "command": "docker",
-      "args": ["ai", "mcpserver"]
-    }
-  }
-}
-```
-
-This setup ensures that Claude Desktop can communicate with Gordon as an MCP
-server, leveraging its built-in tools. You can follow the [Claude Desktop
-documentation](https://modelcontextprotocol.io/quickstart/user) to explore
-further.
-
-
----
-
-### Tool Permissions and Security
-
-These tools operate with the same permissions as the user running the
-application.
-
-Any potentially destructive tool call, changing files, deleting images or
-stopping containers will ask for your confirmation before proceeding.
-
-![Gordon page with the delete confirmation question](../images/delete.webp)

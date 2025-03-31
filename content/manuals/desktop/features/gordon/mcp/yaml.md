@@ -112,18 +112,18 @@ The website rumpl.dev features a variety of blog posts and articles authored by 
 Now that you’ve learned how to use MCP servers with Gordon, here are a few ways
 you can get started:
 
-1. Experiment: Try integrating one or more of the tested MCP servers into your
+- Experiment: Try integrating one or more of the tested MCP servers into your
   `gordon-mcp.yml` file and explore their capabilities.
-2. Explore the ecosystem: Check out the [reference implementations on
+- Explore the ecosystem: Check out the [reference implementations on
    GitHub](https://github.com/modelcontextprotocol/servers/) or browse the
    [Docker Hub MCP namespace](https://hub.docker.com/u/mcp) for additional
    servers that might suit your needs.
-3. Build your own: If none of the existing servers meet your needs, or you’re
+- Build your own: If none of the existing servers meet your needs, or you’re
    curious about exploring how they work in more detail, consider developing a
    custom MCP server. Use the [MCP
    specification](https://www.anthropic.com/news/model-context-protocol) as a
    guide.
-4. Share your feedback: If you discover new servers that work well with Gordon
+- Share your feedback: If you discover new servers that work well with Gordon
    or encounter issues with existing ones, [share your findings to help improve
    the ecosystem](https://docker.qualtrics.com/jfe/form/SV_9tT3kdgXfAa6cWa).
 
