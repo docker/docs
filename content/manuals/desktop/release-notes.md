@@ -37,7 +37,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ### New
 
-- You can now pull, run, and manage AI models from Docker Hub directly in Docker Desktop with Docker Model Runner (Beta). Currently available for Docker Desktop for Mac with Apple Silicon.
+- You can now pull, run, and manage AI models from Docker Hub directly in Docker Desktop with [Docker Model Runner (Beta)](/manuals/desktop/features/model-runner.md). Currently available for Docker Desktop for Mac with Apple Silicon.
 
 ### Upgrades
 
