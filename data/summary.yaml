@@ -137,6 +137,10 @@ Docker Desktop CLI logs:
   requires: Docker Desktop 4.39 and later
 Docker GitHub Copilot:
   availability: Early Access
+Docker Model Runner:
+  availability: Beta
+  requires: Docker Desktop 4.40 and later
+  for: Docker Desktop for Mac with Apple Silicon
 Docker Projects:
   availability: Beta
 Docker Init:
