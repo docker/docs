@@ -80,7 +80,7 @@ Output:
 
 ```text
 Downloaded: 257.71 MB
-Model ai/smo11m2 pulled successfully
+Model ai/smollm2 pulled successfully
 ```
 
 ### List available models
@@ -105,7 +105,7 @@ Run a model and interact with it using a submitted prompt or in chat mode.
 #### One-time prompt
 
 ```console
-$ docker model run ai/smo11m2 "Hi"
+$ docker model run ai/smollm2 "Hi"
 ```
 
 Output:
@@ -117,7 +117,7 @@ Hello! How can I assist you today?
 #### Interactive chat
 
 ```console
-docker model run ai/smo11m2
+docker model run ai/smollm2
 ```
 
 Output:
@@ -216,7 +216,7 @@ Examples of calling an OpenAI endpoint (`chat/completions`) from within another 
 curl http://model-runner.docker.internal/engines/llama.cpp/v1/chat/completions \
     -H "Content-Type: application/json" \
     -d '{
-        "model": "ai/smo11m2",
+        "model": "ai/smollm2",
         "messages": [
             {
                 "role": "system",
@@ -242,7 +242,7 @@ curl --unix-socket $HOME/.docker/run/docker.sock \
     localhost/exp/vDD4.40/engines/llama.cpp/v1/chat/completions \
     -H "Content-Type: application/json" \
     -d '{
-        "model": "ai/smo11m2",
+        "model": "ai/smollm2",
         "messages": [
             {
                 "role": "system",
@@ -269,7 +269,7 @@ Afterwards, interact with it as previously documented using `localhost` and the 
 	curl http://localhost:12434/engines/llama.cpp/v1/chat/completions \
     -H "Content-Type: application/json" \
     -d '{
-        "model": "ai/smo11m2",
+        "model": "ai/smollm2",
         "messages": [
             {
                 "role": "system",
