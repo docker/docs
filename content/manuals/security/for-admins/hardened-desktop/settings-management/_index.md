@@ -74,8 +74,6 @@ Enforced settings appear grayed out in Docker Desktop. They can't be edited via 
 
 In addition, if Enhanced Container Isolation is enforced, developers can't use privileged containers or similar techniques to modify enforced settings within the Docker Desktop Linux VM. For example, they can't reconfigure proxy and networking, or Docker Engine.
 
-![Proxy settings grayed out](/assets/images/grayed-setting.png)
-
 ## What's next?
 
 - [Configure Settings Management with a `.json` file](configure-json-file.md)

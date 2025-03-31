@@ -521,7 +521,7 @@ In this section, you'll create a Docker Compose file to start your `docker-gs-pi
 
 ### Configure Docker Compose
 
-In your application's directory, create a new text file named `docker-compose.yml` with the following content.
+In your application's directory, create a new text file named `compose.yaml` with the following content.
 
 ```yaml
 version: "3.8"
@@ -582,7 +582,7 @@ The exact value doesn't really matter for this example, because you run Cockroac
 
 ### Merging Compose files
 
-The file name `docker-compose.yml` is the default file name which `docker compose` command recognizes if no `-f` flag is provided. This means you can have multiple Docker Compose files if your environment has such requirements. Furthermore, Docker Compose files are... composable (pun intended), so multiple files can be specified on the command line to merge parts of the configuration together. The following list is just a few examples of scenarios where such a feature would be very useful:
+The file name `compose.yaml` is the default file name which `docker compose` command recognizes if no `-f` flag is provided. This means you can have multiple Docker Compose files if your environment has such requirements. Furthermore, Docker Compose files are... composable (pun intended), so multiple files can be specified on the command line to merge parts of the configuration together. The following list is just a few examples of scenarios where such a feature would be very useful:
 
 - Using a bind mount for the source code for local development but not when running the CI tests;
 - Switching between using a pre-built image for the frontend for some API application vs creating a bind mount for source code;
@@ -608,7 +608,7 @@ Before you apply changes made to a Compose configuration file, there is an oppor
 $ docker compose config
 ```
 
-When this command is run, Docker Compose reads the file `docker-compose.yml`, parses it into a data structure in memory, validates where possible, and prints back the reconstruction of that configuration file from its internal representation. If this isn't possible due to errors, Docker prints an error message instead.
+When this command is run, Docker Compose reads the file `compose.yaml`, parses it into a data structure in memory, validates where possible, and prints back the reconstruction of that configuration file from its internal representation. If this isn't possible due to errors, Docker prints an error message instead.
 
 ### Build and run the application using Docker Compose
 

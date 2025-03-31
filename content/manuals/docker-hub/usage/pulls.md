@@ -9,22 +9,20 @@ aliases:
   - /docker-hub/usage/repositories/
 ---
 
-{{% include "hub-limits.md" %}}
-
-Unauthenticated and Docker Personal users are subject to hourly pull rate limits
+Unauthenticated and Docker Personal users are subject to a 6-hour pull rate limit
 on Docker Hub. In contrast, Docker Pro, Team, and Business users benefit from
-unlimited pulls per hour.
+an unlimited pull rate.
 
 The following pull usage and limits apply based on your subscription, subject to
 fair use:
 
-| User type                | Pull rate limit per hour               |
-|--------------------------|----------------------------------------|
-| Business (authenticated) | Unlimited                              |
-| Team (authenticated)     | Unlimited                              |
-| Pro (authenticated)      | Unlimited                              |
-| Personal (authenticated) | 100                                     |
-| Unauthenticated Users    | 10 per IPv4 address or IPv6 /64 subnet |
+| User type                | Pull rate limit per 6 hours             |
+|--------------------------|-----------------------------------------|
+| Business (authenticated) | Unlimited                               |
+| Team (authenticated)     | Unlimited                               |
+| Pro (authenticated)      | Unlimited                               |
+| Personal (authenticated) | 200                                     |
+| Unauthenticated Users    | 100 per IPv4 address or IPv6 /64 subnet |
 
 ## Pull definition
 
@@ -151,9 +149,9 @@ separated file with the following detailed information.
 | `version_checks`     | The number of version checks accumulated for the date and hour of each image repository. Depending on the client, a pull can do a version check to verify the existence of an image or tag without downloading it. | This helps identify the frequency of version checks, which you can use to analyze usage trends and potential unexpected behaviors.                                                  |
 | `pulls`              | The number of pulls accumulated for the date and hour of each image repository.                                                                                                                                            | This helps identify the frequency of repository pulls, which you can use to analyze usage trends and potential unexpected behaviors.                                                |
 
-## View hourly pull rate and limit
+## View pull rate and limit
 
-The pull rate limit is calculated on a per hour basis. There is no pull rate
+The pull rate limit is calculated on a 6-hour basis. There is no pull rate
 limit for users or automated systems with a paid subscription. Unauthenticated
 and Docker Personal users using Docker Hub will experience rate limits on image
 pulls.
@@ -200,13 +198,13 @@ To view your current pull rate and limit:
 3. Examine the headers. You should see the following headers.
 
    ```text
-   ratelimit-limit: 100;w=3600
-   ratelimit-remaining: 20;w=3600
+   ratelimit-limit: 100;w=21600
+   ratelimit-remaining: 20;w=21600
    docker-ratelimit-source: 192.0.2.1
    ```
 
-   In the previous example, the pull limit is 100 pulls per 3600 seconds (1
-   hour), and there are 20 pulls remaining.
+   In the previous example, the pull limit is 100 pulls per 21600 seconds (6
+   hours), and there are 20 pulls remaining.
 
    If you don't see any `ratelimit` header, it could be because the image or your IP
    is unlimited in partnership with a publisher, provider, or an open source

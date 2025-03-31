@@ -1,5 +1,5 @@
 ---
-title: Docker container build driver
+title: Docker container driver
 description: The Docker container driver runs BuildKit in a container image.
 keywords: build, buildx, driver, builder, docker-container
 aliases:
