@@ -12,14 +12,14 @@ params:
 {{< summary-bar feature_name="Ask Gordon" >}}
 
 Ask Gordon is your personal AI assistant embedded in Docker Desktop and the
-Docker CLI. It's designed to streamline your workflow and help you make the
-most of the Docker ecosystem.
+Docker CLI. It's designed to streamline your workflow and help you make the most
+of the Docker ecosystem.
 
 ## What is Ask Gordon?
 
-Ask Gordon is a suite of AI-powered capabilities integrated into Docker's
-tools. These features, currently in Beta, are not enabled by default, and are
-not production-ready. You may also encounter the term "Docker AI" as a broader
+Ask Gordon is a suite of AI-powered capabilities integrated into Docker's tools.
+These features, currently in Beta, are not enabled by default, and are not
+production-ready. You may also encounter the term "Docker AI" as a broader
 reference to this technology.
 
 The goal of Ask Gordon is to make Docker's tools for managing images and
@@ -33,9 +33,8 @@ images. For example, you can ask Gordon to help you identify vulnerabilities in
 your project or how to optimize a Dockerfile in your local repository. This
 tight integration ensures responses are practical and actionable.
 
-> [!NOTE]
-> Ask Gordon is powered by Large Language Models (LLMs). Like all LLM-based
-> tools, its responses may sometimes be inaccurate. Always verify the
+> [!NOTE] Ask Gordon is powered by Large Language Models (LLMs). Like all
+> LLM-based tools, its responses may sometimes be inaccurate. Always verify the
 > information provided.
 
 ### What data does Gordon access?
@@ -43,20 +42,21 @@ tight integration ensures responses are practical and actionable.
 When you use Ask Gordon, the data it accesses depends on the context of your
 query:
 
-- Local files: If you use the `docker ai` command, Ask Gordon can access
-  files and directories in the current working directory where the command is
+- Local files: If you use the `docker ai` command, Ask Gordon can access files
+  and directories in the current working directory where the command is
   executed. In Docker Desktop, if you ask about a specific file or directory in
   the **Ask Gordon** view, you'll be prompted to select the relevant context.
-- Local images: Gordon integrates with Docker Desktop and can view all images
-  in your local image store. This includes images you've built or pulled from a
+- Local images: Gordon integrates with Docker Desktop and can view all images in
+  your local image store. This includes images you've built or pulled from a
   registry.
 
 To provide accurate responses, Ask Gordon may send relevant files, directories,
 or image metadata to the Gordon backend along with your query. This data
-transfer occurs over the network but is never stored persistently or shared
-with third parties. It is used exclusively to process your request and
-formulate a response. For more information about privacy terms and conditions
-for Docker AI, review [Gordon's Supplemental Terms](https://www.docker.com/legal/docker-ai-supplemental-terms/).
+transfer occurs over the network but is never stored persistently or shared with
+third parties. It is used exclusively to process your request and formulate a
+response. For more information about privacy terms and conditions for Docker AI,
+review [Gordon's Supplemental
+Terms](https://www.docker.com/legal/docker-ai-supplemental-terms/).
 
 All data transferred is encrypted in transit.
 
@@ -107,7 +107,8 @@ After signing in to your Docker Account, enable the Docker AI feature:
 3. Check the **Enable Docker AI** checkbox.
 
    The Docker AI terms of service agreement is displayed. You must agree to the
-   terms before you can enable the feature. Review the terms and select **Accept and enable** to continue.
+   terms before you can enable the feature. Review the terms and select **Accept
+   and enable** to continue.
 
 4. Select **Apply & restart**.
 
@@ -117,22 +118,21 @@ The primary interfaces to Docker's AI capabilities are through the **Ask
 Gordon** view in Docker Desktop, or if you prefer to use the CLI: the `docker
 ai` CLI command.
 
-If you've used an AI chatbot before, these interfaces will be pretty familiar
-to you. You can chat with the Docker AI to get help with your Docker tasks.
+If you've used an AI chatbot before, these interfaces will be pretty familiar to
+you. You can chat with the Docker AI to get help with your Docker tasks.
 
 ### Contextual help
 
-Once you've enabled the Docker AI features, you'll also find references to
-**Ask Gordon** in various other places throughout the Docker Desktop user
-interface. Whenever you encounter a button with the "sparkles" (✨) icon in the
-user interface, you can use the button to get contextual support from Ask
-Gordon.
+Once you've enabled the Docker AI features, you'll also find references to **Ask
+Gordon** in various other places throughout the Docker Desktop user interface.
+Whenever you encounter a button with the "sparkles" (✨) icon in the user
+interface, you can use the button to get contextual support from Ask Gordon.
 
 ## Example workflows
 
 Ask Gordon is a general-purpose AI assistant created to help you with all your
-Docker-related tasks and workflows. If you need some inspiration, here are a
-few ways things you can try:
+Docker-related tasks and workflows. If you need some inspiration, here are a few
+ways things you can try:
 
 - [Troubleshoot a crashed container](#troubleshoot-a-crashed-container)
 - [Get help with running a container](#get-help-with-running-a-container)
@@ -222,7 +222,8 @@ If you've enabled Ask Gordon and you want to disable it again:
 4. Select **Apply & restart**.
 
 If you want to disable Ask Gordon for your entire Docker organization, using
-[Settings Management](/manuals/security/for-admins/hardened-desktop/settings-management/_index.md),
+[Settings
+Management](/manuals/security/for-admins/hardened-desktop/settings-management/_index.md),
 add the following property to your `admin-settings.json` file:
 
 ```json
@@ -234,7 +235,8 @@ add the following property to your `admin-settings.json` file:
 }
 ```
 
-Alternatively, you can disable all Beta features by setting `allowBetaFeatures` to false:
+Alternatively, you can disable all Beta features by setting `allowBetaFeatures`
+to false:
 
 ```json
 {
