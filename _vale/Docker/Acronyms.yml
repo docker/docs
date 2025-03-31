@@ -79,6 +79,7 @@ exceptions:
   - LTS
   - MAC
   - MCP
+  - mcp
   - MDM
   - MDN
   - MSI
