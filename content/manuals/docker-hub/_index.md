@@ -32,6 +32,8 @@ grid:
   description: Find out about new features, improvements, and bug fixes.
   icon: note_add
   link: /docker-hub/release-notes
+aliases:
+  - /docker-hub/overview/
 ---
 
 Docker Hub simplifies development with the world's largest container registry

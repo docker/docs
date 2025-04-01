@@ -3,6 +3,8 @@ description: Learn how to manage and contribute to trusted content.
 keywords: Docker Hub, Hub, trusted content
 title: Trusted content
 weight: 100
+aliases:
+ - /trusted-content/
 ---
 
 Docker's trusted content programs ensure that container images meet the highest
