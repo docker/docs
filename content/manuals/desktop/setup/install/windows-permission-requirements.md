@@ -1,7 +1,8 @@
 ---
 description: Understand permission requirements for Docker Desktop for Windows
 keywords: Docker Desktop, Windows, security, install
-title: Understand permission requirements for Windows
+title: Understand permission requirements for Docker Desktop on Windows
+linkTitle: Windows permission requirements
 aliases:
 - /desktop/windows/privileged-helper/
 - /desktop/windows/permission-requirements/
@@ -9,7 +10,7 @@ aliases:
 weight: 40
 ---
 
-This page contains information about the permission requirements for running and installing Docker Desktop on Windows, the functionality of the privileged helper process `com.docker.service` and the reasoning behind this approach.
+This page contains information about the permission requirements for running and installing Docker Desktop on Windows, the functionality of the privileged helper process `com.docker.service`, and the rationale behind this approach.
 
 It also provides clarity on running containers as `root` as opposed to having `Administrator` access on the host and the privileges of the Windows Docker engine and Windows containers.
 
@@ -27,7 +28,7 @@ The service performs the following functionalities:
 - Ensuring that `kubernetes.docker.internal` is defined in the Win32 hosts file. Defining the DNS name `kubernetes.docker.internal` allows Docker to share Kubernetes contexts with containers.
 - Ensuring that `host.docker.internal` and `gateway.docker.internal` are defined in the Win32 hosts file. They point to the host local IP address and allow an application to resolve the host IP using the same name from either the host itself or a container.
 - Securely caching the Registry Access Management policy which is read-only for the developer.
-- Creating the Hyper-V VM `"DockerDesktopVM"` and managing its lifecycle - starting, stopping and destroying it. The VM name is hard coded in the service code so the service cannot be used for creating or manipulating any other VMs.
+- Creating the Hyper-V VM `"DockerDesktopVM"` and managing its lifecycle - starting, stopping, and destroying it. The VM name is hard coded in the service code so the service cannot be used for creating or manipulating any other VMs.
 - Moving the VHDX file or folder.
 - Starting and stopping the Windows Docker engine and querying whether it's running.
 - Deleting all Windows containers data files.
@@ -38,7 +39,7 @@ The service performs the following functionalities:
 
 The service start mode depends on which container engine is selected, and, for WSL, on whether it is needed to maintain `host.docker.internal` and `gateway.docker.internal` in the Win32 hosts file. This is controlled by a setting under `Use the WSL 2 based engine` in the settings page. When this is set, WSL engine behaves the same as Hyper-V. So:
 - With Windows containers, or Hyper-v Linux containers, the service is started when the system boots and runs all the time, even when Docker Desktop isn't running. This is required so you can launch Docker Desktop without admin privileges.
-- With WSL2 Linux containers, the service isn't necessary and therefore doesn't run automatically when the system boots. When you switch to Windows containers or Hyper-V Linux containers, or choose to maintain `host.docker.internal` and `gateway.docker.internal` in the Win32 hosts file, a UAC prompt is displayed which asks you to accept the privileged operation to start the service. If accepted, the service is started and set to start automatically upon the next Windows boot.
+- With WSL2 Linux containers, the service isn't necessary and therefore doesn't run automatically when the system boots. When you switch to Windows containers or Hyper-V Linux containers, or choose to maintain `host.docker.internal` and `gateway.docker.internal` in the Win32 hosts file, a UAC prompt appears asking you to accept the privileged operation to start the service. If accepted, the service is started and set to start automatically upon the next Windows boot.
 
 ## Containers running as root within the Linux VM
 
@@ -49,8 +50,7 @@ installed software.  This means that although containers run by default as
 access to the Windows host machine. The Linux VM serves as a security boundary
 and limits what resources from the host can be accessed. File sharing uses a
 user-space crafted file server and any directories from the host bind mounted
-into Docker containers still retain their original permissions. It doesn't give
-you access to any files that it doesn’t already have access to.
+into Docker containers still retain their original permissions. Containers don't have access to any host files beyond those explicitly shared.
 
 ## Enhanced Container Isolation
 
@@ -71,7 +71,7 @@ isolated from the Docker daemon and other services running inside the VM.
 >
 > Enabling Windows containers has important security implications.
 
-Unlike the Linux Docker Engine and containers which run in a VM, Windows containers are implemented using operating system features, and run directly on the Windows host. If you enable Windows containers during installation, the `ContainerAdministrator` user used for administration inside the container is a local administrator on the host machine. Enabling Windows containers during installation makes it so that members of the `docker-users` group are able to elevate to administrators on the host. For organizations who don't want their developers to run Windows containers, a `-–no-windows-containers` installer flag is available to disable their use.
+Unlike the Linux Docker Engine and containers which run in a VM, Windows containers are implemented using operating system features, and run directly on the Windows host. If you enable Windows containers during installation, the `ContainerAdministrator` user used for administration inside the container is a local administrator on the host machine. Enabling Windows containers during installation makes it so that members of the `docker-users` group are able to elevate to administrators on the host. For organizations who don't want their developers to run Windows containers, a `--no-windows-containers` installer flag is available to disable their use.
 
 ## Networking
 
