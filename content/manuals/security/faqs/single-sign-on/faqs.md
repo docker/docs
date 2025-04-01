@@ -65,10 +65,5 @@ No. There are no specific firewall rules required for configuring SSO, as long a
 
 ### Does Docker use my IdP's default session timeout?
 
-No. Currently, Docker does not support your IdP's default session timeout for
-SSO users.
-
-Docker's default user session timeouts are as follows:
-
-- Docker Desktop signs you out after 90 days, or 30 days of inactivity.
-- Docker Hub and Docker Home sign you out after 24 hours.
+Yes, Docker supports your IdP's default session timeout using a custom SAML attribute.
+Instead of relying on the standard `SessionNotOnOrAfter` element from the SAML spec, Docker uses a custom `dockerSessionMinutes` attribute to control session duration. See [SSO attributes](/manuals/security/for-admins/provisioning/_index.md#sso-attributes) for more information.
