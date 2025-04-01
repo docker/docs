@@ -13,6 +13,7 @@ aliases:
   - /get-started/part2/
   - /get-started/02_our_app/
   - /guides/workshop/02_our_app/
+  - /guides/walkthroughs/containerize-your-app/
 ---
 
 For the rest of this guide, you'll be working with a simple todo
