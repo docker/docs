@@ -17,17 +17,22 @@ The following GitHub Actions are available:
 
 - [Build and push Docker images](https://github.com/marketplace/actions/build-and-push-docker-images):
   build and push Docker images with BuildKit.
+- [Docker Buildx Bake](https://github.com/marketplace/actions/docker-buildx-bake):
+  enables using high-level builds with [Bake](../../bake/_index.md).
 - [Docker Login](https://github.com/marketplace/actions/docker-login):
   sign in to a Docker registry.
 - [Docker Setup Buildx](https://github.com/marketplace/actions/docker-setup-buildx):
-  initiates a BuildKit builder.
+  creates and boots a BuildKit builder.
 - [Docker Metadata action](https://github.com/marketplace/actions/docker-metadata-action):
-  extracts metadata from Git reference and GitHub events.
+  extracts metadata from Git reference and GitHub events to generate tags,
+  labels, and annotations.
+- [Docker Setup Compose](https://github.com/marketplace/actions/docker-setup-compose):
+  installs and sets up [Compose](../../../compose).
+- [Docker Setup Docker](https://github.com/marketplace/actions/docker-setup-docker):
+  installs Docker CE.
 - [Docker Setup QEMU](https://github.com/marketplace/actions/docker-setup-qemu):
-  installs [QEMU](https://github.com/qemu/qemu) static binaries for multi-arch
-  builds.
-- [Docker Buildx Bake](https://github.com/marketplace/actions/docker-buildx-bake):
-  enables using high-level builds with [Bake](../../bake/_index.md).
+  installs [QEMU](https://github.com/qemu/qemu) static binaries for
+  multi-platform builds.
 - [Docker Scout](https://github.com/docker/scout-action):
   analyze Docker images for security vulnerabilities.
 
