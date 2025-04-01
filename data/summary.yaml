@@ -62,6 +62,11 @@ Cache backend API:
 Company:
   subscription: [Business]
   for: Administrators
+Compliance reporting:
+  subscription: [Business]
+  for: Administrators
+  requires: Docker Desktop 4.40 and later
+  availability: Early Access
 Compose attach:
   requires: Docker Compose [2.20.0](/manuals/compose/releases/release-notes.md#2200) and later
 Compose bridge:
