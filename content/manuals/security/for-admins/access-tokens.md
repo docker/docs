@@ -4,11 +4,6 @@ description: Learn how to create and manage organization access tokens
   to securely push and pull images programmatically.
 keywords: docker hub, security, OAT, organization access token
 linkTitle: Organization access tokens
-params:
-  sidebar:
-    badge:
-      color: blue
-      text: Beta
 ---
 
 {{< summary-bar feature_name="OATs" >}}
