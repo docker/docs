@@ -20,7 +20,7 @@ The guide teaches you how to containerize a Golang application and monitor it wi
 
 To make sure your application is working as intended, monitoring is important. One of the most popular monitoring tools is Prometheus. Prometheus is an open-source monitoring and alerting toolkit that is designed for reliability and scalability. It collects metrics from monitored targets by scraping metrics HTTP endpoints on these targets. To visualize the metrics, you can use Grafana. Grafana is an open-source platform for monitoring and observability that allows you to query, visualize, alert on, and understand your metrics no matter where they are stored.
 
-In this guide, we will be creating a Golang server with some endpoints to simulate a real-world application. Then we will expose metrics from the server using Prometheus. Finally, we will visualize the metrics using Grafana. We will containerize the Golang application and using the Docker Compose file, we will connect all the services- Golang, Prometheus, and Grafana. 
+In this guide, you will be creating a Golang server with some endpoints to simulate a real-world application. Then you will expose metrics from the server using Prometheus. Finally, you will visualize the metrics using Grafana. You will containerize the Golang application, and using the Docker Compose file, you will connect all the services: Golang, Prometheus, and Grafana.
 
 ## What will you learn?
 
