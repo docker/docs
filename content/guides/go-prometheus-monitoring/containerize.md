@@ -6,7 +6,7 @@ keywords: go, golang, containerize, initialize
 description: Learn how to containerize a Golang application.
 ---
 
-Containerization helps us bundle the application and its dependencies into a single package called a container. This package can run on any platform without worrying about the environment. In this section, we will learn how to containerize a Golang application using Docker.
+Containerization helps you bundle the application and its dependencies into a single package called a container. This package can run on any platform without worrying about the environment. In this section, you will learn how to containerize a Golang application using Docker.
 
 To containerize a Golang application, you first need to create a Dockerfile. The Dockerfile contains instructions to build and run the application in a container. Also, when creating a Dockerfile, you can follow different sets of best practices to optimize the image size and make it more secure.
 
