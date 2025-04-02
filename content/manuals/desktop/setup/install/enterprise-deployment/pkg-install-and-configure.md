@@ -26,7 +26,7 @@ The PKG package supports various MDM (Mobile Device Management) solutions, makin
 
 > [!NOTE]
 >
-> When installing Docker Desktop with the PKG, in-app updates are automatically disabled.  This ensures organizations can maintain version consistency and prevent unapproved updates. For Docker Desktop installed with the `.dmg` installer, in-app updates remain supported.
+> When installing Docker Desktop with the PKG, in-app updates are automatically disabled. This ensures organizations can maintain version consistency and prevent unapproved updates. For Docker Desktop installed with the `.dmg` installer, in-app updates remain supported.
 >
 > Docker Desktop notifies you when an update is available. To update Docker Desktop, download the latest installer from the Docker Admin Console. Navigate to the  **Deploy** page > under **Docker Desktop**.
 >

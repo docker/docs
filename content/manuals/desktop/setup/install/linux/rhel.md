@@ -6,11 +6,6 @@ keywords: red hat, red hat enterprise linux, rhel, rpm,
 title: Install Docker Desktop on RHEL
 linkTitle: RHEL
 download-url-base: https://download.docker.com/linux/rhel
-params:
-  sidebar:
-    badge:
-      color: green
-      text: New
 aliases:
 - /desktop/install/linux/rhel/
 ---

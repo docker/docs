@@ -80,10 +80,4 @@ Docker Desktop integrates with your preferred development tools and languages, a
 {{< /tab >}}
 {{< /tabs >}}
 
-Docker Desktop works with your choice of development tools and languages and
-gives you access to a vast library of certified images and templates in
-[Docker Hub](https://hub.docker.com/). This allows development teams to extend
-their environment to rapidly auto-build, continuously integrate, and collaborate
-using a secure repository.
-
 {{< grid >}}
