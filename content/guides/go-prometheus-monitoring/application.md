@@ -239,7 +239,7 @@ api_http_request_total{path="/v1/users",status="200"} 1
 In the terminal, press `ctrl` + `c` to stop the application.
 
 > [!Note]
-> If you don't want to run the application locally, and want to run it in a Docker container, skip to next page where we create a Dockerfile and containerize the application.
+> If you don't want to run the application locally, and want to run it in a Docker container, skip to next page where you create a Dockerfile and containerize the application.
 
 ## Summary
 
