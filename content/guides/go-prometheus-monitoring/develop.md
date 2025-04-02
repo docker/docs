@@ -83,4 +83,4 @@ We created this panel to visualize the total number of requests from different e
 
 ## Summary
 
-That's it! We come to the end of this guide. We learned how to develop the Golang application with Docker. We also saw how to use Docker Compose Watch to rebuild the image whenever we make changes to the code. Lastly, we tested the application and visualized the metrics in Grafana using Prometheus as the datasource.
+You've come to the end of this guide. You learned how to develop the Golang application with Docker. You also saw how to use Docker Compose Watch to rebuild the image whenever you make changes to the code. Lastly, you tested the application and visualized the metrics in Grafana using Prometheus as the data source.
