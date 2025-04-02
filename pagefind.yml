@@ -2,3 +2,4 @@ output_subdir: pagefind
 site: public
 exclude_selectors:
   - "table"
+  - ".md-dropdown"
