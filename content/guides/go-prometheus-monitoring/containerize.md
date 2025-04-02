@@ -65,7 +65,7 @@ The Dockerfile consists of two stages:
 
     You use the `alpine:3.17` image as the base image for the final stage. You copy the compiled binary from the build stage to the final image. You expose the application's port using the `EXPOSE` instruction and run the application using the `CMD` instruction.
 
-    Apart from the multi-stage build, the Dockerfile also follows best practices such as using the official images, setting the working directory, and copying only the necessary files to the final image. We can further optimize the Dockerfile by other best practices.
+    Apart from the multi-stage build, the Dockerfile also follows best practices such as using the official images, setting the working directory, and copying only the necessary files to the final image. You can further optimize the Dockerfile by other best practices.
 
 ## Build the Docker image and run the application
 
