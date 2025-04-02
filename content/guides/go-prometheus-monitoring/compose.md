@@ -107,7 +107,7 @@ Apart from the services, the Docker Compose file also defines a volume named `gr
 
 ## Building and running the services
 
-Now that we have the Docker Compose file, we can build the services and run them together using Docker Compose.
+Now that you have the Docker Compose file, you can build the services and run them together using Docker Compose.
 
 To build and run the services, run the following command in the terminal:
 
