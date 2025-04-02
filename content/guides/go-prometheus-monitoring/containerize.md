@@ -4,7 +4,6 @@ linkTitle: Containerize your app
 weight: 20
 keywords: go, golang, containerize, initialize
 description: Learn how to containerize a Golang application.
-  - /guides/go-prometheus-monitoring/containerize/
 ---
 
 Containerization helps us bundle the application and its dependencies into a single package called a container. This package can run on any platform without worrying about the environment. In this section, we will learn how to containerize a Golang application using Docker.
