@@ -1,26 +1,36 @@
 command: docker desktop
-short: Docker Desktop
-long: Control Docker Desktop from the CLI
-usage: docker desktop
+short: Docker Desktop commands (Beta)
+long: |-
+    The Docker Desktop CLI lets you perform key operations such as starting, stopping,
+    restarting, and updating Docker Desktop directly from the command line.
 pname: docker
 plink: docker.yaml
 cname:
-    - docker desktop start
-    - docker desktop stop
-    - docker desktop restart
-    - docker desktop status
+    - docker desktop disable
+    - docker desktop enable
     - docker desktop engine
+    - docker desktop logs
+    - docker desktop restart
+    - docker desktop start
+    - docker desktop status
+    - docker desktop stop
     - docker desktop update
+    - docker desktop version
 clink:
-    - docker_desktop_start.yaml
-    - docker_desktop_stop.yaml
-    - docker_desktop_restart.yaml
-    - docker_desktop_status.yaml
+    - docker_desktop_disable.yaml
+    - docker_desktop_enable.yaml
     - docker_desktop_engine.yaml
+    - docker_desktop_logs.yaml
+    - docker_desktop_restart.yaml
+    - docker_desktop_start.yaml
+    - docker_desktop_status.yaml
+    - docker_desktop_stop.yaml
     - docker_desktop_update.yaml
+    - docker_desktop_version.yaml
 deprecated: false
-hidden: false
+hidden: true
 experimental: false
 experimentalcli: false
 kubernetes: false
 swarm: false
+

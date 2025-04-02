@@ -1,14 +1,16 @@
 command: docker desktop logs
-short: Print log entries for Docker Desktop
-usage: docker desktop logs [OPTIONS]
+short: Print log entries
+long: Print log entries
+usage: docker desktop logs
 pname: docker desktop
 plink: docker_desktop.yaml
 options:
     - option: boot
       shorthand: b
-      value_type: init
-      default_value: false
-      description: Show logs from a specified boot. Zero means the current or boot, one the second last boot, and so on
+      value_type: int
+      default_value: "0"
+      description: |
+        Show logs from a specified boot. Zero means the current or boot, one the second last boot, and so on.
       deprecated: false
       hidden: false
       experimental: false
@@ -18,7 +20,7 @@ options:
     - option: color
       shorthand: c
       value_type: bool
-      default_value: false
+      default_value: "false"
       description: Enable colored output. Priority levels are highlighted.
       deprecated: false
       hidden: false
@@ -28,9 +30,9 @@ options:
       swarm: false
     - option: color-mode
       shorthand: m
-      value_type: bool
+      value_type: string
       default_value: default
-      description: Color mode to use. Can be `default` or `priority`
+      description: Color mode to use. Can be 'default' or 'priority'
       deprecated: false
       hidden: false
       experimental: false
@@ -39,9 +41,8 @@ options:
       swarm: false
     - option: directory
       shorthand: D
-      value_type: bool
-      default_value: false
-      description: Specifies a custom directory to search for log entries
+      value_type: string
+      description: Specifies a custom directory to search for log entries.
       deprecated: false
       hidden: false
       experimental: false
@@ -50,9 +51,10 @@ options:
       swarm: false
     - option: priority
       shorthand: p
-      value_type: init
-      default_value: -1
-      description: Filter output by log priorities. `-1` is all, `0` is info or above, `1` filters for warnings or above, `2` filters for errors.
+      value_type: int
+      default_value: "-1"
+      description: |
+        Filter output by log priorities. -1 (default) is all, 0 is info or above, 1 warnings or above, 2 errors.
       deprecated: false
       hidden: false
       experimental: false
@@ -61,9 +63,9 @@ options:
       swarm: false
     - option: since
       shorthand: S
-      value_type: bool
-      default_value: false
-      description: Start showing entries on or newer than the specified date and time. Uses the systemd.time(7) format.
+      value_type: string
+      description: |
+        Start showing entries on or newer than the specified date and time. Uses the systemd.time(7) format.
       deprecated: false
       hidden: false
       experimental: false
@@ -72,9 +74,10 @@ options:
       swarm: false
     - option: unit
       shorthand: u
-      value_type: bool
-      default_value: false
-      description: Filter by one or more categories (e.g. `--unit=com.docker.backend.ipc`, `com.docker.backend.apiproxy`)
+      value_type: stringSlice
+      default_value: '[]'
+      description: |
+        Filter by one or more categories (e.g. --unit=com.docker.backend.ipc,com.docker.backend.apiproxy)
       deprecated: false
       hidden: false
       experimental: false
@@ -83,9 +86,9 @@ options:
       swarm: false
     - option: until
       shorthand: U
-      value_type: bool
-      default_value: false
-      description: Start showing entries on or before the specified date and time. Uses the systemd.time(7) format.
+      value_type: string
+      description: |
+        Start showing entries on or before than the specified date and time. Uses the systemd.time(7) format.
       deprecated: false
       hidden: false
       experimental: false
@@ -98,3 +101,4 @@ experimental: false
 experimentalcli: false
 kubernetes: false
 swarm: false
+

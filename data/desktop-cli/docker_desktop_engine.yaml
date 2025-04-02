@@ -1,6 +1,7 @@
 command: docker desktop engine
-short: Commands to list and switch containers (Windows only)
-usage: docker desktop engine
+short: Commands to list and switch engine modes (Windows only)
+long: Commands to list and switch engine modes (Windows only)
+usage: docker desktop engine [command]
 pname: docker desktop
 plink: docker_desktop.yaml
 cname:
@@ -15,3 +16,4 @@ experimental: false
 experimentalcli: false
 kubernetes: false
 swarm: false
+

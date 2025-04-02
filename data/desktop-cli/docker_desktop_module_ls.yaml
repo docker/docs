@@ -1,15 +1,15 @@
-command: docker desktop update
-short: Manage Docker Desktop updates
-long: Manage Docker Desktop updates
-usage: docker desktop update
-pname: docker desktop
-plink: docker_desktop.yaml
+command: docker desktop module ls
+aliases: docker desktop module ls, docker desktop module list
+short: List modules
+long: List modules
+usage: docker desktop module ls
+pname: docker desktop module
+plink: docker_desktop_module.yaml
 options:
-    - option: check-only
-      shorthand: k
-      value_type: bool
-      default_value: "false"
-      description: Check for updates without applying them
+    - option: format
+      value_type: string
+      default_value: pretty
+      description: 'Format the output. Values: [pretty | json].'
       deprecated: false
       hidden: false
       experimental: false
@@ -20,7 +20,7 @@ options:
       shorthand: q
       value_type: bool
       default_value: "false"
-      description: Quietly check and apply updates
+      description: Only display IDs.
       deprecated: false
       hidden: false
       experimental: false
@@ -30,7 +30,7 @@ options:
 deprecated: false
 hidden: false
 experimental: false
-experimentalcli: false
+experimentalcli: true
 kubernetes: false
 swarm: false
 

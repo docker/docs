@@ -1,11 +1,24 @@
 command: docker desktop status
-short:  Display Docker Desktop's status
+short: Show the status of the Docker Desktop engines
+long: Show the status of the Docker Desktop engines
 usage: docker desktop status
 pname: docker desktop
 plink: docker_desktop.yaml
+options:
+    - option: format
+      value_type: string
+      default_value: pretty
+      description: 'Format the output. Accepted values are: pretty, json'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
 deprecated: false
 hidden: false
 experimental: false
 experimentalcli: false
 kubernetes: false
 swarm: false
+

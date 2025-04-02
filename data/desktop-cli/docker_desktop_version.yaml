@@ -1,26 +1,24 @@
-command: docker desktop update
-short: Manage Docker Desktop updates
-long: Manage Docker Desktop updates
-usage: docker desktop update
+command: docker desktop version
+short: Show the Docker Desktop CLI plugin version information
+long: Show the Docker Desktop CLI plugin version information
+usage: docker desktop version [OPTIONS]
 pname: docker desktop
 plink: docker_desktop.yaml
 options:
-    - option: check-only
-      shorthand: k
-      value_type: bool
-      default_value: "false"
-      description: Check for updates without applying them
+    - option: format
+      shorthand: f
+      value_type: string
+      description: 'Format the output. Values: [pretty | json]. (Default: pretty)'
       deprecated: false
       hidden: false
       experimental: false
       experimentalcli: false
       kubernetes: false
       swarm: false
-    - option: quiet
-      shorthand: q
+    - option: short
       value_type: bool
       default_value: "false"
-      description: Quietly check and apply updates
+      description: Shows only the version number
       deprecated: false
       hidden: false
       experimental: false
