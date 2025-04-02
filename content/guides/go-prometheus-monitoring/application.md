@@ -11,7 +11,7 @@ description: Learn how to create a Golang server to register metrics with Promet
 
 * You have a [Git client](https://git-scm.com/downloads). The examples in this section use a command-line based Git client, but you can use any client.
 
-We will be creating a Golang server with some endpoints to simulate a real-world application. Then we will expose metrics from the server using Prometheus.
+You will be creating a Golang server with some endpoints to simulate a real-world application. Then you will expose metrics from the server using Prometheus.
 
 ## Getting the sample application
 
