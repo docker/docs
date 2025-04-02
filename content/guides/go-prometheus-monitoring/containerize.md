@@ -69,7 +69,7 @@ The Dockerfile consists of two stages:
 
 ## Build the Docker image and run the application
 
-One we have the Dockerfile, we can build the Docker image and run the application in a container.
+One you have the Dockerfile, you can build the Docker image and run the application in a container.
 
 To build the Docker image, run the following command in the terminal:
 
