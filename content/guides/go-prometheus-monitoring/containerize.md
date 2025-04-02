@@ -100,4 +100,4 @@ Related information:
 
 ## Next steps
 
-In the next section, we will learn how to use Docker Compose to connect and run multiple services together to monitor a Golang application with Prometheus and Grafana.
+In the next section, you will learn how to use Docker Compose to connect and run multiple services together to monitor a Golang application with Prometheus and Grafana.
