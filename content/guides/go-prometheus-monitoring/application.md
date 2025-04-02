@@ -4,7 +4,6 @@ linkTitle: Understand the application
 weight: 10 #
 keywords: go, golang, prometheus, grafana, containerize, monitor
 description: Learn how to create a Golang server to register metrics with Prometheus.
-aliases:
   - /guides/go-prometheus-monitoring/application/
 ---
 
