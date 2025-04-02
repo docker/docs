@@ -116,7 +116,7 @@ msiexec /i "DockerDesktop.msi" /L*V ".\msi.log" /passive /norestart
 
 > [!TIP]
 >
-> When creating a value that expects a JSON string as its value:
+> When creating a value that expects a JSON string:
 >
 > - The property expects a JSON formatted string
 > - The string should be wrapped in double quotes

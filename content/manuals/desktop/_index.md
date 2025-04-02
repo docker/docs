@@ -57,7 +57,7 @@ Docker Desktop integrates with your preferred development tools and languages, a
 
 - [Docker Engine](/manuals/engine/_index.md)
 - Docker CLI client
-- [Docker Scout](../scout/_index.md) (additional subscription may apply)
+- [Docker Scout](../scout/_index.md)
 - [Docker Build](/manuals/build/_index.md)
 - [Docker Compose](/manuals/compose/_index.md)
 - [Ask Gordon](/manuals/desktop/features/gordon/_index.md)

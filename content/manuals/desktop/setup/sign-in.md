@@ -56,8 +56,7 @@ Docker Desktop for Linux relies on [`pass`](https://www.passwordstore.org/) to s
 Before signing in to Docker Desktop with your [Docker ID](/accounts/create-account/), you must initialize `pass`.
 Docker Desktop displays a warning if `pass` is not configured.
 
-1. Generate a GPG key. Run: 
-You can initialize pass by using a gpg key. To generate a gpg key, run:
+1. Generate a GPG key. You can initialize pass by using a gpg key. To generate a gpg key, run:
 
    ``` console
    $ gpg --generate-key
@@ -72,7 +71,7 @@ You can initialize pass by using a gpg key. To generate a gpg key, run:
     3ABCD1234EF56G78
    uid          Molly <molly@example.com>
    ```
-3.Copy the GPG ID and use it to initialize `pass`
+3. Copy the GPG ID and use it to initialize `pass`
 
    ```console
    $ pass init <your_generated_gpg-id_public_key>
