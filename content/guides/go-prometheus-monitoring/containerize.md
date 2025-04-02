@@ -14,7 +14,7 @@ To containerize a Golang application, you first need to create a Dockerfile. The
 
 Create a new file named `Dockerfile` in the root directory of your Golang application. The Dockerfile contains instructions to build and run the application in a container.
 
-Here is a Dockerfile for a Golang application: You will also find this file in the `go-prometheus-monitoring` directory.
+The following is a Dockerfile for a Golang application. You will also find this file in the `go-prometheus-monitoring` directory.
 
 ```dockerfile
 # Use the official Golang image as the base
