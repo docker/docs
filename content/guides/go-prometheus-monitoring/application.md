@@ -214,7 +214,7 @@ func RequestMetricsMiddleware() gin.HandlerFunc {
 }
 ```
 
-That's it, this was the complete gist of our application. Now it's time to run and test if our app is registering metrics correctly.
+That's it, this was the complete gist of the application. Now it's time to run and test if the app is registering metrics correctly.
 
 ## Running the application
 
