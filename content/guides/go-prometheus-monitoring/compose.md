@@ -12,7 +12,7 @@ Now that you have containerized the Golang application, you will use Docker Comp
 
 Create a new file named `compose.yml` in the root directory of your Golang application. The Docker Compose file contains instructions to run multiple services and connect them together.
 
-Here is a Docker Compose file for a Golang application, Prometheus, and Grafana services. You will also find this file in the `go-prometheus-monitoring` directory.
+Here is a Docker Compose file for a project that uses Golang, Prometheus, and Grafana. You will also find this file in the `go-prometheus-monitoring` directory.
 
 ```yaml
 services:
