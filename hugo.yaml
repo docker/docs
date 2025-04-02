@@ -74,8 +74,22 @@ outputFormats:
     isPlainText: true
     mediaType: "text/plain"
     notAlternative: true
+  # Markdown for LLMs, see layouts/_default/single.markdown.md
+  Markdown:
+    baseName: index
+    mediaType: "text/markdown"
+    isPlainText: true
+    isHTML: false
+    permalinkable: false
+  # llms.txt
+  llms:
+    baseName: llms
+    isPlainText: true
+    mediaType: "text/plain"
+    notAlternative: true
+    permalinkable: false
 
-# Enable custom output formats for the home page only
+# Enable custom output formats
 # (only generate the custom output files once)
 outputs:
   home:
@@ -83,6 +97,13 @@ outputs:
     - redirects
     - metadata
     - robots
+    - llms
+  page:
+    - html
+    - Markdown
+  section:
+    - html
+    - Markdown
 
 languages:
   en:
