@@ -4,7 +4,6 @@ linkTitle: Develop your app
 weight: 40
 keywords: go, golang, containerize, initialize
 description: Learn how to develop the Golang application with Docker.
-aliases:
 ---
 
 In the last section, you saw how using Docker Compose, you can connect your services together. In this section, you will learn how to develop the Golang application with Docker. You will also see how to use Docker Compose Watch to rebuild the image whenever we make changes to the code. Lastly, you will test the application and visualize the metrics in Grafana using Prometheus as the data source.
