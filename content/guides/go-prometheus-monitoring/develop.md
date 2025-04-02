@@ -45,7 +45,7 @@ services:
           action: rebuild
 ```
 
-One you have added the `develop` section in the `compose.yml` file, you can use the following command to start the development server:
+Once you have added the `develop` section in the `compose.yml` file, you can use the following command to start the development server:
 
 ```console
 $ docker compose watch
