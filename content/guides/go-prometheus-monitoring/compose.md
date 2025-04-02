@@ -6,7 +6,7 @@ keywords: go, golang, prometheus, grafana, containerize, monitor
 description: Learn how to connect services with Docker Compose to monitor a Golang application with Prometheus and Grafana.
 ---
 
-Now that we have containerized the Golang application, now we will use Docker Compose to connect our services together. We will connect the Golang application, Prometheus, and Grafana services together to monitor the Golang application with Prometheus and Grafana.
+Now that you have containerized the Golang application, you will use Docker Compose to connect your services together. You will connect the Golang application, Prometheus, and Grafana services together to monitor the Golang application with Prometheus and Grafana.
 
 ## Creating a Docker Compose file
 
