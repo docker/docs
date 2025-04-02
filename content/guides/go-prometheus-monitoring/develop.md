@@ -12,7 +12,7 @@ In the last section, we saw how using Docker Compose, we can connect our service
 
 ## Developing the application
 
-Now, if we make any changes to our golang application locally, it needs to reflect in the container, right? To do that, one approach is use --build flag in Docker Compose after making changes in the code. This will rebuild all the services which have `build` instruction in the `compose.yml` file, in our case, the `api` service (golang application).
+Now, if you make any changes to your Golang application locally, it needs to reflect in the container, right? To do that, one approach is use the `--build` flag in Docker Compose after making changes in the code. This will rebuild all the services which have the `build` instruction in the `compose.yml` file, in your case, the `api` service (Golang application).
 
 ```
 docker compose up --build
