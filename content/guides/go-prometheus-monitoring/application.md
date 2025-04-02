@@ -243,7 +243,7 @@ In the terminal, press `ctrl` + `c` to stop the application.
 
 ## Summary
 
-In this section, we learned how to create an Golang app to register metrics with Prometheus. By implementing middleware functions, we were able to increment the counters based on the request path and status codes.
+In this section, you learned how to create a Golang app to register metrics with Prometheus. By implementing middleware functions, you were able to increment the counters based on the request path and status codes.
 
 ## Next steps
 
