@@ -4,7 +4,6 @@ linkTitle: Containerize your app
 weight: 20
 keywords: go, golang, containerize, initialize
 description: Learn how to containerize a Golang application.
-aliases:
   - /guides/go-prometheus-monitoring/containerize/
 ---
 
