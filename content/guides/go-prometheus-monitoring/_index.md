@@ -37,4 +37,4 @@ In this guide, we will be creating a Golang server with some endpoints to simula
 
 ## Next steps
 
-We will be creating a Golang server and exposing metrics using Prometheus.
+You will create a Golang server and expose metrics using Prometheus.
