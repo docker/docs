@@ -52,7 +52,7 @@ go-prometheus-monitoring
 
 ## Understanding the application
 
-Below is complete logic of the application you will find in the `main.go`. Let's break this to understand code better.
+The following is the complete logic of the application you will find in `main.go`.
 
 ```go
 package main
