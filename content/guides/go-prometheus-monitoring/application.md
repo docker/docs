@@ -221,7 +221,7 @@ That's it, this was the complete gist of the application. Now it's time to run a
 Make sure you are still inside `go-prometheus-monitoring` directory in the terminal, and run the following command. Install the dependencies by running `go mod tidy` and then build and run the application by running `go run main.go`. Then visit `http://localhost:8000/health` or `http://localhost:8000/v1/users`. You should see the output `{"message": "Up and running!"}` or `{"message": "Hello from /v1/users"}`. If you are able to see this then your app is successfully up and running. 
 
 
-Now let's check our application's metrics by accessing the `/metrics` endpoint. 
+Now, check your application's metrics by accessing the `/metrics` endpoint. 
 Open `http://localhost:8000/metrics` in your browser. You should see similar output to the following.
 
 ```sh
