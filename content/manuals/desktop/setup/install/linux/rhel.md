@@ -47,7 +47,7 @@ To install Docker Desktop successfully, you must:
    {{< /tab >}}
    {{< /tabs >}}
 
-- Additionally, for a GNOME desktop environment you must install AppIndicator and KStatusNotifierItem [GNOME extensions](https://extensions.gnome.org/extension/615/appindicator-support/). You must also enable EPEL.
+- For a GNOME desktop environment you must install AppIndicator and KStatusNotifierItem [GNOME extensions](https://extensions.gnome.org/extension/615/appindicator-support/). You must also enable EPEL.
 
    {{< tabs group="os_version" >}}
    {{< tab name="RHEL 9" >}}

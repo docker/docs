@@ -11,6 +11,8 @@ aliases:
 - /desktop/install/linux/archlinux/
 ---
 
+{{< summary-bar feature_name="Docker Desktop Archlinux" >}}
+
 > **Docker Desktop terms**
 >
 > Commercial use of Docker Desktop in larger enterprises (more than 250
@@ -19,7 +21,7 @@ aliases:
 
 This page contains information on how to install, launch and upgrade Docker Desktop on an Arch-based distribution. 
 
-{{< summary-bar feature_name="Docker Desktop Archlinux" >}}
+
 
 ## Prerequisites
 
