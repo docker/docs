@@ -75,7 +75,7 @@ Once you are logged in, you can create a new dashboard. While creating dashboard
 
 ![The optional settings screen with the options specified.](../images/grafana-dash.png)
 
-We can use different panels to visualize the metrics. We will not go into details of Grafana here. You can refer to the [official documentation](https://grafana.com/docs/grafana/latest/) for more information. I created a Bar Gauge panel to visualize the total number of requests from different endpoints. We used the `api_http_request_total` and `api_http_request_error_total` metrics to get the data.
+You can use different panels to visualize the metrics. This guide doesn't go into details of Grafana. You can refer to the [Grafana documentation](https://grafana.com/docs/grafana/latest/) for more information. There is a Bar Gauge panel to visualize the total number of requests from different endpoints. You used the `api_http_request_total` and `api_http_request_error_total` metrics to get the data.
 
 ![The optional settings screen with the options specified.](../images/grafana-panel.png)
 
