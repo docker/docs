@@ -1,5 +1,5 @@
 ---
-title: Use the MSI installer
+title: MSI installer
 description: Understand how to use the MSI installer. Also explore additional configuration options.
 keywords: msi, windows, docker desktop, install, deploy, configure, admin, mdm
 tags: [admin]
@@ -21,7 +21,7 @@ The MSI package supports various MDM (Mobile Device Management) solutions, makin
 2. Under **Docker Desktop**, select the **Deploy** page.
 3. From the **Windows OS** tab, select the **Download MSI installer** button.
 4. Once downloaded, double-click `Docker Desktop Installer.msi` to run the installer.
-5. Once you've accepted the license agreement, you can choose the install location. By default, Docker Desktop is installed at `C:\Program Files\Docker\Docker`.
+5. After accepting the license agreement, choose the install location. By default, Docker Desktop is installed at `C:\Program Files\Docker\Docker`.
 6. Configure the Docker Desktop installation. You can:
 
     - Create a desktop shortcut
@@ -30,11 +30,11 @@ The MSI package supports various MDM (Mobile Device Management) solutions, makin
 
     - Disable Windows Container usage
 
-    - Select the engine for Docker Desktop. Either WSL or Hyper-V. If your system only supports one of the two options, you won't be able to select which backend to use.
+    - Select the Docker Desktop engine: WSL or Hyper-V. If only one is supported by your system, you won't be able to choose.
 7. Follow the instructions on the installation wizard to authorize the installer and proceed with the install.
 8. When the installation is successful, select **Finish** to complete the installation process.
 
-If your administrator account is different to your user account, you must add the user to the **docker-users** group:
+If your administrator account is different from your user account, you must add the user to the **docker-users** group:
 1. Run **Computer Management** as an **administrator**.
 2. Navigate to **Local Users and Groups** > **Groups** > **docker-users**.
 3. Right-click to add the user to the group.
@@ -42,7 +42,7 @@ If your administrator account is different to your user account, you must add th
 
 > [!NOTE]
 >
-> When installing Docker Desktop with the MSI, in-app updates are automatically disabled. This feature ensures your organization maintains the required Docker Desktop version. For Docker Desktop installed with the .exe installer, in-app updates remain supported.
+> When installing Docker Desktop with the MSI, in-app updates are automatically disabled. This ensures organizations can maintain version consistency and prevent unapproved updates. For Docker Desktop installed with the .exe installer, in-app updates remain supported.
 >
 > Docker Desktop notifies you when an update is available. To update Docker Desktop, download the latest installer from the Docker Admin Console. Navigate to the  **Deploy** page > under **Docker Desktop**.
 >
@@ -116,7 +116,7 @@ msiexec /i "DockerDesktop.msi" /L*V ".\msi.log" /passive /norestart
 
 > [!TIP]
 >
-> Some useful tips to remember when creating a value that expects a JSON string as it’s value:
+> When creating a value that expects a JSON string as its value:
 >
 > - The property expects a JSON formatted string
 > - The string should be wrapped in double quotes
@@ -142,7 +142,7 @@ IdentifyingNumber                      Name
 ```
 > [!NOTE]
 >
-> This command can take some time to return, depending on the number of installed applications.
+> This command may take some time, depending on the number of installed applications.
 
 `IdentifyingNumber` is the applications product code and can be used to uninstall Docker Desktop. For example:
 
@@ -202,11 +202,11 @@ msiexec /x "DockerDesktop.msi" /quiet
 
 Additionally, you can also use `/norestart` or `/forcerestart` to control reboot behaviour.
 
-By default, the installer reboots the machine after a successful installation. When ran silently, the reboot is automatic and the user is not prompted.
+By default, the installer reboots the machine after a successful installation. When run silently, the reboot is automatic and the user is not prompted.
 
 ## Analytics
 
-The MSI installer collects anonymous usage statistics relating to install only. This is to better understand user behaviour and to improve the user experience by identifying and addressing issues or optimizing popular features.
+The MSI installer collects anonymous usage statistics relating to installation only. This is to better understand user behaviour and to improve the user experience by identifying and addressing issues or optimizing popular features.
 
 ### How to opt-out
 
@@ -239,7 +239,7 @@ The registry key is as follows:
 SOFTWARE\Docker Inc.\Docker Desktop\DisableMsiAnalytics
 ```
 
-When analytics is disabled, this key has a value of `1`.
+When analytics is disabled, this key is set to `1`.
 
 ## Additional resources
 
