@@ -69,7 +69,7 @@ service(s) ["api"] successfully built
 
 ## Testing the application
 
-Now that we have our application running, Let's head over to Grafana dashboard to visualize the metrics we are registering. Open your browser and navigate to `http://localhost:3000`. You will be greeted with the Grafana login page. The login credentials are the one we have provided in compose file. 
+Now that you have your application running, head over to the Grafana dashboard to visualize the metrics you are registering. Open your browser and navigate to `http://localhost:3000`. You will be greeted with the Grafana login page. The login credentials are the ones provided in Compose file. 
 
 Once you are logged in, you can create a new dashboard. While creating dashboard you will notice that is default data source is `Prometheus`. This is because you have already configured the data source in the `grafana.yml` file.
 
