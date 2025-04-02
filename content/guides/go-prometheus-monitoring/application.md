@@ -222,7 +222,7 @@ Make sure you are still inside `go-prometheus-monitoring` directory in the termi
 
 
 Now let's check our application's metrics by accessing the `/metrics` endpoint. 
-Open `http://localhost:8000/metrics` in your browser. You should see similar output to the one below.
+Open `http://localhost:8000/metrics` in your browser. You should see similar output to the following.
 
 ```sh
 # HELP api_http_request_error_total Total number of errors returned by the API
