@@ -369,6 +369,7 @@
       "mb-2",
       "mb-4",
       "mb-8",
+      "md-dropdown",
       "md:block",
       "md:flex-nowrap",
       "md:flex-row",
