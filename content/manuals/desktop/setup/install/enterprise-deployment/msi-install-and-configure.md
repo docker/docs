@@ -30,7 +30,7 @@ The MSI package supports various MDM (Mobile Device Management) solutions, makin
 
     - Disable Windows Container usage
 
-    - Select the Docker Desktop engine: WSL or Hyper-V. If only one is supported by your system, you won't be able to choose.
+    - Select the Docker Desktop backend: WSL or Hyper-V. If only one is supported by your system, you won't be able to choose.
 7. Follow the instructions on the installation wizard to authorize the installer and proceed with the install.
 8. When the installation is successful, select **Finish** to complete the installation process.
 
