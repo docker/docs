@@ -159,7 +159,7 @@ Related information:
  - [Docker Compose overview](/manuals/compose/_index.md)
  - [Compose file reference](/reference/compose-file/_index.md)
 
-Next, we will learn how to develop the Golang application with Docker Compose and monitor it with Prometheus and Grafana.
+Next, you will learn how to develop the Golang application with Docker Compose and monitor it with Prometheus and Grafana.
 
 ## Next steps
 
