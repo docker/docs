@@ -16,6 +16,7 @@ weight: 60
 - JCB
 - Diners
 - UnionPay
+- Link
 
 ### What currency is supported?
 
