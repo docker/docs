@@ -27,8 +27,7 @@ To install Docker Desktop successfully, you must:
 - Meet the [general system requirements](_index.md#general-system-requirements).
 - Have a 64-bit version of Debian 12.
 - For a Gnome Desktop environment, you must also install AppIndicator and KStatusNotifierItem [Gnome extensions](https://extensions.gnome.org/extension/615/appindicator-support/).
-
-- For non-Gnome Desktop environments, `gnome-terminal` must be installed:
+- If you're not using GNOME, you must install `gnome-terminal` to enable terminal access from Docker Desktop:
 
   ```console
   $ sudo apt install gnome-terminal
@@ -43,7 +42,7 @@ Recommended approach to install Docker Desktop on Debian:
 
 2. Download the latest [DEB package](https://desktop.docker.com/linux/main/amd64/docker-desktop-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64). For checksums, see the [Release notes](/manuals/desktop/release-notes.md).
 
-3. Install the package with apt as follows:
+3. Install the package using `apt`:
 
   ```console
   $ sudo apt-get update
@@ -61,7 +60,7 @@ Recommended approach to install Docker Desktop on Debian:
 
    By default, Docker Desktop is installed at `/opt/docker-desktop`.
 
-There are a few post-install configuration steps done through the post-install script contained in the deb package.
+The RPM package includes a post-install script that completes additional setup steps automatically.
 
 The post-install script:
 

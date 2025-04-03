@@ -50,6 +50,7 @@ exceptions:
   - GDB
   - GET
   - GHSA
+  - GNOME
   - GNU
   - GPG
   - GPL
@@ -74,10 +75,12 @@ exceptions:
   - JIT
   - JSON
   - JSX
+  - KDE
   - LESS
   - LLDB
   - LTS
   - MAC
+  - MATE
   - MCP
   - mcp
   - MDM

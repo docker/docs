@@ -15,10 +15,14 @@ grid:
     [Windows](/desktop/setup/install/windows-install/), or
     [Linux](/desktop/setup/install/linux/).
   icon: download
-- title: Explore Docker Desktop
-  description: Navigate Docker Desktop and learn about its key features.
+- title: Learn about Docker Desktop
+  description: Navigate Docker Desktop.
   icon: feature_search
   link: /desktop/use-desktop/
+- title: Explore its key features
+  description: |
+    Find information about [Docker VMM](/desktop/features/vmm/), [WSL](/desktop/features/wsl/), [deploying on Kubernetes](/desktop/features/kubernetes/), and more.
+  icon: category
 - title: View the release notes
   description: Find out about new features, improvements, and bug fixes.
   icon: note_add
@@ -27,11 +31,6 @@ grid:
   description: Explore general FAQs or FAQs for specific platforms.
   icon: help
   link: /desktop/troubleshoot-and-support/faqs/general/
-- title: Find additional resources
-  description: |
-    Find information on networking features, deploying on Kubernetes, and more.
-  icon: category
-  link: /desktop/features/kubernetes/
 - title: Give feedback
   description: Provide feedback on Docker Desktop or Docker Desktop features.
   icon: sms
@@ -51,15 +50,18 @@ It provides a straightforward GUI (Graphical User Interface) that lets you manag
 
 Docker Desktop reduces the time spent on complex setups so you can focus on writing code. It takes care of port mappings, file system concerns, and other default settings, and is regularly updated with bug fixes and security updates.
 
+Docker Desktop integrates with your preferred development tools and languages, and gives you access to a vast ecosystem of trusted images and templates via Docker Hub. This empowers teams to accelerate development, automate builds, enable CI/CD workflows, and collaborate securely through shared repositories.
+
 {{< tabs >}}
 {{< tab name="What's included in Docker Desktop?" >}}
 
 - [Docker Engine](/manuals/engine/_index.md)
 - Docker CLI client
-- [Docker Scout](../scout/_index.md) (additional subscription may apply)
+- [Docker Scout](../scout/_index.md)
 - [Docker Build](/manuals/build/_index.md)
-- [Docker Extensions](../extensions/_index.md)
 - [Docker Compose](/manuals/compose/_index.md)
+- [Ask Gordon](/manuals/desktop/features/gordon/_index.md)
+- [Docker Extensions](../extensions/_index.md)
 - [Docker Content Trust](/manuals/engine/security/trust/_index.md)
 - [Kubernetes](https://github.com/kubernetes/kubernetes/)
 - [Credential Helper](https://github.com/docker/docker-credential-helpers/)
@@ -77,11 +79,5 @@ Docker Desktop reduces the time spent on complex setups so you can focus on writ
 
 {{< /tab >}}
 {{< /tabs >}}
-
-Docker Desktop works with your choice of development tools and languages and
-gives you access to a vast library of certified images and templates in
-[Docker Hub](https://hub.docker.com/). This allows development teams to extend
-their environment to rapidly auto-build, continuously integrate, and collaborate
-using a secure repository.
 
 {{< grid >}}

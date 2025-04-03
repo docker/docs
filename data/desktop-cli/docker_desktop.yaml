@@ -11,6 +11,10 @@ cname:
     - docker desktop status
     - docker desktop engine
     - docker desktop update
+    - docker desktop logs
+    - docker desktop disable
+    - docker desktop enable
+    - docker desktop version
 clink:
     - docker_desktop_start.yaml
     - docker_desktop_stop.yaml
@@ -18,8 +22,12 @@ clink:
     - docker_desktop_status.yaml
     - docker_desktop_engine.yaml
     - docker_desktop_update.yaml
+    - docker_desktop_logs.yaml
+    - docker_desktop_disable.yaml
+    - docker_desktop_enable.yaml
+    - docker_desktop_version.yaml
 deprecated: false
-hidden: false
+hidden: true
 experimental: false
 experimentalcli: false
 kubernetes: false
