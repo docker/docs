@@ -28,6 +28,39 @@ In addition, the Docker Desktop Dashboard lets you:
 - Get to the [Docker Scout](../../scout/_index.md) dashboard.
 - Navigate to [Docker Extensions](/manuals/extensions/_index.md).
 
+## Integrated terminal
+
+From the Docker Dashboard footer, you can use the integrated terminal, on a running
+container, directly within Docker Desktop. You are able to quickly run commands
+within your container so you can understand its current state or debug when
+something goes wrong.
+
+Using the integrated terminal is the same as running one of the following commands:
+
+- `docker exec -it <container-id> /bin/sh`
+- `docker exec -it <container-id> cmd.exe` when accessing Windows containers
+- `docker debug <container-id>` when using debug mode
+
+The integrated terminal:
+
+- Persists your session and **Debug mode** setting if you navigate to another
+  part of the Docker Desktop Dashboard and then return.
+- Supports copy, paste, search, and clearing your session.
+- When not using debug mode, it automatically detects the default user for a
+  running container from the image's Dockerfile. If no user is specified, or
+  you're using debug mode, it defaults to `root`.
+
+#### Open the integrated terminal
+
+To open the integrated terminal, either:
+
+- Hover over your running container and under the **Actions** column, select the **Show container actions**
+  menu. From the drop-down menu, select **Open in terminal**.
+- Or, select the **Terminal** icon located in the bottom-right corner, next to the version number.
+
+To use your external terminal, navigate to the **General** tab in **Settings**
+and select the **System default** option under **Choose your terminal**.
+
 ## Quick search
 
 Use Quick Search, which is located in the Docker Dashboard header, to search for:

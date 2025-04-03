@@ -90,10 +90,10 @@ To remove individual images, select the bin icon.
 
 The **Images** view also allows you to manage and interact with images in Docker Hub repositories.
 By default, when you go to **Images** in Docker Desktop, you see a list of images that exist in your local image store.
-The **Local** and **Hub repositories** tabs near the top toggles between viewing images in your local image store,
+The **Local** and **Docker Hub repositories** tabs near the top toggles between viewing images in your local image store,
 and images in remote Docker Hub repositories that you have access to.
 
-Switching to the **Hub repositories** tab prompts you to sign in to your Docker Hub account, if you're not already signed in.
+Switching to the **Docker Hub repositories** tab prompts you to sign in to your Docker Hub account, if you're not already signed in.
 When signed in, it shows you a list of images in Docker Hub organizations and repositories that you have access to.
 
 Select an organization from the drop-down to view a list of repositories for that organization.
