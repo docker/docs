@@ -38,7 +38,7 @@ docker desktop COMMAND [OPTIONS]
 | `engine use`         | Switch between Linux and Windows containers (Windows only) |
 | `update`             | Manage Docker Desktop updates. Available for Mac only with Docker Desktop version 4.38, or all OSs with Docker Desktop version 4.39 and later. |
 | `logs`               | Print log entries                        |
-| `disbale`            | Disable a feature                        |
+| `disable`            | Disable a feature                        |
 | `enable`             | Enable a feature                         | 
 | `version`            | Show the Docker Desktop CLI plugin version information |
 | `module`             | Manage Docker Desktop modules |
