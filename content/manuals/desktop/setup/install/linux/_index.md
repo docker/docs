@@ -16,7 +16,7 @@ aliases:
 > **Docker Desktop terms**
 >
 > Commercial use of Docker Desktop in larger enterprises (more than 250
-> employees OR more than $10 million USD in annual revenue) requires a [paid
+> employees or more than $10 million USD in annual revenue) requires a [paid
 > subscription](https://www.docker.com/pricing/).
 
 This page contains information about general system requirements, supported platforms, and instructions on how to install Docker Desktop for Linux.
@@ -27,11 +27,11 @@ This page contains information about general system requirements, supported plat
 >
 >This means images and containers deployed on the Linux Docker Engine (before installation) are not available in Docker Desktop for Linux. 
 >
-> {{< accordion title=" What is the difference between Docker Desktop for Linux and Docker Engine?" >}}
+> {{< accordion title=" Docker Desktop vs Docker Engine: What's the difference?" >}}
 
 > [!IMPORTANT]
 >
-> For commercial use of Docker Engine obtained via Docker Desktop within larger enterprises (exceeding 250 employees OR with annual revenue surpassing $10 million USD), a [paid subscription](https://www.docker.com/pricing/) is required.
+> For commercial use of Docker Engine obtained via Docker Desktop within larger enterprises (exceeding 250 employees or with annual revenue surpassing $10 million USD), a [paid subscription](https://www.docker.com/pricing/) is required.
 
 Docker Desktop for Linux provides a user-friendly graphical interface that simplifies the management of containers and services. It includes Docker Engine as this is the core technology that powers Docker containers. Docker Desktop for Linux also comes with additional features like Docker Scout and Docker Extensions.
 
@@ -82,7 +82,7 @@ Docker CLI commands target Docker Desktop. On shutdown, Docker Desktop resets
 the current context to the `default` context.
 
 Use the `docker context ls` command to view what contexts are available on your
-machine. The current context is indicated with an asterisk (`*`);
+machine. The current context is indicated with an asterisk (`*`).
 
 ```console
 $ docker context ls
@@ -114,7 +114,7 @@ Refer to the [Docker Context documentation](/manuals/engine/manage-resources/con
 
 ## Supported platforms
 
-Docker provides `.deb` and `.rpm` packages from the following Linux distributions
+Docker provides `.deb` and `.rpm` packages for the following Linux distributions
 and architectures:
 
 | Platform                | x86_64 / amd64          | 
@@ -137,8 +137,8 @@ To install Docker Desktop successfully, your Linux host must meet the following 
 - KVM virtualization support. Follow the [KVM virtualization support instructions](#kvm-virtualization-support) to check if the KVM kernel modules are enabled and how to provide access to the KVM device.
 - QEMU must be version 5.2 or later. We recommend upgrading to the latest version.
 - systemd init system.
-- Gnome, KDE, or MATE Desktop environment.
-  - For many Linux distributions, the Gnome environment does not support tray icons. To add support for tray icons, you need to install a Gnome extension. For example, [AppIndicator](https://extensions.gnome.org/extension/615/appindicator-support/).
+- GNOME, KDE, or MATE desktop environment.
+  - For many Linux distributions, the GNOME environment does not support tray icons. To add support for tray icons, you need to install a GNOME extension. For example, [AppIndicator](https://extensions.gnome.org/extension/615/appindicator-support/).
 - At least 4 GB of RAM.
 - Enable configuring ID mapping in user namespaces, see [File sharing](/manuals/desktop/troubleshoot-and-support/faqs/linuxfaqs.md#how-do-i-enable-file-sharing). Note that for Docker Desktop version 4.35 and later, this is not required anymore.
 - Recommended: [Initialize `pass`](/manuals/desktop/setup/sign-in.md#credentials-management-for-linux-users) for credentials management.

@@ -1,5 +1,5 @@
 ---
-title: Use Intune
+title: Deploy with Intune
 description: Use Intune, Microsoft's cloud-based device management tool, to deploy Docker Desktop
 keywords: microsoft, windows, docker desktop, deploy, mdm, enterprise, administrator, mac, pkg, dmg
 tags: [admin]
@@ -11,7 +11,7 @@ aliases:
 
 {{< summary-bar feature_name="Intune" >}}
 
-Learn how to deploy Docker Desktop for Windows and Mac using Intune, Microsoft's cloud-based device management tool. 
+Learn how to deploy Docker Desktop on Windows and macOS devices using Microsoft Intune. It covers app creation, installer configuration, and assignment to users or devices.
 
 {{< tabs >}}
 {{< tab name="Windows" >}}
@@ -20,7 +20,7 @@ Learn how to deploy Docker Desktop for Windows and Mac using Intune, Microsoft's
 2. Add a new app. Select **Apps**, then **Windows**, then **Add**.
 3. For the app type, select **Windows app (Win32)**
 4. Select the `intunewin` package. 
-5. Complete any relevant details such as the description, publisher, or app version and then select **Next**. 
+5. Fill in the required details, such as the description, publisher, or app version and then select **Next**. 
 6. Optional: On the **Program** tab, you can update the **Install command** field to suit your needs. The field is pre-populated with `msiexec /i "DockerDesktop.msi" /qn`. See the [Common installation scenarios](msi-install-and-configure.md) for examples on the changes you can make. 
 
    > [!TIP]
@@ -29,9 +29,9 @@ Learn how to deploy Docker Desktop for Windows and Mac using Intune, Microsoft's
    >
    > This is because the Docker Desktop installer installs Windows features depending on your engine selection and also updates the membership of the `docker-users` local group.
    >
-   > You may also want to set Intune to determine behaviour based on return codes and watch for a return code of `3010`. 
+   > You may also want to set Intune to determine behaviour based on return codes and watch for a return code of `3010`. Return code 3010 means the installation succeeded but a reboot is required.
 
-7. Complete the rest of the tabs and then review and create the app. 
+7. Complete the remaining tabs, then review and create the app. 
 
 {{< /tab >}}
 {{< tab name="Mac" >}}
@@ -39,7 +39,7 @@ Learn how to deploy Docker Desktop for Windows and Mac using Intune, Microsoft's
 First, upload the package:
 
 1. Sign in to your Intune admin center.
-2. Add a new app. Select **Apps**, then **macOSs**, then **Add**.
+2. Add a new app. Select **Apps**, then **macOS**, then **Add**.
 3. Select **Line-of-business app** and then **Select**.
 4. Upload the `Docker.pkg` file and fill in the required details.
 
@@ -55,4 +55,4 @@ Next, assign the app:
 ## Additional resources
 
 - [Explore the FAQs](faq.md).
-- Learn how to [Enforce sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md) for your users.
+- Learn how to [enforce sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md) for your users.
