@@ -130,7 +130,7 @@ func RequestMetricsMiddleware() gin.HandlerFunc {
 }
 ```
 
-In this part of the code, we have imported the required packages `gin`, `prometheus`, and `promhttp`. Then we have defined a couple of variables, `HttpRequestTotal` and `HttpRequestErrorTotal` are Prometheus counter metrics, and `customRegistry` is a custom registry that will be used to register these metrics. The name of the metric is a string that you can use to identify the metric. The help string is a string that will be shown when you query the `/metrics` endpoint to understand the metric. The reason we are using the custom registry is so avoid the default Go metrics that are registered by default by the Prometheus client. Then using the `init` function we are registering the metrics with the custom registry. 
+In this part of the code, you have imported the required packages `gin`, `prometheus`, and `promhttp`. Then you have defined a couple of variables, `HttpRequestTotal` and `HttpRequestErrorTotal` are Prometheus counter metrics, and `customRegistry` is a custom registry that will be used to register these metrics. The name of the metric is a string that you can use to identify the metric. The help string is a string that will be shown when you query the `/metrics` endpoint to understand the metric. The reason you are using the custom registry is so avoid the default Go metrics that are registered by default by the Prometheus client. Then using the `init` function you are registering the metrics with the custom registry. 
 
 ```go
 import (
