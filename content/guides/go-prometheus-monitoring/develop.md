@@ -16,7 +16,7 @@ Now, if you make any changes to your Golang application locally, it needs to ref
 docker compose up --build
 ```
 
-But, this is not the best approach. This is not efficient. Every time you make a change in the code, you need to rebuild manually. This is not is not very good flow for development. 
+But, this is not the best approach. This is not efficient. Every time you make a change in the code, you need to rebuild manually. This is not is not a good flow for development. 
 
 The better approach is to use Docker Compose Watch. In the `compose.yml` file, under the service `api`, you have added the `develop` section. So, it's more like a hot reloading. Whenever you make changes to code (defined in `path`), it will rebuild the image (or restart depending on the action). This is how you can use it:
 
