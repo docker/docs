@@ -8,6 +8,9 @@ weight: 40
 
 ![Builds view in Docker Desktop](../images/builds-view.webp)
 
+
+e **Builds** view lets you inspect your build history and manage builders. By default, it displays a list of all your ongoing and completed builds. [Explore builds](builds.md).
+
 The **Builds** view is a simple interface that lets you inspect your build
 history and manage builders using Docker Desktop.
 

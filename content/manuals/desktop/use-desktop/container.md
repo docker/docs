@@ -6,20 +6,20 @@ linkTitle: Containers
 weight: 10
 ---
 
-The **Containers** view lists all your running containers and applications. You must have running or stopped containers and applications to see them listed.
+The **Containers** view lists all running and stopped containers and applications. It provides a clean interface to manage the lifecycle of your containers, interact with running applications, and inspect Docker objects—including Docker Compose apps.
 
 ## Container actions
 
-Use the **Search** field to search for any specific container.
+Use the **Search** field to find a specific container by name.
 
-From the **Containers** view you can perform the following actions:
-- Pause/Resume
-- Stop/Start/Restart
+From the **Containers** view you can:
+- Start, stop, pause, resume, or restart containers
 - View image packages and CVEs
-- Delete
+- Delete containers
 - Open the application in VS code
 - Open the port exposed by the container in a browser
-- Copy docker run. This lets you share container run details or modify certain parameters.
+- Copy the `docker run` command for reuse or modification
+- Use [Docker Debug](#open-the-integrated-terminal-in-debug-mode)
 
 ## Resource usage
 

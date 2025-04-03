@@ -11,6 +11,8 @@ other actions on your [volumes](/manuals/engine/storage/volumes.md). You can als
 which volumes are being used as well as inspect the files and folders in your
 volumes.
 
+The **Volumes** view displays a list of volumes and allows you to easily create and delete volumes and see which ones are being used. For more information, see [Explore volumes](volumes.md).
+
 ## View your volumes
 
 You can view the following information about your volumes:
