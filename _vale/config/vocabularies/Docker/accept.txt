@@ -11,6 +11,7 @@ CentOS
 Ceph
 Chrome
 Chrome DevTools
+Citrix
 CloudFront
 Codefresh
 Codespaces
