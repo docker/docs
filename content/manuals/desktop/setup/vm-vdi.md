@@ -25,6 +25,12 @@ For troubleshooting problems and intermittent failures that are outside of Docke
 
 Docker does not support running multiple instances of Docker Desktop on the same machine in a VM or VDI environment. 
 
+> [!TIP]
+>
+> If you're running Docker Desktop inside a Citrix VDI, note that Citrix can be used with a variety of underlying hypervisors, for example VMware, Hyper-V, Citrix Hypervisor/XenServer. Docker Desktop requires nested virtualization, which is not supported by Citrix Hypervisor/XenServer.
+>
+> Check with your Citrix administrator or VDI infrastructure team to confirm which hypervisor is being used, and whether nested virtualization is enabled.
+
 ## Turn on nested virtualization
 
 You must turn on nested virtualization before you install Docker Desktop on a virtual machine.
