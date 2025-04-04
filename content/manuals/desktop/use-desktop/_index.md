@@ -43,10 +43,10 @@ Using the integrated terminal is the same as running one of the following comman
 
 The integrated terminal:
 
-- Persists your session and **Debug mode** setting if you navigate to another
+- Persists your session if you navigate to another
   part of the Docker Desktop Dashboard and then return.
 - Supports copy, paste, search, and clearing your session.
-- When not using debug mode, it automatically detects the default user for a
+- Automatically detects the default user for a
   running container from the image's Dockerfile. If no user is specified, or
   you're using debug mode, it defaults to `root`.
 

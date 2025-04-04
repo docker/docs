@@ -62,7 +62,7 @@ Debug mode requires a [Pro, Team, or Business subscription](/subscription/detail
 - The ability to access containers that don't have a shell, for example, slim or
   distroless containers.
 
-To open the integrated terminal in debug mode:
+To use debug mode:
 
 1. Sign in to Docker Desktop with an account that has a Pro, Team, or Business
    subscription.
@@ -72,7 +72,7 @@ To open the integrated terminal in debug mode:
      menu. From the drop-down menu, select **Use Docker Debug**.
    - Or, select the container and then select the **Debug** tab. 
 
-To use debug mode by default when accessing the integrated terminal, navigate to
+To use debug mode by default, navigate to
 the **General** tab in **Settings** and select the **Enable Docker Debug by
 default** option.
 
