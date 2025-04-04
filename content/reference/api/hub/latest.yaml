@@ -914,7 +914,11 @@ paths:
           required: true
           schema:
             type: string
-          description: string - possible values : read, write, admin
+            description: |
+              Access level for the group. Possible values:
+              - `read`
+              - `write`
+              - `admin`
       responses:
         "200":
           $ref: "#/components/responses/team_repo"
