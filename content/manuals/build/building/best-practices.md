@@ -46,9 +46,9 @@ image. When choosing an image, ensure it's built from a trusted source and keep
 it small.
 
 - [Docker Official Images](https://hub.docker.com/search?image_filter=official)
-  are some of the most secure and dependable images on Docker Hub. Typically,
-  Docker Official images have few or no packages containing CVEs, and are
-  thoroughly reviewed by Docker and project maintainers.
+  are a curated collection that have clear documentation, promote best
+  practices, and are regularly updated. They provide a trusted starting point
+  for many applications.
 
 - [Verified Publisher](https://hub.docker.com/search?image_filter=store) images
   are high-quality images published and maintained by the organizations
