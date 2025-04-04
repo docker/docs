@@ -45,10 +45,10 @@ To add a payment method:
 4. Select **Add payment method**.
 5. Enter your new payment information:
     - If you are adding a card, fill out the card information form.
-    - If you are adding Link, select **Secure, 1-click checkout with Link** and
-    enter your Link **email address** and **phone number**. Then, enter your
-    card information. Your card information will be saved and added to your Link
-    account.
+    - If you are adding a Link payment, select **Secure, 1-click checkout with Link**
+    and enter your Link **email address** and **phone number**. If you are not
+    an existing Link customer, you must fill out the card information form to
+    store a card for Link payments.
 6. Select **Add payment method**.
 7. Optional. You can set a new default payment method by selecting the **Set as default** action.
 8. Optional. You can remove non-default payment methods by selecting the **Delete** action.
@@ -65,10 +65,10 @@ To add a payment method:
 5. In the **Payment method** section, select **Add payment method**.
 6. Enter your new payment information:
     - If you are adding a card, fill out the card information form.
-    - If you are adding Link, select **Secure, 1-click checkout with Link** and
-    enter your Link **email address** and **phone number**. Then, enter your
-    card information. Your card information will be saved and added to your Link
-    account.
+    - IIf you are adding a Link payment, select **Secure, 1-click checkout with Link**
+    and enter your Link **email address** and **phone number**. If you are not
+    an existing Link customer, you must fill out the card information form to
+    store a card for Link payments.
 7. Select **Add**.
 8. Select the **Actions** icon, then select **Make default** to ensure that your new payment method applies to all purchases and subscriptions.
 9. Optional. You can remove non-default payment methods by selecting the **Actions** icon. Then, select **Delete**.
@@ -94,10 +94,10 @@ To add a payment method:
 5. Select **Add payment method**.
 6. Enter your new payment information:
     - If you are adding a card, fill out the card information form.
-    - If you are adding Link, select **Secure, 1-click checkout with Link** and
-    enter your Link **email address** and **phone number**. Then, enter your
-    card information. Your card information will be saved and added to your Link
-    account.
+    - If you are adding a Link payment, select **Secure, 1-click checkout with Link**
+    and enter your Link **email address** and **phone number**. If you are not
+    an existing Link customer, you must fill out the card information form to
+    store a card for Link payments.
 7. Select **Add payment method**.
 8. Optional. You can set a new default payment method by selecting the **Set as default** action.
 9. Optional. You can remove non-default payment methods by selecting the **Delete** action.
@@ -115,10 +115,10 @@ To add a payment method:
 6. In the **Payment Method** section, select **Add payment method**.
 7. Enter your new payment information:
     - If you are adding a card, fill out the card information form.
-    - If you are adding Link, select **Secure, 1-click checkout with Link** and
-    enter your Link **email address** and **phone number**. Then, enter your
-    card information. Your card information will be saved and added to your Link
-    account.
+    - If you are adding a Link payment, select **Secure, 1-click checkout with Link**
+    and enter your Link **email address** and **phone number**. If you are not
+    an existing Link customer, you must fill out the card information form to
+    store a card for Link payments.
 8. Select **Add payment method**.
 9. Select the **Actions** icon, then select **Make default** to ensure that your new payment method applies to all purchases and subscriptions.
 10. Optional. You can remove non-default payment methods by selecting the **Actions** icon. Then, select **Delete**.
