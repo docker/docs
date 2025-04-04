@@ -263,7 +263,7 @@
 # Docker Debug
 "/reference/cli/docker/debug/":
   - /go/debug-cli/
-"/desktop/use-desktop/container/#integrated-terminal":
+"/desktop/use-desktop/container/#debug":
   - /go/debug-gui/
 
 # Docker Desktop - volumes cloud backup
