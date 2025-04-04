@@ -95,6 +95,10 @@ the underlying vulnerable express version to 4.17.3 or later.
    +    "express": "4.17.3"
       }
    ```
+   > [!TIP]
+   >
+   > The express package is constantly being updated and depending on when you are running this tutorial, other vulnerabilities with different levels of criticality may be listed. In order to follow this tutorial properly, it is suggested that all vulnerabilities are fixed.
+   > In general, it will only be necessary to modify the version of the `express` package to the most current version.
 
 2. Rebuild the image with a new tag and push it to your Docker Hub repository:
 
@@ -172,6 +176,10 @@ Policy status  FAILED  (2/6 policies met, 2 missing data)
   ?      │ Supply chain attestations                    │    No data
 ```
 
+> [!NOTE]
+> 
+> The report shown by the `docker scout quickview` command, run on your local machine, may be different from the one shown in the example above.
+
 Exclamation marks in the status column indicate a violated policy.
 Question marks indicate that there isn't enough metadata to complete the evaluation.
 A check mark indicates compliance.
@@ -209,7 +217,7 @@ The classic image store doesn't support manifest lists,
 which is how the provenance attestations are attached to an image.
 
 Open **Settings** in Docker Desktop. Under the **General** section, make sure
-that the **Use containerd for pulling and storing images** option is checked.
+that the **Use containerd for pulling and storing images** option is checked, then click the `Apply & Restart` button to apply the changes.
 Note that changing image stores temporarily hides images and containers of the
 inactive image store until you switch back.
 
@@ -230,7 +238,11 @@ results through a different lens: the Docker Scout Dashboard.
 3. Select **Images** in the left-hand navigation.
 
 The images page lists your Scout-enabled repositories.
-Select the image in the list to open the **Image details** sidebar.
+
+Select the docker image you want to analyze and click the button shown in the image below to display the **Image details** sidebar.
+
+![View Image Details](./images/image-details.png)
+
 The sidebar shows a compliance overview for the last pushed tag of a repository.
 
 > [!NOTE]
@@ -239,13 +251,17 @@ The sidebar shows a compliance overview for the last pushed tag of a repository.
 > It might take a few minutes before the results appear if this is your
 > first time using the Docker Scout Dashboard.
 
-Inspect the **Up-to-Date Base Images** policy.
+Go back to the image list and click on the image version, available in the **Most recent image** column.
+Then, at the top right of the page, click on the **Update base image** button to inspect the policy.
+
+![Policy Inspect](./images/policy-inspect.png)
+
 This policy checks whether base images you use are up-to-date.
 It currently has a non-compliant status,
 because the example image uses an old version `alpine` as a base image.
 
-Select the **View fix** button next to the policy name for details about the violation,
-and recommendations on how to address it.
+Close the **Recommended fixes for base image** popup. In the policy listing, click the **View fixes** button, next to the policy name for details about the violation, and recommendations on how to address it.
+
 In this case, the recommended action is to enable
 [Docker Scout's GitHub integration](./integrations/source-code-management/github.md),
 which helps keep your base images up-to-date automatically.
