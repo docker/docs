@@ -1,26 +1,5 @@
----
-description: Get started with Docker for Windows. This guide covers system requirements,
-  where to download, and instructions on how to install and update.
-keywords: docker for windows, docker windows, docker desktop for windows, docker on
-  windows, install docker windows, install docker on windows, docker windows 10, docker
-  run on windows, installing docker for windows, windows containers, wsl, hyper-v
-title: Install Docker Desktop on Windows
-linkTitle: Windows
-weight: 30
-aliases:
-- /desktop/windows/install/
-- /docker-ee-for-windows/install/
-- /docker-for-windows/install-windows-home/
-- /docker-for-windows/install/
-- /ee/docker-ee/windows/docker-ee/
-- /engine/installation/windows/
-- /engine/installation/windows/docker-ee/
-- /install/windows/docker-ee/
-- /install/windows/ee-preview/
-- /installation/windows/
-- /desktop/win/configuring-wsl/
-- /desktop/install/windows-install/
----
+Install Docker Desktop on Windows
+
 
 > **Docker Desktop terms**
 >
@@ -62,7 +41,7 @@ For more information on setting up WSL 2 with Docker Desktop, see [WSL](/manuals
 
 > [!NOTE]
 >
-> Docker only supports Docker Desktop on Windows for those versions of Windows that are still within [Microsoft’s servicing timeline](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet). Docker Desktop is not supported on server versions of Windows, such as Windows Server 2019 or Windows Server 2022. For more information on how to run containers on Windows Server, see [Microsoft's official documentation](https://learn.microsoft.com/virtualization/windowscontainers/quick-start/set-up-environment).
+> Docker only supports Docker Desktop on Windows for those versions of Windows that are still within [Microsoftâ€™s servicing timeline](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet). Docker Desktop is not supported on server versions of Windows, such as Windows Server 2019 or Windows Server 2022. For more information on how to run containers on Windows Server, see [Microsoft's official documentation](https://learn.microsoft.com/virtualization/windowscontainers/quick-start/set-up-environment).
 
 > [!IMPORTANT]
 >
@@ -86,7 +65,7 @@ For more information on setting up WSL 2 with Docker Desktop, see [WSL](/manuals
 
 > [!NOTE]
 >
-> Docker only supports Docker Desktop on Windows for those versions of Windows that are still within [Microsoft’s servicing timeline](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet). Docker Desktop is not supported on server versions of Windows, such as Windows Server 2019 or Windows Server 2022. For more information on how to run containers on Windows Server, see [Microsoft's official documentation](https://learn.microsoft.com/virtualization/windowscontainers/quick-start/set-up-environment).
+> Docker only supports Docker Desktop on Windows for those versions of Windows that are still within [Microsoftâ€™s servicing timeline](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet). Docker Desktop is not supported on server versions of Windows, such as Windows Server 2019 or Windows Server 2022. For more information on how to run containers on Windows Server, see [Microsoft's official documentation](https://learn.microsoft.com/virtualization/windowscontainers/quick-start/set-up-environment).
 
 > [!IMPORTANT]
 >
@@ -193,7 +172,7 @@ After downloading `Docker Desktop Installer.exe`, run the following command in a
 $ "Docker Desktop Installer.exe" install
 ```
 
-If you’re using PowerShell you should run it as:
+If youâ€™re using PowerShell you should run it as:
 
 ```powershell
 Start-Process 'Docker Desktop Installer.exe' -Wait install
