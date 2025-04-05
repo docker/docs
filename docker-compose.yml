@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  docs:
+    image: docs
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 9222:9222
