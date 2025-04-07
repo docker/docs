@@ -34,7 +34,7 @@ On the **General** tab, you can configure when to start Docker and specify other
 
 - **Choose theme for Docker Desktop**. Choose whether you want to apply a **Light** or **Dark** theme to Docker Desktop. Alternatively you can set Docker Desktop to **Use system settings**.
 
-- **Configure shell completions**. Automatically edits your shell configuration and gives you you word completion for commands, flags, and Docker objects (such as container and volume names) when you hit `<Tab>` as you type into your terminal. For more information, see [Completion](/manuals/engine/cli/completion.md).
+- **Configure shell completions**. Automatically edits your shell configuration and gives you word completion for commands, flags, and Docker objects (such as container and volume names) when you hit `<Tab>` as you type into your terminal. For more information, see [Completion](/manuals/engine/cli/completion.md).
 
 - **Choose container terminal**. Determines which terminal is launched when opening the terminal from a container.
 If you choose the integrated terminal, you can run commands in a running container straight from the Docker Desktop Dashboard. For more information, see [Explore containers](/manuals/desktop/use-desktop/container.md).

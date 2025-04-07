@@ -43,13 +43,13 @@ and [install a different version](/manuals/desktop/release-notes.md) or reset Do
 
 1. Load your images.
 
-   - If your pushed to Docker Hub:
+   - If you pushed to Docker Hub:
    
       ```console
       $ docker pull <my-backup-image>
       ```
    
-   - If your saved a `.tar` file:
+   - If you saved a `.tar` file:
    
       ```console
       $ docker image load -i images.tar
