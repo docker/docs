@@ -19,7 +19,7 @@ From the **Containers** view you can:
 - Open the application in VS code
 - Open the port exposed by the container in a browser
 - Copy the `docker run` command for reuse or modification
-- Use [Docker Debug](#exec/debug)
+- Use [Docker Debug](#execdebug)
 
 ## Resource usage
 
