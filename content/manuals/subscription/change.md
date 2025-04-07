@@ -80,8 +80,7 @@ To downgrade your Docker subscription:
 2. Under Settings and administration, select **Billing**.
 3. Select the account you want to downgrade in the drop-down at the top-left of the page.
 4. Select the action icon and then **Cancel subscription**.
-5. Review the cancellation warnings, then select **Confirm cancellation**.
-6. Optional. Fill out the feedback survey, or select **Skip**.
+5. Fill out the feedback survey to continue with cancellation.
 
 {{< /tab >}}
 {{< tab name="Legacy Docker plan" >}}
