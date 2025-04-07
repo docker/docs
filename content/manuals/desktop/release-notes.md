@@ -52,7 +52,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 #### For all platforms
 
-- You can now get quick access to the Kubernetes Dashboard with the **Launch Dashboard** button on the **Kubernetes** settings page.
 - Fixed a bug that caused `docker-proxy` to stop forwarding UDP datagrams to containers.
 - Fixed a bug that caused docker-proxy to close UDP connections to containers eagerly and resulting in the source address to change needlessly
 - Fixed a race condition that prevented Docker Desktop Kubernetes from starting in some scenarios.
