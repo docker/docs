@@ -922,6 +922,12 @@ paths:
       responses:
         "200":
           $ref: "#/components/responses/team_repo"
+        "403":
+          $ref: "#/components/responses/forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+          
   /v2/orgs/{org_name}/members:
     parameters:
       - $ref: "#/components/parameters/org_name"
