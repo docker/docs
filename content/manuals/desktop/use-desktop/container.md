@@ -53,7 +53,18 @@ Select **Logs** to see logs from the container. You can also:
 
 Select **Inspect** to view low-level information about the container. It displays the local path, version number of the image, SHA-256, port mapping, and other details.
 
-### Debug
+### Exec/Debug
+
+If you have not enabled Docker Debug in settings, the **Exec** tab displays. It lets you quickly run commands within your running container.
+
+Using the **Exec** tab is the same as running one of the following commands:
+
+- `docker exec -it <container-id> /bin/sh`
+- `docker exec -it <container-id> cmd.exe` when accessing Windows containers
+
+For more details, see the [`docker exec` CLI reference](/reference/cli/docker/exec/).
+
+If you have enabled Docker Debug in settings, or toggled on **Debug mode** to the right of the tab options, the **Debug** tab displays. 
 
 Debug mode requires a [Pro, Team, or Business subscription](/subscription/details/). Debug mode has several advantages, such as:
 
