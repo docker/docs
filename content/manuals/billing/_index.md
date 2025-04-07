@@ -12,7 +12,7 @@ grid_core:
   description: Learn how to add or update a payment method for your personal account or organization.
   link: /billing/payment-method/
   icon: credit_score
-- title: Update the billing information
+- title: Update billing information
   description: Discover how to update the billing information for your personal account or organization.
   link: /billing/details/
   icon: contract_edit
