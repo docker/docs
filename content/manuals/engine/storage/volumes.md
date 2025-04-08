@@ -526,7 +526,7 @@ store data in the cloud, without changing the application logic.
 
 When you create a volume using `docker volume create`, or when you start a
 container which uses a not-yet-created volume, you can specify a volume driver.
-The following examples use the `vieux/sshfs` volume driver, first when creating
+The following examples use the `rclone` volume driver, first when creating
 a standalone volume, and then when starting a container which creates a new
 volume.
 
