@@ -18,7 +18,7 @@ Use this procedure to back up and restore your images and container data. This i
 
 1. Commit your containers to an image with [`docker container commit`](/reference/cli/docker/container/commit.md).
 
-   Committing a container stores the container filesystem changes and some container configurations, such as labels and environment variables, as a local image. Be aware that environment variables may contain sensitive
+   Committing a container stores filesystem changes and some container configurations, such as labels and environment variables, as a local image. Be aware that environment variables may contain sensitive
    information such as passwords or proxy-authentication, so take care when pushing the resulting image to a registry.
 
    Also note that filesystem changes in a volume that are attached to the
@@ -31,7 +31,7 @@ Use this procedure to back up and restore your images and container data. This i
    
    > [!TIP]
    >
-   > [Set the repository visibility to private](](/manuals/docker-hub/repos/_index.md) if your image includes sensitive content.
+   > [Set the repository visibility to private](/manuals/docker-hub/repos/_index.md) if your image includes sensitive content.
 
    Alternatively, use [`docker image save -o images.tar image1 [image2 ...]`](/reference/cli/docker/image/save.md)
    to save any images you want to keep to a local `.tar` file. 

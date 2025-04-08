@@ -507,7 +507,7 @@ By default, all general notifications are turned on. You'll always receive error
 
 You can also [configure notification settings for Docker Scout-related issues](/manuals/scout/explore/dashboard.md#notification-settings). 
 
-Notifications momentarily appear in the lower-right of the Docker Desktop Dashboard and then move to the **Notifications** drawer. To open the **Notifications** drawer, select {{< inline-image src="../images/notifications.svg" alt="notifications" >}}.
+Notifications momentarily appear in the lower-right of the Docker Desktop Dashboard and then move to the **Notifications** drawer which can be accessed from the top-right of the Docker Desktop Dashboard.
 
 ## Advanced
 
@@ -527,4 +527,4 @@ On Mac, you can reconfigure your initial installation settings  on the **Advance
 
 - **Allow privileged port mapping (Requires password)**. Starts the privileged helper process which binds the ports that are between 1 and 1024. For more information, see [permission requirements for macOS](/manuals/desktop/setup/install/mac-permission-requirements.md#binding-privileged-ports).
 
-  For more information on each configuration and use case, see [Permission requirements](/manuals/desktop/setup/install/mac-permission-requirements.md).
+For more information on each configuration and use case, see [Permission requirements](/manuals/desktop/setup/install/mac-permission-requirements.md).
