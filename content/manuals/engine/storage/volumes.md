@@ -555,20 +555,20 @@ host and can connect to the second node using SSH.
 On the Docker host, install the `vieux/sshfs` plugin:
 
 ```console
-$ docker plugin install --grant-all-permissions vieux/sshfs
+$ docker plugin install --grant-all-permissions rclone/docker-volume-rclone --aliases rclone
 ```
 
 ### Create a volume using a volume driver
 
-This example specifies an SSH password, but if the two hosts have shared keys
+This example specifies an SSH password using a custom `rclone.conf` file, but if the two hosts have shared keys
 configured, you can exclude the password. Each volume driver may have zero or more
 configurable options, you specify each of them using an `-o` flag.
 
 ```console
-$ docker volume create --driver vieux/sshfs \
-  -o sshcmd=test@node2:/home/test \
-  -o password=testpassword \
-  sshvolume
+$ docker volume create --driver rclone \
+  -o remote=remotehost:home/test \
+  -o prclone_config="$(cat /path/to/rclone.conf)" \
+  rclonevolume
 ```
 
 ### Start a container which creates a volume using a volume driver
@@ -584,8 +584,8 @@ Each volume driver may have zero or more configurable options.
 
 ```console
 $ docker run -d \
-  --name sshfs-container \
-  --mount type=volume,volume-driver=vieux/sshfs,src=sshvolume,target=/app,volume-opt=sshcmd=test@node2:/home/test,volume-opt=password=testpassword \
+  --name rclone-container \
+  --mount type=volume,volume-driver=rclone,src=rclonevolume,target=/app,volume-opt=remote=remotehost:home/test,volume-opt=rclone_config=$(cat /path/to/rclone.conf) \
   nginx:latest
 ```
 
