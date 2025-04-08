@@ -10,32 +10,48 @@ aliases:
 
 When you open Docker Desktop, the Docker Desktop Dashboard displays.
 
-![Docker Desktop Dashboard on Containers view](../images/dashboard.webp)
+![Docker Desktop Dashboard on Containers view](../images/dashboard.png)
 
-The **Containers** view provides a runtime view of all your containers and applications. It allows you to interact with containers and applications, and manage the lifecycle of your applications directly from your machine. This view also provides an intuitive interface to perform common actions to inspect, interact with, and manage your Docker objects including containers and Docker Compose-based applications. For more information, see [Explore running containers and applications](container.md).
-
-The **Images** view displays a list of your Docker images and allows you to run an image as a container, pull the latest version of an image from Docker Hub, and inspect images. It also displays a summary of image vulnerabilities. In addition, the **Images** view contains clean-up options to remove unwanted images from the disk to reclaim space. If you are logged in, you can also see the images you and your organization have shared on Docker Hub. For more information, see [Explore your images](images.md).
-
-The **Volumes** view displays a list of volumes and allows you to easily create and delete volumes and see which ones are being used. For more information, see [Explore volumes](volumes.md).
-
-The **Builds** view lets you inspect your build history and manage builders. By default, it displays a list of all your ongoing and completed builds. [Explore builds](builds.md).
+It provides a centralized interface to manage your [containers](container.md), [images](images.md), [volumes](volumes.md), and [builds](builds.md).
 
 In addition, the Docker Desktop Dashboard lets you:
 
+- Use [Ask Gordon](/manuals/desktop/features/gordon/_index.md), a personal AI assistant embedded in Docker Desktop and the Docker CLI. It's designed to streamline your workflow and help you make the most of the Docker ecosystem.
 - Navigate to the **Settings** menu to configure your Docker Desktop settings. Select the **Settings** icon in the Dashboard header.
 - Access the **Troubleshoot** menu to debug and perform restart operations. Select the **Troubleshoot** icon in the Dashboard header.
 - Be notified of new releases, installation progress updates, and more in the **Notifications center**. Select the bell icon in the bottom-right corner of the Docker Desktop Dashboard to access the notification center.
 - Access the **Learning center** from the Dashboard header. It helps you get started with quick in-app walkthroughs and provides other resources for learning about Docker. 
 
   For a more detailed guide about getting started, see [Get started](/get-started/introduction/_index.md).
-- Get to the [Docker Scout](../../scout/_index.md) dashboard.
-- Check the status of Docker services.
 - Access [Docker Hub](/manuals/docker-hub/_index.md) to search, browse, pull, run, or view details
   of images.
+- Get to the [Docker Scout](../../scout/_index.md) dashboard.
+- Navigate to [Docker Extensions](/manuals/extensions/_index.md).
+
+## Docker terminal
+
+From the Docker Dashboard footer, you can use the integrated terminal directly within Docker Desktop. 
+
+The integrated terminal:
+
+- Persists your session if you navigate to another
+  part of the Docker Desktop Dashboard and then return.
+- Supports copy, paste, search, and clearing your session.
+
+#### Open the integrated terminal
+
+To open the integrated terminal, either:
+
+- Hover over your running container and under the **Actions** column, select the **Show container actions**
+  menu. From the drop-down menu, select **Open in terminal**.
+- Or, select the **Terminal** icon located in the bottom-right corner, next to the version number.
+
+To use your external terminal, navigate to the **General** tab in **Settings**
+and select the **System default** option under **Choose your terminal**.
 
 ## Quick search
 
-From the Docker Desktop Dashboard you can use Quick Search, which is located in the Dashboard header, to search for:
+Use Quick Search, which is located in the Docker Dashboard header, to search for:
 
 - Any container or Compose application on your local system. You can see an overview of associated environment variables or perform quick actions, such as start, stop, or delete.
 
@@ -49,9 +65,9 @@ From the Docker Desktop Dashboard you can use Quick Search, which is located in 
 
 ## The Docker menu
 
-Docker Desktop also provides an easy-access tray icon that appears in the taskbar and is referred to as the Docker menu {{< inline-image src="../../assets/images/whale-x.svg" alt="whale menu" >}}.
+Docker Desktop also includes a tray icon, referred to as the Docker menu {{< inline-image src="../../assets/images/whale-x.svg" alt="whale menu" >}} for quick access.
 
-To display the Docker menu, select the {{< inline-image src="../../assets/images/whale-x.svg" alt="whale menu" >}} icon. It displays the following options:
+Select the {{< inline-image src="../../assets/images/whale-x.svg" alt="whale menu" >}} icon in your taskbar to open options such as:
 
 - **Dashboard**. This takes you to the Docker Desktop Dashboard.
 - **Sign in/Sign up**

@@ -21,7 +21,15 @@ The Docker Model Runner plugin lets you:
 
 Models are pulled from Docker Hub the first time they're used and stored locally. They're loaded into memory only at runtime when a request is made, and unloaded when not in use to optimize resources. Since models can be large, the initial pull may take some time — but after that, they're cached locally for faster access. You can interact with the model using [OpenAI-compatible APIs](#what-api-endpoints-are-available).
 
-Docker Model Runner is enabled by default in Docker Desktop.
+## Enable Docker Model Runner
+
+1. Navigate to the **Features in development** tab in settings.
+2. Under the **Experimental features** tab, select **Access experimental features**.
+3. Select **Apply and restart**. 
+4. Quit and reopen Docker Desktop to ensure the changes take effect. 
+5. Open the **Settings** view in Docker Desktop.
+6. Navigate to **Features in development**.
+7. From the **Beta** tab, check the **Enable Docker Model Runner** setting.
 
 ## Available commands
 

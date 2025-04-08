@@ -6,20 +6,20 @@ linkTitle: Containers
 weight: 10
 ---
 
-The **Containers** view lists all your running containers and applications. You must have running or stopped containers and applications to see them listed.
+The **Containers** view lists all running and stopped containers and applications. It provides a clean interface to manage the lifecycle of your containers, interact with running applications, and inspect Docker objects—including Docker Compose apps.
 
 ## Container actions
 
-Use the **Search** field to search for any specific container.
+Use the **Search** field to find a specific container by name.
 
-From the **Containers** view you can perform the following actions:
-- Pause/Resume
-- Stop/Start/Restart
+From the **Containers** view you can:
+- Start, stop, pause, resume, or restart containers
 - View image packages and CVEs
-- Delete
+- Delete containers
 - Open the application in VS code
 - Open the port exposed by the container in a browser
-- Copy docker run. This lets you share container run details or modify certain parameters.
+- Copy the `docker run` command for reuse or modification
+- Use [Docker Debug](#execdebug)
 
 ## Resource usage
 
@@ -31,7 +31,7 @@ When you [inspect a container](#inspect-a-container), the **Stats** tab displays
 
 You can obtain detailed information about the container when you select it.
 
-From here, you can use the quick action buttons to perform various actions such as pause, resume, start or stop, or explore the **Logs**, **Inspect**, **Bind mounts**, **Exec**, **Files**, and **Stats** tabs. 
+From here, you can use the quick action buttons to perform various actions such as pause, resume, start or stop, or explore the **Logs**, **Inspect**, **Bind mounts**, **Debug**, **Files**, and **Stats** tabs. 
 
 ### Logs
 
@@ -53,40 +53,18 @@ Select **Logs** to see logs from the container. You can also:
 
 Select **Inspect** to view low-level information about the container. It displays the local path, version number of the image, SHA-256, port mapping, and other details.
 
-### Integrated terminal
+### Exec/Debug
 
-From the **Exec** tab, you can use the integrated terminal, on a running
-container, directly within Docker Desktop. You are able to quickly run commands
-within your container so you can understand its current state or debug when
-something goes wrong.
+If you have not enabled Docker Debug in settings, the **Exec** tab displays. It lets you quickly run commands within your running container.
 
-Using the integrated terminal is the same as running one of the following commands:
+Using the **Exec** tab is the same as running one of the following commands:
 
 - `docker exec -it <container-id> /bin/sh`
 - `docker exec -it <container-id> cmd.exe` when accessing Windows containers
-- `docker debug <container-id>` when using debug mode
 
-The integrated terminal:
+For more details, see the [`docker exec` CLI reference](/reference/cli/docker/exec/).
 
-- Persists your session and **Debug mode** setting if you navigate to another
-  part of the Docker Desktop Dashboard and then return.
-- Supports copy, paste, search, and clearing your session.
-- When not using debug mode, it automatically detects the default user for a
-  running container from the image's Dockerfile. If no user is specified, or
-  you're using debug mode, it defaults to `root`.
-
-#### Open the integrated terminal
-
-To open the integrated terminal, either:
-
-- Hover over your running container and under the **Actions** column, select the **Show container actions**
-  menu. From the drop-down menu, select **Open in terminal**.
-- Or, select the container and then select the **Exec** tab.
-
-To use your external terminal, navigate to the **General** tab in **Settings**
-and select the **System default** option under **Choose your terminal**.
-
-#### Open the integrated terminal in debug mode
+If you have enabled Docker Debug in settings, or toggled on **Debug mode** to the right of the tab options, the **Debug** tab displays. 
 
 Debug mode requires a [Pro, Team, or Business subscription](/subscription/details/). Debug mode has several advantages, such as:
 
@@ -95,7 +73,7 @@ Debug mode requires a [Pro, Team, or Business subscription](/subscription/detail
 - The ability to access containers that don't have a shell, for example, slim or
   distroless containers.
 
-To open the integrated terminal in debug mode:
+To use debug mode:
 
 1. Sign in to Docker Desktop with an account that has a Pro, Team, or Business
    subscription.
@@ -103,11 +81,9 @@ To open the integrated terminal in debug mode:
 
    - Hover over your running container and under the **Actions** column, select the **Show container actions**
      menu. From the drop-down menu, select **Use Docker Debug**.
-   - Or, select the container and then select the **Debug** tab. If the
-     **Debug** tab isn't visible, select the **Exec** tab and then enable the
-     **Debug mode** setting.
+   - Or, select the container and then select the **Debug** tab. 
 
-To use debug mode by default when accessing the integrated terminal, navigate to
+To use debug mode by default, navigate to
 the **General** tab in **Settings** and select the **Enable Docker Debug by
 default** option.
 
