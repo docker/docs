@@ -6,10 +6,7 @@ linkTitle: Volumes
 weight: 30
 ---
 
-The **Volumes** view in Docker Desktop Dashboard lets you create, delete, and perform
-other actions on your [volumes](/manuals/engine/storage/volumes.md). You can also see
-which volumes are being used as well as inspect the files and folders in your
-volumes.
+The **Volumes** view in Docker Desktop lets you create, inspect, delete, clone, empty, export, and import [Docker volumes](/manuals/engine/storage/volumes.md). You can also browse files and folders in volumes and see which containers are using them.
 
 ## View your volumes
 

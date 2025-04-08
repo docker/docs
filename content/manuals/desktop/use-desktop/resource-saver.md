@@ -6,7 +6,7 @@ linkTitle: Resource Saver mode
 weight: 50
 ---
 
-Resource Saver is a new feature available in Docker Desktop version 4.24 and later. It significantly reduces Docker
+Resource Saver mode significantly reduces Docker
 Desktop's CPU and memory utilization on the host by 2 GBs or more, by
 automatically stopping the Docker Desktop Linux VM when no containers are
 running for a period of time. The default time is set to 5 minutes, but this can be adjusted to suit your needs.
@@ -15,7 +15,7 @@ With Resource Saver mode, Docker Desktop uses minimal system resources when it's
 allowing you to save battery life on your laptop and improve your multi-tasking
 experience.
 
-## How to configure Resource Saver 
+## Configure Resource Saver 
 
 Resource Saver is enabled by default but can be disabled by navigating to the **Resources** tab, in **Settings**. You can also configure the idle
 timer as shown below.
@@ -74,10 +74,3 @@ users enable WSL's `autoMemoryReclaim` feature as described in the
 [Docker  Desktop WSL docs](/manuals/desktop/features/wsl/_index.md). Finally, since Docker Desktop does not
 stop the Linux VM on WSL, exit from Resource Saver mode is immediate (there's
 no exit delay).
-
-## Feedback
-
-To give feedback or report any bugs you may find, create an issue on the appropriate Docker Desktop GitHub repository:
-
-- [for-mac](https://github.com/docker/for-mac)
-- [for-win](https://github.com/docker/for-win)

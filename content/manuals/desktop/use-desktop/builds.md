@@ -6,16 +6,9 @@ keywords: Docker Dashboard, manage, gui, dashboard, builders, builds
 weight: 40
 ---
 
-![Builds view in Docker Desktop](../images/builds-view.webp)
+The **Builds** view provides an interactive interface for inspecting build history, monitoring active builds, and managing builders directly in Docker Desktop.
 
-The **Builds** view is a simple interface that lets you inspect your build
-history and manage builders using Docker Desktop.
-
-Opening the **Builds** view in Docker Desktop displays a list of completed builds.
-By default, the list is sorted by date, showing the most recent builds at the top.
-You can switch to **Active builds** to view any ongoing builds.
-
-![Build UI screenshot active builds](../images/build-ui-active-builds.webp)
+By default, the **Build history** tab displays a list of completed builds, sorted by date (newest first). Switch to the **Active builds** tab to view ongoing builds.
 
 If you're connected to a cloud builder through [Docker Build Cloud](../../build-cloud/_index.md),
 the Builds view also lists any active or completed cloud builds by other team members
@@ -23,16 +16,12 @@ connected to the same cloud builder.
 
 ## Show build list
 
-Select the **Builds** view in the Docker Desktop Dashboard to open the build list.
+Open the **Builds** view from the Docker Dashboard to access:
 
-The build list shows your completed and ongoing builds. The **Build history**
-tab shows completed historical builds, and from here you can inspect the build
-logs, dependencies, traces, and more. The **Active builds** tab shows builds
-that are currently running.
+- **Build history**: Completed builds with access to logs, dependencies, traces, and more
+- **Active builds**: Builds currently in progress
 
-The list shows builds for your active, running builders. It doesn't list builds
-for inactive builders: builders that you've removed from your system, or
-builders that have been stopped.
+Only builds from active, running builders are listed. Builds from removed or stopped builders are not shown.
 
 ### Builder settings
 
@@ -47,7 +36,9 @@ Docker Desktop settings.
 The **Import builds** button lets you import build records for builds by other
 people, or builds in a CI environment. When you've imported a build record, it
 gives you full access to the logs, traces, and other data for that build,
-directly in Docker Desktop. The [build summary](/manuals/build/ci/github-actions/build-summary.md)
+directly in Docker Desktop. 
+
+The [build summary](/manuals/build/ci/github-actions/build-summary.md)
 for the `docker/build-push-action` and `docker/bake-action` GitHub Actions
 includes a link to download the build records, for inspecting CI jobs with
 Docker Desktop.
@@ -63,8 +54,6 @@ If you're inspecting a multi-platform build, the drop-down menu in the
 top-right of this tab lets you filter the information down to a specific
 platform:
 
-![Platform filter](../images/build-ui-platform-menu.webp?w=400)
-
 The **Source details** section shows information about the frontend
 [frontend](/manuals/build/buildkit/frontend.md) and, if available,
 the source code repository used for the build.
@@ -78,8 +67,6 @@ showing a breakdown of the build execution from various angles.
 - **Accumulated time** shows the total CPU time for all steps.
 - **Cache usage** shows the extent to which build operations were cached.
 - **Parallel execution** shows how much of the build execution time was spent running steps in parallel.
-
-![Build timing charts](../images/build-ui-timing-chart.webp)
 
 The chart colors and legend keys describe the different build operations. Build
 operations are defined as follows:
@@ -168,8 +155,6 @@ If the build failed, an **Error** tab displays instead of the **Source** tab.
 The error message is inlined in the Dockerfile source,
 indicating where the failure happened and why.
 
-![Build error displayed inline in the Dockerfile](../images/build-ui-error.webp)
-
 ### Build logs
 
 The **Logs** tab displays the build logs.
@@ -193,20 +178,16 @@ helping you identify patterns and shifts in build operations over time.
 For instance, significant spikes in build duration or a high number of cache misses
 could signal opportunities for optimizing the Dockerfile.
 
-![Build history chart](../images/build-ui-history.webp)
-
 You can navigate to and inspect a related build by selecting it in the chart,
 or using the **Past builds** list below the chart.
 
 ## Manage builders
 
-The **Builder settings** view in the Docker Desktop settings lets you:
+The **Builder** tab in **Settings** lets you:
 
 - Inspect the state and configuration of active builders
 - Start and stop a builder
 - Delete build history
 - Add or remove builders (or connect and disconnect, in the case of cloud builders)
-
-![Builder settings drop-down](../images/build-ui-manage-builders.webp)
 
 For more information about managing builders, see [Change settings](/manuals/desktop/settings-and-maintenance/settings.md#builders)
