@@ -190,13 +190,13 @@ FROM node:17.7-alpine3.14 AS client-builder
 FROM golang:1.17-alpine AS builder
 ENV CGO_ENABLED=0
 WORKDIR /backend
-COPY vm/go.* .
 RUN --mount=type=cache,target=/go/pkg/mod \
-    --mount=type=cache,target=/root/.cache/go-build \
+    --mount=type=bind,source=vm/go.mod,target=go.mod \
+    --mount=type=bind,source=vm/go.sum,target=go.sum \
     go mod download
-COPY vm/. .
 RUN --mount=type=cache,target=/go/pkg/mod \
     --mount=type=cache,target=/root/.cache/go-build \
+    --mount=type=bind,source=vm/.,target=. \
     go build -trimpath -ldflags="-s -w" -o bin/service
 
 FROM alpine:3.15
