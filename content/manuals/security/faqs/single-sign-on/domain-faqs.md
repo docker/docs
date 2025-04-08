@@ -1,7 +1,7 @@
 ---
 description: Single sign-on domain FAQs
 keywords: Docker, Docker Hub, SSO FAQs, single sign-on, domains, domain verification, domain management
-title: FAQS on SSO and domains
+title: Domains
 tags: [FAQ]
 aliases:
 - /single-sign-on/domain-faqs/

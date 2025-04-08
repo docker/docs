@@ -58,6 +58,8 @@ You must [configure SSO](../single-sign-on/configure/_index.md) before you enabl
 {{< /tab >}}
 {{< tab name="Docker Hub" >}}
 
+{{% include "hub-org-management.md" %}}
+
 {{% admin-scim %}}
 
 {{< /tab >}}
@@ -247,6 +249,8 @@ If SCIM is disabled, any user provisioned through SCIM will remain in the organi
 
 {{< /tab >}}
 {{< tab name="Docker Hub" >}}
+
+{{% include "hub-org-management.md" %}}
 
 {{% admin-scim-disable %}}
 

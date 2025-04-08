@@ -43,6 +43,8 @@ Make sure you have completed the following before you begin:
 {{< /tab >}}
 {{< tab name="Docker Hub" >}}
 
+{{% include "hub-org-management.md" %}}
+
 1. Sign in to Docker Hub.
 2. Select **My Hub** and then your organization from the list.
 3. On your organization page, select **Settings** and then **Security**.

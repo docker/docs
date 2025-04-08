@@ -46,14 +46,16 @@ feature always takes effect.
 ## Configure Registry Access Management permissions
 
 {{< tabs >}}
-{{< tab name="Docker Hub" >}}
-
-{{% admin-registry-access product="hub" %}}
-
-{{< /tab >}}
 {{< tab name="Admin Console" >}}
 
 {{% admin-registry-access product="admin" %}}
+
+{{< /tab >}}
+{{< tab name="Docker Hub" >}}
+
+{{% include "hub-org-management.md" %}}
+
+{{% admin-registry-access product="hub" %}}
 
 {{< /tab >}}
 {{< /tabs >}}

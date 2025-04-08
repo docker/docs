@@ -52,9 +52,9 @@ Some users authenticate by signing in to Docker Desktop and joining their domain
 
 Organizations set up in Docker use verified domains and any team member with an email domain other than what's verified is noted as a "Guest" in that organization.
 
-### How long are Docker Hub logs available?
+### How long are activity logs available?
 
-Docker provides various types of audit logs and log retention varies. For example, Docker Hub Activity logs are available for 90 days. You are responsible for exporting logs or setting up drivers to their own internal systems.
+Docker provides various types of audit logs and log retention varies. For example, Docker activity logs are available for 90 days. You are responsible for exporting logs or setting up drivers to their own internal systems.
 
 ### Can I export a list of all users with their assigned roles and privileges and if so, in what format?
 
@@ -84,4 +84,4 @@ Extensions are not covered as part of Docker’s Third-Party Risk Management Pro
 
 ### Can I disable private repos in my organization via a setting to make sure nobody is pushing images into Docker Hub?
 
-No. With [Registry Access Management](/manuals/security/for-admins/hardened-desktop/registry-access-management.md) (RAM), administrators can ensure that their developers using Docker Desktop only access allowed registries. This is done through the Registry Access Management dashboard on Docker Hub.
+No. With [Registry Access Management](/manuals/security/for-admins/hardened-desktop/registry-access-management.md) (RAM), administrators can ensure that their developers using Docker Desktop only access allowed registries. This is done through the Registry Access Management dashboard in the Admin Console.

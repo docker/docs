@@ -1,7 +1,7 @@
 ---
 description: Single sign-on enforcement FAQs
 keywords: Docker, Docker Hub, SSO FAQs, single sign-on, enforce SSO, SSO enforcement
-title: FAQs on SSO and enforcement
+title: Enforcement
 tags: [FAQ]
 aliases:
 - /single-sign-on/enforcement-faqs/
