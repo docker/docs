@@ -114,7 +114,7 @@ After signing in to your Docker Account, enable the Docker AI feature:
    terms before you can enable the feature. Review the terms and select **Accept
    and enable** to continue.
 
-4. Select **Apply & restart**.
+8. Select **Apply & restart**.
 
 ## Using Ask Gordon
 
