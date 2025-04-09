@@ -76,6 +76,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 #### For Windows
 
 - Switching to Windows Containers while the privileged helper error message is displayed could cause inconsistent state. As a workaround, quit Docker Desktop, change `UseWindowsContainers` to `false` in `settings-store.json` and restart Docker Desktop.
+- After installation, `Docker Desktop.exe` does not contain the latest version information.
 
 ## 4.39.0
 
