@@ -3,7 +3,7 @@ description: Dev Environments
 keywords: Dev Environments, share, local, Compose
 title: Overview of Dev Environments
 linkTitle: Dev Environments 
-weight: 40
+weight: 130
 aliases:
 - /desktop/dev-environments/
 params:

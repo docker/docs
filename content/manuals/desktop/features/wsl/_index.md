@@ -5,7 +5,7 @@ keywords: wsl, wsl2, installing wsl2, wsl installation, docker wsl2, wsl docker,
   tech preview, wsl install docker, install docker wsl, how to install docker in wsl
 title: Docker Desktop WSL 2 backend on Windows
 linkTitle: WSL
-weight: 90
+weight: 120
 aliases:
 - /docker-for-windows/wsl/
 - /docker-for-windows/wsl-tech-preview/
