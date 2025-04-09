@@ -526,7 +526,7 @@ store data in the cloud, without changing the application logic.
 
 When you create a volume using `docker volume create`, or when you start a
 container which uses a not-yet-created volume, you can specify a volume driver.
-The following examples use the `rclone` volume driver, first when creating
+The following examples use the `rclone/docker-volume-rclone` volume driver, first when creating
 a standalone volume, and then when starting a container which creates a new
 volume.
 
@@ -561,15 +561,20 @@ $ docker plugin install --grant-all-permissions rclone/docker-volume-rclone --al
 ### Create a volume using a volume driver
 
 This example specifies an SSH password using a custom `rclone.conf` file, but if the two hosts have shared keys
-configured, you can exclude the password. Each volume driver may have zero or more
+configured, you can exclude the password. 
+
+This example mounts the `/remote` directory on host `1.2.3.4` into a
+volume named `rclonevolume`. Each volume driver may have zero or more
 configurable options, you specify each of them using an `-o` flag.
 
 ```console
-$ docker volume create --driver rclone \
-  -o remote=remotehost:home/test \
-  -o prclone_config="$(cat /path/to/rclone.conf)" \
-  rclonevolume
+$ docker volume create \
+  -d rclone \
+  --name rclonevolume \
+  -o type=sftp -o path=remote -o sftp-host=1.2.3.4 -o sftp-user=user
 ```
+
+This volume can now be mounted into containers.
 
 ### Start a container which creates a volume using a volume driver
 
