@@ -560,9 +560,6 @@ $ docker plugin install --grant-all-permissions rclone/docker-volume-rclone --al
 
 ### Create a volume using a volume driver
 
-This example specifies an SSH password using a custom `rclone.conf` file, but if the two hosts have shared keys
-configured, you can exclude the password. 
-
 This example mounts the `/remote` directory on host `1.2.3.4` into a
 volume named `rclonevolume`. Each volume driver may have zero or more
 configurable options, you specify each of them using an `-o` flag.
@@ -571,16 +568,15 @@ configurable options, you specify each of them using an `-o` flag.
 $ docker volume create \
   -d rclone \
   --name rclonevolume \
-  -o type=sftp -o path=remote -o sftp-host=1.2.3.4 -o sftp-user=user
+  -o type=sftp 
+  -o path=remote 
+  -o sftp-host=1.2.3.4 
+  -o sftp-user=user
 ```
 
 This volume can now be mounted into containers.
 
 ### Start a container which creates a volume using a volume driver
-
-The following example specifies an SSH password. However, if the two hosts have
-shared keys configured, you can exclude the password.
-Each volume driver may have zero or more configurable options.
 
 > [!NOTE]
 >
@@ -590,7 +586,7 @@ Each volume driver may have zero or more configurable options.
 ```console
 $ docker run -d \
   --name rclone-container \
-  --mount type=volume,volume-driver=rclone,src=rclonevolume,target=/app,volume-opt=remote=remotehost:home/test,volume-opt=rclone_config=$(cat /path/to/rclone.conf) \
+  --mount type=volume,volume-driver=rclone,src=rclonevolume,target=/app,volume-opt=type=sftp,volume-opt=path=remote, volume-opt=sftp-host=1.2.3.4,volume-opt=sftp-user=user \
   nginx:latest
 ```
 
