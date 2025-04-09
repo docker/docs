@@ -50,7 +50,7 @@ This opens the Desktop settings reporting page. From here you can:
 
 1. Sign in to the [Admin Console](https://app.docker.com/admin).
 2. Select your organization or company from the **Choose profile** page.
-3. Under Docker Desktop, select **Reporting**. By default, non-compliant users
+3. Under **Docker Desktop**, select **Reporting**. By default, non-compliant users
 are displayed.
 4. Optional. Select the **Hide compliant users** checkbox to show both compliant
 and non-compliant users.
