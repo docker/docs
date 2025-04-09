@@ -35,6 +35,16 @@ target "release" {
   provenance = false
 }
 
+target "nginx" {
+  args = {
+    HUGO_ENV = "production"
+    DOCS_URL = "/"
+  }
+  target = "nginx"
+  provenance = false
+  tags = ["docker/docs:latest"]
+}
+
 group "validate" {
   targets = ["lint", "test", "unused-media", "test-go-redirects", "dockerfile-lint", "path-warnings"]
 }
