@@ -568,10 +568,10 @@ configurable options, you specify each of them using an `-o` flag.
 $ docker volume create \
   -d rclone \
   --name rclonevolume \
-  -o type=sftp 
-  -o path=remote 
-  -o sftp-host=1.2.3.4 
-  -o sftp-user=user
+  -o type=sftp \
+  -o path=remote \
+  -o sftp-host=1.2.3.4 \
+  -o sftp-user=user \
   -o "sftp-password=$(cat file_containing_password_for_remote_host)"
 ```
 
