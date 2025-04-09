@@ -155,7 +155,7 @@ able to help you get set up:
 2. Open the **Images** view in Docker Desktop and select the image.
 3. Select the **Run** button.
 
-In the **Run a new containe** dialog, you should see a message about
+In the **Run a new container** dialog, you should see a message about
 **Ask Gordon**.
 
 ![Ask Gordon hint in Docker Desktop](../../images/gordon-run-ctr.png)
