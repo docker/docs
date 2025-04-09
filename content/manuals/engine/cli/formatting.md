@@ -98,7 +98,7 @@ $ docker inspect --format "{{upper .Name}}" container
 $ docker image list --format '{{pad .Repository 5 10}}'
 ```
 
-This example will add 5 spaces before the image repository name and 10 spaces after.
+This example adds 5 spaces before the image repository name and 10 spaces after.
 
 ## truncate
 
@@ -108,7 +108,7 @@ This example will add 5 spaces before the image repository name and 10 spaces af
 $ docker image list --format '{{truncate .Repository 15}}'
 ```
 
-This example will display the image repository name, truncating it to the first 15 characters if it's longer.
+This example displays the image repository name, truncating it to the first 15 characters if it's longer.
 
 ## println
 
