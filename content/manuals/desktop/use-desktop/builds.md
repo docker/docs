@@ -15,9 +15,10 @@ the Builds view also lists any active or completed cloud builds by other team me
 connected to the same cloud builder.
 
 > [!NOTE]
-> When building Windows container images using the `docker build` command, the legacy builder is used which does not populate the **Builds** view. To switch to using the BuildKit engine, you can:
-- Set `DOCKER_BUILDKIT=1` in the build command, such as `DOCKER_BUILDKIT=1 docker build .` or
-- Use the `docker buildx build` command
+>
+> When building Windows container images using the `docker build` command, the legacy builder is used which does not populate the **Builds** view. To switch to using BuildKit, you can either:
+> - Set `DOCKER_BUILDKIT=1` in the build command, such as `DOCKER_BUILDKIT=1 docker build .` or
+> - Use the `docker buildx build` command
 
 ## Show build list
 
