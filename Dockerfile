@@ -149,3 +149,7 @@ EOT
 FROM scratch AS release
 COPY --from=build /project/public /
 COPY --from=pagefind /pagefind /pagefind
+
+# nginx is an image containing release compiled assets for static serving
+FROM nginx AS nginx
+COPY --from=release / /usr/share/nginx/html
