@@ -1,7 +1,7 @@
 ---
 title: Using USB/IP with Docker Desktop
 linkTitle: USB/IP support
-weight: 80
+weight: 50
 description: How to use USB/IP in Docker Desktop
 keywords: usb, usbip, docker desktop, macos, windows, linux
 toc_max: 3

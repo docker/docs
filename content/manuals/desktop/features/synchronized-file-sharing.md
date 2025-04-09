@@ -1,6 +1,6 @@
 ---
 title: Synchronized file shares
-weight: 50
+weight: 70
 description: Get started with Synchronized file shares on Docker Desktop.
 keyword: mutagen, file sharing, docker desktop, bind mounts
 aliases:
@@ -40,7 +40,7 @@ After creating a file share instance, any container using a bind mount that poin
 To create a file share instance:
 1. Sign in to Docker Desktop.
 2. In **Settings**, navigate to the **File sharing** tab within the **Resources** section. 
-3. In the **Synchronized File Shares** section, select the **Create share** icon.
+3. In the **Synchronized file shares** section, select **Create share**.
 4. Select a host folder to share. The synchronized file share should initialize and be usable.
 
 File shares take a few seconds to initialize as files are copied into the Docker Desktop VM. During this time, the status indicator displays **Preparing**. There is also a status icon in the footer of the Docker Desktop Dashboard that keeps you updated.
@@ -53,7 +53,7 @@ When the status indicator displays **Watching for filesystem changes**, your fil
 
 > [!TIP]
 >
-> Compose can now automatically create file shares for bind mounts. 
+> Docker Compose can automatically create file shares for bind mounts. 
 > Ensure you're signed in to Docker with a paid subscription and have enabled both **Access experimental features** and **Manage Synchronized file shares with Compose** in Docker Desktop's settings.
 
 ## Explore your file share instance
@@ -93,11 +93,3 @@ In general, use your `.syncignore` file to exclude items that aren't critical to
 - POSIX-style Windows paths are not supported. Avoid setting the [`COMPOSE_CONVERT_WINDOWS_PATHS`](/manuals/compose/how-tos/environment-variables/envvars.md#compose_convert_windows_paths) environment variable in Docker Compose.
 
 - If you don't have the correct permissions to create symbolic links and your container attempts to create symbolic links in your file share instance, an **unable to create symbolic link** error message displays. For Windows users, see Microsoft's [Create symbolic links documentation](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/create-symbolic-links) for best practices and location of the **Create symbolic links** security policy setting. For Mac and Linux users, check that you have write permissions on the folder.
-
-## Feedback and support
-
-To give feedback or report bugs, visit:
-
-- [Docker Desktop for Mac issues on GitHub](https://github.com/docker/for-mac/issues)
-- [Docker Desktop for Windows issues on GitHub](https://github.com/docker/for-win/issues)
-- [Docker Desktop for Linux issues on GitHub](https://github.com/docker/desktop-linux/issues)
