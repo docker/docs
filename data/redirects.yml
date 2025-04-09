@@ -288,3 +288,9 @@
   - /go/insights-images/
 "/admin/organization/insights/#extensions":
   - /go/insights-extensions/
+
+# Billing - cancellation
+"/subscription/desktop-license/":
+  - /go/desktop-license/
+"/docker-hub/usage/pulls/":
+  - /go/hub-pull-limits/

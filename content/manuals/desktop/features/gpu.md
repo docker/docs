@@ -1,7 +1,7 @@
 ---
-title: GPU support in Docker Desktop
+title: GPU support in Docker Desktop for Windows
 linkTitle: GPU support
-weight: 80
+weight: 40
 description: How to use GPU in Docker Desktop
 keywords: gpu, gpu support, nvidia, wsl2, docker desktop, windows
 toc_max: 3
@@ -13,22 +13,27 @@ aliases:
 >
 > Currently GPU support in Docker Desktop is only available on Windows with the WSL2 backend.
 
-## Using NVIDIA GPUs with WSL2
+Docker Desktop for Windows supports NVIDIA GPU Paravirtualization (GPU-PV) on NVIDIA GPUs, allowing containers to access GPU resources for compute-intensive workloads like AI, machine learning, or video processing.
 
-Docker Desktop for Windows supports WSL 2 GPU Paravirtualization (GPU-PV) on NVIDIA GPUs. To enable WSL 2 GPU Paravirtualization, you need:
+## Prerequisites
 
-- A machine with an NVIDIA GPU
+To enable WSL 2 GPU Paravirtualization, you need:
+
+- A Windows machine with an NVIDIA GPU
 - Up to date Windows 10 or Windows 11 installation
 - [Up to date drivers](https://developer.nvidia.com/cuda/wsl) from NVIDIA supporting WSL 2 GPU Paravirtualization
 - The latest version of the WSL 2 Linux kernel. Use `wsl --update` on the command line
 - To make sure the [WSL 2 backend is turned on](wsl/_index.md#turn-on-docker-desktop-wsl-2) in Docker Desktop
 
-To validate that everything works as expected, execute a `docker run` command with the `--gpus=all` flag. For example, the following will run a short benchmark on your GPU:
+## Validate GPU support
+
+To confirm GPU access is working inside Docker, run the following:
 
 ```console
 $ docker run --rm -it --gpus=all nvcr.io/nvidia/k8s/cuda-sample:nbody nbody -gpu -benchmark
 ```
-The output will be similar to:
+
+This runs an n-body simulation benchmark on the GPU. The output will be similar to:
 
 ```console
 Run "nbody -benchmark [-numbodies=<numBodies>]" to measure performance.
@@ -58,9 +63,16 @@ GPU Device 0: "GeForce RTX 2060 with Max-Q Design" with compute capability 7.5
 = 2724.379 single-precision GFLOP/s at 20 flops per interaction
 ```
 
-Or if you wanted to try something more useful you could use the official [Ollama image](https://hub.docker.com/r/ollama/ollama) to run the Llama2 large language model.
+## Run a real-world model: Llama2 with Ollama
+
+Use the [official Ollama image](https://hub.docker.com/r/ollama/ollama) to run the Llama2 LLM with GPU acceleration:
 
 ```console
 $ docker run --gpus=all -d -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
+```
+
+Then start the model:
+
+```console
 $ docker exec -it ollama ollama run llama2
 ```

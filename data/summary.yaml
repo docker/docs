@@ -206,18 +206,18 @@ Registry access management:
   subscription: [Business]
   for: Administrators
 SOCKS5 proxy support:
-  requires: Docker Desktop [4.28.0](/manuals/desktop/release-notes.md#4280) and later
+  subscription: [Business]
 SSO:
   subscription: [Business]
   for: Administrators
 Synchronized file sharing:
   subscription: [Pro, Team, Business]
-  requires: Docker Desktop [4.27](/manuals/desktop/release-notes.md#4270) and later
 USB/IP support:
   requires: Docker Desktop [4.35.0](/manuals/desktop/release-notes.md#4350) and later
+  for: Docker Desktop for Mac, Linux, and Windows with the Hyper-V backend
 VMM:
-  availability: Beta
   requires: Docker Desktop [4.35.0](/manuals/desktop/release-notes.md#4350) and later
+  for: Docker Desktop on Mac with Apple Silicon
 Wasm workloads:
   availability: Beta
 Wasmtime:

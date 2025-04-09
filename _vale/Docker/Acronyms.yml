@@ -78,6 +78,7 @@ exceptions:
   - KDE
   - LESS
   - LLDB
+  - LLM
   - LTS
   - MAC
   - MATE

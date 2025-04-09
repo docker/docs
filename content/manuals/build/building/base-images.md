@@ -22,9 +22,8 @@ For most cases, you don't need to create your own base image. Docker Hub
 contains a vast library of Docker images that are suitable for use as a base
 image in your build. [Docker Official
 Images](../../docker-hub/image-library/trusted-content.md#docker-official-images)
-are specifically designed as a set of hardened, battle-tested images that
-support a wide variety of platforms, languages, and frameworks. There are also
-[Docker Verified
+have clear documentation, promote best practices, and are regularly updated
+There are also [Docker Verified
 Publisher](../../docker-hub/image-library/trusted-content.md#verified-publisher-images)
 images, created by trusted publishing partners, verified by Docker.
 

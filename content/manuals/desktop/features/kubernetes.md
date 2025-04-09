@@ -20,7 +20,7 @@ Kubernetes on Docker Desktop runs alongside other workloads, including Swarm ser
 
 ## What happens when I enable Kubernetes in Docker Desktop?
 
-When you enable Kubernetes in Docker Desktop, the following actions are triggered in the Docker Desktop backend and VM:
+The following actions are triggered in the Docker Desktop backend and VM:
 
 - Generation of certificates and cluster configuration
 - Download and installation of Kubernetes internal components

@@ -20,9 +20,9 @@ organization for configurations to take effect.
 
 ## Create a settings policy
 
-1. Within the [Docker Admin Console](https://admin.docker.com/) navigate to the company or organization you want to define a settings policy for.
-2. Under the **Security and access** section, select **Desktop Settings Management**.
-3. In the top-right corner, select **Create a settings policy**.
+1. Within the [Docker Admin Console](https://app.docker.com/admin) navigate to the company or organization you want to define a settings policy for.
+2. Under the **Docker Desktop** section, select **Settings Management**.
+3. Select **Create a settings policy**.
 4. Give your settings policy a name and an optional description.
 
    > [!TIP]
@@ -68,7 +68,8 @@ If your settings policy needs to be rolled back, either delete the policy or edi
 
 ## Settings policy actions
 
-From the **Actions** menu on the **Desktop Settings Management** page in the Docker Admin Console, you can:
+From the **Actions** menu on the **Settings Management** page in the Docker Admin Console, you can:
+
 - Edit or delete an existing settings policy.
 - Export a settings policy as an `admin-settings.json` file.
 - Promote a policy that is applied to a select group of users, to be the new global default policy for all users.
