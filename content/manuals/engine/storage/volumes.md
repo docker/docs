@@ -572,6 +572,7 @@ $ docker volume create \
   -o path=remote 
   -o sftp-host=1.2.3.4 
   -o sftp-user=user
+  -o "sftp-password=$(cat file_containing_password_for_remote_host)"
 ```
 
 This volume can now be mounted into containers.
@@ -586,7 +587,7 @@ This volume can now be mounted into containers.
 ```console
 $ docker run -d \
   --name rclone-container \
-  --mount type=volume,volume-driver=rclone,src=rclonevolume,target=/app,volume-opt=type=sftp,volume-opt=path=remote, volume-opt=sftp-host=1.2.3.4,volume-opt=sftp-user=user \
+  --mount type=volume,volume-driver=rclone,src=rclonevolume,target=/app,volume-opt=type=sftp,volume-opt=path=remote, volume-opt=sftp-host=1.2.3.4,volume-opt=sftp-user=user,volume-opt=-o "sftp-password=$(cat file_containing_password_for_remote_host)" \
   nginx:latest
 ```
 
