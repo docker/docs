@@ -1,6 +1,6 @@
 ---
 title: Synchronized file shares
-weight: 30
+weight: 50
 description: Get started with Synchronized file shares on Docker Desktop.
 keyword: mutagen, file sharing, docker desktop, bind mounts
 aliases:

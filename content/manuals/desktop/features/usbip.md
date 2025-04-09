@@ -1,7 +1,7 @@
 ---
 title: Using USB/IP with Docker Desktop
 linkTitle: USB/IP support
-weight: 100
+weight: 80
 description: How to use USB/IP in Docker Desktop
 keywords: usb, usbip, docker desktop, macos, windows, linux
 toc_max: 3
@@ -11,15 +11,11 @@ aliases:
 
 {{< summary-bar feature_name="USB/IP support" >}}
 
-> [!NOTE]
->
-> Available on Docker Desktop for Mac, Linux, and Windows with the Hyper-V backend.
-
 USB/IP enables you to share USB devices over the network, which can then be accessed from within Docker containers. This page focuses on sharing USB devices connected to the machine you run Docker Desktop on. You can repeat the following process to attach and use additional USB devices as needed.
 
 > [!NOTE]
 >
-> The Docker Desktop VM kernel image comes pre-configured with drivers for many common USB devices, but Docker can't guarantee every possible USB device will work with this setup.
+> Docker Desktop includes built-in drivers for many common USB devices but Docker can't guarantee every possible USB device works with this setup.
 
 ## Setup and use
 
@@ -48,6 +44,8 @@ To attach the USB device, start a privileged Docker container with the PID names
 $ docker run --rm -it --privileged --pid=host alpine
 ```
 
+`--privileged` gives the container full access to the host, and `--pid=host` allows it to share the host’s process namespace.
+
 ### Step three: Enter the mount namespace of PID 1
 
 Inside the container, enter the mount namespace of the `init` process to gain access to the pre-installed USB/IP tools:
@@ -56,7 +54,7 @@ Inside the container, enter the mount namespace of the `init` process to gain ac
 $ nsenter -t 1 -m
 ```
 
-### Step four: Use USB/IP tools
+### Step four: Use the USB/IP tools
 
 Now you can use the USB/IP tools as you would on any other system:
 
@@ -102,7 +100,7 @@ Example output:
 event0  mice
 ```
 
-### Step five: Use the attached device in another container
+### Step five: Access the device from another container
 
 While the initial container remains running to keep the USB device operational, you can access the attached device from another container. For example:
 
