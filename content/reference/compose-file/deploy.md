@@ -254,11 +254,10 @@ deploy:
   - `on-failure`, the container is restarted if it exits due to an error, which manifests as a non-zero exit code.
   - `any` (default), containers are restarted regardless of the exit status. 
 - `delay`: How long to wait between restart attempts, specified as a [duration](extension.md#specifying-durations). The default is 0, meaning restart attempts can occur immediately.
-- `max_attempts`: How many times to attempt to restart a container before giving up (default: never give up). If the restart does not
-  succeed within the configured `window`, this attempt doesn't count toward the configured `max_attempts` value.
-  For example, if `max_attempts` is set to '2', and the restart fails on the first attempt, more than two restarts must be attempted.
-- `window`: How long to wait before deciding if a restart has succeeded, specified as a [duration](extension.md#specifying-durations) (default:
-  decide immediately).
+- `max_attempts`: The maximum number of failed restart attempts allowed before giving up. (Default: unlimited retries.)
+A failed attempt only counts toward `max_attempts` if the container does not successfully restart within the time defined by `window`.
+For example, if `max_attempts` is set to `2` and the container fails to restart within the window on the first try, the system will continue retrying until two such failed attempts occur, even if that means trying more than twice.
+- `window`: The amount of time to wait after a restart to determine whether it was successful, specified as a [duration](extension.md#specifying-durations) (default: the result is evaluated immediately after the restart).
 
 ```yml
 deploy:
