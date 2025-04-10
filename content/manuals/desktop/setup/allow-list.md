@@ -19,7 +19,6 @@ This page contains the domain URLs that you need to add to a firewall allowlist 
 | ------------------------------------------------------------------------------------ | -------------------------------------------- |
 | https://api.segment.io                                                               | Analytics                                    |
 | https://cdn.segment.com                                                              | Analytics                                    |
-| https://experiments.docker.com                                                       | A/B testing                                  |
 | https://notify.bugsnag.com                                                           | Error reports                                |
 | https://sessions.bugsnag.com                                                         | Error reports                                |
 | https://auth.docker.io                                                               | Authentication                               |
