@@ -20,12 +20,12 @@ For more detailed information, see the [release notes in the Compose repo](https
 ### Bug fixes and enhancements
 
 - Added support for Docker Model Runner to easily integrate AI models into your Compose applications
-- Added `build --print` command to help debug complex build configurations by showing the equivalent bakefile
-- Added `volume.type=image` to provide more flexible volume management from container images
+- Added `build --print` command to help debug complex build configurations by showing the equivalent bake file
+- Added `volume.type=image` to provide more flexible volume management for container images
 - Added `--quiet` options to the `run` command for cleaner output when running containers
 - Added `config --no-env-resolution` option to view raw configuration without environment variable substitution
 - Fixed behavior of `depends_on` to prevent unnecessary container recreation when dependencies change
-- Fixed support for secrets defined by environment variables when using the `include` directive
+- Fixed support for secrets defined by environment variables when using `include`
 - Fixed volume mount handling to ensure bind mounts work correctly in all scenarios
 
 ### Update
