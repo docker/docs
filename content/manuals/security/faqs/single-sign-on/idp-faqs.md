@@ -1,7 +1,8 @@
 ---
 description: Single sign-on IdP FAQs
 keywords: Docker, Docker Hub, SSO FAQs, single sign-on, IdP
-title: Identity providers
+title: FAQs for SSO and identity providers
+linkTitle: Identity providers
 tags: [FAQ]
 aliases:
 - /single-sign-on/idp-faqs/

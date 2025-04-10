@@ -1,4 +1,4 @@
-> [!WARNING]
+> [!IMPORTANT]
 >
 > Organization management is moving to the Admin Console.
 >
