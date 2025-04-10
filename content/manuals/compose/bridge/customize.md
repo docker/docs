@@ -133,8 +133,8 @@ metadata:
 spec:
   rules:  
 {{ range $name, $service := .services }}
-{{ if $service.x-virtual-host }}
-  - host: ${{ $service.x-virtual-host }}
+{{ range index $service "x-virtual-host" }}
+  - host: ${{ . }}
     http:
       paths:
       - path: "/"
