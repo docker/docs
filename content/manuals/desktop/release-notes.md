@@ -57,7 +57,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Fixed a race condition that prevented Docker Desktop Kubernetes from starting in some scenarios.
 - Improved the way ECI collects image digest info from a repository in environments where proxies are configured.
 - Users can now to specify a timeout when generating  a private Extension Marketplace using the new `--timeout` flag.
-- Removed unused internal helper tool `com.docker.admin`.
+- Removed unused internal helper tool `com.docker.admin` for Mac and Linux.
 
 #### For Mac
 
