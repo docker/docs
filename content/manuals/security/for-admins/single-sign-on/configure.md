@@ -31,6 +31,8 @@ Get started creating a single sign-on (SSO) connection for your organization or 
 {{< /tab >}}
 {{< tab name="Docker Hub" >}}
 
+{{% include "hub-org-management.md" %}}
+
 1. Sign in to [Docker Hub](https://hub.docker.com/).
 2. Select **My Hub** and then your organization from the list.
 3. On your organization page, select **Settings** and then **Security**.
@@ -53,6 +55,8 @@ Verifying your domain ensures Docker knows you own it. Domain verification is do
 
 {{< /tab >}}
 {{< tab name="Docker Hub" >}}
+
+{{% include "hub-org-management.md" %}}
 
 1. Navigate to your domain host, create a new TXT record, and paste the **TXT Record Value** from Docker.
 2. TXT Record Verification can take 72 hours. Once you have waited for TXT record verification, return to the **Security** page of Docker Hub and select **Verify** next to your domain name.

@@ -35,9 +35,9 @@ aliases:
 - /docker-hub/admin-overview
 ---
 
-Administrators can manage companies and organizations using the Docker Admin Console, or manage organizations in Docker Hub.
+Administrators can manage companies and organizations using the Docker Admin Console.
 
-The Docker Admin Console is available for customers with a Docker Business subscription. The [Docker Admin Console](https://admin.docker.com) provides administrators with centralized observability, access management, and controls for their company and organizations. To provide these features, Docker uses the following hierarchy and roles.
+The [Docker Admin Console](https://admin.docker.com) provides administrators with centralized observability, access management, and controls for their company and organizations. To provide these features, Docker uses the following hierarchy and roles.
 
 ![Docker hierarchy](./images/docker-admin-structure.webp)
 
