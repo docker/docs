@@ -54,7 +54,7 @@ Consider the following effects of converting your account:
 
 1. Ensure you have removed your user account from any company or teams or organizations. Also make sure that you have a new Docker ID before you convert an account. See the [Prerequisites](#prerequisites) section for details.
 
-2. Sign in to your [Docker account](https://app.docker.com/login).
+2. Sign in to [Docker Home](https://app.docker.com/login).
 
 3. In Docker Home, select your avatar in the top-right corner to open the drop-down.
 
