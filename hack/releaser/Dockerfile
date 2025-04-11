@@ -8,10 +8,6 @@ FROM golang:${GO_VERSION}-alpine AS base
 RUN apk add --no-cache openssl
 ENV CGO_ENABLED=0
 WORKDIR /src
-RUN --mount=type=cache,target=/go/pkg/mod \
-  --mount=type=bind,source=go.mod,target=go.mod \
-  --mount=type=bind,source=go.sum,target=go.sum \
-  go mod download
 
 FROM base AS releaser
 RUN --mount=type=bind,target=. \
