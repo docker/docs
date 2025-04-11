@@ -932,12 +932,6 @@ paths:
       - $ref: "#/components/parameters/namespace"
       - $ref: "#/components/parameters/repository"
       - $ref: "#/components/parameters/group_id"
-      - in: path
-        name: group_id
-        required: true
-        schema:
-          type: string
-        description: ID of the group to remove from repository access
     delete:
       summary: Remove a group (Team) from repository access
       description: |
