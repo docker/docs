@@ -2059,7 +2059,7 @@ expressed in the short form.
   - `size`: The size for the tmpfs mount in bytes (either numeric or as bytes unit).
   - `mode`: The file mode for the tmpfs mount as Unix permission bits as an octal number. Introduced in Docker Compose version [2.14.0](/manuals/compose/releases/release-notes.md#2260).
 - `image`: Configures additional image options:
-  - `subpath`: Path inside the source image to mount instead of the image root. Available in [Docker Compose version 2.35.0](/manuals/compose/releases/release-notes/#2350)
+  - `subpath`: Path inside the source image to mount instead of the image root. Available in [Docker Compose version 2.35.0](/manuals/compose/releases/release-notes.md#2350)
 - `consistency`: The consistency requirements of the mount. Available values are platform specific.
 
 > [!TIP]
