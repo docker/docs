@@ -31,6 +31,8 @@ Get started creating a single sign-on (SSO) connection for your organization or 
 {{< /tab >}}
 {{< tab name="Docker Hub" >}}
 
+{{% include "hub-org-management.md" %}}
+
 1. Sign in to [Docker Hub](https://hub.docker.com/).
 2. Select **My Hub** and then your organization from the list.
 3. On your organization page, select **Settings** and then **Security**.

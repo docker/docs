@@ -24,14 +24,16 @@ You first need to [enforce sign-in](/manuals/security/for-admins/enforce-sign-in
 ## Configure
 
 {{< tabs >}}
-{{< tab name="Docker Hub" >}}
-
-{{% admin-image-access product="hub" %}}
-
-{{< /tab >}}
 {{< tab name="Admin Console" >}}
 
 {{% admin-image-access product="admin" %}}
+
+{{< /tab >}}
+{{< tab name="Docker Hub" >}}
+
+{{% include "hub-org-management.md" %}}
+
+{{% admin-image-access product="hub" %}}
 
 {{< /tab >}}
 {{< /tabs >}}
