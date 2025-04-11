@@ -526,7 +526,7 @@ store data in the cloud, without changing the application logic.
 
 When you create a volume using `docker volume create`, or when you start a
 container which uses a not-yet-created volume, you can specify a volume driver.
-The following examples use the `vieux/sshfs` volume driver, first when creating
+The following examples use the `rclone/docker-volume-rclone` volume driver, first when creating
 a standalone volume, and then when starting a container which creates a new
 volume.
 
@@ -555,27 +555,29 @@ host and can connect to the second node using SSH.
 On the Docker host, install the `vieux/sshfs` plugin:
 
 ```console
-$ docker plugin install --grant-all-permissions vieux/sshfs
+$ docker plugin install --grant-all-permissions rclone/docker-volume-rclone --aliases rclone
 ```
 
 ### Create a volume using a volume driver
 
-This example specifies an SSH password, but if the two hosts have shared keys
-configured, you can exclude the password. Each volume driver may have zero or more
+This example mounts the `/remote` directory on host `1.2.3.4` into a
+volume named `rclonevolume`. Each volume driver may have zero or more
 configurable options, you specify each of them using an `-o` flag.
 
 ```console
-$ docker volume create --driver vieux/sshfs \
-  -o sshcmd=test@node2:/home/test \
-  -o password=testpassword \
-  sshvolume
+$ docker volume create \
+  -d rclone \
+  --name rclonevolume \
+  -o type=sftp \
+  -o path=remote \
+  -o sftp-host=1.2.3.4 \
+  -o sftp-user=user \
+  -o "sftp-password=$(cat file_containing_password_for_remote_host)"
 ```
 
-### Start a container which creates a volume using a volume driver
+This volume can now be mounted into containers.
 
-The following example specifies an SSH password. However, if the two hosts have
-shared keys configured, you can exclude the password.
-Each volume driver may have zero or more configurable options.
+### Start a container which creates a volume using a volume driver
 
 > [!NOTE]
 >
@@ -584,8 +586,8 @@ Each volume driver may have zero or more configurable options.
 
 ```console
 $ docker run -d \
-  --name sshfs-container \
-  --mount type=volume,volume-driver=vieux/sshfs,src=sshvolume,target=/app,volume-opt=sshcmd=test@node2:/home/test,volume-opt=password=testpassword \
+  --name rclone-container \
+  --mount type=volume,volume-driver=rclone,src=rclonevolume,target=/app,volume-opt=type=sftp,volume-opt=path=remote, volume-opt=sftp-host=1.2.3.4,volume-opt=sftp-user=user,volume-opt=-o "sftp-password=$(cat file_containing_password_for_remote_host)" \
   nginx:latest
 ```
 
