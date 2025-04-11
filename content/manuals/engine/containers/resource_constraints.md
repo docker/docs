@@ -86,7 +86,6 @@ Most of these options take a positive integer, followed by a suffix of `b`, `k`,
 | `--memory-swap`\*      | The amount of memory this container is allowed to swap to disk. See [`--memory-swap` details](#--memory-swap-details).                                                                                                                                                                                                                                                                          |
 | `--memory-swappiness`  | By default, the host kernel can swap out a percentage of anonymous pages used by a container. You can set `--memory-swappiness` to a value between 0 and 100, to tune this percentage. See [`--memory-swappiness` details](#--memory-swappiness-details).                                                                                                                                       |
 | `--memory-reservation` | Allows you to specify a soft limit smaller than `--memory` which is activated when Docker detects contention or low memory on the host machine. If you use `--memory-reservation`, it must be set lower than `--memory` for it to take precedence. Because it is a soft limit, it doesn't guarantee that the container doesn't exceed the limit.                                                |
-| `--kernel-memory`      | The maximum amount of kernel memory the container can use. The minimum allowed value is `6m`. Because kernel memory can't be swapped out, a container which is starved of kernel memory may block host machine resources, which can have side effects on the host machine and on other containers. See [`--kernel-memory` details](#--kernel-memory-details).                                   |
 | `--oom-kill-disable`   | By default, if an out-of-memory (OOM) error occurs, the kernel kills processes in a container. To change this behavior, use the `--oom-kill-disable` option. Only disable the OOM killer on containers where you have also set the `-m/--memory` option. If the `-m` flag isn't set, the host can run out of memory and the kernel may need to kill the host system's processes to free memory. |
 
 For more information about cgroups and memory in general, see the documentation
@@ -138,34 +137,6 @@ of physical memory that can be used.
 - A value of 100 sets all anonymous pages as swappable.
 - By default, if you don't set `--memory-swappiness`, the value is
   inherited from the host machine.
-
-### `--kernel-memory` details
-
-Kernel memory limits are expressed in terms of the overall memory allocated to
-a container. Consider the following scenarios:
-
-- **Unlimited memory, unlimited kernel memory**: This is the default
-  behavior.
-- **Unlimited memory, limited kernel memory**: This is appropriate when the
-  amount of memory needed by all cgroups is greater than the amount of
-  memory that actually exists on the host machine. You can configure the
-  kernel memory to never go over what's available on the host machine,
-  and containers which need more memory need to wait for it.
-- **Limited memory, unlimited kernel memory**: The overall memory is
-  limited, but the kernel memory isn't.
-- **Limited memory, limited kernel memory**: Limiting both user and kernel
-  memory can be useful for debugging memory-related problems. If a container
-  is using an unexpected amount of either type of memory, it runs out
-  of memory without affecting other containers or the host machine. Within
-  this setting, if the kernel memory limit is lower than the user memory
-  limit, running out of kernel memory causes the container to experience
-  an OOM error. If the kernel memory limit is higher than the user memory
-  limit, the kernel limit doesn't cause the container to experience an OOM.
-
-When you enable kernel memory limits, the host machine tracks "high water mark"
-statistics on a per-process basis, so you can track which processes (in this
-case, containers) are using excess memory. This can be seen per process by
-viewing `/proc/<PID>/status` on the host machine.
 
 ## CPU
 
