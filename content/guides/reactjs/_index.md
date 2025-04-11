@@ -2,7 +2,7 @@
 title: React.js language-specific guide
 linkTitle: React.js
 description: Containerize and develop React.js apps using Docker
-keywords: getting started, React.js, react.js, docker, language, dockerfile
+keywords: getting started, React.js, react.js, docker, language, Dockerfile
 summary: |
   This guide explains how to containerize React.js applications using Docker.
 toc_min: 1
@@ -21,7 +21,7 @@ The React.js language-specific guide shows you how to containerize a React.js ap
 
 > 
 > **Acknowledgment**
-> Docker extends its sincere gratitude to [Krisityan Velkov](https://www.linkedin.com/in/kristiyan-velkov-763130b3/) for authoring this guide. As a Docker Captain and experienced Front-end engineer, his expertise in Docker, DevOps, and modern web development has made this resource invaluable for the community, helping developers navigate and optimize their Docker workflows.
+> Docker extends its sincere gratitude to [Kristiyan Velkov](https://www.linkedin.com/in/kristiyan-velkov-763130b3/) for authoring this guide. As a Docker Captain and experienced Front-end engineer, his expertise in Docker, DevOps, and modern web development has made this resource invaluable for the community, helping developers navigate and optimize their Docker workflows.
 
 ---
 
