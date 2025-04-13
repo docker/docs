@@ -55,7 +55,7 @@ Compose waits for healthchecks to pass on dependencies marked with `service_heal
 
 `restart: true` ensures that if `db` is updated or restarted due to an explicit Compose operation, for example `docker compose restart`, the `web` service is also restarted automatically, ensuring it re-establishes connections or dependencies correctly.
 
-The healthcheck for the `db` service uses the `pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}'` command to check if the PostgreSQL database is ready. The service is retried every 10 seconds, up to 5 times.
+The healthcheck for the `db` service uses the `pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}` command to check if the PostgreSQL database is ready. The service is retried every 10 seconds, up to 5 times.
 
 Compose also removes services in dependency order. `web` is removed before `db` and `redis`.
 
