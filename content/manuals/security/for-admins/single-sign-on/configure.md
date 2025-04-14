@@ -45,7 +45,7 @@ Get started creating a single sign-on (SSO) connection for your organization or 
 
 ## Step two: Verify your domain
 
-Verifying your domain ensures Docker knows you own it. To verify, you’ll add a TXT record to your Domain Name System (DNS) host using the value Docker provides. The TXT Record Value proves ownership, which signals the DNS to add this record. It can take up to 72 hours for DNS to recognize the change. When the change is reflected in DNS, Docker will automatically check the record to confirm your ownership.
+Verifying your domain ensures Docker knows you own it. To verify, you add a TXT record to your Domain Name System (DNS) host using the value Docker provides. The TXT Record Value proves ownership, which signals the DNS to add this record. It can take up to 72 hours for DNS to recognize the change. When the change is reflected in DNS, Docker automatically checks the record to confirm your ownership.
 
 Use the **TXT Record Value** provided by Docker and follow the steps based on your DNS host. If your provider isn't listed, use the instructions for other providers.
 
