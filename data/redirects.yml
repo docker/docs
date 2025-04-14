@@ -294,3 +294,8 @@
   - /go/desktop-license/
 "/docker-hub/usage/pulls/":
   - /go/hub-pull-limits/
+
+# Desktop DMR
+
+"/desktop/features/model-runner/":
+  - /go/model-runner/
