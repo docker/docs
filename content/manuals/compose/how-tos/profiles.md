@@ -111,8 +111,8 @@ services:
 # Only start backend and db
 $ docker compose up -d
 
-# This runs db-migrations (and,if necessary, start db)
-# by implicitly enabling the profiles `tools`
+# This runs db-migrations (and, if necessary, start db)
+# by implicitly enabling the profiles "tools"
 $ docker compose run db-migrations
 ```
 
@@ -150,7 +150,7 @@ services:
 $ docker compose up -d
 
 # Start mock-backend (and, if necessary, db)
-# by implicitly enabling profiles `dev`
+# by implicitly enabling profiles "dev"
 $ docker compose up -d mock-backend
 
 # This fails because profiles "dev" is not enabled

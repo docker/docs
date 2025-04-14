@@ -20,7 +20,7 @@ Docker Admin Console.
 
 Registry Access Management supports both cloud and on-prem registries. This
 feature operates at the DNS level and therefore is compatible with all
-egistries. You can add any hostname or domain name you’d like to include in the
+registries. You can add any hostname or domain name you’d like to include in the
 list of allowed registries. However, if the registry redirects to other domains
 such as `s3.amazon.com`, then you must add those domains to the list.
 
