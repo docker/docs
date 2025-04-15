@@ -252,12 +252,12 @@ The following `admin-settings.json` code and table provides an example of the re
 
 > [!NOTE]
 >
-> When using a custom image repository via the `imagesRepository` setting, and if Enhanced Container Isolation (ECI) is enabled, add the following images to the [ECI Docker socket mount image list](#enhanced-container-isolation):
+> When using the `imagesRepository` setting and Enhanced Container Isolation (ECI), add the following images to the [ECI Docker socket mount image list](#enhanced-container-isolation):
 >
 > `<custom-image-repo>/desktop-cloud-provider-kind:*`
 > `<custom-image-repo>/desktop-containerd-registry-mirror:*`
 >
-> The containers based on these images mount the Docker socket, so the images must be added to the ECI images list as otherwise ECI will block the mount and Kubernetes will fail to start.
+> These containers mount the Docker socket, so you must add the images to the ECI images list. If not, ECI will block the mount and Kubernetes won't start.
 
 ### Features in development
 
