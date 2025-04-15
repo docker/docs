@@ -9,7 +9,7 @@ aliases:
 This series of tutorials deals with networking for standalone Docker containers.
 For networking with swarm services, see
 [Networking with swarm services](/manuals/engine/network/tutorials/overlay.md). If you need to
-learn more about Docker networking in general, see the [overview](_index.md).
+learn more about Docker networking in general, see the [overview](/manuals/engine/network/_index.md).
 
 This topic includes two different tutorials. You can run each of them on
 Linux, Windows, or a Mac, but for the last one, you need a second Docker
