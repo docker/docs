@@ -494,7 +494,7 @@ $ docker run --rm \
   alpine mkdir -p /logs/app1 /logs/app2
 $ docker run -d \
   --name=app1 \
-  --mount src=logs,dst=/var/log/app1/,volume-subpath=app1 \
+  --mount src=logs,dst=/var/log/app1,volume-subpath=app1 \
   app1:latest
 $ docker run -d \
   --name=app2 \
