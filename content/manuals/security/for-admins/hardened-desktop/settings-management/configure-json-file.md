@@ -182,7 +182,7 @@ The following `admin-settings.json` code and table provides an example of the re
 }
 ```
 
-### General 
+### General
 
 |Parameter|OS|Description|Version|
 |:-------------------------------|---|:-------------------------------|---|
@@ -195,7 +195,7 @@ The following `admin-settings.json` code and table provides an example of the re
 | `desktopTerminalEnabled` |  | If `value` is set to `false`, developers cannot use the Docker terminal to interact with the host machine and execute commands directly from Docker Desktop. |  |
 |`exposeDockerAPIOnTCP2375`| Windows only| Exposes the Docker API on a specified port. If `value` is set to true, the Docker API is exposed on port 2375. Note: This is unauthenticated and should only be enabled if protected by suitable firewall rules.|  |
 
-### File sharing and emulation 
+### File sharing and emulation
 
 |Parameter|OS|Description|Version|
 |:-------------------------------|---|:-------------------------------|---|
@@ -241,7 +241,7 @@ The following `admin-settings.json` code and table provides an example of the re
 | &nbsp; &nbsp; &nbsp; &nbsp;`dockerDaemonOptions` |  | Overrides the options in the Linux daemon config file. See the [Docker Engine reference](/reference/cli/dockerd/#daemon-configuration-file).|  |
 
 > [!NOTE]
-> 
+>
 > This setting is not available to configure via the Docker Admin Console.
 
 ### Kubernetes
@@ -250,7 +250,16 @@ The following `admin-settings.json` code and table provides an example of the re
 |:-------------------------------|---|:-------------------------------|---|
 |`kubernetes`|  | If `enabled` is set to true, a Kubernetes single-node cluster is started when Docker Desktop starts. If `showSystemContainers` is set to true, Kubernetes containers are displayed in the Docker Desktop Dashboard and when you run `docker ps`.  `imagesRepository` lets you specify which repository Docker Desktop pulls the Kubernetes images from. For example, `"imagesRepository": "registry-1.docker.io/docker"`.  |  |
 
-### Features in development 
+> [!NOTE]
+>
+> When using a custom image repository via the `imagesRepository` setting, and if Enhanced Container Isolation (ECI) is enabled, add the following images to the [ECI Docker socket mount image list](#enhanced-container-isolation):
+>
+> `<custom-image-repo>/desktop-cloud-provider-kind:*`
+> `<custom-image-repo>/desktop-containerd-registry-mirror:*`
+>
+> The containers based on these images mount the Docker socket, so the images must be added to the ECI images list as otherwise ECI will block the mount and Kubernetes will fail to start.
+
+### Features in development
 
 |Parameter|OS|Description|Version|
 |:-------------------------------|---|:-------------------------------|---|
@@ -258,7 +267,7 @@ The following `admin-settings.json` code and table provides an example of the re
 | `allowBetaFeatures`| | If `value` is set to `false`, beta features are disabled.|  |
 | `enableDockerAI` | | If `value` is set to `false`, Docker AI (Ask Gordon) features are disabled. |  |
 
-### Enhanced Container Isolation 
+### Enhanced Container Isolation
 
 |Parameter|OS|Description|Version|
 |:-------------------------------|---|:-------------------------------|---|
