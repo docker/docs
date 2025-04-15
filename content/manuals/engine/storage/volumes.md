@@ -494,7 +494,7 @@ $ docker run --rm \
   alpine mkdir -p /logs/app1 /logs/app2
 $ docker run -d \
   --name=app1 \
-  --mount src=logs,dst=/var/log/app1/,volume-subpath=app1 \
+  --mount src=logs,dst=/var/log/app1,volume-subpath=app1 \
   app1:latest
 $ docker run -d \
   --name=app2 \
@@ -552,7 +552,7 @@ volume.
 The following example assumes that you have two nodes, the first of which is a Docker
 host and can connect to the second node using SSH.
 
-On the Docker host, install the `vieux/sshfs` plugin:
+On the Docker host, install the `rclone/docker-volume-rclone` plugin:
 
 ```console
 $ docker plugin install --grant-all-permissions rclone/docker-volume-rclone --aliases rclone

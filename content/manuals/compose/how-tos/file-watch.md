@@ -40,7 +40,7 @@ For example, in a Node.js project, it's not recommended to sync the `node_module
 
 The `watch` attribute defines a list of rules that control automatic service updates based on local file changes.
 
-Each rule requires, a `path` pattern and `action` to take when a modification is detected. There are two possible actions for `watch` and depending on
+Each rule requires a `path` pattern and `action` to take when a modification is detected. There are two possible actions for `watch` and depending on
 the `action`, additional fields might be accepted or required. 
 
 Watch mode can be used with many different languages and frameworks.
@@ -95,8 +95,8 @@ image rebuild (e.g. `package.json`).
 
 If `action` is set to `sync+restart`, Compose synchronizes your changes with the service containers and restarts it. 
 
-`sync+restart` is ideal when config file changes, and you don't need to rebuild the image but just restart the main process of the service containers. 
-It will work well when you update a database configuration or your `nginx.conf` file for example
+`sync+restart` is ideal when the config file changes, and you don't need to rebuild the image but just restart the main process of the service containers. 
+It will work well when you update a database configuration or your `nginx.conf` file, for example.
 
 >[!TIP]
 >
@@ -116,7 +116,7 @@ For `path: ./app/html` and a change to `./app/html/index.html`:
 
 ### `ignore`
 
-The `ignore` patterns are relative to the `path` defined in the current `watch` action, not to the project directory. In the following Example  1, the ignore path would be relative to the `./web` directory specified in the `path` attribute.
+The `ignore` patterns are relative to the `path` defined in the current `watch` action, not to the project directory. In the following Example 1, the ignore path would be relative to the `./web` directory specified in the `path` attribute.
 
 ## Example 1
 
