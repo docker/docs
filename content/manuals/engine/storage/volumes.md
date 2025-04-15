@@ -552,7 +552,7 @@ volume.
 The following example assumes that you have two nodes, the first of which is a Docker
 host and can connect to the second node using SSH.
 
-On the Docker host, install the `vieux/sshfs` plugin:
+On the Docker host, install the `rclone/docker-volume-rclone` plugin:
 
 ```console
 $ docker plugin install --grant-all-permissions rclone/docker-volume-rclone --aliases rclone
