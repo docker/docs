@@ -1,44 +1,24 @@
-command: docker buildx history ls
-short: List build records
-long: List build records
-usage: docker buildx history ls
+command: docker buildx history export
+short: Export a build into Docker Desktop bundle
+long: Export a build into Docker Desktop bundle
+usage: docker buildx history export [OPTIONS] [REF]
 pname: docker buildx history
 plink: docker_buildx_history.yaml
 options:
-    - option: filter
-      value_type: stringArray
-      default_value: '[]'
-      description: Provide filter values (e.g., `status=error`)
+    - option: all
+      value_type: bool
+      default_value: "false"
+      description: Export all records for the builder
       deprecated: false
       hidden: false
       experimental: false
       experimentalcli: false
       kubernetes: false
       swarm: false
-    - option: format
+    - option: output
+      shorthand: o
       value_type: string
-      default_value: table
-      description: Format the output
-      deprecated: false
-      hidden: false
-      experimental: false
-      experimentalcli: false
-      kubernetes: false
-      swarm: false
-    - option: local
-      value_type: bool
-      default_value: "false"
-      description: List records for current repository only
-      deprecated: false
-      hidden: false
-      experimental: false
-      experimentalcli: false
-      kubernetes: false
-      swarm: false
-    - option: no-trunc
-      value_type: bool
-      default_value: "false"
-      description: Don't truncate output
+      description: Output file path
       deprecated: false
       hidden: false
       experimental: false
