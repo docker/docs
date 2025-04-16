@@ -10,6 +10,54 @@ toc_max: 2
 This page contains information about the new features, improvements, and bug
 fixes in [Docker Buildx](https://github.com/docker/buildx).
 
+## 0.23.0
+
+{{< release-date date="2025-04-15" >}}
+
+The full release note for this release is available
+[on GitHub](https://github.com/docker/buildx/releases/tag/v0.23.0).
+
+### New
+
+- New `buildx history export` command allows exporting the build record into a bundle that can be imported to [Docker Desktop](/desktop/). [docker/buildx#3073](https://github.com/docker/buildx/pull/3073)
+
+### Enhancements
+
+- New `--local` and `--filter` flags allow filtering history records in `buildx history ls`. [docker/buildx#3091](https://github.com/docker/buildx/pull/3091)
+- Compose compatibility has been updated to v2.6.0. [docker/buildx#3080](https://github.com/docker/buildx/pull/3080), [docker/buildx#3105](https://github.com/docker/buildx/pull/3105)
+- Support CLI environment variables in standalone mode. [docker/buildx#3087](https://github.com/docker/buildx/pull/3087)
+
+### Bug fixes
+
+- Fix `--print` output for Bake producing output with unescaped variables that could cause build errors later. [docker/buildx#3097](https://github.com/docker/buildx/pull/3097)
+- Fix `additional_contexts` field not working correctly when pointing to another service. [docker/buildx#3090](https://github.com/docker/buildx/pull/3090)
+- Fix empty validation block crashing the Bake HCL parser. [docker/buildx#3101](https://github.com/docker/buildx/pull/3101)
+
+## 0.22.0
+
+{{< release-date date="2025-03-18" >}}
+
+The full release note for this release is available
+[on GitHub](https://github.com/docker/buildx/releases/tag/v0.22.0).
+
+### New
+
+- New command `buildx history import` lets you import build records into Docker Desktop for further debugging in the [Build UI](/desktop/use-desktop/builds/). This command requires [Docker Desktop](/desktop/) to be installed. [docker/buildx#3039](https://github.com/docker/buildx/pull/3039)
+
+### Enhancements
+
+- History records can now be opened by offset from the latest in `history inspect`, `history logs` and `history open` commands (e.g. `^1`). [docker/buildx#3049](https://github.com/docker/buildx/pull/3049), [docker/buildx#3055](https://github.com/docker/buildx/pull/3055)
+- Bake now supports the `+=` operator to append when using `--set` for overrides. [docker/buildx#3031](https://github.com/docker/buildx/pull/3031)
+- Docker container driver adds GPU devices to the container if available. [docker/buildx#3063](https://github.com/docker/buildx/pull/3063)
+- Annotations can now be set when using overrides with Bake. [docker/buildx#2997](https://github.com/docker/buildx/pull/2997)
+- NetBSD binaries are now included in the release. [docker/buildx#2901](https://github.com/docker/buildx/pull/2901)
+- The `inspect` and `create` commands now return an error if a node fails to boot. [docker/buildx#3062](https://github.com/docker/buildx/pull/3062)
+
+### Bug fixes
+
+- Fix double pushing with Docker driver when the containerd image store is enabled. [docker/buildx#3023](https://github.com/docker/buildx/pull/3023)
+- Fix multiple tags being pushed for `imagetools create` command. Now only the final manifest pushes by tag. [docker/buildx#3024](https://github.com/docker/buildx/pull/3024)
+
 ## 0.21.0
 
 {{< release-date date="2025-02-19" >}}
