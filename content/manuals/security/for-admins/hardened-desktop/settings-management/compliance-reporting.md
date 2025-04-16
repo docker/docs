@@ -59,6 +59,37 @@ and non-compliant users.
 7. Select a username to view more details about their compliance status, and for
 steps to resolve non-compliant users.
 
+## Understand compliance status
+
+Docker evaluates compliance status based on:
+
+- Compliance status: Whether a user has fetched and applied the latest settings.
+- Domain status: Whether the user's email matches a verified domain.
+- Settings status: Whether a settings package is applied to the user.
+
+The combination of these statuses determines what actions an administrator needs to take.
+
+### Compliance status reference
+
+Use the following table to understand how a user’s compliance status is
+determined based on their domain status and settings status. Each row represents
+a combination of statuses that may appear in the reporting dashboard.
+
+> [!TIP]
+>
+> If a combination is marked "Not possible" in the reference table,
+it means that Docker does not currently report that combination due to how
+compliance is evaluated. These are included here to help you interpret
+unexpected or unclear data.
+
+| Domain status   | Settings status     | Compliance: Unknown                                                                 | Compliance: Outdated                                                                                      | Compliance: Non-compliant                                                                                      | Compliance: Compliant                                            |
+|-----------------|---------------------|--------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------|
+| Unknown         | Unknown             | The user does not exist in the system, is inactive, or has never been a member of the organization. | The user was removed from the organization after fetching settings that are now outdated.                 | The user was removed from the organization after fetching valid settings.                                       | Not possible                                                     |
+| Uncontrolled    | Unknown             | The user’s email domain is not verified and the user has never fetched settings. May be a guest user or inactive. | The user was removed or changed their email after fetching outdated settings.                             | The user was removed or changed their email after fetching valid settings.                                      | Not possible                                                     |
+| Controlled      | Uncontrolled        | The user does not have a settings package assigned or applicable to them.            | The user is assigned to a settings package but has not fetched the latest version.                         | Not possible                                                                                                     | Not possible                                                     |
+| Controlled      | Controlled          | The user has not logged into Docker Desktop to fetch settings.                       | The user fetched an outdated version of the settings.                                                      | The user fetched the latest settings but has not applied them yet.                                              | The user has fetched and applied the latest settings.            |
+| Uncontrolled  | Controlled       | The user is associated with a verified settings policy, but their email domain is not verified. May be a guest user. | The user fetched outdated settings but their domain is still not verified. | The user fetched valid settings but their domain is not verified. | Not possible |
+
 ## Resolve compliance status
 
 To resolve compliance status, you must view a user's compliance status details
