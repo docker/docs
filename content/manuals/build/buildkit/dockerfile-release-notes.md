@@ -26,8 +26,8 @@ The full release note for this release is available
 
 - Build error for invalid target now shows suggestions for correct possible names. [moby/buildkit#5851](https://github.com/moby/buildkit/pull/5851)
 - Fix SBOM attestation producing error for Windows targets. [moby/buildkit#5837](https://github.com/moby/buildkit/pull/5837)
-- Fix recursive ARG producing an infinite loop when processing an outline request. [moby/buildkit#5823](https://github.com/moby/buildkit/pull/5823)
-- Fix parsing syntax directive from JSON would fail if the JSON had other datatypes than strings. [moby/buildkit#5815](https://github.com/moby/buildkit/pull/5815)
+- Fix recursive `ARG` producing an infinite loop when processing an outline request. [moby/buildkit#5823](https://github.com/moby/buildkit/pull/5823)
+- Fix parsing syntax directive from JSON that would fail if the JSON had other datatypes than strings. [moby/buildkit#5815](https://github.com/moby/buildkit/pull/5815)
 - Fix platform in image config being in unnormalized form (regression from 1.12). [moby/buildkit#5776](https://github.com/moby/buildkit/pull/5776)
 - Fix copying into destination directory when directory is not present with WCOW. [moby/buildkit#5249](https://github.com/moby/buildkit/pull/5249)
 
