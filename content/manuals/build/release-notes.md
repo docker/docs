@@ -42,7 +42,7 @@ The full release note for this release is available
 
 ### New
 
-- New command `buildx history import` allows to import build records into Docker Desktop for futher debugging in the [Build UI](/desktop/use-desktop/builds/). This command requires [Docker Desktop](/desktop/) to be installed. [docker/buildx#3039](https://github.com/docker/buildx/pull/3039)
+- New command `buildx history import` lets you import build records into Docker Desktop for further debugging in the [Build UI](/desktop/use-desktop/builds/). This command requires [Docker Desktop](/desktop/) to be installed. [docker/buildx#3039](https://github.com/docker/buildx/pull/3039)
 
 ### Enhancements
 
@@ -55,7 +55,7 @@ The full release note for this release is available
 
 ### Bug fixes
 
-- Fix double pushing with Docker driver when containerd store is enabled. [docker/buildx#3023](https://github.com/docker/buildx/pull/3023)
+- Fix double pushing with Docker driver when the containerd image store is enabled. [docker/buildx#3023](https://github.com/docker/buildx/pull/3023)
 - Fix multiple tags being pushed for `imagetools create` command. Now only the final manifest pushes by tag. [docker/buildx#3024](https://github.com/docker/buildx/pull/3024)
 
 ## 0.21.0
