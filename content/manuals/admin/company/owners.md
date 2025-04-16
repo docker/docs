@@ -16,7 +16,8 @@ owners don't need to be member of an organization.
 
 > [!NOTE]
 >
-> Company owners do not occupy a seat unless:
+> Company owners do not occupy a seat unless one of the following is true:
+>
 >   - They are added as a member of an organization under your company
 >   - SSO is enabled
 
