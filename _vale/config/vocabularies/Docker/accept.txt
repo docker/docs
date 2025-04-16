@@ -97,6 +97,7 @@ Sysbox
 Sysdig
 Testcontainers
 Traefik
+Trixie
 Ubuntu
 Unix
 VMware
