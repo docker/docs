@@ -32,14 +32,22 @@ You can add a maximum of 10 company owners to a single company account.
 
 ### Do company owners occupy a subscription seat?
 
-Company owners don't occupy a seat in any organization unless they are added as a
-member of the organization. Since company owners have the same access as
-organization owners for all organizations associated with the company, it is not
-necessary to add company owners to an organization.
+Company owners do not occupy a seat unless one of the following is true:
 
-Note that when you first create a company, your account will be both a company
-owner and an organization owner. Your account will occupy a seat as long as
-you're an organization owner.
+- They are added as a member of an organization under your company
+- SSO is enabled
+
+Although company owners have the same access as organization owners across all
+organizations in the company, it's not necessary to add them to any
+organization. Doing so will cause them to occupy a seat.
+
+When you first create a company, your account is both a company owner and an
+organization owner. In that case, your account will occupy a seat as long as
+you remain an organization owner.
+
+To avoid occupying a seat, [assign another user as the organization owner](/manuals/admin/organization/members.md#update-a-member-role) and remove yourself from the organization.
+You'll retain full administrative access as a company owner without using a
+subscription seat.
 
 ### What permissions does the company owner have in the associated/nested organizations?
 
