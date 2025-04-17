@@ -13,6 +13,23 @@ keywords: "API, Docker, rcli, REST, documentation"
      will be rejected.
 -->
 
+## v1.49 API changes
+
+[Docker Engine API v1.49](https://docs.docker.com/reference/api/engine/version/v1.49/) documentation
+
+* `GET /images/{name}/json` now supports a `platform` parameter (JSON
+  encoded OCI Platform type) allowing to specify a platform of the multi-platform
+  image to inspect.
+  This option is mutually exclusive with the `manifests` option.
+* `GET /info` now returns a `FirewallBackend` containing information about
+  the daemon's firewalling configuration.
+* Deprecated: The  `AllowNondistributableArtifactsCIDRs` and `AllowNondistributableArtifactsHostnames`
+  fields in the `RegistryConfig` struct in the `GET /info` response are omitted
+  in API v1.49.
+* Deprecated: The `ContainerdCommit.Expected`, `RuncCommit.Expected`, and
+  `InitCommit.Expected` fields in the `GET /info` endpoint were deprecated
+  in API v1.48, and are now omitted in API v1.49.
+
 ## v1.48 API changes
 
 [Docker Engine API v1.48](https://docs.docker.com/reference/api/engine/version/v1.48/) documentation
