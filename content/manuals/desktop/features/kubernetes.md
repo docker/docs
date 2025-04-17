@@ -37,7 +37,7 @@ Turning the Kubernetes server on or off in Docker Desktop does not affect your o
 4. Choose your [cluster provisioning method](#cluster-provisioning-method).
 5. Select **Apply & Restart** to save the settings.
 
-This sets up the images required to run the Kubernetes server as containers, and installs the `kubectl` command-line tool on your system at `/usr/local/bin/kubectl` (Mac) or `C:\Program Files\Docker\Docker\Resources\bin\kubectl.exe` (Windows).
+This sets up the images required to run the Kubernetes server as containers, and installs the `kubectl` command-line tool on your system at `/usr/local/bin/kubectl` (Mac) or `C:\Program Files\Docker\Docker\resources\bin\kubectl.exe` (Windows).
 
    > [!NOTE]
    >
