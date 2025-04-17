@@ -11,8 +11,11 @@ aliases:
 
 > [!TIP]
 >
-> To define a term that is not listed, or to get a definition that is more context-aware,
-select **Ask AI** in the top navigation and ask the AI assistant to define a term.
+> Looking for a definition that's not listed or need a more context-aware
+> explanation?
+>
+> Try <a href="#" class="open-kapa-widget">Ask AI</a>.
+
 
 
 <!--
