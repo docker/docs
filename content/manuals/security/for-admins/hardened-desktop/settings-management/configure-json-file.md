@@ -19,7 +19,7 @@ Settings Management is designed specifically for organizations who don’t give 
 
 You must [enforce sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md) to ensure that all Docker Desktop users authenticate with your organization.
 
-Settings management requires a Docker Business suubscription. Docker Desktop verifies the user's authentication and licensing before applying any settings from the `admin-settings.json` file. The settings file will not take effect unless both authentication and license checks pass. These checks ensure that only licensed users receive managed settings.
+Settings management requires a Docker Business subscription. Docker Desktop verifies the user's authentication and licensing before applying any settings from the `admin-settings.json` file. The settings file will not take effect unless both authentication and license checks pass. These checks ensure that only licensed users receive managed settings.
 
 > [!IMPORTANT]
 >
