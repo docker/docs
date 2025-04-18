@@ -151,7 +151,7 @@ reactjs-sample-service   NodePort    10.100.244.65    <none>        8080:30001/T
 
 This output confirms that your app is available via NodePort on port 30001.
 
-### Step 4.Access your app in the browser
+### Step 4. Access your app in the browser
 
 Open your browser and navigate to [http://localhost:30001](http://localhost:30001).
 
