@@ -86,7 +86,7 @@ spec:
   (refer to [Configure CI/CD for your React.js application](configure-ci-cd.md)).  
   The container listens on port `8080`, which is typically used by [Nginx](https://nginx.org/en/docs/) to serve your production React app.
 
-- **Service (NodePort)**  
+- Service (NodePort) 
   Exposes the deployed pod to your local machine.  
   It forwards traffic from port `30001` on your host to port `8080` inside the container.  
   This lets you access the application in your browser at [http://localhost:30001](http://localhost:30001).
