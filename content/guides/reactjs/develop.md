@@ -4,10 +4,7 @@ linkTitle: Develop your app
 weight: 30
 keywords: react.js, development, node
 description: Learn how to develop your React.js application locally using containers.
-aliases:
-  - /get-started/react.js/develop/
-  - /language/react.js/develop/
-  - /guides/language/react.js/develop/
+
 ---
 
 ## Prerequisites
@@ -20,16 +17,16 @@ Complete [Containerize React.js application](containerize.md).
 
 In this section, you'll learn how to set up both production and development environments for your containerized React.js application using Docker Compose. This setup allows you to serve a static production build via Nginx and to develop efficiently inside containers using a live-reloading dev server with Compose Watch.
 
-**You’ll learn how to:**
-- Configure separate containers for **production** and **development**
-- Enable automatic file syncing using **Compose Watch** in development
+You’ll learn how to:
+- Configure separate containers for production and development
+- Enable automatic file syncing using Compose Watch in development
 - Debug and live-preview your changes in real-time without manual rebuilds
 
 ---
 
 ## Automatically update services (Development Mode)
 
-Use **Compose Watch** to automatically sync source file changes into your containerized development environment. This provides a seamless, efficient development experience without needing to restart or rebuild containers manually.
+Use Compose Watch to automatically sync source file changes into your containerized development environment. This provides a seamless, efficient development experience without needing to restart or rebuild containers manually.
 
 ## Step 1: Create a development Dockerfile
 
@@ -156,24 +153,24 @@ $ docker compose watch react-dev
 
 ### Step 5: Test Compose Watch with React
 
-To verify that **Compose Watch** is working correctly:
+To verify that Compose Watch is working correctly:
 
-1.Open the `src/App.tsx` file in your text editor.
+1. Open the `src/App.tsx` file in your text editor.
 
-2.Locate the following line:
+2. Locate the following line:
 
 ```html
 <h1>Vite + React</h1>
 ```
 
-3.Change it to:
+3. Change it to:
 ```html
 <h1>Hello from Docker Compose Watch</h1>
 ```
 
-4.Save the file.
+4. Save the file.
 
-5.Open your browser at [http://localhost:5173](http://localhost:5173).
+5. Open your browser at [http://localhost:5173](http://localhost:5173).
 
 You should see the updated text appear instantly, without needing to rebuild the container manually. This confirms that file watching and automatic synchronization are working as expected.
 
@@ -183,10 +180,10 @@ You should see the updated text appear instantly, without needing to rebuild the
 
 In this section, you set up a complete development and production workflow for your React.js application using Docker and Docker Compose.
 
-**Here's what you achieved:**
+Here's what you achieved:
 - Created a `Dockerfile.dev` to streamline local development with hot reloading  
 - Defined separate `react-dev` and `react-prod` services in your `compose.yaml` file  
-- Enabled real-time file syncing using **Compose Watch** for a smoother development experience  
+- Enabled real-time file syncing using Compose Watch for a smoother development experience  
 - Verified that live updates work seamlessly by modifying and previewing a component
 
 With this setup, you're now equipped to build, run, and iterate on your React.js app entirely within containers—efficiently and consistently across environments.

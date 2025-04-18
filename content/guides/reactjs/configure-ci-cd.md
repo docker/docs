@@ -4,9 +4,7 @@ linkTitle: Configure CI/CD
 weight: 50
 keywords: CI/CD, GitHub( Actions), React.js, Next.js
 description: Learn how to configure CI/CD using GitHub Actions for your React.js application.
-aliases:
-  - /language/react.js/configure-ci-cd/
-  - /guides/language/react.js/configure-ci-cd/
+
 ---
 
 ## Prerequisites
@@ -37,11 +35,11 @@ To enable GitHub Actions to build and push Docker images, you’ll securely stor
 
 ### Step 1: Connect your GitHub repository to Docker Hub
 
-1. **Create a Personal Access Token (PAT) from [Docker Hub](https://hub.docker.com)**
-   - Go to your **Docker Hub account → Account Settings → Security**.
-   - Generate a new Access Token with **Read/Write** permissions.
-   - Name it something like `docker-reactjs-sample`.
-   - Copy and save the token — you’ll need it in Step 4.
+Create a Personal Access Token (PAT) from [Docker Hub](https://hub.docker.com)
+   1. Go to your **Docker Hub account → Account Settings → Security**.
+   2. Generate a new Access Token with **Read/Write** permissions.
+   3. Name it something like `docker-reactjs-sample`.
+   4. Copy and save the token — you’ll need it in Step 4.
 
 2. **Create a repository in [Docker Hub](https://hub.docker.com/repositories/)**
    1. Go to your **Docker Hub account → Create a repository**.

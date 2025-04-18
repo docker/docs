@@ -7,12 +7,10 @@ summary: |
   This guide explains how to containerize React.js applications using Docker.
 toc_min: 1
 toc_max: 2
-aliases:
-  - /language/reactjs/
-  - /guides/language/reactjs/
 languages: [js]
 params:
   time: 20 minutes
+
 ---
 
 The React.js language-specific guide shows you how to containerize a React.js application using Docker, following best practices for creating efficient, production-ready containers.
