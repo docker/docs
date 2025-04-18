@@ -44,7 +44,7 @@ To enable GitHub Actions to build and push Docker images, you’ll securely stor
    - Copy and save the token — you’ll need it in Step 4.
 
 2. **Create a repository in [Docker Hub](https://hub.docker.com/repositories/)**
-   - Go to your **Docker Hub account → Create a repository**.
+   1. Go to your **Docker Hub account → Create a repository**.
    - For the Repository Name, use something descriptive — for example: `reactjs-sample`.
    - Once created, copy and save the repository name — you’ll need it in Step 4.
 
