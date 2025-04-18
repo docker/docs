@@ -1,7 +1,7 @@
 ---
 title: Configure CI/CD for your React.js application
 linkTitle: Configure CI/CD
-weight: 50
+weight: 60
 keywords: CI/CD, GitHub( Actions), React.js, Next.js
 description: Learn how to configure CI/CD using GitHub Actions for your React.js application.
 
@@ -14,8 +14,6 @@ Complete all the previous sections of this guide, starting with [Containerize Re
 You must also have:
 - A [GitHub](https://github.com/signup) account.
 - A [Docker Hub](https://hub.docker.com/signup) account.
-- Docker image of your app pushed to Docker Hub
-- Basic familiarity with the terminal and `kubectl` commands
 
 ---
 
@@ -35,20 +33,20 @@ To enable GitHub Actions to build and push Docker images, you’ll securely stor
 
 ### Step 1: Connect your GitHub repository to Docker Hub
 
-Create a Personal Access Token (PAT) from [Docker Hub](https://hub.docker.com)
+1. Create a Personal Access Token (PAT) from [Docker Hub](https://hub.docker.com)
    1. Go to your **Docker Hub account → Account Settings → Security**.
    2. Generate a new Access Token with **Read/Write** permissions.
    3. Name it something like `docker-reactjs-sample`.
    4. Copy and save the token — you’ll need it in Step 4.
 
-2. **Create a repository in [Docker Hub](https://hub.docker.com/repositories/)**
+2. Create a repository in [Docker Hub](https://hub.docker.com/repositories/)
    1. Go to your **Docker Hub account → Create a repository**.
-   - For the Repository Name, use something descriptive — for example: `reactjs-sample`.
-   - Once created, copy and save the repository name — you’ll need it in Step 4.
+   2. For the Repository Name, use something descriptive — for example: `reactjs-sample`.
+   3. Once created, copy and save the repository name — you’ll need it in Step 4.
 
-3. **Create a new [GitHub repository](https://github.com/new) for your React.js project**
+3. Create a new [GitHub repository](https://github.com/new) for your React.js project
 
-4. **Add Docker Hub credentials as GitHub repository secrets**
+4. Add Docker Hub credentials as GitHub repository secrets
 
    In your newly created GitHub repository:
    
@@ -79,48 +77,48 @@ Create a Personal Access Token (PAT) from [Docker Hub](https://hub.docker.com)
    To confirm that your local project is correctly connected to the remote GitHub repository, run:
 
    ```console
-      $ git remote -v
+   $ git remote -v
    ```
 
    You should see output similar to:
 
    ```console
-      origin  https://github.com/{your-username}/{your-repository-name}.git (fetch)
-      origin  https://github.com/{your-username}/{your-repository-name}.git (push)
+   origin  https://github.com/{your-username}/{your-repository-name}.git (fetch)
+   origin  https://github.com/{your-username}/{your-repository-name}.git (push)
    ```
 
    This confirms that your local repository is properly linked and ready to push your source code to GitHub.
 
-6. **Push Your Source Code to GitHub**
+6. Push Your Source Code to GitHub
 
    Follow these steps to commit and push your local project to your GitHub repository:
 
-   1. **Stage all files for commit**
+   1. Stage all files for commit.
 
       ```console
-         $ git add -A
+      $ git add -A
       ```
       This command stages all changes — including new, modified, and deleted files — preparing them for commit.
 
 
-   2. **Commit your changes**
+   2. Commit your changes.
 
       ```console
-         $ git commit -m "Initial commit"
+      $ git commit -m "Initial commit"
       ```
       This command creates a commit that snapshots the staged changes with a descriptive message.  
 
-   3. **Push the code to the `main` branch**
+   3. Push the code to the `main` branch.
 
       ```console
-         $ git push -u origin main
+      $ git push -u origin main
       ```
       This command pushes your local commits to the `main` branch of the remote GitHub repository and sets the upstream branch.
 
 Once completed, your code will be available on GitHub, and any GitHub Actions workflow you’ve configured will run automatically.
 
 > [!NOTE]  
-> **Learn more about the Git commands used in this step:**  
+> Learn more about the Git commands used in this step:
 > - [Git add](https://git-scm.com/docs/git-add) – Stage changes (new, modified, deleted) for commit  
 > - [Git commit](https://git-scm.com/docs/git-commit) – Save a snapshot of your staged changes  
 > - [Git push](https://git-scm.com/docs/git-push) – Upload local commits to your GitHub repository  
@@ -236,15 +234,15 @@ jobs:
           cache-from: type=local,src=/tmp/.buildx-cache
 ```
 
-**This workflow performs the following tasks for your React.js application:**
-- **Triggers** on every `push` or `pull request` targeting the `main` branch.
-- **Builds a development Docker image** using `Dockerfile.dev`, optimized for testing.
-- **Executes unit tests** using Vitest inside a clean, containerized environment to ensure consistency.
-- **Halts the workflow immediately** if any test fails — enforcing code quality.
-- **Caches** both Docker build layers and npm dependencies for faster CI runs.
-- **Authenticates securely** with Docker Hub using GitHub repository secrets.
-- **Builds a production-ready image** using the `prod` stage in `Dockerfile`.
-- **Tags and pushes** the final image to Docker Hub with both `latest` and short SHA tags for traceability.
+This workflow performs the following tasks for your React.js application:
+- Triggers on every `push` or `pull request` targeting the `main` branch.
+- Builds a development Docker image using `Dockerfile.dev`, optimized for testing.
+- Executes unit tests using Vitest inside a clean, containerized environment to ensure consistency.
+- Halts the workflow immediately if any test fails — enforcing code quality.
+- Caches both Docker build layers and npm dependencies for faster CI runs.
+- Authenticates securely with Docker Hub using GitHub repository secrets.
+- Builds a production-ready image using the `prod` stage in `Dockerfile`.
+- Tags and pushes the final image to Docker Hub with both `latest` and short SHA tags for traceability.
 
 > [!NOTE]
 >  For more information about  `docker/build-push-action`, refer to the [GitHub Action README](https://github.com/docker/build-push-action/blob/master/README.md).
@@ -255,23 +253,23 @@ jobs:
 
 After you've added your workflow file, it's time to trigger and observe the CI/CD process in action.
 
-1. **Commit and push your workflow file**
+1. Commit and push your workflow file
 
-   Click **"Commit changes…"** in the GitHub editor.
+   Select "Commit changes…" in the GitHub editor.
 
    - This push will automatically trigger the GitHub Actions pipeline.
 
-2. **Monitor the workflow execution**
+2. Monitor the workflow execution
 
-   - Go to the **Actions** tab in your GitHub repository.
-   - Click into the workflow run to follow each step: **build**, **test**, and (if successful) **push**.
+   1. Go to the Actions tab in your GitHub repository.
+   2. Click into the workflow run to follow each step: **build**, **test**, and (if successful) **push**.
 
-3. **Verify the Docker image on Docker Hub**
+3. Verify the Docker image on Docker Hub
 
    - After a successful workflow run, visit your [Docker Hub repositories](https://hub.docker.com/repositories).
    - You should see a new image under your repository with:
-      - **Repository name**: `${your-repository-name}`
-      - **Tags include:**
+      - Repository name: `${your-repository-name}`
+      - Tags include:
          - `latest` – represents the most recent successful build; ideal for quick testing or deployment.
          - `<short-sha>` – a unique identifier based on the commit hash, useful for version tracking, rollbacks, and traceability.
 
@@ -289,9 +287,9 @@ After you've added your workflow file, it's time to trigger and observe the CI/C
 
 ## Summary
 
-In this section, you set up a complete CI/CD pipeline for your Dockerized React.js application using **GitHub Actions**.
+In this section, you set up a complete CI/CD pipeline for your containerized React.js application using GitHub Actions.
 
-**Here's what you accomplished:**
+Here's what you accomplished:
 
 - Created a new GitHub repository specifically for your project.
 - Generated a secure Docker Hub access token and added it to GitHub as a secret.
@@ -308,7 +306,7 @@ With this setup, your React.js application is now ready for automated testing an
 
 ## Related resources
 
-Deepen your understanding of automation and best practices for Dockerized apps:
+Deepen your understanding of automation and best practices for containerized apps:
 
 - [Introduction to GitHub Actions](/guides/gha.md) – Learn how GitHub Actions automate your workflows  
 - [Docker Build GitHub Actions](/manuals/build/ci/github-actions/_index.md) – Set up container builds with GitHub Actions  
@@ -320,4 +318,4 @@ Deepen your understanding of automation and best practices for Dockerized apps:
 
 ## Next steps
 
-Next, learn how you can **locally test and debug your React.js workloads on Kubernetes** before deploying. This helps you ensure your application behaves as expected in a production-like environment, reducing surprises during deployment.
+Next, learn how you can locally test and debug your React.js workloads on Kubernetes before deploying. This helps you ensure your application behaves as expected in a production-like environment, reducing surprises during deployment.

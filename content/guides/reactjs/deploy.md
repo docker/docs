@@ -28,15 +28,11 @@ This section guides you through deploying your containerized React.js applicatio
 
 Follow these steps to define your deployment configuration:
 
-1.In the root of your project, create a new file named:
+1. In the root of your project, create a new file named: reactjs-sample-kubernetes.yaml
 
-  ```console
-    $ reactjs-sample-kubernetes.yaml
-  ```
+2. Open the file in your IDE or preferred text editor.
 
-2.Open the file in your IDE or preferred text editor.
-
-3.Add the following configuration, and be sure to replace `{DOCKER_USERNAME}` and `{DOCKERHUB_PROJECT_NAME}` with your actual Docker Hub username and repository name from the previous[Configure CI/CD for your React.js application](configure-ci-cd.md).
+3. Add the following configuration, and be sure to replace `{DOCKER_USERNAME}` and `{DOCKERHUB_PROJECT_NAME}` with your actual Docker Hub username and repository name from the previous [Configure CI/CD for your React.js application](configure-ci-cd.md).
 
 
 ```yaml
@@ -77,7 +73,7 @@ spec:
       nodePort: 30001
 ```
 
-**This manifest defines two key Kubernetes resources, separated by `---`**:
+This manifest defines two key Kubernetes resources, separated by `---`:
 
 - Deployment
   Deploys a single replica of your React.js application inside a pod. The pod uses the Docker image built and pushed by your GitHub Actions CI/CD workflow  

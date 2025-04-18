@@ -1,9 +1,10 @@
 ---
 title: Run React.js tests in a container
 linkTitle: Run your tests
-weight: 30
+weight: 40
 keywords: react.js, react, test, vitest
 description: Learn how to run your React.js tests in a container.
+
 ---
 
 ## Prerequisites
