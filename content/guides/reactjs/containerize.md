@@ -24,7 +24,7 @@ Before you begin, make sure the following tools are installed and available on y
 
 This guide walks you through the complete process of containerizing a React.js application with Docker. You’ll learn how to create a production-ready Docker image using best practices that improve performance, security, scalability, and deployment efficiency.
 
-**By the end of this guide, you will:**
+By the end of this guide, you will:
 
 - Containerize a React.js application using Docker.
 - Create and optimize a **Dockerfile** for production builds. 
