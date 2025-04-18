@@ -81,7 +81,7 @@ spec:
 
 **This manifest defines two key Kubernetes resources, separated by `---`**:
 
-- **Deployment**  
+- Deployment
   Deploys a single replica of your React.js application inside a pod. The pod uses the Docker image built and pushed by your GitHub Actions CI/CD workflow  
   (refer to [Configure CI/CD for your React.js application](configure-ci-cd.md)).  
   The container listens on port `8080`, which is typically used by [Nginx](https://nginx.org/en/docs/) to serve your production React app.
