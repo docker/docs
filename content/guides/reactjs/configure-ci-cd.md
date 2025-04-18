@@ -50,10 +50,10 @@ To enable GitHub Actions to build and push Docker images, you’ll securely stor
 
    In your newly created GitHub repository:
    
-   - Navigate to:
-   `Settings` → `Secrets and variables` → `Actions` → `New repository secret`.
+   1. Navigate to:
+   **Settings → Secrets and variables → Actions → New repository secret**.
 
-   - Add the following secrets:
+   2. Add the following secrets:
 
    | Name              | Value                          |
    |-------------------|--------------------------------|
@@ -63,7 +63,7 @@ To enable GitHub Actions to build and push Docker images, you’ll securely stor
 
    These secrets let GitHub Actions to authenticate securely with Docker Hub during automated workflows.
 
-5. **Connect Your Local Project to GitHub**
+5. Connect Your Local Project to GitHub
 
    Link your local project `docker-reactjs-sample` to the GitHub repository you just created by running the following command from your project root:
 

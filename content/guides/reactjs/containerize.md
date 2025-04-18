@@ -439,10 +439,10 @@ In this guide, you learned how to containerize, build, and run a React.js applic
 
 What you accomplished:
 - Initialized your project using `docker init` to scaffold essential Docker configuration files.
-- Replaced the default `Dockerfile` with a **multi-stage build** that compiles the React.js application and serves the static files using **Nginx**.
+- Replaced the default `Dockerfile` with a multi-stage build that compiles the React.js application and serves the static files using Nginx.
 - Replaced the default `.dockerignore` file to exclude unnecessary files and keep the image clean and efficient.
 - Built your Docker image using `docker build`.
-- Ran the container using `docker compose up`, both in the foreground and in **detached mode**.
+- Ran the container using `docker compose up`, both in the foreground and in detached mode.
 - Verified that the app was running by visiting [http://localhost:8080](http://localhost:8080).
 - Learned how to stop the containerized application using `docker compose down`.
 

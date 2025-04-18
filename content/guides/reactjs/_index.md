@@ -19,6 +19,7 @@ The React.js language-specific guide shows you how to containerize a React.js ap
 
 > 
 > **Acknowledgment**
+>
 > Docker extends its sincere gratitude to [Kristiyan Velkov](https://www.linkedin.com/in/kristiyan-velkov-763130b3/) for authoring this guide. As a Docker Captain and experienced Front-end engineer, his expertise in Docker, DevOps, and modern web development has made this resource invaluable for the community, helping developers navigate and optimize their Docker workflows.
 
 ---

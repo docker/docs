@@ -1,7 +1,7 @@
 ---
 title: Test your React.js deployment
 linkTitle: Test your deployment
-weight: 50
+weight: 60
 keywords: deploy, kubernetes, react, react.js
 description: Learn how to deploy locally to test and debug your Kubernetes deployment
 

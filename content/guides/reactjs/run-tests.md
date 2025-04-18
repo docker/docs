@@ -177,4 +177,4 @@ Explore official references and best practices to sharpen your Docker testing wo
 
 ## Next steps
 
-Next, you’ll learn how to set up a CI/CD pipeline using **GitHub Actions** to automatically build and test your React.js application in a containerized environment. This ensures your code is validated on every push or pull request, maintaining consistency and reliability across your development workflow.
+Next, you’ll learn how to set up a CI/CD pipeline using GitHub Actions to automatically build and test your React.js application in a containerized environment. This ensures your code is validated on every push or pull request, maintaining consistency and reliability across your development workflow.
