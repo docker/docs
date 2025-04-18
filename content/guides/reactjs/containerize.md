@@ -1,7 +1,7 @@
 ---
 title: Containerize a React.js Application
 linkTitle: Containerize
-weight: 50
+weight: 10
 keywords: react.js, node, image, initialize, build
 description: Learn how to containerize a React.js application with Docker by creating an optimized, production-ready image using best practices for performance, security, and scalability.
 aliases:
