@@ -178,7 +178,7 @@ This ensures your cluster stays clean and ready for the next deployment.
 
 ## Summary
 
-In this section, you learned how to deploy your **React.js application** to a local Kubernetes cluster using **Docker Desktop**. This setup allows you to test and debug your containerized app in a production-like environment before deploying it to the cloud.
+In this section, you learned how to deploy your React.js application to a local Kubernetes cluster using Docker Desktop. This setup allows you to test and debug your containerized app in a production-like environment before deploying it to the cloud.
 
 What you accomplished:
 
