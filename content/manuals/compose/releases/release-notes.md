@@ -13,6 +13,23 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.35.1
+
+{{< release-date date="2025-04-17" >}}
+
+### Bug fixes and enhancements
+
+- Fixed an issue with bind mounts
+
+### Update
+
+- Dependencies upgrade: bump compose-go to v2.6.0
+- Dependencies upgrade: bump docker engine and cli to v28.0.4
+- Dependencies upgrade: bump buildx to v0.22.0
+
+
+
+
 ## 2.35.0
 
 {{< release-date date="2025-04-10" >}}
@@ -30,9 +47,9 @@ For more detailed information, see the [release notes in the Compose repo](https
 
 ### Update
 
-- Dependencies upgrade: bump compose-go to v2.6.0
-- Dependencies upgrade: bump docker engine and cli to v28.0.4
-- Dependencies upgrade: bump buildx to v0.22.0
+- Dependencies upgrade: bump docker engine and cli to v28.1.0
+- Dependencies upgrade: bump buildx to v0.23.0
+- Dependencies upgrade: bump buildkit to v0.21.0
 
 
 ## 2.34.0
