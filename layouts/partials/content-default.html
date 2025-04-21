@@ -3,9 +3,6 @@
     {{ partial "breadcrumbs.html" . }}
     <h1 data-pagefind-weight="10" class="flex scroll-mt-36 items-center">
       <span>{{ .Title }}</span>
-        <span class="ml-auto md-dropdown">
-          {{ partial "md-dropdown.html" . }}
-        </span>
     </h1>
 
     <div class="block lg:hidden">
@@ -14,6 +11,9 @@
     </div>
     {{ .Content }}
   </article>
+  <span class="ml-auto md-dropdown">
+    {{ partial "md-dropdown.html" . }}
+  </span>
   <div class="-mr-8 -mt-8 hidden min-w-52 flex-1 lg:block">
     {{ partial "aside.html" . }}
   </div>
