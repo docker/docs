@@ -177,7 +177,7 @@ $ COMPOSE_PROFILES=dev docker compose up phpmyadmin
 
 ## Stop application and services with specific profiles
 
-As with starting specific profiles, you can use the `--profile` [command-line option](/reference/cli/docker/compose.md#use--p-to-specify-a-project-name) or
+As with starting specific profiles, you can use the `--profile` [command-line option](/reference/cli/docker/compose.md) or
 use the [`COMPOSE_PROFILES` environment variable](environment-variables/envvars.md#compose_profiles):
 
 ```console
