@@ -53,7 +53,7 @@ you must designate the user as an organization owner. This will ensure any PATs 
 
 > [!TIP]
 >
-> To avoid potentially disrupting service of personal access tokens when converting an account or changing ownership, it is recommended to use [Organization access tokens](/manuals/security/for-admins/access-tokens.md). Organization access tokens are
+> To avoid potentially disrupting service of personal access tokens when converting an account or changing ownership, it is recommended to use [organization access tokens](/manuals/security/for-admins/access-tokens.md). Organization access tokens are
 associated with an organization, not a single user account.
 
 ## Convert an account into an organization
