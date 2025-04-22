@@ -48,7 +48,13 @@ Consider the following effects of converting your account:
 
 - The user account that you add as the first owner will have full administrative access to configure and manage the organization.
 
-- Converting a user account to an organization will delete all of the user's personal access tokens. See [Create an access token](/manuals/security/for-developers/access-tokens.md#create-an-access-token) for steps on creating personal access tokens after converting the user account.
+- To transfer a user's personal access tokens (PATs) to your converted organization,
+you must designate the user as an organization owner. This will ensure any PATs associated with the user's account are transferred to the organization owner.
+
+> [!TIP]
+>
+> To avoid potentially disrupting service of personal access tokens when converting an account or changing ownership, it is recommended to use [organization access tokens](/manuals/security/for-admins/access-tokens.md). Organization access tokens are
+associated with an organization, not a single user account.
 
 ## Convert an account into an organization
 
