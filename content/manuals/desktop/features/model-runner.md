@@ -142,7 +142,7 @@ Chat session ended.
 
 ### Upload a model to Docker Hub
 
-Use  the command below to push your model to Docker Hub:
+Use the following command to push your model to Docker Hub:
 
 ```console
 $ docker model push <namespace>/<model>
@@ -150,7 +150,7 @@ $ docker model push <namespace>/<model>
 
 ### View the logs
 
-Fetch logs from the Docker Model Runner to monitor activity, debug issues, or inspect inference behavior.
+Fetch logs from Docker Model Runner to monitor activity or debug issues.
 
 ```console
 $ docker model logs 
