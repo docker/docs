@@ -11,15 +11,17 @@ weight: 50
 
 {{< summary-bar feature_name="Domain audit" >}}
 
-Domain management identifies uncaptured users in an organization. Uncaptured users
-are Docker users who have authenticated to Docker using an email address
-associated with one of your verified domains, but they're not a member of your
-organization in Docker. You can audit domains on organizations that are part of
-the Docker Business subscription. To upgrade your existing account to a Docker
-Business subscription, see [Upgrade your subscription](/subscription/upgrade/).
+Domain management identifies uncaptured users in an organization. Uncaptured
+users are Docker users who have logged into Docker using an email address
+associated with one of your verified domains, but are not a member of your
+organization in Docker. To manage your organization, domain management allows
+you to:
 
-Uncaptured users who access Docker Desktop in your environment may pose a
-security risk because your organization's security settings, like Image Access
+- Audit domains for uncaptured users
+- Auto-provision users to an organization
+
+Uncaptured users who access Docker Desktop may pose a security risk because
+your organization's security settings, like Image Access
 Management and Registry Access Management, aren't applied to a user's session.
 In addition, you won't have visibility into the activity of uncaptured users.
 You can add uncaptured users to your organization to gain visibility into their
@@ -34,7 +36,7 @@ associated with one of your verified domains
 Although domain audit can't identify all Docker users in your environment, you
 can enforce sign-in to prevent unidentifiable users from accessing Docker
 Desktop in your environment. For more details about enforcing sign-in, see
-[Configure registry.json to enforce sign-in](../for-admins/enforce-sign-in/_index.md).
+[Enforce sign-in for Docker Desktop](../for-admins/enforce-sign-in/_index.md).
 
 > [!TIP]
 >
@@ -50,7 +52,7 @@ version of Docker Desktop, and enable you to [enforce sign-in](enforce-sign-in/_
 
 ## Prerequisites
 
-Before you audit your domains, review the following required prerequisites:
+Before managing domains, review the following required prerequisites:
 
 - Your organization must be part of a Docker Business subscription. To upgrade
 your existing account to a Docker Business subscription, see
@@ -80,7 +82,16 @@ your existing account to a Docker Business subscription, see
 
 ## Auto-provisioning
 
-Auto-provisioning adds users automatically to your organization.
+Auto-provisioning adds users to your organization when they sign in with an
+email address that matches a verified domain. This relies on domain
+verification, which confirms that your organization controls the domain. Once
+a domain is verified, Docker can automatically associate matching users with
+your organization. For more information on verifying a domain, see
+[Verify your domain](/manuals/security/for-admins/single-sign-on/configure/#step-two-verify-your-domain).
+
+This simplifies user management, helps apply organization-level security
+settings consistently, and reduces the risk of uncaptured users accessing
+Docker services without visibility or controls.
 
 > [!IMPORTANT]
 >
