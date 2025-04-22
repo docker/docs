@@ -87,7 +87,7 @@ email address that matches a verified domain. This relies on domain
 verification, which confirms that your organization controls the domain. Once
 a domain is verified, Docker can automatically associate matching users with
 your organization. For more information on verifying a domain, see
-[Verify your domain](/manuals/security/for-admins/single-sign-on/configure/#step-two-verify-your-domain).
+[Verify your domain](/manuals/security/for-admins/single-sign-on/configure.md#step-two-verify-your-domain).
 
 This simplifies user management, helps apply organization-level security
 settings consistently, and reduces the risk of uncaptured users accessing
