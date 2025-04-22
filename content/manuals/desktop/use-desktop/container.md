@@ -35,7 +35,7 @@ From here, you can use the quick action buttons to perform various actions such 
 
 ### Logs
 
-Select Logs to view output from the container in real time. While viewing logs, you can:
+Select **Logs** to view output from the container in real time. While viewing logs, you can:
 
 - Use `Cmd + f`/`Ctrl + f` to open the search bar and find specific entries.
   Search matches are highlighted in yellow.
