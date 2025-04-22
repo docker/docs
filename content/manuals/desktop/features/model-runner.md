@@ -123,7 +123,7 @@ Hello! How can I assist you today?
 #### Interactive chat
 
 ```console
-docker model run ai/smollm2
+$ docker model run ai/smollm2
 ```
 
 Output:
@@ -140,11 +140,26 @@ Chat session ended.
 >
 > You can also use chat mode in the Docker Desktop Dashboard when you select the model in the **Models** tab.
 
-### Push a model 
+### Upload a model to Docker Hub
+
+Use  the command below to push your model to Docker Hub:
 
 ```console
-docker model push <namespace>/<model>
+$ docker model push <namespace>/<model>
 ```
+
+### View the logs
+
+Fetch logs from the Docker Model Runner to monitor activity, debug issues, or inspect inference behavior.
+
+```console
+$ docker model logs 
+```
+
+The following flags are accepted:
+
+- `-f`/`--follow`: View logs with real-time streaming
+- `--no-engines`: Exclude inference engine logs from the output
 
 ### Remove a model
 
