@@ -29,6 +29,54 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 >
 > If you're experiencing malware detection issues on Mac, follow the steps documented in [docker/for-mac#7527](https://github.com/docker/for-mac/issues/7527).
 
+## 4.41.0
+
+{{< release-date date="2025-04-24" >}}
+
+{{< desktop-install-v2 all=true beta_win_arm=true version="4.41.0" build_path="/190394/" >}}
+
+### New
+
+- Expanded IPv6 support to improve container connectivity
+- Docker Model Runner on Windows machines with NVIDIA GPUs on board
+- Docker Model Runner model push to Hub
+- Compose support with Docker Model Runner
+- TestContainers support with Docker Model Runner
+
+### Upgrades
+
+- [Docker Engine v28.1.1](https://docs.docker.com/engine/release-notes/28.1/#2811)
+- [Docker Compose v2.35.1](https://github.com/docker/compose/releases/tag/v2.35.1)
+- [Docker Buildx v0.23.0](https://github.com/docker/buildx/releases/tag/v0.23.0)
+- [Docker Scout CLI v1.17.1](https://github.com/docker/scout-cli/releases/tag/v1.17.1)
+- [Compose Bridge v0.0.19](https://github.com/docker/compose-bridge-binaries/releases/tag/v0.0.19)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed a bug in DockerVMM that caused an excessive number of open file handles on the host.
+- Fixed an issue where Docker Desktop failed to start if the admin-settings.json didn't contain the optional `configurationFileVersion` configuration.
+- Fixed a bug that was causing outgoing UDP connections to be eagerly closed.
+- Added support for local AI model management and chat interface in Docker Desktop for Mac and Windows. Users can now view, interact with, and manage local AI models through a new dedicated interface.
+- Enhanced log reading experience with advanced search capabilities and container-level filtering, enabling quicker debugging and troubleshooting.
+- Improved error messages when downloading Registry Access Management configuration.
+- If Docker can't bind an ICMPv4 socket log an error and continue rather than quit.
+- Enabled the memory protection keys mechanism in the Docker Desktop Linux VM, allowing containers like Oracle database images to run correctly.
+- Fixed problem with containers accessing `/proc/sys/kernel/shm*` sysctls when [Enhanced Container Isolation](https://docs.docker.com/security/for-admins/hardened-desktop/enhanced-container-isolation/) is enabled on Mac, Windows Hyper-V, or Linux.
+- Added kernel module `nft_fib_inet`, required for running firewalld in a Linux container.
+
+#### For Mac
+
+- Fixed a bug that caused high CPU usage. Fixes [docker/for-mac#7643](https://github.com/docker/for-mac/issues/7643).
+- Fixed multi-arch build issue with Rosetta on M3 Macs.
+- Fixed an issue where absence of `/Library/Application Support/com.docker.docker/` directory can cause failure to apply RAM policy restrictions.
+
+#### For Windows
+
+- The Windows EXE installer now includes improved handling of locked files. Fixes [docker/for-win#14299](https://github.com/docker/for-win/issues/14299) and [docker/for-win#14316](https://github.com/docker/for-win/issues/14316).
+- Fixed `Docker Desktop.exe` not showing version information after installation. Fixes [docker/for-win#14703](https://github.com/docker/for-win/issues/14703).
+
 ## 4.40.0
 
 {{< release-date date="2025-03-31" >}}
