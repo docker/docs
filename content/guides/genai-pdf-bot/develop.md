@@ -202,6 +202,20 @@ To run Ollama outside of a container:
    ```
 
 {{< /tab >}}
+{{< tab name="Use Docker Model Runner" >}}
+
+Docker Model Runner is compatible with Ollama in the API.
+
+1. Make sure your OS and Docker Desktop support [Docker Model Runner](https://docs.docker.com/desktop/features/model-runner/).
+   Docker Model Runner was initially released for Mac Silicon on Docker Desktop 4.40. 
+2. Download the model of your choice:
+   ```console
+   $ docker model pull ai/llama3.3
+   ```
+3. Update the `OLLAMA_BASE_URL` value in your `.env` file to
+   `http://model-runner.docker.internal`.
+
+{{< /tab >}}
 {{< tab name="Use OpenAI" >}}
 
 > [!IMPORTANT]
