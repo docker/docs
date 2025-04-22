@@ -17,7 +17,8 @@ The Docker Model Runner plugin lets you:
 - [Pull models from Docker Hub](https://hub.docker.com/u/ai)
 - Run AI models directly from the command line
 - Manage local models (add, list, remove)
-- Interact with models using a submitted prompt or in chat mode
+- Interact with models using a submitted prompt or in chat mode in the CLI or Docker Desktop Dashboard
+- Push models to Docker Hub
 
 Models are pulled from Docker Hub the first time they're used and stored locally. They're loaded into memory only at runtime when a request is made, and unloaded when not in use to optimize resources. Since models can be large, the initial pull may take some time — but after that, they're cached locally for faster access. You can interact with the model using [OpenAI-compatible APIs](#what-api-endpoints-are-available).
 
@@ -30,6 +31,8 @@ Models are pulled from Docker Hub the first time they're used and stored locally
 5. Open the **Settings** view in Docker Desktop.
 6. Navigate to **Features in development**.
 7. From the **Beta** tab, check the **Enable Docker Model Runner** setting.
+
+You can now use the `docker model` command in the CLI and view and interact with your local models in the **Models** tab in the Docker Desktop Dashboard.
 
 ## Available commands
 
@@ -84,6 +87,8 @@ Downloaded: 257.71 MB
 Model ai/smollm2 pulled successfully
 ```
 
+The models also display in the Docker Desktop Dashboard.
+
 ### List available models
 
 Lists all models currently pulled to your local environment.
@@ -129,6 +134,16 @@ Interactive chat mode started. Type '/bye' to exit.
 Hi there! It's SmolLM, AI assistant. How can I help you today?
 > /bye
 Chat session ended.
+```
+
+> [!TIP]
+>
+> You can also use chat mode in the Docker Desktop Dashboard when you select the model in the **Models** tab.
+
+### Push a model 
+
+```console
+docker model push <namespace>/<model>
 ```
 
 ### Remove a model

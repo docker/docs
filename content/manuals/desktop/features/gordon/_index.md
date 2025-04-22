@@ -97,6 +97,8 @@ If you have concerns about data collection or usage, you can
 
 9. Select **Apply & restart**.
 
+You can also enable Ask Gordon from the **Ask Gordon** tab if you have selected the  **Access experimental features** setting. Simply select the **Enable Ask Gordon** button, and then accept the Docker AI terms of service agreement.
+
 ## Using Ask Gordon
 
 The primary interfaces to Docker's AI capabilities are through the **Ask

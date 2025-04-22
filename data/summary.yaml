@@ -145,7 +145,7 @@ Docker GitHub Copilot:
 Docker Model Runner:
   availability: Beta
   requires: Docker Desktop 4.40 and later
-  for: Docker Desktop for Mac with Apple Silicon
+  for: Docker Desktop for Mac with Apple Silicon or Windows with NVIDIA GPUs
 Docker Projects:
   availability: Beta
 Docker Init:
