@@ -49,17 +49,17 @@ responds to all normal docker pull requests but stores all content locally.
 
 If Docker Hub access is restricted via your Registry Access Management (RAM) configuration, you will not be able to pull images originating from Docker Hub even if the images are available in your registry mirror.
 
-You may encounter an error like:
-```bash
+You will encounter the following error:
+```console
 Error response from daemon: Access to docker.io has been restricted by your administrators.
 ```
 
-This happens because RAM restrictions are enforced at the API proxy layer, meaning the request is blocked before Docker Desktop even attempts to pull from a registry mirror or fall back to Docker Hub.
+This happens because RAM restrictions are enforced at the API proxy layer, meaning that the request is blocked before Docker Desktop even attempts to pull from a registry mirror or fall back to Docker Hub.
 
 If you are unable to allow access to Docker Hub, you can manually pull from your registry mirror and optionally, retag the image. For example:
-```
-docker pull <your-registry-mirror>/library/busybox
-docker tag <your-registry-mirror>/library/busybox:latest busybox:latest
+```console
+docker pull <your-registry-mirror>[:<port>]/library/busybox
+docker tag <your-registry-mirror>[:<port>]/library/busybox:latest busybox:latest
 ```
 
 ## How does it work?
