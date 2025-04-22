@@ -15,7 +15,7 @@ params:
 
 {{< summary-bar feature_name="Wasm workloads" >}}
 
-WebAssembly (Wasm) is a fast, light alternative Linux and
+WebAssembly (Wasm) is a fast, light alternative to Linux and
 Windows containers.  With Docker Desktop, you can now run Wasm workloads side by side with traditional containers.
 
 This page provides information about the ability to run Wasm applications
@@ -93,7 +93,7 @@ Start the application using the normal Docker Compose commands:
 
 ### Running a multi-service application with Wasm
 
-Networking works the same as you expect with Linux containers, giving you the
+Networking works the same as you'd expect with Linux containers, giving you the
 flexibility to combine Wasm applications with other containerized workloads,
 such as a database, in a single application stack.
 
