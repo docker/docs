@@ -11,7 +11,7 @@ keywords: cli, compose, lifecycle, hooks reference
 ## Services lifecycle hooks
 
 When Docker Compose runs a container, it uses two elements, 
-[ENTRYPOINT and COMMAND](https://docs.docker.com/engine/containers/run/#default-command-and-options), 
+[ENTRYPOINT and COMMAND](/manuals/engine/containers/run.md#default-command-and-options), 
 to manage what happens when the container starts and stops.
 
 However, it can sometimes be easier to handle these tasks separately with lifecycle hooks - 
