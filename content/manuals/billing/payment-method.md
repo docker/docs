@@ -25,6 +25,7 @@ The following payment methods are supported:
 - Diners
 - UnionPay
 - Link
+- ACH transfer via with a US bank account
 
 All currency, for example the amount listed on your billing invoice, is in United States dollar (USD).
 
@@ -44,11 +45,14 @@ To add a payment method:
 3. Select **Payment methods** from the left-hand menu.
 4. Select **Add payment method**.
 5. Enter your new payment information:
-    - If you are adding a card, fill out the card information form.
+    - If you are adding a card, select **Card** and fill out the card information form.
     - If you are adding a Link payment, select **Secure, 1-click checkout with Link**
     and enter your Link **email address** and **phone number**. If you are not
     an existing Link customer, you must fill out the card information form to
     store a card for Link payments.
+    - If you are adding a bank account, select **US bank account**, enter your
+    **Email** and **Full name**, and **Search for your bank**. Follow the
+    on-screen instructions to add your bank account.
 6. Select **Add payment method**.
 7. Optional. You can set a new default payment method by selecting the **Set as default** action.
 8. Optional. You can remove non-default payment methods by selecting the **Delete** action.
@@ -64,11 +68,14 @@ To add a payment method:
 4. Select the **Payment methods and billing history** link.
 5. In the **Payment method** section, select **Add payment method**.
 6. Enter your new payment information:
-    - If you are adding a card, fill out the card information form.
+    - If you are adding a card, select **Card** and fill out the card information form.
     - IIf you are adding a Link payment, select **Secure, 1-click checkout with Link**
     and enter your Link **email address** and **phone number**. If you are not
     an existing Link customer, you must fill out the card information form to
     store a card for Link payments.
+    - If you are adding a bank account, select **US bank account**, enter your
+    **Email** and **Full name**, and **Search for your bank**. Follow the
+    on-screen instructions to add your bank account.
 7. Select **Add**.
 8. Select the **Actions** icon, then select **Make default** to ensure that your new payment method applies to all purchases and subscriptions.
 9. Optional. You can remove non-default payment methods by selecting the **Actions** icon. Then, select **Delete**.
