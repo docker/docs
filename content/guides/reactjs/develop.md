@@ -159,14 +159,15 @@ To verify that Compose Watch is working correctly:
 
 2. Locate the following line:
 
-```html
-<h1>Vite + React</h1>
-```
+  ```html
+  <h1>Vite + React</h1>
+  ```
 
 3. Change it to:
-```html
-<h1>Hello from Docker Compose Watch</h1>
-```
+
+  ```html
+  <h1>Hello from Docker Compose Watch</h1>
+  ```
 
 4. Save the file.
 
