@@ -121,6 +121,8 @@ tampered with by the users.
 
 4. Use a MDM solution to distribute your modified `.mobileconfig` file to your macOS clients. 
 
+5. Verify that the profile is added to `Device (Managed)` profiles list (System Settings --> General --> Device Management) on your macOS clients.
+
 ## plist method (Mac only)
 
 > [!NOTE]
