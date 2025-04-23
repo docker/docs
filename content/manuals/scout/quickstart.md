@@ -101,7 +101,7 @@ Rebuild the image with a new tag and push it to your Docker Hub repository:
    $ docker build --push -t <ORG_NAME>/scout-demo:v2 .
    ```
 
-Run the **docker scout** command again and verify that HIGH CVE-2022-24999 is no longer present:
+Run the `docker scout` command again and verify that HIGH CVE-2022-24999 is no longer present:
 
 ```console
 $ docker scout cves --only-package express
