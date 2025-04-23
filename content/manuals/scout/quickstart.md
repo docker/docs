@@ -86,7 +86,7 @@ Learn more about the `docker scout cves` command in the
 
 After the Docker Scout analysis, a high vulnerability CVE-2022-24999 was found, caused by an outdated version of the **express** package.
 
-The version 4.17.3 of the express package fizes the vulnerabillity. Therefore, update the `package.json` file to the new version:
+The version 4.17.3 of the express package fixes the vulnerability. Therefore, update the `package.json` file to the new version:
 
    ```diff
       "dependencies": {
