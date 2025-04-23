@@ -105,10 +105,10 @@ To add a payment method:
     - If you are adding a bank account, select **US bank account**, enter your
     **Email** and **Full name**, and **Search for your bank**. To verifiy your
     bank account, see [Verify a bank account](manuals/billing/payment-method.md#verify-a-bank-account).
-6. Select **Add payment method**.
 7. Select **Add payment method**.
-8. Optional. You can set a new default payment method by selecting the **Set as default** action.
-9. Optional. You can remove non-default payment methods by selecting the **Delete** action.
+8. Select **Add payment method**.
+9. Optional. You can set a new default payment method by selecting the **Set as default** action.
+10. Optional. You can remove non-default payment methods by selecting the **Delete** action.
 
 {{< /tab >}}
 {{< tab name="Legacy Docker plan" >}}
