@@ -67,7 +67,7 @@ Docker evaluates compliance status based on:
 - Domain status: Whether the user's email matches a verified domain.
 - Settings status: Whether a settings policy is applied to the user.
 
-The combination of these statuses determines what actions an administrator needs to take.
+The combination of these statuses determines what actions you need to take.
 
 ### Compliance status reference
 
