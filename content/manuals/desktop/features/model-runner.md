@@ -148,6 +148,16 @@ Use the following command to push your model to Docker Hub:
 $ docker model push <namespace>/<model>
 ```
 
+### Tag a model
+
+You can specify a particular version or variant of the model:
+
+```console
+$ docker model tag 
+```
+
+If no tag is provided, Docker defaults to `latest`.
+
 ### View the logs
 
 Fetch logs from Docker Model Runner to monitor activity or debug issues.
