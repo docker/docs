@@ -54,8 +54,6 @@ You will encounter the following error:
 Error response from daemon: Access to docker.io has been restricted by your administrators.
 ```
 
-This happens because RAM restrictions are enforced at the API proxy layer, meaning that the request is blocked before Docker Desktop even attempts to pull from a registry mirror or fall back to Docker Hub.
-
 If you are unable to allow access to Docker Hub, you can manually pull from your registry mirror and optionally, retag the image. For example:
 ```console
 docker pull <your-registry-mirror>[:<port>]/library/busybox
