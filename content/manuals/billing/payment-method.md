@@ -25,7 +25,7 @@ The following payment methods are supported:
 - Diners
 - UnionPay
 - Link
-- ACH transfer via with a US bank account
+- ACH transfer via with a [verified](manuals/billing/payment-method.md#verify-a-bank-account) US bank account
 
 All currency, for example the amount listed on your billing invoice, is in United States dollar (USD).
 
@@ -51,8 +51,8 @@ To add a payment method:
     an existing Link customer, you must fill out the card information form to
     store a card for Link payments.
     - If you are adding a bank account, select **US bank account**, enter your
-    **Email** and **Full name**, and **Search for your bank**. Follow the
-    on-screen instructions to add your bank account.
+    **Email** and **Full name**, and **Search for your bank**. To verifiy your
+    bank account, see [Verify a bank account](manuals/billing/payment-method.md#verify-a-bank-account).
 6. Select **Add payment method**.
 7. Optional. You can set a new default payment method by selecting the **Set as default** action.
 8. Optional. You can remove non-default payment methods by selecting the **Delete** action.
@@ -73,9 +73,6 @@ To add a payment method:
     and enter your Link **email address** and **phone number**. If you are not
     an existing Link customer, you must fill out the card information form to
     store a card for Link payments.
-    - If you are adding a bank account, select **US bank account**, enter your
-    **Email** and **Full name**, and **Search for your bank**. Follow the
-    on-screen instructions to add your bank account.
 7. Select **Add**.
 8. Select the **Actions** icon, then select **Make default** to ensure that your new payment method applies to all purchases and subscriptions.
 9. Optional. You can remove non-default payment methods by selecting the **Actions** icon. Then, select **Delete**.
@@ -105,6 +102,10 @@ To add a payment method:
     and enter your Link **email address** and **phone number**. If you are not
     an existing Link customer, you must fill out the card information form to
     store a card for Link payments.
+    - If you are adding a bank account, select **US bank account**, enter your
+    **Email** and **Full name**, and **Search for your bank**. To verifiy your
+    bank account, see [Verify a bank account](manuals/billing/payment-method.md#verify-a-bank-account).
+6. Select **Add payment method**.
 7. Select **Add payment method**.
 8. Optional. You can set a new default payment method by selecting the **Set as default** action.
 9. Optional. You can remove non-default payment methods by selecting the **Delete** action.
@@ -132,6 +133,44 @@ To add a payment method:
 
 {{< /tab >}}
 {{< /tabs >}}
+
+## Verify a bank account
+
+There are two ways to verify a bank account as a payment method:
+
+- Instant verification
+- Manual verification
+
+### Instant verification
+
+To verify your bank account instantly, you must sign in to your bank account
+from the Docker billing flow:
+
+1. Choose **US bank account** as your payment method.
+2. Enter your **Email** and **First and last name**, and **Search for your bank**.
+3. Sign in to your bank and select **Agree and continue**.
+4. Select an account to link and verify, and select **Connect account**.
+
+When the account is verified, you will see a success message in the pop-up modal.
+
+### Manual verification
+
+> [!NOTE]
+>
+> You may have to use an alternative payment method until your bank account is
+> manually verified. Manual verification can take 1-2 business days.
+
+You can also manually verify your bank account using microdeposits:
+
+1. Choose **US bank account** as your payment method.
+2. Enter your **Email** and **First and last name**, and **Search for your bank**.
+3. Enter your bank details: **Routing number** and **Account number**.
+4. Select **Submit**.
+5. You will receive an email with instructions on how to manually verify.
+
+Manual verification uses microdeposits. You should see a small deposit in your
+bank account in 1-2 business days. Open your manual verification email and enter
+the amount of this deposit to verify your account.
 
 ## Failed payments
 
