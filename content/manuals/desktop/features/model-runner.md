@@ -22,6 +22,10 @@ The Docker Model Runner plugin lets you:
 
 Models are pulled from Docker Hub the first time they're used and stored locally. They're loaded into memory only at runtime when a request is made, and unloaded when not in use to optimize resources. Since models can be large, the initial pull may take some time — but after that, they're cached locally for faster access. You can interact with the model using [OpenAI-compatible APIs](#what-api-endpoints-are-available).
 
+> [!TIP]
+>
+> Using Testcontainers? Testcontainers for Java now [supports Docker Model Runner](https://java.testcontainers.org/modules/docker_model_runner/)
+
 ## Enable Docker Model Runner
 
 1. Navigate to the **Features in development** tab in settings.
