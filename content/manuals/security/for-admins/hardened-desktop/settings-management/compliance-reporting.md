@@ -75,20 +75,13 @@ Use the following table to understand how a user’s compliance status is
 determined based on their domain status and settings status. Each row represents
 a combination of statuses that may appear in the reporting dashboard.
 
-> [!TIP]
->
-> If a combination is marked "Not possible" in the reference table,
-it means that Docker does not currently report that combination due to how
-compliance is evaluated. These are included here to help you interpret
-unexpected or unclear data.
-
 | Domain status   | Settings status     | Compliance: Unknown                                                                 | Compliance: Outdated                                                                                      | Compliance: Non-compliant                                                                                      | Compliance: Compliant                                            |
 |-----------------|---------------------|--------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------|
-| Unknown         | Unknown             | The user does not exist in the system, is inactive, or has never been a member of the organization. | The user was removed from the organization after fetching settings that are now outdated.                 | The user was removed from the organization after fetching valid settings.                                       | Not possible                                                     |
-| Uncontrolled    | Unknown             | The user’s email domain is not verified and the user has never fetched settings. May be a guest user or inactive. | The user was removed or changed their email after fetching outdated settings.                             | The user was removed or changed their email after fetching valid settings.                                      | Not possible                                                     |
-| Controlled      | Uncontrolled        | The user does not have a settings package assigned or applicable to them.            | The user is assigned to a settings package but has not fetched the latest version.                         | Not possible                                                                                                     | Not possible                                                     |
+| Unknown         | Unknown             | The user does not exist in the system, is inactive, or has never been a member of the organization. | The user was removed from the organization after fetching settings that are now outdated.                 | The user was removed from the organization after fetching valid settings.                                       | -                                                     |
+| Uncontrolled    | Unknown             | The user’s email domain is not verified and the user has never fetched settings. May be a guest user or inactive. | The user was removed or changed their email after fetching outdated settings.                             | The user was removed or changed their email after fetching valid settings.                                      | -                                                     |
+| Controlled      | Uncontrolled        | The user does not have a settings package assigned or applicable to them.            | The user is assigned to a settings package but has not fetched the latest version.                         | -                                                                                                     | -                                                     |
 | Controlled      | Controlled          | The user has not logged into Docker Desktop to fetch settings.                       | The user fetched an outdated version of the settings.                                                      | The user fetched the latest settings but has not applied them yet.                                              | The user has fetched and applied the latest settings.            |
-| Uncontrolled  | Controlled       | The user is associated with a verified settings policy, but their email domain is not verified. May be a guest user. | The user fetched outdated settings but their domain is still not verified. | The user fetched valid settings but their domain is not verified. | Not possible |
+| Uncontrolled  | Controlled       | The user is associated with a verified settings policy, but their email domain is not verified. May be a guest user. | The user fetched outdated settings but their domain is still not verified. | The user fetched valid settings but their domain is not verified. | - |
 
 ## Resolve compliance status
 
