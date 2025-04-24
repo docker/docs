@@ -37,11 +37,12 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ### New
 
-- Expanded IPv6 support to improve container connectivity
-- Docker Model Runner on Windows machines with NVIDIA GPUs on board
-- Docker Model Runner model push to Hub
-- Compose support with Docker Model Runner
-- TestContainers support with Docker Model Runner
+- Docker Model Runner is now available on Windows machines with NVIDIA GPUs.
+- You can now push models to Docker Hub with Docker Model Runner.
+- Added support for Docker Model Runner's model management and chat interface in Docker Desktop for Mac and Windows (on hardware supporting Docker Model Runner). Users can now view, interact with, and manage local AI models through a new dedicated interface.
+- Docker Compose and Testcontainers Java and Go now support Docker Model Runner.
+- Introducing Docker Desktop in the Microsoft App Store.
+- MacOS QEMU Virtualization option deprecation.
 
 ### Upgrades
 
@@ -56,14 +57,13 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 #### For all platforms
 
 - Fixed a bug in DockerVMM that caused an excessive number of open file handles on the host.
-- Fixed an issue where Docker Desktop failed to start if the admin-settings.json didn't contain the optional `configurationFileVersion` configuration.
+- Fixed an issue where Docker Desktop failed to start if the `admin-settings.json` file didn't contain the optional `configurationFileVersion` configuration.
 - Fixed a bug that was causing outgoing UDP connections to be eagerly closed.
-- Added support for local AI model management and chat interface in Docker Desktop for Mac and Windows. Users can now view, interact with, and manage local AI models through a new dedicated interface.
 - Enhanced log reading experience with advanced search capabilities and container-level filtering, enabling quicker debugging and troubleshooting.
 - Improved error messages when downloading Registry Access Management configuration.
-- If Docker can't bind an ICMPv4 socket log an error and continue rather than quit.
+- If Docker can't bind an ICMPv4 socket, it now logs an error and continues rather than quits.
 - Enabled the memory protection keys mechanism in the Docker Desktop Linux VM, allowing containers like Oracle database images to run correctly.
-- Fixed problem with containers accessing `/proc/sys/kernel/shm*` sysctls when [Enhanced Container Isolation](https://docs.docker.com/security/for-admins/hardened-desktop/enhanced-container-isolation/) is enabled on Mac, Windows Hyper-V, or Linux.
+- Fixed a problem with containers accessing `/proc/sys/kernel/shm*` sysctls when [Enhanced Container Isolation](/manuals/security/for-admins/hardened-desktop/enhanced-container-isolation/_index.md) is enabled on Mac, Windows Hyper-V, or Linux.
 - Added kernel module `nft_fib_inet`, required for running firewalld in a Linux container.
 
 #### For Mac
@@ -74,8 +74,14 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 #### For Windows
 
-- The Windows EXE installer now includes improved handling of locked files. Fixes [docker/for-win#14299](https://github.com/docker/for-win/issues/14299) and [docker/for-win#14316](https://github.com/docker/for-win/issues/14316).
+- The Windows `.exe` installer now includes improved handling of locked files. Fixes [docker/for-win#14299](https://github.com/docker/for-win/issues/14299) and [docker/for-win#14316](https://github.com/docker/for-win/issues/14316).
 - Fixed `Docker Desktop.exe` not showing version information after installation. Fixes [docker/for-win#14703](https://github.com/docker/for-win/issues/14703).
+
+### Known issues
+
+#### For Windows
+
+- If multiple organizations are specified in the `allowedOrgs` Windows registry key using space-separated format, sign-in will fail and user will be logged out. As a workaround, specify each organization on a separate line in the registry key value.
 
 ## 4.40.0
 
