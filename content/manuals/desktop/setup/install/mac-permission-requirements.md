@@ -16,7 +16,7 @@ This page contains information about the permission requirements for running and
 
 It also provides clarity on running containers as `root` as opposed to having `root` access on the host.
 
-Docker Desktop on Windows is designed with security in mind. Administrative rights are only required when absolutely necessary.
+Docker Desktop on Mac is designed with security in mind. Administrative rights are only required when absolutely necessary.
 
 ## Permission requirements
 
