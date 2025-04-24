@@ -24,7 +24,7 @@ Models are pulled from Docker Hub the first time they're used and stored locally
 
 > [!TIP]
 >
-> Using Testcontainers? Testcontainers for Java now [supports Docker Model Runner](https://java.testcontainers.org/modules/docker_model_runner/)
+> Using Testcontainers? [Testcontainers for Java](https://java.testcontainers.org/modules/docker_model_runner/) and [Go](https://golang.testcontainers.org/modules/dockermodelrunner/) now support Docker Model Runner
 
 ## Enable Docker Model Runner
 
