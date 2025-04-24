@@ -141,3 +141,9 @@ Do you want to continue? [y/N]: y
 
 Your compose stack "oci://registry.example.com/stack:latest" is stored in "~/Library/Caches/docker-compose/964e715660d6f6c3b384e05e7338613795f7dcd3613890cfa57e3540353b9d6d"
 ```
+
+The docker compose publish command supports non-interactive execution, allowing you to skip the confirmation prompt by including the `-y` (or `--yes`) flag: 
+
+```console
+$ docker compose publish -y username/my-compose-app:latest
+```
