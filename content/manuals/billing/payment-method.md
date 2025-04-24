@@ -51,7 +51,7 @@ To add a payment method:
     an existing Link customer, you must fill out the card information form to
     store a card for Link payments.
     - If you are adding a bank account, select **US bank account**, enter your
-    **Email** and **Full name**, and **Search for your bank**. To verifiy your
+    **Email** and **Full name**, and **Search for your bank**. To verify your
     bank account, see [Verify a bank account](manuals/billing/payment-method.md#verify-a-bank-account).
 6. Select **Add payment method**.
 7. Optional. You can set a new default payment method by selecting the **Set as default** action.
@@ -108,7 +108,7 @@ To add a payment method:
     an existing Link customer, you must fill out the card information form to
     store a card for Link payments.
     - If you are adding a bank account, select **US bank account**, enter your
-    **Email** and **Full name**, and **Search for your bank**. To verifiy your
+    **Email** and **Full name**, and **Search for your bank**. To verify your
     bank account, see [Verify a bank account](manuals/billing/payment-method.md#verify-a-bank-account).
 7. Select **Add payment method**.
 8. Select **Add payment method**.
@@ -170,7 +170,7 @@ When the account is verified, you will see a success message in the pop-up modal
 > You may have to use an alternative payment method until your bank account is
 > manually verified. Manual verification can take 1-2 business days.
 
-You can also manually verify your bank account using microdeposits:
+You can also manually verify your bank account using micro-deposits:
 
 1. Choose **US bank account** as your payment method.
 2. Enter your **Email** and **First and last name**, and **Search for your bank**.
@@ -178,7 +178,7 @@ You can also manually verify your bank account using microdeposits:
 4. Select **Submit**.
 5. You will receive an email with instructions on how to manually verify.
 
-Manual verification uses microdeposits. You should see a small deposit in your
+Manual verification uses micro-deposits. You should see a small deposit in your
 bank account in 1-2 business days. Open your manual verification email and enter
 the amount of this deposit to verify your account.
 
