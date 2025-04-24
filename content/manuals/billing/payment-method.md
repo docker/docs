@@ -25,7 +25,7 @@ The following payment methods are supported:
 - Diners
 - UnionPay
 - Link
-- ACH transfer via with a [verified](manuals/billing/payment-method.md#verify-a-bank-account) US bank account
+- ACH transfer with a [verified](manuals/billing/payment-method.md#verify-a-bank-account) US bank account
 
 All currency, for example the amount listed on your billing invoice, is in United States dollar (USD).
 
