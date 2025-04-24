@@ -57,6 +57,11 @@ To add a payment method:
 7. Optional. You can set a new default payment method by selecting the **Set as default** action.
 8. Optional. You can remove non-default payment methods by selecting the **Delete** action.
 
+> [!NOTE]
+>
+> If you want to set a US bank account as your default payment method, you must
+> verify the account first.
+
 {{< /tab >}}
 {{< tab name="Legacy Docker plan" >}}
 
@@ -109,6 +114,11 @@ To add a payment method:
 8. Select **Add payment method**.
 9. Optional. You can set a new default payment method by selecting the **Set as default** action.
 10. Optional. You can remove non-default payment methods by selecting the **Delete** action.
+
+> [!NOTE]
+>
+> If you want to set a US bank account as your default payment method, you must
+> verify the account first.
 
 {{< /tab >}}
 {{< tab name="Legacy Docker plan" >}}
