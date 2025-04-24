@@ -89,6 +89,7 @@ earlier Linux kernel series).
 This will be resolved in the updated 5.15 series Linux kernel.
 - Images pulled by Docker Desktop when Docker Debug or Kubernetes is enabled,
 are not restricted by default even if Docker Hub is blocked by RAM.
+- If Docker Hub access is restricted by RAM, pulls on images originating from Docker Hub are restricted even if the image has been previously cached by a registry mirror. See [Using Registry Access Management (RAM) with a registry mirror](/manuals/docker-hub/image-library/mirror.md).
 
 Also, Registry Access Management operates on the level of hosts, not IP
 addresses. Developers can bypass this restriction within their domain
