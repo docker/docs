@@ -17,15 +17,18 @@ You can add a payment method or update your account's existing payment method at
 
 The following payment methods are supported:
 
-- Visa
-- MasterCard
-- American Express
-- Discover
-- JCB
-- Diners
-- UnionPay
-- Link
-- ACH transfer with a [verified](manuals/billing/payment-method.md#verify-a-bank-account) US bank account
+- Cards
+  - Visa
+  - MasterCard
+  - American Express
+  - Discover
+  - JCB
+  - Diners
+  - UnionPay
+- Wallets
+  - Stripe Link
+- Bank accounts
+  - ACH transfer with a [verified](manuals/billing/payment-method.md#verify-a-bank-account) US bank account
 
 All currency, for example the amount listed on your billing invoice, is in United States dollar (USD).
 
@@ -45,14 +48,17 @@ To add a payment method:
 3. Select **Payment methods** from the left-hand menu.
 4. Select **Add payment method**.
 5. Enter your new payment information:
-    - If you are adding a card, select **Card** and fill out the card information form.
-    - If you are adding a Link payment, select **Secure, 1-click checkout with Link**
-    and enter your Link **email address** and **phone number**. If you are not
-    an existing Link customer, you must fill out the card information form to
-    store a card for Link payments.
-    - If you are adding a bank account, select **US bank account**, enter your
-    **Email** and **Full name**, and **Search for your bank**. To verify your
-    bank account, see [Verify a bank account](manuals/billing/payment-method.md#verify-a-bank-account).
+    - If you are adding a card:
+        - Select **Card** and fill out the card information form.
+    - If you are adding a Link payment:
+        - Select **Secure, 1-click checkout with Link** and enter your Link **email address** and **phone number**.
+        - If you are not an existing Link customer, you must fill out the card information form to store a card for Link payments.
+    - If you are adding a bank account:
+        - Select **US bank account**.
+        - Verify your **Email** and **Full name**.
+        - If your bank is listed, select your bank's name.
+        - If your bank is not listed, select **Search for your bank**.
+        - To verify your bank account, see [Verify a bank account](manuals/billing/payment-method.md#verify-a-bank-account).
 6. Select **Add payment method**.
 7. Optional. You can set a new default payment method by selecting the **Set as default** action.
 8. Optional. You can remove non-default payment methods by selecting the **Delete** action.
@@ -73,11 +79,11 @@ To add a payment method:
 4. Select the **Payment methods and billing history** link.
 5. In the **Payment method** section, select **Add payment method**.
 6. Enter your new payment information:
-    - If you are adding a card, select **Card** and fill out the card information form.
-    - IIf you are adding a Link payment, select **Secure, 1-click checkout with Link**
-    and enter your Link **email address** and **phone number**. If you are not
-    an existing Link customer, you must fill out the card information form to
-    store a card for Link payments.
+    - If you are adding a card:
+        - Select **Card** and fill out the card information form.
+    - If you are adding a Link payment:
+        - Select **Secure, 1-click checkout with Link** and enter your Link **email address** and **phone number**.
+        - If you are not an existing Link customer, you must fill out the card information form to store a card for Link payments.
 7. Select **Add**.
 8. Select the **Actions** icon, then select **Make default** to ensure that your new payment method applies to all purchases and subscriptions.
 9. Optional. You can remove non-default payment methods by selecting the **Actions** icon. Then, select **Delete**.
@@ -102,14 +108,17 @@ To add a payment method:
 4. Select **Payment methods** from the left-hand menu.
 5. Select **Add payment method**.
 6. Enter your new payment information:
-    - If you are adding a card, fill out the card information form.
-    - If you are adding a Link payment, select **Secure, 1-click checkout with Link**
-    and enter your Link **email address** and **phone number**. If you are not
-    an existing Link customer, you must fill out the card information form to
-    store a card for Link payments.
-    - If you are adding a bank account, select **US bank account**, enter your
-    **Email** and **Full name**, and **Search for your bank**. To verify your
-    bank account, see [Verify a bank account](manuals/billing/payment-method.md#verify-a-bank-account).
+    - If you are adding a card:
+        - Select **Card** and fill out the card information form.
+    - If you are adding a Link payment:
+        - Select **Secure, 1-click checkout with Link** and enter your Link **email address** and **phone number**.
+        - If you are not an existing Link customer, you must fill out the card information form to store a card for Link payments.
+    - If you are adding a bank account:
+        - Select **US bank account**.
+        - Verify your **Email** and **Full name**.
+        - If your bank is listed, select your bank's name.
+        - If your bank is not listed, select **Search for your bank**.
+        - To verify your bank account, see [Verify a bank account](manuals/billing/payment-method.md#verify-a-bank-account).
 7. Select **Add payment method**.
 8. Select **Add payment method**.
 9. Optional. You can set a new default payment method by selecting the **Set as default** action.
@@ -132,11 +141,11 @@ To add a payment method:
 5. Select the **Payment methods and billing history** link.
 6. In the **Payment Method** section, select **Add payment method**.
 7. Enter your new payment information:
-    - If you are adding a card, fill out the card information form.
-    - If you are adding a Link payment, select **Secure, 1-click checkout with Link**
-    and enter your Link **email address** and **phone number**. If you are not
-    an existing Link customer, you must fill out the card information form to
-    store a card for Link payments.
+    - If you are adding a card:
+        - Select **Card** and fill out the card information form.
+    - If you are adding a Link payment:
+        - Select **Secure, 1-click checkout with Link** and enter your Link **email address** and **phone number**.
+        - If you are not an existing Link customer, you must fill out the card information form to store a card for Link payments.
 8. Select **Add payment method**.
 9. Select the **Actions** icon, then select **Make default** to ensure that your new payment method applies to all purchases and subscriptions.
 10. Optional. You can remove non-default payment methods by selecting the **Actions** icon. Then, select **Delete**.
@@ -148,8 +157,8 @@ To add a payment method:
 
 There are two ways to verify a bank account as a payment method:
 
-- Instant verification
-- Manual verification
+- Instant verification: Docker supports several major banks for instant verification.
+- Manual verification: All other banks must be verified manually.
 
 ### Instant verification
 
@@ -157,30 +166,28 @@ To verify your bank account instantly, you must sign in to your bank account
 from the Docker billing flow:
 
 1. Choose **US bank account** as your payment method.
-2. Enter your **Email** and **First and last name**, and **Search for your bank**.
-3. Sign in to your bank and select **Agree and continue**.
-4. Select an account to link and verify, and select **Connect account**.
+2. Verify your **Email** and **Full name**.
+3. If your bank is listed, select your bank's name or select **Search for your bank**.
+4. Sign in to your bank and review the terms and conditions. This agreement
+allows Docker to debit payments from your connected bank account.
+5. Select **Agree and continue**.
+6. Select an account to link and verify, and select **Connect account**.
 
 When the account is verified, you will see a success message in the pop-up modal.
 
 ### Manual verification
 
-> [!NOTE]
->
-> You may have to use an alternative payment method until your bank account is
-> manually verified. Manual verification can take 1-2 business days.
-
-You can also manually verify your bank account using micro-deposits:
+To verify your bank account manually, you must enter the micro-deposit amount from your bank statement:
 
 1. Choose **US bank account** as your payment method.
-2. Enter your **Email** and **First and last name**, and **Search for your bank**.
-3. Enter your bank details: **Routing number** and **Account number**.
-4. Select **Submit**.
-5. You will receive an email with instructions on how to manually verify.
+2. Verify your **Email** and **First and last name**.
+3. Select **Enter bank details manually instead**.
+4. Enter your bank details: **Routing number** and **Account number**.
+5. Select **Submit**.
+6. You will receive an email with instructions on how to manually verify.
 
-Manual verification uses micro-deposits. You should see a small deposit in your
-bank account in 1-2 business days. Open your manual verification email and enter
-the amount of this deposit to verify your account.
+Manual verification uses micro-deposits. You should see a small deposit
+(e.g. $-0.01) in your bank account in 1-2 business days. Open your manual verification email and enter the amount of this deposit to verify your account.
 
 ## Failed payments
 
