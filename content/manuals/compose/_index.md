@@ -40,8 +40,8 @@ grid:
   description: Explore general FAQs and find out how to give feedback.
   icon: help
   link: /compose/faq
-- title: Migrate to Compose V2
-  description: Learn how to migrate from Compose V1 to V2
+- title: Migrate to Compose v2
+  description: Learn how to migrate from Compose v1 to v2
   icon: folder_delete
   link: /compose/releases/migrate/
 aliases:
@@ -55,7 +55,7 @@ aliases:
 Docker Compose is a tool for defining and running multi-container applications. 
 It is the key to unlocking a streamlined and efficient development and deployment experience. 
 
-Compose simplifies the control of your entire application stack, making it easy to manage services, networks, and volumes in a single, comprehensible YAML configuration file. Then, with a single command, you create and start all the services
+Compose simplifies the control of your entire application stack, making it easy to manage services, networks, and volumes in a single YAML configuration file. Then, with a single command, you create and start all the services
 from your configuration file.
 
 Compose works in all environments; production, staging, development, testing, as
