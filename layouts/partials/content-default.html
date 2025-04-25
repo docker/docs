@@ -11,9 +11,9 @@
     </div>
     {{ .Content }}
   </article>
-  <span class="ml-auto md-dropdown">
+  <div class="hidden lg:block ml-auto md-dropdown">
     {{ partial "md-dropdown.html" . }}
-  </span>
+  </div>
   <div class="-mr-8 -mt-8 hidden min-w-52 flex-1 lg:block">
     {{ partial "aside.html" . }}
   </div>
