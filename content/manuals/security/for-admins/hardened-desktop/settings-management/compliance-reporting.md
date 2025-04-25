@@ -75,8 +75,9 @@ This reference explains how each status is determined in the reporting dashboard
 based on user domain and settings data. The Admin Console displays the
 highest-priority applicable status according to the following rules.
 
-**Compliance status**
-| Compliance status | What it means |
+#### Compliance status
+
+| Compliance status | Description |
 |-------------------|---------------|
 | Uncontrolled domain | The user's email domain is not verified. |
 | No policy assigned | The user does not have any policy assigned to them. |
@@ -85,16 +86,17 @@ highest-priority applicable status according to the following rules.
 | Unknown | The user hasn't fetched any policy yet, or their compliance can't be determined. |
 | Compliant | The user fetched and applied the latest assigned policy. |
 
-**Domain status**
-| Domain status | What it means |
+#### Domain status
+
+| Domain status | Description |
 |---------------|---------------|
 | Verified | The user’s email domain is verified. |
 | Guest user | The user's email domain is not verified. |
 | Domainless | Your organization has no verified domains, and the user's domain is unknown. |
 | Unknown user | Your organization has verified domains, but the user's domain is unknown. |
 
-**Settings status**
-| Settings status | What it means |
+#### Settings status
+| Settings status | Description |
 |-----------------|---------------|
 | Global policy | The user is assigned your organzation's default policy. |
 | User policy | The user is assigned a specific custom policy. |
