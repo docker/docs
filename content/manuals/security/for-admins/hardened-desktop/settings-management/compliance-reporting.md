@@ -76,7 +76,6 @@ based on user domain and settings data. The Admin Console displays the
 highest-priority applicable status according to the following rules.
 
 **Compliance status**
-
 | Compliance status | What it means |
 |-------------------|---------------|
 | Uncontrolled domain | The user's email domain is not verified. |
@@ -87,9 +86,6 @@ highest-priority applicable status according to the following rules.
 | Compliant | The user fetched and applied the latest assigned policy. |
 
 **Domain status**
-
-This reflects how the user’s email domain is evaluated based on the organization’s domain setup.
-
 | Domain status | What it means |
 |---------------|---------------|
 | Verified | The user’s email domain is verified. |
@@ -98,9 +94,6 @@ This reflects how the user’s email domain is evaluated based on the organizati
 | Unknown user | Your organization has verified domains, but the user's domain is unknown. |
 
 **Settings status**
-
-This shows whether and how the user is assigned a settings policy.
-
 | Settings status | What it means |
 |-----------------|---------------|
 | Global policy | The user is assigned your organzation's default policy. |
