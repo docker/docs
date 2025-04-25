@@ -36,6 +36,11 @@ To add seats to your subscription:
 4. Select **Add seats**.
 5. Follow the on-screen instructions to complete adding seats.
 
+> [!NOTE]
+>
+> If you choose to pay using a US bank account, you must verify the account. For
+> more information, see [Verify a bank account](manuals/billing/payment-method.md#verify-a-bank-account).
+
 You can now add more members to your organization. For more information, see [Manage organization members](../admin/organization/members.md).
 
 {{< /tab >}}
