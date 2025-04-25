@@ -98,7 +98,7 @@ Use the `bash` language code block when you want to show a Bash script:
 
 ```bash
 #!/usr/bin/bash
-echo "deb https://packages.docker.com/1.12/apt/repo ubuntu-trusty main" | sudo tee /etc/apt/sources.list.d/docker.list
+echo "deb https://download.docker.com/linux/ubuntu noble stable" | sudo tee /etc/apt/sources.list.d/docker.list
 ```
 
 If you want to show an interactive shell, use `console` instead.
@@ -106,7 +106,7 @@ In cases where you use `console`, make sure to add a dollar character
 for the user sign:
 
 ```console
-$ echo "deb https://packages.docker.com/1.12/apt/repo ubuntu-trusty main" | sudo tee /etc/apt/sources.list.d/docker.list
+$ echo "deb https://download.docker.com/linux/ubuntu noble stable" | sudo tee /etc/apt/sources.list.d/docker.list
 ```
 
 ## Go
