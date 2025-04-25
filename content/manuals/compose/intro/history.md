@@ -17,7 +17,7 @@ This page provides:
 
 ![Image showing the main differences between Compose v1 and Compose v2](../images/v1-versus-v2.png)
 
-The image above shows that the currently supported version of the Docker Compose CLI is Compose v2 which is defined by the [Compose Specification](/reference/compose-file/_index.md).
+The previous image shows that the currently supported version of the Docker Compose CLI is Compose v2 which is defined by the [Compose Specification](/reference/compose-file/_index.md).
 
 It also provides a quick snapshot of the differences in file formats, command-line syntax, and top-level elements. This is covered in more detail in the following sections.
 
@@ -45,6 +45,6 @@ Compose file format 2.x and 3.x are very similar to each other, but the latter i
 
 To address confusion around Compose CLI versioning, Compose file format versioning, and feature parity depending on whether Swarm mode was in use, file format 2.x and 3.x were merged into the [Compose Specification](/reference/compose-file/_index.md). 
 
-Compose v2 uses the Compose Specification for project definition. Unlike the prior file formats, the Compose Specification is rolling and makes the `version` top-level element optional. Compose v2 also makes use of optional specifications - [Deploy](/reference/compose-file/deploy.md), [Develop](/reference/compose-file/develop.md) and [Build](/reference/compose-file/build.md).
+Compose v2 uses the Compose Specification for project definition. Unlike the prior file formats, the Compose Specification is rolling and makes the `version` top-level element optional. Compose v2 also makes use of optional specifications - [Deploy](/reference/compose-file/deploy.md), [Develop](/reference/compose-file/develop.md), and [Build](/reference/compose-file/build.md).
 
 To make [migration](/manuals/compose/releases/migrate.md) easier, Compose v2 has backwards compatibility for certain elements that have been deprecated or changed between Compose file format 2.x/3.x and the Compose Specification.
