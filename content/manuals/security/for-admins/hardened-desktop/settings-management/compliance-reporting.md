@@ -103,7 +103,6 @@ highest-priority applicable status according to the following rules.
 | User policy | The user is assigned a specific custom policy. |
 | No policy assigned | The user is not assigned to any policy. |
 
-
 ## Resolve compliance status
 
 To resolve compliance status, you must view a user's compliance status details
