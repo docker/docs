@@ -1,7 +1,6 @@
 ---
-title: API reference
+title: Token authorization
 build:
   render: never
-weight: 20
 ---
 
