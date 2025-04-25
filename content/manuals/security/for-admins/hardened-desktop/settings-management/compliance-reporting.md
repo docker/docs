@@ -83,7 +83,6 @@ highest-priority applicable status according to the following rules.
 | No policy assigned | The user does not have any policy assigned to them. |
 | Non-compliant | The user fetched the correct policy, but hasn't applied it. |
 | Outdated | The user fetched a previous version of the policy. |
-| Unknown | The user hasn't fetched any policy yet, or their compliance can't be determined. |
 | Compliant | The user fetched and applied the latest assigned policy. |
 
 #### Domain status
