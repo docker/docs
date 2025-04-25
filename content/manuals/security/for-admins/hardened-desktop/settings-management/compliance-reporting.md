@@ -96,6 +96,7 @@ highest-priority applicable status according to the following rules.
 | Unknown user | Your organization has verified domains, but the user's domain is unknown. |
 
 #### Settings status
+
 | Settings status | Description |
 |-----------------|---------------|
 | Global policy | The user is assigned your organzation's default policy. |
