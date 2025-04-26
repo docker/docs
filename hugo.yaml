@@ -4,6 +4,7 @@ refLinksErrorLevel: ERROR
 enableGitInfo: true
 disablePathToLower: true
 enableInlineShortcodes: true
+disableHugoGeneratorInject: true
 ignoreLogs:
   - cascade-pattern-with-extension
 
