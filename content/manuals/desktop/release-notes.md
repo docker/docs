@@ -31,9 +31,9 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ## 4.41.0
 
-{{< release-date date="2025-04-24" >}}
+{{< release-date date="2025-04-28" >}}
 
-{{< desktop-install-v2 all=true beta_win_arm=true version="4.41.0" build_path="/190394/" >}}
+{{< desktop-install-v2 all=true beta_win_arm=true version="4.41.0" build_path="/190950/" >}}
 
 ### New
 
@@ -78,6 +78,10 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Fixed `Docker Desktop.exe` not showing version information after installation. Fixes [docker/for-win#14703](https://github.com/docker/for-win/issues/14703).
 
 ### Known issues
+
+#### For all platforms
+
+- If you have enforced sign-in using `desktop.plist` and also have a `registry.json`, sign-in will fail if the user belongs to an organization listed in `desktop.plist` but not to any organizations specified in `registry.json`. To resolve this, remove the `registry.json` file.
 
 #### For Windows
 
