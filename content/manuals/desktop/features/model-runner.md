@@ -24,7 +24,7 @@ Models are pulled from Docker Hub the first time they're used and stored locally
 
 > [!TIP]
 >
-> Using Testcontainers? [Testcontainers for Java](https://java.testcontainers.org/modules/docker_model_runner/) and [Go](https://golang.testcontainers.org/modules/dockermodelrunner/) now support Docker Model Runner.
+> Using Testcontainers or Docker Compose? [Testcontainers for Java](https://java.testcontainers.org/modules/docker_model_runner/) and [Go](https://golang.testcontainers.org/modules/dockermodelrunner/), and [Docker Compose](/manuals/compose/how-tos/model-runner.md) now support Docker Model Runner.
 
 ## Enable Docker Model Runner
 
@@ -144,7 +144,7 @@ Chat session ended.
 >
 > You can also use chat mode in the Docker Desktop Dashboard when you select the model in the **Models** tab.
 
-### Upload a model to Docker Hub
+### Push a model to Docker Hub
 
 Use the following command to push your model to Docker Hub:
 
