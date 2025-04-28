@@ -16,13 +16,13 @@ Using the Flask framework, the application features a hit counter in Redis, prov
 
 The concepts demonstrated here should be understandable even if you're not familiar with Python. 
 
-This is a non-normative example that just highlights the key things you can do with Compose.
+This is a non-normative example that demonstrates core Compose functionality. 
 
 ## Prerequisites
 
 Make sure you have:
 
-- Installed the latest version of Docker Compose
+- [Installed the latest version of Docker Compose](/manuals/compose/install/_index.md)
 - A basic understanding of Docker concepts and how Docker works
 
 ## Step 1: Set up

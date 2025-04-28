@@ -4,27 +4,29 @@ keywords: compose, orchestration, uninstall, uninstallation, docker, documentati
 title: Uninstall Docker Compose
 ---
 
-Uninstalling Docker Compose depends on the method you have used to install Docker Compose. On this page you can find specific instructions to uninstall Docker Compose.
+How you uninstall Docker Compose depends on how it was installed. This guide covers uninstallation instructions for:
 
+- Docker Compose installed via Docker Desktop
+- Docker Compose installed as a CLI plugin
 
-## Uninstalling Docker Desktop
+## Uninstalling Docker Compose with Docker Desktop
 
 If you want to uninstall Docker Compose and you have installed Docker Desktop, see [Uninstall Docker Desktop](/manuals/desktop/uninstall.md).
 
 > [!NOTE]
 >
-> Unless you have other Docker instances installed on that specific environment, you would be removing Docker altogether by uninstalling Docker Desktop.
+> Unless you have other Docker instances installed on that specific environment, uninstalling Docker Desktop removes all Docker components, including Docker Engine, Docker CLI, and Docker Compose.
 
 ## Uninstalling the Docker Compose CLI plugin
 
-To remove the Docker Compose CLI plugin, run:
+If you installed Docker Compose via a package manager, run:
 
-Ubuntu, Debian:
+On Ubuntu or Debian:
 
    ```console
    $ sudo apt-get remove docker-compose-plugin
    ```
-RPM-based distributions:
+On RPM-based distributions:
 
    ```console
    $ sudo yum remove docker-compose-plugin
@@ -32,7 +34,7 @@ RPM-based distributions:
 
 ### Manually installed
 
-If you used `curl` to install Docker Compose CLI plugin, to uninstall it, run:
+If you installed Docker Compose manually (using curl), remove it by deleting the binary:
 
    ```console
    $ rm $DOCKER_CONFIG/cli-plugins/docker-compose
@@ -40,7 +42,7 @@ If you used `curl` to install Docker Compose CLI plugin, to uninstall it, run:
 
 ### Remove for all users
 
-Or, if you have installed Docker Compose for all users, run:
+If installed for all users, remove it from the system directory:
 
    ```console
    $ rm /usr/local/lib/docker/cli-plugins/docker-compose

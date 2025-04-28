@@ -17,29 +17,11 @@ if you have not already done so.
 The samples should help you to:
 
 - Define services based on Docker images using
-  [Compose files](/reference/compose-file/_index.md): `compose.yaml` and
-  `docker-stack.yml`
+  [Compose files](/reference/compose-file/_index.md)
 - Understand the relationship between `compose.yaml` and
   [Dockerfiles](/reference/dockerfile/)
 - Learn how to make calls to your application services from Compose files
 - Learn how to deploy applications and services to a [swarm](/manuals/engine/swarm/_index.md)
-
-## Samples tailored to demo Compose
-
-These samples focus specifically on Docker Compose:
-
-- [Quickstart: Compose and ELK](https://github.com/docker/awesome-compose/tree/master/elasticsearch-logstash-kibana/README.md) - Shows
-  how to use Docker Compose to set up and run ELK - Elasticsearch-Logstash-Kibana.
-
-- [Quickstart: Compose and Django](https://github.com/docker/awesome-compose/tree/master/official-documentation-samples/django/README.md) - Shows
-  how to use Docker Compose to set up and run a simple Django/PostgreSQL app.
-
-- [Quickstart: Compose and Rails](https://github.com/docker/awesome-compose/tree/master/official-documentation-samples/rails/README.md) - Shows
-  how to use Docker Compose to set up and run a Rails/PostgreSQL app.
-
-- [Quickstart: Compose and WordPress](https://github.com/docker/awesome-compose/tree/master/official-documentation-samples/wordpress/README.md) - Shows
-  how to use Docker Compose to set up and run WordPress in an isolated
-  environment with Docker containers.
 
 ## Awesome Compose samples
 
