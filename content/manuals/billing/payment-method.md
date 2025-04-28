@@ -25,6 +25,7 @@ The following payment methods are supported:
 - Diners
 - UnionPay
 - Link
+- Pay by invoice
 
 All currency, for example the amount listed on your billing invoice, is in United States dollar (USD).
 
@@ -125,6 +126,25 @@ To add a payment method:
 
 {{< /tab >}}
 {{< /tabs >}}
+
+## Enable pay by invoice
+
+Pay by invoice is available during first-time checkouts and subscription
+renewals for subscribers with an annual subscription. When enabled, subscription
+renewals will be sent to your billing contact's email address via invoice.
+You can pay an invoice using card or US bank account.
+
+> [!NOTE]
+>
+> Pay by invoice is only available for annual subscriptions. You can't use pay
+by invoice for subscription upgrades or purchasing additional seats.
+
+1. Sign in to [Docker Home](https://app.docker.com/).
+2. Under Settings and administration, select **Billing**.
+3. Select **Payment methods**, then **Pay by invoice**.
+4. To enable pay by invoice, select the **Pay by invoice** toggle.
+5. Confirm your billing contact details. If you need to change them, select
+**Change** and enter your new billing contact details.
 
 ## Failed payments
 
