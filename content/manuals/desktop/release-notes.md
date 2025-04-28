@@ -37,12 +37,11 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ### New
 
-- Docker Model Runner is now available on Windows machines with NVIDIA GPUs.
-- You can now push models to Docker Hub with Docker Model Runner.
+- Docker Model Runner is now available on x86 Windows machines with NVIDIA GPUs.
+- You can now [push models](/manuals/desktop/features/model-runner.md#push-a-model-to-docker-hub) to Docker Hub with Docker Model Runner.
 - Added support for Docker Model Runner's model management and chat interface in Docker Desktop for Mac and Windows (on hardware supporting Docker Model Runner). Users can now view, interact with, and manage local AI models through a new dedicated interface.
-- Docker Compose and Testcontainers Java and Go now support Docker Model Runner.
-- Introducing Docker Desktop in the Microsoft App Store.
-- MacOS QEMU Virtualization option deprecation.
+- [Docker Compose](/manuals/compose/how-tos/model-runner.md) and Testcontainers [Java](https://java.testcontainers.org/modules/docker_model_runner/) and [Go](https://golang.testcontainers.org/modules/dockermodelrunner/) now support Docker Model Runner.
+- Introducing Docker Desktop in the [Microsoft App Store](https://apps.microsoft.com/detail/xp8cbj40xlbwkx?hl=en-GB&gl=GB).
 
 ### Upgrades
 
@@ -51,6 +50,10 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - [Docker Buildx v0.23.0](https://github.com/docker/buildx/releases/tag/v0.23.0)
 - [Docker Scout CLI v1.17.1](https://github.com/docker/scout-cli/releases/tag/v1.17.1)
 - [Compose Bridge v0.0.19](https://github.com/docker/compose-bridge-binaries/releases/tag/v0.0.19)
+
+### Security 
+
+- Fixed [CVE-2025-3224](https://www.cve.org/CVERecord?id=CVE-2025-3224) allowing an attacker with access to a user machine to perform an elevation of privilege when Docker Desktop updates.
 
 ### Bug fixes and enhancements
 
@@ -65,6 +68,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Enabled the memory protection keys mechanism in the Docker Desktop Linux VM, allowing containers like Oracle database images to run correctly.
 - Fixed a problem with containers accessing `/proc/sys/kernel/shm*` sysctls when [Enhanced Container Isolation](/manuals/security/for-admins/hardened-desktop/enhanced-container-isolation/_index.md) is enabled on Mac, Windows Hyper-V, or Linux.
 - Added kernel module `nft_fib_inet`, required for running firewalld in a Linux container.
+- MacOS QEMU Virtualization option is being deprecated on July 14, 2025.
 
 #### For Mac
 
