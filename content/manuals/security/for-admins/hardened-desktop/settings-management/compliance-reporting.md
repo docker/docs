@@ -75,28 +75,33 @@ This reference explains how each status is determined in the reporting dashboard
 based on user domain and settings data. The Admin Console displays the
 highest-priority applicable status according to the following rules.
 
-#### Compliance status
+**Compliance status**
 
-| Compliance status | Description |
+| Compliance status | What it means |
 |-------------------|---------------|
 | Uncontrolled domain | The user's email domain is not verified. |
 | No policy assigned | The user does not have any policy assigned to them. |
 | Non-compliant | The user fetched the correct policy, but hasn't applied it. |
 | Outdated | The user fetched a previous version of the policy. |
+| Unknown | The user hasn't fetched any policy yet, or their compliance can't be determined. |
 | Compliant | The user fetched and applied the latest assigned policy. |
 
-#### Domain status
+**Domain status**
 
-| Domain status | Description |
+This reflects how the user’s email domain is evaluated based on the organization’s domain setup.
+
+| Domain status | What it means |
 |---------------|---------------|
 | Verified | The user’s email domain is verified. |
 | Guest user | The user's email domain is not verified. |
 | Domainless | Your organization has no verified domains, and the user's domain is unknown. |
 | Unknown user | Your organization has verified domains, but the user's domain is unknown. |
 
-#### Settings status
+**Settings status**
 
-| Settings status | Description |
+This shows whether and how the user is assigned a settings policy.
+
+| Settings status | What it means |
 |-----------------|---------------|
 | Global policy | The user is assigned your organzation's default policy. |
 | User policy | The user is assigned a specific custom policy. |
