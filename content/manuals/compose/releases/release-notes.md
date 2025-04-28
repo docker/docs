@@ -27,16 +27,13 @@ For more detailed information, see the [release notes in the Compose repo](https
 - Dependencies upgrade: bump docker engine and cli to v28.0.4
 - Dependencies upgrade: bump buildx to v0.22.0
 
-
-
-
 ## 2.35.0
 
 {{< release-date date="2025-04-10" >}}
 
 ### Bug fixes and enhancements
 
-- Added support for Docker Model Runner to easily integrate AI models into your Compose applications
+- Added support for [Docker Model Runner](/manuals/desktop/features/model-runner.md) to easily integrate AI models into your Compose applications
 - Added `build --print` command to help debug complex build configurations by showing the equivalent bake file
 - Added `volume.type=image` to provide more flexible volume management for container images
 - Added `--quiet` options to the `run` command for cleaner output when running containers
@@ -50,7 +47,6 @@ For more detailed information, see the [release notes in the Compose repo](https
 - Dependencies upgrade: bump docker engine and cli to v28.1.0
 - Dependencies upgrade: bump buildx to v0.23.0
 - Dependencies upgrade: bump buildkit to v0.21.0
-
 
 ## 2.34.0
 
