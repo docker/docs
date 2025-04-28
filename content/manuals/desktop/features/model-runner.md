@@ -17,9 +17,14 @@ The Docker Model Runner plugin lets you:
 - [Pull models from Docker Hub](https://hub.docker.com/u/ai)
 - Run AI models directly from the command line
 - Manage local models (add, list, remove)
-- Interact with models using a submitted prompt or in chat mode
+- Interact with models using a submitted prompt or in chat mode in the CLI or Docker Desktop Dashboard
+- Push models to Docker Hub
 
 Models are pulled from Docker Hub the first time they're used and stored locally. They're loaded into memory only at runtime when a request is made, and unloaded when not in use to optimize resources. Since models can be large, the initial pull may take some time — but after that, they're cached locally for faster access. You can interact with the model using [OpenAI-compatible APIs](#what-api-endpoints-are-available).
+
+> [!TIP]
+>
+> Using Testcontainers? [Testcontainers for Java](https://java.testcontainers.org/modules/docker_model_runner/) and [Go](https://golang.testcontainers.org/modules/dockermodelrunner/) now support Docker Model Runner.
 
 ## Enable Docker Model Runner
 
@@ -30,6 +35,8 @@ Models are pulled from Docker Hub the first time they're used and stored locally
 5. Open the **Settings** view in Docker Desktop.
 6. Navigate to **Features in development**.
 7. From the **Beta** tab, check the **Enable Docker Model Runner** setting.
+
+You can now use the `docker model` command in the CLI and view and interact with your local models in the **Models** tab in the Docker Desktop Dashboard.
 
 ## Available commands
 
@@ -84,6 +91,8 @@ Downloaded: 257.71 MB
 Model ai/smollm2 pulled successfully
 ```
 
+The models also display in the Docker Desktop Dashboard.
+
 ### List available models
 
 Lists all models currently pulled to your local environment.
@@ -118,7 +127,7 @@ Hello! How can I assist you today?
 #### Interactive chat
 
 ```console
-docker model run ai/smollm2
+$ docker model run ai/smollm2
 ```
 
 Output:
@@ -130,6 +139,41 @@ Hi there! It's SmolLM, AI assistant. How can I help you today?
 > /bye
 Chat session ended.
 ```
+
+> [!TIP]
+>
+> You can also use chat mode in the Docker Desktop Dashboard when you select the model in the **Models** tab.
+
+### Upload a model to Docker Hub
+
+Use the following command to push your model to Docker Hub:
+
+```console
+$ docker model push <namespace>/<model>
+```
+
+### Tag a model
+
+You can specify a particular version or variant of the model:
+
+```console
+$ docker model tag 
+```
+
+If no tag is provided, Docker defaults to `latest`.
+
+### View the logs
+
+Fetch logs from Docker Model Runner to monitor activity or debug issues.
+
+```console
+$ docker model logs 
+```
+
+The following flags are accepted:
+
+- `-f`/`--follow`: View logs with real-time streaming
+- `--no-engines`: Exclude inference engine logs from the output
 
 ### Remove a model
 
@@ -308,19 +352,9 @@ Once linked, re-run the command.
 
 Currently, Docker Model Runner doesn't include safeguards to prevent you from launching models that exceed their system’s available resources. Attempting to run a model that is too large for the host machine may result in severe slowdowns or render the system temporarily unusable. This issue is particularly common when running LLMs models without sufficient GPU memory or system RAM. 
 
-### `model run` drops into chat even if pull fails
-
-If a model image fails to pull successfully, for example due to network issues or lack of disk space, the `docker model run` command will still drop you into the chat interface, even though the model isn’t actually available. This can lead to confusion, as the chat will not function correctly without a running model. 
-
-You can manually retry the `docker model pull` command to ensure the image is available before running it again.
-
 ### No consistent digest support in Model CLI
 
 The Docker Model CLI currently lacks consistent support for specifying models by image digest. As a temporary workaround, you should refer to models by name instead of digest.
-
-### Misleading pull progress after failed initial attempt
-
-In some cases, if an initial `docker model pull` fails partway through, a subsequent successful pull may misleadingly report “0 bytes” downloaded even though data is being fetched in the background. This can give the impression that nothing is happening, when in fact the model is being retrieved. Despite the incorrect progress output, the pull typically completes as expected.
 
 ## Share feedback
 
