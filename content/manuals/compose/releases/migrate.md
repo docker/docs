@@ -9,7 +9,7 @@ aliases:
 - /compose/migrate/
 ---
 
-From July 2023 Compose v1 stopped receiving updates. It’s also no longer available in new releases of Docker Desktop.
+From July 2023, Compose v1 stopped receiving updates. It’s also no longer available in new releases of Docker Desktop.
 
 Compose v2, which was first released in 2020, is included with all currently supported versions of Docker Desktop. It offers an improved CLI experience, improved build performance with BuildKit, and continued new-feature development.
 
@@ -52,7 +52,7 @@ For example, running the Compose command `-p myproject up --scale=1 svc` results
 
 > [!TIP]
 >
->In Compose v2, the global `--compatibility` flag or `COMPOSE_COMPATIBILITY` environment variable preserves the Compose v1 behavior to use underscores (`_`) as the word separator.
+> In Compose v2, the global `--compatibility` flag or `COMPOSE_COMPATIBILITY` environment variable preserves the Compose v1 behavior to use underscores (`_`) as the word separator.
 As this option must be specified for every Compose v2 command run, it's recommended that you only use this as a temporary measure while transitioning to Compose v2.
 
 ### Command-line flags and subcommands
@@ -107,7 +107,7 @@ However, Docker Desktop continues to support a `docker-compose` alias to redirec
 
 ### Migrating running projects
 
-In both v1 and v2, running `up` on a Compose project recreates service containers as necessary to reach the desired state based on comparing the actual state in the Docker Engine to the resolved project configuration including Compose YAML, environment variables, and command-line flags.
+In both v1 and v2, running up on a Compose project recreates service containers as needed. It compares the actual state in the Docker Engine to the resolved project configuration, which includes the Compose YAML, environment variables, and command-line flags.
 
 Because Compose v1 and v2 [name service containers differently](#service-container-names), running `up` using v2 the first time on a project with running services originally launched by v1, results in service containers being recreated with updated names.
 
