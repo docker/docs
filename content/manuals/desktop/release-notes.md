@@ -85,7 +85,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 #### For all platforms
 
-- If you have enforced sign-in using `desktop.plist` and also have a `registry.json`, sign-in will fail if the user belongs to an organization listed in `desktop.plist` but not to any organizations specified in `registry.json`. To resolve this, remove the `registry.json` file.
+- If you have enforced sign-in using `desktop.plist` (on macOS) or Registry key (on Windows) and also have a `registry.json`, sign-in will fail if the user belongs to an organization listed in `desktop.plist`/ registry key but not to any organizations specified in `registry.json`. To resolve this, remove the `registry.json` file.
 
 #### For Windows
 
