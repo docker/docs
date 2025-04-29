@@ -135,7 +135,7 @@ tokens](/manuals/security/for-admins/access-tokens.md).
 
 ## Gated Distribution
 
-> **Availability**: Early Access
+> {{< summary-bar feature_name="Gated distribution" >}}
 
 Gated distribution allows publishers to securely share private container images with external customers or partners, without giving them full organization access or visibility into your teams, collaborators, or other repositories.
 
