@@ -153,7 +153,7 @@ This feature is ideal for commercial software publishers who want to control who
 
 ### Invite distributor members via API
 
-> **Note**
+> [!NOTE]
 > When you invite members, you assign them a role. See [Roles and permissions](/manuals/security/for-admins/roles-and-permissions.md) for details about the access permissions for each role.
 
 Distributor members (used for gated distribution) can only be invited using the Docker Hub API. UI-based invitations are not currently supported for this role. To invite distributor members, use the Bulk create invites API endpoint.
