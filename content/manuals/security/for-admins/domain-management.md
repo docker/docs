@@ -92,9 +92,22 @@ your domain name.
 {{< /tab >}}
 {{< /tabs >}}
 
+## Delete a domain
+
+Deleting a domain removes the assigned TXT record value. To delete a domain:
+
+1. Sign in to the [Admin Console](https://admin.docker.com/).
+2. Select your organization or company from the **Choose profile** page.
+If your organization is part of a company, select the company
+and configure the domain for the organization at the company level.
+3. Under **Security and access**, select **Domain management**.
+4. For the domain you want to delete, section the **Actions** menu, then
+**Delete domain**.
+5. To confirm, select **Delete domain** in the pop-up modal.
+
 ## Auto-provisioning
 
-You must add and verifiy a domain before enabling auto-provisioning. This
+You must add and verify a domain before enabling auto-provisioning. This
 confirms your organization owns the domain. Once a domain is verified,
 Docker can automatically associate matching users with your organization.
 Auto-provisioning does not require an SSO connection.
