@@ -2,6 +2,8 @@
 title: Gordon as an MCP server
 description: How to use Gordon as an MCP server
 keywords: ai, mcp, gordon
+aliases:
+ - /desktop/features/gordon/mcp/gordon-mcp-server/
 ---
 
 ## Gordon as an MCP server
