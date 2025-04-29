@@ -36,7 +36,7 @@ Now, any traffic sent to port `8080` on your host machine will be forwarded to p
 
 > [!IMPORTANT]
 >
-> When a port is published, it's published to all network interfaces by default. This means any traffic that reaches your machine can access the published application. Be mindful of publishing databases or any sensitive information. [Learn more about published ports here](/engine/network/#published-ports).
+> When a port is published, it's published to all network interfaces by default. This means any traffic that reaches your machine can access the published application. Be mindful of publishing databases or any sensitive information. See [Binding to specific network interfaces](#binding-to-specific-network-interfaces) below, and [learn more about published ports here](/engine/network/#published-ports).
 
 ### Binding to specific network interfaces
 
@@ -86,7 +86,7 @@ services:
       - "127.0.0.1:5432:5432"
 ```
 
-This configuration ensures your database is only accessible from the host machine itself, adding a layer of security to your application stack.
+This configuration ensures your database is only accessible from the host machine itself, adding a layer of security to your application stack. You can also set a default bind address for all containers using the `host_binding_ipv4` configuration parameter. This allows you to change the default binding from `0.0.0.0` to a specific IP address. For more information, see [Setting the default bind address for containers](/engine/network/packet-filtering-firewalls/#setting-the-default-bind-address-for-containers).
 
 ### Publishing to ephemeral ports
 
