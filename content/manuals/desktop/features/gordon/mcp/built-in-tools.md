@@ -2,8 +2,6 @@
 title: Built-in tools
 description: How to use Gordon's built-in tools
 keywords: ai, mcp, gordon
-aliases:
- - /desktop/features/gordon/mcp/built-in-tools/
 ---
 
 Gordon comes with an integrated toolbox providing access to various system tools

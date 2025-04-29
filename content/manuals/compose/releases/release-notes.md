@@ -33,7 +33,7 @@ For more detailed information, see the [release notes in the Compose repo](https
 
 ### Bug fixes and enhancements
 
-- Added support for [Docker Model Runner](/manuals/ai/model-runner.md) to easily integrate AI models into your Compose applications
+- Added support for [Docker Model Runner](/manuals/desktop/features/model-runner.md) to easily integrate AI models into your Compose applications
 - Added `build --print` command to help debug complex build configurations by showing the equivalent bake file
 - Added `volume.type=image` to provide more flexible volume management for container images
 - Added `--quiet` options to the `run` command for cleaner output when running containers

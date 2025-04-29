@@ -60,7 +60,7 @@ Docker Desktop integrates with your preferred development tools and languages, a
 - [Docker Scout](../scout/_index.md)
 - [Docker Build](/manuals/build/_index.md)
 - [Docker Compose](/manuals/compose/_index.md)
-- [Ask Gordon](/manuals/ai/gordon/_index.md)
+- [Ask Gordon](/manuals/desktop/features/gordon/_index.md)
 - [Docker Extensions](../extensions/_index.md)
 - [Docker Content Trust](/manuals/engine/security/trust/_index.md)
 - [Kubernetes](https://github.com/kubernetes/kubernetes/)
