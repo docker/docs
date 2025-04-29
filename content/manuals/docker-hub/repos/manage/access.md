@@ -133,7 +133,7 @@ Organizations can use OATs. OATs let you assign fine-grained repository access
 permissions to tokens. For more details, see [Organization access
 tokens](/manuals/security/for-admins/access-tokens.md).
 
-## Gated Distribution
+## Gated distribution
 
 > {{< summary-bar feature_name="Gated distribution" >}}
 
