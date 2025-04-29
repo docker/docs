@@ -54,6 +54,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ### Security 
 
 - Fixed [CVE-2025-3224](https://www.cve.org/CVERecord?id=CVE-2025-3224) allowing an attacker with access to a user machine to perform an elevation of privilege when Docker Desktop updates.
+- Fixed [CVE-2025-4095](https://www.cve.org/CVERecord?id=CVE-2025-4095) where Registry Access Management (RAM) policies were not enforced when using a MacOS configuration profile, allowing users to pull images from unapproved registries.
 
 ### Bug fixes and enhancements
 
