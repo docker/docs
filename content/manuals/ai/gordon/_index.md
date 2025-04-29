@@ -7,7 +7,7 @@ params:
     badge:
       color: blue
       text: Beta
-  group: AI
+    group: AI
 aliases: 
  - /desktop/features/gordon/
 ---
