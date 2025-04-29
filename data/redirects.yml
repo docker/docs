@@ -297,6 +297,6 @@
 
 # Desktop DMR
 
-"/ai/model-runner/":
+"/desktop/features/model-runner/":
   - /go/model-runner/
   

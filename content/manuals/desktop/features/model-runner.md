@@ -5,12 +5,9 @@ params:
     badge:
       color: blue
       text: Beta
-    group: AI
 weight: 20
 description: Learn how to use Docker Model Runner to manage and run AI models. 
 keywords: Docker, ai, model runner, docker deskotp, llm
-aliases:
- - /desktop/features/model-runner/
 ---
 
 {{< summary-bar feature_name="Docker Model Runner" >}}

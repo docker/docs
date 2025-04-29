@@ -10,7 +10,6 @@ params:
   sidebar:
     groups:
       - Open source
-      - AI
       - Products
       - Platform
   notoc: true
@@ -31,15 +30,6 @@ params:
     description: Run containers programmatically in your preferred programming language.
     icon: /assets/icons/Testcontainers.svg
     link: /testcontainers/
-  ai:
-  - title: Ask Gordon
-    description: streamline your workflow and get the most out of the Docker ecosystem with your personal AI assistant.
-    icon: note_add
-    link: /ai/gordon/
-  - title: Docker Model Runner
-    description: View and manage your local models
-    icon: view_in_ar
-    link: /model-runner/
   products:
   - title: Docker Desktop
     description: Your command center for container development.
@@ -100,12 +90,6 @@ Docker products.
 Open source development and containerization technologies.
 
 {{< grid items=open-source >}}
-
-## AI
-
-All the Docker AI tools in one easy-to-access location. 
-
-{{< grid items=ai >}}
 
 ## Products
 
