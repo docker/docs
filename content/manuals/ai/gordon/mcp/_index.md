@@ -6,15 +6,17 @@ grid:
 - title: Built-in tools
   description: Use the built-in tools.
   icon: construction
-  link: /desktop/features/gordon/mcp/built-in-tools
+  link: /ai/gordon/mcp/built-in-tools
 - title: MCP configuration
   description: Configure MCP tools on a per-project basis.
   icon: manufacturing
-  link: /desktop/features/gordon/mcp/yaml
+  link: /ai/gordon/mcp/yaml
 - title: MCP Server
   description: Use Gordon as an MCP server
   icon: dns
-  link: /desktop/features/gordon/mcp/gordon-mcp-server/
+  link: /ai/gordon/mcp/gordon-mcp-server/
+aliases:
+ - /desktop/features/gordon/mcp/
 ---
 
 ## What is MCP?

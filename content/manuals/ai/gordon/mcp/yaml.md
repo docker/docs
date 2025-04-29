@@ -2,6 +2,8 @@
 title: YAML configuration
 description: Learn how to use MCP servers with Gordon
 keywords: ai, mcp, gordon
+aliases: 
+ - /desktop/features/gordon/mcp/yaml/
 ---
 
 Docker has partnered with Anthropic to build container images for the [reference
