@@ -54,7 +54,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ### Security
 
 - Fixed [CVE-2025-3224](https://www.cve.org/CVERecord?id=CVE-2025-3224) allowing an attacker with access to a user machine to perform an elevation of privilege when Docker Desktop updates.
-- Fixed [CVE-2025-3911](https://www.cve.org/CVERecord?id=CVE-2025-3911) allowing an attacker with read access to a user machine to obtain sensitive information from Docker Desktop log files containing environment variables configured for running containers.
+- Fixed [CVE-2025-3911](https://www.cve.org/CVERecord?id=CVE-2025-3911) allowing an attacker with read access to a user's machine to obtain sensitive information from Docker Desktop log files, including environment variables configured for running containers.
 
 ### Bug fixes and enhancements
 
