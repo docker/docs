@@ -1,17 +1,20 @@
 ---
-title: View billing history
+title: Invoices and billing history
 weight: 40
-description: Discover how to view your billing history in Docker Hub
-keywords: payments, billing, subscription, invoices, renewals, invoice management, billing administration
+description: Discover how to view invoices and your billing history
+keywords: payments, billing, subscription, invoices, renewals, invoice management, billing administration, pay invoice
 aliases:
     - /billing/core-billing/history/
 ---
 
-In this section, learn how you can view your billing history, manage your invoices, and verify your renewal date. All monthly and annual subscriptions are automatically renewed at the end of the term using the original form of payment.
+Learn how to view and pay invoices, view your billing history, and verify
+your billing renewal date. All monthly and annual subscriptions are
+automatically renewed at the end of the subscription term using your default
+payment method.
 
 {{% include "tax-compliance.md" %}}
 
-## Invoices
+## View an incoice
 
 Your invoice includes the following:
 
@@ -20,19 +23,44 @@ Your invoice includes the following:
 - Date due
 - Your "Bill to" information
 - Amount due (in USD)
+- Pay online: Select this link to pay your invoice online
 - Description of your order, quantity if applicable, unit price, and amount (in USD)
+- Subtotal, discount (if applicable), and total
 
 The information listed in the **Bill to** section of your invoice is based on your billing information. Not all fields are required. The billing information includes the following:
 
 - Name (required): The name of the administrator or company
-- Email address (required): The email address that receives all billing-related emails for the account
 - Address (required)
+- Email address (required): The email address that receives all billing-related emails for the account
 - Phone number
 - Tax ID or VAT
 
 You can’t make changes to a paid or unpaid billing invoice. When you update your billing information, this change won't update an existing invoice. If you need to update your billing information, make sure you do so before your subscription renewal date when your invoice is finalized. For more information, see [Update the billing information](details.md).
 
-### View renewal date
+## Pay an invoice
+
+> [!NOTE]
+>
+> Pay by invoice is only available for subscribers on an annual billing cylce.
+To change your billing cycle, see [Change your billing cycle](/manuals/billing/cycle.md).
+
+You can pay an invoice from the Docker Billing Console:
+
+1. Sign in to [Docker Home](https://app.docker.com/).
+2. Under Settings and administration, select **Billing**.
+3. Select **Invoices** and locate the invoice you want to pay.
+4. In the **Actions** column, select **Pay invoice**.
+5. Fill out your payment details and select **Pay**.
+
+When your payment has processed, the invoice's **Status** column will update to
+**Paid** and you will receive a confirmation email.
+
+> [!NOTE]
+>
+> If you choose to pay using a US bank account, you must verify the account. For
+more information, see [Verify a bank account](manuals/billing/payment-method.md#verify-a-bank-account).
+
+## View renewal date
 
 {{< tabs >}}
 {{< tab name="Docker plan" >}}
@@ -53,7 +81,7 @@ You receive your invoice when the subscription renews. To verify your renewal da
 {{< /tab >}}
 {{< /tabs >}}
 
-### Include your VAT number on your invoice
+## Include your VAT number on your invoice
 
 > [!NOTE]
 >

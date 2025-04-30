@@ -34,7 +34,9 @@ To add seats to your subscription:
 2. Under Settings and administration, select **Billing**.
 3. Select your account from the drop-down menu in the top-left.
 4. Select **Add seats**.
-5. Follow the on-screen instructions to complete adding seats.
+5. Follow the on-screen instructions to complete adding seats. Note, you can't
+use pay by invoice for purchasing additional seats. You must use a card or US
+bank account.
 
 You can now add more members to your organization. For more information, see [Manage organization members](../admin/organization/members.md).
 

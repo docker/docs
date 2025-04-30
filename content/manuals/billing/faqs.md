@@ -59,3 +59,9 @@ Contact the [Docker Sales Team](https://www.docker.com/company/contact).
 ### Do I need to do anything at the end of my subscription term?
 
 No. All monthly and annual subscriptions are automatically renewed at the end of the term using the original form of payment.
+
+### Can I use pay by invoice for upgrades or additional seats?
+
+No. Pay by invoice is only available for subscribers on an annual subscription
+during first-time checkouts and subscription renewal. You must use card payment
+or US bank accounts for purchasing upgrades or additional seats.

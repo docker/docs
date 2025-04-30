@@ -9,13 +9,9 @@ You can pay for a subscription plan on a monthly or yearly billing cycle. You se
 
 > [!NOTE]
 >
-> Business plan is available only on yearly billing cycle.
+> Business plan is available only on yearly billing cycle. You can't switch from an annual billing cycle to a monthly cycle.
 
 If you have a monthly billing cycle, you can choose to switch to an annual billing cycle.
-
-> [!NOTE]
->
-> You can't switch from an annual billing cycle to a monthly cycle.
 
 When you change the billing cycle's duration:
 
@@ -29,6 +25,11 @@ When you change the billing cycle's duration:
 
 {{< tabs >}}
 {{< tab name="Docker plan" >}}
+
+> [!IMPORTANT]
+>
+> Pay by invoice is only available on first-time checkouts and subscription renewals.
+You can't use pay by invoice for subscription upgrades.
 
 To change your billing cycle:
 
