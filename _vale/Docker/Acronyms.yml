@@ -8,6 +8,7 @@ first: '\b([A-Z]{2,5})\b'
 second: '(?:\b[A-Z][a-z]+ )+\(([A-Z]{2,5})s?\)'
 # ... with the exception of these:
 exceptions:
+  - ACH
   - AGPL
   - AI
   - API
