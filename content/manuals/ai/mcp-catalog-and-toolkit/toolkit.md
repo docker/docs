@@ -8,7 +8,7 @@ The Docker MCP Toolkit is a Docker Desktop extension local that enables seamless
 
 ## Key features
 
-- Cross-LLM compatibility: Works out of the box with Claude Desktop, Cursor, Continue.dev, and [Gordon](/manuals/ai/gordon/mcp/gordon-mcp-server.md).
+- Cross-LLM compatibility: Works out of the box with Claude Desktop, Cursor, Continue.dev, and [Gordon](/manuals/ai/gordon/_index.md).
 - Integrated tool discovery: Browse and launch MCP servers that are available in the Docker MCP Catalog, directly from Docker Desktop.
 - No manual setup: Skip dependency management, runtime setup, and manual server configuration.
 
