@@ -23,7 +23,7 @@ Microsoft Dev Box provides cloud-based, pre-configured developer workstations th
 - An Azure subscription
 - Access to Microsoft Dev Box
 - A Docker subscription (Pro, Team, or Business). You can use Docker Desktop in Microsoft Dev Box with any of the following subscription options:
-   - An existing Docker subscription (sign in with your Docker ID)
+   - An existing or new Docker subscription 
    - A new Docker subscription purchased through Azure Marketplace
    - A Docker Business subscription with SSO configured for your organization
 
