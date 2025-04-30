@@ -14,19 +14,33 @@ The Docker MCP Toolkit is a Docker Desktop extension local that enables seamless
 
 ## How it works
 
-The **MCP Servers** tab lists all available containerized servers from the Docker MCP Catalog. Each entry includes:
+The **MCP Servers** tab lists all available servers from the Docker MCP Catalog. Each entry includes:
 
 - Tool name and description
 - Partner/publisher
-- Number of callable tools
+- Number of callable tools and what they are
 
 To enable an MCP server, simply use the toggle switch to toggle it on.
 
+> [!NOTE]
+>
+> Some MCP servers requires secrets or tokens to be configured before it can be enabled. Instructions on how to do this can be found on each MCP servers' repository.
+
 The **MCP Clients** tab lets you connect your enabled MCP servers to supported agents. Connection is as simple as selecting **Connect**, so you can switch between LLM providers without altering your MCP server integrations or security configurations.
+
+## Installation
+
+To install the Docker MCP Toolkit extension:
+
+1. In the Docker Desktop Dashboard, select the **Extensions** view, and then select **Manage**.
+2. Select the **Browse** tab and search for **Docker MCP Toolkit**.
+3. On the **Docker MCP Toolkit** result, select install.
+
+The extension then appears under the **My extensions** tab.
 
 ### Example
 
-The following example takes the [MCP Catalog example] and shows how you can reduce manual setup. It assumes you have already installed and set up Claude Desktop.
+The following example assumes you have already installed and set up Claude Desktop.
 
 1. In the Docker MCP Toolkit extension, search for the Puppeteer MCP server in the **MCP Servers** tab, and toggle it on to enable.
 2. From the **MCP Clients** tab, select the **Connect** button for Claude Desktop. 

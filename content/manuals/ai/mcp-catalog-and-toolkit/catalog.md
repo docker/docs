@@ -27,8 +27,8 @@ With Docker, each MCP server runs as a self-contained container so it is portabl
 Each tool in the MCP Catalog is packaged as a Docker image with metadata. Developers can:
 
 - Discover tools via Docker Hub under the mcp/ namespace.
+- Connect tools to their preferred agents with simple configuration through the [MCP Toolkit](toolkit.md)
 - Pull and run tools using Docker Desktop or the CLI.
-- Connect tools to their preferred agents with simple configuration.
 
 Each catalog entry provides:
 
@@ -38,7 +38,22 @@ Each catalog entry provides:
 
 ## Example: How to use an MCP server from Docker Hub
 
-The following example uses the Puppeteer MCP server to take a screenshot of a website and invert the colors using Claude Desktop and Docker Desktop. It assumes you have already installed and set up Claude Desktop and Docker Desktop.
+The following example uses the Puppeteer MCP server to take a screenshot of a website and invert the colors using Claude Desktop.
+
+{{< tabs >}}
+{{< tab name="Using the MCP Toolkit (Recommended)" >}}
+
+1. Make sure you have [installed the Docker Desktop Docker MCP Toolkit extension](toolkit.md).
+2. From the extension, search for the Puppeteer MCP server in the **MCP Servers** tab, and toggle it on to enable.
+3. From the **MCP Clients** tab, select the **Connect** button for Claude Desktop. 
+4. Within Claude Desktop, submit the following prompt using the Sonnet 3.5 model:
+
+   ```text
+   Take a screenshot of docs.docker.com and then invert the colors
+   ```
+
+{{< /tab >}}
+{{< tab name="Manually set it up" >}}
 
 1. Update the `claude_desktop_config.json` file to include the following configuration:
 
@@ -71,6 +86,9 @@ The following example uses the Puppeteer MCP server to take a screenshot of a we
 
 Once you've given your consent to use the new tools, Claude spins up the Puppeteer MCP server inside a container, navigates to the target URL, captures and modify the page, and returns the screenshot.
 
-> [!TIP]
->
-> Don't want to set up manually? Use the [Docker MCP Toolkit](toolkit.md#example) to connect MCP servers to AI agents in one click.
+{{< /tab >}}
+{{< /tabs >}}
+
+## Contribute an MCP server to the catalog
+
+If you would like to add you MCP server to the Docker MCP Catalog, fill out the Docker [MCP submission form](https://www.docker.com/products/mcp-catalog-and-toolkit/#get_updates).
