@@ -46,6 +46,11 @@ To upgrade your Docker subscription:
 5. Select **Upgrade**.
 6. Follow the on-screen instructions to complete your upgrade.
 
+> [!NOTE]
+>
+> If you choose to pay using a US bank account, you must verify the account. For
+> more information, see [Verify a bank account](manuals/billing/payment-method.md#verify-a-bank-account).
+
 {{< /tab >}}
 {{< tab name="Legacy Docker plan" >}}
 
