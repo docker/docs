@@ -64,3 +64,7 @@ Docker Desktop follows the VDI support definitions outlined [previously](#virtua
 ### Support scope and responsibilities
 
 For WSL 2-related issues, contact Nutanix support. For Docker Desktop-specific issues, contact Docker support.
+
+## Aditional resources
+
+- [Docker Desktop on Microsoft Dev Box](/manuals/desktop/features/dev-box.md)
