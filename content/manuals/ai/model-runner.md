@@ -96,6 +96,22 @@ Model ai/smollm2 pulled successfully
 
 The models also display in the Docker Desktop Dashboard.
 
+#### Pull from Hugging Face
+
+You can also pull models directly from [Hugging Face](https://huggingface.co/models).
+
+```console
+$ docker model pull hf.co/<model-you-want-to-pull>
+```
+
+For example: 
+
+```console
+$ docker model pull hf.co/nvidia/DAM-3B
+```
+
+Pulls the [Nvidia/DAM-3B model](https://huggingface.co/nvidia/DAM-3B).
+
 ### List available models
 
 Lists all models currently pulled to your local environment.
