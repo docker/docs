@@ -98,7 +98,7 @@ The models also display in the Docker Desktop Dashboard.
 
 #### Pull from Hugging Face
 
-You can also pull models directly from [Hugging Face](https://huggingface.co/models).
+You can also pull GGUF models directly from [Hugging Face](https://huggingface.co/models?library=gguf).
 
 ```console
 $ docker model pull hf.co/<model-you-want-to-pull>
@@ -107,10 +107,10 @@ $ docker model pull hf.co/<model-you-want-to-pull>
 For example: 
 
 ```console
-$ docker model pull hf.co/nvidia/DAM-3B
+$ docker model pull hf.co/bartowski/Llama-3.2-1B-Instruct-GGUF
 ```
 
-Pulls the [Nvidia/DAM-3B model](https://huggingface.co/nvidia/DAM-3B).
+Pulls the [bartowski/Llama-3.2-1B-Instruct-GGUF](https://huggingface.co/bartowski/Llama-3.2-1B-Instruct-GGUF).
 
 ### List available models
 
