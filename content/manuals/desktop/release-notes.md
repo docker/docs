@@ -39,7 +39,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 #### For all platforms
 
-- Fixed an issue that caused Docker Desktop with proxy configuration defined in `admin-settings.json`, fail to start.
+- Fixed an issue where Docker Desktop failed to start when a proxy configuration was specified in the `admin-settings.json` file.
 
 #### For Windows
 
