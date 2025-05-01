@@ -27,12 +27,12 @@ Microsoft Dev Box provides cloud-based, pre-configured developer workstations th
    - A new Docker subscription purchased through Azure Marketplace
    - A Docker Business subscription with SSO configured for your organization
 
-### Setting up Docker Desktop in Dev Box
+### Set up Docker Desktop in Dev Box
 
 1. Navigate to the [Docker Desktop for Microsoft Dev Box](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/dockerinc1694120899427.devbox_azuremachine?tab=Overview) listing in Azure Marketplace.
-2. Select **Get It Now** to add the virtual machine image to your subscription
-3. Follow the Azure workflow to complete the setup
-4. Use the image to create VMs, assign to Dev Centers, or create Dev Box Pools according to your organization's setup
+2. Select **Get It Now** to add the virtual machine image to your subscription.
+3. Follow the Azure workflow to complete the setup.
+4. Use the image to create VMs, assign to Dev Centers, or create Dev Box Pools according to your organization's setup.
 
 ### Activate Docker Desktop
 
@@ -40,16 +40,16 @@ Once your Dev Box is provisioned with the Docker Desktop image:
 
 1. Start your Dev Box instance.
 2. Launch Docker Desktop. 
-3. Sign in with your Docker ID
+3. Sign in with your Docker ID.
 
 ## Support
 
 For issues related to:
 
-- Docker Desktop configuration, usage, or licensing: Create a support ticket through [Docker Support](https://hub.docker.com/support)
-- Dev Box creation, Azure portal configuration, or networking: Contact Azure Support
+- Docker Desktop configuration, usage, or licensing: Create a support ticket through [Docker Support](https://hub.docker.com/support).
+- Dev Box creation, Azure portal configuration, or networking: Contact Azure Support.
 
 ## Limitations
 
-- Microsoft Dev Box is currently only available on Windows 10 & 11 (Linux VMs are not supported)
-- Performance may vary based on your Dev Box configuration and network conditions
+- Microsoft Dev Box is currently only available on Windows 10 and 11 (Linux VMs are not supported).
+- Performance may vary based on your Dev Box configuration and network conditions.
