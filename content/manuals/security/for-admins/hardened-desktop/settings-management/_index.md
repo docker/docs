@@ -12,48 +12,39 @@ weight: 10
 
 {{< summary-bar feature_name="Hardened Docker Desktop" >}}
 
-Settings Management helps you control key Docker Desktop settings, like proxies and network configurations, on your developers' machines within your organization.
+Settings Management helps you control key Docker Desktop settings, like proxies
+and network configurations, on your developers' machines within your
+organization.
 
-For an extra layer of security, you can also use Settings Management to enable and lock in [Enhanced Container Isolation](../enhanced-container-isolation/_index.md), which prevents containers from modifying any Settings Management configurations.
+For an extra layer of security, you can also use Settings Management to enable
+and lock in [Enhanced Container Isolation](../enhanced-container-isolation/_index.md),
+which prevents containers from modifying any Settings Management configurations.
 
 ## Who is it for?
 
-- For organizations that want to configure Docker Desktop to be within their organization's centralized control.
-- For organizations that want to create a standardized Docker Desktop environment at scale.
-- For Docker Business customers who want to confidently manage their use of Docker Desktop within tightly regulated environments.
+- For organizations that want centralized control over Docker Desktop.
+- For organizations that want to create a standardized Docker Desktop
+environment at scale.
+- For Docker Business customers who want to confidently manage their use of
+Docker Desktop within tightly regulated environments.
 
 ## How does it work?
 
-You can configure several Docker Desktop settings using either:
+With Settings Management, you can configure Docker Desktop settings using:
 
- - An `admin-settings.json` file. This file is located on the Docker Desktop host and can only be accessed by developers with root or administrator privileges.
+ - An `admin-settings.json` file. This file is located on the Docker Desktop
+ host and can only be accessed by developers with root or administrator
+ privileges.
  - Creating a settings policy in the Docker Admin Console.
 
-Settings that are defined by an administrator override any previous values set by developers and ensure that these cannot be modified.
+Settings that are defined by an administrator override any previous values set
+by developers and ensure that these cannot be modified.
 
 ## What features can I configure with Settings Management?
 
-Using the `admin-settings.json` file, you can:
-
-- Turn on and lock in [Enhanced Container Isolation](../enhanced-container-isolation/_index.md)
-- Configure HTTP proxies
-- Configure network settings
-- Configure Kubernetes settings
-- Enforce the use of WSL 2 based engine or Hyper-V
-- Enforce the use of Rosetta for x86_64/amd64 emulation on Apple Silicon
-- Configure Docker Engine
-- Turn off Docker Desktop's ability to checks for updates
-- Turn off Docker Extensions
-- Turn off Docker Scout SBOM indexing
-- Turn off beta and experimental features
-- Turn off Docker AI ([Ask Gordon](/manuals/ai/gordon/_index.md))
-- Turn off Docker Desktop's onboarding survey
-- Control whether developers can use the Docker terminal
-- Control the file sharing implementation for your developers on macOS
-- Specify which paths your developers can add file shares to
-- Configure Air-gapped containers
-
-For more details on the syntax and options, see [Configure Settings Management](configure-json-file.md).
+You can configure a wide range of features, from proxies and Kubernetes settings
+to Enhanced Container isolation. For more information, view the [full list of
+configurable settings]().
 
 ## How do I set up and enforce Settings Management?
 
