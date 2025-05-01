@@ -20,7 +20,7 @@ Before you begin, make sure you’ve completed the following:
 
 ## Overview
 
-This section guides you through deploying your containerized Angular application locally using [Docker Desktop’s built-in Kubernetes](/desktop/kubernetes/). Running your app in a local Kubernetes cluster allows you to closely simulate a real production environment, enabling you to test, validate, and debug your workloads with confidence before promoting them to staging or production.
+This section guides you through deploying your containerized Angular application locally using [Docker Desktop’s built-in Kubernetes](/desktop/kubernetes/). Running your app in a local Kubernetes cluster closely simulates a real production environment, enabling you to test, validate, and debug your workloads with confidence before promoting them to staging or production.
 
 ---
 
@@ -57,16 +57,23 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
+            requests:
+              cpu: "250m"
+              memory: "128Mi"
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name:  angular-sample-service
+  name: angular-sample-service
   namespace: default
 spec:
   type: NodePort
   selector:
-    app:  angular-sample
+    app: angular-sample
   ports:
     - port: 8080
       targetPort: 8080
@@ -78,7 +85,7 @@ This manifest defines two key Kubernetes resources, separated by `---`:
 - Deployment
   Deploys a single replica of your Angular application inside a pod. The pod uses the Docker image built and pushed by your GitHub Actions CI/CD workflow  
   (refer to [Configure CI/CD for your Angular application](configure-ci-cd.md)).  
-  The container listens on port `8080`, which is typically used by [Nginx](https://nginx.org/en/docs/) to serve your production React app.
+  The container listens on port `8080`, which is typically used by [Nginx](https://nginx.org/en/docs/) to serve your production Angular app.
 
 - Service (NodePort) 
   Exposes the deployed pod to your local machine.  
@@ -109,7 +116,7 @@ If everything is configured properly, you’ll see confirmation that both the De
   service/angular-sample-service created
 ```
    
-This output means that both the Deployment and the Service were successfully created and are now running inside your local cluster.
+This confirms that both the Deployment and the Service were successfully created and are now running inside your local cluster.
 
 ### Step 2. Check the Deployment status
 
@@ -119,7 +126,7 @@ Run the following command to check the status of your deployment:
   $ kubectl get deployments
 ```
 
-You should see an output similar to:
+You should see output similar to the following:
 
 ```shell
   NAME                 READY   UP-TO-DATE   AVAILABLE   AGE
@@ -140,7 +147,7 @@ You should see something like:
 
 ```shell
 NAME                     TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
-angular-sample-service   NodePort    10.100.244.65    <none>        8080:30001/TCP   1m
+angular-sample-service   NodePort    10.100.185.105    <none>        8080:30001/TCP   1m
 ```
 
 This output confirms that your app is available via NodePort on port 30001.

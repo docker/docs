@@ -1,9 +1,9 @@
 ---
-title: Containerize a Angular Application
+title: Containerize an Angular Application
 linkTitle: Containerize
 weight: 10
 keywords: angular, node, image, initialize, build
-description: Learn how to containerize a Angular application with Docker by creating an optimized, production-ready image using best practices for performance, security, and scalability.
+description: Learn how to containerize an Angular application with Docker by creating an optimized, production-ready image using best practices for performance, security, and scalability.
 
 ---
 
@@ -22,22 +22,21 @@ Before you begin, make sure the following tools are installed and available on y
 
 ## Overview
 
-This guide walks you through the complete process of containerizing a Angular application with Docker. You’ll learn how to create a production-ready Docker image using best practices that improve performance, security, scalability, and deployment efficiency.
+This guide walks you through the complete process of containerizing an Angular application with Docker. You’ll learn how to create a production-ready Docker image using best practices that improve performance, security, scalability, and deployment efficiency.
 
 By the end of this guide, you will:
 
-- Containerize a Angular application using Docker.
+- Containerize an Angular application using Docker.
 - Create and optimize a Dockerfile for production builds. 
 - Use multi-stage builds to minimize image size.
 - Serve the application efficiently with a custom NGINX configuration.
-- Follow best practices for building secure and maintainable Docker images. 
+- Build secure and maintainable Docker images by following best practices.
 
 ---
 
 ## Get the sample application
 
-Clone the sample application to use with this guide. Open a terminal, change
-directory to a directory that you want to work in, and run the following command
+Clone the sample application to use with this guide. Open a terminal, navigate to the directory where you want to work, and run the following command
 to clone the git repository:
 
 ```console
@@ -117,7 +116,7 @@ These updates help ensure your app is easy to deploy, fast to load, and producti
 > For full details, see the [Dockerfile reference](/reference/dockerfile/).
 
 
-### Step 2: Configure the Dockerfile file 
+### Step 2: Configure the Dockerfile
 
 Copy and replace the contents of your existing `Dockerfile` with the configuration below:
 
@@ -188,62 +187,64 @@ The `.dockerignore` file tells Docker which files and folders to exclude when bu
 Copy and replace the contents of your existing `.dockerignore` with the configuration below:
 
 ```dockerignore
-# =========================================
-# Dependency directories and build output
-# =========================================
-node_modules/
-dist/
-out-tsc/
-.tmp/
-.cache/
-.angular/
+# ================================
+# Node and build output
+# ================================
+node_modules
+dist
+out-tsc
+.angular
+.cache
+.tmp
 
-# =========================================
-# Angular CLI, build tools, and test artifacts
-# =========================================
-coverage/
-.vite/
-.vitepress/
-jest/
-cypress/
-cypress/screenshots/
-cypress/videos/
-reports/
-playwright-report/
+# ================================
+# Testing & Coverage
+# ================================
+coverage
+jest
+cypress
+cypress/screenshots
+cypress/videos
+reports
+playwright-report
+.vite
+.vitepress
 
-# =========================================
-# Environment and log files
-# =========================================
+# ================================
+# Environment & log files
+# ================================
 *.env*
-!.env.production
+!*.env.production
 *.log
 *.tsbuildinfo
 
-# =========================================
-# IDE and local development files
-# =========================================
-.vscode/
-.idea/
-*.swp
+# ================================
+# IDE & OS-specific files
+# ================================
+.vscode
+.idea
 .DS_Store
 Thumbs.db
+*.swp
 
-# =========================================
-# Version control
-# =========================================
-.git/
+# ================================
+# Version control & CI files
+# ================================
+.git
 .gitignore
 
-# =========================================
-# Docker-specific config files (not needed inside image)
-# =========================================
+# ================================
+# Docker & local orchestration
+# ================================
 Dockerfile
+Dockerfile.*
 .dockerignore
+docker-compose.yml
 docker-compose*.yml
 
-# =========================================
+# ================================
 # Miscellaneous
-# =========================================
+# ================================
 *.bak
 *.old
 *.tmp
@@ -338,7 +339,7 @@ With your custom configuration in place, you're now ready to build the Docker im
 
 The updated setup includes:
 
-- Clean, production-ready Nginx configuration tailored specifically for Angular.
+- The updated setup includes a clean, production-ready NGINX configuration tailored specifically for Angular.
 - Efficient multi-stage Docker build, ensuring a small and secure final image.
 
 After completing the previous steps, your project directory should now contain the following files:
@@ -424,7 +425,7 @@ in a terminal.
 $ docker compose up --build -d
 ```
 
-Open a browser and view the application at [http://localhost:8080](http://localhost:8080). You should see a simple web application preview.
+Open a browser and view the application at [http://localhost:8080](http://localhost:8080). You should see your Angular application running in the browser.
 
 
 To confirm that the container is running, use `docker ps` command:
@@ -458,7 +459,7 @@ $ docker compose down
 
 ## Summary
 
-In this guide, you learned how to containerize, build, and run a Angular application using Docker. By following best practices, you created a secure, optimized, and production-ready setup.
+In this guide, you learned how to containerize, build, and run an Angular application using Docker. By following best practices, you created a secure, optimized, and production-ready setup.
 
 What you accomplished:
 - Initialized your project using `docker init` to scaffold essential Docker configuration files.

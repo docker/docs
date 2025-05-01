@@ -9,7 +9,7 @@ description: Learn how to configure CI/CD using GitHub Actions for your Angular 
 
 ## Prerequisites
 
-Complete all the previous sections of this guide, starting with [Containerize Angular application](containerize.md).
+Complete all the previous sections of this guide, starting with [Containerize an Angular application](containerize.md).
 
 You must also have:
 - A [GitHub](https://github.com/signup) account.
@@ -19,7 +19,7 @@ You must also have:
 
 ## Overview
 
-In this section, you'll set up a **CI/CD pipeline** using [GitHub Actions](https://docs.github.com/en/actions) to automatically:
+In this section, you'll set up a CI/CD pipeline using [GitHub Actions](https://docs.github.com/en/actions) to automatically:
 
 - Build your Angular application inside a Docker container.
 - Run tests in a consistent environment.
@@ -31,7 +31,7 @@ In this section, you'll set up a **CI/CD pipeline** using [GitHub Actions](https
 
 To enable GitHub Actions to build and push Docker images, you’ll securely store your Docker Hub credentials in your new GitHub repository.
 
-### Step 1: Connect your GitHub repository to Docker Hub
+### Step 1: Generate Docker Hub Credentials and Set GitHub Secrets"
 
 1. Create a Personal Access Token (PAT) from [Docker Hub](https://hub.docker.com)
    1. Go to your **Docker Hub account → Account Settings → Security**.
@@ -61,7 +61,7 @@ To enable GitHub Actions to build and push Docker images, you’ll securely stor
    | `DOCKERHUB_TOKEN` | Your Docker Hub access token (created in Step 1)   |
    | `DOCKERHUB_PROJECT_NAME` | Your Docker Project Name (created in Step 2)   |
 
-   These secrets let GitHub Actions to authenticate securely with Docker Hub during automated workflows.
+   These secrets allow GitHub Actions to authenticate securely with Docker Hub during automated workflows.
 
 5. Connect Your Local Project to GitHub
 
@@ -89,7 +89,7 @@ To enable GitHub Actions to build and push Docker images, you’ll securely stor
 
    This confirms that your local repository is properly linked and ready to push your source code to GitHub.
 
-6. Push Your Source Code to GitHub
+6. Push your source code to GitHub
 
    Follow these steps to commit and push your local project to your GitHub repository:
 
@@ -101,7 +101,7 @@ To enable GitHub Actions to build and push Docker images, you’ll securely stor
       This command stages all changes — including new, modified, and deleted files — preparing them for commit.
 
 
-   2. Commit your changes.
+   2. Commit the staged changes with a descriptive message.
 
       ```console
       $ git commit -m "Initial commit"
@@ -152,7 +152,7 @@ on:
 
 jobs:
   build-test-push:
-    name: Build, Test and Push Docker Image
+    name: Build, Test, and Push Docker Image
     runs-on: ubuntu-latest
 
     steps:
@@ -160,7 +160,7 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Fetches full history for better caching/context
+          fetch-depth: 0
 
       # 2. Set up Docker Buildx
       - name: Set up Docker Buildx
@@ -172,7 +172,8 @@ jobs:
         with:
           path: /tmp/.buildx-cache
           key: ${{ runner.os }}-buildx-${{ github.sha }}
-          restore-keys: ${{ runner.os }}-buildx-
+          restore-keys: |
+            ${{ runner.os }}-buildx-
 
       # 4. Cache npm dependencies
       - name: Cache npm dependencies
@@ -180,7 +181,8 @@ jobs:
         with:
           path: ~/.npm
           key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: ${{ runner.os }}-npm-
+          restore-keys: |
+            ${{ runner.os }}-npm-
 
       # 5. Extract metadata
       - name: Extract metadata
@@ -196,31 +198,31 @@ jobs:
           context: .
           file: Dockerfile.dev
           tags: ${{ steps.meta.outputs.REPO_NAME }}-dev:latest
-          load: true # Load to local Docker daemon for testing
+          load: true
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache,mode=max
 
-      # 7. Run Vitest tests
-      - name: Run Vitest tests and generate report
+      # 7. Run Angular tests with Jasmine
+      - name: Run Angular Jasmine tests inside container
         run: |
           docker run --rm \
             --workdir /app \
             --entrypoint "" \
             ${{ steps.meta.outputs.REPO_NAME }}-dev:latest \
-            sh -c "npm ci && npx vitest run --reporter=verbose"
+            sh -c "npm ci && npm run test -- --ci --runInBand"
         env:
           CI: true
           NODE_ENV: test
         timeout-minutes: 10
 
-      # 8. Login to Docker Hub
+      # 8. Log in to Docker Hub
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # 9. Build and push prod image
+      # 9. Build and push production image
       - name: Build and push production image
         uses: docker/build-push-action@v6
         with:
@@ -255,14 +257,14 @@ After you've added your workflow file, it's time to trigger and observe the CI/C
 
 1. Commit and push your workflow file
 
-   Select "Commit changes…" in the GitHub editor.
+   - Select "Commit changes…" in the GitHub editor.
 
    - This push will automatically trigger the GitHub Actions pipeline.
 
 2. Monitor the workflow execution
 
-   1. Go to the Actions tab in your GitHub repository.
-   2. Click into the workflow run to follow each step: **build**, **test**, and (if successful) **push**.
+   - Go to the Actions tab in your GitHub repository.
+   - Click into the workflow run to follow each step: **build**, **test**, and (if successful) **push**.
 
 3. Verify the Docker image on Docker Hub
 
@@ -293,7 +295,7 @@ Here's what you accomplished:
 
 - Created a new GitHub repository specifically for your project.
 - Generated a secure Docker Hub access token and added it to GitHub as a secret.
-- Defined a GitHub Actions workflow to:
+- Defined a GitHub Actions workflow that:
    - Build your application inside a Docker container.
    - Run tests in a consistent, containerized environment.
    - Push a production-ready image to Docker Hub if tests pass.

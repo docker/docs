@@ -20,13 +20,13 @@ Testing is a critical part of the development process. In this section, you'll l
 - Ensure consistency between local and container-based testing.
 
 
-`docker-angular-sample` project comes pre-configured with Jasmine, so you can get started quickly without extra setup.
+The `docker-angular-sample` project comes pre-configured with Jasmine, so you can get started quickly without extra setup.
 
 ---
 
 ## Run tests during development
 
-`docker-angular-sample` application includes a sample test file at location:
+The `docker-angular-sample` application includes a sample test file at the following location:
 
 ```console
 $ src/app/app.component.spec.ts
@@ -36,7 +36,7 @@ This test uses Jasmine to validate the AppComponent logic.
 
 ### Step 1: Update compose.yaml
 
-Add a new service named `angular-test` to your `compose.yaml` file. This service allows you to run your test suite in an isolated containerized environment.
+Add a new service named `angular-test` to your `compose.yaml` file. This service allows you to run your test suite in an isolated, containerized environment.
 
 ```yaml {hl_lines="22-26",linenos=true}
 services:
@@ -94,11 +94,11 @@ $ docker compose run --rm angular-test
 This command will:
 - Start the `angular-test` service defined in your `compose.yaml` file.
 - Execute the `npm run test` script using the same environment as development.
-- Automatically remove the container after the tests complete [`docker compose run --rm`](/engine/reference/commandline/compose_run) command.
+- Automatically removes the container after tests complete, using the [`docker compose run --rm`](/engine/reference/commandline/compose_run) command.
 
-The output should look something like this:
+You should see output similar to the following:
 
-```text
+```shell
 Test Suites: 1 passed, 1 total
 Tests:       3 passed, 3 total
 Snapshots:   0 total
@@ -119,7 +119,7 @@ What you accomplished:
 - Created a `angular-test` service in `compose.yaml` to isolate test execution.
 - Reused the development `Dockerfile.dev` to ensure consistency between dev and test environments.
 - Ran tests inside the container using `docker compose run --rm angular-test`.
-- Ensured reliable, repeatable testing across environments without relying on local machine setup.
+- Ensured reliable, repeatable testing across environments without depending on your local machine setup.
 
 ---
 

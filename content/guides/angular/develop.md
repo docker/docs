@@ -26,7 +26,7 @@ You’ll learn how to:
 
 ## Automatically update services (Development Mode)
 
-Use Compose Watch to automatically sync source file changes into your containerized development environment. This provides a seamless, efficient development experience without needing to restart or rebuild containers manually.
+Use Compose Watch to automatically sync source file changes into your containerized development environment. This provides a seamless, efficient development experience without restarting or rebuilding containers manually.
 
 ## Step 1: Create a development Dockerfile
 
@@ -73,7 +73,7 @@ This file sets up a lightweight development environment for your Angular applica
 
 Open your `compose.yaml` file and define two services: one for production (`angular-prod`) and one for development (`angular-dev`).
 
-Here’s an example configuration for a Angular application:
+Here’s an example configuration for an Angular application:
 
 ```yaml
 services:
@@ -118,7 +118,7 @@ After completing the previous steps, your project directory should now contain t
 
 ### Step 4: Start Compose Watch
 
-Run the following command from your project root to start your container in watch mode:
+Run the following command from the project root to start the container in watch mode
 
 ```console
 $ docker compose watch angular-dev
@@ -144,7 +144,7 @@ To verify that Compose Watch is working correctly:
 
 4. Save the file.
 
-5. Open your browser at [http://localhost:5173](http://localhost:5173).
+5. Open your browser at [http://localhost:4200](http://localhost:4200).
 
 You should see the updated text appear instantly, without needing to rebuild the container manually. This confirms that file watching and automatic synchronization are working as expected.
 
@@ -154,7 +154,7 @@ You should see the updated text appear instantly, without needing to rebuild the
 
 In this section, you set up a complete development and production workflow for your Angular application using Docker and Docker Compose.
 
-Here's what you achieved:
+Here’s what you accomplished:
 - Created a `Dockerfile.dev` to streamline local development with hot reloading  
 - Defined separate `angular-dev` and `angular-prod` services in your `compose.yaml` file  
 - Enabled real-time file syncing using Compose Watch for a smoother development experience  
