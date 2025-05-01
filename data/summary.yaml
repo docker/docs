@@ -164,7 +164,7 @@ Domain audit:
   subscription: [Business]
   for: Administrators
 Domain management:
-  subscription: [Team, Business]
+  subscription: [Business]
   for: Administrators
 Enforce sign-in:
   subscription: [Business]

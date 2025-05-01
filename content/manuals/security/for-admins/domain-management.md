@@ -117,6 +117,20 @@ Auto-provisioning does not require an SSO connection.
 > For domains that are part of an SSO connection, Just-in-Time (JIT) overrides
 auto-provisioning to add users to an organization.
 
+### How it works
+
+When auto-provisioning is enabled for a verified domain, the next time a user
+signs into Docker with an email address that is associated with your verified
+domain, they are automatically added to your organization. Auto-provisioning
+does not create accounts for new users, it adds existing unassociated users to
+your organization. Users will *not* experience any sign in or user experience
+changes.
+
+When a new user is auto-provisioned, company and organization owners will
+receive an email notifying them that a new user has been added to their
+organization. If you need to add more seats to your organization to
+to accomodate new users, see [Manage seats](/manuals/subscription/manage-seats.md).
+
 ### Enable auto-provisioning
 
 Auto-provisioning is enabled per user. To enable
