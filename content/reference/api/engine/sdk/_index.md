@@ -80,14 +80,14 @@ Docker API directly, or using the Python or Go SDK.
 package main
 
 import (
-	"context"
-	"io"
-	"os"
+    "context"
+    "io"
+    "os"
 
-	"github.com/docker/docker/api/types/container"
-        "github.com/docker/docker/api/types/image"
-	"github.com/docker/docker/client"
-	"github.com/docker/docker/pkg/stdcopy"
+    "github.com/docker/docker/api/types/container"
+    "github.com/docker/docker/api/types/image"
+    "github.com/docker/docker/client"
+    "github.com/docker/docker/pkg/stdcopy"
 )
 
 func main() {
