@@ -29,30 +29,53 @@ See [Loading build results](./usage/#loading-build-results) for details.
 
 > [!NOTE]
 >
-> Builds on Docker Build Cloud have a timeout limit of two hours. Builds that
-> run for longer than two hours are automatically cancelled.
+> Builds on Docker Build Cloud have a timeout limit of 90 minutes. Builds that
+> run for longer than 90 minutes are automatically cancelled.
+
+## Setting up credentials for CI/CD
+
+To enable your CI/CD system to build and push images using Docker Build Cloud, provide both an access token and a username. The type of token and the username you use depend on your account type and permissions.
+
+- If you are an organization administrator or have permission to create [organization access tokens (OAT)](../security/for-admins/access-tokens.md), use an OAT and set `DOCKER_USER` to your Docker Hub organization name.
+- If you do not have permission to create OATs or are using a personal account, use a [personal access token (PAT)](/security/for-developers/access-tokens/) and set `DOCKER_USER` to your Docker Hub username.
+
+### Creating access tokens
+
+#### For organization accounts
+
+If you are an organization administrator:
+
+1. Create an [organization access token (OAT)](../security/for-admins/access-tokens.md):
+   - The token must have these permissions:
+     - **cloud-connect** scope
+     - **Read public repositories** permission
+     - **Repository access** with **Image push** permission for the target repository:
+       - Expand the **Repository** drop-down.
+       - Select **Add repository** and choose your target repository.
+       - Set the **Image push** permission for the repository.
+
+If you are not an organization administrator:
+
+- Ask your organization administrator for an access token with the permissions listed above, or use a personal access token.
+
+#### For personal accounts
+
+1. Create a [personal access token (PAT)](/security/for-developers/access-tokens/):
+   - Create a new token with **Read & write** access.
+     - Note: Building with Docker Build Cloud only requires read access, but you need write access to push images to a Docker Hub repository.
+
 
 ## CI platform examples
 
-### GitHub Actions
-
 > [!NOTE]
 >
-> Version 4.0.0 and later of `docker/build-push-action` and
-> `docker/bake-action` builds images with [provenance attestations by
-> default](/manuals/build/ci/github-actions/attestations.md#default-provenance). Docker
-> Build Cloud automatically attempts to load images to the local image store if
-> you don't explicitly push them to a registry.
+> In your CI/CD configuration, set the following variables:
+> - `DOCKER_PAT` — your access token (PAT or OAT)
+> - `DOCKER_USER` — your Docker Hub username (for PAT) or organization name (for OAT)
 >
-> This results in a conflicting scenario where if you build a tagged image
-> without pushing it to a registry, Docker Build Cloud attempts to load images
-> containing attestations. But the local image store on the GitHub runner
-> doesn't support attestations, and the image load fails as a result.
->
-> If you want to load images built with `docker/build-push-action` together
-> with Docker Build Cloud, you must disable provenance attestations by setting
-> `provenance: false` in the GitHub Action inputs (or in `docker-bake.hcl` if
-> you use Bake).
+> This ensures your builds authenticate correctly with Docker Build Cloud.
+
+### GitHub Actions
 
 ```yaml
 name: ci
@@ -381,7 +404,7 @@ mkdir -vp ~/.docker/cli-plugins/
 curl --silent -L --output ~/.docker/cli-plugins/docker-buildx $BUILDX_URL
 chmod a+x ~/.docker/cli-plugins/docker-buildx
 
-# Login to Docker Hub. For security reasons $DOCKER_PAT should be a Personal Access Token. See https://docs.docker.com/security/for-developers/access-tokens/
+# Login to Docker Hub. For security reasons $DOCKER_PAT should be a Personal Access Token. See https://docs.docker.com/build-cloud/ci/#creating-access-tokens
 echo "$DOCKER_PAT" | docker login --username $DOCKER_USER --password-stdin
 
 # Connect to your builder and set it as the default builder
@@ -426,7 +449,7 @@ curl --silent -L --output ~/.docker/cli-plugins/docker-compose $COMPOSE_URL
 chmod a+x ~/.docker/cli-plugins/docker-buildx
 chmod a+x ~/.docker/cli-plugins/docker-compose
 
-# Login to Docker Hub. For security reasons $DOCKER_PAT should be a Personal Access Token. See https://docs.docker.com/security/for-developers/access-tokens/
+# Login to Docker Hub. For security reasons $DOCKER_PAT should be a Personal Access Token. See https://docs.docker.com/build-cloud/ci/#creating-access-tokens
 echo "$DOCKER_PAT" | docker login --username $DOCKER_USER --password-stdin
 
 # Connect to your builder and set it as the default builder
