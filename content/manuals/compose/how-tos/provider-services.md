@@ -53,7 +53,7 @@ services:
 ```
 
 Notice the dedicated `provider` attribute in the `database` service.
-This attribute specifies that the service is a provider and lets you define options specific to that provider type.
+This attribute specifies that the service is managed by a provider and lets you define options specific to that provider type.
 
 The `depends_on` attribute in the `app` service specifies that it depends on the `database` service.
 This means that the `database` service will be started before the `app` service, allowing the provider information
@@ -61,8 +61,8 @@ to be injected into the `app` service.
 
 ## How it works
 
-During the `docker compose up` process, Compose identifies provider services and works with the platform to provision
-the requested capabilities. The platform then provides Compose with information about how to access the provisioned resource.
+During the `docker compose up` command execution, Compose identifies services relying on providers and works with them to provision
+the requested capabilities. The provider then populates Compose model with information about how to access the provisioned resource.
 
 This information is passed to services that declare a dependency on the provider service, typically through environment
 variables. The naming convention for these variables is:
