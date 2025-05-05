@@ -264,14 +264,14 @@ The following `admin-settings.json` code and table provides an example of the re
 
 |Parameter|OS|Description|Version|
 |:-------------------------------|---|:-------------------------------|---|
-|`kubernetes`|  | If `enabled` is set to true, a Kubernetes single-node cluster is started when Docker Desktop starts. If `showSystemContainers` is set to true, Kubernetes containers are displayed in the Docker Desktop Dashboard and when you run `docker ps`.  `imagesRepository` lets you specify which repository Docker Desktop pulls the Kubernetes images from. For example, `"imagesRepository": "registry-1.docker.io/docker"`.  |  |
+|`kubernetes`|  | If `enabled` is set to true, a Kubernetes single-node cluster is started when Docker Desktop starts. If `showSystemContainers` is set to true, Kubernetes containers are displayed in the Docker Desktop Dashboard and when you run `docker ps`. The [imagesRepository](../../../../desktop/features/kubernetes.md#configuring-a-custom-image-registry-for-kubernetes-control-plane-images) setting lets you specify which repository Docker Desktop pulls control-plane Kubernetes images from. |  |
 
 > [!NOTE]
 >
 > When using the `imagesRepository` setting and Enhanced Container Isolation (ECI), add the following images to the [ECI Docker socket mount image list](#enhanced-container-isolation):
 >
-> `<custom-image-repo>/desktop-cloud-provider-kind:*`
-> `<custom-image-repo>/desktop-containerd-registry-mirror:*`
+> * [imagesRepository]/desktop-cloud-provider-kind:*
+> * [imagesRepository]/desktop-containerd-registry-mirror:*
 >
 > These containers mount the Docker socket, so you must add the images to the ECI images list. If not, ECI will block the mount and Kubernetes won't start.
 
