@@ -195,6 +195,9 @@ MSI installer:
   for: Administrators
 OATs:
   subscription: [Team, Business]
+OIDC connections:
+  availability: Beta
+  for: Administrators
 PKG installer:
   subscription: [Business]
   requires: Docker Desktop [4.36](/manuals/desktop/release-notes.md#4360) and later

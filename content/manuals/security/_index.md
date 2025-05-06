@@ -59,6 +59,10 @@ grid_admins:
   description: Create organization access tokens as an alternative to a password.
   link: /security/for-admins/access-tokens/
   icon: password
+- title: OIDC connections
+  description: Create and manage OIDC connections in Docker Home.
+  link: /security/for-admins/OIDC-connections.md
+  icon: lock
 - title: Enforce sign-in
   description: Enforce your users to sign in to Docker Desktop.
   link: /security/for-admins/enforce-sign-in/
