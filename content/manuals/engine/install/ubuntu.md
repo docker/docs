@@ -177,6 +177,7 @@ Docker from the repository.
 3. Verify that the installation is successful by running the `hello-world` image:
 
    ```console
+   $ sudo service docker start
    $ sudo docker run hello-world
    ```
 
