@@ -11,6 +11,7 @@ description: Learn how to use Docker Model Runner to manage and run AI models.
 keywords: Docker, ai, model runner, docker deskotp, llm
 aliases: 
   - /desktop/features/model-runner/
+  - /ai/model-runner/
 ---
 
 {{< summary-bar feature_name="Docker Model Runner" >}}
