@@ -117,7 +117,7 @@ Its setting can have complicated effects:
 
 - If `--memory-swap` is unset, and `--memory` is set, the container can use
   as much swap as the `--memory` setting, if the host container has swap
-  memory configured. For instance, if `--memory="300m"` and `--memory-swap` are
+  memory configured. For instance, if `--memory="300m"` and `--memory-swap` is
   not set, the container can use 600m in total of memory and swap.
 
 - If `--memory-swap` is explicitly set to `-1`, the container is allowed to use
