@@ -33,9 +33,16 @@ WORKDIR /out
 ADD https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-${TARGETARCH}.tar.gz .
 RUN tar xvf hugo_extended_${HUGO_VERSION}_linux-${TARGETARCH}.tar.gz
 
+# git-src clones the OSS projects in order to include
+# code snippets into the docs.
+FROM base AS git-src-oss
+WORKDIR /git-src
+RUN git clone https://github.com/testcontainers/testcontainers-go.git
+
 # build-base is the base stage used for building the site
 FROM base AS build-base
 WORKDIR /project
+COPY --from=git-src-oss /git-src /project/git-src
 COPY --from=hugo /out/hugo /bin/hugo
 COPY --from=npm /out/node_modules node_modules
 COPY . .
