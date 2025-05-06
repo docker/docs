@@ -29,6 +29,18 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 >
 > If you're experiencing malware detection issues on Mac, follow the steps documented in [docker/for-mac#7527](https://github.com/docker/for-mac/issues/7527).
 
+## 4.41.2
+
+{{< release-date date="2025-05-06" >}}
+
+{{< desktop-install-v2 all=true beta_win_arm=true version="4.41.2" build_path="/191736/" >}}
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed an issue where the `Models` menu was displayed in the GUI even when Docker Model Runner was not supported or not enabled.
+
 ## 4.41.1
 
 {{< release-date date="2025-04-30" >}}
