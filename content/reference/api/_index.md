@@ -2,6 +2,5 @@
 title: API reference
 build:
   render: never
-weight: 20
 ---
 

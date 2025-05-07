@@ -37,7 +37,6 @@ aliases:
  - /compose/compose-file/compose-file-v1/
  - /compose/compose-file/
  - /compose/reference/overview/
-weight: 50
 ---
 
 >**New to Docker Compose?**

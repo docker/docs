@@ -1,12 +1,11 @@
 ---
-linktitle: "Token Authentication Specification"
-title: Docker Registry v2 authentication via central service
+title: Registry authentication
 description: "Specifies the Docker Registry v2 authentication"
-keywords: registry, on-prem, images, tags, repository, distribution, Bearer authentication, advanced
+keywords: registry, images, tags, repository, distribution, Bearer authentication, advanced
 ---
 
 
-This document outlines the v2 Docker registry authentication scheme:
+This document outlines the v2 Docker Registry authentication scheme:
 
 ![v2 registry auth](./images/v2-registry-auth.png)
 
@@ -33,10 +32,10 @@ This document outlines the v2 Docker registry authentication scheme:
   which clients can use for authorization and the ability to verify these
   tokens for single use or for use during a sufficiently short period of time.
 
-## Authorization Server Endpoint Descriptions
+## Authorization server endpoint descriptions
 
 The described server is meant to serve as a standalone access control manager
-for resources hosted by other services which wish to authenticate and manage
+for resources hosted by other services which want to authenticate and manage
 authorizations using a separate access control manager.
 
 A service like this is used by the official Docker Registry to authenticate
@@ -58,7 +57,7 @@ repository `samalba/my-app`. For the registry to authorize this, I will need
 `push` access to the `samalba/my-app` repository. The registry will first
 return this response:
 
-```
+```text
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json; charset=utf-8
 Docker-Distribution-Api-Version: registry/2.0
@@ -72,7 +71,7 @@ Strict-Transport-Security: max-age=31536000
 
 Note the HTTP Response Header indicating the auth challenge:
 
-```
+```text
 Www-Authenticate: Bearer realm="https://auth.docker.io/token",service="registry.docker.io",scope="repository:samalba/my-app:pull,push"
 ```
 
@@ -133,7 +132,7 @@ Defines getting a bearer and refresh token using the token endpoint.
 </dl>
 
 
-#### Token Response Fields
+#### Token response fields
 
 <dl>
     <dt>
@@ -147,8 +146,8 @@ Defines getting a bearer and refresh token using the token endpoint.
         <code>access_token</code>
     </dt>
     <dd>
-        For compatibility with OAuth 2.0, we will also accept <code>token</code> under the name
-        <code>access_token</code>.  At least one of these fields <b>must</b> be specified, but
+        For compatibility with OAuth 2.0, the <code>token</code> under the name
+        <code>access_token</code> is also accepted.  At least one of these fields <b>must</b> be specified, but
         both may also appear (for compatibility with older clients).  When both are specified,
         they should be equivalent; if they differ the client's choice is undefined.
     </dd>
@@ -185,13 +184,13 @@ Defines getting a bearer and refresh token using the token endpoint.
 
 For this example, the client makes an HTTP GET request to the following URL:
 
-```
+```text
 https://auth.docker.io/token?service=registry.docker.io&scope=repository:samalba/my-app:pull,push
 ```
 
 The token server should first attempt to authenticate the client using any
 authentication credentials provided with the request. From Docker 1.11 the
-Docker engine supports both Basic Authentication and [OAuth2](oauth.md) for
+Docker Engine supports both Basic Authentication and OAuth2 for
 getting tokens. Docker 1.10 and before, the registry client in the Docker Engine
 only supports Basic Authentication. If an attempt to authenticate to the token
 server fails, the token server should return a `401 Unauthorized` response
@@ -230,20 +229,19 @@ The server then constructs an implementation-specific token with this
 intersected set of access, and returns it to the Docker client to use to
 authenticate to the audience service (within the indicated window of time):
 
-```
+```text
 HTTP/1.1 200 OK
 Content-Type: application/json
 
 {"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiIsImtpZCI6IlBZWU86VEVXVTpWN0pIOjI2SlY6QVFUWjpMSkMzOlNYVko6WEdIQTozNEYyOjJMQVE6WlJNSzpaN1E2In0.eyJpc3MiOiJhdXRoLmRvY2tlci5jb20iLCJzdWIiOiJqbGhhd24iLCJhdWQiOiJyZWdpc3RyeS5kb2NrZXIuY29tIiwiZXhwIjoxNDE1Mzg3MzE1LCJuYmYiOjE0MTUzODcwMTUsImlhdCI6MTQxNTM4NzAxNSwianRpIjoidFlKQ08xYzZjbnl5N2tBbjBjN3JLUGdiVjFIMWJGd3MiLCJhY2Nlc3MiOlt7InR5cGUiOiJyZXBvc2l0b3J5IiwibmFtZSI6InNhbWFsYmEvbXktYXBwIiwiYWN0aW9ucyI6WyJwdXNoIl19XX0.QhflHPfbd6eVF4lM9bwYpFZIV0PfikbyXuLx959ykRTBpe3CYnzs6YBK8FToVb5R47920PVLrh8zuLzdCr9t3w", "expires_in": 3600,"issued_at": "2009-11-10T23:00:00Z"}
 ```
 
-
 ## Using the Bearer token
 
 Once the client has a token, it will try the registry request again with the
 token placed in the HTTP `Authorization` header like so:
 
-```
+```text
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiIsImtpZCI6IkJWM0Q6MkFWWjpVQjVaOktJQVA6SU5QTDo1RU42Ok40SjQ6Nk1XTzpEUktFOkJWUUs6M0ZKTDpQT1RMIn0.eyJpc3MiOiJhdXRoLmRvY2tlci5jb20iLCJzdWIiOiJCQ0NZOk9VNlo6UUVKNTpXTjJDOjJBVkM6WTdZRDpBM0xZOjQ1VVc6NE9HRDpLQUxMOkNOSjU6NUlVTCIsImF1ZCI6InJlZ2lzdHJ5LmRvY2tlci5jb20iLCJleHAiOjE0MTUzODczMTUsIm5iZiI6MTQxNTM4NzAxNSwiaWF0IjoxNDE1Mzg3MDE1LCJqdGkiOiJ0WUpDTzFjNmNueXk3a0FuMGM3cktQZ2JWMUgxYkZ3cyIsInNjb3BlIjoiamxoYXduOnJlcG9zaXRvcnk6c2FtYWxiYS9teS1hcHA6cHVzaCxwdWxsIGpsaGF3bjpuYW1lc3BhY2U6c2FtYWxiYTpwdWxsIn0.Y3zZSwaZPqy4y9oRBVRImZyv3m_S9XDHF1tWwN7mL52C_IiA73SJkWVNsvNqpJIn5h7A2F8biv_S2ppQ1lgkbw
 ```
 
