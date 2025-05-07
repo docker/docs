@@ -13,6 +13,25 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.36.0
+
+{{< release-date date="2025-05-07" >}}
+
+### Bug fixes and enhancements
+
+- Introduced `networks.interface_name`
+- Added support for `COMPOSE_PROGRESS` env variable
+- Added `service.provider` to external binaries
+- Introduced build `--check` flag
+- Fixed multiple panic issues when parsing Compose files
+
+### Update
+
+- Dependencies upgrade: bump compose-go to v2.6.2
+- Dependencies upgrade: bump docker engine and cli to v28.1.0
+- Dependencies upgrade: bump containerd to 2.0.5
+- Dependencies upgrade: bump buildkit to v0.21.1
+
 ## 2.35.1
 
 {{< release-date date="2025-04-17" >}}
