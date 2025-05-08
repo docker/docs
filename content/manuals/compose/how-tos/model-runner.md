@@ -33,21 +33,21 @@ services:
   chat:
     image: my-chat-app
     depends_on:
-      - ai-runner
+      - ai_runner
 
-  ai-runner:
+  ai_runner:
     provider:
       type: model
       options:
         model: ai/smollm2
 ```
 
-Notice the dedicated `provider` attribute in the `ai-runner` service.   
+Notice the dedicated `provider` attribute in the `ai_runner` service.   
 This attribute specifies that the service is a model provider and lets you define options such as the name of the model to be used.
 
 There is also a `depends_on` attribute in the `chat` service.  
-This attribute specifies that the `chat` service depends on the `ai-runner` service.  
-This means that the `ai-runner` service will be started before the `chat` service to allow injection of model information to the `chat` service.
+This attribute specifies that the `chat` service depends on the `ai_runner` service.  
+This means that the `ai_runner` service will be started before the `chat` service to allow injection of model information to the `chat` service.
 
 ## How it works
 
@@ -56,8 +56,8 @@ It also sends Compose the model tag name and the URL to access the model runner.
 
 This information is then passed to services which declare a dependency on the model provider.  
 In the example above, the `chat` service receives 2 environment variables prefixed by the service name:
- - `AI-RUNNER_URL` with the URL to access the model runner
- - `AI-RUNNER_MODEL` with the model name which could be passed with the URL to request the model.
+ - `AI_RUNNER_URL` with the URL to access the model runner
+ - `AI_RUNNER_MODEL` with the model name which could be passed with the URL to request the model.
 
 This lets the `chat` service to interact with the model and use it for its own purposes.
 
