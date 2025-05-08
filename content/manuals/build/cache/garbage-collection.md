@@ -57,7 +57,7 @@ The default GC policies are (approximately):
    been used for more than 48 hours.
 2. Remove cache that hasn't been used in a build for more than 60 days.
 3. Remove unshared cache that exceeds the build cache size limit. Unshared
-   cache records refers to layer blobs that are not used by other resources
+   cache records refer to layer blobs that are not used by other resources
    (typically, as image layers).
 4. Remove any build cache that exceeds the build cache size limit.
 
@@ -69,7 +69,7 @@ depending on what kind of builder you're using. Refer to
 
 > [!NOTE]
 > If you're satisfied with the default garbage collection behavior and don't
-> need to fine-tune its settings, you can skip this section. Default
+> need to fine-tune its settings, you can skip this section. The default
 > configurations work well for most use cases and require no additional setup.
 
 Depending on the type of [build driver](../builders/drivers/_index.md) you use,
@@ -137,16 +137,16 @@ default GC policies resolve to:
 The easiest way to tweak the build cache configuration for the `docker` driver
 is to adjust the `defaultKeepStorage` option:
 
-- Increase the limit if you feel like you think the GC is too aggressive.
+- Increase the limit if you feel like the GC is too aggressive.
 - Decrease the limit if you need to preserve space.
 
 If you need even more control, you can define your own GC policies directly.
 The following example defines a more conservative GC configuration with the
 following policies:
 
-1. Remove unused cache entries older than 1440 hours, or 60 days, if build cache exceeds 50GB.
-2. Remove unshared cache entries if build cache exceeds 50GB.
-3. Remove any cache entries if build cache exceeds 100GB.
+1. Remove unused cache entries older than 1440 hours, or 60 days, if the build cache exceeds 50GB.
+2. Remove unshared cache entries if the build cache exceeds 50GB.
+3. Remove any cache entries if the build cache exceeds 100GB.
 
 ```json
 {
@@ -180,7 +180,7 @@ tweak the thresholds for how much disk space BuildKit should use for cache:
 | `maxUsedSpace`  | The maximum amount of disk space that BuildKit is allowed to use. Usage above this threshold will be reclaimed during garbage collection.               | 60% of total disk space or 100GB (whichever is lower) |
 | `minFreeSpace`  | The amount of disk space that must be kept free.                                                                                                        | 20GB                                                  |
 
-You can set these options either as number of bytes, a unit string (for
+You can set these options either as a number of bytes, a unit string (for
 example, `512MB`), or as a percentage of the total disk size. Changing these
 options influences the default GC policies used by the BuildKit worker. With
 the default thresholds, the GC policies resolve as follows:
@@ -245,14 +245,14 @@ policy is allowed to prune.
 
 #### Custom GC policies in BuildKit
 
-Custom GC policies let you fine-tune how BuildKit manages its cache, and gives
+Custom GC policies let you fine-tune how BuildKit manages its cache, and give
 you full control over cache retention based on criteria such as cache type,
 duration, or disk space thresholds. If you need full control over the cache
 thresholds and how cache records should be prioritized, defining custom GC
 policies is the way to go.
 
 To define a custom GC policy, use the `[[worker.oci.gcpolicy]]` configuration
-block in `buildkitd.toml`. Each policy define the thresholds that will be used
+block in `buildkitd.toml`. Each policy defines the thresholds that will be used
 for that policy. The global values for `reservedSpace`, `maxUsedSpace`, and
 `minFreeSpace` do not apply if you use custom policies.
 
@@ -280,7 +280,7 @@ Here’s an example configuration:
   maxUsedSpace = "90GB"
 ```
 
-In addition to the `reservedSpace`, `maxUsedSpace`, and `minFreeSpace` threshold,
+In addition to the `reservedSpace`, `maxUsedSpace`, and `minFreeSpace` thresholds,
 when defining a GC policy you have two additional configuration options:
 
 - `all`: By default, BuildKit will exclude some cache records from being pruned
