@@ -10,14 +10,14 @@ aliases:
   - /config/containers/start-containers-automatically/
 ---
 
-Docker provides [restart policies](/manuals/engine/containers/run.md#restart-policies---restart)
+Docker provides [restart policies](/manuals/engine/containers/start-containers-automatically.md#use-a-restart-policy)
 to control whether your containers start automatically when they exit, or when
 Docker restarts. Restart policies start linked containers in the correct order.
 Docker recommends that you use restart policies, and avoid using process
 managers to start containers.
 
 Restart policies are different from the `--live-restore` flag of the `dockerd`
-command. Using `--live-restore` lets you to keep your containers running during
+command. Using `--live-restore` lets you keep your containers running during
 a Docker upgrade, though networking and user input are interrupted.
 
 ## Use a restart policy
@@ -115,7 +115,7 @@ container. This behavior is illustrated in the following example.
    $
    ```
 
-4. Running `docker ps` shows that is still running or restarting, thanks to the
+4. Running `docker ps` shows that it is still running or restarting, thanks to the
    restart policy. The CLI session has already exited, however. It doesn't
    survive the initial container exit.
 
@@ -157,7 +157,7 @@ process manager for more details.
 ### Using a process manager inside containers
 
 Process managers can also run within the container to check whether a process is
-running and starts/restart it if not.
+running and start/restart it if it's not.
 
 > [!WARNING]
 >
