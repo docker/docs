@@ -20,6 +20,7 @@ When you invite users to your organization, you assign them a role. A role is a 
 The following roles are available to assign:
 
 - Member: Non-administrative role. Members can view other members that are in the same organization.
+- Distributor Member: Restricted-access role. Distributor Members can only view and pull from repositories they’ve been explicitly granted access to. They cannot view other members or teams.
 - Editor: Partial administrative access to the organization. Editors can create, edit, and delete repositories. They can also edit an existing team's access permissions.
 - Organization owner: Full organization administrative access. Organization owners can manage organization repositories, teams, members, settings, and billing.
 - Company owner: In addition to the permissions of an organization owner, company owners can configure settings for their associated organizations.
