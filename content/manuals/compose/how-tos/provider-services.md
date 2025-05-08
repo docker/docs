@@ -15,9 +15,6 @@ params:
 Docker Compose supports provider services, which allow integration with services whose lifecycles are managed by third-party components rather than by Compose itself.  
 This feature enables you to define and utilize platform-specific services without the need for manual setup or direct lifecycle management.
 
-## Prerequisites
-
-- Docker Compose v2.36 or later
 
 ## What are provider services?
 
@@ -111,9 +108,9 @@ This information is then passed to dependent services as environment variables.
 
 Using provider services in your Compose applications offers several benefits:
 
-1. **Simplified configuration**: You don't need to manually configure and manage platform capabilities
-2. **Declarative approach**: You can declare all your application's dependencies in one place
-3. **Consistent workflow**: You use the same Compose commands to manage your entire application, including platform capabilities
+1. Simplified configuration: You don't need to manually configure and manage platform capabilities
+2. Declarative approach: You can declare all your application's dependencies in one place
+3. Consistent workflow: You use the same Compose commands to manage your entire application, including platform capabilities
 
 ## Creating your own provider
 
