@@ -47,7 +47,7 @@ Recommended approach to install Docker Desktop on Ubuntu:
 
    ```console
    $ sudo apt-get update
-   $ sudo apt-get install ./docker-desktop-amd64.deb
+   $ sudo dpkg -i ./docker-desktop-amd64.deb
    ```
 
    > [!NOTE]
