@@ -100,7 +100,7 @@ Total:        2.01GB
 ## Remove a builder
 
 Use the
-[`docker buildx remove`](/reference/cli/docker/buildx/create.md)
+[`docker buildx rm`](/reference/cli/docker/buildx/rm.md)
 command to remove a builder.
 
 ```console
