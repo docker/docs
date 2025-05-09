@@ -1,7 +1,7 @@
 ---
 description: Learn about immutable tags and how they help maintain image version consistency on Docker Hub.
 keywords: Docker Hub, Hub, repository content, tags, immutable tags, version control
-title: Immutable Tags on Docker Hub
+title: Immutable tags on Docker Hub
 linkTitle: Immutable Tags
 weight: 11
 ---
