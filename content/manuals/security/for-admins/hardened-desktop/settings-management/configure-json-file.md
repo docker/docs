@@ -17,14 +17,12 @@ Settings Management is designed specifically for organizations who don’t give 
 
 ## Prerequisites
 
-You must [enforce sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md) to ensure that all Docker Desktop users authenticate with your organization.
-
-Settings management requires a Docker Business subscription. Docker Desktop verifies the user's authentication and licensing before applying any settings from the `admin-settings.json` file. The settings file will not take effect unless both authentication and license checks pass. These checks ensure that only licensed users receive managed settings.
+- You must [enforce sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md) to ensure that all Docker Desktop users authenticate with your organization.
+- Settings management requires a Docker Business subscription. Docker Desktop verifies the user's authentication and licensing before applying any settings from the `admin-settings.json` file. The settings file will not take effect unless both authentication and license checks pass. These checks ensure that only licensed users receive managed settings.
 
 > [!IMPORTANT]
 >
 > If a user is not signed in, or their Docker ID does not belong to an organization with a Docker Business subscription, Docker Desktop ignores the `admin-settings.json` file.
-
 
 ## Known limitations
 
@@ -34,8 +32,7 @@ of an organization with a Docker Business subscription. This means the file does
 - Air-grapped or offline environments where Docker Desktop can't authenticate with Docker Hub.
 - Restricted environments where SSO and cloud-based authentication are not permitted.
 
-
-## Step one: Create the `admin-settings.json` file and save it in the correct location
+## Step one: Create the `admin-settings.json` file and save it
 
 You can either use the `--admin-settings` installer flag on [macOS](/manuals/desktop/setup/install/mac-install.md#install-from-the-command-line) or [Windows](/manuals/desktop/setup/install/windows-install.md#install-from-the-command-line) to automatically create the `admin-settings.json` and save it in the correct location, or set it up manually.
 
@@ -52,7 +49,7 @@ To set it up manually:
    >
    > It is assumed that you have the ability to push the `admin-settings.json` settings file to the locations specified through a device management software such as [Jamf](https://www.jamf.com/lp/en-gb/apple-mobile-device-management-mdm-jamf-shared/?attr=google_ads-brand-search-shared&gclid=CjwKCAjw1ICZBhAzEiwAFfvFhEXjayUAi8FHHv1JJitFPb47C_q_RCySTmF86twF1qJc_6GST-YDmhoCuJsQAvD_BwE).
 
-## Step two: Configure the settings you want to lock in
+## Step two: Configure settings
 
 > [!NOTE]
 >
@@ -64,7 +61,6 @@ If `locked: true`, users aren't able to edit this setting from Docker Desktop or
 
 If `locked: false`, it's similar to setting a factory default in that:
    - For new installs, `locked: false` pre-populates the relevant settings in the Docker Desktop Dashboard, but users are able to modify it.
-
    - If Docker Desktop is already installed and being used, `locked: false` is ignored. This is because existing users of Docker Desktop may have already updated a setting, which in turn will have been written to the relevant config file, for example the `settings-store.json` (or `settings.json` for Docker Desktop versions 4.34 and earlier) or `daemon.json`. In these instances, the user's preferences are respected and the values aren't altered. These can be controlled by setting `locked: true`.
 
 The following `admin-settings.json` code and table provides an example of the required syntax and descriptions for parameters and values:
@@ -301,10 +297,11 @@ The following `admin-settings.json` code and table provides an example of the re
 For settings to take effect:
 - On a new install, developers need to launch Docker Desktop and authenticate to their organization.
 - On an existing install, developers need to quit Docker Desktop through the Docker menu, and then re-launch Docker Desktop. If they are already signed in, they don't need to sign in again for the changes to take effect.
+
   > [!IMPORTANT]
   >
   > Selecting **Restart** from the Docker menu isn't enough as it only restarts some components of Docker Desktop.
 
-So as not to disrupt your developers' workflow, Docker doesn't automatically mandate that developers re-launch and re-authenticate once a change has been made.
+To avoid disrupting your developers' workflow, Docker doesn't automatically mandate that developers re-launch and re-authenticate once a change has been made.
 
 In Docker Desktop, developers see the relevant settings grayed out.
