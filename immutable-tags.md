@@ -5,7 +5,7 @@ title: Immutable Tags on Docker Hub
 linkTitle: Immutable Tags
 weight: 11
 ---
-> **Availability**: Beta
+{{< summary-bar feature_name="Immutable tags" >}}
 
 Immutable tags provide a way to ensure that specific image versions remain unchanged once they are published to Docker Hub. This feature helps maintain consistency and reliability in your container deployments by preventing accidental overwrites of important image versions.
 
