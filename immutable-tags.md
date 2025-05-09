@@ -32,7 +32,7 @@ To enable immutable tags for your repository:
 Once enabled, all tags are locked to their specific images, ensuring that each tag always points to the same image version and cannot be modified.
 
  > [!NOTE]
-   >
+>
    > All tags in the repository become immutable, including the `latest` tag
 
 ## Working with immutable tags
