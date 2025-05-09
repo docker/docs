@@ -18,6 +18,10 @@ This page contains information for administrators on how to configure Settings M
 subscription, therefore your Docker Desktop users must authenticate to your
 organization for configurations to take effect.
 
+> [!IMPORTANT]
+>
+> For settings to take effect, users must be added to your verified domain.
+
 ## Create a settings policy
 
 1. Within the [Docker Admin Console](https://app.docker.com/admin) navigate to the company or organization you want to define a settings policy for.

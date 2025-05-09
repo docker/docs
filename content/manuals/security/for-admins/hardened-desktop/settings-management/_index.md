@@ -43,8 +43,10 @@ by developers and ensure that these cannot be modified.
 ## What features can I configure with Settings Management?
 
 You can configure a wide range of features, from proxies and Kubernetes settings
-to Enhanced Container isolation. For more information, view the [full list of
-configurable settings]().
+to Enhanced Container isolation. For more information, view the [Settings reference](/manuals/security/for-admins/hardened-desktop/settings-management/settings-reference.md).
+
+The settings reference outlines what settings can be configured with the [Admin
+Console](/manuals/security/for-admins/hardened-desktop/settings-management/configure-admin-console.md) or [`admin-settings.json` file](/manuals/security/for-admins/hardened-desktop/settings-management/configure-json-file.md).
 
 ## How do I set up and enforce Settings Management?
 

@@ -796,9 +796,9 @@ Docker-in-Docker or containerized CI agents.
 - **Configure this setting with:**
     - **Advanced** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
-## Settings not available in the Docker Desktop UI
+## Settings not available in the Docker Desktop GUI
 
-The following settings aren’t shown in the Docker Desktop UI. You can only configure them using Settings Management with the Admin Console or the `admin-settings.json` file.
+The following settings aren’t shown in the Docker Desktop GUI. You can only configure them using Settings Management with the Admin Console or the `admin-settings.json` file.
 
 ### Block `docker load`
 
