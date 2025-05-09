@@ -81,14 +81,6 @@ The following table summarizes this comparison.
 | Works with containerd image store | Yes | Yes |
 | Works with Docker image store | Yes | No |
 
-### Additional settings
-
-#### Viewing system containers
-
-By default, Kubernetes system containers are hidden. To inspect these containers, enable **Show system containers (advanced)**.
-
-You can now view the running Kubernetes containers with `docker ps` or in the Docker Desktop Dashboard.
-
 ## Using the kubectl command
 
 Kubernetes integration automatically installs the Kubernetes CLI command
@@ -130,6 +122,104 @@ For more information about `kubectl`, see the
 ## Upgrade your cluster
 
 Kubernetes clusters are not automatically upgraded with Docker Desktop updates. To upgrade the cluster, you must manually select **Reset Kubernetes Cluster** in settings.
+
+## Additional settings
+
+### Viewing system containers
+
+By default, Kubernetes system containers are hidden. To inspect these containers, enable **Show system containers (advanced)**.
+
+You can now view the running Kubernetes containers with `docker ps` or in the Docker Desktop Dashboard.
+
+### Configuring a custom image registry for Kubernetes control plane images
+
+Docker Desktop uses containers to run the Kubernetes control plane. By default, Docker Desktop pulls
+the associated container images from Docker Hub. The images pulled depend on the [cluster provisioning mode](#cluster-provisioning-method).
+
+For example, in `kind` mode it requires the following images:
+
+```console
+docker.io/kindest/node:<tag>
+docker.io/docker/desktop-cloud-provider-kind:<tag>
+docker.io/docker/desktop-containerd-registry-mirror:<tag>
+```
+
+In `kubeadm` mode it requires the following images:
+
+```console
+docker.io/registry.k8s.io/kube-controller-manager:<tag>
+docker.io/registry.k8s.io/kube-apiserver:<tag>
+docker.io/registry.k8s.io/kube-scheduler:<tag>
+docker.io/registry.k8s.io/kube-proxy
+docker.io/registry.k8s.io/etcd:<tag>
+docker.io/registry.k8s.io/pause:<tag>
+docker.io/registry.k8s.io/coredns/coredns:<tag>
+docker.io/docker/desktop-storage-provisioner:<tag>
+docker.io/docker/desktop-vpnkit-controller:<tag>
+docker.io/docker/desktop-kubernetes:<tag>
+```
+
+The image tags are automatically selected by Docker Desktop based on several
+factors, including the version of Kubernetes being used. The tags vary for each image.
+
+To accommodate scenarios where access to Docker Hub is not allowed, admins can
+configure Docker Desktop to pull the above listed images from a different registry (e.g., a mirror)
+using the [KubernetesImagesRepository](../../security/for-admins/hardened-desktop/settings-management/configure-json-file.md#kubernetes) setting as follows.
+
+An image name can be broken into `[registry[:port]/][namespace/]repository[:tag]` components.
+The `KubernetesImagesRepository` setting allows users to override the `[registry[:port]/][namespace]`
+portion of the image's name.
+
+For example, if Docker Desktop Kubernetes is configured in `kind` mode and
+`KubernetesImagesRepository` is set to `my-registry:5000/kind-images`, then
+Docker Desktop will pull the images from:
+
+```console
+my-registry:5000/kind-images/node:<tag>
+my-registry:5000/kind-images/desktop-cloud-provider-kind:<tag>
+my-registry:5000/kind-images/desktop-containerd-registry-mirror:<tag>
+```
+
+These images should be cloned/mirrored from their respective images in Docker Hub. The tags must
+also match what Docker Desktop expects.
+
+The recommended approach to set this up is the following:
+
+1) Start Docker Desktop.
+
+2) In Settings > Kubernetes, enable the *Show system containers* setting.
+
+3) In Settings > Kubernetes, start Kubernetes using the desired cluster provisioning method: `kubeadm` or `kind`.
+
+4) Wait for Kubernetes to start.
+
+5) Use `docker ps` to view the container images used by Docker Desktop for the Kubernetes control plane.
+
+6) Clone or mirror those images (with matching tags) to your custom registry.
+
+7) Stop the Kubernetes cluster.
+
+8) Configure the `KubernetesImagesRepository` setting to point to your custom registry.
+
+9) Restart Docker Desktop.
+
+10) Verify that the Kubernetes cluster is using the custom registry images using the `docker ps` command.
+
+> [!NOTE]
+>
+> The `KubernetesImagesRepository` setting only applies to control plane images used by Docker Desktop
+> to set up the Kubernetes cluster. It has no effect on other Kubernetes pods.
+
+> [!NOTE]
+>
+> When using `KubernetesImagesRepository` and [Enhanced Container Isolation (ECI)](../../security/for-admins/hardened-desktop/enhanced-container-isolation/_index.md)
+> is enabled, add the following images to the [ECI Docker socket mount image list](../../security/for-admins/hardened-desktop/settings-management/configure-json-file.md#enhanced-container-isolation):
+>
+> * [imagesRepository]/desktop-cloud-provider-kind:*
+> * [imagesRepository]/desktop-containerd-registry-mirror:*
+>
+> These containers mount the Docker socket, so you must add the images to the ECI images list. If not,
+> ECI will block the mount and Kubernetes won't start.
 
 ## Troubleshooting
 
