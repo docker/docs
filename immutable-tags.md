@@ -33,7 +33,7 @@ Once enabled, all tags are locked to their specific images, ensuring that each t
 
  > [!NOTE]
 >
-   > All tags in the repository become immutable, including the `latest` tag
+> All tags in the repository become immutable, including the `latest` tag.
 
 ## Working with immutable tags
 
