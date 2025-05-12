@@ -49,6 +49,10 @@ params:
     description: Your command center for container development.
     icon: /icons/Whale.svg
     link: /desktop/
+  - title: Docker Hardened Images
+    description: Secure, minimal base images for trusted software delivery.
+    icon: verified_user
+    link: /docker-hardened-images/
   - title: Build Cloud
     description: Build your images faster in the cloud.
     icon: /icons/logo-build-cloud.svg
