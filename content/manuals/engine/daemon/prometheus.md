@@ -29,7 +29,7 @@ instance using Prometheus.
 ### Configure the daemon
 
 To configure the Docker daemon as a Prometheus target, you need to specify the
-`metrics-address` in the `daemon.json` configuration file. This daemon expects
+`metrics-addr` in the `daemon.json` configuration file. This daemon expects
 the file to be located at one of the following locations by default. If the
 file doesn't exist, create it.
 
