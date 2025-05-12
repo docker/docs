@@ -39,7 +39,7 @@ The Docker Engine provides the following storage drivers on Linux:
 The Docker Engine has a prioritized list of which storage driver to use if no
 storage driver is explicitly configured, assuming that the storage driver meets
 the prerequisites, and automatically selects a compatible storage driver. You
-can see the order in the [source code for Docker Engine {{% param "docker_ce_version" %}}](https://github.com/moby/moby/blob/v{{% param "docker_ce_version" %}}/daemon/graphdriver/driver_linux.go#L52-L53).
+can see the order in the [source code for Docker Engine {{% param "docker_ce_version" %}}](https://github.com/moby/moby/blob/v{{% param "docker_ce_version" %}}/daemon/graphdriver/driver_linux.go#L3-L4).
 { #storage-driver-order }
 
 <!-- markdownlint-enable reference-links-images -->
@@ -84,7 +84,7 @@ use Docker volumes for write-heavy workloads instead of relying on writing data
 to the container's writable layer.
 
 The `vfs` storage driver is usually not the best choice, and primarily intended
-for debugging purposes in situations where no other storage-driver is supported.
+for debugging purposes in situations where no other storage driver is supported.
 Before using the `vfs` storage driver, be sure to read about
 [its performance and storage characteristics and limitations](vfs-driver.md).
 
@@ -96,7 +96,7 @@ can and should still report any issues you run into. However, such issues
 have a lower priority than issues encountered when using a recommended
 configuration.
 
-Depending on your Linux distribution, other storage-drivers, such as `btrfs` may
+Depending on your Linux distribution, other storage drivers, such as `btrfs` may
 be available. These storage drivers can have advantages for specific use-cases,
 but may require additional set-up or maintenance, which make them not recommended
 for common scenarios. Refer to the documentation for those storage drivers for
