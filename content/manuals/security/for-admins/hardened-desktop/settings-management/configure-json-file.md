@@ -35,7 +35,7 @@ of an organization with a Docker Business subscription. This means the file does
 - Restricted environments where SSO and cloud-based authentication are not permitted.
 
 
-## Step one: Create the `admin-settings.json` file and save it in the correct location
+## Step one: Create the `admin-settings.json` file and save it
 
 You can either use the `--admin-settings` installer flag on [macOS](/manuals/desktop/setup/install/mac-install.md#install-from-the-command-line) or [Windows](/manuals/desktop/setup/install/windows-install.md#install-from-the-command-line) to automatically create the `admin-settings.json` and save it in the correct location, or set it up manually.
 
@@ -52,7 +52,7 @@ To set it up manually:
    >
    > It is assumed that you have the ability to push the `admin-settings.json` settings file to the locations specified through a device management software such as [Jamf](https://www.jamf.com/lp/en-gb/apple-mobile-device-management-mdm-jamf-shared/?attr=google_ads-brand-search-shared&gclid=CjwKCAjw1ICZBhAzEiwAFfvFhEXjayUAi8FHHv1JJitFPb47C_q_RCySTmF86twF1qJc_6GST-YDmhoCuJsQAvD_BwE).
 
-## Step two: Configure the settings you want to lock in
+## Step two: Configure settings
 
 > [!NOTE]
 >

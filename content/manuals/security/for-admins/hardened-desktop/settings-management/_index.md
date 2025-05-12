@@ -33,27 +33,11 @@ Settings that are defined by an administrator override any previous values set b
 
 ## What features can I configure with Settings Management?
 
-Using the `admin-settings.json` file, you can:
+You can configure a wide range of features, from proxies and Kubernetes settings
+to Enhanced Container isolation. For more information, view the [Settings reference](/manuals/security/for-admins/hardened-desktop/settings-management/settings-reference.md).
 
-- Turn on and lock in [Enhanced Container Isolation](../enhanced-container-isolation/_index.md)
-- Configure HTTP proxies
-- Configure network settings
-- Configure Kubernetes settings
-- Enforce the use of WSL 2 based engine or Hyper-V
-- Enforce the use of Rosetta for x86_64/amd64 emulation on Apple Silicon
-- Configure Docker Engine
-- Turn off Docker Desktop's ability to checks for updates
-- Turn off Docker Extensions
-- Turn off Docker Scout SBOM indexing
-- Turn off beta and experimental features
-- Turn off Docker AI ([Ask Gordon](/manuals/ai/gordon/_index.md))
-- Turn off Docker Desktop's onboarding survey
-- Control whether developers can use the Docker terminal
-- Control the file sharing implementation for your developers on macOS
-- Specify which paths your developers can add file shares to
-- Configure Air-gapped containers
-
-For more details on the syntax and options, see [Configure Settings Management](configure-json-file.md).
+The settings reference outlines what settings can be configured with the [Admin
+Console](/manuals/security/for-admins/hardened-desktop/settings-management/configure-admin-console.md) or [`admin-settings.json` file](/manuals/security/for-admins/hardened-desktop/settings-management/configure-json-file.md).
 
 ## How do I set up and enforce Settings Management?
 
