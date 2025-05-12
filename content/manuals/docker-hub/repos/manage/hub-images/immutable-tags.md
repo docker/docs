@@ -27,7 +27,7 @@ To enable immutable tags for your repository:
 3. Select the repository where you want to enable immutable tags.
 4. Select the **Settings** tab
 5. Under **Tag mutability settings**, select **Immutable**.
-6. Click **Save**.
+6. Select **Save**.
 
 Once enabled, all tags are locked to their specific images, ensuring that each tag always points to the same image version and cannot be modified.
 
