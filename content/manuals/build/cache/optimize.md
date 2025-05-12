@@ -1,13 +1,13 @@
 ---
 title: Optimize cache usage in builds
-description: An overview on how to optimize cache utilization in Docker builds.
+description: An overview of how to optimize cache utilization in Docker builds.
 keywords: build, buildkit, buildx, guide, tutorial, mounts, cache mounts, bind mounts
 aliases:
   - /build/guide/mounts/
 ---
 
 When building with Docker, a layer is reused from the build cache if the
-instruction and the files it depends on hasn't changed since it was previously
+instruction and the files it depends on haven't changed since it was previously
 built. Reusing layers from the cache speeds up the build process because Docker
 doesn't have to rebuild the layer again.
 
@@ -15,7 +15,7 @@ Here are a few techniques you can use to optimize build caching and speed up
 the build process:
 
 - [Order your layers](#order-your-layers): Putting the commands in your
-  Dockerfile into a logical order can help you avoid unnecessary cache
+  Dockerfile in a logical order can help you avoid unnecessary cache
   invalidation.
 - [Keep the context small](#keep-the-context-small): The context is the set of
   files and directories that are sent to the builder to process a build
@@ -32,7 +32,7 @@ the build process:
   a package manager. Having a persistent cache for packages means that even if
   you rebuild a layer, you only download new or changed packages.
 - [Use an external cache](#use-an-external-cache): An external cache lets you
-  store build cache at a remote location. The external cache image can be
+  store the build cache at a remote location. The external cache image can be
   shared between multiple builds, and across different environments.
 
 ## Order your layers
@@ -59,7 +59,7 @@ This Dockerfile is rather inefficient. Updating any file causes a reinstall of
 all dependencies every time you build the Docker image even if the dependencies
 didn't change since last time.
 
-Instead, the `COPY` command can be split in two. First, copy over the package
+Instead, the `COPY` command can be split into two. First, copy over the package
 management files (in this case, `package.json` and `yarn.lock`). Then, install
 the dependencies. Finally, copy over the project source code, which is subject
 to frequent change.
@@ -92,7 +92,7 @@ node_modules
 tmp*
 ```
 
-Ignore-rules specified in the `.dockerignore` file apply to the entire build
+Ignore rules specified in the `.dockerignore` file apply to the entire build
 context, including subdirectories. This means it's a rather coarse-grained
 mechanism, but it's a good way to exclude files and directories that you know
 you don't need in the build context, such as temporary files, log files, and
@@ -127,7 +127,7 @@ instruction is done executing, the mounted files are not persisted in the final
 image, or in the build cache. Only the output of the `go build` command
 remains.
 
-The `COPY` and `ADD` instructions in a Dockerfile lets you copy files from the
+The `COPY` and `ADD` instructions in a Dockerfile let you copy files from the
 build context into the build container. Using bind mounts is beneficial for
 build cache optimization because you're not adding unnecessary layers to the
 cache. If you have build context that's on the larger side, and it's only used
@@ -341,7 +341,7 @@ jobs:
           cache-to: type=registry,ref=user/app:buildcache,mode=max
 ```
 
-This setup tells BuildKit to look for cache in the `user/app:buildcache` image.
+This setup tells BuildKit to look for the cache in the `user/app:buildcache` image.
 And when the build is done, the new build cache is pushed to the same image,
 overwriting the old cache.
 
