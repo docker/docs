@@ -173,7 +173,6 @@ hugo:
           - hugo_stats.json
           - i18n/**
           - layouts/**
-          - postcss.config.js
           - static/**
           - tailwind.config.js
 

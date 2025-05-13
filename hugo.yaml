@@ -48,7 +48,7 @@ build:
   cachebusters:
     - source: assets/watching/hugo_stats\.json
       target: styles\.css
-    - source: (postcss|tailwind)\.config\.js
+    - source: tailwind\.config\.js
       target: css
     - source: assets/.*\.js
       target: js
