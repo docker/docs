@@ -224,15 +224,25 @@ precedence.
 |---------------|-----------------|--------|
 | `true`        | `true`, `false` | Boolean |
 
-- **Description:** Send usage statistics and crash reports to Docker. If set to
-`false`, Docker Desktop doesn't send usage statistics to Docker.
+- **Description:** Controls whether Docker Desktop collects and sends local
+usage statistics and crash reports to Docker. This setting affects telemetry
+gathered from the Docker Desktop application itself. It does not affect
+server-side telemetry collected via Docker Hub or other backend services, such
+as login timestamps, pulls, or builds.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Enable analytics to help Docker improve the product based on
-usage data.
+- **Use case:** Manage telemetry collection for compliance, privacy, or
+visibility in dashboards like Docker Insights.
 - **Configure this setting with:**
     - **General** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
     - Settings Management: `analyticsEnabled` setting in the [`admin-settings.json` file](/manuals/security/for-admins/hardened-desktop/settings-management/configure-json-file.md)
     - Settings Management: **Send usage statistics** setting in the [Admin Console](/manuals/security/for-admins/hardened-desktop/settings-management/configure-admin-console.md)
+
+> [!NOTE]
+>
+> Organizations using the Insights Dashboard may need this setting enabled to
+ensure that developer activity is fully visible. If users opt out and the
+setting is not locked, their activity may be excluded from analytics
+views.
 
 ### Use Enhanced Container Isolation
 
