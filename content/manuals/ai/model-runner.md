@@ -231,8 +231,8 @@ All the available models are hosted in the [public Docker Hub namespace of `ai`]
 
 Once the feature is enabled, new API endpoints are available under the following base URLs:
 
-- **For containers**: `http://model-runner.docker.internal/`
-- **For host processes**: `http://localhost:12434/engines/`, assuming you have enabled TCP host access on default port 12434.
+- **From containers**: `http://model-runner.docker.internal/`
+- **From host processes**: `http://localhost:12434/`, assuming you have enabled TCP host access on default port 12434.
 
 **Docker Model management endpoints:**
 
@@ -251,7 +251,6 @@ GET /engines/llama.cpp/v1/models/{namespace}/{name}
 POST /engines/llama.cpp/v1/chat/completions
 POST /engines/llama.cpp/v1/completions
 POST /engines/llama.cpp/v1/embeddings
-Note:
 ```
 
 To call these endpoints via a Unix socket (`/var/run/docker.sock`), prefix their path with
