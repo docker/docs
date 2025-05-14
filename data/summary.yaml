@@ -166,6 +166,8 @@ Domain audit:
 Enforce sign-in:
   subscription: [Business]
   for: Administrators
+Gated distribution:
+  availability: Early Access
 General admin:
   for: Administrators
 GitHub Actions cache:
