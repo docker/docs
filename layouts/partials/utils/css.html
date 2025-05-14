@@ -1,17 +1,22 @@
-{{- /*
-  Processes and links the main CSS file (`assets/css/styles.css`).
-  - Applies minification, fingerprinting, and post-processing in production.
-  - Adds inline CSS to hide injected images in production builds.
-  */
--}}
-{{ $styles := resources.Get "css/styles.css" }}
-{{ $styles = $styles }}
-{{ if hugo.IsProduction }}
-  {{ $styles = $styles | minify | fingerprint | css.tailwindcss }}
-  <style>
-    /* hide img injected by prod scripts */
-    body > img {
-      display: none;
-    }
-  </style>
-{{ end }} <link href="{{ $styles.Permalink }}" rel="stylesheet" />
+{{ with (templates.Defer (dict "key" "global")) }}
+  {{ with resources.Get "css/style.css" }}
+    {{ $opts := dict
+      "minify" hugo.IsProduction
+      "inlineImports" true
+    }}
+    {{ with . | css.TailwindCSS $opts }}
+      {{ if hugo.IsProduction }}
+        {{ with . | fingerprint }}
+          <link
+            rel="stylesheet"
+            href="{{ .RelPermalink }}"
+            integrity="{{ .Data.Integrity }}"
+            crossorigin="anonymous"
+          />
+        {{ end }}
+      {{ else }}
+        <link rel="stylesheet" href="{{ .RelPermalink }}" />
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
