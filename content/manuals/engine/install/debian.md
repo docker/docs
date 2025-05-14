@@ -42,6 +42,7 @@ To get started with Docker Engine on Debian, make sure you
 To install Docker Engine, you need the 64-bit version of one of these Debian
 versions:
 
+- Debian Trixie 13 (testing)
 - Debian Bookworm 12 (stable)
 - Debian Bullseye 11 (oldstable)
 
@@ -144,7 +145,7 @@ Docker from the repository.
    ```console
    $ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
    ```
-  
+
    {{< /tab >}}
    {{< tab name="Specific version" >}}
 

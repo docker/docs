@@ -11,63 +11,75 @@ aliases:
 
 {{< summary-bar feature_name="Hardened Docker Desktop" >}}
 
-This page contains information on how to configure Settings Management with an `admin-settings.json` file. You can specify and lock configuration parameters to create a standardized Docker Desktop environment across your company or organization.
-
-Settings Management is designed specifically for organizations who don’t give developers root access to their machines.
+This page explains how to use an `admin-settings.json` file to configure and
+enforce Docker Desktop settings. Use this method to standardize Docker
+Desktop environments in your organization.
 
 ## Prerequisites
 
-You must [enforce sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md) to ensure that all Docker Desktop users authenticate with your organization.
+- [Enforce sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md) to
+ensure all users authenticate with your organization.
+- A Docker Business subscription is required.
 
-Settings management requires a Docker Business subscription. Docker Desktop verifies the user's authentication and licensing before applying any settings from the `admin-settings.json` file. The settings file will not take effect unless both authentication and license checks pass. These checks ensure that only licensed users receive managed settings.
+Docker Desktop only applies settings from the `admin-settings.json` file if both
+authentication and Docker Business license checks succeed.
 
 > [!IMPORTANT]
 >
-> If a user is not signed in, or their Docker ID does not belong to an organization with a Docker Business subscription, Docker Desktop ignores the `admin-settings.json` file.
+> If a user isn't signed in or isn't part of a Docker Business organization,
+the settings file is ignored.
 
+## Limitation
 
-## Known limitations
+- The `admin-settings.json` file doesn't work in air-gapped or offline
+environments.
+- The file is not compatible with environments that restrict authentication
+with Docker Hub.
 
-The `admin-settings.json` file requires users to authenticate with Docker Hub and be a member
-of an organization with a Docker Business subscription. This means the file does not work in:
+## Step one: Create the settings file
 
-- Air-grapped or offline environments where Docker Desktop can't authenticate with Docker Hub.
-- Restricted environments where SSO and cloud-based authentication are not permitted.
+You can:
 
+- Use the `--admin-settings` installer flag to auto-generate the file. See:
+    - [macOS](/manuals/desktop/setup/install/mac-install.md#install-from-the-command-line) install guide
+    - [Windows](/manuals/desktop/setup/install/windows-install.md#install-from-the-command-line) install guide
+- Or create it manually and place it in the following locations:
+    - Mac: `/Library/Application\ Support/com.docker.docker/admin-settings.json`
+    - Windows: `C:\ProgramData\DockerDesktop\admin-settings.json`
+    - Linux: `/usr/share/docker-desktop/admin-settings.json`
 
-## Step one: Create the `admin-settings.json` file and save it in the correct location
+> [!IMPORTANT]
+>
+> Place the file in a protected directory to prevent modification. Use MDM tools
+like [Jamf](https://www.jamf.com/lp/en-gb/apple-mobile-device-management-mdm-jamf-shared/?attr=google_ads-brand-search-shared&gclid=CjwKCAjw1ICZBhAzEiwAFfvFhEXjayUAi8FHHv1JJitFPb47C_q_RCySTmF86twF1qJc_6GST-YDmhoCuJsQAvD_BwE) to distribute it at scale.
 
-You can either use the `--admin-settings` installer flag on [macOS](/manuals/desktop/setup/install/mac-install.md#install-from-the-command-line) or [Windows](/manuals/desktop/setup/install/windows-install.md#install-from-the-command-line) to automatically create the `admin-settings.json` and save it in the correct location, or set it up manually.
+## Step two: Define settings
 
-To set it up manually:
-1. Create a new, empty JSON file and name it `admin-settings.json`.
-2. Save the `admin-settings.json` file on your developers' machines in the following locations:
-   - Mac: `/Library/Application\ Support/com.docker.docker/admin-settings.json`
-   - Windows: `C:\ProgramData\DockerDesktop\admin-settings.json`
-   - Linux: `/usr/share/docker-desktop/admin-settings.json`
+> [!TIP]
+>
+> For a complete list of available settings, their supported platforms, and which configuration methods they work with, see the [Settings reference](settings-reference.md).
 
-   By placing this file in a protected directory, developers are unable to modify it.
+The `admin-settings.json` file uses structured keys to define what can
+be configured and whether the values are enforced.
 
-   > [!IMPORTANT]
-   >
-   > It is assumed that you have the ability to push the `admin-settings.json` settings file to the locations specified through a device management software such as [Jamf](https://www.jamf.com/lp/en-gb/apple-mobile-device-management-mdm-jamf-shared/?attr=google_ads-brand-search-shared&gclid=CjwKCAjw1ICZBhAzEiwAFfvFhEXjayUAi8FHHv1JJitFPb47C_q_RCySTmF86twF1qJc_6GST-YDmhoCuJsQAvD_BwE).
+Each setting supports the `locked` field. When `locked` is set to `true`, users
+can't change that value in Docker Desktop, the CLI, or config files. When
+`locked` is set to `false`, the value acts like a default suggestion and users
+can still update it.
 
-## Step two: Configure the settings you want to lock in
+Settings where `locked` is set to `false` are ignored on existing installs if
+a user has already customized that value in `settings-store.json`,
+`settings.json`, or `daemon.json`.
 
 > [!NOTE]
 >
-> Some of the configuration parameters only apply to certain platforms or to specific Docker Desktop versions. This is highlighted in the following table.
+> Some settings are platform-specific or require a minimum Docker Desktop
+version. See the [Settings reference](/manuals/security/for-admins/hardened-desktop/settings-management/settings-reference.md) for details.
 
-The `admin-settings.json` file requires a nested list of configuration parameters, each of which must contain the `locked` parameter. You can add or remove configuration parameters as per your requirements.
+### Example settings file
 
-If `locked: true`, users aren't able to edit this setting from Docker Desktop or the CLI.
-
-If `locked: false`, it's similar to setting a factory default in that:
-   - For new installs, `locked: false` pre-populates the relevant settings in the Docker Desktop Dashboard, but users are able to modify it.
-
-   - If Docker Desktop is already installed and being used, `locked: false` is ignored. This is because existing users of Docker Desktop may have already updated a setting, which in turn will have been written to the relevant config file, for example the `settings-store.json` (or `settings.json` for Docker Desktop versions 4.34 and earlier) or `daemon.json`. In these instances, the user's preferences are respected and the values aren't altered. These can be controlled by setting `locked: true`.
-
-The following `admin-settings.json` code and table provides an example of the required syntax and descriptions for parameters and values:
+The following file is an example `admin-settings.json` file. For a full list
+of configurable settings for the `admin-settings.json` file, see [`admin-settings.json` configurations](#admin-settingsjson-configurations).
 
 ```json {collapse=true}
 {
@@ -198,6 +210,20 @@ The following `admin-settings.json` code and table provides an example of the re
 }
 ```
 
+## Step three: Restart and apply settings
+
+Settings apply after Docker Desktop is restarted and the user is signed in.
+
+- New installs: Launch Docker Desktop and sign in.
+- Existing installs: Quit Docker Desktop fully and relaunch it.
+
+> [!IMPORTANT]
+>
+> Restarting Docker Desktop from the menu isn't enough. It must be fully
+quit and reopened.
+
+## `admin-settings.json` configurations
+
 ### General
 
 |Parameter|OS|Description|Version|
@@ -291,20 +317,3 @@ The following `admin-settings.json` code and table provides an example of the re
 | &nbsp; &nbsp; &nbsp; &nbsp;`dockerSocketMount` |  | By default, enhanced container isolation blocks bind-mounting the Docker Engine socket into containers (e.g., `docker run -v /var/run/docker.sock:/var/run/docker.sock ...`). This lets you relax this in a controlled way. See [ECI Configuration](../enhanced-container-isolation/config.md) for more info. |  |
 | &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; `imageList` |  | Indicates which container images are allowed to bind-mount the Docker Engine socket. |  |
 | &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; `commandList` |  | Restricts the commands that containers can issue via the bind-mounted Docker Engine socket. |  |
-
-## Step three: Re-launch Docker Desktop
-
-> [!NOTE]
->
-> Test the changes made through the `admin-settings.json` file locally to see if the settings work as expected.
-
-For settings to take effect:
-- On a new install, developers need to launch Docker Desktop and authenticate to their organization.
-- On an existing install, developers need to quit Docker Desktop through the Docker menu, and then re-launch Docker Desktop. If they are already signed in, they don't need to sign in again for the changes to take effect.
-  > [!IMPORTANT]
-  >
-  > Selecting **Restart** from the Docker menu isn't enough as it only restarts some components of Docker Desktop.
-
-So as not to disrupt your developers' workflow, Docker doesn't automatically mandate that developers re-launch and re-authenticate once a change has been made.
-
-In Docker Desktop, developers see the relevant settings grayed out.
