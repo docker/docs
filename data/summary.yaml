@@ -173,6 +173,8 @@ Domain management:
 Enforce sign-in:
   subscription: [Business]
   for: Administrators
+Gated distribution:
+  availability: Early Access
 General admin:
   for: Administrators
 GitHub Actions cache:
@@ -181,6 +183,8 @@ Hardened Docker Desktop:
   subscription: [Business]
   for: Administrators
 Image management:
+  availability: Beta
+Immutable tags:
   availability: Beta
 Import builds:
   availability: Beta

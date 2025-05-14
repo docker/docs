@@ -18,6 +18,10 @@ Get started creating a single sign-on (SSO) connection for your organization or 
 
 ## Step one: Add your domain
 
+> [!NOTE]
+>
+> Docker supports multiple identity provider (IdP) configurations. With a multiple IdP configuration, one domain can be associated with more than one SSO identity provider.
+
 {{< tabs >}}
 {{< tab name="Admin Console" >}}
 
