@@ -1,0 +1,14 @@
+@layer components {
+  #TableOfContents {
+    .toc a {
+      @apply block max-w-full truncate py-1 pl-2 hover:font-medium hover:no-underline;
+      &[aria-current="true"],
+      &:hover {
+        @apply border-l-gray-light from-gray-light-100 dark:border-l-gray-dark dark:from-gray-dark-200 border-l-2 bg-gradient-to-r font-medium text-black dark:text-white;
+      }
+      &:not([aria-current="true"]) {
+        @apply text-gray-light-600 dark:text-gray-dark-700 hover:text-black dark:hover:text-white;
+      }
+    }
+  }
+}

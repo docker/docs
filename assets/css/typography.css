@@ -1,15 +1,3 @@
-/*
-   * Font faces for Roboto Flex and Roboto Mono.
-   *
-   * - https://fonts.google.com/specimen/Roboto+Flex
-   * - https://fonts.google.com/specimen/Roboto+Mono
-   *
-   * The TTF fonts have been compressed to woff2,
-   * preserving the latin character subset.
-   *
-   * */
-
-/* Roboto Flex */
 @font-face {
   font-family: "Roboto Flex";
   src: url("/assets/fonts/RobotoFlex.woff2") format("woff2");
