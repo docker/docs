@@ -24,7 +24,6 @@ You can invite all the uncaptured users to your organization using the exported 
 
 > [!NOTE]
 >
-> Domain audit may identify accounts of users who are no longer a part of your organization. If you don't want to add a user to your organization and you don't want the user to appear in future domain audits, you must deactivate the account or update the associated email address.
+> Domain audit may identify accounts of users who are no longer a part of your organization. If you don't want to add a user to your organization and you don't want the user to appear in future domain audits, the user must deactivate their account or update their associated email address.
 >
-> Only someone with access to the Docker account can deactivate the account or update the associated email address. For more details, see [Deactivating an account](/admin/organization/deactivate-account/).
->
+> You can't deactivate an account or update an associated email address on behalf of a user. For more details, see [Deactivating an account](/manuals/accounts/deactivate-user-account.md).
