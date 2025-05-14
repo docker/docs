@@ -182,6 +182,7 @@ images are permitted.
 > [!NOTE]
 >
 > Rosetta requires enabling Apple Virtualization framework.
+
 #### QEMU
 
 | Default value | Accepted values | Format   |
@@ -557,6 +558,7 @@ The Docker Engine settings let you configure low-level daemon settings through a
 > [!NOTE]
 >
 > Values for this setting are passed as-is to the Docker daemon. Invalid or unsupported fields may prevent Docker Desktop from starting.
+
 ## Builders
 
 Builders settings lets you manage Buildx builder instances for advanced image-building scenarios, including multi-platform builds and custom backends.
@@ -576,6 +578,7 @@ Builders settings lets you manage Buildx builder instances for advanced image-bu
 > [!NOTE]
 >
 > Builder definitions are structured as an array of objects, each describing a builder instance. Conflicting or unsupported configurations may cause build errors.
+
 ## Kubernetes
 
 ### Enable Kubernetes
@@ -776,6 +779,7 @@ third-party or unvetted plugins from being installed.
 > [!NOTE]
 >
 > This setting requires Docker Model Runner setting to be enabled first.
+
 ## Notifications
 
 ### Status updates on tasks and processes
