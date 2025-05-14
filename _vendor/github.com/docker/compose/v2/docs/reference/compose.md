@@ -67,10 +67,12 @@ Define and run multi-container applications with Docker
 
 ## Examples
 
-### Use `-f` to specify the name and path of one or more Compose files
-Use the `-f` flag to specify the location of a Compose [configuration file](/reference/compose-file/).
+### Specify the name and path of one or more Compose files with `-f`
 
-#### Specifying multiple Compose files
+Use the `-f`lag to specify the location of a Compose [configuration file](/reference/compose-file/).
+
+#### Specify multiple Compose files
+
 You can supply multiple `-f` configuration files. When you supply multiple files, Compose combines them into a single
 configuration. Compose builds the configuration in the order you supply the files. Subsequent files override and add
 to their predecessors.
@@ -112,7 +114,8 @@ configuration are relative to the current working directory.
 The `-f` flag is optional. If you don’t provide this flag on the command line, Compose traverses the working directory
 and its parent directories looking for a `compose.yaml` or `docker-compose.yaml` file.
 
-#### Specifying a path to a single Compose file
+#### Specify a path to a single Compose file
+
 You can use the `-f` flag to specify a path to a Compose file that is not located in the current directory, either
 from the command line or by setting up a `COMPOSE_FILE` environment variable in your shell or in an environment file.
 
@@ -124,7 +127,7 @@ get the postgres image for the db service from anywhere by using the `-f` flag a
 $ docker compose -f ~/sandbox/rails/compose.yaml pull db
 ```
 
-### Use `-p` to specify a project name
+### Specify a project name with `-p`
 
 Each configuration has a project name. Compose sets the project name using
 the following mechanisms, in order of precedence:
@@ -159,7 +162,7 @@ You can also enable multiple profiles, e.g. with `docker compose --profile front
 
 Profiles can also be set by `COMPOSE_PROFILES` environment variable.
 
-### Configuring parallelism
+### Configure parallelism
 
 Use `--parallel` to specify the maximum level of parallelism for concurrent engine calls.
 Calling `docker compose --parallel 1 pull` pulls the pullable images defined in the Compose file

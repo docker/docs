@@ -15,7 +15,7 @@ weight: 150
 
 This page defines how Compose behaves to efficiently assist you and defines the development constraints and workflows set by Compose. Only a subset of Compose file services may require a `develop` subsection.
 
-## Illustrative example
+## Example
 
 ```yaml
 services:

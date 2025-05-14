@@ -27,7 +27,7 @@ If `pull_policy` is missing from the service definition, Compose attempts to pul
 
 Compose with `build` support offers an option to push built images to a registry. When doing so, it doesn't try to push service images without an `image` attribute. Compose warns you about the missing `image` attribute which prevents images being pushed.
 
-## Illustrative example
+## Example
 
 The following example illustrates Compose Build Specification concepts with a concrete sample application. The sample is non-normative.
 
