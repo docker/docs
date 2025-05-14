@@ -33,7 +33,7 @@ the settings file is ignored.
 
 - The `admin-settings.json` file doesn't work in air-gapped or offline
 environments.
-- The file is not compatible with environments that restrcit authentication
+- The file is not compatible with environments that restrict authentication
 with Docker Hub.
 
 ## Step one: Create the settings file
