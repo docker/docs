@@ -5,22 +5,18 @@ title: Settings reference
 linkTitle: Settings reference
 ---
 
-This reference lists all Docker Desktop settings, including where they live,
-which operating systems they apply to, and whether they're configurable via the
-Docker Desktop GUI, the Docker Admin Console, or the `admin-settings.json` file.
-Settings are organized to match the structure of the Docker Desktop GUI.
+This reference lists all Docker Desktop settings, including where they are configured, which operating systems they apply to, and whether they're available in the Docker Desktop GUI, the Docker Admin Console, or the `admin-settings.json` file. Settings are grouped to match the structure of the Docker Desktop interface.
 
 Each setting includes:
 
-- Desktop setting name
-- A values table that includes the default value, accepted values, and format
-- Description
+- The display name used in Docker Desktop
+- A table of values, default values, and required format
+- A description and use cases
 - OS compatibility
-- Use cases
-- How to configure the setting: With [Docker Desktop](/manuals/desktop/settings-and-maintenance/settings.md) or Settings Management (Admin Console or `admin-settings.json` file)
+- Configuration methods: via [Docker Desktop](/manuals/desktop/settings-and-maintenance/settings.md), the Admin Console, or the `admin-settings.json` file
 
-For details on the format and usage of the `admin-settings.json` file, see
-[Configure Settings Management with a JSON file](/manuals/security/for-admins/hardened-desktop/settings-management/configure-json-file.md).
+Use this reference to compare how settings behave across different configuration
+methods and platforms.
 
 ## General
 

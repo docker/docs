@@ -8,72 +8,77 @@ weight: 20
 
 {{< summary-bar feature_name="Admin Console" >}}
 
-This page contains information for administrators on how to configure Settings Management with the Docker Admin Console. You can specify and lock configuration parameters to create a standardized Docker Desktop environment across your Docker company or organization.
+This page explains how administrators can use the Docker Admin Console to create
+and apply settings policies for Docker Desktop. These policies help standardize
+and secure Docker Desktop environments across your organization.
 
 ## Prerequisites
 
-- [Download and install Docker Desktop 4.36.0 or later](/manuals/desktop/release-notes.md).
+- [Install Docker Desktop 4.36.0 or later](/manuals/desktop/release-notes.md).
 - [Verify your domain](/manuals/security/for-admins/single-sign-on/configure.md#step-one-add-and-verify-your-domain).
-- [Enforce sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md). The Settings Management feature requires a Docker Business
-subscription, therefore your Docker Desktop users must authenticate to your
-organization for configurations to take effect.
+- [Enforce sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md) to
+ensure users authenticate to your organization.
+- A Docker Business subscription is required.
 
 > [!IMPORTANT]
 >
-> For settings to take effect, you must add users to your verified domain.
+> You must add users to your verified domain for settings to take effect.
 
 ## Create a settings policy
 
-1. Within the [Docker Admin Console](https://app.docker.com/admin) navigate to the company or organization you want to define a settings policy for.
-2. Under the **Docker Desktop** section, select **Settings Management**.
+1. Go to the [Docker Admin Console](https://app.docker.com/admin) and select
+your organization.
+2. Under **Docker Desktop**, select **Settings Management**.
 3. Select **Create a settings policy**.
-4. Give your settings policy a name and an optional description.
+4. Provide a name and optional description.
 
    > [!TIP]
    >
-   > If you have already configured Settings Management with an `admin-settings.json` file for an organization, you can upload it using the **Upload existing settings** button which then automatically populates the form for you.
-   >
-   > Settings policies deployed via the Docker Admin Console take precedence over manually deployed `admin-settings.json` files.
+   > You can upload an existing `admin-settings.json` file to pre-fill the form.
+   Admin Console policies override local `admin-settings.json` files.
 
-5. Assign the setting policy to all your users within the company or organization, or specific users.
+5. Choose who the policy applies to:
+   - All users
+   - Specific users
 
    > [!NOTE]
    >
-   > If a settings policy is assigned to all users, it sets the policy as the global default policy. You can only have one global settings policy at a time.
-   > If a user already has a user-specific settings policy assigned, the user-specific policy takes precedence over a global policy.
+   > User-specific policies override the global default. Test your policy with
+   a few users before rolling it out globally.
+
+6. Configure the state for each setting:
+   - **User-defined**: Users can change the setting.
+   - **Always enabled**: Setting is on and locked.
+   - **Enabled**: Setting is on but can be changed.
+   - **Always disabled**: Setting is off and locked.
+   - **Disabled**: Setting is off but can be changed.
 
    > [!TIP]
    >
-   > Before setting a global settings policy, it is recommended that you first test it as a user-specific policy to make sure you're happy with the changes before proceeding.
+   > For a complete list of available settings, their supported platforms, and which configuration methods they work with, see the [Settings reference](settings-reference.md).
+7. Select **Create**.
 
-6. Configure the settings for the policy. Go through each setting and select your chosen setting state. You can choose:
-   - **User-defined**. Your developers are able to control and change this setting.
-   - **Always enabled**. This means the setting is turned on and your users won't be able to edit this setting from Docker Desktop or the CLI.
-   - **Enabled**. The setting is turned on and users can edit this setting from Docker Desktop or the CLI.
-   - **Always disabled**. This means the setting is turned off and your users won't be able to edit this setting from Docker Desktop or the CLI.
-   - **Disabled**. The setting is turned off and users can edit this setting from Docker Desktop or the CLI.
-7. Select **Create**
+To apply the policy:
 
-For the settings policy to take effect:
-- On a new install, users need to launch Docker Desktop and authenticate to their organization.
-- On an existing install, users need to quit Docker Desktop through the Docker menu, and then re-launch Docker Desktop. If they are already signed in, they don't need to sign in again for the changes to take effect.
+- New installs: Launch Docker Desktop and sign in.
+- Existing installs: Fully quit and relaunch Docker Desktop.
 
-  > [!IMPORTANT]
-  >
-  > Selecting **Restart** from the Docker menu isn't enough as it only restarts some components of Docker Desktop.
-
-To avoid disrupting your users' workflows, Docker doesn't automatically require that users re-launch once a change has been made.
-
-> [!NOTE]
+> [!IMPORTANT]
 >
-> Settings are synced to Docker Desktop and the CLI when a user is signed in and starts Docker Desktop, and then every 60 minutes.
+> Restarting from the Docker Desktop menu isn't enough. Users must fully quit
+and relaunch Docker Desktop.
 
-If your settings policy needs to be rolled back, either delete the policy or edit the policy to set individual settings to **User-defined**.
+Docker Desktop checks for policy updates at launch and every 60 minutes. To roll
+back a policy, either delete it or set individual settings to **User-defined**.
 
-## Settings policy actions
+## Manage policies
 
-From the **Actions** menu on the **Settings Management** page in the Docker Admin Console, you can:
+From the **Actions** menu on the **Settings Management** page, you can:
 
-- Edit or delete an existing settings policy.
-- Export a settings policy as an `admin-settings.json` file.
-- Promote a policy that is applied to a select group of users, to be the new global default policy for all users.
+- Edit or delete an existing settings policy
+- Export a settings policy as an `admin-settings.json` file
+- Promote a user-specific policy to be the new global default
+
+## Learn more
+
+To see how each Docker Desktop setting maps across the Docker Dashboard, `admin-settings.json` file, and Admin Console, see the [Settings reference](settings-reference.md).
