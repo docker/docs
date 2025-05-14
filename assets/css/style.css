@@ -3,19 +3,44 @@
 @plugin "@tailwindcss/typography";
 @source "hugo_stats.json";
 
+@font-face {
+  font-family: "Roboto Flex";
+  src: url("/assets/fonts/RobotoFlex.woff2") format("woff2");
+  font-weight: 100 1000; /* Range of weights Roboto Flex supports */
+  font-stretch: 100%; /* Range of width Roboto Flex supports */
+  font-style: oblique 0deg 10deg; /* Range of oblique angle Roboto Flex supports */
+  font-display: fallback;
+}
+
+/* Roboto Mono */
+@font-face {
+  font-family: "Roboto Mono";
+  src: url("/assets/fonts/RobotoMono-Regular.woff2") format("woff2");
+  font-weight: 100 700; /* Define the range of weight the variable font supports */
+  font-style: normal;
+  font-display: fallback;
+}
+
+/* Roboto Mono Italic */
+@font-face {
+  font-family: "Roboto Mono";
+  src: url("/assets/fonts/RobotoMono-Italic.woff2") format("woff2");
+  font-weight: 100 700; /* Define the range of weight the variable font supports */
+  font-style: italic;
+  font-display: fallback;
+}
+
 @layer theme {
   @import "theme.css";
 }
 
 @layer base {
   @import "global.css";
-  @import "typography.css";
 }
-
 @import "utilities.css";
-@import "components.css";
 @import "syntax-dark.css";
 @import "syntax-light.css";
+@import "components.css";
 
 @variant dark (&:where(.dark, .dark *));
 

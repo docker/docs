@@ -49,42 +49,31 @@ input[type="search"]::-ms-clear {
       margin: 0;
     }
   }
-  a {
-    font-weight: 400;
-  }
   hr {
     @apply mt-8 mb-4;
   }
   h1 {
-    @apply my-4 text-4xl;
-    line-height: 1.167;
+    @apply mt-2! mb-4! text-4xl!;
   }
   h2 {
-    @apply mt-8 mb-4 text-3xl;
-    line-height: 1.2;
+    @apply mt-2! mb-4! text-3xl!;
   }
   h3 {
-    @apply text-2xl;
-    line-height: 1.167;
+    @apply text-2xl!;
   }
   h4 {
-    @apply text-xl;
-    line-height: 1.235;
   }
   h5 {
-    @apply text-lg;
-    line-height: 1.75;
   }
-}
+  ol {
+    list-style-type: decimal;
+  }
 
-.prose ol {
-  list-style-type: decimal;
-}
+  ol ol {
+    list-style-type: lower-alpha;
+  }
 
-.prose ol ol {
-  list-style-type: lower-alpha;
-}
-
-.prose ol ol ol {
-  list-style-type: lower-roman;
+  ol ol ol {
+    list-style-type: lower-roman;
+  }
 }

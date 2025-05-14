@@ -1,0 +1,29 @@
+@layer components {
+  .card {
+    @apply flex flex-col gap-4 rounded-lg border border-gray-200 bg-white p-6 shadow-md;
+  }
+
+  .card-title {
+    @apply text-lg font-light text-gray-900;
+  }
+
+  .card-content {
+    @apply text-base text-gray-700;
+  }
+
+  .card-link {
+    @apply block text-inherit no-underline hover:underline;
+  }
+
+  .card-icon {
+    @apply mb-4 text-gray-500;
+  }
+
+  .card-description {
+    @apply text-sm text-gray-600;
+  }
+
+  .card-header {
+    @apply flex items-center gap-4;
+  }
+}

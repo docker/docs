@@ -122,7 +122,9 @@
   --color-blue-light-600: #0c49c2;
   --color-blue-light-700: #00308d;
   --color-blue-light-800: #00084d;
-  --color-blue-light: #1d63ed;
+  --color-primary-blue: #1d63ed;
+  --tw-prose-link: var(--color-primary-blue);
+  --color-blue-light: var(--color-primary-blue);
 
   --color-blue-dark-100: #002ea3;
   --color-blue-dark-200: #063bb7;

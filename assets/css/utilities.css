@@ -26,8 +26,12 @@
   }
 }
 
+@utility text-primary-blue {
+  color: var(--color-primary-blue);
+}
+
 @utility link {
-  @apply text-blue-light dark:text-blue-dark underline underline-offset-2;
+  @apply text-primary-blue dark:text-blue-dark underline underline-offset-2;
 }
 
 @utility invertible {

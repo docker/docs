@@ -3,25 +3,34 @@
 {{ end }}
 
 {{ define "main" }}
-  <article class="prose max-w-none dark:prose-invert">
+  <article class="prose dark:prose-invert max-w-none">
     <h1 class="py-4">{{ .Title }}</h1>
     {{ .Content }}
     <div class="not-prose">
-      <div class="flex flex-col lg:flex-row justify-between gap-8">
-        <input type="search" id="search-page-input"
-          class="min-w-0 ring-[1.5px] ring-gray-light-200 dark:ring-gray-dark-400 w-full max-w-xl rounded px-4 py-2 outline-none bg-white dark:bg-background-dark focus:ring-blue-light dark:focus:ring-blue-dark"
-          placeholder="Search…" tabindex="0" />
-        <div class="flex min-w-fit flex-col flex-grow items-center">
+      <div class="flex flex-col justify-between gap-8 lg:flex-row">
+        <input
+          type="search"
+          id="search-page-input"
+          class="ring-3-gray-light-200 dark:ring-3-gray-dark-400 dark:bg-background-dark focus:ring-3-blue-light dark:focus:ring-3-blue-dark ring-3-[1.5px] w-full max-w-xl min-w-0 rounded-sm bg-white px-4 py-2 outline-hidden"
+          placeholder="Search…"
+          tabindex="0"
+        />
+        <div class="flex min-w-fit flex-grow flex-col items-center">
           <p>Not finding what you're looking for?</p>
           <button
-            class="px-2 py-1 font-semibold rounded open-kapa-widget flex w-fit gap-2 items-center hover:bg-gray-light-200 dark:hover:bg-gray-dark-200">
+            class="open-kapa-widget hover:bg-gray-light-200 dark:hover:bg-gray-dark-200 flex w-fit items-center gap-2 rounded-sm px-2 py-1 font-semibold"
+          >
             <span>Try Ask AI</span>
-            <img height="24px" width="24px" src="{{ (resources.Get "images/ai-stars.svg").Permalink }}"
-              alt="AI sparkles!" />
+            <img
+              height="24px"
+              width="24px"
+              src="{{ (resources.Get "images/ai-stars.svg").Permalink }}"
+              alt="AI sparkles!"
+            />
           </button>
         </div>
       </div>
-      <hr class="border-divider-light dark:border-divider-dark">
+      <hr class="border-divider-light dark:border-divider-dark" />
       <div id="search-page-results">
         <!-- results -->
       </div>
@@ -140,7 +149,7 @@
           .join("");
         // If the results length is greater than 10, display links to show more results
         if (resultsLength > 10) {
-          resultsHTML += `<hr class="border-divider-light dark:border-divider-dark">`
+          resultsHTML += `<hr class="border-divider-light dark:border-divider-dark">`;
           resultsHTML += `<ul class="flex flex-wrap gap-1 pt-4 pb-8 justify-center text-sm">`;
           for (let i = 1; i <= resultsLength / 10; i++) {
             if (i == currentPage) {

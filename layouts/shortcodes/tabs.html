@@ -4,20 +4,21 @@
 {{ $groupID := fmt.Printf "tabgroup-%s" (urlize $group) }}
 {{ $persist := .Get "persist" }}
 
+
 <div
   {{ with $group }}
     {{ if $persist }}
-      x-data="{ selected: $persist('{{$first}}').as('{{$groupID}}') }"
+      x-data="{ selected: $persist('{{ $first }}').as('{{ $groupID }}') }"
     {{ else }}
-      x-data="{ selected: '{{$first}}' }"
+      x-data="{ selected: '{{ $first }}' }"
     {{ end }}
-    @tab-select.window="$event.detail.group === '{{ . }}'
-      ? selected = $event.detail.name
-      : null"
+    @tab-select.window="$event.detail.group === '{{ . }}' ? selected =
+    $event.detail.name : null"
   {{ else }}
     x-data="{ selected: '{{ $first }}' }"
   {{ end }}
-  aria-role="tabpanel">
+  aria-role="tabpanel"
+>
   <div aria-role="tablist" class="space-x-2">
     {{ range (.Store.Get "tabs") }}
       <button
