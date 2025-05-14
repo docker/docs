@@ -1,89 +1,103 @@
 /* global styles */
 
-@layer base {
-  [x-cloak=""] {
+[x-cloak=""] {
+  display: none !important;
+}
+/* alpine cloak for small screens only */
+[x-cloak="sm"] {
+  @media (width <= 768px) {
     display: none !important;
-  }
-  /* alpine cloak for small screens only */
-  [x-cloak="sm"] {
-    @media (width <= 768px) {
-      display: none !important;
-    }
-  }
-
-  :root {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-
-    scrollbar-color: theme(colors.gray.light.400) theme(colors.black / 0.05);
-    &.dark {
-      scrollbar-color: theme(colors.gray.dark.800) theme(colors.white / 0.10);
-    }
-  }
-
-  mark {
-    @apply bg-transparent font-bold text-blue-light dark:text-blue-dark;
-  }
-
-  /* Hide the clear (X) button for search inputs */
-  /* Chrome, Safari, Edge, and Opera */
-  input[type="search"]::-webkit-search-cancel-button {
-    -webkit-appearance: none;
-    appearance: none;
-  }
-  
-  /* Firefox */
-  input[type="search"]::-moz-search-cancel-button {
-    display: none;
-  }
-  
-  /* Internet Explorer and Edge (legacy) */
-  input[type="search"]::-ms-clear {
-    display: none;
   }
 }
 
-/* utility classes */
+:root {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 
-@layer utilities {
-  .link {
-    @apply text-blue-light underline underline-offset-2 dark:text-blue-dark;
+  scrollbar-color: theme(colors.gray.light.400) theme(colors.black / 0.05);
+  &.dark {
+    scrollbar-color: theme(colors.gray.dark.800) theme(colors.white / 0.1);
   }
+}
 
-  .invertible {
-    @apply dark:hue-rotate-180 dark:invert dark:filter;
-  }
+mark {
+  @apply text-blue-light dark:text-blue-dark bg-transparent font-bold;
+}
 
-  .bg-pattern-blue {
-    background-color: theme(colors.white / 50%);
-    background-image: url('/assets/images/bg-pattern-blue.webp');
-    background-blend-mode: overlay;
-    background-size: cover;
-    background-repeat: none;
-    .dark & {
-      background-color: theme(colors.black / 70%);
+/* Hide the clear (X) button for search inputs */
+/* Chrome, Safari, Edge, and Opera */
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Firefox */
+input[type="search"]::-moz-search-cancel-button {
+  display: none;
+}
+
+/* Internet Explorer and Edge (legacy) */
+input[type="search"]::-ms-clear {
+  display: none;
+}
+
+.prose {
+  li {
+    @apply my-2;
+    > :last-child,
+    > :first-child {
+      margin: 0;
     }
   }
-
-  .bg-pattern-purple {
-    background-color: theme(colors.white / 50%);
-    background-image: url('/assets/images/bg-pattern-purple.webp');
-    background-blend-mode: overlay;
-    background-size: cover;
-    background-repeat: none;
-    .dark & {
-      background-color: theme(colors.black / 70%);
-    }
+  a {
+    font-weight: 400;
   }
+  hr {
+    @apply mt-8 mb-4;
+  }
+  h1 {
+    @apply my-4 text-4xl;
+    line-height: 1.167;
+  }
+  h2 {
+    @apply mt-8 mb-4 text-3xl;
+    line-height: 1.2;
+  }
+  h3 {
+    @apply text-2xl;
+    line-height: 1.167;
+  }
+  h4 {
+    @apply text-xl;
+    line-height: 1.235;
+  }
+  h5 {
+    @apply text-lg;
+    line-height: 1.75;
+  }
+}
 
-  .bg-pattern-verde {
-    background-color: theme(colors.white / 50%);
-    background-image: url('/assets/images/bg-pattern-verde.webp');
-    background-blend-mode: overlay;
-    background-size: cover;
-    background-repeat: none;
-    .dark & {
-      background-color: theme(colors.black / 70%);
+.prose ol {
+  list-style-type: decimal;
+}
+
+.prose ol ol {
+  list-style-type: lower-alpha;
+}
+
+.prose ol ol ol {
+  list-style-type: lower-roman;
+}
+
+#TableOfContents {
+  .toc a {
+    @apply block max-w-full truncate py-1 pl-2 hover:font-medium hover:no-underline;
+    &[aria-current="true"],
+    &:hover {
+      @apply border-l-gray-light from-gray-light-100 dark:border-l-gray-dark dark:from-gray-dark-200 border-l-2 bg-gradient-to-r font-medium text-black dark:text-white;
+    }
+    &:not([aria-current="true"]) {
+      @apply text-gray-light-600 dark:text-gray-dark-700 hover:text-black dark:hover:text-white;
     }
   }
 }
