@@ -32,19 +32,19 @@ your organization.
 3. Select **Create a settings policy**.
 4. Provide a name and optional description.
 
-   > [!TIP]
-   >
-   > You can upload an existing `admin-settings.json` file to pre-fill the form.
-   Admin Console policies override local `admin-settings.json` files.
+      > [!TIP]
+      >
+      > You can upload an existing `admin-settings.json` file to pre-fill the form.
+      Admin Console policies override local `admin-settings.json` files.
 
 5. Choose who the policy applies to:
    - All users
    - Specific users
 
-   > [!NOTE]
-   >
-   > User-specific policies override the global default. Test your policy with
-   a few users before rolling it out globally.
+      > [!NOTE]
+      >
+      > User-specific policies override the global default. Test your policy with
+      a few users before rolling it out globally.
 
 6. Configure the state for each setting:
    - **User-defined**: Users can change the setting.
@@ -53,9 +53,10 @@ your organization.
    - **Always disabled**: Setting is off and locked.
    - **Disabled**: Setting is off but can be changed.
 
-   > [!TIP]
-   >
-   > For a complete list of available settings, their supported platforms, and which configuration methods they work with, see the [Settings reference](settings-reference.md).
+      > [!TIP]
+      >
+      > For a complete list of available settings, their supported platforms, and which configuration methods they work with, see the [Settings reference](settings-reference.md).
+
 7. Select **Create**.
 
 To apply the policy:
