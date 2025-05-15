@@ -7,11 +7,15 @@
         <img class="card-image" src="{{ . }}" alt="">
       {{ end }}
       {{ with .icon }}
+      <div class="card-icon">
         {{ if (in . "/") }}
-          <img class="card-icon" src="{{ . }}" alt="">
+          <img class="card-img" src="{{ . }}" alt="">
         {{ else }}
-          <span class="icon-svg">{{ partial "icon" . }}</span>
+          <span class="card-img">
+            {{ partial "icon" . }}
+          </span>
         {{ end }}
+      </div>
       {{ end }}
       <h3 class="card-title">{{ markdownify .title }}</h3>
     </div>
