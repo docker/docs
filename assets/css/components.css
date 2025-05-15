@@ -86,4 +86,7 @@
   .download-links a {
     @apply link;
   }
+  .download-links-subcontainer {
+    @apply flex flex-wrap gap-2;
+  }
 }
