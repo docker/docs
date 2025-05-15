@@ -87,99 +87,73 @@ challenge, the client will need to make a `GET` request to the URL
 
 Defines getting a bearer and refresh token using the token endpoint.
 
-#### Query parameters
+### Query parameters
 
-<dl>
-    <dt>
-        <code>service</code>
-    </dt>
-    <dd>
-        The name of the service which hosts the resource.
-    </dd>
-    <dt>
-        <code>offline_token</code>
-    </dt>
-    <dd>
-        Whether to return a refresh token along with the bearer token. A refresh
-        token is capable of getting additional bearer tokens for the same
-        subject with different scopes. The refresh token does not have an
-        expiration and should be considered completely opaque to the client.
-    </dd>
-    <dt>
-        <code>client_id</code>
-    </dt>
-    <dd>
-        String identifying the client. This client_id does not need
-        to be registered with the authorization server but should be set to a
-        meaningful value in order to allow auditing keys created by unregistered
-        clients. Accepted syntax is defined in
-        [RFC6749 Appendix A.1](https://tools.ietf.org/html/rfc6749#appendix-A.1).
-    </dd>
-    <dt>
-        <code>scope</code>
-    </dt>
-    <dd>
-        The resource in question, formatted as one of the space-delimited
-        entries from the <code>scope</code> parameters from the <code>WWW-Authenticate</code> header
-        shown above. This query parameter should be specified multiple times if
-        there is more than one <code>scope</code> entry from the <code>WWW-Authenticate</code>
-        header. The above example would be specified as:
-        <code>scope=repository:samalba/my-app:push</code>. The scope field may
-        be empty to request a refresh token without providing any resource
-        permissions to the returned bearer token.
-    </dd>
-</dl>
+#### `service`
 
+The name of the service which hosts the resource.
 
-#### Token response fields
+#### `offline_token`
 
-<dl>
-    <dt>
-        <code>token</code>
-    </dt>
-    <dd>
-        An opaque <code>Bearer</code> token that clients should supply to subsequent
-        requests in the <code>Authorization</code> header.
-    </dd>
-    <dt>
-        <code>access_token</code>
-    </dt>
-    <dd>
-        For compatibility with OAuth 2.0, the <code>token</code> under the name
-        <code>access_token</code> is also accepted.  At least one of these fields <b>must</b> be specified, but
-        both may also appear (for compatibility with older clients).  When both are specified,
-        they should be equivalent; if they differ the client's choice is undefined.
-    </dd>
-    <dt>
-        <code>expires_in</code>
-    </dt>
-    <dd>
-        (Optional) The duration in seconds since the token was issued that it
-        will remain valid.  When omitted, this defaults to 60 seconds.  For
-        compatibility with older clients, a token should never be returned with
-        less than 60 seconds to live.
-    </dd>
-    <dt>
-        <code>issued_at</code>
-    </dt>
-    <dd>
-        (Optional) The <a href="https://www.ietf.org/rfc/rfc3339.txt">RFC3339</a>-serialized UTC
-        standard time at which a given token was issued. If <code>issued_at</code> is omitted, the
-        expiration is from when the token exchange completed.
-    </dd>
-    <dt>
-        <code>refresh_token</code>
-    </dt>
-    <dd>
-        (Optional) Token which can be used to get additional access tokens for
-        the same subject with different scopes. This token should be kept secure
-        by the client and only sent to the authorization server which issues
-        bearer tokens. This field will only be set when `offline_token=true` is
-        provided in the request.
-    </dd>
-</dl>
+Whether to return a refresh token along with the bearer token. A refresh token
+is capable of getting additional bearer tokens for the same subject with
+different scopes. The refresh token does not have an expiration and should be
+considered completely opaque to the client.
 
-#### Example
+#### `client_id`
+
+String identifying the client. This client_id does not need to be registered
+with the authorization server but should be set to a meaningful value in order
+to allow auditing keys created by unregistered clients. Accepted syntax is
+defined in [RFC6749 Appendix
+A.1](https://tools.ietf.org/html/rfc6749#appendix-A.1).
+
+#### `scope`
+
+The resource in question, formatted as one of the space-delimited entries from
+the `scope` parameters from the `WWW-Authenticate` header shown above. This
+query parameter should be specified multiple times if there is more than one
+`scope` entry from the `WWW-Authenticate` header. The above example would be
+specified as: `scope=repository:samalba/my-app:push`. The scope field may be
+empty to request a refresh token without providing any resource permissions to
+the returned bearer token.
+
+### Token response fields
+
+#### `token`
+
+An opaque `Bearer` token that clients should supply to subsequent
+requests in the `Authorization` header.
+
+#### `access_token`
+
+For compatibility with OAuth 2.0, the `token` under the name `access_token` is
+also accepted.  At least one of these fields must be specified, but both may
+also appear (for compatibility with older clients).  When both are specified,
+they should be equivalent; if they differ the client's choice is undefined.
+
+#### `expires_in`
+
+(Optional) The duration in seconds since the token was issued that it will
+remain valid.  When omitted, this defaults to 60 seconds.  For compatibility
+with older clients, a token should never be returned with less than 60 seconds
+to live.
+
+#### `issued_at`
+
+(Optional) The [RFC3339](https://www.ietf.org/rfc/rfc3339.txt)-serialized UTC
+standard time at which a given token was issued. If `issued_at` is omitted, the
+expiration is from when the token exchange completed.
+
+#### `refresh_token`
+
+(Optional) Token which can be used to get additional access tokens for
+the same subject with different scopes. This token should be kept secure
+by the client and only sent to the authorization server which issues
+bearer tokens. This field will only be set when `offline_token=true` is
+provided in the request.
+
+### Example
 
 For this example, the client makes an HTTP GET request to the following URL:
 
