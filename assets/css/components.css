@@ -1,33 +1,61 @@
 @layer components {
   .card {
-    @apply prose flex flex-col gap-2 rounded-lg border border-gray-200 bg-white p-6 shadow-md;
+    @apply prose flex flex-col gap-2 rounded-sm border border-gray-200 bg-white p-6 shadow-md;
   }
-
   .card-title {
     @apply prose-lg font-semibold;
   }
-
   .card-content {
     @apply text-gray-700;
   }
-
   .card-link {
     @apply block text-inherit no-underline;
   }
-
   .card-icon{
     max-height: 26px
   }
-
   .card-description {
     @apply  text-gray-600;
   }
-
   .card-header {
     @apply flex items-start gap-2 mb-2;
   }
-
   .card-image {
     max-height: 26px
+  }
+
+  .admonition {
+    @apply flex flex-col items-start w-full px-6 py-4 gap-3 relative rounded-sm;
+  }
+  .admonition-header {
+    @apply flex items-center gap-2;
+  }
+  .admonition-title {
+    @apply font-semibold;
+  }
+  .admonition-content {
+    @apply flex-1 min-w-0;
+  }
+  .admonition-note {
+    @apply border-blue-400 bg-blue-50 text-blue-900;
+  }
+  .admonition-tip {
+    @apply border-green-400 bg-green-50 text-green-900;
+  }
+  .admonition-warning {
+    @apply border-yellow-400 bg-yellow-50 text-yellow-900;
+  }
+  .admonition-danger {
+    @apply border-red-400 bg-red-50 text-red-900;
+  }
+  .admonition-icon {
+    @apply flex-shrink-0;
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    min-height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
