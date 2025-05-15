@@ -1,12 +1,14 @@
-
 <div class="card">
   {{ if .link }}
     <a href="{{ .link }}" class="card-link">
   {{ end }}
-    <div class="card-header flex items-center gap-4">
+    <div class="card-header">
+      {{ with .image }}
+        <img class="card-image" src="{{ . }}" alt="">
+      {{ end }}
       {{ with .icon }}
-        {{ if strings.ContainsAny . "/." }}
-          <img class="card-icon w-[32px] invertible" src="{{ . }}" alt="">
+        {{ if (in . "/") }}
+          <img class="card-icon" src="{{ . }}" alt="">
         {{ else }}
           <span class="icon-svg">{{ partial "icon" . }}</span>
         {{ end }}

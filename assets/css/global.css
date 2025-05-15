@@ -52,18 +52,18 @@ input[type="search"]::-ms-clear {
   hr {
     @apply mt-8 mb-4;
   }
-  h1 {
+  > h1 {
     @apply mt-2! mb-4! text-4xl!;
   }
-  h2 {
+  > h2 {
     @apply mt-2! mb-4! text-3xl!;
   }
-  h3 {
+  > h3 {
     @apply text-2xl!;
   }
-  h4 {
+  > h4 {
   }
-  h5 {
+  > h5 {
   }
   ol {
     list-style-type: decimal;

@@ -1,7 +1,6 @@
 @theme inline {
   --font-sans: "roboto flex", sans-serif;
   --font-mono: "roboto flex mono", ui-monospace, SFMono-Regular, monospace;
-  --text-base: 14px;
   --default-font-family: var(--font-sans);
 
   --text-xs: 0.7143rem;

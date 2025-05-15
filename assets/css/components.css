@@ -1,29 +1,33 @@
 @layer components {
   .card {
-    @apply flex flex-col gap-4 rounded-lg border border-gray-200 bg-white p-6 shadow-md;
+    @apply prose flex flex-col gap-2 rounded-lg border border-gray-200 bg-white p-6 shadow-md;
   }
 
   .card-title {
-    @apply text-lg font-light text-gray-900;
+    @apply prose-lg font-semibold;
   }
 
   .card-content {
-    @apply text-base text-gray-700;
+    @apply text-gray-700;
   }
 
   .card-link {
-    @apply block text-inherit no-underline hover:underline;
+    @apply block text-inherit no-underline;
   }
 
-  .card-icon {
-    @apply mb-4 text-gray-500;
+  .card-icon{
+    max-height: 26px
   }
 
   .card-description {
-    @apply text-sm text-gray-600;
+    @apply  text-gray-600;
   }
 
   .card-header {
-    @apply flex items-center gap-4;
+    @apply flex items-start gap-2 mb-2;
+  }
+
+  .card-image {
+    max-height: 26px
   }
 }
