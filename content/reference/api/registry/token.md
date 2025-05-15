@@ -4,8 +4,7 @@ description: "Specifies the Docker Registry v2 authentication"
 keywords: registry, images, tags, repository, distribution, Bearer authentication, advanced
 ---
 
-
-This document outlines the v2 Docker Registry authentication scheme:
+This document outlines the registry authentication scheme:
 
 ![v2 registry auth](./images/v2-registry-auth.png)
 
@@ -84,11 +83,11 @@ challenge, the client will need to make a `GET` request to the URL
 `https://auth.docker.io/token` using the `service` and `scope` values from the
 `WWW-Authenticate` header.
 
-## Requesting a Token
+## Requesting a token
 
 Defines getting a bearer and refresh token using the token endpoint.
 
-#### Query Parameters
+#### Query parameters
 
 <dl>
     <dt>
