@@ -343,12 +343,20 @@ Also, the `\` character has a special meaning in Git Bash.
 
 Portability of the scripts is not affected as Linux treats multiple `/` as a single entry.
 
-### Docker Desktop fails due to Virtualization settings
+### Docker Desktop fails due to Virtualization not working
+
+#### Error message
+
+A typical error message is "Docker Desktop - Unexpected WSL error" mentioning the error code
+`Wsl/Service/RegisterDistro/CreateVm/HCS/HCS_E_HYPERV_NOT_INSTALLED`. Manually executing `wsl` commands
+will also fail with the same error code.
 
 #### Cause
 
 - Virtualization settings are disabled in the BIOS.
 - Windows Hyper-V or WSL 2 components are missing.
+
+Note some third-party software such as Android emulators will disable Hyper-V on install.
 
 #### Solutions
 
@@ -363,6 +371,21 @@ Your machine must have the following features for Docker Desktop to function cor
 4. Hypervisor enabled at Windows startup
 
 ![WSL 2 enabled](../../images/wsl2-enabled.png)
+
+It must be possible to run WSL 2 commands without error, for example
+
+```console
+PS C:\users\> wsl -l -v
+  NAME              STATE           VERSION
+* Ubuntu            Running         2
+  docker-desktop    Stopped         2
+PS C:\users\> wsl -d docker-desktop echo WSL 2 is working
+WSL 2 is working
+```
+
+If the features are enabled but the commands are not working, first check [Virtualization is turned on](#virtualization-must-be-turned-on)
+then [enable the Hypervisor at Windows startup](#hypervisor-enabled-at-windows-startup) if required. If running Docker
+Desktop in a Virtual Machine, ensure [the hypervisor has nested virtualization enabled](#turn-on-nested-virtualization).
 
 ##### Hyper-V
 
