@@ -517,7 +517,7 @@ response format is as follows:
 To delete a manifest, perform a DELETE request to a path in the following
 format: `/v2/<name>/manifests/<digest>`.
 
-<name> is the namespace of the repository, and <digest> is the digest of the
+`<name>` is the namespace of the repository, and `<digest>` is the digest of the
 manifest to be deleted. Upon success, the registry must respond with a 202
 Accepted code. If the repository does not exist, the response must return 404
 Not Found. If manifest deletion is disabled, the registry must respond with
