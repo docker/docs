@@ -37,6 +37,6 @@
 <blockquote
   {{ with .Attributes.id }}id="{{ . }}"{{ end }}
   class="admonition not-prose">
-    {{ .Text | safeHTML }}
+  {{ .Text | safeHTML }}
   </blockquote>
 {{ end }}

@@ -4,8 +4,8 @@
 {{- $mac := .Get "mac" -}}
 {{- $linux := .Get "linux" -}}
 {{- $build_path := .Get "build_path" -}}
-<blockquote {{ if eq $build_path "/" }} class="tip" {{ end }}>
-<p>Download Docker Desktop</p>
+<blockquote {{ if eq $build_path "/" }} class="tip" {{ end }} class="not-prose download-links">
+<p>Download Docker Desktop:</p>
 <p>
   {{- if or $all $win }}
   <a rel="noopener"

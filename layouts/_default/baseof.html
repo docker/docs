@@ -30,7 +30,7 @@
               }
           }
       })"
-        class="bg-background-light dark:bg-gray-dark-100 fixed top-0 z-40 hidden h-screen w-full flex-none overflow-x-hidden overflow-y-auto md:sticky md:top-16 md:z-auto md:block md:h-[calc(100vh-64px)] md:w-[300px]"
+        class="bg-background-toc dark:bg-background-toc fixed top-0 z-40 hidden h-screen w-full flex-none overflow-x-hidden overflow-y-auto md:sticky md:top-16 md:z-auto md:block md:h-[calc(100vh-64px)] md:w-[300px]"
         :class="{ 'hidden': ! $store.showSidebar }"
       >
         <!-- Gray backdrop on small screens -->
@@ -41,7 +41,7 @@
           x-transition.opacity
         ></div>
         <div
-          class="bg-background-light dark:bg-gray-dark-100 z-50 w-full p-4 md:block md:w-[300px]"
+          class="bg-background-toc dark:bg-background-toc z-50 w-full p-4 md:block md:w-[300px]"
         >
           <!-- Collapse button for small screens -->
           <button class="my-4 md:hidden" @click="$store.showSidebar = false">

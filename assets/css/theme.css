@@ -180,5 +180,8 @@
   --card-bg-dark: #1D262D;
   --card-border-dark: #516980;
   --color-gray-900: var(--card-bg-dark);
-  --color-gray-700: var(--card-border-dark)
+  --color-gray-700: var(--card-border-dark);
+  
+  --navbar-bg-light: f9f9fa;
+  --navbar-bg-dark: #0b0b0b;
 }

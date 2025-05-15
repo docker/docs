@@ -77,4 +77,13 @@
     justify-content: center;
 
   }
+  
+  .download-links {
+    @apply block;
+    @apply text-gray-800;
+    @apply dark:text-gray-200;
+  }
+  .download-links a {
+    @apply link;
+  }
 }

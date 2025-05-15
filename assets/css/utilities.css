@@ -60,6 +60,13 @@
   }
 }
 
+@utility bg-background-toc{
+  background-color: var(--navbar-bg-light);
+  .dark & {
+    background-color: var(--navbar-bg-dark);
+  }
+}
+
 @utility bg-pattern-verde {
   background-color: theme(colors.white / 50%);
   background-image: url("/assets/images/bg-pattern-verde.webp");

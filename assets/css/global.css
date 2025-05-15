@@ -53,10 +53,10 @@ input[type="search"]::-ms-clear {
     @apply mt-8 mb-4;
   }
   > h1 {
-    @apply mt-2! mb-4! text-4xl!;
+    @apply mt-3! mb-5! text-4xl!;
   }
   > h2 {
-    @apply mt-2! mb-4! text-3xl!;
+    @apply mt-4! mb-6! text-3xl!;
   }
   > h3 {
     @apply text-2xl!;
