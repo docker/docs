@@ -68,7 +68,7 @@ Docker Desktop utilizes the host operating system's secure key management for ha
 
 This is applicable only when using Docker Hub's application-level password versus SSO/SAML. For users created through SSO Just-in-Time or SCIM provisioning, Docker Hub doesn't store passwords. For all other users, application-level passwords are salt-hashed in storage (SHA-256) and encrypted in transit (TLS).
 
-### How do we de-provision users who are not part of our IdP? We use SSO but not SCIM.
+### How do we de-provision users who are not part of our IdP? We use SSO but not SCIM
 
 If SCIM isn't enabled, you have to manually remove users from the organization.
 SCIM can automate this if your users are added after SCIM is enabled. Any users
