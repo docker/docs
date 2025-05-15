@@ -23,7 +23,7 @@
   --text-4xl--font-weight: 500;
 
   --color-background-light: #f9f9fa;
-  --color-background-dark: #141b1f;
+  --color-background-dark: #10151B;
 
   --color-divider-light: hsla(0, 0%, 0%, 0.1);
   --color-divider-dark: hsla(0, 0%, 100%, 0.05);
@@ -176,4 +176,9 @@
   --color-gray-dark-700: #adbecb;
   --color-gray-dark-800: #c4d0da;
   --color-gray-dark: #7794ab;
+  
+  --card-bg-dark: #1D262D;
+  --card-border-dark: #516980;
+  --color-gray-900: var(--card-bg-dark);
+  --color-gray-700: var(--card-border-dark)
 }
