@@ -349,7 +349,7 @@ Portability of the scripts is not affected as Linux treats multiple `/` as a sin
 
 A typical error message is "Docker Desktop - Unexpected WSL error" mentioning the error code
 `Wsl/Service/RegisterDistro/CreateVm/HCS/HCS_E_HYPERV_NOT_INSTALLED`. Manually executing `wsl` commands
-will also fail with the same error code.
+also fails with the same error code.
 
 #### Cause
 
@@ -372,7 +372,7 @@ Your machine must have the following features for Docker Desktop to function cor
 
 ![WSL 2 enabled](../../images/wsl2-enabled.png)
 
-It must be possible to run WSL 2 commands without error, for example
+It must be possible to run WSL 2 commands without error, for example:
 
 ```console
 PS C:\users\> wsl -l -v
