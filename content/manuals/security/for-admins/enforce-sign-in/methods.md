@@ -27,7 +27,7 @@ To enforce sign-in for Docker Desktop on Windows, you can configure a registry k
    > [!IMPORTANT]
    >
    > As of Docker Desktop version 4.36 and later, you can add more than one organization. With Docker Desktop version 4.35 and earlier, if you add more than one organization sign-in enforcement silently fails.
-3. Use your organization's name, all lowercase as string data. If you're adding more than one organization, make sure they are all on their own line (don't use any other separators like spaces, commas or such).
+3. Use your organization's name, all lowercase as string data. If you're adding more than one organization, make sure they are all on their own line. Don't use any other separators such as spaces or commas.
 4. Restart Docker Desktop.
 5. When Docker Desktop restarts, verify that the **Sign in required!** prompt appears.
 
