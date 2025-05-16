@@ -282,7 +282,7 @@ Content-Type: application/octet-stream
 <Layer Binary Data>
 ```
 
-The "digest" parameter must be included with the PUT request.See the
+The "digest" parameter must be included with the `PUT` request. See the
 [Completed Upload](#completed-upload) section for details on the parameters
 and expected responses.
 
