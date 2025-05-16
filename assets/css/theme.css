@@ -184,4 +184,7 @@
   
   --navbar-bg-light: f9f9fa;
   --navbar-bg-dark: #0b0b0b;
+  --navbar-text-color-light: #000;
+  --navbar-text-color-dark: var(--tw-prose-body);
+  --navbar-border-color-light: var(--tw-prose-inverse-body);
 }
