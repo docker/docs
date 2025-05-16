@@ -135,7 +135,7 @@ they should be equivalent; if they differ the client's choice is undefined.
 #### `expires_in`
 
 (Optional) The duration in seconds since the token was issued that it will
-remain valid.  When omitted, this defaults to 60 seconds. For compatibility
+remain valid. When omitted, this defaults to 60 seconds. For compatibility
 with older clients, a token should never be returned with less than 60 seconds
 to live.
 
