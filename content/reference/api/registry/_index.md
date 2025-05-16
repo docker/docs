@@ -132,7 +132,7 @@ Content-Length: <length of manifest>
 Docker-Content-Digest: <digest>
 ```
 
-### Pulling a Layer
+### Get a layer
 
 Layers are stored in the blob portion of the registry, keyed by digest.
 Pulling a layer is carried out by a standard HTTP request. The URL is as
