@@ -14,9 +14,8 @@ platforms in the container ecosystem. For full details, refer to the [OCI
 Distribution
 Specification](https://github.com/opencontainers/distribution-spec).
 
-This topic provides a reference of selected registry API endpoints that are
-supported by Docker Hub. It does not cover the entire OCI Distribution
-Specification.
+This reference documents the Docker Hub-supported subset of the Registry HTTP API V2. 
+It focuses on pulling and pushing images, and does not cover the full OCI Distribution Specification.
 
 ## Overview
 
