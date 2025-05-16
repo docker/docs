@@ -1740,20 +1740,20 @@ Dependent service `app` receives additional environment variables prefixed by th
 For illustration, assuming `awesomecloud` execution produced variables `URL` and `API_KEY`, the `app` service
 runs with environment variables `DATABASE_URL` and `DATABASE_API_KEY`.
 
-As Compose stops the application, the `awesomecloud` binary is used to manage the `database` service teardown.
+As Compose stops the application, the `awesomecloud` binary is used to manage the `database` service tear down.
 
 The mechanism used by Compose to delegate the service lifecycle to an external binary is described [here](https://github.com/docker/compose/tree/main/docs/extension.md).
 
 For more information on using the `provider` attribute, see [Use provider services](/manuals/compose/how-tos/provider-services.md).
 
-### type 
-`type` attribute is required. It defines the external component used by Compose to manage setup and teardown lifecycle
+### `type`
+
+`type` attribute is required. It defines the external component used by Compose to manage setup and tear down lifecycle
 events.
 
-### options
+### `options`
+
 `options` are specific to the selected provider and not validated by the compose specification
-
-
 
 ### `pull_policy`
 

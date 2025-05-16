@@ -153,6 +153,7 @@ Zsh
 [Ss]warm
 [Ss]yscalls?
 [Ss]ysfs
+[Tt]eardown
 [Tt]oolchains?
 [Uu]narchived?
 [Uu]ngated
