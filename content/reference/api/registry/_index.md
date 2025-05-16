@@ -19,7 +19,7 @@ It focuses on pulling and pushing images, and does not cover the full OCI Distri
 
 ## Overview
 
-All endpoints will be prefixed
+All endpoints are prefixed
 by the API version and the repository name:
 
 ```text
