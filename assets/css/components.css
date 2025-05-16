@@ -16,18 +16,18 @@
     fill: currentColor;
   }
   .card-title {
-    @apply prose-lg font-semibold;
+    @apply text-lg font-light text-gray-900;
   }
   .card-content {
     @apply text-gray-700;
     @apply dark:text-gray-200;
   }
   .card-link {
-    @apply block text-inherit no-underline;
-    @apply dark:text-inherit;
+    @apply block text-inherit no-underline hover:underline;
   }
-  .card-icon{
-    @apply align-bottom;
+
+  .card-icon {
+    @apply mb-4 text-gray-500;
   }
   .card-description {
     @apply text-gray-500;
@@ -35,7 +35,8 @@
   }
 
   .admonition {
-    @apply flex flex-col items-start w-full px-6 py-4 gap-3 relative rounded-sm;
+    @apply flex flex-col items-start w-full px-6 py-4 gap-3 relative rounded-sm mb-4;
+    @apply bg-gray-50 dark:bg-gray-900;
   }
   .admonition-header {
     @apply flex items-center gap-2;
@@ -88,5 +89,9 @@
   }
   .download-links-subcontainer {
     @apply flex flex-wrap gap-2;
+  }
+
+  .card-image {
+    @apply h-12 w-12 overflow-hidden;
   }
 }
