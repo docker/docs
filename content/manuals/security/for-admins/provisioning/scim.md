@@ -11,31 +11,46 @@ weight: 30
 
 {{< summary-bar feature_name="SSO" >}}
 
-System for Cross-domain Identity Management (SCIM) is available for Docker Business customers. This guide provides an overview of SCIM provisioning.
+System for Cross-domain Identity Management (SCIM) is available for Docker
+Business customers. This guide provides an overview of SCIM provisioning.
 
 ## How SCIM works
 
-SCIM offers automated user provisioning and de-provisioning for Docker through your identity provider (IdP). Once SCIM is enabled, users assigned to the Docker application in your IdP are automatically provisioned and added to your Docker organization. If a user is unassigned, they are removed from Docker.
+SCIM automates user provisioning and de-provisioning for Docker through your
+identity provider (IdP). After you enable SCIM, any user assigned to your
+Docker application in your IdP is automatically provisioned and added to your
+Docker organization. When a user is removed from the Docker application in your
+IdP, SCIM deactivates and removes them from your Docker organization.
 
-SCIM also syncs user profile updates, such as name changes, made in your IdP. SCIM can be used with Docker’s default Just-in-Time (JIT) provisioning configuration, or on its own with JIT disabled.
+In addition to provisioning and removal, SCIM also syncs profile updates like
+name changes—made in your IdP. You can use SCIM alongside Docker’s default
+Just-in-Time (JIT) provisioning or on its own with JIT disabled.
 
-SCIM supports the automation of:
+SCIM automates:
+
 - Creating users
 - Updating user profiles
 - Removing and deactivating users
 - Re-activating users
 - Group mapping
 
+> [!NOTE]
+>
+> SCIM only manages users provisioned through your IdP after SCIM is enabled.
+It cannot remove users who were manually added to your Docker organization
+before SCIM was set up.
+>
+> To remove those users, delete them manually from your Docker organization.
+For more information, see [Manage organization members](/manuals/admin/organization/members.md).
+
 ## Supported attributes
 
-> [!IMPORTANT]
->
-> Docker uses JIT provisioning by default for SSO configurations. If you enable SCIM, JIT values still overwrite the attribute
-values set by SCIM provisioning. To avoid conflicts, your JIT attribute values must match your SCIM attribute values. To avoid conflicts between SCIM and JIT, you can also disable JIT provisioning. See [Just-in-Time](/manuals/security/for-admins/provisioning/just-in-time.md) for more information.
+SCIM uses attributes (e.g., name, email) to sync user information between your
+IdP and Docker. Properly mapping these attributes in your IdP ensures that user
+provisioning works smoothly and prevents issues like duplicate user accounts
+when using single sign-on (SSO).
 
-Attributes are pieces of user information, such as name and email, that are synchronized between your IdP and Docker when using SCIM. Proper mapping of these attributes is essential for seamless user provisioning and to prevent duplicate entries when using SSO.
-
-The following table lists the supported attributes for SCIM:
+Docker supports the following SCIM attributes:
 
 | Attribute    | Description |
 |:---------------------------------------------------------------|:-------------------------------------------------------------------------------------------|
@@ -45,6 +60,16 @@ The following table lists the supported attributes for SCIM:
 | active | Indicates if a user is enabled or disabled, set to “false” to de-provision a user |
 
 For additional details about supported attributes and SCIM, see [Docker Hub API SCIM reference](/reference/api/hub/latest/#tag/scim).
+
+> [!IMPORTANT]
+>
+> By default, Docker uses Just-in-Time (JIT) provisioning for SSO. If SCIM is
+enabled, JIT values still take precedence and will overwrite attribute values
+set by SCIM. To avoid conflicts, make sure your JIT attribute values match your
+SCIM values.
+>
+> Alternatively, you can disable JIT provisioning to rely solely on SCIM.
+For details, see [Just-in-Time](/manuals/security/for-admins/provisioning/just-in-time.md).
 
 ## Enable SCIM in Docker
 

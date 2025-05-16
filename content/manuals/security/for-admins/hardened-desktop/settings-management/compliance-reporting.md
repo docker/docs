@@ -83,7 +83,6 @@ highest-priority applicable status according to the following rules.
 | No policy assigned | The user does not have any policy assigned to them. |
 | Non-compliant | The user fetched the correct policy, but hasn't applied it. |
 | Outdated | The user fetched a previous version of the policy. |
-| Unknown | The user hasn't fetched any policy yet, or their compliance can't be determined. |
 | Compliant | The user fetched and applied the latest assigned policy. |
 
 **Domain status**
@@ -95,7 +94,6 @@ This reflects how the user’s email domain is evaluated based on the organizati
 | Verified | The user’s email domain is verified. |
 | Guest user | The user's email domain is not verified. |
 | Domainless | Your organization has no verified domains, and the user's domain is unknown. |
-| Unknown user | Your organization has verified domains, but the user's domain is unknown. |
 
 **Settings status**
 
