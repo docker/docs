@@ -7,18 +7,19 @@
   }
   .card-header {
     @apply flex gap-2 mb-2 items-center;
-    @apply text-gray-800;
-    @apply dark:text-gray-200;
+    @apply text-gray-800 dark:text-gray-200;
+    @apply text-lg font-light;
   }
   .card-icon {
     @apply  text-gray-500;
   }
+  .card-icon{
+    @apply text-gray-800 dark:text-gray-200;
+  }
   .card-img, .card-img svg{
     @apply max-h-5 max-w-5 m-0 fill-current flex items-center justify-center;
   }
-  .card-title {
-    @apply text-lg font-light text-gray-900;
-  }
+  
   .card-content {
     @apply text-gray-700;
     @apply dark:text-gray-200;
