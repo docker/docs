@@ -66,8 +66,8 @@ the relevant manifest fields for the registry are the following:
 |----------|------------------------------------------------|
 | name      | The name of the image.                         |
 | tag       | The tag for this version of the image.         |
-| fsLayers  | A list of layer descriptors (including digest) |
-| signature | A JWS used to verify the manifest content      |
+| fsLayers  | A list of layer descriptors (including digest). |
+| signature | A JWS used to verify the manifest content.      |
 
 When the manifest is in hand, the client must verify the signature to ensure
 the names and layers are valid. Once confirmed, the client will then use the
