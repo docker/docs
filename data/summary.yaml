@@ -97,6 +97,8 @@ Compose gw priority:
   requires: Docker Compose [2.33.1](/manuals/compose/releases/release-notes.md#2331) and later
 Compose include:
   requires: Docker Compose [2.20.3](/manuals/compose/releases/release-notes.md#2203) and later
+Compose interface-name:
+  requires: Docker Compose [2.36.0](/manuals/compose/releases/release-notes.md#2203) and later
 Compose label file:
   requires: Docker Compose [2.32.2](/manuals/compose/releases/release-notes.md#2232) and later
 Compose lifecycle hooks:
@@ -110,6 +112,8 @@ Compose model runner:
 Compose OCI artifact:
   requires: Docker Compose [2.34.0](/manuals/compose/releases/release-notes.md#2340) and later
 Compose provider services:
+  requires: Docker Compose [2.36.0](/manuals/compose/releases/release-notes.md) and later
+Compose progress:
   requires: Docker Compose [2.36.0](/manuals/compose/releases/release-notes.md) and later
 Compose replace file:
   requires: Docker Compose [2.24.4](/manuals/compose/releases/release-notes.md#2244) and later
