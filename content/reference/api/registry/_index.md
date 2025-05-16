@@ -195,7 +195,7 @@ API. The request should be formatted as follows:
 HEAD /v2/<name>/blobs/<digest>
 ```
 
-If the layer with the digest specified in `digest` is available, a 200 OK
+If the layer with the digest specified in `digest` is available, a `200 OK`
 response will be received, with no actual body content (this is according to
 HTTP specification). The response will look as follows:
 
