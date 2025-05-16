@@ -73,7 +73,7 @@ the names and layers are valid. Once confirmed, the client will then use the
 digests to download the individual layers. Layers are stored in as blobs in
 the V2 registry API, keyed by their digest.
 
-### Pulling an image manifest
+### Get image manifest
 
 The image manifest can be fetched with the following URL:
 
