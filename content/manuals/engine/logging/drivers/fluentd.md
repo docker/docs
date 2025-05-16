@@ -84,11 +84,12 @@ Users can use the `--log-opt NAME=VALUE` flag to specify additional Fluentd logg
 ### fluentd-address
 
 By default, the logging driver connects to `localhost:24224`. Supply the
-`fluentd-address` option to connect to a different address. `tcp`(default) and `unix` sockets are supported.
+`fluentd-address` option to connect to a different address. `tcp`(default), `tls` and `unix` sockets are supported.
 
 ```console
 $ docker run --log-driver=fluentd --log-opt fluentd-address=fluentdhost:24224
 $ docker run --log-driver=fluentd --log-opt fluentd-address=tcp://fluentdhost:24224
+$ docker run --log-driver=fluentd --log-opt fluentd-address=tls://fluentdhost:24224
 $ docker run --log-driver=fluentd --log-opt fluentd-address=unix:///path/to/fluentd.sock
 ```
 
