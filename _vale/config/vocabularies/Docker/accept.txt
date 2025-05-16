@@ -41,6 +41,7 @@ Dockerize
 Dockerizing
 Entra
 Ethernet
+EPERM
 Fargate
 Fedora
 Flink
@@ -176,6 +177,7 @@ deserialize
 displayName
 dockerignore
 firewalld
+fluentd
 g?libc
 gRPC
 inotify
@@ -183,6 +185,7 @@ iptables
 kubectl
 kubefwd
 kubelet
+libseccomp
 lookup
 macOS
 macvlan

@@ -20,6 +20,7 @@ exceptions:
   - BIOS
   - BPF
   - BSD
+  - CDI
   - CFS
   - CI
   - CIDR
@@ -28,6 +29,7 @@ exceptions:
   - CNCF
   - CORS
   - CPU
+  - CSI
   - CSS
   - CSV
   - CUDA
