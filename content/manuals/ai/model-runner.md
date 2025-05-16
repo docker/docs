@@ -8,7 +8,7 @@ params:
     group: AI
 weight: 20
 description: Learn how to use Docker Model Runner to manage and run AI models.
-keywords: Docker, ai, model runner, docker deskotp, llm
+keywords: Docker, ai, model runner, docker desktop, docker engine, llm
 aliases:
   - /desktop/features/model-runner/
   - /ai/model-runner/
@@ -44,6 +44,36 @@ Models are pulled from Docker Hub the first time they're used and stored locally
 8. If you are running on Windows with a supported NVIDIA GPU, you should also see and be able to tick the **Enable GPU-backed inference** setting.
 
 You can now use the `docker model` command in the CLI and view and interact with your local models in the **Models** tab in the Docker Desktop Dashboard.
+
+### Enable DMR in Docker Engine
+
+1. Ensure you have installed [Docker Engine](/engine/install/).
+2. DMR is available as a package. To install it, run:
+ 
+   {{< tabs >}}
+   {{< tab name="Ubuntu/Debian">}}
+   
+   ```console
+   $ sudo apt-get update
+   $ sudo apt-get install docker-model-runner
+   ```
+   
+   {{< /tab >}}
+   {{< tab name="RPM-base distributions">}}
+   
+   ```console
+   $ sudo yum update
+   $ sudo yum install docker-model-runner
+   ```
+   
+   {{< /tab >}}
+   {{< /tabs >}}
+
+3. Test the installation:
+   
+   ```console
+   $ docker model status
+   ```
 
 ## Available commands
 
@@ -248,7 +278,7 @@ If you want to try an existing GenAI application, follow these instructions.
 
 4. Open you app in the browser at the addresses specified in the repository [README](https://github.com/docker/hello-genai).
 
-You'll see the GenAI app's interface where you can start typing your prompts.
+You'll see the GenAI app's interface where you can start typing your prompts. 
 
 You can now interact with your own GenAI app, powered by a local model. Try a few prompts and notice how fast the responses are — all running on your machine with Docker.
 
@@ -393,7 +423,7 @@ Once linked, re-run the command.
 
 ### No safeguard for running oversized models
 
-Currently, Docker Model Runner doesn't include safeguards to prevent you from launching models that exceed their system's available resources. Attempting to run a model that is too large for the host machine may result in severe slowdowns or render the system temporarily unusable. This issue is particularly common when running LLMs models without sufficient GPU memory or system RAM.
+Currently, Docker Model Runner doesn't include safeguards to prevent you from launching models that exceed their system’s available resources. Attempting to run a model that is too large for the host machine may result in severe slowdowns or render the system temporarily unusable. This issue is particularly common when running LLMs models without sufficient GPU memory or system RAM.
 
 ### No consistent digest support in Model CLI
 
@@ -401,7 +431,7 @@ The Docker Model CLI currently lacks consistent support for specifying models by
 
 ## Share feedback
 
-Thanks for trying out Docker Model Runner. Give feedback or report any bugs you may find through the **Give feedback** link next to the **Enable Docker Model Runner** setting.
+Thanks for trying out Docker Model Runner. Give feedback or report any bugs you may find through the **Give feedback** link next to the **Enable Docker Model Runner** setting. 
 
 ## Disable the feature
 
