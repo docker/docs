@@ -113,7 +113,7 @@ before fetching layers.
 
 ### Check existing manifests
 
-The image manifest can be checked for existence with the following URL:
+Check for existing manifests with the following URL:
 
 ```text
 HEAD /v2/<name>/manifests/<reference>
