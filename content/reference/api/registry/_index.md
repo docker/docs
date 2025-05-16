@@ -55,7 +55,7 @@ superset of what is supported by other Docker ecosystem components.
 
 ## Pulling an image
 
-An "image" is a combination of a JSON manifest and individual layer files. The
+An image is composed of a JSON manifest and individual layer files. The
 process of pulling an image centers around retrieving these two components.
 
 The first step in pulling an image is to retrieve the manifest. For reference,
