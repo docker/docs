@@ -8,18 +8,21 @@ toc_min: 1
 toc_max: 2
 ---
 
-Here you can learn about the latest changes, new features, bug fixes, and known
-issues for Docker Service APIs.
+Docker Hub is a service provided by Docker for finding and sharing container images with your team.
+The changelog is where to learn about the latest changes, new features, bug fixes, and known issues for Docker Service APIs.
 
-## 2025-03-25
+## 2-beta
 
-### New
+2025-03-25
 
-- Add [APIs](/reference/api/hub/latest/#tag/org-access-tokens) for organization access token (OATs) management.
+### New features
 
-## 2025-03-18
+- Added [APIs](/reference/api/hub/latest/#tag/org-access-tokens) for organization access token (OATs) management.
 
-### New
+## beta
 
-- Add access to [audit logs](/reference/api/hub/latest/#tag/audit-logs) for org
-  access tokens.
+2025-03-18
+
+### New features
+
+- Added access to [audit logs](/reference/api/hub/latest/#tag/audit-logs) for org access tokens.
