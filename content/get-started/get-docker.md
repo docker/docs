@@ -31,13 +31,12 @@ section and choose the best installation path for you.
 > employees OR more than $10 million USD in annual revenue) requires a [paid
 > subscription](https://www.docker.com/pricing/).
 
+<div class="not-prose">
 {{< card
   title="Docker Desktop for Mac"
   description="A native application using the macOS sandbox security model that delivers all Docker tools to your Mac."
   link="/desktop/setup/install/mac-install/"
   icon="/assets/icons/AppleMac.svg" >}}
-
-<br>
 
 {{< card
   title="Docker Desktop for Windows"
@@ -45,13 +44,12 @@ section and choose the best installation path for you.
   link="/desktop/setup/install/windows-install/"
   icon="/assets/icons/Windows.svg" >}}
 
-<br>
-
 {{< card
   title="Docker Desktop for Linux"
   description="A native Linux application that delivers all Docker tools to your Linux computer."
   link="/desktop/setup/install/linux/"
   icon="/assets/icons/linux.svg" >}}
+</div>
 
 > [!NOTE]
 >
