@@ -111,7 +111,7 @@ manifest will be returned.
 The client should verify the returned manifest signature for authenticity
 before fetching layers.
 
-#### Existing manifests
+### Check existing manifests
 
 The image manifest can be checked for existence with the following URL:
 
