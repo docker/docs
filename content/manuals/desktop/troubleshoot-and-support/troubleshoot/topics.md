@@ -156,6 +156,23 @@ Ensure your username is short enough to keep paths within the allowed limit:
 
 ## Topics for Mac
 
+### Upgrade requires administrator privileges
+
+#### Cause 
+
+On macOS, users without administrator privileges cannot perform in-app upgrades from the Docker Desktop Dashboard.
+
+#### Solution
+
+> [!IMPORTANT]
+>
+> Do not uninstall the current version before upgrading. Doing so deletes all local Docker containers, images, and volumes.
+
+To upgrade Docker Desktop:
+
+- Ask an administrator to install the newer version over the existing one.
+- Use the []`--user` install flag](/manuals/desktop/setup/install/mac-install.md#security-and-access) if appropriate for your setup.
+
 ### Persistent notification telling me an application has changed my Desktop configurations
 
 #### Cause 
