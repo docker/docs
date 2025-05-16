@@ -111,7 +111,7 @@ A.1](https://tools.ietf.org/html/rfc6749#appendix-A.1).
 #### `scope`
 
 The resource in question, formatted as one of the space-delimited entries from
-the `scope` parameters from the `WWW-Authenticate` header shown above. This
+the `scope` parameters from the `WWW-Authenticate` header shown previously. This
 query parameter should be specified multiple times if there is more than one
 `scope` entry from the `WWW-Authenticate` header. The above example would be
 specified as: `scope=repository:samalba/my-app:push`. The scope field may be
