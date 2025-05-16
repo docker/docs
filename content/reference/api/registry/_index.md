@@ -446,7 +446,7 @@ the blob not existing in the expected repository.
 
 #### Errors
 
-If an 502, 503 or 504 error is received, the client should assume that the
+If an `502`, `503` or `504` error is received, the client should assume that the
 download can proceed due to a temporary condition, honoring the appropriate
 retry mechanism. Other 5xx errors should be treated as terminal.
 
