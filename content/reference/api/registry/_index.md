@@ -440,9 +440,11 @@ Docker-Upload-UUID: <uuid>
 This behavior is consistent with older versions of the registry, which do not
 recognize the repository mount query parameters.
 
-Note: a client may issue a HEAD request to check existence of a blob in a source
-repository to distinguish between the registry not supporting blob mounts and
-the blob not existing in the expected repository.
+> [!NOTE]
+>
+> A client may issue a `HEAD` request to check existence of a blob in a source
+> repository to distinguish between the registry not supporting blob mounts and
+> the blob not existing in the expected repository.
 
 #### Errors
 
