@@ -62,7 +62,7 @@ process of pulling an image centers around retrieving these two components.
 The first step in pulling an image is to retrieve the manifest. For reference,
 the relevant manifest fields for the registry are the following:
 
-| field    | description                                    |
+| Field    | Description                                    |
 |----------|------------------------------------------------|
 | name      | The name of the image.                         |
 | tag       | The tag for this version of the image.         |
