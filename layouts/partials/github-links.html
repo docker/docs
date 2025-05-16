@@ -6,8 +6,10 @@
 {{ if hugo.IsProduction }}
   {{ with .File }}
   {{ if not (in .Filename "/_vendor/") }}
-<p class="flex items-center gap-2">
-  <span class="icon-svg">{{ partialCached "icon" "edit" }}</span>
+<p class="flex items-center gap-1">
+  <span class="icon-svg icon-sm">
+  {{ partialCached "utils/svg.html" "theme/icons/edit.svg" }}
+  </span>
   <a class="link" rel="noopener"
     href="{{ site.Params.repo }}/edit/main/content/{{ .Path }}">{{- T "editPage" -}}
     <span class="icon-svg icon-sm">
@@ -16,8 +18,10 @@
 </p>
   {{ end }}
   {{ end }}
-<p class="flex items-center gap-2">
-  <span class="icon-svg">{{ partialCached "icon" "check" }}</span>
+<p class="flex items-center gap-1">
+  <span class="icon-svg icon-sm">
+    {{ partial "utils/svg.html" "theme/icons/issue.svg" }}
+  </span>
   <a class="link" rel="noopener"
     href="{{ site.Params.repo }}/issues/new?template=doc_issue.yml&location={{ .Permalink }}&labels=status%2Ftriage">{{- T "requestChanges" -}}
     <span class="icon-svg icon-sm">
