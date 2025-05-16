@@ -97,6 +97,22 @@ Model ai/smollm2 pulled successfully
 
 The models also display in the Docker Desktop Dashboard.
 
+#### Pull from Hugging Face
+
+You can also pull GGUF models directly from [Hugging Face](https://huggingface.co/models?library=gguf).
+
+```console
+$ docker model pull hf.co/<model-you-want-to-pull>
+```
+
+For example: 
+
+```console
+$ docker model pull hf.co/bartowski/Llama-3.2-1B-Instruct-GGUF
+```
+
+Pulls the [bartowski/Llama-3.2-1B-Instruct-GGUF](https://huggingface.co/bartowski/Llama-3.2-1B-Instruct-GGUF).
+
 ### List available models
 
 Lists all models currently pulled to your local environment.
