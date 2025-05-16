@@ -466,8 +466,7 @@ The long syntax provides more granularity in how the secret is created within
 the service's containers.
 
 - `source`: The name of the secret as it exists on the platform.
-- `target`: The name of the file to be mounted in `/run/secrets/` in the
-  service's task containers. Defaults to `source` if not specified.
+- `target`: The ID of the secret as declared in the Dockerfile. Defaults to `source` if not specified.
 - `uid` and `gid`: The numeric uid or gid that owns the file within
   `/run/secrets/` in the service's task containers. Default value is `USER`.
 - `mode`: The [permissions](https://wintelguy.com/permissions-calc.pl) for the file to be mounted in `/run/secrets/`
@@ -487,13 +486,19 @@ services:
       context: .
       secrets:
         - source: server-certificate
-          target: server.cert
+          target: cert # secret ID in Dockerfile
           uid: "103"
           gid: "103"
           mode: 0440
 secrets:
   server-certificate:
     external: true
+```
+
+```dockerfile
+# Dockerfile
+FROM nginx
+RUN --mount=type=secret,id=cert,required=true,target=/root/cert ...
 ```
 
 Service builds may be granted access to multiple secrets. Long and short syntax for secrets may be used in the

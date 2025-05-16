@@ -26,6 +26,7 @@ This page contains information on how you can set or change the following pre-de
 - `COMPOSE_ENV_FILES`
 - `COMPOSE_MENU`
 - `COMPOSE_EXPERIMENTAL`
+- `COMPOSE_PROGRESS`
 
 ## Methods to override 
 
@@ -191,6 +192,15 @@ This is an opt-out variable. When turned off it deactivates the experimental fea
    - `true` or `1`, to enable
    - `false` or `0`, to disable
 - Defaults to: `1`
+
+### COMPOSE\_PROGRESS
+
+{{< summary-bar feature_name="Compose progress" >}}
+
+Defines the type of progress output, if `--progress` isn't used. 
+
+Supported values are `auto`, `tty`, `plain`, `json`, and `quiet`.
+Default is `auto`. 
 
 ## Unsupported in Compose V2
 
