@@ -8,7 +8,7 @@
   */
 -}}
 <!-- section tree -->
-<nav class="flex flex-col md:text-sm">
+<nav class="flex flex-col navbar-font">
   <div class="text-gray-light dark:text-gray-dark block py-4 md:hidden">
     This section
   </div>
@@ -31,9 +31,7 @@
     {{- end }}
   {{- end }}
   {{- range .Params.sidebar.groups }}
-    <li
-      class="text-gray-light dark:text-gray-dark px-2 py-2 pb-2 text-xs font-semibold uppercase"
-    >
+    <li class="navbar-group-font px-2 py-2 pb-2 mt-2">
       {{ . }}
     </li>
     {{- range where $pages "Params.sidebar.group" . }}

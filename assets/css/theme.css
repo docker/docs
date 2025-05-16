@@ -182,9 +182,13 @@
   --color-gray-900: var(--card-bg-dark);
   --color-gray-700: var(--card-border-dark);
   
-  --navbar-bg-light: f9f9fa;
+  --navbar-bg-light: #f9f9fa;
   --navbar-bg-dark: #0b0b0b;
-  --navbar-text-color-light: #000;
+  --navbar-text-color-light: var(--color-gray-700);
   --navbar-text-color-dark: var(--tw-prose-body);
   --navbar-border-color-light: var(--tw-prose-inverse-body);
+  --navbar-font-size: 0.9rem;
+  --navbar-group-font-size: 0.9rem;
+  --navbar-group-text-color-light: var(--color-gray-700);
+  --navbar-group-text-color-dark: var(--tw-prose-body);
 }
