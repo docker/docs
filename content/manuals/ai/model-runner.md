@@ -8,7 +8,7 @@ params:
     group: AI
 weight: 20
 description: Learn how to use Docker Model Runner to manage and run AI models.
-keywords: Docker, ai, model runner, docker deskotp, llm
+keywords: Docker, ai, model runner, docker desktop, docker engine, llm
 aliases:
   - /desktop/features/model-runner/
   - /ai/model-runner/
@@ -45,6 +45,221 @@ Models are pulled from Docker Hub the first time they're used and stored locally
 
 You can now use the `docker model` command in the CLI and view and interact with your local models in the **Models** tab in the Docker Desktop Dashboard.
 
+### Enable DMR in Docker Engine
+
+1. Ensure you have installed [Docker Engine](/engine/install/).
+2. DMR is available as a package. To install it, run:
+ 
+   {{< tabs >}}
+   {{< tab name="Ubuntu/Debian">}}
+   
+   ```console
+   $ sudo apt-get update
+   $ sudo apt-get install docker-model-runner
+   ```
+   
+   {{< /tab >}}
+   {{< tab name="RPM-base distributions">}}
+   
+   ```console
+   $ sudo yum update
+   $ sudo yum install docker-model-runner
+   ```
+   
+   {{< /tab >}}
+   {{< /tabs >}}
+
+3. Test the installation:
+   
+   ```console
+   $ docker model status
+   ```
+
+## Available commands
+
+### Model runner status
+
+Check whether the Docker Model Runner is active and displays the current inference engine:
+
+```console
+$ docker model status
+```
+
+### View all commands
+
+Displays help information and a list of available subcommands.
+
+```console
+$ docker model help
+```
+
+Output:
+
+```text
+Usage:  docker model COMMAND
+
+Commands:
+  list        List models available locally
+  pull        Download a model from Docker Hub
+  rm          Remove a downloaded model
+  run         Run a model interactively or with a prompt
+  status      Check if the model runner is running
+  version     Show the current version
+```
+
+### Pull a model
+
+Pulls a model from Docker Hub to your local environment.
+
+```console
+$ docker model pull <model>
+```
+
+Example:
+
+```console
+$ docker model pull ai/smollm2
+```
+
+Output:
+
+```text
+Downloaded: 257.71 MB
+Model ai/smollm2 pulled successfully
+```
+
+The models also display in the Docker Desktop Dashboard.
+
+#### Pull from Hugging Face
+
+You can also pull GGUF models directly from [Hugging Face](https://huggingface.co/models?library=gguf).
+
+```console
+$ docker model pull hf.co/<model-you-want-to-pull>
+```
+
+For example: 
+
+```console
+$ docker model pull hf.co/bartowski/Llama-3.2-1B-Instruct-GGUF
+```
+
+Pulls the [bartowski/Llama-3.2-1B-Instruct-GGUF](https://huggingface.co/bartowski/Llama-3.2-1B-Instruct-GGUF).
+
+### List available models
+
+Lists all models currently pulled to your local environment.
+
+```console
+$ docker model list
+```
+
+You will see something similar to:
+
+```text
++MODEL       PARAMETERS  QUANTIZATION    ARCHITECTURE  MODEL ID      CREATED     SIZE
++ai/smollm2  361.82 M    IQ2_XXS/Q4_K_M  llama         354bf30d0aa3  3 days ago  256.35 MiB
+```
+
+### Run a model
+
+Run a model and interact with it using a submitted prompt or in chat mode. When you run a model, Docker
+calls an Inference Server API endpoint hosted by the Model Runner through Docker Desktop. The model
+stays in memory until another model is requested, or until a pre-defined inactivity timeout is reached (currently 5 minutes).
+
+You do not have to use `Docker model run` before interacting with a specific model from a
+host process or from within a container. Model Runner transparently loads the requested model on-demand, assuming it has been
+pulled beforehand and is locally available.
+
+#### One-time prompt
+
+```console
+$ docker model run ai/smollm2 "Hi"
+```
+
+Output:
+
+```text
+Hello! How can I assist you today?
+```
+
+#### Interactive chat
+
+```console
+$ docker model run ai/smollm2
+```
+
+Output:
+
+```text
+Interactive chat mode started. Type '/bye' to exit.
+> Hi
+Hi there! It's SmolLM, AI assistant. How can I help you today?
+> /bye
+Chat session ended.
+```
+
+> [!TIP]
+>
+> You can also use chat mode in the Docker Desktop Dashboard when you select the model in the **Models** tab.
+
+### Push a model to Docker Hub
+
+To push your model to Docker Hub:
+
+```console
+$ docker model push <namespace>/<model>
+```
+
+### Tag a model
+
+To specify a particular version or variant of the model:
+
+```console
+$ docker model tag
+```
+
+If no tag is provided, Docker defaults to `latest`.
+
+### View the logs
+
+Fetch logs from Docker Model Runner to monitor activity or debug issues.
+
+```console
+$ docker model logs
+```
+
+The following flags are accepted:
+
+- `-f`/`--follow`: View logs with real-time streaming
+- `--no-engines`: Exclude inference engine logs from the output
+
+### Remove a model
+
+Removes a downloaded model from your system.
+
+```console
+$ docker model rm <model>
+```
+
+Output:
+
+```text
+Model <model> removed successfully
+```
+
+### Package a model
+
+Packages a GGUF file into a Docker model OCI artifact, with optional licenses, and pushes it to the specified registry.
+
+```console
+$ docker model package \
+    --gguf ./model.gguf \
+    --licenses license1.txt \
+    --licenses license2.txt \
+    --push registry.example.com/ai/custom-model
+```
+
 ## Integrate the Docker Model Runner into your software development lifecycle
 
 You can now start building your Generative AI application powered by the Docker Model Runner.
@@ -63,7 +278,7 @@ If you want to try an existing GenAI application, follow these instructions.
 
 4. Open you app in the browser at the addresses specified in the repository [README](https://github.com/docker/hello-genai).
 
-You'll see the GenAI app's interface where you can start typing your prompts.
+You'll see the GenAI app's interface where you can start typing your prompts. 
 
 You can now interact with your own GenAI app, powered by a local model. Try a few prompts and notice how fast the responses are — all running on your machine with Docker.
 
@@ -212,7 +427,7 @@ Once linked, re-run the command.
 
 ### No safeguard for running oversized models
 
-Currently, Docker Model Runner doesn't include safeguards to prevent you from launching models that exceed their system's available resources. Attempting to run a model that is too large for the host machine may result in severe slowdowns or render the system temporarily unusable. This issue is particularly common when running LLMs models without sufficient GPU memory or system RAM.
+Currently, Docker Model Runner doesn't include safeguards to prevent you from launching models that exceed their system’s available resources. Attempting to run a model that is too large for the host machine may result in severe slowdowns or render the system temporarily unusable. This issue is particularly common when running LLMs models without sufficient GPU memory or system RAM.
 
 ### No consistent digest support in Model CLI
 
@@ -220,7 +435,7 @@ The Docker Model CLI currently lacks consistent support for specifying models by
 
 ## Share feedback
 
-Thanks for trying out Docker Model Runner. Give feedback or report any bugs you may find through the **Give feedback** link next to the **Enable Docker Model Runner** setting.
+Thanks for trying out Docker Model Runner. Give feedback or report any bugs you may find through the **Give feedback** link next to the **Enable Docker Model Runner** setting. 
 
 ## Disable the feature
 
