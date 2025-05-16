@@ -145,7 +145,7 @@ GET /v2/<name>/blobs/<digest>
 Access to a layer will be gated by the `name` of the repository but is
 identified uniquely in the registry by `digest`.
 
-This endpoint may issue a 307 (302 for <HTTP 1.1) redirect to another service
+This endpoint may issue a `307` (`302` for <HTTP 1.1) redirect to another service
 for downloading the layer and clients should be prepared to handle redirects.
 
 This endpoint should support aggressive HTTP caching for image layers. Support
