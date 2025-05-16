@@ -102,7 +102,7 @@ considered completely opaque to the client.
 
 #### `client_id`
 
-String identifying the client. This client_id does not need to be registered
+String identifying the client. This `client_id` does not need to be registered
 with the authorization server but should be set to a meaningful value in order
 to allow auditing keys created by unregistered clients. Accepted syntax is
 defined in [RFC6749 Appendix
