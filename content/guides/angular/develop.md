@@ -50,13 +50,13 @@ ENV NODE_ENV=development
 WORKDIR /app
 
 # Copy only the dependency files first to optimize Docker caching
-COPY --link package.json package-lock.json ./
+COPY package.json package-lock.json ./
 
 # Install dependencies using npm with caching to speed up subsequent builds
 RUN --mount=type=cache,target=/root/.npm npm ci
 
 # Copy all application source files into the container
-COPY --link . .
+COPY . .
 
 # Expose the port Angular uses for the dev server (default is 4200)
 EXPOSE 4200
