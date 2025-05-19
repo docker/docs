@@ -45,7 +45,7 @@ params:
   - title: Registry API
     description: API for Docker Registry.
     icon: database
-    link: /reference/api/registry/
+    link: /reference/api/registry/latest/
 ---
 
 This section includes the reference documentation for the Docker platform's
