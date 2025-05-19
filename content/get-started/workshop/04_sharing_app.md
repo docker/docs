@@ -52,6 +52,10 @@ In the following image, you can see an example Docker command from Docker Hub. T
 
     To fix this, you need to tag your existing image you've built to give it another name.
 
+   > [!NOTE]
+   >
+   > If you encounter the following error: `denied: requested access to the resource is denied`, you can retry with `$ docker login -u "myusername" -p "mypassword" docker.io`.
+
 2. Sign in to Docker Hub using the command `docker login -u YOUR-USER-NAME`.
 
 3. Use the `docker tag` command to give the `getting-started` image a new name. Replace `YOUR-USER-NAME` with your Docker ID.
