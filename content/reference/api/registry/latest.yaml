@@ -119,14 +119,14 @@ tags:
   
       2. [Check if the blob exists](#operation/CheckBlobExists) using a `HEAD` request for each blob digest.
   
-      3. If the blob does not exist, [upload the blob](#operation=CompleteBlobUpload) using a monolithic `PUT` request:
-          - First, [initiate the upload](#operation=InitiateBlobUpload) with `POST`.
-          - Then [upload and complete](#operation=CompleteBlobUpload) with `PUT`.
+      3. If the blob does not exist, [upload the blob](#operation/CompleteBlobUpload) using a monolithic `PUT` request:
+          - First, [initiate the upload](#operation/InitiateBlobUpload) with `POST`.
+          - Then [upload and complete](#operation/CompleteBlobUpload) with `PUT`.
 
-          **Note**:  Alternatively, you can upload the blob in multiple chunks by using `PATCH` requests to send each chunk, followed by a final `PUT` request to complete the upload. This is known as a [chunked upload](#operation=UploadBlobChunk) and is useful for large blobs or when resuming interrupted uploads.
+          **Note**:  Alternatively, you can upload the blob in multiple chunks by using `PATCH` requests to send each chunk, followed by a final `PUT` request to complete the upload. This is known as a [chunked upload](#operation/UploadBlobChunk) and is useful for large blobs or when resuming interrupted uploads.
 
   
-      4. [Upload the image manifest](#operation=PutImageManifest) using a `PUT` request to associate the config and layers.
+      4. [Upload the image manifest](#operation/PutImageManifest) using a `PUT` request to associate the config and layers.
   
       The following bash script example pushes a dummy config blob and manifest to `yourusername/helloworld:latest` on Docker Hub. You can replace `yourusername` with your Docker Hub username and `dckr_pat` with your Docker Hub personal access token.
   
@@ -203,9 +203,9 @@ tags:
       This section outlines the basic steps to delete an image using the registry API.
 
       1. [Get a bearer token for the repository](https://docs.docker.com/reference/api/registry/auth/).
-      2. [Get the manifest](#operation=GetImageManifest) using the image's tag.
+      2. [Get the manifest](#operation/GetImageManifest) using the image's tag.
       3. Retrieve the `Docker-Content-Digest` header from the manifest response. This digest uniquely identifies the manifest.
-      4. [Delete the manifest](#operation=DeleteImageManifest) using a `DELETE` request and the digest.
+      4. [Delete the manifest](#operation/DeleteImageManifest) using a `DELETE` request and the digest.
 
       The following bash script example deletes the `latest` tag from `yourusername/helloworld` on Docker Hub. Replace `yourusername` with your Docker Hub username and `dckr_pat` with your Docker Hub personal access token.
 
