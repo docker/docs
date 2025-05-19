@@ -215,6 +215,18 @@ Output:
 Model <model> removed successfully
 ```
 
+### Package a model
+
+Packages a GGUF file into a Docker model OCI artifact, with optional licenses, and pushes it to the specified registry.
+
+```console
+$ docker model package \
+    --gguf ./model.gguf \
+    --licenses license1.txt \
+    --licenses license2.txt \
+    --push registry.example.com/ai/custom-model
+```
+
 ## Integrate the Docker Model Runner into your software development lifecycle
 
 You can now start building your Generative AI application powered by the Docker Model Runner.
