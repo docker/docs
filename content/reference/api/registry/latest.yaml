@@ -646,7 +646,59 @@ paths:
           description: Access denied.
         "429":
           description: Too many requests.
+    delete:
+      tags:
+        - Manifests
+      summary: Delete image manifest
+      operationId: DeleteImageManifest
+      description: |
+        Delete an image manifest from a repository by digest.
 
+        Only untagged or unreferenced manifests can be deleted. If the manifest is still referenced by a tag or another image, the registry will return `403 Forbidden`.
+
+        This operation requires `delete` access to the repository.
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: Name of the repository
+          example: yourusername/helloworld
+          schema:
+            type: string
+        - name: reference
+          in: path
+          required: true
+          description: Digest of the manifest to delete (e.g., `sha256:...`)
+          example: sha256:abc123def456...
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          required: true
+          description: Bearer token with `delete` access
+          schema:
+            type: string
+      x-codeSamples:
+        - lang: Bash
+          label: cURL
+          source: |
+            # DELETE a manifest by digest
+            curl -X DELETE \
+              -H "Authorization: Bearer $TOKEN" \
+              https://registry-1.docker.io/v2/yourusername/helloworld/manifests/sha256:abc123def456...
+      responses:
+        "202":
+          description: Manifest deleted successfully. No content returned.
+        "401":
+          description: Authentication required.
+        "403":
+          description: Access denied. The manifest may still be referenced.
+        "404":
+          description: Manifest or repository not found.
+        "405":
+          description: Only digest-based deletion is allowed.
+        "429":
+          description: Too many requests.
   /v2/{name}/blobs/uploads/:
     post:
       tags:
