@@ -57,6 +57,7 @@
         </div>
       </div>
 
+
       <!-- Main content -->
       <div
         {{ if ne .Params.sitemap false }}data-pagefind-body{{- end }}
@@ -67,7 +68,7 @@
       </div>
     </main>
 
-    <footer class="w-full">{{ partialCached "footer.html" . }}</footer>
+    <footer class="w-full z-10 relative">{{ partialCached "footer.html" . }}</footer>
 
     {{/* Load the YouTube player if the page embeds a YouTube video */}}
     {{ with .Store.Get "youtube" }}

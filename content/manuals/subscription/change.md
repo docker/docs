@@ -12,6 +12,7 @@ aliases:
 - /docker-hub/cancel-downgrade/
 - /docker-hub/billing/downgrade/
 - /billing/scout-billing/
+- /billing/subscription-management/
 weight: 30
 ---
 

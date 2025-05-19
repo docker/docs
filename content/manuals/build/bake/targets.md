@@ -81,8 +81,8 @@ target "api" {
 target "tests" {
   dockerfile = "tests.Dockerfile"
   contexts = {
-    webapp = "target:webapp",
-    api = "target:api",
+    webapp = "target:webapp"
+    api = "target:api"
   }
   output = ["type=local,dest=build/tests"]
   context = "."

@@ -126,6 +126,17 @@ the source and destination. For instance, if the Docker host has addresses
 `2001:db8:1111::2` and `2001:db8:2222::2`, you can make rules specific to
 `2001:db8:1111::2` and leave `2001:db8:2222::2` open.
 
+You may need to allow responses from servers outside the permitted external address
+ranges. For example, containers may send DNS or HTTP requests to hosts that are
+not allowed to access the container's services. The following rule accepts any
+incoming or outgoing packet belonging to a flow that has already been accepted
+by other rules. It must be placed before `DROP` rules that restrict access from
+external address ranges.
+
+```console
+$ iptables -I DOCKER-USER -m state --state RELATED,ESTABLISHED -j ACCEPT
+```
+
 `iptables` is complicated. There is a lot more information at [Netfilter.org HOWTO](https://www.netfilter.org/documentation/HOWTO/NAT-HOWTO.html).
 
 ### Direct routing
@@ -223,14 +234,14 @@ $ docker run --network=mynet -p 8080:80 myimage
 ```
 
 Then:
-- Only container port 80 will be open, for IPv4 and IPv6. It is accessible
-  from anywhere, if there is routing to the container's address, and access
-  is not blocked by the host's firewall.
+- Only container port 80 will be open, for IPv4 and IPv6.
 - For IPv6, using `routed` mode, port 80 will be open on the container's IP
   address. Port 8080 will not be opened on the host's IP addresses, and
   outgoing packets will use the container's IP address.
 - For IPv4, using the default `nat` mode, the container's port 80 will be
-  accessible via port 8080 on the host's IP addresses, as well as directly.
+  accessible via port 8080 on the host's IP addresses, as well as directly
+  from within the Docker host. But, container port 80 cannot be accessed
+  directly from outside the host.
   Connections originating from the container will masquerade, using the 
   host's IP address.
 

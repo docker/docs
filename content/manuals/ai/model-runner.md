@@ -57,7 +57,7 @@ You can now use the `docker model` command in the CLI and view and interact with
 
 ### Model runner status
 
-Check whether the Docker Model Runner is active:
+Check whether the Docker Model Runner is active and displays the current inference engine:
 
 ```console
 $ docker model status
@@ -108,6 +108,22 @@ Model ai/smollm2 pulled successfully
 
 The models also display in the Docker Desktop Dashboard.
 
+#### Pull from Hugging Face
+
+You can also pull GGUF models directly from [Hugging Face](https://huggingface.co/models?library=gguf).
+
+```console
+$ docker model pull hf.co/<model-you-want-to-pull>
+```
+
+For example: 
+
+```console
+$ docker model pull hf.co/bartowski/Llama-3.2-1B-Instruct-GGUF
+```
+
+Pulls the [bartowski/Llama-3.2-1B-Instruct-GGUF](https://huggingface.co/bartowski/Llama-3.2-1B-Instruct-GGUF).
+
 ### List available models
 
 Lists all models currently pulled to your local environment.
@@ -125,7 +141,13 @@ You will see something similar to:
 
 ### Run a model
 
-Run a model and interact with it using a submitted prompt or in chat mode.
+Run a model and interact with it using a submitted prompt or in chat mode. When you run a model, Docker
+calls an Inference Server API endpoint hosted by the Model Runner through Docker Desktop. The model
+stays in memory until another model is requested, or until a pre-defined inactivity timeout is reached (currently 5 minutes).
+
+You do not have to use `Docker model run` before interacting with a specific model from a
+host process or from within a container. Model Runner transparently loads the requested model on-demand, assuming it has been
+pulled beforehand and is locally available.
 
 #### One-time prompt
 
@@ -161,7 +183,7 @@ Chat session ended.
 
 ### Push a model to Docker Hub
 
-Use the following command to push your model to Docker Hub:
+To push your model to Docker Hub:
 
 ```console
 $ docker model push <namespace>/<model>
@@ -169,7 +191,7 @@ $ docker model push <namespace>/<model>
 
 ### Tag a model
 
-You can specify a particular version or variant of the model:
+To specify a particular version or variant of the model:
 
 ```console
 $ docker model tag
@@ -234,41 +256,42 @@ All the available models are hosted in the [public Docker Hub namespace of `ai`]
 
 ### What API endpoints are available?
 
-Once the feature is enabled, the following new APIs are available:
+Once the feature is enabled, new API endpoints are available under the following base URLs:
+
+- From containers: `http://model-runner.docker.internal/`
+- From host processes: `http://localhost:12434/`, assuming you have enabled TCP host access on default port 12434.
+
+Docker Model management endpoints:
 
 ```text
-#### Inside containers ####
-
-http://model-runner.docker.internal/
-
-    # Docker Model management
-    POST /models/create
-    GET /models
-    GET /models/{namespace}/{name}
-    DELETE /models/{namespace}/{name}
-
-    # OpenAI endpoints
-    GET /engines/llama.cpp/v1/models
-    GET /engines/llama.cpp/v1/models/{namespace}/{name}
-    POST /engines/llama.cpp/v1/chat/completions
-    POST /engines/llama.cpp/v1/completions
-    POST /engines/llama.cpp/v1/embeddings
-    Note: You can also omit llama.cpp.
-    E.g., POST /engines/v1/chat/completions.
-
-#### Inside or outside containers (host) ####
-
-Same endpoints on /var/run/docker.sock
-
-    # While still in Beta
-    Prefixed with /exp/vDD4.40
+POST /models/create
+GET /models
+GET /models/{namespace}/{name}
+DELETE /models/{namespace}/{name}
 ```
+
+OpenAI endpoints:
+
+```text
+GET /engines/llama.cpp/v1/models
+GET /engines/llama.cpp/v1/models/{namespace}/{name}
+POST /engines/llama.cpp/v1/chat/completions
+POST /engines/llama.cpp/v1/completions
+POST /engines/llama.cpp/v1/embeddings
+```
+
+To call these endpoints via a Unix socket (`/var/run/docker.sock`), prefix their path with
+with `/exp/vDD4.40`.
+
+> [!NOTE]
+> You can omit `llama.cpp` from the path. For example: `POST /engines/v1/chat/completions`.
+
 
 ### How do I interact through the OpenAI API?
 
 #### From within a container
 
-Examples of calling an OpenAI endpoint (`chat/completions`) from within another container using `curl`:
+To call the `chat/completions` OpenAI endpoint from within another container using `curl`:
 
 ```bash
 #!/bin/sh
@@ -291,15 +314,18 @@ curl http://model-runner.docker.internal/engines/llama.cpp/v1/chat/completions \
 
 ```
 
-#### From the host using a Unix socket
+#### From the host using TCP
 
-Examples of calling an OpenAI endpoint (`chat/completions`) through the Docker socket from the host using `curl`:
+To call the `chat/completions` OpenAI endpoint from the host via TCP:
+
+1. Enable the host-side TCP support from the Docker Desktop GUI, or via the [Docker Desktop CLI](/manuals/desktop/features/desktop-cli.md).
+   For example: `docker desktop enable model-runner --tcp <port>`.
+2. Interact with it as documented in the previous section using `localhost` and the correct port.
 
 ```bash
 #!/bin/sh
 
-curl --unix-socket $HOME/.docker/run/docker.sock \
-    localhost/exp/vDD4.40/engines/llama.cpp/v1/chat/completions \
+	curl http://localhost:12434/engines/llama.cpp/v1/chat/completions \
     -H "Content-Type: application/json" \
     -d '{
         "model": "ai/smollm2",
@@ -314,19 +340,17 @@ curl --unix-socket $HOME/.docker/run/docker.sock \
             }
         ]
     }'
-
 ```
 
-#### From the host using TCP
+#### From the host using a Unix socket
 
-In case you want to interact with the API from the host, but use TCP instead of a Docker socket, you can enable the host-side TCP support from the Docker Desktop GUI, or via the [Docker Desktop CLI](/manuals/desktop/features/desktop-cli.md). For example, using `docker desktop enable model-runner --tcp <port>`.
-
-Afterwards, interact with it as previously documented using `localhost` and the chosen, or the default port.
+To call the `chat/completions` OpenAI endpoint through the Docker socket from the host using `curl`:
 
 ```bash
 #!/bin/sh
 
-	curl http://localhost:12434/engines/llama.cpp/v1/chat/completions \
+curl --unix-socket $HOME/.docker/run/docker.sock \
+    localhost/exp/vDD4.40/engines/llama.cpp/v1/chat/completions \
     -H "Content-Type: application/json" \
     -d '{
         "model": "ai/smollm2",
@@ -365,7 +389,7 @@ Once linked, re-run the command.
 
 ### No safeguard for running oversized models
 
-Currently, Docker Model Runner doesn't include safeguards to prevent you from launching models that exceed their system’s available resources. Attempting to run a model that is too large for the host machine may result in severe slowdowns or render the system temporarily unusable. This issue is particularly common when running LLMs models without sufficient GPU memory or system RAM.
+Currently, Docker Model Runner doesn't include safeguards to prevent you from launching models that exceed their system's available resources. Attempting to run a model that is too large for the host machine may result in severe slowdowns or render the system temporarily unusable. This issue is particularly common when running LLMs models without sufficient GPU memory or system RAM.
 
 ### No consistent digest support in Model CLI
 

@@ -140,12 +140,12 @@ params:
   # (Used to show e.g., "latest" and "latest"-1 in engine install examples
   docker_ce_version_prev: "28.1.0"
   # Latest Docker Compose version
-  compose_version: "v2.35.1"
+  compose_version: "v2.36.0"
   # Latest BuildKit version
   buildkit_version: "0.21.0"
 
   # Example runtime/library/os versions
-  example_go_version: "1.23"
+  example_go_version: "1.24"
   example_alpine_version: "3.21"
   example_node_version: "20"
 
