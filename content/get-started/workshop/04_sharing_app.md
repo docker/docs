@@ -38,7 +38,7 @@ In the following image, you can see an example Docker command from Docker Hub. T
 
 ## Push the image
 
-1. Sign in to Docker Hub using the command: `docker login YOUR-USER-NAME YOUR-PASSWORD`.
+1. Sign in to Docker Hub using the command: `docker login`.
 2. In the command line, run the `docker push` command that you see on Docker
    Hub. Note that your command will have your Docker ID, not "docker". For example, `docker push YOUR-USER-NAME/getting-started`.
 
