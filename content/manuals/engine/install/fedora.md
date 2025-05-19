@@ -48,7 +48,8 @@ $ sudo dnf remove docker \
                   docker-logrotate \
                   docker-selinux \
                   docker-engine-selinux \
-                  docker-engine
+                  docker-engine \
+                  runc
 ```
 
 `dnf` might report that you have none of these packages installed.
