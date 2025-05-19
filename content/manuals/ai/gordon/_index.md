@@ -7,6 +7,9 @@ params:
     badge:
       color: blue
       text: Beta
+    group: AI
+aliases: 
+ - /desktop/features/gordon/
 ---
 
 {{< summary-bar feature_name="Ask Gordon" >}}
@@ -96,6 +99,8 @@ If you have concerns about data collection or usage, you can
    and enable** to continue.
 
 9. Select **Apply & restart**.
+
+You can also enable Ask Gordon from the **Ask Gordon** tab if you have selected the  **Access experimental features** setting. Simply select the **Enable Ask Gordon** button, and then accept the Docker AI terms of service agreement.
 
 ## Using Ask Gordon
 

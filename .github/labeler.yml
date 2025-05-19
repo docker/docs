@@ -1,3 +1,9 @@
+area/ai:
+  - changed-files:
+      - any-glob-to-any-file:
+          - content/manuals/ai/**
+          - content/reference/cli/model/**
+
 area/release:
   - changed-files:
       - any-glob-to-any-file:

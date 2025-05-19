@@ -31,7 +31,8 @@ aliases:
 This page provides download links, system requirements, and step-by-step installation instructions for Docker Desktop on Windows.
 
 {{< button text="Docker Desktop for Windows - x86_64" url="https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64" >}}
-{{< button text="Docker Desktop for Windows - Arm (Beta)" url="https://desktop.docker.com/win/main/arm64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-arm64" >}}
+{{< button text="Docker Desktop for Windows - x86_64 on the Microsoft Store" url="https://apps.microsoft.com/detail/xp8cbj40xlbwkx?hl=en-GB&gl=GB" >}}
+{{< button text="Docker Desktop for Windows - Arm (Early Access)" url="https://desktop.docker.com/win/main/arm64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-arm64" >}}
 
 _For checksums, see [Release notes](/manuals/desktop/release-notes.md)_
 
@@ -94,7 +95,7 @@ For more information on setting up WSL 2 with Docker Desktop, see [WSL](/manuals
 > Windows Home or Education editions only allow you to run Linux containers.
 
 {{< /tab >}}
-{{< tab name="WSL 2 backend, Arm (Beta)" >}}
+{{< tab name="WSL 2 backend, Arm (Early Access)" >}}
 
 - WSL version 1.1.3.0 or later.
 - Windows 11 64-bit: Home or Pro version 22H2 or higher, or Enterprise or Education version 22H2 or higher.

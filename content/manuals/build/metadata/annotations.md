@@ -11,7 +11,7 @@ arbitrary information and attach it to your image, which helps consumers and
 tools understand the origin, contents, and how to use the image.
 
 Annotations are similar to, and in some sense overlap with, [labels]. Both
-serve the same purpose: attach metadata to a resource. As a general principle,
+serve the same purpose: to attach metadata to a resource. As a general principle,
 you can think of the difference between annotations and labels as follows:
 
 - Annotations describe OCI image components, such as [manifests], [indexes],
@@ -68,7 +68,7 @@ For examples on how to add annotations to images built with GitHub Actions, see
 You can also add annotations to an image created using `docker buildx
 imagetools create`. This command only supports adding annotations to an index
 or manifest descriptors, see
-[CLI reference](/reference/cli/docker/buildx/imagetools/create.md#annotations).
+[CLI reference](/reference/cli/docker/buildx/imagetools/create.md#annotation).
 
 ## Inspect annotations
 

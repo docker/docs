@@ -29,6 +29,98 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 >
 > If you're experiencing malware detection issues on Mac, follow the steps documented in [docker/for-mac#7527](https://github.com/docker/for-mac/issues/7527).
 
+## 4.41.2
+
+{{< release-date date="2025-05-06" >}}
+
+{{< desktop-install-v2 all=true beta_win_arm=true version="4.41.2" build_path="/191736/" >}}
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed an issue where the `Models` menu was displayed in the GUI even when Docker Model Runner was not supported or not enabled.
+
+## 4.41.1
+
+{{< release-date date="2025-04-30" >}}
+
+{{< desktop-install-v2 all=true beta_win_arm=true version="4.41.1" build_path="/191279/" >}}
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed an issue where Docker Desktop failed to start when a proxy configuration was specified in the `admin-settings.json` file.
+
+#### For Windows
+
+- Fixed possible conflict with 3rd party tools (for example, Ollama) by avoiding placing `llama.cpp` DLLs in a directory included in the system `PATH`.
+
+## 4.41.0
+
+{{< release-date date="2025-04-28" >}}
+
+{{< desktop-install-v2 all=true beta_win_arm=true version="4.41.0" build_path="/190950/" >}}
+
+### New
+
+- Docker Model Runner is now available on x86 Windows machines with NVIDIA GPUs.
+- You can now [push models](/manuals/ai/model-runner.md#push-a-model-to-docker-hub) to Docker Hub with Docker Model Runner.
+- Added support for Docker Model Runner's model management and chat interface in Docker Desktop for Mac and Windows (on hardware supporting Docker Model Runner). Users can now view, interact with, and manage local AI models through a new dedicated interface.
+- [Docker Compose](/manuals/compose/how-tos/model-runner.md) and Testcontainers [Java](https://java.testcontainers.org/modules/docker_model_runner/) and [Go](https://golang.testcontainers.org/modules/dockermodelrunner/) now support Docker Model Runner.
+- Introducing Docker Desktop in the [Microsoft App Store](https://apps.microsoft.com/detail/xp8cbj40xlbwkx?hl=en-GB&gl=GB).
+
+### Upgrades
+
+- [Docker Engine v28.1.1](https://docs.docker.com/engine/release-notes/28.1/#2811)
+- [Docker Compose v2.35.1](https://github.com/docker/compose/releases/tag/v2.35.1)
+- [Docker Buildx v0.23.0](https://github.com/docker/buildx/releases/tag/v0.23.0)
+- [Docker Scout CLI v1.17.1](https://github.com/docker/scout-cli/releases/tag/v1.17.1)
+- [Compose Bridge v0.0.19](https://github.com/docker/compose-bridge-binaries/releases/tag/v0.0.19)
+
+### Security
+
+- Fixed [CVE-2025-3224](https://www.cve.org/CVERecord?id=CVE-2025-3224) allowing an attacker with access to a user machine to perform an elevation of privilege when Docker Desktop updates.
+- Fixed [CVE-2025-4095](https://www.cve.org/CVERecord?id=CVE-2025-4095) where Registry Access Management (RAM) policies were not enforced when using a MacOS configuration profile, allowing users to pull images from unapproved registries.
+- Fixed [CVE-2025-3911](https://www.cve.org/CVERecord?id=CVE-2025-3911) allowing an attacker with read access to a user's machine to obtain sensitive information from Docker Desktop log files, including environment variables configured for running containers.
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed a bug in DockerVMM that caused an excessive number of open file handles on the host.
+- Fixed an issue where Docker Desktop failed to start if the `admin-settings.json` file didn't contain the optional `configurationFileVersion` configuration.
+- Fixed a bug that was causing outgoing UDP connections to be eagerly closed.
+- Enhanced log reading experience with advanced search capabilities and container-level filtering, enabling quicker debugging and troubleshooting.
+- Improved error messages when downloading Registry Access Management configuration.
+- If Docker can't bind an ICMPv4 socket, it now logs an error and continues rather than quits.
+- Enabled the memory protection keys mechanism in the Docker Desktop Linux VM, allowing containers like Oracle database images to run correctly.
+- Fixed a problem with containers accessing `/proc/sys/kernel/shm*` sysctls when [Enhanced Container Isolation](/manuals/security/for-admins/hardened-desktop/enhanced-container-isolation/_index.md) is enabled on Mac, Windows Hyper-V, or Linux.
+- Added kernel module `nft_fib_inet`, required for running firewalld in a Linux container.
+- MacOS QEMU Virtualization option is being deprecated on July 14, 2025.
+
+#### For Mac
+
+- Fixed a bug that caused high CPU usage. Fixes [docker/for-mac#7643](https://github.com/docker/for-mac/issues/7643).
+- Fixed multi-arch build issue with Rosetta on M3 Macs.
+- Fixed an issue where absence of `/Library/Application Support/com.docker.docker/` directory can cause failure to apply RAM policy restrictions.
+
+#### For Windows
+
+- The Windows `.exe` installer now includes improved handling of locked files. Fixes [docker/for-win#14299](https://github.com/docker/for-win/issues/14299) and [docker/for-win#14316](https://github.com/docker/for-win/issues/14316).
+- Fixed `Docker Desktop.exe` not showing version information after installation. Fixes [docker/for-win#14703](https://github.com/docker/for-win/issues/14703).
+
+### Known issues
+
+#### For all platforms
+
+- If you have enforced sign-in using `desktop.plist` (on macOS) or Registry key (on Windows) and also have a `registry.json`, sign-in will fail if the user belongs to an organization listed in `desktop.plist`/ registry key but not to any organizations specified in `registry.json`. To resolve this, remove the `registry.json` file.
+
+#### For Windows
+
+- If multiple organizations are specified in the `allowedOrgs` Windows registry key using space-separated format, sign-in will fail and user will be logged out. As a workaround, specify each organization on a separate line in the registry key value.
+
 ## 4.40.0
 
 {{< release-date date="2025-03-31" >}}
@@ -37,7 +129,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ### New
 
-- You can now pull, run, and manage AI models from Docker Hub directly in Docker Desktop with [Docker Model Runner (Beta)](/manuals/desktop/features/model-runner.md). Currently available for Docker Desktop for Mac with Apple Silicon.
+- You can now pull, run, and manage AI models from Docker Hub directly in Docker Desktop with [Docker Model Runner (Beta)](/manuals/ai/model-runner.md). Currently available for Docker Desktop for Mac with Apple Silicon.
 
 ### Upgrades
 
@@ -148,7 +240,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - The new [`update` command](/reference/cli/docker/desktop/update.md) has been added to the Docker Desktop CLI (Mac only).
 - [Bake](/manuals//build/bake/_index.md) is now generally available, with support for entitlements and composable attributes.
 - You can now create [multi-node Kubernetes clusters](/manuals/desktop/settings-and-maintenance/settings.md#kubernetes) in Docker Desktop.
-- [Ask Gordon](/manuals/desktop/features/gordon.md) is more widely available. It is still in Beta.
+- [Ask Gordon](/manuals/ai/gordon/_index.md) is more widely available. It is still in Beta.
 
 ### Upgrades
 

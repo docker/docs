@@ -45,6 +45,11 @@ To change your billing cycle:
 5. Select **Continue to payment**.
 6. Verify payment information and select **Upgrade subscription**.
 
+> [!NOTE]
+>
+> If you choose to pay using a US bank account, you must verify the account. For
+> more information, see [Verify a bank account](manuals/billing/payment-method.md#verify-a-bank-account).
+
 The billing plans and usage page will now reflect your new annual plan details.
 
 {{< /tab >}}
@@ -81,6 +86,11 @@ To change your organization's billing cycle:
 4. Verify your billing information.
 5. Select **Continue to payment**.
 6. Verify payment information and select **Upgrade subscription**.
+
+> [!NOTE]
+>
+> If you choose to pay using a US bank account, you must verify the account. For
+> more information, see [Verify a bank account](manuals/billing/payment-method.md#verify-a-bank-account).
 
 {{< /tab >}}
 {{< tab name="Legacy Docker plan" >}}

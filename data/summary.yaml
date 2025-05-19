@@ -30,7 +30,7 @@ Build dockerfile inline:
 Build entitlements:
   requires: Docker Compose [2.27.1](/manuals/compose/releases/release-notes.md#2271) and later
 Build multiple exporters:
-  requires: Docker Buildx [0.13.0]((/manuals/build/release-notes.md#0130) and later
+  requires: Docker Buildx [0.13.0](/manuals/build/release-notes.md#0130) and later
 Buildkit host:
   requires: Docker Buildx [0.9.0](/manuals/build/release-notes.md#090) and later
 Build privileged:
@@ -97,6 +97,8 @@ Compose gw priority:
   requires: Docker Compose [2.33.1](/manuals/compose/releases/release-notes.md#2331) and later
 Compose include:
   requires: Docker Compose [2.20.3](/manuals/compose/releases/release-notes.md#2203) and later
+Compose interface-name:
+  requires: Docker Compose [2.36.0](/manuals/compose/releases/release-notes.md#2203) and later
 Compose label file:
   requires: Docker Compose [2.32.2](/manuals/compose/releases/release-notes.md#2232) and later
 Compose lifecycle hooks:
@@ -105,8 +107,14 @@ Compose mac address:
   requires: Docker Compose [2.23.2](/manuals/compose/releases/release-notes.md#2232) and later
 Compose menu:
   requires: Docker Compose [2.26.0](/manuals/compose/releases/release-notes.md#2260) and later
+Compose model runner:
+  requires: Docker Compose [2.35.0](/manuals/compose/releases/release-notes.md#2350) and later, and Docker Desktop 4.41 and later
 Compose OCI artifact:
   requires: Docker Compose [2.34.0](/manuals/compose/releases/release-notes.md#2340) and later
+Compose provider services:
+  requires: Docker Compose [2.36.0](/manuals/compose/releases/release-notes.md) and later
+Compose progress:
+  requires: Docker Compose [2.36.0](/manuals/compose/releases/release-notes.md) and later
 Compose replace file:
   requires: Docker Compose [2.24.4](/manuals/compose/releases/release-notes.md#2244) and later
 Compose required:
@@ -145,7 +153,7 @@ Docker GitHub Copilot:
 Docker Model Runner:
   availability: Beta
   requires: Docker Desktop 4.40 and later
-  for: Docker Desktop for Mac with Apple Silicon
+  for: Docker Desktop for Mac with Apple Silicon or Windows with NVIDIA GPUs
 Docker Projects:
   availability: Beta
 Docker Init:
@@ -163,9 +171,14 @@ Docker Scout Mount Permissions:
 Domain audit:
   subscription: [Business]
   for: Administrators
+Domain management:
+  subscription: [Business]
+  for: Administrators
 Enforce sign-in:
   subscription: [Business]
   for: Administrators
+Gated distribution:
+  availability: Early Access
 General admin:
   for: Administrators
 GitHub Actions cache:
@@ -174,6 +187,8 @@ Hardened Docker Desktop:
   subscription: [Business]
   for: Administrators
 Image management:
+  availability: Beta
+Immutable tags:
   availability: Beta
 Import builds:
   availability: Beta

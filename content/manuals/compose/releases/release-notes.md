@@ -13,6 +13,42 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.36.1
+
+{{< release-date date="2025-05-19" >}}
+
+### Bug fixes and enhancements
+
+- Introduced support of arrays for `provider` service `options` attribute
+- Added `debug` messages in the extension protocol
+- Fixed an issue when trying to publish a Compose application with a `provider` service
+- Fixed build issues on Compose applications with `service.provider`
+- Introduced `--lock-image-digests` to `config` command
+
+### Update
+
+- Dependencies upgrade: bump compose-go to v2.6.3
+- Dependencies upgrade: bump containerd to 2.1.0
+
+## 2.36.0
+
+{{< release-date date="2025-05-07" >}}
+
+### Bug fixes and enhancements
+
+- Introduced `networks.interface_name`
+- Added support for `COMPOSE_PROGRESS` env variable
+- Added `service.provider` to external binaries
+- Introduced build `--check` flag
+- Fixed multiple panic issues when parsing Compose files
+
+### Update
+
+- Dependencies upgrade: bump compose-go to v2.6.2
+- Dependencies upgrade: bump docker engine and cli to v28.1.0
+- Dependencies upgrade: bump containerd to 2.0.5
+- Dependencies upgrade: bump buildkit to v0.21.1
+
 ## 2.35.1
 
 {{< release-date date="2025-04-17" >}}
@@ -33,7 +69,7 @@ For more detailed information, see the [release notes in the Compose repo](https
 
 ### Bug fixes and enhancements
 
-- Added support for [Docker Model Runner](/manuals/desktop/features/model-runner.md) to easily integrate AI models into your Compose applications
+- Added support for [Docker Model Runner](/manuals/ai/model-runner.md) to easily integrate AI models into your Compose applications
 - Added `build --print` command to help debug complex build configurations by showing the equivalent bake file
 - Added `volume.type=image` to provide more flexible volume management for container images
 - Added `--quiet` options to the `run` command for cleaner output when running containers

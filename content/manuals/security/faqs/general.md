@@ -70,7 +70,12 @@ This is applicable only when using Docker Hub's application-level password versu
 
 ### How do we de-provision users who are not part of our IdP? We use SSO but not SCIM
 
-If SCIM isn't enabled, you have to manually remove users from the organization in our system. Using SCIM automates this.
+If SCIM isn't enabled, you have to manually remove users from the organization.
+SCIM can automate this if your users are added after SCIM is enabled. Any users
+added to your organization before SCIM is enabled must be removed manually.
+
+For more information on manually removing users, see
+[Manage organization members](/manuals/admin/organization/members.md).
 
 ### What metadata is collected from container images that Scout analyzes?
 

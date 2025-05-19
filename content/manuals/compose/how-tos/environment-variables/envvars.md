@@ -26,6 +26,7 @@ This page contains information on how you can set or change the following pre-de
 - `COMPOSE_ENV_FILES`
 - `COMPOSE_MENU`
 - `COMPOSE_EXPERIMENTAL`
+- `COMPOSE_PROGRESS`
 
 ## Methods to override 
 
@@ -50,7 +51,7 @@ Compose can set the project name in different ways. The level of precedence (fro
 
 1. The `-p` command line flag 
 2. `COMPOSE_PROJECT_NAME`
-3. The top level `name:` variable from the config file (or the last `name:` from
+3. The top-level `name:` variable from the config file (or the last `name:` from
   a series of config files specified using `-f`)
 4. The `basename` of the project directory containing the config file (or
   containing the first config file specified using `-f`)
@@ -78,7 +79,7 @@ Specifies the path to a Compose file. Specifying multiple Compose files is suppo
       ```  
    The path separator can also be customized using [`COMPOSE_PATH_SEPARATOR`](#compose_path_separator).  
 
-See also the [command-line options overview](/reference/cli/docker/compose/_index.md#command-options-overview-and-help) and [using `-f` to specify name and path of one or more Compose files](/reference/cli/docker/compose/_index.md#use--f-to-specify-name-and-path-of-one-or-more-compose-files).
+See also the [command-line options overview](/reference/cli/docker/compose/_index.md#command-options-overview-and-help) and [using `-f` to specify name and path of one or more Compose files](/reference/cli/docker/compose/_index.md#use--f-to-specify-the-name-and-path-of-one-or-more-compose-files).
 
 ### COMPOSE\_PROFILES
 
@@ -86,18 +87,18 @@ Specifies one or more profiles to be enabled when `docker compose up` is run.
 
 Services with matching profiles are started as well as any services for which no profile has been defined.
 
-For example, calling `docker compose up`with `COMPOSE_PROFILES=frontend` selects services with the 
+For example, calling `docker compose up` with `COMPOSE_PROFILES=frontend` selects services with the 
 `frontend` profile as well as any services without a profile specified.
 
 If specifying multiple profiles, use a comma as a separator.
 
-This following example enables all services matching both the `frontend` and `debug` profiles and services without a profile. 
+The following example enables all services matching both the `frontend` and `debug` profiles and services without a profile. 
 
 ```console
 COMPOSE_PROFILES=frontend,debug
 ```
 
-See also [Using profiles with Compose](../profiles.md) and the [`--profile` command-line option](/reference/cli/docker/compose/_index.md#use---profile-to-specify-one-or-more-active-profiles).
+See also [Using profiles with Compose](../profiles.md) and the [`--profile` command-line option](/reference/cli/docker/compose/_index.md#use-profiles-to-enable-optional-services).
 
 ### COMPOSE\_CONVERT\_WINDOWS\_PATHS
 
@@ -179,7 +180,7 @@ When enabled, Compose displays a navigation menu where you can choose to open th
 - Supported values:
    - `true` or `1`, to enable
    - `false` or `0`, to disable
-- Defaults to: `1` if you obtained Docker Compose through Docker Desktop, otherwise default is `0`
+- Defaults to: `1` if you obtained Docker Compose through Docker Desktop, otherwise the default is `0`
 
 ### COMPOSE\_EXPERIMENTAL
 
@@ -191,6 +192,15 @@ This is an opt-out variable. When turned off it deactivates the experimental fea
    - `true` or `1`, to enable
    - `false` or `0`, to disable
 - Defaults to: `1`
+
+### COMPOSE\_PROGRESS
+
+{{< summary-bar feature_name="Compose progress" >}}
+
+Defines the type of progress output, if `--progress` isn't used. 
+
+Supported values are `auto`, `tty`, `plain`, `json`, and `quiet`.
+Default is `auto`. 
 
 ## Unsupported in Compose V2
 
