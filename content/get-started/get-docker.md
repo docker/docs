@@ -48,7 +48,7 @@ section and choose the best installation path for you.
   title="Docker Desktop for Linux"
   description="A native Linux application that delivers all Docker tools to your Linux computer."
   link="/desktop/setup/install/linux/"
-  icon="/assets/icons/linux.svg" >}}
+  icon="/assets/icons/Linux.svg" >}}
 </div>
 
 > [!NOTE]
