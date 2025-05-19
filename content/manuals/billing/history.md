@@ -20,22 +20,27 @@ Your invoice includes the following:
 
 - Invoice number
 - Date of issue
-- Date due
+- Due date
 - Your "Bill to" information
 - Amount due (in USD)
 - Pay online: Select this link to pay your invoice online
-- Description of your order, quantity if applicable, unit price, and amount (in USD)
+- Description of your order, quantity if applicable, unit price, and amount
+(in USD)
 - Subtotal, discount (if applicable), and total
 
-The information listed in the **Bill to** section of your invoice is based on your billing information. Not all fields are required. The billing information includes the following:
+The information listed in the "Bill to" section of your invoice is based on your billing information. Not all fields are required. The billing information
+includes the following:
 
 - Name (required): The name of the administrator or company
 - Address (required)
-- Email address (required): The email address that receives all billing-related emails for the account
+- Email address (required): The email address that receives all billing-related
+emails for the account
 - Phone number
 - Tax ID or VAT
 
-You can’t make changes to a paid or unpaid billing invoice. When you update your billing information, this change won't update an existing invoice. If you need to update your billing information, make sure you do so before your subscription renewal date when your invoice is finalized. For more information, see [Update the billing information](details.md).
+You can’t make changes to a paid or unpaid billing invoice. When you update your billing information, this change won't update an existing invoice. If you need
+to update your billing information, make sure you do so before your subscription renewal date when your invoice is finalized.
+For more information, see [Update billing information](details.md).
 
 ## Pay an invoice
 
@@ -55,9 +60,7 @@ You can pay an invoice from the Docker Billing Console:
 When your payment has processed, the invoice's **Status** column will update to
 **Paid** and you will receive a confirmation email.
 
-> [!NOTE]
->
-> If you choose to pay using a US bank account, you must verify the account. For
+If you choose to pay using a US bank account, you must verify the account. For
 more information, see [Verify a bank account](manuals/billing/payment-method.md#verify-a-bank-account).
 
 ## View renewal date
@@ -65,13 +68,14 @@ more information, see [Verify a bank account](manuals/billing/payment-method.md#
 {{< tabs >}}
 {{< tab name="Docker plan" >}}
 
-You receive your invoice when the subscription renews. To verify your renewal date, sign in to the [Docker Home Billing](https://app.docker.com/billing). Your renewal date and amount are displayed on your subscription plan card.
-
+You receive your invoice when the subscription renews. To verify your renewal
+date, sign in to the [Docker Home Billing](https://app.docker.com/billing). Your renewal date and amount are displayed on your subscription plan card.
 
 {{< /tab >}}
 {{< tab name="Legacy Docker plan" >}}
 
-You receive your invoice when the subscription renews. To verify your renewal date:
+You receive your invoice when the subscription renews. To verify your renewal
+date:
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
 2. Select your user avatar to open the drop-down menu.
@@ -85,7 +89,9 @@ You receive your invoice when the subscription renews. To verify your renewal da
 
 > [!NOTE]
 >
-> If the VAT number field is not available, complete the [Contact Support form](https://hub.docker.com/support/contact/). This field may need to be manually added.
+> If the VAT number field is not available, complete the
+[Contact Support form](https://hub.docker.com/support/contact/). This field
+may need to be manually added.
 
 {{< tabs >}}
 {{< tab name="Docker plan" >}}
@@ -114,7 +120,8 @@ Your VAT number will be included on your next invoice.
 To add or update your VAT number:
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
-2. For user accounts, Select your avatar in the top-right corner, then **Billing**. For organizations, select the name of the organization.
+2. For user accounts, select your user avatar, then **Billing**. For
+organizations, select the name of the organization.
 3. Select the **Billing address** link.
 4. In the **Billing Information** section, select **Update information**.
 5. Enter your VAT number in the Tax ID section.
@@ -133,7 +140,8 @@ Your VAT number will be included on your next invoice.
 
 ## View billing history
 
-You can view the billing history and download past invoices for a personal account or organization.
+You can view your billing history and download past invoices for a personal
+account or organization.
 
 ### Personal account
 
@@ -166,9 +174,7 @@ From here you can download an invoice.
 
 ### Organization
 
-> [!NOTE]
->
-> You must be an owner of the organization to view the billing history.
+You must be an owner of the organization to view the billing history.
 
 {{< tabs >}}
 {{< tab name="Docker plan" >}}
@@ -189,10 +195,10 @@ To view billing history:
 1. Sign in to [Docker Hub](https://hub.docker.com).
 2. Select your avatar in the top-right corner.
 3. From the drop-down menu select **Billing**.
-4. Select the **Payment methods and billing history** link.
-    You can find your past invoices in the **Invoice History** section.
+4. Select the **Payment methods and billing history** link. You can find your
+past invoices in the **Invoice History** section.
 
-From here you can download an invoice.
+You cna also download an invoice from this page if needed.
 
 {{< /tab >}}
 {{< /tabs >}}

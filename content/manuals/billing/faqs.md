@@ -65,3 +65,5 @@ No. All monthly and annual subscriptions are automatically renewed at the end of
 No. Pay by invoice is only available for subscribers on an annual subscription
 during first-time checkouts and subscription renewal. You must use card payment
 or US bank accounts for purchasing upgrades or additional seats.
+
+For a list of supported payment methods, see [Add or update a payment method](/manuals/billing/payment-method.md).

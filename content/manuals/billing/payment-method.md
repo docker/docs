@@ -7,13 +7,16 @@ alisases:
     - /billing/core-billing/payment-method/
 ---
 
-This page describes how to add or update a payment method for your personal account or for an organization.
+This page describes how to add or update a payment method for your personal
+account or for an organization.
 
-You can add a payment method or update your account's existing payment method at any time.
+You can add a payment method or update your account's existing payment method
+at any time.
 
 > [!IMPORTANT]
 >
-> If you want to remove all payment methods, you must first downgrade your subscription to a free plan. See [Downgrade](../subscription/change.md).
+> If you want to remove all payment methods, you must first downgrade your
+subscription to a free plan. See [Downgrade](../subscription/change.md).
 
 The following payment methods are supported:
 
@@ -27,7 +30,8 @@ The following payment methods are supported:
 - Link
 - Pay by invoice
 
-All currency, for example the amount listed on your billing invoice, is in United States dollar (USD).
+All currency, for example the amount listed on your billing invoice, is in
+United States dollar (USD).
 
 {{% include "tax-compliance.md" %}}
 
@@ -140,7 +144,7 @@ You can pay an invoice using card or US bank account.
 by invoice for subscription upgrades or purchasing additional seats.
 
 1. Sign in to [Docker Home](https://app.docker.com/).
-2. Under Settings and administration, select **Billing**.
+2. Under **Settings and administration**, select **Billing**.
 3. Select **Payment methods**, then **Pay by invoice**.
 4. To enable pay by invoice, select the **Pay by invoice** toggle.
 5. Confirm your billing contact details. If you need to change them, select
@@ -153,24 +157,32 @@ by invoice for subscription upgrades or purchasing additional seats.
 > You can't manually retry a failed payment. Docker will retry failed payments
 based on the retry schedule.
 
-If your subscription payment fails, there is a grace period of 15 days, including the due date. Docker retries to collect the payment 3 times using the following schedule:
+If your subscription payment fails, there is a grace period of 15 days,
+including the due date. Docker retries to collect the payment 3 times using the following schedule:
 
 - 3 days after the due date
 - 5 days after the previous attempt
 - 7 days after the previous attempt
 
-Docker also sends an email notification `Action Required - Credit Card Payment Failed` with an attached unpaid invoice after each failed payment attempt.
+Docker also sends an email notification
+`Action Required - Credit Card Payment Failed` with an attached unpaid
+invoice after each failed payment attempt.
 
-Once the grace period is over and the invoice is still not paid, the subscription downgrades to a free plan and all paid features are disabled.
+Once the grace period is over and the invoice is still not paid, the
+subscription downgrades to a free plan and all paid features are disabled.
 
 ## Redeem a coupon
 
 You can redeem a coupon for any paid Docker subscription.
 
 A coupon can be used when you:
+
 - Sign up to a new paid subscription from a free subscription
 - Upgrade an existing paid subscription
 
-You are asked to enter your coupon code when you confirm or enter your payment method.
+You are asked to enter your coupon code when you confirm or enter your
+payment method.
 
-If you use a coupon to pay for a subscription, when the coupon expires, your payment method is charged the full cost of your subscription. If you don't have a saved payment method, your account downgrades to a free subscription.
+If you use a coupon to pay for a subscription, when the coupon expires, your
+payment method is charged the full cost of your subscription. If you don't have
+a saved payment method, your account downgrades to a free subscription.

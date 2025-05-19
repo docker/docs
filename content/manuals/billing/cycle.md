@@ -5,19 +5,24 @@ description: Learn to change your billing cycle for your Docker subscription
 keywords: billing, cycle, payments, subscription
 ---
 
-You can pay for a subscription plan on a monthly or yearly billing cycle. You select your preferred billing cycle when you buy your subscription.
+You can choose a monthly or yearly billing cycle when purchasing a subscription.
+[Docker Business](/manuals/subscription/details.md#docker-business) subscription
+plans are only available with yearly billing.
 
-> [!NOTE]
->
-> Business plan is available only on yearly billing cycle. You can't switch from an annual billing cycle to a monthly cycle.
+If you're on a monthly plan, you can switch to a yearly plan at any time.
+However, switching from a yearly to a monthly cycle isn't supported.
 
-If you have a monthly billing cycle, you can choose to switch to an annual billing cycle.
+When you change your billing cycle:
 
-When you change the billing cycle's duration:
-
-- The next billing date reflects the new cycle. To find your next billing date, see [View renewal date](history.md#view-renewal-date).
-- The subscription's start date resets. For example, if the start date of the monthly subscription is March 1st and the end date is April 1st, then after switching the billing duration to March 15th, 2024 the new start date is March 15th, 2024, and the new end date is March 15th, 2025.
-- Any unused monthly subscription is prorated and applied as credit towards the new annual period. For example, if you switch from a $10 monthly subscription to a $100 annual plan, deducting the unused monthly value (in this case $5), the migration cost becomes $95 ($100 - $5). The renewal cost after March 15, 2025 is $100.
+- Your next billing date updates to reflect the new cycle. To find your next
+billing date, see [View renewal date](history.md#view-renewal-date).
+- Your subscription start date resets. For example, if your monthly subscription
+runs from March 1 to April 1, and you switchin to annual billing on March 15,
+your new subscription runs from March 15, 2025 to March 15, 2026.
+- Any unused portion of your monthly subscription is credited towards the
+annual plan. For example, if you switch from a $10 monthly plan halfway through
+the month, $5 is credited toward the $100 annual fee, making your first charge
+$95. The renewal cost remains $100.
 
 {{% include "tax-compliance.md" %}}
 
@@ -28,8 +33,8 @@ When you change the billing cycle's duration:
 
 > [!IMPORTANT]
 >
-> Pay by invoice is only available on first-time checkouts and subscription renewals.
-You can't use pay by invoice for subscription upgrades.
+> Pay by invoice is only available on first-time checkouts and subscription
+renewals. You can't use pay by invoice for subscription upgrades or changes.
 
 To change your billing cycle:
 
@@ -58,12 +63,15 @@ To change your billing cycle:
 
 ## Organization
 
-> [!NOTE]
->
-> You must be an organization owner to make changes to the payment information.
+You must be an organization owner to make changes to an organization's payment information.
 
 {{< tabs >}}
 {{< tab name="Docker plan" >}}
+
+> [!IMPORTANT]
+>
+> Pay by invoice is only available on first-time checkouts and subscription
+renewals. You can't use pay by invoice for subscription upgrades or changes.
 
 To change your organization's billing cycle:
 
