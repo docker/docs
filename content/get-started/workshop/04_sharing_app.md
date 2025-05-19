@@ -38,7 +38,8 @@ In the following image, you can see an example Docker command from Docker Hub. T
 
 ## Push the image
 
-1. In the command line, run the `docker push` command that you see on Docker
+1. Sign in to Docker Hub using the command: `docker login YOUR-USER-NAME YOUR-PASSWORD`.
+2. In the command line, run the `docker push` command that you see on Docker
    Hub. Note that your command will have your Docker ID, not "docker". For example, `docker push YOUR-USER-NAME/getting-started`.
 
    ```console
@@ -51,12 +52,6 @@ In the following image, you can see an example Docker command from Docker Hub. T
     didn't find one. If you run `docker image ls`, you won't see one either.
 
     To fix this, you need to tag your existing image you've built to give it another name.
-
-   > [!NOTE]
-   >
-   > If you encounter the following error: `denied: requested access to the resource is denied`, you can retry with `$ docker login -u "myusername" -p "mypassword" docker.io`.
-
-2. Sign in to Docker Hub using the command `docker login -u YOUR-USER-NAME`.
 
 3. Use the `docker tag` command to give the `getting-started` image a new name. Replace `YOUR-USER-NAME` with your Docker ID.
 
