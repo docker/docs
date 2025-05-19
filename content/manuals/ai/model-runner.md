@@ -55,15 +55,15 @@ You can now use the `docker model` command in the CLI and view and interact with
    
    ```console
    $ sudo apt-get update
-   $ sudo apt-get install docker-model-runner
+   $ sudo apt-get install docker-model-plugin
    ```
    
    {{< /tab >}}
    {{< tab name="RPM-base distributions">}}
    
    ```console
-   $ sudo yum update
-   $ sudo yum install docker-model-runner
+   $ sudo dnf update
+   $ sudo dnf install docker-model-plugin
    ```
    
    {{< /tab >}}
@@ -72,7 +72,7 @@ You can now use the `docker model` command in the CLI and view and interact with
 3. Test the installation:
    
    ```console
-   $ docker model status
+   $ docker model version
    ```
 
 ## Available commands
