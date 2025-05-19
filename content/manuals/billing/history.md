@@ -14,7 +14,7 @@ payment method.
 
 {{% include "tax-compliance.md" %}}
 
-## View an incoice
+## View an invoice
 
 Your invoice includes the following:
 
@@ -46,7 +46,7 @@ For more information, see [Update billing information](details.md).
 
 > [!NOTE]
 >
-> Pay by invoice is only available for subscribers on an annual billing cylce.
+> Pay by invoice is only available for subscribers on an annual billing cycle.
 To change your billing cycle, see [Change your billing cycle](/manuals/billing/cycle.md).
 
 You can pay an invoice from the Docker Billing Console:
@@ -198,7 +198,7 @@ To view billing history:
 4. Select the **Payment methods and billing history** link. You can find your
 past invoices in the **Invoice History** section.
 
-You cna also download an invoice from this page if needed.
+You can also download an invoice from this page if needed.
 
 {{< /tab >}}
 {{< /tabs >}}

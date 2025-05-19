@@ -17,7 +17,7 @@ When you change your billing cycle:
 - Your next billing date updates to reflect the new cycle. To find your next
 billing date, see [View renewal date](history.md#view-renewal-date).
 - Your subscription start date resets. For example, if your monthly subscription
-runs from March 1 to April 1, and you switchin to annual billing on March 15,
+runs from March 1 to April 1, and you switching to annual billing on March 15,
 your new subscription runs from March 15, 2025 to March 15, 2026.
 - Any unused portion of your monthly subscription is credited towards the
 annual plan. For example, if you switch from a $10 monthly plan halfway through
