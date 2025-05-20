@@ -37,6 +37,7 @@ In the following image, you can see an example Docker command from Docker Hub. T
 
 
 ## Push the image
+
 Let's try to push the image to Docker Hub.
 
 1. In the command line, run the following commmand:
