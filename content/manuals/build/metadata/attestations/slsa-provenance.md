@@ -175,7 +175,7 @@ extract the full source code of the Dockerfile used to build the image:
 ```console
 $ docker buildx imagetools inspect <namespace>/<image>:<version> \
     --format '{{ range (index .Provenance.SLSA.metadata "https://mobyproject.org/buildkit@v1#metadata").source.infos }}{{ if eq .filename "Dockerfile" }}{{ .data }}{{ end }}{{ end }}' | base64 -d
-FROM ubuntu:20.04
+FROM ubuntu:24.04
 RUN apt-get update
 ...
 ```
