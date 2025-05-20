@@ -41,8 +41,8 @@ For an example on how to add provenance attestations with GitHub Actions, see
 ## Mode
 
 You can use the `mode` parameter to define the level of detail to be included in
-the provenance attestation. Supported values are `mode=min`, and `mode=max`
-(default).
+the provenance attestation. Supported values are `mode=min` (default) and
+`mode=max`.
 
 ### Min
 
