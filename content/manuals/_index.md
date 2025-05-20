@@ -42,7 +42,7 @@ params:
     link: /model-runner/
   - title: MCP Catalog and Toolkit
     description: Augment your AI workflow with MCP servers.
-    icon: /assets/icons/toolbox.svg
+    icon: /icons/toolkit.svg
     link: /ai/mcp-catalog-and-toolkit/
   products:
   - title: Docker Desktop
