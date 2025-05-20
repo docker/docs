@@ -56,14 +56,26 @@ input[type="search"]::-ms-clear {
     @apply mt-3! mb-5! text-4xl!;
   }
   > h2 {
-    @apply mt-4! mb-6! text-3xl!;
+    @apply mt-5! mb-3! text-3xl!;
+    a {
+      @apply hover:no-underline!;
+    }
   }
   > h3 {
     @apply text-2xl!;
+    a {
+      @apply hover:no-underline!;
+    }
   }
   > h4 {
+    a {
+      @apply hover:no-underline!;
+    }
   }
   > h5 {
+    a {
+      @apply hover:no-underline!;
+    }
   }
   ol {
     list-style-type: decimal;

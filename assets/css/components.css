@@ -49,6 +49,7 @@
   }
   .admonition-content {
     @apply flex-1 min-w-0;
+    color: var(--tw-prose-body);
   }
   .admonition-note {
     @apply border-blue-400 bg-blue-50 text-blue-900;
