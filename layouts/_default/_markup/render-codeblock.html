@@ -2,7 +2,7 @@
   {{ with .Attributes.title }}
     <div class="text-gray-light dark:text-gray-dark -mb-3 text-sm">{{ . }}</div>
   {{ end }}
-  <div class="group relative">
+  <div class="group relative not-prose">
     <button
       x-data="{ code: '{{ encoding.Base64Encode .Inner }}', copying: false }"
       class="text-gray-light-300 dark:text-gray-dark-600 absolute top-3 right-3 z-10"
