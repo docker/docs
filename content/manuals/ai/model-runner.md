@@ -49,28 +49,28 @@ You can now use the `docker model` command in the CLI and view and interact with
 
 1. Ensure you have installed [Docker Engine](/engine/install/).
 2. DMR is available as a package. To install it, run:
- 
+
    {{< tabs >}}
    {{< tab name="Ubuntu/Debian">}}
-   
+
    ```console
    $ sudo apt-get update
    $ sudo apt-get install docker-model-plugin
    ```
-   
+
    {{< /tab >}}
    {{< tab name="RPM-base distributions">}}
-   
+
    ```console
    $ sudo dnf update
    $ sudo dnf install docker-model-plugin
    ```
-   
+
    {{< /tab >}}
    {{< /tabs >}}
 
 3. Test the installation:
-   
+
    ```console
    $ docker model version
    ```
@@ -138,7 +138,7 @@ You can also pull GGUF models directly from [Hugging Face](https://huggingface.c
 $ docker model pull hf.co/<model-you-want-to-pull>
 ```
 
-For example: 
+For example:
 
 ```console
 $ docker model pull hf.co/bartowski/Llama-3.2-1B-Instruct-GGUF
@@ -278,7 +278,7 @@ If you want to try an existing GenAI application, follow these instructions.
 
 4. Open you app in the browser at the addresses specified in the repository [README](https://github.com/docker/hello-genai).
 
-You'll see the GenAI app's interface where you can start typing your prompts. 
+You'll see the GenAI app's interface where you can start typing your prompts.
 
 You can now interact with your own GenAI app, powered by a local model. Try a few prompts and notice how fast the responses are — all running on your machine with Docker.
 
@@ -435,7 +435,7 @@ The Docker Model CLI currently lacks consistent support for specifying models by
 
 ## Share feedback
 
-Thanks for trying out Docker Model Runner. Give feedback or report any bugs you may find through the **Give feedback** link next to the **Enable Docker Model Runner** setting. 
+Thanks for trying out Docker Model Runner. Give feedback or report any bugs you may find through the **Give feedback** link next to the **Enable Docker Model Runner** setting.
 
 ## Disable the feature
 
