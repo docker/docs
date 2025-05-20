@@ -31,7 +31,11 @@
 }
 
 @utility link {
-  @apply text-primary-blue dark:text-blue-dark underline underline-offset-2;
+  @apply text-primary-blue dark:text-blue-dark no-underline;
+  font-weight: inherit;
+  &:hover {
+    @apply underline underline-offset-3;
+  }
 }
 
 @utility invertible {
