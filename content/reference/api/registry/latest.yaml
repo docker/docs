@@ -222,7 +222,7 @@ tags:
         "https://auth.docker.io/token?service=registry.docker.io&scope=repository:$REPO:pull,push,delete" \
         | jq -r .token)
   
-      # Step 2: Get the manifest and extract the digest from response headers
+      # Step 2 and 3: Get the manifest and extract the digest from response headers
       DIGEST=$(curl -sI -H "Authorization: Bearer $TOKEN" \
         -H "Accept: application/vnd.docker.distribution.manifest.v2+json" \
         https://registry-1.docker.io/v2/$REPO/manifests/$TAG \
@@ -230,7 +230,7 @@ tags:
   
       echo "Deleting manifest with digest: $DIGEST"
   
-      # Step 3: Delete the manifest by digest
+      # Step 4: Delete the manifest by digest
       curl -s -X DELETE \
         -H "Authorization: Bearer $TOKEN" \
         https://registry-1.docker.io/v2/$REPO/manifests/$DIGEST
