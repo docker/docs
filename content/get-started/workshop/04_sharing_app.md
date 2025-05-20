@@ -37,10 +37,15 @@ In the following image, you can see an example Docker command from Docker Hub. T
 
 
 ## Push the image
+Let's try to push the image to Docker Hub.
 
-1. Sign in to Docker Hub using the command: `docker login`.
-2. In the command line, run the `docker push` command that you see on Docker
-   Hub. Note that your command will have your Docker ID, not "docker". For example, `docker push YOUR-USER-NAME/getting-started`.
+1. In the command line, run the following commmand:
+
+   ```console
+   docker push docker/getting-started
+   ```
+
+   You'll see an error like this:
 
    ```console
    $ docker push docker/getting-started
@@ -48,11 +53,17 @@ In the following image, you can see an example Docker command from Docker Hub. T
    An image does not exist locally with the tag: docker/getting-started
    ```
 
-    Why did it fail? The push command was looking for an image named `docker/getting-started`, but
-    didn't find one. If you run `docker image ls`, you won't see one either.
+   This failure is expected because the image isn't tagged correctly yet.
+   Docker is looking for an image name `docker/getting started`, but your
+   local image is still named `getting-started`.
 
-    To fix this, you need to tag your existing image you've built to give it another name.
+   You can confirm this by running:
 
+   ```console
+   docker image ls
+   ```
+
+2. To fix this, first sign in to Docker Hub using your Docker ID: `docker login YOUR-USER-NAME`.
 3. Use the `docker tag` command to give the `getting-started` image a new name. Replace `YOUR-USER-NAME` with your Docker ID.
 
    ```console
