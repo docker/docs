@@ -47,8 +47,7 @@ updated. If you need to update your default payment method, see
 
 Docker collects sales tax and/or VAT from the following:
 
-- Docker began collecting sales tax from United States
-customers on July 1, 2024.
+- For United States customers, Docker began collecting sales tax on July 1, 2024.
 - For European customers, Docker began collecting VAT on March 1, 2025.
 - For United Kingdom customers, Docker began collecting VAT on May 1, 2025.
 
