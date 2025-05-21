@@ -1,7 +1,7 @@
 ---
 title: Use containers for Python development
 linkTitle: Develop your app
-weight: 20
+weight: 40
 keywords: python, local, development
 description: Learn how to develop your Python application locally.
 aliases:
