@@ -1,0 +1,44 @@
+command: docker model package
+short: package a model
+long: package a model
+usage: docker model package --gguf <path> [--license <path>...] --push TARGET
+pname: docker model
+plink: docker_model.yaml
+options:
+    - option: gguf
+      value_type: string
+      description: absolute path to gguf file (required)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: license
+      shorthand: l
+      value_type: stringArray
+      default_value: '[]'
+      description: absolute path to a license file
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: push
+      value_type: bool
+      default_value: "false"
+      description: push to registry (required)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: true
+kubernetes: false
+swarm: false
+

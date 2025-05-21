@@ -3,4 +3,5 @@
 # github.com/docker/buildx v0.23.0
 # github.com/docker/cli v28.1.1+incompatible
 # github.com/docker/compose/v2 v2.36.1
+# github.com/docker/model-cli v0.1.24
 # github.com/docker/scout-cli v1.15.0
