@@ -33,13 +33,17 @@ params:
     link: /testcontainers/
   ai:
   - title: Ask Gordon
-    description: streamline your workflow and get the most out of the Docker ecosystem with your personal AI assistant.
+    description: Streamline your workflow and get the most out of the Docker ecosystem with your personal AI assistant.
     icon: note_add
     link: /ai/gordon/
   - title: Docker Model Runner
-    description: View and manage your local models
+    description: View and manage your local models.
     icon: view_in_ar
     link: /model-runner/
+  - title: MCP Catalog and Toolkit
+    description: Augment your AI workflow with MCP servers.
+    icon: /assets/icons/toolbox.svg
+    link: /ai/mcp-catalog-and-toolkit/
   products:
   - title: Docker Desktop
     description: Your command center for container development.
