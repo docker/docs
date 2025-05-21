@@ -1,6 +1,6 @@
 ---
 title: Automate your builds with GitHub Actions
-linkTitle: Configure CI/CD
+linkTitle: Automate your builds with GitHub Actions
 weight: 60
 keywords: CI/CD, GitHub( Actions), Angular
 description: Learn how to configure CI/CD using GitHub Actions for your Angular application.

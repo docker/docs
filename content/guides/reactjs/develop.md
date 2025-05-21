@@ -45,13 +45,13 @@ FROM node:${NODE_VERSION} AS dev
 WORKDIR /app
 
 # Copy package-related files first to leverage Docker's caching mechanism
-COPY --link package.json package-lock.json ./
+COPY package.json package-lock.json ./
 
 # Install project dependencies
 RUN --mount=type=cache,target=/root/.npm npm install
 
 # Copy the rest of the application source code into the container
-COPY --link . .
+COPY . .
 
 # Expose the port used by the Vite development server
 EXPOSE 5173
