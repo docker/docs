@@ -45,9 +45,19 @@ updated. If you need to update your default payment method, see
 
 ### Does Docker collect sales tax and/or VAT?
 
-Docker began collecting sales tax on subscription fees for United States customers on July 1, 2024. For European customers, Docker will begin collecting VAT on March 1, 2025.
+Docker collects sales tax and/or VAT from the following:
 
-To ensure that tax assessments are correct, make sure that your billing information and VAT/Tax ID, if applicable, are updated. See [Update the billing information](/billing/details/).
+- Docker began collecting sales tax from United States
+customers on July 1, 2024.
+- For European customers, Docker began collecting VAT on March 1, 2025.
+- For United Kingdom customers, Docker began collecting VAT on May 1, 2025.
+
+To ensure that tax assessments are correct, make sure that your billing
+information and VAT/Tax ID, if applicable, are updated. See
+[Update the billing information](/billing/details/).
+
+If you're exempt from sales tax, see
+[Register a tax certificate](/billing/tax-certificate/).
 
 ### How do I certify my tax exempt status?
 
