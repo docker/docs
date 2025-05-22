@@ -1,0 +1,34 @@
+command: docker model install-runner
+short: Install Docker Model Runner
+long: Install Docker Model Runner
+usage: docker model install-runner
+pname: docker model
+plink: docker_model.yaml
+options:
+    - option: gpu
+      value_type: string
+      default_value: auto
+      description: Specify GPU support (none|auto|cuda)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: port
+      value_type: uint16
+      default_value: "12434"
+      description: Docker container port for Docker Model Runner
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: true
+kubernetes: false
+swarm: false
+

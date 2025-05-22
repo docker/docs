@@ -1,0 +1,24 @@
+command: docker model run
+short: Run a model with the Docker Model Runner
+long: Run a model with the Docker Model Runner
+usage: docker model run MODEL [PROMPT]
+pname: docker model
+plink: docker_model.yaml
+options:
+    - option: debug
+      value_type: bool
+      default_value: "false"
+      description: Enable debug logging
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: true
+kubernetes: false
+swarm: false
+

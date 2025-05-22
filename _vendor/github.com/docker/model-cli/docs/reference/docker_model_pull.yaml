@@ -1,0 +1,13 @@
+command: docker model pull
+short: Download a model
+long: Download a model
+usage: docker model pull MODEL
+pname: docker model
+plink: docker_model.yaml
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: true
+kubernetes: false
+swarm: false
+
