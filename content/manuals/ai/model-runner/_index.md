@@ -8,27 +8,30 @@ params:
     group: AI
 weight: 20
 description: Learn how to use Docker Model Runner to manage and run AI models.
-keywords: Docker, ai, model runner, docker deskotp, llm
+keywords: Docker, ai, model runner, docker desktop, llm
 aliases:
   - /desktop/features/model-runner/
-  - /ai/model-runner/
+  - /model-runner/
 ---
 
 {{< summary-bar feature_name="Docker Model Runner" >}}
 
-The Docker Model Runner plugin lets you:
+## Key features
 
-- [Pull models from Docker Hub](https://hub.docker.com/u/ai)
-- Run AI models directly from the command line
-- Manage local models (add, list, remove)
-- Interact with models using a submitted prompt or in chat mode in the CLI or Docker Desktop Dashboard
-- Push models to Docker Hub
+- [Pull and push models to and from Docker Hub](https://hub.docker.com/u/ai)
+- Run and interact with AI models directly from the command line or from Docker Desktop
+- Manage local models and display logs
+
+## How it works
 
 Models are pulled from Docker Hub the first time they're used and stored locally. They're loaded into memory only at runtime when a request is made, and unloaded when not in use to optimize resources. Since models can be large, the initial pull may take some time — but after that, they're cached locally for faster access. You can interact with the model using [OpenAI-compatible APIs](#what-api-endpoints-are-available).
 
 > [!TIP]
 >
-> Using Testcontainers or Docker Compose? [Testcontainers for Java](https://java.testcontainers.org/modules/docker_model_runner/) and [Go](https://golang.testcontainers.org/modules/dockermodelrunner/), and [Docker Compose](/manuals/compose/how-tos/model-runner.md) now support Docker Model Runner.
+> Using Testcontainers or Docker Compose?
+> [Testcontainers for Java](https://java.testcontainers.org/modules/docker_model_runner/)
+> and [Go](https://golang.testcontainers.org/modules/dockermodelrunner/), and
+> [Docker Compose](/manuals/compose/how-tos/model-runner.md) now support Docker Model Runner.
 
 ## Enable Docker Model Runner
 
@@ -42,192 +45,60 @@ Models are pulled from Docker Hub the first time they're used and stored locally
 
 You can now use the `docker model` command in the CLI and view and interact with your local models in the **Models** tab in the Docker Desktop Dashboard.
 
-## Available commands
+## Install a model
 
-### Model runner status
+Models are installed locally. 
 
-Check whether the Docker Model Runner is active and displays the current inference engine:
+{{< tabs >}}
+{{< tab name="From Docker Desktop">}}
 
-```console
-$ docker model status
-```
+1. Select **Models** and select the **Docker Hub** tab.
+2. Find the model of your choice and select **Pull**.
 
-### View all commands
+{{< /tab >}}
+{{< tab name="From the Docker CLI">}}
 
-Displays help information and a list of available subcommands.
+Use the [`docker model pull` command](/reference/cli/docker/).
 
-```console
-$ docker model help
-```
+{{< /tab >}}
+{{< /tabs >}}
 
-Output:
+## Run a model
 
-```text
-Usage:  docker model COMMAND
+Models are installed locally. 
 
-Commands:
-  list        List models available locally
-  pull        Download a model from Docker Hub
-  rm          Remove a downloaded model
-  run         Run a model interactively or with a prompt
-  status      Check if the model runner is running
-  version     Show the current version
-```
+{{< tabs >}}
+{{< tab name="From Docker Desktop">}}
 
-### Pull a model
+Select **Models** and select the **Local** tab and click the play button.
+The interactive chat screen opens.
 
-Pulls a model from Docker Hub to your local environment.
+{{< /tab >}}
+{{< tab name="From the Docker CLI">}}
 
-```console
-$ docker model pull <model>
-```
+Use the [`docker model run` command](/reference/cli/docker/).
 
-Example:
+{{< /tab >}}
+{{< /tabs >}}
 
-```console
-$ docker model pull ai/smollm2
-```
+## Troubleshooting
 
-Output:
+To troubleshoot potential issues, display the logs:
 
-```text
-Downloaded: 257.71 MB
-Model ai/smollm2 pulled successfully
-```
+{{< tabs >}}
+{{< tab name="From Docker Desktop">}}
 
-The models also display in the Docker Desktop Dashboard.
+Select **Models** and select the **Logs** tab.
 
-#### Pull from Hugging Face
+{{< /tab >}}
+{{< tab name="From the Docker CLI">}}
 
-You can also pull GGUF models directly from [Hugging Face](https://huggingface.co/models?library=gguf).
+Use the [`docker model log` command](/reference/cli/docker/).
 
-```console
-$ docker model pull hf.co/<model-you-want-to-pull>
-```
+{{< /tab >}}
+{{< /tabs >}}
 
-For example: 
-
-```console
-$ docker model pull hf.co/bartowski/Llama-3.2-1B-Instruct-GGUF
-```
-
-Pulls the [bartowski/Llama-3.2-1B-Instruct-GGUF](https://huggingface.co/bartowski/Llama-3.2-1B-Instruct-GGUF).
-
-### List available models
-
-Lists all models currently pulled to your local environment.
-
-```console
-$ docker model list
-```
-
-You will see something similar to:
-
-```text
-+MODEL       PARAMETERS  QUANTIZATION    ARCHITECTURE  MODEL ID      CREATED     SIZE
-+ai/smollm2  361.82 M    IQ2_XXS/Q4_K_M  llama         354bf30d0aa3  3 days ago  256.35 MiB
-```
-
-### Run a model
-
-Run a model and interact with it using a submitted prompt or in chat mode. When you run a model, Docker
-calls an Inference Server API endpoint hosted by the Model Runner through Docker Desktop. The model
-stays in memory until another model is requested, or until a pre-defined inactivity timeout is reached (currently 5 minutes).
-
-You do not have to use `Docker model run` before interacting with a specific model from a
-host process or from within a container. Model Runner transparently loads the requested model on-demand, assuming it has been
-pulled beforehand and is locally available.
-
-#### One-time prompt
-
-```console
-$ docker model run ai/smollm2 "Hi"
-```
-
-Output:
-
-```text
-Hello! How can I assist you today?
-```
-
-#### Interactive chat
-
-```console
-$ docker model run ai/smollm2
-```
-
-Output:
-
-```text
-Interactive chat mode started. Type '/bye' to exit.
-> Hi
-Hi there! It's SmolLM, AI assistant. How can I help you today?
-> /bye
-Chat session ended.
-```
-
-> [!TIP]
->
-> You can also use chat mode in the Docker Desktop Dashboard when you select the model in the **Models** tab.
-
-### Push a model to Docker Hub
-
-To push your model to Docker Hub:
-
-```console
-$ docker model push <namespace>/<model>
-```
-
-### Tag a model
-
-To specify a particular version or variant of the model:
-
-```console
-$ docker model tag
-```
-
-If no tag is provided, Docker defaults to `latest`.
-
-### View the logs
-
-Fetch logs from Docker Model Runner to monitor activity or debug issues.
-
-```console
-$ docker model logs
-```
-
-The following flags are accepted:
-
-- `-f`/`--follow`: View logs with real-time streaming
-- `--no-engines`: Exclude inference engine logs from the output
-
-### Remove a model
-
-Removes a downloaded model from your system.
-
-```console
-$ docker model rm <model>
-```
-
-Output:
-
-```text
-Model <model> removed successfully
-```
-
-### Package a model
-
-Packages a GGUF file into a Docker model OCI artifact, with optional licenses, and pushes it to the specified registry.
-
-```console
-$ docker model package \
-    --gguf ./model.gguf \
-    --licenses license1.txt \
-    --licenses license2.txt \
-    --push registry.example.com/ai/custom-model
-```
-
-## Integrate the Docker Model Runner into your software development lifecycle
+## Example: Integrate Docker Model Runner into your software development lifecycle
 
 You can now start building your Generative AI application powered by the Docker Model Runner.
 
@@ -286,7 +157,6 @@ with `/exp/vDD4.40`.
 
 > [!NOTE]
 > You can omit `llama.cpp` from the path. For example: `POST /engines/v1/chat/completions`.
-
 
 ### How do I interact through the OpenAI API?
 
@@ -399,12 +269,3 @@ The Docker Model CLI currently lacks consistent support for specifying models by
 ## Share feedback
 
 Thanks for trying out Docker Model Runner. Give feedback or report any bugs you may find through the **Give feedback** link next to the **Enable Docker Model Runner** setting.
-
-## Disable the feature
-
-To disable Docker Model Runner:
-
-1. Open the **Settings** view in Docker Desktop.
-2. Navigate to the **Beta** tab in **Features in development**.
-3. Clear the **Enable Docker Model Runner** checkbox.
-4. Select **Apply & restart**.
