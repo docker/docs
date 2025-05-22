@@ -427,7 +427,7 @@ Once linked, re-run the command.
 
 ### No safeguard for running oversized models
 
-Currently, Docker Model Runner doesn't include safeguards to prevent you from launching models that exceed their system’s available resources. Attempting to run a model that is too large for the host machine may result in severe slowdowns or render the system temporarily unusable. This issue is particularly common when running LLMs models without sufficient GPU memory or system RAM.
+Currently, Docker Model Runner doesn't include safeguards to prevent you from launching models that exceed your system’s available resources. Attempting to run a model that is too large for the host machine may result in severe slowdowns or render the system temporarily unusable. This issue is particularly common when running LLMs models without sufficient GPU memory or system RAM.
 
 ### No consistent digest support in Model CLI
 
