@@ -16,6 +16,8 @@ The Docker MCP Toolkit enables seamless setup, management, and execution of cont
 >[!NOTE]
 >If you have the MCP Toolkit _extension_ installed, you can uninstall it.
 
+![Visualisation of the MCP toolkit](/assets/images/mcp_servers.png)
+
 ## Install an MCP server
 
 To install an MCP server:
