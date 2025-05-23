@@ -135,6 +135,9 @@ Docker Build Cloud:
   subscription: [Pro, Team, Business]
 Docker CLI OpenTelemetry:
   requires: Docker Engine [26.1.0](/manuals/engine/release-notes/26.1.md#2610) and later
+Docker Cloud:
+  availability: Beta
+  requires: Docker Desktop 4.42 and later
 docker compose alpha:
   availability: Experimental
 Docker Debug:
