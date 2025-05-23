@@ -152,7 +152,7 @@ Docker GitHub Copilot:
   availability: Early Access
 Docker Model Runner:
   availability: Beta
-  requires: Docker Engine 28.2 or Docker Desktop (Windows) 4.41+ or Docker Desktop (MacOS) 4.40+
+  requires: Docker Engine or Docker Desktop (Windows) 4.41+ or Docker Desktop (MacOS) 4.40+
   for: Docker Desktop for Mac with Apple Silicon or Windows with NVIDIA GPUs
 Docker Projects:
   availability: Beta
