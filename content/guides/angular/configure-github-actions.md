@@ -1,15 +1,15 @@
 ---
-title: Configure CI/CD for your React.js application
-linkTitle: Configure CI/CD
+title: Automate your builds with GitHub Actions
+linkTitle: Automate your builds with GitHub Actions
 weight: 60
-keywords: CI/CD, GitHub( Actions), React.js, Next.js
-description: Learn how to configure CI/CD using GitHub Actions for your React.js application.
+keywords: CI/CD, GitHub( Actions), Angular
+description: Learn how to configure CI/CD using GitHub Actions for your Angular application.
 
 ---
 
 ## Prerequisites
 
-Complete all the previous sections of this guide, starting with [Containerize React.js application](containerize.md).
+Complete all the previous sections of this guide, starting with [Containerize an Angular application](containerize.md).
 
 You must also have:
 - A [GitHub](https://github.com/signup) account.
@@ -19,9 +19,9 @@ You must also have:
 
 ## Overview
 
-In this section, you'll set up a **CI/CD pipeline** using [GitHub Actions](https://docs.github.com/en/actions) to automatically:
+In this section, you'll set up a CI/CD pipeline using [GitHub Actions](https://docs.github.com/en/actions) to automatically:
 
-- Build your React.js application inside a Docker container.
+- Build your Angular application inside a Docker container.
 - Run tests in a consistent environment.
 - Push the production-ready image to [Docker Hub](https://hub.docker.com).
 
@@ -31,20 +31,20 @@ In this section, you'll set up a **CI/CD pipeline** using [GitHub Actions](https
 
 To enable GitHub Actions to build and push Docker images, you’ll securely store your Docker Hub credentials in your new GitHub repository.
 
-### Step 1: Connect your GitHub repository to Docker Hub
+### Step 1: Generate Docker Hub Credentials and Set GitHub Secrets"
 
 1. Create a Personal Access Token (PAT) from [Docker Hub](https://hub.docker.com)
    1. Go to your **Docker Hub account → Account Settings → Security**.
    2. Generate a new Access Token with **Read/Write** permissions.
-   3. Name it something like `docker-reactjs-sample`.
+   3. Name it something like `docker-angular-sample`.
    4. Copy and save the token — you’ll need it in Step 4.
 
 2. Create a repository in [Docker Hub](https://hub.docker.com/repositories/)
    1. Go to your **Docker Hub account → Create a repository**.
-   2. For the Repository Name, use something descriptive — for example: `reactjs-sample`.
+   2. For the Repository Name, use something descriptive — for example: `angular-sample`.
    3. Once created, copy and save the repository name — you’ll need it in Step 4.
 
-3. Create a new [GitHub repository](https://github.com/new) for your React.js project
+3. Create a new [GitHub repository](https://github.com/new) for your Angular project
 
 4. Add Docker Hub credentials as GitHub repository secrets
 
@@ -61,11 +61,11 @@ To enable GitHub Actions to build and push Docker images, you’ll securely stor
    | `DOCKERHUB_TOKEN` | Your Docker Hub access token (created in Step 1)   |
    | `DOCKERHUB_PROJECT_NAME` | Your Docker Project Name (created in Step 2)   |
 
-   These secrets let GitHub Actions to authenticate securely with Docker Hub during automated workflows.
+   These secrets allow GitHub Actions to authenticate securely with Docker Hub during automated workflows.
 
 5. Connect Your Local Project to GitHub
 
-   Link your local project `docker-reactjs-sample` to the GitHub repository you just created by running the following command from your project root:
+   Link your local project `docker-angular-sample` to the GitHub repository you just created by running the following command from your project root:
 
    ```console
       $ git remote set-url origin https://github.com/{your-username}/{your-repository-name}.git
@@ -89,7 +89,7 @@ To enable GitHub Actions to build and push Docker images, you’ll securely stor
 
    This confirms that your local repository is properly linked and ready to push your source code to GitHub.
 
-6. Push Your Source Code to GitHub
+6. Push your source code to GitHub
 
    Follow these steps to commit and push your local project to your GitHub repository:
 
@@ -101,7 +101,7 @@ To enable GitHub Actions to build and push Docker images, you’ll securely stor
       This command stages all changes — including new, modified, and deleted files — preparing them for commit.
 
 
-   2. Commit your changes.
+   2. Commit the staged changes with a descriptive message.
 
       ```console
       $ git commit -m "Initial commit"
@@ -141,7 +141,7 @@ Now you'll create a GitHub Actions workflow that builds your Docker image, runs 
 3. Add the following workflow configuration to the new file:
 
 ```yaml
-name: CI/CD – React.js Application with Docker
+name: CI/CD – Angular Application with Docker
 
 on:
   push:
@@ -152,7 +152,7 @@ on:
 
 jobs:
   build-test-push:
-    name: Build, Test and Push Docker Image
+    name: Build, Test, and Push Docker Image
     runs-on: ubuntu-latest
 
     steps:
@@ -160,7 +160,7 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Fetches full history for better caching/context
+          fetch-depth: 0
 
       # 2. Set up Docker Buildx
       - name: Set up Docker Buildx
@@ -172,7 +172,8 @@ jobs:
         with:
           path: /tmp/.buildx-cache
           key: ${{ runner.os }}-buildx-${{ github.sha }}
-          restore-keys: ${{ runner.os }}-buildx-
+          restore-keys: |
+            ${{ runner.os }}-buildx-
 
       # 4. Cache npm dependencies
       - name: Cache npm dependencies
@@ -180,7 +181,8 @@ jobs:
         with:
           path: ~/.npm
           key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: ${{ runner.os }}-npm-
+          restore-keys: |
+            ${{ runner.os }}-npm-
 
       # 5. Extract metadata
       - name: Extract metadata
@@ -196,31 +198,31 @@ jobs:
           context: .
           file: Dockerfile.dev
           tags: ${{ steps.meta.outputs.REPO_NAME }}-dev:latest
-          load: true # Load to local Docker daemon for testing
+          load: true
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache,mode=max
 
-      # 7. Run Vitest tests
-      - name: Run Vitest tests and generate report
+      # 7. Run Angular tests with Jasmine
+      - name: Run Angular Jasmine tests inside container
         run: |
           docker run --rm \
             --workdir /app \
             --entrypoint "" \
             ${{ steps.meta.outputs.REPO_NAME }}-dev:latest \
-            sh -c "npm ci && npx vitest run --reporter=verbose"
+            sh -c "npm ci && npm run test -- --ci --runInBand"
         env:
           CI: true
           NODE_ENV: test
         timeout-minutes: 10
 
-      # 8. Login to Docker Hub
+      # 8. Log in to Docker Hub
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # 9. Build and push prod image
+      # 9. Build and push production image
       - name: Build and push production image
         uses: docker/build-push-action@v6
         with:
@@ -234,7 +236,7 @@ jobs:
           cache-from: type=local,src=/tmp/.buildx-cache
 ```
 
-This workflow performs the following tasks for your React.js application:
+This workflow performs the following tasks for your Angular application:
 - Triggers on every `push` or `pull request` targeting the `main` branch.
 - Builds a development Docker image using `Dockerfile.dev`, optimized for testing.
 - Executes unit tests using Vitest inside a clean, containerized environment to ensure consistency.
@@ -255,14 +257,14 @@ After you've added your workflow file, it's time to trigger and observe the CI/C
 
 1. Commit and push your workflow file
 
-   Select "Commit changes…" in the GitHub editor.
+   - Select "Commit changes…" in the GitHub editor.
 
    - This push will automatically trigger the GitHub Actions pipeline.
 
 2. Monitor the workflow execution
 
-   1. Go to the Actions tab in your GitHub repository.
-   2. Click into the workflow run to follow each step: **build**, **test**, and (if successful) **push**.
+   - Go to the Actions tab in your GitHub repository.
+   - Click into the workflow run to follow each step: **build**, **test**, and (if successful) **push**.
 
 3. Verify the Docker image on Docker Hub
 
@@ -287,20 +289,20 @@ After you've added your workflow file, it's time to trigger and observe the CI/C
 
 ## Summary
 
-In this section, you set up a complete CI/CD pipeline for your containerized React.js application using GitHub Actions.
+In this section, you set up a complete CI/CD pipeline for your containerized Angular application using GitHub Actions.
 
 Here's what you accomplished:
 
 - Created a new GitHub repository specifically for your project.
 - Generated a secure Docker Hub access token and added it to GitHub as a secret.
-- Defined a GitHub Actions workflow to:
+- Defined a GitHub Actions workflow that:
    - Build your application inside a Docker container.
    - Run tests in a consistent, containerized environment.
    - Push a production-ready image to Docker Hub if tests pass.
 - Triggered and verified the workflow execution through GitHub Actions.
 - Confirmed that your image was successfully published to Docker Hub.
 
-With this setup, your React.js application is now ready for automated testing and deployment across environments — increasing confidence, consistency, and team productivity.
+With this setup, your Angular application is now ready for automated testing and deployment across environments — increasing confidence, consistency, and team productivity.
 
 ---
 
@@ -318,4 +320,4 @@ Deepen your understanding of automation and best practices for containerized app
 
 ## Next steps
 
-Next, learn how you can locally test and debug your React.js workloads on Kubernetes before deploying. This helps you ensure your application behaves as expected in a production-like environment, reducing surprises during deployment.
+Next, learn how you can locally test and debug your Angular workloads on Kubernetes before deploying. This helps you ensure your application behaves as expected in a production-like environment, reducing surprises during deployment.
