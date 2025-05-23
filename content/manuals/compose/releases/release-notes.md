@@ -21,7 +21,7 @@ For more detailed information, see the [release notes in the Compose repo](https
 
 - Fixed an issue with random port allocation
 - Fixed an issue recreating containers when not needed during inner loop
-- Fixed a problem during `up --build` wiht `additional_context`
+- Fixed a problem during `up --build` with `additional_context`
 
 ### Update
 
