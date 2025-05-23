@@ -8,7 +8,7 @@ params:
     group: AI
 weight: 20
 description: Learn how to use Docker Model Runner to manage and run AI models.
-keywords: Docker, ai, model runner, docker deskotp, llm
+keywords: Docker, ai, model runner, docker desktop, docker engine, llm
 aliases:
   - /desktop/features/model-runner/
   - /ai/model-runner/
@@ -32,6 +32,8 @@ Models are pulled from Docker Hub the first time they're used and stored locally
 
 ## Enable Docker Model Runner
 
+### Enable DMR in Docker Desktop
+
 1. Navigate to the **Features in development** tab in settings.
 2. Under the **Experimental features** tab, select **Access experimental features**.
 3. Select **Apply and restart**.
@@ -41,6 +43,37 @@ Models are pulled from Docker Hub the first time they're used and stored locally
 7. From the **Beta** tab, check the **Enable Docker Model Runner** setting.
 
 You can now use the `docker model` command in the CLI and view and interact with your local models in the **Models** tab in the Docker Desktop Dashboard.
+
+### Enable DMR in Docker Engine
+
+1. Ensure you have installed [Docker Engine](/engine/install/).
+2. DMR is available as a package. To install it, run:
+
+   {{< tabs >}}
+   {{< tab name="Ubuntu/Debian">}}
+
+   ```console
+   $ sudo apt-get update
+   $ sudo apt-get install docker-model-plugin
+   ```
+
+   {{< /tab >}}
+   {{< tab name="RPM-base distributions">}}
+
+   ```console
+   $ sudo dnf update
+   $ sudo dnf install docker-model-plugin
+   ```
+
+   {{< /tab >}}
+   {{< /tabs >}}
+
+3. Test the installation:
+
+   ```console
+   $ docker model version
+   $ docker model run ai/smollm2
+   ```
 
 ## Available commands
 
@@ -105,7 +138,7 @@ You can also pull GGUF models directly from [Hugging Face](https://huggingface.c
 $ docker model pull hf.co/<model-you-want-to-pull>
 ```
 
-For example: 
+For example:
 
 ```console
 $ docker model pull hf.co/bartowski/Llama-3.2-1B-Instruct-GGUF
@@ -390,7 +423,7 @@ Once linked, re-run the command.
 
 ### No safeguard for running oversized models
 
-Currently, Docker Model Runner doesn't include safeguards to prevent you from launching models that exceed their system's available resources. Attempting to run a model that is too large for the host machine may result in severe slowdowns or render the system temporarily unusable. This issue is particularly common when running LLMs models without sufficient GPU memory or system RAM.
+Currently, Docker Model Runner doesn't include safeguards to prevent you from launching models that exceed your system’s available resources. Attempting to run a model that is too large for the host machine may result in severe slowdowns or render the system temporarily unusable. This issue is particularly common when running LLMs models without sufficient GPU memory or system RAM.
 
 ### No consistent digest support in Model CLI
 
