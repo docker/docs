@@ -15,6 +15,22 @@ For more detailed information, see the [release notes in the Compose repo](https
 
 ## 2.36.1
 
+{{< release-date date="2025-05-23" >}}
+
+### Bug fixes and enhancements
+
+- Fixed an issue with random port allocation
+- Fixed an issue recreating containers when not needed during inner loop
+- Fixed a problem during `up --build` wiht `additional_context`
+
+### Update
+
+- Dependencies upgrade: bump compose-go to v2.6.4
+- Dependencies upgrade: bump buildx to v0.24.0
+- Dependencies upgrade: bump buildkit to v0.22.0
+
+## 2.36.1
+
 {{< release-date date="2025-05-19" >}}
 
 ### Bug fixes and enhancements
