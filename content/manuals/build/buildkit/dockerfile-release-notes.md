@@ -13,6 +13,35 @@ issues, and bug fixes in [Dockerfile reference](/reference/dockerfile.md).
 
 For usage, see the [Dockerfile frontend syntax](frontend.md) page.
 
+## 1.16.0
+
+{{< release-date date="2025-05-22" >}}
+
+The full release note for this release is available
+[on GitHub](https://github.com/moby/buildkit/releases/tag/dockerfile%2F1.16.0).
+
+```dockerfile
+# syntax=docker/dockerfile:1.16.0
+```
+
+* `ADD --checksum` support for Git URL. [moby/buildkit#5975](https://github.com/moby/buildkit/pull/5975)
+* Allow whitespace in heredocs. [moby/buildkit#5817](https://github.com/moby/buildkit/pull/5817)
+* `WORKDIR` now supports `SOURCE_DATE_EPOCH`. [moby/buildkit#5960](https://github.com/moby/buildkit/pull/5960)
+* Leave default PATH environment variable set by the base image for WCOW. [moby/buildkit#5895](https://github.com/moby/buildkit/pull/5895)
+
+## 1.15.1
+
+{{< release-date date="2025-03-30" >}}
+
+The full release note for this release is available
+[on GitHub](https://github.com/moby/buildkit/releases/tag/dockerfile%2F1.15.1).
+
+```dockerfile
+# syntax=docker/dockerfile:1.15.1
+```
+
+* Fix `no scan targets for linux/arm64/v8` when `--attest type=sbom` is used. [moby/buildkit#5941](https://github.com/moby/buildkit/pull/5941)
+
 ## 1.15.0
 
 {{< release-date date="2025-04-15" >}}
