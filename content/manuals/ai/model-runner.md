@@ -72,6 +72,7 @@ You can now use the `docker model` command in the CLI and view and interact with
 
    ```console
    $ docker model version
+   $ docker model run ai/smollm2
    ```
 
 ## Available commands
