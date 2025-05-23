@@ -296,7 +296,9 @@
   - /go/hub-pull-limits/
 
 # Desktop DMR
-
 "/model-runner/":
   - /go/model-runner/
   
+# Desktop MCP Toolkit
+"/mcp-toolkit/":
+  - /go/mcp-toolkit/
