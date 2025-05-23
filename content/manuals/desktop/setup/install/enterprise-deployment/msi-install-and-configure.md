@@ -72,37 +72,43 @@ Non-interactive installations are silent and any additional configuration must b
 >
 > Admin rights are required to run any of the following commands.
 
-#### Installing interactively with verbose logging
+#### Install interactively with verbose logging
 
 ```powershell
 msiexec /i "DockerDesktop.msi" /L*V ".\msi.log"
 ```
 
-#### Installing interactively without verbose logging
+#### Install interactively without verbose logging
 
 ```powershell
 msiexec /i "DockerDesktop.msi"
 ```
 
-#### Installing non-interactively with verbose logging
+#### Install non-interactively with verbose logging
 
 ```powershell
 msiexec /i "DockerDesktop.msi" /L*V ".\msi.log" /quiet
 ```
 
-#### Installing non-interactively and suppressing reboots
+#### Install non-interactively and suppressing reboots
 
 ```powershell
 msiexec /i "DockerDesktop.msi" /L*V ".\msi.log" /quiet /norestart
 ```
 
-#### Installing non-interactively with admin settings
+#### Install non-interactively with admin settings
 
 ```powershell
 msiexec /i "DockerDesktop.msi" /L*V ".\msi.log" /quiet /norestart ADMINSETTINGS="{"configurationFileVersion":2,"enhancedContainerIsolation":{"value":true,"locked":false}}" ALLOWEDORG="docker"
 ```
 
-#### Installing with the passive display option
+#### Install interactively and allow users to switch to Windows containers without admin rights
+
+```powershell
+msiexec /i "DockerDesktop.msi" /L*V ".\msi.log" /quiet /norestart ALLOWEDORG="docker" ALWAYSRUNSERVICE=1
+```
+
+#### Install with the passive display option
 
 You can use the `/passive` display option instead of `/quiet` when you want to perform a non-interactive installation but show a progress dialog.
 
@@ -150,25 +156,25 @@ IdentifyingNumber                      Name
 msiexec /x {10FC87E2-9145-4D7D-B493-2E99E8D8E103} /L*V ".\msi.log" /quiet
 ```
 
-#### Uninstalling interactively with verbose logging
+#### Uninstall interactively with verbose logging
 
 ```powershell
 msiexec /x "DockerDesktop.msi" /L*V ".\msi.log"
 ```
 
-#### Uninstalling interactively without verbose logging
+#### Uninstall interactively without verbose logging
 
 ```powershell
 msiexec /x "DockerDesktop.msi"
 ```
 
-#### Uninstalling non-interactively with verbose logging
+#### Uninstall non-interactively with verbose logging
 
 ```powershell
 msiexec /x "DockerDesktop.msi" /L*V ".\msi.log" /quiet
 ```
 
-#### Uninstalling non-interactively without verbose logging
+#### Uninstall non-interactively without verbose logging
 
 ```powershell
 msiexec /x "DockerDesktop.msi" /quiet
