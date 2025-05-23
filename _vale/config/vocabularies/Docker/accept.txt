@@ -87,6 +87,7 @@ PKG
 Postgres
 PowerShell
 Python
+Qualcomm
 Ryuk
 S3
 Slack
