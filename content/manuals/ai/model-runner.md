@@ -32,6 +32,8 @@ Models are pulled from Docker Hub the first time they're used and stored locally
 
 ## Enable Docker Model Runner
 
+### Enable DMR in Docker Desktop
+
 1. Navigate to the **Features in development** tab in settings.
 2. Under the **Experimental features** tab, select **Access experimental features**.
 3. Select **Apply and restart**.
@@ -41,6 +43,15 @@ Models are pulled from Docker Hub the first time they're used and stored locally
 7. From the **Beta** tab, check the **Enable Docker Model Runner** setting.
 
 You can now use the `docker model` command in the CLI and view and interact with your local models in the **Models** tab in the Docker Desktop Dashboard.
+
+### Enable DMR in Docker Engine
+
+1. Ensure you have installed [Docker Engine](/engine/install/).
+2. DMR is available as a package. To install it, run:
+
+   ```console
+   apt install docker-model-plugin
+   ```
 
 ## Available commands
 

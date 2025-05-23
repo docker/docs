@@ -1,6 +1,6 @@
 <nav id="breadcrumbs"
   {{- $breadcrumbTitles := slice }}
-  data-pagefind-ignore class="gap-4 flex items-center text-gray-light dark:text-gray-dark min-w-0">
+  data-pagefind-ignore class="gap-3 flex items-center text-gray-light dark:text-gray-dark min-w-0 mb-4">
   {{ range .Ancestors.Reverse }}
     {{ $breadcrumbTitles = $breadcrumbTitles | append .LinkTitle }}
     <a href="{{ .Permalink }}" class="link truncate">{{ markdownify .LinkTitle }}</a>

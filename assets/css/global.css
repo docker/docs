@@ -1,89 +1,91 @@
 /* global styles */
 
-@layer base {
-  [x-cloak=""] {
+[x-cloak=""] {
+  display: none !important;
+}
+/* alpine cloak for small screens only */
+[x-cloak="sm"] {
+  @media (width <= 768px) {
     display: none !important;
-  }
-  /* alpine cloak for small screens only */
-  [x-cloak="sm"] {
-    @media (width <= 768px) {
-      display: none !important;
-    }
-  }
-
-  :root {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-
-    scrollbar-color: theme(colors.gray.light.400) theme(colors.black / 0.05);
-    &.dark {
-      scrollbar-color: theme(colors.gray.dark.800) theme(colors.white / 0.10);
-    }
-  }
-
-  mark {
-    @apply bg-transparent font-bold text-blue-light dark:text-blue-dark;
-  }
-
-  /* Hide the clear (X) button for search inputs */
-  /* Chrome, Safari, Edge, and Opera */
-  input[type="search"]::-webkit-search-cancel-button {
-    -webkit-appearance: none;
-    appearance: none;
-  }
-  
-  /* Firefox */
-  input[type="search"]::-moz-search-cancel-button {
-    display: none;
-  }
-  
-  /* Internet Explorer and Edge (legacy) */
-  input[type="search"]::-ms-clear {
-    display: none;
   }
 }
 
-/* utility classes */
+:root {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 
-@layer utilities {
-  .link {
-    @apply text-blue-light underline underline-offset-2 dark:text-blue-dark;
+  scrollbar-color: theme(colors.gray.light.400) theme(colors.black / 0.05);
+  &.dark {
+    scrollbar-color: theme(colors.gray.dark.800) theme(colors.white / 0.1);
   }
+}
 
-  .invertible {
-    @apply dark:hue-rotate-180 dark:invert dark:filter;
-  }
+mark {
+  @apply text-blue-light dark:text-blue-dark bg-transparent font-bold;
+}
 
-  .bg-pattern-blue {
-    background-color: theme(colors.white / 50%);
-    background-image: url('/assets/images/bg-pattern-blue.webp');
-    background-blend-mode: overlay;
-    background-size: cover;
-    background-repeat: none;
-    .dark & {
-      background-color: theme(colors.black / 70%);
+/* Hide the clear (X) button for search inputs */
+/* Chrome, Safari, Edge, and Opera */
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Firefox */
+input[type="search"]::-moz-search-cancel-button {
+  display: none;
+}
+
+/* Internet Explorer and Edge (legacy) */
+input[type="search"]::-ms-clear {
+  display: none;
+}
+
+.prose {
+  li {
+    @apply my-2;
+    > :last-child,
+    > :first-child {
+      margin: 0;
     }
   }
-
-  .bg-pattern-purple {
-    background-color: theme(colors.white / 50%);
-    background-image: url('/assets/images/bg-pattern-purple.webp');
-    background-blend-mode: overlay;
-    background-size: cover;
-    background-repeat: none;
-    .dark & {
-      background-color: theme(colors.black / 70%);
+  hr {
+    @apply mt-8 mb-4;
+  }
+  > h1 {
+    @apply mt-3! mb-5! text-4xl!;
+  }
+  > h2 {
+    @apply mt-5! mb-3! text-3xl!;
+    a {
+      @apply hover:no-underline!;
     }
   }
-
-  .bg-pattern-verde {
-    background-color: theme(colors.white / 50%);
-    background-image: url('/assets/images/bg-pattern-verde.webp');
-    background-blend-mode: overlay;
-    background-size: cover;
-    background-repeat: none;
-    .dark & {
-      background-color: theme(colors.black / 70%);
+  > h3 {
+    @apply text-2xl!;
+    a {
+      @apply hover:no-underline!;
     }
+  }
+  > h4 {
+    a {
+      @apply hover:no-underline!;
+    }
+  }
+  > h5 {
+    a {
+      @apply hover:no-underline!;
+    }
+  }
+  ol {
+    list-style-type: decimal;
+  }
+
+  ol ol {
+    list-style-type: lower-alpha;
+  }
+
+  ol ol ol {
+    list-style-type: lower-roman;
   }
 }

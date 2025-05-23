@@ -1,0 +1,212 @@
+@utility icon-svg {
+  svg {
+    font-size: 24px;
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    fill: currentColor;
+  }
+}
+
+@utility icon-xs {
+  svg {
+    font-size: 12px;
+  }
+}
+
+@utility icon-sm {
+  svg {
+    font-size: 16px;
+  }
+}
+
+@utility icon-lg {
+  svg {
+    font-size: 32px;
+  }
+}
+
+@utility text-primary-blue {
+  color: var(--color-primary-blue);
+}
+
+@utility link {
+  @apply text-primary-blue dark:text-blue-dark no-underline;
+  font-weight: inherit;
+  &:hover {
+    @apply underline underline-offset-3;
+  }
+}
+
+@utility invertible {
+  @apply dark:hue-rotate-180 dark:invert dark:filter;
+}
+
+@utility bg-pattern-blue {
+  background-color: theme(colors.white / 50%);
+  background-image: url("/assets/images/bg-pattern-blue.webp");
+  background-blend-mode: overlay;
+  background-size: cover;
+  background-repeat: none;
+  .dark & {
+    background-color: theme(colors.black / 70%);
+  }
+}
+
+@utility bg-pattern-purple {
+  background-color: theme(colors.white / 50%);
+  background-image: url("/assets/images/bg-pattern-purple.webp");
+  background-blend-mode: overlay;
+  background-size: cover;
+  background-repeat: none;
+  .dark & {
+    background-color: theme(colors.black / 70%);
+  }
+}
+
+@utility bg-background-toc{
+  background-color: var(--navbar-bg-light);
+  .dark & {
+    background-color: var(--navbar-bg-dark);
+  }
+}
+
+@utility bg-pattern-verde {
+  background-color: theme(colors.white / 50%);
+  background-image: url("/assets/images/bg-pattern-verde.webp");
+  background-blend-mode: overlay;
+  background-size: cover;
+  background-repeat: none;
+  .dark & {
+    background-color: theme(colors.black / 70%);
+  }
+}
+
+@utility icon-svg {
+  svg {
+    font-size: 24px;
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    fill: currentColor;
+  }
+}
+
+@utility icon-xs {
+  svg {
+    font-size: 12px;
+  }
+}
+
+@utility icon-sm {
+  svg {
+    font-size: 16px;
+  }
+}
+
+@utility icon-lg {
+  svg {
+    font-size: 32px;
+  }
+}
+
+@utility navbar-font{
+  font-size: var(--navbar-font-size);
+  @apply text-[var(--navbar-text-color-light)];
+  .dark & {
+    @apply text-[var(--navbar-text-color-dark)];
+  }
+}
+
+@utility navbar-group-font{
+  font-size: var(--navbar-group-font-size);
+  @apply font-semibold uppercase;
+  @apply text-[var(--navbar-group-text-color-light)];
+  .dark & {
+    @apply text-[var(--navbar-group-text-color-dark)];
+  }
+}
+
+@utility prose {
+  .highlight,
+  :not(pre) > code {
+    font-size: 0.875em;
+    border: 1px solid;
+    border-radius: theme("spacing.1");
+    background: theme("colors.white");
+    border-color: theme("colors.gray.light.300");
+    .dark & {
+      background: theme("colors.gray.dark.200");
+      border-color: theme("colors.gray.dark.300");
+    }
+    &::before,
+    &::after {
+      content: none !important;
+    }
+  }
+
+  :not(pre) > code {
+    background: theme("colors.gray.light.200");
+    display: inline-block;
+    margin: 0;
+    font-weight: 400;
+    overflow-wrap: anywhere;
+    padding: 0 4px;
+  }
+
+  table:not(.lntable) code {
+    overflow-wrap: unset;
+    white-space: nowrap;
+  }
+
+  /* Indented code blocks */
+  pre:not(.chroma) {
+    @apply my-4 overflow-x-auto p-3;
+    font-size: 0.875em;
+    border: 1px solid;
+    border-radius: theme("spacing.1");
+    background: theme("colors.white");
+    border-color: theme("colors.gray.light.300");
+    .dark & {
+      background: theme("colors.gray.dark.200");
+      border-color: theme("colors.gray.dark.300");
+    }
+  }
+
+  .highlight {
+    @apply my-4 overflow-x-auto p-3;
+
+    /* LineTableTD */
+    .lntd {
+      vertical-align: top;
+      padding: 0;
+      margin: 0;
+      font-weight: 400;
+      padding: 0 4px;
+      &:first-child {
+        width: 0;
+      }
+    }
+
+    /* LineTableTD */
+    .lntd {
+      vertical-align: top;
+      padding: 0;
+      margin: 0;
+      border: 0;
+    }
+    /* LineTable */
+    .lntable {
+      display: table;
+      width: 100%;
+      border-spacing: 0;
+      padding: 0;
+      margin: 0;
+      border: 0;
+      /* LineNumberColumnHighlight */
+      .lntd:first-child .hl {
+        display: block;
+      }
+    }
+  }
+}

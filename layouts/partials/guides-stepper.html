@@ -1,7 +1,7 @@
-{{/*- Multi-page guide: render a progress bar -*/}}
-<div class="flex flex-col my-4 items-start text-sm">
+{{/* - Multi-page guide: render a progress bar - */}}
+<div class="my-4 flex flex-col items-start text-sm">
   {{ $totalPages := len .CurrentSection.Pages }}
-  {{/*- initialize the page store
+  {{/* - initialize the page store
 
     $stepper_seen controls the color of the item in the stepper
 
@@ -13,14 +13,15 @@
     default to true if kind = section
     (make all entries gray)
 
-  -*/}}
+    -
+  */}}
   {{ page.Store.Set "stepper_seen" .IsSection }}
-  {{/*- Loop over the pages in this guide -*/}}
+  {{/* - Loop over the pages in this guide - */}}
   {{ range $i, $e := .CurrentSection.Pages }}
     {{ $isLast := eq (add $i 1) $totalPages }}
     <div class="flex">
       <div class="flex flex-col items-center">
-        {{/*- Render the page's index digit (1,2,3,4 etc) -*/}}
+        {{/* - Render the page's index digit (1,2,3,4 etc) - */}}
         <a
           href="{{ .Permalink }}"
           class="{{ if (page.Store.Get "stepper_seen") }}
@@ -34,7 +35,7 @@
         >
           {{ add $i 1 }}
         </a>
-        {{/*- Render the vertical border -*/}}
+        {{/* - Render the vertical border - */}}
         {{ if not $isLast }}
           <div
             class="{{ if (page.Store.Get "stepper_seen") }}
@@ -47,8 +48,8 @@
           ></div>
         {{ end }}
       </div>
-      {{/*- Render the page's title -*/}}
-      <div class="ml-2 flex self-start h-8 items-center">
+      {{/* - Render the page's title - */}}
+      <div class="ml-2 flex h-8 items-center self-start">
         <a href="{{ .Permalink }}">
           {{ .LinkTitle }}
         </a>

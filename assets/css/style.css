@@ -1,0 +1,58 @@
+/* Main CSS entry point */
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@source "hugo_stats.json";
+
+@font-face {
+  font-family: "Roboto Flex";
+  src: url("/assets/fonts/RobotoFlex.woff2") format("woff2");
+  font-weight: 100 1000; /* Range of weights Roboto Flex supports */
+  font-stretch: 100%; /* Range of width Roboto Flex supports */
+  font-style: oblique 0deg 10deg; /* Range of oblique angle Roboto Flex supports */
+  font-display: fallback;
+}
+
+/* Roboto Mono */
+@font-face {
+  font-family: "Roboto Mono";
+  src: url("/assets/fonts/RobotoMono-Regular.woff2") format("woff2");
+  font-weight: 100 700; /* Define the range of weight the variable font supports */
+  font-style: normal;
+  font-display: fallback;
+}
+
+/* Roboto Mono Italic */
+@font-face {
+  font-family: "Roboto Mono";
+  src: url("/assets/fonts/RobotoMono-Italic.woff2") format("woff2");
+  font-weight: 100 700; /* Define the range of weight the variable font supports */
+  font-style: italic;
+  font-display: fallback;
+}
+
+@layer theme {
+  @import "theme.css";
+}
+
+@layer base {
+  @import "global.css";
+}
+@import "utilities.css";
+@import "syntax-dark.css";
+@import "syntax-light.css";
+@import "components.css";
+
+@variant dark (&:where(.dark, .dark *));
+
+#TableOfContents {
+  .toc a {
+    @apply block max-w-full truncate py-1 pl-2 hover:font-medium hover:no-underline;
+    &[aria-current="true"],
+    &:hover {
+      @apply border-l-gray-light from-gray-light-100 dark:border-l-gray-dark dark:from-gray-dark-200 border-l-2 bg-gradient-to-r font-medium text-black dark:text-white;
+    }
+    &:not([aria-current="true"]) {
+      @apply text-gray-light-600 dark:text-gray-dark-700 hover:text-black dark:hover:text-white;
+    }
+  }
+}

@@ -8,10 +8,11 @@
 -}}
 
 {{- if not (isset $colors .color) -}}
-{{- errorf "[badge] wrong color name: '%s' - supported values: amber, blue, green, red, violet" .color -}}h
+  {{- errorf "[badge] wrong color name: '%s' - supported values: amber, blue, green, red, violet" .color -}}h
 {{- end -}}
 
+
 <span
-  class="not-prose px-1 rounded-sm {{ index $colors .color }} text-white text-xs"
+  class="not-prose {{ index $colors .color }} rounded-sm px-1 text-xs text-white"
   >{{ .content }}</span
 >

@@ -1,6 +1,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 {{ partial "meta.html" . }}
+{{ partial "utils/css.html" "-" }}
 {{- if hugo.IsProduction -}}
   <script
     src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"
@@ -8,13 +9,14 @@
     charset="UTF-8"
     data-domain-script="{{ site.Params.analytics.onetrust }}"
   ></script>
-  <script type="text/javascript">function OptanonWrapper() {}</script>
+  <script type="text/javascript">
+    function OptanonWrapper() {}
+  </script>
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
   j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','{{ site.Params.analytics.google }}');</script>
-  <script>
+  })(window,document,'script','dataLayer','{{ site.Params.analytics.google }}');</script>  <script>
   (function(h,o,t,j,a,r){
     h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
     h._hjSettings={hjid:{{ site.Params.analytics.hotjar.prod | safeJS }},hjsv:6};
@@ -50,30 +52,37 @@
   </script>
 {{ end }}
 {{/* kapa.ai widget */}}
-<script async src="https://widget.kapa.ai/kapa-widget.bundle.js"
-data-button-hide="true"
-data-font-family="Roboto Flex,sans-serif"
-data-modal-disclaimer-bg-color="#e5f2fc"
-data-modal-disclaimer-text-color="#086dd7"
-data-modal-disclaimer="This is a custom LLM for answering questions about Docker. Answers are based on the contents of the documentation. Rate the answers to let us know what you think!"
-data-kapa-branding-text="powered by [kapa.ai](https://www.kapa.ai) and Docker"
-data-modal-header-bg-color="#1d63ed"
-data-modal-image-height="25px"
-data-modal-image-width="181px"
-data-modal-title="​"
-data-modal-override-open-class="open-kapa-widget"
-data-modal-ask-ai-input-placeholder="Ask me a question about Docker…"
-data-modal-title-color="#fff"
-data-project-color="#1d63ed"
-data-project-logo="/assets/images/logo-icon-white.svg"
-data-project-name="Docker"
-data-user-analytics-fingerprint-enabled="true"
-data-bot-protection-mechanism="hcaptcha"
-data-website-id="{{ site.Params.kapa.id }}"
+<script
+  async
+  src="https://widget.kapa.ai/kapa-widget.bundle.js"
+  data-button-hide="true"
+  data-font-family="Roboto Flex,sans-serif"
+  data-modal-disclaimer-bg-color="#e5f2fc"
+  data-modal-disclaimer-text-color="#086dd7"
+  data-modal-disclaimer="This is a custom LLM for answering questions about Docker. Answers are based on the contents of the documentation. Rate the answers to let us know what you think!"
+  data-kapa-branding-text="powered by [kapa.ai](https://www.kapa.ai) and Docker"
+  data-modal-header-bg-color="#1d63ed"
+  data-modal-image-height="25px"
+  data-modal-image-width="181px"
+  data-modal-title="​"
+  data-modal-override-open-class="open-kapa-widget"
+  data-modal-ask-ai-input-placeholder="Ask me a question about Docker…"
+  data-modal-title-color="#fff"
+  data-project-color="#1d63ed"
+  data-project-logo="/assets/images/logo-icon-white.svg"
+  data-project-name="Docker"
+  data-user-analytics-fingerprint-enabled="true"
+  data-bot-protection-mechanism="hcaptcha"
+  data-website-id="{{ site.Params.kapa.id }}"
 ></script>
 {{/* preload Roboto Flex as it's a critical font: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel/preload */}}
-<link href="/assets/fonts/RobotoFlex.woff2" rel="preload" as="font" type="font/woff2" crossorigin />
-{{ partialCached "utils/css.html" "-" }}
+<link
+  href="/assets/fonts/RobotoFlex.woff2"
+  rel="preload"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/>
 {{ $theme := resources.Get "js/theme.js" | js.Build (dict "minify" true) }}
 <script>{{ $theme.Content | safeJS }}</script>
 {{ $js := resources.Match "js/src/**.js"

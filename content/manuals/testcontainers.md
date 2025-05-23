@@ -18,11 +18,11 @@ intro:
 quickstart:
 - title: Testcontainers for Go
   description: A Go package that makes it simple to create and clean up container-based dependencies for automated integration/smoke tests.
-  icon: /assets/icons/go.svg
+  icon: /icons/go.svg
   link: https://golang.testcontainers.org/quickstart/
 - title: Testcontainers for Java
   description: A Java library that supports JUnit tests, providing lightweight, throwaway instances of anything that can run in a Docker container.
-  icon: /assets/icons/java.svg
+  icon: /icons/java.svg
   link: https://java.testcontainers.org/
 ---
 
