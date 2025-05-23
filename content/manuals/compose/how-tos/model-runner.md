@@ -19,7 +19,7 @@ This lets you define and run AI-powered applications alongside your other servic
 
 - Docker Compose v2.35 or later
 - Docker Desktop 4.41 or later 
-- Docker Desktop for Mac with Apple Silicon or Docker Desktop for Windows with NVIDIA GPU
+- Docker Desktop for Mac with Apple Silicon or Docker Desktop for Windows with an NVIDIA GPU or a Qualcomm CPU/GPU
 - [Docker Model Runner enabled in Docker Desktop](/manuals/ai/model-runner.md#enable-docker-model-runner)
 
 ## Provider services
