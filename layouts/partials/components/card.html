@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card not-prose">
   {{ if .link }}
     <a href="{{ .link }}" class="card-link">
   {{ end }}
@@ -8,10 +8,14 @@
       {{ end }}
       {{ with .icon }}
       <div class="card-icon">
-        {{ if (in . "/") }}
+        {{ if (and (in . "/") (not (in . "svg"))) }} 
           <img class="card-img" src="{{ . }}" alt="">
+        {{ else if (in . "svg") }}
+          <span class="card-img svg">
+            {{ partial "utils/svg" . }}
+          </span>
         {{ else }}
-          <span class="card-img">
+          <span class="card-img svg">
             {{ partial "icon" . }}
           </span>
         {{ end }}

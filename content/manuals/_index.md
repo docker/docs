@@ -25,11 +25,11 @@ params:
     link: /engine/
   - title: Docker Compose
     description: Define and run multi-container applications.
-    icon: /assets/icons/Compose.svg
+    icon: /icons/Compose.svg
     link: /compose/
   - title: Testcontainers
     description: Run containers programmatically in your preferred programming language.
-    icon: /assets/icons/Testcontainers.svg
+    icon: /icons/Testcontainers.svg
     link: /testcontainers/
   ai:
   - title: Ask Gordon
@@ -43,11 +43,11 @@ params:
   products:
   - title: Docker Desktop
     description: Your command center for container development.
-    icon: /assets/icons/Whale.svg
+    icon: /icons/Whale.svg
     link: /desktop/
   - title: Build Cloud
     description: Build your images faster in the cloud.
-    icon: /assets/images/logo-build-cloud.svg
+    icon: /icons/logo-build-cloud.svg
     link: /build-cloud/
   - title: Docker Hub
     description: Discover, share, and integrate container images.
@@ -55,7 +55,7 @@ params:
     link: /docker-hub/
   - title: Docker Scout
     description: Image analysis and policy evaluation.
-    icon: /assets/icons/Scout.svg
+    icon: /icons/Scout.svg
     link: /scout/
   - title: Docker for GitHub Copilot
     description: Integrate Docker's capabilities with GitHub Copilot.
