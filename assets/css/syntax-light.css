@@ -1,11 +1,11 @@
 @utility syntax-light {
   /* Other */
   .x {
-    color: theme("colors.black");
+    color: var(--color-black-main);
   }
   /* Error */
   .err {
-    color: theme("colors.red.light.500");
+    color: var(--color-red-500);
   }
   /* CodeLine */
   .cl {
@@ -13,12 +13,12 @@
   /* LineHighlight */
   .hl {
     min-width: fit-content;
-    background-color: theme("colors.blue.light.100");
+    background-color: var(--color-blue-100);
   }
   .lntd:first-child .hl,
   & > .chroma > code > .hl {
     margin-left: -4px;
-    border-left: 4px solid theme("colors.blue.light.300");
+    border-left: 4px solid var(--color-blue-300);
   }
   /* LineNumbersTable */
   .lnt {
@@ -26,7 +26,7 @@
     user-select: none;
     margin-right: 0.4em;
     padding: 0 0.4em 0 0.4em;
-    color: theme("colors.gray.light.400");
+    color: var(--color-grey-400);
   }
   /* LineNumbers */
   .ln {
@@ -34,7 +34,7 @@
     user-select: none;
     margin-right: 0.4em;
     padding: 0 0.4em 0 0.4em;
-    color: theme("colors.gray.light.400");
+    color: var(--color-grey-400);
   }
   /* Line */
   .line {
@@ -42,143 +42,143 @@
   }
   /* Keyword */
   .k {
-    color: theme("colors.amber.light.500");
+    color: var(--color-yellow-500);
   }
   /* KeywordConstant */
   .kc {
-    color: theme("colors.violet.light.400");
+    color: var(--color-violet-400);
   }
   /* KeywordDeclaration */
   .kd {
-    color: theme("colors.amber.light.500");
+    color: var(--color-yellow-500);
   }
   /* KeywordNamespace */
   .kn {
-    color: theme("colors.amber.light.500");
+    color: var(--color-yellow-500);
   }
   /* KeywordPseudo */
   .kp {
-    color: theme("colors.amber.light.500");
+    color: var(--color-yellow-500);
   }
   /* KeywordReserved */
   .kr {
-    color: theme("colors.amber.light.500");
+    color: var(--color-yellow-500);
   }
   /* KeywordType */
   .kt {
-    color: theme("colors.amber.light.500");
+    color: var(--color-yellow-500);
   }
   /* Name */
   .n {
-    color: theme("colors.violet.light.400");
+    color: var(--color-violet-400);
   }
   /* NameAttribute */
   .na {
-    color: theme("colors.amber.light.500");
+    color: var(--color-yellow-500);
   }
   /* NameBuiltin */
   .nb {
-    color: theme("colors.amber.light.500");
+    color: var(--color-yellow-500);
   }
   /* NameBuiltinPseudo */
   .bp {
-    color: theme("colors.violet.light.400");
+    color: var(--color-violet-400);
   }
   /* NameClass */
   .nc {
-    color: theme("colors.black");
+    color: var(--color-black-main);
   }
   /* NameConstant */
   .no {
-    color: theme("colors.black");
+    color: var(--color-black-main);
   }
   /* NameDecorator */
   .nd {
-    color: theme("colors.violet.light.400");
+    color: var(--color-violet-400);
   }
   /* NameEntity */
   .ni {
-    color: theme("colors.amber.light.500");
+    color: var(--color-yellow-500);
   }
   /* NameException */
   .ne {
-    color: theme("colors.red.light.700");
+    color: var(--color-red-700);
   }
   /* NameFunction */
   .nf {
-    color: theme("colors.blue.light.600");
+    color: var(--color-blue-600);
   }
   /* NameFunctionMagic */
   .fm {
-    color: theme("colors.blue.light.600");
+    color: var(--color-blue-600);
   }
   /* NameLabel */
   .nl {
-    color: theme("colors.amber.light.700");
+    color: var(--color-yellow-700);
   }
   /* NameNamespace */
   .nn {
-    color: theme("colors.black");
+    color: var(--color-black-main);
   }
   /* NameOther */
   .nx {
-    color: theme("colors.black");
+    color: var(--color-black-main);
   }
   /* NameProperty */
   .py {
-    color: theme("colors.black");
+    color: var(--color-black-main);
   }
   /* NameTag */
   .nt {
-    color: theme("colors.green.light.600");
+    color: var(--color-green-600);
   }
   /* NameVariable */
   .nv {
-    color: theme("colors.black");
+    color: var(--color-black-main);
   }
   /* NameVariableClass */
   .vc {
-    color: theme("colors.violet.light.600");
+    color: var(--color-violet-600);
   }
   /* NameVariableGlobal */
   .vg {
-    color: theme("colors.violet.light.600");
+    color: var(--color-violet-600);
   }
   /* NameVariableInstance */
   .vi {
-    color: theme("colors.violet.light.600");
+    color: var(--color-violet-600);
   }
   /* NameVariableMagic */
   .vm {
-    color: theme("colors.violet.light.600");
+    color: var(--color-violet-600);
   }
   /* Literal */
   .l {
-    color: theme("colors.black");
+    color: var(--color-black-main);
   }
   /* LiteralDate */
   .ld {
-    color: theme("colors.black");
+    color: var(--color-black-main);
   }
   /* LiteralString */
   .s {
-    color: theme("colors.black");
+    color: var(--color-black-main);
   }
   /* LiteralStringAffix */
   .sa {
-    color: theme("colors.green.light.600");
+    color: var(--color-green-600);
   }
   /* LiteralStringBacktick */
   .sb {
-    color: theme("colors.green.light.600");
+    color: var(--color-green-600);
   }
   /* LiteralStringChar */
   .sc {
-    color: theme("colors.green.light.600");
+    color: var(--color-green-600);
   }
   /* LiteralStringDelimiter */
   .dl {
-    color: theme("colors.green.light.600");
+    color: var(--color-green-600);
   }
   /* LiteralStringDoc */
   .sd {
@@ -186,156 +186,156 @@
   }
   /* LiteralStringDouble */
   .s2 {
-    color: theme("colors.green.light.600");
+    color: var(--color-green-600);
   }
   /* LiteralStringEscape */
   .se {
-    color: theme("colors.black");
+    color: var(--color-black-main);
   }
   /* LiteralStringHeredoc */
   .sh {
-    color: theme("colors.green.light.600");
+    color: var(--color-green-600);
   }
   /* LiteralStringInterpol */
   .si {
-    color: theme("colors.green.light.600");
+    color: var(--color-green-600);
   }
   /* LiteralStringOther */
   .sx {
-    color: theme("colors.green.light.600");
+    color: var(--color-green-600);
   }
   /* LiteralStringRegex */
   .sr {
-    color: theme("colors.blue.light.500");
+    color: var(--color-blue-500);
   }
   /* LiteralStringSingle */
   .s1 {
-    color: theme("colors.green.light.600");
+    color: var(--color-green-600);
   }
   /* LiteralStringSymbol */
   .ss {
-    color: theme("colors.green.light.600");
+    color: var(--color-green-600);
   }
   /* LiteralNumber */
   .m {
-    color: theme("colors.blue.light.600");
+    color: var(--color-blue-600);
   }
   /* LiteralNumberBin */
   .mb {
-    color: theme("colors.blue.light.600");
+    color: var(--color-blue-600);
   }
   /* LiteralNumberFloat */
   .mf {
-    color: theme("colors.blue.light.600");
+    color: var(--color-blue-600);
   }
   /* LiteralNumberHex */
   .mh {
-    color: theme("colors.blue.light.600");
+    color: var(--color-blue-600);
   }
   /* LiteralNumberInteger */
   .mi {
-    color: theme("colors.blue.light.600");
+    color: var(--color-blue-600);
   }
   /* LiteralNumberIntegerLong */
   .il {
-    color: theme("colors.blue.light.600");
+    color: var(--color-blue-600);
   }
   /* LiteralNumberOct */
   .mo {
-    color: theme("colors.blue.light.600");
+    color: var(--color-blue-600);
   }
   /* Operator */
   .o {
-    color: theme("colors.blue.light.400");
+    color: var(--color-blue-400);
   }
   /* OperatorWord */
   .ow {
-    color: theme("colors.amber.light.500");
+    color: var(--color-yellow-500);
   }
   /* Punctuation */
   .p {
-    color: theme("colors.gray.light.400");
+    color: var(--color-grey-400);
   }
   /* Comment */
   .c {
-    color: theme("colors.gray.light.400");
+    color: var(--color-grey-400);
   }
   /* CommentHashbang */
   .ch {
-    color: theme("colors.gray.light.400");
+    color: var(--color-grey-400);
   }
   /* CommentMultiline */
   .cm {
-    color: theme("colors.gray.light.400");
+    color: var(--color-grey-400);
   }
   /* CommentSingle */
   .c1 {
-    color: theme("colors.gray.light.400");
+    color: var(--color-grey-400);
   }
   /* CommentSpecial */
   .cs {
-    color: theme("colors.gray.light.400");
+    color: var(--color-grey-400);
   }
   /* CommentPreproc */
   .cp {
-    color: theme("colors.gray.light.400");
+    color: var(--color-grey-400);
   }
   /* CommentPreprocFile */
   .cpf {
-    color: theme("colors.gray.light.400");
+    color: var(--color-grey-400);
   }
   /* Generic */
   .g {
-    color: theme("colors.black");
+    color: var(--color-black-main);
   }
   /* GenericDeleted */
   .gd {
-    color: theme("colors.red.light.500");
+    color: var(--color-red-500);
   }
   /* GenericEmph */
   .ge {
-    color: theme("colors.black");
+    color: var(--color-black-main);
   }
   /* GenericError */
   .gr {
-    color: theme("colors.red.light.500");
+    color: var(--color-red-500);
   }
   /* GenericHeading */
   .gh {
-    color: theme("colors.gray.light.600");
+    color: var(--color-grey-600);
   }
   /* GenericInserted */
   .gi {
-    color: theme("colors.green.light.500");
+    color: var(--color-green-500);
   }
   /* GenericOutput */
   .go {
-    color: theme("colors.black");
+    color: var(--color-black-main);
   }
   /* GenericPrompt */
   .gp {
     user-select: none;
-    color: theme("colors.green.light.400");
+    color: var(--color-green-400);
   }
   /* GenericStrong */
   .gs {
-    color: theme("colors.black");
+    color: var(--color-black-main);
   }
   /* GenericSubheading */
   .gu {
-    color: theme("colors.gray.light.600");
+    color: var(--color-grey-600);
   }
   /* GenericTraceback */
   .gt {
-    color: theme("colors.red.light.500");
+    color: var(--color-red-500);
   }
   /* GenericUnderline */
   .gl {
-    color: theme("colors.black");
+    color: var(--color-black-main);
     text-decoration: underline;
   }
   /* TextWhitespace */
   .w {
-    color: theme("colors.gray.light.100");
+    color: var(--color-grey-100);
   }
 }

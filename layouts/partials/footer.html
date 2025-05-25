@@ -1,11 +1,9 @@
 <div
-  class="bg-gray-light-100 dark:bg-gray-dark-200 flex justify-center px-4 py-8 relative z-10"
+  class="relative z-10 flex justify-center bg-gray-100 px-4 py-8 dark:bg-gray-900"
 >
   {{ partialCached "components/support-button.html" . }}
 </div>
-<div
-  class="bg-gray-light-100 dark:bg-gray-dark-200 flex justify-center px-4 pt-10 pb-20"
->
+<div class="flex justify-center bg-gray-100 px-4 pt-10 pb-20 dark:bg-gray-900">
   <div class="flex w-full max-w-[840px] flex-col gap-10">
     <div class="flex flex-col items-center justify-evenly gap-4 md:flex-row">
       <a
@@ -37,35 +35,35 @@
       </p>
       <div class="flex gap-4">
         <a
-          class="fill-blue-light dark:fill-blue-dark h-8 w-8 rounded-full"
+          class="h-8 w-8 rounded-full fill-blue-500 dark:fill-blue-300"
           title="X (Twitter)"
           href="http://twitter.com/docker/"
         >
           {{ (resources.Get "images/TwitterCircle.svg").Content | safe.HTML }}
         </a>
         <a
-          class="fill-blue-light dark:fill-blue-dark h-8 w-8 rounded-full"
+          class="h-8 w-8 rounded-full fill-blue-500 dark:fill-blue-300"
           title="LinkedIn"
           href="https://www.linkedin.com/company/docker"
         >
           {{ (resources.Get "images/LinkedinCircle.svg").Content | safe.HTML }}
         </a>
         <a
-          class="fill-blue-light dark:fill-blue-dark h-8 w-8 rounded-full"
+          class="h-8 w-8 rounded-full fill-blue-500 dark:fill-blue-300"
           title="Instagram"
           href="https://www.instagram.com/dockerinc/"
         >
           {{ (resources.Get "images/InstagramCircle.svg").Content | safe.HTML }}
         </a>
         <a
-          class="fill-blue-light dark:fill-blue-dark h-8 w-8 rounded-full"
+          class="h-8 w-8 rounded-full fill-blue-500 dark:fill-blue-300"
           title="YouTube"
           href="http://www.youtube.com/user/dockerrun"
         >
           {{ (resources.Get "images/YoutubeCircle.svg").Content | safe.HTML }}
         </a>
         <a
-          class="fill-blue-light dark:fill-blue-dark h-8 w-8 rounded-full"
+          class="h-8 w-8 rounded-full fill-blue-500 dark:fill-blue-300"
           title="Facebook"
           href="https://www.facebook.com/docker.run"
         >
@@ -102,7 +100,7 @@
         <button
           aria-label="Theme switch"
           id="theme-switch"
-          class="bg-blue-light hover:bg-blue-light-400 dark:bg-blue-dark-400 dark:hover:bg-blue-dark rounded-sm px-4 py-1 text-white transition"
+          class="rounded-sm bg-blue-500 px-4 py-1 text-white transition hover:bg-blue-400 dark:bg-blue-400 dark:hover:bg-blue-500"
           x-data="{ theme: localStorage.getItem('theme-preference') }"
           x-init="$watch('theme', value => {
                 localStorage.setItem('theme-preference', value);

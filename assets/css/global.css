@@ -14,14 +14,14 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  scrollbar-color: theme(colors.gray.light.400) theme(colors.black / 0.05);
+  scrollbar-color: var(--color-grey-400) rgba(0, 0, 0, 0.05);
   &.dark {
-    scrollbar-color: theme(colors.gray.dark.800) theme(colors.white / 0.1);
+    scrollbar-color: var(--color-grey-800) rgba(255, 255, 255, 0.1);
   }
 }
 
 mark {
-  @apply text-blue-light dark:text-blue-dark bg-transparent font-bold;
+  @apply bg-transparent font-bold text-blue-500 dark:text-blue-800;
 }
 
 /* Hide the clear (X) button for search inputs */

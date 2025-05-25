@@ -8,7 +8,7 @@
   */
 -}}
 <!-- section tree -->
-<nav class="flex flex-col navbar-font">
+<nav class="navbar-font flex flex-col">
   <div class="text-gray-light dark:text-gray-dark block py-4 md:hidden">
     This section
   </div>
@@ -31,7 +31,7 @@
     {{- end }}
   {{- end }}
   {{- range .Params.sidebar.groups }}
-    <li class="navbar-group-font px-2 py-2 pb-2 mt-2">
+    <li class="navbar-group-font mt-2 px-2 py-2 pb-2">
       {{ . }}
     </li>
     {{- range where $pages "Params.sidebar.group" . }}
@@ -61,7 +61,7 @@
             {{ if $isCurrent }}
               aria-current="page" id="sidebar-current-page"
             {{ end }}
-            class="hover:text-blue-light hover:dark:text-blue-dark block select-none"
+            class="hover:text-blue-light block select-none hover:dark:text-blue-700"
             href="{{ .Permalink }}"
           >
             {{ template "renderTitle" . }}
@@ -70,7 +70,7 @@
           {{/* Otherwise, just expand the section */}}
           <button
             @click="expanded = !expanded"
-            class="hover:text-blue-light hover:dark:text-blue-dark w-full text-left select-none"
+            class="hover:text-blue-light w-full text-left select-none hover:dark:text-blue-700"
           >
             {{ template "renderTitle" . }}
           </button>
@@ -105,7 +105,7 @@
 
 {{ define "renderSingle" }}
   {{- if .Params.sidebar.goto }}
-    <li class="hover:text-blue-light hover:dark:text-blue-dark px-4">
+    <li class="hover:text-blue-light px-4 hover:dark:text-blue-700">
       <a
         class="block w-full truncate py-2"
         href="{{ .Params.sidebar.goto }}"
@@ -117,9 +117,9 @@
   {{- else }}
     {{ $isCurrent := eq page . }}
     <li
-      class="hover:text-blue-light hover:dark:text-blue-dark {{ if $isCurrent }}
+      class="hover:text-blue-light {{ if $isCurrent }}
         bg-gray-light-200 dark:bg-gray-dark-200
-      {{ end }} rounded-sm px-4"
+      {{ end }} rounded-sm px-4 hover:dark:text-blue-700"
     >
       <a
         {{ if $isCurrent }}

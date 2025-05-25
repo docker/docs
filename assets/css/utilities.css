@@ -31,7 +31,7 @@
 }
 
 @utility link {
-  @apply text-primary-blue dark:text-blue-dark no-underline;
+  @apply text-primary-blue no-underline dark:text-blue-700;
   font-weight: inherit;
   &:hover {
     @apply underline underline-offset-3;
@@ -43,28 +43,28 @@
 }
 
 @utility bg-pattern-blue {
-  background-color: theme(colors.white / 50%);
+  background-color: var(--color-white-main);
   background-image: url("/assets/images/bg-pattern-blue.webp");
   background-blend-mode: overlay;
   background-size: cover;
   background-repeat: none;
   .dark & {
-    background-color: theme(colors.black / 70%);
+    background-color: var(--color-black-main);
   }
 }
 
 @utility bg-pattern-purple {
-  background-color: theme(colors.white / 50%);
+  background-color: var(--color-white-main);
   background-image: url("/assets/images/bg-pattern-purple.webp");
   background-blend-mode: overlay;
   background-size: cover;
   background-repeat: none;
   .dark & {
-    background-color: theme(colors.black / 70%);
+    background-color: var(--color-black-main);
   }
 }
 
-@utility bg-background-toc{
+@utility bg-background-toc {
   background-color: var(--navbar-bg-light);
   .dark & {
     background-color: var(--navbar-bg-dark);
@@ -72,13 +72,13 @@
 }
 
 @utility bg-pattern-verde {
-  background-color: theme(colors.white / 50%);
+  background-color: var(--color-white-main);
   background-image: url("/assets/images/bg-pattern-verde.webp");
   background-blend-mode: overlay;
   background-size: cover;
   background-repeat: none;
   .dark & {
-    background-color: theme(colors.black / 70%);
+    background-color: var(--color-black-main);
   }
 }
 
@@ -110,7 +110,7 @@
   }
 }
 
-@utility navbar-font{
+@utility navbar-font {
   font-size: var(--navbar-font-size);
   @apply text-[var(--navbar-text-color-light)];
   .dark & {
@@ -118,7 +118,7 @@
   }
 }
 
-@utility navbar-group-font{
+@utility navbar-group-font {
   font-size: var(--navbar-group-font-size);
   @apply font-semibold uppercase;
   @apply text-[var(--navbar-group-text-color-light)];
@@ -132,12 +132,12 @@
   :not(pre) > code {
     font-size: 0.875em;
     border: 1px solid;
-    border-radius: theme("spacing.1");
-    background: theme("colors.white");
-    border-color: theme("colors.gray.light.300");
+    border-radius: 0.25rem; /* theme("spacing.1") fallback */
+    background: var(--color-white-main);
+    border-color: var(--color-grey-300);
     .dark & {
-      background: theme("colors.gray.dark.200");
-      border-color: theme("colors.gray.dark.300");
+      background: var(--color-grey-200);
+      border-color: var(--color-grey-400);
     }
     &::before,
     &::after {
@@ -146,7 +146,7 @@
   }
 
   :not(pre) > code {
-    background: theme("colors.gray.light.200");
+    background: var(--color-grey-200);
     display: inline-block;
     margin: 0;
     font-weight: 400;
@@ -164,12 +164,12 @@
     @apply my-4 overflow-x-auto p-3;
     font-size: 0.875em;
     border: 1px solid;
-    border-radius: theme("spacing.1");
-    background: theme("colors.white");
-    border-color: theme("colors.gray.light.300");
+    border-radius: 0.25rem; /* theme("spacing.1") fallback */
+    background: var(--color-white-main);
+    border-color: var(--color-grey-300);
     .dark & {
-      background: theme("colors.gray.dark.200");
-      border-color: theme("colors.gray.dark.300");
+      background: var(--color-grey-200);
+      border-color: var(--color-grey-400);
     }
   }
 
