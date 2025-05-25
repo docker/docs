@@ -18,7 +18,7 @@
         <div class="flex min-w-fit flex-grow flex-col items-center">
           <p>Not finding what you're looking for?</p>
           <button
-            class="open-kapa-widget hover:bg-gray-light-200 dark:hover:bg-gray-dark-200 flex w-fit items-center gap-2 rounded-sm px-2 py-1 font-semibold"
+            class="open-kapa-widget flex w-fit items-center gap-2 rounded-sm px-2 py-1 font-semibold hover:bg-gray-200 dark:hover:bg-gray-800"
           >
             <span>Try Ask AI</span>
             <img
@@ -133,14 +133,14 @@
         }
 
         // Generate the search results HTML
-        let resultsHTML = `<div class="text-gray-light dark:text-gray-dark p-2">${resultsLength} results</div>`;
+        let resultsHTML = `<div class="text-gray-200 dark:text-gray-500 p-2">${resultsLength} results</div>`;
 
         // Map results to HTML
         resultsHTML += results
           .map((item) => {
             return `<div class="p-4">
          <div class="flex flex-col">
-           <span class="text-gray-light dark:texty-gray-dark text-sm">${item.meta.breadcrumbs}</span>
+           <span class="text-gray-200 dark:texty-gray-dark text-sm">${item.meta.breadcrumbs}</span>
            <a class="link" href="${item.url}" data-query="${query}" data-index="${item.index}">${item.meta.title}</a>
            <p class="text-black dark:text-white overflow-hidden">…${item.excerpt}…</p>
          </div>
@@ -157,8 +157,8 @@
                 <a href="/search/?q=${query}&page=${i}" class="block h-6 w-6 rounded-sm bg-blue-light dark:bg-blue-dark">${i}</a>
               </li>`;
             } else {
-              resultsHTML += `<li class="text-center text-gray-light dark:text-gray-dark">
-                <a href="/search/?q=${query}&page=${i}" class="block h-6 w-6 rounded-sm bg-gray-light-200 dark:bg-gray-dark-200">${i}</a>
+              resultsHTML += `<li class="text-center text-gray-200 dark:text-gray-500">
+                <a href="/search/?q=${query}&page=${i}" class="block h-6 w-6 rounded-sm bg-gray-200 dark:bg-gray-800">${i}</a>
               </li>`;
             }
           }

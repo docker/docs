@@ -13,12 +13,12 @@
   /* LineHighlight */
   .hl {
     min-width: fit-content;
-    background-color: var(--color-grey-800);
+    background-color: var(--color-gray-800);
   }
   .lntd:first-child .hl,
   & > .chroma > code > .hl {
     margin-left: -4px;
-    border-left: 4px solid var(--color-grey-900);
+    border-left: 4px solid var(--color-gray-900);
   }
   /* LineNumbersTable */
   .lnt {
@@ -26,7 +26,7 @@
     user-select: none;
     margin-right: 0.4em;
     padding: 0 0.4em 0 0.4em;
-    color: var(--color-grey-900);
+    color: var(--color-gray-900);
   }
   /* LineNumbers */
   .ln {
@@ -34,7 +34,7 @@
     user-select: none;
     margin-right: 0.4em;
     padding: 0 0.4em 0 0.4em;
-    color: var(--color-grey-900);
+    color: var(--color-gray-900);
   }
   /* Line */
   .line {
@@ -254,35 +254,35 @@
   }
   /* Punctuation */
   .p {
-    color: var(--color-grey-500);
+    color: var(--color-gray-500);
   }
   /* Comment */
   .c {
-    color: var(--color-grey-500);
+    color: var(--color-gray-500);
   }
   /* CommentHashbang */
   .ch {
-    color: var(--color-grey-500);
+    color: var(--color-gray-500);
   }
   /* CommentMultiline */
   .cm {
-    color: var(--color-grey-500);
+    color: var(--color-gray-500);
   }
   /* CommentSingle */
   .c1 {
-    color: var(--color-grey-500);
+    color: var(--color-gray-500);
   }
   /* CommentSpecial */
   .cs {
-    color: var(--color-grey-500);
+    color: var(--color-gray-500);
   }
   /* CommentPreproc */
   .cp {
-    color: var(--color-grey-500);
+    color: var(--color-gray-500);
   }
   /* CommentPreprocFile */
   .cpf {
-    color: var(--color-grey-500);
+    color: var(--color-gray-500);
   }
   /* Generic */
   .g {
@@ -302,7 +302,7 @@
   }
   /* GenericHeading */
   .gh {
-    color: var(--color-grey-600);
+    color: var(--color-gray-600);
   }
   /* GenericInserted */
   .gi {
@@ -315,7 +315,7 @@
   /* GenericPrompt */
   .gp {
     user-select: none;
-    color: var(--color-green-400);
+    color: var(--color-green-500);
   }
   /* GenericStrong */
   .gs {
@@ -323,7 +323,7 @@
   }
   /* GenericSubheading */
   .gu {
-    color: var(--color-grey-600);
+    color: var(--color-gray-600);
   }
   /* GenericTraceback */
   .gt {
@@ -336,6 +336,6 @@
   }
   /* TextWhitespace */
   .w {
-    color: var(--color-grey-100);
+    color: var(--color-gray-100);
   }
 }

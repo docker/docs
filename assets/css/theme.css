@@ -24,33 +24,27 @@
 
   --color-background-light: #f9f9fa;
   --color-background-dark: #10151b;
+  --color-primary-blue: var(--color-blue);
 
   --color-divider-light: hsla(0, 0%, 0%, 0.1);
   --color-divider-dark: hsla(0, 0%, 100%, 0.05);
 
   --card-bg-dark: #1d262d;
   --card-border-dark: #516980;
-  --color-gray-900: var(--card-bg-dark);
-  --color-gray-700: var(--card-border-dark);
+  --card-bg-dark: var(--color-gray-900);
+  --card-border-dark: var(--color-gray-700);
 
-  --navbar-bg-light: #f9f9fa;
-  --navbar-bg-dark: #0b0b0b;
-  --navbar-text-color-light: var(--color-gray-700);
-  --navbar-text-color-dark: var(--tw-prose-body);
-  --navbar-border-color-light: var(--tw-prose-inverse-body);
-  --navbar-font-size: 0.9rem;
-  --navbar-group-font-size: 0.9rem;
-  --navbar-group-text-color-light: var(--color-gray-700);
-  --navbar-group-text-color-dark: var(--tw-prose-body);
+  --color-navbar-bg: var(--color-background-light);
+  --color-navbar-bg-dark: var(--color-background-dark);
+  --color-navbar-text: var(--color-gray-700);
+  --color-navbar-text-dark: var(--tw-prose-body);
+  --color-navbar-border-color-light: var(--tw-prose-inverse-body);
+  --navbar-font-size: 1rem;
+  --navbar-group-font-title-size: 1rem;
+  --color-navbar-text-dark: var(--color-gray-200);
+  --color-navbar-group-text-dark: var(--tw-prose-body);
 
-  --color-black-disabled: rgba(0, 0, 0, 0.32);
-  --color-black-focus: rgba(0, 0, 0, 0.24);
-  --color-black-focusvisible: rgba(0, 0, 0, 0.32);
-  --color-black-hover: rgba(0, 0, 0, 0.12);
-  --color-black-main: rgba(0, 0, 0, 1);
-  --color-black-outlinedborder: rgba(0, 0, 0, 0.56);
-  --color-black-selected: rgba(0, 0, 0, 0.16);
-
+  --color-blue: var(--color-blue-400);
   --color-blue-100: rgba(217, 229, 252, 1);
   --color-blue-200: rgba(170, 196, 248, 1);
   --color-blue-300: rgba(123, 164, 244, 1);
@@ -68,6 +62,7 @@
   --color-blue-outlinedborder: rgba(37, 96, 255, 0.56);
   --color-blue-selected: rgba(37, 96, 255, 0.16);
 
+  --color-gray: var(--color-gray-600);
   --color-gray-100: rgba(231, 234, 239, 1);
   --color-gray-200: rgba(200, 207, 218, 1);
   --color-gray-300: rgba(169, 180, 198, 1);
@@ -78,7 +73,7 @@
   --color-gray-700: rgba(67, 76, 95, 1);
   --color-gray-800: rgba(44, 51, 63, 1);
   --color-gray-900: rgba(30, 33, 41, 1);
-  --color-gray-950: rgba(15, 18, 27, 1);
+  --color-gray-950: rgb(18, 21, 31);
   --color-gray-focus: rgba(108, 126, 157, 0.24);
   --color-gray-focusvisible: rgba(108, 126, 157, 0.32);
   --color-gray-hover: rgba(108, 126, 157, 0.12);
@@ -170,6 +165,7 @@
   --color-teal-outlinedborder: rgba(27, 189, 191, 0.56);
   --color-teal-selected: rgba(27, 189, 191, 0.16);
 
+  --color-violet: var(--color-violet-500);
   --color-violet-100: rgba(239, 224, 255, 1);
   --color-violet-200: rgba(211, 183, 255, 1);
   --color-violet-300: rgba(174, 130, 255, 1);

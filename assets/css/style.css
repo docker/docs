@@ -43,16 +43,3 @@
 @import "components.css";
 
 @variant dark (&:where(.dark, .dark *));
-
-#TableOfContents {
-  .toc a {
-    @apply block max-w-full truncate py-1 pl-2 hover:font-medium hover:no-underline;
-    &[aria-current="true"],
-    &:hover {
-      @apply border-l-2 border-x-gray-200 bg-gradient-to-r from-gray-100 font-medium text-black dark:border-l-gray-300 dark:from-gray-200 dark:text-white;
-    }
-    &:not([aria-current="true"]) {
-      @apply text-gray-600 hover:text-black dark:text-gray-700 dark:hover:text-white;
-    }
-  }
-}

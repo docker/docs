@@ -9,7 +9,7 @@
 -}}
 <!-- section tree -->
 <nav class="navbar-font flex flex-col">
-  <div class="text-gray-light dark:text-gray-dark block py-4 md:hidden">
+  <div class="block py-4 text-gray-200 md:hidden dark:text-gray-200">
     This section
   </div>
   <ul>
@@ -31,7 +31,8 @@
     {{- end }}
   {{- end }}
   {{- range .Params.sidebar.groups }}
-    <li class="navbar-group-font mt-2 px-2 py-2 pb-2">
+    <!--  Main titles -->
+    <li class="navbar-group-font-title mt-2 px-2 py-2 pt-5 pb-2">
       {{ . }}
     </li>
     {{- range where $pages "Params.sidebar.group" . }}
@@ -51,17 +52,17 @@
   <li x-data="{ expanded: {{ $expanded }} }">
     <div
       class="justify-between{{ if $isCurrent }}
-        bg-gray-light-200 dark:bg-gray-dark-200
+        bg-gray-200 dark:bg-gray-800
       {{ end }} flex w-full items-center rounded-sm px-4"
     >
-      <div class="w-full truncate py-2">
+      <div class="w-full truncate py-1">
         {{- if .Permalink }}
           {{/* If the link is not empty, use it */}}
           <a
             {{ if $isCurrent }}
               aria-current="page" id="sidebar-current-page"
             {{ end }}
-            class="hover:text-blue-light block select-none hover:dark:text-blue-700"
+            class="hover:text-blue block select-none hover:dark:text-blue-400"
             href="{{ .Permalink }}"
           >
             {{ template "renderTitle" . }}
@@ -70,7 +71,7 @@
           {{/* Otherwise, just expand the section */}}
           <button
             @click="expanded = !expanded"
-            class="hover:text-blue-light w-full text-left select-none hover:dark:text-blue-700"
+            class="hover:text-blue w-full text-left select-none hover:dark:text-blue-400"
           >
             {{ template "renderTitle" . }}
           </button>
@@ -78,7 +79,7 @@
       </div>
       <button
         @click="expanded = !expanded"
-        class="hover:bg-gray-light-300 hover:dark:bg-gray-dark-300 rounded-sm"
+        class="rounded-sm hover:bg-gray-300 hover:dark:bg-gray-300"
       >
         <span
           :class="{ 'hidden' : expanded }"
@@ -105,7 +106,7 @@
 
 {{ define "renderSingle" }}
   {{- if .Params.sidebar.goto }}
-    <li class="hover:text-blue-light px-4 hover:dark:text-blue-700">
+    <li class="hover:text-blue px-4 hover:dark:text-blue-400">
       <a
         class="block w-full truncate py-2"
         href="{{ .Params.sidebar.goto }}"
@@ -117,9 +118,9 @@
   {{- else }}
     {{ $isCurrent := eq page . }}
     <li
-      class="hover:text-blue-light {{ if $isCurrent }}
-        bg-gray-light-200 dark:bg-gray-dark-200
-      {{ end }} rounded-sm px-4 hover:dark:text-blue-700"
+      class="hover:text-blue {{ if $isCurrent }}
+        bg-gray-200 dark:bg-gray-800
+      {{ end }} rounded-sm px-4 hover:dark:text-blue-400"
     >
       <a
         {{ if $isCurrent }}

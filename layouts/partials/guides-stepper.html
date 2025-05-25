@@ -25,12 +25,11 @@
         <a
           href="{{ .Permalink }}"
           class="{{ if (page.Store.Get "stepper_seen") }}
-            bg-gray-light-400 dark:bg-gray-dark-400
+            bg-gray-400 dark:bg-gray-500
           {{ else if (eq . page) }}
-            {{ .Store.Set "stepper_seen" true }} bg-blue-light-400
-            dark:bg-blue-dark-400
+            {{ .Store.Set "stepper_seen" true }} bg-blue-400 dark:bg-blue-800
           {{ else }}
-            bg-green-light-400 dark:bg-green-dark-400
+            bg-green-400 dark:bg-green-dark-400
           {{ end }} flex h-8 w-8 items-center justify-center rounded-full text-white no-underline"
         >
           {{ add $i 1 }}
@@ -39,11 +38,11 @@
         {{ if not $isLast }}
           <div
             class="{{ if (page.Store.Get "stepper_seen") }}
-              border-gray-light-400 dark:border-gray-dark-400
+              border-gray-400 dark:border-gray-400
             {{ else if (eq . page) }}
-              border-blue-light-400 dark:border-blue-dark-400
+              border-blue-400 dark:border-blue-400
             {{ else }}
-              border-green-light-400 dark:border-green-dark-400
+              border-green-400 dark:border-green-400
             {{ end }} h-6 border-l-2"
           ></div>
         {{ end }}

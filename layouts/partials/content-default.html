@@ -1,17 +1,18 @@
 <div class="flex w-full gap-8">
   <article class="prose dark:prose-invert max-w-4xl min-w-0 flex-[2_2_0%]">
     {{ partial "breadcrumbs.html" . }}
-    <h1 data-pagefind-weight="10">{{ .Title }}</h1>
-
+    <div class="flex items-start justify-between">
+      <h1 data-pagefind-weight="10">{{ .Title }}</h1>
+      <div class="md-dropdown ml-auto hidden lg:block">
+        {{ partial "md-dropdown.html" . }}
+      </div>
+    </div>
     <div class="block lg:hidden">
       {{ partialCached "pagemeta.html" . . }}
       <hr />
     </div>
     {{ .Content }}
   </article>
-  <div class="md-dropdown ml-auto hidden lg:block">
-    {{ partial "md-dropdown.html" . }}
-  </div>
   <div class="-mt-8 -mr-8 hidden min-w-52 flex-1 lg:block">
     {{ partial "aside.html" . }}
   </div>

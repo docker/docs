@@ -7,8 +7,8 @@
 <ul class="md:text-sm">
   {{- range site.Taxonomies.tags }}
     <li
-      class="hover:text-blue-light {{ if eq .Page page }}
-        bg-gray-light-200 dark:bg-gray-dark-200
+      class="hover:text-blue {{ if eq .Page page }}
+        bg-gray-400 dark:bg-gray-800
       {{ end }} pl-4 hover:dark:text-blue-700"
     >
       <a

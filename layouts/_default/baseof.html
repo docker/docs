@@ -5,7 +5,7 @@
   </head>
 
   <body
-    class="from-background-light dark:from-gray-dark-100 dark:to-background-dark flex flex-col items-center bg-gradient-to-r from-20% to-white to-30% text-base dark:text-white"
+    class="dark:bg-navbar-bg-dark bg-navbar-bg flex flex-col items-center text-base text-black dark:text-white"
   >
     {{ partial "header.html" . }}
     <main class="relative flex w-full max-w-[1920px]">
@@ -57,7 +57,6 @@
         </div>
       </div>
 
-
       <!-- Main content -->
       <div
         {{ if ne .Params.sitemap false }}data-pagefind-body{{- end }}
@@ -68,7 +67,9 @@
       </div>
     </main>
 
-    <footer class="w-full z-10 relative">{{ partialCached "footer.html" . }}</footer>
+    <footer class="relative z-10 w-full">
+      {{ partialCached "footer.html" . }}
+    </footer>
 
     {{/* Load the YouTube player if the page embeds a YouTube video */}}
     {{ with .Store.Get "youtube" }}

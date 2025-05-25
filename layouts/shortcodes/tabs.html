@@ -24,7 +24,7 @@
       <button
         class="p-1"
         :class="selected === '{{ .name | urlize }}' &&
-          'border-blue-light-500 border-b-4 dark:border-b-blue-dark-600'"
+          'border-blue border-b-4 dark:border-b-blue-600'"
         {{ if $group }}
           @click="$dispatch('tab-select', { group: '{{ $group }}', name:
           '{{ .name | urlize }}'})"

@@ -6,12 +6,15 @@
 {{ define "main" }}
   {{ partial "content-default.html" . }}
   <div class="prose dark:prose-invert max-w-4xl">
+    <div class="md-dropdown ml-auto hidden lg:block">
+      {{ partial "md-dropdown.html" . }}
+    </div>
     {{ if (.Store.Get "multipage") }}
       {{- with .PrevInSection }}
         <div class="not-prose col-start-2 my-4">
           <a
             href="{{ .Permalink }}"
-            class="bg-blue-light-500 dark:bg-blue-dark-400 hover:bg-blue-light-400 dark:hover:bg-blue-dark-500 cursor-pointer rounded-sm px-4 py-2 text-white"
+            class="cursor-pointer rounded-sm bg-blue-500 px-4 py-2 text-white hover:bg-blue-400 dark:bg-blue-800 dark:hover:bg-blue-700"
             >{{ .Title }} »</a
           >
         </div>

@@ -31,7 +31,7 @@
 }
 
 @utility link {
-  @apply text-primary-blue no-underline dark:text-blue-700;
+  @apply text-blue no-underline dark:text-blue-400;
   font-weight: inherit;
   &:hover {
     @apply underline underline-offset-3;
@@ -43,42 +43,42 @@
 }
 
 @utility bg-pattern-blue {
-  background-color: var(--color-white-main);
+  background-color: rgba(255, 255, 255, 0.5);
   background-image: url("/assets/images/bg-pattern-blue.webp");
   background-blend-mode: overlay;
   background-size: cover;
-  background-repeat: none;
+  background-repeat: no-repeat;
   .dark & {
-    background-color: var(--color-black-main);
+    background-color: rgba(0, 0, 0, 0.741);
   }
 }
 
 @utility bg-pattern-purple {
-  background-color: var(--color-white-main);
+  background-color: rgba(255, 255, 255, 0.5);
   background-image: url("/assets/images/bg-pattern-purple.webp");
   background-blend-mode: overlay;
   background-size: cover;
-  background-repeat: none;
+  background-repeat: no-repeat;
   .dark & {
-    background-color: var(--color-black-main);
+    background-color: rgba(0, 0, 0, 0.741);
   }
 }
 
 @utility bg-background-toc {
-  background-color: var(--navbar-bg-light);
+  background-color: var(--color-navbar-bg);
   .dark & {
-    background-color: var(--navbar-bg-dark);
+    background-color: var(--color-navbar-bg-dark);
   }
 }
 
 @utility bg-pattern-verde {
-  background-color: var(--color-white-main);
+  background-color: rgba(255, 255, 255, 0.5);
   background-image: url("/assets/images/bg-pattern-verde.webp");
   background-blend-mode: overlay;
   background-size: cover;
-  background-repeat: none;
+  background-repeat: no-repeat;
   .dark & {
-    background-color: var(--color-black-main);
+    background-color: rgba(0, 0, 0, 0.741);
   }
 }
 
@@ -112,18 +112,18 @@
 
 @utility navbar-font {
   font-size: var(--navbar-font-size);
-  @apply text-[var(--navbar-text-color-light)];
+  color: var(--color-navbar-text);
   .dark & {
-    @apply text-[var(--navbar-text-color-dark)];
+    color: var(--color-navbar-text-dark);
   }
 }
 
-@utility navbar-group-font {
-  font-size: var(--navbar-group-font-size);
+@utility navbar-group-font-title {
+  font-size: var(--color-navbar-group-font-title-size);
   @apply font-semibold uppercase;
-  @apply text-[var(--navbar-group-text-color-light)];
+  color: var(--color-navbar-text-dark);
   .dark & {
-    @apply text-[var(--navbar-group-text-color-dark)];
+    color: var(--color-navbar-text-dark);
   }
 }
 
@@ -134,10 +134,10 @@
     border: 1px solid;
     border-radius: 0.25rem; /* theme("spacing.1") fallback */
     background: var(--color-white-main);
-    border-color: var(--color-grey-300);
+    border-color: var(--color-gray-300);
     .dark & {
-      background: var(--color-grey-200);
-      border-color: var(--color-grey-400);
+      background: var(--color-gray-200);
+      border-color: var(--color-gray-400);
     }
     &::before,
     &::after {
@@ -146,7 +146,7 @@
   }
 
   :not(pre) > code {
-    background: var(--color-grey-200);
+    background: var(--color-gray-200);
     display: inline-block;
     margin: 0;
     font-weight: 400;
@@ -166,10 +166,10 @@
     border: 1px solid;
     border-radius: 0.25rem; /* theme("spacing.1") fallback */
     background: var(--color-white-main);
-    border-color: var(--color-grey-300);
+    border-color: var(--color-gray-300);
     .dark & {
-      background: var(--color-grey-200);
-      border-color: var(--color-grey-400);
+      background: var(--color-gray-200);
+      border-color: var(--color-gray-400);
     }
   }
 
@@ -207,6 +207,36 @@
       .lntd:first-child .hl {
         display: block;
       }
+    }
+  }
+}
+
+@utility section-card {
+  @apply flex h-full flex-col gap-2 rounded-sm border p-4 drop-shadow-xs hover:drop-shadow-lg;
+  @apply text-gray dark:text-gray-200;
+  @apply border-gray-100 bg-gray-50 hover:border-gray-200 dark:border-gray-600 dark:bg-gray-900 hover:dark:border-gray-500;
+}
+
+@utility section-card-text {
+  @apply leading-snug text-gray-800 dark:text-gray-200;
+}
+@utility section-card-title {
+  @apply text-xl font-semibold text-gray-900 dark:text-gray-100;
+}
+
+@utility sub-button {
+  @apply flex w-full items-start gap-2 rounded-sm px-2 py-2 text-left text-gray-700 transition-colors hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800;
+}
+
+@utility toc {
+  a {
+    @apply block max-w-full truncate py-1 pl-2 hover:font-medium hover:no-underline;
+    &[aria-current="true"],
+    &:hover {
+      @apply border-l-2 border-x-gray-200 bg-gradient-to-r from-gray-50 font-medium text-black dark:border-l-gray-300 dark:from-gray-900 dark:text-white;
+    }
+    &:not([aria-current="true"]) {
+      @apply text-gray-600 hover:text-black dark:text-gray-100 dark:hover:text-white;
     }
   }
 }

@@ -26,7 +26,7 @@
     user-select: none;
     margin-right: 0.4em;
     padding: 0 0.4em 0 0.4em;
-    color: var(--color-grey-400);
+    color: var(--color-gray-400);
   }
   /* LineNumbers */
   .ln {
@@ -34,7 +34,7 @@
     user-select: none;
     margin-right: 0.4em;
     padding: 0 0.4em 0 0.4em;
-    color: var(--color-grey-400);
+    color: var(--color-gray-400);
   }
   /* Line */
   .line {
@@ -42,7 +42,7 @@
   }
   /* Keyword */
   .k {
-    color: var(--color-yellow-500);
+    color: var(--color-yellow-700);
   }
   /* KeywordConstant */
   .kc {
@@ -50,23 +50,23 @@
   }
   /* KeywordDeclaration */
   .kd {
-    color: var(--color-yellow-500);
+    color: var(--color-yellow-700);
   }
   /* KeywordNamespace */
   .kn {
-    color: var(--color-yellow-500);
+    color: var(--color-yellow-700);
   }
   /* KeywordPseudo */
   .kp {
-    color: var(--color-yellow-500);
+    color: var(--color-yellow-700);
   }
   /* KeywordReserved */
   .kr {
-    color: var(--color-yellow-500);
+    color: var(--color-yellow-700);
   }
   /* KeywordType */
   .kt {
-    color: var(--color-yellow-500);
+    color: var(--color-yellow-700);
   }
   /* Name */
   .n {
@@ -74,11 +74,11 @@
   }
   /* NameAttribute */
   .na {
-    color: var(--color-yellow-500);
+    color: var(--color-yellow-700);
   }
   /* NameBuiltin */
   .nb {
-    color: var(--color-yellow-500);
+    color: var(--color-yellow-800);
   }
   /* NameBuiltinPseudo */
   .bp {
@@ -98,7 +98,7 @@
   }
   /* NameEntity */
   .ni {
-    color: var(--color-yellow-500);
+    color: var(--color-yellow-700);
   }
   /* NameException */
   .ne {
@@ -250,39 +250,39 @@
   }
   /* OperatorWord */
   .ow {
-    color: var(--color-yellow-500);
+    color: var(--color-yellow-700);
   }
   /* Punctuation */
   .p {
-    color: var(--color-grey-400);
+    color: var(--color-gray-400);
   }
   /* Comment */
   .c {
-    color: var(--color-grey-400);
+    color: var(--color-gray-400);
   }
   /* CommentHashbang */
   .ch {
-    color: var(--color-grey-400);
+    color: var(--color-gray-400);
   }
   /* CommentMultiline */
   .cm {
-    color: var(--color-grey-400);
+    color: var(--color-gray-400);
   }
   /* CommentSingle */
   .c1 {
-    color: var(--color-grey-400);
+    color: var(--color-gray-400);
   }
   /* CommentSpecial */
   .cs {
-    color: var(--color-grey-400);
+    color: var(--color-gray-400);
   }
   /* CommentPreproc */
   .cp {
-    color: var(--color-grey-400);
+    color: var(--color-gray-400);
   }
   /* CommentPreprocFile */
   .cpf {
-    color: var(--color-grey-400);
+    color: var(--color-gray-400);
   }
   /* Generic */
   .g {
@@ -302,7 +302,7 @@
   }
   /* GenericHeading */
   .gh {
-    color: var(--color-grey-600);
+    color: var(--color-gray-600);
   }
   /* GenericInserted */
   .gi {
@@ -323,7 +323,7 @@
   }
   /* GenericSubheading */
   .gu {
-    color: var(--color-grey-600);
+    color: var(--color-gray-600);
   }
   /* GenericTraceback */
   .gt {
@@ -336,6 +336,6 @@
   }
   /* TextWhitespace */
   .w {
-    color: var(--color-grey-100);
+    color: var(--color-gray-100);
   }
 }

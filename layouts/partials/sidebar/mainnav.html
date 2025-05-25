@@ -19,7 +19,7 @@
       {{- end }}
     {{- end }}
     <a
-      class="hover:text-blue-light dark:hover:text-blue-dark"
+      class="hover:text-blue dark:hover:text-blue"
       href="{{ $curr.Permalink }}"
     >
       {{- with $curr.Params.icon }}
@@ -31,7 +31,7 @@
     </a>
     <button
       @click="expanded = !expanded"
-      class="hover:bg-gray-light-300 hover:dark:bg-gray-dark-300 rounded-sm"
+      class="rounded-sm hover:bg-gray-300 hover:dark:bg-gray-300"
     >
       <span x-show="! expanded" class="icon-svg">
         {{ partialCached "icon" "arrow_drop_down" "arrow_drop_down" }}
@@ -45,10 +45,7 @@
     {{ range site.Menus.main }}
       {{ if ne page.FirstSection .Page }}
         <li>
-          <a
-            class="hover:text-blue-light dark:hover:text-blue-dark"
-            href="{{ .URL }}"
-          >
+          <a class="hover:text-blue dark:hover:text-blue" href="{{ .URL }}">
             {{- with .Page.Params.icon }}
               <span class="icon-sm icon-svg pr-2">
                 {{- partialCached "icon.html" . . -}}
@@ -61,4 +58,4 @@
     {{ end }}
   </ul>
 </div>
-<hr class="text-gray-light-200 dark:text-gray-dark-300 m-2" />
+<hr class="m-2 text-gray-200 dark:text-gray-500" />

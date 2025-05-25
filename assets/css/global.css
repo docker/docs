@@ -9,14 +9,13 @@
     display: none !important;
   }
 }
-
 :root {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  scrollbar-color: var(--color-grey-400) rgba(0, 0, 0, 0.05);
+  scrollbar-color: var(--color-gray-400) rgba(0, 0, 0, 0.05);
   &.dark {
-    scrollbar-color: var(--color-grey-800) rgba(255, 255, 255, 0.1);
+    scrollbar-color: var(--color-gray-700) rgba(255, 255, 255, 0.1);
   }
 }
 
@@ -39,6 +38,18 @@ input[type="search"]::-moz-search-cancel-button {
 /* Internet Explorer and Edge (legacy) */
 input[type="search"]::-ms-clear {
   display: none;
+}
+.prose {
+  code {
+    @apply !bg-gray-100;
+  }
+  & .highlight,
+  & :not(pre) > code {
+    .dark & {
+      background: var(--color-gray-900) !important;
+      border-color: var(--color-gray-700) !important;
+    }
+  }
 }
 
 .prose {

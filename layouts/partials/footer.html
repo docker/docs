@@ -35,35 +35,35 @@
       </p>
       <div class="flex gap-4">
         <a
-          class="h-8 w-8 rounded-full fill-blue-500 dark:fill-blue-300"
+          class="fill-blue h-8 w-8 rounded-full dark:fill-blue-300"
           title="X (Twitter)"
           href="http://twitter.com/docker/"
         >
           {{ (resources.Get "images/TwitterCircle.svg").Content | safe.HTML }}
         </a>
         <a
-          class="h-8 w-8 rounded-full fill-blue-500 dark:fill-blue-300"
+          class="fill-blue h-8 w-8 rounded-full dark:fill-blue-300"
           title="LinkedIn"
           href="https://www.linkedin.com/company/docker"
         >
           {{ (resources.Get "images/LinkedinCircle.svg").Content | safe.HTML }}
         </a>
         <a
-          class="h-8 w-8 rounded-full fill-blue-500 dark:fill-blue-300"
+          class="fill-blue h-8 w-8 rounded-full dark:fill-blue-300"
           title="Instagram"
           href="https://www.instagram.com/dockerinc/"
         >
           {{ (resources.Get "images/InstagramCircle.svg").Content | safe.HTML }}
         </a>
         <a
-          class="h-8 w-8 rounded-full fill-blue-500 dark:fill-blue-300"
+          class="fill-blue h-8 w-8 rounded-full dark:fill-blue-300"
           title="YouTube"
           href="http://www.youtube.com/user/dockerrun"
         >
           {{ (resources.Get "images/YoutubeCircle.svg").Content | safe.HTML }}
         </a>
         <a
-          class="h-8 w-8 rounded-full fill-blue-500 dark:fill-blue-300"
+          class="fill-blue h-8 w-8 rounded-full dark:fill-blue-300"
           title="Facebook"
           href="https://www.facebook.com/docker.run"
         >
@@ -100,7 +100,7 @@
         <button
           aria-label="Theme switch"
           id="theme-switch"
-          class="rounded-sm bg-blue-500 px-4 py-1 text-white transition hover:bg-blue-400 dark:bg-blue-400 dark:hover:bg-blue-500"
+          class="bg-blue rounded-sm px-4 py-1 text-white transition hover:bg-blue-400 dark:bg-blue-400 dark:hover:bg-blue-500"
           x-data="{ theme: localStorage.getItem('theme-preference') }"
           x-init="$watch('theme', value => {
                 localStorage.setItem('theme-preference', value);

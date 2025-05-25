@@ -61,7 +61,7 @@
         {{- range $name, $taxonomy := where site.Taxonomies.languages ".Page.Type" "guides" }}
           {{- $id := anchorize (fmt.Printf "lang-%s" $name) }}
           <button
-            class="dark:bg-gray-dark-300 border-divider-light dark:border-divider-dark flex gap-1 rounded-full border bg-white px-2 py-1"
+            class="border-divider-light dark:border-divider-dark flex gap-1 rounded-full border bg-white px-2 py-1 dark:bg-gray-800"
             :class="{ 'ring-3-2 ring-3-blue-light-400 dark:ring-3-blue-dark-400': filters['languages'].includes('{{ $name }}') }"
             @click="toggleFilter('languages', '{{ $name }}')"
           >
@@ -198,7 +198,7 @@
             {{- range $name, $taxonomy := site.Taxonomies.languages }}
               <div
                 x-show="filters.languages.includes('{{ $name }}')"
-                class="border-divider-light dark:border-divider-dark bg-gray-light-100 text-gray-light-800 dark:bg-gray-dark-200 dark:text-gray-dark-800 inline-flex items-center gap-1 rounded-full border px-2 text-sm select-none"
+                class="border-divider-light dark:border-divider-dark inline-flex items-center gap-1 rounded-full border bg-gray-100 px-2 text-sm text-gray-200 select-none dark:bg-gray-800 dark:text-gray-300"
               >
                 <img
                   class="py-1"
@@ -219,7 +219,7 @@
               data-languages="{{ jsonify (.Params.languages | default slice) }}"
               data-tags="{{ jsonify (.Params.tags | default slice) }}"
               x-show="isVisible($el);"
-              class="border-divider-light hover:bg-gray-light-100 hover:dark:bg-gray-dark-200 dark:border-divider-dark flex flex-col justify-between border-b p-4"
+              class="border-divider-light dark:border-divider-dark flex flex-col justify-between border-b p-4 hover:bg-gray-100 hover:dark:bg-gray-800"
             >
               <div class="flex flex-col justify-between xl:flex-row">
                 <a
@@ -239,7 +239,7 @@
 
 {{- define "guide-metadata" }}
   <div
-    class="text-gray-light dark:text-gray-dark flex items-center justify-between gap-8 text-sm"
+    class="flex items-center justify-between gap-8 text-sm text-gray-200 dark:text-gray-300"
   >
     <div class="flex flex-wrap gap-2 md:flex-nowrap">
       {{- $langs := .GetTerms "languages" }}
@@ -262,7 +262,7 @@
 
 {{- define "termchip" }}
   <span
-    class="border-divider-light dark:border-divider-dark bg-gray-light-100 text-gray-light-800 dark:bg-gray-dark-200 dark:text-gray-dark-800 inline-flex min-w-0 items-center rounded-full border px-2 text-sm whitespace-nowrap select-none"
+    class="border-divider-light dark:border-divider-dark inline-flex min-w-0 items-center rounded-full border bg-gray-100 px-2 text-sm whitespace-nowrap text-gray-200 select-none dark:bg-gray-800 dark:text-gray-300"
   >
     <span class="icon-svg icon-sm pb-0.5">
       {{ partialCached "icon" "tag" "tag" }}
