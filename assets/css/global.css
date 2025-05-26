@@ -63,8 +63,12 @@ input[type="search"]::-ms-clear {
   hr {
     @apply mt-8 mb-4;
   }
-  > h1 {
-    @apply mt-3! mb-5! text-4xl!;
+  :where(h1):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    color: var(--tw-prose-headings);
+    font-weight: 500 !important;
+    margin-top: 0;
+    margin-bottom: 0.2em !important;
+    line-height: 1.1111111;
   }
   > h2 {
     @apply mt-5! mb-3! text-3xl!;

@@ -121,7 +121,7 @@
 @utility navbar-group-font-title {
   font-size: var(--color-navbar-group-font-title-size);
   @apply font-semibold uppercase;
-  color: var(--color-navbar-text-dark);
+  color: var(--color-navbar-text);
   .dark & {
     color: var(--color-navbar-text-dark);
   }

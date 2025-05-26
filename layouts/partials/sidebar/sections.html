@@ -52,7 +52,7 @@
   <li x-data="{ expanded: {{ $expanded }} }">
     <div
       class="justify-between{{ if $isCurrent }}
-        bg-gray-200 dark:bg-gray-800
+        bg-gray-100 dark:bg-gray-900
       {{ end }} flex w-full items-center rounded-sm px-4"
     >
       <div class="w-full truncate py-1">
@@ -119,7 +119,7 @@
     {{ $isCurrent := eq page . }}
     <li
       class="hover:text-blue {{ if $isCurrent }}
-        bg-gray-200 dark:bg-gray-800
+        bg-gray-100 dark:bg-gray-900
       {{ end }} rounded-sm px-4 hover:dark:text-blue-400"
     >
       <a

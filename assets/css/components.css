@@ -38,13 +38,13 @@
     @apply bg-gray-50 dark:bg-gray-900;
   }
   .admonition-header {
-    @apply flex items-center gap-2;
+    @apply flex flex-wrap items-center gap-2;
   }
   .admonition-title {
     @apply font-semibold;
   }
   .admonition-content {
-    @apply min-w-0 flex-1;
+    @apply w-full min-w-0 flex-1 flex-wrap overflow-x-auto break-words;
     color: var(--tw-prose-body);
   }
   .admonition-note {
