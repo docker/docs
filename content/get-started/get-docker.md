@@ -35,19 +35,19 @@ section and choose the best installation path for you.
   title="Docker Desktop for Mac"
   description="A native application using the macOS sandbox security model that delivers all Docker tools to your Mac."
   link="/desktop/setup/install/mac-install/"
-  icon="/icons/AppleMac.svg" >}}
+  icon="/assets/icons/AppleMac.svg" >}}
 
 {{< card
   title="Docker Desktop for Windows"
   description="A native Windows application that delivers all Docker tools to your Windows computer."
   link="/desktop/setup/install/windows-install/"
-  icon="/icons/Windows.svg" >}}
+  icon="/assets/icons/Windows.svg" >}}
 
 {{< card
   title="Docker Desktop for Linux"
   description="A native Linux application that delivers all Docker tools to your Linux computer."
   link="/desktop/setup/install/linux/"
-  icon="/icons/Linux.svg" >}}
+  icon="/assets/icons/Linux.svg" >}}
 
 > [!NOTE]
 >
