@@ -29,17 +29,17 @@ This guide will walk you through the installation process, enabling you to exper
 {{< card
   title="Docker Desktop for Mac"
   description="[Download (Apple Silicon)](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64) | [Download (Intel)](https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64) | [Install instructions](/desktop/setup/install/mac-install)"
-  icon="/assets/icons/AppleMac.svg" >}}
+  icon="/icons/AppleMac.svg" >}}
 
 {{< card
   title="Docker Desktop for Windows"
   description="[Download](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-windows) | [Install instructions](/desktop/setup/install/windows-install)"
-  icon="/assets/icons/Windows.svg" >}}
+  icon="/icons/Windows.svg" >}}
 
 {{< card
   title="Docker Desktop for Linux"
   description="[Install instructions](/desktop/setup/install/linux/)"
-  icon="/assets/icons/Linux.svg" >}}
+  icon="/icons/Linux.svg" >}}
 
 
 Once it's installed, complete the setup process and you're all set to run a Docker container.

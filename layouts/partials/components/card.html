@@ -8,10 +8,14 @@
       {{ end }}
       {{ with .icon }}
       <div class="card-icon">
-        {{ if (in . "/") }}
+        {{ if (in . ".svg") }}
+         <span class="card-img svg">
+            {{ partial "utils/svg" . }}
+          </span>
+        {{ else if (in . "/") }}
           <img class="card-img" src="{{ . }}" alt="">
         {{ else }}
-          <span class="card-img">
+          <span class="card-img svg">
             {{ partial "icon" . }}
           </span>
         {{ end }}
