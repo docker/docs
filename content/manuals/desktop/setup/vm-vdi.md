@@ -49,7 +49,11 @@ experience. To use Docker Cloud mode:
 4. Sign in to Docker Desktop.
 
 After you sign in, Docker Cloud mode is enabled by default and cannot be
-disabled. In this mode, Docker Desktop mirrors your cloud environment, providing
+disabled. When enabled, Docker Desktop's Dashboard header appears purple and the
+cloud mode toggle is a cloud icon ({{< inline-image
+src="./images/cloud-mode.png" alt="Cloud mode icon" >}}).
+
+In this mode, Docker Desktop mirrors your cloud environment, providing
 a seamless view of your containers and resources running on Docker Cloud. You
 can verify that Docker Cloud mode is working by running a simple container. In a
 terminal on your virtual desktop, run the following command:
