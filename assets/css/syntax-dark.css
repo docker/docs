@@ -9,6 +9,7 @@
   }
   /* CodeLine */
   .cl {
+    color: var(--color-gray-200);
   }
   /* LineHighlight */
   .hl {
@@ -46,7 +47,7 @@
   }
   /* KeywordConstant */
   .kc {
-    color: var(--color-violet-700);
+    color: var(--color-violet-300);
   }
   /* KeywordDeclaration */
   .kd {
@@ -70,7 +71,7 @@
   }
   /* Name */
   .n {
-    color: var(--color-violet-700);
+    color: var(--color-violet-300);
   }
   /* NameAttribute */
   .na {
@@ -82,7 +83,7 @@
   }
   /* NameBuiltinPseudo */
   .bp {
-    color: var(--color-violet-700);
+    color: var(--color-violet-300);
   }
   /* NameClass */
   .nc {
@@ -94,7 +95,7 @@
   }
   /* NameDecorator */
   .nd {
-    color: var(--color-violet-700);
+    color: var(--color-violet-300);
   }
   /* NameEntity */
   .ni {
@@ -106,11 +107,11 @@
   }
   /* NameFunction */
   .nf {
-    color: var(--color-blue-600);
+    color: var(--color-blue-400);
   }
   /* NameFunctionMagic */
   .fm {
-    color: var(--color-blue-600);
+    color: var(--color-blue-400);
   }
   /* NameLabel */
   .nl {
@@ -126,15 +127,15 @@
   }
   /* NameProperty */
   .py {
-    color: var(--color-white-main);
+    color: var(--color-violet-300);
   }
   /* NameTag */
   .nt {
-    color: var(--color-green-600);
+    color: var(--color-green-300);
   }
   /* NameVariable */
   .nv {
-    color: var(--color-white-main);
+    color: var(--color-green-500);
   }
   /* NameVariableClass */
   .vc {
@@ -206,7 +207,7 @@
   }
   /* LiteralStringRegex */
   .sr {
-    color: var(--color-blue-500);
+    color: var(--color-blue-400);
   }
   /* LiteralStringSingle */
   .s1 {
@@ -214,39 +215,39 @@
   }
   /* LiteralStringSymbol */
   .ss {
-    color: var(--color-blue-600);
+    color: var(--color-blue-400);
   }
   /* LiteralNumber */
   .m {
-    color: var(--color-blue-600);
+    color: var(--color-blue-400);
   }
   /* LiteralNumberBin */
   .mb {
-    color: var(--color-blue-600);
+    color: var(--color-blue-400);
   }
   /* LiteralNumberFloat */
   .mf {
-    color: var(--color-blue-600);
+    color: var(--color-blue-400);
   }
   /* LiteralNumberHex */
   .mh {
-    color: var(--color-blue-600);
+    color: var(--color-blue-400);
   }
   /* LiteralNumberInteger */
   .mi {
-    color: var(--color-blue-600);
+    color: var(--color-blue-400);
   }
   /* LiteralNumberIntegerLong */
   .il {
-    color: var(--color-blue-600);
+    color: var(--color-blue-400);
   }
   /* LiteralNumberOct */
   .mo {
-    color: var(--color-blue-600);
+    color: var(--color-blue-400);
   }
   /* Operator */
   .o {
-    color: var(--color-blue-700);
+    color: var(--color-blue-200);
   }
   /* OperatorWord */
   .ow {
