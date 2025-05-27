@@ -442,7 +442,7 @@ reduces the image size, since the apt cache isn't stored in a layer. Since the
 `RUN` statement starts with `apt-get update`, the package cache is always
 refreshed prior to `apt-get install`.
 
-Official Debian and Ubuntu images [automatically run `apt-get clean`](https://github.com/moby/moby/blob/03e2923e42446dbb830c654d0eec323a0b4ef02a/contrib/mkimage/debootstrap#L82-L105), so explicit invocation is not required.
+Official Debian and Ubuntu images [automatically run `apt-get clean`](https://github.com/debuerreotype/debuerreotype/blob/c9542ab785e72696eb2908a6dbc9220abbabef39/scripts/debuerreotype-minimizing-config#L87-L109), so explicit invocation is not required.
 
 #### Using pipes
 
