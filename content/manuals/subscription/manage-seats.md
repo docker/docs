@@ -35,8 +35,7 @@ To add seats to your subscription:
 3. Select your account from the drop-down menu in the top-left.
 4. Select **Add seats**.
 5. Follow the on-screen instructions to complete adding seats. Note, you can't
-use pay by invoice for purchasing additional seats. You must use a card or US
-bank account.
+use pay-by-invoice for purchasing additional seats. You must use a card or US bank account.
 
 > [!NOTE]
 >

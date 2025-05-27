@@ -34,7 +34,7 @@ $95. The renewal cost remains $100.
 > [!IMPORTANT]
 >
 > Pay by invoice is only available on first-time checkouts and subscription
-renewals. You can't use pay by invoice for subscription upgrades or changes.
+renewals. You can't use pay-by-invoice for subscription upgrades or changes.
 
 To change your billing cycle:
 
@@ -76,7 +76,7 @@ You must be an organization owner to make changes to an organization's payment i
 > [!IMPORTANT]
 >
 > Pay by invoice is only available on first-time checkouts and subscription
-renewals. You can't use pay by invoice for subscription upgrades or changes.
+renewals. You can't use pay-by-invoice for subscription upgrades or changes.
 
 To change your organization's billing cycle:
 

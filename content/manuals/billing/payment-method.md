@@ -158,7 +158,7 @@ To add a payment method:
 {{< /tab >}}
 {{< /tabs >}}
 
-## Enable pay by invoice
+## Enable pay-by-invoice
 
 Pay by invoice is available during first-time checkouts and subscription
 renewals for subscribers with an annual subscription. When enabled, subscription
@@ -173,7 +173,7 @@ by invoice for subscription upgrades or purchasing additional seats.
 1. Sign in to [Docker Home](https://app.docker.com/).
 2. Under **Settings and administration**, select **Billing**.
 3. Select **Payment methods**, then **Pay by invoice**.
-4. To enable pay by invoice, select the **Pay by invoice** toggle.
+4. To enable pay-by-invoice, select the **Pay by invoice** toggle.
 5. Confirm your billing contact details. If you need to change them, select
 **Change** and enter your new billing contact details.
 
