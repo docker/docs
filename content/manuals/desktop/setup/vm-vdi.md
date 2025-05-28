@@ -50,7 +50,7 @@ experience. To use Docker Cloud:
 
 After you sign in, Docker Cloud is enabled by default and cannot be
 disabled. When enabled, Docker Desktop's Dashboard header appears purple and the
-cloud mode toggle is a cloud icon ({{< inline-image
+cloud-mode toggle is a cloud icon ({{< inline-image
 src="./images/cloud-mode.png" alt="Cloud mode icon" >}}).
 
 In this mode, Docker Desktop mirrors your cloud environment, providing
