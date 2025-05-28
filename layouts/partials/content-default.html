@@ -1,20 +1,19 @@
 <div class="flex w-full gap-8">
-  <article class="prose min-w-0 max-w-4xl flex-[2_2_0%] dark:prose-invert">
+  <article class="prose dark:prose-invert max-w-4xl min-w-0 flex-[2_2_0%]">
     {{ partial "breadcrumbs.html" . }}
-    <h1 data-pagefind-weight="10" class="flex scroll-mt-36 items-center">
-      <span>{{ .Title }}</span>
-    </h1>
-
+    <div class="flex items-start justify-between">
+      <h1 data-pagefind-weight="10">{{ .Title }}</h1>
+      <div class="md-dropdown ml-auto hidden lg:block">
+        {{ partial "md-dropdown.html" . }}
+      </div>
+    </div>
     <div class="block lg:hidden">
       {{ partialCached "pagemeta.html" . . }}
       <hr />
     </div>
     {{ .Content }}
   </article>
-  <div class="hidden lg:block ml-auto md-dropdown">
-    {{ partial "md-dropdown.html" . }}
-  </div>
-  <div class="-mr-8 -mt-8 hidden min-w-52 flex-1 lg:block">
+  <div class="-mt-8 -mr-8 hidden min-w-52 flex-1 lg:block">
     {{ partial "aside.html" . }}
   </div>
 </div>
