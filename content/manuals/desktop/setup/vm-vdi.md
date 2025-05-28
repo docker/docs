@@ -33,7 +33,7 @@ isn't supported. In these environments, Docker Desktop defaults to using
 cloud mode to ensure you can still build and run containers without relying on
 local virtualization.
 
-Docker Cloud mode decouples the Docker Desktop client from the Docker Engine,
+Docker Cloud decouples the Docker Desktop client from the Docker Engine,
 allowing the Docker CLI and Docker Desktop Dashboard to interact with
 cloud-based resources as if they were local. When you run a container, Docker
 provisions a secure, isolated, and ephemeral cloud environment connected to
