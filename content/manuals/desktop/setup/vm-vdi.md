@@ -29,7 +29,7 @@ includes an insights dashboard that offers performance metrics and environment
 management to help optimize your development workflow.
 
 This mode is useful in virtual desktop environments where nested virtualization
-isn't supported. In these environments, Docker Desktop defaults to using Docker
+isn't supported. In these environments, Docker Desktop defaults to using
 cloud mode to ensure you can still build and run containers without relying on
 local virtualization.
 
