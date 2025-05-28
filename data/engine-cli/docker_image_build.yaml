@@ -51,7 +51,7 @@ long: |-
     file to exclude files and directories that you don't require in your build from
     being sent as part of the build context.
 
-    #### Access paths outside the build context
+    #### Accessing paths outside the build context
 
     The legacy builder will error out if you try to access files outside of the
     build context using relative paths in your Dockerfile.
