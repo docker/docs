@@ -1,6 +1,7 @@
 **/.DS_Store
 **/desktop.ini
-.vscode
+.vscode/settings.json
+.vscode/tasks.json
 node_modules
 .hugo_build.lock
 resources
