@@ -114,7 +114,7 @@ Docker does not support running multiple instances of Docker Desktop on the same
 ## Turn on nested virtualization
 
 You must turn on nested virtualization before you install Docker Desktop on a
-virtual machine that will not use Docker Cloud mode.
+virtual machine that will not use Docker Cloud.
 
 ### Turn on nested virtualization on VMware ESXi
 
