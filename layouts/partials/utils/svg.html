@@ -1,0 +1,10 @@
+{{- $path := printf "%s" . }}
+{{- with resources.Get $path }}
+  {{ .Content | safeHTML }}
+{{- else }}
+  {{- if in $path "toolbox.svg" }}
+    {{/* Temporary empty branch */}}
+  {{- else }}
+    {{- errorf "The 'svg' partial was unable to find %s" $path }}
+  {{- end }}
+{{- end }}

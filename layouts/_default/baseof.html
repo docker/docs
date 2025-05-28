@@ -1,16 +1,19 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    {{ partial "head.html" . }}
+  </head>
 
-<head>
-  {{ partial "head.html" . }}
-</head>
-
-<body
-  class="flex flex-col items-center bg-gradient-to-r from-background-light from-20% to-white to-30% text-base dark:from-gray-dark-100 dark:to-background-dark dark:text-white">
-  {{ partial "header.html" . }}
-  <main class="relative flex w-full max-w-[1920px]">
-    <!-- Sidebar -->
-    <div style="scroll-behavior: smooth;" x-data x-init="$nextTick(() => {
+  <body
+    class="dark:bg-navbar-bg-dark bg-navbar-bg flex flex-col items-center text-base text-black dark:text-white"
+  >
+    {{ partial "header.html" . }}
+    <main class="relative flex w-full max-w-[1920px]">
+      <!-- Sidebar -->
+      <div
+        style="scroll-behavior: smooth;"
+        x-data
+        x-init="$nextTick(() => {
           const container = $el; // The div with overflow
           const item = document.getElementById('sidebar-current-page')
           if (item) {
@@ -26,39 +29,51 @@
               }
           }
       })"
-      class="md:h-[calc(100vh-64px)] fixed md:sticky top-0 md:top-16 z-40 hidden h-screen flex-none overflow-y-auto overflow-x-hidden bg-background-light dark:bg-gray-dark-100 w-full md:z-auto md:block md:w-[300px]"
-      :class="{ 'hidden': ! $store.showSidebar }">
-      <!-- Gray backdrop on small screens -->
-      <div class="fixed bg-black/50 md:hidden z-30" x-show="$store.showSidebar" @click="openSidebar = false"
-        x-transition.opacity></div>
-      <div class="z-50 w-full bg-background-light p-4 dark:bg-gray-dark-100 md:block md:w-[300px]">
-        <!-- Collapse button for small screens -->
-        <button class="my-4 md:hidden" @click="$store.showSidebar = false">
-          <span class="icon-svg">{{ partialCached "icon" "arrow_left_alt" "arrow_left_alt" }}</span>
-          Back
-        </button>
-        <!-- Actual Sidebar Content -->
-        {{ block "left" . }}
-          {{ partial "sidebar/mainnav.html" . }}
-          {{ partial "sidebar/sections.html" . }}
+        class="bg-background-toc dark:bg-background-toc fixed top-0 z-40 hidden h-screen w-full flex-none overflow-x-hidden overflow-y-auto md:sticky md:top-16 md:z-auto md:block md:h-[calc(100vh-64px)] md:w-[300px]"
+        :class="{ 'hidden': ! $store.showSidebar }"
+      >
+        <!-- Gray backdrop on small screens -->
+        <div
+          class="fixed bg-black/50 md:hidden"
+          x-show="$store.showSidebar"
+          @click="openSidebar = false"
+          x-transition.opacity
+        ></div>
+        <div
+          class="bg-background-toc dark:bg-background-toc z-50 w-full p-4 md:block md:w-[300px]"
+        >
+          <!-- Collapse button for small screens -->
+          <button class="my-4 md:hidden" @click="$store.showSidebar = false">
+            <span class="icon-svg"
+              >{{ partialCached "icon" "arrow_left_alt" "arrow_left_alt" }}</span
+            >
+            Back
+          </button>
+          <!-- Actual Sidebar Content -->
+          {{ block "left" . }}
+            {{ partial "sidebar/mainnav.html" . }}
+            {{ partial "sidebar/sections.html" . }}
+          {{ end }}
+        </div>
+      </div>
+
+      <!-- Main content -->
+      <div
+        {{ if ne .Params.sitemap false }}data-pagefind-body{{- end }}
+        class="dark:bg-background-dark w-full min-w-0 bg-white p-8"
+      >
+        {{ block "main" . }}
         {{ end }}
       </div>
-    </div>
+    </main>
 
-    <!-- Main content -->
-    <div {{ if ne .Params.sitemap false }}data-pagefind-body{{- end }}
-      class="w-full min-w-0 bg-white p-8 dark:bg-background-dark">
-      {{ block "main" . }}
-      {{ end }}
-    </div>
-  </main>
+    <footer class="relative z-10 w-full">
+      {{ partialCached "footer.html" . }}
+    </footer>
 
-  <footer class="w-full z-10 relative">{{ partialCached "footer.html" . }}</footer>
-
-  {{/* Load the YouTube player if the page embeds a YouTube video */}}
-  {{ with .Store.Get "youtube" }}
-  {{ partial "youtube-script.html" . }}
-  {{ end }}
-</body>
-
+    {{/* Load the YouTube player if the page embeds a YouTube video */}}
+    {{ with .Store.Get "youtube" }}
+      {{ partial "youtube-script.html" . }}
+    {{ end }}
+  </body>
 </html>

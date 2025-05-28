@@ -7,14 +7,13 @@
   {{- if eq .File nil }}
     {{- errorf "[tags] Undefined tag: '%s' in %s" (urlize (strings.ToLower .Title)) page.File.Filename }}
   {{- end }}
-<a class="text-sm inline-flex items-center rounded-full border
-          border-divider-light dark:border-divider-dark bg-gray-light-100 px-2
-          text-gray-light-800 dark:bg-gray-dark-200 dark:text-gray-dark-800
-          select-none"
-  href="{{ .Permalink }}">
+  <a
+    class="border-divider-light dark:border-divider-dark bg-gray-00 inline-flex items-center rounded-full border px-2 text-sm text-gray-800 select-none hover:bg-gray-100 dark:bg-gray-800 dark:text-gray-200 hover:dark:bg-gray-700"
+    href="{{ .Permalink }}"
+  >
     <span class="icon-svg icon-sm pb-0.5">
       {{ partialCached "icon" "tag" "tag" }}
     </span>
     <span>{{ .LinkTitle }}</span>
-</a>
+  </a>
 {{- end -}}
