@@ -55,7 +55,7 @@ src="./images/cloud-mode.png" alt="Cloud mode icon" >}}).
 
 In this mode, Docker Desktop mirrors your cloud environment, providing
 a seamless view of your containers and resources running on Docker Cloud. You
-can verify that Docker Cloud mode is working by running a simple container. In a
+can verify that Docker Cloud is working by running a simple container. In a
 terminal on your virtual desktop, run the following command:
 
 ```console
