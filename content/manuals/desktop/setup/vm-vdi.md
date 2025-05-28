@@ -39,7 +39,7 @@ cloud-based resources as if they were local. When you run a container, Docker
 provisions a secure, isolated, and ephemeral cloud environment connected to
 Docker Desktop via an SSH tunnel. Despite running remotely, features like bind
 mounts and port forwarding continue to work seamlessly, providing a local-like
-experience. To use Docker Cloud mode:
+experience. To use Docker Cloud:
 
 1. Contact Docker at `docker-cloud@docker.com` to activate the feature for your
    account.
