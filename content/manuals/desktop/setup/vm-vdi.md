@@ -82,7 +82,7 @@ Access the Docker Cloud Dashboard at https://app.docker.com/cloud.
 
 ### Limitations
 
-The following limitations apply when using Docker Cloud mode:
+The following limitations apply when using Docker Cloud:
 
 - Persistence: Containers are launched in a cloud engine that remains available
   as long as you interact with and consume the containers' output. After closing
