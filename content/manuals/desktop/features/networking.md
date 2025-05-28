@@ -68,6 +68,51 @@ To enable and set up SOCKS proxy support:
 3. Switch on the **Manual proxy configuration** toggle. 
 4. In the **Secure Web Server HTTPS** box, paste your `socks5://host:port` URL.
 
+## Networking mode and DNS behaviour for Mac and Windows
+
+With Docker Desktop version 4.32 and later, you can customize how Docker handles container networking and DNS resolution to better support a range of environments — from IPv4-only to dual-stack and IPv6-only systems. These settings help prevent timeouts and connectivity issues caused by incompatible or misconfigured host networks.
+
+> [!NOTE]
+>
+> These settings can be overridden on a per-network basis using CLI flags or Compose file options.
+
+### Default networking mode
+
+Choose the default IP protocol used when Docker creates new networks. This allows you to align Docker with your host’s network capabilities or organizational requirements, such as enforcing IPv6-only access.
+
+The options available are:
+
+- **Dual IPv4/IPv6** (Default): Supports both IPv4 and IPv6. Most flexible and ideal for environments with dual-stack networking.
+- **IPv4 only**: Only IPv4 addresses are used. Use this if your host or network does not support IPv6.
+- **IPv6 only**: Only IPv6 addresses are used. Best for environments transitioning to or enforcing IPv6-only connectivity.
+
+> [!NOTE]
+>
+> This setting can be overridden on a per-network basis using CLI flags or Compose file options.
+
+### DNS resolution behavior 
+
+Control how Docker filters DNS records returned to containers, improving reliability in environments where only IPv4 or IPv6 is supported. This setting is especially useful for preventing apps from trying to connect using IP families that aren't actually available, which can cause avoidable delays or failures.
+
+Depending on your selected network mode, the options available are:
+
+- **Auto (recommended)**: Docker detects your host's network stack and automatically filters out unsupported DNS record types (A for IPv4, AAAA for IPv6).
+- **Filter IPv4 (A records)**: Prevents containers from resolving IPv4 addresses. Only available in dual-stack mode.
+- **Filter IPv6 (AAAA records)**: Prevents containers from resolving IPv6 addresses. Only available in dual-stack mode.
+- **No filtering**: Docker returns all DNS records (A and AAAA), regardless of host support.
+
+> [!IMPORTANT]
+>
+> Switching the default networking mode resets the DNS filter to Auto.
+
+### Using Settings Management
+
+If you're an administrator, you can use Settings Management to enforce this Docker Desktop setting across your developer's machines. Add the following to your `admin-settings.json` file and swap in your chosen network mode and DNS resolution behavior
+
+- TODO
+
+
+
 ## Networking features for Mac and Linux
 
 ### SSH agent forwarding

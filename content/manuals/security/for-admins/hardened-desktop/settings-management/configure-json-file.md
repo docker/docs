@@ -301,6 +301,13 @@ quit and reopened.
 >
 > These containers mount the Docker socket, so you must add the images to the ECI images list. If not, ECI will block the mount and Kubernetes won't start.
 
+### Networking
+
+|Parameter|OS|Description|Version|
+|:-------------------------------|---|:-------------------------------|---|
+
+TODO
+
 ### Features in development
 
 |Parameter|OS|Description|Version|
