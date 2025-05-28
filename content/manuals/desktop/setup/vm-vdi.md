@@ -19,7 +19,7 @@ depending on whether nested virtualization is supported:
 - If nested virtualization is not supported, Docker recommends using Docker
   Cloud. To join the beta, contact Docker at `docker-cloud@docker.com`.
 
-## Use Docker Cloud mode
+## Use Docker Cloud 
 
 {{< summary-bar feature_name="Docker Cloud" >}}
 
