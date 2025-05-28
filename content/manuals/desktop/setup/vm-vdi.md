@@ -48,7 +48,7 @@ experience. To use Docker Cloud:
 3. [Start Docker Desktop](/manuals/desktop/setup/install/windows-install.md#start-docker-desktop).
 4. Sign in to Docker Desktop.
 
-After you sign in, Docker Cloud mode is enabled by default and cannot be
+After you sign in, Docker Cloud is enabled by default and cannot be
 disabled. When enabled, Docker Desktop's Dashboard header appears purple and the
 cloud mode toggle is a cloud icon ({{< inline-image
 src="./images/cloud-mode.png" alt="Cloud mode icon" >}}).
