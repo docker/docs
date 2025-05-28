@@ -30,7 +30,7 @@ management to help optimize your development workflow.
 
 This mode is useful in virtual desktop environments where nested virtualization
 isn't supported. In these environments, Docker Desktop defaults to using Docker
-Cloud mode to ensure you can still build and run containers without relying on
+cloud mode to ensure you can still build and run containers without relying on
 local virtualization.
 
 Docker Cloud mode decouples the Docker Desktop client from the Docker Engine,
