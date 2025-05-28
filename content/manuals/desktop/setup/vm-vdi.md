@@ -23,7 +23,7 @@ depending on whether nested virtualization is supported:
 
 {{< summary-bar feature_name="Docker Cloud" >}}
 
-Docker Cloud mode lets you offload container workloads to a high-performance,
+Docker Cloud lets you offload container workloads to a high-performance,
 fully hosted cloud environment, enabling a seamless hybrid experience. It
 includes an insights dashboard that offers performance metrics and environment
 management to help optimize your development workflow.
