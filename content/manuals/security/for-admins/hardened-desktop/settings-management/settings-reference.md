@@ -517,27 +517,31 @@ settings.
 
 | Default value | Accepted values | Format   |
 |---------------|-----------------|----------|
-| `Dual IPv4/IPv6` | `IPv4 only`, `IPv6 only` | String  |
+| `dual-stack` | `ipv4only`, `ipv6only` | String  |
 
 - **Description:** Set the networking mode.
 - **OS:** {{< badge color=blue text="Windows and Mac" >}}
 - **Use case:** Choose the default IP protocol used when Docker creates new networks.
 - **Configure this setting with:**
     - **Network** Resources settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
-    - Settings Management: TODO setting in the [`admin-settings.json` file](/manuals/security/for-admins/hardened-desktop/settings-management/configure-json-file.md)
+    - Settings Management: `defaultNetworkingMode` setting in the [`admin-settings.json` file](/manuals/security/for-admins/hardened-desktop/settings-management/configure-json-file.md)
+
+For more information, see [Networking](/manuals/desktop/features/networking.md#networking-mode-and-dns-behaviour-for-mac-and-windows).
 
 #### Inhibit DNS resolution for IPv4/IPv6
 
 | Default value | Accepted values | Format   |
 |---------------|-----------------|----------|
-| `Auto` | `Filter IPv4 (A records)`, `Filter IPv6 (AAAA records)` | String  |
+| `auto` | `ipv4`, `ipv6`, `none` | String  |
 
 - **Description:** Filters unsupported DNS record types.
 - **OS:** {{< badge color=blue text="Windows and Mac" >}}
 - **Use case:** Control how Docker filters DNS records returned to containers, improving reliability in environments where only IPv4 or IPv6 is supported.
 - **Configure this setting with:**
     - **Network** Resources settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
-    - Settings Management: TODO setting in the [`admin-settings.json` file](/manuals/security/for-admins/hardened-desktop/settings-management/configure-json-file.md)
+    - Settings Management: `DnsInhibition` setting in the [`admin-settings.json` file](/manuals/security/for-admins/hardened-desktop/settings-management/configure-json-file.md)
+
+For more information, see [Networking](/manuals/desktop/features/networking.md#networking-mode-and-dns-behaviour-for-mac-and-windows).
 
 ### Enable WSL engine
 

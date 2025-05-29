@@ -107,11 +107,93 @@ Depending on your selected network mode, the options available are:
 
 ### Using Settings Management
 
-If you're an administrator, you can use Settings Management to enforce this Docker Desktop setting across your developer's machines. Add the following to your `admin-settings.json` file and swap in your chosen network mode and DNS resolution behavior
+If you're an administrator, you can use Settings Management to enforce this Docker Desktop setting across your developer's machines. Choose from the following code snippets and at it to your `admin-settings.json` file.
 
-- TODO
+{{< tabs >}}
+{{< tab name="Networking mode" >}}
 
+Dual IPv4/IPv6:
 
+```json
+{
+  "networkingMode": {
+    "locked": true
+    "value": dual-stack
+  }
+}
+```
+
+IPv4 only:
+
+```json
+{
+  "networkingMode": {
+    "locked": true
+    "value": ipv4only
+  }
+}
+```
+
+IPv6 only:
+
+```json
+{
+  "networkingMode": {
+    "locked": true
+    "value": ipv6only
+  }
+}
+```
+
+{{< /tab >}}
+{{< tab name="DNS resolution" >}}
+
+Auto filter:
+
+```json
+{
+  "DnsInhibition": {
+    "locked": true
+    "value": auto
+  }
+}
+```
+
+Filter IPv4:
+
+```json
+{
+  "DnsInhibition": {
+    "locked": true
+    "value": ipv4
+  }
+}
+```
+
+Filter IPv6:
+
+```json
+{
+  "DnsInhibition": {
+    "locked": true
+    "value": ipv6
+  }
+}
+```
+
+No filter:
+
+```json
+{
+  "DnsInhibition": {
+    "locked": true
+    "value": none
+  }
+}
+```
+
+{{< /tab >}}
+{{< /tabs >}}
 
 ## Networking features for Mac and Linux
 
