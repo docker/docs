@@ -107,7 +107,7 @@ Depending on your selected network mode, the options available are:
 
 ### Using Settings Management
 
-If you're an administrator, you can use Settings Management to enforce this Docker Desktop setting across your developer's machines. Choose from the following code snippets and at it to your `admin-settings.json` file.
+If you're an administrator, you can use [Settings Management](/manuals/security/for-admins/hardened-desktop/settings-management/configure-json-file.md#networking) to enforce this Docker Desktop setting across your developer's machines. Choose from the following code snippets and at it to your `admin-settings.json` file.
 
 {{< tabs >}}
 {{< tab name="Networking mode" >}}
@@ -116,9 +116,9 @@ Dual IPv4/IPv6:
 
 ```json
 {
-  "networkingMode": {
+  "defaultNetworkingMode": {
     "locked": true
-    "value": dual-stack
+    "value": "dual-stack"
   }
 }
 ```
@@ -127,9 +127,9 @@ IPv4 only:
 
 ```json
 {
-  "networkingMode": {
+  "defaultNetworkingMode": {
     "locked": true
-    "value": ipv4only
+    "value": "ipv4only"
   }
 }
 ```
@@ -138,9 +138,9 @@ IPv6 only:
 
 ```json
 {
-  "networkingMode": {
+  "defaultNetworkingMode": {
     "locked": true
-    "value": ipv6only
+    "value": "ipv6only"
   }
 }
 ```
@@ -152,9 +152,9 @@ Auto filter:
 
 ```json
 {
-  "DnsInhibition": {
+  "dnsInhibition": {
     "locked": true
-    "value": auto
+    "value": "auto"
   }
 }
 ```
@@ -163,9 +163,9 @@ Filter IPv4:
 
 ```json
 {
-  "DnsInhibition": {
+  "dnsInhibition": {
     "locked": true
-    "value": ipv4
+    "value": "ipv4"
   }
 }
 ```
@@ -174,9 +174,9 @@ Filter IPv6:
 
 ```json
 {
-  "DnsInhibition": {
+  "dnsInhibition": {
     "locked": true
-    "value": ipv6
+    "value": "ipv6"
   }
 }
 ```
@@ -185,9 +185,9 @@ No filter:
 
 ```json
 {
-  "DnsInhibition": {
+  "dnsInhibition": {
     "locked": true
-    "value": none
+    "value": "none"
   }
 }
 ```

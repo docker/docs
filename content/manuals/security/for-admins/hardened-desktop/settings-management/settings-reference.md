@@ -539,7 +539,7 @@ For more information, see [Networking](/manuals/desktop/features/networking.md#n
 - **Use case:** Control how Docker filters DNS records returned to containers, improving reliability in environments where only IPv4 or IPv6 is supported.
 - **Configure this setting with:**
     - **Network** Resources settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
-    - Settings Management: `DnsInhibition` setting in the [`admin-settings.json` file](/manuals/security/for-admins/hardened-desktop/settings-management/configure-json-file.md)
+    - Settings Management: `dnsInhibition` setting in the [`admin-settings.json` file](/manuals/security/for-admins/hardened-desktop/settings-management/configure-json-file.md)
 
 For more information, see [Networking](/manuals/desktop/features/networking.md#networking-mode-and-dns-behaviour-for-mac-and-windows).
 
