@@ -175,7 +175,7 @@ Domain management:
   subscription: [Business]
   for: Administrators
 Enforce sign-in:
-  subscription: [Business]
+  subscription: [Team, Business]
   for: Administrators
 Gated distribution:
   availability: Early Access
