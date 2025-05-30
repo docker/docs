@@ -39,4 +39,9 @@
     ],
     "description": "Insert a Hugo tabs block with two tabs and snippet stops for names and content",
   },
+  "Insert a Button": {
+    "prefix": ["button"],
+    "body": ["{{< button url=\"$1\" text=\"$2\" >}}"],
+    "description": "Insert a Hugo button",
+  },
 }
