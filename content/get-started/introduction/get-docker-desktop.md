@@ -26,6 +26,7 @@ This guide will walk you through the installation process, enabling you to exper
 > Commercial use of Docker Desktop in larger enterprises (more than 250
 > employees OR more than $10 million USD in annual revenue) requires a [paid subscription](https://www.docker.com/pricing/?_gl=1*1nyypal*_ga*MTYxMTUxMzkzOS4xNjgzNTM0MTcw*_ga_XJWPQMJYHQ*MTcxNjk4MzU4Mi4xMjE2LjEuMTcxNjk4MzkzNS4xNy4wLjA.).
 
+<div class="not-prose">
 {{< card
   title="Docker Desktop for Mac"
   description="[Download (Apple Silicon)](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64) | [Download (Intel)](https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64) | [Install instructions](/desktop/setup/install/mac-install)"
@@ -40,7 +41,7 @@ This guide will walk you through the installation process, enabling you to exper
   title="Docker Desktop for Linux"
   description="[Install instructions](/desktop/setup/install/linux/)"
   icon="/icons/Linux.svg" >}}
-
+</div>
 
 Once it's installed, complete the setup process and you're all set to run a Docker container.
 
