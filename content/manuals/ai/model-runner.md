@@ -41,7 +41,7 @@ Models are pulled from Docker Hub the first time they're used and stored locally
 5. Open the **Settings** view in Docker Desktop.
 6. Navigate to **Features in development**.
 7. From the **Beta** tab, tick the **Enable Docker Model Runner** setting.
-8. If you are running on Windows, check tick the **Enable GPU-backed inference** setting.
+8. If you are running on Windows with a supported NVIDIA GPU, you should also see and be able to tick the **Enable GPU-backed inference** setting.
 
 You can now use the `docker model` command in the CLI and view and interact with your local models in the **Models** tab in the Docker Desktop Dashboard.
 
