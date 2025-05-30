@@ -303,11 +303,12 @@ quit and reopened.
 
 ### Features in development
 
-|Parameter|OS|Description|Version|
-|:-------------------------------|---|:-------------------------------|---|
-| `allowExperimentalFeatures`| | If `value` is set to `false`, experimental features are disabled.|  |
-| `allowBetaFeatures`| | If `value` is set to `false`, beta features are disabled.|  |
-| `enableDockerAI` | | If `value` is set to `false`, Docker AI (Ask Gordon) features are disabled. |  |
+| Parameter                   | OS | Description                                                                                                                                                           | Version |
+|:----------------------------|----|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
+| `allowExperimentalFeatures` |    | If `value` is set to `true`, experimental features are enabled.                                                                                                       |         |
+| `allowBetaFeatures`         |    | If `value` is set to `true`, beta features are enabled.                                                                                                               |         |
+| `enableDockerAI`            |    | If `value` is set to `true`, Docker AI (Ask Gordon) features are enabled.                                                                                             |         |
+| `enableDockerMCPToolkit`    |    | If `allowBetaFeatures` is true, setting `enableDockerMCPToolkit` to `true` enables the [MCP toolkit feature](/manuals/ai/mcp-catalog-and-toolkit/toolkit.md). |         |
 
 ### Enhanced Container Isolation
 

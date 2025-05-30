@@ -11,10 +11,6 @@ grid:
   description: Configure MCP tools on a per-project basis.
   icon: manufacturing
   link: /ai/gordon/mcp/yaml
-- title: MCP Server
-  description: Use Gordon as an MCP server
-  icon: dns
-  link: /ai/gordon/mcp/gordon-mcp-server/
 aliases:
  - /desktop/features/gordon/mcp/
 ---
