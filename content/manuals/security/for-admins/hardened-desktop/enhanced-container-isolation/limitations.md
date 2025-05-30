@@ -83,11 +83,6 @@ arrangements are needed, just enable ECI and run the KinD tool as usual.
 Extension containers are also not yet protected by ECI. Ensure you extension
 containers come from trusted entities to avoid issues.
 
-### Docker Desktop Dev Environments are not yet protected
-
-Containers launched by the Docker Desktop Dev Environments feature are not yet
-protected.
-
 ### Docker Debug containers are not yet protected
 
 [Docker Debug](https://docs.docker.com/reference/cli/docker/debug/) containers

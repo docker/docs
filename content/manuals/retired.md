@@ -62,6 +62,11 @@ aliases:
   - /toolbox/overview/
   - /toolbox/toolbox_install_mac/
   - /toolbox/toolbox_install_windows/
+  - /desktop/features/dev-environments/
+  - /desktop/features/dev-environments/create-dev-env/
+  - /desktop/features/dev-environments/set-up/
+  - /desktop/features/dev-environments/share/
+  - /desktop/features/dev-environments/dev-cli/
 ---
 
 This document provides an overview of Docker features, products, and
@@ -135,8 +140,7 @@ guidance on modern equivalents.
 ### Dev Environments
 
 Dev Environments was a feature introduced in Docker Desktop that allowed
-developers to spin up development environments quickly. This feature is no
-longer under active development. Similar workflows can be achieved through
+developers to spin up development environments quickly. It was deprecated and removed from Docker Desktop version 4.42 and later. Similar workflows can be achieved through
 Docker Compose or by creating custom configurations tailored to specific
 project requirements.
 
