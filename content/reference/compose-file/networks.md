@@ -190,6 +190,27 @@ networks:
     external: true
 ```
 
+#### Accessing host network in Swarm mode with Stack
+If you need to access the Docker host's network when using Swarm mode with `docker stack deploy`, 
+you can reference the network by declaring it as an external network:
+
+```yml
+services:
+  my-service:
+    image: example/my-service
+    networks:
+      - outside
+
+networks:
+  outside:
+    external:
+      name: "host"
+```
+> [!NOTE]
+> Accessing the Docker host network adds certain limitations on services including restricted port mapping, lack of service replication, and
+> exclusion from the Swarm's ingress routing mesh and service discovery. For more information, see [External Network Drivers](https://docs.docker.com/engine/network/drivers/host/)
+> and [Swarm mode routing mesh](https://docs.docker.com/engine/swarm/ingress/)
+
 ### `ipam`
 
 `ipam` specifies a custom IPAM configuration. This is an object with several properties, each of which is optional:
