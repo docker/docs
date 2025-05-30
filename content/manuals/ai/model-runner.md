@@ -40,18 +40,10 @@ Models are pulled from Docker Hub the first time they're used and stored locally
 4. Quit and reopen Docker Desktop to ensure the changes take effect.
 5. Open the **Settings** view in Docker Desktop.
 6. Navigate to **Features in development**.
-7. From the **Beta** tab, check the **Enable Docker Model Runner** setting.
+7. From the **Beta** tab, tick the **Enable Docker Model Runner** setting.
+8. If you are running on Windows, check tick the **Enable GPU-backed inference** setting.
 
 You can now use the `docker model` command in the CLI and view and interact with your local models in the **Models** tab in the Docker Desktop Dashboard.
-
-### Enable DMR in Docker Engine
-
-1. Ensure you have installed [Docker Engine](/engine/install/).
-2. DMR is available as a package. To install it, run:
-
-   ```console
-   apt install docker-model-plugin
-   ```
 
 ## Available commands
 
