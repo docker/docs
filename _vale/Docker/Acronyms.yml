@@ -17,6 +17,7 @@ exceptions:
   - ASP
   - AUFS
   - AWS
+  - BGP     # Border Gateway Protocol
   - BIOS
   - BPF
   - BSD
