@@ -16,10 +16,13 @@ weight: 30
 By default, members of your organization can use Docker Desktop without signing
 in. When users don’t sign in as a member of your organization, they don’t
 receive the [benefits of your organization’s
-subscription](../../../subscription/details.md) and they can circumvent [Docker’s
-security features](/manuals/security/for-admins/hardened-desktop/_index.md) for your organization.
+subscription](../../../subscription/details.md) and they can circumvent
+[Docker’s
+security features](/manuals/security/for-admins/hardened-desktop/_index.md) for
+your organization.
 
-There are multiple methods for enforcing sign-in, depending on your companies' set up and preferences:
+There are multiple methods for enforcing sign-in, depending on your companies'
+set up and preferences:
 - [Registry key method (Windows only)](methods.md#registry-key-method-windows-only){{< badge color=green text="New" >}}
 - [Configuration profiles method (Mac only)](methods.md#configuration-profiles-method-mac-only){{< badge color=green text="New" >}}
 - [`.plist` method (Mac only)](methods.md#plist-method-mac-only){{< badge color=green text="New" >}}
@@ -27,7 +30,8 @@ There are multiple methods for enforcing sign-in, depending on your companies' s
 
 ## How is sign-in enforced?
 
-When Docker Desktop starts and it detects a registry key, `.plist` file, or `registry.json` file, the following occurs:
+When Docker Desktop starts and it detects a registry key, `.plist` file, or
+`registry.json` file, the following occurs:
 
 - A **Sign in required!** prompt appears requiring the user to sign
   in as a member of your organization to use Docker Desktop. ![Enforce Sign-in
@@ -42,11 +46,13 @@ When Docker Desktop starts and it detects a registry key, `.plist` file, or `reg
 
 > [!NOTE]
 >
-> Enforcing sign-in for Docker Desktop does not impact accessing the Docker CLI. CLI access is only impacted for organizations that enforce single sign-on.
+> Enforcing sign-in for Docker Desktop does not impact accessing the Docker CLI.
+CLI access is only impacted for organizations that enforce single sign-on.
 
 ## Enforcing sign-in versus enforcing single sign-on (SSO)
 
-[Enforcing SSO](/manuals/security/for-admins/single-sign-on/connect.md#optional-enforce-sso) and enforcing sign-in are different features. The following table provides a
+[Enforcing SSO](/manuals/security/for-admins/single-sign-on/connect.md#optional-enforce-sso)
+and enforcing sign-in are different features. The following table provides a
 description and benefits when using each feature.
 
 | Enforcement                       | Description                                                     | Benefits                                                                                                                                                                                                                                                   |
