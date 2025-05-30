@@ -118,9 +118,20 @@
   }
 }
 
+@utility navbar-entry-margin {
+  @apply px-2 py-1;
+}
+
+@utility navbar-group {
+  @apply mt-5;
+}
+
+@utility navbar-entry-background-current {
+  @apply bg-gray-100 dark:bg-gray-900;
+}
 @utility navbar-group-font-title {
   font-size: var(--color-navbar-group-font-title-size);
-  @apply font-semibold uppercase;
+  @apply pb-1.5 font-semibold uppercase;
   color: var(--color-navbar-text);
   .dark & {
     color: var(--color-navbar-text-dark);
