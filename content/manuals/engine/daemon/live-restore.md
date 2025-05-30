@@ -4,8 +4,9 @@ keywords: docker, upgrade, daemon, dockerd, live-restore, daemonless container
 title: Live restore
 weight: 40
 aliases:
-  - /engine/admin/live-restore/
   - /config/containers/live-restore/
+  - /engine/admin/live-restore/
+  - /engine/containers/live-restore/
 ---
 
 By default, when the Docker daemon terminates, it shuts down running containers.

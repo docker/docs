@@ -29,7 +29,8 @@ params:
     link: /get-started/workshop/
     icon: desk
 aliases:
-  - /get-started/what-is-a-container
+  - /engine/tutorials/usingdocker/
+  - /get-started/what-is-a-container/
 ---
 
 If you're new to Docker, this section guides you through the essential resources to get started.
