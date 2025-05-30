@@ -191,6 +191,7 @@ networks:
 ```
 
 #### Accessing host network in Swarm mode with Stack
+
 If you need to access the Docker host's network when using Swarm mode with `docker stack deploy`, 
 you can reference the network by declaring it as an external network:
 
