@@ -104,3 +104,6 @@ input[type="search"]::-ms-clear {
     list-style-type: lower-roman;
   }
 }
+.navbar-group:first-of-type {
+  margin-top: 0.2rem !important;
+}

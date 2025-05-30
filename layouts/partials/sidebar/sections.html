@@ -32,32 +32,36 @@
   {{- end }}
   {{- range .Params.sidebar.groups }}
     <!--  Main titles -->
-    <li class="navbar-group-font-title mt-2 px-2 py-2 pt-5 pb-2">
-      {{ . }}
-    </li>
-    {{- range where $pages "Params.sidebar.group" . }}
-      {{- if .IsSection }}
-        {{- template "renderList" . }}
-      {{- else }}
-        {{- template "renderSingle" . }}
+    <div class="navbar-group">
+      <li class="navbar-group-font-title">
+        {{ . }}
+      </li>
+      {{- range where $pages "Params.sidebar.group" . }}
+        {{- if .IsSection }}
+          {{- template "renderList" . }}
+        {{- else }}
+          {{- template "renderSingle" . }}
+        {{- end }}
       {{- end }}
-    {{- end }}
+    </div>
   {{- end }}
+
 {{ end }}
 
 {{/* Recursive template for sidebar items */}}
 {{ define "renderList" }}
   {{ $isCurrent := eq page . }}
   {{ $expanded := or $isCurrent (page.IsDescendant .) }}
-  <li x-data="{ expanded: {{ $expanded }} }">
+  <li class="" x-data="{ expanded: {{ $expanded }} }">
     <div
-      class="justify-between{{ if $isCurrent }}
-        bg-gray-100 dark:bg-gray-900
-      {{ end }} flex w-full items-center rounded-sm px-4"
+      class="{{ if $isCurrent }}
+        navbar-entry-background-current
+      {{ end }} flex w-full items-center justify-between rounded-sm"
     >
-      <div class="w-full truncate py-1">
+      <div class="navbar-entry-margin w-full truncate">
         {{- if .Permalink }}
           {{/* If the link is not empty, use it */}}
+          <!-- Sections that have children and linking to a page -->
           <a
             {{ if $isCurrent }}
               aria-current="page" id="sidebar-current-page"
@@ -69,6 +73,7 @@
           </a>
         {{- else }}
           {{/* Otherwise, just expand the section */}}
+          <!-- Sections that have children and do not link to a page -->
           <button
             @click="expanded = !expanded"
             class="hover:text-blue w-full text-left select-none hover:dark:text-blue-400"
@@ -77,9 +82,10 @@
           </button>
         {{- end }}
       </div>
+      <!-- Expand group button -->
       <button
         @click="expanded = !expanded"
-        class="rounded-sm hover:bg-gray-300 hover:dark:bg-gray-300"
+        class="rounded-sm hover:bg-gray-200 hover:dark:bg-gray-800"
       >
         <span
           :class="{ 'hidden' : expanded }"
@@ -106,9 +112,9 @@
 
 {{ define "renderSingle" }}
   {{- if .Params.sidebar.goto }}
-    <li class="hover:text-blue px-4 hover:dark:text-blue-400">
+    <li class="navbar-entry-margin hover:text-blue hover:dark:text-blue-400">
       <a
-        class="block w-full truncate py-2"
+        class="block w-full truncate"
         href="{{ .Params.sidebar.goto }}"
         title="{{ .LinkTitle }}"
       >
@@ -118,15 +124,15 @@
   {{- else }}
     {{ $isCurrent := eq page . }}
     <li
-      class="hover:text-blue {{ if $isCurrent }}
-        bg-gray-100 dark:bg-gray-900
-      {{ end }} rounded-sm px-4 hover:dark:text-blue-400"
+      class="navbar-entry-margin hover:text-blue {{ if $isCurrent }}
+        navbar-entry-background-current
+      {{ end }} rounded-sm hover:dark:text-blue-400"
     >
       <a
         {{ if $isCurrent }}
           aria-current="page" id="sidebar-current-page"
         {{ end }}
-        class="block w-full truncate py-2"
+        class="block w-full truncate"
         href="{{ .Permalink }}"
         title="{{ .LinkTitle }}"
       >
@@ -139,8 +145,8 @@
 {{ define "renderTitle" }}
   {{ .LinkTitle }}
   {{- with .Params.sidebar.badge }}
-    <span
-      >{{- partial "components/badge.html" (dict "color" .color "content" .text) }}</span
-    >
+    <span>
+      {{- partial "components/badge.html" (dict "color" .color "content" .text) }}
+    </span>
   {{- end }}
 {{ end }}
