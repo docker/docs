@@ -143,6 +143,10 @@ To call the `chat/completions` OpenAI endpoint from the host via TCP:
 
 1. Enable the host-side TCP support from the Docker Desktop GUI, or via the [Docker Desktop CLI](/manuals/desktop/features/desktop-cli.md).
    For example: `docker desktop enable model-runner --tcp <port>`.
+
+   If you are running on Windows, also enable GPU-backed inference.
+   See [Enable Docker Model Runner](#enable-dmr-in-docker-desktop).
+
 2. Interact with it as documented in the previous section using `localhost` and the correct port.
 
 ```bash
