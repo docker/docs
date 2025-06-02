@@ -342,6 +342,13 @@ module:
           target: data/compose-cli
           includeFiles: "*.yaml"
 
+    # Model CLI
+    - path: github.com/docker/model-cli
+      mounts:
+        - source: docs/reference
+          target: data/model-cli
+          includeFiles: "*.yaml"
+
     # Scout CLI plugin (public dist repo)
     - path: github.com/docker/scout-cli
       mounts:
