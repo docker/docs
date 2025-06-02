@@ -1,6 +1,8 @@
 <div data-pagefind-ignore class="scroll-mt-2" x-data x-ref="root">
   {{ with .Attributes.title }}
-    <div class="mb-3 text-sm text-gray-100 dark:bg-gray-900 dark:text-gray-900">
+    <div
+      class="mb-0 rounded-sm bg-gray-100 p-2 text-sm text-gray-900 dark:bg-gray-900 dark:text-gray-200"
+    >
       {{ . }}
     </div>
   {{ end }}
@@ -38,7 +40,7 @@
           >
             <button
               @click="collapse = false"
-              class="bg-blue flex items-center rounded-full px-2 text-sm text-white dark:bg-blue-400"
+              class="bg-blue flex items-center rounded-full px-2 text-sm text-white dark:bg-blue-500"
             >
               <span>Show more</span>
               <span class="icon-svg"
@@ -51,7 +53,7 @@
             <button
               @click="collapse = true"
               x-show="!collapse"
-              class="rounded-sm-b-lg bg-blue mx-auto mt-4 flex items-center px-2 text-sm text-white dark:bg-blue-800"
+              class="bg-blue mx-auto mt-4 flex items-center rounded-full px-2 text-sm text-white dark:bg-blue-500"
             >
               <span>Hide</span>
               <span class="icon-svg"

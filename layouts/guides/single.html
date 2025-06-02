@@ -6,9 +6,6 @@
 {{ define "main" }}
   {{ partial "content-default.html" . }}
   <div class="prose dark:prose-invert max-w-4xl">
-    <div class="md-dropdown ml-auto hidden lg:block">
-      {{ partial "md-dropdown.html" . }}
-    </div>
     {{ if (.Store.Get "multipage") }}
       {{- with .PrevInSection }}
         <div class="not-prose col-start-2 my-4">

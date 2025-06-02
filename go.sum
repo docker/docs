@@ -185,6 +185,10 @@ github.com/docker/cli v28.0.2+incompatible h1:cRPZ77FK3/IXTAIQQj1vmhlxiLS5m+MIUD
 github.com/docker/cli v28.0.2+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/cli v28.1.0-rc.2+incompatible h1:BDhiR2nacubawpKAWFLqZmjGkARWPtYmUmy5gg4k/f8=
 github.com/docker/cli v28.1.0-rc.2+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
+github.com/docker/cli v28.2.0+incompatible h1:Tnor4OXVIBBPlTegk65OAL+TVlG1pQxsrTw08X8w9ao=
+github.com/docker/cli v28.2.0+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
+github.com/docker/cli v28.2.1+incompatible h1:AYyTcuwvhl9dXdyCiXlOGXiIqSNYzTmaDNpxIISPGsM=
+github.com/docker/cli v28.2.1+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/compose-cli v1.0.35 h1:uZyEHLalfqBS2PiTpA1LAULyJmuQ+YtZg7nG4Xl3/Cc=
 github.com/docker/compose-cli v1.0.35/go.mod h1:mSXI4hFLpRU3EtI8NTo32bNwI0UXSr8jnq+/rYjGAUU=
 github.com/docker/compose/v2 v2.22.0 h1:3rRz4L7tPU75wRsV8JZh2/aTgerQvPa1cpzZN+tHqUY=
@@ -502,6 +506,10 @@ github.com/moby/moby v28.0.2+incompatible h1:CZfEXXYP3TYmdaYw4llMj7NIHA++tQzDiPk
 github.com/moby/moby v28.0.2+incompatible/go.mod h1:fDXVQ6+S340veQPv35CzDahGBmHsiclFwfEygB/TWMc=
 github.com/moby/moby v28.1.0-rc.2+incompatible h1:F9Ku4A7eCFvb9cYR/jk7sLC6U9+r2u4vzjwZQzv/EQc=
 github.com/moby/moby v28.1.0-rc.2+incompatible/go.mod h1:fDXVQ6+S340veQPv35CzDahGBmHsiclFwfEygB/TWMc=
+github.com/moby/moby v28.2.0+incompatible h1:TtiT7qCEOZWnP0+GKsRUPUN3GPvSUt4/0oLOc2trQdk=
+github.com/moby/moby v28.2.0+incompatible/go.mod h1:fDXVQ6+S340veQPv35CzDahGBmHsiclFwfEygB/TWMc=
+github.com/moby/moby v28.2.1+incompatible h1:UYmHExYP8S0uGKDozhYw7RJ+LpANL51g4fa3qT0Q2GA=+
+github.com/moby/moby v28.2.1+incompatible/go.mod h1:fDXVQ6+S340veQPv35CzDahGBmHsiclFwfEygB/TWMc=
 github.com/moby/sys/atomicwriter v0.1.0 h1:kw5D/EqkBwsBFi0ss9v1VG3wIkVhzGvLklJ+w3A14Sw=
 github.com/moby/sys/atomicwriter v0.1.0/go.mod h1:Ul8oqv2ZMNHOceF643P6FKPXeCmYtlQMvpizfsSoaWs=
 github.com/moby/sys/sequential v0.6.0 h1:qrx7XFUd/5DxtqcoH1h438hF5TmOvzC/lspjy7zgvCU=

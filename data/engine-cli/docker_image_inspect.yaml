@@ -19,6 +19,19 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: platform
+      value_type: string
+      description: |-
+        Inspect a specific platform of the multi-platform image.
+        If the image or the server is not multi-platform capable, the command will error out if the platform does not match.
+        'os[/arch[/variant]]': Explicit platform (eg. linux/amd64)
+      deprecated: false
+      hidden: false
+      min_api_version: "1.49"
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
 inherited_options:
     - option: help
       value_type: bool
