@@ -84,7 +84,7 @@ Imagine you want to enable Ask Gordon to interact with your GitHub account:
    the **GitHub Official** server and add it.
 2. In the server's **Config** tab, insert your token generated from
    your [GitHub account](https://github.com/settings/personal-access-tokens).
-3. In the Clients tab, ensure Gordon is connected.
+3. In the **Clients** tab, ensure Gordon is connected.
 4. From the **Ask Gordon** menu, you can now send requests related to your
    GitHub account, in accordance to the tools provided by the GitHub MCP server. To test it, ask Gordon:
 
@@ -115,8 +115,8 @@ and add Claude Desktop as a client:
 
 1. From the **MCP Toolkit** menu, select the **Catalog** tab and find the **Puppeteer** server and add it.
 2. Repeat for the **GitHub** server.
-3. From the **Clients** tab, select **Connect** next to **Claude Desktop**. Now
-   Claude Desktop can access the MCP Toolkit.
+3. From the **Clients** tab, select **Connect** next to **Claude Desktop**. Restart 
+   Claude Desktop if it's running, and it can now access all the servers in the MCP Toolkit.
 4. Within Claude Desktop, run a test by submitting the following prompt using the Sonnet 3.5 model:
 
    ```text
