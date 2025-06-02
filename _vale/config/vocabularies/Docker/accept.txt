@@ -4,6 +4,7 @@ Anchore
 Apple
 Artifactory
 Azure
+AD
 Btrfs
 BuildKit
 BusyBox
