@@ -10,9 +10,7 @@
   {{- if not .Page.Params.icon }}
     {{- errorf "[languages] language is missing an icon: '%s' in %s" (urlize (strings.ToLower .Title)) page.File.Filename }}
   {{- end }}
-  <span
-    class="border-divider-light dark:border-divider-dark inline-flex items-center gap-1 rounded-full border bg-gray-100 px-2 text-sm text-gray-200 select-none dark:bg-gray-800 dark:text-gray-400"
-  >
+  <span class="chip">
     <img
       class="py-1"
       height="18"

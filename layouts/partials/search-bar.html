@@ -62,7 +62,7 @@
     class="bg-background-light dark:bg-background-dark absolute top-full right-0 z-50 w-screen max-w-xl rounded-sm px-6 py-4 shadow-lg"
   >
     <div id="search-bar-results">
-      {{- $emptyState := `<div class="p-2 text-gray-200 dark:text-gray-500">Start typing to search… or try <button @click="open=false" class="open-kapa-widget link">Ask AI</button></div>` }}
+      {{- $emptyState := `<div class="p-2 text-gray-500 dark:text-gray-400">Start typing to search… or try <button @click="open=false" class="open-kapa-widget link">Ask AI</button></div>` }}
       {{- $emptyState | safe.HTML }}
       <!-- results -->
     </div>

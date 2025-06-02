@@ -239,7 +239,7 @@
 
 {{- define "guide-metadata" }}
   <div
-    class="flex items-center justify-between gap-8 text-sm text-gray-200 dark:text-gray-300"
+    class="flex items-center justify-between gap-8 text-sm text-gray-400 dark:text-gray-300"
   >
     <div class="flex flex-wrap gap-2 md:flex-nowrap">
       {{- $langs := .GetTerms "languages" }}
@@ -261,9 +261,7 @@
 {{- end }}
 
 {{- define "termchip" }}
-  <span
-    class="border-divider-light dark:border-divider-dark inline-flex min-w-0 items-center rounded-full border bg-gray-100 px-2 text-sm whitespace-nowrap text-gray-200 select-none dark:bg-gray-800 dark:text-gray-300"
-  >
+  <span class="chip">
     <span class="icon-svg icon-sm pb-0.5">
       {{ partialCached "icon" "tag" "tag" }}
     </span>
