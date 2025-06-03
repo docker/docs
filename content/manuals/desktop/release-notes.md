@@ -33,7 +33,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2025-06-04" >}}
 
-{{< desktop-install-v2 all=true beta_win_arm=true version="4.42.0" build_path="/TBD/" >}}
+{{< desktop-install-v2 all=true beta_win_arm=true version="4.42.0" build_path="/195023/" >}}
 
 ### New
 
@@ -87,6 +87,8 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Fixed an issue where Docker Desktop would not remove entries in the hosts file when uninstalling.
 - Fixed an issue when reading auto-start registry key for some system languages. Fixes [docker/for-win#14731](https://github.com/docker/for-win/issues/14731).
 - Fixed a bug where Docker Desktop was adding unrecognised /etc/wsl.conf `crossDistro` option which was causing WSL 2 to log an error. See [microsoft/WSL#4577](https://github.com/microsoft/WSL/issues/4577)
+- Fixed a bug where Docker Desktop failed to start on WSL 2.5.7 if another WSL distro is still using Linux cgroups v1. Fixes [docker/for-win#14801](https://github.com/docker/for-win/issues/14801)
+- Windows Subsystem for Linux (WSL) version 2.1.5 is now the minimum version required for proper functioning of Docker Desktop application
 
 ### Known issues
 
