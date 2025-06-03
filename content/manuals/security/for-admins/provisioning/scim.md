@@ -73,8 +73,8 @@ For details, see [Just-in-Time](/manuals/security/for-admins/provisioning/just-i
 
 ## Prerequisites
 
-- You've [set up SSO](/manuals/security/single-sign-on) with Docker and verified
-your domain.
+- You've [set up SSO](/manuals/security/for-admins/single-sign-on/_index.md)
+with Docker and verified your domain.
 - You have access to your identity provider's administrator portal with
 permission to create and manage applications.
 
