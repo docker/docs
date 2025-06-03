@@ -7,7 +7,7 @@ NODE_ENV = "production"
 HUGO_VERSION = "0.141.0"
 HUGO_ENABLEGITINFO = "true"
 HUGO_ENVIRONMENT = "preview"
-SECRETS_SCAN_OMIT_KEYS = "LS0t"
+SECRETS_SCAN_SMART_DETECTION_OMIT_VALUES = "true"
 
 [context.deploy-preview]
 command = "hugo --gc --minify -b $DEPLOY_PRIME_URL && npx pagefind@v1.3.0"
