@@ -55,6 +55,7 @@ aliases:
 - /installation/ubuntulinux/
 toc_max: 4
 -​--
+```
 
 ## Body
 
