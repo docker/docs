@@ -38,7 +38,7 @@ Here's an example of a valid (but contrived) page metadata. The order of
 the metadata elements in the front matter isn't important.
 
 ```yaml
--​--
+&#45;&#45;&#45;
 description: Instructions for installing Docker Engine on Ubuntu
 keywords: requirements, apt, installation, ubuntu, install, uninstall, upgrade, update
 title: Install Docker Engine on Ubuntu
@@ -54,7 +54,7 @@ aliases:
 - /install/linux/ubuntu/
 - /installation/ubuntulinux/
 toc_max: 4
--​--
+&#45;&#45;&#45;
 ```
 
 ## Body
