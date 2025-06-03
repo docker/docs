@@ -50,6 +50,7 @@ Security at runtime is enforced through resource and access limitations:
 
 1. Open the Docker Desktop settings and select **Beta features**.
 2. Select **Enable Docker MCP Toolkit**.
+3. Select **Apply & restart**.
 
 >[!NOTE]
 >If you have the MCP Toolkit _extension_ installed, you can uninstall it.
@@ -66,7 +67,7 @@ To install an MCP server:
    - Partner/publisher
    - The list of callable tools the server provides.
 
-2. Find the MCP server of your choice and click the **Plus** icon.
+2. Find the MCP server of your choice and select the **Plus** icon.
 3. Optional: Some servers require extra configuration. To configure them, select
    the **Config** tab and follow the instructions available on the repository of the provider of the MCP server.
 

@@ -303,11 +303,11 @@ quit and reopened.
 
 ### Features in development
 
-| Parameter                   | OS | Description                                                                                                                                                           | Version |
-|:----------------------------|----|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
-| `allowExperimentalFeatures` |    | If `value` is set to `true`, experimental features are enabled.                                                                                                       |         |
-| `allowBetaFeatures`         |    | If `value` is set to `true`, beta features are enabled.                                                                                                               |         |
-| `enableDockerAI`            |    | If `value` is set to `true`, Docker AI (Ask Gordon) features are enabled.                                                                                             |         |
+| Parameter                   | OS | Description                                                                                                                                                   | Version |
+|:----------------------------|----|:--------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
+| `allowExperimentalFeatures` |    | If `value` is set to `true`, experimental features are enabled.                                                                                               |         |
+| `allowBetaFeatures`         |    | If `value` is set to `true`, beta features are enabled.                                                                                                       |         |
+| `enableDockerAI`            |    | If `allowBetaFeatures` is true, setting `enableDockerAI` to `true` enables [Docker AI (Ask Gordon)](/manuals/ai/gordon/_index.md).                                                            |         |
 | `enableDockerMCPToolkit`    |    | If `allowBetaFeatures` is true, setting `enableDockerMCPToolkit` to `true` enables the [MCP toolkit feature](/manuals/ai/mcp-catalog-and-toolkit/toolkit.md). |         |
 
 ### Enhanced Container Isolation
