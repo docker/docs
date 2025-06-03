@@ -25,9 +25,10 @@ $ docker buildx build --output type=tar[,parameters] .
 
 The following table describes the available parameters:
 
-| Parameter | Type   | Default | Description           |
-| --------- | ------ | ------- | --------------------- |
-| `dest`    | String |         | Path to copy files to |
+| Parameter        | Type    | Default | Description                                                                                                                                                                                 |
+|------------------|---------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `dest`           | String  |         | Path to copy files to                                                                                                                                                                       |
+| `platform-split` | Boolean | `false` | With a multi-platform build, a subfolder matching each target platform is created in the destination directory. Set it to `true` to merge files from all platforms into the same directory. |
 
 ## Further reading
 
