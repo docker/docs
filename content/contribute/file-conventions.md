@@ -70,7 +70,7 @@ Splitting long lines (preferably up to 80 characters) can make it easier to prov
 If you want to add an entry to the sidebar, but you want the link to point somewhere else, you can use the `sidebar.goto` parameter.
 This is useful in combination with `build.render` set to `always`, which creates a pageless entry in the sidebar that links to another page.
 
-```text
+```toml
 ---
 title: Dummy sidebar link
 build:
