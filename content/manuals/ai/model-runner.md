@@ -75,7 +75,7 @@ You can now use the `docker model` command in the CLI and view and interact with
    $ docker model version
    $ docker model run ai/smollm2
    ```
-
+   
 ## Integrate the Docker Model Runner into your software development lifecycle
 
 You can now start building your Generative AI application powered by the Docker Model Runner.
