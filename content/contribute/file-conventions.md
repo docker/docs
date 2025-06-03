@@ -38,7 +38,6 @@ Here's an example of a valid (but contrived) page metadata. The order of
 the metadata elements in the front matter isn't important.
 
 ```toml
->>>>>>> e39d051e04 (try toml)
 ---
 description: Instructions for installing Docker Engine on Ubuntu
 keywords: requirements, apt, installation, ubuntu, install, uninstall, upgrade, update
