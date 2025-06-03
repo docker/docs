@@ -70,7 +70,7 @@ To enable and set up SOCKS proxy support:
 
 ## Networking mode and DNS behaviour for Mac and Windows
 
-With Docker Desktop version 4.32 and later, you can customize how Docker handles container networking and DNS resolution to better support a range of environments — from IPv4-only to dual-stack and IPv6-only systems. These settings help prevent timeouts and connectivity issues caused by incompatible or misconfigured host networks.
+With Docker Desktop version 4.42 and later, you can customize how Docker handles container networking and DNS resolution to better support a range of environments — from IPv4-only to dual-stack and IPv6-only systems. These settings help prevent timeouts and connectivity issues caused by incompatible or misconfigured host networks.
 
 > [!NOTE]
 >
