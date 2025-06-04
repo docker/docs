@@ -197,24 +197,6 @@ A promise that fails if the image doesn't exist.
 
 ___
 
-## Other Methods
-
-### viewDevEnvironments
-
-▸ **viewDevEnvironments**(): `Promise`<`void`\>
-
-Navigate to the Dev Environments window in Docker Desktop.
-
-```typescript
-ddClient.desktopUI.navigate.viewDevEnvironments()
-```
-
-#### Returns
-
-`Promise`<`void`\>
-
-___
-
 ## Volume Methods
 
 ### viewVolumes

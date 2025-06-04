@@ -144,12 +144,8 @@
     font-size: 0.875em;
     border: 1px solid;
     border-radius: 0.25rem; /* theme("spacing.1") fallback */
-    background: var(--color-white-main);
-    border-color: var(--color-gray-300);
-    .dark & {
-      background: var(--color-gray-200);
-      border-color: var(--color-gray-400);
-    }
+    border: none;
+    background: transparent;
     &::before,
     &::after {
       content: none !important;
@@ -185,7 +181,7 @@
   }
 
   .highlight {
-    @apply my-4 overflow-x-auto p-3;
+    @apply my-0 overflow-x-auto p-2;
 
     /* LineTableTD */
     .lntd {

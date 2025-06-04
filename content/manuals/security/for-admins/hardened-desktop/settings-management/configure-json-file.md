@@ -301,13 +301,23 @@ quit and reopened.
 >
 > These containers mount the Docker socket, so you must add the images to the ECI images list. If not, ECI will block the mount and Kubernetes won't start.
 
-### Features in development
+### Networking
 
 |Parameter|OS|Description|Version|
 |:-------------------------------|---|:-------------------------------|---|
-| `allowExperimentalFeatures`| | If `value` is set to `false`, experimental features are disabled.|  |
-| `allowBetaFeatures`| | If `value` is set to `false`, beta features are disabled.|  |
-| `enableDockerAI` | | If `value` is set to `false`, Docker AI (Ask Gordon) features are disabled. |  |
+| `defaultNetworkingMode` | Windows and Mac only | Defines the default IP protocol for new Docker networks: `dual-stack` (IPv4 + IPv6, default), `ipv4only`, or `ipv6only`. | Docker Desktop version 4.42 and later. |
+| `dnsInhibition` | Windows and Mac only | Controls DNS record filtering returned to containers. Options: `auto` (recommended), `ipv4`, `ipv6`, `none`| Docker Desktop version 4.42 and later. |
+
+For more information, see [Networking](/manuals/desktop/features/networking.md#networking-mode-and-dns-behaviour-for-mac-and-windows).
+
+### Features in development
+
+| Parameter                   | OS | Description                                                                                                                                                   | Version |
+|:----------------------------|----|:--------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
+| `allowExperimentalFeatures` |    | If `value` is set to `true`, experimental features are enabled.                                                                                               |         |
+| `allowBetaFeatures`         |    | If `value` is set to `true`, beta features are enabled.                                                                                                       |         |
+| `enableDockerAI`            |    | If `allowBetaFeatures` is true, setting `enableDockerAI` to `true` enables [Docker AI (Ask Gordon)](/manuals/ai/gordon/_index.md).                                                            |         |
+| `enableDockerMCPToolkit`    |    | If `allowBetaFeatures` is true, setting `enableDockerMCPToolkit` to `true` enables the [MCP toolkit feature](/manuals/ai/mcp-catalog-and-toolkit/toolkit.md). |         |
 
 ### Enhanced Container Isolation
 

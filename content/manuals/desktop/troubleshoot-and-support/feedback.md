@@ -31,7 +31,6 @@ GitHub](https://github.com/docker/for-mac/issues)
 - [Docker Desktop for Windows issues on GitHub](https://github.com/docker/for-win/issues)
 - [Docker Desktop for Linux issues on
 GitHub](https://github.com/docker/desktop-linux/issues)
-- [Dev Environments issues on GitHub](https://github.com/docker/dev-environments/issues)
 - [Docker Extensions issues on GitHub](https://github.com/docker/extensions-sdk/issues)
 
 ### Feedback via Community Slack channels
@@ -41,5 +40,4 @@ You can also provide feedback through the following [Docker Community Slack](htt
 - #docker-desktop-mac
 - #docker-desktop-windows
 - #docker-desktop-linux
-- #docker-dev-environments
 - #extensions
