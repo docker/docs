@@ -73,9 +73,6 @@ For containers implicitly created by `docker build` as well as Docker
 Desktop's integrated Kubernetes, protection varies depending on the Docker
 Desktop version (see the following two FAQs).
 
-ECI does not yet protect Docker Desktop Extension containers and
-[Dev Environments containers](/manuals/desktop/features/dev-environments/_index.md).
-
 ### Does ECI protect containers implicitly used by `docker build`?
 
 Prior to Docker Desktop 4.19, ECI did not protect containers used implicitly
