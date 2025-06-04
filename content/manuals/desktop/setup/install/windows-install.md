@@ -47,7 +47,7 @@ _For checksums, see [Release notes](/manuals/desktop/release-notes.md)_
 {{< tabs >}}
 {{< tab name="WSL 2 backend, x86_64" >}}
 
-- WSL version 1.1.3.0 or later.
+- WSL version 2.1.5 or later.
 - Windows 11 64-bit: Home or Pro version 22H2 or higher, or Enterprise or Education version 22H2 or higher.
 - Windows 10 64-bit: Minimum required is Home or Pro 22H2 (build 19045) or higher, or Enterprise or Education 22H2 (build 19045) or higher. 
 - Turn on the WSL 2 feature on Windows. For detailed instructions, refer to the
@@ -97,7 +97,7 @@ For more information on setting up WSL 2 with Docker Desktop, see [WSL](/manuals
 {{< /tab >}}
 {{< tab name="WSL 2 backend, Arm (Early Access)" >}}
 
-- WSL version 1.1.3.0 or later.
+- WSL version 2.1.5 or later.
 - Windows 11 64-bit: Home or Pro version 22H2 or higher, or Enterprise or Education version 22H2 or higher.
 - Windows 10 64-bit: Minimum required is Home or Pro 22H2 (build 19045) or higher, or Enterprise or Education 22H2 (build 19045) or higher.
 - Turn on the WSL 2 feature on Windows. For detailed instructions, refer to the
