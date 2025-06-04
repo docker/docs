@@ -21,11 +21,11 @@
     "@material-symbols/svg-400": "^0.23.0",
     "@tailwindcss/cli": "^4.1.6",
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
+    "@tailwindcss/typography": "^0.5.15",
     "alpinejs": "^3.14.3",
     "tailwindcss": "^4.1.6"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.16",
     "markdownlint": "^0.35.0",
     "prettier": "^3.3.3",
     "prettier-plugin-go-template": "^0.0.15",
