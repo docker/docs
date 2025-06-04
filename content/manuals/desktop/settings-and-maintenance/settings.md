@@ -484,6 +484,12 @@ You can also sign up to the [Developer Preview program](https://www.docker.com/c
 
 For a list of current experimental features in the Docker CLI, see [Docker CLI Experimental features](https://github.com/docker/cli/blob/master/experimental/README.md).
 
+> [!IMPORTANT]
+>
+> For Docker Desktop versions 4.41 and earlier, there is also an **Experimental features** tab under the **Features in development** page.
+>
+> As with beta features, experimental features must not be used in production environments. Docker does not offer support for experimental features.
+
 ## Notifications
 
 Use the **Notifications** tab to turn on or turn off notifications for the following events:

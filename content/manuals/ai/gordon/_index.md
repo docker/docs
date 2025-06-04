@@ -95,6 +95,10 @@ If you have concerns about data collection or usage, you can
 
 4. Select **Apply & restart**.
 
+> [!IMPORTANT]
+>
+> For Docker Desktop versions 4.41 and earlier, this settings lived under the **Experimental features** tab on the **Features in development** page.
+
 ## Using Ask Gordon
 
 The primary interfaces to Docker's AI capabilities are through the **Ask

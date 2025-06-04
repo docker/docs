@@ -43,6 +43,10 @@ Models are pulled from Docker Hub the first time they're used and stored locally
 
 You can now use the `docker model` command in the CLI and view and interact with your local models in the **Models** tab in the Docker Desktop Dashboard.
 
+> [!IMPORTANT]
+>
+> For Docker Desktop versions 4.41 and earlier, this settings lived under the **Experimental features** tab on the **Features in development** page.
+
 ### Enable DMR in Docker Engine
 
 1. Ensure you have installed [Docker Engine](/engine/install/).
