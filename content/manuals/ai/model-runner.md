@@ -126,7 +126,8 @@ Once the feature is enabled, new API endpoints are available under the following
 - From host processes: `http://localhost:12434/`
 
 > [!NOTE]
-> The `172.17.0.1` interface may not be available by default to Compose containers.
+> The `172.17.0.1` interface may not be available by default to containers
+ within a Compose project.
 > In this case, add an `extra_hosts` directive to your Compose service YAML:
 > 
 > ```yaml
