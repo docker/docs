@@ -256,7 +256,7 @@ and select your SCIM application.
     - `userPrincipalName` -> `userName`
     - `mail` -> `emails.value`
     - Optional. Map `dockerRole`, `dockerOrg`, or `dockerTeam` using one of the
-    [mapping methods](#choose-a-role-mapping-method).
+    [mapping methods](#step-two-choose-a-role-mapping-method).
 1. Remove any unsupported attributes to prevent sync errors.
 1. Optional. Go to **Mappings** > **Provision Azure Active Directory Groups**:
     - If group provisioning causes errors, set **Enabled** to **No**.

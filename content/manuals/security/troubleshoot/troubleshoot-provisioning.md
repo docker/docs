@@ -43,7 +43,7 @@ assignment does not reflect changes.
 
 **Disable JIT provisioning (recommended)**
 
-1. Sign in to the Docker [Admin Console](app.docker.com/admin).
+1. Sign in to the Docker [Admin Console](https://app.docker.com/admin).
 1. Go to your organization's **Settings** > **Security** > **SSO and SCIM**.
 1. Find the relevant SSO connection.
 1. Select the **actions menu** and choose **Edit**.
@@ -76,7 +76,7 @@ linked to manage them.
 SCIM only manages users that it provisions. To allow SCIM to manage an
 existing user:
 
-1. Remove the user manually from the Docker [Admin Console](app.docker.com/admin).
+1. Remove the user manually from the Docker [Admin Console](https://app.docker.com/admin).
 1. Trigger provisioning from your IdP.
 1. SCIM will re-create the user with correct attributes.
 
