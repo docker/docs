@@ -102,12 +102,19 @@ You must [configure SSO](../single-sign-on/configure/_index.md) before you enabl
 The user interface for your IdP may differ slightly from the following steps. You can refer to the documentation for your IdP to verify. For additional details, see the documentation for your IdP:
 
 - [Okta](https://help.okta.com/en-us/Content/Topics/Apps/Apps_App_Integration_Wizard_SCIM.htm)
-- [Entra ID/Azure AD](https://learn.microsoft.com/en-us/azure/active-directory/app-provisioning/user-provisioning)
+- [Entra ID/Azure AD SAML 2.0](https://learn.microsoft.com/en-us/azure/active-directory/app-provisioning/user-provisioning)
+
+> [!NOTE]
+>
+> Microsoft does not currently support SCIM and OIDC in the same non-gallery
+application in Entra ID. This guide provides a verified workaround using a
+separate non-gallery app for SCIM provisioning. While Microsoft does not
+officially document this setup, it is widely used and supported in practice.
 
 {{< tabs >}}
 {{< tab name="Okta" >}}
 
-### Enable SCIM
+### Step one: Enable SCIM
 
 1. Sign in to Okta and select **Admin** to open the admin portal.
 1. Open the application you created when you configured your SSO connection.
@@ -123,7 +130,7 @@ The user interface for your IdP may differ slightly from the following steps. Yo
 1. Select **Test Connector Configuration**.
 1. Review the test results and select **Save**.
 
-### Enable synchronization
+### Step two: Enable synchronization
 
 1. In Okta, select **Provisioning**.
 1. Select **To App**, then **Edit**.
@@ -136,31 +143,48 @@ The user interface for your IdP may differ slightly from the following steps. Yo
     - Email
 
 {{< /tab >}}
-{{< tab name="Entra ID/Azure AD" >}}
+{{< tab name="Entra ID (OIDC)" >}}
 
-> [!NOTE]
->
-> In non-gallery configurations, Azure AD requires separate applications for
-OIDC SSO and SCIM provisioning. Use the following steps to create and
-configure a second app for SCIM.
+Microsoft does not support SCIM and OIDC in the same non-gallery application.
+You must create a second non-gallery application in Entra ID for SCIM
+provisioning.
 
-### Create a non-gallery app for SCIM
+### Step one: Create a separate SCIM app
 
-1. In the Azure Portal, go to **Microsoft Entra ID** > **Enterprise Application** >
+1. In the Azure Portal, go to **Microsoft Entra ID** > **Enterprise Applications** >
 **New application**.
 1. Select **Create your own application**.
-1. Enter a name (for example, `Docker SCIM`) and choose **Integrate any other application you don't find in the gallery**.
+1. Name your application and choose **Integrate any other application you don't find in the gallery**.
 1. Select **Create**.
 
-### Configure SCIM provisioning
+### Step two: Configure SCIM provisioning
 
 1. In your new SCIM application, go to **Provisioning** > **Get started**.
 1. Set **Provisioning Mode** to **Automatic**.
 1. Under **Admin Credentials**:
-    1. **Tenant URL**: Paste the **SCIM Base URL** from Docker.
-    1. **Secret Token**: Paste the **API Token** from Docker.
+    - **Tenant URL**: Paste the **SCIM Base URL** from Docker.
+    - **Secret Token**: Paste the **SCIM API token** from Docker.
 1. Select **Test Connection** to verify.
-1. Select **Save** to store the credentials.
+1. Select **Save** to store credentials.
+
+Next, [set up role mapping](#set-up-role-mapping).
+
+{{< /tab >}}
+{{< tab name="Entra ID (SAML 2.0)" >}}
+
+### Configure SCIM provisioning
+
+1. In the Azure Portal, go to **Microsoft Entra ID** > **Enterprise Applications**,
+and select your Docker SAML app.
+1. Select **Provisioning** > **Get started**.
+1. Set **Provisioning Mode** to **Automatic**.
+1. Under **Admin Credentials**:
+    - **Tenant URL**: Paste the **SCIM Base URL** from Docker.
+    - **Secret Token**: Paste the **SCIM API token** from Docker.
+1. Select **Test Connection** to verify.
+1. Select **Save** to store credentials.
+
+Next, [set up role mapping](#set-up-role-mapping).
 
 {{< /tab >}}
 {{< /tabs >}}
@@ -191,7 +215,7 @@ This value is required in your IdP when creating custom SCIM attributes for Dock
 {{< tabs >}}
 {{< tab name="Okta" >}}
 
-### Set up role mapping in Okta
+### Step one: Set up role mapping in Okta
 
 1. Setup [SSO](../single-sign-on/configure/_index.md) and SCIM first.
 1. In the Okta admin portal, go to **Directory**, select **Profile Editor**, and then **User (Default)**.
@@ -204,13 +228,13 @@ This value is required in your IdP when creating custom SCIM attributes for Dock
 1. Select **General**, then **SAML Settings**, and **Edit**.
 1. Select **Step 2** and configure the mapping from the user attribute to the Docker variables.
 
-### Assign roles by user
+### Step two: Assign roles by user
 
 1. In the Okta Admin portal, select **Directory**, then **People**.
 1. Select **Profile**, then **Edit**.
 1. Select **Attributes** and update the attributes to the desired values.
 
-### Assign roles by group
+### Step three: Assign roles by group
 
 1. In the Okta Admin portal, select **Directory**, then **People**.
 1. Select **YOUR GROUP**, then **Applications**.
@@ -220,11 +244,11 @@ This value is required in your IdP when creating custom SCIM attributes for Dock
 If a user doesn't already have attributes set up, users who are added to the group will inherit these attributes upon provisioning.
 
 {{< /tab >}}
-{{< tab name="Entra ID/Azure AD" >}}
+{{< tab name="Entra ID/Azure AD (SAML 2.0 and OIDC)" >}}
 
-### Configure attribute mappings
+### Step one: Configure attribute mappings
 
-1. Complete the [SCIM provisioning setup](#enable-scim).
+1. Complete the [SCIM provisioning setup](#enable-scim-in-docker).
 1. In the Azure Portal, open **Microsoft Entra ID** > **Enterprise Applications**,
 and select your SCIM application.
 1. Go to **Provisioning** > **Mappings** > **Provision Azure Active Directory Users**.
@@ -239,7 +263,7 @@ and select your SCIM application.
     - If enabling, test group mappings carefully.
 1. Select **Save** to apply mappings.
 
-### Choose a role mapping method
+### Step two: Choose a role mapping method
 
 You can map `dockerRole`, `dockerOrg`, or `dockerTeam` using one of the following
 methods:
@@ -283,7 +307,7 @@ Use this method if you need to map multiple attributes (e.g., `dockerRole` +
 
 To assign values, you'll need to use the Microsoft Graph API.
 
-### Assign users and groups
+### Step three: Assign users and groups
 
 For either mapping method:
 
@@ -318,17 +342,6 @@ Content-Type: application/json
 >
 > You must use a different extension attribute for each SCIM field.
 
-### Enable and test provisioning
-
-1. Return to **Provisioning** in the Azure Portal.
-1. Set **Provisioning Status** to **On**, then select **Save**.
-1. To test provisioning:
-    1. Go to **Provision on demand**.
-    1. Select a user or group and select **Provision**.
-    1. Confirm the user or group appears in the **Members** tab in the
-    Docker [Admin Console](https://app.docker.com/admin).
-    1. Check **Provisioning logs** in Azure AD for any issues.
-
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -336,6 +349,36 @@ See the documentation for your IdP for additional details:
 
 - [Okta](https://help.okta.com/en-us/Content/Topics/users-groups-profiles/usgp-add-custom-user-attributes.htm)
 - [Entra ID/Azure AD](https://learn.microsoft.com/en-us/azure/active-directory/app-provisioning/customize-application-attributes#provisioning-a-custom-extension-attribute-to-a-scim-compliant-application)
+
+## Test SCIM provisioning
+
+After completing role mapping, you can test the configuration manually.
+
+
+{{< tabs >}}
+{{< tab name="Okta" >}}
+
+1. In the Okta admin portal, go to **Directory > People**.
+1. Select a user you've assigned to your SCIM application.
+1. Select **Provision User**.
+1. Wait a few seconds, then check the Docker
+[Admin Console](https://app.docker.com/admin) under **Members**.
+1. If the user doesn’t appear, review logs in **Reports > System Log** and
+confirm SCIM settings in the app.
+
+{{< /tab >}}
+{{< tab name="Entra ID/Azure AD (OIDC and SAML 2.0)" >}}
+
+1. In the Azure Portal, go to **Microsoft Entra ID** > **Enterprise Applications**,
+and select your SCIM app.
+1. Go to **Provisioning** > **Provision on demand**.
+1. Select a user or group and choose **Provision**.
+1. Confirm that the user appears in the Docker
+[Admin Console](https://app.docker.com/admin) under **Members**.
+1. If needed, check **Provisioning logs** for errors.
+
+{{< /tab >}}
+{{< /tabs >}}
 
 ## Disable SCIM
 
@@ -364,3 +407,7 @@ The following videos demonstrate how to configure SCIM for your IdP:
 - [Video: Attribute mapping with Okta](https://youtu.be/c56YECO4YP4?feature=shared&t=1998)
 - [Video: Configure SCIM with Entra ID/Azure AD](https://youtu.be/bGquA8qR9jU?feature=shared&t=1668)
 - [Video: Attribute and group mapping with Entra ID/Azure AD](https://youtu.be/bGquA8qR9jU?feature=shared&t=2039)
+
+Refer to the following troubleshooting guide if needed:
+
+- [Troubleshoot provisioning](/manuals/security/troubleshoot/troubleshoot-provisioning.md)
