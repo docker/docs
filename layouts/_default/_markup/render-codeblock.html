@@ -1,33 +1,47 @@
-<div data-pagefind-ignore class="scroll-mt-2" x-data x-ref="root">
+<div
+  data-pagefind-ignore
+  x-data
+  x-ref="root"
+  class="mt-2 mb-4 flex w-full scroll-mt-2 flex-col items-start gap-4 rounded bg-gray-50 p-2 outline outline-1 outline-offset-[-1px] outline-gray-200 dark:bg-gray-900 dark:outline-gray-800"
+>
   {{ with .Attributes.title }}
-    <div
-      class="mb-0 rounded-sm border-1 border-b bg-gray-50 p-2 text-sm text-gray-900 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-200"
-    >
-      {{ . }}
+    <div class="flex w-full items-center gap-2">
+      <div
+        class="flex items-center gap-2.5 rounded bg-gray-100 px-2 py-0.5 dark:bg-gray-800"
+      >
+        <div class="font-normal text-gray-500 dark:text-gray-200">
+          {{ . }}
+        </div>
+      </div>
     </div>
   {{ end }}
-  <div class="group relative">
-    <!-- copy button -->
-    <button
-      x-data="{ code: '{{ encoding.Base64Encode .Inner }}', copying: false }"
-      class="absolute top-3 right-3 z-10 text-gray-200 dark:text-gray-500"
-      title="copy"
-      @click="window.navigator.clipboard.writeText(atob(code).replaceAll(/^[\$>]\s+/gm, ''));
-      copying = true;
-      setTimeout(() => copying = false, 2000);"
-    >
-      <span :class="{ 'group-hover:block' : !copying }" class="icon-svg hidden"
-        >{{ partialCached "icon" "content_copy" "content_copy" }}</span
-      >
-      <span :class="{ 'group-hover:block' : copying }" class="icon-svg hidden"
-        >{{ partialCached "icon" "check_circle" "check_circle" }}</span
-      >
-    </button>
+  <div class="group relative w-full">
     {{ $lang := .Type | default "text" }}
     {{ $result := transform.Highlight .Inner
       $lang .Options
     }}
-    <div class="syntax-light dark:syntax-dark not-prose">
+    <div class="syntax-light dark:syntax-dark not-prose w-full">
+      <button
+        x-data="{ code: '{{ encoding.Base64Encode .Inner }}', copying: false }"
+        class="{{ if .Attributes.title }}
+          -top-10
+        {{ else }}
+          top-1
+        {{ end }} absolute right-2 z-10 text-gray-300 dark:text-gray-500"
+        title="copy"
+        @click="window.navigator.clipboard.writeText(atob(code).replaceAll(/^[\$>]\s+/gm, ''));
+      copying = true;
+      setTimeout(() => copying = false, 2000);"
+      >
+        <span
+          :class="{ 'group-hover:block' : !copying }"
+          class="icon-svg hidden"
+          >{{ partialCached "icon" "content_copy" "content_copy" }}</span
+        >
+        <span :class="{ 'group-hover:block' : copying }" class="icon-svg hidden"
+          >{{ partialCached "icon" "check_circle" "check_circle" }}</span
+        >
+      </button>
       {{ with .Attributes.collapse }}
         <div
           x-data="{ collapse: true }"
