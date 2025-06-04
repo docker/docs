@@ -312,11 +312,12 @@ For more information, see [Networking](/manuals/desktop/features/networking.md#n
 
 ### Features in development
 
-|Parameter|OS|Description|Version|
-|:-------------------------------|---|:-------------------------------|---|
-| `allowExperimentalFeatures`| | If `value` is set to `false`, experimental features are disabled.|  |
-| `allowBetaFeatures`| | If `value` is set to `false`, beta features are disabled.|  |
-| `enableDockerAI` | | If `value` is set to `false`, Docker AI (Ask Gordon) features are disabled. |  |
+| Parameter                   | OS | Description                                                                                                                                                   | Version |
+|:----------------------------|----|:--------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
+| `allowExperimentalFeatures` |    | If `value` is set to `true`, experimental features are enabled.                                                                                               |         |
+| `allowBetaFeatures`         |    | If `value` is set to `true`, beta features are enabled.                                                                                                       |         |
+| `enableDockerAI`            |    | If `allowBetaFeatures` is true, setting `enableDockerAI` to `true` enables [Docker AI (Ask Gordon)](/manuals/ai/gordon/_index.md).                                                            |         |
+| `enableDockerMCPToolkit`    |    | If `allowBetaFeatures` is true, setting `enableDockerMCPToolkit` to `true` enables the [MCP toolkit feature](/manuals/ai/mcp-catalog-and-toolkit/toolkit.md). |         |
 
 ### Enhanced Container Isolation
 
