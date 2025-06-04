@@ -10,8 +10,6 @@
 # in its help output, which can be redirected to elsewhere in the documentation.
 "/security/for-developers/access-tokens/":
   - /go/access-tokens/
-"/desktop/mac/apple-silicon/":
-  - /go/apple-silicon/
 "/reference/api/engine/#deprecated-api-versions":
   - /engine/api/v1.18/
   - /engine/api/v1.19/
@@ -83,13 +81,6 @@
   - /go/formatting/
 "/?utm_source=docker&utm_medium=inproductad&utm_campaign=20-11nurturecli_docs":
   - /go/guides/
-"/desktop/get-started/#credentials-management-for-linux-users":
-  - /go/linux-credentials/
-"/desktop/use-desktop/pause/":
-  - /go/mac-desktop-pause/
-  - /go/win-desktop-pause/
-"/desktop/settings-and-maintenance/settings/#file-sharing":
-  - /go/mac-file-sharing/
 "/engine/security/rootless/":
   # Instructions on running docker in rootless mode. This redirect is currently
   # used in the installation script at "get.docker.com"
@@ -98,9 +89,7 @@
   - /go/storage-driver/
 "/docker-hub/vulnerability-scanning/":
   - /go/tip-scanning/
-"/desktop/features/wsl/":
-  # Link used by Docker Desktop to refer users on how to activate WSL 2
-  - /go/wsl2/
+
 "/reference/api/hub/latest/":
   - /docker-hub/api/latest/
 "/reference/api/hub/dvp/":
@@ -268,13 +257,6 @@
 "/desktop/use-desktop/container/#debug":
   - /go/debug-gui/
 
-# Docker Desktop - volumes cloud backup
-"/desktop/use-desktop/volumes/#export-a-volume":
-  - /go/volume-export/
-  - /go/volume-export-aws/
-  - /go/volume-export-azure/
-  - /go/volume-export-gcs/
-
 # Docker Admin Console - Insights
 "/admin/organization/insights/":
   - /go/insights/
@@ -297,10 +279,66 @@
 "/docker-hub/usage/pulls/":
   - /go/hub-pull-limits/
 
-# Desktop DMR
-"/model-runner/":
-  - /go/model-runner/
-  
+
+# Links in Desktop
+
 # Desktop MCP Toolkit
 "/ai/mcp-catalog-and-toolkit/toolkit/":
   - /go/mcp-toolkit/
+
+# Desktop DMR
+"/model-runner/":
+  - /go/model-runner/
+
+# Docker Desktop - volumes cloud backup
+"/desktop/use-desktop/volumes/#export-a-volume":
+  - /go/volume-export/
+  - /go/volume-export-aws/
+  - /go/volume-export-azure/
+  - /go/volume-export-gcs/
+
+# Link used by Docker Desktop to refer users on how to activate WSL 2
+"/desktop/features/wsl/":
+  - /go/wsl2/
+
+"/desktop/get-started/#credentials-management-for-linux-users":
+  - /go/linux-credentials/
+"/desktop/use-desktop/pause/":
+  - /go/mac-desktop-pause/
+  - /go/win-desktop-pause/
+"/desktop/settings-and-maintenance/settings/#file-sharing":
+  - /go/mac-file-sharing/
+
+"/desktop/use-desktop/container/"
+  - /go/container/
+"/desktop/use-desktop/images/"
+  - /go/images/
+"/desktop/use-desktop/volumes/"
+  - /go/volumes/
+"/extensions/"
+  - /go/extensions/
+"/engine/cli/completion/"
+  - /go/completion/
+"/desktop/features/vmm/"
+  - /go/vmm/
+"/security/for-admins/hardened-desktop/enhanced-container-isolation/"
+  - /go/eci/
+"/desktop/features/synchronized-file-sharing/"
+  - /go/synchronized-file-sharing/
+"/reference/cli/dockerd/"
+  - /go/daemon/
+"/ai/gordon/"
+  - /go/gordon/
+"/desktop/features/wasm/"
+  - /go/wasm/
+"/compose/bridge/"
+  - /go/compose-bridge/
+"/desktop/settings-and-maintenance/settings/"
+  - /go/notifications/
+"/desktop/setup/install/mac-permission-requirements/#installing-symlinks"
+  - /go/symlinks/
+"/desktop/setup/install/mac-permission-requirements/"
+  - /go/permissions/
+"/desktop/setup/install/mac-permission-requirements/#binding-privileged-ports"
+  - /go/port-mapping/
+  
