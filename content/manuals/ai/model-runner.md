@@ -112,8 +112,32 @@ See [the reference docs](/reference/cli/docker/model/).
 
 Once the feature is enabled, new API endpoints are available under the following base URLs:
 
+{{< tabs >}}
+{{< tab name="Docker Desktop">}}
+
 - From containers: `http://model-runner.docker.internal/`
-- From host processes: `http://localhost:12434/`, assuming you have enabled TCP host access on default port 12434.
+- From host processes: `http://localhost:12434/`, assuming TCP host access is
+  enabled on the default port (12434).
+
+{{< /tab >}}
+{{< tab name="Docker Engine">}}
+
+- From containers: `http://172.17.0.1:12434/` (with `172.17.0.1` representing the host gateway address)
+- From host processes: `http://localhost:12434/`
+
+> [!NOTE]
+> The `172.17.0.1` interface may not be available by default to containers
+ within a Compose project.
+> In this case, add an `extra_hosts` directive to your Compose service YAML:
+> 
+> ```yaml
+> extra_hosts:
+>   - "model-runner.docker.internal:host-gateway"
+> ```
+> Then you can access the Docker Model Runner APIs at http://model-runner.docker.internal:12434/
+
+{{< /tab >}}
+{{</tabs >}}
 
 Docker Model management endpoints:
 
