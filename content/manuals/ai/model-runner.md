@@ -120,7 +120,7 @@ Once the feature is enabled, new API endpoints are available under the following
   enabled on the default port (12434).
 
 {{< /tab >}}
-{{< tab name="Docker CE">}}
+{{< tab name="Docker Engine">}}
 
 - From containers: `http://172.17.0.1:12434/` (with `172.17.0.1` representing the host gateway address)
 - From host processes: `http://localhost:12434/`
