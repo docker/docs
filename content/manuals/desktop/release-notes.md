@@ -29,6 +29,74 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 >
 > If you're experiencing malware detection issues on Mac, follow the steps documented in [docker/for-mac#7527](https://github.com/docker/for-mac/issues/7527).
 
+## 4.42.0
+
+{{< release-date date="2025-06-04" >}}
+
+{{< desktop-install-v2 all=true beta_win_arm=true version="4.42.0" build_path="/195023/" >}}
+
+### New
+
+- Expanded network compatibility with IPv6 support.
+- The Docker MCP Toolkit is now natively integrated into Docker Desktop.
+- Docker Model Runner is now available for Windows systems running on Qualcomm/ARM GPUs.
+- Added a **Logs** tab to the Models view so you can see the inference engine output in real time.
+- Gordon now integrates the MCP Toolkit, providing access to 100+ MCP servers.
+
+### Upgrades
+
+- [Docker Buildx v0.24.0](https://github.com/docker/buildx/releases/tag/v0.24.0)
+- [Docker Engine v28.2.2](https://docs.docker.com/engine/release-notes/28/#2822)
+- [Compose Bridge v0.0.20](https://github.com/docker/compose-bridge-binaries/releases/tag/v0.0.20)
+- [Docker Compose v2.36.2](https://github.com/docker/compose/releases/tag/v2.36.2)
+- [NVIDIA Container Toolkit v1.17.7](https://github.com/NVIDIA/nvidia-container-toolkit/releases/tag/v1.17.7)
+- [Docker Scout CLI v1.18.0](https://github.com/docker/scout-cli/releases/tag/v1.18.0)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Docker Desktop now accepts certificates with a negative serial number.
+- Re-enable `seccomp` for containers by default. Use `docker run --security-opt seccomp=unconfined` to disable seccomp for a container.
+- Fixed a bug that caused Docker Desktop to hang when it ran out of memory.
+- Block `io_uring` syscalls in containers.
+- Added support for pulling models from Docker Hub directly, simplifying the process of accessing and using models.
+- Docker Desktop now sets the disk usage limit to the size of the physical disk on fresh install and reset to defaults on Mac and Linux.
+- The maximum disk size in the settings UI now aligns with the full capacity of the host file system.
+- The **Models** view now has a **Docker Hub** tab that lists models under the `ai` namespace.
+- Improved the sign-in enforcement message when more than 10 organizations are enforced.
+- Changed the way ports are mapped by Docker Desktop to fully support IPv6 ports.
+- Fixed a bug in the Dashboard container logs screen causing the scrollbar to disappear as the mouse approaches.
+- [Enforced sign-in](../security/for-admins/enforce-sign-in) fixed for Teams subscription users.
+- `llama.cpp` server now supports streaming and tool calling in Model Runner.
+- Sign-in Enforcement capability is now available to all subscriptions.
+
+#### For Mac
+
+- Fixed a bug where the disk would always have a minimum usage limit of 64GB when using Docker VMM.
+- Disabled the memory protection keys mechanism in the Docker Desktop Linux VM. This caused VS Code Dev Containers to not work properly. See [docker/for-mac#7667](https://github.com/docker/for-mac/issues/7667).
+- Fixed persistent volume claims under Kubernetes. Fixes [docker/for-mac#7625](https://github.com/docker/for-mac/issues/7625).
+- Fixed a bug where the VM failed to start using Apple virtualization.framework.
+- Minimum version to install or update Docker Desktop on is now macOS Ventura 13.3.
+
+#### For Windows
+
+- Fixed a bug in Enhanced Container Isolation on Windows WSL, where files with hardlinks inside containers had `nobody:nogroup` ownership.
+- Fixed a bug that caused Docker Desktop to crash. Related to [docker/for-win#14782](https://github.com/docker/for-win/issues/14782).
+- Fixed a bug that caused `The network name cannot be found` error when starting with WSL 2. Fixes [docker/for-win#14714](https://github.com/docker/for-win/issues/14714).
+- Fixed an issue where Docker Desktop would not remove entries in the hosts file when uninstalling.
+- Fixed an issue when reading auto-start registry key for some system languages. Fixes [docker/for-win#14731](https://github.com/docker/for-win/issues/14731).
+- Fixed a bug where Docker Desktop was adding unrecognised /etc/wsl.conf `crossDistro` option which was causing WSL 2 to log an error. See [microsoft/WSL#4577](https://github.com/microsoft/WSL/issues/4577)
+- Fixed a bug where Docker Desktop failed to start on WSL 2.5.7 if another WSL distro is still using Linux cgroups v1. Fixes [docker/for-win#14801](https://github.com/docker/for-win/issues/14801)
+- Windows Subsystem for Linux (WSL) version 2.1.5 is now the minimum version required for proper functioning of Docker Desktop application
+
+### Known issues
+
+#### For Windows
+
+- Running containers with Wasm will hang sporadically. See [docker/for-mac#7666](https://github.com/docker/for-mac/issues/7666).
+- On some machines Resource Saver will cause other WSL 2 distros to freeze. The workaround is to disable Resource Saver. See [docker/for-mac#14656](https://github.com/docker/for-win/issues/14656).
+
 ## 4.41.2
 
 {{< release-date date="2025-05-06" >}}
