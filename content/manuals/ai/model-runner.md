@@ -122,7 +122,7 @@ Once the feature is enabled, new API endpoints are available under the following
 {{< /tab >}}
 {{< tab name="Docker CE">}}
 
-- From containers: `http://172.17.0.1:12434/`
+- From containers: `http://172.17.0.1:12434/` (with `172.17.0.1` representing the host gateway address)
 - From host processes: `http://localhost:12434/`
 
 > [!NOTE]
