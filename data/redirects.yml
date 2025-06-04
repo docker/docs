@@ -29,9 +29,6 @@
   - /reference/api/docker_remote_api_v1.21/
   - /reference/api/docker_remote_api_v1.22/
   - /reference/api/docker_remote_api_v1.23/
-# redirect for old location of dockerd reference
-"/reference/cli/dockerd/":
-  - /engine/reference/commandline/dockerd/
 # redirect updated location of the "running containers" page
 "/engine/containers/run/":
   - "/engine/reference/run/"
