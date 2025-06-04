@@ -309,36 +309,36 @@
 "/desktop/settings-and-maintenance/settings/#file-sharing":
   - /go/mac-file-sharing/
 
-"/desktop/use-desktop/container/"
+"/desktop/use-desktop/container/":
   - /go/container/
-"/desktop/use-desktop/images/"
+"/desktop/use-desktop/images/":
   - /go/images/
-"/desktop/use-desktop/volumes/"
+"/desktop/use-desktop/volumes/":
   - /go/volumes/
-"/extensions/"
+"/extensions/":
   - /go/extensions/
-"/engine/cli/completion/"
+"/engine/cli/completion/":
   - /go/completion/
-"/desktop/features/vmm/"
+"/desktop/features/vmm/":
   - /go/vmm/
-"/security/for-admins/hardened-desktop/enhanced-container-isolation/"
+"/security/for-admins/hardened-desktop/enhanced-container-isolation/":
   - /go/eci/
-"/desktop/features/synchronized-file-sharing/"
+"/desktop/features/synchronized-file-sharing/":
   - /go/synchronized-file-sharing/
-"/reference/cli/dockerd/"
+"/reference/cli/dockerd/":
   - /go/daemon/
-"/ai/gordon/"
+"/ai/gordon/":
   - /go/gordon/
-"/desktop/features/wasm/"
+"/desktop/features/wasm/":
   - /go/wasm/
-"/compose/bridge/"
+"/compose/bridge/":
   - /go/compose-bridge/
-"/desktop/settings-and-maintenance/settings/"
+"/desktop/settings-and-maintenance/settings/":
   - /go/notifications/
-"/desktop/setup/install/mac-permission-requirements/#installing-symlinks"
+"/desktop/setup/install/mac-permission-requirements/#installing-symlinks":
   - /go/symlinks/
-"/desktop/setup/install/mac-permission-requirements/"
+"/desktop/setup/install/mac-permission-requirements/":
   - /go/permissions/
-"/desktop/setup/install/mac-permission-requirements/#binding-privileged-ports"
+"/desktop/setup/install/mac-permission-requirements/#binding-privileged-ports":
   - /go/port-mapping/
   
