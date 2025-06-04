@@ -39,7 +39,7 @@ params:
   - title: Docker Model Runner
     description: View and manage your local models.
     icon: view_in_ar
-    link: /ai/model-runner/
+    link: /model-runner/
   - title: MCP Catalog and Toolkit
     description: Augment your AI workflow with MCP servers.
     icon: /icons/toolkit.svg
