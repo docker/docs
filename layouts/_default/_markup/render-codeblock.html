@@ -52,10 +52,7 @@
             x-show="collapse"
             class="absolute z-10 flex h-32 w-full flex-col-reverse items-center overflow-clip pb-4"
           >
-            <button
-              @click="collapse = false"
-              class="bg-blue flex items-center rounded-full px-2 text-sm text-white dark:bg-blue-500"
-            >
+            <button @click="collapse = false" class="chip">
               <span>Show more</span>
               <span class="icon-svg"
                 >{{ partialCached "icon" "arrow_drop_down" "arrow_drop_down" }}</span
@@ -67,7 +64,7 @@
             <button
               @click="collapse = true"
               x-show="!collapse"
-              class="bg-blue mx-auto mt-4 flex items-center rounded-full px-2 text-sm text-white dark:bg-blue-500"
+              class="chip mx-auto mt-4 flex items-center"
             >
               <span>Hide</span>
               <span class="icon-svg"
