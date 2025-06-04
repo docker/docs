@@ -86,21 +86,14 @@ If you have concerns about data collection or usage, you can
 ## Enable Ask Gordon
 
 1. Sign in to your Docker account.
-2. Navigate to the **Features in development** tab in settings.
-3. Under the **Experimental features** tab, select **Access experimental features**.
-4. Select **Apply and restart**. 
-5. Quit and reopen Docker Desktop to ensure the changes take effect. 
-6. Open the **Settings** view in Docker Desktop.
-7. Navigate to **Features in development**.
-8. From the **Beta** tab, check the **Enable Docker AI** checkbox.
+2. Navigate to the **Beta features** tab in settings.
+3. Check the **Enable Docker AI** checkbox.
 
    The Docker AI terms of service agreement is displayed. You must agree to the
    terms before you can enable the feature. Review the terms and select **Accept
    and enable** to continue.
 
-9. Select **Apply & restart**.
-
-You can also enable Ask Gordon from the **Ask Gordon** tab if you have selected the  **Access experimental features** setting. Simply select the **Enable Ask Gordon** button, and then accept the Docker AI terms of service agreement.
+4. Select **Apply & restart**.
 
 ## Using Ask Gordon
 
@@ -204,7 +197,7 @@ across several dimensions:
 If you've enabled Ask Gordon and you want to disable it again:
 
 1. Open the **Settings** view in Docker Desktop.
-2. Navigate to **Features in development**.
+2. Navigate to **Beta features**.
 3. Clear the **Enable Docker AI** checkbox.
 4. Select **Apply & restart**.
 
