@@ -302,5 +302,5 @@
   - /go/model-runner/
   
 # Desktop MCP Toolkit
-"/ai/mcp-toolkit/":
+"/ai/mcp-catalog-and-toolkit/toolkit/":
   - /go/mcp-toolkit/
