@@ -2,7 +2,7 @@
   data-pagefind-ignore
   x-data
   x-ref="root"
-  class="mt-2 mb-4 flex w-full scroll-mt-2 flex-col items-start gap-4 rounded bg-gray-50 p-2 outline outline-1 outline-offset-[-1px] outline-gray-200 dark:bg-gray-900 dark:outline-gray-800"
+  class="group mt-2 mb-4 flex w-full scroll-mt-2 flex-col items-start gap-4 rounded bg-gray-50 p-2 outline outline-1 outline-offset-[-1px] outline-gray-200 dark:bg-gray-900 dark:outline-gray-800"
 >
   {{ with .Attributes.title }}
     <div class="flex w-full items-center gap-2">
@@ -15,7 +15,7 @@
       </div>
     </div>
   {{ end }}
-  <div class="group relative w-full">
+  <div class="relative w-full">
     {{ $lang := .Type | default "text" }}
     {{ $result := transform.Highlight .Inner
       $lang .Options
@@ -64,7 +64,7 @@
             <button
               @click="collapse = true"
               x-show="!collapse"
-              class="chip mx-auto mt-4 flex items-center"
+              class="bg-blue mx-auto mt-4 flex items-center rounded-full px-2 text-sm text-white dark:bg-blue-500"
             >
               <span>Hide</span>
               <span class="icon-svg"
