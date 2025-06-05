@@ -7,6 +7,18 @@ toc_min: 1
 toc_max: 2
 ---
 
+## Docker Desktop 4.41.0 Security Update: CVE-2025-3224, CVE-2025-4095, and CVE-2025-3911
+
+_Last updated May 15, 2025_
+
+Three vulnerabilities in Docker Desktop were fixed on April 28 in the [4.41.0](https://docs.docker.com/desktop/release-notes/#4410) release.
+
+- Fixed [CVE-2025-3224](https://www.cve.org/CVERecord?id=CVE-2025-3224) allowing an attacker with access to a user machine to perform an elevation of privilege when Docker Desktop updates.
+- Fixed [CVE-2025-4095](https://www.cve.org/CVERecord?id=CVE-2025-4095) where Registry Access Management (RAM) policies were not enforced when using a MacOS configuration profile, allowing users to pull images from unapproved registries.
+- Fixed [CVE-2025-3911](https://www.cve.org/CVERecord?id=CVE-2025-3911) allowing an attacker with read access to a user's machine to obtain sensitive information from Docker Desktop log files, including environment variables configured for running containers.
+
+We strongly encourage you to update to Docker Desktop [4.41.0](https://docs.docker.com/desktop/release-notes/#4410).
+
 ## Docker Desktop 4.34.2 Security Update: CVE-2024-8695 and CVE-2024-8696
 
 _Last updated September 13, 2024_

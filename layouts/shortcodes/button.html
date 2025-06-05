@@ -7,8 +7,6 @@
 {{- else -}}
   {{ $url = ref .Page $url }}
 {{- end -}}
-<div class="not-prose my-4">
-  <a href="{{ $url }}"
-    class="cursor-pointer py-2 px-4 rounded bg-blue-light-500 dark:bg-blue-dark-400 hover:bg-blue-light-400 dark:hover:bg-blue-dark-500 text-white">{{
-    $text }}</a>
+<div class="button not-prose">
+  <a href="{{ $url }}">{{ $text }}</a>
 </div>

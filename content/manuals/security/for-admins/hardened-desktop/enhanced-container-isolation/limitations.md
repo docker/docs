@@ -10,9 +10,9 @@ weight: 50
 
 > [!NOTE]
 >
-> Docker Desktop requires WSL 2 version 1.1.3.0 or later. To get the current
+> Docker Desktop requires WSL 2 version 2.1.5 or later. To get the current
 > version of WSL on your host, type `wsl --version`. If the command fails or if
-> it returns a version number prior to 1.1.3.0, update WSL to the latest version
+> it returns a version number prior to 2.1.5, update WSL to the latest version
 > by typing `wsl --update` in a Windows command or PowerShell terminal.
 
 ECI on WSL is not as secure as on Hyper-V because:
@@ -82,11 +82,6 @@ arrangements are needed, just enable ECI and run the KinD tool as usual.
 
 Extension containers are also not yet protected by ECI. Ensure you extension
 containers come from trusted entities to avoid issues.
-
-### Docker Desktop Dev Environments are not yet protected
-
-Containers launched by the Docker Desktop Dev Environments feature are not yet
-protected.
 
 ### Docker Debug containers are not yet protected
 

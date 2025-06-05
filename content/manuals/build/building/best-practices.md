@@ -192,15 +192,15 @@ image. This is useful because it lets publishers update tags to point to
 newer versions of an image. And as an image consumer, it means you
 automatically get the new version when you re-build your image.
 
-For example, if you specify `FROM alpine:3.19` in your Dockerfile, `3.19`
-resolves to the latest patch version for `3.19`.
+For example, if you specify `FROM alpine:3.21` in your Dockerfile, `3.21`
+resolves to the latest patch version for `3.21`.
 
 ```dockerfile
 # syntax=docker/dockerfile:1
-FROM alpine:3.19
+FROM alpine:3.21
 ```
 
-At one point in time, the `3.19` tag might point to version 3.19.1 of the
+At one point in time, the `3.21` tag might point to version 3.21.1 of the
 image. If you rebuild the image 3 months later, the same tag might point to a
 different version, such as 3.19.4. This publishing workflow is best practice,
 and most publishers use this tagging strategy, but it isn't enforced.
@@ -213,16 +213,16 @@ To fully secure your supply chain integrity, you can pin the image version to a
 specific digest. By pinning your images to a digest, you're guaranteed to
 always use the same image version, even if a publisher replaces the tag with a
 new image. For example, the following Dockerfile pins the Alpine image to the
-same tag as earlier, `3.19`, but this time with a digest reference as well.
+same tag as earlier, `3.21`, but this time with a digest reference as well.
 
 ```dockerfile
 # syntax=docker/dockerfile:1
-FROM alpine:3.19@sha256:13b7e62e8df80264dbb747995705a986aa530415763a6c58f84a3ca8af9a5bcd
+FROM alpine:3.21@sha256:a8560b36e8b8210634f77d9f7f9efd7ffa463e380b75e2e74aff4511df3ef88c
 ```
 
-With this Dockerfile, even if the publisher updates the `3.19` tag, your builds
+With this Dockerfile, even if the publisher updates the `3.21` tag, your builds
 would still use the pinned image version:
-`13b7e62e8df80264dbb747995705a986aa530415763a6c58f84a3ca8af9a5bcd`.
+`a8560b36e8b8210634f77d9f7f9efd7ffa463e380b75e2e74aff4511df3ef88c`.
 
 While this helps you avoid unexpected changes, it's also more tedious to have
 to look up and include the image digest for base image versions manually each
@@ -442,7 +442,7 @@ reduces the image size, since the apt cache isn't stored in a layer. Since the
 `RUN` statement starts with `apt-get update`, the package cache is always
 refreshed prior to `apt-get install`.
 
-Official Debian and Ubuntu images [automatically run `apt-get clean`](https://github.com/moby/moby/blob/03e2923e42446dbb830c654d0eec323a0b4ef02a/contrib/mkimage/debootstrap#L82-L105), so explicit invocation is not required.
+Official Debian and Ubuntu images [automatically run `apt-get clean`](https://github.com/debuerreotype/debuerreotype/blob/c9542ab785e72696eb2908a6dbc9220abbabef39/scripts/debuerreotype-minimizing-config#L87-L109), so explicit invocation is not required.
 
 #### Using pipes
 

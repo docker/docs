@@ -20,6 +20,7 @@ exceptions:
   - BIOS
   - BPF
   - BSD
+  - CDI
   - CFS
   - CI
   - CIDR
@@ -28,6 +29,7 @@ exceptions:
   - CNCF
   - CORS
   - CPU
+  - CSI
   - CSS
   - CSV
   - CUDA
@@ -36,6 +38,7 @@ exceptions:
   - DCT
   - DEBUG
   - DHCP
+  - DMR
   - DNS
   - DOM
   - DPI
@@ -83,8 +86,8 @@ exceptions:
   - LTS
   - MAC
   - MATE
-  - MCP
   - mcp
+  - MCP
   - MDM
   - MDN
   - MSI
@@ -103,8 +106,8 @@ exceptions:
   - PATH
   - PDF
   - PEM
-  - PID
   - PHP
+  - PID
   - POSIX
   - POST
   - QA

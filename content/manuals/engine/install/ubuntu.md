@@ -54,7 +54,6 @@ versions:
 - Ubuntu Oracular 24.10
 - Ubuntu Noble 24.04 (LTS)
 - Ubuntu Jammy 22.04 (LTS)
-- Ubuntu Focal 20.04 (LTS)
 
 Docker Engine for Ubuntu is compatible with x86_64 (or amd64), armhf, arm64,
 s390x, and ppc64le (ppc64el) architectures.

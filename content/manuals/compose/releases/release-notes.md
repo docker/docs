@@ -13,6 +13,58 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.36.2
+
+{{< release-date date="2025-05-23" >}}
+
+### Bug fixes and enhancements
+
+- Fixed an issue with random port allocation
+- Fixed an issue recreating containers when not needed during inner loop
+- Fixed a problem during `up --build` with `additional_context`
+
+### Update
+
+- Dependencies upgrade: bump compose-go to v2.6.4
+- Dependencies upgrade: bump buildx to v0.24.0
+- Dependencies upgrade: bump buildkit to v0.22.0
+
+## 2.36.1
+
+{{< release-date date="2025-05-19" >}}
+
+### Bug fixes and enhancements
+
+- Introduced support of arrays for `provider` service `options` attribute
+- Added `debug` messages in the extension protocol
+- Fixed an issue when trying to publish a Compose application with a `provider` service
+- Fixed build issues on Compose applications with `service.provider`
+- Introduced `--lock-image-digests` to `config` command
+
+### Update
+
+- Dependencies upgrade: bump compose-go to v2.6.3
+- Dependencies upgrade: bump containerd to 2.1.0
+
+## 2.36.0
+
+{{< release-date date="2025-05-07" >}}
+
+### Bug fixes and enhancements
+
+- Introduced `networks.interface_name`
+- Added support for `COMPOSE_PROGRESS` env variable
+- Added `service.provider` to external binaries
+- Introduced build `--check` flag
+- Fixed multiple panic issues when parsing Compose files
+
+### Update
+
+- Dependencies upgrade: bump compose-go to v2.6.2
+- Dependencies upgrade: bump docker engine and cli to v28.1.0
+- Dependencies upgrade: bump containerd to 2.0.5
+- Dependencies upgrade: bump buildkit to v0.21.1
+
 ## 2.35.1
 
 {{< release-date date="2025-04-17" >}}

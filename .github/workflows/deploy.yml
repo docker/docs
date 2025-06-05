@@ -96,9 +96,6 @@ jobs:
           files: |
             docker-bake.hcl
           targets: release
-          set: |
-            *.cache-from=type=gha,scope=deploy-${{ env.BRANCH_NAME }}
-            *.cache-to=type=gha,scope=deploy-${{ env.BRANCH_NAME }},mode=max
           provenance: false
       -
         name: Configure AWS Credentials
@@ -134,8 +131,6 @@ jobs:
           files: |
             docker-bake.hcl
           targets: aws-s3-update-config
-          set: |
-            *.cache-from=type=gha,scope=releaser
         env:
           AWS_REGION: ${{ env.DOCS_AWS_REGION }}
           AWS_S3_BUCKET: ${{ env.DOCS_S3_BUCKET }}

@@ -110,7 +110,7 @@ configure your organization.
 
 - **Security and access**: Manage security settings. For more information, see [Security](/manuals/security/_index.md).
 
-- **Organization settings**: Update general settings, manage your company settings, or [deactivate your organization](/manuals/admin/organization/deactivate-account.md).
+- **Organization settings**: Update organization information or [deactivate your organization](/manuals/admin/organization/deactivate-account.md).
 
 {{< /tab >}}
 {{< tab name="Docker Hub" >}}

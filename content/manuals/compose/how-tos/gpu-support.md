@@ -39,7 +39,7 @@ For more information on these properties, see the [Compose Deploy Specification]
 ```yaml
 services:
   test:
-    image: nvidia/cuda:12.3.1-base-ubuntu20.04
+    image: nvidia/cuda:12.9.0-base-ubuntu22.04
     command: nvidia-smi
     deploy:
       resources:

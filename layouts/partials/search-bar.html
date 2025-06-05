@@ -3,13 +3,23 @@
   <span class="icon-svg">{{ partialCached "icon" "search" "search" }}</span>
 </a>
 <!-- search button -->
-<div x-ref="searchBarRef" x-data="{ open: false }" @click.outside="open = false;"
-  @keyup.escape.window="open = false" id="search-bar"
-  class="hidden min-w-0 sm:flex relative bg-white/10 rounded items-center p-2 sm:w-full xl:w-[400px]">
+<div
+  x-ref="searchBarRef"
+  x-data="{ open: false }"
+  @click.outside="open = false;"
+  @keyup.escape.window="open = false"
+  id="search-bar"
+  class="relative hidden min-w-0 items-center rounded-sm bg-white/10 p-2 sm:flex sm:w-full xl:w-[400px]"
+>
   {{ (resources.Get "images/search-ai.svg").Content | safeHTML }}
-  <input x-ref="searchBarInput" type="search" id="search-bar-input" @focus="open = true;"
+  <input
+    x-ref="searchBarInput"
+    type="search"
+    id="search-bar-input"
+    @focus="open = true;"
     @keyup.enter.prevent="window.location.href = '/search/?q=' + $event.target.value;"
-    @keyup.escape.prevent="open = false;" @keydown.window="(e) => {
+    @keyup.escape.prevent="open = false;"
+    @keydown.window="(e) => {
           switch(e.key) {
           case 'k':
             if (e.metaKey || e.ctrlKey) {
@@ -18,24 +28,41 @@
             }
             break;
           }
-        }" class="flex-grow px-2 bg-transparent min-w-0 text-white placeholder:text-white outline-none" placeholder="Search"
-    tabindex="0" />
-  <div x-cloak :class="open && 'hidden'" class="hidden lg:flex border px-1 text-sm border-white rounded items-center">
+        }"
+    class="min-w-0 flex-grow bg-transparent px-2 text-white outline-hidden placeholder:text-white"
+    placeholder="Search"
+    tabindex="0"
+  />
+  <div
+    x-cloak
+    :class="open && 'hidden'"
+    class="hidden items-center rounded-sm border border-white px-1 text-sm lg:flex"
+  >
     <div class="-mt-0.5">
-      <span x-show="navigator.platform == 'MacIntel'" class="icon-svg icon-sm">{{ partialCached "icon" "keyboard_command_key" "keyboard_command_key" }}</span>
-      <span x-show="navigator.platform != 'MacIntel'" class="icon-svg icon-sm">{{ partialCached "icon" "keyboard_control_key" "keyboard_control_key" }}</span>
+      <span x-show="navigator.platform == 'MacIntel'" class="icon-svg icon-sm"
+        >{{ partialCached "icon" "keyboard_command_key" "keyboard_command_key" }}</span
+      >
+      <span x-show="navigator.platform != 'MacIntel'" class="icon-svg icon-sm"
+        >{{ partialCached "icon" "keyboard_control_key" "keyboard_control_key" }}</span
+      >
     </div>
     <span>K</span>
   </div>
   <div x-cloak :class="open || 'hidden'">
-    <button @click="$refs.searchBarInput.value = ''; open = false" class="text-white hover:text-white">
+    <button
+      @click="$refs.searchBarInput.value = ''; open = false"
+      class="text-white hover:text-white"
+    >
       <span class="icon-svg">{{ partialCached "icon" "close" "close" }}</span>
     </button>
   </div>
-  <div x-show="open" x-cloak
-    class="absolute px-6 py-4 right-0 w-screen max-w-xl top-full bg-background-light dark:bg-background-dark rounded shadow-lg z-50">
+  <div
+    x-show="open"
+    x-cloak
+    class="bg-background-light dark:bg-background-dark absolute top-full right-0 z-50 w-screen max-w-xl rounded-sm px-6 py-4 shadow-lg"
+  >
     <div id="search-bar-results">
-      {{- $emptyState := `<div class="p-2 text-gray-light dark:text-gray-dark">Start typing to search… or try <button @click="open=false" class="open-kapa-widget link">Ask AI</button></div>` }}
+      {{- $emptyState := `<div class="p-2 text-gray-500 dark:text-gray-400">Start typing to search… or try <button @click="open=false" class="open-kapa-widget link">Ask AI</button></div>` }}
       {{- $emptyState | safe.HTML }}
       <!-- results -->
     </div>
@@ -77,7 +104,7 @@
             searchBarResults.classList.add("hidden");
           }
 
-          let resultsHTML = `<div class="p-2 text-gray-light dark:text-gray-dark">${resultsLength} results</div>`;
+          let resultsHTML = `<div class="p-2 text-gray-200 dark:text-gray-500">${resultsLength} results</div>`;
           resultsHTML += results
             .map((item) => {
               return `<div class="p-2">

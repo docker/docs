@@ -59,10 +59,6 @@ grid_admins:
   description: Create organization access tokens as an alternative to a password.
   link: /security/for-admins/access-tokens/
   icon: password
-- title: Enforce sign-in
-  description: Enforce your users to sign in to Docker Desktop.
-  link: /security/for-admins/enforce-sign-in/
-  icon: login
 grid_developers:
 - title: Set up two-factor authentication
   description: Add an extra layer of authentication to your Docker account.

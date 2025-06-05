@@ -73,22 +73,22 @@ To see the highest version of the API your Docker daemon and client support, use
 ```console
 $ docker version
 Client: Docker Engine - Community
- Version:           28.0.0
- API version:       1.48
- Go version:        go1.23.6
- Git commit:        f9ced58
- Built:             Wed Feb 19 22:11:04 2025
- OS/Arch:           linux/amd64
+ Version:           28.2.1
+ API version:       1.50
+ Go version:        go1.24.3
+ Git commit:        879ac3f
+ Built:             Wed May 28 19:24:55 2025
+ OS/Arch:           linux/arm64
  Context:           default
 
 Server: Docker Engine - Community
  Engine:
-  Version:          28.0.0
-  API version:      1.48 (minimum version 1.24)
-  Go version:       go1.23.6
-  Git commit:       af898ab
-  Built:            Wed Feb 19 22:11:04 2025
-  OS/Arch:          linux/amd64
+  Version:          28.2.1
+  API version:      1.50 (minimum version 1.24)
+  Go version:       go1.24.3
+  Git commit:       0e2cc22
+  Built:            Wed May 28 19:24:55 2025
+  OS/Arch:          linux/arm64
   ...
 ```
 
@@ -132,6 +132,8 @@ You can specify the API version to use in any of the following ways:
 
 | Docker version | Maximum API version                          | Change log                                                         |
 |:---------------|:---------------------------------------------|:-------------------------------------------------------------------|
+| 28.2           | [1.50](/reference/api/engine/version/v1.50/) | [changes](/reference/api/engine/version-history/#v150-api-changes) |
+| 28.1           | [1.49](/reference/api/engine/version/v1.49/) | [changes](/reference/api/engine/version-history/#v149-api-changes) |
 | 28.0           | [1.48](/reference/api/engine/version/v1.48/) | [changes](/reference/api/engine/version-history/#v148-api-changes) |
 | 27.5           | [1.47](/reference/api/engine/version/v1.47/) | [changes](/reference/api/engine/version-history/#v147-api-changes) |
 | 27.4           | [1.47](/reference/api/engine/version/v1.47/) | [changes](/reference/api/engine/version-history/#v147-api-changes) |

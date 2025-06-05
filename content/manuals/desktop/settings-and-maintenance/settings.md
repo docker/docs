@@ -307,6 +307,8 @@ To enable Kerberos or NTLM proxy authentication you must pass the `--proxy-enabl
 
 Docker Desktop uses a private IPv4 network for internal services such as a DNS server and an HTTP proxy. In case Docker Desktop's choice of subnet clashes with IPs in your environment, you can specify a custom subnet using the **Network** setting.
 
+On Windows and Mac, you can also set the default networking mode and DNS resolution behavior. For more information, see [Networking](/manuals/desktop/features/networking.md#networking-mode-and-dns-behaviour-for-mac-and-windows).
+
 On Mac, you can also select the **Use kernel networking for UDP** setting. This lets you use a more efficient kernel networking path for UDP. This may not be compatible with your VPN software.
 
 ### WSL Integration
@@ -470,13 +472,7 @@ Use the **Extensions** tab to:
 
 For more information about Docker extensions, see [Extensions](/manuals/extensions/_index.md).
 
-## Features in development
-
-On the **Feature control** tab you can control your settings for **Beta features** and **Experimental features**.
-
-You can also sign up to the [Developer Preview program](https://www.docker.com/community/get-involved/developer-preview/) from the **Features in development** tab.
-
-### Beta features
+## Beta features
 
 Beta features provide access to future product functionality.
 These features are intended for testing and feedback only as they may change
@@ -484,15 +480,15 @@ between releases without warning or remove them entirely from a future
 release. Beta features must not be used in production environments.
 Docker doesn't offer support for beta features.
 
-### Experimental features
-
-Experimental features provide early access to future product functionality.
-These features are intended for testing and feedback only as they may change
-between releases without warning or can be removed entirely from a future
-release. Experimental features must not be used in production environments.
-Docker does not offer support for experimental features.
+You can also sign up to the [Developer Preview program](https://www.docker.com/community/get-involved/developer-preview/) from the **Beta features** tab.
 
 For a list of current experimental features in the Docker CLI, see [Docker CLI Experimental features](https://github.com/docker/cli/blob/master/experimental/README.md).
+
+> [!IMPORTANT]
+>
+> For Docker Desktop versions 4.41 and earlier, there is also an **Experimental features** tab under the **Features in development** page.
+>
+> As with beta features, experimental features must not be used in production environments. Docker does not offer support for experimental features.
 
 ## Notifications
 
