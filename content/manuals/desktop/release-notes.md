@@ -94,7 +94,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 #### For all platforms
 
-- This release contains a regression with  `docker port`, resulting in  No host port found for host IP  errors when using testcontainers-node, see [testcontainers/testcontainers-node#818](https://github.com/testcontainers/testcontainers-node/issues/818#issuecomment-2941575369)
+- This release contains a regression with  `docker port`, resulting in "No host port found for host IP" errors when using testcontainers-node, see [testcontainers/testcontainers-node#818](https://github.com/testcontainers/testcontainers-node/issues/818#issuecomment-2941575369)
 
 #### For Windows
 
