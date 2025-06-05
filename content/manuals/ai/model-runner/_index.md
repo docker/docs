@@ -82,7 +82,7 @@ You can now use the `docker model` command in the CLI and view and interact with
 
 Models are cached locally.
 
-{{< tabs >}}
+{{< tabs group="release" >}}
 {{< tab name="From Docker Desktop">}}
 
 1. Select **Models** and select the **Docker Hub** tab.
@@ -98,14 +98,14 @@ Use the [`docker model pull` command](/reference/cli/docker/).
 
 ## Run a model
 
-{{< tabs >}}
+{{< tabs group="release" >}}
 {{< tab name="From Docker Desktop">}}
 
 Select **Models** and select the **Local** tab and click the play button.
 The interactive chat screen opens.
 
 {{< /tab >}}
-{{< tab name="From the Docker CLI">}}
+{{< tab name="From the Docker CLI" >}}
 
 Use the [`docker model run` command](/reference/cli/docker/).
 
@@ -116,7 +116,7 @@ Use the [`docker model run` command](/reference/cli/docker/).
 
 To troubleshoot potential issues, display the logs:
 
-{{< tabs >}}
+{{< tabs group="release" >}}
 {{< tab name="From Docker Desktop">}}
 
 Select **Models** and select the **Logs** tab.
