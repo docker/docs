@@ -284,7 +284,8 @@
   - /go/mcp-toolkit/
 
 # Desktop DMR
-"/model-runner/":
+
+"/ai/model-runner/":
   - /go/model-runner/
 
 # Docker Desktop - volumes cloud backup
@@ -338,4 +339,3 @@
   - /go/permissions/
 "/desktop/setup/install/mac-permission-requirements/#binding-privileged-ports":
   - /go/port-mapping/
-  
