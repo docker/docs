@@ -1,32 +1,38 @@
-command: docker compose alpha generate
-short: EXPERIMENTAL - Generate a Compose file from existing containers
-long: EXPERIMENTAL - Generate a Compose file from existing containers
-usage: docker compose alpha generate [OPTIONS] [CONTAINERS...]
-pname: docker compose alpha
-plink: docker_compose_alpha.yaml
+command: docker compose bridge convert
+short: |
+    Convert compose files to Kubernetes manifests, Helm charts, or another model
+long: |
+    Convert compose files to Kubernetes manifests, Helm charts, or another model
+usage: docker compose bridge convert
+pname: docker compose bridge
+plink: docker_compose_bridge.yaml
 options:
-    - option: format
+    - option: output
+      shorthand: o
       value_type: string
-      default_value: yaml
-      description: 'Format the output. Values: [yaml | json]'
+      default_value: out
+      description: The output directory for the Kubernetes resources
       deprecated: false
       hidden: false
       experimental: false
       experimentalcli: false
       kubernetes: false
       swarm: false
-    - option: name
+    - option: templates
       value_type: string
-      description: Project name to set in the Compose file
+      description: Directory containing transformation templates
       deprecated: false
       hidden: false
       experimental: false
       experimentalcli: false
       kubernetes: false
       swarm: false
-    - option: project-dir
-      value_type: string
-      description: Directory to use for the project
+    - option: transformation
+      shorthand: t
+      value_type: stringArray
+      default_value: '[]'
+      description: |
+        Transformation to apply to compose model (default: docker/compose-bridge-kubernetes)
       deprecated: false
       hidden: false
       experimental: false
@@ -45,9 +51,9 @@ inherited_options:
       kubernetes: false
       swarm: false
 deprecated: false
-hidden: true
+hidden: false
 experimental: false
-experimentalcli: true
+experimentalcli: false
 kubernetes: false
 swarm: false
 
