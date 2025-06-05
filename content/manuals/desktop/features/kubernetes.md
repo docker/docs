@@ -140,6 +140,7 @@ For example, in `kind` mode it requires the following images:
 
 ```console
 docker.io/kindest/node:<tag>
+docker.io/envoyproxy/envoy:<tag>
 docker.io/docker/desktop-cloud-provider-kind:<tag>
 docker.io/docker/desktop-containerd-registry-mirror:<tag>
 ```
@@ -176,6 +177,7 @@ Docker Desktop will pull the images from:
 
 ```console
 my-registry:5000/kind-images/node:<tag>
+my-registry:5000/kind-images/envoy:<tag>
 my-registry:5000/kind-images/desktop-cloud-provider-kind:<tag>
 my-registry:5000/kind-images/desktop-containerd-registry-mirror:<tag>
 ```
