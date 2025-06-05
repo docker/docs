@@ -1,7 +1,7 @@
 ---
 title: Use containers for Python development
 linkTitle: Develop your app
-weight: 20
+weight: 40
 keywords: python, local, development
 description: Learn how to develop your Python application locally.
 aliases:
@@ -569,4 +569,4 @@ Related information:
 
 ## Next steps
 
-In the next section, you'll take a look at how to set up a CI/CD pipeline using GitHub Actions.
+In the next section, you'll learn how you can locally test and debug your workloads on Kubernetes before deploying.
