@@ -472,7 +472,13 @@ Use the **Extensions** tab to:
 
 For more information about Docker extensions, see [Extensions](/manuals/extensions/_index.md).
 
-## Beta features
+## Features in development
+
+On the **Feature control** tab you can control your settings for **Beta features** and **Experimental features**.
+
+You can also sign up to the [Developer Preview program](https://www.docker.com/community/get-involved/developer-preview/) from the **Features in development** tab.
+
+### Beta features
 
 Beta features provide access to future product functionality.
 These features are intended for testing and feedback only as they may change
@@ -480,15 +486,15 @@ between releases without warning or remove them entirely from a future
 release. Beta features must not be used in production environments.
 Docker doesn't offer support for beta features.
 
-You can also sign up to the [Developer Preview program](https://www.docker.com/community/get-involved/developer-preview/) from the **Beta features** tab.
+### Experimental features
+
+Experimental features provide early access to future product functionality.
+These features are intended for testing and feedback only as they may change
+between releases without warning or can be removed entirely from a future
+release. Experimental features must not be used in production environments.
+Docker does not offer support for experimental features.
 
 For a list of current experimental features in the Docker CLI, see [Docker CLI Experimental features](https://github.com/docker/cli/blob/master/experimental/README.md).
-
-> [!IMPORTANT]
->
-> For Docker Desktop versions 4.41 and earlier, there is also an **Experimental features** tab under the **Features in development** page.
->
-> As with beta features, experimental features must not be used in production environments. Docker does not offer support for experimental features.
 
 ## Notifications
 
