@@ -763,7 +763,11 @@ third-party or unvetted plugins from being installed.
 - **Configure this setting with:**
     - **Extensions** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
-## Features in development
+## Beta features
+
+> [!IMPORTANT]
+>
+> For Docker Desktop versions 4.41 and earlier, these settings lived under the **Experimental features** tab on the **Features in development** page.
 
 ### Enable Docker AI
 
@@ -775,7 +779,7 @@ third-party or unvetted plugins from being installed.
 - **OS:** {{< badge color=blue text="All" >}}
 - **Use case:** Enable or disable AI features like "Ask Gordon".
 - **Configure this setting with:**
-    - **Features in development** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
+    - **Beta** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
     - Settings Management: `enableDockerAI` setting in the [`admin-settings.json` file](/manuals/security/for-admins/hardened-desktop/settings-management/configure-json-file.md)
 
 ### Enable Docker Model Runner
@@ -788,7 +792,7 @@ third-party or unvetted plugins from being installed.
 - **OS:** {{< badge color=blue text="All" >}}
 - **Use case:** Enable or disable Docker Model Runner features.
 - **Configure this setting with:**
-    - **Features in development** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
+    - **Beta** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
 ### Enable host-side TCP support
 
@@ -800,7 +804,7 @@ third-party or unvetted plugins from being installed.
 - **OS:** {{< badge color=blue text="All" >}}
 - **Use case:** Enable or disable Docker Model Runner features.
 - **Configure this setting with:**
-    - **Features in development** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
+    - **Beta** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
 > [!NOTE]
 >
