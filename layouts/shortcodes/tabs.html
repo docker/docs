@@ -6,7 +6,6 @@
 
 
 <div
-  class="tabs"
   {{ with $group }}
     {{ if $persist }}
       x-data="{ selected: $persist('{{ $first }}').as('{{ $groupID }}') }"
@@ -20,10 +19,10 @@
   {{ end }}
   aria-role="tabpanel"
 >
-  <div aria-role="tablist" class="tablist">
+  <div aria-role="tablist" class="space-x-2">
     {{ range (.Store.Get "tabs") }}
       <button
-        class="tab-item"
+        class="p-1"
         :class="selected === '{{ .name | urlize }}' &&
           'border-blue border-b-4 dark:border-b-blue-600'"
         {{ if $group }}
@@ -37,6 +36,7 @@
       </button>
     {{ end }}
   </div>
+  <hr class="!mt-0" />
   <div>
     {{ range (.Store.Get "tabs") }}
       <div
@@ -47,4 +47,5 @@
       </div>
     {{ end }}
   </div>
+  <hr />
 </div>
