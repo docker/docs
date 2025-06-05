@@ -37,6 +37,7 @@ Models are pulled from Docker Hub the first time they're used and stored locally
 
 ### Enable DMR in Docker Desktop
 
+
 1. Navigate to the **Beta features** tab in settings.
 2. Tick the **Enable Docker Model Runner** setting.
 3. If you are running on Windows with a supported NVIDIA GPU, you should also see and be able to tick the **Enable GPU-backed inference** setting.
