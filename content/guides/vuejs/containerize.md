@@ -134,13 +134,13 @@ FROM node:${NODE_VERSION} AS builder
 WORKDIR /app
 
 # Copy package-related files first to leverage Docker's caching mechanism
-COPY --link package.json package-lock.json ./
+COPY package.json package-lock.json ./
 
 # Install project dependencies using npm ci (ensures a clean, reproducible install)
-RUN npm ci
+RUN --mount=type=cache,target=/root/.npm npm ci
 
 # Copy the rest of the application source code into the container
-COPY --link . .
+COPY . .
 
 # Build the Vue.js application
 RUN npm run build
@@ -155,11 +155,11 @@ FROM nginxinc/nginx-unprivileged:${NGINX_VERSION} AS runner
 USER nginx
 
 # Copy custom Nginx config
-COPY --link nginx.conf /etc/nginx/nginx.conf
+COPY nginx.conf /etc/nginx/nginx.conf
 
 
 # Copy the static build output from the build stage to Nginx's default HTML serving directory
-COPY --link --from=builder /app/dist /usr/share/nginx/html
+COPY --chown=nginx:nginx --from=builder /app/dist /usr/share/nginx/html
 
 # Expose port 8080 to allow HTTP traffic
 # Note: The default NGINX container now listens on port 8080 instead of 80 
@@ -373,7 +373,7 @@ What this command does:
 - Tags the image as docker-vuejs-sample so you can reference it later
 
 
-#### Step 6:  View local images
+#### Step 6: View local images
 
 After building your Docker image, you can check which images are available on your local machine using either the Docker CLI or [Docker Desktop](/manuals/desktop/use-desktop/images.md). Since you're already working in the terminal, let's use the Docker CLI.
 

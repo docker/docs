@@ -15,13 +15,12 @@ params:
 
 The Vue.js language-specific guide shows you how to containerize an Vue.js application using Docker, following best practices for creating efficient, production-ready containers.
 
-[Vue.js](https://vuejs.org/) Vue.js is a progressive and flexible framework for building modern, interactive web applications. Its simplicity and modularity make it ideal for projects of any size, from small prototypes to large-scale enterprise solutions. However, as applications grow, managing dependencies, configuring environments, and handling deployments can become increasingly intricate. Docker addresses these complexities by providing a consistent, containerized environment that simplifies development, testing, and production workflows.
+[Vue.js](https://vuejs.org/) is a progressive and flexible framework for building modern, interactive web applications. However, as applications scale, managing dependencies, environments, and deployments can become complex. Docker simplifies these challenges by providing a consistent, isolated environment for both development and production.
 
 > 
 > **Acknowledgment**
 >
-> Docker extends its sincere gratitude to [Kristiyan Velkov](https://www.linkedin.com/in/kristiyan-velkov-763130b3/) for authoring this comprehensive guide. As a respected Docker Captain and seasoned Front-end Engineer, Kristiyan brings deep expertise in Docker, DevOps, and modern web development. His commitment to clarity and best practices has made this guide an invaluable resource—empowering developers to streamline, optimize, and master their Docker workflows with confidence.
-
+> Docker extends its sincere gratitude to [Kristiyan Velkov](https://www.linkedin.com/in/kristiyan-velkov-763130b3/) for authoring this guide. As a Docker Captain and highly skilled Front-end engineer, Kristiyan brings exceptional expertise in modern web development, Docker, and DevOps. His hands-on approach and clear, actionable guidance make this guide an essential resource for developers aiming to build, optimize, and secure Vue.js applications with Docker.
 ---
 
 ## What will you learn?

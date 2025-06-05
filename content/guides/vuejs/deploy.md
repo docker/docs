@@ -2,7 +2,7 @@
 title: Test your Vue.js deployment
 linkTitle: Test your deployment
 weight: 60
-keywords: deploy, kubernetes, vuejs
+keywords: deploy, kubernetes, vue, vue.js
 description: Learn how to deploy locally to test and debug your Kubernetes deployment
 
 ---
@@ -32,7 +32,7 @@ Follow these steps to define your deployment configuration:
 
 2. Open the file in your IDE or preferred text editor.
 
-3. Add the following configuration, and be sure to replace `{DOCKER_USERNAME}` and `{DOCKERHUB_PROJECT_NAME}` with your actual Docker Hub username and repository name from the previous [Configure CI/CD for your Vue.js application](configure-ci-cd.md).
+3. Add the following configuration, and be sure to replace `{DOCKER_USERNAME}` and `{DOCKERHUB_PROJECT_NAME}` with your actual Docker Hub username and repository name from the previous [Automate your builds with GitHub Actions](configure-github-actions.md).
 
 
 ```yaml
@@ -84,7 +84,7 @@ This manifest defines two key Kubernetes resources, separated by `---`:
 
 - Deployment
   Deploys a single replica of your Vue.js application inside a pod. The pod uses the Docker image built and pushed by your GitHub Actions CI/CD workflow  
-  (refer to [Configure CI/CD for your Vue.js application](configure-ci-cd.md)).  
+  (refer to [Automate your builds with GitHub Actions](configure-github-actions.md)).  
   The container listens on port `8080`, which is typically used by [Nginx](https://nginx.org/en/docs/) to serve your production Vue.js app.
 
 - Service (NodePort) 

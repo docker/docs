@@ -84,7 +84,7 @@ After completing the previous steps, your project directory should contain the f
 │ └── README.Docker.md
 ```
 
-### Step 4: Run the tests
+### Step 2: Run the tests
 
 To execute your test suite inside the container, run the following command from your project root:
 

@@ -43,17 +43,20 @@ ARG NODE_VERSION=22.14.0-alpine
 # Use a lightweight Node.js image for development
 FROM node:${NODE_VERSION} AS dev
 
+# Set environment variable to indicate development mode
+ENV NODE_ENV=development
+
 # Set the working directory inside the container
 WORKDIR /app
 
 # Copy package-related files first to leverage Docker's caching mechanism
-COPY --link package.json package-lock.json ./
+COPY package.json package-lock.json ./
 
 # Install project dependencies
 RUN --mount=type=cache,target=/root/.npm npm install
 
 # Copy the rest of the application source code into the container
-COPY --link . .
+COPY . .
 
 # Expose the port used by the Vite development server
 EXPOSE 5173
