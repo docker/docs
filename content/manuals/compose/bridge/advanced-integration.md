@@ -10,7 +10,7 @@ keywords: kubernetes, compose, compose bridge, plugin, advanced
 
 Compose Bridge can also function as a `kubectl` plugin, allowing you to integrate its capabilities directly into your Kubernetes command-line operations. This integration simplifies the process of converting and deploying applications from Docker Compose to Kubernetes.
 
-## Use `compose-bridge` as a `kubectl` plugin
+## Use `docker compose bridge` as a `kubectl` plugin
 
 To use the `compose-bridge` binary as a `kubectl` plugin, you need to make sure that the binary is available in your PATH and the name of the binary is prefixed with `kubectl-`. 
 
@@ -37,7 +37,7 @@ To use the `compose-bridge` binary as a `kubectl` plugin, you need to make sure 
 4. Now you can use `compose-bridge` as a `kubectl` plugin:
 
     ```console
-   $ kubectl compose-bridge [command]
+   $ kubectl docker compose bridge [command]
     ```
 
-Replace `[command]` with any `compose-bridge` command you want to use.
+Replace `[command]` with any `docker compose bridge` command you want to use.

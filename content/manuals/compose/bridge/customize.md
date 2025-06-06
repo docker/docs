@@ -91,7 +91,7 @@ decisions and preferences, with various level of flexibility and effort.
 ### Modify the default templates
 
 You can extract templates used by the default transformation `docker/compose-bridge-kubernetes`,
-by running `compose-bridge transformations create --from docker/compose-bridge-kubernetes my-template` 
+by running `docker compose bridge transformations create --from docker/compose-bridge-kubernetes my-template` 
 and adjusting the templates to match your needs.
 
 The templates are extracted into a directory named after your template name, in this case `my-template`.  
@@ -106,7 +106,7 @@ $ docker build --tag mycompany/transform --push .
 You can then use your transformation as a replacement:
 
 ```console
-$ compose-bridge convert --transformations mycompany/transform 
+$ docker compose bridge convert --transformations mycompany/transform 
 ```
 
 ### Add your own templates

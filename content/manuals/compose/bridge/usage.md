@@ -29,7 +29,7 @@ It also supplies a Kustomize overlay dedicated to Docker Desktop with:
 To use the default transformation run the following command:
 
 ```console
-$ compose-bridge convert
+$ docker compose bridge convert
 ```
 
 Compose looks for a `compose.yaml` file inside the current directory and then converts it.
@@ -69,13 +69,13 @@ the standard deployment command `kubectl apply -k out/overlays/desktop/`.
 If you want to convert a `compose.yaml` file that is located in another directory, you can run:
 
 ```console
-$ compose-bridge convert -f <path-to-file>/compose.yaml 
+$ docker compose bridge convert -f <path-to-file>/compose.yaml 
 ```
 
 To see all available flags, run:
 
 ```console
-$ compose-bridge convert --help
+$ docker compose bridge convert --help
 ```
 
 > [!TIP]
