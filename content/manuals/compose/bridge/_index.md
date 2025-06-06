@@ -30,8 +30,8 @@ To get started with Compose Bridge, you need to:
 
 1. Download and install Docker Desktop version 4.33 and later.
 2. Sign in to your Docker account.
-3. Navigate to the **Features in development** tab in **Settings**. 
-4. From the **Experimental features** tab, select **Enable Compose Bridge**.
+3. Navigate to the **Beta features** tab in **Settings**. 
+4. Select **Enable Compose Bridge**.
 5. Select **Apply & restart**.
 
 ## Feedback
@@ -42,4 +42,3 @@ To give feedback, report bugs, or receive support, email `desktop-preview@docker
 
 - [Use Compose Bridge](usage.md)
 - [Explore how you can customize Compose Bridge](customize.md)
-- [Explore the advanced integration](advanced-integration.md)
