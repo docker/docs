@@ -134,7 +134,6 @@ This pipeline is triggered automatically on:
 ```yaml
 variables:
   imageName: 'docker.io/$(dockerUsername)/my-image'
-  dockerUsername: 'your-dockerhub-username'  # Replace with your actual Docker Hub username
   buildTag: '$(Build.BuildId)'
   latestTag: 'latest'
 ```
