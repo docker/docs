@@ -42,4 +42,3 @@ To give feedback, report bugs, or receive support, email `desktop-preview@docker
 
 - [Use Compose Bridge](usage.md)
 - [Explore how you can customize Compose Bridge](customize.md)
-- [Explore the advanced integration](advanced-integration.md)

@@ -152,7 +152,7 @@ when transforming Compose models into Kubernetes in addition to other
 transformations:
 
 ```console
-$ compose-bridge convert \
+$ docker compose bridge convert \
     --transformation docker/compose-bridge-kubernetes \
     --transformation mycompany/transform 
 ```
@@ -184,7 +184,3 @@ CMD ["/usr/bin/kompose", "convert", "-f", "/in/compose.yaml", "--out", "/out"]
 
 This Dockerfile bundles Kompose and defines the command to run this tool according
 to the Compose Bridge transformation contract.
-
-## What's next?
-
-- [Explore the advanced integration](advanced-integration.md)

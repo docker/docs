@@ -36,7 +36,7 @@ Compose looks for a `compose.yaml` file inside the current directory and then co
 
 The following output is displayed 
 ```console
-$ compose-bridge convert -f compose.yaml 
+$ docker compose bridge convert -f compose.yaml 
 Kubernetes resource api-deployment.yaml created
 Kubernetes resource db-deployment.yaml created
 Kubernetes resource web-deployment.yaml created
@@ -87,4 +87,3 @@ $ docker compose bridge convert --help
 ## What's next?
 
 - [Explore how you can customize Compose Bridge](customize.md)
-- [Explore the advanced integration](advanced-integration.md)
