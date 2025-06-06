@@ -23,11 +23,11 @@ To configure:
 
    ![Gordon page with the toolbox button](../images/gordon.webp)
 
-2. Choose the tools you want to make available. Selecting a card lets you view extra information regarding each tool and what it does.
+2. To enable or disable a tool, select it in the left-menu and select the toggle.
 
    ![Gordon's Toolbox](../images/toolbox.webp)
 
-   For more information on the possible tools, see [Reference](#reference).
+   For more information on the available Docker tools, see [Reference](#reference).
 
 ## Usage examples
 
@@ -224,15 +224,15 @@ General-purpose development utilities.
 
 | Tool | Description |
 |------|-------------|
-| `list_models` | List all available AI models |
-| `pull_model` | Download an AI model |
+| `list_models` | List all available Docker models |
+| `pull_model` | Download an Docker model |
 | `run_model` | Query a model with a prompt |
-| `remove_model` | Remove an AI model |
+| `remove_model` | Remove an Docker model |
 
-### AI Tool Catalog
+### Docker MCP Catalog
 
-When the [AI Tool
-Catalog](https://open.docker.com/extensions/marketplace?extensionId=docker/labs-ai-tools-for-devs)
-Docker Desktop extension is installed, all the tools enabled in the catalog are
-available for Gordon to use. After installation, you can enable the usage of the
-AI Tool Catalog tools in the toolbox section of Gordon.
+If you have enabled the [MCP Toolkit feature](/content/manuals/ai/mcp-catalog-and-toolkit/toolkit.md), 
+all the tools you have enabled and configured are available for Gordon to use.
+
+To disable Gordon's access to the MCP toolkit 
+
