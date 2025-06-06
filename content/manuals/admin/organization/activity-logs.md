@@ -71,6 +71,14 @@ Refer to the following section for a list of events and their descriptions:
 | Policy updated | Details of updating a settings policy |
 | Policy deleted | Details of deleting a settings policy |
 | Policy transferred | Details of transferring a settings policy to another owner |
+| Create SSO Connection | Details of creating a new org/company SSO connection |
+| Update SSO Connection | Details of updating an existing org/company SSO connection |
+| Delete SSO Connection | Details of deleting an existing org/company SSO connection |
+| Enforce SSO | Details of toggling enforcement on an existing org/company SSO connection |
+| Enforce SCIM | Details of toggling SCIM on an existing org/company SSO connection |
+| Refresh SCIM Token | Details of a SCIM token refresh on an existing org/company SSO connection |
+| Change SSO Connection Type | Details of a connection type change on an existing org/company SSO connection |
+| Toggle JIT provisioning | Details of a JIT toggle on an existing org/company SSO connection |
 
 ### Repository events
 
