@@ -23,16 +23,14 @@ This guide walks you through building and pushing Docker images using [Azure Pip
 - Configure Docker authentication securely.
 - Set up an automated pipeline to build and push images.
 
-## Step 1: Configure Docker credentials
+## Step 1: Configure a Docker Hub service connection
 
-To authenticate securely with Docker Hub:
+To securely authenticate with Docker Hub using Azure Pipelines:
 
-1. In your Azure DevOps project, navigate to **Project Settings > Pipelines > Library**.
-2. Create a new **Variable Group** and add the following variables:
-   - `DOCKER_USERNAME` — your Docker Hub username.
-   - `DOCKER_PASSWORD` — your Docker Hub access token (mark this as **secret**).
-
-These credentials will be used by the pipeline to log in to Docker Hub.
+1. Navigate to **Project Settings > Service Connections** in your Azure DevOps project.
+2. Click **New service connection > Docker Registry**.
+3. Choose **Docker Hub** and provide your Docker Hub credentials or access token.
+4. Give the service connection a recognizable name, such as `my-docker-registry`, and grant access permissions to all pipelines.
 
 ## Step 2: Create your pipeline
 
@@ -49,93 +47,237 @@ pr:
 
 # Define variables for reuse across the pipeline
 variables:
-  imageName: '$(dockerRegistry)/$(dockerUsername)/my-image'  # Docker image name with registry and username
-  dockerRegistry: 'docker.io'  # Docker registry URL (e.g., Docker Hub or private registry)
-  dockerUsername: '$(DOCKER_USERNAME)'  # Docker username from variable group or pipeline variable
-  buildTag: '$(Build.BuildId)'  # Tag the image with the unique build ID
-  latestTag: 'latest'  # Additional tag for the latest image
-  - group: my-variable-group  # Link to Azure DevOps variable group containing DOCKER_USERNAME and DOCKER_PASSWORD
+  imageName: 'docker.io/$(dockerUsername)/my-image'
+  dockerUsername: 'your-dockerhub-username'  # Replace with your Docker Hub username
+  buildTag: '$(Build.BuildId)'
+  latestTag: 'latest'
 
-# Define stages for the pipeline
 stages:
   - stage: BuildAndPush
     displayName: Build and Push Docker Image
-    # Only run this stage for the main branch and if previous steps succeeded
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
     jobs:
       - job: DockerJob
         displayName: Build and Push
-        # Use the latest Ubuntu VM image for compatibility with Docker
         pool:
           vmImage: ubuntu-latest
         steps:
-          # Check out the repository code
           - checkout: self
             displayName: Checkout Code
 
-          # Log in to Docker registry using a service connection for secure credential management
           - task: Docker@2
             displayName: Docker Login
             inputs:
               command: login
-              containerRegistry: 'my-docker-registry'  # Service connection defined in Azure DevOps
+              containerRegistry: 'my-docker-registry'  # Service connection name
 
-          # Build the Docker image with BuildKit for caching and efficiency
           - task: Docker@2
             displayName: Build Docker Image
             inputs:
               command: build
-              repository: $(imageName)  # Image name with registry and username
+              repository: $(imageName)
               tags: |
-                $(buildTag)  # Tag with build ID
-                $(latestTag)  # Tag as latest
-              dockerfile: './Dockerfile'  # Path to Dockerfile
-              arguments: '--cache-from $(imageName):latest'  # Use cached layers from latest image
+                $(buildTag)
+                $(latestTag)
+              dockerfile: './Dockerfile'
+              arguments: '--cache-from $(imageName):latest'
             env:
-              DOCKER_BUILDKIT: 1  # Enable BuildKit for faster builds and better caching
+              DOCKER_BUILDKIT: 1
 
-          # Validate the built Docker image by running a simple command (e.g., version check)
-          - script: |
-              docker run --rm $(imageName):$(buildTag) --version
-            displayName: Validate Docker Image
-            continueOnError: true  # Continue even if validation fails (optional)
-
-          # Push the Docker image to the registry
           - task: Docker@2
             displayName: Push Docker Image
             inputs:
               command: push
               repository: $(imageName)
               tags: |
-                $(buildTag)  # Push build ID tag
-                $(latestTag)  # Push latest tag
+                $(buildTag)
+                $(latestTag)
+
+          # Optional: logout for self-hosted agents
+          - script: docker logout
+            displayName: Docker Logout (Self-hosted only)
+            condition: ne(variables['Agent.OS'], 'Windows_NT')
 ```
 
 ## What this pipeline does
 
+This pipeline automates the Docker image build and deployment process for the main branch. It ensures a secure and efficient workflow with best practices like caching, tagging, and conditional cleanup. Here's what it does:
+
 - Triggers on commits and pull requests targeting the `main` branch.
-- Authenticates with Docker Hub (or another specified registry) using a secure Azure DevOps service connection for credential management.
-- Builds and tags the Docker image with the Azure build ID and a latest tag, utilizing Docker BuildKit for efficient caching.
-- Validates the built Docker image by running a simple command (e.g., version check) to ensure it functions as expected.
-- Pushes the tagged Docker images to the specified Docker registry (e.g., Docker Hub).
+- Authenticates securely with Docker Hub using an Azure DevOps service connection.
+- Builds and tags the Docker image using Docker BuildKit for caching.
+- Pushes both buildId and latest tags to Docker Hub.
+- Logs out from Docker if running on a self-hosted Linux agent.
+
+
+## Detailed Step-by-Step Explanation 
+
+### Step 1: Define Pipeline Triggers 
+
+```yaml
+trigger:
+  - main
+
+pr:
+  - main
+```
+
+This pipeline is triggered automatically on:
+- Commits pushed to the `main` branch
+- Pull requests targeting `main` main branch
+
+> [!NOTE]
+> Learn more: [Define pipeline triggers in Azure Pipelines](https://learn.microsoft.com/en-us/azure/devops/pipelines/build/triggers?view=azure-devops)
+
+
+### Step 2: Define Common Variables
+
+```yaml
+variables:
+  imageName: 'docker.io/$(dockerUsername)/my-image'
+  dockerUsername: 'your-dockerhub-username'  # Replace with your actual Docker Hub username
+  buildTag: '$(Build.BuildId)'
+  latestTag: 'latest'
+```
+
+These variables ensure consistent naming, versioning, and reuse throughout the pipeline steps:
+
+- `imageName`: your image path on Docker Hub
+- `buildTag`: a unique tag for each pipeline run
+- `latestTag`: a stable alias for your most recent image
+
+> [!NOTE]
+> Learn more: [Define and use variables in Azure Pipelines](https://learn.microsoft.com/en-us/azure/devops/pipelines/process/variables?view=azure-devops&tabs=yaml%2Cbatch)
+
+
+### Step 3: Define Pipeline Stages and Jobs
+
+```yaml
+stages:
+  - stage: BuildAndPush
+    displayName: Build and Push Docker Image
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+```
+
+This stage executes only if:
+
+- The pipeline completes successfully.
+- The source branch is main.
+
+> [!NOTE]
+> Learn more: [Stage conditions in Azure Pipelines](https://learn.microsoft.com/en-us/azure/devops/pipelines/process/stages?view=azure-devops&tabs=yaml)
+
+### Step 4: Job Configuration
+
+```yaml
+jobs:
+  - job: DockerJob
+  displayName: Build and Push
+  pool:
+  vmImage: ubuntu-latest
+```
+
+This job uses the latest Ubuntu VM image provided by Microsoft-hosted agents. It can be swapped with a custom pool for self-hosted agents if needed.
+
+> [!NOTE]
+> Learn more: [Specify a pool in your pipeline](https://learn.microsoft.com/en-us/azure/devops/pipelines/agents/pools-queues?view=azure-devops&tabs=yaml%2Cbrowser)
+
+#### Step 4.1 Checkout Code
+
+```yaml
+steps:
+  - checkout: self
+    displayName: Checkout Code
+
+```
+
+This step pulls your repository code into the build agent, so the pipeline can access the Dockerfile and application files.
+
+> [!NOTE]
+> Learn more: [checkout step documentation](https://learn.microsoft.com/en-us/azure/devops/pipelines/yaml-schema/steps-checkout?view=azure-pipelines)
+
+
+#### Step 4.2 Authenticate to Docker Hub
+
+```yaml
+- task: Docker@2
+  displayName: Docker Login
+  inputs:
+    command: login
+    containerRegistry: 'my-docker-registry'  # Replace with your service connection name
+```
+
+Uses a preconfigured Azure DevOps Docker registry service connection to authenticate securely without exposing credentials directly.
+
+> [!NOTE]
+> Learn more: [Use service connections for Docker Hub](https://learn.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops#docker-hub-or-others)
+
+
+#### Step 4.3 Build the Docker Image
+
+```yaml
+- task: Docker@2
+  displayName: Build Docker Image
+  inputs:
+    command: build
+    repository: $(imageName)
+    tags: |
+        $(buildTag)
+        $(latestTag)
+    dockerfile: './Dockerfile'
+    arguments: '--cache-from $(imageName):latest'
+  env:
+    DOCKER_BUILDKIT: 1
+```
+
+This builds the image with:
+
+- Two tags: one with the build ID and one as latest
+- Docker BuildKit for faster builds and layer caching
+- Cache pull from the last pushed latest tag
+
+> [!NOTE]
+> Learn more: [Docker task for Azure Pipelines](https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/reference/docker-v2?view=azure-pipelines&tabs=yaml)
+
+
+#### Step 4.4 Push the Docker Image
+```yaml
+- task: Docker@2
+  displayName: Push Docker Image
+  inputs:
+      command: push
+      repository: $(imageName)
+      tags: |
+        $(buildTag)
+        $(latestTag)
+
+```
+
+This uploads both tags to Docker Hub:
+- `$(buildTag)` ensures traceability per run.
+- `latest` is used for most recent image references.
+
+
+5. Logout from Docker (Self-Hosted Agents)
+
+```yaml
+- script: docker logout
+  displayName: Docker Logout (Self-hosted only)
+  condition: ne(variables['Agent.OS'], 'Windows_NT')
+
+```
+
+Executes docker logout at the end of the pipeline on Linux-based self-hosted agents to proactively clean up credentials and enhance security posture.
 
 ---
 
 ## Summary
 
-With a streamlined configuration, this Azure Pipelines CI workflow:
-
-- Automatically triggers on commits and pull requests to the main branch, building and pushing Docker images.
-- Authenticates securely with Docker Hub (or another registry) using an Azure DevOps service connection for credential management.
-- Builds and tags Docker images with the Azure build ID and a latest tag, leveraging Docker BuildKit for efficient caching.
-- Validates the built image with a simple command (e.g., version check) to ensure functionality.
-- Pushes the tagged images to the specified Docker registry (e.g., Docker Hub).
-
-**You can extend this pipeline to support:**
-
-- Multi-platform image builds for broader architecture compatibility.
-- Deployment stages for Helm or Kubernetes-based environments.
-- Integration with [Azure Container Registry (ACR)](https://learn.microsoft.com/en-us/azure/container-registry/) for private registry storage.
+With this Azure Pipelines CI setup, you get:
+- Secure Docker authentication using a built-in service connection.
+- Automated image building and tagging triggered by code changes.
+- Efficient builds leveraging Docker BuildKit cache.
+- Safe cleanup with logout on persistent agents.
 
 ---
 
