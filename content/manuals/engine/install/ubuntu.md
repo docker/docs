@@ -97,6 +97,26 @@ automatically removed when you uninstall Docker. If you want to start with a
 clean installation, and prefer to clean up any existing data, read the
 [uninstall Docker Engine](#uninstall-docker-engine) section.
 
+#### Uninstall snap version
+
+Verify if you have snap version of Docker :
+
+```console
+snap list | grep docker
+```
+
+If you have this kind of result : 
+```text
+docker                     27.2.0                      2963      latest/stable    canonical**     -
+```
+
+Disable and remove the snap :
+```console
+sudo snap disable docker && sudo snap remove docker --purge
+```
+
+Then reboot.
+
 ## Installation methods
 
 You can install Docker Engine in different ways, depending on your needs:
