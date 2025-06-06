@@ -80,7 +80,7 @@ stages:
                 $(buildTag)
                 $(latestTag)
               dockerfile: './Dockerfile'
-              arguments: '--cache-from $(imageName):latest'
+              arguments: '--sbom=true --attest type=provenance --cache-from $(imageName):latest'
             env:
               DOCKER_BUILDKIT: 1
 
