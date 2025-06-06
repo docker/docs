@@ -30,7 +30,11 @@ To securely authenticate with Docker Hub using Azure Pipelines:
 1. Navigate to **Project Settings > Service Connections** in your Azure DevOps project.
 2. Click **New service connection > Docker Registry**.
 3. Choose **Docker Hub** and provide your Docker Hub credentials or access token.
-4. Give the service connection a recognizable name, such as `my-docker-registry`, and grant access permissions to all pipelines.
+4. Give the service connection a recognizable name, such as `my-docker-registry`.
+5. Grant access only to the specific pipeline(s) that require it for improved security and least privilege.
+
+> [!IMPORTANT]
+> Avoid selecting the option to grant access to all pipelines unless absolutely necessary. Always apply the principle of least privilege.
 
 ## Step 2: Create your pipeline
 
