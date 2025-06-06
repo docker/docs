@@ -927,7 +927,28 @@ paths:
         "404":
           $ref: "#/components/responses/NotFound"
 
-          
+  /v2/repositories/{namespace}/{repository}/groups/{group_id}:
+    parameters:
+      - $ref: "#/components/parameters/namespace"
+      - $ref: "#/components/parameters/repository"
+      - $ref: "#/components/parameters/group_id"
+    delete:
+      summary: Remove a group (Team) from repository access
+      description: |
+        Removes a group's access to a repository. The user must be a repository admin to perform this action.
+      tags:
+        - repositories
+      security:
+        - bearerAuth: []
+      responses:
+        "204":
+          description: No content
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
   /v2/orgs/{org_name}/members:
     parameters:
       - $ref: "#/components/parameters/org_name"
@@ -3156,6 +3177,13 @@ components:
       required: true
       schema:
         type: string
+    group_id:
+      in: path
+      name: group_id
+      required: true
+      schema:
+        type: string
+      description: ID of the group (team) to remove from repository access
     org_name:
       in: path
       name: org_name
