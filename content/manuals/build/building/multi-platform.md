@@ -206,7 +206,7 @@ environment and start building.
 ```console
 $ docker buildx create --driver cloud <ORG>/<BUILDER_NAME>
 cloud-<ORG>-<BUILDER_NAME>
-$ docker build \
+$ docker buildx build \
   --builder cloud-<ORG>-<BUILDER_NAME> \
   --platform linux/amd64,linux/arm64,linux/arm/v7 \
   --tag <IMAGE_NAME> \
@@ -279,7 +279,7 @@ Steps:
 3. Build the image for `linux/amd64` and `linux/arm64`:
 
    ```console
-   $ docker build --platform linux/amd64,linux/arm64 -t multi-platform .
+   $ docker buildx build --platform linux/amd64,linux/arm64 -t multi-platform .
    ```
 
 4. Run the image and print the architecture:
@@ -339,7 +339,7 @@ Steps:
 3. Build the image for `linux/amd64` and `linux/arm64` using Docker Build Cloud:
 
    ```console
-   $ docker build \
+   $ docker buildx build \
       --builder <cloud-builder> \
       --platform linux/amd64,linux/arm64 \
       --output ./bin .
@@ -481,7 +481,7 @@ Steps:
 4. Build the image for `linux/amd64` and `linux/arm64`:
 
    ```console
-   $ docker build --platform linux/amd64,linux/arm64 -t go-server .
+   $ docker buildx build --platform linux/amd64,linux/arm64 -t go-server .
    ```
 
 This example has shown how to cross-compile a Go application for multiple
