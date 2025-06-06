@@ -92,6 +92,10 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ### Known issues
 
+#### For all platforms
+
+- This release contains a regression with  `docker port`, resulting in "No host port found for host IP" errors when using testcontainers-node. See [testcontainers/testcontainers-node#818](https://github.com/testcontainers/testcontainers-node/issues/818#issuecomment-2941575369)
+
 #### For Windows
 
 - Running containers with Wasm will hang sporadically. See [docker/for-mac#7666](https://github.com/docker/for-mac/issues/7666).
