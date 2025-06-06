@@ -8,6 +8,8 @@ params:
   time: 10 minutes
 ---
 
+> This guide was created by [Kristiyan Velkov](https://www.linkedin.com/in/kristiyan-velkov-763130b3/).
+
 ## Prerequisites
 
 Before you begin, ensure the following requirements are met:
@@ -83,7 +85,10 @@ stages:
                 $(buildTag)
                 $(latestTag)
               dockerfile: './Dockerfile'
-              arguments: '--sbom=true --attest type=provenance --cache-from $(imageName):latest'
+              arguments: |
+                --sbom=true
+                --attest type=provenance
+                --cache-from $(imageName):latest
             env:
               DOCKER_BUILDKIT: 1
 
@@ -129,7 +134,7 @@ This pipeline is triggered automatically on:
 - Commits pushed to the `main` branch
 - Pull requests targeting `main` main branch
 
-> [!NOTE]
+> [!TIP]
 > Learn more: [Define pipeline triggers in Azure Pipelines](https://learn.microsoft.com/en-us/azure/devops/pipelines/build/triggers?view=azure-devops)
 
 
@@ -148,7 +153,7 @@ These variables ensure consistent naming, versioning, and reuse throughout the p
 - `buildTag`: a unique tag for each pipeline run
 - `latestTag`: a stable alias for your most recent image
 
-> [!NOTE]
+> [!TIP]
 > Learn more: [Define and use variables in Azure Pipelines](https://learn.microsoft.com/en-us/azure/devops/pipelines/process/variables?view=azure-devops&tabs=yaml%2Cbatch)
 
 
@@ -166,7 +171,7 @@ This stage executes only if:
 - The pipeline completes successfully.
 - The source branch is main.
 
-> [!NOTE]
+> [!TIP]
 > Learn more: [Stage conditions in Azure Pipelines](https://learn.microsoft.com/en-us/azure/devops/pipelines/process/stages?view=azure-devops&tabs=yaml)
 
 ### Step 4: Job Configuration
@@ -181,7 +186,7 @@ jobs:
 
 This job uses the latest Ubuntu VM image provided by Microsoft-hosted agents. It can be swapped with a custom pool for self-hosted agents if needed.
 
-> [!NOTE]
+> [!TIP]
 > Learn more: [Specify a pool in your pipeline](https://learn.microsoft.com/en-us/azure/devops/pipelines/agents/pools-queues?view=azure-devops&tabs=yaml%2Cbrowser)
 
 #### Step 4.1 Checkout Code
@@ -195,7 +200,7 @@ steps:
 
 This step pulls your repository code into the build agent, so the pipeline can access the Dockerfile and application files.
 
-> [!NOTE]
+> [!TIP]
 > Learn more: [checkout step documentation](https://learn.microsoft.com/en-us/azure/devops/pipelines/yaml-schema/steps-checkout?view=azure-pipelines)
 
 
@@ -211,38 +216,45 @@ This step pulls your repository code into the build agent, so the pipeline can a
 
 Uses a preconfigured Azure DevOps Docker registry service connection to authenticate securely without exposing credentials directly.
 
-> [!NOTE]
+> [!TIP]
 > Learn more: [Use service connections for Docker Hub](https://learn.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops#docker-hub-or-others)
 
 
 #### Step 4.3 Build the Docker Image
 
 ```yaml
-- task: Docker@2
-  displayName: Build Docker Image
-  inputs:
-    command: build
-    repository: $(imageName)
-    tags: |
-        $(buildTag)
-        $(latestTag)
-    dockerfile: './Dockerfile'
-    arguments: '--cache-from $(imageName):latest'
-  env:
-    DOCKER_BUILDKIT: 1
+ - task: Docker@2
+    displayName: Build Docker Image
+    inputs:
+      command: build
+      repository: $(imageName)
+      tags: |
+          $(buildTag)
+          $(latestTag)
+      dockerfile: './Dockerfile'
+      arguments: |
+          --sbom=true
+          --attest type=provenance
+          --cache-from $(imageName):latest
+    env:
+      DOCKER_BUILDKIT: 1
 ```
 
 This builds the image with:
 
-- Two tags: one with the build ID and one as latest
-- Docker BuildKit for faster builds and layer caching
-- Cache pull from the last pushed latest tag
+- Two tags: one with the unique Build ID and one as latest
+- Docker BuildKit enabled for faster builds and efficient layer caching
+- Cache pull from the most recent pushed latest image
+- Software Bill of Materials (SBOM) for supply chain transparency
+- Provenance attestation to verify how and where the image was built
 
-> [!NOTE]
-> Learn more: [Docker task for Azure Pipelines](https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/reference/docker-v2?view=azure-pipelines&tabs=yaml)
-
+> [!TIP]
+> Learn more: 
+> - [Docker task for Azure Pipelines](https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/reference/docker-v2?view=azure-pipelines&tabs=yaml)
+> - [Docker SBOM Attestations](/build/metadata/attestations/slsa-provenance/#create-a-provenance-attestation)
 
 #### Step 4.4 Push the Docker Image
+
 ```yaml
 - task: Docker@2
   displayName: Push Docker Image
@@ -260,7 +272,7 @@ This uploads both tags to Docker Hub:
 - `latest` is used for most recent image references.
 
 
-5. Logout from Docker (Self-Hosted Agents)
+#### Step 4.5  Logout from Docker (Self-Hosted Agents)
 
 ```yaml
 - script: docker logout
