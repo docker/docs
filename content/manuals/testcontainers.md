@@ -42,6 +42,8 @@ Testcontainers provide support for the most popular languages, and Docker sponso
 
 The rest are community-driven and maintained by independent contributors.
 
+{{< embedded language="go" source="/git-src/testcontainers-go/modules/redis/examples_test.go" id="runRedisContainer" >}}
+
 ### Prerequisites
 
 Testcontainers requires a Docker-API compatible container runtime. 
