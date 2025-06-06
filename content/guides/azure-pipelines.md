@@ -52,7 +52,6 @@ pr:
 # Define variables for reuse across the pipeline
 variables:
   imageName: 'docker.io/$(dockerUsername)/my-image'
-  dockerUsername: 'your-dockerhub-username'  # Replace with your Docker Hub username
   buildTag: '$(Build.BuildId)'
   latestTag: 'latest'
 
@@ -84,7 +83,7 @@ stages:
                 $(buildTag)
                 $(latestTag)
               dockerfile: './Dockerfile'
-              arguments: '--cache-from $(imageName):latest'
+              arguments: '--sbom=true --attest type=provenance --cache-from $(imageName):latest'
             env:
               DOCKER_BUILDKIT: 1
 
@@ -139,7 +138,6 @@ This pipeline is triggered automatically on:
 ```yaml
 variables:
   imageName: 'docker.io/$(dockerUsername)/my-image'
-  dockerUsername: 'your-dockerhub-username'  # Replace with your actual Docker Hub username
   buildTag: '$(Build.BuildId)'
   latestTag: 'latest'
 ```
