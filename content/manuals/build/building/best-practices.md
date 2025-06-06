@@ -202,7 +202,7 @@ FROM alpine:3.21
 
 At one point in time, the `3.21` tag might point to version 3.21.1 of the
 image. If you rebuild the image 3 months later, the same tag might point to a
-different version, such as 3.19.4. This publishing workflow is best practice,
+different version, such as 3.21.4. This publishing workflow is best practice,
 and most publishers use this tagging strategy, but it isn't enforced.
 
 The downside with this is that you're not guaranteed to get the same for every
