@@ -48,7 +48,6 @@ pr:
 # Define variables for reuse across the pipeline
 variables:
   imageName: 'docker.io/$(dockerUsername)/my-image'
-  dockerUsername: 'your-dockerhub-username'  # Replace with your Docker Hub username
   buildTag: '$(Build.BuildId)'
   latestTag: 'latest'
 
