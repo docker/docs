@@ -13,7 +13,7 @@ aliases:
 This section describes how to create an organization. Before you begin:
 
 - You need a [Docker ID](/accounts/create-account/)
-- Review the [Docker subscriptions and features](../../subscription/details.md) to determine what plan to choose for your organization
+- Review the [Docker subscriptions and features](../../subscription/details.md) to determine what subscription to choose for your organization
 
 ## Create an organization
 
@@ -33,7 +33,7 @@ To create an organization:
 1. Sign in to [Docker Home](https://app.docker.com/).
 2. Under Settings and administration, select **Go to Admin Console**.
 3. Select the **Organization** drop-down in the left-hand navigation and then **Create Organization**.
-4. Choose a plan for your organization, a billing cycle, and specify how many seats you need. See [Docker Pricing](https://www.docker.com/pricing/) for details on the features offered in the Team and Business plan.
+4. Choose a subscription for your organization, a billing cycle, and specify how many seats you need. See [Docker Pricing](https://www.docker.com/pricing/) for details on the features offered in the Team and Business subscription.
 5. Select **Continue to profile**.
 6. Enter an **Organization namespace**. This is the official, unique name for
 your organization in Docker Hub. It's not possible to change the name of the
@@ -60,7 +60,7 @@ You've now created an organization.
 
 1. Sign in to [Docker Hub](https://hub.docker.com/) using your Docker ID, your email address, or your social provider.
 2. Select **My Hub**, select the account drop-down, and then **Create Organization** to create a new organization.
-3. Choose a plan for your organization, a billing cycle, and specify how many seats you need. See [Docker Pricing](https://www.docker.com/pricing/) for details on the features offered in the Team and Business plan.
+3. Choose a subscription for your organization, a billing cycle, and specify how many seats you need. See [Docker Pricing](https://www.docker.com/pricing/) for details on the features offered in the Team and Business subscription.
 4. Select **Continue to profile**.
 5. Enter an **Organization namespace**. This is the official, unique name for
 your organization in Docker Hub. It's not possible to change the name of the
@@ -161,7 +161,7 @@ configure your organization.
    organization's **Settings** page.
 
 - **Billing**: Displays information about your existing
-[Docker subscription (plan)](../../subscription/_index.md), including the number of seats and next payment due date. For how to access the billing history and payment methods for your organization, see [View billing history](../../billing/history.md).
+[Docker subscription](../../subscription/_index.md), including the number of seats and next payment due date. For how to access the billing history and payment methods for your organization, see [View billing history](../../billing/history.md).
 
 {{< /tab >}}
 {{< /tabs >}}
