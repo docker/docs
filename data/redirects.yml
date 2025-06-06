@@ -334,6 +334,8 @@
   - /go/compose-bridge/
 "/desktop/settings-and-maintenance/settings/":
   - /go/notifications/
+"/desktop/setup/install/mac-install/":
+  - /go/apple-silicon/
 "/desktop/setup/install/mac-permission-requirements/#installing-symlinks":
   - /go/symlinks/
 "/desktop/setup/install/mac-permission-requirements/":

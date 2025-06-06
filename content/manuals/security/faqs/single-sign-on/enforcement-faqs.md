@@ -41,7 +41,7 @@ Guest users who are not part of your registered domain but have been invited to 
 
 ### Is there a way to test this functionality in a test tenant with Okta before going to production?
 
-Yes, you can create a test organization. Companies can set up a new 5 seat Business plan on a new organization to test with. To do this, make sure to only enable SSO, not enforce it, or all domain email users will be forced to sign in to that test tenant.
+Yes, you can create a test organization. Companies can set up a new 5 seat Business subscription on a new organization to test with. To do this, make sure to only enable SSO, not enforce it, or all domain email users will be forced to sign in to that test tenant.
 
 ### Is the sign in required tracking at runtime or install time?
 

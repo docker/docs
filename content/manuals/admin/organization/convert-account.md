@@ -11,7 +11,7 @@ aliases:
 
 You can convert an existing user account to an organization. This is useful if you need multiple users to access your account and the repositories that it’s connected to. Converting it to an organization gives you better control over permissions for these users through [teams](manage-a-team.md) and [roles](roles-and-permissions.md).
 
-When you convert a user account to an organization, the account is migrated to a Docker Team plan.
+When you convert a user account to an organization, the account is migrated to a Docker Team subscription.
 
 > [!IMPORTANT]
 >
@@ -40,7 +40,7 @@ Consider the following effects of converting your account:
 
 - This process removes the email address for the account, and organization owners will receive notification emails instead. You'll be able to reuse the removed email address for another account after converting.
 
-- The current plan will cancel and your new subscription will start.
+- The current subscription will cancel and your new subscription will start.
 
 - Repository namespaces and names won't change, but converting your account removes any repository collaborators. Once you convert the account, you'll need to add those users as team members.
 

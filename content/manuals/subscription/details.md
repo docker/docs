@@ -8,7 +8,7 @@ aliases:
 weight: 10
 ---
 
-Docker subscription plans empower development teams by providing the tools they need to ship secure, high-quality apps — fast. These plans include access to Docker's suite of products:
+Docker subscriptions empower development teams by providing the tools they need to ship secure, high-quality apps — fast. These plans include access to Docker's suite of products:
 
 - [Docker Desktop](../desktop/_index.md): The industry-leading container-first
   development solution that includes, Docker Engine, Docker CLI, Docker Compose,
@@ -23,14 +23,14 @@ Docker subscription plans empower development teams by providing the tools they 
   and more.
 
 The following sections describe some of the key features included with your
-Docker subscription plan or Legacy Docker plan.
+Docker subscription or Legacy Docker subscription.
 
 > [!NOTE]
 >
-> Legacy Docker plans apply to Docker subscribers who last purchased or renewed their subscription before December 10, 2024. These subscribers will keep their current plan and pricing until their next renewal date that falls on or after December 10, 2024. To see purchase or renewal history, view your [billing history](../billing/history.md). For more details about Docker legacy plans, see [Announcing Upgraded Docker Plans](https://www.docker.com/blog/november-2024-updated-plans-announcement/).
+> Legacy Docker plans apply to Docker subscribers who last purchased or renewed their subscription before December 10, 2024. These subscribers will keep their current subscription and pricing until their next renewal date that falls on or after December 10, 2024. To see purchase or renewal history, view your [billing history](../billing/history.md). For more details about Docker Legacy subscriptions, see [Announcing Upgraded Docker Plans](https://www.docker.com/blog/november-2024-updated-plans-announcement/).
 
 {{< tabs >}}
-{{< tab name="Docker plan" >}}
+{{< tab name="Docker subscription" >}}
 
 ## Docker Personal
 
@@ -47,7 +47,7 @@ Docker Personal includes:
 - 7-day Testcontainers Cloud trial
 
 Docker Personal users who want to continue using Docker Build Cloud or Docker
-Testcontainers Cloud after their trial can upgrade to a Docker Pro plan at any
+Testcontainers Cloud after their trial can upgrade to a Docker Pro subscription at any
 time.
 
 All unauthenticated users, including unauthenticated Docker Personal users, get
@@ -145,7 +145,7 @@ You can:
 
 ## Sales-assisted
 
-A sales-assisted plan refers to a Docker Business or Team subscription where everything is set up and
+A sales-assisted subscription refers to a Docker Business or Team subscription where everything is set up and
 managed by a dedicated Docker account manager.
 
 {{< /tab >}}
@@ -154,7 +154,7 @@ managed by a dedicated Docker account manager.
 > [!IMPORTANT]
 >
 > As of December 10, 2024, Docker Core, Docker Build Cloud, and Docker Scout
-> subscription plans are no longer available and have been replaced by Docker subscription
+> subscriptions are no longer available and have been replaced by Docker subscription
 > plans that provide access to all tools. If you subscribed or renewed
 > your subscriptions before December 10, 2024, your legacy Docker
 > plans still apply to your account until you renew. For more details,
@@ -186,9 +186,9 @@ Legacy Docker Pro includes:
 
 For a list of features available in each legacy tier, see [Legacy Docker Pricing](https://www.docker.com/legacy-pricing/).
 
-#### Upgrade your Legacy Docker Pro plan
+#### Upgrade your Legacy Docker Pro subscription
 
-When you upgrade your Legacy Docker Pro plan to a Docker Pro subscription plan, your plan includes the following changes:
+When you upgrade your Legacy Docker Pro subscription to a Docker Pro subscription, your subscription includes the following changes:
 
 - Docker Build Cloud build minutes increased from 100/month to 200/month and no monthly fee. Docker Build Cloud minutes do not rollover month to month.
 - 2 included repositories with continuous vulnerability analysis in Docker Scout.
@@ -217,11 +217,11 @@ There are also advanced collaboration and management tools, including organizati
 
 For a list of features available in each legacy tier, see [Legacy Docker Pricing](https://www.docker.com/legacy-pricing/).
 
-#### Upgrade your Legacy Docker Team plan
+#### Upgrade your Legacy Docker Team subscription
 
-When you upgrade your Legacy Docker Team plan to a Docker Team subscription plan, your plan includes the following changes:
+When you upgrade your Legacy Docker Team subscription to a Docker Team subscription, your subscription includes the following changes:
 
-- Instead of paying an additional per-seat fee, Docker Build Cloud is now available to all users in your Docker plan.
+- Instead of paying an additional per-seat fee, Docker Build Cloud is now available to all users in your Docker subscription.
 - Docker Build Cloud build minutes increase from 400/mo to 500/mo. Docker Build Cloud minutes do not rollover month to month.
 - Docker Scout now includes unlimited repositories with continuous vulnerability analysis, an increase from 3.
 - 500 Testcontainers Cloud runtime minutes are now included for use either in Docker Desktop or for CI. Testcontainers Cloud runtime minutes do not rollover month to month.
@@ -249,11 +249,11 @@ Legacy Docker Business includes:
 
 For a list of features available in each tier, see [Legacy Docker Pricing](https://www.docker.com/legacy-pricing/).
 
-#### Upgrade your Legacy Docker Business plan
+#### Upgrade your Legacy Docker Business subscription
 
-When you upgrade your Legacy Docker Business plan to a Docker Business subscription plan, your plan includes the following changes:
+When you upgrade your Legacy Docker Business subscription to a Docker Business subscription, your subscription includes the following changes:
 
-- Instead of paying an additional per-seat fee, Docker Build Cloud is now available to all users in your Docker plan.
+- Instead of paying an additional per-seat fee, Docker Build Cloud is now available to all users in your Docker subscription.
 - Docker Build Cloud included minutes increase from 800/mo to 1500/mo. Docker Build Cloud minutes do not rollover month to month.
 - Docker Scout now includes unlimited repositories with continuous vulnerability analysis, an increase from 3.
 - 1500 Testcontainers Cloud runtime minutes are now included for use either in Docker Desktop or for CI. Testcontainers Cloud runtime minutes do not rollover month to month.
@@ -276,20 +276,20 @@ A sales-assisted Docker Business subscription where everything is set up and man
 
 ## Legacy Docker Scout subscriptions
 
-This section provides an overview of the legacy subscription plans for Docker
+This section provides an overview of the legacy subscriptions for Docker
 Scout.
 
 > [!IMPORTANT]
 >
 > As of December 10, 2024, Docker Scout subscriptions are no longer available
-> and have been replaced by Docker subscription plans that provide access to
+> and have been replaced by Docker subscriptions that provide access to
 > all tools. If you subscribed or renewed your subscriptions before December 10, 2024, your legacy Docker subscriptions still apply to your account until
 > you renew. For more details, see [Announcing Upgraded Docker
 > Plans](https://www.docker.com/blog/november-2024-updated-plans-announcement/).
 
 ### Legacy Docker Scout Free
 
-Legacy Docker Scout Free is available for organizations. If you have a Legacy Docker plan, you automatically have access to legacy Docker Scout Free.
+Legacy Docker Scout Free is available for organizations. If you have a Legacy Docker subscription, you automatically have access to legacy Docker Scout Free.
 
 Legacy Docker Scout Free includes:
 
@@ -313,10 +313,10 @@ Legacy Docker Scout Business includes:
 - All the features available in legacy Docker Scout Team
 - Unlimited Docker Scout-enabled repositories
 
-### Upgrade your Legacy Docker Scout plan
+### Upgrade your Legacy Docker Scout subscription
 
-When you upgrade your Legacy Docker Scout plan to a Docker subscription plan, your
-plan includes the following changes:
+When you upgrade your Legacy Docker Scout subscription to a Docker subscription, your
+subscription includes the following changes:
 
 - Docker Business: Unlimited repositories with continuous vulnerability analysis, an increase from 3.
 - Docker Team: Unlimited repositories with continuous vulnerability analysis, an increase from 3
@@ -333,16 +333,16 @@ For a list of features available in each tier, see [Docker Pricing](https://www.
 > [!IMPORTANT]
 >
 > As of December 10, 2024, Docker Build Cloud is only available with the
-> new Docker Pro, Team, and Business plans. When your plan renews on or after
+> new Docker Pro, Team, and Business plans. When your subscription renews on or after
 > December 10, 2024, you will see an increase in your included Build Cloud
 > minutes each month. For more details, see [Announcing Upgraded Docker
 > Plans](https://www.docker.com/blog/november-2024-updated-plans-announcement/).
 
 ### Legacy Docker Build Cloud Starter
 
-If you have a Legacy Docker plan, a base level of Build Cloud
+If you have a Legacy Docker subscription, a base level of Build Cloud
 minutes and cache are included. The features available vary depending on your
-Legacy Docker plan subscription tier.
+Legacy Docker subscription tier.
 
 #### Legacy Docker Pro
 
@@ -378,11 +378,11 @@ the organization associated with the subscription. See Manage seats and invites.
 
 For more details about your enterprise subscription, [contact sales](https://www.docker.com/products/build-cloud/#contact_sales).
 
-### Upgrade your Legacy Docker Build Cloud plan
+### Upgrade your Legacy Docker Build Cloud subscription
 
-You no longer need to subscribe to a separate Docker Build Cloud plan to access
-Docker Build Cloud or to scale your minutes. When you upgrade your Legacy Docker plan to
-a Docker subscription plan, your plan includes the following changes:
+You no longer need to subscribe to a separate Docker Build Cloud subscription to access
+Docker Build Cloud or to scale your minutes. When you upgrade your Legacy Docker subscription to
+a Docker subscription, your subscription includes the following changes:
 
 - Docker Business: Included minutes are increased from 800/mo to 1500/mo with the option to scale more minutes.
 - Docker Team: Included minutes are increased from 400/mo to 500/mo with the option to scale more minutes.

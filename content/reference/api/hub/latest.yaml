@@ -51,9 +51,9 @@ tags:
     description: |
       Most Docker Hub API endpoints require you to authenticate using your Docker credentials before using them.
 
-      Additionally, similar to the Docker Hub UI features, API endpoint responses may vary depending on your plan (Personal, Pro, or Team) and your account's permissions.
+      Additionally, similar to the Docker Hub UI features, API endpoint responses may vary depending on your subscription (Personal, Pro, or Team) and your account's permissions.
 
-      To learn more about the features available in each plan and to upgrade your existing plan, see [Docker Pricing](https://www.docker.com/pricing).
+      To learn more about the features available in each subscription and to upgrade your existing subscription, see [Docker Pricing](https://www.docker.com/pricing).
 
       # Types
 
@@ -641,11 +641,11 @@ paths:
     put:
       summary: Update organization settings
       description: |
-        Updates an organization's settings. Some settings are only used when the organization is on a business plan.
+        Updates an organization's settings. Some settings are only used when the organization is on a business subscription.
 
         ***Only users with administrative privileges for the organization (owner role) can modify these settings.***
 
-        The following settings are only used on a business plan:
+        The following settings are only used on a business subscription:
         - `restricted_images`
       tags:
         - org-settings

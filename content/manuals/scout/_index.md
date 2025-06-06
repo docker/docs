@@ -40,7 +40,7 @@ grid:
   - title: Upgrade
     link: /subscription/change/
     description: |
-      The free plan includes up to 1 repository. Upgrade for more.
+      A Personal subscription includes up to 1 repository. Upgrade for more.
     icon: upgrade
 ---
 

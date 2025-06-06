@@ -33,7 +33,7 @@ If your subscription payment fails, there is a grace period of 15 days, includin
 
 Docker also sends an email notification `Action Required - Credit Card Payment Failed` with an attached unpaid invoice after each failed payment attempt.
 
-Once the grace period is over and the invoice is still not paid, the subscription downgrades to a free plan and all paid features are disabled.
+Once the grace period is over and the invoice is still not paid, the subscription downgrades to a free subscription and all paid features are disabled.
 
 ### Can I manually retry a failed payment?
 
