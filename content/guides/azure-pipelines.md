@@ -139,7 +139,6 @@ This pipeline is triggered automatically on:
 > [!TIP]
 > Learn more: [Define pipeline triggers in Azure Pipelines](https://learn.microsoft.com/en-us/azure/devops/pipelines/build/triggers?view=azure-devops)
 
-
 ### Step 2: Define Common Variables
 
 ```yaml
@@ -174,6 +173,7 @@ This stage executes only if:
 > [!TIP]
 > Learn more: [Stage conditions in Azure Pipelines](https://learn.microsoft.com/en-us/azure/devops/pipelines/process/stages?view=azure-devops&tabs=yaml)
 
+
 ### Step 4: Job Configuration
 
 ```yaml
@@ -197,14 +197,12 @@ This job utilizes the latest Ubuntu VM image with Docker support, provided by Mi
 steps:
   - checkout: self
     displayName: Checkout Code
-
 ```
 
 This step pulls your repository code into the build agent, so the pipeline can access the Dockerfile and application files.
 
 > [!TIP]
 > Learn more: [checkout step documentation](https://learn.microsoft.com/en-us/azure/devops/pipelines/yaml-schema/steps-checkout?view=azure-pipelines)
-
 
 #### Step 4.2 Authenticate to Docker Hub
 
@@ -220,7 +218,6 @@ Uses a preconfigured Azure DevOps Docker registry service connection to authenti
 
 > [!TIP]
 > Learn more: [Use service connections for Docker Hub](https://learn.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops#docker-hub-or-others)
-
 
 #### Step 4.3 Build the Docker Image
 
@@ -267,15 +264,13 @@ This builds the image with:
       tags: |
         $(buildTag)
         $(latestTag)
-
 ```
+
 By applying this condition, the pipeline builds the Docker image on every run to ensure early detection of issues, but only pushes the image to the registry when changes are merged into the main branch—keeping your Docker Hub clean and focused
 
 This uploads both tags to Docker Hub:
 - `$(buildTag)` ensures traceability per run.
 - `latest` is used for most recent image references.
-- 
-
 
 #### Step 4.5  Logout from Docker (Self-Hosted Agents)
 
@@ -283,12 +278,9 @@ This uploads both tags to Docker Hub:
 - script: docker logout
   displayName: Docker Logout (Self-hosted only)
   condition: ne(variables['Agent.OS'], 'Windows_NT')
-
 ```
 
 Executes docker logout at the end of the pipeline on Linux-based self-hosted agents to proactively clean up credentials and enhance security posture.
-
----
 
 ## Summary
 
@@ -298,7 +290,6 @@ With this Azure Pipelines CI setup, you get:
 - Efficient builds leveraging Docker BuildKit cache.
 - Safe cleanup with logout on persistent agents.
 - Build images that meet modern software supply chain requirements with SBOM and attestation
----
 
 ## Further Reading
 
