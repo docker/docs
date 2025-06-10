@@ -253,7 +253,7 @@ This builds the image with:
 > [!TIP]
 > Learn more: 
 > - [Docker task for Azure Pipelines](https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/reference/docker-v2?view=azure-pipelines&tabs=yaml)
-> - [Docker SBOM Attestations](/build/metadata/attestations/slsa-provenance/#create-a-provenance-attestation)
+> - [Docker SBOM Attestations](/manuals/build/metadata/attestations/slsa-provenance.md)
 
 #### Step 4.4 Push the Docker Image
 
