@@ -227,6 +227,7 @@
   - /go/run-cloud-eap/
 "/desktop/setup/vm-vdi/":
   - /go/docker-cloud/
+  - /go/docker-cloud-gpu/
 
 # CLI backlinks
 "/engine/cli/filter/":
