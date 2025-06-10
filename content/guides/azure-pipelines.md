@@ -65,6 +65,8 @@ stages:
         displayName: Build and Push
         pool:
           vmImage: ubuntu-latest
+          demands:
+            - docker
         steps:
           - checkout: self
             displayName: Checkout Code
@@ -179,10 +181,12 @@ jobs:
   - job: DockerJob
   displayName: Build and Push
   pool:
-  vmImage: ubuntu-latest
+    vmImage: ubuntu-latest
+    demands:
+      - docker
 ```
 
-This job uses the latest Ubuntu VM image provided by Microsoft-hosted agents. It can be swapped with a custom pool for self-hosted agents if needed.
+This job utilizes the latest Ubuntu VM image with Docker support, provided by Microsoft-hosted agents. It can be replaced with a custom pool for self-hosted agents if necessary.
 
 > [!TIP]
 > Learn more: [Specify a pool in your pipeline](https://learn.microsoft.com/en-us/azure/devops/pipelines/agents/pools-queues?view=azure-devops&tabs=yaml%2Cbrowser)
