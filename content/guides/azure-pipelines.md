@@ -293,7 +293,7 @@ With this Azure Pipelines CI setup, you get:
 - Automated image building and tagging triggered by code changes.
 - Efficient builds leveraging Docker BuildKit cache.
 - Safe cleanup with logout on persistent agents.
-
+- Build images that meet modern software supply chain requirements with SBOM and attestation
 ---
 
 ## Further Reading
