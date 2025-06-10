@@ -41,7 +41,7 @@ assignment does not reflect changes.
 
 ### Solutions
 
-**Disable JIT provisioning (recommended)**
+#### Disable JIT provisioning (recommended)
 
 1. Sign in to the Docker [Admin Console](https://app.docker.com/admin).
 1. Go to your organization's **Settings** > **Security** > **SSO and SCIM**.
