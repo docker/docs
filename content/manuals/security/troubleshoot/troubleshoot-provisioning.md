@@ -53,7 +53,7 @@ assignment does not reflect changes.
 With JIT disabled, Docker uses SCIM as the source of truth for user creation
 and role assignment.
 
-**Keep JIT enabled and mattch attributes**
+**Keep JIT enabled and match attributes**
 
 If you prefer to keep JIT enabled:
 
