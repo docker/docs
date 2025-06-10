@@ -60,7 +60,6 @@ variables:
 stages:
   - stage: BuildAndPush
     displayName: Build and Push Docker Image
-    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
     jobs:
       - job: DockerJob
         displayName: Build and Push
@@ -94,6 +93,7 @@ stages:
 
           - task: Docker@2
             displayName: Push Docker Image
+            condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
             inputs:
               command: push
               repository: $(imageName)
@@ -163,12 +163,10 @@ These variables ensure consistent naming, versioning, and reuse throughout the p
 stages:
   - stage: BuildAndPush
     displayName: Build and Push Docker Image
-    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
 ```
 
 This stage executes only if:
 
-- The pipeline completes successfully.
 - The source branch is main.
 
 > [!TIP]
@@ -258,6 +256,7 @@ This builds the image with:
 ```yaml
 - task: Docker@2
   displayName: Push Docker Image
+  condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
   inputs:
       command: push
       repository: $(imageName)
@@ -266,10 +265,12 @@ This builds the image with:
         $(latestTag)
 
 ```
+By applying this condition, the pipeline builds the Docker image on every run to ensure early detection of issues, but only pushes the image to the registry when changes are merged into the main branch—keeping your Docker Hub clean and focused
 
 This uploads both tags to Docker Hub:
 - `$(buildTag)` ensures traceability per run.
 - `latest` is used for most recent image references.
+- 
 
 
 #### Step 4.5  Logout from Docker (Self-Hosted Agents)
