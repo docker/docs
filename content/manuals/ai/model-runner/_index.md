@@ -131,6 +131,10 @@ Use the [`docker model log` command](/reference/cli/docker/).
 
 ## Publish a model
 
+> [!NOTE]
+>
+> This works for any Container Registry supporting OCI Artifacts, not only Docker Hub.
+
 You can tag existing models with a new name and publish them under a different namespace and repository:
 
 ```console
@@ -142,7 +146,6 @@ $ docker model push myorg/smollm2
 ```
 
 For more details, see the [`docker model tag`](/reference/cli/docker/model/tag) and [`docker model push`](/reference/cli/docker/model/push) command documentation.
-Note: This works for any Container Registry supporting OCI Artifacts, not only Docker Hub.
 
 You can also directly package a model file in GGUF format as an OCI Artifact and publish it to Docker Hub.
 
