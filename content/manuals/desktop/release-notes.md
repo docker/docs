@@ -99,7 +99,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 #### For Windows
 
 - Running containers with Wasm will hang sporadically. See [docker/for-mac#7666](https://github.com/docker/for-mac/issues/7666).
-- On some machines Resource Saver will cause other WSL 2 distros to freeze. The workaround is to disable Resource Saver. See [docker/for-mac#14656](https://github.com/docker/for-win/issues/14656).
+- On some machines Resource Saver will cause other WSL 2 distros to freeze. The workaround is to disable Resource Saver. See [docker/for-win#14656](https://github.com/docker/for-win/issues/14656).
 
 ## 4.41.2
 

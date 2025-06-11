@@ -281,7 +281,6 @@ Each organization page now breaks down into these tabs:
 
 * Scan results don't appear for some official images.
 
-
 ## 2019-09-05
 
 ### Enhancements

@@ -227,6 +227,7 @@
   - /go/run-cloud-eap/
 "/desktop/setup/vm-vdi/":
   - /go/docker-cloud/
+  - /go/docker-cloud-gpu/
 
 # CLI backlinks
 "/engine/cli/filter/":
@@ -334,6 +335,8 @@
   - /go/compose-bridge/
 "/desktop/settings-and-maintenance/settings/":
   - /go/notifications/
+"/desktop/setup/install/mac-install/":
+  - /go/apple-silicon/
 "/desktop/setup/install/mac-permission-requirements/#installing-symlinks":
   - /go/symlinks/
 "/desktop/setup/install/mac-permission-requirements/":
