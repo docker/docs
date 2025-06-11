@@ -58,16 +58,16 @@ sign-in enforcement
 ### Solution
 
 1. Verify the user is running Docker Desktop version 4.37 or later.
-2. If not, update to the latest version.
-3. Ensure network access to Docker's authentication services:
+1. If not, have the user update to the latest version.
+1. Ensure the user has network access to Docker's authentication services:
     - https://login.docker.com
     - https://auth.docker.io
-4. Confirm the user is signing in with their work email address.
+1. Confirm the user is signing in with their work email address.
 
 If issues persist, temporarily disable enforcement for that specific machine
 while troubleshooting.
 
-## Machine remains in unassociated list after user signs in
+## Machine is in unassociated list after user signs in
 
 ### Possible causes
 
@@ -82,18 +82,19 @@ while troubleshooting.
 
 ### Solution
 
-Recommended solution:
+**Recommended solution**:
 
-1. Check if the user appears in your organization's member list
-2. If not visible, go to Settings > General > Unassociated machines
-3. Look for the machine showing an email address
-4. Select the machine and choose Add to organization
+1. In the [Admin Console](https://app.docker.com/admin), navigate to **User management** > **Members**
+and check if the user appears in your organization's member list.
+1. If not visible, go to **User management** > **Unassociated**.
+1. Look for the machine and verify the email address.
+1. Select the **Actions** menu and select **Add to organization**.
 
-Alternative solution:
+**Alternative solution**:
 
-1. Enable auto-provisioning for your verified domains
-2. Ask the user to sign in again with their work email address
-3. The user will be automatically added to your organization
+1. Enable [auto-provisioning](/manuals/security/for-admins/domain-management.md#auto-provisioning) for your verified domains.
+2. Ask the user to sign in again with their work email address.
+3. The user will be automatically added to your organization.
 
 ## Unassociated machines count seems inaccurate
 
@@ -113,16 +114,17 @@ Alternative solution:
 
 Review the machine list to identify patterns:
 
-- Multiple recent activities from the same machine ID may indicate sharing
-- Consider the registry access patterns shown in the details
-- For shared machines, enforce sign-in and add users as they authenticate
+- Multiple recent activities from the same machine ID may indicate sharing.
+- Consider the registry access patterns show in the **Unassociated** page of
+the Admin Console.
+- For shared machines, enforce sign-in and add users as they authenticate.
 - For air-gapped environments, consider implementing centralized Docker Desktop
-configuration
+configuration.
 
 > [!NOTE]
 >
 > Docker achieves approximately 97% accuracy in machine identification.
-A ~3% variance is expected and normal."
+A ~3% variance is expected and normal.
 
 ## Sign-in enforcement not working for some machines
 
@@ -132,26 +134,22 @@ A ~3% variance is expected and normal."
 - Users haven't restarted Docker Desktop since enforcement was enabled
 - Network issues preventing the enforcement check
 
-### Affected environments
-
-- Docker Desktop versions before 4.37
-- All operating systems
-
 ### Steps to replicate
 
-1. Enable sign-in enforcement for a machine
-2. User opens Docker Desktop
-
-- Expected result: Sign-in prompt appears
-- Actual result: No prompt, Docker Desktop works normally
+1. Enable sign-in enforcement for a machine.
+1. User opens Docker Desktop.
+1. View the result:
+    - Expected result: Sign-in prompt appears
+    - Actual result: No prompt, Docker Desktop works normally
 
 ### Solution
 
-1. Verify the machine is running Docker Desktop 4.37 or later
-2. Ask the user to restart Docker Desktop completely
-3. Check that the machine ID matches the one in your enforcement list
-4. If the issue persists, disable and re-enable enforcement for that specific
-machine
+1. Verify the machine is running Docker Desktop 4.37 or later. If not,
+have the user upgrade to the latest version.
+1. Ask the user to restart Docker Desktop completely.
+1. Check that the machine ID matches the one in your enforcement list.
+1. If the issue persists, disable and re-enable enforcement for that specific
+machine.
 
 ## Auto-provisioning not working after sign-in enforcement
 
@@ -168,19 +166,20 @@ machine
 
 ### Solution
 
-Recommended solution:
+**Recommended solution**:
 
 Verify domain auto-provisioning is enabled:
 
-1. Go to Settings > Security > Domain management
-2. Ensure the user's email domain is verified and auto-provisioning is enabled
+1. In the [Admin Console](https://app.docker.com/admin), select **Domain management**
+and confirm auto-provisioning is enabled.
+1. Ensure the user's email domain is associated with your verified domain.
 
 Check organization seat usage:
 
-1. If at capacity, purchase additional seats or remove inactive users
-2. Manually add the user if auto-provisioning cannot be enabled
+1. If at capacity, purchase additional seats or remove inactive users.
+1. Manually add the user if you can't enable auto-provisioning.
 
-Alternative solution:
+**Alternative solution**:
 
-1. Set up Single Sign-On (SSO) for automatic user provisioning
-2. Enable Just-in-Time (JIT) provisioning through your SSO configuration
+1. Set up [Single Sign-On (SSO)](/manuals/security/for-admins/single-sign-on/_index.md).
+1. Enable [Just-in-Time (JIT)](/manuals/security/for-admins/provisioning/just-in-time.md) provisioning through your SSO configuration.

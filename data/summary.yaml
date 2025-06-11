@@ -230,6 +230,10 @@ SSO:
   for: Administrators
 Synchronized file sharing:
   subscription: [Pro, Team, Business]
+Unassociated machines:
+  subscription: [Business]
+  for: Administrators
+  requires: Docker Desktop [4.37](/manuals/desktop/release-notes.md) and later
 USB/IP support:
   requires: Docker Desktop [4.35.0](/manuals/desktop/release-notes.md#4350) and later
   for: Docker Desktop for Mac, Linux, and Windows with the Hyper-V backend

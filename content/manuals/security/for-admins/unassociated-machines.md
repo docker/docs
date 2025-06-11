@@ -46,8 +46,8 @@ The Insights dashboard shows high-level metrics for both associated and
 unassociated machines:
 
 1. Navigate to your organization in Docker Hub.
-2. Go to the Insights tab.
-3. View the summary of:
+1. Go to the Insights tab.
+1. View the summary of:
 	- Total active users (associated + unassociated)
 	- Associated organization members
 	- Unassociated machines detected
@@ -59,81 +59,147 @@ sign-in enforcement for your organization.
 
 For more information, see [Insights](/manuals/admin/organization/insights.md).
 
-### In the machines management view
+### In the Admin Console
 
 To see detailed information about unassociated machines:
 
-1. Navigate to your organization in Docker Hub.
-2. Go to Settings > General.
-3. Select Unassociated machines.
+1. Sign in to the [Admin Console](https://app.docker.com/admin) and select
+your organization.
+1. In **User management**, select **Unassociated**.
 
 The machine list displays:
 
 - Machine ID (Docker-generated identifier)
 - Registry addresses accessed (when available)
-- Last activity date
+- User email
 - Docker Desktop version
-- User email (after sign-in enforcement)
+- Last activity date
+- Sign-in enforced status
 
 You can:
 
 - Export the list as CSV
-- Filter and sort machines by activity
 - Take actions on individual or multiple machines
 
-## Manage unassociated machines
+## Add unassociated machines to your organization
 
-### Enable sign-in enforcement
+You can add unassociated machines by:
+- [Auto-provisiong](/manuals/security/for-admins/domain-management.md#auto-provisioning)
+- [SSO user provisioning](/manuals/security/for-admins/provisioning/_index.md)
+- [Manually adding them](#add-unassociated-machines-to-your-organization)
 
-You can require users to sign in to Docker Desktop.
+> [!NOTE]
+>
+> If you add users and do not have enough seats in your organization, a
+pop-up will appear prompting you to **Get more seats**.
 
-For all unassociated machines:
+### Add individual users
 
-1. In your organization settings, go to Unassociated machines.
-2. Select Enforce sign-in for all machines.
-3. Confirm the action.
+1. Sign in to the [Admin Console](https://app.docker.com/admin) and select
+your organization.
+1. In **User management**, select **Unassociated**.
+1. Locate the machine you want to add to your organization.
+1. Select the **Actions** menu and choose **Add to organization**.
+1. In the pop-up modal, select **Add user**.
 
-For specific machines:
+### Bulk add users
 
-1. In the unassociated machines list, select individual machines.
-2. Choose Require sign-in from the actions menu.
+1. Sign in to the [Admin Console](https://app.docker.com/admin) and select
+your organization.
+1. In **User management**, select **Unassociated**.
+1. Use the **checkboxes** to select the machines you want to add to your
+organizations.
+1. Select the **Add to organization** button.
+1. In the pop-up modal, select **Add users** to confirm.
 
-### Manually add users
+## Enable sign-in enforcement
 
-To manually add users:
+### Enable for all unassociated machines
 
-1. Go to Settings > General > Unassociated machines.
-2. Review users who have signed in (identified by email addresses).
-3. Select users to add to your organization.
-4. Choose Add to organization.
+1. Sign in to the [Admin Console](https://app.docker.com/admin) and select
+your organization.
+1. In **User management**, select **Unassociated**.
+1. Turn on the **Require sign-in** toggle.
+1. In the pop-up modal, select **Require sign-in** to confirm.
 
-## User experience
+The **Sign-in required** status will update for all unassociated machines to
+**Yes**.
 
-Sign in enforcement only take effect after a Docker Desktop restart. The
-following sections outline the user experience after sign in is enforced
-and Docker Desktop restarted.
+> [!NOTE]
+>
+> Sign-in enforcement requires Docker Desktop version 4.37 or later. If you
+enable enforcement for a user with an older version, their status shows
+as **Pending** until they update Docker Desktop.
+
+### Enable for individual unassociated machines
+
+1. Sign in to the [Admin Console](https://app.docker.com/admin) and select
+your organization.
+1. In **User management**, select **Unassociated**.
+1. Locate the machine you want to enable sign-in enforcement for.
+1. Select the **Actions** menu and choose **Turn on sign-in enforcement**.
+1. In the pop-up modal, select **Require sign-in** to confirm.
+
+The **Sign-in required** status will update for the individual machine to
+**Yes**.
+
+> [!NOTE]
+>
+> Sign-in enforcement works with Docker Desktop versions 4.37 and later. If you
+enable sign-in enforcement for a user using an older version of Docker Desktop,
+their **Sign-in required** status will display as **Pending**.
+
+## Disable sign-in enforcement
+
+### Disable for all unassociated machines
+
+1. Sign in to the [Admin Console](https://app.docker.com/admin) and select
+your organization.
+1. In **User management**, select **Unassociated**.
+1. Turn off the **Require sign-in** toggle.
+1. In the pop-up modal, select **Turn off sign-in** to confirm.
+
+The **Sign-in required** status will update for all unassociated machines to
+**No**.
+
+### Disable for specific unassociated machines
+
+1. Sign in to the [Admin Console](https://app.docker.com/admin) and select
+your organization.
+1. In **User management**, select **Unassociated**.
+1. Locate the machine you want to disable sign-in enforcement for.
+1. Select the **Actions** menu and choose **Turn off sign-in enforcement**.
+1. In the pop-up modal, select **Turn off sign-in** to confirm.
+
+The **Sign-in required** status will update for the individual machine to
+**No**.
+
+## Developer experience
+
+Sign in enforcement only takes effect after a Docker Desktop restart. The
+following sections outline the developer experience after sign in is enforced
+and Docker Desktop is restarted.
 
 ### First time sign in on enforced machine
 
-When a user opens Docker Desktop on an enforced machine:
+When a user opens Docker Desktop on an enforced machine, they see a sign-in
+prompt explaining that their organization requires authentication. After
+signing in, users can continue using Docker Desktop immediately.
 
-1. They see a customizable prompt explaining that their organization requires
-sign-in.
-2. The prompt includes information that their email will be shared with
-organization administrators.
-3. Users can continue using Docker Desktop immediately after signing in.
-4. Users are not blocked based on license availability.
+> [!NOTE]
+>
+> Sign-in enforcement only takes effect after Docker Desktop is restarted.
 
 ### After sign in
 
 Once users sign in to enforced machines:
 
 - With verified domains and auto-provisioning enabled: Users are automatically
-added to your organization.
-	- For more information on verifying a domain and enabling auto-provisioning,
-    see [Domain management](/manuals/security/for-admins/domain-management.md).
+added to your organization. For more information on verifying a domain and
+enabling auto-provisioning, see [Domain management](/manuals/security/for-admins/domain-management.md).
 - Without auto-provisioning: User emails appear in your the machines management
-view for manual review and addition.
+view for manual review and addition. To add a user to your organization,
+see [Add unassociated machines to your organization](#add-unassociated-machines-to-your-organization).
 
 ## Troubleshooting
 

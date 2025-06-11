@@ -31,10 +31,18 @@ grid_admins:
   description: Configure sign-in for members of your teams and organizations.
   link: /security/for-admins/enforce-sign-in/
   icon: passkey
+- title: Domain management
+  description: Learn how to manage domains and users in the Admin Console.
+  link: /security/for-admins/domain-management/
+  icon: domain_verification
 - title: Domain audit
   description: Identify uncaptured users in your organization.
   link: /security/for-admins/domain-audit/
   icon: person_search
+- title: Manage unassociated machines
+  description: Learn how to manage unassociated machines using the Docker Admin Console.
+  link: /security/for-admins/unassociated-machines/
+  icon: desktop_windows
 - title: Docker Scout
   description: Explore how Docker Scout can help you create a more secure software supply chain.
   icon: query_stats
