@@ -160,19 +160,19 @@ again when you switch back.
 
 ## WSL: Verification and Setup
 
-If you've chosen to use WSL, first verify that your installed version meets system requirements by running the following command in your terminal:
+If you have chosen to use WSL, first verify that your installed version meets system requirements by running the following command in your terminal:
 
 ```console
 wsl --version
 ```
 
-If version details do not appear, you’re likely using the inbox version of WSL. This version does not support modern capabilities and must be updated.
+If version details do not appear, you are likely using the inbox version of WSL. This version does not support modern capabilities and must be updated.
 
 You can update or install WSL using one of the following methods:
 
 ### Option 1: Install or update WSL via the terminal
 1. Open PowerShell or Windows Command Prompt in administrator mode.
-2. Run either the install or update command. For more information, refer to [Install WSL](https://learn.microsoft.com/en-us/windows/wsl/install).
+2. Run either the install or update command. You may be prompted to restart your machine. For more information, refer to [Install WSL](https://learn.microsoft.com/en-us/windows/wsl/install).
 ```console
 wsl --install
 
@@ -182,7 +182,7 @@ wsl --update
 ### Option 2: Install WSL via the MSI package
 If Microsoft Store access is blocked due to security policies:
 1. Go to the official WSL GitHub Releases page: https://github.com/microsoft/WSL/releases
-2. Download the `.msi` installer from the latest stable release (under the Assets dropdown).
+2. Download the `.msi` installer from the latest stable release (under the Assets drop-down).
 3. Run the downloaded installer and follow the setup instructions.
 
 
