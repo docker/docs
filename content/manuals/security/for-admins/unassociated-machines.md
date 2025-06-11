@@ -5,6 +5,8 @@ keywords: unassociated machines, insights, manage users, enforce sign-in
 weight: 56
 ---
 
+{{< summary-bar feature_name="Unassociated machines" >}}
+
 Docker administrators can identify, view, and manage Docker Desktop machines
 that should be associated with their organization but aren't currently linked
 to user accounts. This self-service capability helps you understand Docker
