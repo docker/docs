@@ -40,27 +40,6 @@ indicate organizational usage
 
 ## View unassociated machines
 
-### In the Insights dashboard
-
-The Insights dashboard shows high-level metrics for both associated and
-unassociated machines:
-
-1. Navigate to your organization in Docker Hub.
-1. Go to the Insights tab.
-1. View the summary of:
-	- Total active users (associated + unassociated)
-	- Associated organization members
-	- Unassociated machines detected
-
-> [!NOTE]
->
-> Full Insights dashboard features become available when you enable
-sign-in enforcement for your organization.
-
-For more information, see [Insights](/manuals/admin/organization/insights.md).
-
-### In the Admin Console
-
 To see detailed information about unassociated machines:
 
 1. Sign in to the [Admin Console](https://app.docker.com/admin) and select
