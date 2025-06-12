@@ -1,0 +1,12 @@
+command: docker cloud diagnose
+short: Print diagnostic information for Docker Cloud
+usage: docker cloud diagnose
+pname: docker cloud
+plink: docker_cloud.yaml
+options: []
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false

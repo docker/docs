@@ -1,0 +1,25 @@
+command: docker cloud
+short: Control Docker Cloud from the CLI
+usage: docker cloud
+pname: docker
+plink: docker.yaml
+cname:
+  - docker cloud accounts
+  - docker cloud diagnose
+  - docker cloud start
+  - docker cloud status
+  - docker cloud stop
+  - docker cloud version
+clink:
+  - docker_cloud_accounts.yaml
+  - docker_cloud_diagnose.yaml
+  - docker_cloud_start.yaml
+  - docker_cloud_status.yaml
+  - docker_cloud_stop.yaml
+  - docker_cloud_version.yaml
+deprecated: false
+hidden: true
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false

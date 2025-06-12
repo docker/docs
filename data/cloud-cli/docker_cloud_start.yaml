@@ -1,0 +1,12 @@
+command: docker cloud start
+short: Start a Docker Cloud session
+usage: docker cloud start
+pname: docker cloud
+plink: docker_cloud.yaml
+options: []
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false

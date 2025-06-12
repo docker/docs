@@ -223,10 +223,11 @@
   - /go/docker-build-cloud/
 
 # Run Cloud links & Docker Cloud
-"/":
+"/": 
   - /go/run-cloud-eap/
-"/desktop/setup/vm-vdi/":
+"/cloud/":
   - /go/docker-cloud/
+"/cloud/about/":
   - /go/docker-cloud-gpu/
 
 # CLI backlinks

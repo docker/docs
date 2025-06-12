@@ -53,6 +53,10 @@ params:
     description: Secure, minimal base images for trusted software delivery.
     icon: /icons/dhi.svg
     link: /dhi/
+  - title: Docker Cloud
+    description: Build and run containers in the cloud.
+    icon: cloud
+    link: /cloud/
   - title: Build Cloud
     description: Build your images faster in the cloud.
     icon: /icons/logo-build-cloud.svg

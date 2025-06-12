@@ -1,0 +1,23 @@
+command: docker cloud status
+short: Show the status of the Docker Cloud connection
+usage: docker cloud status [OPTIONS]
+pname: docker cloud
+plink: docker_cloud.yaml
+options:
+  - option: watch
+    shorthand: w
+    value_type: bool
+    default_value: "false"
+    description: Watch for status updates
+    deprecated: false
+    hidden: false
+    experimental: false
+    experimentalcli: false
+    kubernetes: false
+    swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false

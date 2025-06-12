@@ -21,6 +21,8 @@ Docker subscriptions empower development teams by providing the tools they need 
 - [Testcontainers Cloud](https://testcontainers.com/cloud/docs): Container-based
   testing automation that provides faster tests, a unified developer experience,
   and more.
+- [Docker Cloud](../cloud/_index.md): A cloud-based development environment that
+  integrates with Docker Desktop to provide a seamless hybrid development experience.
 
 The following sections describe some of the key features included with your
 Docker subscription or Legacy Docker subscription.
@@ -45,6 +47,7 @@ Docker Personal includes:
 - 200 pulls per 6 hours Docker Hub image pull rate limit for authenticated users
 - 7-day Docker Build Cloud trial
 - 7-day Testcontainers Cloud trial
+- TBD Docker Cloud credits for trial
 
 Docker Personal users who want to continue using Docker Build Cloud or Docker
 Testcontainers Cloud after their trial can upgrade to a Docker Pro subscription at any
@@ -72,6 +75,7 @@ rollover month to month.
 - 2 included repositories with continuous vulnerability analysis in Docker Scout.
 - 100 Testcontainers Cloud runtime minutes per month for use either in Docker Desktop or for CI. Testcontainers Cloud runtime minutes do not rollover month to month.
 - No Docker Hub image pull rate limits.
+- TBD Docker Cloud credits per month. Credits do not rollover month to month.
 
 For a list of features available in each tier, see [Docker
 Pricing](https://www.docker.com/pricing/).
@@ -92,6 +96,7 @@ rollover month to month.
 - Unlimited Docker Scout repositories with continuous vulnerability analysis.
 - 500 Testcontainers Cloud runtime minutes per month for use either in Docker Desktop or for CI. Testcontainers Cloud runtime minutes do not rollover month to month.
 - No Docker Hub image pull rate limits.
+- TBD Docker Cloud credits per month. Credits do not rollover month to month.
 
 There are also advanced collaboration and management tools, including
 organization and team management with [Role Based Access Control
@@ -116,6 +121,7 @@ rollover month to month.
 - Unlimited Docker Scout repositories with continuous vulnerability analysis.
 - 1500 Testcontainers Cloud runtime minutes per month for use either in Docker Desktop or for CI. Testcontainers Cloud runtime minutes do not rollover month to month.
 - No Docker Hub image pull rate limits.
+- TBD Docker Cloud credits per month. Credits do not rollover month to month.
 
 In addition, you gain access to enterprise-grade features, such as:
 - [Hardened Docker Desktop](../security/for-admins/hardened-desktop/_index.md)

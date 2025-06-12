@@ -16,6 +16,7 @@ product, including how to set up and configure them, see the following manuals:
 - [Docker Hub](../../docker-hub/_index.md)
 - [Docker Scout](../../scout/_index.md)
 - [Testcontainers Cloud](https://testcontainers.com/cloud/docs/#getting-started)
+- [Docker Cloud](../../cloud/_index.md)
 
 ## Manage access to Docker products
 
@@ -26,10 +27,18 @@ for all users. The included products are:
 - Docker Build Cloud
 - Docker Desktop
 - Docker Scout
+- Docker Cloud
 
 Testcontainers Cloud is not enabled by default. To enable Testcontainers Cloud, see the Testcontainers [Getting Started](https://testcontainers.com/cloud/docs/#getting-started) guide.
 
 The following sections describe how to enable or disable access for these products.
+
+### Manage access to Docker Cloud
+
+To manage access to Docker Cloud, sign in to [Docker
+Home](http://app.docker.com/) as an organization owner, select **Docker
+Cloud**, select **Cloud settings**, and then manage access under **Lock Docker
+Cloud**.
 
 ### Manage access to Docker Build Cloud
 
@@ -104,6 +113,9 @@ View usage for the products on the following pages:
 
 - Docker Desktop: View the **Insights** page in the [Docker Admin Console](https://app.docker.com/admin). For more details, see
   [Insights](./insights.md).
+
+- Docker Cloud: View the **Cloud overview** page in the Docker Cloud
+  Dashboard.
 
 If your usage exceeds your subscription amount, you can [scale your
 subscription](../../subscription/scale.md) to meet your needs.
