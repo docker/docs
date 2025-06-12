@@ -189,9 +189,9 @@ If Microsoft Store access is blocked due to security policies:
 2. Download the `.msi` installer from the latest stable release (under the Assets drop-down).
 3. Run the downloaded installer and follow the setup instructions.
 
-### Adjust installation based on user's admin access
+### Adjust installation based on user's administrator access
 
-Note down if Docker Desktop will be used by non-admin users. If so, consider using the `--always-run-service` installer flag. This will prevent the `com.docker.service` service from prompting non-admin users with a User Account Control (UAC) elevation prompt when using Docker Desktop. See [Installer Flags](#installer-flags) for more detail.
+Note down if Docker Desktop will be used by non-administrator users. If so, consider using the `--always-run-service` installer flag. This will prevent the `com.docker.service` service from prompting non-administrator users with a User Account Control (UAC) elevation prompt when using Docker Desktop. See [Installer Flags](#installer-flags) for more detail.
 
 ## Install Docker Desktop on Windows
 
