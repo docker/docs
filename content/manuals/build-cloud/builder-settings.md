@@ -8,15 +8,32 @@ The **Builder settings** page in Docker Build Cloud lets you configure disk allo
 
 ## Disk allocation
 
-The **Disk allocation** setting lets you control how much of the available storage is dedicated to the build cache. A lower allocation increases storage available for active builds.
+The **Disk allocation** setting lets you control how much of the available
+storage is dedicated to the build cache. A lower allocation increases
+storage available for active builds.
 
-To make disk allocation changes, navigate to **Builder settings** in Docker Build Cloud and then adjust the **Disk allocation** slider to specify the percentage of storage used for build caching.
+To make disk allocation changes, navigate to **Builder settings** in Docker
+Build Cloud and then adjust the **Disk allocation** slider to specify the
+percentage of storage used for build caching.
 
 Any changes take effect immediately.
 
+### Build cache space
+
+Your subscription includes the following Build cache space:
+
+| Subscription | Build cache space |
+|--------------|-------------------|
+| Personal     | N/A               |
+| Pro          | 50GB              |
+| Team         | 100GB             |
+| Business     | 200GB             |
+
+To get more Build cache space, [upgrade your subscription](/manuals/subscription/change.md).
+
 > [!TIP]
-> 
-> If you build very large images, consider allocating less storage for caching.
+>
+> If you build large images, consider allocating less storage for caching.
 
 ## Private resource access
 
@@ -26,7 +43,7 @@ For example, if your organization hosts a private [PyPI](https://pypi.org/) repo
 
 To enable your cloud builders to access your private resources, enter the host name and port of your private resource and then select **Add**.
 
-### Authentication 
+### Authentication
 
 If your internal artifacts require authentication, make sure that you
 authenticate with the repository either before or during the build. For
