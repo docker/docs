@@ -9,64 +9,6 @@ toc_max: 2
 If you experience issues with unassociated machine management, refer to the
 following solutions.
 
-## Machine incorrectly identified as belonging to your organization
-
-### Possible causes
-
-- Docker's machine identification algorithm incorrectly associated the machine
-with your organization based on registry usage patterns
-- A contractor or temporary user accessed your organization's registries from
-a personal machine
-- Shared or public registries created false associations
-
-### Affected environments
-
-- All Docker Desktop versions
-- All operating systems
-
-### Solution
-
-Docker can add incorrectly identified machines to an ignore list to prevent
-future appearances.
-
-[Contact Docker Support](https://hub.docker.com/support/contact) and provide:
-
-- The machine ID
-- The reason for why the machine doesn't belong to your organization
-
-## Users cannot sign in to Docker Desktop after enforcement
-
-### Error message
-
-```txt
-Sign-in required by your organization
-```
-
-### Possible causes
-
-- User is running an outdated version of Docker Desktop that doesn't support
-sign-in enforcement
-- Network connectivity issues preventing authentication
-- User is attempting to sign in with an incorrect email address
-
-### Affected environments
-
-- Docker Desktop versions before 4.37
-- Networks with restricted internet access
-- Corporate firewalls blocking Docker authentication services
-
-### Solution
-
-1. Verify the user is running Docker Desktop version 4.37 or later.
-1. If not, have the user update to the latest version.
-1. Ensure the user has network access to Docker's authentication services:
-    - https://login.docker.com
-    - https://auth.docker.io
-1. Confirm the user is signing in with their work email address.
-
-If issues persist, temporarily disable enforcement for that specific machine
-while troubleshooting.
-
 ## Machine is in unassociated list after user signs in
 
 ### Possible causes
