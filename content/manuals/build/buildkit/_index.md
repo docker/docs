@@ -154,7 +154,7 @@ see [GitHub issues](https://github.com/moby/buildkit/issues?q=is%3Aissue%20state
 4. Download and extract the latest BuildKit release.
 
    ```powershell
-   $version = "v0.13.1" # specify the release version, v0.13+
+   $version = "v0.22.0" # specify the release version, v0.13+
    $arch = "amd64" # arm64 binary available too
    curl.exe -LO https://github.com/moby/buildkit/releases/download/$version/buildkit-$version.windows-$arch.tar.gz
    # there could be another `.\bin` directory from containerd instructions
@@ -184,6 +184,9 @@ see [GitHub issues](https://github.com/moby/buildkit/issues?q=is%3Aissue%20state
    ```console
    > buildkitd.exe
    ```
+   > [!NOTE]
+   > If you are running a _dockerd-managed_ `containerd` process, use that instead, by supplying the address:
+   > `buildkitd.exe --containerd-worker-addr "npipe:////./pipe/docker-containerd"`
 
 7. In another terminal with administrator privileges, create a remote builder that uses the local BuildKit daemon.
 
