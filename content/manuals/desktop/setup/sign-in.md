@@ -30,13 +30,13 @@ aliases:
 - /desktop/get-started/
 ---
 
-Docker recommends signing in with the **Sign in** option in the top-right corner of the Docker Dashboard. 
+Docker recommends signing in with the **Sign in** option in the top-right corner of the Docker Dashboard.
 
-In large enterprises where admin access is restricted, administrators can [enforce sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md). 
+In large enterprises where admin access is restricted, administrators can [enforce sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md).
 
 > [!TIP]
 >
-> Explore [Docker's core subscriptions](https://www.docker.com/pricing/) to see what else Docker can offer you. 
+> Explore [Docker's core subscriptions](https://www.docker.com/pricing/) to see what else Docker can offer you.
 
 ## Benefits of signing in
 
@@ -48,7 +48,7 @@ In large enterprises where admin access is restricted, administrators can [enfor
 
 > [!NOTE]
 >
-> Docker Desktop automatically signs you out after 90 days, or after 30 days of inactivity. 
+> Docker Desktop automatically signs you out after 90 days, or after 30 days of inactivity.
 
 ## Signing in with Docker Desktop for Linux
 
@@ -60,8 +60,8 @@ Docker Desktop displays a warning if `pass` is not configured.
 
    ``` console
    $ gpg --generate-key
-   ``` 
-2. Enter your name and email once prompted. 
+   ```
+2. Enter your name and email once prompted.
 
    Once confirmed, GPG creates a key pair. Look for the `pub` line that contains your GPG ID, for example:
 
@@ -75,9 +75,9 @@ Docker Desktop displays a warning if `pass` is not configured.
 
    ```console
    $ pass init <your_generated_gpg-id_public_key>
-   ``` 
+   ```
 
-   You should see output similar to: 
+   You should see output similar to:
 
    ```text
    mkdir: created directory '/home/molly/.password-store/'
@@ -91,14 +91,32 @@ When Docker CLI or Docker Desktop use credentials, a user prompt may pop up for 
 $ docker pull molly/privateimage
 Using default tag: latest
 latest: Pulling from molly/privateimage
-3b9cc81c3203: Pull complete 
+3b9cc81c3203: Pull complete
 Digest: sha256:3c6b73ce467f04d4897d7a7439782721fd28ec9bf62ea2ad9e81a5fb7fb3ff96
 Status: Downloaded newer image for molly/privateimage:latest
 docker.io/molly/privateimage:latest
 ```
 
+## Why might I be required to sign in?
+
+If Docker Desktop is prompting you to sign in, it may be due to policies set
+by your organization's administrator:
+
+### Organization sign-in enforcement
+
+Your organization requires all users to sign in and be members of the
+organization to use Docker Desktop. This provides enhanced security and ensures
+only authorized users can access Docker Desktop. For more information, see [Enforce sign-in for Docker Desktop](/manuals/security/for-admins/enforce-sign-in/_index.md).
+
+### Unassociated machine identification
+
+Your organization wants to identify who is using Docker Desktop on machines
+that appear to belong to your company. You can sign in with any email address.
+This helps administrators understand Docker usage across the organization. For
+more information, see [Manage unassociated machines](/manuals/security/for-admins/unassociated-machines.md).
+
 ## What's next?
 
-- [Explore Docker Desktop](/manuals/desktop/use-desktop/_index.md) and its features. 
+- [Explore Docker Desktop](/manuals/desktop/use-desktop/_index.md) and its features.
 - Change your [Docker Desktop settings](/manuals/desktop/settings-and-maintenance/settings.md).
 - [Browse common FAQs](/manuals/desktop/troubleshoot-and-support/faqs/general.md).
