@@ -154,10 +154,14 @@ These variables ensure consistent naming, versioning, and reuse throughout the p
 - `buildTag`: a unique tag for each pipeline run
 - `latestTag`: a stable alias for your most recent image
 
-> [!TIP]
+> [!IMPORTANT]
+> The variable `dockerUsername` is not set automatically.  
+> Set it securely in your Azure DevOps pipeline variables:  
+> 1. Go to **Pipelines > Edit > Variables**  
+> 2. Add `dockerUsername` with your Docker Hub username  
+>
 > Learn more: [Define and use variables in Azure Pipelines](https://learn.microsoft.com/en-us/azure/devops/pipelines/process/variables?view=azure-devops&tabs=yaml%2Cbatch)
-
-
+ 
 ### Step 3: Define Pipeline Stages and Jobs
 
 ```yaml
