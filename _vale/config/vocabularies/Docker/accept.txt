@@ -68,6 +68,7 @@ Grafana
 Gravatar
 gRPC
 HyperKit
+inferencing
 inotify
 Intel
 Intune
