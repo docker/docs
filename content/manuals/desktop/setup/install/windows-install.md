@@ -191,7 +191,7 @@ If Microsoft Store access is blocked due to security policies:
 
 ### Adjust installation based on user's administrator access
 
-Note down if Docker Desktop will be used by non-administrator users. If so, consider using the `--always-run-service` installer flag. This will prevent the `com.docker.service` service from prompting non-administrator users with a User Account Control (UAC) elevation prompt when using Docker Desktop. See [Installer Flags](#installer-flags) for more detail.
+Note down if Docker Desktop will be used by non-administrator users. If so, consider using the `--always-run-service` installer flag. This will prevent the `com.docker.service` service from prompting non-administrator users with a User Account Control (UAC) elevation prompt when using Docker Desktop. See [Installer Flags](#installer-flags) for more details.
 
 ## Install Docker Desktop on Windows
 
