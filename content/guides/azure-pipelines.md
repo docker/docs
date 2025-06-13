@@ -12,7 +12,7 @@ params:
 
 ## Prerequisites
 
-Before you begin, ensure the following requirements are met:
+Before you begin, ensure you have the following requirements:
 
 - A [Docker Hub account](https://hub.docker.com) with a generated access token.
 - An active [Azure DevOps project](https://dev.azure.com/) with a connected [Git repository](https://learn.microsoft.com/en-us/azure/devops/repos/git/?view=azure-devops).
@@ -30,12 +30,13 @@ This guide walks you through building and pushing Docker images using [Azure Pip
 To securely authenticate with Docker Hub using Azure Pipelines:
 
 1. Navigate to **Project Settings > Service Connections** in your Azure DevOps project.
-2. Click **New service connection > Docker Registry**.
+2. Select **New service connection > Docker Registry**.
 3. Choose **Docker Hub** and provide your Docker Hub credentials or access token.
 4. Give the service connection a recognizable name, such as `my-docker-registry`.
 5. Grant access only to the specific pipeline(s) that require it for improved security and least privilege.
 
 > [!IMPORTANT]
+>
 > Avoid selecting the option to grant access to all pipelines unless absolutely necessary. Always apply the principle of least privilege.
 
 ## Step 2: Create your pipeline
@@ -120,9 +121,9 @@ This pipeline automates the Docker image build and deployment process for the ma
 - Logs out from Docker if running on a self-hosted Linux agent.
 
 
-## Detailed Step-by-Step Explanation 
+## How the pipeline works
 
-### Step 1: Define Pipeline Triggers 
+### Step 1: Define pipeline triggers 
 
 ```yaml
 trigger:
@@ -139,7 +140,7 @@ This pipeline is triggered automatically on:
 > [!TIP]
 > Learn more: [Define pipeline triggers in Azure Pipelines](https://learn.microsoft.com/en-us/azure/devops/pipelines/build/triggers?view=azure-devops)
 
-### Step 2: Define Common Variables
+### Step 2: Define common variables
 
 ```yaml
 variables:
@@ -155,14 +156,15 @@ These variables ensure consistent naming, versioning, and reuse throughout the p
 - `latestTag`: a stable alias for your most recent image
 
 > [!IMPORTANT]
+>
 > The variable `dockerUsername` is not set automatically.  
 > Set it securely in your Azure DevOps pipeline variables:  
-> 1. Go to **Pipelines > Edit > Variables**  
-> 2. Add `dockerUsername` with your Docker Hub username  
+>   1. Go to **Pipelines > Edit > Variables**  
+>   2. Add `dockerUsername` with your Docker Hub username  
 >
 > Learn more: [Define and use variables in Azure Pipelines](https://learn.microsoft.com/en-us/azure/devops/pipelines/process/variables?view=azure-devops&tabs=yaml%2Cbatch)
  
-### Step 3: Define Pipeline Stages and Jobs
+### Step 3: Define pipeline stages and jobs
 
 ```yaml
 stages:
@@ -170,15 +172,14 @@ stages:
     displayName: Build and Push Docker Image
 ```
 
-This stage executes only if:
-
-- The source branch is main.
+This stage executes only if the source branch is `main`.
 
 > [!TIP]
+>
 > Learn more: [Stage conditions in Azure Pipelines](https://learn.microsoft.com/en-us/azure/devops/pipelines/process/stages?view=azure-devops&tabs=yaml)
 
 
-### Step 4: Job Configuration
+### Step 4: Job configuration
 
 ```yaml
 jobs:
@@ -193,9 +194,10 @@ jobs:
 This job utilizes the latest Ubuntu VM image with Docker support, provided by Microsoft-hosted agents. It can be replaced with a custom pool for self-hosted agents if necessary.
 
 > [!TIP]
+>
 > Learn more: [Specify a pool in your pipeline](https://learn.microsoft.com/en-us/azure/devops/pipelines/agents/pools-queues?view=azure-devops&tabs=yaml%2Cbrowser)
 
-#### Step 4.1 Checkout Code
+#### Step 4.1: Checkout code
 
 ```yaml
 steps:
@@ -206,9 +208,10 @@ steps:
 This step pulls your repository code into the build agent, so the pipeline can access the Dockerfile and application files.
 
 > [!TIP]
+>
 > Learn more: [checkout step documentation](https://learn.microsoft.com/en-us/azure/devops/pipelines/yaml-schema/steps-checkout?view=azure-pipelines)
 
-#### Step 4.2 Authenticate to Docker Hub
+#### Step 4.2: Authenticate to Docker Hub
 
 ```yaml
 - task: Docker@2
@@ -218,12 +221,13 @@ This step pulls your repository code into the build agent, so the pipeline can a
     containerRegistry: 'my-docker-registry'  # Replace with your service connection name
 ```
 
-Uses a preconfigured Azure DevOps Docker registry service connection to authenticate securely without exposing credentials directly.
+Uses a pre-configured Azure DevOps Docker registry service connection to authenticate securely without exposing credentials directly.
 
 > [!TIP]
+>
 > Learn more: [Use service connections for Docker Hub](https://learn.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops#docker-hub-or-others)
 
-#### Step 4.3 Build the Docker Image
+#### Step 4.3: Build the Docker image
 
 ```yaml
  - task: Docker@2
@@ -252,11 +256,12 @@ This builds the image with:
 - Provenance attestation to verify how and where the image was built
 
 > [!TIP]
+>
 > Learn more: 
 > - [Docker task for Azure Pipelines](https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/reference/docker-v2?view=azure-pipelines&tabs=yaml)
 > - [Docker SBOM Attestations](/manuals/build/metadata/attestations/slsa-provenance.md)
 
-#### Step 4.4 Push the Docker Image
+#### Step 4.4: Push the Docker image
 
 ```yaml
 - task: Docker@2
@@ -276,7 +281,7 @@ This uploads both tags to Docker Hub:
 - `$(buildTag)` ensures traceability per run.
 - `latest` is used for most recent image references.
 
-#### Step 4.5  Logout from Docker (Self-Hosted Agents)
+#### Step 4.5  Logout of Docker (self-hosted agents)
 
 ```yaml
 - script: docker logout
@@ -289,15 +294,16 @@ Executes docker logout at the end of the pipeline on Linux-based self-hosted age
 ## Summary
 
 With this Azure Pipelines CI setup, you get:
+
 - Secure Docker authentication using a built-in service connection.
 - Automated image building and tagging triggered by code changes.
 - Efficient builds leveraging Docker BuildKit cache.
 - Safe cleanup with logout on persistent agents.
 - Build images that meet modern software supply chain requirements with SBOM and attestation
 
-## Further Reading
+## Learn more
 
-- [Azure Pipelines Documentation](https://learn.microsoft.com/en-us/azure/devops/pipelines/?view=azure-devops) - Comprehensive guide to configuring and managing CI/CD pipelines in Azure DevOps.
-- [Docker Task for Azure Pipelines](https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/build/docker) - Detailed reference for using the Docker task in Azure Pipelines to build and push images.
-- [Docker Buildx Bake](/manuals/build/bake/_index.md) - Explore Docker's advanced build tool for complex, multi-stage, and multi-platform build setups. See also the [Mastering Buildx Bake Guide](/guides/bake/index.md) for practical examples and best practices.
-- [Docker Build Cloud](/guides/docker-build-cloud/_index.md) - Learn about Docker's managed build service for faster, scalable, and multi-platform image builds in the cloud.
+- [Azure Pipelines Documentation](https://learn.microsoft.com/en-us/azure/devops/pipelines/?view=azure-devops): Comprehensive guide to configuring and managing CI/CD pipelines in Azure DevOps.
+- [Docker Task for Azure Pipelines](https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/build/docker): Detailed reference for using the Docker task in Azure Pipelines to build and push images.
+- [Docker Buildx Bake](/manuals/build/bake/_index.md): Explore Docker's advanced build tool for complex, multi-stage, and multi-platform build setups. See also the [Mastering Buildx Bake Guide](/guides/bake/index.md) for practical examples and best practices.
+- [Docker Build Cloud](/guides/docker-build-cloud/_index.md): Learn about Docker's managed build service for faster, scalable, and multi-platform image builds in the cloud.
