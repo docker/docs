@@ -19,6 +19,7 @@ aliases:
 ## Key features
 
 - [Pull and push models to and from Docker Hub](https://hub.docker.com/u/ai)
+- Serve models on OpenAI-compatible APIs for easy integration with existing apps
 - Package GGUF files as OCI Artifacts and publish them to any Container Registry
 - Run and interact with AI models directly from the command line or from the Docker Desktop GUI
 - Manage local models and display logs
