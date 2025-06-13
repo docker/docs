@@ -10,8 +10,6 @@ params:
   time: 35 minutes
 ---
 
-
-
 ## Introduction
 
 Retrieval-Augmented Generation (RAG) is a powerful framework that enhances large language models (LLMs) by integrating information retrieval from external knowledge sources. This guide focuses on a specialized RAG implementation using graph databases like Neo4j, which excel in managing highly connected, relational data. Unlike traditional RAG setups with vector databases, combining RAG with graph databases offers better context-awareness and relationship-driven insights.
@@ -22,25 +20,24 @@ In this guide, you will:
 * Configure a GenAI stack with Docker, incorporating Neo4j and an AI model.
 * Analyze a real-world case study that highlights the effectiveness of this approach for handling specialized queries.
 
-## Understanding RAG 
+## Understanding RAG
 
-RAG is a hybrid framework that enhances the capabilities of large language models by integrating information retrieval. It combines three core components:  
+RAG is a hybrid framework that enhances the capabilities of large language models by integrating information retrieval. It combines three core components:
 
-- **Information retrieval** from an external knowledge base  
-- **Large Language Model (LLM)** for generating responses  
-- **Vector embeddings** to enable semantic search  
+- **Information retrieval** from an external knowledge base
+- **Large Language Model (LLM)** for generating responses
+- **Vector embeddings** to enable semantic search
 
 In a RAG system, vector embeddings are used to represent the semantic meaning of text in a way that a machine can understand and process. For instance, the words "dog" and "puppy" will have similar embeddings because they share similar meanings. By integrating these embeddings into the RAG framework, the system can combine the generative power of large language models with the ability to pull in highly relevant, contextually-aware data from external sources.
 
-The system operates as follows:  
-1. Questions get turned into mathematical patterns that capture their meaning  
+The system operates as follows:
+1. Questions get turned into mathematical patterns that capture their meaning
 2. These patterns help find matching information in a database
-3. The found information gets added to the original question before passed to LLM 
-4. The LLM generates responses that blend the model's inherent knowledge with the this extra information.  
+4. The LLM generates responses that blend the model's inherent knowledge with the this extra information.
 
 To hold this vector information in an efficient manner, we need a special type of database.
 
-## Introduction to Graph databases 
+## Introduction to Graph databases
 
 Graph databases, such as Neo4j, are specifically designed for managing highly connected data. Unlike traditional relational databases, graph databases prioritize both the entities and the relationships between them, making them ideal for tasks where connections are as important as the data itself.
 
@@ -65,7 +62,7 @@ RAG: Disabled
 I'm happy to help! Unfortunately, I'm a large language model, I don't have access to real-time information or events that occurred after my training data cutoff in 2024. Therefore, I cannot provide you with any important events that happened in 2024. My apologize for any inconvenience this may cause. Is there anything else I can help you with?
 ```
 
-## Setting up GenAI stack with GPU acceleration on Linux 
+## Setting up GenAI stack with GPU acceleration on Linux
 
 To set up and run the GenAI stack on a Linux host, execute one of the following commands, either for GPU or CPU powered:
 
@@ -79,10 +76,12 @@ nano .env
 ```
 In the `.env` file, make sure following lines are commented out. Set your own credentials for security
 
+  ```txt
     NEO4J_URI=neo4j://database:7687
     NEO4J_USERNAME=neo4j
     NEO4J_PASSWORD=password
     OLLAMA_BASE_URL=http://llm-gpu:11434
+  ```
 
 ### CPU powered
 
@@ -94,15 +93,16 @@ nano .env
 ```
 In the `.env` file, make sure following lines are commented out. Set your own credentials for security
 
+  ```txt
     NEO4J_URI=neo4j://database:7687
     NEO4J_USERNAME=neo4j
     NEO4J_PASSWORD=password
     OLLAMA_BASE_URL=http://llm:11434
+  ```
 
-### Setting up on other platforms 
+### Setting up on other platforms
 
-For instructions on how to set up the stack on other platforms, refer to [this page](https://github.com/docker/genai-stack). 
-
+For instructions on how to set up the stack on other platforms, refer to [this page](https://github.com/docker/genai-stack).
 
 ### Initial startup
 
@@ -118,42 +118,41 @@ docker compose logs
 
 Wait for specific lines in the logs indicating that the download is complete and the stack is ready. These lines typically confirm successful setup and initialization.
 
+  ```text
     pull-model-1 exited with code 0
     database-1    | 2024-12-29 09:35:53.269+0000 INFO  Started.
     pdf_bot-1     |   You can now view your Streamlit app in your browser.
     loader-1      |   You can now view your Streamlit app in your browser.
     bot-1         |   You can now view your Streamlit app in your browser.
+  ```
 
-
-    You can now access the interface at [http://localhost:8501/](http://localhost:8501/) to ask questions. For example, you can try the sample question:
+You can now access the interface at [http://localhost:8501/](http://localhost:8501/) to ask questions. For example, you can try the sample question:
 
 When we see those lines in the logs, web apps are ready to be used.
 
-Since our goal is to teach AI about things it does not yet know, we begin by asking it a simple question about Nifi at 
+Since our goal is to teach AI about things it does not yet know, we begin by asking it a simple question about Nifi at
 [http://localhost:8501/](http://localhost:8501/).
 ![alt text](image.png)
 
 ```text
-Question: What is Apache Nifi? 
+Question: What is Apache Nifi?
 RAG: Disabled
 Hello! I'm here to help you with your question about Apache NiFi. Unfortunately, I don't know the answer to that question. I'm just an AI and my knowledge cutoff is December 2022, so I may not be familiar with the latest technologies or software. Can you please provide more context or details about Apache NiFi? Maybe there's something I can help you with related to it.
 ```
 
 As we can see, AI does not know anything about this subject because it did not exist during the time of its training, also known as the information cutoff point.
 
-Now it's time to teach the AI some new tricks. First, connect to [http://localhost:8502/](http://localhost:8502/). Instead of using the "neo4j" tag, change it to the "apache-nifi" tag, then select the **Import** button. 
-
+Now it's time to teach the AI some new tricks. First, connect to [http://localhost:8502/](http://localhost:8502/). Instead of using the "neo4j" tag, change it to the "apache-nifi" tag, then select the **Import** button.
 
 ![alt text](image-1.png)
 
-
-After the import is successful, we can access Neo4j to verify the data. 
+After the import is successful, we can access Neo4j to verify the data.
 
 After logging in to [http://localhost:7474/](http://localhost:7474/) using the credentials from the `.env` file, you can run queries on Neo4j. Using the Neo4j Cypher query language, you can check for the data stored in the database.
 
 To count the data, run the following query:
 
-```cypher
+```text
 MATCH (n)
 RETURN DISTINCT labels(n) AS NodeTypes, count(*) AS Count
 ORDER BY Count DESC;
@@ -167,17 +166,15 @@ Results will appear below. What we are seeing here is the information system dow
 
 You can also run the following query to visualize the data:
 
-```cypher
+```text
 CALL db.schema.visualization()
 ```
 
 To check the relationships in the database, run the following query:
 
-```cypher
+```text
 CALL db.relationshipTypes()
 ```
-
-
 
 Now, we are ready to enable our LLM to use this information. Go back to [http://localhost:8501/](http://localhost:8501/), enable the **RAG** checkbox, and ask the same question again. The LLM will now provide a more detailed answer.
 
@@ -185,7 +182,7 @@ Now, we are ready to enable our LLM to use this information. Go back to [http://
 
 The system delivers comprehensive, accurate information by pulling from current technical documentation.
 ```text
-Question: What is Apache Nifi? 
+Question: What is Apache Nifi?
 RAG: Enabled
 
 Answer:
@@ -203,14 +200,12 @@ Keep in mind that new questions will be added to Stack Overflow, and due to the 
 
 Feel free to start over with another [Stack Overflow tag](https://stackoverflow.com/tags). To drop all data in Neo4j, you can use the following command in the Neo4j Web UI:
 
-
-```cypher
+```txt
 MATCH (n)
 DETACH DELETE n;
 ```
 
 For optimal results, choose a tag that the LLM is not familiar with.
-
 
 ### When to leverage RAG for optimal results
 
