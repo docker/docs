@@ -158,6 +158,12 @@ again when you switch back.
 
 {{< /accordion >}}
 
+## Administrator privileges and installation requirements
+
+Installing Docker Desktop requires administrator privileges. However, once installed, it can be used without administrative access. Some actions, though, still need elevated permissions. For details, see [Understand permission requirements for Windows](./windows-permission-requirements.md).
+
+If your users do not have administrator rights and plan to perform operations that require elevated privileges, be sure to install Docker Desktop using the `--always-run-service installer flag`. This ensures those actions can still be executed without prompting for UAC elevation.  See [Installer Flags](#installer-flags) for more details.
+
 ## WSL: Verification and Setup
 
 If you have chosen to use WSL, first verify that your installed version meets system requirements by running the following command in your terminal:
@@ -186,12 +192,6 @@ If Microsoft Store access is blocked due to security policies:
 1. Go to the official WSL GitHub Releases page: https://github.com/microsoft/WSL/releases
 2. Download the `.msi` installer from the latest stable release (under the Assets drop-down).
 3. Run the downloaded installer and follow the setup instructions.
-
-## Administrator privileges and installation requirements
-
-Installing Docker Desktop requires administrator privileges. However, once installed, it can be used without administrative access. Some actions, though, still need elevated permissions. For details, see [Understand permission requirements for Windows](./windows-permission-requirements.md).
-
-If your users do not have administrator rights and plan to perform operations that require elevated privileges, be sure to install Docker Desktop using the `--always-run-service installer flag`. This ensures those actions can still be executed without prompting for UAC elevation.  See [Installer Flags](#installer-flags) for more details.
 
 ## Install Docker Desktop on Windows
 
