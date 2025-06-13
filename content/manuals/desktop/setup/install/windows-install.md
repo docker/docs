@@ -164,7 +164,7 @@ Installing Docker Desktop requires administrator privileges. However, once insta
 
 If your users do not have administrator rights and plan to perform operations that require elevated privileges, be sure to install Docker Desktop using the `--always-run-service installer flag`. This ensures those actions can still be executed without prompting for User Account Control (UAC) elevation. See [Installer Flags](#installer-flags) for more detail.
 
-## WSL: Verification and Setup
+## WSL: Verification and setup
 
 If you have chosen to use WSL, first verify that your installed version meets system requirements by running the following command in your terminal:
 
