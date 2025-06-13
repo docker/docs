@@ -8,7 +8,7 @@ params:
   time: 10 minutes
 ---
 
-> This guide was created by [Kristiyan Velkov](https://www.linkedin.com/in/kristiyan-velkov-763130b3/).
+> This guide is a community contribution. Docker would like to thank [Kristiyan Velkov](https://www.linkedin.com/in/kristiyan-velkov-763130b3/) for his contribution to this guide.
 
 ## Prerequisites
 
