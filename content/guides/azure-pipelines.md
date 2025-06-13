@@ -25,7 +25,9 @@ This guide walks you through building and pushing Docker images using [Azure Pip
 - Configure Docker authentication securely.
 - Set up an automated pipeline to build and push images.
 
-## Step 1: Configure a Docker Hub service connection
+## Set up Azure DevOps to work with Docker Hub
+
+### Step 1: Configure a Docker Hub service connection
 
 To securely authenticate with Docker Hub using Azure Pipelines:
 
@@ -39,7 +41,7 @@ To securely authenticate with Docker Hub using Azure Pipelines:
 >
 > Avoid selecting the option to grant access to all pipelines unless absolutely necessary. Always apply the principle of least privilege.
 
-## Step 2: Create your pipeline
+### Step 2: Create your pipeline
 
 Add the following `azure-pipelines.yml` file to the root of your repository:
 
