@@ -189,7 +189,7 @@ wsl --update
 ### Option 2: Install WSL via the MSI package
 
 If Microsoft Store access is blocked due to security policies:
-1. Go to the official WSL GitHub Releases page: https://github.com/microsoft/WSL/releases
+1. Go to the official [WSL GitHub Releases page](https://github.com/microsoft/WSL/releases).
 2. Download the `.msi` installer from the latest stable release (under the Assets drop-down).
 3. Run the downloaded installer and follow the setup instructions.
 
