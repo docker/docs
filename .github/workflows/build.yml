@@ -91,6 +91,7 @@ jobs:
           - test-go-redirects
           - dockerfile-lint
           - path-warnings
+          - validate-vendor
     steps:
       -
         name: Set up Docker Buildx
