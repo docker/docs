@@ -162,7 +162,7 @@ again when you switch back.
 
 Installing Docker Desktop requires administrator privileges. However, once installed, it can be used without administrative access. Some actions, though, still need elevated permissions. For details, see [Understand permission requirements for Windows](./windows-permission-requirements.md).
 
-If your users do not have administrator rights and plan to perform operations that require elevated privileges, be sure to install Docker Desktop using the `--always-run-service installer flag`. This ensures those actions can still be executed without prompting for UAC elevation.  See [Installer Flags](#installer-flags) for more details.
+If your users do not have administrator rights and plan to perform operations that require elevated privileges, be sure to install Docker Desktop using the `--always-run-service installer flag`. This ensures those actions can still be executed without prompting for User Account Control (UAC) elevation. See [Installer Flags](#installer-flags) for more detail.
 
 ## WSL: Verification and Setup
 
