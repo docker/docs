@@ -233,7 +233,7 @@ Synchronized file sharing:
 Unassociated machines:
   subscription: [Business]
   for: Administrators
-  requires: Docker Desktop [4.37](/manuals/desktop/release-notes.md) and later
+  requires: Docker Desktop [4.41](/manuals/desktop/release-notes.md#4410) and later
 USB/IP support:
   requires: Docker Desktop [4.35.0](/manuals/desktop/release-notes.md#4350) and later
   for: Docker Desktop for Mac, Linux, and Windows with the Hyper-V backend

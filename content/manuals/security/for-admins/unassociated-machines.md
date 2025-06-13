@@ -22,7 +22,8 @@ IT involvement.
 
 Unassociated machines are Docker Desktop instances that Docker has identified
 as likely belonging to your organization based on usage patterns, but the users
-are not signed in with an account that is part of your organization.
+are not signed in to Docker Desktop with an account that is part of your
+organization.
 
 ## How Docker identifies unassociated machines
 
@@ -202,7 +203,3 @@ your organization.
 
 The **Sign-in required** status will update for the individual machine to
 **No**.
-
-## Troubleshooting
-
-For common issues and solutions, see [Troubleshoot unassociated machines](/manuals/security/troubleshoot/troubleshoot-unassociated-machines.md).
