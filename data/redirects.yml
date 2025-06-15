@@ -325,7 +325,7 @@
 "/desktop/features/synchronized-file-sharing/":
   - /go/synchronized-file-sharing/
 "/reference/cli/dockerd/":
-  - /go/daemon/
+  - /go/daemon-config/
   - /engine/reference/commandline/dockerd/
 "/ai/gordon/":
   - /go/gordon/
