@@ -14,7 +14,8 @@ RUN apk add --no-cache \
     git \
     nodejs \
     npm \
-    gcompat
+    gcompat \
+    rsync
 
 # npm downloads Node.js dependencies
 FROM base AS npm
@@ -86,6 +87,22 @@ RUN hugo mod vendor
 FROM scratch AS vendor
 COPY --from=update-modules /project/_vendor /_vendor
 COPY --from=update-modules /project/go.* /
+
+FROM base AS validate-vendor
+RUN --mount=target=/context \
+  --mount=type=bind,from=vendor,target=/out \
+  --mount=target=.,type=tmpfs <<EOT
+set -e
+rsync -a /context/. .
+git add -A
+rm -rf _vendor
+cp -rf /out/* .
+if [ -n "$(git status --porcelain -- go.mod go.sum _vendor)" ]; then
+  echo >&2 'ERROR: Vendor result differs. Please vendor your package with "make vendor"'
+  git status --porcelain -- go.mod go.sum _vendor
+  exit 1
+fi
+EOT
 
 # build-upstream builds an upstream project with a replacement module
 FROM build-base AS build-upstream

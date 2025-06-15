@@ -36,7 +36,7 @@ target "release" {
 }
 
 group "validate" {
-  targets = ["lint", "test", "unused-media", "test-go-redirects", "dockerfile-lint", "path-warnings"]
+  targets = ["lint", "test", "unused-media", "test-go-redirects", "dockerfile-lint", "path-warnings", "validate-vendor"]
 }
 
 target "test" {
@@ -155,6 +155,11 @@ target "vendor" {
   }
   output = ["."]
   provenance = false
+}
+
+target "validate-vendor" {
+  target = "validate-vendor"
+  output = ["type=cacheonly"]
 }
 
 variable "UPSTREAM_MODULE_NAME" {

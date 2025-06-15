@@ -141,6 +141,8 @@ Gated distribution allows publishers to securely share private container images 
 
 This feature is ideal for commercial software publishers who want to control who can pull specific images while preserving a clean separation between internal users and external consumers.
 
+If you are interested in Gated Distribution contact the [Docker Sales Team](https://www.docker.com/pricing/contact-sales/) for more information.
+
 ### Key features
 
 - **Private repository distribution**: Content is stored in private repositories and only accessible to explicitly invited users.
