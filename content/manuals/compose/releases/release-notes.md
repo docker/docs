@@ -19,7 +19,7 @@ For more detailed information, see the [release notes in the Compose repo](https
 
 ### Bug fixes and enhancements
 
-- Fixed an issue permission issue on bake metadata file on Windows
+- Fixed a permission issue with bake metadata files on Windows
 - Fixed a panic error on provider service startup
 - Reverted `compose images` JSON output to array format
 
