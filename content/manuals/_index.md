@@ -52,7 +52,7 @@ params:
   - title: Docker Hardened Images
     description: Secure, minimal base images for trusted software delivery.
     icon: verified_user
-    link: /docker-hardened-images/
+    link: /dhi/
   - title: Build Cloud
     description: Build your images faster in the cloud.
     icon: /icons/logo-build-cloud.svg

@@ -23,7 +23,7 @@ params:
     - title: Flexible, repository-based pricing
       description: Learn how Docker Hardened Images offer repository-based flexibility with no per-image or per-pull limitations.
       icon: wallet
-      link: /dhi/features/pricing/
+      link: /dhi/features/flexible/
 ---
 
 Docker Hardened Images (DHIs) go beyond minimal base and application images by

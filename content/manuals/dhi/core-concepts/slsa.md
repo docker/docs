@@ -99,5 +99,4 @@ meets the specified security levels.
 
 ## Resources
 
-For more details about SLSA definitions and Docker Build, see [SLSA definitions
-](/build/metadata/attestations/slsa-definitions/).
+For more details about SLSA definitions and Docker Build, see [SLSA definitions](/build/metadata/attestations/slsa-definitions/).

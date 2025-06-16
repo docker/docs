@@ -105,8 +105,7 @@ a simple Python command just like you would with any other Docker image:
     This starts a container from the `dhi-python:3.13` image and runs a simple
     Python script that prints `Hello from DHI`.
 
-To dive deeper into using images see [Use a Docker Hardened Image
-](./how-to/use.md).
+To dive deeper into using images see [Use a Docker Hardened Image](./how-to/use.md).
 
 ## What's next
 
