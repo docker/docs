@@ -70,8 +70,9 @@ The chart contains the following data.
 | Active user | The number of users that have actively used Docker Desktop and either signed in with a Docker account that has a license in your organization or signed in to a Docker account with an email address from a domain associated with your organization. <br><br>Users who don’t sign in to an account associated with your organization are not represented in the data. To ensure users sign in with an account associated with your organization, you can [enforce sign-in](/security/for-admins/enforce-sign-in/). |
 | Total organization members | The number of users that have used Docker Desktop, regardless of their Insights activity. |
 | Users opted out of analytics | The number of users that are a member of your organization that have opted out of sending analytics. <br><br>When users opt out of sending analytics, you won't see any of their data in Insights. To ensure that the data includes all users, you can use [Settings Management](/desktop/hardened-desktop/settings-management/) to set `analyticsEnabled` for all your users. |
+| Unassociated machines | Users who have actively used Docker Desktop but aren't signed in with a licensed Docker account or an email address from a domain associated with the organization. |
+| Registered users | Users linked to unassociated machines where email addresses have been captured but are outside the organization's domain |
 | Active users (graph) | The view over time for total active users. |
-
 
 ### Builds
 
