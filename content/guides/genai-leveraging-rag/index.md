@@ -33,7 +33,7 @@ In a RAG system, vector embeddings are used to represent the semantic meaning of
 The system operates as follows:
 1. Questions get turned into mathematical patterns that capture their meaning
 2. These patterns help find matching information in a database
-4. The LLM generates responses that blend the model's inherent knowledge with the this extra information.
+3. The LLM generates responses that blend the model's inherent knowledge with the this extra information.
 
 To hold this vector information in an efficient manner, we need a special type of database.
 
