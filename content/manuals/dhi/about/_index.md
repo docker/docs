@@ -1,6 +1,6 @@
 ---
 title: About
-description: dhi description
+description: Learn about Docker Hardened Images, their purpose, how they are built and tested, and the shared responsibility model for security.
 weight: 5
 params:
   grid_about:

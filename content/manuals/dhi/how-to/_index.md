@@ -1,6 +1,6 @@
 ---
 title: How-tos
-description: dhi description
+description: Step-by-step guidance for working with Docker Hardened Images, from discovery to debugging.
 weight: 20
 params:
   grid_howto:

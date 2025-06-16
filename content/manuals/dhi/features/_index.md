@@ -1,6 +1,6 @@
 ---
 title: Features
-description: dhi description
+description: Explore the core features of Docker Hardened Images, including hardened defaults, secure metadata, and ecosystem compatibility.
 weight: 10
 params:
   grid_features:

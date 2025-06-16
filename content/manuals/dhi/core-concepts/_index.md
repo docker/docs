@@ -1,6 +1,6 @@
 ---
 title: Core concepts
-description: dhi description
+description: Learn the core concepts behind Docker Hardened Images, including security metadata, vulnerability management, image structure, and verification.
 weight: 30
 params:
   grid_concepts_metadata:
