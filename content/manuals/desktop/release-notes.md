@@ -29,6 +29,33 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 >
 > If you're experiencing malware detection issues on Mac, follow the steps documented in [docker/for-mac#7527](https://github.com/docker/for-mac/issues/7527).
 
+## 4.42.1
+
+{{< release-date date="2025-06-18" >}}
+
+{{< desktop-install-v2 all=true beta_win_arm=true version="4.42.1" build_path="/196321/" >}}
+
+### Upgrades
+
+- [Docker Compose v2.37.1](https://github.com/docker/compose/releases/tag/v2.37.1)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed an issue where Docker domains were not reachable when the proxy configuration is not valid
+- For air-gapped containers: ensure the `containersProxy` `mode` is set to `manual` as described in the [docs](../security/for-admins/hardened-desktop/air-gapped-containers.md#configuration) to ensure container network traffic is blocked if a .PAC file is unreachable.
+- Fixed a possible deadlock when exposing ports.
+- Fixed a race condition which can cause `docker run -p` ports to disappear.
+
+#### For Mac
+
+- Fix a bug where the list of container's ports would be empty when inspecting a container quickly after it's been created, e.g. from a script [docker/for-mac#7693](https://github.com/docker/for-mac/issues/7693)
+
+#### For Windows
+
+- Disable Resource Saver on WSL 2 to prevent `docker` CLI commands hanging in WSL 2 distros, see https://github.com/docker/for-win/issues/14656#issuecomment-2960285463
+
 ## 4.42.0
 
 {{< release-date date="2025-06-04" >}}
