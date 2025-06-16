@@ -52,7 +52,7 @@ The `containersProxy` setting describes the policy which is applied to traffic f
 > [!IMPORTANT]
 >
 > Any existing `proxy` setting in the `admin-settings.json` file continues to apply to traffic from the app on the host.
-> If the PAC file download fails, the Docker Desktop app and its containers do not block the request; instead, they attempt to connect directly to the target URL.
+> If the PAC file download fails, the containers block the request to the target URL.
 
 ## Example PAC file
 
