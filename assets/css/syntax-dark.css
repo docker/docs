@@ -14,7 +14,7 @@
   /* LineHighlight */
   .hl {
     min-width: fit-content;
-    background-color: var(--color-gray-800);
+    background-color: var(--color-gray-700);
   }
   .lntd:first-child .hl,
   & > .chroma > code > .hl {
