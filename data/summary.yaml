@@ -153,14 +153,16 @@ Docker Desktop CLI logs:
   requires: Docker Desktop 4.39 and later
 Docker GitHub Copilot:
   availability: Early Access
+Docker Hardened Images:
+  subscription: [Docker Hardened Images]
+Docker Init:
+  requires: Docker Desktop [4.27](/manuals/desktop/release-notes.md#4270) and later
 Docker Model Runner:
   availability: Beta
   requires: Docker Engine or Docker Desktop (Windows) 4.41+ or Docker Desktop (MacOS) 4.40+
   for: Docker Desktop for Mac with Apple Silicon or Windows with NVIDIA GPUs
 Docker Projects:
   availability: Beta
-Docker Init:
-  requires: Docker Desktop [4.27](/manuals/desktop/release-notes.md#4270) and later
 Docker Scout exceptions:
   availability: Experimental
   requires: Docker Scout CLI [1.15.0](/manuals/scout/release-notes/cli.md#1150) and later
