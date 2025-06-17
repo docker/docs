@@ -88,7 +88,7 @@ Users can continue using Docker Desktop until their next restart.
 1. Sign in to the [Admin Console](https://app.docker.com/admin) and select
 your organization.
 1. In **User management**, select **Unassociated**.
-1. Turn on the **Require sign-in** toggle.
+1. Turn on the **Enforce sign-in** toggle.
 1. In the pop-up modal, select **Require sign-in** to confirm.
 
 The **Sign-in required** status will update for all unassociated machines to
@@ -186,8 +186,8 @@ organizations.
 1. Sign in to the [Admin Console](https://app.docker.com/admin) and select
 your organization.
 1. In **User management**, select **Unassociated**.
-1. Turn off the **Require sign-in** toggle.
-1. In the pop-up modal, select **Turn off sign-in** to confirm.
+1. Turn off the **Enforce sign-in** toggle.
+1. In the pop-up modal, select **Turn off sign-in requirement** to confirm.
 
 The **Sign-in required** status will update for all unassociated machines to
 **No**.
@@ -199,7 +199,7 @@ your organization.
 1. In **User management**, select **Unassociated**.
 1. Locate the machine you want to disable sign-in enforcement for.
 1. Select the **Actions** menu and choose **Turn off sign-in enforcement**.
-1. In the pop-up modal, select **Turn off sign-in** to confirm.
+1. In the pop-up modal, select **Turn off sign-in requirement** to confirm.
 
 The **Sign-in required** status will update for the individual machine to
 **No**.

@@ -97,10 +97,12 @@ Status: Downloaded newer image for molly/privateimage:latest
 docker.io/molly/privateimage:latest
 ```
 
-## Why might I be required to sign in?
+## Why do I need to sign in?
+
+By default, Docker Desktop does not require sign in.
 
 If Docker Desktop is prompting you to sign in, it may be due to policies set
-by your organization's administrator:
+by your organization's administrator.
 
 ### Organization sign-in enforcement
 
