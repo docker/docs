@@ -158,6 +158,21 @@ $ docker push registry.example.com/my-project/<image>:<tag>
 > To continue receiving image updates and preserve access to Docker Hardened
 > Images, ensure that any copies pushed to other registries remain private.
 
+### Include attestations when mirroring images
+
+Docker Hardened Images are signed and include associated attestations that
+provide metadata such as build provenance and vulnerability scan results. These
+attestations are stored as OCI artifacts and are not included by default when
+using the Docker CLI to mirror images.
+
+To preserve the full security context when copying DHIs to another registry, you
+must explicitly include the attestations. One tool is `regctl`, which supports
+copying both images and their associated artifacts.
+
+For more details on how to use `regctl` to copy images and their associated
+artifacts, see the [regclient
+documentation](https://regclient.org/cli/regctl/image/copy/).
+
 ## What's next
 
 After mirroring an image repository, you can you can start [using the
