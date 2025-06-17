@@ -77,9 +77,9 @@ so you don’t have to.
   environment while maintaining compatibility with common Linux distributions.
   They remove non-essential components like shells and package managers to
   enhance security, yet retain a small base layer built on familiar distribution
-  standards. You can choose between Alpine-based images (using musl libc) and
-  Debian-based images (using glibc) to suit your application's compatibility
-  requirements.
+  standards. Images are typically available with musl libc (Alpine-based) and
+  glibc (Debian-based), supporting a broad range of application compatibility
+  needs.
 
 ## Why use Docker Hardened Images?
 
@@ -87,7 +87,7 @@ Docker Hardened Images (DHIs) are secure by default, minimal by design, and
 maintained so you don't have to. They offer:
 
 
-- Images built for peace of mind: Ultra-minimal and distroless, DHIs eliminate up to 95 percent of the traditional container attack surface.
+- Images built for peace of mind: Ultra-minimal and distroless, DHIs eliminate up to 95% of the traditional container attack surface.
 - No more patch panic: With continuous CVE scanning and SLA-backed remediation, Docker helps you stay ahead of threats.
 - Audit-ready images: All DHIs include signed SBOMs, VEX, and provenance that support security and compliance workflows.
 - Images that work with your stack: Available in Alpine and Debian flavors, DHIs drop into your existing Dockerfiles and pipelines.
