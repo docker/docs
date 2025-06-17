@@ -63,12 +63,22 @@ After inviting members, you can resend or remove invitations as needed.
 {{< tabs >}}
 {{< tab name="Admin Console" >}}
 
-To resend an invitation from the Admin Console:
+You can send individual invitations, or bulk invitations from the Admin Console.
+
+To resend an individual invitation:
 
 1. In the [Admin Console](https://app.docker.com/admin), select your organization.
 2. Select **Members**.
 3. Select the **action menu** next to the invitee and select **Resend invitation**.
 4. Select **Invite** to confirm.
+
+To bulk resend invitations:
+
+1. In the [Admin Console](https://app.docker.com/admin), select your organization.
+2. Select **Members**.
+3. Use the **checkboxes** next to **Usernames** to bulk select users.
+4. Select **Resend invites**.
+5. Select **Resend** to confirm.
 
 {{< /tab >}}
 {{< tab name="Docker Hub" >}}
