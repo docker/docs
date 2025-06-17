@@ -92,7 +92,7 @@ Models are cached locally.
 {{< /tab >}}
 {{< tab name="From the Docker CLI">}}
 
-Use the [`docker model pull` command](/reference/cli/docker/model/run/).
+Use the [`docker model pull` command](/reference/cli/docker/model/pull/).
 
 {{< /tab >}}
 {{< /tabs >}}
