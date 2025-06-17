@@ -1,7 +1,6 @@
 command: docker buildx debug
 short: Start debugger
 long: Start debugger
-usage: docker buildx debug
 pname: docker buildx
 plink: docker_buildx.yaml
 cname:

@@ -18,6 +18,8 @@ github.com/distribution/reference v0.6.0 h1:0IXCQ5g4/QMHHkarYzh5l+u8T3t73zM5Qvfr
 github.com/distribution/reference v0.6.0/go.mod h1:BbU0aIcezP1/5jX/8MP0YiH4SdvB5Y4f/wlDRiLyi3E=
 github.com/docker/buildx v0.24.0 h1:qiD+xktY+Fs3R79oz8M+7pbhip78qGLx6LBuVmyb+64=
 github.com/docker/buildx v0.24.0/go.mod h1:vYkdBUBjFo/i5vUE0mkajGlk03gE0T/HaGXXhgIxo8E=
+github.com/docker/buildx v0.25.0 h1:qs5WxBo0wQKSXcQ+v6UhWaeM2Pu+95ZCymaimRzInaE=
+github.com/docker/buildx v0.25.0/go.mod h1:xJcOeBhz49tgqN174MMGuOU4bxNmgfaLnZn7Gm641EE=
 github.com/docker/cli v28.2.1+incompatible h1:AYyTcuwvhl9dXdyCiXlOGXiIqSNYzTmaDNpxIISPGsM=
 github.com/docker/cli v28.2.1+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/compose/v2 v2.36.2 h1:rxk1PUUbhbAS6HkGsYo9xUmMBpKtVwFMNCQjE4+i5fk=
