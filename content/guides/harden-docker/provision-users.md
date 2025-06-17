@@ -1,6 +1,6 @@
 ---
 title: Provision users with least privilege
-description:
+description: Learn how to provision users and best practices for providing least privilege permissions.
 weight: 30
 ---
 

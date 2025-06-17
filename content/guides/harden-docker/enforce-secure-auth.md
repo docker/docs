@@ -1,6 +1,6 @@
 ---
 title: Enforce secure authentication
-description:
+description: Enforce secure authentication for all users in your organization.
 weight: 10
 ---
 

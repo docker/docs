@@ -1,6 +1,6 @@
 ---
-title: Secure Docker Desktop with Settings Management
-description:
+title: Secure Docker Desktop
+description: Use Settings Management to control Docker Desktop settings and learn best practices for hardened environments.
 weight: 40
 ---
 

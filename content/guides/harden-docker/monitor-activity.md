@@ -1,6 +1,6 @@
 ---
-title: Secure Docker Desktop with Settings Management
-description:
+title: Monitory activity
+description: Use Docker features to monitory user activity and compliance with your organization settings.
 weight: 50
 ---
 

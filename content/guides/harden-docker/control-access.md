@@ -1,6 +1,6 @@
 ---
-title: Control access with verified domains and groups
-description:
+title: Control user access
+description: Control user access to your verified domains, Docker resources, and more.
 weight: 20
 ---
 
