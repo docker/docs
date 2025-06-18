@@ -1,52 +1,30 @@
-# Docs @ Docker
+# docs-base
 
-<img src="static/assets/images/docker-docs.png" alt="Welcome to Docker Documentation" style="max-width: 50%;">
+This is the source for [docs/docker.github.io:docs-base](https://hub.docker.com/r/docs/docker.github.io/tags/).
 
-Welcome to the Docker Documentation repository. This is the source for
-[https://docs.docker.com/](https://docs.docker.com/).
+The docs-base Dockerfile includes:
 
-Feel free to send us pull requests and file issues. Our docs are completely
-open source, and we deeply appreciate contributions from the Docker community!
+- The GitHub Pages environment (w/Jekyll)
+- nginx
+- Builds of all previous versions of Docker's documentation
 
-## Provide feedback
+Having this large amount of stuff that stays relatively static in a base image
+helps keep build times for the docs low as we can use Docker Cloud's caching
+when running auto-builds out of GitHub.
 
-We’d love to hear your feedback. Please file documentation issues only in the
-Docs GitHub repository. You can file a new issue to suggest improvements or if
-you see any errors in the existing documentation.
+While you would only see the docs archives by doing so, you can run docs-base
+locally and peruse by running:
 
-Before submitting a new issue, check whether the issue has already been
-reported. You can join the discussion using an emoji, or by adding a comment to
-an existing issue. If possible, we recommend that you suggest a fix to the issue
-by creating a pull request.
+```
+docker run -ti -p 4000:4000 docs/docker.github.io:docs-base
+```
 
-You can ask general questions and get community support through the [Docker
-Community Slack](https://dockr.ly/comm-slack). Personalized support is available
-through the Docker Pro, Team, and Business subscriptions. See [Docker
-Pricing](https://www.docker.com/pricing) for details.
+The contents of docs-base will then be viewable in your browser at
+`localhost:4000`.
 
-If you have an idea for a new feature or behavior change in a specific aspect of
-Docker or have found a product bug, file that issue in the project's code
-repository.
+## Reasons to update this branch
 
-We've made it easy for you to file new issues.
-
-- Click **[New issue](https://github.com/docker/docs/issues/new)** on the docs repository and fill in the details, or
-- Click **Request docs changes** in the right column of every page on
-  [docs.docker.com](https://docs.docker.com/) and add the details, or
-
-  ![Request changes link](/static/assets/images/docs-site-feedback.png)
-
-- Click the **Give feedback** link on the side of every page in the docs.
-
-  ![Docs feedback on each page](/static/assets/images/feedback-widget.png)
-
-## Contribute to Docker docs
-
-We value your contribution. We want to make it as easy as possible to submit
-your contributions to the Docker docs repository. Changes to the docs are
-handled through pull requests against the `main` branch. To learn how to
-contribute, see [CONTRIBUTING.md](CONTRIBUTING.md).
-
-## Copyright and license
-
-Copyright 2013-2025 Docker, Inc., released under the <a href="https://github.com/docker/docs/blob/main/LICENSE">Apache 2.0 license</a> .
+- Changing the nginx configuration
+- Publishing a new docs archive, or anything else that stays static between
+  doc builds.
+- Updating the GitHub Pages version used in production to a newer release
