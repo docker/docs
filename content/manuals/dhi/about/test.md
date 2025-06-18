@@ -23,7 +23,7 @@ The testing process for DHIs focuses on two main areas:
 - Image standards compliance: Ensuring that each image adheres to strict size,
   security, and compatibility standards.
 - Application functionality: Verifying that applications within the images
-  function correctly and meet expected performance benchmarks.
+  function correctly.
 
 ## Image standards compliance
 
@@ -33,8 +33,8 @@ Each DHI undergoes rigorous checks to meet the following standards:
   unnecessary components to reduce potential vulnerabilities.
 - Near-zero known CVEs: Images are scanned using tools like Docker Scout to
   ensure they are free from known Common Vulnerabilities and Exposures (CVEs).
-- Multi-architecture support: DHIs are built for multiple architectures,
-  including `linux/amd64` and `linux/arm64`, to ensure broad compatibility.
+- Multi-architecture support: DHIs are built for multiple architectures
+  (`linux/amd64` and `linux/arm64`) to ensure broad compatibility.
 - Kubernetes compatibility: Images are tested to run seamlessly within
   Kubernetes clusters, ensuring they meet the requirements for container
   orchestration environments.

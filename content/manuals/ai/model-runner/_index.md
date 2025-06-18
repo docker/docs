@@ -93,7 +93,7 @@ Models are cached locally.
 {{< /tab >}}
 {{< tab name="From the Docker CLI">}}
 
-Use the [`docker model pull` command](/reference/cli/docker/).
+Use the [`docker model pull` command](/reference/cli/docker/model/pull/).
 
 {{< /tab >}}
 {{< /tabs >}}
@@ -109,7 +109,7 @@ The interactive chat screen opens.
 {{< /tab >}}
 {{< tab name="From the Docker CLI" >}}
 
-Use the [`docker model run` command](/reference/cli/docker/).
+Use the [`docker model run` command](/reference/cli/docker/model/run/).
 
 {{< /tab >}}
 {{< /tabs >}}
@@ -126,7 +126,7 @@ Select **Models** and select the **Logs** tab.
 {{< /tab >}}
 {{< tab name="From the Docker CLI">}}
 
-Use the [`docker model log` command](/reference/cli/docker/).
+Use the [`docker model logs` command](/reference/cli/docker/model/logs/).
 
 {{< /tab >}}
 {{< /tabs >}}

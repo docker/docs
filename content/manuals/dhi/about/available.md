@@ -34,8 +34,8 @@ requirements:
   many language ecosystems and enterprise systems.
 
 - Alpine-based images: A smaller and more lightweight option using musl libc.
-  These images are faster to pull and have a reduced footprint, though you may
-  need to account for musl-glibc differences in some applications.
+  These images tend to be small and are therefore faster to pull and have a
+  reduced footprint.
 
 Each image maintains a minimal and secure runtime layer by removing
 non-essential components like shells, package managers, and debugging tools.
@@ -52,8 +52,8 @@ with. Debian tends to offer the broadest compatibility.
 
 ## Development and runtime variants
 
-To accommodate different stages of the application lifecycle, DHI offers images
-in several variants:
+To accommodate different stages of the application lifecycle, DHI offers all
+language framework images and select application images in two variants:
 
 - Development (dev) images: Equipped with necessary development tools and
 libraries, these images facilitate the building and testing of applications in a
