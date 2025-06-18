@@ -117,6 +117,6 @@ These tools help maintain code quality and catch errors early in development.
 
 ## Next Steps
 
-- [Configure CI/CD](configure-ci-cd.md) to run these checks automatically
+- [Configure Github Actions](configure-github-actions.md) to run these checks automatically
 - Customize linting rules to match your team's style preferences
 - Explore advanced type checking features

@@ -375,6 +375,4 @@ Related information:
 
 ## Next steps
 
-In the next section, you'll take a look at how to set up a CI pipeline using GitHub Actions.
-
-
+In the next section, you'll take a look at how to set up a local development environment using docker containers.

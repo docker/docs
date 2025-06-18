@@ -132,5 +132,5 @@ Related information:
 
 ## Next steps
 
-In the next section, you'll learn how you can develop your application using containers.
+In the next section, you'll learn how you can develop locally using kubernetes.
 
