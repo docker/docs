@@ -69,7 +69,7 @@ To resend an individual invitation:
 
 1. In the [Admin Console](https://app.docker.com/admin), select your organization.
 2. Select **Members**.
-3. Select the **action menu** next to the invitee and select **Resend invitation**.
+3. Select the **action menu** next to the invitee and select **Resend**.
 4. Select **Invite** to confirm.
 
 To bulk resend invitations:
