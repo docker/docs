@@ -50,7 +50,7 @@
 
 <body>
   {{ $specURL := urls.Parse (printf "/%s%s.yaml" .File.Dir .File.ContentBaseName) }}
-  {{ if strings.HasPrefix .RelPermalink "/reference/api/hub/" }}
+  {{ if or (strings.HasPrefix .RelPermalink "/reference/api/hub/") (strings.HasPrefix .RelPermalink "/reference/api/registry/") }}
     <redoc spec-url="{{ $specURL.String }}" suppress-warnings="true" lazy-rendering></redoc>
   {{ else }}
     <redoc spec-url="{{ $specURL.String }}" hide-hostname="true" suppress-warnings="true" lazy-rendering></redoc>
