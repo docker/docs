@@ -39,18 +39,6 @@ input[type="search"]::-moz-search-cancel-button {
 input[type="search"]::-ms-clear {
   display: none;
 }
-.prose {
-  code {
-    @apply !bg-gray-100;
-  }
-  & .highlight,
-  & :not(pre) > code {
-    .dark & {
-      background: var(--color-gray-900) !important;
-      border-color: var(--color-gray-700) !important;
-    }
-  }
-}
 
 .prose {
   li {
