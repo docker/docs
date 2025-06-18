@@ -2,7 +2,7 @@
 title: Linting, Formatting and Type Checking for Python
 linkTitle: Linting and Typing
 weight: 25
-keywords: python, linting, formatting, type checking, ruff, pyright
+keywords: Python, linting, formatting, type checking, ruff, pyright
 description: Learn how to set up linting, formatting and type checking for your Python application.
 aliases:
   - /language/python/lint-format-typing/
