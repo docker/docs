@@ -513,6 +513,36 @@ settings.
 - **Configure this setting with:**
     - **Network** Resources settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
+### Networking mode
+
+| Default value | Accepted values | Format   |
+|---------------|-----------------|----------|
+| `dual-stack` | `ipv4only`, `ipv6only` | String  |
+
+- **Description:** Set the networking mode.
+- **OS:** {{< badge color=blue text="Windows and Mac" >}}
+- **Use case:** Choose the default IP protocol used when Docker creates new networks.
+- **Configure this setting with:**
+    - **Network** Resources settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
+    - Settings Management: `defaultNetworkingMode` setting in the [`admin-settings.json` file](/manuals/security/for-admins/hardened-desktop/settings-management/configure-json-file.md)
+
+For more information, see [Networking](/manuals/desktop/features/networking.md#networking-mode-and-dns-behaviour-for-mac-and-windows).
+
+#### Inhibit DNS resolution for IPv4/IPv6
+
+| Default value | Accepted values | Format   |
+|---------------|-----------------|----------|
+| `auto` | `ipv4`, `ipv6`, `none` | String  |
+
+- **Description:** Filters unsupported DNS record types.
+- **OS:** {{< badge color=blue text="Windows and Mac" >}}
+- **Use case:** Control how Docker filters DNS records returned to containers, improving reliability in environments where only IPv4 or IPv6 is supported.
+- **Configure this setting with:**
+    - **Network** Resources settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
+    - Settings Management: `dnsInhibition` setting in the [`admin-settings.json` file](/manuals/security/for-admins/hardened-desktop/settings-management/configure-json-file.md)
+
+For more information, see [Networking](/manuals/desktop/features/networking.md#networking-mode-and-dns-behaviour-for-mac-and-windows).
+
 ### Enable WSL engine
 
 | Default value | Accepted values | Format   |
@@ -733,7 +763,11 @@ third-party or unvetted plugins from being installed.
 - **Configure this setting with:**
     - **Extensions** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
-## Features in development
+## Beta features
+
+> [!IMPORTANT]
+>
+> For Docker Desktop versions 4.41 and earlier, these settings lived under the **Experimental features** tab on the **Features in development** page.
 
 ### Enable Docker AI
 
@@ -745,7 +779,7 @@ third-party or unvetted plugins from being installed.
 - **OS:** {{< badge color=blue text="All" >}}
 - **Use case:** Enable or disable AI features like "Ask Gordon".
 - **Configure this setting with:**
-    - **Features in development** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
+    - **Beta** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
     - Settings Management: `enableDockerAI` setting in the [`admin-settings.json` file](/manuals/security/for-admins/hardened-desktop/settings-management/configure-json-file.md)
 
 ### Enable Docker Model Runner
@@ -758,7 +792,8 @@ third-party or unvetted plugins from being installed.
 - **OS:** {{< badge color=blue text="All" >}}
 - **Use case:** Enable or disable Docker Model Runner features.
 - **Configure this setting with:**
-    - **Features in development** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
+    - **Beta** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
+    - Settings Management: `enableDockerAI` setting in the [`admin-settings.json` file](/manuals/security/for-admins/hardened-desktop/settings-management/configure-json-file.md)
 
 ### Enable host-side TCP support
 
@@ -770,11 +805,48 @@ third-party or unvetted plugins from being installed.
 - **OS:** {{< badge color=blue text="All" >}}
 - **Use case:** Enable or disable Docker Model Runner features.
 - **Configure this setting with:**
-    - **Features in development** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
+    - **Beta** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
+    - Settings Management: `enableDockerAI` setting in the [`admin-settings.json` file](/manuals/security/for-admins/hardened-desktop/settings-management/configure-json-file.md)
+    
 
 > [!NOTE]
 >
 > This setting requires Docker Model Runner setting to be enabled first.
+
+### Enable Docker MCP Toolkit
+
+| Default value | Accepted values | Format   |
+|---------------|-----------------|----------|
+| `true`       | `true`, `false` | Boolean  |
+
+- **Description:** Enable [Docker MCP Toolkit](/manuals/ai/mcp-catalog-and-toolkit/_index.md) in Docker Desktop.
+- **OS:** {{< badge color=blue text="All" >}}
+- **Configure this setting with:**
+    - **Beta** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
+    - Settings Management: `enableDockerMCPToolkit` setting in the [`admin-settings.json` file](/manuals/security/for-admins/hardened-desktop/settings-management/configure-json-file.md)
+    
+
+### Enable Wasm
+
+| Default value | Accepted values | Format   |
+|---------------|-----------------|----------|
+| `true`       | `true`, `false` | Boolean  |
+
+- **Description:** Enable [Wasm](/manuals/desktop/features/wasm.md) to run Wasm workloads.
+- **OS:** {{< badge color=blue text="All" >}}
+- **Configure this setting with:**
+    - **Beta** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)    
+
+### Enable Compose Bridge
+
+| Default value | Accepted values | Format   |
+|---------------|-----------------|----------|
+| `true`       | `true`, `false` | Boolean  |
+
+- **Description:** Enable [Compose Bridge](/manuals/compose/bridge/_index.md).
+- **OS:** {{< badge color=blue text="All" >}}
+- **Configure this setting with:**
+    - **Beta** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
 ## Notifications
 

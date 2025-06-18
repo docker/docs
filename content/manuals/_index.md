@@ -39,16 +39,20 @@ params:
   - title: Docker Model Runner
     description: View and manage your local models.
     icon: view_in_ar
-    link: /model-runner/
+    link: /ai/model-runner/
   - title: MCP Catalog and Toolkit
     description: Augment your AI workflow with MCP servers.
-    icon: /assets/icons/toolbox.svg
+    icon: /icons/toolkit.svg
     link: /ai/mcp-catalog-and-toolkit/
   products:
   - title: Docker Desktop
     description: Your command center for container development.
     icon: /icons/Whale.svg
     link: /desktop/
+  - title: Docker Hardened Images
+    description: Secure, minimal base images for trusted software delivery.
+    icon: /icons/dhi.svg
+    link: /dhi/
   - title: Build Cloud
     description: Build your images faster in the cloud.
     icon: /icons/logo-build-cloud.svg

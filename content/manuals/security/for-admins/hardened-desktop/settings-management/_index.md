@@ -13,7 +13,7 @@ weight: 10
 {{< summary-bar feature_name="Hardened Docker Desktop" >}}
 
 Settings Management lets administrators configure and enforce Docker Desktop
-settings across ennd-user machines. It helps maintain consistent configurations
+settings across end-user machines. It helps maintain consistent configurations
 and enhances security within your organization.
 
 ## Who is it for?
@@ -81,4 +81,5 @@ Desktop Linux VM.
 
 ## Learn more
 
-To see how each Docker Desktop setting maps across the Docker Dashboard, `admin-settings.json` file, and Admin Console, see the [Settings reference](settings-reference.md).
+- To see how each Docker Desktop setting maps across the Docker Dashboard, `admin-settings.json` file, and Admin Console, see the [Settings reference](settings-reference.md).
+- Read the [Settings Management blog post](https://www.docker.com/blog/settings-management-for-docker-desktop-now-generally-available-in-the-admin-console/).

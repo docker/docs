@@ -13,9 +13,19 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
-## 2.36.1
+## 2.37.1
 
-{{< release-date date="2025-05-23" >}}
+{{< release-date date="2025-06-12" >}}
+
+### Bug fixes and enhancements
+
+- Fixed a permission issue with bake metadata files on Windows
+- Fixed a panic error on provider service startup
+- Reverted `compose images` JSON output to array format
+
+## 2.37.0
+
+{{< release-date date="2025-06-05" >}}
 
 ### Bug fixes and enhancements
 
@@ -28,6 +38,22 @@ For more detailed information, see the [release notes in the Compose repo](https
 - Dependencies upgrade: bump compose-go to v2.6.4
 - Dependencies upgrade: bump buildx to v0.24.0
 - Dependencies upgrade: bump buildkit to v0.22.0
+
+## 2.36.2
+
+{{< release-date date="2025-05-23" >}}
+
+### Bug fixes and enhancements
+
+- Compose Bridge features are now part of Compose
+- Improved display of the `docker compose images` command
+- Promoted `bake` as the default build tool for Compose
+- Fixed issues around build flow
+- Fixed the restart of dependent services after `watch` rebuild images
+
+### Update
+
+- Dependencies upgrade: bump docker engine and cli to v28.2.2
 
 ## 2.36.1
 

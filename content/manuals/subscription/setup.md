@@ -1,6 +1,6 @@
 ---
 description: Learn how to set up your Docker subscription
-keywords: subscription, Pro, Team, Business, pricing plan
+keywords: subscription, Pro, Team, Business, pricing
 title: Set up your subscription
 weight: 15
 ---
@@ -13,14 +13,14 @@ In this section, learn how to get started with a Docker subscription for individ
 
 ## Set up a Docker subscription for a personal account
 
-After you [create your Docker ID](../accounts/create-account.md), you have a Docker Personal subscription. To continue using this plan, no further action is necessary. For additional features, you can upgrade to a Docker Pro plan.
+After you [create your Docker ID](../accounts/create-account.md), you have a Docker Personal subscription. To continue using this subscription, no further action is necessary. For additional features, you can upgrade to a Docker Pro subscription.
 
 To upgrade from Docker Personal to Docker Pro, see [Upgrade your subscription](./change.md#upgrade-your-subscription).
 
 ## Set up a Docker subscription for an organization
 
-You can subscribe a new or existing organization to a Docker plan. Only organization owners can manage billing for the organization.
+You can subscribe a new or existing organization to a Docker subscription. Only organization owners can manage billing for the organization.
 
-After you [create your Docker ID](../accounts/create-account.md), you have a Docker Personal plan. You must then create an organization and choose a subscription for it. For more details, see [Create your organization](../admin/organization/orgs.md).
+After you [create your Docker ID](../accounts/create-account.md), you have a Docker Personal subscription. You must then create an organization and choose a subscription for it. For more details, see [Create your organization](../admin/organization/orgs.md).
 
 To learn how to upgrade a Docker subscription for an existing organization, see [Upgrade your subscription](./change.md#upgrade-your-subscription).

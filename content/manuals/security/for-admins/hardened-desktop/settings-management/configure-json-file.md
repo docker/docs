@@ -165,10 +165,6 @@ of configurable settings for the `admin-settings.json` file, see [`admin-setting
     "sbomIndexing": true,
     "useBackgroundIndexing": true
   },
-  "allowExperimentalFeatures": {
-    "locked": false,
-    "value": false
-  },
   "allowBetaFeatures": {
     "locked": false,
     "value": false
@@ -301,13 +297,29 @@ quit and reopened.
 >
 > These containers mount the Docker socket, so you must add the images to the ECI images list. If not, ECI will block the mount and Kubernetes won't start.
 
-### Features in development
+### Networking
 
 |Parameter|OS|Description|Version|
 |:-------------------------------|---|:-------------------------------|---|
-| `allowExperimentalFeatures`| | If `value` is set to `false`, experimental features are disabled.|  |
-| `allowBetaFeatures`| | If `value` is set to `false`, beta features are disabled.|  |
-| `enableDockerAI` | | If `value` is set to `false`, Docker AI (Ask Gordon) features are disabled. |  |
+| `defaultNetworkingMode` | Windows and Mac only | Defines the default IP protocol for new Docker networks: `dual-stack` (IPv4 + IPv6, default), `ipv4only`, or `ipv6only`. | Docker Desktop version 4.42 and later. |
+| `dnsInhibition` | Windows and Mac only | Controls DNS record filtering returned to containers. Options: `auto` (recommended), `ipv4`, `ipv6`, `none`| Docker Desktop version 4.42 and later. |
+
+For more information, see [Networking](/manuals/desktop/features/networking.md#networking-mode-and-dns-behaviour-for-mac-and-windows).
+
+### Beta features
+
+> [!IMPORTANT]
+>
+> For Docker Desktop versions 4.41 and earlier, some of these settings lived under the **Experimental features** tab on the **Features in development** page.
+
+| Parameter                   | OS | Description                                                                                                                                                   | Version |
+|:----------------------------|----|:--------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
+| `allowBetaFeatures`         |    | If `value` is set to `true`, beta features are enabled.                                                                                                       |         |
+| `enableDockerAI`            |    | If `allowBetaFeatures` is true, setting `enableDockerAI` to `true` enables [Docker AI (Ask Gordon)](/manuals/ai/gordon/_index.md) by default. You can independently control this setting from the `allowBetaFeatures` setting.                                                 |         |
+| `enableInference` | | If `allowBetaFeatures` is true, setting `enableInference` to `true` enables [Docker Model Runner](/manuals/ai/model-runner/_index.md) by default. You can independently control this setting from the `allowBetaFeatures` setting. |  |
+| &nbsp; &nbsp; &nbsp; &nbsp; `enableInferenceTCP` | | Enable host-side TCP support. This setting requires Docker Model Runner setting to be enabled first. | |
+| `enableDockerMCPToolkit`    |    | If `allowBetaFeatures` is true, setting `enableDockerMCPToolkit` to `true` enables the [MCP toolkit feature](/manuals/ai/mcp-catalog-and-toolkit/toolkit.md) by default. You can independently control this setting from the `allowBetaFeatures` setting.         |         |
+| `allowExperimentalFeatures` |    | If `value` is set to `true`, experimental features are enabled.                                                                                               |   Docker Desktop version 4.41 and earlier      |
 
 ### Enhanced Container Isolation
 

@@ -36,6 +36,6 @@ aliases:
   - /billing/docker-hub-pricing/
 ---
 
-Use the resources in this section to manage your billing and payment settings for your Docker subscription plans.
+Use the resources in this section to manage your billing and payment settings for your Docker subscriptions.
 
 {{< grid items="grid_core" >}}
