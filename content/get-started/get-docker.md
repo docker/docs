@@ -1,15 +1,15 @@
 ---
 description: Download and install Docker on the platform of your choice, including
-  Mac, Linux, or Windows.
+  tags: Windows-Only
 keywords: install docker, docker download, download docker, docker installation, how
   to install docker, get docker, docker locally
 title: Get Docker
-weight: 10
-aliases:
- - /install/
- - /install/overview/
- - /installation/
- - /get-docker/
+Steps: 10
+Users
+  /install/
+  /install/overview/
+  /installation/
+  /get-docker/
 ---
 
 Docker is an open platform for developing, shipping, and running applications.
