@@ -43,8 +43,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 #### For all platforms
 
-- Fixed an issue where Docker domains were not reachable when the proxy configuration is not valid.
-- For air-gapped containers: ensure the `containersProxy` `mode` is set to `manual` as described in the [docs](../security/for-admins/hardened-desktop/air-gapped-containers.md#configuration) to ensure container network traffic is blocked if a .PAC file is unreachable.
+- Fixed an issue where Docker domains were not reachable when the proxy configuration is not valid
 - Fixed a possible deadlock when exposing ports.
 - Fixed a race condition which can cause `docker run -p` ports to disappear.
 
