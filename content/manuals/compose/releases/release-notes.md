@@ -13,6 +13,16 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.37.1
+
+{{< release-date date="2025-06-12" >}}
+
+### Bug fixes and enhancements
+
+- Fixed a permission issue with bake metadata files on Windows
+- Fixed a panic error on provider service startup
+- Reverted `compose images` JSON output to array format
+
 ## 2.37.0
 
 {{< release-date date="2025-06-05" >}}

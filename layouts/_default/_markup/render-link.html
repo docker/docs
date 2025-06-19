@@ -1,22 +1,13 @@
 {{ $url := .Destination }}
 {{- if (strings.HasPrefix $url "http") -}}
-  {{/* external link, add icon */}}
-  <a class="link" href="{{ $url | safeURL }}" rel="noopener">
-    {{ .Text | safeHTML }}
-    <span class="pl-1 icon-svg icon-sm">
-      {{ partialCached "icon" "open_in_new" "open_in_new" }}
-    </span>
-  </a>
+  <a class="link" href="{{ $url | safeURL }}" rel="noopener">{{ .Text | safeHTML }}</a>
 {{- else if (strings.HasPrefix $url "mailto:") -}}
-  {{/* mailto link, render as normal link */}}
   <a class="link" href="{{ $url }}">{{ .Text | safeHTML }}</a>
 {{- else if (strings.HasPrefix $url "/") -}}
   {{ if (strings.HasSuffix (urls.Parse $url).Path ".md") }}
-    {{/* abs path to markdown file, use ref */}}
     {{ $url = (ref page $url) }}
   {{ end }}
   <a class="link" href="{{ $url }}">{{ .Text | safeHTML }}</a>
 {{- else -}}
-  {{/* relative link, use ref */}}
   <a class="link" href="{{ ref page $url }}">{{ .Text | safeHTML }}</a>
 {{- end -}}

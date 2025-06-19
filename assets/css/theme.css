@@ -200,4 +200,7 @@
   --color-yellow-hover: rgba(235, 156, 0, 0.12);
   --color-yellow-outlinedborder: rgba(235, 156, 0, 0.56);
   --color-yellow-selected: rgba(235, 156, 0, 0.16);
+
+  --tw-prose-code-bg: var(--color-gray-100);
+  --tw-prose-code-bg-dark: var(--color-gray-800);
 }

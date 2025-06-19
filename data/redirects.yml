@@ -227,6 +227,7 @@
   - /go/run-cloud-eap/
 "/desktop/setup/vm-vdi/":
   - /go/docker-cloud/
+  - /go/docker-cloud-gpu/
 
 # CLI backlinks
 "/engine/cli/filter/":
@@ -324,7 +325,7 @@
 "/desktop/features/synchronized-file-sharing/":
   - /go/synchronized-file-sharing/
 "/reference/cli/dockerd/":
-  - /go/daemon/
+  - /go/daemon-config/
   - /engine/reference/commandline/dockerd/
 "/ai/gordon/":
   - /go/gordon/
