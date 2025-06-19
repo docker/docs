@@ -12,12 +12,18 @@ aliases:
   - /guides/language/nodejs/containerize/
 ---
 
+
 ## Prerequisites
 
-- You have installed the latest version of [Docker
-  Desktop](/get-started/get-docker.md).
-- You have a [git client](https://git-scm.com/downloads). The examples in this
-  section use a command-line based git client, but you can use any client.
+Before you begin, make sure the following tools are installed and available on your system:
+
+- You have installed the latest version of [Docker Desktop](/get-started/get-docker.md).
+- You have a [git client](https://git-scm.com/downloads). The examples in this section use a command-line based git client, but you can use any client.
+
+> **New to Docker?**  
+> Start with the [Docker basics](/get-started/docker-concepts/the-basics/what-is-a-container.md) guide to get familiar with key concepts like images, containers, and Dockerfiles.
+
+---
 
 ## Overview
 
