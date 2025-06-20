@@ -366,11 +366,14 @@ examples: |-
 
     ```console
     $ docker buildx bake --list=variables
-    VARIABLE      VALUE                DESCRIPTION
-    REGISTRY      docker.io/username   Registry and namespace
-    IMAGE_NAME    my-app               Image name
-    GO_VERSION    <null>
+    VARIABLE      TYPE      VALUE                DESCRIPTION
+    REGISTRY      string    docker.io/username   Registry and namespace
+    IMAGE_NAME    string    my-app               Image name
+    GO_VERSION              <null>
+    DEBUG         bool      false                Add debug symbols
     ```
+
+    Variable types will be shown when set using the `type` property in the Bake file.
 
     By default, the output of `docker buildx bake --list` is presented in a table
     format. Alternatively, you can use a long-form CSV syntax and specify a
@@ -531,6 +534,7 @@ examples: |-
     * `context`
     * `dockerfile`
     * `entitlements`
+    * `extra-hosts`
     * `labels`
     * `load`
     * `no-cache`
