@@ -10,10 +10,9 @@ linkTitle: Organization access tokens
 
 > [!WARNING]
 >
-> Organization access tokens (OATs) are not intended to be used with Docker
-> Desktop or Docker Scout, and are incompatible.
+> Organization access tokens (OATs) are incompatible with Docker Desktop.
 >
-> If you use Docker Desktop or Docker Scout, you must use personal
+> If you use Docker Desktop, you must use personal
 > access tokens instead.
 
 An organization access token (OAT) is like a [personal access token
