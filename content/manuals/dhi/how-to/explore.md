@@ -74,6 +74,7 @@ To explore image variants:
 The **Tags** page provides the following information:
 
 - Tags: A list of all available tags, also known as image variants.
+- Compliance: Lists relevant compliance designations. For example, `FIPS`.
 - Distribution: The distribution that the variant is based on. For example, `debian 12` or `alpine 3.21`.
 - Package manager: The package manager that is available in the variant. For example, `apt`, `apk`, or `-` (no package manager).
 - Shell: The shell that is available in the variant. For example, `bash`, `busybox`, or `-` (no shell).
