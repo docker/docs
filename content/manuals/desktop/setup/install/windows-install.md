@@ -221,8 +221,6 @@ By default, Docker Desktop is installed at `C:\Program Files\Docker\Docker`.
 
 If your admin account is different to your user account, you must add the user to the **docker-users** group to access features that require higher privileges, such as creating and managing the Hyper-V VM, or using Windows containers.
 
-```powershell
-
 ```console
 $ net localgroup docker-users <user> /add
 ```
