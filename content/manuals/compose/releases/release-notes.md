@@ -15,6 +15,24 @@ For more detailed information, see the [release notes in the Compose repo](https
 
 ## 2.37.1
 
+{{< release-date date="2025-06-20" >}}
+
+### Bug fixes and enhancements
+
+- Introduce `use_api_socket`
+- Fixed `compose images` JSON output format
+- Fixed panic using `w` shortcut on project without watch support
+- Fixed a permission issue with bake metadata files on Windows
+- Fixed a panic error on provider service startup
+
+### Update
+
+- Dependencies upgrade: bump compose-go to v2.6.5
+- Dependencies upgrade: bump buildx to v0.25.0
+- Dependencies upgrade: bump buildkit to v0.23.0
+
+## 2.37.1
+
 {{< release-date date="2025-06-12" >}}
 
 ### Bug fixes and enhancements
