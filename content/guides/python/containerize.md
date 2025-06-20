@@ -58,7 +58,7 @@ This utility will walk you through creating the following files with sensible de
 Let's get started!
 
 ? What application platform does your project use? Python
-? What version of Python do you want to use? 3.11.4
+? What version of Python do you want to use? 3.12
 ? What port do you want your app to listen on? 8000
 ? What is the command to run your app? python3 -m uvicorn app:app --host=0.0.0.0 --port=8000
 ```
@@ -139,8 +139,8 @@ Create a file named `Dockerfile` with the following contents.
 
 # Want to help us make this template better? Share your feedback here: https://forms.gle/ybq9Krt8jtBL3iCk7
 
-ARG PYTHON_VERSION=3.11.4
-FROM python:${PYTHON_VERSION}-slim AS base
+ARG PYTHON_VERSION=3.12
+FROM python:${PYTHON_VERSION}-slim
 
 # Prevents Python from writing pyc files.
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -181,7 +181,7 @@ COPY . .
 EXPOSE 8000
 
 # Run the application.
-CMD python3 -m uvicorn app:app --host=0.0.0.0 --port=8000
+CMD ["python3", "-m", "uvicorn", "app:app", "--host=0.0.0.0", "--port=8000"]
 ```
 
 Create a file named `compose.yaml` with the following contents.
@@ -375,6 +375,4 @@ Related information:
 
 ## Next steps
 
-In the next section, you'll take a look at how to set up a CI pipeline using GitHub Actions.
-
-
+In the next section, you'll take a look at how to set up a local development environment using Docker containers.
