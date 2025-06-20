@@ -180,7 +180,8 @@ again when you switch back.
 
 6. [Start Docker Desktop](#start-docker-desktop).
 
-If your administrator account is different to your user account, you must add the user to the **docker-users** group:
+If your administrator account is different to your user account, you must add the user to the **docker-users** group to access features that require higher privileges, such as creating and managing the Hyper-V VM, or using Windows containers:
+
 1. Run **Computer Management** as an **administrator**.
 2. Navigate to **Local Users and Groups** > **Groups** > **docker-users**. 
 3. Right-click to add the user to the group.
@@ -218,7 +219,7 @@ By default, Docker Desktop is installed at `C:\Program Files\Docker\Docker`.
 > Start-Process 'Docker Desktop Installer.exe' -Wait -ArgumentList 'install', '--accept-license'
 > ```
 
-If your admin account is different to your user account, you must add the user to the **docker-users** group:
+If your admin account is different to your user account, you must add the user to the **docker-users** group to access features that require higher privileges, such as creating and managing the Hyper-V VM, or using Windows containers.
 
 ```console
 $ net localgroup docker-users <user> /add

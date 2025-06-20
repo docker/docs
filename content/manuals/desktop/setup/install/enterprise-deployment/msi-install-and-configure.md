@@ -34,7 +34,7 @@ The MSI package supports various MDM (Mobile Device Management) solutions, makin
 7. Follow the instructions on the installation wizard to authorize the installer and proceed with the install.
 8. When the installation is successful, select **Finish** to complete the installation process.
 
-If your administrator account is different from your user account, you must add the user to the **docker-users** group:
+If your administrator account is different from your user account, you must add the user to the **docker-users** group to access features that require higher privileges, such as creating and managing the Hyper-V VM, or using Windows containers:
 1. Run **Computer Management** as an **administrator**.
 2. Navigate to **Local Users and Groups** > **Groups** > **docker-users**.
 3. Right-click to add the user to the group.

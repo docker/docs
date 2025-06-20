@@ -122,5 +122,5 @@ Manifests:
 - Verification: You can pull and verify a specific image digest for your
   platform to ensure you're using the exact image version, not just the manifest
   list.
-- Poliqcy enforcement: When enforcing digest-based policies with Docker Scout,
+- Policy enforcement: When enforcing digest-based policies with Docker Scout,
   each platform variant is evaluated individually using its digest.
