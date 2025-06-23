@@ -2022,7 +2022,7 @@ ulimits:
 ### `use_api_socket`
 
 When `use_api_socket` is set, the container is able to interact with the underlying container engine through the API socket.
-Your credentials are mounted inside the container so the container acts as a pure delegate for your commands reglating to the container engine.
+Your credentials are mounted inside the container so the container acts as a pure delegate for your commands relating to the container engine.
 Typically, commands ran by container can `pull` and `push` to your registry.
 
 ### `user`
