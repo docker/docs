@@ -21,11 +21,11 @@ To configure:
 
 1. On the **Ask Gordon** view in Docker Desktop, select the `Toolbox` button in the bottom left of the input area.
 
-   ![Gordon page with the toolbox button](../images/gordon.webp)
+   ![Gordon page with the toolbox button](../images/gordon.png)
 
 2. To enable or disable a tool, select it in the left-menu and select the toggle.
 
-   ![Gordon's Toolbox](../images/toolbox.webp)
+   ![Gordon's Toolbox](../images/toolbox.png)
 
    For more information on the available Docker tools, see [Reference](#reference).
 
@@ -108,7 +108,7 @@ $ docker ai "Show me logs from the auth-service pod"
 
 
 ```console
-# Scan  for CVEs
+# Scan for CVEs
 $ docker ai "Scan my application for security vulnerabilities"
 
 # Get security recommendations
@@ -136,13 +136,11 @@ Tools to interact with your Docker containers, images, and volumes.
 
 #### Container management
 
-| Name | Description |
-|------|-------------|
-| `list_containers` | List all Docker containers |
-| `remove_containers` | Remove one or more Docker containers |
-| `stop_container` | Stop a running Docker container |
-| `fetch_container_logs` | Retrieve logs from a Docker container |
-| `run_container` | Run a new Docker container |
+| Name          | Description                            |
+|---------------|----------------------------------------|
+| `docker`      | Access to the Docker cli               |
+| `list_builds` | List the builds in the Docker daemon   |
+| `build_logs`  | Show the build logs.                   |
 
 #### Volume management
 
@@ -231,8 +229,5 @@ General-purpose development utilities.
 
 ### Docker MCP Catalog
 
-If you have enabled the [MCP Toolkit feature](/content/manuals/ai/mcp-catalog-and-toolkit/toolkit.md), 
+If you have enabled the [MCP Toolkit feature](../../mcp-catalog-and-toolkit/_index.md), 
 all the tools you have enabled and configured are available for Gordon to use.
-
-To disable Gordon's access to the MCP toolkit 
-
