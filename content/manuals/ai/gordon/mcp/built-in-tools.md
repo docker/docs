@@ -138,7 +138,7 @@ Tools to interact with your Docker containers, images, and volumes.
 
 | Name          | Description                            |
 |---------------|----------------------------------------|
-| `docker`      | Access to the Docker cli               |
+| `docker`      | Access to the Docker CLI               |
 | `list_builds` | List the builds in the Docker daemon   |
 | `build_logs`  | Show the build logs.                   |
 
