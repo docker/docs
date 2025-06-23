@@ -157,6 +157,7 @@ unmanaged
 VMware
 vpnkit
 vSphere
+VSCode
 Wasm
 Windows
 windowsfilter
