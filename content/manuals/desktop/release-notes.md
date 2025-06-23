@@ -29,6 +29,59 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 >
 > If you're experiencing malware detection issues on Mac, follow the steps documented in [docker/for-mac#7527](https://github.com/docker/for-mac/issues/7527).
 
+## 4.43.0
+
+{{< release-date date="2025-07-03" >}}
+
+{{< desktop-install-v2 all=true beta_win_arm=true version="4.43.0" build_path="/TBD/" >}}
+
+### New
+
+- Deploy your Compose project to K8s right on Docker Desktop via Compose Bridge CLI.
+
+### Upgrades
+
+- [Docker Buildx v0.25.0](https://github.com/docker/buildx/releases/tag/v0.25.0)
+- [Docker Compose v2.38.1](https://github.com/docker/compose/releases/tag/v2.38.1)
+- [Docker Engine v28.3.0](https://docs.docker.com/engine/release-notes/28/#2830)
+- [NVIDIA Container Toolkit v1.17.8](https://github.com/NVIDIA/nvidia-container-toolkit/releases/tag/v1.17.8)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed a bug causing `docker start` to drop the container's port mappings for a container already running.
+- Fixed a bug that prevented container ports to be displayed on the GUI when a container was re-started.
+- Fixed a bug that caused Docker API `500 Internal Server Error for API route and version` error application start.
+- The dashboard's settings screen's "Apply & restart" button is now labeled "Apply" when clicking it will not restart the VM.
+- Fixed a bug where the disk would be corrupted if Docker is shutdown during a `fsck`.
+- Fixed a bug causing an incorrect `~/.kube/config` in WSL2 when using a `kind` kubernetes cluster.
+- Return an explicit error to a Docker API / `docker` CLI command if Docker Desktop has been manually paused.
+- Fixed an issue where unknown keys in Admin and Cloud settings caused a failure.
+
+#### For Linux
+
+- Bump `virtiofsd` to `1.13.1`.
+
+#### For Mac
+
+- Removed `eBPF` which blocked `io_uring`. To enable `io_uring` in a container, use `--security-opt seccomp=unconfined`. Fixes [docker/for-mac#7707](https://github.com/docker/for-mac/issues/7707).
+
+#### For Windows
+
+- Fixed an issue that caused Docker Desktop installer to crash when the current user has no `SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall` registry key.
+- Fixed a bug where Docker Desktop could leak a `com.docker.build` process and fail to start. Fixes [docker/for-win#14840](https://github.com/docker/for-win/issues/14840)
+
+### Known issues
+
+#### For all platforms
+
+- `docker buildx bake` will not build images in Compose files with a top-level models attribute. Use `docker compose build` instead.
+
+#### For Windows
+
+- Possible incompatibility between the "host networking" feature of Docker Desktop and the most recent WSL 2 Linux kernel. If you encounter such issues, please downgrade WSL 2 to 2.5.7.
+
 ## 4.42.1
 
 {{< release-date date="2025-06-18" >}}
