@@ -101,9 +101,10 @@ If you have concerns about data collection or usage, you can
 
 ## Using Ask Gordon
 
-The primary interfaces to Docker's AI capabilities are through the **Ask
-Gordon** view in Docker Desktop, or if you prefer to use the CLI: the `docker
-ai` CLI command.
+You can access Gordon:
+
+- In Docker Desktop, in the **Ask Gordon** view.
+- Via the Docker CLI, with the `docker ai` CLI command.
 
 Once you've enabled the Docker AI features, you'll also find references to **Ask
 Gordon** in various other places throughout the Docker Desktop user interface.
@@ -119,6 +120,7 @@ ways things you can try:
 - [Troubleshoot a crashed container](#troubleshoot-a-crashed-container)
 - [Get help with running a container](#get-help-with-running-a-container)
 - [Improve a Dockerfile](#improve-a-dockerfile)
+- [Migrate a Dockerfile to DHI](#migrate-a-dockerfile-to-dhi)
 
 For more examples, try asking Gordon directly. For example:
 
@@ -193,6 +195,10 @@ across several dimensions:
 - Reproducibility
 - Portability
 - Resource efficiency
+
+### Migrate a Dockerfile to DHI
+
+See [Use Gordon AI](/manuals/dhi/how-to/migrate.md#use-gordon-ai) in the DHI section.
 
 ## Disable Ask Gordon
 

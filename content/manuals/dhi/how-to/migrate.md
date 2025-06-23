@@ -240,3 +240,22 @@ ENTRYPOINT [ "python", "/app/image.py" ]
 
 {{< /tab >}}
 {{< /tabs >}}
+
+### Use Gordon AI
+
+Alternatively, you can request assistance to
+[Gordon](/manuals/ai/gordon/_index.md), Docker's AI feature, to act as a DevSecOps Agent 
+and migrate your Dockerfile:
+
+1. In the terminal, navigate to the directory containing your Dockerfile.
+1. Run:
+   
+   ```bash
+   docker ai "Migrate my dockerfile to DHI"
+   ```
+
+1. Follow the conversation with Gordon. When it requests access to the filesystem, 
+   type `yes` to enable it to update the file.
+
+> [!IMPORTANT]
+> As with any AI tool, you must verify Gordon's edits and test your image. 
