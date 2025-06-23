@@ -13,7 +13,7 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
-## 2.37.1
+## 2.37.2
 
 {{< release-date date="2025-06-20" >}}
 
