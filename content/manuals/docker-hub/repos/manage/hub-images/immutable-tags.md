@@ -1,11 +1,11 @@
 ---
 description: Learn about immutable tags and how they help maintain image version consistency on Docker Hub.
 keywords: Docker Hub, Hub, repository content, tags, immutable tags, version control
-title: Immutable tags on Docker Hub
-linkTitle: Immutable tags
+title: Immutable Tags on Docker Hub
+linkTitle: Immutable Tags
 weight: 11
 ---
-{{< summary-bar feature_name="Immutable tags" >}}
+> **Availability**: Beta
 
 Immutable tags provide a way to ensure that specific image versions remain unchanged once they are published to Docker Hub. This feature helps maintain consistency and reliability in your container deployments by preventing accidental overwrites of important image versions.
 
@@ -25,15 +25,20 @@ To enable immutable tags for your repository:
 1. Sign in to [Docker Hub](https://hub.docker.com).
 2. Select **My Hub** > **Repositories**.
 3. Select the repository where you want to enable immutable tags.
-4. Select the **Settings** tab
-5. Under **Tag mutability settings**, select **Immutable**.
-6. Select **Save**.
+4. Go to **Settings** > **General**.
+5. Under **Tag mutability settings**, select one of the following options:
+   - **All tags are mutable (Default):**  
+     Tags can be changed to reference a different image. This allows you to retarget a tag without creating a new one.
+   - **All tags are immutable:**  
+     Tags cannot be updated to point to a different image after creation. This ensures consistency and prevents accidental changes. This includes the `latest` tag.
+   - **Specific tags are immutable:**  
+     Define specific tags that cannot be updated after creation using RegEx values.
+6. Click **Save**.
 
 Once enabled, all tags are locked to their specific images, ensuring that each tag always points to the same image version and cannot be modified.
 
- > [!NOTE]
->
-> All tags in the repository become immutable, including the `latest` tag.
+> [!NOTE]
+> This implementation of regular expressions follows the [Go regexp package](https://pkg.go.dev/regexp), which is based on the RE2 engine. For more information, visit [RE2 Regular Expression Syntax](https://github.com/google/re2/wiki/Syntax).
 
 ## Working with immutable tags
 
@@ -43,6 +48,11 @@ When immutable tags are enabled:
 - You must use a new tag name for each new image version
 
 To push an image, create a new tag for your updated image and push it to the repository.
+
+
+
+
+
 
 
 
