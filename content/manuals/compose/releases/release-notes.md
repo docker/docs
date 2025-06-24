@@ -19,8 +19,8 @@ For more detailed information, see the [release notes in the Compose repo](https
 
 ### Bug fixes and enhancements
 
-- Added support of `cache_to` for bake
-- Fixed issue with bake integration
+- Added support of `cache_to` for Bake
+- Fixed issue with Bake integration
 - Fixed multiple issues affecting `run` command
 
 ### Update
