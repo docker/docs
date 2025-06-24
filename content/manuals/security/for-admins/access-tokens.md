@@ -64,28 +64,21 @@ Expired tokens count towards the total amount of tokens.
 
 To create an OAT:
 
-1. Sign in to the [Admin Console](https://app.docker.com/admin).
-
-2. Select the organization you want to create an access token for.
-
-3. Under **Security and access**, select **Access tokens**.
-
-4. Select **Generate access token**.
-
-5. Add a label and optional description for your token. Use something that
+1. Sign in to [Docker Home](https://app.docker.com/) and select your
+organization.
+1. Select **Admin Console**, then **Access tokens**.
+1. Select **Generate access token**.
+1. Add a label and optional description for your token. Use something that
 indicates the use case or purpose of the token.
-
-6. Select the expiration date for the token.
-
-7. Expand the **Repository** drop-down to set access permission
+1. Select the expiration date for the token.
+1. Expand the **Repository** drop-down to set access permission
 scopes for your token. To set Repository access scopes:
     1. Optional. Select **Read public repositories**.
-    2. Select **Add repository** and choose a repository from the drop-down.
-    3. Set the scopes for your repository &mdash; **Image Push** or
+    1. Select **Add repository** and choose a repository from the drop-down.
+    1. Set the scopes for your repository &mdash; **Image Push** or
     **Image Pull**.
-    4. Add more repositories as needed. You can add up to 50 repositories.
-
-8. Optional. Expand the **Organization** drop-down and select the
+    1. Add more repositories as needed. You can add up to 50 repositories.
+1. Optional. Expand the **Organization** drop-down and select the
 **Allow management access to this organization's resources** checkbox. This
 setting enables organization management scopes for your token. The following
 organization management scopes are available:
@@ -95,8 +88,7 @@ organization management scopes are available:
     - **Invite Read**: Read invites to the organization
     - **Group Edit**: Edit groups of the organization
     - **Group Read**: Read groups of the organization
-
-9. Select **Generate token**. Copy the token that appears on the screen
+1. Select **Generate token**. Copy the token that appears on the screen
    and save it. You won't be able to retrieve the token once you exit the
    screen.
 
@@ -119,14 +111,8 @@ password.
 You can rename, update the description, update the repository access,
 deactivate, or delete a token as needed.
 
-1. Sign in to the [Admin Console](https://app.docker.com/admin).
-
-2. Select the organization you want to modify an access token for.
-
-3. Under **Security and access**, select **Access tokens**.
-
-4. Select the actions menu in the token row, then select
-   **Deactivate**, **Edit**, or **Delete** to modify the token. For **Inactive**
-   tokens, you can only select **Delete**.
-
-5. If editing a token, select **Save** after specifying your modifications.
+1. Sign in to [Docker Home](https://app.docker.com/) and select your
+organization.
+1. Select **Admin Console**, then **Access tokens**.
+1. Select the actions menu in the token row, then select **Deactivate**, **Edit**, or **Delete** to modify the token. For **Inactive** tokens, you can only select **Delete**.
+1. If editing a token, select **Save** after specifying your modifications.

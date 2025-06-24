@@ -21,10 +21,9 @@ This information includes:
 
 To edit this information:
 
-1. Sign in to the [Admin Console](https://admin.docker.com).
-2. Select your company on the **Choose profile** page.
-3. Under **Organization settings**, select **Organization information**.
-4. Specify the organization information and select **Save**.
+1. Sign in to the [Admin Console](https://app.docker.com/admin).
+1. Select your company on the **Choose profile** page.
+1. Specify the organization information and select **Save**.
 
 ## Next steps
 

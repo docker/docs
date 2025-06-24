@@ -1,8 +1,9 @@
 {{ $product_link := "[Docker Hub](https://hub.docker.com)" }}
 {{ $audit_navigation := "Select **My Hub**, your organization, and then **Activity**." }}
+
 {{ if eq (.Get "product") "admin" }}
-  {{ $product_link = "the [Admin Console](https://admin.docker.com)" }}
-  {{ $audit_navigation = "Select your organization in the left navigation drop-down menu, and then select **Activity logs**." }}
+  {{ $product_link = "[Docker Home](https://app.docker.com/) and select your organization." }}
+  {{ $iam_navigation = "Select **Admin Console**, then **Activity logs**." }}
 {{ end }}
 
 ### View the activity logs
