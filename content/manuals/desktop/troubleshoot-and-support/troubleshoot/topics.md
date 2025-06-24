@@ -383,7 +383,7 @@ Your machine must have the following features for Docker Desktop to function cor
 
 #### Error message
 
-FSCTL_EXTEND_VOLUME \\?\Volume{GUID}: The media is write protected
+`FSCTL_EXTEND_VOLUME \\?\Volume{GUID}: The media is write protected`
 
 #### Cause
 
@@ -396,21 +396,20 @@ correctly because it requires read-write access to these volumes.
 
 FDVDenyWriteAccess is a Windows Group Policy setting that, when enabled, prevents write access to fixed data drives that are not protected
 by BitLocker. This is often used in security-conscious environments but can interfere with development tools like Docker.
-In the Windows registry it can be found at HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Policies\Microsoft\FVE\FDVDenyWriteAccess.
+In the Windows registry it can be found at `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Policies\Microsoft\FVE\FDVDenyWriteAccess`.
 
 #### Solutions
 
 Docker Desktop does not support running Windows Containers on systems where FDVDenyWriteAccess is enabled. This setting interferes with the
 ability of Docker to mount volumes correctly, which is critical for container functionality.
 
-To use Docker Desktop with Windows Containers, ensure that FDVDenyWriteAccess is disabled. You can check and change this setting in the registry or through Group Policy Editor (gpedit.msc) under:
+To use Docker Desktop with Windows Containers, ensure that FDVDenyWriteAccess is disabled. You can check and change this setting in the registry or through Group Policy Editor (`gpedit.msc`) under:
 
-Computer Configuration -> Administrative Templates -> Windows Components -> BitLocker Drive Encryption -> Fixed Data Drives -> Deny write access to fixed drives not protected by BitLocker
+**Computer Configuration** > **Administrative Templates** > **Windows Components** > **BitLocker Drive Encryption** > **Fixed Data Drives** > **Deny write access to fixed drives not protected by BitLocker**
 
-Set this policy to "Not Configured" or "Disabled".
-
-Note: Modifying Group Policy settings may require administrator privileges and should comply with your organization's IT policies. If the setting gets reset after some
-time this usually means that it got overriden by the centralized configuration of your IT department. Better talk to them before making any changes.
+> [!NOTE]
+> 
+> Modifying Group Policy settings may require administrator privileges and should comply with your organization's IT policies. If the setting gets reset after some time this usually means that it was overriden by the centralized configuration of your IT department. Talk to them before making any changes.
 
 ##### WSL 2 and Windows Home
 
