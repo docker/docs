@@ -1,6 +1,6 @@
 ---
-title: Linting, Formatting and Type Checking for Python
-linkTitle: Linting and Typing
+title: Linting, formatting, and type checking for Python
+linkTitle: Linting and typing
 weight: 25
 keywords: Python, linting, formatting, type checking, ruff, pyright
 description: Learn how to set up linting, formatting and type checking for your Python application.
@@ -20,7 +20,7 @@ In this section, you'll learn how to set up code quality tools for your Python a
 - Static type checking with Pyright
 - Automating checks with pre-commit hooks
 
-## Linting and Formatting with Ruff
+## Linting and formatting with Ruff
 
 Ruff is an extremely fast Python linter and formatter written in Rust. It replaces multiple tools like flake8, isort, and black with a single unified tool.
 
@@ -64,7 +64,7 @@ ruff check --fix .
 ruff format .
 ```
 
-## Type Checking with Pyright
+## Type checking with Pyright
 
 Pyright is a fast static type checker for Python that works well with modern Python features.
 
@@ -87,10 +87,10 @@ pyright
 
 ## Setting up pre-commit hooks
 
-Pre-commit hooks automatically run checks before each commit. in `.pre-commit-config.yaml` sets up Ruff:
+Pre-commit hooks automatically run checks before each commit. in `.pre-commit-config.yaml` snippet sets up Ruff:
 
 ```yaml
-: https: https://github.com/charliermarsh/ruff-pre-commit
+  https: https://github.com/charliermarsh/ruff-pre-commit
   rev: v0.2.2
   hooks:
     - id: ruff
@@ -115,8 +115,8 @@ In this section, you learned how to:
 
 These tools help maintain code quality and catch errors early in development.
 
-## Next Steps
+## Next steps
 
-- [Configure Github Actions](configure-github-actions.md) to run these checks automatically
+- [Configure GitHub Actions](configure-github-actions.md) to run these checks automatically
 - Customize linting rules to match your team's style preferences
 - Explore advanced type checking features
