@@ -187,6 +187,11 @@ If you don't have a paid Docker subscription, create an issue on GitHub:
 - [For Mac](https://github.com/docker/for-mac/issues)
 - [For Windows](https://github.com/docker/for-win/issues)
 
+### Self-diagnose tool
+
+> [!IMPORTANT]
+>
+> This tool has been deprecated in Docker Desktop version 4.43 and later.
 
 ## Check the logs
 
