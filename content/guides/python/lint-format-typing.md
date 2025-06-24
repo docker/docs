@@ -87,7 +87,7 @@ pyright
 
 ## Setting up pre-commit hooks
 
-Pre-commit hooks automatically run checks before each commit. in `.pre-commit-config.yaml` snippet sets up Ruff:
+Pre-commit hooks automatically run checks before each commit. The following `.pre-commit-config.yaml` snippet sets up Ruff:
 
 ```yaml
   https: https://github.com/charliermarsh/ruff-pre-commit
