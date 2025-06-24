@@ -13,6 +13,20 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.37.3
+
+{{< release-date date="2025-06-24" >}}
+
+### Bug fixes and enhancements
+
+- Added support of `cache_to` for bake
+- Fixed issue with bake integration
+- Fixed multiple issues affecting `run` command
+
+### Update
+
+- Dependencies upgrade: bump buildkit to v0.23.1
+
 ## 2.37.2
 
 {{< release-date date="2025-06-20" >}}
