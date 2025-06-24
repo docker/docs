@@ -153,9 +153,9 @@ and add Claude Desktop as a client:
    ```text
    Take a screenshot of docs.docker.com and then invert the colors
    ```
-3. From the **Clients** tab, select **Connect** next to **Claude Desktop**. Restart 
+5. From the **Clients** tab, select **Connect** next to **Claude Desktop**. Restart 
    Claude Desktop if it's running, and it can now access all the servers in the MCP Toolkit.
-4. Within Claude Desktop, run a test by submitting the following prompt using the Sonnet 3.5 model:
+6. Within Claude Desktop, run a test by submitting the following prompt using the Sonnet 3.5 model:
 
    ```text
    Take a screenshot of docs.docker.com and then invert the colors
