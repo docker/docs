@@ -35,7 +35,7 @@ Turning the Kubernetes server on or off in Docker Desktop does not affect your o
 2. Select the **Kubernetes** tab.
 3. Toggle on **Enable Kubernetes**.
 4. Choose your [cluster provisioning method](#cluster-provisioning-method).
-5. Select **Apply & Restart** to save the settings.
+5. Select **Apply** to save the settings.
 
 This sets up the images required to run the Kubernetes server as containers, and installs the `kubectl` command-line tool on your system at `/usr/local/bin/kubectl` (Mac) or `C:\Program Files\Docker\Docker\resources\bin\kubectl.exe` (Windows).
 
@@ -240,4 +240,4 @@ To turn off Kubernetes in Docker Desktop:
 1. From the Docker Desktop Dashboard, select the **Settings** icon.
 2. Select the **Kubernetes** tab.
 3. Deselect the **Enable Kubernetes** checkbox.
-4. Select **Apply & Restart** to save the settings. This stops and removes Kubernetes containers, and also removes the `/usr/local/bin/kubectl` command.
+4. Select **Apply** to save the settings. This stops and removes Kubernetes containers, and also removes the `/usr/local/bin/kubectl` command.
