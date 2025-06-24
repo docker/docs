@@ -16,7 +16,37 @@ The Docker MCP Toolkit enables seamless setup, management, and execution of cont
 - Zero manual setup: No dependency management, runtime configuration, or server setup required.
 - Functions as both an MCP server aggregator and a gateway for clients to access installed MCP servers.
 
+## How the MCP toolkit works
+
+MCP introduces two core concepts: MCP clients and MCP servers. 
+
+- MCP clients are typically embedded in LLM-based applications, such as
+  the Claude Desktop App. They request resources or actions.
+- MCP servers are launched by the client to perform the requested tasks,
+  using any necessary tools, languages, or processes.
+
+Docker standardizes the development, packaging, and distribution of
+applications, including MCP servers. By packaging MCP servers as containers,
+Docker eliminates issues related to isolation and environment differences. Users
+can run a container directly, without managing dependencies or configuring
+runtimes.
+
+Depending on the MCP server, the tools it provides may run within the same container
+as the server or in dedicated containers:
+
+
+{{< tabs group="" >}}
+{{< tab name="Single container">}}
+
 ![Visualisation of the MCP toolkit](/assets/images/mcp_servers.png)
+
+{{< /tab >}}
+{{< tab name="Separate containers">}}
+
+![Visualisation of the MCP toolkit](/assets/images/mcp_servers_2.png)
+
+{{< /tab >}}
+{{</tabs >}}
 
 ## Security
 
@@ -116,6 +146,13 @@ and add Claude Desktop as a client:
 
 1. From the **MCP Toolkit** menu, select the **Catalog** tab and find the **Puppeteer** server and add it.
 2. Repeat for the **GitHub** server.
+3. From the **Clients** tab, select **Connect** next to **Claude Desktop**. Restart 
+   Claude Desktop if it's running, and it can now access all the servers in the MCP Toolkit.
+4. Within Claude Desktop, run a test by submitting the following prompt using the Sonnet 3.5 model:
+
+   ```text
+   Take a screenshot of docs.docker.com and then invert the colors
+   ```
 3. From the **Clients** tab, select **Connect** next to **Claude Desktop**. Restart 
    Claude Desktop if it's running, and it can now access all the servers in the MCP Toolkit.
 4. Within Claude Desktop, run a test by submitting the following prompt using the Sonnet 3.5 model:
