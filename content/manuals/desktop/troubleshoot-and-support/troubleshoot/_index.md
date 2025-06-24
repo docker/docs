@@ -191,7 +191,7 @@ If you don't have a paid Docker subscription, create an issue on GitHub:
 
 > [!IMPORTANT]
 >
-> This tool has been deprecated in Docker Desktop version 4.43 and later.
+> This tool has been deprecated.
 
 ## Check the logs
 
