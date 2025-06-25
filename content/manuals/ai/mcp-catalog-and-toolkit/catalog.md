@@ -44,4 +44,11 @@ To use an MCP server from the catalog, see [MCP toolkit](toolkit.md).
 
 ## Contribute an MCP server to the catalog
 
-To add an MCP server to the Docker MCP catalog, fill out the Docker [MCP submission form](https://www.docker.com/products/mcp-catalog-and-toolkit/#get_updates).
+The MCP server registry is available at https://github.com/docker/mcp-registry. To submit an MCP server:
+follow the [contributing guidelines](https://github.com/docker/mcp-registry/blob/main/CONTRIBUTING.md).
+
+When your pull request is reviewed and approved, your MCP server is available in 24 hours on:
+
+- Docker Desktop's [MCP Toolkit feature](toolkit.md)
+- The [Docker MCP catalog](https://hub.docker.com/mcp)
+- The [Docker Hub](https://hub.docker.com/u/mcp) mcp namespace (for MCP servers built by Docker)
