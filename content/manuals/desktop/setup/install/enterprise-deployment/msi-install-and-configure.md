@@ -99,13 +99,13 @@ msiexec /i "DockerDesktop.msi" /L*V ".\msi.log" /quiet /norestart
 #### Install non-interactively with admin settings
 
 ```powershell
-msiexec /i "DockerDesktop.msi" /L*V ".\msi.log" /quiet /norestart ADMINSETTINGS="{"configurationFileVersion":2,"enhancedContainerIsolation":{"value":true,"locked":false}}" ALLOWEDORG="docker"
+msiexec /i "DockerDesktop.msi" /L*V ".\msi.log" /quiet /norestart ADMINSETTINGS="{"configurationFileVersion":2,"enhancedContainerIsolation":{"value":true,"locked":false}}" ALLOWEDORG="your-organization"
 ```
 
 #### Install interactively and allow users to switch to Windows containers without admin rights
 
 ```powershell
-msiexec /i "DockerDesktop.msi" /L*V ".\msi.log" /quiet /norestart ALLOWEDORG="docker" ALWAYSRUNSERVICE=1
+msiexec /i "DockerDesktop.msi" /L*V ".\msi.log" /quiet /norestart ALLOWEDORG="your-organization" ALWAYSRUNSERVICE=1
 ```
 
 #### Install with the passive display option
