@@ -88,8 +88,8 @@ You can now use the `docker model` command in the CLI and view and interact with
 1. Optional: To enable TCP support, set the port with the `DMR_RUNNER_PORT` environment variable.
 1. Optional: If you enabled TCP support, you can configure CORS allowed origins with the `DMR_ORIGINS` environment variable. Possible values are:
    - `*`: Allow all origins
-   - `-`: Deny all origins
    - Comma-separated list of allowed origins
+   - When unspecified, all origins are denied.
 
 ## Pull a model
 
