@@ -164,7 +164,6 @@ and add Claude Desktop as a client:
 
 You can interact with all your installed MCP servers in VS Code:
 
-1. In Docker Desktop, select **MCP Toolkit** and select the **Clients** tab. 
 1. Option 1: To enable the MCP Toolkit globally:
  
    1. Insert the following in your VS Code's User`settings.json`:
