@@ -3357,3 +3357,24 @@ x-tagGroups:
       - org-access-tokens
       - groups
       - invites
+/v2/namespaces/{namespace}/repositories/{repository}:
+    parameters:
+      - $ref: "#/components/parameters/namespace"
+      - $ref: "#/components/parameters/repository"
+    get:
+      summary: Gets repository info
+      description: |
+        PAT scope: `repo:public_read`
+        
+        Legacy endpoint: `/v2/repositories/{namespace}/{repository}/`
+      tags:
+        - repositories
+      responses:
+        "200":
+          description: Repository info
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/repository_info"
+        "404":
+          $ref: "#/components/responses/not_found"
