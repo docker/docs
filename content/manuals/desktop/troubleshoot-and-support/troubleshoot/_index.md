@@ -189,58 +189,9 @@ If you don't have a paid Docker subscription, create an issue on GitHub:
 
 ### Self-diagnose tool
 
-Docker Desktop contains a self-diagnose tool which can help you identify some common problems. 
-
-{{< tabs group="os" >}}
-{{< tab name="Windows" >}}
-1. Locate the `com.docker.diagnose` tool. 
-     
-   ```console
-   $ C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe
-   ```
-
-2. In PowerShell, run the self-diagnose tool:
-
-   ```console
-   $ & "C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe" gather
-   ```
-
-{{< /tab >}}
-{{< tab name="Mac" >}}
-
-1. Locate the `com.docker.diagnose` tool. 
-
-   ```console
-   $ /Applications/Docker.app/Contents/MacOS/com.docker.diagnose
-   ```
-
-2. Run the self-diagnose tool:
-
-   ```console
-   $ /Applications/Docker.app/Contents/MacOS/com.docker.diagnose gather
-   ```
-
-{{< /tab >}}
-{{< tab name="Linux" >}}
-
-1. Locate the `com.docker.diagnose` tool. 
-
-2. Run the self-diagnose tool:
-
-   ```console
-   $ /opt/docker-desktop/bin/com.docker.diagnose gather
-   ```
-
-{{< /tab >}}
-{{< /tabs >}}
-
-The tool runs a suite of checks and displays **PASS** or **FAIL** next to each check. If there are any failures, it highlights the most relevant at the end of the report.
-
-You can then create an issue on GitHub:
-
-- [For Linux](https://github.com/docker/desktop-linux/issues)
-- [For Mac](https://github.com/docker/for-mac/issues)
-- [For Windows](https://github.com/docker/for-win/issues)
+> [!IMPORTANT]
+>
+> This tool has been deprecated.
 
 ## Check the logs
 
