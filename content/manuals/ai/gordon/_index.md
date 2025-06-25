@@ -20,7 +20,8 @@ of the Docker ecosystem.
 
 ## What is Ask Gordon?
 
-Ask Gordon provides AI-powered assistance in Docker tools. It offers contextual help for tasks like:
+Ask Gordon provides AI-powered assistance in Docker tools and can act as a DevSecOps agent.
+It offers contextual help for tasks like:
 
 - Improving Dockerfiles
 - Running and troubleshooting containers
