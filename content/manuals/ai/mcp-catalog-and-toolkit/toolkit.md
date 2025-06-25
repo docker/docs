@@ -222,4 +222,4 @@ OAuth integration. For now, the MCP Toolkit only supports GitHub OAuth.
 1. Install the **GitHub Official** MCP server, see [Install an MCP server](#install-an-mcp-server).
 
 The MCP Toolkit now has access to your GitHub account. To revoke access, select **Revoke** in the **OAuth** tab.
-See an example in [Use the **GitHub Official** MCP server ](#example-use-the-github-official-mcp-server).
+See an example in [Use the **GitHub Official** MCP server](#example-use-the-github-official-mcp-server).
