@@ -32,7 +32,7 @@ To enable immutable tags for your repository:
    - **All tags are immutable**:  
      Tags cannot be updated to point to a different image after creation. This ensures consistency and prevents accidental changes. This includes the `latest` tag.
    - **Specific tags are immutable**:  
-     Define specific tags that cannot be updated after creation using RegEx values.
+     Define specific tags that cannot be updated after creation using regex values.
 6. Select **Save**.
 
 Once enabled, all tags are locked to their specific images, ensuring that each tag always points to the same image version and cannot be modified.
