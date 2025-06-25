@@ -1,6 +1,7 @@
 (?i)[A-Z]{2,}'?s
 Amazon
 Anchore
+Aleksandrov
 Apple
 Artifactory
 Azure
@@ -73,6 +74,7 @@ Intune
 iptables
 IPv[46]
 IPvlan
+isort
 Jamf
 JetBrains
 JFrog
@@ -124,6 +126,8 @@ PKG
 Postgres
 PowerShell
 Python
+Pyright
+pyright
 rollback
 rootful
 runc
