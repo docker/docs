@@ -59,12 +59,11 @@ Use these standard terms when referring to elements in Docker products:
 |---------------------|----------------------------------------------|
 | **button**          | A clickable action element (e.g., **Start**) |
 | **field**           | A place to enter text or select a value      |
-| **menu** / **menu item** | A dropdown or navigation option         |
-| **drop-down**       | A dropdown menu                              |
+| **menu** / **menu item** | A drop-down or navigation option         |
+| **drop-down**       | A drop-down menu  item                             |
 | **context switcher** | Specific to toggling on cloud mode          |
 | **tab**             | A selectable view within a window or page    |
 | **dialog**          | A popup window for confirmations or options  |
-| **pane**            | A resizable section within a window          |
 | **section**         | A logical grouping of content on a page      |
 | **list** / **list item** | A scrollable list of selectable entries |
 | **toggle**  | A binary control (on/off)               |
