@@ -10,9 +10,10 @@ linkTitle: Organization access tokens
 
 > [!WARNING]
 >
-> Organization access tokens (OATs) are incompatible with Docker Desktop.
+> Organization access tokens (OATs) are incompatible with Docker Desktop,
+> [Image Access Management (IAM)](/manuals/security/for-admins/hardened-desktop/image-access-management.md), and [Registry Access Management (RAM)](/manuals/security/for-admins/hardened-desktop/registry-access-management.md).
 >
-> If you use Docker Desktop, you must use personal
+> If you use Docker Desktop, IAM, or RAM, you must use personal
 > access tokens instead.
 
 An organization access token (OAT) is like a [personal access token
