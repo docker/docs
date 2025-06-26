@@ -45,7 +45,7 @@ key: value
 
 ### Input
 
-You can generate the input model by running docker compose config. This canonical YAML output serves as the input for Compose Bridge transformations. Within the templates, data from the `compose.yaml` is accessed using dot notation, allowing you to navigate through nested data structures. For example, to access the deployment mode of a service, you would use `service.deploy.mode`:
+You can generate the input model by running `docker compose config`. This canonical YAML output serves as the input for Compose Bridge transformations. Within the templates, data from the `compose.yaml` is accessed using dot notation, allowing you to navigate through nested data structures. For example, to access the deployment mode of a service, you would use `service.deploy.mode`:
 
  ```yaml
 # iterate over a yaml sequence
