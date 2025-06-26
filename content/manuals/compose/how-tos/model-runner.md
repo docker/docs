@@ -41,25 +41,31 @@ services:
       options:
         model: ai/smollm2
         context-size: 1024
+        runtime-flags: "--no-prefill-assistant"
 ```
 
 Notice the following:
 
-- In the `ai_runner` service:
+In the `ai_runner` service:
 
-  - `provider.type`: Specifies that the service is a `model` provider.
-  - `provider.options`: Specifies the options of the model. In our case, we want to use
-    `ai/smollm2`, and we set the context size to 1024 tokens.
+- `provider.type`: Specifies that the service is a `model` provider.
+- `provider.options`: Specifies the options of the mode:
+  - We want to use `ai/smollm2` model.
+  - We set the context size to `1024` tokens.
+    
+    > [!NOTE]
+    > Each model has its own maximum context size. When increasing the context length,
+    > consider your hardware constraints. In general, try to use the smallest context size
+    > possible for your use case.
+  - We pass the llama.cpp server `--no-prefill-assistant` parameter,
+    see [the available parameters](https://github.com/ggml-org/llama.cpp/blob/master/tools/server/README.md).
+ 
 
-     > [!NOTE]
-     > Each model has its own maximum context size. When increasing the context length,
-     > consider your hardware constraints. In general, try to use the smallest context size
-     > possible for your use case.
    
-- In the `chat` service:
+In the `chat` service:
    
-  -  `depends_on` specifies that the `chat` service depends on the `ai_runner` service. The
-     `ai_runner` service will be started before the `chat` service, to allow injection of model information to the `chat` service.
+-  `depends_on` specifies that the `chat` service depends on the `ai_runner` service. The
+   `ai_runner` service will be started before the `chat` service, to allow injection of model information to the `chat` service.
    
 ## How it works
 
