@@ -40,15 +40,27 @@ services:
       type: model
       options:
         model: ai/smollm2
+        context-size: 1024
 ```
 
-Notice the dedicated `provider` attribute in the `ai_runner` service.   
-This attribute specifies that the service is a model provider and lets you define options such as the name of the model to be used.
+Notice the following:
 
-There is also a `depends_on` attribute in the `chat` service.  
-This attribute specifies that the `chat` service depends on the `ai_runner` service.  
-This means that the `ai_runner` service will be started before the `chat` service to allow injection of model information to the `chat` service.
+- In the `ai_runner` service:
 
+  - `provider.type`: Specifies that the service is a `model` provider.
+  - `provider.options`: Specifies the options of the model. In our case, we want to use
+    `ai/smollm2`, and we set the context size to 1024 tokens.
+
+     > [!NOTE]
+     > Each model has its own maximum context size. When increasing the context length,
+     > consider your hardware constraints. In general, try to use the smallest context size
+     > possible for your use case.
+   
+- In the `chat` service:
+   
+  -  `depends_on` specifies that the `chat` service depends on the `ai_runner` service. The
+     `ai_runner` service will be started before the `chat` service, to allow injection of model information to the `chat` service.
+   
 ## How it works
 
 During the `docker compose up` process, Docker Model Runner automatically pulls and runs the specified model.  
@@ -61,6 +73,6 @@ In the example above, the `chat` service receives 2 environment variables prefix
 
 This lets the `chat` service to interact with the model and use it for its own purposes.
 
-## Reference
+## Related pages
 
 - [Docker Model Runner documentation](/manuals/ai/model-runner.md)

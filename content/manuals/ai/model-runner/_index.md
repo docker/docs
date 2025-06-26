@@ -385,3 +385,7 @@ The Docker Model CLI currently lacks consistent support for specifying models by
 ## Share feedback
 
 Thanks for trying out Docker Model Runner. Give feedback or report any bugs you may find through the **Give feedback** link next to the **Enable Docker Model Runner** setting.
+
+## Related pages
+
+- [Use Model Runner with Compose](/manuals/compose/how-tos/model-runner.md)
