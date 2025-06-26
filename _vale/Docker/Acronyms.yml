@@ -146,6 +146,7 @@ exceptions:
   - TTY
   - TXT
   - UDP
+  - UI
   - URI
   - URL
   - USB
