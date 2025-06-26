@@ -23,15 +23,17 @@ owners don't need to be member of an organization.
 
 ## Add a company owner
 
-1. Sign in to [Docker Home](https://app.docker.com) and select your company.
-1. Select **Admin Console**, then **Company owners**.
-1. Select **Add owner**.
-1. Specify the user's Docker ID to search for the user.
-1. After you find the user, select **Add company owner**.
+1. Sign in to the [Admin Console](https://admin.docker.com).
+2. Select your company on the **Choose profile** page.
+3. Select **Company owners**.
+4. Select **Add owner**.
+5. Specify the user's Docker ID to search for the user.
+6. After you find the user, select **Add company owner**.
 
 ## Remove a company owner
 
-1. Sign in to [Docker Home](https://app.docker.com) and select your company.
-1. Select **Admin Console**, then **Company owners**.
-1. Locate the company owner you want to remove and select the **Actions** menu.
-1. Select **Remove as company owner**.
+1. Sign in to the [Admin Console](https://admin.docker.com).
+2. Select your company on the **Choose profile** page.
+3. Select **Company owners**.
+4. Select the **Action** icon in the row of the company owner that your want to remove.
+5. Select **Remove as company owner**.

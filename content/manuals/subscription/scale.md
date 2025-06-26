@@ -48,13 +48,14 @@ subscription period.
 
 You can pre-purchase Docker Build Cloud build minutes in the Docker Build Cloud Dashboard:
 
-1. Sign in to [Docker Home](https://app.docker.com/) and choose
-your organization.
-1. Select **Build Cloud**, then **Build minutes**.
-1. Select **Add prepaid minutes**.
-1. Select your additional minute amount, then **Continue to payment**.
-1. Enter your payment details and billing address.
-1. Review your order and select **Pay**.
+1. Sign in to [Docker Home](https://app.docker.com/).
+2. Under Settings and administration, select **Billing**.
+3. On the plan and usage page, select **View build minutes**.
+    This will launch the Docker Build Cloud settings page.
+4. Select **Add minutes**.
+5. Select your additional minute amount, then **Continue to payment**.
+6. Enter your payment details and billing address.
+7. Review your order and select **Pay**.
 
 Your additional minutes will now display on the Build minutes page.
 

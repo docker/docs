@@ -2,8 +2,8 @@
 {{ $sso_navigation := `Navigate to the SSO settings page for your organization. Select **My Hub**, your organization, **Settings**, and then **Security**.` }}
 
 {{ if eq (.Get "product") "admin" }}
-  {{ $product_link = "[Docker Home](https://app.docker.com) and select your organization. Note that when an organization is part of a company, you must select the company and configure SSO for that organization at the company level. Each organization can have its own SSO configuration and domain, but it must be configured at the company level." }}
-  {{ $sso_navigation = "Select **Admin Console**, then **SSO and SCIM**." }}
+  {{ $product_link = "the [Admin Console](https://admin.docker.com)" }}
+  {{ $sso_navigation = "Select your organization or company from the **Choose profile** page, and then select **SSO and SCIM**. Note that when an organization is part of a company, you must select the company and configure SSO for that organization at the company level. Each organization can have its own SSO configuration and domain, but it must be configured at the company level." }}
 {{ end }}
 
 1. In {{ $product_link }}, select the verified domains you want to apply the connection to.

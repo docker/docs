@@ -37,7 +37,7 @@ aliases:
 
 Administrators can manage companies and organizations using the Docker Admin Console.
 
-The [Docker Admin Console](https://app.docker.com/admin) provides administrators with centralized observability, access management, and controls for their company and organizations. To provide these features, Docker uses the following hierarchy and roles.
+The [Docker Admin Console](https://admin.docker.com) provides administrators with centralized observability, access management, and controls for their company and organizations. To provide these features, Docker uses the following hierarchy and roles.
 
 ![Docker hierarchy](./images/docker-admin-structure.webp)
 

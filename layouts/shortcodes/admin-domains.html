@@ -2,8 +2,8 @@
 {{ $domain_navigation := `Navigate to the domain settings page for your organization. Select **My Hub**, your organization, **Settings**, and then **Security**.` }}
 
 {{ if eq (.Get "product") "admin" }}
-{{ $product_link = "[Docker Home](https://app.docker.com) and select your organization or company. Note that when an organization is part of a company, you must select the company and configure the domain for that organization at the company level. Each organization in a company can have its own domain, but it must be configured at the company level." }}
-{{ $domain_navigation = "Select **Admin Console**, then **Domain management**." }}
+{{ $product_link = "the [Admin Console](https://admin.docker.com)" }}
+{{ $domain_navigation = "Select your organization or company in the left navigation drop-down menu, and then select **Domain management**. Note that when an organization is part of a company, you must select the company and configure the domain for that organization at the company level. Each organization in a company can have its own domain, but it must be configured at the company level." }}
 {{ end }}
 
 
