@@ -32,7 +32,7 @@ To get started with Compose Bridge, you need to:
 2. Sign in to your Docker account.
 3. Navigate to the **Beta features** tab in **Settings**. 
 4. Select **Enable Compose Bridge**.
-5. Select **Apply & restart**.
+5. Select **Apply**.
 
 ## Feedback
 

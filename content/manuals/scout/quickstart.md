@@ -207,7 +207,7 @@ The classic image store doesn't support manifest lists,
 which is how the provenance attestations are attached to an image.
 
 Open **Settings** in Docker Desktop. Under the **General** section, make sure
-that the **Use containerd for pulling and storing images** option is checked, then select **Apply & Restart**.
+that the **Use containerd for pulling and storing images** option is checked, then select **Apply**.
 Note that changing image stores temporarily hides images and containers of the
 inactive image store until you switch back.
 
