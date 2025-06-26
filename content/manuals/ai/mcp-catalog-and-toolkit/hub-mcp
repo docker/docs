@@ -115,8 +115,7 @@ $ docker ai "What is the most secure image I can use to run a node.js applicatio
 $ docker ai "Can you help me update my Dockerfile to use a docker hardened image instead of the current one"
 ```
 > [!NOTE]
-> To access Docker Hardened Images, a subscription is required. If you're interested in using Docker Hardened Images, please visit:
- [Docker Hardened Images](https://www.docker.com/products/hardened-images/) 
+> To access Docker Hardened Images, a subscription is required. If you're interested in using Docker Hardened Images, visit [Docker Hardened Images](https://www.docker.com/products/hardened-images/).
 
 
 ## Reference
