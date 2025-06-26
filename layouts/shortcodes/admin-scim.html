@@ -3,8 +3,8 @@
    - Organization: Select **My Hub**, your organization, **Settings**, and then **Security**.` }}
 
 {{ if eq (.Get "product") "admin" }}
-  {{ $product_link = "[Docker Home](https://app.docker.com/) and select your organization." }}
-  {{ $sso_navigation = "Select **Admin Console**, then **SSO and SCIM**." }}
+{{ $product_link = "the [Admin Console](https://admin.docker.com)" }}
+{{ $sso_navigation = "Select your organization or company in the left navigation drop-down menu, and then select **SSO and SCIM.**" }}
 {{ end }}
 
 1. Sign in to {{ $product_link }}.

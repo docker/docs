@@ -67,10 +67,10 @@ This page provides details on new features, enhancements, known issues, and bug 
 
 ### New
 
-- Administrators can now view [organization Insights](/manuals/admin/organization/insights.md).
+- Administrators can now view [organization insights](/manuals/admin/organization/insights.md) (Early Access).
 
 ## 2024-07-17
 
 ### New
 
-- You can now centrally access and manage Docker products in [Docker Home](https://app.docker.com).
+- You can now centrally access and manage Docker products in [Docker Home](https://app.docker.com) (Early Access).

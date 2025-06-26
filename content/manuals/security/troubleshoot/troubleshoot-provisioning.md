@@ -43,8 +43,8 @@ assignment does not reflect changes.
 
 #### Disable JIT provisioning (recommended)
 
-1. Sign in to [Docker Home](https://app.docker.com/).
-1. Select **Admin Console**, then **SSO and SCIM**.
+1. Sign in to the Docker [Admin Console](https://app.docker.com/admin).
+1. Go to your organization's **Settings** > **Security** > **SSO and SCIM**.
 1. Find the relevant SSO connection.
 1. Select the **actions menu** and choose **Edit**.
 1. Disable **Just-in-Time provisioning**.

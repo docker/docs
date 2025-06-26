@@ -1,9 +1,8 @@
 {{ $product_link := "[Docker Hub](https://hub.docker.com)" }}
 {{ $sso_navigation := "Select **My Hub**, your organization, and then **Settings**." }}
-
 {{ if eq (.Get "product") "admin" }}
-  {{ $product_link = "[Docker Home](https://app.docker.com) and select your organization. Note that when an organization is part of a company, you must select the company and configure SSO for that organization at the company level. Each organization can have its own SSO configuration and domain, but it must be configured at the company level." }}
-  {{ $sso_navigation = "Select **Admin Console**, then **SSO and SCIM**." }}
+  {{ $product_link = "the [Admin Console](https://app.docker.com/admin)" }}
+  {{ $sso_navigation = "Select your company from the **Choose profile** page, and then select **SSO and SCIM**." }}
 {{ end }}
 
 ### Connect an organization

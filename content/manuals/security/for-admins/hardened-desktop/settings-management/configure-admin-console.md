@@ -26,18 +26,18 @@ ensure users authenticate to your organization.
 
 ## Create a settings policy
 
-1. Sign in to [Docker Home](https://app.docker.com/) and select
+1. Go to the [Docker Admin Console](https://app.docker.com/admin) and select
 your organization.
-1. Select **Admin Console**, then **Desktop Settings Management**.
-1. Select **Create a settings policy**.
-1. Provide a name and optional description.
+2. Under **Docker Desktop**, select **Settings Management**.
+3. Select **Create a settings policy**.
+4. Provide a name and optional description.
 
       > [!TIP]
       >
       > You can upload an existing `admin-settings.json` file to pre-fill the form.
       Admin Console policies override local `admin-settings.json` files.
 
-1. Choose who the policy applies to:
+5. Choose who the policy applies to:
    - All users
    - Specific users
 
@@ -46,7 +46,7 @@ your organization.
       > User-specific policies override the global default. Test your policy with
       a few users before rolling it out globally.
 
-1. Configure the state for each setting:
+6. Configure the state for each setting:
    - **User-defined**: Users can change the setting.
    - **Always enabled**: Setting is on and locked.
    - **Enabled**: Setting is on but can be changed.
@@ -57,7 +57,7 @@ your organization.
       >
       > For a complete list of available settings, their supported platforms, and which configuration methods they work with, see the [Settings reference](settings-reference.md).
 
-1. Select **Create**.
+7. Select **Create**.
 
 To apply the policy:
 
