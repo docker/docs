@@ -112,5 +112,5 @@ To update the Docker Compose plugin, run the following commands:
 
 ## What's next?
 
-- [Understand how Compose works](compose-application-model.md)
-- [Try the Quickstart guide](../gettingstarted.md)
+- [Understand how Compose works](/manuals/compose/intro/compose-application-model.md)
+- [Try the Quickstart guide](/manuals/compose/gettingstarted.md)

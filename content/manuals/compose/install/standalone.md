@@ -78,5 +78,5 @@ on Microsoft Windows Server](/manuals/engine/install/binaries.md#install-server-
 
 ## What's next?
 
-- [Understand how Compose works](compose-application-model.md)
-- [Try the Quickstart guide](../gettingstarted.md)
+- [Understand how Compose works](/manuals/compose/intro/compose-application-model.md)
+- [Try the Quickstart guide](/manuals/compose/gettingstarted.md)

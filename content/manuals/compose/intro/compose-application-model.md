@@ -1,6 +1,5 @@
 ---
-title: How Compose works
-linkTitle: "How Docker Compose Works:" Model, File, and CLI
+titleTitle: How Compose works
 weight: 10
 description: Learn how Docker Compose works, from the application model to Compose files and CLI, whilst following a detailed example.
 keywords: docker compose, compose.yaml, docker compose model, compose cli, multi-container application, compose example 
@@ -16,23 +15,13 @@ The Compose file, or `compose.yaml` file, follows the rules provided by the [Com
 
 {{< accordion title="The Compose application model" >}}
 
-#### Services
-
 Computing components of an application are defined as [services](/reference/compose-file/services.md). A service is an abstract concept implemented on platforms by running the same container image, and configuration, one or more times.
-
-#### Networks
 
 Services communicate with each other through [networks](/reference/compose-file/networks.md). In the Compose Specification, a network is a platform capability abstraction to establish an IP route between containers within services connected together.
 
-#### Volumes
-
 Services store and share persistent data into [volumes](/reference/compose-file/volumes.md). The Specification describes such a persistent data as a high-level filesystem mount with global options.
 
-#### Configs
-
 Some services require configuration data that is dependent on the runtime or platform. For this, the Specification defines a dedicated [configs](/reference/compose-file/configs.md) concept. From inside the container, configs behave like volumes—they’re mounted as files. However, configs are defined differently at the platform level.
-
-#### Secrets
 
 A [secret](/reference/compose-file/secrets.md) is a specific flavor of configuration data for sensitive data that should not be exposed without security considerations. Secrets are made available to services as files mounted into their containers, but the platform-specific resources to provide sensitive data are specific enough to deserve a distinct concept and definition within the Compose Specification.
 

@@ -35,9 +35,9 @@ grid:
   icon: polyline
   link: /reference/compose-file
 - title: Use Compose Bridge
-  description:  transform your Compose configuration file into configuration files for different platforms, such as Kubernetes.
+  description: Transform your Compose configuration file into configuration files for different platforms, such as Kubernetes.
   icon: move_down
-  link: /compose/bridge/_index.md
+  link: /compose/bridge
 - title: Browse common FAQs
   description: Explore general FAQs and find out how to give feedback.
   icon: help
