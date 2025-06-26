@@ -1,10 +1,11 @@
 ---
 datafolder: compose-cli
-datafile: docker_compose_alpha_publish
-title: docker compose alpha publish
+datafile: docker_compose_publish
+title: docker compose publish
 layout: cli
 aliases:
-- /engine/reference/commandline/compose_alpha_publish/
+ - /reference/cli/docker/compose/alpha/publish/
+ - /engine/reference/commandline/compose_alpha_publish/
 ---
 
 <!--
