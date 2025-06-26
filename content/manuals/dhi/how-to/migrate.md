@@ -9,7 +9,9 @@ keywords: migrate dockerfile, hardened base image, multi-stage build, non-root c
 {{< summary-bar feature_name="Docker Hardened Images" >}}
 
 This guide helps you migrate your existing Dockerfiles to use Docker Hardened
-Images (DHIs). DHIs are minimal and security-focused, which may require
+Images (DHIs) [manually](#step-1-update-the-base-image-in-your-dockerfile),
+or with [Gordon](#use-gordon).
+DHIs are minimal and security-focused, which may require
 adjustments to your base images, build process, and runtime configuration.
 
 This guide focuses on migrating framework images, such as images for building
@@ -241,21 +243,9 @@ ENTRYPOINT [ "python", "/app/image.py" ]
 {{< /tab >}}
 {{< /tabs >}}
 
-### Use Gordon AI
+### Use Gordon
 
-Alternatively, you can request assistance to
-[Gordon](/manuals/ai/gordon/_index.md), Docker's AI feature, to act as a DevSecOps Agent 
-and migrate your Dockerfile:
+Alternatively, you can request assistance to 
+[Gordon](/manuals/ai/gordon/_index.md), Docker's AI feature, to migrate your Dockerfile:
 
-1. In the terminal, navigate to the directory containing your Dockerfile.
-1. Run:
-   
-   ```bash
-   docker ai "Migrate my dockerfile to DHI"
-   ```
-
-1. Follow the conversation with Gordon. When it requests access to the filesystem, 
-   type `yes` to enable it to update the file.
-
-> [!IMPORTANT]
-> As with any AI tool, you must verify Gordon's edits and test your image. 
+{{% include "gordondhi.md" %}}

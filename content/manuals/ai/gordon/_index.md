@@ -20,13 +20,14 @@ of the Docker ecosystem.
 
 ## What is Ask Gordon?
 
-Ask Gordon provides AI-powered assistance in Docker tools and can act as a DevSecOps agent.
+Ask Gordon provides AI-powered assistance in Docker tools.
 It offers contextual help for tasks like:
 
 - Improving Dockerfiles
 - Running and troubleshooting containers
 - Interacting with your images and code
 - Finding vulnerabilities or configuration issues
+- Migrating a Dockerfile to use [Docker Hardened Images](/manuals/dhi/_index.md)
 
 It understands your local environment, including source code, Dockerfiles, and images, to provide personalized and actionable guidance.
 
@@ -199,7 +200,14 @@ across several dimensions:
 
 ### Migrate a Dockerfile to DHI
 
-See [Use Gordon AI](/manuals/dhi/how-to/migrate.md#use-gordon-ai) in the DHI section.
+Migrating your Dockerfile to use [Docker Hardened Images](/manuals/dhi/_index.md) helps you build
+more secure, minimal, and production-ready containers. DHIs are designed to
+reduce vulnerabilities, enforce best practices, and simplify compliance, making
+them a strong foundation for secure software supply chains.
+
+To request Gordon's help for the migration:
+
+{{% include "gordondhi.md" %}}
 
 ## Disable Ask Gordon
 
