@@ -37,12 +37,11 @@ The organization owner can also add additional organization owners to help them 
 {{< tabs >}}
 {{< tab name="Admin Console" >}}
 
-1. Sign in to [Docker Home](https://app.docker.com) and select your
-organization.
-1. Select **Admin Console**, then **Teams**.
-1. Select **Create team**.
-1. Fill out your team's information and select **Create**.
-1. [Add members to your team](members.md#add-a-member-to-a-team).
+1. In Admin Console, select your organization.
+2. In the **User management** section, select **Teams**.
+3. Select **Create team**.
+4. Fill out your team's information and select **Create**.
+5. [Add members to your team](members.md#add-a-member-to-a-team).
 
 {{< /tab >}}
 {{< tab name="Docker Hub" >}}
@@ -50,10 +49,10 @@ organization.
 {{% include "hub-org-management.md" %}}
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
-1. Select **My Hub** and choose your organization.
-1. Select the **Teams** and then select **Create Team**.
-1. Fill out your team's information and select **Create**.
-1. [Add members to your team](members.md#add-a-member-to-a-team).
+2. Select **My Hub** and choose your organization.
+3. Select the **Teams** and then select **Create Team**.
+4. Fill out your team's information and select **Create**.
+5. [Add members to your team](members.md#add-a-member-to-a-team).
 
 {{< /tab >}}
 {{< /tabs >}}
@@ -68,11 +67,11 @@ access. Note that organization owners have full administrative access to all rep
 To give a team access to a repository:
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
-1. Select **My Hub** and choose your organization.
-1. Select the **Teams** and select the team that you'd like to configure repository access to.
-1. Select the **Permissions** tab and select a repository from the
+2. Select **My Hub** and choose your organization.
+3. Select the **Teams** and select the team that you'd like to configure repository access to.
+4. Select the **Permissions** tab and select a repository from the
    **Repository** drop-down.
-1. Choose a permission from the **Permissions** drop-down list and select
+5. Choose a permission from the **Permissions** drop-down list and select
    **Add**.
 
 Organization owners can also assign members the editor role to grant partial administrative access. See [Roles and permissions](../../security/for-admins/roles-and-permissions.md) for more about the editor role.
@@ -112,9 +111,9 @@ you automatically have "Read-only" permissions:
 To view a team's permissions across all repositories:
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
-1. Select **My Hub** and choose your organization.
-1. Select **Teams** and choose your team name.
-1. Select the **Permissions** tab, where you can view the repositories this team can access.
+2. Select **My Hub** and choose your organization.
+3. Select **Teams** and choose your team name.
+4. Select the **Permissions** tab, where you can view the repositories this team can access.
 
 ## Delete a team
 
@@ -123,12 +122,11 @@ Organization owners can delete a team in Docker Hub or Admin Console. When you r
 {{< tabs >}}
 {{< tab name="Admin Console" >}}
 
-1. Sign in to [Docker Home](https://app.docker.com/) and select your
-organization.
-1. Select **Admin Console**, then **Teams**.
-1. Select the **Actions** icon next to the name of the team you want to delete.
-1. Select **Delete team**.
-1. Review the confirmation message, then select **Delete**.
+1. In the [Admin Console](https://app.docker.com/admin), select your organization.
+2. In the **User management** section, select **Teams**.
+3. Select the **Actions** icon next to the name of the team you want to delete.
+4. Select **Delete team**.
+5. Review the confirmation message, then select **Delete**.
 
 {{< /tab >}}
 {{< tab name="Docker Hub" >}}
@@ -136,12 +134,12 @@ organization.
 {{% include "hub-org-management.md" %}}
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
-1. Select **My Hub** and choose your organization.
-1. Select **Teams**.
-1. Select the name of the team that you want to delete.
-1. Select **Settings**.
-1. Select **Delete Team**.
-1. Review the confirmation message, then select **Delete**.
+2. Select **My Hub** and choose your organization.
+3. Select **Teams**.
+4. Select the name of the team that you want to delete.
+5. Select **Settings**.
+6. Select **Delete Team**.
+7. Review the confirmation message, then select **Delete**.
 
 {{< /tab >}}
 {{< /tabs >}}

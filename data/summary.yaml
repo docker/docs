@@ -173,6 +173,9 @@ Docker Scout health scores:
   availability: Beta
 Docker Scout Mount Permissions:
   requires: Docker Desktop [4.34.0](/manuals/desktop/release-notes.md#4340) and later
+Domain audit:
+  subscription: [Business]
+  for: Administrators
 Domain management:
   subscription: [Business]
   for: Administrators

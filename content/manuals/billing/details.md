@@ -20,20 +20,19 @@ The billing information provided appears on all your billing invoices. The email
 
 To update your billing information:
 
-1. Sign in to [Docker Home](https://app.docker.com/) and select your
-organization.
-1. Select **Billing**.
-1. Select **Billing information** from the left-hand navigation.
-1. On your billing information card, select **Change**.
-1. Update your billing contact and billing address information.
-1. Optional. To add or update a VAT ID, select the **I'm purchasing as a business** checkbox and enter your Tax ID.
+1. Sign in to [Docker Home](https://app.docker.com/).
+2. Under Settings and administration, select **Billing**.
+3. Select **Billing information** from the left-hand navigation.
+4. On your billing information card, select **Change**.
+5. Update your billing contact and billing address information.
+6. Optional. To add or update a VAT ID, select the **I'm purchasing as a business** checkbox and enter your Tax ID.
 
     > [!IMPORTANT]
     >
     > Your VAT number must include your country prefix. For example, if you are
     entering a VAT number for Germany, you would enter `DE123456789`.
 
-1. Select **Update**.
+7. Select **Update**.
 
 {{< /tab >}}
 {{< tab name="Legacy Docker subscription" >}}
@@ -41,16 +40,17 @@ organization.
 To update your billing information:
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
-1. Select your organization, then select **Billing**.
-1. Select **Billing Address** and enter your updated billing information.
-1. Optional. To add or update a VAT ID, enter your **Tax ID/VAT**.
+2. Select your avatar in the top-right corner.
+3. From the drop-down menu, select **Billing**.
+4. Select **Billing Address** and enter your updated billing information.
+5. Optional. To add or update a VAT ID, enter your **Tax ID/VAT**.
 
     > [!IMPORTANT]
     >
     > Your VAT number must include your country prefix. For example, if you are
     entering a VAT number for Germany, you would enter `DE123456789`.
 
-1. Select **Submit**.
+6. Select **Submit**.
 
 {{< /tab >}}
 {{< /tabs >}}
@@ -66,20 +66,19 @@ To update your billing information:
 
 To update your billing information:
 
-1. Sign in to [Docker Home](https://app.docker.com/) and select your
-organization.
-1. Select **Billing**.
-1. Select **Billing information** from the left-hand navigation.
-1. On your billing information card, select **Change**.
-1. Update your billing contact and billing address information.
-1. Optional. To add or update a VAT ID, select the **I'm purchasing as a business** checkbox and enter your Tax ID.
+1. Sign in to [Docker Home](https://app.docker.com/).
+2. Under Settings and administration, select **Billing**.
+3. Select **Billing information** from the left-hand navigation.
+4. On your billing information card, select **Change**.
+5. Update your billing contact and billing address information.
+6. Optional. To add or update a VAT ID, select the **I'm purchasing as a business** checkbox and enter your Tax ID.
 
     > [!IMPORTANT]
     >
     > Your VAT number must include your country prefix. For example, if you are
     entering a VAT number for Germany, you would enter `DE123456789`.
 
-1. Select **Update**.
+7. Select **Update**.
 
 {{< /tab >}}
 {{< tab name="Legacy Docker subscription" >}}
@@ -87,16 +86,18 @@ organization.
 To update your billing information:
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
-1. Select your organization, then select **Billing**.
-1. Select **Billing Address**.
-1. Optional. To add or update a VAT ID, enter your **Tax ID/VAT**.
+2. Select your avatar in the top-right corner.
+3. From the drop-down menu select **Billing**.
+4. Select the organization that you want to change the payment method for.
+5. Select **Billing Address**.
+6. Optional. To add or update a VAT ID, enter your **Tax ID/VAT**.
 
     > [!IMPORTANT]
     >
     > Your VAT number must include your country prefix. For example, if you are
     entering a VAT number for Germany, you would enter `DE123456789`.
 
-1. Select **Submit**.
+7. Select **Submit**.
 
 {{< /tab >}}
 {{< /tabs >}}
@@ -110,8 +111,7 @@ Docker sends the following billing-related emails:
 - Notifications of credit or debit card payment failures.
 - Notifications of credit or debit card expiration.
 - Confirmation of a cancelled subscription
-- Reminders of subscription renewals for annual subscribers. This is sent 14
-days before the renewal date.
+- Reminders of subscription renewals for annual subscribers. This is sent 14 days before the renewal date.
 
 You can update the email address that receives billing invoices at any time.
 
@@ -122,12 +122,11 @@ You can update the email address that receives billing invoices at any time.
 
 To update your billing email address:
 
-1. Sign in to [Docker Home](https://app.docker.com/) and select your
-organization.
-1. Select **Billing**.
-1. Select **Billing information** from the left-hand navigation.
-1. On your billing information card, select **Change**.
-1. Update your billing contact information and select **Update**.
+1. Sign in to [Docker Home](https://app.docker.com/).
+2. Under Settings and administration, select **Billing**.
+3. Select **Billing information** from the left-hand navigation.
+4. On your billing information card, select **Change**.
+5. Update your billing contact information and select **Update**.
 
 {{< /tab >}}
 {{< tab name="Legacy Docker subscription" >}}
@@ -135,10 +134,11 @@ organization.
 To update your billing email address:
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
-1. Select your organization, then select **Billing**.
-1. Select **Billing Address**.
-1. Update the email address in the **Billing contact** section.
-1. Select **Submit**.
+2. Select your avatar in the top-right corner.
+3. From the drop-down menu select **Billing**.
+4. Select **Billing Address**.
+5. Update the email address in the **Billing contact** section.
+6. Select **Submit**.
 
 {{< /tab >}}
 {{< /tabs >}}
@@ -150,12 +150,11 @@ To update your billing email address:
 
 To update your billing email address:
 
-1. Sign in to [Docker Home](https://app.docker.com/) and select
-your organization.
-1. Select **Billing**.
-1. Select **Billing information** from the left-hand navigation.
-1. On your billing information card, select **Change**.
-1. Update your billing contact information and select **Update**.
+1. Sign in to [Docker Home](https://app.docker.com/).
+2. Under Settings and administration, select **Billing**.
+3. Select **Billing information** from the left-hand navigation.
+4. On your billing information card, select **Change**.
+5. Update your billing contact information and select **Update**.
 
 {{< /tab >}}
 {{< tab name="Legacy Docker subscription" >}}
@@ -163,11 +162,12 @@ your organization.
 To update your billing email address:
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
-1. Select your organization, then select **Billing**.
-1. Select the name of the organization.
-1. Select **Billing Address**.
-1. Update the email address in the **Billing contact** section.
-1. Select **Submit**.
+2. Select your avatar in the top-right corner.
+3. From the drop-down menu select **Billing**.
+4. Select the name of the organization.
+5. Select **Billing Address**.
+6. Update the email address in the **Billing contact** section.
+7. Select **Submit**.
 
 {{< /tab >}}
 {{< /tabs >}}

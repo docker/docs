@@ -85,9 +85,7 @@ If the user is a member of your organization, you can remove the user from your 
 
 ### How do I manage settings for a user account?
 
-You can manage your account settings anytime when you sign in to your [Docker account](https://app.docker.com/login). Select your avatar in the top-right navigation, then select **My Account**.
-
-You can also access this menu from any Docker web applications when you're signed in to your account. See [Manage your Docker account](/accounts/manage-account). If your account is associated with an organization that uses SSO, you may have limited access to the settings that you can control.
+You can manage your account settings anytime when you sign in to your [Docker account](https://app.docker.com/login). In Docker Home, select your avatar in the top-right navigation, then select **My Account**. You can also access this menu from any Docker web applications when you're signed in to your account. See [Manage your Docker account](/accounts/manage-account). If your account is associated with an organization that uses SSO, you may have limited access to the settings that you can control.
 
 ### How do I add an avatar to my Docker account?
 
