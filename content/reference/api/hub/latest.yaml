@@ -40,9 +40,9 @@ tags:
       - `X-RateLimit-Remaining` - The remaining amount of calls within the limit period.
       - `X-RateLimit-Reset` - The unix timestamp of when the remaining resets.
 
-      If you have hit the limit, you will receive a response status of `429` and the `X-Retry-After` header in the response.
+      If you have hit the limit, you will receive a response status of `429` and the `Retry-After` header in the response.
 
-      The `X-Retry-After` header is a unix timestamp of when you can call the API again.
+      The [`Retry-After` header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Retry-After) specifies the number of seconds to wait until you can call the API again.
 
       **Note**: These rate limits are separate from anti-abuse and Docker Hub download, or pull rate limiting.
       To learn more about Docker Hub pull rate limiting, see [Usage and limits](https://docs.docker.com/docker-hub/usage/).

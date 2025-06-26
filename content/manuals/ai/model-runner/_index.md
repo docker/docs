@@ -16,6 +16,22 @@ aliases:
 
 {{< summary-bar feature_name="Docker Model Runner" >}}
 
+Docker Model Runner makes it easy to manage, run, and
+deploy AI models using Docker. Designed for developers,
+Docker Model Runner streamlines the process of pulling, running, and serving
+large language models (LLMs) and other AI models directly from Docker Hub or any
+OCI-compliant registry.
+
+With seamless integration into Docker Desktop and Docker
+Engine, you can serve models via OpenAI-compatible APIs, package GGUF files as
+OCI Artifacts, and interact with models from both the command line and graphical
+interface.
+
+Whether you're building generative AI applications, experimenting with machine
+learning workflows, or integrating AI into your software development lifecycle,
+Docker Model Runner provides a consistent, secure, and efficient way to work
+with AI models locally.
+
 ## Key features
 
 - [Pull and push models to and from Docker Hub](https://hub.docker.com/u/ai)

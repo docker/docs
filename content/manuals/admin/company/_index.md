@@ -33,7 +33,7 @@ grid:
 - title: Domain management
   description: Add and verify your domains.
   icon: domain_verification
-  link: /admin/company/settings/domains/
+  link: /security/for-admins/domain-management/
 - title: FAQs
   description: Explore common company FAQs.
   link: /faq/admin/company-faqs/
