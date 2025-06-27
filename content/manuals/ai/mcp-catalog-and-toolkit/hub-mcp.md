@@ -27,6 +27,83 @@ The Docker Hub MCP Server is a Model Context Protocol (MCP) server that interfac
 > [!TIP]
 > By default, the Gordon [client](#install-an-mcp-client) is enabled,
 > which means Gordon can automatically interact with your MCP servers.
+>
+## Use Claude Desktop as a client
+
+1. Add the Docker Hub MCP Server configuration to your `claude_desktop_config.json`:
+
+#### For public repositories only:
+
+   - `/FULL/PATH/TO/YOUR/docker-hub-mcp-server` - The complete path to where you cloned this repository
+```json
+{
+  "mcpServers": {
+    "docker-hub": {
+      "command": "node",
+      "args": ["/FULL/PATH/TO/YOUR/docker-hub-mcp-server/dist/index.js", "--transport=stdio"]
+    }
+  }
+}
+```
+#### For authenticated access (recommended):
+ Replace the following values:
+   - `YOUR_DOCKER_HUB_USERNAME` - Your Docker Hub username
+   - `YOUR_DOCKER_HUB_PERSONAL_ACCESS_TOKEN` - Your Docker Hub Personal Access Token
+  - `/FULL/PATH/TO/YOUR/docker-hub-mcp-server` - The complete path to where you cloned this 
+
+```json
+{
+  "mcpServers": {
+    "docker-hub": {
+      "command": "node",
+      "args": ["/FULL/PATH/TO/YOUR/docker-hub-mcp-server/dist/index.js", "--transport=stdio", "--username=YOUR_DOCKER_HUB_USERNAME"],
+      "env": {
+        "HUB_PAT_TOKEN": "YOUR_DOCKER_HUB_PERSONAL_ACCESS_TOKEN"
+      }
+    }
+  }
+}
+```
+2. Save the configuration file and completely restart Claude Desktop for the changes to take effect.
+
+## Usage with VS Code
+1. Add the Docker Hub MCP Server configuration to your User Settings (JSON) file in VS Code. You can do this by opening the `Command Palette` and typing `Preferences: Open User Settings (JSON)`.
+
+#### For public repositories only:
+
+   - `/FULL/PATH/TO/YOUR/docker-hub-mcp-server` - The complete path to where you cloned this repository
+```json
+{
+  "mcpServers": {
+    "docker-hub": {
+      "command": "node",
+      "args": ["/FULL/PATH/TO/YOUR/docker-hub-mcp-server/dist/index.js", "--transport=stdio"]
+    }
+  }
+}
+```
+#### For authenticated access (recommended):
+ Replace the following values:
+   - `YOUR_DOCKER_HUB_USERNAME` - Your Docker Hub username
+   - `YOUR_DOCKER_HUB_PERSONAL_ACCESS_TOKEN` - Your Docker Hub Personal Access Token
+  - `/FULL/PATH/TO/YOUR/docker-hub-mcp-server` - The complete path to where you cloned this 
+
+```json
+{
+  "mcpServers": {
+    "docker-hub": {
+      "command": "node",
+      "args": ["/FULL/PATH/TO/YOUR/docker-hub-mcp-server/dist/index.js", "--transport=stdio"],
+      "env": {
+        "HUB_USERNAME": "YOUR_DOCKER_HUB_USERNAME",
+        "HUB_PAT_TOKEN": "YOUR_DOCKER_HUB_PERSONAL_ACCESS_TOKEN"
+      }
+    }
+  }
+}
+```
+2. Open the `Command Palette` and type `MCP: List Servers`.
+3. Select `docker-hub` and select `Start Server`.
 
 ## Usage examples
 
