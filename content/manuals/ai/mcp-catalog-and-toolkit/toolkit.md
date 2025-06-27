@@ -83,7 +83,8 @@ Security at runtime is enforced through resource and access limitations:
 3. Select **Apply & restart**.
 
 >[!NOTE]
->If you have the MCP Toolkit _extension_ installed, you can uninstall it.
+>This feature started as the MCP Toolkit _extension_. This exentension is now deprecated
+>and should be uninstalled.
 
 ## Install an MCP server
 
