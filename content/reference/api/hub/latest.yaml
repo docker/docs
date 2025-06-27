@@ -23,7 +23,7 @@ tags:
   - name: changelog
     x-displayName: Changelog
     description: |
-      See the [Changelog](/reference/api/hub/latest-changelog) for a summary of changes across Docker Hub API versions.
+      See the [Changelog](/reference/api/hub/changelog) for a summary of changes across Docker Hub API versions.
   - name: resources
     x-displayName: Resources
     description: |
@@ -823,6 +823,7 @@ paths:
       - $ref: "#/components/parameters/namespace"
       - $ref: "#/components/parameters/repository"
     get:
+      operationId: ListRepositoryTags
       summary: List repository tags
       tags:
         - repositories
@@ -867,6 +868,7 @@ paths:
       - $ref: "#/components/parameters/repository"
       - $ref: "#/components/parameters/tag"
     get:
+      operationId: GetRepositoryTag
       summary: Read repository tag
       tags:
         - repositories
