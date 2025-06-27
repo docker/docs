@@ -1,0 +1,12 @@
+command: docker cloud accounts
+short: Prints available Docker Cloud accounts
+usage: docker cloud accounts
+pname: docker cloud
+plink: docker_cloud.yaml
+options: []
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false

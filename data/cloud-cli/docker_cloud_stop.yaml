@@ -1,0 +1,23 @@
+command: docker cloud stop
+short: Stop a Docker Cloud session
+usage: docker cloud stop [OPTIONS]
+pname: docker cloud
+plink: docker_cloud.yaml
+options:
+  - option: force
+    shorthand: f
+    value_type: bool
+    default_value: "false"
+    description: Don't prompt for confirmation
+    deprecated: false
+    hidden: false
+    experimental: false
+    experimentalcli: false
+    kubernetes: false
+    swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
