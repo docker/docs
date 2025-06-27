@@ -795,7 +795,7 @@ third-party or unvetted plugins from being installed.
     - **Beta** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
     - Settings Management: `enableDockerAI` setting in the [`admin-settings.json` file](/manuals/security/for-admins/hardened-desktop/settings-management/configure-json-file.md)
 
-### Enable host-side TCP support
+#### Enable host-side TCP support
 
 | Default value | Accepted values | Format   |
 |---------------|-----------------|----------|
@@ -808,10 +808,35 @@ third-party or unvetted plugins from being installed.
     - **Beta** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
     - Settings Management: `enableDockerAI` setting in the [`admin-settings.json` file](/manuals/security/for-admins/hardened-desktop/settings-management/configure-json-file.md)
     
-
 > [!NOTE]
 >
 > This setting requires Docker Model Runner setting to be enabled first.
+
+##### Port
+
+| Default value | Accepted values | Format  |
+|---------------|-----------------|---------|
+| 12434         | Integer         | Integer |
+
+- **Description:** Specifies the exposed TCP port.
+- **OS:** {{< badge color=blue text="All" >}}
+- **Use case:** Connect to the Model Runner via TCP.
+- **Configure this setting with:**
+    - **Beta features** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
+    - Settings Management: `enableInferenceTCP` setting in the [`admin-settings.json` file](/manuals/security/for-admins/hardened-desktop/settings-management/configure-json-file.md)
+
+##### CORS Allowed Origins
+
+| Default value | Accepted values                                                                 | Format |
+|---------------|---------------------------------------------------------------------------------|--------|
+| Empty string  | Empty string to deny all,`*` to accept all, or a list of comma-separated values | String |
+
+- **Description:** Specifies the allowed CORS origins.
+- **OS:** {{< badge color=blue text="All" >}}
+- **Use case:** Integration with a web app.
+- **Configure this setting with:**
+    - **Beta features** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
+    - Settings Management: `enableInferenceCORS` setting in the [`admin-settings.json` file](/manuals/security/for-admins/hardened-desktop/settings-management/configure-json-file.md)
 
 ### Enable Docker MCP Toolkit
 
