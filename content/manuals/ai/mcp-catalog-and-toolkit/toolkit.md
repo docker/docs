@@ -7,7 +7,7 @@ aliases:
   - /ai/gordon/mcp/gordon-mcp-server/
 ---
 
-The Docker MCP Toolkit enables seamless setup, management, and execution of containerized MCP servers and their connections to AI agents. It removes the friction from tool usage by offering secure defaults, one-click setup, and support for a growing ecosystem of LLM-based clients. It is the fastest path from MCP tool discovery to local execution.
+The Docker MCP Toolkit is a gateway that enables seamless setup, management, and execution of containerized MCP servers and their connections to AI agents. It removes the friction from tool usage by offering secure defaults, one-click setup, and support for a growing ecosystem of LLM-based clients. It is the fastest path from MCP tool discovery to local execution.
 
 ## Key features
 
@@ -18,7 +18,7 @@ The Docker MCP Toolkit enables seamless setup, management, and execution of cont
 
 ## How the MCP toolkit works
 
-MCP introduces two core concepts: MCP clients and MCP servers. 
+MCP introduces two core concepts: MCP clients and MCP servers.
 
 - MCP clients are typically embedded in LLM-based applications, such as
   the Claude Desktop App. They request resources or actions.
@@ -55,7 +55,7 @@ surfaces and ensure safe runtime behavior.
 
 ### Passive security
 
-- Image signing and attestation: All MCP server images under `mcp/` in the [catalog](catalog.md) 
+- Image signing and attestation: All MCP server images under `mcp/` in the [catalog](catalog.md)
   are built by Docker and digitally
   signed to verify their source and integrity. Each image includes a Software
   Bill of Materials (SBOM) for full transparency.
@@ -95,7 +95,7 @@ To install an MCP server:
    When you select a server you can see the following
    information:
 
-   - Tool name and description 
+   - Tool name and description
    - Partner/publisher
    - The list of callable tools the server provides.
 
@@ -140,21 +140,21 @@ Your client can now interact with the MCP Toolkit.
 
 ### Example: Use Claude Desktop as a client
 
-Imagine you have Claude Desktop installed, and you want to use the GitHub MCP server, 
+Imagine you have Claude Desktop installed, and you want to use the GitHub MCP server,
 and the Puppeteer MCP server, you do not have to install the servers in Claude Desktop.
 You can simply install these 2 MCP servers in the MCP Toolkit,
 and add Claude Desktop as a client:
 
 1. From the **MCP Toolkit** menu, select the **Catalog** tab and find the **Puppeteer** server and add it.
 2. Repeat for the **GitHub Official** server.
-3. From the **Clients** tab, select **Connect** next to **Claude Desktop**. Restart 
+3. From the **Clients** tab, select **Connect** next to **Claude Desktop**. Restart
    Claude Desktop if it's running, and it can now access all the servers in the MCP Toolkit.
 4. Within Claude Desktop, run a test by submitting the following prompt using the Sonnet 3.5 model:
 
    ```text
    Take a screenshot of docs.docker.com and then invert the colors
    ```
-5. From the **Clients** tab, select **Connect** next to **Claude Desktop**. Restart 
+5. From the **Clients** tab, select **Connect** next to **Claude Desktop**. Restart
    Claude Desktop if it's running, and it can now access all the servers in the MCP Toolkit.
 6. Within Claude Desktop, run a test by submitting the following prompt using the Sonnet 3.5 model:
 
@@ -173,7 +173,7 @@ You can interact with all your installed MCP servers in VS Code:
    {{< tab name="Enable globally">}}
 
    1. Insert the following in your VS Code's User`settings.json`:
-   
+
       ```json
       "mcp": {
        "servers": {
@@ -195,11 +195,11 @@ You can interact with all your installed MCP servers in VS Code:
 
    1. In your terminal, navigate to your project's folder.
    1. Run:
-    
+
       ```bash
       docker mcp client connect vscode
       ```
-   
+
       > [!NOTE]
       > This command creates a `.vscode/mcp.json` file in the current directory. We
       > recommend you add it to your  `.gitignore` file.
@@ -208,7 +208,7 @@ You can interact with all your installed MCP servers in VS Code:
   {{</tabs >}}
 
 1. In Visual Studio Code, open a new Chat and select the **Agent** mode:
-   
+
    ![Copilot mode switching](./images/copilot-mode.png)
 
 1. You can also check the available MCP tools:
@@ -224,7 +224,7 @@ You can connect the MCP Toolkit to your development workflow via
 OAuth integration. For now, the MCP Toolkit only supports GitHub OAuth.
 
 1. On https://github.com/, ensure you are signed in.
-1. In Docker Desktop, select **MCP Toolkit** and select the **OAuth** tab. 
+1. In Docker Desktop, select **MCP Toolkit** and select the **OAuth** tab.
 1. In the GitHub entry, select **Authorize**. Your browser opens the GitHub authorization page.
 1. In the GitHub authorization page, select **Authorize Docker**. Once the authorization
    is successful, you are automatically redirected to Docker Desktop.
@@ -232,3 +232,7 @@ OAuth integration. For now, the MCP Toolkit only supports GitHub OAuth.
 
 The MCP Toolkit now has access to your GitHub account. To revoke access, select **Revoke** in the **OAuth** tab.
 See an example in [Use the **GitHub Official** MCP server](#example-use-the-github-official-mcp-server).
+
+## Related pages
+
+- [Open-source MCP Gateway](/manuals/ai/mcp-gateway/_index.md)
