@@ -18,18 +18,21 @@ Ask Gordon is your personal AI assistant embedded in Docker Desktop and the
 Docker CLI. It's designed to streamline your workflow and help you make the most
 of the Docker ecosystem.
 
-## What is Ask Gordon?
+## Key features
 
-Ask Gordon provides AI-powered assistance in Docker tools. It offers contextual help for tasks like:
+Ask Gordon provides AI-powered assistance within Docker tools. It can:
 
-- Improving Dockerfiles
-- Running and troubleshooting containers
-- Interacting with your images and code
-- Finding vulnerabilities or configuration issues
+- Improve Dockerfiles
+- Run and troubleshoot containers
+- Interact with your images and code
+- Find vulnerabilities or configuration issues
 
-It understands your local environment, including source code, Dockerfiles, and images, to provide personalized and actionable guidance.
+It understands your local environment, including source code, Dockerfiles, and
+images, to provide personalized and actionable guidance.
 
-These features are not enabled by default, and are not
+Ask Gordon remembers conversations, allowing you to switch topics more easily.
+
+Ask Gordon is not enabled by default, and is not
 production-ready. You may also encounter the term "Docker AI" as a broader
 reference to this technology.
 
