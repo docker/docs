@@ -7,7 +7,7 @@ aliases:
   - /ai/gordon/mcp/gordon-mcp-server/
 ---
 
-The Docker MCP Toolkit enables seamless setup, management, and execution of containerized MCP servers and their connections to AI agents. It removes the friction from tool usage by offering secure defaults, one-click setup, and support for a growing ecosystem of LLM-based clients. It is the fastest path from MCP tool discovery to local execution.
+The Docker MCP Toolkit is a gateway that enables seamless setup, management, and execution of containerized MCP servers and their connections to AI agents. It removes the friction from tool usage by offering secure defaults, one-click setup, and support for a growing ecosystem of LLM-based clients. It is the fastest path from MCP tool discovery to local execution.
 
 ## Key features
 
@@ -160,3 +160,7 @@ and add Claude Desktop as a client:
    ```text
    Take a screenshot of docs.docker.com and then invert the colors
    ```
+
+## Related pages
+
+- [Open-source MCP Gateway](/manuals/ai/mcp-gateway/_index.md)
