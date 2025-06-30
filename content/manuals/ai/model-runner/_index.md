@@ -104,7 +104,9 @@ Models are cached locally.
 {{< tab name="From Docker Desktop">}}
 
 1. Select **Models** and select the **Docker Hub** tab.
-2. Find the model of your choice and select **Pull**.
+1. Find the model of your choice and select **Pull**.
+
+![screencapture of the Docker Hub view](./images/dmr-catalog.png)
 
 {{< /tab >}}
 {{< tab name="From the Docker CLI">}}
@@ -119,8 +121,10 @@ Use the [`docker model pull` command](/reference/cli/docker/model/pull/).
 {{< tabs group="release" >}}
 {{< tab name="From Docker Desktop">}}
 
-Select **Models** and select the **Local** tab and click the play button.
-The interactive chat screen opens.
+1. Select **Models** and select the **Local** tab
+1. Click the play button. The interactive chat screen opens.
+
+![screencapture of the Local view](./images/dmr-run.png)
 
 {{< /tab >}}
 {{< tab name="From the Docker CLI" >}}
@@ -139,6 +143,8 @@ To troubleshoot potential issues, display the logs:
 
 Select **Models** and select the **Logs** tab.
 
+![screencapture of the Models view](./images/dmr-logs.png)
+
 {{< /tab >}}
 {{< tab name="From the Docker CLI">}}
 
@@ -153,7 +159,7 @@ Use the [`docker model logs` command](/reference/cli/docker/model/logs/).
 >
 > This works for any Container Registry supporting OCI Artifacts, not only Docker Hub.
 
-You can tag existing models with a new name and publish them under a different namespace and repository:
+You can tag existing models with a new name and publish them under a different namespaceand repository:
 
 ```console
 # Tag a pulled model under a new name
