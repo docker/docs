@@ -50,6 +50,8 @@ github.com/docker/model-runner v0.0.0-20250512190413-96af7b750f88 h1:NkiizYL67Hs
 github.com/docker/model-runner v0.0.0-20250512190413-96af7b750f88/go.mod h1:Nw+rx6RRPNdProEb9/BVJyAQn63px6WWlOv+eEpkV7Q=
 github.com/docker/scout-cli v1.15.0 h1:VhA9niVftEyZ9f5KGwKnrSfQOp2X3uIU3VbE/gTVMTM=
 github.com/docker/scout-cli v1.15.0/go.mod h1:Eo1RyCJsx3ldz/YTY5yGxu9g9mwTYbRUutxQUkow3Fc=
+github.com/docker/scout-cli v1.18.1 h1:snFodhV6xFJryxdUZ0ukPZFZZFnWAGLUuuPZGB3BOK8=
+github.com/docker/scout-cli v1.18.1/go.mod h1:Eo1RyCJsx3ldz/YTY5yGxu9g9mwTYbRUutxQUkow3Fc=
 github.com/felixge/httpsnoop v1.0.4 h1:NFTV2Zj1bL4mc9sqWACXbQFVBBg2W3GPvqp8/ESS2Wg=
 github.com/felixge/httpsnoop v1.0.4/go.mod h1:m8KPJKqk1gH5J9DgRY2ASl2lWCfGKXixSwevea8zH2U=
 github.com/fsnotify/fsnotify v1.4.9/go.mod h1:znqG4EE+3YCdAaPaxE2ZRY/06pZUdp0tY4IgpuI1SZQ=
