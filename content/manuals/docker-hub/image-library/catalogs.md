@@ -21,9 +21,9 @@ Docker Hub:
 
 The following sections provide an overview of the key catalogs available in Docker Hub.
 
-## MCP Servers Catalog
+## MCP Catalog
 
-The [MCP Servers Catalog](https://hub.docker.com/mcp/) is a centralized, trusted
+The [MCP Catalog](https://hub.docker.com/mcp/) is a centralized, trusted
 registry for discovering, sharing, and running Model Context Protocol
 (MCP)-compatible tools. Seamlessly integrated into Docker Hub, the catalog
 includes:
