@@ -84,7 +84,7 @@ Security at runtime is enforced through resource and access limitations:
 
 >[!NOTE]
 >
-> This feature started as the MCP Toolkit _extension_. This exentension is now deprecated
+> This feature started as the MCP Toolkit _extension_. This extension is now deprecated
 >and should be uninstalled.
 
 ## Install an MCP server
