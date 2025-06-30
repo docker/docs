@@ -11,7 +11,7 @@ Compare two images and display differences (experimental)
 
 | Name                  | Type          | Default | Description                                                                                                                                                                    |
 |:----------------------|:--------------|:--------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `-x`, `--exit-on`     | `stringSlice` |         |  Comma separated list of conditions to fail the action step if worse, options are: vulnerability, policy                                                                       |
+| `-x`, `--exit-on`     | `stringSlice` |         |  Comma separated list of conditions to fail the action step if worse or changed, options are: vulnerability, policy, package                                                   |
 | `--format`            | `string`      | `text`  | Output format of the generated vulnerability report:<br>- text: default output, plain text with or without colors depending on the terminal<br>- markdown: Markdown output<br> |
 | `--hide-policies`     |               |         | Hide policy status from the output                                                                                                                                             |
 | `--ignore-base`       |               |         | Filter out CVEs introduced from base image                                                                                                                                     |
