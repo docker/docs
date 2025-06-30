@@ -686,7 +686,7 @@ paths:
       description: |
         Create an access token for an organization.
 
-        ## Creating an access token with read access to public repositories.
+        **Creating an access token with read access to public repositories**
 
         To refer to public repositories, use the `*/*/public` paths.
 
@@ -699,9 +699,7 @@ paths:
             {
               "type": "TYPE_REPO",
               "path": "*/*/public",
-              "scopes": [
-                "repo-pull"
-              ]
+              "scopes": [ "repo-pull" ]
             }
           ],
           "expires_at": "2023-05-20T00:54:18Z"
