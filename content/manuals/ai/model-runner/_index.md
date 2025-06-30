@@ -100,6 +100,9 @@ You can now use the `docker model` command in the CLI and view and interact with
 
 Models are cached locally.
 
+> [!NOTE]
+> When working with the Docker CLI, you can also pull models directly from [HuggingFace](https://huggingface.co/).
+
 {{< tabs group="release" >}}
 {{< tab name="From Docker Desktop">}}
 
@@ -109,7 +112,15 @@ Models are cached locally.
 {{< /tab >}}
 {{< tab name="From the Docker CLI">}}
 
-Use the [`docker model pull` command](/reference/cli/docker/model/pull/).
+Use the [`docker model pull` command](/reference/cli/docker/model/pull/). For example:
+  
+```bash {title="Pulling from Docker Hub"}
+docker model pull ai/smollm2:360M-Q4_K_M
+```
+
+```bash {title="Pulling from HuggingFace"}
+docker model pull hf.co/bartowski/Llama-3.2-1B-Instruct-GGUF
+```
 
 {{< /tab >}}
 {{< /tabs >}}
