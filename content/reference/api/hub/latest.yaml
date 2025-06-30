@@ -685,26 +685,6 @@ paths:
       summary: Create access token
       description: |
         Create an access token for an organization.
-
-        ### Creating an access token with read access to public repositories:
-
-        To refer to public repositories, use the `*/*/public` paths.
-
-        Example payload for creating an access token with pull access to public repositories.
-        ```json
-        {
-          "label": "My public token",
-          "description": "Token for pulling repositories",
-          "resources": [
-            {
-              "type": "TYPE_REPO",
-              "path": "*/*/public",
-              "scopes": [ "repo-pull" ]
-            }
-          ],
-          "expires_at": "2023-05-20T00:54:18Z"
-        }
-        ```
       tags:
         - org-access-tokens
       security:
@@ -3039,7 +3019,10 @@ components:
         path:
           type: string
           example: "myorg/myrepo"
-          description: The path of the resource. The format of this will change depending on the type of resource.
+          description: |
+            The path of the resource. The format of this will change depending on the type of resource.
+
+            To reference public repositories, use `*/*/public` as the path value.
           required: true
         scopes:
           type: array
