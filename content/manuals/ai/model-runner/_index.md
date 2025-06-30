@@ -101,6 +101,7 @@ You can now use the `docker model` command in the CLI and view and interact with
 Models are cached locally.
 
 > [!NOTE]
+>
 > When working with the Docker CLI, you can also pull models directly from [HuggingFace](https://huggingface.co/).
 
 {{< tabs group="release" >}}
