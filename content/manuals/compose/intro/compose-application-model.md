@@ -1,5 +1,5 @@
 ---
-titleTitle: How Compose works
+title: How Compose works
 weight: 10
 description: Learn how Docker Compose works, from the application model to Compose files and CLI, whilst following a detailed example.
 keywords: docker compose, compose.yaml, docker compose model, compose cli, multi-container application, compose example 
