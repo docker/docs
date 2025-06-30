@@ -451,7 +451,8 @@ expressed in the short form.
   - `service_started`: An equivalent of the short syntax described previously
   - `service_healthy`: Specifies that a dependency is expected to be "healthy"
     (as indicated by [`healthcheck`](#healthcheck)) before starting a dependent
-    service.
+    service. Note that since v3 dependent services will be started regardless of the
+    healthcheck status.
   - `service_completed_successfully`: Specifies that a dependency is expected to run
     to successful completion before starting a dependent service.
 - `required`: When set to `false` Compose only warns you when the dependency service isn't started or available. If it's not defined
