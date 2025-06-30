@@ -13,6 +13,7 @@ Push an image or image index to Docker Scout
 | `-o`, `--output` | `string` |         | Write the report to a file                                         |
 | `--platform`     | `string` |         | Platform of image to be pushed                                     |
 | `--sbom`         |          |         | Create and upload SBOMs                                            |
+| `--secrets`      |          |         | Scan for secrets in the image                                      |
 | `--timestamp`    | `string` |         | Timestamp of image or tag creation                                 |
 
 
