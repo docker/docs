@@ -85,9 +85,9 @@ If you want to enable all profiles at the same time, you can run `docker compose
 
 ## Auto-starting profiles and dependency resolution
 
-When you explicitly target a service on the command line that has one or more profiles assigned, you do not need to enable the profile manually — Docker Compose will run that service regardless of whether its profile is activated. This is useful for running one-off services or debugging tools.
+When you explicitly target a service on the command line that has one or more profiles assigned, you do not need to enable the profile manually as Compose runs that service regardless of whether its profile is activated. This is useful for running one-off services or debugging tools.
 
-However, only the targeted service (and any of its declared dependencies via depends_on) will be started. Other services that share the same profile will not be started unless:
+Only the targeted service (and any of its declared dependencies via `depends_on`) is started. Other services that share the same profile will not be started unless:
 - They are also explicitly targeted, or
 - The profile is explicitly enabled using `--profile` or `COMPOSE_PROFILES`.
 
