@@ -686,11 +686,11 @@ paths:
       description: |
         Create an access token for an organization.
 
-        **Creating an access token with read access to public repositories**
+        ### Creating an access token with read access to public repositories:
 
         To refer to public repositories, use the `*/*/public` paths.
 
-        Example payload for creating an access token with read access to public repositories.
+        Example payload for creating an access token with pull access to public repositories.
         ```json
         {
           "label": "My public token",
