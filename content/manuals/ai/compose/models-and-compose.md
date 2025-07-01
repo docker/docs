@@ -1,5 +1,6 @@
 ---
 title: Define AI Models in Docker Compose applications
+linkTitle: Use AI models in Compose
 description: Learn how to define and use AI models in Docker Compose applications using the models top-level element
 keywords: compose, docker compose, models, ai, machine learning, cloud providers, specification
 weight: 10
