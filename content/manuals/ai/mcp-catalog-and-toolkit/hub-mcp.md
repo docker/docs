@@ -1,5 +1,5 @@
 ---
-title: Hub MCP
+title: Hub MCP Server
 description: Use the MCP Toolkit to set up MCP servers and MCP clients.
 keywords: Docker Hub MCP Server, Hub MCP server, Hub MCP
 ---
