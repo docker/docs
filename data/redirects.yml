@@ -222,12 +222,17 @@
 "https://www.docker.com/products/build-cloud/?utm_campaign=2024-02-02-dbc_cli&utm_medium=in-product-ad&utm_source=desktop_v4":
   - /go/docker-build-cloud/
 
-# Run Cloud links & Docker Cloud
+# Run Cloud links & Docker Cloud & Docker Offload
 "/":
   - /go/run-cloud-eap/
 "/desktop/setup/vm-vdi/":
+  # Onboarding - VDI beta
   - /go/docker-cloud/
+  # Onboarding - enable GPU
   - /go/docker-cloud-gpu/
+"/ai/compose/models-and-compose/":
+  # Onboarding - enable GPU - compose for agents
+  - /go/compose-for-agents/
 
 # CLI backlinks
 "/engine/cli/filter/":
@@ -279,6 +284,7 @@
 
 
 # Links in Desktop
+ 
 
 # Desktop MCP Toolkit
 "/ai/mcp-catalog-and-toolkit/toolkit/":
