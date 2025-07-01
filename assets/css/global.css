@@ -96,7 +96,7 @@ input[type="search"]::-ms-clear {
   margin-top: 0.2rem !important;
 }
 
-#search-bar-results {
+#search-page-results {
   mark:where(.dark, .dark *) {
     color: var(--color-blue-400);
   }
