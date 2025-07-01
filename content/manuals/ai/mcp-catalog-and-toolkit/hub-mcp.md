@@ -31,6 +31,9 @@ The Docker Hub MCP Server is a Model Context Protocol (MCP) server that interfac
 ## Using other clients
 If want to integrate the Docker Hub MCP Server into your own development environment, you can find the source code and installation instructions on our [GitHub repository](https://github.com/docker/hub-mcp). 
 
+## Using other clients
+If want to integrate the Docker Hub MCP Server into your own development environment, you can find the source code and installation instructions on our [GitHub repository](https://github.com/docker/hub-mcp). 
+
 ## Use Claude Desktop as a client
 
 1. Add the Docker Hub MCP Server configuration to your `claude_desktop_config.json`:
