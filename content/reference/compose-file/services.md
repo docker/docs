@@ -1292,7 +1292,7 @@ There is a performance penalty for applications that swap memory to disk often.
 
 {{< summary-bar feature_name="Compose models" >}}
 
-`models` defines  which AI models the service should use at runtime. Each referenced model must be defined under the [`models` top-level element](models.md).
+`models` defines which AI models the service should use at runtime. Each referenced model must be defined under the [`models` top-level element](models.md).
 
 ```yaml
 services:
@@ -1308,7 +1308,7 @@ services:
         model_var: MODEL
 ```
 
-When a service is linked to a model, Docker Compose injects environment variables to pass connection details and model identifiers to the container. This allows the application to locate and communicate with the model dynamically at runtime, without hardcoding values.
+When a service is linked to a model, Docker Compose injects environment variables to pass connection details and model identifiers to the container. This allows the application to locate and communicate with the model dynamically at runtime, without hard-coding values.
 
 #### Long syntax
 
@@ -1317,7 +1317,7 @@ The long syntax gives you more control over the environment variable names.
 - `endpoint_var` sets the name of the environment variable that holds the model runner’s URL.
 - `model_var` sets the name of the environment variable that holds the model identifier.
 
-If either is ommitted, Compose automatically generates the  environment variable names based on the model key using the following rules:
+If either is omitted, Compose automatically generates the environment variable names based on the model key using the following rules:
 
  - Convert the model key to uppercase
  - Replace any '-' characters with '_'
