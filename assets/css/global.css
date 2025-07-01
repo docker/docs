@@ -95,3 +95,9 @@ input[type="search"]::-ms-clear {
 .navbar-group:first-of-type {
   margin-top: 0.2rem !important;
 }
+
+#search-page-results {
+  mark:where(.dark, .dark *) {
+    color: var(--color-blue-400);
+  }
+}
