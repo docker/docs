@@ -17,14 +17,74 @@ This lets you define and run AI-powered applications alongside your other servic
 
 ## Prerequisites
 
-- Docker Compose v2.35 or later
-- Docker Desktop 4.41 or later 
+- Docker Compose v2.38 or later
+- Docker Desktop 4.43 or later 
 - Docker Desktop for Mac with Apple Silicon or Docker Desktop for Windows with NVIDIA GPU
 - [Docker Model Runner enabled in Docker Desktop](/manuals/ai/model-runner.md#enable-docker-model-runner)
 
-## Provider services
+## Use `models` definition
 
-Compose introduces a new service type called `provider` that allows you to declare platform capabilities required by your application. For AI models, you can use the `model` type to declare model dependencies.
+The `models` top-level element in the Compose file lets you define AI models to be used by your application.
+Compose will use Docker Model Runner as the model runtime. 
+
+The following example shows how to provide the minimal configuration to use a model within your Compose application:
+
+```yaml
+services:
+  my-chat-app:
+    image: my-chat-app
+    models:
+      - smollm2
+
+models:
+  smollm2:
+    image: ai/smollm2
+```
+
+### How it works
+
+During the `docker compose up` process, Docker Model Runner automatically pulls and runs the specified model.  
+It also sends Compose the model tag name and the URL to access the model runner.
+
+This information is then passed to services which declare a dependency on the model provider.  
+In the example above, the `my-chat-app` service receives 2 environment variables prefixed by the service name:
+- `SMOLLM2_ENDPOINT` with the URL to access the model
+- `SMOLLM2_MODEL` with the model name
+
+This lets the `my-chat-app` service to interact with the model and use it for its own purposes.
+
+
+### Customizing environment variables
+
+You can customize the environment variable names which will be passed to your service container using the long syntax:
+
+```yaml
+services:
+  my-chat-app:
+    image: my-chat-app
+    models:
+      smollm2:
+        endpoint_var: AI_MODEL_URL
+        model_var: AI_MODEL_NAME
+
+models:
+  smollm2:
+    image: ai/smollm2
+```
+
+With this configuration, your `my-chat-app` service will receive:
+- `AI_MODEL_URL` with the URL to access the model
+- `AI_MODEL_NAME` with the model name
+
+This allows you to use more descriptive variable names that match your application's expectations.
+
+
+## Alternative configuration with Provider services
+
+> [!NOTE]
+> Now that Compose supports a `models` top-level element, we recommend using it instead of the provider services approach.
+
+Compose introduced a new service type called `provider` that allows you to declare platform capabilities required by your application. For AI models, you can use the `model` type to declare model dependencies.
 
 Here's an example of how to define a model provider:
 
@@ -45,21 +105,9 @@ services:
 Notice the dedicated `provider` attribute in the `ai_runner` service.   
 This attribute specifies that the service is a model provider and lets you define options such as the name of the model to be used.
 
-There is also a `depends_on` attribute in the `chat` service.  
-This attribute specifies that the `chat` service depends on the `ai_runner` service.  
-This means that the `ai_runner` service will be started before the `chat` service to allow injection of model information to the `chat` service.
-
-## How it works
-
-During the `docker compose up` process, Docker Model Runner automatically pulls and runs the specified model.  
-It also sends Compose the model tag name and the URL to access the model runner.
-
-This information is then passed to services which declare a dependency on the model provider.  
-In the example above, the `chat` service receives 2 environment variables prefixed by the service name:
- - `AI_RUNNER_URL` with the URL to access the model runner
- - `AI_RUNNER_MODEL` with the model name which could be passed with the URL to request the model.
-
-This lets the `chat` service to interact with the model and use it for its own purposes.
+There is also a `depends_on` attribute in the `my-chat-app` service.  
+This attribute specifies that the `my-chat-app` service depends on the `ai_runner` service.  
+This means that the `ai_runner` service will be started before the `my-chat-app` service to allow injection of model information to the `my-chat-app` service.
 
 ## Reference
 
