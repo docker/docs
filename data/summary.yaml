@@ -162,7 +162,7 @@ Docker Init:
 Docker Model Runner:
   availability: Beta
   requires: Docker Engine or Docker Desktop (Windows) 4.41+ or Docker Desktop (MacOS) 4.40+
-  for: Docker Desktop for Mac with Apple Silicon or Windows with NVIDIA GPUs
+  for: See Requirements section below
 Docker Projects:
   availability: Beta
 Docker Scout exceptions:

@@ -40,6 +40,33 @@ with AI models locally.
 - Run and interact with AI models directly from the command line or from the Docker Desktop GUI
 - Manage local models and display logs
 
+## Requirements 
+
+Docker Runner is supported on the following platforms:
+
+{{< tabs >}}
+{{< tab name="Windows">}}
+
+- Windows with NVIDIA GPUs on Windows(amd64)
+- Windows with Adreno GPU and OpenCL on Windows(arm64)
+
+{{< /tab >}}
+{{< tab name="MacOS">}}
+
+- Apple Silicon
+
+
+{{< /tab >}}
+{{< tab name="Linux">}}
+
+Docker Engine only:
+
+- Linux CPU & Linux NVIDIA
+
+{{< /tab >}}
+{{</tabs >}}
+
+
 ## How it works
 
 Models are pulled from Docker Hub the first time they're used and stored locally. They're loaded into memory only at runtime when a request is made, and unloaded when not in use to optimize resources. Since models can be large, the initial pull may take some time — but after that, they're cached locally for faster access. You can interact with the model using [OpenAI-compatible APIs](#what-api-endpoints-are-available).
