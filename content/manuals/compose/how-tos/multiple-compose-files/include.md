@@ -36,6 +36,18 @@ services:
 
 This means the team managing `serviceB` can refactor its own database component to introduce additional services without impacting any dependent teams. It also means that the dependent teams don't need to include additional flags on each Compose command they run.
 
+```yaml
+include:
+  - oci://docker.io/username/my-compose-app:latest # use a Compose file stored as an OCI artifact
+services:
+  serviceA:
+    build: .
+    depends_on:
+      - serviceB 
+```
+`include` allows you to reference Compose files from remote sources, such as OCI artifacts or Git repositories.  
+Here `serviceB` is defined in a Compose file stored on Docker Hub.
+
 ## Include and overrides
 
 Compose reports an error if any resource from `include` conflicts with resources from the included Compose file. This rule prevents

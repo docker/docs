@@ -1288,6 +1288,41 @@ There is a performance penalty for applications that swap memory to disk often.
 - If `memswap_limit` is unset, and `memory` is set, the container can use as much swap as the `memory` setting, if the host container has swap memory configured. For instance, if `memory`="300m" and `memswap_limit` is not set, the container can use 600m in total of memory and swap.
 - If `memswap_limit` is explicitly set to -1, the container is allowed to use unlimited swap, up to the amount available on the host system.
 
+### models
+
+{{< summary-bar feature_name="Compose models" >}}
+
+`models` defines which AI models the service should use at runtime. Each referenced model must be defined under the [`models` top-level element](models.md).
+
+```yaml
+services:
+  short_syntax:
+    image: app
+    models:
+      - my_model
+  long_syntax:
+    image: app
+    models:
+      my_model:
+        endpoint_var: MODEL_URL
+        model_var: MODEL
+```
+
+When a service is linked to a model, Docker Compose injects environment variables to pass connection details and model identifiers to the container. This allows the application to locate and communicate with the model dynamically at runtime, without hard-coding values.
+
+#### Long syntax
+
+The long syntax gives you more control over the environment variable names.
+
+- `endpoint_var` sets the name of the environment variable that holds the model runner’s URL.
+- `model_var` sets the name of the environment variable that holds the model identifier.
+
+If either is omitted, Compose automatically generates the environment variable names based on the model key using the following rules:
+
+ - Convert the model key to uppercase
+ - Replace any '-' characters with '_'
+ - Append `_URL` for the endpoint variable
+
 ### `network_mode`
 
 `network_mode` sets a service container's network mode. 
