@@ -37,13 +37,13 @@ detailed instructions on converting an existing user account to an organization,
 To create an organization:
 
 1. Sign in to [Docker Home](https://app.docker.com/).
-2. Under **Settings and administration**, select **Go to Admin Console**.
-3. Select the organization drop-down, then **Create Organization**.
-4. Choose a subscription for your organization, a billing cycle, and specify
+1. Under **Settings and administration**, select **Go to Admin Console**.
+1. Select the organization drop-down, then **Create Organization**.
+1. Choose a subscription for your organization, a billing cycle, and specify
 how many seats you need. See [Docker Pricing](https://www.docker.com/pricing/)
 for details on the features offered in Docker's subscriptions.
-5. Select **Continue to profile**.
-6. Enter an **Organization namespace**. This is the official, unique name for
+1. Select **Continue to profile**.
+1. Enter an **Organization namespace**. This is the official, unique name for
    your organization in Docker Hub. It's not possible to change the name of the
    organization after you've created it.
 
@@ -53,14 +53,14 @@ for details on the features offered in Docker's subscriptions.
    you want to use your Docker ID as the organization name, then you must
    first [convert your account into an organization](/manuals/admin/organization/convert-account.md).
 
-7. Enter your **Company name**. This is the full name of your company. Docker
+1. Enter your **Company name**. This is the full name of your company. Docker
    displays the company name on your organization page and in the details of any
    public images you publish. You can update the company name anytime by
    navigating to your organization's **Settings** page.
-8. Select **Continue to billing** to continue.
-9. Enter your organization's billing information and select
+1. Select **Continue to billing** to continue.
+1. Enter your organization's billing information and select
 **Continue to payment** to continue to the billing portal.
-10. Provide your payment details and select **Purchase**.
+1. Provide your payment details and select **Purchase**.
 
 {{< /tab >}}
 {{< tab name="Docker Hub" >}}
@@ -69,12 +69,12 @@ for details on the features offered in Docker's subscriptions.
 
 1. Sign in to [Docker Hub](https://hub.docker.com/) using your Docker ID,
 your email address, or your social provider.
-2. Select the organization drop-down, then **Create Organization**.
-3. Choose a subscription for your organization, a billing cycle, and specify
+1. Select the organization drop-down, then **Create Organization**.
+1. Choose a subscription for your organization, a billing cycle, and specify
 how many seats you need. See [Docker Pricing](https://www.docker.com/pricing/)
 for details on the features offered in Docker's subscriptions.
-4. Select **Continue to profile**.
-5. Enter an **Organization namespace**. This is the official, unique name for
+1. Select **Continue to profile**.
+1. Enter an **Organization namespace**. This is the official, unique name for
    your organization in Docker Hub. It's not possible to change the name of the
    organization after you've created it.
 
@@ -84,14 +84,14 @@ for details on the features offered in Docker's subscriptions.
    you want to use your Docker ID as the organization name, then you must
    first [convert your account into an organization](/manuals/admin/organization/convert-account.md).
 
-6. Enter your **Company name**. This is the full name of your company. Docker
+1. Enter your **Company name**. This is the full name of your company. Docker
    displays the company name on your organization page and in the details of any
    public images you publish. You can update the company name anytime by
    navigating to your organization's **Settings** page.
-7. Select **Continue to billing** to continue.
-8. Enter your organization's billing information and select
+1. Select **Continue to billing** to continue.
+1. Enter your organization's billing information and select
 **Continue to payment** to continue to the billing portal.
-9. Provide your payment details and select **Purchase**.
+1. Provide your payment details and select **Purchase**.
 
 {{< /tab >}}
 {{< /tabs >}}
@@ -104,8 +104,8 @@ for details on the features offered in Docker's subscriptions.
 To view an organization in the Admin Console:
 
 1. Sign in to [Docker Home](https://app.docker.com).
-2. Under Settings and administration, select **Go to Admin Console**.
-3. Select your organization from the organization drop-down in the
+1. Under Settings and administration, select **Go to Admin Console**.
+1. Select your organization from the organization drop-down in the
 left-hand navigation.
 
 The Admin Console displays various options that let you to
@@ -137,8 +137,7 @@ To view an organization:
           > You can't sign in directly to an organization. After converting from
           > a user to an organization, sign in with the owner or team member
           > account. If you don’t see the org, you may not be a member or owner.
-
-2.  Select **My Hub** in the top navigation bar, then choose your
+1.  Select **My Hub** in the top navigation bar, then choose your
     organization from the list.
 
 The organization landing page displays various options that let you to
@@ -181,10 +180,10 @@ the following steps:
 1. Based on the number of seats from the secondary organization,
 [purchase additional seats](../../subscription/manage-seats.md) for the
 primary organization account that you want to keep.
-2. Manually add users to the primary organization and remove existing users
+1. Manually add users to the primary organization and remove existing users
 from the secondary organization.
-3. Manually move over your data, including all repositories.
-4. Once you're done moving all of your users and data,
+1. Manually move over your data, including all repositories.
+1. Once you're done moving all of your users and data,
 [downgrade](../../subscription/change.md) the secondary account to a free
 subscription. Note that Docker does not offer refunds for downgrading
 organizations mid-billing cycle.

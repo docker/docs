@@ -81,7 +81,7 @@ receive your Docker subscription benefits.
    - If your organization doesn't use device management software or your
    users haven't installed Docker Desktop yet, you can survey your users to
    identify who is using Docker Desktop.
-2. Ask users to update their Docker account's email address to one associated
+1. Ask users to update their Docker account's email address to one associated
 with your organization's domain, or create a new account with that email.
    - To update an account's email address, instruct your users to sign in
    to [Docker Hub](https://hub.docker.com), and update the email address to
@@ -89,7 +89,7 @@ with your organization's domain, or create a new account with that email.
    - To create a new account, instruct your users to
    [sign up](https://hub.docker.com/signup) using their email address associated
    with your organization's domain.
-3. Identify Docker accounts associated with your organization's domain:
+1. Identify Docker accounts associated with your organization's domain:
    - Ask your Docker sales representative or
    [contact sales](https://www.docker.com/pricing/contact-sales/) to get a list
    of Docker accounts that use an email address in your organization's domain.
