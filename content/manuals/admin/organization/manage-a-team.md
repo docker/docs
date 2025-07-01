@@ -10,9 +10,8 @@ aliases:
 
 {{< summary-bar feature_name="Admin orgs" >}}
 
-You can create teams for your organization in the Admin Console or Docker Hub.
-You can [configure repository access for a team](#configure-repository-permissions-for-a-team)
-in Docker Hub.
+You can create teams for your organization in the Admin Console or Docker Hub,
+and configure team repository access in Docker Hub.
 
 A team is a group of Docker users that belong to an organization. An
 organization can have multiple teams. An organization owner can create new
