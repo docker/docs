@@ -45,7 +45,7 @@ services:
     depends_on:
       - serviceB 
 ```
-`include` allows you to reference to Compose files from remote sources, such as OCI artifacts or Git repositories.  
+`include` allows you to reference Compose files from remote sources, such as OCI artifacts or Git repositories.  
 Here `serviceB` is defined in a Compose file stored on Docker Hub.
 
 ## Include and overrides
