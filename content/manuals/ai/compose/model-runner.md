@@ -2,7 +2,9 @@
 title: Use Docker Model Runner
 description: Learn how to integrate Docker Model Runner with Docker Compose to build AI-powered applications
 keywords: compose, docker compose, model runner, ai, llm, artificial intelligence, machine learning
-weight: 111
+weight: 20
+aliases:
+ - /compose/how-tos/model-runner/
 params:
   sidebar:
     badge:
@@ -24,8 +26,8 @@ This lets you define and run AI-powered applications alongside your other servic
 
 ## Use `models` definition
 
-The `models` top-level element in the Compose file lets you define AI models to be used by your application.
-Compose will use Docker Model Runner as the model runtime. 
+The [`models` top-level element](/manuals/ai/compose/models-and-compose.md) in the Compose file lets you define AI models to be used by your application.
+Compose can then use Docker Model Runner as the model runtime. 
 
 The following example shows how to provide the minimal configuration to use a model within your Compose application:
 
@@ -52,7 +54,6 @@ In the example above, the `my-chat-app` service receives 2 environment variables
 - `SMOLLM2_MODEL` with the model name
 
 This lets the `my-chat-app` service to interact with the model and use it for its own purposes.
-
 
 ### Customizing environment variables
 
@@ -81,8 +82,9 @@ This allows you to use more descriptive variable names that match your applicati
 
 ## Alternative configuration with Provider services
 
-> [!NOTE]
-> Now that Compose supports a `models` top-level element, we recommend using it instead of the provider services approach.
+> [!TIP]
+>
+> Use the []`models` top-level element](#use-models-definition) instead.
 
 Compose introduced a new service type called `provider` that allows you to declare platform capabilities required by your application. For AI models, you can use the `model` type to declare model dependencies.
 
