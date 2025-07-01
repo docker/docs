@@ -22,7 +22,7 @@ Compose lets you define AI models as core components of your application, so you
 
 ## What are Compose models?
 
-Compose `models` are a standardized way to define AI model dependencies in your application. By using the `models` top-level element in your Compose file, you can:
+Compose `models` are a standardized way to define AI model dependencies in your application. By using the []`models` top-level element](/reference/compose-file/models.md) in your Compose file, you can:
 
 - Declare which AI models your application needs
 - Specify model configurations and requirements
