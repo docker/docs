@@ -1,5 +1,5 @@
 ---
-title: Define models in Compose applications
+title: Define AI Models in Docker Compose applications
 description: Learn how to define and use AI models in Docker Compose applications using the models top-level element
 keywords: compose, docker compose, models, ai, machine learning, cloud providers, specification
 weight: 10
@@ -12,7 +12,7 @@ params:
 
 {{< summary-bar feature_name="Compose models" >}}
 
-Compose includes support for defining AI models as first-class resources in your applications. This lets you declare model dependencies alongside your services, making your applications portable across different platforms that support the Compose Specification.
+Compose lets you define AI models as core components of your application, so you can declare model dependencies alongside services and run the application on any platform that supports the Compose Specification.
 
 ## Prerequisites
 
