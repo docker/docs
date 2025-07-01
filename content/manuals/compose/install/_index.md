@@ -1,9 +1,7 @@
 ---
 description: Learn how to install Docker Compose. Compose is available natively on
   Docker Desktop, as a Docker Engine plugin, and as a standalone tool.
-keywords: install docker compose, docker compose install, install docker compose ubuntu,
-  installing docker compose, docker compose download, docker compose not found, docker
-  compose windows, how to install docker compose
+keywords: install docker compose, docker compose plugin, install compose linux, install docker desktop, docker compose windows, standalone docker compose, docker compose not found
 title: Overview of installing Docker Compose
 linkTitle: Install
 weight: 20
@@ -18,7 +16,7 @@ This page summarizes the different ways you can install Docker Compose, dependin
 
 ## Installation scenarios 
 
-### Scenario one: Install Docker Desktop (Recommended)
+### Docker Desktop (Recommended)
 
 The easiest and recommended way to get Docker Compose is to install Docker Desktop. 
 
@@ -33,7 +31,7 @@ Docker Desktop is available for:
 > 
 > If you have already installed Docker Desktop, you can check which version of Compose you have by selecting **About Docker Desktop** from the Docker menu {{< inline-image src="../../desktop/images/whale-x.svg" alt="whale menu" >}}.
 
-### Scenario two: Install the Docker Compose plugin (Linux only)
+### Plugin (Linux only)
 
 > [!IMPORTANT]
 >
@@ -43,7 +41,7 @@ If you already have Docker Engine and Docker CLI installed, you can install the 
 - [Using Docker's repository](linux.md#install-using-the-repository)
 - [Downloading and installing manually](linux.md#install-the-plugin-manually)
 
-### Scenario three: Install the Docker Compose standalone (Legacy)
+### Standalone (Legacy)
 
 > [!WARNING]
 >
