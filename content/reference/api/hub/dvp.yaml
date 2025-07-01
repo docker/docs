@@ -1,0 +1,5 @@
+---
+outputs: 
+  - redirect
+url: /reference/api/dvp/latest.yaml
+---

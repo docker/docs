@@ -12,7 +12,7 @@ This page provides an overview of endpoints that are deprecated in Docker Verifi
 
 As changes are made to Docker there may be times when existing endpoints need to be removed or replaced with newer endpoints. Before an existing endpoint is removed it is labeled as "deprecated" within the documentation. After some time it may be removed.
 
-## Deprecated engine endpoints
+## Deprecated endpoints
 
 The following table provides an overview of the current status of deprecated endpoints:
 

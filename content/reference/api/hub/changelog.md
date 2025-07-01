@@ -6,6 +6,8 @@ keywords: docker hub, hub, whats new, release notes, api, changelog
 weight: 1
 toc_min: 1
 toc_max: 2
+aliases:
+  - /reference/api/hub/latest-changelog/
 ---
 
 Here you can learn about the latest changes, new features, bug fixes, and known

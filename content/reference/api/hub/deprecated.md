@@ -4,6 +4,8 @@ keywords: deprecated
 title: Deprecated Docker Hub API endpoints
 linkTitle: Deprecated
 weight: 2
+aliases:
+    - /docker-hub/api/deprecated/
 ---
 
 This page provides an overview of endpoints that are deprecated in Docker Hub API.
@@ -12,7 +14,7 @@ This page provides an overview of endpoints that are deprecated in Docker Hub AP
 
 As changes are made to Docker there may be times when existing endpoints need to be removed or replaced with newer endpoints. Before an existing endpoint is removed it is labeled as "deprecated" within the documentation. After some time it may be removed.
 
-## Deprecated engine endpoints
+## Deprecated endpoints
 
 The following table provides an overview of the current status of deprecated endpoints:
 
@@ -46,7 +48,7 @@ Reformat page
 
 ### Docker Hub API v1 deprecation
 
-Docker Hub API v1 has been deprecated. Please use Docker Hub API v2 instead.
+Docker Hub API v1 has been deprecated. Use Docker Hub API v2 instead.
 
 The following API routes within the v1 path will no longer work and will return a 410 status code:
 * `/v1/repositories/{name}/images`
