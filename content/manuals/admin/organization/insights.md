@@ -68,9 +68,9 @@ The chart contains the following data:
 
 | Data | Description |
 |:-----------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Active user | The number of users that have actively used Docker Desktop and either signed in with a Docker account that has a license in your organization or signed in to a Docker account with an email address from a domain associated with your organization. <br><br>Users who don’t sign in to an account associated with your organization are not represented in the data. To ensure users sign in with an account associated with your organization, you can [enforce sign-in](/security/for-admins/enforce-sign-in/). |
-| Total organization members | The number of users that have used Docker Desktop, regardless of their Insights activity. |
-| Users opted out of analytics | The number of users that are a member of your organization that have opted out of sending analytics. <br><br>When users opt out of sending analytics, you won't see any of their data in Insights. To ensure that the data includes all users, you can use [Settings Management](/desktop/hardened-desktop/settings-management/) to set `analyticsEnabled` for all your users. |
+| Active user | The number of users who have actively used Docker Desktop and either signed in with a Docker account that has a license in your organization or signed in to a Docker account with an email address from a domain associated with your organization. <br><br>Users who don’t sign in to an account associated with your organization are not represented in the data. To ensure users sign in with an account associated with your organization, you can [enforce sign-in](/security/for-admins/enforce-sign-in/). |
+| Total organization members | The number of users who have used Docker Desktop, regardless of their Insights activity. |
+| Users opted out of analytics | The number of users who are members of your organization that have opted out of sending analytics. <br><br>When users opt out of sending analytics, you won't see any of their data in Insights. To ensure that the data includes all users, you can use [Settings Management](/desktop/hardened-desktop/settings-management/) to set `analyticsEnabled` for all your users. |
 | Active users (graph) | The view over time for total active users. |
 
 
@@ -142,7 +142,7 @@ The chart contains the following data:
 ### Extensions
 
 Monitor extension installation activity with this chart. It provides visibility
-into the Docker Desktop extensions your team are using, letting you track
+into the Docker Desktop extensions your teams are using, letting you track
 adoption and identify popular tools that enhance productivity.
 
 The chart contains the following data:
@@ -180,7 +180,7 @@ A Docker Desktop user export file contains the following data points:
 member of
 - Date Joined: The date the user joined your organization
 - Last Logged-In Date: The last date the user logged into Docker using
-their web browser (this include Docker Hub and Docker Home)
+their web browser (this includes Docker Hub and Docker Home)
 - Docker Desktop Version: The version of Docker Desktop the user has
 installed
 - Last Seen Date: The last date the user used the Docker Desktop application
@@ -206,11 +206,11 @@ solutions to resolve common problems.
    Management](/desktop/hardened-desktop/settings-management/) and enable the
    `analyticsEnabled` setting.
 
-- Ensure that users are using Docker Desktop and aren't using the standalone
+- Ensure users use Docker Desktop and aren't using the standalone
   version of Docker Engine.
 
-   Only Docker Desktop can provide data for Insights. If a user installs and
-   uses Docker Engine outside of Docker Desktop, Docker Engine won't provide
+   Only Docker Desktop can provide data for Insights. If a user installs Docker
+   Engine outside of Docker Desktop, Docker Engine won't provide
    data for that user.
 
 - Ensure that users are signing in to an account associated with your
