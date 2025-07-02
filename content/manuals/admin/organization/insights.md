@@ -34,12 +34,9 @@ To access Insights, you must contact your Customer Success Manager to have the
 feature enabled. Once the feature is enabled, access Insights using the following
 steps:
 
-1. Open [Docker Home](https://app.docker.com/) and select your organization
-on the **Choose profile** page.
-1. Select **Admin Console** in the left-hand navigation menu.
-1. Select **Desktop insights**.
-1. Choose a timeframe for your insights data: **1 Week**, **1 Month**, or
-**3 Months**.
+1. Sign in to [Docker Home](https://app.docker.com/) and choose
+your organization.
+1. Select **Insights**. then select the period of time for the data.
 
 > [!NOTE]
 >
