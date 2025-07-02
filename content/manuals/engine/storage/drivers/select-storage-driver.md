@@ -117,6 +117,7 @@ backing filesystems.
 | `vfs`            | any filesystem                                        |
 
 > [!NOTE]
+>
 > Most filesystems should work if they have the required features.
 > Consult [OverlayFS](https://www.kernel.org/doc/html/latest/filesystems/overlayfs.html)
 > for more information.
