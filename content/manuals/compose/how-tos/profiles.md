@@ -85,6 +85,12 @@ If you want to enable all profiles at the same time, you can run `docker compose
 
 ## Auto-starting profiles and dependency resolution
 
+When you explicitly target a service on the command line that has one or more profiles assigned, you do not need to enable the profile manually as Compose runs that service regardless of whether its profile is activated. This is useful for running one-off services or debugging tools.
+
+Only the targeted service (and any of its declared dependencies via `depends_on`) is started. Other services that share the same profile will not be started unless:
+- They are also explicitly targeted, or
+- The profile is explicitly enabled using `--profile` or `COMPOSE_PROFILES`.
+
 When a service with assigned `profiles` is explicitly targeted on the command
 line its profiles are started automatically so you don't need to start them
 manually. This can be used for one-off services and debugging tools.
@@ -108,72 +114,19 @@ services:
 ```
 
 ```sh
-# Only start backend and db
+# Only start backend and db (no profiles involved)
 $ docker compose up -d
 
-# This runs db-migrations (and, if necessary, start db)
-# by implicitly enabling the profiles "tools"
+# Run the db-migrations service without manually enabling the 'tools' profile
 $ docker compose run db-migrations
 ```
 
-But keep in mind that `docker compose` only automatically starts the
-profiles of the services on the command line and not of any dependencies. 
+In this example, `db-migrations` runs even though it is assigned to the tools profile, because it was explicitly targeted. The `db` service is also started automatically because it is listed in `depends_on`.
 
-This means that any other services the targeted service `depends_on` should either:
-- Share a common profile 
-- Always be started, by omitting `profiles` or having a matching profile started explicitly
-
-```yaml
-services:
-  web:
-    image: web
-
-  mock-backend:
-    image: backend
-    profiles: ["dev"]
-    depends_on:
-      - db
-
-  db:
-    image: mysql
-    profiles: ["dev"]
-
-  phpmyadmin:
-    image: phpmyadmin
-    profiles: ["debug"]
-    depends_on:
-      - db
-```
-
-```sh
-# Only start "web"
-$ docker compose up -d
-
-# Start mock-backend (and, if necessary, db)
-# by implicitly enabling profiles "dev"
-$ docker compose up -d mock-backend
-
-# This fails because profiles "dev" is not enabled
-$ docker compose up phpmyadmin
-```
-
-Although targeting `phpmyadmin` automatically starts the profiles `debug`, it doesn't automatically start the profiles required by `db` which is `dev`. 
-
-To fix this you either have to add the `debug` profile to the `db` service:
-
-```yaml
-db:
-  image: mysql
-  profiles: ["debug", "dev"]
-```
-
-or start the `dev` profile explicitly:
-
-```console
-# Profiles "debug" is started automatically by targeting phpmyadmin
-$ docker compose --profile dev up phpmyadmin
-$ COMPOSE_PROFILES=dev docker compose up phpmyadmin
-```
+If the targeted service has dependencies that are also gated behind a profile, you must ensure those dependencies are either: 
+ - In the same profile
+ - Started separately
+ - Not assigned to any profile so are always enabled
 
 ## Stop application and services with specific profiles
 
@@ -208,6 +161,7 @@ services:
 ```
 
 if you only want to stop the `phpmyadmin` service, you can run 
+
 ```console 
 $ docker compose down phpmyadmin
 ``` 
