@@ -102,7 +102,7 @@ View usage for the products on the following pages:
   page](https://app.testcontainers.cloud/dashboard/billing) in the
   Testcontainers Cloud Dashboard.
 
-- Docker Desktop: View the **Insights** page in the [Docker Admin Console](https://app.docker.com/admin). For more details, see
+- Docker Desktop: View the **Insights** page in [Docker Home](https://app.docker.com/). For more details, see
   [Insights](./insights.md).
 
 If your usage exceeds your subscription amount, you can [scale your

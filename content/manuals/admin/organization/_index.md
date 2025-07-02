@@ -37,7 +37,7 @@ grid:
   icon: key
 - title: Domain management
   description: Add, verify, and audit your domains.
-  link: /admin/organization/security-settings/domains/
+  link: /security/for-admins/domain-management/
   icon: domain_verification
 - title: FAQs
   description: Explore common organization FAQs.

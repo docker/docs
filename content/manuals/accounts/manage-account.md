@@ -18,9 +18,7 @@ account security.
 ## Update general settings
 
 1. Sign in to your [Docker account](https://app.docker.com/login).
-2. In Docker Home, select your avatar in the top-right corner to open the
-drop-down.
-3. Select **Account settings**.
+2. Select your avatar in the top-right corner and select **Account settings**.
 
 From the Account settings page, you can take any of the following actions.
 

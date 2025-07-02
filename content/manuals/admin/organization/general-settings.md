@@ -21,11 +21,10 @@ This information includes:
 
 To edit this information:
 
-1. Sign in to the [Admin Console](https://admin.docker.com).
-2. Select your company on the **Choose profile** page.
-3. Under **Organization settings**, select **Organization information**.
-4. Specify the organization information and select **Save**.
+1. Sign in to the [Admin Console](https://app.docker.com/admin).
+1. Select your company on the **Choose profile** page.
+1. Specify the organization information and select **Save**.
 
 ## Next steps
 
-In the **Organization settings** menu, you can also [configure SSO](../../security/for-admins/single-sign-on/configure/) and [set up SCIM](../../security/for-admins/provisioning/scim.md). If your organization isn't part of a company, from here you can also [audit your domains](../../security/for-admins/domain-audit.md) or [create a company](new-company.md).
+In the **Organization settings** menu, you can also [configure SSO](../../security/for-admins/single-sign-on/configure/) and [set up SCIM](../../security/for-admins/provisioning/scim.md). If your organization isn't part of a company, from here you can also [manage your domains](/manuals/security/for-admins/domain-management.md) or [create a company](new-company.md).
