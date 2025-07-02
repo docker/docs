@@ -42,7 +42,7 @@ with AI models locally.
 
 ## Requirements 
 
-Docker Runner is supported on the following platforms:
+Docker Model Runner is supported on the following platforms:
 
 {{< tabs >}}
 {{< tab name="Windows">}}
