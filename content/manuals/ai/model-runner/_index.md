@@ -47,14 +47,21 @@ Docker Runner is supported on the following platforms:
 {{< tabs >}}
 {{< tab name="Windows">}}
 
-- Windows with NVIDIA GPUs on Windows(amd64)
-- Windows with Adreno GPU and OpenCL on Windows(arm64)
+Windows(amd64):
+-  NVIDIA GPUs 
+-  NVIDIA drivers 576.57+
+
+Windows(arm64):
+- OpenCL for Adreno
+- Qualcomm Adreno GPU (6xx series and later)
+    
+  > [!NOTE]
+  > Some llama.cpp features might not be fully supported on the 6xx series.
 
 {{< /tab >}}
 {{< tab name="MacOS">}}
 
 - Apple Silicon
-
 
 {{< /tab >}}
 {{< tab name="Linux">}}
@@ -62,6 +69,7 @@ Docker Runner is supported on the following platforms:
 Docker Engine only:
 
 - Linux CPU & Linux NVIDIA
+- NVIDIA drivers 575.57.08+
 
 {{< /tab >}}
 {{</tabs >}}
