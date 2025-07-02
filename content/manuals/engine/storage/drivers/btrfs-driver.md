@@ -12,7 +12,7 @@ aliases:
 > required to use the `btrfs` storage driver simply because your system uses
 > Btrfs as its root filesystem.
 >
-> Btrfs driver has known issues - see [Moby issue #27653](https://github.com/moby/moby/issues/27653)
+> Btrfs driver has known issues. See [Moby issue #27653](https://github.com/moby/moby/issues/27653)
 > for more information.
 
 Btrfs is a copy-on-write filesystem that supports many advanced storage
