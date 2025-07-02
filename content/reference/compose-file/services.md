@@ -1629,6 +1629,11 @@ in the form:
 - `CONTAINER` is `port | range`.
 - `PROTOCOL` restricts ports to a specified protocol either `tcp` or `udp`(optional). Default is `tcp`.
 
+>[!CAUTION]
+>
+>If you do not specify an IP address (such as 127.0.0.1) and it binds to all interfaces then any machine on the same network could
+>potentially have access to the container. This could be especially dangerous if the container is exposed to the internet.
+
 Ports can be either a single value or a range. `HOST` and `CONTAINER` must use equivalent ranges. 
 
 You can either specify both ports (`HOST:CONTAINER`), or just the container port. In the latter case,
@@ -1636,6 +1641,8 @@ the container runtime automatically allocates any unassigned port of the host.
 
 `HOST:CONTAINER` should always be specified as a (quoted) string, to avoid conflicts
 with [YAML base-60 float](https://yaml.org/type/float.html).
+
+
 
 IPv6 addresses can be enclosed in square brackets.
 
