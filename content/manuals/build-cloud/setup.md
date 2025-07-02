@@ -56,7 +56,6 @@ command, or using the Docker Desktop settings GUI.
    This creates a local instance of the cloud builder named `cloud-ORG-BUILDER_NAME`.
 
    > [!NOTE]
-   > Example:
    >
    > If your organization is `acme` and you named your builder `default`, use:
    > ```console
