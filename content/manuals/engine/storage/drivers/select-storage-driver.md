@@ -110,7 +110,7 @@ backing filesystems.
 
 | Storage driver   | Supported backing filesystems                         |
 | :--------------- | :-----------------------------------------------------|
-| `overlay2`       | `xfs` with ftype=1, `ext4`, `btrfs`, (and more\*)     |
+| `overlay2`       | `xfs` with ftype=1, `ext4`, `btrfs`, (and more)     |
 | `fuse-overlayfs` | any filesystem                                        |
 | `btrfs`          | `btrfs`                                               |
 | `zfs`            | `zfs`                                                 |
