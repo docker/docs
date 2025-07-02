@@ -14,7 +14,7 @@ and secure Docker Desktop environments across your organization.
 
 ## Prerequisites
 
-- [Install Docker Desktop 4.37.0 or later](/manuals/desktop/release-notes.md).
+- [Install Docker Desktop 4.37.1 or later](/manuals/desktop/release-notes.md).
 - [Verify your domain](/manuals/security/for-admins/single-sign-on/configure.md#step-one-add-and-verify-your-domain).
 - [Enforce sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md) to
 ensure users authenticate to your organization.
