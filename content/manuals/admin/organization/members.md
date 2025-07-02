@@ -69,7 +69,7 @@ To resend an individual invitation:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select your
 organization.
-1. Select **Admin Console**, then **Members**.
+1. Select **Members**.
 1. Select the **action menu** next to the invitee and select **Resend**.
 1. Select **Invite** to confirm.
 
@@ -77,7 +77,7 @@ To bulk resend invitations:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select your
 organization.
-1. Select **Admin Console**, then **Members**.
+1. Select **Members**.
 1. Use the **checkboxes** next to **Usernames** to bulk select users.
 1. Select **Resend invites**.
 1. Select **Resend** to confirm.
@@ -110,7 +110,7 @@ To remove an invitation from the Admin Console:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select your
 organization.
-1. Select **Admin Console**, then **Members**.
+1. Select **Members**.
 1. Select the **action menu** next to the invitee and select **Remove invitee**.
 1. Select **Remove** to confirm.
 
@@ -145,7 +145,7 @@ To add a member to a team with the Admin Console:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select your
 organization.
-1. Select **Admin Console**, then **Teams**.
+1. Select **Teams**.
 1. Select the team name.
 1. Select **Add member**. You can add the member by searching for their email address or username.
 
@@ -191,7 +191,7 @@ To remove a member from a specific team with the Admin Console:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select your
 organization.
-1. Select **Admin Console**, then **Teams**.
+1. Select **Teams**.
 1. Select the team name.
 1. Select the **X** next to the user's name to remove them from the team.
 1. When prompted, select **Remove** to confirm.
@@ -224,7 +224,7 @@ To update a member role in the Admin Console:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select your
 organization.
-1. Select **Admin Console**, then **Members**.
+1. Select **Members**.
 1. Find the username of the member whose role you want to edit. Select the
 **Actions** menu, then **Edit role**.
 
@@ -274,7 +274,7 @@ To export a CSV file of your members:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select your
 organization.
-1. Select **Admin Console**, then **Members**.
+1. Select **Members**.
 1. Select the **download** icon to export a CSV file of all members.
 
 {{< /tab >}}

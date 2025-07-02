@@ -19,7 +19,6 @@ Before deactivating your Docker account, ensure you meet the following requireme
     To do this:
     1. Sign in to [Docker Home](https://app.docker.com/admin) and choose
     your organization.
-    1. Select **Admin Console**.
     1. Select **Members** and find your username.
     1. Select the **Actions** menu and then select **Leave organization**.
 

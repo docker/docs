@@ -36,8 +36,7 @@ steps:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and choose
 your organization.
-1. Select **Admin Console**, then **Insights**.
-1. On the **Insights** page, select the period of time for the data.
+1. Select **Insights**. then select the period of time for the data.
 
 > [!NOTE]
 >

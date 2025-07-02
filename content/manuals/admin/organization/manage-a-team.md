@@ -39,7 +39,7 @@ The organization owner can also add additional organization owners to help them 
 
 1. Sign in to [Docker Home](https://app.docker.com) and select your
 organization.
-1. Select **Admin Console**, then **Teams**.
+1. Select **Teams**.
 1. Select **Create team**.
 1. Fill out your team's information and select **Create**.
 1. [Add members to your team](members.md#add-a-member-to-a-team).
@@ -125,7 +125,7 @@ Organization owners can delete a team in Docker Hub or Admin Console. When you r
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select your
 organization.
-1. Select **Admin Console**, then **Teams**.
+1. Select **Teams**.
 1. Select the **Actions** icon next to the name of the team you want to delete.
 1. Select **Delete team**.
 1. Review the confirmation message, then select **Delete**.
