@@ -55,7 +55,7 @@ options:
       value_type: stringSlice
       default_value: '[]'
       description: |
-        Comma separated list of conditions to fail the action step if worse, options are: vulnerability, policy
+        Comma separated list of conditions to fail the action step if worse or changed, options are: vulnerability, policy, package
       deprecated: false
       hidden: false
       experimental: false
