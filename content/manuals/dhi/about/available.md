@@ -71,3 +71,24 @@ For example, you might find tags like the following in a DHI repository:
 
 - `3.9.23-debian12`: runtime image for Python 3.9.23
 - `3.9.23-debian12-dev`: development image for Python 3.9.23
+
+## FIPS variants
+
+Some Docker Hardened Images include a `-fips` variant. These variants use
+cryptographic modules that have been validated under [FIPS
+140](../core-concepts/fips.md), a U.S. government standard for secure
+cryptographic operations.
+
+FIPS variants are designed to help organizations meet regulatory and compliance
+requirements related to cryptographic use in sensitive or regulated
+environments.
+
+You can recognize FIPS variants by their tag that includes `-fips`.
+
+For example:
+- `3.13-fips`: FIPS variant of the Python 3.13 image
+- `3.9.23-debian12-fips`: FIPS variant of the Debian-based Python 3.9.23 image
+
+FIPS variants can be used in the same way as any other Docker Hardened Image and
+are ideal for teams operating in regulated industries or under compliance
+frameworks that require cryptographic validation.

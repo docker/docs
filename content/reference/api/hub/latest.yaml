@@ -927,7 +927,6 @@ paths:
         "404":
           $ref: "#/components/responses/NotFound"
 
-          
   /v2/orgs/{org_name}/members:
     parameters:
       - $ref: "#/components/parameters/org_name"
@@ -3020,7 +3019,10 @@ components:
         path:
           type: string
           example: "myorg/myrepo"
-          description: The path of the resource. The format of this will change depending on the type of resource.
+          description: |
+            The path of the resource. The format of this will change depending on the type of resource.
+
+            To reference public repositories, use `*/*/public` as the path value.
           required: true
         scopes:
           type: array

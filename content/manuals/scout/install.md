@@ -76,7 +76,7 @@ $ sh install-scout.sh
 5. Authorize the binary to be executable on macOS:
 
    ```console
-   xattr -d com.apple.quarantine $HOME/.docker/scout/docker-scout.
+   xattr -d com.apple.quarantine $HOME/.docker/scout/docker-scout
    ```
 
 6. Add the `scout` subdirectory to your `.docker/config.json` as a plugin directory:
