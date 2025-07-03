@@ -43,6 +43,10 @@ always authenticate to your organization, even though they can authenticate
 without it and the feature will take effect. Enforcing sign-in guarantees the
 feature always takes effect.
 
+> [!IMPORTANT]
+>
+> You must use [personal access tokens (PATs)](/manuals/security/for-developers/access-tokens.md) with Registry Access Management. Organization access tokens (OATs) are not compatible.
+
 ## Configure Registry Access Management permissions
 
 {{< tabs >}}

@@ -31,9 +31,9 @@ grid_admins:
   description: Configure sign-in for members of your teams and organizations.
   link: /security/for-admins/enforce-sign-in/
   icon: passkey
-- title: Domain audit
+- title: Domain management
   description: Identify uncaptured users in your organization.
-  link: /security/for-admins/domain-audit/
+  link: /security/for-admins/domain-management/
   icon: person_search
 - title: Docker Scout
   description: Explore how Docker Scout can help you create a more secure software supply chain.

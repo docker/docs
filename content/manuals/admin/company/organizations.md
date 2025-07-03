@@ -10,11 +10,11 @@ You can manage the organizations in a company in the Docker Admin Console.
 
 ## View all organizations
 
-1. Sign in to the [Admin Console](https://admin.docker.com).
-2. Select your company on the **Choose profile** page.
-3. Under **Organizations**, select **Overview**.
+1. Sign in to the [Docker Home](https://app.docker.com) and choose
+your company.
+1. Select **Admin Console**, then **Organizations**.
 
-The organization overview page displays all organizations under your company.
+The **Organizations** view displays all organizations under your company.
 
 ## Add seats to an organization
 
@@ -30,18 +30,17 @@ You must be a company owner to add an organization to a company. You must also b
 >
 > Once you add an organization to a company, you can't remove it from the company.
 
-1. Sign in to the [Admin Console](https://admin.docker.com).
-2. Select your company on the **Choose profile** page.
-3. Select **Organizations**, then **Overview**.
-4. Select **Add organization**.
-5. Choose the organization you want to add from the drop-down menu.
-6. Select **Add organization** to confirm.
+1. Sign in to [Docker Home](https://app.docker.com) and select your company.
+1. Select **Admin Console**, then **Organizations**.
+1. Select **Add organization**.
+1. Choose the organization you want to add from the drop-down menu.
+1. Select **Add organization** to confirm.
 
 ## Manage an organization
 
-1. Sign in to the [Admin Console](https://admin.docker.com).
-2. Select your company on the **Choose profile** page.
-3. Select the organization that you want to manage.
+1. Sign in to [Docker Home](https://app.docker.com) and select your company.
+1. Select **Admin Console**, then **Organizations**.
+1. Select the organization you want to manage.
 
 For more details about managing an organization, see [Organization administration](../organization/_index.md).
 

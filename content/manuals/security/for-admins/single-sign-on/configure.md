@@ -25,12 +25,13 @@ Get started creating a single sign-on (SSO) connection for your organization or 
 {{< tabs >}}
 {{< tab name="Admin Console" >}}
 
-1. Sign in to the [Admin Console](https://admin.docker.com/).
-2. Select your organization or company from the **Choose profile** page. Note that when an organization is part of a company, you must select the company and configure the domain for the organization at the company level.
-3. Under **Security and access**, select **Domain management**.
-4. Select **Add a domain**.
-5. Enter your domain in the text box and select **Add domain**.
-6. The pop-up modal will prompt you with steps to verify your domain. Copy the **TXT Record Value**.
+1. Sign in to [Docker Home](https://app.docker.com) and choose your
+organization. Note that when an organization is part of a company, you must
+select the company and configure the domain for the organization at the company level.
+1. Select **Admin Console**, then **Domain management**.
+1. Select **Add a domain**.
+1. Enter your domain in the text box and select **Add domain**.
+1. The pop-up modal will prompt you with steps to verify your domain. Copy the **TXT Record Value**.
 
 {{< /tab >}}
 {{< tab name="Docker Hub" >}}
@@ -38,11 +39,11 @@ Get started creating a single sign-on (SSO) connection for your organization or 
 {{% include "hub-org-management.md" %}}
 
 1. Sign in to [Docker Hub](https://hub.docker.com/).
-2. Select **My Hub** and then your organization from the list.
-3. On your organization page, select **Settings** and then **Security**.
-4. Select **Add a domain**.
-5. Enter your domain in the text box and select **Add domain**.
-6. The pop-up modal will prompt you with steps to verify your domain. Copy the **TXT Record Value**.
+1. Select **My Hub** and then your organization from the list.
+1. On your organization page, select **Settings** and then **Security**.
+1. Select **Add a domain**.
+1. Enter your domain in the text box and select **Add domain**.
+1. The pop-up modal will prompt you with steps to verify your domain. Copy the **TXT Record Value**.
 
 {{< /tab >}}
 {{< /tabs >}}
@@ -66,26 +67,26 @@ Use the **TXT Record Value** provided by Docker and follow the steps based on yo
 {{< tab name="AWS Route 53" >}}
 
 1. To add your TXT record to AWS, see [Creating records by using the Amazon Route 53 console](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-creating.html).
-2. TXT record verification can take 72 hours. Once you have waited for TXT record verification, return to the **Domain management** page of the [Admin Console](https://app.docker.com/admin) and select **Verify** next to your domain name.
+1. TXT record verification can take 72 hours. Once you have waited for TXT record verification, return to the **Domain management** page of the [Admin Console](https://app.docker.com/admin) and select **Verify** next to your domain name.
 
 {{< /tab >}}
 {{< tab name="Google Cloud DNS" >}}
 
 1. To add your TXT record to Google Cloud DNS, see [Verifying your domain with a TXT record](https://cloud.google.com/identity/docs/verify-domain-txt).
-2. TXT record verification can take 72 hours. Once you have waited for TXT record verification, return to the **Domain management** page of the [Admin Console](https://app.docker.com/admin) and select **Verify** next to your domain name.
+1. TXT record verification can take 72 hours. Once you have waited for TXT record verification, return to the **Domain management** page of the [Admin Console](https://app.docker.com/admin) and select **Verify** next to your domain name.
 
 {{< /tab >}}
 {{< tab name="GoDaddy" >}}
 
 1. To add your TXT record to GoDaddy, see [Add a TXT record](https://www.godaddy.com/help/add-a-txt-record-19232).
-2. TXT record verification can take 72 hours. Once you have waited for TXT record verification, return to the **Domain management** page of the [Admin Console](https://app.docker.com/admin) and select **Verify** next to your domain name.
+1. TXT record verification can take 72 hours. Once you have waited for TXT record verification, return to the **Domain management** page of the [Admin Console](https://app.docker.com/admin) and select **Verify** next to your domain name.
 
 {{< /tab >}}
 {{< tab name="Other providers" >}}
 
 1. Sign in to your domain host.
-2. Add a TXT record to your DNS settings and save the record.
-3. TXT record verification can take 72 hours. Once you have waited for TXT record verification, return to the **Domain management** page of the [Admin Console](https://app.docker.com/admin) and select **Verify** next to your domain name.
+1. Add a TXT record to your DNS settings and save the record.
+1. TXT record verification can take 72 hours. Once you have waited for TXT record verification, return to the **Domain management** page of the [Admin Console](https://app.docker.com/admin) and select **Verify** next to your domain name.
 
 {{< /tab >}}
 {{< /tabs >}}

@@ -24,20 +24,6 @@ Compose Bridge provides its own transformation for Kubernetes using Go templates
 
 For more detailed information on how these transformations work and how you can customize them for your projects, see [Customize](customize.md).
 
-## Setup
-
-To get started with Compose Bridge, you need to:
-
-1. Download and install Docker Desktop version 4.33 and later.
-2. Sign in to your Docker account.
-3. Navigate to the **Beta features** tab in **Settings**. 
-4. Select **Enable Compose Bridge**.
-5. Select **Apply**.
-
-## Feedback
-
-To give feedback, report bugs, or receive support, email `desktop-preview@docker.com`. There is also a dedicated Slack channel. To join, simply send an email to the provided address.
-
 ## What's next?
 
 - [Use Compose Bridge](usage.md)

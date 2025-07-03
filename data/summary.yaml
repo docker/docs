@@ -70,7 +70,7 @@ Compliance reporting:
 Compose attach:
   requires: Docker Compose [2.20.0](/manuals/compose/releases/release-notes.md#2200) and later
 Compose bridge:
-  availability: Beta
+  requires: Docker Desktop 4.43.0 and later
 Config profiles:
   requires: Docker Desktop 4.36 and later
 Compose dependent images:
@@ -107,6 +107,8 @@ Compose mac address:
   requires: Docker Compose [2.23.2](/manuals/compose/releases/release-notes.md#2232) and later
 Compose menu:
   requires: Docker Compose [2.26.0](/manuals/compose/releases/release-notes.md#2260) and later
+Compose models:
+  requires: Docker Compose [2.38.0](/manuals/compose/releases/release-notes.md#2380) and later
 Compose model runner:
   requires: Docker Compose [2.35.0](/manuals/compose/releases/release-notes.md#2350) and later, and Docker Desktop 4.41 and later
 Compose OCI artifact:
@@ -160,7 +162,7 @@ Docker Init:
 Docker Model Runner:
   availability: Beta
   requires: Docker Engine or Docker Desktop (Windows) 4.41+ or Docker Desktop (MacOS) 4.40+
-  for: Docker Desktop for Mac with Apple Silicon or Windows with NVIDIA GPUs
+  for: See Requirements section below
 Docker Projects:
   availability: Beta
 Docker Scout exceptions:
@@ -173,9 +175,6 @@ Docker Scout health scores:
   availability: Beta
 Docker Scout Mount Permissions:
   requires: Docker Desktop [4.34.0](/manuals/desktop/release-notes.md#4340) and later
-Domain audit:
-  subscription: [Business]
-  for: Administrators
 Domain management:
   subscription: [Business]
   for: Administrators

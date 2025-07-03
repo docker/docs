@@ -16,12 +16,64 @@ aliases:
 
 {{< summary-bar feature_name="Docker Model Runner" >}}
 
+Docker Model Runner makes it easy to manage, run, and
+deploy AI models using Docker. Designed for developers,
+Docker Model Runner streamlines the process of pulling, running, and serving
+large language models (LLMs) and other AI models directly from Docker Hub or any
+OCI-compliant registry.
+
+With seamless integration into Docker Desktop and Docker
+Engine, you can serve models via OpenAI-compatible APIs, package GGUF files as
+OCI Artifacts, and interact with models from both the command line and graphical
+interface.
+
+Whether you're building generative AI applications, experimenting with machine
+learning workflows, or integrating AI into your software development lifecycle,
+Docker Model Runner provides a consistent, secure, and efficient way to work
+with AI models locally.
+
 ## Key features
 
 - [Pull and push models to and from Docker Hub](https://hub.docker.com/u/ai)
+- Serve models on OpenAI-compatible APIs for easy integration with existing apps
 - Package GGUF files as OCI Artifacts and publish them to any Container Registry
 - Run and interact with AI models directly from the command line or from the Docker Desktop GUI
 - Manage local models and display logs
+
+## Requirements 
+
+Docker Model Runner is supported on the following platforms:
+
+{{< tabs >}}
+{{< tab name="Windows">}}
+
+Windows(amd64):
+-  NVIDIA GPUs 
+-  NVIDIA drivers 576.57+
+
+Windows(arm64):
+- OpenCL for Adreno
+- Qualcomm Adreno GPU (6xx series and later)
+    
+  > [!NOTE]
+  > Some llama.cpp features might not be fully supported on the 6xx series.
+
+{{< /tab >}}
+{{< tab name="MacOS">}}
+
+- Apple Silicon
+
+{{< /tab >}}
+{{< tab name="Linux">}}
+
+Docker Engine only:
+
+- Linux CPU & Linux NVIDIA
+- NVIDIA drivers 575.57.08+
+
+{{< /tab >}}
+{{</tabs >}}
+
 
 ## How it works
 
@@ -83,6 +135,10 @@ You can now use the `docker model` command in the CLI and view and interact with
 
 Models are cached locally.
 
+> [!NOTE]
+>
+> When working with the Docker CLI, you can also pull models directly from [HuggingFace](https://huggingface.co/).
+
 {{< tabs group="release" >}}
 {{< tab name="From Docker Desktop">}}
 
@@ -92,7 +148,15 @@ Models are cached locally.
 {{< /tab >}}
 {{< tab name="From the Docker CLI">}}
 
-Use the [`docker model pull` command](/reference/cli/docker/model/pull/).
+Use the [`docker model pull` command](/reference/cli/docker/model/pull/). For example:
+  
+```bash {title="Pulling from Docker Hub"}
+docker model pull ai/smollm2:360M-Q4_K_M
+```
+
+```bash {title="Pulling from HuggingFace"}
+docker model pull hf.co/bartowski/Llama-3.2-1B-Instruct-GGUF
+```
 
 {{< /tab >}}
 {{< /tabs >}}

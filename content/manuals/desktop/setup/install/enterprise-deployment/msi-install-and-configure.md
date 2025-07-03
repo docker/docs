@@ -17,8 +17,8 @@ The MSI package supports various MDM (Mobile Device Management) solutions, makin
 
 ## Install interactively
 
-1. In the [Docker Admin Console](http://admin.docker.com/), navigate to your organization.
-2. Under **Docker Desktop**, select the **Deploy** page.
+1. In [Docker Home](http://app.docker.com), choose your organization.
+2. Select **Admin Console**, then **Enterprise deployment**.
 3. From the **Windows OS** tab, select the **Download MSI installer** button.
 4. Once downloaded, double-click `Docker Desktop Installer.msi` to run the installer.
 5. After accepting the license agreement, choose the install location. By default, Docker Desktop is installed at `C:\Program Files\Docker\Docker`.
@@ -35,6 +35,7 @@ The MSI package supports various MDM (Mobile Device Management) solutions, makin
 8. When the installation is successful, select **Finish** to complete the installation process.
 
 If your administrator account is different from your user account, you must add the user to the **docker-users** group to access features that require higher privileges, such as creating and managing the Hyper-V VM, or using Windows containers:
+
 1. Run **Computer Management** as an **administrator**.
 2. Navigate to **Local Users and Groups** > **Groups** > **docker-users**.
 3. Right-click to add the user to the group.
@@ -44,7 +45,7 @@ If your administrator account is different from your user account, you must add 
 >
 > When installing Docker Desktop with the MSI, in-app updates are automatically disabled. This ensures organizations can maintain version consistency and prevent unapproved updates. For Docker Desktop installed with the .exe installer, in-app updates remain supported.
 >
-> Docker Desktop notifies you when an update is available. To update Docker Desktop, download the latest installer from the Docker Admin Console. Navigate to the  **Deploy** page > under **Docker Desktop**.
+> Docker Desktop notifies you when an update is available. To update Docker Desktop, download the latest installer from the Docker Admin Console. Navigate to the **Enterprise deployment** page.
 >
 > To keep up to date with new releases, check the [release notes](/manuals/desktop/release-notes.md) page.
 
@@ -99,13 +100,13 @@ msiexec /i "DockerDesktop.msi" /L*V ".\msi.log" /quiet /norestart
 #### Install non-interactively with admin settings
 
 ```powershell
-msiexec /i "DockerDesktop.msi" /L*V ".\msi.log" /quiet /norestart ADMINSETTINGS="{"configurationFileVersion":2,"enhancedContainerIsolation":{"value":true,"locked":false}}" ALLOWEDORG="docker"
+msiexec /i "DockerDesktop.msi" /L*V ".\msi.log" /quiet /norestart ADMINSETTINGS="{"configurationFileVersion":2,"enhancedContainerIsolation":{"value":true,"locked":false}}" ALLOWEDORG="your-organization"
 ```
 
 #### Install interactively and allow users to switch to Windows containers without admin rights
 
 ```powershell
-msiexec /i "DockerDesktop.msi" /L*V ".\msi.log" /quiet /norestart ALLOWEDORG="docker" ALWAYSRUNSERVICE=1
+msiexec /i "DockerDesktop.msi" /L*V ".\msi.log" /quiet /norestart ALLOWEDORG="your-organization" ALWAYSRUNSERVICE=1
 ```
 
 #### Install with the passive display option
