@@ -77,25 +77,27 @@ By integrating SLSA-compliant DHIs into your development and deployment processe
 - Streamline audits: Utilize verifiable build records and signatures to simplify
   security audits and assessments.
 
-## How to verify SLSA compliance
+## Get and verify SLSA provenance for Docker Hardened Images
 
-Each DHI is cryptographically signed and complies with the SLSA framework,
-ensuring verifiable build provenance and integrity.
+Each Docker Hardened Image (DHI) is cryptographically signed and includes
+attestations. These attestations provide verifiable build provenance and
+demonstrate adherence to SLSA Build Level 3 standards.
 
-To evaluate whether a DHI complies with SLSA standards, you can use the
-[slsa-verifier tool](https://github.com/slsa-framework/slsa-verifier). This tool
-verifies the SLSA provenance of an image, ensuring that it was built according
-to the specified security levels.
-
-To use the slsa-verifier tool after installation, run the following command.
-Replace `<your-namespace>/dhi-<image>:<tag>` with the image name and tag.
+To get and verify SLSA provenance for a DHI, you can use Docker Scout.
 
 ```console
-$ slsa-verifier verify-image <your-namespace>/dhi-<image>:<tag>
+$ docker scout attest get <your-namespace>/dhi-<image>:<tag> \
+  --predicate-type https://slsa.dev/provenance/v0.2 \
+  --verify
 ```
 
-This command will verify the SLSA provenance of the image, checking that it
-meets the specified security levels.
+For example:
+
+```console
+$ docker scout attest get docs/dhi-node:20.19-debian12-fips-20250701182639 \
+  --predicate-type https://slsa.dev/provenance/v0.2 \
+  --verify
+```
 
 ## Resources
 
