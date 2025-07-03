@@ -48,16 +48,10 @@ up](https://www.docker.com/products/docker-offload/) and subscribe.
    > Offload usage](/offload/usage/).
 
 When Docker Offload is started, you'll see a cloud icon ({{< inline-image
-src="./images/cloud-mode.png" alt="Offload mode icon"
->}}), and the Docker Desktop Dashboard appears purple.
+src="./images/cloud-mode.png" alt="Offload mode icon" >}})
+in the Docker Desktop Dashboard header, and the Docker Desktop Dashboard appears purple.
 You can run `docker offload status` in a terminal to check the status of
 Docker Offload.
-
-> [!NOTE]
->
-> If you're unable to start Docker Offload, ensure you have the latest
-> version of Docker Desktop installed, you're signed in, and that Docker
-> Offload is enabled in **Settings** > **Beta features**.
 
 ## Step 3: Run a container with Docker Offload
 

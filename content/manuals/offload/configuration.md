@@ -61,10 +61,6 @@ Your subscription includes the following Build cache space:
 
 To get more Build cache space, [upgrade your subscription](/manuals/subscription/change.md).
 
-> [!TIP]
->
-> If you build large images, consider allocating less storage for caching.
-
 ### Private resource access
 
 Private resource access lets cloud builders pull images and packages from

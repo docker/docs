@@ -19,31 +19,37 @@ Docker Desktop uses Offload to run both builds and containers in the cloud.
 If builds or containers are failing to run, falling back to local, or reporting
 session errors, use the following steps to help resolve the issue.
 
-1. Use the following command to check if the connection is active:
+1. Ensure Docker Offload is enabled in Docker Desktop:
+
+   1. Open Docker Desktop and sign in.
+   2. Go to **Settings** > **Beta features**.
+   3. Ensure that **Docker Offload** is checked.
+
+2. Use the following command to check if the connection is active:
 
    ```console
    $ docker offload status
    ```
 
-2. To get more information, run the following command:
+3. To get more information, run the following command:
 
    ```console
    $ docker offload diagnose
    ```
 
-3. If you're not connected, start a new session:
+4. If you're not connected, start a new session:
 
    ```console
    $ docker offload start
    ```
 
-4. Verify authentication with `docker login`.
+5. Verify authentication with `docker login`.
 
-5. If needed, you can sign out and then sign in again:
+6. If needed, you can sign out and then sign in again:
 
    ```console
    $ docker logout
    $ docker login
    ```
 
-6. Verify your usage and billing. For more information, see [Docker Offload usage](/offload/usage/).
+7. Verify your usage and billing. For more information, see [Docker Offload usage](/offload/usage/).
