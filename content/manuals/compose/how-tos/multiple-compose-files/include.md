@@ -53,6 +53,7 @@ Here `serviceB` is defined in a Compose file stored on Docker Hub.
 Compose reports an error if any resource from `include` conflicts with resources from the included Compose file. This rule prevents
 unexpected conflicts with resources defined by the included compose file author. However, there may be some circumstances where you might want to customize the
 included model. This can be achieved by adding an override file to the include directive:
+
 ```yaml
 include:
   - path : 
