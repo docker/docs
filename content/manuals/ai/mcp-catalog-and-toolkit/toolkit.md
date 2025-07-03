@@ -213,7 +213,7 @@ For more information about the Agent mode, see the
 You can connect the MCP Toolkit to your development workflow via
 OAuth integration. For now, the MCP Toolkit only supports GitHub OAuth.
 
-1. On https://github.com/, ensure you are logged in.
+1. On https://github.com/, ensure you are signed in.
 1. In Docker Desktop, select **MCP Toolkit** and select the **OAuth** tab. 
 1. In the GitHub entry, select **Authorize**. Your browser opens the GitHub authorization page.
 1. In the GitHub authorization page, select **Authorize Docker**. Once the authorization
