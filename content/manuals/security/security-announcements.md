@@ -7,6 +7,14 @@ toc_min: 1
 toc_max: 2
 ---
 
+##  Docker Desktop 4.43.0 Security Update: CVE-2025-6587
+
+_Last updated July 03, 2025_
+
+A vulnerability in Docker Desktop was fixed on July 03 in the [4.43.0](https://docs.docker.com/desktop/release-notes/#4430) release: 
+
+- Fixed [CVE-2025-6587](https://www.cve.org/CVERecord?id=CVE-2025-6587) where sensitive system environment variables were included in Docker Desktop diagnostic logs, allowing for potential secret exposure.
+
 ## Docker Desktop 4.41.0 Security Update: CVE-2025-3224, CVE-2025-4095, and CVE-2025-3911
 
 _Last updated May 15, 2025_
