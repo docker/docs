@@ -102,15 +102,36 @@ services:
       type: model
       options:
         model: ai/smollm2
+        context-size: 1024
+        runtime-flags: "--no-prefill-assistant"
 ```
 
-Notice the dedicated `provider` attribute in the `ai_runner` service.   
-This attribute specifies that the service is a model provider and lets you define options such as the name of the model to be used.
+Notice the following:
 
-There is also a `depends_on` attribute in the `my-chat-app` service.  
-This attribute specifies that the `my-chat-app` service depends on the `ai_runner` service.  
-This means that the `ai_runner` service will be started before the `my-chat-app` service to allow injection of model information to the `my-chat-app` service.
+In the `ai_runner` service:
 
-## Reference
+- `provider.type`: Specifies that the service is a `model` provider.
+- `provider.options`: Specifies the options of the mode:
+  
+  - We want to use `ai/smollm2` model.
+  
+  - We set the context size to `1024` tokens.
+
+  
+    > [!NOTE]
+    > Each model has its own maximum context size. When increasing the context length,
+    > consider your hardware constraints. In general, try to use the smallest context size
+    > possible for your use case.
+  
+  - We pass the llama.cpp server `--no-prefill-assistant` parameter,
+    see [the available parameters](https://github.com/ggml-org/llama.cpp/blob/master/tools/server/README.md).
+
+In the `chat` service:
+
+-  `depends_on` specifies that the `chat` service depends on the `ai_runner` service. The
+   `ai_runner` service will be started before the `chat` service, to allow injection of model 
+   information to the `chat` service.
+
+## Related pages
 
 - [Docker Model Runner documentation](/manuals/ai/model-runner.md)
