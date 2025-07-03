@@ -11,7 +11,7 @@ toc_max: 2
 
 _Last updated July 03, 2025_
 
-A vulnerability in Docker Desktop was fixed on July 03 in the [4.43.0](/manuals/desktop/release-notes/#4430) release: 
+A vulnerability in Docker Desktop was fixed on July 03 in the [4.43.0](/manuals/desktop/release-notes.md#4430) release: 
 
 - Fixed [CVE-2025-6587](https://www.cve.org/CVERecord?id=CVE-2025-6587) where sensitive system environment variables were included in Docker Desktop diagnostic logs, allowing for potential secret exposure.
 
@@ -19,26 +19,26 @@ A vulnerability in Docker Desktop was fixed on July 03 in the [4.43.0](/manuals/
 
 _Last updated May 15, 2025_
 
-Three vulnerabilities in Docker Desktop were fixed on April 28 in the [4.41.0](/manuals/desktop/release-notes/#4410) release.
+Three vulnerabilities in Docker Desktop were fixed on April 28 in the [4.41.0](/manuals/desktop/release-notes.md#4410) release.
 
 - Fixed [CVE-2025-3224](https://www.cve.org/CVERecord?id=CVE-2025-3224) allowing an attacker with access to a user machine to perform an elevation of privilege when Docker Desktop updates.
 - Fixed [CVE-2025-4095](https://www.cve.org/CVERecord?id=CVE-2025-4095) where Registry Access Management (RAM) policies were not enforced when using a MacOS configuration profile, allowing users to pull images from unapproved registries.
 - Fixed [CVE-2025-3911](https://www.cve.org/CVERecord?id=CVE-2025-3911) allowing an attacker with read access to a user's machine to obtain sensitive information from Docker Desktop log files, including environment variables configured for running containers.
 
-We strongly encourage you to update to Docker Desktop [4.41.0](/manuals/desktop/release-notes/#4410).
+We strongly encourage you to update to Docker Desktop [4.41.0](/manuals/desktop/release-notes.md#4410).
 
 ## Docker Desktop 4.34.2 Security Update: CVE-2024-8695 and CVE-2024-8696
 
 _Last updated September 13, 2024_
 
-Two remote code execution (RCE) vulnerabilities in Docker Desktop related to Docker Extensions were reported by [Cure53](https://cure53.de/) and were fixed on September 12 in the [4.34.2](/manuals/desktop/release-notes/#4342) release.
+Two remote code execution (RCE) vulnerabilities in Docker Desktop related to Docker Extensions were reported by [Cure53](https://cure53.de/) and were fixed on September 12 in the [4.34.2](/manuals/desktop/release-notes.md#4342) release.
 
 - [CVE-2024-8695](https://www.cve.org/cverecord?id=CVE-2024-8695): A remote code execution (RCE) vulnerability via crafted extension description/changelog could be abused by a malicious extension in Docker Desktop before 4.34.2. [Critical]
 - [CVE-2024-8696](https://www.cve.org/cverecord?id=CVE-2024-8696): A remote code execution (RCE) vulnerability via crafted extension publisher-url/additional-urls could be abused by a malicious extension in Docker Desktop before 4.34.2. [High]
 
 No existing extensions exploiting the vulnerabilities were found in the Extensions Marketplace. The Docker team will be closely monitoring and diligently reviewing any requests for publishing new extensions.
 
-We strongly encourage you to update to Docker Desktop [4.34.2](/manuals/desktop/release-notes/#4342). If you are unable to update promptly, you can [disable Docker Extensions](/manuals/extensions/settings-feedback/#turn-on-or-turn-off-extensions) as a workaround.
+We strongly encourage you to update to Docker Desktop [4.34.2](/manuals/desktop/release-notes.md#4342). If you are unable to update promptly, you can [disable Docker Extensions](/manuals/extensions/settings-feedback.md#turn-on-or-turn-off-extensions) as a workaround.
 
 ## Deprecation of password logins on CLI when SSO enforced
 
@@ -95,7 +95,7 @@ If you are unable to update to an unaffected version promptly, follow these best
   * [Enhanced Container Isolation](/manuals/security/for-admins/hardened-desktop/enhanced-container-isolation/_index.md), which mitigates the impact of CVE-2024-21626 in the case of running containers from malicious images.
   * [Image Access Management](for-admins/hardened-desktop/image-access-management.md), and [Registry Access Management](/manuals/security/for-admins/hardened-desktop/registry-access-management.md), which give organizations control over which images and repositories their users can access.
 * For CVE-2024-23650, CVE-2024-23651, CVE-2024-23652, and CVE-2024-23653, avoid using BuildKit frontend from an untrusted source. A frontend image is usually specified as the #syntax line on your Dockerfile, or with `--frontend` flag when using the `buildctl build` command.
-* To mitigate CVE-2024-24557, make sure to either use BuildKit or disable caching when building images. From the CLI this can be done via the `DOCKER_BUILDKIT=1` environment variable (default for Moby >= v23.0 if the buildx plugin is installed) or the `--no-cache flag`. If you are using the HTTP API directly or through a client, the same can be done by setting `nocache` to `true` or `version` to `2` for the [/build API endpoint](/manuals/engine/api/v1.44/#tag/Image/operation/ImageBuild).
+* To mitigate CVE-2024-24557, make sure to either use BuildKit or disable caching when building images. From the CLI this can be done via the `DOCKER_BUILDKIT=1` environment variable (default for Moby >= v23.0 if the buildx plugin is installed) or the `--no-cache flag`. If you are using the HTTP API directly or through a client, the same can be done by setting `nocache` to `true` or `version` to `2` for the [/build API endpoint](https://docs.docker.com/reference/api/engine/version/v1.44/#tag/Image/operation/ImageBuild).
 
 ### Technical details and impact
 
