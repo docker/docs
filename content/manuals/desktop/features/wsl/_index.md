@@ -48,7 +48,7 @@ Before you turn on the Docker Desktop WSL 2 feature, ensure you have:
 5. From the **General** tab, select **Use WSL 2 based engine**..
 
     If you have installed Docker Desktop on a system that supports WSL 2, this option is turned on by default.
-6. Select **Apply & Restart**.
+6. Select **Apply**.
 
 Now `docker` commands work from Windows using the new WSL 2 engine.
 
@@ -92,7 +92,7 @@ Docker Desktop does not require any particular Linux distributions to be install
     ```
    If **WSL integrations** isn't available under **Resources**, Docker may be in Windows container mode. In your taskbar, select the Docker menu and then **Switch to Linux containers**.
 
-3. Select **Apply & Restart**.
+3. Select **Apply**.
 
 > [!NOTE]
 >

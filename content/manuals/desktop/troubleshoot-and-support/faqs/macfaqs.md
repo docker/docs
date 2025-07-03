@@ -48,7 +48,7 @@ To move the disk image file to a different location:
 
 2. In the **Disk image location** section, select **Browse** and choose a new location for the disk image.
 
-3. Select **Apply & Restart** for the changes to take effect.
+3. Select **Apply** for the changes to take effect.
 
 > [!IMPORTANT]
 >
@@ -112,7 +112,7 @@ To reduce the maximum size of the disk image file:
 
 2. The **Disk image size** section contains a slider that allows you to change the maximum size of the disk image. Adjust the slider to set a lower limit.
 
-3. Select **Apply & Restart**.
+3. Select **Apply**.
 
 When you reduce the maximum size, the current disk image file is deleted, and therefore, all containers and images are lost.
 
