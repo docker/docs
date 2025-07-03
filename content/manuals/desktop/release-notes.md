@@ -37,7 +37,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ### New
 
-- Deploy your Compose project to K8s right on Docker Desktop via Compose Bridge CLI.
+- [Compose Bridge](/manuals/compose/bridge/_index.md) is now generally available.
 
 ### Upgrades
 
@@ -53,9 +53,9 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Fixed a bug causing `docker start` to drop the container's port mappings for a container already running.
 - Fixed a bug that prevented container ports to be displayed on the GUI when a container was re-started.
 - Fixed a bug that caused Docker API `500 Internal Server Error for API route and version` error application start.
-- The dashboard's settings screen's "Apply & restart" button is now labeled "Apply" when clicking it will not restart the VM.
+- The settings **Apply & restart** button is now labeled **Apply**. The VM is no longer restarted when applying changed settings. 
 - Fixed a bug where the disk would be corrupted if Docker is shutdown during a `fsck`.
-- Fixed a bug causing an incorrect `~/.kube/config` in WSL2 when using a `kind` kubernetes cluster.
+- Fixed a bug causing an incorrect `~/.kube/config` in WSL2 when using a `kind` Kubernetes cluster.
 - Return an explicit error to a Docker API / `docker` CLI command if Docker Desktop has been manually paused.
 - Fixed an issue where unknown keys in Admin and Cloud settings caused a failure.
 
@@ -69,7 +69,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 #### For Windows
 
-- Fixed an issue that caused Docker Desktop installer to crash when the current user has no `SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall` registry key.
+- Fixed an issue that caused the Docker Desktop installer to crash when the current user has no `SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall` registry key.
 - Fixed a bug where Docker Desktop could leak a `com.docker.build` process and fail to start. Fixes [docker/for-win#14840](https://github.com/docker/for-win/issues/14840)
 
 ### Known issues
@@ -80,7 +80,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 #### For Windows
 
-- Possible incompatibility between the "host networking" feature of Docker Desktop and the most recent WSL 2 Linux kernel. If you encounter such issues, please downgrade WSL 2 to 2.5.7.
+- Possible incompatibility between the "host networking" feature of Docker Desktop and the most recent WSL 2 Linux kernel. If you encounter such issues, downgrade WSL 2 to 2.5.7.
 
 ## 4.42.1
 
