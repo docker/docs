@@ -164,8 +164,12 @@ and add Claude Desktop as a client:
 
 You can interact with all your installed MCP servers in VS Code:
 
-1. Option 1: To enable the MCP Toolkit globally:
- 
+1. To enable the MCP Toolkit:
+
+
+   {{< tabs group="" >}}
+   {{< tab name="Enable globally">}}
+
    1. Insert the following in your VS Code's User`settings.json`:
    
       ```json
@@ -184,7 +188,8 @@ You can interact with all your installed MCP servers in VS Code:
       }
       ```
 
-1. Option 2: Enable the MCP Toolkit for a given project:
+   {{< /tab >}}
+   {{< tab name="Enable for a given project">}}
 
    1. In your terminal, navigate to your project's folder.
    1. Run:
@@ -196,7 +201,10 @@ You can interact with all your installed MCP servers in VS Code:
       > [!NOTE]
       > This command creates a `.vscode/mcp.json` file in the current directory. We
       > recommend you add it to your  `.gitignore` file.
-   
+
+  {{< /tab >}}
+  {{</tabs >}}
+
 1. In Visual Studio Code, open a new Chat and select the **Agent** mode:
    
    ![Copilot mode switching](./images/copilot-mode.png)
