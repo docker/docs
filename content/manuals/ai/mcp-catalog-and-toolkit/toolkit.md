@@ -216,7 +216,7 @@ OAuth integration. For now, the MCP Toolkit only supports GitHub OAuth.
 1. On https://github.com/, ensure you are logged in.
 1. In Docker Desktop, select **MCP Toolkit** and select the **OAuth** tab. 
 1. In the GitHub entry, select **Authorize**. Your browser opens the GitHub authorization page.
-1. In the GitHub authorization page, select **Authorize docker**. Once the authorization
+1. In the GitHub authorization page, select **Authorize Docker**. Once the authorization
    is successful, you are automatically redirected to Docker Desktop.
 1. Install the **GitHub Official** MCP server, see [Install an MCP server](#install-an-mcp-server).
 
