@@ -142,7 +142,7 @@ You can view and verify this attestation using the Docker Scout CLI.
     ```
 
 If the attestation is valid, Docker Scout will confirm the signature and show
-the matching Cosign verify-attestation command.
+the matching `cosign verify` command.
 
 To view other attestations, such as SBOMs or vulnerability reports, see [Verify
 an image](../how-to/verify.md).
