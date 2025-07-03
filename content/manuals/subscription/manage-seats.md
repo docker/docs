@@ -30,11 +30,11 @@ When you add seats to your subscription in the middle of your billing cycle, you
 
 To add seats to your subscription:
 
-1. Sign in to [Docker Home](https://app.docker.com/).
-2. Under Settings and administration, select **Billing**.
-3. Select your account from the drop-down menu in the top-left.
-4. Select **Add seats**.
-5. Follow the on-screen instructions to complete adding seats.
+1. Sign in to [Docker Home](https://app.docker.com/) and select your
+organization.
+1. Select **Billing**.
+1. Select **Add seats** and follow the on-screen instructions to complete
+adding seats.
 
 > [!NOTE]
 >
@@ -53,15 +53,15 @@ You can now add more members to your organization. For more information, see [Ma
 ### Add seats to Legacy Docker subscription
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
-2. Select your avatar in the top-left, and select **Billing** from the drop-down menu.
-3. On the Billing page, select **Add seats**.
-4. Select the number of seats you want to add, then select **Purchase**.
+1. Select your organization, then select **Billing**.
+1. On the Billing page, select **Add seats**.
+1. Select the number of seats you want to add, then select **Purchase**.
 
 ### Add seats to Docker Build Cloud
 
-1. Sign in to Docker Build Cloud.
-2. Select **Account settings**, then **Add seats**.
-3. Select the number of seats you want to add, then select **Add seats**.
+1. Sign in to [Docker Home](https://app.docker.com) and select **Build Cloud**.
+1. Select **Account settings**, then **Add seats**.
+1. Select the number of seats you want to add, then select **Add seats**.
 
 {{< /tab >}}
 {{< /tabs >}}
@@ -87,11 +87,11 @@ For example, if you receive your billing on the 8th of every month for 10 seats 
 
 To remove seats:
 
-1. Sign in to [Docker Home](https://app.docker.com/).
-2. Under Settings and administration, select **Billing**.
-3. Select your account from the drop-down menu in the top-left.
-4. Select the action icon and then select **Remove seats**.
-5. Follow the on-screen instructions to complete removing seats.
+1. Sign in to [Docker Home](https://app.docker.com/) and select your
+organization.
+1. Select **Billing**.
+1. In the **Seats** row, select the action icon, then **Remove seats**.
+1. Follow the on-screen instructions to complete removing seats.
 
 You can cancel the removal of seats before your next billing cycle. To do so, select **Cancel change**.
 
@@ -105,15 +105,15 @@ You can cancel the removal of seats before your next billing cycle. To do so, se
 ### Remove seats from Legacy Docker subscription
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
-2. Select your avatar in the top-left, and select **Billing** from the drop-down menu.
-3. On the Billing page, select **Remove seats**.
-4. Follow the on-screen instructions to complete removing seats.
+1. Select your organization, then select **Billing**.
+1. On the Billing page, select **Remove seats**.
+1. Follow the on-screen instructions to complete removing seats.
 
 ### Remove seats from Docker Build Cloud
 
-1. Sign in to [Docker Build Cloud](https://app.docker.com/build).
-2. Select **Account settings**, then **Remove seats**.
-3. Follow the on-screen instructions to complete removing seats.
+1. Sign in to [Docker Home](https://app.docker.com) and select **Build Cloud**.
+1. Select **Account settings**, then **Remove seats**.
+1. Follow the on-screen instructions to complete removing seats.
 
 {{< /tab >}}
 {{< /tabs >}}

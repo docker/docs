@@ -18,20 +18,22 @@ Ask Gordon is your personal AI assistant embedded in Docker Desktop and the
 Docker CLI. It's designed to streamline your workflow and help you make the most
 of the Docker ecosystem.
 
-## What is Ask Gordon?
+## Key features
 
-Ask Gordon provides AI-powered assistance in Docker tools.
-It offers contextual help for tasks like:
+Ask Gordon provides AI-powered assistance in Docker tools. It can:
 
-- Improving Dockerfiles
-- Running and troubleshooting containers
-- Interacting with your images and code
-- Finding vulnerabilities or configuration issues
-- Migrating a Dockerfile to use [Docker Hardened Images](/manuals/dhi/_index.md)
+- Improve Dockerfiles
+- Run and troubleshoot containers
+- Interact with your images and code
+- Find vulnerabilities or configuration issues
+- Migrate a Dockerfile to use [Docker Hardened Images](/manuals/dhi/_index.md)
 
-It understands your local environment, including source code, Dockerfiles, and images, to provide personalized and actionable guidance.
+It understands your local environment, including source code, Dockerfiles, and
+images, to provide personalized and actionable guidance.
 
-These features are not enabled by default, and are not
+Ask Gordon remembers conversations, allowing you to switch topics more easily.
+
+Ask Gordon is not enabled by default, and is not
 production-ready. You may also encounter the term "Docker AI" as a broader
 reference to this technology.
 
@@ -95,7 +97,7 @@ If you have concerns about data collection or usage, you can
    terms before you can enable the feature. Review the terms and select **Accept
    and enable** to continue.
 
-4. Select **Apply & restart**.
+4. Select **Apply**.
 
 > [!IMPORTANT]
 >
@@ -218,7 +220,7 @@ If you've enabled Ask Gordon and you want to disable it again:
 1. Open the **Settings** view in Docker Desktop.
 2. Navigate to **Beta features**.
 3. Clear the **Enable Docker AI** checkbox.
-4. Select **Apply & restart**.
+4. Select **Apply**.
 
 ### For organizations
 

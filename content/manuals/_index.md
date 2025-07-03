@@ -50,7 +50,7 @@ params:
     icon: /icons/Whale.svg
     link: /desktop/
   - title: Docker Hardened Images
-    description: Secure, minimal base images for trusted software delivery.
+    description: Secure, minimal images for trusted software delivery.
     icon: /icons/dhi.svg
     link: /dhi/
   - title: Build Cloud

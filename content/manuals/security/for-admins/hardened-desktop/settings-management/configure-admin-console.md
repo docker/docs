@@ -14,7 +14,7 @@ and secure Docker Desktop environments across your organization.
 
 ## Prerequisites
 
-- [Install Docker Desktop 4.36.0 or later](/manuals/desktop/release-notes.md).
+- [Install Docker Desktop 4.37.1 or later](/manuals/desktop/release-notes.md).
 - [Verify your domain](/manuals/security/for-admins/single-sign-on/configure.md#step-one-add-and-verify-your-domain).
 - [Enforce sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md) to
 ensure users authenticate to your organization.
@@ -26,18 +26,18 @@ ensure users authenticate to your organization.
 
 ## Create a settings policy
 
-1. Go to the [Docker Admin Console](https://app.docker.com/admin) and select
+1. Sign in to [Docker Home](https://app.docker.com/) and select
 your organization.
-2. Under **Docker Desktop**, select **Settings Management**.
-3. Select **Create a settings policy**.
-4. Provide a name and optional description.
+1. Select **Admin Console**, then **Desktop Settings Management**.
+1. Select **Create a settings policy**.
+1. Provide a name and optional description.
 
       > [!TIP]
       >
       > You can upload an existing `admin-settings.json` file to pre-fill the form.
       Admin Console policies override local `admin-settings.json` files.
 
-5. Choose who the policy applies to:
+1. Choose who the policy applies to:
    - All users
    - Specific users
 
@@ -46,7 +46,7 @@ your organization.
       > User-specific policies override the global default. Test your policy with
       a few users before rolling it out globally.
 
-6. Configure the state for each setting:
+1. Configure the state for each setting:
    - **User-defined**: Users can change the setting.
    - **Always enabled**: Setting is on and locked.
    - **Enabled**: Setting is on but can be changed.
@@ -57,7 +57,7 @@ your organization.
       >
       > For a complete list of available settings, their supported platforms, and which configuration methods they work with, see the [Settings reference](settings-reference.md).
 
-7. Select **Create**.
+1. Select **Create**.
 
 To apply the policy:
 

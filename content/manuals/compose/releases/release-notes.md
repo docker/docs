@@ -13,7 +13,50 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
-## 2.37.1
+## 2.38.1
+
+{{< release-date date="2025-06-30" >}}
+
+### Bug fixes and enhancements
+
+- Added support of `model_variable` for service `models` configuration
+
+### Update
+
+- Dependencies upgrade: bump compose-go to v2.7.1
+
+## 2.38.0
+
+{{< release-date date="2025-06-30" >}}
+
+### Bug fixes and enhancements
+
+- Introduced support of `models` for LLM configuration
+- Added `volumes` command
+- Removed `publish` limitation on bind mounts
+- Fixed an issue mounting the docker socket to container which doesn't need it
+- Fixed an issue with bake hanging on output 
+
+### Update
+
+- Dependencies upgrade: bump compose-go to v2.7.0
+- Dependencies upgrade: bump docker engine and cli to v28.3.0
+
+## 2.37.3
+
+{{< release-date date="2025-06-24" >}}
+
+### Bug fixes and enhancements
+
+- Added support of `cache_to` for Bake
+- Fixed issue with Bake integration
+- Fixed multiple issues affecting `run` command
+
+### Update
+
+- Dependencies upgrade: bump buildkit to v0.23.1
+
+## 2.37.2
 
 {{< release-date date="2025-06-20" >}}
 

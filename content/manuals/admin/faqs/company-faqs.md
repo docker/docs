@@ -62,7 +62,7 @@ You can manage domain verification, SSO, and SCIM at the company level. The foll
 - User management
 - Billing
 
-To view and manage users across all the organizations under your company, you can [manage users at the company level](../../admin/company/users.md) when you use the [Admin Console](https://admin.docker.com).
+To view and manage users across all the organizations under your company, you can [manage users at the company level](../../admin/company/users.md) when you use the [Admin Console](https://app.docker.com/admin).
 
 Domain audit isn't supported for companies or organizations within a company.
 

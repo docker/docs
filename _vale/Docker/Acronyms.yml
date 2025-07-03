@@ -17,6 +17,7 @@ exceptions:
   - ASP
   - AUFS
   - AWS
+  - BGP     # Border Gateway Protocol
   - BIOS
   - BPF
   - BSD
@@ -146,6 +147,7 @@ exceptions:
   - TTY
   - TXT
   - UDP
+  - UI
   - URI
   - URL
   - USB

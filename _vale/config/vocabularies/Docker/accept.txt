@@ -1,4 +1,6 @@
 (?i)[A-Z]{2,}'?s
+Adreno
+Aleksandrov
 Amazon
 Anchore
 Apple
@@ -73,6 +75,7 @@ Intune
 iptables
 IPv[46]
 IPvlan
+isort
 Jamf
 JetBrains
 JFrog
@@ -112,6 +115,7 @@ Nginx
 npm
 Nutanix
 Nuxeo
+NVIDIA
 OAuth
 Okta
 Ollama
@@ -124,11 +128,13 @@ PKG
 Postgres
 PowerShell
 Python
+Qualcomm
 rollback
 rootful
 runc
 Ryuk
 S3
+scrollable
 Slack
 snapshotters?
 Snyk
@@ -157,6 +163,7 @@ unmanaged
 VMware
 vpnkit
 vSphere
+VSCode
 Wasm
 Windows
 windowsfilter
@@ -195,6 +202,7 @@ Zsh
 [Pp]rocfs
 [Pp]roxied
 [Pp]roxying
+[pP]yright
 [Rr]eal-time
 [Rr]egex(es)?
 [Rr]untimes?

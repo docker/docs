@@ -297,12 +297,9 @@ documentation](../integrations/environment/sysdig.md).
 The new JFrog Artifactory integration enables automatic image analysis on
 Artifactory registries.
 
-![Animation of how to integrate Artifactory](../images/release-notes/artifactory-agent.gif)
-
 The integration involves deploying a Docker Scout Artifactory agent that polls
 for new images, performs analysis, and uploads results to Docker Scout, all
-while preserving the integrity of image data. Learn more in the [Artifactory
-integration documentation](../integrations/registry/artifactory.md)
+while preserving the integrity of image data.
 
 #### Known limitations
 

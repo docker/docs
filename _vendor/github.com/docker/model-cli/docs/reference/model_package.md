@@ -7,6 +7,7 @@ Package a GGUF file into a Docker model OCI artifact, with optional licenses, an
 
 | Name              | Type          | Default | Description                           |
 |:------------------|:--------------|:--------|:--------------------------------------|
+| `--context-size`  | `uint64`      | `0`     | context size in tokens                |
 | `--gguf`          | `string`      |         | absolute path to gguf file (required) |
 | `-l`, `--license` | `stringArray` |         | absolute path to a license file       |
 | `--push`          | `bool`        |         | push to registry (required)           |

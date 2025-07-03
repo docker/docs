@@ -1,4 +1,4 @@
-{{- $pages := .Site.RegularPages -}}
+{{- $pages := where site.RegularPages "Params.sitemap" "!=" false -}}
 {{- $sorted := sort $pages "RelPermalink" -}}
 {{- $grouped := $sorted.GroupBy "Section" -}}
 
