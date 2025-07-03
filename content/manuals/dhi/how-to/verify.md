@@ -57,8 +57,6 @@ offers several key advantages when working with Docker Hardened Images:
 
 In short, Docker Scout streamlines the verification process and reduces the chances of human error, while still giving you full visibility and the option to fall back to cosign when needed.
 
-
-
 ### List available attestations
 
 To list attestations for a mirrored DHI:
@@ -105,9 +103,26 @@ $ docker scout attest get \
   docs/dhi-python:3.13 --platform linux/amd64
 ```
 
-### Validate and show the equivalent cosign command
+### Validate the attestation with Docker Scout
 
-You can use the `--verify` flag to validate the attestation and print the corresponding [cosign](https://docs.sigstore.dev/) command:
+To validate the attestation using Docker Scout, you can use the `--verify` flag:
+
+```console
+$ docker scout attest get <image-name>:<tag> \
+   --predicate-type https://scout.docker.com/sbom/v0.1 --verify
+```
+
+For example, to verify the SBOM attestation for the `dhi/node:20.19-debian12-fips-20250701182639` image:
+
+```console
+$ docker scout attest get docs/dhi-node:20.19-debian12-fips-20250701182639 \
+   --predicate-type https://scout.docker.com/sbom/v0.1 --verify
+```
+
+### Show the equivalent cosign command
+
+When using the `--verify` flag, it also prints the corresponding
+[cosign](https://docs.sigstore.dev/) command to verify the image signature:
 
 ```console
 $ docker scout attest get \
@@ -136,6 +151,21 @@ Example output:
         --key https://registry.scout.docker.com/keyring/dhi/latest.pub --experimental-oci11
     ...
 ```
+
+> [!IMPORTANT]
+>
+> When using cosign, you must first authenticate to both the Docker Hub registry
+> and the Docker Scout registry.
+>
+> For example:
+>
+> ```console
+> $ docker login
+> $ docker login registry.scout.docker.com
+> $ cosign verify \
+>     registry.scout.docker.com/docker/dhi-python@sha256:b5418da893ada6272add2268573a3d5f595b5c486fb7ec58370a93217a9785ae \
+>     --key https://registry.scout.docker.com/keyring/dhi/latest.pub --experimental-oci11
+> ```
 
 ## Available DHI attestations
 
