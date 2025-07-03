@@ -246,6 +246,6 @@ ENTRYPOINT [ "python", "/app/image.py" ]
 ### Use Gordon
 
 Alternatively, you can request assistance to 
-[Gordon](/manuals/ai/gordon/_index.md), Docker's AI feature, to migrate your Dockerfile:
+[Gordon](/manuals/ai/gordon/_index.md), Docker's AI-powered assistant, to migrate your Dockerfile:
 
 {{% include "gordondhi.md" %}}
