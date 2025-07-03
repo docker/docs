@@ -11,7 +11,7 @@ toc_max: 2
 
 _Last updated July 03, 2025_
 
-A vulnerability in Docker Desktop was fixed on July 03 in the [4.43.0](/manuala/desktop/release-notes/#4430) release: 
+A vulnerability in Docker Desktop was fixed on July 03 in the [4.43.0](/manuals/desktop/release-notes/#4430) release: 
 
 - Fixed [CVE-2025-6587](https://www.cve.org/CVERecord?id=CVE-2025-6587) where sensitive system environment variables were included in Docker Desktop diagnostic logs, allowing for potential secret exposure.
 
