@@ -90,20 +90,25 @@ Models are pulled from Docker Hub the first time they're used and stored locally
 
 ### Enable DMR in Docker Desktop
 
-1. Navigate to the **Beta features** tab in settings.
-2. Tick the **Enable Docker Model Runner** setting.
-3. If you are running on Windows with a supported NVIDIA GPU, you should also see and be able to tick the **Enable GPU-backed inference** setting.
+1. In the settings view, navigate to the **Beta features** tab.
+1. Tick the **Enable Docker Model Runner** setting.
+1. If you are running on Windows with a supported NVIDIA GPU, you should also see and be able to tick the **Enable GPU-backed inference** setting.
+1. Optional: If you want to enable TCP support, select the **Enable host-side TCP support**
+   1. In the **Port** field, type the port of your choice.
+   1. If you are interacting with Model Runner from a local frontend web app,
+      in **CORS Allows Origins**, select the origins that Model Runner should accept requests from.
+      An origin is the URL where your web app is running, for example `http://localhost:3131`.
 
 You can now use the `docker model` command in the CLI and view and interact with your local models in the **Models** tab in the Docker Desktop Dashboard.
 
 > [!IMPORTANT]
 >
-> For Docker Desktop versions 4.41 and earlier, this settings lived under the **Experimental features** tab on the **Features in development** page.
+> For Docker Desktop versions 4.41 and earlier, this setting lived under the **Experimental features** tab on the **Features in development** page.
 
 ### Enable DMR in Docker Engine
 
 1. Ensure you have installed [Docker Engine](/engine/install/).
-2. DMR is available as a package. To install it, run:
+1. DMR is available as a package. To install it, run:
 
    {{< tabs >}}
    {{< tab name="Ubuntu/Debian">}}
@@ -124,12 +129,18 @@ You can now use the `docker model` command in the CLI and view and interact with
    {{< /tab >}}
    {{< /tabs >}}
 
-3. Test the installation:
+1. Test the installation:
 
    ```console
    $ docker model version
    $ docker model run ai/smollm2
    ```
+
+1. Optional: To enable TCP support, set the port with the `DMR_RUNNER_PORT` environment variable.
+1. Optional: If you enabled TCP support, you can configure CORS allowed origins with the `DMR_ORIGINS` environment variable. Possible values are:
+   - `*`: Allow all origins
+   - Comma-separated list of allowed origins
+   - When unspecified, all origins are denied.
 
 ## Pull a model
 
