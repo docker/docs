@@ -91,6 +91,10 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 #### For all platforms
 
 - `docker buildx bake` will not build images in Compose files with a top-level models attribute. Use `docker compose build` instead.
+- Gordon responses containing HTML can cause Desktop UI to be permanently broken. As a workaround, you can delete `persisted-state.json` file to reset the UI. The file is located in the following directories:
+  - Windows: `%APPDATA%\Docker Desktop\persisted-state.json`
+  - Linux: `$XDG_CONFIG_HOME/Docker Desktop/persisted-state.json` or `~/.config/Docker Desktop/persisted-state.json`
+  - Mac: `~/Library/Application Support/Docker Desktop/persisted-state.json`
 
 #### For Windows
 
