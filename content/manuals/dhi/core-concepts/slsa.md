@@ -85,7 +85,7 @@ demonstrate adherence to SLSA Build Level 3 standards.
 
 To get and verify SLSA provenance for a DHI, you can use Docker Scout.
 
-```
+```console
 $ docker scout attest get <your-namespace>/dhi-<image>:<tag> \
   --predicate-type https://slsa.dev/provenance/v0.2 \
   --verify
@@ -93,7 +93,7 @@ $ docker scout attest get <your-namespace>/dhi-<image>:<tag> \
 
 For example:
 
-```
+```console
 $ docker scout attest get docs/dhi-node:20.19-debian12-fips-20250701182639 \
   --predicate-type https://slsa.dev/provenance/v0.2 \
   --verify
