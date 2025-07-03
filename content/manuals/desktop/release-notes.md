@@ -29,6 +29,16 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 >
 > If you're experiencing malware detection issues on Mac, follow the steps documented in [docker/for-mac#7527](https://github.com/docker/for-mac/issues/7527).
 
+## 4.43.1
+
+{{< release-date date="2025-07-04" >}}
+
+{{< desktop-install-v2 all=true beta_win_arm=true version="4.43.1" build_path="/TBD/" >}}
+
+### Bug fixes and enhancements
+
+- Fixed an issue that caused Docker Desktop UI to break when Ask Gordon responses contained HTML tags.
+
 ## 4.43.0
 
 {{< release-date date="2025-07-03" >}}
