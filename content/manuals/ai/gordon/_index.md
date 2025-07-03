@@ -20,13 +20,12 @@ of the Docker ecosystem.
 
 ## Key features
 
-Ask Gordon provides AI-powered assistance in Docker tools. It can:
+Ask Gordon provides AI-powered assistance within Docker tools. It can:
 
 - Improve Dockerfiles
 - Run and troubleshoot containers
 - Interact with your images and code
 - Find vulnerabilities or configuration issues
-- Migrate a Dockerfile to use [Docker Hardened Images](/manuals/dhi/_index.md)
 
 It understands your local environment, including source code, Dockerfiles, and
 images, to provide personalized and actionable guidance.
@@ -105,10 +104,9 @@ If you have concerns about data collection or usage, you can
 
 ## Using Ask Gordon
 
-You can access Gordon:
-
-- In Docker Desktop, in the **Ask Gordon** view.
-- Via the Docker CLI, with the `docker ai` CLI command.
+The primary interfaces to Docker's AI capabilities are through the **Ask
+Gordon** view in Docker Desktop, or if you prefer to use the CLI: the `docker
+ai` CLI command.
 
 Once you've enabled the Docker AI features, you'll also find references to **Ask
 Gordon** in various other places throughout the Docker Desktop user interface.
@@ -124,7 +122,6 @@ ways things you can try:
 - [Troubleshoot a crashed container](#troubleshoot-a-crashed-container)
 - [Get help with running a container](#get-help-with-running-a-container)
 - [Improve a Dockerfile](#improve-a-dockerfile)
-- [Migrate a Dockerfile to DHI](#migrate-a-dockerfile-to-dhi)
 
 For more examples, try asking Gordon directly. For example:
 
@@ -199,17 +196,6 @@ across several dimensions:
 - Reproducibility
 - Portability
 - Resource efficiency
-
-### Migrate a Dockerfile to DHI
-
-Migrating your Dockerfile to use [Docker Hardened Images](/manuals/dhi/_index.md) helps you build
-more secure, minimal, and production-ready containers. DHIs are designed to
-reduce vulnerabilities, enforce best practices, and simplify compliance, making
-them a strong foundation for secure software supply chains.
-
-To request Gordon's help for the migration:
-
-{{% include "gordondhi.md" %}}
 
 ## Disable Ask Gordon
 
