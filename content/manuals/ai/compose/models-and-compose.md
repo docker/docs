@@ -181,4 +181,4 @@ Cloud providers might:
 - [`models` top-level element](/reference/compose-file/models.md)
 - [`models` attribute](/reference/compose-file/services.md#models)
 - [Docker Model Runner documentation](/manuals/ai/model-runner.md)
-- [Compose Model Runner documentation](/manuals/compose/how-tos/model-runner.md)]
+- [Compose Model Runner documentation](/manuals/ai/compose/model-runner.md)
