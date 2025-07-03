@@ -1,15 +1,10 @@
-command: docker model compose
-pname: docker model
-plink: docker_model.yaml
-cname:
-    - docker model compose down
-    - docker model compose metadata
-    - docker model compose up
-clink:
-    - docker_model_compose_down.yaml
-    - docker_model_compose_metadata.yaml
-    - docker_model_compose_up.yaml
-options:
+command: docker model compose metadata
+short: Metadata for Docker Compose
+long: Metadata for Docker Compose
+usage: docker model compose metadata
+pname: docker model compose
+plink: docker_model_compose.yaml
+inherited_options:
     - option: project-name
       value_type: string
       description: compose project name

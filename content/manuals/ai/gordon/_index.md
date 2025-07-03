@@ -18,18 +18,22 @@ Ask Gordon is your personal AI assistant embedded in Docker Desktop and the
 Docker CLI. It's designed to streamline your workflow and help you make the most
 of the Docker ecosystem.
 
-## What is Ask Gordon?
+## Key features
 
-Ask Gordon provides AI-powered assistance in Docker tools. It offers contextual help for tasks like:
+Ask Gordon provides AI-powered assistance in Docker tools. It can:
 
-- Improving Dockerfiles
-- Running and troubleshooting containers
-- Interacting with your images and code
-- Finding vulnerabilities or configuration issues
+- Improve Dockerfiles
+- Run and troubleshoot containers
+- Interact with your images and code
+- Find vulnerabilities or configuration issues
+- Migrate a Dockerfile to use [Docker Hardened Images](/manuals/dhi/_index.md)
 
-It understands your local environment, including source code, Dockerfiles, and images, to provide personalized and actionable guidance.
+It understands your local environment, including source code, Dockerfiles, and
+images, to provide personalized and actionable guidance.
 
-These features are not enabled by default, and are not
+Ask Gordon remembers conversations, allowing you to switch topics more easily.
+
+Ask Gordon is not enabled by default, and is not
 production-ready. You may also encounter the term "Docker AI" as a broader
 reference to this technology.
 
@@ -101,9 +105,10 @@ If you have concerns about data collection or usage, you can
 
 ## Using Ask Gordon
 
-The primary interfaces to Docker's AI capabilities are through the **Ask
-Gordon** view in Docker Desktop, or if you prefer to use the CLI: the `docker
-ai` CLI command.
+You can access Gordon:
+
+- In Docker Desktop, in the **Ask Gordon** view.
+- Via the Docker CLI, with the `docker ai` CLI command.
 
 Once you've enabled the Docker AI features, you'll also find references to **Ask
 Gordon** in various other places throughout the Docker Desktop user interface.
@@ -119,6 +124,7 @@ ways things you can try:
 - [Troubleshoot a crashed container](#troubleshoot-a-crashed-container)
 - [Get help with running a container](#get-help-with-running-a-container)
 - [Improve a Dockerfile](#improve-a-dockerfile)
+- [Migrate a Dockerfile to DHI](#migrate-a-dockerfile-to-dhi)
 
 For more examples, try asking Gordon directly. For example:
 
@@ -193,6 +199,17 @@ across several dimensions:
 - Reproducibility
 - Portability
 - Resource efficiency
+
+### Migrate a Dockerfile to DHI
+
+Migrating your Dockerfile to use [Docker Hardened Images](/manuals/dhi/_index.md) helps you build
+more secure, minimal, and production-ready containers. DHIs are designed to
+reduce vulnerabilities, enforce best practices, and simplify compliance, making
+them a strong foundation for secure software supply chains.
+
+To request Gordon's help for the migration:
+
+{{% include "gordondhi.md" %}}
 
 ## Disable Ask Gordon
 
