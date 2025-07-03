@@ -33,7 +33,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2025-07-03" >}}
 
-{{< desktop-install-v2 all=true beta_win_arm=true version="4.43.0" build_path="/TBD/" >}}
+{{< desktop-install-v2 all=true beta_win_arm=true version="4.43.0" build_path="/198134/" >}}
 
 ### New
 
