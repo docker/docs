@@ -40,7 +40,7 @@ services:
 
 models:
   smollm2:
-    image: ai/smollm2
+    model: ai/smollm2
 ```
 
 ### How it works
@@ -70,7 +70,7 @@ services:
 
 models:
   smollm2:
-    image: ai/smollm2
+    model: ai/smollm2
 ```
 
 With this configuration, your `my-chat-app` service will receive:
