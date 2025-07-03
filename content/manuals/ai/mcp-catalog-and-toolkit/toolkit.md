@@ -80,7 +80,7 @@ Security at runtime is enforced through resource and access limitations:
 
 1. Open the Docker Desktop settings and select **Beta features**.
 2. Select **Enable Docker MCP Toolkit**.
-3. Select **Apply & restart**.
+3. Select **Apply**.
 
 >[!NOTE]
 >If you have the MCP Toolkit _extension_ installed, you can uninstall it.

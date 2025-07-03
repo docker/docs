@@ -93,7 +93,7 @@ If you have concerns about data collection or usage, you can
    terms before you can enable the feature. Review the terms and select **Accept
    and enable** to continue.
 
-4. Select **Apply & restart**.
+4. Select **Apply**.
 
 > [!IMPORTANT]
 >
@@ -203,7 +203,7 @@ If you've enabled Ask Gordon and you want to disable it again:
 1. Open the **Settings** view in Docker Desktop.
 2. Navigate to **Beta features**.
 3. Clear the **Enable Docker AI** checkbox.
-4. Select **Apply & restart**.
+4. Select **Apply**.
 
 ### For organizations
 
