@@ -46,6 +46,10 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - [Docker Engine v28.3.0](https://docs.docker.com/engine/release-notes/28/#2830)
 - [NVIDIA Container Toolkit v1.17.8](https://github.com/NVIDIA/nvidia-container-toolkit/releases/tag/v1.17.8)
 
+### Security 
+
+- Fixed [CVE-2025-6587](https://www.cve.org/CVERecord?id=CVE-2025-6587) where sensitive system environment variables were included in Docker Desktop diagnostic logs, allowing for potential secret exposure.
+
 ### Bug fixes and enhancements
 
 #### For all platforms
