@@ -10,6 +10,31 @@ toc_max: 2
 This page contains information about the new features, improvements, and bug
 fixes in [Docker Buildx](https://github.com/docker/buildx).
 
+## 0.25.0
+
+{{< release-date date="2025-06-17" >}}
+
+The full release notes for this release are available
+[on GitHub](https://github.com/docker/buildx/releases/tag/v0.25.0).
+
+### New
+
+- Bake now supports defining `extra-hosts`. [docker/buildx#3234](https://github.com/docker/buildx/pull/3234)
+
+### Enhancements
+
+- Add support for bearer token auth. [docker/buildx#3233](https://github.com/docker/buildx/pull/3233)
+- Add custom exit codes for internal, resource, and canceled errors in commands. [docker/buildx#3214](https://github.com/docker/buildx/pull/3214)
+- Show variable type when using `--list=variables` with Bake. [docker/buildx#3207](https://github.com/docker/buildx/pull/3207)
+- Consider typed, value-less variables to have `null` value in Bake. [docker/buildx#3198](https://github.com/docker/buildx/pull/3198)
+- Add support for multiple IPs in extra hosts configuration. [docker/buildx#3244](https://github.com/docker/buildx/pull/3244)
+- Support for updated SLSA V1 provenance in `buildx history` commands. [docker/buildx#3245](https://github.com/docker/buildx/pull/3245)
+- Add support for `RegistryToken` configuration in imagetools commands. [docker/buildx#3233](https://github.com/docker/buildx/pull/3233)
+
+### Bug fixes
+
+- Fix `keep-storage` flag deprecation notice for `prune` command. [docker/buildx#3216](https://github.com/docker/buildx/pull/3216)
+
 ## 0.24.0
 
 {{< release-date date="2025-05-21" >}}
