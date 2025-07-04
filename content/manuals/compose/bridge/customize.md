@@ -2,13 +2,14 @@
 title: Customize Compose Bridge 
 linkTitle: Customize
 weight: 20
-description: Learn about the Compose Bridge templates syntax
-keywords: compose, bridge, templates
+description: Learn how to customize Compose Bridge transformations using Go templates and Compose extensions
+keywords: docker compose bridge, customize compose bridge, compose bridge templates, compose to kubernetes, compose bridge transformation, go templates docker
+
 ---
 
 {{< summary-bar feature_name="Compose bridge" >}}
 
-This page explains how Compose Bridge utilizes templating to efficiently translate Docker Compose files into Kubernetes manifests. It also explain how you can customize these templates for your specific requirements and needs, or how you can build your own transformation. 
+This page explains how Compose Bridge utilizes templating to efficiently translate Docker Compose files into Kubernetes manifests. It also explains how you can customize these templates for your specific requirements and needs, or how you can build your own transformation. 
 
 ## How it works 
 
@@ -16,11 +17,11 @@ Compose bridge uses transformations to let you convert a Compose model into anot
 
 A transformation is packaged as a Docker image that receives the fully-resolved Compose model as `/in/compose.yaml` and can produce any target format file under `/out`.
 
-Compose Bridge provides its transformation for Kubernetes using Go templates, so that it is easy to extend for customization by just replacing or appending your own templates.
+Compose Bridge includes a default Kubernetes transformation using Go templates, which you can customize by replacing or extending templates.
 
 ### Syntax
 
-Compose Bridge make use of templates to transform a Compose configuration file into Kubernetes manifests. Templates are plain text files that use the [Go templating syntax](https://pkg.go.dev/text/template). This enables the insertion of logic and data, making the templates dynamic and adaptable according to the Compose model.
+Compose Bridge makes use of templates to transform a Compose configuration file into Kubernetes manifests. Templates are plain text files that use the [Go templating syntax](https://pkg.go.dev/text/template). This enables the insertion of logic and data, making the templates dynamic and adaptable according to the Compose model.
 
 When a template is executed, it must produce a YAML file which is the standard format for Kubernetes manifests. Multiple files can be generated as long as they are separated by `---`
 
@@ -44,7 +45,7 @@ key: value
 
 ### Input
 
-The input Compose model is the canonical YAML model you can get by running  `docker compose config`. Within the templates, data from the `compose.yaml` is accessed using dot notation, allowing you to navigate through nested data structures. For example, to access the deployment mode of a service, you would use `service.deploy.mode`:
+You can generate the input model by running `docker compose config`. This canonical YAML output serves as the input for Compose Bridge transformations. Within the templates, data from the `compose.yaml` is accessed using dot notation, allowing you to navigate through nested data structures. For example, to access the deployment mode of a service, you would use `service.deploy.mode`:
 
  ```yaml
 # iterate over a yaml sequence
@@ -86,7 +87,7 @@ In the following example, the template checks if a healthcheck interval is speci
 As Kubernetes is a versatile platform, there are many ways
 to map Compose concepts into Kubernetes resource definitions. Compose
 Bridge lets you customize the transformation to match your own infrastructure
-decisions and preferences, with various level of flexibility and effort.
+decisions and preferences, with varying level of flexibility and effort.
 
 ### Modify the default templates
 
