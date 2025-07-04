@@ -1,5 +1,5 @@
 ---
-title: Hub MCP Server
+title: Docker Hub MCP server
 description: Use the MCP Toolkit to set up MCP servers and MCP clients.
 keywords: Docker Hub MCP Server, Hub MCP server, Hub MCP
 ---
@@ -8,15 +8,15 @@ The Docker Hub MCP Server is a Model Context Protocol (MCP) server that interfac
 
 ## Key features
 
-- Advanced LLM Context: Our MCP Server provides LLMs with detailed, structured context for Docker Hub images, enabling smarter, more relevant recommendations for developers, whether they're choosing a base image or automating CI/CD workflows.
-- Natural Language Image Discovery: Developers can find the right container image using natural language, no need to remember tags or repository names. Just describe what you need, and Docker Hub will return images that match your intent.
-- Simplified Repository Management: Hub MCP Server enables agents to manage repositories through natural language fetching image details, viewing stats, searching content, and performing key operations quickly and easily.
+- Advanced LLM context: Our MCP Server provides LLMs with detailed, structured context for Docker Hub images, enabling smarter, more relevant recommendations for developers, whether they're choosing a base image or automating CI/CD workflows.
+- Natural language image discovery: Developers can find the right container image using natural language, no need to remember tags or repository names. Just describe what you need, and Docker Hub will return images that match your intent.
+- Simplified repository management: Hub MCP Server enables agents to manage repositories through natural language fetching image details, viewing stats, searching content, and performing key operations quickly and easily.
 
 ## Install Docker Hub MCP server
 
 1. From the **MCP Toolkit** menu, select the **Catalog** tab and search for **Docker Hub** and select the plus icon to add the Docker Hub MCP server.
-2. In the server's Configuration tab, insert your Docker Hub username and personal access token (PAT).
-3. In the Clients tab in MCP Toolkit, ensure Gordon is connected.
+2. In the server's **Configuration** tab, insert your Docker Hub username and personal access token (PAT).
+3. In the **Clients** tab in MCP Toolkit, ensure Gordon is connected.
 4. From the **Ask Gordon** menu, you can now send requests related to your
    Docker Hub account, in accordance to the tools provided by the Docker Hub MCP server. To test it, ask Gordon:
 
@@ -31,14 +31,11 @@ The Docker Hub MCP Server is a Model Context Protocol (MCP) server that interfac
 ## Using other clients
 If want to integrate the Docker Hub MCP Server into your own development environment, you can find the source code and installation instructions on our [GitHub repository](https://github.com/docker/hub-mcp). 
 
-## Using other clients
-If want to integrate the Docker Hub MCP Server into your own development environment, you can find the source code and installation instructions on our [GitHub repository](https://github.com/docker/hub-mcp). 
-
 ## Use Claude Desktop as a client
 
 1. Add the Docker Hub MCP Server configuration to your `claude_desktop_config.json`:
 
-#### For public repositories only:
+### For public repositories only:
 
    - `/FULL/PATH/TO/YOUR/docker-hub-mcp-server` - The complete path to where you cloned this repository
 ```json
@@ -51,7 +48,7 @@ If want to integrate the Docker Hub MCP Server into your own development environ
   }
 }
 ```
-#### For authenticated access (recommended):
+### For authenticated access (recommended):
  Replace the following values:
    - `YOUR_DOCKER_HUB_USERNAME` - Your Docker Hub username
    - `YOUR_DOCKER_HUB_PERSONAL_ACCESS_TOKEN` - Your Docker Hub Personal Access Token
@@ -75,7 +72,7 @@ If want to integrate the Docker Hub MCP Server into your own development environ
 ## Usage with VS Code
 1. Add the Docker Hub MCP Server configuration to your User Settings (JSON) file in VS Code. You can do this by opening the `Command Palette` and typing `Preferences: Open User Settings (JSON)`.
 
-#### For public repositories only:
+### For public repositories only:
 
    - `/FULL/PATH/TO/YOUR/docker-hub-mcp-server` - The complete path to where you cloned this repository
 ```json
@@ -88,7 +85,7 @@ If want to integrate the Docker Hub MCP Server into your own development environ
   }
 }
 ```
-#### For authenticated access (recommended):
+### For authenticated access (recommended):
  Replace the following values:
    - `YOUR_DOCKER_HUB_USERNAME` - Your Docker Hub username
    - `YOUR_DOCKER_HUB_PERSONAL_ACCESS_TOKEN` - Your Docker Hub Personal Access Token
@@ -137,7 +134,7 @@ $ docker ai "Help me find the right Ubuntu version for my project"
 ```
 
 
-### Repository Management
+### Repository management
 
 ```console
 # Create a repository
@@ -159,7 +156,7 @@ $ docker ai "Show me my most recently updated repositories"
 $ docker ai "Show me information about my '<repository-name>' repository"
 ```
 
-### Pull/Push Images 
+### Pull/push images 
 
 ```console
 # Pull latest PostgreSQL version
@@ -169,7 +166,7 @@ $ docker ai "Pull the latest postgres image"
 $ docker ai "Push my <image-name> to my <repository-name> repository"
 ```
 
-### Tag Management
+### Tag management
 
 ```console
 # List all tags for a repository
@@ -206,7 +203,7 @@ $ docker ai "Can you help me update my Dockerfile to use a docker hardened image
 This section provides a comprehensive listing of the tools you can find
 in the Docker Hub MCP Server.
 
-### Docker Hub MCP Server tools
+### Docker Hub MCP server tools
 
 Tools to interact with your Docker repositories and discover content on Docker Hub.
 
