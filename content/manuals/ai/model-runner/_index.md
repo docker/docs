@@ -84,7 +84,7 @@ Models are pulled from Docker Hub the first time they're used and stored locally
 > Using Testcontainers or Docker Compose?
 > [Testcontainers for Java](https://java.testcontainers.org/modules/docker_model_runner/)
 > and [Go](https://golang.testcontainers.org/modules/dockermodelrunner/), and
-> [Docker Compose](/manuals/ai/compose/model-runner.md) now support Docker Model Runner.
+> [Docker Compose](/manuals/ai/compose/models-and-compose.md) now support Docker Model Runner.
 
 ## Enable Docker Model Runner
 
