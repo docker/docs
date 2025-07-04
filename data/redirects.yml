@@ -225,9 +225,10 @@
 # Run Cloud links & Docker Cloud & Docker Offload
 "/":
   - /go/run-cloud-eap/
-"/desktop/setup/vm-vdi/":
+"/offload/":
   # Onboarding - VDI beta
   - /go/docker-cloud/
+"/offload/about/":
   # Onboarding - enable GPU
   - /go/docker-cloud-gpu/
 "/ai/compose/models-and-compose/":

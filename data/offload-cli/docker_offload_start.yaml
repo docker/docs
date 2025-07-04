@@ -1,0 +1,12 @@
+command: docker offload start
+short: Start a Docker Offload session
+usage: docker offload start
+pname: docker offload
+plink: docker_offload.yaml
+options: []
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
