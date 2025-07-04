@@ -22,11 +22,7 @@ Compose lets you define AI models as core components of your application, so you
 
 - Docker Compose v2.38 or later
 - A platform that supports Compose models such as Docker Model Runner (DMR) or compatible cloud providers.
-  If you are using DMR:
-
-  - Docker Desktop 4.43 or later 
-  - Docker Desktop for Mac with Apple Silicon or Docker Desktop for Windows with NVIDIA GPU
-  - [Docker Model Runner enabled in Docker Desktop](/manuals/ai/model-runner.md#enable-docker-model-runner)
+  If you are using DMR, see the [requirements](/manuals/ai/model-runner/_index.md#requirements).
 
 ## What are Compose models?
 
