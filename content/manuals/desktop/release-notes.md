@@ -76,10 +76,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Return an explicit error to a Docker API / `docker` CLI command if Docker Desktop has been manually paused.
 - Fixed an issue where unknown keys in Admin and Cloud settings caused a failure.
 
-#### For Linux
-
-- Bump `virtiofsd` to `1.13.1`.
-
 #### For Mac
 
 - Removed `eBPF` which blocked `io_uring`. To enable `io_uring` in a container, use `--security-opt seccomp=unconfined`. Fixes [docker/for-mac#7707](https://github.com/docker/for-mac/issues/7707).
