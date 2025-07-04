@@ -40,6 +40,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 #### For all platforms
 
 - Fixed an issue that caused Docker Desktop UI to break when Ask Gordon responses contained HTML tags.
+- Fixed an issue that prevented extensions from communicating with their backends.
 
 ## 4.43.0
 
