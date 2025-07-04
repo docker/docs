@@ -36,6 +36,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 {{< desktop-install-v2 all=true beta_win_arm=true version="4.43.1" build_path="/TBD/" >}}
 
 ### Bug fixes and enhancements
+
 #### For all platforms
 
 - Fixed an issue that caused Docker Desktop UI to break when Ask Gordon responses contained HTML tags.
