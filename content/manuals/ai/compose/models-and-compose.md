@@ -21,7 +21,7 @@ Compose lets you define AI models as core components of your application, so you
 ## Prerequisites
 
 - Docker Compose v2.38 or later
-- A platform that supports Compose models such as Docker Model Runner or compatible cloud providers.
+- A platform that supports Compose models such as Docker Model Runner (DMR) or compatible cloud providers.
   If you are using DMR:
 
   - Docker Desktop 4.43 or later 
@@ -81,8 +81,8 @@ Common configuration options include:
    > possible for your use case.
   
 - `runtime_flags`: A list of raw command-line flags passed to the inference engine when the model is started.
-   For example, if If you use llama.cpp, you can pass any of [the available parameters](https://github.com/ggml-org/llama.cpp/blob/master/tools/server/README.md).
--  Platform-specific options may also be available via extensions attributes `x-*`
+   For example, if you use llama.cpp, you can pass any of [the available parameters](https://github.com/ggml-org/llama.cpp/blob/master/tools/server/README.md).
+- Platform-specific options may also be available via extension attributes `x-*`
 
 ## Service model binding
 
@@ -170,11 +170,11 @@ Docker Model Runner will:
 - Provide endpoint URLs for accessing the model
 - Inject environment variables into the service
 
-#### Alternative configuration with Provider services
+#### Alternative configuration with provider services
 
 > [!TIP]
 >
-> This approach is deprecated. Use the [`models` top-level element](#use-models-definition) instead.
+> This approach is deprecated. Use the [`models` top-level element](#basic-model-definition) instead.
 
 You can also use the `provider` service type, which allows you to declare platform capabilities required by your application. 
 For AI models, you can use the `model` type to declare model dependencies.
