@@ -8,7 +8,7 @@ weight: 50
 {{< summary-bar feature_name="Compose dependent images" >}}
 
 To reduce push/pull time and image weight, a common practice for Compose applications is to have services
-share base layers as much as possible. You will typically select the same operating system base image for
+share base layers as much as possible. You typically select the same operating system base image for
 all services. But you can also get one step further by sharing image layers when your images share the same
 system packages. The challenge to address is then to avoid repeating the exact same Dockerfile instruction 
 in all services.
@@ -162,3 +162,8 @@ Bake can also be selected as the default builder by editing your `$HOME/.docker/
   ...
 }
 ```
+
+## Additional resources
+
+- [Docker Compose build reference](/reference/cli/docker/compose/build.md)
+- [Learn about multi-stage Dockerfiles](/manuals/build/building/multi-stage.md)
