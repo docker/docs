@@ -13,6 +13,20 @@ issues, and bug fixes in [Dockerfile reference](/reference/dockerfile.md).
 
 For usage, see the [Dockerfile frontend syntax](frontend.md) page.
 
+## 1.17.0
+
+{{< release-date date="2025-06-17" >}}
+
+The full release notes for this release are available
+[on GitHub](https://github.com/moby/buildkit/releases/tag/dockerfile%2F1.17.0).
+
+```dockerfile
+# syntax=docker/dockerfile:1.17.0
+```
+
+* Add `ADD --unpack=bool` to control whether archives from a URL path are unpacked. The default is to detect unpack behavior based on the source path, as it happened in previous versions. [moby/buildkit#5991](https://github.com/moby/buildkit/pull/5991)
+* Add support for `ADD --chown` when unpacking archive, similar to when copying regular files. [moby/buildkit#5987](https://github.com/moby/buildkit/pull/5987)
+
 ## 1.16.0
 
 {{< release-date date="2025-05-22" >}}
