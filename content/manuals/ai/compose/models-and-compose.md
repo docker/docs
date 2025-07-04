@@ -3,6 +3,9 @@ title: Define AI Models in Docker Compose applications
 linkTitle: Use AI models in Compose
 description: Learn how to define and use AI models in Docker Compose applications using the models top-level element
 keywords: compose, docker compose, models, ai, machine learning, cloud providers, specification
+alias:
+  - /compose/how-tos/model-runner/
+  - /ai/compose/model-runner/
 weight: 10
 params:
   sidebar:
@@ -18,11 +21,16 @@ Compose lets you define AI models as core components of your application, so you
 ## Prerequisites
 
 - Docker Compose v2.38 or later
-- A platform that supports Compose models such as Docker Model Runner or compatible cloud providers
+- A platform that supports Compose models such as Docker Model Runner or compatible cloud providers.
+  If you are using DMR:
+
+  - Docker Desktop 4.43 or later 
+  - Docker Desktop for Mac with Apple Silicon or Docker Desktop for Windows with NVIDIA GPU
+  - [Docker Model Runner enabled in Docker Desktop](/manuals/ai/model-runner.md#enable-docker-model-runner)
 
 ## What are Compose models?
 
-Compose `models` are a standardized way to define AI model dependencies in your application. By using the []`models` top-level element](/reference/compose-file/models.md) in your Compose file, you can:
+Compose `models` are a standardized way to define AI model dependencies in your application. By using the [`models` top-level element](/reference/compose-file/models.md) in your Compose file, you can:
 
 - Declare which AI models your application needs
 - Specify model configurations and requirements
@@ -66,7 +74,14 @@ models:
 Common configuration options include:
 - `model` (required): The OCI artifact identifier for the model. This is what Compose pulls and runs via the model runner. 
 - `context_size`: Defines the maximum token context size for the model.
+  
+   > [!NOTE]
+   > Each model has its own maximum context size. When increasing the context length,
+   > consider your hardware constraints. In general, try to use the smallest context size
+   > possible for your use case.
+  
 - `runtime_flags`: A list of raw command-line flags passed to the inference engine when the model is started.
+   For example, if If you use llama.cpp, you can pass any of [the available parameters](https://github.com/ggml-org/llama.cpp/blob/master/tools/server/README.md).
 -  Platform-specific options may also be available via extensions attributes `x-*`
 
 ## Service model binding
@@ -131,24 +146,57 @@ One of the key benefits of using Compose models is portability across different 
 
 ### Docker Model Runner
 
-When Docker Model Runner is enabled:
+When [Docker Model Runner is enabled](/manuals/ai/model-runner/_index.md):
 
 ```yaml
 services:
   chat-app:
     image: my-chat-app
     models:
-      - llm
+      llm:
+        endpoint_var: AI_MODEL_URL
+        model_var: AI_MODEL_NAME
 
 models:
   llm:
     model: ai/smollm2
+    context_size: 4096
+    runtime_flags:
+      - "--no-prefill-assistant"
 ```
 
 Docker Model Runner will:
 - Pull and run the specified model locally
 - Provide endpoint URLs for accessing the model
 - Inject environment variables into the service
+
+#### Alternative configuration with Provider services
+
+> [!TIP]
+>
+> This approach is deprecated. Use the [`models` top-level element](#use-models-definition) instead.
+
+You can also use the `provider` service type, which allows you to declare platform capabilities required by your application. 
+For AI models, you can use the `model` type to declare model dependencies.
+
+To define a model provider:
+
+```yaml
+services:
+  chat:
+    image: my-chat-app
+    depends_on:
+      - ai_runner
+
+  ai_runner:
+    provider:
+      type: model
+      options:
+        model: ai/smollm2
+        context-size: 1024
+        runtime-flags: "--no-prefill-assistant"
+```
+
 
 ### Cloud providers
 
@@ -181,4 +229,4 @@ Cloud providers might:
 - [`models` top-level element](/reference/compose-file/models.md)
 - [`models` attribute](/reference/compose-file/services.md#models)
 - [Docker Model Runner documentation](/manuals/ai/model-runner.md)
-- [Compose Model Runner documentation](/manuals/ai/compose/model-runner.md)
+- [Compose Model Runner documentation](/manuals/ai/compose/models-and-compose.md)
