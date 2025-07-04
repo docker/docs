@@ -77,8 +77,8 @@ Common configuration options include:
   
    > [!NOTE]
    > Each model has its own maximum context size. When increasing the context length,
-   > consider your hardware constraints. In general, try to use the smallest context size
-   > possible for your use case.
+   > consider your hardware constraints. In general, try to keep context size
+   > as small as feasible for your specific needs.
   
 - `runtime_flags`: A list of raw command-line flags passed to the inference engine when the model is started.
    For example, if you use llama.cpp, you can pass any of [the available parameters](https://github.com/ggml-org/llama.cpp/blob/master/tools/server/README.md).
