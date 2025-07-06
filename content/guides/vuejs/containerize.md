@@ -82,7 +82,7 @@ For consistency, please use the same responses shown in the example below when p
 | Which package manager do you want to use?                  | npm             |
 | Do you want to run "npm run build" before starting server? | yes             |
 | What directory is your build output to?                    | dist            |
-| What command do you want to use to start the app?          | npm run dev     |
+| What command do you want to use to start the app?          | npm run build   |
 | What port does your server listen on?                      | 8080            |
 
 After completion, your project directory will contain the following new files:
@@ -246,9 +246,6 @@ Thumbs.db
 # -------------------------------
 # Lockfiles (optional)
 # -------------------------------
-package-lock.json
-yarn.lock
-pnpm-lock.yaml
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
