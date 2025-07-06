@@ -1,31 +1,31 @@
 #此工作流将执行节点依赖项的干净安装、缓存/恢复它们、生成源代码并跨节点的不同版本运行测试
 #有关详细信息，请参阅： https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
 
-姓名: Node.js CI
+姓名: 姓名：Node.js CI
 
 在……之上:
 推:
-分支机构: [ "主" ]
+分支机构: [分支机构: [ "主" ]"主" ]
 pull_request:
-分支机构: [ "主" ]
+分支机构: [分支机构: [ "主" ]"主" ]
 
 工作:
 建立:
 
-连续的: Ubuntu-最新
+连续的: 连续的：Ubuntu-最新
 
 策略:
 矩阵:
-节点版本: [18.x,20.x,22.x]
-        #见支持节点。JS发布时间表：https://nodejs.org/en/about/releases/
+节点版本: [节点版本: [18.x,20.x,22.x],20.x,22.x]
+#见支持节点。JS发布时间表：https://nodejs.org/en/about/releases/#见支持节点.JS发布时间表：https://nodejs.org/en/about/releases/
 
 步骤:
-    - uses: 操作/结帐@v4
-    - 姓名: 使用Node.js${{matrix.node-version}}
-uses: 操作/设置-节点@v4
+    - uses: -使用：操作/结帐@v4
+    - 姓名: -姓名：使用Node.js${{matrix.node-version}}{{matrix.node-version}}
+uses: uses：操作/设置-节点@v4
 和……一起:
-节点版本: ${{matrix.node-version}}
+节点版本: 节点版本：${{matrix.node-version}}{{matrix.node-version}}
 缓存: 'npm'
-    - 跑: npm ci
-    - 跑: npm运行内部版本--if-resent
-    - 跑: npm测试
+    - 跑: -跑：npm ci
+    - 跑: -跑：npm运行内部版本--if-resent
+    - 跑: -跑：npm测试
