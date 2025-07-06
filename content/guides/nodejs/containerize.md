@@ -27,36 +27,43 @@ Before you begin, make sure the following tools are installed and available on y
 
 ## Overview
 
-This section walks you through containerizing and running a Node.js
-application.
+This guide walks you through the complete process of containerizing a Node.js application with Docker. You’ll learn how to create a production-ready Docker image using best practices that enhance performance, security, scalability, and operational efficiency.
+
+By the end of this guide, you will:
+
+- Containerize a Node.js application using Docker.
+- Create and optimize a Dockerfile tailored for Node.js environments.
+- Use multi-stage builds to separate dependencies and reduce image size.
+- Configure the container for secure, efficient runtime using a non-root user.
+- Follow best practices for building secure, lightweight, and maintainable Docker images.
 
 ## Get the sample application
 
 Clone the sample application to use with this guide. Open a terminal, change
 directory to a directory that you want to work in, and run the following command
-to clone the repository:
+to clone the git repository:
 
 ```console
-$ git clone https://github.com/docker/docker-nodejs-sample && cd docker-nodejs-sample
+$ git clone https://github.com/kristiyan-velkov/docker-nodejs-sample
 ```
 
-## Initialize Docker assets
+## Generate a Dockerfile
+Docker provides an interactive CLI tool called `docker init` that helps scaffold the necessary configuration files for containerizing your application. This includes generating a `Dockerfile`, `.dockerignore`, `compose.yaml`, and `README.Docker.md`.
 
-Now that you have an application, you can create the necessary Docker assets to
-containerize your application. You can use Docker Desktop's built-in Docker Init
-feature to help streamline the process, or you can manually create the assets.
+To begin, navigate to the root of your project directory:
 
-{{< tabs >}}
-{{< tab name="Use Docker Init" >}}
+```console
+$ cd docker-nodejs-sample
+```
 
-Inside the `docker-nodejs-sample` directory, run
-the `docker init` command in a terminal. `docker init` provides some default
-configuration, but you'll need to answer a few questions about your application.
-Refer to the following example to answer the prompts from `docker init` and use
-the same answers for your prompts.
+Then run the following command:
 
 ```console
 $ docker init
+```
+You’ll see output similar to:
+
+```text
 Welcome to the Docker Init CLI!
 
 This utility will walk you through creating the following files with sensible defaults for your project:
@@ -66,181 +73,299 @@ This utility will walk you through creating the following files with sensible de
   - README.Docker.md
 
 Let's get started!
-
-? What application platform does your project use? Node
-? What version of Node do you want to use? 18.0.0
-? Which package manager do you want to use? npm
-? What command do you want to use to start the app: node src/index.js
-? What port does your server listen on? 3000
 ```
 
-{{< /tab >}}
-{{< tab name="Manually create assets" >}}
+The CLI will prompt you with a few questions about your app setup.
+For consistency, please use the same responses shown in the example below when prompted:
+| Question                                                   | Answer          |
+|------------------------------------------------------------|-----------------|
+| What application platform does your project use?           | Node            |
+| What version of Node do you want to use?                   | 22.14.0-alpine  |
+| Which package manager do you want to use?                  | npm             |
+| Do you want to run "npm run build" before starting server? | yes             |
+| What directory is your build output to?                    | dist            |
+| What command do you want to use to start the app?          | npm run dev     |
+| What port does your server listen on?                      | 8080            |
 
-If you don't have Docker Desktop installed or prefer creating the assets manually, you can create the following files in your project directory.
-
-Create a file named `Dockerfile` with the following contents.
-
-```dockerfile {collapse=true,title=Dockerfile}
-# syntax=docker/dockerfile:1
-
-# Comments are provided throughout this file to help you get started.
-# If you need more help, visit the Dockerfile reference guide at
-# https://docs.docker.com/go/dockerfile-reference/
-
-# Want to help us make this template better? Share your feedback here: https://forms.gle/ybq9Krt8jtBL3iCk7
-
-ARG NODE_VERSION=18.0.0
-
-FROM node:${NODE_VERSION}-alpine
-
-# Use production node environment by default.
-ENV NODE_ENV production
-
-
-WORKDIR /usr/src/app
-
-# Download dependencies as a separate step to take advantage of Docker's caching.
-# Leverage a cache mount to /root/.npm to speed up subsequent builds.
-# Leverage a bind mounts to package.json and package-lock.json to avoid having to copy them into
-# into this layer.
-RUN --mount=type=bind,source=package.json,target=package.json \
-    --mount=type=bind,source=package-lock.json,target=package-lock.json \
-    --mount=type=cache,target=/root/.npm \
-    npm ci --omit=dev
-
-# Run the application as a non-root user.
-USER node
-
-# Copy the rest of the source files into the image.
-COPY . .
-
-# Expose the port that the application listens on.
-EXPOSE 3000
-
-# Run the application.
-CMD node src/index.js
-```
-
-Create a file named `compose.yaml` with the following contents.
-
-```yaml {collapse=true,title=compose.yaml}
-# Comments are provided throughout this file to help you get started.
-# If you need more help, visit the Docker Compose reference guide at
-# https://docs.docker.com/go/compose-spec-reference/
-
-# Here the instructions define your application as a service called "server".
-# This service is built from the Dockerfile in the current directory.
-# You can add other services your application may depend on here, such as a
-# database or a cache. For examples, see the Awesome Compose repository:
-# https://github.com/docker/awesome-compose
-services:
-  server:
-    build:
-      context: .
-    environment:
-      NODE_ENV: production
-    ports:
-      - 3000:3000
-# The commented out section below is an example of how to define a PostgreSQL
-# database that your application can use. `depends_on` tells Docker Compose to
-# start the database before your application. The `db-data` volume persists the
-# database data between container restarts. The `db-password` secret is used
-# to set the database password. You must create `db/password.txt` and add
-# a password of your choosing to it before running `docker compose up`.
-#     depends_on:
-#       db:
-#         condition: service_healthy
-#   db:
-#     image: postgres
-#     restart: always
-#     user: postgres
-#     secrets:
-#       - db-password
-#     volumes:
-#       - db-data:/var/lib/postgresql/data
-#     environment:
-#       - POSTGRES_DB=example
-#       - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
-#     expose:
-#       - 5432
-#     healthcheck:
-#       test: [ "CMD", "pg_isready" ]
-#       interval: 10s
-#       timeout: 5s
-#       retries: 5
-# volumes:
-#   db-data:
-# secrets:
-#   db-password:
-#     file: db/password.txt
-```
-
-Create a file named `.dockerignore` with the following contents.
-
-```text {collapse=true,title=".dockerignore"}
-# Include any files or directories that you don't want to be copied to your
-# container here (e.g., local build artifacts, temporary files, etc.).
-#
-# For more help, visit the .dockerignore file reference guide at
-# https://docs.docker.com/go/build-context-dockerignore/
-
-**/.classpath
-**/.dockerignore
-**/.env
-**/.git
-**/.gitignore
-**/.project
-**/.settings
-**/.toolstarget
-**/.vs
-**/.vscode
-**/.next
-**/.cache
-**/*.*proj.user
-**/*.dbmdl
-**/*.jfm
-**/charts
-**/docker-compose*
-**/compose.y*ml
-**/Dockerfile*
-**/node_modules
-**/npm-debug.log
-**/obj
-**/secrets.dev.yaml
-**/values.dev.yaml
-**/build
-**/dist
-LICENSE
-README.md
-```
-
-{{< /tab >}}
-{{< /tabs >}}
-
-You should now have at least the following contents in your
-`docker-nodejs-sample` directory.
+After completion, your project directory will contain the following new files:
 
 ```text
 ├── docker-nodejs-sample/
-│ ├── spec/
-│ ├── src/
-│ ├── .dockerignore
-│ ├── .gitignore
-│ ├── compose.yaml
 │ ├── Dockerfile
-│ ├── package-lock.json
-│ ├── package.json
-│ └── README.md
+│ ├── .dockerignore
+│ ├── compose.yaml
+│ └── README.Docker.md
+```
+---
+
+## Build the Docker image
+
+The default Dockerfile generated by `docker init` serves as a solid starting point for general Node.js applications. However, Node.js is a front-end library that compiles into static assets, so we need to tailor the Dockerfile to optimize for how React applications are built and served in a production environment.
+
+### Step 1: Review the generated files
+
+In this step, you’ll improve the Dockerfile and configuration files by following best practices:
+
+- Use multi-stage builds to keep the final image clean and small  
+- Improve performance and security by only including what’s needed  
+
+These updates help ensure your app is easy to deploy, fast to load, and production-ready.
+
+> [!NOTE]
+> A `Dockerfile` is a plain text file that contains step-by-step instructions to build a Docker image. It automates packaging your application along with its dependencies and runtime environment.  
+> For full details, see the [Dockerfile reference](/reference/dockerfile/).
+
+
+### Step 2: Configure the Dockerfile file 
+
+Copy and replace the contents of your existing `Dockerfile` with the configuration below:
+
+```dockerfile
+# ----------------------------------------
+# Stage 1: Base Layer for Reuse
+# Installs dependencies using npm ci
+# ----------------------------------------
+    ARG NODE_VERSION=22.14.0-alpine
+    FROM node:${NODE_VERSION} AS base
+    
+    # Set working directory inside the container
+    WORKDIR /app
+    
+    # Copy dependency definitions
+    COPY package.json package-lock.json ./
+    
+    # Install exact dependencies (clean, deterministic install)
+    RUN --mount=type=cache,target=/root/.npm npm ci
+    
+    
+    # ----------------------------------------
+    # Stage 2: Development Environment
+    # Includes devDependencies and nodemon
+    # ----------------------------------------
+    FROM base AS development
+    
+    ENV NODE_ENV=development
+    
+    # Install all deps including dev tools like nodemon and jest
+    RUN --mount=type=cache,target=/root/.npm npm install
+    
+    # Copy source code after deps to optimize caching
+    COPY . .
+    
+    # Expose app and debugger ports
+    EXPOSE 8080 9229
+    
+    # Start the app in development mode with inspector enabled
+    CMD ["npm", "run", "dev"]
+    
+    
+    # ----------------------------------------
+    # Stage 3: Production Build
+    # Installs only production dependencies
+    # ----------------------------------------
+    FROM base AS production
+    
+    ENV NODE_ENV=production
+    
+    # Install only production dependencies
+    RUN --mount=type=cache,target=/root/.npm npm ci --omit=dev
+    
+    # Copy entire source codebase
+    COPY . .
+    
+    # Drop root privileges for security
+    USER node
+    
+    # Expose application port
+    EXPOSE 8080
+    
+   # Start the app in production mode with inspector enabled
+   CMD ["npm", "run", "prod"]
+    
+    
+    # ----------------------------------------
+    # Stage 4: Testing Environment
+    # Runs tests with devDependencies (e.g. jest)
+    # ----------------------------------------
+    FROM base AS test
+    
+    ENV NODE_ENV=test
+    
+    # Install dependencies including devDependencies (for testing)
+    RUN --mount=type=cache,target=/root/.npm npm ci --include=dev
+    
+    # Copy source files and tests
+    COPY . .
+    
+    # Drop privileges for safer test execution
+    USER node
+    
+    # Run tests
+    CMD ["npm", "run", "test"]
+    
 ```
 
-To learn more about the files, see the following:
+### Step 3: Configure the .dockerignore file
 
-- [Dockerfile](/reference/dockerfile.md)
-- [.dockerignore](/reference/dockerfile.md#dockerignore-file)
-- [compose.yaml](/reference/compose-file/_index.md)
+The `.dockerignore` file tells Docker which files and folders to exclude when building the image.
 
-## Run the application
+
+> [!NOTE]
+> This helps:
+>
+> 1.Reduce image size  
+> 2.Speed up the build process  
+> 3.Prevent sensitive or unnecessary files (like `.env`, `.git`, or `node_modules`) from being added to the final image.
+> 
+> To learn more, visit the [.dockerignore reference](/reference/dockerfile.md#dockerignore-file).
+
+Copy and replace the contents of your existing `.dockerignore` with the configuration below:
+
+```dockerignore
+# =============================
+# Dependency directories
+# =============================
+node_modules/
+dist/
+build/
+
+# =============================
+# Logs & debugging
+# =============================
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+*.tsbuildinfo
+*.log
+
+# =============================
+# Environment files
+# =============================
+.env
+.env.*
+*.env
+
+# =============================
+# Editor / IDE configs
+# =============================
+.vscode/
+.idea/
+*.swp
+
+# =============================
+# OS generated files
+# =============================
+.DS_Store
+Thumbs.db
+
+# =============================
+# Git-related
+# =============================
+.git/
+.gitignore
+
+# =============================
+# Docker / Compose files
+# =============================
+.dockerignore
+Dockerfile*
+docker-compose*
+
+# =============================
+# Testing / Reports / Coverage
+# =============================
+coverage/
+jest/
+reports/
+cypress/
+cypress/screenshots/
+cypress/videos/
+
+# =============================
+# Misc build tools & cache
+# =============================
+.tmp/
+.cache/
+.eslintcache
+.vs/
+
+# =============================
+# Optional Kubernetes/Helm
+# =============================
+charts/
+
+# =============================
+# Docs & meta files
+# =============================
+README.md
+LICENSE
+```
+
+### Step 4: Build the Node.js application image
+
+With your custom configuration in place, you're now ready to build the Docker image for your Node.js application.
+
+After completing the previous steps, your project directory should now contain the following files:
+
+```text
+├── docker-nodejs-sample/
+│ ├── Dockerfile
+│ ├── .dockerignore
+│ ├── compose.yaml
+│ ├── nginx.conf
+│ └── README.Docker.md
+```
+
+Now that your Dockerfile is configured, you can build the Docker image for your Node.js application.
+
+> [!NOTE]
+> The `docker build` command packages your application into an image using the instructions in the Dockerfile. It includes all necessary files from the current directory (called the [build context](/build/concepts/context/#what-is-a-build-context)).
+
+Run the following command from the root of your project:
+
+```console
+$ docker build --tag docker-nodejs-sample .
+```
+
+What this command does:
+- Uses the Dockerfile in the current directory (.)
+- Packages the application and its dependencies into a Docker image
+- Tags the image as docker-nodejs-sample so you can reference it later
+
+
+#### Step 6:  View local images
+
+After building your Docker image, you can check which images are available on your local machine using either the Docker CLI or [Docker Desktop](/manuals/desktop/use-desktop/images.md). Since you're already working in the terminal, let's use the Docker CLI.
+
+To list all locally available Docker images, run the following command:
+
+```console
+$ docker images
+```
+
+Example Output:
+
+```shell
+REPOSITORY               TAG              IMAGE ID       CREATED         SIZE
+docker-nodejs-sample     latest           423525528038   14 seconds ago   75.8MB
+```
+
+This output provides key details about your images:
+
+- **Repository** – The name assigned to the image.
+- **Tag** – A version label that helps identify different builds (e.g., latest).
+- **Image ID** – A unique identifier for the image.
+- **Created** – The timestamp indicating when the image was built.
+- **Size** – The total disk space used by the image.
+
+If the build was successful, you should see `docker-nodejs-sample` image listed. 
+
+---
+
+## Run the containerized application
+
+In the previous step, you created a Dockerfile for your Node.js application and built a Docker image using the docker build command. Now it’s time to run that image in a container and verify that your application works as expected.
+
 
 Inside the `docker-nodejs-sample` directory, run the following command in a
 terminal.
@@ -249,9 +374,9 @@ terminal.
 $ docker compose up --build
 ```
 
-Open a browser and view the application at [http://localhost:3000](http://localhost:3000). You should see a simple todo application.
+Open a browser and view the application at [http://localhost:8080](http://localhost:8080). You should see a simple Node.js web application.
 
-In the terminal, press `ctrl`+`c` to stop the application.
+Press `ctrl+c` in the terminal to stop your application.
 
 ### Run the application in the background
 
@@ -263,31 +388,73 @@ in a terminal.
 $ docker compose up --build -d
 ```
 
-Open a browser and view the application at [http://localhost:3000](http://localhost:3000).
+Open a browser and view the application at [http://localhost:8080](http://localhost:8080). You should see a simple web application preview.
 
-You should see a simple todo application.
 
-In the terminal, run the following command to stop the application.
+To confirm that the container is running, use `docker ps` command:
+
+```console
+$ docker ps
+```
+
+This will list all active containers along with their ports, names, and status. Look for a container exposing port 8080.
+
+Example Output:
+
+```shell
+CONTAINER ID   IMAGE                          COMMAND                  CREATED             STATUS             PORTS                    NAMES
+88bced6ade95   docker-nodejs-sample-server   "nginx -c /etc/nginx…"   About a minute ago  Up About a minute  0.0.0.0:8080->8080/tcp   docker-nodejs-sample-server-1
+```
+
+
+To stop the application, run:
 
 ```console
 $ docker compose down
 ```
 
-For more information about Compose commands, see the [Compose CLI
-reference](/reference/cli/docker/compose/_index.md).
+
+> [!NOTE]
+> For more information about Compose commands, see the [Compose CLI
+> reference](/reference/cli/docker/compose/_index.md).
+
+---
 
 ## Summary
 
-In this section, you learned how you can containerize and run your Node.js
-application using Docker.
+In this guide, you learned how to containerize, build, and run a Node.js application using Docker. By following best practices, you created a secure, optimized, and production-ready setup.
 
-Related information:
+What you accomplished:
+- Initialized your project using `docker init` to scaffold essential Docker configuration files.
+- Replaced the default `Dockerfile` with a multi-stage build that compiles the Node.js application and serves the static files using Nginx.
+- Replaced the default `.dockerignore` file to exclude unnecessary files and keep the image clean and efficient.
+- Built your Docker image using `docker build`.
+- Ran the container using `docker compose up`, both in the foreground and in detached mode.
+- Verified that the app was running by visiting [http://localhost:8080](http://localhost:8080).
+- Learned how to stop the containerized application using `docker compose down`.
 
-- [Dockerfile reference](/reference/dockerfile.md)
-- [.dockerignore file reference](/reference/dockerfile.md#dockerignore-file)
-- [Docker Compose overview](/manuals/compose/_index.md)
+You now have a fully containerized Node.js application, running in a Docker container, and ready for deployment across any environment with confidence and consistency.
+
+---
+
+## Related resources
+
+Explore official references and best practices to sharpen your Docker workflow:
+
+- [Multi-stage builds](/build/building/multi-stage/) – Learn how to separate build and runtime stages.
+- [Best practices for writing Dockerfiles](/develop/develop-images/dockerfile_best-practices/) – Write efficient, maintainable, and secure Dockerfiles.  
+- [Build context in Docker](/build/concepts/context/) – Learn how context affects image builds.  
+- [`docker init` CLI reference](/reference/cli/docker/init/) – Scaffold Docker assets automatically.
+- [`docker build` CLI reference](/reference/cli/docker/build/) – Build Docker images from a Dockerfile.
+- [`docker images` CLI reference](/reference/cli/docker/images/) – Manage and inspect local Docker images.
+- [`docker compose up` CLI reference](/reference/cli/docker/compose/up/) – Start and run multi-container applications.
+- [`docker compose down` CLI reference](/reference/cli/docker/compose/down/) – Stop and remove containers, networks, and volumes.
+
+---
 
 ## Next steps
 
-In the next section, you'll learn how you can develop your application using
-containers.
+With your Node.js application now containerized, you're ready to move on to the next step.
+
+In the next section, you'll learn how to develop your application using Docker containers, enabling a consistent, isolated, and reproducible development environment across any machine.
+
