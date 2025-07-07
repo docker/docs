@@ -3,7 +3,7 @@ title: Define AI Models in Docker Compose applications
 linkTitle: Use AI models in Compose
 description: Learn how to define and use AI models in Docker Compose applications using the models top-level element
 keywords: compose, docker compose, models, ai, machine learning, cloud providers, specification
-alias:
+aliases:
   - /compose/how-tos/model-runner/
   - /ai/compose/model-runner/
 weight: 10
@@ -68,14 +68,14 @@ models:
 ```
 
 Common configuration options include:
-- `model` (required): The OCI artifact identifier for the model. This is what Compose pulls and runs via the model runner. 
+- `model` (required): The OCI artifact identifier for the model. This is what Compose pulls and runs via the model runner.
 - `context_size`: Defines the maximum token context size for the model.
-  
+
    > [!NOTE]
    > Each model has its own maximum context size. When increasing the context length,
    > consider your hardware constraints. In general, try to keep context size
    > as small as feasible for your specific needs.
-  
+
 - `runtime_flags`: A list of raw command-line flags passed to the inference engine when the model is started.
    For example, if you use llama.cpp, you can pass any of [the available parameters](https://github.com/ggml-org/llama.cpp/blob/master/tools/server/README.md).
 - Platform-specific options may also be available via extension attributes `x-*`
@@ -172,7 +172,7 @@ Docker Model Runner will:
 >
 > This approach is deprecated. Use the [`models` top-level element](#basic-model-definition) instead.
 
-You can also use the `provider` service type, which allows you to declare platform capabilities required by your application. 
+You can also use the `provider` service type, which allows you to declare platform capabilities required by your application.
 For AI models, you can use the `model` type to declare model dependencies.
 
 To define a model provider:
