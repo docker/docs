@@ -67,13 +67,8 @@
       // Set the value of the input field to the query parameter
       searchInput.value = query;
 
-      // Trigger the input event to simulate user typing
-      const event = new Event("input", {
-        bubbles: true,
-        cancelable: true,
-      });
-      // Trigger the input event for the search input
-      searchInput.dispatchEvent(event);
+      // Directly call the search function
+      await onPageSearch({ target: { value: query } });
       searchInput.focus();
     });
 
