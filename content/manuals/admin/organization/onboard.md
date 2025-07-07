@@ -93,8 +93,6 @@ with your organization's domain, or create a new account with that email.
    - Ask your Docker sales representative or
    [contact sales](https://www.docker.com/pricing/contact-sales/) to get a list
    of Docker accounts that use an email address in your organization's domain.
-   - Use [domain audit](/manuals/security/for-admins/domain-audit.md) to
-   identify uncapture users in your organization.
 
 ### Step two: Invite owners
 
