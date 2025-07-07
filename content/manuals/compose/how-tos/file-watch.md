@@ -207,10 +207,6 @@ This setup demonstrates how to use the `sync+restart` action in Docker Compose t
 > or [local setup for Docker docs](https://github.com/docker/docs/blob/main/CONTRIBUTING.md)
 > for a demonstration of Compose `watch`.
 
-## Feedback
-
-We are actively looking for feedback on this feature. Give feedback or report any bugs you may find in the [Compose Specification repository](https://github.com/compose-spec/compose-spec/pull/253).
-
 ## Reference
 
 - [Compose Develop Specification](/reference/compose-file/develop.md)

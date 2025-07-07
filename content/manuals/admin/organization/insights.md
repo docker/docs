@@ -1,7 +1,7 @@
 ---
-description: Gain insights about your organization's users and their Docker usage.
-keywords: organization, insights
 title: Insights
+description: Gain insights about your organization's users and their Docker usage.
+keywords: organization, insights, Docker Desktop analytics, user usage statistics, Docker Business, track Docker activity
 ---
 
 {{< summary-bar feature_name="Insights" >}}
@@ -13,33 +13,33 @@ productivity and efficiency across the organization.
 
 Key benefits include:
 
-- Uniform working environment. Establish and maintain standardized
+- Uniform working environment: Establish and maintain standardized
   configurations across teams.
-- Best practices. Promote and enforce usage guidelines to ensure optimal
+- Best practices: Promote and enforce usage guidelines to ensure optimal
   performance.
-- Increased visibility. Monitor and drive adoption of organizational
+- Increased visibility: Monitor and drive adoption of organizational
   configurations and policies.
-- Optimized license use. Ensure that developers have access to advanced
+- Optimized license use: Ensure that developers have access to advanced
   features provided by a Docker subscription.
 
 ## Prerequisites
 
+To use Insights, you must meet the following requirements:
+
 - [Docker Business subscription](../../subscription/details.md#docker-business)
-- Administrators must [enforce sign-in](/security/for-admins/enforce-sign-in/) for users
-- Insights enabled by your Customer Success Manager
+- Administrators must [enforce sign-in](/security/for-admins/enforce-sign-in/)
+for users
+- Your Customer Success Manager must turn on Insights for your organization
 
 ## View Insights for organization users
 
-To access Insights, you must contact your Customer Success Manager to have the
-feature enabled. Once the feature is enabled, access Insights using the following
-steps:
+To access Insights, contact your Customer Success Manager to have the
+feature turned on. Once the feature is turned on, access Insights using the
+following steps:
 
-1. Open [Docker Home](https://app.docker.com/) and select your organization
-on the **Choose profile** page.
-1. Select **Admin Console** in the left-hand navigation menu.
-1. Select **Desktop insights**.
-1. Choose a timeframe for your insights data: **1 Week**, **1 Month**, or
-**3 Months**.
+1. Sign in to [Docker Home](https://app.docker.com/) and choose
+your organization.
+1. Select **Insights**. then select the period of time for the data.
 
 > [!NOTE]
 >
@@ -47,7 +47,7 @@ on the **Choose profile** page.
 > Insights page, view the **Last updated** date to understand when the data was
 > last updated.
 
-You can view data in the following charts:
+Insights data is displayed in the following charts:
 
  - [Docker Desktop users](#docker-desktop-users)
  - [Builds](#builds)
@@ -68,9 +68,9 @@ The chart contains the following data:
 
 | Data | Description |
 |:-----------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Active user | The number of users that have actively used Docker Desktop and either signed in with a Docker account that has a license in your organization or signed in to a Docker account with an email address from a domain associated with your organization. <br><br>Users who don’t sign in to an account associated with your organization are not represented in the data. To ensure users sign in with an account associated with your organization, you can [enforce sign-in](/security/for-admins/enforce-sign-in/). |
-| Total organization members | The number of users that have used Docker Desktop, regardless of their Insights activity. |
-| Users opted out of analytics | The number of users that are a member of your organization that have opted out of sending analytics. <br><br>When users opt out of sending analytics, you won't see any of their data in Insights. To ensure that the data includes all users, you can use [Settings Management](/desktop/hardened-desktop/settings-management/) to set `analyticsEnabled` for all your users. |
+| Active user | The number of users who have actively used Docker Desktop and either signed in with a Docker account that has a license in your organization or signed in to a Docker account with an email address from a domain associated with your organization. <br><br>Users who don’t sign in to an account associated with your organization are not represented in the data. To ensure users sign in with an account associated with your organization, you can [enforce sign-in](/security/for-admins/enforce-sign-in/). |
+| Total organization members | The number of users who have used Docker Desktop, regardless of their Insights activity. |
+| Users opted out of analytics | The number of users who are members of your organization that have opted out of sending analytics. <br><br>When users opt out of sending analytics, you won't see any of their data in Insights. To ensure that the data includes all users, you can use [Settings Management](/desktop/hardened-desktop/settings-management/) to set `analyticsEnabled` for all your users. |
 | Active users (graph) | The view over time for total active users. |
 
 
@@ -142,7 +142,7 @@ The chart contains the following data:
 ### Extensions
 
 Monitor extension installation activity with this chart. It provides visibility
-into the Docker Desktop extensions your team are using, letting you track
+into the Docker Desktop extensions your teams are using, letting you track
 adoption and identify popular tools that enhance productivity.
 
 The chart contains the following data:
@@ -180,7 +180,7 @@ A Docker Desktop user export file contains the following data points:
 member of
 - Date Joined: The date the user joined your organization
 - Last Logged-In Date: The last date the user logged into Docker using
-their web browser (this include Docker Hub and Docker Home)
+their web browser (this includes Docker Hub and Docker Home)
 - Docker Desktop Version: The version of Docker Desktop the user has
 installed
 - Last Seen Date: The last date the user used the Docker Desktop application
@@ -190,7 +190,7 @@ installed
 ## Troubleshoot Insights
 
 If you’re experiencing issues with data in Insights, consider the following
-solutions to resolve common problems.
+solutions to resolve common problems:
 
 - Update users to the latest version of Docker Desktop.
 
@@ -198,22 +198,22 @@ solutions to resolve common problems.
    In addition, older versions may not provide all data. Ensure all users have
    installed the latest version of Docker Desktop.
 
-- Enable **Send usage statistics** in Docker Desktop for all your users.
+- Turn on **Send usage statistics** in Docker Desktop for all your users.
 
    If users have opted out of sending usage statistics for Docker Desktop, then
    their usage data will not be a part of Insights. To manage the setting at
    scale for all your users, you can use [Settings
-   Management](/desktop/hardened-desktop/settings-management/) and enable the
+   Management](/desktop/hardened-desktop/settings-management/) and turn on the
    `analyticsEnabled` setting.
 
-- Ensure that users are using Docker Desktop and aren't using the standalone
+- Ensure users use Docker Desktop and aren't using the standalone
   version of Docker Engine.
 
-   Only Docker Desktop can provide data for Insights. If a user installs and
-   uses Docker Engine outside of Docker Desktop, Docker Engine won't provide
+   Only Docker Desktop can provide data for Insights. If a user installs Docker
+   Engine outside of Docker Desktop, Docker Engine won't provide
    data for that user.
 
-- Ensure that users are signing in to an account associated with your
+- Make sure users sign in to an account associated with your
   organization.
 
    Users who don’t sign in to an account associated with your organization are

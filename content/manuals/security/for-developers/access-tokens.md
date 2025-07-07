@@ -25,25 +25,18 @@ any time.
 
 Use the Docker Admin Console to create an access token.
 
-1. Sign in to your [Docker account](https://app.docker.com/login).
-
-2. Select your avatar in the top-right corner and from the drop-down menu select **Account settings**.
-
-3. Select **Personal access tokens**.
-
-4. Select **Generate new token**.
-
-5. Add a description for your token. Use something that indicates the use case or purpose of the token.
-
-6. Select the expiration date for the token.
-
-7. Set the access permissions.
+1. Sign in to [Docker Home](https://app.docker.com/).
+1. Select your avatar in the top-right corner and from the drop-down menu select **Account settings**.
+1. Select **Personal access tokens**.
+1. Select **Generate new token**.
+1. Add a description for your token. Use something that indicates the use case or purpose of the token.
+1. Select the expiration date for the token.
+1. Set the access permissions.
    The access permissions are scopes that set restrictions in your
    repositories. For example, for Read & Write permissions, an automation
    pipeline can build an image and then push it to a repository. However, it
    can't delete the repository.
-
-8. Select **Generate** and then copy the token that appears on the screen and save it. You won't be able to retrieve the token once you close this prompt.
+1. Select **Generate** and then copy the token that appears on the screen and save it. You won't be able to retrieve the token once you close this prompt.
 
 ## Use an access token
 
@@ -75,21 +68,17 @@ When utilizing PATs, users should be aware that excessive creation of PATs could
 
 You can rename, activate, deactivate, or delete a token as needed. You can manage your tokens in your account settings.
 
-1. Sign in to your [Docker account](https://app.docker.com/login).
-
-2. Select your avatar in the top-right corner and from the drop-down menu select **Account settings**.
-
-3. Select **Personal access tokens**.
+1. Sign in to [Docker Home](https://app.docker.com/login).
+1. Select your avatar in the top-right corner and from the drop-down menu select **Account settings**.
+1. Select **Personal access tokens**.
 
    This page shows an overview of all your
    tokens, and lists if the token was generated manually or if it was
    [auto-generated](#auto-generated-tokens). You can also view the scope of the
    tokens, which tokens are activate and inactive, when they were created, when
    they were last used, and their expiration date.
-
-4. Select the actions menu on the far right of a token row, then select **Deactivate** or **Activate**, **Edit**, or **Delete** to modify the token.
-
-5. After editing the token, select **Save token**.
+1. Select the actions menu on the far right of a token row, then select **Deactivate** or **Activate**, **Edit**, or **Delete** to modify the token.
+1. After editing the token, select **Save token**.
 
 ## Auto-generated tokens
 

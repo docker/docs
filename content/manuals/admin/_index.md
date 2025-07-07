@@ -42,6 +42,8 @@ across Docker environments.
 
 ## Company and organization hierarchy
 
+The [Docker Admin Console](https://app.docker.com/admin) provides administrators with centralized observability, access management, and controls for their company and organizations. To provide these features, Docker uses the following hierarchy and roles.
+
 ![Diagram showing Docker’s administration hierarchy with Company at the top, followed by Organizations, Teams, and Members](./images/docker-admin-structure.webp)
 
 ### Company

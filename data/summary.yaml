@@ -110,7 +110,7 @@ Compose menu:
 Compose models:
   requires: Docker Compose [2.38.0](/manuals/compose/releases/release-notes.md#2380) and later
 Compose model runner:
-  requires: Docker Compose [2.35.0](/manuals/compose/releases/release-notes.md#2350) and later, and Docker Desktop 4.41 and later
+  requires: Docker Compose [2.38.0](/manuals/compose/releases/release-notes.md#2350) and later, and Docker Desktop 4.43 and later
 Compose OCI artifact:
   requires: Docker Compose [2.34.0](/manuals/compose/releases/release-notes.md#2340) and later
 Compose provider services:
@@ -162,7 +162,7 @@ Docker Init:
 Docker Model Runner:
   availability: Beta
   requires: Docker Engine or Docker Desktop (Windows) 4.41+ or Docker Desktop (MacOS) 4.40+
-  for: Docker Desktop for Mac with Apple Silicon or Windows with NVIDIA GPUs
+  for: See Requirements section below
 Docker Projects:
   availability: Beta
 Docker Scout exceptions:
@@ -175,9 +175,6 @@ Docker Scout health scores:
   availability: Beta
 Docker Scout Mount Permissions:
   requires: Docker Desktop [4.34.0](/manuals/desktop/release-notes.md#4340) and later
-Domain audit:
-  subscription: [Business]
-  for: Administrators
 Domain management:
   subscription: [Business]
   for: Administrators

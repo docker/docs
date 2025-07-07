@@ -80,10 +80,12 @@ Security at runtime is enforced through resource and access limitations:
 
 1. Open the Docker Desktop settings and select **Beta features**.
 2. Select **Enable Docker MCP Toolkit**.
-3. Select **Apply & restart**.
+3. Select **Apply**.
 
 >[!NOTE]
->If you have the MCP Toolkit _extension_ installed, you can uninstall it.
+>
+> This feature started as the MCP Toolkit _extension_. This extension is now deprecated
+>and should be uninstalled.
 
 ## Install an MCP server
 
@@ -107,17 +109,16 @@ To install an MCP server:
 
 To learn more about the MCP server catalog, see [Catalog](catalog.md).
 
-### Example: Use the GitHub MCP server
+### Example: Use the **GitHub Official** MCP server
 
 Imagine you want to enable Ask Gordon to interact with your GitHub account:
 
 1. From the **MCP Toolkit** menu, select the **Catalog** tab and find
    the **GitHub Official** server and add it.
-2. In the server's **Config** tab, insert your token generated from
-   your [GitHub account](https://github.com/settings/personal-access-tokens).
+2. In the server's **Config** tab, [connect via OAuth](#authenticate-via-oauth).
 3. In the **Clients** tab, ensure Gordon is connected.
 4. From the **Ask Gordon** menu, you can now send requests related to your
-   GitHub account, in accordance to the tools provided by the GitHub MCP server. To test it, ask Gordon:
+   GitHub account, in accordance to the tools provided by the GitHub Official server. To test it, ask Gordon:
 
    ```text
    What's my GitHub handle?
@@ -145,7 +146,7 @@ You can simply install these 2 MCP servers in the MCP Toolkit,
 and add Claude Desktop as a client:
 
 1. From the **MCP Toolkit** menu, select the **Catalog** tab and find the **Puppeteer** server and add it.
-2. Repeat for the **GitHub** server.
+2. Repeat for the **GitHub Official** server.
 3. From the **Clients** tab, select **Connect** next to **Claude Desktop**. Restart 
    Claude Desktop if it's running, and it can now access all the servers in the MCP Toolkit.
 4. Within Claude Desktop, run a test by submitting the following prompt using the Sonnet 3.5 model:
@@ -160,3 +161,74 @@ and add Claude Desktop as a client:
    ```text
    Take a screenshot of docs.docker.com and then invert the colors
    ```
+
+### Example: Use Visual Studio Code as a client
+
+You can interact with all your installed MCP servers in VS Code:
+
+1. To enable the MCP Toolkit:
+
+
+   {{< tabs group="" >}}
+   {{< tab name="Enable globally">}}
+
+   1. Insert the following in your VS Code's User`settings.json`:
+   
+      ```json
+      "mcp": {
+       "servers": {
+         "MCP_DOCKER": {
+           "command": "docker",
+           "args": [
+             "mcp",
+             "gateway",
+             "run"
+           ],
+           "type": "stdio"
+         }
+       }
+      }
+      ```
+
+   {{< /tab >}}
+   {{< tab name="Enable for a given project">}}
+
+   1. In your terminal, navigate to your project's folder.
+   1. Run:
+    
+      ```bash
+      docker mcp client connect vscode
+      ```
+   
+      > [!NOTE]
+      > This command creates a `.vscode/mcp.json` file in the current directory. We
+      > recommend you add it to your  `.gitignore` file.
+
+  {{< /tab >}}
+  {{</tabs >}}
+
+1. In Visual Studio Code, open a new Chat and select the **Agent** mode:
+   
+   ![Copilot mode switching](./images/copilot-mode.png)
+
+1. You can also check the available MCP tools:
+
+   ![Displaying tools in VSCode](./images/tools.png)
+
+For more information about the Agent mode, see the
+[Visual Studio Code documentation](https://code.visualstudio.com/docs/copilot/chat/mcp-servers#_use-mcp-tools-in-agent-mode).
+
+## Authenticate via OAuth
+
+You can connect the MCP Toolkit to your development workflow via
+OAuth integration. For now, the MCP Toolkit only supports GitHub OAuth.
+
+1. On https://github.com/, ensure you are signed in.
+1. In Docker Desktop, select **MCP Toolkit** and select the **OAuth** tab. 
+1. In the GitHub entry, select **Authorize**. Your browser opens the GitHub authorization page.
+1. In the GitHub authorization page, select **Authorize Docker**. Once the authorization
+   is successful, you are automatically redirected to Docker Desktop.
+1. Install the **GitHub Official** MCP server, see [Install an MCP server](#install-an-mcp-server).
+
+The MCP Toolkit now has access to your GitHub account. To revoke access, select **Revoke** in the **OAuth** tab.
+See an example in [Use the **GitHub Official** MCP server](#example-use-the-github-official-mcp-server).

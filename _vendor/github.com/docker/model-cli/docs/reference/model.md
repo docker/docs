@@ -31,4 +31,4 @@ Docker Model Runner (EXPERIMENTAL)
 ## Description
 
 Use Docker Model Runner to run and interact with AI models directly from the command line.
-For more information, see the [documentation](https://docs.docker.com/model-runner/)
+For more information, see the [documentation](https://docs.docker.com/ai/model-runner/)

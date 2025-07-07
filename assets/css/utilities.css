@@ -1,13 +1,3 @@
-@utility icon-svg {
-  svg {
-    font-size: 24px;
-    width: 1em;
-    height: 1em;
-    display: inline-block;
-    fill: currentColor;
-  }
-}
-
 @utility icon-xs {
   svg {
     font-size: 12px;
@@ -89,6 +79,15 @@
     height: 1em;
     display: inline-block;
     fill: currentColor;
+  }
+}
+@utility icon-svg-stroke {
+  svg {
+    font-size: 24px;
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    stroke: currentColor;
   }
 }
 
@@ -256,4 +255,8 @@
 
 @utility pagination-link {
   @apply flex items-center justify-center rounded-sm p-2;
+}
+
+@utility breadcrumbs {
+  font-size: 90%;
 }

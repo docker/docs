@@ -21,20 +21,20 @@ a Docker Team subscription by default.
 
 ## Prerequisites
 
-Before you convert a user account to an organization, you must meet
-the following requirements:
+Before you convert a user account to an organization, ensure that you meet the following requirements:
 
-- The user account that you want to convert can not be a member of a company,
-any existing teams, or another organization. You must remove the account from
-all teams, organizations, or companies.
--  You must have a separate Docker ID ready to assign as the owner of the
-organization during conversion.
+- The user account that you want to convert must not be a member of a company or any teams or organizations. You must remove the account from all teams, organizations, or the company.
 
-    If you want to convert your user account into an organization account and
-    you don't have any other user accounts, you need to create a new user
-    account to assign it as the owner of the new organization. The assigned
-    owner has full administrative access to manage the organization. You can
-    assign more users the owner role after the conversion.
+    To do this:
+    1. Navigate to **My Hub** and then select the organization you need to leave.
+    1. Find your username in the **Members** tab.
+    1. Select the **More options** menu and then select **Leave organization**.
+
+    If the user account is the sole owner of any organization or company, assign another user the owner role and then remove yourself from the organization or company.
+
+-  You must have a separate Docker ID ready to assign as the owner of the organization during conversion.
+
+    If you want to convert your user account into an organization account and you don't have any other user accounts, you need to create a new user account to assign it as the owner of the new organization. With the owner role assigned, this user account has full administrative access to configure and manage the organization. You can assign more users the owner role after the conversion.
 
 ## What happens when you convert your account
 
@@ -57,14 +57,6 @@ administrative access to configure and manage the organization.
 organization, you must designate the user as an organization owner. This will
 ensure any PATs associated with the user's account are transferred to the
 organization owner.
-
-> [!TIP]
->
-> To avoid potentially disrupting service of personal access tokens when
-converting an account or changing ownership, it is recommended to
-use [organization access tokens](/manuals/security/for-admins/access-tokens.md).
-Organization access tokens are associated with an organization, not a
-single user account.
 
 ## Convert an account into an organization
 

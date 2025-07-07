@@ -43,15 +43,13 @@ join the Docker organization.
    > address the link was sent to and accept the invitation from the
    > **Notifications** panel.
 
-1. The Docker account creation page opens. If you already have an account,
-select **Already have an account? Sign in**.
+1. The Docker create an account page will open. If you already have an account, select **Already have an account? Sign in**.
 If you do not have an account yet, create an account using the same email
 address you received the invitation through.
-1. Optional. If you just created an account, you must navigate
-back to your email inbox and verify your email address using the Docker
-verification email.
-1. Once you are signed in to Docker Hub, select **My Hub** from the top-level
-navigation menu.
+1. Optional. If you do not have an account and created one, you must navigate
+back to your email inbox and verify your email address using the Docker verification
+email.
+1. Once you are signed in to Docker Hub, select **My Hub** from the top-level navigation menu.
 1. Select **Accept** on your invitation.
 
 After accepting an invitation, you are now a member of the organization.
@@ -65,12 +63,24 @@ After inviting members, you can resend or remove invitations as needed.
 {{< tabs >}}
 {{< tab name="Admin Console" >}}
 
-To resend an invitation from the Admin Console:
+You can send individual invitations, or bulk invitations from the Admin Console.
 
-1. In the [Admin Console](https://app.docker.com/admin), select your organization.
+To resend an individual invitation:
+
+1. Sign in to [Docker Home](https://app.docker.com/) and select your
+organization.
 1. Select **Members**.
-1. Select the **action menu** next to the invitee and select **Resend invitation**.
+1. Select the **action menu** next to the invitee and select **Resend**.
 1. Select **Invite** to confirm.
+
+To bulk resend invitations:
+
+1. Sign in to [Docker Home](https://app.docker.com/) and select your
+organization.
+1. Select **Members**.
+1. Use the **checkboxes** next to **Usernames** to bulk select users.
+1. Select **Resend invites**.
+1. Select **Resend** to confirm.
 
 {{< /tab >}}
 {{< tab name="Docker Hub" >}}
@@ -98,7 +108,8 @@ see the [Resend an invite](https://docs.docker.com/reference/api/hub/latest/#tag
 
 To remove an invitation from the Admin Console:
 
-1. In the [Admin Console](https://app.docker.com/admin), select your organization.
+1. Sign in to [Docker Home](https://app.docker.com/) and select your
+organization.
 1. Select **Members**.
 1. Select the **action menu** next to the invitee and select **Remove invitee**.
 1. Select **Remove** to confirm.
@@ -132,7 +143,9 @@ Use Docker Hub or the Admin Console to add or remove team members. Organization 
 
 To add a member to a team with the Admin Console:
 
-1. In the [Admin Console](https://app.docker.com/admin), select your organization.
+1. Sign in to [Docker Home](https://app.docker.com/) and select your
+organization.
+1. Select **Teams**.
 1. Select the team name.
 1. Select **Add member**. You can add the member by searching for their email address or username.
 
@@ -176,7 +189,9 @@ Organization owners can remove a member from a team in Docker Hub or Admin Conso
 
 To remove a member from a specific team with the Admin Console:
 
-1. In the [Admin Console](https://app.docker.com/admin), select your organization.
+1. Sign in to [Docker Home](https://app.docker.com/) and select your
+organization.
+1. Select **Teams**.
 1. Select the team name.
 1. Select the **X** next to the user's name to remove them from the team.
 1. When prompted, select **Remove** to confirm.
@@ -212,10 +227,11 @@ before you can edit your role.
 
 To update a member role in the Admin Console:
 
-1. In the [Admin Console](https://app.docker.com/admin), select your organization.
-1. Select the **Members** tab.
+1. Sign in to [Docker Home](https://app.docker.com/) and select your
+organization.
+1. Select **Members**.
 1. Find the username of the member whose role you want to edit. Select the
-**Actions menu**, then **Edit role**.
+**Actions** menu, then **Edit role**.
 
 {{< /tab >}}
 {{< tab name="Docker Hub" >}}
@@ -230,6 +246,11 @@ To update a member role in Docker Hub:
 1. Select **Edit role**.
 1. Select their organization, select the role you want to assign, and then select **Save**.
 
+> [!NOTE]
+>
+> If you're the only owner of an organization,
+> you need to assign a new owner before you can edit your role.
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -238,6 +259,7 @@ To update a member role in Docker Hub:
 {{< summary-bar feature_name="Admin orgs" >}}
 
 Owners can export a CSV file containing all members. The CSV file for a company contains the following fields:
+
 - Name: The user's name
 - Username: The user's Docker ID
 - Email: The user's email address
@@ -250,7 +272,8 @@ Owners can export a CSV file containing all members. The CSV file for a company 
 
 To export a CSV file of your members:
 
-1. In the [Admin Console](https://app.docker.com/admin), select your organization.
+1. Sign in to [Docker Home](https://app.docker.com/) and select your
+organization.
 1. Select **Members**.
 1. Select the **download** icon to export a CSV file of all members.
 

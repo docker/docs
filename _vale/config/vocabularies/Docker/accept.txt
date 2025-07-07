@@ -1,7 +1,8 @@
 (?i)[A-Z]{2,}'?s
+Adreno
+Aleksandrov
 Amazon
 Anchore
-Aleksandrov
 Apple
 Artifactory
 Azure
@@ -114,6 +115,7 @@ Nginx
 npm
 Nutanix
 Nuxeo
+NVIDIA
 OAuth
 Okta
 Ollama
@@ -126,8 +128,7 @@ PKG
 Postgres
 PowerShell
 Python
-Pyright
-pyright
+Qualcomm
 rollback
 rootful
 runc
@@ -162,6 +163,7 @@ unmanaged
 VMware
 vpnkit
 vSphere
+VSCode
 Wasm
 Windows
 windowsfilter
@@ -200,6 +202,7 @@ Zsh
 [Pp]rocfs
 [Pp]roxied
 [Pp]roxying
+[pP]yright
 [Rr]eal-time
 [Rr]egex(es)?
 [Rr]untimes?

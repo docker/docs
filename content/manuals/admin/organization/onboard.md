@@ -169,12 +169,9 @@ security posture:
 
 ## What's next
 
-- [Manage Docker products](./manage-products.md) to configure access and view
-usage.
-- Configure [Hardened Docker Desktop](/desktop/hardened-desktop/) to improve
-your organization’s security posture for containerized development.
-- [Audit your domains](/docker-hub/domain-audit/) to ensure that all Docker
-users in your domain are part of your organization.
+- [Manage Docker products](./manage-products.md) to configure access and view usage.
+- Configure [Hardened Docker Desktop](/desktop/hardened-desktop/) to improve your organization’s security posture for containerized development.
+- [Manage your domains](/manuals/security/for-admins/domain-management.md) to ensure that all Docker users in your domain are part of your organization.
 
 Your Docker subscription provides many more additional features. To learn more,
 see [Docker subscriptions and features](/subscription/details/).

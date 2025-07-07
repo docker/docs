@@ -20,6 +20,10 @@ params:
       description: Learn how build provenance metadata helps trace the origin of Docker Hardened Images and support compliance with SLSA.
       icon: track_changes
       link: /dhi/core-concepts/provenance/
+    - title: FIPS
+      description: Learn how Docker Hardened Images support FIPS 140 by using validated cryptographic modules and providing signed attestations for compliance audits.
+      icon: verified
+      link: /dhi/core-concepts/fips/
 
   grid_concepts_risk:
     - title: Common Vulnerabilities and Exposures (CVEs)

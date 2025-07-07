@@ -187,7 +187,7 @@ File share settings are:
 
 - **Remove a Directory**. Select `-` next to the directory you want to remove
 
-- **Apply & Restart** makes the directory available to containers using Docker's
+- **Apply** makes the directory available to containers using Docker's
   bind mount (`-v`) feature.
 
 > [!TIP]
@@ -350,7 +350,7 @@ edit the file using your favorite text editor.
 To see the full list of possible configuration options, see the
 [dockerd command reference](/reference/cli/dockerd/).
 
-Select **Apply & Restart** to save your settings and restart Docker Desktop.
+Select **Apply** to save your settings.
 
 ## Builders
 
