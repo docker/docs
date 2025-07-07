@@ -10,7 +10,7 @@ aliases:
   - /config/containers/start-containers-automatically/
 ---
 
-Docker provides [restart policies](/manuals/engine/containers/run.md#restart-policies---restart)
+Docker provides [restart policies](/reference/cli/docker/container/run.md#restart)
 to control whether your containers start automatically when they exit, or when
 Docker restarts. Restart policies start linked containers in the correct order.
 Docker recommends that you use restart policies, and avoid using process
@@ -22,7 +22,7 @@ a Docker upgrade, though networking and user input are interrupted.
 
 ## Use a restart policy
 
-To configure the restart policy for a container, use the `--restart` flag
+To configure the restart policy for a container, use the [`--restart`](/reference/cli/docker/container/run.md#restart) flag
 when using the `docker run` command. The value of the `--restart` flag can be
 any of the following:
 
