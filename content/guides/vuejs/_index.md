@@ -8,6 +8,9 @@ summary: |
 toc_min: 1
 toc_max: 2
 languages: [js]
+tags: [frameworks]
+aliases:
+  - /frameworks/vue/
 params:
   time: 20 minutes
 
