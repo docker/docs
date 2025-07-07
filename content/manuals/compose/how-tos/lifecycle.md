@@ -2,8 +2,8 @@
 title: Using lifecycle hooks with Compose
 linkTitle: Use lifecycle hooks
 weight: 20
-desription: How to use lifecycle hooks with Docker Compose
-keywords: cli, compose, lifecycle, hooks reference
+description: Learn how to use Docker Compose lifecycle hooks like post_start and pre_stop to customize container behavior.
+keywords: docker compose lifecycle hooks, post_start, pre_stop, docker compose entrypoint, docker container stop hooks, compose hook commands
 ---
 
 {{< summary-bar feature_name="Compose lifecycle hooks" >}}
@@ -11,7 +11,7 @@ keywords: cli, compose, lifecycle, hooks reference
 ## Services lifecycle hooks
 
 When Docker Compose runs a container, it uses two elements, 
-[ENTRYPOINT and COMMAND](https://github.com/manuals//engine/containers/run.md#default-command-and-options), 
+[ENTRYPOINT and COMMAND](/manuals/engine/containers/run.md#default-command-and-options), 
 to manage what happens when the container starts and stops.
 
 However, it can sometimes be easier to handle these tasks separately with lifecycle hooks - 

@@ -1,18 +1,18 @@
 ---
 description: Learn how to scale your Docker subscription
-keywords: subscription, Pro, Team, business, pricing plan, build minutes, test container minutes, pull limit
+keywords: subscription, Pro, Team, business, pricing, build minutes, test container minutes, pull limit
 title: Scale your subscription
 weight: 17
 ---
 
 > [!NOTE]
 >
-> Owners of legacy Docker subscription plans must upgrade their subscription to a new
-> Docker subscription plan in order to scale their subscription.
+> Owners of legacy Docker subscriptions must upgrade their subscription to a new
+> Docker subscription in order to scale their subscription.
 >
-> Legacy Docker plans apply to Docker subscribers who last purchased or renewed
+> Legacy Docker subscriptions apply to Docker subscribers who last purchased or renewed
 > their subscription before December 10, 2024. These subscribers will keep
-> their current plan and pricing until their next renewal date that falls on or
+> their current subscription and pricing until their next renewal date that falls on or
 > after December 10, 2024. To see purchase or renewal history, view your
 > [billing history](../billing/history.md). For more details about legacy
 > after December 10, 2024. For more details about legacy
@@ -20,7 +20,7 @@ weight: 17
 > Plans](https://www.docker.com/blog/november-2024-updated-plans-announcement/).
 
 Docker subscriptions let you scale your consumption as your needs evolve. Except
-for legacy Docker subscription plans, all paid Docker subscriptions come with
+for legacy Docker subscriptions, all paid Docker subscriptions come with
 access to Docker Hub, Docker Build Cloud, and Testcontainers Cloud with a base
 amount of consumption. See [Docker subscriptions and features](./details.md) to
 learn how much base consumption comes with each subscription. You can scale your
@@ -48,14 +48,13 @@ subscription period.
 
 You can pre-purchase Docker Build Cloud build minutes in the Docker Build Cloud Dashboard:
 
-1. Sign in to [Docker Home](https://app.docker.com/).
-2. Under Settings and administration, select **Billing**.
-3. On the plans and usage page, select **View build minutes**.
-    This will launch the Docker Build Cloud settings page.
-4. Select **Add minutes**.
-5. Select your additional minute amount, then **Continue to payment**.
-6. Enter your payment details and billing address.
-7. Review your order and select **Pay**.
+1. Sign in to [Docker Home](https://app.docker.com/) and choose
+your organization.
+1. Select **Build Cloud**, then **Build minutes**.
+1. Select **Add prepaid minutes**.
+1. Select your additional minute amount, then **Continue to payment**.
+1. Enter your payment details and billing address.
+1. Review your order and select **Pay**.
 
 Your additional minutes will now display on the Build minutes page.
 

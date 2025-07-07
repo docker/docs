@@ -34,6 +34,8 @@ On the **General** tab, you can configure when to start Docker and specify other
 
 - **Choose theme for Docker Desktop**. Choose whether you want to apply a **Light** or **Dark** theme to Docker Desktop. Alternatively you can set Docker Desktop to **Use system settings**.
 
+- **Configure shell completions**. Automatically edits your shell configuration and gives you word completion for commands, flags, and Docker objects (such as container and volume names) when you hit `<Tab>` as you type into your terminal. For more information, see [Completion](/manuals/engine/cli/completion.md).
+
 - **Choose container terminal**. Determines which terminal is launched when opening the terminal from a container.
 If you choose the integrated terminal, you can run commands in a running container straight from the Docker Desktop Dashboard. For more information, see [Explore containers](/manuals/desktop/use-desktop/container.md).
 
@@ -44,6 +46,12 @@ If you choose the integrated terminal, you can run commands in a running contain
 - {{< badge color=blue text="Mac only" >}}**Include VM in Time Machine backups**. Select to back up the Docker Desktop
   virtual machine. This option is turned off by default.
 
+- **Use containerd for pulling and storing images**.
+  Turns on the containerd image store.
+  This brings new features like faster container startup performance by lazy-pulling images,
+  and the ability to run Wasm applications with Docker.
+  For more information, see [containerd image store](/manuals/desktop/features/containerd.md).
+
 - {{< badge color=blue text="Windows only" >}}**Expose daemon on tcp://localhost:2375 without TLS**. Check this option to
   enable legacy clients to connect to the Docker daemon. You must use this option
   with caution as exposing the daemon without TLS can result in remote code
@@ -53,12 +61,6 @@ If you choose the integrated terminal, you can run commands in a running contain
   Hyper-V backend. For more information, see [Docker Desktop WSL 2 backend](/manuals/desktop/features/wsl/_index.md).
 
 - {{< badge color=blue text="Windows only" >}}**Add the `*.docker.internal` names to the host's `/etc/hosts` file (Password required)**. Lets you resolve `*.docker.internal` DNS names from both the host and your containers.
-
-- **Use containerd for pulling and storing images**.
-  Turns on the containerd image store.
-  This brings new features like faster container startup performance by lazy-pulling images,
-  and the ability to run Wasm applications with Docker.
-  For more information, see [containerd image store](/manuals/desktop/features/containerd.md).
 
 - {{< badge color=blue text="Mac only" >}} **Choose Virtual Machine Manager (VMM)**. Choose the Virtual Machine Manager for creating and managing the Docker Desktop Linux VM.
   - Select **Docker VMM** for the latest and most performant Hypervisor/Virtual Machine Manager. This option is available only on Apple Silicon Macs running macOS 12.5 or later and is currently in Beta.
@@ -88,7 +90,7 @@ If you choose the integrated terminal, you can run commands in a running contain
 
 - **Show CLI hints**. Displays CLI hints and tips when running Docker commands in the CLI. This is turned on by default. To turn CLI hints on or off from the CLI, set `DOCKER_CLI_HINTS` to `true` or `false` respectively.
 
-- **SBOM Indexing**. When this option is enabled, inspecting an image in Docker Desktop shows a **Start analysis** button that, when selected, analyzes the image with Docker Scout.
+- **Enable Scout image analysis**. When this option is enabled, inspecting an image in Docker Desktop shows a **Start analysis** button that, when selected, analyzes the image with Docker Scout.
 
 - **Enable background SBOM indexing**. When this option is enabled, Docker Scout automatically analyzes images that you build or pull.
 
@@ -128,7 +130,7 @@ Advanced settings are:
 
 - **Swap**. Configure swap file size as needed. The default is 1 GB.
 
-- **Virtual disk limit**. Specify the maximum size of the disk image.
+- **Disk usage limit**. Specify the maximum amount of disk space the engine can use.
 
 - **Disk image location**. Specify the location of the Linux volume where containers and images are stored.
 
@@ -185,7 +187,7 @@ File share settings are:
 
 - **Remove a Directory**. Select `-` next to the directory you want to remove
 
-- **Apply & Restart** makes the directory available to containers using Docker's
+- **Apply** makes the directory available to containers using Docker's
   bind mount (`-v`) feature.
 
 > [!TIP]
@@ -305,6 +307,8 @@ To enable Kerberos or NTLM proxy authentication you must pass the `--proxy-enabl
 
 Docker Desktop uses a private IPv4 network for internal services such as a DNS server and an HTTP proxy. In case Docker Desktop's choice of subnet clashes with IPs in your environment, you can specify a custom subnet using the **Network** setting.
 
+On Windows and Mac, you can also set the default networking mode and DNS resolution behavior. For more information, see [Networking](/manuals/desktop/features/networking.md#networking-mode-and-dns-behaviour-for-mac-and-windows).
+
 On Mac, you can also select the **Use kernel networking for UDP** setting. This lets you use a more efficient kernel networking path for UDP. This may not be compatible with your VPN software.
 
 ### WSL Integration
@@ -346,7 +350,7 @@ edit the file using your favorite text editor.
 To see the full list of possible configuration options, see the
 [dockerd command reference](/reference/cli/dockerd/).
 
-Select **Apply & Restart** to save your settings and restart Docker Desktop.
+Select **Apply** to save your settings.
 
 ## Builders
 
@@ -429,8 +433,6 @@ With Docker Desktop version 4.38 and later, you can choose your cluster provisio
  - **Kubeadm** creates a single-node cluster and the version is set by Docker Desktop.
  - **kind** creates a multi-node cluster and you can set the version and number of nodes. 
 
-Docker Desktop version 4.38 and later also lets you install the Kubernetes Dashboard within an existing Kubernetes cluster with the **Deploy the Kubernetes Dashboard into cluster** setting. It provides real-time visibility into workloads and nodes and helps you manage and monitor your Kubernetes clusters and applications easily.
-
 Select **Show system containers (advanced)** to view internal containers when
 using Docker commands.
 
@@ -470,13 +472,7 @@ Use the **Extensions** tab to:
 
 For more information about Docker extensions, see [Extensions](/manuals/extensions/_index.md).
 
-## Features in development
-
-On the **Feature control** tab you can control your settings for **Beta features** and **Experimental features**.
-
-You can also sign up to the [Developer Preview program](https://www.docker.com/community/get-involved/developer-preview/) from the **Features in development** tab.
-
-### Beta features
+## Beta features
 
 Beta features provide access to future product functionality.
 These features are intended for testing and feedback only as they may change
@@ -484,27 +480,30 @@ between releases without warning or remove them entirely from a future
 release. Beta features must not be used in production environments.
 Docker doesn't offer support for beta features.
 
-### Experimental features
-
-Experimental features provide early access to future product functionality.
-These features are intended for testing and feedback only as they may change
-between releases without warning or can be removed entirely from a future
-release. Experimental features must not be used in production environments.
-Docker does not offer support for experimental features.
+You can also sign up to the [Developer Preview program](https://www.docker.com/community/get-involved/developer-preview/) from the **Beta features** tab.
 
 For a list of current experimental features in the Docker CLI, see [Docker CLI Experimental features](https://github.com/docker/cli/blob/master/experimental/README.md).
+
+> [!IMPORTANT]
+>
+> For Docker Desktop versions 4.41 and earlier, there is also an **Experimental features** tab under the **Features in development** page.
+>
+> As with beta features, experimental features must not be used in production environments. Docker does not offer support for experimental features.
 
 ## Notifications
 
 Use the **Notifications** tab to turn on or turn off notifications for the following events:
 
 - **Status updates on tasks and processes**
+- **Recommendations from Docker**
 - **Docker announcements**
 - **Docker surveys**
 
-By default, all notifications are turned on. You'll always receive error notifications and notifications about new Docker Desktop releases and updates.
+By default, all general notifications are turned on. You'll always receive error notifications and notifications about new Docker Desktop releases and updates.
 
-Notifications momentarily appear in the lower-right of the Docker Desktop Dashboard and then move to the **Notifications** drawer. To open the **Notifications** drawer, select {{< inline-image src="../images/notifications.svg" alt="notifications" >}}.
+You can also [configure notification settings for Docker Scout-related issues](/manuals/scout/explore/dashboard.md#notification-settings). 
+
+Notifications momentarily appear in the lower-right of the Docker Desktop Dashboard and then move to the **Notifications** drawer which can be accessed from the top-right of the Docker Desktop Dashboard.
 
 ## Advanced
 
@@ -520,8 +519,8 @@ On Mac, you can reconfigure your initial installation settings  on the **Advance
             ```
      3. Save and the close the file. Restart your shell to apply the changes to the PATH variable.
 
-- **Enable default Docker socket (Requires password)**. Creates `/var/run/docker.sock` which some third party clients may use to communicate with Docker Desktop. For more information, see [permission requirements for macOS](/manuals/desktop/setup/install/mac-permission-requirements.md#installing-symlinks).
+- **Allow the default Docker socket to be used (Requires password)**. Creates `/var/run/docker.sock` which some third party clients may use to communicate with Docker Desktop. For more information, see [permission requirements for macOS](/manuals/desktop/setup/install/mac-permission-requirements.md#installing-symlinks).
 
-- **Enable privileged port mapping (Requires password)**. Starts the privileged helper process which binds the ports that are between 1 and 1024. For more information, see [permission requirements for macOS](/manuals/desktop/setup/install/mac-permission-requirements.md#binding-privileged-ports).
+- **Allow privileged port mapping (Requires password)**. Starts the privileged helper process which binds the ports that are between 1 and 1024. For more information, see [permission requirements for macOS](/manuals/desktop/setup/install/mac-permission-requirements.md#binding-privileged-ports).
 
-  For more information on each configuration and use case, see [Permission requirements](/manuals/desktop/setup/install/mac-permission-requirements.md).
+For more information on each configuration and use case, see [Permission requirements](/manuals/desktop/setup/install/mac-permission-requirements.md).

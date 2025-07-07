@@ -30,7 +30,7 @@ Build dockerfile inline:
 Build entitlements:
   requires: Docker Compose [2.27.1](/manuals/compose/releases/release-notes.md#2271) and later
 Build multiple exporters:
-  requires: Docker Buildx [0.13.0]((/manuals/build/release-notes.md#0130) and later
+  requires: Docker Buildx [0.13.0](/manuals/build/release-notes.md#0130) and later
 Buildkit host:
   requires: Docker Buildx [0.9.0](/manuals/build/release-notes.md#090) and later
 Build privileged:
@@ -70,7 +70,7 @@ Compliance reporting:
 Compose attach:
   requires: Docker Compose [2.20.0](/manuals/compose/releases/release-notes.md#2200) and later
 Compose bridge:
-  availability: Experimental
+  requires: Docker Desktop 4.43.0 and later
 Config profiles:
   requires: Docker Desktop 4.36 and later
 Compose dependent images:
@@ -97,6 +97,8 @@ Compose gw priority:
   requires: Docker Compose [2.33.1](/manuals/compose/releases/release-notes.md#2331) and later
 Compose include:
   requires: Docker Compose [2.20.3](/manuals/compose/releases/release-notes.md#2203) and later
+Compose interface-name:
+  requires: Docker Compose [2.36.0](/manuals/compose/releases/release-notes.md#2203) and later
 Compose label file:
   requires: Docker Compose [2.32.2](/manuals/compose/releases/release-notes.md#2232) and later
 Compose lifecycle hooks:
@@ -105,8 +107,16 @@ Compose mac address:
   requires: Docker Compose [2.23.2](/manuals/compose/releases/release-notes.md#2232) and later
 Compose menu:
   requires: Docker Compose [2.26.0](/manuals/compose/releases/release-notes.md#2260) and later
+Compose models:
+  requires: Docker Compose [2.38.0](/manuals/compose/releases/release-notes.md#2380) and later
+Compose model runner:
+  requires: Docker Compose [2.38.0](/manuals/compose/releases/release-notes.md#2350) and later, and Docker Desktop 4.43 and later
 Compose OCI artifact:
   requires: Docker Compose [2.34.0](/manuals/compose/releases/release-notes.md#2340) and later
+Compose provider services:
+  requires: Docker Compose [2.36.0](/manuals/compose/releases/release-notes.md) and later
+Compose progress:
+  requires: Docker Compose [2.36.0](/manuals/compose/releases/release-notes.md) and later
 Compose replace file:
   requires: Docker Compose [2.24.4](/manuals/compose/releases/release-notes.md#2244) and later
 Compose required:
@@ -127,6 +137,9 @@ Docker Build Cloud:
   subscription: [Pro, Team, Business]
 Docker CLI OpenTelemetry:
   requires: Docker Engine [26.1.0](/manuals/engine/release-notes/26.1.md#2610) and later
+Docker Cloud:
+  availability: Beta
+  requires: Docker Desktop 4.42 and later
 docker compose alpha:
   availability: Experimental
 Docker Debug:
@@ -142,14 +155,16 @@ Docker Desktop CLI logs:
   requires: Docker Desktop 4.39 and later
 Docker GitHub Copilot:
   availability: Early Access
-Docker Model Runner:
-  availability: Beta
-  requires: Docker Desktop 4.40 and later
-  for: Docker Desktop for Mac with Apple Silicon
-Docker Projects:
-  availability: Beta
+Docker Hardened Images:
+  subscription: [Docker Hardened Images]
 Docker Init:
   requires: Docker Desktop [4.27](/manuals/desktop/release-notes.md#4270) and later
+Docker Model Runner:
+  availability: Beta
+  requires: Docker Engine or Docker Desktop (Windows) 4.41+ or Docker Desktop (MacOS) 4.40+
+  for: See Requirements section below
+Docker Projects:
+  availability: Beta
 Docker Scout exceptions:
   availability: Experimental
   requires: Docker Scout CLI [1.15.0](/manuals/scout/release-notes/cli.md#1150) and later
@@ -160,12 +175,14 @@ Docker Scout health scores:
   availability: Beta
 Docker Scout Mount Permissions:
   requires: Docker Desktop [4.34.0](/manuals/desktop/release-notes.md#4340) and later
-Domain audit:
+Domain management:
   subscription: [Business]
   for: Administrators
 Enforce sign-in:
-  subscription: [Business]
+  subscription: [Team, Business]
   for: Administrators
+Gated distribution:
+  availability: Early Access
 General admin:
   for: Administrators
 GitHub Actions cache:
@@ -174,6 +191,8 @@ Hardened Docker Desktop:
   subscription: [Business]
   for: Administrators
 Image management:
+  availability: Beta
+Immutable tags:
   availability: Beta
 Import builds:
   availability: Beta
@@ -206,18 +225,18 @@ Registry access management:
   subscription: [Business]
   for: Administrators
 SOCKS5 proxy support:
-  requires: Docker Desktop [4.28.0](/manuals/desktop/release-notes.md#4280) and later
+  subscription: [Business]
 SSO:
   subscription: [Business]
   for: Administrators
 Synchronized file sharing:
   subscription: [Pro, Team, Business]
-  requires: Docker Desktop [4.27](/manuals/desktop/release-notes.md#4270) and later
 USB/IP support:
   requires: Docker Desktop [4.35.0](/manuals/desktop/release-notes.md#4350) and later
+  for: Docker Desktop for Mac, Linux, and Windows with the Hyper-V backend
 VMM:
-  availability: Beta
   requires: Docker Desktop [4.35.0](/manuals/desktop/release-notes.md#4350) and later
+  for: Docker Desktop on Mac with Apple Silicon
 Wasm workloads:
   availability: Beta
 Wasmtime:

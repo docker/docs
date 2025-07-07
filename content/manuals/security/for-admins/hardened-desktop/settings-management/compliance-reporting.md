@@ -28,9 +28,9 @@ compliance status, and resolving non-compliant users.
 > Desktop settings reporting is in Early Access and is being rolled out
 > gradually. You may not see this setting in the Admin Console yet.
 
-1. Sign in to the [Admin Console](https://app.docker.com/admin).
-2. Select your organization or company from the **Choose profile** page.
-3. Under Docker Desktop, select **Reporting**.
+1. Sign in to [Docker Home](https://app.docker.com) and select
+your organization.
+1. Select **Admin Console**, then **Desktop settings reporting**.
 
 This opens the Desktop settings reporting page. From here you can:
 
@@ -48,16 +48,61 @@ This opens the Desktop settings reporting page. From here you can:
 > because older versions can't report compliance. To ensure accurate
 > compliance status, users must update to Docker Desktop version 4.40 and later.
 
-1. Sign in to the [Admin Console](https://app.docker.com/admin).
-2. Select your organization or company from the **Choose profile** page.
-3. Under Docker Desktop, select **Reporting**. By default, non-compliant users
-are displayed.
-4. Optional. Select the **Hide compliant users** checkbox to show both compliant
+1. Sign in to [Docker Home](https://app.docker.com) and select
+your organization.
+1. Select **Admin Console**, then **Desktop settings reporting**.
+1. Optional. Select the **Hide compliant users** checkbox to show both compliant
 and non-compliant users.
-5. Use the **Search** field to search by username or email address.
-6. Hover over a user’s compliance status indicator to quickly view their status.
-7. Select a username to view more details about their compliance status, and for
+1. Use the **Search** field to search by username or email address.
+1. Hover over a user’s compliance status indicator to quickly view their status.
+1. Select a username to view more details about their compliance status, and for
 steps to resolve non-compliant users.
+
+## Understand compliance status
+
+Docker evaluates compliance status based on:
+
+- Compliance status: Whether a user has fetched and applied the latest settings. This is the primary label shown on the reporting page.
+- Domain status: Whether the user's email matches a verified domain.
+- Settings status: Whether a settings policy is applied to the user.
+
+The combination of these statuses determines what actions you need to take.
+
+### Compliance status reference
+
+This reference explains how each status is determined in the reporting dashboard
+based on user domain and settings data. The Admin Console displays the
+highest-priority applicable status according to the following rules.
+
+**Compliance status**
+
+| Compliance status | What it means |
+|-------------------|---------------|
+| Uncontrolled domain | The user's email domain is not verified. |
+| No policy assigned | The user does not have any policy assigned to them. |
+| Non-compliant | The user fetched the correct policy, but hasn't applied it. |
+| Outdated | The user fetched a previous version of the policy. |
+| Compliant | The user fetched and applied the latest assigned policy. |
+
+**Domain status**
+
+This reflects how the user’s email domain is evaluated based on the organization’s domain setup.
+
+| Domain status | What it means |
+|---------------|---------------|
+| Verified | The user’s email domain is verified. |
+| Guest user | The user's email domain is not verified. |
+| Domainless | Your organization has no verified domains, and the user's domain is unknown. |
+
+**Settings status**
+
+This shows whether and how the user is assigned a settings policy.
+
+| Settings status | What it means |
+|-----------------|---------------|
+| Global policy | The user is assigned your organzation's default policy. |
+| User policy | The user is assigned a specific custom policy. |
+| No policy assigned | The user is not assigned to any policy. |
 
 ## Resolve compliance status
 
@@ -80,8 +125,8 @@ Desktop settings reporting dashboard. Select a compliant user to open their
 compliance status details. Compliant users have the following status details:
 
 - **Compliance status**: Compliant
-- **Domain status**: Verified domain
-- **Settings status**: Compliant
+- **Domain status**: Verified
+- **Settings status**: Global policy or user policy
 - **User is compliant** indicator
 
 No resolution steps are needed for compliant users.
@@ -93,7 +138,7 @@ next to their name on the Desktop settings reporting dashboard. Non-compliant
 users must have their compliance status resolved:
 
 1. Select a username from the Desktop settings reporting dashboard.
-2. On the compliance status details page, follow the resolution steps provided
+1. On the compliance status details page, follow the resolution steps provided
 to resolve the compliance status.
-3. Refresh the page to ensure the resolution steps resolved the compliance
+1. Refresh the page to ensure the resolution steps resolved the compliance
 status.

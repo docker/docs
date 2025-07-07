@@ -187,16 +187,6 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
-    - option: detach
-      value_type: bool
-      default_value: "false"
-      description: Detach buildx server (supported only on linux)
-      deprecated: false
-      hidden: false
-      experimental: false
-      experimentalcli: true
-      kubernetes: false
-      swarm: false
     - option: file
       shorthand: f
       value_type: string
@@ -415,15 +405,6 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
-    - option: root
-      value_type: string
-      description: Specify root directory of server to connect
-      deprecated: false
-      hidden: false
-      experimental: false
-      experimentalcli: true
-      kubernetes: false
-      swarm: false
     - option: sbom
       value_type: string
       description: Shorthand for `--attest=type=sbom`
@@ -454,16 +435,6 @@ options:
       hidden: true
       experimental: false
       experimentalcli: false
-      kubernetes: false
-      swarm: false
-    - option: server-config
-      value_type: string
-      description: |
-        Specify buildx server config file (used only when launching new server)
-      deprecated: false
-      hidden: false
-      experimental: false
-      experimentalcli: true
       kubernetes: false
       swarm: false
     - option: shm-size
@@ -1433,7 +1404,7 @@ examples: |-
     ###### `type=file` usage
 
     In the following example, `type=file` is automatically detected because no
-    environment variable mathing `aws` (the ID) is set.
+    environment variable matching `aws` (the ID) is set.
 
     ```console
     $ docker buildx build --secret id=aws,src=$HOME/.aws/credentials .

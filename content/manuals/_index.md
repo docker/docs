@@ -10,6 +10,7 @@ params:
   sidebar:
     groups:
       - Open source
+      - AI
       - Products
       - Platform
   notoc: true
@@ -24,20 +25,37 @@ params:
     link: /engine/
   - title: Docker Compose
     description: Define and run multi-container applications.
-    icon: /assets/icons/Compose.svg
+    icon: /icons/Compose.svg
     link: /compose/
   - title: Testcontainers
     description: Run containers programmatically in your preferred programming language.
-    icon: /assets/icons/Testcontainers.svg
+    icon: /icons/Testcontainers.svg
     link: /testcontainers/
+  ai:
+  - title: Ask Gordon
+    description: Streamline your workflow and get the most out of the Docker ecosystem with your personal AI assistant.
+    icon: note_add
+    link: /ai/gordon/
+  - title: Docker Model Runner
+    description: View and manage your local models.
+    icon: view_in_ar
+    link: /ai/model-runner/
+  - title: MCP Catalog and Toolkit
+    description: Augment your AI workflow with MCP servers.
+    icon: /icons/toolkit.svg
+    link: /ai/mcp-catalog-and-toolkit/
   products:
   - title: Docker Desktop
     description: Your command center for container development.
-    icon: /assets/icons/Whale.svg
+    icon: /icons/Whale.svg
     link: /desktop/
+  - title: Docker Hardened Images
+    description: Secure, minimal images for trusted software delivery.
+    icon: /icons/dhi.svg
+    link: /dhi/
   - title: Build Cloud
     description: Build your images faster in the cloud.
-    icon: /assets/images/logo-build-cloud.svg
+    icon: /icons/logo-build-cloud.svg
     link: /build-cloud/
   - title: Docker Hub
     description: Discover, share, and integrate container images.
@@ -45,7 +63,7 @@ params:
     link: /docker-hub/
   - title: Docker Scout
     description: Image analysis and policy evaluation.
-    icon: /assets/icons/Scout.svg
+    icon: /icons/Scout.svg
     link: /scout/
   - title: Docker for GitHub Copilot
     description: Integrate Docker's capabilities with GitHub Copilot.
@@ -59,10 +77,6 @@ params:
     description: Run integration tests, with real dependencies, in the cloud.
     icon: package_2
     link: https://testcontainers.com/cloud/docs/
-  - title: Docker Projects
-    description: Use a unified, project-based workflow to run your containerized projects. 
-    icon: folder
-    link: /projects/
   platform:
   - title: Administration
     description: Centralized observability for companies and organizations.
@@ -94,6 +108,12 @@ Docker products.
 Open source development and containerization technologies.
 
 {{< grid items=open-source >}}
+
+## AI
+
+All the Docker AI tools in one easy-to-access location. 
+
+{{< grid items=ai >}}
 
 ## Products
 

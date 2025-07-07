@@ -19,12 +19,12 @@ This page contains the domain URLs that you need to add to a firewall allowlist 
 | ------------------------------------------------------------------------------------ | -------------------------------------------- |
 | https://api.segment.io                                                               | Analytics                                    |
 | https://cdn.segment.com                                                              | Analytics                                    |
-| https://experiments.docker.com                                                       | A/B testing                                  |
 | https://notify.bugsnag.com                                                           | Error reports                                |
 | https://sessions.bugsnag.com                                                         | Error reports                                |
 | https://auth.docker.io                                                               | Authentication                               |
 | https://cdn.auth0.com                                                                | Authentication                               |
 | https://login.docker.com                                                             | Authentication                               |
+| https://auth.docker.com                                                              | Authentication                               |
 | https://desktop.docker.com                                                           | Update                                       |
 | https://hub.docker.com                                                               | Docker Hub                                   |
 | https://registry-1.docker.io                                                         | Docker Pull/Push                             |

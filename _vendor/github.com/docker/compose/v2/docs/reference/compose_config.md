@@ -5,20 +5,18 @@
 It merges the Compose files set by `-f` flags, resolves variables in the Compose file, and expands short-notation into
 the canonical format.
 
-### Aliases
-
-`docker compose config`, `docker compose convert`
-
 ### Options
 
 | Name                      | Type     | Default | Description                                                                 |
 |:--------------------------|:---------|:--------|:----------------------------------------------------------------------------|
 | `--dry-run`               | `bool`   |         | Execute command in dry run mode                                             |
 | `--environment`           | `bool`   |         | Print environment used for interpolation.                                   |
-| `--format`                | `string` | `yaml`  | Format the output. Values: [yaml \| json]                                   |
+| `--format`                | `string` |         | Format the output. Values: [yaml \| json]                                   |
 | `--hash`                  | `string` |         | Print the service config hash, one per line.                                |
 | `--images`                | `bool`   |         | Print the image names, one per line.                                        |
+| `--lock-image-digests`    | `bool`   |         | Produces an override file with image digests                                |
 | `--no-consistency`        | `bool`   |         | Don't check model consistency - warning: may produce invalid Compose output |
+| `--no-env-resolution`     | `bool`   |         | Don't resolve service env files                                             |
 | `--no-interpolate`        | `bool`   |         | Don't interpolate environment variables                                     |
 | `--no-normalize`          | `bool`   |         | Don't normalize compose model                                               |
 | `--no-path-resolution`    | `bool`   |         | Don't resolve file paths                                                    |

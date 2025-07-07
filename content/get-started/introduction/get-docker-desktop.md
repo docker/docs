@@ -26,24 +26,22 @@ This guide will walk you through the installation process, enabling you to exper
 > Commercial use of Docker Desktop in larger enterprises (more than 250
 > employees OR more than $10 million USD in annual revenue) requires a [paid subscription](https://www.docker.com/pricing/?_gl=1*1nyypal*_ga*MTYxMTUxMzkzOS4xNjgzNTM0MTcw*_ga_XJWPQMJYHQ*MTcxNjk4MzU4Mi4xMjE2LjEuMTcxNjk4MzkzNS4xNy4wLjA.).
 
+<div class="not-prose">
 {{< card
   title="Docker Desktop for Mac"
   description="[Download (Apple Silicon)](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64) | [Download (Intel)](https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64) | [Install instructions](/desktop/setup/install/mac-install)"
-  icon="/assets/images/apple_48.svg" >}}
-
-<br>
+  icon="/icons/AppleMac.svg" >}}
 
 {{< card
   title="Docker Desktop for Windows"
   description="[Download](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-windows) | [Install instructions](/desktop/setup/install/windows-install)"
-  icon="/assets/images/windows_48.svg" >}}
-
-<br>
+  icon="/icons/Windows.svg" >}}
 
 {{< card
   title="Docker Desktop for Linux"
   description="[Install instructions](/desktop/setup/install/linux/)"
-  icon="/assets/images/linux_48.svg" >}}
+  icon="/icons/Linux.svg" >}}
+</div>
 
 Once it's installed, complete the setup process and you're all set to run a Docker container.
 
@@ -94,4 +92,3 @@ Docker Desktop simplifies container management for developers by streamlining th
 Now that you have Docker Desktop installed and ran your first container, it's time to start developing with containers.
 
 {{< button text="Develop with containers" url="develop-with-containers" >}}
-

@@ -27,7 +27,7 @@ Additionally, you can't reuse a Docker ID in the future if you deactivate your a
 
 ### What if my Docker ID is taken?
 
-All Docker IDs are first-come, first-served except for companies that have a US Trademark on a username. If you have a trademark for your namespace, [Docker Support](https://hub.docker.com/support/contact/) can retrieve the Docker ID for you.
+All Docker IDs are first-come, first-served except for companies that have a U.S. Trademark on a username. If you have a trademark for your namespace, [Docker Support](https://hub.docker.com/support/contact/) can retrieve the Docker ID for you.
 
 ### What’s an organization?
 
@@ -66,16 +66,16 @@ The organization owner can also add additional owners to help them manage users,
 
 ### Can I configure multiple SSO identity providers (IdPs) to authenticate users to a single org?
 
-Docker SSO allows only one IdP configuration per organization. For more
+Yes. Docker SSO supports multiple IdP configurations. For more
 information, see [Configure SSO](../../security/for-admins/single-sign-on/configure/_index.md) and [SSO FAQs](../../security/faqs/single-sign-on/faqs.md).
 
 ### What is a service account?
 
 > [!IMPORTANT]
 >
-> As of December 10, 2024, service accounts are no longer available. Existing Service Account agreements will be honored until their current term expires, but new purchases or renewals of service accounts no longer available and customers must renew under a new subscription plan. It is recommended to transition to Organization Access Tokens (OATs), which can provide similar functionality. For more information, see [Organization access tokens (Beta)](/manuals/security/for-admins/access-tokens.md).
+> As of December 10, 2024, service accounts are no longer available. Existing Service Account agreements will be honored until their current term expires, but new purchases or renewals of service accounts no longer available and customers must renew under a new subscription. It is recommended to transition to Organization Access Tokens (OATs), which can provide similar functionality. For more information, see [Organization access tokens (Beta)](/manuals/security/for-admins/access-tokens.md).
 
-A [service account](../../docker-hub/service-accounts.md) is a Docker ID used for automated management of container images or containerized applications. Service accounts are typically used in automated workflows, and don't share Docker IDs with the members in the Team or Business plan. Common use cases for service accounts include mirroring content on Docker Hub, or tying in image pulls from your CI/CD process.
+A [service account](../../docker-hub/service-accounts.md) is a Docker ID used for automated management of container images or containerized applications. Service accounts are typically used in automated workflows, and don't share Docker IDs with the members in the Team or Business subscription. Common use cases for service accounts include mirroring content on Docker Hub, or tying in image pulls from your CI/CD process.
 
 ### Can I delete or deactivate a Docker account for another user?
 
@@ -85,7 +85,9 @@ If the user is a member of your organization, you can remove the user from your 
 
 ### How do I manage settings for a user account?
 
-You can manage your account settings anytime when you sign in to your [Docker account](https://app.docker.com/login). In Docker Home, select your avatar in the top-right navigation, then select **My Account**. You can also access this menu from any Docker web applications when you're signed in to your account. See [Manage your Docker account](/accounts/manage-account). If your account is associated with an organization that uses SSO, you may have limited access to the settings that you can control.
+You can manage your account settings anytime when you sign in to your [Docker account](https://app.docker.com/login). Select your avatar in the top-right navigation, then select **My Account**.
+
+You can also access this menu from any Docker web applications when you're signed in to your account. See [Manage your Docker account](/accounts/manage-account). If your account is associated with an organization that uses SSO, you may have limited access to the settings that you can control.
 
 ### How do I add an avatar to my Docker account?
 

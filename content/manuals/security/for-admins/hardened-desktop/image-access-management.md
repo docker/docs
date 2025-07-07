@@ -21,17 +21,23 @@ For example, a developer, who is part of an organization, building a new contain
 
 You first need to [enforce sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md) to ensure that all Docker Desktop developers authenticate with your organization. Since Image Access Management requires a Docker Business subscription, enforced sign-in guarantees that only authenticated users have access and that the feature consistently takes effect across all users, even though it may still work without enforced sign-in.
 
+> [!IMPORTANT]
+>
+> You must use [personal access tokens (PATs)](/manuals/security/for-developers/access-tokens.md) with Image Access Management. Organization access tokens (OATs) are not compatible.
+
 ## Configure
 
 {{< tabs >}}
-{{< tab name="Docker Hub" >}}
-
-{{% admin-image-access product="hub" %}}
-
-{{< /tab >}}
 {{< tab name="Admin Console" >}}
 
 {{% admin-image-access product="admin" %}}
+
+{{< /tab >}}
+{{< tab name="Docker Hub" >}}
+
+{{% include "hub-org-management.md" %}}
+
+{{% admin-image-access product="hub" %}}
 
 {{< /tab >}}
 {{< /tabs >}}

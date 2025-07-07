@@ -31,9 +31,9 @@ grid_admins:
   description: Configure sign-in for members of your teams and organizations.
   link: /security/for-admins/enforce-sign-in/
   icon: passkey
-- title: Domain audit
+- title: Domain management
   description: Identify uncaptured users in your organization.
-  link: /security/for-admins/domain-audit/
+  link: /security/for-admins/domain-management/
   icon: person_search
 - title: Docker Scout
   description: Explore how Docker Scout can help you create a more secure software supply chain.
@@ -55,6 +55,10 @@ grid_admins:
   description: Learn how to configure and set up a private marketplace with a curated list of extensions for your Docker Desktop users.
   icon: storefront
   link: /desktop/extensions/private-marketplace/
+- title: Organization access tokens
+  description: Create organization access tokens as an alternative to a password.
+  link: /security/for-admins/access-tokens/
+  icon: password
 grid_developers:
 - title: Set up two-factor authentication
   description: Add an extra layer of authentication to your Docker account.

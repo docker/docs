@@ -1,5 +1,4 @@
 command: docker compose config
-aliases: docker compose config, docker compose convert
 short: Parse, resolve and render compose file in canonical format
 long: |-
     `docker compose config` renders the actual data model to be applied on the Docker Engine.
@@ -21,7 +20,6 @@ options:
       swarm: false
     - option: format
       value_type: string
-      default_value: yaml
       description: 'Format the output. Values: [yaml | json]'
       deprecated: false
       hidden: false
@@ -48,11 +46,31 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: lock-image-digests
+      value_type: bool
+      default_value: "false"
+      description: Produces an override file with image digests
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: no-consistency
       value_type: bool
       default_value: "false"
       description: |
         Don't check model consistency - warning: may produce invalid Compose output
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: no-env-resolution
+      value_type: bool
+      default_value: "false"
+      description: Don't resolve service env files
       deprecated: false
       hidden: false
       experimental: false

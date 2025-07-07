@@ -1,0 +1,115 @@
+@layer components {
+  .card {
+    @apply mt-2 mb-2 flex flex-col gap-2 rounded-sm border border-gray-200 p-3;
+    @apply dark:border-gray-700 dark:bg-gray-900;
+    @apply transition-shadow duration-200;
+    &:hover,
+    &:focus {
+      @apply border-gray-300 dark:border-gray-600;
+    }
+  }
+  .card-link:hover {
+    @apply !no-underline;
+  }
+  .card-header {
+    @apply mb-2 flex items-center gap-2;
+    @apply text-gray-700 dark:text-gray-100;
+  }
+  .card-icon {
+    @apply text-gray-700 dark:text-gray-100;
+  }
+  .card-img,
+  .card-img svg {
+    @apply m-0 flex max-h-5 min-h-5 max-w-5 min-w-5 items-center justify-center fill-current;
+  }
+  .card-title {
+    @apply font-semibold;
+  }
+  .card-link {
+    @apply block text-inherit no-underline hover:underline;
+  }
+  .card-description {
+    @apply text-gray-600;
+    @apply dark:text-gray-300;
+  }
+
+  .admonition {
+    @apply relative mb-4 flex w-full flex-col items-start gap-3 rounded-sm px-6 py-4;
+    @apply bg-gray-50 dark:bg-gray-900;
+  }
+  .admonition-header {
+    @apply flex flex-wrap items-center gap-2;
+  }
+  .admonition-title {
+    @apply font-semibold;
+  }
+  .admonition-content {
+    @apply w-full min-w-0 flex-1 flex-wrap overflow-x-auto break-words;
+    color: var(--tw-prose-body);
+  }
+  .admonition-note {
+    @apply border-blue-400 bg-blue-50 text-blue-900;
+    @apply dark:border-blue-600 dark:bg-blue-950 dark:text-blue-100;
+  }
+  .admonition-tip {
+    @apply border-green-400 bg-green-100 text-green-900;
+    @apply dark:border-green-600 dark:bg-green-950 dark:text-green-100;
+  }
+  .admonition-warning {
+    @apply border-yellow-400 bg-yellow-50 text-yellow-900;
+    @apply dark:border-yellow-600 dark:bg-yellow-950 dark:text-yellow-100;
+  }
+  .admonition-danger {
+    @apply border-red-400 bg-red-50 text-red-900;
+    @apply dark:border-red-600 dark:bg-red-950 dark:text-red-100;
+  }
+  .admonition-important {
+    @apply border-purple-400 bg-purple-50 text-purple-900;
+    @apply dark:border-purple-600 dark:bg-purple-950 dark:text-purple-100;
+  }
+  .admonition-icon {
+    @apply flex-shrink-0;
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    min-height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .download-links {
+    @apply block;
+    @apply text-gray-800;
+    @apply dark:text-gray-200;
+  }
+  .download-links a {
+    @apply link;
+  }
+  .download-links-subcontainer {
+    @apply flex flex-wrap gap-2;
+  }
+
+  .card-image {
+    @apply h-12 w-12 overflow-hidden;
+  }
+}
+.button {
+  @apply mt-1 inline-block rounded-sm bg-blue-500 p-1 px-3 text-blue-50 text-white hover:bg-blue-600 dark:bg-blue-500 hover:dark:bg-blue-400;
+}
+
+.summary-bar {
+  @apply my-1 mt-4 flex flex-col rounded-sm border-1 border-gray-100 bg-gray-50 p-4 dark:border-gray-800 dark:bg-gray-900;
+}
+
+.tabs {
+  @apply bg-blue/2 rounded-sm p-2;
+}
+.tablist {
+  @apply mb-1 border-b border-gray-100 dark:border-gray-800;
+}
+
+.tab-item {
+  @apply inline-block rounded-t-sm px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-900;
+  @apply dark:text-gray-200;
+}

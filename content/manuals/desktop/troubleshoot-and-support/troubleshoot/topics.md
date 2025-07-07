@@ -156,6 +156,23 @@ Ensure your username is short enough to keep paths within the allowed limit:
 
 ## Topics for Mac
 
+### Upgrade requires administrator privileges
+
+#### Cause 
+
+On macOS, users without administrator privileges cannot perform in-app upgrades from the Docker Desktop Dashboard.
+
+#### Solution
+
+> [!IMPORTANT]
+>
+> Do not uninstall the current version before upgrading. Doing so deletes all local Docker containers, images, and volumes.
+
+To upgrade Docker Desktop:
+
+- Ask an administrator to install the newer version over the existing one.
+- Use the []`--user` install flag](/manuals/desktop/setup/install/mac-install.md#security-and-access) if appropriate for your setup.
+
 ### Persistent notification telling me an application has changed my Desktop configurations
 
 #### Cause 
@@ -343,12 +360,20 @@ Also, the `\` character has a special meaning in Git Bash.
 
 Portability of the scripts is not affected as Linux treats multiple `/` as a single entry.
 
-### Docker Desktop fails due to Virtualization settings
+### Docker Desktop fails due to Virtualization not working
+
+#### Error message
+
+A typical error message is "Docker Desktop - Unexpected WSL error" mentioning the error code
+`Wsl/Service/RegisterDistro/CreateVm/HCS/HCS_E_HYPERV_NOT_INSTALLED`. Manually executing `wsl` commands
+also fails with the same error code.
 
 #### Cause
 
 - Virtualization settings are disabled in the BIOS.
 - Windows Hyper-V or WSL 2 components are missing.
+
+Note some third-party software such as Android emulators will disable Hyper-V on install.
 
 #### Solutions
 
@@ -363,6 +388,21 @@ Your machine must have the following features for Docker Desktop to function cor
 4. Hypervisor enabled at Windows startup
 
 ![WSL 2 enabled](../../images/wsl2-enabled.png)
+
+It must be possible to run WSL 2 commands without error, for example:
+
+```console
+PS C:\users\> wsl -l -v
+  NAME              STATE           VERSION
+* Ubuntu            Running         2
+  docker-desktop    Stopped         2
+PS C:\users\> wsl -d docker-desktop echo WSL 2 is working
+WSL 2 is working
+```
+
+If the features are enabled but the commands are not working, first check [Virtualization is turned on](#virtualization-must-be-turned-on)
+then [enable the Hypervisor at Windows startup](#hypervisor-enabled-at-windows-startup) if required. If running Docker
+Desktop in a Virtual Machine, ensure [the hypervisor has nested virtualization enabled](#turn-on-nested-virtualization).
 
 ##### Hyper-V
 
@@ -421,6 +461,38 @@ The Virtual Machine Management Service failed to start the virtual machine 'Dock
 ```
 
 Try [enabling nested virtualization](/manuals/desktop/setup/vm-vdi.md#turn-on-nested-virtualization).
+
+### Docker Desktop with Windows Containers fails with "The media is write protected""
+
+#### Error message
+
+`FSCTL_EXTEND_VOLUME \\?\Volume{GUID}: The media is write protected`
+
+#### Cause
+
+If you're encountering failures when running Docker Desktop with Windows Containers, it might be due to
+a specific Windows configuration policy: FDVDenyWriteAccess.
+
+This policy, when enabled, causes Windows to mount all fixed drives not encrypted by BitLocker-encrypted as read-only.
+This also affects virtual machine volumes and as a result, Docker Desktop may not be able to start or run containers
+correctly because it requires read-write access to these volumes.
+
+FDVDenyWriteAccess is a Windows Group Policy setting that, when enabled, prevents write access to fixed data drives that are not protected
+by BitLocker. This is often used in security-conscious environments but can interfere with development tools like Docker.
+In the Windows registry it can be found at `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Policies\Microsoft\FVE\FDVDenyWriteAccess`.
+
+#### Solutions
+
+Docker Desktop does not support running Windows Containers on systems where FDVDenyWriteAccess is enabled. This setting interferes with the
+ability of Docker to mount volumes correctly, which is critical for container functionality.
+
+To use Docker Desktop with Windows Containers, ensure that FDVDenyWriteAccess is disabled. You can check and change this setting in the registry or through Group Policy Editor (`gpedit.msc`) under:
+
+**Computer Configuration** > **Administrative Templates** > **Windows Components** > **BitLocker Drive Encryption** > **Fixed Data Drives** > **Deny write access to fixed drives not protected by BitLocker**
+
+> [!NOTE]
+> 
+> Modifying Group Policy settings may require administrator privileges and should comply with your organization's IT policies. If the setting gets reset after some time this usually means that it was overriden by the centralized configuration of your IT department. Talk to them before making any changes.
 
 ### `Docker Desktop Access Denied` error message when starting Docker Desktop
 

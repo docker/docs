@@ -36,9 +36,6 @@ jobs:
           files: |
             docker-bake.hcl
           targets: releaser-build
-          set: |
-            *.cache-from=type=gha,scope=releaser
-            *.cache-to=type=gha,scope=releaser,mode=max
 
   build:
     runs-on: ubuntu-24.04
@@ -59,9 +56,6 @@ jobs:
           files: |
             docker-bake.hcl
           targets: release
-          set: |
-            *.cache-from=type=gha,scope=build
-            *.cache-to=type=gha,scope=build,mode=max
       -
         name: Check Cloudfront config
         uses: docker/bake-action@v6
@@ -97,6 +91,7 @@ jobs:
           - test-go-redirects
           - dockerfile-lint
           - path-warnings
+          - validate-vendor
     steps:
       -
         name: Set up Docker Buildx
@@ -110,6 +105,3 @@ jobs:
           targets: ${{ matrix.target }}
           set: |
             *.args.BUILDKIT_CONTEXT_KEEP_GIT_DIR=1
-            *.cache-to=type=gha,scope=validate-${{ matrix.target }},mode=max
-            *.cache-from=type=gha,scope=validate-${{ matrix.target }}
-            *.cache-from=type=gha,scope=build

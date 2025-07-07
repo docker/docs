@@ -1,0 +1,57 @@
+{
+  "Insert Hugo Note Admonition": {
+    "prefix": ["admonition", "note"],
+    "body": ["> [!NOTE]", "> $1"],
+    "description": "Insert a Hugo note admonition",
+  },
+  "Insert Hugo Important Admonition": {
+    "prefix": ["admonition", "important"],
+    "body": ["> [!IMPORTANT]", "> $1"],
+    "description": "Insert a Hugo important admonition",
+  },
+  "Insert Hugo Warning Admonition": {
+    "prefix": ["admonition", "warning"],
+    "body": ["> [!WARNING]", "> $1"],
+    "description": "Insert a Hugo warning admonition",
+  },
+  "Insert Hugo Tip Admonition": {
+    "prefix": ["admonition", "tip"],
+    "body": ["> [!TIP]", "> $1"],
+    "description": "Insert a Hugo tip admonition",
+  },
+  "Insert Hugo Tabs": {
+    "prefix": ["admonition", "tabs"],
+    "body": [
+      "",
+      "{{< tabs group=\"$1\" >}}",
+      "{{< tab name=\"$2\">}}",
+      "",
+      "$3",
+      "",
+      "{{< /tab >}}",
+      "{{< tab name=\"$4\">}}",
+      "",
+      "$5",
+      "",
+      "{{< /tab >}}",
+      "{{</tabs >}}",
+      "",
+    ],
+    "description": "Insert a Hugo tabs block with two tabs and snippet stops for names and content",
+  },
+  "Insert Hugo code block (no title)": {
+    "prefix": ["codeblock", "block"],
+    "body": ["```${1:json}", "$2", "```", ""],
+    "description": "Insert a Hugo code block with an optional title",
+  },
+  "Insert Hugo code block (with title)": {
+    "prefix": ["codeblock", "codettl", "block"],
+    "body": ["```${1:json} {title=\"$2\"}", "$3", "```", ""],
+    "description": "Insert a Hugo code block with an optional title",
+  },
+  "Insert a Button": {
+    "prefix": ["button"],
+    "body": ["{{< button url=\"$1\" text=\"$2\" >}}"],
+    "description": "Insert a Hugo button",
+  },
+}

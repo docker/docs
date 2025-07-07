@@ -4,7 +4,59 @@ long: |-
     Docker inspect provides detailed information on constructs controlled by Docker.
 
     By default, `docker inspect` will render results in a JSON array.
-
+usage: docker inspect [OPTIONS] NAME|ID [NAME|ID...]
+pname: docker
+plink: docker.yaml
+options:
+    - option: format
+      shorthand: f
+      value_type: string
+      description: |-
+        Format output using a custom template:
+        'json':             Print in JSON format
+        'TEMPLATE':         Print output using the given Go template.
+        Refer to https://docs.docker.com/go/formatting/ for more information about formatting output with templates
+      details_url: '#format'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: size
+      shorthand: s
+      value_type: bool
+      default_value: "false"
+      description: Display total file sizes if the type is container
+      details_url: '#size'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: type
+      value_type: string
+      description: Only inspect objects of the given type
+      details_url: '#type'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+inherited_options:
+    - option: help
+      value_type: bool
+      default_value: "false"
+      description: Print usage
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+examples: |-
     ### Format the output (--format) {#format}
 
     If a format is specified, the given template will be executed for each result.
@@ -57,56 +109,7 @@ long: |-
     $ docker inspect --size database -f '{{ .SizeRw }}'
     12288
     ```
-usage: docker inspect [OPTIONS] NAME|ID [NAME|ID...]
-pname: docker
-plink: docker.yaml
-options:
-    - option: format
-      shorthand: f
-      value_type: string
-      description: |-
-        Format output using a custom template:
-        'json':             Print in JSON format
-        'TEMPLATE':         Print output using the given Go template.
-        Refer to https://docs.docker.com/go/formatting/ for more information about formatting output with templates
-      deprecated: false
-      hidden: false
-      experimental: false
-      experimentalcli: false
-      kubernetes: false
-      swarm: false
-    - option: size
-      shorthand: s
-      value_type: bool
-      default_value: "false"
-      description: Display total file sizes if the type is container
-      deprecated: false
-      hidden: false
-      experimental: false
-      experimentalcli: false
-      kubernetes: false
-      swarm: false
-    - option: type
-      value_type: string
-      description: Return JSON for specified type
-      deprecated: false
-      hidden: false
-      experimental: false
-      experimentalcli: false
-      kubernetes: false
-      swarm: false
-inherited_options:
-    - option: help
-      value_type: bool
-      default_value: "false"
-      description: Print usage
-      deprecated: false
-      hidden: true
-      experimental: false
-      experimentalcli: false
-      kubernetes: false
-      swarm: false
-examples: |-
+
     ### Get an instance's IP address
 
     For the most part, you can pick out any field from the JSON in a fairly

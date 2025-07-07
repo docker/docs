@@ -84,3 +84,17 @@ Add-LocalGroupMember -Group $Group -Member $CurrentUser
 > [!NOTE]
 >
 > After adding a new user to the `docker-users` group, the user must sign out and then sign back in for the changes to take effect.
+
+## MDM
+
+Common questions about deploying Docker Desktop using mobile device management
+(MDM) tools such as Jamf, Intune, or Workspace ONE.
+
+### Why doesn't my MDM tool apply all Docker Desktop configuration settings at once?
+
+Some MDM tools, such as Workspace ONE, may not support applying multiple
+configuration settings in a single XML file. In these cases, you may need to
+deploy each setting in a separate XML file.
+
+Refer to your MDM provider's documentation for specific deployment
+requirements or limitations.

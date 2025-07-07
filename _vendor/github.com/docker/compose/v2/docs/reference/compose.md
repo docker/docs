@@ -12,6 +12,7 @@ Define and run multi-container applications with Docker
 | Name                            | Description                                                                             |
 |:--------------------------------|:----------------------------------------------------------------------------------------|
 | [`attach`](compose_attach.md)   | Attach local standard input, output, and error streams to a service's running container |
+| [`bridge`](compose_bridge.md)   | Convert compose files into another model                                                |
 | [`build`](compose_build.md)     | Build or rebuild services                                                               |
 | [`commit`](compose_commit.md)   | Create a new image from a service container's changes                                   |
 | [`config`](compose_config.md)   | Parse, resolve and render compose file in canonical format                              |
@@ -42,6 +43,7 @@ Define and run multi-container applications with Docker
 | [`unpause`](compose_unpause.md) | Unpause services                                                                        |
 | [`up`](compose_up.md)           | Create and start containers                                                             |
 | [`version`](compose_version.md) | Show the Docker Compose version information                                             |
+| [`volumes`](compose_volumes.md) | List volumes                                                                            |
 | [`wait`](compose_wait.md)       | Block until containers of all (or specified) services stop.                             |
 | [`watch`](compose_watch.md)     | Watch build context for service and rebuild/refresh containers when files are updated   |
 
@@ -58,7 +60,7 @@ Define and run multi-container applications with Docker
 | `-f`, `--file`         | `stringArray` |         | Compose configuration files                                                                         |
 | `--parallel`           | `int`         | `-1`    | Control max parallelism, -1 for unlimited                                                           |
 | `--profile`            | `stringArray` |         | Specify a profile to enable                                                                         |
-| `--progress`           | `string`      | `auto`  | Set type of progress output (auto, tty, plain, json, quiet)                                         |
+| `--progress`           | `string`      |         | Set type of progress output (auto, tty, plain, json, quiet)                                         |
 | `--project-directory`  | `string`      |         | Specify an alternate working directory<br>(default: the path of the, first specified, Compose file) |
 | `-p`, `--project-name` | `string`      |         | Project name                                                                                        |
 
@@ -78,10 +80,10 @@ to their predecessors.
 For example, consider this command line:
 
 ```console
-$ docker compose -f docker-compose.yml -f docker-compose.admin.yml run backup_db
+$ docker compose -f compose.yaml -f compose.admin.yaml run backup_db
 ```
 
-The `docker-compose.yml` file might specify a `webapp` service.
+The `compose.yaml` file might specify a `webapp` service.
 
 ```yaml
 services:
@@ -92,7 +94,7 @@ services:
     volumes:
       - "/data"
 ```
-If the `docker-compose.admin.yml` also specifies this same service, any matching fields override the previous file.
+If the `compose.admin.yaml` also specifies this same service, any matching fields override the previous file.
 New values, add to the `webapp` service configuration.
 
 ```yaml
@@ -207,4 +209,4 @@ $ docker compose --dry-run up --build -d
 From the example above, you can see that the first step is to pull the image defined by `db` service, then build the `backend` service.  
 Next, the containers are created. The `db` service is started, and the `backend` and `proxy` wait until the `db` service is healthy before starting.
 
-Dry Run mode works with almost all commands. You cannot use Dry Run mode with a command that doesn't change the state of a Compose stack such as `ps`, `ls`, `logs` for example.  
+Dry Run mode works with almost all commands. You cannot use Dry Run mode with a command that doesn't change the state of a Compose stack such as `ps`, `ls`, `logs` for example.

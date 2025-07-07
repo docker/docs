@@ -24,6 +24,7 @@ A self-sufficient runtime for containers.
 
 Options:
       --add-runtime runtime                   Register an additional OCI compatible runtime (default [])
+      --allow-direct-routing                  Allow remote access to published ports on container IP addresses
       --authorization-plugin list             Authorization plugins to load
       --bip string                            IPv4 address for the default bridge
       --bip6 string                           IPv6 address for the default bridge
@@ -1057,6 +1058,7 @@ The following is a full example of the allowed configuration options on Linux:
 
 ```json
 {
+  "allow-direct-routing": false,
   "authorization-plugins": [],
   "bip": "",
   "bip6": "",
@@ -1300,7 +1302,7 @@ The list of currently supported options that can be reconfigured is this:
 | ---------------------------------- | ----------------------------------------------------------------------------------------------------------- |
 | `debug`                            | Toggles debug mode of the daemon.                                                                           |
 | `labels`                           | Replaces the daemon labels with a new set of labels.                                                        |
-| `live-restore`                     | Toggles [live restore](https://docs.docker.com/engine/containers/live-restore/).                            |
+| `live-restore`                     | Toggles [live restore](https://docs.docker.com/engine/daemon/live-restore/).                                |
 | `max-concurrent-downloads`         | Configures the max concurrent downloads for each pull.                                                      |
 | `max-concurrent-uploads`           | Configures the max concurrent uploads for each push.                                                        |
 | `max-download-attempts`            | Configures the max download attempts for each pull.                                                         |

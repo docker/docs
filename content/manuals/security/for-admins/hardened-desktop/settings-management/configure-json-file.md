@@ -11,47 +11,75 @@ aliases:
 
 {{< summary-bar feature_name="Hardened Docker Desktop" >}}
 
-This page contains information on how to configure Settings Management with an `admin-settings.json` file. You can specify and lock configuration parameters to create a standardized Docker Desktop environment across your company or organization.
-
-Settings Management is designed specifically for organizations who don’t give developers root access to their machines.
+This page explains how to use an `admin-settings.json` file to configure and
+enforce Docker Desktop settings. Use this method to standardize Docker
+Desktop environments in your organization.
 
 ## Prerequisites
 
-You first need to [enforce sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md) to ensure that all Docker Desktop developers authenticate with your organization. Since Settings Management requires a Docker Business subscription, enforced sign-in guarantees that only authenticated users have access and that the feature consistently takes effect across all users, even though it may still work without enforced sign-in.
+- [Enforce sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md) to
+ensure all users authenticate with your organization.
+- A Docker Business subscription is required.
 
-## Step one: Create the `admin-settings.json` file and save it in the correct location
+Docker Desktop only applies settings from the `admin-settings.json` file if both
+authentication and Docker Business license checks succeed.
 
-You can either use the `--admin-settings` installer flag on [macOS](/manuals/desktop/setup/install/mac-install.md#install-from-the-command-line) or [Windows](/manuals/desktop/setup/install/windows-install.md#install-from-the-command-line) to automatically create the `admin-settings.json` and save it in the correct location, or set it up manually.
+> [!IMPORTANT]
+>
+> If a user isn't signed in or isn't part of a Docker Business organization,
+the settings file is ignored.
 
-To set it up manually:
-1. Create a new, empty JSON file and name it `admin-settings.json`.
-2. Save the `admin-settings.json` file on your developers' machines in the following locations:
-   - Mac: `/Library/Application\ Support/com.docker.docker/admin-settings.json`
-   - Windows: `C:\ProgramData\DockerDesktop\admin-settings.json`
-   - Linux: `/usr/share/docker-desktop/admin-settings.json`
+## Limitation
 
-   By placing this file in a protected directory, developers are unable to modify it.
+- The `admin-settings.json` file doesn't work in air-gapped or offline
+environments.
+- The file is not compatible with environments that restrict authentication
+with Docker Hub.
 
-   > [!IMPORTANT]
-   >
-   > It is assumed that you have the ability to push the `admin-settings.json` settings file to the locations specified through a device management software such as [Jamf](https://www.jamf.com/lp/en-gb/apple-mobile-device-management-mdm-jamf-shared/?attr=google_ads-brand-search-shared&gclid=CjwKCAjw1ICZBhAzEiwAFfvFhEXjayUAi8FHHv1JJitFPb47C_q_RCySTmF86twF1qJc_6GST-YDmhoCuJsQAvD_BwE).
+## Step one: Create the settings file
 
-## Step two: Configure the settings you want to lock in
+You can:
+
+- Use the `--admin-settings` installer flag to auto-generate the file. See:
+    - [macOS](/manuals/desktop/setup/install/mac-install.md#install-from-the-command-line) install guide
+    - [Windows](/manuals/desktop/setup/install/windows-install.md#install-from-the-command-line) install guide
+- Or create it manually and place it in the following locations:
+    - Mac: `/Library/Application\ Support/com.docker.docker/admin-settings.json`
+    - Windows: `C:\ProgramData\DockerDesktop\admin-settings.json`
+    - Linux: `/usr/share/docker-desktop/admin-settings.json`
+
+> [!IMPORTANT]
+>
+> Place the file in a protected directory to prevent modification. Use MDM tools
+like [Jamf](https://www.jamf.com/lp/en-gb/apple-mobile-device-management-mdm-jamf-shared/?attr=google_ads-brand-search-shared&gclid=CjwKCAjw1ICZBhAzEiwAFfvFhEXjayUAi8FHHv1JJitFPb47C_q_RCySTmF86twF1qJc_6GST-YDmhoCuJsQAvD_BwE) to distribute it at scale.
+
+## Step two: Define settings
+
+> [!TIP]
+>
+> For a complete list of available settings, their supported platforms, and which configuration methods they work with, see the [Settings reference](settings-reference.md).
+
+The `admin-settings.json` file uses structured keys to define what can
+be configured and whether the values are enforced.
+
+Each setting supports the `locked` field. When `locked` is set to `true`, users
+can't change that value in Docker Desktop, the CLI, or config files. When
+`locked` is set to `false`, the value acts like a default suggestion and users
+can still update it.
+
+Settings where `locked` is set to `false` are ignored on existing installs if
+a user has already customized that value in `settings-store.json`,
+`settings.json`, or `daemon.json`.
 
 > [!NOTE]
 >
-> Some of the configuration parameters only apply to certain platforms or to specific Docker Desktop versions. This is highlighted in the following table.
+> Some settings are platform-specific or require a minimum Docker Desktop
+version. See the [Settings reference](/manuals/security/for-admins/hardened-desktop/settings-management/settings-reference.md) for details.
 
-The `admin-settings.json` file requires a nested list of configuration parameters, each of which must contain the `locked` parameter. You can add or remove configuration parameters as per your requirements.
+### Example settings file
 
-If `locked: true`, users aren't able to edit this setting from Docker Desktop or the CLI.
-
-If `locked: false`, it's similar to setting a factory default in that:
-   - For new installs, `locked: false` pre-populates the relevant settings in the Docker Desktop Dashboard, but users are able to modify it.
-
-   - If Docker Desktop is already installed and being used, `locked: false` is ignored. This is because existing users of Docker Desktop may have already updated a setting, which in turn will have been written to the relevant config file, for example the `settings-store.json` (or `settings.json` for Docker Desktop versions 4.34 and earlier) or `daemon.json`. In these instances, the user's preferences are respected and the values aren't altered. These can be controlled by setting `locked: true`.
-
-The following `admin-settings.json` code and table provides an example of the required syntax and descriptions for parameters and values:
+The following file is an example `admin-settings.json` file. For a full list
+of configurable settings for the `admin-settings.json` file, see [`admin-settings.json` configurations](#admin-settingsjson-configurations).
 
 ```json {collapse=true}
 {
@@ -137,10 +165,6 @@ The following `admin-settings.json` code and table provides an example of the re
     "sbomIndexing": true,
     "useBackgroundIndexing": true
   },
-  "allowExperimentalFeatures": {
-    "locked": false,
-    "value": false
-  },
   "allowBetaFeatures": {
     "locked": false,
     "value": false
@@ -182,7 +206,21 @@ The following `admin-settings.json` code and table provides an example of the re
 }
 ```
 
-### General 
+## Step three: Restart and apply settings
+
+Settings apply after Docker Desktop is restarted and the user is signed in.
+
+- New installs: Launch Docker Desktop and sign in.
+- Existing installs: Quit Docker Desktop fully and relaunch it.
+
+> [!IMPORTANT]
+>
+> Restarting Docker Desktop from the menu isn't enough. It must be fully
+quit and reopened.
+
+## `admin-settings.json` configurations
+
+### General
 
 |Parameter|OS|Description|Version|
 |:-------------------------------|---|:-------------------------------|---|
@@ -195,7 +233,7 @@ The following `admin-settings.json` code and table provides an example of the re
 | `desktopTerminalEnabled` |  | If `value` is set to `false`, developers cannot use the Docker terminal to interact with the host machine and execute commands directly from Docker Desktop. |  |
 |`exposeDockerAPIOnTCP2375`| Windows only| Exposes the Docker API on a specified port. If `value` is set to true, the Docker API is exposed on port 2375. Note: This is unauthenticated and should only be enabled if protected by suitable firewall rules.|  |
 
-### File sharing and emulation 
+### File sharing and emulation
 
 |Parameter|OS|Description|Version|
 |:-------------------------------|---|:-------------------------------|---|
@@ -241,24 +279,51 @@ The following `admin-settings.json` code and table provides an example of the re
 | &nbsp; &nbsp; &nbsp; &nbsp;`dockerDaemonOptions` |  | Overrides the options in the Linux daemon config file. See the [Docker Engine reference](/reference/cli/dockerd/#daemon-configuration-file).|  |
 
 > [!NOTE]
-> 
+>
 > This setting is not available to configure via the Docker Admin Console.
 
 ### Kubernetes
 
 |Parameter|OS|Description|Version|
 |:-------------------------------|---|:-------------------------------|---|
-|`kubernetes`|  | If `enabled` is set to true, a Kubernetes single-node cluster is started when Docker Desktop starts. If `showSystemContainers` is set to true, Kubernetes containers are displayed in the Docker Desktop Dashboard and when you run `docker ps`.  `imagesRepository` lets you specify which repository Docker Desktop pulls the Kubernetes images from. For example, `"imagesRepository": "registry-1.docker.io/docker"`.  |  |
+|`kubernetes`|  | If `enabled` is set to true, a Kubernetes single-node cluster is started when Docker Desktop starts. If `showSystemContainers` is set to true, Kubernetes containers are displayed in the Docker Desktop Dashboard and when you run `docker ps`. The [imagesRepository](../../../../desktop/features/kubernetes.md#configuring-a-custom-image-registry-for-kubernetes-control-plane-images) setting lets you specify which repository Docker Desktop pulls control-plane Kubernetes images from. |  |
 
-### Features in development 
+> [!NOTE]
+>
+> When using the `imagesRepository` setting and Enhanced Container Isolation (ECI), add the following images to the [ECI Docker socket mount image list](#enhanced-container-isolation):
+>
+> * [imagesRepository]/desktop-cloud-provider-kind:*
+> * [imagesRepository]/desktop-containerd-registry-mirror:*
+>
+> These containers mount the Docker socket, so you must add the images to the ECI images list. If not, ECI will block the mount and Kubernetes won't start.
+
+### Networking
 
 |Parameter|OS|Description|Version|
 |:-------------------------------|---|:-------------------------------|---|
-| `allowExperimentalFeatures`| | If `value` is set to `false`, experimental features are disabled.|  |
-| `allowBetaFeatures`| | If `value` is set to `false`, beta features are disabled.|  |
-| `enableDockerAI` | | If `value` is set to `false`, Docker AI (Ask Gordon) features are disabled. |  |
+| `defaultNetworkingMode` | Windows and Mac only | Defines the default IP protocol for new Docker networks: `dual-stack` (IPv4 + IPv6, default), `ipv4only`, or `ipv6only`. | Docker Desktop version 4.43 and later. |
+| `dnsInhibition` | Windows and Mac only | Controls DNS record filtering returned to containers. Options: `auto` (recommended), `ipv4`, `ipv6`, `none`| Docker Desktop version 4.43 and later. |
 
-### Enhanced Container Isolation 
+For more information, see [Networking](/manuals/desktop/features/networking.md#networking-mode-and-dns-behaviour-for-mac-and-windows).
+
+### Beta features
+
+> [!IMPORTANT]
+>
+> For Docker Desktop versions 4.41 and earlier, some of these settings lived under the **Experimental features** tab on the **Features in development** page.
+
+| Parameter                                            | OS | Description                                                                                                                                                                                                                                               | Version                                 |
+|:-----------------------------------------------------|----|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------|
+| `allowBetaFeatures`                                  |    | If `value` is set to `true`, beta features are enabled.                                                                                                                                                                                                   |                                         |
+| `enableDockerAI`                                     |    | If `allowBetaFeatures` is true, setting `enableDockerAI` to `true` enables [Docker AI (Ask Gordon)](/manuals/ai/gordon/_index.md) by default. You can independently control this setting from the `allowBetaFeatures` setting.                            |                                         |
+| `enableInference`                                    |    | If `allowBetaFeatures` is true, setting `enableInference` to `true` enables [Docker Model Runner](/manuals/ai/model-runner/_index.md) by default. You can independently control this setting from the `allowBetaFeatures` setting.                        |                                         |
+| &nbsp; &nbsp; &nbsp; &nbsp; `enableInferenceTCP`     |    | Enable host-side TCP support. This setting requires Docker Model Runner setting to be enabled first.                                                                                                                                                      |                                         |
+| &nbsp; &nbsp; &nbsp; &nbsp; `enableInferenceTCPPort` |    | Specifies the exposed TCP port. This setting requires Docker Model Runner setting to be enabled first.                                                                                                                                                    |                                         |
+| &nbsp; &nbsp; &nbsp; &nbsp; `enableInferenceCORS`    |    | Specifies the allowed CORS origins. Empty string to deny all,`*` to accept all, or a list of comma-separated values. This setting requires Docker Model Runner setting to be enabled first.                                                                                                                                                    |                                         |
+| `enableDockerMCPToolkit`                             |    | If `allowBetaFeatures` is true, setting `enableDockerMCPToolkit` to `true` enables the [MCP toolkit feature](/manuals/ai/mcp-catalog-and-toolkit/toolkit.md) by default. You can independently control this setting from the `allowBetaFeatures` setting. |                                         |
+| `allowExperimentalFeatures`                          |    | If `value` is set to `true`, experimental features are enabled.                                                                                                                                                                                           | Docker Desktop version 4.41 and earlier |
+
+### Enhanced Container Isolation
 
 |Parameter|OS|Description|Version|
 |:-------------------------------|---|:-------------------------------|---|
@@ -266,20 +331,3 @@ The following `admin-settings.json` code and table provides an example of the re
 | &nbsp; &nbsp; &nbsp; &nbsp;`dockerSocketMount` |  | By default, enhanced container isolation blocks bind-mounting the Docker Engine socket into containers (e.g., `docker run -v /var/run/docker.sock:/var/run/docker.sock ...`). This lets you relax this in a controlled way. See [ECI Configuration](../enhanced-container-isolation/config.md) for more info. |  |
 | &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; `imageList` |  | Indicates which container images are allowed to bind-mount the Docker Engine socket. |  |
 | &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; `commandList` |  | Restricts the commands that containers can issue via the bind-mounted Docker Engine socket. |  |
-
-## Step three: Re-launch Docker Desktop
-
-> [!NOTE]
->
-> Test the changes made through the `admin-settings.json` file locally to see if the settings work as expected.
-
-For settings to take effect:
-- On a new install, developers need to launch Docker Desktop and authenticate to their organization.
-- On an existing install, developers need to quit Docker Desktop through the Docker menu, and then re-launch Docker Desktop. If they are already signed in, they don't need to sign in again for the changes to take effect.
-  > [!IMPORTANT]
-  >
-  > Selecting **Restart** from the Docker menu isn't enough as it only restarts some components of Docker Desktop.
-
-So as not to disrupt your developers' workflow, Docker doesn't automatically mandate that developers re-launch and re-authenticate once a change has been made.
-
-In Docker Desktop, developers see the relevant settings grayed out.

@@ -4,6 +4,7 @@ refLinksErrorLevel: ERROR
 enableGitInfo: true
 disablePathToLower: true
 enableInlineShortcodes: true
+disableHugoGeneratorInject: true
 ignoreLogs:
   - cascade-pattern-with-extension
 
@@ -45,8 +46,8 @@ build:
     disableTags: true
   # Ensure that CSS/assets changes trigger a dev server rebuild
   cachebusters:
-    - source: assets/watching/hugo_stats\.json
-      target: styles\.css
+    - source: assets/notwatching/hugo_stats\.json
+      target: css
     - source: (postcss|tailwind)\.config\.js
       target: css
     - source: assets/.*\.js
@@ -132,19 +133,19 @@ params:
   # Use `grep` to figure out how they might be used.
 
   # Latest version of the Docker Engine API
-  latest_engine_api_version: "1.48"
+  latest_engine_api_version: "1.51"
   # Latest version of Docker Engine
-  docker_ce_version: "28.0.4"
+  docker_ce_version: "28.3.1"
   # Previous version of the Docker Engine
   # (Used to show e.g., "latest" and "latest"-1 in engine install examples
-  docker_ce_version_prev: "28.0.3"
+  docker_ce_version_prev: "28.3.0"
   # Latest Docker Compose version
-  compose_version: "v2.34.0"
+  compose_version: "v2.38.1"
   # Latest BuildKit version
-  buildkit_version: "0.20.2"
+  buildkit_version: "0.23.2"
 
   # Example runtime/library/os versions
-  example_go_version: "1.23"
+  example_go_version: "1.24"
   example_alpine_version: "3.21"
   example_node_version: "20"
 
@@ -277,8 +278,9 @@ module:
     - source: assets
       target: assets
     # Mount hugo_stats.json to the assets dir to trigger cachebust
-    - source: hugo_stats.json
-      target: assets/watching/hugo_stats.json
+    - disableWatch: true
+      source: hugo_stats.json
+      target: assets/notwatching/hugo_stats.json
     # Mount the icon files to assets so we can access them with resources.Get
     - source: node_modules/@material-symbols/svg-400/rounded
       target: assets/icons
@@ -338,6 +340,13 @@ module:
       mounts:
         - source: docs/reference
           target: data/compose-cli
+          includeFiles: "*.yaml"
+
+    # Model CLI
+    - path: github.com/docker/model-cli
+      mounts:
+        - source: docs/reference
+          target: data/model-cli
           includeFiles: "*.yaml"
 
     # Scout CLI plugin (public dist repo)

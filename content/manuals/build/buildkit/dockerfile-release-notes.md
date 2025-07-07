@@ -13,11 +13,85 @@ issues, and bug fixes in [Dockerfile reference](/reference/dockerfile.md).
 
 For usage, see the [Dockerfile frontend syntax](frontend.md) page.
 
+## 1.17.0
+
+{{< release-date date="2025-06-17" >}}
+
+The full release notes for this release are available
+[on GitHub](https://github.com/moby/buildkit/releases/tag/dockerfile%2F1.17.0).
+
+```dockerfile
+# syntax=docker/dockerfile:1.17.0
+```
+
+* Add `ADD --unpack=bool` to control whether archives from a URL path are unpacked. The default is to detect unpack behavior based on the source path, as it happened in previous versions. [moby/buildkit#5991](https://github.com/moby/buildkit/pull/5991)
+* Add support for `ADD --chown` when unpacking archive, similar to when copying regular files. [moby/buildkit#5987](https://github.com/moby/buildkit/pull/5987)
+
+## 1.16.0
+
+{{< release-date date="2025-05-22" >}}
+
+The full release notes for this release are available
+[on GitHub](https://github.com/moby/buildkit/releases/tag/dockerfile%2F1.16.0).
+
+```dockerfile
+# syntax=docker/dockerfile:1.16.0
+```
+
+* `ADD --checksum` support for Git URL. [moby/buildkit#5975](https://github.com/moby/buildkit/pull/5975)
+* Allow whitespace in heredocs. [moby/buildkit#5817](https://github.com/moby/buildkit/pull/5817)
+* `WORKDIR` now supports `SOURCE_DATE_EPOCH`. [moby/buildkit#5960](https://github.com/moby/buildkit/pull/5960)
+* Leave default PATH environment variable set by the base image for WCOW. [moby/buildkit#5895](https://github.com/moby/buildkit/pull/5895)
+
+## 1.15.1
+
+{{< release-date date="2025-03-30" >}}
+
+The full release notes for this release are available
+[on GitHub](https://github.com/moby/buildkit/releases/tag/dockerfile%2F1.15.1).
+
+```dockerfile
+# syntax=docker/dockerfile:1.15.1
+```
+
+* Fix `no scan targets for linux/arm64/v8` when `--attest type=sbom` is used. [moby/buildkit#5941](https://github.com/moby/buildkit/pull/5941)
+
+## 1.15.0
+
+{{< release-date date="2025-04-15" >}}
+
+The full release notes for this release are available
+[on GitHub](https://github.com/moby/buildkit/releases/tag/dockerfile%2F1.15.0).
+
+```dockerfile
+# syntax=docker/dockerfile:1.15.0
+```
+
+- Build error for invalid target now shows suggestions for correct possible names. [moby/buildkit#5851](https://github.com/moby/buildkit/pull/5851)
+- Fix SBOM attestation producing error for Windows targets. [moby/buildkit#5837](https://github.com/moby/buildkit/pull/5837)
+- Fix recursive `ARG` producing an infinite loop when processing an outline request. [moby/buildkit#5823](https://github.com/moby/buildkit/pull/5823)
+- Fix parsing syntax directive from JSON that would fail if the JSON had other datatypes than strings. [moby/buildkit#5815](https://github.com/moby/buildkit/pull/5815)
+- Fix platform in image config being in unnormalized form (regression from 1.12). [moby/buildkit#5776](https://github.com/moby/buildkit/pull/5776)
+- Fix copying into destination directory when directory is not present with WCOW. [moby/buildkit#5249](https://github.com/moby/buildkit/pull/5249)
+
+## 1.14.1
+
+{{< release-date date="2025-03-05" >}}
+
+The full release notes for this release are available
+[on GitHub](https://github.com/moby/buildkit/releases/tag/dockerfile%2F1.14.1).
+
+```dockerfile
+# syntax=docker/dockerfile:1.14.1
+```
+
+- Normalize platform in image config. [moby/buildkit#5776](https://github.com/moby/buildkit/pull/5776)
+
 ## 1.14.0
 
 {{< release-date date="2025-02-19" >}}
 
-The full release note for this release is available
+The full release notes for this release are available
 [on GitHub](https://github.com/moby/buildkit/releases/tag/dockerfile%2F1.14.0).
 
 ```dockerfile
@@ -34,7 +108,7 @@ The full release note for this release is available
 
 {{% include "dockerfile-labs-channel.md" %}}
 
-The full release note for this release is available
+The full release notes for this release are available
 [on GitHub](https://github.com/moby/buildkit/releases/tag/dockerfile%2F1.14.0-labs).
 
 ```dockerfile
@@ -47,7 +121,7 @@ The full release note for this release is available
 
 {{< release-date date="2025-01-20" >}}
 
-The full release note for this release is available
+The full release notes for this release are available
 [on GitHub](https://github.com/moby/buildkit/releases/tag/dockerfile%2F1.13.0).
 
 ```dockerfile
@@ -67,7 +141,7 @@ The full release note for this release is available
 
 {{% include "dockerfile-labs-channel.md" %}}
 
-The full release note for this release is available
+The full release notes for this release are available
 [on GitHub](https://github.com/moby/buildkit/releases/tag/dockerfile%2F1.13.0-labs).
 
 ```dockerfile
@@ -80,7 +154,7 @@ The full release note for this release is available
 
 {{< release-date date="2024-11-27" >}}
 
-The full release note for this release is available
+The full release notes for this release are available
 [on GitHub](https://github.com/moby/buildkit/releases/tag/dockerfile%2F1.12.0).
 
 ```dockerfile
@@ -95,7 +169,7 @@ The full release note for this release is available
 
 {{< release-date date="2024-11-08" >}}
 
-The full release note for this release is available
+The full release notes for this release are available
 [on GitHub](https://github.com/moby/buildkit/releases/tag/dockerfile%2F1.11.1).
 
 ```dockerfile
@@ -110,7 +184,7 @@ The full release note for this release is available
 
 {{< release-date date="2024-10-30" >}}
 
-The full release note for this release is available
+The full release notes for this release are available
 [on GitHub](https://github.com/moby/buildkit/releases/tag/dockerfile%2F1.11.0).
 
 ```dockerfile
@@ -144,7 +218,7 @@ The full release note for this release is available
 
 {{< release-date date="2024-09-10" >}}
 
-The full release note for this release is available
+The full release notes for this release are available
 [on GitHub](https://github.com/moby/buildkit/releases/tag/dockerfile%2F1.10.0).
 
 ```dockerfile
@@ -171,7 +245,7 @@ The full release note for this release is available
 
 {{< release-date date="2024-07-11" >}}
 
-The full release note for this release is available
+The full release notes for this release are available
 [on GitHub](https://github.com/moby/buildkit/releases/tag/dockerfile%2F1.9.0).
 
 ```dockerfile
@@ -194,7 +268,7 @@ The full release note for this release is available
 
 {{< release-date date="2024-06-18" >}}
 
-The full release note for this release is available
+The full release notes for this release are available
 [on GitHub](https://github.com/moby/buildkit/releases/tag/dockerfile%2F1.8.1).
 
 ```dockerfile
@@ -211,7 +285,7 @@ The full release note for this release is available
 
 {{< release-date date="2024-06-11" >}}
 
-The full release note for this release is available
+The full release notes for this release are available
 [on GitHub](https://github.com/moby/buildkit/releases/tag/dockerfile%2F1.8.0).
 
 ```dockerfile

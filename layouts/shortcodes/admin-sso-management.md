@@ -2,11 +2,15 @@
 {{ $sso_navigation := `Navigate to the SSO settings page for your organization. Select **My Hub**, your organization, **Settings**, and then **Security**.` }}
 
 {{ if eq (.Get "product") "admin" }}
-  {{ $product_link = "the [Admin Console](https://app.docker.com/admin)" }}
-  {{ $sso_navigation = "Select your organization or company from the **Choose profile** page, and then select **SSO and SCIM**." }}
+  {{ $product_link = "[Docker Home](https://app.docker.com) and select your organization. Note that when an organization is part of a company, you must select the company and configure SSO for that organization at the company level. Each organization can have its own SSO configuration and domain, but it must be configured at the company level." }}
+  {{ $sso_navigation = "Select **Admin Console**, then **SSO and SCIM**." }}
 {{ end }}
 
 ### Remove a domain from an SSO connection
+
+> [!IMPORTANT]
+>
+> Docker supports multiple IdP configurations, where a single domain is used for multiple SSO identity providers. If you want to remove a domain from multiple SSO connections, you must remove it from each connection individually.
 
 1. Sign in to {{ $product_link }}.
 2. {{ $sso_navigation }}
