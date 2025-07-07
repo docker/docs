@@ -76,10 +76,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Return an explicit error to a Docker API / `docker` CLI command if Docker Desktop has been manually paused.
 - Fixed an issue where unknown keys in Admin and Cloud settings caused a failure.
 
-#### For Linux
-
-- Bump `virtiofsd` to `1.13.1`.
-
 #### For Mac
 
 - Removed `eBPF` which blocked `io_uring`. To enable `io_uring` in a container, use `--security-opt seccomp=unconfined`. Fixes [docker/for-mac#7707](https://github.com/docker/for-mac/issues/7707).
@@ -240,7 +236,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Docker Model Runner is now available on x86 Windows machines with NVIDIA GPUs.
 - You can now [push models](/manuals/ai/model-runner.md#push-a-model-to-docker-hub) to Docker Hub with Docker Model Runner.
 - Added support for Docker Model Runner's model management and chat interface in Docker Desktop for Mac and Windows (on hardware supporting Docker Model Runner). Users can now view, interact with, and manage local AI models through a new dedicated interface.
-- [Docker Compose](/manuals/ai/compose/model-runner.md) and Testcontainers [Java](https://java.testcontainers.org/modules/docker_model_runner/) and [Go](https://golang.testcontainers.org/modules/dockermodelrunner/) now support Docker Model Runner.
+- [Docker Compose](/manuals/ai/compose/models-and-compose.md) and Testcontainers [Java](https://java.testcontainers.org/modules/docker_model_runner/) and [Go](https://golang.testcontainers.org/modules/dockermodelrunner/) now support Docker Model Runner.
 - Introducing Docker Desktop in the [Microsoft App Store](https://apps.microsoft.com/detail/xp8cbj40xlbwkx?hl=en-GB&gl=GB).
 
 ### Upgrades
