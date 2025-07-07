@@ -49,7 +49,7 @@ input[type="search"]::-ms-clear {
     margin-bottom: 0.4em !important;
   }
   > h2 {
-    @apply mt-5! mb-3!;
+    @apply mt-7! mb-3!;
     font-size: 160% !important;
     a {
       @apply hover:no-underline!;
