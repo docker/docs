@@ -38,7 +38,6 @@ The MCP Gateway solves problems encountered by various groups:
 - Server management: List, inspect, and call MCP tools, resources and prompts from multiple servers
 - Container-based servers: Run MCP servers as Docker containers with proper isolation
 - Secrets management: Secure handling of API keys and credentials via Docker Desktop
-- Server catalog: Manage and configure multiple MCP catalogs
 - Dynamic discovery and reloading: Automatic tool, prompt, and resource discovery from running servers
 - Monitoring: Built-in logging and call tracing capabilities
 
@@ -46,7 +45,7 @@ The MCP Gateway solves problems encountered by various groups:
 
 ### Prerequisites
 
-- [Docker Engine](/manuals/engine/_index.md)
+- Docker Desktop with the [MCP Toolkit feature enabled](../mcp-catalog-and-toolkit/toolkit.md#enable-docker-mcp-toolkit).
 - Go 1.24+ (for development)
 
 ### Install using a pre-built binary
@@ -99,7 +98,13 @@ docker mcp --help
 
 ## Use the MCP Gateway
 
-To view all the commands and configuration options, go to the [mcp-gateway repository](https://github.com/docker/mcp-gateway).
+Run:
+
+```bash
+docker mcp gateway run
+```
+
+To view all the commands and configuration options, go to the [mcp-gateway repository](https://github.com/docker/mcp-gateway?tab=readme-ov-file#usage).
 
 ## Related pages
 
