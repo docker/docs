@@ -11,35 +11,41 @@
   <div class="block py-4 text-gray-200 md:hidden dark:text-gray-200">
     This section
   </div>
-<ul>
-  {{- $first := .FirstSection }}
-  {{- if eq $first.Title "Manuals" }}
-    {{- if eq page $first }}
-      {{/* 1) On /manuals/ → grouped flat list (unchanged) */}}
-      {{- $sections := $first.Sections }}
-      {{- $ungrouped := where $sections "Params.sidebar.group" "==" nil }}
-      {{- range $ungrouped }}{{ template "renderSingle" . }}{{- end }}
-      {{- range $first.Params.sidebar.groups }}
-        <div class="navbar-group">
-          <li class="navbar-group-font-title">{{ . }}</li>
-          {{- range where $sections "Params.sidebar.group" . }}
-            {{ template "renderSingle" . }}
+  <ul>
+    {{- $first := .FirstSection }}
+    {{- if eq $first.Title "Manuals" }}
+      {{- if eq page $first }}
+        {{/* 1) On /manuals/ → list all manuals, grouped by Params.sidebar.groups (multi-group supported) */}}
+        {{- $sections := $first.Sections }}
+        {{- /* Manuals without any group */}}
+        {{- $ungrouped := where $sections "Params.sidebar.group" "==" nil }}
+        {{- range $ungrouped }}
+          {{ template "renderSingle" . }}
+        {{- end }}
+        {{- /* Then each declared group, allowing multiple groups per manual */}}
+        {{- range $group := $first.Params.sidebar.groups }}
+          <div class="navbar-group">
+            <li class="navbar-group-font-title">{{ $group }}</li>
+            {{- range $sections }}
+              {{- if in .Params.sidebar.group $group }}
+                {{ template "renderSingle" . }}
+              {{- end }}
+            {{- end }}
+          </div>
+        {{- end }}
+      {{- else }}
+        {{/* 2) Under a specific manual → render that manual’s full collapsible tree */}}
+        {{- range $first.Sections }}
+          {{- if or (eq page .) (page.IsDescendant .) }}
+            {{ template "renderList" . }}
           {{- end }}
-        </div>
-      {{- end }}
-    {{- else }}
-      {{/* 2) Under a manual → show that manual’s entire tree */}}
-      {{- range $first.Sections }}
-        {{- if or (eq page .) (page.IsDescendant .) }}
-          {{ template "renderList" . }}
         {{- end }}
       {{- end }}
+    {{- else }}
+      {{/* 3) Everywhere else → normal recursive nav of FirstSection */}}
+      {{ template "renderChildren" $first }}
     {{- end }}
-  {{- else }}
-    {{/* 3) Everywhere else → normal recursive nav */}}
-    {{ template "renderChildren" $first }}
-  {{- end }}
-</ul>
+  </ul>
 </nav>
 
 {{ define "renderChildren" }}
@@ -55,17 +61,17 @@
       {{- template "renderSingle" . }}
     {{- end }}
   {{- end }}
-  {{- range .Params.sidebar.groups }}
-    <!--  Main titles -->
+  {{- /* grouping, allowing multiple groups per page */}}
+  {{- range $group := .Params.sidebar.groups }}
     <div class="navbar-group">
-      <li class="navbar-group-font-title">
-        {{ . }}
-      </li>
-      {{- range where $pages "Params.sidebar.group" . }}
-        {{- if .IsSection }}
-          {{- template "renderList" . }}
-        {{- else }}
-          {{- template "renderSingle" . }}
+      <li class="navbar-group-font-title">{{ $group }}</li>
+      {{- range $pages }}
+        {{- if in .Params.sidebar.group $group }}
+          {{- if .IsSection }}
+            {{- template "renderList" . }}
+          {{- else }}
+            {{- template "renderSingle" . }}
+          {{- end }}
         {{- end }}
       {{- end }}
     </div>
@@ -76,26 +82,19 @@
 {{ define "renderList" }}
   {{ $isCurrent := eq page . }}
   {{ $expanded := or $isCurrent (page.IsDescendant .) }}
-  <li class="" x-data="{ expanded: {{ $expanded }} }">
-    <div
-      class="{{ if $isCurrent }}
-        navbar-entry-background-current
-      {{ end }} flex w-full items-center justify-between rounded-sm"
-    >
+  <li x-data="{ expanded: {{ $expanded }} }">
+    <div class="{{ if $isCurrent }}navbar-entry-background-current{{ end }}
+                flex w-full items-center justify-between rounded-sm">
       <div class="navbar-entry-margin w-full truncate">
         {{- if .Permalink }}
-          <!-- Sections that have children and linking to a page -->
           <a
-            {{ if $isCurrent }}
-              aria-current="page" id="sidebar-current-page"
-            {{ end }}
+            {{ if $isCurrent }}aria-current="page" id="sidebar-current-page"{{ end }}
             class="hover:text-blue block select-none hover:dark:text-blue-400"
             href="{{ .Permalink }}"
           >
             {{ template "renderTitle" . }}
           </a>
         {{- else }}
-          <!-- Sections that have children and do not link to a page -->
           <button
             @click="expanded = !expanded"
             class="hover:text-blue w-full text-left select-none hover:dark:text-blue-400"
@@ -104,29 +103,20 @@
           </button>
         {{- end }}
       </div>
-      <!-- Expand/collapse button -->
-      <button
-        @click="expanded = !expanded"
-        class="rounded-sm hover:bg-gray-200 hover:dark:bg-gray-800"
-      >
-        <span
-          :class="{ 'hidden' : expanded }"
-          class="icon-svg {{ if $expanded }}hidden{{ end }}"
-        >
+      <button @click="expanded = !expanded"
+              class="rounded-sm hover:bg-gray-200 hover:dark:bg-gray-800">
+        <span :class="{ 'hidden': expanded }"
+              class="icon-svg {{ if $expanded }}hidden{{ end }}">
           {{ partialCached "icon" "arrow_drop_down" "arrow_drop_down" }}
         </span>
-        <span
-          :class="{ 'hidden' : !expanded }"
-          class="icon-svg {{ if not $expanded }}hidden{{ end }}"
-        >
+        <span :class="{ 'hidden': !expanded }"
+              class="icon-svg {{ if not $expanded }}hidden{{ end }}">
           {{ partialCached "icon" "arrow_drop_up" "arrow_drop_up" }}
         </span>
       </button>
     </div>
-    <ul
-      :class="{ 'hidden' : !expanded }"
-      class="{{ if not $expanded }}hidden{{ end }} ml-3"
-    >
+    <ul :class="{ 'hidden': !expanded }"
+        class="{{ if not $expanded }}hidden{{ end }} ml-3">
       {{ template "renderChildren" . }}
     </ul>
   </li>
@@ -145,15 +135,9 @@
     </li>
   {{- else }}
     {{ $isCurrent := eq page . }}
-    <li
-      class="navbar-entry-margin hover:text-blue {{ if $isCurrent }}
-        navbar-entry-background-current
-      {{ end }} rounded-sm hover:dark:text-blue-400"
-    >
+    <li class="navbar-entry-margin hover:text-blue {{ if $isCurrent }}navbar-entry-background-current{{ end }} rounded-sm hover:dark:text-blue-400">
       <a
-        {{ if $isCurrent }}
-          aria-current="page" id="sidebar-current-page"
-        {{ end }}
+        {{ if $isCurrent }}aria-current="page" id="sidebar-current-page"{{ end }}
         class="block w-full truncate"
         href="{{ .Permalink }}"
         title="{{ .LinkTitle }}"
@@ -168,7 +152,7 @@
   {{ .LinkTitle }}
   {{- with .Params.sidebar.badge }}
     <span>
-      {{- partial "components/badge.html" (dict "color" .color "content" .text) }}
+      {{ partial "components/badge.html" (dict "color" .color "content" .text) }}
     </span>
   {{- end }}
 {{ end }}

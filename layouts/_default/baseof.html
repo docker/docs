@@ -50,10 +50,13 @@
             Back
           </button>
           <!-- Actual Sidebar Content -->
-          {{ block "left" . }}
-            {{ partial "sidebar/mainnav.html" . }}
-            {{ partial "sidebar/sections.html" . }}
-          {{ end }}
+ {{ block "left" . }}
+   {{ partial "sidebar/mainnav.html" . }}
+  {{/* only skip sections.html when we're on exactly /manuals/ */}}
+  {{ if ne .RelPermalink "/manuals/" }}
+    {{ partial "sidebar/sections.html" . }}
+  {{ end }}
+ {{ end }}
         </div>
       </div>
 
