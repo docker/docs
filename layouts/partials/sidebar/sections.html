@@ -5,16 +5,41 @@
   - Dynamically applies current page highlighting and expanded states.
   - Handles external links via `Params.sidebar.goto` in `renderSingle`.
   - Requires `Params.sitemap` and `Params.sidebar` for filtering and behavior.
-  */
--}}
+*/ -}}
 <!-- section tree -->
 <nav class="navbar-font flex flex-col">
   <div class="block py-4 text-gray-200 md:hidden dark:text-gray-200">
     This section
   </div>
-  <ul>
-    {{ template "renderChildren" .FirstSection }}
-  </ul>
+<ul>
+  {{- $first := .FirstSection }}
+  {{- if eq $first.Title "Manuals" }}
+    {{- if eq page $first }}
+      {{/* 1) On /manuals/ → grouped flat list (unchanged) */}}
+      {{- $sections := $first.Sections }}
+      {{- $ungrouped := where $sections "Params.sidebar.group" "==" nil }}
+      {{- range $ungrouped }}{{ template "renderSingle" . }}{{- end }}
+      {{- range $first.Params.sidebar.groups }}
+        <div class="navbar-group">
+          <li class="navbar-group-font-title">{{ . }}</li>
+          {{- range where $sections "Params.sidebar.group" . }}
+            {{ template "renderSingle" . }}
+          {{- end }}
+        </div>
+      {{- end }}
+    {{- else }}
+      {{/* 2) Under a manual → show that manual’s entire tree */}}
+      {{- range $first.Sections }}
+        {{- if or (eq page .) (page.IsDescendant .) }}
+          {{ template "renderList" . }}
+        {{- end }}
+      {{- end }}
+    {{- end }}
+  {{- else }}
+    {{/* 3) Everywhere else → normal recursive nav */}}
+    {{ template "renderChildren" $first }}
+  {{- end }}
+</ul>
 </nav>
 
 {{ define "renderChildren" }}
@@ -45,7 +70,6 @@
       {{- end }}
     </div>
   {{- end }}
-
 {{ end }}
 
 {{/* Recursive template for sidebar items */}}
@@ -60,7 +84,6 @@
     >
       <div class="navbar-entry-margin w-full truncate">
         {{- if .Permalink }}
-          {{/* If the link is not empty, use it */}}
           <!-- Sections that have children and linking to a page -->
           <a
             {{ if $isCurrent }}
@@ -72,7 +95,6 @@
             {{ template "renderTitle" . }}
           </a>
         {{- else }}
-          {{/* Otherwise, just expand the section */}}
           <!-- Sections that have children and do not link to a page -->
           <button
             @click="expanded = !expanded"
@@ -82,7 +104,7 @@
           </button>
         {{- end }}
       </div>
-      <!-- Expand group button -->
+      <!-- Expand/collapse button -->
       <button
         @click="expanded = !expanded"
         class="rounded-sm hover:bg-gray-200 hover:dark:bg-gray-800"
