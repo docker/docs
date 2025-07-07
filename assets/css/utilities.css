@@ -256,3 +256,7 @@
 @utility pagination-link {
   @apply flex items-center justify-center rounded-sm p-2;
 }
+
+@utility breadcrumbs {
+  font-size: 90%;
+}
