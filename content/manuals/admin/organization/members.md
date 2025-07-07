@@ -2,7 +2,7 @@
 title: Manage organization members
 weight: 30
 description: Learn how to manage organization members in Docker Hub and Docker Admin Console.
-keywords: members, teams, organizations, invite members, manage team members
+keywords: members, teams, organizations, invite members, manage team members, export member list, edit roles, organization teams, user management
 aliases:
 - /docker-hub/members/
 ---
@@ -176,7 +176,7 @@ To add a member to a team with Docker Hub:
 {{< /tab >}}
 {{< /tabs >}}
 
-### Remove a member from a team
+### Remove members from teams
 
 > [!NOTE]
 >
@@ -217,6 +217,11 @@ Organization owners can manage [roles](/security/for-admins/roles-and-permission
 within an organization. If an organization is part of a company,
 the company owner can also manage that organization's roles. If you have SSO enabled, you can use [SCIM for role mapping](/security/for-admins/provisioning/scim/).
 
+> [!NOTE]
+>
+> If you're the only owner of an organization, you need to assign a new owner
+before you can edit your role.
+
 {{< tabs >}}
 {{< tab name="Admin Console" >}}
 
@@ -227,11 +232,6 @@ organization.
 1. Select **Members**.
 1. Find the username of the member whose role you want to edit. Select the
 **Actions** menu, then **Edit role**.
-
-> [!NOTE]
->
-> If you're the only owner of an organization,
-> you need to assign a new owner before you can edit your role.
 
 {{< /tab >}}
 {{< tab name="Docker Hub" >}}

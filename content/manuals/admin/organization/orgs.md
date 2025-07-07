@@ -2,23 +2,29 @@
 title: Create your organization
 weight: 10
 description: Learn how to create an organization.
-keywords: Docker, docker, registry, teams, organizations, plans, Dockerfile, Docker
-  Hub, docs, documentation
+keywords: docker organizations, organization, create organization, docker teams, docker admin console, organization management
 aliases:
-- /docker-hub/orgs/
+  - /docker-hub/orgs/
 ---
 
 {{< summary-bar feature_name="Admin orgs" >}}
 
-This section describes how to create an organization. Before you begin:
+This page describes how to create an organization.
+
+## Prerequisites
+
+Before you begin creating an organization:
 
 - You need a [Docker ID](/accounts/create-account/)
-- Review the [Docker subscriptions and features](../../subscription/details.md) to determine what subscription to choose for your organization
+- Review the [Docker subscriptions and features](../../subscription/details.md)
+  to determine what subscription to choose for your organization
 
 ## Create an organization
 
 There are multiple ways to create an organization. You can either:
-- Create a new organization using the **Create Organization** option in Docker Hub
+
+- Create a new organization using the **Create Organization** option in the
+Admin Console or Docker Hub
 - Convert an existing user account to an organization
 
 The following section contains instructions on how to create a new organization. For prerequisites and
@@ -105,7 +111,8 @@ configure your organization.
 
 To view an organization:
 
-1. Sign in to [Docker Hub](https://hub.docker.com) with a user account that is a member of any team in the organization.
+1.  Sign in to [Docker Hub](https://hub.docker.com) with a user account that is
+    a member of any team in the organization.
 
       > [!NOTE]
       >
@@ -139,10 +146,9 @@ configure your organization.
 - **Settings**: Displays information about your
   organization, and you to view and change your repository privacy
   settings, configure org permissions such as
-  [Image Access Management](/manuals/security/for-admins/hardened-desktop/image-access-management.md), configure notification settings, and [deactivate](/manuals/admin/organization/deactivate-account.md#deactivate-an-organization) You can also update your organization name and company name that appear on your organization landing page. You must be an owner to access the
-   organization's **Settings** page.
+  [Image Access Management](/manuals/security/for-admins/hardened-desktop/image-access-management.md), configure notification settings, and [deactivate](/manuals/admin/organization/deactivate-account.md#deactivate-an-organization) You can also update your organization name and company name that appear on your organization landing page. You must be an owner to access the organization's **Settings** page.
 - **Billing**: Displays information about your existing
-[Docker subscription](../../subscription/_index.md), including the number of seats and next payment due date. For how to access the billing history and payment methods for your organization, see [View billing history](../../billing/history.md).
+  [Docker subscription](../../subscription/_index.md), including the number of seats and next payment due date. For how to access the billing history and payment methods for your organization, see [View billing history](../../billing/history.md).
 
 {{< /tab >}}
 {{< /tabs >}}
@@ -151,12 +157,13 @@ configure your organization.
 
 > [!WARNING]
 >
-> If you are merging organizations, it is recommended to do so at the *end* of
+> If you are merging organizations, it is recommended to do so at the _end_ of
 > your billing cycle. When you merge an organization and downgrade another, you
 > will lose seats on your downgraded organization. Docker does not offer
 > refunds for downgrades.
 
-If you have multiple organizations that you want to merge into one, complete the following:
+If you have multiple organizations that you want to merge into one, complete
+the following steps:
 
 1. Based on the number of seats from the secondary organization, [purchase additional seats](../../subscription/manage-seats.md) for the primary organization account that you want to keep.
 1. Manually add users to the primary organization and remove existing users from the secondary organization.
@@ -165,7 +172,8 @@ If you have multiple organizations that you want to merge into one, complete the
 
 > [!TIP]
 >
-> If your organization has a Docker Business subscription with a purchase order, contact Support or your Account Manager at Docker.
+> If your organization has a Docker Business subscription with a purchase
+order, contact Support or your Account Manager at Docker.
 
 ## More resources
 
