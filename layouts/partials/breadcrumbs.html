@@ -2,7 +2,7 @@
   id="breadcrumbs"
   {{- $breadcrumbTitles := slice }}
   data-pagefind-ignore
-  class="mb-4 flex min-w-0 items-center gap-2 text-gray-400 dark:text-gray-300"
+  class="breadcrumbs mb-4 flex min-w-0 items-center gap-2 text-gray-400 dark:text-gray-300"
 >
   {{ range .Ancestors.Reverse }}
     {{ $breadcrumbTitles = $breadcrumbTitles | append .LinkTitle }}
