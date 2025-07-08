@@ -38,7 +38,7 @@ Create a file named `Dockerfile.dev` in your project root with the following con
 # =========================================
 # Stage 1: Develop the Vue.js Application
 # =========================================
-ARG NODE_VERSION=22.14.0-alpine
+ARG NODE_VERSION=23.11.0-alpine
 
 # Use a lightweight Node.js image for development
 FROM node:${NODE_VERSION} AS dev
@@ -58,11 +58,18 @@ RUN --mount=type=cache,target=/root/.npm npm install
 # Copy the rest of the application source code into the container
 COPY . .
 
+# Change ownership of the application directory to the node user
+RUN chown -R node:node /app
+
+# Switch to the node user
+USER node
+
 # Expose the port used by the Vite development server
 EXPOSE 5173
 
 # Use a default command, can be overridden in Docker compose.yml file
 CMD [ "npm", "run", "dev", "--", "--host" ]
+
 ```
 
 This file sets up a lightweight development environment for your Vue.js application using the dev server.
@@ -92,10 +99,13 @@ services:
     develop:
       watch:
         - path: ./src
+          target: /app/src
           action: sync
         - path: ./package.json
+          target: /app/package.json
           action: restart
         - path: ./vite.config.js
+          target: /app/vite.config.js
           action: restart
 ```
 - The `vuejs-prod` service builds and serves your static production app using Nginx.
