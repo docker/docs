@@ -534,7 +534,8 @@ For more information, see [Networking](/manuals/desktop/features/networking.md#n
 |---------------|-----------------|----------|
 | `auto` | `ipv4`, `ipv6`, `none` | String  |
 
-- **Description:** Filters unsupported DNS record types.
+- **Description:** Filters unsupported DNS record types. Requires Docker Desktop
+version 4.43 and up.
 - **OS:** {{< badge color=blue text="Windows and Mac" >}}
 - **Use case:** Control how Docker filters DNS records returned to containers, improving reliability in environments where only IPv4 or IPv6 is supported.
 - **Configure this setting with:**
