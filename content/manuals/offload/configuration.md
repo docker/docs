@@ -10,25 +10,25 @@ To use Docker Offload, you must start it in Docker Desktop. For more details,
 see the [Docker Offload quickstart](/offload/quickstart/).
 
 Settings for the cloud builders in Docker Offload can be further configured, in
-addition to settings for an entire organization, through **Cloud settings** in
-the Docker Cloud dashboard.
+addition to settings for an entire organization, through **Offload settings** in
+the Docker Offload dashboard.
 
 > [!NOTE]
 >
 > To view usage and configure billing for Docker Offload, see [Docker Offload
 > usage and billing](/offload/usage/).
 
-## Cloud settings
+## Offload settings
 
-The **Cloud settings** page in Docker Home lets you configure disk
+The **Offload settings** page in Docker Home lets you configure disk
 allocation, private resource access, and firewall settings for your cloud
 builders in your organization.
 
-To view the **Cloud settings** page:
+To view the **Offload settings** page:
 
 1. Go to [Docker Home](https://app.docker.com/).
 2. Select the account for which you want to manage Docker Offload.
-3. Select **Cloud** > **Cloud settings**.
+3. Select **Offload** > **Offload settings**.
 
 The following sections describe the available settings.
 
@@ -38,9 +38,8 @@ The **Disk allocation** setting lets you control how much of the available
 storage is dedicated to the build cache. A lower allocation increases storage
 available for active builds.
 
-To make disk allocation changes, navigate to **Cloud settings** in Docker
-Cloud and then adjust the **Disk allocation** slider to specify the
-percentage of storage used for build caching.
+Adjust the **Disk allocation** slider to specify the percentage of storage used
+for build caching.
 
 Any changes take effect immediately.
 
