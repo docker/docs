@@ -33,7 +33,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2025-07-04" >}}
 
-{{< desktop-install-v2 all=true beta_win_arm=true version="4.43.1" build_path="/198352/" >}}
+{{< desktop-install-v2 all=true ea_win_arm=true version="4.43.1" build_path="/198352/" >}}
 
 ### Bug fixes and enhancements
 
@@ -46,7 +46,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2025-07-03" >}}
 
-{{< desktop-install-v2 all=true beta_win_arm=true version="4.43.0" build_path="/198134/" >}}
+{{< desktop-install-v2 all=true ea_win_arm=true version="4.43.0" build_path="/198134/" >}}
 
 ### New
 
@@ -103,7 +103,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2025-06-18" >}}
 
-{{< desktop-install-v2 all=true beta_win_arm=true version="4.42.1" build_path="/196648/" >}}
+{{< desktop-install-v2 all=true ea_win_arm=true version="4.42.1" build_path="/196648/" >}}
 
 ### Upgrades
 
@@ -129,7 +129,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2025-06-04" >}}
 
-{{< desktop-install-v2 all=true beta_win_arm=true version="4.42.0" build_path="/195023/" >}}
+{{< desktop-install-v2 all=true ea_win_arm=true version="4.42.0" build_path="/195023/" >}}
 
 ### New
 

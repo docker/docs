@@ -1,6 +1,7 @@
 {{- $all := .Get "all" -}}
 {{- $win := .Get "win" -}}
 {{- $beta_win_arm := .Get "beta_win_arm" -}}
+{{- $ea_win_arm := .Get "ea_win_arm" -}}
 {{- $mac := .Get "mac" -}}
 {{- $linux := .Get "linux" -}}
 {{- $build_path := .Get "build_path" -}}
@@ -19,6 +20,14 @@
     <div>
       <a rel="noopener"
          href="https://desktop.docker.com/win/main/arm64{{ $build_path }}Docker%20Desktop%20Installer.exe">Windows ARM Beta</a>
+      (<a rel="noopener"
+          href="https://desktop.docker.com/win/main/arm64{{ $build_path }}checksums.txt">checksum</a>)
+    </div>
+  {{ end }}
+  {{- if or $ea_win_arm }}
+    <div>
+      <a rel="noopener"
+         href="https://desktop.docker.com/win/main/arm64{{ $build_path }}Docker%20Desktop%20Installer.exe">Windows ARM Early Access</a>
       (<a rel="noopener"
           href="https://desktop.docker.com/win/main/arm64{{ $build_path }}checksums.txt">checksum</a>)
     </div>
