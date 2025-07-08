@@ -1061,10 +1061,6 @@ For more information, see [microsoft/WSL#11794](https://github.com/microsoft/WSL
 
 ## 4.31.1
 
-{{< release-date date="2024-06-10" >}}
-
-{{< desktop-install win=true win_arm_release="Beta" version="4.31.1" build_path="/153621/" >}}
-
 ### Bug fixes and enhancements
 
 #### For Windows
@@ -1072,10 +1068,6 @@ For more information, see [microsoft/WSL#11794](https://github.com/microsoft/WSL
 - Fixed a bug where containers, images and volumes created before the update were potentially invisible for users. Fixes [docker/for-win#14118](https://github.com/docker/for-win/issues/14118).
 
 ## 4.31.0
-
-{{< release-date date="2024-06-06" >}}
-
-{{< desktop-install all=true win_arm_release="Beta" version="4.31.0" build_path="/153195/" >}}
 
 ### New
 
