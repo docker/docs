@@ -36,7 +36,7 @@ Create a file named `Dockerfile.dev` in your project root with the following con
 
 ```dockerfile
 # =========================================
-# Stage 1: Develop the React.js Application
+# Stage 1: Develop the Vue.js Application
 # =========================================
 ARG NODE_VERSION=22.14.0-alpine
 
