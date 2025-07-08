@@ -1,6 +1,7 @@
 ---
-title: Merge
-description: Learn about merging rules
+linkTitle: Merge
+title: Merge Compose files
+description: Understand how Docker Compose merges multiple files and resolves conflicts
 keywords: compose, compose specification, merge, compose file reference
 aliases: 
  - /compose/compose-file/13-merge/

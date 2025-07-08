@@ -1,6 +1,6 @@
 ---
 title: Configs top-level elements
-description: Explore all the attributes the configs top-level element can have.
+description: Manage and share configuration data using the configs element in Docker Compose.
 keywords: compose, compose specification, configs, compose file reference
 aliases: 
  - /compose/compose-file/08-configs/

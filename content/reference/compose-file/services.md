@@ -1,5 +1,6 @@
 ---
-title: Services top-level elements
+linkTitle: Services
+title: Define services in Docker Compose
 description: Explore all the attributes the services top-level element can have.
 keywords: compose, compose specification, services, compose file reference
 aliases:
@@ -1290,7 +1291,7 @@ There is a performance penalty for applications that swap memory to disk often.
 - If `memswap_limit` is unset, and `memory` is set, the container can use as much swap as the `memory` setting, if the host container has swap memory configured. For instance, if `memory`="300m" and `memswap_limit` is not set, the container can use 600m in total of memory and swap.
 - If `memswap_limit` is explicitly set to -1, the container is allowed to use unlimited swap, up to the amount available on the host system.
 
-### models
+### `models`
 
 {{< summary-bar feature_name="Compose models" >}}
 
@@ -1358,7 +1359,7 @@ services:
 ```
 For more information about the `networks` top-level element, see [Networks](networks.md).
 
-### Implicit default network
+#### Implicit default network
 
 If `networks` is empty or absent from the Compose file, Compose considers an implicit definition for the service to be
 connected to the `default` network:
@@ -1674,7 +1675,7 @@ expressed in the short form.
 - `protocol`: The port protocol (`tcp` or `udp`). Defaults to `tcp`.
 - `app_protocol`: The application protocol (TCP/IP level 4 / OSI level 7) this port is used for. This is optional and can be used as a hint for Compose to offer richer behavior for protocols that it understands. Introduced in Docker Compose version [2.26.0](/manuals/compose/releases/release-notes.md#2260).
 - `mode`: Specifies how the port is published in a Swarm setup. If set to `host`, it publishes the port on every node in Swarm. If set to `ingress`, it allows load balancing across the nodes in Swarm. Defaults to `ingress`.
-- `name`: A human-readable name for the port, used to document it's usage within the service.
+- `name`: A human-readable name for the port, used to document its usage within the service.
 
 ```yml
 ports:
@@ -1783,12 +1784,12 @@ The mechanism used by Compose to delegate the service lifecycle to an external b
 
 For more information on using the `provider` attribute, see [Use provider services](/manuals/compose/how-tos/provider-services.md).
 
-### `type`
+#### `type`
 
 `type` attribute is required. It defines the external component used by Compose to manage setup and tear down lifecycle
 events.
 
-### `options`
+#### `options`
 
 `options` are specific to the selected provider and not validated by the compose specification
 

@@ -1,6 +1,7 @@
 ---
-title: Volumes top-level element
-description: Explore all the attributes the volumes top-level element can have.
+linkTitle: Volumes 
+title: Define and manage volumes in Docker Compose
+description: Control how volumes are declared and shared between services using the top-level volumes element.
 keywords: compose, compose specification, volumes, compose file reference
 aliases: 
  - /compose/compose-file/07-volumes/

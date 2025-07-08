@@ -1,5 +1,5 @@
 ---
-title: Secrets top-level elements
+title: Secrets
 description: Explore all the attributes the secrets top-level element can have.
 keywords: compose, compose specification, secrets, compose file reference
 aliases: 
