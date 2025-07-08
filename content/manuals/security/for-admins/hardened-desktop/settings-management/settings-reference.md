@@ -534,7 +534,8 @@ For more information, see [Networking](/manuals/desktop/features/networking.md#n
 |---------------|-----------------|----------|
 | `auto` | `ipv4`, `ipv6`, `none` | String  |
 
-- **Description:** Filters unsupported DNS record types.
+- **Description:** Filters unsupported DNS record types. Requires Docker Desktop
+version 4.43 and up.
 - **OS:** {{< badge color=blue text="Windows and Mac" >}}
 - **Use case:** Control how Docker filters DNS records returned to containers, improving reliability in environments where only IPv4 or IPv6 is supported.
 - **Configure this setting with:**
@@ -621,6 +622,12 @@ Builders settings lets you manage Buildx builder instances for advanced image-bu
 >
 > In hardened environments, disable and lock this setting.
 
+> [!IMPORTANT]
+>
+> When Kubernetes is enabled through Settings Management policies, only the
+`kubeadm` cluster provisioning method is supported. The `kind` provisioning
+method is not yet supported by Settings Management.
+
 - **Configure this setting with:**
     - **Kubernetes** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
     - Settings Management: `kubernetes` setting in the [`admin-settings.json` file](/manuals/security/for-admins/hardened-desktop/settings-management/configure-json-file.md)
@@ -679,6 +686,40 @@ compatibility.
 
 - **Configure this setting with:**
     - **Kubernetes** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
+
+### Custom Kubernetes image repository
+
+| Default value | Accepted values | Format   |
+|---------------|-----------------|----------|
+| `""`          | Registry URL    | String   |
+
+- **Description**: Configure a custom image repository for Kubernetes control
+plane images. This allows Docker Desktop to pull Kubernetes system
+images from a private registry or mirror instead of Docker Hub. This setting
+overrides the `[registry[:port]/][namespace]` portion of image names.
+- **OS**: {{< badge color=blue text="All" >}}
+- **Use case**: Use private registries in air-gapped environments or
+when Docker Hub access is restricted.
+
+> [!NOTE]
+>
+> The images must be cloned/mirrored from Docker Hub with matching tags. The
+specific images required depend on the cluster provisioning method (`kubeadm`
+or `kind`). See the Kubernetes documentation for the complete list
+of required images and detailed setup instructions.
+
+- **Configure this setting with**:
+    - Settings Management: `KubernetesImagesRepository` settings in the
+    [`admin-settings.json` file](/manuals/security/for-admins/hardened-desktop/settings-management/configure-json-file.md)
+    - Settings Management: **Kubernetes Images Repository** setting in the
+    [Admin Console](/manuals/security/for-admins/hardened-desktop/settings-management/configure-admin-console.md)
+
+> [!IMPORTANT]
+>
+> When using `KubernetesImagesRepository` with Enhanced Container Isolation (ECI)
+enabled, you must add the following images to the ECI Docker socket mount image
+list: `[imagesRepository]/desktop-cloud-provider-kind:*` and
+`[imagesRepository]/desktop-containerd-registry-mirror:*`.
 
 ## Software updates
 
