@@ -91,9 +91,12 @@ services:
       - "5173:5173"
     develop:
       watch:
-        - action: sync
-          path: .
-          target: /app
+        - path: ./src
+          action: sync
+        - path: ./package.json
+          action: restart
+        - path: ./vite.config.js
+          action: restart
 ```
 - The `vuejs-prod` service builds and serves your static production app using Nginx.
 - The `vuejs-dev` service runs your Vue.js development server with live reload and hot module replacement.
