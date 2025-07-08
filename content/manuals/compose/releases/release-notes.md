@@ -15,6 +15,23 @@ For more detailed information, see the [release notes in the Compose repo](https
 
 ## 2.38.1
 
+{{< release-date date="2025-07-08" >}}
+
+### Bug fixes and enhancements
+
+- Added `--networks` flag to `config` command to list networks
+- Fixed an issue on `down` command with Docker Model Runner used as a provider service
+- Fixed a display issue on Docker Model Runner progress
+- Fixed an issue with services with profile missing secrets
+
+### Update
+
+- Dependencies upgrade: bump docker engine and cli to v28.3.1
+- Dependencies upgrade: bump buildkit to v0.23.2
+- Dependencies upgrade: bump golang to v1.23.10
+
+## 2.38.1
+
 {{< release-date date="2025-06-30" >}}
 
 ### Bug fixes and enhancements
