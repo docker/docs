@@ -41,7 +41,10 @@ The MCP Gateway solves problems encountered by various groups:
 - Dynamic discovery and reloading: Automatic tool, prompt, and resource discovery from running servers
 - Monitoring: Built-in logging and call tracing capabilities
 
-## Install the MCP Gateway
+## Install a pre-release version of the MCP Gateway
+
+If you use Docker Desktop, the MCP Gateway is readily available. Use the
+following instructions to test pre-release versions.
 
 ### Prerequisites
 
