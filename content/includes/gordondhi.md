@@ -9,10 +9,14 @@
    ```console
    "Migrate my dockerfile to DHI"
    ```
-1. Follow the conversation with Gordon. When it requests access to the filesystem and more,
-   type `yes` to enable it to update your Dockerfile.
- 
-When the migration is complete, you see a success message: 
+1. Follow the conversation with Gordon. Gordon will edit your Dockerfile, so when
+   it requests access to the filesystem and more, type `yes` to allow Gordon to proceed.
+
+   > [!NOTE]
+   > To learn more about Gordon's data retention and the data it
+   > can access, see [Gordon](/manuals/ai/gordon.md#what-data-does-gordon-access).
+
+When the migration is complete, you see a success message:
 
 ```text
 The migration to Docker Hardened Images (DHI) is complete. The updated Dockerfile
