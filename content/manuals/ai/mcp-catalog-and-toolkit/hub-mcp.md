@@ -29,13 +29,14 @@ The Docker Hub MCP Server is a Model Context Protocol (MCP) server that interfac
 > which means Gordon can automatically interact with your MCP servers.
 
 ## Using other clients
-If want to integrate the Docker Hub MCP Server into your own development environment, you can find the source code and installation instructions on our [GitHub repository](https://github.com/docker/hub-mcp). 
+
+If want to integrate the Docker Hub MCP Server into your own development environment, you can find the source code and installation instructions on our [GitHub repository](https://github.com/docker/hub-mcp).
 
 ## Use Claude Desktop as a client
 
 1. Add the Docker Hub MCP Server configuration to your `claude_desktop_config.json`:
 
-### For public repositories only:
+### For public repositories only
 
    - `/FULL/PATH/TO/YOUR/docker-hub-mcp-server` - The complete path to where you cloned this repository
 ```json
@@ -48,11 +49,13 @@ If want to integrate the Docker Hub MCP Server into your own development environ
   }
 }
 ```
-### For authenticated access (recommended):
+
+### For authenticated access
+
  Replace the following values:
    - `YOUR_DOCKER_HUB_USERNAME` - Your Docker Hub username
    - `YOUR_DOCKER_HUB_PERSONAL_ACCESS_TOKEN` - Your Docker Hub Personal Access Token
-  - `/FULL/PATH/TO/YOUR/docker-hub-mcp-server` - The complete path to where you cloned this 
+  - `/FULL/PATH/TO/YOUR/docker-hub-mcp-server` - The complete path to where you cloned this
 
 ```json
 {
@@ -67,12 +70,13 @@ If want to integrate the Docker Hub MCP Server into your own development environ
   }
 }
 ```
-2. Save the configuration file and completely restart Claude Desktop for the changes to take effect.
+1. Save the configuration file and completely restart Claude Desktop for the changes to take effect.
 
 ## Usage with VS Code
+
 1. Add the Docker Hub MCP Server configuration to your User Settings (JSON) file in VS Code. You can do this by opening the `Command Palette` and typing `Preferences: Open User Settings (JSON)`.
 
-### For public repositories only:
+### For public repositories only
 
    - `/FULL/PATH/TO/YOUR/docker-hub-mcp-server` - The complete path to where you cloned this repository
 ```json
@@ -85,11 +89,13 @@ If want to integrate the Docker Hub MCP Server into your own development environ
   }
 }
 ```
-### For authenticated access (recommended):
+
+### For authenticated access
+
  Replace the following values:
    - `YOUR_DOCKER_HUB_USERNAME` - Your Docker Hub username
    - `YOUR_DOCKER_HUB_PERSONAL_ACCESS_TOKEN` - Your Docker Hub Personal Access Token
-  - `/FULL/PATH/TO/YOUR/docker-hub-mcp-server` - The complete path to where you cloned this 
+  - `/FULL/PATH/TO/YOUR/docker-hub-mcp-server` - The complete path to where you cloned this
 
 ```json
 {
@@ -105,8 +111,8 @@ If want to integrate the Docker Hub MCP Server into your own development environ
   }
 }
 ```
-2. Open the `Command Palette` and type `MCP: List Servers`.
-3. Select `docker-hub` and select `Start Server`.
+1. Open the `Command Palette` and type `MCP: List Servers`.
+1. Select `docker-hub` and select `Start Server`.
 
 ## Usage examples
 
@@ -114,7 +120,7 @@ This section provides task-oriented examples for common operations with Docker H
 tools.
 
 
-### Finding images 
+### Finding images
 
 ```console
 # Search for official images
@@ -123,7 +129,7 @@ $ docker ai "Search for official nginx images on Docker Hub"
 # Search for lightweight images to reduce deployment size and improve performance
 $ docker ai "Search for minimal Node.js images with small footprint"
 
-# Get the most recent tag of a base image 
+# Get the most recent tag of a base image
 $ docker ai "Show me the latest tag details for go"
 
 # Find a production-ready database with enterprise features and reliability
@@ -132,7 +138,6 @@ $ docker ai "Search for production ready database images"
 # Compare Ubuntu versions to choose the right one for my project
 $ docker ai "Help me find the right Ubuntu version for my project"
 ```
-
 
 ### Repository management
 
@@ -156,7 +161,7 @@ $ docker ai "Show me my most recently updated repositories"
 $ docker ai "Show me information about my '<repository-name>' repository"
 ```
 
-### Pull/push images 
+### Pull/push images
 
 ```console
 # Pull latest PostgreSQL version
