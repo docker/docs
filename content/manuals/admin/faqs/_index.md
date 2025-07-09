@@ -1,6 +1,6 @@
 ---
 build:
   render: never
-title: Account and admin FAQ
+title: FAQ
 weight: 30
 ---
