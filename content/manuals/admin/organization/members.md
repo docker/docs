@@ -30,7 +30,7 @@ Use the following steps to invite members to your organization via Docker ID or 
 > When you invite members, you assign them a role. See [Roles and permissions](/manuals/security/for-admins/roles-and-permissions.md) for
 details about the access permissions for each role.
 
-Pending invitations appear in the table. The invitees receive an email with a link to Docker Hub where they can accept or decline the invitation.
+Pending invitations appear in the table. Invitees receive an email with a link to Docker Hub where they can accept or decline the invitation.
 
 ### Invite members via CSV file
 
@@ -172,7 +172,7 @@ When an invitation is to a user's email address, they receive
 a link to Docker Hub where they can accept or decline the invitation.
 To accept an invitation:
 
-1. Navigate to your email inbox and open the Docker email with an invitation to
+1. Check your email inbox and open the Docker email with an invitation to
 join the Docker organization.
 1. To open the link to Docker Hub, select the **click here** link.
 
