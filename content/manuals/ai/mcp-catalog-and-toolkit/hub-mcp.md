@@ -15,9 +15,9 @@ The Docker Hub MCP Server is a Model Context Protocol (MCP) server that interfac
 ## Install Docker Hub MCP server
 
 1. From the **MCP Toolkit** menu, select the **Catalog** tab and search for **Docker Hub** and select the plus icon to add the Docker Hub MCP server.
-2. In the server's **Configuration** tab, insert your Docker Hub username and personal access token (PAT).
-3. In the **Clients** tab in MCP Toolkit, ensure Gordon is connected.
-4. From the **Ask Gordon** menu, you can now send requests related to your
+1. In the server's **Configuration** tab, insert your Docker Hub username and personal access token (PAT).
+1. In the **Clients** tab in MCP Toolkit, ensure Gordon is connected.
+1. From the **Ask Gordon** menu, you can now send requests related to your
    Docker Hub account, in accordance to the tools provided by the Docker Hub MCP server. To test it, ask Gordon:
 
    ```text
