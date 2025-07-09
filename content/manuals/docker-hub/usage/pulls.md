@@ -126,6 +126,7 @@ If you're using any third-party platforms, follow your provider’s instructions
 - [Codefresh](https://codefresh.io/docs/docs/docker-registries/external-docker-registries/docker-hub/)
 - [Drone.io](https://docs.drone.io/pipeline/docker/syntax/images/#pulling-private-images)
 - [GitLab](https://docs.gitlab.com/ee/user/packages/container_registry/#authenticate-with-the-container-registry)
+- [Froggit](https://lab.frogg.it/help/user/packages/container_registry/authenticate_with_container_registry.md)
 - [LayerCI](https://layerci.com/docs/advanced-workflows#logging-in-to-docker)
 - [TeamCity](https://www.jetbrains.com/help/teamcity/integrating-teamcity-with-docker.html#Conforming+with+Docker+download+rate+limits)
 
