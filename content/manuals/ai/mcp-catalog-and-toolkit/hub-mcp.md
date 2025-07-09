@@ -25,7 +25,7 @@ The Docker Hub MCP Server is a Model Context Protocol (MCP) server that interfac
    ```
 
 > [!TIP]
-> By default, the Gordon [client](#install-an-mcp-client) is enabled,
+> By default, the Gordon [client](/manuals/ai/mcp-catalog-and-toolkit/toolkit.md#install-an-mcp-client) is enabled,
 > which means Gordon can automatically interact with your MCP servers.
 
 ## Using other clients
