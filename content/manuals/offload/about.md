@@ -120,7 +120,7 @@ and the CLI.
 
 Docker Offload provisions an ephemeral cloud environment for each session. The
 environment remains active while you are interacting with Docker Desktop or
-actively using containers. If no activity is detected for about 30 minutes, the
+actively using containers. If no activity is detected for about 5 minutes, the
 session shuts down automatically. This includes any containers, images, or
 volumes in that environment, which are deleted when the session ends.
 
