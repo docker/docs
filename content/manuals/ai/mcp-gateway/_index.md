@@ -50,10 +50,6 @@ The MCP Gateway solves problems encountered by various groups:
 
 ### Install using a pre-built binary
 
-> [!IMPORTANT]
-> These instructions are mostly suitable for testing purposes.
-> We otherwise recommend building from the sources. See the [README](https://github.com/docker/mcp-gateway?tab=readme-ov-file#installation).
-
 You can download the latest binary from the [GitHub releases page](https://github.com/docker/mcp-gateway/releases/latest).
 
 Rename the relevant binary and copy it to the destination matching your OS:
