@@ -51,7 +51,7 @@ require (
 	github.com/moby/buildkit v0.23.1 // indirect
 	github.com/moby/docker-image-spec v1.3.1 // indirect
 	github.com/moby/locker v1.0.1 // indirect
-	github.com/moby/moby v28.3.0+incompatible // indirect
+	github.com/moby/moby v28.3.2+incompatible // indirect
 	github.com/moby/sys/atomicwriter v0.1.0 // indirect
 	github.com/moby/sys/sequential v0.6.0 // indirect
 	github.com/moby/term v0.5.2 // indirect
@@ -109,5 +109,5 @@ replace (
 	github.com/docker/model-cli => github.com/docker/model-cli v0.1.33-0.20250703103301-d4e4936a9eb2
 	github.com/docker/scout-cli => github.com/docker/scout-cli v1.15.0
 	github.com/moby/buildkit => github.com/moby/buildkit v0.22.0
-	github.com/moby/moby => github.com/moby/moby v28.3.0+incompatible
+	github.com/moby/moby => github.com/moby/moby v28.3.2+incompatible
 )

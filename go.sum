@@ -138,6 +138,8 @@ github.com/moby/moby v28.2.1+incompatible h1:UYmHExYP8S0uGKDozhYw7RJ+LpANL51g4fa
 github.com/moby/moby v28.2.1+incompatible/go.mod h1:fDXVQ6+S340veQPv35CzDahGBmHsiclFwfEygB/TWMc=
 github.com/moby/moby v28.3.0+incompatible h1:BnZpCciB9dCnfNC+MerxqsHV4I6/gLiZIzzbRFJIhUY=
 github.com/moby/moby v28.3.0+incompatible/go.mod h1:fDXVQ6+S340veQPv35CzDahGBmHsiclFwfEygB/TWMc=
+github.com/moby/moby v28.3.2+incompatible h1:K0SaQiU3VJxzMmHarwIa9MUyYFYC6FzCf0Qs9oQaFI4=
+github.com/moby/moby v28.3.2+incompatible/go.mod h1:fDXVQ6+S340veQPv35CzDahGBmHsiclFwfEygB/TWMc=
 github.com/moby/sys/atomicwriter v0.1.0 h1:kw5D/EqkBwsBFi0ss9v1VG3wIkVhzGvLklJ+w3A14Sw=
 github.com/moby/sys/atomicwriter v0.1.0/go.mod h1:Ul8oqv2ZMNHOceF643P6FKPXeCmYtlQMvpizfsSoaWs=
 github.com/moby/sys/sequential v0.6.0 h1:qrx7XFUd/5DxtqcoH1h438hF5TmOvzC/lspjy7zgvCU=
