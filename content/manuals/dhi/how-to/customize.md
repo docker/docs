@@ -65,8 +65,9 @@ To customize a Docker Hardened Image, follow these steps:
 
       > [!NOTE]
       >
-      > When files necessary for runtime are overwritten, the image build still
-      > succeeds, but you may have issues when running the image.
+      > When files necessary for runtime are overwritten by OCI artifacts, the
+      > image build still succeeds, but you may have issues when running the
+      > image.
 
 9. Select **Next: Configure** and then configure the following options.
 
