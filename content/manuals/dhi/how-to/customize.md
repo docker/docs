@@ -2,7 +2,7 @@
 title: Customize a Docker Hardened Image
 linkTitle: Customize an image
 weight: 25
-keywords: debug, hardened images, DHI, customize, certificate, artififact
+keywords: debug, hardened images, DHI, customize, certificate, artifact
 description: Learn how to customize a Docker Hardened Images (DHI).
 ---
 
@@ -35,8 +35,18 @@ To customize a Docker Hardened Image, follow these steps:
 
    1. In the **Packages** drop-down, select the packages you want to add to the
       image.
-   2. In the **OCI artifacts** drop-down select the OCI artifacts you want to
-      add to the image. The OCI artifacts are images that you have previously
+
+      The packages available in the drop-down are OS system packages for the
+      selected image variant. For example, if you are customizing the Alpine
+      variant of the Python DHI, the list will include all Alpine system
+      packages.
+
+   2. In the **OCI artifacts** drop-down, first, select the repository that
+      contains the OCI artifact image. Then, select the tag you want to use from
+      that repository. Finally, specify the specific paths you want to include
+      from the OCI artifact image.
+
+      The OCI artifacts are images that you have previously
       built and pushed to a repository in the same namespace as the mirrored
       DHI. For example, you can add a custom root CA certificate or a another
       image that contains a tool you need, like adding Python to a Node.js
@@ -45,13 +55,17 @@ To customize a Docker Hardened Image, follow these steps:
 
       When combining images that contain directories and files with the same
       path, images later in the list will overwrite files from earlier images.
-      To manage this, you can further select paths to include or exclude from
-      each OCI artifact image. This allows you to control which files are
+      To manage this, you must select paths to include and optionally exclude
+      from each OCI artifact image. This allows you to control which files are
       included in the final customized image.
+
+      By default, no files are included from the OCI artifact image. You must
+      explicitly include the paths you want. After including a path, you can
+      then explicitly exclude files or directories underneath it.
 
       > [!NOTE]
       >
-      > When necessary files are overwritten, the image build still
+      > When files necessary for runtime are overwritten, the image build still
       > succeeds, but you may have issues when running the image.
 
 9. Select **Next: Configure** and then configure the following options.
