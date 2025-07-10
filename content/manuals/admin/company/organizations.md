@@ -1,12 +1,12 @@
 ---
-description: Learn how to manage organizations in a company.
-keywords: company, multiple organizations, manage organizations
 title: Manage company organizations
+description: Learn how to manage organizations in a company.
+keywords: company, multiple organizations, manage organizations, Docker Admin Console, organization settings, add organization, company management
 ---
 
 {{< summary-bar feature_name="Company" >}}
 
-You can manage the organizations in a company in the Docker Admin Console.
+Learn to manage the organizations in a company using the Docker Admin Console.
 
 ## View all organizations
 
@@ -18,17 +18,27 @@ The **Organizations** view displays all organizations under your company.
 
 ## Add seats to an organization
 
-When you have a [self-serve](../../subscription/details.md#self-serve) subscription that has no pending subscription changes, you can add seats using the following steps. If you have a sales-assisted subscription, you can contact Docker support or sales to add seats.
+If you have a [self-serve](../../subscription/details.md#self-serve)
+subscription that has no pending subscription changes, you can add seats using
+Docker Home. For more information about adding seats,
+see [Manage seats](/manuals/subscription/manage-seats.md#add-seats).
 
-For more information about adding seats, see [Manage seats](/manuals/subscription/manage-seats.md#add-seats).
+If you have a sales-assisted subscription, you must contact Docker support or
+sales to add seats.
 
 ## Add organizations to a company
 
-You must be a company owner to add an organization to a company. You must also be an organization owner of the organization you want to add. There is no limit to the number of organizations you can have under a company layer. All organizations must have a Business subscription.
+To add an organization to a company, ensure the following:
+
+- You are a company owner.
+- You are an organization owner of the organization you want to add.
+- The organization has a Docker Business subscription.
+- There’s no limit to how many organizations can exist under a company.
 
 > [!IMPORTANT]
 >
-> Once you add an organization to a company, you can't remove it from the company.
+> Once you add an organization to a company, you can't remove it from the
+company.
 
 1. Sign in to [Docker Home](https://app.docker.com) and select your company.
 1. Select **Admin Console**, then **Organizations**.
@@ -42,7 +52,8 @@ You must be a company owner to add an organization to a company. You must also b
 1. Select **Admin Console**, then **Organizations**.
 1. Select the organization you want to manage.
 
-For more details about managing an organization, see [Organization administration](../organization/_index.md).
+For more details about managing an organization, see
+[Organization administration](../organization/_index.md).
 
 ## More resources
 
