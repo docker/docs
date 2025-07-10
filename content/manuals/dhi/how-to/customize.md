@@ -123,7 +123,7 @@ extracted into a minimal final image:
 ```dockerfile
 # syntax=docker/dockerfile:1
 
-FROM yourorg/dhi-bash:5-dev AS certs
+FROM <your-namespace>/dhi-bash:5-dev AS certs
 
 ENV DEBIAN_FRONTEND=noninteractive
 
