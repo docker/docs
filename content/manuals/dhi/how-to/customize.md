@@ -11,8 +11,10 @@ using the Docker Hub UI. This allows you to select a base image, add packages,
 add artifacts, and configure settings. In addition, the build pipeline ensures that
 your customized image is built securely and includes attestations.
 
-To add a customized Docker Hardened Image to your organization, you must first
-[mirror](./mirror.md) the DHI repository to your organization.
+To add a customized Docker Hardened Image to your organization, an organization
+owner must first [mirror](./mirror.md) the DHI repository to your organization.
+Once the repository is mirrored, any user with access to the mirrored DHI
+repository can create a customized image.
 
 ## Customize a Docker Hardened Image
 
