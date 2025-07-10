@@ -117,5 +117,9 @@ If Docker Desktop cannot launch and must be reinstalled, you can back up its VM 
 
    Copy it to a safe location.
 
+1. Restore. 
+
+   After reinstalling Docker Desktop, restore the `Docker.raw` to the same location.
+
 {{< /tab >}}
 {{< /tabs >}}
