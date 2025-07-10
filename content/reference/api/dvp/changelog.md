@@ -3,7 +3,7 @@ description: Docker Verified Publisher API changelog
 title: Docker Verified Publisher API changelog
 linkTitle: Changelog
 keywords: docker dvp, dvp, whats new, release notes, api, changelog
-weight: 1
+weight: 2
 toc_min: 1
 toc_max: 2
 ---

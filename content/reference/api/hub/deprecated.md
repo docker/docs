@@ -3,7 +3,7 @@ description: Deprecated Docker Hub API endpoints
 keywords: deprecated
 title: Deprecated Docker Hub API endpoints
 linkTitle: Deprecated
-weight: 2
+weight: 3
 aliases:
     - /docker-hub/api/deprecated/
 ---

@@ -3,7 +3,7 @@ description: Deprecated Docker Verified Publisher API endpoints
 keywords: deprecated
 title: Deprecated Docker Verified Publisher API endpoints
 linkTitle: Deprecated
-weight: 2
+weight: 3
 ---
 
 This page provides an overview of endpoints that are deprecated in Docker Verified Publisher API.
