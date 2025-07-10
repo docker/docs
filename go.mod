@@ -16,10 +16,10 @@ require (
 	github.com/containerd/typeurl/v2 v2.2.3 // indirect
 	github.com/distribution/reference v0.6.0 // indirect
 	github.com/docker/buildx v0.25.0 // indirect
-	github.com/docker/cli v28.3.0+incompatible // indirect
+	github.com/docker/cli v28.3.1+incompatible // indirect
 	github.com/docker/compose/v2 v2.38.2 // indirect
 	github.com/docker/distribution v2.8.3+incompatible // indirect
-	github.com/docker/docker v28.3.0+incompatible // indirect
+	github.com/docker/docker v28.3.1+incompatible // indirect
 	github.com/docker/docker-credential-helpers v0.9.3 // indirect
 	github.com/docker/go-connections v0.5.0 // indirect
 	github.com/docker/go-units v0.5.0 // indirect
@@ -48,7 +48,7 @@ require (
 	github.com/mattn/go-runewidth v0.0.16 // indirect
 	github.com/mattn/go-shellwords v1.0.12 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
-	github.com/moby/buildkit v0.23.1 // indirect
+	github.com/moby/buildkit v0.23.2 // indirect
 	github.com/moby/docker-image-spec v1.3.1 // indirect
 	github.com/moby/locker v1.0.1 // indirect
 	github.com/moby/moby v28.3.2+incompatible // indirect
