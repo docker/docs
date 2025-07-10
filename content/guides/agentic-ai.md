@@ -49,7 +49,7 @@ shows how Docker ties them all together with the following tools:
 - [Docker Offload](/offload/) provides a powerful, GPU-accelerated
   environment to run your AI applications with the same Compose-based
   workflow you use locally.
-- [Docker Compose](../manuals/ai/compose/model-runner.md/) is the tool that ties it all
+- [Docker Compose](/manuals/ai/compose/models-and-compose.md) is the tool that ties it all
   together, letting you define and run multi-container applications with a
   single file.
 
@@ -64,7 +64,7 @@ works together.
 To follow this guide, you need to:
 
  - [Install Docker Desktop 4.43 or later](../get-started/get-docker.md)
- - [Enable Docker Model Runner](/ai/model-runner/#enable-dmr-in-docker-desktop)
+ - [Enable Docker Model Runner](/manuals/ai/model-runner.md#enable-dmr-in-docker-desktop)
  - [Join Docker Offload Beta](/offload/quickstart/)
 
 ## Step 1: Clone the sample application
@@ -384,7 +384,7 @@ that support local and cloud-based agentic AI development:
   tool integrations that follow the Model Context Protocol (MCP) standard.
 - [Docker MCP Gateway](/ai/mcp-gateway/): Orchestrate and manage
   MCP servers to connect agents to external tools and services.
-- [Docker Compose](../manuals/ai/compose/model-runner.md): Define and run
+- [Docker Compose](/manuals/ai/compose/models-and-compose.md): Define and run
   multi-container agentic AI applications with a single file, using the same
   workflow locally and in the cloud.
 - [Docker Offload](/offload/): Run GPU-intensive AI workloads in a secure, managed
