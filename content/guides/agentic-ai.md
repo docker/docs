@@ -139,7 +139,7 @@ Hardware requirements:
  - VRAM: 3.5 GB
  - Storage: 2.31 GB
 
-If your machine exceeds those requirements, consider running a with a larger
+If your machine exceeds those requirements, consider running the application with a larger
 context size or a larger model to improve the agents performance. You can easily
 update model and context size in the `compose.yaml` file.
 
