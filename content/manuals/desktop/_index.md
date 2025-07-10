@@ -65,6 +65,7 @@ Docker Desktop integrates with your preferred development tools and languages, a
 - [Docker Content Trust](/manuals/engine/security/trust/_index.md)
 - [Kubernetes](https://github.com/kubernetes/kubernetes/)
 - [Credential Helper](https://github.com/docker/docker-credential-helpers/)
+- [Docker Offload](/manuals/offload/_index.md)
 
 {{< /tab >}}
 {{< tab name="What are the key features of Docker Desktop?">}}

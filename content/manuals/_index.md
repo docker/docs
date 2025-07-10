@@ -58,6 +58,10 @@ params:
     description: Secure, minimal images for trusted software delivery.
     icon: /icons/dhi.svg
     link: /dhi/
+  - title: Docker Offload
+    description: Build and run containers in the cloud.
+    icon: cloud
+    link: /offload/
   - title: Build Cloud
     description: Build your images faster in the cloud.
     icon: /icons/logo-build-cloud.svg
