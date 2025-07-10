@@ -141,7 +141,7 @@ The CSV file contains the following columns:
 
 ### Invite uncaptured users
 
-You can invite all unacptured users to your organization using the exported
+You can invite all uncaptured users to your organization using the exported
 CSV file. For more information on bulk inviting users, see
 [Manage organization members](/manuals/admin/organization/members.md).
 
