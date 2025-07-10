@@ -29,11 +29,11 @@ To use Insights, you must meet the following requirements:
 - [Docker Business subscription](../../subscription/details.md#docker-business)
 - Administrators must [enforce sign-in](/security/for-admins/enforce-sign-in/)
 for users
-- Your Customer Success Manager must turn on Insights for your organization
+- Your Account Executive must turn on Insights for your organization
 
 ## View Insights for organization users
 
-To access Insights, contact your Customer Success Manager to have the
+To access Insights, contact your Account Executive to have the
 feature turned on. Once the feature is turned on, access Insights using the
 following steps:
 
