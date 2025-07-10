@@ -42,6 +42,8 @@ grid:
   icon: bug_report
   link: /offload/troubleshoot/
 
+aliases:
+- /harmonia/
 ---
 
 {{< summary-bar feature_name="Docker Offload" >}}
