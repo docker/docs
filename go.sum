@@ -42,12 +42,16 @@ github.com/docker/compose/v2 v2.37.3 h1:RKaTVsWmqvJd6GP9EWPZ6fu4ezl8tfG1V7bRijTo
 github.com/docker/compose/v2 v2.37.3/go.mod h1:U5PKGy7r7M7u2oVhz41NzlNglJFCdMrrThBOH5x00hk=
 github.com/docker/compose/v2 v2.38.1 h1:UNbMX6UbpdvdW3xjljD05fcL4jQmHGLh7y9VDgPp29Q=
 github.com/docker/compose/v2 v2.38.1/go.mod h1:0Jn/JGDGghZ9JlhY4DJY2/Cs15EDIH2nnagA66Lu3Dw=
+github.com/docker/compose/v2 v2.38.2 h1:yY3jocdj1JkHbSgAyGaDLAh8fKOykZ8LVPitNOyo9/0=
+github.com/docker/compose/v2 v2.38.2/go.mod h1:zigTfE9jJq/wFZPUCbNJtOC2YpSXBn0d3Xm/8EOs3Rk=
 github.com/docker/distribution v2.8.3+incompatible h1:AtKxIZ36LoNK51+Z6RpzLpddBirtxJnzDrHLEKxTAYk=
 github.com/docker/distribution v2.8.3+incompatible/go.mod h1:J2gT2udsDAN96Uj4KfcMRqY0/ypR+oyYUYmja8H+y+w=
 github.com/docker/docker v28.2.2+incompatible h1:CjwRSksz8Yo4+RmQ339Dp/D2tGO5JxwYeqtMOEe0LDw=
 github.com/docker/docker v28.2.2+incompatible/go.mod h1:eEKB0N0r5NX/I1kEveEz05bcu8tLC/8azJZsviup8Sk=
 github.com/docker/docker v28.3.0+incompatible h1:ffS62aKWupCWdvcee7nBU9fhnmknOqDPaJAMtfK0ImQ=
 github.com/docker/docker v28.3.0+incompatible/go.mod h1:eEKB0N0r5NX/I1kEveEz05bcu8tLC/8azJZsviup8Sk=
+github.com/docker/docker v28.3.1+incompatible h1:20+BmuA9FXlCX4ByQ0vYJcUEnOmRM6XljDnFWR+jCyY=
+github.com/docker/docker v28.3.1+incompatible/go.mod h1:eEKB0N0r5NX/I1kEveEz05bcu8tLC/8azJZsviup8Sk=
 github.com/docker/docker-credential-helpers v0.9.3 h1:gAm/VtF9wgqJMoxzT3Gj5p4AqIjCBS4wrsOh9yRqcz8=
 github.com/docker/docker-credential-helpers v0.9.3/go.mod h1:x+4Gbw9aGmChi3qTLZj8Dfn0TD20M/fuWy0E5+WDeCo=
 github.com/docker/go-connections v0.5.0 h1:USnMq7hx7gwdVZq1L49hLXaFtUdTADjXGp+uj1Br63c=
