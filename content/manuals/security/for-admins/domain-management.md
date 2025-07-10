@@ -103,6 +103,48 @@ and configure the domain for the organization at the company level.
 **Delete domain**.
 1. To confirm, select **Delete domain** in the pop-up modal.
 
+## Audit domains
+
+{{< summary-bar feature_name="Domain audit" >}}
+
+The domain audit feature identifies uncapture users in an organization.
+Uncaptured users are Docker users who have authenticated to Docker
+using an email address associated with one of your verified domains,
+but they're not a member of your Docker organization.
+
+### Known limitations
+
+Domain audit can't identify the following Docker users:
+
+- Users who access Docker Desktop without authenticating
+- Users who authenticate using an account that doesn't have an
+email address associated with one of your verified domains.
+
+Although domain audit can't identify all Docker users,
+you can enforce sign-in to prevent unidentifiable users from accessing
+Docker Desktop in your environment. For more information,
+see [Enforce sign-in](/manuals/security/for-admins/enforce-sign-in.md).
+
+### Audit your domain for uncaptured users
+
+1. Sign in to [Docker Home](https://app.docker.com) and choose your
+company.
+1. Select **Admin Console**, then **Domain management**.
+1. In **Domain audit**, select **Export Users** to export a CSV file
+of uncaptured users.
+
+The CSV file contains the following columns:
+
+    - Name: Name of the Docker user
+    - Username: Docker ID of the Docker user
+    - Email: Email address of the Docker user
+
+### Invite uncaptured users
+
+You can invite all unacptured users to your organization using the exported
+CSV file. For more information on bulk inviting users, see
+[Manage organization members](/manuals/admin/organization/members.md).
+
 ## Auto-provisioning
 
 You must add and verify a domain before enabling auto-provisioning. This

@@ -178,6 +178,9 @@ Docker Scout Mount Permissions:
 Domain management:
   subscription: [Business]
   for: Administrators
+Domain audit:
+  subscription: [Business]
+  for: Administrators
 Enforce sign-in:
   subscription: [Team, Business]
   for: Administrators
