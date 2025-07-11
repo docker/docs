@@ -42,6 +42,11 @@ grid:
   icon: bug_report
   link: /offload/troubleshoot/
 
+- title: Feedback
+  description: Provide feedback on Docker Offload.
+  icon: feedback
+  link: /offload/feedback/
+
 aliases:
 - /harmonia/
 ---
