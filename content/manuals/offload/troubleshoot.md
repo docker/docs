@@ -1,7 +1,7 @@
 ---
 title: Troubleshoot Docker Offload
 linktitle: Troubleshoot
-weight: 999
+weight: 800
 description: Learn how to troubleshoot issues with Docker Offload.
 keywords: cloud, troubleshooting, cloud mode, Docker Desktop, cloud builder, usage
 tags: [Troubleshooting]
