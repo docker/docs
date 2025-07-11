@@ -1,6 +1,6 @@
 ---
 title: Base images
-weight: 70
+weight: 80
 description: Learn about base images and how they're created
 keywords: images, base image, examples
 aliases:
