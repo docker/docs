@@ -93,6 +93,16 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: secrets
+      value_type: bool
+      default_value: "false"
+      description: Scan for secrets in the image
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
 inherited_options:
     - option: debug
       value_type: bool
