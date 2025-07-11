@@ -54,4 +54,4 @@ The following objects are shown in the diagram.
   
    > [!NOTE]
    >
-   > If you would like to delete in bulk, you can use the [deletion API endpoint](https://docs.docker.com/reference/api/registry/latest/#tag/delete)).
+   > If you would like to delete in bulk, you can use the [deletion API endpoint](/reference/api/registry/latest/#tag/delete).
