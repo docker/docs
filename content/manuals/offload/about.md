@@ -23,7 +23,6 @@ Docker Offload includes the following capabilities to support modern container
 workflows:
 
 - Cloud-based builds: Execute builds on remote, fully managed BuildKit instances
-  with native support for multi-platform output.
 - GPU acceleration: Use NVIDIA L4 GPU-backed environments for machine learning,
   media processing, and other compute-intensive workloads.
 - Ephemeral cloud runners: Automatically provision and tear down cloud
@@ -74,8 +73,6 @@ The build runs on infrastructure provisioned and managed by Docker:
 - Each cloud builder is an isolated Amazon EC2 instance with its own EBS volume
 - Remote builders use a shared cache to speed up builds across machines and
   teammates
-- Builds support native multi-platform output (for example, `linux/amd64`,
-  `linux/arm64`)
 - Build results are encrypted in transit and sent to your specified destination
   (such as a registry or local image store)
 
