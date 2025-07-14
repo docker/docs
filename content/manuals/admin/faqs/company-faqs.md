@@ -46,4 +46,4 @@ subscription seat.
 Company owners can navigate to the **Organizations** page to view all their
 nested organizations in a single location. They can also view or edit organization members and change single sign-on (SSO) and System for Cross-domain Identity Management (SCIM) settings. Changes to company settings impact all users in each organization under the company.
 
-For more information, see [Roles and permissions](/manuals/enterprise/security/roles-and-permissions.md).
+For more information, see [Roles and permissions](../../security/for-admins/roles-and-permissions.md).

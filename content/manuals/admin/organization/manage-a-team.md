@@ -32,7 +32,7 @@ An organization owner is an administrator who has the following permissions:
 organization settings
 - Specify [permissions](#permissions-reference) for each team in the
 organization
-- Enable [SSO](/manuals/enterprise/security/single-sign-on/_index.md) for the
+- Enable [SSO](../../security/for-admins/single-sign-on/_index.md) for the
 organization
 
 When SSO is enabled for your organization, the organization owner can
@@ -44,7 +44,7 @@ Organization owners can add others with the owner role to help them
 manage users, teams, and repositories in the organization.
 
 For more information on roles, see
-[Roles and permissions](/manuals/enterprise/security/roles-and-permissions.md).
+[Roles and permissions](/manuals/security/for-admins/roles-and-permissions.md).
 
 ## Create a team
 
@@ -92,7 +92,7 @@ access for.
 
 Organization owners can also assign members the editor role to grant partial
 administrative access. For more information on the editor role, see
-[Roles and permissions](/manuals/enterprise/security/roles-and-permissions.md).
+[Roles and permissions](../../security/for-admins/roles-and-permissions.md).
 
 ### Permissions reference
 

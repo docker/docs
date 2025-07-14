@@ -273,7 +273,7 @@ The `install` command accepts the following flags:
 ##### Security and access control
 
 - `--allowed-org=<org name>`: Requires the user to sign in and be part of the specified Docker Hub organization when running the application
-- `--admin-settings`: Automatically creates an `admin-settings.json` file which is used by admins to control certain Docker Desktop settings on client machines within their organization. For more information, see [Settings Management](/manuals/enterprise/security/hardened-desktop/settings-management/_index.md).
+- `--admin-settings`: Automatically creates an `admin-settings.json` file which is used by admins to control certain Docker Desktop settings on client machines within their organization. For more information, see [Settings Management](/manuals/security/for-admins/hardened-desktop/settings-management/_index.md).
   - It must be used together with the `--allowed-org=<org name>` flag. 
   - For example:`--allowed-org=<org name> --admin-settings="{'configurationFileVersion': 2, 'enhancedContainerIsolation': {'value': true, 'locked': false}}"`
 - `--no-windows-containers`: Disables the Windows containers integration. This can improve security. For more information, see [Windows containers](/manuals/desktop/setup/install/windows-permission-requirements.md#windows-containers).
@@ -310,7 +310,7 @@ Docker Desktop does not start automatically after installation. To start Docker 
 
 > [!TIP]
 >
-> As an IT administrator, you can use endpoint management (MDM) software to identify the number of Docker Desktop instances and their versions within your environment. This can provide accurate license reporting, help ensure your machines use the latest version of Docker Desktop, and enable you to [enforce sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md).
+> As an IT administrator, you can use endpoint management (MDM) software to identify the number of Docker Desktop instances and their versions within your environment. This can provide accurate license reporting, help ensure your machines use the latest version of Docker Desktop, and enable you to [enforce sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md).
 > - [Intune](https://learn.microsoft.com/en-us/mem/intune/apps/app-discovered-apps)
 > - [Jamf](https://docs.jamf.com/10.25.0/jamf-pro/administrator-guide/Application_Usage.html)
 > - [Kandji](https://support.kandji.io/support/solutions/articles/72000559793-view-a-device-application-list)

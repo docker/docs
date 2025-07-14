@@ -29,7 +29,7 @@ select your organization.
 
 After configuring your organization information, you can:
 
-- [Configure single sign-on (SSO)](/manuals/enterprise/security/single-sign-on/configure.md)
-- [Set up SCIM provisioning](/manuals/enterprise/security/provisioning/scim.md)
-- [Manage domains](/manuals/enterprise/security/domain-management.md)
+- [Configure single sign-on (SSO)](../../security/for-admins/single-sign-on/configure/)
+- [Set up SCIM provisioning](../../security/for-admins/provisioning/scim.md)
+- [Manage domains](../../security/for-admins/domain-management.md)
 - [Create a company](new-company.md)
