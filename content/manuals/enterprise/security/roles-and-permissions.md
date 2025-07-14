@@ -131,3 +131,4 @@ member, editor, and owner roles.
 | Configure builder settings   | ✅     | ✅     | ✅                 |
 | Buy minutes                  | ❌     | ❌     | ✅                 |
 | Manage subscription          | ❌     | ❌     | ✅                 |
+
