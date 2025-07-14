@@ -53,12 +53,12 @@ An organization owner is a member who has administrator permissions. They
 have full access to private repositories, all teams, billing information, and
 organization settings.
 
-For more information on the organization owner role, see [Roles and permissions](/manuals/enterprise/security/roles-and-permissions.md).
+For more information on the organization owner role, see [Roles and permissions](/manuals/security/for-admins/roles-and-permissions.md).
 
 ### Can I configure multiple SSO identity providers (IdPs) to authenticate users to a single org?
 
 Yes. Docker SSO supports multiple IdP configurations. For more
-information, see [Configure SSO](/manuals/enterprise/security/single-sign-on/configure.md) and [SSO FAQs](../../security/faqs/single-sign-on/faqs.md).
+information, see [Configure SSO](../../security/for-admins/single-sign-on/configure/_index.md) and [SSO FAQs](../../security/faqs/single-sign-on/faqs.md).
 
 ### What is a service account?
 
@@ -68,7 +68,7 @@ or renewals of service accounts are no longer available and customers must renew
 under a new subscription.
 
 For similar functionality,
-transition to [Organization access tokens](/manuals/enterprise/security/access-tokens.md).
+transition to [Organization access tokens](/manuals/security/for-admins/access-tokens.md).
 
 ### Can I delete or deactivate a Docker account for another user?
 

@@ -146,7 +146,7 @@ configure your organization.
 - **Settings**: Displays information about your
   organization, and you to view and change your repository privacy
   settings, configure org permissions such as
-  [Image Access Management](/manuals/enterprise/security/hardened-desktop/image-access-management.md), configure notification settings, and [deactivate](/manuals/admin/organization/deactivate-account.md#deactivate-an-organization) You can also update your organization name and company name that appear on your organization landing page. You must be an owner to access the organization's **Settings** page.
+  [Image Access Management](/manuals/security/for-admins/hardened-desktop/image-access-management.md), configure notification settings, and [deactivate](/manuals/admin/organization/deactivate-account.md#deactivate-an-organization) You can also update your organization name and company name that appear on your organization landing page. You must be an owner to access the organization's **Settings** page.
 - **Billing**: Displays information about your existing
   [Docker subscription](../../subscription/_index.md), including the number of seats and next payment due date. For how to access the billing history and payment methods for your organization, see [View billing history](../../billing/history.md).
 

@@ -37,7 +37,7 @@ If users attempt to sign in through the CLI, they must authenticate using a pers
 
 ### Is it possible to force users of Docker Desktop to authenticate, and/or authenticate using their company’s domain?
 
-Yes. Admins can [force users to authenticate with Docker Desktop](/manuals/enterprise/security/enforce-sign-in/_index.md) using a registry key, `.plist` file, or `registry.json` file. 
+Yes. Admins can [force users to authenticate with Docker Desktop](../../for-admins/enforce-sign-in/_index.md) using a registry key, `.plist` file, or `registry.json` file. 
 
 Once SSO enforcement is set up on their Docker Business organization or company on Hub, when the user is forced to authenticate with Docker Desktop, the SSO enforcement will also force users to authenticate through SSO with their IdP (instead of authenticating using their username and password).
 
@@ -52,7 +52,7 @@ Yes, you can convert existing users to an SSO account. To convert users from a n
 - Each user has created a PAT to replace their passwords to allow them to sign in through Docker CLI.
 - Confirm that all CI/CD pipelines automation systems have replaced their passwords with PATs.
 
-For detailed prerequisites and instructions on how to enable SSO, see [Configure Single Sign-on](/manuals/enterprise/security/single-sign-on/configure.md).
+For detailed prerequisites and instructions on how to enable SSO, see [Configure Single Sign-on](../../../security/for-admins/single-sign-on/configure/_index.md).
 
 ### What impact can users expect once we start onboarding them to SSO accounts?
 
@@ -62,7 +62,7 @@ When SSO is enabled and enforced, your users just have to sign in using the veri
 
 Docker SSO provides Just-in-Time (JIT) provisioning by default, with an option to disable JIT. Users are provisioned when a user authenticates with SSO. If a user leaves the organization, administrators must sign in to Docker and manually [remove the user](../../../admin/organization/members.md#remove-a-member-or-invitee) from the organization.
 
-[SCIM](/manuals/enterprise/security/provisioning/scim.md) is available to provide full synchronization with users and groups. When you auto-provision users with SCIM, the recommended configuration is to disable JIT so that all auto-provisioning is handled by SCIM.
+[SCIM](../../../security/for-admins/provisioning/scim/) is available to provide full synchronization with users and groups. When you auto-provision users with SCIM, the recommended configuration is to disable JIT so that all auto-provisioning is handled by SCIM.
 
 Additionally, you can use the [Docker Hub API](/reference/api/hub/latest/) to complete this process.
 
@@ -70,9 +70,9 @@ Additionally, you can use the [Docker Hub API](/reference/api/hub/latest/) to co
 
 The option to disable JIT is available when you use the Admin Console and enable SCIM. If a user attempts to sign in to Docker using an email address that is a verified domain for your SSO connection, they need to be a member of the organization to access it, or have a pending invitation to the organization. Users who don't meet these criteria will encounter an `Access denied` error, and will need an administrator to invite them to the organization.
 
-See [SSO authentication with JIT provisioning disabled](/manuals/enterprise/security/provisioning/just-in-time.md#sso-authentication-with-jit-provisioning-disabled).
+See [SSO authentication with JIT provisioning disabled](/security/for-admins/provisioning/just-in-time/#sso-authentication-with-jit-provisioning-disabled).
 
-To auto-provision users without JIT provisioning, you can use [SCIM](/manuals/enterprise/security/provisioning/scim.md).
+To auto-provision users without JIT provisioning, you can use [SCIM](/security/for-admins/provisioning/scim/).
 
 ### What's the best way to provision the Docker subscription without SSO?
 

@@ -31,9 +31,9 @@ subscription, see
 
 To manage Docker Desktop access:
 
-1. [Enforce sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md).
+1. [Enforce sign-in](../../security/for-admins/enforce-sign-in/_index.md).
 1. Manage members [manually](./members.md) or use
-[provisioning](/manuals/enterprise/security/provisioning/_index.md).
+[provisioning](../../security/for-admins/provisioning/_index.md).
 
 With sign-in enforced, only users who are a member of your organization can
 use Docker Desktop after signing in.
@@ -44,8 +44,8 @@ use Docker Desktop after signing in.
 ### Manage Docker Hub access
 
 To manage Docker Hub access, sign in to
-[Docker Home](https://app.docker.com/) and configure [Registry Access Management](/manuals/enterprise/security/hardened-desktop/registry-access-management.md)
-or [Image Access Management](/manuals/enterprise/security/hardened-desktop/image-access-management.md).
+[Docker Home](https://app.docker.com/) and configure [Registry Access Management](../../security/for-admins/hardened-desktop/registry-access-management.md)
+or [Image Access Management](../../security/for-admins/hardened-desktop/image-access-management.md).
 
 {{< /tab >}}
 {{< tab name="Docker Build Cloud" >}}
@@ -80,7 +80,7 @@ owner.
 **Repository settings**. For more information on,
 see [repository settings](../../scout/explore/dashboard.md#repository-settings).
 1. To manage access to Docker Scout for use on local images with Docker Desktop,
-use [Settings Management](/manuals/enterprise/security/hardened-desktop/settings-management/_index.md)
+use [Settings Management](../../security/for-admins/hardened-desktop/settings-management/_index.md)
 and set `sbomIndexing` to `false` to disable, or to `true` to enable.
 
 {{< /tab >}}
