@@ -250,4 +250,4 @@ When analytics is disabled, this key is set to `1`.
 
 ## Additional resources
 
-- [Explore the FAQs](faq.md)
+- [Explore the FAQs](/manuals/desktop/setup/install/enterprise-deployment/faq.md)

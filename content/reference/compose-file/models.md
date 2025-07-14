@@ -2,7 +2,7 @@
 title: Models
 description: Learn about the models top-level element
 keywords: compose, compose specification, models, compose file reference
-weight: 120
+weight: 130
 ---
 
 {{< summary-bar feature_name="Compose models" >}}

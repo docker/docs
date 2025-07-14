@@ -137,9 +137,9 @@ Docker Build Cloud:
   subscription: [Pro, Team, Business]
 Docker CLI OpenTelemetry:
   requires: Docker Engine [26.1.0](/manuals/engine/release-notes/26.1.md#2610) and later
-Docker Cloud:
+Docker Offload:
   availability: Beta
-  requires: Docker Desktop 4.42 and later
+  requires: Docker Desktop 4.43 and later
 docker compose alpha:
   availability: Experimental
 Docker Debug:
@@ -176,6 +176,9 @@ Docker Scout health scores:
 Docker Scout Mount Permissions:
   requires: Docker Desktop [4.34.0](/manuals/desktop/release-notes.md#4340) and later
 Domain management:
+  subscription: [Business]
+  for: Administrators
+Domain audit:
   subscription: [Business]
   for: Administrators
 Enforce sign-in:

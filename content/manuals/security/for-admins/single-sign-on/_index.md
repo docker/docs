@@ -48,4 +48,4 @@ Before configuring SSO, ensure you meet the following prerequisites:
 ## What's next?
 
 - Start [configuring SSO](../../for-admins/single-sign-on/configure.md) in Docker
-- Explore the [FAQs](../../../security/faqs/single-sign-on/_index.md)
+- Explore the [FAQs](../../../security/faqs/single-sign-on/faqs.md)

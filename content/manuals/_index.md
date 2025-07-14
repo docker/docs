@@ -31,6 +31,11 @@ params:
     description: Run containers programmatically in your preferred programming language.
     icon: /icons/Testcontainers.svg
     link: /testcontainers/
+  - title: MCP Gateway
+    description: Manage and secure your AI tools with a single gateway.
+    icon: /icons/toolkit.svg
+    link: /ai/mcp-gateway/
+    
   ai:
   - title: Ask Gordon
     description: Streamline your workflow and get the most out of the Docker ecosystem with your personal AI assistant.
@@ -53,6 +58,10 @@ params:
     description: Secure, minimal images for trusted software delivery.
     icon: /icons/dhi.svg
     link: /dhi/
+  - title: Docker Offload
+    description: Build and run containers in the cloud.
+    icon: cloud
+    link: /offload/
   - title: Build Cloud
     description: Build your images faster in the cloud.
     icon: /icons/logo-build-cloud.svg
