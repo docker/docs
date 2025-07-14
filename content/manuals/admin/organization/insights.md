@@ -175,7 +175,7 @@ A Docker Desktop user export file contains the following data points:
 - Username: User's Docker ID
 - Email: User's email address associated with their Docker ID
 - Type: User type
-- Role: User [role](/manuals/security/for-admins/roles-and-permissions.md)
+- Role: User [role](/manuals/enterprise/security/roles-and-permissions.md)
 - Teams: Team(s) within your organization the user is a
 member of
 - Date Joined: The date the user joined your organization
@@ -185,7 +185,7 @@ their web browser (this includes Docker Hub and Docker Home)
 installed
 - Last Seen Date: The last date the user used the Docker Desktop application
 - Opted Out Analytics: Whether the user has opted out of the
-[Send usage statistics](/manuals/security/for-admins/hardened-desktop/settings-management/settings-reference.md#send-usage-statistics) setting in Docker Desktop
+[Send usage statistics](/manuals/enterprise/security/hardened-desktop/settings-management/settings-reference.md#send-usage-statistics) setting in Docker Desktop
 
 ## Troubleshoot Insights
 

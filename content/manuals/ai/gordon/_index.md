@@ -226,7 +226,7 @@ If you've enabled Ask Gordon and you want to disable it again:
 
 If you want to disable Ask Gordon for your entire Docker organization, using
 [Settings
-Management](/manuals/security/for-admins/hardened-desktop/settings-management/_index.md),
+Management](/manuals/enterprise/security/hardened-desktop/settings-management/_index.md),
 add the following property to your `admin-settings.json` file:
 
 ```json

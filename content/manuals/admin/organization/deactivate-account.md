@@ -28,7 +28,7 @@ organization:
 - If you have an active Docker subscription, [downgrade it to a free subscription](../../subscription/change.md).
 - Remove all other members within the organization.
 - Unlink your [GitHub and Bitbucket accounts](../../docker-hub/repos/manage/builds/link-source.md#unlink-a-github-user-account).
-- For Business organizations, [remove your SSO connection](../../security/for-admins/single-sign-on/manage/#remove-an-organization).
+- For Business organizations, [remove your SSO connection](/manuals/enterprise/security/single-sign-on/manage.md#remove-an-organization).
 
 ## Deactivate
 
