@@ -3,7 +3,10 @@ title: Docker MCP Catalog and Toolkit
 linkTitle: MCP Catalog and Toolkit
 params:
   sidebar:
-    group: AI
+    group:
+     - AI
+     - Products
+     - Desktop
     badge:
       color: blue
       text: Beta

@@ -1,0 +1,163 @@
+{{ define "left" }}
+  {{ if eq .RelPermalink "/manuals/" }}
+    {{ partial "sidebar/mainnav.html" . }}
+
+    {{ $section := .Site.GetPage "section" "manuals" }}
+
+    {{/* Create group-to-count map */}}
+    {{ $groupCounts := dict }}
+
+    {{/* Count all manuals (no dupes) */}}
+    {{ $seen := slice }}
+    {{ $allCount := 0 }}
+    {{ range $p := $section.Pages }}
+      {{ if not (in $seen $p.Permalink) }}
+        {{ $seen = $seen | append $p.Permalink }}
+        {{ $allCount = add $allCount 1 }}
+      {{ end }}
+    {{ end }}
+    {{ $groupCounts = merge $groupCounts (dict "All" $allCount) }}
+
+    {{/* Count per group */}}
+    {{ range $group := $section.Params.sidebar.groups }}
+      {{ $count := 0 }}
+      {{ range $p := $section.Pages }}
+        {{ $pageGroups := slice }}
+        {{ if reflect.IsSlice $p.Params.sidebar.group }}
+          {{ $pageGroups = $p.Params.sidebar.group }}
+        {{ else if $p.Params.sidebar.group }}
+          {{ $pageGroups = slice $p.Params.sidebar.group }}
+        {{ end }}
+        {{ if in $pageGroups $group }}
+          {{ $count = add $count 1 }}
+        {{ end }}
+      {{ end }}
+      {{ $groupCounts = merge $groupCounts (dict $group $count) }}
+    {{ end }}
+
+    <nav
+      class="navbar-font flex flex-col gap-4 p-4 text-sm"
+      x-data="{
+        selected: '',
+        select(group) {
+          this.selected = group;
+          const url = new URL(window.location.href);
+          url.searchParams.set('group', group);
+          window.history.replaceState({}, '', url);
+          this.$dispatch('group-selected', { group });
+        },
+        init() {
+          const url = new URL(window.location.href);
+          const group = url.searchParams.get('group') || 'All';
+          this.selected = group;
+          this.$nextTick(() => {
+            this.$dispatch('group-selected', { group: this.selected });
+          });
+        }
+      }"
+    >
+      <p class="font-semibold">Product category</p>
+      <ul class="space-y-2">
+        {{ $groups := slice "All" | append $section.Params.sidebar.groups }}
+        {{ range $group := $groups }}
+          <li>
+            <button
+              @click="select('{{ $group }}')"
+              :class="{ 'font-bold': selected === '{{ $group }}' }"
+              class="hover:underline text-left w-full"
+            >
+              {{ $group }} ({{ index $groupCounts $group }})
+            </button>
+          </li>
+        {{ end }}
+      </ul>
+    </nav>
+  {{ else }}
+    {{ partial "sidebar/mainnav.html" . }}
+    {{ partial "sidebar/sections.html" . }}
+  {{ end }}
+{{ end }}
+
+
+{{ define "main" }}
+  {{ if eq .RelPermalink "/manuals/" }}
+    <article
+      class="prose max-w-none"
+      x-data="{
+        manuals: [],
+        all: JSON.parse(document.getElementById('manuals-data').textContent),
+        init() {
+          const url = new URL(window.location.href);
+          const group = url.searchParams.get('group') || 'All';
+          this.manuals = this.all[group] || [];
+        }
+      }"
+      @group-selected.window="manuals = all[$event.detail.group] || []"
+    >
+      <h1>{{ .Title }}</h1>
+
+      <template x-if="manuals.length === 0">
+        <p>Select a group from the left to view its manuals.</p>
+      </template>
+
+      <template x-if="manuals.length > 0">
+        <section>
+          <ul class="list-disc ml-6">
+            <template x-for="item in manuals" :key="item.url">
+              <li>
+                <a class="hover:underline" :href="item.url" x-text="item.title"></a>
+              </li>
+            </template>
+          </ul>
+        </section>
+      </template>
+
+      <script type="application/json" id="manuals-data">
+      {
+        {{- $section := .Site.GetPage "section" "manuals" }}
+        "All": [
+          {{- $seen := slice }}
+          {{- $innerFirst := true }}
+          {{- range $p := $section.Pages }}
+            {{- if not (in $seen $p.Permalink) }}
+              {{- if not $innerFirst }},{{ end }}
+              {
+                "title": "{{ $p.LinkTitle | htmlEscape }}",
+                "url": "{{ $p.Permalink }}"
+              }
+              {{- $seen = $seen | append $p.Permalink }}
+              {{- $innerFirst = false }}
+            {{- end }}
+          {{- end }}
+        ],
+        {{- $first := true }}
+        {{- range $group := $section.Params.sidebar.groups }}
+          {{- if not $first }},{{ end }}
+          "{{ $group }}": [
+            {{- $inner := true }}
+            {{- range $p := $section.Pages }}
+              {{- $pageGroups := slice }}
+              {{- if reflect.IsSlice $p.Params.sidebar.group }}
+                {{- $pageGroups = $p.Params.sidebar.group }}
+              {{- else if $p.Params.sidebar.group }}
+                {{- $pageGroups = slice $p.Params.sidebar.group }}
+              {{- end }}
+              {{- if in $pageGroups $group }}
+                {{- if not $inner }},{{ end }}
+                {
+                  "title": "{{ $p.LinkTitle | htmlEscape }}",
+                  "url": "{{ $p.Permalink }}"
+                }
+                {{- $inner = false }}
+              {{- end }}
+            {{- end }}
+          ]
+          {{- $first = false }}
+        {{- end }}
+      }
+      </script>
+    </article>
+  {{ else }}
+    {{ partial "content-default.html" . }}
+  {{ end }}
+{{ end }}

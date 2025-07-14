@@ -13,6 +13,7 @@ params:
       - AI
       - Products
       - Platform
+      - Desktop
   notoc: true
   open-source:
   - title: Docker Build
