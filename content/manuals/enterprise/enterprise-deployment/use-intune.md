@@ -5,8 +5,9 @@ keywords: microsoft, windows, docker desktop, deploy, mdm, enterprise, administr
 tags: [admin]
 weight: 40
 aliases:
-- /desktop/install/msi/use-intune/
-- /desktop/setup/install/msi/use-intune/
+ - /desktop/install/msi/use-intune/
+ - /desktop/setup/install/msi/use-intune/
+ - /desktop/setup/install/enterprise-deployment/use-intune/
 ---
 
 {{< summary-bar feature_name="Intune" >}}

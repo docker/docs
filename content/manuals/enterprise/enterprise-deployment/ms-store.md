@@ -5,6 +5,8 @@ description: Install Docker Desktop for Windows through the Microsoft Store. Und
 keywords: microsoft store, windows, docker desktop, install, deploy, configure, admin, mdm, intune, winget
 tags: [admin]
 weight: 30
+aliases: 
+ - /desktop/setup/install/enterprise-deployment/ms-store/
 ---
 
 You can deploy Docker Desktop for Windows through the [Microsoft app store](https://apps.microsoft.com/detail/xp8cbj40xlbwkx?hl=en-GB&gl=GB).

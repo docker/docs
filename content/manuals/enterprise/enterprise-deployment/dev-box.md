@@ -3,8 +3,10 @@ Title: Docker Desktop in Microsoft Dev Box
 linkTitle: Microsoft Dev Box
 description: Learn about the benefits of and  how to setup Docker Desktop in Microsoft Dev Box
 keywords: desktop, docker, windows, microsoft dev box
+weight: 60
 aliases:
  - /desktop/features/dev-box/
+ - /desktop/setup/install/enterprise-deployment/dev-box/
 ---
 
 Docker Desktop is available as a pre-configured image in the Microsoft Azure Marketplace for use with Microsoft Dev Box, allowing developers to quickly set up consistent development environments in the cloud.

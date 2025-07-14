@@ -5,10 +5,11 @@ keywords: msi, windows, docker desktop, install, deploy, configure, admin, mdm
 tags: [admin]
 weight: 10
 aliases:
-- /desktop/install/msi/install-and-configure/
-- /desktop/setup/install/msi/install-and-configure/
-- /desktop/install/msi/
-- /desktop/setup/install/msi/
+ - /desktop/install/msi/install-and-configure/
+ - /desktop/setup/install/msi/install-and-configure/
+ - /desktop/install/msi/
+ - /desktop/setup/install/msi/
+ - /desktop/setup/install/enterprise-deployment/msi-install-and-configure/
 ---
 
 {{< summary-bar feature_name="MSI installer" >}}
@@ -250,4 +251,4 @@ When analytics is disabled, this key is set to `1`.
 
 ## Additional resources
 
-- [Explore the FAQs](/manuals/desktop/setup/install/enterprise-deployment/faq.md)
+- [Explore the FAQs](/manuals/enterprise/enterprise-deployment/faq.md)
