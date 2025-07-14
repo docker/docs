@@ -30,7 +30,7 @@ Docker supports some special template markup you can use when specifying a tag's
 
 For example, specifying a `--log-opt tag="{{.ImageName}}/{{.Name}}/{{.ID}}"` value yields `syslog` log lines like:
 
-```none
+```text
 Aug  7 18:33:19 HOSTNAME hello-world/foobar/5790672ab6a0[9103]: Hello from Docker.
 ```
 
