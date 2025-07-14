@@ -72,8 +72,8 @@
         bubbles: true,
         cancelable: true,
       });
-      // Trigger the input event for the search input
-      searchInput.dispatchEvent(event);
+      // Directly call the search function
+      await onPageSearch({ target: { value: query } });
       searchInput.focus();
     });
 
