@@ -48,4 +48,4 @@ The PKG package supports various MDM (Mobile Device Management) solutions, makin
 ## Additional resources
 
 - See how you can deploy Docker Desktop for Mac using [Intune](use-intune.md) or [Jamf Pro](use-jamf-pro.md)
-- Explore how to [Enforce sign-in](/manuals/security/for-admins/enforce-sign-in/methods.md#plist-method-mac-only) for your users.
+- Explore how to [Enforce sign-in](/manuals/enterprise/security/enforce-sign-in/methods.md#plist-method-mac-only) for your users.

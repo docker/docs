@@ -36,7 +36,7 @@ By default, Docker uses tokens to manage sessions after a user signs in:
 - Docker Desktop signs you out after 90 days, or 30 days of inactivity.
 - Docker Hub and Docker Home sign you out after 24 hours.
 
-Docker also supports your IdP's default session timeout. You can configure this by setting a Docker session minutes SAML attribute. For more information, see [SSO attributes](/manuals/security/for-admins/provisioning/_index.md#sso-attributes).
+Docker also supports your IdP's default session timeout. You can configure this by setting a Docker session minutes SAML attribute. For more information, see [SSO attributes](/manuals/enterprise/security/provisioning/_index.md#sso-attributes).
 
 ### How does Docker attribute downloads to us and what data is used to classify or verify the user is part of our organization?
 
@@ -89,4 +89,4 @@ Extensions are not covered as part of Docker’s Third-Party Risk Management Pro
 
 ### Can I disable private repos in my organization via a setting to make sure nobody is pushing images into Docker Hub?
 
-No. With [Registry Access Management](/manuals/security/for-admins/hardened-desktop/registry-access-management.md) (RAM), administrators can ensure that their developers using Docker Desktop only access allowed registries. This is done through the Registry Access Management dashboard in the Admin Console.
+No. With [Registry Access Management](/manuals/enterprise/security/hardened-desktop/registry-access-management.md) (RAM), administrators can ensure that their developers using Docker Desktop only access allowed registries. This is done through the Registry Access Management dashboard in the Admin Console.

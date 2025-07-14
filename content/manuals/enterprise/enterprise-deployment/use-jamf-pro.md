@@ -31,4 +31,4 @@ For more information, see [Jamf Pro's official documentation](https://learn.jamf
 
 ## Additional resources
 
-- Learn how to [enforce sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md) for your users.
+- Learn how to [enforce sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md) for your users.

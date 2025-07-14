@@ -36,7 +36,7 @@ See [Loading build results](./usage/#loading-build-results) for details.
 
 To enable your CI/CD system to build and push images using Docker Build Cloud, provide both an access token and a username. The type of token and the username you use depend on your account type and permissions.
 
-- If you are an organization administrator or have permission to create [organization access tokens (OAT)](../security/for-admins/access-tokens.md), use an OAT and set `DOCKER_ACCOUNT` to your Docker Hub organization name.
+- If you are an organization administrator or have permission to create [organization access tokens (OAT)](/manuals/enterprise/security/access-tokens.md), use an OAT and set `DOCKER_ACCOUNT` to your Docker Hub organization name.
 - If you do not have permission to create OATs or are using a personal account, use a [personal access token (PAT)](/security/for-developers/access-tokens/) and set `DOCKER_ACCOUNT` to your Docker Hub username.
 
 ### Creating access tokens
@@ -45,7 +45,7 @@ To enable your CI/CD system to build and push images using Docker Build Cloud, p
 
 If you are an organization administrator:
 
-- Create an [organization access token (OAT)](../security/for-admins/access-tokens.md). The token must have these permissions:
+- Create an [organization access token (OAT)](/manuals/enterprise/security/access-tokens.md). The token must have these permissions:
     1. **cloud-connect** scope
     2. **Read public repositories** permission
     3. **Repository access** with **Image push** permission for the target repository:
