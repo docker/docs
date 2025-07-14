@@ -112,7 +112,7 @@ If you have SCIM enabled, troubleshoot your SCIM connection using the following 
 1. Navigate back to the **SSO and SCIM** page of the Admin Console and verify your SCIM configuration:
     - Ensure that the SCIM Base URL and API Token in your IdP match those provided in the Docker Admin Console.
     - Verify that SCIM is enabled in both Docker and your IdP.
-1. Ensure that the attributes being synced from your IdP match Docker's [supported attributes](/manuals/security/for-admins/provisioning/scim.md#supported-attributes) for SCIM.
+1. Ensure that the attributes being synced from your IdP match Docker's [supported attributes](/manuals/enterprise/security/provisioning/scim.md#supported-attributes) for SCIM.
 1. Test user provisioning by trying to provision a test user through your IdP and verify if they appear in Docker.
 
 ## IdP-initiated sign in is not enabled for connection
@@ -184,7 +184,7 @@ Ensure that the IdP SSO connection is returning the correct UPN value in the ass
 
 **Add and verify all domains**
 
-Add and verify all domains and subdomains used as UPN by your IdP and associate them with your Docker SSO connection. For details, see [Configure single sign-on](/manuals/security/for-admins/single-sign-on/configure.md).
+Add and verify all domains and subdomains used as UPN by your IdP and associate them with your Docker SSO connection. For details, see [Configure single sign-on](/manuals/enterprise/security/single-sign-on/configure.md).
 
 ## Unable to find session
 
