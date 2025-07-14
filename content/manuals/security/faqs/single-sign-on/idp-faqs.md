@@ -15,7 +15,7 @@ Yes. Docker supports multiple IdP configurations. A domain can be associated wit
 
 ### Is it possible to change my identity provider after configuring SSO?
 
-Yes. You must delete your existing IdP configuration in your Docker SSO connection and then [configure SSO using your new IdP](/manuals/security/for-admins/single-sign-on/connect.md). If you had already turned on enforcement, you should turn off enforcement before updating the provider SSO connection.
+Yes. You must delete your existing IdP configuration in your Docker SSO connection and then [configure SSO using your new IdP](/manuals/enterprise/security/single-sign-on/connect.md). If you had already turned on enforcement, you should turn off enforcement before updating the provider SSO connection.
 
 ### What information do I need from my identity provider to configure SSO?
 
@@ -27,7 +27,7 @@ To enable SSO in Docker, you need the following from your IdP:
 
 ### What happens if my existing certificate expires?
 
-If your existing certificate has expired, you may need to contact your identity provider to retrieve a new X.509 certificate. Then, you need to update the certificate in the [SSO configuration settings](/security/for-admins/single-sign-on/manage/#manage-sso-connections) in Docker Hub or Docker Admin Console.
+If your existing certificate has expired, you may need to contact your identity provider to retrieve a new X.509 certificate. Then, you need to update the certificate in the [SSO configuration settings](/manuals/enterprise/security/single-sign-on/manage.md#manage-sso-connections) in Docker Hub or Docker Admin Console.
 
 ### What happens if my IdP goes down when SSO is enabled?
 

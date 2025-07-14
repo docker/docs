@@ -13,6 +13,7 @@ params:
       - AI
       - Products
       - Platform
+      - Enterprise
   notoc: true
   open-source:
   - title: Docker Build
@@ -107,6 +108,11 @@ params:
     description: Commercial use licenses for Docker products.
     icon: card_membership
     link: /subscription/
+  enterprise:
+  - title: Deploy Docker Desktop
+    description: Deploy Docker Desktop at scale within your company
+    icon: download
+    link: /enterprise/enterprise-deployment/
 ---
 
 This section contains user guides on how to install, set up, configure, and use
@@ -133,6 +139,12 @@ End-to-end developer solutions for innovative teams.
 ## Platform
 
 Documentation related to the Docker platform, such as administration and
-subscription management for organizations.
+subscription management.
 
 {{< grid items=platform >}}
+
+## Enterprise
+
+Targeted at IT administrators with help on deploying Docker Desktop at scale with configuration guidance on security related features. 
+
+{{< grid items=enterprise >}}

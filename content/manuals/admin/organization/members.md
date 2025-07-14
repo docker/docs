@@ -27,7 +27,7 @@ Use the following steps to invite members to your organization via Docker ID or 
 
 > [!NOTE]
 >
-> When you invite members, you assign them a role. See [Roles and permissions](/manuals/security/for-admins/roles-and-permissions.md) for
+> When you invite members, you assign them a role. See [Roles and permissions](/manuals/enterprise/security/roles-and-permissions.md) for
 details about the access permissions for each role.
 
 Pending invitations appear in the table. Invitees receive an email with a link to Docker Hub where they can accept or decline the invitation.
@@ -76,7 +76,7 @@ Valid email addresses and any email addresses that have issues appear. Email add
 
 > [!NOTE]
 >
-> When you invite members, you assign them a role. See [Roles and permissions](/manuals/security/for-admins/roles-and-permissions.md) for
+> When you invite members, you assign them a role. See [Roles and permissions](/manuals/enterprise/security/roles-and-permissions.md) for
 details about the access permissions for each role.
 
 Pending invitations appear in the table. The invitees receive an email with a link to Docker Hub where they can accept or decline the invitation.
@@ -104,7 +104,7 @@ Use the following steps to invite members to your organization via Docker ID or 
 
 > [!NOTE]
 >
-> When you invite members, you assign them a role. See [Roles and permissions](/manuals/security/for-admins/roles-and-permissions.md) for
+> When you invite members, you assign them a role. See [Roles and permissions](/manuals/enterprise/security/roles-and-permissions.md) for
 details about the access permissions for each role.
 
 Pending invitations appear in the table. The invitees receive an email with a link to Docker Hub where they can accept or decline the invitation.
@@ -154,7 +154,7 @@ Valid email addresses and any email addresses that have issues appear. Email add
 
 > [!NOTE]
 >
-> When you invite members, you assign them a role. See [Roles and permissions](/manuals/security/for-admins/roles-and-permissions.md) for
+> When you invite members, you assign them a role. See [Roles and permissions](/manuals/enterprise/security/roles-and-permissions.md) for
 details about the access permissions for each role.
 
 Pending invitations appear in the table. The invitees receive an email with a link to Docker Hub where they can accept or decline the invitation.
@@ -320,7 +320,7 @@ To add a member to a team with Docker Hub:
 
 > [!NOTE]
 >
-> If your organization uses single sign-on (SSO) with [SCIM](/manuals/security/for-admins/provisioning/scim.md) enabled, you should remove members from your identity provider (IdP). This will automatically remove members from Docker. If SCIM is disabled, you must manually manage members in Docker.
+> If your organization uses single sign-on (SSO) with [SCIM](/manuals/enterprise/security/provisioning/scim.md) enabled, you should remove members from your identity provider (IdP). This will automatically remove members from Docker. If SCIM is disabled, you must manually manage members in Docker.
 
 Organization owners can remove a member from a team in Docker Hub or Admin Console. Removing the member from the team will revoke their access to the permitted resources.
 
