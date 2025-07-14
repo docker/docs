@@ -118,12 +118,12 @@ rollover month to month.
 - No Docker Hub image pull rate limits.
 
 In addition, you gain access to enterprise-grade features, such as:
-- [Hardened Docker Desktop](../security/for-admins/hardened-desktop/_index.md)
+- [Hardened Docker Desktop](/manuals/enterprise/security/hardened-desktop/_index.md)
 - [Image Access
-  Management](../security/for-admins/hardened-desktop/image-access-management.md)
+  Management](/manuals/enterprise/security/hardened-desktop/image-access-management.md)
   which lets admins control what content developers can access
 - [Registry Access
-  Management](../security/for-admins/hardened-desktop/registry-access-management.md)
+  Management](/manuals/enterprise/security/hardened-desktop/registry-access-management.md)
   which lets admins control what registries developers can access
 - [Company layer](/admin/company/) to manage multiple organizations and settings
 - [Single sign-on](/security/for-admins/single-sign-on/)
@@ -240,9 +240,9 @@ use of Docker components including Docker Desktop and Docker Hub.
 
 Legacy Docker Business includes:
 - Everything included in legacy Docker Team
-- [Hardened Docker Desktop](../security/for-admins/hardened-desktop/_index.md)
-- [Image Access Management](../security/for-admins/hardened-desktop/image-access-management.md) which lets admins control what content developers can access
-- [Registry Access Management](../security/for-admins/hardened-desktop/registry-access-management.md) which lets admins control what registries developers can access
+- [Hardened Docker Desktop](/manuals/enterprise/security/hardened-desktop/_index.md)
+- [Image Access Management](/manuals/enterprise/security/hardened-desktop/image-access-management.md) which lets admins control what content developers can access
+- [Registry Access Management](/manuals/enterprise/security/hardened-desktop/registry-access-management.md) which lets admins control what registries developers can access
 - [Company layer](/admin/company/) to manage multiple organizations and settings
 - [Single Sign-On](/security/for-admins/single-sign-on/)
 - [System for Cross-domain Identity Management](/security/for-admins/provisioning/scim/) and more.

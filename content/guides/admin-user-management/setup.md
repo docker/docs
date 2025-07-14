@@ -24,7 +24,7 @@ Docker’s predefined roles offer flexibility for various organizational needs. 
 - Organization owner: Full organization administrative access. Organization owners can manage organization repositories, teams, members, settings, and billing.
 - Company owner: In addition to the permissions of an organization owner, company owners can configure settings for their associated organizations.
 
-For more information, see [Roles and permissions](/manuals/security/for-admins/roles-and-permissions.md).
+For more information, see [Roles and permissions](/manuals/enterprise/security/roles-and-permissions.md).
 
 ### Enhancing with teams
 
