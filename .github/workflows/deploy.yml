@@ -9,6 +9,7 @@ on:
   push:
     branches:
       - main
+      - lab
 
 env:
   # Use edge release of buildx (latest RC, fallback to latest stable)
@@ -20,6 +21,8 @@ permissions:
   id-token: write
   contents: read
 
+# The `main` branch is deployed to the production environment.
+# The `lab` branch is deployed to a separate environment for testing purposes.
 jobs:
   publish:
     runs-on: ubuntu-24.04
@@ -30,14 +33,26 @@ jobs:
         run: |
           DOCS_AWS_REGION=us-east-1
           HUGO_ENV=production
-          DOCS_URL="https://docs.docker.com"
-          DOCS_AWS_IAM_ROLE="arn:aws:iam::710015040892:role/prod-docs-docs.docker.com-20220818202218674300000001"
-          DOCS_S3_BUCKET="prod-docs-docs.docker.com"
-          DOCS_S3_CONFIG="s3-config.json"
-          DOCS_CLOUDFRONT_ID="E228TTN20HNU8F"
-          DOCS_LAMBDA_FUNCTION_REDIRECTS="DockerDocsRedirectFunction-prod"
-          DOCS_SLACK_MSG="Successfully deployed docs from the main branch. $DOCS_URL"
-        
+          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            DOCS_URL="https://docs.docker.com"
+            DOCS_AWS_IAM_ROLE="arn:aws:iam::710015040892:role/prod-docs-docs.docker.com-20220818202218674300000001"
+            DOCS_S3_BUCKET="prod-docs-docs.docker.com"
+            DOCS_S3_CONFIG="s3-config.json"
+            DOCS_CLOUDFRONT_ID="E228TTN20HNU8F"
+            DOCS_LAMBDA_FUNCTION_REDIRECTS="DockerDocsRedirectFunction-prod"
+            DOCS_SLACK_MSG="Successfully deployed docs from the main branch. $DOCS_URL"
+          elif [ "${{ github.ref }}" = "refs/heads/lab" ]; then
+            HUGO_ENV=lab
+            DOCS_URL="https://docs-labs.docker.com"
+            DOCS_AWS_IAM_ROLE="arn:aws:iam::710015040892:role/labs-docs-docs.docker.com-20220818202218402500000001"
+            DOCS_S3_BUCKET="labs-docs-docs.docker.com"
+            DOCS_S3_CONFIG="s3-config.json"
+            DOCS_CLOUDFRONT_ID="E1MYDYF65FW3HG"
+            DOCS_LAMBDA_FUNCTION_REDIRECTS="DockerDocsRedirectFunction-labs"
+          else
+            echo >&2 "ERROR: unknown branch ${{ github.ref }}"
+            exit 1
+          fi
           SEND_SLACK_MSG="true"
           if [ -z "$DOCS_AWS_IAM_ROLE" ] || [ -z "$DOCS_S3_BUCKET" ] || [ -z "$DOCS_CLOUDFRONT_ID" ] || [ -z "$DOCS_SLACK_MSG" ]; then
             SEND_SLACK_MSG="false"
