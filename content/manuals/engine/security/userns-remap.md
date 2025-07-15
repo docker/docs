@@ -22,7 +22,7 @@ The remapping itself is handled by two files: `/etc/subuid` and `/etc/subgid`.
 Each file works the same, but one is concerned with the user ID range, and the
 other with the group ID range. Consider the following entry in `/etc/subuid`:
 
-```none
+```text
 testuser:231072:65536
 ```
 
@@ -93,7 +93,7 @@ avoid these situations.
     and a maximum number of UIDs or GIDs available to the user. For instance,
     given the following entry:
 
-    ```none
+    ```text
     testuser:231072:65536
     ```
 
