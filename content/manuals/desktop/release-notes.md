@@ -29,6 +29,18 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 >
 > If you're experiencing malware detection issues on Mac, follow the steps documented in [docker/for-mac#7527](https://github.com/docker/for-mac/issues/7527).
 
+## 4.43.2
+
+{{< release-date date="2025-07-15" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.43.2" build_path="/199162/" >}}
+
+### Upgrades
+
+- [Docker Compose v2.38.2](https://github.com/docker/compose/releases/tag/v2.38.2)
+- [Docker Engine v28.3.2](https://docs.docker.com/engine/release-notes/28/#2832)
+- Docker Model CLI v0.1.33
+
 ## 4.43.1
 
 {{< release-date date="2025-07-04" >}}

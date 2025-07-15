@@ -78,7 +78,7 @@ To create the `docker` group and add your user:
    If you initially ran Docker CLI commands using `sudo` before adding your user
    to the `docker` group, you may see the following error:
 
-   ```none
+   ```text
    WARNING: Error loading config file: /home/user/.docker/config.json -
    stat /home/user/.docker/config.json: permission denied
    ```

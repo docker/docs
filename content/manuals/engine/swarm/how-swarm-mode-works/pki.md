@@ -36,7 +36,7 @@ communications using a minimum of TLS 1.2.
 
 The example below shows the information from a certificate from a worker node:
 
-```none
+```text
 Certificate:
     Data:
         Version: 3 (0x2)

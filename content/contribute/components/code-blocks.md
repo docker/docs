@@ -13,7 +13,7 @@ we use often.
 If your example contains a placeholder value that's subject to change,
 use the format `<[A-Z_]+>` for the placeholder value: `<MY_VARIABLE>`
 
-```none
+```text
 export name=<MY_NAME>
 ```
 
