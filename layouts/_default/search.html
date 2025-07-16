@@ -85,6 +85,30 @@
     async function onPageSearch(e) {
       pagefind.init();
       const query = e.target.value;
+      const terms = query.trim().split(/\s+/);
+
+      // Search each term individually
+      const allResults = [];
+
+      for (let term of terms) {
+        const result = await pagefind.search(term);
+        if (result) {
+          allResults.push(...result.results);
+        }
+      }
+
+      // Deduplicate results by URL (some results match multiple terms)
+      const resultMap = new Map();
+      for (const r of allResults) {
+        if (!resultMap.has(r.url)) {
+          resultMap.set(r.url, r);
+        }
+      }
+
+      const dedupedResults = [...resultMap.values()];
+      const fullResultsData = await Promise.all(
+        dedupedResults.map((r) => r.data()),
+      );
 
       // Set the query parameter in the URL
       const params = new URLSearchParams(document.location.search);
@@ -113,7 +137,7 @@
         // Get the data for the search results
         // Slice the results based on the range start + 10
         const fullResultsData = await Promise.all(
-          search.results.map((r) => r.data())
+          search.results.map((r) => r.data()),
         );
         const resultsData = fullResultsData.slice(rangeStart, rangeEnd);
         // If the range does not have any results, display a message
