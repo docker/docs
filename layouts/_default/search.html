@@ -112,9 +112,10 @@
         const resultsLength = search.results.length;
         // Get the data for the search results
         // Slice the results based on the range start + 10
-        const resultsData = await Promise.all(
-          search.results.slice(rangeStart, rangeEnd).map((r) => r.data()),
+        const fullResultsData = await Promise.all(
+          search.results.map((r) => r.data())
         );
+        const resultsData = fullResultsData.slice(rangeStart, rangeEnd);
         // If the range does not have any results, display a message
         if (resultsData.length === 0) {
           searchPageResults.innerHTML = `<div class="p-4">No results found</div>`;
@@ -123,7 +124,7 @@
         // Add an index to the results, for heap tracking
         const results = resultsData.map((item, index) => ({
           ...item,
-          index: index + 1,
+          index: rangeStart + index + 1,
         }));
 
         // If the query is not empty, display the search results container
