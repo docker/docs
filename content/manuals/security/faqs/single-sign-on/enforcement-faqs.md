@@ -21,11 +21,11 @@ Yes. You must verify a domain before using it with an SSO connection.
 
 When SSO is enforced, [passwords are prevented from accessing the Docker CLI](/security/security-announcements/#deprecation-of-password-logins-on-cli-when-sso-enforced). You can still access the Docker CLI using a personal access token (PAT) for authentication.
 
-Each user must create a PAT to access the CLI. To learn how to create a PAT, see [Manage access tokens](/security/for-developers/access-tokens/). Users who already used a PAT to sign in before SSO enforcement will still be able to use that PAT to authenticate.
+Each user must create a PAT to access the CLI. To learn how to create a PAT, see [Manage access tokens](/security/access-tokens/). Users who already used a PAT to sign in before SSO enforcement will still be able to use that PAT to authenticate.
 
 ### How does SSO affect automation systems and CI/CD pipelines?
 
-Before enforcing SSO, you must [create PATs](/security/for-developers/access-tokens/). These PATs are used instead of passwords for signing into automation systems and CI/CD pipelines.
+Before enforcing SSO, you must [create PATs](/security/access-tokens/). These PATs are used instead of passwords for signing into automation systems and CI/CD pipelines.
 
 ### What can organization users who authenticated with personal emails prior to enforcement expect?
 

@@ -5,6 +5,8 @@ title: Troubleshoot provisioning
 linkTitle: Troubleshoot provisioning
 tags: [Troubleshooting]
 toc_max: 2
+aliases:
+ - /security/troubleshoot/troubleshoot-provisioning/
 ---
 
 If you experience issues with user roles, attributes, or unexpected account

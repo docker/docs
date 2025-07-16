@@ -48,7 +48,7 @@ This page provides details on new features, enhancements, known issues, and bug 
 
 ### New
 
-- [Personal access tokens](/security/for-developers/access-tokens/) (PATs) now support expiration dates.
+- [Personal access tokens](/security/access-tokens/) (PATs) now support expiration dates.
 
 ## 2024-10-15
 

@@ -4,7 +4,8 @@ keywords: Docker, docker, registry, security, Docker Hub, authentication, two-fa
   authentication
 title: Recover your Docker account
 aliases:
-- /docker-hub/2fa/recover-hub-account/
+ - /docker-hub/2fa/recover-hub-account/
+ - /security/for-developers/2fa/recover-hub-account/
 weight: 20
 ---
 

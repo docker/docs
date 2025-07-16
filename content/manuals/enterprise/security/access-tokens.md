@@ -19,7 +19,7 @@ aliases:
 > access tokens instead.
 
 An organization access token (OAT) is like a [personal access token
-(PAT)](/security/for-developers/access-tokens/), but an OAT is associated with
+(PAT)](/security/access-tokens/), but an OAT is associated with
 an organization and not a single user account. Use an OAT instead of a PAT to
 let business-critical tasks access Docker Hub repositories without connecting
 the token to single user. You must have a [Docker Team or Business

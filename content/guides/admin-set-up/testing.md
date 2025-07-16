@@ -10,7 +10,7 @@ You can test SSO and SCIM by signing in to Docker Desktop or Docker Hub with the
 
 > [!IMPORTANT] 
 >
-> Some users may need CLI based logins to Docker Hub, and for this they will need a [personal access token (PAT)](/manuals/security/for-developers/access-tokens.md).
+> Some users may need CLI based logins to Docker Hub, and for this they will need a [personal access token (PAT)](/manuals/security/access-tokens.md).
 
 ## Test RAM and IAM
 

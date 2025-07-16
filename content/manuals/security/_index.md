@@ -1,6 +1,7 @@
 ---
 title: Security
-description: Learn about security features Docker has to offer and explore best practices
+linkTitle: Security for developers
+description: Learn about developer-level security features Docker has to offer and explore best practices
 keywords: docker, docker hub, docker desktop, security
 weight: 40
 params:
@@ -10,30 +11,30 @@ grid_admins:
 - title: Settings Management
   description: Learn how Settings Management can secure your developers' workflows.
   icon: shield_locked
-  link: /security/for-admins/hardened-desktop/settings-management/
+  link: /enterprise/security/hardened-desktop/settings-management/
 - title: Enhanced Container Isolation
   description: Understand how Enhanced Container Isolation can prevent container attacks.
   icon: security
-  link: /security/for-admins/hardened-desktop/enhanced-container-isolation/
+  link: /enterprise/security/hardened-desktop/enhanced-container-isolation/
 - title: Registry Access Management
   description: Control the registries developers can access while using Docker Desktop.
   icon: home_storage
-  link: /security/for-admins/hardened-desktop/registry-access-management/
+  link: /enterprise/security/hardened-desktop/registry-access-management/
 - title: Image Access Management
   description: Control the images developers can pull from Docker Hub.
   icon: photo_library
-  link: /security/for-admins/hardened-desktop/image-access-management/
+  link: /enterprise/security/hardened-desktop/image-access-management/
 - title: "Air-Gapped Containers"
   description: Restrict containers from accessing unwanted network resources.
   icon: "vpn_lock"
-  link: /security/for-admins/hardened-desktop/air-gapped-containers/
+  link: /enterprise/security/hardened-desktop/air-gapped-containers/
 - title: Enforce sign-in
   description: Configure sign-in for members of your teams and organizations.
-  link: /security/for-admins/enforce-sign-in/
+  link: /enterprise/security/enforce-sign-in/
   icon: passkey
 - title: Domain management
   description: Identify uncaptured users in your organization.
-  link: /security/for-admins/domain-management/
+  link: /enterprise/security/domain-management/
   icon: person_search
 - title: Docker Scout
   description: Explore how Docker Scout can help you create a more secure software supply chain.
@@ -42,32 +43,32 @@ grid_admins:
 - title: SSO
   description: Learn how to configure SSO for your company or organization.
   icon: key
-  link: /security/for-admins/single-sign-on/
+  link: /enterprise/security/single-sign-on/
 - title: SCIM
   description: Set up SCIM to automatically provision and deprovision users.
   icon: checklist
-  link: /security/for-admins/provisioning/scim/
+  link: /enterprise/security/provisioning/scim/
 - title: Roles and permissions
   description: Assign roles to individuals giving them different permissions within an organization.
   icon: badge
-  link: /security/for-admins/roles-and-permissions/
+  link: /enterprise/security/roles-and-permissions/
 - title: Private marketplace for Extensions (Beta)
   description: Learn how to configure and set up a private marketplace with a curated list of extensions for your Docker Desktop users.
   icon: storefront
   link: /desktop/extensions/private-marketplace/
 - title: Organization access tokens
   description: Create organization access tokens as an alternative to a password.
-  link: /security/for-admins/access-tokens/
+  link: /enterprise/security/access-tokens/
   icon: password
 grid_developers:
 - title: Set up two-factor authentication
   description: Add an extra layer of authentication to your Docker account.
-  link: /security/for-developers/2fa/
+  link: /security/2fa/
   icon: phonelink_lock
 - title: Manage access tokens
   description: Create personal access tokens as an alternative to your password.
   icon: password
-  link: /security/for-developers/access-tokens/
+  link: /security/access-tokens/
 - title: Static vulnerability scanning
   description: Automatically run a point-in-time scan on your Docker images for vulnerabilities.
   icon: image_search

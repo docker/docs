@@ -22,10 +22,10 @@ grid:
 - title: Personal access tokens
   description: Learn how to create and manage access tokens for your account.
   icon: password
-  link: /security/for-developers/access-tokens/
+  link: /security/access-tokens/
 - title: Set up two-factor authentication
   description: Add an extra layer of authentication to your Docker account.
-  link: /security/for-developers/2fa/
+  link: /security/2fa/
   icon: phonelink_lock
 - title: Deactivate an account
   description: Learn how to deactivate a Docker user account.
