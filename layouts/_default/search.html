@@ -117,7 +117,7 @@
       // Default the current page to 1
       let currentPage = 1;
 
-      // Check if the page parameter exists
+      // Check if the page parameter exists 
       const page = params.get("page");
       // Calculate the range start based on the page parameter
       if (page) {
@@ -126,73 +126,63 @@
       const rangeStart = (currentPage - 1) * 10;
       const rangeEnd = rangeStart + 10;
 
-      // Execute the search
-      const search = await pagefind.debouncedSearch(query);
-      // If no search results are found, exit
-      if (search === null) {
+      // total number of results
+      const resultsLength = fullResultsData.length;
+      // Slice the results based on the range
+      const resultsData = fullResultsData.slice(rangeStart, rangeEnd);
+
+      // If the range does not have any results, display a message
+      if (resultsData.length === 0) {
+        searchPageResults.innerHTML = `<div class="p-4">No results found</div>`;
         return;
-      } else {
-        // total number of results
-        const resultsLength = search.results.length;
-        // Get the data for the search results
-        // Slice the results based on the range start + 10
-        const fullResultsData = await Promise.all(
-          search.results.map((r) => r.data()),
-        );
-        const resultsData = fullResultsData.slice(rangeStart, rangeEnd);
-        // If the range does not have any results, display a message
-        if (resultsData.length === 0) {
-          searchPageResults.innerHTML = `<div class="p-4">No results found</div>`;
-          return;
-        }
-        // Add an index to the results, for heap tracking
-        const results = resultsData.map((item, index) => ({
-          ...item,
-          index: rangeStart + index + 1,
-        }));
-
-        // If the query is not empty, display the search results container
-        if (query) {
-          searchPageResults.classList.remove("hidden");
-        } else {
-          searchPageResults.classList.add("hidden");
-        }
-
-        // Generate the search results HTML
-        let resultsHTML = `<div class="text-gray-400 dark:text-gray-500 p-2">${resultsLength} results</div>`;
-
-        // Map results to HTML
-        resultsHTML += results
-          .map((item) => {
-            return `<div class="p-4">
-         <div class="flex flex-col">
-           <span class="text-gray-400 dark:texty-gray-dark text-sm">${item.meta.breadcrumbs}</span>
-           <a class="link" href="${item.url}" data-query="${query}" data-index="${item.index}">${item.meta.title}</a>
-           <p class="text-black dark:text-white overflow-hidden">…${item.excerpt}…</p>
-         </div>
-       </div>`;
-          })
-          .join("");
-        // If the results length is greater than 10, display links to show more results
-        if (resultsLength > 10) {
-          resultsHTML += `<hr class="border-divider-light dark:border-divider-dark">`;
-          resultsHTML += `<ul class="flex flex-wrap gap-1 pt-4 pb-8 justify-center text-sm">`;
-          for (let i = 1; i <= resultsLength / 10; i++) {
-            if (i == currentPage) {
-              resultsHTML += `<li class="flex items-center justify-center">
-                 <a href="/search/?q=${query}&page=${i}" class="pagination-link bg-gray-200 dark:bg-gray-800 dark:text-gray-200">${i}</a>
-              </li>`;
-            } else {
-              resultsHTML += `<li class="flex items-center justify-center">
-                <a href="/search/?q=${query}&page=${i}" class="pagination-link bg-gray-100 dark:bg-gray-900 dark:text-gray-400">${i}</a>
-              </li>`;
-            }
-          }
-          resultsHTML += `</ul>`;
-        }
-
-        searchPageResults.innerHTML = resultsHTML;
       }
+      // Add an index to the results, for heap tracking
+      const results = resultsData.map((item, index) => ({
+        ...item,
+        index: rangeStart + index + 1,
+      }));
+
+      // If the query is not empty, display the search results container
+      if (query) {
+        searchPageResults.classList.remove("hidden");
+      } else {
+        searchPageResults.classList.add("hidden");
+      }
+
+      // Generate the search results HTML
+      let resultsHTML = `<div class="text-gray-400 dark:text-gray-500 p-2">${resultsLength} results</div>`;
+
+      // Map results to HTML
+      resultsHTML += results
+        .map((item) => {
+          return `<div class="p-4">
+       <div class="flex flex-col">
+         <span class="text-gray-400 dark:texty-gray-dark text-sm">${item.meta.breadcrumbs}</span>
+         <a class="link" href="${item.url}" data-query="${query}" data-index="${item.index}">${item.meta.title}</a>
+         <p class="text-black dark:text-white overflow-hidden">…${item.excerpt}…</p>
+       </div>
+     </div>`;
+        })
+        .join("");
+      // If the results length is greater than 10, display links to show more results
+      if (resultsLength > 10) {
+        resultsHTML += `<hr class="border-divider-light dark:border-divider-dark">`;
+        resultsHTML += `<ul class="flex flex-wrap gap-1 pt-4 pb-8 justify-center text-sm">`;
+        for (let i = 1; i <= resultsLength / 10; i++) {
+          if (i == currentPage) {
+            resultsHTML += `<li class="flex items-center justify-center">
+               <a href="/search/?q=${query}&page=${i}" class="pagination-link bg-gray-200 dark:bg-gray-800 dark:text-gray-200">${i}</a>
+            </li>`;
+          } else {
+            resultsHTML += `<li class="flex items-center justify-center">
+              <a href="/search/?q=${query}&page=${i}" class="pagination-link bg-gray-100 dark:bg-gray-900 dark:text-gray-400">${i}</a>
+            </li>`;
+          }
+        }
+        resultsHTML += `</ul>`;
+      }
+
+      searchPageResults.innerHTML = resultsHTML;
     }
 
     searchPageInput.addEventListener("input", (e) => onPageSearch(e));
