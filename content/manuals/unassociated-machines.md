@@ -5,8 +5,13 @@ keywords: unassociated machines, insights, manage users, enforce sign-in
 sitemap: false
 params:
     sidebar:
-        group: Platform
+        group: Enterprise
 ---
+
+{{% restricted title="About unassociated machines" %}}
+Unassociated machines is a private feature. Your Docker
+Account Executive must enable the feature for you.
+{{% /restricted %}}
 
 Docker administrators can identify, view, and manage Docker Desktop machines
 that are likely associated with their organization but aren't currently linked
