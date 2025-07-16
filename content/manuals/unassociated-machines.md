@@ -8,8 +8,6 @@ params:
         group: Platform
 ---
 
-{{< summary-bar feature_name="Unassociated machines" >}}
-
 Docker administrators can identify, view, and manage Docker Desktop machines
 that are likely associated with their organization but aren't currently linked
 to user accounts. This self-service capability helps you understand Docker
@@ -68,12 +66,12 @@ You can:
 > [!NOTE]
 >
 > Sign-in enforcement for unassociated machines is different from
-the [organization-level sign-in enforcement](/security/for-admins/enforce-sign-in/)
+the [organization-level sign-in enforcement](/enterprise/security/enforce-sign-in/)
 available through `registry.json` and configuration profiles. This sign-in
 enforcement only requires users to sign in so admins can identify who is
 using the machine, meaning users can sign in with any email address. For more
 stringent security controls that limit sign-ins to users who are already part
-of your organization, see [Enforce sign-in](/security/for-admins/enforce-sign-in/).
+of your organization, see [Enforce sign-in](/enterprise/security/enforce-sign-in/).
 
 Sign-in enforcement helps you identify who is using unassociated machines in
 your organization. When you enable enforcement, users on these machines will
@@ -149,9 +147,9 @@ organization in two ways:
     - Auto-provisioning: If you have verified domains with auto-provisioning
     enabled, users who sign in with a matching email domain will automatically
     be added to your organization. For more information on verifying domains and
-    auto-provisioning, see [Domain management](/manuals/security/for-admins/domain-management.md).
+    auto-provisioning, see [Domain management](/manuals/enterprise/security/domain-management.md).
     - SSO user provisioning: If you have SSO configured with
-    [Just-in-Time provisioning](/manuals/security/for-admins/provisioning/just-in-time.md),
+    [Just-in-Time provisioning](/manuals/enterprise/security/provisioning/just-in-time.md),
     users who sign in through your SSO connection will automatically be added
     to your organization.
 - Manual addition: If you don't have auto-provisioning or SSO set up, or if a
