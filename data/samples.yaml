@@ -437,7 +437,7 @@ samples:
       - aiml
       - agentic-ai
   - title: MCP UI with Vercel AI SDK
-    url: https://github.com/docker/compose-for-agents/tree/main/a2a
+    url: https://github.com/docker/compose-for-agents/tree/main/vercel
     description: >
       Start an MCP UI application that uses the Vercel AI SDK to provide a
       chat interface for local models, provided by the Docker Model Runner,
