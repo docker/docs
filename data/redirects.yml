@@ -350,3 +350,10 @@
   - /go/permissions/
 "/desktop/setup/install/mac-permission-requirements/#binding-privileged-ports":
   - /go/port-mapping/
+
+# Docker Hardened Images (DHI)
+"/dhi/how-to/customize/":
+  - /go/dhi-customization/
+
+"/dhi/how-to/customize/#create-an-oci-artifact-image":
+  - /go/dhi-customization-artifacts/
