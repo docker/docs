@@ -137,7 +137,7 @@ You can now use the `docker model` command in the CLI and view and interact with
    ```
 
 > [!NOTE]
-> TCP support is enabled by default on port 12434.
+> TCP support is enabled by default for Docker Engine on port 12434.
 
 ## Pull a model
 
