@@ -40,7 +40,7 @@ with AI models locally.
 - Run and interact with AI models directly from the command line or from the Docker Desktop GUI
 - Manage local models and display logs
 
-## Requirements 
+## Requirements
 
 Docker Model Runner is supported on the following platforms:
 
@@ -48,13 +48,13 @@ Docker Model Runner is supported on the following platforms:
 {{< tab name="Windows">}}
 
 Windows(amd64):
--  NVIDIA GPUs 
+-  NVIDIA GPUs
 -  NVIDIA drivers 576.57+
 
 Windows(arm64):
 - OpenCL for Adreno
 - Qualcomm Adreno GPU (6xx series and later)
-    
+
   > [!NOTE]
   > Some llama.cpp features might not be fully supported on the 6xx series.
 
@@ -142,6 +142,18 @@ You can now use the `docker model` command in the CLI and view and interact with
    - Comma-separated list of allowed origins
    - When unspecified, all origins are denied.
 
+### Update DMR in Docker Engine
+
+To update Docker Model Runner in Docker Engine, uninstall it with [`docker model uninstall-runner`](/reference/cli/docker/model/uninstall-runner/) then reinstall it:
+
+```console
+docker model uninstall-runner --images && docker model install-runner
+```
+
+> [!NOTE]
+> With the above command, local models are preserved.
+> To delete the models during the upgrade, add the `--models` option to the `uninstall-runner` command.
+
 ## Pull a model
 
 Models are cached locally.
@@ -162,7 +174,7 @@ Models are cached locally.
 {{< tab name="From the Docker CLI">}}
 
 Use the [`docker model pull` command](/reference/cli/docker/model/pull/). For example:
-  
+
 ```bash {title="Pulling from Docker Hub"}
 docker model pull ai/smollm2:360M-Q4_K_M
 ```
@@ -294,7 +306,7 @@ Once the feature is enabled, new API endpoints are available under the following
 > The `172.17.0.1` interface may not be available by default to containers
  within a Compose project.
 > In this case, add an `extra_hosts` directive to your Compose service YAML:
-> 
+>
 > ```yaml
 > extra_hosts:
 >   - "model-runner.docker.internal:host-gateway"
