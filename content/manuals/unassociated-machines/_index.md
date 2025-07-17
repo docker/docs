@@ -91,7 +91,7 @@ to your organization.
 > Sign-in enforcement only takes effect after Docker Desktop is restarted.
 Users can continue using Docker Desktop until their next restart.
 
-### Enable for all unassociated machines
+### Enable sign-in enforcement for all unassociated machines
 
 1. Sign in to the [Admin Console](https://app.docker.com/admin) and select
 your organization.
@@ -111,7 +111,7 @@ Users with older versions will not be prompted to sign in and can continue
 using Docker Desktop normally until they update. Their status shows
 as **Pending** until they update to version 4.41 or later.
 
-### Enable for individual unassociated machines
+### Enable sign-in enforcement for individual unassociated machines
 
 1. Sign in to the [Admin Console](https://app.docker.com/admin) and select
 your organization.
