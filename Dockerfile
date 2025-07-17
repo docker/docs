@@ -4,6 +4,7 @@
 ARG ALPINE_VERSION=3.21
 ARG GO_VERSION=1.24
 ARG HTMLTEST_VERSION=0.17.0
+ARG VALE_VERSION=3.11.2
 ARG HUGO_VERSION=0.141.0
 ARG NODE_VERSION=22
 ARG PAGEFIND_VERSION=1.3.0
@@ -66,6 +67,23 @@ WORKDIR /test
 COPY --from=build /project/public ./public
 ADD .htmltest.yml .htmltest.yml
 RUN htmltest
+
+# vale
+FROM jdkato/vale:v${VALE_VERSION} AS vale-run
+WORKDIR /src
+ARG GITHUB_ACTIONS
+RUN --mount=type=bind,target=.,rw <<EOT
+  set -e
+  mkdir /out
+  args=""
+  [ "$GITHUB_ACTIONS" = "true" ] && args="--output=.vale-rdjsonl.tmpl"
+  set -x
+  vale sync
+  vale $args content/ | tee /out/vale.out
+EOT
+
+FROM scratch AS vale
+COPY --from=vale-run /out/vale.out /
 
 # update-modules downloads and vendors Hugo modules
 FROM build-base AS update-modules
