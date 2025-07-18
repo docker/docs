@@ -5,42 +5,41 @@ description: Learn to change your billing cycle for your Docker subscription
 keywords: billing, cycle, payments, subscription
 ---
 
-You can pay for a subscription on a monthly or yearly billing cycle. You select
-your preferred billing cycle when you buy your subscription.
-
-> [!NOTE]
->
-> Business subscriptions are available only on yearly billing cycle.
-
-If you have a monthly billing cycle, you can choose to switch to an annual
+You can choose between a monthly or annual billing cycle when purchasing a
+Docker subscription. If you have a monthly billing cycle, you can choose to
+switch to an annual
 billing cycle.
 
 > [!NOTE]
 >
-> You can't switch from an annual billing cycle to a monthly cycle.
+> Docker Business subscriptions are only available on an annual billing cycle.
 
-When you change the billing cycle's duration:
+> [!NOTE]
+>
+> Switching from an annual billing cycle to a monthly cycle isn't supported.
 
-- The next billing date reflects the new cycle. To find your next billing date,
+When you change your billing cycle:
+
+- Your next billing date reflects the new cycle. To find your next billing date,
 see [View renewal date](history.md#view-renewal-date).
-- The subscription's start date resets. For example, if the start date of the
-monthly subscription is March 1st and the end date is April 1st, then after
-switching the billing duration to March 15th, 2024 the new start date is March
-15th, 2024, and the new end date is March 15th, 2025.
-- Any unused monthly subscription is prorated and applied as credit towards the
-new annual period. For example, if you switch from a $10 monthly subscription to
-a $100 annual subscription, deducting the unused monthly value
-(in this case $5), the migration cost becomes $95 ($100 - $5). The renewal cost
-after March 15, 2025 is $100.
+- Your subscription's start date resets. For example, if the monthly
+subscription started on March 1 and ended on April 1, switching the billing
+duration on March 15, 2024, resets the new start date to March 15, 2024, with
+an end date of March 15, 2025.
+- Any unused portion of your monthly subscription is prorated and applied as
+credit toward an annual subscription. For example, if your monthly cost is $10
+and you're used value is $5, when you switch to an annual cycle ($100), the
+final charge is $95 ($100-$5).
 
 {{% include "tax-compliance.md" %}}
 
-## Personal account
+## Change personal account to an annual cycle
 
 {{< tabs >}}
 {{< tab name="Docker subscription" >}}
 
-To change your billing cycle:
+Follow these steps to switch from a monthly to annual billing
+cycle for your Docker subscription:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select
 your organization.
@@ -56,13 +55,14 @@ your organization.
 > more information, see
 [Verify a bank account](manuals/billing/payment-method.md#verify-a-bank-account).
 
-The billing plans and usage page will now reflect your new annual subscription
-details.
+After completing the change, the billing plans and usage page displays
+your updated annual subscription details.
 
 {{< /tab >}}
 {{< tab name="Legacy Docker subscription" >}}
 
-To change your billing cycle:
+Follow these steps to switch from a monthly to annual billing cycle for
+a legacy Docker subscription:
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
 1. Select your organization, then select **Billing**.
@@ -73,7 +73,7 @@ page and select **Accept Terms and Purchase** to confirm.
 {{< /tab >}}
 {{< /tabs >}}
 
-## Organization
+## Change organization to an annual cycle
 
 > [!NOTE]
 >
@@ -82,7 +82,8 @@ page and select **Accept Terms and Purchase** to confirm.
 {{< tabs >}}
 {{< tab name="Docker subscription" >}}
 
-To change your organization's billing cycle:
+Follow these steps to switch from a monthly to annual billing cycle for your
+organization's Docker subscription:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select
 your organization.
@@ -101,7 +102,8 @@ your organization.
 {{< /tab >}}
 {{< tab name="Legacy Docker subscription" >}}
 
-To change your organization's billing cycle:
+Follow these steps to switch from a monthly to annual billing cycle for a
+legacy Docker organization subscription:
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
 1. Select your organization, then select **Billing**.
