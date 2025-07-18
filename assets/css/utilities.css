@@ -237,6 +237,10 @@
   @apply flex w-full items-start gap-2 rounded-sm px-2 py-2 text-left text-gray-700 transition-colors hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800;
 }
 
+@utility dropdown-base {
+  @apply rounded-sm border border-gray-300 bg-white text-gray-700 dark:border-gray-300 dark:bg-gray-900 dark:text-gray-100;
+}
+
 @utility toc {
   a {
     @apply block max-w-full truncate py-1 pl-2 hover:font-medium hover:no-underline;
