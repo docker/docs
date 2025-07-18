@@ -60,12 +60,12 @@ Follow the instructions in the password reset email.
 
 To update your two-factor authentication (2FA) settings, select **2FA**.
 For information on two-factor authentication (2FA) for your account, see
-[Enable two-factor authentication](../security/for-developers/2fa/_index.md)
+[Enable two-factor authentication](../security/2fa/_index.md)
 to get started.
 
 To manage personal access tokens, select **Personal access tokens**.
 For information on personal access tokens, see
-[Create and manage access tokens](../security/for-developers/access-tokens.md).
+[Create and manage access tokens](../security/access-tokens.md).
 
 ## Manage connected accounts
 

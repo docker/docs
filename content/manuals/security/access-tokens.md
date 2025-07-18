@@ -5,7 +5,8 @@ description: Learn how to create and manage your personal Docker access tokens
   to securely push and pull images programmatically.
 keywords: docker hub, hub, security, PAT, personal access token
 aliases:
-- /docker-hub/access-tokens/
+ - /docker-hub/access-tokens/
+ - /security/for-developers/access-tokens/
 ---
 
 You can create a personal access token (PAT) to use as an alternative to your password for Docker CLI authentication.

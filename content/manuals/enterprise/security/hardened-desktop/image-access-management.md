@@ -24,7 +24,7 @@ You first need to [enforce sign-in](/manuals/enterprise/security/enforce-sign-in
 
 > [!IMPORTANT]
 >
-> You must use [personal access tokens (PATs)](/manuals/security/for-developers/access-tokens.md) with Image Access Management. Organization access tokens (OATs) are not compatible.
+> You must use [personal access tokens (PATs)](/manuals/security/access-tokens.md) with Image Access Management. Organization access tokens (OATs) are not compatible.
 
 ## Configure
 

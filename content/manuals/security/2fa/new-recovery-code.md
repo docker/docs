@@ -4,7 +4,8 @@ keywords: Docker, docker, registry, security, Docker Hub, authentication, two-fa
   authentication, account security
 title: Generate a new recovery code
 aliases:
-- /docker-hub/2fa/new-recovery-code/
+ - /docker-hub/2fa/new-recovery-code/
+ - /security/for-developers/2fa/new-recovery-code/
 weight: 10
 ---
 

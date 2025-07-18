@@ -6,7 +6,8 @@ linkTitle: Troubleshoot SSO
 tags: [Troubleshooting]
 toc_max: 2
 aliases:
-    - "/security/for-admins/single-sign-on/troubleshoot/"
+    - /security/for-admins/single-sign-on/troubleshoot/
+    - /security/troubleshoot/troubleshoot-sso/
 ---
 
 While configuring or using single sign-on (SSO), you may encounter issues that

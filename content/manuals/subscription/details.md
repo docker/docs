@@ -176,7 +176,7 @@ their customers.
 
 Legacy Docker Pro includes:
 - Unlimited public repositories
-- Unlimited [Scoped Access Tokens](/security/for-developers/access-tokens/)
+- Unlimited [Scoped Access Tokens](/security/access-tokens/)
 - Unlimited [collaborators](/docker-hub/repos/manage/access/#collaborators) for public repositories at no cost per month.
 - Access to [Legacy Docker Scout Free](#legacy-docker-scout-free) to get started with software supply chain security.
 - Unlimited private repositories

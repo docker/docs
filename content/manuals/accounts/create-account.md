@@ -77,7 +77,7 @@ Once you register your Docker ID and verify your email address, you can sign in 
 > When you use the `docker login` command, your credentials are
 stored in your home directory in `.docker/config.json`. The password is base64-encoded in this file.
 >
-> We recommend using one of the [Docker credential helpers](https://github.com/docker/docker-credential-helpers) for secure storage of passwords. For extra security, you can also use a [personal access token](../security/for-developers/access-tokens.md) to sign in instead, which is still encoded in this file (without a Docker credential helper) but doesn't permit administrator actions (such as changing the password).
+> We recommend using one of the [Docker credential helpers](https://github.com/docker/docker-credential-helpers) for secure storage of passwords. For extra security, you can also use a [personal access token](../security/access-tokens.md) to sign in instead, which is still encoded in this file (without a Docker credential helper) but doesn't permit administrator actions (such as changing the password).
 
 ### Sign in with your social provider
 
