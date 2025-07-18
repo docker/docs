@@ -47,7 +47,20 @@ To update your email address, select **Email**:
 3. Select **Send verification email** to send a verification email to your new
 email address.
 
-Once you verify your email address, your account information will update.
+Your new email address will appear as unverified until you complete the
+verification process. You can:
+
+- Resend the verification email if needed.
+- Removed the unverified email address at any time before verification.
+
+To verify your email, open your email client and follow the instructions
+in the Docker verification email.
+
+> [!NOTE]
+>
+> Docker accounts only support one verified email address at a time, which
+is used for account notifications and security-related communications. You
+can't add multiple verified email addresses to your account.
 
 ### Change your password
 
