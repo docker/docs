@@ -1,13 +1,19 @@
 ---
-title: Update billing information
+title: Manage your billing information
 weight: 30
 description: Learn how to update your billing information in Docker Hub
-keywords: payments, billing, subscription, invoices
+keywords: payments, billing, subscription, invoices, update billing email, change billing address, VAT ID, Docker billing account
 ---
 
-You can update the billing information for your personal account or for an organization. When you update your billing information, these changes apply to future billing invoices. Note that you can't update an existing invoice, including paid and unpaid invoices.
+You can update the billing information for your personal account or for an
+organization. When you update your billing information, these changes apply to
+future billing invoices. The email address you provide for a billing account is
+where Docker sends all invoices and other billing related communications.
 
-The billing information provided appears on all your billing invoices. The email address provided is where Docker sends all invoices and other [billing-related communication](#update-your-billing-invoice-email-address).
+> [!NOTE]
+>
+> Existing invoices, whether paid or unpaid, cannot be updated.
+Changes only apply to future invoices.
 
 {{% include "tax-compliance.md" %}}
 
@@ -101,17 +107,13 @@ To update your billing information:
 {{< /tab >}}
 {{< /tabs >}}
 
-## Update your billing invoice email address
+## Update your billing email address
 
 Docker sends the following billing-related emails:
 
-- Confirmation of a new subscription.
-- Confirmation of paid invoices.
-- Notifications of credit or debit card payment failures.
-- Notifications of credit or debit card expiration.
-- Confirmation of a cancelled subscription
-- Reminders of subscription renewals for annual subscribers. This is sent 14
-days before the renewal date.
+- Confirmations (new subscriptions, paid invoices)
+- Notifications (card failure, card expiration)
+- Reminders (subscription renewal)
 
 You can update the email address that receives billing invoices at any time.
 
