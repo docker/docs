@@ -136,11 +136,8 @@ You can now use the `docker model` command in the CLI and view and interact with
    $ docker model run ai/smollm2
    ```
 
-1. Optional: To enable TCP support, set the port with the `DMR_RUNNER_PORT` environment variable.
-1. Optional: If you enabled TCP support, you can configure CORS allowed origins with the `DMR_ORIGINS` environment variable. Possible values are:
-   - `*`: Allow all origins
-   - Comma-separated list of allowed origins
-   - When unspecified, all origins are denied.
+> [!NOTE]
+> TCP support is enabled by default for Docker Engine on port `12434`.
 
 ### Update DMR in Docker Engine
 
