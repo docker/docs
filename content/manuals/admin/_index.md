@@ -5,7 +5,7 @@ keywords: admin, administration, company, organization, Admin Console, user acco
 weight: 10
 params:
   sidebar:
-    group: Platform
+    group: Enterprise
 grid:
 - title: Company administration
   description: Explore how to manage a company.
