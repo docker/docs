@@ -88,7 +88,7 @@ $ docker scout attest get \
 
 To extract and view the human-readable HTML report:
 
-```
+```console
 $ docker scout attest get <your-namespace>/dhi-<image>:<tag> \
   --predicate-type https://docker.com/dhi/stig/v0.1 \
   --verify \
