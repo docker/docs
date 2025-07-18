@@ -234,7 +234,11 @@
 }
 
 @utility sub-button {
-  @apply flex w-full items-start gap-2 rounded-sm px-2 py-2 text-left text-gray-700 transition-colors hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800;
+  @apply flex w-full items-center gap-2 rounded-sm px-2 py-2 text-left text-gray-600 transition-colors hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800;
+}
+
+@utility dropdown-base {
+  @apply rounded-sm border border-gray-300 bg-white text-gray-600 dark:border-gray-300 dark:bg-gray-900 dark:text-gray-100;
 }
 
 @utility toc {

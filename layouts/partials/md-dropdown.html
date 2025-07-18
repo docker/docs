@@ -1,7 +1,6 @@
 <details id="markdownDropdown" class="ml-3 group relative z-10 inline-block" data-heap-id="markdown-dropdown">
     <summary
-      class="inline-flex cursor-pointer items-center gap-0 rounded-sm border border-gray-600 bg-white  py-1 pl-2
-      text-base font-semibold text-gray-600 transition-colors hover:bg-gray-50 dark:border-gray-50 dark:bg-gray-950 dark:text-gray-100 dark:hover:bg-gray-900"
+      class="dropdown-base hover:bg-gray-50 dark:hover:bg-gray-900 inline-flex cursor-pointer items-center gap-0 py-1 pl-2 text-sm font-semibold transition-colors"
       data-heap-id="markdown-dropdown-toggle"
     >
       <span class="font-normal">Page options</span>
@@ -14,7 +13,7 @@
 
     <!-- Dropdown menu -->
     <div
-      class="absolute right-0 z-50 mt-1 w-56 origin-top-right rounded-sm border border-gray-300 bg-white p-2 text-sm text-black shadow-md [display:none] group-open:[display:block] dark:border-gray-100 dark:text-gray-100 dark:bg-gray-950"
+      class="dropdown-base absolute right-0 z-50 mt-1 w-65 origin-top-right p-2 text-sm shadow-md [display:none] group-open:[display:block]"
       data-heap-id="markdown-dropdown-menu"
     >
       <button
@@ -58,6 +57,32 @@
           <div class="text-base">Ask questions with Docs AI</div>
         </div>
       </button>
+       <button
+        onclick="openInChatGPT()"
+        data-heap-id="search-docs-ai-button"
+        class="sub-button"
+      >
+        <span class="icon-svg mt-[2px] text-base leading-none">
+          {{ partial "icon" "/icons/openai.svg" }}
+        </span>
+        <div class="leading-tight">
+          <div class="text-base">Open in ChatGPT</div>
+        </div>
+      </button>
+
+       <button
+        onclick="openInClaude()"
+        data-heap-id="search-docs-ai-button"
+        class="sub-button"
+      >
+        <span class="icon-svg mt-[2px] text-base leading-none">
+          {{ partial "icon" "/icons/claude.svg" }}
+        </span>
+        <div class="leading-tight">
+          <div class="text-base">Open in Claude</div>
+        </div>
+      </button>
+
     </div>
   </details>
 
@@ -104,6 +129,32 @@
       } else {
         alert("Couldn't find Docs AI.");
       }
+    }
+
+    function openInChatGPT() {
+      fetch(getCurrentPlaintextUrl())
+        .then((response) => response.text())
+        .then((text) => {
+          const encodedText = encodeURIComponent(text);
+          const chatGPTUrl = `https://chat.openai.com/?q=${encodedText}`;
+          window.open(chatGPTUrl, "_blank");
+        })
+        .catch((err) => {
+          console.error("Error opening in ChatGPT:", err);
+        });
+    }
+
+    function openInClaude() {
+      fetch(getCurrentPlaintextUrl())
+        .then((response) => response.text())
+        .then((text) => {
+          const encodedText = encodeURIComponent(text);
+        const claudeUrl = `https://claude.ai/new?q=${encodedText}`;https://claude.ai/new?q=%22hey%22
+        window.open(claudeUrl, '_blank');
+        })
+        .catch((err) => {
+          console.error("Error opening in Claude:", err);
+        });
     }
 
     document.addEventListener("click", function (event) {
