@@ -1,6 +1,6 @@
 ---
 title: Wasm workloads 
-weight: 20
+weight: 90
 description: How to run Wasm workloads with Docker Desktop
 keywords: Docker, WebAssembly, wasm, containerd, engine
 toc_max: 3
@@ -15,12 +15,15 @@ params:
 
 {{< summary-bar feature_name="Wasm workloads" >}}
 
-Wasm (short for WebAssembly) is a fast, light alternative to the Linux and
-Windows containers you’re using in Docker today (with
-[some tradeoffs](https://www.docker.com/blog/docker-wasm-technical-preview/)).
+WebAssembly (Wasm) is a fast, light alternative to Linux and
+Windows containers.  With Docker Desktop, you can now run Wasm workloads side by side with traditional containers.
 
-This page provides information about the new ability to run Wasm applications
+This page provides information about the ability to run Wasm applications
 alongside your Linux containers in Docker.
+
+> [!TIP]
+>
+> Learn more about Wasm use cases and tradeoffs in the [Docker Wasm technical preview blog post](https://www.docker.com/blog/docker-wasm-technical-preview/).
 
 ## Turn on Wasm workloads
 
@@ -31,12 +34,10 @@ then pre-existing images and containers will be inaccessible.
 1. Navigate to **Settings** in Docker Desktop.
 2. In the **General** tab, check **Use containerd for pulling and storing images**.
 3. Go to **Features in development** and check the **Enable Wasm** option.
-4. Select **Apply & restart** to save the settings.
+4. Select **Apply** to save the settings.
 5. In the confirmation dialog, select **Install** to install the Wasm runtimes.
 
-Docker Desktop downloads and installs the following runtimes that you can use
-to run Wasm workloads:
-
+Docker Desktop downloads and installs the following runtimes: 
 - `io.containerd.slight.v1`
 - `io.containerd.spin.v2`
 - `io.containerd.wasmedge.v1`
@@ -92,7 +93,7 @@ Start the application using the normal Docker Compose commands:
 
 ### Running a multi-service application with Wasm
 
-Networking works the same as you expect with Linux containers, giving you the
+Networking works the same as you'd expect with Linux containers, giving you the
 flexibility to combine Wasm applications with other containerized workloads,
 such as a database, in a single application stack.
 
@@ -211,16 +212,5 @@ Update your Docker Desktop to the latest version and try again.
 
 ## Known issues
 
-- Docker Compose may not exit cleanly when interrupted
-  - Workaround: Clean up `docker-compose` processes by sending them a SIGKILL
-    (`killall -9 docker-compose`).
-- Pushes to Hub might give an error stating
-  `server message: insufficient_scope: authorization failed`, even after logging
-  in using Docker Desktop
-  - Workaround: Run `docker login` in the CLI
-
-## Feedback
-
-Thanks for trying out Wasm workloads with Docker. Give feedback or report any
-bugs you may find through the issues tracker on the
-[public roadmap item](https://github.com/docker/roadmap/issues/426).
+- Docker Compose may not exit cleanly when interrupted. As a workaround, clean up `docker-compose` processes by sending them a SIGKILL (`killall -9 docker-compose`).
+- Pushes to Docker Hub might give an error stating `server message: insufficient_scope: authorization failed`, even after signing in through Docker Desktop. As a workaround, run `docker login` in the CLI

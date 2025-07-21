@@ -2,8 +2,8 @@
 title: Organization administration overview
 linkTitle: Organization administration
 weight: 10
-description: Learn about managing organizations in Docker including how they relate to teams, how to onboard, and more
-keywords: organizations, admin, overview
+description: Learn how to manage your Docker organization, including teams, members, permissions, and settings.
+keywords: organizations, admin, overview, manage teams, roles
 grid:
 - title: Onboard your organization
   description: Learn how to onboard and secure your organization.
@@ -37,7 +37,7 @@ grid:
   icon: key
 - title: Domain management
   description: Add, verify, and audit your domains.
-  link: /admin/organization/security-settings/domains/
+  link: /security/for-admins/domain-management/
   icon: domain_verification
 - title: FAQs
   description: Explore common organization FAQs.
@@ -45,10 +45,26 @@ grid:
   icon: help
 ---
 
-{{% include "admin-org-overview.md" %}}
+A Docker organization is a collection of teams and repositories with centralized
+management. It helps administrators group members and assign access in a
+streamlined, scalable way.
 
-To create an organization, see [Create your organization](../organization/orgs.md).
+## Organization structure
 
-Learn how to administer an organization in the following sections.
+The following diagram shows how organizations relate to teams and members.
+
+![Diagram showing how teams and members relate within a Docker organization](/admin/images/org-structure.webp)
+
+## Organization members
+
+Organization owners have full administrator access to manage members, roles,
+and teams across the organization.
+
+An organization includes members and optional teams. Teams help group members
+and simplify permission management.
+
+## Create and manage your organization
+
+Learn how to create and manage your organization in the following sections.
 
 {{< grid >}}

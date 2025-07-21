@@ -5,7 +5,7 @@ keywords: wsl, wsl2, installing wsl2, wsl installation, docker wsl2, wsl docker,
   tech preview, wsl install docker, install docker wsl, how to install docker in wsl
 title: Docker Desktop WSL 2 backend on Windows
 linkTitle: WSL
-weight: 90
+weight: 120
 aliases:
 - /docker-for-windows/wsl/
 - /docker-for-windows/wsl-tech-preview/
@@ -23,7 +23,7 @@ Additionally, with WSL 2, the time required to start a Docker daemon after a col
 
 Before you turn on the Docker Desktop WSL 2 feature, ensure you have:
 
-- At a minimum WSL version 1.1.3.0., but ideally the latest version of WSL to [avoid Docker Desktop not working as expected](best-practices.md).
+- At a minimum WSL version 2.1.5, but ideally the latest version of WSL to [avoid Docker Desktop not working as expected](best-practices.md).
 - Met the Docker Desktop for Windows' [system requirements](/manuals/desktop/setup/install/windows-install.md#system-requirements).
 - Installed the WSL 2 feature on Windows. For detailed instructions, refer to the [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
 
@@ -48,7 +48,7 @@ Before you turn on the Docker Desktop WSL 2 feature, ensure you have:
 5. From the **General** tab, select **Use WSL 2 based engine**..
 
     If you have installed Docker Desktop on a system that supports WSL 2, this option is turned on by default.
-6. Select **Apply & Restart**.
+6. Select **Apply**.
 
 Now `docker` commands work from Windows using the new WSL 2 engine.
 
@@ -92,7 +92,7 @@ Docker Desktop does not require any particular Linux distributions to be install
     ```
    If **WSL integrations** isn't available under **Resources**, Docker may be in Windows container mode. In your taskbar, select the Docker menu and then **Switch to Linux containers**.
 
-3. Select **Apply & Restart**.
+3. Select **Apply**.
 
 > [!NOTE]
 >
@@ -111,7 +111,7 @@ Docker Desktop runs within its own dedicated WSL distribution, `docker-desktop`,
 
 WSL is designed to facilitate interoperability between Windows and Linux environments. Its file system is accessible from the Windows host `\\wsl$`, meaning Windows processes can read and modify files within WSL. This behavior is not specific to Docker Desktop, but rather a core aspect of WSL itself.
 
-For organizations concerned about security risks related to WSL and want stricter isolation and security controls, run Docker Desktop in Hyper-V mode instead of WSL 2. Alternatively, run your container workloads with [Enhanced Container Isolation](/manuals/security/for-admins/hardened-desktop/enhanced-container-isolation/_index.md) enabled.
+For organizations concerned about security risks related to WSL and want stricter isolation and security controls, run Docker Desktop in Hyper-V mode instead of WSL 2. Alternatively, run your container workloads with [Enhanced Container Isolation](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/_index.md) enabled.
 
 ## Additional resources
 

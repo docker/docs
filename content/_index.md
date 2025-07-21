@@ -14,6 +14,17 @@ grid:
         url: "/desktop/use-desktop/"
       - text: "Release notes"
         url: "/desktop/release-notes/"
+  - title: Docker Hardened Images
+    icon: /icons/dhi.svg
+    description: |
+      Secure, minimal images for trusted software delivery.
+    links:
+      - text: "Overview"
+        url: "/dhi/"
+      - text: "Quickstart"
+        url: "/dhi/get-started/"
+      - text: "Use an image"
+        url: "/dhi/how-to/use/"
   - title: Docker Engine
     icon: developer_board
     description: |
@@ -135,4 +146,15 @@ grid:
         url: "https://testcontainers.com/cloud/docs/#getting-started"
       - text: "TCC for CI"
         url: "https://testcontainers.com/cloud/docs/#tcc-for-ci"
+  - title: Docker Offload
+    icon: cloud
+    description: |
+      Build and run containers in the cloud.
+    links:
+      - text: "Overview"
+        url: "/offload/"
+      - text: "Quickstart"
+        url: "/offload/quickstart/"
+      - text: "About Docker Offload"
+        url: "/offload/about/"
 ---

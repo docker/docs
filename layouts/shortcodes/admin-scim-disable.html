@@ -3,11 +3,11 @@
    - Organization: Select **My Hub**, your organization, **Settings**, and then **Security**.` }}
 
 {{ if eq (.Get "product") "admin" }}
-{{ $product_link = "the [Admin Console](https://admin.docker.com)" }}
-{{ $sso_navigation = "Select your organization or company in the left navigation drop-down menu, and then select **SSO and SCIM.**" }}
+  {{ $product_link = "[Docker Home](https://app.docker.com/) and select your organization." }}
+  {{ $sso_navigation = "Select **Admin Console**, then **SSO and SCIM**." }}
 {{ end }}
 
 1. Sign in to {{ $product_link }}.
-2. {{ $sso_navigation }}
-3. In the SSO connections table, select the **Actions** icon.
-4. Select **Disable SCIM**.
+1. {{ $sso_navigation }}
+1. In the SSO connections table, select the **Actions** icon.
+1. Select **Disable SCIM**.

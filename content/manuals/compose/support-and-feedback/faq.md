@@ -1,7 +1,7 @@
 ---
-description: Frequently asked questions for Docker Compose
-keywords: documentation, docs,  docker, compose, faq, docker compose vs docker-compose
-title: Compose FAQs
+description: Answers to common questions about Docker Compose, including v1 vs v2, commands, shutdown behavior, and development setup.
+keywords: docker compose faq, docker compose questions, docker-compose vs docker compose, docker compose json, docker compose stop delay, run multiple docker compose
+title: Frequently asked questions about Docker Compose
 linkTitle: FAQs
 weight: 10
 tags: [FAQ]
@@ -11,9 +11,9 @@ aliases:
 
 ### What is the difference between `docker compose` and `docker-compose`
 
-Version one of the Docker Compose command-line binary was first released in 2014. It was written in Python, and is invoked with `docker-compose`. Typically, Compose V1 projects include a top-level version element in the compose.yaml file, with values ranging from 2.0 to 3.8, which refer to the specific file formats.
+Version one of the Docker Compose command-line binary was first released in 2014. It was written in Python, and is invoked with `docker-compose`. Typically, Compose v1 projects include a top-level version element in the `compose.yaml` file, with values ranging from 2.0 to 3.8, which refer to the specific file formats.
 
-Version two of the Docker Compose command-line binary was announced in 2020, is written in Go, and is invoked with `docker compose`. Compose V2 ignores the version top-level element in the compose.yaml file.
+Version two of the Docker Compose command-line binary was announced in 2020, is written in Go, and is invoked with `docker compose`. Compose v2 ignores the version top-level element in the compose.yaml file.
 
 For further information, see [History and development of Compose](/manuals/compose/intro/history.md).
 
@@ -91,7 +91,7 @@ any JSON file should be valid YAML. To use a JSON file with Compose,
 specify the filename to use, for example:
 
 ```console
-$ docker compose -f docker-compose.json up
+$ docker compose -f compose.json up
 ```
 
 ### Should I include my code with `COPY`/`ADD` or a volume?

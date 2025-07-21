@@ -115,7 +115,7 @@ You can run images from Docker Hub using the CLI or Docker Desktop Dashboard.
    The container logs appear after the container starts.
 
 5. Select the **8080:80** link to open the server, or visit
-   [https://localhost:8080](https://localhost:8080) in your web browser.
+   [http://localhost:8080](http://localhost:8080) in your web browser.
 
 6. In the Docker Desktop Dashboard, select the **Stop** button to stop the
    container.
@@ -174,7 +174,7 @@ You can run images from Docker Hub using the CLI or Docker Desktop Dashboard.
    ...
    ```
 
-3. Visit [https://localhost:8080](https://localhost:8080) to view the default
+3. Visit [http://localhost:8080](http://localhost:8080) to view the default
    Nginx page and verify that the container is running.
 
 4. In the terminal, press <kdb>Ctrl+C</kbd> to stop the container.
@@ -241,7 +241,7 @@ customize your own images to suit specific needs.
    $ docker run -p 8080:80 --rm <YOUR-USERNAME>/nginx-custom
    ```
 
-4. Visit [https://localhost:8080](https://localhost:8080) to view the page. You
+4. Visit [http://localhost:8080](http://localhost:8080) to view the page. You
    should see `Hello world from Docker!`.
 
 5. In the terminal, press CTRL+C to stop the container.
@@ -323,4 +323,3 @@ these options.
 
 Add [repository information](./repos/manage/information.md) to help users find and use
 your image.
-

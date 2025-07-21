@@ -97,9 +97,6 @@ jobs:
             docker-bake.hcl
           targets: validate-upstream
           provenance: false
-          set: |
-            *.cache-from=type=gha,scope=docs-upstream
-            *.cache-to=type=gha,scope=docs-upstream
         env:
           UPSTREAM_MODULE_NAME: ${{ inputs.module-name }}
           UPSTREAM_REPO: ${{ github.repository }}

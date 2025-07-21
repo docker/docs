@@ -81,12 +81,11 @@ $ docker buildx build --push -t <registry>/<image> \
 
 ## Multiple caches
 
-BuildKit currently only supports
-[a single cache exporter](https://github.com/moby/buildkit/pull/3024). But you
-can import from as many remote caches as you like. For example, a common pattern
-is to use the cache of both the current branch and the main branch. The
-following example shows importing cache from multiple locations using the
-registry cache backend:
+BuildKit supports multiple cache exporters, allowing you to push cache to more 
+than one destination. You can also import from as many remote caches as you'd 
+like. For example, a common pattern is to use the cache of both the current 
+branch and the main branch. The following example shows importing cache from 
+multiple locations using the registry cache backend:
 
 ```console
 $ docker buildx build --push -t <registry>/<image> \
@@ -180,3 +179,6 @@ $ docker buildx build --push -t <registry>/<image> \
   --cache-to type=registry,ref=<registry>/<cache-image>,oci-mediatypes=true,image-manifest=true \
   --cache-from type=registry,ref=<registry>/<cache-image> .
 ```
+
+> [!NOTE]
+> Since BuildKit v0.21, `image-manifest` is enabled by default.

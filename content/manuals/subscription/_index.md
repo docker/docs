@@ -1,7 +1,7 @@
 ---
 title: Subscription
 description: Learn about subscription features and how to manage your subscription
-keywords: Docker, pricing, billing, Pro, Team, business, subscription, tier, plan
+keywords: Docker, pricing, billing, Pro, Team, business, subscription, tier
 weight: 50
 params:
   sidebar:
@@ -20,7 +20,7 @@ grid_subscriptions:
   link: /subscription/scale/
   icon: leaderboard
 - title: Change your subscription
-  description: Learn how to upgrade or downgrade your plan.
+  description: Learn how to upgrade or downgrade your subscription.
   link: /subscription/change/
   icon: upgrade
 - title: Manage seats

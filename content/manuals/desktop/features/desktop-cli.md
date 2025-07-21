@@ -1,14 +1,9 @@
 ---
-title: Using the Docker Desktop CLI
+title: Use the Docker Desktop CLI
 linkTitle: Docker Desktop CLI
-weight: 120
+weight: 100
 description: How to use the Docker Desktop CLI
 keywords: cli, docker desktop, macos, windows, linux
-params:
-  sidebar:
-    badge:
-      color: green
-      text: New
 ---
 
 {{< summary-bar feature_name="Docker Desktop CLI" >}}

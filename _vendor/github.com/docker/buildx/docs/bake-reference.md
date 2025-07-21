@@ -227,6 +227,8 @@ The following table shows the complete list of attributes that you can assign to
 | [`description`](#targetdescription)             | String  | Description of a target                                              |
 | [`dockerfile-inline`](#targetdockerfile-inline) | String  | Inline Dockerfile string                                             |
 | [`dockerfile`](#targetdockerfile)               | String  | Dockerfile location                                                  |
+| [`entitlements`](#targetentitlements)           | List    | Permissions that the build process requires to run                   |
+| [`extra-hosts`](#targetextra-hosts)             | List    | Customs host-to-IP mapping                                           |
 | [`inherits`](#targetinherits)                   | List    | Inherit attributes from other targets                                |
 | [`labels`](#targetlabels)                       | Map     | Metadata for images                                                  |
 | [`matrix`](#targetmatrix)                       | Map     | Define a set of variables that forks a target into multiple targets. |
@@ -297,7 +299,12 @@ example adds annotations to both the image index and manifests.
 
 ```hcl
 target "default" {
-  output = [{ type = "image", name = "foo" }]
+  output = [
+    {
+      type = "image"
+      name = "foo"
+    }
+  ]
   annotations = ["index,manifest:org.opencontainers.image.authors=dvdksn"]
 }
 ```
@@ -314,11 +321,11 @@ This attribute accepts the long-form CSV version of attestation parameters.
 target "default" {
   attest = [
     {
-      type = "provenance",
-      mode = "max",
+      type = "provenance"
+      mode = "max"
     },
     {
-      type = "sbom",
+      type = "sbom"
     }
   ]
 }
@@ -336,12 +343,12 @@ This takes a list value, so you can specify multiple cache sources.
 target "app" {
   cache-from = [
     {
-      type = "s3",
-      region = "eu-west-1",
+      type = "s3"
+      region = "eu-west-1"
       bucket = "mybucket"
     },
     {
-      type = "registry",
+      type = "registry"
       ref = "user/repo:cache"
     }
   ]
@@ -360,12 +367,12 @@ This takes a list value, so you can specify multiple cache export targets.
 target "app" {
   cache-to = [
     {
-      type = "s3",
-      region = "eu-west-1",
+      type = "s3"
+      region = "eu-west-1"
       bucket = "mybucket"
     },
     {
-      type = "inline",
+      type = "inline"
     }
   ]
 }
@@ -445,9 +452,9 @@ a context based on the pattern of the context value.
 ```hcl
 # docker-bake.hcl
 target "app" {
-    contexts = {
-        alpine = "docker-image://alpine:3.13"
-    }
+  contexts = {
+    alpine = "docker-image://alpine:3.13"
+  }
 }
 ```
 
@@ -462,9 +469,9 @@ RUN echo "Hello world"
 ```hcl
 # docker-bake.hcl
 target "app" {
-    contexts = {
-        src = "../path/to/source"
-    }
+  contexts = {
+    src = "../path/to/source"
+  }
 }
 ```
 
@@ -485,12 +492,13 @@ COPY --from=src . .
 ```hcl
 # docker-bake.hcl
 target "base" {
-    dockerfile = "baseapp.Dockerfile"
+  dockerfile = "baseapp.Dockerfile"
 }
+
 target "app" {
-    contexts = {
-        baseapp = "target:base"
-    }
+  contexts = {
+    baseapp = "target:base"
+  }
 }
 ```
 
@@ -507,11 +515,11 @@ functionality.
 
 ```hcl
 target "lint" {
-    description = "Runs golangci-lint to detect style errors"
-    args = {
-        GOLANGCI_LINT_VERSION = null
-    }
-    dockerfile = "lint.Dockerfile"
+  description = "Runs golangci-lint to detect style errors"
+  args = {
+    GOLANGCI_LINT_VERSION = null
+  }
+  dockerfile = "lint.Dockerfile"
 }
 ```
 
@@ -576,6 +584,20 @@ target "integration-tests" {
 ```
 
 Entitlements are enabled with a two-step process. First, a target must declare the entitlements it requires. Secondly, when invoking the `bake` command, the user must grant the entitlements by passing the `--allow` flag or confirming the entitlements when prompted in an interactive terminal. This is to ensure that the user is aware of the possibly insecure permissions they are granting to the build process.
+
+### `target.extra-hosts`
+
+Use the `extra-hosts` attribute to define customs host-to-IP mapping for the
+target. This has the same effect as passing a [`--add-host`][add-host] flag to
+the build command.
+
+```hcl
+target "default" {
+  extra-hosts = {
+    my_hostname = "8.8.8.8"
+  }
+}
+```
 
 ### `target.inherits`
 
@@ -913,8 +935,15 @@ variable "HOME" {
 
 target "default" {
   secret = [
-    { type = "env", id = "KUBECONFIG" },
-    { type = "file", id = "aws", src = "${HOME}/.aws/credentials" },
+    {
+      type = "env"
+      id = "KUBECONFIG"
+    },
+    {
+      type = "file"
+      id = "aws"
+      src = "${HOME}/.aws/credentials"
+    }
   ]
 }
 ```
@@ -1068,6 +1097,7 @@ or interpolate them in attribute values in your Bake file.
 
 ```hcl
 variable "TAG" {
+  type = string
   default = "latest"
 }
 
@@ -1087,6 +1117,206 @@ overriding the default `latest` value shown in the previous example.
 
 ```console
 $ TAG=dev docker buildx bake webapp-dev
+```
+
+Variables can also be assigned an explicit type.
+If provided, it will be used to validate the default value (if set), as well as any overrides.
+This is particularly useful when using complex types which are intended to be overridden.
+The previous example could be expanded to apply an arbitrary series of tags.
+```hcl
+variable "TAGS" {
+  default = ["latest"]
+  type = list(string)
+}
+
+target "webapp-dev" {
+  dockerfile = "Dockerfile.webapp"
+  tags = [for tag in TAGS: "docker.io/username/webapp:${tag}"]
+}
+```
+
+This example shows how to generate three tags without changing the file
+or using custom functions/parsing:
+```console
+$ TAGS=dev,latest,2 docker buildx bake webapp-dev
+```
+
+### Variable typing
+
+The following primitive types are available:
+* `string`
+* `number`
+* `bool`
+
+The type is expressed like a keyword; it must be expressed as a literal:
+```hcl
+variable "OK" {
+  type = string
+}
+
+# cannot be an actual string
+variable "BAD" {
+  type = "string"
+}
+
+# cannot be the result of an expression
+variable "ALSO_BAD" {
+  type = lower("string")
+}
+```
+Specifying primitive types can be valuable to show intent (especially when a default is not provided),
+but bake will generally behave as expected without explicit typing.
+
+Complex types are expressed with "type constructors"; they are:
+* `tuple([<type>,...])`
+* `list(<type>)`
+* `set(<type>)`
+* `map(<type>)`
+* `object({<attr>=<type>},...})`
+
+The following are examples of each of those, as well as how the (optional) default value would be expressed:
+```hcl
+# structured way to express "1.2.3-alpha"
+variable "MY_VERSION" {
+  type = tuple([number, number, number, string])
+  default = [1, 2, 3, "alpha"]
+}
+
+# JDK versions used in a matrix build
+variable "JDK_VERSIONS" {
+  type = list(number)
+  default = [11, 17, 21]
+}
+
+# better way to express the previous example; this will also
+# enforce set semantics and allow use of set-based functions
+variable "JDK_VERSIONS" {
+  type = set(number)
+  default = [11, 17, 21]
+}
+
+# with the help of lookup(), translate a 'feature' to a tag
+variable "FEATURE_TO_NAME" {
+  type = map(string)
+  default = {featureA = "slim", featureB = "tiny"}
+}
+
+# map a branch name to a registry location
+variable "PUSH_DESTINATION" {
+  type = object({branch = string, registry = string})
+  default = {branch = "main", registry = "prod-registry.invalid.com"}
+}
+
+# make the previous example more useful with composition
+variable "PUSH_DESTINATIONS" {
+  type = list(object({branch = string, registry = string}))
+  default = [
+    {branch = "develop", registry = "test-registry.invalid.com"},
+    {branch = "main", registry = "prod-registry.invalid.com"},
+  ]
+}
+```
+Note that in each example, the default value would be valid even if typing was not present.
+If typing was omitted, the first three would all be considered `tuple`;
+you would be restricted to functions that operate on `tuple` and, for example, not be able to add elements.
+Similarly, the third and fourth would both be considered `object`, with the limits and semantics of that type.
+In short, in the absence of a type, any value delimited with `[]` is a `tuple`
+and value delimited with `{}` is an `object`.
+Explicit typing for complex types not only opens up the ability to use functions applicable to that specialized type,
+but is also a precondition for providing overrides.
+
+> [!NOTE]
+> See [HCL Type Expressions][typeexpr] page for more details.
+
+### Overriding variables
+
+As mentioned in the [intro to variables](#variable), primitive types (`string`, `number`, and `bool`)
+can be overridden without typing and will generally behave as expected.
+(When explicit typing is not provided, a variable is assumed to be primitive when the default value lacks `{}` or `[]` delimiters;
+a variable with neither typing nor a default value is treated as `string`.)
+Naturally, these same overrides can be used alongside explicit typing too;
+they may help in edge cases where you want `VAR=true` to be a `string`, where without typing,
+it may be a `string` or a `bool` depending on how/where it's used.
+Overriding a variable with a complex type can only be done when the type is provided.
+This is still done via environment variables, but the values can be provided via CSV or JSON.
+
+#### CSV overrides
+
+This is considered the canonical method and is well suited to interactive usage.
+It is assumed that `list` and `set` will be the most common complex type,
+as well as the most common complex type designed to be overridden.
+Thus, there is full CSV support for `list` and `set`
+(and `tuple`; despite being considered a structural type, it is more like a collection type in this regard).
+
+
+There is limited support for `map` and `object` and no support for composite types;
+for these advanced cases, an alternative mechanism [using JSON](#json-overrides) is available.
+
+#### JSON overrides
+
+Overrides can also be provided via JSON.
+This is the only method available for providing some complex types and may be convenient if overrides are already JSON
+(for example, if they come from a JSON API).
+It can also be used when dealing with values are difficult or impossible to specify using CSV (e.g., values containing quotes or commas).
+To use JSON, simply append `_JSON` to the variable name.
+In this contrived example, CSV cannot handle the second value; despite being a supported CSV type, JSON must be used:
+```hcl
+variable "VALS" {
+  type = list(string)
+  default = ["some", "list"]
+}
+```
+```console
+$ cat data.json
+["hello","with,comma","with\"quote"]
+$ VALS_JSON=$(< data.json) docker buildx bake
+
+# CSV equivalent, though the second value cannot be expressed at all 
+$ VALS='hello,"with""quote"' docker buildx bake
+```
+
+This example illustrates some precedence and usage rules:
+```hcl
+variable "FOO" {
+  type = string
+  default = "foo"
+}
+
+variable "FOO_JSON" {
+  type = string
+  default = "foo"
+}
+```
+
+The variable `FOO` can *only* be overridden using CSV because `FOO_JSON`, which would typically used for a JSON override,
+is already a defined variable.
+Since `FOO_JSON` is an actual variable, setting that environment variable would be expected to a CSV value.
+A JSON override *is* possible for this variable, using environment variable `FOO_JSON_JSON`.
+
+```Console
+# These three are all equivalent, setting variable FOO=bar
+$ FOO=bar docker buildx bake <...>
+$ FOO='bar' docker buildx bake <...>
+$ FOO="bar" docker buildx bake <...>
+
+# Sets *only* variable FOO_JSON; FOO is untouched
+$ FOO_JSON=bar docker buildx bake <...>
+
+# This also sets FOO_JSON, but will fail due to not being valid JSON
+$ FOO_JSON_JSON=bar docker buildx bake <...>
+
+# These are all equivalent
+$ cat data.json
+"bar"
+$ FOO_JSON_JSON=$(< data.json) docker buildx bake <...>
+$ FOO_JSON_JSON='"bar"' docker buildx bake <...>
+$ FOO_JSON=bar docker buildx bake <...>
+
+# This results in setting two different variables, both specified as CSV (FOO=bar and FOO_JSON="baz")
+$ FOO=bar FOO_JSON='"baz"' docker buildx bake <...>
+
+# These refer to the same variable with FOO_JSON_JSON having precedence and read as JSON (FOO_JSON=baz)
+$ FOO_JSON=bar FOO_JSON_JSON='"baz"' docker buildx bake <...>
 ```
 
 ### Built-in variables
@@ -1208,6 +1438,7 @@ target "webapp-dev" {
 
 <!-- external links -->
 
+[add-host]: https://docs.docker.com/reference/cli/docker/buildx/build/#add-host
 [attestations]: https://docs.docker.com/build/attestations/
 [bake_stdlib]: https://github.com/docker/buildx/blob/master/bake/hclparser/stdlib.go
 [build-arg]: https://docs.docker.com/reference/cli/docker/image/build/#build-arg
@@ -1226,4 +1457,5 @@ target "webapp-dev" {
 [ssh]: https://docs.docker.com/reference/cli/docker/buildx/build/#ssh
 [tag]: https://docs.docker.com/reference/cli/docker/image/build/#tag
 [target]: https://docs.docker.com/reference/cli/docker/image/build/#target
+[typeexpr]: https://github.com/hashicorp/hcl/tree/main/ext/typeexpr
 [userfunc]: https://github.com/hashicorp/hcl/tree/main/ext/userfunc

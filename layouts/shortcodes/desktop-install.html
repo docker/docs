@@ -1,6 +1,6 @@
 {{- $all := .Get "all" -}}
 {{- $win := .Get "win" -}}
-{{- $beta_win_arm := .Get "beta_win_arm" -}}
+{{- $win_arm_release := .Get "win_arm_release" -}}
 {{- $mac := .Get "mac" -}}
 {{- $linux := .Get "linux" -}}
 {{- $version := .Get "version" -}}
@@ -14,9 +14,9 @@
   (<a rel="noopener"
       href="https://desktop.docker.com/win/main/amd64{{ $build_path }}checksums.txt">checksum</a>) |
   {{ end }}
-  {{- if or $beta_win_arm }}
+  {{- if or $win_arm_release }}
   <a rel="noopener"
-     href="https://desktop.docker.com/win/main/arm64{{ $build_path }}Docker%20Desktop%20Installer.exe">Windows ARM Beta</a>
+     href="https://desktop.docker.com/win/main/arm64{{ $build_path }}Docker%20Desktop%20Installer.exe">Windows ARM {{ $win_arm_release }}</a>
   (<a rel="noopener"
       href="https://desktop.docker.com/win/main/arm64{{ $build_path }}checksums.txt">checksum</a>) |
   {{ end }}

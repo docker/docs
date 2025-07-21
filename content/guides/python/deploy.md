@@ -98,7 +98,7 @@ data:
 In your `python-docker-dev-example` directory, create a file named
 `docker-python-kubernetes.yaml`. Replace `DOCKER_USERNAME/REPO_NAME` with your
 Docker username and the repository name that you created in [Configure CI/CD for
-your Python application](./configure-ci-cd.md).
+your Python application](./configure-github-actions.md).
 
 ```yaml
 apiVersion: apps/v1
@@ -158,7 +158,7 @@ In these Kubernetes YAML file, there are various objects, separated by the `---`
   you'll get just one replica, or copy of your pod. That pod, which is
   described under `template`, has just one container in it. The
   container is created from the image built by GitHub Actions in [Configure CI/CD for
-  your Python application](configure-ci-cd.md).
+  your Python application](configure-github-actions.md).
 - A Service, which will define how the ports are mapped in the containers.
 - A PersistentVolumeClaim, to define a storage that will be persistent through restarts for the database.
 - A Secret, Keeping the database password as an example using secret kubernetes resource.

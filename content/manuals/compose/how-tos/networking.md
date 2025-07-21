@@ -164,7 +164,9 @@ networks:
     driver: custom-driver-1
 ```
 
-## Use a pre-existing network
+## Use an existing network
+
+If you've manually created a bridge network outside of Compose using the `docker network create` command, you can connect your Compose services to it by marking the network as `external`.
 
 If you want your containers to join a pre-existing network, use the [`external` option](/reference/compose-file/networks.md#external)
 ```yaml

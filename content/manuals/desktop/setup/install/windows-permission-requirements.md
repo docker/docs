@@ -18,11 +18,22 @@ Docker Desktop on Windows is designed with security in mind. Administrative righ
 
 ## Permission requirements
 
-While Docker Desktop on Windows can be run without having `Administrator` privileges, it does require them during installation. On installation you receive a UAC prompt which allows a privileged helper service to be installed. After that, Docker Desktop can be run without administrator privileges, provided you are members of the `docker-users` group. If you performed the installation, you are automatically added to this group, but other users must be added manually. This allows the administrator to control who has access to Docker Desktop.
+While Docker Desktop on Windows can be run without having `Administrator` privileges, it does require them during installation. On installation you receive a UAC prompt which allows a privileged helper service to be installed. After that, Docker Desktop can be run without administrator privileges. 
 
-The reason for this approach is that Docker Desktop needs to perform a limited set of privileged operations which are conducted by the privileged helper process `com.docker.service`. This approach allows, following the principle of least privilege, `Administrator` access to be used only for the operations for which it is absolutely necessary, while still being able to use Docker Desktop as an unprivileged user.
+Running Docker Desktop on Windows without the privileged helper does not require users to have `docker-users` group membership. However,
+some features that require privileged operations will have this requirement. 
+
+If you performed the installation, you are automatically added to this group, but other users must be added manually. This allows the administrator to control who has access to features that require higher privileges, such as creating and managing the Hyper-V VM, or using Windows containers.
+
+When Docker Desktop launches, all non-privileged named pipes are created so that only the following users can access them:
+- The user that launched Docker Desktop.
+- Members of the local `Administrators` group.
+- The `LOCALSYSTEM` account.
 
 ## Privileged helper
+
+Docker Desktop needs to perform a limited set of privileged operations which are conducted by the privileged helper process `com.docker.service`. This approach allows, following the principle of least privilege, `Administrator` access to be used only for the operations for which it is absolutely necessary, while still being able to use Docker Desktop as an unprivileged user.
+
 
 The privileged helper `com.docker.service` is a Windows service which runs in the background with `SYSTEM` privileges. It listens on the named pipe `//./pipe/dockerBackendV2`. The developer runs the Docker Desktop application, which connects to the named pipe and sends commands to the service. This named pipe is protected, and only users that are part of the `docker-users` group can have access to it.
 
@@ -57,7 +68,7 @@ into Docker containers still retain their original permissions.  Containers don'
 ## Enhanced Container Isolation
 
 In addition, Docker Desktop supports [Enhanced Container Isolation
-mode](/manuals/security/for-admins/hardened-desktop/enhanced-container-isolation/_index.md) (ECI),
+mode](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/_index.md) (ECI),
 available to Business customers only, which further secures containers without
 impacting developer workflows.
 

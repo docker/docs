@@ -18,9 +18,7 @@ account security.
 ## Update general settings
 
 1. Sign in to your [Docker account](https://app.docker.com/login).
-2. In Docker Home, select your avatar in the top-right corner to open the
-drop-down.
-3. Select **Account settings**.
+2. Select your avatar in the top-right corner and select **Account settings**.
 
 From the Account settings page, you can take any of the following actions.
 
@@ -62,12 +60,12 @@ Follow the instructions in the password reset email.
 
 To update your two-factor authentication (2FA) settings, select **2FA**.
 For information on two-factor authentication (2FA) for your account, see
-[Enable two-factor authentication](../security/for-developers/2fa/_index.md)
+[Enable two-factor authentication](../security/2fa/_index.md)
 to get started.
 
 To manage personal access tokens, select **Personal access tokens**.
 For information on personal access tokens, see
-[Create and manage access tokens](../security/for-developers/access-tokens.md).
+[Create and manage access tokens](../security/access-tokens.md).
 
 ## Manage connected accounts
 

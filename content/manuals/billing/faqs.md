@@ -17,6 +17,7 @@ weight: 60
 - Diners
 - UnionPay
 - Link
+- ACH transfer with a [verified](manuals/billing/payment-method.md#verify-a-bank-account) US bank account
 
 ### What currency is supported?
 
@@ -32,7 +33,7 @@ If your subscription payment fails, there is a grace period of 15 days, includin
 
 Docker also sends an email notification `Action Required - Credit Card Payment Failed` with an attached unpaid invoice after each failed payment attempt.
 
-Once the grace period is over and the invoice is still not paid, the subscription downgrades to a free plan and all paid features are disabled.
+Once the grace period is over and the invoice is still not paid, the subscription downgrades to a free subscription and all paid features are disabled.
 
 ### Can I manually retry a failed payment?
 
@@ -44,9 +45,18 @@ updated. If you need to update your default payment method, see
 
 ### Does Docker collect sales tax and/or VAT?
 
-Docker began collecting sales tax on subscription fees for United States customers on July 1, 2024. For European customers, Docker will begin collecting VAT on March 1, 2025.
+Docker collects sales tax and/or VAT from the following:
 
-To ensure that tax assessments are correct, make sure that your billing information and VAT/Tax ID, if applicable, are updated. See [Update the billing information](/billing/details/).
+- For United States customers, Docker began collecting sales tax on July 1, 2024.
+- For European customers, Docker began collecting VAT on March 1, 2025.
+- For United Kingdom customers, Docker began collecting VAT on May 1, 2025.
+
+To ensure that tax assessments are correct, make sure that your billing
+information and VAT/Tax ID, if applicable, are updated. See
+[Update the billing information](/billing/details/).
+
+If you're exempt from sales tax, see
+[Register a tax certificate](/billing/tax-certificate/).
 
 ### How do I certify my tax exempt status?
 
