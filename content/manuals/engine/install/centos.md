@@ -19,7 +19,7 @@ download-url-base: https://download.docker.com/linux/centos
 ---
 
 To get started with Docker Engine on CentOS, make sure you
-[meet the prerequisites](#prerequisites), and then follow the
+[meet the prerequisites](#prerequisites), and follow the
 [installation steps](#installation-methods).
 
 ## Prerequisites
@@ -31,16 +31,17 @@ CentOS versions:
 
 - CentOS 9 (stream)
 
-The `centos-extras` repository must be enabled. This repository is enabled by
-default. If you have disabled it, you need to re-enable it.
+> [!NOTE]
+> The `centos-extras` repository must be enabled. This repository is enabled by default.
+> If you have disabled it, re-enable it before proceeding.
 
 ### Uninstall old versions
 
-Before you can install Docker Engine, you need to uninstall any conflicting packages.
+Before you install Docker Engine, uninstall any conflicting packages.
 
-Your Linux distribution may provide unofficial Docker packages, which may conflict
-with the official packages provided by Docker. You must uninstall these packages
-before you install the official version of Docker Engine.
+Your Linux distribution may provide unofficial Docker packages, which can
+conflict with the official packages provided by Docker. Uninstall these packages
+before installing the official version.
 
 ```console
 $ sudo dnf remove docker \
@@ -55,36 +56,25 @@ $ sudo dnf remove docker \
 
 `dnf` might report that you have none of these packages installed.
 
-Images, containers, volumes, and networks stored in `/var/lib/docker/` aren't
-automatically removed when you uninstall Docker.
+> [!NOTE]
+> Images, containers, volumes, and networks stored in `/var/lib/docker/` are
+> not automatically removed when you uninstall Docker.
 
 ## Installation methods
 
-You can install Docker Engine in different ways, depending on your needs:
+You can install Docker Engine in different ways:
 
-- You can
-  [set up Docker's repositories](#install-using-the-repository) and install
-  from them, for ease of installation and upgrade tasks. This is the
-  recommended approach.
-
-- You can download the RPM package,
-  [install it manually](#install-from-a-package), and manage
-  upgrades completely manually. This is useful in situations such as installing
-  Docker on air-gapped systems with no access to the internet.
-
-- In testing and development environments, you can use automated
-  [convenience scripts](#install-using-the-convenience-script) to install Docker.
+- Recommended: [Set up Docker's repositories](#install-using-the-repository) and install from them for easy installation and upgrades.
+- Manual: [Download the RPM package](#install-from-a-package) and install it manually. Useful for air-gapped systems.
+- Development/testing: Use [convenience scripts](#install-using-the-convenience-script) for quick setup.
 
 ### Install using the rpm repository {#install-using-the-repository}
 
-Before you install Docker Engine for the first time on a new host machine, you
-need to set up the Docker repository. Afterward, you can install and update
-Docker from the repository.
+Before installing Docker Engine for the first time on a new host, set up the Docker repository. Afterward, you can install and update Docker from the repository.
 
 #### Set up the repository
 
-Install the `dnf-plugins-core` package (which provides the commands to manage
-your DNF repositories) and set up the repository.
+Install the `dnf-plugins-core` package (provides commands to manage DNF repositories) and set up the repository.
 
 ```console
 $ sudo dnf -y install dnf-plugins-core
@@ -93,12 +83,10 @@ $ sudo dnf config-manager --add-repo {{% param "download-url-base" %}}/docker-ce
 
 #### Install Docker Engine
 
-1. Install the Docker packages.
+{{< tabs >}}
+{{< tab name="Latest" >}}
 
-   {{< tabs >}}
-   {{< tab name="Latest" >}}
-
-   To install the latest version, run:
+To install the latest version:
 
    ```console
    $ sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
@@ -124,27 +112,24 @@ $ sudo dnf config-manager --add-repo {{% param "download-url-base" %}}/docker-ce
    <...>
    ```
 
-   The list returned depends on which repositories are enabled, and is specific
-   to your version of CentOS (indicated by the `.el9` suffix in this example).
+   The list depends on which repositories are enabled and your CentOS version (see the `.el9` suffix).
 
    Install a specific version by its fully qualified package name, which is
    the package name (`docker-ce`) plus the version string (2nd column),
    separated by a hyphen (`-`). For example, `docker-ce-3:{{% param "docker_ce_version" %}}-1.el9`.
 
-   Replace `<VERSION_STRING>` with the desired version and then run the following
-   command to install:
+   Replace `<VERSION_STRING>` with the desired version and run:
 
    ```console
    $ sudo dnf install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io docker-buildx-plugin docker-compose-plugin
    ```
 
-   This command installs Docker, but it doesn't start Docker. It also creates a
-   `docker` group, however, it doesn't add any users to the group by default.
+   This installs Docker, but does not start it. It also creates a `docker` group, but does not add users to the group by default.
 
    {{< /tab >}}
    {{< /tabs >}}
 
-2. Start Docker Engine.
+1. Start Docker Engine:
 
    ```console
    $ sudo systemctl enable --now docker
@@ -154,16 +139,15 @@ $ sudo dnf config-manager --add-repo {{% param "download-url-base" %}}/docker-ce
    boot your system. If you don't want Docker to start automatically, use `sudo
    systemctl start docker` instead.
 
-3. Verify that the installation is successful by running the `hello-world` image:
+1. Verify the installation by running the `hello-world` image:
 
    ```console
    $ sudo docker run hello-world
    ```
 
-   This command downloads a test image and runs it in a container. When the
-   container runs, it prints a confirmation message and exits.
+   This downloads a test image and runs it in a container. When the container runs, it prints a confirmation message and exits.
 
-You have now successfully installed and started Docker Engine.
+You have now installed and started Docker Engine.
 
 {{% include "root-errors.md" %}}
 
@@ -174,9 +158,7 @@ choosing the new version you want to install.
 
 ### Install from a package
 
-If you can't use Docker's `rpm` repository to install Docker Engine, you can
-download the `.rpm` file for your release and install it manually. You need to
-download a new file each time you want to upgrade Docker Engine.
+If you cannot use Docker's `rpm` repository, download the `.rpm` file for your release and install it manually. Download a new file each time you want to upgrade Docker Engine.
 
 <!-- markdownlint-disable-next-line -->
 1. Go to [{{% param "download-url-base" %}}/]({{% param "download-url-base" %}}/)
@@ -190,10 +172,10 @@ download a new file each time you want to upgrade Docker Engine.
    $ sudo dnf install /path/to/package.rpm
    ```
 
-   Docker is installed but not started. The `docker` group is created, but no
-   users are added to the group.
+   Docker is installed but not started. The `docker` group
+   is created, but no users are added to the group.
 
-3. Start Docker Engine.
+3. Start Docker Engine:
 
    ```console
    $ sudo systemctl enable --now docker
@@ -232,7 +214,7 @@ instead of `dnf install`, and point to the new files.
    $ sudo dnf remove docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras
    ```
 
-2. Images, containers, volumes, or custom configuration files on your host
+1. Images, containers, volumes, or custom configuration files on your host
    aren't automatically removed. To delete all images, containers, and volumes:
 
    ```console
