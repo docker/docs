@@ -15,27 +15,24 @@ aliases:
 download-url-base: https://download.docker.com/linux/fedora
 ---
 
-To get started with Docker Engine on Fedora, make sure you
-[meet the prerequisites](#prerequisites), and then follow the
-[installation steps](#installation-methods).
+To get started with Docker Engine on Fedora:
+
+- [Check prerequisites](#prerequisites)
+- [Follow the installation steps](#installation-methods)
 
 ## Prerequisites
 
 ### OS requirements
 
-To install Docker Engine, you need a maintained version of one of the following
-Fedora versions:
+Docker Engine requires a maintained version of Fedora:
 
 - Fedora 42
 - Fedora 41
 
 ### Uninstall old versions
 
-Before you can install Docker Engine, you need to uninstall any conflicting packages.
-
-Your Linux distribution may provide unofficial Docker packages, which may conflict
-with the official packages provided by Docker. You must uninstall these packages
-before you install the official version of Docker Engine.
+Uninstall unofficial or conflicting Docker packages before installing Docker Engine.
+Remove the following packages if present:
 
 ```console
 $ sudo dnf remove docker \
@@ -141,7 +138,7 @@ $ sudo dnf-3 config-manager --add-repo {{% param "download-url-base" %}}/docker-
    {{< /tab >}}
    {{< /tabs >}}
 
-2. Start Docker Engine.
+1. Start Docker Engine.
 
    ```console
    $ sudo systemctl enable --now docker
@@ -151,7 +148,7 @@ $ sudo dnf-3 config-manager --add-repo {{% param "download-url-base" %}}/docker-
    boot your system. If you don't want Docker to start automatically, use `sudo
    systemctl start docker` instead.
 
-3. Verify that the installation is successful by running the `hello-world` image:
+1. Verify that the installation is successful by running the `hello-world` image:
 
    ```console
    $ sudo docker run hello-world
@@ -180,7 +177,7 @@ download a new file each time you want to upgrade Docker Engine.
    and choose your version of Fedora. Then browse to `x86_64/stable/Packages/`
    and download the `.rpm` file for the Docker version you want to install.
 
-2. Install Docker Engine, changing the following path to the path where you downloaded
+1. Install Docker Engine, changing the following path to the path where you downloaded
    the Docker package.
 
    ```console
@@ -190,7 +187,7 @@ download a new file each time you want to upgrade Docker Engine.
    Docker is installed but not started. The `docker` group is created, but no
    users are added to the group.
 
-3. Start Docker Engine.
+1. Start Docker Engine.
 
    ```console
    $ sudo systemctl enable --now docker
@@ -200,7 +197,7 @@ download a new file each time you want to upgrade Docker Engine.
    boot your system. If you don't want Docker to start automatically, use `sudo
    systemctl start docker` instead.
 
-4. Verify that the installation is successful by running the `hello-world` image:
+1. Verify that the installation is successful by running the `hello-world` image:
 
    ```console
    $ sudo docker run hello-world
@@ -229,7 +226,7 @@ instead of `dnf install`, and point to the new files.
    $ sudo dnf remove docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras
    ```
 
-2. Images, containers, volumes, or custom configuration files on your host
+1. Images, containers, volumes, or custom configuration files on your host
    aren't automatically removed. To delete all images, containers, and volumes:
 
    ```console
