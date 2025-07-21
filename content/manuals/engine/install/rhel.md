@@ -18,16 +18,16 @@ aliases:
 download-url-base: https://download.docker.com/linux/rhel
 ---
 
-To get started with Docker Engine on RHEL, make sure you
-[meet the prerequisites](#prerequisites), and then follow the
-[installation steps](#installation-methods).
+To get started with Docker Engine on RHEL:
+
+- [Check prerequisites](#prerequisites)
+- [Follow the installation steps](#installation-methods)
 
 ## Prerequisites
 
 ### OS requirements
 
-To install Docker Engine, you need a maintained version of one of the following
-RHEL versions:
+Docker Engine requires a maintained version of RHEL:
 
 - RHEL 8
 - RHEL 9
@@ -144,7 +144,7 @@ $ sudo dnf config-manager --add-repo {{% param "download-url-base" %}}/docker-ce
    {{< /tab >}}
    {{< /tabs >}}
 
-2. Start Docker Engine.
+1. Start Docker Engine.
 
    ```console
    $ sudo systemctl enable --now docker
@@ -154,7 +154,7 @@ $ sudo dnf config-manager --add-repo {{% param "download-url-base" %}}/docker-ce
    boot your system. If you don't want Docker to start automatically, use `sudo
    systemctl start docker` instead.
 
-3. Verify that the installation is successful by running the `hello-world` image:
+1. Verify that the installation is successful by running the `hello-world` image:
 
    ```console
    $ sudo docker run hello-world
@@ -181,12 +181,12 @@ download a new file each time you want to upgrade Docker Engine.
 <!-- markdownlint-disable-next-line -->
 1. Go to [{{% param "download-url-base" %}}/]({{% param "download-url-base" %}}/).
 
-2. Select your RHEL version in the list.
+1. Select your RHEL version in the list.
 
-3. Select the applicable architecture (`x86_64`, `aarch64`, or `s390x`), and
+1. Select the applicable architecture (`x86_64`, `aarch64`, or `s390x`), and
    then go to `stable/Packages/`.
 
-4. Download the following `rpm` files for the Docker Engine, CLI, containerd,
+1. Download the following `rpm` files for the Docker Engine, CLI, containerd,
    and Docker Compose packages:
 
    - `containerd.io-<version>.<arch>.rpm`
@@ -195,7 +195,7 @@ download a new file each time you want to upgrade Docker Engine.
    - `docker-buildx-plugin-<version>.<arch>.rpm`
    - `docker-compose-plugin-<version>.<arch>.rpm`
 
-5. Install Docker Engine, changing the following path to the path where you downloaded
+1. Install Docker Engine, changing the following path to the path where you downloaded
    the packages.
 
    ```console
@@ -209,7 +209,7 @@ download a new file each time you want to upgrade Docker Engine.
    Docker is installed but not started. The `docker` group is created, but no
    users are added to the group.
 
-6. Start Docker Engine.
+1. Start Docker Engine.
 
    ```console
    $ sudo systemctl enable --now docker
@@ -219,7 +219,7 @@ download a new file each time you want to upgrade Docker Engine.
    boot your system. If you don't want Docker to start automatically, use `sudo
    systemctl start docker` instead.
 
-7. Verify that the installation is successful by running the `hello-world` image:
+1. Verify that the installation is successful by running the `hello-world` image:
 
    ```console
    $ sudo docker run hello-world
@@ -248,7 +248,7 @@ instead of `dnf install`, and point to the new files.
    $ sudo dnf remove docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras
    ```
 
-2. Images, containers, volumes, or custom configuration files on your host
+1. Images, containers, volumes, or custom configuration files on your host
    aren't automatically removed. To delete all images, containers, and volumes:
 
    ```console
