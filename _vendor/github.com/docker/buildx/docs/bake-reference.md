@@ -1399,8 +1399,7 @@ $ docker buildx bake
 
 ## Function
 
-A [set of general-purpose functions][bake_stdlib]
-provided by [go-cty][go-cty]
+A [set of general-purpose functions][bake_stdlib] provided by [go-cty][go-cty]
 are available for use in HCL files:
 
 ```hcl
@@ -1440,7 +1439,7 @@ target "webapp-dev" {
 
 [add-host]: https://docs.docker.com/reference/cli/docker/buildx/build/#add-host
 [attestations]: https://docs.docker.com/build/attestations/
-[bake_stdlib]: https://github.com/docker/buildx/blob/master/bake/hclparser/stdlib.go
+[bake_stdlib]: https://github.com/docker/buildx/blob/master/docs/bake-stdlib.md
 [build-arg]: https://docs.docker.com/reference/cli/docker/image/build/#build-arg
 [build-context]: https://docs.docker.com/reference/cli/docker/buildx/build/#build-context
 [cache-backends]: https://docs.docker.com/build/cache/backends/
