@@ -1,6 +1,6 @@
 ---
 title: STIG
-description: Learn how Docker Hardened Images provide STIG-compliant container images with verifiable security scan attestations for government and enterprise compliance requirements.
+description: Learn how Docker Hardened Images provide STIG-hardened container images with verifiable security scan attestations for government and enterprise compliance requirements.
 keywords: docker stig, stig-hardened images, stig guidance, openscap docker, secure container images
 ---
 
@@ -93,7 +93,7 @@ $ docker scout attest get <your-namespace>/dhi-<image>:<tag> \
   --predicate-type https://docker.com/dhi/stig/v0.1 \
   --verify \
   --predicate \
-  | jq -r '.[0].output[0].content | @base64d' > stig_report.html
+  | jq -r '.[0].output[] | select(.format == "html").content | @base64d' > stig_report.html
 ```
 
 ### Extract XCCDF report
@@ -105,7 +105,7 @@ $ docker scout attest get <your-namespace>/dhi-<image>:<tag> \
   --predicate-type https://docker.com/dhi/stig/v0.1 \
   --verify \
   --predicate \
-  | jq -r '.[0].output[1].content | @base64d' > stig_report.xml
+  | jq -r '.[0].output[] | select(.format == "xccdf").content | @base64d' > stig_report.xml
 ```
 
 ### View STIG scan summary
