@@ -27,29 +27,22 @@ download-url-base: https://download.docker.com/linux/sles
 ---
 
 > [!NOTE]
->
-> The installation instructions on this page refer to packages for SLES on the
-> **s390x** architecture (IBM Z). Other architectures, including x86_64, aren't
-> supported for SLES.
+> These instructions are for SLES on the **s390x** architecture (IBM Z). Other architectures, including x86_64, are not supported for SLES.
 
-To get started with Docker Engine on SLES, make sure you
-[meet the prerequisites](#prerequisites), and then follow the
-[installation steps](#installation-methods).
+To get started with Docker Engine on SLES, first [meet the prerequisites](#prerequisites). Then follow the [installation steps](#installation-methods).
 
 ## Prerequisites
 
 ### OS requirements
 
-To install Docker Engine, you need a maintained version of one of the following
-SLES versions:
+You need a maintained version of one of these SLES versions:
 
 - SLES 15-SP4 on s390x (IBM Z)
 - SLES 15-SP5 on s390x (IBM Z)
 
-You must enable the [`SCC SUSE`](https://scc.suse.com/packages?name=SUSE%20Linux%20Enterprise%20Server&version=15.5&arch=s390x)
-repositories.
+Enable the [`SCC SUSE`](https://scc.suse.com/packages?name=SUSE%20Linux%20Enterprise%20Server&version=15.5&arch=s390x) repositories.
 
-You must add the [OpenSUSE `SELinux` repository](https://download.opensuse.org/repositories/security:/SELinux/). This repository is not added by default. Run the following commands to add it:
+Add the [OpenSUSE SELinux repository](https://download.opensuse.org/repositories/security:/SELinux/). This repository is not added by default. Run:
 
 ```console
 $ opensuse_repo="https://download.opensuse.org/repositories/security:/SELinux/openSUSE_Factory/security:SELinux.repo"
@@ -58,7 +51,7 @@ $ sudo zypper addrepo $opensuse_repo
 
 ### Uninstall old versions
 
-Before you can install Docker Engine, you need to uninstall any conflicting packages.
+Uninstall any conflicting packages before you install Docker Engine.
 
 Your Linux distribution may provide unofficial Docker packages, which may conflict
 with the official packages provided by Docker. You must uninstall these packages
@@ -76,7 +69,7 @@ $ sudo zypper remove docker \
                   runc
 ```
 
-`zypper` might report that you have none of these packages installed.
+`zypper` might report that none of these packages are installed.
 
 Images, containers, volumes, and networks stored in `/var/lib/docker/` aren't
 automatically removed when you uninstall Docker.
@@ -139,7 +132,7 @@ $ sudo zypper addrepo {{% param "download-url-base" %}}/docker-ce.repo
 
    ```console
    $ sudo zypper search -s --match-exact docker-ce | sort -r
- 
+
      v  | docker-ce | package | 3:{{% param "docker_ce_version" %}}-1 | s390x | Docker CE Stable - s390x
      v  | docker-ce | package | 3:{{% param "docker_ce_version_prev" %}}-1 | s390x | Docker CE Stable - s390x
    ```
@@ -160,11 +153,11 @@ $ sudo zypper addrepo {{% param "download-url-base" %}}/docker-ce.repo
 
    This command installs Docker, but it doesn't start Docker. It also creates a
    `docker` group, however, it doesn't add any users to the group by default.
-  
+
    {{< /tab >}}
    {{< /tabs >}}
 
-2. Start Docker Engine.
+1. Start Docker Engine.
 
    ```console
    $ sudo systemctl enable --now docker
@@ -174,7 +167,7 @@ $ sudo zypper addrepo {{% param "download-url-base" %}}/docker-ce.repo
    boot your system. If you don't want Docker to start automatically, use `sudo
    systemctl start docker` instead.
 
-3. Verify that the installation is successful by running the `hello-world` image:
+1. Verify that the installation is successful by running the `hello-world` image:
 
    ```console
    $ sudo docker run hello-world
@@ -203,7 +196,7 @@ download a new file each time you want to upgrade Docker Engine.
    and choose your version of SLES. Then browse to `s390x/stable/Packages/`
    and download the `.rpm` file for the Docker version you want to install.
 
-2. Install Docker Engine, changing the following path to the path where you downloaded
+1. Install Docker Engine, changing the following path to the path where you downloaded
    the Docker package.
 
    ```console
@@ -213,7 +206,7 @@ download a new file each time you want to upgrade Docker Engine.
    Docker is installed but not started. The `docker` group is created, but no
    users are added to the group.
 
-3. Start Docker Engine.
+1. Start Docker Engine.
 
    ```console
    $ sudo systemctl enable --now docker
@@ -223,7 +216,7 @@ download a new file each time you want to upgrade Docker Engine.
    boot your system. If you don't want Docker to start automatically, use `sudo
    systemctl start docker` instead.
 
-4. Verify that the installation is successful by running the `hello-world` image:
+1. Verify that the installation is successful by running the `hello-world` image:
 
    ```console
    $ sudo docker run hello-world
@@ -252,7 +245,7 @@ instead of `zypper -y install`, and point to the new files.
    $ sudo zypper remove docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras
    ```
 
-2. Images, containers, volumes, or custom configuration files on your host
+1. Images, containers, volumes, or custom configuration files on your host
    aren't automatically removed. To delete all images, containers, and volumes:
 
    ```console
