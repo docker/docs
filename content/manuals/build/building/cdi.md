@@ -21,7 +21,7 @@ variables, host mounts (such as shared objects), and executable hooks.
 ## Getting started
 
 To get started with CDI, you need to have a compatible environment set up. This
-includes having Docker v27+ installed with [CDI enabled](/reference/cli/dockerd.md#enable-cdi-devices)
+includes having Docker v27+ installed with [CDI configured](/reference/cli/dockerd.md#configure-cdi-devices)
 and Buildx v0.22+.
 
 You also need to create the [device specifications using JSON or YAML files](https://github.com/cncf-tags/container-device-interface/blob/main/SPEC.md#cdi-json-specification)
@@ -119,7 +119,6 @@ Now let's build this Dockerfile:
 
 ```console
 $ docker buildx build .
-docker buildx build .
 [+] Building 0.4s (5/5) FINISHED                                                                                                        docker:default
  => [internal] load build definition from Dockerfile                                                                                    0.0s 
  => => transferring dockerfile: 155B                                                                                                    0.0s
