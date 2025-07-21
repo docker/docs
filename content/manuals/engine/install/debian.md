@@ -22,25 +22,16 @@ To get started with Docker Engine on Debian, make sure you
 
 ### Firewall limitations
 
-> [!WARNING]
->
-> Before you install Docker, make sure you consider the following
-> security implications and firewall incompatibilities.
-
-- If you use ufw or firewalld to manage firewall settings, be aware that
-  when you expose container ports using Docker, these ports bypass your
-  firewall rules. For more information, refer to
-  [Docker and ufw](/manuals/engine/network/packet-filtering-firewalls.md#docker-and-ufw).
-- Docker is only compatible with `iptables-nft` and `iptables-legacy`.
-  Firewall rules created with `nft` are not supported on a system with Docker installed.
-  Make sure that any firewall rulesets you use are created with `iptables` or `ip6tables`,
-  and that you add them to the `DOCKER-USER` chain,
-  see [Packet filtering and firewalls](/manuals/engine/network/packet-filtering-firewalls.md).
+When exposing container ports with Docker, these ports bypass `ufw` or `firewalld` rules.
+See [Docker and ufw](/manuals/engine/network/packet-filtering-firewalls.md#docker-and-ufw) for details.
+Docker supports only `iptables-nft` and `iptables-legacy`.
+Rules created with `nft` are not supported on a system with Docker installed.
+Use `iptables` or `ip6tables` and add rules to the `DOCKER-USER` chain.
+See [Packet filtering and firewalls](/manuals/engine/network/packet-filtering-firewalls.md).
 
 ### OS requirements
 
-To install Docker Engine, you need the 64-bit version of one of these Debian
-versions:
+Docker Engine requires a 64-bit version of one of these Debian releases:
 
 - Debian Trixie 13 (testing)
 - Debian Bookworm 12 (stable)
@@ -51,13 +42,8 @@ and ppc64le (ppc64el) architectures.
 
 ### Uninstall old versions
 
-Before you can install Docker Engine, you need to uninstall any conflicting packages.
-
-Your Linux distribution may provide unofficial Docker packages, which may conflict
-with the official packages provided by Docker. You must uninstall these packages
-before you install the official version of Docker Engine.
-
-The unofficial packages to uninstall are:
+Uninstall unofficial or conflicting Docker packages before installing Docker Engine.
+Remove the following packages if present:
 
 - `docker.io`
 - `docker-compose`
@@ -75,12 +61,11 @@ Run the following command to uninstall all conflicting packages:
 $ for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done
 ```
 
-`apt-get` might report that you have none of these packages installed.
+> [!NOTE]
+> `apt-get` might report that you have none of these packages installed.
+> Images, containers, volumes, and networks in `/var/lib/docker/` are not removed automatically.
 
-Images, containers, volumes, and networks stored in `/var/lib/docker/` aren't
-automatically removed when you uninstall Docker. If you want to start with a
-clean installation, and prefer to clean up any existing data, read the
-[uninstall Docker Engine](#uninstall-docker-engine) section.
+For a clean install, see [uninstall Docker Engine](#uninstall-docker-engine).
 
 ## Installation methods
 
@@ -135,7 +120,7 @@ Docker from the repository.
    > Replace this part with the codename of the corresponding Debian release,
    > such as `bookworm`.
 
-2. Install the Docker packages.
+1. Install the Docker packages.
 
    {{< tabs >}}
    {{< tab name="Latest" >}}
@@ -171,7 +156,7 @@ Docker from the repository.
    {{< /tab >}}
    {{< /tabs >}}
 
-3. Verify that the installation is successful by running the `hello-world` image:
+1. Verify that the installation is successful by running the `hello-world` image:
 
    ```console
    $ sudo docker run hello-world
@@ -192,19 +177,17 @@ choosing the new version you want to install.
 
 ### Install from a package
 
-If you can't use Docker's `apt` repository to install Docker Engine, you can
-download the `deb` file for your release and install it manually. You need to
-download a new file each time you want to upgrade Docker Engine.
+If you can't use the `apt` repository, download and install `.deb` files manually:
 
 <!-- markdownlint-disable-next-line -->
 1. Go to [`{{% param "download-url-base" %}}/dists/`]({{% param "download-url-base" %}}/dists/).
 
-2. Select your Debian version in the list.
+1. Select your Debian version in the list.
 
-3. Go to `pool/stable/` and select the applicable architecture (`amd64`,
+1. Go to `pool/stable/` and select the applicable architecture (`amd64`,
    `armhf`, `arm64`, or `s390x`).
 
-4. Download the following `deb` files for the Docker Engine, CLI, containerd,
+1. Download the following `deb` files for the Docker Engine, CLI, containerd,
    and Docker Compose packages:
 
    - `containerd.io_<version>_<arch>.deb`
@@ -213,7 +196,7 @@ download a new file each time you want to upgrade Docker Engine.
    - `docker-buildx-plugin_<version>_<arch>.deb`
    - `docker-compose-plugin_<version>_<arch>.deb`
 
-5. Install the `.deb` packages. Update the paths in the following example to
+1. Install the `.deb` packages. Update the paths in the following example to
    where you downloaded the Docker packages.
 
    ```console
@@ -226,7 +209,7 @@ download a new file each time you want to upgrade Docker Engine.
 
    The Docker daemon starts automatically.
 
-6. Verify that the installation is successful by running the `hello-world` image:
+1. Verify that the installation is successful by running the `hello-world` image:
 
    ```console
    $ sudo service docker start
@@ -255,7 +238,7 @@ To upgrade Docker Engine, download the newer package files and repeat the
    $ sudo apt-get purge docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras
    ```
 
-2. Images, containers, volumes, or custom configuration files on your host
+1. Images, containers, volumes, or custom configuration files on your host
    aren't automatically removed. To delete all images, containers, and volumes:
 
    ```console
@@ -263,7 +246,7 @@ To upgrade Docker Engine, download the newer package files and repeat the
    $ sudo rm -rf /var/lib/containerd
    ```
 
-3. Remove source list and keyrings
+1. Remove source list and keyrings
 
    ```console
    $ sudo rm /etc/apt/sources.list.d/docker.list
