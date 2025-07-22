@@ -274,7 +274,7 @@ You'll see the GenAI app's interface where you can start typing your prompts.
 
 You can now interact with your own GenAI app, powered by a local model. Try a few prompts and notice how fast the responses are — all running on your machine with Docker.
 
-### Use Model Runner in Github Actions
+### Use Model Runner in GitHub Actions
 
 Here is an example on how to use Model Runner as part of a Github workflow.
 The example installs Model Runner, tests the installation, pulls and runs a model,
