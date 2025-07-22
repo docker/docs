@@ -21,8 +21,9 @@ If you didn't create a [GitHub repository](https://github.com/new) for your proj
 2. Under the **Variables** tab, create a new **Repository variable** named `DOCKER_USERNAME` and your Docker ID as a value.
 
 3. Create a new [Personal Access Token (PAT)](/manuals/security/access-tokens.md#create-an-access-token) for Docker Hub. You can name this token `docker-tutorial`. Make sure access permissions include Read and Write.
+4. Create DockerHub repository use the **same name** as your GitHub repository
 
-4. Add the PAT as a **Repository secret** in your GitHub repository, with the name
+5. Add the PAT as a **Repository secret** in your GitHub repository, with the name
    `DOCKERHUB_TOKEN`.
 
 ## Overview
