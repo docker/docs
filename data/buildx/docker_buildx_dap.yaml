@@ -1,32 +1,12 @@
-command: docker buildx debug
-short: Start debugger
-long: Start debugger
+command: docker buildx dap
+short: Start debug adapter protocol compatible debugger
+long: Start debug adapter protocol compatible debugger
 pname: docker buildx
 plink: docker_buildx.yaml
 cname:
-    - docker buildx debug build
+    - docker buildx dap build
 clink:
-    - docker_buildx_debug_build.yaml
-options:
-    - option: invoke
-      value_type: string
-      description: Launch a monitor with executing specified command
-      deprecated: false
-      hidden: false
-      experimental: false
-      experimentalcli: true
-      kubernetes: false
-      swarm: false
-    - option: "on"
-      value_type: string
-      default_value: error
-      description: When to launch the monitor ([always, error])
-      deprecated: false
-      hidden: false
-      experimental: false
-      experimentalcli: true
-      kubernetes: false
-      swarm: false
+    - docker_buildx_dap_build.yaml
 inherited_options:
     - option: builder
       value_type: string

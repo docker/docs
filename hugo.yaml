@@ -318,6 +318,8 @@ module:
       mounts:
         - source: docs/bake-reference.md
           target: content/manuals/build/bake/reference.md
+        - source: docs/bake-stdlib.md
+          target: content/manuals/build/bake/stdlib.md
 
     # Docker CLI
     - path: github.com/docker/cli

@@ -165,7 +165,7 @@ You can interact with all your installed MCP servers in VS Code:
    {{< tabs group="" >}}
    {{< tab name="Enable globally">}}
 
-   1. Insert the following in your VS Code's User`settings.json`:
+   1. Insert the following in your VS Code's User`mcp.json`:
 
       ```json
       "mcp": {

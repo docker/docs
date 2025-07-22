@@ -80,6 +80,36 @@ Common configuration options include:
    For example, if you use llama.cpp, you can pass any of [the available parameters](https://github.com/ggml-org/llama.cpp/blob/master/tools/server/README.md).
 - Platform-specific options may also be available via extension attributes `x-*`
 
+> [!TIP]
+> See more example in the [Common runtime configurations](#common-runtime-configurations) section.
+
+### Alternative configuration with provider services
+
+> [!IMPORTANT]
+>
+> This approach is deprecated. Use the [`models` top-level element](#basic-model-definition) instead.
+
+You can also use the `provider` service type, which allows you to declare platform capabilities required by your application.
+For AI models, you can use the `model` type to declare model dependencies.
+
+To define a model provider:
+
+```yaml
+services:
+  chat:
+    image: my-chat-app
+    depends_on:
+      - ai_runner
+
+  ai_runner:
+    provider:
+      type: model
+      options:
+        model: ai/smollm2
+        context-size: 1024
+        runtime-flags: "--no-prefill-assistant"
+```
+
 ## Service model binding
 
 Services can reference models in two ways: short syntax and long syntax.
@@ -166,34 +196,6 @@ Docker Model Runner will:
 - Provide endpoint URLs for accessing the model
 - Inject environment variables into the service
 
-#### Alternative configuration with provider services
-
-> [!TIP]
->
-> This approach is deprecated. Use the [`models` top-level element](#basic-model-definition) instead.
-
-You can also use the `provider` service type, which allows you to declare platform capabilities required by your application.
-For AI models, you can use the `model` type to declare model dependencies.
-
-To define a model provider:
-
-```yaml
-services:
-  chat:
-    image: my-chat-app
-    depends_on:
-      - ai_runner
-
-  ai_runner:
-    provider:
-      type: model
-      options:
-        model: ai/smollm2
-        context-size: 1024
-        runtime-flags: "--no-prefill-assistant"
-```
-
-
 ### Cloud providers
 
 The same Compose file can run on cloud providers that support Compose models:
@@ -219,6 +221,144 @@ Cloud providers might:
 - Apply cloud-specific optimizations and scaling
 - Provide additional monitoring and logging capabilities
 - Handle model versioning and updates automatically
+
+## Common runtime configurations
+
+Below are some example configurations for various use cases.
+
+### Development
+
+```yaml
+services:
+  app:
+    image: app
+    models:
+      dev_model:
+        endpoint_var: DEV_URL
+        model_var: DEV_MODEL
+
+models:
+  dev_model:
+    model: ai/model
+    context_size: 4096
+    runtime_flags:
+      - "--verbose"                       # Set verbosity level to infinity
+      - "--verbose-prompt"                # Print a verbose prompt before generation
+      - "--log-prefix"                    # Enable prefix in log messages
+      - "--log-timestamps"                # Enable timestamps in log messages
+      - "--log-colors"                    # Enable colored logging
+```
+
+### Conservative with disabled reasoning
+
+```yaml
+services:
+  app:
+    image: app
+    models:
+      conservative_model:
+        endpoint_var: CONSERVATIVE_URL
+        model_var: CONSERVATIVE_MODEL
+
+models:
+  conservative_model:
+    model: ai/model
+    context_size: 4096
+    runtime_flags:
+      - "--temp"                # Temperature
+      - "0.1"
+      - "--top-k"               # Top-k sampling
+      - "1"
+      - "--reasoning-budget"    # Disable reasoning
+      - "0"
+```
+
+### Creative with high randomness
+
+```yaml
+services:
+  app:
+    image: app
+    models:
+      creative_model:
+        endpoint_var: CREATIVE_URL
+        model_var: CREATIVE_MODEL
+
+models:
+  creative_model:
+    model: ai/model
+    context_size: 4096
+    runtime_flags:
+      - "--temp"                # Temperature
+      - "1"
+      - "--top-p"               # Top-p sampling
+      - "0.9"
+```
+
+### Highly deterministic
+
+```yaml
+services:
+  app:
+    image: app
+    models:
+      deterministic_model:
+        endpoint_var: DET_URL
+        model_var: DET_MODEL
+
+models:
+  deterministic_model:
+    model: ai/model
+    context_size: 4096
+    runtime_flags:
+      - "--temp"                # Temperature
+      - "0"
+      - "--top-k"               # Top-k sampling
+      - "1"
+```
+
+### Concurrent processing
+
+```yaml
+services:
+  app:
+    image: app
+    models:
+      concurrent_model:
+        endpoint_var: CONCURRENT_URL
+        model_var: CONCURRENT_MODEL
+
+models:
+  concurrent_model:
+    model: ai/model
+    context_size: 2048
+    runtime_flags:
+      - "--threads"             # Number of threads to use during generation
+      - "8"
+      - "--mlock"               # Lock memory to prevent swapping
+```
+
+### Rich vocabulary model
+
+```yaml
+services:
+  app:
+    image: app
+    models:
+      rich_vocab_model:
+        endpoint_var: RICH_VOCAB_URL
+        model_var: RICH_VOCAB_MODEL
+
+models:
+  rich_vocab_model:
+    model: ai/model
+    context_size: 4096
+    runtime_flags:
+      - "--temp"                # Temperature
+      - "0.1"
+      - "--top-p"               # Top-p sampling
+      - "0.9"
+```
 
 ## Reference
 
