@@ -276,7 +276,7 @@ You can now interact with your own GenAI app, powered by a local model. Try a fe
 
 ### Use Model Runner in GitHub Actions
 
-Here is an example on how to use Model Runner as part of a Github workflow.
+Here is an example on how to use Model Runner as part of a GitHub workflow.
 The example installs Model Runner, tests the installation, pulls and runs a model,
 interacts with the model via the API and finally deletes the model.
 
