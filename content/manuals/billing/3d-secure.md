@@ -6,7 +6,7 @@ keywords: billing, renewal, payments, subscriptions, 3DS, credit card verificati
 weight: 40
 ---
 
-Docker supports [3D Secure (3DS)], an extra layer of authentication required
+Docker supports 3D Secure (3DS), an extra layer of authentication required
 for certain credit card payments. If your bank or card issuer requires 3DS, you
 may need to verify your identity before your payment can be completed.
 
