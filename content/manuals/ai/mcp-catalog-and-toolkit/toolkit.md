@@ -128,13 +128,25 @@ Imagine you want to enable Ask Gordon to interact with your GitHub account:
 
 ## Install an MCP client
 
-When you have installed MCP servers, you can add clients to the MCP Toolkit. These clients
+The MCP Toolkit can connect to the following clients:
+
+- [Claude Desktop](https://claude.ai/)
+- [Continue.dev](https://www.continue.dev/)
+- [Cursor](https://cursor.com/)
+- [Gordon](/manuals/ai/gordon/_index.md)
+- [LM Studio](https://lmstudio.ai/)
+- [Sema4.ai Studio](https://sema4.ai/)
+- [Visual Studio Code](https://code.visualstudio.com/)
+
+These clients
 can interact with the installed MCP servers, turning the MCP Toolkit into a gateway.
 
-To install a client:
+To connect a client:
 
 1. In Docker Desktop, select **MCP Toolkit** and select the **Clients** tab.
-2. Find the client of your choice and select **Connect**.
+1. Find the client you want to use. If it is already installed, select **Connect**.
+   If not, select **Download** to install the client.
+   Once installed, the **Connect** button will appear.
 
 Your client can now interact with the MCP Toolkit.
 
