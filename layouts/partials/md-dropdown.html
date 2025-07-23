@@ -131,31 +131,21 @@
       }
     }
 
-    function openInChatGPT() {
-      fetch(getCurrentPlaintextUrl())
-        .then((response) => response.text())
-        .then((text) => {
-          const encodedText = encodeURIComponent(text);
-          const chatGPTUrl = `https://chat.openai.com/?q=${encodedText}`;
-          window.open(chatGPTUrl, "_blank");
-        })
-        .catch((err) => {
-          console.error("Error opening in ChatGPT:", err);
-        });
-    }
+ function openInChatGPT() {
+  const markdownUrl = getCurrentPlaintextUrl();
+  const prompt = `Read ${markdownUrl} so I can ask questions about it.`;
+  const encodedText = encodeURIComponent(prompt);
+  const chatGPTUrl = `https://chat.openai.com/?q=${encodedText}`;
+  window.open(chatGPTUrl, "_blank");
+}
 
-    function openInClaude() {
-      fetch(getCurrentPlaintextUrl())
-        .then((response) => response.text())
-        .then((text) => {
-          const encodedText = encodeURIComponent(text);
-        const claudeUrl = `https://claude.ai/new?q=${encodedText}`;https://claude.ai/new?q=%22hey%22
-        window.open(claudeUrl, '_blank');
-        })
-        .catch((err) => {
-          console.error("Error opening in Claude:", err);
-        });
-    }
+function openInClaude() {
+  const markdownUrl = getCurrentPlaintextUrl();
+  const prompt = `Read ${markdownUrl} so I can ask questions about it.`;
+  const encodedText = encodeURIComponent(prompt);
+  const claudeUrl = `https://claude.ai/new?q=${encodedText}`;
+  window.open(claudeUrl, '_blank');
+}
 
     document.addEventListener("click", function (event) {
       const dropdown = document.getElementById("markdownDropdown");
