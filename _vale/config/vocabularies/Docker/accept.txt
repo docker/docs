@@ -1,4 +1,5 @@
 (?i)[A-Z]{2,}'?s
+
 Adreno
 Aleksandrov
 Amazon
@@ -8,6 +9,7 @@ Artifactory
 Azure
 bootup
 Btrfs
+Bugsnag
 BuildKit
 BusyBox
 CentOS
@@ -16,6 +18,8 @@ cgroup
 Chrome
 Chrome DevTools
 Citrix
+cli
+CLI
 CloudFront
 Codefresh
 Codespaces
@@ -27,6 +31,7 @@ datacenter
 Datadog
 Ddosify
 Debootstrap
+denylist
 deprovisioning
 deserialization
 deserialize
@@ -53,6 +58,7 @@ Dockerize
 Dockerizing
 Entra
 EPERM
+ESXi
 Ethernet
 Fargate
 Fedora
@@ -63,7 +69,8 @@ g?libc
 GeoNetwork
 GGUF
 Git
-GitHub( Actions)?
+GitHub
+GitHub Actions
 Google
 Grafana
 Gravatar
@@ -81,6 +88,7 @@ Jamf
 JetBrains
 JFrog
 JUnit
+Kata
 Kerberos
 Kitematic
 Kubeadm
@@ -93,6 +101,7 @@ Laravel
 libseccomp
 Linux
 LinuxKit
+Loggly
 Logstash
 lookup
 Mac
@@ -110,6 +119,7 @@ namespace
 namespacing
 netfilter
 netlabel
+netlink
 Netplan
 NFSv\d
 Nginx
@@ -130,17 +140,20 @@ Postgres
 PowerShell
 Python
 Qualcomm
+reimplement
 rollback
 rootful
 runc
 Ryuk
 S3
 scrollable
+SELinux
 Slack
 snapshotters?
 Snyk
 Solr
 SonarQube
+Splunk
 SQLite
 stdin
 stdout
@@ -163,13 +176,14 @@ Unix
 unmanaged
 VMware
 vpnkit
-vSphere
 VSCode
+vSphere
 Wasm
 Windows
 windowsfilter
 WireMock
 Xdebug
+youki
 Zscaler
 Zsh
 [Aa]nonymized?
