@@ -24,6 +24,10 @@ params:
       description: Learn how Docker Hardened Images support FIPS 140 by using validated cryptographic modules and providing signed attestations for compliance audits.
       icon: verified
       link: /dhi/core-concepts/fips/
+    - title: STIG
+      description: Learn how Docker Hardened Images provide STIG-hardened container images with verifiable security scan attestations for government and enterprise compliance requirements.
+      icon: policy
+      link: /dhi/core-concepts/stig/
 
   grid_concepts_risk:
     - title: Common Vulnerabilities and Exposures (CVEs)
