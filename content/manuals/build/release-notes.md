@@ -10,6 +10,17 @@ toc_max: 2
 This page contains information about the new features, improvements, and bug
 fixes in [Docker Buildx](https://github.com/docker/buildx).
 
+## 0.26.1
+
+{{< release-date date="2025-07-22" >}}
+
+The full release notes for this release are available
+[on GitHub](https://github.com/docker/buildx/releases/tag/v0.26.1).
+
+### Bug fixes
+
+- Fix regression when validating compose files with Bake. [docker/buildx#3329](https://github.com/docker/buildx/pull/3329)
+
 ## 0.26.0
 
 {{< release-date date="2025-07-21" >}}
