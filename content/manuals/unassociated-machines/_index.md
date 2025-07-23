@@ -11,8 +11,8 @@ params:
 ---
 
 {{% restricted title="About unassociated machines" %}}
-Unassociated machines is a private feature. Your Docker
-Account Executive must enable the feature for you.
+Unassociated machines is a private feature that may not be available to all
+accounts.
 {{% /restricted %}}
 
 Docker administrators can identify, view, and manage Docker Desktop machines
@@ -23,7 +23,7 @@ IT involvement.
 
 ## Prerequisites
 
-- Docker Business subscription
+- Docker Business or Team subscription
 - Organization owner access to your Docker organization
 
 ## About unassociated machines
