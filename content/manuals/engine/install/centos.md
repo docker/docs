@@ -37,11 +37,9 @@ CentOS versions:
 
 ### Uninstall old versions
 
-Before you install Docker Engine, uninstall any conflicting packages.
-
-Your Linux distribution may provide unofficial Docker packages, which can
-conflict with the official packages provided by Docker. Uninstall these packages
-before installing the official version.
+Uninstall unofficial or conflicting Docker packages provided
+by your Linux distribution before installing Docker Engine.
+Remove the following packages if present:
 
 ```console
 $ sudo dnf remove docker \
@@ -83,10 +81,12 @@ $ sudo dnf config-manager --add-repo {{% param "download-url-base" %}}/docker-ce
 
 #### Install Docker Engine
 
-{{< tabs >}}
-{{< tab name="Latest" >}}
+1. Install the Docker packages.
 
-To install the latest version:
+   {{< tabs >}}
+   {{< tab name="Latest" >}}
+
+   To install the latest version, run:
 
    ```console
    $ sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
@@ -112,19 +112,22 @@ To install the latest version:
    <...>
    ```
 
-   The list depends on which repositories are enabled and your CentOS version (see the `.el9` suffix).
+   The list returned depends on which repositories are enabled, and is specific
+   to your version of CentOS (indicated by the `.el9` suffix in this example).
 
    Install a specific version by its fully qualified package name, which is
    the package name (`docker-ce`) plus the version string (2nd column),
    separated by a hyphen (`-`). For example, `docker-ce-3:{{% param "docker_ce_version" %}}-1.el9`.
 
-   Replace `<VERSION_STRING>` with the desired version and run:
+   Replace `<VERSION_STRING>` with the desired version and then run the following
+   command to install:
 
    ```console
    $ sudo dnf install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io docker-buildx-plugin docker-compose-plugin
    ```
 
-   This installs Docker, but does not start it. It also creates a `docker` group, but does not add users to the group by default.
+   This command installs Docker, but it doesn't start Docker. It also creates a
+   `docker` group, however, it doesn't add any users to the group by default.
 
    {{< /tab >}}
    {{< /tabs >}}

@@ -64,7 +64,12 @@ This section describes how to install Docker Engine on Linux, also known as Dock
   - Follow the [Ubuntu installation instructions](ubuntu.md).
   - Substitute your distribution version for the corresponding Ubuntu release.
   - Check your distribution's documentation for the matching Ubuntu release.
-- Some Linux distributions provide a Docker Engine package in their repositories. These packages are built and maintained by the distribution's maintainers and may have configuration differences or use modified source code. Docker isn't involved in releasing these packages. Report bugs or issues with these packages to your distribution's issue tracker.
+- Some Linux distributions provide a package of Docker Engine through their
+  package repositories. These packages are built and maintained by the Linux
+  distribution's package maintainers and may have differences in configuration
+  or are built from modified source code. Docker isn't involved in releasing these
+  packages and you should report any bugs or issues involving these packages to
+  your Linux distribution's issue tracker.
 
 Docker provides [binaries](binaries.md) for manual installation. These binaries are statically linked and work on any Linux distribution.
 
@@ -72,16 +77,22 @@ Docker provides [binaries](binaries.md) for manual installation. These binaries 
 
 Docker Engine has two update channels: **stable** and **test**.
 
-- The **stable** channel gives you the latest versions released for general availability.
-- The **test** channel gives you pre-release versions that are ready for testing before general availability.
+* The **stable** channel gives you the latest versions released for general availability.
+* The **test** channel gives you pre-release versions that are ready for testing before
+  general availability.
 
-Use the test channel with caution. Pre-release versions include experimental and early-access features that are subject to breaking changes.
+Use the test channel with caution. Pre-release versions include experimental and
+early-access features that are subject to breaking changes.
 
 ## Support
 
-Docker Engine is an open source project, supported by the Moby project maintainers and community members. Docker doesn't provide support for Docker Engine. Docker provides support for Docker products, including Docker Desktop, which uses Docker Engine as one of its components.
+Docker Engine is an open source project, supported by the Moby project maintainers
+and community members. Docker doesn't provide support for Docker Engine.
+Docker provides support for Docker products, including Docker Desktop, which uses
+Docker Engine as one of its components.
 
-For information about the open source project, refer to the [Moby project website](https://mobyproject.org/).
+For information about the open source project, refer to the
+[Moby project website](https://mobyproject.org/).
 
 ### Upgrade path
 
@@ -89,7 +100,9 @@ Patch releases are always backward compatible with their major and minor version
 
 ### Licensing
 
-Docker Engine is licensed under the Apache License, Version 2.0. See [LICENSE](https://github.com/moby/moby/blob/master/LICENSE) for the full license text.
+Docker Engine is licensed under the Apache License, Version 2.0. See
+[LICENSE](https://github.com/moby/moby/blob/master/LICENSE) for the full
+license text.
 
 ## Reporting security issues
 
@@ -101,4 +114,5 @@ Docker appreciates security reports and will publicly thank you for your contrib
 
 ## Get started
 
-After setting up Docker, you can learn the basics with [Getting started with Docker](/get-started/introduction/_index.md).
+After setting up Docker, you can learn the basics with
+[Getting started with Docker](/get-started/introduction/_index.md).

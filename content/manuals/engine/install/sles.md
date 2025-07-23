@@ -51,11 +51,9 @@ $ sudo zypper addrepo $opensuse_repo
 
 ### Uninstall old versions
 
-Uninstall any conflicting packages before you install Docker Engine.
-
-Your Linux distribution may provide unofficial Docker packages, which may conflict
-with the official packages provided by Docker. You must uninstall these packages
-before you install the official version of Docker Engine.
+Uninstall unofficial or conflicting Docker packages provided
+by your Linux distribution before installing Docker Engine.
+Remove the following packages if present:
 
 ```console
 $ sudo zypper remove docker \
@@ -132,7 +130,6 @@ $ sudo zypper addrepo {{% param "download-url-base" %}}/docker-ce.repo
 
    ```console
    $ sudo zypper search -s --match-exact docker-ce | sort -r
-
      v  | docker-ce | package | 3:{{% param "docker_ce_version" %}}-1 | s390x | Docker CE Stable - s390x
      v  | docker-ce | package | 3:{{% param "docker_ce_version_prev" %}}-1 | s390x | Docker CE Stable - s390x
    ```

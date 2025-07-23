@@ -31,7 +31,8 @@ Docker Engine requires a maintained version of Fedora:
 
 ### Uninstall old versions
 
-Uninstall unofficial or conflicting Docker packages before installing Docker Engine.
+Uninstall unofficial or conflicting Docker packages provided
+by your Linux distribution before installing Docker Engine.
 Remove the following packages if present:
 
 ```console

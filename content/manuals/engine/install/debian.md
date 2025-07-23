@@ -22,12 +22,17 @@ To get started with Docker Engine on Debian, make sure you
 
 ### Firewall limitations
 
-When exposing container ports with Docker, these ports bypass `ufw` or `firewalld` rules.
-See [Docker and ufw](/manuals/engine/network/packet-filtering-firewalls.md#docker-and-ufw) for details.
-Docker supports only `iptables-nft` and `iptables-legacy`.
-Rules created with `nft` are not supported on a system with Docker installed.
-Use `iptables` or `ip6tables` and add rules to the `DOCKER-USER` chain.
-See [Packet filtering and firewalls](/manuals/engine/network/packet-filtering-firewalls.md).
+> [!WARNING]
+>
+> Before you install Docker, make sure you consider the following
+> security implications and firewall incompatibilities.
+
+- When exposing container ports with Docker, these ports bypass `ufw` or `firewalld` rules.
+  See [Docker and ufw](/manuals/engine/network/packet-filtering-firewalls.md#docker-and-ufw) for details.
+- Docker supports only `iptables-nft` and `iptables-legacy`.
+  Rules created with `nft` are not supported on a system with Docker installed.
+  Use `iptables` or `ip6tables` and add rules to the `DOCKER-USER` chain.
+  See [Packet filtering and firewalls](/manuals/engine/network/packet-filtering-firewalls.md).
 
 ### OS requirements
 
@@ -42,7 +47,8 @@ and ppc64le (ppc64el) architectures.
 
 ### Uninstall old versions
 
-Uninstall unofficial or conflicting Docker packages before installing Docker Engine.
+Uninstall unofficial or conflicting Docker packages provided
+by your Linux distribution before installing Docker Engine.
 Remove the following packages if present:
 
 - `docker.io`
