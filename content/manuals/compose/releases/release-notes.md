@@ -11,6 +11,8 @@ aliases:
 - /compose/release-notes/
 ---
 
+<!-- vale off -->
+
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
 ## 2.38.2
@@ -52,7 +54,7 @@ For more detailed information, see the [release notes in the Compose repo](https
 - Added `volumes` command
 - Removed `publish` limitation on bind mounts
 - Fixed an issue mounting the docker socket to container which doesn't need it
-- Fixed an issue with bake hanging on output 
+- Fixed an issue with bake hanging on output
 
 ### Update
 

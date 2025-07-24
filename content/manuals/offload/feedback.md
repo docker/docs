@@ -10,7 +10,7 @@ There are several ways you can provide feedback on Docker Offload.
 ### In-product feedback
 
 On each Docker Desktop Dashboard view, there is a **Give feedback** link. This
-opens a feedback form where you can share ideas directly with the Docker team.
+opens a feedback form where you can share ideas directly with the Docker Team.
 
 You can use the form for any type of feedback, including:
 

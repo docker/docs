@@ -1,7 +1,7 @@
 ---
 title: Setting up roles and permissions in Docker
 description: A guide to securely managing access and collaboration in Docker through roles and teams.
-keywords: Docker roles, permissions management, access control, IT administration, team collaboration, least privilege, security, Docker teams, role-based access
+keywords: Docker roles, permissions management, access control, IT administration, team collaboration, least privilege, security, Docker Teams, role-based access
 weight: 10
 ---
 

@@ -17,7 +17,9 @@ aliases:
 weight: 220
 ---
 
-This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases. 
+<!-- vale off -->
+
+This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases.
 
 Releases are gradually rolled out to ensure quality control. If the latest version is not yet available to you, allow some time — updates typically become available within a week of the release date.
 
@@ -71,7 +73,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - [Docker Engine v28.3.0](https://docs.docker.com/engine/release-notes/28/#2830)
 - [NVIDIA Container Toolkit v1.17.8](https://github.com/NVIDIA/nvidia-container-toolkit/releases/tag/v1.17.8)
 
-### Security 
+### Security
 
 - Fixed [CVE-2025-6587](https://www.cve.org/CVERecord?id=CVE-2025-6587) where sensitive system environment variables were included in Docker Desktop diagnostic logs, allowing for potential secret exposure.
 
@@ -82,7 +84,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Fixed a bug causing `docker start` to drop the container's port mappings for a container already running.
 - Fixed a bug that prevented container ports to be displayed on the GUI when a container was re-started.
 - Fixed a bug that caused Docker API `500 Internal Server Error for API route and version` error application start.
-- The settings **Apply & restart** button is now labeled **Apply**. The VM is no longer restarted when applying changed settings. 
+- The settings **Apply & restart** button is now labeled **Apply**. The VM is no longer restarted when applying changed settings.
 - Fixed a bug where the disk would be corrupted if Docker is shutdown during a `fsck`.
 - Fixed a bug causing an incorrect `~/.kube/config` in WSL2 when using a `kind` Kubernetes cluster.
 - Return an explicit error to a Docker API / `docker` CLI command if Docker Desktop has been manually paused.
