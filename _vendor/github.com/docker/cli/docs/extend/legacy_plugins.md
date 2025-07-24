@@ -83,7 +83,7 @@ The sections below provide an overview of available third-party plugins.
 ## Troubleshooting a plugin
 
 If you are having problems with Docker after loading a plugin, ask the authors
-of the plugin for help. The Docker Team may not be able to assist you.
+of the plugin for help. The Docker team may not be able to assist you.
 
 ## Writing a plugin
 
