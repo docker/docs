@@ -57,6 +57,7 @@
           <div class="text-base">Ask questions with Docs AI</div>
         </div>
       </button>
+      {{ if eq hugo.Environment "production" }}
        <button
         onclick="openInClaude()"
         data-heap-id="search-docs-ai-button"
@@ -69,6 +70,7 @@
           <div class="text-base">Open in Claude</div>
         </div>
       </button>
+      {{ end }}
 
     </div>
   </details>
