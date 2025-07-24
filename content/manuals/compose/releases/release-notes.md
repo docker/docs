@@ -23,7 +23,7 @@ For more detailed information, see the [release notes in the Compose repo](https
 
 - Added `--models` flag to `config` command to list models
 - Added `--since` and `--until` flags to `events`
-- Introduced `provenance` and `sbom` attributes to `develop` section
+- Introduced `provenance` and `sbom` attributes to `build` section
 - Fixed `bridge convert` issue on Windows 
 - Fixed multiple issues with `bake` builds
 
