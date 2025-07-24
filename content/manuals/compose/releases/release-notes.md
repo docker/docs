@@ -15,6 +15,24 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.39.0
+
+{{< release-date date="2025-07-24" >}}
+
+### Bug fixes and enhancements
+
+- Added `--models` flag to `config` command to list models
+- Added `--since` and `--until` flags to `events`
+- Introduced `provenance` and `sbom` attributes to `develop` section
+- Fixed `bridge convert` issue on Windows 
+- Fixed multiple issues with `bake` builds
+
+### Update
+
+- Dependencies upgrade: bump docker engine and cli to v28.3.2
+- Dependencies upgrade: bump buildx to v0.26.1
+- Dependencies upgrade: bump compose-go to v2.8.0
+
 ## 2.38.2
 
 {{< release-date date="2025-07-08" >}}
