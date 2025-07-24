@@ -128,8 +128,8 @@ requests in the `Authorization` header.
 #### `access_token`
 
 For compatibility with OAuth 2.0, the `token` under the name `access_token` is
-also accepted.  At least one of these fields must be specified, but both may
-also appear (for compatibility with older clients).  When both are specified,
+also accepted. At least one of these fields must be specified, but both may
+also appear (for compatibility with older clients). When both are specified,
 they should be equivalent; if they differ the client's choice is undefined.
 
 #### `expires_in`
