@@ -15,6 +15,18 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.39.1
+
+{{< release-date date="2025-07-24" >}}
+
+### Bug fixes and enhancements
+
+- Added metrics to monitor `models` usage
+
+### Update
+
+- Dependencies upgrade: bump compose-go to v2.8.1
+
 ## 2.39.0
 
 {{< release-date date="2025-07-24" >}}
