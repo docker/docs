@@ -67,42 +67,43 @@ These indicators help you quickly locate repositories that support FIPS-based
 compliance needs. Image variants that include FIPS support will have a tag
 ending with `-fips`, such as `3.13-fips`.
 
-## Validate FIPS-related tests using attestations
+## View the FIPS attestation
 
-Docker Hardened Images include a signed [test
-attestation](../core-concepts/attestations.md) that documents the results of
-automated image validation. For FIPS variants, this includes test cases that
-verify whether the image uses FIPS-validated cryptographic modules.
+The FIPS variants of Docker Hardened Images contain a FIPS attestation that
+lists the actual cryptographic modules included in the image.
 
-You can retrieve and inspect this attestation using the Docker Scout CLI:
+You can retrieve and inspect the FIPS attestation using the Docker Scout CLI:
 
 ```console
 $ docker scout attest get \
-  --predicate-type https://scout.docker.com/tests/v0.1 \
+  --predicate-type https://docker.com/dhi/fips/v0.1 \
   --predicate \
-  <your-namespace>/dhi-<image>:<tag> --platform <platform>
+  <your-namespace>/dhi-<image>:<tag>
 ```
 
 For example:
 
 ```console
 $ docker scout attest get \
-  --predicate-type https://scout.docker.com/tests/v0.1 \
+  --predicate-type https://docker.com/dhi/fips/v0.1 \
   --predicate \
-  docs/dhi-python:3.13-fips --platform linux/amd64
+  docs/dhi-python:3.13-fips
 ```
 
-The output is a structured JSON report. Individual test outputs are
-base64-encoded under fields like `stdout`. You can decode them to review the raw
-test output.
+The attestation output is a JSON array describing the cryptographic modules
+included in the image and their compliance status. For example:
 
-To decode and view test results:
-
-```console
-$ docker scout attest get \
-  --predicate-type https://scout.docker.com/tests/v0.1 \
-  --predicate \
-  docs/dhi-python:3.13-fips --platform linux/amd64 \
-  | jq -r '.results.tests[].extra.stdout' \
-  | base64 -d
+```json
+[
+  {
+    "certification": "CMVP #4985",
+    "certificationUrl": "https://csrc.nist.gov/projects/cryptographic-module-validation-program/certificate/4985",
+    "name": "OpenSSL FIPS Provider",
+    "package": "pkg:dhi/openssl-provider-fips@3.1.2",
+    "standard": "FIPS 140-3",
+    "status": "active",
+    "sunsetDate": "2030-03-10",
+    "version": "3.1.2"
+  }
+]
 ```
