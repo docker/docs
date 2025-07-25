@@ -51,11 +51,9 @@ To install Docker Engine, you need one of the following OS versions:
 
 ### Uninstall old versions
 
-Before you can install Docker Engine, you need to uninstall any conflicting packages.
-
-Your Linux distribution may provide unofficial Docker packages, which may conflict
-with the official packages provided by Docker. You must uninstall these packages
-before you install the official version of Docker Engine.
+Uninstall unofficial or conflicting Docker packages provided
+by your Linux distribution before installing Docker Engine.
+Remove the following packages if present:
 
 The unofficial packages to uninstall are:
 
@@ -132,7 +130,7 @@ Docker from the repository.
    ```console
    $ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
    ```
-  
+
    {{< /tab >}}
    {{< tab name="Specific version" >}}
 
