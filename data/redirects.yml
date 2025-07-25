@@ -258,7 +258,7 @@
 # Docker Debug
 "/reference/cli/docker/debug/":
   - /go/debug-cli/
-"/desktop/use-desktop/container/#debug":
+"/desktop/use-desktop/container/#execdebug":
   - /go/debug-gui/
 
 # Docker Admin Console - Insights
