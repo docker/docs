@@ -1,11 +1,14 @@
 module github.com/docker/docs
 
-go 1.24.0
+go 1.24.4
+
+toolchain go1.24.5
 
 require (
 	github.com/docker/buildx v0.26.1 // indirect
 	github.com/docker/cli v28.3.3+incompatible // indirect
 	github.com/docker/compose/v2 v2.39.2 // indirect
+	github.com/docker/mcp-gateway v0.13.1-0.20250725123702-8e89765b8e23 // indirect
 	github.com/docker/model-cli v0.1.33-0.20250703103301-d4e4936a9eb2 // indirect
 	github.com/docker/scout-cli v1.18.1 // indirect
 	github.com/moby/buildkit v0.23.2 // indirect
@@ -21,3 +24,5 @@ replace (
 	github.com/moby/buildkit => github.com/moby/buildkit v0.23.2
 	github.com/moby/moby => github.com/moby/moby v28.3.3+incompatible
 )
+
+replace github.com/docker/mcp-gateway => github.com/docker/mcp-gateway v0.13.1-0.20250725123702-8e89765b8e23

@@ -1,0 +1,13 @@
+command: docker mcp config read
+short: Read the configuration
+long: Read the configuration
+usage: docker mcp config read
+pname: docker mcp config
+plink: docker_mcp_config.yaml
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

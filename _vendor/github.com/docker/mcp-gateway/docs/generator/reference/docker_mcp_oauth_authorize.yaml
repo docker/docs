@@ -1,0 +1,11 @@
+command: docker mcp oauth authorize
+usage: docker mcp oauth authorize <app>
+pname: docker mcp oauth
+plink: docker_mcp_oauth.yaml
+deprecated: false
+hidden: true
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+
