@@ -28,9 +28,3 @@ GitHub](https://github.com/docker/for-mac/issues)
 - [Docker Desktop for Windows issues on GitHub](https://github.com/docker/for-win/issues)
 - [Docker Desktop for Linux issues on
 GitHub](https://github.com/docker/desktop-linux/issues)
-
-## Suggest features or ideas
-
-To suggest new features or improvements, visit the [Docker Public
-Roadmap](https://github.com/docker/roadmap/discussions). You can browse existing
-ideas, vote on what matters to you, or open a new discussion.
