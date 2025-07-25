@@ -1,0 +1,13 @@
+command: docker mcp server inspect
+short: Get information about a server
+long: Get information about a server
+usage: docker mcp server inspect
+pname: docker mcp server
+plink: docker_mcp_server.yaml
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

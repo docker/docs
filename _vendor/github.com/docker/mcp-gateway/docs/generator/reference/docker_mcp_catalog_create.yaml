@@ -1,0 +1,13 @@
+command: docker mcp catalog create
+short: Create a new catalog
+long: Create a new catalog
+usage: docker mcp catalog create <name>
+pname: docker mcp catalog
+plink: docker_mcp_catalog.yaml
+deprecated: false
+hidden: true
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

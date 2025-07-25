@@ -1,0 +1,16 @@
+command: docker mcp gateway
+short: Manage the MCP Server gateway
+long: Manage the MCP Server gateway
+pname: docker mcp
+plink: docker_mcp.yaml
+cname:
+    - docker mcp gateway run
+clink:
+    - docker_mcp_gateway_run.yaml
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

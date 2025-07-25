@@ -351,6 +351,13 @@ module:
           target: data/model-cli
           includeFiles: "*.yaml"
 
+    # MCP CLI
+    - path: github.com/docker/mcp-gateway
+      mounts:
+        - source: docs/generator/reference
+          target: data/mcp-cli
+          includeFiles: "*.yaml"
+
     # Scout CLI plugin (public dist repo)
     - path: github.com/docker/scout-cli
       mounts:
