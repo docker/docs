@@ -127,7 +127,7 @@ FROM ubuntu:22.04
 ```
 
 The [`FROM` instruction](/reference/dockerfile.md#from) sets your base
-image to Ubuntu 22.04. All following instructions run in this Ubuntu environment. The
+image to the 22.04 release of Ubuntu. All following instructions run in this Ubuntu environment. The
 `ubuntu:22.04` notation follows the `name:tag` standard for Docker images. You can
 use many public images in your projects by importing them with the `FROM` instruction.
 
