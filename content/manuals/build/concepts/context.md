@@ -437,7 +437,7 @@ improving build speed, especially when using a remote builder.
 When you run a build command, the build client looks for a file named
 `.dockerignore` in the root directory of the context. If this file exists, files
 and directories that match patterns in the file are removed from the build context
-before Docker sends them to the builder.
+before it sends them to the builder.
 
 If you use multiple Dockerfiles, you can use different ignore files for each
 Dockerfile. Use a special naming convention for these ignore files. Place your
