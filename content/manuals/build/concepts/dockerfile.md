@@ -34,7 +34,7 @@ complex scenarios.
 The default filename for a Dockerfile is `Dockerfile`, without a file extension. Using
 the default name lets you run the `docker build` command without extra flags.
 
-Some projects need different Dockerfiles for specific purposes. A common
+Some projects may need distinct Dockerfiles for specific purposes. A common
 convention is to name these `<something>.Dockerfile`. You can specify the
 Dockerfile filename using the `--file` flag with the `docker build` command. See the
 [`docker build` CLI reference](/reference/cli/docker/buildx/build.md#file) for details.
