@@ -1,8 +1,8 @@
 ---
 title: Dockerfile overview
 weight: 20
-description: Learn about Dockerfiles and how to use them with Docker Images to build and package your software
-keywords: build, buildx, buildkit, getting started, dockerfile
+description: Learn how to use Dockerfiles to build and package your software into Docker images.
+keywords: dockerfile, docker build, buildx, buildkit, container image, getting started, image layers, dockerfile instructions
 aliases:
 - /build/hellobuild/
 - /build/building/packaging/
@@ -10,57 +10,49 @@ aliases:
 
 ## Dockerfile
 
-It all starts with a Dockerfile.
-
-Docker builds images by reading the instructions from a Dockerfile. A
-Dockerfile is a text file containing instructions for building your source
-code. The Dockerfile instruction syntax is defined by the specification
-reference in the [Dockerfile reference](/reference/dockerfile.md).
+Docker builds images by reading instructions from a Dockerfile. A
+Dockerfile is a text file that contains instructions for building your source
+code. The Dockerfile instruction syntax is defined in the
+[Dockerfile reference](/reference/dockerfile.md).
 
 Here are the most common types of instructions:
 
-| Instruction                                                        | Description                                                                                                                                                                                              |
-| ------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`FROM <image>`](/reference/dockerfile.md#from)           | Defines a base for your image.                                                                                                                                                                           |
-| [`RUN <command>`](/reference/dockerfile.md#run)           | Executes any commands in a new layer on top of the current image and commits the result. `RUN` also has a shell form for running commands.                                                               |
-| [`WORKDIR <directory>`](/reference/dockerfile.md#workdir) | Sets the working directory for any `RUN`, `CMD`, `ENTRYPOINT`, `COPY`, and `ADD` instructions that follow it in the Dockerfile.                                                                          |
-| [`COPY <src> <dest>`](/reference/dockerfile.md#copy)      | Copies new files or directories from `<src>` and adds them to the filesystem of the container at the path `<dest>`.                                                                                      |
-| [`CMD <command>`](/reference/dockerfile.md#cmd)           | Lets you define the default program that is run once you start the container based on this image. Each Dockerfile only has one `CMD`, and only the last `CMD` instance is respected when multiple exist. |
+| Instruction                                               | Description                                                                                                                            |
+|-----------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|
+| [`FROM <image>`](/reference/dockerfile.md#from)           | Defines a base for your image.                                                                                                         |
+| [`RUN <command>`](/reference/dockerfile.md#run)           | Executes commands in a new layer on top of the current image and commits the result. `RUN` also has a shell form for running commands. |
+| [`WORKDIR <directory>`](/reference/dockerfile.md#workdir) | Sets the working directory for any `RUN`, `CMD`, `ENTRYPOINT`, `COPY`, and `ADD` instructions that follow it in the Dockerfile.        |
+| [`COPY <src> <dest>`](/reference/dockerfile.md#copy)      | Copies new files or directories from `<src>` and adds them to the container at the path `<dest>`.                                      |
+| [`CMD <command>`](/reference/dockerfile.md#cmd)           | Defines the default program that runs when you start the container. Only the last `CMD` in the Dockerfile is used if multiple exist.   |
 
-Dockerfiles are crucial inputs for image builds and can facilitate automated,
-multi-layer image builds based on your unique configurations. Dockerfiles can
-start simple and grow with your needs to support more complex scenarios.
+Dockerfiles are essential for image builds and can automate multi-layer image builds
+based on your configuration. Dockerfiles can start simple and grow to support more
+complex scenarios.
 
 ### Filename
 
-The default filename to use for a Dockerfile is `Dockerfile`, without a file
-extension. Using the default name allows you to run the `docker build` command
-without having to specify additional command flags.
+The default filename for a Dockerfile is `Dockerfile`, without a file extension. Using
+the default name lets you run the `docker build` command without extra flags.
 
-Some projects may need distinct Dockerfiles for specific purposes. A common
+Some projects need different Dockerfiles for specific purposes. A common
 convention is to name these `<something>.Dockerfile`. You can specify the
-Dockerfile filename using the `--file` flag for the `docker build` command.
-Refer to the
-[`docker build` CLI reference](/reference/cli/docker/buildx/build.md#file)
-to learn about the `--file` flag.
+Dockerfile filename using the `--file` flag with the `docker build` command. See the
+[`docker build` CLI reference](/reference/cli/docker/buildx/build.md#file) for details.
 
 > [!NOTE]
->
-> We recommend using the default (`Dockerfile`) for your project's primary
-> Dockerfile.
+> We recommend using the default (`Dockerfile`) for your project's main Dockerfile.
 
 ## Docker images
 
-Docker images consist of layers. Each layer is the result of a build
-instruction in the Dockerfile. Layers are stacked sequentially, and each one is
-a delta representing the changes applied to the previous layer.
+Docker images consist of layers. Each layer results from a build instruction in the
+Dockerfile. Layers are stacked in order, and each one represents changes applied to
+the previous layer.
 
 ### Example
 
-Here's what a typical workflow for building applications with Docker looks like.
+A typical workflow for building applications with Docker:
 
-The following example code shows a small "Hello World" application written in
-Python, using the Flask framework.
+The following example shows a small "Hello World" application in Python using Flask.
 
 ```python
 from flask import Flask
@@ -71,15 +63,14 @@ def hello():
     return "Hello World!"
 ```
 
-In order to ship and deploy this application without Docker Build, you would
-need to make sure that:
+Without Docker Build, you need to:
 
-- The required runtime dependencies are installed on the server
-- The Python code gets uploaded to the server's filesystem
-- The server starts your application, using the necessary parameters
+- Install the required runtime dependencies on the server.
+- Upload the Python code to the server's filesystem.
+- Start your application on the server with the necessary parameters.
 
-The following Dockerfile creates a container image, which has all the
-dependencies installed and that automatically starts your application.
+The following Dockerfile creates a container image with all dependencies installed and
+automatically starts your application.
 
 ```dockerfile
 # syntax=docker/dockerfile:1
@@ -98,7 +89,7 @@ EXPOSE 8000
 CMD ["flask", "run", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
-Here's a breakdown of what this Dockerfile does:
+This Dockerfile does the following:
 
 - [Dockerfile syntax](#dockerfile-syntax)
 - [Base image](#base-image)
@@ -112,46 +103,40 @@ Here's a breakdown of what this Dockerfile does:
 
 ### Dockerfile syntax
 
-The first line to add to a Dockerfile is a [`# syntax` parser directive](/reference/dockerfile.md#syntax).
-While optional, this directive instructs the Docker builder what syntax to use
-when parsing the Dockerfile, and allows older Docker versions with [BuildKit enabled](../buildkit/_index.md#getting-started)
-to use a specific [Dockerfile frontend](../buildkit/frontend.md) before
-starting the build. [Parser directives](/reference/dockerfile.md#parser-directives)
-must appear before any other comment, whitespace, or Dockerfile instruction in
-your Dockerfile, and should be the first line in Dockerfiles.
+The first line is a [`# syntax` parser directive](/reference/dockerfile.md#syntax).
+This optional directive tells Docker which syntax to use when parsing the Dockerfile.
+It lets older Docker versions with [BuildKit enabled](../buildkit/_index.md#getting-started)
+use a specific [Dockerfile frontend](../buildkit/frontend.md) before starting the
+build. [Parser directives](/reference/dockerfile.md#parser-directives) must appear
+before any other comment, whitespace, or instruction, and should be the first line.
 
 ```dockerfile
 # syntax=docker/dockerfile:1
 ```
 
 > [!TIP]
->
-> We recommend using `docker/dockerfile:1`, which always points to the latest
-> release of the version 1 syntax. BuildKit automatically checks for updates of
-> the syntax before building, making sure you are using the most current version.
+> Use `docker/dockerfile:1` to always get the latest version 1 syntax. BuildKit
+> checks for updates before building, so you use the most current version.
 
 ### Base image
 
-The line following the syntax directive defines what base image to use:
+The next line defines the base image:
 
 ```dockerfile
 FROM ubuntu:22.04
 ```
 
 The [`FROM` instruction](/reference/dockerfile.md#from) sets your base
-image to the 22.04 release of Ubuntu. All instructions that follow are executed
-in this base image: an Ubuntu environment. The notation `ubuntu:22.04`, follows
-the `name:tag` standard for naming Docker images. When you build images, you
-use this notation to name your images. There are many public images you can
-leverage in your projects, by importing them into your build steps using the
-Dockerfile `FROM` instruction.
+image to Ubuntu 22.04. All following instructions run in this Ubuntu environment. The
+`ubuntu:22.04` notation follows the `name:tag` standard for Docker images. You can
+use many public images in your projects by importing them with the `FROM` instruction.
 
 [Docker Hub](https://hub.docker.com/search?image_filter=official&q=&type=image)
-contains a large set of official images that you can use for this purpose.
+offers many official images you can use.
 
 ### Environment setup
 
-The following line executes a build command inside the base image.
+This line runs a build command inside the base image.
 
 ```dockerfile
 # install app dependencies
@@ -164,23 +149,17 @@ the container.
 
 ### Comments
 
-Note the `# install app dependencies` line. This is a comment. Comments in
-Dockerfiles begin with the `#` symbol. As your Dockerfile evolves, comments can
-be instrumental to document how your Dockerfile works for any future readers
-and editors of the file, including your future self!
+The `# install app dependencies` line is a comment. Comments in Dockerfiles start
+with `#`. Comments help document your Dockerfile for future readers and editors.
 
 > [!NOTE]
->
-> You might've noticed that comments are denoted using the same symbol as the
-> [syntax directive](#dockerfile-syntax) on the first line of the file.
-> The symbol is only interpreted as a directive if the pattern matches a
-> directive and appears at the beginning of the Dockerfile. Otherwise, it's
-> treated as a comment.
+> Comments use the same symbol as the [syntax directive](#dockerfile-syntax) on the
+> first line. The symbol is only a directive if it matches a directive pattern and is
+> at the start of the Dockerfile. Otherwise, it is a comment.
 
 ### Installing dependencies
 
-The second `RUN` instruction installs the `flask` dependency required by the
-Python application.
+The second `RUN` instruction installs the `flask` dependency for the Python app.
 
 ```dockerfile
 RUN pip install flask==3.0.*
@@ -194,7 +173,7 @@ use the command to install the flask web framework.
 
 The next instruction uses the
 [`COPY` instruction](/reference/dockerfile.md#copy) to copy the
-`hello.py` file from the local build context into the root directory of our image. 
+`hello.py` file from the local build context into the root directory of our image.
 
 ```dockerfile
 COPY hello.py /
@@ -215,9 +194,8 @@ in your Docker build using the [`ENV` instruction](/reference/dockerfile.md#env)
 ENV FLASK_APP=hello
 ```
 
-This sets a Linux environment variable we'll need later. Flask, the framework
-used in this example, uses this variable to start the application. Without this,
-flask wouldn't know where to find our application to be able to run it.
+This sets a Linux environment variable needed by Flask to start the app. Without this,
+Flask cannot find the app to run it.
 
 ### Exposed ports
 

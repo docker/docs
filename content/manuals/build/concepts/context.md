@@ -337,13 +337,11 @@ $ docker build http://server/context.tar.gz
 ...
 ```
 
-The download operation will be performed on the host where the BuildKit daemon
-is running. Note that if you're using a remote Docker context or a remote
-builder, that's not necessarily the same machine as where you issue the build
-command. BuildKit fetches the `context.tar.gz` and uses it as the build
-context. Tarball contexts must be tar archives conforming to the standard `tar`
-Unix format and can be compressed with any one of the `xz`, `bzip2`, `gzip` or
-`identity` (no compression) formats.
+The download operation runs on the host where the BuildKit daemon is running. If you
+use a remote Docker context or a remote builder, that might not be the same machine
+where you issue the build command. BuildKit fetches the `context.tar.gz` and uses it
+as the build context. Tarball contexts must be tar archives in the standard `tar` Unix
+format and can be compressed with `xz`, `bzip2`, `gzip`, or `identity` (no compression) formats.
 
 ## Empty context
 
@@ -437,14 +435,14 @@ improving build speed, especially when using a remote builder.
 ### Filename and location
 
 When you run a build command, the build client looks for a file named
-`.dockerignore` in the root directory of the context. If this file exists, the
-files and directories that match patterns in the files are removed from the
-build context before it's sent to the builder.
+`.dockerignore` in the root directory of the context. If this file exists, files
+and directories that match patterns in the file are removed from the build context
+before Docker sends them to the builder.
 
-If you use multiple Dockerfiles, you can use different ignore-files for each
-Dockerfile. You do so using a special naming convention for the ignore-files.
-Place your ignore-file in the same directory as the Dockerfile, and prefix the
-ignore-file with the name of the Dockerfile, as shown in the following example.
+If you use multiple Dockerfiles, you can use different ignore files for each
+Dockerfile. Use a special naming convention for these ignore files. Place your
+ignore file in the same directory as the Dockerfile, and prefix the ignore file
+with the name of the Dockerfile, as shown in the following example.
 
 ```text
 .
@@ -520,14 +518,14 @@ Lines that are blank after preprocessing are ignored.
 > For historical reasons, the pattern `.` is ignored.
 
 Beyond Go's `filepath.Match` rules, Docker also supports a special wildcard
-string `**` that matches any number of directories (including zero). For
-example, `**/*.go` excludes all files that end with `.go` found anywhere in the
+string `**` that matches any number of directories, including zero. For
+example, `**/*.go` excludes all files ending with `.go` found anywhere in the
 build context.
 
 You can use the `.dockerignore` file to exclude the `Dockerfile` and
-`.dockerignore` files. These files are still sent to the builder as they're
-needed for running the build. But you can't copy the files into the image using
-`ADD`, `COPY`, or bind mounts.
+`.dockerignore` files. These files are still sent to the builder because they are
+needed for running the build. However, you can't copy these files into the image
+using `ADD`, `COPY`, or bind mounts.
 
 #### Negating matches
 
@@ -717,7 +715,7 @@ where you have two Dockerfiles:
 - `base.Dockerfile`: for building a base image
 - `app.Dockerfile`: for building an application image
 
-The `app.Dockerfile` uses the image produced by `base.Dockerfile` as it's base
+The `app.Dockerfile` uses the image produced by its `base.Dockerfile` as its base
 image:
 
 ```dockerfile {title=app.Dockerfile}
