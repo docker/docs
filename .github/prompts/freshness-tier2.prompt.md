@@ -18,6 +18,6 @@ how fresh and up to date it is. Apply the following:
 5. Try to add some helpful next steps to the end of the document, but only if there are no *Next steps* or *Related pages* section, already.
 6. Try to clarify, shorten or improve the efficiency of some sentences.
 7. Check for LLM readability.
-8. Keep line length to a maximum of 90 characters.
+8. Keep line length to a maximum of approximately 80 characters.
 
 Do your best and don't be lazy.
