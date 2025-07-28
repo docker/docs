@@ -715,7 +715,7 @@ where you have two Dockerfiles:
 - `base.Dockerfile`: for building a base image
 - `app.Dockerfile`: for building an application image
 
-The `app.Dockerfile` uses the image produced by its `base.Dockerfile` as its base
+The `app.Dockerfile` uses the image produced by `base.Dockerfile` as its base
 image:
 
 ```dockerfile {title=app.Dockerfile}
