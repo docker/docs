@@ -31,6 +31,58 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 >
 > If you're experiencing malware detection issues on Mac, follow the steps documented in [docker/for-mac#7527](https://github.com/docker/for-mac/issues/7527).
 
+## 4.44.0
+
+{{< release-date date="2025-07-31" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.44.0" build_path="/TODO/" >}}
+
+### New
+
+- Debugging Support (Request/Response tracing) in Model Runner.
+- Can now run multiple models and receive a warn on insufficient resources (avoid freezing using big models).
+- Introduced `--gpu` (Windows only) and `--cors` flags for `docker desktop enable model-runner`.
+
+### Upgrades
+
+- [Docker Compose v2.39.1](https://github.com/docker/compose/releases/tag/v2.39.1)
+- [Docker Buildx v0.26.1](https://github.com/docker/buildx/releases/tag/v0.26.1)
+- [Docker Engine v28.3.2](https://docs.docker.com/engine/release-notes/28/#2832)
+- [Docker Scout CLI v1.18.2](https://github.com/docker/scout-cli/releases/tag/v1.18.2)
+- [Docker Model CLI v0.1.36](https://github.com/docker/model-cli/releases/tag/v0.1.36)
+- [Docker Desktop CLI v0.2.0](/manuals/desktop/features/desktop-cli.md)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed an issue pulling images with zstd differential layers when the containerd image store is enabled.
+- Fixed a bug causing containers launched with the `--restart` flag to fail to restart properly when using Enhanced Container Isolation.
+- Improved interaction between [Kubernetes custom registry images](https://docs.docker.com/desktop/features/kubernetes/#configuring-a-custom-image-registry-for-kubernetes-control-plane-images) and Enhanced Container Isolation (ECI), so the [ECI Docker Socket image list](https://docs.docker.com/security/for-admins/hardened-desktop/enhanced-container-isolation/config/#image-list) no longer needs to be manually updated when using a custom registry for Kubernetes control plane images.
+- Fixed a bug where a Docker Desktop Kubernetes cluster (in "kind" mode) fails to start after restarting Docker Desktop if the user is required to be logged in but is currently logged out.
+
+- Fixed a bug that prevented mounting of MCP secrets into containers when [Enhanced Container Isolation](https://docs.docker.com/security/for-admins/hardened-desktop/enhanced-container-isolation/) is enabled.
+- Fixed a bug preventing the use of `--publish-all` when `--publish` was already specified.
+- Fixed a bug causing images screen to scroll infinitely. Fixes [#7725](https://github.com/docker/for-mac/issues/7725).
+- Fixed blank Volumes page while on Resource Saver mode.
+- Updated terms of service text on first launch.
+
+#### For Mac
+
+- Fixed disk corruption on DockerVMM when reclaiming disk space.
+- Fixed regression since 4.42.0 on DockerVMM by re-introducing performance boost on general usage.
+- Removed QEMU hypervisor and switched to Apple Virtualization as the new default. See [blog post](https://www.docker.com/blog/docker-desktop-for-mac-qemu-virtualization-option-to-be-deprecated-in-90-days/).
+- Fixed a bug preventing Traefik from autodetecting containers' ports. Fixes [docker/for-mac#7693](https://github.com/docker/for-mac/issues/7693).
+- Remove eBPF which blocked `io_uring`. To enable `io_uring` in a container, use `--security-opt seccomp=unconfined`. Fixes [docker/for-mac#7707](https://github.com/docker/for-mac/issues/7707).
+
+#### For Windows
+
+- Re-added `docker-users` group to the named pipe security descriptors.
+- Fixed an installer crash when the current user has no `SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall` registry key.
+- Fixed a bug where Docker Desktop could leak a `com.docker.build` process and fail to start. Fixed [docker/for-win#14840](https://github.com/docker/for-win/issues/14840).
+- Fixed a bug that was preventing Docker Desktop Kubernetes in "kind" mode from starting when using WSL with `cgroups v1` and Enhanced Container Isolation (ECI) is enabled.
+
+
 ## 4.43.2
 
 {{< release-date date="2025-07-15" >}}
