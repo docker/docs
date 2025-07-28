@@ -2,7 +2,7 @@
 title: Dockerfile overview
 weight: 20
 description: Learn how to use Dockerfiles to build and package your software into Docker images.
-keywords: dockerfile, docker build, buildx, buildkit, container image, getting started, image layers, dockerfile instructions
+keywords: dockerfile, docker build, buildx, buildkit, container image, getting started, image layers, dockerfile, instructions
 aliases:
 - /build/hellobuild/
 - /build/building/packaging/
