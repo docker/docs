@@ -50,7 +50,7 @@ purpose.
 > [!WARNING]
 >
 > Some distributions do not automatically add the new group to the
-> `/etc/subuid` and `/etc/subgid` files. If that's the case, you are may have
+> `/etc/subuid` and `/etc/subgid` files. If that's the case, you may have
 > to manually edit these files and assign non-overlapping ranges. This step is
 > covered in [Prerequisites](#prerequisites).
 
