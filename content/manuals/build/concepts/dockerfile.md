@@ -23,7 +23,7 @@ Here are the most common types of instructions:
 | [`RUN <command>`](/reference/dockerfile.md#run)           | Executes commands in a new layer on top of the current image and commits the result. `RUN` also has a shell form for running commands. |
 | [`WORKDIR <directory>`](/reference/dockerfile.md#workdir) | Sets the working directory for any `RUN`, `CMD`, `ENTRYPOINT`, `COPY`, and `ADD` instructions that follow it in the Dockerfile.        |
 | [`COPY <src> <dest>`](/reference/dockerfile.md#copy)      | Copies new files or directories from `<src>` and adds them to the container at the path `<dest>`.                                      |
-| [`CMD <command>`](/reference/dockerfile.md#cmd)           | Defines the default program that runs when you start the container. Only the last `CMD` in the Dockerfile is used if multiple exist.   |
+| [`CMD <command>`](/reference/dockerfile.md#cmd)           | Defines the default program that runs when you start the container based on this image. Only the last `CMD` in the Dockerfile is used if multiple exist.   |
 
 Dockerfiles are crucial inputs for image builds and can facilitate automated,
 multi-layer image builds based on your unique configurations. Dockerfiles can
