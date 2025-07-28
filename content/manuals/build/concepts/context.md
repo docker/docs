@@ -439,7 +439,7 @@ When you run a build command, the build client looks for a file named
 and directories that match patterns in the file are removed from the build context
 before it sends them to the builder.
 
-If you use multiple Dockerfiles, you can use different ignore files for each
+If you use multiple Dockerfiles, you can use different ignore-files for each
 Dockerfile. Use a special naming convention for these ignore files. Place your
 ignore file in the same directory as the Dockerfile, and prefix the ignore file
 with the name of the Dockerfile, as shown in the following example.
