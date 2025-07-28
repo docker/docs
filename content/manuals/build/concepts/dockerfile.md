@@ -25,9 +25,9 @@ Here are the most common types of instructions:
 | [`COPY <src> <dest>`](/reference/dockerfile.md#copy)      | Copies new files or directories from `<src>` and adds them to the container at the path `<dest>`.                                      |
 | [`CMD <command>`](/reference/dockerfile.md#cmd)           | Defines the default program that runs when you start the container. Only the last `CMD` in the Dockerfile is used if multiple exist.   |
 
-Dockerfiles are essential for image builds and can automate multi-layer image builds
-based on your configuration. Dockerfiles can start simple and grow to support more
-complex scenarios.
+Dockerfiles are crucial inputs for image builds and can facilitate automated,
+multi-layer image builds based on your unique configurations. Dockerfiles can
+start simple and grow with your needs to support more complex scenarios.
 
 ### Filename
 
@@ -44,9 +44,9 @@ Dockerfile filename using the `--file` flag with the `docker build` command. See
 
 ## Docker images
 
-Docker images consist of layers. Each layer results from a build instruction in the
-Dockerfile. Layers are stacked in order, and each one represents changes applied to
-the previous layer.
+Docker images consist of layers. Each layer is the result of a build
+instruction in the Dockerfile. Layers are stacked sequentially, and each one is
+a delta representing the changes applied to the previous layer.
 
 ### Example
 
@@ -149,13 +149,10 @@ the container.
 
 ### Comments
 
-The `# install app dependencies` line is a comment. Comments in Dockerfiles start
-with `#`. Comments help document your Dockerfile for future readers and editors.
-
-> [!NOTE]
-> Comments use the same symbol as the [syntax directive](#dockerfile-syntax) on the
-> first line. The symbol is only a directive if it matches a directive pattern and is
-> at the start of the Dockerfile. Otherwise, it is a comment.
+Note the `# install app dependencies` line. This is a comment. Comments in
+Dockerfiles begin with the `#` symbol. As your Dockerfile evolves, comments can
+be instrumental to document how your Dockerfile works for any future readers
+and editors of the file, including your future self!
 
 ### Installing dependencies
 
