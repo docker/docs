@@ -41,7 +41,7 @@ A pull is defined as the following:
 ## Pull attribution
 
 Pulls from authenticated users can be attributed to either a personal or an
-[organization namespace](/manuals/admin/faqs/general-faqs.md#whats-an-organization-name-or-namespace).
+[organization namespace](/manuals/accounts/general-faqs.md#whats-an-organization-name-or-namespace).
 
 Attribution is based on the following:
 
