@@ -67,7 +67,7 @@ If you choose the integrated terminal, you can run commands in a running contain
     > [!TIP]
     >
     > Turn this setting on to make Docker Desktop run faster.
-  - Alternatively, you can choose **Apple Virtualization framework**, **QEMU** (for Apple Silicon), or **HyperKit** (for Intel Macs). For macOS 12.5 and later, Apple Virtualization framework is the default setting.
+  - Alternatively, you can choose **Apple Virtualization framework**, **QEMU** (for Apple Silicon  in Docker Desktop version 4.43 and earlier), or **HyperKit** (for Intel Macs). For macOS 12.5 and later, Apple Virtualization framework is the default setting.
 
    For more information, see [Virtual Machine Manager](/manuals/desktop/features/vmm.md).
 
