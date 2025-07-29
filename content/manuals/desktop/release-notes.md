@@ -39,8 +39,8 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ### New
 
-- Debugging Support (Request/Response tracing) in Model Runner.
-- Can now run multiple models and receive a warn on insufficient resources (avoid freezing using big models).
+- You can now inspect requests and responses to help you diagnose model-related issues in Docker Model Runner. 
+- Added the ability to run multiple models and receive a warning on insufficient resources. This avoids Docker Desktop freezing when using big models.
 - Introduced `--gpu` (Windows only) and `--cors` flags for `docker desktop enable model-runner`.
 
 ### Upgrades
@@ -52,19 +52,22 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - [Docker Model CLI v0.1.36](https://github.com/docker/model-cli/releases/tag/v0.1.36)
 - [Docker Desktop CLI v0.2.0](/manuals/desktop/features/desktop-cli.md)
 
+### Security 
+
+We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266), a critical vulnerability affecting the NVIDIA Container Toolkit in CDI mode up to version 1.17.7. Docker Desktop includes version 1.17.8, which is not impacted. However, older versions of Docker Desktop that bundled earlier toolkit versions may be affected if CDI mode was manually enabled. Uprade to Docker Desktop 4.44 or later to ensure you're using the patched version.
+
 ### Bug fixes and enhancements
 
 #### For all platforms
 
 - Fixed an issue pulling images with zstd differential layers when the containerd image store is enabled.
-- Fixed a bug causing containers launched with the `--restart` flag to fail to restart properly when using Enhanced Container Isolation.
-- Improved interaction between [Kubernetes custom registry images](https://docs.docker.com/desktop/features/kubernetes/#configuring-a-custom-image-registry-for-kubernetes-control-plane-images) and Enhanced Container Isolation (ECI), so the [ECI Docker Socket image list](https://docs.docker.com/security/for-admins/hardened-desktop/enhanced-container-isolation/config/#image-list) no longer needs to be manually updated when using a custom registry for Kubernetes control plane images.
-- Fixed a bug where a Docker Desktop Kubernetes cluster (in "kind" mode) fails to start after restarting Docker Desktop if the user is required to be logged in but is currently logged out.
-
-- Fixed a bug that prevented mounting of MCP secrets into containers when [Enhanced Container Isolation](https://docs.docker.com/security/for-admins/hardened-desktop/enhanced-container-isolation/) is enabled.
+- Fixed a bug causing containers launching  with the `--restart` flag to not restart properly when using Enhanced Container Isolation.
+- Improved interaction between [Kubernetes custom registry images](/manuals/desktop/features/kubernetes/#configuring-a-custom-image-registry-for-kubernetes-control-plane-images) and Enhanced Container Isolation (ECI), so the [ECI Docker Socket image list](/enterprise/security/hardened-desktop/enhanced-container-isolation/config/#image-list) no longer needs to be manually updated when using a custom registry for Kubernetes control plane images.
+- Fixed a bug where a Docker Desktop Kubernetes cluster in kind mode fails to start after restarting Docker Desktop if the user is required to be signed in but is currently signed out.
+- Fixed a bug that prevented the mounting of MCP secrets into containers when [Enhanced Container Isolation](/enterprise/security/hardened-desktop/enhanced-container-isolation/) is enabled.
 - Fixed a bug preventing the use of `--publish-all` when `--publish` was already specified.
-- Fixed a bug causing images screen to scroll infinitely. Fixes [#7725](https://github.com/docker/for-mac/issues/7725).
-- Fixed blank Volumes page while on Resource Saver mode.
+- Fixed a bug causing the **Images** view to scroll infinitely. Fixes [#7725](https://github.com/docker/for-mac/issues/7725).
+- Fixed a bug which caused the **Volumes** tab to be blank while in Resource Saver mode.
 - Updated terms of service text on first launch.
 
 #### For Mac
@@ -73,15 +76,14 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Fixed regression since 4.42.0 on DockerVMM by re-introducing performance boost on general usage.
 - Removed QEMU hypervisor and switched to Apple Virtualization as the new default. See [blog post](https://www.docker.com/blog/docker-desktop-for-mac-qemu-virtualization-option-to-be-deprecated-in-90-days/).
 - Fixed a bug preventing Traefik from autodetecting containers' ports. Fixes [docker/for-mac#7693](https://github.com/docker/for-mac/issues/7693).
-- Remove eBPF which blocked `io_uring`. To enable `io_uring` in a container, use `--security-opt seccomp=unconfined`. Fixes [docker/for-mac#7707](https://github.com/docker/for-mac/issues/7707).
+- Removed eBPF which blocked `io_uring`. To enable `io_uring` in a container, use `--security-opt seccomp=unconfined`. Fixes [docker/for-mac#7707](https://github.com/docker/for-mac/issues/7707).
 
 #### For Windows
 
 - Re-added `docker-users` group to the named pipe security descriptors.
 - Fixed an installer crash when the current user has no `SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall` registry key.
 - Fixed a bug where Docker Desktop could leak a `com.docker.build` process and fail to start. Fixed [docker/for-win#14840](https://github.com/docker/for-win/issues/14840).
-- Fixed a bug that was preventing Docker Desktop Kubernetes in "kind" mode from starting when using WSL with `cgroups v1` and Enhanced Container Isolation (ECI) is enabled.
-
+- Fixed a bug that was preventing Docker Desktop Kubernetes in kind mode from starting when using WSL with `cgroups v1` and Enhanced Container Isolation (ECI) is enabled.
 
 ## 4.43.2
 
