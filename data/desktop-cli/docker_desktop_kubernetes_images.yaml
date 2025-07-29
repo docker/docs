@@ -1,0 +1,22 @@
+command: docker desktop kubernetes images
+short: List Kubernetes images used by Docker Desktop
+usage: docker desktop kubernetes images
+pname: docker desktop kubernetes
+plink: docker_desktop_kubernetes.yaml
+options:
+    - option: format
+      value_type: string
+      default_value: pretty
+      description: 'Format the output. Accepted values are: pretty, json'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
