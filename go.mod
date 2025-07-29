@@ -9,7 +9,7 @@ require (
 	github.com/docker/model-cli v0.1.33-0.20250703103301-d4e4936a9eb2 // indirect
 	github.com/docker/scout-cli v1.18.1 // indirect
 	github.com/moby/buildkit v0.23.2 // indirect
-	github.com/moby/moby v28.3.2+incompatible // indirect
+	github.com/moby/moby v28.3.3+incompatible // indirect
 )
 
 replace (
@@ -19,5 +19,5 @@ replace (
 	github.com/docker/model-cli => github.com/docker/model-cli v0.1.33-0.20250703103301-d4e4936a9eb2
 	github.com/docker/scout-cli => github.com/docker/scout-cli v1.18.1
 	github.com/moby/buildkit => github.com/moby/buildkit v0.23.2
-	github.com/moby/moby => github.com/moby/moby v28.3.2+incompatible
+	github.com/moby/moby => github.com/moby/moby v28.3.3+incompatible
 )
