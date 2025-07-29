@@ -157,20 +157,6 @@ services:
       - queue
 ```
 
-## Exceptions and limitations
-
-`volumes_from` and `depends_on` are never shared between services using
-`extends`. These exceptions exist to avoid implicit dependencies; you always
-define `volumes_from` locally. This ensures dependencies between services are
-clearly visible when reading the current file. Defining these locally also
-ensures that changes to the referenced file don't break anything.
-
-`extends` is useful if you only need a single service to be shared and you are
-familiar with the file you're extending to, so you can tweak the
-configuration. But this isn’t an acceptable solution when you want to re-use
-someone else's unfamiliar configurations and you don’t know about its own
-dependencies.
-
 ## Relative paths
 
 When using `extends` with a `file` attribute which points to another folder, relative paths 
