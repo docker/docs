@@ -183,6 +183,10 @@ images are permitted.
 
 #### QEMU
 
+> [!WARNING]
+>
+> QEMU has been deprecated in Docker Desktop versions 4.44 and later. For more information, see the [blog announcement](https://www.docker.com/blog/docker-desktop-for-mac-qemu-virtualization-option-to-be-deprecated-in-90-days/) 
+
 | Default value | Accepted values | Format   |
 |---------------|-----------------|----------|
 | `true`        | `true`, `false` | Boolean  |

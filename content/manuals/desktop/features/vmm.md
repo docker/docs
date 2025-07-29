@@ -43,7 +43,7 @@ The Apple Virtualization framework is a stable and well-established option for m
 
 > [!NOTE]
 >
-> QEMU will be deprecated on July 14, 2025. For more information, see the [blog announcement](https://www.docker.com/blog/docker-desktop-for-mac-qemu-virtualization-option-to-be-deprecated-in-90-days/) 
+> QEMU has been deprecated in versions 4.44 and later. For more information, see the [blog announcement](https://www.docker.com/blog/docker-desktop-for-mac-qemu-virtualization-option-to-be-deprecated-in-90-days/) 
 
 QEMU is a legacy virtualization option for Apple Silicon Macs, primarily supported for older use cases. 
 
