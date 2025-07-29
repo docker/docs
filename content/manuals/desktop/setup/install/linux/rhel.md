@@ -24,7 +24,6 @@ To install Docker Desktop successfully, you must:
 
 - Meet the [general system requirements](_index.md#general-system-requirements).
 - Have a 64-bit version of either RHEL 8 or RHEL 9.
-- Have a [Docker account](/manuals/accounts/create-account.md), as authentication is required for Docker Desktop on RHEL.
 
 - If `pass` is not installed, or it can't be installed, you must enable [CodeReady Linux Builder (CRB) repository](https://access.redhat.com/articles/4348511) and [Extra Packages for Enterprise Linux (EPEL)](https://docs.fedoraproject.org/en-US/epel/).
 
@@ -106,10 +105,6 @@ The post-install script:
 ## Launch Docker Desktop
 
 {{% include "desktop-linux-launch.md" %}}
-
-> [!IMPORTANT]
->
-> After launching Docker Desktop for RHEL, you must sign in to your Docker account to start using Docker Desktop.
 
 > [!TIP]
 >
