@@ -85,6 +85,7 @@ We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266
 - Fixed an installer crash when the current user has no `SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall` registry key.
 - Fixed a bug where Docker Desktop could leak a `com.docker.build` process and fail to start. Fixed [docker/for-win#14840](https://github.com/docker/for-win/issues/14840).
 - Fixed a bug that was preventing Docker Desktop Kubernetes in kind mode from starting when using WSL with `cgroups v1` and Enhanced Container Isolation (ECI) is enabled.
+- Fixed a typo in the WSL installation URL in the UI.
 
 ## 4.43.2
 
