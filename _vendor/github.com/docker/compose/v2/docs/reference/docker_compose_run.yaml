@@ -117,6 +117,16 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: env-from-file
+      value_type: stringArray
+      default_value: '[]'
+      description: Set environment variables from file
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: interactive
       shorthand: i
       value_type: bool
@@ -184,6 +194,27 @@ options:
       value_type: string
       default_value: policy
       description: Pull image before running ("always"|"missing"|"never")
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: quiet
+      shorthand: q
+      value_type: bool
+      default_value: "false"
+      description: Don't print anything to STDOUT
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: quiet-build
+      value_type: bool
+      default_value: "false"
+      description: Suppress progress output from the build process
       deprecated: false
       hidden: false
       experimental: false

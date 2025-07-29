@@ -135,7 +135,7 @@ Valid options for `--mount type=tmpfs` include:
 
 | Option                         | Description                                                                                                            |
 | :----------------------------- | :--------------------------------------------------------------------------------------------------------------------- |
-| `destination`, `dst`, `target` | Size of the tmpfs mount in bytes. If unset, the default maximum size of a tmpfs volume is 50% of the host's total RAM. |
+| `destination`, `dst`, `target` | Container path to mount into a tmpfs.                                                                                  |
 | `tmpfs-size`                   | Size of the tmpfs mount in bytes. If unset, the default maximum size of a tmpfs volume is 50% of the host's total RAM. |
 | `tmpfs-mode`                   | File mode of the tmpfs in octal. For instance, `700` or `0770`. Defaults to `1777` or world-writable.                  |
 

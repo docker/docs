@@ -19,7 +19,7 @@ options:
       shorthand: q
       value_type: bool
       default_value: false
-      description: Queitly check and apply updates
+      description: Quietly check and apply updates
       deprecated: false
       hidden: false
       experimental: false

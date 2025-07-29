@@ -1,7 +1,8 @@
 ---
 description: Single sign-on enforcement FAQs
 keywords: Docker, Docker Hub, SSO FAQs, single sign-on, enforce SSO, SSO enforcement
-title: FAQs on SSO and enforcement
+title: FAQs for SSO and enforcement
+linkTitle: Enforcement
 tags: [FAQ]
 aliases:
 - /single-sign-on/enforcement-faqs/
@@ -20,11 +21,11 @@ Yes. You must verify a domain before using it with an SSO connection.
 
 When SSO is enforced, [passwords are prevented from accessing the Docker CLI](/security/security-announcements/#deprecation-of-password-logins-on-cli-when-sso-enforced). You can still access the Docker CLI using a personal access token (PAT) for authentication.
 
-Each user must create a PAT to access the CLI. To learn how to create a PAT, see [Manage access tokens](/security/for-developers/access-tokens/). Users who already used a PAT to sign in before SSO enforcement will still be able to use that PAT to authenticate.
+Each user must create a PAT to access the CLI. To learn how to create a PAT, see [Manage access tokens](/security/access-tokens/). Users who already used a PAT to sign in before SSO enforcement will still be able to use that PAT to authenticate.
 
 ### How does SSO affect automation systems and CI/CD pipelines?
 
-Before enforcing SSO, you must [create PATs](/security/for-developers/access-tokens/). These PATs are used instead of passwords for signing into automation systems and CI/CD pipelines.
+Before enforcing SSO, you must [create PATs](/security/access-tokens/). These PATs are used instead of passwords for signing into automation systems and CI/CD pipelines.
 
 ### What can organization users who authenticated with personal emails prior to enforcement expect?
 
@@ -40,7 +41,7 @@ Guest users who are not part of your registered domain but have been invited to 
 
 ### Is there a way to test this functionality in a test tenant with Okta before going to production?
 
-Yes, you can create a test organization. Companies can set up a new 5 seat Business plan on a new organization to test with. To do this, make sure to only enable SSO, not enforce it, or all domain email users will be forced to sign in to that test tenant.
+Yes, you can create a test organization. Companies can set up a new 5 seat Business subscription on a new organization to test with. To do this, make sure to only enable SSO, not enforce it, or all domain email users will be forced to sign in to that test tenant.
 
 ### Is the sign in required tracking at runtime or install time?
 
@@ -52,5 +53,5 @@ Enforcing SSO and enforcing sign-in to Docker Desktop are different features tha
 
 Enforcing SSO ensures that users sign in using their SSO credentials instead of their Docker ID. One of the benefits is that SSO enables you to better manage user credentials.
 
-Enforcing sign-in to Docker Desktop ensures that users always sign in to an account that's a member of your organization. The benefits are that your organization's security settings are always applied to the user's session and your users always receive the benefits of your subscription. For more details, see [Enforce sign-in for Desktop](../../../security/for-admins/enforce-sign-in/_index.md#enforcing-sign-in-versus-enforcing-single-sign-on-sso).
+Enforcing sign-in to Docker Desktop ensures that users always sign in to an account that's a member of your organization. The benefits are that your organization's security settings are always applied to the user's session and your users always receive the benefits of your subscription. For more details, see [Enforce sign-in for Desktop](/manuals/enterprise/security/enforce-sign-in/_index.md#enforcing-sign-in-versus-enforcing-single-sign-on-sso).
 

@@ -35,7 +35,7 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
-    - option: "y"
+    - option: "yes"
       shorthand: "y"
       value_type: bool
       default_value: "false"
@@ -58,7 +58,7 @@ inherited_options:
       kubernetes: false
       swarm: false
 deprecated: false
-hidden: false
+hidden: true
 experimental: false
 experimentalcli: true
 kubernetes: false

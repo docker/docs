@@ -24,7 +24,7 @@ The default `seccomp` profile provides a sane default for running containers wit
 seccomp and disables around 44 system calls out of 300+. It is moderately
 protective while providing wide application compatibility. The default Docker
 profile can be found
-[here](https://github.com/moby/moby/blob/master/profiles/seccomp/default.json).
+[here](https://github.com/moby/profiles/blob/main/seccomp/default.json).
 
 In effect, the profile is an allowlist that denies access to system calls by
 default and then allows specific system calls. The profile works by defining a

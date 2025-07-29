@@ -221,7 +221,7 @@ the `docker node rm` command. If a node becomes unreachable, unresponsive, or
 compromised you can forcefully remove the node without shutting it down by
 passing the `--force` flag. For instance, if `node9` becomes compromised:
 
-```none
+```console
 $ docker node rm node9
 
 Error response from daemon: rpc error: code = 9 desc = node node9 is not down and can't be removed
@@ -338,7 +338,7 @@ If you lose the quorum of managers, you cannot administer the swarm. If you have
 lost the quorum and you attempt to perform any management operation on the swarm,
 an error occurs:
 
-```none
+```text
 Error response from daemon: rpc error: code = 4 desc = context deadline exceeded
 ```
 

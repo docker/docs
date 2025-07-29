@@ -3,9 +3,7 @@ title: Docker Compose
 weight: 30
 description: Learn how to use Docker Compose to define and run multi-container applications
   with this detailed introduction to the tool.
-keywords: docker compose, docker-compose, docker compose command, docker compose files,
-  docker compose documentation, using docker compose, compose container, docker compose
-  service
+keywords: docker compose, docker-compose, compose.yaml, docker compose command, multi-container applications, container orchestration, docker cli
 params:
   sidebar:
     group: Open source
@@ -36,12 +34,16 @@ grid:
     Docker application.
   icon: polyline
   link: /reference/compose-file
+- title: Use Compose Bridge
+  description: Transform your Compose configuration file into configuration files for different platforms, such as Kubernetes.
+  icon: move_down
+  link: /compose/bridge
 - title: Browse common FAQs
   description: Explore general FAQs and find out how to give feedback.
   icon: help
   link: /compose/faq
-- title: Migrate to Compose V2
-  description: Learn how to migrate from Compose V1 to V2
+- title: Migrate to Compose v2
+  description: Learn how to migrate from Compose v1 to v2
   icon: folder_delete
   link: /compose/releases/migrate/
 aliases:
@@ -55,15 +57,15 @@ aliases:
 Docker Compose is a tool for defining and running multi-container applications. 
 It is the key to unlocking a streamlined and efficient development and deployment experience. 
 
-Compose simplifies the control of your entire application stack, making it easy to manage services, networks, and volumes in a single, comprehensible YAML configuration file. Then, with a single command, you create and start all the services
+Compose simplifies the control of your entire application stack, making it easy to manage services, networks, and volumes in a single YAML configuration file. Then, with a single command, you create and start all the services
 from your configuration file.
 
-Compose works in all environments; production, staging, development, testing, as
+Compose works in all environments - production, staging, development, testing, as
 well as CI workflows. It also has commands for managing the whole lifecycle of your application:
 
- * Start, stop, and rebuild services
- * View the status of running services
- * Stream the log output of running services
- * Run a one-off command on a service
+ - Start, stop, and rebuild services
+ - View the status of running services
+ - Stream the log output of running services
+ - Run a one-off command on a service
 
 {{< grid >}}

@@ -1,14 +1,9 @@
 ---
-title: Using the Docker Desktop CLI
+title: Use the Docker Desktop CLI
 linkTitle: Docker Desktop CLI
-weight: 120
+weight: 100
 description: How to use the Docker Desktop CLI
 keywords: cli, docker desktop, macos, windows, linux
-params:
-  sidebar:
-    badge:
-      color: green
-      text: New
 ---
 
 {{< summary-bar feature_name="Docker Desktop CLI" >}}
@@ -38,6 +33,9 @@ docker desktop COMMAND [OPTIONS]
 | `engine use`         | Switch between Linux and Windows containers (Windows only) |
 | `update`             | Manage Docker Desktop updates. Available for Mac only with Docker Desktop version 4.38, or all OSs with Docker Desktop version 4.39 and later. |
 | `logs`               | Print log entries                        |
-
+| `disable`            | Disable a feature                        |
+| `enable`             | Enable a feature                         | 
+| `version`            | Show the Docker Desktop CLI plugin version information |
+| `module`             | Manage Docker Desktop modules |
 
 For more details on each command, see the [Docker Desktop CLI reference](/reference/cli/docker/desktop/_index.md).

@@ -10,14 +10,14 @@ You can test SSO and SCIM by signing in to Docker Desktop or Docker Hub with the
 
 > [!IMPORTANT] 
 >
-> Some users may need CLI based logins to Docker Hub, and for this they will need a [personal access token (PAT)](/manuals/security/for-developers/access-tokens.md).
+> Some users may need CLI based logins to Docker Hub, and for this they will need a [personal access token (PAT)](/manuals/security/access-tokens.md).
 
 ## Test RAM and IAM
 
 > [!WARNING]
 > Be sure to communicate with your users before proceeding, as this step will impact all existing users signing into your Docker organization
 
-If you plan to use [Registry Access Management (RAM)](/manuals/security/for-admins/hardened-desktop/registry-access-management.md) and/or [Image Access Management (IAM)](/manuals/security/for-admins/hardened-desktop/image-access-management.md), ensure your test developer signs in to Docker Desktop using their organization credentials. Once authenticated, have them attempt to pull an unauthorized image or one from a disallowed registry via the Docker CLI. They should receive an error message indicating that the registry is restricted by the organization.
+If you plan to use [Registry Access Management (RAM)](/manuals/enterprise/security/hardened-desktop/registry-access-management.md) and/or [Image Access Management (IAM)](/manuals/enterprise/security/hardened-desktop/image-access-management.md), ensure your test developer signs in to Docker Desktop using their organization credentials. Once authenticated, have them attempt to pull an unauthorized image or one from a disallowed registry via the Docker CLI. They should receive an error message indicating that the registry is restricted by the organization.
 
 ## Deploy settings and enforce sign in to test group
 

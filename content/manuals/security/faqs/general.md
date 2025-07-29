@@ -31,11 +31,12 @@ You can configure this through SSO using your IdP. Check with your IdP if they s
 
 ### How are sessions managed and do they expire?
 
-Docker Desktop uses tokens to manage sessions after a user signs in. Docker Desktop signs you out after 90 days, or 30 days of inactivity.
+By default, Docker uses tokens to manage sessions after a user signs in:
 
-In Docker Hub, you need to re-authenticate after 24 hours. If users are authenticating using SSO, the default session timeout for the IdP is respected.
+- Docker Desktop signs you out after 90 days, or 30 days of inactivity.
+- Docker Hub and Docker Home sign you out after 24 hours.
 
-Custom settings per organization for sessions aren't supported.
+Docker also supports your IdP's default session timeout. You can configure this by setting a Docker session minutes SAML attribute. For more information, see [SSO attributes](/manuals/enterprise/security/provisioning/_index.md#sso-attributes).
 
 ### How does Docker attribute downloads to us and what data is used to classify or verify the user is part of our organization?
 
@@ -51,9 +52,9 @@ Some users authenticate by signing in to Docker Desktop and joining their domain
 
 Organizations set up in Docker use verified domains and any team member with an email domain other than what's verified is noted as a "Guest" in that organization.
 
-### How long are Docker Hub logs available?
+### How long are activity logs available?
 
-Docker provides various types of audit logs and log retention varies. For example, Docker Hub Activity logs are available for 90 days. You are responsible for exporting logs or setting up drivers to their own internal systems.
+Docker provides various types of audit logs and log retention varies. For example, Docker activity logs are available for 90 days. You are responsible for exporting logs or setting up drivers to their own internal systems.
 
 ### Can I export a list of all users with their assigned roles and privileges and if so, in what format?
 
@@ -69,7 +70,12 @@ This is applicable only when using Docker Hub's application-level password versu
 
 ### How do we de-provision users who are not part of our IdP? We use SSO but not SCIM
 
-If SCIM isn't enabled, you have to manually remove users from the organization in our system. Using SCIM automates this.
+If SCIM isn't enabled, you have to manually remove users from the organization.
+SCIM can automate this if your users are added after SCIM is enabled. Any users
+added to your organization before SCIM is enabled must be removed manually.
+
+For more information on manually removing users, see
+[Manage organization members](/manuals/admin/organization/members.md).
 
 ### What metadata is collected from container images that Scout analyzes?
 
@@ -83,4 +89,4 @@ Extensions are not covered as part of Docker’s Third-Party Risk Management Pro
 
 ### Can I disable private repos in my organization via a setting to make sure nobody is pushing images into Docker Hub?
 
-No. With [Registry Access Management](/manuals/security/for-admins/hardened-desktop/registry-access-management.md) (RAM), administrators can ensure that their developers using Docker Desktop only access allowed registries. This is done through the Registry Access Management dashboard on Docker Hub.
+No. With [Registry Access Management](/manuals/enterprise/security/hardened-desktop/registry-access-management.md) (RAM), administrators can ensure that their developers using Docker Desktop only access allowed registries. This is done through the Registry Access Management dashboard in the Admin Console.

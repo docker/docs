@@ -1,7 +1,8 @@
 ---
 description: Single sign-on domain FAQs
 keywords: Docker, Docker Hub, SSO FAQs, single sign-on, domains, domain verification, domain management
-title: FAQS on SSO and domains
+title: FAQs for SSO and domains
+linkTitle: Domains
 tags: [FAQ]
 aliases:
 - /single-sign-on/domain-faqs/
@@ -18,7 +19,7 @@ You can do it one time to add the domain to a connection. If your organization e
 
 ### Is adding domain required to configure SSO? What domains should I be adding? And how do I add it?
 
-Adding and verifying a domain is required to enable and enforce SSO. See [Configure single sign-on](/manuals/security/for-admins/single-sign-on/configure.md) for more information. This should include all email domains users will use to access Docker. Public domains, for example `gmail.com` or `outlook.com`, are not permitted. Also, the email domain should be set as the primary email.
+Adding and verifying a domain is required to enable and enforce SSO. See [Configure single sign-on](/manuals/enterprise/security/single-sign-on/configure.md) for more information. This should include all email domains users will use to access Docker. Public domains, for example `gmail.com` or `outlook.com`, are not permitted. Also, the email domain should be set as the primary email.
 
 ### Is IdP-initiated authentication supported?
 

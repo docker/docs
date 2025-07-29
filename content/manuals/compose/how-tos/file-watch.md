@@ -31,8 +31,8 @@ Compose supports sharing a host directory inside service containers. Watch mode 
 More importantly, `watch` allows for greater granularity than is practical with a bind mount. Watch rules let you ignore specific files or entire directories within the watched tree.
 
 For example, in a JavaScript project, ignoring the `node_modules/` directory has two benefits:
-* Performance. File trees with many small files can cause high I/O load in some configurations
-* Multi-platform. Compiled artifacts cannot be shared if the host OS or architecture is different to the container
+* Performance. File trees with many small files can cause a high I/O load in some configurations
+* Multi-platform. Compiled artifacts cannot be shared if the host OS or architecture is different from the container
 
 For example, in a Node.js project, it's not recommended to sync the `node_modules/` directory. Even though JavaScript is interpreted, `npm` packages can contain native code that is not portable across platforms.
 
@@ -40,7 +40,7 @@ For example, in a Node.js project, it's not recommended to sync the `node_module
 
 The `watch` attribute defines a list of rules that control automatic service updates based on local file changes.
 
-Each rule requires, a `path` pattern and `action` to take when a modification is detected. There are two possible actions for `watch` and depending on
+Each rule requires a `path` pattern and `action` to take when a modification is detected. There are two possible actions for `watch` and depending on
 the `action`, additional fields might be accepted or required. 
 
 Watch mode can be used with many different languages and frameworks.
@@ -88,15 +88,15 @@ If `action` is set to `rebuild`, Compose automatically builds a new image with B
 
 The behavior is the same as running `docker compose up --build <svc>`.
 
-Rebuild is ideal for compiled languages or as fallbacks for modifications to particular files that require a full
+Rebuild is ideal for compiled languages or as a fallback for modifications to particular files that require a full
 image rebuild (e.g. `package.json`).
 
 #### Sync + Restart
 
-If `action` is set to `sync+restart`, Compose synchronizes your changes with the service containers and restarts it. 
+If `action` is set to `sync+restart`, Compose synchronizes your changes with the service containers and restarts them. 
 
-`sync+restart` is ideal when config file changes, and you don't need to rebuild the image but just restart the main process of the service containers. 
-It will work well when you update a database configuration or your `nginx.conf` file for example
+`sync+restart` is ideal when the config file changes, and you don't need to rebuild the image but just restart the main process of the service containers. 
+It will work well when you update a database configuration or your `nginx.conf` file, for example.
 
 >[!TIP]
 >
@@ -116,7 +116,7 @@ For `path: ./app/html` and a change to `./app/html/index.html`:
 
 ### `ignore`
 
-The `ignore` patterns are relative to the `path` defined in the current `watch` action, not to the project directory. In the following Example  1, the ignore path would be relative to the `./web` directory specified in the `path` attribute.
+The `ignore` patterns are relative to the `path` defined in the current `watch` action, not to the project directory. In the following Example 1, the ignore path would be relative to the `./web` directory specified in the `path` attribute.
 
 ## Example 1
 
@@ -206,10 +206,6 @@ This setup demonstrates how to use the `sync+restart` action in Docker Compose t
 > Check out [`dockersamples/avatars`](https://github.com/dockersamples/avatars),
 > or [local setup for Docker docs](https://github.com/docker/docs/blob/main/CONTRIBUTING.md)
 > for a demonstration of Compose `watch`.
-
-## Feedback
-
-We are actively looking for feedback on this feature. Give feedback or report any bugs you may find in the [Compose Specification repository](https://github.com/compose-spec/compose-spec/pull/253).
 
 ## Reference
 

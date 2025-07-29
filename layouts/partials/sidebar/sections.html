@@ -5,11 +5,10 @@
   - Dynamically applies current page highlighting and expanded states.
   - Handles external links via `Params.sidebar.goto` in `renderSingle`.
   - Requires `Params.sitemap` and `Params.sidebar` for filtering and behavior.
-*/ -}}
+  */
+-}}
 <!-- section tree -->
-<nav class="md:text-sm flex flex-col">
-  <div
-    class="block py-4 md:hidden text-gray-light dark:text-gray-dark">This section</div>
+<nav class="navbar-font flex flex-col mt-1 mx-1">
   <ul>
     {{ template "renderChildren" .FirstSection }}
   </ul>
@@ -29,50 +28,80 @@
     {{- end }}
   {{- end }}
   {{- range .Params.sidebar.groups }}
-    <li class="px-2 py-2 pb-2 text-gray-light dark:text-gray-dark uppercase
-      text-xs font-semibold">{{ . }}</li>
-    {{- range where $pages "Params.sidebar.group" . }}
-      {{- if .IsSection }}
-        {{- template "renderList" . }}
-      {{- else }}
-        {{- template "renderSingle" . }}
+    <!--  Main titles -->
+    <div class="navbar-group">
+      <li class="navbar-group-font-title">
+        {{ . }}
+      </li>
+      {{- range where $pages "Params.sidebar.group" . }}
+        {{- if .IsSection }}
+          {{- template "renderList" . }}
+        {{- else }}
+          {{- template "renderSingle" . }}
+        {{- end }}
       {{- end }}
-    {{- end }}
+    </div>
   {{- end }}
+
 {{ end }}
 
 {{/* Recursive template for sidebar items */}}
 {{ define "renderList" }}
   {{ $isCurrent := eq page . }}
   {{ $expanded := or $isCurrent (page.IsDescendant .) }}
-  <li x-data="{ expanded: {{$expanded}} }">
-    <div class="rounded px-4 w-full flex items-center justify-between{{ if $isCurrent }} bg-gray-light-200 dark:bg-gray-dark-200{{ end }}">
-      <div class="w-full py-2 truncate">
+  <li class="" x-data="{ expanded: {{ $expanded }} }">
+    <div
+      class="{{ if $isCurrent }}
+        navbar-entry-background-current
+      {{ end }} flex w-full items-center justify-between rounded-sm"
+    >
+      <div class="navbar-entry-margin w-full truncate">
         {{- if .Permalink }}
           {{/* If the link is not empty, use it */}}
-          <a {{ if $isCurrent }}aria-current="page" id="sidebar-current-page" {{ end }}
-              class="block select-none hover:text-blue-light hover:dark:text-blue-dark"
-            href="{{ .Permalink }}">
+          <!-- Sections that have children and linking to a page -->
+          <a
+            {{ if $isCurrent }}
+              aria-current="page" id="sidebar-current-page"
+            {{ end }}
+            class="hover:text-blue block select-none hover:dark:text-blue-400"
+            href="{{ .Permalink }}"
+          >
             {{ template "renderTitle" . }}
           </a>
         {{- else }}
           {{/* Otherwise, just expand the section */}}
-          <button @click="expanded = !expanded"
-            class="w-full text-left select-none hover:text-blue-light hover:dark:text-blue-dark">
+          <!-- Sections that have children and do not link to a page -->
+          <button
+            @click="expanded = !expanded"
+            class="hover:text-blue w-full text-left select-none hover:dark:text-blue-400"
+          >
             {{ template "renderTitle" . }}
           </button>
         {{- end }}
       </div>
-      <button @click="expanded = !expanded" class="hover:bg-gray-light-300 hover:dark:bg-gray-dark-300 rounded">
-        <span :class="{ 'hidden' : expanded }" class="icon-svg {{ if $expanded }}hidden{{ end }}">
+      <!-- Expand group button -->
+      <button
+        @click="expanded = !expanded"
+        class="rounded-sm hover:bg-gray-200 hover:dark:bg-gray-800"
+      >
+        <span
+          :class="{ 'hidden' : expanded }"
+          class="icon-svg {{ if $expanded }}hidden{{ end }}"
+        >
           {{ partialCached "icon" "arrow_drop_down" "arrow_drop_down" }}
         </span>
-        <span :class="{ 'hidden' : !expanded }" class="icon-svg {{ if not $expanded }}hidden{{ end }}">
+        <span
+          :class="{ 'hidden' : !expanded }"
+          class="icon-svg {{ if not $expanded }}hidden{{ end }}"
+        >
           {{ partialCached "icon" "arrow_drop_up" "arrow_drop_up" }}
         </span>
       </button>
     </div>
-    <ul :class="{ 'hidden' : !expanded }" class="{{if not $expanded}}hidden {{end}}ml-3">
+    <ul
+      :class="{ 'hidden' : !expanded }"
+      class="{{ if not $expanded }}hidden{{ end }} ml-3"
+    >
       {{ template "renderChildren" . }}
     </ul>
   </li>
@@ -80,19 +109,30 @@
 
 {{ define "renderSingle" }}
   {{- if .Params.sidebar.goto }}
-    <li class="px-4 hover:text-blue-light hover:dark:text-blue-dark">
-      <a class="py-2 w-full truncate block"
-         href="{{ .Params.sidebar.goto }}"
-         title="{{ .LinkTitle }}">
+    <li class="navbar-entry-margin hover:text-blue hover:dark:text-blue-400">
+      <a
+        class="block w-full truncate"
+        href="{{ .Params.sidebar.goto }}"
+        title="{{ .LinkTitle }}"
+      >
         {{ template "renderTitle" . }}
       </a>
     </li>
   {{- else }}
     {{ $isCurrent := eq page . }}
-    <li class="rounded px-4 hover:text-blue-light hover:dark:text-blue-dark
-      {{ if $isCurrent }} bg-gray-light-200 dark:bg-gray-dark-200{{ end }}">
-      <a {{ if $isCurrent }}aria-current="page" id="sidebar-current-page" {{ end }} class="py-2 w-full truncate block"
-        href="{{ .Permalink }}" title="{{ .LinkTitle }}">
+    <li
+      class="navbar-entry-margin hover:text-blue {{ if $isCurrent }}
+        navbar-entry-background-current
+      {{ end }} rounded-sm hover:dark:text-blue-400"
+    >
+      <a
+        {{ if $isCurrent }}
+          aria-current="page" id="sidebar-current-page"
+        {{ end }}
+        class="block w-full truncate"
+        href="{{ .Permalink }}"
+        title="{{ .LinkTitle }}"
+      >
         {{ template "renderTitle" . }}
       </a>
     </li>
@@ -102,6 +142,8 @@
 {{ define "renderTitle" }}
   {{ .LinkTitle }}
   {{- with .Params.sidebar.badge }}
-    <span>{{- partial "components/badge.html" (dict "color" .color "content" .text) }}</span>
+    <span>
+      {{- partial "components/badge.html" (dict "color" .color "content" .text) }}
+    </span>
   {{- end }}
 {{ end }}

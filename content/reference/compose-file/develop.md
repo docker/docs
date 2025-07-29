@@ -43,8 +43,6 @@ services:
 
 ## Attributes
 
-<!-- vale Docker.HeadingSentenceCase = NO ) -->
-
 The `develop` subsection defines configuration options that are applied by Compose to assist you during development of a service with optimized workflows.
 
 ### `watch`
@@ -90,7 +88,7 @@ services:
 
 #### `ignore`
 
-The `ignore` attribute can be used to define a list of patterns for paths to be ignored. Any updated file
+The `ignore` attribute is used to define a list of patterns for paths to be ignored. Any updated file
 that matches a pattern, or belongs to a folder that matches a pattern, won't trigger services to be re-created. 
 The syntax is the same as `.dockerignore` file: 
 
@@ -101,6 +99,30 @@ The syntax is the same as `.dockerignore` file:
 
 If the build context includes a `.dockerignore` file, the patterns in this file is loaded as implicit content
 for the `ignores` file, and values set in the Compose model are appended.
+
+#### `include`
+
+It is sometimes easier to select files to be watched instead of declaring those that shouldn't be watched with `ignore`.
+
+The `include` attribute is used to define a pattern, or a list of patterns, for paths to be considered for watching.
+Only files that match these patterns will be considered when applying a watch rule. The syntax is the same as `ignore`.
+
+```yaml
+services:
+  backend:
+    image: example/backend
+    develop:
+      watch: 
+        # rebuild image and recreate service
+        - path: ./src
+          include: "*.go"  
+          action: rebuild
+```
+
+> [!NOTE]
+> 
+> In many cases `include` patterns start with a wildcard (`*`) character. This has special meaning in YAML syntax
+> to define an [alias node](https://yaml.org/spec/1.2.2/#alias-nodes) so you have to wrap pattern expression with quotes.
 
 #### `path`
 

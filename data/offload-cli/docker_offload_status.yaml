@@ -1,0 +1,23 @@
+command: docker offload status
+short: Show the status of the Docker Offload connection
+usage: docker offload status [OPTIONS]
+pname: docker offload
+plink: docker_offload.yaml
+options:
+  - option: watch
+    shorthand: w
+    value_type: bool
+    default_value: "false"
+    description: Watch for status updates
+    deprecated: false
+    hidden: false
+    experimental: false
+    experimentalcli: false
+    kubernetes: false
+    swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false

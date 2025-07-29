@@ -5,6 +5,8 @@ usage: docker buildx history
 pname: docker buildx
 plink: docker_buildx.yaml
 cname:
+    - docker buildx history export
+    - docker buildx history import
     - docker buildx history inspect
     - docker buildx history logs
     - docker buildx history ls
@@ -12,6 +14,8 @@ cname:
     - docker buildx history rm
     - docker buildx history trace
 clink:
+    - docker_buildx_history_export.yaml
+    - docker_buildx_history_import.yaml
     - docker_buildx_history_inspect.yaml
     - docker_buildx_history_logs.yaml
     - docker_buildx_history_ls.yaml

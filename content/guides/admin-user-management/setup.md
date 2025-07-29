@@ -1,7 +1,7 @@
 ---
 title: Setting up roles and permissions in Docker
 description: A guide to securely managing access and collaboration in Docker through roles and teams.
-keywords: Docker roles, permissions management, access control, IT administration, team collaboration, least privilege, security, Docker teams, role-based access
+keywords: Docker roles, permissions management, access control, IT administration, team collaboration, least privilege, security, Docker Teams, role-based access
 weight: 10
 ---
 
@@ -24,7 +24,7 @@ Docker’s predefined roles offer flexibility for various organizational needs. 
 - Organization owner: Full organization administrative access. Organization owners can manage organization repositories, teams, members, settings, and billing.
 - Company owner: In addition to the permissions of an organization owner, company owners can configure settings for their associated organizations.
 
-For more information, see [Roles and permissions](/manuals/security/for-admins/roles-and-permissions.md).
+For more information, see [Roles and permissions](/manuals/enterprise/security/roles-and-permissions.md).
 
 ### Enhancing with teams
 

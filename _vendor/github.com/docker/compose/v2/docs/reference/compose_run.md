@@ -66,6 +66,7 @@ specified in the service configuration.
 | `--dry-run`             | `bool`        |          | Execute command in dry run mode                                                  |
 | `--entrypoint`          | `string`      |          | Override the entrypoint of the image                                             |
 | `-e`, `--env`           | `stringArray` |          | Set environment variables                                                        |
+| `--env-from-file`       | `stringArray` |          | Set environment variables from file                                              |
 | `-i`, `--interactive`   | `bool`        | `true`   | Keep STDIN open even if not attached                                             |
 | `-l`, `--label`         | `stringArray` |          | Add or override a label                                                          |
 | `--name`                | `string`      |          | Assign a name to the container                                                   |
@@ -73,6 +74,8 @@ specified in the service configuration.
 | `--no-deps`             | `bool`        |          | Don't start linked services                                                      |
 | `-p`, `--publish`       | `stringArray` |          | Publish a container's port(s) to the host                                        |
 | `--pull`                | `string`      | `policy` | Pull image before running ("always"\|"missing"\|"never")                         |
+| `-q`, `--quiet`         | `bool`        |          | Don't print anything to STDOUT                                                   |
+| `--quiet-build`         | `bool`        |          | Suppress progress output from the build process                                  |
 | `--quiet-pull`          | `bool`        |          | Pull without printing progress information                                       |
 | `--remove-orphans`      | `bool`        |          | Remove containers for services not defined in the Compose file                   |
 | `--rm`                  | `bool`        |          | Automatically remove the container when it exits                                 |

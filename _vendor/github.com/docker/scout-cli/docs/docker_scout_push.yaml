@@ -63,6 +63,16 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: secrets
+      value_type: bool
+      default_value: "false"
+      description: Scan for secrets in the image
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: timestamp
       value_type: string
       description: Timestamp of image or tag creation

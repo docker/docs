@@ -6,11 +6,6 @@ keywords: red hat, red hat enterprise linux, rhel, rpm,
 title: Install Docker Desktop on RHEL
 linkTitle: RHEL
 download-url-base: https://download.docker.com/linux/rhel
-params:
-  sidebar:
-    badge:
-      color: green
-      text: New
 aliases:
 - /desktop/install/linux/rhel/
 ---
@@ -18,7 +13,7 @@ aliases:
 > **Docker Desktop terms**
 >
 > Commercial use of Docker Desktop in larger enterprises (more than 250
-> employees OR more than $10 million USD in annual revenue) requires a [paid
+> employees or more than $10 million USD in annual revenue) requires a [paid
 > subscription](https://www.docker.com/pricing/).
 
 This page contains information on how to install, launch and upgrade Docker Desktop on a Red Hat Enterprise Linux (RHEL) distribution.
@@ -31,57 +26,54 @@ To install Docker Desktop successfully, you must:
 - Have a 64-bit version of either RHEL 8 or RHEL 9.
 - Have a [Docker account](/manuals/accounts/create-account.md), as authentication is required for Docker Desktop on RHEL.
 
-If you don't have `pass` installed, or it can't be installed, you must enable
-[CodeReady Linux Builder (CRB) repository](https://access.redhat.com/articles/4348511)
-and
-[Extra Packages for Enterprise Linux (EPEL)](https://docs.fedoraproject.org/en-US/epel/).
+- If `pass` is not installed, or it can't be installed, you must enable [CodeReady Linux Builder (CRB) repository](https://access.redhat.com/articles/4348511) and [Extra Packages for Enterprise Linux (EPEL)](https://docs.fedoraproject.org/en-US/epel/).
 
    {{< tabs group="os_version" >}}
    {{< tab name="RHEL 9" >}}
-```console
-$ sudo subscription-manager repos --enable codeready-builder-for-rhel-9-$(arch)-rpms
-$ sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
-$ sudo dnf install pass
-```
+   ```console
+   $ sudo subscription-manager repos --enable codeready-builder-for-rhel-9-$(arch)-rpms
+   $ sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+   $ sudo dnf install pass
+   ```
 
    {{< /tab >}}
    {{< tab name="RHEL 8" >}}
-```console
-$ sudo subscription-manager repos --enable codeready-builder-for-rhel-8-$(arch)-rpms
-$ sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
-$ sudo dnf install pass
-```
+   ```console
+   $ sudo subscription-manager repos --enable codeready-builder-for-rhel-8-$(arch)-rpms
+   $ sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+   $ sudo dnf install pass
+   ```
 
    {{< /tab >}}
    {{< /tabs >}}
 
-Additionally, for a GNOME desktop environment you must install AppIndicator and KStatusNotifierItem [GNOME extensions](https://extensions.gnome.org/extension/615/appindicator-support/). You must also enable EPEL.
+- For a GNOME desktop environment you must install AppIndicator and KStatusNotifierItem [GNOME extensions](https://extensions.gnome.org/extension/615/appindicator-support/). You must also enable EPEL.
 
    {{< tabs group="os_version" >}}
    {{< tab name="RHEL 9" >}}
-```console
-$ # enable EPEL as described above
-$ sudo dnf install gnome-shell-extension-appindicator
-$ sudo gnome-extensions enable appindicatorsupport@rgcjonas.gmail.com
-```
+   ```console
+   $ # enable EPEL as described above
+   $ sudo dnf install gnome-shell-extension-appindicator
+   $ sudo gnome-extensions enable appindicatorsupport@rgcjonas.gmail.com
+   ```
 
    {{< /tab >}}
    {{< tab name="RHEL 8" >}}
-```console
-$ # enable EPEL as described above
-$ sudo dnf install gnome-shell-extension-appindicator
-$ sudo dnf install gnome-shell-extension-desktop-icons
-$ sudo gnome-shell-extension-tool -e appindicatorsupport@rgcjonas.gmail.com
-```
+   ```console
+   $ # enable EPEL as described above
+   $ sudo dnf install gnome-shell-extension-appindicator
+   $ sudo dnf install gnome-shell-extension-desktop-icons
+   $ sudo gnome-shell-extension-tool -e appindicatorsupport@rgcjonas.gmail.com
+   ```
 
    {{< /tab >}}
    {{< /tabs >}}
 
-For non-GNOME desktop environments, `gnome-terminal` must be installed:
+- If you're not using GNOME, you must install `gnome-terminal` to enable terminal access from Docker Desktop:
 
-```console
-$ sudo dnf install gnome-terminal
-```
+   ```console
+   $ sudo dnf install gnome-terminal
+   ```
 
 ## Install Docker Desktop
 
@@ -101,14 +93,14 @@ To install Docker Desktop on RHEL:
    $ sudo dnf install ./docker-desktop-x86_64-rhel.rpm
    ```
 
-There are a few post-install configuration steps done through the post-install script contained in the RPM package.
+The RPM package includes a post-install script that completes additional setup steps automatically.
 
 The post-install script:
 
 - Sets the capability on the Docker Desktop binary to map privileged ports and set resource limits.
 - Adds a DNS name for Kubernetes to `/etc/hosts`.
 - Creates a symlink from `/usr/local/bin/com.docker.cli` to `/usr/bin/docker`.
-  This is because the classic Docker CLI is installed at `/usr/bin/docker`. The Docker Desktop installer also installs a Docker CLI binary that includes cloud-integration capabilities and is essentially a wrapper for the Compose CLI, at`/usr/local/bin/com.docker.cli`. The symlink ensures that the wrapper can access the classic Docker CLI. 
+  This is because the classic Docker CLI is installed at `/usr/bin/docker`. The Docker Desktop installer also installs a Docker CLI binary that includes cloud-integration capabilities and is essentially a wrapper for the Compose CLI, at `/usr/local/bin/com.docker.cli`. The symlink ensures that the wrapper can access the classic Docker CLI. 
 - Creates a symlink from `/usr/libexec/qemu-kvm` to `/usr/local/bin/qemu-system-x86_64`.
 
 ## Launch Docker Desktop
@@ -140,7 +132,7 @@ $ sudo dnf install ./docker-desktop-<arch>-rhel.rpm
 
 ## Next steps
 
-- Explore [Docker's subscriptions](https://www.docker.com/pricing/) to see what Docker can offer you.
+- Review [Docker's subscriptions](https://www.docker.com/pricing/) to see what Docker can offer you.
 - Take a look at the [Docker workshop](/get-started/workshop/_index.md) to learn how to build an image and run it as a containerized application.
 - [Explore Docker Desktop](/manuals/desktop/use-desktop/_index.md) and all its features.
 - [Troubleshooting](/manuals/desktop/troubleshoot-and-support/troubleshoot/_index.md) describes common problems, workarounds, how to run and submit diagnostics, and submit issues.

@@ -45,6 +45,21 @@ Hub can be mirrored.
 The Registry can be configured as a pull through cache. In this mode a Registry
 responds to all normal docker pull requests but stores all content locally.
 
+### Using Registry Access Management (RAM) with a registry mirror
+
+If Docker Hub access is restricted via your Registry Access Management (RAM) configuration, you will not be able to pull images originating from Docker Hub even if the images are available in your registry mirror.
+
+You will encounter the following error:
+```console
+Error response from daemon: Access to docker.io has been restricted by your administrators.
+```
+
+If you are unable to allow access to Docker Hub, you can manually pull from your registry mirror and optionally, retag the image. For example:
+```console
+docker pull <your-registry-mirror>[:<port>]/library/busybox
+docker tag <your-registry-mirror>[:<port>]/library/busybox:latest busybox:latest
+```
+
 ## How does it work?
 
 The first time you request an image from your local registry mirror, it pulls
@@ -78,10 +93,6 @@ as described in the following subsection.
 Multiple registry caches can be deployed over the same back-end. A single
 registry cache ensures that concurrent requests do not pull duplicate data,
 but this property does not hold true for a registry cache cluster.
-
-> [!NOTE]
->
-> When using Docker Hub, all paid Docker subscriptions are limited to 5000 pulls per day. If you require a higher number of pulls, you can purchase an Enhanced Service Account add-on. See [Service Accounts](/docker-hub/service-accounts/) for more details.
 
 ### Configure the cache
 

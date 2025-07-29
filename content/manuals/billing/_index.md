@@ -1,9 +1,9 @@
 ---
-title: Billing and payments
+title: Manage billing and payments
 linkTitle: Billing
-description: Discover information on billing and payment processes for Docker subscriptions.
-keywords: billing, invoice, payment, subscription
-weight: 20
+description: Find information about managing billing and payments for Docker subscriptions.
+keywords: billing, invoice, payment, subscription, Docker billing, update payment method, billing history, invoices, payment verification, tax exemption
+weight: 10
 params:
   sidebar:
     group: Platform
@@ -12,7 +12,7 @@ grid_core:
   description: Learn how to add or update a payment method for your personal account or organization.
   link: /billing/payment-method/
   icon: credit_score
-- title: Update the billing information
+- title: Update billing information
   description: Discover how to update the billing information for your personal account or organization.
   link: /billing/details/
   icon: contract_edit
@@ -36,6 +36,7 @@ aliases:
   - /billing/docker-hub-pricing/
 ---
 
-Use the resources in this section to manage your billing and payment settings for your Docker subscription plans.
+Use the resources in this section to manage billing and payments for your Docker
+subscriptions.
 
 {{< grid items="grid_core" >}}

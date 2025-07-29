@@ -1,6 +1,6 @@
 ---
 title: Base images
-weight: 70
+weight: 80
 description: Learn about base images and how they're created
 keywords: images, base image, examples
 aliases:
@@ -22,9 +22,8 @@ For most cases, you don't need to create your own base image. Docker Hub
 contains a vast library of Docker images that are suitable for use as a base
 image in your build. [Docker Official
 Images](../../docker-hub/image-library/trusted-content.md#docker-official-images)
-are specifically designed as a set of hardened, battle-tested images that
-support a wide variety of platforms, languages, and frameworks. There are also
-[Docker Verified
+have clear documentation, promote best practices, and are regularly updated.
+There are also [Docker Verified
 Publisher](../../docker-hub/image-library/trusted-content.md#verified-publisher-images)
 images, created by trusted publishing partners, verified by Docker.
 
@@ -78,7 +77,7 @@ To run your new image, use the `docker run` command:
 $ docker run --rm hello
 ```
 
-This example image can only successfully execute as long as the `hello` binary
+This example image can only be successfully executed as long as the `hello` binary
 doesn't have any runtime dependencies. Computer programs tend to depend on
 certain other programs or resources to exist in the runtime environment. For
 example:
@@ -103,17 +102,17 @@ which you can also use to build Ubuntu images.
 For example, to create an Ubuntu base image:
 
 ```dockerfile
-$ sudo debootstrap focal focal > /dev/null
-$ sudo tar -C focal -c . | docker import - focal
+$ sudo debootstrap noble noble > /dev/null
+$ sudo tar -C noble -c . | docker import - noble
 
 sha256:81ec9a55a92a5618161f68ae691d092bf14d700129093158297b3d01593f4ee3
 
-$ docker run focal cat /etc/lsb-release
+$ docker run noble cat /etc/lsb-release
 
 DISTRIB_ID=Ubuntu
-DISTRIB_RELEASE=20.04
-DISTRIB_CODENAME=focal
-DISTRIB_DESCRIPTION="Ubuntu 20.04 LTS"
+DISTRIB_RELEASE=24.04
+DISTRIB_CODENAME=noble
+DISTRIB_DESCRIPTION="Ubuntu 24.04.2 LTS"
 ```
 
 There are more example scripts for creating base images in

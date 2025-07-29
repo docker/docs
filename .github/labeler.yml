@@ -1,3 +1,9 @@
+area/ai:
+  - changed-files:
+      - any-glob-to-any-file:
+          - content/manuals/ai/**
+          - content/reference/cli/model/**
+
 area/release:
   - changed-files:
       - any-glob-to-any-file:
@@ -44,6 +50,11 @@ area/build-cloud:
       - any-glob-to-any-file:
           - content/manuals/build-cloud/**
 
+area/cloud:
+  - changed-files:
+      - any-glob-to-any-file:
+          - content/manuals/cloud/**
+
 area/compose:
   - changed-files:
       - any-glob-to-any-file:
@@ -55,6 +66,11 @@ area/desktop:
   - changed-files:
       - any-glob-to-any-file:
           - content/manuals/desktop/**
+
+area/dhi:
+  - changed-files:
+      - any-glob-to-any-file:
+          - content/manuals/dhi/**
 
 area/engine:
   - changed-files:
@@ -173,7 +189,6 @@ hugo:
           - hugo_stats.json
           - i18n/**
           - layouts/**
-          - postcss.config.js
           - static/**
           - tailwind.config.js
 

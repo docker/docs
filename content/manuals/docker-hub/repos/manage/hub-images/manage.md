@@ -27,7 +27,7 @@ The following objects are shown in the diagram.
 ## Manage repository images and image indexes
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
-2. Select **Repositories**.
+2. Select **My Hub** > **Repositories**.
 3. In the list, select a repository.
 4. Select **Image Management**.
 5. Search, filter, or sort the items.
@@ -50,3 +50,8 @@ The following objects are shown in the diagram.
    3. In the window that appears, verify the items that will be deleted and the
       amount of storage you will reclaim.
    4. Select **Delete forever**.
+
+  
+   > [!NOTE]
+   >
+   > If you would like to delete in bulk, you can use the [deletion API endpoint](/reference/api/registry/latest/#tag/delete).

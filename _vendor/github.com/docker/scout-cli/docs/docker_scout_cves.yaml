@@ -135,6 +135,25 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: local
+      value_type: bool
+      default_value: "false"
+      description: Local mode
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: local-vulndb
+      value_type: string
+      description: Local vulnerability database
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: locations
       value_type: bool
       default_value: "false"

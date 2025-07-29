@@ -137,7 +137,7 @@ Docker Hub for examples on how to install packages if you are unfamiliar.
 ### Codenames
 
 Tags with words that look like Toy Story characters (for example, `bookworm`,
-`bullseye`, and `trixie`) or adjectives (such as `focal`, `jammy`, and
+`bullseye`, and `trixie`) or adjectives (such as `jammy`, and
 `noble`), indicate the codename of the Linux distribution they use as a base
 image. Debian release codenames are [based on Toy Story characters](https://en.wikipedia.org/wiki/Debian_version_history#Naming_convention),
 and Ubuntu's take the form of "Adjective Animal". For example, the

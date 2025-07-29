@@ -5,9 +5,10 @@ pname: docker desktop
 plink: docker_desktop.yaml
 options:
     - option: detach
+      shorthand: d
       value_type: bool
       default_value: false
-      description: Start Docker Desktop in the background
+      description: Do not synchronously wait for the requested operation to complete.
       deprecated: false
       hidden: false
       experimental: false
@@ -15,9 +16,9 @@ options:
       kubernetes: false
       swarm: false
     - option: timeout
-      value_type: init
+      value_type: seconds
       default_value: 0
-      description: Specify in seconds how long to wait for Docker Desktop to start before timing out
+      description: Terminate the running command after the specified timeout with a non-zero exit code. A value of zero (the default) or -1 means no timeout.
       deprecated: false
       hidden: false
       experimental: false

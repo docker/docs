@@ -1,41 +1,76 @@
 ---
 title: Activity logs
 weight: 50
-description: Learn about activity logs.
-keywords: team, organization, activity, log, audit, activities
+description: Learn how to access and interpret Docker activity logs for organizations and repositories.
+keywords: audit log, organization activity, Docker business logs, repository activity, track changes Docker, security logs Docker, filter logs, log Docker events
 aliases:
 - /docker-hub/audit-log/
 ---
 
 {{< summary-bar feature_name="Activity logs" >}}
 
-Activity logs display a chronological list of activities that occur at organization and repository levels. It provides a report to owners on all their member activities.
+Activity logs display a chronological list of activities that occur at organization and repository levels. The activity log provides organization owners with a record of all
+member activities.
 
 With activity logs, owners can view and track:
+
  - What changes were made
  - The date when a change was made
  - Who initiated the change
 
 For example, activity logs display activities such as the date when a repository was created or deleted, the member who created the repository, the name of the repository, and when there was a change to the privacy settings.
 
-Owners can also see the activity logs for their repository if the repository is part of the organization subscribed to a Docker Business or Team plan.
+Owners can also see the activity logs for their repository if the repository is part of the organization subscribed to a Docker Business or Team subscription.
 
-## Manage activity logs
+## Access activity logs
 
 {{< tabs >}}
-{{< tab name="Docker Hub" >}}
-
-{{% admin-org-audit-log product="hub" %}}
-
-{{< /tab >}}
 {{< tab name="Admin Console" >}}
 
-{{% admin-org-audit-log product="admin" %}}
+To view activity logs in the Admin Console:
+
+1. Sign in to [Docker Home](https://app.docker.com) and select your
+organization.
+1. Select **Admin Console**, then **Activity logs**.
+
+{{< /tab >}}
+{{< tab name="Docker Hub" >}}
+
+{{% include "hub-org-management.md" %}}
+
+To view activity logs in Docker Hub:
+
+1. Sign in to [Docker Hub](https://hub.docker.com).
+1. Select **My Hub**, your organization, and then **Activity**.
 
 {{< /tab >}}
 {{< /tabs >}}
 
-## Event definitions
+## Filter and customize activity logs
+
+By default, the **Activity** tab displays all recorded events. To narrow your
+view, use the calendar to select a specific date range. The log updates to
+show only the activities that occurred during that period.
+
+You can also filter by activity type. Use the **All Activities** drop-down to
+focus on organization-level, repository-level, or billing-related events.
+In Docker Hub, when viewing a repository, the **Activities** tab only shows
+events for that repository.
+
+After selecting a category—**Organization**, **Repository**, or **Billing**—use
+the **All Actions** drop-down to refine the results even further by specific
+event type.
+
+> [!NOTE]
+>
+> Events triggered by Docker Support appear under the username **dockersupport**.
+
+> [!IMPORTANT]
+>
+> Docker retains activity logs for three months. To maintain access to older
+data, export logs regularly.
+
+## Types of activity log events
 
 Refer to the following section for a list of events and their descriptions:
 
@@ -69,6 +104,14 @@ Refer to the following section for a list of events and their descriptions:
 | Policy updated | Details of updating a settings policy |
 | Policy deleted | Details of deleting a settings policy |
 | Policy transferred | Details of transferring a settings policy to another owner |
+| Create SSO Connection | Details of creating a new org/company SSO connection |
+| Update SSO Connection | Details of updating an existing org/company SSO connection |
+| Delete SSO Connection | Details of deleting an existing org/company SSO connection |
+| Enforce SSO | Details of toggling enforcement on an existing org/company SSO connection |
+| Enforce SCIM | Details of toggling SCIM on an existing org/company SSO connection |
+| Refresh SCIM Token | Details of a SCIM token refresh on an existing org/company SSO connection |
+| Change SSO Connection Type | Details of a connection type change on an existing org/company SSO connection |
+| Toggle JIT provisioning | Details of a JIT toggle on an existing org/company SSO connection |
 
 ### Repository events
 

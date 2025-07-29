@@ -8,6 +8,7 @@ first: '\b([A-Z]{2,5})\b'
 second: '(?:\b[A-Z][a-z]+ )+\(([A-Z]{2,5})s?\)'
 # ... with the exception of these:
 exceptions:
+  - ACH
   - AGPL
   - AI
   - API
@@ -16,9 +17,11 @@ exceptions:
   - ASP
   - AUFS
   - AWS
+  - BGP     # Border Gateway Protocol
   - BIOS
   - BPF
   - BSD
+  - CDI
   - CFS
   - CI
   - CIDR
@@ -27,6 +30,7 @@ exceptions:
   - CNCF
   - CORS
   - CPU
+  - CSI
   - CSS
   - CSV
   - CUDA
@@ -35,6 +39,7 @@ exceptions:
   - DCT
   - DEBUG
   - DHCP
+  - DMR
   - DNS
   - DOM
   - DPI
@@ -50,6 +55,7 @@ exceptions:
   - GDB
   - GET
   - GHSA
+  - GNOME
   - GNU
   - GPG
   - GPL
@@ -74,10 +80,14 @@ exceptions:
   - JIT
   - JSON
   - JSX
+  - KDE
   - LESS
   - LLDB
+  - LLM
   - LTS
   - MAC
+  - MATE
+  - mcp
   - MCP
   - MDM
   - MDN
@@ -97,8 +107,8 @@ exceptions:
   - PATH
   - PDF
   - PEM
-  - PID
   - PHP
+  - PID
   - POSIX
   - POST
   - QA
@@ -137,6 +147,7 @@ exceptions:
   - TTY
   - TXT
   - UDP
+  - UI
   - URI
   - URL
   - USB
@@ -145,6 +156,7 @@ exceptions:
   - UTS
   - UUID
   - VAT
+  - VDI
   - VIP
   - VLAN
   - VM

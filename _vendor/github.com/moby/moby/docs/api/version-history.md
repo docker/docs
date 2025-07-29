@@ -13,6 +13,54 @@ keywords: "API, Docker, rcli, REST, documentation"
      will be rejected.
 -->
 
+## v1.51 API changes
+
+[Docker Engine API v1.51](https://docs.docker.com/reference/api/engine/version/v1.51/) documentation
+
+* `GET /images/json` now sets the value of `Containers` field for all images
+  to the count of containers using the image.
+  This field was previously always -1.
+
+## v1.50 API changes
+
+[Docker Engine API v1.50](https://docs.docker.com/reference/api/engine/version/v1.50/) documentation
+
+* `GET /info` now includes a `DiscoveredDevices` field. This is an array of
+  `DeviceInfo` objects, each providing details about a device discovered by a
+  device driver.
+  Currently only the CDI device driver is supported.
+* `DELETE /images/{name}` now supports a `platforms` query parameter. It accepts
+  an array of JSON-encoded OCI Platform objects, allowing for selecting specific
+  platforms to delete content for.
+* Deprecated: The `BridgeNfIptables` and `BridgeNfIp6tables` fields in the
+  `GET /info` response were deprecated in API v1.48, and are now omitted
+  in API v1.50.
+* Deprecated: `GET /images/{name}/json` no longer returns the following `Config`
+  fields; `Hostname`, `Domainname`, `AttachStdin`, `AttachStdout`, `AttachStderr`
+  `Tty`, `OpenStdin`, `StdinOnce`, `Image`, `NetworkDisabled` (already omitted unless set),
+  `MacAddress` (already omitted unless set), `StopTimeout` (already omitted unless set).
+  These additional fields were included in the response due to an implementation
+  detail but not part of the image's Configuration. These fields were marked
+  deprecated in API v1.46, and are now omitted. Older versions of the API still
+  return these fields, but they are always empty.
+
+## v1.49 API changes
+
+[Docker Engine API v1.49](https://docs.docker.com/reference/api/engine/version/v1.49/) documentation
+
+* `GET /images/{name}/json` now supports a `platform` parameter (JSON
+  encoded OCI Platform type) allowing to specify a platform of the multi-platform
+  image to inspect.
+  This option is mutually exclusive with the `manifests` option.
+* `GET /info` now returns a `FirewallBackend` containing information about
+  the daemon's firewalling configuration.
+* Deprecated: The  `AllowNondistributableArtifactsCIDRs` and `AllowNondistributableArtifactsHostnames`
+  fields in the `RegistryConfig` struct in the `GET /info` response are omitted
+  in API v1.49.
+* Deprecated: The `ContainerdCommit.Expected`, `RuncCommit.Expected`, and
+  `InitCommit.Expected` fields in the `GET /info` endpoint were deprecated
+  in API v1.48, and are now omitted in API v1.49.
+
 ## v1.48 API changes
 
 [Docker Engine API v1.48](https://docs.docker.com/reference/api/engine/version/v1.48/) documentation

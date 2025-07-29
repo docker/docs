@@ -84,10 +84,9 @@ Learn more about the `docker scout cves` command in the
 
 ## Step 4: Fix application vulnerabilities
 
-The fix suggested by Docker Scout is to update
-the underlying vulnerable express version to 4.17.3 or later.
+After the Docker Scout analysis, a high vulnerability CVE-2022-24999 was found, caused by an outdated version of the **express** package.
 
-1. Update the `package.json` file with the new package version.
+The version 4.17.3 of the express package fixes the vulnerability. Therefore, update the `package.json` file to the new version:
 
    ```diff
       "dependencies": {
@@ -95,15 +94,14 @@ the underlying vulnerable express version to 4.17.3 or later.
    +    "express": "4.17.3"
       }
    ```
-
-2. Rebuild the image with a new tag and push it to your Docker Hub repository:
+   
+Rebuild the image with a new tag and push it to your Docker Hub repository:
 
    ```console
    $ docker build --push -t <ORG_NAME>/scout-demo:v2 .
    ```
 
-Now, viewing the latest tag of the image in Docker Desktop, the Docker Scout
-Dashboard, or CLI, you can see that you have fixed the vulnerability.
+Run the `docker scout` command again and verify that HIGH CVE-2022-24999 is no longer present:
 
 ```console
 $ docker scout cves --only-package express
@@ -154,7 +152,7 @@ $ docker scout config organization <ORG_NAME>
 
 Now you can run the `quickview` command to get an overview
 of the compliance status for the image you just built.
-The image is evaluated against the default policy configurations.
+The image is evaluated against the default policy configurations. You'll see output similar to the following:
 
 ```console
 $ docker scout quickview
@@ -209,7 +207,7 @@ The classic image store doesn't support manifest lists,
 which is how the provenance attestations are attached to an image.
 
 Open **Settings** in Docker Desktop. Under the **General** section, make sure
-that the **Use containerd for pulling and storing images** option is checked.
+that the **Use containerd for pulling and storing images** option is checked, then select **Apply**.
 Note that changing image stores temporarily hides images and containers of the
 inactive image store until you switch back.
 
@@ -230,7 +228,9 @@ results through a different lens: the Docker Scout Dashboard.
 3. Select **Images** in the left-hand navigation.
 
 The images page lists your Scout-enabled repositories.
-Select the image in the list to open the **Image details** sidebar.
+
+Select the row for the image you want to view, anywhere in the row except on a link, to open the **Image details** sidebar.
+
 The sidebar shows a compliance overview for the last pushed tag of a repository.
 
 > [!NOTE]
@@ -239,13 +239,15 @@ The sidebar shows a compliance overview for the last pushed tag of a repository.
 > It might take a few minutes before the results appear if this is your
 > first time using the Docker Scout Dashboard.
 
-Inspect the **Up-to-Date Base Images** policy.
+Go back to the image list and select the image version, available in the **Most recent image** column.
+Then, at the top right of the page, select the **Update base image** button to inspect the policy.
+
 This policy checks whether base images you use are up-to-date.
 It currently has a non-compliant status,
 because the example image uses an old version `alpine` as a base image.
 
-Select the **View fix** button next to the policy name for details about the violation,
-and recommendations on how to address it.
+Close the **Recommended fixes for base image** modal. In the policy listing, select **View fixes** button, next to the policy name for details about the violation, and recommendations on how to address it.
+
 In this case, the recommended action is to enable
 [Docker Scout's GitHub integration](./integrations/source-code-management/github.md),
 which helps keep your base images up-to-date automatically.

@@ -10,11 +10,145 @@ toc_max: 2
 This page contains information about the new features, improvements, and bug
 fixes in [Docker Buildx](https://github.com/docker/buildx).
 
+## 0.26.1
+
+{{< release-date date="2025-07-22" >}}
+
+The full release notes for this release are available
+[on GitHub](https://github.com/docker/buildx/releases/tag/v0.26.1).
+
+### Bug fixes
+
+- Fix regression when validating compose files with Bake. [docker/buildx#3329](https://github.com/docker/buildx/pull/3329)
+
+## 0.26.0
+
+{{< release-date date="2025-07-21" >}}
+
+The full release notes for this release are available
+[on GitHub](https://github.com/docker/buildx/releases/tag/v0.26.0).
+
+### New
+
+- New experimental version of the DAP debugger has been added with a new `dap build` helper command. The new feature can be tried with the [DockerDX VSCode extension](https://github.com/docker/vscode-extension). [docker/buildx#3235](https://github.com/docker/buildx/pull/3235)
+- Compose compatibility has been updated to v2.7.1. [docker/buildx#3282](https://github.com/docker/buildx/pull/3282)
+
+### Enhancements
+
+- Bake command now supports pattern-matching target names with wildcards. [docker/buildx#3280](https://github.com/docker/buildx/pull/3280)
+- Bake command now supports setting files through environment variable `BUILDX_BAKE_FILE`. [docker/buildx#3242](https://github.com/docker/buildx/pull/3242)
+- Bake now ignores unrelated fields when parsing and validating compose files. [docker/buildx#3292](https://github.com/docker/buildx/pull/3292)
+- `history` commands will automatically bootstrap the builder. [docker/buildx#3300](https://github.com/docker/buildx/pull/3300)
+- Add SLSA v1 support to `history inspect` command. [docker/buildx#3245](https://github.com/docker/buildx/pull/3245)
+- Kubernetes driver option `buildkit-root-volume-memory` to use memory mount for the root volume. [docker/buildx#3253](https://github.com/docker/buildx/pull/3253)
+
+### Bug fixes
+
+- Fix possible error from `imagetools` commands when accessing registries that don't return content length. [docker/buildx#3316](https://github.com/docker/buildx/pull/3316)
+- Fix duplicated command descriptions from help output. [docker/buildx#3298](https://github.com/docker/buildx/pull/3298)
+- Fix `history inspect attachment` to not require an argument. [docker/buildx#3264](https://github.com/docker/buildx/pull/3264)
+- Fix resolving environment variables from `.env` file when building compose files with Bake. [docker/buildx#3275](https://github.com/docker/buildx/pull/3275), [docker/buildx#3276](https://github.com/docker/buildx/pull/3276), [docker/buildx#3322](https://github.com/docker/buildx/pull/3322)
+
+## 0.25.0
+
+{{< release-date date="2025-06-17" >}}
+
+The full release notes for this release are available
+[on GitHub](https://github.com/docker/buildx/releases/tag/v0.25.0).
+
+### New
+
+- Bake now supports defining `extra-hosts`. [docker/buildx#3234](https://github.com/docker/buildx/pull/3234)
+
+### Enhancements
+
+- Add support for bearer token auth. [docker/buildx#3233](https://github.com/docker/buildx/pull/3233)
+- Add custom exit codes for internal, resource, and canceled errors in commands. [docker/buildx#3214](https://github.com/docker/buildx/pull/3214)
+- Show variable type when using `--list=variables` with Bake. [docker/buildx#3207](https://github.com/docker/buildx/pull/3207)
+- Consider typed, value-less variables to have `null` value in Bake. [docker/buildx#3198](https://github.com/docker/buildx/pull/3198)
+- Add support for multiple IPs in extra hosts configuration. [docker/buildx#3244](https://github.com/docker/buildx/pull/3244)
+- Support for updated SLSA V1 provenance in `buildx history` commands. [docker/buildx#3245](https://github.com/docker/buildx/pull/3245)
+- Add support for `RegistryToken` configuration in imagetools commands. [docker/buildx#3233](https://github.com/docker/buildx/pull/3233)
+
+### Bug fixes
+
+- Fix `keep-storage` flag deprecation notice for `prune` command. [docker/buildx#3216](https://github.com/docker/buildx/pull/3216)
+
+## 0.24.0
+
+{{< release-date date="2025-05-21" >}}
+
+The full release notes for this release are available
+[on GitHub](https://github.com/docker/buildx/releases/tag/v0.24.0).
+
+### Enhancements
+
+- New `type` attribute added to the `variable` block in Bake to allow explicit typing of variables. [docker/buildx#3167](https://github.com/docker/buildx/pull/3167), [docker/buildx#3189](https://github.com/docker/buildx/pull/3189), [docker/buildx#3198](https://github.com/docker/buildx/pull/3198)
+- New `--finalize` flag added to the `history export` command to finalize build traces before exporting. [docker/buildx#3152](https://github.com/docker/buildx/pull/3152)
+- Compose compatibility has been updated to v2.6.3. [docker/buildx#3191](https://github.com/docker/buildx/pull/3191), [docker/buildx#3171](https://github.com/docker/buildx/pull/3171)
+
+### Bug fixes
+
+- Fix issue where some builds may leave behind temporary files after completion. [docker/buildx#3133](https://github.com/docker/buildx/pull/3133)
+- Fix wrong image ID returned when building with Docker when containerd-snapshotter is enabled. [docker/buildx#3136](https://github.com/docker/buildx/pull/3136)
+- Fix possible panic when using empty `call` definition with Bake. [docker/buildx#3168](https://github.com/docker/buildx/pull/3168)
+- Fix possible malformed Dockerfile path with Bake on Windows. [docker/buildx#3141](https://github.com/docker/buildx/pull/3141)
+- Fix current builder not being available in JSON output for `ls` command. [docker/buildx#3179](https://github.com/docker/buildx/pull/3179)
+- Fix OTEL context not being propagated to Docker daemon. [docker/buildx#3146](https://github.com/docker/buildx/pull/3146)
+
+## 0.23.0
+
+{{< release-date date="2025-04-15" >}}
+
+The full release notes for this release are available
+[on GitHub](https://github.com/docker/buildx/releases/tag/v0.23.0).
+
+### New
+
+- New `buildx history export` command allows exporting the build record into a bundle that can be imported to [Docker Desktop](/desktop/). [docker/buildx#3073](https://github.com/docker/buildx/pull/3073)
+
+### Enhancements
+
+- New `--local` and `--filter` flags allow filtering history records in `buildx history ls`. [docker/buildx#3091](https://github.com/docker/buildx/pull/3091)
+- Compose compatibility has been updated to v2.6.0. [docker/buildx#3080](https://github.com/docker/buildx/pull/3080), [docker/buildx#3105](https://github.com/docker/buildx/pull/3105)
+- Support CLI environment variables in standalone mode. [docker/buildx#3087](https://github.com/docker/buildx/pull/3087)
+
+### Bug fixes
+
+- Fix `--print` output for Bake producing output with unescaped variables that could cause build errors later. [docker/buildx#3097](https://github.com/docker/buildx/pull/3097)
+- Fix `additional_contexts` field not working correctly when pointing to another service. [docker/buildx#3090](https://github.com/docker/buildx/pull/3090)
+- Fix empty validation block crashing the Bake HCL parser. [docker/buildx#3101](https://github.com/docker/buildx/pull/3101)
+
+## 0.22.0
+
+{{< release-date date="2025-03-18" >}}
+
+The full release notes for this release are available
+[on GitHub](https://github.com/docker/buildx/releases/tag/v0.22.0).
+
+### New
+
+- New command `buildx history import` lets you import build records into Docker Desktop for further debugging in the [Build UI](/desktop/use-desktop/builds/). This command requires [Docker Desktop](/desktop/) to be installed. [docker/buildx#3039](https://github.com/docker/buildx/pull/3039)
+
+### Enhancements
+
+- History records can now be opened by offset from the latest in `history inspect`, `history logs` and `history open` commands (e.g. `^1`). [docker/buildx#3049](https://github.com/docker/buildx/pull/3049), [docker/buildx#3055](https://github.com/docker/buildx/pull/3055)
+- Bake now supports the `+=` operator to append when using `--set` for overrides. [docker/buildx#3031](https://github.com/docker/buildx/pull/3031)
+- Docker container driver adds GPU devices to the container if available. [docker/buildx#3063](https://github.com/docker/buildx/pull/3063)
+- Annotations can now be set when using overrides with Bake. [docker/buildx#2997](https://github.com/docker/buildx/pull/2997)
+- NetBSD binaries are now included in the release. [docker/buildx#2901](https://github.com/docker/buildx/pull/2901)
+- The `inspect` and `create` commands now return an error if a node fails to boot. [docker/buildx#3062](https://github.com/docker/buildx/pull/3062)
+
+### Bug fixes
+
+- Fix double pushing with Docker driver when the containerd image store is enabled. [docker/buildx#3023](https://github.com/docker/buildx/pull/3023)
+- Fix multiple tags being pushed for `imagetools create` command. Now only the final manifest pushes by tag. [docker/buildx#3024](https://github.com/docker/buildx/pull/3024)
+
 ## 0.21.0
 
 {{< release-date date="2025-02-19" >}}
 
-The full release note for this release is available
+The full release notes for this release are available
 [on GitHub](https://github.com/docker/buildx/releases/tag/v0.21.0).
 
 ### New
@@ -42,7 +176,7 @@ The full release note for this release is available
 
 {{< release-date date="2025-01-23" >}}
 
-The full release note for this release is available
+The full release notes for this release are available
 [on GitHub](https://github.com/docker/buildx/releases/tag/v0.20.1).
 
 ### Bug fixes
@@ -54,7 +188,7 @@ The full release note for this release is available
 
 {{< release-date date="2025-01-20" >}}
 
-The full release note for this release is available
+The full release notes for this release are available
 [on GitHub](https://github.com/docker/buildx/releases/tag/v0.20.0).
 
 > [!NOTE]
@@ -97,7 +231,7 @@ The full release note for this release is available
 
 {{< release-date date="2024-11-27" >}}
 
-The full release note for this release is available
+The full release notes for this release are available
 [on GitHub](https://github.com/docker/buildx/releases/tag/v0.19.1).
 
 ### Bug fixes
@@ -112,7 +246,7 @@ The full release note for this release is available
 
 {{< release-date date="2024-11-27" >}}
 
-The full release note for this release is available
+The full release notes for this release are available
 [on GitHub](https://github.com/docker/buildx/releases/tag/v0.19.0).
 
 ### New
@@ -154,7 +288,7 @@ The full release note for this release is available
 
 {{< release-date date="2024-10-31" >}}
 
-The full release note for this release is available
+The full release notes for this release are available
 [on GitHub](https://github.com/docker/buildx/releases/tag/v0.18.0).
 
 ### New
@@ -189,7 +323,7 @@ The full release note for this release is available
 
 {{< release-date date="2024-09-13" >}}
 
-The full release note for this release is available
+The full release notes for this release are available
 [on GitHub](https://github.com/docker/buildx/releases/tag/v0.17.1).
 
 ### Bug fixes
@@ -208,7 +342,7 @@ The full release note for this release is available
 
 {{< release-date date="2024-09-10" >}}
 
-The full release note for this release is available
+The full release notes for this release are available
 [on GitHub](https://github.com/docker/buildx/releases/tag/v0.17.0).
 
 ### New
@@ -260,7 +394,7 @@ The full release note for this release is available
 
 {{< release-date date="2024-07-25" >}}
 
-The full release note for this release is available
+The full release notes for this release are available
 [on GitHub](https://github.com/docker/buildx/releases/tag/v0.16.2).
 
 ### Bug fixes
@@ -271,7 +405,7 @@ The full release note for this release is available
 
 {{< release-date date="2024-07-18" >}}
 
-The full release note for this release is available
+The full release notes for this release are available
 [on GitHub](https://github.com/docker/buildx/releases/tag/v0.16.1).
 
 ### Bug fixes
@@ -283,7 +417,7 @@ The full release note for this release is available
 
 {{< release-date date="2024-07-11" >}}
 
-The full release note for this release is available
+The full release notes for this release are available
 [on GitHub](https://github.com/docker/buildx/releases/tag/v0.16.0).
 
 ### New
@@ -317,7 +451,7 @@ The full release note for this release is available
 
 {{< release-date date="2024-06-18" >}}
 
-The full release note for this release is available
+The full release notes for this release are available
 [on GitHub](https://github.com/docker/buildx/releases/tag/v0.15.1).
 
 ### Bug fixes
@@ -329,7 +463,7 @@ The full release note for this release is available
 
 {{< release-date date="2024-06-11" >}}
 
-The full release note for this release is available
+The full release notes for this release are available
 [on GitHub](https://github.com/docker/buildx/releases/tag/v0.15.0).
 
 ### New
@@ -358,7 +492,7 @@ The full release note for this release is available
 
 {{< release-date date="2024-04-18" >}}
 
-The full release note for this release is available
+The full release notes for this release are available
 [on GitHub](https://github.com/docker/buildx/releases/tag/v0.14.0).
 
 ### Enhancements
@@ -406,7 +540,7 @@ The full release note for this release is available
 
 {{< release-date date="2024-03-13" >}}
 
-The full release note for this release is available
+The full release notes for this release are available
 [on GitHub](https://github.com/docker/buildx/releases/tag/v0.13.1).
 
 ### Bug fixes
@@ -418,7 +552,7 @@ The full release note for this release is available
 
 {{< release-date date="2024-03-06" >}}
 
-The full release note for this release is available
+The full release notes for this release are available
 [on GitHub](https://github.com/docker/buildx/releases/tag/v0.13.0).
 
 ### New
@@ -460,7 +594,7 @@ The full release note for this release is available
 
 {{< release-date date="2024-01-12" >}}
 
-The full release note for this release is available
+The full release notes for this release are available
 [on GitHub](https://github.com/docker/buildx/releases/tag/v0.12.1).
 
 ### Bug fixes and enhancements
@@ -472,7 +606,7 @@ The full release note for this release is available
 
 {{< release-date date="2023-11-16" >}}
 
-The full release note for this release is available
+The full release notes for this release are available
 [on GitHub](https://github.com/docker/buildx/releases/tag/v0.12.0).
 
 ### New
@@ -565,7 +699,7 @@ The full release note for this release is available
 
 {{< release-date date="2023-07-18" >}}
 
-The full release note for this release is available
+The full release notes for this release are available
 [on GitHub](https://github.com/docker/buildx/releases/tag/v0.11.2).
 
 ### Bug fixes and enhancements
@@ -579,7 +713,7 @@ The full release note for this release is available
 
 {{< release-date date="2023-07-05" >}}
 
-The full release note for this release is available
+The full release notes for this release are available
 [on GitHub](https://github.com/docker/buildx/releases/tag/v0.11.1).
 
 ### Bug fixes and enhancements
@@ -597,7 +731,7 @@ The full release note for this release is available
 
 {{< release-date date="2023-06-13" >}}
 
-The full release note for this release is available
+The full release notes for this release are available
 [on GitHub](https://github.com/docker/buildx/releases/tag/v0.11.0).
 
 ### New

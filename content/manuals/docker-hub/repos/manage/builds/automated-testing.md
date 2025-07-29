@@ -73,7 +73,7 @@ branch or tag, and you do not need to enable it at all.
 Only branches that are configured to use autobuild push images to the
 Docker repository, regardless of the Autotest settings.
 
-1. Sign in to Docker Hub and select **Repositories**.
+1. Sign in to Docker Hub and select **My Hub** > **Repositories**.
 
 2. Select the repository you want to enable `Autotest` on.
 

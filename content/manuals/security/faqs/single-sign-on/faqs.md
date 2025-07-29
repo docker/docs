@@ -27,7 +27,7 @@ Docker supports Service Provider Initiated (SP-initiated) SSO flow. This means u
 
 ### Where can I find detailed instructions on how to configure Docker SSO?
 
-You first need to establish an SSO connection with your identity provider, and the company email domain needs to be verified prior to establishing an SSO connection for your users. For detailed step-by-step instructions on how to configure Docker SSO, see [Single Sign-on](../../../security/for-admins/single-sign-on/configure/_index.md).
+You first need to establish an SSO connection with your identity provider, and the company email domain needs to be verified prior to establishing an SSO connection for your users. For detailed step-by-step instructions on how to configure Docker SSO, see [Single Sign-on](/manuals/enterprise/security/single-sign-on/configure.md).
 
 ### Does Docker SSO support multi-factor authentication (MFA)?
 
@@ -57,8 +57,13 @@ Directory.Read.All permission, which provides access to all users, groups, and
 other sensitive data in the directory. Due to potential security risks, Docker
 doesn't support this configuration. Instead, Docker recommends [configuring SCIM
 to enable group sync
-securely](/security/for-admins/provisioning/group-mapping/#use-group-mapping-with-scim).
+securely](/manuals/enterprise/security/provisioning/group-mapping.md#use-group-mapping-with-scim).
 
 ### Are there any firewall rules required for SSO configuration?
 
 No. There are no specific firewall rules required for configuring SSO, as long as the domain `login.docker.com` is accessible. This domain is commonly accessible by default. However, in rare cases, some organizations may have firewall restrictions in place that block this domain. If you encounter issues during SSO setup, ensure that `login.docker.com` is allowed in your network's firewall settings.
+
+### Does Docker use my IdP's default session timeout?
+
+Yes, Docker supports your IdP's default session timeout using a custom SAML attribute.
+Instead of relying on the standard `SessionNotOnOrAfter` element from the SAML spec, Docker uses a custom `dockerSessionMinutes` attribute to control session duration. See [SSO attributes](/manuals/enterprise/security/provisioning/_index.md#sso-attributes) for more information.

@@ -95,7 +95,7 @@ counter whenever you visit it.
 
 3.  Create a file called `requirements.txt` and paste these two lines in:
 
-    ```none
+    ```text
     flask
     redis
     ```

@@ -1,6 +1,6 @@
 ---
 title: Interpolation
-description: Learn about interpolation
+description: Substitute environment variables in Docker Compose files using interpolation syntax.
 keywords: compose, compose specification, interpolation, compose file reference
 aliases: 
  - /compose/compose-file/12-interpolation/

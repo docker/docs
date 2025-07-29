@@ -1,10 +1,11 @@
-<div class="p-4 bg-amber-light-200 dark:bg-amber-dark-200" role="alert">
+<div class="bg-amber-light-200 dark:bg-amber-dark-200 p-4" role="alert">
   <div class="text-lg">{{ .Get "header" }}</div>
   {{ .Get "body" | .Page.RenderString (dict "display" "block") }}
   <div class="not-prose">
-    <a href="{{ .Get "url" }}"
-      class="cursor-pointer py-2 px-4 rounded bg-blue-light-500 dark:bg-blue-dark-400 hover:bg-blue-light-400 dark:hover:bg-blue-dark-500 text-white"
-      >{{ .Get "cta" }}</a>
+    <a
+      href="{{ .Get "url" }}"
+      class="cursor-pointer rounded-sm bg-blue-500 px-4 py-2 text-white hover:bg-blue-400 dark:bg-blue-800 dark:hover:bg-blue-700"
+      >{{ .Get "cta" }}</a
+    >
   </div>
 </div>
-

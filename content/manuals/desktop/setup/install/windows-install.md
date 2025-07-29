@@ -28,10 +28,11 @@ aliases:
 > employees OR more than $10 million USD in annual revenue) requires a [paid
 > subscription](https://www.docker.com/pricing/).
 
-This page contains the download URL, information about system requirements, and instructions on how to install Docker Desktop for Windows.
+This page provides download links, system requirements, and step-by-step installation instructions for Docker Desktop on Windows.
 
 {{< button text="Docker Desktop for Windows - x86_64" url="https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64" >}}
-{{< button text="Docker Desktop for Windows - Arm (Beta)" url="https://desktop.docker.com/win/main/arm64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-arm64" >}}
+{{< button text="Docker Desktop for Windows - x86_64 on the Microsoft Store" url="https://apps.microsoft.com/detail/xp8cbj40xlbwkx?hl=en-GB&gl=GB" >}}
+{{< button text="Docker Desktop for Windows - Arm (Early Access)" url="https://desktop.docker.com/win/main/arm64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-arm64" >}}
 
 _For checksums, see [Release notes](/manuals/desktop/release-notes.md)_
 
@@ -41,12 +42,12 @@ _For checksums, see [Release notes](/manuals/desktop/release-notes.md)_
 >
 > **Should I use Hyper-V or WSL?**
 >
-> Docker Desktop's functionality remains consistent on both WSL and Hyper-V, without a preference for either architecture. Hyper-V and WSL have their own advantages and disadvantages, depending on your specific set up and your planned use case. 
+> Docker Desktop's functionality remains consistent on both WSL and Hyper-V, without a preference for either architecture. Hyper-V and WSL have their own advantages and disadvantages, depending on your specific setup and your planned use case. 
 
 {{< tabs >}}
 {{< tab name="WSL 2 backend, x86_64" >}}
 
-- WSL version 1.1.3.0 or later.
+- WSL version 2.1.5 or later.
 - Windows 11 64-bit: Home or Pro version 22H2 or higher, or Enterprise or Education version 22H2 or higher.
 - Windows 10 64-bit: Minimum required is Home or Pro 22H2 (build 19045) or higher, or Enterprise or Education 22H2 (build 19045) or higher. 
 - Turn on the WSL 2 feature on Windows. For detailed instructions, refer to the
@@ -56,7 +57,7 @@ _For checksums, see [Release notes](/manuals/desktop/release-notes.md)_
   - 64-bit processor with [Second Level Address Translation (SLAT)](https://en.wikipedia.org/wiki/Second_Level_Address_Translation)
   - 4GB system RAM
   - Enable hardware virtualization in BIOS/UEFI. For more information, see
-    [Virtualization](/manuals/desktop/troubleshoot-and-support/troubleshoot/topics.md#virtualization).
+    [Virtualization](/manuals/desktop/troubleshoot-and-support/troubleshoot/topics.md#docker-desktop-fails-due-to-virtualization-not-working).
 
 For more information on setting up WSL 2 with Docker Desktop, see [WSL](/manuals/desktop/features/wsl/_index.md).
 
@@ -94,9 +95,9 @@ For more information on setting up WSL 2 with Docker Desktop, see [WSL](/manuals
 > Windows Home or Education editions only allow you to run Linux containers.
 
 {{< /tab >}}
-{{< tab name="WSL 2 backend, Arm (Beta)" >}}
+{{< tab name="WSL 2 backend, Arm (Early Access)" >}}
 
-- WSL version 1.1.3.0 or later.
+- WSL version 2.1.5 or later.
 - Windows 11 64-bit: Home or Pro version 22H2 or higher, or Enterprise or Education version 22H2 or higher.
 - Windows 10 64-bit: Minimum required is Home or Pro 22H2 (build 19045) or higher, or Enterprise or Education 22H2 (build 19045) or higher.
 - Turn on the WSL 2 feature on Windows. For detailed instructions, refer to the
@@ -157,6 +158,41 @@ again when you switch back.
 
 {{< /accordion >}}
 
+## Administrator privileges and installation requirements
+
+Installing Docker Desktop requires administrator privileges. However, once installed, it can be used without administrative access. Some actions, though, still need elevated permissions. See [Understand permission requirements for Windows](./windows-permission-requirements.md) for more detail.
+
+If your users do not have administrator rights and plan to perform operations that require elevated privileges, be sure to install Docker Desktop using the `--always-run-service` installer flag. This ensures those actions can still be executed without prompting for User Account Control (UAC) elevation. See [Installer Flags](#installer-flags) for more detail.
+
+## WSL: Verification and setup
+
+If you have chosen to use WSL, first verify that your installed version meets system requirements by running the following command in your terminal:
+
+```console
+wsl --version
+```
+
+If version details do not appear, you are likely using the inbox version of WSL. This version does not support modern capabilities and must be updated.
+
+You can update or install WSL using one of the following methods:
+
+### Option 1: Install or update WSL via the terminal
+
+1. Open PowerShell or Windows Command Prompt in administrator mode.
+2. Run either the install or update command. You may be prompted to restart your machine. For more information, refer to [Install WSL](https://learn.microsoft.com/en-us/windows/wsl/install).
+```console
+wsl --install
+
+wsl --update
+```
+
+### Option 2: Install WSL via the MSI package
+
+If Microsoft Store access is blocked due to security policies:
+1. Go to the official [WSL GitHub Releases page](https://github.com/microsoft/WSL/releases).
+2. Download the `.msi` installer from the latest stable release (under the Assets drop-down).
+3. Run the downloaded installer and follow the setup instructions.
+
 ## Install Docker Desktop on Windows
 
 > [!TIP]
@@ -171,15 +207,16 @@ again when you switch back.
 
 3. When prompted, ensure the **Use WSL 2 instead of Hyper-V** option on the Configuration page is selected or not depending on your choice of backend.
 
-   If your system only supports one of the two options, you won't be able to select which backend to use.
+    On systems that support only one backend, Docker Desktop automatically selects the available option.
 
-4. Follow the instructions on the installation wizard to authorize the installer and proceed with the install.
+4. Follow the instructions on the installation wizard to authorize the installer and proceed with the installation.
 
 5. When the installation is successful, select **Close** to complete the installation process.
 
 6. [Start Docker Desktop](#start-docker-desktop).
 
-If your administrator account is different to your user account, you must add the user to the **docker-users** group:
+If your administrator account is different to your user account, you must add the user to the **docker-users** group to access features that require higher privileges, such as creating and managing the Hyper-V VM, or using Windows containers:
+
 1. Run **Computer Management** as an **administrator**.
 2. Navigate to **Local Users and Groups** > **Groups** > **docker-users**. 
 3. Right-click to add the user to the group.
@@ -207,26 +244,7 @@ start /w "" "Docker Desktop Installer.exe" install
 
 By default, Docker Desktop is installed at `C:\Program Files\Docker\Docker`.
 
-The `install` command accepts the following flags:
-- `--quiet`: Suppresses information output when running the installer 
-- `--accept-license`: Accepts the [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement) now, rather than requiring it to be accepted when the application is first run
-- `--no-windows-containers`: Disables the Windows containers integration. This can improve security. For more information, see [Windows containers](/manuals/desktop/setup/install/windows-permission-requirements.md#windows-containers).
-- `--allowed-org=<org name>`: Requires the user to sign in and be part of the specified Docker Hub organization when running the application
-- `--backend=<backend name>`: Selects the default backend to use for Docker Desktop, `hyper-v`, `windows` or `wsl-2` (default)
-- `--installation-dir=<path>`: Changes the default installation location (`C:\Program Files\Docker\Docker`)
-- `--admin-settings`: Automatically creates an `admin-settings.json` file which is used by admins to control certain Docker Desktop settings on client machines within their organization. For more information, see [Settings Management](/manuals/security/for-admins/hardened-desktop/settings-management/_index.md).
-  - It must be used together with the `--allowed-org=<org name>` flag. 
-  - For example:`--allowed-org=<org name> --admin-settings="{'configurationFileVersion': 2, 'enhancedContainerIsolation': {'value': true, 'locked': false}}"`
-
-- `--proxy-http-mode=<mode>`: Sets the HTTP Proxy mode, `system` (default) or `manual`
-- `--override-proxy-http=<URL>`: Sets the URL of the HTTP proxy that must be used for outgoing HTTP requests, requires `--proxy-http-mode` to be `manual`
-- `--override-proxy-https=<URL>`: Sets the URL of the HTTP proxy that must be used for outgoing HTTPS requests, requires `--proxy-http-mode` to be `manual`
-- `--override-proxy-exclude=<hosts/domains>`: Bypasses proxy settings for the hosts and domains. Uses a comma-separated list.
-- `--proxy-enable-kerberosntlm`: Enables Kerberos and NTLM proxy authentication. If you are enabling this, ensure your proxy server is properly configured for Kerberos/NTLM authentication. Available with Docker Desktop 4.32 and later.
-- `--hyper-v-default-data-root=<path>`: Specifies the default location for the Hyper-V VM disk. 
-- `--windows-containers-default-data-root=<path>`: Specifies the default location for the Windows containers.
-- `--wsl-default-data-root=<path>`: Specifies the default location for the WSL distribution disk.
-- `--always-run-service`: After installation completes, starts `com.docker.service` and sets the service startup type to Automatic. This circumvents the need for administrator privileges, which are otherwise necessary to start `com.docker.service`. `com.docker.service` is required by Windows containers and Hyper-V backend.
+#### Installer flags
 
 > [!NOTE]
 >
@@ -236,11 +254,43 @@ The `install` command accepts the following flags:
 > Start-Process 'Docker Desktop Installer.exe' -Wait -ArgumentList 'install', '--accept-license'
 > ```
 
-If your admin account is different to your user account, you must add the user to the **docker-users** group:
+If your admin account is different to your user account, you must add the user to the **docker-users** group to access features that require higher privileges, such as creating and managing the Hyper-V VM, or using Windows containers.
 
 ```console
 $ net localgroup docker-users <user> /add
 ```
+
+The `install` command accepts the following flags:
+
+##### Installation behavior
+
+- `--quiet`: Suppresses information output when running the installer 
+- `--accept-license`: Accepts the [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement) now, rather than requiring it to be accepted when the application is first run
+- `--installation-dir=<path>`: Changes the default installation location (`C:\Program Files\Docker\Docker`)
+- `--backend=<backend name>`: Selects the default backend to use for Docker Desktop, `hyper-v`, `windows` or `wsl-2` (default)
+- `--always-run-service`: After installation completes, starts `com.docker.service` and sets the service startup type to Automatic. This circumvents the need for administrator privileges, which are otherwise necessary to start `com.docker.service`. `com.docker.service` is required by Windows containers and Hyper-V backend.
+
+##### Security and access control
+
+- `--allowed-org=<org name>`: Requires the user to sign in and be part of the specified Docker Hub organization when running the application
+- `--admin-settings`: Automatically creates an `admin-settings.json` file which is used by admins to control certain Docker Desktop settings on client machines within their organization. For more information, see [Settings Management](/manuals/enterprise/security/hardened-desktop/settings-management/_index.md).
+  - It must be used together with the `--allowed-org=<org name>` flag. 
+  - For example:`--allowed-org=<org name> --admin-settings="{'configurationFileVersion': 2, 'enhancedContainerIsolation': {'value': true, 'locked': false}}"`
+- `--no-windows-containers`: Disables the Windows containers integration. This can improve security. For more information, see [Windows containers](/manuals/desktop/setup/install/windows-permission-requirements.md#windows-containers).
+
+##### Proxy configuration
+
+- `--proxy-http-mode=<mode>`: Sets the HTTP Proxy mode, `system` (default) or `manual`
+- `--override-proxy-http=<URL>`: Sets the URL of the HTTP proxy that must be used for outgoing HTTP requests, requires `--proxy-http-mode` to be `manual`
+- `--override-proxy-https=<URL>`: Sets the URL of the HTTP proxy that must be used for outgoing HTTPS requests, requires `--proxy-http-mode` to be `manual`
+- `--override-proxy-exclude=<hosts/domains>`: Bypasses proxy settings for the hosts and domains. Uses a comma-separated list.
+- `--proxy-enable-kerberosntlm`: Enables Kerberos and NTLM proxy authentication. If you are enabling this, ensure your proxy server is properly configured for Kerberos/NTLM authentication. Available with Docker Desktop 4.32 and later.
+
+##### Data root and disk location
+
+- `--hyper-v-default-data-root=<path>`: Specifies the default location for the Hyper-V VM disk. 
+- `--windows-containers-default-data-root=<path>`: Specifies the default location for the Windows containers.
+- `--wsl-default-data-root=<path>`: Specifies the default location for the WSL distribution disk.
 
 ## Start Docker Desktop
 
@@ -260,7 +310,7 @@ Docker Desktop does not start automatically after installation. To start Docker 
 
 > [!TIP]
 >
-> As an IT administrator, you can use endpoint management (MDM) software to identify the number of Docker Desktop instances and their versions within your environment. This can provide accurate license reporting, help ensure your machines use the latest version of Docker Desktop, and enable you to [enforce sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md).
+> As an IT administrator, you can use endpoint management (MDM) software to identify the number of Docker Desktop instances and their versions within your environment. This can provide accurate license reporting, help ensure your machines use the latest version of Docker Desktop, and enable you to [enforce sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md).
 > - [Intune](https://learn.microsoft.com/en-us/mem/intune/apps/app-discovered-apps)
 > - [Jamf](https://docs.jamf.com/10.25.0/jamf-pro/administrator-guide/Application_Usage.html)
 > - [Kandji](https://support.kandji.io/support/solutions/articles/72000559793-view-a-device-application-list)
