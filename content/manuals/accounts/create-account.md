@@ -117,7 +117,7 @@ To reset your password:
 
 1. Go to the [Docker sign in page](https://login.docker.com/).
 1. Enter your email address.
-1. When prompted for your password, selectr **Forgot password?**.
+1. When prompted for your password, select **Forgot password?**.
 
 ## Troubleshooting
 
