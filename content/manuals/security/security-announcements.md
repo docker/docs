@@ -7,7 +7,7 @@ toc_min: 1
 toc_max: 2
 ---
 
-## Docker Desktop 4.44.0 security update: 
+## Docker Desktop 4.44.0 security update: CVE-2025-23266
 
 _Last updated July 31, 2025_
 
