@@ -63,5 +63,18 @@
     ],
     "description": "Insert a Hugo summary bar with a feature name and content. Define your summary key in data/summary.yaml.",
   },
-
+  "Insert Title": {
+    "prefix": ["insert title", "frontmatter", "title"],
+    "body": [
+      "---",
+      "title: $1",
+      "weight: $2",
+      "description: $3",
+      "keywords: $4",
+      "aliases:",
+      "  - $5",
+      "---"
+    ],
+    "description": "Insert a frontmatter block with title, weight, description, keywords, and aliases."
+  }
 }
