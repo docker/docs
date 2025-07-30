@@ -33,16 +33,17 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ## 4.44.0
 
-{{< release-date date="2025-07-31" >}}
+{{< release-date date="2025-08-04" >}}
 
 {{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.44.0" build_path="/TODO/" >}}
 
 ### New
 
-- Windows WSL2 stability improvements.
+- WSL2 stability improvements.
 - You can now inspect requests and responses to help you diagnose model-related issues in Docker Model Runner.
 - Added the ability to run multiple models and receive a warning on insufficient resources. This avoids Docker Desktop freezing when using big models.
 - Introduced `--gpu` (Windows only) and `--cors` flags for `docker desktop enable model-runner`.
+- Added a new `docker desktop kubernetes` command to the Docker Desktop CLI.
 - Search Settings is now available in Settings, enabling you to quickly find specific preferences and configuration options.
 - Apple Virtualization is now the default VMM for better performance and QEMU Virtualization is removed. See [blog post](https://www.docker.com/blog/docker-desktop-for-mac-qemu-virtualization-option-to-be-deprecated-in-90-days/).
 - Performance and stability improvements to the DockerVMM.
