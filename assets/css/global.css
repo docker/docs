@@ -92,3 +92,7 @@ input[type="search"]::-ms-clear {
     color: var(--color-blue-400);
   }
 }
+
+code{
+  font-size:0.9em;
+}
