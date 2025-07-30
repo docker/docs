@@ -1,4 +1,5 @@
 {{ $featureName := .Get "feature_name" }}
+{{ $text := .Get "text" }}
 {{ $feature := index site.Data.summary $featureName }}
 {{ if not $feature }}
   {{ errorf "[summary-bar] invalid feature: %s %v" $featureName .Position }}
@@ -47,15 +48,16 @@
     {{ with $feature.availability }}
       {{ $availabilityText := . }}
       <div class="flex flex-wrap gap-1 {{ $availabilityText|lower }}">
+        {{ range $key, $icon := $availabilityIcons }}
+          {{ if in $availabilityText $key }}
+            <span class="icon-svg">{{ partial "icon" $icon }}</span>
+          {{ end }}
+        {{ end }}
         <span class="font-bold">Availability:</span>
         <span>
-          {{ $availabilityText }}
-          {{ range $key, $icon := $availabilityIcons }}
-            {{ if in $availabilityText $key }}
-              <span class="icon-svg">{{ partial "icon" $icon }}</span>
-            {{ end }}
-          {{ end }}
+          {{ $availabilityText }}.
         </span>
+        <div> <span class="">{{ $text | markdownify }}</span></div>
       </div>
     {{ end }}
 
