@@ -44,7 +44,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Added the ability to run multiple models and receive a warning on insufficient resources. This avoids Docker Desktop freezing when using big models.
 - Introduced `--gpu` (Windows only) and `--cors` flags for `docker desktop enable model-runner`.
 - Added a new `docker desktop kubernetes` command to the Docker Desktop CLI.
-- You can now search for specific configuration options within Settings.
+- You can now search for specific configuration options within **Settings**.
 - Apple Virtualization is now the default VMM for better performance and QEMU Virtualization is removed. See [blog post](https://www.docker.com/blog/docker-desktop-for-mac-qemu-virtualization-option-to-be-deprecated-in-90-days/).
 - Performance and stability improvements to the DockerVMM.
 
