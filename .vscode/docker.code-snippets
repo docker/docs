@@ -54,4 +54,14 @@
     "body": ["{{< button url=\"$1\" text=\"$2\" >}}"],
     "description": "Insert a Hugo button",
   },
+  "Insert a Summary Bar": {
+    "prefix": ["summary-bar"],
+    "body": [
+      "{{< summary-bar feature_name=\"$1\" >}}",
+      "",
+      "$2",
+    ],
+    "description": "Insert a Hugo summary bar with a feature name and content. Define your summary key in data/summary.yaml.",
+  },
+
 }
