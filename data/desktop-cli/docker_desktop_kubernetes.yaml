@@ -1,5 +1,8 @@
 command: docker desktop kubernetes
-short: Commands to list and switch containers (Windows only)
+short: Manage Kubernetes settings
+usage: docker desktop kubernetes
+pname: docker desktop
+plink: docker_desktop.yaml
 usage: docker desktop kubernetes
 pname: docker desktop
 plink: docker_desktop.yaml
