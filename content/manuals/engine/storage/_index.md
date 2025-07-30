@@ -18,6 +18,17 @@ container if another process needs it.
 The writable layer is unique per container. You can't easily extract the data
 from the writeable layer to the host, or to another container.
 
+> [!IMPORTANT]
+> Starting with Docker Engine v29, Docker uses
+> [containerd](./containerd.md) for managing container storage and images.
+
+## Image storage
+
+Docker offers two implementation of image storage:
+
+- Default/current implementation: [Containerd](./containerd.md)
+- Legacy/deprecated implementation: [Storage drivers](./drivers/_index.md)
+
 ## Storage mount options
 
 Docker supports the following types of storage mounts for storing data outside

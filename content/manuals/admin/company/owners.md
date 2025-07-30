@@ -13,6 +13,7 @@ entire company and can manage settings that apply to all organizations under
 that company. They also have the same access rights as organization owners but
 don’t need to be members of any individual organization.
 
+
 > [!IMPORTANT]
 >
 > Company owners do not occupy a seat unless one of the following is true:
