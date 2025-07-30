@@ -32,7 +32,6 @@
       <div class="flex flex-wrap gap-1">
         <span class="font-bold">Subscription:</span>
         {{ range . }}
-          <span>{{ . }}</span>
           <span class="icon-svg">
             {{ $icon := index $subscriptionIcons . }}
             {{ if $icon }}
@@ -41,6 +40,7 @@
               {{ partial "icon" "default_icon" }}
             {{ end }}
           </span>
+          <span>{{ . }}</span>
         {{ end }}
       </div>
     {{ end }}
@@ -55,31 +55,37 @@
         {{ end }}
         <span class="font-bold">Availability:</span>
         <span>
-          {{ $availabilityText }}.
+          {{ $availabilityText }}
         </span>
-        <div> <span class="">{{ $text | markdownify }}</span></div>
+        <div>
+          <span>
+            {{- if $text -}}
+              . {{ $text | markdownify }}
+            {{- end -}}
+          </span>
+        </div>
       </div>
     {{ end }}
 
     {{ with $feature.requires }}
       <div class="flex flex-wrap gap-1">
-        <span class="font-bold">Requires:</span>
-        <span>{{ . | markdownify }}</span>
         <span class="icon-svg">
           {{ partial "icon" $requiresIcon }}
         </span>
+        <span class="font-bold">Requires:</span>
+        <span>{{ . | markdownify }}</span>
       </div>
     {{ end }}
 
     {{ with $feature.for }}
       <div class="flex flex-wrap gap-1">
-        <span class="font-bold">For:</span>
-        <span>{{ . }}</span>
         {{ if eq . "Administrators" }}
           <span class="icon-svg">
             {{ partial "icon" $forIcon }}
           </span>
         {{ end }}
+        <span class="font-bold">For:</span>
+        <span>{{ . }}</span>
       </div>
     {{ end }}
   </div>
