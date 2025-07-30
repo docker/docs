@@ -18,6 +18,7 @@
     "Early Access" "rocket_launch"
     "GA" "check_circle"
     "Retired" "package_2"
+    "Deprecated" "warning"
   }}
   {{ $requiresIcon := "browser_updated" }}
   {{ $forIcon := "admin_panel_settings" }}
@@ -45,7 +46,7 @@
 
     {{ with $feature.availability }}
       {{ $availabilityText := . }}
-      <div class="flex flex-wrap gap-1">
+      <div class="flex flex-wrap gap-1 {{ $availabilityText|lower }}">
         <span class="font-bold">Availability:</span>
         <span>
           {{ $availabilityText }}
