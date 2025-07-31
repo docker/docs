@@ -1,0 +1,13 @@
+command: docker mcp config dump
+short: Dump the whole configuration
+long: Dump the whole configuration
+usage: docker mcp config dump
+pname: docker mcp config
+plink: docker_mcp_config.yaml
+deprecated: false
+hidden: true
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

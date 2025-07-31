@@ -1,0 +1,22 @@
+command: docker mcp policy set
+short: Set a policy for secret management in Docker Desktop
+long: Set a policy for secret management in Docker Desktop
+usage: docker mcp policy set <content>
+pname: docker mcp policy
+plink: docker_mcp_policy.yaml
+examples: |-
+    ### Backup the current policy to a file
+    docker mcp policy dump > policy.conf
+
+    ### Set a new policy
+    docker mcp policy set "my-secret allows postgres"
+
+    ### Restore the previous policy
+    cat policy.conf | docker mcp policy set
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

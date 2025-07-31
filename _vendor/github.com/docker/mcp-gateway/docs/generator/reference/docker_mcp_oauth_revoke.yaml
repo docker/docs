@@ -1,0 +1,13 @@
+command: docker mcp oauth revoke
+short: Revoke the specified OAuth app.
+long: Revoke the specified OAuth app.
+usage: docker mcp oauth revoke <app>
+pname: docker mcp oauth
+plink: docker_mcp_oauth.yaml
+deprecated: false
+hidden: true
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

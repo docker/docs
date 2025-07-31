@@ -1,0 +1,13 @@
+command: docker mcp catalog import
+short: Import a catalog
+long: Import a catalog
+usage: docker mcp catalog import <alias|url|file>
+pname: docker mcp catalog
+plink: docker_mcp_catalog.yaml
+deprecated: false
+hidden: true
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

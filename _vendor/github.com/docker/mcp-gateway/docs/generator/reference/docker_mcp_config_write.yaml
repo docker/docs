@@ -1,0 +1,13 @@
+command: docker mcp config write
+short: Write the configuration
+long: Write the configuration
+usage: docker mcp config write
+pname: docker mcp config
+plink: docker_mcp_config.yaml
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+
