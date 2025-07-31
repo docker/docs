@@ -1,7 +1,7 @@
 # docker mcp client connect
 
 <!---MARKER_GEN_START-->
-Connect the Docker MCP Toolkit to a client
+Connect the Docker MCP Toolkit to a client. Supported clients: claude-desktop continue cursor gemini goose gordon lmstudio sema4 vscode
 
 ### Options
 

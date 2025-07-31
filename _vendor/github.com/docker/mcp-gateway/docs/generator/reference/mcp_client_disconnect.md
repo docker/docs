@@ -1,7 +1,7 @@
 # docker mcp client disconnect
 
 <!---MARKER_GEN_START-->
-Disconnect the Docker MCP Toolkit from a client
+Disconnect the Docker MCP Toolkit from a client. Supported clients: claude-desktop continue cursor gemini goose gordon lmstudio sema4 vscode
 
 ### Options
 

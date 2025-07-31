@@ -1,7 +1,7 @@
 # docker mcp tools call
 
 <!---MARKER_GEN_START-->
-call a tool
+Call a tool
 
 ### Options
 

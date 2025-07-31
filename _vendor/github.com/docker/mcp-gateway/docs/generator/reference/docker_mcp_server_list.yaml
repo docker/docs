@@ -1,7 +1,7 @@
 command: docker mcp server list
 aliases: docker mcp server list, docker mcp server ls
-short: list enabled servers
-long: list enabled servers
+short: List enabled servers
+long: List enabled servers
 usage: docker mcp server list
 pname: docker mcp server
 plink: docker_mcp_server.yaml

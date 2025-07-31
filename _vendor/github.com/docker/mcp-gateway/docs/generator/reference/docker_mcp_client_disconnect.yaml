@@ -1,6 +1,8 @@
 command: docker mcp client disconnect
-short: Disconnect the Docker MCP Toolkit from a client
-long: Disconnect the Docker MCP Toolkit from a client
+short: |
+    Disconnect the Docker MCP Toolkit from a client. Supported clients: claude-desktop continue cursor gemini goose gordon lmstudio sema4 vscode
+long: |
+    Disconnect the Docker MCP Toolkit from a client. Supported clients: claude-desktop continue cursor gemini goose gordon lmstudio sema4 vscode
 usage: |-
     docker mcp client disconnect [OPTIONS] <mcp-client>
 

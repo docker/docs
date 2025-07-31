@@ -1,6 +1,6 @@
 command: docker mcp tools inspect
-short: inspect a tool
-long: inspect a tool
+short: Inspect a tool
+long: Inspect a tool
 usage: docker mcp tools inspect
 pname: docker mcp tools
 plink: docker_mcp_tools.yaml

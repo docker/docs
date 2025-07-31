@@ -1,6 +1,8 @@
 command: docker mcp client connect
-short: Connect the Docker MCP Toolkit to a client
-long: Connect the Docker MCP Toolkit to a client
+short: |
+    Connect the Docker MCP Toolkit to a client. Supported clients: claude-desktop continue cursor gemini goose gordon lmstudio sema4 vscode
+long: |
+    Connect the Docker MCP Toolkit to a client. Supported clients: claude-desktop continue cursor gemini goose gordon lmstudio sema4 vscode
 usage: |-
     docker mcp client connect [OPTIONS] <mcp-client>
 

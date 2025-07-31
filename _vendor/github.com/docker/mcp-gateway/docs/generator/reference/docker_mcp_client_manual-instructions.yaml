@@ -1,4 +1,6 @@
 command: docker mcp client manual-instructions
+short: Display the manual instructions to connect the MCP client
+long: Display the manual instructions to connect the MCP client
 usage: docker mcp client manual-instructions
 pname: docker mcp client
 plink: docker_mcp_client.yaml

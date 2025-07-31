@@ -1,7 +1,7 @@
 command: docker mcp tools list
 aliases: docker mcp tools list, docker mcp tools ls
-short: list tools
-long: list tools
+short: List tools
+long: List tools
 usage: docker mcp tools list
 pname: docker mcp tools
 plink: docker_mcp_tools.yaml

@@ -1,7 +1,7 @@
 # docker mcp tools list
 
 <!---MARKER_GEN_START-->
-list tools
+List tools
 
 ### Aliases
 

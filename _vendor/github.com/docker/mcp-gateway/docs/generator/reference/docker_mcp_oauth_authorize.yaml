@@ -1,4 +1,6 @@
 command: docker mcp oauth authorize
+short: Authorize the specified OAuth app.
+long: Authorize the specified OAuth app.
 usage: docker mcp oauth authorize <app>
 pname: docker mcp oauth
 plink: docker_mcp_oauth.yaml

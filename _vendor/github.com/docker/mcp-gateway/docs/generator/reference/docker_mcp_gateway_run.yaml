@@ -8,7 +8,7 @@ options:
     - option: additional-catalog
       value_type: stringSlice
       default_value: '[]'
-      description: additional catalog paths to append to the default catalogs
+      description: Additional catalog paths to append to the default catalogs
       deprecated: false
       hidden: false
       experimental: false
@@ -18,7 +18,7 @@ options:
     - option: additional-config
       value_type: stringSlice
       default_value: '[]'
-      description: additional config paths to merge with the default config.yaml
+      description: Additional config paths to merge with the default config.yaml
       deprecated: false
       hidden: false
       experimental: false
@@ -28,7 +28,7 @@ options:
     - option: additional-registry
       value_type: stringSlice
       default_value: '[]'
-      description: additional registry paths to merge with the default registry.yaml
+      description: Additional registry paths to merge with the default registry.yaml
       deprecated: false
       hidden: false
       experimental: false
@@ -59,7 +59,7 @@ options:
       value_type: stringSlice
       default_value: '[docker-mcp.yaml]'
       description: |
-        paths to docker catalogs (absolute or relative to ~/.docker/mcp/catalogs/)
+        Paths to docker catalogs (absolute or relative to ~/.docker/mcp/catalogs/)
       deprecated: false
       hidden: false
       experimental: false
@@ -79,7 +79,7 @@ options:
     - option: config
       value_type: stringSlice
       default_value: '[config.yaml]'
-      description: paths to the config files (absolute or relative to ~/.docker/mcp/)
+      description: Paths to the config files (absolute or relative to ~/.docker/mcp/)
       deprecated: false
       hidden: false
       experimental: false
@@ -173,7 +173,7 @@ options:
       value_type: stringSlice
       default_value: '[registry.yaml]'
       description: |
-        paths to the registry files (absolute or relative to ~/.docker/mcp/)
+        Paths to the registry files (absolute or relative to ~/.docker/mcp/)
       deprecated: false
       hidden: false
       experimental: false
@@ -184,7 +184,7 @@ options:
       value_type: string
       default_value: docker-desktop
       description: |
-        colon separated paths to search for secrets. Can be `docker-desktop` or a path to a .env file (default to using Docker Deskop's secrets API)
+        Colon separated paths to search for secrets. Can be `docker-desktop` or a path to a .env file (default to using Docker Desktop's secrets API)
       deprecated: false
       hidden: false
       experimental: false
@@ -195,7 +195,7 @@ options:
       value_type: stringSlice
       default_value: '[]'
       description: |
-        names of the servers to enable (if non empty, ignore --registry flag)
+        Names of the servers to enable (if non empty, ignore --registry flag)
       deprecated: false
       hidden: false
       experimental: false

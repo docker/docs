@@ -78,6 +78,8 @@ github.com/docker/mcp-gateway v0.13.0 h1:ZXcY/mEDz1JLX4mMawhGPUC4PdCv5Kn2sJB/2bt
 github.com/docker/mcp-gateway v0.13.0/go.mod h1:g/Y+7N4c+/Jqngd2kxOYNQae+zKThl+zhuNMUymcBXE=
 github.com/docker/mcp-gateway v0.13.1-0.20250725123702-8e89765b8e23 h1:K6eT3ES75oNaPd4ryB2h9YjYTl/YEY/2Gd2RIJNvvUo=
 github.com/docker/mcp-gateway v0.13.1-0.20250725123702-8e89765b8e23/go.mod h1:UQ2De7vreEHLHCGtpn/yentfqR49W5Br9rr9N7R8GKU=
+github.com/docker/mcp-gateway v0.13.1-0.20250730013131-e08a3be84765 h1:mySoEboZo2nHFeeZt5bHNt1DBNfzyTDvhZlOx2BS5JQ=
+github.com/docker/mcp-gateway v0.13.1-0.20250730013131-e08a3be84765/go.mod h1:fgjFpcHItWEFKbClB4hINY4W15g+tCtC5T0j1PwCYzk=
 github.com/docker/model-cli v0.1.26-0.20250527144806-15d0078a3c01 h1:UL/07fs6IEdRWWkK+GRvmSTZM+9fugWzEeo2vdGIPoE=
 github.com/docker/model-cli v0.1.26-0.20250527144806-15d0078a3c01/go.mod h1:1YlKTiA19vEhbmM8EiJVPUFvRifBBI1S3sBpOt6Gbl4=
 github.com/docker/model-cli v0.1.26-0.20250529165100-f4b458125149 h1:uOLJ8d/isN/mqvr5rEFHVL3pBAWvnjfEEcvPLHJ2JSI=

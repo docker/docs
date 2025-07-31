@@ -1,6 +1,6 @@
 command: docker mcp tools call
-short: call a tool
-long: call a tool
+short: Call a tool
+long: Call a tool
 usage: docker mcp tools call
 pname: docker mcp tools
 plink: docker_mcp_tools.yaml

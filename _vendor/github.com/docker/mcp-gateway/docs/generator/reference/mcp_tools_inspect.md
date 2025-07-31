@@ -1,7 +1,7 @@
 # docker mcp tools inspect
 
 <!---MARKER_GEN_START-->
-inspect a tool
+Inspect a tool
 
 ### Options
 

@@ -1,6 +1,6 @@
 command: docker mcp tools count
-short: count tools
-long: count tools
+short: Count tools
+long: Count tools
 usage: docker mcp tools count
 pname: docker mcp tools
 plink: docker_mcp_tools.yaml

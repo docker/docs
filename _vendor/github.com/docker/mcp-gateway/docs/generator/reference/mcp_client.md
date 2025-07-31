@@ -5,11 +5,11 @@ Manage MCP clients
 
 ### Subcommands
 
-| Name                                     | Description                                     |
-|:-----------------------------------------|:------------------------------------------------|
-| [`connect`](mcp_client_connect.md)       | Connect the Docker MCP Toolkit to a client      |
-| [`disconnect`](mcp_client_disconnect.md) | Disconnect the Docker MCP Toolkit from a client |
-| [`ls`](mcp_client_ls.md)                 | List client configurations                      |
+| Name                                     | Description                                                                                                                                  |
+|:-----------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------|
+| [`connect`](mcp_client_connect.md)       | Connect the Docker MCP Toolkit to a client. Supported clients: claude-desktop continue cursor gemini goose gordon lmstudio sema4 vscode      |
+| [`disconnect`](mcp_client_disconnect.md) | Disconnect the Docker MCP Toolkit from a client. Supported clients: claude-desktop continue cursor gemini goose gordon lmstudio sema4 vscode |
+| [`ls`](mcp_client_ls.md)                 | List client configurations                                                                                                                   |
 
 
 

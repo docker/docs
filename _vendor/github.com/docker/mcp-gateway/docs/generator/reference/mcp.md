@@ -1,6 +1,8 @@
 # docker mcp
 
 <!---MARKER_GEN_START-->
+Manage MCP servers and clients
+
 ### Subcommands
 
 | Name                        | Description                   |
@@ -25,3 +27,10 @@
 
 <!---MARKER_GEN_END-->
 
+## Description
+
+The MCP Gateway is Docker's open-source enterprise solution for orchestrating
+Model Context Protocol (MCP) servers and clients.
+
+For more information see [Docker MCP](https://docs.docker.com/ai/mcp-gateway/) and
+the public [GitHub repository](https://github.com/docker/mcp-gateway).

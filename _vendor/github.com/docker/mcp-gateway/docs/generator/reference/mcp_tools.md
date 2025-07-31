@@ -7,10 +7,10 @@ List/count/call MCP tools
 
 | Name                              | Description    |
 |:----------------------------------|:---------------|
-| [`call`](mcp_tools_call.md)       | call a tool    |
-| [`count`](mcp_tools_count.md)     | count tools    |
-| [`inspect`](mcp_tools_inspect.md) | inspect a tool |
-| [`list`](mcp_tools_list.md)       | list tools     |
+| [`call`](mcp_tools_call.md)       | Call a tool    |
+| [`count`](mcp_tools_count.md)     | Count tools    |
+| [`inspect`](mcp_tools_inspect.md) | Inspect a tool |
+| [`list`](mcp_tools_list.md)       | List tools     |
 
 
 ### Options

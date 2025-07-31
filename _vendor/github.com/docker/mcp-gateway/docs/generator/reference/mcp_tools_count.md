@@ -1,7 +1,7 @@
 # docker mcp tools count
 
 <!---MARKER_GEN_START-->
-count tools
+Count tools
 
 ### Options
 
