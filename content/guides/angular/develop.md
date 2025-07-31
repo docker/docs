@@ -53,7 +53,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 
 # Install dependencies using npm with caching to speed up subsequent builds
-RUN --mount=type=cache,target=/root/.npm npm ci
+RUN --mount=type=cache,target=/root/.npm npm install
 
 # Copy all application source files into the container
 COPY . .
