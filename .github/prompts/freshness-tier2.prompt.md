@@ -18,5 +18,6 @@ how fresh and up to date it is. Apply the following:
 5. Try to add some helpful next steps to the end of the document, but only if there are no *Next steps* or *Related pages* section, already.
 6. Try to clarify, shorten or improve the efficiency of some sentences.
 7. Check for LLM readibility.
+8. Ensure each line is limited to 80 characters.
 
 Do your best and don't be lazy.
