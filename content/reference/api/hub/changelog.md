@@ -15,6 +15,15 @@ issues for Docker Service APIs.
 
 ---
 
+## 2025-07-29
+
+### New
+
+- Add [Update repository immutable tags settings](/reference/api/hub/latest/#tag/repositories/operation/UpdateRepositoryImmutableTags) endpoints for a given `namespace` and `repository`.
+- Add [Verify repository immutable tags](/reference/api/hub/latest/#tag/repositories/operation/VerifyRepositoryImmutableTags) endpoints for a given `namespace` and `repository`.
+
+---
+
 ## 2025-06-27
 
 ### New

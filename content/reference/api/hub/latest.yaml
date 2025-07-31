@@ -894,6 +894,62 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "404":
           $ref: "#/components/responses/NotFound"
+  /v2/namespaces/{namespace}/repositories/{repository}/immutabletags:
+    parameters:
+      - $ref: "#/components/parameters/namespace"
+      - $ref: "#/components/parameters/repository"
+    patch:
+      operationId: UpdateRepositoryImmutableTags
+      summary: "Update repository immutable tags"
+      description: |
+        Updates the immutable tags configuration for this repository.
+        
+        **Only users with administrative privileges for the repository can modify these settings.**
+      tags: 
+        - repositories
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/update_repository_immutable_tags_request"
+      responses:
+        200:
+          $ref: "#/components/responses/update_repository_immutable_tags_response"
+        400:
+          $ref: "#/components/responses/bad_request"
+        401:
+          $ref: "#/components/responses/unauthorized"
+        403:
+          $ref: "#/components/responses/forbidden"
+        404:
+          $ref: "#/components/responses/not_found"
+  /v2/namespaces/{namespace}/repositories/{repository}/immutabletags/verify:
+    parameters:
+      - $ref: "#/components/parameters/namespace"
+      - $ref: "#/components/parameters/repository"
+    post:
+      operationId: VerifyRepositoryImmutableTags
+      summary: "Verify repository immutable tags"
+      description: |
+        Validates  the immutable tags regex pass in parameter and returns a list of tags matching it in this repository.
+        
+        **Only users with administrative privileges for the repository call this endpoint.**
+      tags:
+        - repositories
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/immutable_tags_verify_request"
+      responses:
+        200:
+          $ref: "#/components/responses/immutable_tags_verify_response"
+        400:
+          $ref: "#/components/responses/bad_request"
+        401:
+          $ref: "#/components/responses/unauthorized"
+        403:
+          $ref: "#/components/responses/forbidden"
+        404:
+          $ref: "#/components/responses/not_found"
   /v2/repositories/{namespace}/{repository}/groups:
     parameters:
       - $ref: "#/components/parameters/namespace"
@@ -2154,7 +2210,209 @@ components:
         application/scim+json:
           schema:
             $ref: "#/components/schemas/scim_user"
+    update_repository_immutable_tags_response:
+      description: ""
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/repository_info"
+    immutable_tags_verify_response:
+      description: ""
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/immutable_tags_verify_response"
   schemas:
+    update_repository_immutable_tags_request:
+      type: object
+      properties:
+        immutable_tags:
+          type: boolean
+          description: Whether immutable tags are enabled
+        immutable_tags_rules:
+          type: array
+          items:
+            type: string
+          description: List of immutable tag rules
+          example:
+            - "v.*"
+            - ".*-RELEASE"
+      required:
+        - immutable_tags
+        - immutable_tags_rules
+    repository_info:
+      type: object
+      properties:
+        user:
+          type: string
+          description: Username of the repository owner
+        name:
+          type: string
+          description: Repository name
+        namespace:
+          type: string
+          description: Repository namespace
+        repository_type:
+          type: string
+          nullable: true
+          description: Type of the repository
+        status:
+          type: integer
+          description: Repository status code
+        status_description:
+          type: string
+          description: Description of the repository status
+        description:
+          type: string
+          description: Short description of the repository
+        is_private:
+          type: boolean
+          description: Whether the repository is private
+        is_automated:
+          type: boolean
+          description: Whether the repository has automated builds
+        star_count:
+          type: integer
+          format: int64
+          description: Number of stars
+        pull_count:
+          type: integer
+          format: int64
+          description: Number of pulls
+        last_updated:
+          type: string
+          format: date-time
+          example: "2021-01-05T21:06:53.506400Z"
+          description: ISO 8601 timestamp of when repository was last updated
+        last_modified:
+          type: string
+          format: date-time
+          example: "2021-01-05T21:06:53.506400Z"
+          nullable: true
+          description: ISO 8601 timestamp of when repository was last modified
+        date_registered:
+          type: string
+          format: date-time
+          example: "2021-01-05T21:06:53.506400Z"
+          description: ISO 8601 timestamp of when repository was created
+        collaborator_count:
+          type: integer
+          format: int64
+          description: Number of collaborators
+        affiliation:
+          type: string
+          nullable: true
+          description: Repository affiliation
+        hub_user:
+          type: string
+          nullable: true
+          description: Hub user information
+        has_starred:
+          type: boolean
+          description: Whether the current user has starred this repository
+        full_description:
+          type: string
+          nullable: true
+          description: Full description of the repository
+        permissions:
+          $ref: '#/components/schemas/repo_permissions'
+        media_types:
+          type: array
+          items:
+            type: string
+            nullable: true
+          description: Supported media types
+        content_types:
+          type: array
+          items:
+            type: string
+          description: Supported content types
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/category'
+          description: Repository categories
+        immutable_tags_settings:
+          $ref: '#/components/schemas/immutable_tags_settings'
+        storage_size:
+          type: integer
+          format: int64
+          nullable: true
+          description: Storage size in bytes
+      required:
+        - user
+        - name
+        - namespace
+        - status
+        - status_description
+        - description
+        - is_private
+        - is_automated
+        - star_count
+        - pull_count
+        - last_updated
+        - date_registered
+        - collaborator_count
+        - has_starred
+        - permissions
+        - media_types
+        - content_types
+        - categories
+        - immutable_tags_settings
+    repo_permissions:
+      type: object
+      properties:
+        read:
+          type: boolean
+          description: Read permission
+        write:
+          type: boolean
+          description: Write permission
+        admin:
+          type: boolean
+          description: Admin permission
+      required:
+        - read
+        - write
+        - admin
+    immutable_tags_settings:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Whether immutable tags are enabled
+        rules:
+          type: array
+          items:
+            type: string
+          description: List of immutable tag rules
+      required:
+        - enabled
+        - rules
+    immutable_tags_verify_request:
+      type: object
+      properties:
+        regex:
+          type: string
+          pattern: '^[a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*(\\/[a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*)*$'
+          description: 'Immutable tags rule regex pattern. Must match format: [a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*(\\/[a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*)*'
+          example: 'v.*'
+      required:
+        - regex
+    immutable_tags_verify_response:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+          description: List of tags that match the provided regex pattern
+          example:
+            - 'v1.0.0'
+            - 'v2.1.3'
+            - 'latest'
+      required:
+        - tags
     repository_list_entry:
       type: object
       properties:
@@ -3601,6 +3859,18 @@ components:
               member:
                 type: string
                 example: jonsnow
+    update_repository_immutable_tags_request:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/update_repository_immutable_tags_request"
+    immutable_tags_verify_request:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/immutable_tags_verify_request"
   securitySchemes:
     bearerAuth:
       type: http
