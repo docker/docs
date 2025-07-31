@@ -47,14 +47,13 @@ aliases:
 - /develop/develop-images/build_enhancements/
 ---
 
-Docker Build is one of Docker Engine's most used features. Whenever you are
-creating an image you are using Docker Build. Build is a key part of your
-software development life cycle allowing you to package and bundle your code and
-ship it anywhere.
+Docker Build is one of Docker Engine's most used features. Every time you
+create an image, you use Docker Build. Build is a key part of your software
+development lifecycle that lets you package and bundle your code and ship it
+anywhere.
 
-Docker Build is more than a command for building images, and it's not only about
-packaging your code. It's a whole ecosystem of tools and features that support
-not only common workflow tasks but also provides support for more complex and
+Docker Build is more than a command for building images. It's a complete
+ecosystem of tools and features that supports common workflow tasks and
 advanced scenarios.
 
 {{< grid >}}
