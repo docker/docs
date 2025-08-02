@@ -7,7 +7,13 @@ toc_min: 1
 toc_max: 2
 ---
 
-## Docker Desktop 4.43.0 Security Update: CVE-2025-6587
+## Docker Desktop 4.44.0 security update: CVE-2025-23266
+
+_Last updated July 31, 2025_
+
+We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266), a critical vulnerability affecting the NVIDIA Container Toolkit in CDI mode up to version 1.17.7. Docker Desktop includes version 1.17.8, which is not impacted. However, older versions of Docker Desktop that bundled earlier toolkit versions may be affected if CDI mode was manually enabled. Upgrade to Docker Desktop 4.44 or later to ensure you're using the patched version.
+
+## Docker Desktop 4.43.0 security update: CVE-2025-6587
 
 _Last updated July 03, 2025_
 
