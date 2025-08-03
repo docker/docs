@@ -12,13 +12,13 @@ Using Git HTTPS
 docker buildx bake "https://github.com/docker/cli.git#v20.10.11" --print
 ```
 
-Using GIT SSH
+Using Git SSH
 
 ```console
 docker buildx bake "git@github.com:docker/cli.git#v20.10.11" --print
 ```
 
-Using Raw HTTP/HTTPS
+Using HTTP/HTTPS
 
 ```console
 docker buildx bake "https://raw.githubusercontent.com/docker/cli/v20.10.11/docker-bake.hcl" --print
