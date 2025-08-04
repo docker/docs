@@ -42,6 +42,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - WSL 2 stability improvements.
 - You can now inspect requests and responses to help you diagnose model-related issues in Docker Model Runner.
 - Added the ability to run multiple models and receive a warning on insufficient resources. This avoids Docker Desktop freezing when using big models.
+- Added new MCP clients to the MCP Toolkit: Gemini CLI, Goose.
 - Introduced `--gpu` (Windows only) and `--cors` flags for `docker desktop enable model-runner`.
 - Added a new `docker desktop kubernetes` command to the Docker Desktop CLI.
 - You can now search for specific configuration options within **Settings**.
