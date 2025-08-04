@@ -98,7 +98,7 @@ $ docker scout repo enable --org YOUR_ORG YOUR_ORG/my-dhi-app
    `docker.io/ORG_NAME/dhi-*`. Replace `ORG_NAME` with your organization name.
 8. Select **Save policy**.
 
-#### Step 4: Evaluate policy compliance
+#### Step 5: Evaluate policy compliance
 
 1. Go to the [Docker Scout dashboard](https://scout.docker.com).
 2. Select your organization and navigate to **Images**.
