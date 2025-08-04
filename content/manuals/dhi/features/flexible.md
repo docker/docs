@@ -1,14 +1,15 @@
 ---
-title: Flexible, repository-based pricing
+title: Flexibility through pricing and customization
 linktitle: Flexibility
-description: Understand how Docker Hardened Images give you cost control by charging only for what you mirror and use.
-keywords: docker hardened images pricing, per repo billing, flexible pricing model, mirror image pricing, container pricing model
+description: Learn how Docker Hardened Images give you control over costs and image behavior through repository-based pricing and secure customization.
+keywords: docker hardened images pricing, per repo billing, flexible pricing model, mirror image pricing, container pricing model, customize hardened image
 weight: 30
 ---
 
 Docker Hardened Images are designed not only for security and compliance, but
 also for operational and financial efficiency. With a model that charges per
-repository, you get precise control over what you use and what you pay for.
+repository and tooling that lets you customize images securely, you gain both
+cost control and configuration flexibility.
 
 ## Repository mirroring on your terms
 
@@ -30,15 +31,27 @@ freely choose the best tag for each use case without incurring additional cost.
 This flexibility allows teams to adopt secure images without being limited by
 billing complexity or image count.
 
+## Customize images to fit your environment
+
+In addition to cost flexibility, Docker Hardened Images let you securely
+customize images before use. You can add your own packages, tools, certificates,
+and configuration files using a guided customization workflow in Docker Hub.
+These customizations are securely built and signed, so they integrate with your
+compliance and CI/CD policies.
+
 ## Share access across your team
 
 Once a repository is mirrored, anyone in your organization can pull, verify,
 scan, and run images from it. There are no extra charges based on usage volume.
 You mirror what you need, and your teams use it freely.
 
-## Cost efficiency for platform teams
+## Cost and operational efficiency for platform teams
 
-This model simplifies budgeting for platform and security teams. Rather than
-tracking usage at the individual image or tag level, you manage your spend
-through the repositories you control, aligning security enforcement, team access,
-and cost in one place.
+The Docker Hardened Images model simplifies budgeting for platform and security
+teams. Instead of tracking usage at the image or tag level, you manage spend
+through the repositories you mirror. And since you can customize images within
+Docker Hub itself, everything is in one place, reducing complexity and
+operational overhead.
+
+By aligning repository mirroring, team access, image customization, and cost,
+Docker Hardened Images help you build securely and operate efficiently.

@@ -12,6 +12,10 @@ params:
       description: Learn how to mirror an image into your organization's namespace and optionally push it to another private registry.
       icon: compare_arrows
       link: /dhi/how-to/mirror/
+    - title: Customize a Docker Hardened Image
+      description: Learn how to customize a DHI to suit your organization's needs.
+      icon: settings
+      link: /dhi/how-to/customize/
     - title: Use a Docker Hardened Image
       description: Learn how to pull, run, and reference Docker Hardened Images in Dockerfiles, CI pipelines, and standard development workflows.
       icon: play_arrow
