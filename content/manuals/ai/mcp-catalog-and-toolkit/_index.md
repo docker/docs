@@ -16,7 +16,7 @@ grid:
    icon: hub
    link: /ai/mcp-catalog-and-toolkit/catalog/
  - title: MCP Toolkit
-   description: Learn about the MCP toolkit to manage MCP servers and clients
+   description: Learn about the MCP Toolkit to manage MCP servers and clients
    icon: /icons/toolkit.svg
    link: /ai/mcp-catalog-and-toolkit/toolkit/
 ---

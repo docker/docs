@@ -20,7 +20,7 @@ discovery to local execution.
 - Zero manual setup: No dependency management, runtime configuration, or server setup required.
 - Functions as both an MCP server aggregator and a gateway for clients to access installed MCP servers.
 
-## How the MCP toolkit works
+## How the MCP Toolkit works
 
 MCP introduces two core concepts: MCP clients and MCP servers.
 
@@ -41,19 +41,19 @@ container as the server or in dedicated containers:
 {{< tabs group="" >}}
 {{< tab name="Single container">}}
 
-![Screenshot showing a single-container MCP toolkit setup.](/assets/images/mcp_servers.png)
+![Screenshot showing a single-container MCP Toolkit setup.](/assets/images/mcp_servers.png)
 
 {{< /tab >}}
 {{< tab name="Separate containers">}}
 
-![Screenshot showing a multi-container MCP toolkit setup.](/assets/images/mcp_servers_2.png)
+![Screenshot showing a multi-container MCP Toolkit setup.](/assets/images/mcp_servers_2.png)
 
 {{< /tab >}}
 {{</tabs >}}
 
 ## Security
 
-The Docker MCP toolkit combines passive and active measures to reduce attack
+The Docker MCP Toolkit combines passive and active measures to reduce attack
 surfaces and ensure safe runtime behavior.
 
 ### Passive security

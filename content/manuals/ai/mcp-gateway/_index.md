@@ -107,4 +107,4 @@ To view all the commands and configuration options, go to the [mcp-gateway repos
 
 ## Related pages
 
-- [Docker MCP toolkit and catalog](/manuals/ai/mcp-catalog-and-toolkit/_index.md)
+- [Docker MCP Toolkit and catalog](/manuals/ai/mcp-catalog-and-toolkit/_index.md)
