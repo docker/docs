@@ -7,7 +7,11 @@ aliases:
   - /ai/gordon/mcp/gordon-mcp-server/
 ---
 
-The Docker MCP Toolkit is a gateway that enables seamless setup, management, and execution of containerized MCP servers and their connections to AI agents. It removes the friction from tool usage by offering secure defaults, one-click setup, and support for a growing ecosystem of LLM-based clients. It is the fastest path from MCP tool discovery to local execution.
+The Docker MCP Toolkit is a gateway that lets you set up, manage, and run
+containerized MCP servers and connect them to AI agents. It removes friction
+from tool usage by offering secure defaults, one-click setup, and support for a
+growing ecosystem of LLM-based clients. It is the fastest way from MCP tool
+discovery to local execution.
 
 ## Key features
 
@@ -16,34 +20,33 @@ The Docker MCP Toolkit is a gateway that enables seamless setup, management, and
 - Zero manual setup: No dependency management, runtime configuration, or server setup required.
 - Functions as both an MCP server aggregator and a gateway for clients to access installed MCP servers.
 
-## How the MCP toolkit works
+## How the MCP Toolkit works
 
 MCP introduces two core concepts: MCP clients and MCP servers.
 
-- MCP clients are typically embedded in LLM-based applications, such as
-  the Claude Desktop App. They request resources or actions.
-- MCP servers are launched by the client to perform the requested tasks,
-  using any necessary tools, languages, or processes.
+- MCP clients are typically embedded in LLM-based applications, such as the
+  Claude Desktop app. They request resources or actions.
+- MCP servers are launched by the client to perform the requested tasks, using
+  any necessary tools, languages, or processes.
 
 Docker standardizes the development, packaging, and distribution of
 applications, including MCP servers. By packaging MCP servers as containers,
-Docker eliminates issues related to isolation and environment differences. Users
+Docker eliminates issues related to isolation and environment differences. You
 can run a container directly, without managing dependencies or configuring
 runtimes.
 
-Depending on the MCP server, the tools it provides may run within the same container
-as the server or in dedicated containers:
-
+Depending on the MCP server, the tools it provides might run within the same
+container as the server or in dedicated containers:
 
 {{< tabs group="" >}}
 {{< tab name="Single container">}}
 
-![Visualisation of the MCP toolkit](/assets/images/mcp_servers.png)
+![Screenshot showing a single-container MCP Toolkit setup.](/assets/images/mcp_servers.png)
 
 {{< /tab >}}
 {{< tab name="Separate containers">}}
 
-![Visualisation of the MCP toolkit](/assets/images/mcp_servers_2.png)
+![Screenshot showing a multi-container MCP Toolkit setup.](/assets/images/mcp_servers_2.png)
 
 {{< /tab >}}
 {{</tabs >}}
@@ -134,7 +137,7 @@ can interact with the installed MCP servers, turning the MCP Toolkit into a gate
 To install a client:
 
 1. In Docker Desktop, select **MCP Toolkit** and select the **Clients** tab.
-2. Find the client of your choice and select **Connect**.
+1. Find the client of your choice and select **Connect**.
 
 Your client can now interact with the MCP Toolkit.
 
@@ -146,10 +149,10 @@ You can simply install these 2 MCP servers in the MCP Toolkit,
 and add Claude Desktop as a client:
 
 1. From the **MCP Toolkit** menu, select the **Catalog** tab and find the **Puppeteer** server and add it.
-2. Repeat for the **GitHub Official** server.
-3. From the **Clients** tab, select **Connect** next to **Claude Desktop**. Restart
+1. Repeat for the **GitHub Official** server.
+1. From the **Clients** tab, select **Connect** next to **Claude Desktop**. Restart
    Claude Desktop if it's running, and it can now access all the servers in the MCP Toolkit.
-4. Within Claude Desktop, run a test by submitting the following prompt using the Sonnet 3.5 model:
+1. Within Claude Desktop, run a test by submitting the following prompt using the Sonnet 3.5 model:
 
    ```text
    Take a screenshot of docs.docker.com and then invert the colors
