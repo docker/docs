@@ -20,6 +20,10 @@ params:
       description: Learn how to pull, run, and reference Docker Hardened Images in Dockerfiles, CI pipelines, and standard development workflows.
       icon: play_arrow
       link: /dhi/how-to/use/
+    - title: Manage Docker Hardened Images
+      description: Learn how to manage your mirrored and customized Docker Hardened Images in your organization.
+      icon: reorder
+      link: /dhi/how-to/manage/
     - title: Migrate an existing application to use Docker Hardened Images
       description: Follow a step-by-step guide to update your Dockerfiles and adopt Docker Hardened Images for secure, minimal, and production-ready builds.
       icon: directions_run
