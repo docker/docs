@@ -35,7 +35,7 @@ To manage your mirrored DHI repositories:
 
 To manage your customized DHI repositories:
 
-1. Go to the [Docker Hub](https://hub.docker.com) and sign in.
+1. Go to [Docker Hub](https://hub.docker.com) and sign in.
 2. Select **My Hub**.
 3. In the namespace drop-down, select your organization.
 4. Select **DHI** > **Management**.
