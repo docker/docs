@@ -650,15 +650,6 @@ $ ln -s /Applications/Docker.app/Contents/Resources/cli-plugins/docker-model ~/.
 
 Once linked, rerun the command.
 
-### No safeguard for running oversized models
-
-Currently, Docker Model Runner doesn't include safeguards to prevent you from
-launching models that exceed your system's available resources. Attempting to
-run a model that is too large for the host machine may result in severe
-slowdowns or may render the system temporarily unusable. This issue is
-particularly common when running LLMs without sufficient GPU memory or system
-RAM.
-
 ### No consistent digest support in Model CLI
 
 The Docker Model CLI currently lacks consistent support for specifying models by image digest. As a temporary workaround, you should refer to models by name instead of digest.
