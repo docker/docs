@@ -15,7 +15,13 @@ surface, making it more difficult for an attacker to gain control or escalate
 privileges inside the container.
 
 Hardening also involves applying best practices like running as a non-root user,
-reducing writable surfaces, and ensuring consistency through immutability.
+reducing writable surfaces, and ensuring consistency through immutability. While
+[Docker Official
+Images](../../docker-hub/image-library/trusted-content.md#docker-official-images)
+and [Docker Verified Publisher
+Images](../../docker-hub/image-library/trusted-content.md#verified-publisher-images)
+follow best practices for security, they may not be as hardened as Docker
+Hardened Images, as they are designed to support a broader range of use cases.
 
 ## Why is it important?
 
