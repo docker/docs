@@ -214,11 +214,11 @@ The recommended approach to set this up is the following:
 
 > [!NOTE]
 >
-> When using `KubernetesImagesRepository` and [Enhanced Container Isolation (ECI)](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/_index.md)
+> In Docker Desktop versions 4.43 or earlier, when using `KubernetesImagesRepository` and [Enhanced Container Isolation (ECI)](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/_index.md)
 > is enabled, add the following images to the [ECI Docker socket mount image list](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md#enhanced-container-isolation):
 >
-> * [imagesRepository]/desktop-cloud-provider-kind:*
-> * [imagesRepository]/desktop-containerd-registry-mirror:*
+> `[imagesRepository]/desktop-cloud-provider-kind:`
+> `[imagesRepository]/desktop-containerd-registry-mirror:`
 >
 > These containers mount the Docker socket, so you must add the images to the ECI images list. If not,
 > ECI will block the mount and Kubernetes won't start.
