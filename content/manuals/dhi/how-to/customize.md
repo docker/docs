@@ -24,7 +24,7 @@ To customize a Docker Hardened Image, follow these steps:
 2. Select **My Hub**.
 3. In the namespace drop-down, select your organization that has a mirrored DHI
    repository.
-4. Select **DHI** > **Management**.
+4. Select **Hardened Images** > **Management**.
 5. For the mirrored DHI repository you want to customize, select the menu icon in the far right column.
 6. Select **Customize**.
 
@@ -100,7 +100,7 @@ To edit or delete a Docker Hardened Image customization, follow these steps:
 1. Sign in to [Docker Hub](https://hub.docker.com).
 2. Select **My Hub**.
 3. In the namespace drop-down, select your organization that has a mirrored DHI.
-4. Select **DHI** > **Management**.
+4. Select **Hardened Images** > **Management**.
 5. Select **Customizations**.
 
 6. For the customized DHI repository you want to manage, select the menu icon in the far right column.
