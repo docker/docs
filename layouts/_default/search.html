@@ -13,7 +13,7 @@
           placeholder="Search…" tabindex="0" />
         <div class="flex min-w-fit flex-grow flex-col items-center">
           <p class="mb-1">Not finding what you're looking for? Try</p>
-          <button class="topbar-button open-kapa-widget bg-blue-400/95 border-blue-300 hover:bg-blue-400/90">
+          <button onclick="askAI('search-page-input')" class="topbar-button bg-blue-400/95 border-blue-300 hover:bg-blue-400/90">
             <span>Ask&nbsp;AI</span>
             <span class="icon-svg">
               {{ partial "utils/svg.html" "/icons/sparkle.svg" }}
