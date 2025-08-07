@@ -11,16 +11,29 @@ aliases:
 - /network/drivers/bridge/
 ---
 
+A Docker bridge network has an IPv4 subnet and, optionally, an IPv6 subnet.
+Each container connected to the bridge network has a network interface with
+addresses in the network's subnets. By default, it:
+- Allows unrestricted network access to containers in the network from
+  the host, and from other containers connected to the same bridge network.
+- Blocks access from containers in other networks and from outside the
+  Docker host.
+- Uses masquerading to give containers external network access. Devices on
+  the host's external networks only see the IP address of the Docker host.
+- Supports port publishing, where network traffic is forwarded between
+  container ports and ports on host IP addresses. The published ports
+  can be accessed from outside the Docker host, on its IP addresses.
+
 In terms of networking, a bridge network is a Link Layer device
 which forwards traffic between network segments. A bridge can be a hardware
 device or a software device running within a host machine's kernel.
 
 In terms of Docker, a bridge network uses a software bridge which lets
 containers connected to the same bridge network communicate, while providing
-isolation from containers that aren't connected to that bridge network. The
-Docker bridge driver automatically installs rules in the host machine so that
-containers on different bridge networks can't communicate directly with each
-other.
+isolation from containers that aren't connected to that bridge network. By
+default, the Docker bridge driver automatically installs rules in the host
+machine so that containers connected to different bridge networks can only
+communicate with each other using published ports.
 
 Bridge networks apply to containers running on the same Docker daemon host.
 For communication among containers running on different Docker daemon hosts, you
