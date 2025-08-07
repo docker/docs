@@ -1,7 +1,6 @@
 command: docker buildx debug
 short: Start debugger
 long: Start debugger
-usage: docker buildx debug
 pname: docker buildx
 plink: docker_buildx.yaml
 cname:
@@ -26,17 +25,6 @@ options:
       hidden: false
       experimental: false
       experimentalcli: true
-      kubernetes: false
-      swarm: false
-    - option: progress
-      value_type: string
-      default_value: auto
-      description: |
-        Set type of progress output (`auto`, `plain`, `tty`, `rawjson`) for the monitor. Use plain to show container output
-      deprecated: false
-      hidden: false
-      experimental: false
-      experimentalcli: false
       kubernetes: false
       swarm: false
 inherited_options:

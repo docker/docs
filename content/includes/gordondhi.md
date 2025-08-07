@@ -1,5 +1,5 @@
 1. Ensure Gordon is [enabled](/manuals/ai/gordon.md#enable-ask-gordon).
-1. In Gordon's Toolbox, ensure Gordon's [Developer MCP toolkit is enabled](/manuals/ai/gordon/mcp/built-in-tools.md#configuration).
+1. In Gordon's Toolbox, ensure Gordon's [Developer MCP Toolkit is enabled](/manuals/ai/gordon/mcp/built-in-tools.md#configuration).
 1. In the terminal, navigate to the directory containing your Dockerfile.
 1. Start a conversation with Gordon:
    ```bash

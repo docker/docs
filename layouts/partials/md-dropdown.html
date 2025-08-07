@@ -57,19 +57,7 @@
           <div class="text-base">Ask questions with Docs AI</div>
         </div>
       </button>
-       <button
-        onclick="openInChatGPT()"
-        data-heap-id="search-docs-ai-button"
-        class="sub-button"
-      >
-        <span class="icon-svg mt-[2px] text-base leading-none">
-          {{ partial "icon" "/icons/openai.svg" }}
-        </span>
-        <div class="leading-tight">
-          <div class="text-base">Open in ChatGPT</div>
-        </div>
-      </button>
-
+      {{ if eq hugo.Environment "production" }}
        <button
         onclick="openInClaude()"
         data-heap-id="search-docs-ai-button"
@@ -82,11 +70,12 @@
           <div class="text-base">Open in Claude</div>
         </div>
       </button>
+      {{ end }}
 
     </div>
   </details>
 
-  <script>
+<script>
     function getCurrentPlaintextUrl() {
       const url = window.location.href.split("#")[0].replace(/\/$/, "");
       return `${url}/index.md`;
@@ -131,41 +120,11 @@
       }
     }
 
-    function openInChatGPT() {
-      fetch(getCurrentPlaintextUrl())
-        .then((response) => response.text())
-        .then((text) => {
-          const encodedText = encodeURIComponent(text);
-          const chatGPTUrl = `https://chat.openai.com/?q=${encodedText}`;
-          window.open(chatGPTUrl, "_blank");
-        })
-        .catch((err) => {
-          console.error("Error opening in ChatGPT:", err);
-        });
-    }
-
     function openInClaude() {
-      fetch(getCurrentPlaintextUrl())
-        .then((response) => response.text())
-        .then((text) => {
-          const encodedText = encodeURIComponent(text);
-        const claudeUrl = `https://claude.ai/new?q=${encodedText}`;https://claude.ai/new?q=%22hey%22
-        window.open(claudeUrl, '_blank');
-        })
-        .catch((err) => {
-          console.error("Error opening in Claude:", err);
-        });
+      const markdownUrl = getCurrentPlaintextUrl();
+      const prompt = `Read ${markdownUrl} so I can ask questions about it.`;
+      const encodedText = encodeURIComponent(prompt);
+      const claudeUrl = `https://claude.ai/new?q=${encodedText}`;
+      window.open(claudeUrl, '_blank');
     }
-
-    document.addEventListener("click", function (event) {
-      const dropdown = document.getElementById("markdownDropdown");
-
-      if (!dropdown) return;
-
-      const isClickInside = dropdown.contains(event.target);
-
-      if (!isClickInside && dropdown.hasAttribute("open")) {
-        dropdown.removeAttribute("open");
-      }
-    });
   </script>

@@ -424,10 +424,51 @@ build:
   privileged: true
 ```
 
+### `provenance`
+
+{{< summary-bar feature_name="Compose provenance" >}} 
+
+`provenance` configures the builder to add a [provenance attestation](https://slsa.dev/provenance/v0.2#schema) to the published image. 
+
+The value can be either a boolean to enable/disable provenance attestation, or a key=value string to set provenance configuration. You can
+use this to select the level of detail to be included in the provenance attestation by setting the `mode` parameter.
+
+```yaml
+build:
+  context: .
+  provenance: true
+```
+
+```yaml
+build:
+  context: .
+  provenance: mode=max
+```
+
 ### `pull`
 
 `pull` requires the image builder to pull referenced images (`FROM` Dockerfile directive), even if those are already
 available in the local image store.
+
+### `sbom`
+
+{{< summary-bar feature_name="Compose sbom" >}}
+
+`sbom` configures the builder to add a [provenance attestation](https://slsa.dev/provenance/v0.2#schema) to the published image. 
+The value can be either a boolean to enable/disable sbom attestation, or a key=value string to set SBOM generator configuration. This let you
+select an alternative SBOM generator image (see https://github.com/moby/buildkit/blob/master/docs/attestations/sbom-protocol.md)
+
+```yaml
+build:
+  context: .
+  sbom: true
+```
+
+```yaml
+build:
+  context: .
+  sbom: generator=docker/scout-sbom-indexer:latest # Use an alternative SBOM generator
+```
 
 ### `secrets`
 

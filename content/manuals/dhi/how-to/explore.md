@@ -28,7 +28,7 @@ To explore Docker Hardened Images (DHI):
 1. Go to [Docker Hub](https://hub.docker.com) and sign in.
 2. Select **My Hub**.
 3. In the namespace drop-down, select your organization that has access to DHI.
-4. Select **DHI catalog**.
+4. Select **DHI** > **Catalog**.
 
 On the DHI page, you can browse images, search images, or filter images by
 category.
@@ -40,7 +40,7 @@ To view repository details:
 1. Go to [Docker Hub](https://hub.docker.com) and sign in.
 2. Select **My Hub**.
 3. In the namespace drop-down, select your organization that has access to DHI.
-4. Select **DHI catalog**.
+4. Select **DHI** > **Catalog**.
 5. Select a repository in the DHI catalog list.
 
 The repository details page provides the following:
@@ -67,14 +67,14 @@ To explore image variants:
 1. Go to [Docker Hub](https://hub.docker.com) and sign in.
 2. Select **My Hub**.
 3. In the namespace drop-down, select your organization that has access to DHI.
-4. Select **DHI catalog**.
+4. Select **DHI** > **Catalog**.
 5. Select a repository in the DHI catalog list.
 6. Select **Tags**.
 
 The **Tags** page provides the following information:
 
 - Tags: A list of all available tags, also known as image variants.
-- Compliance: Lists relevant compliance designations. For example, `FIPS`.
+- Compliance: Lists relevant compliance designations. For example, `FIPS` or `STIG`.
 - Distribution: The distribution that the variant is based on. For example, `debian 12` or `alpine 3.21`.
 - Package manager: The package manager that is available in the variant. For example, `apt`, `apk`, or `-` (no package manager).
 - Shell: The shell that is available in the variant. For example, `bash`, `busybox`, or `-` (no shell).
@@ -98,7 +98,7 @@ To explore the details of an image variant:
 1. Go to [Docker Hub](https://hub.docker.com) and sign in.
 2. Select **My Hub**.
 3. In the namespace drop-down, select your organization that has access to DHI.
-4. Select **DHI catalog**.
+4. Select **DHI** > **Catalog**.
 5. Select a repository in the DHI catalog list.
 6. Select **Tags**.
 7. Select the image variant's tag in the table.

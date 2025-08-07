@@ -17,7 +17,9 @@ aliases:
 weight: 220
 ---
 
-This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases. 
+<!-- vale off -->
+
+This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases.
 
 Releases are gradually rolled out to ensure quality control. If the latest version is not yet available to you, allow some time — updates typically become available within a week of the release date.
 
@@ -28,6 +30,69 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 > [!WARNING]
 >
 > If you're experiencing malware detection issues on Mac, follow the steps documented in [docker/for-mac#7527](https://github.com/docker/for-mac/issues/7527).
+
+## 4.44.0
+
+{{< release-date date="2025-08-07" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.44.0" build_path="/201307/" >}}
+
+### New
+
+- WSL 2 stability improvements.
+- You can now inspect requests and responses to help you diagnose model-related issues in Docker Model Runner.
+- Added the ability to run multiple models and receive a warning on insufficient resources. This avoids Docker Desktop freezing when using big models.
+- Added new MCP clients to the MCP Toolkit: Gemini CLI, Goose.
+- Introduced `--gpu` (Windows only) and `--cors` flags for `docker desktop enable model-runner`.
+- Added a new `docker desktop kubernetes` command to the Docker Desktop CLI.
+- You can now search for specific configuration options within **Settings**.
+- Apple Virtualization is now the default VMM for better performance and QEMU Virtualization is removed. See [blog post](https://www.docker.com/blog/docker-desktop-for-mac-qemu-virtualization-option-to-be-deprecated-in-90-days/).
+- Performance and stability improvements to the DockerVMM.
+
+### Upgrades
+
+- [Docker Compose v2.39.1](https://github.com/docker/compose/releases/tag/v2.39.1)
+- [Docker Buildx v0.26.1](https://github.com/docker/buildx/releases/tag/v0.26.1)
+- [Docker Engine v28.3.2](https://docs.docker.com/engine/release-notes/28/#2832)
+- [Docker Scout CLI v1.18.2](https://github.com/docker/scout-cli/releases/tag/v1.18.2)
+- [Docker Model CLI v0.1.36](https://github.com/docker/model-cli/releases/tag/v0.1.36)
+- [Docker Desktop CLI v0.2.0](/manuals/desktop/features/desktop-cli.md)
+
+### Security 
+
+We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266), a critical vulnerability affecting the NVIDIA Container Toolkit in CDI mode up to version 1.17.7. Docker Desktop includes version 1.17.8, which is not impacted. However, older versions of Docker Desktop that bundled earlier toolkit versions may be affected if CDI mode was manually enabled. Uprade to Docker Desktop 4.44 or later to ensure you're using the patched version.
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed an issue pulling images with zstd differential layers when the containerd image store is enabled.
+- Fixed a bug causing containers launching  with the `--restart` flag to not restart properly when using Enhanced Container Isolation.
+- Improved interaction between [Kubernetes custom registry images](/manuals/desktop/features/kubernetes.md#configuring-a-custom-image-registry-for-kubernetes-control-plane-images) and Enhanced Container Isolation (ECI), so the [ECI Docker Socket image list](/enterprise/security/hardened-desktop/enhanced-container-isolation/config/#image-list) no longer needs to be manually updated when using a custom registry for Kubernetes control plane images.
+- Fixed a bug where a Docker Desktop Kubernetes cluster in kind mode fails to start after restarting Docker Desktop if the user is required to be signed in but is currently signed out.
+- Fixed a bug that prevented the mounting of MCP secrets into containers when [Enhanced Container Isolation](/enterprise/security/hardened-desktop/enhanced-container-isolation/) is enabled.
+- Fixed a bug preventing the use of `--publish-all` when `--publish` was already specified.
+- Fixed a bug causing the **Images** view to scroll infinitely. Fixes [#7725](https://github.com/docker/for-mac/issues/7725).
+- Fixed a bug which caused the **Volumes** tab to be blank while in Resource Saver mode.
+- Updated terms of service text on first launch.
+- More robustness in parsing newly released GGUF formats.
+
+#### For Mac
+
+- Fixed disk corruption on DockerVMM when reclaiming disk space.
+- Fixed regression since 4.42.0 on DockerVMM by re-introducing performance boost on general usage.
+- Removed QEMU hypervisor and switched to Apple Virtualization as the new default. See [blog post](https://www.docker.com/blog/docker-desktop-for-mac-qemu-virtualization-option-to-be-deprecated-in-90-days/).
+- Fixed a bug preventing Traefik from autodetecting containers' ports. Fixes [docker/for-mac#7693](https://github.com/docker/for-mac/issues/7693).
+- Fixed a bug that caused port mappings to break when a container was connected to or disconnected from a network after it was started. Fixes [docker/for-mac#7693](https://github.com/docker/for-mac/issues/7693#issuecomment-3131427879).
+- Removed eBPF which blocked `io_uring`. To enable `io_uring` in a container, use `--security-opt seccomp=unconfined`. Fixes [docker/for-mac#7707](https://github.com/docker/for-mac/issues/7707).
+
+#### For Windows
+
+- Re-added `docker-users` group to the named pipe security descriptors.
+- Fixed an installer crash when the current user has no `SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall` registry key.
+- Fixed a bug where Docker Desktop could leak a `com.docker.build` process and fail to start. Fixed [docker/for-win#14840](https://github.com/docker/for-win/issues/14840).
+- Fixed a bug that was preventing Docker Desktop Kubernetes in kind mode from starting when using WSL with `cgroups v1` and Enhanced Container Isolation (ECI) is enabled.
+- Fixed a typo in the WSL installation URL in the UI.
 
 ## 4.43.2
 
@@ -71,7 +136,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - [Docker Engine v28.3.0](https://docs.docker.com/engine/release-notes/28/#2830)
 - [NVIDIA Container Toolkit v1.17.8](https://github.com/NVIDIA/nvidia-container-toolkit/releases/tag/v1.17.8)
 
-### Security 
+### Security
 
 - Fixed [CVE-2025-6587](https://www.cve.org/CVERecord?id=CVE-2025-6587) where sensitive system environment variables were included in Docker Desktop diagnostic logs, allowing for potential secret exposure.
 
@@ -82,7 +147,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Fixed a bug causing `docker start` to drop the container's port mappings for a container already running.
 - Fixed a bug that prevented container ports to be displayed on the GUI when a container was re-started.
 - Fixed a bug that caused Docker API `500 Internal Server Error for API route and version` error application start.
-- The settings **Apply & restart** button is now labeled **Apply**. The VM is no longer restarted when applying changed settings. 
+- The settings **Apply & restart** button is now labeled **Apply**. The VM is no longer restarted when applying changed settings.
 - Fixed a bug where the disk would be corrupted if Docker is shutdown during a `fsck`.
 - Fixed a bug causing an incorrect `~/.kube/config` in WSL2 when using a `kind` Kubernetes cluster.
 - Return an explicit error to a Docker API / `docker` CLI command if Docker Desktop has been manually paused.

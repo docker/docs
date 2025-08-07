@@ -11,7 +11,39 @@ aliases:
 - /compose/release-notes/
 ---
 
+<!-- vale off -->
+
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
+
+## 2.39.1
+
+{{< release-date date="2025-07-24" >}}
+
+### Bug fixes and enhancements
+
+- Added metrics to monitor `models` usage
+
+### Update
+
+- Dependencies upgrade: bump compose-go to v2.8.1
+
+## 2.39.0
+
+{{< release-date date="2025-07-24" >}}
+
+### Bug fixes and enhancements
+
+- Added `--models` flag to `config` command to list models
+- Added `--since` and `--until` flags to `events`
+- Introduced `provenance` and `sbom` attributes to `build` section
+- Fixed `bridge convert` issue on Windows 
+- Fixed multiple issues with `bake` builds
+
+### Update
+
+- Dependencies upgrade: bump docker engine and cli to v28.3.2
+- Dependencies upgrade: bump buildx to v0.26.1
+- Dependencies upgrade: bump compose-go to v2.8.0
 
 ## 2.38.2
 
@@ -52,7 +84,7 @@ For more detailed information, see the [release notes in the Compose repo](https
 - Added `volumes` command
 - Removed `publish` limitation on bind mounts
 - Fixed an issue mounting the docker socket to container which doesn't need it
-- Fixed an issue with bake hanging on output 
+- Fixed an issue with bake hanging on output
 
 ### Update
 

@@ -423,6 +423,19 @@ samples:
       - python
       - aiml
       - agentic-ai
+  - title: Langchaingo Brave Search Example - Model Context Protocol (MCP)
+    url: https://github.com/docker/compose-for-agents/tree/main/langchaingo
+    description: >
+      This example demonstrates how to create a Go Model Context Protocol
+      (MCP) client that communicates with the Brave Search MCP Server. The
+      application shows how to build an MCP client that enables natural language
+      interactions with Brave Search, allowing you to perform internet searches
+      through a conversational interface. This example uses the official Go SDK
+      for Model Context Protocol servers and clients, to set up the MCP client.
+    services:
+      - golang
+      - aiml
+      - agentic-ai
   - title: Spring AI Brave Search Example - Model Context Protocol (MCP)
     url: https://github.com/docker/compose-for-agents/tree/main/spring-ai
     description: >

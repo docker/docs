@@ -7,11 +7,17 @@ toc_min: 1
 toc_max: 2
 ---
 
-## Docker Desktop 4.43.0 Security Update: CVE-2025-6587
+## Docker Desktop 4.44.0 security update: CVE-2025-23266
+
+_Last updated July 31, 2025_
+
+We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266), a critical vulnerability affecting the NVIDIA Container Toolkit in CDI mode up to version 1.17.7. Docker Desktop includes version 1.17.8, which is not impacted. However, older versions of Docker Desktop that bundled earlier toolkit versions may be affected if CDI mode was manually enabled. Upgrade to Docker Desktop 4.44 or later to ensure you're using the patched version.
+
+## Docker Desktop 4.43.0 security update: CVE-2025-6587
 
 _Last updated July 03, 2025_
 
-A vulnerability in Docker Desktop was fixed on July 03 in the [4.43.0](/manuals/desktop/release-notes.md#4430) release: 
+A vulnerability in Docker Desktop was fixed on July 03 in the [4.43.0](/manuals/desktop/release-notes.md#4430) release:
 
 - Fixed [CVE-2025-6587](https://www.cve.org/CVERecord?id=CVE-2025-6587) where sensitive system environment variables were included in Docker Desktop diagnostic logs, allowing for potential secret exposure.
 
@@ -36,7 +42,7 @@ Two remote code execution (RCE) vulnerabilities in Docker Desktop related to Doc
 - [CVE-2024-8695](https://www.cve.org/cverecord?id=CVE-2024-8695): A remote code execution (RCE) vulnerability via crafted extension description/changelog could be abused by a malicious extension in Docker Desktop before 4.34.2. [Critical]
 - [CVE-2024-8696](https://www.cve.org/cverecord?id=CVE-2024-8696): A remote code execution (RCE) vulnerability via crafted extension publisher-url/additional-urls could be abused by a malicious extension in Docker Desktop before 4.34.2. [High]
 
-No existing extensions exploiting the vulnerabilities were found in the Extensions Marketplace. The Docker team will be closely monitoring and diligently reviewing any requests for publishing new extensions.
+No existing extensions exploiting the vulnerabilities were found in the Extensions Marketplace. The Docker Team will be closely monitoring and diligently reviewing any requests for publishing new extensions.
 
 We strongly encourage you to update to Docker Desktop [4.34.2](/manuals/desktop/release-notes.md#4342). If you are unable to update promptly, you can [disable Docker Extensions](/manuals/extensions/settings-feedback.md#turn-on-or-turn-off-extensions) as a workaround.
 
@@ -54,7 +60,7 @@ At Docker, we want the experience to be the most secure for our developers and o
 
 _Last updated June, 2024_
 
-Docker is pleased to announce that we have received our SOC 2 Type 2 attestation and ISO 27001 certification with no exceptions or major non-conformities. 
+Docker is pleased to announce that we have received our SOC 2 Type 2 attestation and ISO 27001 certification with no exceptions or major non-conformities.
 
 Security is a fundamental pillar to Docker’s operations, which is embedded into our overall mission and company strategy. Docker’s products are core to our user community and our SOC 2 Type 2 attestation and ISO 27001 certification demonstrate Docker’s ongoing commitment to security to our user base.
 
@@ -66,7 +72,7 @@ _Last updated February 2, 2024_
 
 We at Docker prioritize the security and integrity of our software and the trust of our users. Security researchers at Snyk Labs identified and reported four security vulnerabilities in the container ecosystem. One of the vulnerabilities, [CVE-2024-21626](https://scout.docker.com/v/CVE-2024-21626), concerns the runc container runtime, and the other three affect BuildKit ([CVE-2024-23651](https://scout.docker.com/v/CVE-2024-23651), [CVE-2024-23652](https://scout.docker.com/v/CVE-2024-23652), and [CVE-2024-23653](https://scout.docker.com/v/CVE-2024-23653)). We want to assure our community that our team, in collaboration with the reporters and open source maintainers, has been diligently working on coordinating and implementing necessary remediations.
 
-We are committed to maintaining the highest security standards. We have published patched versions of runc, BuildKit, and Moby on January 31 and released an update for Docker Desktop on February 1 to address these vulnerabilities.  Additionally, our latest BuildKit and Moby releases included fixes for [CVE-2024-23650](https://scout.docker.com/v/CVE-2024-23650) and [CVE-2024-24557](https://scout.docker.com/v/CVE-2024-24557), discovered respectively by an independent researcher and through Docker’s internal research initiatives.
+We are committed to maintaining the highest security standards. We have published patched versions of runc, BuildKit, and Moby on January 31 and released an update for Docker Desktop on February 1 to address these vulnerabilities. Additionally, our latest BuildKit and Moby releases included fixes for [CVE-2024-23650](https://scout.docker.com/v/CVE-2024-23650) and [CVE-2024-24557](https://scout.docker.com/v/CVE-2024-24557), discovered respectively by an independent researcher and through Docker’s internal research initiatives.
 
 |                        | Versions Impacted         |
 |:-----------------------|:--------------------------|
@@ -87,7 +93,7 @@ If you are using affected versions of runc, BuildKit, Moby, or Docker Desktop, m
 | `Docker Desktop`       | >= [4.27.1](/manuals/desktop/release-notes.md#4271)                 |
 
 
-If you are unable to update to an unaffected version promptly, follow these best practices to mitigate risk: 
+If you are unable to update to an unaffected version promptly, follow these best practices to mitigate risk:
 
 * Only use trusted Docker images (such as [Docker Official Images](../docker-hub/image-library/trusted-content.md#docker-official-images)).
 * Don’t build Docker images from untrusted sources or untrusted Dockerfiles.
@@ -135,7 +141,7 @@ In Moby <= v25.0.1 and <= v24.0.8, the classic builder cache system is prone to 
 
 _The issue has been fixed in Moby >= v25.0.2 and >= v24.0.9._
 
-### How are Docker products affected? 
+### How are Docker products affected?
 
 #### Docker Desktop
 
@@ -167,7 +173,7 @@ _Last updated October 2022_
 
 [CVE-2022-42889](https://nvd.nist.gov/vuln/detail/CVE-2022-42889) has been discovered in the popular Apache Commons Text library. Versions of this library up to but not including 1.10.0 are affected by this vulnerability.
 
-We strongly encourage you to update to the latest version of [Apache Commons Text](https://commons.apache.org/proper/commons-text/download_text.cgi). 
+We strongly encourage you to update to the latest version of [Apache Commons Text](https://commons.apache.org/proper/commons-text/download_text.cgi).
 
 ### Scan images on Docker Hub
 
@@ -183,13 +189,13 @@ A number of [Docker Official Images](../docker-hub/image-library/trusted-content
 Apache Commons Text. The following lists Docker Official Images that
 may contain the vulnerable versions of Apache Commons Text:
 
-- [bonita](https://hub.docker.com/_/bonita) 
+- [bonita](https://hub.docker.com/_/bonita)
 - [Couchbase](https://hub.docker.com/_/couchbase)
-- [Geonetwork](https://hub.docker.com/_/geonetwork) 
+- [Geonetwork](https://hub.docker.com/_/geonetwork)
 - [neo4j](https://hub.docker.com/_/neo4j)
 - [sliverpeas](https://hub.docker.com/_/sliverpeas)
-- [solr](https://hub.docker.com/_/solr) 
-- [xwiki](https://hub.docker.com/_/xwiki) 
+- [solr](https://hub.docker.com/_/solr)
+- [xwiki](https://hub.docker.com/_/xwiki)
 
 We have updated
 Apache Commons Text in these images to the latest version. Some of these images may not be

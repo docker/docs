@@ -13,7 +13,7 @@ weight: 40
 
 {{< summary-bar feature_name="SSO" >}}
 
-Group mapping lets you sync user groups from your identity provider (IdP) with teams in your Docker organization. This automates team membership management, keeping your Docker teams up to date based on changes in your IdP. You can use group mapping once you have configured [single sign-on (SSO)](../single-sign-on/_index.md).
+Group mapping lets you sync user groups from your identity provider (IdP) with teams in your Docker organization. This automates team membership management, keeping your Docker Teams up to date based on changes in your IdP. You can use group mapping once you have configured [single sign-on (SSO)](../single-sign-on/_index.md).
 
 > [!TIP]
 >
@@ -27,13 +27,13 @@ It's important to note that Docker uses the user's email address as a unique ide
 
 ## Use group mapping
 
-To assign users to Docker teams through your IdP, you must create groups in your IdP following the naming pattern: `organization:team`. For example, if your organization is called "moby" and you want to manage the "developers" team, the group name in your IdP should be `moby:developers`. In this example, any user added to this group in your IdP is automatically assigned to the "developers" team in Docker.
+To assign users to Docker Teams through your IdP, you must create groups in your IdP following the naming pattern: `organization:team`. For example, if your organization is called "moby" and you want to manage the "developers" team, the group name in your IdP should be `moby:developers`. In this example, any user added to this group in your IdP is automatically assigned to the "developers" team in Docker.
 
 You can also use this format to assign users to multiple organizations. For example, to add a user to the "backend" team in the "moby" organization and the "desktop" team in the "whale" organization, the group names would be `moby:backend` and `whale:desktop`.
 
 > [!TIP]
 >
-> Match the group names in your IdP with your Docker teams. When groups are synced, Docker creates a team if it doesn’t already exist.
+> Match the group names in your IdP with your Docker Teams. When groups are synced, Docker creates a team if it doesn’t already exist.
 
 The following lists the supported group mapping attributes:
 

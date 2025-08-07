@@ -125,10 +125,14 @@ Compose post start:
   requires: Docker Compose [2.30.0](/manuals/compose/releases/release-notes.md#2300) and later
 Compose pre stop:
   requires: Docker Compose [2.30.0](/manuals/compose/releases/release-notes.md#2300) and later
+Compose provenance:
+  requires: Docker Compose [2.39.0](/manuals/compose/releases/release-notes.md#2390) and later
 Compose uts:
   requires: Docker Compose [2.15.1](/manuals/compose/releases/release-notes.md#2151) and later
 Composefile include:
   requires: Docker Compose [2.20.0](/manuals/compose/releases/release-notes.md#2200) and later
+Compose sbom:
+  requires: Docker Compose [2.39.0](/manuals/compose/releases/release-notes.md#2390) and later
 containerd:
   availability: Experimental
 Dev Environments:
@@ -153,6 +157,8 @@ Docker Desktop CLI update:
   requires: Docker Desktop 4.39 and later
 Docker Desktop CLI logs:
   requires: Docker Desktop 4.39 and later
+Docker Desktop CLI kubernetes:
+  requires: Docker Desktop 4.44 and later
 Docker GitHub Copilot:
   availability: Early Access
 Docker Hardened Images:

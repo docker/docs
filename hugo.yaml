@@ -135,12 +135,12 @@ params:
   # Latest version of the Docker Engine API
   latest_engine_api_version: "1.51"
   # Latest version of Docker Engine
-  docker_ce_version: "28.3.2"
+  docker_ce_version: "28.3.3"
   # Previous version of the Docker Engine
   # (Used to show e.g., "latest" and "latest"-1 in engine install examples
-  docker_ce_version_prev: "28.3.1"
+  docker_ce_version_prev: "28.3.2"
   # Latest Docker Compose version
-  compose_version: "v2.38.2"
+  compose_version: "v2.39.1"
   # Latest BuildKit version
   buildkit_version: "0.23.2"
 
@@ -318,6 +318,8 @@ module:
       mounts:
         - source: docs/bake-reference.md
           target: content/manuals/build/bake/reference.md
+        - source: docs/bake-stdlib.md
+          target: content/manuals/build/bake/stdlib.md
 
     # Docker CLI
     - path: github.com/docker/cli

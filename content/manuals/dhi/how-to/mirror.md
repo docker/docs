@@ -31,7 +31,7 @@ To mirror a Docker Hardened Image repository:
 1. Go to [Docker Hub](https://hub.docker.com) and sign in.
 2. Select **My Hub**.
 3. In the namespace drop-down, select your organization that has access to DHI.
-4. Select **DHI catalog**.
+4. Select **DHI** > **Catalog**.
 5. Select a DHI repository to view its details.
 6. Select **Mirror to repository** and follow the on-screen instructions.
 
@@ -116,8 +116,12 @@ repository.
 
  To stop mirroring an image repository:
 
-1. Go to the mirrored repository in your organization's namespace.
-2. Select **Stop mirroring**.
+1. Go to [Docker Hub](https://hub.docker.com) and sign in.
+2. Select **My Hub**.
+3. In the namespace drop-down, select your organization that has access to DHI.
+4. Select **DHI** > **Management**.
+5. In the far right column of the repository you want to stop mirroring, select the menu icon.
+6. Select **Stop mirroring**.
 
 Once you have stopped mirroring a repository, you can choose another DHI
 repository to mirror.

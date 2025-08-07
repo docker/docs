@@ -144,8 +144,8 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 ### Known issues
 
-- The `clock_gettime64` system call returns `EPERM` rather than `ENOSYS` 
-in i386 images. To work around this issue, disable `seccomp` by using 
+- The `clock_gettime64` system call returns `EPERM` rather than `ENOSYS`
+in i386 images. To work around this issue, disable `seccomp` by using
 the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for-win/issues/8326).
 
 ## Docker Desktop Community 2.3.6.2
@@ -710,7 +710,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 - Docker Desktop now supports a configurable user timeout for VMs on slower machines. [docker/for-win#4393](https://github.com/docker/for-win/issues/4393)
 - Enabled Windows features such as Hyper-V and Containers during installation, thereby reducing the need for another restart after installation.
 
-## Docker Desktop Community 2.1.0.0 
+## Docker Desktop Community 2.1.0.0
 2019-07-30
 
 
@@ -728,14 +728,14 @@ This release contains Kubernetes security improvements. Note that your local Kub
 #### New
 
  - Introduced a new user interface for the Docker Desktop **Settings** menu.
- - The **Restart** and **Reset** options are now available on the **Troubleshoot** menu. 
+ - The **Restart** and **Reset** options are now available on the **Troubleshoot** menu.
 
 #### Bug fixes and minor changes
 
  - Changed the host's kubernetes context to ensure `docker run -v .kube:kube ... kubectl` works.
  - Restricted the `cluster-admin` role on local Kubernetes cluster to `kube-system` namespace.
  - Fixed Kubernetes installation with VPNkit subnet.
- - Fixed an issue where Docker Desktop restarts when a user logs out of Windows and logs back in, which results in retaining the    
+ - Fixed an issue where Docker Desktop restarts when a user logs out of Windows and logs back in, which results in retaining the
    exported ports on containers.
  - Reduced the VM startup time. `swap` is not created every time a virtual machine boots.
  - Fixed a bug which caused Docker Desktop to crash when a user cancels switching the version using Windows User Account Control (UAC)    settings.
@@ -795,16 +795,16 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 * New
 
   - App: Docker CLI plugin to configure, share, and install applications
-  
+
     - Extend Compose files with metadata and parameters
     - Reuse the same application across multiple environments (Development/QA/Staging/Production)
     - Multi-orchestrator installation (Swarm or Kubernetes)
     - Push/Pull/Promotion/Signing supported for application, with the same workflow as images
     - Fully CNAB compliant
     - Full support for Docker Contexts
-    
+
   - Buildx (Tech Preview): Docker CLI plugin for extended build capabilities with BuildKit
-  
+
     - Familiar UI from docker build
     - Full BuildKit capabilities with container driver
     - Multiple builder instance support
@@ -847,7 +847,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 * New
   - Rebranded UI
-  
+
 * Bug fixes and minor changes
   - Kubernetes: use default maximum number of pods for kubelet. [docker/for-mac#3453](https://github.com/docker/for-mac/issues/3453)
 
@@ -860,7 +860,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
   - [Kubernetes 1.13.0](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.13.md#v1130)
   - [Kitematic 0.17.6](https://github.com/docker/kitematic/releases/tag/v0.17.6)
   - Golang 1.10.6, fixes CVEs: [CVE-2018-16875](https://www.cvedetails.com/cve/CVE-2018-16875), [CVE-2018-16873](https://www.cvedetails.com/cve/CVE-2018-16873) and [CVE-2018-16874](https://www.cvedetails.com/cve/CVE-2018-16874)
-  
+
   WARNING: If you have an existing Kubernetes cluster created with Docker Desktop, this upgrade will reset the cluster. If you need to back up your Kubernetes cluster or persistent volumes you can use [Ark](https://github.com/heptio/ark).
 
 * Bug fixes and minor changes
@@ -880,7 +880,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
   - [Docker compose 1.23.2](https://github.com/docker/compose/releases/tag/1.23.2)
 
 * Bug fixes and minor changes
-  - Compose: Fixed a bug where build context URLs would fail to build on Windows. Fixes [docker/for-win#2918](https://github.com/docker/for-win/issues/2918) 
+  - Compose: Fixed a bug where build context URLs would fail to build on Windows. Fixes [docker/for-win#2918](https://github.com/docker/for-win/issues/2918)
 
 ### Docker Community Edition 2.0.0.0-win77 2018-11-14
 
@@ -891,7 +891,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
   - [Kitematic 0.17.5](https://github.com/docker/kitematic/releases/tag/v0.17.5)
 
 * Bug fixes and minor changes
-  - Windows Containers: Fix group daemon option settings. Fixes [docker/for-win#2647](https://github.com/docker/for-win/issues/2647) 
+  - Windows Containers: Fix group daemon option settings. Fixes [docker/for-win#2647](https://github.com/docker/for-win/issues/2647)
   - Windows Containers: Improve host.docker.internal ip resolution
   - Do not try to update samba share mounts when using Windows containers
   - Improved dns update too verbose in logs
@@ -909,7 +909,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 * Deprecation
   - Removed support of AUFS
-  
+
 * Bug fixes and minor changes
   - LCOW does not anymore need --platform flag on multi-arch images
   - Better WCOW host.docker.internal resolution on host, don't rewrite it if not modified. From [docker/for-win#1976](https://github.com/docker/for-win/issues/1976)
@@ -977,13 +977,13 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
   - [Docker 18.05.0-ce](https://github.com/docker/docker-ce/releases/tag/v18.05.0-ce)
   - [Docker compose 1.21.2](https://github.com/docker/compose/releases/tag/1.21.2)
 
-* New 
+* New
   - Allow orchestrator selection from the UI in the "Kubernetes" pane, to allow "docker stack" commands to deploy to swarm clusters, even if Kubernetes is enabled in Docker for Windows.
 
 * Bug fixes and minor changes
   - Fix restart issue when using Windows fast startup on latest 1709 Windows updates. Fixes [docker/for-win#1741](https://github.com/docker/for-win/issues/1741), [docker/for-win#1741](https://github.com/docker/for-win/issues/1741)
   - DNS name `host.docker.internal` can be used for host resolution from Windows containers.  Fixes [docker/for-win#1976](https://github.com/docker/for-win/issues/1976)
-  - Fix broken link in diagnostics window. 
+  - Fix broken link in diagnostics window.
 
 ### Docker Community Edition 18.05.0-ce-rc1-win63 2018-04-26
 
@@ -995,7 +995,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
   - Fix startup issue due to incompatibility with other programs (like Razer Synapse 3). Fixes [docker/for-win#1723](https://github.com/docker/for-win/issues/1723)
   - Fix Kubernetes hostPath translation for PersistentVolumeClaim (PVC). Previously failing PVCs must be deleted and recreated. Fixes [docker/for-win#1758](https://github.com/docker/for-win/issues/1758)
   - Fix Kubernetes status when resetting to factory defaults.
-  
+
 
 ### Docker Community Edition 18.04.0-ce-win62 2018-04-12
 
@@ -1009,7 +1009,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
   - [Docker 18.04.0-ce-rc2](https://github.com/docker/docker-ce/releases/tag/v18.04.0-ce-rc2)
   - [Kubernetes 1.9.6](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.9.md#v196). If Kubernetes is enabled, the upgrade will be performed automatically when starting Docker for Windows.
 
-* New 
+* New
   - Enable ceph & rbd modules in LinuxKit VM.
 
 * Bug fixes and minor changes

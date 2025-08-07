@@ -10,6 +10,45 @@ toc_max: 2
 This page contains information about the new features, improvements, and bug
 fixes in [Docker Buildx](https://github.com/docker/buildx).
 
+## 0.26.1
+
+{{< release-date date="2025-07-22" >}}
+
+The full release notes for this release are available
+[on GitHub](https://github.com/docker/buildx/releases/tag/v0.26.1).
+
+### Bug fixes
+
+- Fix regression when validating compose files with Bake. [docker/buildx#3329](https://github.com/docker/buildx/pull/3329)
+
+## 0.26.0
+
+{{< release-date date="2025-07-21" >}}
+
+The full release notes for this release are available
+[on GitHub](https://github.com/docker/buildx/releases/tag/v0.26.0).
+
+### New
+
+- New experimental version of the DAP debugger has been added with a new `dap build` helper command. The new feature can be tried with the [DockerDX VSCode extension](https://github.com/docker/vscode-extension). [docker/buildx#3235](https://github.com/docker/buildx/pull/3235)
+- Compose compatibility has been updated to v2.7.1. [docker/buildx#3282](https://github.com/docker/buildx/pull/3282)
+
+### Enhancements
+
+- Bake command now supports pattern-matching target names with wildcards. [docker/buildx#3280](https://github.com/docker/buildx/pull/3280)
+- Bake command now supports setting files through environment variable `BUILDX_BAKE_FILE`. [docker/buildx#3242](https://github.com/docker/buildx/pull/3242)
+- Bake now ignores unrelated fields when parsing and validating compose files. [docker/buildx#3292](https://github.com/docker/buildx/pull/3292)
+- `history` commands will automatically bootstrap the builder. [docker/buildx#3300](https://github.com/docker/buildx/pull/3300)
+- Add SLSA v1 support to `history inspect` command. [docker/buildx#3245](https://github.com/docker/buildx/pull/3245)
+- Kubernetes driver option `buildkit-root-volume-memory` to use memory mount for the root volume. [docker/buildx#3253](https://github.com/docker/buildx/pull/3253)
+
+### Bug fixes
+
+- Fix possible error from `imagetools` commands when accessing registries that don't return content length. [docker/buildx#3316](https://github.com/docker/buildx/pull/3316)
+- Fix duplicated command descriptions from help output. [docker/buildx#3298](https://github.com/docker/buildx/pull/3298)
+- Fix `history inspect attachment` to not require an argument. [docker/buildx#3264](https://github.com/docker/buildx/pull/3264)
+- Fix resolving environment variables from `.env` file when building compose files with Bake. [docker/buildx#3275](https://github.com/docker/buildx/pull/3275), [docker/buildx#3276](https://github.com/docker/buildx/pull/3276), [docker/buildx#3322](https://github.com/docker/buildx/pull/3322)
+
 ## 0.25.0
 
 {{< release-date date="2025-06-17" >}}
