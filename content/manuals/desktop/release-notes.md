@@ -33,9 +33,9 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ## 4.44.0
 
-{{< release-date date="2025-08-06" >}}
+{{< release-date date="2025-08-07" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.44.0" build_path="/200873/" >}}
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.44.0" build_path="/201307/" >}}
 
 ### New
 
@@ -75,6 +75,7 @@ We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266
 - Fixed a bug causing the **Images** view to scroll infinitely. Fixes [#7725](https://github.com/docker/for-mac/issues/7725).
 - Fixed a bug which caused the **Volumes** tab to be blank while in Resource Saver mode.
 - Updated terms of service text on first launch.
+- Docker Model Runner now supports GPT OSS models.
 
 #### For Mac
 
