@@ -69,7 +69,7 @@ runs a container in that network:
 
 ```console
 $ docker network create -d bridge my-net
-$ docker run --network=my-net -it --name=container3 busybox
+$ docker run --network=my-net -it busybox
 ```
 
 ### Drivers
