@@ -45,16 +45,17 @@
       </nav>
     </div>
     <div class="flex min-w-0 flex-grow items-center justify-end gap-4">
-      {{ partialCached "search-bar.html" "-" }}
+      <div class="topbar-button overflow-visible">
+         {{ partialCached "search-bar.html" "-" }}
+      </div>
       <button
         @click="open = false"
-        class="open-kapa-widget flex items-center gap-1 rounded-sm px-2 py-1 transition hover:bg-white/20 dark:text-white"
+        class="topbar-button open-kapa-widget"
       >
         <span>Ask&nbsp;AI</span>
-        <img
-          src="{{ (resources.Get "images/ai-stars.svg").Permalink }}"
-          alt="AI Stars"
-        />
+        <span class="icon-svg">
+          {{ partial "utils/svg.html" "/icons/sparkle.svg" }}
+        </span>
       </button>
     </div>
   </div>

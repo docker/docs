@@ -9,9 +9,20 @@
   @click.outside="open = false;"
   @keyup.escape.window="open = false"
   id="search-bar"
-  class="relative hidden min-w-0 items-center rounded-sm bg-white/10 p-2 sm:flex sm:w-full xl:w-[400px]"
+  class="relative hidden min-w-0 items-center sm:flex sm:w-full xl:w-[300px] flex"
 >
-  {{ (resources.Get "images/search-ai.svg").Content | safeHTML }}
+  <div id="search-bar-keyboard-shortcuts" x-cloak :class="open && 'hidden'"
+    class="hidden rounded-sm text-sm md:flex md:items-center"
+    >
+    <div>
+      <span x-show="navigator.platform == 'MacIntel'" class="icon-svg icon-sm">{{ partialCached "icon"
+        "keyboard_command_key" "keyboard_command_key" }}</span>
+      <span x-show="navigator.platform != 'MacIntel'" class="icon-svg icon-sm">{{ partialCached "icon"
+        "keyboard_control_key" "keyboard_control_key" }}</span>
+    </div>
+    <div><span class="align-middle">K</span></div>
+  </div>
+
   <input
     x-ref="searchBarInput"
     type="search"
@@ -29,37 +40,33 @@
             break;
           }
         }"
-    class="min-w-0 flex-grow bg-transparent px-2 text-white outline-hidden placeholder:text-white"
-    placeholder="Search"
+    class="min-w-0 flex-grow px-2 text-white outline-hidden order-1"
     tabindex="0"
   />
-  <div
-    x-cloak
-    :class="open && 'hidden'"
-    class="hidden items-center rounded-sm border border-white px-1 text-sm lg:flex"
-  >
-    <div class="-mt-0.5">
-      <span x-show="navigator.platform == 'MacIntel'" class="icon-svg icon-sm"
-        >{{ partialCached "icon" "keyboard_command_key" "keyboard_command_key" }}</span
-      >
-      <span x-show="navigator.platform != 'MacIntel'" class="icon-svg icon-sm"
-        >{{ partialCached "icon" "keyboard_control_key" "keyboard_control_key" }}</span
-      >
-    </div>
-    <span>K</span>
-  </div>
-  <div x-cloak :class="open || 'hidden'">
-    <button
-      @click="$refs.searchBarInput.value = ''; open = false"
-      class="text-white hover:text-white"
-    >
-      <span class="icon-svg">{{ partialCached "icon" "close" "close" }}</span>
-    </button>
+  <div id="search-bar-icon" class="order-2">
+    <span class="icon-svg-stroke icon-sm">
+          {{ partial "utils/svg.html" "/icons/search.svg" }}
+        </span>
   </div>
   <div
     x-show="open"
     x-cloak
-    class="bg-background-light dark:bg-background-dark absolute top-full right-0 z-50 w-screen max-w-xl rounded-sm px-6 py-4 shadow-lg"
+    x-ref="dropdown"
+    x-init="$nextTick(() => {
+      if (open) {
+        const rect = $refs.searchBarRef.getBoundingClientRect();
+        $el.style.top = (rect.bottom + window.scrollY) + 'px';
+        $el.style.left = rect.left + 'px';
+        $el.style.width = Math.max(rect.width, 400) + 'px';
+      }
+    })"
+    x-effect="if (open) {
+      const rect = $refs.searchBarRef.getBoundingClientRect();
+      $el.style.top = (rect.bottom + window.scrollY) + 'px';
+      $el.style.left = rect.left + 'px';
+      $el.style.width = Math.max(rect.width, 300) + 'px';
+    }"
+    class="bg-background-light dark:bg-background-dark fixed z-[999] max-w-xl rounded-sm px-6 py-4 shadow-lg"
   >
     <div id="search-bar-results">
       {{- $emptyState := `<div class="p-2 text-gray-500 dark:text-gray-400">Start typing to search… or try <button @click="open=false" class="open-kapa-widget link">Ask AI</button></div>` }}
