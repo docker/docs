@@ -9,10 +9,10 @@
   @click.outside="open = false;"
   @keyup.escape.window="open = false"
   id="search-bar"
-  class="relative hidden min-w-0 items-center sm:flex sm:w-full xl:w-[300px] flex"
+  class="relative items-center flex"
 >
   <div id="search-bar-keyboard-shortcuts" x-cloak :class="open && 'hidden'"
-    class="hidden rounded-sm text-sm md:flex md:items-center"
+    class="sm:hidden rounded-sm text-sm md:flex md:items-center"
     >
     <div>
       <span x-show="navigator.platform == 'MacIntel'" class="icon-svg icon-sm">{{ partialCached "icon"
@@ -44,7 +44,7 @@
     tabindex="0"
   />
   <div id="search-bar-icon" class="order-2">
-    <span class="icon-svg-stroke icon-sm">
+    <span class="icon-svg-stroke">
           {{ partial "utils/svg.html" "/icons/search.svg" }}
         </span>
   </div>
@@ -55,16 +55,16 @@
     x-init="$nextTick(() => {
       if (open) {
         const rect = $refs.searchBarRef.getBoundingClientRect();
-        $el.style.top = (rect.bottom + window.scrollY) + 'px';
+        $el.style.top = (rect.bottom + window.scrollY + 9) + 'px';
         $el.style.left = rect.left + 'px';
         $el.style.width = Math.max(rect.width, 400) + 'px';
       }
     })"
     x-effect="if (open) {
       const rect = $refs.searchBarRef.getBoundingClientRect();
-      $el.style.top = (rect.bottom + window.scrollY) + 'px';
+      $el.style.top = (rect.bottom + window.scrollY + 9) + 'px';
       $el.style.left = rect.left + 'px';
-      $el.style.width = Math.max(rect.width, 300) + 'px';
+      $el.style.width = Math.max(rect.width, 400) + 'px';
     }"
     class="bg-background-light dark:bg-background-dark fixed z-[999] max-w-xl rounded-sm px-6 py-4 shadow-lg"
   >
@@ -82,7 +82,7 @@
           termFrequency: 0.2,
           pageLength: 0.75,
           termSaturation: 1.4,
-          termSimilarity: 6.0,
+          termSimilarity: 6.0
         },
       });
 
