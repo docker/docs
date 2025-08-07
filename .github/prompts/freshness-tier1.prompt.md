@@ -12,6 +12,6 @@ how fresh and up to date it is. Apply the following:
 5. Ensure all the components formatted correctly.
 6. Improve the SEO keywords.
 7. If you find numbered lists, make sure their numbering only uses 1's.
-8. Keep line length to a maximum of approximately 80 characters and do not add a space character at the end of lines.
+8. Ensure each line is limited to 80 characters.
 
 Do your best and don't be lazy.

@@ -138,48 +138,33 @@
 }
 
 @utility prose {
-  .highlight,
-  :not(pre) > code {
+  table:not(.lntable) code {
+    overflow-wrap: unset;
+    white-space: nowrap;
+  }
+
+  /* code in `inline code` style */
+  :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *)),
+  a>code {
     font-size: 0.875em;
-    border: 1px solid;
-    border-radius: 0.25rem; /* theme("spacing.1") fallback */
-    border: none;
-    background: transparent;
+    font-weight: 400 !important;
+    border: 1px solid !important;
+    border-radius: 0.25rem;
+    border: none !important;
+    padding: 4px !important;
+    background: var(--tw-prose-code-bg) !important;
+    .dark & {
+      background: var(--tw-prose-code-bg-dark) !important;
+    }
     &::before,
     &::after {
       content: none !important;
     }
   }
 
-  :not(pre) > code {
-    background: var(--tw-prose-code-bg);
-    .dark & {
-      background: var(--tw-prose-code-bg-dark);
-    }
-    display: inline-block;
-    margin: 0;
-    font-weight: 400;
-    overflow-wrap: anywhere;
-    padding: 0 4px;
-  }
-
-  table:not(.lntable) code {
-    overflow-wrap: unset;
-    white-space: nowrap;
-  }
-
-  /* Indented code blocks */
+  /* code blocks with unrecognized languages*/
   pre:not(.chroma) {
-    @apply my-4 overflow-x-auto p-3;
-    font-size: 0.875em;
-    border: 1px solid;
-    border-radius: 0.25rem; /* theme("spacing.1") fallback */
-    background: var(--color-white-main);
-    border-color: var(--color-gray-300);
-    .dark & {
-      background: var(--color-gray-200);
-      border-color: var(--color-gray-400);
-    }
+    @apply overflow-x-auto p-3;
   }
 
   .highlight {

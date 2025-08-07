@@ -38,7 +38,9 @@ Docker CE. Docker Engine is also available for Windows, macOS, and Linux,
 through Docker Desktop. For instructions on how to install Docker Desktop,
 see: [Overview of Docker Desktop](/manuals/desktop/_index.md).
 
-## Supported platforms
+## Installation procedures for supported platforms
+
+Click on a platform's link to view the relevant installation procedure.
 
 | Platform                                       | x86_64 / amd64 | arm64 / aarch64 | arm (32-bit) | ppc64le | s390x |
 | :--------------------------------------------- | :------------: | :-------------: | :----------: | :-----: | :---: |

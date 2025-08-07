@@ -25,7 +25,7 @@ namespace on Docker Hub.
 1. Go to [Docker Hub](https://hub.docker.com) and sign in.
 2. Select **My Hub** in the top navigation.
 3. In the left sidebar, choose your organization that has DHI access.
-4. In the left sidebar, select **DHI catalog**.
+4. In the left sidebar, select **DHI** > **Catalog**.
 
    ![Docker Hub sidebar showing DHI catalog](./images/dhi-catalog.png)
 

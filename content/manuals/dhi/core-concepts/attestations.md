@@ -61,7 +61,9 @@ tooling or security platforms.
 While every DHI variant includes a set of attestations, the attestations may
 vary based on the image variant. For example, some images may include a STIG
 scan attestation. The following table is a comprehensive list of all
-attestations that may be included with a DHI:
+attestations that may be included with a DHI. To see which attestations are
+available for a specific image variant, you can [view the image variant
+details](../how-to/explore.md#view-image-variant-details) in Docker Hub.
 
 | Attestation type           | Description                                                                                                                                                                                                                     | Predicate type URI                                 |
 |----------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------|
@@ -79,6 +81,7 @@ attestations that may be included with a DHI:
 | SLSA provenance            | A standard [SLSA](https://slsa.dev/) provenance statement describing how the image was built, including build tool, parameters, and source.                                               | `https://slsa.dev/provenance/v0.2`                |
 | SLSA verification summary  | A summary attestation indicating the image's compliance with SLSA requirements.                                                                                                          | `https://slsa.dev/verification_summary/v1`        |
 | SPDX SBOM                  | An SBOM in [SPDX](https://spdx.dev/) format, widely adopted in open-source ecosystems.                                                                                                   | `https://spdx.dev/Document`                       |
+| FIPS compliance            | An attestation that verifies the image uses FIPS 140-validated cryptographic modules.                              | `https://docker.com/dhi/fips/v0.1`                |
 
 ## View and verify attestations
 
