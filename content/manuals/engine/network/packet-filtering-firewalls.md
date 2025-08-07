@@ -25,10 +25,15 @@ implement functionality including port publishing, and NAT/masquerading.
 
 ## Firewall backend
 
-Docker Engine creates its firewall rules using iptables,
-see [Docker with iptables](./firewall-iptables.md).
+By default, Docker Engine creates its firewall rules using iptables,
+see [Docker with iptables](./firewall-iptables.md). It also has
+support for nftables, see [Docker with nftables](./firewall-nftables.md).
 
+For bridge networks, iptables and nftables have the same functionality.
 
+Docker Engine option `firewall-backend` can be used to select whether
+iptables or nftables is used. See
+[daemon configuration](https://docs.docker.com/reference/cli/dockerd/).
 
 ## Docker on a router
 
@@ -46,11 +51,17 @@ To stop Docker from setting the forwarding policy to "drop", include
 `"ip-forward-no-drop": true` in `/etc/docker/daemon.json`, or add option
 `--ip-forward-no-drop` to the `dockerd` command line.
 
+> [!NOTE]
+>
+> With the experimental nftables backend, Docker does not enable IP forwarding
+> itself, and it will not create a default "drop" nftables policy. See
+> [Migrating from iptables to nftables](./firewall-nftables.md#migrating-from-iptables-to-nftables).
+
 ## Prevent Docker from manipulating firewall rules
 
 Setting the `iptables` or `ip6tables` keys to `false` in
 [daemon configuration](https://docs.docker.com/reference/cli/dockerd/), will
-prevent Docker from creating most of its `iptables` rules. But,
+prevent Docker from creating most of its `iptables` or `nftables` rules. But,
 this option is not appropriate for most users, it is likely to break
 container networking for the Docker Engine.
 
