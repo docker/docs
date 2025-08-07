@@ -10,6 +10,7 @@
     x-ref="searchBarInput"
     type="search"
     id="search-bar-input"
+    placeholder="Search"
     @focus="open = true;"
     @keyup.enter.prevent="window.location.href = '/search/?q=' + $event.target.value;"
     @keyup.escape.prevent="open = false;"
@@ -31,31 +32,25 @@
           {{ partial "utils/svg.html" "/icons/search.svg" }}
         </span>
   </div>
-  <div
-    id="search-bar-dropdown"
-    x-show="open"
-    x-cloak
-    x-ref="dropdown"
-    x-init="$nextTick(() => {
-      if (open) {
+  <div id="search-bar-dropdown" x-show="open" x-cloak x-ref="dropdown" x-init="$nextTick(() => {
+       if (open) {
         const containerRect = document.getElementById('search-bar-container').getBoundingClientRect();
         const rect = $refs.searchBarRef.getBoundingClientRect();
         $el.style.top = (rect.bottom + window.scrollY + 9) + 'px';
-        $el.style.left = (containerRect.right - Math.max(rect.width, 400)) + 'px';
-        $el.style.width = Math.max(rect.width, 400) + 'px';
+        $el.style.left = (containerRect.right - 600) + 'px';
+        $el.style.width = '600px';
       }
-    })"
-    x-effect="if (open) {
-      const containerRect = document.getElementById('search-bar-container').getBoundingClientRect();
-      const rect = $refs.searchBarRef.getBoundingClientRect();
-      $el.style.top = (rect.bottom + window.scrollY + 9) + 'px';
-      $el.style.left = (containerRect.right - Math.max(rect.width, 400)) + 'px';
-      $el.style.width = Math.max(rect.width, 400) + 'px';
-    }"
-    class="bg-background-light dark:bg-background-dark fixed z-[999] max-w-xl rounded-sm px-6 py-4 shadow-lg"
-  >
+      })" x-effect="if (open) {
+        const containerRect = document.getElementById('search-bar-container').getBoundingClientRect();
+        const rect = $refs.searchBarRef.getBoundingClientRect();
+        $el.style.top = (rect.bottom + window.scrollY + 9) + 'px';
+        $el.style.left = (containerRect.right - 600) + 'px';
+        $el.style.width = '600px';
+      }"
+    class="font-medium text-gray-400 dark:text-gray-200 bg-gray-50 dark:bg-gray-900 rounded-sm mt-1 border-1 border-gray-100 dark:border-gray-700 fixed z-[999] max-w-xl p-6 shadow-md">
     <div id="search-bar-results">
-      {{- $emptyState := `<div class="p-2 text-gray-500 dark:text-gray-400">Start typing to search or try <button onclick="askAI('search-bar-input')" class="link">Ask AI</button></div>` }}
+      {{- $emptyState := `<div>Start typing to search or try <button onclick="askAI('search-bar-input')" class="link">Ask
+          AI</button>.</div>` }}
       {{- $emptyState | safe.HTML }}
       <!-- results -->
     </div>
