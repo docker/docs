@@ -4,20 +4,8 @@
   @click.outside="open = false;"
   @keyup.escape.window="open = false"
   id="search-bar"
-  class="relative w-40 items-center flex"
+  class="relative w-32 items-center flex"
 >
-  <div id="search-bar-keyboard-shortcuts"
-    class="text-sm flex items-center"
-    >
-    <div>
-      <span x-show="navigator.platform == 'MacIntel'" class="icon-svg icon-sm">{{ partialCached "icon"
-        "keyboard_command_key" "keyboard_command_key" }}</span>
-      <span x-show="navigator.platform != 'MacIntel'" class="icon-svg icon-sm">{{ partialCached "icon"
-        "keyboard_control_key" "keyboard_control_key" }}</span>
-    </div>
-    <div><span class="align-middle">K</span></div>
-  </div>
-
   <input
     x-ref="searchBarInput"
     type="search"
