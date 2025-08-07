@@ -99,6 +99,19 @@ For options, see the [Docker Engine docs](https://docs.docker.com/engine/network
 
 ## Attributes
 
+### `attachable`
+
+If `attachable` is set to `true`, then standalone containers should be able to attach to this network, in addition to services.
+If a standalone container attaches to the network, it can communicate with services and other standalone containers
+that are also attached to the network.
+
+```yml
+networks:
+  mynet1:
+    driver: overlay
+    attachable: true
+```
+
 ### `driver`
 
 `driver` specifies which driver should be used for this network. Compose returns an error if the
@@ -126,19 +139,6 @@ networks:
 ```
 
 Consult the [network drivers documentation](/manuals/engine/network/_index.md) for more information.
-
-### `attachable`
-
-If `attachable` is set to `true`, then standalone containers should be able to attach to this network, in addition to services.
-If a standalone container attaches to the network, it can communicate with services and other standalone containers
-that are also attached to the network.
-
-```yml
-networks:
-  mynet1:
-    driver: overlay
-    attachable: true
-```
 
 ### `enable_ipv4`
 
