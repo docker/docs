@@ -141,45 +141,10 @@ networks.
 
 Use the `--publish` or `-p` flag to make a port available outside the host,
 and to containers in other bridge networks.
-This creates a firewall rule in the host,
-mapping a container port to a port on the Docker host to the outside world.
-Here are some examples:
-
-| Flag value                      | Description                                                                                                                                             |
-| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `-p 8080:80`                    | Map port `8080` on the Docker host to TCP port `80` in the container.                                                                                   |
-| `-p 192.168.1.100:8080:80`      | Map port `8080` on the Docker host IP `192.168.1.100` to TCP port `80` in the container.                                                                |
-| `-p 8080:80/udp`                | Map port `8080` on the Docker host to UDP port `80` in the container.                                                                                   |
-| `-p 8080:80/tcp -p 8080:80/udp` | Map TCP port `8080` on the Docker host to TCP port `80` in the container, and map UDP port `8080` on the Docker host to UDP port `80` in the container. |
-
-> [!IMPORTANT]
->
-> Publishing container ports is insecure by default. Meaning, when you publish
-> a container's ports it becomes available not only to the Docker host, but to
-> the outside world as well.
->
-> If you include the localhost IP address (`127.0.0.1`, or `::1`) with the
-> publish flag, only the Docker host and its containers can access the
-> published container port.
->
-> ```console
-> $ docker run -p 127.0.0.1:8080:80 -p '[::1]:8080:80' nginx
-> ```
->
-> > [!WARNING]
-> >
-> > In releases older than 28.0.0, hosts within the same L2 segment (for example,
-> > hosts connected to the same network switch) can reach ports published to localhost.
-> > For more information, see
-> > [moby/moby#45610](https://github.com/moby/moby/issues/45610)
-
-Ports on the host's IPv6 addresses will map to the container's IPv4 address
-if no host IP is given in a port mapping, the bridge network is IPv4-only,
-and `--userland-proxy=true` (default).
 
 For more information about port mapping, including how to disable it and use
 direct routing to containers, see
-[packet filtering and firewalls](./packet-filtering-firewalls.md).
+[port publishing](./port-publishing.md).
 
 ## IP address and hostname
 
