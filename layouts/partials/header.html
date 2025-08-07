@@ -26,7 +26,8 @@
           </div>
         </a>
       </div>
-      <nav class="mt-1 hidden md:block">
+      <nav class="mt-1 hidden md:flex lg:flex xl:flex 2xl:flex">
+        {{/* main menu */}}
         <ul class="flex text-sm md:text-base lg:gap-4">
           {{ range site.Menus.main }}
             <li
@@ -44,8 +45,8 @@
         </ul>
       </nav>
     </div>
-    <div class="flex min-w-0  items-center justify-end gap-4">
-      <div class="topbar-button overflow-visible">
+    <div id="buttons" class="flex min-w-0 items-center justify-end gap-4 flex-shrink-0">
+      <div class="topbar-button">
          {{ partialCached "search-bar.html" "-" }}
       </div>
       <button

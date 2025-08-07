@@ -1,18 +1,13 @@
-<!-- search button, mobile (link off to the search page for now) -->
-<a href="/search" class="sm:hidden">
-  <span class="icon-svg">{{ partialCached "icon" "search" "search" }}</span>
-</a>
-<!-- search button -->
 <div
   x-ref="searchBarRef"
   x-data="{ open: false }"
   @click.outside="open = false;"
   @keyup.escape.window="open = false"
   id="search-bar"
-  class="relative items-center flex"
+  class="relative w-40 items-center flex"
 >
-  <div id="search-bar-keyboard-shortcuts" x-cloak :class="open && 'hidden'"
-    class="sm:hidden rounded-sm text-sm md:flex md:items-center"
+  <div id="search-bar-keyboard-shortcuts"
+    class="text-sm flex items-center"
     >
     <div>
       <span x-show="navigator.platform == 'MacIntel'" class="icon-svg icon-sm">{{ partialCached "icon"
@@ -40,7 +35,7 @@
             break;
           }
         }"
-    class="min-w-0 flex-grow px-2 text-white outline-hidden order-1"
+    class="flex-grow px-2 order-1 min-w-0 border-none outline-none focus:outline-none"
     tabindex="0"
   />
   <div id="search-bar-icon" class="order-2">
@@ -56,14 +51,14 @@
       if (open) {
         const rect = $refs.searchBarRef.getBoundingClientRect();
         $el.style.top = (rect.bottom + window.scrollY + 9) + 'px';
-        $el.style.left = rect.left + 'px';
+        $el.style.left = (rect.right - Math.max(rect.width, 400)) + 'px';
         $el.style.width = Math.max(rect.width, 400) + 'px';
       }
     })"
     x-effect="if (open) {
       const rect = $refs.searchBarRef.getBoundingClientRect();
       $el.style.top = (rect.bottom + window.scrollY + 9) + 'px';
-      $el.style.left = rect.left + 'px';
+      $el.style.left = (rect.right - Math.max(rect.width, 400)) + 'px';
       $el.style.width = Math.max(rect.width, 400) + 'px';
     }"
     class="bg-background-light dark:bg-background-dark fixed z-[999] max-w-xl rounded-sm px-6 py-4 shadow-lg"
