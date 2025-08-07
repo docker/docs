@@ -32,22 +32,14 @@
           {{ partial "utils/svg.html" "/icons/search.svg" }}
         </span>
   </div>
-  <div id="search-bar-dropdown" x-show="open" x-cloak x-ref="dropdown" x-init="$nextTick(() => {
-       if (open) {
-        const containerRect = document.getElementById('search-bar-container').getBoundingClientRect();
-        const rect = $refs.searchBarRef.getBoundingClientRect();
-        $el.style.top = (rect.bottom + window.scrollY + 9) + 'px';
-        $el.style.left = (containerRect.right - 600) + 'px';
-        $el.style.width = '600px';
-      }
-      })" x-effect="if (open) {
-        const containerRect = document.getElementById('search-bar-container').getBoundingClientRect();
-        const rect = $refs.searchBarRef.getBoundingClientRect();
-        $el.style.top = (rect.bottom + window.scrollY + 9) + 'px';
-        $el.style.left = (containerRect.right - 600) + 'px';
-        $el.style.width = '600px';
-      }"
-    class="font-medium text-gray-400 dark:text-gray-200 bg-gray-50 dark:bg-gray-900 rounded-sm mt-1 border-1 border-gray-100 dark:border-gray-700 fixed z-[999] max-w-xl p-6 shadow-md">
+  <div id="search-bar-dropdown" x-show="open" x-cloak x-ref="dropdown"
+    class="font-medium text-gray-400 dark:text-gray-200 bg-gray-50 dark:bg-gray-900 rounded-sm mt-4 border-1 border-gray-100 dark:border-gray-700 fixed z-[999] w-[500px] p-6 shadow-md"
+    x-effect="if (open) {
+      const containerRect = document.getElementById('search-bar-container').getBoundingClientRect();
+      const rect = $refs.searchBarRef.getBoundingClientRect();
+      $el.style.top = (rect.bottom + window.scrollY - 2) + 'px';
+      $el.style.right = (window.innerWidth - containerRect.right - 15) + 'px';
+    }">
     <div id="search-bar-results">
       {{- $emptyState := `<div>Start typing to search or try <button onclick="askAI('search-bar-input')" class="link">Ask
           AI</button>.</div>` }}
