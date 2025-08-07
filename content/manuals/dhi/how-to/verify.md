@@ -20,7 +20,7 @@ Docker's public key for DHI images is published at:
 
 ## Verify attestations with Docker Scout
 
-You can use the Docker Scout CLI to list and retrieve attestations for Docker
+You can use the [Docker Scout](/scout/) CLI to list and retrieve attestations for Docker
 Hardened Images, including images mirrored into your organization's namespace.
 
 > [!NOTE]

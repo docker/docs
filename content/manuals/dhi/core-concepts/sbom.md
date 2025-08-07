@@ -90,3 +90,5 @@ $ docker scout attest get docs/dhi-node:20.19-debian12-fips-20250701182639 \
 
 For more details about SBOM attestations and Docker Build, see [SBOM
 attestations](/build/metadata/attestations/sbom/).
+
+To learn more about Docker Scout and working with SBOMs, see [Docker Scout SBOMs](../../scout/how-tos/view-create-sboms.md).
