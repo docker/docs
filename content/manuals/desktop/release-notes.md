@@ -75,7 +75,7 @@ We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266
 - Fixed a bug causing the **Images** view to scroll infinitely. Fixes [#7725](https://github.com/docker/for-mac/issues/7725).
 - Fixed a bug which caused the **Volumes** tab to be blank while in Resource Saver mode.
 - Updated terms of service text on first launch.
-- Docker Model Runner now supports GPT OSS models.
+- More robustness in parsing newly released GGUF formats.
 
 #### For Mac
 
