@@ -1438,7 +1438,7 @@ networks:
   admin: {}
 ```
 
-### `interface_name`
+#### `interface_name`
 
 {{< summary-bar feature_name="Compose interface-name" >}}
 
@@ -1513,6 +1513,21 @@ networks:
 {{< summary-bar feature_name="Compose mac address" >}}
 
 `mac_address` sets the Mac address used by the service container when connecting to this particular network.
+
+#### `driver_opts`
+
+`driver_opts` specifies a list of options as key-value pairs to pass to the driver. These options are
+driver-dependent. Consult the driver's documentation for more information.
+
+```yml
+services:
+  app:
+    networks:
+      app_net:
+        driver_opts:
+          foo: "bar"
+          baz: 1
+```
 
 #### `gw_priority`
 

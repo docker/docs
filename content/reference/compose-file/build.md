@@ -175,27 +175,6 @@ args:
   - GIT_COMMIT
 ```
 
-### `context`
-
-`context` defines either a path to a directory containing a Dockerfile, or a URL to a Git repository.
-
-When the value supplied is a relative path, it is interpreted as relative to the project directory.
-Compose warns you about the absolute path used to define the build context as those prevent the Compose file
-from being portable.
-
-```yml
-build:
-  context: ./dir
-```
-
-```yml
-services:
-  webapp:
-    build: https://github.com/mycompany/webapp.git
-```
-
-If not set explicitly, `context` defaults to project directory (`.`). 
-
 ### `cache_from`
 
 `cache_from` defines a list of sources the image builder should use for cache resolution.
@@ -233,6 +212,27 @@ build:
 Cache target is defined using the same `type=TYPE[,KEY=VALUE]` syntax defined by [`cache_from`](#cache_from).
 
 Unsupported caches are ignored and don't prevent you from building images.
+
+### `context`
+
+`context` defines either a path to a directory containing a Dockerfile, or a URL to a Git repository.
+
+When the value supplied is a relative path, it is interpreted as relative to the project directory.
+Compose warns you about the absolute path used to define the build context as those prevent the Compose file
+from being portable.
+
+```yml
+build:
+  context: ./dir
+```
+
+```yml
+services:
+  webapp:
+    build: https://github.com/mycompany/webapp.git
+```
+
+If not set explicitly, `context` defaults to project directory (`.`). 
 
 ### `dockerfile`
 
