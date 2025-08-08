@@ -101,6 +101,9 @@
 .summary-bar {
   @apply my-1 mt-4 flex flex-col rounded-sm border-1 border-gray-100 bg-gray-50 p-4 dark:border-gray-800 dark:bg-gray-900;
 }
+.summary-bar:has(.deprecated) {
+  @apply bg-red-100 dark:bg-red-950;
+}
 
 .tabs {
   @apply bg-blue/2 rounded-sm p-2;

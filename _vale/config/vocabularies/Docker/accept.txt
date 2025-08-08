@@ -157,7 +157,7 @@ S3
 scrollable
 SELinux
 Slack
-snapshotters?
+[sS]napshotters?
 Snyk
 Solr
 SonarQube
