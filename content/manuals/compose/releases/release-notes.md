@@ -15,6 +15,22 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.39.2
+
+{{< release-date date="2025-08-04" >}}
+
+### Bug fixes and enhancements
+
+- Fixed multiple rendenring issues of build output
+- Fixed issue with `pull` and `no_cache` attributes were not applied with `bake`
+- Removed log display of explicitly un-attached services on `up` command
+
+### Update
+
+- Dependencies upgrade: bump docker engine and cli to v28.3.3
+- Dependencies upgrade: bump golang to v1.23.12
+- Dependencies upgrade: bump containerd to 2.1.4
+
 ## 2.39.1
 
 {{< release-date date="2025-07-24" >}}
