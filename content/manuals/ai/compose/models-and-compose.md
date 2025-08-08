@@ -134,8 +134,8 @@ models:
 ```
 
 With short syntax, the platform automatically generates environment variables based on the model name:
-- `LLM_URL` - URL to access the llm model
-- `LLM_MODEL` - Model identifier for the llm model
+- `LLM_URL` - URL to access the LLM model
+- `LLM_MODEL` - Model identifier for the LLM model
 - `EMBEDDING_MODEL_URL` - URL to access the embedding-model
 - `EMBEDDING_MODEL_MODEL` - Model identifier for the embedding-model
 

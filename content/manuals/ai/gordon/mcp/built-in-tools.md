@@ -133,11 +133,13 @@ Interact with Docker containers, images, and volumes.
 
 #### Container management
 
-| Name          | Description                            |
-|---------------|----------------------------------------|
-| `docker`      | Access the Docker CLI                  |
-| `list_builds` | List builds in the Docker daemon       |
-| `build_logs`  | Show build logs                        |
+<!-- vale off -->
+
+| Name          | Description                      |
+|---------------|----------------------------------|
+| `docker`      | Access the Docker CLI            |
+| `list_builds` | List builds in the Docker daemon |
+| `build_logs`  | Show build logs                  |
 
 #### Volume management
 
