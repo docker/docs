@@ -50,10 +50,10 @@ area/build-cloud:
       - any-glob-to-any-file:
           - content/manuals/build-cloud/**
 
-area/cloud:
+area/offload:
   - changed-files:
       - any-glob-to-any-file:
-          - content/manuals/cloud/**
+          - content/manuals/offload/**
 
 area/compose:
   - changed-files:
