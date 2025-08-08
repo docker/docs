@@ -219,6 +219,7 @@ Use the [`docker model run` command](/reference/cli/docker/model/run/).
 ## Troubleshooting
 
 ### Display the logs
+
 To troubleshoot issues, display the logs:
 
 {{< tabs group="release" >}}
@@ -236,7 +237,7 @@ Use the [`docker model logs` command](/reference/cli/docker/model/logs/).
 {{< /tab >}}
 {{< /tabs >}}
 
-### Inpect requests and responses
+### Inspect requests and responses
 
 Inspecting requests and responses helps you diagnose model-related issues.
 For example, you can evaluate context usage to verify you stay within the model's context
@@ -564,7 +565,7 @@ POST /engines/llama.cpp/v1/completions
 POST /engines/llama.cpp/v1/embeddings
 ```
 
-To call these endpoints via a Unix socket (`/var/run/docker.sock`), prefix their path with
+To call these endpoints via a Unix socket (`/var/run/docker.sock`), prefix their path
 with `/exp/vDD4.40`.
 
 > [!NOTE]
