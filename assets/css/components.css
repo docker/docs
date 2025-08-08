@@ -95,7 +95,7 @@
   }
 }
 .button {
-  @apply my-2 mr-2 inline-block rounded-sm bg-blue-500 p-1 px-3 text-blue-50 text-white hover:bg-blue-600 dark:bg-blue-500 hover:dark:bg-blue-400;
+  @apply my-2 mr-2 inline-block rounded-sm bg-blue-500 p-1 px-3 text-white hover:bg-blue-600 dark:bg-blue-500 hover:dark:bg-blue-400;
 }
 
 .summary-bar {
