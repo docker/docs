@@ -20,7 +20,7 @@
 }
 
 mark {
-  @apply bg-transparent font-bold text-blue-500 dark:text-blue-800;
+  @apply bg-transparent font-bold text-blue-500 dark:text-blue-400;
 }
 
 /* Hide the clear (X) button for search inputs */

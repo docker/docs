@@ -1,8 +1,8 @@
 <header
-  class="sticky top-0 z-20 h-16 w-full bg-gradient-to-r from-blue-600 to-blue-500 to-50% px-6 text-white dark:from-blue-600 dark:to-blue-500"
+  class="sticky top-0 z-20 h-16 w-full bg-blue-600 px-6 text-white"
 >
   <div
-    class="mx-auto flex h-full max-w-[1920px] items-center justify-between gap-2 lg:gap-8"
+    class="mx-auto flex h-full max-w-[1920px] items-center justify-between gap-2"
   >
     <div class="flex h-full items-center gap-2 lg:gap-8">
       {{- if not .IsHome }}
@@ -26,7 +26,8 @@
           </div>
         </a>
       </div>
-      <nav class="mt-1 hidden md:block">
+      <nav class="mt-1 hidden md:flex lg:flex xl:flex 2xl:flex">
+        {{/* main menu */}}
         <ul class="flex text-sm md:text-base lg:gap-4">
           {{ range site.Menus.main }}
             <li
@@ -44,18 +45,19 @@
         </ul>
       </nav>
     </div>
-    <div class="flex min-w-0 flex-grow items-center justify-end gap-4">
-      {{ partialCached "search-bar.html" "-" }}
+    <div id="buttons" class="flex min-w-0 items-center justify-end gap-4 flex-shrink-0">
       <button
         @click="open = false"
-        class="open-kapa-widget flex items-center gap-1 rounded-sm px-2 py-1 transition hover:bg-white/20 dark:text-white"
+        class="topbar-button open-kapa-widget"
       >
         <span>Ask&nbsp;AI</span>
-        <img
-          src="{{ (resources.Get "images/ai-stars.svg").Permalink }}"
-          alt="AI Stars"
-        />
+        <span class="icon-svg-stroke">
+          {{ partial "utils/svg.html" "/icons/sparkle.svg" }}
+        </span>
       </button>
+      <div class="topbar-button" id="search-bar-container">
+         {{ partialCached "search-bar.html" "-" }}
+      </div>
     </div>
   </div>
 </header>
