@@ -133,49 +133,45 @@ namespace on Docker Hub, you can optionally mirror it to another container
 registry, such as Amazon ECR, Google Artifact Registry, GitHub Container
 Registry, or a private Harbor instance.
 
-You can use any standard workflow, including:
+You can use any standard workflow to mirror the image, such as the
+[Docker CLI](/reference/cli/docker/_index.md), [Docker Hub Registry
+API](/reference/api/registry/latest/), third-party registry tools, or CI/CD
+automation.
 
-- [The Docker CLI](/reference/cli/docker/_index.md)
-- [The Docker Hub Registry API](/reference/api/registry/latest/)
-- Third-party registry tools or CI/CD automation
+However, to preserve the full security context, including signatures and
+attestations, you must also copy its associated OCI artifacts. Docker
+Hardened Images store the image layers on Docker Hub (`docker.io`) and the
+signed attestations in a separate registry (`registry.scout.docker.com`).
 
-The following example shows how to use the Docker CLI to pull a mirrored DHI and
-push it to another registry:
+To copy both, you can use [regctl](https://regclient.org/cli/regctl/), an
+OCI-aware CLI that supports mirroring images along with attached artifacts such
+as SBOMs, vulnerability reports, and SLSA provenance.
+
+The following example uses `regctl` to mirror a DHI and then its attestations to a
+private registry:
 
 ```console
-# Authenticate to Docker Hub (if not already signed in)
-$ docker login
+$ regctl \
+  --host "reg=docker.io,user=$DOCKER_USERNAME,pass=$DOCKER_PASSWORD_OR_PAT" \
+  --host "reg=registry.example.com" \
+  image copy \
+    docker.io/docs/dhi-python@sha256:25c9... \
+    my-registry.example.com/mirror/dhi-python@sha256:25c9...
 
-# Pull the image from your organization's namespace on Docker Hub
-$ docker pull <your-namespace>/dhi-<image>:<tag>
-
-# Tag the image for your destination registry
-$ docker tag <your-namespace>/dhi-<image>:<tag> registry.example.com/my-project/<image>:<tag>
-
-# Push the image to the destination registry
-# You will need to authenticate to the third-party registry before pushing
-$ docker push registry.example.com/my-project/<image>:<tag>
+$ regctl \
+  --host "reg=registry.scout.docker.com,user=$DOCKER_USERNAME,pass=$DOCKER_PASSWORD_OR_PAT" \
+  --host "reg=registry.example.com" \
+  image copy --referrers \
+    registry.scout.docker.com/docs/dhi-python@sha256:25c9... \
+    my-registry.example.com/mirror/dhi-python@sha256:25c9...
 ```
+
+This mirrors both the image and its associated attestations to a private OCI-compatible registry.
 
 > [!IMPORTANT]
 >
 > To continue receiving image updates and preserve access to Docker Hardened
 > Images, ensure that any copies pushed to other registries remain private.
-
-### Include attestations when mirroring images
-
-Docker Hardened Images are signed and include associated attestations that
-provide metadata such as build provenance and vulnerability scan results. These
-attestations are stored as OCI artifacts and are not included by default when
-using the Docker CLI to mirror images.
-
-To preserve the full security context when copying DHIs to another registry, you
-must explicitly include the attestations. One tool is `regctl`, which supports
-copying both images and their associated artifacts.
-
-For more details on how to use `regctl` to copy images and their associated
-artifacts, see the [regclient
-documentation](https://regclient.org/cli/regctl/image/copy/).
 
 ## What's next
 
