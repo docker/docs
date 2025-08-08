@@ -46,18 +46,18 @@
       </nav>
     </div>
     <div id="buttons" class="flex min-w-0 items-center justify-end gap-4 flex-shrink-0">
-      <div class="topbar-button" id="search-bar-container">
-         {{ partialCached "search-bar.html" "-" }}
-      </div>
       <button
         @click="open = false"
         class="topbar-button open-kapa-widget"
       >
         <span>Ask&nbsp;AI</span>
-        <span class="icon-svg">
+        <span class="icon-svg-stroke">
           {{ partial "utils/svg.html" "/icons/sparkle.svg" }}
         </span>
       </button>
+      <div class="topbar-button" id="search-bar-container">
+         {{ partialCached "search-bar.html" "-" }}
+      </div>
     </div>
   </div>
 </header>
