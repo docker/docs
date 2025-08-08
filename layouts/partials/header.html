@@ -45,7 +45,7 @@
         </ul>
       </nav>
     </div>
-    <div id="buttons" class="flex min-w-0 items-center justify-end gap-4 flex-shrink-0">
+    <div id="buttons" class="flex min-w-0 items-center justify-end gap-3 flex-shrink-0">
       <button
         @click="open = false"
         class="topbar-button open-kapa-widget"
@@ -58,6 +58,26 @@
       <div class="topbar-button" id="search-bar-container">
          {{ partialCached "search-bar.html" "-" }}
       </div>
+      <button href="https://hub.docker.com/support/contact" class="topbar-button" aria-label="Contact support">
+        <span>Support</span>
+        <span class="icon-svg">
+          {{ partial "utils/svg.html" "/icons/headset.svg" }}
+        </span>
+      </button>
+      <button id="theme-switch" x-data="{ theme: localStorage.getItem('theme-preference') }" x-init="$watch('theme', value => {
+                            localStorage.setItem('theme-preference', value);
+                            document.firstElementChild.className = value;
+                          })" @click="theme = (theme === 'dark' ? 'light' : 'dark')" class="topbar-button"
+        aria-label="Theme switcher">
+        <span class="icon-svg-outline">
+          <span x-show="theme === 'dark'">
+            {{ partial "utils/svg.html" "/icons/sun.svg" }}
+          </span>
+          <span x-show="theme !== 'dark'">
+            {{ partial "utils/svg.html" "/icons/moon.svg" }}
+          </span>
+        </span>
+      </button>
     </div>
   </div>
 </header>
