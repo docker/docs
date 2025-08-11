@@ -224,7 +224,7 @@ Tools to interact with your Docker repositories and discover content on Docker H
 | `create-repository` | Creates a new repository |
 | `docker-hardened-images` | Lists available [Docker Hardened Images](https://www.docker.com/products/hardened-images/) in specified namespace |
 | `get-namespaces` | Get organizations/namespaces for a user |
-| `get-repository-dockerfile` | Gets dockerfile for repository |
+| `get-repository-dockerfile` | Gets Dockerfile for repository |
 | `get-repository-info` | Gets repository info |
 | `list-repositories-by-namespace` | Lists repositories under namespace |
 | `list-repository-tags` | List repository tags |

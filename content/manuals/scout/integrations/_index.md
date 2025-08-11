@@ -4,6 +4,8 @@ keywords: supply chain, security, integrations, registries, ci, environments
 title: Integrating Docker Scout with other systems
 linkTitle: Integrations
 weight: 80
+aliases:
+ - /scout/integrations/registry/artifactory
 ---
 
 By default, Docker Scout integrates with your Docker organization and your

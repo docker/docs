@@ -10,7 +10,12 @@ Minimal images, sometimes called distroless images, are container images
 stripped of unnecessary components such as package managers, shells, or even the
 underlying operating system distribution. Docker Hardened Images (DHI) embrace
 this minimal approach to reduce vulnerabilities and enforce secure software
-delivery.
+delivery. [Docker Official
+Images](../../docker-hub/image-library/trusted-content.md#docker-official-images)
+and [Docker Verified Publisher
+Images](../../docker-hub/image-library/trusted-content.md#verified-publisher-images)
+follow similar best practices for minimalism and security but may not be as
+stripped down to ensure compatibility with a wider range of use cases.
 
 ### What are minimal or distroless images?
 

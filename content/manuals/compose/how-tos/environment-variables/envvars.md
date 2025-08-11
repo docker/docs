@@ -24,6 +24,7 @@ This page explains how to set or change the following pre-defined environment va
 - `COMPOSE_ANSI`
 - `COMPOSE_STATUS_STDOUT`
 - `COMPOSE_ENV_FILES`
+- `COMPOSE_DISABLE_ENV_FILE`
 - `COMPOSE_MENU`
 - `COMPOSE_EXPERIMENTAL`
 - `COMPOSE_PROGRESS`
@@ -122,6 +123,15 @@ COMPOSE_ENV_FILES=.env.envfile1, .env.envfile2
 ```
 
 If `COMPOSE_ENV_FILES` is not set, and you don't provide `--env-file` in the CLI, Docker Compose uses the default behavior, which is to look for an `.env` file in the project directory.
+
+#### COMPOSE\_DISABLE\_ENV\_FILE
+
+Lets you disable the use of the default `.env` file. 
+
+- Supported values: 
+    - `true` or `1`, Compose ignores the `.env` file
+    - `false` or `0`, Compose looks for an `.env` file in the project directory
+- Defaults to: `0`
 
 ### Environment handling and container lifecycle
 

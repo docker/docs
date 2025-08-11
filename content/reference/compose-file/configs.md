@@ -1,5 +1,6 @@
 ---
-title: Configs top-level elements
+linkTitle: Configs 
+title: Configs top-level element
 description: Manage and share configuration data using the configs element in Docker Compose.
 keywords: compose, compose specification, configs, compose file reference
 aliases: 

@@ -249,3 +249,10 @@
 @utility breadcrumbs {
   font-size: 90%;
 }
+@utility topbar-button {
+  @apply text-white font-semibold min-h-10 px-2 bg-blue-300/50 rounded-md border-1 border-blue-300  inline-flex justify-center items-center gap-1.5 hover:bg-blue-400/70 hover:border-blue-200 transition-colors;
+  svg {
+   font-size: 19px;
+  }
+}
+
