@@ -2,7 +2,6 @@
   "htmlElements": {
     "tags": null,
     "classes": [
-      "$availabilityText",
       "--mount",
       "--tmpfs",
       "-mt-8",
@@ -36,7 +35,6 @@
       "DNS-resolution",
       "Debian",
       "Debian-GNU/Linux",
-      "Deprecated",
       "Diff",
       "Docker-Build-Cloud",
       "Docker-Desktop",
@@ -542,7 +540,6 @@
       "tab-item",
       "tablist",
       "tabs",
-      "text",
       "text-2xl",
       "text-base",
       "text-black",
@@ -583,7 +580,6 @@
       "w-[500px]",
       "w-full",
       "w-screen",
-      "whitespace-normal",
       "whitespace-nowrap",
       "xl:flex",
       "xl:flex-row",

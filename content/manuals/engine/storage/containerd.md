@@ -30,13 +30,15 @@ For more information about the containerd image store and its benefits, refer to
 
 ## Migrate to containerd image store on Docker Engine
 
-When you update to Docker Engine v29 and enable the containrd feature, you are automatically migrated.
-This is a non-breaking migration with support for backward compatibility.
+When you update to Docker Engine v29 and enable the containrd feature, you are
+automatically migrated. The migration mechanism handles overlay and vfs images.
 
 Switching to containerd snapshotters causes you to temporarily lose images and
-containers created using the classic storage drivers.
-Those resources still exist on your filesystem, and you can retrieve them by
-turning off the containerd snapshotters feature.
+containers created using the classic storage drivers. If you use other graph storage, repull or rebuild your images.
+
+> [!TIP]
+> Those resources still exist on your filesystem, and you can retrieve them by
+> turning off the containerd snapshotters feature.
 
 Docker Engine uses the `overlayfs` containerd snapshotter by default.
 
