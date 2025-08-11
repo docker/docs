@@ -21,8 +21,8 @@ For more detailed information, see the [release notes in the Compose repo](https
 
 ### Bug fixes and enhancements
 
-- Fixed multiple rendenring issues of build output
-- Fixed issue with `pull` and `no_cache` attributes were not applied with `bake`
+- Fixed multiple rendering issues with the build output
+- Fixed issue when `pull` and `no_cache` attributes were not applied with `bake`
 - Removed log display of explicitly un-attached services on `up` command
 
 ### Update
