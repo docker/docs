@@ -1,7 +1,7 @@
 ---
-description: Use roles in your organization to control who has access to content, registry, and organization management permissions.
-keywords: members, teams, organization, company, roles, access, docker hub, admin console, security
 title: Roles and permissions
+description: Control access to content, registry, and organization management with roles in your organization.
+keywords: members, teams, organization, company, roles, access, docker hub, admin console, security, permissions
 aliases:
 - /docker-hub/roles-and-permissions/
 - /security/for-admins/roles-and-permissions/
@@ -10,44 +10,25 @@ weight: 40
 
 {{< summary-bar feature_name="General admin" >}}
 
-This guide outlines Docker's organization roles and their permission scopes.
+Roles control what users can do in your organization. When you invite users, you assign them a role that determines their permissions for repositories, teams, and organization settings.
 
-## Roles
+## Organization roles
 
-When you invite users to your organization, you assign them a role. A role is a
-collection of permissions. Roles define whether users can create repositories,
-pull images, create teams, and configure organization settings.
+Docker organizations have three main roles:
 
-The following roles are available to assign:
+- Member: Non-administrative role with basic access. Members can view other organization members and pull images from repositories they have access to.
+- Editor: Partial administrative access. Editors can create, edit, and delete repositories. They can also manage team permissions for repositories.
+- Owner: Full administrative access. Owners can manage all organization settings, including repositories, teams, members, billing, and security features.
 
-- Member: Non-administrative role. Members can view other members that are in
-the same organization.
-- Editor: Partial administrative access to the organization. Editors can
-create, edit, and delete repositories. They can also edit an existing team's
-access permissions.
-- Owner: Full organization administrative access. Owners can manage organization
-repositories, teams, members, settings, and billing.
-
-Owners can manage roles for members of an organization using Docker Hub or the Admin Console:
-
-- Update a member role in [Docker Hub](/manuals/admin/organization/members.md#update-a-member-role)
-- Update an organization's members or company in the [Admin Console](/manuals/admin/company/users.md#update-a-member-role)
-- Learn more about [organizations and companies](/manuals/admin/_index.md)
-
-## Permissions
+## Permissions by role
 
 > [!NOTE]
 >
-> Company owners have the same access as owners for all associated organizations. For more information, see [Company overview](/admin/company/).
-
-The following sections describe the permissions for each role.
+> An owner role assigned at the company level has the same access as an owner role assigned at the organization level. For more information, see [Company overview](/admin/company/).
 
 ### Content and registry permissions
 
-The following table outlines content and registry permissions for member,
-editor, and owner roles. These permissions and roles apply to the entire
-organization, including all the repositories in the namespace for the
-organization.
+These permissions apply organization-wide, including all repositories in your organization's namespace.
 
 | Permission                                            | Member | Editor | Owner |
 | :---------------------------------------------------- | :----- | :----- | :----------------- |
@@ -66,21 +47,16 @@ organization.
 | View teams                                            | ✅     | ✅     | ✅                 |
 | Assign team permissions to repositories               | ❌     | ✅     | ✅                 |
 
-When you add members to a team, you can manage their repository permissions.
-For team repository permissions, see [Create and manage a team permissions reference](/manuals/admin/organization/manage-a-team.md#permissions-reference).
+When you add members to teams, you can grant additional repository permissions
+beyond their organization role. The following diagram shows how permissions
+work:
 
-The following diagram provides an example of how permissions may work for a
-user. In this example, the first permission check is for the role: member or
-editor. Editors have administrative permissions for repositories across the
-namespace of the organization. Members may have administrative permissions for
-a repository if they're a member of a team that grants those permissions.
+1. Role permissions: Applied organization-wide (member or editor)
+2. Team permissions: Additional permissions for specific repositories
 
 ![User repository permissions within an organization](../images/roles-and-permissions-member-editor-roles.png)
 
 ### Organization management permissions
-
-The following table outlines organization management permissions for member,
-editor, owner, and company owner roles.
 
 | Permission                                                        | Member | Editor | Owner |
 | :---------------------------------------------------------------- | :----- | :----- | :----------------- |
@@ -108,9 +84,6 @@ _\* If not part of a company_
 
 ### Docker Scout permissions
 
-The following table outlines Docker Scout management permissions for member,
-editor, and owner roles.
-
 | Permission                                            | Member | Editor | Owner |
 | :---------------------------------------------------- | :----- | :----- | :----------------- |
 | View and compare analysis results                     | ✅     | ✅     | ✅                 |
@@ -120,9 +93,6 @@ editor, and owner roles.
 | Manage registry integrations                          | ❌     | ❌     | ✅                 |
 
 ### Docker Build Cloud permissions
-
-The following table outlines Docker Build Cloud management permissions for
-member, editor, and owner roles.
 
 | Permission                   | Member | Editor | Owner |
 | ---------------------------- | :----- | :----- | :----------------- |

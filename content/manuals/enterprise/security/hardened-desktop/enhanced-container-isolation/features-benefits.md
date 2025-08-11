@@ -1,6 +1,7 @@
 ---
-description: The benefits of enhanced container isolation
-title: Key features and benefits
+title: Features and benefits of ECI
+linkTitle: Features and benefits
+description: Key security features and benefits of Enhanced Container Isolation for Docker Desktop
 keywords: set up, enhanced container isolation, rootless, security, features, Docker Desktop
 aliases:
  - /desktop/hardened-desktop/enhanced-container-isolation/features-benefits/
@@ -10,11 +11,12 @@ weight: 20
 
 {{< summary-bar feature_name="Hardened Docker Desktop" >}}
 
+Enhanced Container Isolation provides multiple layers of security protection that work together to prevent container breaches while maintaining full developer productivity. This page explains the key security features and their benefits.
+
 ## Linux user namespace on all containers
 
-With Enhanced Container Isolation, all user containers leverage the [Linux user namespace](https://man7.org/linux/man-pages/man7/user_namespaces.7.html)
-for extra isolation. This means that the root user in the container maps to an unprivileged
-user in the Docker Desktop Linux VM.
+Enhanced Container Isolation automatically applies [Linux user namespaces](https://man7.org/linux/man-pages/man7/user_namespaces.7.html)
+to every container. The root user inside containers maps to unprivileged users in the Docker Desktop Linux VM, preventing privilege escalation attacks.
 
 For example:
 
@@ -24,13 +26,13 @@ $ docker run -it --rm --name=first alpine
          0     100000      65536
 ```
 
-The output `0 100000 65536` is the signature of the Linux user namespace. It
-means that the root user (0) in the container is mapped to unprivileged user
-100000 in the Docker Desktop Linux VM, and the mapping extends for a continuous
-range of 64K user IDs. The same applies to group IDs.
+The output `0 100000 65536` shows that:
 
-Each container gets an exclusive range of mappings, managed by Sysbox. For
-example, if a second container is launched the mapping range is different:
+- Container root user (0) maps to unprivileged user 100000 in the VM
+- The mapping covers a continuous range of 64K user IDs
+- The same principle applies to group IDs
+
+Each container gets an exclusive user ID range managed automatically by Sysbox:
 
 ```console
 $ docker run -it --rm --name=second alpine
@@ -47,36 +49,33 @@ $ docker run -it --rm alpine
          0       0     4294967295
 ```
 
-By virtue of using the Linux user namespace, Enhanced Container Isolation
-ensures the container processes never run as user ID 0 (true root) in the Linux
-VM. In fact they never run with any valid user-ID in the Linux VM. Thus, their
-Linux capabilities are constrained to resources within the container only,
-increasing isolation significantly compared to regular containers, both
-container-to-host and cross-container isolation.
+This shows the container root user maps directly to VM root user (0), providing much less isolation.
 
-## Privileged containers are also secured
+## Security benefits
 
-Privileged containers `docker run --privileged ...` are insecure because they
-give the container full access to the Linux kernel. That is, the container runs
-as true root with all capabilities enabled, seccomp and AppArmor restrictions
-are disabled, all hardware devices are exposed, for example.
+Enhanced Container Isolation provides the following security benefits:
 
-Organizations aiming to secure Docker Desktop on developers' machines face challenges with privileged containers. These containers, whether running benign or malicious workloads, can gain control of the Linux kernel within the Docker Desktop VM, potentially altering security related settings, for example registry
-access management, and network proxies.
+- Container processes never run with true root privileges in the Linux VM
+- Processes don't run with any valid user ID in the Linux VM
+- Linux capabilities are constrained to resources within the container only
+- Significantly improved container-to-host and cross-container isolation
 
-With Enhanced Container Isolation, privileged containers can no longer do
-this. The combination of the Linux user namespace and other security techniques
-used by Sysbox ensures that processes inside a privileged container can only
-access resources assigned to the container.
+## Secured privileged containers
+
+Privileged containers (`docker run --privileged`) normally pose significant security risks because they provide unrestricted access to the Linux kernel. Without Enhanced Container Isolation, privileged containers can:
+
+- Run as true root with all capabilities
+- Bypass seccomp and AppArmor restrictions
+- Access all hardware devices
+- Modify global kernel settings
+
+Organizations securing developer environments face challenges with privileged containers because they can gain control of the Docker Desktop VM and alter security settings like registry access management and network proxies.
+
+Enhanced Container Isolation ensures privileged containers can only access resources within their container boundary. The Linux user namespace and Sysbox security techniques prevent privileged containers from breaching the Docker Desktop VM.
 
 > [!NOTE]
 >
-> Enhanced Container Isolation does not prevent users from launching privileged
-> containers, but rather runs them securely by ensuring that they can only
-> modify resources associated with the container. Privileged workloads that
-> modify global kernel settings, for example loading a kernel module or changing Berkeley Packet Filters (BPF)
-> settings will not work properly as they will receive "permission
-> denied" error when attempting such operations.
+> Enhanced Container Isolation doesn't prevent users from running privileged containers, but makes them secure by containing their access to container resources only. Privileged workloads that modify global kernel settings (loading kernel modules, changing Berkeley Packet Filter settings) receive "permission denied" errors.
 
 For example, Enhanced Container Isolation ensures privileged containers can't
 access Docker Desktop network settings in the Linux VM configured via BPF:
@@ -86,8 +85,7 @@ $ docker run --privileged djs55/bpftool map show
 Error: can't get next map: Operation not permitted
 ```
 
-In contrast, without Enhanced Container Isolation, privileged containers
-can easily do this:
+Without Enhanced Container Isolation, privileged containers can access and modify these settings:
 
 ```console
 $ docker run --privileged djs55/bpftool map show
@@ -99,16 +97,11 @@ $ docker run --privileged djs55/bpftool map show
         key 8B  value 8B  max_entries 1024  memlock 16384B
 ```
 
-Note that some advanced container workloads require privileged containers, for
-example Docker-in-Docker, Kubernetes-in-Docker, etc. With Enhanced Container
-Isolation you can still run such workloads but do so much more securely than
-before.
+Advanced container workloads like Docker-in-Docker and Kubernetes-in-Docker still work with Enhanced Container Isolation but run much more securely than before.
 
-## Containers can't share namespaces with the Linux VM
+## Namespace isolation enforcement
 
-When Enhanced Container Isolation is enabled, containers can't share Linux
-namespaces with the host (e.g., PID, network, uts, etc.) as that essentially
-breaks isolation.
+Enhanced Container Isolation prevents containers from sharing Linux namespaces with the Docker Desktop VM, which would break isolation boundaries.
 
 For example, sharing the PID namespace fails:
 
@@ -137,56 +130,45 @@ Finally, Docker build `--network=host` and Docker buildx entitlements
 (`network.host`, `security.insecure`) are not allowed. Builds that require these
 won't work properly.
 
-## Bind mount restrictions
+## Protected bind mounts
 
-When Enhanced Container Isolation is enabled, Docker Desktop users can continue
-to bind mount host directories into containers as configured via **Settings** >
-**Resources** > **File sharing**, but they are no longer allowed to bind mount
-arbitrary Linux VM directories into containers.
+Enhanced Container Isolation maintains support for standard file sharing while preventing access to sensitive VM directories.
 
-This prevents containers from modifying sensitive files inside the Docker
-Desktop Linux VM, files that can hold configurations for registry access
-management, proxies, Docker Engine configurations, and more.
+### Allowed: Host directory bind mounts
 
-For example, the following bind mount of the Docker Engine's configuration file
-(`/etc/docker/daemon.json` inside the Linux VM) into a container is restricted
-and therefore fails:
+Users can continue bind mounting host directories configured in **Settings** > **Resources** > **File sharing**:
 
 ```console
+$ docker run -it --rm -v $HOME:/mnt alpine
+/ # ls /mnt
+# Lists home directory contents successfully
+```
+
+### Blocked: VM configuration bind mounts
+
+Containers can't mount sensitive Docker Desktop VM directories that contain security configurations:
+
+```
 $ docker run -it --rm -v /etc/docker/daemon.json:/mnt/daemon.json alpine
 docker: Error response from daemon: failed to create shim task: OCI runtime create failed: error in the container spec: can't mount /etc/docker/daemon.json because it's configured as a restricted host mount: unknown
 ```
 
-In contrast, without Enhanced Container Isolation this mount works and gives the
-container full read and write access to the Docker Engine's configuration.
+This prevents containers from reading or modifying:
 
-Of course, bind mounts of host files continue to work as usual. For example,
-assuming a user configures Docker Desktop to file share her `$HOME` directory,
-she can bind mount it into the container:
-
-```console
-$ docker run -it --rm -v $HOME:/mnt alpine
-/ #
-```
+- Docker Engine configurations
+- Registry access management settings
+- Proxy configurations
+- Other security-related VM files
 
 > [!NOTE]
 >
-> By default, Enhanced Container Isolation won't allow bind mounting the Docker Engine socket
-> (`/var/run/docker.sock`) into a container, as doing so essentially grants the
-> container control of Docker Engine, thus breaking container isolation. However,
-> as some legitimate use cases require this, it's possible to relax
-> this restriction for trusted container images. See [Docker socket mount permissions](config.md#docker-socket-mount-permissions).
+> By default, Enhanced Container Isolation blocks bind mounting the Docker Engine socket (`/var/run/docker.sock`) as this would grant containers control over Docker Engine. Administrators can create exceptions for trusted container images. See [Docker socket mount permissions](config.md#docker-socket-mount-permissions).
 
-## Vetting sensitive system calls
+## Advanced system call filtering
 
-Another feature of Enhanced Container Isolation is that it intercepts and vets a
-few highly sensitive system calls inside containers, such as `mount` and
-`umount`. This ensures that processes that have capabilities to execute these
-system calls can't use them to breach the container.
+Enhanced Container Isolation intercepts and inspects sensitive system calls between containers and the Linux kernel, preventing containers from using legitimate capabilities maliciously.
 
-For example, a container that has `CAP_SYS_ADMIN` (required to execute the
-`mount` system call) can't use that capability to change a read-only bind mount
-into a read-write mount:
+Even containers with CAP_SYS_ADMIN capability can't use mount operations to breach container boundaries:
 
 ```console
 $ docker run -it --rm --cap-add SYS_ADMIN -v $HOME:/mnt:ro alpine
@@ -194,21 +176,16 @@ $ docker run -it --rm --cap-add SYS_ADMIN -v $HOME:/mnt:ro alpine
 mount: permission denied (are you root?)
 ```
 
-Since the `$HOME` directory was mounted into the container's `/mnt` directory as
-read-only, it can't be changed from within the container to read-write, even if the container process has the capability to do so. This
-ensures container processes can't use `mount`, or `umount`, to breach the container's
-root filesystem.
+The read-only bind mount can't be changed to read-write from within the container, even with the appropriate capability.
 
-Note however that in the previous example the container can still create mounts
-within the container, and mount them read-only or read-write as needed. Those
-mounts are allowed since they occur within the container, and therefore don't
-breach it's root filesystem:
+### Allowed: Internal container mounts
 
-```text
+Containers can still create and modify mounts within their own filesystem:
+
+```console
 / # mkdir /root/tmpfs
 / # mount -t tmpfs tmpfs /root/tmpfs
 / # mount -o remount,ro /root/tmpfs /root/tmpfs
-
 / # findmnt | grep tmpfs
 ├─/root/tmpfs    tmpfs      tmpfs    ro,relatime,uid=100000,gid=100000
 
@@ -217,57 +194,42 @@ breach it's root filesystem:
 ├─/root/tmpfs    tmpfs      tmpfs    rw,relatime,uid=100000,gid=100000
 ```
 
-This feature, together with the user-namespace, ensures that even if a container
-process has all Linux capabilities they can't be used to breach the container.
+### Performance optimization
 
-Finally, Enhanced Container Isolation does system call vetting in such a way
-that it does not affect the performance of containers in the great majority of
-cases. It intercepts control-path system calls that are rarely used in most
-container workloads but data-path system calls are not intercepted.
+Enhanced Container Isolation performs system call filtering efficiently by:
 
-## Filesystem user-ID mappings
+- Intercepting only control-path system calls (rarely used in most workloads)
+- Avoiding interception of data-path system calls (frequent operations)
+- Maintaining container performance in the majority of use cases
 
-As mentioned, ECI enables the Linux
-user namespace on all containers. This ensures that the container's user-ID
-range (0->64K) maps to an unprivileged range of "real" user-IDs in the Docker
-Desktop Linux VM (e.g., 100000->165535).
+This approach ensures that containers with all Linux capabilities still can't breach container boundaries while maintaining good performance.
 
-Moreover, each container gets an exclusive range of real user-IDs in the Linux
-VM (e.g., container 0 could get mapped to 100000->165535, container 2 to
-165536->231071, container 3 to 231072->296607, and so on). The same applies to
-group-IDs. In addition, if a container is stopped and restarted, there is no
-guarantee it will receive the same mapping as before. This is by design and
-further improves security.
+## Automatic filesystem user ID mapping
 
-However this presents a problem when mounting Docker volumes into
-containers. Files written to such volumes have the real
-user/group-IDs and therefore won't be accessible across a container's
-start/stop/restart, or between containers due to the different real
-user-ID/group-ID of each container.
+Enhanced Container Isolation solves the challenge of sharing files between containers that use different user ID ranges through automatic filesystem mapping.
 
-To solve this problem, Sysbox uses "filesystem user-ID remapping" via the Linux
-Kernel's ID-mapped mounts feature (added in 2021) or an alternative `shiftsfs` module. These technologies map filesystem accesses from the container's
-real user-ID (e.g., range 100000->165535) to the range (0->65535) inside Docker
-Desktop's Linux VM. This way, volumes can now be mounted or shared across
-containers, even if each container uses an exclusive range of user-IDs. Users
-need not worry about the container's real user-IDs.
+The challenge is, each container gets exclusive user ID mappings (container 1: 100000-165535, container 2: 165536-231071). Without mapping, files created by one container would be inaccessible to others due to different user IDs.
 
-Although filesystem user-ID remapping may cause containers to access
-Linux VM files mounted into the container with real user-ID 0, the
-[restricted mounts feature](#bind-mount-restrictions) ensures
-that sensitive Linux VM files can't be mounted into the container.
+To solve this, Sysbox uses filesystem user ID remapping through:
 
-## Procfs & sysfs emulation
+- ID-mapped mounts: Linux kernel feature (added in 2021) that maps filesystem accesses
+- Alternative shiftsfs: Fallback module for older kernel versions
 
-Another feature of Enhanced Container Isolation is that inside each container,
-the `/proc` and `/sys` filesystems are partially emulated. This
-serves several purposes, such as hiding sensitive host information inside the
-container and namespacing host kernel resources that are not yet namespaced by
-the Linux kernel itself.
+### How it works
 
-As a simple example, when Enhanced Container Isolation is enabled the
-`/proc/uptime` file shows the uptime of the container itself, not that of the
-Docker Desktop Linux VM:
+Filesystem accesses from containers' real user IDs (e.g., 100000-165535) are mapped to the standard range (0-65535) in the Docker Desktop VM. This allows:
+
+- Volume sharing across containers with different user ID ranges
+- Consistent file ownership regardless of container user ID mappings
+- Transparent file access without user intervention
+
+Even though filesystem mapping allows containers to access VM files with user ID 0, the bind mount restrictions prevent containers from mounting sensitive VM directories.
+
+## Procfs and sysfs emulation
+
+Enhanced Container Isolation emulates portions of the `/proc` and `/sys` filesystems within containers to hide sensitive host information and provide per-container views of kernel resources.
+
+The `/proc/uptime` file shows container uptime instead of VM uptime:
 
 ```console
 $ docker run -it --rm alpine
@@ -275,18 +237,16 @@ $ docker run -it --rm alpine
 5.86 5.86
 ```
 
-In contrast, without Enhanced Container Isolation you see the uptime of
-the Docker Desktop Linux VM. Though this is a trivial example, it shows how
-Enhanced Container Isolation aims to prevent the Linux VM's configuration and
-information from leaking into the container so as to make it more difficult to
-breach the VM.
+Without Enhanced Container Isolation, this would show Docker Desktop VM uptime, potentially
+leaking system information.
 
-In addition several other resources under `/proc/sys` that are not namespaced by
-the Linux Kernel are also emulated inside the container. Each container
-sees a separate view of each such resource and Sysbox reconciles the values
-across the containers when programming the corresponding Linux kernel setting.
+Several `/proc/sys resources` that aren't namespaced by the Linux kernel are emulated per-container. Each container sees a separate view of these resources, and Sysbox coordinates values when programming kernel settings.
 
-This has the advantage of enabling container workloads that would otherwise
-require truly privileged containers to access such non-namespaced kernel
-resources to run with Enhanced Container Isolation enabled, thereby improving
-security.
+## Performance and compatibility
+
+Enhanced Container Isolation is designed to provide strong security without impacting developer productivity:
+
+- No performance impact: System call filtering targets only control-path calls, leaving data-path operations unaffected
+- Full workflow compatibility: Existing development processes, tools, and container images work unchanged
+- Advanced workload support: Docker-in-Docker, Kubernetes-in-Docker, and other complex scenarios work securely
+- Automatic management: User ID mappings, filesystem access, and security policies are handled automatically

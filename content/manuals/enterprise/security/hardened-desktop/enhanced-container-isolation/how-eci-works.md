@@ -1,6 +1,6 @@
 ---
-description: How Enhanced Container Isolation works
-title: How does it work?
+title: How ECI works
+description: Technical details of how Enhanced Container Isolation provides additional security for Docker Desktop
 keywords: set up, enhanced container isolation, rootless, security
 aliases:
  - /desktop/hardened-desktop/enhanced-container-isolation/how-eci-works/
@@ -10,83 +10,67 @@ weight: 10
 
 {{< summary-bar feature_name="Hardened Docker Desktop" >}}
 
-Docker implements Enhanced Container Isolation by using the [Sysbox
-container runtime](https://github.com/nestybox/sysbox). Sysbox is a fork of the
-standard OCI runc runtime that was modified to enhance standard container isolation and
-workloads. For more details see [Under the hood](#under-the-hood).
+Enhanced Container Isolation uses the [Sysbox
+container runtime](https://github.com/nestybox/sysbox) to provide stronger container security. Sysbox is a specialized fork of the standard OCI runc runtime that enhances container isolation without impacting developer workflows.
 
-When [Enhanced Container Isolation is enabled](index.md#how-do-i-enable-enhanced-container-isolation), containers
-created by users through `docker run` or `docker create` are automatically
-launched using Sysbox instead of the standard OCI runc runtime. Users need not
-do anything else and can continue to use containers as usual. For exceptions,
-see [FAQs](faq.md).
+When [Enhanced Container Isolation is turned on](index.md#how-do-i-enable-enhanced-container-isolation), containers
+created through `docker run` or `docker create` automatically
+use Sysbox instead of the standard runc runtime. Users can continue working with containers normally without any changes to their workflows.
 
-Even containers that use the insecure `--privileged` flag can now be run
-securely with Enhanced Container Isolation, such that they can no longer be used
-to breach the Docker Desktop Virtual Machine (VM) or other containers.
+Even containers using the `--privileged` flag run securely with Enhanced Container Isolation, preventing them from breaching the Docker Desktop virtual machine or other containers.
 
 > [!NOTE]
 >
-> When Enhanced Container Isolation is enabled in Docker Desktop, the Docker CLI
-> `--runtime` flag is ignored. Docker's default runtime continues to be `runc`,
-> but all user containers are implicitly launched with Sysbox.
+> When Enhanced Container Isolation is turned on, the Docker CLI `--runtime` flag is ignored. Docker's default runtime remains `runc`, but all user containers implicitly launch with Sysbox.
 
-Enhanced Container Isolation is not the same as [Docker Engine's userns-remap mode or Rootless Docker](#enhanced-container-isolation-versus-user-namespace-remapping).
+## How Enhanced Container Isolation secures containers
 
-### Under the hood
+Enhanced Container Isolation applies multiple security techniques simultaneously:
 
-Sysbox enhances container isolation by using techniques such as:
+- Linux user namespaces: Root user in containers maps to unprivileged users in the Docker Desktop VM
+- Sensitive directory restrictions: Containers can't mount sensitive VM directories
+- System call filtering: Sensitive system calls between containers and the Linux kernel are inspected and restricted
+- Filesystem user/group mapping: User and group IDs are safely mapped between container namespaces and the Linux VM
+- Filesystem emulation: Portions of `/proc` and `/sys` filesystems are emulated inside containers for security
+- Exclusive namespace mappings: Each container gets unique user-namespace mappings automatically
+- Namespace isolation enforcement: Containers can't share namespaces with the Docker Desktop VM (`--network=host`, `--pid=host` are blocked)
+- Configuration protection: Containers can't modify Docker Desktop VM configuration files
+- Docker socket restrictions: Containers can't access the Docker Engine socket by default
+- VM console restrictions: Direct console access to the Docker Desktop VM is blocked
+- Privileged container containment: `--privileged` containers only have privileges within their own namespace
+- Workflow compatibility: No changes required to existing development processes, tools, or container images
+- Docker-in-Docker security: DinD and Kubernetes-in-Docker work but run unprivileged within the VM
 
-* Enabling the Linux user-namespace on all containers (root user in the container maps to an unprivileged user in the Linux VM).
-* Restricting the container from mounting sensitive VM directories.
-* Vetting sensitive system-calls between the container and the Linux kernel.
-* Mapping filesystem user/group IDs between the container's user-namespace and the Linux VM.
-* Emulating portions of the `/proc` and `/sys` filesystems inside the container.
+These techniques use recent Linux kernel advances and complement Docker's existing security mechanisms including Linux namespaces, cgroups, restricted capabilities, seccomp, and AppArmor. Together, they create strong isolation between containers and the Linux kernel inside the Docker Desktop VM.
 
-Some of these are made possible by recent advances in the Linux kernel which
-Docker Desktop now incorporates. Sysbox applies these techniques with minimal
-functional or performance impact to containers.
+> [!IMPORTANT]
+>
+> ECI protection varies by Docker Desktop version. Later versions include more comprehensive protection. ECI doesn't yet protect extension containers.
 
-These techniques complement Docker's traditional container security mechanisms
-such as using other Linux namespaces, cgroups, restricted Linux Capabilities,
-Seccomp, and AppArmor. They add a strong layer of isolation between the
-container and the Linux kernel inside the Docker Desktop VM.
+## Enhanced Container Isolation versus user namespace remapping
 
-For more information, see [Key features and benefits](features-benefits.md).
+The Docker Engine includes [userns-remap mode](/engine/security/userns-remap/)
+that turns on user namespaces in all containers. However, this feature has several
+[limitations](/engine/security/userns-remap/) and isn't supported in Docker Desktop.
 
-### Enhanced Container Isolation versus user namespace remapping
+Both userns-remap mode and Enhanced Container Isolation improve container isolation using Linux user namespaces, but Enhanced Container Isolation provides significant advantages:
 
-The Docker Engine includes a feature called [userns-remap mode](/engine/security/userns-remap/)
-that enables the user namespace in all containers. However it suffers from a few
-[limitations](/engine/security/userns-remap/) and it's
-not supported within Docker Desktop.
-
-Userns-remap mode is similar to Enhanced Container Isolation in that both improve
-container isolation by leveraging the Linux user-namespace.
-
-However, Enhanced Container Isolation is much more advanced since it assigns
-exclusive user-namespace mappings per container automatically and adds several
-other [container isolation features](#under-the-hood) meant to secure Docker
-Desktop in organizations with stringent security requirements.
+- Automatic exclusive mappings: Each container gets unique user-namespace mappings without manual configuration
+- Advanced isolation features: Includes system call filtering, filesystem emulation, and other security enhancements beyond basic user namespace remapping
+- Docker Desktop optimization: Designed specifically for Docker Desktop's virtual machine architecture
+- Enterprise security focus: Built for organizations with stringent security requirements
 
 ### Enhanced Container Isolation versus Rootless Docker
 
-[Rootless Docker](/engine/security/rootless/) lets Docker Engine, and by
-extension the containers, to run without root privileges natively on a Linux host. This
-lets non-root users to install and run Docker natively on Linux.
+[Rootless Docker](/engine/security/rootless/) allows Docker Engine and containers to run without root privileges on Linux hosts. This lets non-root users install and run Docker natively on Linux systems.
 
-Rootless Docker is not supported within Docker Desktop. While it's a valuable
-feature when running Docker natively on Linux, its value within Docker Desktop
-is reduced since Docker Desktop runs the Docker Engine within a Linux VM. That
-is, Docker Desktop already lets non-root host users to run Docker and
-isolates the Docker Engine from the host using a virtual machine.
+Rootless Docker isn't supported in Docker Desktop because Docker Desktop already provides isolation through virtualization. Docker Desktop runs Docker Engine in a Linux VM, which already allows non-root host users to run Docker safely.
 
-Unlike Rootless Docker, Enhanced Container Isolation does not run Docker Engine
-within a Linux user-namespace. Rather it runs the containers generated by that
-engine within a user-namespace. This has the advantage of bypassing [the
-limitations](/engine/security/rootless/#known-limitations) of Rootless Docker
-and creates a stronger boundary between the containers and the Docker Engine.
+Key differences between Enhanced Container Isolation and Rootless Docker:
 
-Enhanced Container Isolation is meant to ensure containers launched with Docker
-Desktop can't easily breach the Docker Desktop Linux VM and therefore modify
-security settings within it.
+- Scope: Enhanced Container Isolation secures containers within the VM, while Rootless Docker secures the entire Docker Engine on the host
+- Architecture: Enhanced Container Isolation works within Docker Desktop's VM architecture, while Rootless Docker modifies the host installation
+- Limitations: Enhanced Container Isolation avoids the known limitations of Rootless Docker
+- Security boundary: Enhanced Container Isolation creates stronger isolation between containers and the Docker Engine, while Rootless Docker focuses on isolating the Docker Engine from the host
+
+Enhanced Container Isolation ensures that containers can't breach the Docker Desktop Linux VM or modify security settings within it, providing an additional security layer specifically designed for Docker Desktop's architecture.

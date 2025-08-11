@@ -1,30 +1,34 @@
 ---
-keywords: SCIM, SSO, user provisioning, de-provisioning, role mapping, assign users
 title: SCIM provisioning
 linkTitle: SCIM
 description: Learn how System for Cross-domain Identity Management works and how to set it up.
+keywords: SCIM, SSO, user provisioning, de-provisioning, role mapping, assign users
 aliases:
   - /security/for-admins/scim/
   - /docker-hub/scim/
   - /security/for-admins/provisioning/scim/
-weight: 30
+weight: 20
 ---
 
 {{< summary-bar feature_name="SSO" >}}
 
-System for Cross-domain Identity Management (SCIM) is available for Docker
-Business customers. This guide provides an overview of SCIM provisioning.
+This page shows you how to automate user provisioning and de-provisioning for Docker using System for Cross-domain Identity Management (SCIM).
+
+## Prerequisites
+
+- SSO is configured for your organization
+- You have administrator access to Docker Home and your identity provider
 
 ## How SCIM works
 
 SCIM automates user provisioning and de-provisioning for Docker through your
-identity provider (IdP). After you enable SCIM, any user assigned to your
-Docker application in your IdP is automatically provisioned and added to your
+identity provider. After you enable SCIM, any user assigned to your
+Docker application in your identity provider is automatically provisioned and added to your
 Docker organization. When a user is removed from the Docker application in your
-IdP, SCIM deactivates and removes them from your Docker organization.
+identity provider, SCIM deactivates and removes them from your Docker organization.
 
 In addition to provisioning and removal, SCIM also syncs profile updates like
-name changes—made in your IdP. You can use SCIM alongside Docker’s default
+name changes made in your identity provider. You can use SCIM alongside Docker's default
 Just-in-Time (JIT) provisioning or on its own with JIT disabled.
 
 SCIM automates:
@@ -37,19 +41,16 @@ SCIM automates:
 
 > [!NOTE]
 >
-> SCIM only manages users provisioned through your IdP after SCIM is enabled.
-It cannot remove users who were manually added to your Docker organization
-before SCIM was set up.
+> SCIM only manages users provisioned through your identity provider after SCIM is enabled. It cannot remove users who were manually added to your Docker organization before SCIM was set up.
 >
 > To remove those users, delete them manually from your Docker organization.
 For more information, see [Manage organization members](/manuals/admin/organization/members.md).
 
 ## Supported attributes
 
-SCIM uses attributes (e.g., name, email) to sync user information between your
-IdP and Docker. Properly mapping these attributes in your IdP ensures that user
-provisioning works smoothly and prevents issues like duplicate user accounts
-when using single sign-on (SSO).
+SCIM uses attributes (name, email, etc.) to sync user information between your
+identity provider and Docker. Properly mapping these attributes in your identity provider ensures that user provisioning works smoothly and prevents issues like duplicate user accounts
+when using single sign-on.
 
 Docker supports the following SCIM attributes:
 
@@ -72,35 +73,18 @@ SCIM values.
 > Alternatively, you can disable JIT provisioning to rely solely on SCIM.
 For details, see [Just-in-Time](just-in-time.md).
 
-## Prerequisites
-
-- You've [set up SSO](../single-sign-on/_index.md)
-with Docker and verified your domain.
-- You have access to your identity provider's administrator portal with
-permission to create and manage applications.
-
 ## Enable SCIM in Docker
 
-You must [configure SSO](../single-sign-on/configure/_index.md) before you enable SCIM. Enforcing SSO isn't required to use SCIM.
+To enable SCIM:
 
-{{< tabs >}}
-{{< tab name="Admin Console" >}}
-
-{{% admin-scim product="admin" %}}
-
-{{< /tab >}}
-{{< tab name="Docker Hub" >}}
-
-{{% include "hub-org-management.md" %}}
-
-{{% admin-scim %}}
-
-{{< /tab >}}
-{{< /tabs >}}
+1. Sign in to [Docker Home](https://app.docker.com).
+1. Select **Admin Console**, then **SSO and SCIM**.
+1. In the **SSO connections** table, select the **Actions** icon for your conection, then select **Setup SCIM**.
+1. Copy the **SCIM Base URL** and **API Token** and paste the values into your IdP.
 
 ## Enable SCIM in your IdP
 
-The user interface for your IdP may differ slightly from the following steps. You can refer to the documentation for your IdP to verify. For additional details, see the documentation for your IdP:
+The user interface for your identity provider may differ slightly from the following steps. You can refer to the documentation for your identity provider to verify. For additional details, see the documentation for your identity provider:
 
 - [Okta](https://help.okta.com/en-us/Content/Topics/Apps/Apps_App_Integration_Wizard_SCIM.htm)
 - [Entra ID/Azure AD SAML 2.0](https://learn.microsoft.com/en-us/azure/active-directory/app-provisioning/user-provisioning)
@@ -108,7 +92,7 @@ The user interface for your IdP may differ slightly from the following steps. Yo
 > [!NOTE]
 >
 > Microsoft does not currently support SCIM and OIDC in the same non-gallery
-application in Entra ID. This guide provides a verified workaround using a
+application in Entra ID. This page provides a verified workaround using a
 separate non-gallery app for SCIM provisioning. While Microsoft does not
 officially document this setup, it is widely used and supported in practice.
 
@@ -121,13 +105,13 @@ officially document this setup, it is widely used and supported in practice.
 1. Open the application you created when you configured your SSO connection.
 1. On the application page, select the **General** tab, then **Edit App Settings**.
 1. Enable SCIM provisioning, then select **Save**.
-1. Now you can access the **Provisioning** tab in Okta. Navigate to this tab, then select **Edit SCIM Connection**.
+1. Navigate to the **Provisioning**, then select **Edit SCIM Connection**.
 1. To configure SCIM in Okta, set up your connection using the following values and settings:
-    - SCIM Base URL: SCIM connector base URL (copied from Docker Hub)
+    - SCIM Base URL: SCIM connector base URL (copied from Docker Home)
     - Unique identifier field for users: `email`
     - Supported provisioning actions: **Push New Users** and **Push Profile Updates**
     - Authentication Mode: HTTP Header
-    - SCIM Bearer Token: HTTP Header Authorization Bearer Token (copied from Docker Hub)
+    - SCIM Bearer Token: HTTP Header Authorization Bearer Token (copied from Docker Home)
 1. Select **Test Connector Configuration**.
 1. Review the test results and select **Save**.
 
@@ -163,8 +147,8 @@ provisioning.
 1. In your new SCIM application, go to **Provisioning** > **Get started**.
 1. Set **Provisioning Mode** to **Automatic**.
 1. Under **Admin Credentials**:
-    - **Tenant URL**: Paste the **SCIM Base URL** from Docker.
-    - **Secret Token**: Paste the **SCIM API token** from Docker.
+    - **Tenant URL**: Paste the **SCIM Base URL** from Docker Home.
+    - **Secret Token**: Paste the **SCIM API token** from Docker Home.
 1. Select **Test Connection** to verify.
 1. Select **Save** to store credentials.
 
@@ -173,15 +157,13 @@ Next, [set up role mapping](#set-up-role-mapping).
 {{< /tab >}}
 {{< tab name="Entra ID (SAML 2.0)" >}}
 
-### Configure SCIM provisioning
-
 1. In the Azure Portal, go to **Microsoft Entra ID** > **Enterprise Applications**,
 and select your Docker SAML app.
 1. Select **Provisioning** > **Get started**.
 1. Set **Provisioning Mode** to **Automatic**.
 1. Under **Admin Credentials**:
-    - **Tenant URL**: Paste the **SCIM Base URL** from Docker.
-    - **Secret Token**: Paste the **SCIM API token** from Docker.
+    - **Tenant URL**: Paste the **SCIM Base URL** from Docker Home.
+    - **Secret Token**: Paste the **SCIM API token** from Docker Home.
 1. Select **Test Connection** to verify.
 1. Select **Save** to store credentials.
 
@@ -211,7 +193,7 @@ The following table lists the supported optional user-level attributes:
 | `dockerTeam` | Docker `teamName` (e.g., `developers`) | Provisions the user to the specified team in the default or specified organization. If the team doesn't exist, it is automatically created.<br><br>You can still use [group mapping](group-mapping.md) to assign users to multiple teams across organizations. |
 
 The external namespace used for these attributes is: `urn:ietf:params:scim:schemas:extension:docker:2.0:User`.
-This value is required in your IdP when creating custom SCIM attributes for Docker.
+This value is required in your identity provider when creating custom SCIM attributes for Docker.
 
 {{< tabs >}}
 {{< tab name="Okta" >}}
@@ -222,7 +204,9 @@ This value is required in your IdP when creating custom SCIM attributes for Dock
 1. In the Okta admin portal, go to **Directory**, select **Profile Editor**, and then **User (Default)**.
 1. Select **Add Attribute** and configure the values for the role, organization, or team you want to add. Exact naming isn't required.
 1. Return to the **Profile Editor** and select your application.
-1. Select **Add Attribute** and enter the required values. The **External Name** and **External Namespace** must be exact. The external name values for organization/team/role mapping are `dockerOrg`, `dockerTeam`, and `dockerRole` respectively, as listed in the previous table. The external namespace is the same for all of them: `urn:ietf:params:scim:schemas:extension:docker:2.0:User`.
+1. Select **Add Attribute** and enter the required values. The **External Name** and **External Namespace** must be exact.
+    - The external name values for organization/team/role mapping are `dockerOrg`, `dockerTeam`, and `dockerRole` respectively, as listed in the previous table.
+    - The external namespace is the same for all of them: `urn:ietf:params:scim:schemas:extension:docker:2.0:User`.
 1. After creating the attributes, navigate to the top of the page and select **Mappings**, then **Okta User to YOUR APP**.
 1. Go to the newly created attributes and map the variable names to the external names, then select **Save Mappings**. If you’re using JIT provisioning, continue to the following steps.
 1. Navigate to **Applications** and select **YOUR APP**.
@@ -291,14 +275,13 @@ is only compatible with one attribute.
 
 #### Direct mapping
 
-Use this method if you need to map multiple attributes (e.g., `dockerRole` +
+Use this method if you need to map multiple attributes (`dockerRole` +
 `dockerTeam`).
 
-1. For each Docker attribute, choose a unique Entra extension attribute (e.g.,
-`extensionAttribute1`, `extensionAttribute2`, etc.).
+1. For each Docker attribute, choose a unique Entra extension attribute (`extensionAttribute1`, `extensionAttribute2`, etc.).
 1. In the **Edit Attribute** view:
     - Set mapping type to **Direct**.
-    - Set **Source attribute** to your selected extension attribute (e.g., `extensionAttribute1`).
+    - Set **Source attribute** to your selected extension attribute.
     - Set **Target attribute** to one of:
         - `dockerRole: urn:ietf:params:scim:schemas:extension:docker:2.0:User:dockerRole`
         - `dockerOrg: urn:ietf:params:scim:schemas:extension:docker:2.0:User:dockerOrg`
@@ -355,7 +338,6 @@ See the documentation for your IdP for additional details:
 
 After completing role mapping, you can test the configuration manually.
 
-
 {{< tabs >}}
 {{< tab name="Okta" >}}
 
@@ -385,30 +367,14 @@ and select your SCIM app.
 
 If SCIM is disabled, any user provisioned through SCIM will remain in the organization. Future changes for your users will not sync from your IdP. User de-provisioning is only possible when manually removing the user from the organization.
 
-{{< tabs >}}
-{{< tab name="Admin Console" >}}
+To disable SCIM:
 
-{{% admin-scim-disable product="admin" %}}
+1. Sign in to [Docker Home](https://app.docker.com).
+1. Select **Admin Console**, then **SSO and SCIM**.
+1. In the **SSO connections** table, select the **Actions** icon.
+1. Select **Disable SCIM**.
 
-{{< /tab >}}
-{{< tab name="Docker Hub" >}}
 
-{{% include "hub-org-management.md" %}}
-
-{{% admin-scim-disable %}}
-
-{{< /tab >}}
-{{< /tabs >}}
-
-## More resources
-
-The following videos demonstrate how to configure SCIM for your IdP:
-
-- [Video: Configure SCIM with Okta](https://youtu.be/c56YECO4YP4?feature=shared&t=1314)
-- [Video: Attribute mapping with Okta](https://youtu.be/c56YECO4YP4?feature=shared&t=1998)
-- [Video: Configure SCIM with Entra ID/Azure AD](https://youtu.be/bGquA8qR9jU?feature=shared&t=1668)
-- [Video: Attribute and group mapping with Entra ID/Azure AD](https://youtu.be/bGquA8qR9jU?feature=shared&t=2039)
-
-Refer to the following troubleshooting guide if needed:
+## Next steps
 
 - [Troubleshoot provisioning](/manuals/enterprise/troubleshoot/troubleshoot-provisioning.md)

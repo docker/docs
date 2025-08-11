@@ -1,9 +1,8 @@
 ---
-description: Understand how Settings Management works, who it is for, and what the
-  benefits are
-keywords: Settings Management, rootless, docker desktop, hardened desktop
+description: Understand how Settings Management works, who it's for, and the benefits it provides
+keywords: Settings Management, rootless, docker desktop, hardened desktop, admin control, enterprise
 tags: [admin]
-title: What is Settings Management?
+title: Settings Management
 linkTitle: Settings Management
 aliases:
  - /desktop/hardened-desktop/settings-management/
@@ -13,38 +12,51 @@ weight: 10
 
 {{< summary-bar feature_name="Hardened Docker Desktop" >}}
 
-Settings Management lets administrators configure and enforce Docker Desktop
-settings across end-user machines. It helps maintain consistent configurations
-and enhances security within your organization.
+Settings Management lets administrators configure and enforce Docker Desktop settings across end-user machines. It helps maintain consistent configurations and enhances security within your organization.
 
-## Who is it for?
+## Who is Settings Management for?
 
 Settings Management is designed for organizations that:
 
-- Require centralized control over Docker Desktop configurations.
-- Aim to standardize Docker Desktop environments across teams.
-- Operate in regulated environments and need to enforce compliance.
+- Need centralized control over Docker Desktop configurations
+- Want to standardize Docker Desktop environments across teams
+- Operate in regulated environments and must enforce compliance policies
 
 This feature is available with a Docker Business subscription.
 
-## How it works
+## How Settings Management works
 
-Administrators can define settings using one of the following methods:
+Administrators can define settings using one of these methods:
 
 - [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md): Create and assign settings policies through the
-Docker Admin Console.
+Docker Admin Console. This provides a web-based interface for managing settings
+across your organization.
 - [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md): Place a configuration file on the
-user's machine to enforce settings.
+user's machine to enforce settings. This method works well for automated
+deployments and scripted installations.
 
-Enforced settings override user-defined configurations and can't be modified
-by developers.
+Enforced settings override user-defined configurations and can't be modified by developers.
 
 ## Configurable settings
 
-Settings Management supports a broad range of Docker Desktop features,
-including proxies, network configurations, and container isolation.
+Settings Management supports a wide range of Docker Desktop features, including:
 
-For a full list of settings you can enforce, see the [Settings reference](/manuals/enterprise/security/hardened-desktop/settings-management/settings-reference.md).
+- Proxy configurations
+- Network settings
+- Container isolation options
+- Registry access controls
+- Resource limits
+- Security policies
+
+For a complete list of settings you can enforce, see the [Settings reference](/manuals/enterprise/security/hardened-desktop/settings-management/settings-reference.md).
+
+## Policy precedence
+
+When multiple policies exist, Docker Desktop applies them in this order:
+
+1. User-specific policies: Highest priority
+1. Organization default policy: Applied when no user-specific policy exists
+1. Local `admin-settings.json` file: Lowest priority, overriden by Admin Console policies
 
 ## Set up Settings Management
 
@@ -55,32 +67,32 @@ ensure all developers authenticate with your organization.
     - Manually create and configure the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md).
     - Create a settings policy in the [Docker Admin Console](configure-admin-console.md).
 
-After configuration, developers receive the enforced setting when they:
+After configuration, developers receive the enforced settings when they:
 
-- Quit and relaunch Docker Desktop, then sign in.
-- Launch and sign in to Docker Desktop for the first time.
+- Quit and relaunch Docker Desktop, then sign in
+- Launch and sign in to Docker Desktop for the first time
 
 > [!NOTE]
 >
-> Docker Desktop does not automatically prompt users to restart or re-authenticate
-after a settings change.
+> Docker Desktop doesn't automatically prompt users to restart or re-authenticate after a settings change. You may need to communicate these requirements to your developers.
 
 ## Developer experience
 
 When settings are enforced:
 
-- Options appear grayed out in Docker Desktop and can't be modified via the
-Dashboard, CLI, or configuration files.
-- If Enhanced Container Isolation is enabled, developers can't use privileged
-containers or similar methods to alter enforced settings within the Docker
-Desktop Linux VM.
+- Settings options appear grayed out in Docker Desktop and can't be modified through the Dashboard, CLI, or configuration files
+- If Enhanced Container Isolation is enabled, developers can't use privileged containers or similar methods to alter enforced settings within the Docker Desktop Linux VM
 
-## What's next?
+This ensures consistent environments while maintaining a clear visual indication of which settings are managed by administrators.
+
+## Next steps
+
+Get started with Settings Management:
 
 - [Configure Settings Management with the `admin-settings.json` file](configure-json-file.md)
 - [Configure Settings Management with the Docker Admin Console](configure-admin-console.md)
 
-## Learn more
+## More resources
 
 - To see how each Docker Desktop setting maps across the Docker Dashboard, `admin-settings.json` file, and Admin Console, see the [Settings reference](settings-reference.md).
 - Read the [Settings Management blog post](https://www.docker.com/blog/settings-management-for-docker-desktop-now-generally-available-in-the-admin-console/).
