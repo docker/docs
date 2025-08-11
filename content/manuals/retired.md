@@ -67,6 +67,7 @@ aliases:
   - /desktop/features/dev-environments/set-up/
   - /desktop/features/dev-environments/share/
   - /desktop/features/dev-environments/dev-cli/
+  - /desktop/dev-environments/
 ---
 
 This document provides an overview of Docker features, products, and
