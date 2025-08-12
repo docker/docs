@@ -1,5 +1,5 @@
 ---
-title: SSO and identity provider FAQs
+title: SSO identity provider FAQs
 linkTitle: Identity providers
 description: Frequently asked questions about Docker SSO and identity provider configuration
 keywords: identity providers, SSO IdP, SAML, Azure AD, Entra ID, certificate management

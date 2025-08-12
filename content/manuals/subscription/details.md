@@ -1,14 +1,14 @@
 ---
 title: Docker subscriptions and features
 linkTitle: Subscriptions and features
-description: Learn about Docker subscription tiers and their features
+description: Learn about Docker subscription tiers and their key features
 keywords: subscription, personal, pro, team, business, features, docker subscription
 aliases:
 - /subscription/core-subscription/details/
 weight: 10
 ---
 
-Docker subscriptions empower development teams by providing the tools they need to ship secure, high-quality apps — fast. These plans include access to Docker's suite of products:
+Docker subscriptions provide licensing for commercial use of Docker products and include access to Docker's complete development platform:
 
 - [Docker Desktop](../desktop/_index.md): The industry-leading container-first
   development solution that includes, Docker Engine, Docker CLI, Docker Compose,
@@ -22,29 +22,26 @@ Docker subscriptions empower development teams by providing the tools they need 
   testing automation that provides faster tests, a unified developer experience,
   and more.
 
-The following sections describe some of the key features included with your
-Docker subscription or Legacy Docker subscription.
+Choose the subscription that fits your needs, from individual developers to large enterprises.
 
 > [!NOTE]
 >
-> Legacy Docker plans apply to Docker subscribers who last purchased or renewed their subscription before December 10, 2024. These subscribers will keep their current subscription and pricing until their next renewal date that falls on or after December 10, 2024. To see purchase or renewal history, view your [billing history](../billing/history.md). For more details about Docker Legacy subscriptions, see [Announcing Upgraded Docker Plans](https://www.docker.com/blog/november-2024-updated-plans-announcement/).
+> Legacy Docker plans apply to subscribers who last purchased or renewed before December 10, 2024. These subscribers keep their current subscription and pricing until their next renewal on or after December 10, 2024.
 
 {{< tabs >}}
 {{< tab name="Docker subscription" >}}
 
 ## Docker Personal
 
-**Docker Personal** is ideal for open source communities, individual developers,
-education, and small businesses. It includes the free use of essential Docker
-tools as well as trials for powerful tools that'll level up your development loops.
+**Docker Personal** is ideal for open source communities, individual developers, education, and small businesses.
 
 Docker Personal includes:
 
-- 1 included repository with continuous vulnerability analysis in Docker Scout
+- Essential Docker tools at no cost
+- 1 Docker Scout repository with vulnerability analysis
 - Unlimited public Docker Hub repositories
-- 200 pulls per 6 hours Docker Hub image pull rate limit for authenticated users
-- 7-day Docker Build Cloud trial
-- 7-day Testcontainers Cloud trial
+- 200 pulls per 6 hours for authenticated users
+- 7-day trials for Docker Build Cloud and Testcontainers Cloud
 
 Docker Personal users who want to continue using Docker Build Cloud or Docker
 Testcontainers Cloud after their trial can upgrade to a Docker Pro subscription at any
@@ -57,112 +54,72 @@ For a list of features available in each tier, see [Docker Pricing](https://www.
 
 ## Docker Pro
 
-**Docker Pro** enables individual developers to get more control of their
-development environment and provides an integrated and reliable developer
-experience. It reduces the amount of time developers spend on mundane and
-repetitive tasks and empowers developers to spend more time creating value for
-their customers. A Docker Pro subscription includes access to all tools,
-including Docker Desktop, Docker Hub, Docker Scout, Docker Build Cloud, and
-Testcontainers Cloud.
+**Docker Pro** is ideal for individual developers who need full access to Docker's development platform.
 
 Docker Pro includes:
 
-- 200 Docker Build Cloud build minutes per month. Docker Build Cloud minutes do not
-rollover month to month.
-- 2 included repositories with continuous vulnerability analysis in Docker Scout.
-- 100 Testcontainers Cloud runtime minutes per month for use either in Docker Desktop or for CI. Testcontainers Cloud runtime minutes do not rollover month to month.
-- No Docker Hub image pull rate limits.
+- Full access to all Docker tools
+- 200 Docker Build Cloud minutes per month, Docker Build Cloud minutes do not
+rollover month to month
+- 2 Docker Scout repositories with vulnerability analysis
+- 100 Testcontainers Cloud runtime minutes per month, Testcontainers Cloud runtime minutes do not rollover month to month
+- No Docker Hub pull rate limits
 
 For a list of features available in each tier, see [Docker
 Pricing](https://www.docker.com/pricing/).
 
 ## Docker Team
 
-**Docker Team** offers capabilities for collaboration, productivity, and
-security across organizations. It enables groups of developers to unlock the
-full power of collaboration and sharing combined with essential security
-features and team management capabilities. A Docker Team subscription includes
-licensing for commercial use of Docker components including Docker Desktop,
-Docker Hub, Docker Scout, Docker Build Cloud, and Testcontainers Cloud.
+**Docker Team** is ideal for development teams that need collaboration and security features.
 
 Docker Team includes:
 
-- 500 Docker Build Cloud build minutes per month. Docker Build Cloud minutes do not
-rollover month to month.
-- Unlimited Docker Scout repositories with continuous vulnerability analysis.
-- 500 Testcontainers Cloud runtime minutes per month for use either in Docker Desktop or for CI. Testcontainers Cloud runtime minutes do not rollover month to month.
-- No Docker Hub image pull rate limits.
-
-There are also advanced collaboration and management tools, including
-organization and team management with [Role Based Access Control
-(RBAC)](/security/for-admins/roles-and-permissions/), [activity logs](/admin/organization/activity-logs/), and more.
+- 500 Docker Build Cloud minutes per month, Docker Build Cloud minutes do not
+rollover month to month
+- Unlimited Docker Scout repositories with vulnerability analysis
+- 500 Testcontainers Cloud runtime minutes per month, Testcontainers Cloud runtime minutes do not rollover month to month
+- No Docker Hub pull rate limits
+- Advanced collaboration tools including organization management, [Role Based Access Control
+(RBAC)](/security/for-admins/roles-and-permissions/), [activity logs](/admin/organization/activity-logs/), and more
 
 For a list of features available in each tier, see [Docker
 Pricing](https://www.docker.com/pricing/).
 
 ## Docker Business
 
-**Docker Business** offers centralized management and advanced security features
-for enterprises that use Docker at scale. It empowers leaders to manage their
-Docker development environments and speed up their secure software supply chain
-initiatives. A Docker Business subscription includes licensing for commercial use of
-Docker components including Docker Desktop, Docker Hub, Docker Scout, Docker
-Build Cloud, and Testcontainers Cloud.
+**Docker Business** is ideal for enterprises that need centralized management and advanced security.
 
 Docker Business includes:
 
-- 1500 Docker Build Cloud build minutes per month. Docker Build Cloud minutes do not
-rollover month to month.
-- Unlimited Docker Scout repositories with continuous vulnerability analysis.
-- 1500 Testcontainers Cloud runtime minutes per month for use either in Docker Desktop or for CI. Testcontainers Cloud runtime minutes do not rollover month to month.
-- No Docker Hub image pull rate limits.
-
-In addition, you gain access to enterprise-grade features, such as:
-- [Hardened Docker Desktop](/manuals/enterprise/security/hardened-desktop/_index.md)
-- [Image Access
+- 1500 Docker Build Cloud minutes per month, Docker Build Cloud minutes do not
+rollover month to month
+- Unlimited Docker Scout repositories with vulnerability analysis
+- 1500 Testcontainers Cloud runtime minutes per month, Testcontainers Cloud runtime minutes do not rollover month to month
+- No Docker Hub pull rate limits
+- Enterprise security features:
+  - [Hardened Docker Desktop](/manuals/enterprise/security/hardened-desktop/_index.md)
+  - [Image Access
   Management](/manuals/enterprise/security/hardened-desktop/image-access-management.md)
   which lets admins control what content developers can access
-- [Registry Access
+  - [Registry Access
   Management](/manuals/enterprise/security/hardened-desktop/registry-access-management.md)
   which lets admins control what registries developers can access
-- [Company layer](/admin/company/) to manage multiple organizations and settings
-- [Single sign-on](/security/for-admins/single-sign-on/)
-- [System for Cross-domain Identity
+  - [Company layer](/admin/company/) to manage multiple organizations and settings
+  - [Single sign-on](/security/for-admins/single-sign-on/)
+  - [System for Cross-domain Identity
   Management](/security/for-admins/provisioning/scim/)
 
 For a list of features available in each tier, see [Docker
 Pricing](https://www.docker.com/pricing/).
-
-## Self-serve
-
-A self-serve Docker subscription is where everything is set up by you.
-You can:
-
-- Manage your own invoices
-- Add or remove seats
-- Update billing and payment information
-- Downgrade your subscription at any time
-
-## Sales-assisted
-
-A sales-assisted subscription refers to a Docker Business or Team subscription where everything is set up and
-managed by a dedicated Docker account manager.
 
 {{< /tab >}}
 {{< tab name="Legacy Docker plans" >}}
 
 > [!IMPORTANT]
 >
-> As of December 10, 2024, Docker Core, Docker Build Cloud, and Docker Scout
-> subscriptions are no longer available and have been replaced by Docker subscription
-> plans that provide access to all tools. If you subscribed or renewed
-> your subscriptions before December 10, 2024, your legacy Docker
-> plans still apply to your account until you renew. For more details,
-> see [Announcing Upgraded Docker
-> Plans](https://www.docker.com/blog/november-2024-updated-plans-announcement/).
-The following describes some of the key features included with your Legacy Docker plans:
+> Legacy Docker plans apply to subscribers who last purchased or renewed before December 10, 2024. These subscribers keep their current subscription and pricing until their next renewal on or after December 10, 2024.
 
-![Docker Core subscription diagram](./images/subscription-diagram.webp)
+If you have a legacy subscription, you'll automatically upgrade to the new Docker subscription model when you renew. The new plans provide access to all Docker tools with increased limits and additional features.
 
 ## Legacy Docker plans
 
@@ -260,19 +217,6 @@ When you upgrade your Legacy Docker Business subscription to a Docker Business s
 - Docker Hub image pull rate limits are removed.
 
 For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/).
-
-#### Self-serve
-
-A self-serve Docker Business subscription is where everything is set up by you. You can:
-
-- Manage your own invoices
-- Add or remove seats
-- Update billing and payment information
-- Downgrade your subscription at any time
-
-#### Sales-assisted
-
-A sales-assisted Docker Business subscription where everything is set up and managed by a dedicated Docker account manager.
 
 ## Legacy Docker Scout subscriptions
 
@@ -392,6 +336,16 @@ a Docker subscription, your subscription includes the following changes:
 {{< /tab >}}
 {{< /tabs >}}
 
-## Support for subscriptions
+## Subscription management options
+
+### Self-serve
+
+You manage everything directly including invoices, seats, billing information, and subscription changes.
+
+### Sales-assisted
+
+A dedicated Docker account manager handles setup and management for Docker Business and Team subscriptions.
+
+## Support
 
 All Docker Pro, Team, and Business subscribers receive email support for their subscriptions.
