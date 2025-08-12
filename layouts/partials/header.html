@@ -52,16 +52,25 @@
       >
         <span>Ask&nbsp;AI</span>
         <span class="icon-svg-stroke">
-          {{ partial "utils/svg.html" "/icons/sparkle.svg" }}
+          {{ partialCached "utils/svg.html" "/icons/sparkle.svg" }}
         </span>
       </button>
       <div class="topbar-button" id="search-bar-container">
          {{ partialCached "search-bar.html" "-" }}
       </div>
-      <button
+      <button class="topbar-button">
+        <a href="https://hub.docker.com/support/contact"
+          aria-label="Contact support">
+          <span>Contact support</span>
+          <span class="icon-svg icon-sm">
+            {{ partial "utils/svg.html" "/icons/headset.svg" }}
+          </span>
+        </a>
+      </button>
+        <button
           aria-label="Theme switch"
           id="theme-switch"
-          class="topbar-button"
+          class="topbar-button-clear"
           x-data="{ theme: localStorage.getItem('theme-preference') }"
           x-init="$watch('theme', value => {
                 localStorage.setItem('theme-preference', value);
@@ -70,11 +79,11 @@
           @click="theme = (theme === 'dark' ? 'light' : 'dark')"
         >
         <span class="icon-svg icon-sm dark:hidden"
-          >{{ partialCached "icon" "light_mode" "light_mode" }}</span
-        >
-        <span class="icon-svg icon-sm hidden dark:block"
-          >{{ partialCached "icon" "dark_mode" "dark_mode" }}</span
-        >
+          >{{ partialCached "icon" "icons/sun.svg" "sun" }}
+        </span>
+        <span class="icon-svg icon-sm hidden dark:block">
+          {{ partialCached "icon" "icons/moon.svg" "moon" }}
+        </span>
       </button>
     </div>
   </div>
