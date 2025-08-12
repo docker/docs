@@ -1,42 +1,27 @@
 ---
-title: Limitations
-description: Limitations of Enhanced Container Isolation
-keywords: enhanced container isolation, security, sysbox, known issues, Docker Desktop
-toc_max: 2
-weight: 50
+linkTitle: Limitations
+title: Enhanced Container Isolation limitations
+description: Known limitations and platform-specific considerations for Enhanced Container Isolation
+keywords: enhanced container isolation, limitations, wsl, hyper-v, kubernetes, docker build
+toc_max: 3
+weight: 30
 aliases:
  - /security/for-admins/hardened-desktop/enhanced-container-isolation/limitations/
 ---
 
-### ECI support for WSL
+{{< summary-bar feature_name="Hardened Docker Desktop" >}}
+
+Enhanced Container Isolation has some platform-specific limitations and feature constraints. Understanding these limitations helps you plan your security strategy and set appropriate expectations.
+
+## WSL 2 security considerations
 
 > [!NOTE]
 >
-> Docker Desktop requires WSL 2 version 2.1.5 or later. To get the current
-> version of WSL on your host, type `wsl --version`. If the command fails or if
-> it returns a version number prior to 2.1.5, update WSL to the latest version
-> by typing `wsl --update` in a Windows command or PowerShell terminal.
+> Docker Desktop requires WSL 2 version 2.1.5 or later. Check your version with `wsl --version` and update with `wsl --update` if needed.
 
-ECI on WSL is not as secure as on Hyper-V because:
+Enhanced Container Isolation provides different security levels depending on your Windows backend configuration.
 
-- While ECI on WSL still hardens containers so that malicious workloads can't
-  easily breach Docker Desktop's Linux VM, ECI on WSL can't prevent Docker
-  Desktop users from breaching the Docker Desktop Linux VM. Such users can
-  trivially access that VM (as root) with the `wsl -d docker-desktop` command,
-  and use that access to modify Docker Engine settings inside the VM. This gives
-  Docker Desktop users control of the Docker Desktop VM and lets them bypass Docker Desktop configs set by administrators via the
-  [settings-management](../settings-management/_index.md) feature. In contrast,
-  ECI on Hyper-V does not let Docker Desktop users to breach the Docker
-  Desktop Linux VM.
-
-- With WSL 2, all WSL 2 distributions on the same Windows host share the same instance
-  of the Linux kernel. As a result, Docker Desktop can't ensure the integrity of
-  the kernel in the Docker Desktop Linux VM since another WSL 2 distribution could
-  modify shared kernel settings. In contrast, when using Hyper-V, the Docker
-  Desktop Linux VM has a dedicated kernel that is solely under the control of
-  Docker Desktop.
-
-The following table summarizes this.
+The following table compares ECI on WSL 2 and ECI on Hyper-V:
 
 | Security feature                                   | ECI on WSL   | ECI on Hyper-V   | Comment               |
 | -------------------------------------------------- | ------------ | ---------------- | --------------------- |
@@ -44,65 +29,143 @@ The following table summarizes this.
 | Docker Desktop Linux VM protected from user access | No           | Yes              | On WSL, users can access Docker Engine directly or bypass Docker Desktop security settings. |
 | Docker Desktop Linux VM has a dedicated kernel     | No           | Yes              | On WSL, Docker Desktop can't guarantee the integrity of kernel level configs. |
 
-In general, using ECI with Hyper-V is more secure than with WSL 2. But WSL 2
-offers advantages for performance and resource utilization on the host machine,
-and it's an excellent way for users to run their favorite Linux distribution on
-Windows hosts and access Docker from within.
+WSL 2 security gaps include:
 
-### ECI protection for Docker builds with the "docker" driver
+- Direct VM access: Users can bypass Docker Desktop security by accessing the VM directly: `wsl -d docker-desktop`. This gives users root access to modify Docker Engine settings and bypass
+Settings Management configurations.
+- Shared kernel vulnerability: All WSL 2 distributions share the same Linux kernel instance. Other WSL distributions can modify kernel settings that affect Docker Desktop's security.
 
-Prior to Docker Desktop 4.30, `docker build` commands that use the buildx
-`docker` driver (the default) are not protected by ECI, in other words the build runs
-rootful inside the Docker Desktop VM.
+### Recommendation
 
-Starting with Docker Desktop 4.30, `docker build` commands that use the buildx
-`docker` driver are protected by ECI, except when Docker Desktop is configured to use WSL 2
-(on Windows hosts).
+Use Hyper-V backend for maximum security. WSL 2 offers better performance and resource
+utilization, but provides reduced security isolation.
 
-Note that `docker build` commands that use the `docker-container` driver are
-always protected by ECI. 
+## Windows containers not supported
 
-### Docker Build and Buildx have some restrictions
+ECI only works with Linux containers (Docker Desktop's default mode). Native Windows
+containers mode isn't supported.
 
-With ECI enabled, Docker build `--network=host` and Docker Buildx entitlements
-(`network.host`, `security.insecure`) are not allowed. Builds that require
-these won't work properly.
+## Docker Build protection varies
 
-### Kubernetes pods are not yet protected
+Docker Build proection depends on the driver and Docker Desktop version:
 
-When using the Docker Desktop integrated Kubernetes, pods are not yet protected
-by ECI. Therefore a malicious or privileged pod can compromise the Docker
-Desktop Linux VM and bypass security controls.
+| Build drive | Protection | Version requirements |
+|:------------|:-----------|:---------------------|
+| `docker` (default) | Protected | Docker Desktop 4.30 and later (except WSL 2) |
+| `docker` (legacy) | Not protected | Docker Desktop versions before 4.30 |
+| `docker-container` | Always protected | All Docker Desktop versions |
 
-As an alternative, you can use the [K8s.io KinD](https://kind.sigs.k8s.io/) tool
-with ECI. In this case, each Kubernetes node runs inside an ECI-protected
-container, thereby more strongly isolating the Kubernetes cluster away from the
-underlying Docker Desktop Linux VM (and Docker Engine within). No special
-arrangements are needed, just enable ECI and run the KinD tool as usual.
+The following Docker Build features don't work with ECI:
 
-### Extension containers are not yet protected
+- `docker build --network=host`
+- Docker Buildx entitlements: `network.host`, `security.insecure`
 
-Extension containers are also not yet protected by ECI. Ensure you extension
-containers come from trusted entities to avoid issues.
+### Recommendation
 
-### Docker Debug containers are not yet protected
+Use `docker-container` build driver for builds requiring these features:
 
-[Docker Debug](/reference/cli/docker/debug.md) containers
-are not yet protected by ECI. 
+```console
+$ docker buildx create --driver docker-container --use
+$ docker buildx build --network=host .
+```
 
-### Native Windows containers are not supported
+## Docker Desktop Kubernetes not protected
 
-ECI only works when Docker Desktop is in Linux containers mode (the default,
-most common mode). It's not supported when Docker Desktop is configured in
-native Windows containers mode (i.e., it's not supported on Windows hosts, when
-Docker Desktop is switched from its default Linux mode to native Windows mode).
+The integrated Kubernetes feature doesn't benefit from ECI protection. Malicious or privileged pods can compromise the Docker Desktop VM and bypass security controls.
 
-### Use in production
+### Recommendation
 
-In general users should not experience differences between running a container
-in Docker Desktop with ECI enabled, which uses the Sysbox runtime, and running
-that same container in production, through the standard OCI `runc` runtime.
+Use Kubernetes in Docker (KinD) for ECI-protected Kubernetes:
 
-However in some cases, typically when running advanced or privileged workloads in
-containers, users may experience some differences. In particular, the container
-may run with ECI but not with `runc`, or vice-versa.
+```console
+$ kind create cluster
+```
+
+With ECI turned on, each Kubernetes node runs in an ECI-protected container, providing stronger isolation from the Docker Desktop VM.
+
+## Unprotected container types
+
+These container types currently don't benefit from ECI protection:
+
+- Docker Extensions: Extension containers run without ECI protection
+- Docker Debug: Docker Debug containers bypass ECI restrictions
+- Kubernetes pods: When using Docker Desktop's integrated Kubernetes
+
+### Recommendation
+
+Only use extensions from trusted sources and avoid Docker Debug in security-sensitive environments.
+
+## Global command restrictions
+
+Command lists apply to all containers allowed to mount the Docker socket. You can't configure different command restrictions per container image.
+
+## Local-only images not supported
+
+You can't allow arbitrary local-only images (images not in a registry) to mount the Docker socket, unless they're:
+
+- Derived from an allowed base image (with `allowDerivedImages: true`)
+- Using the wildcard allowlist (`"*"`, Docker Desktop 4.36 and later)
+
+## Unsupported Docker commands
+
+These Docker commands aren't yet supported in command list restrictions:
+
+- `compose`: Docker Compose commands
+- `dev`: Development environment commands
+- `extension`: Docker Extensions management
+- `feedback`: Docker feedback submission
+- `init`: Docker initialization commands
+- `manifest`: Image manifest management
+- `plugin`: Plugin management
+- `sbom`: Software Bill of Materials
+- `scout`: Docker Scout commands
+- `trust`: Image trust management
+
+## Performance considerations
+
+### Derived images impact
+
+Enabling `allowDerivedImages: true` adds approximately 1 second to container startup time for image validation.
+
+### Registry dependencies
+
+- Docker Desktop periodically fetches image digests from registries for validation
+- Initial container starts require registry access to validate allowed images
+- Network connectivity issues may cause delays in container startup
+
+### Image digest validation
+
+When allowed images are updated in registries, local containers may be unexpectedly blocked until you refresh the local image:
+
+```console
+$ docker image rm <image>
+$ docker pull <image>
+```
+
+## Version compatibility
+
+ECI features have been introduced across different Docker Desktop versions:
+
+- Docker Desktop 4.36 and later: Wildcard allowlist support (`"*"`) and improved derived images handling
+- Docker Desktop 4.34 and later: Derived images support (`allowDerivedImages`)
+- Docker Desktop 4.30 and later: Docker Build protection with default driver (except WSL 2)
+- Docker Desktop 4.13 and later: Core ECI functionality
+
+For the latest feature availability, use the most recent Docker Desktop version.
+
+## Production compatibility
+
+### Container behavior differences
+
+Most containers run identically with and without ECI. However, some advanced workloads may behave differently:
+
+- Containers requiring kernel module loading
+- Workloads modifying global kernel settings (BPF, sysctl)
+- Applications expecting specific privilege escalation behavior
+- Tools requiring direct hardware device access
+
+Test advanced workloads with ECI in development environments before production deployment to ensure compatibility.
+
+### Runtime considerations
+
+Containers using the Sysbox runtime (with ECI) may have subtle differences compared to standard OCI runc runtime in production. These differences typically only affect privileged or system-level operations.
