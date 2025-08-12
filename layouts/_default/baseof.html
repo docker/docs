@@ -42,6 +42,49 @@
         <div
           class="bg-background-toc dark:bg-background-toc z-50 w-full p-3 md:block md:w-[300px]"
         >
+          <!-- Top nav buttons appear here on sm width -->
+          <div class="flex flex-col gap-2 md:hidden mb-4">
+            <button
+              @click="open = false"
+              class="topbar-button open-kapa-widget w-full flex items-center gap-2"
+            >
+              <span>Ask&nbsp;AI</span>
+              <span class="icon-svg-stroke">
+                {{ partialCached "utils/svg.html" "/icons/sparkle.svg" }}
+              </span>
+            </button>
+            <div class="topbar-button w-full flex items-center gap-2" id="search-bar-container">
+               {{ partialCached "search-bar.html" "-" }}
+            </div>
+            <button class="topbar-button w-full flex items-center gap-2"
+               href="https://hub.docker.com/support/contact"
+                aria-label="Contact support" class="flex items-center gap-2 w-full">
+                <span>Contact support</span>
+                <span class="icon-svg icon-sm">
+                  {{ partial "utils/svg.html" "/icons/headset.svg" }}
+                </span>
+              </a>
+            </button>
+            <button
+              aria-label="Theme switch"
+              id="theme-switch"
+              class="topbar-button-clear w-full flex items-center gap-2"
+              x-data="{ theme: localStorage.getItem('theme-preference') }"
+              x-init="$watch('theme', value => {
+                    localStorage.setItem('theme-preference', value);
+                    document.firstElementChild.className = value;
+                  })"
+              @click="theme = (theme === 'dark' ? 'light' : 'dark')"
+            >
+              <span class="icon-svg icon-sm dark:hidden"
+                >{{ partialCached "icon" "icons/sun.svg" "sun" }}
+              </span>
+              <span class="icon-svg icon-sm hidden dark:block">
+                {{ partialCached "icon" "icons/moon.svg" "moon" }}
+              </span>
+              <span>Theme</span>
+            </button>
+          </div>
           <!-- Collapse button for small screens -->
           <button class="my-4 md:hidden" @click="$store.showSidebar = false">
             <span class="icon-svg"

@@ -46,27 +46,31 @@
       </nav>
     </div>
     <div id="buttons" class="flex min-w-0 items-center justify-end gap-4 flex-shrink-0">
-      <button
-        @click="open = false"
-        class="topbar-button open-kapa-widget"
-      >
-        <span>Ask&nbsp;AI</span>
-        <span class="icon-svg-stroke">
-          {{ partialCached "utils/svg.html" "/icons/sparkle.svg" }}
-        </span>
-      </button>
-      <div class="topbar-button" id="search-bar-container">
-         {{ partialCached "search-bar.html" "-" }}
-      </div>
-      <button class="topbar-button">
-        <a href="https://hub.docker.com/support/contact"
-          aria-label="Contact support">
-          <span>Contact support</span>
-          <span class="icon-svg icon-sm">
-            {{ partial "utils/svg.html" "/icons/headset.svg" }}
+      <!-- Hide on small screens, show on md+ -->
+      <div class="hidden md:flex items-center gap-4">
+        <button
+          @click="open = false"
+          class="topbar-button open-kapa-widget"
+        >
+          <span class="hidden lg:inline">Ask&nbsp;AI</span>
+          <span class="icon-svg-stroke">
+            {{ partialCached "utils/svg.html" "/icons/sparkle.svg" }}
           </span>
-        </a>
-      </button>
+        </button>
+
+        <div class="topbar-button" id="search-bar-container">
+           {{ partialCached "search-bar.html" "-" }}
+        </div>
+
+        <button class="topbar-button" href="https://hub.docker.com/support/contact"
+            aria-label="Contact support">
+            <span class="hidden lg:inline">Contact support</span>
+            <span class="icon-svg icon-sm">
+              {{ partial "utils/svg.html" "/icons/headset.svg" }}
+            </span>
+          </a>
+        </button>
+
         <button
           aria-label="Theme switch"
           id="theme-switch"
@@ -78,13 +82,15 @@
               })"
           @click="theme = (theme === 'dark' ? 'light' : 'dark')"
         >
-        <span class="icon-svg icon-sm dark:hidden"
-          >{{ partialCached "icon" "icons/sun.svg" "sun" }}
-        </span>
-        <span class="icon-svg icon-sm hidden dark:block">
-          {{ partialCached "icon" "icons/moon.svg" "moon" }}
-        </span>
-      </button>
+          <span class="icon-svg icon-sm dark:hidden"
+            >{{ partialCached "icon" "icons/sun.svg" "sun" }}
+          </span>
+          <span class="icon-svg icon-sm hidden dark:block">
+            {{ partialCached "icon" "icons/moon.svg" "moon" }}
+          </span>
+        </button>
+      </div>
+      <!-- On sm screens, hide all buttons here (they will be in sidebar) -->
     </div>
   </div>
 </header>

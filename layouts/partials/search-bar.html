@@ -1,129 +1,129 @@
-<div
-  x-ref="searchBarRef"
-  x-data="{ open: false }"
-  @click.outside="open = false;"
-  @keyup.escape.window="open = false"
-  id="search-bar"
-  class="relative w-32 items-center flex"
->
-  <input
-    x-ref="searchBarInput"
-    type="search"
-    id="search-bar-input"
-    placeholder="Search"
-    @focus="open = true;"
-    @keyup.enter.prevent="window.location.href = '/search/?q=' + $event.target.value;"
-    @keyup.escape.prevent="open = false;"
-    @keydown.window="(e) => {
-          switch(e.key) {
-          case 'k':
-            if (e.metaKey || e.ctrlKey) {
-              e.preventDefault();
-              $el.focus();
+  <div
+    x-ref="searchBarRef"
+    x-data="{ open: false }"
+    @click.outside="open = false;"
+    @keyup.escape.window="open = false"
+    id="search-bar"
+    class="relative items-center flex w-full max-w-full overflow-x-auto"
+  >
+    <input
+      x-ref="searchBarInput"
+      type="search"
+      id="search-bar-input"
+      placeholder="Search"
+      @focus="open = true;"
+      @keyup.enter.prevent="window.location.href = '/search/?q=' + $event.target.value;"
+      @keyup.escape.prevent="open = false;"
+      @keydown.window="(e) => {
+            switch(e.key) {
+            case 'k':
+              if (e.metaKey || e.ctrlKey) {
+                e.preventDefault();
+                $el.focus();
+              }
+              break;
             }
-            break;
-          }
-        }"
-    class="flex-grow order-1 min-w-0 border-none outline-none focus:outline-none"
-    tabindex="0"
-  />
-  <div id="search-bar-icon" class="order-2">
-    <span class="icon-svg-stroke">
-          {{ partial "utils/svg.html" "/icons/search.svg" }}
-        </span>
-  </div>
-  <div id="search-bar-dropdown" x-show="open" x-cloak x-ref="dropdown"
-    class="font-medium text-gray-400 dark:text-gray-200 bg-gray-50 dark:bg-gray-900 rounded-sm mt-4 border-1 border-gray-100 dark:border-gray-700 fixed z-[999] w-[500px] p-6 shadow-md"
-    x-effect="if (open) {
-      const containerRect = document.getElementById('search-bar-container').getBoundingClientRect();
-      const rect = $refs.searchBarRef.getBoundingClientRect();
-      $el.style.top = (rect.bottom + window.scrollY - 2) + 'px';
-      $el.style.right = (window.innerWidth - containerRect.right - 15) + 'px';
-    }">
-    <div id="search-bar-results">
-      {{- $emptyState := `<div>Start typing to search or try <button onclick="askAI('search-bar-input')" class="link">Ask
-          AI</button>.</div>` }}
-      {{- $emptyState | safe.HTML }}
-      <!-- results -->
+          }"
+      class="border-none outline-none focus:outline-none w-auto max-w-xs min-w-0"
+      tabindex="0"
+    />
+    <div id="search-bar-icon">
+      <span class="icon-svg-stroke">
+            {{ partial "utils/svg.html" "/icons/search.svg" }}
+          </span>
     </div>
-  </div>
-  <script type="module">
-    window.addEventListener("load", async function () {
-      const pagefind = await import("/pagefind/pagefind.js");
-      await pagefind.options({
-        ranking: {
-          termFrequency: 0.2,
-          pageLength: 0.75,
-          termSaturation: 1.4,
-          termSimilarity: 6.0
-        },
-      });
-
-      const searchBarInput = document.querySelector("#search-bar-input");
-      const searchBarResults = document.querySelector(
-        "#search-bar-results",
-      );
-
-      async function search(e) {
-        const query = e.target.value;
-        if (query === "") {
-          searchBarResults.innerHTML = `{{ $emptyState | safe.HTML }}`;
-          return;
-        }
-        const search = await pagefind.debouncedSearch(query);
-        if (search === null) {
-          return;
-        } else {
-          const resultsLength = search.results.length
-          const resultsData = await Promise.all(search.results.slice(0, 5).map(r => r.data()));
-          const results = resultsData.map((item, index) => ({...item, index: index + 1}));
-
-          if (query) {
-            searchBarResults.classList.remove("hidden");
-          } else {
-            searchBarResults.classList.add("hidden");
-          }
-
-          let resultsHTML = `<div class="p-2 text-gray-400 dark:text-gray-500">${resultsLength} results</div>`;
-          resultsHTML += results
-            .map((item) => {
-              return `<div class="p-2">
-              <div class="flex flex-col">
-                <a class="link" href="${item.url}" data-query="${query}" data-index="${item.index}">${item.meta.title}</a>
-                <p class="text-black dark:text-white overflow-hidden">…${item.excerpt}…</p>
-              </div>
-              </div>`;
-            })
-            .join("");
-          if (resultsLength > 5) {
-            resultsHTML += `<div class="w-fit ml-auto px-4 py-2"><a href="/search/?q=${query}" class="link">Show all results</a></div>`;
-          }
-
-          searchBarResults.innerHTML = resultsHTML;
-        }
-      }
-
-      searchBarInput.addEventListener("input", search);
-
-      // Event delegation for tracking link clicks
-      if (window.heap !== undefined) {
-        searchBarResults.addEventListener('click', function (event) {
-          if (event.target.tagName === 'A' && event.target.closest('.link')) {
-            const searchQuery = event.target.getAttribute('data-query');
-            const resultIndex = event.target.getAttribute('data-index');
-            const url = new URL(event.target.href);
-            const properties = {
-              docs_search_target_path: url.pathname,
-              docs_search_target_title: event.target.textContent,
-              docs_search_query_text: searchQuery,
-              docs_search_target_index: resultIndex,
-              docs_search_source_path: window.location.pathname,
-              docs_search_source_title: document.title,
-            };
-            heap.track("Docs - Search - Click - Result Link", properties);
-          }
+    <div id="search-bar-dropdown" x-show="open" x-cloak x-ref="dropdown"
+      class="font-medium text-gray-400 dark:text-gray-200 bg-gray-50 dark:bg-gray-900 rounded-sm mt-4 border-1 border-gray-100 dark:border-gray-700 fixed z-[999] w-[500px] p-6 shadow-md"
+      x-effect="if (open) {
+        const containerRect = document.getElementById('search-bar-container').getBoundingClientRect();
+        const rect = $refs.searchBarRef.getBoundingClientRect();
+        $el.style.top = (rect.bottom + window.scrollY - 2) + 'px';
+        $el.style.right = (window.innerWidth - containerRect.right - 15) + 'px';
+      }">
+      <div id="search-bar-results">
+        {{- $emptyState := `<div>Start typing to search or try <button onclick="askAI('search-bar-input')" class="link">Ask
+            AI</button>.</div>` }}
+        {{- $emptyState | safe.HTML }}
+        <!-- results -->
+      </div>
+    </div>
+    <script type="module">
+      window.addEventListener("load", async function () {
+        const pagefind = await import("/pagefind/pagefind.js");
+        await pagefind.options({
+          ranking: {
+            termFrequency: 0.2,
+            pageLength: 0.75,
+            termSaturation: 1.4,
+            termSimilarity: 6.0
+          },
         });
-      }
-    });
-  </script>
+
+        const searchBarInput = document.querySelector("#search-bar-input");
+        const searchBarResults = document.querySelector(
+          "#search-bar-results",
+        );
+
+        async function search(e) {
+          const query = e.target.value;
+          if (query === "") {
+            searchBarResults.innerHTML = `{{ $emptyState | safe.HTML }}`;
+            return;
+          }
+          const search = await pagefind.debouncedSearch(query);
+          if (search === null) {
+            return;
+          } else {
+            const resultsLength = search.results.length
+            const resultsData = await Promise.all(search.results.slice(0, 5).map(r => r.data()));
+            const results = resultsData.map((item, index) => ({...item, index: index + 1}));
+
+            if (query) {
+              searchBarResults.classList.remove("hidden");
+            } else {
+              searchBarResults.classList.add("hidden");
+            }
+
+            let resultsHTML = `<div class="p-2 text-gray-400 dark:text-gray-500">${resultsLength} results</div>`;
+            resultsHTML += results
+              .map((item) => {
+                return `<div class="p-2">
+                <div class="flex flex-col">
+                  <a class="link" href="${item.url}" data-query="${query}" data-index="${item.index}">${item.meta.title}</a>
+                  <p class="text-black dark:text-white overflow-hidden">…${item.excerpt}…</p>
+                </div>
+                </div>`;
+              })
+              .join("");
+            if (resultsLength > 5) {
+              resultsHTML += `<div class="w-fit ml-auto px-4 py-2"><a href="/search/?q=${query}" class="link">Show all results</a></div>`;
+            }
+
+            searchBarResults.innerHTML = resultsHTML;
+          }
+        }
+
+        searchBarInput.addEventListener("input", search);
+
+        // Event delegation for tracking link clicks
+        if (window.heap !== undefined) {
+          searchBarResults.addEventListener('click', function (event) {
+            if (event.target.tagName === 'A' && event.target.closest('.link')) {
+              const searchQuery = event.target.getAttribute('data-query');
+              const resultIndex = event.target.getAttribute('data-index');
+              const url = new URL(event.target.href);
+              const properties = {
+                docs_search_target_path: url.pathname,
+                docs_search_target_title: event.target.textContent,
+                docs_search_query_text: searchQuery,
+                docs_search_target_index: resultIndex,
+                docs_search_source_path: window.location.pathname,
+                docs_search_source_title: document.title,
+              };
+              heap.track("Docs - Search - Click - Result Link", properties);
+            }
+          });
+        }
+      });
+    </script>
 </div>
