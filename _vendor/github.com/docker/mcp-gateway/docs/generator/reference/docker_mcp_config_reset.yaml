@@ -1,0 +1,13 @@
+command: docker mcp config reset
+short: Reset the configuration
+long: Reset the configuration
+usage: docker mcp config reset
+pname: docker mcp config
+plink: docker_mcp_config.yaml
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

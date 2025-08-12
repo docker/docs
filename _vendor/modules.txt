@@ -4,4 +4,5 @@
 # github.com/docker/cli v28.3.3+incompatible
 # github.com/docker/compose/v2 v2.39.2
 # github.com/docker/model-cli v0.1.33-0.20250703103301-d4e4936a9eb2
+# github.com/docker/mcp-gateway v0.13.1-0.20250730013131-e08a3be84765
 # github.com/docker/scout-cli v1.18.1
