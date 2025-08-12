@@ -95,27 +95,6 @@
       <button type="button" id="ot-sdk-btn" class="ot-sdk-show-settings">
         Cookies Settings
       </button>
-      <div class="flex items-center gap-2">
-        <span>Theme:</span>
-        <button
-          aria-label="Theme switch"
-          id="theme-switch"
-          class="bg-blue rounded-sm px-4 py-1 text-white transition hover:bg-blue-400 dark:bg-blue-400 dark:hover:bg-blue-500"
-          x-data="{ theme: localStorage.getItem('theme-preference') }"
-          x-init="$watch('theme', value => {
-                localStorage.setItem('theme-preference', value);
-                document.firstElementChild.className = value;
-              })"
-          @click="theme = (theme === 'dark' ? 'light' : 'dark')"
-        >
-          <span class="icon-svg icon-sm dark:hidden"
-            >Light {{ partialCached "icon" "light_mode" "light_mode" }}</span
-          >
-          <span class="icon-svg icon-sm hidden dark:block"
-            >Dark {{ partialCached "icon" "dark_mode" "dark_mode" }}</span
-          >
-        </button>
-      </div>
     </div>
   </div>
 </div>

@@ -255,4 +255,9 @@
    font-size: 19px;
   }
 }
-
+@utility topbar-button-clear {
+  @apply text-white/95 font-semibold min-h-9 px-0 inline-flex justify-center items-center gap-1.5  hover:text-white/90 transition-colors;
+  svg {
+   font-size: 19px;
+  }
+}
