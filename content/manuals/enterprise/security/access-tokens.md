@@ -1,69 +1,56 @@
 ---
 title: Organization access tokens
-description: Learn how to create and manage organization access tokens
-  to securely push and pull images programmatically.
-keywords: docker hub, security, OAT, organization access token
 linkTitle: Organization access tokens
+description: Create and manage organization access tokens to securely authenticate automated systems and CI/CD pipelines with Docker Hub
+keywords: organization access tokens, OAT, docker hub security, programmatic access, automation
 aliases:
  - /security/for-admins/access-tokens/
 ---
 
 {{< summary-bar feature_name="OATs" >}}
 
+Organization access tokens (OATs) provide secure, programmatic access to Docker Hub for automated systems, CI/CD pipelines, and other business-critical tasks. Unlike personal access tokens tied to individual users, OATs are associated with your organization and can be managed by any organization owner.
+
 > [!WARNING]
 >
-> Organization access tokens (OATs) are incompatible with Docker Desktop,
-> [Image Access Management (IAM)](/manuals/enterprise/security/hardened-desktop/image-access-management.md), and [Registry Access Management (RAM)](/manuals/enterprise/security/hardened-desktop/registry-access-management.md).
->
-> If you use Docker Desktop, IAM, or RAM, you must use personal
-> access tokens instead.
+> Organization access tokens are incompatible with Docker Desktop, Image Access Management, and Registry Access Management. If you use these features, use [personal access tokens](/manuals/security/access-tokens.md) instead.
 
-An organization access token (OAT) is like a [personal access token
-(PAT)](/security/access-tokens/), but an OAT is associated with
-an organization and not a single user account. Use an OAT instead of a PAT to
-let business-critical tasks access Docker Hub repositories without connecting
-the token to single user. You must have a [Docker Team or Business
-subscription](/subscription/core-subscription/details/) to use OATs.
+## When to use organization access tokens
 
-OATs provide the following advantages:
+Use OATs for automated systems that need Docker Hub access without depending on individual user accounts:
 
-- You can investigate when the OAT was last used and then disable or delete it
-  if you find any suspicious activity.
-- You can limit what each OAT has access to, which limits the impact if an OAT
-  is compromised.
-- All company or organization owners can manage OATs. If one owner leaves the
-  organization, the remaining owners can still manage the OATs.
-- OATs have their own Docker Hub usage limits that don't count towards your
-  personal account's limits.
+- CI/CD pipelines: Build and deployment systems that push and pull images
+- Production systems: Applications that pull images during deployment
+- Monitoring tools: Systems that need to check repository status or pull images
+- Backup systems: Tools that periodically pull images for archival
+- Integration services: Third-party tools that integrate with your Docker Hub repositories
 
-If you have existing [service accounts](/docker-hub/service-accounts/),
-Docker recommends that you replace the service accounts with OATs. OATs offer
-the following advantages over service accounts:
+## Prerequisites
 
-- Access permissions are easier to manage with OATs. You can assign access
-  permissions to OATs, while service accounts require using teams for access
-  permissions.
-- OATs are easier to manage. OATs are centrally managed in the Admin Console.
-  For service accounts, you may need to sign in to that service account to
-  manage it. If using single sign-on enforcement and the service account is not
-  in your IdP, you may not be able to sign in to the service account to manage
-  it.
-- OATs are not associated with a single user. If a user with access to the
-  service account leaves your organization, you may lose access to the service
-  account. OATs can be managed by any company or organization owner.
+To create and use organization access tokens, you must have:
+
+- A Docker Team or Business subscription
+- Owner permissions
+- Repositories you want to grant access to
+
+## Key benefits
+
+Benefits of using organization access tokens include:
+
+- Organizational ownership: Not tied to individual users who might leave the company
+- Shared management: All organization owners can create and manage OATs
+- Separate usage limits: OATs have their own Docker Hub rate limits, not counting against personal accounts
+- Better security audit: Track when tokens were last used and identify suspicious activity
+- Granular permissions: Limit access to specific repositories and operations
 
 ## Create an organization access token
 
-> [!IMPORTANT]
->
-> Treat access tokens like a password and keep them secret. Store your tokens
-> securely in a credential manager for example.
+Owners can create tokens with these limits:
 
-Company or organization owners can create up to:
-- 10 OATs for organizations with a Team subscription
-- 100 OATs for organizations with a Business subscription
+- Team subscription: Up to 10 OATs per organization
+- Business subscription: Up to 100 OATs per organization
 
-Expired tokens count towards the total amount of tokens.
+Expired tokens count toward your total limit.
 
 To create an OAT:
 
@@ -71,51 +58,56 @@ To create an OAT:
 organization.
 1. Select **Admin Console**, then **Access tokens**.
 1. Select **Generate access token**.
-1. Add a label and optional description for your token. Use something that
-indicates the use case or purpose of the token.
-1. Select the expiration date for the token.
-1. Expand the **Repository** drop-down to set access permission
-scopes for your token. To set Repository access scopes:
-    1. Optional. Select **Read public repositories**.
-    1. Select **Add repository** and choose a repository from the drop-down.
-    1. Set the scopes for your repository &mdash; **Image Push** or
-    **Image Pull**.
-    1. Add more repositories as needed. You can add up to 50 repositories.
-1. Optional. Expand the **Organization** drop-down and select the
-**Allow management access to this organization's resources** checkbox. This
-setting enables organization management scopes for your token. The following
-organization management scopes are available:
+1. Configure token details:
+  - Label: Descriptive name indicating the token's purpose
+  - Description (optional): Additional details
+  - Expiration date: When the token should expire
+1. Expand the **Repository** drop-down to set access permissions:
+  1. Optional. Select **Read public repositories** for access to public repositories.
+  1. Select **Add repository** and choose a repository from the drop-down.
+  1. Set permissions for each repository: **Image Pull** or **Image Push**.
+  1. Add up to 50 repositories as needed.
+1. Optional. Configure organization management permissions by expanding the **Organization** drop-down and selecting the **Allow management access to this organization's resources**:
     - **Member Edit**: Edit members of the organization
     - **Member Read**: Read members of the organization
     - **Invite Edit**: Invite members to the organization
     - **Invite Read**: Read invites to the organization
     - **Group Edit**: Edit groups of the organization
     - **Group Read**: Read groups of the organization
-1. Select **Generate token**. Copy the token that appears on the screen
-   and save it. You won't be able to retrieve the token once you exit the
-   screen.
+1. Select **Generate token**. Copy the token that appears on the screen and save it. You won't be able to retrieve the token once you exit the screen.
 
-## Use an organization access token
+> [!IMPORTANT]
+>
+> Treat organization access tokens like passwords. Store them securely in a credential manager and never commit them to source code repositories.
 
-You can use an organization access token when you sign in using Docker CLI.
+## Use organization access tokens
 
-Sign in from your Docker CLI client with the following command, replacing
-`YOUR_ORG` with your organization name:
+Sign in to the Docker CLI using your organization access token:
 
 ```console
-$ docker login --username <YOUR_ORG>
+$ docker login --username <YOUR_ORGANIZATION_NAME>
+Password: [paste your OAT here]
 ```
 
-When prompted for a password, enter your organization access token instead of a
-password.
+When prompted for a password, enter your organization access token.
 
 ## Modify existing tokens
 
-You can rename, update the description, update the repository access,
-deactivate, or delete a token as needed.
+To manage existing tokens:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select your
 organization.
 1. Select **Admin Console**, then **Access tokens**.
-1. Select the actions menu in the token row, then select **Deactivate**, **Edit**, or **Delete** to modify the token. For **Inactive** tokens, you can only select **Delete**.
-1. If editing a token, select **Save** after specifying your modifications.
+1. Select the actions menu in the token row, you can:
+  - **Edit**
+  - **Deactivate**
+  - **Delete**
+1. Select **Save** after making changes to a token.
+
+## Organization access token best practices
+
+- Regular token rotation: Set reasonable expiration dates and rotate tokens regularly to minimize security risks.
+- Principle of least privilege: Grant only the minimum repository access and permissions needed for each use case.
+- Monitor token usage: Regularly review when tokens were last used to identify unused or suspicious tokens.
+- Secure storage: Store tokens in secure credential management systems, never in plain text or source code.
+- Immediate revocation: Deactivate or delete tokens immediately if they're compromised or no longer needed.

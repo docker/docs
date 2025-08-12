@@ -1,71 +1,72 @@
 ---
-title: Create and manage access tokens
-linkTitle: Access tokens
-description: Learn how to create and manage your personal Docker access tokens
-  to securely push and pull images programmatically.
-keywords: docker hub, hub, security, PAT, personal access token
+title: Personal access tokens
+linkTitle: Personal access tokens
+description: Create and manage personal Docker access tokens for secure CLI authentication and automation
+keywords: personal access tokens, PAT, docker cli authentication, docker hub security, programmatic access
 aliases:
  - /docker-hub/access-tokens/
  - /security/for-developers/access-tokens/
 ---
 
-You can create a personal access token (PAT) to use as an alternative to your password for Docker CLI authentication.
+Personal access tokens (PATs) provide a secure alternative to passwords for Docker CLI authentication. Use PATs to authenticate automated systems, CI/CD pipelines, and development tools without exposing your Docker Hub password.
 
-Compared to passwords, PATs provide the following advantages:
+## Key benefits
 
-- You can investigate when the PAT was last used and then disable or delete it if you find any suspicious activity.
-- When using an access token, you can't perform any administrative activity on the account, including changing the password. It protects your account if your computer is compromised.
-- Access tokens are valuable for building integrations, as you can issue multiple tokens, one for each integration, and revoke them at
-any time.
+PATs offer significant security advantages over password authentication:
 
-## Create an access token
+- Enhanced security: Investigate token usage, disable suspicious tokens, and prevent administrative actions that could compromise your account if your system is compromised.
+- Better automation: Issue multiple tokens for different integrations, each with specific permissions, and revoke them independently when no longer needed.
+- Two-factor authentication compatibility: Required when you have two-factor authentication turned on, providing secure CLI access without bypassing 2FA protection.
+- Usage tracking: Monitor when and how tokens are used to identify potential security issues or unused automation.
+
+## When to use personal access tokens
+
+Use PATs for these common scenarios:
+
+- Development workflows: Authenticate Docker CLI during local development
+- CI/CD pipelines: Automate image builds and deployments in continuous integration systems
+- Automation scripts: Push and pull images in automated deployment or backup scripts
+- Development tools: Integrate Docker Hub access with IDEs, container management tools, or monitoring systems
+- Two-factor authentication: Required for CLI access when 2FA is turned on
+
+> [!NOTE]
+>
+> For organization-wide automation, consider [organization access tokens](/manuals/enterprise/security/access-tokens.md) which aren't tied to individual user accounts.
+
+## Create a personal access token
 
 > [!IMPORTANT]
 >
-> Treat access tokens like your password and keep them secret. Store your tokens securely in a credential manager for example.
+> Treat access tokens like passwords and keep them secure. Store tokens in credential managers and never commit them to source code repositories.
 
-Use the Docker Admin Console to create an access token.
+To create a personal access token:
 
 1. Sign in to [Docker Home](https://app.docker.com/).
 1. Select your avatar in the top-right corner and from the drop-down menu select **Account settings**.
 1. Select **Personal access tokens**.
 1. Select **Generate new token**.
-1. Add a description for your token. Use something that indicates the use case or purpose of the token.
-1. Select the expiration date for the token.
-1. Set the access permissions.
-   The access permissions are scopes that set restrictions in your
-   repositories. For example, for Read & Write permissions, an automation
-   pipeline can build an image and then push it to a repository. However, it
-   can't delete the repository.
-1. Select **Generate** and then copy the token that appears on the screen and save it. You won't be able to retrieve the token once you close this prompt.
+1. Configure your token:
+   - **Description:** Use a descriptive name that indicates the token's purpose
+   - **Expiration date:** Set an expiration date based on your security policies
+   - **Access permissions:** **Read**, **Write**, or **Delete**.
+1. Select **Generate**. Copy the token that appears on the screen and save it. You won't be able to retrieve the token once you exit the screen.
 
-## Use an access token
+## Use personal access tokens
 
-You can use an access token in place of your password when you sign in using Docker CLI.
-
-Sign in from your Docker CLI client with the following command, replacing `YOUR_USERNAME` with your Docker ID:
+Sign in to the Docker CLI using your personal access token:
 
 ```console
 $ docker login --username <YOUR_USERNAME>
+Password: [paste your PAT here]
 ```
 
-When prompted for a password, enter your personal access token instead of a password.
+When prompted for a password, enter your personal access token instead of your Docker Hub password.
+
+## Modify personal access tokens
 
 > [!NOTE]
 >
-> If you have [two-factor authentication (2FA)](2fa/_index.md) enabled, you must
-> use a personal access token when logging in from the Docker CLI. 2FA is an
-> optional, but more secure method of authentication.
-
-### Fair use
-
-When utilizing PATs, users should be aware that excessive creation of PATs could lead to throttling, or additional charges. To ensure fair resource usage and maintain service quality, Docker reserves the right to impose restrictions or apply additional charges to accounts exhibiting excessive use of PATs.
-
-## Modify existing tokens
-
-> [!NOTE]
->
-> You can't edit the expiration date on an existing token. You must create a new PAT if you need to set a new expiration date.
+> You can't edit the expiration date on an existing personal access token. You must create a new PAT if you need to set a new expiration date.
 
 You can rename, activate, deactivate, or delete a token as needed. You can manage your tokens in your account settings.
 
@@ -83,6 +84,23 @@ You can rename, activate, deactivate, or delete a token as needed. You can manag
 
 ## Auto-generated tokens
 
-When you sign in to your Docker account with Docker Desktop, Docker Desktop generates an authentication token on your behalf. When you interact with Docker Hub using the Docker CLI, the CLI uses this token for authentication. The token scope has Read, Write, and Delete access. If your Docker Desktop session expires, the token is automatically removed locally.
+Docker Desktop automatically creates authentication tokens when you sign in, with these characteristics:
 
-You can have up to 5 auto-generated tokens associated with your account. These are deleted and created automatically based on usage and creation dates. You can also delete your auto-generated tokens as needed. For more information, see [Modify existing tokens](#modify-existing-tokens).
+- Automatic creation: Generated when you sign in to Docker Desktop
+- Full permissions: Include Read, Write, and Delete access
+- Session-based: Automatically removed when Docker Desktop session expires
+- Account limits: Up to 5 auto-generated tokens per account
+- Automatic cleanup: Older tokens are deleted when new ones are created
+
+You can manually delete auto-generated tokens if needed, but they'll be recreated when you use Docker Desktop.
+
+## Fair use policy
+
+When using personal access tokens, be aware that excessive token creation may result in throttling or additional charges. Docker reserves the right to impose restrictions on accounts with excessive PAT usage to ensure fair resource allocation and maintain service quality.
+
+Best practices for fair use include:
+
+- Reuse tokens across similar use cases instead of creating many single-purpose tokens
+- Delete unused tokens regularly
+- Use [organization access tokens](/manuals/enterprise/security/access-tokens.md) for organization-wide automation
+- Monitor token usage to identify optimization opportunities
