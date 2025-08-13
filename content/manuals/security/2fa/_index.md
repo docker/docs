@@ -3,6 +3,7 @@ title: Enable two-factor authentication for your Docker account
 linkTitle: Two-factor authentication
 description: Enable or disable two-factor authentication on your Docker account for enhanced security and account protection
 keywords: two-factor authentication, 2FA, docker hub security, account security, TOTP, authenticator app, disable 2FA
+weight: 20
 aliases:
  - /docker-hub/2fa/
  - /security/for-developers/2fa/

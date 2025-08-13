@@ -28,13 +28,6 @@ Docker Desktop only applies settings from the `admin-settings.json` file when bo
 >
 > Users must be signed in and part of a Docker Business organization. If either condition isn't met, the settings file is ignored.
 
-## Limitation
-
-Settings Management has the following limitations:
-
-- Doesn't work in air-gapped or offline environments
-- Not compatible with environments that restrict authentication with Docker Hub
-
 ## Step one: Create the settings file
 
 You can create the `admin-settings.json` file in two ways:
@@ -71,7 +64,7 @@ a user has already customized that value in `settings-store.json`,
 
 ### Example configuration
 
-The folloiwng sample is an `admin-settings.json` file with common enterprise settings configured:
+The following sample is an `admin-settings.json` file with common enterprise settings configured. You can use this example as a template with the [`admin-settings.json` configurations](#admin-settingsjson-configurations):
 
 ```json {collapse=true}
 {

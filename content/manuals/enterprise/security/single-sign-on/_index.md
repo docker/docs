@@ -16,8 +16,7 @@ weight: 10
 Single sign-on (SSO) lets users access Docker by authenticating through their
 identity providers (IdPs). SSO can be configured for an entire company,
 including all associated organizations, or for a single organization that has a
-Docker Business subscription. To upgrade, see
-[Upgrade your subscription](/manuals/subscription/change.md).
+Docker Business subscription.
 
 ## How SSO works
 
@@ -65,8 +64,8 @@ users accessing Docker through the CLI must [create a personal access token (PAT
 Using a PAT ensures continued CLI access. For more information, see the
 [security announcement](/manuals/security/security-announcements.md#deprecation-of-password-logins-on-cli-when-sso-enforced).
 
-## What's next?
+## Next steps
 
-- Start [configuring SSO](configure.md)
-- Read the FAQs [FAQs](/manuals/security/faqs/_index.md)
-- [Troubleshoot](/manuals/enterprise/troubleshoot/troubleshoot-sso.md) SSO issues
+- Start [configuring SSO](configure.md).
+- Read the FAQs [FAQs](/manuals/security/faqs/_index.md).
+- [Troubleshoot](/manuals/enterprise/troubleshoot/troubleshoot-sso.md) SSO issues.

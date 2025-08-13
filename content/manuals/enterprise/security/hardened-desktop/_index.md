@@ -37,9 +37,7 @@ Hardened Docker Desktop provides a collection of security features designed to s
 
 With Hardened Docker Desktop, you can enforce strict security policies that prevent developers and containers from bypassing organizational controls. You can also enhance container isolation to protect against security threats like malicious payloads that might breach the Docker Desktop Linux VM or underlying host system.
 
-## Key benefits
-
-Hardened Docker Desktop shifts configuration ownership from individual developers to your organization. This means security controls you establish can't be modified by Docker Desktop users.
+## Who should use Hardened Docker Desktop?
 
 Hardened Docker Desktop is ideal for security-focused organizations that:
 
@@ -47,9 +45,9 @@ Hardened Docker Desktop is ideal for security-focused organizations that:
 - Want centralized control over Docker Desktop configurations
 - Must meet specific compliance requirements
 
-### How Hardened Docker Desktop protects your organization
+## How Hardened Docker Desktop works
 
-The Hardened Docker Desktop features work independently and together to create a defense-in-depth security strategy. They protect developer workstations against attacks across multiple layers, including Docker Desktop configuration, container image management, and container runtime security:
+Hardened Docker Desktop features work independently and together to create a defense-in-depth security strategy. They protect developer workstations against attacks across multiple layers, including Docker Desktop configuration, container image management, and container runtime security:
 
 - Registry Access Management and Image Access Management prevent access to unauthorized container registries and image types, reducing exposure to malicious payloads
 - Enhanced Container Isolation runs containers without root privileges inside a Linux user namespace, limiting the impact of malicious containers

@@ -23,7 +23,7 @@ With Image Access Management, you can restrict access to:
 - Organization images: Your organization's private repositories
 - Community images: Public images from individual developers
 
-## Why use Image Access Management?
+## Who should use Image Access Management?
 
 Image Access Management helps prevent supply chain attacks by ensuring developers only use trusted container images. For example, a developer building a new application might accidentally use a malicious community image as a component. Image Access Management prevents this by restricting access to only approved image types.
 
@@ -54,10 +54,10 @@ To configure Image Access Management:
 1. Select **Admin Console**, then **Image access**.
 1. Use the **toggle** to enable image access.
 1. Select which image types to allow:
-    - Organization images: Images from your organization (always allowed by default). These can be public or private images created by members within your organization.
-    - Community images: Images contributed by various users that may pose security risks. This category includes Docker-Sponsored Open Source images and is turned off by default.
-    - Docker Verified Publisher Images: Images from Docker partners in the Verified Publisher program, qualified for secure supply chains.
-    - Docker Official Images: Curated Docker repositories that provide OS repositories, best practices for Dockerfiles, drop-in solutions, and timely security updates.
+    - **Organization images**: Images from your organization (always allowed by default). These can be public or private images created by members within your organization.
+    - **Community images**: Images contributed by various users that may pose security risks. This category includes Docker-Sponsored Open Source images and is turned off by default.
+    - **Docker Verified Publisher Images**: Images from Docker partners in the Verified Publisher program, qualified for secure supply chains.
+    - **Docker Official Images**: Curated Docker repositories that provide OS repositories, best practices for Dockerfiles, drop-in solutions, and timely security updates.
 
 Once restrictions are applied, organization members can view the permissions page in read-only format.
 

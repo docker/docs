@@ -44,7 +44,7 @@ To configure the registry key method manually:
    - Add each organization on a separate line
    - Do not use spaces or commas as separators
 1. Restart Docker Desktop.
-1. Verify the **Sign in required!** prompt appears.
+1. Verify the `Sign in required!` prompt appears in Docker Desktop.
 
 > [!IMPORTANT]
 >
@@ -154,7 +154,7 @@ Use this alternative method for macOS with Docker Desktop version 4.32 and later
    ```
 1. Set file permissions to prevent editing by non-administrator users.
 1. Restart Docker Desktop.
-1. Verify the **Sign in required!** prompt appears.
+1. Verify the `Sign in required!` prompt appears in Docker Desktop.
 
 {{< /tab >}}
 {{< tab name="Shell script deployment" >}}
@@ -202,14 +202,14 @@ Create the `registry.json` file at the appropriate location:
 1. Ensure users are members of your Docker organization.
 1. Create the `registry.json` file at the appropriate location for your platform.
 1. Add this content, replacing organization names with your own:
-   ```json
-   {
-  "allowedOrgs": ["myorg1", "myorg2"]
-   }
-   ```
+      ```json
+      {
+         "allowedOrgs": ["myorg1", "myorg2"]
+      }
+      ```
 1. Set file permissions to prevent user editing.
 1. Restart Docker Desktop.
-1. Verify the **Sign in required!** prompt appears.
+1. Verify the `Sign in required!` prompt appears in Docker Desktop.
 
 > [!TIP]
 >
@@ -219,20 +219,20 @@ they may need to update to the latest version.
 {{< /tab >}}
 {{< tab name="Command line setup" >}}
 
-#### Windows (PowerShell as Administrator):
+#### Windows (PowerShell as Administrator)
 
 ```shell
 Set-Content /ProgramData/DockerDesktop/registry.json '{"allowedOrgs":["myorg1","myorg2"]}'
 ```
 
-#### macOS:
+#### macOS
 
 ```console
 sudo mkdir -p "/Library/Application Support/com.docker.docker"
 echo '{"allowedOrgs":["myorg1","myorg2"]}' | sudo tee "/Library/Application Support/com.docker.docker/registry.json"
 ```
 
-#### Linux:
+#### Linux
 
 ```console
 sudo mkdir -p /usr/share/docker-desktop/registry
@@ -244,7 +244,7 @@ echo '{"allowedOrgs":["myorg1","myorg2"]}' | sudo tee /usr/share/docker-desktop/
 
 Create the registry.json file during Docker Desktop installation:
 
-#### Windows:
+#### Windows
 
 ```shell
 # PowerShell
@@ -254,7 +254,7 @@ Start-Process '.\Docker Desktop Installer.exe' -Wait 'install --allowed-org=myor
 "Docker Desktop Installer.exe" install --allowed-org=myorg
 ```
 
-#### macOS:
+#### macOS
 
 ```console
 sudo hdiutil attach Docker.dmg

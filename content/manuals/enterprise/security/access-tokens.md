@@ -15,7 +15,7 @@ Organization access tokens (OATs) provide secure, programmatic access to Docker 
 >
 > Organization access tokens are incompatible with Docker Desktop, Image Access Management, and Registry Access Management. If you use these features, use [personal access tokens](/manuals/security/access-tokens.md) instead.
 
-## When to use organization access tokens
+## Who should use organization access tokens?
 
 Use OATs for automated systems that need Docker Hub access without depending on individual user accounts:
 
@@ -24,14 +24,6 @@ Use OATs for automated systems that need Docker Hub access without depending on 
 - Monitoring tools: Systems that need to check repository status or pull images
 - Backup systems: Tools that periodically pull images for archival
 - Integration services: Third-party tools that integrate with your Docker Hub repositories
-
-## Prerequisites
-
-To create and use organization access tokens, you must have:
-
-- A Docker Team or Business subscription
-- Owner permissions
-- Repositories you want to grant access to
 
 ## Key benefits
 
@@ -42,6 +34,14 @@ Benefits of using organization access tokens include:
 - Separate usage limits: OATs have their own Docker Hub rate limits, not counting against personal accounts
 - Better security audit: Track when tokens were last used and identify suspicious activity
 - Granular permissions: Limit access to specific repositories and operations
+
+## Prerequisites
+
+To create and use organization access tokens, you must have:
+
+- A Docker Team or Business subscription
+- Owner permissions
+- Repositories you want to grant access to
 
 ## Create an organization access token
 
@@ -59,14 +59,14 @@ organization.
 1. Select **Admin Console**, then **Access tokens**.
 1. Select **Generate access token**.
 1. Configure token details:
-  - Label: Descriptive name indicating the token's purpose
-  - Description (optional): Additional details
-  - Expiration date: When the token should expire
+    - Label: Descriptive name indicating the token's purpose
+    - Description (optional): Additional details
+    - Expiration date: When the token should expire
 1. Expand the **Repository** drop-down to set access permissions:
-  1. Optional. Select **Read public repositories** for access to public repositories.
-  1. Select **Add repository** and choose a repository from the drop-down.
-  1. Set permissions for each repository: **Image Pull** or **Image Push**.
-  1. Add up to 50 repositories as needed.
+    1. Optional. Select **Read public repositories** for access to public repositories.
+    1. Select **Add repository** and choose a repository from the drop-down.
+    1. Set permissions for each repository: **Image Pull** or **Image Push**.
+    1. Add up to 50 repositories as needed.
 1. Optional. Configure organization management permissions by expanding the **Organization** drop-down and selecting the **Allow management access to this organization's resources**:
     - **Member Edit**: Edit members of the organization
     - **Member Read**: Read members of the organization
@@ -99,9 +99,9 @@ To manage existing tokens:
 organization.
 1. Select **Admin Console**, then **Access tokens**.
 1. Select the actions menu in the token row, you can:
-  - **Edit**
-  - **Deactivate**
-  - **Delete**
+    - **Edit**
+    - **Deactivate**
+    - **Delete**
 1. Select **Save** after making changes to a token.
 
 ## Organization access token best practices

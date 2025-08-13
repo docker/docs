@@ -14,15 +14,13 @@ weight: 10
 
 Settings Management lets administrators configure and enforce Docker Desktop settings across end-user machines. It helps maintain consistent configurations and enhances security within your organization.
 
-## Who is Settings Management for?
+## Who should use Settings Management?
 
 Settings Management is designed for organizations that:
 
 - Need centralized control over Docker Desktop configurations
 - Want to standardize Docker Desktop environments across teams
 - Operate in regulated environments and must enforce compliance policies
-
-This feature is available with a Docker Business subscription.
 
 ## How Settings Management works
 
@@ -85,6 +83,13 @@ When settings are enforced:
 
 This ensures consistent environments while maintaining a clear visual indication of which settings are managed by administrators.
 
+## Limitations
+
+Settings Management has the following limitations:
+
+- Doesn't work in air-gapped or offline environments
+- Not compatible with environments that restrict authentication with Docker Hub
+
 ## Next steps
 
 Get started with Settings Management:
@@ -92,7 +97,3 @@ Get started with Settings Management:
 - [Configure Settings Management with the `admin-settings.json` file](configure-json-file.md)
 - [Configure Settings Management with the Docker Admin Console](configure-admin-console.md)
 
-## More resources
-
-- To see how each Docker Desktop setting maps across the Docker Dashboard, `admin-settings.json` file, and Admin Console, see the [Settings reference](settings-reference.md).
-- Read the [Settings Management blog post](https://www.docker.com/blog/settings-management-for-docker-desktop-now-generally-available-in-the-admin-console/).

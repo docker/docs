@@ -1,6 +1,6 @@
 ---
 title: Configure Docker socket exceptions and advanced settings
-linkTitle: Configure Docker socket exceptions
+linkTitle: Configure advanced settings
 description: Configure Docker socket exceptions and advanced settings for Enhanced Container Isolation
 keywords: enhanced container isolation, docker socket, configuration, testcontainers, admin settings
 aliases:
@@ -15,7 +15,7 @@ This page shows you how to configure Docker socket exceptions and other advanced
 
 ## Docker socket mount permissions
 
-By default, Enhanced Container Isolation blocks containers from mounting the Docker socket to prevent malicious access to Docker Engine. However, some legitimate tools require Docker socket access.
+By default, Enhanced Container Isolation blocks containers from mounting the Docker socket to prevent malicious access to Docker Engine. However, some tools require Docker socket access.
 
 Common scenarios requiring Docker socket access include:
 
@@ -23,7 +23,6 @@ Common scenarios requiring Docker socket access include:
 - Build tools: Paketo buildpacks that create ephemeral build containers
 - CI/CD tools: Tools that manage containers as part of deployment pipelines
 - Development utilities: Docker CLI containers for container management
-
 
 ## Configure socket exceptions
 
@@ -44,8 +43,8 @@ command restrictions.
 
 Create an [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md) and add:
 
-  ```json
-  {
+```json
+{
   "configurationFileVersion": 2,
   "enhancedContainerIsolation": {
     "locked": true,
@@ -65,8 +64,8 @@ Create an [`admin-settings.json` file](/manuals/enterprise/security/hardened-des
       }
     }
   }
-  }
-  ```
+}
+```
 
 {{< /tab >}}
 {{< /tabs >}}
@@ -84,7 +83,7 @@ The `imageList` defines which container images can mount the Docker socket.
 
 ### Example configurations
 
-**Basic allowlist for testing tools:**
+Basic allowlist for testing tools:
 
 ```json
 "imageList": {
@@ -96,7 +95,7 @@ The `imageList` defines which container images can mount the Docker socket.
 }
 ```
 
-**Wildcard allowlist (Docker Desktop 4.36 and later):**
+Wildcard allowlist (Docker Desktop 4.36 and later):
 
 ```json
 "imageList": {
@@ -177,12 +176,12 @@ Only allows specified commands while blocking all others:
 
 | Wildcard | Blocks/allows |
 | :---------------- | :---------- |
-| "container\*"     | All "docker container ..." commands |
-| "image\*"         | All "docker image ..." commands |
-| "volume\*"        | All "docker volume ..." commands |
-| "network\*"       | All "docker network ..." commands |
-| "build\*"         | All "docker build ..." commands |
-| "system\*"        | All "docker system ..." commands |
+| `"container\*"`     | All "docker container ..." commands |
+| `"image\*"`         | All "docker image ..." commands |
+| `"volume\*"`        | All "docker volume ..." commands |
+| `"network\*"`       | All "docker network ..." commands |
+| `"build\*"`         | All "docker build ..." commands |
+| `"system\*"`        | All "docker system ..." commands |
 
 ### Command blocking example
 
@@ -271,11 +270,10 @@ For local development with Docker-in-Docker:
 
 - Regular validation: Test your configuration after Docker Desktop updates, as image digests may change.
 - Handle digest mismatches: If allowed images are unexpectedly blocked:
-
-```console
-$ docker image rm <image>
-$ docker pull <image>
-```
+    ```console
+    $ docker image rm <image>
+    $ docker pull <image>
+    ```
 
 This resolves digest mismatches when upstream images are updated.
 

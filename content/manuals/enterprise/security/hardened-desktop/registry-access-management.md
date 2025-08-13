@@ -49,8 +49,8 @@ To configure registry permissions:
 1. Use the **toggle** to enable registry access. By default, Docker Hub is enabled
 in the registry list.
 1. To add additional registries, select **Add registry** and provide
-a **Registry address** and **Registry nickname**. Select **Create**. You can add
-up to 100 registries.
+a **Registry address** and **Registry nickname**.
+1. Select **Create**. You can add up to 100 registries.
 1. Verify your registry appears in the registry list and select **Save changes**.
 
 Changes can take up to 24 hours to take effect. To apply them sooner,
@@ -63,7 +63,7 @@ have developers sign out and back in to Docker Desktop.
 > [!TIP]
 >
 > RAM restrictions also apply to Dockerfile `ADD` instructions that fetch content via URL. Include trusted registry domains in your allowlist when using `ADD` with URLs.
->
+><br><br>
 > RAM is designed for container registries, not general-purpose URLs like package mirrors or storage services. Adding too many domains may cause errors or hit system limits.
 
 

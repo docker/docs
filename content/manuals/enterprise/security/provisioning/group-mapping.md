@@ -15,14 +15,18 @@ weight: 30
 
 Group mapping automatically synchronizes user groups from your identity provider (IdP) with teams in your Docker organization. For example, when you add a developer to the "backend-team" group in your IdP, they're automatically added to the corresponding team in Docker
 
+This page explains how group mapping works, and how to set up group mapping.
+
 > [!TIP]
 >
-> Group mapping is ideal for adding users to multiple organizations or multiple teams within one organization. If you don't need to set up multi-organization or multi-team assignment, you can use SCIM [user-level attributes](scim.md#set-up-role-mapping).
+> Group mapping is ideal for adding users to multiple organizations or multiple teams within one organization. If you don't need to set up multi-organization or multi-team assignment, SCIM [user-level attributes](scim.md#set-up-role-mapping) may be a better fit for your needs.
 
 ## Prerequisites
 
-- SSO is configured for your organization
-- You have administrator access to Docker Home and your identity provider
+Before you being, you must have:
+
+- SSO configured for your organization
+- Administrator access to Docker Home and your identity provider
 
 ## How group mapping works
 
@@ -50,7 +54,7 @@ user lifecycle management.
 
 Create groups in your IdP using the format: `organization:team`.
 
-Examples:
+For example:
 
 - For the "developers" team in the "moby" organization: `mobdy:developers`
 - For multi-organization access: `moby:backend` and `whale:desktop`
@@ -61,10 +65,10 @@ Docker creates teams automatically if they don't already exist when groups sync.
 
 | Attribute | Description |
 |:--------- | :---------- |
-| id | Unique ID of the group in UUID format. This attribute is read-only. |
-| displayName | Name of the group following the group mapping format: `organization:team`. |
-| members | A list of users that are members of this group. |
-| members(x).value | Unique ID of the user that is a member of this group. Members are referenced by ID. |
+| `id` | Unique ID of the group in UUID format. This attribute is read-only. |
+| `displayName` | Name of the group following the group mapping format: `organization:team`. |
+| `members` | A list of users that are members of this group. |
+| `members(x).value` | Unique ID of the user that is a member of this group. Members are referenced by ID. |
 
 ## Configure group mapping with SSO
 

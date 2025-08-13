@@ -10,7 +10,7 @@ aliases:
 {{< summary-bar feature_name="SSO" >}}
 
 Setting up a single sign-on (SSO) connection involves configuring both Docker
-and your identity provider (IdP). This guide walks you through each step: setup
+and your identity provider (IdP). This guide walks you through setup
 in Docker, setup in your IdP, and final connection.
 
 > [!TIP]
@@ -28,9 +28,9 @@ Before you begin:
 
 ## Step one: Create an SSO connection in Docker
 
->[!NOTE]
+> [!NOTE]
 >
-> You must verify at least one domain before creating an SSO connection.
+> You must [verify at least one domain](/manuals/enterprise/security/single-sign-on/configure.md) before creating an SSO connection.
 
 1. Sign in to [Docker Home](https://app.docker.com) and choose your
 organization.
@@ -172,7 +172,7 @@ If you're using the CLI, you must authenticate using a personal access token.
 
 Docker supports multiple IdP configurations. To use multiple IdPs with one domain:
 
-- Repeat Steps 1-4 for each IdP.
+- Repeat Steps 1-4 on this page for each IdP.
 - Each connection must use the same domain.
 - Users will select **Continue with SSO** to choose their IdP at sign in.
 
@@ -185,7 +185,7 @@ Docker supports multiple IdP configurations. To use multiple IdPs with one domai
 Enforcing SSO requires users to use SSO when signing into Docker. This centralizes authentication and enforces policies set by the IdP.
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select
-your organization. Note that when an organization is part of a company, you must select the company and configure the domain for the organization at the company level.
+your organization or company.
 1. Select **Admin Console**, then **SSO and SCIM**.
 1. In the SSO connections table, select the **Action** menu, then **Enable enforcement**.
 1. Follow the on-screen instructions.
@@ -197,7 +197,7 @@ Docker Hub. If you want to use 2FA, you must enable 2FA through your IdP.
 
 ## Next steps
 
-- [Provision users](/manuals/enterprise/security/provisioning/_index.md)
-- [Enforce sign-in](../enforce-sign-in/_index.md)
-- [Create access tokens](/manuals/enterprise/security/access-tokens.md)
-- [Troubleshoot](/manuals/enterprise/troubleshoot/troubleshoot-sso.md) SSO issues
+- [Provision users](/manuals/enterprise/security/provisioning/_index.md).
+- [Enforce sign-in](../enforce-sign-in/_index.md).
+- [Create personal access tokens](/manuals/enterprise/security/access-tokens.md).
+- [Troubleshoot SSO](/manuals/enterprise/troubleshoot/troubleshoot-sso.md) issues.

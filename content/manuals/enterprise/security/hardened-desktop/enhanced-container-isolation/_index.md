@@ -34,13 +34,13 @@ Enhanced Container Isolation is designed for:
 Docker implements ECI using the [Sysbox container runtime](https://github.com/nestybox/sysbox), a
 security-enhanced fork of the standard OCI runc runtime. When ECI is turned on, containers created through `docker run` or `docker create` automatically use Sysbox instead of runc without requiring any changes to developer workflows.
 
+Even containers using the `--privileged` flag run securely with Enhanced Container Isolation, preventing them from breaching the Docker Desktop virtual machine or other containers.
+
 > [!NOTE]
 >
 > When ECI is turned on, the Docker CLI `--runtime` flag is ignored.
-Docker's default runtime remains `runc`, but all user containers
+Docker's default runtime remains runc, but all user containers
 implicitly launch with Sysbox.
-
-Even containers using the `--privileged` flag run securely with Enhanced Container Isolation, preventing them from breaching the Docker Desktop virtual machine or other containers.
 
 ## Key security features
 
@@ -139,7 +139,7 @@ Docker build operations using `--network-host` and Docker buildx entitlements (`
 
 Enhanced Container Isolation maintains support for standard file sharing while preventing access to sensitive VM directories:
 
-**Host directory mounts continue to work:**
+Host directory mounts continue to work:
 
 ```console
 $ docker run -it --rm -v $HOME:/mnt alpine
@@ -147,7 +147,7 @@ $ docker run -it --rm -v $HOME:/mnt alpine
 # Successfully lists home directory contents
 ```
 
-**VM configuration mounts are blocked:**
+VM configuration mounts are blocked:
 
 ```console
 $ docker run -it --rm -v /etc/docker/daemon.json:/mnt/daemon.json alpine
@@ -210,7 +210,7 @@ Several `/proc/sys` resources that aren't namespaced by the Linux kernel are emu
 
 ## Performance and compatibility
 
-Enhanced Container Isolation maintains excellent performance and full compatibility:
+Enhanced Container Isolation maintains optimized performance and full compatibility:
 
 - No performance impact: System call filtering targets only control-path calls, leaving data-path operations unaffected
 - Full workflow compatibility: Existing development processes, tools, and container images work unchanged

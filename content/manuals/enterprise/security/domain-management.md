@@ -9,9 +9,9 @@ aliases:
 
 {{< summary-bar feature_name="Domain management" >}}
 
-Domain management lets you add and verify domains for your organization, then enable auto-provisioning to automatically add users when they sign in with email addresses that match your verified domains.
+Domain management lets you add and verify domains for your organization, then enable auto-provisioning to automatically add users when they sign in with email addresses that match your verified domains. This approach simplifies user management, ensures consistent security settings, and reduces the risk of unmanaged users accessing Docker without visibility or control.
 
-This approach simplifies user management, ensures consistent security settings, and reduces the risk of unmanaged users accessing Docker without visibility or control.
+This page provides steps to add and delete domains, configure auto-provisioning, and audit uncaptured users.
 
 ## Add and verify a domain
 
@@ -29,23 +29,11 @@ and configure the domain for the organization at the company level.
 
 ### Verify a domain
 
-Verification confirms that you own the domain by adding a TXT record to your Domain Name System (DNS) host.
-
-It can take up to 72 hours for the DNS change to propagate. Docker automatically
-checks for the record and confirms ownership once the change is recognized.
+Verification confirms that you own the domain by adding a TXT record to your Domain Name System (DNS) host. It can take up to 72 hours for the DNS change to propagate. Docker automatically checks for the record and confirms ownership once the change is recognized.
 
 > [!TIP]
 >
-> The record name field determines where the TXT record is added in your domain
-(root or subdomain). In general, refer to the following tips for
-adding a record name:
->
-> - Use `@` or leave the record name empty for root domains like `example.com`,
-depending on your provider.
-> - Don't enter values like `docker`, `docker-verification`, `www`, or your
-domain name. These values may direct to the wrong place.
->
-> Check your DNS provider's documentation to verify record name requirements.
+> The record name field determines where the TXT record is added in your domain (root or subdomain). For root domains like `example.com`, use `@` or leave the record name empty, depending on your provider. Don't enter values like docker, `docker-verification`, `www`, or your domain name, as these may direct to the wrong place. Check your DNS provider's documentation to verify record name requirements.
 
 Follow the steps for your DNS provider to add the **TXT Record Value**. If
 your provider isn't listed, use the steps for "Other providers":
@@ -113,8 +101,7 @@ When auto-provisioning is enabled for a verified domain:
 Auto-provisioning is configured per domain. To enable it:
 
 1. Sign in to [Docker Home](https://app.docker.com) and select
-your organization. If your organization is part of a company, select the company
-and configure the domain for the organization at the company level.
+your company or organization.
 1. Select **Admin Console**, then **Domain management**.
 1. Select the **Actions menu** next to the domain you want to enable
 auto-provisioning for.
@@ -162,10 +149,9 @@ company.
 of uncaptured users.
 
 The CSV file contains the following columns:
-
-    - Name: Docker user's display name
-    - Username: Docker ID of the user
-    - Email: Email address of the user
+- Name: Docker user's display name
+- Username: Docker ID of the user
+- Email: Email address of the user
 
 ### Invite uncaptured users
 

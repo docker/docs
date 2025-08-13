@@ -47,20 +47,17 @@ JIT provisioning may not provide sufficient control or security for some organiz
 
 When a user signs in through SSO, Docker obtains several attributes from your IdP to manage the user's identity and permissions. These attributes include:
 
-- Email address: The unique identifier for the user.
-- Full name: The user's complete name.
-- Groups: Optional. Used for group-based access control.
-- Docker Org: Optional. Specifies the organization the user belongs to.
-- Docker Team: Optional. Defines the team the user belongs to within the organization.
+- Email address: The unique identifier for the user
+- Full name: The user's complete name
+- Groups: Optional. Used for group-based access control
+- Docker Org: Optional. Specifies the organization the user belongs to
+- Docker Team: Optional. Defines the team the user belongs to within the organization
 - Docker Role: Optional. Determines the user's permissions within Docker
-- Docker session minutes: Optional. Sets the session duration before users must re-authenticate with their IdP. Must be a positive integer greater than 0. If not provided, default session timeouts apply.
+- Docker session minutes: Optional. Sets the session duration before users must re-authenticate with their IdP. Must be a positive integer greater than 0. If not provided, default session timeouts apply
 
 > [!NOTE]
 >
-> Default session timeouts when Docker session minutes is not specified are
-as follows:
->   - Docker Desktop: 90 days, or 30 days of inactivity
->   - Docker Hub and Docker Home: 24 hours
+> Default session timeouts apply when Docker session minutes is not specified. Docker Desktop sessions expire after 90 days or 30 days of inactivity. Docker Hub and Docker Home sessions expire after 24 hours.
 
 ## SAML attribute mapping
 

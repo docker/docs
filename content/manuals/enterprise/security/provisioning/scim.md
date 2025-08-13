@@ -12,12 +12,16 @@ weight: 20
 
 {{< summary-bar feature_name="SSO" >}}
 
-This page shows you how to automate user provisioning and de-provisioning for Docker using System for Cross-domain Identity Management (SCIM).
+Automate user management for your Docker organization using System for Cross-domain Identity Management (SCIM). SCIM automatically provisions and de-provisions users, synchronizes team memberships, and keeps your Docker organization in sync with your identity provider.
+
+This page shows you how to automate user provisioning and de-provisioning for Docker using SCIM.
 
 ## Prerequisites
 
-- SSO is configured for your organization
-- You have administrator access to Docker Home and your identity provider
+Before you begin, you must have:
+
+- SSO configured for your organization
+- Administrator access to Docker Home and your identity provider
 
 ## How SCIM works
 
@@ -42,7 +46,7 @@ SCIM automates:
 > [!NOTE]
 >
 > SCIM only manages users provisioned through your identity provider after SCIM is enabled. It cannot remove users who were manually added to your Docker organization before SCIM was set up.
->
+><br><br>
 > To remove those users, delete them manually from your Docker organization.
 For more information, see [Manage organization members](/manuals/admin/organization/members.md).
 
@@ -56,10 +60,10 @@ Docker supports the following SCIM attributes:
 
 | Attribute    | Description |
 |:---------------------------------------------------------------|:-------------------------------------------------------------------------------------------|
-| userName             | User’s primary email address, used as the unique identifier |
-| name.givenName | User’s first name |
-| name.familyName | User’s surname |
-| active | Indicates if a user is enabled or disabled, set to “false” to de-provision a user |
+| `userName`             | User’s primary email address, used as the unique identifier |
+| `name.givenName` | User’s first name |
+| `name.familyName` | User’s surname |
+| `active` | Indicates if a user is enabled or disabled, set to “false” to de-provision a user |
 
 For additional details about supported attributes and SCIM, see [Docker Hub API SCIM reference](/reference/api/hub/latest/#tag/scim).
 
@@ -69,7 +73,7 @@ For additional details about supported attributes and SCIM, see [Docker Hub API 
 enabled, JIT values still take precedence and will overwrite attribute values
 set by SCIM. To avoid conflicts, make sure your JIT attribute values match your
 SCIM values.
->
+><br><br>
 > Alternatively, you can disable JIT provisioning to rely solely on SCIM.
 For details, see [Just-in-Time](just-in-time.md).
 
@@ -126,6 +130,8 @@ officially document this setup, it is widely used and supported in practice.
     - Given name
     - Family name
     - Email
+
+Next, [set up role mapping](#set-up-role-mapping).
 
 {{< /tab >}}
 {{< tab name="Entra ID (OIDC)" >}}
@@ -377,4 +383,5 @@ To disable SCIM:
 
 ## Next steps
 
-- [Troubleshoot provisioning](/manuals/enterprise/troubleshoot/troubleshoot-provisioning.md)
+- Set up [Group mapping](/manuals/enterprise/security/provisioning/group-mapping.md).
+- [Troubleshoot provisioning](/manuals/enterprise/troubleshoot/troubleshoot-provisioning.md).

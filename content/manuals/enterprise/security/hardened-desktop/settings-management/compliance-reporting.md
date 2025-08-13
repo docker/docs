@@ -16,9 +16,9 @@ Desktop settings reporting tracks user compliance with Docker Desktop settings p
 
 Before you can use Docker Desktop settings reporting, make sure you have:
 
-- Docker Desktop 4.37.1 or later installed across your organization
-- A verified domain
-- Enforced sign-in for your organization
+- [Docker Desktop 4.37.1 or later](/manuals/desktop/release-notes.md) installed across your organization
+- [A verified domain](/manuals/enterprise/security/single-sign-on/configure.md#step-one-add-and-verify-your-domain)
+- [Enforced sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md) for your organization
 - A Docker Business subscription
 - At least one settings policy configured
 
@@ -42,7 +42,7 @@ The reporting dashboard provides these tools:
 - Compliance status indicators
 - CSV export option to download compliance data
 
-## Understanding compliance status
+## User compliance statuses
 
 Docker Desktop evaluates three types of status to determine overall compliance:
 
@@ -92,7 +92,7 @@ When you select a user's name, you'll see their detailed compliance information 
 
 ## Resolve compliance issues
 
-Follow these steps based on the user's compliance status:
+You can select a non-compliant user's name in the dashboard for recommended status resolution steps. The following sections are general resolution steps for non-compliant statuses:
 
 ### Non-compliant or outdated users
 

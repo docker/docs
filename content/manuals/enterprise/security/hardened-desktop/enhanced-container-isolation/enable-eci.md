@@ -1,5 +1,6 @@
 ---
 title: Enable Enhanced Container Isolation
+linkTitle: Enable ECI
 description: Enable Enhanced Container Isolation to secure containers in Docker Desktop
 keywords: enhanced container isolation, enable eci, container security, docker desktop setup
 weight: 15
@@ -7,7 +8,9 @@ weight: 15
 
 {{< summary-bar feature_name="Hardened Docker Desktop" >}}
 
-This page shows you how to turn on Enhanced Container Isolation (ECI) and verify it's working correctly. ECI prevents malicious containers from compromising Docker Desktop while maintaining full developer productivity.
+ECI prevents malicious containers from compromising Docker Desktop while maintaining full developer productivity.
+
+This page shows you how to turn on Enhanced Container Isolation (ECI) and verify it's working correctly.
 
 ## Prerequisites
 
@@ -15,7 +18,7 @@ Before you begin, you must have:
 
 - A Docker Business subscription
 - Docker Desktop 4.13 or later
-- Enforced sign-in (for administrators managing organization-wide settings only)
+- [Enforced sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md) (for administrators managing organization-wide settings only)
 
 ## Enable Enhanced Container Isolation
 
@@ -23,13 +26,13 @@ Before you begin, you must have:
 
 Turn on ECI in your Docker Desktop settings:
 
-1. Sign in to your organizationin Docker Desktop. Your organization must have
+1. Sign in to your organization in Docker Desktop. Your organization must have
 a Docker Business subscription.
 1. Stop and remove all existing containers:
 
     ```console
-    docker stop $(docker ps -q)
-    docker rm $(docker ps -aq)
+    $ docker stop $(docker ps -q)
+    $ docker rm $(docker ps -aq)
     ```
 
 1. In Docker Desktop, go to **Settings** > **General**.
@@ -57,15 +60,15 @@ Configure Enhanced Container Isolation organization-wide using Settings Manageme
 
 1. Create an [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md) and add:
 
-    ```json
-    {
-  "configurationFileVersion": 2,
-  "enhancedContainerIsolation": {
-    "value": true,
-    "locked": true
-  }
-    }
-    ```
+      ```json
+      {
+        "configurationFileVersion": 2,
+        "enhancedContainerIsolation": {
+          "value": true,
+          "locked": true
+        }
+      }
+      ```
 
 1. Configure the following as needed:
     - `"value": true`: Turns on ECI by default (required)
@@ -100,7 +103,7 @@ Run a container and examine the user namespace mapping:
 $ docker run --rm alpine cat /proc/self/uid_map
 ```
 
-**With ECI turned on:**
+With ECI turned on:
 
 ```text
 0     100000      65536
@@ -108,7 +111,7 @@ $ docker run --rm alpine cat /proc/self/uid_map
 
 This shows the container's root user (0) maps to an unprivileged user (100000) in the Docker Desktop VM, with a range of 64K user IDs. Each container gets an exclusive user ID range for isolation.
 
-**With ECI turned off:**
+With ECI turned off:
 
 ```text
 0          0 4294967295
@@ -131,7 +134,7 @@ With ECI turned on, it turns `sysbox-runc`. With ECI turned off, it returns
 
 Verify that ECI security restrictions are active.
 
-**Test namespace sharing:**
+Test namespace sharing:
 
 ```console
 $ docker run -it --rm --pid=host alpine
@@ -140,7 +143,7 @@ $ docker run -it --rm --pid=host alpine
 With ECI turned on, this command fails with an error about Sysbox containers
 not being able to share namespaces with the host.
 
-**Test Docker socket access:**
+Test Docker socket access:
 
 ```console
 $ docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock alpine

@@ -28,6 +28,8 @@ Choose the subscription that fits your needs, from individual developers to larg
 >
 > Legacy Docker plans apply to subscribers who last purchased or renewed before December 10, 2024. These subscribers keep their current subscription and pricing until their next renewal on or after December 10, 2024.
 
+## Subscriptions
+
 {{< tabs >}}
 {{< tab name="Docker subscription" >}}
 
@@ -121,9 +123,7 @@ Pricing](https://www.docker.com/pricing/).
 
 If you have a legacy subscription, you'll automatically upgrade to the new Docker subscription model when you renew. The new plans provide access to all Docker tools with increased limits and additional features.
 
-## Legacy Docker plans
-
-### Legacy Docker Pro
+## Legacy Docker Pro
 
 **Legacy Docker Pro** enables individual developers to get more control of their
 development environment and provides an integrated and reliable developer
@@ -143,7 +143,7 @@ Legacy Docker Pro includes:
 
 For a list of features available in each legacy tier, see [Legacy Docker Pricing](https://www.docker.com/legacy-pricing/).
 
-#### Upgrade your Legacy Docker Pro subscription
+### Upgrade your Legacy Docker Pro subscription
 
 When you upgrade your Legacy Docker Pro subscription to a Docker Pro subscription, your subscription includes the following changes:
 
@@ -154,7 +154,7 @@ When you upgrade your Legacy Docker Pro subscription to a Docker Pro subscriptio
 
 For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/).
 
-### Legacy Docker Team
+## Legacy Docker Team
 
 **Legacy Docker Team** offers capabilities for collaboration, productivity, and
 security across organizations. It enables groups of developers to unlock the
@@ -174,7 +174,7 @@ There are also advanced collaboration and management tools, including organizati
 
 For a list of features available in each legacy tier, see [Legacy Docker Pricing](https://www.docker.com/legacy-pricing/).
 
-#### Upgrade your Legacy Docker Team subscription
+### Upgrade your Legacy Docker Team subscription
 
 When you upgrade your Legacy Docker Team subscription to a Docker Team subscription, your subscription includes the following changes:
 
@@ -187,7 +187,7 @@ When you upgrade your Legacy Docker Team subscription to a Docker Team subscript
 
 For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/).
 
-### Legacy Docker Business
+## Legacy Docker Business
 
 **Legacy Docker Business** offers centralized management and advanced security features
 for enterprises that use Docker at scale. It empowers leaders to manage their
@@ -206,7 +206,7 @@ Legacy Docker Business includes:
 
 For a list of features available in each tier, see [Legacy Docker Pricing](https://www.docker.com/legacy-pricing/).
 
-#### Upgrade your Legacy Docker Business subscription
+### Upgrade your Legacy Docker Business subscription
 
 When you upgrade your Legacy Docker Business subscription to a Docker Business subscription, your subscription includes the following changes:
 

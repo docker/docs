@@ -14,9 +14,8 @@ weight: 30
 
 {{< summary-bar feature_name="Enforce sign-in" >}}
 
-By default, users can run Docker Desktop without signing in to your organization.
-When users don't sign in as organization members, they miss out on [subscription benefits](/manuals/subscription/details.md) and can bypass
-[security features](/manuals/enterprise/security/hardened-desktop/_index.md) configured for your organization.
+By default, users can access Docker Desktop without signing in to your organization.
+When users don't sign in as organization members, they miss out on subscription benefits and can bypass security features configured for your organization.
 
 You can enforce sign-in using several methods, depending on your setup:
 
@@ -25,20 +24,21 @@ You can enforce sign-in using several methods, depending on your setup:
 - [`.plist` method (Mac only)](methods.md#plist-method-mac-only)
 - [`registry.json` method (All)](methods.md#registryjson-method-all)
 
+This page provides an overview of how sign-in enforcement works.
+
 ## How sign-in enforcement works
 
 When Docker Desktop detects a registry key, `.plist` file, or
 `registry.json` file:
 
-- A **Sign in required!** prompt appears, requiring users to sign
-  in as organization members to use Docker Desktop. ![Enforce Sign-in
-  Prompt](../../images/enforce-sign-in.png?w=400)
+- A `Sign in required!` prompt appears, requiring users to sign
+  in as organization members to use Docker Desktop.
 - If users sign in with accounts that aren't organization members, they're
   automatically signed out and can't use Docker Desktop. They can select **Sign in**
   to try again with a different account.
 - When users sign in with organization member accounts, they can use Docker
   Desktop normally.
-- When users sign out, the **Sign in required!** prompt reappears and they can
+- When users sign out, the `Sign in required!` prompt reappears and they can
   no longer use Docker Desktop unless they sign back in.
 
 > [!NOTE]
@@ -47,16 +47,17 @@ When Docker Desktop detects a registry key, `.plist` file, or
 
 ## Enforcing sign-in versus enforcing single sign-on (SSO)
 
-Enforcing Docker Desktop sign-in and [enforcing SSO](/manuals/enterprise/security/single-sign-on/connect.md#optional-enforce-sso) are different features that server different purposes:
+Enforcing Docker Desktop sign-in and [enforcing SSO](/manuals/enterprise/security/single-sign-on/connect.md#optional-enforce-sso) are different features that serve different purposes:
 
 
 | Enforcement                       | Description                                                     | Benefits                                                                                                                                                                                                                                                   |
 |:----------------------------------|:----------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Enforce sign-in only              | Users must sign in before using Docker Desktop.                 | Ensures users receive the benefits of your subscription and ensures security features are applied. In addition, you gain insights into users’ activity.                                                                                                    |
-| Enforce single sign-on (SSO) only | If users sign in, they must sign in using SSO.                  | Centralizes authentication and enforces unified policies set by the identity provider.                                                                                                                                                                     |
-| Enforce both                      | Users must sign in using SSO before using Docker Desktop.       | Ensures users receive the benefits of your subscription and ensures security features are applied. In addition, you gain insights into users’ activity. It also centralizes authentication and enforces unified policies set by the identity provider. |
-| Enforce neither                   | If users sign in, they can use SSO or their Docker credentials. | Lets users access Docker Desktop without barriers, at the cost of reduced security and insights.                                                                                                                                                  |
+| Enforce sign-in only              | Users must sign in before using Docker Desktop                 | Ensures users receive the benefits of your subscription and ensures security features are applied. In addition, you gain insights into users’ activity.                                                                                                    |
+| Enforce single sign-on (SSO) only | If users sign in, they must sign in using SSO                  | Centralizes authentication and enforces unified policies set by the identity provider.                                                                                                                                                                     |
+| Enforce both                      | Users must sign in using SSO before using Docker Desktop       | Ensures users receive the benefits of your subscription and ensures security features are applied. In addition, you gain insights into users’ activity. It also centralizes authentication and enforces unified policies set by the identity provider. |
+| Enforce neither                   | If users sign in, they can use SSO or their Docker credentials | Lets users access Docker Desktop without barriers, at the cost of reduced security and insights.                                                                                                                                                  |
+
 ## Next steps
 
-- To set up sign-in enforcement, see [Configure sign-in enforcement](/manuals/enterprise/security/enforce-sign-in/methods.md) guide.
+- To set up sign-in enforcement, see [Configure sign-in enforcement](/manuals/enterprise/security/enforce-sign-in/methods.md).
 - To configure SSO enforcement, see [Enforce SSO](/manuals/enterprise/security/single-sign-on/connect.md).

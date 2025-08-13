@@ -14,7 +14,9 @@ Air-gapped containers let you restrict container network access by controlling w
 
 Docker Desktop can configure container network traffic to accept connections, reject connections, or tunnel through HTTP or SOCKS proxies. You control which TCP ports the policy applies to and whether to use a single proxy or per-destination policies via Proxy Auto-Configuration (PAC) files.
 
-## Use cases for air-gapped containers
+This page provides an overview of air-gapped containers and configuration steps.
+
+## Who should use air-gapped containers?
 
 Air-gapped containers help organizations maintain security in restricted environments:
 
@@ -24,14 +26,30 @@ Air-gapped containers help organizations maintain security in restricted environ
 - Supply chain security: Control which external resources containers can access during builds
 - Corporate network policies: Enforce existing network security policies for containerized applications
 
+## How air-gapped containers work
+
+Air-gapped containers operate by intercepting container network traffic and applying proxy rules:
+
+1. Traffic interception: Docker Desktop intercepts all outgoing network connections from containers
+1. Port filtering: Only traffic on specified ports (`transparentPorts`) is subject to proxy rules
+1. Rule evaluation: PAC file rules or static proxy settings determine how to handle each connection
+1. Connection handling: Traffic is allowed directly, routed through a proxy, or blocked based on the rules
+
+Some important considerations include:
+
+- The existing `proxy` setting continues to apply to Docker Desktop application traffic on the host
+- If PAC file download fails, containers block requests to target URLs
+- URL parameter format is `http://host_or_ip:port` or `https://host_or_ip:port`
+- Hostname is available for ports 80 and 443, but only IP addresses for other ports
+
 ## Prerequisites
 
-Before configuring air-gapped containers:
+Before configuring air-gapped containers, you must have:
 
-- [Enforce sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md) to ensure users authenticate with your organization
-- Have a Docker Business subscription
-- Configure [Settings Management](/manuals/enterprise/security/hardened-desktop/settings-management/_index.md) to manage organization policies
-- Download Docker Desktop 4.29 or later
+- [Enforce sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md) enabled to ensure users authenticate with your organization
+- A Docker Business subscription
+- Configured [Settings Management](/manuals/enterprise/security/hardened-desktop/settings-management/_index.md) to manage organization policies
+- Downloaded Docker Desktop 4.29 or later
 
 ## Configure air-gapped containers
 
@@ -68,7 +86,7 @@ The `containersProxy` setting controls network policies applied to container tra
 
 ### Configuration examples
 
-**Block all external access:**
+Block all external access:
 
 ```json
 "containersProxy": {
@@ -81,7 +99,7 @@ The `containersProxy` setting controls network policies applied to container tra
 }
 ```
 
-**Allow specific internal services:**
+Allow specific internal services:
 
 ```json
 "containersProxy": {
@@ -94,7 +112,7 @@ The `containersProxy` setting controls network policies applied to container tra
 }
 ```
 
-**Route through corporate proxy:**
+Route through corporate proxy:
 
 ```json
 "containersProxy": {
@@ -165,22 +183,6 @@ function FindProxyForURL(url, host) {
   return "PROXY reject.docker.internal:1234";
 }
 ```
-
-## How air-gapped containers work
-
-Air-gapped containers operate by intercepting container network traffic and applying proxy rules:
-
-1. Traffic interception: Docker Desktop intercepts all outgoing network connections from containers
-1. Port filtering: Only traffic on specified ports (`transparentPorts`) is subject to proxy rules
-1. Rule evaluation: PAC file rules or static proxy settings determine how to handle each connection
-1. Connection handling: Traffic is allowed directly, routed through a proxy, or blocked based on the rules
-
-Some important considerations include:
-
-- The existing `proxy` setting continues to apply to Docker Desktop application traffic on the host
-- If PAC file download fails, containers block requests to target URLs
-- URL parameter format is `http://host_or_ip:port` or `https://host_or_ip:port`
-- Hostname is available for ports 80 and 443, but only IP addresses for other ports
 
 ## Verify air-gapped container configuration
 

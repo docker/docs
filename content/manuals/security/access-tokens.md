@@ -3,6 +3,7 @@ title: Personal access tokens
 linkTitle: Personal access tokens
 description: Create and manage personal Docker access tokens for secure CLI authentication and automation
 keywords: personal access tokens, PAT, docker cli authentication, docker hub security, programmatic access
+weight: 10
 aliases:
  - /docker-hub/access-tokens/
  - /security/for-developers/access-tokens/
@@ -19,7 +20,7 @@ PATs offer significant security advantages over password authentication:
 - Two-factor authentication compatibility: Required when you have two-factor authentication turned on, providing secure CLI access without bypassing 2FA protection.
 - Usage tracking: Monitor when and how tokens are used to identify potential security issues or unused automation.
 
-## When to use personal access tokens
+## Who should use personal access tokens?
 
 Use PATs for these common scenarios:
 
@@ -73,9 +74,7 @@ You can rename, activate, deactivate, or delete a token as needed. You can manag
 1. Sign in to [Docker Home](https://app.docker.com/login).
 1. Select your avatar in the top-right corner and from the drop-down menu select **Account settings**.
 1. Select **Personal access tokens**.
-
-   This page shows an overview of all your
-   tokens, and lists if the token was generated manually or if it was
+      - This page shows an overview of all your tokens, and lists if the token was generated manually or if it was
    [auto-generated](#auto-generated-tokens). You can also view the scope of the
    tokens, which tokens are activate and inactive, when they were created, when
    they were last used, and their expiration date.

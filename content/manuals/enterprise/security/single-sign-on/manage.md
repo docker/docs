@@ -12,24 +12,8 @@ aliases:
 {{< summary-bar feature_name="SSO" >}}
 
 This page covers how to manage single sign-on (SSO) after initial setup,
-including managing organizations, domains, connections, users, and provisioning
+including managing domains, connections, users, and provisioning
 settings.
-
-## Manage organizations
-
-> [!NOTE]
->
-> You must have a [company](/admin/company/) to manage more than one organization.
-
-To manage SSO for organizations in your company:
-
-1. Sign in to [Docker Home](https://app.docker.com) and select your company.
-1. Select **Admin Console**, then **SSO and SCIM**.
-1. In the **Organizations** section, you can:
-
-    - View all organizations in your company
-    - Turn SSO on or off for each organization
-    - Configure organization-specific SSO settings
 
 ## Manage domains
 

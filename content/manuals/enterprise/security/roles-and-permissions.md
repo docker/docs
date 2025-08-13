@@ -12,6 +12,8 @@ weight: 40
 
 Roles control what users can do in your organization. When you invite users, you assign them a role that determines their permissions for repositories, teams, and organization settings.
 
+This page provides an overview of Docker roles and permissions for each role.
+
 ## Organization roles
 
 Docker organizations have three main roles:
@@ -48,13 +50,10 @@ These permissions apply organization-wide, including all repositories in your or
 | Assign team permissions to repositories               | ❌     | ✅     | ✅                 |
 
 When you add members to teams, you can grant additional repository permissions
-beyond their organization role. The following diagram shows how permissions
-work:
+beyond their organization role:
 
 1. Role permissions: Applied organization-wide (member or editor)
 2. Team permissions: Additional permissions for specific repositories
-
-![User repository permissions within an organization](../images/roles-and-permissions-member-editor-roles.png)
 
 ### Organization management permissions
 
