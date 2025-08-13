@@ -9,7 +9,7 @@ aliases:
 - /faq/security/networking-and-vms/
 ---
 
-## How can I limit container internet access to prevent data exfiltration?
+## How can I limit container internet access?
 
 Docker Desktop doesn't have a built-in mechanism for this, but you can use process-level firewalls on the host. Apply rules to the `com.docker.vpnkit` user-space process to control where it can connect (DNS allowlists, packet filters) and which ports/protocols it can use.
 
