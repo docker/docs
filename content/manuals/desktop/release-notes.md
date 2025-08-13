@@ -41,7 +41,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 #### For all platforms
 
-- Fixed an issue that caused startup to fail when `vpnkit` CIDR is locked without specifying a value in centralized settings UI. This issue is present in 4.44.0.
+- Fixed an issue found in version 4.44.0 that caused startup to fail when `vpnkit` CIDR is locked without specifying a value in Desktop Settings Management.
 
 #### For Windows
 
