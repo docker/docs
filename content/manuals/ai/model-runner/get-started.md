@@ -30,7 +30,7 @@ with your local models in the **Models** tab in the Docker Desktop Dashboard.
 > For Docker Desktop versions 4.41 and earlier, this setting was under the
 > **Experimental features** tab on the **Features in development** page.
 
-### Enable Docker Model Runner in Docker Engine
+### Enable DMR in Docker Engine
 
 1. Ensure you have installed [Docker Engine](/engine/install/).
 1. Docker Model Runner is available as a package. To install it, run:
@@ -38,7 +38,7 @@ with your local models in the **Models** tab in the Docker Desktop Dashboard.
    {{< tabs >}}
    {{< tab name="Ubuntu/Debian">}}
 
-   ```console
+   ```bash
    $ sudo apt-get update
    $ sudo apt-get install docker-model-plugin
    ```
@@ -46,7 +46,7 @@ with your local models in the **Models** tab in the Docker Desktop Dashboard.
    {{< /tab >}}
    {{< tab name="RPM-base distributions">}}
 
-   ```console
+   ```bash
    $ sudo dnf update
    $ sudo dnf install docker-model-plugin
    ```
@@ -56,7 +56,7 @@ with your local models in the **Models** tab in the Docker Desktop Dashboard.
 
 1. Test the installation:
 
-   ```console
+   ```bash
    $ docker model version
    $ docker model run ai/smollm2
    ```
@@ -64,13 +64,13 @@ with your local models in the **Models** tab in the Docker Desktop Dashboard.
 > [!NOTE]
 > TCP support is enabled by default for Docker Engine on port `12434`.
 
-### Update Docker Model Runner in Docker Engine
+### Update DMR in Docker Engine
 
 To update Docker Model Runner in Docker Engine, uninstall it with
 [`docker model uninstall-runner`](/reference/cli/docker/model/uninstall-runner/)
 then reinstall it:
 
-```console
+```bash
 docker model uninstall-runner --images && docker model install-runner
 ```
 
@@ -133,8 +133,9 @@ Use the [`docker model run` command](/reference/cli/docker/model/run/).
 
 ## Configure a model
 
-You can configure a model, such as the its maximum token limit and more,
-use Docker Compose. See [Models and Compose - Model configuration options](../compose/models-and-compose.md#model-configuration-options).
+You can configure a model, such as its maximum token limit and more,
+use Docker Compose.
+See [Models and Compose - Model configuration options](../compose/models-and-compose.md#model-configuration-options).
 
 ## Publish a model
 
@@ -146,7 +147,7 @@ use Docker Compose. See [Models and Compose - Model configuration options](../co
 You can tag existing models with a new name and publish them under a different
 namespace and repository:
 
-```console
+```bash
 # Tag a pulled model under a new name
 $ docker model tag ai/smollm2 myorg/smollm2
 
@@ -161,7 +162,7 @@ documentation.
 You can also package a model file in GGUF format as an OCI Artifact and publish
 it to Docker Hub.
 
-```console
+```bash
 # Download a model file in GGUF format, for example from HuggingFace
 $ curl -L -o model.gguf https://huggingface.co/TheBloke/Mistral-7B-v0.1-GGUF/resolve/main/mistral-7b-v0.1.Q4_K_M.gguf
 
@@ -209,7 +210,7 @@ In Docker Desktop, to inspect the requests and responses for each model:
    - The prompt/request
    - The context usage
    - The time it took for the response to be generated.
-2. Select one of the requests to display further details:
+1. Select one of the requests to display further details:
    - In the **Overview** tab, view the token usage, response metadata and generation speed, and the actual prompt and response.
    - In the **Request**  and **Response** tabs, view the full JSON payload of the request and the response.
 
@@ -220,4 +221,4 @@ In Docker Desktop, to inspect the requests and responses for each model:
 
 - [Interact with your model programmatically](./api-reference.md)
 - [Models and Compose](../compose/models-and-compose.md)
-- [Docker Model Runner cli reference documentation](/reference/cli/docker/model)
+- [Docker Model Runner CLI reference documentation](/reference/cli/docker/model)
