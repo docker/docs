@@ -39,6 +39,10 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ### Bug fixes and enhancements
 
+#### For all platforms
+
+- Fixed an issue that caused startup to fail when vpnkit CIDR is locked without specifying a value in centralized settings UI. This issue is present in 4.44.0.
+
 #### For Windows
 
 - Fixed an issue where volumes and containers were not visible after an upgrade from distributions using the legacy `version-pack-data` directory structure.
