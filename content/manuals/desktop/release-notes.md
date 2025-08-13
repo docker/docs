@@ -41,7 +41,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 #### For Windows
 
-- Fixed an issue where volumes and containers are not visible after an upgrade from distributions using the legacy `version-pack-data` directory structure.
+- Fixed an issue where volumes and containers were not visible after an upgrade from distributions using the legacy `version-pack-data` directory structure.
 - Resolved a rare issue in WSL 2 where the Docker CLI failed with a **Proxy Authentication Required** error.
 - Fixed a bug where CLI plugins were not deployed to `~/.docker/cli-plugins` if the user lacked execution permissions on that directory.
 
