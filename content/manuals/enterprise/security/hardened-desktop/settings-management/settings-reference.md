@@ -23,7 +23,7 @@ methods are indicated with these labels:
 
 - Desktop GUI: Configurable through Docker Desktop settings interface
 - Admin Console: Configurable through the Docker Admin Console using Settings Management
-- JSON file: Configurable htrough `admin-settings.json` using Settings Managemet
+- JSON file: Configurable through `admin-settings.json` using Settings Management
 - CLI: Configurable through command-line tools
 
 ## General settings
@@ -344,7 +344,7 @@ if needed.
 
 - **Description:** Automatic SBOM indexing for images without requiring user interaction.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** KKeep image metadata current by indexing during idle time or after image operations.
+- **Use case:** Keep image metadata current by indexing during idle time or after image operations.
 - **Configure this setting with:**
     - **General settings** in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 

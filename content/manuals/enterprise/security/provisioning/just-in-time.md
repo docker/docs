@@ -16,7 +16,7 @@ This page explains how JIT provisioning works, SSO authentication flows, and how
 
 ## Prerequisites
 
-Before you beging, you must have:
+Before you begin, you must have:
 
 - SSO configured for your organization
 - Administrator access to Docker Home and your identity provider

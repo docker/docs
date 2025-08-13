@@ -47,7 +47,7 @@ containers mode isn't supported.
 
 ## Docker Build protection varies
 
-Docker Build proection depends on the driver and Docker Desktop version:
+Docker Build protection depends on the driver and Docker Desktop version:
 
 | Build drive | Protection | Version requirements |
 |:------------|:-----------|:---------------------|

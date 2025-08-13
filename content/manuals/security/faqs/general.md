@@ -11,15 +11,15 @@ aliases:
 
 ## How do I report a vulnerability?
 
-If you've discovered a security vulnerability in Docker, report it responsibly to security@docker.com so our team can quickly address it.
+If you've discovered a security vulnerability in Docker, report it responsibly to security@docker.com so Docker can quickly address it.
 
 ## Does Docker lockout users after failed sign-ins?
 
 Docker Hub locks out users after 10 failed sign-in attempts within 5 minutes. The lockout duration is 5 minutes. This policy applies to Docker Hub, Docker Desktop, and Docker Scout authentication.
 
-## Do you support physical MFA with YubiKeys?
+## Do you support physical multi-factor authentication (MFA) with YubiKeys?
 
-You can configure physical MFA through SSO using your identity provider (IdP). Check with your IdP if they support physical MFA devices like YubiKeys.
+You can configure physical multi-factor authentication (MFA) through SSO using your identity provider (IdP). Check with your IdP if they support physical MFA devices like YubiKeys.
 
 ## How are sessions managed and do they expire?
 
@@ -50,7 +50,7 @@ Docker Desktop uses the host operating system's secure key management to store a
 - Windows: [Security and Identity API via Wincred](https://learn.microsoft.com/en-us/windows/win32/api/wincred/)
 - Linux: [Pass](https://www.passwordstore.org/).
 
-## How do we remove users who aren't part of our IdP when using SSO without SCIM?
+## How do I remove users who aren't part of my IdP when using SSO without SCIM?
 
 If SCIM isn't turned on, you must manually remove users from the organization. SCIM can automate user removal, but only for users added after SCIM is turned on. Users added before SCIM was turned on must be removed manually.
 
@@ -62,7 +62,7 @@ For information about metadata stored by Docker Scout, see [Data handling](/manu
 
 ## How are Marketplace extensions vetted for security?
 
-Security vetting for extensions is on our roadmap but isn't currently implemented. Extensions aren't covered as part of Docker's Third-Party Risk Management Program.
+Security vetting for extensions is on the roadmap but isn't currently implemented. Extensions aren't covered as part of Docker's Third-Party Risk Management Program.
 
 ## Can I prevent users from pushing images to Docker Hub private repositories?
 

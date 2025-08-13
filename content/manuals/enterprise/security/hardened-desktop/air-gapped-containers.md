@@ -174,7 +174,7 @@ function FindProxyForURL(url, host) {
     }
   }
 
-  // Block access to developer's localhost to prevent data exfiltration
+  // Block access to developer's localhost
   if (host === "host.docker.internal" || host === "localhost") {
     return "PROXY reject.docker.internal:1234";
   }

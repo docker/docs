@@ -71,7 +71,7 @@ ECI protection varies by container type and Docker Desktop version:
 
 - Docker Extensions
 - Docker Debug containers
-- Kubernetes with kubeadm provisioner
+- Kubernetes with Kubeadm provisioner
 
 For complete details, see [ECI limitations](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/limitations.md).
 

@@ -113,7 +113,7 @@ Use the following tabs based on your IdP provider.
 
 ## Step three: Connect Docker to your IdP
 
-Complet the integration by pasting your IdP values into Docker.
+Complete the integration by pasting your IdP values into Docker.
 
 {{< tabs >}}
 {{< tab name="Okta SAML" >}}

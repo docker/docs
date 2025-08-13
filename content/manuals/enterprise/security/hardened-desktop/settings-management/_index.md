@@ -54,7 +54,7 @@ When multiple policies exist, Docker Desktop applies them in this order:
 
 1. User-specific policies: Highest priority
 1. Organization default policy: Applied when no user-specific policy exists
-1. Local `admin-settings.json` file: Lowest priority, overriden by Admin Console policies
+1. Local `admin-settings.json` file: Lowest priority, overridden by Admin Console policies
 
 ## Set up Settings Management
 

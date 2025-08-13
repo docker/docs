@@ -115,7 +115,7 @@ Docker Desktop validates allowed images by:
 1. Comparing container image digests against the allowlist when containers start
 1. Blocking containers whose digests don't match allowed images
 
-This prevents bypassing restrictions by retagging unauthorized images:
+This prevents bypassing restrictions by re-tagging unauthorized images:
 
 ```console
 $ docker tag malicious-image docker:cli

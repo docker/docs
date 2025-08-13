@@ -117,7 +117,7 @@ your organization.
 1. Select **Invite**.
 1. Follow the on-screen instructions to invite the user.
 
-The uesr receives an email invitation and can create a Docker account or sign
+The user receives an email invitation and can create a Docker account or sign
 in with their existing account.
 
 ### Remove users
