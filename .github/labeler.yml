@@ -181,6 +181,11 @@ area/copilot:
       - any-glob-to-any-file:
           - content/manuals/copilot/**
 
+ci:
+  - changed-files:
+      - any-glob-to-any-file:
+          - .github/workflows/**
+
 hugo:
   - changed-files:
       - any-glob-to-any-file:
