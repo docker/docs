@@ -20,6 +20,7 @@ cgroup
 Chrome
 Chrome DevTools
 Citrix
+CI/CD
 cli
 CLI
 CloudFront
@@ -183,6 +184,8 @@ ufw
 ui
 uid
 umask
+uncaptured
+Uncaptured
 undeterminable
 Unix
 unmanaged
