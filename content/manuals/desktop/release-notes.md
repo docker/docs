@@ -31,6 +31,24 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 >
 > If you're experiencing malware detection issues on Mac, follow the steps documented in [docker/for-mac#7527](https://github.com/docker/for-mac/issues/7527).
 
+## 4.44.1
+
+{{< release-date date="2025-08-13" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.44.1" build_path="/201842/" >}}
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed an issue found in version 4.44.0 that caused startup to fail when `vpnkit` CIDR is locked without specifying a value in Desktop Settings Management.
+
+#### For Windows
+
+- Fixed an issue where volumes and containers were not visible after an upgrade from distributions using the legacy `version-pack-data` directory structure.
+- Resolved a rare issue in WSL 2 where the Docker CLI failed with a **Proxy Authentication Required** error.
+- Fixed a bug where CLI plugins were not deployed to `~/.docker/cli-plugins` if the user lacked execution permissions on that directory.
+
 ## 4.44.0
 
 {{< release-date date="2025-08-07" >}}
