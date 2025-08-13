@@ -30,7 +30,7 @@ For more information about the containerd image store and its benefits, refer to
 
 ## Migrate to containerd image store on Docker Engine
 
-When you update to Docker Engine v29 and enable the containrd feature, you are
+When you update to Docker Engine v29 and enable the containerd feature, you are
 automatically migrated. The migration mechanism handles overlay and vfs images.
 
 Switching to containerd snapshotters causes you to temporarily lose images and

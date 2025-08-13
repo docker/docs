@@ -152,6 +152,7 @@ Qualcomm
 Quickview
 rebalance
 reimplement
+repull
 rollback
 rootful
 runc
@@ -160,7 +161,6 @@ S3
 scrollable
 SELinux
 Slack
-[sS]napshotters?
 Snyk
 Solr
 SonarQube
@@ -245,6 +245,7 @@ Zsh
 [Rr]untimes?
 [Ss]andbox(ed)?
 [Ss]eccomp
+[sS]napshotters?
 [Ss]ubmounts?
 [Ss]ubnet
 [Ss]ubpaths?
