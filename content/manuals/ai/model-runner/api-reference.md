@@ -144,7 +144,7 @@ To call the `chat/completions` OpenAI endpoint from the host via TCP:
    If you are running on Windows, also enable GPU-backed inference.
    See [Enable Docker Model Runner](get-started.md#enable-docker-model-runner-in-docker-desktop).
 
-2. Interact with it as documented in the previous section using `localhost` and the correct port.
+1. Interact with it as documented in the previous section using `localhost` and the correct port.
 
 ```bash
 #!/bin/sh
