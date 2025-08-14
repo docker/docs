@@ -42,6 +42,13 @@
         <div
           class="bg-background-toc dark:bg-background-toc z-50 w-full p-3 md:block md:w-[300px]"
         >
+          <!-- Collapse button for small screens -->
+          <button class="my-4 md:hidden" @click="$store.showSidebar = false">
+            <span class="icon-svg"
+              >{{ partialCached "icon" "arrow_left_alt" "arrow_left_alt" }}</span
+            >
+            Back
+          </button>
           <!-- Top nav buttons appear here on sm width -->
           <div class="flex flex-col gap-2 md:hidden mb-4">
             <button
@@ -84,13 +91,6 @@
               </span>
             </button>
           </div>
-          <!-- Collapse button for small screens -->
-          <button class="my-4 md:hidden" @click="$store.showSidebar = false">
-            <span class="icon-svg"
-              >{{ partialCached "icon" "arrow_left_alt" "arrow_left_alt" }}</span
-            >
-            Back
-          </button>
           <!-- Actual Sidebar Content -->
           {{ block "left" . }}
             {{ partial "sidebar/mainnav.html" . }}
