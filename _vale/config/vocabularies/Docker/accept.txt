@@ -188,7 +188,7 @@ Unix
 unmanaged
 VMware
 vpnkit
-VSCode
+Visual Studio Code
 vSphere
 Vue
 Wasm
