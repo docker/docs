@@ -49,7 +49,7 @@
               class="topbar-button open-kapa-widget w-full flex items-center gap-2"
             >
               <span>Ask&nbsp;AI</span>
-              <span class="icon-svg-stroke">
+              <span class="icon-svg">
                 {{ partialCached "utils/svg.html" "/icons/sparkle.svg" }}
               </span>
             </button>
@@ -68,7 +68,7 @@
             <button
               aria-label="Theme switch"
               id="theme-switch"
-              class="topbar-button-clear w-full flex items-center gap-2"
+              class="topbar-button flex items-center"
               x-data="{ theme: localStorage.getItem('theme-preference') }"
               x-init="$watch('theme', value => {
                     localStorage.setItem('theme-preference', value);
@@ -82,7 +82,6 @@
               <span class="icon-svg icon-sm hidden dark:block">
                 {{ partialCached "icon" "icons/moon.svg" "moon" }}
               </span>
-              <span>Theme</span>
             </button>
           </div>
           <!-- Collapse button for small screens -->
