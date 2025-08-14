@@ -1,5 +1,6 @@
 ---
 title: Docker Model Runner
+linkTitle: Model Runner
 params:
   sidebar:
     badge:

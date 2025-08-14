@@ -1,5 +1,6 @@
 ---
-title: MCP Toolkit
+title: Docker MCP Toolkit
+linkTitle: MCP Toolkit
 description: Use the MCP Toolkit to set up MCP servers and MCP clients.
 keywords: Docker MCP Toolkit, MCP server, MCP client, AI agents
 weight: 20

@@ -1,5 +1,6 @@
 ---
 title: Docker MCP Catalog
+linkTitle: MCP Catalog
 description: Learn about the benefits of the MCP Catalog, how you can use it, and how you can contribute
 keywords: docker hub, mcp, mcp servers, ai agents, catalog, docker
 weight: 10
