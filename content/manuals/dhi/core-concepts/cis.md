@@ -31,7 +31,9 @@ Dockerfile configuration.
 CIS-compliant DHIs are compliant with all controls in Section 4, with the sole
 exception of the control requiring Docker Content Trust (DCT), which [Docker
 officially retired](https://www.docker.com/blog/retiring-docker-content-trust/).
-By starting from a CIS-compliant DHI, teams can adopt image-level best practices
+Instead, DHIs are [signed](/manuals/dhi/core-concepts/signatures.md) using
+Cosign, providing an even higher level of authenticity and integrity. By
+starting from a CIS-compliant DHI, teams can adopt image-level best practices
 from the benchmark more quickly and confidently.
 
 > [!NOTE]
