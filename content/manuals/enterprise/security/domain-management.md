@@ -173,6 +173,6 @@ To delete a domain:
 your organization. If your organization is part of a company, select the company
 and configure the domain for the organization at the company level.
 1. Select **Admin Console**, then **Domain management**.
-1. For the domain you want to delete, section the **Actions** menu, then
+1. For the domain you want to delete, select the **Actions** menu, then
 **Delete domain**.
 1. To confirm, select **Delete domain** in the pop-up modal.
