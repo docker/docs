@@ -33,10 +33,10 @@ aliases:
 - /install/linux/docker-ee/oracle/
 ---
 
-This section describes how to install Docker Engine on Linux, also known as
-Docker CE. Docker Engine is also available for Windows, macOS, and Linux,
-through Docker Desktop. For instructions on how to install Docker Desktop,
-see: [Overview of Docker Desktop](/manuals/desktop/_index.md).
+This section describes how to install Docker Engine on Linux, also known as Docker CE. Docker Engine is also available for Windows, macOS, and Linux through Docker Desktop.
+
+> [!TIP]
+> To install Docker Desktop, see [Overview of Docker Desktop](/manuals/desktop/_index.md).
 
 ## Installation procedures for supported platforms
 
@@ -56,20 +56,16 @@ Click on a platform's link to view the relevant installation procedure.
 ### Other Linux distributions
 
 > [!NOTE]
->
-> While the following instructions may work, Docker doesn't test or verify
-> installation on distribution derivatives.
+> While the following instructions may work, Docker doesn't test or verify installation on distribution derivatives.
 
-- If you use Debian derivatives such as "BunsenLabs Linux", "Kali Linux" or 
-  "LMDE" (Debian-based Mint) should follow the installation instructions for
-  [Debian](debian.md), substitute the version of your distribution for the
-  corresponding Debian release. Refer to the documentation of your distribution to find
-  which Debian release corresponds with your derivative version.
-- Likewise, if you use Ubuntu derivatives such as "Kubuntu", "Lubuntu" or "Xubuntu"
-  you should follow the installation instructions for [Ubuntu](ubuntu.md),
-  substituting the version of your distribution for the corresponding Ubuntu release.
-  Refer to the documentation of your distribution to find which Ubuntu release
-  corresponds with your derivative version.
+- For Debian derivatives (for example, BunsenLabs Linux, Kali Linux, LMDE):
+  - Follow the [Debian installation instructions](debian.md).
+  - Substitute your distribution version for the corresponding Debian release.
+  - Check your distribution's documentation for the matching Debian release.
+- For Ubuntu derivatives (for example, Kubuntu, Lubuntu, Xubuntu):
+  - Follow the [Ubuntu installation instructions](ubuntu.md).
+  - Substitute your distribution version for the corresponding Ubuntu release.
+  - Check your distribution's documentation for the matching Ubuntu release.
 - Some Linux distributions provide a package of Docker Engine through their
   package repositories. These packages are built and maintained by the Linux
   distribution's package maintainers and may have differences in configuration
@@ -77,12 +73,11 @@ Click on a platform's link to view the relevant installation procedure.
   packages and you should report any bugs or issues involving these packages to
   your Linux distribution's issue tracker.
 
-Docker provides [binaries](binaries.md) for manual installation of Docker Engine.
-These binaries are statically linked and you can use them on any Linux distribution.
+Docker provides [binaries](binaries.md) for manual installation. These binaries are statically linked and work on any Linux distribution.
 
 ## Release channels
 
-Docker Engine has two types of update channels, **stable** and **test**:
+Docker Engine has two update channels: **stable** and **test**.
 
 * The **stable** channel gives you the latest versions released for general availability.
 * The **test** channel gives you pre-release versions that are ready for testing before
@@ -103,7 +98,7 @@ For information about the open source project, refer to the
 
 ### Upgrade path
 
-Patch releases are always backward compatible with its major and minor version.
+Patch releases are always backward compatible with their major and minor version.
 
 ### Licensing
 
@@ -113,11 +108,11 @@ license text.
 
 ## Reporting security issues
 
-If you discover a security issue, we request that you bring it to our attention immediately.
+If you discover a security issue, report it immediately.
 
-DO NOT file a public issue. Instead, submit your report privately to security@docker.com.
+Do not file a public issue. Instead, send your report privately to security@docker.com.
 
-Security reports are greatly appreciated, and Docker will publicly thank you for it.
+Docker appreciates security reports and will publicly thank you for your contribution.
 
 ## Get started
 
