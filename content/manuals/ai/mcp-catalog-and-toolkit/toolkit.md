@@ -164,7 +164,9 @@ and add Claude Desktop as a client:
 
 ### Example: Use Visual Studio Code as a client
 
-You can interact with all your installed MCP servers in VS Code:
+You can interact with all your installed MCP servers in Visual Studio Code:
+
+<!-- vale off -->
 
 1. To enable the MCP Toolkit:
 
@@ -172,7 +174,7 @@ You can interact with all your installed MCP servers in VS Code:
    {{< tabs group="" >}}
    {{< tab name="Enable globally">}}
 
-   1. Insert the following in your VS Code's User`mcp.json`:
+   1. Insert the following in your Visual Studio Code's User`mcp.json`:
 
       ```json
       "mcp": {
@@ -217,6 +219,8 @@ You can interact with all your installed MCP servers in VS Code:
 
 For more information about the Agent mode, see the
 [Visual Studio Code documentation](https://code.visualstudio.com/docs/copilot/chat/mcp-servers#_use-mcp-tools-in-agent-mode).
+
+<!-- vale on -->
 
 ## Authenticate via OAuth
 

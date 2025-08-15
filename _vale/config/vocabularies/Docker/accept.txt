@@ -1,5 +1,6 @@
 (?i)[A-Z]{2,}'?s
 
+[Dd]ev
 Adreno
 Aleksandrov
 Amazon
@@ -14,11 +15,14 @@ Btrfs
 Bugsnag
 BuildKit
 BusyBox
+CD
 CentOS
 Ceph
 cgroup
 Chrome
 Chrome DevTools
+CI
+CI/CD
 Citrix
 cli
 CLI
@@ -37,7 +41,6 @@ denylist
 deprovisioning
 deserialization
 deserialize
-[Dd]ev
 Dev Environments?
 Dex
 displayName
@@ -140,6 +143,7 @@ osquery
 osxfs
 OTel
 Paketo
+PAT
 pgAdmin
 PKG
 Postgres
@@ -186,9 +190,9 @@ umask
 undeterminable
 Unix
 unmanaged
+Visual Studio Code
 VMware
 vpnkit
-Visual Studio Code
 vSphere
 Vue
 Wasm

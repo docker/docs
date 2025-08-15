@@ -31,7 +31,7 @@ It simplifies the developer experience across these areas:
 - Discovery: A central catalog with verified, versioned tools.
 - Credential management: OAuth-based and secure by default.
 - Execution: Tools run in isolated, containerized environments.
-- Portability: Use MCP tools across Claude, Cursor, VS Code, and more—no code
+- Portability: Use MCP tools across Claude, Cursor, Visual Studio Code, and more—no code
   changes needed.
 
 With Docker Hub and the MCP Toolkit, you can:

@@ -16,7 +16,7 @@ searching instead of building.
 
 ## Key features
 
-- Advanced LLM context: Our MCP Server provides LLMs with detailed, structured context for Docker Hub images, enabling smarter, more relevant recommendations for developers, whether they're choosing a base image or automating CI/CD workflows.
+- Advanced LLM context: Docker's MCP Server provides LLMs with detailed, structured context for Docker Hub images, enabling smarter, more relevant recommendations for developers, whether they're choosing a base image or automating CI/CD workflows.
 - Natural language image discovery: Developers can find the right container image using natural language, no need to remember tags or repository names. Just describe what you need, and Docker Hub will return images that match your intent.
 - Simplified repository management: Hub MCP Server enables agents to manage repositories through natural language fetching image details, viewing stats, searching content, and performing key operations quickly and easily.
 
@@ -88,7 +88,7 @@ searching instead of building.
 ## Usage with Visual Studio Code
 
 1. Add the Docker Hub MCP Server configuration to your User Settings (JSON)
-   file in VS Code. You can do this by opening the `Command Palette` and
+   file in Visual Studio Code. You can do this by opening the `Command Palette` and
    typing `Preferences: Open User Settings (JSON)`.
 
 
