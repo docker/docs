@@ -133,8 +133,6 @@ Composefile include:
   requires: Docker Compose [2.20.0](/manuals/compose/releases/release-notes.md#2200) and later
 Compose sbom:
   requires: Docker Compose [2.39.0](/manuals/compose/releases/release-notes.md#2390) and later
-containerd:
-  availability: Experimental
 Dev Environments:
   availability: Beta
 Docker Build Cloud:
@@ -250,3 +248,5 @@ Wasm workloads:
   availability: Beta
 Wasmtime:
   availability: Experimental
+StorageDrivers:
+  availability: Deprecated

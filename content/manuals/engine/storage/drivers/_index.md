@@ -2,12 +2,14 @@
 description: Learn the technologies that support storage drivers.
 keywords: container, storage, driver, btrfs, overlayfs, vfs, zfs
 title: Storage drivers
-weight: 40
 aliases:
   - /storage/storagedriver/imagesandcontainers/
   - /storage/storagedriver/
   - /engine/userguide/storagedriver/imagesandcontainers/
 ---
+
+{{< summary-bar feature_name="StorageDrivers"
+text="Use [containerd](../containerd.md) instead.">}}
 
 To use storage drivers effectively, it's important to know how Docker builds and
 stores images, and how these images are used by containers. You can use this
@@ -170,7 +172,7 @@ docker.io/library/ubuntu:22.04
 
 Each of these layers is stored in its own directory inside the Docker host's
 local storage area. To examine the layers on the filesystem, list the contents
-of `/var/lib/docker/<storage-driver>`. This example uses the `overlay2` 
+of `/var/lib/docker/<storage-driver>`. This example uses the `overlay2`
 storage driver:
 
 ```console
@@ -326,7 +328,7 @@ layers are the same.
    Before BuildKit, the "classic" builder would produce a new "intermediate"
    image for each step for caching purposes, and the `IMAGE` column would show
    the ID of that image.
-   
+
    BuildKit uses its own caching mechanism, and no longer requires intermediate
    images for caching. Refer to [BuildKit](/manuals/build/buildkit/_index.md)
    to learn more about other enhancements made in BuildKit.
@@ -343,7 +345,7 @@ layers are the same.
      "sha256:07b4a9068b6af337e8b8f1f1dae3dd14185b2c0003a9a1f0a6fd2587495b204a"
    ]
    ```
-   
+
    ```console
    $ docker image inspect --format "{{json .RootFS.Layers}}" acme/my-final-image:1.0
    [
@@ -363,7 +365,7 @@ layers are the same.
    > [!TIP]
    >
    > Format output of Docker commands with the `--format` option.
-   > 
+   >
    > The examples above use the `docker image inspect` command with the `--format`
    > option to view the layer IDs, formatted as a JSON array. The `--format`
    > option on Docker commands can be a powerful feature that allows you to
@@ -412,7 +414,7 @@ in a `copy_up` operation, therefore duplicating the file to the writable layer.
 > applications, for example write-intensive databases, are known to be
 > problematic particularly when pre-existing data exists in the read-only
 > layer.
-> 
+>
 > Instead, use Docker volumes, which are independent of the running container,
 > and designed to be efficient for I/O. In addition, volumes can be shared
 > among containers and don't increase the size of your container's writable
@@ -449,7 +451,7 @@ examines how much room they take up.
 2. Run the `docker ps` command with the `--size` option to verify the 5 containers
    are running, and to see each container's size.
 
-   
+
    ```console
    $ docker ps --size --format "table {{.ID}}\t{{.Image}}\t{{.Names}}\t{{.Size}}"
 
@@ -460,35 +462,35 @@ examines how much room they take up.
    a5ff32e2b551   acme/my-final-image:1.0   my_container_2   0B (virtual 7.75MB)
    40ebdd763416   acme/my-final-image:1.0   my_container_1   0B (virtual 7.75MB)
    ```
-   
+
    The output above shows that all containers share the image's read-only layers
    (7.75MB), but no data was written to the container's filesystem, so no additional
    storage is used for the containers.
 
    {{< accordion title="Advanced: metadata and logs storage used for containers" >}}
-   
+
    > [!NOTE]
    >
    > This step requires a Linux machine, and doesn't work on Docker Desktop, as
    > it requires access to the Docker Daemon's file storage.
-   
+
    While the output of `docker ps` provides you information about disk space
    consumed by a container's writable layer, it doesn't include information
    about metadata and log-files stored for each container.
-   
+
    More details can be obtained by exploring the Docker Daemon's storage
    location (`/var/lib/docker` by default).
-   
+
    ```console
    $ sudo du -sh /var/lib/docker/containers/*
-   
+
    36K  /var/lib/docker/containers/3ed3c1a10430e09f253704116965b01ca920202d52f3bf381fbb833b8ae356bc
    36K  /var/lib/docker/containers/40ebdd7634162eb42bdb1ba76a395095527e9c0aa40348e6c325bd0aa289423c
    36K  /var/lib/docker/containers/939b3bf9e7ece24bcffec57d974c939da2bdcc6a5077b5459c897c1e2fa37a39
    36K  /var/lib/docker/containers/a5ff32e2b551168b9498870faf16c9cd0af820edf8a5c157f7b80da59d01a107
    36K  /var/lib/docker/containers/cddae31c314fbab3f7eabeb9b26733838187abc9a2ed53f97bd5b04cd7984a5a
    ```
-   
+
    Each of these containers only takes up 36k of space on the filesystem.
 
    {{< /accordion >}}
@@ -502,13 +504,13 @@ examines how much room they take up.
    ```console
    $ for i in {1..3}; do docker exec my_container_$i sh -c 'printf hello > /out.txt'; done
    ```
-   
+
    Running the `docker ps` command again afterward shows that those containers
    now consume 5 bytes each. This data is unique to each container, and not
    shared. The read-only layers of the containers aren't affected, and are still
    shared by all containers.
 
-   
+
    ```console
    $ docker ps --size --format "table {{.ID}}\t{{.Image}}\t{{.Names}}\t{{.Size}}"
 
