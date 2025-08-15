@@ -201,6 +201,7 @@
   --color-yellow-outlinedborder: rgba(235, 156, 0, 0.56);
   --color-yellow-selected: rgba(235, 156, 0, 0.16);
 
+  --topnav-button-bg: #4878f3;
   --tw-prose-code-bg: var(--color-gray-100);
   --tw-prose-code-bg-dark: var(--color-gray-800);
 }

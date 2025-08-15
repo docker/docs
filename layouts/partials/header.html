@@ -45,19 +45,51 @@
         </ul>
       </nav>
     </div>
-    <div id="buttons" class="flex min-w-0 items-center justify-end gap-4 flex-shrink-0">
-      <button
-        @click="open = false"
-        class="topbar-button open-kapa-widget"
-      >
-        <span>Ask&nbsp;AI</span>
-        <span class="icon-svg-stroke">
-          {{ partial "utils/svg.html" "/icons/sparkle.svg" }}
-        </span>
-      </button>
-      <div class="topbar-button" id="search-bar-container">
-         {{ partialCached "search-bar.html" "-" }}
+    <div id="buttons" class="flex min-w-0 items-center justify-end flex-shrink-0">
+      <!-- Hide on small screens, show on md+ -->
+      <div class="hidden md:flex items-center gap-3">
+        <button
+          @click="open = false"
+          class="topbar-button open-kapa-widget"
+        >
+          <span class="hidden lg:inline">Ask&nbsp;AI</span>
+          <span class="icon-svg">
+            {{ partialCached "utils/svg.html" "/icons/sparkle.svg" }}
+          </span>
+        </button>
+
+        <div class="topbar-button" id="search-bar-container">
+           {{ partialCached "search-bar.html" "-" }}
+        </div>
+
+        {{ partial "contact-support-button.html" "notext" }}
+
+        <button
+          aria-label="Theme switch"
+          id="theme-switch"
+          class="topbar-button-clear"
+          x-data="{ theme: localStorage.getItem('theme-preference') }"
+          x-init="$watch('theme', value => {
+                localStorage.setItem('theme-preference', value);
+                document.firstElementChild.className = value;
+              })"
+          @click="theme = (theme === 'dark' ? 'light' : 'dark')"
+        >
+          <span class="icon-svg icon-sm dark:hidden"
+            >{{ partialCached "icon" "icons/sun.svg" "sun" }}
+          </span>
+          <span class="icon-svg icon-sm hidden dark:block">
+            {{ partialCached "icon" "icons/moon.svg" "moon" }}
+          </span>
+        </button>
       </div>
+      <!-- On sm screens, hide all buttons here (they will be in sidebar) -->
+    </div>
+  </div>
+</header>
+        </button>
+      </div>
+      <!-- On sm screens, hide all buttons here (they will be in sidebar) -->
     </div>
   </div>
 </header>
