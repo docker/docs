@@ -37,7 +37,9 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.44.2" build_path="/TODO/" >}}
 
-TODO
+### Bug fixes and enhancements
+
+ - Adds [Docker Offload](/manuals/offload/_index.md) to the **Beta features** settings tab and includes updates to support [Docker Offload Beta](https://www.docker.com/products/docker-offload/).
 
 ## 4.44.1
 
