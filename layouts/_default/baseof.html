@@ -63,15 +63,7 @@
             <div class="topbar-button w-full flex items-center gap-2" id="search-bar-container">
                {{ partialCached "search-bar.html" "-" }}
             </div>
-            <button class="topbar-button w-full flex items-center gap-2"
-               href="https://hub.docker.com/support/contact"
-                aria-label="Contact support" class="flex items-center gap-2 w-full">
-                <span>Contact support</span>
-                <span class="icon-svg icon-sm">
-                  {{ partial "utils/svg.html" "/icons/headset.svg" }}
-                </span>
-              </a>
-            </button>
+            {{ partial "contact-support-button.html" .}}
             <button
               aria-label="Theme switch"
               id="theme-switch"

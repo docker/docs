@@ -62,14 +62,7 @@
            {{ partialCached "search-bar.html" "-" }}
         </div>
 
-        <button class="topbar-button" href="https://hub.docker.com/support/contact"
-            aria-label="Contact support">
-            <span class="hidden lg:inline">Contact support</span>
-            <span class="icon-svg icon-sm">
-              {{ partial "utils/svg.html" "/icons/headset.svg" }}
-            </span>
-          </a>
-        </button>
+        {{ partial "contact-support-button.html" "notext" }}
 
         <button
           aria-label="Theme switch"
@@ -88,6 +81,12 @@
           <span class="icon-svg icon-sm hidden dark:block">
             {{ partialCached "icon" "icons/moon.svg" "moon" }}
           </span>
+        </button>
+      </div>
+      <!-- On sm screens, hide all buttons here (they will be in sidebar) -->
+    </div>
+  </div>
+</header>
         </button>
       </div>
       <!-- On sm screens, hide all buttons here (they will be in sidebar) -->
