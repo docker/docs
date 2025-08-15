@@ -31,6 +31,16 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 >
 > If you're experiencing malware detection issues on Mac, follow the steps documented in [docker/for-mac#7527](https://github.com/docker/for-mac/issues/7527).
 
+## 4.44.2
+
+{{< release-date date="2025-08-15" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.44.2" build_path="/202017/" >}}
+
+### Bug fixes and enhancements
+
+ - Adds [Docker Offload](/manuals/offload/_index.md) to the **Beta features** settings tab and includes updates to support [Docker Offload Beta](https://www.docker.com/products/docker-offload/).
+
 ## 4.44.1
 
 {{< release-date date="2025-08-13" >}}
