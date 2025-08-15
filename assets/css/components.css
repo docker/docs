@@ -77,6 +77,13 @@
     align-items: center;
     justify-content: center;
   }
+  .admonition p{
+    margin-bottom: 1em;
+  }
+  .admonition ul{
+    @apply list-disc pl-5 mb-1;
+  }
+
 
   .download-links {
     @apply block;
@@ -93,6 +100,7 @@
   .card-image {
     @apply h-12 w-12 overflow-hidden;
   }
+
 }
 .button {
   @apply my-2 mr-2 inline-block rounded-sm bg-blue-500 p-1 px-3 text-white hover:bg-blue-600 dark:bg-blue-500 hover:dark:bg-blue-400;

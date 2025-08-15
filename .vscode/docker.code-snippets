@@ -54,4 +54,9 @@
     "body": ["{{< button url=\"$1\" text=\"$2\" >}}"],
     "description": "Insert a Hugo button",
   },
+  "Insert Visual Studio Code": {
+    "prefix": ["vscode", "vs"],
+    "body": ["Visual Studio Code"],
+    "description": "Insert 'Visual Studio Code'",
+  },
 }
