@@ -8,65 +8,71 @@ aliases:
 - /build/architecture/
 ---
 
-Docker Build implements a client-server architecture, where:
+Docker Build uses a client-server architecture with two main components:
 
-- Client: Buildx is the client and the user interface for running and managing builds.
-- Server: BuildKit is the server, or builder, that handles the build execution.
+- **Client**: Buildx serves as the user interface for running and managing builds
+- **Server**: BuildKit handles the actual build execution
 
-When you invoke a build, the Buildx client sends a build request to the
-BuildKit backend. BuildKit resolves the build instructions and executes the
-build steps. The build output is either sent back to the client or uploaded to
-a registry, such as Docker Hub.
+## How Docker Build works
 
-Buildx and BuildKit are both installed with Docker Desktop and Docker Engine
-out-of-the-box. When you invoke the `docker build` command, you're using Buildx
-to run a build using the default BuildKit bundled with Docker.
+When you invoke a build:
+
+1. Buildx (client) sends a build request to BuildKit (backend).
+2. BuildKit resolves build instructions and executes build steps.
+3. Build output returns to the client or uploads to a registry like Docker Hub.
+
+Both Buildx and BuildKit come pre-installed with Docker Desktop and Docker Engine.
+The `docker build` command uses the default BuildKit bundled with Docker.
 
 ## Buildx
 
-Buildx is the CLI tool that you use to run builds. The `docker build` command
-is a wrapper around Buildx. When you invoke `docker build`, Buildx interprets
-the build options and sends a build request to the BuildKit backend.
+Buildx is the CLI tool for running builds. The `docker build` command
+is a wrapper around Buildx functionality.
 
-The Buildx client can do more than just run builds. You can also use Buildx to
-create and manage BuildKit backends, referred to as builders. It also supports
-features for managing images in registries, and for running multiple builds
-concurrently.
+When you run `docker build`, Buildx:
 
-Docker Buildx is installed by default with Docker Desktop. You can also build
-the CLI plugin from source, or grab a binary from the GitHub repository and
-install it manually. See [Buildx README](https://github.com/docker/buildx#manual-download)
-on GitHub for more information.
+- Interprets your build options
+- Sends build requests to BuildKit backend
+- Manages build execution
+
+Beyond running builds, Buildx enables you to:
+
+- Create and manage BuildKit backends (builders)
+- Manage images in registries
+- Run multiple builds concurrently
+- Access advanced build features
+
+
+Docker Buildx comes installed by default with Docker Desktop. For manual installation, you can:
+
+- Build the CLI plugin from source.
+- Download a binary from the [GitHub repository](https://github.com/docker/buildx#manual-download).
 
 > [!NOTE]
-> While `docker build` invokes Buildx under the hood, there are subtle
-> differences between this command and the canonical `docker buildx build`.
-> For details, see [Difference between `docker build` and `docker buildx build`](../builders/_index.md#difference-between-docker-build-and-docker-buildx-build).
+> The `docker build` command differs slightly from `docker buildx build`.
+> See [build command differences](../builders/_index.md#difference-between-docker-build-and-docker-buildx-build) for details.
 
 ## BuildKit
 
-BuildKit is the daemon process that executes the build workloads.
+BuildKit is the daemon process that executes build workloads.
 
-A build execution starts with the invocation of a `docker build` command.
-Buildx interprets your build command and sends a build request to the BuildKit
-backend. The build request includes:
+A build execution starts when you run a `docker build` command. Buildx interprets
+your command and sends a build request to BuildKit. The build request includes:
 
 - The Dockerfile
 - Build arguments
 - Export options
 - Caching options
 
-BuildKit resolves the build instructions and executes the build steps. While
-BuildKit is executing the build, Buildx monitors the build status and prints
-the progress to the terminal.
+BuildKit resolves the build instructions and executes the build steps. While BuildKit
+executes the build, Buildx monitors the build status and prints progress to the terminal.
 
-If the build requires resources from the client, such as local files or build
-secrets, BuildKit requests the resources that it needs from Buildx.
+If the build needs resources from the client, such as local files or build secrets,
+BuildKit requests only the resources it needs from Buildx.
 
-This is one way in which BuildKit is more efficient compared to the legacy
-builder used in earlier versions of Docker. BuildKit only requests the
-resources that the build needs when they're needed. The legacy builder, in
-comparison, always takes a copy of the local filesystem.
+BuildKit is more efficient than the legacy builder used in earlier Docker versions.
+BuildKit requests resources only when needed. The legacy builder always copies the
+local filesystem.
 
 Examples of resources that BuildKit can request from Buildx include:
 
