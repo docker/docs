@@ -9,6 +9,7 @@ Artifactory
 auditable
 autolock
 Azure
+Azure AD
 bootup
 Btrfs
 Bugsnag
@@ -20,6 +21,7 @@ cgroup
 Chrome
 Chrome DevTools
 Citrix
+CI/CD
 cli
 CLI
 CloudFront
@@ -141,6 +143,7 @@ osxfs
 OTel
 Paketo
 pgAdmin
+plist
 PKG
 Postgres
 PowerShell
@@ -171,6 +174,7 @@ Syft
 syntaxes
 Sysbox
 sysctls
+sysctl
 Sysdig
 systemd
 Testcontainers
@@ -183,6 +187,8 @@ ufw
 ui
 uid
 umask
+uncaptured
+Uncaptured
 undeterminable
 Unix
 unmanaged

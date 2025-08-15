@@ -1,8 +1,8 @@
 ---
-description: How to configure Settings Management for Docker Desktop
-keywords: admin, controls, rootless, enhanced container isolation
 title: Configure Settings Management with a JSON file
 linkTitle: Use a JSON file
+description: Configure and enforce Docker Desktop settings using an admin-settings.json file
+keywords: admin controls, settings management, configuration, enterprise, docker desktop, json file
 weight: 10
 aliases:
  - /desktop/hardened-desktop/settings-management/configure/
@@ -12,75 +12,59 @@ aliases:
 
 {{< summary-bar feature_name="Hardened Docker Desktop" >}}
 
-This page explains how to use an `admin-settings.json` file to configure and
-enforce Docker Desktop settings. Use this method to standardize Docker
-Desktop environments in your organization.
+Settings Management lets you configure and enforce Docker Desktop settings across your organization using an `admin-settings.json` file. This standardizes Docker Desktop environments and ensures consistent configurations for all users.
 
 ## Prerequisites
 
-- [Enforce sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md) to
-ensure all users authenticate with your organization.
-- A Docker Business subscription is required.
+Before you begin, make sure you have:
 
-Docker Desktop only applies settings from the `admin-settings.json` file if both
-authentication and Docker Business license checks succeed.
+- [Enforce sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md) for
+your organization
+- A Docker Business subscription
+
+Docker Desktop only applies settings from the `admin-settings.json` file when both authentication and Docker Business license checks succeed.
 
 > [!IMPORTANT]
 >
-> If a user isn't signed in or isn't part of a Docker Business organization,
-the settings file is ignored.
-
-## Limitation
-
-- The `admin-settings.json` file doesn't work in air-gapped or offline
-environments.
-- The file is not compatible with environments that restrict authentication
-with Docker Hub.
+> Users must be signed in and part of a Docker Business organization. If either condition isn't met, the settings file is ignored.
 
 ## Step one: Create the settings file
 
-You can:
+You can create the `admin-settings.json` file in two ways:
 
-- Use the `--admin-settings` installer flag to auto-generate the file. See:
-    - [macOS](/manuals/desktop/setup/install/mac-install.md#install-from-the-command-line) install guide
-    - [Windows](/manuals/desktop/setup/install/windows-install.md#install-from-the-command-line) install guide
-- Or create it manually and place it in the following locations:
+- Use the `--admin-settings` installer flag to auto-generate the file:
+    - [macOS](/manuals/desktop/setup/install/mac-install.md#install-from-the-command-line) installation guide
+    - [Windows](/manuals/desktop/setup/install/windows-install.md#install-from-the-command-line) installation guide
+- Create it manually and place it in the following locations:
     - Mac: `/Library/Application\ Support/com.docker.docker/admin-settings.json`
     - Windows: `C:\ProgramData\DockerDesktop\admin-settings.json`
     - Linux: `/usr/share/docker-desktop/admin-settings.json`
 
 > [!IMPORTANT]
 >
-> Place the file in a protected directory to prevent modification. Use MDM tools
-like [Jamf](https://www.jamf.com/lp/en-gb/apple-mobile-device-management-mdm-jamf-shared/?attr=google_ads-brand-search-shared&gclid=CjwKCAjw1ICZBhAzEiwAFfvFhEXjayUAi8FHHv1JJitFPb47C_q_RCySTmF86twF1qJc_6GST-YDmhoCuJsQAvD_BwE) to distribute it at scale.
+> Place the file in a protected directory to prevent unauthorized changes. Use Mobile Device Management (MDM) tools like Jamf to distribute the file at scale across your organization.
 
-## Step two: Define settings
+## Step two: Configure settings
 
 > [!TIP]
 >
 > For a complete list of available settings, their supported platforms, and which configuration methods they work with, see the [Settings reference](settings-reference.md).
 
-The `admin-settings.json` file uses structured keys to define what can
-be configured and whether the values are enforced.
+The `admin-settings.json` file uses structured keys to define configurable settings and whether values are enforced.
 
-Each setting supports the `locked` field. When `locked` is set to `true`, users
-can't change that value in Docker Desktop, the CLI, or config files. When
-`locked` is set to `false`, the value acts like a default suggestion and users
+Each setting supports a `locked` field that controls user permissions:
+
+- When `locked` is set to `true`, users can't change that value in Docker Desktop, the CLI, or config files.
+- When `locked` is set to `false`, the value acts like a default suggestion and users
 can still update it.
 
 Settings where `locked` is set to `false` are ignored on existing installs if
 a user has already customized that value in `settings-store.json`,
 `settings.json`, or `daemon.json`.
 
-> [!NOTE]
->
-> Some settings are platform-specific or require a minimum Docker Desktop
-version. See the [Settings reference](/manuals/enterprise/security/hardened-desktop/settings-management/settings-reference.md) for details.
+### Example configuration
 
-### Example settings file
-
-The following file is an example `admin-settings.json` file. For a full list
-of configurable settings for the `admin-settings.json` file, see [`admin-settings.json` configurations](#admin-settingsjson-configurations).
+The following sample is an `admin-settings.json` file with common enterprise settings configured. You can use this example as a template with the [`admin-settings.json` configurations](#admin-settingsjson-configurations):
 
 ```json {collapse=true}
 {
@@ -207,21 +191,33 @@ of configurable settings for the `admin-settings.json` file, see [`admin-setting
 }
 ```
 
-## Step three: Restart and apply settings
+## Step three: Apply the settings
 
-Settings apply after Docker Desktop is restarted and the user is signed in.
+Settings take effect after Docker Desktop restarts and the user signs in.
 
-- New installs: Launch Docker Desktop and sign in.
-- Existing installs: Quit Docker Desktop fully and relaunch it.
+For new installations:
+
+1. Launch Docker Desktop.
+1. Sign in with your Docker account.
+
+For existing installations:
+
+1. Quit Docker Desktop completely.
+1. Relaunch Docker Desktop.
 
 > [!IMPORTANT]
 >
-> Restarting Docker Desktop from the menu isn't enough. It must be fully
-quit and reopened.
+> You must fully quit and reopen Docker Desktop. Restarting from the menu isn't sufficient.
 
 ## `admin-settings.json` configurations
 
-### General
+The following tables describe all available settings in the `admin-settings.json` file.
+
+> [!NOTE]
+>
+> Some settings are platform-specific or require minimum Docker Desktop versions. Check the Version column for requirements.
+
+### General settings
 
 |Parameter|OS|Description|Version|
 |:-------------------------------|---|:-------------------------------|---|
@@ -249,7 +245,7 @@ quit and reopened.
 |:-------------------------------|---|:-------------------------------|---|
 |`scout`| | Setting `useBackgroundIndexing` to `false` disables automatic indexing of images loaded to the image store. Setting `sbomIndexing` to `false` prevents users from being able to index image by inspecting them in Docker Desktop or using `docker scout` CLI commands. |  |
 
-### Proxy
+### Proxy settings
 
 |Parameter|OS|Description|Version|
 |:-------------------------------|---|:-------------------------------|---|
@@ -263,7 +259,7 @@ quit and reopened.
 |:-------------------------------|---|:-------------------------------|---|
 |`containersProxy` | | Creates air-gapped containers. For more information see [Air-Gapped Containers](../air-gapped-containers.md).| Docker Desktop version 4.29 and later. |
 
-### Linux VM
+### Linux VM settings
 
 |Parameter|OS|Description|Version|
 |:-------------------------------|---|:-------------------------------|---|
@@ -283,7 +279,7 @@ quit and reopened.
 >
 > This setting is not available to configure via the Docker Admin Console.
 
-### Kubernetes
+### Kubernetes settings
 
 |Parameter|OS|Description|Version|
 |:-------------------------------|---|:-------------------------------|---|
@@ -291,14 +287,14 @@ quit and reopened.
 
 > [!NOTE]
 >
-> In Docker Desktop versions 4.43 or earlier, when using the `imagesRepository` setting and Enhanced Container Isolation (ECI), add the following images to the [ECI Docker socket mount image list](#enhanced-container-isolation):
+> When using `imagesRepository` with Enhanced Container Isolation (ECI), add these images to the [ECI Docker socket mount image list](#enhanced-container-isolation):
 >
 > `[imagesRepository]/desktop-cloud-provider-kind:`
 > `[imagesRepository]/desktop-containerd-registry-mirror:`
 >
-> These containers mount the Docker socket, so you must add the images to the ECI images list. If not, ECI will block the mount and Kubernetes won't start.
+> These containers mount the Docker socket, so you must add them to the ECI images list. Otherwise, ECI blocks the mount and Kubernetes won't start.
 
-### Networking
+### Networking settings
 
 |Parameter|OS|Description|Version|
 |:-------------------------------|---|:-------------------------------|---|

@@ -1,17 +1,15 @@
 ---
-description: Learn how to troubleshoot common user provisioning issues.
-keywords: scim, jit, provision, troubleshoot, group mapping
 title: Troubleshoot provisioning
 linkTitle: Troubleshoot provisioning
+description: Troubleshoot common user provisioning issues with SCIM and Just-in-Time provisioning
+keywords: SCIM troubleshooting, user provisioning, JIT provisioning, group mapping, attribute conflicts
 tags: [Troubleshooting]
 toc_max: 2
 aliases:
  - /security/troubleshoot/troubleshoot-provisioning/
 ---
 
-If you experience issues with user roles, attributes, or unexpected account
-behavior with user provisioning, this guide provides troubleshooting
-recommendations to resolve conflicts.
+This page helps troubleshoot common user provisioning issues including user roles, attributes, and unexpected account behavior with SCIM and Just-in-Time (JIT) provisioning.
 
 ## SCIM attribute values are overwritten or ignored
 
@@ -20,7 +18,7 @@ recommendations to resolve conflicts.
 Typically, this scenario does not produce an error message in Docker or your
 IdP. This issue ususally surfaces as incorrect role or team assignment.
 
-### Possible causes
+### Causes
 
 - JIT provisioning is enabled, and Docker is using values from your IdP's
 SSO login flow to provision the user, which overrides
@@ -68,7 +66,7 @@ in your IdP configuration.
 
 ## SCIM updates don't apply to existing users
 
-### Possible causes
+### Causes
 
 User accounts were originally created manually or via JIT, and SCIM is not
 linked to manage them.

@@ -1,7 +1,7 @@
 ---
 title: Air-gapped containers
-description: Air-gapped containers - What it is, benefits, and how to configure it.
-keywords: air gapped, security, Docker Desktop, configuration, proxy, network
+description: Control container network access with air-gapped containers using custom proxy rules and network restrictions
+keywords: air gapped containers, network security, proxy configuration, container isolation, docker desktop
 aliases:
  - /desktop/hardened-desktop/settings-management/air-gapped-containers/
  - /desktop/hardened-desktop/air-gapped-containers/
@@ -10,22 +10,50 @@ aliases:
 
 {{< summary-bar feature_name="Air-gapped containers" >}}
 
-Air-gapped containers let you restrict containers from accessing network resources, limiting where data can be uploaded to or downloaded from.
+Air-gapped containers let you restrict container network access by controlling where containers can send and receive data. This feature applies custom proxy rules to container network traffic, helping secure environments where containers shouldn't have unrestricted internet access.
 
-Docker Desktop can apply a custom set of proxy rules to network traffic from containers. The proxy can be configured to:
+Docker Desktop can configure container network traffic to accept connections, reject connections, or tunnel through HTTP or SOCKS proxies. You control which TCP ports the policy applies to and whether to use a single proxy or per-destination policies via Proxy Auto-Configuration (PAC) files.
 
-- Accept network connections
-- Reject network connections
-- Tunnel through an HTTP or SOCKS proxy
+This page provides an overview of air-gapped containers and configuration steps.
 
-You can choose:
+## Who should use air-gapped containers?
 
-- Which outgoing TCP ports the policy applies to. For example, only certain ports, `80`, `443` or all with `*`.
-- Whether to forward to a single HTTP or SOCKS proxy, or to have a policy per destination via a Proxy Auto-Configuration (PAC) file.
+Air-gapped containers help organizations maintain security in restricted environments:
 
-## Configuration
+- Secure development environments: Prevent containers from accessing unauthorized external services
+- Compliance requirements: Meet regulatory standards that require network isolation
+- Data loss prevention: Block containers from uploading sensitive data to external services
+- Supply chain security: Control which external resources containers can access during builds
+- Corporate network policies: Enforce existing network security policies for containerized applications
 
-Assuming [enforced sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md) and [Settings Management](settings-management/_index.md) are enabled, add the new proxy configuration to the `admin-settings.json` file. For example:
+## How air-gapped containers work
+
+Air-gapped containers operate by intercepting container network traffic and applying proxy rules:
+
+1. Traffic interception: Docker Desktop intercepts all outgoing network connections from containers
+1. Port filtering: Only traffic on specified ports (`transparentPorts`) is subject to proxy rules
+1. Rule evaluation: PAC file rules or static proxy settings determine how to handle each connection
+1. Connection handling: Traffic is allowed directly, routed through a proxy, or blocked based on the rules
+
+Some important considerations include:
+
+- The existing `proxy` setting continues to apply to Docker Desktop application traffic on the host
+- If PAC file download fails, containers block requests to target URLs
+- URL parameter format is `http://host_or_ip:port` or `https://host_or_ip:port`
+- Hostname is available for ports 80 and 443, but only IP addresses for other ports
+
+## Prerequisites
+
+Before configuring air-gapped containers, you must have:
+
+- [Enforce sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md) enabled to ensure users authenticate with your organization
+- A Docker Business subscription
+- Configured [Settings Management](/manuals/enterprise/security/hardened-desktop/settings-management/_index.md) to manage organization policies
+- Downloaded Docker Desktop 4.29 or later
+
+## Configure air-gapped containers
+
+Add the container proxy to your [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md). For example:
 
 ```json
 {
@@ -42,24 +70,66 @@ Assuming [enforced sign-in](/manuals/enterprise/security/enforce-sign-in/_index.
 }
 ```
 
-The `containersProxy` setting describes the policy which is applied to traffic from containers. The valid fields are:
+### Configuration parameters
 
-- `locked`: If true, it is not possible for developers to override these settings. If false the settings are interpreted as default values which the developer can change.
-- `mode`: Same meaning as with the existing `proxy` setting. Possible values are `system` and `manual`.
-- `http`, `https`, `exclude`: Same meaning as with the `proxy` setting. Only takes effect if `mode` is set to `manual`.
-- `pac` : URL for a PAC file. Only takes effect if `mode` is `manual`, and is considered higher priority than `http`, `https`, `exclude`.
-- `transparentPorts`: A comma-separated list of ports (e.g. `"80,443,8080"`) or a wildcard (`*`) indicating which ports should be proxied.
+The `containersProxy` setting controls network policies applied to container traffic:
 
-> [!IMPORTANT]
->
-> Any existing `proxy` setting in the `admin-settings.json` file continues to apply to traffic from the app on the host.
-> If the PAC file download fails, the containers block the request to the target URL.
+| Parameter | Description | Value |
+|-----------|-------------|-------|
+| `locked` | Prevents developers from overriding settings | `true` (locked), `false` (default) |
+| `mode` | Proxy configuration method | `system` (use system proxy), `manual` (custom) |
+| `http` | HTTP proxy server | URL (e.g., `"http://proxy.company.com:8080"`) |
+| `https` | HTTPS proxy server | URL (e.g., `"https://proxy.company.com:8080"`) |
+| `exclude` | Bypass proxy for these addresses | Array of hostnames/IPs |
+| `pac` | Proxy Auto-Configuration file URL | URL to PAC file |
+| `transparentPorts` | Ports subject to proxy rules | Comma-separated ports or wildcard (`"*"`) |
 
-## Example PAC file
+### Configuration examples
 
-For general information about PAC files, see the [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Proxy_servers_and_tunneling/Proxy_Auto-Configuration_PAC_file).
+Block all external access:
 
-The following is an example PAC file:
+```json
+"containersProxy": {
+  "locked": true,
+  "mode": "manual",
+  "http": "",
+  "https": "",
+  "exclude": [],
+  "transparentPorts": "*"
+}
+```
+
+Allow specific internal services:
+
+```json
+"containersProxy": {
+  "locked": true,
+  "mode": "manual",
+  "http": "",
+  "https": "",
+  "exclude": ["internal.company.com", "10.0.0.0/8"],
+  "transparentPorts": "80,443"
+}
+```
+
+Route through corporate proxy:
+
+```json
+"containersProxy": {
+  "locked": true,
+  "mode": "manual",
+  "http": "http://corporate-proxy.company.com:8080",
+  "https": "http://corporate-proxy.company.com:8080",
+  "exclude": ["localhost", "*.company.local"],
+  "transparentPorts": "*"
+}
+```
+
+## Proxy Auto-Configuration (PAC) files
+
+PAC files provide fine-grained control over container network access by defining rules for different destinations.
+
+### Basic PAC file structure
 
 ```javascript
 function FindProxyForURL(url, host) {
@@ -73,17 +143,76 @@ function FindProxyForURL(url, host) {
 }
 ```
 
-The `url` parameter is either `http://host_or_ip:port` or `https://host_or_ip:port`.
+### PAC file return values
 
-The hostname is normally available for outgoing requests on port `80` and `443`, but for other cases there is only an IP address.
+| Return value | Action |
+|--------------|--------|
+| `PROXY host:port` | Route through HTTP proxy at specified host and port |
+| `SOCKS5 host:port` | Route through SOCKS5 proxy at specified host and port |
+| `DIRECT` | Allow direct connection without proxy |
+| `PROXY reject.docker.internal:any_port` | Block the request completely |
 
-The `FindProxyForURL` can return the following values:
+### Advanced PAC file example
 
-- `PROXY host_or_ip:port`: Tunnels this request through the HTTP proxy `host_or_ip:port`
-- `SOCKS5 host_or_ip:port`: Tunnels this request through the SOCKS proxy `host_or_ip:port`
-- `DIRECT`: Lets this request go direct, without a proxy
-- `PROXY reject.docker.internal:any_port`: Rejects this request
+```javascript
+function FindProxyForURL(url, host) {
+  // Allow access to Docker Hub for approved base images
+  if (dnsDomainIs(host, ".docker.io") || host === "docker.io") {
+    return "PROXY corporate-proxy.company.com:8080";
+  }
 
-In this particular example, HTTP and HTTPS requests for `internal.corp` are sent via the HTTP proxy `10.0.0.1:3128`. Requests to connect to IPs on the subnet `192.168.0.0/24` connect directly. All other requests are blocked.
+  // Allow internal package repositories
+  if (localHostOrDomainIs(host, 'nexus.company.com') ||
+      localHostOrDomainIs(host, 'artifactory.company.com')) {
+    return "DIRECT";
+  }
 
-To restrict traffic connecting to ports on the developers local machine, [match the special hostname `host.docker.internal`](/manuals/desktop/features/networking.md#i-want-to-connect-from-a-container-to-a-service-on-the-host).
+  // Allow development tools on specific ports
+  if (url.indexOf(":3000") > 0 || url.indexOf(":8080") > 0) {
+    if (isInNet(host, "10.0.0.0", "255.0.0.0")) {
+      return "DIRECT";
+    }
+  }
+
+  // Block access to developer's localhost
+  if (host === "host.docker.internal" || host === "localhost") {
+    return "PROXY reject.docker.internal:1234";
+  }
+
+  // Block all other external access
+  return "PROXY reject.docker.internal:1234";
+}
+```
+
+## Verify air-gapped container configuration
+
+After applying the configuration, test that container network restrictions work:
+
+Test blocked access:
+
+```console
+$ docker run --rm alpine wget -O- https://www.google.com
+# Should fail or timeout based on your proxy rules
+```
+
+Test allowed access:
+
+```console
+$ docker run --rm alpine wget -O- https://internal.company.com
+# Should succeed if internal.company.com is in your exclude list or PAC rules
+```
+
+Test proxy routing:
+
+```console
+$ docker run --rm alpine wget -O- https://docker.io
+# Should succeed if routed through approved proxy
+```
+
+## Security considerations
+
+- Network policy enforcement: Air-gapped containers work at the Docker Desktop level. Advanced users might bypass restrictions through various means, so consider additional network-level controls for high-security environments.
+- Development workflow impact: Overly restrictive policies can break legitimate development workflows. Test thoroughly and provide clear exceptions for necessary services.
+- PAC file management: Host PAC files on reliable internal infrastructure. Failed PAC downloads result in blocked container network access.
+- Performance considerations: Complex PAC files with many rules may impact container network performance. Keep rules simple and efficient.
+

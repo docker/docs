@@ -1,8 +1,8 @@
 ---
 title: Security for developers
-linkTitle: Security 
-description: Learn about developer-level security features Docker has to offer and explore best practices
-keywords: docker, docker hub, docker desktop, security
+linkTitle: Security
+description: Learn about developer-level security features like 2FA and access tokens
+keywords: docker, docker hub, docker desktop, security, developer security, 2FA, access tokens
 weight: 40
 params:
   sidebar:
@@ -41,21 +41,26 @@ grid_resources:
   description: Learn how to suppress non-applicable or fixed vulnerabilities found in your images.
   icon: query_stats
   link: /scout/guides/vex/
+- title: Docker Hardened Images
+  description: Learn how to use Docker Hardened Images to enhance your software supply security.
+  icon: encrypted_add_circle
+  link: /dhi/
 ---
 
-Docker provides security guardrails for both administrators and developers.
+Docker helps you protect your local environments, infrastructure, and networks
+with its developer-level security features.
 
-If you're an administrator, you can enforce sign-in across Docker products for your developers, and
-scale, manage, and secure your instances of Docker Desktop with DevOps security controls like Enhanced Container Isolation and Registry Access Management.
+Use tools like two-factor authentication (2FA), personal access tokens, and
+Docker Scout to manage access and detect vulnerabilities early in your workflow.
+You can also integrate secrets securely into your development stack using Docker Compose,
+or enhance your software supply security with Docker Hardened Images.
 
-For both administrators and developers, Docker provides security-specific products such as Docker Scout, for securing your software supply chain with proactive image vulnerability monitoring and remediation strategies.
+Explore the following sections to learn more.
 
 ## For developers
 
-See how you can protect your local environments, infrastructure, and networks without impeding productivity.
-
 {{< grid items="grid_developers" >}}
 
-## Further resources
+## More resources
 
 {{< grid items="grid_resources" >}}
