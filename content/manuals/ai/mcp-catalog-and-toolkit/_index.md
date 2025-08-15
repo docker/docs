@@ -21,32 +21,12 @@ grid:
    link: /ai/mcp-catalog-and-toolkit/toolkit/
 ---
 
-## MCP servers
-
-The Model Context Protocol (MCP) is a modern standard that transforms AI agents
-from passive responders into action-oriented systems. By standardizing how tools
-are described, discovered, and invoked, MCP enables agents to securely query
-APIs, access data, and run services across different environments.
-
-As agents move into production, MCP solves common integration challenges —
-interoperability, reliability, and security — by providing a consistent,
-decoupled, and scalable interface between agents and tools. Just as containers
-redefined software deployment, MCP is reshaping how AI systems interact with the
-world.
-
-> **MCP servers in simple terms**
->
-> An MCP server is a way for an LLM to interact with an external system.
->
-> For example:
-> If you ask a model to create a meeting, it needs to communicate with your calendar app to do that.
-> An MCP server for your calendar app provides _tools_ that perform atomic actions, such as:
-> "getting the details of a meeting" or "creating a new meeting".
-
-## Docker MCP Catalog and Toolkit
+{{< summary-bar feature_name="Docker MCP Catalog and Toolkit" >}}
 
 Docker MCP Catalog and Toolkit is a solution for securely building, sharing, and
-running MCP tools. It simplifies the developer experience across these areas:
+running MCP tools.
+
+It simplifies the developer experience across these areas:
 
 - Discovery: A central catalog with verified, versioned tools.
 - Credential management: OAuth-based and secure by default.
@@ -59,5 +39,25 @@ With Docker Hub and the MCP Toolkit, you can:
 - Launch MCP servers in seconds.
 - Add tools using the CLI or GUI.
 - Rely on Docker's pull-based infrastructure for trusted delivery.
+
+## MCP servers
+
+MCP servers are systems that use the [Model Context Protocol](https://www.anthropic.com/news/model-context-protocol) (MCP) to help manage
+and run AI or machine learning models more efficiently. MCP allows different
+parts of a system, like the model, data, and runtime environment, to
+communicate in a standardized way. You can see them as
+add-ons that provide specific tools to an LLM.
+
+> [!TIP]
+> **Example**:
+> If you ask a model to create a meeting, it needs to communicate with your calendar app to do that.
+>
+> An MCP server provided by your calendar app provides _tools_ to your model to perform atomic
+> actions, like:
+>
+> - `get the details of a meeting`
+> - `create a new meeting`
+> - ...
+
 
 {{< grid >}}

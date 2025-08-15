@@ -9,6 +9,8 @@ aliases:
   - /ai/gordon/mcp/gordon-mcp-server/
 ---
 
+{{< summary-bar feature_name="Docker MCP Toolkit" >}}
+
 The Docker MCP Toolkit is a gateway that lets you set up, manage, and run
 containerized MCP servers and connect them to AI agents. It removes friction
 from tool usage by offering secure defaults, one-click setup, and support for a

@@ -6,6 +6,8 @@ keywords: docker hub, mcp, mcp servers, ai agents, catalog, docker
 weight: 10
 ---
 
+{{< summary-bar feature_name="Docker MCP Catalog" >}}
+
 The [Docker MCP Catalog](https://hub.docker.com/mcp) is a centralized, trusted
 registry for discovering, sharing, and running MCP-compatible tools. Integrated
 with Docker Hub, it offers verified, versioned, and curated MCP servers
