@@ -122,12 +122,12 @@ Docker from the repository.
 
    # Add the repository to Apt sources (new deb822 format, introduced with Trixie):
    echo -e \
-     "Types: deb\n \
-	 URIs: https://download.docker.com/linux/debian/\n \
-	 Suites: $(. /etc/os-release && echo "$VERSION_CODENAME")\n \
-	 Components: stable\n \
-	 Signed-By: /etc/apt/keyrings/docker.gpg" | \
-	 sudo tee /etc/apt/sources.list.d/docker.sources > /dev/null
+   "Types: deb\n\
+   URIs: https://download.docker.com/linux/debian/\n\
+   Suites: $(. /etc/os-release && echo "$VERSION_CODENAME")\n\
+   Components: stable\n\
+   Signed-By: /etc/apt/keyrings/docker.gpg" | \
+   sudo tee /etc/apt/sources.list.d/docker.sources > /dev/null
 
    sudo apt-get update
    ```
