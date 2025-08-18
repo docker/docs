@@ -289,13 +289,13 @@
 }
 
 .links a {
-  @apply inline-flex p-0 m-0 max-w-36 whitespace-normal md:truncate;
+  @apply inline-flex whitespace-normal truncate min-w-15;
 }
 
 .secondaryLinks {
   @apply  flex items-center;
   a, button{
-    @apply max-w-36 whitespace-normal md:truncate;
+    @apply whitespace-normal md:truncate;
   }
 }
 
