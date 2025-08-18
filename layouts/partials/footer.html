@@ -1,6 +1,6 @@
-<div id="footer" >
-  <div class="flex justify-items-start max-w-[1280px] gap-10 mx-auto">
-    <div id="social">
+<div class="footer">
+  <div class="flex max-w-[1280px] gap-8">
+    <div class="social">
       <a href="https://www.linkedin.com/company/docker">
         <span class="icon-svg">
           {{ partial "utils/svg" "icons/linkedin.svg" }}
@@ -27,25 +27,25 @@
         </span>
       </a>
     </div>
-    <div id="links">
-      <a class="underline-offset-2 hover:underline" href="https://www.docker.com/">Product offerings</a>
-      <a class="underline-offset-2 hover:underline" href="https://www.docker.com/pricing/">Pricing</a>
-      <a class="underline-offset-2 hover:underline" href="https://www.docker.com/company/">About us</a>
+    <div class="links">
+      <a href="https://www.docker.com/">Product offerings</a>
+      <a href="https://www.docker.com/pricing/">Pricing</a>
+      <a href="https://www.docker.com/company/">About us</a>
       {{- with .GetPage "/contribute" }}
-      <a class="underline-offset-2 hover:underline" href="{{ .Permalink }}">{{ .LinkTitle }}</a>
+      <a href="{{ .Permalink }}">{{ .LinkTitle }}</a>
       {{- end }}
       <a href="{{ " llms.txt" | relURL }}">Read llms.txt</a>
     </div>
-    <div id="copyright">
+    <div class="copyright">
       <span>Copyright © 2013-{{ time.Now.Year }} Docker Inc. All rights reserved.</span>
       <button type="button" id="ot-sdk-btn" class="ot-sdk-show-settings">
         Cookies Settings
       </button>
-      <a class="underline-offset-2 hover:underline" title="Docker Terms of Service"
+      <a title="Docker Terms of Service"
         href="https://www.docker.com/legal/docker-terms-service">Terms of Service</a>
-      <a class="underline-offset-2 hover:underline" title="Docker Systems Status Page"
+      <a title="Docker Systems Status Page"
         href="https://www.dockerstatus.com/">Status</a>
-      <a class="underline-offset-2 hover:underline" title="Docker Legal Terms"
+      <a title="Docker Legal Terms"
         href="https://www.docker.com/legal">Legal</a>
     </div>
   </div>
