@@ -1,33 +1,33 @@
-<div class="flex bg-gray-100 px-4 pt-10 pb-20 dark:bg-gray-900">
-  <div class="flex flex-row justify-center w-full max-w-[1200px] gap-20 mx-auto">
-    <div id="social" class="flex flex-row gap-2">
+<div id="footer" >
+  <div class="flex justify-items-start max-w-[1280px] gap-10 mx-auto">
+    <div id="social">
       <a href="https://www.linkedin.com/company/docker">
-        <span class="icon-svg icon-lg">
+        <span class="icon-svg">
           {{ partial "utils/svg" "icons/linkedin.svg" }}
         </span>
       </a>
       <a href="https://x.com/docker/">
-        <span class="icon-svg icon-lg">
+        <span class="icon-svg">
           {{ partial "utils/svg" "icons/twitter.svg" }}
         </span>
       </a>
       <a href="https://www.facebook.com/docker.run">
-        <span class="icon-svg icon-lg">
+        <span class="icon-svg">
           {{ partial "utils/svg" "icons/facebook.svg" }}
         </span>
       </a>
       <a href="http://www.youtube.com/user/dockerrun">
-        <span class="icon-svg icon-lg">
+        <span class="icon-svg">
           {{ partial "utils/svg" "icons/youtube.svg" }}
         </span>
       </a>
       <a href="https://www.instagram.com/dockerinc/">
-        <span class="icon-svg icon-lg">
+        <span class="icon-svg">
           {{ partial "utils/svg" "icons/instagram.svg" }}
         </span>
       </a>
     </div>
-    <div id="links" class="flex flex-row items-center gap-4">
+    <div id="links">
       <a class="underline-offset-2 hover:underline" href="https://www.docker.com/">Product offerings</a>
       <a class="underline-offset-2 hover:underline" href="https://www.docker.com/pricing/">Pricing</a>
       <a class="underline-offset-2 hover:underline" href="https://www.docker.com/company/">About us</a>
@@ -37,9 +37,7 @@
       <a href="{{ " llms.txt" | relURL }}">Read llms.txt</a>
     </div>
     <div id="copyright">
-      <span class="text-sm">
-        Copyright © 2013-{{ time.Now.Year }} Docker Inc. All rights reserved.
-      </span>
+      <span>Copyright © 2013-{{ time.Now.Year }} Docker Inc. All rights reserved.</span>
       <button type="button" id="ot-sdk-btn" class="ot-sdk-show-settings">
         Cookies Settings
       </button>
