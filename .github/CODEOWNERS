@@ -3,9 +3,9 @@
 
 # For more details, see https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
 
-/content/manuals/build/ @crazy-max @ArthurFlag
+/content/manuals/build/ @ArthurFlag @aevesdocker
 
-/content/manuals/build-cloud/ @crazy-max @craig-osterhout
+/content/manuals/build-cloud/ @craig-osterhout
 
 /content/manuals/compose/ @aevesdocker
 
@@ -19,11 +19,11 @@
 
 /content/manuals/docker-hub/ @craig-osterhout
 
-/content/manuals/engine/ @thaJeztah @ArthurFlag
+/content/manuals/engine/ @ArthurFlag
 
-/content/reference/api/engine/ @thaJeztah @ArthurFlag
+/content/reference/api/engine/ @ArthurFlag
 
-/content/reference/cli/ @thaJeztah @ArthurFlag
+/content/reference/cli/ @ArthurFlag
 
 /content/manuals/subscription/ @sarahsanders-docker
 
