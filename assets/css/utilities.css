@@ -272,34 +272,34 @@
 }
 
 .footer {
-  @apply flex flex-wrap grow justify-center bg-gray-100 px-4 py-6;
-  @apply dark:bg-gray-900 w-full min-w-0 border-t border-gray-200 dark:border-gray-700;
+  @apply hidden md:flex flex-row ml-auto justify-between px-4 pt-6 pb-2 gap-6;
+  @apply bg-gray-100 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700;
+  @apply text-gray-600 dark:text-gray-400;
+  a:hover{
+    @apply underline underline-offset-4;
+  }
 }
 
 .social {
-  @apply flex-row items-center gap-1 flex-wrap min-w-0 hidden md:flex;
+  @apply items-center gap-1 flex-wrap min-w-20 flex;
 }
 
 .links {
-  @apply text-gray-600 flex-wrap items-center gap-[0.5em] hidden lg:flex;
+  @apply flex items-center gap-3;
 }
 
 .links a {
-  @apply underline-offset-2 inline-flex w-max p-0 m-0;
-}
-.links a:hover {
-  @apply underline;
+  @apply inline-flex p-0 m-0 max-w-36 whitespace-normal md:truncate;
 }
 
-.copyright {
-  @apply text-[0.9em] text-[#78909C] flex flex-wrap items-center;
+.secondaryLinks {
+  @apply  flex items-center;
+  a, button{
+    @apply max-w-36 whitespace-normal md:truncate;
+  }
 }
 
-.copyright > * {
-  @apply w-max;
-}
-
-.copyright > *:not(:last-child)::after {
+.secondaryLinks > *:not(:last-child)::after {
   content: "|";
-  @apply text-[color:var(--color-gray-400)] mx-1;
+  @apply text-gray-400 mx-1;
 }
