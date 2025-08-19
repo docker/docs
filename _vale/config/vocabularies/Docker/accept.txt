@@ -152,6 +152,7 @@ Qualcomm
 Quickview
 rebalance
 reimplement
+Rekor
 rollback
 rootful
 runc
