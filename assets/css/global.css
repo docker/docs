@@ -96,8 +96,3 @@ input[type="search"]::-ms-clear {
 code{
   font-size:0.9em;
 }
-
-/* cookie setting button */
-#ot-sdk-btn{
-  border:none;
-}

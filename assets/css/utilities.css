@@ -303,3 +303,11 @@
   content: "|";
   @apply text-gray-400 mx-1;
 }
+
+.ot-sdk-show-settings {
+  @apply !text-gray-600 dark:!text-gray-400 hover:!text-gray-800 dark:hover:!text-gray-200;
+  @apply !text-sm !border-none !p-0 !m-0 !truncate !min-w-15;
+}
+#ot-sdk-btn.ot-sdk-show-settings:hover, #ot-sdk-btn.optanon-show-settings:hover{
+  @apply hover:!bg-transparent !text-gray-600 dark:!text-gray-400 underline underline-offset-4 decoration-1;
+}
