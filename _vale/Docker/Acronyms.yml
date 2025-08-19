@@ -91,6 +91,7 @@ exceptions:
   - MCP
   - MDM
   - MDN
+  - MIME
   - MSI
   - NAT
   - NET
