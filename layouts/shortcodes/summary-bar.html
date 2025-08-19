@@ -54,13 +54,10 @@
           {{ end }}
         {{ end }}
         <span class="font-bold">Availability:</span>
-        <span>
-          {{ $availabilityText }}
-        </span>
+        <span>{{ $availabilityText }}{{- if $text -}}.{{- end -}}</span>
         <div>
           <span>
-            {{- if $text -}}
-              . {{ $text | markdownify }}
+            {{- if $text -}}{{ $text | markdownify }}
             {{- end -}}
           </span>
         </div>
