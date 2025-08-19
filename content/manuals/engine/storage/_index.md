@@ -24,7 +24,7 @@ from the writeable layer to the host, or to another container.
 
 ## Image storage
 
-Docker offers two implementation of image storage:
+Docker offers two implementations for image storage:
 
 - Default/current implementation: [Containerd](./containerd.md)
 - Legacy/deprecated implementation: [Storage drivers](./drivers/_index.md)

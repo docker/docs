@@ -30,27 +30,11 @@ For more information about the containerd image store and its benefits, refer to
 
 ## Migrate to containerd image store on Docker Engine
 
-When you update to Docker Engine v29 and enable the containerd feature, you are
-automatically migrated. The migration mechanism handles overlay and vfs images.
+{{< summary-bar feature_name="Containerd migration" >}}
 
-Switching to containerd snapshotters causes you to temporarily lose images and
-containers created using the classic storage drivers. If you use other graph storage, repull or rebuild your images.
-
-> [!TIP]
-> Those resources still exist on your filesystem, and you can retrieve them by
-> turning off the containerd snapshotters feature.
-
-Docker Engine uses the `overlayfs` containerd snapshotter by default.
-
-To display which driver you are using, run:
-
-```console
-$ docker info -f '{{ .DriverStatus }}'
-```
-
-## Disabling containerd image store
-
-The following steps explain how to disable the containerd snapshotters feature.
+You can enable the auto-migration feature for containerd snapshotters once you
+update to Docker Engine v29. The migration mechanism handles overlay and vfs
+images. To enable it:
 
 1. Add the following configuration to your `/etc/docker/daemon.json`
    configuration file:
@@ -58,21 +42,29 @@ The following steps explain how to disable the containerd snapshotters feature.
    ```json
    {
      "features": {
-       "containerd-snapshotter": false
+         "containerd-migration": true
      }
    }
    ```
 
-2. Save the file.
+1. Save the file.
 
-3. Restart the daemon for the changes to take effect.
+1. Restart the daemon for the changes to take effect.
 
-   ```console
-   $ sudo systemctl restart docker
-   ```
+   Switching to containerd snapshotters causes you to temporarily lose images and
+   containers created using the classic storage drivers.
+   If you use other graph storage, repull or rebuild your images.
 
-4. Verify which driver you are using:
+1. To display which driver you are using, run:
 
    ```console
    $ docker info -f '{{ .DriverStatus }}'
    ```
+
+> [!TIP]
+> Those resources still exist on your filesystem, and you can retrieve them by
+> [turning off the containerd snapshotters feature](#disabling-containerd-image-store).
+
+## Related pages
+
+- [Legacy storage drivers](drivers/_index.md)

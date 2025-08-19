@@ -535,7 +535,39 @@ work, with one or more virtual disks per virtual machine. The [`vfs` storage](vf
 doesn't provide a CoW filesystem or other optimizations. When using this storage
 driver, a full copy of the image's data is created for each container.
 
+## Enable Legacy storage drivers
+
+Starting with Docker Engine v29, [containerd](../containerd.md) is enabled by
+default. To re-enable the legacy storage drivers instead of using containerd
+snapshotters:
+
+1. Add the following configuration to your `/etc/docker/daemon.json`
+   configuration file:
+
+   ```json
+   {
+     "features": {
+       "containerd-snapshotter": false
+     }
+   }
+   ```
+
+1. Save the file.
+
+1. Restart the daemon for the changes to take effect.
+
+   ```console
+   $ sudo systemctl restart docker
+   ```
+
+1. Verify which driver you are using:
+
+   ```console
+   $ docker info -f '{{ .DriverStatus }}'
+   ```
+
 ## Related information
 
 * [Volumes](../volumes.md)
 * [Select a storage driver](select-storage-driver.md)
+* [Containerd](../containerd.md)
