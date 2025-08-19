@@ -10,6 +10,13 @@
   }
 }
 
+@utility icon-md {
+  svg {
+    font-size: 24px;
+  }
+}
+
+
 @utility icon-lg {
   svg {
     font-size: 32px;
@@ -262,4 +269,45 @@
   svg {
    font-size: 19px;
   }
+}
+
+.footer {
+  @apply hidden md:flex flex-row ml-auto justify-between px-4 pt-6 pb-2 gap-6;
+  @apply bg-gray-100 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700;
+  @apply text-gray-600 dark:text-gray-400;
+  a:hover{
+    @apply underline underline-offset-4;
+  }
+}
+
+.social {
+  @apply items-center gap-1 flex-wrap min-w-20 flex;
+}
+
+.links {
+  @apply flex items-center gap-3;
+}
+
+.links a {
+  @apply inline-flex whitespace-normal truncate min-w-15;
+}
+
+.secondaryLinks {
+  @apply  flex items-center;
+  a, button{
+    @apply whitespace-normal md:truncate;
+  }
+}
+
+.secondaryLinks > *:not(:last-child)::after {
+  content: "|";
+  @apply text-gray-400 mx-1;
+}
+
+.ot-sdk-show-settings {
+  @apply !text-gray-600 dark:!text-gray-400 hover:!text-gray-800 dark:hover:!text-gray-200;
+  @apply !text-sm !border-none !p-0 !m-0 !truncate !min-w-15;
+}
+#ot-sdk-btn.ot-sdk-show-settings:hover, #ot-sdk-btn.optanon-show-settings:hover{
+  @apply hover:!bg-transparent !text-gray-600 dark:!text-gray-400 underline underline-offset-4 decoration-1;
 }

@@ -1,96 +1,50 @@
-
-<div class="flex justify-center bg-gray-100 px-4 pt-10 pb-20 dark:bg-gray-900">
-  <div class="flex w-full max-w-[840px] flex-col gap-10">
-    <div class="flex flex-col items-center justify-evenly gap-4 md:flex-row">
-      <a
-        class="underline-offset-2 hover:underline"
-        href="https://www.docker.com/"
-        >Product offerings</a
-      >
-      <a
-        class="underline-offset-2 hover:underline"
-        href="https://www.docker.com/pricing/"
-        >Pricing</a
-      >
-      <a
-        class="underline-offset-2 hover:underline"
-        href="https://www.docker.com/company/"
-        >About us</a
-      >
-      {{- with .GetPage "/contribute" }}
-        <a class="underline-offset-2 hover:underline" href="{{ .Permalink }}"
-          >{{ .LinkTitle }}</a
-        >
-      {{- end }}
-      <a href="{{ "llms.txt" | relURL }}">Read llms.txt</a>
-    </div>
-    <hr class="text-divider-light dark:text-divider-dark" />
-    <div class="grid grid-cols-1 place-items-center gap-8 lg:grid-cols-3">
-      <p class="text-sm">
-        Copyright © 2013-{{ time.Now.Year }} Docker Inc. All rights reserved.
-      </p>
-      <div class="flex gap-4">
-        <a
-          class="fill-blue h-8 w-8 rounded-full dark:fill-blue-300"
-          title="X (Twitter)"
-          href="http://twitter.com/docker/"
-        >
-          {{ (resources.Get "images/TwitterCircle.svg").Content | safe.HTML }}
-        </a>
-        <a
-          class="fill-blue h-8 w-8 rounded-full dark:fill-blue-300"
-          title="LinkedIn"
-          href="https://www.linkedin.com/company/docker"
-        >
-          {{ (resources.Get "images/LinkedinCircle.svg").Content | safe.HTML }}
-        </a>
-        <a
-          class="fill-blue h-8 w-8 rounded-full dark:fill-blue-300"
-          title="Instagram"
-          href="https://www.instagram.com/dockerinc/"
-        >
-          {{ (resources.Get "images/InstagramCircle.svg").Content | safe.HTML }}
-        </a>
-        <a
-          class="fill-blue h-8 w-8 rounded-full dark:fill-blue-300"
-          title="YouTube"
-          href="http://www.youtube.com/user/dockerrun"
-        >
-          {{ (resources.Get "images/YoutubeCircle.svg").Content | safe.HTML }}
-        </a>
-        <a
-          class="fill-blue h-8 w-8 rounded-full dark:fill-blue-300"
-          title="Facebook"
-          href="https://www.facebook.com/docker.run"
-        >
-          {{ (resources.Get "images/FacebookCircle.svg").Content | safe.HTML }}
-        </a>
-      </div>
-      <div class="flex items-center gap-4">
-        <a
-          class="underline-offset-2 hover:underline"
-          title="Docker Terms of Service"
-          href="https://www.docker.com/legal/docker-terms-service"
-          >Terms of Service</a
-        >
-        <a
-          class="underline-offset-2 hover:underline"
-          title="Docker Systems Status Page"
-          href="https://www.dockerstatus.com/"
-          >Status</a
-        >
-        <a
-          class="underline-offset-2 hover:underline"
-          title="Docker Legal Terms"
-          href="https://www.docker.com/legal"
-          >Legal</a
-        >
-      </div>
-    </div>
-    <div class="flex items-center justify-between">
-      <button type="button" id="ot-sdk-btn" class="ot-sdk-show-settings">
-        Cookies Settings
-      </button>
-    </div>
+<div class="footer">
+  <div class="social">
+    <a href="https://www.linkedin.com/company/docker">
+      <span class="icon-svg">
+        {{ partial "utils/svg" "icons/linkedin.svg" }}
+      </span>
+    </a>
+    <a href="https://x.com/docker/">
+      <span class="icon-svg">
+        {{ partial "utils/svg" "icons/twitter.svg" }}
+      </span>
+    </a>
+    <a href="https://www.facebook.com/docker.run">
+      <span class="icon-svg">
+        {{ partial "utils/svg" "icons/facebook.svg" }}
+      </span>
+    </a>
+    <a href="http://www.youtube.com/user/dockerrun">
+      <span class="icon-svg">
+        {{ partial "utils/svg" "icons/youtube.svg" }}
+      </span>
+    </a>
+    <a href="https://www.instagram.com/dockerinc/">
+      <span class="icon-svg">
+        {{ partial "utils/svg" "icons/instagram.svg" }}
+      </span>
+    </a>
   </div>
+  <div class="links">
+    <a href="https://www.docker.com/">Product offerings</a>
+    <a href="https://www.docker.com/pricing/">Pricing</a>
+    <a href="https://www.docker.com/company/">About us</a>
+    {{- with .GetPage "/contribute" }}
+    <a href="{{ .Permalink }}">{{ .LinkTitle }}</a>
+    {{- end }}
+    <a href="{{ "llms.txt" | relURL }}">Read llms.txt</a>
+  </div>
+  <div class="secondaryLinks">
+    <button type="button" id="ot-sdk-btn" class="ot-sdk-show-settings">
+      Cookies Settings
+    </button>
+    <a title="Docker Terms of Service" href="https://www.docker.com/legal/docker-terms-service">Terms of Service</a>
+    <a title="Docker Systems Status Page" href="https://www.dockerstatus.com/">Status</a>
+    <a title="Docker Legal Terms" href="https://www.docker.com/legal">Legal</a>
+  </div>
+</div>
+<div
+  class="text-sm text-gray-400 dark:text-gray-600 border-t dark:border-gray-700  border-gray-200 md:border-none px-4 py-4 bg-gray-100 dark:bg-gray-900 ">
+  <span>Copyright © 2013-{{ time.Now.Year }} Docker Inc. All rights reserved.</span>
 </div>
