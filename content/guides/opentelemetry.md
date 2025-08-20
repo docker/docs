@@ -25,7 +25,7 @@ In this guide, you'll learn how to:
 
 ## Using OpenTelemetry with Docker
 
-the official [docker image for opentelemetry](https://hub.docker.com/r/otel/opentelemetry-collector-contrib) provides a convenient way to deploy and manage dex instances. Opentelemetry is available for various cpu architectures, including amd64, armv7, and arm64, ensuring compatibility with different devices and platforms. Same for the [Jaeger docekr image](https://hub.docker.com/r/jaegertracing/jaeger).
+the official [docker image for opentelemetry](https://hub.docker.com/r/otel/opentelemetry-collector-contrib) provides a convenient way to deploy and manage Dex instances. Opentelemetry is available for various cpu architectures, including amd64, armv7, and arm64, ensuring compatibility with different devices and platforms. Same for the [Jaeger docekr image](https://hub.docker.com/r/jaegertracing/jaeger).
 
 ## Prerequisites
 
