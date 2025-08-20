@@ -1,8 +1,8 @@
 ---
-description: How to configure Settings Management for Docker Desktop using the Docker Admin Console
-keywords: admin, controls, rootless, enhanced container isolation
 title: Configure Settings Management with the Admin Console
 linkTitle: Use the Admin Console
+description: Configure and enforce Docker Desktop settings across your organization using the Docker Admin Console
+keywords: admin console, settings management, policy configuration, enterprise controls, docker desktop
 weight: 20
 aliases:
  - /security/for-admins/hardened-desktop/settings-management/configure-admin-console/
@@ -10,23 +10,24 @@ aliases:
 
 {{< summary-bar feature_name="Admin Console" >}}
 
-This page explains how administrators can use the Docker Admin Console to create
-and apply settings policies for Docker Desktop. These policies help standardize
-and secure Docker Desktop environments across your organization.
+Use the Docker Admin Console to create and manage settings policies for Docker Desktop across your organization. Settings policies let you standardize configurations, enforce security requirements, and maintain consistent Docker Desktop environments.
 
 ## Prerequisites
 
-- [Install Docker Desktop 4.37.1 or later](/manuals/desktop/release-notes.md).
-- [Verify your domain](/manuals/enterprise/security/single-sign-on/configure.md#step-one-add-and-verify-your-domain).
-- [Enforce sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md) to
-ensure users authenticate to your organization.
-- A Docker Business subscription is required.
+Before you begin, make sure you have:
+
+- [Docker Desktop 4.37.1 or later](/manuals/desktop/release-notes.md) installed
+- [A verified domain](/manuals/enterprise/security/single-sign-on/configure.md#step-one-add-and-verify-your-domain)
+- [Enforced sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md) for your organization
+- A Docker Business subscription
 
 > [!IMPORTANT]
 >
 > You must add users to your verified domain for settings to take effect.
 
 ## Create a settings policy
+
+To create a new settings policy:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select
 your organization.
@@ -45,10 +46,9 @@ your organization.
 
       > [!NOTE]
       >
-      > User-specific policies override the global default. Test your policy with
-      a few users before rolling it out globally.
+      > User-specific policies override global default policies. Test your policy with a small group before applying it organization-wide.
 
-1. Configure the state for each setting:
+1. Configure each setting using a state:
    - **User-defined**: Users can change the setting.
    - **Always enabled**: Setting is on and locked.
    - **Enabled**: Setting is on but can be changed.
@@ -57,31 +57,43 @@ your organization.
 
       > [!TIP]
       >
-      > For a complete list of available settings, their supported platforms, and which configuration methods they work with, see the [Settings reference](settings-reference.md).
+      > For a complete list of configurable settings, supported platforms, and configuration methods, see the [Settings reference](settings-reference.md).
 
-1. Select **Create**.
+1. Select **Create** to save your policy.
 
-To apply the policy:
+## Apply the policy
 
-- New installs: Launch Docker Desktop and sign in.
-- Existing installs: Fully quit and relaunch Docker Desktop.
+Settings policies take effect after Docker Desktop restarts and users sign in.
+
+For new installations:
+
+1. Launch Docker Desktop.
+1. Sign in with your Docker account.
+
+For existing installations:
+
+1. Quit Docker Desktop completely.
+1. Relaunch Docker Desktop.
 
 > [!IMPORTANT]
 >
-> Restarting from the Docker Desktop menu isn't enough. Users must fully quit
-and relaunch Docker Desktop.
+> Users must fully quit and reopen Docker Desktop. Restarting from the Docker Desktop menu isn't sufficient.
 
-Docker Desktop checks for policy updates at launch and every 60 minutes. To roll
-back a policy, either delete it or set individual settings to **User-defined**.
+Docker Desktop checks for policy updates when it launches and every 60 minutes while running.
 
-## Manage policies
+## Manage existing policies
 
-From the **Actions** menu on the **Settings Management** page, you can:
+From the **Desktop Settings Management** page in the Admin Console, use the **Actions** menu to:
 
 - Edit or delete an existing settings policy
 - Export a settings policy as an `admin-settings.json` file
 - Promote a user-specific policy to be the new global default
 
-## Learn more
+## Roll back policies
 
-To see how each Docker Desktop setting maps across the Docker Dashboard, `admin-settings.json` file, and Admin Console, see the [Settings reference](settings-reference.md).
+To roll back a settings policy:
+
+- Complete rollback: Delete the entire policy.
+- Partial rollback: Set specific settings to **User-defined**.
+
+When you roll back settings, users regain control over those settings configurations.

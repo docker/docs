@@ -36,6 +36,6 @@ docker desktop COMMAND [OPTIONS]
 | `disable`            | Disable a feature                        |
 | `enable`             | Enable a feature                         | 
 | `version`            | Show the Docker Desktop CLI plugin version information |
-| `kubernetes`         | List Kubernetes images used by Docker Desktop. Available with Docker Docker version 4.44 and later.          | 
+| `kubernetes`         | List Kubernetes images used by Docker Desktop or restart the cluster. Available with Docker Desktop version 4.44 and later.          |
 
 For more details on each command, see the [Docker Desktop CLI reference](/reference/cli/docker/desktop/_index.md).

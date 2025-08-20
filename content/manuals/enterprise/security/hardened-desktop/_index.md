@@ -1,10 +1,8 @@
 ---
-title: Overview of Hardened Docker Desktop
+title: Hardened Docker Desktop
 linkTitle: Hardened Docker Desktop
-description: Overview of what Hardened Docker Desktop is and its key features
-keywords: security, hardened desktop, enhanced container isolation, registry access
-  management, settings management root access, admins, docker desktop, image access
-  management
+description: Security features that help organizations secure developer environments without impacting productivity
+keywords: security, hardened desktop, enhanced container isolation, registry access management, settings management, admins, docker desktop, image access management, air-gapped containers
 tags: [admin]
 aliases:
  - /desktop/hardened-desktop/
@@ -35,23 +33,29 @@ weight: 60
 
 {{< summary-bar feature_name="Hardened Docker Desktop" >}}
 
-Hardened Docker Desktop is a group of security features, designed to improve the security of developer environments with minimal impact on developer experience or productivity.
+Hardened Docker Desktop provides a collection of security features designed to strengthen developer environments without compromising productivity or developer experience.
 
-It lets you enforce strict security settings, preventing developers and their containers from bypassing these controls, either intentionally or unintentionally. Additionally, you can enhance container isolation, to mitigate potential security threats such as malicious payloads breaching the Docker Desktop Linux VM and the underlying host.
+With Hardened Docker Desktop, you can enforce strict security policies that prevent developers and containers from bypassing organizational controls. You can also enhance container isolation to protect against security threats like malicious payloads that might breach the Docker Desktop Linux VM or underlying host system.
 
-Hardened Docker Desktop moves the ownership boundary for Docker Desktop configuration to the organization, meaning that any security controls you set cannot be altered by the user of Docker Desktop. 
+## Who should use Hardened Docker Desktop?
 
-It is for security conscious organizations who:
-- Don’t give their users root or administrator access on their machines
-- Would like Docker Desktop to be within their organization’s centralized control
-- Have certain compliance obligations
+Hardened Docker Desktop is ideal for security-focused organizations that:
 
-### How does it help my organization?
+- Don't provide root or administrator access to developers' machines
+- Want centralized control over Docker Desktop configurations
+- Must meet specific compliance requirements
 
-Hardened Desktop features work independently but collectively to create a defense-in-depth strategy, safeguarding developer workstations against potential attacks across various functional layers, such as configuring Docker Desktop, pulling container images, and running container images. This multi-layered defense approach ensures comprehensive security. It helps mitigate against threats such as:
+## How Hardened Docker Desktop works
 
- - Malware and supply chain attacks: Registry Access Management and Image Access Management prevent developers from accessing certain container registries and image types, significantly lowering the risk of malicious payloads. Additionally, Enhanced Container Isolation (ECI) restricts the impact of containers with malicious payloads by running them without root privileges inside a Linux user namespace.
- - Lateral movement: Air-gapped containers lets you configure network access restrictions for containers, thereby preventing malicious containers from performing lateral movement within the organization's network.
- - Insider threats: Settings Management configures and locks various Docker Desktop settings so you can enforce company policies and prevent developers from introducing insecure configurations, intentionally or unintentionally.
+Hardened Docker Desktop features work independently and together to create a defense-in-depth security strategy. They protect developer workstations against attacks across multiple layers, including Docker Desktop configuration, container image management, and container runtime security:
+
+- Registry Access Management and Image Access Management prevent access to unauthorized container registries and image types, reducing exposure to malicious payloads
+- Enhanced Container Isolation runs containers without root privileges inside a Linux user namespace, limiting the impact of malicious containers
+- Air-gapped containers let you configure network restrictions for containers, preventing malicious containers from accessing your organization's internal network resources
+- Settings Management locks down Docker Desktop configurations to enforce company policies and prevent developers from introducing insecure settings, whether intentionally or accidentally
+
+## Next steps
+
+Explore Hardened Docker Desktop features to understand how they can strengthen your organization's security posture:
 
 {{< grid >}}

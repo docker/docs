@@ -491,8 +491,8 @@ To use Docker Desktop with Windows Containers, ensure that FDVDenyWriteAccess is
 **Computer Configuration** > **Administrative Templates** > **Windows Components** > **BitLocker Drive Encryption** > **Fixed Data Drives** > **Deny write access to fixed drives not protected by BitLocker**
 
 > [!NOTE]
-> 
-> Modifying Group Policy settings may require administrator privileges and should comply with your organization's IT policies. If the setting gets reset after some time this usually means that it was overriden by the centralized configuration of your IT department. Talk to them before making any changes.
+>
+> Modifying Group Policy settings may require administrator privileges and should comply with your organization's IT policies. If the setting gets reset after some time this usually means that it was overridden by the centralized configuration of your IT department. Talk to them before making any changes.
 
 ### `Docker Desktop Access Denied` error message when starting Docker Desktop
 

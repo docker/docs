@@ -1,19 +1,29 @@
 ---
 description: Learn how Just-in-Time provisioning works with your SSO connection.
-keywords: user provisioning, just-in-time provisioning, JIT, autoprovision, Docker Hub, Docker Admin, admin, security
+keywords: user provisioning, just-in-time provisioning, JIT, autoprovision, Docker Admin, admin, security
 title: Just-in-Time provisioning
 linkTitle: Just-in-Time
-aliases: 
+weight: 10
+aliases:
  - /security/for-admins/provisioning/just-in-time/
 ---
 
 {{< summary-bar feature_name="SSO" >}}
 
-Just-in-Time (JIT) provisioning automatically creates and updates user accounts after every successful single sign-on (SSO) authentication. JIT verifies that the user signing in belongs to the organization and the teams assigned to them in your identity provider (IdP). When you [create your SSO connection](../single-sign-on/_index.md), JIT provisioning is turned on by default.
+Just-in-Time (JIT) provisioning streamlines user onboarding by automatically creating and updating user accounts during SSO authentication. This eliminates manual account creation and ensures users have immediate access to your organization's resources. JIT verifies that users belong to the organization and assigns them to the appropriate teams based on your identity provider (IdP) configuration. When you create your SSO connection, JIT provisioning is turned on by default.
+
+This page explains how JIT provisioning works, SSO authentication flows, and how to disable JIT provisioning.
+
+## Prerequisites
+
+Before you begin, you must have:
+
+- SSO configured for your organization
+- Administrator access to Docker Home and your identity provider
 
 ## SSO authentication with JIT provisioning enabled
 
-When a user signs in with SSO and your SSO configuration has JIT provisioning enabled, the following steps occur automatically:
+When a user signs in with SSO and you have JIT provisioning enabled, the following steps occur automatically:
 
 1. The system checks if a Docker account exists for the user's email address.
 
@@ -32,11 +42,11 @@ When a user signs in with SSO and your SSO configuration has JIT provisioning en
 
 The following graphic provides an overview of SSO authentication with JIT enabled:
 
-   ![JIT provisioning enabled](../images/jit-enabled-flow.svg)
+   ![JIT provisioning enabled workflow](../images/jit-enabled-flow.svg)
 
 ## SSO authentication with JIT provisioning disabled
 
-When JIT provisioning is disabled in your SSO connection, the following actions occur during authentication:
+When JIT provisioning is disabled, the following actions occur during SSO authentication:
 
 1. The system checks if a Docker account exists for the user's email address.
 
@@ -52,7 +62,7 @@ With JIT disabled, group mapping is only available if you have [SCIM enabled](sc
 
 The following graphic provides an overview of SSO authentication with JIT disabled:
 
-![JIT provisioning disabled](../images/jit-disabled-flow.svg)
+![JIT provisioning disabled workflow](../images/jit-disabled-flow.svg)
 
 ## Disable JIT provisioning
 
@@ -67,7 +77,13 @@ You may want to disable JIT provisioning for reasons such as the following:
 
 Users are provisioned with JIT by default. If you enable SCIM, you can disable JIT:
 
-1. In [Docker Home](https://app.docker.com/), select your organization.
+1. Go to [Docker Home](https://app.docker.com/) and select your organization.
 1. Select **Admin Console**, then **SSO and SCIM**.
-1. In the SSO connections table, select the **Action** icon and then **Disable JIT provisioning**.
+1. In the **SSO connections** table, select the **Action** icon, then select **Disable JIT provisioning**.
 1. Select **Disable** to confirm.
+
+## Next steps
+
+- Configure [SCIM provisioning](/manuals/enterprise/security/provisioning/scim.md) for advanced user management.
+- Set up [group mapping](/manuals/enterprise/security/provisioning/group-mapping.md) to automatically assign users to teams.
+- Review [Troubleshoot provisioning](/manuals/enterprise/troubleshoot/troubleshoot-provisioning.md).
