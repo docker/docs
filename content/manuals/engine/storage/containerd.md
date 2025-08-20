@@ -63,7 +63,7 @@ images. To enable it:
 
 > [!TIP]
 > Those resources still exist on your filesystem, and you can retrieve them by
-> [turning off the containerd snapshotters feature](#disabling-containerd-image-store).
+> [turning off the containerd snapshotters feature](./drivers/_index.md#enable-legacy-storage-drivers).
 
 ## Related pages
 
