@@ -14,14 +14,15 @@ bootup
 Btrfs
 Bugsnag
 BuildKit
+buildkitd
 BusyBox
 CentOS
 Ceph
 cgroup
 Chrome
 Chrome DevTools
-Citrix
 CI/CD
+Citrix
 cli
 CLI
 CloudFront
@@ -39,7 +40,6 @@ denylist
 deprovisioning
 deserialization
 deserialize
-[Dd]ev
 Dev Environments?
 Dex
 displayName
@@ -59,6 +59,7 @@ Docker's
 Dockerfile
 dockerignore
 Dockerize
+Dockerized
 Dockerizing
 Entra
 EPERM
@@ -129,6 +130,7 @@ netfilter
 netlabel
 netlink
 Netplan
+Neovim
 NFSv\d
 Nginx
 npm
@@ -142,9 +144,10 @@ osquery
 osxfs
 OTel
 Paketo
+perl
 pgAdmin
-plist
 PKG
+plist
 Postgres
 PowerShell
 Python
@@ -173,8 +176,8 @@ subvolume
 Syft
 syntaxes
 Sysbox
-sysctls
 sysctl
+sysctls
 Sysdig
 systemd
 Testcontainers
@@ -184,8 +187,6 @@ Trivy
 Trixie
 Ubuntu
 ufw
-ui
-uid
 umask
 uncaptured
 Uncaptured
@@ -203,6 +204,7 @@ Windows
 windowsfilter
 WireMock
 workdir
+WORKDIR
 Xdebug
 youki
 Yubikey
@@ -219,6 +221,8 @@ Zsh
 [Cc]odenames?
 [Cc]ompose
 [Cc]onfigs
+[dD]eduplicate
+[Dd]ev
 [Dd]istroless
 [Ff]ilepaths?
 [Ff]iletypes?
