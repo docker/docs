@@ -31,8 +31,8 @@ The full release notes for this release are available
 - Build name shown in history can now be overridden with `BUILDKIT_BUILD_NAME` build argument. [docker/buildx#3330](https://github.com/docker/buildx/pull/3330)
 - Bake now supports `homedir()` function. [docker/buildx#3351](https://github.com/docker/buildx/pull/3351)
 - Bake default for empty Dockerfile defaults to `Dockerfile` to match the behavior of `build` command. [docker/buildx#3347](https://github.com/docker/buildx/pull/3347)
-- Bake supports `pull` and `no_cache` fields for compose files. [docker/buildx#3352](https://github.com/docker/buildx/pull/3352)
-- Sanitize the names of `additional_contexts` from compose files when building with Bake. [docker/buildx#3361](https://github.com/docker/buildx/pull/3361)
+- Bake supports `pull` and `no_cache` fields for Compose files. [docker/buildx#3352](https://github.com/docker/buildx/pull/3352)
+- Sanitize the names of `additional_contexts` from Compose files when building with Bake. [docker/buildx#3361](https://github.com/docker/buildx/pull/3361)
 
 ### Bug fixes
 
