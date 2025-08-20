@@ -123,7 +123,7 @@ docker mcp --help
 Now your MCP gateway is running and you can leverage all the servers set up
 behind it from Visual Studio Code.
 
-{{< button url="https://github.com/docker/mcp-gateway?tab=readme-ov-file#usage" text="View the complete docs on GitHub" >}}
+[View the complete docs on GitHub.](https://github.com/docker/mcp-gateway?tab=readme-ov-file#usage" text)
 
 ## Related pages
 
