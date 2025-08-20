@@ -10,6 +10,34 @@ toc_max: 2
 This page contains information about the new features, improvements, and bug
 fixes in [Docker Buildx](https://github.com/docker/buildx).
 
+## 0.27.0
+
+{{< release-date date="2025-08-20" >}}
+
+The full release notes for this release are available
+[on GitHub](https://github.com/docker/buildx/releases/tag/v0.27.0).
+
+### New
+
+- Compose compatibility has been updated to v2.8.1. [docker/buildx#3337](https://github.com/docker/buildx/pull/3337)
+
+### Enhancements
+
+- DAP: Exec shell now restarts with the new container when execution resumes and pauses again. [docker/buildx#3341](https://github.com/docker/buildx/pull/3341)
+- DAP: Add `File Explorer` section to variables to inspect filesystem state. [docker/buildx#3327](https://github.com/docker/buildx/pull/3327)
+- DAP: Change Dockerfile step order to match more closely with user expectations. [docker/buildx#3325](https://github.com/docker/buildx/pull/3325)
+- DAP: Improve determination of the proper parent. [docker/buildx#3366](https://github.com/docker/buildx/pull/3366)
+- DAP: Dockerfile nested in the context is now supported. [docker/buildx#3371](https://github.com/docker/buildx/pull/3371)
+- Build name shown in history can now be overridden with `BUILDKIT_BUILD_NAME` build argument. [docker/buildx#3330](https://github.com/docker/buildx/pull/3330)
+- Bake now supports `homedir()` function. [docker/buildx#3351](https://github.com/docker/buildx/pull/3351)
+- Bake default for empty Dockerfile defaults to `Dockerfile` to match the behavior of `build` command. [docker/buildx#3347](https://github.com/docker/buildx/pull/3347)
+- Bake supports `pull` and `no_cache` fields for compose files. [docker/buildx#3352](https://github.com/docker/buildx/pull/3352)
+- Sanitize the names of `additional_contexts` from compose files when building with Bake. [docker/buildx#3361](https://github.com/docker/buildx/pull/3361)
+
+### Bug fixes
+
+- Fix missing WSL libraries in `docker-container` driver when GPU device is requested. [docker/buildx#3320](https://github.com/docker/buildx/pull/3320)
+
 ## 0.26.1
 
 {{< release-date date="2025-07-22" >}}
