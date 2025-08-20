@@ -5,7 +5,7 @@ keywords: OpenTelemetry, observability, tracing
 linktitle: Instrumenting JS Apps with OpenTelemetry
 summary: *desc
 tags: [app-dev, observability]
-languages: [JavaScript]
+languages: [js]
 params:
   time: 10 minutes
 ---
