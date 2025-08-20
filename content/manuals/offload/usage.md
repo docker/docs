@@ -8,6 +8,13 @@ keywords: cloud, usage, cloud minutes, shared cache, top repositories, cloud bui
 
 {{< summary-bar feature_name="Docker Offload" >}}
 
+> [!NOTE]
+>
+> All free trial credits granted for the Docker Offload Beta expire after 90
+> days from the time they are granted. To continue using Docker Offload after
+> your credits expire, you can enable on-demand usage at [Docker Home
+> Billing](https://app.docker.com/billing).
+
 ## Docker Offload billing
 
 For Docker Offload, you can view and configure billing on the **Docker Offload**
