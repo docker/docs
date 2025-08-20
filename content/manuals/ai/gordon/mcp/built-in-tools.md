@@ -225,17 +225,6 @@ General-purpose development utilities.
 | `run_model`    | Query a model with a prompt        |
 | `remove_model` | Remove a Docker model              |
 
-### Docker MCP catalog
-
-If you enable the [MCP Toolkit feature](../../mcp-catalog-and-toolkit/_index.md),
-all the tools you enable and configure are available for Gordon to use.
-
-|----------------|----------------------------------|
-| `list_models`  | List all available Docker models |
-| `pull_model`   | Download an Docker model         |
-| `run_model`    | Query a model with a prompt      |
-| `remove_model` | Remove an Docker model           |
-
 ### Docker MCP Catalog
 
 If you have enabled the [MCP Toolkit feature](../../mcp-catalog-and-toolkit/_index.md),
