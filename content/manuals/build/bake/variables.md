@@ -2,7 +2,7 @@
 title: Variables in Bake
 linkTitle: Variables
 weight: 40
-description: 
+description:
 keywords: build, buildx, bake, buildkit, hcl, variables
 ---
 
@@ -93,7 +93,7 @@ range, or other condition, you can define custom validation rules using the
 `validation` block.
 
 In the following example, validation is used to enforce a numeric constraint on
-a variable value; the `PORT` variable must be 1024 or higher.
+a variable value; the `PORT` variable must be 1024 or greater.
 
 ```hcl {title=docker-bake.hcl}
 # Define a variable `PORT` with a default value and a validation rule
@@ -103,7 +103,7 @@ variable "PORT" {
   # Validation block to ensure `PORT` is a valid number within the acceptable range
   validation {
     condition = PORT >= 1024  # Ensure `PORT` is at least 1024
-    error_message = "The variable 'PORT' must be 1024 or higher."  # Error message for invalid values
+    error_message = "The variable 'PORT' must be 1024 or greater."  # Error message for invalid values
   }
 }
 ```

@@ -259,8 +259,8 @@ to create an efficient and maintainable Dockerfile.
 
 > [!TIP]
 >
-> Want a better editing experience for Dockerfiles in VS Code?
-> Check out the [Docker VS Code Extension (Beta)](https://marketplace.visualstudio.com/items?itemName=docker.docker) for linting, code navigation, and vulnerability scanning.
+> To improve linting, code navigation, and vulnerability scanning of your Dockerfiles in Visual Studio Code
+> see [Docker VS Code Extension](https://marketplace.visualstudio.com/items?itemName=docker.docker).
 
 ### FROM
 
@@ -487,7 +487,7 @@ service, such as Apache and Rails, you would run something like `CMD
 for any service-based image.
 
 In most other cases, `CMD` should be given an interactive shell, such as bash,
-python and perl. For example, `CMD ["perl", "-de0"]`, `CMD ["python"]`, or `CMD
+Python and perl. For example, `CMD ["perl", "-de0"]`, `CMD ["python"]`, or `CMD
 ["php", "-a"]`. Using this form means that when you execute something like
 `docker run -it python`, you’ll get dropped into a usable shell, ready to go.
 `CMD` should rarely be used in the manner of `CMD ["param", "param"]` in
@@ -556,7 +556,7 @@ $ docker run --rm test sh -c 'echo $ADMIN_USER'
 mark
 ```
 
-To prevent this, and really unset the environment variable, use a `RUN` command
+To prevent this and unset the environment variable, use a `RUN` command
 with shell commands, to set, use, and unset the variable all in a single layer.
 You can separate your commands with `;` or `&&`. If you use the second method,
 and one of the commands fails, the `docker build` also fails. This is usually a
@@ -763,7 +763,7 @@ RUN groupadd -r postgres && useradd --no-log-init -r -g postgres postgres
 > with a significantly large UID inside a Docker container can lead to disk
 > exhaustion because `/var/log/faillog` in the container layer is filled with
 > NULL (\0) characters. A workaround is to pass the `--no-log-init` flag to
-> useradd. The Debian/Ubuntu `adduser` wrapper does not support this flag.
+> `useradd`. The Debian/Ubuntu `adduser` wrapper does not support this flag.
 
 Avoid installing or using `sudo` as it has unpredictable TTY and
 signal-forwarding behavior that can cause problems. If you absolutely need
@@ -778,11 +778,11 @@ For more information about `USER`, see [Dockerfile reference for the USER instru
 ### WORKDIR
 
 For clarity and reliability, you should always use absolute paths for your
-`WORKDIR`. Also, you should use `WORKDIR` instead of  proliferating instructions
+`WORKDIR`. Also, you should use `WORKDIR` instead of proliferating instructions
 like `RUN cd … && do-something`, which are hard to read, troubleshoot, and
 maintain.
 
-For more information about `WORKDIR`, see [Dockerfile reference for the WORKDIR instruction](/reference/dockerfile.md#workdir).
+For more information about `WORKDIR`, see [Dockerfile reference for the `WORKDIR` instruction](/reference/dockerfile.md#workdir).
 
 ### ONBUILD
 
@@ -802,7 +802,7 @@ Dockerfile, as you can see in [Ruby’s `ONBUILD` variants](https://github.com/d
 Images built with `ONBUILD` should get a separate tag. For example,
 `ruby:1.9-onbuild` or `ruby:2.0-onbuild`.
 
-Be careful when putting `ADD` or `COPY` in `ONBUILD`. The onbuild image
+Be careful when putting `ADD` or `COPY` in `ONBUILD`. The `onbuild image
 fails catastrophically if the new build's context is missing the resource being
 added. Adding a separate tag, as recommended above, helps mitigate this by
 allowing the Dockerfile author to make a choice.
