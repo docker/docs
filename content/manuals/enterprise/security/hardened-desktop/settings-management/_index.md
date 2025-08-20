@@ -85,7 +85,7 @@ This ensures consistent environments while maintaining a clear visual indication
 
 ## View applied settings
 
-When administrators apply Settings Management policies, Docker Desktop grays out most enforced settings in the GUI.
+When administrators apply Settings Management policies, Docker Desktop greys out most enforced settings in the GUI.
 
 The Docker Desktop GUI doesn't currently display all centralized settings,
 particularly Enhanced Container Isolation (ECI) settings that administrators
