@@ -83,6 +83,24 @@ When settings are enforced:
 
 This ensures consistent environments while maintaining a clear visual indication of which settings are managed by administrators.
 
+## View applied settings
+
+When administrators apply Settings Management policies, Docker Desktop greys out most enforced settings in the GUI.
+
+The Docker Desktop GUI doesn't currently display all centralized settings,
+particularly Enhanced Container Isolation (ECI) settings that administrators
+apply via the Admin Console.
+
+As a workaround, you can check the `settings-store.json` file to view all
+applied settings:
+
+  - Mac: `~/Library/Application Support/Docker/settings-store.json`
+  - Windows: `%APPDATA%\Docker\settings-store.json`
+  - Linux: `~/.docker/desktop/settings-store.json`
+
+The `settings-store.json` file contains all settings, including those that
+may not appear in the Docker Desktop GUI.
+
 ## Limitations
 
 Settings Management has the following limitations:
