@@ -3,7 +3,7 @@ module github.com/docker/docs
 go 1.24.5
 
 require (
-	github.com/docker/buildx v0.26.1 // indirect
+	github.com/docker/buildx v0.27.0 // indirect
 	github.com/docker/cli v28.3.3+incompatible // indirect
 	github.com/docker/compose/v2 v2.39.2 // indirect
 	github.com/docker/mcp-gateway v0.13.1-0.20250730013131-e08a3be84765 // indirect
@@ -14,7 +14,7 @@ require (
 )
 
 replace (
-	github.com/docker/buildx => github.com/docker/buildx v0.26.1
+	github.com/docker/buildx => github.com/docker/buildx v0.27.0
 	github.com/docker/cli => github.com/docker/cli v28.3.3+incompatible
 	github.com/docker/compose/v2 => github.com/docker/compose/v2 v2.39.2
 	github.com/docker/model-cli => github.com/docker/model-cli v0.1.33-0.20250703103301-d4e4936a9eb2
