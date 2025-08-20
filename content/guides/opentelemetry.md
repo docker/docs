@@ -189,7 +189,7 @@ View traces at [http://localhost:16686](http://localhost:16686) in the Jaeger UI
 
 ## Verify Traces in Jaeger
 
-After visiting your app's root endpoint, open Jaeger’s UI, search for the service (default is usually unknown_service unless explicitly named), and check the traces.
+After visiting your app's root endpoint, open Jaeger’s UI, search for the service (default is usually `unknown_service` unless explicitly named), and check the traces.
 
 You should see spans for the HTTP request, middleware, and auto-instrumented libraries.
 
