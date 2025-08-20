@@ -1,5 +1,6 @@
 (?i)[A-Z]{2,}'?s
 
+[Dd]ev
 Adreno
 Aleksandrov
 Amazon
@@ -16,11 +17,13 @@ Bugsnag
 BuildKit
 buildkitd
 BusyBox
+CD
 CentOS
 Ceph
 cgroup
 Chrome
 Chrome DevTools
+CI
 CI/CD
 Citrix
 cli
@@ -144,6 +147,7 @@ osquery
 osxfs
 OTel
 Paketo
+PAT
 perl
 pgAdmin
 PKG
@@ -193,9 +197,9 @@ Uncaptured
 undeterminable
 Unix
 unmanaged
+Visual Studio Code
 VMware
 vpnkit
-VSCode
 vSphere
 Vue
 Wasm

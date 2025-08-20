@@ -169,6 +169,12 @@ Docker Model Runner:
   availability: Beta
   requires: Docker Engine or Docker Desktop (Windows) 4.41+ or Docker Desktop (MacOS) 4.40+
   for: See Requirements section below
+Docker MCP Catalog and Toolkit:
+  availability: Beta
+Docker MCP Catalog:
+  availability: Beta
+Docker MCP Toolkit:
+  availability: Beta
 Docker Projects:
   availability: Beta
 Docker Scout exceptions:

@@ -1,11 +1,15 @@
 ---
-title: MCP Toolkit
+title: Docker MCP Toolkit
+linkTitle: MCP Toolkit
 description: Use the MCP Toolkit to set up MCP servers and MCP clients.
 keywords: Docker MCP Toolkit, MCP server, MCP client, AI agents
+weight: 20
 aliases:
   - /desktop/features/gordon/mcp/gordon-mcp-server/
   - /ai/gordon/mcp/gordon-mcp-server/
 ---
+
+{{< summary-bar feature_name="Docker MCP Toolkit" >}}
 
 The Docker MCP Toolkit is a gateway that lets you set up, manage, and run
 containerized MCP servers and connect them to AI agents. It removes friction
@@ -160,7 +164,9 @@ and add Claude Desktop as a client:
 
 ### Example: Use Visual Studio Code as a client
 
-You can interact with all your installed MCP servers in VS Code:
+You can interact with all your installed MCP servers in Visual Studio Code:
+
+<!-- vale off -->
 
 1. To enable the MCP Toolkit:
 
@@ -168,7 +174,7 @@ You can interact with all your installed MCP servers in VS Code:
    {{< tabs group="" >}}
    {{< tab name="Enable globally">}}
 
-   1. Insert the following in your VS Code's User`mcp.json`:
+   1. Insert the following in your Visual Studio Code's User`mcp.json`:
 
       ```json
       "mcp": {
@@ -213,6 +219,8 @@ You can interact with all your installed MCP servers in VS Code:
 
 For more information about the Agent mode, see the
 [Visual Studio Code documentation](https://code.visualstudio.com/docs/copilot/chat/mcp-servers#_use-mcp-tools-in-agent-mode).
+
+<!-- vale on -->
 
 ## Authenticate via OAuth
 

@@ -7,10 +7,12 @@ params:
     group: Open source
 ---
 
-The MCP Gateway is Docker's open-source enterprise-ready solution for orchestrating and
-managing [Model Context Protocol (MCP)](https://spec.modelcontextprotocol.io/) servers
-securely across development and production environments.
-It is designed to help organizations connect MCP servers from the [Docker MCP Catalog](https://hub.docker.com/mcp) to MCP Clients without compromising security, visibility, or control.
+The MCP Gateway is Docker's open-source enterprise-ready solution for
+orchestrating and managing [Model Context Protocol
+(MCP)](https://spec.modelcontextprotocol.io/) servers securely across
+development and production environments. It is designed to help organizations
+connect MCP servers from the [Docker MCP Catalog](https://hub.docker.com/mcp) to
+MCP Clients without compromising security, visibility, or control.
 
 By unifying multiple MCP servers into a single, secure endpoint, the MCP Gateway offers
 the following benefits:
@@ -57,8 +59,8 @@ You can download the latest binary from the [GitHub releases page](https://githu
 
 Rename the relevant binary and copy it to the destination matching your OS:
 
-| OS      | Binary name         | Destination folder                  |
-|---------|---------------------|-------------------------------------|
+| OS      | Binary name      | Destination folder                  |
+|---------|------------------|-------------------------------------|
 | Linux   | `docker-mcp`     | `$HOME/.docker/cli-plugins`         |
 | macOS   | `docker-mcp`     | `$HOME/.docker/cli-plugins`         |
 | Windows | `docker-mcp.exe` | `%USERPROFILE%\.docker\cli-plugins` |
@@ -68,7 +70,6 @@ Or copy it into one of these folders for installing it system-wide:
 
 {{< tabs group="" >}}
 {{< tab name="On Unix environments">}}
-
 
 * `/usr/local/lib/docker/cli-plugins` OR `/usr/local/libexec/docker/cli-plugins`
 * `/usr/lib/docker/cli-plugins` OR `/usr/libexec/docker/cli-plugins`
@@ -97,13 +98,32 @@ docker mcp --help
 
 ## Use the MCP Gateway
 
-Run:
+1. Select a server of your choice from the [MCP Catalog](https://hub.docker.com/mcp)
+   and copy the install command from the **Manual installation** section.
 
-```bash
-docker mcp gateway run
-```
+1. For example, run this command in your terminal to install the `duckduckgo`
+   MCP server:
 
-To view all the commands and configuration options, go to the [mcp-gateway repository](https://github.com/docker/mcp-gateway?tab=readme-ov-file#usage).
+   ```console
+   docker mcp server enable duckduckgo
+   ```
+
+1. Connect a client, like Visual Studio Code:
+
+   ```console
+   docker mcp client connect vscode
+   ```
+
+1. Run the gateway:
+
+   ```console
+   docker mcp gateway run
+   ```
+
+Now your MCP gateway is running and you can leverage all the servers set up
+behind it from Visual Studio Code.
+
+[View the complete docs on GitHub.](https://github.com/docker/mcp-gateway?tab=readme-ov-file#usage" text)
 
 ## Related pages
 
