@@ -49,7 +49,7 @@ communicate in a standardized way. You can see them as
 add-ons that provide specific tools to an LLM.
 
 > [!TIP]
-> **Example**:
+> Example:
 > If you ask a model to create a meeting, it needs to communicate with your calendar app to do that.
 >
 > An MCP server provided by your calendar app provides _tools_ to your model to perform atomic
