@@ -498,6 +498,7 @@ The following code snippet shows an example `.dockerignore` file.
 */*/temp*
 temp?
 ```
+<!-- vale off -->
 
 This file causes the following build behavior:
 
@@ -507,6 +508,8 @@ This file causes the following build behavior:
 | `*/temp*`   | Exclude files and directories whose names start with `temp` in any immediate subdirectory of the root. For example, the plain file `/somedir/temporary.txt` is excluded, as is the directory `/somedir/temp`. |
 | `*/*/temp*` | Exclude files and directories starting with `temp` from any subdirectory that is two levels below the root. For example, `/somedir/subdir/temporary.txt` is excluded.                                         |
 | `temp?`     | Exclude files and directories in the root directory whose names are a one-character extension of `temp`. For example, `/tempa` and `/tempb` are excluded.                                                     |
+
+<!-- vale on -->
 
 Matching is done using Go's
 [`filepath.Match` function](https://golang.org/pkg/path/filepath#Match) rules.

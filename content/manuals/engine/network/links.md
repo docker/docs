@@ -295,9 +295,9 @@ Docker uses this prefix format to define three distinct environment variables:
 
 * The `prefix_ADDR` variable contains the IP Address from the URL, for
 example `WEBDB_PORT_5432_TCP_ADDR=172.17.0.82`.
-* The `prefix_PORT` variable contains just the port number from the URL for
+* The `prefix_PORT` variable contains just the port number from the URL of
 example `WEBDB_PORT_5432_TCP_PORT=5432`.
-* The `prefix_PROTO` variable contains just the protocol from the URL for
+* The `prefix_PROTO` variable contains just the protocol from the URL of
 example `WEBDB_PORT_5432_TCP_PROTO=tcp`.
 
 If the container exposes multiple ports, an environment variable set is
