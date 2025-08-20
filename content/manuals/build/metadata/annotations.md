@@ -6,6 +6,8 @@ aliases:
 - /build/building/annotations/
 ---
 
+<!-- vale Docker.Spacing = NO -->
+
 Annotations provide descriptive metadata for images. Use annotations to record
 arbitrary information and attach it to your image, which helps consumers and
 tools understand the origin, contents, and how to use the image.
@@ -39,7 +41,7 @@ You can add annotations to an image at build-time, or when creating the image
 manifest or index.
 
 > [!NOTE]
-> 
+>
 > The Docker Engine image store doesn't support loading images with
 > annotations. To build with annotations, make sure to push the image directly
 > to a registry, using the `--push` CLI flag or the

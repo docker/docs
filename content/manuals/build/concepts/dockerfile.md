@@ -8,6 +8,8 @@ aliases:
 - /build/building/packaging/
 ---
 
+<!-- vale Docker.We = NO -->
+
 ## Dockerfile
 
 It all starts with a Dockerfile.
@@ -19,8 +21,8 @@ reference in the [Dockerfile reference](/reference/dockerfile.md).
 
 Here are the most common types of instructions:
 
-| Instruction                                                        | Description                                                                                                                                                                                              |
-| ------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Instruction                                               | Description                                                                                                                                                                                              |
+|-----------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [`FROM <image>`](/reference/dockerfile.md#from)           | Defines a base for your image.                                                                                                                                                                           |
 | [`RUN <command>`](/reference/dockerfile.md#run)           | Executes any commands in a new layer on top of the current image and commits the result. `RUN` also has a shell form for running commands.                                                               |
 | [`WORKDIR <directory>`](/reference/dockerfile.md#workdir) | Sets the working directory for any `RUN`, `CMD`, `ENTRYPOINT`, `COPY`, and `ADD` instructions that follow it in the Dockerfile.                                                                          |
@@ -167,7 +169,7 @@ the container.
 Note the `# install app dependencies` line. This is a comment. Comments in
 Dockerfiles begin with the `#` symbol. As your Dockerfile evolves, comments can
 be instrumental to document how your Dockerfile works for any future readers
-and editors of the file, including your future self!
+and editors of the file, including your future self.
 
 > [!NOTE]
 >
@@ -194,7 +196,7 @@ use the command to install the flask web framework.
 
 The next instruction uses the
 [`COPY` instruction](/reference/dockerfile.md#copy) to copy the
-`hello.py` file from the local build context into the root directory of our image. 
+`hello.py` file from the local build context into the root directory of our image.
 
 ```dockerfile
 COPY hello.py /
@@ -281,5 +283,5 @@ Docker host.
 
 > [!TIP]
 >
-> Want a better editing experience for Dockerfiles in VS Code?
-> Check out the [Docker VS Code Extension (Beta)](https://marketplace.visualstudio.com/items?itemName=docker.docker) for linting, code navigation, and vulnerability scanning.
+> To improve linting, code navigation, and vulnerability scanning of your Dockerfiles in Visual Studio Code
+> see [Docker VS Code Extension](https://marketplace.visualstudio.com/items?itemName=docker.docker).
