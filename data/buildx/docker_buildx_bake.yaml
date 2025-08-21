@@ -536,6 +536,7 @@ examples: |-
     * `args`
     * `cache-from`
     * `cache-to`
+    * `call`
     * `context`
     * `dockerfile`
     * `entitlements`

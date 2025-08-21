@@ -77,4 +77,9 @@
     ],
     "description": "Insert a frontmatter block with title, weight, description, keywords, and aliases."
   }
+  "Insert Visual Studio Code": {
+    "prefix": ["vscode", "vs"],
+    "body": ["Visual Studio Code"],
+    "description": "Insert 'Visual Studio Code'",
+  },
 }

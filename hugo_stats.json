@@ -55,6 +55,8 @@
       "Fedora",
       "For-Mac-with-Apple-silicon",
       "For-Mac-with-Intel-chip",
+      "For-authenticated-access",
+      "For-public-repositories-only",
       "From-Docker-Desktop",
       "From-the-Docker-CLI",
       "From-the-GUI",

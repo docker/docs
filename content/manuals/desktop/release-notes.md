@@ -31,6 +31,20 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 >
 > If you're experiencing malware detection issues on Mac, follow the steps documented in [docker/for-mac#7527](https://github.com/docker/for-mac/issues/7527).
 
+## 4.44.3
+
+{{< release-date date="2025-08-20" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.44.3" build_path="/202357/" >}}
+
+### Security 
+
+- Fixed [CVE-2025-9074](https://www.cve.org/CVERecord?id=CVE-2025-9074) where a malicious container running on Docker Desktop could access the Docker Engine and launch additional containers without requiring the Docker socket to be mounted. This could allow unauthorized access to user files on the host system. Enhanced Container Isolation (ECI) does not mitigate this vulnerability.
+
+### Bug fixes and enhancements
+
+- Fixed a bug which caused the Docker Offload dialog to block users from accessing the dashboard.
+
 ## 4.44.2
 
 {{< release-date date="2025-08-15" >}}

@@ -81,6 +81,16 @@ For existing installations:
 
 Docker Desktop checks for policy updates when it launches and every 60 minutes while running.
 
+## Verify applied settings
+
+After you apply policies:
+
+- Docker Desktop displays most settings as greyed out
+- Some settings, particularly Enhanced Container Isolation configurations,
+may not appear in the GUI
+- You can verify all applied settings by checking the [`settings-store.json`
+file](/manuals/desktop/settings-and-maintenance/settings.md) on your system
+
 ## Manage existing policies
 
 From the **Desktop Settings Management** page in the Admin Console, use the **Actions** menu to:

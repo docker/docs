@@ -8,6 +8,15 @@ toc_min: 1
 toc_max: 2
 ---
 
+## Docker Desktop 4.44.3 security update: CVE-2025-9074
+
+_Last updated August 20, 2025_
+
+A vulnerability in Docker Desktop was fixed on July 03 in the [4.44.3](/manuals/desktop/release-notes.md#4443) release:
+
+- Fixed [CVE-2025-9074](https://www.cve.org/CVERecord?id=CVE-2025-9074) where a malicious container running on Docker Desktop could access the Docker Engine and launch additional containers without requiring the Docker socket to be mounted. This could allow unauthorized access to user files on the host system. Enhanced Container Isolation (ECI) does not mitigate this vulnerability.
+
+
 ## Docker Desktop 4.44.0 security update: CVE-2025-23266
 
 _Last updated July 31, 2025_

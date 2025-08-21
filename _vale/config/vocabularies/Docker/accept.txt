@@ -1,5 +1,6 @@
 (?i)[A-Z]{2,}'?s
 
+[Dd]ev
 Adreno
 Aleksandrov
 Amazon
@@ -14,14 +15,17 @@ bootup
 Btrfs
 Bugsnag
 BuildKit
+buildkitd
 BusyBox
+CD
 CentOS
 Ceph
 cgroup
 Chrome
 Chrome DevTools
-Citrix
+CI
 CI/CD
+Citrix
 cli
 CLI
 CloudFront
@@ -39,7 +43,6 @@ denylist
 deprovisioning
 deserialization
 deserialize
-[Dd]ev
 Dev Environments?
 Dex
 displayName
@@ -59,6 +62,7 @@ Docker's
 Dockerfile
 dockerignore
 Dockerize
+Dockerized
 Dockerizing
 Entra
 EPERM
@@ -129,6 +133,7 @@ netfilter
 netlabel
 netlink
 Netplan
+Neovim
 NFSv\d
 Nginx
 npm
@@ -142,9 +147,11 @@ osquery
 osxfs
 OTel
 Paketo
+PAT
+perl
 pgAdmin
-plist
 PKG
+plist
 Postgres
 PowerShell
 Python
@@ -173,8 +180,8 @@ subvolume
 Syft
 syntaxes
 Sysbox
-sysctls
 sysctl
+sysctls
 Sysdig
 systemd
 Testcontainers
@@ -184,17 +191,15 @@ Trivy
 Trixie
 Ubuntu
 ufw
-ui
-uid
 umask
 uncaptured
 Uncaptured
 undeterminable
 Unix
 unmanaged
+Visual Studio Code
 VMware
 vpnkit
-VSCode
 vSphere
 Vue
 Wasm
@@ -203,6 +208,7 @@ Windows
 windowsfilter
 WireMock
 workdir
+WORKDIR
 Xdebug
 youki
 Yubikey
@@ -219,6 +225,8 @@ Zsh
 [Cc]odenames?
 [Cc]ompose
 [Cc]onfigs
+[dD]eduplicate
+[Dd]ev
 [Dd]istroless
 [Ff]ilepaths?
 [Ff]iletypes?

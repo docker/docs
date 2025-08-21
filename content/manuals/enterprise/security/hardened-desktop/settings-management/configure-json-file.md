@@ -62,7 +62,36 @@ Settings where `locked` is set to `false` are ignored on existing installs if
 a user has already customized that value in `settings-store.json`,
 `settings.json`, or `daemon.json`.
 
-### Example configuration
+### Grouped settings
+
+Docker Desktop groups some settings together with a single toggle that controls
+the entire section. These include:
+
+- Enhanced Container Isolation (ECI): Uses a main toggle (`enhancedContainerIsolation`) that enables/disables the entire feature, with sub-settings for specific configurations
+- Kubernetes: Uses a main toggle (`kubernetes.enabled`) with sub-settings for cluster configuration
+- Docker Scout: Groups settings under the `scout` object
+
+When configuring grouped settings:
+
+1. Set the main toggle to enable the feature
+1. Configure sub-settings within that group
+1. When you lock the main toggle, users cannot modify any settings in that group
+
+Example for `enhancedContainerIsolation`:
+
+```json
+"enhancedContainerIsolation": {
+  "locked": true,  // This locks the entire ECI section
+  "value": true,   // This enables ECI
+  "dockerSocketMount": {  // These are sub-settings
+    "imageList": {
+      "images": ["docker.io/testcontainers/ryuk:*"]
+    }
+  }
+}
+```
+
+### Example `admin-settings.json` file
 
 The following sample is an `admin-settings.json` file with common enterprise settings configured. You can use this example as a template with the [`admin-settings.json` configurations](#admin-settingsjson-configurations):
 

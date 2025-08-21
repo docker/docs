@@ -265,7 +265,7 @@ host directories into containers.
 usage statistics and crash reports to Docker. This setting affects telemetry
 gathered from the Docker Desktop application itself. It does not affect
 server-side telemetry collected via Docker Hub or other backend services, such
-as login timestamps, pulls, or builds.
+as sign in timestamps, pulls, or builds.
 - **OS:** {{< badge color=blue text="All" >}}
 - **Use case:** Help Docker improve the product based on usage patterns.
 - **Configure this setting with:**
