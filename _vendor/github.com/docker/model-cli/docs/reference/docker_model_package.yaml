@@ -1,9 +1,9 @@
 command: docker model package
 short: |
-    Package a GGUF file into a Docker model OCI artifact, with optional licenses, and pushes it to the specified registry
+    Package a GGUF file into a Docker model OCI artifact, with optional licenses. The package is sent to the model-runner, unless --push is specified
 long: |
-    Package a GGUF file into a Docker model OCI artifact, with optional licenses, and pushes it to the specified registry
-usage: docker model package --gguf <path> [--license <path>...] [--context-size <tokens>] --push TARGET
+    Package a GGUF file into a Docker model OCI artifact, with optional licenses. The package is sent to the model-runner, unless --push is specified
+usage: docker model package --gguf <path> [--license <path>...] [--context-size <tokens>] [--push] MODEL
 pname: docker model
 plink: docker_model.yaml
 options:
@@ -40,7 +40,8 @@ options:
     - option: push
       value_type: bool
       default_value: "false"
-      description: push to registry (required)
+      description: |
+        push to registry (if not set, the model is loaded into the Model Runner content store.
       deprecated: false
       hidden: false
       experimental: false
