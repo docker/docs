@@ -45,12 +45,12 @@ container as the server or in dedicated containers:
 {{< tabs group="" >}}
 {{< tab name="Single container">}}
 
-![Screenshot showing a single-container MCP Toolkit setup.](/assets/images/mcp_servers.png)
+![Screenshot showing a single-container MCP Toolkit setup.](./images/mcp-servers.svg)
 
 {{< /tab >}}
 {{< tab name="Separate containers">}}
 
-![Screenshot showing a multi-container MCP Toolkit setup.](/assets/images/mcp_servers_2.png)
+![Screenshot showing a multi-container MCP Toolkit setup.](./images/mcp-servers-2.svg)
 
 {{< /tab >}}
 {{</tabs >}}
