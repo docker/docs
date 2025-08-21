@@ -8,24 +8,33 @@ aliases:
   - /storage/containerd/
 ---
 
-{{< summary-bar feature_name="containerd" >}}
+Starting with Docker Engine v29, Docker uses [`containerd`](https://containerd.io/)
+for managing container storage and images. `containerd` is the industry-standard container runtime.
 
-containerd, the industry-standard container runtime, uses snapshotters instead
-of the classic storage drivers for storing image and container data.
-While the `overlay2` driver still remains the default driver for Docker Engine,
-you can opt in to using containerd snapshotters as an experimental feature.
+## Main benefits
 
-To learn more about the containerd image store and its benefits, refer to
+containerd offers the following benefits:
+
+- Shared maintenance: containerd is an open-source project maintained by a large community.
+- Customizability: use [snapshotters](snapshotters.md)
+  with unique characteristics, such as:
+  - [stargz](https://github.com/containerd/stargz-snapshotter) for lazy-pulling images on container
+  startup.
+  - [nydus](https://github.com/containerd/nydus-snapshotter) or [dragonfly](https://github.com/dragonflyoss/nydus) for peer-to-peer image distribution.
+- Portability: containerd is lighter and more modular.
+- Multi-platform support: Build multi-platform images and images with attestations.
+- WebAssembly: Ability to run Wasm containers.
+
+For more information about the containerd image store and its benefits, refer to
 [containerd image store on Docker Desktop](/manuals/desktop/features/containerd.md).
 
-## Enable containerd image store on Docker Engine
+## Migrate to containerd image store on Docker Engine
 
-Switching to containerd snapshotters causes you to temporarily lose images and
-containers created using the classic storage drivers.
-Those resources still exist on your filesystem, and you can retrieve them by
-turning off the containerd snapshotters feature.
+{{< summary-bar feature_name="Containerd migration" >}}
 
-The following steps explain how to enable the containerd snapshotters feature.
+You can enable the auto-migration feature for containerd snapshotters once you
+update to Docker Engine v29. The migration mechanism handles overlay and vfs
+images. To enable it:
 
 1. Add the following configuration to your `/etc/docker/daemon.json`
    configuration file:
@@ -33,24 +42,29 @@ The following steps explain how to enable the containerd snapshotters feature.
    ```json
    {
      "features": {
-       "containerd-snapshotter": true
+         "containerd-migration": true
      }
    }
    ```
 
-2. Save the file.
-3. Restart the daemon for the changes to take effect.
+1. Save the file.
+
+1. Restart the daemon for the changes to take effect.
+
+   Switching to containerd snapshotters causes you to temporarily lose images and
+   containers created using the classic storage drivers.
+   If you use other graph storage, repull or rebuild your images.
+
+1. To display which driver you are using, run:
 
    ```console
-   $ sudo systemctl restart docker
+   $ docker info -f '{{ .DriverStatus }}'
    ```
 
-After restarting the daemon, running `docker info` shows that you're using
-containerd snapshotter storage drivers.
+> [!TIP]
+> Those resources still exist on your filesystem, and you can retrieve them by
+> [turning off the containerd snapshotters feature](./drivers/_index.md#enable-legacy-storage-drivers).
 
-```console
-$ docker info -f '{{ .DriverStatus }}'
-[[driver-type io.containerd.snapshotter.v1]]
-```
+## Related pages
 
-Docker Engine uses the `overlayfs` containerd snapshotter by default.
+- [Legacy storage drivers](drivers/_index.md)
