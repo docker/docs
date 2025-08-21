@@ -71,28 +71,27 @@ organization.
 
 ## Set team repository permissions
 
-Organization owners can configure repository permissions on a per-team basis.
-For example, you can specify that all teams within an organization have
-"Read and Write" access to repositories A and B, whereas only specific
-teams have "Admin" access.
+You must create a team before you are able to configure repository permissions.
+For more details, see [Create and manage a
+team](/manuals/admin/organization/manage-a-team.md).
 
-Note that organization owners have full administrative access to all
-repositories within the organization.
-
-To give a team access to a repository:
+To set team repository permissions:
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
-1. Select **My Hub** and choose your organization.
-1. In the **Teams** section, select the team you want to configure repository
-access for.
-1. Select the **Permissions** tab and select a repository from the
-**Repository** drop-down.
-1. Choose a permission from the **Permissions** drop-down list and select
-**Add**.
+1. Select **My Hub** > **Repositories**.
 
-Organization owners can also assign members the editor role to grant partial
-administrative access. For more information on the editor role, see
-[Roles and permissions](/manuals/enterprise/security/roles-and-permissions.md).
+   A list of your repositories appears.
+
+1. Select a repository.
+
+   The **General** page for the repository appears.
+
+1. Select the **Permissions** tab.
+1. Add, modify, or remove a team's repository permissions.
+
+   - Add: Specify the **Team**, select the **Permission**, and then select **Add**.
+   - Modify: Specify the new permission next to the team.
+   - Remove: Select the **Remove permission** icon next to the team.
 
 ### Permissions reference
 
