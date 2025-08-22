@@ -44,7 +44,7 @@ Do not modify Docker's tables directly as the modifications are likely to
 be lost, Docker expects to have full ownership of its tables.
 
 > [!NOTE]
-> 
+>
 > Because iptables has a fixed set of chains, equivalent to nftables base
 > chains, all rules are included in those chains. The `DOCKER-USER` chain
 > is supplied as a way to insert rules into the `filter` table's `FORWARD`
@@ -81,7 +81,7 @@ publishing, communication between bridge networks, and direct routing from
 outside the host to containers in bridge networks.
 
 When running with iptables, depending on network and daemon configuration,
-Docker may enable IPv4 and IPv6 forwarding on the host. 
+Docker may enable IPv4 and IPv6 forwarding on the host.
 
 With its nftables firewall backend enabled, Docker will not enable IP forwarding
 itself. It will report an error if forwarding is needed, but not already enabled.
@@ -90,7 +90,7 @@ when it determines that forwarding is disabled, use Daemon option `--ip-forward=
 or `"ip-forward": false` in its configuration file.
 
 > [!WARNING]
-> 
+>
 > When enabling IP forwarding, make sure you have firewall rules to block
 > unwanted forwarding between non-Docker interfaces.
 
@@ -103,8 +103,8 @@ or `"ip-forward": false` in its configuration file.
 If Docker is in a VM that has a single network interface and no other
 software running, there is probably no unwanted forwarding to block.
 But, on a physical host with multiple network interfaces, forwarding
-between those interfaces should probably be blocked unless the host
-is acting as a router.
+between those interfaces should probably be blocked with nftables rules
+unless the host is acting as a router.
 
 To enable IP forwarding on the host, set the following sysctls:
 
@@ -112,7 +112,7 @@ To enable IP forwarding on the host, set the following sysctls:
 - `net.ipv6.conf.all.forwarding=1`
 
 If your host uses `systemd`, you may be able to use `systemd-sysctl`. For
-example, by editing `/etc/sysctl.d/99-sysctl.conf`. 
+example, by editing `/etc/sysctl.d/99-sysctl.conf`.
 
 If the host is running `firewalld`, you may be able to use it to block
 unwanted forwarding. Docker's bridges are in a firewalld zone called
