@@ -517,8 +517,6 @@ We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266
 
 {{< release-date date="2025-01-30" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Beta" version="4.38.0" build_path="/181591/" >}}
-
 ### New
 
 - Installing Docker Desktop via the PKG installer is now generally available.
@@ -584,8 +582,6 @@ We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266
 
 {{< release-date date="2025-01-09" >}}
 
-{{< desktop-install-v2 mac=true version="4.37.2" build_path="/179585/" >}}
-
 ### Bug fixes and enhancements
 
 #### For Mac
@@ -601,8 +597,6 @@ We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266
 ## 4.37.1
 
 {{< release-date date="2024-12-17" >}}
-
-{{< desktop-install-v2 all=true win_arm_release="Beta" version="4.37.1" build_path="/178610/" >}}
 
 ### Bug fixes and enhancements
 
@@ -620,8 +614,6 @@ We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266
 ## 4.37.0
 
 {{< release-date date="2024-12-12" >}}
-
-{{< desktop-install-v2 all=true win_arm_release="Beta" version="4.37.0" build_path="/178034/" >}}
 
 ### New
 
@@ -681,8 +673,6 @@ We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266
 
 {{< release-date date="2025-01-09" >}}
 
-{{< desktop-install-v2 mac=true version="4.36.1" build_path="/179655/" >}}
-
 ### Bug fixes and enhancements
 
 #### For Mac
@@ -698,8 +688,6 @@ We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266
 ## 4.36.0
 
 {{< release-date date="2024-11-18" >}}
-
-{{< desktop-install-v2 all=true win_arm_release="Beta" version="4.36.0" build_path="/175267/" >}}
 
 ### New
 
@@ -761,7 +749,6 @@ We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266
 
 {{< release-date date="2025-01-09" >}}
 
-{{< desktop-install-v2 mac=true version="4.35.2" build_path="/179656/" >}}
 
 ### Bug fixes and enhancements
 
@@ -779,8 +766,6 @@ We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266
 
 {{< release-date date="2024-10-30" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Beta" version="4.35.1" build_path="/173168/" >}}
-
 #### For all platforms
 
 - Fixed a bug where Docker Desktop would incorrectly bind to port `8888`. Fixes [docker/for-win#14389](https://github.com/docker/for-win/issues/14389) and [docker/for-mac#7468](https://github.com/docker/for-mac/issues/7468)
@@ -788,8 +773,6 @@ We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266
 ## 4.35.0
 
 {{< release-date date="2024-10-24" >}}
-
-{{< desktop-install-v2 all=true win_arm_release="Beta" version="4.35.0" build_path="/172550/" >}}
 
 ### New
 
@@ -865,8 +848,6 @@ We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266
 
 {{< release-date date="2025-01-09" >}}
 
-{{< desktop-install-v2 mac=true version="4.34.4" build_path="/179671/" >}}
-
 ### Bug fixes and enhancements
 
 #### For Mac
@@ -899,8 +880,6 @@ We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266
 
 {{< release-date date="2024-09-12" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Beta" version="4.34.2" build_path="/167172/" >}}
-
 ### Bug fixes and enhancements
 
 #### For all platforms
@@ -927,8 +906,6 @@ We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266
 ## 4.34.0
 
 {{< release-date date="2024-08-29" >}}
-
-{{< desktop-install-v2 all=true win_arm_release="Beta" version="4.34.0" build_path="/165256/" >}}
 
 ### New
 
@@ -990,8 +967,6 @@ We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266
 
 {{< release-date date="2025-01-09" >}}
 
-{{< desktop-install-v2 mac=true version="4.33.2" build_path="/179689/" >}}
-
 ### Bug fixes and enhancements
 
 #### For Mac
@@ -1007,8 +982,6 @@ We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266
 ## 4.33.1
 
 {{< release-date date="2024-07-31" >}}
-
-{{< desktop-install-v2 win=true win_arm_release="Beta" version="4.33.0" build_path="/161083/" >}}
 
 ### Bug fixes and enhancements
 
@@ -1112,7 +1085,6 @@ For more information, see [microsoft/WSL#11794](https://github.com/microsoft/WSL
 
 {{< release-date date="2024-07-04" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Beta" version="4.32.0" build_path="/157355/" >}}
 
 ### New
 
@@ -1272,8 +1244,6 @@ For more information, see [microsoft/WSL#11794](https://github.com/microsoft/WSL
 
 {{< release-date date="2024-05-06" >}}
 
-{{< desktop-install all=true win_arm_release="Beta" version="4.30.0" build_path="/149282/" >}}
-
 ### New
 
 #### For all platforms
@@ -1353,8 +1323,6 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 ## 4.29.0
 
 {{< release-date date="2024-04-08" >}}
-
-{{< desktop-install all=true win_arm_release="Beta" version="4.29.0" build_path="/145265/" >}}
 
 ### New
 
