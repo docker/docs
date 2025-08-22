@@ -24,10 +24,6 @@ addresses in the network's subnets. By default, it:
   container ports and ports on host IP addresses. The published ports
   can be accessed from outside the Docker host, on its IP addresses.
 
-In terms of networking, a bridge network is a Link Layer device
-which forwards traffic between network segments. A bridge can be a hardware
-device or a software device running within a host machine's kernel.
-
 In terms of Docker, a bridge network uses a software bridge which lets
 containers connected to the same bridge network communicate, while providing
 isolation from containers that aren't connected to that bridge network. By
