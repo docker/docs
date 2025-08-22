@@ -225,8 +225,8 @@ networking mode:
 - `--expose`
 
 The following example runs a Redis container, with Redis binding to
-`localhost`, then running the `redis-cli` command and connecting to the Redis
-server over the `localhost` interface.
+127.0.0.1, then running the `redis-cli` command and connecting to the Redis
+server over 127.0.0.1.
 
 ```console
 $ docker run -d --name redis example/redis --bind 127.0.0.1
