@@ -17,7 +17,7 @@ container networking.
 ### Docker and iptables chains
 
 To support bridge and overlay networks, Docker creates the following custom
-`iptables` chains:
+`iptables` chains in the `filter` table:
 
 * `DOCKER-USER`
     * A placeholder for user-defined rules that will be processed before rules
