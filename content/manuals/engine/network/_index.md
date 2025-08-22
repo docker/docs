@@ -229,6 +229,6 @@ The following example runs a Redis container, with Redis binding to
 server over 127.0.0.1.
 
 ```console
-$ docker run -d --name redis example/redis --bind 127.0.0.1
-$ docker run --rm -it --network container:redis example/redis-cli -h 127.0.0.1
+$ docker run -d --name redis redis --bind 127.0.0.1
+$ docker run --rm -it --network container:redis redis-cli -h 127.0.0.1
 ```
