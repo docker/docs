@@ -84,40 +84,47 @@
     @apply list-disc pl-5 mb-1;
   }
 
-
   .download-links {
-    @apply block;
-    @apply text-gray-800;
-    @apply dark:text-gray-200;
+    @apply my-0  text-gray-600 dark:text-gray-400 rounded-sm border-1 border-gray-100 bg-gray-100/10 px-2 py-1;
+    @apply dark:border-gray-800 dark:bg-gray-900;
+    font-size: 86%;
   }
+
   .download-links a {
     @apply link;
   }
+
   .download-links-subcontainer {
-    @apply flex flex-wrap gap-2;
+    @apply flex flex-row gap-2 justify-between;
+    ul{
+      @apply m-0 p-0 list-none;
+      li{
+        @apply p-0 m-0;
+      }
+    }
   }
 
   .card-image {
     @apply h-12 w-12 overflow-hidden;
   }
 
-}
-.button {
-  @apply my-2 mr-2 inline-block rounded-sm bg-blue-500 p-1 px-3 text-white hover:bg-blue-600 dark:bg-blue-500 hover:dark:bg-blue-400;
-}
+  .button {
+     @apply my-2 mr-2 inline-block rounded-sm bg-blue-500 p-1 px-3 text-white hover:bg-blue-600 dark:bg-blue-500 hover:dark:bg-blue-400;
+  }
 
-.summary-bar {
-  @apply my-1 mt-4 flex flex-col rounded-sm border-1 border-gray-100 bg-gray-50 p-4 dark:border-gray-800 dark:bg-gray-900;
-}
+  .summary-bar {
+    @apply my-1 mt-4 flex flex-col rounded-sm border-1 border-gray-100 bg-gray-50 p-4 dark:border-gray-800 dark:bg-gray-900;
+  }
 
-.tabs {
-  @apply bg-blue/2 rounded-sm p-2;
-}
-.tablist {
-  @apply mb-1 border-b border-gray-100 dark:border-gray-800;
-}
+  .tabs {
+    @apply bg-blue/2 rounded-sm p-2;
+  }
+  .tablist {
+    @apply mb-1 border-b border-gray-100 dark:border-gray-800;
+  }
 
-.tab-item {
-  @apply inline-block rounded-t-sm px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-900;
-  @apply dark:text-gray-200;
+  .tab-item {
+    @apply inline-block rounded-t-sm px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-900;
+    @apply dark:text-gray-200;
+  }
 }

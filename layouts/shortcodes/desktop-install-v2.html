@@ -5,49 +5,57 @@
 {{- $linux := .Get "linux" -}}
 {{- $build_path := .Get "build_path" -}}
 <blockquote {{ if eq $build_path "/" }} class="tip" {{ end }} class="not-prose download-links">
-<p>Download Docker Desktop:</p>
-<div class="download-links-subcontainer">
-  {{- if or $all $win }}
-    <div>
-      <a rel="noopener"
-         href="https://desktop.docker.com/win/main/amd64{{ $build_path }}Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-windows">Windows</a>
-      (<a rel="noopener"
-          href="https://desktop.docker.com/win/main/amd64{{ $build_path }}checksums.txt">checksum</a>)
-    </div>
-  {{ end }}
-  {{- if or $win_arm_release }}
-    <div>
-      <a rel="noopener"
-         href="https://desktop.docker.com/win/main/arm64{{ $build_path }}Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-windows">Windows ARM {{ $win_arm_release }}</a>
-      (<a rel="noopener"
-          href="https://desktop.docker.com/win/main/arm64{{ $build_path }}checksums.txt">checksum</a>)
-    </div>
-  {{ end }}
-  {{- if or $all $mac }}
-    <div>
-      <a rel="noopener" href="https://desktop.docker.com/mac/main/arm64{{ $build_path }}Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64">Mac with Apple chip</a>
-      (<a rel="noopener"
-          href="https://desktop.docker.com/mac/main/arm64{{ $build_path }}checksums.txt">checksum</a>)
-    </div>
-    <div>
-      <a rel="noopener" href="https://desktop.docker.com/mac/main/amd64{{ $build_path }}Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64">Mac with Intel chip</a>
-      (<a rel="noopener"
-          href="https://desktop.docker.com/mac/main/amd64{{ $build_path }}checksums.txt">checksum</a>)
-    </div>
-  {{ end -}}
-  {{- if or $all $linux }}
-    <div>
-      <a rel="noopener"
-         href="https://desktop.docker.com/linux/main/amd64{{ $build_path }}docker-desktop-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64">Debian</a>
-      -
-      <a rel="noopener"
-         href="https://desktop.docker.com/linux/main/amd64{{ $build_path }}docker-desktop-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64">RPM</a>
-      -
-      <a rel="noopener"
-         href="https://desktop.docker.com/linux/main/amd64{{ $build_path }}docker-desktop-x86_64.pkg.tar.zst?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64">Arch</a>
-      (<a rel="noopener"
-          href="https://desktop.docker.com/linux/main/amd64{{ $build_path }}checksums.txt">checksum</a>)
-    </div>
-  {{- end -}}
-</div>
+  <p class="font-semibold mb-1">Download Docker Desktop</p>
+  <div class="download-links-subcontainer">
+   {{- if or $all $win $win_arm_release }}
+   <ul>  {{ end }}
+    {{- if or $all $win }}
+      <li>
+        <a rel="noopener"
+           href="https://desktop.docker.com/win/main/amd64{{ $build_path }}Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-windows">Windows</a>
+        (<a rel="noopener"
+            href="https://desktop.docker.com/win/main/amd64{{ $build_path }}checksums.txt">checksum</a>)
+      </li>
+    {{ end }}
+    {{- if or $win_arm_release }}
+        <li>
+          <a rel="noopener"
+             href="https://desktop.docker.com/win/main/arm64{{ $build_path }}Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-windows">Windows ARM {{ $win_arm_release }}</a>
+          (<a rel="noopener"
+              href="https://desktop.docker.com/win/main/arm64{{ $build_path }}checksums.txt">checksum</a>)
+        </li>
+    {{ end }}
+     {{- if or $all $win $win_arm_release }}
+      </ul>  {{ end }}
+    {{- if or $all $mac }}
+      <ul>
+        <li>
+          <a rel="noopener" href="https://desktop.docker.com/mac/main/arm64{{ $build_path }}Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64">Mac with Apple chip</a>
+          (<a rel="noopener"
+              href="https://desktop.docker.com/mac/main/arm64{{ $build_path }}checksums.txt">checksum</a>)
+        </li>
+        <li>
+          <a rel="noopener" href="https://desktop.docker.com/mac/main/amd64{{ $build_path }}Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64">Mac with Intel chip</a>
+          (<a rel="noopener"
+              href="https://desktop.docker.com/mac/main/amd64{{ $build_path }}checksums.txt">checksum</a>)
+        </li>
+      </ul>
+    {{ end -}}
+    {{- if or $all $linux }}
+      <ul>
+        <li>
+          <a rel="noopener"
+             href="https://desktop.docker.com/linux/main/amd64{{ $build_path }}docker-desktop-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64">Debian</a>
+          -
+          <a rel="noopener"
+             href="https://desktop.docker.com/linux/main/amd64{{ $build_path }}docker-desktop-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64">RPM</a>
+          -
+          <a rel="noopener"
+             href="https://desktop.docker.com/linux/main/amd64{{ $build_path }}docker-desktop-x86_64.pkg.tar.zst?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64">Arch</a>
+          (<a rel="noopener"
+              href="https://desktop.docker.com/linux/main/amd64{{ $build_path }}checksums.txt">checksum</a>)
+        </li>
+      </ul>
+      {{- end -}}
+  </div>
 </blockquote>
