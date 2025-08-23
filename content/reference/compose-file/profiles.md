@@ -24,7 +24,7 @@ References to other services (by `links`, `extends` or shared resource syntax `s
 automatically enable a component that would otherwise have been ignored by active profiles. Instead
 Compose returns an error.
 
-## Illustrative example
+## Example
 
 ```yaml
 services:
