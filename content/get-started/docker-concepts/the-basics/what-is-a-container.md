@@ -8,6 +8,7 @@ aliases:
 - /guides/walkthroughs/run-a-container/
 - /guides/walkthroughs/
 - /get-started/run-your-own-container/
+- /get-started/what-is-a-container/
 - /guides/docker-concepts/the-basics/what-is-a-container/
 ---
 
