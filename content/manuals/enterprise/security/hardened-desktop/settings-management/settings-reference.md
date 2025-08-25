@@ -365,6 +365,16 @@ if needed.
     - **General** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
     - Settings Management: `configurationFileVersion` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
 
+### Hide side navigation tabs
+
+- **Description:** Specify what Docker Desktop side navigation tabs to display
+for your organization.
+- **OS:** {{< badge color=blue text="All" >}}
+- **Use case:** Hide Docker Desktop side navigation items to create
+simplified role-based interfaces for improved security compliance.
+- **Configure this settings with:**
+    -  Settings Management: **Hide** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
+
 ## Resources settings
 
 ### CPU limit
