@@ -13,6 +13,7 @@ product, including how to set up and configure them, see the following manuals:
 
 - [Docker Desktop](../../desktop/_index.md)
 - [Docker Hub](../../docker-hub/_index.md)
+- [Docker Offload](/manuals/offload/_index.md)
 - [Docker Build Cloud](../../build-cloud/_index.md)
 - [Docker Scout](../../scout/_index.md)
 - [Testcontainers Cloud](https://testcontainers.com/cloud/docs/#getting-started)
@@ -48,20 +49,76 @@ To manage Docker Hub access, sign in to
 or [Image Access Management](/manuals/enterprise/security/hardened-desktop/image-access-management.md).
 
 {{< /tab >}}
-{{< tab name="Docker Build Cloud" >}}
+{{< tab name="Docker Offload" >}}
 
-### Manage Docker Build Cloud access
+> [!NOTE]
+>
+> Docker Build Cloud settings are now bundled under the Docker Offload product.
+To learn more about Docker Offload, see [Docker Offload](/manuals/offload/_index.md).
 
-To initially set up and configure Docker Build Cloud, sign in to
-[Docker Build Cloud](https://app.docker.com/build) and follow the
-on-screen instructions.
+### Enable Docker Offload
 
-To manage Docker Build Cloud access:
+Enabling Docker Offload enables the feature for all members of your
+organization. Docker Offload is enabled by default.
 
-1. Sign in to [Docker Build Cloud](http://app.docker.com/build) as an
+To enable Docker Offload:
+
+1. Sign in to [Docker Home](http://app.docker.com/) as an
 organization owner.
-1. Select **Account settings**.
+1. Select **Admin Console** > **Offload access**.
+1. In the **Configuration** drop-down, select **Enabled**.
+1. Select **Save**.
+
+### Disable Docker Offload
+
+Disabling Docker Offload removes the ability for your organization members or
+CI/CD pipelines to use offload resources or consume offload minutes.
+
+To disable Docker Offload:
+
+1. Sign in to [Docker Home](http://app.docker.com/) as an
+organization owner.
+1. Select **Admin Console** > **Offload access**.
+1. In the **Configuration** drop-down, select **Disabled**.
+1. Select **Save**.
+
+### Configure GPU access for Docker Offload
+
+GPU access allows developers to use Run Docker Model Runner, MCP tools,
+or other GPU accelerated containers when using cloud mode.
+
+To configure GPU access:
+
+1. Sign in to [Docker Home](http://app.docker.com/) as an
+organization owner.
+1. Select **Admin Console** > **Offload access**.
+1. Use the **Allow GPU access** checkbox to toggle the feature on or off.
+1. Select **Save**.
+
+### Lock Docker Build Cloud
+
+Locking access to Docker Build Cloud removes the ability for anybody in your
+organization to utilize any cloud builders or consume build minutes.
+
+To lock Docker Build Cloud:
+
+1. Sign in to [Docker Home](http://app.docker.com/) as an
+organization owner.
+1. Select **Offload** > **Account settings**.
 1. Select **Lock access to Docker Build Account**.
+
+### Purge cloud data
+
+You can permanently delete all build-related data from your
+Docker Build Cloud account. This action removes build history, build details,
+usage data, and the build cache.
+
+To purge cloud data:
+
+1. Sign in to [Docker Home](http://app.docker.com/) as an
+organization owner.
+1. Select **Offload** > **Account settings**.
+1. Select **Purge cloud data**.
 
 {{< /tab >}}
 {{< tab name="Docker Scout" >}}
