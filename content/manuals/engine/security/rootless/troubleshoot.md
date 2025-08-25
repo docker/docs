@@ -7,19 +7,8 @@ weight: 30
 
 ### Distribution-specific hint
 
-> [!TIP]
->
-> We recommend that you use the Ubuntu kernel.
-
 {{< tabs >}}
 {{< tab name="Ubuntu" >}}
-- Install `dbus-user-session` package if not installed. Run `sudo apt-get install -y dbus-user-session` and relogin.
-- Install `uidmap` package if not installed.  Run `sudo apt-get install -y uidmap`.
-- If running in a terminal where the user was not directly logged into, you will need to install `systemd-container` with `sudo apt-get install -y systemd-container`, then switch to TheUser with the command `sudo machinectl shell TheUser@`.
-
-- `overlay2` storage driver  is enabled by default
-  ([Ubuntu-specific kernel patch](https://kernel.ubuntu.com/git/ubuntu/ubuntu-bionic.git/commit/fs/overlayfs?id=3b7da90f28fe1ed4b79ef2d994c81efbc58f1144)).
-
 - Ubuntu 24.04 and later enables restricted unprivileged user namespaces by
   default, which prevents unprivileged processes in creating user namespaces
   unless an AppArmor profile is configured to allow programs to use
@@ -56,30 +45,11 @@ weight: 30
      ```
 
 {{< /tab >}}
-{{< tab name="Debian GNU/Linux" >}}
-- Install `dbus-user-session` package if not installed. Run `sudo apt-get install -y dbus-user-session` and relogin.
-
-- For Debian 11, installing `fuse-overlayfs` is recommended. Run `sudo apt-get install -y fuse-overlayfs`.
-  This step is not required on Debian 12.
-
-- Rootless docker requires version of `slirp4netns` greater than `v0.4.0` (when `vpnkit` is not installed).
-  Check you have this with 
-  
-  ```console
-  $ slirp4netns --version
-  ```
-  If you do not have this download and install with `sudo apt-get install -y slirp4netns` or download the latest [release](https://github.com/rootless-containers/slirp4netns/releases).
-{{< /tab >}}
 {{< tab name="Arch Linux" >}}
-- Installing `fuse-overlayfs` is recommended. Run `sudo pacman -S fuse-overlayfs`.
-
 - Add `kernel.unprivileged_userns_clone=1` to `/etc/sysctl.conf` (or
   `/etc/sysctl.d`) and run `sudo sysctl --system`
 {{< /tab >}}
 {{< tab name="openSUSE and SLES" >}}
-- For openSUSE 15 and SLES 15, Installing `fuse-overlayfs` is recommended. Run `sudo zypper install -y fuse-overlayfs`.
-  This step is not required on openSUSE Tumbleweed.
-
 - `sudo modprobe ip_tables iptable_mangle iptable_nat iptable_filter` is required.
   This might be required on other distributions as well depending on the configuration.
 
@@ -96,7 +66,7 @@ weight: 30
 ## Known limitations
 
 - Only the following storage drivers are supported:
-  - `overlay2` (only if running with kernel 5.11 or later, or Ubuntu-flavored kernel)
+  - `overlay2` (only if running with kernel 5.11 or later)
   - `fuse-overlayfs` (only if running with kernel 4.18 or later, and `fuse-overlayfs` is installed)
   - `btrfs` (only if running with kernel 4.18 or later, or `~/.local/share/docker` is mounted with `user_subvol_rm_allowed` mount option)
   - `vfs`
@@ -197,17 +167,7 @@ Instead of `sudo -iu <USERNAME>`, you need to log in using `pam_systemd`. For ex
 **The daemon does not start up automatically**
 
 You need `sudo loginctl enable-linger $(whoami)` to enable the daemon to start
-up automatically. See [Usage](./tips.md#usage).
-
-**iptables failed: iptables -t nat -N DOCKER: Fatal: can't open lock file /run/xtables.lock: Permission denied**
-
-This error may happen with an older version of Docker when SELinux is enabled on the host.
-
-The issue has been fixed in Docker 20.10.8.
-A known workaround for older version of Docker is to run the following commands to disable SELinux for `iptables`:
-```console
-$ sudo dnf install -y policycoreutils-python-utils && sudo semanage permissive -a iptables_t
-```
+up automatically. See [Advanced Usage](./tips.md/#advanced-usage).
 
 ### `docker pull` errors
 

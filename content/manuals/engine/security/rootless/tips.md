@@ -5,7 +5,7 @@ title: Tips
 weight: 20
 ---
 
-## Usage
+## Advanced Usage
 
 ### Daemon
 
@@ -56,7 +56,10 @@ Remarks about directory paths:
 
 ### Client
 
-You need to specify either the socket path or the CLI context explicitly.
+Since Docker Engine v23.0, `dockerd-rootless-setuptool.sh install` automatically configures
+the `docker` CLI to use the `rootless` context.
+
+Prior to Docker Engine v23.0, a user had to specify either the socket path or the CLI context explicitly.
 
 To specify the socket path using `$DOCKER_HOST`:
 

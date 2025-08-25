@@ -45,6 +45,9 @@ $ grep ^$(whoami): /etc/subgid
 testuser:231072:65536
 ```
 
+The `dockerd-rootless-setuptool.sh install` script (see following) automatically shows help
+when the prerequiresites are not satisfied.
+
 ## Install
 
 > [!NOTE]
@@ -73,9 +76,15 @@ $ dockerd-rootless-setuptool.sh install
 [INFO] To control docker.service, run: `systemctl --user (start|stop|restart) docker.service`
 [INFO] To run docker.service on system startup, run: `sudo loginctl enable-linger testuser`
 
-[INFO] Make sure the following environment variables are set (or add them to ~/.bashrc):
+[INFO] Creating CLI context "rootless"
+Successfully created context "rootless"
+[INFO] Using CLI context "rootless"
+Current context is now "rootless"
 
+[INFO] Make sure the following environment variable(s) are set (or add them to ~/.bashrc):
 export PATH=/usr/bin:$PATH
+
+[INFO] Some applications may require the following environment variable too:
 export DOCKER_HOST=unix:///run/user/1000/docker.sock
 ```
 
@@ -101,9 +110,15 @@ $ curl -fsSL https://get.docker.com/rootless | sh
 [INFO] To control docker.service, run: `systemctl --user (start|stop|restart) docker.service`
 [INFO] To run docker.service on system startup, run: `sudo loginctl enable-linger testuser`
 
-[INFO] Make sure the following environment variables are set (or add them to ~/.bashrc):
+[INFO] Creating CLI context "rootless"
+Successfully created context "rootless"
+[INFO] Using CLI context "rootless"
+Current context is now "rootless"
 
+[INFO] Make sure the following environment variable(s) are set (or add them to ~/.bashrc):
 export PATH=/home/testuser/bin:$PATH
+
+[INFO] Some applications may require the following environment variable too:
 export DOCKER_HOST=unix:///run/user/1000/docker.sock
 ```
 
@@ -111,5 +126,22 @@ The binaries will be installed at `~/bin`.
 
 {{< /tab >}}
 {{< /tabs >}}
+
+Run `docker info` to confirm that the `docker` client is connecting to the Rootless daemon:
+```console
+$ docker info
+Client: Docker Engine - Community
+ Version:    28.3.3
+ Context:    rootless
+...
+Server:
+...
+ Security Options:
+  seccomp
+   Profile: builtin
+  rootless
+  cgroupns
+...
+```
 
 See [Troubleshooting](./troubleshoot.md) if you faced an error.
