@@ -76,7 +76,6 @@ Or copy it into one of these folders for installing it system-wide:
 
 > [!NOTE]
 > You may have to make the binaries executable with `chmod +x`:
-
 > ```bash
 > $ chmod +x ~/.docker/cli-plugins/docker-mcp
 > ```
