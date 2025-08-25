@@ -15,7 +15,7 @@ the Docker daemon, as long as the [prerequisites](#prerequisites) are met.
 ## How it works
 
 Rootless mode executes the Docker daemon and containers inside a user namespace.
-This is very similar to [`userns-remap` mode](../userns-remap.md), except that
+This is similar to [`userns-remap` mode](../userns-remap.md), except that
 with `userns-remap` mode, the daemon itself is running with root privileges,
 whereas in rootless mode, both the daemon and the container are running without
 root privileges.
