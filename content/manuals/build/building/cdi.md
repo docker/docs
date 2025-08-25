@@ -38,6 +38,12 @@ in one of the following locations:
 > the `docker` driver, see [Configure CDI devices](/reference/cli/dockerd.md#configure-cdi-devices)
 > documentation.
 
+> [!NOTE]
+> If you are creating a container builder on WSL, you need to ensure that
+> [Docker Desktop](../../desktop/_index.md) is installed and [WSL 2 GPU Paravirtualization](../../desktop/features/gpu.md#prerequisites)
+> is enabled. Buildx v0.27+ is also required to mount the WSL libraries in the
+> container.
+
 ## Building with a simple CDI specification
 
 Let's start with a simple CDI specification that injects an environment variable
