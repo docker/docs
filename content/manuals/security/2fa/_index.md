@@ -6,8 +6,9 @@ keywords: two-factor authentication, 2FA, docker hub security, account security,
 weight: 20
 aliases:
  - /docker-hub/2fa/
- - /security/for-developers/2fa/
  - /security/2fa/disable-2fa/
+ - /security/for-developers/2fa/
+ - /security/for-developers/2fa/disable-2fa/
 ---
 
 Two-factor authentication (2FA) adds an essential security layer to your Docker account by requiring a unique security code in addition to your password when signing in. This prevents unauthorized access even if your password is compromised.
