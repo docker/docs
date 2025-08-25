@@ -1,8 +1,9 @@
 command: docker model package
 short: |
-    Package a GGUF file into a Docker model OCI artifact, with optional licenses. The package is sent to the model-runner, unless --push is specified
-long: |
-    Package a GGUF file into a Docker model OCI artifact, with optional licenses. The package is sent to the model-runner, unless --push is specified
+    Package a GGUF file into a Docker model OCI artifact, with optional licenses.
+long: |-
+    Package a GGUF file into a Docker model OCI artifact, with optional licenses. The package is sent to the model-runner, unless --push is specified.
+    When packaging a sharded model --gguf should point to the first shard. All shard files should be siblings and should include the index in the file name (e.g. model-00001-of-00015.gguf).
 usage: docker model package --gguf <path> [--license <path>...] [--context-size <tokens>] [--push] MODEL
 pname: docker model
 plink: docker_model.yaml
@@ -41,7 +42,7 @@ options:
       value_type: bool
       default_value: "false"
       description: |
-        push to registry (if not set, the model is loaded into the Model Runner content store.
+        push to registry (if not set, the model is loaded into the Model Runner content store)
       deprecated: false
       hidden: false
       experimental: false

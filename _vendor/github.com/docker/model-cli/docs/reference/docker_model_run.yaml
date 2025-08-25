@@ -29,6 +29,17 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: ignore-runtime-memory-check
+      value_type: bool
+      default_value: "false"
+      description: |
+        Do not block pull if estimated runtime memory for model exceeds system resources.
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
 examples: |-
     ### One-time prompt
 
