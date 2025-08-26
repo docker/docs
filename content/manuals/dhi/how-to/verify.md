@@ -149,7 +149,7 @@ $ docker scout attest get \
 
 > [!NOTE]
 >
-> The `--skip-tlog` flag is only available in Docker Scout CLI version 1.18.3 and
+> The `--skip-tlog` flag is only available in Docker Scout CLI version 1.18.2 and
 > later.
 
 This is equivalent to using `cosign` with the `--insecure-ignore-tlog=true`
