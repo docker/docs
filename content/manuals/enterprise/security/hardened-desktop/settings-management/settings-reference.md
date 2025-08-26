@@ -192,7 +192,7 @@ images are permitted.
 
 > [!WARNING]
 >
-> QEMU has been deprecated in Docker Desktop versions 4.44 and later. For more information, see the [blog announcement](https://www.docker.com/blog/docker-desktop-for-mac-qemu-virtualization-option-to-be-deprecated-in-90-days/) 
+> QEMU has been deprecated in Docker Desktop versions 4.44 and later. For more information, see the [blog announcement](https://www.docker.com/blog/docker-desktop-for-mac-qemu-virtualization-option-to-be-deprecated-in-90-days/)
 
 | Default value | Accepted values | Format   |
 |---------------|-----------------|----------|
@@ -610,6 +610,62 @@ Builders settings lets you manage Buildx builder instances for advanced image-bu
 >
 > Builder definitions are structured as an array of objects, each describing a builder instance. Conflicting or unsupported configurations may cause build errors.
 
+## AI settings
+
+### Enable Docker Model Runner
+
+| Default value | Accepted values | Format   |
+|---------------|-----------------|----------|
+| `true`       | `true`, `false` | Boolean  |
+
+- **Description:** Docker Model Runner functionality for running AI models in containers.
+- **OS:** {{< badge color=blue text="All" >}}
+- **Use case:** Run and manage AI/ML models using Docker infrastructure.
+- **Configure this setting with:**
+    - Settings Management: `enableDockerAI` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
+
+#### Enable host-side TCP support
+
+| Default value | Accepted values | Format   |
+|---------------|-----------------|----------|
+| `false`       | `true`, `false` | Boolean  |
+
+- **Description:** TCP connectivity for Docker Model Runner services.
+- **OS:** {{< badge color=blue text="All" >}}
+- **Use case:** Allow external applications to connect to Model Runner via TCP.
+- **Configure this setting with:**
+    - Settings Management: `enableDockerAI` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
+
+> [!NOTE]
+>
+> This setting requires Docker Model Runner setting to be enabled first.
+
+##### Port
+
+| Default value | Accepted values | Format  |
+|---------------|-----------------|---------|
+| 12434         | Integer         | Integer |
+
+- **Description:** Specific port used for Model Runner TCP connections.
+- **OS:** {{< badge color=blue text="All" >}}
+- **Use case:** Customize the port for Model Runner TCP connectivity.
+- **Configure this setting with:**
+    - **Beta features** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
+    - Settings Management: `enableInferenceTCP` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
+
+##### CORS Allowed Origins
+
+| Default value | Accepted values                                                                 | Format |
+|---------------|---------------------------------------------------------------------------------|--------|
+| Empty string  | Empty string to deny all,`*` to accept all, or a list of comma-separated values | String |
+
+- **Description:** Cross-origin resource sharing settings for Model Runner web integration.
+- **OS:** {{< badge color=blue text="All" >}}
+- **Use case:** Allow web applications to connect to Model Runner services.
+- **Configure this setting with:**
+    - **Beta features** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
+    - Settings Management: `enableInferenceCORS` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
+
 ## Kubernetes settings
 
 ### Enable Kubernetes
@@ -812,62 +868,6 @@ third-party or unvetted plugins from being installed.
 - **Configure this setting with:**
     - **Beta** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
     - Settings Management: `enableDockerAI` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
-
-### Enable Docker Model Runner
-
-| Default value | Accepted values | Format   |
-|---------------|-----------------|----------|
-| `true`       | `true`, `false` | Boolean  |
-
-- **Description:** Docker Model Runner functionality for running AI models in containers.
-- **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Run and manage AI/ML models using Docker infrastructure.
-- **Configure this setting with:**
-    - **Beta** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
-    - Settings Management: `enableDockerAI` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
-
-#### Enable host-side TCP support
-
-| Default value | Accepted values | Format   |
-|---------------|-----------------|----------|
-| `false`       | `true`, `false` | Boolean  |
-
-- **Description:** TCP connectivity for Docker Model Runner services.
-- **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Allow external applications to connect to Model Runner via TCP.
-- **Configure this setting with:**
-    - **Beta** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
-    - Settings Management: `enableDockerAI` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
-
-> [!NOTE]
->
-> This setting requires Docker Model Runner setting to be enabled first.
-
-##### Port
-
-| Default value | Accepted values | Format  |
-|---------------|-----------------|---------|
-| 12434         | Integer         | Integer |
-
-- **Description:** Specific port used for Model Runner TCP connections.
-- **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Customize the port for Model Runner TCP connectivity.
-- **Configure this setting with:**
-    - **Beta features** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
-    - Settings Management: `enableInferenceTCP` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
-
-##### CORS Allowed Origins
-
-| Default value | Accepted values                                                                 | Format |
-|---------------|---------------------------------------------------------------------------------|--------|
-| Empty string  | Empty string to deny all,`*` to accept all, or a list of comma-separated values | String |
-
-- **Description:** Cross-origin resource sharing settings for Model Runner web integration.
-- **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Allow web applications to connect to Model Runner services.
-- **Configure this setting with:**
-    - **Beta features** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
-    - Settings Management: `enableInferenceCORS` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
 
 ### Enable Docker MCP Toolkit
 
