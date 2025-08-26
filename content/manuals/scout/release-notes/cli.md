@@ -9,6 +9,83 @@ This page contains information about the new features, improvements, known
 issues, and bug fixes in the Docker Scout [CLI plugin](https://github.com/docker/scout-cli/)
 and the `docker/scout-action` [GitHub Action](https://github.com/docker/scout-action).
 
+## 1.18.3
+
+{{< release-date date="2025-08-13" >}}
+
+### New
+
+- Add `docker scout vex get` command to retrieve a merged VEX document from all VEX attestations.
+
+### Bug fixes
+
+- Minor fixes for Docker Hardened Images (DHI).
+
+## 1.18.2
+
+{{< release-date date="2025-07-21" >}}
+
+### New
+
+- Add `--skip-tlog` flag to `docker scout attest get` to skip signature verification against the transparency log.
+
+### Enhancements
+
+- Add predicate type human-readable names for DHI FIPS and STIG attestations.
+
+### Bug fixes
+
+- Do not filter CVEs that are marked with a VEX `under_investigation` statement.
+- Minor fixes for Docker Hardened Images (DHI).
+
+## 1.18.1
+
+{{< release-date date="2025-05-26" >}}
+
+### Bug fixes
+
+- Fix issues with `docker scout attest list` and `docker scout attest get` for local images.
+
+## 1.18.0
+
+{{< release-date date="2025-05-13" >}}
+
+### New
+
+- Add `docker scout attest list` and `docker scout attest get` commands to list attestations.
+- Add support for Docker Hardened Images (DHI) VEX documents.
+
+## 1.16.1
+
+{{< release-date date="2024-12-13" >}}
+
+### Bug fixes
+
+- Fix in-toto subject digest for the `docker scout attestation add` command.
+
+## 1.16.0
+
+{{< release-date date="2024-12-12" >}}
+
+### New
+
+- Add secret scanning to the `docker scout sbom` command.
+- Add support for attestations for images from Tanzu Application Catalog.
+
+### Enhancements
+
+- Normalize licenses using the SPDX license list.
+- Make licenses unique.
+- Print platform in markdown output.
+- Keep original pattern to find nested matches.
+- Updates to make SPDX output spec-compliant.
+- Update Go, crypto module, and Alpine dependencies.
+
+### Bug fixes
+
+- Fix behavior with multiple images in the `docker scout attest` command.
+- Check directory existence before creating temporary file.
+
 ## 1.15.0
 
 {{< release-date date="2024-10-31" >}}
