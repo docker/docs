@@ -31,6 +31,43 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 >
 > If you're experiencing malware detection issues on Mac, follow the steps documented in [docker/for-mac#7527](https://github.com/docker/for-mac/issues/7527).
 
+## 4.45.0
+
+{{< release-date date="2025-08-26" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.45.0" build_path="/TODO/" >}}
+
+### New
+
+- [Docker Model Runner](/manuals/ai/model-runner/_index.md) is now generally available.
+- Docker Model Runner now supports GPT OSS models.
+
+### Upgrades
+
+- [Docker Compose v2.39.2](https://github.com/docker/compose/releases/tag/v2.39.2)
+- [Docker Buildx v0.27.0](https://github.com/docker/buildx/releases/tag/v0.27.0)
+- [Kubernetes v1.32.6](https://github.com/kubernetes/kubernetes/releases/tag/v1.32.6)
+- [Docker Scout CLI v1.18.3](https://github.com/docker/scout-cli/releases/tag/v1.18.3)
+- [Docker Engine v28.3.3](https://docs.docker.com/engine/release-notes/28/#2833)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed a bug that caused the `com.docker.diagnose` to crash when uploading a diagnostics bundle behind a proxy that requires authentication.
+
+#### For Windows
+
+- Fixed a bug that prevented CLI plugins from being deployed to `~/.docker/cli-plugins` by default when users lacked the correct permissions.
+- Fixed a bug where relocating the WSL data distribution would fail if the `docker-desktop` distribution was not present.
+- Fixed a typo in the WSL install URL in the Docker Desktop Dashboard.
+
+#### For Mac
+
+- Fixed a bug that caused Docker Desktop to crash after the laptop woke from sleep. Fixes [docker/for-mac#7741](https://github.com/docker/for-mac/issues/7741).
+- Fixed an issue where the VM would sometimes fail with the error **The virtual machine stopped unexpectedly.**
+- Fixed a bug that would break port mappings when a container was connected to or disconnected from a network after it was started. Fixes [docker/for-mac#7693](https://github.com/docker/for-mac/issues/7693).
+
 ## 4.44.3
 
 {{< release-date date="2025-08-20" >}}
