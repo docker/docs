@@ -40,7 +40,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ### New
 
 - [Docker Model Runner](/manuals/ai/model-runner/_index.md) is now generally available.
-- Docker Model Runner now supports GPT OSS models.
 
 ### Upgrades
 
