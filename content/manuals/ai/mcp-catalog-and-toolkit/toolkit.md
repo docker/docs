@@ -17,6 +17,10 @@ from tool usage by offering secure defaults, one-click setup, and support for a
 growing ecosystem of LLM-based clients. It is the fastest way from MCP tool
 discovery to local execution.
 
+> [!NOTE]
+> If you need to run your own MCP gateway,
+> see [Docker MCP Gateway](../mcp-gateway/_index.md).
+
 ## Key features
 
 - Cross-LLM compatibility: Instantly works with Claude Desktop, Cursor, Continue.dev, and [Gordon](/manuals/ai/gordon/_index.md).
