@@ -147,6 +147,11 @@ $ docker scout attest get \
   --verify --skip-tlog
 ```
 
+> [!NOTE]
+>
+> The `--skip-tlog` flag is only available in Docker Scout CLI version 1.18.3 and
+> later.
+
 This is equivalent to using `cosign` with the `--insecure-ignore-tlog=true`
 flag, which validates the signature against Docker's published public key, but
 ignores the transparency log check.
