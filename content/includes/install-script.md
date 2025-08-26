@@ -53,7 +53,7 @@ Executing docker install script, commit: 7cae5f8b0decc17d6571f9f52eb840fbc13b273
 
 You have now successfully installed and started Docker Engine. The `docker`
 service starts automatically on Debian based distributions. On `RPM` based
-distributions, such as CentOS, Fedora, RHEL or SLES, you need to start it
+distributions, such as CentOS, Fedora or RHEL, you need to start it
 manually using the appropriate `systemctl` or `service` command. As the message
 indicates, non-root users can't run Docker commands by default.
 
