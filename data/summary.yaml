@@ -166,7 +166,6 @@ Docker Hardened Images:
 Docker Init:
   requires: Docker Desktop [4.27](/manuals/desktop/release-notes.md#4270) and later
 Docker Model Runner:
-  availability: Beta
   requires: Docker Engine or Docker Desktop (Windows) 4.41+ or Docker Desktop (MacOS) 4.40+
   for: See Requirements section below
 Docker MCP Catalog and Toolkit:
