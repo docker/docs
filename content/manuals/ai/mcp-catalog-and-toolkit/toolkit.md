@@ -17,6 +17,10 @@ from tool usage by offering secure defaults, one-click setup, and support for a
 growing ecosystem of LLM-based clients. It is the fastest way from MCP tool
 discovery to local execution.
 
+> [!NOTE]
+> If you need to run your own MCP gateway,
+> see [Docker MCP Gateway](../mcp-gateway/_index.md).
+
 ## Key features
 
 - Cross-LLM compatibility: Instantly works with Claude Desktop, Cursor, Continue.dev, and [Gordon](/manuals/ai/gordon/_index.md).
@@ -45,12 +49,12 @@ container as the server or in dedicated containers:
 {{< tabs group="" >}}
 {{< tab name="Single container">}}
 
-![Screenshot showing a single-container MCP Toolkit setup.](/assets/images/mcp_servers.png)
+![Screenshot showing a single-container MCP Toolkit setup.](./images/mcp-servers.svg)
 
 {{< /tab >}}
 {{< tab name="Separate containers">}}
 
-![Screenshot showing a multi-container MCP Toolkit setup.](/assets/images/mcp_servers_2.png)
+![Screenshot showing a multi-container MCP Toolkit setup.](./images/mcp-servers-2.svg)
 
 {{< /tab >}}
 {{</tabs >}}

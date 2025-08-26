@@ -40,6 +40,8 @@ With Docker Hub and the MCP Toolkit, you can:
 - Add tools using the CLI or GUI.
 - Rely on Docker's pull-based infrastructure for trusted delivery.
 
+![MCP overview](./images/mcp-overview.svg)
+
 ## MCP servers
 
 MCP servers are systems that use the [Model Context Protocol](https://www.anthropic.com/news/model-context-protocol) (MCP) to help manage
@@ -48,16 +50,21 @@ parts of a system, like the model, data, and runtime environment, to
 communicate in a standardized way. You can see them as
 add-ons that provide specific tools to an LLM.
 
+![Example of the GitHub MCP server](./images/mcp-servers-overview.svg)
+
 > [!TIP]
 > Example:
-> If you ask a model to create a meeting, it needs to communicate with your calendar app to do that.
+> If you work in Visual Studio Code's _agent mode_ and ask it to create a
+> branch in GitHub, it needs an MCP server provided by GitHub to do that.
 >
-> An MCP server provided by your calendar app provides _tools_ to your model to perform atomic
-> actions, like:
+> The MCP server provided by GitHub provides _tools_ to your model to perform
+> atomic actions, like:
 >
-> - `get the details of a meeting`
-> - `create a new meeting`
+> - `Create a PR`
+> - `Create a branch`
 > - ...
+>
 
+## Learn more
 
 {{< grid >}}
