@@ -1,10 +1,14 @@
 # Docs @ Docker
 
-<img src="static/assets/images/docker-docs.png" alt="Welcome to Docker Documentation" style="max-width: 45%;">
+<div align="center">
+<img src="static/assets/images/docker-docs.svg" alt="Welcome to Docker Documentation">
+</div>
+<br/>
+<br/>
 
 Welcome to the Docker Documentation repository. This is the source for the [Docker Docs Website](https://docs.docker.com/).
 
-We welcome your contributions—feel free to open pull requests or issues. Our docs are completely open source, and we deeply appreciate contributions from the Docker community!
+Feel free to open pull requests or issues. Our docs are completely open source, and we deeply appreciate contributions from the Docker community!
 
 ## Provide feedback
 
