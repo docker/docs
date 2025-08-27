@@ -1,6 +1,6 @@
 ---
 title: Configure Docker Offload
-linktitle: Configuration & billing
+linktitle: Configuration
 weight: 20
 description: Learn how to configure settings for Docker Offload.
 keywords: cloud, configuration, settings, GPU
@@ -12,8 +12,6 @@ The following Docker Offload settings can be configured:
      Docker Offload in your organization.
    - [Offload access](#offload-access): Configure Offload availability for
      members of your organization.
-   - [Offload billing](#offload-billing): View and configure billing for Docker
-     Offload.
 
 ## Run settings
 
@@ -47,22 +45,3 @@ organization owner:
    > Offload in Docker Desktop.
 
 
-## Offload billing
-
-> [!NOTE]
->
-> All free trial credits granted for the Docker Offload Beta expire after 90
-> days from the time they are granted. To continue using Docker Offload after
-> your credits expire, you can enable on-demand usage at [Docker Home
-> Billing](https://app.docker.com/billing).
-
-For Docker Offload, you can view and configure billing on the **Docker Offload**
-page in [Docker Home Billing](https://app.docker.com/billing). In Docker Home
-Billing, you can:
-
-- View your Docker Offload usage summary
-- View rates for cloud resources
-- Manage on-demand usage
-- Add or change payment methods
-
-For more general information about billing, see [Billing](../billing/_index.md).
