@@ -12,11 +12,10 @@ Docker Offload requires:
 - Authentication
 - An active internet connection
 - No restrictive proxy or firewall blocking traffic to Docker Cloud
-- Beta access to Docker Offload
-- Docker Desktop 4.43 or later
+- Docker Desktop 4.46 or later
 
-Docker Desktop uses Offload to run both builds and containers in the cloud.
-If builds or containers are failing to run, falling back to local, or reporting
+Docker Desktop uses Offload to run containers in the cloud.
+If containers are failing to run, falling back to local, or reporting
 session errors, use the following steps to help resolve the issue.
 
 1. Ensure Docker Offload is enabled in Docker Desktop:
