@@ -6,11 +6,6 @@ keywords: build, buildx, bake, file, remote, git, http
 
 You can build Bake files directly from a remote Git repository or HTTPS URL:
 
-
-
-
-
-
 {{<tabs>}}
 
 {{<tab name="Git HTTPS">}}
@@ -35,6 +30,8 @@ docker buildx bake "git@github.com:docker/cli.git#v20.10.11" --print
 docker buildx bake "https://raw.githubusercontent.com/docker/cli/v20.10.11/docker-bake.hcl" --print
 ```
 {{</tab>}}
+
+{{</tabs>}}
 
 This fetches the Bake definition from the specified remote location and
 executes the groups or targets defined in that file. If the remote Bake
