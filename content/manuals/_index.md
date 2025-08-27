@@ -60,7 +60,7 @@ params:
     icon: /icons/dhi.svg
     link: /dhi/
   - title: Docker Offload
-    description: Build and run containers in the cloud.
+    description: Run containers on GPU-accelerated infrastructure in the cloud.
     icon: cloud
     link: /offload/
   - title: Build Cloud
