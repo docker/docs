@@ -26,7 +26,7 @@ hosted cloud environment, enabling a seamless hybrid experience.
 
 Docker Offload is useful in virtual desktop environments where nested
 virtualization isn't supported. In these environments, Docker Desktop defaults
-to using Docker Offload to ensure you can still build and run containers without
+to using Docker Offload to ensure you can still run containers without
 relying on local virtualization.
 
 Docker Offload decouples the Docker Desktop client from the Docker Engine,
