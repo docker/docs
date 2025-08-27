@@ -10,10 +10,30 @@ usage: docker model run MODEL [PROMPT]
 pname: docker model
 plink: docker_model.yaml
 options:
+    - option: backend
+      value_type: string
+      description: Specify the backend to use (llama.cpp, openai)
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: debug
       value_type: bool
       default_value: "false"
       description: Enable debug logging
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: ignore-runtime-memory-check
+      value_type: bool
+      default_value: "false"
+      description: |
+        Do not block pull if estimated runtime memory for model exceeds system resources.
       deprecated: false
       hidden: false
       experimental: false

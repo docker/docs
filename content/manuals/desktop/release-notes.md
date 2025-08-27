@@ -31,6 +31,111 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 >
 > If you're experiencing malware detection issues on Mac, follow the steps documented in [docker/for-mac#7527](https://github.com/docker/for-mac/issues/7527).
 
+## 4.44.3
+
+{{< release-date date="2025-08-20" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.44.3" build_path="/202357/" >}}
+
+### Security 
+
+- Fixed [CVE-2025-9074](https://www.cve.org/CVERecord?id=CVE-2025-9074) where a malicious container running on Docker Desktop could access the Docker Engine and launch additional containers without requiring the Docker socket to be mounted. This could allow unauthorized access to user files on the host system. Enhanced Container Isolation (ECI) does not mitigate this vulnerability.
+
+### Bug fixes and enhancements
+
+- Fixed a bug which caused the Docker Offload dialog to block users from accessing the dashboard.
+
+## 4.44.2
+
+{{< release-date date="2025-08-15" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.44.2" build_path="/202017/" >}}
+
+### Bug fixes and enhancements
+
+ - Adds [Docker Offload](/manuals/offload/_index.md) to the **Beta features** settings tab and includes updates to support [Docker Offload Beta](https://www.docker.com/products/docker-offload/).
+
+## 4.44.1
+
+{{< release-date date="2025-08-13" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.44.1" build_path="/201842/" >}}
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed an issue found in version 4.44.0 that caused startup to fail when `vpnkit` CIDR is locked without specifying a value in Desktop Settings Management.
+
+#### For Windows
+
+- Fixed an issue where volumes and containers were not visible after an upgrade from distributions using the legacy `version-pack-data` directory structure.
+- Resolved a rare issue in WSL 2 where the Docker CLI failed with a **Proxy Authentication Required** error.
+- Fixed a bug where CLI plugins were not deployed to `~/.docker/cli-plugins` if the user lacked execution permissions on that directory.
+
+## 4.44.0
+
+{{< release-date date="2025-08-07" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.44.0" build_path="/201307/" >}}
+
+### New
+
+- WSL 2 stability improvements.
+- You can now inspect requests and responses to help you diagnose model-related issues in Docker Model Runner.
+- Added the ability to run multiple models and receive a warning on insufficient resources. This avoids Docker Desktop freezing when using big models.
+- Added new MCP clients to the MCP Toolkit: Gemini CLI, Goose.
+- Introduced `--gpu` (Windows only) and `--cors` flags for `docker desktop enable model-runner`.
+- Added a new `docker desktop kubernetes` command to the Docker Desktop CLI.
+- You can now search for specific configuration options within **Settings**.
+- Apple Virtualization is now the default VMM for better performance and QEMU Virtualization is removed. See [blog post](https://www.docker.com/blog/docker-desktop-for-mac-qemu-virtualization-option-to-be-deprecated-in-90-days/).
+- Performance and stability improvements to the DockerVMM.
+
+### Upgrades
+
+- [Docker Compose v2.39.1](https://github.com/docker/compose/releases/tag/v2.39.1)
+- [Docker Buildx v0.26.1](https://github.com/docker/buildx/releases/tag/v0.26.1)
+- [Docker Engine v28.3.2](https://docs.docker.com/engine/release-notes/28/#2832)
+- [Docker Scout CLI v1.18.2](https://github.com/docker/scout-cli/releases/tag/v1.18.2)
+- [Docker Model CLI v0.1.36](https://github.com/docker/model-cli/releases/tag/v0.1.36)
+- [Docker Desktop CLI v0.2.0](/manuals/desktop/features/desktop-cli.md)
+
+### Security 
+
+We are aware of [CVE-2025-23266](https://nvd.nist.gov/vuln/detail/CVE-2025-23266), a critical vulnerability affecting the NVIDIA Container Toolkit in CDI mode up to version 1.17.7. Docker Desktop includes version 1.17.8, which is not impacted. However, older versions of Docker Desktop that bundled earlier toolkit versions may be affected if CDI mode was manually enabled. Uprade to Docker Desktop 4.44 or later to ensure you're using the patched version.
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed an issue pulling images with zstd differential layers when the containerd image store is enabled.
+- Fixed a bug causing containers launching  with the `--restart` flag to not restart properly when using Enhanced Container Isolation.
+- Improved interaction between [Kubernetes custom registry images](/manuals/desktop/features/kubernetes.md#configuring-a-custom-image-registry-for-kubernetes-control-plane-images) and Enhanced Container Isolation (ECI), so the [ECI Docker Socket image list](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/config.md) no longer needs to be manually updated when using a custom registry for Kubernetes control plane images.
+- Fixed a bug where a Docker Desktop Kubernetes cluster in kind mode fails to start after restarting Docker Desktop if the user is required to be signed in but is currently signed out.
+- Fixed a bug that prevented the mounting of MCP secrets into containers when [Enhanced Container Isolation](/enterprise/security/hardened-desktop/enhanced-container-isolation/) is enabled.
+- Fixed a bug preventing the use of `--publish-all` when `--publish` was already specified.
+- Fixed a bug causing the **Images** view to scroll infinitely. Fixes [docker/for-mac#7725](https://github.com/docker/for-mac/issues/7725).
+- Fixed a bug which caused the **Volumes** tab to be blank while in Resource Saver mode.
+- Updated terms of service text on first launch.
+- More robustness in parsing newly released GGUF formats.
+
+#### For Mac
+
+- Fixed disk corruption on DockerVMM when reclaiming disk space.
+- Fixed regression since 4.42.0 on DockerVMM by re-introducing performance boost on general usage.
+- Removed QEMU hypervisor and switched to Apple Virtualization as the new default. See [blog post](https://www.docker.com/blog/docker-desktop-for-mac-qemu-virtualization-option-to-be-deprecated-in-90-days/).
+- Fixed a bug preventing Traefik from autodetecting containers' ports. Fixes [docker/for-mac#7693](https://github.com/docker/for-mac/issues/7693).
+- Fixed a bug that caused port mappings to break when a container was connected to or disconnected from a network after it was started. Fixes [docker/for-mac#7693](https://github.com/docker/for-mac/issues/7693#issuecomment-3131427879).
+- Removed eBPF which blocked `io_uring`. To enable `io_uring` in a container, use `--security-opt seccomp=unconfined`. Fixes [docker/for-mac#7707](https://github.com/docker/for-mac/issues/7707).
+
+#### For Windows
+
+- Re-added `docker-users` group to the named pipe security descriptors.
+- Fixed an installer crash when the current user has no `SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall` registry key.
+- Fixed a bug where Docker Desktop could leak a `com.docker.build` process and fail to start. Fixed [docker/for-win#14840](https://github.com/docker/for-win/issues/14840).
+- Fixed a bug that was preventing Docker Desktop Kubernetes in kind mode from starting when using WSL with `cgroups v1` and Enhanced Container Isolation (ECI) is enabled.
+- Fixed a typo in the WSL installation URL in the UI.
+
 ## 4.43.2
 
 {{< release-date date="2025-07-15" >}}
@@ -412,8 +517,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2025-01-30" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Beta" version="4.38.0" build_path="/181591/" >}}
-
 ### New
 
 - Installing Docker Desktop via the PKG installer is now generally available.
@@ -479,8 +582,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2025-01-09" >}}
 
-{{< desktop-install-v2 mac=true version="4.37.2" build_path="/179585/" >}}
-
 ### Bug fixes and enhancements
 
 #### For Mac
@@ -496,8 +597,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ## 4.37.1
 
 {{< release-date date="2024-12-17" >}}
-
-{{< desktop-install-v2 all=true win_arm_release="Beta" version="4.37.1" build_path="/178610/" >}}
 
 ### Bug fixes and enhancements
 
@@ -515,8 +614,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ## 4.37.0
 
 {{< release-date date="2024-12-12" >}}
-
-{{< desktop-install-v2 all=true win_arm_release="Beta" version="4.37.0" build_path="/178034/" >}}
 
 ### New
 
@@ -576,8 +673,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2025-01-09" >}}
 
-{{< desktop-install-v2 mac=true version="4.36.1" build_path="/179655/" >}}
-
 ### Bug fixes and enhancements
 
 #### For Mac
@@ -593,8 +688,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ## 4.36.0
 
 {{< release-date date="2024-11-18" >}}
-
-{{< desktop-install-v2 all=true win_arm_release="Beta" version="4.36.0" build_path="/175267/" >}}
 
 ### New
 
@@ -656,7 +749,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2025-01-09" >}}
 
-{{< desktop-install-v2 mac=true version="4.35.2" build_path="/179656/" >}}
 
 ### Bug fixes and enhancements
 
@@ -674,8 +766,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2024-10-30" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Beta" version="4.35.1" build_path="/173168/" >}}
-
 #### For all platforms
 
 - Fixed a bug where Docker Desktop would incorrectly bind to port `8888`. Fixes [docker/for-win#14389](https://github.com/docker/for-win/issues/14389) and [docker/for-mac#7468](https://github.com/docker/for-mac/issues/7468)
@@ -683,8 +773,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ## 4.35.0
 
 {{< release-date date="2024-10-24" >}}
-
-{{< desktop-install-v2 all=true win_arm_release="Beta" version="4.35.0" build_path="/172550/" >}}
 
 ### New
 
@@ -760,8 +848,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2025-01-09" >}}
 
-{{< desktop-install-v2 mac=true version="4.34.4" build_path="/179671/" >}}
-
 ### Bug fixes and enhancements
 
 #### For Mac
@@ -794,8 +880,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2024-09-12" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Beta" version="4.34.2" build_path="/167172/" >}}
-
 ### Bug fixes and enhancements
 
 #### For all platforms
@@ -822,8 +906,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ## 4.34.0
 
 {{< release-date date="2024-08-29" >}}
-
-{{< desktop-install-v2 all=true win_arm_release="Beta" version="4.34.0" build_path="/165256/" >}}
 
 ### New
 
@@ -885,8 +967,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< release-date date="2025-01-09" >}}
 
-{{< desktop-install-v2 mac=true version="4.33.2" build_path="/179689/" >}}
-
 ### Bug fixes and enhancements
 
 #### For Mac
@@ -902,8 +982,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ## 4.33.1
 
 {{< release-date date="2024-07-31" >}}
-
-{{< desktop-install-v2 win=true win_arm_release="Beta" version="4.33.0" build_path="/161083/" >}}
 
 ### Bug fixes and enhancements
 
@@ -1007,7 +1085,6 @@ For more information, see [microsoft/WSL#11794](https://github.com/microsoft/WSL
 
 {{< release-date date="2024-07-04" >}}
 
-{{< desktop-install-v2 all=true win_arm_release="Beta" version="4.32.0" build_path="/157355/" >}}
 
 ### New
 
@@ -1167,8 +1244,6 @@ For more information, see [microsoft/WSL#11794](https://github.com/microsoft/WSL
 
 {{< release-date date="2024-05-06" >}}
 
-{{< desktop-install all=true win_arm_release="Beta" version="4.30.0" build_path="/149282/" >}}
-
 ### New
 
 #### For all platforms
@@ -1248,8 +1323,6 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 ## 4.29.0
 
 {{< release-date date="2024-04-08" >}}
-
-{{< desktop-install all=true win_arm_release="Beta" version="4.29.0" build_path="/145265/" >}}
 
 ### New
 

@@ -1,0 +1,13 @@
+command: docker mcp version
+short: Show the version information
+long: Show the version information
+usage: docker mcp version
+pname: docker mcp
+plink: docker_mcp.yaml
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

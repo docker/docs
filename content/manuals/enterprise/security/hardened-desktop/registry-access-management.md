@@ -1,7 +1,7 @@
 ---
-description: Control access to approved registries with Registry Access Management, ensuring secure Docker Desktop usage
-keywords: registry, access, management, permissions, Docker Business feature, security, admin
 title: Registry Access Management
+description: Control access to approved container registries with Registry Access Management for secure Docker Desktop usage
+keywords: registry access management, container registry, security controls, docker business, admin controls
 tags: [admin]
 aliases:
  - /desktop/hardened-desktop/registry-access-management/
@@ -14,94 +14,132 @@ weight: 30
 
 {{< summary-bar feature_name="Registry access management" >}}
 
-With Registry Access Management (RAM), administrators can ensure that their
-developers using Docker Desktop only access allowed registries. This is done
-through the Registry Access Management dashboard in Docker Hub or the
-Docker Admin Console.
+Registry Access Management (RAM) lets administrators control which container registries developers can access through Docker Desktop. This DNS-level filtering ensures developers only pull and push images from approved registries, improving supply chain security.
 
-Registry Access Management supports both cloud and on-prem registries. This
-feature operates at the DNS level and therefore is compatible with all
-registries. You can add any hostname or domain name you’d like to include in the
-list of allowed registries. However, if the registry redirects to other domains
-such as `s3.amazon.com`, then you must add those domains to the list.
+RAM works with all registry types including cloud services, on-premises registries, and registry mirrors. You can allow any hostname or domain, but must include redirect domains (like `s3.amazonaws.com` for some registries) in your allowlist.
 
-Example registries administrators can allow include:
+## Supported registries
 
- - Docker Hub. This is enabled by default.
- - Amazon ECR
- - GitHub Container Registry
- - Google Container Registry
- - GitLab Container Registry
- - Nexus
- - Artifactory
+Registry Access Management works with any container registry, including:
+
+ - Docker Hub (allowed by default)
+- Cloud registries: Amazon ECR, Google Container Registry, Azure Container Registry
+- Git-based registries: GitHub Container Registry, GitLab Container Registry
+- On-premises solutions: Nexus, Artifactory, Harbor
+- Registry mirrors: Including Docker Hub mirrors
 
 ## Prerequisites
 
-You must [enforce sign-in](../enforce-sign-in/_index.md). For Registry Access
-Management to take effect, Docker Desktop users must authenticate to your
-organization. Enforcing sign-in ensures that your Docker Desktop developers
-always authenticate to your organization, even though they can authenticate
-without it and the feature will take effect. Enforcing sign-in guarantees the
-feature always takes effect.
+Before configuring Registry Access Management, you must:
+
+- [Enforce sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md) to ensure users authenticate with your organization
+- Use [personal access tokens (PATs)](/manuals/security/access-tokens.md) for authentication (Organization access tokens aren't supported)
+- Have a Docker Business subscription
 
 > [!IMPORTANT]
 >
-> You must use [personal access tokens (PATs)](/manuals/security/access-tokens.md) with Registry Access Management. Organization access tokens (OATs) are not compatible.
+> Registry Access Management only takes effect when users are signed in to Docker Desktop with organization credentials.
 
-## Configure Registry Access Management permissions
+## Configure registry permissions
 
-{{< tabs >}}
-{{< tab name="Admin Console" >}}
+To configure registry permissions:
 
-{{% admin-registry-access product="admin" %}}
+1. Sign in to [Docker Home](https://app.docker.com) and select your organization.
+1. Select **Admin Console**, then **Regsitry access**.
+1. Use the **toggle** to enable registry access. By default, Docker Hub is enabled
+in the registry list.
+1. To add additional registries, select **Add registry** and provide
+a **Registry address** and **Registry nickname**.
+1. Select **Create**. You can add up to 100 registries.
+1. Verify your registry appears in the registry list and select **Save changes**.
 
-{{< /tab >}}
-{{< tab name="Docker Hub" >}}
+Changes can take up to 24 hours to take effect. To apply them sooner,
+have developers sign out and back in to Docker Desktop.
 
-{{% include "hub-org-management.md" %}}
+> [!IMPORTANT]
+>
+> Starting with Docker Desktop 4.36, if a developer belongs to multiple organizations with different RAM policies, only the policy for the first organization in the configuration file is enforced.
 
-{{% admin-registry-access product="hub" %}}
+> [!TIP]
+>
+> RAM restrictions also apply to Dockerfile `ADD` instructions that fetch content via URL. Include trusted registry domains in your allowlist when using `ADD` with URLs.
+><br><br>
+> RAM is designed for container registries, not general-purpose URLs like package mirrors or storage services. Adding too many domains may cause errors or hit system limits.
 
-{{< /tab >}}
-{{< /tabs >}}
 
-## Verify the restrictions
+## Verify restrictions are working
 
-The new Registry Access Management policy takes effect after the developer
-successfully authenticates to Docker Desktop using their organization
-credentials. If a developer attempts to pull an image from a disallowed
-registry via the Docker CLI, they receive an error message that the organization
-has disallowed this registry.
+After users sign in to Docker Desktop with their organization credentials, Registry Access Management takes effect immediately.
 
-## Caveats
+When users try to pull from a blocked registry:
 
-There are certain limitations when using Registry Access Management:
+```console
+$ docker pull blocked-registry.com/image:tag
+Error response from daemon: registry access to blocked-registry.com is not allowed
+```
 
-- You can add up to 100 registries/domains.
-- Windows image pulls and image builds are not restricted by default. For
-Registry Access Management to take effect on Windows Container mode, you must
-allow the Windows Docker daemon to use Docker Desktop's internal proxy by
-selecting the [Use proxy for Windows Docker daemon](/manuals/desktop/settings-and-maintenance/settings.md#proxies)
-setting.
-- Builds such as `docker buildx` using a Kubernetes driver are not restricted.
-- Builds such as `docker buildx` using a custom docker-container driver are not
-restricted.
-- Blocking is DNS-based. You must use a registry's access control mechanisms to
-distinguish between “push” and “pull”.
-- WSL 2 requires at least a 5.4 series Linux kernel (this does not apply to
-earlier Linux kernel series).
-- Under the WSL 2 network, traffic from all Linux distributions is restricted.
-This will be resolved in the updated 5.15 series Linux kernel.
-- Images pulled by Docker Desktop when Docker Debug or Kubernetes is enabled,
-are not restricted by default even if Docker Hub is blocked by RAM.
-- If Docker Hub access is restricted by RAM, pulls on images originating from Docker Hub are restricted even if the image has been previously cached by a registry mirror. See [Using Registry Access Management (RAM) with a registry mirror](/manuals/docker-hub/image-library/mirror.md).
+Allowed registry access works normally:
 
-Also, Registry Access Management operates on the level of hosts, not IP
-addresses. Developers can bypass this restriction within their domain
-resolution, for example by running Docker against a local proxy or modifying
-their operating system's `sts` file. Blocking these forms of manipulation is
-outside the remit of Docker Desktop.
+```console
+$ docker pull allowed-registry.com/image:tag
+# Pull succeeds
+```
 
-## More resources
+Registry restrictions apply to all Docker operations including pulls, pushes,
+and builds that reference external registries.
 
-- [Video: Hardened Desktop Registry Access Management](https://www.youtube.com/watch?v=l9Z6WJdJC9A)
+## Registry limits and platform constraints
+
+Registry Access Management has these limits and platform-specific behaviors:
+
+- Maximum allowlist size: 100 registries or domains per organization
+- DNS-based filtering: Restrictions work at the hostname level, not IP addresses
+- Redirect domains required: Must include all domains a registry redirects to (CDN endpoints, storage services)
+- Windows containers: Windows image operations aren't restricted by default. Turn on **Use proxy for Windows Docker daemon** in Docker Desktop settings to apply restrictions
+- WSL 2 requirements: Requires Linux kernel 5.4 or later, restrictions apply to all WSL 2 distributions
+
+## Build and deployment restrictions
+
+These scenarios are not restricted by Registry Access Management:
+
+- Docker buildx with Kubernetes driver
+- Docker buildx with custom docker-container driver
+- Some Docker Debug and Kubernetes image pulls (even if Docker Hub is blocked)
+- Images previously cached by registry mirrors may still be blocked if the source registry is restricted
+
+## Security bypass considerations
+
+Users can potentially bypass Registry Access Management through:
+
+- Local proxies or DNS manipulation
+- Signing out of Docker Desktop (unless sign-in is enforced)
+- Network-level modifications outside Docker Desktop's control
+
+To maximize security effectiveness:
+
+- [Enforce sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md) to prevent bypass through sign-out
+- Implement additional network-level controls for complete protection
+- Use Registry Access Management as part of a broader security strategy
+
+## Registry allowlist best practices
+
+- Include all registry domains: Some registries redirect to multiple
+domains. For AWS ECR, include:
+
+    ```text
+    your-account.dkr.ecr.us-west-2.amazonaws.com
+    amazonaws.com
+    s3.amazonaws.com
+    ```
+
+- Practice regular allowlist maintenance:
+    - Remove unused registries periodically
+    - Add newly approved registries as needed
+    - Update domain names that may have changed
+    - Monitor registry usage through Docker Desktop analytics
+- Test configuration changes:
+    - Verify registry access after making allowlist updates
+    - Check that all necessary redirect domains are included
+    - Ensure development workflows aren't disrupted
+    - Combine with [Enhanced Container Isolation](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/_index.md) for comprehensive protection
+    

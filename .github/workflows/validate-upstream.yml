@@ -34,12 +34,12 @@ jobs:
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: docker/docs
       -
         name: Download data files
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         if: ${{ inputs.data-files-id != '' && inputs.data-files-folder != '' }}
         with:
           name: ${{ inputs.data-files-id }}

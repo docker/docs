@@ -37,7 +37,7 @@ jobs:
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-      
+
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
@@ -67,10 +67,10 @@ jobs:
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-      
+
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
@@ -108,10 +108,10 @@ jobs:
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-      
+
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
@@ -124,13 +124,13 @@ jobs:
 > [!IMPORTANT]
 >
 > Starting [April 15th, 2025, only GitHub Cache service API v2 will be supported](https://gh.io/gha-cache-sunset).
-> 
+>
 > If you encounter the following error during your build:
-> 
+>
 > ```console
 > ERROR: failed to solve: This legacy service is shutting down, effective April 15, 2025. Migrate to the new service ASAP. For more information: https://gh.io/gha-cache-sunset
 > ```
-> 
+>
 > You're probably using outdated tools that only support the legacy GitHub
 > Cache service API v1. Here are the minimum versions you need to upgrade to
 > depending on your use case:
@@ -138,33 +138,33 @@ jobs:
 > * BuildKit >= v0.20.0
 > * Docker Compose >= v2.33.1
 > * Docker Engine >= v28.0.0 (if you're building using the Docker driver with containerd image store enabled)
-> 
+>
 > If you're building using the `docker/build-push-action` or `docker/bake-action`
 > actions on GitHub hosted runners, Docker Buildx and BuildKit are already up
 > to date but on self-hosted runners, you may need to update them yourself.
 > Alternatively, you can use the `docker/setup-buildx-action` action to install
 > the latest version of Docker Buildx:
-> 
+>
 > ```yaml
 > - name: Set up Docker Buildx
 >   uses: docker/setup-buildx-action@v3
 >   with:
 >    version: latest
 > ```
-> 
+>
 > If you're building using Docker Compose, you can use the
 > `docker/setup-compose-action` action:
-> 
+>
 > ```yaml
 > - name: Set up Docker Compose
 >   uses: docker/setup-compose-action@v1
 >   with:
 >    version: latest
 > ```
-> 
+>
 > If you're building using the Docker Engine with the containerd image store
 > enabled, you can use the `docker/setup-docker-action` action:
-> 
+>
 > ```yaml
 > -
 >   name: Set up Docker
@@ -182,7 +182,7 @@ jobs:
 ### Cache mounts
 
 BuildKit doesn't preserve cache mounts in the GitHub Actions cache by default.
-If you wish to put your cache mounts into GitHub Actions cache and reuse it
+To put your cache mounts into GitHub Actions cache and reuse it
 between builds, you can use a workaround provided by
 [`reproducible-containers/buildkit-cache-dance`](https://github.com/reproducible-containers/buildkit-cache-dance).
 
@@ -224,7 +224,7 @@ jobs:
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 

@@ -98,7 +98,7 @@ Compose gw priority:
 Compose include:
   requires: Docker Compose [2.20.3](/manuals/compose/releases/release-notes.md#2203) and later
 Compose interface-name:
-  requires: Docker Compose [2.36.0](/manuals/compose/releases/release-notes.md#2203) and later
+  requires: Docker Compose [2.36.0](/manuals/compose/releases/release-notes.md#2360) and later
 Compose label file:
   requires: Docker Compose [2.32.2](/manuals/compose/releases/release-notes.md#2232) and later
 Compose lifecycle hooks:
@@ -157,6 +157,8 @@ Docker Desktop CLI update:
   requires: Docker Desktop 4.39 and later
 Docker Desktop CLI logs:
   requires: Docker Desktop 4.39 and later
+Docker Desktop CLI kubernetes:
+  requires: Docker Desktop 4.44 and later
 Docker GitHub Copilot:
   availability: Early Access
 Docker Hardened Images:
@@ -167,6 +169,12 @@ Docker Model Runner:
   availability: Beta
   requires: Docker Engine or Docker Desktop (Windows) 4.41+ or Docker Desktop (MacOS) 4.40+
   for: See Requirements section below
+Docker MCP Catalog and Toolkit:
+  availability: Beta
+Docker MCP Catalog:
+  availability: Beta
+Docker MCP Toolkit:
+  availability: Beta
 Docker Projects:
   availability: Beta
 Docker Scout exceptions:
@@ -236,6 +244,7 @@ SOCKS5 proxy support:
 SSO:
   subscription: [Business]
   for: Administrators
+  requires: Docker Desktop [4.42](/manuals/desktop/release-notes.md#4420) and later
 Synchronized file sharing:
   subscription: [Pro, Team, Business]
 USB/IP support:

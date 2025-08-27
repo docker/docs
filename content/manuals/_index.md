@@ -36,7 +36,7 @@ params:
     description: Manage and secure your AI tools with a single gateway.
     icon: /icons/toolkit.svg
     link: /ai/mcp-gateway/
-    
+
   ai:
   - title: Ask Gordon
     description: Streamline your workflow and get the most out of the Docker ecosystem with your personal AI assistant.
@@ -44,7 +44,7 @@ params:
     link: /ai/gordon/
   - title: Docker Model Runner
     description: View and manage your local models.
-    icon: view_in_ar
+    icon: /icons/models.svg
     link: /ai/model-runner/
   - title: MCP Catalog and Toolkit
     description: Augment your AI workflow with MCP servers.
@@ -126,7 +126,7 @@ Open source development and containerization technologies.
 
 ## AI
 
-All the Docker AI tools in one easy-to-access location. 
+All the Docker AI tools in one easy-to-access location.
 
 {{< grid items=ai >}}
 
@@ -145,6 +145,6 @@ subscription management.
 
 ## Enterprise
 
-Targeted at IT administrators with help on deploying Docker Desktop at scale with configuration guidance on security related features. 
+Targeted at IT administrators with help on deploying Docker Desktop at scale with configuration guidance on security related features.
 
 {{< grid items=enterprise >}}

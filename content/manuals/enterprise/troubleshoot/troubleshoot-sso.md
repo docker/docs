@@ -1,8 +1,8 @@
 ---
-description: Learn how to troubleshoot common SSO issues.
-keywords: sso, troubleshoot, single sign-on
 title: Troubleshoot single sign-on
 linkTitle: Troubleshoot SSO
+description: Troubleshoot common Docker single sign-on configuration and authentication issues
+keywords: sso troubleshooting, single sign-on errors, authentication issues, identity provider problems
 tags: [Troubleshooting]
 toc_max: 2
 aliases:
@@ -10,13 +10,11 @@ aliases:
     - /security/troubleshoot/troubleshoot-sso/
 ---
 
-While configuring or using single sign-on (SSO), you may encounter issues that
-can stem from your identity provider (IdP) or Docker configuration. The
-following sections describe some common SSO errors and possible solutions.
+This page describes common single sign-on (SSO) errors and their solutions. Issues can stem from your identity provider (IdP) configuration or Docker settings.
 
 ## Check for errors
 
-If you experience issues with SSO, check both the Docker Admin Console and your identity provider (IdP) for errors first.
+If you experience SSO issues, check both Docker and your identity provider for errors first.
 
 ### Check Docker error logs
 
@@ -26,7 +24,7 @@ If you experience issues with SSO, check both the Docker Admin Console and your 
 1. For more details on specific errors, select **View error details** next to an error message.
 1. Note any errors you see on this page for further troubleshooting.
 
-### Check for errors in your IdP
+### Check identity provider errors
 
 1. Review your IdP’s logs or audit trails for any failed authentication or provisioning attempts.
 2. Confirm that your IdP’s SSO settings match the values provided in Docker.
@@ -34,7 +32,7 @@ If you experience issues with SSO, check both the Docker Admin Console and your 
 4. If applicable, verify that your IdP correctly maps Docker's required user attributes.
 5. Try provisioning a test user from your IdP and verify if they appear in Docker.
 
-For further troubleshooting, check your IdP’s documentation. You can also contact their support team for guidance on error messages.
+For further troubleshooting, check your IdP's documentation or contact their support team.
 
 ## Groups are not formatted correctly
 
@@ -45,7 +43,7 @@ When this issue occurs, the following error message is common:
 Some of the groups assigned to the user are not formatted as '<organization name>:<team name>'. Directory groups will be ignored and user will be provisioned into the default organization and team.
 ```
 
-### Possible causes
+### Causes
 
 - Incorrect group name formatting in your identity provider (IdP): Docker requires groups to follow the format `<organization>:<team>`. If the groups assigned to a user do not follow this format, they will be ignored.
 - Non-matching groups between IdP and Docker organization: If a group in your IdP does not have a corresponding team in Docker, it will not be recognized, and the user will be placed in the default organization and team.
@@ -80,7 +78,7 @@ When this issue occurs, the following error message is common:
 User '$username' is not assigned to this SSO organization. Contact your administrator. TraceID: XXXXXXXXXXXXX
 ```
 
-### Possible causes
+### Causes
 
 - User is not assigned to the organization: If Just-in-Time (JIT) provisioning is disabled, the user may not be assigned to your organization.
 - User is not invited to the organization: If JIT is disabled and you do not want to enable it, the user must be manually invited.
@@ -125,7 +123,7 @@ When this issue occurs, the following error message is common:
 IdP-Initiated sign in is not enabled for connection '$ssoConnection'.
 ```
 
-### Possible causes
+### Causes
 
 Docker does not support an IdP-initiated SAML flow. This error occurs when a user attempts to authenticate from your IdP, such as using the Docker SSO app tile on the sign in page.
 
@@ -148,7 +146,7 @@ When this issue occurs, the following error message is common:
 Not enough seats in organization '$orgName'. Add more seats or contact your administrator.
 ```
 
-### Possible causes
+### Causes
 
 This error occurs when the organization has no available seats for the user when provisioning via Just-in-Time (JIT) provisioning or SCIM.
 
@@ -171,7 +169,7 @@ When this issue occurs, the following error message is common:
 Domain '$emailDomain' is not verified for your SSO connection. Contact your company administrator. TraceID: XXXXXXXXXXXXXX
 ```
 
-### Possible causes
+### Causes
 
 This error occurs if the IdP authenticated a user through SSO and the User Principal Name (UPN)
 returned to Docker doesn’t match any of the verified domains associated to the
@@ -196,7 +194,7 @@ When this issue occurs, the following error message is common:
 We couldn't find your session. You may have pressed the back button, refreshed the page, opened too many sign-in dialogs, or there is some issue with cookies. Try signing in again. If the issue persists, contact your administrator.
 ```
 
-### Possible causes
+### Causes
 
 The following causes may create this issue:
 - The user pressed the back or refresh button during authentication.
@@ -221,7 +219,7 @@ When this issue occurs, the following error message is common:
 The name ID sent by the identity provider is not an email address. Contact your company administrator.
 ```
 
-### Possible causes
+### Causes
 
 The following causes may create this issue:
 - The IdP sends a Name ID (UPN) that does not comply with the email format required by Docker.

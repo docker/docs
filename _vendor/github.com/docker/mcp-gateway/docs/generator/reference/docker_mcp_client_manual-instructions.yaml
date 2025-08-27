@@ -1,0 +1,24 @@
+command: docker mcp client manual-instructions
+short: Display the manual instructions to connect the MCP client
+long: Display the manual instructions to connect the MCP client
+usage: docker mcp client manual-instructions
+pname: docker mcp client
+plink: docker_mcp_client.yaml
+options:
+    - option: json
+      value_type: bool
+      default_value: "false"
+      description: Print as JSON.
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: true
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

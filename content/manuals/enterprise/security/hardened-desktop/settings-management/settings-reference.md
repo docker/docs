@@ -1,26 +1,32 @@
 ---
-description: Reference for all settings and features that are configured with Settings Management
-keywords: admin, controls, settings management, reference
 title: Settings reference
 linkTitle: Settings reference
-aliases: 
+description: Complete reference for all Docker Desktop settings and configuration options
+keywords: docker desktop settings, configuration reference, admin controls, settings management
+aliases:
  - /security/for-admins/hardened-desktop/settings-management/settings-reference/
 ---
 
-This reference lists all Docker Desktop settings, including where they are configured, which operating systems they apply to, and whether they're available in the Docker Desktop GUI, the Docker Admin Console, or the `admin-settings.json` file. Settings are grouped to match the structure of the Docker Desktop interface.
+This reference documents all Docker Desktop settings and configuration options. Use this to understand setting behavior across different configuration methods and platforms.
 
 Each setting includes:
 
-- The display name used in Docker Desktop
-- A table of values, default values, and required format
-- A description and use cases
-- OS compatibility
-- Configuration methods: via [Docker Desktop](/manuals/desktop/settings-and-maintenance/settings.md), the Admin Console, or the `admin-settings.json` file
+- Default and accepted values
+- Platform compatibility
+- Configuration methods (Docker Desktop GUI, Admin Console, admin-settings.json file, or CLI)
+- Enterprise security recommendations where applicable
 
-Use this reference to compare how settings behave across different configuration
-methods and platforms.
+## How to use this reference
 
-## General
+Settings are organized to match the Docker Desktop GUI structure. Configuration
+methods are indicated with these labels:
+
+- Desktop GUI: Configurable through Docker Desktop settings interface
+- Admin Console: Configurable through the Docker Admin Console using Settings Management
+- JSON file: Configurable through `admin-settings.json` using Settings Management
+- CLI: Configurable through command-line tools
+
+## General settings
 
 ### Start Docker Desktop when you sign in to your computer
 
@@ -28,9 +34,9 @@ methods and platforms.
 |---------------|-----------------|--------|
 | `false`       | `true`, `false` | Boolean |
 
-- **Description:** Start Docker Desktop automatically when booting machine.
+- **Description:** Automatic startup of Docker Desktop when the user logs in to their computer.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Ensure Docker Desktop is always running after boot.
+- **Use case:** Ensure Docker Desktop is always available after system boot.
 - **Configure this setting with:**
     - **General** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
@@ -40,9 +46,9 @@ methods and platforms.
 |---------------|----------------------------|--------|
 | `false`      | `true`, `false`  | Boolean   |
 
-- **Description:** Open the Docker Dashboard automatically when Docker Desktop starts.
+- **Description:** Whether the Docker Dashboard opens automatically when Docker Desktop launches.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Quickly access containers, images, and volumes in the Docker Dashboard after starting Docker Desktop.
+- **Use case:** Provide immediate access to containers, images, and volumes after startup.
 - **Configure this setting with:**
     - **General** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
@@ -52,9 +58,9 @@ methods and platforms.
 |---------------|----------------------------|--------|
 | `system`      | `light`, `dark`, `system`  | Enum   |
 
-- **Description:** Choose the Docker Desktop GUI theme.
+- **Description:** Visual appearance of the Docker Desktop interface.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Personalize Docker Desktop appearance.
+- **Use case:** Customize interface appearance to match user preferences or system theme.
 - **Configure this setting with:**
     - **General** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
@@ -64,9 +70,9 @@ methods and platforms.
 |---------------|-------------------------|--------|
 | `integrated`  | `integrated`, `system`  | String |
 
-- **Description:** If installed, automatically edits your shell configuration.
+- **Description:** How Docker CLI auto-completion integrates with the user's shell.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Customize developer experience with shell completions.
+- **Use case:** Control whether Docker modifies shell configuration files for auto-completion.
 - **Configure this setting with:**
     - **General** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
@@ -76,10 +82,9 @@ methods and platforms.
 |---------------|-------------------------|--------|
 | `integrated`  | `integrated`, `system`  | String |
 
-- **Description:** Select default terminal for launching Docker CLI from Docker
-Desktop.
+- **Description:** Default terminal used when launching Docker CLI from Docker Desktop.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Customize developer experience with preferred terminal.
+- **Use case:** Set preferred terminal application for Docker CLI interactions.
 - **Configure this setting with:**
     - **General** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
@@ -89,14 +94,18 @@ Desktop.
 |---------------|-----------------|--------|
 | `false`       | `true`, `false` | Boolean |
 
-- **Description:** Enable access to the Docker Desktop integrated terminal. If
+- **Description:** Access to Docker Desktop's integrated terminal feature. If
 the value is set to `false`, users can't use the Docker terminal to interact
 with the host machine and execute commands directly from Docker Desktop.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Allow or restrict developer access to the built-in terminal.
+- **Use case:** Allow or restrict developer access to the built-in terminal for host system interaction.
 - **Configure this setting with:**
     - **General** setting in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
     - Settings Management: `desktopTerminalEnabled` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
+
+> [!NOTE]
+>
+> In hardened environments, disable and lock this setting to limit host access.
 
 ### Enable Docker Debug by default
 
@@ -104,9 +113,9 @@ with the host machine and execute commands directly from Docker Desktop.
 |---------------|-----------------|----------|
 | `false`       | `true`, `false` | Boolean  |
 
-- **Description:** Enable debug logging by default for Docker CLI commands.
+- **Description:** Whether debug logging is turned on by default for Docker CLI commands.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Assist with debugging support issues.
+- **Use case:** Provide verbose output for troubleshooting and support scenarios.
 - **Configure this setting with:**
     - **General** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
@@ -116,9 +125,9 @@ with the host machine and execute commands directly from Docker Desktop.
 |---------------|-----------------|--------|
 | `false`       | `true`, `false` | Boolean |
 
-- **Description:** Back up the Docker Desktop virtual machine.
+- **Description:** Whether the Docker Desktop virtual machine is included in macOS Time Machine backups.
 - **OS:** {{< badge color=blue text="Mac only" >}}
-- **Use case:** Manage persistence of application data.
+- **Use case:** Balance backup completeness with backup size and performance.
 - **Configure this setting with:**
     - **General** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
@@ -128,10 +137,9 @@ with the host machine and execute commands directly from Docker Desktop.
 |---------------|-----------------|----------|
 | `false`       | `true`, `false` | Boolean  |
 
-- **Description:** Use containerd native snapshotter instead of legacy
-snapshotters.
+- **Description:** Image storage backend used by Docker Desktop.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Improve image handling performance and compatibility.
+- **Use case:** Improve image handling performance and enable containerd-native features.
 - **Configure this setting with:**
     - **General** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
@@ -166,12 +174,6 @@ is set to `true`, Docker Desktop turns on Rosetta to accelerate
 x86_64/amd64 binary emulation on Apple Silicon.
 - **OS:** {{< badge color=blue text="Mac only" >}} 13+
 - **Use case:** Run Intel-based containers on Apple Silicon hosts.
-
-> [!NOTE]
->
-> In hardened environments, disable and lock this setting so only ARM-native
-images are permitted.
-
 - **Configure this setting with:**
     - **General** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
     - Settings Management:`useVirtualizationFrameworkRosetta` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
@@ -179,9 +181,18 @@ images are permitted.
 
 > [!NOTE]
 >
+> In hardened environments, disable and lock this setting so only ARM-native
+images are permitted.
+
+> [!NOTE]
+>
 > Rosetta requires enabling Apple Virtualization framework.
 
 #### QEMU
+
+> [!WARNING]
+>
+> QEMU has been deprecated in Docker Desktop versions 4.44 and later. For more information, see the [blog announcement](https://www.docker.com/blog/docker-desktop-for-mac-qemu-virtualization-option-to-be-deprecated-in-90-days/) 
 
 | Default value | Accepted values | Format   |
 |---------------|-----------------|----------|
@@ -200,17 +211,16 @@ containers. If value is set to `true`, VirtioFS is set as the file sharing
 mechanism. If both VirtioFS and gRPC are set to `true`, VirtioFS takes
 precedence.
 - **OS:** {{< badge color=blue text="Mac only" >}} 12.5+
-- **Use case:** Improve volume mount performance and compatibility.
+- **Use case:** Achieve better file system performance and compatibility on modern macOS.
+- **Configure this setting with:**
+    - **General settings** in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
+    - Settings Management: `useVirtualizationFrameworkVirtioFS` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
+    - Settings Management: **Use VirtioFS for file sharing** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
 
 > [!NOTE]
 >
 > In hardened environments, enable and lock this setting for macOS 12.5 and
 later.
-
-- **Configure this setting with:**
-    - **General settings** in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
-    - Settings Management: `useVirtualizationFrameworkVirtioFS` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
-    - Settings Management: **Use VirtioFS for file sharing** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
 
 #### gRPC FUSE
 
@@ -221,16 +231,15 @@ later.
 - **Description:** Enable gRPC FUSE for macOS file sharing. If value is set to
 `true`, gRPC Fuse is set as the file sharing mechanism.
 - **OS:** {{< badge color=blue text="Mac only" >}}
-- **Use case:** Improve performance and compatibility of file mounts.
-
-> [!NOTE]
->
-> In hardened environments, disable and lock this setting.
-
+- **Use case:** Alternative file sharing with improved performance over legacy osxfs.
 - **Configure this setting with:**
     - **General** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
     - Settings Management: `useGrpcfuse` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
     - Settings Management: **Use gRPC FUSE for file sharing** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
+
+> [!NOTE]
+>
+> In hardened environments, disable and lock this setting.
 
 #### osxfs
 
@@ -238,12 +247,11 @@ later.
 | ------------- | --------------- | ------- |
 | `false`       | `true`, `false` | Boolean |
 
-- **Description:** Enable the legacy osxfs file sharing driver for macOS. When
+- **Description:** Use the original osxfs file sharing driver for macOS. When
 set to true, Docker Desktop uses osxfs instead of VirtioFS or gRPC FUSE to mount
 host directories into containers.
 - **OS:** {{< badge color=blue text="Mac only" >}}
-- **Use case:** Use the original file sharing implementation when compatibility
-with older tooling or specific workflows is required.
+- **Use case:** Compatibility with legacy tooling that requires the original file sharing implementation.
 - **Configure this setting with:**
     - **General** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
@@ -257,21 +265,19 @@ with older tooling or specific workflows is required.
 usage statistics and crash reports to Docker. This setting affects telemetry
 gathered from the Docker Desktop application itself. It does not affect
 server-side telemetry collected via Docker Hub or other backend services, such
-as login timestamps, pulls, or builds.
+as sign in timestamps, pulls, or builds.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Enable analytics to help Docker improve the product based on
-usage data.
+- **Use case:** Help Docker improve the product based on usage patterns.
+- **Configure this setting with:**
+    - **General** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
+    - Settings Management: `analyticsEnabled` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
+    - Settings Management: **Send usage statistics** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
 
 > [!NOTE]
 >
 > In hardened environments, disable and lock this setting. This allows you
 to control all your data flows and collect support logs via secure channels
 if needed.
-
-- **Configure this setting with:**
-    - **General** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
-    - Settings Management: `analyticsEnabled` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
-    - Settings Management: **Send usage statistics** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
 
 > [!NOTE]
 >
@@ -286,20 +292,19 @@ views.
 |---------------|-----------------|----------|
 | `false`       | `true`, `false` | Boolean  |
 
-- **Description:** Enable Enhanced Container Isolation for secure container
-execution.
+- **Description:** Advanced container security through Linux user namespaces and additional isolation.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Prevent containers from modifying configuration or sensitive
-host areas.
-
-> [!NOTE]
->
-> In hardened environments, disable and lock this setting.
-
+- **Use case:** Prevent containers from modifying Docker Desktop VM configuration or accessing sensitive host areas.
 - **Configure this setting with:**
     - **General settings** in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
     - Settings Management: `enhancedContainerIsolation` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
     - Settings Management: **Enable enhanced container isolation** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
+
+> [!NOTE]
+>
+> In hardened environments, disable and lock this setting. This allows you
+to control all your data flows and collect support logs via secure channels
+if needed.
 
 ### Show CLI hints
 
@@ -307,9 +312,9 @@ host areas.
 |---------------|-----------------|----------|
 | `true`       | `true`, `false` | Boolean  |
 
-- **Description:** Display helpful CLI tips in the terminal when using Docker commands.
+- **Description:** Display of helpful CLI suggestions in the terminal when using Docker commands.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Help users discover and learn Docker CLI features through inline suggestions.
+- **Use case:** Help users discover Docker CLI features through contextual tips.
 - **Configure this setting with:**
     - **General** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
@@ -319,19 +324,17 @@ host areas.
 |---------------|-----------------|----------|
 | `true`        | `true`, `false` | Boolean  |
 
-- **Description:** Enable Docker Scout to generate and display SBOM data for container images.
+- **Description:** Docker Scout SBOM generation and vulnerability scanning for container images.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Turn on Docker Scout analysis features to view vulnerabilities, packages, and metadata associated with images.
-
-> [!NOTE]
->
-> In hardened environments, enable and lock this setting to ensure SBOMs are
-always built to satisfy compliance scans.
-
+- **Use case:** Turn on vulnerability scanning and software bill of materials analysis.
 - **Configure this setting with:**
     - **General settings** in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
     - Settings Management: `sbomIndexing` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
     - Settings Management: **SBOM indexing** settings in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
+
+> [!NOTE]
+>
+> In hardened environments, enable and lock this setting to ensure compliance scanning is always available.
 
 ### Enable background Scout SBOM indexing
 
@@ -339,16 +342,15 @@ always built to satisfy compliance scans.
 |---------------|-----------------|----------|
 | `false`        | `true`, `false` | Boolean  |
 
-- **Description:** Automatically index SBOM data for images in the background without requiring user interaction.
+- **Description:** Automatic SBOM indexing for images without requiring user interaction.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Keep image metadata up to date by allowing Docker to perform SBOM indexing during idle time or after image pull operations.
+- **Use case:** Keep image metadata current by indexing during idle time or after image operations.
+- **Configure this setting with:**
+    - **General settings** in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
 > [!NOTE]
 >
-> In hardened environments, enable and lock this setting.
-
-- **Configure this setting with:**
-    - **General settings** in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
+> In hardened environments, enable and lock this setting for continuous security analysis.
 
 ### Automatically check configuration
 
@@ -356,14 +358,14 @@ always built to satisfy compliance scans.
 |-----------------------|-----------------|---------|
 | `CurrentSettingsVersions` | Integer         | Integer |
 
-- **Description:** Regularly checks your configuration to ensure no unexpected changes have been made by another application
+- **Description:** Regular verification that Docker Desktop configuration hasn't been modified by external applications.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Track versions for compatibility
+- **Use case:** Track configuration versions for compatibility and change detection.
 - **Configure this setting with:**
     - **General** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
     - Settings Management: `configurationFileVersion` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
 
-## Resources
+## Resources settings
 
 ### CPU limit
 
@@ -371,9 +373,9 @@ always built to satisfy compliance scans.
 |-----------------------------------------------|-----------------|---------|
 | Number of logical CPU cores available on host | Integer         | Integer |
 
-- **Description:** Number of CPUs assigned to the Docker Desktop virtual machine.
+- **Description:** Number of CPU cores allocated to the Docker Desktop virtual machine.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Resource allocation control.
+- **Use case:** Balance Docker performance with host system resource availability.
 - **Configure this setting with:**
     - **Advanced** Resources settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
@@ -383,9 +385,9 @@ always built to satisfy compliance scans.
 |---------------------------|-----------------|---------|
 | Based on system resources | Integer         | Integer |
 
-- **Description:** Amount of RAM (in MiB) assigned to the Docker virtual machine.
+- **Description:** Amount of RAM (in MiB) allocated to the Docker Desktop virtual machine.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Control how much memory Docker can use on the host.
+- **Use case:** Control memory allocation to optimize performance for both Docker and host applications.
 - **Configure this setting with:**
     - **Advanced** Resources settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
@@ -395,9 +397,9 @@ always built to satisfy compliance scans.
 |---------------|-----------------|---------|
 | `1024`        | Integer         | Integer |
 
-- **Description:** Amount of swap space (in MiB) assigned to the Docker virtual machine
+- **Description:** Amount of swap space (in MiB) available to the Docker virtual machine.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Extend memory availability via swap
+- **Use case:** Extend available memory for container workloads when physical RAM is limited.
 - **Configure this setting with:**
     - **Advanced** Resources settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
@@ -407,9 +409,9 @@ always built to satisfy compliance scans.
 |-------------------------------|-----------------|---------|
 | Default disk size of machine. | Integer         | Integer |
 
-- **Description:** Maximum disk size (in MiB) allocated for Docker Desktop.
+- **Description:** Maximum disk space (in MiB) allocated for Docker Desktop data.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Constrain Docker's virtual disk size for storage management.
+- **Use case:** Prevent Docker from consuming excessive disk space on the host system.
 - **Configure this setting with:**
     - **Advanced** Resources settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
@@ -419,9 +421,9 @@ always built to satisfy compliance scans.
 |--------------------------------------------------|-----------------|--------|
 | macOS: `~/Library/Containers/com.docker.docker/Data/vms/0`  <br> Windows: `%USERPROFILE%\AppData\Local\Docker\wsl\data` | File path       | String |
 
-- **Description:** Path where Docker Desktop stores virtual machine data.
+- **Description:** File system path where Docker Desktop stores virtual machine data.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Redirect Docker data to a custom location.
+- **Use case:** Move Docker data to custom storage locations for performance or space management.
 - **Configure this setting with:**
     - **Advanced** Resources settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
@@ -431,9 +433,9 @@ always built to satisfy compliance scans.
 |---------------|-----------------|----------|
 | `true`        | `true`, `false` | Boolean  |
 
-- **Description:** Enable Docker Desktop to pause when idle.
+- **Description:** Automatic pausing of Docker Desktop when idle to conserve system resources.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Save system resources during periods of inactivity.
+- **Use case:** Reduce CPU and memory usage when Docker Desktop isn't actively being used.
 - **Configure this setting with:**
     - **Advanced** Resources settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
@@ -443,20 +445,18 @@ always built to satisfy compliance scans.
 |----------------------------------------|---------------------------------|--------------------------|
 | Varies by OS                           | List of file paths as strings   | Array list of strings   |
 
-- **Description:** List of allowed directories shared between the host and
-containers. When a path is added, its subdirectories are allowed.
+- **Description:** Host directories that can be mounted into containers as volumes.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Restrict or define what file paths are available to containers.
-
-> [!NOTE]
->
-> In hardened environments, lock to an explicit whitelist and disable end-user
-edits.
-
+- **Use case:** Define which host directories containers can access for development workflows.
 - **Configure this setting with:**
     - **File sharing** Resources settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
     - Settings Management: `filesharingAllowedDirectories` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
     - Settings Management: **Allowed file sharing directories** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
+
+> [!NOTE]
+>
+> In hardened environments, lock to an explicit allowlist and disable end-user
+edits.
 
 ### Proxy exclude
 
@@ -464,18 +464,16 @@ edits.
 |---------------|--------------------|--------|
 | `""`          | List of addresses  | String |
 
-- **Description:** Configure addresses that containers should bypass from proxy
-settings.
+- **Description:** Network addresses that containers should bypass when using proxy settings.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Fine-tune proxy exceptions for container networking.
-
-> [!NOTE]
->
-> In hardened environments, disable and lock this setting.
-
+- **Use case:** Define proxy exceptions for internal services or specific domains.
 - **Configure this setting with:**
     - **Proxies** Resources settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
     - Settings Management: `proxy` setting with `manual` and `exclude` modes in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
+
+> [!NOTE]
+>
+> In hardened environments, disable and lock this setting to maintain strict proxy control.
 
 ### Docker subnet
 
@@ -499,7 +497,7 @@ settings.
 
 - **Description:** Use the host’s kernel network stack for UDP traffic instead of Docker’s virtual network driver. This enables faster and more direct UDP communication, but may bypass some container isolation features.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Improve performance or compatibility for workloads that rely heavily on UDP traffic, such as real-time media, DNS, or game servers.
+- **Use case:** Improve performance for UDP-intensive applications like real-time media, DNS, or gaming.
 - **Configure this setting with:**
     - **Network** Resources settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
@@ -509,9 +507,9 @@ settings.
 |---------------|-----------------|----------|
 | `false`       | `true`, `false` | Boolean  |
 
-- **Description:** Enable experimental host networking support.
+- **Description:** Experimental support for containers to use the host network stack directly.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Allow containers to use the host network stack.
+- **Use case:** Allow containers to bypass Docker's network isolation for specific scenarios.
 - **Configure this setting with:**
     - **Network** Resources settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
@@ -521,9 +519,9 @@ settings.
 |---------------|-----------------|----------|
 | `dual-stack` | `ipv4only`, `ipv6only` | String  |
 
-- **Description:** Set the networking mode.
+- **Description:** Default IP protocol used when Docker creates new networks.
 - **OS:** {{< badge color=blue text="Windows and Mac" >}}
-- **Use case:** Choose the default IP protocol used when Docker creates new networks.
+- **Use case:** Align with network infrastructure that supports only IPv4 or IPv6.
 - **Configure this setting with:**
     - **Network** Resources settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
     - Settings Management: `defaultNetworkingMode` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
@@ -556,18 +554,17 @@ For more information, see [Networking](/manuals/desktop/features/networking.md#n
 based engine. This overrides anything that may have been set at installation
 using the `--backend=<backend name>` flag.
 - **OS:** {{< badge color=blue text="Windows only" >}} + WSL
-- **Use case:** Enable Linux containers via WSL 2 backend.
-
-> [!NOTE]
->
-> In hardened environments, enable and lock this setting.
-
+- **Use case:** Run Linux containers on Windows using the WSL 2 backend for better performance.
 - **Configure this setting with:**
     - **WSL Integration** Resources settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
     - Settings Management: `wslEngineEnabled` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
     - Settings Management: **Windows Subsystem for Linux (WSL) Engine** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
 
-## Docker Engine
+> [!NOTE]
+>
+> In hardened environments, enable and lock this setting for improved security and performance.
+
+## Docker Engine settings
 
 The Docker Engine settings let you configure low-level daemon settings through a raw JSON object. These settings are passed directly to the dockerd process that powers container management in Docker Desktop.
 
@@ -580,15 +577,20 @@ The Docker Engine settings let you configure low-level daemon settings through a
 
 - **Description:** Customize the behavior of the Docker daemon using a structured JSON config passed directly to dockerd.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Fine-tune registry access, enable debug mode, or opt into experimental features.
+- **Use case:** Configure registry access, enable debug logging, or turn on experimental features.
 - **Configure this setting with:**
     - **Docker Engine** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
 > [!NOTE]
 >
+> In hardened environments, provide a vetted configuration and lock it to prevent
+unauthorized daemon modifications.
+
+> [!IMPORTANT]
+>
 > Values for this setting are passed as-is to the Docker daemon. Invalid or unsupported fields may prevent Docker Desktop from starting.
 
-## Builders
+## Builders settings
 
 Builders settings lets you manage Buildx builder instances for advanced image-building scenarios, including multi-platform builds and custom backends.
 
@@ -598,9 +600,9 @@ Builders settings lets you manage Buildx builder instances for advanced image-bu
 | `driver`    | `"docker-container"`             | Backend used by the builder (`docker`, `docker-container`, `remote`, etc.) | String                    | `docker`  |
 | `platforms` | `["linux/amd64", "linux/arm64"]` | Target platforms supported by the builder                                  | Array of platform strings | Host arch |
 
-- **Description:** Configure custom Buildx builders for Docker Desktop, including driver type and supported platforms.
+- **Description:** Buildx builder instances for advanced image building scenarios.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Set up advanced build configurations like cross-platform images or remote builders.
+- **Use case:** Set up cross-platform builds, remote builders, or custom build environments.
 - **Configure this setting with:**
     - **Builders** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
@@ -608,7 +610,7 @@ Builders settings lets you manage Buildx builder instances for advanced image-bu
 >
 > Builder definitions are structured as an array of objects, each describing a builder instance. Conflicting or unsupported configurations may cause build errors.
 
-## Kubernetes
+## Kubernetes settings
 
 ### Enable Kubernetes
 
@@ -616,13 +618,17 @@ Builders settings lets you manage Buildx builder instances for advanced image-bu
 |---------------|-----------------|----------|
 | `false`       | `true`, `false` | Boolean  |
 
-- **Description:** Enable the integrated Kubernetes cluster in Docker Desktop.
+- **Description:** Local Kubernetes cluster integration with Docker Desktop.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Enable or disable Kubernetes support for developers.
+- **Use case:** Provide local Kubernetes development environment for testing and development.
+- **Configure this setting with:**
+    - **Kubernetes** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
+    - Settings Management: `kubernetes` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
+    - Settings Management: **Allow Kubernetes** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
 
 > [!NOTE]
 >
-> In hardened environments, disable and lock this setting.
+> In hardened environments, disable and lock this setting unless Kubernetes development is specifically required.
 
 > [!IMPORTANT]
 >
@@ -630,20 +636,15 @@ Builders settings lets you manage Buildx builder instances for advanced image-bu
 `kubeadm` cluster provisioning method is supported. The `kind` provisioning
 method is not yet supported by Settings Management.
 
-- **Configure this setting with:**
-    - **Kubernetes** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
-    - Settings Management: `kubernetes` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
-    - Settings Management: **Allow Kubernetes** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
-
 ### Choose cluster provisioning method
 
 | Default value | Accepted values | Format |
 |---------------|-----------------|--------|
 | `kubeadm`     | `kubeadm`, `kind`  | String |
 
-- **Description:** Set the Kubernetes node mode (single-node or multi-node).
+- **Description:** Kubernetes cluster topology and node configuration.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Control the topology of the integrated Kubernetes cluster.
+- **Use case:** Choose between single-node (`kubeadm`) or multi-node (`kind`)` cluster configurations for different development needs.
 - **Configure this setting with:**
     - **Kubernetes** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
@@ -653,9 +654,9 @@ method is not yet supported by Settings Management.
 |---------------|-----------------|---------|
 | `1`           | Integer         | Integer |
 
-- **Description:** Number of nodes to create in a multi-node Kubernetes cluster.
+- **Description:** Number of nodes in multi-node Kubernetes clusters.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Scale the number of Kubernetes nodes for development or testing.
+- **Use case:** Scale cluster size for testing distributed applications or cluster features.
 - **Configure this setting with:**
     - **Kubernetes** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
@@ -665,10 +666,9 @@ method is not yet supported by Settings Management.
 |---------------|-------------------------------|--------|
 | `1.31.1`      | Semantic version (e.g., 1.29.1) | String |
 
-- **Description:** Version of Kubernetes used for cluster node creation.
+- **Description:** Kubernetes version used for cluster nodes.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Pin a specific Kubernetes version for consistency or
-compatibility.
+- **Use case:** Pin specific Kubernetes versions for consistency or compatibility requirements.
 - **Configure this setting with:**
     - **Kubernetes** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
@@ -678,16 +678,15 @@ compatibility.
 |---------------|-----------------|----------|
 | `false`       | `true`, `false` | Boolean  |
 
-- **Description:** Show Kubernetes system containers in the Docker Dashboard container list
+- **Description:** Visibility of Kubernetes system containers in Docker Desktop Dashboard.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Allow developers to view kube-system containers for debugging
+- **Use case:** Allow developers to view and debug kube-system containers.
+- **Configure this setting with:**
+    - **Kubernetes** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
 > [!NOTE]
 >
-> In hardened environments, disable and lock this setting.
-
-- **Configure this setting with:**
-    - **Kubernetes** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
+> In hardened environments, disable and lock this setting to reduce interface complexity.
 
 ### Custom Kubernetes image repository
 
@@ -695,35 +694,27 @@ compatibility.
 |---------------|-----------------|----------|
 | `""`          | Registry URL    | String   |
 
-- **Description**: Configure a custom image repository for Kubernetes control
-plane images. This allows Docker Desktop to pull Kubernetes system
+- **Description**: Registry used for Kubernetes control plane images instead of Docker Hub. This allows Docker Desktop to pull Kubernetes system
 images from a private registry or mirror instead of Docker Hub. This setting
 overrides the `[registry[:port]/][namespace]` portion of image names.
 - **OS**: {{< badge color=blue text="All" >}}
-- **Use case**: Use private registries in air-gapped environments or
-when Docker Hub access is restricted.
-
-> [!NOTE]
->
-> The images must be cloned/mirrored from Docker Hub with matching tags. The
-specific images required depend on the cluster provisioning method (`kubeadm`
-or `kind`). See the Kubernetes documentation for the complete list
-of required images and detailed setup instructions.
-
+- **Use case**: Support air-gapped environments or when Docker Hub access is restricted.
 - **Configure this setting with**:
     - Settings Management: `KubernetesImagesRepository` settings in the
     [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
     - Settings Management: **Kubernetes Images Repository** setting in the
     [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
 
+> [!NOTE]
+>
+> Images must be mirrored from Docker Hub with matching tags. Required images depend on the cluster provisioning method.
+
 > [!IMPORTANT]
 >
-> When using `KubernetesImagesRepository` with Enhanced Container Isolation (ECI)
-enabled, you must add the following images to the ECI Docker socket mount image
-list: `[imagesRepository]/desktop-cloud-provider-kind:*` and
+> When using custom image repositories with Enhanced Container Isolation, add these images to the ECI allowlist: `[imagesRepository]/desktop-cloud-provider-kind:*` and
 `[imagesRepository]/desktop-containerd-registry-mirror:*`.
 
-## Software updates
+## Software updates settings
 
 ### Automatically check for updates
 
@@ -731,20 +722,19 @@ list: `[imagesRepository]/desktop-cloud-provider-kind:*` and
 |---------------|-----------------|--------|
 | `false`       | `true`, `false` | Boolean |
 
-- **Description:** Disable automatic update polling for Docker Desktop. If the
+- **Description:** Whether Docker Desktop checks for and notifies about available updates. If the
 value is set to `true`, checking for updates and notifications about Docker
 Desktop updates are disabled.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Freeze the current version in enterprise environments.
+- **Use case:** Control update notifications and automatic version checking.
+- **Configure this setting with:**
+    - Settings Management: `disableUpdate` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
+    - Settings Management: **Disable update** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
 
 > [!NOTE]
 >
 > In hardened environments, enable this setting and lock. This guarantees that
 only internally vetted versions are installed.
-
-- **Configure this setting with:**
-    - Settings Management: `disableUpdate` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
-    - Settings Management: **Disable update** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
 
 ### Always download updates
 
@@ -752,14 +742,14 @@ only internally vetted versions are installed.
 |---------------|-----------------|--------|
 | `false`       | `true`, `false` | Boolean |
 
-- **Description:** Automatically download Docker Desktop updates when available.
+- **Description:** Automatic downloading of Docker Desktop updates when they become available.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Manage auto update behavior.
+- **Use case:** Manage bandwidth usage and control when updates are downloaded.
 - **Configure this setting with:**
     - **Software updates** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
     - Settings Management: **Disable updates** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
 
-## Extensions
+## Extensions settings
 
 ### Enable Docker extensions
 
@@ -767,20 +757,18 @@ only internally vetted versions are installed.
 |---------------|-----------------|----------|
 | `true`        | `true`, `false` | Boolean  |
 
-- **Description:** Enable or disable Docker Extensions.
+- **Description:** Access to Docker Extensions marketplace and installed extensions.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Control access to the Extensions Marketplace and installed
-extensions.
+- **Use case:** Control whether users can install and run Docker Extensions.
+- **Configure this setting with:**
+    - **Extensions** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
+    - Settings Management: `extensionsEnabled` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
+    - Settings Management: **Allow Extensions** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
 
 > [!NOTE]
 >
 > In hardened environments, disable and lock this setting. This prevents
 third-party or unvetted plugins from being installed.
-
-- **Configure this setting with:**
-    - **Extensions** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
-    - Settings Management: `extensionsEnabled` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
-    - Settings Management: **Allow Extensions** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
 
 ### Allow only extensions distributed through the Docker Marketplace
 
@@ -788,9 +776,9 @@ third-party or unvetted plugins from being installed.
 |---------------|-----------------|----------|
 | `true`        | `true`, `false` | Boolean  |
 
-- **Description:** Restrict Docker Desktop to only run Marketplace extensions.
+- **Description:** Restriction of Docker Extensions to only those available through the official marketplace.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Prevent running third-party or local extensions.
+- **Use case:** Prevent installation of third-party or locally developed extensions.
 - **Configure this setting with:**
     - **Extensions** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
@@ -800,17 +788,17 @@ third-party or unvetted plugins from being installed.
 |---------------|-----------------|----------|
 | `false`       | `true`, `false` | Boolean  |
 
-- **Description:** Show system containers used by Docker Extensions in the container list
+- **Description:** Visibility of system containers used by Docker Extensions in the container list.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Help developers troubleshoot or view extension system containers
+- **Use case:** Help developers troubleshoot extension issues by viewing underlying containers.
 - **Configure this setting with:**
     - **Extensions** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
-## Beta features
+## Beta features settings
 
 > [!IMPORTANT]
 >
-> For Docker Desktop versions 4.41 and earlier, these settings lived under the **Experimental features** tab on the **Features in development** page.
+> For Docker Desktop versions 4.41 and earlier, these settings were under the **Experimental features** tab on the **Features in development** page.
 
 ### Enable Docker AI
 
@@ -818,9 +806,9 @@ third-party or unvetted plugins from being installed.
 |---------------|-----------------|----------|
 | `false`       | `true`, `false` | Boolean  |
 
-- **Description:** Enable Docker AI features in the Docker Desktop experience.
+- **Description:** Docker AI features including "Ask Gordon" functionality.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Enable or disable AI features like "Ask Gordon".
+- **Use case:** Turn on AI-powered assistance and recommendations within Docker Desktop.
 - **Configure this setting with:**
     - **Beta** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
     - Settings Management: `enableDockerAI` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
@@ -831,9 +819,9 @@ third-party or unvetted plugins from being installed.
 |---------------|-----------------|----------|
 | `true`       | `true`, `false` | Boolean  |
 
-- **Description:** Enable Docker Model Runner features in Docker Desktop.
+- **Description:** Docker Model Runner functionality for running AI models in containers.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Enable or disable Docker Model Runner features.
+- **Use case:** Run and manage AI/ML models using Docker infrastructure.
 - **Configure this setting with:**
     - **Beta** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
     - Settings Management: `enableDockerAI` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
@@ -844,13 +832,13 @@ third-party or unvetted plugins from being installed.
 |---------------|-----------------|----------|
 | `false`       | `true`, `false` | Boolean  |
 
-- **Description:** Enable Docker Model Runner features in Docker Desktop.
+- **Description:** TCP connectivity for Docker Model Runner services.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Enable or disable Docker Model Runner features.
+- **Use case:** Allow external applications to connect to Model Runner via TCP.
 - **Configure this setting with:**
     - **Beta** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
     - Settings Management: `enableDockerAI` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
-    
+
 > [!NOTE]
 >
 > This setting requires Docker Model Runner setting to be enabled first.
@@ -861,9 +849,9 @@ third-party or unvetted plugins from being installed.
 |---------------|-----------------|---------|
 | 12434         | Integer         | Integer |
 
-- **Description:** Specifies the exposed TCP port.
+- **Description:** Specific port used for Model Runner TCP connections.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Connect to the Model Runner via TCP.
+- **Use case:** Customize the port for Model Runner TCP connectivity.
 - **Configure this setting with:**
     - **Beta features** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
     - Settings Management: `enableInferenceTCP` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
@@ -874,9 +862,9 @@ third-party or unvetted plugins from being installed.
 |---------------|---------------------------------------------------------------------------------|--------|
 | Empty string  | Empty string to deny all,`*` to accept all, or a list of comma-separated values | String |
 
-- **Description:** Specifies the allowed CORS origins.
+- **Description:** Cross-origin resource sharing settings for Model Runner web integration.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Integration with a web app.
+- **Use case:** Allow web applications to connect to Model Runner services.
 - **Configure this setting with:**
     - **Beta features** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
     - Settings Management: `enableInferenceCORS` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
@@ -889,10 +877,10 @@ third-party or unvetted plugins from being installed.
 
 - **Description:** Enable [Docker MCP Toolkit](/manuals/ai/mcp-catalog-and-toolkit/_index.md) in Docker Desktop.
 - **OS:** {{< badge color=blue text="All" >}}
+- **Use case:** Turn on MCP toolkit features for AI model development workflows.
 - **Configure this setting with:**
     - **Beta** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
     - Settings Management: `enableDockerMCPToolkit` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
-    
 
 ### Enable Wasm
 
@@ -902,8 +890,9 @@ third-party or unvetted plugins from being installed.
 
 - **Description:** Enable [Wasm](/manuals/desktop/features/wasm.md) to run Wasm workloads.
 - **OS:** {{< badge color=blue text="All" >}}
+- **Use case:** Run WebAssembly applications and modules within Docker containers.
 - **Configure this setting with:**
-    - **Beta** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)    
+    - **Beta** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
 ### Enable Compose Bridge
 
@@ -913,10 +902,11 @@ third-party or unvetted plugins from being installed.
 
 - **Description:** Enable [Compose Bridge](/manuals/compose/bridge/_index.md).
 - **OS:** {{< badge color=blue text="All" >}}
+- **Use case:** Turn on enhanced Compose features and integrations.
 - **Configure this setting with:**
     - **Beta** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
-## Notifications
+## Notifications settings
 
 ### Status updates on tasks and processes
 
@@ -924,9 +914,9 @@ third-party or unvetted plugins from being installed.
 |---------------|-----------------|----------|
 | `true`        | `true`, `false` | Boolean  |
 
-- **Description:** Display general informational messages inside Docker Desktop
+- **Description:** General informational messages displayed within Docker Desktop.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Customize in-app communication visibility
+- **Use case:** Control visibility of operational status messages and process updates.
 - **Configure this setting with:**
     - **Notifications** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
@@ -936,9 +926,9 @@ third-party or unvetted plugins from being installed.
 |---------------|-----------------|----------|
 | `true`        | `true`, `false` | Boolean  |
 
-- **Description:** Display promotional announcements and banners inside Docker Desktop
+- **Description:** Promotional content and feature recommendations displayed in Docker Desktop.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Control exposure to Docker news and feature promotion
+- **Use case:** Manage exposure to Docker marketing content and feature promotions.
 - **Configure this setting with:**
     - **Notifications** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
@@ -948,9 +938,9 @@ third-party or unvetted plugins from being installed.
 |---------------|-----------------|----------|
 | `true`        | `true`, `false` | Boolean  |
 
-- **Description:** Display general announcements inside Docker Desktop.
+- **Description:** General announcements and news displayed within Docker Desktop.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Enable or suppress Docker-wide announcements in the GUI.
+- **Use case:** Control visibility of Docker-wide announcements and important updates.
 - **Configure this setting with:**
     - **Notifications** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
@@ -960,9 +950,9 @@ third-party or unvetted plugins from being installed.
 |---------------|-----------------|----------|
 | `true`        | `true`, `false` | Boolean  |
 
-- **Description:** Display notifications inviting users to participate in surveys
+- **Description:** Survey invitations and feedback requests displayed to users.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Enable or disable in-product survey prompts
+- **Use case:** Manage user participation in Docker product feedback and research.
 - **Configure this setting with:**
     - **Notifications** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
@@ -972,9 +962,9 @@ third-party or unvetted plugins from being installed.
 |---------------|-----------------|----------|
 | `true`        | `true`, `false` | Boolean  |
 
-- **Description:** Enable Docker Scout popups inside Docker Desktop.
+- **Description:** In-application notifications from Docker Scout vulnerability scanning.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Show or hide vulnerability scan notifications
+- **Use case:** Control visibility of vulnerability scan results and security recommendations.
 - **Configure this setting with:**
     - **Notifications** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
@@ -984,13 +974,13 @@ third-party or unvetted plugins from being installed.
 |---------------|-----------------|----------|
 | `false`       | `true`, `false` | Boolean  |
 
-- **Description:** Enable Docker Scout notifications through the operating system.
+- **Description:** Operating system-level notifications from Docker Scout.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Push Scout updates via system notification center
+- **Use case:** Receive Scout security alerts through the system notification center.
 - **Configure this setting with:**
     - **Notifications** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
-## Advanced
+## Advanced settings
 
 ### Configure installation of Docker CLI
 
@@ -998,9 +988,9 @@ third-party or unvetted plugins from being installed.
 |---------------|-----------------|----------|
 | `system`      | File path       | String   |
 
-- **Description:** Install location for Docker CLI binaries.
+- **Description:** File system location where Docker CLI binaries are installed.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Customize CLI install location for compliance or tooling.
+- **Use case:** Customize CLI installation location for compliance or tooling integration requirements.
 - **Configure this setting with:**
     - **Advanced** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
@@ -1015,8 +1005,7 @@ the Docker Engine socket into containers
 (e.g., `docker run -v /var/run/docker.sock:/var/run/docker.sock ...`). This lets
 you relax this in a controlled way. See ECI Configuration for more info.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Allow containers to access the Docker socket for scenarios like
-Docker-in-Docker or containerized CI agents.
+- **Use case:** Support Docker-in-Docker scenarios, CI agents, or tools like Testcontainers while maintaining Enhanced Container Isolation.
 - **Configure this setting with:**
     - **Advanced** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
     - Settings Management: `dockerSocketMount` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
@@ -1027,13 +1016,13 @@ Docker-in-Docker or containerized CI agents.
 |---------------|-----------------|----------|
 | `true`        | `true`, `false` | Boolean  |
 
-- **Description:** Starts the privileged helper process which binds privileged ports that are between 1 and 1024
+- **Description:** Permission to bind container ports to privileged ports (1-1024) on the host.
 - **OS:** {{< badge color=blue text="Mac only" >}}
-- **Use case:** Enforce elevated privileges for networking support
+- **Use case:** Allow containers to use standard service ports like HTTP (80) or HTTPS (443).
 - **Configure this setting with:**
     - **Advanced** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
-## Settings not available in the Docker Desktop GUI
+## Settings not available in Docker Desktop
 
 The following settings aren’t shown in the Docker Desktop GUI. You can only configure them using Settings Management with the Admin Console or the `admin-settings.json` file.
 
@@ -1045,15 +1034,14 @@ The following settings aren’t shown in the Docker Desktop GUI. You can only co
 
 - **Description:** Prevent users from loading local Docker images using the `docker load` command.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Enforce image provenance by restricting local image imports.
+- **Use case:** Enforce image provenance by requiring all images to come from registries.
+- **Configure this setting with:**
+    - Settings Management: `blockDockerLoad` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
 
 > [!NOTE]
 >
 > In hardened environments, enable and lock this setting. This forces all images
 to come from your secure, scanned registry.
-
-- **Configure this setting with:**
-    - Settings Management: `blockDockerLoad` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
 
 ### Expose Docker API on TCP 2375
 
@@ -1063,15 +1051,14 @@ to come from your secure, scanned registry.
 
 - **Description:** Exposes the Docker API over an unauthenticated TCP socket on port 2375. Only recommended for isolated and protected environments.
 - **OS:** {{< badge color=blue text="Windows only" >}}
-- **Use case:** Required for legacy integrations or environments without named pipe support.
+- **Use case:** Support legacy integrations that require TCP API access.
+- **Configure this setting with:**
+    - Settings Management: `exposeDockerAPIOnTCP2375` in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
 
 > [!NOTE]
 >
 > In hardened environments, disable and lock this setting. This ensures the
 Docker API is only reachable via the secure internal socket.
-
-- **Configure this setting with:**
-    - Settings Management: `exposeDockerAPIOnTCP2375` in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
 
 ### Air-gapped container proxy
 
@@ -1079,9 +1066,9 @@ Docker API is only reachable via the secure internal socket.
 | ------------- | --------------- | ----------- |
 | See example   | Object          | JSON object |
 
-- **Description:** Configure a manual HTTP/HTTPS proxy for containers. Useful in air-gapped environments where containers need restricted access.
+- **Description:** HTTP/HTTPS proxy configuration for containers in air-gapped environments.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Redirect or block container networking to comply with offline or secured network environments.
+- **Use case:** Provide controlled network access for containers in offline or restricted network environments.
 - **Configure this setting with:**
     - Settings Management: `containersProxy` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
 
@@ -1099,15 +1086,15 @@ Docker API is only reachable via the secure internal socket.
 }
 ```
 
-Docker socket access control (ECI exceptions)
+### Docker socket access control (ECI exceptions)
 
 | Default value | Accepted values | Format      |
 | ------------- | --------------- | ----------- |
 | -           | Object          | JSON object |
 
-- **Description:** Allow specific images or commands to use the Docker socket when Enhanced Container Isolation is enabled.
+- **Description:** Specific images and commands allowed to use the Docker socket when Enhanced Container Isolation is active.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Support tools like Testcontainers or LocalStack that need Docker socket access while maintaining secure defaults.
+- **Use case:** Support tools like Testcontainers, LocalStack, or CI systems that need Docker socket access while maintaining security.
 - Configure this setting with:
     - Settings Management: `enhancedContainerIsolation` > `dockerSocketMount` in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
 
@@ -1138,16 +1125,15 @@ Docker socket access control (ECI exceptions)
 |---------------|-----------------|----------|
 | `false`       | `true`, `false` | Boolean  |
 
-- **Description:** Enable access to beta features in Docker Desktop.
+- **Description:** Access to Docker Desktop features in public beta.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Give developers early access to features that are in public beta.
+- **Use case:** Provide early access to features in development for testing and feedback.
+- **Configure this setting with:**
+    - Settings Management: `allowBetaFeatures` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
 
 > [!NOTE]
 >
 > In hardened environments, disable and lock this setting.
-
-- **Configure this setting with:**
-    - Settings Management: `allowBetaFeatures` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
 
 ### Docker daemon options (Linux or Windows)
 
@@ -1157,15 +1143,14 @@ Docker socket access control (ECI exceptions)
 
 - **Description:** Override the Docker daemon configuration used in Linux or Windows containers.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Configure low-level Docker daemon options (e.g., logging, storage drivers) without editing the local config files.
+- **Use case:** Configure advanced daemon options without modifying local configuration files.
+- **Configure this setting with:**
+    - Settings Management: `linuxVM.dockerDaemonOptions` or `windowsContainers.dockerDaemonOptions` in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
 
 > [!NOTE]
 >
 > In hardened environments, provide a vetted JSON config and lock it so no
 overrides are possible.
-
-- **Configure this setting with:**
-    - Settings Management: `linuxVM.dockerDaemonOptions` or `windowsContainers.dockerDaemonOptions` in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
 
 ### VPNKit CIDR
 
@@ -1173,17 +1158,16 @@ overrides are possible.
 |-------------------|-----------------|--------|
 | `192.168.65.0/24` | CIDR notation   | String |
 
-- **Description:** Set the subnet used for internal VPNKit DHCP/DNS services.
+- **Description:** Network subnet used for Docker Desktop's internal VPNKit DHCP/DNS services.
 - **OS:** {{< badge color=blue text="Mac only" >}}
-- **Use case:** Prevent IP conflicts in environments with overlapping subnets.
+- **Use case:** Prevent IP address conflicts in environments with overlapping network subnets.
+- **Configure this setting with:**
+    - Settings Management: `vpnkitCIDR` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
+    - Settings Management: **VPN Kit CIDR** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
 
 > [!NOTE]
 >
 > In hardened environments, lock to an approved, non-conflicting CIDR.
-
-- **Configure this setting with:**
-    - Settings Management: `vpnkitCIDR` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
-    - Settings Management: **VPN Kit CIDR** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
 
 ### Enable Kerberos and NTLM authentication
 
@@ -1191,8 +1175,8 @@ overrides are possible.
 |---------------|-----------------|--------|
 | `false`       | `true`, `false` | Boolean |
 
-- **Description:** Enables Kerberos and NTLM proxy authentication for enterprise environments.
+- **Description:** Enterprise proxy authentication support for Kerberos and NTLM protocols.
 - **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Allow users to authenticate with enterprise proxy servers that require Kerberos or NTLM.
+- **Use case:** Support enterprise proxy servers that require Kerberos or NTLM authentication.
 - **Configure this setting with:**
     - Settings Management: `proxy.enableKerberosNtlm` in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)

@@ -1,94 +1,66 @@
 ---
-description: Understand how to use the Desktop settings reporting dashboard
-keywords: Settings Management, docker desktop, hardened desktop, reporting, compliance
 title: Desktop settings reporting
 linkTitle: Desktop settings reporting
+description: Track and monitor user compliance with Docker Desktop settings policies using the reporting dashboard
+keywords: settings management, compliance reporting, admin console, policy enforcement, docker desktop
 weight: 30
-params:
-  sidebar:
-    badge:
-      color: violet
-      text: EA
 aliases:
  - /security/for-admins/hardened-desktop/settings-management/compliance-reporting/
 ---
 
 {{< summary-bar feature_name="Compliance reporting" >}}
 
-Desktop settings reporting is a feature of Desktop Settings Management that
-tracks and reports user compliance with the settings policies that are assigned
-to them. This lets administrators track the application of settings and
-monitor what actions they need to take to make users compliant.
+Desktop settings reporting tracks user compliance with Docker Desktop settings policies. Use this feature to monitor policy application across your organization and identify users who need assistance with compliance.
 
-This guide provides steps for accessing Desktop settings reporting, viewing
-compliance status, and resolving non-compliant users.
+## Prerequisites
 
-## Access Desktop settings reporting
+Before you can use Docker Desktop settings reporting, make sure you have:
 
-> [!IMPORTANT]
->
-> Desktop settings reporting is in Early Access and is being rolled out
-> gradually. You may not see this setting in the Admin Console yet.
-
-1. Sign in to [Docker Home](https://app.docker.com) and select
-your organization.
-1. Select **Admin Console**, then **Desktop settings reporting**.
-
-This opens the Desktop settings reporting page. From here you can:
-
-- Use the **Search** field to search by username or email address
-- Filter by policies
-- Hide or un-hide compliant users
-- View a user’s compliance status and what policy is assigned to the user
-- Download a CSV file of user compliance information
-
-## View compliance status
+- [Docker Desktop 4.37.1 or later](/manuals/desktop/release-notes.md) installed across your organization
+- [A verified domain](/manuals/enterprise/security/single-sign-on/configure.md#step-one-add-and-verify-your-domain)
+- [Enforced sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md) for your organization
+- A Docker Business subscription
+- At least one settings policy configured
 
 > [!WARNING]
 >
-> Users on Docker Desktop versions older than 4.40 may appear non-compliant
-> because older versions can't report compliance. To ensure accurate
-> compliance status, users must update to Docker Desktop version 4.40 and later.
+> Users on Docker Desktop versions older than 4.40 may appear non-compliant because older versions can't report compliance status. For accurate reporting, update users to Docker Desktop version 4.40 or later.
+
+## Access the reporting dashboard
+
+To view compliance reporting:
 
 1. Sign in to [Docker Home](https://app.docker.com) and select
 your organization.
 1. Select **Admin Console**, then **Desktop settings reporting**.
-1. Optional. Select the **Hide compliant users** checkbox to show both compliant
-and non-compliant users.
-1. Use the **Search** field to search by username or email address.
-1. Hover over a user’s compliance status indicator to quickly view their status.
-1. Select a username to view more details about their compliance status, and for
-steps to resolve non-compliant users.
 
-## Understand compliance status
+The reporting dashboard provides these tools:
 
-Docker evaluates compliance status based on:
+- A search field to find users by username or email address
+- Filter options to show users assigned to specific policies
+- Toggles to hide or un-hide compliant users
+- Compliance status indicators
+- CSV export option to download compliance data
 
-- Compliance status: Whether a user has fetched and applied the latest settings. This is the primary label shown on the reporting page.
-- Domain status: Whether the user's email matches a verified domain.
-- Settings status: Whether a settings policy is applied to the user.
+## User compliance statuses
 
-The combination of these statuses determines what actions you need to take.
+Docker Desktop evaluates three types of status to determine overall compliance:
 
-### Compliance status reference
+### Compliance status
 
-This reference explains how each status is determined in the reporting dashboard
-based on user domain and settings data. The Admin Console displays the
-highest-priority applicable status according to the following rules.
-
-**Compliance status**
+This is the primary status shown in the dashboard:
 
 | Compliance status | What it means |
 |-------------------|---------------|
-| Uncontrolled domain | The user's email domain is not verified. |
-| No policy assigned | The user does not have any policy assigned to them. |
+| Compliant | The user fetched and applied the latest assigned policy. |
 | Non-compliant | The user fetched the correct policy, but hasn't applied it. |
 | Outdated | The user fetched a previous version of the policy. |
-| Compliant | The user fetched and applied the latest assigned policy. |
+| No policy assigned | The user does not have any policy assigned to them. |
+| Uncontrolled domain | The user's email domain is not verified. |
 
-**Domain status**
+### Domain status
 
-This reflects how the user’s email domain is evaluated based on the organization’s domain setup.
+Shows how the user's email domain relates to your organization:
 
 | Domain status | What it means |
 |---------------|---------------|
@@ -96,9 +68,9 @@ This reflects how the user’s email domain is evaluated based on the organizati
 | Guest user | The user's email domain is not verified. |
 | Domainless | Your organization has no verified domains, and the user's domain is unknown. |
 
-**Settings status**
+### Settings status
 
-This shows whether and how the user is assigned a settings policy.
+Indicates the user's policy assignment:
 
 | Settings status | What it means |
 |-----------------|---------------|
@@ -106,41 +78,48 @@ This shows whether and how the user is assigned a settings policy.
 | User policy | The user is assigned a specific custom policy. |
 | No policy assigned | The user is not assigned to any policy. |
 
-## Resolve compliance status
+## Monitor compliance
 
-To resolve compliance status, you must view a user's compliance status details
-by selecting their username from the Desktop settings reporting page.
-These details include the following information:
+From the **Desktop settings reporting** dashboard, you can:
 
-- **Compliance status**: Indicates whether the user is compliant with the
-settings applied to them
-- **Domain status**: Indicates whether the user’s email address is associated
-with a verified domain
-- **Settings status**: Indicates whether the user has settings applied to them
-- **Resolution steps**: If a user is non-compliant, this provides information
-on how to resolve the user’s compliance status
+- Review organization-wide compliance at a glance
+- Turn on **Hide compliant users** to focus on issues
+- Filter by specific policies to check targeted compliance
+- Export compliance data
+- Select any user's name for detailed status and resolution steps
 
-### Compliant
+When you select a user's name, you'll see their detailed compliance information including current status, domain verification, assigned policy, last policy fetch time, and Docker Desktop version.
 
-When a user is compliant, a **Compliant** icon appears next to their name on the
-Desktop settings reporting dashboard. Select a compliant user to open their
-compliance status details. Compliant users have the following status details:
+## Resolve compliance issues
 
-- **Compliance status**: Compliant
-- **Domain status**: Verified
-- **Settings status**: Global policy or user policy
-- **User is compliant** indicator
+You can select a non-compliant user's name in the dashboard for recommended status resolution steps. The following sections are general resolution steps for non-compliant statuses:
 
-No resolution steps are needed for compliant users.
+### Non-compliant or outdated users
 
-### Non-compliant
+- Ask the user to fully quit and relaunch Docker Desktop
+- Verify the user is signed in to Docker Desktop
+- Confirm the user has Docker Desktop 4.40 or later
 
-When a user is non-compliant, a **Non-compliant** or **Unknown** icon appears
-next to their name on the Desktop settings reporting dashboard. Non-compliant
-users must have their compliance status resolved:
+### Uncontrolled domain users
 
-1. Select a username from the Desktop settings reporting dashboard.
-1. On the compliance status details page, follow the resolution steps provided
-to resolve the compliance status.
-1. Refresh the page to ensure the resolution steps resolved the compliance
-status.
+- Verify the user's email domain in your organization settings
+- If the domain should be controlled, add and verify it, then wait for verification
+- If the user is a guest and shouldn't be controlled, no action is needed
+
+### No policy assigned users
+
+- Assign the user to an existing policy
+- Create a new user-specific policy for them
+- Verify they're included in your organization's default policy scope
+
+After users take corrective action, refresh the reporting dashboard to verify status changes.
+
+## Policy update timing
+
+Docker Desktop checks for policy updates:
+
+- At startup
+- Every 60 minutes while Docker Desktop is running
+- When users restart Docker Desktop
+
+Changes to policies in the Admin Console are available immediately, but users must restart Docker Desktop to apply them.

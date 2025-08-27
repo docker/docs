@@ -49,8 +49,8 @@ services:
 
 When used to build service images from source, the Compose file creates three Docker images:
 
-* `example/webapp`: A Docker image is built using `webapp` sub-directory, within the Compose file's parent folder, as the Docker build context. Lack of a `Dockerfile` within this folder returns an error.
-* `example/database`: A Docker image is built using `backend` sub-directory within the Compose file parent folder. `backend.Dockerfile` file is used to define build steps, this file is searched relative to the context path, which means `..` resolves to the Compose file's parent folder, so `backend.Dockerfile` is a sibling file.
+* `example/webapp`: A Docker image is built using `webapp` sub-directory, within the Compose file's folder, as the Docker build context. Lack of a `Dockerfile` within this folder returns an error.
+* `example/database`: A Docker image is built using `backend` sub-directory within the Compose file's folder. `backend.Dockerfile` file is used to define build steps, this file is searched relative to the context path, which means `..` resolves to the Compose file's folder, so `backend.Dockerfile` is a sibling file.
 * A Docker image is built using the `custom` directory with the user's `$HOME` as the Docker context. Compose displays a warning about the non-portable path used to build image.
 
 On push, both `example/webapp` and `example/database` Docker images are pushed to the default registry. The `custom` service image is skipped as no `image` attribute is set and Compose displays a warning about this missing attribute.
@@ -61,7 +61,7 @@ The `build` subsection defines configuration options that are applied by Compose
 `build` can be specified either as a string containing a path to the build context or as a detailed structure:
 
 Using the string syntax, only the build context can be configured as either:
-- A relative path to the Compose file's parent folder. This path must be a directory and must contain a `Dockerfile`
+- A relative path to the Compose file's folder. This path must be a directory and must contain a `Dockerfile`
 
   ```yml
   services:
@@ -175,27 +175,6 @@ args:
   - GIT_COMMIT
 ```
 
-### `context`
-
-`context` defines either a path to a directory containing a Dockerfile, or a URL to a Git repository.
-
-When the value supplied is a relative path, it is interpreted as relative to the project directory.
-Compose warns you about the absolute path used to define the build context as those prevent the Compose file
-from being portable.
-
-```yml
-build:
-  context: ./dir
-```
-
-```yml
-services:
-  webapp:
-    build: https://github.com/mycompany/webapp.git
-```
-
-If not set explicitly, `context` defaults to project directory (`.`). 
-
 ### `cache_from`
 
 `cache_from` defines a list of sources the image builder should use for cache resolution.
@@ -233,6 +212,27 @@ build:
 Cache target is defined using the same `type=TYPE[,KEY=VALUE]` syntax defined by [`cache_from`](#cache_from).
 
 Unsupported caches are ignored and don't prevent you from building images.
+
+### `context`
+
+`context` defines either a path to a directory containing a Dockerfile, or a URL to a Git repository.
+
+When the value supplied is a relative path, it is interpreted as relative to the project directory.
+Compose warns you about the absolute path used to define the build context as those prevent the Compose file
+from being portable.
+
+```yml
+build:
+  context: ./dir
+```
+
+```yml
+services:
+  webapp:
+    build: https://github.com/mycompany/webapp.git
+```
+
+If not set explicitly, `context` defaults to project directory (`.`). 
 
 ### `dockerfile`
 

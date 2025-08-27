@@ -29,8 +29,9 @@ Apart from many new features, the main areas BuildKit improves on the current
 experience are performance, storage management, and extensibility. From the
 performance side, a significant update is a new fully concurrent build graph
 solver. It can run build steps in parallel when possible and optimize out
-commands that don't have an impact on the final result. We have also optimized
-the access to the local source files. By tracking only the updates made to these
+commands that don't have an impact on the final result.
+The access to the local source files has also been optimized. By tracking
+only the updates made to these
 files between repeated build invocations, there is no need to wait for local
 files to be read or uploaded before the work can begin.
 
@@ -39,7 +40,7 @@ files to be read or uploaded before the work can begin.
 At the core of BuildKit is a
 [Low-Level Build (LLB)](https://github.com/moby/buildkit#exploring-llb) definition format. LLB is an intermediate binary format
 that allows developers to extend BuildKit. LLB defines a content-addressable
-dependency graph that can be used to put together very complex build
+dependency graph that can be used to put together complex build
 definitions. It also supports features not exposed in Dockerfiles, like direct
 data mounting and nested invocation.
 
@@ -115,7 +116,7 @@ daemon.
 
 BuildKit has experimental support for Windows containers (WCOW) as of version 0.13.
 This section walks you through the steps for trying it out.
-We appreciate any feedback you submit by [opening an issue here](https://github.com/moby/buildkit/issues/new), especially `buildkitd.exe`.
+To share feedback, [open an issue in the repository](https://github.com/moby/buildkit/issues/new), especially `buildkitd.exe`.
 
 ### Known limitations
 

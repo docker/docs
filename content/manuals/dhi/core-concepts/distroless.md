@@ -10,9 +10,14 @@ Minimal images, sometimes called distroless images, are container images
 stripped of unnecessary components such as package managers, shells, or even the
 underlying operating system distribution. Docker Hardened Images (DHI) embrace
 this minimal approach to reduce vulnerabilities and enforce secure software
-delivery.
+delivery. [Docker Official
+Images](../../docker-hub/image-library/trusted-content.md#docker-official-images)
+and [Docker Verified Publisher
+Images](../../docker-hub/image-library/trusted-content.md#verified-publisher-images)
+follow similar best practices for minimalism and security but may not be as
+stripped down to ensure compatibility with a wider range of use cases.
 
-### What are minimal or distroless images?
+## What are minimal or distroless images?
 
 Traditional container images include a full OS, often more than what is needed
 to run an application. In contrast, minimal or distroless images include only:
@@ -31,7 +36,7 @@ They typically exclude:
 Docker Hardened Images are based on this model, ensuring a smaller and more
 secure runtime surface.
 
-### What you gain
+## What you gain
 
 | Benefit                | Description                                                                   |
 |------------------------|-------------------------------------------------------------------------------|
@@ -40,7 +45,7 @@ secure runtime surface.
 | Improved security      | Lack of shell and package manager limits what attackers can do if compromised |
 | Better compliance      | Easier to audit and verify, especially with SBOMs and attestations            |
 
-### Addressing common tradeoffs
+## Addressing common tradeoffs
 
 Minimal and distroless images offer strong security benefits, but they can
 change how you work with containers. Docker Hardened Images are designed to
@@ -55,7 +60,7 @@ maintain productivity while enhancing security.
 By balancing minimalism with practical tooling, Docker Hardened Images support
 modern development workflows without compromising on security or reliability.
 
-### Best practices for using minimal images
+## Best practices for using minimal images
 
 - Use multi-stage builds to separate build-time and runtime environments
 - Validate image behavior using CI pipelines, not interactive inspection

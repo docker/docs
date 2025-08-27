@@ -1,7 +1,7 @@
 ---
-description: Learn how to change your Docker subscription
-keywords: Docker Hub, upgrade, downgrade, subscription, Pro, Team, business, pricing
 title: Change your subscription
+description: Upgrade or downgrade your Docker subscription and understand billing changes
+keywords: upgrade subscription, downgrade subscription, docker pricing, subscription changes
 aliases:
 - /docker-hub/upgrade/
 - /docker-hub/billing/upgrade/
@@ -18,27 +18,20 @@ weight: 30
 
 {{% include "tax-compliance.md" %}}
 
-The following sections describe how to change plans when you have a Docker
-subscription or legacy Docker subscription.
+You can upgrade or downgrade your Docker subscription at any time to match your changing needs. This page explains how to make subscription changes and what to expect with billing and feature access.
 
 > [!NOTE]
 >
-> Legacy Docker plans apply to Docker subscribers who last purchased or renewed
-> their subscription before December 10, 2024. These subscribers will keep
-> their current subscription and pricing until their next renewal date that falls on or
-> after December 10, 2024. To see purchase or renewal history, view your
-> [billing history](../billing/history.md). For more details about legacy
-> subscriptions, see [Announcing Upgraded Docker
-> Plans](https://www.docker.com/blog/november-2024-updated-plans-announcement/).
+> Legacy Docker subscribers have different interfaces for subscription changes. Legacy subscriptions apply to subscribers who last purchased or renewed before December 10, 2024. For details, see [Announcing Upgraded Docker Plans](https://www.docker.com/blog/november-2024-updated-plans-announcement/).
 
 ## Upgrade your subscription
 
-When you upgrade a Docker subscription, you immediately have access to all the features and entitlements available in your Docker subscription. For detailed information on features available in each subscription, see [Docker Pricing](https://www.docker.com/pricing).
+When you upgrade your Docker subscription, you immediately get access to all features and entitlements in your new subscription tier. For detailed feature information, see [Docker Pricing](https://www.docker.com/pricing).
 
 {{< tabs >}}
 {{< tab name="Docker subscription" >}}
 
-To upgrade your Docker subscription:
+To upgrade your subscription:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select the organization
 you want to upgrade.
@@ -55,9 +48,7 @@ you want to upgrade.
 {{< /tab >}}
 {{< tab name="Legacy Docker subscription" >}}
 
-You can upgrade a legacy Docker Core, Docker Build Cloud, or Docker Scout subscription to a Docker subscription that includes access to all tools.
-
-Contact [Docker sales](https://www.docker.com/pricing/contact-sales/) to upgrade your legacy Docker subscription.
+To upgrade your legacy Docker subscription to a new Docker subscription that includes access to all tools, contact [Docker sales](https://www.docker.com/pricing/contact-sales/).
 
 {{< /tab >}}
 {{< /tabs >}}
@@ -66,21 +57,26 @@ Contact [Docker sales](https://www.docker.com/pricing/contact-sales/) to upgrade
 
 You can downgrade your Docker subscription at anytime before the renewal date. The unused portion of the subscription isn't refundable or creditable.
 
-When you downgrade your subscription, access to paid features is available until the next billing cycle. The downgrade takes effect on the next billing cycle.
+You can downgrade your Docker subscription at any time before the renewal date. The unused portion isn't refundable, but you retain access to paid features until the next billing cycle.
 
-> [!IMPORTANT]
->
-> If you downgrade your personal account from a Pro subscription to a Personal subscription, note that [Personal subscriptions](details.md#docker-personal) don't include collaborators for private repositories. Only one private repository is included with a Personal subscription. When you downgrade, all collaborators will be removed and additional private repositories are locked.
-> Before you downgrade, consider the following:
-> - Team size: You may need to reduce the number of team members and convert any private repositories to public repositories or delete them. For information on features available in each tier, see [Docker Pricing](https://www.docker.com/pricing).
-> - SSO and SCIM: If you want to downgrade a Docker Business subscription and your organization uses single sign-on (SSO) for user authentication, you need to remove your SSO connection and verified domains before downgrading. After removing the SSO connection, any organization members that were auto-provisioned (for example, with SCIM) need to set up a password to sign in without SSO. To do this, users can [reset their password at sign in](/accounts/create-account/#reset-your-password-at-sign-in).
+### Downgrade considerations
+
+Consider the following before downgrading:
+
+- Team size and repositories: You may need to reduce team members and convert private repositories to public or delete them based on your new subscription limits.
+- SSO and SCIM: If downgrading from Docker Business and your organization uses single sign-on, remove your SSO connection and verified domains first. Organization members who were auto-provisioned through SCIM need to reset their passwords to sign in without SSO.
+- Private repository collaborators: Personal subscriptions don't include collaborators for private repositories. When downgrading from Pro to Personal, all collaborators are removed and additional private repositories are locked.
+
+For feature limits in each tier, see [Docker Pricing](https://www.docker.com/pricing).
 
 {{< tabs >}}
 {{< tab name="Docker subscription" >}}
 
-If you have a [sales-assisted Docker Business subscription](details.md#sales-assisted), contact your account manager to downgrade your subscription.
+> [!IMPORTANT]
+>
+> If you have a [sales-assisted Docker Business subscription](details.md#sales-assisted), contact your account manager to downgrade your subscription.
 
-To downgrade your Docker subscription:
+To downgrade your subscription:
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select
 the organization you want to downgrade.
@@ -91,9 +87,9 @@ the organization you want to downgrade.
 {{< /tab >}}
 {{< tab name="Legacy Docker subscription" >}}
 
-If you have a [sales-assisted Docker Business subscription](details.md#sales-assisted), contact your account manager to downgrade your subscription.
-
-### Downgrade Legacy Docker subscription
+> [!IMPORTANT]
+>
+> If you have a [sales-assisted Docker Business subscription](details.md#sales-assisted), contact your account manager to downgrade your subscription.
 
 To downgrade your legacy Docker subscription:
 
@@ -102,8 +98,6 @@ To downgrade your legacy Docker subscription:
 1. To downgrade, you must navigate to the upgrade plan page. Select **Upgrade**.
 1. On the upgrade page, select **Downgrade** in the **Free Team** plan card.
 1. Follow the on-screen instructions to complete your downgrade.
-
-### Downgrade Docker Build Cloud subscription
 
 To downgrade your Docker Build Cloud subscription:
 
@@ -115,6 +109,6 @@ To downgrade your Docker Build Cloud subscription:
 {{< /tab >}}
 {{< /tabs >}}
 
-## Pause a subscription
+## Subscription pause policy
 
-You can't pause or delay a subscription. If a subscription invoice hasn't been paid on the due date, there's a 15 day grace period, including the due date.
+You can't pause or delay a subscription. If a subscription invoice isn't paid by the due date, there's a 15-day grace period starting from the due date.

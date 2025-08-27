@@ -1,149 +1,132 @@
-<!-- search button, mobile (link off to the search page for now) -->
-<a href="/search" class="sm:hidden">
-  <span class="icon-svg">{{ partialCached "icon" "search" "search" }}</span>
-</a>
-<!-- search button -->
 <div
-  x-ref="searchBarRef"
-  x-data="{ open: false }"
-  @click.outside="open = false;"
-  @keyup.escape.window="open = false"
-  id="search-bar"
-  class="relative hidden min-w-0 items-center rounded-sm bg-white/10 p-2 sm:flex sm:w-full xl:w-[400px]"
->
-  {{ (resources.Get "images/search-ai.svg").Content | safeHTML }}
-  <input
-    x-ref="searchBarInput"
-    type="search"
-    id="search-bar-input"
-    @focus="open = true;"
-    @keyup.enter.prevent="window.location.href = '/search/?q=' + $event.target.value;"
-    @keyup.escape.prevent="open = false;"
-    @keydown.window="(e) => {
-          switch(e.key) {
-          case 'k':
-            if (e.metaKey || e.ctrlKey) {
-              e.preventDefault();
-              $el.focus();
+    x-ref="searchBarRef"
+    x-data="{ open: false }"
+    @click.outside="open = false;"
+    @keyup.escape.window="open = false"
+    id="search-bar"
+    class="relative items-center flex w-full max-w-full overflow-x-auto"
+  >
+    <input
+      class="border-none outline-none focus:outline-none min-w-0"
+      x-ref="searchBarInput"
+      type="search"
+      id="search-bar-input"
+      placeholder="Search"
+      @focus="open = true;"
+      @keyup.enter.prevent="window.location.href = '/search/?q=' + $event.target.value;"
+      @keyup.escape.prevent="open = false;"
+      @keydown.window="(e) => {
+            switch(e.key) {
+            case 'k':
+              if (e.metaKey || e.ctrlKey) {
+                e.preventDefault();
+                $el.focus();
+              }
+              break;
             }
-            break;
-          }
-        }"
-    class="min-w-0 flex-grow bg-transparent px-2 text-white outline-hidden placeholder:text-white"
-    placeholder="Search"
-    tabindex="0"
-  />
-  <div
-    x-cloak
-    :class="open && 'hidden'"
-    class="hidden items-center rounded-sm border border-white px-1 text-sm lg:flex"
-  >
-    <div class="-mt-0.5">
-      <span x-show="navigator.platform == 'MacIntel'" class="icon-svg icon-sm"
-        >{{ partialCached "icon" "keyboard_command_key" "keyboard_command_key" }}</span
-      >
-      <span x-show="navigator.platform != 'MacIntel'" class="icon-svg icon-sm"
-        >{{ partialCached "icon" "keyboard_control_key" "keyboard_control_key" }}</span
-      >
+          }"
+      tabindex="0"
+    />
+    <div id="search-bar-icon">
+      <span class="icon-svg-stroke">
+            {{ partial "utils/svg.html" "/icons/search.svg" }}
+          </span>
     </div>
-    <span>K</span>
-  </div>
-  <div x-cloak :class="open || 'hidden'">
-    <button
-      @click="$refs.searchBarInput.value = ''; open = false"
-      class="text-white hover:text-white"
-    >
-      <span class="icon-svg">{{ partialCached "icon" "close" "close" }}</span>
-    </button>
-  </div>
-  <div
-    x-show="open"
-    x-cloak
-    class="bg-background-light dark:bg-background-dark absolute top-full right-0 z-50 w-screen max-w-xl rounded-sm px-6 py-4 shadow-lg"
-  >
-    <div id="search-bar-results">
-      {{- $emptyState := `<div class="p-2 text-gray-500 dark:text-gray-400">Start typing to search… or try <button @click="open=false" class="open-kapa-widget link">Ask AI</button></div>` }}
-      {{- $emptyState | safe.HTML }}
-      <!-- results -->
+    <div id="search-bar-dropdown"
+      x-show="open"
+      x-cloak
+      x-ref="dropdown"
+      class="hidden md:block font-medium text-gray-400 dark:text-gray-200 bg-gray-50 dark:bg-gray-900 rounded-sm mt-4 border-1 border-gray-100 dark:border-gray-700 fixed z-[999] w-[500px] p-6 shadow-md"
+      x-effect="if (open) {
+        const containerRect = document.getElementById('search-bar-container').getBoundingClientRect();
+        const rect = $refs.searchBarRef.getBoundingClientRect();
+        $el.style.top = (rect.bottom + window.scrollY - 2) + 'px';
+        $el.style.right = (window.innerWidth - containerRect.right - 15) + 'px';
+      }">
+      <div id="search-bar-results">
+        {{- $emptyState := `<div>Start typing to search or try <button onclick="askAI('search-bar-input')" class="link">Ask
+            AI</button>.</div>` }}
+        {{- $emptyState | safe.HTML }}
+        <!-- results -->
+      </div>
     </div>
-  </div>
-  <script type="module">
-    window.addEventListener("load", async function () {
-      const pagefind = await import("/pagefind/pagefind.js");
-      await pagefind.options({
-        ranking: {
-          termFrequency: 0.2,
-          pageLength: 0.75,
-          termSaturation: 1.4,
-          termSimilarity: 6.0,
-        },
-      });
-
-      const searchBarInput = document.querySelector("#search-bar-input");
-      const searchBarResults = document.querySelector(
-        "#search-bar-results",
-      );
-
-      async function search(e) {
-        const query = e.target.value;
-        if (query === "") {
-          searchBarResults.innerHTML = `{{ $emptyState | safe.HTML }}`;
-          return;
-        }
-        const search = await pagefind.debouncedSearch(query);
-        if (search === null) {
-          return;
-        } else {
-          const resultsLength = search.results.length
-          const resultsData = await Promise.all(search.results.slice(0, 5).map(r => r.data()));
-          const results = resultsData.map((item, index) => ({...item, index: index + 1}));
-
-          if (query) {
-            searchBarResults.classList.remove("hidden");
-          } else {
-            searchBarResults.classList.add("hidden");
-          }
-
-          let resultsHTML = `<div class="p-2 text-gray-400 dark:text-gray-500">${resultsLength} results</div>`;
-          resultsHTML += results
-            .map((item) => {
-              return `<div class="p-2">
-              <div class="flex flex-col">
-                <a class="link" href="${item.url}" data-query="${query}" data-index="${item.index}">${item.meta.title}</a>
-                <p class="text-black dark:text-white overflow-hidden">…${item.excerpt}…</p>
-              </div>
-              </div>`;
-            })
-            .join("");
-          if (resultsLength > 5) {
-            resultsHTML += `<div class="w-fit ml-auto px-4 py-2"><a href="/search/?q=${query}" class="link">Show all results</a></div>`;
-          }
-
-          searchBarResults.innerHTML = resultsHTML;
-        }
-      }
-
-      searchBarInput.addEventListener("input", search);
-
-      // Event delegation for tracking link clicks
-      if (window.heap !== undefined) {
-        searchBarResults.addEventListener('click', function (event) {
-          if (event.target.tagName === 'A' && event.target.closest('.link')) {
-            const searchQuery = event.target.getAttribute('data-query');
-            const resultIndex = event.target.getAttribute('data-index');
-            const url = new URL(event.target.href);
-            const properties = {
-              docs_search_target_path: url.pathname,
-              docs_search_target_title: event.target.textContent,
-              docs_search_query_text: searchQuery,
-              docs_search_target_index: resultIndex,
-              docs_search_source_path: window.location.pathname,
-              docs_search_source_title: document.title,
-            };
-            heap.track("Docs - Search - Click - Result Link", properties);
-          }
+    <script type="module">
+      window.addEventListener("load", async function () {
+        const pagefind = await import("/pagefind/pagefind.js");
+        await pagefind.options({
+          ranking: {
+            termFrequency: 0.2,
+            pageLength: 0.75,
+            termSaturation: 1.4,
+            termSimilarity: 6.0
+          },
         });
-      }
-    });
-  </script>
+
+        const searchBarInput = document.querySelector("#search-bar-input");
+        const searchBarResults = document.querySelector(
+          "#search-bar-results",
+        );
+
+        async function search(e) {
+          const query = e.target.value;
+          if (query === "") {
+            searchBarResults.innerHTML = `{{ $emptyState | safe.HTML }}`;
+            return;
+          }
+          const search = await pagefind.debouncedSearch(query);
+          if (search === null) {
+            return;
+          } else {
+            const resultsLength = search.results.length
+            const resultsData = await Promise.all(search.results.slice(0, 5).map(r => r.data()));
+            const results = resultsData.map((item, index) => ({...item, index: index + 1}));
+
+            if (query) {
+              searchBarResults.classList.remove("hidden");
+            } else {
+              searchBarResults.classList.add("hidden");
+            }
+
+            let resultsHTML = `<div class="p-2 text-gray-400 dark:text-gray-500">${resultsLength} results</div>`;
+            resultsHTML += results
+              .map((item) => {
+                return `<div class="p-2">
+                <div class="flex flex-col items-start item">
+                  <a class="link" href="${item.url}" data-query="${query}" data-index="${item.index}">${item.meta.title}</a>
+                  <p class="text-black dark:text-white overflow-hidden text-left">…${item.excerpt}…</p>
+                </div>
+                </div>`;
+              })
+              .join("");
+            if (resultsLength > 5) {
+              resultsHTML += `<div class="w-fit ml-auto px-4 py-2"><a href="/search/?q=${query}" class="link">Show all results</a></div>`;
+            }
+
+            searchBarResults.innerHTML = resultsHTML;
+          }
+        }
+
+        searchBarInput.addEventListener("input", search);
+
+        // Event delegation for tracking link clicks
+        if (window.heap !== undefined) {
+          searchBarResults.addEventListener('click', function (event) {
+            if (event.target.tagName === 'A' && event.target.closest('.link')) {
+              const searchQuery = event.target.getAttribute('data-query');
+              const resultIndex = event.target.getAttribute('data-index');
+              const url = new URL(event.target.href);
+              const properties = {
+                docs_search_target_path: url.pathname,
+                docs_search_target_title: event.target.textContent,
+                docs_search_query_text: searchQuery,
+                docs_search_target_index: resultIndex,
+                docs_search_source_path: window.location.pathname,
+                docs_search_source_title: document.title,
+              };
+              heap.track("Docs - Search - Click - Result Link", properties);
+            }
+          });
+        }
+      });
+    </script>
 </div>

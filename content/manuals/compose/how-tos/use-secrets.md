@@ -84,7 +84,7 @@ In the advanced example above:
 
 - The `secrets` attribute under each service defines the secrets you want to inject into the specific container.
 - The top-level `secrets` section defines the variables `db_password` and `db_root_password` and provides the `file` that populates their values.
-- The deployment of each container means Docker creates a temporary filesystem mount under `/run/secrets/<secret_name>` with their specific values.
+- The deployment of each container means Docker creates a bind mount under `/run/secrets/<secret_name>` with their specific values.
 
 > [!NOTE]
 >
