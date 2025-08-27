@@ -40,5 +40,5 @@ On the Docker Offload **Usage summary** page, you can:
 
 - View your estimated amount due for on-demand usage
 - View free trial usage remaining
-- View included usage remaning
+- View included usage remaining
 - View your recorded usage for the current billing period
