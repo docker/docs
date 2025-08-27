@@ -60,7 +60,7 @@ Click on a platform's link to view the relevant installation procedure.
 > While the following instructions may work, Docker doesn't test or verify
 > installation on distribution derivatives.
 
-- If you use Debian derivatives such as "BunsenLabs Linux", "Kali Linux" or 
+- If you use Debian derivatives such as "BunsenLabs Linux", "Kali Linux" or
   "LMDE" (Debian-based Mint) should follow the installation instructions for
   [Debian](debian.md), substitute the version of your distribution for the
   corresponding Debian release. Refer to the documentation of your distribution to find
@@ -107,9 +107,10 @@ Patch releases are always backward compatible with its major and minor version.
 
 ### Licensing
 
-Docker Engine is licensed under the Apache License, Version 2.0. See
-[LICENSE](https://github.com/moby/moby/blob/master/LICENSE) for the full
-license text.
+Commercial use of Docker Engine obtained via Docker Desktop
+within larger enterprises (exceeding 250 employees OR with annual revenue surpassing
+$10 million USD), requires a [paid subscription](https://www.docker.com/pricing/).
+See [LICENSE](https://github.com/moby/moby/blob/master/LICENSE) for the full license.
 
 ## Reporting security issues
 
