@@ -119,6 +119,43 @@ $ docker scout attest get docs/dhi-node:20.19-debian12-fips-20250701182639 \
    --predicate-type https://scout.docker.com/sbom/v0.1 --verify
 ```
 
+#### Handle missing transparency log entries
+
+When using `--verify`, you may sometimes see an error like:
+
+```text
+ERROR no matching signatures: signature not found in transparency log
+```
+
+This occurs because Docker Hardened Images don't always record attestations in
+the public [Rekor](https://docs.sigstore.dev/logging/overview/) transparency
+log. In cases where an attestation would contain private user information (for
+example, your organization's namespace in the image reference), writing it to
+Rekor would expose that information publicly.
+
+Even if the Rekor entry is missing, the attestation is still signed with
+Docker's public key and can be verified offline by skipping the Rekor
+transparency log check.
+
+To skip the transparency log check and validate against Docker's key, use the
+`--skip-tlog` flag:
+
+```console
+$ docker scout attest get \
+  --predicate-type https://cyclonedx.org/bom/v1.6 \
+  <your-org-namespace>/dhi-<image>:<tag> --platform <platform> \
+  --verify --skip-tlog
+```
+
+> [!NOTE]
+>
+> The `--skip-tlog` flag is only available in Docker Scout CLI version 1.18.2 and
+> later.
+
+This is equivalent to using `cosign` with the `--insecure-ignore-tlog=true`
+flag, which validates the signature against Docker's published public key, but
+ignores the transparency log check.
+
 ### Show the equivalent cosign command
 
 When using the `--verify` flag, it also prints the corresponding
