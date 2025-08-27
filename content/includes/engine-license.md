@@ -1,0 +1,1 @@
+See [LICENSE](https://github.com/moby/moby/blob/master/LICENSE) for the full license.
