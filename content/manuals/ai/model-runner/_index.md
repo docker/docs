@@ -3,9 +3,6 @@ title: Docker Model Runner
 linkTitle: Model Runner
 params:
   sidebar:
-    badge:
-      color: blue
-      text: Beta
     group: AI
 weight: 20
 description: Learn how to use Docker Model Runner to manage and run AI models.

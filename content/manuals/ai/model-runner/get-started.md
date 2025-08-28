@@ -11,7 +11,7 @@ Get started with [Docker Model Runner](_index.md).
 
 ### Enable DMR in Docker Desktop
 
-1. In the settings view, go to the **Beta features** tab.
+1. In the settings view, go to the **AI** tab.
 1. Select the **Enable Docker Model Runner** setting.
 1. If you use Windows with a supported NVIDIA GPU, you also see and can select
    **Enable GPU-backed inference**.
@@ -27,8 +27,8 @@ with your local models in the **Models** tab in the Docker Desktop Dashboard.
 
 > [!IMPORTANT]
 >
-> For Docker Desktop versions 4.41 and earlier, this setting was under the
-> **Experimental features** tab on the **Features in development** page.
+> For Docker Desktop versions 4.45 and earlier, this setting was under the
+> **Beta features** tab.
 
 ### Enable DMR in Docker Engine
 
