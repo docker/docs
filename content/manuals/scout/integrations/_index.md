@@ -31,8 +31,8 @@ The following container registry integrations are available:
 
 ### Continuous Integration
 
-Integrating Docker Scout with Continuous Integration (CI) systems is a great
-way to get instant, automatic feedback about your security posture in your inner
+Integrating Docker Scout with Continuous Integration (CI) systems is a great way
+to get instant, automatic feedback about your security posture in your inner
 loop. Analysis running in CI also gets the benefit of additional context that's
 useful for getting even more insights.
 

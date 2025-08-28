@@ -31,23 +31,23 @@ optionally configure Artifactory webhooks.
 
 These `type=artifactory` options override the generic registry handling for the `--registry` option:
 
-| Key              | Required | Description |
-|------------------|:--------:|-------------|
-| `type`           | Yes      | Must be `artifactory`. |
-| `registry`       | Yes      | Docker/OCI registry hostname (e.g., `example.jfrog.io`). |
-| `api`            | Yes      | Artifactory REST API base URL (e.g., `https://example.jfrog.io/artifactory`). |
-| `repository`     | Yes      | Repository to watch (replaces `--repository`). |
-| `includes`       | No       | Globs to include (e.g., `*/frontend*`). |
-| `excludes`       | No       | Globs to exclude (e.g., `*/legacy/*`). |
-| `port`           | No       | Local port to listen on for webhook callbacks. |
-| `subdomain-mode` | No       | `true` or `false`; matches Artifactory’s Docker layout (subdomain vs repo-path). |
+| Key              | Required | Description                                                                            |
+|------------------|:--------:|----------------------------------------------------------------------------------------|
+| `type`           |   Yes    | Must be `artifactory`.                                                                 |
+| `registry`       |   Yes    | Docker/OCI registry hostname (e.g., `example.jfrog.io`).                               |
+| `api`            |   Yes    | Artifactory REST API base URL (e.g., `https://example.jfrog.io/artifactory`).          |
+| `repository`     |   Yes    | Repository to watch (replaces `--repository`).                                         |
+| `includes`       |    No    | Globs to include (e.g., `*/frontend*`).                                                |
+| `excludes`       |    No    | Globs to exclude (e.g., `*/legacy/*`).                                                 |
+| `port`           |    No    | Local port to listen on for webhook callbacks.                                         |
+| `subdomain-mode` |    No    | `true` or `false`; matches Artifactory’s Docker layout (subdomain versus repository-path). |
 
 ## Integrate an Artifactory registry
 
 Use the following steps to integrate your Artifactory registry with Docker
 Scout.
 
-1. Pick the host on which to  run `docker scout watch`.
+1. Pick the host on which to run `docker scout watch`.
 
    The host must have local or network access to your private registry and be able
    to access the Scout API (`https://api.scout.docker.com`) over the internet. If
