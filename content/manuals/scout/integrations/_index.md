@@ -4,8 +4,6 @@ keywords: supply chain, security, integrations, registries, ci, environments
 title: Integrating Docker Scout with other systems
 linkTitle: Integrations
 weight: 80
-aliases:
- - /scout/integrations/registry/artifactory
 ---
 
 By default, Docker Scout integrates with your Docker organization and your
@@ -29,6 +27,7 @@ The following container registry integrations are available:
 
 - [Amazon Elastic Container Registry](./registry/ecr.md)
 - [Azure Container Registry](./registry/acr.md)
+- [JFrog Artifactory](./registry/artifactory.md)
 
 ### Continuous Integration
 
