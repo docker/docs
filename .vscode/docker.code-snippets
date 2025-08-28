@@ -59,4 +59,9 @@
     "body": ["Visual Studio Code"],
     "description": "Insert 'Visual Studio Code'",
   },
+  "Insert reusable snippet": {
+    "prefix": ["include","reuse"],
+    "body": ["{{% include \"$1\" %}}"],
+    "description": "Insert a reusable snippet stored in the `includes` folder",
+  }
 }

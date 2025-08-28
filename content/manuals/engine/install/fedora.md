@@ -72,6 +72,8 @@ You can install Docker Engine in different ways, depending on your needs:
 - In testing and development environments, you can use automated
   [convenience scripts](#install-using-the-convenience-script) to install Docker.
 
+{{% include "engine-license.md" %}}
+
 ### Install using the rpm repository {#install-using-the-repository}
 
 Before you install Docker Engine for the first time on a new host machine, you
