@@ -137,7 +137,7 @@ Scout.
    For more information, see the [JFrog Artifactory Webhooks
    documentation](https://jfrog.com/help/r/jfrog-platform-administration-documentation/webhooks)
    or the [JFrog Artifactory REST API Webhooks
-   documentation](https://jfrog.com/help/r/jfrog-rest-apis/webhooks)
+   documentation](https://jfrog.com/help/r/jfrog-rest-apis/webhooks).
 
 8. Continuously watch for new or updated images.
 
