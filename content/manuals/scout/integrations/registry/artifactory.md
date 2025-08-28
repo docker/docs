@@ -6,7 +6,7 @@ linkTitle: Artifactory Container Registry
 ---
 
 Integrating Docker Scout with JFrog Artifactory lets you index and analyze
-images from Artifactory Docker. This integration is powered by a long-running
+images from Artifactory. This integration is powered by a long-running
 `docker scout watch` process. It pulls images from your selected repositories
 (optionally filtered), can receive webhook callbacks from Artifactory, and
 pushes image data to Docker Scout. View results in the Docker Scout Dashboard or
