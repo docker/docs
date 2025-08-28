@@ -285,14 +285,21 @@
 
 
 # Links in Desktop
- 
+
 
 # Desktop MCP Toolkit
 "/ai/mcp-catalog-and-toolkit/toolkit/":
   - /go/mcp-toolkit/
+"/ai/mcp-catalog-and-toolkit/":
+  - /go/mcp-catalog-and-toolkit/
+"/ai/mcp-catalog-and-toolkit/catalog/":
+  - /go/mcp-catalog-and-toolkit-catalog/
+"/ai/mcp-catalog-and-toolkit/toolkit/#install-an-mcp-server":
+  - /go/mcp-toolkit-install-mcp-server/
+"/ai/mcp-catalog-and-toolkit/toolkit/#install-an-mcp-client":
+  - /go/mcp-toolkit-install-mcp-client/
 
-# Desktop DMR
-
+ # Desktop DMR
 "/ai/model-runner/":
   - /go/model-runner/
 
