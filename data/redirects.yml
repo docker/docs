@@ -357,3 +357,8 @@
 
 "/dhi/how-to/customize/#create-an-oci-artifact-image":
   - /go/dhi-customization-artifacts/
+
+
+# Legacy pricing PDF (external link bypassing analytics)
+"http://www.docker.com/legacy-pricing.pdf/":
+  - /go/legacy-pricing/
