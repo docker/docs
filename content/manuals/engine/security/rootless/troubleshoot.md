@@ -1,64 +1,14 @@
 ---
-description: Run the Docker daemon as a non-root user (Rootless mode)
-keywords: security, namespaces, rootless
-title: Rootless mode
-weight: 10
+description: Troubleshooting the Rootless mode
+keywords: security, namespaces, rootless, troubleshooting
+title: Troubleshooting
+weight: 30
 ---
-
-Rootless mode allows running the Docker daemon and containers as a non-root
-user to mitigate potential vulnerabilities in the daemon and
-the container runtime.
-
-Rootless mode does not require root privileges even during the installation of
-the Docker daemon, as long as the [prerequisites](#prerequisites) are met.
-
-## How it works
-
-Rootless mode executes the Docker daemon and containers inside a user namespace.
-This is very similar to [`userns-remap` mode](userns-remap.md), except that
-with `userns-remap` mode, the daemon itself is running with root privileges,
-whereas in rootless mode, both the daemon and the container are running without
-root privileges.
-
-Rootless mode does not use binaries with `SETUID` bits or file capabilities,
-except `newuidmap` and `newgidmap`, which are needed to allow multiple
-UIDs/GIDs to be used in the user namespace.
-
-## Prerequisites
-
--  You must install `newuidmap` and `newgidmap` on the host. These commands
-  are provided by the `uidmap` package on most distributions.
-
-- `/etc/subuid` and `/etc/subgid` should contain at least 65,536 subordinate
-  UIDs/GIDs for the user. In the following example, the user `testuser` has
-  65,536 subordinate UIDs/GIDs (231072-296607).
-
-```console
-$ id -u
-1001
-$ whoami
-testuser
-$ grep ^$(whoami): /etc/subuid
-testuser:231072:65536
-$ grep ^$(whoami): /etc/subgid
-testuser:231072:65536
-```
 
 ### Distribution-specific hint
 
-> [!TIP]
->
-> We recommend that you use the Ubuntu kernel.
-
 {{< tabs >}}
 {{< tab name="Ubuntu" >}}
-- Install `dbus-user-session` package if not installed. Run `sudo apt-get install -y dbus-user-session` and relogin.
-- Install `uidmap` package if not installed.  Run `sudo apt-get install -y uidmap`.
-- If running in a terminal where the user was not directly logged into, you will need to install `systemd-container` with `sudo apt-get install -y systemd-container`, then switch to TheUser with the command `sudo machinectl shell TheUser@`.
-
-- `overlay2` storage driver  is enabled by default
-  ([Ubuntu-specific kernel patch](https://kernel.ubuntu.com/git/ubuntu/ubuntu-bionic.git/commit/fs/overlayfs?id=3b7da90f28fe1ed4b79ef2d994c81efbc58f1144)).
-
 - Ubuntu 24.04 and later enables restricted unprivileged user namespaces by
   default, which prevents unprivileged processes in creating user namespaces
   unless an AppArmor profile is configured to allow programs to use
@@ -95,30 +45,11 @@ testuser:231072:65536
      ```
 
 {{< /tab >}}
-{{< tab name="Debian GNU/Linux" >}}
-- Install `dbus-user-session` package if not installed. Run `sudo apt-get install -y dbus-user-session` and relogin.
-
-- For Debian 11, installing `fuse-overlayfs` is recommended. Run `sudo apt-get install -y fuse-overlayfs`.
-  This step is not required on Debian 12.
-
-- Rootless docker requires version of `slirp4netns` greater than `v0.4.0` (when `vpnkit` is not installed).
-  Check you have this with 
-  
-  ```console
-  $ slirp4netns --version
-  ```
-  If you do not have this download and install with `sudo apt-get install -y slirp4netns` or download the latest [release](https://github.com/rootless-containers/slirp4netns/releases).
-{{< /tab >}}
 {{< tab name="Arch Linux" >}}
-- Installing `fuse-overlayfs` is recommended. Run `sudo pacman -S fuse-overlayfs`.
-
 - Add `kernel.unprivileged_userns_clone=1` to `/etc/sysctl.conf` (or
   `/etc/sysctl.d`) and run `sudo sysctl --system`
 {{< /tab >}}
 {{< tab name="openSUSE and SLES" >}}
-- For openSUSE 15 and SLES 15, Installing `fuse-overlayfs` is recommended. Run `sudo zypper install -y fuse-overlayfs`.
-  This step is not required on openSUSE Tumbleweed.
-
 - `sudo modprobe ip_tables iptable_mangle iptable_nat iptable_filter` is required.
   This might be required on other distributions as well depending on the configuration.
 
@@ -135,293 +66,22 @@ testuser:231072:65536
 ## Known limitations
 
 - Only the following storage drivers are supported:
-  - `overlay2` (only if running with kernel 5.11 or later, or Ubuntu-flavored kernel)
+  - `overlay2` (only if running with kernel 5.11 or later)
   - `fuse-overlayfs` (only if running with kernel 4.18 or later, and `fuse-overlayfs` is installed)
   - `btrfs` (only if running with kernel 4.18 or later, or `~/.local/share/docker` is mounted with `user_subvol_rm_allowed` mount option)
   - `vfs`
-- Cgroup is supported only when running with cgroup v2 and systemd. See [Limiting resources](#limiting-resources).
+- cgroup is supported only when running with cgroup v2 and systemd. See [Limiting resources](./tips.md#limiting-resources).
 - Following features are not supported:
   - AppArmor
   - Checkpoint
   - Overlay network
   - Exposing SCTP ports
-- To use the `ping` command, see [Routing ping packets](#routing-ping-packets).
-- To expose privileged TCP/UDP ports (< 1024), see [Exposing privileged ports](#exposing-privileged-ports).
+- To use the `ping` command, see [Routing ping packets](./tips.md#routing-ping-packets).
+- To expose privileged TCP/UDP ports (< 1024), see [Exposing privileged ports](./tips.md#exposing-privileged-ports).
 - `IPAddress` shown in `docker inspect` is namespaced inside RootlessKit's network namespace.
   This means the IP address is not reachable from the host without `nsenter`-ing into the network namespace.
 - Host network (`docker run --net=host`) is also namespaced inside RootlessKit.
 - NFS mounts as the docker "data-root" is not supported. This limitation is not specific to rootless mode.
-
-## Install
-
-> [!NOTE]
->
-> If the system-wide Docker daemon is already running, consider disabling it:
->```console
->$ sudo systemctl disable --now docker.service docker.socket
->$ sudo rm /var/run/docker.sock
->```
-> Should you choose not to shut down the `docker` service and socket, you will need to use the `--force`
-> parameter in the next section. There are no known issues, but until you shutdown and disable you're
-> still running rootful Docker. 
-
-{{< tabs >}}
-{{< tab name="With packages (RPM/DEB)" >}}
-
-If you installed Docker 20.10 or later with [RPM/DEB packages](/engine/install), you should have `dockerd-rootless-setuptool.sh` in `/usr/bin`.
-
-Run `dockerd-rootless-setuptool.sh install` as a non-root user to set up the daemon:
-
-```console
-$ dockerd-rootless-setuptool.sh install
-[INFO] Creating /home/testuser/.config/systemd/user/docker.service
-...
-[INFO] Installed docker.service successfully.
-[INFO] To control docker.service, run: `systemctl --user (start|stop|restart) docker.service`
-[INFO] To run docker.service on system startup, run: `sudo loginctl enable-linger testuser`
-
-[INFO] Make sure the following environment variables are set (or add them to ~/.bashrc):
-
-export PATH=/usr/bin:$PATH
-export DOCKER_HOST=unix:///run/user/1000/docker.sock
-```
-
-If `dockerd-rootless-setuptool.sh` is not present, you may need to install the `docker-ce-rootless-extras` package manually, e.g.,
-
-```console
-$ sudo apt-get install -y docker-ce-rootless-extras
-```
-
-{{< /tab >}}
-{{< tab name="Without packages" >}}
-
-If you do not have permission to run package managers like `apt-get` and `dnf`,
-consider using the installation script available at [https://get.docker.com/rootless](https://get.docker.com/rootless).
-Since static packages are not available for `s390x`, hence it is not supported for `s390x`.
-
-```console
-$ curl -fsSL https://get.docker.com/rootless | sh
-...
-[INFO] Creating /home/testuser/.config/systemd/user/docker.service
-...
-[INFO] Installed docker.service successfully.
-[INFO] To control docker.service, run: `systemctl --user (start|stop|restart) docker.service`
-[INFO] To run docker.service on system startup, run: `sudo loginctl enable-linger testuser`
-
-[INFO] Make sure the following environment variables are set (or add them to ~/.bashrc):
-
-export PATH=/home/testuser/bin:$PATH
-export DOCKER_HOST=unix:///run/user/1000/docker.sock
-```
-
-The binaries will be installed at `~/bin`.
-
-{{< /tab >}}
-{{< /tabs >}}
-
-See [Troubleshooting](#troubleshooting) if you faced an error.
-
-## Uninstall
-
-To remove the systemd service of the Docker daemon, run `dockerd-rootless-setuptool.sh uninstall`:
-
-```console
-$ dockerd-rootless-setuptool.sh uninstall
-+ systemctl --user stop docker.service
-+ systemctl --user disable docker.service
-Removed /home/testuser/.config/systemd/user/default.target.wants/docker.service.
-[INFO] Uninstalled docker.service
-[INFO] This uninstallation tool does NOT remove Docker binaries and data.
-[INFO] To remove data, run: `/usr/bin/rootlesskit rm -rf /home/testuser/.local/share/docker`
-```
-
-Unset environment variables PATH and DOCKER_HOST if you have added them to `~/.bashrc`.
-
-To remove the data directory, run `rootlesskit rm -rf ~/.local/share/docker`.
-
-To remove the binaries, remove `docker-ce-rootless-extras` package if you installed Docker with package managers.
-If you installed Docker with https://get.docker.com/rootless ([Install without packages](#install)),
-remove the binary files under `~/bin`:
-```console
-$ cd ~/bin
-$ rm -f containerd containerd-shim containerd-shim-runc-v2 ctr docker docker-init docker-proxy dockerd dockerd-rootless-setuptool.sh dockerd-rootless.sh rootlesskit rootlesskit-docker-proxy runc vpnkit
-```
-
-## Usage
-
-### Daemon
-
-{{< tabs >}}
-{{< tab name="With systemd (Highly recommended)" >}}
-
-The systemd unit file is installed as  `~/.config/systemd/user/docker.service`.
-
-Use `systemctl --user` to manage the lifecycle of the daemon:
-
-```console
-$ systemctl --user start docker
-```
-
-To launch the daemon on system startup, enable the systemd service and lingering:
-
-```console
-$ systemctl --user enable docker
-$ sudo loginctl enable-linger $(whoami)
-```
-
-Starting Rootless Docker as a systemd-wide service (`/etc/systemd/system/docker.service`)
-is not supported, even with the `User=` directive.
-
-{{< /tab >}}
-{{< tab name="Without systemd" >}}
-
-To run the daemon directly without systemd, you need to run `dockerd-rootless.sh` instead of `dockerd`.
-
-The following environment variables must be set:
-- `$HOME`: the home directory
-- `$XDG_RUNTIME_DIR`: an ephemeral directory that is only accessible by the expected user, e,g, `~/.docker/run`.
-  The directory should be removed on every host shutdown.
-  The directory can be on tmpfs, however, should not be under `/tmp`.
-  Locating this directory under `/tmp` might be vulnerable to TOCTOU attack.
-
-{{< /tab >}}
-{{< /tabs >}}
-
-Remarks about directory paths:
-
-- The socket path is set to `$XDG_RUNTIME_DIR/docker.sock` by default.
-  `$XDG_RUNTIME_DIR` is typically set to `/run/user/$UID`.
-- The data dir is set to `~/.local/share/docker` by default.
-  The data dir should not be on NFS.
-- The daemon config dir is set to `~/.config/docker` by default.
-  This directory is different from `~/.docker` that is used by the client.
-
-### Client
-
-You need to specify either the socket path or the CLI context explicitly.
-
-To specify the socket path using `$DOCKER_HOST`:
-
-```console
-$ export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
-$ docker run -d -p 8080:80 nginx
-```
-
-To specify the CLI context using `docker context`:
-
-```console
-$ docker context use rootless
-rootless
-Current context is now "rootless"
-$ docker run -d -p 8080:80 nginx
-```
-
-## Best practices
-
-### Rootless Docker in Docker
-
-To run Rootless Docker inside "rootful" Docker, use the `docker:<version>-dind-rootless`
-image instead of `docker:<version>-dind`.
-
-```console
-$ docker run -d --name dind-rootless --privileged docker:25.0-dind-rootless
-```
-
-The `docker:<version>-dind-rootless` image runs as a non-root user (UID 1000).
-However, `--privileged` is required for disabling seccomp, AppArmor, and mount
-masks.
-
-### Expose Docker API socket through TCP
-
-To expose the Docker API socket through TCP, you need to launch `dockerd-rootless.sh`
-with `DOCKERD_ROOTLESS_ROOTLESSKIT_FLAGS="-p 0.0.0.0:2376:2376/tcp"`.
-
-```console
-$ DOCKERD_ROOTLESS_ROOTLESSKIT_FLAGS="-p 0.0.0.0:2376:2376/tcp" \
-  dockerd-rootless.sh \
-  -H tcp://0.0.0.0:2376 \
-  --tlsverify --tlscacert=ca.pem --tlscert=cert.pem --tlskey=key.pem
-```
-
-### Expose Docker API socket through SSH
-
-To expose the Docker API socket through SSH, you need to make sure `$DOCKER_HOST`
-is set on the remote host.
-
-```console
-$ ssh -l <REMOTEUSER> <REMOTEHOST> 'echo $DOCKER_HOST'
-unix:///run/user/1001/docker.sock
-$ docker -H ssh://<REMOTEUSER>@<REMOTEHOST> run ...
-```
-
-### Routing ping packets
-
-On some distributions, `ping` does not work by default.
-
-Add `net.ipv4.ping_group_range = 0   2147483647` to `/etc/sysctl.conf` (or
-`/etc/sysctl.d`) and run `sudo sysctl --system` to allow using `ping`.
-
-### Exposing privileged ports
-
-To expose privileged ports (< 1024), set `CAP_NET_BIND_SERVICE` on `rootlesskit` binary and restart the daemon.
-
-```console
-$ sudo setcap cap_net_bind_service=ep $(which rootlesskit)
-$ systemctl --user restart docker
-```
-
-Or add `net.ipv4.ip_unprivileged_port_start=0` to `/etc/sysctl.conf` (or
-`/etc/sysctl.d`) and run `sudo sysctl --system`.
-
-### Limiting resources
-
-Limiting resources with cgroup-related `docker run` flags such as `--cpus`, `--memory`, `--pids-limit`
-is supported only when running with cgroup v2 and systemd.
-See [Changing cgroup version](/manuals/engine/containers/runmetrics.md) to enable cgroup v2.
-
-If `docker info` shows `none` as `Cgroup Driver`, the conditions are not satisfied.
-When these conditions are not satisfied, rootless mode ignores the cgroup-related `docker run` flags.
-See [Limiting resources without cgroup](#limiting-resources-without-cgroup) for workarounds.
-
-If `docker info` shows `systemd` as `Cgroup Driver`, the conditions are satisfied.
-However, typically, only `memory` and `pids` controllers are delegated to non-root users by default.
-
-```console
-$ cat /sys/fs/cgroup/user.slice/user-$(id -u).slice/user@$(id -u).service/cgroup.controllers
-memory pids
-```
-
-To allow delegation of all controllers, you need to change the systemd configuration as follows:
-
-```console
-# mkdir -p /etc/systemd/system/user@.service.d
-# cat > /etc/systemd/system/user@.service.d/delegate.conf << EOF
-[Service]
-Delegate=cpu cpuset io memory pids
-EOF
-# systemctl daemon-reload
-```
-
-> [!NOTE]
->
-> Delegating `cpuset` requires systemd 244 or later.
-
-#### Limiting resources without cgroup
-
-Even when cgroup is not available, you can still use the traditional `ulimit` and [`cpulimit`](https://github.com/opsengine/cpulimit),
-though they work in process-granularity rather than in container-granularity,
-and can be arbitrarily disabled by the container process.
-
-For example:
-
-- To limit CPU usage to 0.5 cores (similar to `docker run --cpus 0.5`):
-  `docker run <IMAGE> cpulimit --limit=50 --include-children <COMMAND>`
-- To limit max VSZ to 64MiB (similar to `docker run --memory 64m`):
-  `docker run <IMAGE> sh -c "ulimit -v 65536; <COMMAND>"`
-
-- To limit max number of processes to 100 per namespaced UID 2000
-  (similar to `docker run --pids-limit=100`):
-  `docker run --user 2000 --ulimit nproc=100 <IMAGE> <COMMAND>`
 
 ## Troubleshooting
 
@@ -466,7 +126,7 @@ To fix this issue, add  `user.max_user_namespaces=28633` to
 
 **\[rootlesskit:parent\] error: failed to setup UID/GID map: failed to compute uid/gid map: No subuid ranges found for user 1001 ("testuser")**
 
-This error occurs when `/etc/subuid` and `/etc/subgid` are not configured. See [Prerequisites](#prerequisites).
+This error occurs when `/etc/subuid` and `/etc/subgid` are not configured. See [Prerequisites](./_index.md#prerequisites).
 
 **could not get XDG_RUNTIME_DIR**
 
@@ -507,17 +167,7 @@ Instead of `sudo -iu <USERNAME>`, you need to log in using `pam_systemd`. For ex
 **The daemon does not start up automatically**
 
 You need `sudo loginctl enable-linger $(whoami)` to enable the daemon to start
-up automatically. See [Usage](#usage).
-
-**iptables failed: iptables -t nat -N DOCKER: Fatal: can't open lock file /run/xtables.lock: Permission denied**
-
-This error may happen with an older version of Docker when SELinux is enabled on the host.
-
-The issue has been fixed in Docker 20.10.8.
-A known workaround for older version of Docker is to run the following commands to disable SELinux for `iptables`:
-```console
-$ sudo dnf install -y policycoreutils-python-utils && sudo semanage permissive -a iptables_t
-```
+up automatically. See [Advanced Usage](./tips.md/#advanced-usage).
 
 ### `docker pull` errors
 
@@ -526,7 +176,7 @@ $ sudo dnf install -y policycoreutils-python-utils && sudo semanage permissive -
 This error occurs when the number of available entries in `/etc/subuid` or
 `/etc/subgid` is not sufficient. The number of entries required vary across
 images. However, 65,536 entries are sufficient for most images. See
-[Prerequisites](#prerequisites).
+[Prerequisites](./_index.md#prerequisites).
 
 **docker: failed to register layer: ApplyLayer exit status 1 stdout:  stderr: lchown &lt;FILE&gt;: operation not permitted**
 
@@ -562,7 +212,7 @@ If the error still occurs, try running `systemctl --user enable --now dbus` (wit
 
 This is an expected behavior on cgroup v1 mode.
 To use these flags, the host needs to be configured for enabling cgroup v2.
-For more information, see [Limiting resources](#limiting-resources).
+For more information, see [Limiting resources](./tips.md#limiting-resources).
 
 ### Networking errors
 
@@ -607,7 +257,7 @@ When you experience this error, consider using an unprivileged port instead. For
 $ docker run -p 8080:80 nginx:alpine
 ```
 
-To allow exposing privileged ports, see [Exposing privileged ports](#exposing-privileged-ports).
+To allow exposing privileged ports, see [Exposing privileged ports](./tips.md#exposing-privileged-ports).
 
 #### Ping doesn't work
 
@@ -618,7 +268,7 @@ $ cat /proc/sys/net/ipv4/ping_group_range
 1       0
 ```
 
-For details, see [Routing ping packets](#routing-ping-packets).
+For details, see [Routing ping packets](./tips.md#routing-ping-packets).
 
 #### `IPAddress` shown in `docker inspect` is unreachable
 
@@ -707,3 +357,29 @@ The `dockerd-rootless.sh` script executes `dockerd` in its own user, mount, and 
 
 For debugging, you can enter the namespaces by running
 `nsenter -U --preserve-credentials -n -m -t $(cat $XDG_RUNTIME_DIR/docker.pid)`.
+
+## Uninstall
+
+To remove the systemd service of the Docker daemon, run `dockerd-rootless-setuptool.sh uninstall`:
+
+```console
+$ dockerd-rootless-setuptool.sh uninstall
++ systemctl --user stop docker.service
++ systemctl --user disable docker.service
+Removed /home/testuser/.config/systemd/user/default.target.wants/docker.service.
+[INFO] Uninstalled docker.service
+[INFO] This uninstallation tool does NOT remove Docker binaries and data.
+[INFO] To remove data, run: `/usr/bin/rootlesskit rm -rf /home/testuser/.local/share/docker`
+```
+
+Unset environment variables PATH and DOCKER_HOST if you have added them to `~/.bashrc`.
+
+To remove the data directory, run `rootlesskit rm -rf ~/.local/share/docker`.
+
+To remove the binaries, remove `docker-ce-rootless-extras` package if you installed Docker with package managers.
+If you installed Docker with https://get.docker.com/rootless ([Install without packages](./_index.md#install)),
+remove the binary files under `~/bin`:
+```console
+$ cd ~/bin
+$ rm -f containerd containerd-shim containerd-shim-runc-v2 ctr docker docker-init docker-proxy dockerd dockerd-rootless-setuptool.sh dockerd-rootless.sh rootlesskit rootlesskit-docker-proxy runc vpnkit
+```
