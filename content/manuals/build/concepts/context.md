@@ -245,6 +245,34 @@ docker build github.com/docker/buildx#d4f088e689b41353d74f1a0bfcd6d7c0b213aed2
 docker build github.com/docker/buildx#d4f088e
 ```
 
+### URL queries
+
+Starting with Buildx v0.28 and BuildKit v0.24, URL queries are also supported.
+URL queries are more structured and recommended over [URL fragments](#url-fragments).
+
+For example,
+```console
+$ docker buildx build 'https://github.com/user/myrepo.git?branch=container&subdir=docker'
+```
+
+| Build Syntax Suffix                          | Commit Used                   | Build Context Used |
+| -------------------------------------------- | ----------------------------- | ------------------ |
+| `myrepo.git`                                 | `refs/heads/<default branch>` | `/`                |
+| `myrepo.git?tag=mytag`                       | `refs/tags/mytag`             | `/`                |
+| `myrepo.git?branch=mybranch`                 | `refs/heads/mybranch`         | `/`                |
+| `myrepo.git?ref=pull/42/head`                | `refs/pull/42/head`           | `/`                |
+| `myrepo.git?subdir=myfolder`                 | `refs/heads/<default branch>` | `/myfolder`        |
+| `myrepo.git?branch=master&subdir=myfolder`   | `refs/heads/master`           | `/myfolder`        |
+| `myrepo.git?tag=mytag&subdir=myfolder`       | `refs/tags/mytag`             | `/myfolder`        |
+| `myrepo.git?branch=mybranch&subdir=myfolder` | `refs/heads/mybranch`         | `/myfolder`        |
+
+A commit hash can be specified as a `commit` or `checksum` query, along with `tag`, `branch`, or `ref`.
+A hash does not need to be a full hash.
+
+```bash
+docker buildx build 'https://github.com/moby/buildkit.git?tag=v0.21.1&checksum=66735c67'
+```
+
 #### Keep `.git` directory
 
 By default, BuildKit doesn't keep the `.git` directory when using Git contexts.
