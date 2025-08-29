@@ -12,6 +12,7 @@ autolock
 Azure
 Azure AD
 bootup
+Bitnami
 Btrfs
 Bugsnag
 BuildKit
