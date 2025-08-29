@@ -3,10 +3,14 @@ description: Docker security announcements
 keywords: Docker, CVEs, security, notice, Log4J 2, Log4Shell, Text4Shell, announcements
 title: Docker security announcements
 linkTitle: Security announcements
+outputs: ["HTML", "markdown", "RSS"]
+type: "security-announcements"
 weight: 80
 toc_min: 1
 toc_max: 2
 ---
+
+{{< rss-button feed="/security/security-announcements/index.xml" text="Subscribe to security RSS feed" >}}
 
 ## Docker Desktop 4.44.3 security update: CVE-2025-9074
 
