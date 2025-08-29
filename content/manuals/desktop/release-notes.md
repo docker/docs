@@ -33,7 +33,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ## 4.45.0
 
-{{< release-date date="2025-08-26" >}}
+{{< release-date date="2025-08-28" >}}
 
 {{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.45.0" build_path="/203075/" >}}
 
