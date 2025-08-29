@@ -245,6 +245,40 @@ docker build github.com/docker/buildx#d4f088e689b41353d74f1a0bfcd6d7c0b213aed2
 docker build github.com/docker/buildx#d4f088e
 ```
 
+### URL queries
+<!-- WIP: BuildKit PR is merged (https://github.com/moby/buildkit/pull/6172),
+not supported in Buildx context yet -->
+
+Starting with Buildx v0.28 and BuildKit v0.24, URL queries are also supported.
+URL queries are more structured and recommended over [URL fragments](#url-fragments).
+
+For example,
+```console
+$ docker buildx build https://github.com/user/myrepo.git?branch=container&subdir=docker
+```
+
+| Build Syntax Suffix                          | Commit Used                   | Build Context Used |
+| -------------------------------------------- | ----------------------------- | ------------------ |
+| `myrepo.git`                                 | `refs/heads/<default branch>` | `/`                |
+| `myrepo.git?tag=mytag`                       | `refs/tags/mytag`             | `/`                |
+| `myrepo.git?branch=mybranch`                 | `refs/heads/mybranch`         | `/`                |
+| `myrepo.git?ref=pull/42/head`                | `refs/pull/42/head`           | `/`                |
+| `myrepo.git?subdir=myfolder`                 | `refs/heads/<default branch>` | `/myfolder`        |
+| `myrepo.git?branch=master&subdir=myfolder`   | `refs/heads/master`           | `/myfolder`        |
+| `myrepo.git?tag=mytag&subdir=myfolder`       | `refs/tags/mytag`             | `/myfolder`        |
+| `myrepo.git?branch=mybranch&subdir=myfolder` | `refs/heads/mybranch`         | `/myfolder`        |
+
+
+A commit hash can be specified as a `commit` or `checksum` query.
+Unlike `ref` fragment, a `commit` query does not need to be a full commit hash.
+
+```bash
+# ✅ The following works:
+docker buildx build https://github.com/docker/buildx.git?commit=d4f088e689b41353d74f1a0bfcd6d7c0b213aed2
+# ✅ Thie following works too:
+docker buildx build https://github.com/docker/buildx.git?commit=d4f088e
+```
+
 #### Keep `.git` directory
 
 By default, BuildKit doesn't keep the `.git` directory when using Git contexts.
