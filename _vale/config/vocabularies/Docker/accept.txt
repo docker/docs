@@ -43,6 +43,7 @@ denylist
 deprovisioning
 deserialization
 deserialize
+Dev
 Dev Environments?
 Dex
 displayName
