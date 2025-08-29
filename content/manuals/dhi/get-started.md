@@ -16,8 +16,9 @@ example, they can be applied to any DHI.
 >
 > You can keep using the same tools and workflows you already know when moving
 > to DHI from other images on Docker Hub, such as Bitnami public catalog images.
-> Note that Bitnami announced that its public catalog images will no longer be
-> available after September 29, 2025.
+> Note that [Bitnami announced](https://github.com/bitnami/charts/issues/35164)
+> that its public catalog images will no longer be available after September 29,
+> 2025.
 >
 > In most cases, migrating is as simple as updating the image reference in your
 > configuration or commands. Start with this guide, then see the [migration
