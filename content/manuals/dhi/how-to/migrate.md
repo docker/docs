@@ -8,16 +8,15 @@ keywords: migrate dockerfile, hardened base image, multi-stage build, non-root c
 
 {{< summary-bar feature_name="Docker Hardened Images" >}}
 
-This guide helps you migrate your existing Dockerfiles to use Docker Hardened
-Images (DHIs) [manually](#step-1-update-the-base-image-in-your-dockerfile),
-or with [Gordon](#use-gordon).
-DHIs are minimal and security-focused, which may require
-adjustments to your base images, build process, and runtime configuration.
+This guide helps you migrate your existing Dockerfiles and Helm-based
+deployments to use Docker Hardened Images (DHIs). For Dockerfiles, you can
+migrate [manually](#step-1-update-the-base-image-in-your-dockerfile), or with
+[Gordon](#use-gordon).
 
-This guide focuses on migrating framework images, such as images for building
-applications from source using languages like Go, Python, or Node.js. If you're
-migrating application images, such as databases, proxies, or other prebuilt
-services, many of the same principles still apply.
+The Dockerfile migration section focuses on migrating framework images, such as
+images for building applications from source using languages like Go, Python, or
+Node.js. If you're migrating application images, such as databases, proxies, or
+other prebuilt services, many of the same principles still apply.
 
 ## Migration considerations
 
@@ -245,7 +244,98 @@ ENTRYPOINT [ "python", "/app/image.py" ]
 
 ### Use Gordon
 
-Alternatively, you can request assistance to 
-[Gordon](/manuals/ai/gordon/_index.md), Docker's AI-powered assistant, to migrate your Dockerfile:
+Alternatively, you can request assistance to
+[Gordon](/manuals/ai/gordon/_index.md), Docker's AI-powered assistant, to
+migrate your Dockerfile:
 
 {{% include "gordondhi.md" %}}
+
+## Migrate Bitnami Helm charts
+
+If you're using Bitnami Helm charts in your Kubernetes deployments, you can
+migrate to use Docker Hardened Images with minimal changes to your existing
+chart configurations.
+
+By default, Bitnami Helm charts enforce the use of Bitnami container images
+and block non-Bitnami images. This security mechanism can cause installation
+errors if you replace the default image with another, such as a DHI.
+
+To allow other images, including DHIs, set the following in your Helm chart
+configuration:
+
+```yaml
+global:
+  security:
+    allowInsecureImages: true
+```
+
+You can pass this via a values file. In addition to
+`global.security.allowInsecureImages`, you also need to set `image.repository`
+and `image.tag`. The following is an example for Redis, where you would replace
+`<your-namespace>` and `<dhi-image-tag>` with your DHI namespace and the tag:
+
+```yaml{title="values.yaml"}
+global:
+  security:
+    allowInsecureImages: true
+image:
+  repository: <your-namespace>/dhi-redis
+  tag: <dhi-image-tag>
+```
+
+Then install or upgrade your Helm chart with the `-f values.yaml` flag:
+
+```console
+$ helm install redis bitnami/redis -f values.yaml
+```
+
+This lets Bitnami charts run with your DHI, while keeping the usual override
+mechanism intact.
+
+### Mirroring charts with Bitnami chart-syncer
+
+If your organization deploys multiple Bitnami charts or needs to control chart
+availability, you may want to mirror charts into your own registry instead of
+pulling them directly from Bitnami. Tools like [Bitnami
+charts-syncer](https://github.com/bitnami/charts-syncer) help automate this
+process.
+
+The following example shows how to use `charts-syncer` to mirror Bitnami charts.
+Create a `config.yaml` file with the following content, replacing
+`example.registry.com` and `my-dhi` with your own OCI registry and repository.
+
+```yaml
+# Mirror Bitnami Redis chart to your internal OCI registry
+# and rewrite image registry/repository to your DHI location.
+
+# Where to read charts from (Bitnami charts as OCI artifacts on Docker Hub)
+source:
+  repo:
+    kind: OCI
+    url: https://registry-1.docker.io/bitnamicharts
+charts:
+  - redis # list of charts to mirror (name only, no version)
+
+# Where to push charts and how to rewrite image coordinates
+target:
+  # (A) Rewrite image fields in values.yaml:
+  #     image.registry -> REGISTRY below
+  #     image.repository -> REPOSITORY prefix below
+  #
+  #     NOTE: charts-syncer does NOT change the tag; you’ll set it at install time.
+  containerRegistry: example.registry.com         # your OCI image registry (for DHIs)
+  containerRepository: my-dhi                     # prefix/path for images (e.g., my-dhi/redis)
+
+  # (B) Where the mirrored charts will live
+  repo:
+    kind: OCI
+    url: https://example.registry.com/helm
+```
+
+After creating the `config.yaml`, you can run charts-syncer. Based on your
+source and destination, you may need to sign in first using `docker login` or
+`helm registry login`.
+
+```console
+$ charts-syncer sync --config /config.yaml
+```
