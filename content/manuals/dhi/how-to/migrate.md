@@ -8,16 +8,15 @@ keywords: migrate dockerfile, hardened base image, multi-stage build, non-root c
 
 {{< summary-bar feature_name="Docker Hardened Images" >}}
 
-This guide helps you migrate your existing Dockerfiles to use Docker Hardened
-Images (DHIs) [manually](#step-1-update-the-base-image-in-your-dockerfile),
-or with [Gordon](#use-gordon).
-DHIs are minimal and security-focused, which may require
-adjustments to your base images, build process, and runtime configuration.
+This guide helps you migrate your existing Dockerfiles and Helm-based
+deployments to use Docker Hardened Images (DHIs). For Dockerfiles, you can
+migrate [manually](#step-1-update-the-base-image-in-your-dockerfile), or with
+[Gordon](#use-gordon).
 
-This guide focuses on migrating framework images, such as images for building
-applications from source using languages like Go, Python, or Node.js. If you're
-migrating application images, such as databases, proxies, or other prebuilt
-services, many of the same principles still apply.
+The Dockerfile migration section focuses on migrating framework images, such as
+images for building applications from source using languages like Go, Python, or
+Node.js. If you're migrating application images, such as databases, proxies, or
+other prebuilt services, many of the same principles still apply.
 
 ## Migration considerations
 
@@ -245,7 +244,59 @@ ENTRYPOINT [ "python", "/app/image.py" ]
 
 ### Use Gordon
 
-Alternatively, you can request assistance to 
-[Gordon](/manuals/ai/gordon/_index.md), Docker's AI-powered assistant, to migrate your Dockerfile:
+Alternatively, you can request assistance to
+[Gordon](/manuals/ai/gordon/_index.md), Docker's AI-powered assistant, to
+migrate your Dockerfile:
 
 {{% include "gordondhi.md" %}}
+
+## Migrate Bitnami Helm charts
+
+If you're using Bitnami Helm charts in your Kubernetes deployments, you can
+migrate to use Docker Hardened Images with minimal changes to your existing
+chart configurations.
+
+By default, Bitnami Helm charts enforce the use of Bitnami container images
+and block non-Bitnami images. This security mechanism can cause installation
+errors if you replace the default image with another, such as a DHI.
+
+To allow other images, including DHIs, set the following in your Helm chart
+configuration:
+
+```yaml
+global:
+  security:
+    allowInsecureImages: true
+```
+
+You can pass this via a values file. The following is an example for Redis:
+
+```yaml{title="values.yaml"}
+global:
+  security:
+    allowInsecureImages: true
+image:
+  repository: <your-namespace>/dhi-redis
+  tag: <dhi-image-tag>
+```
+
+Then install or upgrade your Helm chart with:
+
+```console
+$ helm install redis bitnami/redis -f values.yaml
+```
+
+This lets Bitnami charts run with your DHI, while keeping the usual override
+mechanism intact.
+
+### Using Bitnami charts-syncer with DHI
+
+Using [Bitnami charts-syncer](https://github.com/bitnami/charts-syncer) is
+helpful when you want to maintain your own internal Helm chart catalog and
+ensure charts are consistently mirrored and linked to your DHI repositories. It
+automates chart mirroring and registry rewriting. However, you will still need
+to manually set the `image.tag` and add `global.security.allowInsecureImages:
+true` to the chart to bypass Bitnami's security validation. If you're only
+deploying a few DHIs, using a direct `values.yaml` override, `--set` flag, or
+even a `kubectl patch` for raw YAML manifests is often simpler than running
+charts-syncer.
