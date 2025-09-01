@@ -67,6 +67,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Fixed a bug that prevented CLI plugins from being deployed to `~/.docker/cli-plugins` by default when users lacked the correct permissions.
 - Fixed a bug where relocating the WSL data distribution would fail if the `docker-desktop` distribution was not present.
 - Fixed a typo in the WSL install URL in the Docker Desktop Dashboard.
+- Fixed an issue where certain WSL distros would fail to integrate. Fixes [docker/for-win#14686](https://github.com/docker/for-win/issues/14686)
 
 ## 4.44.3
 
