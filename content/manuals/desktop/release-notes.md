@@ -46,7 +46,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 - [Docker Compose v2.39.2](https://github.com/docker/compose/releases/tag/v2.39.2)
 - [Docker Buildx v0.27.0](https://github.com/docker/buildx/releases/tag/v0.27.0)
-- [Kubernetes v1.32.6](https://github.com/kubernetes/kubernetes/releases/tag/v1.32.6)
 - [Docker Scout CLI v1.18.3](https://github.com/docker/scout-cli/releases/tag/v1.18.3)
 - [Docker Engine v28.3.3](https://docs.docker.com/engine/release-notes/28/#2833)
 
@@ -55,6 +54,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 #### For all platforms
 
 - Fixed a bug that caused the `com.docker.diagnose` to crash when uploading a diagnostics bundle behind a proxy that requires authentication.
+- The `kind` dependency image `envoyproxy/envoy` was upgraded from v1.32.0 to v1.32.6. If you mirror `kind` images, ensure your mirrors are updated.
 
 #### For Mac
 
