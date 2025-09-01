@@ -59,6 +59,8 @@ Buildx no default:
   requires: Docker Buildx [0.10.4](/manuals/build/release-notes.md#0104) and later
 Cache backend API:
   availability: Experimental
+cagent:
+  availability: Experimental
 Company:
   subscription: [Business]
   for: Administrators

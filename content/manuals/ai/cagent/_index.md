@@ -8,6 +8,8 @@ params:
 keywords: [ai, agent, cagent]
 ---
 
+{{< summary-bar feature_name="cagent" >}}
+
 cagent lets you build, orchestrate, and share AI agents. Use it to define AI
 agents that work as a team.
 
@@ -219,6 +221,18 @@ toolsets:
     args: ["mcp", "gateway", "run", "--servers=duckduckgo"]
 ```
 
+## CLI interactive commands
+
+You can use the following CLI commands, during
+CLI sessions with your agents:
+
+| Command  | Description                              |
+|----------|------------------------------------------|
+| /exit    | Exit the program                         |
+| /reset   | Clear conversation history               |
+| /eval    | Save current conversation for evaluation |
+| /compact | Compact the current session              |
+
 ## Share your agents
 
 Agent configurations can be packaged and shared via Docker Hub.
@@ -230,7 +244,7 @@ To push an agent:
 cagent push ./<agent-file>.yaml <namespace>/<reponame>
 ```
 
-To pull an agent:
+To pull an agent to the current directory:
 
 ```bash
 cagent pull <namespace>/<reponame>
