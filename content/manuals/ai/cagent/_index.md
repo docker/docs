@@ -10,15 +10,15 @@ keywords: [ai, agent, cagent]
 
 {{< summary-bar feature_name="cagent" >}}
 
-cagent lets you build, orchestrate, and share AI agents. Use it to define AI
-agents that work as a team.
+[cagent](https://github.com/docker/cagent) lets you build, orchestrate, and share
+AI agents. Use it to define AI agents that work as a team.
 
 cagent relies on the concept of a _root agent_ that acts as a team lead and
 delegates tasks to the sub-agents you define.
 Each agent:
 - uses the model of your choice, with the parameters of your choice.
 - has access to the [built-in tools](#built-in-tools) and MCP servers
-  configured in the [Docker MCP gateway](/manuals/ai/mcp-gateway.md).
+  configured in the [Docker MCP gateway](/manuals/ai/mcp-gateway/_index.md).
 - works in its own context. They do not share knowledge.
 
 The root agent is your main contact point. Each agent has its own context,
@@ -255,5 +255,6 @@ it with the `cagent run <filename>` command.
 
 ## Related pages
 
-For more information about cagent, see the
+- For more information about cagent, see the
 [GitHub repository](https://github.com/docker/cagent).
+- [Docker MCP Gateway](/manuals/ai/mcp-gateway/_index.md)
