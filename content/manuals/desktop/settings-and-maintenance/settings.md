@@ -441,26 +441,21 @@ Select **Reset Kubernetes cluster** to delete all stacks and Kubernetes resource
 For more information about using the Kubernetes integration with Docker Desktop,
 see [Deploy on Kubernetes](/manuals/desktop/features/kubernetes.md).
 
-## Software Updates
+## Software updates
 
-The **Software Updates** tab notifies you of any updates available to Docker Desktop.
+The **Software updates** tab lets you manage your Docker Desktop updates. 
 When there's a new update, you can choose to download the update right away, or
 select the **Release Notes** option to learn what's included in the updated version.
 
-Turn off the check for updates by clearing the **Automatically check for updates**
-check box. This disables notifications in the Docker menu and the notification
-badge that appears on the Docker Desktop Dashboard. To check for updates manually, select
-the **Check for updates** option in the Docker menu.
+The **Automatically check for updates** setting notifies you of any updates available to Docker Desktop in the Docker menu and the footer of the Docker Desktop Dashboard. This is turned on by default. 
 
 To allow Docker Desktop to automatically download new updates in the background,
 select **Always download updates**. This downloads newer versions of Docker Desktop
 when an update becomes available. After downloading the update, select
-**Apply and Restart** to install the update. You can do this either through the
+**Apply and restart** to install the update. You can do this either through the
 Docker menu or in the **Updates** section in the Docker Desktop Dashboard.
 
-> [!TIP]
-> 
-> With Docker Desktop version 4.38 and later, components of Docker Desktop, such as Docker Compose, Docker Scout, and the Docker CLI, can be updated independently without the need for a full restart. This feature is still in Beta. 
+The **Automatically update components** setting checks whether components of Docker Desktop, such as Docker Compose, Docker Scout, and the Docker CLI, can be updated independently without the need for a full restart. This is turned on by default. 
 
 ## Extensions
 
