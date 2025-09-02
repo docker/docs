@@ -41,7 +41,13 @@ To install the Docker Compose plugin on Linux, you can either:
         $ sudo apt-get update
         $ sudo apt-get install docker-compose-plugin
         ```
-    * For RPM-based distributions, run:
+    * For Fedora, run:
+        ```console
+        $ sudo dnf update
+        $ sudo dnf install docker-compose
+        ```
+        
+    * For RHEL and other RPM-based distributions, run:
 
         ```console
         $ sudo yum update
