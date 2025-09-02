@@ -1,7 +1,7 @@
 # docker model
 
 <!---MARKER_GEN_START-->
-Docker Model Runner (EXPERIMENTAL)
+Docker Model Runner
 
 ### Subcommands
 

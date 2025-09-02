@@ -100,6 +100,8 @@ github.com/docker/model-cli v0.1.33-0.20250703103301-d4e4936a9eb2 h1:gYGGGdufX1u
 github.com/docker/model-cli v0.1.33-0.20250703103301-d4e4936a9eb2/go.mod h1:2w/B+oBs0aEPbmfdGM+NKy/HURJGDAzECTIKiRaj5Rg=
 github.com/docker/model-cli v0.1.39 h1:9W2HEj46QtZ4+WeEtmDlYlJKspcLwaTzzeBQZKGWsCU=
 github.com/docker/model-cli v0.1.39/go.mod h1:vn3xvo4zqZVHbon38lZbaEc12JshwBRzzLbK6w1q8Yg=
+github.com/docker/model-cli v0.1.40 h1:Ar9KLp7B08w3Gz71jFQaOiyZGQ+yr3XBtWTcbm0jgh4=
+github.com/docker/model-cli v0.1.40/go.mod h1:vn3xvo4zqZVHbon38lZbaEc12JshwBRzzLbK6w1q8Yg=
 github.com/docker/model-cli v1.0.2-0.20250812105011-ebb4723662c6 h1:f4iOd3leasQe8Ak0BIssJvy6URQU1QpdyvvrEMVd/to=
 github.com/docker/model-cli v1.0.2-0.20250812105011-ebb4723662c6/go.mod h1:buRKbEmodiWCC9hApXghZZIWa9kdDpSLzwlx04DmtKs=
 github.com/docker/model-distribution v0.0.0-20250512190053-b3792c042d57 h1:ZqfKknb+0/uJid8XLFwSl/osjE+WuS6o6I3dh3ZqO4U=
