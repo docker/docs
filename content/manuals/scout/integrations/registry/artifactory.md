@@ -30,18 +30,14 @@ control and configure the Artifactory-specific registry string via `--registry
 
 - Watch specific repositories or an entire registry
 - Optionally ingest all existing images once
-- Periodically refresh repository lists 
+- Periodically refresh repository lists
 - Receive webhook callbacks from Artifactory on a local port you choose
 
-Unlike the ACR and ECR integration flows, this setup does not create any cloud
-resources for you. You supply Artifactory credentials, start watch, and
-optionally configure Artifactory webhooks.
-
-> [!NOTE]
->
-> Docker Scout analyzes images locally. The image itself is never pushed to
-> Docker. Only the SBOM (Software Bill of Materials) and other metadata are sent
-> to Docker Scout.
+After the integration, Docker Scout automatically pulls and analyzes images
+that you push to the Artifactory registry. Metadata about your images are stored on the
+Docker Scout platform, but Docker Scout doesn't store the container images
+themselves. For more information about how Docker Scout handles image data, see
+[Data handling](/manuals/scout/deep-dive/data-handling.md).
 
 ### Artifactory-specific registry string options
 
