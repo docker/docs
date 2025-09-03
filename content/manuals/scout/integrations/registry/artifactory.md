@@ -13,7 +13,7 @@ Experimental features are intended for testing and feedback as their
 functionality or design may change between releases without warning or
 can be removed entirely in a future release.
 
-{{% /experimental %}}`
+{{% /experimental %}}
 
 Integrating Docker Scout with JFrog Artifactory lets you index and analyze
 images from Artifactory. This integration is powered by a long-running
