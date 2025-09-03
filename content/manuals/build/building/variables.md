@@ -451,14 +451,14 @@ This environment variable provides an alternative to the `-f` / `--file` command
 Multiple files can be specified by separating them with the system path separator (":" on Linux/macOS, ";" on Windows):
 
 ```console
-export BUILDX_BAKE_FILE="file1.hcl:file2.hcl"
+export BUILDX_BAKE_FILE=file1.hcl:file2.hcl
 ```
 
 Or with a custom separator defined by the [BUILDX_BAKE_FILE_SEPARATOR](#buildx_bake_file_separator) variable:
 
 ```console
-export BUILDX_BAKE_FILE_SEPARATOR="@"
-export BUILDX_BAKE_FILE="file1.hcl@file2.hcl"
+export BUILDX_BAKE_FILE_SEPARATOR=@
+export BUILDX_BAKE_FILE=file1.hcl@file2.hcl
 ```
 
 If both `BUILDX_BAKE_FILE` and the `-f` flag are set, only the files provided via `-f` are used. 
@@ -474,8 +474,8 @@ Controls the separator used between file paths in the `BUILDX_BAKE_FILE` environ
 This is useful if your file paths contain the default separator character or if you want to standardize separators across different platforms.
 
 ```console
-export BUILDX_BAKE_PATH_SEPARATOR="@"
-export BUILDX_BAKE_FILE="file1.hcl@file2.hcl"
+export BUILDX_BAKE_PATH_SEPARATOR=@
+export BUILDX_BAKE_FILE=file1.hcl@file2.hcl
 ```
 
 ### BUILDX_BAKE_GIT_AUTH_HEADER
