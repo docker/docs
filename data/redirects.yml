@@ -298,6 +298,8 @@
   - /go/mcp-toolkit-install-mcp-server/
 "/ai/mcp-catalog-and-toolkit/toolkit/#install-an-mcp-client":
   - /go/mcp-toolkit-install-mcp-client/
+"/ai/mcp-catalog-and-toolkit/toolkit/#example-use-claude-desktop-as-a-client":
+  - /go/mcp-toolkit-use-client-examples/
 
  # Desktop DMR
 "/ai/model-runner/":
