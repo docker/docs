@@ -5,6 +5,16 @@ title: Integrate Docker Scout with Artifactory Container Registry
 linkTitle: Artifactory Container Registry
 ---
 
+{{% experimental %}}
+
+The `docker scout watch` command is experimental.
+
+Experimental features are intended for testing and feedback as their
+functionality or design may change between releases without warning or
+can be removed entirely in a future release.
+
+{{% /experimental %}}`
+
 Integrating Docker Scout with JFrog Artifactory lets you index and analyze
 images from Artifactory. This integration is powered by a long-running
 `docker scout watch` process. It pulls images from your selected repositories
@@ -20,12 +30,18 @@ control and configure the Artifactory-specific registry string via `--registry
 
 - Watch specific repositories or an entire registry
 - Optionally ingest all existing images once
-- Periodically refresh repository lists
+- Periodically refresh repository lists 
 - Receive webhook callbacks from Artifactory on a local port you choose
 
 Unlike the ACR and ECR integration flows, this setup does not create any cloud
 resources for you. You supply Artifactory credentials, start watch, and
 optionally configure Artifactory webhooks.
+
+> [!NOTE]
+>
+> Docker Scout analyzes images locally. The image itself is never pushed to
+> Docker. Only the SBOM (Software Bill of Materials) and other metadata are sent
+> to Docker Scout.
 
 ### Artifactory-specific registry string options
 
