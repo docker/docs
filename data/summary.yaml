@@ -37,6 +37,10 @@ Build privileged:
   requires: Docker Compose [2.15.0](/manuals/compose/releases/release-notes.md#2) and later
 Build ulimits:
   requires: Docker Compose [2.23.1](/manuals/compose/releases/release-notes.md#2231) and later
+Buildx bake file:
+  requires: Docker Buildx [0.26.0](/manuals/build/release-notes.md#0260) and later
+Buildx bake file separator:
+  requires: Docker Buildx [0.26.0](/manuals/build/release-notes.md#0260) and later
 Buildx bake Git auth token:
   requires: Docker Buildx [0.14.0](/manuals/build/release-notes.md#0140) and later
 Buildx bake Git SSH:
