@@ -520,16 +520,18 @@ examples: |-
     Command line arguments may be passed to the debug adapter the same way they would be passed to the normal build command and they will set the value.
     Launch request arguments that are set will override command line arguments if they are present.
 
-    A debug extension should include an `args` entry in the launch configuration and should append these arguments to the end of the tool invocation.
+    A debug extension should include an `args` and `builder` entry in the launch configuration. These will modify the arguments passed to the binary for the tool invocation.
+    `builder` will add `--builder <arg>` directly after the executable and `args` will append to the end of the tool invocation.
     For example, a launch configuration in Visual Studio Code with the following:
 
     ```json
     {
         "args": ["--build-arg", "FOO=AAA"]
+        "builder": ["mybuilder"]
     }
     ```
 
-    This should cause the debug adapter to be invoked as `docker buildx dap build --build-arg FOO=AAA`.
+    This should cause the debug adapter to be invoked as `docker buildx --builder mybuilder dap build --build-arg FOO=AAA`.
 deprecated: false
 hidden: false
 experimental: false

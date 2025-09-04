@@ -15,7 +15,7 @@ require (
 	github.com/containerd/stargz-snapshotter/estargz v0.16.3 // indirect
 	github.com/containerd/typeurl/v2 v2.2.3 // indirect
 	github.com/distribution/reference v0.6.0 // indirect
-	github.com/docker/buildx v0.27.0 // indirect
+	github.com/docker/buildx v0.28.0 // indirect
 	github.com/docker/cli v28.3.3+incompatible // indirect
 	github.com/docker/compose/v2 v2.39.2 // indirect
 	github.com/docker/distribution v2.8.3+incompatible // indirect
@@ -53,7 +53,7 @@ require (
 	github.com/mattn/go-runewidth v0.0.16 // indirect
 	github.com/mattn/go-shellwords v1.0.12 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
-	github.com/moby/buildkit v0.23.2 // indirect
+	github.com/moby/buildkit v0.24.0 // indirect
 	github.com/moby/docker-image-spec v1.3.1 // indirect
 	github.com/moby/locker v1.0.1 // indirect
 	github.com/moby/moby v28.3.3+incompatible // indirect
@@ -109,7 +109,7 @@ require (
 )
 
 replace (
-	github.com/docker/buildx => github.com/docker/buildx v0.27.0
+	github.com/docker/buildx => github.com/docker/buildx v0.28.0
 	github.com/docker/cli => github.com/docker/cli v28.3.3+incompatible
 	github.com/docker/compose/v2 => github.com/docker/compose/v2 v2.39.2
 	github.com/docker/model-cli => github.com/docker/model-cli v0.1.39

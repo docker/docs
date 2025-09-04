@@ -8,6 +8,17 @@ options:
     - option: filter
       value_type: filter
       description: Provide filter values
+      details_url: '#filter'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: format
+      value_type: string
+      description: Format the output
+      details_url: '#format'
       deprecated: false
       hidden: false
       experimental: false
@@ -17,7 +28,7 @@ options:
     - option: verbose
       value_type: bool
       default_value: "false"
-      description: Provide a more verbose output
+      description: Shorthand for `--format=pretty`
       details_url: '#verbose'
       deprecated: false
       hidden: false
@@ -77,7 +88,7 @@ examples: |-
     the record, even if you use `--all`. That's because the record is actively in
     use by some component of the builder.
 
-    The asterisks (\*) in the default output indicate the following:
+    The asterisks (\*) in the default output format indicate the following:
 
     - An asterisk next to an ID (`zu7m6evdpebh5h8kfkpw9dlf2*`) indicates that the record
       is mutable. The size of the record may change, or another build can take ownership of
@@ -88,33 +99,156 @@ examples: |-
       If you prune such a record then you will lose build cache but only metadata
       will be deleted as the image still needs to actual storage layers.
 
+    ### Provide filter values (--filter) {#filter}
+
+    Same as [`buildx prune --filter`](/reference/cli/docker/buildx/prune/#filter).
+
+    ### Format the output (--format) {#format}
+
+    The formatting options (`--format`) pretty-prints usage information output
+    using a Go template.
+
+    Valid placeholders for the Go template are:
+
+    * `.ID`
+    * `.Parents`
+    * `.CreatedAt`
+    * `.Mutable`
+    * `.Reclaimable`
+    * `.Shared`
+    * `.Size`
+    * `.Description`
+    * `.UsageCount`
+    * `.LastUsedAt`
+    * `.Type`
+
+    When using the `--format` option, the `du` command will either output the data
+    exactly as the template declares or, when using the `table` directive, includes
+    column headers as well.
+
+    The `pretty` format is useful for inspecting the disk usage records in more
+    detail. It shows the mutable and shared states more clearly, as well as
+    additional information about the corresponding layer:
+
+    ```console
+    $ docker buildx du --format=pretty
+    ...
+    ID:           6wqu0v6hjdwvhh8yjozrepaof
+    Parents:
+     - bqx15bcewecz4wcg14b7iodvp
+    Created at:   2025-06-12 15:44:02.715795569 +0000 UTC
+    Mutable:      false
+    Reclaimable:  true
+    Shared:       true
+    Size:         1.653GB
+    Description:  [build-base 4/4] COPY . .
+    Usage count:  1
+    Last used:    2 months ago
+    Type:         regular
+
+    Shared:         35.57GB
+    Private:        97.94GB
+    Reclaimable:    131.5GB
+    Total:          133.5GB
+    ```
+
+    The following example uses a template without headers and outputs the
+    `ID` and `Size` entries separated by a colon (`:`):
+
+    ```console
+    $ docker buildx du --format "{{.ID}}: {{.Size}}"
+    6wqu0v6hjdwvhh8yjozrepaof: 1.653GB
+    4m8061kctvjyh9qleus8rgpgx: 1.723GB
+    fcm9mlz2641u8r5eicjqdhy1l: 1.841GB
+    z2qu1swvo3afzd9mhihi3l5k0: 1.873GB
+    nmi6asc00aa3ja6xnt6o7wbrr: 2.027GB
+    0qlam41jxqsq6i27yqllgxed3: 2.495GB
+    3w9qhzzskq5jc262snfu90bfz: 2.617GB
+    ```
+
+    The following example uses a `table` template and outputs the `ID` and
+    `Description`:
+
+    ```console
+    $ docker buildx du --format "table {{.ID}}    {{.Description}}"
+    ID                           DESCRIPTION
+    03bbhchaib8cygqs68um6hfnl    [binaries-linux 2/5] LINK COPY --link --from=binfmt-filter /out/ /
+    2h8un0tyg57oj64xvbas6mzea    [cni-plugins-export 2/4] LINK COPY --link --from=cni-plugins /opt/cni/bin/loopback /buildkit-cni-loopback
+    evckox33t07ob9dmollhn4h4j    [cni-plugins-export 3/4] LINK COPY --link --from=cni-plugins /opt/cni/bin/host-local /buildkit-cni-host-local
+    jlxzwcw6xaomxj8irerow9bhb    [binaries-linux 4/5] LINK COPY --link --from=buildctl /usr/bin/buildctl /
+    ov2oetgebkhpsw39rv1sbh5w1    [buildkit-linux 1/1] LINK COPY --link --from=binaries / /usr/bin/
+    ruoczhyq25n5v9ld7n231zalx    [binaries-linux 3/5] LINK COPY --link --from=cni-plugins-export-squashed / /
+    ax7cov6kizxi9ufvcwsef4occ*   local source for context
+    ```
+
+    JSON output is also supported and will print as newline delimited JSON:
+
+    ```console
+    $ docker buildx du --format=json
+    {"CreatedAt":"2025-07-29T12:36:01Z","Description":"pulled from docker.io/library/rust:1.85.1-bookworm@sha256:e51d0265072d2d9d5d320f6a44dde6b9ef13653b035098febd68cce8fa7c0bc4","ID":"ic1gfidvev5nciupzz53alel4","LastUsedAt":"2025-07-29T12:36:01Z","Mutable":false,"Parents":["hmpdhm4sjrfpmae4xm2y3m0ra"],"Reclaimable":true,"Shared":false,"Size":"829889526","Type":"regular","UsageCount":1}
+    {"CreatedAt":"2025-08-05T09:24:09Z","Description":"pulled from docker.io/library/node:22@sha256:3218f0d1b9e4b63def322e9ae362d581fbeac1ef21b51fc502ef91386667ce92","ID":"jsw7fx09l5zsda3bri1z4mwk5","LastUsedAt":"2025-08-05T09:24:09Z","Mutable":false,"Parents":["098jsj5ebbv1w47ikqigeuurs"],"Reclaimable":true,"Shared":true,"Size":"829898832","Type":"regular","UsageCount":1}
+    ```
+
+    You can use `jq` to pretty-print the JSON output:
+
+    ```console
+    $ docker buildx du --format=json | jq .
+    {
+      "CreatedAt": "2025-07-29T12:36:01Z",
+      "Description": "pulled from docker.io/library/rust:1.85.1-bookworm@sha256:e51d0265072d2d9d5d320f6a44dde6b9ef13653b035098febd68cce8fa7c0bc4",
+      "ID": "ic1gfidvev5nciupzz53alel4",
+      "LastUsedAt": "2025-07-29T12:36:01Z",
+      "Mutable": false,
+      "Parents": [
+        "hmpdhm4sjrfpmae4xm2y3m0ra"
+      ],
+      "Reclaimable": true,
+      "Shared": false,
+      "Size": "829889526",
+      "Type": "regular",
+      "UsageCount": 1
+    }
+    {
+      "CreatedAt": "2025-08-05T09:24:09Z",
+      "Description": "pulled from docker.io/library/node:22@sha256:3218f0d1b9e4b63def322e9ae362d581fbeac1ef21b51fc502ef91386667ce92",
+      "ID": "jsw7fx09l5zsda3bri1z4mwk5",
+      "LastUsedAt": "2025-08-05T09:24:09Z",
+      "Mutable": false,
+      "Parents": [
+        "098jsj5ebbv1w47ikqigeuurs"
+      ],
+      "Reclaimable": true,
+      "Shared": true,
+      "Size": "829898832",
+      "Type": "regular",
+      "UsageCount": 1
+    }
+    ```
+
     ### Use verbose output (--verbose) {#verbose}
 
-    The verbose output of the `docker buildx du` command is useful for inspecting
-    the disk usage records in more detail. The verbose output shows the mutable and
-    shared states more clearly, as well as additional information about the
-    corresponding layer.
+    Shorthand for [`--format=pretty`](#format):
 
     ```console
     $ docker buildx du --verbose
     ...
-    Last used:      2 days ago
-    Type:           regular
+    ID:           6wqu0v6hjdwvhh8yjozrepaof
+    Parents:
+     - bqx15bcewecz4wcg14b7iodvp
+    Created at:   2025-06-12 15:44:02.715795569 +0000 UTC
+    Mutable:      false
+    Reclaimable:  true
+    Shared:       true
+    Size:         1.653GB
+    Description:  [build-base 4/4] COPY . .
+    Usage count:  1
+    Last used:    2 months ago
+    Type:         regular
 
-    ID:             05d0elirb4mmvpmnzbrp3ssrg
-    Parent:         e8sfdn4mygrg7msi9ak1dy6op
-    Created at:     2023-11-20 09:53:30.881558721 +0000 UTC
-    Mutable:        false
-    Reclaimable:    true
-    Shared:         false
-    Size:           0B
-    Description:    [gobase 3/3] WORKDIR /src
-    Usage count:    3
-    Last used:      24 hours ago
-    Type:           regular
-
-    Reclaimable:    4.453GB
-    Total:          4.453GB
+    Shared:         35.57GB
+    Private:        97.94GB
+    Reclaimable:    131.5GB
+    Total:          133.5GB
     ```
 
     ### Override the configured builder instance (--builder) {#builder}
@@ -122,7 +256,7 @@ examples: |-
     Use the `--builder` flag to inspect the disk usage of a particular builder.
 
     ```console
-    $ docker buildx du --builder youthful_shtern
+    $ docker buildx du --builder mybuilder
     ID                                RECLAIMABLE    SIZE          LAST ACCESSED
     g41agepgdczekxg2mtw0dujsv*        true           1.312GB       47 hours ago
     e6ycrsa0bn9akigqgzu0sc6kr         true           318MB         47 hours ago
