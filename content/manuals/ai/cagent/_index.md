@@ -11,7 +11,7 @@ keywords: [ai, agent, cagent]
 {{< summary-bar feature_name="cagent" >}}
 
 [cagent](https://github.com/docker/cagent) lets you build, orchestrate, and share
-AI agents. Use it to define AI agents that work as a team.
+AI agents. You can use it to define AI agents that work as a team.
 
 cagent relies on the concept of a _root agent_ that acts as a team lead and
 delegates tasks to the sub-agents you define.
@@ -22,7 +22,7 @@ Each agent:
 - works in its own context. They do not share knowledge.
 
 The root agent is your main contact point. Each agent has its own context,
-they do not share knowledge.
+they don't share knowledge.
 
 ## Key features
 
@@ -96,7 +96,7 @@ command:
 ```console
 $ cagent new
 
-For any feedback, please visit: https://docker.qualtrics.com/jfe/form/SV_cNsCIg92nQemlfw
+For any feedback, visit: https://docker.qualtrics.com/jfe/form/SV_cNsCIg92nQemlfw
 
 Welcome to cagent! (Ctrl+C to exit)
 
@@ -108,7 +108,7 @@ What should your agent/agent team do? (describe its purpose):
   short, clear, and focused on how this team delivers value to users and the business.
 ```
 
-Alternatively, you can write your configuration file by hand. For example:
+Alternatively, you can write your configuration file manually. For example:
 
 ```yaml {title="agentic-team.yaml"}
 agents:
@@ -151,7 +151,7 @@ models:
 ## Built-in tools
 
 cagent includes a set of built-in tools that enhance your agents' capabilities.
-You do not need to configure any external MCP tools to use them.
+You don't need to configure any external MCP tools to use them.
 
 ```yaml
 agents:
@@ -202,7 +202,7 @@ agents:
 ### Task transfer tool
 
 The task transfer tool is an internal tool that allows an agent to delegate a task
-to sub-agents. To prevent an agent from delegating work, make sure it does not have
+to sub-agents. To prevent an agent from delegating work, make sure it doesn't have
 sub-agents defined in its configuration.
 
 ### Using tools via the Docker MCP Gateway
