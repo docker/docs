@@ -36,7 +36,10 @@ params:
     description: Manage and secure your AI tools with a single gateway.
     icon: /icons/toolkit.svg
     link: /ai/mcp-gateway/
-
+  - title: Cagent
+    description: The open-source multi-agent solution to assist you in your tasks.
+    icon: /icons/cagent.svg
+    link: /ai/cagent
   ai:
   - title: Ask Gordon
     description: Streamline your workflow and get the most out of the Docker ecosystem with your personal AI assistant.
