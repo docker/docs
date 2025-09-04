@@ -10,6 +10,28 @@ toc_max: 2
 This page contains information about the new features, improvements, and bug
 fixes in [Docker Buildx](https://github.com/docker/buildx).
 
+## 0.28.0
+
+{{< release-date date="2025-09-03" >}}
+
+The full release notes for this release are available
+[on GitHub](https://github.com/docker/buildx/releases/tag/v0.27.0).
+
+### New
+
+- When building with Dockerfile version 1.18.0 or later, you can now use new Git URLs with query options for build context and named contexts in the `build` and `bake` command. [dockerfile/1.18.0](/manuals/build/buildkit/dockerfile-release-notes.md#1180)
+
+### Enhancements
+
+- Add formatting options to the `buildx du` command for custom and machine-readable output. [docker/buildx#3377](https://github.com/docker/buildx/pull/3377)
+- Kubernetes driver now supports `env.<key>` driver opts [docker/buildx#3373](https://github.com/docker/buildx/pull/3373)
+- Add support for `BUILDKIT_SYNTAX` build argument when BuildKit has a Dockerfile frontend disabled. [docker/buildx#3385](https://github.com/docker/buildx/pull/3385)
+
+### Bug fixes
+
+- Fix failing early when trying to export index annotations with moby exporter. [docker/buildx#3384](https://github.com/docker/buildx/pull/3384)
+- Fix possible errors on Windows from symlink handling [docker/buildx#3386](https://github.com/docker/buildx/pull/3386)
+
 ## 0.27.0
 
 {{< release-date date="2025-08-20" >}}
