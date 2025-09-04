@@ -254,7 +254,7 @@ also supported. URL queries are more structured and recommended over [URL fragme
 $ docker buildx build 'https://github.com/user/myrepo.git?branch=container&subdir=docker'
 ```
 
-| Build Syntax Suffix                          | Commit Used                   | Build Context Used |
+| Build syntax suffix                          | Commit used                   | Build context used |
 | -------------------------------------------- | ----------------------------- | ------------------ |
 | `myrepo.git`                                 | `refs/heads/<default branch>` | `/`                |
 | `myrepo.git?tag=mytag`                       | `refs/tags/mytag`             | `/`                |
@@ -265,7 +265,7 @@ $ docker buildx build 'https://github.com/user/myrepo.git?branch=container&subdi
 | `myrepo.git?tag=mytag&subdir=myfolder`       | `refs/tags/mytag`             | `/myfolder`        |
 | `myrepo.git?branch=mybranch&subdir=myfolder` | `refs/heads/mybranch`         | `/myfolder`        |
 
-A commit hash can be specified as a `checksum` (alias `commit`) query, along
+A commit hash can be specified as a `checksum` (alias `commit`) query, along with
 `tag`, `branch`, or `ref` queries to verify that the reference resolves to the
 expected commit:
 
