@@ -121,20 +121,23 @@ In this hands-on guide, you will learn how to use the Docker build cache effecti
 
 
     <table>
-      <tr>
-       <td>Steps
-       </td>
-       <td>Description
-       </td>
-       <td>Time Taken(1st Run)
-       </td>
-       <td>Time Taken (2nd Run)
-       </td>
-      </tr>
+      <thead>
+        <tr>
+          <th>Steps
+          </th>
+          <th>Description
+          </th>
+          <th>Time Taken (1st Run)
+          </th>
+          <th>Time Taken (2nd Run)
+          </th>
+        </tr>
+      </thead>
+      <tbody>
       <tr>
        <td>1
        </td>
-       <td>Load build definition from Dockerfile
+       <td><code>Load build definition from Dockerfile</code>
        </td>
        <td>0.0 seconds
        </td>
@@ -144,7 +147,7 @@ In this hands-on guide, you will learn how to use the Docker build cache effecti
       <tr>
        <td>2
        </td>
-       <td>Load metadata for docker.io/library/node:22-alpine
+       <td><code>Load metadata for docker.io/library/node:22-alpine</code>
        </td>
        <td>2.7 seconds
        </td>
@@ -154,7 +157,7 @@ In this hands-on guide, you will learn how to use the Docker build cache effecti
       <tr>
        <td>3
        </td>
-       <td>Load .dockerignore
+       <td><code>Load .dockerignore</code>
        </td>
        <td>0.0 seconds
        </td>
@@ -164,7 +167,7 @@ In this hands-on guide, you will learn how to use the Docker build cache effecti
       <tr>
        <td>4
        </td>
-       <td>Load build context
+       <td><code>Load build context</code>
     <p>
     (Context size: 4.60MB)
        </td>
@@ -176,7 +179,7 @@ In this hands-on guide, you will learn how to use the Docker build cache effecti
       <tr>
        <td>5
        </td>
-       <td>Set the working directory (WORKDIR)
+       <td><code>Set the working directory (WORKDIR)</code>
        </td>
        <td>0.1 seconds
        </td>
@@ -186,7 +189,7 @@ In this hands-on guide, you will learn how to use the Docker build cache effecti
       <tr>
        <td>6
        </td>
-       <td>Copy the local code into the container
+       <td><code>Copy the local code into the container</code>
        </td>
        <td>0.0 seconds
        </td>
@@ -196,7 +199,7 @@ In this hands-on guide, you will learn how to use the Docker build cache effecti
       <tr>
        <td>7
        </td>
-       <td>Run yarn install --production
+       <td><code>Run yarn install --production</code>
        </td>
        <td>10.0 seconds
        </td>
@@ -206,7 +209,7 @@ In this hands-on guide, you will learn how to use the Docker build cache effecti
       <tr>
        <td>8
        </td>
-       <td>Exporting layers
+       <td><code>Exporting layers</code>
        </td>
        <td>2.2 seconds
        </td>
@@ -216,13 +219,14 @@ In this hands-on guide, you will learn how to use the Docker build cache effecti
       <tr>
        <td>9
        </td>
-       <td>Exporting the final image
+       <td><code>Exporting the final image</code>
        </td>
        <td>3.0 seconds
        </td>
        <td>0.0 seconds
        </td>
      </tr>
+     </tbody>
     </table>
 
 
