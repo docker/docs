@@ -24,7 +24,7 @@ The full release notes for this release are available
 ### Enhancements
 
 - Add formatting options to the `buildx du` command for custom and machine-readable output. [docker/buildx#3377](https://github.com/docker/buildx/pull/3377)
-- Kubernetes driver now supports `env.<key> `driver opts [docker/buildx#3373](https://github.com/docker/buildx/pull/3373)
+- Kubernetes driver now supports `env.<key>` driver opts [docker/buildx#3373](https://github.com/docker/buildx/pull/3373)
 - Add support for BUILDKIT_SYNTAX build argument when BuildKit has a Dockerfile frontend disabled. [docker/buildx#3385](https://github.com/docker/buildx/pull/3385)
 
 ### Bug fixes
