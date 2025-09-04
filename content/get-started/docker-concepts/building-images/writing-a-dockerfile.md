@@ -22,7 +22,7 @@ A Dockerfile is a text-based document that's used to create a container image. I
 As an example, the following Dockerfile would produce a ready-to-run Python application:
 
 ```dockerfile
-FROM python:3.12
+FROM python:3.13
 WORKDIR /usr/local/app
 
 # Install the application dependencies
@@ -69,7 +69,9 @@ In this quick hands-on guide, you'll write a Dockerfile that builds a simple Nod
 
 ### Set up
 
-[Download this ZIP file](https://github.com/docker/getting-started-todo-app/raw/build-image-from-scratch/app.zip) and extract the contents into a directory on your machine.
+[Download this ZIP file](https://github.com/docker/getting-started-todo-app/archive/refs/heads/build-image-from-scratch.zip) and extract the contents into a directory on your machine.
+
+If you'd rather not download a ZIP file, clone the https://github.com/docker/getting-started-todo-app project and checkout the `build-image-from-scratch` branch.
 
 ### Creating the Dockerfile
 
@@ -87,7 +89,7 @@ Now that you have the project, you’re ready to create the `Dockerfile`.
 3. In the `Dockerfile`, define your base image by adding the following line:
 
     ```dockerfile
-    FROM node:20-alpine
+    FROM node:22-alpine
     ```
 
 4. Now, define the working directory by using the `WORKDIR` instruction. This will specify where future commands will run and the directory files will be copied inside the container image.
@@ -117,7 +119,7 @@ Now that you have the project, you’re ready to create the `Dockerfile`.
 
 
     ```dockerfile
-    FROM node:20-alpine
+    FROM node:22-alpine
     WORKDIR /app
     COPY . .
     RUN yarn install --production
