@@ -12,7 +12,7 @@ fixes in [Docker Buildx](https://github.com/docker/buildx).
 
 ## 0.28.0
 
-{{< release-date date="2025-09-04" >}}
+{{< release-date date="2025-09-03" >}}
 
 The full release notes for this release are available
 [on GitHub](https://github.com/docker/buildx/releases/tag/v0.27.0).
