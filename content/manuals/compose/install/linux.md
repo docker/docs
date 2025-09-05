@@ -30,8 +30,7 @@ To install the Docker Compose plugin on Linux, you can either:
     [Debian](/manuals/engine/install/debian.md#install-using-the-repository) |
     [Raspberry Pi OS](/manuals/engine/install/raspberry-pi-os.md#install-using-the-repository) |
     [Fedora](/manuals/engine/install/fedora.md#set-up-the-repository) |
-    [RHEL](/manuals/engine/install/rhel.md#set-up-the-repository) |
-    [SLES](/manuals/engine/install/sles.md#set-up-the-repository).
+    [RHEL](/manuals/engine/install/rhel.md#set-up-the-repository).
 
 2. Update the package index, and install the latest version of Docker Compose:
 
