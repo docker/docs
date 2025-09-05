@@ -153,19 +153,18 @@ manual configuration needed.
 To manually retrieve the VEX attestation for tools that support it:
 
 ```console
-$ docker scout attest get \
-  --predicate-type https://openvex.dev/ns/v0.2.0 \
-  --predicate \
-  <your-namespace>/dhi-<image>:<tag> --platform <platform> > vex.json
+$ docker scout vex get <your-namespace>/dhi-<image>:<tag> --output vex.json
 ```
+
+> [!NOTE]
+>
+> The `docker scout vex get` command requires [Docker Scout
+> CLI](https://github.com/docker/scout-cli/) version 1.18.3 or later.
 
 For example:
 
 ```console
-$ docker scout attest get \
-  --predicate-type https://openvex.dev/ns/v0.2.0 \
-  --predicate \
-  docs/dhi-python:3.13 --platform linux/amd64 > vex.json
+$ docker scout vex get docs/dhi-python:3.13 --output vex.json
 ```
 
 This creates a `vex.json` file containing the VEX statements for the specified
