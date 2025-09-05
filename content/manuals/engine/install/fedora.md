@@ -83,7 +83,16 @@ Docker from the repository.
 #### Set up the repository
 
 Install the `dnf-plugins-core` package (which provides the commands to manage
-your DNF repositories) and set up the repository.
+your DNF repositories) and set up the repository. Note that Fedora 41 and later
+primarily use DNF5. For Fedora 40 and earlier, please use the commands below
+made specifically for Fedora <=40.
+
+```console
+$ sudo dnf -y install dnf-plugins-core
+$ sudo dnf config-manager addrepo --from-repofile={{% param "download-url-base" %}}/docker-ce.repo
+```
+
+For earlier versions such as Fedora 40 or earlier that use DNF4 or DNF3:
 
 ```console
 $ sudo dnf -y install dnf-plugins-core
