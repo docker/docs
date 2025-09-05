@@ -191,26 +191,26 @@ runtime behavior.
 When using Docker Scout, these VEX statements are automatically applied and no
 manual configuration needed.
 
-To manually create a JSON file VEX attestation for tools that support it:
+To manually create a JSON file of VEX attestations for tools that support it:
 
 ```console
-$ docker scout attest get \
-  --predicate-type https://openvex.dev/ns/v0.2.0 \
-  --predicate \
-  <your-namespace>/dhi-<image>:<tag> --platform <platform> > vex.json
+$ docker scout vex get <your-namespace>/dhi-<image>:<tag> --output vex.json
 ```
+
+> [!NOTE]
+>
+> The `docker scout vex get` command requires [Docker Scout
+> CLI](https://github.com/docker/scout-cli/) version 1.18.3 or later.
 
 For example:
 
 ```console
-$ docker scout attest get \
-  --predicate-type https://openvex.dev/ns/v0.2.0 \
-  --predicate \
-  docs/dhi-python:3.13 --platform linux/amd64 > vex.json
+$ docker scout vex get docs/dhi-python:3.13 --output vex.json
 ```
 
 This creates a `vex.json` file containing the VEX statements for the specified
-image. You can then use this file with tools that support VEX to filter out known non-exploitable CVEs.
+image. You can then use this file with tools that support VEX to filter out
+known non-exploitable CVEs.
 
 For example, with Grype and Trivy, you can use the `--vex` flag to apply the VEX
 statements during the scan:
