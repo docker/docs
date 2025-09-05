@@ -29,7 +29,7 @@ options:
 deprecated: false
 hidden: false
 experimental: false
-experimentalcli: true
+experimentalcli: false
 kubernetes: false
 swarm: false
 
