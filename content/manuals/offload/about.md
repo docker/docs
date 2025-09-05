@@ -3,15 +3,13 @@ title: About Docker Offload
 linktitle: About
 weight: 15
 description: Learn about Docker Offload, its features, and how it works.
-keywords: cloud, build, remote builder
+keywords: cloud, run, offload
 ---
 
-Docker Offload is a fully managed service for building and running containers in
-the cloud using the Docker tools you already know, including Docker Desktop, the
-Docker CLI, and Docker Compose. It extends your local development workflow into a
-scalable, cloud-powered environment, so you can offload compute-heavy tasks,
-accelerate builds, and securely manage container workloads across the software
-lifecycle.
+Docker Offload is a fully managed service for running containers in the cloud
+using the Docker tools you already know, including Docker Desktop, the Docker
+CLI, and Docker Compose. It extends your local development workflow into a
+scalable, cloud-powered environment, so you can offload compute-heavy tasks.
 
 Docker Offload also supports GPU-accelerated instances, allowing you to
 containerize and run compute-intensive workloads such as Docker Model Runner and
@@ -22,13 +20,10 @@ other machine learning or data processing tasks that benefit from GPU.
 Docker Offload includes the following capabilities to support modern container
 workflows:
 
-- Cloud-based builds: Execute builds on remote, fully managed BuildKit instances
 - GPU acceleration: Use NVIDIA L4 GPU-backed environments for machine learning,
   media processing, and other compute-intensive workloads.
 - Ephemeral cloud runners: Automatically provision and tear down cloud
   environments for each container session.
-- Shared build cache: Speed up build times across machines and teammates with a
-  smart, shared cache layer.
 - Hybrid workflows: Seamlessly transition between local and remote execution
   using Docker Desktop or CLI.
 - Secure communication: Use encrypted tunnels between Docker Desktop and cloud
@@ -43,10 +38,9 @@ workflows:
 Docker Offload is designed to support modern development teams working across
 local and cloud environments. It helps you:
 
-- Offload heavy builds and runs to fast, scalable infrastructure
 - Accelerate feedback loops in development and testing
 - Run containers that require more resources than your local setup can provide
-- Build and run AI apps with instant access to GPU-powered environments
+- Run AI apps with instant access to GPU-powered environments
 - Use Docker Compose to manage complex, multi-service apps that need cloud
   resources
 - Maintain consistent environments without managing custom infrastructure
@@ -58,31 +52,8 @@ local tools.
 
 ## How Docker Offload works
 
-Docker Offload replaces the need to build or run containers locally by connecting
-Docker Desktop to secure, dedicated cloud resources.
-
-### Building with Docker Offload
-
-When you use Docker Offload for builds, the `docker buildx build` command sends
-the build request to a remote BuildKit instance in the cloud, instead of
-executing it locally. Your workflow stays the same, only the execution
-environment changes.
-
-The build runs on infrastructure provisioned and managed by Docker:
-
-- Each cloud builder is an isolated Amazon EC2 instance with its own EBS volume
-- Remote builders use a shared cache to speed up builds across machines and
-  teammates
-- Build results are encrypted in transit and sent to your specified destination
-  (such as a registry or local image store)
-
-Docker Offload manages the lifecycle of builders automatically. There's no need to
-provision or maintain infrastructure.
-
-> [!NOTE]
->
-> Docker Offload builders are currently hosted in the United States East region. Users in
-> other regions may experience increased latency.
+Docker Offload replaces the need to run containers locally by connecting Docker
+Desktop to secure, dedicated cloud resources.
 
 ### Running containers with Docker Offload
 
