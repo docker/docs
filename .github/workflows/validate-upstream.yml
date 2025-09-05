@@ -51,7 +51,7 @@ jobs:
         # that folder. If not, create a placeholder stub file for the data file.
         name: Copy data files
         if: ${{ inputs.data-files-id != '' && inputs.data-files-folder != '' }}
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const fs = require('fs');
