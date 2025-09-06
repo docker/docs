@@ -46,7 +46,7 @@ testuser:231072:65536
 ```
 
 The `dockerd-rootless-setuptool.sh install` script (see following) automatically shows help
-when the prerequiresites are not satisfied.
+when the prerequisites are not satisfied.
 
 ## Install
 
