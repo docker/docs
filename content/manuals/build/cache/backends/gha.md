@@ -41,7 +41,7 @@ The following table describes the available CSV parameters that you can pass to
 | `timeout`      | `cache-to`,`cache-from` | String      | `10m`                                          | Max duration for importing or exporting cache before it's timed out. |
 | `repository`   | `cache-to`              | String      |                                                | GitHub repository used for cache storage.                            |
 | `ghtoken`      | `cache-to`              | String      |                                                | GitHub token required for accessing the GitHub API.                  |
-| `version`      | `cache-to`,`cache-from` | String      | `1` unless `$ACTIONS_CACHE_SERVICE_V2` is set, than `2` | Selects GitHub Actions cache version, see [version][4]      |
+| `version`      | `cache-to`,`cache-from` | String      | `1` unless `$ACTIONS_CACHE_SERVICE_V2` is set, then `2` | Selects GitHub Actions cache version, see [version][4]      |
 
 [1]: #authentication
 [2]: #scope
