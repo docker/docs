@@ -1817,7 +1817,7 @@ events.
    If there is no cached image, a failure is reported.
 - `missing`: Compose pulls the image only if it's not available in the platform cache.
    This is the default option if you are not also using the [Compose Build Specification](build.md).
-  `if_not_present` is considered an alias for this value for backward compatibility.
+  `if_not_present` is considered an alias for this value for backward compatibility. The `latest` tag is always pulled even when the `missing` pull policy is used.
 - `build`: Compose builds the image. Compose rebuilds the image if it's already present.
 - `daily`: Compose checks the registry for image updates if the last pull took place more than 24 hours ago.
 - `weekly`: Compose checks the registry for image updates if the last pull took place more than 7 days ago.
