@@ -5,7 +5,7 @@ title: Tips
 weight: 20
 ---
 
-## Advanced Usage
+## Advanced usage
 
 ### Daemon
 
@@ -45,7 +45,7 @@ The following environment variables must be set:
 {{< /tab >}}
 {{< /tabs >}}
 
-Remarks about directory paths:
+It's important to note that with directory paths:
 
 - The socket path is set to `$XDG_RUNTIME_DIR/docker.sock` by default.
   `$XDG_RUNTIME_DIR` is typically set to `/run/user/$UID`.

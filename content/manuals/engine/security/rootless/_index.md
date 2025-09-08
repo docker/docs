@@ -5,7 +5,7 @@ title: Rootless mode
 weight: 10
 ---
 
-Rootless mode allows running the Docker daemon and containers as a non-root
+Rootless mode lets you run the Docker daemon and containers as a non-root
 user to mitigate potential vulnerabilities in the daemon and
 the container runtime.
 
