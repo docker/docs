@@ -32,7 +32,7 @@ The following table describes the available CSV parameters that you can pass to
 
 | Name           | Option                  | Type        | Default                                        | Description                                                          |
 |----------------|-------------------------|-------------|------------------------------------------------|----------------------------------------------------------------------|
-| `url`          | `cache-to`,`cache-from` | String      | `$ACTIONS_CACHE_URL` or `$ACTIONS_RESULTS_URL` | Cache server URL, see [authentication][1].                           |
+| `url`          | `cache-to`,`cache-from` | String      | `$ACTIONS_CACHE_URL` or `$ACTIONS_RESULTS_URL` | Cache server URL, see [authentication][1]. Ignored when `version=2`. |
 | `url_v2`       | `cache-to`,`cache-from` | String      | `$ACTIONS_RESULTS_URL`                         | Cache v2 server URL, see [authentication][1].                        |
 | `token`        | `cache-to`,`cache-from` | String      | `$ACTIONS_RUNTIME_TOKEN`                       | Access token, see [authentication][1].                               |
 | `scope`        | `cache-to`,`cache-from` | String      | `buildkit`                                     | Which scope cache object belongs to, see [scope][2]                  |
@@ -41,10 +41,12 @@ The following table describes the available CSV parameters that you can pass to
 | `timeout`      | `cache-to`,`cache-from` | String      | `10m`                                          | Max duration for importing or exporting cache before it's timed out. |
 | `repository`   | `cache-to`              | String      |                                                | GitHub repository used for cache storage.                            |
 | `ghtoken`      | `cache-to`              | String      |                                                | GitHub token required for accessing the GitHub API.                  |
+| `version`      | `cache-to`,`cache-from` | String      | `1` unless `$ACTIONS_CACHE_SERVICE_V2` is set, then `2` | Selects GitHub Actions cache version, see [version][4]      |
 
 [1]: #authentication
 [2]: #scope
 [3]: _index.md#cache-mode
+[4]: #version
 
 ## Authentication
 
@@ -77,6 +79,15 @@ $ docker buildx build --push -t <registry>/<image2> \
 GitHub's [cache access restrictions](https://docs.github.com/en/actions/advanced-guides/caching-dependencies-to-speed-up-workflows#restrictions-for-accessing-a-cache),
 still apply. Only the cache for the current branch, the base branch and the
 default branch is accessible by a workflow.
+
+## Version
+
+If you don’t set `version` explicitly, the default is v1. However, if the environment variable `$ACTIONS_CACHE_SERVICE_V2` is set to a value interpreted as `true` ( `1`, `true`, `yes`), then v2 is used automatically.
+
+Only one URL is relevant at a time:
+
+ - With v1, use `url` (defaults to `$ACTIONS_CACHE_URL`).
+ - With v2, use `url_v2` (defaults to `$ACTIONS_RESULTS_URL`).
 
 ### Using `docker/build-push-action`
 
