@@ -107,14 +107,19 @@ Supported patterns:
 - `?` matches any single character
 - `[abc]` matches any character in brackets
 
+> [!NOTE]
+>
+> Always wrap wildcard patterns in quotes. Without quotes, your shell will expand the
+> wildcard to match files in the current directory, which usually causes errors.
+
 Examples: 
 
 ```console
 # Match all targets starting with 'foo-'
-$ docker buildx bake foo-*
+$ docker buildx bake "foo-*"
 
 # Match all targets
-$ docker buildx bake *
+$ docker buildx bake "*"
 
 # Matches: foo-baz, foo-caz, foo-daz, etc.
 $ docker buildx bake "foo-?az"
@@ -126,10 +131,10 @@ $ docker buildx bake "[fb]oo-bar"
 $ docker buildx bake "mtx-a-b-*"
 ``` 
 
-You can also combine multiple patters:
+You can also combine multiple patterns:
 
 ```console
-$ docker buildx bake "*" "tests"
+$ docker buildx bake "foo*" "tests"
 ```
 
 ## Additional resources
