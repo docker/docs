@@ -109,7 +109,10 @@ The following sample is an `admin-settings.json` file with common enterprise set
     "https": "",
     "exclude": [],
     "windowsDockerdPort": 65000,
-    "enableKerberosNtlm": false
+    "enableKerberosNtlm": false,
+    "pac": "",
+    "embeddedPac": ""
+
   },
   "containersProxy": {
     "locked": true,
@@ -118,6 +121,7 @@ The following sample is an `admin-settings.json` file with common enterprise set
     "https": "",
     "exclude": [],
     "pac":"",
+    "embeddedPac": "",
     "transparentPorts": ""
   },
   "enhancedContainerIsolation": {
@@ -279,14 +283,18 @@ The following tables describe all available settings in the `admin-settings.json
 |Parameter|OS|Description|Version|
 |:-------------------------------|---|:-------------------------------|---|
 |`proxy`|   |If `mode` is set to `system` instead of `manual`, Docker Desktop gets the proxy values from the system and ignores and values set for `http`, `https` and `exclude`. Change `mode` to `manual` to manually configure proxy servers. If the proxy port is custom, specify it in the `http` or `https` property, for example `"https": "http://myotherproxy.com:4321"`. The `exclude` property specifies a comma-separated list of hosts and domains to bypass the proxy. |  |
-|&nbsp; &nbsp; &nbsp; &nbsp;`windowsDockerdPort`| Windows only | Exposes Docker Desktop's internal proxy locally on this port for the Windows Docker daemon to connect to. If it is set to 0, a random free port is chosen. If the value is greater than 0, use that exact value for the port. The default value is -1 which disables the option. |  |
-|&nbsp; &nbsp; &nbsp; &nbsp;`enableKerberosNtlm`|  |When set to `true`, Kerberos and NTLM authentication is enabled. Default is `false`. For more information, see the settings documentation. | Docker Desktop version 4.32 and later. |
+| `windowsDockerdPort`| Windows only | Exposes Docker Desktop's internal proxy locally on this port for the Windows Docker daemon to connect to. If it is set to 0, a random free port is chosen. If the value is greater than 0, use that exact value for the port. The default value is -1 which disables the option. |  |
+|`enableKerberosNtlm`|  |When set to `true`, Kerberos and NTLM authentication is enabled. Default is `false`. For more information, see the settings documentation. | Docker Desktop version 4.32 and later. |
+| `pac` | | Specifies a PAC file URL. For example, `"pac": "http://proxy/proxy.pac"`. | |
+| `embeddedPac`  | | Specifies an embedded PAC (Proxy Auto-Config) script. For example, `"embeddedPac": "function FindProxyForURL(url, host) { return \"DIRECT\"; }"`. This setting takes precedence over HTTP, HTTPS, Proxy bypass and PAC server URL. |  Docker Desktop version 4.46 and later. |
 
 ### Container proxy
 
 |Parameter|OS|Description|Version|
 |:-------------------------------|---|:-------------------------------|---|
 |`containersProxy` | | Creates air-gapped containers. For more information see [Air-Gapped Containers](../air-gapped-containers.md).| Docker Desktop version 4.29 and later. |
+| `pac` | | Specifies a PAC file URL. For example, `"pac": "http://containerproxy/proxy.pac"`. | |
+| `embeddedPac`  | | Specifies an embedded PAC (Proxy Auto-Config) script. For example, `"embeddedPac": "function FindProxyForURL(url, host) { return \"http://containerproxy:2003\"; }"`. This setting takes precedence over HTTP, HTTPS, Proxy bypass and PAC server URL. |  Docker Desktop version 4.46 and later. |
 
 ### Linux VM settings
 
