@@ -1,6 +1,6 @@
 module github.com/docker/docs
 
-go 1.24.5
+go 1.24.7
 
 require (
 	github.com/Azure/go-ansiterm v0.0.0-20250102033503-faa5f7b0171c // indirect
@@ -16,10 +16,10 @@ require (
 	github.com/containerd/typeurl/v2 v2.2.3 // indirect
 	github.com/distribution/reference v0.6.0 // indirect
 	github.com/docker/buildx v0.28.0 // indirect
-	github.com/docker/cli v28.3.3+incompatible // indirect
-	github.com/docker/compose/v2 v2.39.2 // indirect
+	github.com/docker/cli v28.4.0+incompatible // indirect
+	github.com/docker/compose/v2 v2.39.3 // indirect
 	github.com/docker/distribution v2.8.3+incompatible // indirect
-	github.com/docker/docker v28.3.3+incompatible // indirect
+	github.com/docker/docker v28.4.0+incompatible // indirect
 	github.com/docker/docker-credential-helpers v0.9.3 // indirect
 	github.com/docker/go-connections v0.6.0 // indirect
 	github.com/docker/go-units v0.5.0 // indirect
@@ -76,8 +76,8 @@ require (
 	github.com/rs/dnscache v0.0.0-20230804202142-fc85eb664529 // indirect
 	github.com/sirupsen/logrus v1.9.3 // indirect
 	github.com/smallnest/ringbuffer v0.0.0-20241116012123-461381446e3d // indirect
-	github.com/spf13/cobra v1.9.1 // indirect
-	github.com/spf13/pflag v1.0.7 // indirect
+	github.com/spf13/cobra v1.10.1 // indirect
+	github.com/spf13/pflag v1.0.10 // indirect
 	github.com/vbatts/tar-split v0.12.1 // indirect
 	go.opentelemetry.io/auto/sdk v1.1.0 // indirect
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.62.0 // indirect
@@ -94,8 +94,8 @@ require (
 	golang.org/x/exp v0.0.0-20250606033433-dcc06ee1d476 // indirect
 	golang.org/x/mod v0.25.0 // indirect
 	golang.org/x/net v0.41.0 // indirect
-	golang.org/x/sync v0.16.0 // indirect
-	golang.org/x/sys v0.35.0 // indirect
+	golang.org/x/sync v0.17.0 // indirect
+	golang.org/x/sys v0.36.0 // indirect
 	golang.org/x/text v0.26.0 // indirect
 	golang.org/x/tools v0.34.0 // indirect
 	gonum.org/v1/gonum v0.15.1 // indirect
@@ -111,7 +111,7 @@ require (
 replace (
 	github.com/docker/buildx => github.com/docker/buildx v0.28.0
 	github.com/docker/cli => github.com/docker/cli v28.3.3+incompatible
-	github.com/docker/compose/v2 => github.com/docker/compose/v2 v2.39.2
+	github.com/docker/compose/v2 => github.com/docker/compose/v2 v2.39.3
 	github.com/docker/model-cli => github.com/docker/model-cli v0.1.40
 	github.com/docker/scout-cli => github.com/docker/scout-cli v1.18.1
 	github.com/moby/buildkit => github.com/moby/buildkit v0.24.0

@@ -15,6 +15,24 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.39.3
+
+{{< release-date date="2025-09-09" >}}
+
+### Bug fixes and enhancements
+
+- Added completions for `--progress` flag
+- Fixed minor issues when building with `bake`
+- Fixed issue when publishing a Compose stack with bind mounts and `-y` flag
+
+### Update
+
+- Dependencies upgrade: bump docker engine and cli to v28.4.0
+- Dependencies upgrade: bump compose-go to v2.8.2
+- Dependencies upgrade: bump buildx to v0.28.0
+- Dependencies upgrade: bump buildkit to v0.24.0
+- Dependencies upgrade: bump golang to v1.24.7
+
 ## 2.39.2
 
 {{< release-date date="2025-08-04" >}}
