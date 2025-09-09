@@ -197,6 +197,13 @@ profile docker-nginx flags=(attach_disconnected,mediate_deleted) {
 
 You just deployed a container secured with a custom apparmor profile.
 
+> [!WARNING]
+>
+> The activation of the custom AppArmor profile in `/etc/apparmor.d/containers/docker-nginx` will not persist across restarts.
+> After a reboot the container will fail to start, as it expects the `docker-nginx` profile to be loaded.
+>
+> Only profiles directly located in `/etc/appamor.d/` will be automatically applied in enforce mode.
+> For more information about the AppArmor directory structure, have a look at [Policy Layout](https://gitlab.com/apparmor/apparmor/-/wikis/Policy_Layout).
 
 ## Debug AppArmor
 
