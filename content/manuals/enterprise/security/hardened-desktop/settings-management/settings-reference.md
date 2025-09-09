@@ -365,6 +365,20 @@ if needed.
     - **General** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
     - Settings Management: `configurationFileVersion` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
 
+### Automatically update components
+
+| Default value | Accepted values | Format   |
+|---------------|-----------------|----------|
+| `true`        | `true`, `false` | Boolean  |
+
+- **Description:** Allow Docker Desktop to automatically update components that don't require a restart.
+- **OS:** {{< badge color=blue text="All" >}}
+- **Use case:** Automatically updates key Docker Desktop components such as Docker Compose, Docker Scout, the Docker CLI.
+- **Configure this setting with:**
+    - **General settings** in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/software-updates.md)
+    - Settings Management: `silentModulesUpdate` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
+    - Settings Management: **Automatically update components** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
+
 ## Resources settings
 
 ### CPU limit
