@@ -51,7 +51,7 @@ sandbox is configured to store all the keys and files inside the `trustsandbox`
 container. Since the keys you create in the sandbox are for play only,
 destroying the container destroys them as well.
 
-By using a docker-in-docker image for the `trustsandbox` container, you also
+By using a `docker-in-docker` image for the `trustsandbox` container, you also
 don't pollute your real Docker daemon cache with any images you push and pull.
 The images are stored in an anonymous volume attached to this container,
 and can be destroyed after you destroy the container.
@@ -124,7 +124,7 @@ the `trustsandbox` container, the Notary server, and the Registry server.
    $ docker compose up -d
    ```
 
-   The first time you run this, the docker-in-docker, Notary server, and registry
+   The first time you run this, the `docker-in-docker`, Notary server, and registry
    images are downloaded from Docker Hub.
 
 
@@ -156,7 +156,7 @@ Now, pull some images from within the `trustsandbox` container.
    Status: Downloaded newer image for docker/trusttest:latest
    ```
 
-2. Tag it to be pushed to our sandbox registry:
+2. Tag it to be pushed to your sandbox registry:
 
    ```console
    / # docker tag docker/trusttest sandboxregistry:5000/test/trusttest:latest
@@ -276,7 +276,7 @@ data. Then, you try and pull it.
    sandboxregistry:5000/test/trusttest   <none>              cc7629d1331a        11 months ago       5.025 MB
    ```
 
-8. Remove the `trusttest:latest` image from our local cache.
+8. Remove the `trusttest:latest` image from your local cache.
 
    ```console
    / # docker image rm -f cc7629d1331a
@@ -288,11 +288,11 @@ data. Then, you try and pull it.
    Deleted: sha256:c22f7bc058a9a8ffeb32989b5d3338787e73855bf224af7aa162823da015d44c
    ```
 
-   Docker does not re-download images that it already has cached, but we want
+   Docker does not re-download images that it already has cached, but you want
    Docker to attempt to download the tampered image from the registry and reject
    it because it is invalid.
 
-9. Pull the image again. This downloads the image from the registry, because we don't have it cached.
+9. Pull the image again. This downloads the image from the registry, because you don't have it cached.
 
    ```console
    / # docker pull sandboxregistry:5000/test/trusttest
