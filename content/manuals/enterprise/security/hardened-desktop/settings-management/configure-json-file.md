@@ -216,6 +216,26 @@ The following sample is an `admin-settings.json` file with common enterprise set
   "desktopTerminalEnabled": {
     "locked": false,
     "value": false
+  },
+  "enableInference": {
+    "locked": false,
+    "value": true
+  },
+  "enableInferenceTCP": {
+    "locked": false,
+    "value": true
+  },
+  "enableInferenceTCPPort": {
+    "locked": true,
+    "value": 12434
+  },
+  "enableInferenceCORS": {
+    "locked": true,
+    "value": ""
+  },
+  "enableInferenceGPUVariant": {
+    "locked": true,
+    "value": true
   }
 }
 ```
