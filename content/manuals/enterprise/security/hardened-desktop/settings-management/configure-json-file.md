@@ -112,7 +112,6 @@ The following sample is an `admin-settings.json` file with common enterprise set
     "enableKerberosNtlm": false,
     "pac": "",
     "embeddedPac": ""
-
   },
   "containersProxy": {
     "locked": true,
