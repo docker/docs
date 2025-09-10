@@ -132,7 +132,7 @@ services:
 `resources` configures physical resource constraints for container to run on platform. Those constraints can be configured
 as:
 
-- `limits`: The platform must prevent the container to allocate more.
+- `limits`: The platform must prevent the container from allocating more resources.
 - `reservations`: The platform must guarantee the container can allocate at least the configured amount.
 
 ```yml
@@ -270,7 +270,7 @@ deploy:
 
 ### `rollback_config`
 
-`rollback_config` configures how the service should be rollbacked in case of a failing update.
+`rollback_config` configures how the service should be rolled back in case of a failing update.
 
 - `parallelism`: The number of containers to rollback at a time. If set to 0, all containers rollback simultaneously.
 - `delay`: The time to wait between each container group's rollback (default 0s).

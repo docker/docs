@@ -1,40 +1,39 @@
 ---
-title: Built-in tools
-description: How to use Gordon's built-in tools
-keywords: ai, mcp, gordon
+title: Built-in tools in Gordon
+description: Use and configure Gordon's built-in tools for Docker, Kubernetes, security, and development workflows
+keywords: ai, mcp, gordon, docker, kubernetes, security, developer tools, toolbox, configuration, usage
 aliases:
  - /desktop/features/gordon/mcp/built-in-tools/
 ---
 
-Gordon comes with an integrated toolbox providing access to various system tools
-and capabilities. These tools extend Gordon's functionality by allowing it to
-interact with the Docker Engine, Kubernetes, Docker Scout's security scanning,
-and other developer utilities. This documentation covers the available tools,
-their configuration, and usage patterns.
+Gordon includes an integrated toolbox that gives you access to system tools and
+capabilities. These tools extend Gordon's functionality so you can interact with
+the Docker Engine, Kubernetes, Docker Scout security scanning, and other
+developer utilities. This article describes the available tools, how to
+configure them, and usage patterns.
 
-## Configuration
+## Configure tools
 
-Tools can be configured globally in the toolbox, making them accessible
-throughout the Gordon interfaces, including both Docker Desktop and the CLI.
+Configure tools globally in the toolbox to make them available throughout
+Gordon, including Docker Desktop and the CLI.
 
-To configure:
+To configure tools:
 
-1. On the **Ask Gordon** view in Docker Desktop, select the `Toolbox` button in the bottom left of the input area.
+1. In the **Ask Gordon** view in Docker Desktop, select the **Toolbox** button at the bottom left of the input area.
 
-   ![Gordon page with the toolbox button](../images/gordon.webp)
+   ![Screenshot showing Gordon page with the toolbox button.](../images/gordon.png)
 
-2. Choose the tools you want to make available. Selecting a card lets you view extra information regarding each tool and what it does.
+1. To enable or disable a tool, select it in the left menu and select the toggle.
 
-   ![Gordon's Toolbox](../images/toolbox.webp)
+   ![Screenshot showing Gordon's Toolbox.](../images/toolbox.png)
 
-   For more information on the possible tools, see [Reference](#reference).
+   For more information about Docker tools, see [Reference](#reference).
 
 ## Usage examples
 
-This section provides task-oriented examples for common operations with Gordon
-tools.
+This section shows common tasks you can perform with Gordon tools.
 
-### Managing Docker containers
+### Manage Docker containers
 
 #### List and monitor containers
 
@@ -62,7 +61,7 @@ $ docker ai "Stop my database container"
 $ docker ai "Remove all stopped containers"
 ```
 
-### Working with Docker images
+### Work with Docker images
 
 ```console
 # List available images
@@ -78,7 +77,7 @@ $ docker ai "Build an image from my current directory and tag it as myapp:latest
 $ docker ai "Remove all my unused images"
 ```
 
-### Managing Docker volumes
+### Manage Docker volumes
 
 ```console
 # List volumes
@@ -87,11 +86,11 @@ $ docker ai "List all my Docker volumes"
 # Create a new volume
 $ docker ai "Create a new volume called postgres-data"
 
-# Backup data from a container to a volume
+# Back up data from a container to a volume
 $ docker ai "Create a backup of my postgres container data to a new volume"
 ```
 
-### Kubernetes operations
+### Perform Kubernetes operations
 
 ```console
 # Create a deployment
@@ -104,18 +103,17 @@ $ docker ai "Show me all deployments in the default namespace"
 $ docker ai "Show me logs from the auth-service pod"
 ```
 
-### Security analysis
-
+### Run security analysis
 
 ```console
-# Scan  for CVEs
+# Scan for CVEs
 $ docker ai "Scan my application for security vulnerabilities"
 
 # Get security recommendations
 $ docker ai "Give me recommendations for improving the security of my nodejs-app image"
 ```
 
-### Development workflows
+### Use development workflows
 
 ```console
 # Analyze and commit changes
@@ -127,112 +125,107 @@ $ docker ai "Show me the status of my current branch compared to main"
 
 ## Reference
 
-This section provides a comprehensive listing of the built-in tools you can find
-in Gordon's toolbox.
+This section lists the built-in tools in Gordon's toolbox.
 
 ### Docker tools
 
-Tools to interact with your Docker containers, images, and volumes.
+Interact with Docker containers, images, and volumes.
 
 #### Container management
 
-| Name | Description |
-|------|-------------|
-| `list_containers` | List all Docker containers |
-| `remove_containers` | Remove one or more Docker containers |
-| `stop_container` | Stop a running Docker container |
-| `fetch_container_logs` | Retrieve logs from a Docker container |
-| `run_container` | Run a new Docker container |
+<!-- vale off -->
+
+| Name          | Description                      |
+|---------------|----------------------------------|
+| `docker`      | Access the Docker CLI            |
+| `list_builds` | List builds in the Docker daemon |
+| `build_logs`  | Show build logs                  |
 
 #### Volume management
 
-| Tool | Description |
-|------|-------------|
-| `list_volumes` | List all Docker volumes |
-| `remove_volume` | Remove a Docker volume |
-| `create_volume` | Create a new Docker volume |
+| Tool           | Description                |
+|----------------|---------------------------|
+| `list_volumes` | List all Docker volumes   |
+| `remove_volume`| Remove a Docker volume    |
+| `create_volume`| Create a new Docker volume|
 
 #### Image management
 
-| Tool | Description |
-|------|-------------|
-| `list_images` | List all Docker images |
-| `remove_images` | Remove Docker images |
-| `pull_image` | Pull an image from a registry |
-| `push_image` | Push an image to a registry |
-| `build_image` | Build a Docker image |
-| `tag_image` | Tag a Docker image |
-| `inspect` | Inspect a Docker object |
+| Tool           | Description                    |
+|----------------|-------------------------------|
+| `list_images`  | List all Docker images         |
+| `remove_images`| Remove Docker images           |
+| `pull_image`   | Pull an image from a registry  |
+| `push_image`   | Push an image to a registry    |
+| `build_image`  | Build a Docker image           |
+| `tag_image`    | Tag a Docker image             |
+| `inspect`      | Inspect a Docker object        |
 
 ### Kubernetes tools
 
-Tools to interact with your Kubernetes cluster
+Interact with your Kubernetes cluster.
 
-#### Pods
+#### Pod management
 
-| Tool | Description |
-|------|-------------|
-| `list_pods` | List all pods in the cluster |
-| `get_pod_logs` | Get logs from a specific pod |
+| Tool           | Description                        |
+|----------------|------------------------------------|
+| `list_pods`    | List all pods in the cluster       |
+| `get_pod_logs` | Get logs from a specific pod       |
 
 #### Deployment management
 
-
-| Tool | Description |
-|------|-------------|
-| `list_deployments` | List all deployments |
-| `create_deployment` | Create a new deployment |
-| `expose_deployment` | Expose a deployment as a service |
-| `remove_deployment` | Remove a deployment |
+| Tool               | Description                        |
+|--------------------|------------------------------------|
+| `list_deployments` | List all deployments               |
+| `create_deployment`| Create a new deployment            |
+| `expose_deployment`| Expose a deployment as a service   |
+| `remove_deployment`| Remove a deployment                |
 
 #### Service management
 
-| Tool | Description |
-|------|-------------|
-| `list_services` | List all services |
-| `remove_service` | Remove a service |
+| Tool           | Description                |
+|----------------|---------------------------|
+| `list_services`| List all services         |
+| `remove_service`| Remove a service         |
 
 #### Cluster information
 
-| Tool | Description |
-|------|-------------|
-| `list_namespaces` | List all namespaces |
-| `list_nodes` | List all nodes in the cluster |
+| Tool             | Description                  |
+|------------------|-----------------------------|
+| `list_namespaces`| List all namespaces         |
+| `list_nodes`     | List all nodes in the cluster|
 
 ### Docker Scout tools
 
-Security analysis tools powered by Docker Scout.
+Security analysis powered by Docker Scout.
 
-| Tool | Description |
-|------|-------------|
-| `search_for_cves` | Analyze a Docker image, a project directory, or other artifacts for vulnerabilities using Docker Scout CVEs.search for cves |
-| `get_security_recommendations` | Analyze a Docker image, a project directory, or other artifacts for base image update recommendations using Docker Scout. |
+| Tool                           | Description                                                                                                             |
+|--------------------------------|-------------------------------------------------------------------------------------------------------------------------|
+| `search_for_cves`              | Analyze a Docker image, project directory, or other artifacts for vulnerabilities using Docker Scout CVEs.              |
+| `get_security_recommendations` | Analyze a Docker image, project directory, or other artifacts for base image update recommendations using Docker Scout. |
 
 ### Developer tools
 
 General-purpose development utilities.
 
-| Tool | Description |
-|------|-------------|
-| `fetch` | Retrieve content from a URL |
-| `get_command_help` | Get help for CLI commands |
-| `run_command` | Execute shell commands |
-| `filesystem` | Perform filesystem operations |
-| `git` | Execute git commands |
+| Tool              | Description                      |
+|-------------------|----------------------------------|
+| `fetch`           | Retrieve content from a URL      |
+| `get_command_help`| Get help for CLI commands        |
+| `run_command`     | Execute shell commands           |
+| `filesystem`      | Perform filesystem operations    |
+| `git`             | Execute git commands             |
 
 ### AI model tools
 
-| Tool | Description |
-|------|-------------|
-| `list_models` | List all available AI models |
-| `pull_model` | Download an AI model |
-| `run_model` | Query a model with a prompt |
-| `remove_model` | Remove an AI model |
+| Tool           | Description                        |
+|----------------|------------------------------------|
+| `list_models`  | List all available Docker models   |
+| `pull_model`   | Download a Docker model            |
+| `run_model`    | Query a model with a prompt        |
+| `remove_model` | Remove a Docker model              |
 
-### AI Tool Catalog
+### Docker MCP Catalog
 
-When the [AI Tool
-Catalog](https://open.docker.com/extensions/marketplace?extensionId=docker/labs-ai-tools-for-devs)
-Docker Desktop extension is installed, all the tools enabled in the catalog are
-available for Gordon to use. After installation, you can enable the usage of the
-AI Tool Catalog tools in the toolbox section of Gordon.
+If you have enabled the [MCP Toolkit feature](../../mcp-catalog-and-toolkit/_index.md),
+all the tools you have enabled and configured are available for Gordon to use.

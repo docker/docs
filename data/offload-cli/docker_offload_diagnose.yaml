@@ -1,0 +1,12 @@
+command: docker offload diagnose
+short: Print diagnostic information for Docker Offload
+usage: docker offload diagnose
+pname: docker offload
+plink: docker_offload.yaml
+options: []
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false

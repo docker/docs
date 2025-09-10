@@ -22,7 +22,7 @@ receiver can extract the following information:
 The format is defined in [RFC 5424](https://tools.ietf.org/html/rfc5424) and Docker's syslog driver implements the
 [ABNF reference](https://tools.ietf.org/html/rfc5424#section-6) in the following way:
 
-```none
+```text
                 TIMESTAMP SP HOSTNAME SP APP-NAME SP PROCID SP MSGID
                     +          +             +           |        +
                     |          |             |           |        |

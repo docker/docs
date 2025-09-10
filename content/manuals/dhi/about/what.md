@@ -56,11 +56,12 @@ so you don’t have to.
   Level 3](../core-concepts/slsa.md), ensuring a tamper-resistant, verifiable,
   and auditable build process that protects against supply chain threats.
 
-- Distroless approach: Unlike traditional base images that bundle an entire OS
-  with shells and package managers, [distroless
-  images](../core-concepts/distroless.md) exclude the OS layer and include only
-  your app and its runtime dependencies, reducing the attack surface by up to 95
-  percent and improving performance.
+-  Distroless approach: Unlike traditional base images that bundle an entire OS
+   with shells, package managers, and debugging tools, [distroless
+   images](../core-concepts/distroless.md) retain only the minimal OS components
+   required to run your application. By excluding unnecessary tooling and
+   libraries, they reduce the attack surface by up to 95% and can improve
+   performance and image size.
 
 - Continuous maintenance: All DHIs are continuously monitored and updated to
   maintain near-zero known exploitable [CVEs](../core-concepts/cves.md), helping

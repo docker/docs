@@ -1,7 +1,7 @@
 ---
 title: Automate your builds with GitHub Actions
 linkTitle: Automate your builds with GitHub Actions
-weight: 20
+weight: 40
 keywords: ci/cd, github actions, python, flask
 description: Learn how to configure CI/CD using GitHub Actions for your Python application.
 aliases:
@@ -20,7 +20,7 @@ If you didn't create a [GitHub repository](https://github.com/new) for your proj
 
 2. Under the **Variables** tab, create a new **Repository variable** named `DOCKER_USERNAME` and your Docker ID as a value.
 
-3. Create a new [Personal Access Token (PAT)](/manuals/security/for-developers/access-tokens.md#create-an-access-token) for Docker Hub. You can name this token `docker-tutorial`. Make sure access permissions include Read and Write.
+3. Create a new [Personal Access Token (PAT)](/manuals/security/access-tokens.md#create-an-access-token) for Docker Hub. You can name this token `docker-tutorial`. Make sure access permissions include Read and Write.
 
 4. Add the PAT as a **Repository secret** in your GitHub repository, with the name
    `DOCKERHUB_TOKEN`.
@@ -60,6 +60,27 @@ on:
       - main
 
 jobs:
+  lint-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run pre-commit hooks
+        run: pre-commit run --all-files
+
+      - name: Run pyright
+        run: pyright
+
   build_and_push:
     runs-on: ubuntu-latest
     steps:
@@ -97,7 +118,11 @@ When the workflow is complete, go to your [repositories on Docker Hub](https://h
 
 ## Summary
 
-In this section, you learned how to set up a GitHub Actions workflow for your Python application.
+In this section, you learned how to set up a GitHub Actions workflow for your Python application that includes:
+
+- Running pre-commit hooks for linting and formatting
+- Static type checking with Pyright
+- Building and pushing Docker images
 
 Related information:
 
@@ -107,5 +132,5 @@ Related information:
 
 ## Next steps
 
-In the next section, you'll learn how you can develop your application using containers.
+In the next section, you'll learn how you can develop locally using kubernetes.
 

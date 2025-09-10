@@ -1,0 +1,34 @@
+command: docker offload start
+short: Start a Docker Offload session
+usage: docker offload start
+pname: docker offload
+plink: docker_offload.yaml
+options:
+  - option: account
+    shorthand: a
+    value_type: string
+    default_value: ""
+    description: The Docker account to use
+    deprecated: false
+    hidden: false
+    experimental: false
+    experimentalcli: false
+    kubernetes: false
+    swarm: false
+  - option: gpu
+    shorthand: g
+    value_type: bool
+    default_value: "false"
+    description: Request an engine with a gpu
+    deprecated: false
+    hidden: false
+    experimental: false
+    experimentalcli: false
+    kubernetes: false
+    swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false

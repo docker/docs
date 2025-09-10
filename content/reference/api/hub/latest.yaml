@@ -23,7 +23,7 @@ tags:
   - name: changelog
     x-displayName: Changelog
     description: |
-      See the [Changelog](/reference/api/hub/latest-changelog) for a summary of changes across Docker Hub API versions.
+      See the [Changelog](/reference/api/hub/changelog) for a summary of changes across Docker Hub API versions.
   - name: resources
     x-displayName: Resources
     description: |
@@ -40,9 +40,9 @@ tags:
       - `X-RateLimit-Remaining` - The remaining amount of calls within the limit period.
       - `X-RateLimit-Reset` - The unix timestamp of when the remaining resets.
 
-      If you have hit the limit, you will receive a response status of `429` and the `X-Retry-After` header in the response.
+      If you have hit the limit, you will receive a response status of `429` and the `Retry-After` header in the response.
 
-      The `X-Retry-After` header is a unix timestamp of when you can call the API again.
+      The [`Retry-After` header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Retry-After) specifies the number of seconds to wait until you can call the API again.
 
       **Note**: These rate limits are separate from anti-abuse and Docker Hub download, or pull rate limiting.
       To learn more about Docker Hub pull rate limiting, see [Usage and limits](https://docs.docker.com/docker-hub/usage/).
@@ -101,7 +101,7 @@ tags:
   - name: access-tokens
     x-displayName: Personal Access Tokens
     description: |
-      The Personal Access Token endpoints lets you manage personal access tokens. For more information, see [Access Tokens](https://docs.docker.com/security/for-developers/access-tokens/).
+      The Personal Access Token endpoints lets you manage personal access tokens. For more information, see [Access Tokens](https://docs.docker.com/security/access-tokens/).
 
       You can use a personal access token instead of a password in the [Docker CLI](https://docs.docker.com/engine/reference/commandline/cli/) or in the [Create an authentication token](#operation/PostUsersLogin) route to obtain a bearer token.
 
@@ -823,6 +823,7 @@ paths:
       - $ref: "#/components/parameters/namespace"
       - $ref: "#/components/parameters/repository"
     get:
+      operationId: ListRepositoryTags
       summary: List repository tags
       tags:
         - repositories
@@ -867,6 +868,7 @@ paths:
       - $ref: "#/components/parameters/repository"
       - $ref: "#/components/parameters/tag"
     get:
+      operationId: GetRepositoryTag
       summary: Read repository tag
       tags:
         - repositories
@@ -892,6 +894,62 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "404":
           $ref: "#/components/responses/NotFound"
+  /v2/namespaces/{namespace}/repositories/{repository}/immutabletags:
+    parameters:
+      - $ref: "#/components/parameters/namespace"
+      - $ref: "#/components/parameters/repository"
+    patch:
+      operationId: UpdateRepositoryImmutableTags
+      summary: "Update repository immutable tags"
+      description: |
+        Updates the immutable tags configuration for this repository.
+        
+        **Only users with administrative privileges for the repository can modify these settings.**
+      tags: 
+        - repositories
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/update_repository_immutable_tags_request"
+      responses:
+        200:
+          $ref: "#/components/responses/update_repository_immutable_tags_response"
+        400:
+          $ref: "#/components/responses/bad_request"
+        401:
+          $ref: "#/components/responses/unauthorized"
+        403:
+          $ref: "#/components/responses/forbidden"
+        404:
+          $ref: "#/components/responses/not_found"
+  /v2/namespaces/{namespace}/repositories/{repository}/immutabletags/verify:
+    parameters:
+      - $ref: "#/components/parameters/namespace"
+      - $ref: "#/components/parameters/repository"
+    post:
+      operationId: VerifyRepositoryImmutableTags
+      summary: "Verify repository immutable tags"
+      description: |
+        Validates  the immutable tags regex pass in parameter and returns a list of tags matching it in this repository.
+        
+        **Only users with administrative privileges for the repository call this endpoint.**
+      tags:
+        - repositories
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/immutable_tags_verify_request"
+      responses:
+        200:
+          $ref: "#/components/responses/immutable_tags_verify_response"
+        400:
+          $ref: "#/components/responses/bad_request"
+        401:
+          $ref: "#/components/responses/unauthorized"
+        403:
+          $ref: "#/components/responses/forbidden"
+        404:
+          $ref: "#/components/responses/not_found"
   /v2/repositories/{namespace}/{repository}/groups:
     parameters:
       - $ref: "#/components/parameters/namespace"
@@ -926,8 +984,152 @@ paths:
           $ref: "#/components/responses/forbidden"
         "404":
           $ref: "#/components/responses/NotFound"
+  /v2/namespaces/{namespace}/repositories:
+    parameters:
+      - $ref: "#/components/parameters/namespace"
+    get:
+      operationId: listNamespaceRepositories
+      summary: List repositories in a namespace
+      description: |
+        Returns a list of repositories within the specified namespace (organization or user).
+        
+        Public repositories are accessible to everyone, while private repositories require appropriate authentication and permissions.
+      tags:
+        - repositories
+      security:
+        - bearerAuth: [ ]
+        - { }  # Allow anonymous access for public repositories
+      parameters:
+        - in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+          description: Page number to get. Defaults to 1.
+        - in: query
+          name: page_size
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 10
+          description: Number of repositories to get per page. Defaults to 10. Max of 100.
+        - in: query
+          name: name
+          required: false
+          schema:
+            type: string
+          description: Filter repositories by name (partial match).
+        - in: query
+          name: ordering
+          required: false
+          schema:
+            type: string
+            enum:
+              - name
+              - -name
+              - last_updated
+              - -last_updated
+              - pull_count
+              - -pull_count
+          description: |
+            Order repositories by the specified field. Prefix with '-' for descending order.
+            Available options:
+            - `name` / `-name`: Repository name (ascending/descending)
+            - `last_updated` / `-last_updated`: Last update time (ascending/descending)
+            - `pull_count` / `-pull_count`: Number of pulls (ascending/descending)
+      responses:
+        "200":
+          description: List of repositories
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/list_repositories_response"
+              examples:
+                repositories_list:
+                  value:
+                    count: 287
+                    next: "https://hub.docker.com/v2/namespaces/docker/repositories?page=2&page_size=2"
+                    previous: null
+                    results:
+                      - name: "highland_builder"
+                        namespace: "docker"
+                        repository_type: "image"
+                        status: 1
+                        status_description: "active"
+                        description: "Image for performing Docker build requests"
+                        is_private: false
+                        star_count: 7
+                        pull_count: 15722123
+                        last_updated: "2023-06-20T10:44:45.459826Z"
+                        last_modified: "2024-10-16T13:48:34.145251Z"
+                        date_registered: "2015-05-19T21:13:35.937763Z"
+                        affiliation: ""
+                        media_types:
+                          - "application/octet-stream"
+                          - "application/vnd.docker.container.image.v1+json"
+                          - "application/vnd.docker.distribution.manifest.v1+prettyjws"
+                        content_types:
+                          - "unrecognized"
+                          - "image"
+                        categories:
+                          - name: "Languages & frameworks"
+                            slug: "languages-and-frameworks"
+                          - name: "Integration & delivery"
+                            slug: "integration-and-delivery"
+                          - name: "Operating systems"
+                            slug: "operating-systems"
+                        storage_size: 488723114800
+                      - name: "whalesay"
+                        namespace: "docker"
+                        repository_type: null
+                        status: 1
+                        status_description: "active"
+                        description: "An image for use in the Docker demo tutorial"
+                        is_private: false
+                        star_count: 757
+                        pull_count: 130737682
+                        last_updated: "2015-06-19T19:06:27.388123Z"
+                        last_modified: "2024-10-16T13:48:34.145251Z"
+                        date_registered: "2015-06-09T18:16:36.527329Z"
+                        affiliation: ""
+                        media_types:
+                          - "application/vnd.docker.distribution.manifest.v1+prettyjws"
+                        content_types:
+                          - "image"
+                        categories:
+                          - name: "Languages & frameworks"
+                            slug: "languages-and-frameworks"
+                          - name: "Integration & delivery"
+                            slug: "integration-and-delivery"
+                        storage_size: 103666708
+        "400":
+          description: Bad Request - Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+              examples:
+                invalid_ordering:
+                  summary: Invalid ordering value
+                  value:
+                    fields:
+                      ordering: [ "Invalid ordering value. Must be one of: name, -name, last_updated, -last_updated, pull_count, -pull_count" ]
+                    text: "Invalid ordering value"
+        "401":
+          $ref: "#/components/responses/unauthorized"
+        "403":
+          $ref: "#/components/responses/forbidden"
+        "404":
+          description: Page not found - occurs when requesting a page number `>1` that exceeds the available results
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
 
-          
   /v2/orgs/{org_name}/members:
     parameters:
       - $ref: "#/components/parameters/org_name"
@@ -2008,7 +2210,332 @@ components:
         application/scim+json:
           schema:
             $ref: "#/components/schemas/scim_user"
+    update_repository_immutable_tags_response:
+      description: ""
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/repository_info"
+    immutable_tags_verify_response:
+      description: ""
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/immutable_tags_verify_response"
   schemas:
+    update_repository_immutable_tags_request:
+      type: object
+      properties:
+        immutable_tags:
+          type: boolean
+          description: Whether immutable tags are enabled
+        immutable_tags_rules:
+          type: array
+          items:
+            type: string
+          description: List of immutable tag rules
+          example:
+            - "v.*"
+            - ".*-RELEASE"
+      required:
+        - immutable_tags
+        - immutable_tags_rules
+    repository_info:
+      type: object
+      properties:
+        user:
+          type: string
+          description: Username of the repository owner
+        name:
+          type: string
+          description: Repository name
+        namespace:
+          type: string
+          description: Repository namespace
+        repository_type:
+          type: string
+          nullable: true
+          description: Type of the repository
+        status:
+          type: integer
+          description: Repository status code
+        status_description:
+          type: string
+          description: Description of the repository status
+        description:
+          type: string
+          description: Short description of the repository
+        is_private:
+          type: boolean
+          description: Whether the repository is private
+        is_automated:
+          type: boolean
+          description: Whether the repository has automated builds
+        star_count:
+          type: integer
+          format: int64
+          description: Number of stars
+        pull_count:
+          type: integer
+          format: int64
+          description: Number of pulls
+        last_updated:
+          type: string
+          format: date-time
+          example: "2021-01-05T21:06:53.506400Z"
+          description: ISO 8601 timestamp of when repository was last updated
+        last_modified:
+          type: string
+          format: date-time
+          example: "2021-01-05T21:06:53.506400Z"
+          nullable: true
+          description: ISO 8601 timestamp of when repository was last modified
+        date_registered:
+          type: string
+          format: date-time
+          example: "2021-01-05T21:06:53.506400Z"
+          description: ISO 8601 timestamp of when repository was created
+        collaborator_count:
+          type: integer
+          format: int64
+          description: Number of collaborators
+        affiliation:
+          type: string
+          nullable: true
+          description: Repository affiliation
+        hub_user:
+          type: string
+          nullable: true
+          description: Hub user information
+        has_starred:
+          type: boolean
+          description: Whether the current user has starred this repository
+        full_description:
+          type: string
+          nullable: true
+          description: Full description of the repository
+        permissions:
+          $ref: '#/components/schemas/repo_permissions'
+        media_types:
+          type: array
+          items:
+            type: string
+            nullable: true
+          description: Supported media types
+        content_types:
+          type: array
+          items:
+            type: string
+          description: Supported content types
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/category'
+          description: Repository categories
+        immutable_tags_settings:
+          $ref: '#/components/schemas/immutable_tags_settings'
+        storage_size:
+          type: integer
+          format: int64
+          nullable: true
+          description: Storage size in bytes
+      required:
+        - user
+        - name
+        - namespace
+        - status
+        - status_description
+        - description
+        - is_private
+        - is_automated
+        - star_count
+        - pull_count
+        - last_updated
+        - date_registered
+        - collaborator_count
+        - has_starred
+        - permissions
+        - media_types
+        - content_types
+        - categories
+        - immutable_tags_settings
+    repo_permissions:
+      type: object
+      properties:
+        read:
+          type: boolean
+          description: Read permission
+        write:
+          type: boolean
+          description: Write permission
+        admin:
+          type: boolean
+          description: Admin permission
+      required:
+        - read
+        - write
+        - admin
+    immutable_tags_settings:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Whether immutable tags are enabled
+        rules:
+          type: array
+          items:
+            type: string
+          description: List of immutable tag rules
+      required:
+        - enabled
+        - rules
+    immutable_tags_verify_request:
+      type: object
+      properties:
+        regex:
+          type: string
+          pattern: '^[a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*(\\/[a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*)*$'
+          description: 'Immutable tags rule regex pattern. Must match format: [a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*(\\/[a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*)*'
+          example: 'v.*'
+      required:
+        - regex
+    immutable_tags_verify_response:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+          description: List of tags that match the provided regex pattern
+          example:
+            - 'v1.0.0'
+            - 'v2.1.3'
+            - 'latest'
+      required:
+        - tags
+    repository_list_entry:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the repository
+          example: "hello-world"
+        namespace:
+          type: string
+          description: Namespace (organization or username) that owns the repository
+          example: "docker"
+        repository_type:
+          type: string
+          description: Type of repository
+          enum:
+            - image
+            - plugin
+            - null
+          example: "image"
+          nullable: true
+        status:
+          type: integer
+          description: Repository status code
+          example: 1
+        status_description:
+          type: string
+          description: Human-readable repository status
+          enum:
+            - active
+            - inactive
+          example: "active"
+        description:
+          type: string
+          description: Repository description
+          nullable: true
+          example: "Hello World! (an example of minimal Dockerization)"
+        is_private:
+          type: boolean
+          description: Whether the repository is private
+          example: false
+        star_count:
+          type: integer
+          description: Number of users who starred this repository
+          minimum: 0
+          example: 1234
+        pull_count:
+          type: integer
+          description: Total number of pulls for this repository
+          minimum: 0
+          example: 50000000
+        last_updated:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp of when the repository was last updated
+          example: "2023-12-01T10:30:00Z"
+          nullable: true
+        last_modified:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp of when the repository was last modified
+          example: "2023-12-01T10:30:00Z"
+          nullable: true
+        date_registered:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp of when the repository was created
+          example: "2013-06-19T19:07:54Z"
+        affiliation:
+          type: string
+          description: User's affiliation with the repository (empty string if no affiliation)
+          example: ""
+        media_types:
+          type: array
+          description: Media types supported by this repository
+          items:
+            type: string
+          example:
+            - "application/vnd.docker.plugin.v1+json"
+        content_types:
+          type: array
+          description: Content types supported by this repository
+          items:
+            type: string
+          example:
+            - "plugin"
+        categories:
+          type: array
+          description: Categories associated with this repository
+          items:
+            $ref: "#/components/schemas/category"
+          example: []
+        storage_size:
+          type: integer
+          description: Storage size in bytes used by this repository
+          minimum: 0
+          example: 232719127
+    category:
+      type: object
+      required:
+        - name
+        - slug
+      properties:
+        name:
+          type: string
+          description: Human-readable name of the category
+          example: "Databases"
+          minLength: 1
+        slug:
+          type: string
+          description: URL-friendly identifier for the category
+          example: "databases"
+          minLength: 1
+          pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+      description: Repository category for classification and discovery
+    list_repositories_response:
+      allOf:
+        - $ref: "#/components/schemas/page"
+        - type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: "#/components/schemas/repository_list_entry"
     UsersLoginRequest:
       description: User login details
       type: object
@@ -3020,7 +3547,10 @@ components:
         path:
           type: string
           example: "myorg/myrepo"
-          description: The path of the resource. The format of this will change depending on the type of resource.
+          description: |
+            The path of the resource. The format of this will change depending on the type of resource.
+
+            To reference public repositories, use `*/*/public` as the path value.
           required: true
         scopes:
           type: array
@@ -3329,6 +3859,18 @@ components:
               member:
                 type: string
                 example: jonsnow
+    update_repository_immutable_tags_request:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/update_repository_immutable_tags_request"
+    immutable_tags_verify_request:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/immutable_tags_verify_request"
   securitySchemes:
     bearerAuth:
       type: http

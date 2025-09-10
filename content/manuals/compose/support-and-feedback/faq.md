@@ -1,7 +1,7 @@
 ---
-description: Frequently asked questions for Docker Compose
-keywords: documentation, docs,  docker, compose, faq, docker compose vs docker-compose
-title: Compose FAQs
+description: Answers to common questions about Docker Compose, including v1 vs v2, commands, shutdown behavior, and development setup.
+keywords: docker compose faq, docker compose questions, docker-compose vs docker compose, docker compose json, docker compose stop delay, run multiple docker compose
+title: Frequently asked questions about Docker Compose
 linkTitle: FAQs
 weight: 10
 tags: [FAQ]

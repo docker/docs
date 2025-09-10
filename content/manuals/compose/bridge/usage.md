@@ -2,13 +2,13 @@
 title: Use the default Compose Bridge transformation
 linkTitle: Usage
 weight: 10
-description: Learn about and use the Compose Bridge default transformation
-keywords: compose, bridge, kubernetes
+description: Learn how to use the default Compose Bridge transformation to convert Compose files into Kubernetes manifests
+keywords: docker compose bridge, compose kubernetes transform, kubernetes from compose, compose bridge convert, compose.yaml to kubernetes
 ---
 
 {{< summary-bar feature_name="Compose bridge" >}}
 
-Compose Bridge supplies an out-of-the box transformation for your Compose configuration file. Based on an arbitrary `compose.yaml` file, Compose Bridge produces:
+Compose Bridge supplies an out-of-the-box transformation for your Compose configuration file. Based on an arbitrary `compose.yaml` file, Compose Bridge produces:
 
 - A [Namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) so all your resources are isolated and don't conflict with resources from other deployments.
 - A [ConfigMap](https://kubernetes.io/docs/concepts/configuration/configmap/) with an entry for each and every [config](/reference/compose-file/configs.md) resource in your Compose application.
@@ -34,7 +34,8 @@ $ docker compose bridge convert
 
 Compose looks for a `compose.yaml` file inside the current directory and then converts it.
 
-The following output is displayed 
+When successful, Compose Bridge generates Kubernetes manifests and logs output similar to the following:
+
 ```console
 $ docker compose bridge convert -f compose.yaml 
 Kubernetes resource api-deployment.yaml created
@@ -62,7 +63,7 @@ These files are then stored within your project in the `/out` folder.
 The Kubernetes manifests can then be used to run the application on Kubernetes using
 the standard deployment command `kubectl apply -k out/overlays/desktop/`.
 
-> [!NOTE]
+> [!IMPORTANT]
 >
 > Make sure you have enabled Kubernetes in Docker Desktop before you deploy your Compose Bridge transformations.
 
@@ -80,7 +81,7 @@ $ docker compose bridge convert --help
 
 > [!TIP]
 >
-> You can now convert and deploy your Compose project to a Kubernetes cluster from the Compose file viewer.
+> You can convert and deploy your Compose project to a Kubernetes cluster from the Compose file viewer.
 > 
 > Make sure you are signed in to your Docker account, navigate to your container in the **Containers** view, and in the top-right corner select **View configurations** and then **Convert and Deploy to Kubernetes**. 
 

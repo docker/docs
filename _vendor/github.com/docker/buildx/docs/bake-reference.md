@@ -227,6 +227,8 @@ The following table shows the complete list of attributes that you can assign to
 | [`description`](#targetdescription)             | String  | Description of a target                                              |
 | [`dockerfile-inline`](#targetdockerfile-inline) | String  | Inline Dockerfile string                                             |
 | [`dockerfile`](#targetdockerfile)               | String  | Dockerfile location                                                  |
+| [`entitlements`](#targetentitlements)           | List    | Permissions that the build process requires to run                   |
+| [`extra-hosts`](#targetextra-hosts)             | List    | Customs host-to-IP mapping                                           |
 | [`inherits`](#targetinherits)                   | List    | Inherit attributes from other targets                                |
 | [`labels`](#targetlabels)                       | Map     | Metadata for images                                                  |
 | [`matrix`](#targetmatrix)                       | Map     | Define a set of variables that forks a target into multiple targets. |
@@ -582,6 +584,20 @@ target "integration-tests" {
 ```
 
 Entitlements are enabled with a two-step process. First, a target must declare the entitlements it requires. Secondly, when invoking the `bake` command, the user must grant the entitlements by passing the `--allow` flag or confirming the entitlements when prompted in an interactive terminal. This is to ensure that the user is aware of the possibly insecure permissions they are granting to the build process.
+
+### `target.extra-hosts`
+
+Use the `extra-hosts` attribute to define customs host-to-IP mapping for the
+target. This has the same effect as passing a [`--add-host`][add-host] flag to
+the build command.
+
+```hcl
+target "default" {
+  extra-hosts = {
+    my_hostname = "8.8.8.8"
+  }
+}
+```
 
 ### `target.inherits`
 
@@ -1383,8 +1399,7 @@ $ docker buildx bake
 
 ## Function
 
-A [set of general-purpose functions][bake_stdlib]
-provided by [go-cty][go-cty]
+A [set of general-purpose functions][bake_stdlib] provided by [go-cty][go-cty]
 are available for use in HCL files:
 
 ```hcl
@@ -1422,8 +1437,9 @@ target "webapp-dev" {
 
 <!-- external links -->
 
+[add-host]: https://docs.docker.com/reference/cli/docker/buildx/build/#add-host
 [attestations]: https://docs.docker.com/build/attestations/
-[bake_stdlib]: https://github.com/docker/buildx/blob/master/bake/hclparser/stdlib.go
+[bake_stdlib]: https://github.com/docker/buildx/blob/master/docs/bake-stdlib.md
 [build-arg]: https://docs.docker.com/reference/cli/docker/image/build/#build-arg
 [build-context]: https://docs.docker.com/reference/cli/docker/buildx/build/#build-context
 [cache-backends]: https://docs.docker.com/build/cache/backends/

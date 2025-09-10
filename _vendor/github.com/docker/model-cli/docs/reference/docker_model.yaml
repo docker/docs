@@ -2,7 +2,7 @@ command: docker model
 short: Docker Model Runner
 long: |-
     Use Docker Model Runner to run and interact with AI models directly from the command line.
-    For more information, see the [documentation](/model-runner/)
+    For more information, see the [documentation](/ai/model-runner/)
 pname: docker
 plink: docker.yaml
 cname:
@@ -42,7 +42,7 @@ clink:
 deprecated: false
 hidden: false
 experimental: false
-experimentalcli: true
+experimentalcli: false
 kubernetes: false
 swarm: false
 

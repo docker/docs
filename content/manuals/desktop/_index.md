@@ -52,8 +52,17 @@ Docker Desktop reduces the time spent on complex setups so you can focus on writ
 
 Docker Desktop integrates with your preferred development tools and languages, and gives you access to a vast ecosystem of trusted images and templates via Docker Hub. This empowers teams to accelerate development, automate builds, enable CI/CD workflows, and collaborate securely through shared repositories.
 
-{{< tabs >}}
-{{< tab name="What's included in Docker Desktop?" >}}
+## Key features
+
+* Ability to containerize and share any application on any cloud platform, in multiple languages and frameworks.
+* Quick installation and setup of a complete Docker development environment.
+* Includes the latest version of Kubernetes.
+* On Windows, the ability to toggle between Linux and Windows containers to build applications.
+* Fast and reliable performance with native Windows Hyper-V virtualization.
+* Ability to work natively on Linux through WSL 2 on Windows machines.
+* Volume mounting for code and data, including file change notifications and easy access to running containers on the localhost network.
+
+## Products inside Docker Desktop
 
 - [Docker Engine](/manuals/engine/_index.md)
 - Docker CLI client
@@ -65,19 +74,8 @@ Docker Desktop integrates with your preferred development tools and languages, a
 - [Docker Content Trust](/manuals/engine/security/trust/_index.md)
 - [Kubernetes](https://github.com/kubernetes/kubernetes/)
 - [Credential Helper](https://github.com/docker/docker-credential-helpers/)
+- [Docker Offload](/manuals/offload/_index.md)
 
-{{< /tab >}}
-{{< tab name="What are the key features of Docker Desktop?">}}
-
-* Ability to containerize and share any application on any cloud platform, in multiple languages and frameworks.
-* Quick installation and setup of a complete Docker development environment.
-* Includes the latest version of Kubernetes.
-* On Windows, the ability to toggle between Linux and Windows containers to build applications.
-* Fast and reliable performance with native Windows Hyper-V virtualization.
-* Ability to work natively on Linux through WSL 2 on Windows machines.
-* Volume mounting for code and data, including file change notifications and easy access to running containers on the localhost network.
-
-{{< /tab >}}
-{{< /tabs >}}
+## Next steps
 
 {{< grid >}}

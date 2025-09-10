@@ -6,6 +6,16 @@ usage: docker model install-runner
 pname: docker model
 plink: docker_model.yaml
 options:
+    - option: do-not-track
+      value_type: bool
+      default_value: "false"
+      description: Do not track models usage in Docker Model Runner
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: gpu
       value_type: string
       default_value: auto
@@ -29,7 +39,7 @@ options:
 deprecated: false
 hidden: false
 experimental: false
-experimentalcli: true
+experimentalcli: false
 kubernetes: false
 swarm: false
 

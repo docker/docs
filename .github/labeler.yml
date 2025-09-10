@@ -50,10 +50,10 @@ area/build-cloud:
       - any-glob-to-any-file:
           - content/manuals/build-cloud/**
 
-area/cloud:
+area/offload:
   - changed-files:
       - any-glob-to-any-file:
-          - content/manuals/cloud/**
+          - content/manuals/offload/**
 
 area/compose:
   - changed-files:
@@ -180,6 +180,11 @@ area/copilot:
   - changed-files:
       - any-glob-to-any-file:
           - content/manuals/copilot/**
+
+ci:
+  - changed-files:
+      - any-glob-to-any-file:
+          - .github/workflows/**
 
 hugo:
   - changed-files:

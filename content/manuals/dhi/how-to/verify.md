@@ -20,7 +20,7 @@ Docker's public key for DHI images is published at:
 
 ## Verify attestations with Docker Scout
 
-You can use the Docker Scout CLI to list and retrieve attestations for Docker
+You can use the [Docker Scout](/scout/) CLI to list and retrieve attestations for Docker
 Hardened Images, including images mirrored into your organization's namespace.
 
 > [!NOTE]
@@ -56,8 +56,6 @@ offers several key advantages when working with Docker Hardened Images:
   Docker ecosystem.
 
 In short, Docker Scout streamlines the verification process and reduces the chances of human error, while still giving you full visibility and the option to fall back to cosign when needed.
-
-
 
 ### List available attestations
 
@@ -105,9 +103,63 @@ $ docker scout attest get \
   docs/dhi-python:3.13 --platform linux/amd64
 ```
 
-### Validate and show the equivalent cosign command
+### Validate the attestation with Docker Scout
 
-You can use the `--verify` flag to validate the attestation and print the corresponding [cosign](https://docs.sigstore.dev/) command:
+To validate the attestation using Docker Scout, you can use the `--verify` flag:
+
+```console
+$ docker scout attest get <image-name>:<tag> \
+   --predicate-type https://scout.docker.com/sbom/v0.1 --verify
+```
+
+For example, to verify the SBOM attestation for the `dhi/node:20.19-debian12-fips-20250701182639` image:
+
+```console
+$ docker scout attest get docs/dhi-node:20.19-debian12-fips-20250701182639 \
+   --predicate-type https://scout.docker.com/sbom/v0.1 --verify
+```
+
+#### Handle missing transparency log entries
+
+When using `--verify`, you may sometimes see an error like:
+
+```text
+ERROR no matching signatures: signature not found in transparency log
+```
+
+This occurs because Docker Hardened Images don't always record attestations in
+the public [Rekor](https://docs.sigstore.dev/logging/overview/) transparency
+log. In cases where an attestation would contain private user information (for
+example, your organization's namespace in the image reference), writing it to
+Rekor would expose that information publicly.
+
+Even if the Rekor entry is missing, the attestation is still signed with
+Docker's public key and can be verified offline by skipping the Rekor
+transparency log check.
+
+To skip the transparency log check and validate against Docker's key, use the
+`--skip-tlog` flag:
+
+```console
+$ docker scout attest get \
+  --predicate-type https://cyclonedx.org/bom/v1.6 \
+  <your-org-namespace>/dhi-<image>:<tag> --platform <platform> \
+  --verify --skip-tlog
+```
+
+> [!NOTE]
+>
+> The `--skip-tlog` flag is only available in Docker Scout CLI version 1.18.2 and
+> later.
+
+This is equivalent to using `cosign` with the `--insecure-ignore-tlog=true`
+flag, which validates the signature against Docker's published public key, but
+ignores the transparency log check.
+
+### Show the equivalent cosign command
+
+When using the `--verify` flag, it also prints the corresponding
+[cosign](https://docs.sigstore.dev/) command to verify the image signature:
 
 ```console
 $ docker scout attest get \
@@ -136,6 +188,21 @@ Example output:
         --key https://registry.scout.docker.com/keyring/dhi/latest.pub --experimental-oci11
     ...
 ```
+
+> [!IMPORTANT]
+>
+> When using cosign, you must first authenticate to both the Docker Hub registry
+> and the Docker Scout registry.
+>
+> For example:
+>
+> ```console
+> $ docker login
+> $ docker login registry.scout.docker.com
+> $ cosign verify \
+>     registry.scout.docker.com/docker/dhi-python@sha256:b5418da893ada6272add2268573a3d5f595b5c486fb7ec58370a93217a9785ae \
+>     --key https://registry.scout.docker.com/keyring/dhi/latest.pub --experimental-oci11
+> ```
 
 ## Available DHI attestations
 

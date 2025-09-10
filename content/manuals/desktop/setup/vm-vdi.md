@@ -16,82 +16,29 @@ depending on whether nested virtualization is supported:
 
 - If your environment supports nested virtualization, you can run Docker Desktop
   with its default local Linux VM.
-- If nested virtualization is not supported, Docker recommends using Docker
-  Cloud. To join the beta, contact Docker at `docker-cloud@docker.com`.
+- If nested virtualization is not supported, Docker recommends using [Docker
+  Offload](/offload/).
 
-## Use Docker Cloud 
+## Use Docker Offload
 
-{{< summary-bar feature_name="Docker Cloud" >}}
+Docker Offload lets you offload container workloads to a high-performance, fully
+hosted cloud environment, enabling a seamless hybrid experience.
 
-Docker Cloud lets you offload container workloads to a high-performance,
-fully hosted cloud environment, enabling a seamless hybrid experience. It
-includes an insights dashboard that offers performance metrics and environment
-management to help optimize your development workflow.
+Docker Offload is useful in virtual desktop environments where nested
+virtualization isn't supported. In these environments, Docker Desktop defaults
+to using Docker Offload to ensure you can still build and run containers without
+relying on local virtualization.
 
-This mode is useful in virtual desktop environments where nested virtualization
-isn't supported. In these environments, Docker Desktop defaults to using
-cloud mode to ensure you can still build and run containers without relying on
-local virtualization.
-
-Docker Cloud decouples the Docker Desktop client from the Docker Engine,
+Docker Offload decouples the Docker Desktop client from the Docker Engine,
 allowing the Docker CLI and Docker Desktop Dashboard to interact with
 cloud-based resources as if they were local. When you run a container, Docker
 provisions a secure, isolated, and ephemeral cloud environment connected to
 Docker Desktop via an SSH tunnel. Despite running remotely, features like bind
 mounts and port forwarding continue to work seamlessly, providing a local-like
-experience. To use Docker Cloud:
+experience. To use Docker Offload:
 
-1. Contact Docker at `docker-cloud@docker.com` to activate the feature for your
-   account.
-2. [Install Docker Desktop](/manuals/desktop/setup/install/windows-install.md#install-docker-desktop-on-windows)
-   version 4.42 or later on your Windows virtual desktop.
-3. [Start Docker Desktop](/manuals/desktop/setup/install/windows-install.md#start-docker-desktop).
-4. Sign in to Docker Desktop.
-
-After you sign in, Docker Cloud is enabled by default and cannot be
-disabled. When enabled, Docker Desktop's Dashboard header appears purple and the
-cloud-mode toggle is a cloud icon ({{< inline-image
-src="./images/cloud-mode.png" alt="Cloud mode icon" >}}).
-
-In this mode, Docker Desktop mirrors your cloud environment, providing
-a seamless view of your containers and resources running on Docker Cloud. You
-can verify that Docker Cloud is working by running a simple container. In a
-terminal on your virtual desktop, run the following command:
-
-```console
-$ docker run hello-world
-```
-
-In the terminal, you will see `Hello from Docker!` if everything is working
-correctly.
-
-### View insights and manage Docker Cloud
-
-For insights and management, use the [Docker Cloud
-Dashboard](https://app.docker.com/cloud). It provides visibility into your
-builds, runs, and cloud resource usage. Key features include:
-
-- Overview: Monitor cloud usage, build cache, and top repositories built.
-- Build history: Review past builds with filtering and sorting options.
-- Run history: Track container runs and sort by various options.
-- Integrations: Learn how to set up cloud builders and runners for your CI
-  pipeline.
-- Settings: Manage cloud builders, usage, and account settings.
-
-Access the Docker Cloud Dashboard at https://app.docker.com/cloud.
-
-### Limitations
-
-The following limitations apply when using Docker Cloud:
-
-- Persistence: Containers are launched in a cloud engine that remains available
-  as long as you interact with and consume the containers' output. After closing
-  Docker Desktop, or about 30 minutes of inactivity, the engine is shut down and
-  becomes inaccessible, along with any data stored in it, including images,
-  containers, and volumes. A new engine is provisioned for any new workloads.
-- Usage and billing: During beta, no charges are incurred for using Docker Cloud
-  resources. Docker enforces a usage cap and reserves the right to disable
-  Docker Cloud access at any time.
+To get started using Docker Offload, see the [Docker Offload
+quickstart](/offload/quickstart/).
 
 ## Virtual desktop support when using nested virtualization
 
@@ -148,4 +95,4 @@ For WSL 2-related issues, contact Nutanix support. For Docker Desktop-specific i
 
 ## Aditional resources
 
-- [Docker Desktop on Microsoft Dev Box](/manuals/desktop/setup/install/enterprise-deployment/dev-box.md)
+- [Docker Desktop on Microsoft Dev Box](/manuals/enterprise/enterprise-deployment/dev-box.md)

@@ -12,6 +12,19 @@ This guide shows you how to go from zero to running a Docker Hardened Image
 (DHI) using a real example. While the steps use a specific image as an
 example, they can be applied to any DHI.
 
+> [!TIP]
+>
+> You can keep using the same tools and workflows you already know when moving
+> to DHI from other images on Docker Hub, such as Bitnami public catalog images.
+> Note that [Bitnami announced](https://github.com/bitnami/charts/issues/35164)
+> that its public catalog images will no longer be available after September 29,
+> 2025.
+>
+> In most cases, migrating is as simple as updating the image reference in your
+> configuration or commands. Start with this guide, then see the [migration
+> guide](./how-to/migrate.md) for more details and examples.
+
+
 ## Step 1: Sign up and subscribe to DHI for access
 
 To access Docker Hardened Images, your organization must [sign
@@ -25,7 +38,7 @@ namespace on Docker Hub.
 1. Go to [Docker Hub](https://hub.docker.com) and sign in.
 2. Select **My Hub** in the top navigation.
 3. In the left sidebar, choose your organization that has DHI access.
-4. In the left sidebar, select **DHI catalog**.
+4. In the left sidebar, select **Hardened Images** > **Catalog**.
 
    ![Docker Hub sidebar showing DHI catalog](./images/dhi-catalog.png)
 

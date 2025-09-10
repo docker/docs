@@ -32,7 +32,7 @@ aliases:
 
 Docker recommends signing in with the **Sign in** option in the top-right corner of the Docker Dashboard. 
 
-In large enterprises where admin access is restricted, administrators can [enforce sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md). 
+In large enterprises where admin access is restricted, administrators can [enforce sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md). 
 
 > [!TIP]
 >
@@ -44,7 +44,7 @@ In large enterprises where admin access is restricted, administrators can [enfor
 
 - Increase your pull rate limit compared to anonymous users. See [Usage and limits](/manuals/docker-hub/usage/_index.md).
 
-- Enhance your organization’s security posture for containerized development with [Hardened Desktop](/manuals/security/for-admins/hardened-desktop/_index.md).
+- Enhance your organization’s security posture for containerized development with [Hardened Desktop](/manuals/enterprise/security/hardened-desktop/_index.md).
 
 > [!NOTE]
 >

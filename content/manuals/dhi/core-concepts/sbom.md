@@ -67,30 +67,28 @@ $ docker scout sbom <image-name>:<tag>
 
 ## Verify the SBOM of a Docker Hardened Image
 
-Since Docker Hardened Images come with signed SBOMs, you can use Cosign to
+Since Docker Hardened Images come with signed SBOMs, you can use Docker Scout to
 verify the authenticity and integrity of the SBOM attached to the image. This
 ensures that the SBOM has not been tampered with and that the image's contents
 are trustworthy.
 
-To verify the SBOM of a Docker Hardened Image using Cosign, use the following command:
+To verify the SBOM of a Docker Hardened Image using Docker Scout, use the following command:
 
 ```console
-$ cosign verify-attestation \
-  --key https://registry.scout.docker.com/keyring/dhi/latest.pub \
-  --type sbom \
-  <image-reference>
+$ docker scout attest get <image-name>:<tag> \
+   --predicate-type https://scout.docker.com/sbom/v0.1 --verify --platform <platform>
 ```
 
-For example, to verify the SBOM attestation for the dhi/node image:
+For example, to verify the SBOM attestation for the `dhi/node:20.19-debian12-fips-20250701182639` image:
 
 ```console
-$ cosign verify-attestation \
-  --key https://registry.scout.docker.com/keyring/dhi/latest.pub \
-  --type sbom \
-  registry.scout.docker.com/dhi/node@sha256:6de8ac9c07367652496bf926675425a22bf93e487cc2690d6778a82dd0159c4f
+$ docker scout attest get docs/dhi-node:20.19-debian12-fips-20250701182639 \
+   --predicate-type https://scout.docker.com/sbom/v0.1 --verify --platform linux/amd64
 ```
 
 ## Resources
 
 For more details about SBOM attestations and Docker Build, see [SBOM
 attestations](/build/metadata/attestations/sbom/).
+
+To learn more about Docker Scout and working with SBOMs, see [Docker Scout SBOMs](../../scout/how-tos/view-create-sboms.md).

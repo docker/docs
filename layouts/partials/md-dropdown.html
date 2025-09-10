@@ -1,10 +1,9 @@
-<details id="markdownDropdown" class="group relative z-10 inline-block" data-heap-id="markdown-dropdown">
+<details id="markdownDropdown" class="ml-3 group relative z-10 inline-block" data-heap-id="markdown-dropdown">
     <summary
-      class="inline-flex cursor-pointer items-center gap-0 rounded-sm border border-gray-600 bg-white px-2 py-2
-      text-base font-semibold text-gray-600 transition-colors hover:bg-gray-50 dark:border-gray-50 dark:bg-gray-950 dark:text-gray-100 dark:hover:bg-gray-900"
+      class="dropdown-base hover:bg-gray-50 dark:hover:bg-gray-900 inline-flex cursor-pointer items-center gap-0 py-1 pl-2 text-sm font-semibold transition-colors"
       data-heap-id="markdown-dropdown-toggle"
     >
-      <span>Page options</span>
+      <span class="font-normal">Page options</span>
       <span class="icon-svg transition-transform group-open:rotate-180">
         {{ partialCached "icon" "arrow_drop_down" "arrow_drop_down" }}
       </span>
@@ -14,7 +13,7 @@
 
     <!-- Dropdown menu -->
     <div
-      class="absolute right-0 z-50 mt-2 w-56 origin-top-right rounded-sm border border-gray-300 bg-white p-2 text-sm text-black shadow-md [display:none] group-open:[display:block] dark:border-gray-100 dark:text-gray-100 dark:bg-gray-950"
+      class="dropdown-base absolute right-0 z-50 mt-1 w-65 origin-top-right p-2 text-sm shadow-md [display:none] group-open:[display:block]"
       data-heap-id="markdown-dropdown-menu"
     >
       <button
@@ -58,10 +57,25 @@
           <div class="text-base">Ask questions with Docs AI</div>
         </div>
       </button>
+      {{ if eq hugo.Environment "production" }}
+       <button
+        onclick="openInClaude()"
+        data-heap-id="search-docs-ai-button"
+        class="sub-button"
+      >
+        <span class="icon-svg mt-[2px] text-base leading-none">
+          {{ partial "icon" "/icons/claude.svg" }}
+        </span>
+        <div class="leading-tight">
+          <div class="text-base">Open in Claude</div>
+        </div>
+      </button>
+      {{ end }}
+
     </div>
   </details>
 
-  <script>
+<script>
     function getCurrentPlaintextUrl() {
       const url = window.location.href.split("#")[0].replace(/\/$/, "");
       return `${url}/index.md`;
@@ -106,15 +120,11 @@
       }
     }
 
-    document.addEventListener("click", function (event) {
-      const dropdown = document.getElementById("markdownDropdown");
-
-      if (!dropdown) return;
-
-      const isClickInside = dropdown.contains(event.target);
-
-      if (!isClickInside && dropdown.hasAttribute("open")) {
-        dropdown.removeAttribute("open");
-      }
-    });
+    function openInClaude() {
+      const markdownUrl = getCurrentPlaintextUrl();
+      const prompt = `Read ${markdownUrl} so I can ask questions about it.`;
+      const encodedText = encodeURIComponent(prompt);
+      const claudeUrl = `https://claude.ai/new?q=${encodedText}`;
+      window.open(claudeUrl, '_blank');
+    }
   </script>

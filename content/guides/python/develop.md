@@ -1,7 +1,7 @@
 ---
 title: Use containers for Python development
 linkTitle: Develop your app
-weight: 40
+weight: 15
 keywords: python, local, development
 description: Learn how to develop your Python application locally.
 aliases:
@@ -51,7 +51,7 @@ You'll need to clone a new repository to get a sample application that includes 
    Let's get started!
 
    ? What application platform does your project use? Python
-   ? What version of Python do you want to use? 3.11.4
+   ? What version of Python do you want to use? 3.12
    ? What port do you want your app to listen on? 8001
    ? What is the command to run your app? python3 -m uvicorn app:app --host=0.0.0.0 --port=8001
    ```
@@ -132,8 +132,8 @@ You'll need to clone a new repository to get a sample application that includes 
 
    # Want to help us make this template better? Share your feedback here: https://   forms.gle/ybq9Krt8jtBL3iCk7
 
-   ARG PYTHON_VERSION=3.11.4
-   FROM python:${PYTHON_VERSION}-slim as base
+   ARG PYTHON_VERSION=3.12
+   FROM python:${PYTHON_VERSION}-slim
 
    # Prevents Python from writing pyc files.
    ENV PYTHONDONTWRITEBYTECODE=1
@@ -174,7 +174,7 @@ You'll need to clone a new repository to get a sample application that includes 
    EXPOSE 8001
 
    # Run the application.
-   CMD python3 -m uvicorn app:app --host=0.0.0.0 --port=8001
+   CMD ["python3", "-m", "uvicorn", "app:app", "--host=0.0.0.0", "--port=8001"]
    ```
 
    Create a file named `compose.yaml` with the following contents.
@@ -569,4 +569,4 @@ Related information:
 
 ## Next steps
 
-In the next section, you'll learn how you can locally test and debug your workloads on Kubernetes before deploying.
+In the next section, you'll learn how you can set up linting, formatting and type checking to follow the best practices in python apps.

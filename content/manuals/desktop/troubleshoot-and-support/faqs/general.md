@@ -22,7 +22,7 @@ This includes:
 
 - The resources in the [Learning Center](/manuals/desktop/use-desktop/_index.md)
 - Pulling or pushing an image to Docker Hub
-- [Image Access Management](/manuals/security/for-developers/access-tokens.md)
+- [Image Access Management](/manuals/security/access-tokens.md)
 - [Static vulnerability scanning](/manuals/docker-hub/repos/manage/vulnerability-scanning.md)
 - Viewing remote images in the Docker Dashboard
 - Docker Build when using [BuildKit](/manuals/build/buildkit/_index.md#getting-started).

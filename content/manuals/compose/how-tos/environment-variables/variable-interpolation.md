@@ -149,6 +149,21 @@ The following syntax rules apply to environment files:
   - `VAR="some\tvalue"` -> `some  value`
   - `VAR='some\tvalue'` -> `some\tvalue`
   - `VAR=some\tvalue` -> `some\tvalue`
+- Single-quoted values can span multiple lines. Example:
+
+   ```yaml
+   KEY='SOME
+   VALUE'
+   ```
+
+   If you then run `docker compose config`, you'll see:
+  
+   ```yaml
+   environment:
+     KEY: |-
+       SOME
+       VALUE
+   ```
 
 ### Substitute with `--env-file`
 

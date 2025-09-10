@@ -21,6 +21,20 @@ params:
       icon: track_changes
       link: /dhi/core-concepts/provenance/
 
+  grid_concepts_compliance:
+    - title: FIPS
+      description: Learn how Docker Hardened Images support FIPS 140 by using validated cryptographic modules and providing signed attestations for compliance audits.
+      icon: verified
+      link: /dhi/core-concepts/fips/
+    - title: STIG
+      description: Learn how Docker Hardened Images provide STIG-hardened container images with verifiable security scan attestations for government and enterprise compliance requirements.
+      icon: policy
+      link: /dhi/core-concepts/stig/
+    - title: CIS Benchmarks
+      description: Learn how Docker Hardened Images help you meet Center for Internet Security (CIS) Docker Benchmark requirements for secure container configuration and deployment.
+      icon: check_circle
+      link: /dhi/core-concepts/cis/
+
   grid_concepts_risk:
     - title: Common Vulnerabilities and Exposures (CVEs)
       description: Understand what CVEs are, how Docker Hardened Images reduce exposure, and how to scan images for vulnerabilities using popular tools.
@@ -76,9 +90,14 @@ and VEX.
 Start here if you want to understand how Docker Hardened Images support compliance,
 transparency, and security.
 
+
 ## Security metadata and attestations
 
 {{< grid items="grid_concepts_metadata" >}}
+
+## Compliance standards
+
+{{< grid items="grid_concepts_compliance" >}}
 
 ## Vulnerability and risk management
 

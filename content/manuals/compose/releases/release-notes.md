@@ -11,7 +11,151 @@ aliases:
 - /compose/release-notes/
 ---
 
+<!-- vale off -->
+
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
+
+## 2.39.3
+
+{{< release-date date="2025-09-09" >}}
+
+### Bug fixes and enhancements
+
+- Added completions for `--progress` flag
+- Fixed minor issues when building with `bake`
+- Fixed issue when publishing a Compose stack with bind mounts and `-y` flag
+
+### Update
+
+- Dependencies upgrade: bump docker engine and cli to v28.4.0
+- Dependencies upgrade: bump compose-go to v2.8.2
+- Dependencies upgrade: bump buildx to v0.28.0
+- Dependencies upgrade: bump buildkit to v0.24.0
+- Dependencies upgrade: bump golang to v1.24.7
+
+## 2.39.2
+
+{{< release-date date="2025-08-04" >}}
+
+### Bug fixes and enhancements
+
+- Fixed multiple rendering issues with the build output
+- Fixed issue when `pull` and `no_cache` attributes were not applied with `bake`
+- Removed log display of explicitly un-attached services on `up` command
+
+### Update
+
+- Dependencies upgrade: bump docker engine and cli to v28.3.3
+- Dependencies upgrade: bump golang to v1.23.12
+- Dependencies upgrade: bump containerd to 2.1.4
+
+## 2.39.1
+
+{{< release-date date="2025-07-24" >}}
+
+### Bug fixes and enhancements
+
+- Added metrics to monitor `models` usage
+
+### Update
+
+- Dependencies upgrade: bump compose-go to v2.8.1
+
+## 2.39.0
+
+{{< release-date date="2025-07-24" >}}
+
+### Bug fixes and enhancements
+
+- Added `--models` flag to `config` command to list models
+- Added `--since` and `--until` flags to `events`
+- Introduced `provenance` and `sbom` attributes to `build` section
+- Fixed `bridge convert` issue on Windows 
+- Fixed multiple issues with `bake` builds
+
+### Update
+
+- Dependencies upgrade: bump docker engine and cli to v28.3.2
+- Dependencies upgrade: bump buildx to v0.26.1
+- Dependencies upgrade: bump compose-go to v2.8.0
+
+## 2.38.2
+
+{{< release-date date="2025-07-08" >}}
+
+### Bug fixes and enhancements
+
+- Added `--networks` flag to `config` command to list networks
+- Fixed an issue on `down` command with Docker Model Runner used as a provider service
+- Fixed a display issue on Docker Model Runner progress
+- Fixed an issue with services with profile missing secrets
+
+### Update
+
+- Dependencies upgrade: bump docker engine and cli to v28.3.1
+- Dependencies upgrade: bump buildkit to v0.23.2
+- Dependencies upgrade: bump golang to v1.23.10
+
+## 2.38.1
+
+{{< release-date date="2025-06-30" >}}
+
+### Bug fixes and enhancements
+
+- Added support of `model_variable` for service `models` configuration
+
+### Update
+
+- Dependencies upgrade: bump compose-go to v2.7.1
+
+## 2.38.0
+
+{{< release-date date="2025-06-30" >}}
+
+### Bug fixes and enhancements
+
+- Introduced support of `models` for LLM configuration
+- Added `volumes` command
+- Removed `publish` limitation on bind mounts
+- Fixed an issue mounting the docker socket to container which doesn't need it
+- Fixed an issue with bake hanging on output
+
+### Update
+
+- Dependencies upgrade: bump compose-go to v2.7.0
+- Dependencies upgrade: bump docker engine and cli to v28.3.0
+
+## 2.37.3
+
+{{< release-date date="2025-06-24" >}}
+
+### Bug fixes and enhancements
+
+- Added support of `cache_to` for Bake
+- Fixed issue with Bake integration
+- Fixed multiple issues affecting `run` command
+
+### Update
+
+- Dependencies upgrade: bump buildkit to v0.23.1
+
+## 2.37.2
+
+{{< release-date date="2025-06-20" >}}
+
+### Bug fixes and enhancements
+
+- Introduce `use_api_socket`
+- Fixed `compose images` JSON output format
+- Fixed panic using `w` shortcut on project without watch support
+- Fixed a permission issue with bake metadata files on Windows
+- Fixed a panic error on provider service startup
+
+### Update
+
+- Dependencies upgrade: bump compose-go to v2.6.5
+- Dependencies upgrade: bump buildx to v0.25.0
+- Dependencies upgrade: bump buildkit to v0.23.0
 
 ## 2.37.1
 

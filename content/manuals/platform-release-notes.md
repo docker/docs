@@ -33,22 +33,22 @@ This page provides details on new features, enhancements, known issues, and bug 
 ### New
 
 - Administrators can now:
-  - Enforce sign-in with [configuration profiles](/manuals/security/for-admins/enforce-sign-in/methods.md#configuration-profiles-method-mac-only) (Early Access).
+  - Enforce sign-in with [configuration profiles](/manuals/enterprise/security/enforce-sign-in/methods.md#configuration-profiles-method-mac-only) (Early Access).
   - Enforce sign-in for more than one organization at a time (Early Access).
-  - Deploy Docker Desktop for Mac in bulk with the [PKG installer](/manuals/desktop/setup/install/enterprise-deployment/pkg-install-and-configure.md) (Early Access).
-  - [Use Desktop Settings Management via the Docker Admin Console](/manuals/security/for-admins/hardened-desktop/settings-management/configure-admin-console.md) (Early Access).
+  - Deploy Docker Desktop for Mac in bulk with the [PKG installer](/manuals/enterprise/enterprise-deployment/pkg-install-and-configure.md) (Early Access).
+  - [Use Desktop Settings Management via the Docker Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md) (Early Access).
 
 ### Bug fixes and enhancements
 
 - Enhance Container Isolation (ECI) has been improved to:
-  - Permit admins to [turn off Docker socket mount restrictions](/manuals/security/for-admins/hardened-desktop/enhanced-container-isolation/config.md#allowing-all-containers-to-mount-the-docker-socket).
-  - Support wildcard tags when using the [`allowedDerivedImages` setting](/manuals/security/for-admins/hardened-desktop/enhanced-container-isolation/config.md#docker-socket-mount-permissions-for-derived-images).
+  - Permit admins to [turn off Docker socket mount restrictions](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/config.md#allowing-all-containers-to-mount-the-docker-socket).
+  - Support wildcard tags when using the [`allowedDerivedImages` setting](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/config.md#docker-socket-mount-permissions-for-derived-images).
 
 ## 2024-11-11
 
 ### New
 
-- [Personal access tokens](/security/for-developers/access-tokens/) (PATs) now support expiration dates.
+- [Personal access tokens](/security/access-tokens/) (PATs) now support expiration dates.
 
 ## 2024-10-15
 
@@ -60,17 +60,17 @@ This page provides details on new features, enhancements, known issues, and bug 
 
 ### New
 
-- Deploying Docker Desktop via the [MSI installer](/manuals/desktop/setup/install/enterprise-deployment/msi-install-and-configure.md) is now generally available.
-- Two new methods to [enforce sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md) (Windows registry key and `.plist` file) are now generally available.
+- Deploying Docker Desktop via the [MSI installer](/manuals/enterprise/enterprise-deployment/msi-install-and-configure.md) is now generally available.
+- Two new methods to [enforce sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md) (Windows registry key and `.plist` file) are now generally available.
 
 ## 2024-08-24
 
 ### New
 
-- Administrators can now view [organization insights](/manuals/admin/organization/insights.md) (Early Access).
+- Administrators can now view [organization Insights](/manuals/admin/organization/insights.md).
 
 ## 2024-07-17
 
 ### New
 
-- You can now centrally access and manage Docker products in [Docker Home](https://app.docker.com) (Early Access).
+- You can now centrally access and manage Docker products in [Docker Home](https://app.docker.com).

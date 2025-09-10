@@ -318,7 +318,7 @@ node is responsible for resolving the tag to a digest, and different nodes may
 use different versions of the image. If this happens, a warning like the
 following is logged, substituting the placeholders for real information.
 
-```none
+```text
 unable to pin image <IMAGE-NAME> to digest: <REASON>
 ```
 

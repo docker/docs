@@ -5,6 +5,18 @@ long: |
 usage: docker model pull MODEL
 pname: docker model
 plink: docker_model.yaml
+options:
+    - option: ignore-runtime-memory-check
+      value_type: bool
+      default_value: "false"
+      description: |
+        Do not block pull if estimated runtime memory for model exceeds system resources.
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
 examples: |-
     ### Pulling a model from Docker Hub
 
@@ -16,13 +28,18 @@ examples: |-
 
     You can pull GGUF models directly from [Hugging Face](https://huggingface.co/models?library=gguf).
 
+    **Note about quantization:** If no tag is specified, the command tries to pull the `Q4_K_M` version of the model.
+    If `Q4_K_M` doesn't exist, the command pulls the first GGUF found in the **Files** view of the model on HuggingFace.
+    To specify the quantization, provide it as a tag, for example:
+    `docker model pull hf.co/bartowski/Llama-3.2-1B-Instruct-GGUF:Q4_K_S`
+
     ```console
     docker model pull hf.co/bartowski/Llama-3.2-1B-Instruct-GGUF
     ```
 deprecated: false
 hidden: false
 experimental: false
-experimentalcli: true
+experimentalcli: false
 kubernetes: false
 swarm: false
 

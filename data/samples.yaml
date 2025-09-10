@@ -351,3 +351,110 @@ samples:
     services:
       - python
       - aiml
+# Agentic AI ----------------------------
+  - title: Agent-to-Agent
+    url: https://github.com/docker/compose-for-agents/tree/main/a2a
+    description: >
+        This app is a modular AI agent runtime built on Google's Agent
+        Development Kit (ADK) and the A2A (Agent-to-Agent) protocol. It wraps a
+        large language model (LLM)-based agent in an HTTP API and uses
+        structured execution flows with streaming responses, memory, and tools.
+        It is designed to make agents callable as network services and
+        composable with other agents.
+    services:
+      - python
+      - aiml
+      - agentic-ai
+  - title: ADK Multi-Agent Fact Checker
+    url: https://github.com/docker/compose-for-agents/tree/main/adk
+    description: >
+      This project demonstrates a collaborative multi-agent system built with
+      the Agent Development Kit (ADK), where a top-level Auditor agent coordinates
+      the workflow to verify facts. The Critic agent gathers evidence via live
+      internet searches using DuckDuckGo through the Model Context Protocol (MCP),
+      while the Reviser agent analyzes and refines the conclusion using internal
+      reasoning alone. The system showcases how agents with distinct roles and
+      tools can collaborate under orchestration.
+    services:
+      - python
+      - aiml
+      - agentic-ai
+  - title: DevDuck agents
+    url: https://github.com/docker/compose-for-agents/tree/main/adk-cerebras
+    description: >
+      A multi-agent system for Go programming assistance built with Google
+      Agent Development Kit (ADK). This project features a coordinating agent
+      (DevDuck) that manages two specialized sub-agents (Bob and Cerebras)
+      for different programming tasks.
+    services:
+      - python
+      - aiml
+      - agentic-ai
+  - title: Agno
+    url: https://github.com/docker/compose-for-agents/tree/main/agno
+    description: >
+      This app is a multi-agent orchestration system powered by LLMs (like Qwen
+      and OpenAI) and connected to tools via a Model Control Protocol (MCP)
+      gateway. Its purpose is to retrieve, summarize, and document GitHub
+      issues—automatically creating Notion pages from the summaries. It also
+      supports file content summarization from GitHub.
+    services:
+      - python
+      - aiml
+      - agentic-ai
+  - title: CrewAI
+    url: https://github.com/docker/compose-for-agents/tree/main/crew-ai
+    description: >
+      This project showcases an autonomous, multi-agent virtual marketing team
+      built with CrewAI. It automates the creation of a high-quality, end-to-end
+      marketing strategy — from research to copywriting — using task delegation,
+      web search, and creative synthesis.
+    services:
+      - python
+      - aiml
+      - agentic-ai
+  - title: SQL Agent with LangGraph
+    url: https://github.com/docker/compose-for-agents/tree/main/langgraph
+    description: >
+      This project demonstrates a zero-config AI agent that uses LangGraph to
+      answer natural language questions by querying a SQL database — all
+      orchestrated with Docker Compose.
+    services:
+      - python
+      - aiml
+      - agentic-ai
+  - title: Langchaingo Brave Search Example - Model Context Protocol (MCP)
+    url: https://github.com/docker/compose-for-agents/tree/main/langchaingo
+    description: >
+      This example demonstrates how to create a Go Model Context Protocol
+      (MCP) client that communicates with the Brave Search MCP Server. The
+      application shows how to build an MCP client that enables natural language
+      interactions with Brave Search, allowing you to perform internet searches
+      through a conversational interface. This example uses the official Go SDK
+      for Model Context Protocol servers and clients, to set up the MCP client.
+    services:
+      - golang
+      - aiml
+      - agentic-ai
+  - title: Spring AI Brave Search Example - Model Context Protocol (MCP)
+    url: https://github.com/docker/compose-for-agents/tree/main/spring-ai
+    description: >
+      This example demonstrates how to create a Spring AI Model Context Protocol
+      (MCP) client that communicates with the Brave Search MCP Server. The
+      application shows how to build an MCP client that enables natural language
+      interactions with Brave Search, allowing you to perform internet searches
+      through a conversational interface. This example uses Spring Boot
+      autoconfiguration to set up the MCP client through configuration files.
+    services:
+      - java
+      - aiml
+      - agentic-ai
+  - title: MCP UI with Vercel AI SDK
+    url: https://github.com/docker/compose-for-agents/tree/main/vercel
+    description: >
+      Start an MCP UI application that uses the Vercel AI SDK to provide a
+      chat interface for local models, provided by the Docker Model Runner,
+      with access to MCPs from the Docker MCP Catalog.
+    services:
+      - aiml
+      - agentic-ai

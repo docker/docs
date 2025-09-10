@@ -107,7 +107,8 @@ Depending on your selected network mode, the options available are:
 
 ### Using Settings Management
 
-If you're an administrator, you can use [Settings Management](/manuals/security/for-admins/hardened-desktop/settings-management/configure-json-file.md#networking) to enforce this Docker Desktop setting across your developer's machines. Choose from the following code snippets and at it to your `admin-settings.json` file.
+If you're an administrator, you can use [Settings Management](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md#networking) to enforce this Docker Desktop setting across your developer's machines. Choose from the following code snippets and at it to your `admin-settings.json` file,
+or configure this setting using the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
 
 {{< tabs >}}
 {{< tab name="Networking mode" >}}

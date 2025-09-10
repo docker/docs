@@ -5,10 +5,21 @@ long: |
 usage: docker model status
 pname: docker model
 plink: docker_model.yaml
+options:
+    - option: json
+      value_type: bool
+      default_value: "false"
+      description: Format output in JSON
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
 deprecated: false
 hidden: false
 experimental: false
-experimentalcli: true
+experimentalcli: false
 kubernetes: false
 swarm: false
 

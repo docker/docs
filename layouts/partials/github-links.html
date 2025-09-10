@@ -7,7 +7,7 @@
   {{ with .File }}
   {{ if not (in .Filename "/_vendor/") }}
 <p class="flex items-center gap-1">
-  <span class="icon-svg icon-sm">
+  <span class="icon-svg-stroke icon-sm">
     {{ partial "utils/svg.html" "theme/icons/edit.svg" }}
   </span>
   <a class="link" rel="noopener"
@@ -16,7 +16,7 @@
   {{ end }}
   {{ end }}
 <p class="flex items-center gap-1">
-  <span class="icon-svg icon-sm">
+  <span class="icon-svg-stroke icon-sm">
     {{ partial "utils/svg.html" "theme/icons/issue.svg" }}
   </span>
   <a class="link" rel="noopener"

@@ -15,7 +15,6 @@ params:
 Docker Compose supports provider services, which allow integration with services whose lifecycles are managed by third-party components rather than by Compose itself.  
 This feature enables you to define and utilize platform-specific services without the need for manual setup or direct lifecycle management.
 
-
 ## What are provider services?
 
 Provider services are a special type of service in Compose that represents platform capabilities rather than containers.
@@ -103,6 +102,10 @@ The plugin or binary is responsible for:
 3. Returning information about how to access the provisioned resource
 
 This information is then passed to dependent services as environment variables.
+
+> [!TIP]
+>
+> If you're working with AI models in Compose, use the [`models` top-level element](/manuals/ai/compose/models-and-compose.md) instead.
 
 ## Benefits of using provider services
 

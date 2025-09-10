@@ -310,6 +310,8 @@ They're used to configure the Buildx client, or the BuildKit daemon.
 | [BUILDKIT_HOST](#buildkit_host)                                             | String            | Specify host to use for remote builders.                         |
 | [BUILDKIT_PROGRESS](#buildkit_progress)                                     | String            | Configure type of progress output.                               |
 | [BUILDKIT_TTY_LOG_LINES](#buildkit_tty_log_lines)                           | String            | Number of log lines (for active steps in TTY mode).              |
+| [BUILDX_BAKE_FILE](#buildx_bake_file)                                       | String            | Specify the build definition file(s) for `docker buildx bake`.   |
+| [BUILDX_BAKE_FILE_SEPARATOR](#buildx_bake_file_separator)                   | String            | Specify the file-path separator for `BUILDX_BAKE_FILE`.          |
 | [BUILDX_BAKE_GIT_AUTH_HEADER](#buildx_bake_git_auth_header)                 | String            | HTTP authentication scheme for remote Bake files.                |
 | [BUILDX_BAKE_GIT_AUTH_TOKEN](#buildx_bake_git_auth_token)                   | String            | HTTP authentication token for remote Bake files.                 |
 | [BUILDX_BAKE_GIT_SSH](#buildx_bake_git_ssh)                                 | String            | SSH authentication for remote Bake files.                        |
@@ -436,6 +438,44 @@ Example:
     }
   ]
 }
+```
+
+### BUILDX_BAKE_FILE
+
+{{< summary-bar feature_name="Buildx bake file" >}}
+
+Specify one or more build definition files for `docker buildx bake`. 
+
+This environment variable provides an alternative to the `-f` / `--file` command-line flag.
+
+Multiple files can be specified by separating them with the system path separator (":" on Linux/macOS, ";" on Windows):
+
+```console
+export BUILDX_BAKE_FILE=file1.hcl:file2.hcl
+```
+
+Or with a custom separator defined by the [BUILDX_BAKE_FILE_SEPARATOR](#buildx_bake_file_separator) variable:
+
+```console
+export BUILDX_BAKE_FILE_SEPARATOR=@
+export BUILDX_BAKE_FILE=file1.hcl@file2.hcl
+```
+
+If both `BUILDX_BAKE_FILE` and the `-f` flag are set, only the files provided via `-f` are used. 
+
+If a listed file does not exist or is invalid, bake returns an error.
+
+### BUILDX_BAKE_FILE_SEPARATOR
+
+{{< summary-bar feature_name="Buildx bake file separator" >}}
+
+Controls the separator used between file paths in the `BUILDX_BAKE_FILE` environment variable. 
+
+This is useful if your file paths contain the default separator character or if you want to standardize separators across different platforms.
+
+```console
+export BUILDX_BAKE_PATH_SEPARATOR=@
+export BUILDX_BAKE_FILE=file1.hcl@file2.hcl
 ```
 
 ### BUILDX_BAKE_GIT_AUTH_HEADER

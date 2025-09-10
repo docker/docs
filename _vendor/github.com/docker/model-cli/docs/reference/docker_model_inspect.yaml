@@ -15,10 +15,21 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: remote
+      shorthand: r
+      value_type: bool
+      default_value: "false"
+      description: Show info for remote models
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
 deprecated: false
 hidden: false
 experimental: false
-experimentalcli: true
+experimentalcli: false
 kubernetes: false
 swarm: false
 

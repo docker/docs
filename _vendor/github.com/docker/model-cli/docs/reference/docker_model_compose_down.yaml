@@ -2,17 +2,6 @@ command: docker model compose down
 usage: docker model compose down
 pname: docker model compose
 plink: docker_model_compose.yaml
-options:
-    - option: model
-      value_type: stringArray
-      default_value: '[]'
-      description: model to use
-      deprecated: false
-      hidden: false
-      experimental: false
-      experimentalcli: false
-      kubernetes: false
-      swarm: false
 inherited_options:
     - option: project-name
       value_type: string
@@ -26,7 +15,7 @@ inherited_options:
 deprecated: false
 hidden: true
 experimental: false
-experimentalcli: true
+experimentalcli: false
 kubernetes: false
 swarm: false
 

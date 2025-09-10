@@ -39,7 +39,7 @@
   --color-navbar-text: var(--color-gray-700);
   --color-navbar-text-dark: var(--tw-prose-body);
   --color-navbar-border-color-light: var(--tw-prose-inverse-body);
-  --navbar-font-size: 1rem;
+  --navbar-font-size: 0.92rem;
   --navbar-group-font-title-size: 1rem;
   --color-navbar-text-dark: var(--color-gray-200);
   --color-navbar-group-text-dark: var(--tw-prose-body);
@@ -201,6 +201,7 @@
   --color-yellow-outlinedborder: rgba(235, 156, 0, 0.56);
   --color-yellow-selected: rgba(235, 156, 0, 0.16);
 
+  --topnav-button-bg: #4878f3;
   --tw-prose-code-bg: var(--color-gray-100);
   --tw-prose-code-bg-dark: var(--color-gray-800);
 }

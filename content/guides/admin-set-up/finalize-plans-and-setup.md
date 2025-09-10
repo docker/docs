@@ -6,9 +6,9 @@ weight: 20
 
 ## Step one: Send finalized settings files to the MDM team 
 
-After reaching an agreement with the relevant teams about your baseline and security configurations as outlined in module one, configure Settings Management using either the [Docker Admin Console](/manuals/security/for-admins/hardened-desktop/settings-management/configure-admin-console.md) or an [`admin-settings.json` file](/manuals/security/for-admins/hardened-desktop/settings-management/configure-json-file.md).
+After reaching an agreement with the relevant teams about your baseline and security configurations as outlined in module one, configure Settings Management using either the [Docker Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md) or an [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md).
 
-Once the file is ready, collaborate with your MDM team to deploy your chosen settings, along with your chosen method for [enforcing sign-in](/manuals/security/for-admins/enforce-sign-in/_index.md).
+Once the file is ready, collaborate with your MDM team to deploy your chosen settings, along with your chosen method for [enforcing sign-in](/manuals/enterprise/security/enforce-sign-in/_index.md).
 
 > [!IMPORTANT]
 >
@@ -22,9 +22,9 @@ If you have more than one organization, it’s recommended that you either conso
 
 ### Set up single sign-on SSO domain verification
 
-Single sign-on (SSO) lets developers authenticate using their identity providers (IdPs) to access Docker. SSO is available for a whole company, and all associated organizations, or an individual organization that has a Docker Business subscription. For more information, see the [documentation](/manuals/security/for-admins/single-sign-on/_index.md).
+Single sign-on (SSO) lets developers authenticate using their identity providers (IdPs) to access Docker. SSO is available for a whole company, and all associated organizations, or an individual organization that has a Docker Business subscription. For more information, see the [documentation](/manuals/enterprise/security/single-sign-on/_index.md).
 
-You can also enable [SCIM](/manuals/security/for-admins/provisioning/scim.md) for further automation of provisioning and deprovisioning of users.
+You can also enable [SCIM](/manuals/enterprise/security/provisioning/scim.md) for further automation of provisioning and deprovisioning of users.
 
 ### Set up Docker product entitlements included in the subscription
 

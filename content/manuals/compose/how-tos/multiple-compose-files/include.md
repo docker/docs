@@ -18,7 +18,7 @@ Once the included Compose application loads, all resources are copied into the c
 
 > [!NOTE]
 >
-> `include` applies recursively so an included Compose file which declares its own `include` section, results in those other files being included as well.
+> `include` applies recursively so an included Compose file which declares its own `include` section, causes those files to also be included.
 
 ## Example
 
@@ -36,11 +36,24 @@ services:
 
 This means the team managing `serviceB` can refactor its own database component to introduce additional services without impacting any dependent teams. It also means that the dependent teams don't need to include additional flags on each Compose command they run.
 
-## Include and overrides
+```yaml
+include:
+  - oci://docker.io/username/my-compose-app:latest # use a Compose file stored as an OCI artifact
+services:
+  serviceA:
+    build: .
+    depends_on:
+      - serviceB 
+```
+`include` allows you to reference Compose files from remote sources, such as OCI artifacts or Git repositories.  
+Here `serviceB` is defined in a Compose file stored on Docker Hub.
+
+## Using overrides with included Compose files
 
 Compose reports an error if any resource from `include` conflicts with resources from the included Compose file. This rule prevents
-unexpected conflicts with resources defined by the included compose file author. However, there may be some circumstances where you might want to tweak the
+unexpected conflicts with resources defined by the included compose file author. However, there may be some circumstances where you might want to customize the
 included model. This can be achieved by adding an override file to the include directive:
+
 ```yaml
 include:
   - path : 
@@ -49,7 +62,7 @@ include:
 ```
 
 The main limitation with this approach is that you need to maintain a dedicated override file per include. For complex projects with multiple
-includes this would result into many Compose files.
+includes this would result in many Compose files.
 
 The other option is to use a `compose.override.yaml` file. While conflicts will be rejected from the file using `include` when same
 resource is declared, a global Compose override file can override the resulting merged model, as demonstrated in following example:

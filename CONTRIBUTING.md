@@ -7,7 +7,7 @@ Our style guide and instructions on using our page templates and components is
 available in the [contribution section](https://docs.docker.com/contribute/) on
 the website.
 
-The following guidelines describe the ways in which you can contribute to the
+The following guidelines describe how to contribute to the
 Docker documentation at <https://docs.docker.com/>, and how to get started.
 
 ## Reporting issues
@@ -90,6 +90,9 @@ To stop the development server:
 
 1. In your terminal, press `<Ctrl+C>` to exit the file watch mode of Compose.
 2. Stop the Compose service with the `docker compose down` command.
+
+> [!NOTE]
+> Alternatively, if you have installed Hugo, you can build with `hugo serve`.
 
 ### Testing
 

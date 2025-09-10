@@ -9,9 +9,8 @@ Commands to list, configure, and delete Docker Scout integrations
 |:----------------------------------------------|:----------------------------------------------------|
 | [`configure`](scout_integration_configure.md) | Configure or update a new integration configuration |
 | [`delete`](scout_integration_delete.md)       | Delete a new integration configuration              |
-| [`list`](scout_integration_list.md)           | Integration Docker Scout                            |
+| [`list`](scout_integration_list.md)           | List integrations which can be installed            |
 
 
 
 <!---MARKER_GEN_END-->
-

@@ -6,7 +6,7 @@
   */
 -}}
 <!-- Main navigation for the sidebar -->
-<div class="px-4 py-2" x-data="{ expanded: false }">
+<div class="px-2 py-4 md:hidden text-gray-700 dark:text-gray-200 card " x-data="{ expanded: false }">
   <div class="flex w-full items-center justify-between">
     <!-- Current section: use menu, fall back to current section or page -->
     {{- $curr := .FirstSection }}
@@ -31,7 +31,7 @@
     </a>
     <button
       @click="expanded = !expanded"
-      class="rounded-sm hover:bg-gray-300 hover:dark:bg-gray-300"
+      class="rounded-sm hover:bg-gray-200 hover:dark:bg-gray-800"
     >
       <span x-show="! expanded" class="icon-svg">
         {{ partialCached "icon" "arrow_drop_down" "arrow_drop_down" }}
@@ -58,4 +58,4 @@
     {{ end }}
   </ul>
 </div>
-<hr class="m-2 text-gray-200 dark:text-gray-500" />
+

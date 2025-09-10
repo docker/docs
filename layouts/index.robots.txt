@@ -6,6 +6,7 @@
 
 {{- if hugo.IsProduction -}}
 User-agent: *
+Disallow: /unassociated-machines/
 
 
 Sitemap: {{ "sitemap.xml" | absURL }}

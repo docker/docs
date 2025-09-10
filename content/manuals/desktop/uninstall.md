@@ -170,7 +170,7 @@ To uninstall Docker Desktop for Fedora:
    ```console
    $ rm -r $HOME/.docker/desktop
    $ sudo rm /usr/local/bin/com.docker.cli
-   $ sudo apt purge docker-desktop
+   $ sudo dnf remove docker-desktop
    ```
 
    This removes configuration and data files at `$HOME/.docker/desktop`, the symlink at `/usr/local/bin/com.docker.cli`, and purges the remaining systemd service files.

@@ -16,7 +16,8 @@ environment.
 To get started with Docker Build Cloud, you need to:
 
 - Download and install Docker Desktop version 4.26.0 or later.
-- Sign up for a Docker Build Cloud subscription in the [Docker Build Cloud Dashboard](https://app.docker.com/build/).
+- Create a cloud builder on the [Docker Build Cloud Dashboard](https://app.docker.com/build/).
+  - When you create the builder, choose a name for it (for example, `default`). You will use this name as `BUILDER_NAME` in the CLI steps below.
 
 ### Use Docker Build Cloud without Docker Desktop
 
@@ -50,9 +51,17 @@ command, or using the Docker Desktop settings GUI.
    $ docker buildx create --driver cloud <ORG>/<BUILDER_NAME>
    ```
 
-   Replace `ORG` with the Docker Hub namespace of your Docker organization.
+   Replace `<ORG>` with the Docker Hub namespace of your Docker organization (or your username if you are using a personal account), and `<BUILDER_NAME>` with the name you chose when creating the builder in the dashboard.
 
-This creates a builder named `cloud-ORG-BUILDER_NAME`.
+   This creates a local instance of the cloud builder named `cloud-ORG-BUILDER_NAME`.
+
+   > [!NOTE]
+   >
+   > If your organization is `acme` and you named your builder `default`, use:
+   > ```console
+   > $ docker buildx create --driver cloud acme/default
+   > ```
+
 
 {{< /tab >}}
 {{< tab name="Docker Desktop" >}}

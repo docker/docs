@@ -1,5 +1,5 @@
 name: deploy
-
+# Deploys the Docker Docs website when merging to the `main` branch.
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -8,9 +8,8 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - lab
       - main
-      - published
+      - lab
 
 env:
   # Use edge release of buildx (latest RC, fallback to latest stable)
@@ -22,6 +21,8 @@ permissions:
   id-token: write
   contents: read
 
+# The `main` branch is deployed to the production environment.
+# The `lab` branch is deployed to a separate environment for testing purposes.
 jobs:
   publish:
     runs-on: ubuntu-24.04
@@ -30,26 +31,16 @@ jobs:
       -
         name: Prepare
         run: |
-          HUGO_ENV=development
           DOCS_AWS_REGION=us-east-1
+          HUGO_ENV=production
           if [ "${{ github.ref }}" = "refs/heads/main" ]; then
-            HUGO_ENV=staging
-            DOCS_URL="https://docs-stage.docker.com"
-            DOCS_AWS_IAM_ROLE="arn:aws:iam::710015040892:role/stage-docs-docs.docker.com-20220818202135984800000001"
-            DOCS_S3_BUCKET="stage-docs-docs.docker.com"
-            DOCS_S3_CONFIG="s3-config.json"
-            DOCS_CLOUDFRONT_ID="E1R7CSW3F0X4H8"
-            DOCS_LAMBDA_FUNCTION_REDIRECTS="DockerDocsRedirectFunction-stage"
-            DOCS_SLACK_MSG="Successfully deployed docs-stage from main branch. $DOCS_URL"
-          elif [ "${{ github.ref }}" = "refs/heads/published" ]; then
-            HUGO_ENV=production
             DOCS_URL="https://docs.docker.com"
             DOCS_AWS_IAM_ROLE="arn:aws:iam::710015040892:role/prod-docs-docs.docker.com-20220818202218674300000001"
             DOCS_S3_BUCKET="prod-docs-docs.docker.com"
             DOCS_S3_CONFIG="s3-config.json"
             DOCS_CLOUDFRONT_ID="E228TTN20HNU8F"
             DOCS_LAMBDA_FUNCTION_REDIRECTS="DockerDocsRedirectFunction-prod"
-            DOCS_SLACK_MSG="Successfully deployed docs from published branch. $DOCS_URL"
+            DOCS_SLACK_MSG="Successfully deployed docs from the main branch. $DOCS_URL"
           elif [ "${{ github.ref }}" = "refs/heads/lab" ]; then
             HUGO_ENV=lab
             DOCS_URL="https://docs-labs.docker.com"
@@ -79,7 +70,7 @@ jobs:
           echo "SEND_SLACK_MSG=$SEND_SLACK_MSG" >> $GITHUB_ENV
       -
         name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
       -
@@ -100,7 +91,7 @@ jobs:
       -
         name: Configure AWS Credentials
         if: ${{ env.DOCS_AWS_IAM_ROLE != '' }}
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v5
         with:
           role-to-assume: ${{ env.DOCS_AWS_IAM_ROLE }}
           aws-region: ${{ env.DOCS_AWS_REGION }}

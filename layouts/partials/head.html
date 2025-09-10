@@ -74,7 +74,36 @@
   data-user-analytics-fingerprint-enabled="true"
   data-bot-protection-mechanism="hcaptcha"
   data-website-id="{{ site.Params.kapa.id }}"
+  data-modal-open-on-command-k="true"
+  data-modal-border-radius="6px"
 ></script>
+ <script>
+    // Define askAI function to work with search-page-input
+    window.askAI = function(inputId = "search-page-input") {
+      const searchInput = document.querySelector("#" + inputId);
+      const query = searchInput ? searchInput.value.trim() : "";
+
+      if (query && window.Kapa) {
+        window.Kapa.open({
+          mode: "ai",
+          query: query,
+          submit: false
+        });
+      } else if (window.Kapa) {
+        window.Kapa.open({
+          mode: "ai"
+        });
+      }
+    };
+
+    // Add event listener for the Ask AI button
+    document.addEventListener('click', function(event) {
+      if (event.target.closest('.open-kapa-widget')) {
+        event.preventDefault();
+        window.askAI("search-page-input");
+      }
+    });
+  </script>
 {{/* preload Roboto Flex as it's a critical font: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel/preload */}}
 <link
   href="/assets/fonts/RobotoFlex.woff2"

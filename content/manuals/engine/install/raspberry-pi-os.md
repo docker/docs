@@ -98,6 +98,8 @@ You can install Docker Engine in different ways, depending on your needs:
 - Use a [convenience script](#install-using-the-convenience-script). Only
   recommended for testing and development environments.
 
+{{% include "engine-license.md" %}}
+
 ### Install using the `apt` repository {#install-using-the-repository}
 
 Before you install Docker Engine for the first time on a new host machine, you
@@ -132,7 +134,7 @@ Docker from the repository.
    ```console
    $ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
    ```
-  
+
    {{< /tab >}}
    {{< tab name="Specific version" >}}
 

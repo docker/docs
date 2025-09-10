@@ -16,9 +16,38 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: org
+      value_type: string
+      description: Namespace of the Docker organization
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: predicate-type
       value_type: string
       description: Predicate-type for attestations
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: referrer
+      value_type: bool
+      default_value: "false"
+      description: Use OCI referrer API for pushing attestation
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: referrer-repository
+      value_type: string
+      default_value: registry.scout.docker.com
+      description: Repository to push referrer to
       deprecated: false
       hidden: false
       experimental: false

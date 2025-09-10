@@ -35,7 +35,7 @@ Turning the Kubernetes server on or off in Docker Desktop does not affect your o
 2. Select the **Kubernetes** tab.
 3. Toggle on **Enable Kubernetes**.
 4. Choose your [cluster provisioning method](#cluster-provisioning-method).
-5. Select **Apply & Restart** to save the settings.
+5. Select **Apply** to save the settings.
 
 This sets up the images required to run the Kubernetes server as containers, and installs the `kubectl` command-line tool on your system at `/usr/local/bin/kubectl` (Mac) or `C:\Program Files\Docker\Docker\resources\bin\kubectl.exe` (Windows).
 
@@ -57,7 +57,7 @@ Docker Desktop Kubernetes can be provisioned with either the `kubeadm` or `kind`
 provisioners.
 
 `kubeadm` is the older provisioner. It supports a single-node cluster, you can't select the kubernetes
-version, it's slower to provision than `kind`, and it's not supported by [Enhanced Container Isolation](/manuals/security/for-admins/hardened-desktop/enhanced-container-isolation/index.md) (ECI),
+version, it's slower to provision than `kind`, and it's not supported by [Enhanced Container Isolation](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/index.md) (ECI),
 meaning that if ECI is enabled the cluster works but it's not protected by ECI.
 
 `kind` is the newer provisioner, and it's available if you are signed in and are
@@ -165,7 +165,7 @@ factors, including the version of Kubernetes being used. The tags vary for each 
 
 To accommodate scenarios where access to Docker Hub is not allowed, admins can
 configure Docker Desktop to pull the above listed images from a different registry (e.g., a mirror)
-using the [KubernetesImagesRepository](../../security/for-admins/hardened-desktop/settings-management/configure-json-file.md#kubernetes) setting as follows.
+using the [KubernetesImagesRepository](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md#kubernetes) setting as follows.
 
 An image name can be broken into `[registry[:port]/][namespace/]repository[:tag]` components.
 The `KubernetesImagesRepository` setting allows users to override the `[registry[:port]/][namespace]`
@@ -214,11 +214,11 @@ The recommended approach to set this up is the following:
 
 > [!NOTE]
 >
-> When using `KubernetesImagesRepository` and [Enhanced Container Isolation (ECI)](../../security/for-admins/hardened-desktop/enhanced-container-isolation/_index.md)
-> is enabled, add the following images to the [ECI Docker socket mount image list](../../security/for-admins/hardened-desktop/settings-management/configure-json-file.md#enhanced-container-isolation):
+> In Docker Desktop versions 4.43 or earlier, when using `KubernetesImagesRepository` and [Enhanced Container Isolation (ECI)](/manuals/enterprise/security/hardened-desktop/enhanced-container-isolation/_index.md)
+> is enabled, add the following images to the [ECI Docker socket mount image list](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md#enhanced-container-isolation):
 >
-> * [imagesRepository]/desktop-cloud-provider-kind:*
-> * [imagesRepository]/desktop-containerd-registry-mirror:*
+> `[imagesRepository]/desktop-cloud-provider-kind:`
+> `[imagesRepository]/desktop-containerd-registry-mirror:`
 >
 > These containers mount the Docker socket, so you must add the images to the ECI images list. If not,
 > ECI will block the mount and Kubernetes won't start.
@@ -240,4 +240,4 @@ To turn off Kubernetes in Docker Desktop:
 1. From the Docker Desktop Dashboard, select the **Settings** icon.
 2. Select the **Kubernetes** tab.
 3. Deselect the **Enable Kubernetes** checkbox.
-4. Select **Apply & Restart** to save the settings. This stops and removes Kubernetes containers, and also removes the `/usr/local/bin/kubectl` command.
+4. Select **Apply** to save the settings. This stops and removes Kubernetes containers, and also removes the `/usr/local/bin/kubectl` command.

@@ -14,6 +14,10 @@ variable "DRY_RUN" {
   default = null
 }
 
+variable "GITHUB_ACTIONS" {
+  default = null
+}
+
 group "default" {
   targets = ["release"]
 }
@@ -36,7 +40,7 @@ target "release" {
 }
 
 group "validate" {
-  targets = ["lint", "test", "unused-media", "test-go-redirects", "dockerfile-lint", "path-warnings", "validate-vendor"]
+  targets = ["lint", "vale", "test", "unused-media", "test-go-redirects", "dockerfile-lint", "path-warnings", "validate-vendor"]
 }
 
 target "test" {
@@ -48,6 +52,15 @@ target "test" {
 target "lint" {
   target = "lint"
   output = ["type=cacheonly"]
+  provenance = false
+}
+
+target "vale" {
+  target = "vale"
+  args = {
+    GITHUB_ACTIONS = GITHUB_ACTIONS
+  }
+  output = ["./tmp"]
   provenance = false
 }
 

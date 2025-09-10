@@ -216,7 +216,7 @@ real-world example, continue to
     to the config. The container ID is different, because the
     `service update` command redeploys the service.
 
-    ```none
+    ```console
     $ docker container exec -it $(docker ps --filter name=redis -q) cat /my-config
 
     cat: can't open '/my-config': No such file or directory
@@ -248,7 +248,7 @@ This example assumes that you have PowerShell installed.
       </body>
     </html>
     ```
- 
+
 2.  If you have not already done so, initialize or join the swarm.
 
     ```powershell
@@ -373,7 +373,7 @@ generate the site key and certificate, name the files `site.key` and
     the following contents into it. This constrains the root CA to only sign
     leaf certificates and not intermediate CAs.
 
-    ```none
+    ```ini
     [root_ca]
     basicConstraints = critical,CA:TRUE,pathlen:1
     keyUsage = critical, nonRepudiation, cRLSign, keyCertSign
@@ -407,7 +407,7 @@ generate the site key and certificate, name the files `site.key` and
     certificate so that it can only be used to authenticate a server and
     can't be used to sign certificates.
 
-    ```none
+    ```ini
     [server]
     authorityKeyIdentifier=keyid,issuer
     basicConstraints = critical,CA:FALSE
@@ -438,7 +438,7 @@ generate the site key and certificate, name the files `site.key` and
     In the current directory, create a new file called `site.conf` with the
     following contents:
 
-    ```none
+    ```nginx
     server {
         listen                443 ssl;
         server_name           localhost;
@@ -616,7 +616,7 @@ configuration file.
 1.  Edit the `site.conf` file locally. Add `index.php` to the `index` line, and
     save the file.
 
-    ```none
+    ```nginx
     server {
         listen                443 ssl;
         server_name           localhost;

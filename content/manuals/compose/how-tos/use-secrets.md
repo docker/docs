@@ -1,9 +1,9 @@
 ---
-title: How to use secrets in Docker Compose
+title: Manage secrets securely in Docker Compose
 linkTitle: Secrets in Compose
 weight: 60
-description: How to use secrets in Compose and their benefits
-keywords: secrets, compose, security, environment variables
+description: Learn how to securely manage runtime and build-time secrets in Docker Compose.
+keywords: secrets, compose, security, environment variables, docker secrets, secure Docker builds, sensitive data in containers
 tags: [Secrets]
 aliases:
 - /compose/use-secrets/
@@ -25,7 +25,7 @@ Unlike the other methods, this permits granular access control within a service 
 
 ## Examples
 
-### Simple
+### Single-service secret injection
 
 In the following example, the frontend service is given access to the `my_secret` secret. In the container, `/run/secrets/my_secret` is set to the contents of the file `./my_secret.txt`.
 
@@ -40,7 +40,7 @@ secrets:
     file: ./my_secret.txt
 ```
 
-### Advanced
+### Multi-service secret sharing and password management
 
 ```yaml
 services:
@@ -84,7 +84,7 @@ In the advanced example above:
 
 - The `secrets` attribute under each service defines the secrets you want to inject into the specific container.
 - The top-level `secrets` section defines the variables `db_password` and `db_root_password` and provides the `file` that populates their values.
-- The deployment of each container means Docker creates a temporary filesystem mount under `/run/secrets/<secret_name>` with their specific values.
+- The deployment of each container means Docker creates a bind mount under `/run/secrets/<secret_name>` with their specific values.
 
 > [!NOTE]
 >

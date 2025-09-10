@@ -328,7 +328,7 @@ If you are currently using the `--ipv6` option _without_ specifying the
 `--fixed-cidr-v6` option, the Docker daemon will refuse to start with the
 following message:
 
-```none
+```text
 Error starting daemon: Error initializing network controller: Error creating
                        default "bridge" network: failed to parse pool request
                        for address space "LocalDefault" pool " subpool ":
@@ -344,7 +344,7 @@ In a similar way, if you specify the `--ipv6` flag when creating a network
 with the default IPAM driver, without providing an IPv6 `--subnet`, network
 creation will fail with the following message:
 
-```none
+```text
 Error response from daemon: failed to parse pool request for address space
                             "LocalDefault" pool "" subpool "": could not find an
                             available, non-overlapping IPv6 address pool among
@@ -397,7 +397,7 @@ If you are currently using the `--ipv6` option _without_ specifying the
 `--fixed-cidr-v6` option, the Docker daemon will refuse to start with the
 following message:
 
-```none
+```text
 Error starting daemon: Error initializing network controller: Error creating
                        default "bridge" network: failed to parse pool request
                        for address space "LocalDefault" pool " subpool ":
@@ -413,7 +413,7 @@ In a similar way, if you specify the `--ipv6` flag when creating a network
 with the default IPAM driver, without providing an IPv6 `--subnet`, network
 creation will fail with the following message:
 
-```none
+```text
 Error response from daemon: failed to parse pool request for address space
                             "LocalDefault" pool "" subpool "": could not find an
                             available, non-overlapping IPv6 address pool among

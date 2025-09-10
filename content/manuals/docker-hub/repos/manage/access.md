@@ -94,7 +94,7 @@ repository from that repository's **Settings** page.
 
 Organizations can use roles for individuals, giving them different
 permissions in the organization. For more details, see [Roles and
-permissions](/manuals/security/for-admins/roles-and-permissions.md).
+permissions](/manuals/enterprise/security/roles-and-permissions.md).
 
 ## Organization teams
 
@@ -131,7 +131,7 @@ To configure team repository permissions:
 
 Organizations can use OATs. OATs let you assign fine-grained repository access
 permissions to tokens. For more details, see [Organization access
-tokens](/manuals/security/for-admins/access-tokens.md).
+tokens](/manuals/enterprise/security/access-tokens.md).
 
 ## Gated distribution
 
@@ -156,7 +156,7 @@ If you are interested in Gated Distribution contact the [Docker Sales Team](http
 ### Invite distributor members via API
 
 > [!NOTE]
-> When you invite members, you assign them a role. See [Roles and permissions](/manuals/security/for-admins/roles-and-permissions.md) for details about the access permissions for each role.
+> When you invite members, you assign them a role. See [Roles and permissions](/manuals/enterprise/security/roles-and-permissions.md) for details about the access permissions for each role.
 
 Distributor members (used for gated distribution) can only be invited using the Docker Hub API. UI-based invitations are not currently supported for this role. To invite distributor members, use the Bulk create invites API endpoint.
 

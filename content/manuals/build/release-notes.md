@@ -10,6 +10,120 @@ toc_max: 2
 This page contains information about the new features, improvements, and bug
 fixes in [Docker Buildx](https://github.com/docker/buildx).
 
+## 0.28.0
+
+{{< release-date date="2025-09-03" >}}
+
+The full release notes for this release are available
+[on GitHub](https://github.com/docker/buildx/releases/tag/v0.27.0).
+
+### New
+
+- When building with Dockerfile version 1.18.0 or later, you can now use new Git URLs with query options for build context and named contexts in the `build` and `bake` command. [dockerfile/1.18.0](/manuals/build/buildkit/dockerfile-release-notes.md#1180)
+
+### Enhancements
+
+- Add formatting options to the `buildx du` command for custom and machine-readable output. [docker/buildx#3377](https://github.com/docker/buildx/pull/3377)
+- Kubernetes driver now supports `env.<key>` driver opts [docker/buildx#3373](https://github.com/docker/buildx/pull/3373)
+- Add support for `BUILDKIT_SYNTAX` build argument when BuildKit has a Dockerfile frontend disabled. [docker/buildx#3385](https://github.com/docker/buildx/pull/3385)
+
+### Bug fixes
+
+- Fix failing early when trying to export index annotations with moby exporter. [docker/buildx#3384](https://github.com/docker/buildx/pull/3384)
+- Fix possible errors on Windows from symlink handling [docker/buildx#3386](https://github.com/docker/buildx/pull/3386)
+
+## 0.27.0
+
+{{< release-date date="2025-08-20" >}}
+
+The full release notes for this release are available
+[on GitHub](https://github.com/docker/buildx/releases/tag/v0.27.0).
+
+### New
+
+- Compose compatibility has been updated to v2.8.1. [docker/buildx#3337](https://github.com/docker/buildx/pull/3337)
+
+### Enhancements
+
+- DAP: Exec shell now restarts with the new container when execution resumes and pauses again. [docker/buildx#3341](https://github.com/docker/buildx/pull/3341)
+- DAP: Add `File Explorer` section to variables to inspect filesystem state. [docker/buildx#3327](https://github.com/docker/buildx/pull/3327)
+- DAP: Change Dockerfile step order to match more closely with user expectations. [docker/buildx#3325](https://github.com/docker/buildx/pull/3325)
+- DAP: Improve determination of the proper parent. [docker/buildx#3366](https://github.com/docker/buildx/pull/3366)
+- DAP: Dockerfile nested in the context is now supported. [docker/buildx#3371](https://github.com/docker/buildx/pull/3371)
+- Build name shown in history can now be overridden with `BUILDKIT_BUILD_NAME` build argument. [docker/buildx#3330](https://github.com/docker/buildx/pull/3330)
+- Bake now supports `homedir()` function. [docker/buildx#3351](https://github.com/docker/buildx/pull/3351)
+- Bake default for empty Dockerfile defaults to `Dockerfile` to match the behavior of `build` command. [docker/buildx#3347](https://github.com/docker/buildx/pull/3347)
+- Bake supports `pull` and `no_cache` fields for Compose files. [docker/buildx#3352](https://github.com/docker/buildx/pull/3352)
+- Sanitize the names of `additional_contexts` from Compose files when building with Bake. [docker/buildx#3361](https://github.com/docker/buildx/pull/3361)
+
+### Bug fixes
+
+- Fix missing WSL libraries in `docker-container` driver when GPU device is requested. [docker/buildx#3320](https://github.com/docker/buildx/pull/3320)
+
+## 0.26.1
+
+{{< release-date date="2025-07-22" >}}
+
+The full release notes for this release are available
+[on GitHub](https://github.com/docker/buildx/releases/tag/v0.26.1).
+
+### Bug fixes
+
+- Fix regression when validating compose files with Bake. [docker/buildx#3329](https://github.com/docker/buildx/pull/3329)
+
+## 0.26.0
+
+{{< release-date date="2025-07-21" >}}
+
+The full release notes for this release are available
+[on GitHub](https://github.com/docker/buildx/releases/tag/v0.26.0).
+
+### New
+
+- New experimental version of the DAP debugger has been added with a new `dap build` helper command. The new feature can be tried with the [DockerDX VSCode extension](https://github.com/docker/vscode-extension). [docker/buildx#3235](https://github.com/docker/buildx/pull/3235)
+- Compose compatibility has been updated to v2.7.1. [docker/buildx#3282](https://github.com/docker/buildx/pull/3282)
+
+### Enhancements
+
+- Bake command now supports pattern-matching target names with wildcards. [docker/buildx#3280](https://github.com/docker/buildx/pull/3280)
+- Bake command now supports setting files through environment variable `BUILDX_BAKE_FILE`. [docker/buildx#3242](https://github.com/docker/buildx/pull/3242)
+- Bake now ignores unrelated fields when parsing and validating compose files. [docker/buildx#3292](https://github.com/docker/buildx/pull/3292)
+- `history` commands will automatically bootstrap the builder. [docker/buildx#3300](https://github.com/docker/buildx/pull/3300)
+- Add SLSA v1 support to `history inspect` command. [docker/buildx#3245](https://github.com/docker/buildx/pull/3245)
+- Kubernetes driver option `buildkit-root-volume-memory` to use memory mount for the root volume. [docker/buildx#3253](https://github.com/docker/buildx/pull/3253)
+
+### Bug fixes
+
+- Fix possible error from `imagetools` commands when accessing registries that don't return content length. [docker/buildx#3316](https://github.com/docker/buildx/pull/3316)
+- Fix duplicated command descriptions from help output. [docker/buildx#3298](https://github.com/docker/buildx/pull/3298)
+- Fix `history inspect attachment` to not require an argument. [docker/buildx#3264](https://github.com/docker/buildx/pull/3264)
+- Fix resolving environment variables from `.env` file when building compose files with Bake. [docker/buildx#3275](https://github.com/docker/buildx/pull/3275), [docker/buildx#3276](https://github.com/docker/buildx/pull/3276), [docker/buildx#3322](https://github.com/docker/buildx/pull/3322)
+
+## 0.25.0
+
+{{< release-date date="2025-06-17" >}}
+
+The full release notes for this release are available
+[on GitHub](https://github.com/docker/buildx/releases/tag/v0.25.0).
+
+### New
+
+- Bake now supports defining `extra-hosts`. [docker/buildx#3234](https://github.com/docker/buildx/pull/3234)
+
+### Enhancements
+
+- Add support for bearer token auth. [docker/buildx#3233](https://github.com/docker/buildx/pull/3233)
+- Add custom exit codes for internal, resource, and canceled errors in commands. [docker/buildx#3214](https://github.com/docker/buildx/pull/3214)
+- Show variable type when using `--list=variables` with Bake. [docker/buildx#3207](https://github.com/docker/buildx/pull/3207)
+- Consider typed, value-less variables to have `null` value in Bake. [docker/buildx#3198](https://github.com/docker/buildx/pull/3198)
+- Add support for multiple IPs in extra hosts configuration. [docker/buildx#3244](https://github.com/docker/buildx/pull/3244)
+- Support for updated SLSA V1 provenance in `buildx history` commands. [docker/buildx#3245](https://github.com/docker/buildx/pull/3245)
+- Add support for `RegistryToken` configuration in imagetools commands. [docker/buildx#3233](https://github.com/docker/buildx/pull/3233)
+
+### Bug fixes
+
+- Fix `keep-storage` flag deprecation notice for `prune` command. [docker/buildx#3216](https://github.com/docker/buildx/pull/3216)
+
 ## 0.24.0
 
 {{< release-date date="2025-05-21" >}}
@@ -93,10 +207,10 @@ The full release notes for this release are available
 
 ### Enhancements
 
-- The history inspection command `buildx history inspect` now supports custom formatting with `--format` flag and JSON formatting for machine-readable output. [docker/buildx#2964](https://github.com/docker/buildx/pull/2964) 
+- The history inspection command `buildx history inspect` now supports custom formatting with `--format` flag and JSON formatting for machine-readable output. [docker/buildx#2964](https://github.com/docker/buildx/pull/2964)
 - Support for CDI device entitlement in build and bake. [docker/buildx#2994](https://github.com/docker/buildx/pull/2994)
 - Supported CDI devices are now shown in the builder inspection. [docker/buildx#2983](https://github.com/docker/buildx/pull/2983)
-- When using [GitHub Cache backend `type=gha`](cache/backends/gha.md), the URL for the Version 2 or API is now read from the environment and sent to BuildKit. Version 2 backend requires BuildKit v0.20.0 or later. [docker/buildx#2983](https://github.com/docker/buildx/pull/2983), [docker/buildx#3001](https://github.com/docker/buildx/pull/3001)
+- When using [GitHub Cache backend `type=gha`](cache/backends/gha.md), the URL of the Version 2 or API is now read from the environment and sent to BuildKit. Version 2 backend requires BuildKit v0.20.0 or later. [docker/buildx#2983](https://github.com/docker/buildx/pull/2983), [docker/buildx#3001](https://github.com/docker/buildx/pull/3001)
 
 ### Bug fixes
 

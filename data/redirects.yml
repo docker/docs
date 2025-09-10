@@ -8,7 +8,7 @@
 # provide a short, permanent link to refer to a topic in the documentation.
 # For example, the docker CLI can output https://docs.docker.com/go/some-topic
 # in its help output, which can be redirected to elsewhere in the documentation.
-"/security/for-developers/access-tokens/":
+"/security/access-tokens/":
   - /go/access-tokens/
 "/reference/api/engine/#deprecated-api-versions":
   - /engine/api/v1.18/
@@ -222,12 +222,18 @@
 "https://www.docker.com/products/build-cloud/?utm_campaign=2024-02-02-dbc_cli&utm_medium=in-product-ad&utm_source=desktop_v4":
   - /go/docker-build-cloud/
 
-# Run Cloud links & Docker Cloud
+# Run Cloud links & Docker Cloud & Docker Offload
 "/":
   - /go/run-cloud-eap/
-"/desktop/setup/vm-vdi/":
+"/offload/":
+  # Onboarding - VDI beta
   - /go/docker-cloud/
+"/offload/about/":
+  # Onboarding - enable GPU
   - /go/docker-cloud-gpu/
+"/ai/compose/models-and-compose/":
+  # Onboarding - enable GPU - compose for agents
+  - /go/compose-for-agents/
 
 # CLI backlinks
 "/engine/cli/filter/":
@@ -252,7 +258,7 @@
 # Docker Debug
 "/reference/cli/docker/debug/":
   - /go/debug-cli/
-"/desktop/use-desktop/container/#debug":
+"/desktop/use-desktop/container/#execdebug":
   - /go/debug-gui/
 
 # Docker Admin Console - Insights
@@ -280,12 +286,22 @@
 
 # Links in Desktop
 
+
 # Desktop MCP Toolkit
 "/ai/mcp-catalog-and-toolkit/toolkit/":
   - /go/mcp-toolkit/
+"/ai/mcp-catalog-and-toolkit/":
+  - /go/mcp-catalog-and-toolkit/
+"/ai/mcp-catalog-and-toolkit/catalog/":
+  - /go/mcp-catalog-and-toolkit-catalog/
+"/ai/mcp-catalog-and-toolkit/toolkit/#install-an-mcp-server":
+  - /go/mcp-toolkit-install-mcp-server/
+"/ai/mcp-catalog-and-toolkit/toolkit/#install-an-mcp-client":
+  - /go/mcp-toolkit-install-mcp-client/
+"/ai/mcp-catalog-and-toolkit/toolkit/#example-use-claude-desktop-as-a-client":
+  - /go/mcp-toolkit-use-client-examples/
 
-# Desktop DMR
-
+ # Desktop DMR
 "/ai/model-runner/":
   - /go/model-runner/
 
@@ -343,3 +359,10 @@
   - /go/permissions/
 "/desktop/setup/install/mac-permission-requirements/#binding-privileged-ports":
   - /go/port-mapping/
+
+# Docker Hardened Images (DHI)
+"/dhi/how-to/customize/":
+  - /go/dhi-customization/
+
+"/dhi/how-to/customize/#create-an-oci-artifact-image":
+  - /go/dhi-customization-artifacts/

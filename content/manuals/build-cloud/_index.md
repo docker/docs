@@ -69,4 +69,4 @@ Once you've signed up and created a builder, continue by
 [setting up the builder in your local environment](./setup.md).
 
 For information about roles and permissions related to Docker Build Cloud, see
-[Roles and Permissions](/manuals/security/for-admins/roles-and-permissions.md#docker-build-cloud-permissions).
+[Roles and Permissions](/manuals/enterprise/security/roles-and-permissions.md#docker-build-cloud-permissions).

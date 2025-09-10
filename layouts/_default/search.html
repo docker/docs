@@ -7,26 +7,17 @@
     <h1 class="py-4">{{ .Title }}</h1>
     {{ .Content }}
     <div class="not-prose">
-      <div class="flex flex-col justify-between gap-8 lg:flex-row">
-        <input
-          type="search"
-          id="search-page-input"
+      <div class="flex justify-between gap-8 flex-row">
+        <input type="search" id="search-page-input"
           class="ring-3-gray-light-200 dark:ring-3-gray-dark-400 dark:bg-background-dark focus:ring-3-blue-light dark:focus:ring-3-blue-dark ring-3-[1.5px] w-full max-w-xl min-w-0 rounded-sm bg-white px-4 py-2 outline-hidden"
-          placeholder="Search…"
-          tabindex="0"
-        />
-        <div class="flex min-w-fit flex-grow flex-col items-center">
-          <p>Not finding what you're looking for?</p>
-          <button
-            class="open-kapa-widget flex w-fit items-center gap-2 rounded-sm px-2 py-1 font-semibold hover:bg-gray-200 dark:hover:bg-gray-800"
-          >
-            <span>Try Ask AI</span>
-            <img
-              height="24px"
-              width="24px"
-              src="{{ (resources.Get "images/ai-stars.svg").Permalink }}"
-              alt="AI sparkles!"
-            />
+          placeholder="Search…" tabindex="0" />
+        <div class="admonition flex flex-row items-center gap-1">
+          <p>Not finding what you're looking for? Try</p>
+          <button onclick="askAI('search-page-input')" class="topbar-button bg-blue-400/95 border-blue-300 hover:bg-blue-400/90">
+            <span>Ask&nbsp;AI</span>
+            <span class="icon-svg">
+              {{ partial "utils/svg.html" "/icons/sparkle.svg" }}
+            </span>
           </button>
         </div>
       </div>
@@ -133,14 +124,14 @@
         }
 
         // Generate the search results HTML
-        let resultsHTML = `<div class="text-gray-200 dark:text-gray-500 p-2">${resultsLength} results</div>`;
+        let resultsHTML = `<div class="text-gray-400 dark:text-gray-500 p-2">${resultsLength} results</div>`;
 
         // Map results to HTML
         resultsHTML += results
           .map((item) => {
             return `<div class="p-4">
          <div class="flex flex-col">
-           <span class="text-gray-200 dark:texty-gray-dark text-sm">${item.meta.breadcrumbs}</span>
+           <span class="text-gray-400 dark:texty-gray-dark text-sm">${item.meta.breadcrumbs}</span>
            <a class="link" href="${item.url}" data-query="${query}" data-index="${item.index}">${item.meta.title}</a>
            <p class="text-black dark:text-white overflow-hidden">…${item.excerpt}…</p>
          </div>
@@ -153,12 +144,12 @@
           resultsHTML += `<ul class="flex flex-wrap gap-1 pt-4 pb-8 justify-center text-sm">`;
           for (let i = 1; i <= resultsLength / 10; i++) {
             if (i == currentPage) {
-              resultsHTML += `<li class="text-center text-white">
-                <a href="/search/?q=${query}&page=${i}" class="block h-6 w-6 rounded-sm bg-blue-light dark:bg-blue-dark">${i}</a>
+              resultsHTML += `<li class="flex items-center justify-center">
+                 <a href="/search/?q=${query}&page=${i}" class="pagination-link bg-gray-200 dark:bg-gray-800 dark:text-gray-200">${i}</a>
               </li>`;
             } else {
-              resultsHTML += `<li class="text-center text-gray-200 dark:text-gray-500">
-                <a href="/search/?q=${query}&page=${i}" class="block h-6 w-6 rounded-sm bg-gray-200 dark:bg-gray-800">${i}</a>
+              resultsHTML += `<li class="flex items-center justify-center">
+                <a href="/search/?q=${query}&page=${i}" class="pagination-link bg-gray-100 dark:bg-gray-900 dark:text-gray-400">${i}</a>
               </li>`;
             }
           }
