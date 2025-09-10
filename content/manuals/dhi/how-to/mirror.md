@@ -169,7 +169,8 @@ attestations using `regctl`. You must [install
    $ export DEST_REG="registry.example.com"
    $ export DEST_REPO="mirror/dhi-python"
    $ export SRC_REPO="docker.io/<your-org>/dhi-python"
-   $ export SRC_TAG="3.13-alpine3.21"
+   $ export SRC_ATT_REPO="registry.scout.docker.com/<your-org>/dhi-python"
+   $ export TAG="3.13-alpine3.21"
    ```
 
 2. Sign in via `regctl` to Docker Hub, the Scout registry that contains
@@ -181,24 +182,25 @@ attestations using `regctl`. You must [install
    $ regctl registry login "$DEST_REG
    ```
 
-3. Get a digest for a specific tag and platform. For example, `linux/amd64`.
-
-   ```console
-   DIGEST="$(regctl manifest head "${SRC_REPO}:${SRC_TAG}" --platform linux/amd64)"
-   ```
-
-4. Mirror the image and attestations using `--referrers` and referrer endpoints:
+3. Mirror the image and attestations using `--referrers` and referrer endpoints:
 
    ```console
    $ regctl image copy \
-        "${SRC_REPO}@${DIGEST}" \
-        "${DEST_REG}/${DEST_REPO}@${DIGEST}"
+        "${SRC_REPO}:${TAG}" \
+        "${DEST_REG}/${DEST_REPO}:${TAG}" \
         --referrers \
-        --referrers-src "registry.scout.docker.com/<your-org>/dhi-python" \
-        --referrers-tgt "${DEST_REG}/${DEST_REPO}"
+        --referrers-src "${SRC_ATT_REPO}" \
+        --referrers-tgt "${DEST_REG}/${DEST_REPO}" \
+        --force-recursive
    ```
 
-5. Verify that artifacts were preserved.
+4. Verify that artifacts were preserved.
+
+   First, get a digest for a specific tag and platform. For example, `linux/amd64`.
+
+   ```console
+   DIGEST="$(regctl manifest head "${DEST_REG}/${DEST_REPO}:${TAG}" --platform linux/amd64)"
+   ```
 
    List attached artifacts (SBOM, provenance, VEX, vulnerability reports).
 
@@ -206,7 +208,7 @@ attestations using `regctl`. You must [install
    $ regctl artifact list "${DEST_REG}/${DEST_REPO}@${DIGEST}"
    ```
 
-   If you use Docker Scout:
+   Or, list attached artifacts with `docker scout`.
 
    ```console
    $ docker scout attest list "registry://${DEST_REG}/${DEST_REPO}@${DIGEST}"
