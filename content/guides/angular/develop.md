@@ -38,7 +38,7 @@ Create a file named `Dockerfile.dev` in your project root with the following con
 # =========================================
 
 # Define the Node.js version to use (Alpine for a small footprint)
-ARG NODE_VERSION=22.14.0-alpine
+ARG NODE_VERSION=24.7.0-alpine
 
 # Set the base image for development
 FROM node:${NODE_VERSION} AS dev

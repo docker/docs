@@ -126,8 +126,8 @@ Copy and replace the contents of your existing `Dockerfile` with the configurati
 # =========================================
 # Stage 1: Build the Angular Application
 # =========================================
-ARG NODE_VERSION=22.14.0-alpine
-ARG NGINX_VERSION=alpine3.21
+ARG NODE_VERSION=24.7.0-alpine
+ARG NGINX_VERSION=alpine3.22
 
 # Use a lightweight Node.js image for building (customizable via ARG)
 FROM node:${NODE_VERSION} AS builder
