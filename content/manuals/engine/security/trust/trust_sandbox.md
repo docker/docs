@@ -64,62 +64,68 @@ the `trustsandbox` container, the Notary server, and the Registry server.
 
 1. Create a new `trustsandbox` directory and change into it.
 
-        $ mkdir trustsandbox
-        $ cd trustsandbox
+```bash
+$ mkdir trustsandbox
+$ cd trustsandbox
+```
 
 2. Create a file called `compose.yaml` with your favorite editor.  For example, using vim:
 
-        $ touch compose.yaml
-        $ vim compose.yaml
+```bash
+$ touch compose.yaml
+$ vim compose.yaml
+```
 
 3. Add the following to the new file.
 
-        version: "2"
-        services:
-          notaryserver:
-            image: dockersecurity/notary_autobuilds:server-v0.5.1
-            volumes:
-              - notarycerts:/var/lib/notary/fixtures
-            networks:
-              - sandbox
-            environment:
-              - NOTARY_SERVER_STORAGE_TYPE=memory
-              - NOTARY_SERVER_TRUST_SERVICE_TYPE=local
-          sandboxregistry:
-            image: registry:2.4.1
-            networks:
-              - sandbox
-            container_name: sandboxregistry
-          trustsandbox:
-            image: docker:dind
-            networks:
-              - sandbox
-            volumes:
-              - notarycerts:/notarycerts
-            privileged: true
-            container_name: trustsandbox
-            entrypoint: ""
-            command: |-
-                sh -c '
-                    cp /notarycerts/root-ca.crt /usr/local/share/ca-certificates/root-ca.crt &&
-                    update-ca-certificates &&
-                    dockerd-entrypoint.sh --insecure-registry sandboxregistry:5000'
-        volumes:
-          notarycerts:
-            external: false
-        networks:
-          sandbox:
-            external: false
+```text
+version: "2"
+services:
+  notaryserver:
+    image: dockersecurity/notary_autobuilds:server-v0.5.1
+    volumes:
+      - notarycerts:/var/lib/notary/fixtures
+    networks:
+      - sandbox
+    environment:
+      - NOTARY_SERVER_STORAGE_TYPE=memory
+      - NOTARY_SERVER_TRUST_SERVICE_TYPE=local
+    sandboxregistry:
+      image: registry:2.4.1
+      networks:
+        - sandbox
+      container_name: sandboxregistry
+    trustsandbox:
+      image: docker:dind
+      networks:
+        - sandbox
+      volumes:
+        - notarycerts:/notarycerts
+      privileged: true
+      container_name: trustsandbox
+      entrypoint: ""
+      command: |-
+        sh -c '
+          cp /notarycerts/root-ca.crt /usr/local/share/ca-certificates/root-ca.crt &&
+          update-ca-certificates &&
+          dockerd-entrypoint.sh --insecure-registry sandboxregistry:5000'
+volumes:
+  notarycerts:
+    external: false
+networks:
+  sandbox:
+    external: false
+```
 
 4. Save and close the file.
 
 5. Run the containers on your local system.
 
-        $ docker compose up -d
+```bash
+$ docker compose up -d
+```
 
-    The first time you run this, the docker-in-docker, Notary server, and registry
-    images are downloaded from Docker Hub.
-
+The first time you run this, the docker-in-docker, Notary server, and registry images are downloaded from Docker Hub.
 
 ## Play in the sandbox
 
@@ -127,8 +133,9 @@ Now that everything is setup, you can go into your `trustsandbox` container and
 start testing Docker content trust. From your host machine, obtain a shell
 in the `trustsandbox` container.
 
-    $ docker container exec -it trustsandbox sh
-    / #
+```bash
+$ docker container exec -it trustsandbox sh
+```
 
 ### Test some trust operations
 
@@ -136,75 +143,75 @@ Now, pull some images from within the `trustsandbox` container.
 
 1. Download a `docker` image to test with.
 
-        / # docker pull docker/trusttest
-        docker pull docker/trusttest
-        Using default tag: latest
-        latest: Pulling from docker/trusttest
+```bash
+$ docker pull docker/trusttest
+```
 
-        b3dbab3810fc: Pull complete
-        a9539b34a6ab: Pull complete
-        Digest: sha256:d149ab53f8718e987c3a3024bb8aa0e2caadf6c0328f1d9d850b2a2a67f2819a
-        Status: Downloaded newer image for docker/trusttest:latest
+2. Tag it to be pushed to the sandbox registry:
 
-2. Tag it to be pushed to our sandbox registry:
-
-        / # docker tag docker/trusttest sandboxregistry:5000/test/trusttest:latest
+```bash
+$ docker tag docker/trusttest sandboxregistry:5000/test/trusttest:latest
+```
 
 3. Enable content trust.
 
-        / # export DOCKER_CONTENT_TRUST=1
+```bash
+$ export DOCKER_CONTENT_TRUST=1
+```
 
 4. Identify the trust server.
 
-        / # export DOCKER_CONTENT_TRUST_SERVER=https://notaryserver:4443
+```bash
+export DOCKER_CONTENT_TRUST_SERVER=https://notaryserver:4443
+```
 
-    This step is only necessary because the sandbox is using its own server.
-    Normally, if you are using the Docker Public Hub this step isn't necessary.
+This step is only necessary because the sandbox is using its own server.
+Normally, if you are using the Docker Public Hub this step isn't necessary.
 
 5. Pull the test image.
 
-        / # docker pull sandboxregistry:5000/test/trusttest
-        Using default tag: latest
-        Error: remote trust data does not exist for sandboxregistry:5000/test/trusttest: notaryserver:4443 does not have trust data for sandboxregistry:5000/test/trusttest
+```bash
+$ docker pull sandboxregistry:5000/test/trusttest
+```
 
-      You see an error, because this content doesn't exist on the `notaryserver` yet.
+You see an error, because this content doesn't exist on the notaryserver yet:
+
+```text
+Error: remote trust data does not exist for sandboxregistry:5000/test/trusttest:
+notaryserver:4443 does not have trust data for sandboxregistry:5000/test/trusttest
+```
 
 6. Push and sign the trusted image.
 
-        / # docker push sandboxregistry:5000/test/trusttest:latest
-        The push refers to a repository [sandboxregistry:5000/test/trusttest]
-        5f70bf18a086: Pushed
-        c22f7bc058a9: Pushed
-        latest: digest: sha256:ebf59c538accdf160ef435f1a19938ab8c0d6bd96aef8d4ddd1b379edf15a926 size: 734
-        Signing and pushing trust metadata
-        You are about to create a new root signing key passphrase. This passphrase
-        will be used to protect the most sensitive key in your signing system. Please
-        choose a long, complex passphrase and be careful to keep the password and the
-        key file itself secure and backed up. It is highly recommended that you use a
-        password manager to generate the passphrase and keep it safe. There will be no
-        way to recover this key. You can find the key in your config directory.
-        Enter passphrase for new root key with ID 27ec255:
-        Repeat passphrase for new root key with ID 27ec255:
-        Enter passphrase for new repository key with ID 58233f9 (sandboxregistry:5000/test/trusttest):
-        Repeat passphrase for new repository key with ID 58233f9 (sandboxregistry:5000/test/trusttest):
-        Finished initializing "sandboxregistry:5000/test/trusttest"
-        Successfully signed "sandboxregistry:5000/test/trusttest":latest
+```bash
+$ docker push sandboxregistry:5000/test/trusttest:latest
+```
 
-    Because you are pushing this repository for the first time, Docker creates
-    new root and repository keys and asks you for passphrases with which to
-    encrypt them. If you push again after this, it only asks you for repository
-    passphrase so it can decrypt the key and sign again.
+Because you are pushing this repository for the first time, Docker creates
+new root and repository keys and asks you for passphrases with which to
+encrypt them. You'll see prompts like:
+
+```text
+Enter passphrase for new root key with ID 27ec255:
+Repeat passphrase for new root key with ID 27ec255:
+Enter passphrase for new repository key with ID 58233f9:
+Repeat passphrase for new repository key with ID 58233f9:
+```
+
+If you push again after this, it only asks you for repository
+passphrase so it can decrypt the key and sign again.
 
 7. Try pulling the image you just pushed:
 
-        / # docker pull sandboxregistry:5000/test/trusttest
-        Using default tag: latest
-        Pull (1 of 1): sandboxregistry:5000/test/trusttest:latest@sha256:ebf59c538accdf160ef435f1a19938ab8c0d6bd96aef8d4ddd1b379edf15a926
-        sha256:ebf59c538accdf160ef435f1a19938ab8c0d6bd96aef8d4ddd1b379edf15a926: Pulling from test/trusttest
-        Digest: sha256:ebf59c538accdf160ef435f1a19938ab8c0d6bd96aef8d4ddd1b379edf15a926
-        Status: Downloaded newer image for sandboxregistry:5000/test/trusttest@sha256:ebf59c538accdf160ef435f1a19938ab8c0d6bd96aef8d4ddd1b379edf15a926
-        Tagging sandboxregistry:5000/test/trusttest@sha256:ebf59c538accdf160ef435f1a19938ab8c0d6bd96aef8d4ddd1b379edf15a926 as sandboxregistry:5000/test/trusttest:latest
+```bash
+$ docker pull sandboxregistry:5000/test/trusttest
+```
 
+This time the pull succeeds with verification output:
+
+```text
+Pull (1 of 1): sandboxregistry:5000/test/trusttest:latest@sha256:ebf59c538accdf160ef435f1a19938ab8c0d6bd96aef8d4ddd1b379edf15a926
+```
 
 ### Test with malicious images
 
@@ -217,70 +224,79 @@ data. Then, you try and pull it.
 2.  Open a new interactive terminal from your host, and obtain a shell into the
     `sandboxregistry` container.
 
-        $ docker container exec -it sandboxregistry bash
-        root@65084fc6f047:/#
+```bash
+$ docker container exec -it sandboxregistry bash
+```
 
 3.  List the layers for the `test/trusttest` image you pushed:
 
-    ```console
-    root@65084fc6f047:/# ls -l /var/lib/registry/docker/registry/v2/repositories/test/trusttest/_layers/sha256
-    total 12
-    drwxr-xr-x 2 root root 4096 Jun 10 17:26 a3ed95caeb02ffe68cdd9fd84406680ae93d633cb16422d00e8a7c22955b46d4
-    drwxr-xr-x 2 root root 4096 Jun 10 17:26 aac0c133338db2b18ff054943cee3267fe50c75cdee969aed88b1992539ed042
-    drwxr-xr-x 2 root root 4096 Jun 10 17:26 cc7629d1331a7362b5e5126beb5bf15ca0bf67eb41eab994c719a45de53255cd
-    ```
+```bash
+$ ls -l /var/lib/registry/docker/registry/v2/repositories/test/trusttest/_layers/sha256
+```
+
+You'll see output showing the layer directories.
 
 4.  Change into the registry storage for one of those layers (this is in a different directory):
 
-        root@65084fc6f047:/# cd /var/lib/registry/docker/registry/v2/blobs/sha256/aa/aac0c133338db2b18ff054943cee3267fe50c75cdee969aed88b1992539ed042
+```bash
+$ cd /var/lib/registry/docker/registry/v2/blobs/sha256/aa/aac0c133338db2b18ff054943cee3267fe50c75cdee969aed88b1992539ed042
+```
 
 5.  Add malicious data to one of the `trusttest` layers:
 
-        root@65084fc6f047:/# echo "Malicious data" > data
+```bash
+$ echo "Malicious data" > data
+```
 
 6.  Go back to your `trustsandbox` terminal.
 
 7.  List the `trusttest` image.
 
-        / # docker image ls | grep trusttest
-        REPOSITORY                            TAG                 IMAGE ID            CREATED             SIZE
-        docker/trusttest                      latest              cc7629d1331a        11 months ago       5.025 MB
-        sandboxregistry:5000/test/trusttest   latest              cc7629d1331a        11 months ago       5.025 MB
-        sandboxregistry:5000/test/trusttest   <none>              cc7629d1331a        11 months ago       5.025 MB
+```bash
+$ docker image ls | grep trusttest
+```
 
-8.  Remove the `trusttest:latest` image from our local cache.
+You should see something like:
 
-        / # docker image rm -f cc7629d1331a
-        Untagged: docker/trusttest:latest
-        Untagged: sandboxregistry:5000/test/trusttest:latest
-        Untagged: sandboxregistry:5000/test/trusttest@sha256:ebf59c538accdf160ef435f1a19938ab8c0d6bd96aef8d4ddd1b379edf15a926
-        Deleted: sha256:cc7629d1331a7362b5e5126beb5bf15ca0bf67eb41eab994c719a45de53255cd
-        Deleted: sha256:2a1f6535dc6816ffadcdbe20590045e6cbf048d63fd4cc753a684c9bc01abeea
-        Deleted: sha256:c22f7bc058a9a8ffeb32989b5d3338787e73855bf224af7aa162823da015d44c
+```text
+REPOSITORY                            TAG                 IMAGE ID            CREATED             SIZE
+docker/trusttest                      latest              cc7629d1331a        11 months ago       5.025 MB
+sandboxregistry:5000/test/trusttest   latest              cc7629d1331a        11 months ago       5.025 MB
+sandboxregistry:5000/test/trusttest   <none>              cc7629d1331a        11 months ago       5.025 MB
+```
 
-    Docker does not re-download images that it already has cached, but we want
-    Docker to attempt to download the tampered image from the registry and reject
-    it because it is invalid.
+8.  Remove the `trusttest:latest` image from local cache.
 
-9.  Pull the image again. This downloads the image from the registry, because we don't have it cached.
+```bash
+$ docker image rm -f cc7629d1331a
+```
 
-        / # docker pull sandboxregistry:5000/test/trusttest
-        Using default tag: latest
-        Pull (1 of 1): sandboxregistry:5000/test/trusttest:latest@sha256:35d5bc26fd358da8320c137784fe590d8fcf9417263ef261653e8e1c7f15672e
-        sha256:35d5bc26fd358da8320c137784fe590d8fcf9417263ef261653e8e1c7f15672e: Pulling from test/trusttest
+Docker does not re-download images that it already has cached, but we want
+Docker to attempt to download the tampered image from the registry and reject
+it because it is invalid.
 
-        aac0c133338d: Retrying in 5 seconds
-        a3ed95caeb02: Download complete
-        error pulling image configuration: unexpected EOF
+9. Pull the image again. This downloads the image from the registry, because it's not cached.
 
-      The pull did not complete because the trust system couldn't verify the
-      image.
+```bash
+$ docker pull sandboxregistry:5000/test/trusttest
+```
+
+The pull will fail with an error like:
+
+```text
+aac0c133338d: Retrying in 5 seconds
+a3ed95caeb02: Download complete
+error pulling image configuration: unexpected EOF
+```
+
+The pull did not complete because the trust system couldn't verify the
+image.
 
 ## More play in the sandbox
 
 Now, you have a full Docker content trust sandbox on your local system,
 feel free to play with it and see how it behaves. If you find any security
-issues with Docker, feel free to send us an email at <security@docker.com>.
+issues with Docker, feel free to send an email to <security@docker.com>.
 
 
 ## Clean up your sandbox
@@ -289,4 +305,6 @@ When you are done, and want to clean up all the services you've started and any
 anonymous volumes that have been created, just run the following command in the
 directory where you've created your Docker Compose file:
 
-        $ docker compose down -v
+```bash
+$ docker compose down -v
+```
