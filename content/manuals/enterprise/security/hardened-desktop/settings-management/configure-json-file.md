@@ -293,7 +293,7 @@ The following tables describe all available settings in the `admin-settings.json
 |:-------------------------------|---|:-------------------------------|---|
 |`containersProxy` | | Creates air-gapped containers. For more information see [Air-Gapped Containers](../air-gapped-containers.md).| Docker Desktop version 4.29 and later. |
 | `pac` | | Specifies a PAC file URL. For example, `"pac": "http://containerproxy/proxy.pac"`. | |
-| `embeddedPac`  | | Specifies an embedded PAC (Proxy Auto-Config) script. For example, `"embeddedPac": "function FindProxyForURL(url, host) { return \"http://containerproxy:2003\"; }"`. This setting takes precedence over HTTP, HTTPS, Proxy bypass and PAC server URL. |  Docker Desktop version 4.46 and later. |
+| `embeddedPac`  | | Specifies an embedded PAC (Proxy Auto-Config) script. For example, `"embeddedPac": "function FindProxyForURL(url, host) { return \"PROXY 192.168.92.1:2003\"; }"`. This setting takes precedence over HTTP, HTTPS, Proxy bypass and PAC server URL. |  Docker Desktop version 4.46 and later. |
 
 ### Linux VM settings
 
