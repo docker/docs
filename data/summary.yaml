@@ -153,8 +153,7 @@ Docker Offload:
 docker compose alpha:
   availability: Experimental
 Docker Debug:
-  subscription: [Pro, Team, Business]
-  requires: Docker Desktop [4.33.0](/manuals/desktop/release-notes.md#4330) and later
+  requires: Docker Desktop 4.46 and later
 Docker Desktop Archlinux:
   availability: Experimental
 Docker Desktop CLI:
