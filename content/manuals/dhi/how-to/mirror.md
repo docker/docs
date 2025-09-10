@@ -181,32 +181,21 @@ attestations using `regctl`. You must [install
    $ regctl registry login "$DEST_REG
    ```
 
-3. Mirror the image by digest from Docker Hub to your destination registry.
-
-   First, get a digest for a specific tag and platform. For example, `linux/amd64`.
+3. Get a digest for a specific tag and platform. For example, `linux/amd64`.
 
    ```console
    DIGEST="$(regctl manifest head "${SRC_REPO}:${SRC_TAG}" --platform linux/amd64)"
    ```
 
-   Then, copy the image by digest to ensure you get the exact same image.
-
-   ```console
-   regctl image copy \
-     "${SRC_REPO}@${DIGEST}" \
-     "${DEST_REG}/${DEST_REPO}@${DIGEST}"
-   ```
-
-4. Mirror the attestations from the Scout registry to your target registry using
-   `--referrers` and referrer endpoints:
+4. Mirror the image and attestations using `--referrers` and referrer endpoints:
 
    ```console
    $ regctl image copy \
-     --referrers \
-     --referrers-src  "registry.scout.docker.com/<your-org>/dhi-python" \
-     --referrers-tgt  "${DEST_REG}/${DEST_REPO}" \
-     "registry.scout.docker.com/<your-org>/dhi-python@${DIGEST}" \
-     "${DEST_REG}/${DEST_REPO}@${DIGEST}"
+        "${SRC_REPO}@${DIGEST}" \
+        "${DEST_REG}/${DEST_REPO}@${DIGEST}"
+        --referrers \
+        --referrers-src "registry.scout.docker.com/<your-org>/dhi-python" \
+        --referrers-tgt "${DEST_REG}/${DEST_REPO}"
    ```
 
 5. Verify that artifacts were preserved.
