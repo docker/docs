@@ -78,7 +78,7 @@ For consistency, please use the same responses shown in the example below when p
 | Question                                                   | Answer          |
 |------------------------------------------------------------|-----------------|
 | What application platform does your project use?           | Node            |
-| What version of Node do you want to use?                   | 22.14.0-alpine  |
+| What version of Node do you want to use?                   | 24.7.0-alpine  |
 | Which package manager do you want to use?                  | npm             |
 | Do you want to run "npm run build" before starting server? | yes             |
 | What directory is your build output to?                    | dist            |
@@ -124,8 +124,8 @@ Copy and replace the contents of your existing `Dockerfile` with the configurati
 # =========================================
 # Stage 1: Build the React.js Application
 # =========================================
-ARG NODE_VERSION=22.14.0-alpine
-ARG NGINX_VERSION=alpine3.21
+ARG NODE_VERSION=24.7.0-alpine
+ARG NGINX_VERSION=alpine3.22
 
 # Use a lightweight Node.js image for building (customizable via ARG)
 FROM node:${NODE_VERSION} AS builder
