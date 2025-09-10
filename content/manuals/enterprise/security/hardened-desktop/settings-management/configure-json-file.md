@@ -216,6 +216,26 @@ The following sample is an `admin-settings.json` file with common enterprise set
   "desktopTerminalEnabled": {
     "locked": false,
     "value": false
+  },
+  "enableInference": {
+    "locked": false,
+    "value": true
+  },
+  "enableInferenceTCP": {
+    "locked": false,
+    "value": true
+  },
+  "enableInferenceTCPPort": {
+    "locked": true,
+    "value": 12434
+  },
+  "enableInferenceCORS": {
+    "locked": true,
+    "value": ""
+  },
+  "enableInferenceGPUVariant": {
+    "locked": true,
+    "value": true
   }
 }
 ```
@@ -334,12 +354,13 @@ For more information, see [Networking](/manuals/desktop/features/networking.md#n
 
 ### AI settings
 
-| Parameter                                            | OS | Description                                                                                                                                                                                                                        | Version |
-|:-----------------------------------------------------|----|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
-| `enableInference`                                    |    | If `allowBetaFeatures` is true, setting `enableInference` to `true` enables [Docker Model Runner](/manuals/ai/model-runner/_index.md) by default. You can independently control this setting from the `allowBetaFeatures` setting. |         |
-| &nbsp; &nbsp; &nbsp; &nbsp; `enableInferenceTCP`     |    | Enable host-side TCP support. This setting requires Docker Model Runner setting to be enabled first.                                                                                                                               |         |
-| &nbsp; &nbsp; &nbsp; &nbsp; `enableInferenceTCPPort` |    | Specifies the exposed TCP port. This setting requires Docker Model Runner setting to be enabled first.                                                                                                                             |         |
-| &nbsp; &nbsp; &nbsp; &nbsp; `enableInferenceCORS`    |    | Specifies the allowed CORS origins. Empty string to deny all,`*` to accept all, or a list of comma-separated values. This setting requires Docker Model Runner setting to be enabled first.                                        |         |
+| Parameter                   | OS            | Description                                                                                                                                                                                                                         | Version |
+|:----------------------------|---------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
+| `enableInference`           |               | Setting `enableInference` to `true` enables [Docker Model Runner](/manuals/ai/model-runner/_index.md).                                                                                                                              |         |
+| `enableInferenceTCP`        |               | Enable host-side TCP support. This setting requires the Docker Model Runner setting to be enabled first.                                                                                                                                |         |
+| `enableInferenceTCPPort`    |               | Specifies the exposed TCP port. This setting requires the Docker Model Runner and Enable host-side TCP support settings to be enabled first.                                                                                            |         |
+| `enableInferenceCORS`       |               | Specifies the allowed CORS origins. Empty string to deny all,`*` to accept all, or a list of comma-separated values. This setting requires the Docker Model Runner and Enable host-side TCP support settings to be enabled first.       |         |
+| `enableInferenceGPUVariant` | Windows only  | Setting `enableInferenceGPUVariant` to `true` enables GPU-backed inference. The additional components required for this don't come by default with Docker Desktop, therefore they will be downloaded to `~/.docker/bin/inference`.  |         |
 
 ### Beta features
 

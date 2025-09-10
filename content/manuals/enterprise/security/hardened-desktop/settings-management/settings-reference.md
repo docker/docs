@@ -616,13 +616,15 @@ Builders settings lets you manage Buildx builder instances for advanced image-bu
 
 | Default value | Accepted values | Format   |
 |---------------|-----------------|----------|
-| `true`       | `true`, `false` | Boolean  |
+| `true`        | `true`, `false` | Boolean  |
 
 - **Description:** Docker Model Runner functionality for running AI models in containers.
 - **OS:** {{< badge color=blue text="All" >}}
 - **Use case:** Run and manage AI/ML models using Docker infrastructure.
 - **Configure this setting with:**
+    - **AI** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
     - Settings Management: `enableDockerAI` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
+    - Settings Management: **Enable Docker Model Runner** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
 
 #### Enable host-side TCP support
 
@@ -634,7 +636,9 @@ Builders settings lets you manage Buildx builder instances for advanced image-bu
 - **OS:** {{< badge color=blue text="All" >}}
 - **Use case:** Allow external applications to connect to Model Runner via TCP.
 - **Configure this setting with:**
+    - **AI** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
     - Settings Management: `enableDockerAI` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
+    - Settings Management: **Host-side TCP support** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
 
 > [!NOTE]
 >
@@ -650,8 +654,13 @@ Builders settings lets you manage Buildx builder instances for advanced image-bu
 - **OS:** {{< badge color=blue text="All" >}}
 - **Use case:** Customize the port for Model Runner TCP connectivity.
 - **Configure this setting with:**
-    - **Beta features** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
+    - **AI** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
     - Settings Management: `enableInferenceTCP` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
+    - Settings Management: **Host-side TCP port** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
+
+> [!NOTE]
+>
+> This setting requires Docker Model Runner and host-side TCP support settings to be enabled first.
 
 ##### CORS Allowed Origins
 
@@ -663,8 +672,27 @@ Builders settings lets you manage Buildx builder instances for advanced image-bu
 - **OS:** {{< badge color=blue text="All" >}}
 - **Use case:** Allow web applications to connect to Model Runner services.
 - **Configure this setting with:**
-    - **Beta features** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
+    - **AI** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
     - Settings Management: `enableInferenceCORS` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
+    - Settings Management: **CORS Allowed Origins** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
+
+> [!NOTE]
+>
+> This setting requires Docker Model Runner and host-side TCP support settings to be enabled first.
+
+#### Enable GPU-backed inference
+
+| Default value | Accepted values | Format   |
+|---------------|-----------------|----------|
+| `false`       | `true`, `false` | Boolean  |
+
+- **Description:** GPU-backed inference.
+- **OS:** {{< badge color=blue text="Windows only" >}}
+- **Use case:** Enable GPU-backed inference. Additional components will be downloaded to ~/.docker/bin/inference.
+- **Configure this setting with:**
+    - **AI** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
+    - Settings Management: `enableInferenceGPUVariant` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
+    - Settings Management: **Enable GPU-backed inference** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
 
 ## Kubernetes settings
 
