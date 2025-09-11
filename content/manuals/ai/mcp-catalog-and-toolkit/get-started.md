@@ -1,9 +1,9 @@
 ---
 title: Get started with Docker MCP Toolkit
-linkTitle: Get started with MCP Toolkit
+linkTitle: Get started
 description: Learn how to quickly install and use the MCP Toolkit to set up servers and clients.
 keywords: Docker MCP Toolkit, MCP server, MCP client, AI agents
-weight: 09
+weight: 10
 ---
 
 {{< summary-bar feature_name="Docker MCP Toolkit" >}}
@@ -16,8 +16,8 @@ Before you begin, make sure you meet the following requirements to get started w
 
 ### Download and install Docker Desktop
 
-- Install [Docker Desktop v4.42.0](/manuals/desktop/release-notes.md#4420) or higher.
-- To try the MCP Toolkit Learning center walkthrough, you must install [Docker Desktop 4.46.0](/manuals/desktop/release-notes.md#4460) or higher.
+- Install [Docker Desktop version 4.42.0](/manuals/desktop/release-notes.md#4420) and later.
+- To try the MCP Toolkit Learning center walkthrough, you must install [Docker Desktop version 4.46.0](/manuals/desktop/release-notes.md#4460) and later.
 
 ### Enable Docker MCP Toolkit
 
@@ -26,8 +26,8 @@ Before you begin, make sure you meet the following requirements to get started w
 3. Select **Apply**.
 
 There are multiple ways to get started with Docker MCP Toolkit. You can:
--  Try the [Learning center](#learning-center) walkthrough in Docker Desktop , available in [Docker Desktop 4.46.0](/manuals/desktop/release-notes.md#4460) and higher.
--  Alternatively, follow the step-by-step instructions on this page to use Docker Desktop or the CLI to [Install an MCP server](#install-an-mcp-server), [Add a client, and test your setup](#install-an-mcp-client-and-test-your-setup) with example prompts.
+-  Try the [Learning center](#learning-center) walkthrough in Docker Desktop, available in [Docker Desktop version 4.46.0](/manuals/desktop/release-notes.md#4460) and later.
+-  Alternatively, follow the step-by-step instructions on this page to use Docker Desktop or the CLI to [Install an MCP server](#install-an-mcp-server), [add a client, and test your setup](#install-an-mcp-client-and-test-your-setup) with example prompts.
 
 ## Learning center
 
@@ -41,7 +41,7 @@ On the **MCP Toolkit** page, Docker Desktop shows the **Get started** walkthroug
 {{< tab name="From Docker Desktop">}}
 
 1. In Docker Desktop, select **MCP Toolkit** and select the **Catalog** tab.
-2. Search for **GitHub Official** server from the catalog and select the plus icon (+) to add it.
+2. Search for the **GitHub Official** server from the catalog and then select the plus icon to add it.
 3. In the **GitHub Official** server page, select the **Configuration** tab and select **OAuth**.
 
    >[!NOTE]
@@ -51,32 +51,38 @@ On the **MCP Toolkit** page, Docker Desktop shows the **Get started** walkthroug
    Your browser opens the GitHub authorization page. Follow the on-screen instructions to [authenticate via OAuth](/manuals/ai/mcp-catalog-and-toolkit/toolkit.md#authenticate-via-oauth).
 
 4. Return to Docker Desktop when the authentication process is complete.
+5. Search for the **Playwright** server from the catalog and add it.
 
 {{< /tab >}}
 {{< tab name="From the Docker CLI">}}
 
-1. In a terminal window, run:
+1. Add the GitHub Official MCP server. Run:
 
-   ```bash
-   docker mcp server enable github-official
+   ```console
+   $ docker mcp server enable github-official
    ```
 
-   This adds the GitHub Official MCP server.
-2. Now, authenticate the server by running the following command:
+2. Authenticate the server by running the following command:
 
-   ```bash
-   docker mcp oauth authorize github
+   ```console
+   $ docker mcp oauth authorize github
    ```
+
    >[!NOTE]
    >
    > The type of configuration required depends on the server you select. For the GitHub Official server, you must authenticate using OAuth.
 
    Your browser opens the GitHub authorization page. Follow the on-screen instructions to [authenticate via OAuth](/manuals/ai/mcp-catalog-and-toolkit/toolkit.md#authenticate-via-oauth).
 
+3. Add the **Playwright** server. Run:
+
+   ```console
+   $ docker mcp server enable playwright
+   ```
 {{< /tab >}}
 {{< /tabs >}}
 
-You’ve now successfully added an MCP server. Next, install an MCP client and test your setup. with an example prompt.
+You’ve now successfully added an MCP server. Next, install an MCP client and test your setup with an example prompt.
 
 
 ## Install an MCP client and test your setup
@@ -86,7 +92,7 @@ After you've installed MCP servers, you can add clients to the MCP Toolkit. Thes
 {{< tabs group="release" >}}
 {{< tab name="From Docker Desktop">}}
 
-1.  In Docker Desktop, select **MCP Toolkit** and select the **Clients** tab.
+1. In Docker Desktop, select **MCP Toolkit** and select the **Clients** tab.
 2. Find **Claude Desktop** and select **Connect**.
 
    If Claude Desktop isn't installed, select **Download** to install it, then select **Connect**.
@@ -96,9 +102,9 @@ After you've installed MCP servers, you can add clients to the MCP Toolkit. Thes
    ```text
    Take a screenshot of the header element on docs.docker.com
    ```
-Claude prompts you for permissions and shares a screenshot of the header element from the Docker documentation page.
+   Claude prompts you for permissions and shares a screenshot of the header element from the Docker documentation page.
 
-![Screenshot showing the header of Docker docs.](./images/claude-desktop-example.png)
+   ![Screenshot showing the header of Docker docs.](./images/claude-desktop-example.png)
 
 
 {{< /tab >}}
@@ -106,18 +112,18 @@ Claude prompts you for permissions and shares a screenshot of the header element
 
 1. In a terminal window, run the following commands to connect the Claude Desktop client:
 
-   ```bash
-   docker mcp client connect claude-desktop --global
+   ```console
+   $ docker mcp client connect claude-desktop --global
    ```
 2. Restart Claude Desktop if it's running, and it can now access all the servers in the MCP Toolkit.
-3. Open Claude Desktop and run a test by submitting the following prompt using the Sonnet Opus 4.1 model:
+3. Open Claude Desktop and run a test by submitting the following prompt using the Sonnet 4 model:
 
    ```text
    Take a screenshot of the header element on docs.docker.com
    ```
-Claude prompts you for permissions and shares a screenshot of the header element from the Docker documentation page.
+   Claude prompts you for permissions and shares a screenshot of the header element from the Docker documentation page.
 
-![Screenshot showing the header of Docker docs.](./images/claude-desktop-example.png)
+   ![Screenshot showing the header of Docker docs.](./images/claude-desktop-example.png)
 
 {{< /tab >}}
 {{< /tabs >}}

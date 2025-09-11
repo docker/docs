@@ -3,7 +3,7 @@ title: Docker Hub MCP server
 linkTitle: Hub MCP server
 description: The Docker Hub MCP Server makes Docker Hub image metadata accessible to LLMs for content discovery.
 keywords: Docker Hub MCP Server, Hub MCP server, Hub MCP
-weight: 30
+weight: 40
 ---
 
 The Docker Hub MCP Server is a Model Context Protocol (MCP) server that
