@@ -63,6 +63,12 @@ replaced by the new hardened image.
 
 ### Step 2: Update the runtime image in your Dockerfile
 
+> [!NOTE]
+>
+> Multi-stage builds are recommended to keep your final image minimal and
+> secure. Single-stage builds are supported, but they include the full `dev` image
+> and therefore result in a larger image with a broader attack surface.
+
 To ensure that your final image is as minimal as possible, you should use a
 [multi-stage build](/manuals/build/building/multi-stage.md). All stages in your
 Dockerfile should use a hardened image. While intermediary stages will typically
@@ -77,8 +83,15 @@ examples of how to update your Dockerfile.
 
 ## Example Dockerfile migrations
 
-The following migration examples show a Dockerfile before the migration and
-after the migration.
+The following examples show a Dockerfile before and after migration. Each
+example includes both a multi-stage build (recommended for minimal, secure
+images) and a single-stage build (supported, but results in a larger image with
+a broader attack surface).
+
+> [!NOTE]
+>
+> Multi-stage builds are recommended for most use cases. Single-stage builds are
+> supported for simplicity, but come with tradeoffs in size and security.
 
 ### Go example
 
@@ -98,7 +111,7 @@ ENTRYPOINT ["/app/main"]
 ```
 
 {{< /tab >}}
-{{< tab name="After" >}}
+{{< tab name="After (multi-stage)" >}}
 
 ```dockerfile
 #syntax=docker/dockerfile:1
@@ -118,6 +131,22 @@ COPY --from=builder /app/main  /app/main
 
 ENTRYPOINT ["/app/main"]
 ```
+
+{{< /tab >}}
+{{< tab name="After (single-stage)" >}}
+
+```dockerfile
+#syntax=docker/dockerfile:1
+
+FROM <your-namespace>/dhi-golang:1-alpine3.21-dev
+
+WORKDIR /app
+ADD . ./
+RUN CGO_ENABLED=0 GOOS=linux go build -a -ldflags="-s -w" --installsuffix cgo -o main .
+
+ENTRYPOINT ["/app/main"]
+```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -142,7 +171,7 @@ CMD ["node", "index.js"]
 ```
 
 {{< /tab >}}
-{{< tab name="After" >}}
+{{< tab name="After (multi-stage)" >}}
 
 ```dockerfile
 #syntax=docker/dockerfile:1
@@ -167,6 +196,25 @@ WORKDIR /app
 
 CMD ["index.js"]
 ```
+
+{{< /tab >}}
+{{< tab name="After (single-stage)" >}}
+
+```dockerfile
+#syntax=docker/dockerfile:1
+
+FROM <your-namespace>/dhi-node:23-alpine3.21-dev
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+RUN npm install
+
+COPY image.jpg ./image.jpg
+COPY . .
+
+CMD ["index.js"]
+```
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -206,7 +254,7 @@ ENTRYPOINT [ "python", "/app/image.py" ]
 ```
 
 {{< /tab >}}
-{{< tab name="After" >}}
+{{< tab name="After (multi-stage)" >}}
 
 ```dockerfile
 #syntax=docker/dockerfile:1
@@ -241,11 +289,36 @@ ENTRYPOINT [ "python", "/app/image.py" ]
 ```
 
 {{< /tab >}}
+{{< tab name="After (single-stage)" >}}
+
+```dockerfile
+#syntax=docker/dockerfile:1
+
+FROM <your-namespace>/dhi-python:3.13-alpine3.21-dev
+
+ENV LANG=C.UTF-8
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+ENV PATH="/app/venv/bin:$PATH"
+
+WORKDIR /app
+
+RUN python -m venv /app/venv
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY image.py image.png ./
+
+ENTRYPOINT [ "python", "/app/image.py" ]
+```
+
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Use Gordon
 
-Alternatively, you can request assistance to 
-[Gordon](/manuals/ai/gordon/_index.md), Docker's AI-powered assistant, to migrate your Dockerfile:
+Alternatively, you can request assistance to
+[Gordon](/manuals/ai/gordon/_index.md), Docker's AI-powered assistant, to
+migrate your Dockerfile:
 
 {{% include "gordondhi.md" %}}
