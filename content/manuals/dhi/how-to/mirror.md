@@ -163,12 +163,21 @@ attestations using `regctl`. You must [install
 1. Set environment variables for your specific environment. Replace the
    placeholders with your actual values.
 
+  In this example, you use a Docker username to represent a member of the Docker
+  Hub organization that the DHI repositories are mirrored in. Prepare a
+  [personal access token (PAT)](../../security/access-tokens.md) for the user
+  with `read only` access. Alternatively, you can use an organization namespace and
+  an [organization access token
+  (OAT)](../../enterprise/security/access-tokens.md) to sign in to Docker Hub, but OATs
+  are not yet supported for `registry.scout.docker.com`.
+
    ```console
    $ export DOCKER_USERNAME="YOUR_DOCKER_USERNAME"
    $ export DOCKER_PAT="YOUR_DOCKER_PAT"
    $ export DOCKER_ORG="YOUR_DOCKER_ORG"
    $ export DEST_REG="registry.example.com"
    $ export DEST_REPO="mirror/dhi-python"
+   $ export DEST_REG_USERNAME="YOUR_DESTINATION_REGISTRY_USERNAME"
    $ export DEST_REG_TOKEN="YOUR_DESTINATION_REGISTRY_TOKEN"
    $ export SRC_REPO="docker.io/${DOCKER_ORG}/dhi-python"
    $ export SRC_ATT_REPO="registry.scout.docker.com/${DOCKER_ORG}/dhi-python"
@@ -181,7 +190,7 @@ attestations using `regctl`. You must [install
    ```console
    $ echo $DOCKER_PAT | regctl registry login -u "$DOCKER_USERNAME" --pass-stdin docker.io
    $ echo $DOCKER_PAT | regctl registry login -u "$DOCKER_USERNAME" --pass-stdin registry.scout.docker.com
-   $ echo $DEST_REG_TOKEN | regctl registry login -u "$DOCKER_USERNAME" --pass-stdin "$DEST_REG"
+   $ echo $DEST_REG_TOKEN | regctl registry login -u "$DEST_REG_USERNAME" --pass-stdin "$DEST_REG"
    ```
 
 3. Mirror the image and attestations using `--referrers` and referrer endpoints:
