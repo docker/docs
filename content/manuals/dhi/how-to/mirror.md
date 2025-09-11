@@ -166,10 +166,12 @@ attestations using `regctl`. You must [install
    ```console
    $ export DOCKER_USERNAME="YOUR_DOCKER_USERNAME"
    $ export DOCKER_PAT="YOUR_DOCKER_PAT"
+   $ export DOCKER_ORG="YOUR_DOCKER_ORG"
    $ export DEST_REG="registry.example.com"
    $ export DEST_REPO="mirror/dhi-python"
-   $ export SRC_REPO="docker.io/<your-org>/dhi-python"
-   $ export SRC_ATT_REPO="registry.scout.docker.com/<your-org>/dhi-python"
+   $ export DEST_REG_TOKEN="YOUR_DESTINATION_REGISTRY_TOKEN"
+   $ export SRC_REPO="docker.io/${DOCKER_ORG}/dhi-python"
+   $ export SRC_ATT_REPO="registry.scout.docker.com/${DOCKER_ORG}/dhi-python"
    $ export TAG="3.13-alpine3.21"
    ```
 
@@ -177,9 +179,9 @@ attestations using `regctl`. You must [install
    the attestations, and your destination registry.
 
    ```console
-   $ regctl registry login -u "$DOCKER_USERNAME" --pass-stdin docker.io
-   $ regctl registry login -u "$DOCKER_USERNAME" --pass-stdin registry.scout.docker.com
-   $ regctl registry login "$DEST_REG
+   $ echo $DOCKER_PAT | regctl registry login -u "$DOCKER_USERNAME" --pass-stdin docker.io
+   $ echo $DOCKER_PAT | regctl registry login -u "$DOCKER_USERNAME" --pass-stdin registry.scout.docker.com
+   $ echo $DEST_REG_TOKEN | regctl registry login -u "$DOCKER_USERNAME" --pass-stdin "$DEST_REG"
    ```
 
 3. Mirror the image and attestations using `--referrers` and referrer endpoints:
