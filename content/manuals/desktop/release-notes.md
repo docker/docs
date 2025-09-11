@@ -66,7 +66,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 #### For Windows
 
 - Improved the security of Docker Model Runner by enabling sandboxing of the `llama.cpp` inference processes. 
-- Fixed an issue where certain WSL distros would fail to integrate. Fixes [docker/for-windows#14686](https://github.com/docker/for-win/issues/14686)
 
 #### For Linux
 
