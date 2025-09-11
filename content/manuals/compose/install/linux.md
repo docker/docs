@@ -40,6 +40,14 @@ To install the Docker Compose plugin on Linux, you can either:
         $ sudo apt-get update
         $ sudo apt-get install docker-compose-plugin
         ```
+
+        > [!NOTE]
+        > 
+        > **Note for Ubuntu 24.04 users:** The `docker-compose-plugin` package may not be available in the default Ubuntu repositories. You can install Docker Compose using:
+
+        ```console
+        $ sudo apt-get install docker-compose
+        ```
     * For RPM-based distributions, run:
 
         ```console
