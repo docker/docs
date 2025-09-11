@@ -11,6 +11,10 @@ weight: 30
 description: Learn about Docker's MCP catalog on Docker Hub
 keywords: Docker, ai, mcp servers, ai agents, extension, docker desktop, llm, docker hub
 grid:
+ - title: Get started
+   description: Learn how to quickly install and use the MCP Toolkit to set up servers and clients.
+   icon: explore
+   link: /ai/mcp-catalog-and-toolkit/get-started/
  - title: MCP Catalog
    description: Learn about the benefits of the MCP Catalog, how you can use it, and how you can contribute
    icon: hub
@@ -23,10 +27,13 @@ grid:
 
 {{< summary-bar feature_name="Docker MCP Catalog and Toolkit" >}}
 
-Docker MCP Catalog and Toolkit is a solution for securely building, sharing, and
-running MCP tools.
+[Model Context Protocol](https://modelcontextprotocol.io/introduction) (MCP) is
+an open protocol that standardizes how applications provide context and
+additional functionality to large language models. MCP functions as a
+client-server protocol, where the client, for example an application such as [Gordon](/manuals/ai/gordon/_index.md) or Claude Desktop, sends requests, and the server processes those requests to deliver the necessary context to the AI.
 
-It simplifies the developer experience across these areas:
+Docker MCP Catalog and Toolkit is a solution for securely building, sharing, and
+running MCP tools. It simplifies the developer experience across the following areas:
 
 - Discovery: A central catalog with verified, versioned tools.
 - Credential management: OAuth-based and secure by default.
@@ -44,7 +51,7 @@ With Docker Hub and the MCP Toolkit, you can:
 
 ## MCP servers
 
-MCP servers are systems that use the [Model Context Protocol](https://www.anthropic.com/news/model-context-protocol) (MCP) to help manage
+MCP servers are systems that use the [Model Context Protocol](https://modelcontextprotocol.io/introduction) (MCP) to help manage
 and run AI or machine learning models more efficiently. MCP allows different
 parts of a system, like the model, data, and runtime environment, to
 communicate in a standardized way. You can see them as
