@@ -245,6 +245,49 @@ docker build github.com/docker/buildx#d4f088e689b41353d74f1a0bfcd6d7c0b213aed2
 docker build github.com/docker/buildx#d4f088e
 ```
 
+#### URL queries
+
+Starting with Buildx v0.28, BuildKit v0.24 and Dockerfile v1.18, URL queries are
+also supported. URL queries are more structured and recommended over [URL fragments](#url-fragments):
+
+```console
+$ docker buildx build 'https://github.com/user/myrepo.git?branch=container&subdir=docker'
+```
+
+| Build syntax suffix                          | Commit used                   | Build context used |
+| -------------------------------------------- | ----------------------------- | ------------------ |
+| `myrepo.git`                                 | `refs/heads/<default branch>` | `/`                |
+| `myrepo.git?tag=mytag`                       | `refs/tags/mytag`             | `/`                |
+| `myrepo.git?branch=mybranch`                 | `refs/heads/mybranch`         | `/`                |
+| `myrepo.git?ref=pull/42/head`                | `refs/pull/42/head`           | `/`                |
+| `myrepo.git?subdir=myfolder`                 | `refs/heads/<default branch>` | `/myfolder`        |
+| `myrepo.git?branch=master&subdir=myfolder`   | `refs/heads/master`           | `/myfolder`        |
+| `myrepo.git?tag=mytag&subdir=myfolder`       | `refs/tags/mytag`             | `/myfolder`        |
+| `myrepo.git?branch=mybranch&subdir=myfolder` | `refs/heads/mybranch`         | `/myfolder`        |
+
+A commit hash can be specified as a `checksum` (alias `commit`) query, along with
+`tag`, `branch`, or `ref` queries to verify that the reference resolves to the
+expected commit:
+
+```console
+$ docker buildx build 'https://github.com/moby/buildkit.git?tag=v0.21.1&checksum=66735c67'
+```
+
+If it doesn't match, the build fails:
+
+```console
+$ docker buildx build 'https://github.com/user/myrepo.git?tag=v0.1.0&commit=deadbeef'
+...
+#3 [internal] load git source https://github.com/user/myrepo.git?tag=v0.1.0-rc1&commit=deadbeef
+#3 0.484 bb41e835b6c3523c7c45b248cf4b45e7f862bc42       refs/tags/v0.1.0
+#3 ERROR: expected checksum to match deadbeef, got bb41e835b6c3523c7c45b248cf4b45e7f862bc42
+```
+
+> [!NOTE]
+>
+> Short commit hash is supported with `checksum` (alias `commit`) query but for
+> `ref`, only the full hash of the commit is supported.
+
 #### Keep `.git` directory
 
 By default, BuildKit doesn't keep the `.git` directory when using Git contexts.
