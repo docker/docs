@@ -163,13 +163,13 @@ attestations using `regctl`. You must [install
 1. Set environment variables for your specific environment. Replace the
    placeholders with your actual values.
 
-  In this example, you use a Docker username to represent a member of the Docker
-  Hub organization that the DHI repositories are mirrored in. Prepare a
-  [personal access token (PAT)](../../security/access-tokens.md) for the user
-  with `read only` access. Alternatively, you can use an organization namespace and
-  an [organization access token
-  (OAT)](../../enterprise/security/access-tokens.md) to sign in to Docker Hub, but OATs
-  are not yet supported for `registry.scout.docker.com`.
+   In this example, you use a Docker username to represent a member of the Docker
+   Hub organization that the DHI repositories are mirrored in. Prepare a
+   [personal access token (PAT)](../../security/access-tokens.md) for the user
+   with `read only` access. Alternatively, you can use an organization namespace and
+   an [organization access token
+   (OAT)](../../enterprise/security/access-tokens.md) to sign in to Docker Hub, but OATs
+   are not yet supported for `registry.scout.docker.com`.
 
    ```console
    $ export DOCKER_USERNAME="YOUR_DOCKER_USERNAME"
