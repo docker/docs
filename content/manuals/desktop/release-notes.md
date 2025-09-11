@@ -34,6 +34,44 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 >
 > If you're experiencing malware detection issues on Mac, follow the steps documented in [docker/for-mac#7527](https://github.com/docker/for-mac/issues/7527).
 
+## 4.46.0
+
+{{< release-date date="2025-09-11" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.46.0" build_path="/TODO/" >}}
+
+### New
+
+- Added a new Learning center walkthrough for Docker MCP Toolkit and other onboarding improvements.
+- Administrators can now control PAC configurations with Settings Management. 
+- The update experience has been redesigned to make it easier to understand and manage updates for Docker Desktop and its components.
+
+### Upgrades
+
+- [Docker Buildx v0.28.0](https://github.com/docker/buildx/releases/tag/v0.28.0)
+- [Docker Engine v28.4.0](https://docs.docker.com/engine/release-notes/28/#2840)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- With the Docker CLI, you can now set the `GODEBUG` environment variable when the key-value pair (`"GODEBUG":"..."`) exists inside the Docker context metadata. This means certificates that have negative serial numbers in the CLI binaries are supported by default.
+- Updated the Docker Subscription Service Agreement link to point to the latest version.
+
+#### For Mac
+
+- Improved the security of Docker Model Runner by enabling sandboxing of the `llama.cpp` inference processes.
+- Fixed a bug which caused Docker Desktop to start slowly and appear frozen. Fixes [docker/for-mac#7671](https://github.com/docker/for-mac/issues/7671).
+
+#### For Windows
+
+- Improved the security of Docker Model Runner by enabling sandboxing of the `llama.cpp` inference processes. 
+- Fixed an issue where certain WSL distros would fail to integrate. Fixes [docker/for-windows#14686](https://github.com/docker/for-win/issues/14686)
+
+#### For Linux
+
+- Fixed a path issue in the RHEL post-uninstall sequence.
+
 ## 4.45.0
 
 {{< release-date date="2025-08-28" >}}
@@ -43,7 +81,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ### New
 
 - [Docker Model Runner](/manuals/ai/model-runner/_index.md) is now generally available.
-- In-product release highlights has a new look and feel. 
 
 ### Upgrades
 
