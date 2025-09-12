@@ -32,6 +32,13 @@ Keep the following things in mind:
   overlay (to communicate across multiple Docker hosts), these solutions may be
   better in the long term.
 
+- Containers attached to a macvlan network cannot communicate with the host
+  directly, this is a restriction in the Linux kernel. If you need communication
+  between the host and the containers, you can connect the containers to a
+  bridge network as well as the macvlan. It is also possible to create a
+  macvlan interface on the host with the same parent interface, and assign it
+  an IP address in the Docker network's subnet.
+
 ## Options
 
 The following table describes the driver-specific options that you can pass to
