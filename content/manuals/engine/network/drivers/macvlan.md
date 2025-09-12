@@ -101,15 +101,23 @@ $ docker network create -d macvlan \
 
 ### Use an IPvlan instead of Macvlan
 
-In the above example, you are still using a L3 bridge. You can use `ipvlan`
-instead, and get an L2 bridge. Specify `-o ipvlan_mode=l2`.
+An `ipvlan` network created with option `-o ipvlan_mode=l2` is similar
+to a macvlan network. The main difference is that the `ipvlan` driver
+doesn't assign a MAC address to each container, the layer-2 network stack
+is shared by devices in the ipvlan network. So, containers use the parent
+interface's MAC address.
+
+The network will see fewer MAC addresses, and the host's MAC address will be
+associated with the IP address of each container.
+
+The choice of network type depends on your environment and requirements.
+There are some notes about the trade-offs in the [Linux kernel
+documentation](https://docs.kernel.org/networking/ipvlan.html#what-to-choose-macvlan-vs-ipvlan).
 
 ```console
 $ docker network create -d ipvlan \
     --subnet=192.168.210.0/24 \
-    --subnet=192.168.212.0/24 \
     --gateway=192.168.210.254 \
-    --gateway=192.168.212.254 \
      -o ipvlan_mode=l2 -o parent=eth0 ipvlan210
 ```
 
