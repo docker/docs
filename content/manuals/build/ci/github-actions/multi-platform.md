@@ -177,7 +177,7 @@ jobs:
           retention-days: 1
 
   merge:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     needs:
       - build
     steps:
