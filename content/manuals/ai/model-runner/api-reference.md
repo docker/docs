@@ -88,10 +88,10 @@ DMR supports the following OpenAI endpoints:
   POST /engines/llama.cpp/v1/chat/completions
   ```
 
-- [Create completions](https://platform.openai.com/docs/api-reference/completions/create):
+- [Create chat completions](https://platform.openai.com/docs/api-reference/chat/create):
 
   ```text
-  POST /engines/llama.cpp/v1/completions
+  POST /engines/llama.cpp/v1/chat/completions
   ```
 
 
