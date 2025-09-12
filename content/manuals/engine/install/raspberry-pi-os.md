@@ -160,6 +160,21 @@ Docker from the repository.
    {{< /tab >}}
    {{< /tabs >}}
 
+    > [!NOTE]
+    >
+    > The Docker service starts automatically after installation. To verify that
+    > Docker is running, use:
+    > 
+    > ```console
+    > $ sudo systemctl status docker
+    > ```
+    >
+    > Some systems may have this behavior disabled and will require a manual start:
+    >
+    > ```console
+    > $ sudo systemctl start docker
+    > ```
+
 3. Verify that the installation is successful by running the `hello-world` image:
 
    ```console
@@ -213,12 +228,24 @@ download a new file each time you want to upgrade Docker Engine.
      ./docker-compose-plugin_<version>_<arch>.deb
    ```
 
-   The Docker daemon starts automatically.
+    > [!NOTE]
+    >
+    > The Docker service starts automatically after installation. To verify that
+    > Docker is running, use:
+    > 
+    > ```console
+    > $ sudo systemctl status docker
+    > ```
+    >
+    > Some systems may have this behavior disabled and will require a manual start:
+    >
+    > ```console
+    > $ sudo systemctl start docker
+    > ```
 
 6. Verify that the installation is successful by running the `hello-world` image:
 
    ```console
-   $ sudo service docker start
    $ sudo docker run hello-world
    ```
 
