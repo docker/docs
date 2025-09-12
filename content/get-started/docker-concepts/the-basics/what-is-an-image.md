@@ -12,7 +12,7 @@ aliases:
 
 ## Explanation
 
-Seeing a [container](./what-is-a-container.md) is an isolated process, where does it get its files and configuration? How do you share those environments?
+Seeing as a [container](./what-is-a-container.md) is an isolated process, where does it get its files and configuration? How do you share those environments?
 
 That's where container images come in. A container image is a standardized package that includes all of the files, binaries, libraries, and configurations to run a container.
 
