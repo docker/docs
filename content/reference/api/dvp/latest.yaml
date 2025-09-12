@@ -686,7 +686,7 @@ components:
       enum: [repo,namespace]
   securitySchemes:
     HubAuth:
-      type: https
+      type: http
       scheme: bearer
       bearerFormat: JWT
       description: |
