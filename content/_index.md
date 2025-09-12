@@ -25,6 +25,17 @@ grid:
         url: "/dhi/get-started/"
       - text: "Use an image"
         url: "/dhi/how-to/use/"
+  - title: Docker MCP Catalog and Toolkit
+    icon: /icons/toolkit.svg
+    description: |
+      Augment your AI workflows with MCP servers.
+    links:
+      - text: "Overview"
+        url: "/ai/mcp-catalog-and-toolkit/"
+      - text: "Quickstart"
+        url: "/ai/mcp-catalog-and-toolkit/get-started/"
+      - text: "Explore the MCP Toolkit"
+        url: "/ai/mcp-catalog-and-toolkit/toolkit/"
   - title: Docker Engine
     icon: developer_board
     description: |
