@@ -43,7 +43,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ### New
 
 - Added a new Learning center walkthrough for Docker MCP Toolkit and other onboarding improvements.
-- Administrators can now control PAC configurations with Settings Management. 
+- Administrators can now control [PAC configurations with Settings Management](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md#proxy-settings). 
 - The update experience has been redesigned to make it easier to understand and manage updates for Docker Desktop and its components.
 
 ### Upgrades
