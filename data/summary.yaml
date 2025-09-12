@@ -31,6 +31,8 @@ Build entitlements:
   requires: Docker Compose [2.27.1](/manuals/compose/releases/release-notes.md#2271) and later
 Build multiple exporters:
   requires: Docker Buildx [0.13.0](/manuals/build/release-notes.md#0130) and later
+Build URL Queries:
+  requires: Docker Buildx [0.28.0](/manuals/build/release-notes.md#0280) and later, Dockerfile [1.18.0](/manuals/build/buildkit/dockerfile-release-notes.md#1180) and later, and Docker Desktop [4.46.0](/manuals/desktop/release-notes.md#4460) and later
 Buildkit host:
   requires: Docker Buildx [0.9.0](/manuals/build/release-notes.md#090) and later
 Build privileged:

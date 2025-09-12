@@ -247,8 +247,9 @@ docker build github.com/docker/buildx#d4f088e
 
 #### URL queries
 
-Starting with Buildx v0.28, BuildKit v0.24 and Dockerfile v1.18, URL queries are
-also supported. URL queries are more structured and recommended over [URL fragments](#url-fragments):
+{{< summary-bar feature_name="Build URL Queries" >}}
+
+URL queries are more structured and recommended over [URL fragments](#url-fragments):
 
 ```console
 $ docker buildx build 'https://github.com/user/myrepo.git?branch=container&subdir=docker'
