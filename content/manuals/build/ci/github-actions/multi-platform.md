@@ -123,17 +123,23 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.config.runs-on }}
     strategy:
       fail-fast: false
       matrix:
-        platform:
-          - linux/amd64
-          - linux/arm64
+        config:
+          - platform: linux/arm64
+            runs-on: ubuntu-24.04-arm
+          - platform: linux/amd64
+            runs-on: ubuntu-24.04
     steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # important so tags/history are available
+
       - name: Prepare
         run: |
-          platform=${{ matrix.platform }}
+          platform=${{ matrix.config.platform }}
           echo "PLATFORM_PAIR=${platform//\//-}" >> $GITHUB_ENV
 
       - name: Docker meta
@@ -158,10 +164,12 @@ jobs:
         id: build
         uses: docker/build-push-action@v6
         with:
-          platforms: ${{ matrix.platform }}
+          platforms: ${{ matrix.config.platform }}
           labels: ${{ steps.meta.outputs.labels }}
           tags: ${{ env.REGISTRY_IMAGE }}
           outputs: type=image,push-by-digest=true,name-canonical=true,push=true
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
       - name: Export digest
         run: |
