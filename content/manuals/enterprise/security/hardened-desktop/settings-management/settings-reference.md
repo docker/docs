@@ -7,24 +7,14 @@ aliases:
  - /security/for-admins/hardened-desktop/settings-management/settings-reference/
 ---
 
-This reference documents all Docker Desktop settings and configuration options. Use this to understand setting behavior across different configuration methods and platforms.
+This reference documents all Docker Desktop settings and configuration options. Use this to understand setting behavior across different configuration methods and platforms. It is organized to match the Docker Desktop GUI structure.
 
 Each setting includes:
 
 - Default and accepted values
 - Platform compatibility
-- Configuration methods (Docker Desktop GUI, Admin Console, admin-settings.json file, or CLI)
+- Configuration methods (Docker Desktop GUI, Admin Console, `admin-settings.json` file, or CLI)
 - Enterprise security recommendations where applicable
-
-## How to use this reference
-
-Settings are organized to match the Docker Desktop GUI structure. Configuration
-methods are indicated with these labels:
-
-- Desktop GUI: Configurable through Docker Desktop settings interface
-- Admin Console: Configurable through the Docker Admin Console using Settings Management
-- JSON file: Configurable through `admin-settings.json` using Settings Management
-- CLI: Configurable through command-line tools
 
 ## General settings
 
@@ -365,20 +355,6 @@ if needed.
     - **General** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
     - Settings Management: `configurationFileVersion` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
 
-### Automatically update components
-
-| Default value | Accepted values | Format   |
-|---------------|-----------------|----------|
-| `true`        | `true`, `false` | Boolean  |
-
-- **Description:** Allow Docker Desktop to automatically update components that don't require a restart.
-- **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Automatically updates key Docker Desktop components such as Docker Compose, Docker Scout, the Docker CLI.
-- **Configure this setting with:**
-    - **General settings** in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md#software-updates)
-    - Settings Management: `silentModulesUpdate` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
-    - Settings Management: **Automatically update components** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
-
 ## Resources settings
 
 ### CPU limit
@@ -484,6 +460,7 @@ edits.
 - **Configure this setting with:**
     - **Proxies** Resources settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
     - Settings Management: `proxy` setting with `manual` and `exclude` modes in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
+    - Settings Management: **Proxy** section in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
 
 > [!NOTE]
 >
@@ -539,6 +516,7 @@ edits.
 - **Configure this setting with:**
     - **Network** Resources settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
     - Settings Management: `defaultNetworkingMode` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
+    - Settings Management: **Default network IP mode** in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
 
 For more information, see [Networking](/manuals/desktop/features/networking.md#networking-mode-and-dns-behaviour-for-mac-and-windows).
 
@@ -555,6 +533,7 @@ version 4.43 and up.
 - **Configure this setting with:**
     - **Network** Resources settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
     - Settings Management: `dnsInhibition` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
+    - Settings Management: **DNS filtering behavior** in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
 
 For more information, see [Networking](/manuals/desktop/features/networking.md#networking-mode-and-dns-behaviour-for-mac-and-windows).
 
@@ -786,32 +765,6 @@ method is not yet supported by Settings Management.
 >
 > In hardened environments, disable and lock this setting to reduce interface complexity.
 
-### Custom Kubernetes image repository
-
-| Default value | Accepted values | Format   |
-|---------------|-----------------|----------|
-| `""`          | Registry URL    | String   |
-
-- **Description**: Registry used for Kubernetes control plane images instead of Docker Hub. This allows Docker Desktop to pull Kubernetes system
-images from a private registry or mirror instead of Docker Hub. This setting
-overrides the `[registry[:port]/][namespace]` portion of image names.
-- **OS**: {{< badge color=blue text="All" >}}
-- **Use case**: Support air-gapped environments or when Docker Hub access is restricted.
-- **Configure this setting with**:
-    - Settings Management: `KubernetesImagesRepository` settings in the
-    [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
-    - Settings Management: **Kubernetes Images Repository** setting in the
-    [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
-
-> [!NOTE]
->
-> Images must be mirrored from Docker Hub with matching tags. Required images depend on the cluster provisioning method.
-
-> [!IMPORTANT]
->
-> When using custom image repositories with Enhanced Container Isolation, add these images to the ECI allowlist: `[imagesRepository]/desktop-cloud-provider-kind:*` and
-`[imagesRepository]/desktop-containerd-registry-mirror:*`.
-
 ## Software updates settings
 
 ### Automatically check for updates
@@ -846,6 +799,20 @@ only internally vetted versions are installed.
 - **Configure this setting with:**
     - **Software updates** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
     - Settings Management: **Disable updates** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
+
+### Automatically update components
+
+| Default value | Accepted values | Format   |
+|---------------|-----------------|----------|
+| `true`        | `true`, `false` | Boolean  |
+
+- **Description:** Allow Docker Desktop to automatically update components that don't require a restart.
+- **OS:** {{< badge color=blue text="All" >}}
+- **Use case:** Automatically updates key Docker Desktop components such as Docker Compose, Docker Scout, the Docker CLI.
+- **Configure this setting with:**
+    - **General settings** in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md#software-updates)
+    - Settings Management: `silentModulesUpdate` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
+    - Settings Management: **Automatically update components** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
 
 ## Extensions settings
 
@@ -910,6 +877,7 @@ third-party or unvetted plugins from being installed.
 - **Configure this setting with:**
     - **Beta** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
     - Settings Management: `enableDockerAI` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
+    - Settings Management: **Enable Docker AI** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
 
 ### Enable Docker MCP Toolkit
 
@@ -924,27 +892,29 @@ third-party or unvetted plugins from being installed.
     - **Beta** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
     - Settings Management: `enableDockerMCPToolkit` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
 
+### Enable Docker Offload
+
+| Default value | Accepted values | Format   |
+|---------------|-----------------|----------|
+| `false`       | `true`, `false` | Boolean  |
+
+- **Description:** Enable [Docker Offload](/offload/) in Docker Desktop.
+- **OS:** {{< badge color=blue text="All" >}}
+- **Use case:** Offload building and running containers to the cloud.
+- **Configure this setting with:**
+    - **Beta** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
+    - Settings Management: `enableCloud` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
+    - Settings Management: **Enable Docker Cloud** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
+
 ### Enable Wasm
 
 | Default value | Accepted values | Format   |
 |---------------|-----------------|----------|
-| `true`       | `true`, `false` | Boolean  |
+| `false`       | `true`, `false` | Boolean  |
 
 - **Description:** Enable [Wasm](/manuals/desktop/features/wasm.md) to run Wasm workloads.
 - **OS:** {{< badge color=blue text="All" >}}
 - **Use case:** Run WebAssembly applications and modules within Docker containers.
-- **Configure this setting with:**
-    - **Beta** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
-
-### Enable Compose Bridge
-
-| Default value | Accepted values | Format   |
-|---------------|-----------------|----------|
-| `true`       | `true`, `false` | Boolean  |
-
-- **Description:** Enable [Compose Bridge](/manuals/compose/bridge/_index.md).
-- **OS:** {{< badge color=blue text="All" >}}
-- **Use case:** Turn on enhanced Compose features and integrations.
 - **Configure this setting with:**
     - **Beta** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
@@ -998,7 +968,7 @@ third-party or unvetted plugins from being installed.
 - **Configure this setting with:**
     - **Notifications** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
-### Docker Scout Notification pop-ups
+### Docker Scout notification pop-ups
 
 | Default value | Accepted values | Format   |
 |---------------|-----------------|----------|
@@ -1064,9 +1034,20 @@ you relax this in a controlled way. See ECI Configuration for more info.
 - **Configure this setting with:**
     - **Advanced** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
-## Settings not available in Docker Desktop
+## Settings only available with Settings Management
 
 The following settings aren’t shown in the Docker Desktop GUI. You can only configure them using Settings Management with the Admin Console or the `admin-settings.json` file.
+
+### Enable Docker Cloud GPU Support
+
+| Default value | Accepted values | Format   |
+|---------------|-----------------|----------|
+| `true`        | `true`, `false` | Boolean  |
+
+- **Description:** Enable GPU support for Docker Cloud features.
+- **OS:** {{< badge color=blue text="All" >}}
+- **Configure this setting with:**
+    - Settings Management: **Enable Docker Cloud GPU Support** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md
 
 ### Block `docker load`
 
@@ -1079,11 +1060,24 @@ The following settings aren’t shown in the Docker Desktop GUI. You can only co
 - **Use case:** Enforce image provenance by requiring all images to come from registries.
 - **Configure this setting with:**
     - Settings Management: `blockDockerLoad` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
+    - Settings Management: **Block Docker Load** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md
 
 > [!NOTE]
 >
 > In hardened environments, enable and lock this setting. This forces all images
 to come from your secure, scanned registry.
+
+### Hide onboarding survey
+
+| Default value | Accepted values | Format |
+|---------------|-----------------|--------|
+| `false`       | `true`, `false` | Boolean |
+
+- **Description:** Prevent the onboarding survey from being shown to new users.
+- **OS:** {{< badge color=blue text="All" >}}
+- **Configure this setting with:**
+    - Settings Management: `displayedOnboarding` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
+    - Settings Management: **Block Docker Load** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md
 
 ### Expose Docker API on TCP 2375
 
@@ -1096,6 +1090,7 @@ to come from your secure, scanned registry.
 - **Use case:** Support legacy integrations that require TCP API access.
 - **Configure this setting with:**
     - Settings Management: `exposeDockerAPIOnTCP2375` in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
+    - Settings Management: **Expose Docker API** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md
 
 > [!NOTE]
 >
@@ -1113,6 +1108,7 @@ Docker API is only reachable via the secure internal socket.
 - **Use case:** Provide controlled network access for containers in offline or restricted network environments.
 - **Configure this setting with:**
     - Settings Management: `containersProxy` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
+    - Settings Management: **Containers proxy** section in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md
 
 #### Example
 
@@ -1172,6 +1168,7 @@ Docker API is only reachable via the secure internal socket.
 - **Use case:** Provide early access to features in development for testing and feedback.
 - **Configure this setting with:**
     - Settings Management: `allowBetaFeatures` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
+    - Settings Management: **Access beta features**
 
 > [!NOTE]
 >
@@ -1222,3 +1219,55 @@ overrides are possible.
 - **Use case:** Support enterprise proxy servers that require Kerberos or NTLM authentication.
 - **Configure this setting with:**
     - Settings Management: `proxy.enableKerberosNtlm` in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
+    - Settings Management: **Kerberos NTLM** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
+
+### PAC file URL
+
+| Default value | Accepted values | Format   |
+|---------------|-----------------|----------|
+| `""`          | PAC file URL    | String   |
+
+- **Description:** Specifies a PAC file URL. For example, `"pac": "http://proxy/proxy.pac"`.
+- **OS:** {{< badge color=blue text="All" >}}
+- **Configure this setting with:**
+    - Settings Management: `pac` in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
+    - Settings Management: **PAC file** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
+
+### Embedded PAC script
+
+| Default value | Accepted values | Format   |
+|---------------|-----------------|----------|
+| `""`          | Embedded PAC script  | String   |
+
+- **Description:** Specifies an embedded PAC (Proxy Auto-Config) script. For example, `"embeddedPac": "function FindProxyForURL(url, host) { return \"DIRECT\"; }"`.
+- **OS:** {{< badge color=blue text="All" >}}
+- **Configure this setting with:**
+    - Settings Management: `embeddedPac` in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
+    - Settings Management: **Embedded PAC script** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
+
+
+### Custom Kubernetes image repository
+
+| Default value | Accepted values | Format   |
+|---------------|-----------------|----------|
+| `""`          | Registry URL    | String   |
+
+- **Description**: Registry used for Kubernetes control plane images instead of Docker Hub. This allows Docker Desktop to pull Kubernetes system
+images from a private registry or mirror instead of Docker Hub. This setting
+overrides the `[registry[:port]/][namespace]` portion of image names.
+- **OS**: {{< badge color=blue text="All" >}}
+- **Use case**: Support air-gapped environments or when Docker Hub access is restricted.
+- **Configure this setting with**:
+    - Settings Management: `KubernetesImagesRepository` settings in the
+    [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
+    - Settings Management: **Kubernetes Images Repository** setting in the
+    [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
+
+> [!NOTE]
+>
+> Images must be mirrored from Docker Hub with matching tags. Required images depend on the cluster provisioning method.
+
+> [!IMPORTANT]
+>
+> When using custom image repositories with Enhanced Container Isolation, add these images to the ECI allowlist: `[imagesRepository]/desktop-cloud-provider-kind:*` and
+`[imagesRepository]/desktop-containerd-registry-mirror:*`.
