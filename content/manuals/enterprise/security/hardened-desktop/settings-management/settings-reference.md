@@ -460,7 +460,7 @@ edits.
 - **Configure this setting with:**
     - **Proxies** Resources settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
     - Settings Management: `proxy` setting with `manual` and `exclude` modes in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
-    - Settings Managemt: **Proxy** section in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
+    - Settings Management: **Proxy** section in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
 
 > [!NOTE]
 >
@@ -1034,7 +1034,7 @@ you relax this in a controlled way. See ECI Configuration for more info.
 - **Configure this setting with:**
     - **Advanced** settings in [Docker Desktop GUI](/manuals/desktop/settings-and-maintenance/settings.md)
 
-## Settings only availabe with Settings Management
+## Settings only available with Settings Management
 
 The following settings aren’t shown in the Docker Desktop GUI. You can only configure them using Settings Management with the Admin Console or the `admin-settings.json` file.
 
@@ -1067,7 +1067,7 @@ The following settings aren’t shown in the Docker Desktop GUI. You can only co
 > In hardened environments, enable and lock this setting. This forces all images
 to come from your secure, scanned registry.
 
-### Hide onboarding survey
+### Hide onboarding survey
 
 | Default value | Accepted values | Format |
 |---------------|-----------------|--------|
