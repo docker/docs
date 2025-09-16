@@ -53,7 +53,7 @@ known issues for each Docker Hub release.
 
 ### New
 
-- Organizations can assign the [editor role](roles-and-permissions.md) to members to grant additional permissions without full administrative access.
+- Organizations can assign the [editor role](/manuals/enterprise/security/roles-and-permissions/roles-and-permissions.md) to members to grant additional permissions without full administrative access.
 
 ## 2023-05-09
 
