@@ -168,8 +168,8 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           tags: ${{ env.REGISTRY_IMAGE }}
           outputs: type=image,push-by-digest=true,name-canonical=true,push=true
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-from: type=gha,scope=gha-${{ matrix.config.platform }}
+          cache-to: type=gha,mode=max,scope=gha-${{ matrix.config.platform }}
 
       - name: Export digest
         run: |
