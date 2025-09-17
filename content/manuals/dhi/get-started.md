@@ -24,16 +24,23 @@ example, they can be applied to any DHI.
 > configuration or commands. Start with this guide, then see the [migration
 > guide](./how-to/migrate.md) for more details and examples.
 
+## Step 1: Start a free trial to access DHI
 
-## Step 1: Sign up and subscribe to DHI for access
+You can browse the Docker Hardened Images catalog without a subscription, but to
+use an image, you must either [contact sales to
+subscribe](https://www.docker.com/products/hardened-images/#getstarted) or start
+a free trial for an [organization](/admin/organization/). This guide walks you
+through starting a free trial.
 
-To access Docker Hardened Images, your organization must [sign
-up](https://www.docker.com/products/hardened-images/#getstarted) and subscribe.
+To start a free trial:
+
+1. Go to [Docker Hub](https://hub.docker.com) and sign in.
+2. Select **My Hub** in the top navigation.
+3. In the left sidebar, choose an organization to give access to DHI.
+4. In the left sidebar, select **Hardened Images**.
+5. Select **Start trial** and follow the on-screen instructions.
 
 ## Step 2: Find an image to use
-
-Once subscribed, Docker Hardened Images will appear under your organization's
-namespace on Docker Hub.
 
 1. Go to [Docker Hub](https://hub.docker.com) and sign in.
 2. Select **My Hub** in the top navigation.
