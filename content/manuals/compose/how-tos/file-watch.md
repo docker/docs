@@ -120,7 +120,7 @@ The `ignore` patterns are relative to the `path` defined in the current `watch` 
 
 ### `initial_sync`
 
-When using a `sync+x` action, the `initial_sync` attribute indicates Compose to ensure files part of the defined `path` to be up to date before starting a new watch session.
+When using a `sync+x` action, the `initial_sync` attribute tells Compose to ensure files that are part of the defined `path` are up to date before starting a new watch session.
 
 ## Example 1
 
