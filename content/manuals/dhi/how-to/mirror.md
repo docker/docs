@@ -163,53 +163,55 @@ attestations using `regctl`. You must [install
 1. Set environment variables for your specific environment. Replace the
    placeholders with your actual values.
 
+   In this example, you use a Docker username to represent a member of the Docker
+   Hub organization that the DHI repositories are mirrored in. Prepare a
+   [personal access token (PAT)](../../security/access-tokens.md) for the user
+   with `read only` access. Alternatively, you can use an organization namespace and
+   an [organization access token
+   (OAT)](../../enterprise/security/access-tokens.md) to sign in to Docker Hub, but OATs
+   are not yet supported for `registry.scout.docker.com`.
+
    ```console
    $ export DOCKER_USERNAME="YOUR_DOCKER_USERNAME"
    $ export DOCKER_PAT="YOUR_DOCKER_PAT"
+   $ export DOCKER_ORG="YOUR_DOCKER_ORG"
    $ export DEST_REG="registry.example.com"
    $ export DEST_REPO="mirror/dhi-python"
-   $ export SRC_REPO="docker.io/<your-org>/dhi-python"
-   $ export SRC_TAG="3.13-alpine3.21"
+   $ export DEST_REG_USERNAME="YOUR_DESTINATION_REGISTRY_USERNAME"
+   $ export DEST_REG_TOKEN="YOUR_DESTINATION_REGISTRY_TOKEN"
+   $ export SRC_REPO="docker.io/${DOCKER_ORG}/dhi-python"
+   $ export SRC_ATT_REPO="registry.scout.docker.com/${DOCKER_ORG}/dhi-python"
+   $ export TAG="3.13-alpine3.21"
    ```
 
 2. Sign in via `regctl` to Docker Hub, the Scout registry that contains
    the attestations, and your destination registry.
 
    ```console
-   $ regctl registry login -u "$DOCKER_USERNAME" --pass-stdin docker.io
-   $ regctl registry login -u "$DOCKER_USERNAME" --pass-stdin registry.scout.docker.com
-   $ regctl registry login "$DEST_REG
+   $ echo $DOCKER_PAT | regctl registry login -u "$DOCKER_USERNAME" --pass-stdin docker.io
+   $ echo $DOCKER_PAT | regctl registry login -u "$DOCKER_USERNAME" --pass-stdin registry.scout.docker.com
+   $ echo $DEST_REG_TOKEN | regctl registry login -u "$DEST_REG_USERNAME" --pass-stdin "$DEST_REG"
    ```
 
-3. Mirror the image by digest from Docker Hub to your destination registry.
+3. Mirror the image and attestations using `--referrers` and referrer endpoints:
+
+   ```console
+   $ regctl image copy \
+        "${SRC_REPO}:${TAG}" \
+        "${DEST_REG}/${DEST_REPO}:${TAG}" \
+        --referrers \
+        --referrers-src "${SRC_ATT_REPO}" \
+        --referrers-tgt "${DEST_REG}/${DEST_REPO}" \
+        --force-recursive
+   ```
+
+4. Verify that artifacts were preserved.
 
    First, get a digest for a specific tag and platform. For example, `linux/amd64`.
 
    ```console
-   DIGEST="$(regctl manifest head "${SRC_REPO}:${SRC_TAG}" --platform linux/amd64)"
+   DIGEST="$(regctl manifest head "${DEST_REG}/${DEST_REPO}:${TAG}" --platform linux/amd64)"
    ```
-
-   Then, copy the image by digest to ensure you get the exact same image.
-
-   ```console
-   regctl image copy \
-     "${SRC_REPO}@${DIGEST}" \
-     "${DEST_REG}/${DEST_REPO}@${DIGEST}"
-   ```
-
-4. Mirror the attestations from the Scout registry to your target registry using
-   `--referrers` and referrer endpoints:
-
-   ```console
-   $ regctl image copy \
-     --referrers \
-     --referrers-src  "registry.scout.docker.com/<your-org>/dhi-python" \
-     --referrers-tgt  "${DEST_REG}/${DEST_REPO}" \
-     "registry.scout.docker.com/<your-org>/dhi-python@${DIGEST}" \
-     "${DEST_REG}/${DEST_REPO}@${DIGEST}"
-   ```
-
-5. Verify that artifacts were preserved.
 
    List attached artifacts (SBOM, provenance, VEX, vulnerability reports).
 
@@ -217,7 +219,7 @@ attestations using `regctl`. You must [install
    $ regctl artifact list "${DEST_REG}/${DEST_REPO}@${DIGEST}"
    ```
 
-   If you use Docker Scout:
+   Or, list attached artifacts with `docker scout`.
 
    ```console
    $ docker scout attest list "registry://${DEST_REG}/${DEST_REPO}@${DIGEST}"
