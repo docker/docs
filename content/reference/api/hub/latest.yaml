@@ -3243,7 +3243,7 @@ components:
           example: moby
         invitee:
           type: string
-          description: can either be a dockerID for registred users or an email for non-registred users
+          description: can either be a dockerID for registered users or an email for non-registered users
           example: invitee@docker.com
         org:
           type: string
@@ -3373,7 +3373,7 @@ components:
             - owners
         is_guest:
           type: boolean
-          description: If the organization has verfied domains, members that have email addresses outside of those domains will be flagged as guests.
+          description: If the organization has verified domains, members that have email addresses outside of those domains will be flagged as guests.
           example: false
         primary_email:
           type: string
