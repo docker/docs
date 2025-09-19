@@ -2,8 +2,8 @@
 title: Docker Desktop
 weight: 10
 description: Explore Docker Desktop, what it has to offer, and its key features. Take the next step by downloading or find additional resources
-keywords: how to use docker desktop, what is docker desktop used for, what does docker
-  desktop do, using docker desktop
+Keywords: how to use Docker Desktop, what Docker Desktop is used for, what Docker does
+  desktop do, using Docker Desktop
 params:
   sidebar:
     group: Products
@@ -15,7 +15,7 @@ grid:
     [Windows](/desktop/setup/install/windows-install/), or
     [Linux](/desktop/setup/install/linux/).
   icon: download
-- title: Learn about Docker Desktop
+- title: Learn about Docker Desktop and how to use it for my own projects
   description: Navigate Docker Desktop.
   icon: feature_search
   link: /desktop/use-desktop/
@@ -43,7 +43,7 @@ aliases:
 - /docker-for-windows/opensource/
 ---
 
-Docker Desktop is a one-click-install application for your Mac, Linux, or Windows environment
+Docker Desktop is a one-click installation application for your Mac, Linux, or Windows environment
 that lets you build, share, and run containerized applications and microservices. 
 
 It provides a straightforward GUI (Graphical User Interface) that lets you manage your containers, applications, and images directly from your machine. 
