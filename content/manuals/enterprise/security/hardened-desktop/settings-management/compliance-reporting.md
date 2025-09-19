@@ -74,7 +74,7 @@ Indicates the user's policy assignment:
 
 | Settings status | What it means |
 |-----------------|---------------|
-| Global policy | The user is assigned your organzation's default policy. |
+| Global policy | The user is assigned your organization's default policy. |
 | User policy | The user is assigned a specific custom policy. |
 | No policy assigned | The user is not assigned to any policy. |
 

@@ -159,7 +159,7 @@ Settings Management:
 - The **Use Enhanced Container Isolation** setting appears turned on in
 Docker Desktop settings.
 - If set to `"locked": true`, the setting is locked and greyed out.
-- All new containers automatically use Linux user namepsaces.
+- All new containers automatically use Linux user namespaces.
 - Existing development workflows continue to work without modification.
 - Users see `sysbox-runc` as the container runtime in `docker inspect` output.
 
