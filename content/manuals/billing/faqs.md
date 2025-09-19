@@ -52,3 +52,12 @@ If you're exempt from sales tax, see
 
 For academic pricing, contact the
 [Docker Sales Team](https://www.docker.com/company/contact).
+
+### Can I use pay-by-invoice for upgrades or additional seats?
+
+No. Pay by invoice is only available for subscribers on an annual subscription
+during first-time checkouts and subscription renewal. You must use card payment
+or US bank accounts for purchasing upgrades or additional seats.
+
+For a list of supported payment methods, see
+[Add or update a payment method](/manuals/billing/payment-method.md).
