@@ -8,9 +8,16 @@
     {{ .Content }}
     <div class="not-prose">
       <div class="flex justify-between gap-8 flex-row">
-        <input type="search" id="search-page-input"
-          class="ring-3-gray-light-200 dark:ring-3-gray-dark-400 dark:bg-background-dark focus:ring-3-blue-light dark:focus:ring-3-blue-dark ring-3-[1.5px] w-full max-w-xl min-w-0 rounded-sm bg-white px-4 py-2 outline-hidden"
-          placeholder="Search…" tabindex="0" />
+        <div class="relative w-full max-w-xl">
+          <input type="search" id="search-page-input"
+            class="ring-3-gray-light-200 dark:ring-3-gray-dark-400 dark:bg-background-dark focus:ring-3-blue-light dark:focus:ring-3-blue-dark ring-3-[1.5px] w-full min-w-0 rounded-sm bg-white px-4 py-2 pr-10 outline-hidden"
+            placeholder="Search…" tabindex="0" />
+          <button id="search-button" class="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded">
+            <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </button>
+        </div>
         <div class="admonition flex flex-row items-center gap-1">
           <p>Not finding what you're looking for? Try</p>
           <button onclick="askAI('search-page-input')" class="topbar-button bg-blue-400/95 border-blue-300 hover:bg-blue-400/90">
@@ -22,14 +29,37 @@
         </div>
       </div>
       <hr class="border-divider-light dark:border-divider-dark" />
-      <div id="search-page-results">
-        <!-- results -->
+      
+      <!-- Fixed positioning for search results -->
+      <div id="search-results-overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50" style="top: 0;">
+        <div class="absolute top-20 left-1/2 transform -translate-x-1/2 w-full max-w-4xl max-h-[80vh] overflow-y-auto bg-white dark:bg-gray-900 rounded-lg shadow-xl mx-4">
+          <div class="sticky top-0 bg-white dark:bg-gray-900 p-4 border-b border-divider-light dark:border-divider-dark">
+            <div class="flex justify-between items-center">
+              <h3 class="text-lg font-semibold">Search Results</h3>
+              <button id="close-search-results" class="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div id="search-page-results" class="p-4">
+            <!-- results -->
+          </div>
+        </div>
+      </div>
+      
+      <!-- Inline results for non-modal view (optional) -->
+      <div id="search-page-results-inline" class="hidden">
+        <!-- Inline results will appear here -->
       </div>
     </div>
   </article>
+  
   <script type="module">
     // Global variable to hold the pagefind module
     let pagefind;
+    let useModalResults = true; // Set to false if you prefer inline results
 
     // Initialize the pagefind module and fire a search if the query parameter exists
     window.addEventListener("load", async function () {
@@ -58,23 +88,60 @@
       // Set the value of the input field to the query parameter
       searchInput.value = query;
 
-      // Trigger the input event to simulate user typing
-      const event = new Event("input", {
-        bubbles: true,
-        cancelable: true,
-      });
-      // Trigger the input event for the search input
-      searchInput.dispatchEvent(event);
+      // Trigger search
+      performSearch(query);
       searchInput.focus();
     });
 
     const searchPageInput = document.querySelector("#search-page-input");
     const searchPageResults = document.querySelector("#search-page-results");
+    const searchPageResultsInline = document.querySelector("#search-page-results-inline");
+    const searchResultsOverlay = document.querySelector("#search-results-overlay");
+    const closeSearchResults = document.querySelector("#close-search-results");
+    const searchButton = document.querySelector("#search-button");
 
-    // onPageSearch returns 10 results per query
-    async function onPageSearch(e) {
+    // Add click event for search button (magnifying glass)
+    searchButton.addEventListener("click", function() {
+      const query = searchPageInput.value.trim();
+      if (query) {
+        performSearch(query);
+      }
+    });
+
+    // Add Enter key support
+    searchPageInput.addEventListener("keydown", function(e) {
+      if (e.key === "Enter") {
+        const query = searchPageInput.value.trim();
+        if (query) {
+          performSearch(query);
+        }
+      }
+    });
+
+    // Close modal functionality
+    closeSearchResults.addEventListener("click", function() {
+      searchResultsOverlay.classList.add("hidden");
+    });
+
+    // Close modal when clicking overlay
+    searchResultsOverlay.addEventListener("click", function(e) {
+      if (e.target === searchResultsOverlay) {
+        searchResultsOverlay.classList.add("hidden");
+      }
+    });
+
+    // Close modal with Escape key
+    document.addEventListener("keydown", function(e) {
+      if (e.key === "Escape" && !searchResultsOverlay.classList.contains("hidden")) {
+        searchResultsOverlay.classList.add("hidden");
+      }
+    });
+
+    // Consolidated search function
+    async function performSearch(query) {
+      if (!pagefind) return;
+      
       pagefind.init();
-      const query = e.target.value;
 
       // Set the query parameter in the URL
       const params = new URLSearchParams(document.location.search);
@@ -94,77 +161,114 @@
 
       // Execute the search
       const search = await pagefind.debouncedSearch(query);
+      
+      // Determine which results container to use
+      const resultsContainer = useModalResults ? searchPageResults : searchPageResultsInline;
+      
       // If no search results are found, exit
-      if (search === null) {
+      if (search === null || search.results.length === 0) {
+        resultsContainer.innerHTML = `<div class="p-4 text-center text-gray-500">No results found for "${query}"</div>`;
+        showResults();
         return;
-      } else {
-        // total number of results
-        const resultsLength = search.results.length;
-        // Get the data for the search results
-        // Slice the results based on the range start + 10
-        const resultsData = await Promise.all(
-          search.results.slice(rangeStart, rangeEnd).map((r) => r.data()),
-        );
-        // If the range does not have any results, display a message
-        if (resultsData.length === 0) {
-          searchPageResults.innerHTML = `<div class="p-4">No results found</div>`;
-          return;
-        }
-        // Add an index to the results, for heap tracking
-        const results = resultsData.map((item, index) => ({
-          ...item,
-          index: index + 1,
-        }));
+      }
 
-        // If the query is not empty, display the search results container
-        if (query) {
-          searchPageResults.classList.remove("hidden");
-        } else {
-          searchPageResults.classList.add("hidden");
-        }
+      // total number of results
+      const resultsLength = search.results.length;
+      // Get the data for the search results
+      // Slice the results based on the range start + 10
+      const resultsData = await Promise.all(
+        search.results.slice(rangeStart, rangeEnd).map((r) => r.data()),
+      );
+      
+      // If the range does not have any results, display a message
+      if (resultsData.length === 0) {
+        resultsContainer.innerHTML = `<div class="p-4 text-center text-gray-500">No results found</div>`;
+        showResults();
+        return;
+      }
+      
+      // Add an index to the results, for heap tracking
+      const results = resultsData.map((item, index) => ({
+        ...item,
+        index: index + 1,
+      }));
 
-        // Generate the search results HTML
-        let resultsHTML = `<div class="text-gray-400 dark:text-gray-500 p-2">${resultsLength} results</div>`;
+      // Generate the search results HTML
+      let resultsHTML = `<div class="text-gray-400 dark:text-gray-500 p-2">${resultsLength} results for "${query}"</div>`;
 
-        // Map results to HTML
-        resultsHTML += results
-          .map((item) => {
-            return `<div class="p-4">
-         <div class="flex flex-col">
-           <span class="text-gray-400 dark:texty-gray-dark text-sm">${item.meta.breadcrumbs}</span>
-           <a class="link" href="${item.url}" data-query="${query}" data-index="${item.index}">${item.meta.title}</a>
-           <p class="text-black dark:text-white overflow-hidden">…${item.excerpt}…</p>
-         </div>
-       </div>`;
-          })
-          .join("");
-        // If the results length is greater than 10, display links to show more results
-        if (resultsLength > 10) {
-          resultsHTML += `<hr class="border-divider-light dark:border-divider-dark">`;
-          resultsHTML += `<ul class="flex flex-wrap gap-1 pt-4 pb-8 justify-center text-sm">`;
-          for (let i = 1; i <= resultsLength / 10; i++) {
-            if (i == currentPage) {
-              resultsHTML += `<li class="flex items-center justify-center">
-                 <a href="/search/?q=${query}&page=${i}" class="pagination-link bg-gray-200 dark:bg-gray-800 dark:text-gray-200">${i}</a>
-              </li>`;
-            } else {
-              resultsHTML += `<li class="flex items-center justify-center">
-                <a href="/search/?q=${query}&page=${i}" class="pagination-link bg-gray-100 dark:bg-gray-900 dark:text-gray-400">${i}</a>
-              </li>`;
-            }
+      // Map results to HTML
+      resultsHTML += results
+        .map((item) => {
+          return `<div class="p-4 border-b border-gray-200 dark:border-gray-700 last:border-b-0">
+       <div class="flex flex-col">
+         <span class="text-gray-400 dark:text-gray-500 text-sm">${item.meta.breadcrumbs}</span>
+         <a class="link text-blue-600 dark:text-blue-400 hover:underline font-medium" href="${item.url}" data-query="${query}" data-index="${item.index}">${item.meta.title}</a>
+         <p class="text-black dark:text-white overflow-hidden mt-1">…${item.excerpt}…</p>
+       </div>
+     </div>`;
+        })
+        .join("");
+        
+      // If the results length is greater than 10, display links to show more results
+      if (resultsLength > 10) {
+        resultsHTML += `<hr class="border-divider-light dark:border-divider-dark">`;
+        resultsHTML += `<ul class="flex flex-wrap gap-1 pt-4 pb-8 justify-center text-sm">`;
+        for (let i = 1; i <= Math.ceil(resultsLength / 10); i++) {
+          if (i == currentPage) {
+            resultsHTML += `<li class="flex items-center justify-center">
+               <a href="/search/?q=${encodeURIComponent(query)}&page=${i}" class="pagination-link bg-gray-200 dark:bg-gray-800 dark:text-gray-200 px-3 py-1 rounded">${i}</a>
+            </li>`;
+          } else {
+            resultsHTML += `<li class="flex items-center justify-center">
+              <a href="/search/?q=${encodeURIComponent(query)}&page=${i}" class="pagination-link bg-gray-100 dark:bg-gray-900 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-800 px-3 py-1 rounded">${i}</a>
+            </li>`;
           }
-          resultsHTML += `</ul>`;
         }
+        resultsHTML += `</ul>`;
+      }
 
-        searchPageResults.innerHTML = resultsHTML;
+      resultsContainer.innerHTML = resultsHTML;
+      showResults();
+    }
+
+    // Show results based on mode
+    function showResults() {
+      if (useModalResults) {
+        searchResultsOverlay.classList.remove("hidden");
+        // Prevent body scrolling when modal is open
+        document.body.style.overflow = "hidden";
+      } else {
+        searchPageResultsInline.classList.remove("hidden");
       }
     }
 
-    searchPageInput.addEventListener("input", (e) => onPageSearch(e));
+    // Input event listener for real-time search (optional)
+    let searchTimeout;
+    searchPageInput.addEventListener("input", (e) => {
+      const query = e.target.value.trim();
+      
+      // Clear previous timeout
+      clearTimeout(searchTimeout);
+      
+      // Only search if query is not empty and after a delay
+      if (query.length > 0) {
+        searchTimeout = setTimeout(() => {
+          performSearch(query);
+        }, 300); // 300ms delay
+      } else {
+        // Hide results if query is empty
+        if (useModalResults) {
+          searchResultsOverlay.classList.add("hidden");
+          document.body.style.overflow = ""; // Restore body scrolling
+        } else {
+          searchPageResultsInline.classList.add("hidden");
+        }
+      }
+    });
 
     // Event delegation for tracking link clicks
     if (window.heap !== undefined) {
-      searchPageResults.addEventListener("click", function (event) {
+      document.addEventListener("click", function (event) {
         if (event.target.tagName === "A" && event.target.closest(".link")) {
           const searchQuery = event.target.getAttribute("data-query");
           const resultIndex = event.target.getAttribute("data-index");
@@ -178,8 +282,26 @@
             docs_search_source_title: document.title,
           };
           heap.track("Docs - Search - Click - Result Link", properties);
+          
+          // Close modal after clicking a result
+          if (useModalResults) {
+            searchResultsOverlay.classList.add("hidden");
+            document.body.style.overflow = ""; // Restore body scrolling
+          }
         }
       });
     }
+
+    // Restore body scrolling when modal is closed
+    const observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+          if (searchResultsOverlay.classList.contains('hidden')) {
+            document.body.style.overflow = "";
+          }
+        }
+      });
+    });
+    observer.observe(searchResultsOverlay, { attributes: true });
   </script>
 {{ end }}
