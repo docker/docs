@@ -1210,44 +1210,45 @@ paths:
       security:
         - bearerAuth: [ ]
         - { }  # Allow anonymous access for public repositories
-      200:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/repository_info'
-            example:
-              name: "my-app"
-              namespace: "myorganization"
-              repository_type: "image"
-              status: 1
-              status_description: "Active"
-              description: "A sample application repository"
-              is_private: false
-              is_automated: false
-              star_count: 0
-              pull_count: 0
-              last_updated: "2025-01-20T10:30:00Z"
-              date_registered: "2025-01-20T10:30:00Z"
-              collaborator_count: 0
-              hub_user: "myorganization"
-              has_starred: false
-              full_description: "This is a comprehensive description of my application repository that contains additional details about the project."
-              media_types: [ ]
-              content_types: [ ]
-              categories: [ ]
-              immutable_tags_settings:
-                enabled: false
-                rules: [ ]
-              storage_size: null
-              source: null
-      401:
-        $ref: "#/components/responses/unauthorized"
-      403:
-        $ref: "#/components/responses/forbidden"
-      404:
-        $ref: "#/components/responses/not_found"
-      500:
-        $ref: "#/components/responses/internal_error"
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/repository_info'
+              example:
+                name: "my-app"
+                namespace: "myorganization"
+                repository_type: "image"
+                status: 1
+                status_description: "Active"
+                description: "A sample application repository"
+                is_private: false
+                is_automated: false
+                star_count: 0
+                pull_count: 0
+                last_updated: "2025-01-20T10:30:00Z"
+                date_registered: "2025-01-20T10:30:00Z"
+                collaborator_count: 0
+                hub_user: "myorganization"
+                has_starred: false
+                full_description: "This is a comprehensive description of my application repository that contains additional details about the project."
+                media_types: [ ]
+                content_types: [ ]
+                categories: [ ]
+                immutable_tags_settings:
+                  enabled: false
+                  rules: [ ]
+                storage_size: null
+                source: null
+        401:
+          $ref: "#/components/responses/unauthorized"
+        403:
+          $ref: "#/components/responses/forbidden"
+        404:
+          $ref: "#/components/responses/not_found"
+        500:
+          $ref: "#/components/responses/internal_error"
     head:
       operationId: CheckRepository
       summary: Check repository in a namespace
@@ -1260,44 +1261,45 @@ paths:
       security:
         - bearerAuth: [ ]
         - { }  # Allow anonymous access for public repositories
-      200:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/repository_info'
-            example:
-              name: "my-app"
-              namespace: "myorganization"
-              repository_type: "image"
-              status: 1
-              status_description: "Active"
-              description: "A sample application repository"
-              is_private: false
-              is_automated: false
-              star_count: 0
-              pull_count: 0
-              last_updated: "2025-01-20T10:30:00Z"
-              date_registered: "2025-01-20T10:30:00Z"
-              collaborator_count: 0
-              hub_user: "myorganization"
-              has_starred: false
-              full_description: "This is a comprehensive description of my application repository that contains additional details about the project."
-              media_types: [ ]
-              content_types: [ ]
-              categories: [ ]
-              immutable_tags_settings:
-                enabled: false
-                rules: [ ]
-              storage_size: null
-              source: null
-      401:
-        $ref: "#/components/responses/unauthorized"
-      403:
-        $ref: "#/components/responses/forbidden"
-      404:
-        $ref: "#/components/responses/not_found"
-      500:
-        $ref: "#/components/responses/internal_error"
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/repository_info'
+              example:
+                name: "my-app"
+                namespace: "myorganization"
+                repository_type: "image"
+                status: 1
+                status_description: "Active"
+                description: "A sample application repository"
+                is_private: false
+                is_automated: false
+                star_count: 0
+                pull_count: 0
+                last_updated: "2025-01-20T10:30:00Z"
+                date_registered: "2025-01-20T10:30:00Z"
+                collaborator_count: 0
+                hub_user: "myorganization"
+                has_starred: false
+                full_description: "This is a comprehensive description of my application repository that contains additional details about the project."
+                media_types: [ ]
+                content_types: [ ]
+                categories: [ ]
+                immutable_tags_settings:
+                  enabled: false
+                  rules: [ ]
+                storage_size: null
+                source: null
+        401:
+          $ref: "#/components/responses/unauthorized"
+        403:
+          $ref: "#/components/responses/forbidden"
+        404:
+          $ref: "#/components/responses/not_found"
+        500:
+          $ref: "#/components/responses/internal_error"
   /v2/orgs/{org_name}/members:
     parameters:
       - $ref: "#/components/parameters/org_name"
