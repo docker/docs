@@ -55,7 +55,7 @@ If you are a Mac or Linux user, you also have the option to **Uninstall** Docker
 >
 > - [docker/for-mac](https://github.com/docker/for-mac/issues)
 > - [docker/for-win](https://github.com/docker/for-win/issues)
-> - [docker/for-linux](https://github.com/docker/for-linux/issues)
+> - [docker/desktop-linux](https://github.com/docker/desktop-linux/issues)
 
 ### Diagnose from the app
 
