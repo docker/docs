@@ -12,10 +12,8 @@
           <input type="search" id="search-page-input"
             class="ring-3-gray-light-200 dark:ring-3-gray-dark-400 dark:bg-background-dark focus:ring-3-blue-light dark:focus:ring-3-blue-dark ring-3-[1.5px] w-full min-w-0 rounded-sm bg-white px-4 py-2 pr-10 outline-hidden"
             placeholder="Search…" tabindex="0" />
-          <button id="search-button" class="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded">
-            <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-            </svg>
+          <button type="button" id="search-button" class="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded z-10">
+            🔍
           </button>
         </div>
         <div class="admonition flex flex-row items-center gap-1">
@@ -30,304 +28,225 @@
       </div>
       <hr class="border-divider-light dark:border-divider-dark" />
       
-      <!-- Fixed positioning for search results with better positioning -->
-      <div id="search-results-overlay" class="hidden fixed inset-0 z-50" style="position: fixed !important; top: 0 !important; left: 0 !important; width: 100vw !important; height: 100vh !important;">
-        <div class="fixed inset-0 bg-black bg-opacity-50"></div>
-        <div class="fixed top-1/2 left-1/2 w-full max-w-4xl max-h-[80vh] overflow-y-auto bg-white dark:bg-gray-900 rounded-lg shadow-xl mx-4" style="transform: translate(-50%, -50%) !important; position: fixed !important;">
-          <div class="sticky top-0 bg-white dark:bg-gray-900 p-4 border-b border-divider-light dark:border-divider-dark z-10">
-            <div class="flex justify-between items-center">
-              <h3 class="text-lg font-semibold">Search Results</h3>
-              <button id="close-search-results" class="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
-              </button>
-            </div>
+      <!-- Search Results Modal - Simple approach -->
+      <div id="search-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 10000;">
+        <div id="search-modal-content" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; max-width: 800px; max-height: 80%; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+          <div style="padding: 16px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
+            <h3 style="margin: 0; font-size: 18px;">Search Results</h3>
+            <button id="close-modal" style="background: none; border: none; font-size: 24px; cursor: pointer;">&times;</button>
           </div>
-          <div id="search-page-results" class="p-4">
-            <!-- results -->
+          <div id="search-page-results" style="max-height: 60vh; overflow-y: auto; padding: 16px;">
+            <!-- results go here -->
           </div>
         </div>
       </div>
       
-      <!-- Inline results for non-modal view (optional) -->
-      <div id="search-page-results-inline" class="hidden">
-        <!-- Inline results will appear here -->
+      <!-- Fallback: Inline results for debugging -->
+      <div id="search-page-results-fallback" style="margin-top: 20px;">
+        <!-- results will also appear here for debugging -->
       </div>
     </div>
   </article>
   
   <script type="module">
+    console.log("Search script starting...");
+    
     // Global variable to hold the pagefind module
     let pagefind;
-    let useModalResults = true; // Set to false if you prefer inline results
+
+    // Get DOM elements
+    const searchInput = document.getElementById("search-page-input");
+    const searchButton = document.getElementById("search-button");
+    const searchModal = document.getElementById("search-modal");
+    const closeModal = document.getElementById("close-modal");
+    const searchResults = document.getElementById("search-page-results");
+    const searchResultsFallback = document.getElementById("search-page-results-fallback");
+
+    console.log("DOM elements:", {
+      searchInput: !!searchInput,
+      searchButton: !!searchButton,
+      searchModal: !!searchModal,
+      closeModal: !!closeModal
+    });
 
     // Initialize the pagefind module and fire a search if the query parameter exists
     window.addEventListener("load", async function () {
-      // Hydrate pagefind
-      pagefind = await import("/pagefind/pagefind.js");
-      await pagefind.options({
-        ranking: {
-          termFrequency: 0.2,
-          pageLength: 0.75,
-          termSaturation: 1.4,
-          termSimilarity: 6.0,
-        },
-      });
+      console.log("Window loaded, initializing pagefind...");
+      
+      try {
+        // Hydrate pagefind
+        pagefind = await import("/pagefind/pagefind.js");
+        await pagefind.options({
+          ranking: {
+            termFrequency: 0.2,
+            pageLength: 0.75,
+            termSaturation: 1.4,
+            termSimilarity: 6.0,
+          },
+        });
+        console.log("Pagefind initialized successfully");
+      } catch (error) {
+        console.error("Failed to initialize pagefind:", error);
+        // Continue without pagefind for now
+      }
 
       // Get the query parameter from the URL
       const urlParams = new URLSearchParams(window.location.search);
       const query = urlParams.get("q");
 
-      // If no query parameter is set, return
-      if (!query) {
+      if (query) {
+        console.log("URL query found:", query);
+        searchInput.value = query;
+        doSearch(query);
+        searchInput.focus();
+      }
+    });
+
+    // Search function
+    async function doSearch(query) {
+      console.log("doSearch called with:", query);
+      
+      if (!query || !query.trim()) {
+        console.log("Empty query, skipping search");
         return;
       }
 
-      const searchInput = document.getElementById("search-page-input");
+      // Show modal immediately
+      showModal();
+      
+      // Show loading state
+      searchResults.innerHTML = '<div style="text-align: center; padding: 20px;">Searching...</div>';
+      searchResultsFallback.innerHTML = '<div style="text-align: center; padding: 20px;">Searching...</div>';
 
-      // Set the value of the input field to the query parameter
-      searchInput.value = query;
+      if (!pagefind) {
+        console.log("Pagefind not available, showing mock results");
+        const mockResults = `
+          <div style="padding: 10px; color: #666;">Mock search results for: "${query}"</div>
+          <div style="padding: 10px; border-bottom: 1px solid #eee;">
+            <h4>Mock Result 1</h4>
+            <p>This is a mock result because pagefind is not available</p>
+          </div>
+          <div style="padding: 10px; border-bottom: 1px solid #eee;">
+            <h4>Mock Result 2</h4>
+            <p>Another mock result for testing the UI</p>
+          </div>
+        `;
+        searchResults.innerHTML = mockResults;
+        searchResultsFallback.innerHTML = mockResults;
+        return;
+      }
 
-      // Trigger search
-      performSearch(query);
-      searchInput.focus();
-    });
+      try {
+        pagefind.init();
+        const search = await pagefind.debouncedSearch(query);
+        
+        if (!search || search.results.length === 0) {
+          const noResults = `<div style="text-align: center; padding: 20px; color: #666;">No results found for "${query}"</div>`;
+          searchResults.innerHTML = noResults;
+          searchResultsFallback.innerHTML = noResults;
+          return;
+        }
 
-    const searchPageInput = document.querySelector("#search-page-input");
-    const searchPageResults = document.querySelector("#search-page-results");
-    const searchPageResultsInline = document.querySelector("#search-page-results-inline");
-    const searchResultsOverlay = document.querySelector("#search-results-overlay");
-    const closeSearchResults = document.querySelector("#close-search-results");
-    const searchButton = document.querySelector("#search-button");
+        // Get first 10 results
+        const resultsData = await Promise.all(
+          search.results.slice(0, 10).map((r) => r.data())
+        );
 
-    // Add click event for search button (magnifying glass)
+        // Generate HTML
+        let resultsHTML = `<div style="padding: 10px; color: #666;">${search.results.length} results for "${query}"</div>`;
+        
+        resultsData.forEach((item, index) => {
+          resultsHTML += `
+            <div style="padding: 10px; border-bottom: 1px solid #eee;">
+              <div style="font-size: 12px; color: #888;">${item.meta.breadcrumbs || ''}</div>
+              <a href="${item.url}" style="color: #0066cc; font-weight: bold; text-decoration: none;">${item.meta.title}</a>
+              <p style="margin: 4px 0; color: #333;">…${item.excerpt}…</p>
+            </div>
+          `;
+        });
+
+        searchResults.innerHTML = resultsHTML;
+        searchResultsFallback.innerHTML = resultsHTML;
+        
+      } catch (error) {
+        console.error("Search error:", error);
+        const errorMsg = `<div style="text-align: center; padding: 20px; color: #666;">Search error: ${error.message}</div>`;
+        searchResults.innerHTML = errorMsg;
+        searchResultsFallback.innerHTML = errorMsg;
+      }
+    }
+
+    function showModal() {
+      console.log("Showing modal");
+      searchModal.style.display = "block";
+      document.body.style.overflow = "hidden";
+    }
+
+    function hideModal() {
+      console.log("Hiding modal");
+      searchModal.style.display = "none";
+      document.body.style.overflow = "";
+    }
+
+    // Event listeners
     if (searchButton) {
       searchButton.addEventListener("click", function(e) {
+        console.log("Search button clicked!");
         e.preventDefault();
-        const query = searchPageInput.value.trim();
+        e.stopPropagation();
+        const query = searchInput.value.trim();
+        console.log("Query:", query);
         if (query) {
-          performSearch(query);
-        }
-      });
-    }
-
-    // Add Enter key support
-    searchPageInput.addEventListener("keydown", function(e) {
-      if (e.key === "Enter") {
-        const query = searchPageInput.value.trim();
-        if (query) {
-          performSearch(query);
-        }
-      }
-    });
-
-    // Close modal functionality
-    if (closeSearchResults) {
-      closeSearchResults.addEventListener("click", function() {
-        searchResultsOverlay.classList.add("hidden");
-        document.body.style.overflow = "";
-      });
-    }
-
-    // Close modal when clicking overlay
-    if (searchResultsOverlay) {
-      searchResultsOverlay.addEventListener("click", function(e) {
-        if (e.target === searchResultsOverlay || e.target.classList.contains('bg-black')) {
-          searchResultsOverlay.classList.add("hidden");
-          document.body.style.overflow = "";
-        }
-      });
-    }
-
-    // Close modal with Escape key
-    document.addEventListener("keydown", function(e) {
-      if (e.key === "Escape" && !searchResultsOverlay.classList.contains("hidden")) {
-        searchResultsOverlay.classList.add("hidden");
-      }
-    });
-
-    // Consolidated search function
-    async function performSearch(query) {
-      console.log("Performing search for:", query); // Debug log
-      
-      if (!pagefind) {
-        console.log("Pagefind not initialized yet"); // Debug log
-        return;
-      }
-      
-      pagefind.init();
-
-      // Set the query parameter in the URL
-      const params = new URLSearchParams(document.location.search);
-      params.set("q", query);
-
-      // Default the current page to 1
-      let currentPage = 1;
-
-      // Check if the page parameter exists
-      const page = params.get("page");
-      // Calculate the range start based on the page parameter
-      if (page) {
-        currentPage = parseInt(page);
-      }
-      const rangeStart = (currentPage - 1) * 10;
-      const rangeEnd = rangeStart + 10;
-
-      // Execute the search
-      const search = await pagefind.debouncedSearch(query);
-      
-      // Determine which results container to use
-      const resultsContainer = useModalResults ? searchPageResults : searchPageResultsInline;
-      
-      // If no search results are found, exit
-      if (search === null || search.results.length === 0) {
-        resultsContainer.innerHTML = `<div class="p-4 text-center text-gray-500">No results found for "${query}"</div>`;
-        showResults();
-        return;
-      }
-
-      // total number of results
-      const resultsLength = search.results.length;
-      // Get the data for the search results
-      // Slice the results based on the range start + 10
-      const resultsData = await Promise.all(
-        search.results.slice(rangeStart, rangeEnd).map((r) => r.data()),
-      );
-      
-      // If the range does not have any results, display a message
-      if (resultsData.length === 0) {
-        resultsContainer.innerHTML = `<div class="p-4 text-center text-gray-500">No results found</div>`;
-        showResults();
-        return;
-      }
-      
-      // Add an index to the results, for heap tracking
-      const results = resultsData.map((item, index) => ({
-        ...item,
-        index: index + 1,
-      }));
-
-      // Generate the search results HTML
-      let resultsHTML = `<div class="text-gray-400 dark:text-gray-500 p-2">${resultsLength} results for "${query}"</div>`;
-
-      // Map results to HTML
-      resultsHTML += results
-        .map((item) => {
-          return `<div class="p-4 border-b border-gray-200 dark:border-gray-700 last:border-b-0">
-       <div class="flex flex-col">
-         <span class="text-gray-400 dark:text-gray-500 text-sm">${item.meta.breadcrumbs}</span>
-         <a class="link text-blue-600 dark:text-blue-400 hover:underline font-medium" href="${item.url}" data-query="${query}" data-index="${item.index}">${item.meta.title}</a>
-         <p class="text-black dark:text-white overflow-hidden mt-1">…${item.excerpt}…</p>
-       </div>
-     </div>`;
-        })
-        .join("");
-        
-      // If the results length is greater than 10, display links to show more results
-      if (resultsLength > 10) {
-        resultsHTML += `<hr class="border-divider-light dark:border-divider-dark">`;
-        resultsHTML += `<ul class="flex flex-wrap gap-1 pt-4 pb-8 justify-center text-sm">`;
-        for (let i = 1; i <= Math.ceil(resultsLength / 10); i++) {
-          if (i == currentPage) {
-            resultsHTML += `<li class="flex items-center justify-center">
-               <a href="/search/?q=${encodeURIComponent(query)}&page=${i}" class="pagination-link bg-gray-200 dark:bg-gray-800 dark:text-gray-200 px-3 py-1 rounded">${i}</a>
-            </li>`;
-          } else {
-            resultsHTML += `<li class="flex items-center justify-center">
-              <a href="/search/?q=${encodeURIComponent(query)}&page=${i}" class="pagination-link bg-gray-100 dark:bg-gray-900 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-800 px-3 py-1 rounded">${i}</a>
-            </li>`;
-          }
-        }
-        resultsHTML += `</ul>`;
-      }
-
-      resultsContainer.innerHTML = resultsHTML;
-      showResults();
-    }
-
-    // Show results based on mode
-    function showResults() {
-      if (useModalResults && searchResultsOverlay) {
-        console.log("Showing modal results"); // Debug log
-        searchResultsOverlay.classList.remove("hidden");
-        // Prevent body scrolling when modal is open
-        document.body.style.overflow = "hidden";
-        
-        // Force center positioning with JavaScript as backup
-        const modalContent = searchResultsOverlay.querySelector('div:nth-child(2)');
-        if (modalContent) {
-          modalContent.style.position = 'fixed';
-          modalContent.style.top = '50%';
-          modalContent.style.left = '50%';
-          modalContent.style.transform = 'translate(-50%, -50%)';
-          modalContent.style.zIndex = '9999';
-        }
-      } else if (searchPageResultsInline) {
-        searchPageResultsInline.classList.remove("hidden");
-      }
-    }
-
-    // Input event listener for real-time search (optional)
-    let searchTimeout;
-    searchPageInput.addEventListener("input", (e) => {
-      const query = e.target.value.trim();
-      
-      // Clear previous timeout
-      clearTimeout(searchTimeout);
-      
-      // Only search if query is not empty and after a delay
-      if (query.length > 0) {
-        searchTimeout = setTimeout(() => {
-          performSearch(query);
-        }, 300); // 300ms delay
-      } else {
-        // Hide results if query is empty
-        if (useModalResults) {
-          searchResultsOverlay.classList.add("hidden");
-          document.body.style.overflow = ""; // Restore body scrolling
+          doSearch(query);
         } else {
-          searchPageResultsInline.classList.add("hidden");
+          console.log("No query to search");
         }
-      }
-    });
+      });
+      console.log("Search button event listener added");
+    } else {
+      console.error("Search button not found!");
+    }
 
-    // Event delegation for tracking link clicks
-    if (window.heap !== undefined) {
-      document.addEventListener("click", function (event) {
-        if (event.target.tagName === "A" && event.target.closest(".link")) {
-          const searchQuery = event.target.getAttribute("data-query");
-          const resultIndex = event.target.getAttribute("data-index");
-          const url = new URL(event.target.href);
-          const properties = {
-            docs_search_target_path: url.pathname,
-            docs_search_target_title: event.target.textContent,
-            docs_search_query_text: searchQuery,
-            docs_search_target_index: resultIndex,
-            docs_search_source_path: window.location.pathname,
-            docs_search_source_title: document.title,
-          };
-          heap.track("Docs - Search - Click - Result Link", properties);
-          
-          // Close modal after clicking a result
-          if (useModalResults) {
-            searchResultsOverlay.classList.add("hidden");
-            document.body.style.overflow = ""; // Restore body scrolling
+    if (searchInput) {
+      searchInput.addEventListener("keydown", function(e) {
+        if (e.key === "Enter") {
+          console.log("Enter key pressed");
+          const query = searchInput.value.trim();
+          if (query) {
+            doSearch(query);
           }
         }
       });
     }
 
-    // Restore body scrolling when modal is closed
-    const observer = new MutationObserver(function(mutations) {
-      mutations.forEach(function(mutation) {
-        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-          if (searchResultsOverlay.classList.contains('hidden')) {
-            document.body.style.overflow = "";
-          }
+    if (closeModal) {
+      closeModal.addEventListener("click", hideModal);
+    }
+
+    if (searchModal) {
+      searchModal.addEventListener("click", function(e) {
+        if (e.target === searchModal) {
+          hideModal();
         }
       });
+    }
+
+    // Escape key to close modal
+    document.addEventListener("keydown", function(e) {
+      if (e.key === "Escape" && searchModal.style.display === "block") {
+        hideModal();
+      }
     });
-    observer.observe(searchResultsOverlay, { attributes: true });
+
+    // Test button functionality immediately
+    console.log("Adding test click to search button in 2 seconds...");
+    setTimeout(() => {
+      if (searchButton) {
+        console.log("Test: triggering click on search button");
+        searchInput.value = "test";
+        searchButton.click();
+      }
+    }, 2000);
+
   </script>
 {{ end }}
