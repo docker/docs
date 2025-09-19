@@ -8,14 +8,9 @@
     {{ .Content }}
     <div class="not-prose">
       <div class="flex justify-between gap-8 flex-row">
-        <div class="relative w-full max-w-xl">
-          <input type="search" id="search-page-input"
-            class="ring-3-gray-light-200 dark:ring-3-gray-dark-400 dark:bg-background-dark focus:ring-3-blue-light dark:focus:ring-3-blue-dark ring-3-[1.5px] w-full min-w-0 rounded-sm bg-white px-4 py-2 pr-10 outline-hidden"
-            placeholder="Search…" tabindex="0" />
-          <button type="button" id="search-button" class="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded z-10">
-            🔍
-          </button>
-        </div>
+        <input type="search" id="search-page-input"
+          class="ring-3-gray-light-200 dark:ring-3-gray-dark-400 dark:bg-background-dark focus:ring-3-blue-light dark:focus:ring-3-blue-dark ring-3-[1.5px] w-full max-w-xl min-w-0 rounded-sm bg-white px-4 py-2 outline-hidden"
+          placeholder="Search…" tabindex="0" />
         <div class="admonition flex flex-row items-center gap-1">
           <p>Not finding what you're looking for? Try</p>
           <button onclick="askAI('search-page-input')" class="topbar-button bg-blue-400/95 border-blue-300 hover:bg-blue-400/90">
@@ -27,226 +22,163 @@
         </div>
       </div>
       <hr class="border-divider-light dark:border-divider-dark" />
-      
-      <!-- Search Results Modal - Simple approach -->
-      <div id="search-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 10000;">
-        <div id="search-modal-content" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; max-width: 800px; max-height: 80%; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
-          <div style="padding: 16px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
-            <h3 style="margin: 0; font-size: 18px;">Search Results</h3>
-            <button id="close-modal" style="background: none; border: none; font-size: 24px; cursor: pointer;">&times;</button>
-          </div>
-          <div id="search-page-results" style="max-height: 60vh; overflow-y: auto; padding: 16px;">
-            <!-- results go here -->
-          </div>
-        </div>
-      </div>
-      
-      <!-- Fallback: Inline results for debugging -->
-      <div id="search-page-results-fallback" style="margin-top: 20px;">
-        <!-- results will also appear here for debugging -->
+      <div id="search-page-results">
+        <!-- results -->
       </div>
     </div>
   </article>
-  
   <script type="module">
-    console.log("Search script starting...");
-    
     // Global variable to hold the pagefind module
     let pagefind;
 
-    // Get DOM elements
-    const searchInput = document.getElementById("search-page-input");
-    const searchButton = document.getElementById("search-button");
-    const searchModal = document.getElementById("search-modal");
-    const closeModal = document.getElementById("close-modal");
-    const searchResults = document.getElementById("search-page-results");
-    const searchResultsFallback = document.getElementById("search-page-results-fallback");
-
-    console.log("DOM elements:", {
-      searchInput: !!searchInput,
-      searchButton: !!searchButton,
-      searchModal: !!searchModal,
-      closeModal: !!closeModal
-    });
-
     // Initialize the pagefind module and fire a search if the query parameter exists
     window.addEventListener("load", async function () {
-      console.log("Window loaded, initializing pagefind...");
-      
-      try {
-        // Hydrate pagefind
-        pagefind = await import("/pagefind/pagefind.js");
-        await pagefind.options({
-          ranking: {
-            termFrequency: 0.2,
-            pageLength: 0.75,
-            termSaturation: 1.4,
-            termSimilarity: 6.0,
-          },
-        });
-        console.log("Pagefind initialized successfully");
-      } catch (error) {
-        console.error("Failed to initialize pagefind:", error);
-        // Continue without pagefind for now
-      }
+      // Hydrate pagefind
+      pagefind = await import("/pagefind/pagefind.js");
+      await pagefind.options({
+        ranking: {
+          termFrequency: 0.2,
+          pageLength: 0.75,
+          termSaturation: 1.4,
+          termSimilarity: 6.0,
+        },
+      });
 
       // Get the query parameter from the URL
       const urlParams = new URLSearchParams(window.location.search);
       const query = urlParams.get("q");
 
-      if (query) {
-        console.log("URL query found:", query);
-        searchInput.value = query;
-        doSearch(query);
-        searchInput.focus();
+      // If no query parameter is set, return
+      if (!query) {
+        return;
       }
+
+      const searchInput = document.getElementById("search-page-input");
+
+      // Set the value of the input field to the query parameter
+      searchInput.value = query;
+
+      // Trigger the search immediately
+      onPageSearch({ target: { value: query } });
+      searchInput.focus();
     });
 
-    // Search function
-    async function doSearch(query) {
-      console.log("doSearch called with:", query);
-      
-      if (!query || !query.trim()) {
-        console.log("Empty query, skipping search");
+    const searchPageInput = document.querySelector("#search-page-input");
+    const searchPageResults = document.querySelector("#search-page-results");
+
+    // onPageSearch returns 10 results per query
+    async function onPageSearch(e) {
+      pagefind.init();
+      const query = e.target.value;
+
+      // If query is empty, hide results
+      if (!query.trim()) {
+        searchPageResults.innerHTML = "";
         return;
       }
 
-      // Show modal immediately
-      showModal();
+      // Set the query parameter in the URL
+      const params = new URLSearchParams(document.location.search);
+      params.set("q", query);
       
-      // Show loading state
-      searchResults.innerHTML = '<div style="text-align: center; padding: 20px;">Searching...</div>';
-      searchResultsFallback.innerHTML = '<div style="text-align: center; padding: 20px;">Searching...</div>';
+      // Update URL without page reload
+      const newUrl = window.location.pathname + '?' + params.toString();
+      history.replaceState(null, '', newUrl);
 
-      if (!pagefind) {
-        console.log("Pagefind not available, showing mock results");
-        const mockResults = `
-          <div style="padding: 10px; color: #666;">Mock search results for: "${query}"</div>
-          <div style="padding: 10px; border-bottom: 1px solid #eee;">
-            <h4>Mock Result 1</h4>
-            <p>This is a mock result because pagefind is not available</p>
-          </div>
-          <div style="padding: 10px; border-bottom: 1px solid #eee;">
-            <h4>Mock Result 2</h4>
-            <p>Another mock result for testing the UI</p>
-          </div>
-        `;
-        searchResults.innerHTML = mockResults;
-        searchResultsFallback.innerHTML = mockResults;
-        return;
+      // Default the current page to 1
+      let currentPage = 1;
+
+      // Check if the page parameter exists
+      const page = params.get("page");
+      // Calculate the range start based on the page parameter
+      if (page) {
+        currentPage = parseInt(page);
       }
+      const rangeStart = (currentPage - 1) * 10;
+      const rangeEnd = rangeStart + 10;
 
-      try {
-        pagefind.init();
-        const search = await pagefind.debouncedSearch(query);
-        
-        if (!search || search.results.length === 0) {
-          const noResults = `<div style="text-align: center; padding: 20px; color: #666;">No results found for "${query}"</div>`;
-          searchResults.innerHTML = noResults;
-          searchResultsFallback.innerHTML = noResults;
+      // Execute the search
+      const search = await pagefind.debouncedSearch(query);
+      // If no search results are found, exit
+      if (search === null) {
+        searchPageResults.innerHTML = `<div class="p-4 text-center text-gray-500">No results found</div>`;
+        return;
+      } else {
+        // total number of results
+        const resultsLength = search.results.length;
+        // Get the data for the search results
+        // Slice the results based on the range start + 10
+        const resultsData = await Promise.all(
+          search.results.slice(rangeStart, rangeEnd).map((r) => r.data()),
+        );
+        // If the range does not have any results, display a message
+        if (resultsData.length === 0) {
+          searchPageResults.innerHTML = `<div class="p-4 text-center text-gray-500">No results found</div>`;
           return;
         }
+        // Add an index to the results, for heap tracking
+        const results = resultsData.map((item, index) => ({
+          ...item,
+          index: index + 1,
+        }));
 
-        // Get first 10 results
-        const resultsData = await Promise.all(
-          search.results.slice(0, 10).map((r) => r.data())
-        );
+        // Generate the search results HTML
+        let resultsHTML = `<div class="text-gray-400 dark:text-gray-500 p-2">${resultsLength} results</div>`;
 
-        // Generate HTML
-        let resultsHTML = `<div style="padding: 10px; color: #666;">${search.results.length} results for "${query}"</div>`;
-        
-        resultsData.forEach((item, index) => {
-          resultsHTML += `
-            <div style="padding: 10px; border-bottom: 1px solid #eee;">
-              <div style="font-size: 12px; color: #888;">${item.meta.breadcrumbs || ''}</div>
-              <a href="${item.url}" style="color: #0066cc; font-weight: bold; text-decoration: none;">${item.meta.title}</a>
-              <p style="margin: 4px 0; color: #333;">…${item.excerpt}…</p>
-            </div>
-          `;
-        });
-
-        searchResults.innerHTML = resultsHTML;
-        searchResultsFallback.innerHTML = resultsHTML;
-        
-      } catch (error) {
-        console.error("Search error:", error);
-        const errorMsg = `<div style="text-align: center; padding: 20px; color: #666;">Search error: ${error.message}</div>`;
-        searchResults.innerHTML = errorMsg;
-        searchResultsFallback.innerHTML = errorMsg;
-      }
-    }
-
-    function showModal() {
-      console.log("Showing modal");
-      searchModal.style.display = "block";
-      document.body.style.overflow = "hidden";
-    }
-
-    function hideModal() {
-      console.log("Hiding modal");
-      searchModal.style.display = "none";
-      document.body.style.overflow = "";
-    }
-
-    // Event listeners
-    if (searchButton) {
-      searchButton.addEventListener("click", function(e) {
-        console.log("Search button clicked!");
-        e.preventDefault();
-        e.stopPropagation();
-        const query = searchInput.value.trim();
-        console.log("Query:", query);
-        if (query) {
-          doSearch(query);
-        } else {
-          console.log("No query to search");
-        }
-      });
-      console.log("Search button event listener added");
-    } else {
-      console.error("Search button not found!");
-    }
-
-    if (searchInput) {
-      searchInput.addEventListener("keydown", function(e) {
-        if (e.key === "Enter") {
-          console.log("Enter key pressed");
-          const query = searchInput.value.trim();
-          if (query) {
-            doSearch(query);
+        // Map results to HTML
+        resultsHTML += results
+          .map((item) => {
+            return `<div class="p-4 border-b border-gray-200 dark:border-gray-700">
+         <div class="flex flex-col">
+           <span class="text-gray-400 dark:text-gray-500 text-sm">${item.meta.breadcrumbs}</span>
+           <a class="link text-blue-600 dark:text-blue-400 hover:underline" href="${item.url}" data-query="${query}" data-index="${item.index}">${item.meta.title}</a>
+           <p class="text-black dark:text-white overflow-hidden">…${item.excerpt}…</p>
+         </div>
+       </div>`;
+          })
+          .join("");
+        // If the results length is greater than 10, display links to show more results
+        if (resultsLength > 10) {
+          resultsHTML += `<hr class="border-divider-light dark:border-divider-dark">`;
+          resultsHTML += `<ul class="flex flex-wrap gap-1 pt-4 pb-8 justify-center text-sm">`;
+          for (let i = 1; i <= Math.ceil(resultsLength / 10); i++) {
+            if (i == currentPage) {
+              resultsHTML += `<li class="flex items-center justify-center">
+                 <a href="/search/?q=${encodeURIComponent(query)}&page=${i}" class="pagination-link bg-gray-200 dark:bg-gray-800 dark:text-gray-200 px-3 py-1 rounded">${i}</a>
+              </li>`;
+            } else {
+              resultsHTML += `<li class="flex items-center justify-center">
+                <a href="/search/?q=${encodeURIComponent(query)}&page=${i}" class="pagination-link bg-gray-100 dark:bg-gray-900 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-800 px-3 py-1 rounded">${i}</a>
+              </li>`;
+            }
           }
+          resultsHTML += `</ul>`;
+        }
+
+        searchPageResults.innerHTML = resultsHTML;
+      }
+    }
+
+    searchPageInput.addEventListener("input", (e) => onPageSearch(e));
+
+    // Event delegation for tracking link clicks
+    if (window.heap !== undefined) {
+      searchPageResults.addEventListener("click", function (event) {
+        if (event.target.tagName === "A" && event.target.closest(".link")) {
+          const searchQuery = event.target.getAttribute("data-query");
+          const resultIndex = event.target.getAttribute("data-index");
+          const url = new URL(event.target.href);
+          const properties = {
+            docs_search_target_path: url.pathname,
+            docs_search_target_title: event.target.textContent,
+            docs_search_query_text: searchQuery,
+            docs_search_target_index: resultIndex,
+            docs_search_source_path: window.location.pathname,
+            docs_search_source_title: document.title,
+          };
+          heap.track("Docs - Search - Click - Result Link", properties);
         }
       });
     }
-
-    if (closeModal) {
-      closeModal.addEventListener("click", hideModal);
-    }
-
-    if (searchModal) {
-      searchModal.addEventListener("click", function(e) {
-        if (e.target === searchModal) {
-          hideModal();
-        }
-      });
-    }
-
-    // Escape key to close modal
-    document.addEventListener("keydown", function(e) {
-      if (e.key === "Escape" && searchModal.style.display === "block") {
-        hideModal();
-      }
-    });
-
-    // Test button functionality immediately
-    console.log("Adding test click to search button in 2 seconds...");
-    setTimeout(() => {
-      if (searchButton) {
-        console.log("Test: triggering click on search button");
-        searchInput.value = "test";
-        searchButton.click();
-      }
-    }, 2000);
-
   </script>
 {{ end }}

@@ -27,7 +27,7 @@
           }"
       tabindex="0"
     />
-    <div id="search-bar-icon">
+    <div id="search-bar-icon" class="cursor-pointer" @click="const query = $refs.searchBarInput.value.trim(); if (query) { window.location.href = '/search/?q=' + encodeURIComponent(query); }">
       <span class="icon-svg-stroke">
             {{ partial "utils/svg.html" "/icons/search.svg" }}
           </span>
