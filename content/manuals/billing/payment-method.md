@@ -34,7 +34,7 @@ The following payment methods are supported:
   - Automated Clearing House (ACH) transfer with a
   [verified](manuals/billing/payment-method.md#verify-a-bank-account) US
   bank account
-- Pay by invoice
+- [Pay by invoice](/manuals/billing/history.md)
 
 All charges are in United States dollars (USD).
 
