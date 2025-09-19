@@ -2,7 +2,7 @@
 # github.com/moby/buildkit v0.24.0
 # github.com/docker/buildx v0.28.0
 # github.com/docker/cli v28.4.0+incompatible
-# github.com/docker/compose/v2 v2.39.3
+# github.com/docker/compose/v2 v2.39.4
 # github.com/docker/model-cli v0.1.40
 # github.com/docker/mcp-gateway v0.13.1-0.20250730013131-e08a3be84765
 # github.com/docker/scout-cli v1.18.1

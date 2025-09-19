@@ -17,7 +17,7 @@ require (
 	github.com/distribution/reference v0.6.0 // indirect
 	github.com/docker/buildx v0.28.0 // indirect
 	github.com/docker/cli v28.4.0+incompatible // indirect
-	github.com/docker/compose/v2 v2.39.3 // indirect
+	github.com/docker/compose/v2 v2.39.4 // indirect
 	github.com/docker/distribution v2.8.3+incompatible // indirect
 	github.com/docker/docker v28.4.0+incompatible // indirect
 	github.com/docker/docker-credential-helpers v0.9.3 // indirect
@@ -111,7 +111,7 @@ require (
 replace (
 	github.com/docker/buildx => github.com/docker/buildx v0.28.0
 	github.com/docker/cli => github.com/docker/cli v28.3.3+incompatible
-	github.com/docker/compose/v2 => github.com/docker/compose/v2 v2.39.3
+	github.com/docker/compose/v2 => github.com/docker/compose/v2 v2.39.4
 	github.com/docker/model-cli => github.com/docker/model-cli v0.1.40
 	github.com/docker/scout-cli => github.com/docker/scout-cli v1.18.1
 	github.com/moby/buildkit => github.com/moby/buildkit v0.24.0
