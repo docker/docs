@@ -30,10 +30,11 @@
       </div>
       <hr class="border-divider-light dark:border-divider-dark" />
       
-      <!-- Fixed positioning for search results -->
-      <div id="search-results-overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50" style="top: 0;">
-        <div class="absolute top-20 left-1/2 transform -translate-x-1/2 w-full max-w-4xl max-h-[80vh] overflow-y-auto bg-white dark:bg-gray-900 rounded-lg shadow-xl mx-4">
-          <div class="sticky top-0 bg-white dark:bg-gray-900 p-4 border-b border-divider-light dark:border-divider-dark">
+      <!-- Fixed positioning for search results with better positioning -->
+      <div id="search-results-overlay" class="hidden fixed inset-0 z-50" style="position: fixed !important; top: 0 !important; left: 0 !important; width: 100vw !important; height: 100vh !important;">
+        <div class="fixed inset-0 bg-black bg-opacity-50"></div>
+        <div class="fixed top-1/2 left-1/2 w-full max-w-4xl max-h-[80vh] overflow-y-auto bg-white dark:bg-gray-900 rounded-lg shadow-xl mx-4" style="transform: translate(-50%, -50%) !important; position: fixed !important;">
+          <div class="sticky top-0 bg-white dark:bg-gray-900 p-4 border-b border-divider-light dark:border-divider-dark z-10">
             <div class="flex justify-between items-center">
               <h3 class="text-lg font-semibold">Search Results</h3>
               <button id="close-search-results" class="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded">
@@ -101,12 +102,15 @@
     const searchButton = document.querySelector("#search-button");
 
     // Add click event for search button (magnifying glass)
-    searchButton.addEventListener("click", function() {
-      const query = searchPageInput.value.trim();
-      if (query) {
-        performSearch(query);
-      }
-    });
+    if (searchButton) {
+      searchButton.addEventListener("click", function(e) {
+        e.preventDefault();
+        const query = searchPageInput.value.trim();
+        if (query) {
+          performSearch(query);
+        }
+      });
+    }
 
     // Add Enter key support
     searchPageInput.addEventListener("keydown", function(e) {
@@ -119,16 +123,22 @@
     });
 
     // Close modal functionality
-    closeSearchResults.addEventListener("click", function() {
-      searchResultsOverlay.classList.add("hidden");
-    });
+    if (closeSearchResults) {
+      closeSearchResults.addEventListener("click", function() {
+        searchResultsOverlay.classList.add("hidden");
+        document.body.style.overflow = "";
+      });
+    }
 
     // Close modal when clicking overlay
-    searchResultsOverlay.addEventListener("click", function(e) {
-      if (e.target === searchResultsOverlay) {
-        searchResultsOverlay.classList.add("hidden");
-      }
-    });
+    if (searchResultsOverlay) {
+      searchResultsOverlay.addEventListener("click", function(e) {
+        if (e.target === searchResultsOverlay || e.target.classList.contains('bg-black')) {
+          searchResultsOverlay.classList.add("hidden");
+          document.body.style.overflow = "";
+        }
+      });
+    }
 
     // Close modal with Escape key
     document.addEventListener("keydown", function(e) {
@@ -139,7 +149,12 @@
 
     // Consolidated search function
     async function performSearch(query) {
-      if (!pagefind) return;
+      console.log("Performing search for:", query); // Debug log
+      
+      if (!pagefind) {
+        console.log("Pagefind not initialized yet"); // Debug log
+        return;
+      }
       
       pagefind.init();
 
@@ -233,11 +248,22 @@
 
     // Show results based on mode
     function showResults() {
-      if (useModalResults) {
+      if (useModalResults && searchResultsOverlay) {
+        console.log("Showing modal results"); // Debug log
         searchResultsOverlay.classList.remove("hidden");
         // Prevent body scrolling when modal is open
         document.body.style.overflow = "hidden";
-      } else {
+        
+        // Force center positioning with JavaScript as backup
+        const modalContent = searchResultsOverlay.querySelector('div:nth-child(2)');
+        if (modalContent) {
+          modalContent.style.position = 'fixed';
+          modalContent.style.top = '50%';
+          modalContent.style.left = '50%';
+          modalContent.style.transform = 'translate(-50%, -50%)';
+          modalContent.style.zIndex = '9999';
+        }
+      } else if (searchPageResultsInline) {
         searchPageResultsInline.classList.remove("hidden");
       }
     }
