@@ -182,7 +182,7 @@ The container continues to run until you stop it.
 
 2. Locate the container you'd like to stop.
 
-3. Select the **Delete** action in the Actions column.
+3. Select the **blue square Stop button** in the Actions column to stop the container.
 
 ![A screenshot of Docker Desktop Dashboard showing how to delete the container](images/delete-the-container.webp?border=true)
 
