@@ -58,13 +58,8 @@
       // Set the value of the input field to the query parameter
       searchInput.value = query;
 
-      // Trigger the input event to simulate user typing
-      const event = new Event("input", {
-        bubbles: true,
-        cancelable: true,
-      });
-      // Trigger the input event for the search input
-      searchInput.dispatchEvent(event);
+      // Trigger the search immediately
+      onPageSearch({ target: { value: query } });
       searchInput.focus();
     });
 
@@ -76,9 +71,19 @@
       pagefind.init();
       const query = e.target.value;
 
+      // If query is empty, hide results
+      if (!query.trim()) {
+        searchPageResults.innerHTML = "";
+        return;
+      }
+
       // Set the query parameter in the URL
       const params = new URLSearchParams(document.location.search);
       params.set("q", query);
+      
+      // Update URL without page reload
+      const newUrl = window.location.pathname + '?' + params.toString();
+      history.replaceState(null, '', newUrl);
 
       // Default the current page to 1
       let currentPage = 1;
@@ -96,6 +101,7 @@
       const search = await pagefind.debouncedSearch(query);
       // If no search results are found, exit
       if (search === null) {
+        searchPageResults.innerHTML = `<div class="p-4 text-center text-gray-500">No results found</div>`;
         return;
       } else {
         // total number of results
@@ -107,7 +113,7 @@
         );
         // If the range does not have any results, display a message
         if (resultsData.length === 0) {
-          searchPageResults.innerHTML = `<div class="p-4">No results found</div>`;
+          searchPageResults.innerHTML = `<div class="p-4 text-center text-gray-500">No results found</div>`;
           return;
         }
         // Add an index to the results, for heap tracking
@@ -116,23 +122,16 @@
           index: index + 1,
         }));
 
-        // If the query is not empty, display the search results container
-        if (query) {
-          searchPageResults.classList.remove("hidden");
-        } else {
-          searchPageResults.classList.add("hidden");
-        }
-
         // Generate the search results HTML
         let resultsHTML = `<div class="text-gray-400 dark:text-gray-500 p-2">${resultsLength} results</div>`;
 
         // Map results to HTML
         resultsHTML += results
           .map((item) => {
-            return `<div class="p-4">
+            return `<div class="p-4 border-b border-gray-200 dark:border-gray-700">
          <div class="flex flex-col">
-           <span class="text-gray-400 dark:texty-gray-dark text-sm">${item.meta.breadcrumbs}</span>
-           <a class="link" href="${item.url}" data-query="${query}" data-index="${item.index}">${item.meta.title}</a>
+           <span class="text-gray-400 dark:text-gray-500 text-sm">${item.meta.breadcrumbs}</span>
+           <a class="link text-blue-600 dark:text-blue-400 hover:underline" href="${item.url}" data-query="${query}" data-index="${item.index}">${item.meta.title}</a>
            <p class="text-black dark:text-white overflow-hidden">…${item.excerpt}…</p>
          </div>
        </div>`;
@@ -142,14 +141,14 @@
         if (resultsLength > 10) {
           resultsHTML += `<hr class="border-divider-light dark:border-divider-dark">`;
           resultsHTML += `<ul class="flex flex-wrap gap-1 pt-4 pb-8 justify-center text-sm">`;
-          for (let i = 1; i <= resultsLength / 10; i++) {
+          for (let i = 1; i <= Math.ceil(resultsLength / 10); i++) {
             if (i == currentPage) {
               resultsHTML += `<li class="flex items-center justify-center">
-                 <a href="/search/?q=${query}&page=${i}" class="pagination-link bg-gray-200 dark:bg-gray-800 dark:text-gray-200">${i}</a>
+                 <a href="/search/?q=${encodeURIComponent(query)}&page=${i}" class="pagination-link bg-gray-200 dark:bg-gray-800 dark:text-gray-200 px-3 py-1 rounded">${i}</a>
               </li>`;
             } else {
               resultsHTML += `<li class="flex items-center justify-center">
-                <a href="/search/?q=${query}&page=${i}" class="pagination-link bg-gray-100 dark:bg-gray-900 dark:text-gray-400">${i}</a>
+                <a href="/search/?q=${encodeURIComponent(query)}&page=${i}" class="pagination-link bg-gray-100 dark:bg-gray-900 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-800 px-3 py-1 rounded">${i}</a>
               </li>`;
             }
           }
