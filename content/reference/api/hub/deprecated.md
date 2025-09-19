@@ -28,9 +28,16 @@ The endpoint may be removed, disabled, or change behavior in a future release.
 
 | Status     | Feature                                                                               | Date       |
 |------------|---------------------------------------------------------------------------------------|------------|
+| Deprecated | [Deprecate undocumented create repository](#deprecate-legacy-createrepository)        | 2025-09-19 |
 | Deprecated | [Deprecate /v2/repositories/{namespace}](#deprecate-legacy-listnamespacerepositories) | 2025-06-27 |
 |            | [Create deprecation log table](#create-deprecation-log-table)                         | 2025-06-27 |
 | Removed    | [Docker Hub API v1 deprecation](#docker-hub-api-v1-deprecation)                       | 2022-08-23 |
+
+---
+
+### Deprecate legacy CreateRepository
+
+Deprecate undocumented endpoint `POST /v2/repositories` and `POST /v2/repositories/{namespace}` replaced by [Create repository](/reference/api/hub/latest/#tag/repositories/operation/CreateRepository).
 
 ---
 

@@ -15,6 +15,19 @@ issues for Docker Service APIs.
 
 ---
 
+## 2025-09-19
+
+### New
+
+- Add [Create repository](/reference/api/hub/latest/#tag/repositories/operation/CreateRepository) endpoints for a given `namespace`.
+
+### Deprecations
+
+- [Deprecate POST /v2/repositories](/reference/api/hub/deprecated/#deprecate-legacy-createrepository)
+- [Deprecate POST /v2/repositories/{namespace}](/reference/api/hub/deprecated/#deprecate-legacy-createrepository)
+
+---
+
 ## 2025-07-29
 
 ### New
