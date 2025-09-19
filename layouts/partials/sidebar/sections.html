@@ -79,6 +79,9 @@
           </button>
         {{- end }}
       </div>
+      {{/* Only show expand group button if section has children */}}
+      {{- $hasChildren := gt (len (where .Pages "Params.sitemap" "ne" "false")) 0 }}
+      {{- if $hasChildren }}
       <!-- Expand group button -->
       <button
         @click="expanded = !expanded"
@@ -97,6 +100,7 @@
           {{ partialCached "icon" "arrow_drop_up" "arrow_drop_up" }}
         </span>
       </button>
+      {{- end }}
     </div>
     <ul
       :class="{ 'hidden' : !expanded }"
