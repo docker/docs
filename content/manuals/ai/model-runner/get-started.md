@@ -5,11 +5,13 @@ weight: 10
 keywords: Docker, ai, model runner, setup, installation, getting started
 ---
 
-Get started with [Docker Model Runner](_index.md).
+Docker Model Runner (DMR) lets you run and manage AI models locally using Docker. This page shows you how to enable DMR, pull and run a model, configure model settings, and publish custom models.
 
 ## Enable Docker Model Runner
 
-### Enable DMR in Docker Desktop
+You can enable DMR using Docker Desktop or Docker Engine. Follow the instructions below based on your setup.
+
+### Docker Desktop
 
 1. In the settings view, go to the **AI** tab.
 1. Select the **Enable Docker Model Runner** setting.
@@ -30,7 +32,7 @@ with your local models in the **Models** tab in the Docker Desktop Dashboard.
 > For Docker Desktop versions 4.45 and earlier, this setting was under the
 > **Beta features** tab.
 
-### Enable DMR in Docker Engine
+### Docker Engine
 
 1. Ensure you have installed [Docker Engine](/engine/install/).
 1. Docker Model Runner is available as a package. To install it, run:
