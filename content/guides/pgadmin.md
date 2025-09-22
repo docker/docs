@@ -73,12 +73,12 @@ In this guide you will learn how to:
 
 4. Once in the admin panel, select the **Add New Server** link to define a new server. Enter the following details:
 
-    - _General_ tab:
-        - **Name:** postgres
-    - _Connection_ tab:
-        - **Host name/address:** postgres
-        - **Username:** postgres
-        - **Password:** secret
+    - **General** tab:
+        - **Name**: postgres
+    - **Connection** tab:
+        - **Host name/address**: postgres
+        - **Username**: postgres
+        - **Password**: secret
         - Enable the **Save password?** field
 
     > [!IMPORTANT]
