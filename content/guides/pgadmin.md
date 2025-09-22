@@ -12,7 +12,7 @@ params:
   time: 10 minutes
 ---
 
-Many applications use PostgreSQL databases in the application stack. However, not all developers are very knowledgable about navigating and working with PostgreSQL databases.
+Many applications use PostgreSQL databases in the application stack. However, not all developers are knowledgeable about navigating and working with PostgreSQL databases.
 
 Fortunately, when you use containers in development, it is easy to add additional services to help with troubleshooting and debugging.
 
@@ -62,7 +62,7 @@ In this guide you will learn how to:
 
     After the image is downloaded the container starts, you will see output that looks similar to the following indicating pgAdmin is ready:
 
-    ```plaintext
+    ```console
     pgadmin-1   | [2025-09-22 15:52:47 +0000] [1] [INFO] Starting gunicorn 23.0.0
     pgadmin-1   | [2025-09-22 15:52:47 +0000] [1] [INFO] Listening at: http://[::]:80 (1)
     pgadmin-1   | [2025-09-22 15:52:47 +0000] [1] [INFO] Using worker: gthread
@@ -71,7 +71,7 @@ In this guide you will learn how to:
 
 3. Open pgAdmin by going to http://localhost:5050.
 
-4. Once in the admin panel, click the **Add New Server** link to define a new server. Enter the following details:
+4. Once in the admin panel, select the **Add New Server** link to define a new server. Enter the following details:
 
     - _General_ tab:
         - **Name:** postgres
@@ -83,14 +83,12 @@ In this guide you will learn how to:
 
     > [!IMPORTANT]
     >
-    > These connection details assume you are using the Compose file snippet above. If you are using an existing Compose file,
+    > These connection details assume you are using the previous Compose file snippet. If you are using an existing Compose file,
     > adjust the connection details as required. The **Host name/address** field should match the name of your postgres service.
 
-5. Click the **Save** button to create the new database.
+5. Select the **Save** button to create the new database.
 
-That's it! You now have pgAdmin setup and connected to your containerized database.
-
-Feel free to navigate around, view the tables, and explore your database.
+You now have pgAdmin setup and connected to your containerized database. Feel free to navigate around, view the tables, and explore your database.
 
 
 
