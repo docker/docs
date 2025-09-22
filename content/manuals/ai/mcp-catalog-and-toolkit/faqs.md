@@ -30,7 +30,7 @@ In addition to Docker-built servers, the catalog includes select servers from tr
 
 - Pulling and building the code in an ephemeral build environment.
 - Testing initialization and functionality.
-- Verifying that tools, resources, and prompts can be successfully listed.
+- Verifying that tools can be successfully listed.
 
 ### Under what conditions does Docker reject MCP server submissions?
 
@@ -42,7 +42,7 @@ Docker’s security measures currently represent a best-effort approach. While D
 
 ### How are credentials  managed for MCP servers?
 
-Starting with Docker Desktop version 4.43.0, credentials are stored securely in the Docker Desktop VM. The storage implementation depends on the platform (for example, macOS, WSL2, etc.). You can manage the credentials using the following CLI commands:
+Starting with Docker Desktop version 4.43.0, credentials are stored securely in the Docker Desktop VM. The storage implementation depends on the platform (for example, macOS, WSL2). You can manage the credentials using the following CLI commands:
 
 -  `docker mcp secret ls` - List stored credentials
 -  `docker mcp secret rm` -  Remove specific credentials
@@ -52,7 +52,7 @@ In the upcoming versions of Docker Desktop, Docker aims to support pluggable  st
 
 ### Are credentials removed when an MCP server is uninstalled?
 
-MCP servers are not technically uninstalled since they exist as Docker containers pulled to your local Docker Desktop. when you disable an MCP server, the server stops running, but the container image remains on your system.
+No. MCP servers are not technically uninstalled since they exist as Docker containers pulled to your local Docker Desktop. Removing an MCP server stops the container but leaves the image on your system. Even if the container is deleted, credentials remain stored until you remove them manually.
 
 
 ## Related pages
