@@ -154,6 +154,7 @@ PAT
 perl
 pgAdmin
 PKG
+plaintext
 plist
 Postgres
 PowerShell

@@ -6,8 +6,6 @@ linktitle: Visualizing your PostgreSQL databases with pgAdmin
 summary: |
   Explore how to add pgAdmin to your development stack and make it as easy as possible for your teammates to navigate through your PostgreSQL databases.
 tags: [databases]
-aliases:
-  - /guides/use-case/pgadmin/
 params:
   time: 10 minutes
 ---
@@ -74,11 +72,11 @@ In this guide you will learn how to:
 4. Once in the admin panel, select the **Add New Server** link to define a new server. Enter the following details:
 
     - **General** tab:
-        - **Name**: postgres
+        - **Name**: `postgres`
     - **Connection** tab:
-        - **Host name/address**: postgres
-        - **Username**: postgres
-        - **Password**: secret
+        - **Host name/address**: `postgres`
+        - **Username**: `postgres`
+        - **Password**: `secret`
         - Enable the **Save password?** field
 
     > [!IMPORTANT]
