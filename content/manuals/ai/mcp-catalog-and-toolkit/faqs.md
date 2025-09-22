@@ -40,20 +40,19 @@ Docker rejects MCP server submissions that fail automated testing and validation
 
 Docker’s security measures currently represent a best-effort approach. While Docker implements automated testing, scanning, and metadata extraction for each server in the catalog, these security measures are not yet exhaustive. Docker is actively working to enhance its security processes and expand testing coverage. Enterprise customers can contact their Docker account manager for specific security requirements and implementation details.
 
-### How are credentials  managed for MCP servers?
+### How are credentials managed for MCP servers?
 
 Starting with Docker Desktop version 4.43.0, credentials are stored securely in the Docker Desktop VM. The storage implementation depends on the platform (for example, macOS, WSL2). You can manage the credentials using the following CLI commands:
 
--  `docker mcp secret ls` - List stored credentials
--  `docker mcp secret rm` -  Remove specific credentials
--  `docker mcp oauth revoke` - Revoke OAuth-based credentials
+- `docker mcp secret ls` - List stored credentials
+- `docker mcp secret rm` - Remove specific credentials
+- `docker mcp oauth revoke` - Revoke OAuth-based credentials
 
-In the upcoming versions of Docker Desktop, Docker aims to support pluggable  storage for these secrets, and a few out-of-the-box storage providers for enhanced flexibility for credential management.
+In the upcoming versions of Docker Desktop, Docker plans to support pluggable storage for these secrets and additional out-of-the-box storage providers to give users more flexibility in managing credentials.
 
 ### Are credentials removed when an MCP server is uninstalled?
 
 No. MCP servers are not technically uninstalled since they exist as Docker containers pulled to your local Docker Desktop. Removing an MCP server stops the container but leaves the image on your system. Even if the container is deleted, credentials remain stored until you remove them manually.
-
 
 ## Related pages
 
