@@ -36,7 +36,7 @@ up](https://www.docker.com/products/docker-offload/) and subscribe.
    ```
 
 3. When prompted, select your account to use for Docker Offload. This account
-   will consume credits for your Docker Offload usage.
+   will consume Docker Offload usage.
 
 4. When prompted, select whether to enable GPU support. If you choose to enable
    GPU support, Docker Offload will run in an instance with an NVIDIA L4 GPU,
