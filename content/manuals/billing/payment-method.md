@@ -175,10 +175,10 @@ the **Actions** icon. Then, select **Delete**.
 
 ## Enable pay by invoice
 
-Pay by invoice is only available for subscription renewals on annual plans with
-at least 25 seats, not initial payments. When you select this option, you'll
-pay upfront for your first subscription period using a payment card or US bank
-account.
+Pay by invoice is available for Teams and Business customers with 25+ seats
+on annual subscriptions, starting with your first renewal. When you select this
+payment method, you'll pay upfront for your first subscription period using a
+payment card or ACH bank transfer.
 
 At renewal time, instead of automatic payment, you'll receive an invoice via
 email that you must pay manually. Pay by invoice is not available for
