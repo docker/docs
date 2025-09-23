@@ -34,6 +34,46 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 >
 > If you're experiencing malware detection issues on Mac, follow the steps documented in [docker/for-mac#7527](https://github.com/docker/for-mac/issues/7527).
 
+## 4.47.0
+
+{{< release-date date="2025-09-25" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.47.0" build_path="/TODO/" >}}
+
+### New
+
+- [Docker Debug](/reference/cli/docker/debug.md) is now free for all users.
+- MCP Gateway now supports dynamic MCP server discovery and the MCP Community Registry.
+- With Enhanced Container Isolation, administrators can now block `docker plugin` and `docker login` commands in containers with Docker socket mounts.
+
+### Upgrades
+
+- [Docker Compose v2.39.4](https://github.com/docker/compose/releases/tag/v2.39.4)
+- [Kubernetes v1.34.1](https://github.com/kubernetes/kubernetes/releases/tag/v1.34.1)
+  - [CNI plugins v1.7.1](https://github.com/containernetworking/plugins/releases/tag/v1.7.1)
+  - [cri-tools v1.33.0](https://github.com/kubernetes-sigs/cri-tools/releases/tag/v1.33.0)
+  - [cri-dockerd v0.3.20](https://github.com/Mirantis/cri-dockerd/releases/tag/v0.3.20)
+- Docker Debug `v0.0.44`
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Docker Debug no longer hangs when debugging containers that have environment variables set to an empty value.
+
+#### For Mac
+
+- Removed the `com.apple.security.cs.allow-dyld-environment-variables` entitlement which allow a signed, arbitrary dynamic library to be loaded with Docker Desktop via the `DYLD_INSERT_LIBRARIES` environment variable.
+- Fixed a regression where config profile sign-in enforcement broke for some customer environments.
+- Fixed a bug that sometimes caused the `docker model package` command to hang when writing to the local content store (without the `--push` flag).
+- Fixed a bug where containers started with the restart policy `unless-stopped` were never restarted. Fixes [docker/for-mac#7744](https://github.com/docker/for-mac/issues/7744).
+
+#### For Windows
+
+- Fixed the Goose MCP client connection on Windows for the Docker MCP Toolkit.
+- Addressed an issue with the "Skipping integration" of a WSL distro option, after a failed integration attempt.
+- Fixed a bug that sometimes caused the `docker model package` command to hang when writing to the local content store (without the `--push` flag).
+
 ## 4.46.0
 
 {{< release-date date="2025-09-11" >}}
