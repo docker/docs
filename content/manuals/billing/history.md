@@ -61,7 +61,7 @@ and 15 days after the due date.
 
 You can pay an invoice from the Docker Billing Console:
 
-1. Sign in to [Docker Home](https://app.docker.com/) and choos your organization.
+1. Sign in to [Docker Home](https://app.docker.com/) and choose your organization.
 1. Select **Billing**.
 1. Select **Invoices** and locate the invoice you want to pay.
 1. In the **Actions** column, select **Pay invoice**.
