@@ -42,7 +42,6 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ### New
 
-- [Docker Debug](/reference/cli/docker/debug.md) is now free for all users.
 - MCP Gateway now supports dynamic MCP server discovery and the MCP Community Registry.
 - With Enhanced Container Isolation, administrators can now block `docker plugin` and `docker login` commands in containers with Docker socket mounts.
 
