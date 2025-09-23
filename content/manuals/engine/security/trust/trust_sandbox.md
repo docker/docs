@@ -91,7 +91,7 @@ the `trustsandbox` container, the Notary server, and the Registry server.
          - NOTARY_SERVER_STORAGE_TYPE=memory
          - NOTARY_SERVER_TRUST_SERVICE_TYPE=local
      sandboxregistry:
-       image: registry:2.4.1
+       image: registry:3
        networks:
          - sandbox
        container_name: sandboxregistry
