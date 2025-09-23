@@ -32,7 +32,7 @@ To add seats:
 organization.
 1. Select **Billing**.
 1. Select **Add seats** and follow the on-screen instructions to complete
-adding seats. Note, you can't use pay-by-invoice for purchasing additional
+adding seats. Note, you can't use pay by invoice for purchasing additional
 seats. You must use a card or US bank account.
 
 > [!NOTE]

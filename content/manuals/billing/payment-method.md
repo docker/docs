@@ -34,7 +34,7 @@ The following payment methods are supported:
   - Automated Clearing House (ACH) transfer with a
   [verified](manuals/billing/payment-method.md#verify-a-bank-account) US
   bank account
-- [Pay-by-invoice](/manuals/billing/history.md)
+- [Pay by invoice](/manuals/billing/history.md)
 
 All charges are in United States dollars (USD).
 
@@ -173,26 +173,22 @@ the **Actions** icon. Then, select **Delete**.
 {{< /tab >}}
 {{< /tabs >}}
 
-## Enable pay-by-invoice
+## Enable pay by invoice
 
-Pay-by-invoice is only available for subscription renewals, not
-initial payments. When you select this option, you'll pay
-upfront for your first subscription period using a standard payment method.
+Pay by invoice is only available for subscription renewals on annual plans with
+at least 25 seats, not initial payments. When you select this option, you'll
+pay upfront for your first subscription period using a payment card or US bank
+account.
 
 At renewal time, instead of automatic payment, you'll receive an invoice via
-email that you must pay manually. Pay-by-invoice is not available for
+email that you must pay manually. Pay by invoice is not available for
 subscription upgrades or changes.
-
-> [!NOTE]
->
-> Pay-by-invoice is only available for annual subscriptions. You can't use pay
-by invoice for subscription upgrades or purchasing additional seats.
 
 1. Sign in to [Docker Home](https://app.docker.com/) and select your
 organization.
 1. Select **Billing**.
-1. Select **Payment methods**, then **Pay-by-invoice**.
-1. To enable pay-by-invoice, select the toggle.
+1. Select **Payment methods**, then **Pay by invoice**.
+1. To enable pay by invoice, select the toggle.
 1. Confirm your billing contact details. If you need to change them, select
 **Change** and enter your new details.
 

@@ -52,10 +52,10 @@ For more information, see [Update billing information](details.md).
 
 > [!NOTE]
 >
-> Pay-by-invoice is only available for subscribers on an annual billing cycle.
+> Pay by invoice is only available for subscribers on an annual billing cycle.
 To change your billing cycle, see [Change your billing cycle](/manuals/billing/cycle.md).
 
-If you've selected pay-by-invoice for your subscription, you'll receive email
+If you've selected pay by invoice for your subscription, you'll receive email
 reminders to pay your invoice at 10 days before the due date, on the due date,
 and 15 days after the due date.
 
