@@ -34,8 +34,7 @@ final charge is $95 ($100-$5).
 
 > [!IMPORTANT]
 >
-> Pay by invoice is only available on first-time checkouts and subscription
-renewals. You can't use pay-by-invoice for subscription upgrades or changes.
+> Pay-by-invoice is not available for subscription upgrades or changes.
 
 To change your billing cycle:
 
@@ -79,8 +78,7 @@ You must be an organization owner to make changes to the payment information.
 
 > [!IMPORTANT]
 >
-> Pay by invoice is only available on first-time checkouts and subscription
-renewals. You can't use pay-by-invoice for subscription upgrades or changes.
+> Pay-by-invoice is not available for subscription upgrades or changes.
 
 Follow these steps to switch from a monthly to annual billing cycle for your
 organization's Docker subscription:
