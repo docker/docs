@@ -21,7 +21,7 @@ For more detailed information, see the [release notes in the Compose repo](https
 
 ### Bug fixes and enhancements
 
-- Added `initial_sync` attribute to `develop.watch` definition, to sync files after starting a watch session
+- Added `initial_sync` attribute to the Compose Develop Specification definition, to sync files after starting a watch session
 - Fixed a TLS issue when building with bake
 - Disabled Tty on `run` when running as a piped command
 
