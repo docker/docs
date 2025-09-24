@@ -124,7 +124,7 @@ modern, secure replacement with additional benefits:
 
 ### Migration steps
 
-To migration from service accounts to OATs, use the following steps:
+To migrate from service accounts to OATs, use the following steps:
 
 1. Document current service accounts and their purposes.
 1. Generate organization access tokens with appropriate repository permissions.
