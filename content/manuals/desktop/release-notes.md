@@ -58,6 +58,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 #### For all platforms
 
+- You can now search for MCP servers more easily with filters, sorting, and improved search functionality.
 - Docker Debug no longer hangs when debugging containers that have environment variables set to an empty value.
 
 #### For Mac
