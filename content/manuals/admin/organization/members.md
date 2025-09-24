@@ -20,7 +20,7 @@ Owners can invite new members to an organization via Docker ID, email address, o
 
 Use the following steps to invite members to your organization via Docker ID or email address.
 
-1. Sign in to [Docker Home](https://app.docker.com) and select your organization.
+1. Sign in to [Docker Home](https://app.docker.com) and select your organization from the top-left account drop-down.
 1. Select **Members**, then **Invite**.
 1. Select **Emails or usernames**.
 1. Follow the on-screen instructions to invite members. Invite a maximum of 1000 members and separate multiple entries by comma, semicolon, or space.
@@ -36,7 +36,7 @@ Pending invitations appear in the table. Invitees receive an email with a link t
 
 To invite multiple members to an organization via a CSV file containing email addresses:
 
-1. Sign in to [Docker Home](https://app.docker.com) and select your organization.
+1. Sign in to [Docker Home](https://app.docker.com) and select your organization from the top-left account drop-down.
 1. Select **Members**, then **Invite**.
 1. Select **CSV upload**.
 1. Optional. Select **Download the template CSV file** to download an example CSV file. The following is an example of the contents of a valid CSV file.

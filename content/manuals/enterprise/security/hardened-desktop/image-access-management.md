@@ -50,7 +50,7 @@ Before configuring Image Access Management, you must:
 
 To configure Image Access Management:
 
-1. Sign in to [Docker Home](https://app.docker.com) and select your organization.
+1. Sign in to [Docker Home](https://app.docker.com) and select your organization from the top-left account drop-down.
 1. Select **Admin Console**, then **Image access**.
 1. Use the **toggle** to enable image access.
 1. Select which image types to allow:

@@ -18,7 +18,7 @@ If you experience SSO issues, check both Docker and your identity provider for e
 
 ### Check Docker error logs
 
-1. Sign in to [Docker Home](https://app.docker.com/) and select your organization.
+1. Sign in to [Docker Home](https://app.docker.com/) and select your organization from the top-left account drop-down.
 1. Select **Admin Console**, then **SSO and SCIM**.
 1. In the SSO connections table, select the **Action** menu and then **View error logs**.
 1. For more details on specific errors, select **View error details** next to an error message.
@@ -91,7 +91,7 @@ User '$username' is not assigned to this SSO organization. Contact your administ
 JIT is enabled by default when you enable SSO. If you have JIT disabled and need
 to re-enable it:
 
-1. Sign in to [Docker Home](https://app.docker.com/) and select your organization.
+1. Sign in to [Docker Home](https://app.docker.com/) and select your organization from the top-left account drop-down.
 1. Select **Admin Console**, then **SSO and SCIM**.
 1. In the SSO connections table, select the **Action** menu and then **Enable JIT provisioning**.
 1. Select **Enable** to confirm.
@@ -105,7 +105,7 @@ To manually invite users, see [Invite members](/manuals/admin/organization/membe
 
 If you have SCIM enabled, troubleshoot your SCIM connection using the following steps:
 
-1. Sign in to [Docker Home](https://app.docker.com/) and select your organization.
+1. Sign in to [Docker Home](https://app.docker.com/) and select your organization from the top-left account drop-down.
 1. Select **Admin Console**, then **SSO and SCIM**.
 1. In the SSO connections table, select the **Action** menu and then **View error logs**. For more details on specific errors, select **View error details** next to an error message. Note any errors you see on this page.
 1. Navigate back to the **SSO and SCIM** page of the Admin Console and verify your SCIM configuration:

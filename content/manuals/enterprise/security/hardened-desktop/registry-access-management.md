@@ -44,7 +44,7 @@ Before configuring Registry Access Management, you must:
 
 To configure registry permissions:
 
-1. Sign in to [Docker Home](https://app.docker.com) and select your organization.
+1. Sign in to [Docker Home](https://app.docker.com) and select your organization from the top-left account drop-down.
 1. Select **Admin Console**, then **Registry access**.
 1. Use the **toggle** to enable registry access. By default, Docker Hub is enabled
 in the registry list.
