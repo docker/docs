@@ -18,6 +18,20 @@ in Docker, setup in your IdP, and final connection.
 > You’ll copy and paste values between Docker and your IdP. Complete this guide
 in one session with separate browser windows open for Docker and your IdP.
 
+## Supported identity providers
+
+Docker supports any SAML 2.0 or OIDC-compatible identity provider. This guide
+provides detailed setup instructions for the most commonly
+used providers: Okta and Microsoft Entra ID.
+
+If you're using a
+different IdP, the general process remains the same:
+
+1. Configure the connection in Docker.
+1. Set up the application in your IdP using the values from Docker.
+1. Complete the connection by entering your IdP's values back into Docker.
+1. Test the connection.
+
 ## Prerequisites
 
 Before you begin:
