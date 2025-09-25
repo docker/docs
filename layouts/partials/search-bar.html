@@ -153,11 +153,11 @@
           resultsHTML += results
             .map((item) => {
               return `<div class="p-2">
-    <div class="flex flex-col items-start item">
-      <a class="link break-all" href="${item.url}" data-query="${query}" data-index="${item.index}">${item.meta.title}</a>
-      <p class="text-black dark:text-white overflow-hidden text-left break-words hyphens-auto">…${item.excerpt}…</p>
-    </div>
-    </div>`;
+<div class="flex flex-col items-start item">
+  <a class="link" style="word-break: break-word; overflow-wrap: anywhere;" href="${item.url}" data-query="${query}" data-index="${item.index}">${item.meta.title}</a>
+  <p class="text-black dark:text-white overflow-hidden text-left" style="word-break: break-word; overflow-wrap: anywhere;">…${item.excerpt}…</p>
+</div>
+</div>`;
             })
             .join("");
           if (resultsLength > 5) {

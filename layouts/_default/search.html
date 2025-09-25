@@ -1,14 +1,14 @@
-{{ define "left" }} {{ partial "sidebar/mainnav.html" . }} {{ end }} {{ define
+{{ define "left" }}{{ partial "sidebar/mainnav.html" . }}{{ end }} {{ define
 "main" }}
 <article class="prose dark:prose-invert max-w-none">
   <h1 class="py-4">{{ .Title }}</h1>
   {{ .Content }}
   <div class="not-prose">
-    <div class="flex justify-between items-center gap-8 flex-col lg:flex-row">
+    <div class="flex flex-col items-center justify-between gap-8 lg:flex-row">
       <input
         type="search"
         id="search-page-input"
-        class="ring-3-gray-light-200 dark:ring-3-gray-dark-400 dark:bg-background-dark focus:ring-3-blue-light dark:focus:ring-3-blue-dark ring-3-[1.5px] w-full lg:max-w-xl min-w-0 rounded-sm bg-white px-4 py-2 outline-hidden"
+        class="ring-3-gray-light-200 dark:ring-3-gray-dark-400 dark:bg-background-dark focus:ring-3-blue-light dark:focus:ring-3-blue-dark ring-3-[1.5px] outline-hidden w-full min-w-0 rounded-sm bg-white px-4 py-2 lg:max-w-xl"
         placeholder="Search…"
         tabindex="0"
       />
@@ -136,12 +136,12 @@
       resultsHTML += results
         .map((item) => {
           return `<div class="p-4">
-    <div class="flex flex-col">
-      <span class="text-gray-400 dark:texty-gray-dark text-sm">${item.meta.breadcrumbs}</span>
-      <a class="link break-all" href="${item.url}" data-query="${query}" data-index="${item.index}">${item.meta.title}</a>
-      <p class="text-black dark:text-white overflow-hidden break-words hyphens-auto">…${item.excerpt}…</p>
-    </div>
-    </div>`;
+<div class="flex flex-col">
+  <span class="text-gray-400 dark:texty-gray-dark text-sm">${item.meta.breadcrumbs}</span>
+  <a class="link" style="word-break: break-word; overflow-wrap: anywhere;" href="${item.url}" data-query="${query}" data-index="${item.index}">${item.meta.title}</a>
+  <p class="text-black dark:text-white overflow-hidden" style="word-break: break-word; overflow-wrap: anywhere;">…${item.excerpt}…</p>
+</div>
+</div>`;
         })
         .join("");
       // If the results length is greater than 10, display links to show more results
