@@ -4,7 +4,7 @@
     @click.outside="open = false;"
     @keyup.escape.window="open = false"
     id="search-bar"
-    class="relative items-center flex w-full max-w-full overflow-x-auto"
+    class="relative items-center flex w-full max-w-full overflow-visible"
   >
     <input
       class="border-none outline-none focus:outline-none min-w-0"
@@ -36,13 +36,8 @@
       x-show="open"
       x-cloak
       x-ref="dropdown"
-      class="hidden md:block font-medium text-gray-400 dark:text-gray-200 bg-gray-50 dark:bg-gray-900 rounded-sm mt-4 border-1 border-gray-100 dark:border-gray-700 fixed z-[999] w-[500px] p-6 shadow-md"
-      x-effect="if (open) {
-        const containerRect = document.getElementById('search-bar-container').getBoundingClientRect();
-        const rect = $refs.searchBarRef.getBoundingClientRect();
-        $el.style.top = (rect.bottom + window.scrollY - 2) + 'px';
-        $el.style.right = (window.innerWidth - containerRect.right - 15) + 'px';
-      }">
+      class="hidden md:block font-medium text-gray-400 dark:text-gray-200 bg-gray-50 dark:bg-gray-900 rounded-sm mt-2 border-1 border-gray-100 dark:border-gray-700 absolute top-full left-0 z-[999] w-full max-w-[500px] p-6 shadow-md"
+      >
       <div id="search-bar-results">
         {{- $emptyState := `<div>Start typing to search or try <button onclick="askAI('search-bar-input')" class="link">Ask
             AI</button>.</div>` }}
