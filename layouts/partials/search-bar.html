@@ -37,11 +37,27 @@
       x-cloak
       x-ref="dropdown"
       class="hidden md:block font-medium text-gray-400 dark:text-gray-200 bg-gray-50 dark:bg-gray-900 rounded-sm mt-2 border-1 border-gray-100 dark:border-gray-700 fixed z-[999] p-6 shadow-md"
-      style="width: 500px;"
+      style="width: min(500px, 90vw); max-height: 60vh; overflow-y: auto;"
       x-effect="if (open) {
         const rect = $refs.searchBarRef.getBoundingClientRect();
+        const dropdownWidth = 500;
+        const viewportWidth = window.innerWidth;
+        
+        // Calculate left position
+        let leftPos = rect.left;
+        
+        // Prevent going off right edge
+        if (leftPos + dropdownWidth > viewportWidth - 20) {
+          leftPos = viewportWidth - dropdownWidth - 20;
+        }
+        
+        // Prevent going off left edge
+        if (leftPos < 20) {
+          leftPos = 20;
+        }
+        
         $el.style.top = (rect.bottom + 8) + 'px';
-        $el.style.left = rect.left + 'px';
+        $el.style.left = leftPos + 'px';
       }">
       <div id="search-bar-results">
         {{- $emptyState := `<div>Start typing to search or try <button onclick="askAI('search-bar-input')" class="link">Ask
@@ -63,9 +79,34 @@
         });
 
         const searchBarInput = document.querySelector("#search-bar-input");
-        const searchBarResults = document.querySelector(
-          "#search-bar-results",
-        );
+        const searchBarResults = document.querySelector("#search-bar-results");
+        const searchDropdown = document.querySelector("#search-bar-dropdown");
+
+        // Update position on scroll and resize
+        function updateDropdownPosition() {
+          const searchBar = document.querySelector("#search-bar");
+          if (!searchBar || !searchDropdown || searchDropdown.style.display === 'none') return;
+          
+          const rect = searchBar.getBoundingClientRect();
+          const dropdownWidth = 500;
+          const viewportWidth = window.innerWidth;
+          
+          let leftPos = rect.left;
+          
+          if (leftPos + dropdownWidth > viewportWidth - 20) {
+            leftPos = viewportWidth - dropdownWidth - 20;
+          }
+          
+          if (leftPos < 20) {
+            leftPos = 20;
+          }
+          
+          searchDropdown.style.top = (rect.bottom + 8) + 'px';
+          searchDropdown.style.left = leftPos + 'px';
+        }
+
+        window.addEventListener('scroll', updateDropdownPosition);
+        window.addEventListener('resize', updateDropdownPosition);
 
         async function search(e) {
           const query = e.target.value;
