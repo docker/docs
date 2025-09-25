@@ -15,6 +15,14 @@ issues for Docker Service APIs.
 
 ---
 
+## 2025-09-25
+
+### Updates
+
+- Fix [Assign repository group](/reference/api/hub/latest/#tag/repositories/operation/CreateRepositoryGroup) endpoints request/response
+
+---
+
 ## 2025-09-19
 
 ### New
