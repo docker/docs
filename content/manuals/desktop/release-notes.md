@@ -44,6 +44,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 - Added dynamic MCP server discovery and support to Docker's MCP catalog.
 - With Enhanced Container Isolation, administrators can now block `docker plugin` and `docker login` commands in containers with Docker socket mounts.
+- Added a new Docker Model Runner command. With `docker model requests` you can fetch requests and responses.
 
 ### Upgrades
 
@@ -60,6 +61,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 - You can now search for MCP servers more easily with filters, sorting, and improved search functionality.
 - Docker Debug no longer hangs when debugging containers that have environment variables set to an empty value.
+- Enhanced Docker Model Runner with rich response rendering in the CLI, conversational context in the Docker Desktop Dashboard, and resumable downloads.
 
 #### For Mac
 
