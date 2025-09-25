@@ -11,7 +11,9 @@
   id="search-bar"
   class="relative hidden min-w-0 items-center rounded-sm bg-white/10 p-2 sm:flex sm:w-full xl:w-[400px]"
 >
-  {{ (resources.Get "images/search-ai.svg").Content | safeHTML }}
+  {{- with resources.Get "images/search-ai.svg" -}}
+    {{ .Content | safeHTML }}
+  {{- end -}}
   <input
     x-ref="searchBarInput"
     type="search"
