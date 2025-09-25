@@ -11,9 +11,7 @@
   id="search-bar"
   class="relative hidden min-w-0 items-center rounded-sm bg-white/10 p-2 sm:flex sm:w-full xl:w-[400px]"
 >
-  {{- with resources.Get "images/search-ai.svg" -}}
-    {{ .Content | safeHTML }}
-  {{- end -}}
+  <span class="icon-svg flex-shrink-0">{{ partialCached "icon" "search" "search" }}</span>
   <input
     x-ref="searchBarInput"
     type="search"
@@ -61,8 +59,7 @@
   <div
     x-show="open"
     x-cloak
-    id="search-dropdown"
-    class="bg-background-light dark:bg-background-dark fixed z-50 w-full max-w-xl rounded-sm px-6 py-4 shadow-lg"
+    class="bg-background-light dark:bg-background-dark absolute top-full left-0 mt-1 z-50 w-full rounded-sm px-6 py-4 shadow-lg"
   >
     <div id="search-bar-results">
       {{- $emptyState := `<div class="p-2 text-gray-500 dark:text-gray-400">Start typing to search… or try <button @click="open=false" class="open-kapa-widget link">Ask AI</button></div>` }}
@@ -83,86 +80,10 @@
       });
 
       const searchBarInput = document.querySelector("#search-bar-input");
-      const searchBarResults = document.querySelector("#search-bar-results");
-      const searchDropdown = document.querySelector("#search-dropdown");
-      const searchBar = document.querySelector("#search-bar");
+      const searchBarResults = document.querySelector(
+        "#search-bar-results",
+      );
 
-      // Function to update dropdown position
-      function updateDropdownPosition() {
-        if (!searchBar || !searchDropdown || searchDropdown.style.display === 'none') return;
-        
-        const rect = searchBar.getBoundingClientRect();
-        const dropdownHeight = searchDropdown.offsetHeight || 300;
-        const viewportHeight = window.innerHeight;
-        const viewportWidth = window.innerWidth;
-        
-        // Calculate horizontal position and width
-        let leftPos = rect.left;
-        let width = Math.min(rect.width * 1.5, 600); // Make dropdown wider than search bar, max 600px
-        
-        // Ensure dropdown doesn't go off right edge of screen
-        if (leftPos + width > viewportWidth - 20) {
-          leftPos = viewportWidth - width - 20;
-        }
-        
-        // Ensure dropdown doesn't go off left edge
-        if (leftPos < 20) {
-          leftPos = 20;
-        }
-        
-        // Check if there's enough space below
-        const spaceBelow = viewportHeight - rect.bottom;
-        const spaceAbove = rect.top;
-        
-        searchDropdown.style.left = `${leftPos}px`;
-        searchDropdown.style.width = `${width}px`;
-        searchDropdown.style.maxWidth = '600px';
-        searchDropdown.style.minWidth = `${rect.width}px`;
-        
-        if (spaceBelow < dropdownHeight && spaceAbove > spaceBelow) {
-          // Position above the search bar
-          searchDropdown.style.bottom = `${viewportHeight - rect.top + 8}px`;
-          searchDropdown.style.top = 'auto';
-          searchDropdown.style.maxHeight = `${Math.min(spaceAbove - 20, 400)}px`;
-        } else {
-          // Position below the search bar
-          searchDropdown.style.top = `${rect.bottom + 8}px`;
-          searchDropdown.style.bottom = 'auto';
-          searchDropdown.style.maxHeight = `${Math.min(spaceBelow - 20, 400)}px`;
-        }
-        
-        // Ensure results area is scrollable if needed
-        searchBarResults.style.maxHeight = 'calc(100% - 20px)';
-        searchBarResults.style.overflowY = 'auto';
-      }
-
-      // Update position when dropdown becomes visible
-      const observer = new MutationObserver(function(mutations) {
-        mutations.forEach(function(mutation) {
-          if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
-            const isVisible = searchDropdown.style.display !== 'none' && !searchDropdown.classList.contains('hidden');
-            if (isVisible) {
-              updateDropdownPosition();
-            }
-          }
-        });
-      });
-      
-      observer.observe(searchDropdown, { 
-        attributes: true, 
-        attributeFilter: ['style', 'class'] 
-      });
-
-      // Update position on scroll and resize
-      window.addEventListener('scroll', updateDropdownPosition);
-      window.addEventListener('resize', updateDropdownPosition);
-      
-      // Update position when search input is focused
-      searchBarInput.addEventListener('focus', () => {
-        setTimeout(updateDropdownPosition, 0);
-      });
-
-      // Existing search functionality
       async function search(e) {
         const query = e.target.value;
         if (query === "") {
@@ -199,9 +120,6 @@
           }
 
           searchBarResults.innerHTML = resultsHTML;
-          
-          // Update position after results are loaded
-          setTimeout(updateDropdownPosition, 0);
         }
       }
 
