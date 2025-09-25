@@ -149,20 +149,26 @@
             searchBarResults.classList.add("hidden");
           }
 
-          let resultsHTML = `<div class="p-2 text-gray-400 dark:text-gray-500">${resultsLength} results</div>`;
-          resultsHTML += results
-            .map((item) => {
-              return `<div class="p-2">
+let resultsHTML = `<div class="p-2 text-gray-400 dark:text-gray-500">${resultsLength} results</div>`;
+resultsHTML += results
+  .map((item) => {
+    // Truncate excerpt if it's too long
+    let excerpt = item.excerpt;
+    if (excerpt.length > 200) {
+      excerpt = excerpt.substring(0, 200) + '...';
+    }
+    return `<div class="p-2">
 <div class="flex flex-col items-start item">
   <a class="link" style="word-break: break-word; overflow-wrap: anywhere;" href="${item.url}" data-query="${query}" data-index="${item.index}">${item.meta.title}</a>
-  <p class="text-black dark:text-white overflow-hidden text-left" style="word-break: break-word; overflow-wrap: anywhere;">…${item.excerpt}…</p>
+  <p class="text-black dark:text-white overflow-hidden text-left" style="word-break: break-word; overflow-wrap: anywhere;">…${excerpt}…</p>
 </div>
 </div>`;
-            })
-            .join("");
-          if (resultsLength > 5) {
-            resultsHTML += `<div class="w-fit ml-auto px-4 py-2"><a href="/search/?q=${query}" class="link">Show all results</a></div>`;
-          }
+  })
+  .join("");
+
+if (resultsLength > 5) {
+  resultsHTML += `<div class="w-fit ml-auto px-4 py-2"><a href="/search/?q=${query}" class="link">Show all results</a></div>`;
+}
 
           searchBarResults.innerHTML = resultsHTML;
         }
