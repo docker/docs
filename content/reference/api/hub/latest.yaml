@@ -958,28 +958,37 @@ paths:
       summary: Assign a group (Team) to a repository for access
       tags:
         - repositories
+      operationId: CreateRepositoryGroup
       security:
         - bearerAuth: []
-      parameters:
-        - in: query
-          name: group_name
-          required: true
-          schema:
-            type: string
-          description: Name of the group (team) in the organization.
-        - in: query
-          name: permission
-          required: true
-          schema:
-            type: string
-            description: |
-              Access level for the group. Possible values:
-              - `read`
-              - `write`
-              - `admin`
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RepositoryGroupCreationRequest'
+            example:
+              group_id: 12345
+              permission: "write"
       responses:
         "200":
-          $ref: "#/components/responses/team_repo"
+          description: Repository group permission created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryGroup'
+              example:
+                group_name: "developers"
+                permission: "write"
+                group_id: 12345
+        "400":
+          description: Bad Request - Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+        "401":
+          $ref: "#/components/responses/unauthorized"
         "403":
           $ref: "#/components/responses/forbidden"
         "404":
@@ -2449,6 +2458,43 @@ components:
           description: Whether the repository should be private
           default: false
           example: false
+    RepositoryGroupCreationRequest:
+      type: object
+      required:
+        - group_id
+        - permission
+      properties:
+        group_id:
+          type: integer
+          format: int64
+          description: The ID of the organization group to grant access to
+          example: 12345
+        permission:
+          type: string
+          description: |
+            The permission level to grant to the group:
+            - read: Can view and pull from the repository
+            - write: Can view, pull, and push to the repository
+            - admin: Can view, pull, push, and manage repository settings
+          enum: [ "read", "write", "admin" ]
+          example: "write"
+    RepositoryGroup:
+      type: object
+      properties:
+        group_name:
+          type: string
+          description: The name of the group
+          example: "developers"
+        permission:
+          type: string
+          description: The permission level granted to the group
+          enum: [ "read", "write", "admin" ]
+          example: "write"
+        group_id:
+          type: integer
+          format: int64
+          description: The ID of the group
+          example: 12345
     repository_info:
       type: object
       properties:
