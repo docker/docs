@@ -37,10 +37,10 @@
       x-cloak
       x-ref="dropdown"
       class="hidden md:block font-medium text-gray-400 dark:text-gray-200 bg-gray-50 dark:bg-gray-900 rounded-sm mt-2 border-1 border-gray-100 dark:border-gray-700 fixed z-[999] p-6 shadow-md"
-      style="width: min(500px, 90vw); max-height: 60vh; overflow-y: auto;"
+      style="width: min(500px, 90vw);"
       x-effect="if (open) {
         const rect = $refs.searchBarRef.getBoundingClientRect();
-        const dropdownWidth = 500;
+        const dropdownWidth = Math.min(500, window.innerWidth * 0.9);
         const viewportWidth = window.innerWidth;
         
         // Calculate left position
@@ -88,7 +88,7 @@
           if (!searchBar || !searchDropdown || searchDropdown.style.display === 'none') return;
           
           const rect = searchBar.getBoundingClientRect();
-          const dropdownWidth = 500;
+          const dropdownWidth = Math.min(500, window.innerWidth * 0.9);
           const viewportWidth = window.innerWidth;
           
           let leftPos = rect.left;
