@@ -36,8 +36,13 @@
       x-show="open"
       x-cloak
       x-ref="dropdown"
-      class="hidden md:block font-medium text-gray-400 dark:text-gray-200 bg-gray-50 dark:bg-gray-900 rounded-sm mt-2 border-1 border-gray-100 dark:border-gray-700 absolute top-full left-0 z-[999] w-full max-w-[500px] p-6 shadow-md"
-      >
+      class="hidden md:block font-medium text-gray-400 dark:text-gray-200 bg-gray-50 dark:bg-gray-900 rounded-sm mt-2 border-1 border-gray-100 dark:border-gray-700 fixed z-[999] p-6 shadow-md"
+      style="width: 500px;"
+      x-effect="if (open) {
+        const rect = $refs.searchBarRef.getBoundingClientRect();
+        $el.style.top = (rect.bottom + 8) + 'px';
+        $el.style.left = rect.left + 'px';
+      }">
       <div id="search-bar-results">
         {{- $emptyState := `<div>Start typing to search or try <button onclick="askAI('search-bar-input')" class="link">Ask
             AI</button>.</div>` }}
