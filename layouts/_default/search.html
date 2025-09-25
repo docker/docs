@@ -7,15 +7,16 @@
     <h1 class="py-4">{{ .Title }}</h1>
     {{ .Content }}
     <div class="not-prose">
-      <div class="flex justify-between gap-8 flex-row">
+      <div class="flex justify-between items-center gap-8 flex-col lg:flex-row">
         <input type="search" id="search-page-input"
-          class="ring-3-gray-light-200 dark:ring-3-gray-dark-400 dark:bg-background-dark focus:ring-3-blue-light dark:focus:ring-3-blue-dark ring-3-[1.5px] w-full max-w-xl min-w-0 rounded-sm bg-white px-4 py-2 outline-hidden"
+          class="ring-3-gray-light-200 dark:ring-3-gray-dark-400 dark:bg-background-dark focus:ring-3-blue-light dark:focus:ring-3-blue-dark ring-3-[1.5px] w-full lg:max-w-xl min-w-0 rounded-sm bg-white px-4 py-2 outline-hidden"
           placeholder="Search…" tabindex="0" />
-        <div class="admonition flex flex-row items-center gap-1">
-          <p>Not finding what you're looking for? Try</p>
-          <button onclick="askAI('search-page-input')" class="topbar-button bg-blue-400/95 border-blue-300 hover:bg-blue-400/90">
-            <span>Ask&nbsp;AI</span>
-            <span class="icon-svg">
+        <div class="flex items-center gap-2 text-gray-600 dark:text-gray-400">
+          <p class="text-sm">Not finding what you're looking for? Try</p>
+          <button onclick="askAI('search-page-input')" 
+            class="inline-flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-white bg-blue-500 hover:bg-blue-600 rounded-sm transition-colors">
+            <span>Ask AI</span>
+            <span class="icon-svg icon-sm">
               {{ partial "utils/svg.html" "/icons/sparkle.svg" }}
             </span>
           </button>
