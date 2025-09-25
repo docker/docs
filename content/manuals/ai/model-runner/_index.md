@@ -38,6 +38,7 @@ with AI models locally.
 - Run and interact with AI models directly from the command line or from the Docker Desktop GUI
 - Manage local models and display logs
 - Display prompt and response details
+- Conversational context support for multi-turn interactions
 
 ## Requirements
 
