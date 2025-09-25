@@ -67,7 +67,7 @@
         <button
           aria-label="Theme switch"
           id="theme-switch"
-          class="topbar-button-clear"
+          class="topbar-button rounded-full w-13"
           x-data="{ theme: localStorage.getItem('theme-preference') }"
           x-init="$watch('theme', value => {
                 localStorage.setItem('theme-preference', value);
