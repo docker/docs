@@ -15,6 +15,7 @@ cname:
     - docker model ps
     - docker model pull
     - docker model push
+    - docker model requests
     - docker model rm
     - docker model run
     - docker model status
@@ -32,6 +33,7 @@ clink:
     - docker_model_ps.yaml
     - docker_model_pull.yaml
     - docker_model_push.yaml
+    - docker_model_requests.yaml
     - docker_model_rm.yaml
     - docker_model_run.yaml
     - docker_model_status.yaml

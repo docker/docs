@@ -24,9 +24,9 @@ require (
 	github.com/docker/go-connections v0.6.0 // indirect
 	github.com/docker/go-units v0.5.0 // indirect
 	github.com/docker/mcp-gateway v0.13.1-0.20250730013131-e08a3be84765 // indirect
-	github.com/docker/model-cli v0.1.40 // indirect
-	github.com/docker/model-distribution v0.0.0-20250822172258-8fe9daa4a4da // indirect
-	github.com/docker/model-runner v0.0.0-20250822173738-5341c9fc2974 // indirect
+	github.com/docker/model-cli v0.1.41 // indirect
+	github.com/docker/model-distribution v0.0.0-20250918153037-7d9fc7b72b57 // indirect
+	github.com/docker/model-runner v0.0.0-20250911130340-38bb0171c947 // indirect
 	github.com/docker/scout-cli v1.18.1 // indirect
 	github.com/elastic/go-sysinfo v1.15.3 // indirect
 	github.com/elastic/go-windows v1.0.2 // indirect
@@ -40,7 +40,7 @@ require (
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/google/go-containerregistry v0.20.6 // indirect
 	github.com/google/uuid v1.6.0 // indirect
-	github.com/gpustack/gguf-parser-go v0.14.1 // indirect
+	github.com/gpustack/gguf-parser-go v0.22.1 // indirect
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.26.3 // indirect
 	github.com/henvic/httpretty v0.1.4 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
@@ -112,7 +112,7 @@ replace (
 	github.com/docker/buildx => github.com/docker/buildx v0.28.0
 	github.com/docker/cli => github.com/docker/cli v28.3.3+incompatible
 	github.com/docker/compose/v2 => github.com/docker/compose/v2 v2.39.4
-	github.com/docker/model-cli => github.com/docker/model-cli v0.1.40
+	github.com/docker/model-cli => github.com/docker/model-cli v0.1.41
 	github.com/docker/scout-cli => github.com/docker/scout-cli v1.18.1
 	github.com/moby/buildkit => github.com/moby/buildkit v0.24.0
 	github.com/moby/moby => github.com/moby/moby v28.3.3+incompatible
