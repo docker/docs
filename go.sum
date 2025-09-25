@@ -110,6 +110,8 @@ github.com/docker/model-cli v0.1.39 h1:9W2HEj46QtZ4+WeEtmDlYlJKspcLwaTzzeBQZKGWs
 github.com/docker/model-cli v0.1.39/go.mod h1:vn3xvo4zqZVHbon38lZbaEc12JshwBRzzLbK6w1q8Yg=
 github.com/docker/model-cli v0.1.40 h1:Ar9KLp7B08w3Gz71jFQaOiyZGQ+yr3XBtWTcbm0jgh4=
 github.com/docker/model-cli v0.1.40/go.mod h1:vn3xvo4zqZVHbon38lZbaEc12JshwBRzzLbK6w1q8Yg=
+github.com/docker/model-cli v0.1.41 h1:H1GK9ESxYAFsx2I6xoIwipasGuffQ7vKT9wIFyIVv28=
+github.com/docker/model-cli v0.1.41/go.mod h1:Mam12elFiRQGvxNDgqZVXPsUbfBB67FApk91z3H+jfc=
 github.com/docker/model-cli v1.0.2-0.20250812105011-ebb4723662c6 h1:f4iOd3leasQe8Ak0BIssJvy6URQU1QpdyvvrEMVd/to=
 github.com/docker/model-cli v1.0.2-0.20250812105011-ebb4723662c6/go.mod h1:buRKbEmodiWCC9hApXghZZIWa9kdDpSLzwlx04DmtKs=
 github.com/docker/model-distribution v0.0.0-20250512190053-b3792c042d57 h1:ZqfKknb+0/uJid8XLFwSl/osjE+WuS6o6I3dh3ZqO4U=
@@ -120,6 +122,8 @@ github.com/docker/model-distribution v0.0.0-20250724114133-a11d745e582c h1:w9Mek
 github.com/docker/model-distribution v0.0.0-20250724114133-a11d745e582c/go.mod h1:dThpO9JoG5Px3i+rTluAeZcqLGw8C0qepuEL4gL2o/c=
 github.com/docker/model-distribution v0.0.0-20250822172258-8fe9daa4a4da h1:ml99WBfcLnsy1frXQR4X+5WAC0DoGtwZyGoU/xBsDQM=
 github.com/docker/model-distribution v0.0.0-20250822172258-8fe9daa4a4da/go.mod h1:dThpO9JoG5Px3i+rTluAeZcqLGw8C0qepuEL4gL2o/c=
+github.com/docker/model-distribution v0.0.0-20250918153037-7d9fc7b72b57 h1:WHiPO9UmO5v97T3ksQUA2SbYVkTdUCSFobznegL97kk=
+github.com/docker/model-distribution v0.0.0-20250918153037-7d9fc7b72b57/go.mod h1:bV1RH2e79nTwOW38GoMU9UO8gpZVLH9+cZeEeR4wSeE=
 github.com/docker/model-runner v0.0.0-20250512190413-96af7b750f88 h1:NkiizYL67HsCnnlEU6BQVoeiC1bAAyJFxw02bO7JC4E=
 github.com/docker/model-runner v0.0.0-20250512190413-96af7b750f88/go.mod h1:Nw+rx6RRPNdProEb9/BVJyAQn63px6WWlOv+eEpkV7Q=
 github.com/docker/model-runner v0.0.0-20250627142917-26a0a73fbbc0 h1:yajuhlGe1xhpWW3eMehQi2RrqiBQiGoi6c6OWiPxMaQ=
@@ -128,6 +132,8 @@ github.com/docker/model-runner v0.0.0-20250724122432-ecfa5e7e6807 h1:02vImD8wqUD
 github.com/docker/model-runner v0.0.0-20250724122432-ecfa5e7e6807/go.mod h1:rCzRjRXJ42E8JVIA69E9hErJVV5mnUpWdJ2POsktfRs=
 github.com/docker/model-runner v0.0.0-20250822173738-5341c9fc2974 h1:/uF17tBEtsE6T2Xgg4cgrrqNcQ02gY5Lp98je+2K0nQ=
 github.com/docker/model-runner v0.0.0-20250822173738-5341c9fc2974/go.mod h1:1Q2QRB5vob542x6P5pQXlGTYs5bYPxNG6ePcjTndA0A=
+github.com/docker/model-runner v0.0.0-20250911130340-38bb0171c947 h1:6Dz1SFZONEd8tlKetn2Gu6v5HDJI/YtUFwkqHGwrsV0=
+github.com/docker/model-runner v0.0.0-20250911130340-38bb0171c947/go.mod h1:cl7panafjkSHllYCCGYAzty2aUvbwk55Gi35v06XL80=
 github.com/docker/scout-cli v1.15.0 h1:VhA9niVftEyZ9f5KGwKnrSfQOp2X3uIU3VbE/gTVMTM=
 github.com/docker/scout-cli v1.15.0/go.mod h1:Eo1RyCJsx3ldz/YTY5yGxu9g9mwTYbRUutxQUkow3Fc=
 github.com/docker/scout-cli v1.18.1 h1:snFodhV6xFJryxdUZ0ukPZFZZFnWAGLUuuPZGB3BOK8=
@@ -168,6 +174,8 @@ github.com/google/uuid v1.6.0 h1:NIvaJDMOsjHA8n1jAhLSgzrAzy1Hgr+hNrb57e+94F0=
 github.com/google/uuid v1.6.0/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
 github.com/gpustack/gguf-parser-go v0.14.1 h1:tmz2eTnSEFfE52V10FESqo9oAUquZ6JKQFntWC/wrEg=
 github.com/gpustack/gguf-parser-go v0.14.1/go.mod h1:GvHh1Kvvq5ojCOsJ5UpwiJJmIjFw3Qk5cW7R+CZ3IJo=
+github.com/gpustack/gguf-parser-go v0.22.1 h1:FRnEDWqT0Rcplr/R9ctCRSN2+3DhVsf6dnR5/i9JA4E=
+github.com/gpustack/gguf-parser-go v0.22.1/go.mod h1:y4TwTtDqFWTK+xvprOjRUh+dowgU2TKCX37vRKvGiZ0=
 github.com/grpc-ecosystem/grpc-gateway/v2 v2.26.1 h1:e9Rjr40Z98/clHv5Yg79Is0NtosR5LXRvdr7o/6NwbA=
 github.com/grpc-ecosystem/grpc-gateway/v2 v2.26.1/go.mod h1:tIxuGz/9mpox++sgp9fJjHO0+q1X9/UOWd798aAm22M=
 github.com/grpc-ecosystem/grpc-gateway/v2 v2.26.3 h1:5ZPtiqj0JL5oKWmcsq4VMaAW5ukBEgSGXEN89zeH1Jo=

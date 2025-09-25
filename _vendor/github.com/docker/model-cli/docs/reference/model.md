@@ -16,6 +16,7 @@ Docker Model Runner
 | [`ps`](model_ps.md)                             | List running models                                                           |
 | [`pull`](model_pull.md)                         | Pull a model from Docker Hub or HuggingFace to your local environment         |
 | [`push`](model_push.md)                         | Push a model to Docker Hub                                                    |
+| [`requests`](model_requests.md)                 | Fetch requests+responses from Docker Model Runner                             |
 | [`rm`](model_rm.md)                             | Remove local models downloaded from Docker Hub                                |
 | [`run`](model_run.md)                           | Run a model and interact with it using a submitted prompt or chat mode        |
 | [`status`](model_status.md)                     | Check if the Docker Model Runner is running                                   |

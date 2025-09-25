@@ -8,6 +8,15 @@ usage: docker model package --gguf <path> [--license <path>...] [--context-size 
 pname: docker model
 plink: docker_model.yaml
 options:
+    - option: chat-template
+      value_type: string
+      description: absolute path to chat template file (must be Jinja format)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: context-size
       value_type: uint64
       default_value: "0"

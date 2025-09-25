@@ -19,6 +19,16 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: color
+      value_type: string
+      default_value: auto
+      description: Use colored output (auto|yes|no)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: debug
       value_type: bool
       default_value: "false"

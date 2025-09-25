@@ -5,10 +5,11 @@ Run a model and interact with it using a submitted prompt or chat mode
 
 ### Options
 
-| Name                            | Type   | Default | Description                                                                       |
-|:--------------------------------|:-------|:--------|:----------------------------------------------------------------------------------|
-| `--debug`                       | `bool` |         | Enable debug logging                                                              |
-| `--ignore-runtime-memory-check` | `bool` |         | Do not block pull if estimated runtime memory for model exceeds system resources. |
+| Name                            | Type     | Default | Description                                                                       |
+|:--------------------------------|:---------|:--------|:----------------------------------------------------------------------------------|
+| `--color`                       | `string` | `auto`  | Use colored output (auto\|yes\|no)                                                |
+| `--debug`                       | `bool`   |         | Enable debug logging                                                              |
+| `--ignore-runtime-memory-check` | `bool`   |         | Do not block pull if estimated runtime memory for model exceeds system resources. |
 
 
 <!---MARKER_GEN_END-->
