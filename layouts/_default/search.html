@@ -11,23 +11,14 @@
         <input type="search" id="search-page-input"
           class="ring-3-gray-light-200 dark:ring-3-gray-dark-400 dark:bg-background-dark focus:ring-3-blue-light dark:focus:ring-3-blue-dark ring-3-[1.5px] w-full lg:max-w-xl min-w-0 rounded-sm bg-white px-4 py-2 outline-hidden"
           placeholder="Search…" tabindex="0" />
-        <div class="flex items-center gap-2 text-gray-600 dark:text-gray-400">
-          <p class="text-sm">Not finding what you're looking for? Try</p>
+        <div class="flex items-center gap-2">
+          <p class="text-sm text-gray-600 dark:text-gray-400">Not finding what you're looking for? Try</p>
           <button onclick="askAI('search-page-input')" 
-            class="flex items-center gap-1 rounded-sm px-2 py-1 transition hover:bg-white/20 dark:hover:bg-white/10 text-white">
-            <span>Ask AI</span>
-            {{- with resources.Get "images/ai-stars.svg" -}}
-            <img
-              height="20px"
-              width="20px"
-              src="{{ .Permalink }}"
-              alt="AI sparkles!"
-            />
-            {{- else -}}
-            <span class="icon-svg icon-sm">
+            class="topbar-button open-kapa-widget">
+            <span>Ask&nbsp;AI</span>
+            <span class="icon-svg">
               {{ partial "utils/svg.html" "/icons/sparkle.svg" }}
             </span>
-            {{- end -}}
           </button>
         </div>
       </div>
