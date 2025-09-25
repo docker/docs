@@ -1,21 +1,21 @@
 <div
-    x-ref="searchBarRef"
-    x-data="{ open: false }"
-    @click.outside="open = false;"
-    @keyup.escape.window="open = false"
-    id="search-bar"
-    class="relative items-center flex w-full max-w-full overflow-visible"
-  >
-    <input
-      class="border-none outline-none focus:outline-none min-w-0"
-      x-ref="searchBarInput"
-      type="search"
-      id="search-bar-input"
-      placeholder="Search"
-      @focus="open = true;"
-      @keyup.enter.prevent="window.location.href = '/search/?q=' + $event.target.value;"
-      @keyup.escape.prevent="open = false;"
-      @keydown.window="(e) => {
+  x-ref="searchBarRef"
+  x-data="{ open: false }"
+  @click.outside="open = false;"
+  @keyup.escape.window="open = false"
+  id="search-bar"
+  class="relative flex w-full max-w-full items-center overflow-visible"
+>
+  <input
+    class="min-w-0 border-none outline-none focus:outline-none"
+    x-ref="searchBarInput"
+    type="search"
+    id="search-bar-input"
+    placeholder="Search"
+    @focus="open = true;"
+    @keyup.enter.prevent="window.location.href = '/search/?q=' + $event.target.value;"
+    @keyup.escape.prevent="open = false;"
+    @keydown.window="(e) => {
             switch(e.key) {
             case 'k':
               if (e.metaKey || e.ctrlKey) {
@@ -25,20 +25,26 @@
               break;
             }
           }"
-      tabindex="0"
-    />
-    <div id="search-bar-icon">
-      <span class="icon-svg-stroke">
-            {{ partial "utils/svg.html" "/icons/search.svg" }}
-          </span>
-    </div>
-    <div id="search-bar-dropdown"
-      x-show="open"
-      x-cloak
-      x-ref="dropdown"
-      class="hidden md:block font-medium text-gray-400 dark:text-gray-200 bg-gray-50 dark:bg-gray-900 rounded-sm mt-2 border-1 border-gray-100 dark:border-gray-700 fixed z-[999] p-6 shadow-md"
-      style="width: min(500px, 90vw);"
-      x-effect="if (open) {
+    tabindex="0"
+  />
+  <button
+    id="search-bar-icon"
+    @click="window.location.href = '/search/?q=' + $refs.searchBarInput.value;"
+    class="cursor-pointer transition-opacity hover:opacity-80"
+    aria-label="Search"
+  >
+    <span class="icon-svg-stroke">
+      {{ partial "utils/svg.html" "/icons/search.svg" }}
+    </span>
+  </button>
+  <div
+    id="search-bar-dropdown"
+    x-show="open"
+    x-cloak
+    x-ref="dropdown"
+    class="border-1 fixed z-[999] mt-2 hidden rounded-sm border-gray-100 bg-gray-50 p-6 font-medium text-gray-400 shadow-md md:block dark:border-gray-700 dark:bg-gray-900 dark:text-gray-200"
+    style="width: min(500px, 90vw);"
+    x-effect="if (open) {
         const rect = $refs.searchBarRef.getBoundingClientRect();
         const dropdownWidth = Math.min(500, window.innerWidth * 0.9);
         const viewportWidth = window.innerWidth;
@@ -58,14 +64,16 @@
         
         $el.style.top = (rect.bottom + 8) + 'px';
         $el.style.left = leftPos + 'px';
-      }">
-      <div id="search-bar-results">
-        {{- $emptyState := `<div>Start typing to search or try <button onclick="askAI('search-bar-input')" class="link">Ask
-            AI</button>.</div>` }}
-        {{- $emptyState | safe.HTML }}
-        <!-- results -->
-      </div>
+      }"
+  >
+    <div id="search-bar-results">
+      {{- $emptyState := `<div>Start typing to search or try <button onclick="askAI('search-bar-input')" class="link">Ask
+        AI</button>.</div>`
+      }}
+      {{- $emptyState | safe.HTML }}
+      <!-- results -->
     </div>
+  </div>
     <script type="module">
       window.addEventListener("load", async function () {
         const pagefind = await import("/pagefind/pagefind.js");
@@ -86,21 +94,21 @@
         function updateDropdownPosition() {
           const searchBar = document.querySelector("#search-bar");
           if (!searchBar || !searchDropdown || searchDropdown.style.display === 'none') return;
-          
+
           const rect = searchBar.getBoundingClientRect();
           const dropdownWidth = Math.min(500, window.innerWidth * 0.9);
           const viewportWidth = window.innerWidth;
-          
+
           let leftPos = rect.left;
-          
+
           if (leftPos + dropdownWidth > viewportWidth - 20) {
             leftPos = viewportWidth - dropdownWidth - 20;
           }
-          
+
           if (leftPos < 20) {
             leftPos = 20;
           }
-          
+
           searchDropdown.style.top = (rect.bottom + 8) + 'px';
           searchDropdown.style.left = leftPos + 'px';
         }
