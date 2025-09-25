@@ -14,11 +14,14 @@
         <div class="flex items-center gap-2 text-gray-600 dark:text-gray-400">
           <p class="text-sm">Not finding what you're looking for? Try</p>
           <button onclick="askAI('search-page-input')" 
-            class="inline-flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-white bg-blue-500 hover:bg-blue-600 rounded-sm transition-colors">
+            class="flex items-center gap-1 rounded-sm px-2 py-1 transition hover:bg-white/20 dark:hover:bg-white/10 text-white">
             <span>Ask AI</span>
-            <span class="icon-svg icon-sm">
-              {{ partial "utils/svg.html" "/icons/sparkle.svg" }}
-            </span>
+            <img
+              height="20px"
+              width="20px"
+              src="{{ (resources.Get "images/ai-stars.svg").Permalink }}"
+              alt="AI sparkles!"
+            />
           </button>
         </div>
       </div>
@@ -29,6 +32,7 @@
     </div>
   </article>
   <script type="module">
+    // [Rest of the script remains unchanged]
     // Global variable to hold the pagefind module
     let pagefind;
 
