@@ -24,30 +24,35 @@ example, they can be applied to any DHI.
 > configuration or commands. Start with this guide, then see the [migration
 > guide](./how-to/migrate.md) for more details and examples.
 
+## Step 1: Start a free trial to access DHI
 
-## Step 1: Sign up and subscribe to DHI for access
+You can browse the Docker Hardened Images catalog without a subscription, but to
+use an image, you must either [contact sales to
+subscribe](https://www.docker.com/products/hardened-images/#getstarted) or start
+a free trial for an [organization](/admin/organization/). This guide walks you
+through starting a free trial.
 
-To access Docker Hardened Images, your organization must [sign
-up](https://www.docker.com/products/hardened-images/#getstarted) and subscribe.
+To start a free trial:
+
+1. Go to the Hardened Images catalog in [Docker
+   Hub](https://hub.docker.com/hardened-images/catalog) and sign in.
+2. Select **Start trial** and follow the on-screen instructions.
 
 ## Step 2: Find an image to use
 
-Once subscribed, Docker Hardened Images will appear under your organization's
-namespace on Docker Hub.
-
-1. Go to [Docker Hub](https://hub.docker.com) and sign in.
-2. Select **My Hub** in the top navigation.
-3. In the left sidebar, choose your organization that has DHI access.
-4. In the left sidebar, select **Hardened Images** > **Catalog**.
+1. Go to the Hardened Images catalog in [Docker
+   Hub](https://hub.docker.com/hardened-images/catalog) and sign in.
+2. In the left sidebar, choose your organization that has DHI access.
+3. In the left sidebar, select **Hardened Images** > **Catalog**.
 
    ![Docker Hub sidebar showing DHI catalog](./images/dhi-catalog.png)
 
-5. Use the search bar or filters to find an image (e.g., `python`, `node`,
+4. Use the search bar or filters to find an image (e.g., `python`, `node`,
    `golang`). For this guide, use the Python image as an example.
 
     ![DHI catalog with Python repository shown](./images/dhi-python-search.png)
 
-6. Select the Python repository to view its details.
+5. Select the Python repository to view its details.
 
 Continue to the next step to mirror the image. To dive deeper into exploring
 images see [Explore Docker Hardened Images](./how-to/explore.md).
