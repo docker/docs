@@ -41,6 +41,7 @@
       "Docker-Desktop",
       "Docker-Engine",
       "Docker-Hub",
+      "Docker-Offload",
       "Docker-Scout",
       "Docker-Scout-Dashboard",
       "Docker-subscription",
