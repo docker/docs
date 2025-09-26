@@ -65,6 +65,10 @@
   - /go/daemon-access/
 "/engine/deprecated/#deprecated-engine-features-1":
   - /go/deprecated/
+"https://www.docker.com/blog/retiring-docker-content-trust/":
+  # Details about the deprecation of Docker Content Trust. This URL can be used
+  # for in-product links to the deprecation, and is used by the Docker CLI.
+  - /go/dct-deprecation/
 "/engine/reference/commandline/cli/#experimental-features":
   - /go/experimental/
 "/reference/cli/docker/login/#credential-stores":
