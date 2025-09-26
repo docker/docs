@@ -155,7 +155,7 @@ resultsHTML += results
     // Truncate excerpt if it's too long
     let excerpt = item.excerpt;
     if (excerpt.length > 200) {
-      excerpt = excerpt.substring(0, 200) + '...';
+      excerpt = excerpt.substring(0, 200);
     }
     return `<div class="p-2">
 <div class="flex flex-col items-start item">
