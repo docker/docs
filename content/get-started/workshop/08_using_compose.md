@@ -46,7 +46,7 @@ $ docker run -dp 127.0.0.1:3000:3000 \
   -e MYSQL_USER=root \
   -e MYSQL_PASSWORD=secret \
   -e MYSQL_DB=todos \
-  node:18-alpine \
+  node:lts-alpine \
   sh -c "yarn install && yarn run dev"
 ```
 
@@ -58,7 +58,7 @@ You'll now define this service in the `compose.yaml` file.
    ```yaml
    services:
      app:
-       image: node:18-alpine
+       image: node:lts-alpine
    ```
 
 2. Typically, you will see `command` close to the `image` definition, although there is no requirement on ordering. Add the `command` to your `compose.yaml` file.
@@ -66,7 +66,7 @@ You'll now define this service in the `compose.yaml` file.
    ```yaml
    services:
      app:
-       image: node:18-alpine
+       image: node:lts-alpine
        command: sh -c "yarn install && yarn run dev"
    ```
 
@@ -75,7 +75,7 @@ You'll now define this service in the `compose.yaml` file.
    ```yaml
    services:
      app:
-       image: node:18-alpine
+       image: node:lts-alpine
        command: sh -c "yarn install && yarn run dev"
        ports:
          - 127.0.0.1:3000:3000
@@ -89,7 +89,7 @@ You'll now define this service in the `compose.yaml` file.
    ```yaml
    services:
      app:
-       image: node:18-alpine
+       image: node:lts-alpine
        command: sh -c "yarn install && yarn run dev"
        ports:
          - 127.0.0.1:3000:3000
@@ -103,7 +103,7 @@ You'll now define this service in the `compose.yaml` file.
    ```yaml
    services:
      app:
-       image: node:18-alpine
+       image: node:lts-alpine
        command: sh -c "yarn install && yarn run dev"
        ports:
          - 127.0.0.1:3000:3000
@@ -185,7 +185,7 @@ At this point, your complete `compose.yaml` should look like this:
 ```yaml
 services:
   app:
-    image: node:18-alpine
+    image: node:lts-alpine
     command: sh -c "yarn install && yarn run dev"
     ports:
       - 127.0.0.1:3000:3000
