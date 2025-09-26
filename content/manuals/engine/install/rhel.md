@@ -31,6 +31,7 @@ RHEL versions:
 
 - RHEL 8
 - RHEL 9
+- RHEL 10
 
 ### Uninstall old versions
 
@@ -90,8 +91,36 @@ your DNF repositories) and set up the repository.
 
 ```console
 $ sudo dnf -y install dnf-plugins-core
+```
+
+Add the Docker repository. The repository URL depends on your RHEL version:
+
+{{< tabs >}}
+{{< tab name="RHEL 10" >}}
+
+For RHEL 10 and later:
+
+```console
 $ sudo dnf config-manager --add-repo {{% param "download-url-base" %}}/docker-ce.repo
 ```
+
+{{< /tab >}}
+{{< tab name="RHEL 8 or 9" >}}
+
+For RHEL 8 or 9, use 
+
+```console
+$ sudo dnf config-manager --add-repo {{% param "download-url-base" %}}/<RHEL_VERSION>/docker-ce.repo
+```
+
+For example, for RHEL 9:
+
+```console
+$ sudo dnf config-manager --add-repo {{% param "download-url-base" %}}/9/docker-ce.repo
+```
+
+{{< /tab >}}
+{{< /tabs >}}
 
 #### Install Docker Engine
 
