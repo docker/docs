@@ -33,7 +33,7 @@ To install Docker Desktop successfully, you must meet the [general system requir
 
    ```console
    $ wget https://download.docker.com/linux/static/stable/x86_64/docker-{{% param "docker_ce_version" %}}.tgz -qO- | tar xvfz - docker/docker --strip-components=1
-   $ mv ./docker /usr/local/bin
+   $ cp -rp ./docker /usr/local/bin/ && rm -r ./docker
    ```
 
 2. Download the latest Arch package from the [Release notes](/manuals/desktop/release-notes.md).

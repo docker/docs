@@ -1,0 +1,34 @@
+command: docker model uninstall-runner
+short: Uninstall Docker Model Runner
+long: Uninstall Docker Model Runner
+usage: docker model uninstall-runner
+pname: docker model
+plink: docker_model.yaml
+options:
+    - option: images
+      value_type: bool
+      default_value: "false"
+      description: Remove docker/model-runner images
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: models
+      value_type: bool
+      default_value: "false"
+      description: Remove model storage volume
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

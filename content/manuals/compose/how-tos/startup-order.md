@@ -1,6 +1,6 @@
 ---
-description: How to control service startup and shutdown order in Docker Compose
-keywords: documentation, docs, docker, compose, startup, shutdown, order
+description: Learn how to manage service startup and shutdown order in Docker Compose using depends_on and healthchecks.
+keywords: docker compose startup order, compose shutdown order, depends_on, service healthcheck, control service dependencies
 title: Control startup and shutdown order in Compose
 linkTitle: Control startup order
 weight: 30
@@ -13,7 +13,7 @@ You can control the order of service startup and shutdown with the
 containers in dependency order, where dependencies are determined by
 `depends_on`, `links`, `volumes_from`, and `network_mode: "service:..."`.
 
-A good example of when you might use this is an application which needs to access a database. If both services are started with `docker compose up`, there is a chance this will fail since the application service might start before the database service and won't find a database able to handle its SQL statements. 
+For example, if your application needs to access a database and both services are started with `docker compose up`, there is a chance this will fail since the application service might start before the database service and won't find a database able to handle its SQL statements. 
 
 ## Control startup
 

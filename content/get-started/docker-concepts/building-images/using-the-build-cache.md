@@ -22,7 +22,7 @@ Consider the following Dockerfile that you created for the [getting-started](./w
 
 
 ```dockerfile
-FROM node:20-alpine
+FROM node:22-alpine
 WORKDIR /app
 COPY . .
 RUN yarn install --production
@@ -69,7 +69,7 @@ In this hands-on guide, you will learn how to use the Docker build cache effecti
 
 
     ```dockerfile
-    FROM node:20-alpine
+    FROM node:22-alpine
     WORKDIR /app
     COPY . .
     RUN yarn install --production
@@ -121,20 +121,23 @@ In this hands-on guide, you will learn how to use the Docker build cache effecti
 
 
     <table>
-      <tr>
-       <td>Steps
-       </td>
-       <td>Description
-       </td>
-       <td>Time Taken(1st Run)
-       </td>
-       <td>Time Taken (2nd Run)
-       </td>
-      </tr>
+      <thead>
+        <tr>
+          <th>Steps
+          </th>
+          <th>Description
+          </th>
+          <th>Time Taken (1st Run)
+          </th>
+          <th>Time Taken (2nd Run)
+          </th>
+        </tr>
+      </thead>
+      <tbody>
       <tr>
        <td>1
        </td>
-       <td>Load build definition from Dockerfile
+       <td><code>Load build definition from Dockerfile</code>
        </td>
        <td>0.0 seconds
        </td>
@@ -144,7 +147,7 @@ In this hands-on guide, you will learn how to use the Docker build cache effecti
       <tr>
        <td>2
        </td>
-       <td>Load metadata for docker.io/library/node:20-alpine
+       <td><code>Load metadata for docker.io/library/node:22-alpine</code>
        </td>
        <td>2.7 seconds
        </td>
@@ -154,7 +157,7 @@ In this hands-on guide, you will learn how to use the Docker build cache effecti
       <tr>
        <td>3
        </td>
-       <td>Load .dockerignore
+       <td><code>Load .dockerignore</code>
        </td>
        <td>0.0 seconds
        </td>
@@ -164,7 +167,7 @@ In this hands-on guide, you will learn how to use the Docker build cache effecti
       <tr>
        <td>4
        </td>
-       <td>Load build context
+       <td><code>Load build context</code>
     <p>
     (Context size: 4.60MB)
        </td>
@@ -176,7 +179,7 @@ In this hands-on guide, you will learn how to use the Docker build cache effecti
       <tr>
        <td>5
        </td>
-       <td>Set the working directory (WORKDIR)
+       <td><code>Set the working directory (WORKDIR)</code>
        </td>
        <td>0.1 seconds
        </td>
@@ -186,7 +189,7 @@ In this hands-on guide, you will learn how to use the Docker build cache effecti
       <tr>
        <td>6
        </td>
-       <td>Copy the local code into the container
+       <td><code>Copy the local code into the container</code>
        </td>
        <td>0.0 seconds
        </td>
@@ -196,7 +199,7 @@ In this hands-on guide, you will learn how to use the Docker build cache effecti
       <tr>
        <td>7
        </td>
-       <td>Run yarn install --production
+       <td><code>Run yarn install --production</code>
        </td>
        <td>10.0 seconds
        </td>
@@ -206,7 +209,7 @@ In this hands-on guide, you will learn how to use the Docker build cache effecti
       <tr>
        <td>8
        </td>
-       <td>Exporting layers
+       <td><code>Exporting layers</code>
        </td>
        <td>2.2 seconds
        </td>
@@ -216,13 +219,14 @@ In this hands-on guide, you will learn how to use the Docker build cache effecti
       <tr>
        <td>9
        </td>
-       <td>Exporting the final image
+       <td><code>Exporting the final image</code>
        </td>
        <td>3.0 seconds
        </td>
        <td>0.0 seconds
        </td>
      </tr>
+     </tbody>
     </table>
 
 
@@ -233,7 +237,7 @@ In this hands-on guide, you will learn how to use the Docker build cache effecti
 6. Update the Dockerfile to copy in the `package.json` file first, install dependencies, and then copy everything else in.
 
      ```dockerfile
-     FROM node:20-alpine
+     FROM node:22-alpine
      WORKDIR /app
      COPY package.json yarn.lock ./
      RUN yarn install --production 
@@ -262,10 +266,10 @@ In this hands-on guide, you will learn how to use the Docker build cache effecti
     => => transferring dockerfile: 175B                                                               0.0s
     => [internal] load .dockerignore                                                                  0.0s
     => => transferring context: 2B                                                                    0.0s
-    => [internal] load metadata for docker.io/library/node:21-alpine                                  0.0s
+    => [internal] load metadata for docker.io/library/node:22-alpine                                  0.0s
     => [internal] load build context                                                                  0.8s
     => => transferring context: 53.37MB                                                               0.8s
-    => [1/5] FROM docker.io/library/node:21-alpine                                                    0.0s
+    => [1/5] FROM docker.io/library/node:22-alpine                                                    0.0s
     => CACHED [2/5] WORKDIR /app                                                                      0.0s
     => [3/5] COPY package.json yarn.lock ./                                                           0.2s
     => [4/5] RUN yarn install --production                                                           14.0s
@@ -295,10 +299,10 @@ In this hands-on guide, you will learn how to use the Docker build cache effecti
     => => transferring dockerfile: 37B                                                                0.0s
     => [internal] load .dockerignore                                                                  0.0s
     => => transferring context: 2B                                                                    0.0s
-    => [internal] load metadata for docker.io/library/node:21-alpine                                  0.0s 
+    => [internal] load metadata for docker.io/library/node:22-alpine                                  0.0s 
     => [internal] load build context                                                                  0.2s
     => => transferring context: 450.43kB                                                              0.2s
-    => [1/5] FROM docker.io/library/node:21-alpine                                                    0.0s
+    => [1/5] FROM docker.io/library/node:22-alpine                                                    0.0s
     => CACHED [2/5] WORKDIR /app                                                                      0.0s
     => CACHED [3/5] COPY package.json yarn.lock ./                                                    0.0s
     => CACHED [4/5] RUN yarn install --production                                                     0.0s

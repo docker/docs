@@ -1,0 +1,13 @@
+command: docker model df
+short: Show Docker Model Runner disk usage
+long: Show Docker Model Runner disk usage
+usage: docker model df
+pname: docker model
+plink: docker_model.yaml
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

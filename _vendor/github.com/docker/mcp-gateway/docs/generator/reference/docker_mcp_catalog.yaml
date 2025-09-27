@@ -1,0 +1,25 @@
+command: docker mcp catalog
+aliases: docker mcp catalog, docker mcp catalogs
+short: Manage the catalog
+long: Manage the catalog
+pname: docker mcp
+plink: docker_mcp.yaml
+cname:
+    - docker mcp catalog init
+    - docker mcp catalog ls
+    - docker mcp catalog reset
+    - docker mcp catalog show
+    - docker mcp catalog update
+clink:
+    - docker_mcp_catalog_init.yaml
+    - docker_mcp_catalog_ls.yaml
+    - docker_mcp_catalog_reset.yaml
+    - docker_mcp_catalog_show.yaml
+    - docker_mcp_catalog_update.yaml
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

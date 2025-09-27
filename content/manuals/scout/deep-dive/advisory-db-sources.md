@@ -58,6 +58,27 @@ your SBOM is cross-referenced with the CVE information to detect how it affects 
 
 For more details on how image analysis works, see the [image analysis page](/manuals/scout/explore/analysis.md).
 
+## Severity and scoring priority
+
+Docker Scout uses two main principles when determining severity and scoring for
+CVEs:
+
+   - Source priority
+   - CVSS version preference
+
+For source priority, Docker Scout follows this order:
+
+  1. Vendor advisories: Scout always uses the severity and scoring data from the
+     source that matches the package and version. For example, Debian data for
+     Debian packages.
+
+  2. NIST scoring data: If the vendor doesn't provide scoring data for a CVE,
+     Scout falls back to NIST scoring data.
+
+For CVSS version preference, once Scout has selected a source, it prefers CVSS
+v4 over v3 when both are available, as v4 is the more modern and precise scoring
+model.
+
 ## Vulnerability matching
 
 Traditional tools often rely on broad [Common Product Enumeration (CPE)](https://en.wikipedia.org/wiki/Common_Platform_Enumeration) matching,

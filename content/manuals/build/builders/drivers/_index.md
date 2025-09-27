@@ -28,7 +28,7 @@ The following table outlines some differences between drivers.
 | Feature                      |  `docker`   | `docker-container` | `kubernetes` |      `remote`      |
 | :--------------------------- | :---------: | :----------------: | :----------: | :----------------: |
 | **Automatically load image** |     ✅      |                    |              |                    |
-| **Cache export**             |     ✓\*     |         ✅         |      ✅      |         ✅         |
+| **Cache export**             |     ✅\*     |         ✅         |      ✅      |         ✅         |
 | **Tarball output**           |             |         ✅         |      ✅      |         ✅         |
 | **Multi-arch images**        |             |         ✅         |      ✅      |         ✅         |
 | **BuildKit configuration**   |             |         ✅         |      ✅      | Managed externally |

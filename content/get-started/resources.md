@@ -9,7 +9,7 @@ Docker and the broader community of Docker experts have put together many differ
 
 ## Docker Training
 
-Expand your knowledge on all things Docker with [basic to advanced trainings from Docker experts](https://www.docker.com/resources/trainings/). 
+Expand your knowledge on all things Docker with [basic to advanced trainings from Docker experts](https://www.docker.com/trainings/). 
 
 You can find recorded content at your own convenience, or register for a live session to participate in Q&A.
 

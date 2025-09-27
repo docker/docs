@@ -1,7 +1,7 @@
 ---
 title: Building best practices
 linkTitle: Best practices
-weight: 60
+weight: 70
 description: Hints, tips and guidelines for writing clean, reliable Dockerfiles
 keywords: base images, dockerfile, best practices, hub, official image
 tags: [Best practices]
@@ -192,17 +192,17 @@ image. This is useful because it lets publishers update tags to point to
 newer versions of an image. And as an image consumer, it means you
 automatically get the new version when you re-build your image.
 
-For example, if you specify `FROM alpine:3.19` in your Dockerfile, `3.19`
-resolves to the latest patch version for `3.19`.
+For example, if you specify `FROM alpine:3.21` in your Dockerfile, `3.21`
+resolves to the latest patch version for `3.21`.
 
 ```dockerfile
 # syntax=docker/dockerfile:1
-FROM alpine:3.19
+FROM alpine:3.21
 ```
 
-At one point in time, the `3.19` tag might point to version 3.19.1 of the
+At one point in time, the `3.21` tag might point to version 3.21.1 of the
 image. If you rebuild the image 3 months later, the same tag might point to a
-different version, such as 3.19.4. This publishing workflow is best practice,
+different version, such as 3.21.4. This publishing workflow is best practice,
 and most publishers use this tagging strategy, but it isn't enforced.
 
 The downside with this is that you're not guaranteed to get the same for every
@@ -213,16 +213,16 @@ To fully secure your supply chain integrity, you can pin the image version to a
 specific digest. By pinning your images to a digest, you're guaranteed to
 always use the same image version, even if a publisher replaces the tag with a
 new image. For example, the following Dockerfile pins the Alpine image to the
-same tag as earlier, `3.19`, but this time with a digest reference as well.
+same tag as earlier, `3.21`, but this time with a digest reference as well.
 
 ```dockerfile
 # syntax=docker/dockerfile:1
-FROM alpine:3.19@sha256:13b7e62e8df80264dbb747995705a986aa530415763a6c58f84a3ca8af9a5bcd
+FROM alpine:3.21@sha256:a8560b36e8b8210634f77d9f7f9efd7ffa463e380b75e2e74aff4511df3ef88c
 ```
 
-With this Dockerfile, even if the publisher updates the `3.19` tag, your builds
+With this Dockerfile, even if the publisher updates the `3.21` tag, your builds
 would still use the pinned image version:
-`13b7e62e8df80264dbb747995705a986aa530415763a6c58f84a3ca8af9a5bcd`.
+`a8560b36e8b8210634f77d9f7f9efd7ffa463e380b75e2e74aff4511df3ef88c`.
 
 While this helps you avoid unexpected changes, it's also more tedious to have
 to look up and include the image digest for base image versions manually each
@@ -259,8 +259,8 @@ to create an efficient and maintainable Dockerfile.
 
 > [!TIP]
 >
-> Want a better editing experience for Dockerfiles in VS Code?
-> Check out the [Docker VS Code Extension (Beta)](https://marketplace.visualstudio.com/items?itemName=docker.docker) for linting, code navigation, and vulnerability scanning.
+> To improve linting, code navigation, and vulnerability scanning of your Dockerfiles in Visual Studio Code
+> see [Docker VS Code Extension](https://marketplace.visualstudio.com/items?itemName=docker.docker).
 
 ### FROM
 
@@ -442,7 +442,7 @@ reduces the image size, since the apt cache isn't stored in a layer. Since the
 `RUN` statement starts with `apt-get update`, the package cache is always
 refreshed prior to `apt-get install`.
 
-Official Debian and Ubuntu images [automatically run `apt-get clean`](https://github.com/moby/moby/blob/03e2923e42446dbb830c654d0eec323a0b4ef02a/contrib/mkimage/debootstrap#L82-L105), so explicit invocation is not required.
+Official Debian and Ubuntu images [automatically run `apt-get clean`](https://github.com/debuerreotype/debuerreotype/blob/c9542ab785e72696eb2908a6dbc9220abbabef39/scripts/debuerreotype-minimizing-config#L87-L109), so explicit invocation is not required.
 
 #### Using pipes
 
@@ -487,7 +487,7 @@ service, such as Apache and Rails, you would run something like `CMD
 for any service-based image.
 
 In most other cases, `CMD` should be given an interactive shell, such as bash,
-python and perl. For example, `CMD ["perl", "-de0"]`, `CMD ["python"]`, or `CMD
+Python and perl. For example, `CMD ["perl", "-de0"]`, `CMD ["python"]`, or `CMD
 ["php", "-a"]`. Using this form means that when you execute something like
 `docker run -it python`, you’ll get dropped into a usable shell, ready to go.
 `CMD` should rarely be used in the manner of `CMD ["param", "param"]` in
@@ -556,7 +556,7 @@ $ docker run --rm test sh -c 'echo $ADMIN_USER'
 mark
 ```
 
-To prevent this, and really unset the environment variable, use a `RUN` command
+To prevent this and unset the environment variable, use a `RUN` command
 with shell commands, to set, use, and unset the variable all in a single layer.
 You can separate your commands with `;` or `&&`. If you use the second method,
 and one of the commands fails, the `docker build` also fails. This is usually a
@@ -763,7 +763,7 @@ RUN groupadd -r postgres && useradd --no-log-init -r -g postgres postgres
 > with a significantly large UID inside a Docker container can lead to disk
 > exhaustion because `/var/log/faillog` in the container layer is filled with
 > NULL (\0) characters. A workaround is to pass the `--no-log-init` flag to
-> useradd. The Debian/Ubuntu `adduser` wrapper does not support this flag.
+> `useradd`. The Debian/Ubuntu `adduser` wrapper does not support this flag.
 
 Avoid installing or using `sudo` as it has unpredictable TTY and
 signal-forwarding behavior that can cause problems. If you absolutely need
@@ -778,11 +778,11 @@ For more information about `USER`, see [Dockerfile reference for the USER instru
 ### WORKDIR
 
 For clarity and reliability, you should always use absolute paths for your
-`WORKDIR`. Also, you should use `WORKDIR` instead of  proliferating instructions
+`WORKDIR`. Also, you should use `WORKDIR` instead of proliferating instructions
 like `RUN cd … && do-something`, which are hard to read, troubleshoot, and
 maintain.
 
-For more information about `WORKDIR`, see [Dockerfile reference for the WORKDIR instruction](/reference/dockerfile.md#workdir).
+For more information about `WORKDIR`, see [Dockerfile reference for the `WORKDIR` instruction](/reference/dockerfile.md#workdir).
 
 ### ONBUILD
 
@@ -802,7 +802,7 @@ Dockerfile, as you can see in [Ruby’s `ONBUILD` variants](https://github.com/d
 Images built with `ONBUILD` should get a separate tag. For example,
 `ruby:1.9-onbuild` or `ruby:2.0-onbuild`.
 
-Be careful when putting `ADD` or `COPY` in `ONBUILD`. The onbuild image
+Be careful when putting `ADD` or `COPY` in `ONBUILD`. The `onbuild image
 fails catastrophically if the new build's context is missing the resource being
 added. Adding a separate tag, as recommended above, helps mitigate this by
 allowing the Dockerfile author to make a choice.

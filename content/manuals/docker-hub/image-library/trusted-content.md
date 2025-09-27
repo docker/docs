@@ -18,6 +18,22 @@ Source Software images.
 
 ## Docker Official Images
 
+> [!NOTE]
+>
+> Docker is retiring Docker Content Trust (DCT) for Docker Official Images
+> (DOI). Starting on August 8th, 2025, the oldest of DOI DCT signing
+> certificates will begin to expire. You may have already started seeing expiry
+> warnings if you use the `docker trust` commands with DOI. These certificates,
+> once cached by the Docker client, are not subsequently refreshed, making
+> certificate rotation impractical. If you have set the `DOCKER_CONTENT_TRUST`
+> environment variable to true (`DOCKER_CONTENT_TRUST=1`), DOI pulls will start to
+> fail. The workaround is to unset the `DOCKER_CONTENT_TRUST` environment
+> variable. The use of  `docker trust inspect` will also start to fail and should
+> no longer be used for DOI.
+>
+> For more details, see
+> https://www.docker.com/blog/retiring-docker-content-trust/.
+
 The Docker Official Images are a curated set of Docker repositories hosted on
 Docker Hub.
 
@@ -137,7 +153,7 @@ Docker Hub for examples on how to install packages if you are unfamiliar.
 ### Codenames
 
 Tags with words that look like Toy Story characters (for example, `bookworm`,
-`bullseye`, and `trixie`) or adjectives (such as `focal`, `jammy`, and
+`bullseye`, and `trixie`) or adjectives (such as `jammy`, and
 `noble`), indicate the codename of the Linux distribution they use as a base
 image. Debian release codenames are [based on Toy Story characters](https://en.wikipedia.org/wiki/Debian_version_history#Naming_convention),
 and Ubuntu's take the form of "Adjective Animal". For example, the

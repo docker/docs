@@ -1,17 +1,18 @@
 {{- $colors := (dict
-  "amber" "bg-amber-light dark:bg-amber-dark"
-  "blue" "bg-blue-light dark:bg-blue-dark"
-  "green" "bg-green-light dark:bg-green-dark"
-  "red" "bg-red-light dark:bg-red-dark"
-  "violet" "bg-violet-light dark:bg-violet-dark"
+  "amber" "bg-amber-500 dark:bg-amber-400"
+  "blue" "bg-blue-500 dark:bg-blue-400"
+  "green" "bg-green-500 dark:bg-green-700"
+  "red" "bg-red-500 dark:bg-red-400"
+  "violet" "bg-violet-500 dark:bg-violet-400"
   )
 -}}
 
 {{- if not (isset $colors .color) -}}
-{{- errorf "[badge] wrong color name: '%s' - supported values: amber, blue, green, red, violet" .color -}}h
+  {{- errorf "[badge] wrong color name: '%s' - supported values: amber, blue, green, red, violet" .color -}}h
 {{- end -}}
 
+
 <span
-  class="not-prose px-1 rounded-sm {{ index $colors .color }} text-white text-xs"
+  class="not-prose {{ index $colors .color }} rounded-sm px-1 text-xs text-white"
   >{{ .content }}</span
 >

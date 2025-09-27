@@ -160,8 +160,8 @@ Here are some examples:
 >
 > > [!WARNING]
 > >
-> > Hosts within the same L2 segment (for example, hosts connected to the same
-> > network switch) can reach ports published to localhost.
+> > In releases older than 28.0.0, hosts within the same L2 segment (for example,
+> > hosts connected to the same network switch) can reach ports published to localhost.
 > > For more information, see
 > > [moby/moby#45610](https://github.com/moby/moby/issues/45610)
 

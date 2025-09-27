@@ -1,0 +1,48 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    {{- if eq .Type "desktop-release" -}}
+    <title>Docker Docs - Docker Desktop Releases</title>
+    <description>Docker Desktop release announcements</description>
+    {{- else if eq .Type "security-announcements" -}}
+    <title>Docker Docs - Security Announcements</title>
+    <description>Docker security announcements and updates</description>
+    {{- else -}}
+    <title>Docker Docs</title>
+    <description>Docker documentation updates</description>
+    {{- end }}
+
+    <link>{{ .Permalink }}</link>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>{{ .Site.LanguageCode | default "en" }}</language>
+    <lastBuildDate>{{ now.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>
+    <atom:link href="{{ .Permalink }}index.xml" rel="self" type="application/rss+xml" />
+
+    {{- if eq .Type "desktop-release" -}}
+      {{- $releases := .Site.Data.desktop_release.releases -}}
+      {{- range $index, $release := $releases -}}
+        {{- if lt $index 20 -}}
+    <item>
+      <title>Docker Desktop {{ $release.version }} Released</title>
+      <link>{{ $.Permalink }}#{{ $release.version }}</link>
+      <pubDate>{{ dateFormat "Mon, 02 Jan 2006 15:04:05 -0700" $release.date | safeHTML }}</pubDate>
+      <guid>docker-desktop-{{ $release.version }}</guid>
+      <description>{{ printf "<p><strong>%s</strong></p>" $release.summary | html }}{{ if $release.highlights }}<ul>{{ range $release.highlights }}<li>{{ . | html }}</li>{{ end }}</ul>{{ end }}<p><a href="{{ $.Permalink }}#{{ $release.version }}">View full release notes</a></p></description>
+    </item>
+        {{- end -}}
+      {{- end -}}
+    {{- else if eq .Type "security-announcements" -}}
+      {{- $announcements := .Site.Data.security_announcements.announcements -}}
+      {{- range $index, $announcement := $announcements -}}
+        {{- if lt $index 20 -}}
+    <item>
+      <title>{{ $announcement.title }}</title>
+      <link>{{ $.Permalink }}#{{ $announcement.anchor }}</link>
+      <pubDate>{{ dateFormat "Mon, 02 Jan 2006 15:04:05 -0700" $announcement.date | safeHTML }}</pubDate>
+      <guid>security-{{ $announcement.anchor }}</guid>
+      <description>{{ printf "<p><strong>%s</strong></p><p>%s</p>" $announcement.summary $announcement.description | html }}</description>
+    </item>
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  </channel>
+</rss>

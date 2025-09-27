@@ -1,0 +1,32 @@
+command: docker offload version
+short: Prints the Docker Offload CLI version
+usage: docker offload version [OPTIONS]
+pname: docker offload
+plink: docker_offload.yaml
+options:
+  - option: json
+    value_type: bool
+    default_value: "false"
+    description: Prints the version as JSON
+    deprecated: false
+    hidden: false
+    experimental: false
+    experimentalcli: false
+    kubernetes: false
+    swarm: false
+  - option: short
+    value_type: bool
+    default_value: "false"
+    description: Prints the short version
+    deprecated: false
+    hidden: false
+    experimental: false
+    experimentalcli: false
+    kubernetes: false
+    swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false

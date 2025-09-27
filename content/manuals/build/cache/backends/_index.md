@@ -179,3 +179,6 @@ $ docker buildx build --push -t <registry>/<image> \
   --cache-to type=registry,ref=<registry>/<cache-image>,oci-mediatypes=true,image-manifest=true \
   --cache-from type=registry,ref=<registry>/<cache-image> .
 ```
+
+> [!NOTE]
+> Since BuildKit v0.21, `image-manifest` is enabled by default.

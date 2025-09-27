@@ -1,0 +1,14 @@
+{{ $feed := .Get "feed" | default "index.xml" }}
+{{ $text := .Get "text" | default "Subscribe to RSS feed" }}
+<button
+  onclick="window.open('{{ $feed }}', '_blank')"
+  data-heap-id="rss-subscribe-button"
+  class="inline-flex items-center gap-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-900 py-2 px-3 text-sm transition-colors"
+>
+  <span class="icon-svg text-base leading-none">
+    {{ partial "icon" "rss_feed" }}
+  </span>
+  <div class="leading-tight">
+    <div class="text-base">{{ $text }}</div>
+  </div>
+</button>

@@ -1,15 +1,24 @@
 {{- /*
   Renders a tooltip component using Floating UI for positioning.
   See script at `assets/js/src/tooltip.js` for functionality.
-*/ -}}
+  */
+-}}
 <div data-tooltip-wrapper>
-  <div data-tooltip-button class="icon-svg flex items-center text-blue-light dark:text-blue-dark">
+  <div
+    data-tooltip-button
+    class="icon-svg text-blue-light flex items-center dark:text-blue-700"
+  >
     {{ partialCached "icon" "help" "help" }}
   </div>
-  <div data-tooltip-body
-    class="absolute left-0 top-0 hidden max-w-56 rounded bg-gray-light-700 p-2 text-white dark:bg-gray-dark-300"
-    role="tooltip">
+  <div
+    data-tooltip-body
+    class="absolute top-0 left-0 hidden max-w-56 rounded-sm bg-gray-700 p-2 text-white dark:bg-gray-300"
+    role="tooltip"
+  >
     {{ . }}
-    <div data-tooltip-arrow class="absolute h-2 w-2 rotate-45 bg-gray-light-700 dark:bg-gray-dark-300"></div>
+    <div
+      data-tooltip-arrow
+      class="absolute h-2 w-2 rotate-45 bg-gray-700 dark:bg-gray-300"
+    ></div>
   </div>
 </div>

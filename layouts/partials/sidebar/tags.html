@@ -2,14 +2,20 @@
   Renders a flat list of tags for the "tags" taxonomy.
   - Unlike `sections.html`, this template is based on taxonomy terms, not section pages.
   - Highlights the current tag page and links to all tag pages.
-*/ -}}
+  */
+-}}
 <ul class="md:text-sm">
   {{- range site.Taxonomies.tags }}
-    <li class="pl-4 hover:text-blue-light hover:dark:text-blue-dark
-    {{ if eq .Page page }} bg-gray-light-200 dark:bg-gray-dark-200{{ end }}">
-      <a class="py-2 w-full truncate block"
-         href="{{ .Page.Permalink }}"
-         title="{{ .Page.LinkTitle }}">
+    <li
+      class="hover:text-blue {{ if eq .Page page }}
+        bg-gray-400 dark:bg-gray-800
+      {{ end }} pl-4 hover:dark:text-blue-700"
+    >
+      <a
+        class="block w-full truncate py-2"
+        href="{{ .Page.Permalink }}"
+        title="{{ .Page.LinkTitle }}"
+      >
         {{ .Page.LinkTitle }}
       </a>
     </li>

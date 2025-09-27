@@ -1,7 +1,10 @@
 command: docker buildx history import
-short: Import a build into Docker Desktop
-long: Import a build into Docker Desktop
-usage: docker buildx history import [OPTIONS] < bundle.dockerbuild
+short: Import build records into Docker Desktop
+long: |-
+    Import a build record from a `.dockerbuild` archive into Docker Desktop. This
+    lets you view, inspect, and analyze builds created in other environments or CI
+    pipelines.
+usage: docker buildx history import [OPTIONS] -
 pname: docker buildx history
 plink: docker_buildx_history.yaml
 options:
@@ -10,6 +13,7 @@ options:
       value_type: stringArray
       default_value: '[]'
       description: Import from a file path
+      details_url: '#file'
       deprecated: false
       hidden: false
       experimental: false
@@ -37,6 +41,30 @@ inherited_options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+examples: |-
+    ### Import a `.dockerbuild` archive from standard input
+
+    ```console
+    docker buildx history import < mybuild.dockerbuild
+    ```
+
+    ### Import a build archive from a file (--file) {#file}
+
+    ```console
+    docker buildx history import --file ./artifacts/backend-build.dockerbuild
+    ```
+
+    ### Open a build manually
+
+    By default, the `import` command automatically opens the imported build in Docker
+    Desktop. You don't need to run `open` unless you're opening a specific build
+    or re-opening it later.
+
+    If you've imported multiple builds, you can open one manually:
+
+    ```console
+    docker buildx history open ci-build
+    ```
 deprecated: false
 hidden: false
 experimental: false

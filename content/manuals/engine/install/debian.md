@@ -42,6 +42,7 @@ To get started with Docker Engine on Debian, make sure you
 To install Docker Engine, you need the 64-bit version of one of these Debian
 versions:
 
+- Debian Trixie 13 (testing)
 - Debian Bookworm 12 (stable)
 - Debian Bullseye 11 (oldstable)
 
@@ -97,6 +98,8 @@ You can install Docker Engine in different ways, depending on your needs:
 - Use a [convenience script](#install-using-the-convenience-script). Only
   recommended for testing and development environments.
 
+{{% include "engine-license.md" %}}
+
 ### Install using the `apt` repository {#install-using-the-repository}
 
 Before you install Docker Engine for the first time on a new host machine, you
@@ -144,7 +147,7 @@ Docker from the repository.
    ```console
    $ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
    ```
-  
+
    {{< /tab >}}
    {{< tab name="Specific version" >}}
 
@@ -169,6 +172,21 @@ Docker from the repository.
 
    {{< /tab >}}
    {{< /tabs >}}
+
+    > [!NOTE]
+    >
+    > The Docker service starts automatically after installation. To verify that
+    > Docker is running, use:
+    > 
+    > ```console
+    > $ sudo systemctl status docker
+    > ```
+    >
+    > Some systems may have this behavior disabled and will require a manual start:
+    >
+    > ```console
+    > $ sudo systemctl start docker
+    > ```
 
 3. Verify that the installation is successful by running the `hello-world` image:
 
@@ -223,12 +241,24 @@ download a new file each time you want to upgrade Docker Engine.
      ./docker-compose-plugin_<version>_<arch>.deb
    ```
 
-   The Docker daemon starts automatically.
+    > [!NOTE]
+    >
+    > The Docker service starts automatically after installation. To verify that
+    > Docker is running, use:
+    > 
+    > ```console
+    > $ sudo systemctl status docker
+    > ```
+    >
+    > Some systems may have this behavior disabled and will require a manual start:
+    >
+    > ```console
+    > $ sudo systemctl start docker
+    > ```
 
 6. Verify that the installation is successful by running the `hello-world` image:
 
    ```console
-   $ sudo service docker start
    $ sudo docker run hello-world
    ```
 

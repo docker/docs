@@ -4,12 +4,14 @@
       {{- if $v }}
         {{- printf " %s=%q" $k $v | safeHTMLAttr }}
       {{- end }}
-    {{- end }}>
-    <thead class="bg-gray-light-100 dark:bg-gray-dark-200">
+    {{- end }}
+  >
+    <thead class="bg-gray-100 dark:bg-gray-800">
       {{- range .THead }}
         <tr>
           {{- range . }}
-            <th class="p-2"
+            <th
+              class="p-2"
               {{- with .Alignment }}
                 {{- printf " style=%q" (printf "text-align: %s" .) | safeHTMLAttr }}
               {{- end -}}
@@ -24,7 +26,8 @@
       {{- range .TBody }}
         <tr>
           {{- range . }}
-            <td class="p-2"
+            <td
+              class="p-2"
               {{- with .Alignment }}
                 {{- printf " style=%q" (printf "text-align: %s" .) | safeHTMLAttr }}
               {{- end -}}

@@ -117,7 +117,7 @@ The Docker daemon log can be viewed by using one of the following methods:
 
 Look in the Docker logs for a message like the following:
 
-```none
+```text
 ...goroutine stacks written to /var/run/docker/goroutine-stacks-2017-06-02T193336z.log
 ```
 

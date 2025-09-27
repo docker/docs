@@ -22,10 +22,9 @@ This includes:
 
 - The resources in the [Learning Center](/manuals/desktop/use-desktop/_index.md)
 - Pulling or pushing an image to Docker Hub
-- [Image Access Management](/manuals/security/for-developers/access-tokens.md)
+- [Image Access Management](/manuals/security/access-tokens.md)
 - [Static vulnerability scanning](/manuals/docker-hub/repos/manage/vulnerability-scanning.md)
 - Viewing remote images in the Docker Dashboard
-- Setting up [Dev Environments](/manuals/desktop/features/dev-environments/_index.md)
 - Docker Build when using [BuildKit](/manuals/build/buildkit/_index.md#getting-started).
   You can work around this by disabling BuildKit. Run `DOCKER_BUILDKIT=0 docker build .` to disable BuildKit.
 - [Kubernetes](/manuals/desktop/features/kubernetes.md) (Images are download when you enable Kubernetes for the first time)

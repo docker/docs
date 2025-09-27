@@ -34,12 +34,12 @@ jobs:
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: docker/docs
       -
         name: Download data files
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         if: ${{ inputs.data-files-id != '' && inputs.data-files-folder != '' }}
         with:
           name: ${{ inputs.data-files-id }}
@@ -51,7 +51,7 @@ jobs:
         # that folder. If not, create a placeholder stub file for the data file.
         name: Copy data files
         if: ${{ inputs.data-files-id != '' && inputs.data-files-folder != '' }}
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const fs = require('fs');
@@ -97,9 +97,6 @@ jobs:
             docker-bake.hcl
           targets: validate-upstream
           provenance: false
-          set: |
-            *.cache-from=type=gha,scope=docs-upstream
-            *.cache-to=type=gha,scope=docs-upstream
         env:
           UPSTREAM_MODULE_NAME: ${{ inputs.module-name }}
           UPSTREAM_REPO: ${{ github.repository }}

@@ -1,0 +1,941 @@
+releases:
+  - version: "4.46.0"
+    date: "2025-09-11"
+    summary: "Learning center walkthrough for Docker MCP Toolkit, PAC configuration control, and redesigned update experience"
+    highlights:
+      - "Added Learning center walkthrough for Docker MCP Toolkit and onboarding improvements"
+      - "Administrators can now control PAC configurations with Settings Management"
+      - "Update experience redesigned for easier management"
+      - "Docker Buildx v0.28.0"
+      - "Docker Engine v28.4.0"
+      - "Fixed slow Docker Desktop startup on Mac"
+      - "Improved Docker Model Runner security on Mac and Windows"
+
+  - version: "4.45.0"
+    date: "2025-08-28"
+    summary: "Docker Model Runner is now generally available"
+    highlights:
+      - "Docker Model Runner is now GA"
+      - "Docker Compose v2.39.2"
+      - "Docker Buildx v0.27.0"
+      - "Docker Engine v28.3.3"
+      - "Fixed diagnostics crash behind authenticated proxy"
+      - "Mac: Fixed crash after waking from sleep"
+      - "Windows: Fixed CLI plugin deployment permissions"
+
+  - version: "4.44.3"
+    date: "2025-08-20"
+    summary: "Security fix for CVE-2025-9074"
+    highlights:
+      - "Fixed CVE-2025-9074 - malicious container access vulnerability"
+      - "Fixed Docker Offload dialog blocking dashboard access"
+
+  - version: "4.44.2"
+    date: "2025-08-15"
+    summary: "Docker Offload Beta support"
+    highlights:
+      - "Added Docker Offload to Beta features settings"
+      - "Updates to support Docker Offload Beta"
+
+  - version: "4.44.1"
+    date: "2025-08-13"
+    summary: "Bug fixes for startup and WSL 2 issues"
+    highlights:
+      - "Fixed startup failure when vpnkit CIDR is locked"
+      - "Windows: Fixed volume visibility after upgrade"
+      - "Windows: Fixed WSL 2 proxy authentication error"
+
+  - version: "4.44.0"
+    date: "2025-08-07"
+    summary: "WSL 2 stability, Model Runner improvements, Apple Virtualization default"
+    highlights:
+      - "WSL 2 stability improvements"
+      - "Docker Model Runner request/response inspection"
+      - "Multiple model support with resource warnings"
+      - "Apple Virtualization is now default VMM on Mac"
+      - "Docker Compose v2.39.1"
+      - "Docker Engine v28.3.2"
+      - "New docker desktop kubernetes command"
+      - "Settings search functionality added"
+
+  - version: "4.43.2"
+    date: "2025-07-15"
+    summary: "Version upgrades and model CLI update"
+    highlights:
+      - "Docker Compose v2.38.2"
+      - "Docker Engine v28.3.2"
+      - "Docker Model CLI v0.1.33"
+
+  - version: "4.43.1"
+    date: "2025-07-04"
+    summary: "UI and extension communication fixes"
+    highlights:
+      - "Fixed Docker Desktop UI breaking with HTML in Ask Gordon responses"
+      - "Fixed extensions backend communication issues"
+
+  - version: "4.43.0"
+    date: "2025-07-03"
+    summary: "Compose Bridge GA, security fixes"
+    highlights:
+      - "Compose Bridge is now generally available"
+      - "Docker Buildx v0.25.0"
+      - "Docker Engine v28.3.0"
+      - "Fixed CVE-2025-6587 - sensitive environment variables in logs"
+      - "Fixed container port mapping issues"
+      - "Settings Apply button no longer restarts VM"
+
+  - version: "4.42.1"
+    date: "2025-06-18"
+    summary: "Docker Compose upgrade and bug fixes"
+    highlights:
+      - "Docker Compose v2.37.1"
+      - "Fixed Docker domains unreachable with invalid proxy"
+      - "Fixed port exposure deadlock"
+      - "Mac: Fixed empty container port list on creation"
+      - "Windows: Disabled Resource Saver mode in WSL 2"
+
+  - version: "4.42.0"
+    date: "2025-06-04"
+    summary: "IPv6 support, Docker MCP Toolkit integration, Model Runner for Windows ARM"
+    highlights:
+      - "Expanded network compatibility with IPv6 support"
+      - "Docker MCP Toolkit natively integrated"
+      - "Model Runner available for Windows ARM GPUs"
+      - "Gordon integrates MCP Toolkit with 100+ servers"
+      - "Docker Buildx v0.24.0"
+      - "Docker Engine v28.2.2"
+      - "Fixed memory protection keys for VS Code Dev Containers"
+      - "Sign-in Enforcement available to all subscriptions"
+
+  - version: "4.41.2"
+    date: "2025-05-06"
+    summary: "Model Runner menu display fix"
+    highlights:
+      - "Fixed Models menu displaying when Model Runner not supported"
+
+  - version: "4.41.1"
+    date: "2025-04-30"
+    summary: "Proxy configuration and DLL conflict fixes"
+    highlights:
+      - "Fixed startup failure with proxy in admin-settings.json"
+      - "Windows: Fixed llama.cpp DLL conflicts with 3rd party tools"
+
+  - version: "4.41.0"
+    date: "2025-04-28"
+    summary: "Model Runner on Windows, Microsoft App Store, security fixes"
+    highlights:
+      - "Docker Model Runner available on x86 Windows with NVIDIA GPUs"
+      - "Push models to Docker Hub with Model Runner"
+      - "Model management UI in Docker Desktop"
+      - "Docker Compose and Testcontainers support Model Runner"
+      - "Available in Microsoft App Store"
+      - "Docker Engine v28.1.1"
+      - "Fixed CVE-2025-3224, CVE-2025-4095, CVE-2025-3911"
+
+  - version: "4.40.0"
+    date: "2025-03-31"
+    summary: "Docker Model Runner Beta for Mac with Apple Silicon"
+    highlights:
+      - "Pull, run, and manage AI models from Docker Hub (Beta)"
+      - "Docker Buildx v0.22.0"
+      - "Docker Compose v2.34.0"
+      - "Docker Engine v28.0.4"
+      - "NVIDIA Container Toolkit v1.17.5"
+      - "Fixed UDP forwarding to containers"
+      - "Mac: Unix domain socket sharing support"
+      - "Windows: Improved WSL2 port-mapping throughput"
+
+  - version: "4.39.0"
+    date: "2025-03-05"
+    summary: "Docker Desktop CLI GA, multi-platform image support"
+    highlights:
+      - "Docker Desktop CLI is now GA with docker desktop logs"
+      - "Support for --platform flag on docker load and save"
+      - "Docker Compose v2.33.1"
+      - "Docker Engine v28.0.1"
+      - "Ask Gordon improvements for deeper context"
+      - "Fixed CVE-2025-1696 - proxy credentials disclosure"
+      - "Fixed Kubernetes PKI certificate expiration"
+
+  - version: "4.38.0"
+    date: "2025-01-30"
+    summary: "PKG installer GA, multi-node Kubernetes, independent updates"
+    highlights:
+      - "PKG installer for Mac is now GA"
+      - "Enforcing sign-in via configuration profiles GA"
+      - "Components can be updated independently (Beta)"
+      - "Multi-node Kubernetes clusters support"
+      - "Ask Gordon more widely available (Beta)"
+      - "Docker Engine v27.5.1"
+      - "containerd v1.7.24"
+      - "Fixed container creation with curl when ECI enabled"
+
+  - version: "4.37.2"
+    date: "2025-01-09"
+    summary: "Mac security component update prevention fix"
+    highlights:
+      - "Mac: Prevents vmnetd and socket update issues"
+
+  - version: "4.37.1"
+    date: "2024-12-17"
+    summary: "AI Catalog and ECI fixes"
+    highlights:
+      - "Fixed AI Catalog availability in Docker Hub"
+      - "Fixed ECI panic with index out of range error"
+
+  - version: "4.37.0"
+    date: "2024-12-12"
+    summary: "Desktop CLI Beta, AI Catalog integration"
+    highlights:
+      - "Docker Desktop CLI for command-line operations (Beta)"
+      - "AI Catalog from Docker Hub in Desktop"
+      - "Docker Buildx v0.19.2"
+      - "Docker Engine v27.4.0"
+      - "Default disk usage limit increased to 1TB"
+      - "Mac: Fixed root permission directory creation"
+      - "Windows: Windows on ARM support with WSL 2.3.24+"
+
+  - version: "4.36.1"
+    date: "2025-01-09"
+    summary: "Mac security component update prevention fix"
+    highlights:
+      - "Mac: Prevents vmnetd and socket update issues"
+
+  - version: "4.36.0"
+    date: "2024-11-18"
+    summary: "WSL2 single-distribution, admin features, ECI improvements"
+    highlights:
+      - "WSL2 unified single-distribution architecture"
+      - "Mac configuration profiles for sign-in enforcement"
+      - "Multiple organization sign-in enforcement"
+      - "PKG installer for bulk deployment (Mac)"
+      - "ECI Docker socket mount improvements"
+      - "Docker Buildx v0.18.0"
+      - "Kubernetes v1.30.5"
+
+  - version: "4.35.2"
+    date: "2025-01-09"
+    summary: "Mac security component update prevention fix"
+    highlights:
+      - "Mac: Prevents vmnetd and socket update issues"
+
+  - version: "4.35.1"
+    date: "2024-10-30"
+    summary: "Port binding fix"
+    highlights:
+      - "Fixed incorrect binding to port 8888"
+
+  - version: "4.35.0"
+    date: "2024-10-24"
+    summary: "RHEL support GA, Volume Backup GA, Docker VMM Beta"
+    highlights:
+      - "Red Hat Enterprise Linux support is now GA"
+      - "Volume Backup and Share is GA"
+      - "Terminal support using system shells GA"
+      - "Docker VMM Beta for Apple Silicon"
+      - "Docker Engine v27.3.1"
+      - "containerd v1.7.21"
+      - "Fixed proxy settings override issues"
+      - "USB/IP driver support added"
+
+  - version: "4.34.4"
+    date: "2025-01-09"
+    summary: "Mac security component update prevention fix"
+    highlights:
+      - "Mac: Prevents vmnetd and socket update issues"
+
+  - version: "4.34.3"
+    date: "2024-10-09"
+    summary: "Security fixes for CVEs"
+    highlights:
+      - "Fixed CVE-2024-9348 - RCE via image build details"
+      - "Fixed NVIDIA Toolkit CVE-2024-0132 and CVE-2024-0133"
+      - "NVIDIA Container Toolkit v1.16.2"
+
+  - version: "4.34.2"
+    date: "2024-09-12"
+    summary: "Security fixes for extension vulnerabilities"
+    highlights:
+      - "Fixed CVE-2024-8695 - RCE via extension description"
+      - "Fixed CVE-2024-8696 - RCE via extension URLs"
+      - "Fixed Resource Saver mode with docker compose up"
+
+  - version: "4.34.1"
+    date: "2024-09-05"
+    summary: "Windows startup fix"
+    highlights:
+      - "Windows: Fixed startup failure believing another instance running"
+
+  - version: "4.34.0"
+    date: "2024-08-29"
+    summary: "Host networking GA, browser auth, disk reclamation"
+    highlights:
+      - "Host networking support is now GA"
+      - "Browser-based CLI authentication flow"
+      - "Windows automatic disk space reclamation for WSL2"
+      - "MSI installer is now GA"
+      - "containerd image store default for fresh installs"
+      - "Docker Engine v27.2.0"
+      - "Compose Bridge experimental feature"
+
+  - version: "4.33.2"
+    date: "2025-01-09"
+    summary: "Mac security component update prevention fix"
+    highlights:
+      - "Mac: Prevents vmnetd and socket update issues"
+
+  - version: "4.33.1"
+    date: "2024-07-31"
+    summary: "WSL2 kernel module support"
+    highlights:
+      - "Added support for WSL2 2.3.11 and above with loadable kernel modules"
+
+  - version: "4.33.0"
+    date: "2024-07-25"
+    summary: "Docker Debug GA, BuildKit checks, troubleshooting improvements"
+    highlights:
+      - "Docker Debug is now generally available"
+      - "BuildKit evaluates Dockerfile rules for potential issues"
+      - "Resource Allocation settings accessible from Dashboard footer"
+      - "New and improved troubleshooting experience"
+      - "Docker Compose v2.29.1"
+      - "Docker Engine v27.1.1"
+      - "Kubernetes v1.30.2"
+      - "Linux kernel v6.10"
+
+  - version: "4.32.1"
+    date: "2025-01-09"
+    summary: "Mac security component update prevention fix"
+    highlights:
+      - "Mac: Prevents vmnetd and socket update issues"
+
+  - version: "4.32.0"
+    date: "2024-07-04"
+    summary: "Docker Engine 27.0, data movement, volume backups, terminal access"
+    highlights:
+      - "Docker Engine and CLI updated to version 27.0"
+      - "Support for moving data to different drive on macOS and Windows WSL2"
+      - "Schedule backups for volume exports (Beta)"
+      - "Access terminal shell directly from Docker Desktop (Beta)"
+      - "Docker Buildx v0.15.1"
+      - "Docker Compose v2.28.1"
+      - "Settings Management proxy authentication improvements"
+
+  - version: "4.31.1"
+    date: "2024-06-18"
+    summary: "Windows container visibility fix"
+    highlights:
+      - "Fixed containers, images and volumes visibility after upgrade"
+
+  - version: "4.31.0"
+    date: "2024-06-04"
+    summary: "Air-Gapped Containers GA, Compose File Viewer, new sidebar"
+    highlights:
+      - "Air-Gapped Containers is now generally available"
+      - "Docker Compose File Viewer with syntax highlighting (Beta)"
+      - "New Sidebar user experience"
+      - "Docker Engine and CLI v26.1.4"
+      - "Enhanced Container Isolation security improvements"
+      - "Private Extensions Marketplace for Docker Business"
+
+  - version: "4.30.0"
+    date: "2024-05-06"
+    summary: "SOCKS5 proxy support, Kerberos/NTLM authentication, Wasm runtime updates"
+    highlights:
+      - "SOCKS5 proxies support (Business subscription)"
+      - "Kerberos and NTLM proxy authentication on Windows (Business subscription)"
+      - "Docker Compose v2.27.0"
+      - "Docker Engine v26.1.1"
+      - "Updated Wasm runtimes to v0.4.0 and v0.11.1"
+      - "Settings Management onboarding survey control"
+
+  - version: "4.29.0"
+    date: "2024-04-08"
+    summary: "Rosetta enforcement, Docker socket restrictions GA, Moby 26.0, error screen improvements"
+    highlights:
+      - "Enforce Rosetta usage via Settings Management"
+      - "Docker socket mount restrictions with ECI is now GA"
+      - "Docker Engine and CLI updated to Moby 26.0"
+      - "New and improved Docker Desktop error screens"
+      - "Compose supports Synchronized file shares (experimental)"
+      - "Interactive Compose CLI (experimental)"
+      - "Host networking Beta"
+      - "Docker Debug Beta"
+
+  - version: "4.28.0"
+    date: "2024-02-26"
+    summary: "Settings Management file sharing, SOCKS5 proxy support, volume filtering"
+    highlights:
+      - "Settings Management controls file-sharing implementation"
+      - "SOCKS5 HTTP and HTTPS proxy URL support"
+      - "Filter volumes to see which are in use"
+      - "Compose v2.24.6"
+      - "Docker Engine v25.0.3"
+      - "Updated Wasm runtimes including wasmtime v17.0"
+      - "Enhanced Container Isolation Docker socket permissions"
+
+  - version: "4.27.2"
+    date: "2024-02-08"
+    summary: "Compose upgrade, Scout updates, Docker Debug improvements"
+    highlights:
+      - "Compose v2.24.5"
+      - "Docker Scout CLI v1.4.1"
+      - "Docker Debug v0.0.24"
+      - "Fixed diagnostics ID printing issue"
+      - "Fixed Settings Management default values reset"
+      - "Docker Scout VEX and attestation support"
+
+  - version: "4.27.1"
+    date: "2024-02-01"
+    summary: "Critical security updates for Leaky Vessels CVEs"
+    highlights:
+      - "Docker Engine v25.0.2 with CVE fixes"
+      - "Containerd v1.6.28"
+      - "Runc v1.1.12 with CVE-2024-21626 fix"
+      - "Fixed Docker Desktop hang when applying updates"
+
+  - version: "4.27.0"
+    date: "2024-01-25"
+    summary: "Docker init Java support GA, Synchronized File Shares, Docker socket permissions, Containerd GA"
+    highlights:
+      - "Docker init now supports Java and is GA"
+      - "Synchronized File Shares for improved performance"
+      - "Configure Docker socket mount permissions when ECI enabled"
+      - "Containerd Image Store support is now GA"
+      - "Docker debug command (Beta)"
+      - "Private Extensions Marketplace (Beta)"
+      - "Docker Engine v25.0.0"
+
+  - version: "4.26.1"
+    date: "2023-12-14"
+    summary: "Feedback links update, CLI binary compatibility fix"
+    highlights:
+      - "Updated feedback links inside Docker Desktop"
+      - "Windows: Fixed CLI binaries compatibility with older glibc versions"
+
+  - version: "4.26.0"
+    date: "2023-12-04"
+    summary: "Settings Management beta features control, Docker init PHP support, Builds view GA"
+    highlights:
+      - "Administrators can control access to beta and experimental features"
+      - "Four new version update states in footer"
+      - "docker init Beta now supports PHP with Apache + Composer"
+      - "Builds view is now GA for inspecting and optimizing builds"
+      - "Compose v2.23.3"
+      - "Docker Scout CLI v1.2.0"
+      - "Updated Wasm runtimes with wasmtime v14.0"
+
+  - version: "4.25.2"
+    date: "2023-11-21"
+    summary: "Welcome Survey UI fix, WSL 2 dockerd stability"
+    highlights:
+      - "Fixed blank UI after Welcome Survey submission"
+      - "Windows: Fixed Docker Desktop on WSL 2 unexpected dockerd shutdown"
+
+  - version: "4.25.1"
+    date: "2023-11-13"
+    summary: "Swap file corruption fix, vm.max_map_count adjustment"
+    highlights:
+      - "Fixed Docker startup with corrupt swap files"
+      - "Fixed bug when swap is disabled"
+      - "Set sysctl vm.max_map_count to 262144"
+      - "Windows: Fixed Switch to Windows Containers tray menu"
+      - "Windows: Fixed WSL integration with non-sh shells"
+
+  - version: "4.25.0"
+    date: "2023-10-26"
+    summary: "Rosetta GA, WSL update detection, Settings Management Scout control"
+    highlights:
+      - "Rosetta is now GA for macOS 13+ users"
+      - "Docker Desktop detects and updates outdated WSL versions"
+      - "Windows requirement updated to version 19044+"
+      - "Settings Management controls Docker Scout image analysis"
+      - "Compose v2.23.0"
+      - "Kubernetes v1.28.2"
+      - "containerd integration improvements"
+
+  - version: "4.24.2"
+    date: "2023-10-12"
+    summary: "Bugsnag request fix, PyTorch performance improvement"
+    highlights:
+      - "Fixed multiple requests to notify.bugsnag.com"
+      - "Fixed PyTorch performance regression"
+
+  - version: "4.24.1"
+    date: "2023-10-04"
+    summary: "Windows container logs display fix"
+    highlights:
+      - "Windows: Fixed Docker Desktop Dashboard container logs display"
+
+  - version: "4.24.0"
+    date: "2023-09-28"
+    summary: "Notification center GA, Compose Watch GA, Resource Saver GA, Docker Engine management"
+    highlights:
+      - "Notification center available to all users"
+      - "Compose Watch is now available to all users"
+      - "Resource Saver available to all users and enabled by default"
+      - "View and manage Docker Engine state from Dashboard"
+      - "Compose v2.22.0"
+      - "Updated Wasm runtimes including wasmer shims"
+      - "Docker containers use all host CPU cores by default"
+
+  - version: "4.23.0"
+    date: "2023-09-11"
+    summary: "Wasm runtime expansion, docker init ASP.NET, Compose V1 removal"
+    highlights:
+      - "Added support for new Wasm runtimes: wws and lunatic"
+      - "docker init now supports ASP.NET"
+      - "Increased performance of exposed ports on macOS"
+      - "Removed Compose V1 from Docker Desktop"
+      - "Compose v2.21.0"
+      - "Docker Engine v24.0.6"
+      - "VirtioFS default for new installs on macOS 12.5+"
+
+  - version: "4.22.1"
+    date: "2023-08-24"
+    summary: "Docker Desktop startup and Resource Saver improvements"
+    highlights:
+      - "Mitigated Docker Desktop startup and Resource Saver mode issues"
+      - "Windows: Fixed Clean / Purge data troubleshoot option"
+
+  - version: "4.22.0"
+    date: "2023-08-03"
+    summary: "Resource Usage GA, Compose include support, Settings Management Extensions control"
+    highlights:
+      - "Resource Usage moved from experimental to GA"
+      - "Split large Compose projects with include"
+      - "Settings Management controls Docker Extensions"
+      - "Kubernetes and Wasm UI improvements when paused"
+      - "Quick Search enhancements for containers, images, extensions"
+      - "Buildx v0.11.2"
+      - "Compose v2.20.2"
+
+  - version: "4.21.1"
+    date: "2023-07-03"
+    summary: "SSH connection leak fix, macOS configuration health check removal"
+    highlights:
+      - "Fixed connection leak for Docker contexts using SSH"
+      - "Mac: Removed configuration health check for investigation"
+
+  - version: "4.21.0"
+    date: "2023-06-29"
+    summary: "New Wasm runtimes, Rust support, Builds view Beta"
+    highlights:
+      - "Added support for Wasm runtimes: slight, spin, wasmtime"
+      - "Added Rust server support to Docker init"
+      - "Builds view Beta for inspecting builds and managing builders"
+      - "Docker Desktop automatically pauses when not in use"
+      - "VirtioFS default for new installs on macOS 12.5+"
+      - "Buildx v0.11.0"
+      - "Kubernetes v1.27.2"
+
+  - version: "4.20.1"
+    date: "2023-06-05"
+    summary: "containerd image store fixes, WSL version parsing improvements"
+    highlights:
+      - "Fixed docker load with attestations in containerd image store"
+      - "Fixed default image exporter during build"
+      - "Windows: Fixed WSL version parsing in non-western locales"
+
+  - version: "4.20.0"
+    date: "2023-05-30"
+    summary: "Docker Scout CLI improvements, ECS/ACS retirement warning, Enhanced Container Isolation for WSL-2"
+    highlights:
+      - "Docker Scout CLI finds most recently built image automatically"
+      - "Improved Docker Scout CLI compare command"
+      - "Warning about Docker Compose ECS/ACS integrations retirement"
+      - "Enhanced Container Isolation available on WSL-2"
+      - "Buildx v0.10.5"
+      - "Docker Engine v24.0.2"
+      - "Disk space reclamation improvements"
+
+  - version: "4.19.0"
+    date: "2023-04-27"
+    summary: "Moby 23.0, Learning Center walkthroughs, Docker init Node.js/Python, faster networking"
+    highlights:
+      - "Docker Engine and CLI updated to Moby 23.0"
+      - "Learning Center supports in-product walkthroughs"
+      - "Docker init Beta supports Node.js and Python"
+      - "Faster networking between VM and host on macOS"
+      - "Inspect and analyze remote images without pulling"
+      - "Removed docker scan command, use docker scout"
+      - "Docker Engine v23.0.5"
+
+  - version: "4.18.0"
+    date: "2023-04-03"
+    summary: "Docker init Beta, Learning Center, Compose file-watch, security fixes"
+    highlights:
+      - "Initial beta release of docker init"
+      - "New Learning Center tab for getting started"
+      - "Experimental file-watch command for Compose auto-updates"
+      - "Fixed CVE-2023-28841, CVE-2023-28840, CVE-2023-28842"
+      - "Buildx v0.10.4"
+      - "Docker Engine v20.10.24"
+      - "Enhanced Container Isolation bypass fixes"
+
+  - version: "4.17.1"
+    date: "2023-03-20"
+    summary: "Windows BitLocker support, buildx network access, Registry Access Management fixes"
+    highlights:
+      - "Windows: Docker Desktop works with BitLocker enabled"
+      - "Fixed docker buildx container builders network access after 24hrs"
+      - "Fixed Registry Access Management policy updates"
+      - "Improved WSL 2 debug information"
+
+  - version: "4.17.0"
+    date: "2023-02-27"
+    summary: "Docker Scout integration, Extensions Marketplace improvements, Container File Explorer"
+    highlights:
+      - "Docker Desktop ships with Docker Scout"
+      - "docker scan replaced by docker scout"
+      - "Autonomously published extensions in Marketplace"
+      - "Container File Explorer experimental feature"
+      - "Volume search in Global Search"
+      - "Fixed CVE-2023-0628 and CVE-2023-0629"
+      - "Containerd v1.6.18"
+
+  - version: "4.16.3"
+    date: "2023-01-30"
+    summary: "WSL 2 backend file system fixes"
+    highlights:
+      - "Windows: Fixed WSL 2 backend with file system compression/encryption"
+      - "Windows: Fixed missing/outdated WSL installation reporting"
+
+  - version: "4.16.2"
+    date: "2023-01-19"
+    summary: "containerd integration fixes, networking improvements"
+    highlights:
+      - "Fixed docker build and docker tag with containerd integration"
+      - "Fixed networking regression for linux/386 containers on amd64"
+      - "Mac: Fixed Info.plist capitalization for vmnetd"
+      - "Windows: Fixed WSL2 mode startup hanging"
+
+  - version: "4.16.1"
+    date: "2023-01-13"
+    summary: "Container sudo command security fix"
+    highlights:
+      - "Fixed sudo inside containers failing with security error"
+
+  - version: "4.16.0"
+    date: "2023-01-12"
+    summary: "Extensions GA, Quick Search GA, Rosetta Beta, performance improvements"
+    highlights:
+      - "Extensions moved from Beta to GA"
+      - "Quick Search moved from experimental to GA"
+      - "Extensions included in Quick Search"
+      - "Large image analysis up to 4x faster"
+      - "Local images view moved to GA"
+      - "Rosetta for Linux Beta on macOS 13"
+      - "Compose v2.15.1"
+      - "Docker Engine v20.10.22"
+
+  - version: "4.15.0"
+    date: "2022-12-01"
+    summary: "VirtioFS performance improvements, WebAssembly capabilities, UI accessibility updates"
+    highlights:
+      - "VirtioFS file sharing technology for macOS 12.5+"
+      - "Removed privileged helper process requirement on Mac"
+      - "Added WebAssembly capabilities with containerd integration"
+      - "Available disk space display in Dashboard footer"
+      - "Extensions Marketplace installs display and sorting"
+      - "Dev Environments improvements"
+      - "Compose v2.13.0"
+      - "containerd v1.6.10"
+
+  - version: "4.14.1"
+    date: "2022-11-17"
+    summary: "Registry Access Management DNS fix, image analysis button fix"
+    highlights:
+      - "Fixed container DNS lookups with Registry Access Management"
+      - "Mac: Fixed Analyze Image button on Images tab"
+      - "Mac: Fixed symlink creation when /usr/local/lib missing"
+
+  - version: "4.14.0"
+    date: "2022-11-10"
+    summary: "Virtualization framework default, Enhanced Container Isolation in General Settings"
+    highlights:
+      - "Virtualization framework default hypervisor for macOS 12.5+"
+      - "Migrate previous installs to Virtualization framework"
+      - "Enhanced Container Isolation available in General Settings"
+      - "Docker Engine v20.10.21"
+      - "Docker Compose v2.12.2"
+      - "Internal network subnet expanded to /24"
+
+  - version: "4.13.1"
+    date: "2022-10-31"
+    summary: "docker pull interrupt fix, DHCP lease time increase, Qemu revert"
+    highlights:
+      - "Fixed segfault when interrupting docker pull with Control+C"
+      - "Increased default DHCP lease time"
+      - "Reverted Qemu to 6.2.0 for compatibility"
+      - "Mac: Added /var/run/docker.sock symlink by default"
+      - "Windows: PowerShell disabled machine support"
+
+  - version: "4.13.0"
+    date: "2022-10-19"
+    summary: "Settings Management and Enhanced Container Isolation for Business, Dev Environments CLI"
+    highlights:
+      - "Settings Management and Enhanced Container Isolation for Docker Business"
+      - "New Dev Environments CLI docker dev"
+      - "Docker Desktop installation to any drive with --installation-dir"
+      - "Docker Scan v0.21.0"
+      - "Updated Docker Engine and CLI to v20.10.20"
+      - "Kubernetes v1.25.2"
+      - "Linux kernel 5.15.49"
+
+  - version: "4.12.0"
+    date: "2022-09-01"
+    summary: "containerd experimental support, Extensions Marketplace search, container terminal"
+    highlights:
+      - "containerd for pulling and storing images (experimental)"
+      - "Docker Desktop runs untagged images"
+      - "Extensions Marketplace search capabilities"
+      - "Zoom support with keyboard shortcuts"
+      - "Integrated terminal for containers"
+      - "Docker Compose v2.10.2"
+      - "Kubernetes v1.25.0"
+      - "Security improvements with contextIsolation and sandbox"
+
+  - version: "4.11.1"
+    date: "2022-08-05"
+    summary: "VM bind mount regression fix, WSL2 private registry login fix"
+    highlights:
+      - "Fixed VM system locations bind mount regression"
+      - "Windows: Fixed docker login to private registries from WSL2"
+
+  - version: "4.11.0"
+    date: "2022-07-28"
+    summary: "VMware ESXi and Azure VM support, Extensions Marketplace improvements, custom themes"
+    highlights:
+      - "Docker Desktop fully supported in VMware ESXi and Azure VMs"
+      - "Added vcluster and PGAdmin4 extensions to Marketplace"
+      - "Extensions sorting capability"
+      - "Custom theme settings (dark/light mode independent)"
+      - "Windows: --no-windows-containers installer flag"
+      - "Mac: --user installer flag"
+      - "Docker Compose v2.7.0"
+
+  - version: "4.10.1"
+    date: "2022-07-05"
+    summary: "WSL Compose app UI fixes, Mac install path initialization"
+    highlights:
+      - "Windows: Fixed UI actions with Compose apps from WSL"
+      - "Mac: Fixed install command path initialization failure"
+
+  - version: "4.10.0"
+    date: "2022-06-30"
+    summary: "Environment variables before run, log improvements, Extensions Marketplace additions"
+    highlights:
+      - "Add environment variables before running images"
+      - "Enhanced container logs with regex search and clearing"
+      - "Container table improvements with ports and image separation"
+      - "Added Ddosify and Lacework extensions"
+      - "Removed Homepage for redesign"
+      - "Docker Engine v20.10.17"
+      - "Kubernetes v1.24.1"
+
+  - version: "4.9.1"
+    date: "2022-06-16"
+    summary: "Dashboard blank screen fix"
+    highlights:
+      - "Fixed blank dashboard screen issue"
+
+  - version: "4.9.0"
+    date: "2022-06-02"
+    summary: "Homepage guides expansion, Dashboard footer, containers table redesign"
+    highlights:
+      - "Added guides for Elasticsearch, MariaDB, Memcached, MySQL, RabbitMQ, Ubuntu"
+      - "Dashboard footer with update status and Docker Engine statistics"
+      - "Redesigned containers table with copy ID, pause buttons, column resizing"
+      - "Bulk deletion for containers table"
+      - "Compose v2.6.0"
+      - "Docker Engine v20.10.16"
+
+  - version: "4.8.2"
+    date: "2022-05-18"
+    summary: "Proxy settings fix, Extensions CPU usage fix, password redaction"
+    highlights:
+      - "Fixed manual proxy settings causing image pull problems"
+      - "Fixed high CPU usage when extensions disabled"
+      - "Docker Desktop redacts HTTP proxy passwords in logs"
+      - "Compose v2.5.1"
+
+  - version: "4.8.1"
+    date: "2022-05-09"
+    summary: "Docker Desktop for Linux release, Extensions Beta, Homepage, Compose V2 GA"
+    highlights:
+      - "Released Docker Desktop for Linux"
+      - "Beta release of Docker Extensions and Extensions SDK"
+      - "Created Docker Homepage with popular images"
+      - "Compose V2 is now GA"
+      - "Fixed Kubernetes cluster deletion during updates"
+
+  - version: "4.8.0"
+    date: "2022-05-06"
+    summary: "Docker Desktop for Linux, Extensions Beta, Homepage, Compose V2 GA"
+    highlights:
+      - "Released Docker Desktop for Linux"
+      - "Beta release of Docker Extensions and Extensions SDK"
+      - "Created Docker Homepage with popular images"
+      - "Compose V2 is now GA"
+      - "System proxy reading support"
+      - "Volume tab improvements with size display"
+      - "Compose v2.5.0"
+      - "Kubernetes 1.24"
+
+  - version: "4.7.1"
+    date: "2022-04-19"
+    summary: "Quick Start Guide crash fix, Windows container mode fix"
+    highlights:
+      - "Fixed crash on Quick Start Guide final screen"
+      - "Windows: Fixed update symlink error"
+      - "Windows: Fixed Windows container mode prevention"
+
+  - version: "4.7.0"
+    date: "2022-04-07"
+    summary: "Remote installation support, Docker SBOM CLI, cri-dockerd for Kubernetes"
+    highlights:
+      - "IT Administrators can install Docker Desktop remotely via command line"
+      - "Docker Software Bill of Materials (SBOM) CLI plugin"
+      - "Use cri-dockerd for new Kubernetes clusters instead of dockershim"
+      - "Docker Engine v20.10.14"
+      - "Fixed CVE-2022-24769"
+      - "Volume management multi-select cleanup"
+      - "Improved login feedback"
+
+  - version: "4.6.1"
+    date: "2022-03-22"
+    summary: "vpnkit logging fix, diagnostics upload fix, self-diagnose improvements"
+    highlights:
+      - "Prevented vpnkit-forwarder log filling"
+      - "Fixed diagnostics upload without HTTP proxy"
+      - "Removed false positive vm not running error"
+      - "Buildx 0.8.1"
+
+  - version: "4.6.0"
+    date: "2022-03-14"
+    summary: "Volume Management multi-select, VirtioFS experimental for Mac"
+    highlights:
+      - "Volume Management multi-select checkboxes for cleanup"
+      - "Mac: VirtioFS experimental file sharing technology"
+      - "Docker Engine v20.10.13"
+      - "Fixed CVE-2022-0847 Dirty Pipe"
+      - "Windows: Fixed CVE-2022-26659"
+      - "Compose v2.3.3"
+      - "Buildx 0.8.0"
+
+  - version: "4.5.1"
+    date: "2022-02-15"
+    summary: "Windows backend default fix, Dashboard crash fix"
+    highlights:
+      - "Windows: Fixed new installations defaulting to Hyper-V instead of WSL 2"
+      - "Windows: Fixed Dashboard crash making systray menu disappear"
+
+  - version: "4.5.0"
+    date: "2022-02-10"
+    summary: "New Docker menu design, version output display"
+    highlights:
+      - "New Docker menu for consistent user experience across OS"
+      - "docker version output displays Docker Desktop version"
+      - "Fixed CVE-2021-44719 on Mac"
+      - "Fixed CVE-2022-23774 on Windows"
+      - "Amazon ECR Credential Helper v0.6.0"
+      - "Fixed sign-in prompting after quit/restart"
+
+  - version: "4.4.4"
+    date: "2022-01-24"
+    summary: "WSL 2 login fix"
+    highlights:
+      - "Windows: Fixed logging in from WSL 2"
+
+  - version: "4.4.3"
+    date: "2022-01-14"
+    summary: "Dashboard shortcut capture prevention"
+    highlights:
+      - "Windows: Disabled Dashboard shortcuts when minimized or unfocused"
+
+  - version: "4.4.2"
+    date: "2022-01-13"
+    summary: "Auth0 and Single Sign-on, browser-based authentication"
+    highlights:
+      - "Single Sign-on for Docker Business subscription users"
+      - "Browser-based sign-in with auto-filling from password managers"
+      - "Docker Engine v20.10.12"
+      - "Fixed CVE-2021-45449"
+      - "Compose v2.2.3"
+      - "Kubernetes 1.22.5"
+
+  - version: "4.3.2"
+    date: "2021-12-21"
+    summary: "CVE-2021-45449 security fix, Log4j 2 detection"
+    highlights:
+      - "Fixed CVE-2021-45449 sensitive information logging"
+      - "docker scan v0.14.0 with Log4j 2 CVE detection"
+
+  - version: "4.3.1"
+    date: "2021-12-11"
+    summary: "Log4j 2 CVE detection support"
+    highlights:
+      - "docker scan v0.11.0 with Log4j 2 CVE-2021-44228 detection"
+
+  - version: "4.3.0"
+    date: "2021-12-02"
+    summary: "cgroupv2 adoption, Apple silicon Rosetta 2 optional"
+    highlights:
+      - "Docker Desktop uses cgroupv2"
+      - "Mac: Apple silicon no longer requires Rosetta 2 (except 3 CLI tools)"
+      - "Windows: Fixed startup with regex characters in home directory"
+      - "Docker Engine v20.10.11"
+      - "Buildx 0.7.1"
+      - "Kubernetes 1.22.4"
+
+  - version: "4.2.0"
+    date: "2021-11-09"
+    summary: "Pause/Resume feature, Software Updates control, window management"
+    highlights:
+      - "Pause/Resume Docker Desktop sessions to save CPU resources"
+      - "Software Updates control for all subscription types"
+      - "Window size and position persistence"
+      - "Docker Engine v20.10.10"
+      - "Compose v2.1.1"
+      - "Self-diagnose network overlap checking"
+
+  - version: "4.1.1"
+    date: "2021-10-12"
+    summary: "Docker.qcow2 upgrade fix, update notification improvements"
+    highlights:
+      - "Mac: Fixed Docker.qcow2 file ignored on upgrade issue"
+      - "Fixed update notification overlay sync issues"
+      - "Fixed menu entry for newly downloaded updates"
+      - "Windows: Fixed WSL 2 integration regression"
+
+  - version: "4.1.0"
+    date: "2021-09-30"
+    summary: "Software Updates management, Compose V2 option, Volume Management for all"
+    highlights:
+      - "Software Updates section for managing Docker Desktop updates"
+      - "Compose V2 specification in General settings"
+      - "Volume management available for Docker Personal users"
+      - "Compose V2"
+      - "Buildx 0.6.3"
+      - "Kubernetes 1.21.5"
+
+  - version: "4.0.1"
+    date: "2021-09-13"
+    summary: "Compose V2 RC3, copy-paste fix, Hyper-V engine fix"
+    highlights:
+      - "Compose V2 RC3 with panic and race condition fixes"
+      - "Fixed copy-paste unavailable in Dashboard"
+      - "Windows: Fixed Hyper-V engine startup issues"
+
+  - version: "4.0.0"
+    date: "2021-08-31"
+    summary: "Docker subscription updates, Compose V2 RC2, Kubernetes 1.21.4"
+    highlights:
+      - "Updated Docker Subscription Service Agreement"
+      - "Docker Desktop remains free for small businesses and personal use"
+      - "Paid subscription required for large enterprises"
+      - "Compose V2 RC2"
+      - "Kubernetes 1.21.4"
+      - "Mac: Fixed SSH availability for builds from git URL"
+      - "Windows: Fixed CLI tools availability in WSL 2"

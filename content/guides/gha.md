@@ -51,7 +51,7 @@ that, you must authenticate with your Docker credentials (username and access
 token) as part of the GitHub Actions workflow.
 
 For instructions on how to create a Docker access token, see
-[Create and manage access tokens](/manuals/security/for-developers/access-tokens.md).
+[Create and manage access tokens](/manuals/security/access-tokens.md).
 
 Once you have your Docker credentials ready, add the credentials to your GitHub
 repository so you can use them in GitHub Actions:

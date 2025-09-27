@@ -1,7 +1,7 @@
 ---
 title: Subscription
-description: Learn about subscription features and how to manage your subscription
-keywords: Docker, pricing, billing, Pro, Team, business, subscription, tier, plan
+description: Learn about Docker subscription features and how to manage your subscription
+keywords: docker subscription, pricing, billing, pro, team, business, subscription management
 weight: 50
 params:
   sidebar:
@@ -20,7 +20,7 @@ grid_subscriptions:
   link: /subscription/scale/
   icon: leaderboard
 - title: Change your subscription
-  description: Learn how to upgrade or downgrade your plan.
+  description: Learn how to upgrade or downgrade your subscription.
   link: /subscription/change/
   icon: upgrade
 - title: Manage seats
@@ -40,10 +40,8 @@ aliases:
 - /docker-hub/billing/faq/
 ---
 
-A Docker subscription includes licensing for commercial use of Docker products
-including Docker Desktop, Docker Hub, Docker Build Cloud, Docker Scout, and
-Testcontainers Cloud.
+Docker subscriptions provide licensing for commercial use of Docker products including Docker Desktop, Docker Hub, Docker Build Cloud, Docker Scout, and Testcontainers Cloud.
 
-Use the resources here to decide what subscription you need, or manage an existing subscription.
+Use these resources to choose the right subscription for your needs or manage your existing subscription.
 
 {{< grid items="grid_subscriptions" >}}

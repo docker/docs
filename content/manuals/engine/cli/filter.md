@@ -30,15 +30,15 @@ output of the `docker images` command to only print `alpine` images.
 ```console
 $ docker images
 REPOSITORY   TAG       IMAGE ID       CREATED          SIZE
-ubuntu       20.04     33a5cc25d22c   36 minutes ago   101MB
-ubuntu       18.04     152dc042452c   36 minutes ago   88.1MB
-alpine       3.16      a8cbb8c69ee7   40 minutes ago   8.67MB
+ubuntu       24.04     33a5cc25d22c   36 minutes ago   101MB
+ubuntu       22.04     152dc042452c   36 minutes ago   88.1MB
+alpine       3.21      a8cbb8c69ee7   40 minutes ago   8.67MB
 alpine       latest    7144f7bab3d4   40 minutes ago   11.7MB
 busybox      uclibc    3e516f71d880   48 minutes ago   2.4MB
 busybox      glibc     7338d0c72c65   48 minutes ago   6.09MB
 $ docker images --filter reference=alpine
 REPOSITORY   TAG       IMAGE ID       CREATED          SIZE
-alpine       3.16      a8cbb8c69ee7   40 minutes ago   8.67MB
+alpine       3.21      a8cbb8c69ee7   40 minutes ago   8.67MB
 alpine       latest    7144f7bab3d4   40 minutes ago   11.7MB
 ```
 
@@ -58,9 +58,9 @@ following example shows how to print all images that match `alpine:latest` or
 ```console
 $ docker images
 REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
-ubuntu       20.04     33a5cc25d22c   2 hours ago   101MB
-ubuntu       18.04     152dc042452c   2 hours ago   88.1MB
-alpine       3.16      a8cbb8c69ee7   2 hours ago   8.67MB
+ubuntu       24.04     33a5cc25d22c   2 hours ago   101MB
+ubuntu       22.04     152dc042452c   2 hours ago   88.1MB
+alpine       3.21      a8cbb8c69ee7   2 hours ago   8.67MB
 alpine       latest    7144f7bab3d4   2 hours ago   11.7MB
 busybox      uclibc    3e516f71d880   2 hours ago   2.4MB
 busybox      glibc     7338d0c72c65   2 hours ago   6.09MB

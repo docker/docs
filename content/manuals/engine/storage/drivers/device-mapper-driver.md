@@ -297,7 +297,7 @@ assumes that the Docker daemon is in the `stopped` state.
     The example below adds 20% more capacity when the disk usage reaches
     80%.
 
-    ```none
+    ```text
     activation {
       thin_pool_autoextend_threshold=80
       thin_pool_autoextend_percent=20

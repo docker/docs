@@ -401,30 +401,6 @@ DockerDesktopClientV0.navigateToVolume
 
 ___
 
-### navigateToDevEnvironments
-
-▸ **navigateToDevEnvironments**(): `void`
-
-Navigate to the Dev Environments window in Docker Desktop.
-
-```typescript
-window.ddClient.navigateToDevEnvironments();
-```
-
-> [!WARNING]
->
-> It will be removed in a future version. Use [viewDevEnvironments](NavigationIntents.md#viewdevenvironments) instead.
-
-#### Returns
-
-`void`
-
-#### Inherited from
-
-DockerDesktopClientV0.navigateToDevEnvironments
-
-___
-
 ## Other Methods
 
 ### execHostCmd

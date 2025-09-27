@@ -1,0 +1,14 @@
+command: docker mcp server disable
+aliases: docker mcp server disable, docker mcp server remove, docker mcp server rm
+short: Disable a server or multiple servers
+long: Disable a server or multiple servers
+usage: docker mcp server disable
+pname: docker mcp server
+plink: docker_mcp_server.yaml
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

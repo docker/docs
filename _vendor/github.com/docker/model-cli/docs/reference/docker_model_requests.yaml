@@ -1,0 +1,45 @@
+command: docker model requests
+short: Fetch requests+responses from Docker Model Runner
+long: Fetch requests+responses from Docker Model Runner
+usage: docker model requests [OPTIONS]
+pname: docker model
+plink: docker_model.yaml
+options:
+    - option: follow
+      shorthand: f
+      value_type: bool
+      default_value: "false"
+      description: Follow requests stream
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: include-existing
+      value_type: bool
+      default_value: "false"
+      description: |
+        Include existing requests when starting to follow (only available with --follow)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: model
+      value_type: string
+      description: Specify the model to filter requests
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

@@ -13,6 +13,7 @@ params:
       - AI
       - Products
       - Platform
+      - Enterprise
   notoc: true
   open-source:
   - title: Docker Build
@@ -25,29 +26,49 @@ params:
     link: /engine/
   - title: Docker Compose
     description: Define and run multi-container applications.
-    icon: /assets/icons/Compose.svg
+    icon: /icons/Compose.svg
     link: /compose/
   - title: Testcontainers
     description: Run containers programmatically in your preferred programming language.
-    icon: /assets/icons/Testcontainers.svg
+    icon: /icons/Testcontainers.svg
     link: /testcontainers/
+  - title: MCP Gateway
+    description: Manage and secure your AI tools with a single gateway.
+    icon: /icons/toolkit.svg
+    link: /ai/mcp-gateway/
+  - title: Cagent
+    description: The open-source multi-agent solution to assist you in your tasks.
+    icon: /icons/cagent.svg
+    link: /ai/cagent
   ai:
   - title: Ask Gordon
-    description: streamline your workflow and get the most out of the Docker ecosystem with your personal AI assistant.
+    description: Streamline your workflow and get the most out of the Docker ecosystem with your personal AI assistant.
     icon: note_add
     link: /ai/gordon/
   - title: Docker Model Runner
-    description: View and manage your local models
-    icon: view_in_ar
-    link: /model-runner/
+    description: View and manage your local models.
+    icon: /icons/models.svg
+    link: /ai/model-runner/
+  - title: MCP Catalog and Toolkit
+    description: Augment your AI workflow with MCP servers.
+    icon: /icons/toolkit.svg
+    link: /ai/mcp-catalog-and-toolkit/
   products:
   - title: Docker Desktop
     description: Your command center for container development.
-    icon: /assets/icons/Whale.svg
+    icon: /icons/Whale.svg
     link: /desktop/
+  - title: Docker Hardened Images
+    description: Secure, minimal images for trusted software delivery.
+    icon: /icons/dhi.svg
+    link: /dhi/
+  - title: Docker Offload
+    description: Build and run containers in the cloud.
+    icon: cloud
+    link: /offload/
   - title: Build Cloud
     description: Build your images faster in the cloud.
-    icon: /assets/images/logo-build-cloud.svg
+    icon: /icons/logo-build-cloud.svg
     link: /build-cloud/
   - title: Docker Hub
     description: Discover, share, and integrate container images.
@@ -55,7 +76,7 @@ params:
     link: /docker-hub/
   - title: Docker Scout
     description: Image analysis and policy evaluation.
-    icon: /assets/icons/Scout.svg
+    icon: /icons/Scout.svg
     link: /scout/
   - title: Docker for GitHub Copilot
     description: Integrate Docker's capabilities with GitHub Copilot.
@@ -90,6 +111,11 @@ params:
     description: Commercial use licenses for Docker products.
     icon: card_membership
     link: /subscription/
+  enterprise:
+  - title: Deploy Docker Desktop
+    description: Deploy Docker Desktop at scale within your company
+    icon: download
+    link: /enterprise/enterprise-deployment/
 ---
 
 This section contains user guides on how to install, set up, configure, and use
@@ -103,7 +129,7 @@ Open source development and containerization technologies.
 
 ## AI
 
-All the Docker AI tools in one easy-to-access location. 
+All the Docker AI tools in one easy-to-access location.
 
 {{< grid items=ai >}}
 
@@ -116,6 +142,12 @@ End-to-end developer solutions for innovative teams.
 ## Platform
 
 Documentation related to the Docker platform, such as administration and
-subscription management for organizations.
+subscription management.
 
 {{< grid items=platform >}}
+
+## Enterprise
+
+Targeted at IT administrators with help on deploying Docker Desktop at scale with configuration guidance on security related features.
+
+{{< grid items=enterprise >}}

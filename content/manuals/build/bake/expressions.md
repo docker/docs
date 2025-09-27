@@ -62,7 +62,7 @@ target "default" {
   dockerfile="Dockerfile"
   tags = [
     "my-image:latest",
-    notequal("",TAG) ? "my-image:${TAG}": "",
+    notequal("",TAG) ? "my-image:${TAG}": ""
   ]
 }
 ```

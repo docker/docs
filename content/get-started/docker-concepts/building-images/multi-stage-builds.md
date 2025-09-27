@@ -152,7 +152,7 @@ Now that you have the project, you’re ready to create the `Dockerfile`.
  2. In the `Dockerfile`, define your base image by adding the following line:
 
      ```dockerfile
-     FROM eclipse-temurin:21.0.2_13-jdk-jammy
+     FROM eclipse-temurin:21.0.8_9-jdk-jammy
      ```
 
  3. Now, define the working directory by using the `WORKDIR` instruction. This will specify where future commands will run and the directory files will be copied inside the container image.
@@ -190,7 +190,7 @@ Now that you have the project, you’re ready to create the `Dockerfile`.
     And with that, you should have the following Dockerfile:
 
     ```dockerfile 
-    FROM eclipse-temurin:21.0.2_13-jdk-jammy
+    FROM eclipse-temurin:21.0.8_9-jdk-jammy
     WORKDIR /app
     COPY .mvn/ .mvn
     COPY mvnw pom.xml ./
@@ -268,7 +268,7 @@ Now that you have the project, you’re ready to create the `Dockerfile`.
 1. Consider the following Dockerfile:
 
     ```dockerfile
-    FROM eclipse-temurin:21.0.2_13-jdk-jammy AS builder
+    FROM eclipse-temurin:21.0.8_9-jdk-jammy AS builder
     WORKDIR /opt/app
     COPY .mvn/ .mvn
     COPY mvnw pom.xml ./
@@ -276,7 +276,7 @@ Now that you have the project, you’re ready to create the `Dockerfile`.
     COPY ./src ./src
     RUN ./mvnw clean install
 
-    FROM eclipse-temurin:21.0.2_13-jre-jammy AS final
+    FROM eclipse-temurin:21.0.8_9-jre-jammy AS final
     WORKDIR /opt/app
     EXPOSE 8080
     COPY --from=builder /opt/app/target/*.jar /opt/app/*.jar

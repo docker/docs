@@ -10,6 +10,18 @@ aliases:
 - /docker-hub/official_images/
 ---
 
+> [!NOTE]
+>
+> Docker is retiring Docker Content Trust (DCT) for Docker Official Images
+> (DOI). You should start planning to transition to a different image signing
+> and verification solution (like [Sigstore](https://www.sigstore.dev/) or
+> [Notation](https://github.com/notaryproject/notation#readme)). Docker will
+> publish migration guides soon to help you in that effort. Timelines for the
+> complete deprecation of DCT are being finalized and will be published soon.
+>
+> For more details, see
+> https://www.docker.com/blog/retiring-docker-content-trust/.
+
 Docker, Inc. sponsors a dedicated team that's responsible for reviewing and
 publishing all content in Docker Official Images. This team works in
 collaboration with upstream software maintainers, security experts, and the

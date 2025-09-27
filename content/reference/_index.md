@@ -41,7 +41,11 @@ params:
   - title: DVP Data API
     description: API for Docker Verified Publishers to fetch analytics data.
     icon: area_chart
-    link: /reference/api/hub/dvp/
+    link: /reference/api/dvp/latest/
+  - title: Registry API
+    description: API for Docker Registry.
+    icon: database
+    link: /reference/api/registry/latest/
 ---
 
 This section includes the reference documentation for the Docker platform's

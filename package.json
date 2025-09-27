@@ -19,19 +19,16 @@
     "@alpinejs/persist": "^3.14.3",
     "@floating-ui/dom": "^1.6.12",
     "@material-symbols/svg-400": "^0.23.0",
+    "@tailwindcss/cli": "^4.1.6",
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
     "@tailwindcss/typography": "^0.5.15",
     "alpinejs": "^3.14.3",
-    "autoprefixer": "^10.4.20",
-    "postcss": "^8.4.49",
-    "postcss-cli": "^11.0.0",
-    "postcss-import": "^16.1.0",
-    "tailwindcss": "^3.4.15"
+    "tailwindcss": "^4.1.6"
   },
   "devDependencies": {
     "markdownlint": "^0.35.0",
     "prettier": "^3.3.3",
     "prettier-plugin-go-template": "^0.0.15",
-    "prettier-plugin-tailwindcss": "^0.6.8"
+    "prettier-plugin-tailwindcss": "^0.6.11"
   }
 }

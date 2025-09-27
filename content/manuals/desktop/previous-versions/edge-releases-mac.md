@@ -9,7 +9,7 @@ aliases:
 sitemap: false
 ---
 
-This page contains information about Docker Desktop Edge releases. Edge releases give you early access to our newest features. Note that some of the features may be experimental, and some of them may not ever reach the Stable release. 
+This page contains information about Docker Desktop Edge releases. Edge releases give you early access to our newest features. Note that some of the features may be experimental, and some of them may not ever reach the Stable release.
 
 For Docker Desktop system requirements, see
 [What to know before you install](/manuals/desktop/setup/install/mac-install.md#system-requirements).
@@ -146,7 +146,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 ### Known issues
 
 - The `clock_gettime64` system call returns `EPERM` rather than `ENOSYS`
-in i386 images. To work around this issue, disable `seccomp` by using 
+in i386 images. To work around this issue, disable `seccomp` by using
 the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for-win/issues/8326).
 
 ## Docker Desktop Community 2.3.6.1
@@ -391,7 +391,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 2019-12-11
 
 
-> [!NOTE] 
+> [!NOTE]
 >
 > Docker Desktop Edge 2.1.7.0 is the release candidate for the upcoming major Stable release. Please help us test this version before the wider release and report any issues in the [docker/for-mac](https://github.com/docker/for-mac/issues) GitHub repository.
 
@@ -519,7 +519,7 @@ Fixed an issue that caused VMs running on older hardware with macOS Catalina to 
 - Fixed an issue where running some Docker commands can fail if you are not using Credential Helpers. [docker/for-mac#3785](https://github.com/docker/for-mac/issues/3785)
 - Fixed a bug that did not allow users to copy and paste text in the **Preferences** > **Daemon** window. [docker/for-mac#3798](https://github.com/docker/for-mac/issues/3798)
 
-## Docker Desktop Community 2.1.0.0 
+## Docker Desktop Community 2.1.0.0
 2019-07-26
 
 
@@ -537,7 +537,7 @@ This release contains Kubernetes security improvements. Note that your local Kub
 
  - Introduced a new user interface for the Docker Desktop **Preferences** menu.
  - The **Restart**, **Reset**, and **Uninstall** options are now available on the **Troubleshoot** menu.
- 
+
 #### Bug fixes and minor changes
 
 - Changed the host's Kubernetes context to ensure `docker run -v .kube:kube ... kubectl` works.
@@ -591,16 +591,16 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 * New
   - App: Docker CLI plugin to configure, share, and install applications
-  
+
     - Extend Compose files with metadata and parameters
     - Reuse the same application across multiple environments (Development/QA/Staging/Production)
     - Multi-orchestrator installation (Swarm or Kubernetes)
     - Push/Pull/Promotion/Signing supported for application, with the same workflow as images
     - Fully CNAB compliant
     - Full support for Docker Contexts
-    
+
   - Buildx (Tech Preview): Docker CLI plugin for extended build capabilities with BuildKit
-  
+
     - Familiar UI from docker build
     - Full BuildKit capabilities with container driver
     - Multiple builder instance support
@@ -637,7 +637,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 * New
   - Rebranded UI
-  
+
 * Bug fixes and minor changes
   - Kubernetes: use default maximum number of pods for kubelet. [docker/for-mac#3453](https://github.com/docker/for-mac/issues/3453)
   - Fix DockerHelper crash. [docker/for-mac#3470](https://github.com/docker/for-mac/issues/3470)
@@ -651,7 +651,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
   - [Kubernetes 1.13.0](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.13.md#v1130)
   - [Kitematic 0.17.6](https://github.com/docker/kitematic/releases/tag/v0.17.6)
   - Golang 1.10.6, fixes CVEs: [CVE-2018-16875](https://www.cvedetails.com/cve/CVE-2018-16875), [CVE-2018-16873](https://www.cvedetails.com/cve/CVE-2018-16873) and [CVE-2018-16874](https://www.cvedetails.com/cve/CVE-2018-16874)
-  
+
   WARNING: If you have an existing Kubernetes cluster created with Docker Desktop, this upgrade will reset the cluster. If you need to back up your Kubernetes cluster or persistent volumes you can use [Ark](https://github.com/heptio/ark).
 
 * Bug fixes and minor changes
@@ -752,9 +752,9 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
   - Fix VPNKit memory leak. Fixes [moby/vpnkit#371](https://github.com/moby/vpnkit/issues/371)
   - Fix com.docker.supervisor using 100% CPU. Fixes [docker/for-mac#2967](https://github.com/docker/for-mac/issues/2967), [docker/for-mac#2923](https://github.com/docker/for-mac/issues/2923)
   - Do not override existing kubectl binary in /usr/local/bin (installed with brew or otherwise). Fixes [docker/for-mac#2368](https://github.com/docker/for-mac/issues/2368), [docker/for-mac#2890](https://github.com/docker/for-mac/issues/2890)
-  - Detect Vmnetd install error. Fixes [docker/for-mac#2934](https://github.com/docker/for-mac/issues/2934), [docker/for-mac#2687](https://github.com/docker/for-mac/issues/2687) 
+  - Detect Vmnetd install error. Fixes [docker/for-mac#2934](https://github.com/docker/for-mac/issues/2934), [docker/for-mac#2687](https://github.com/docker/for-mac/issues/2687)
   - Virtual machine default disk path is stored relative to $HOME. Fixes [docker/for-mac#2928](https://github.com/docker/for-mac/issues/2928), [docker/for-mac#1209](https://github.com/docker/for-mac/issues/1209)
-  
+
 
 ### Docker Community Edition 18.05.0-ce-mac66 2018-05-17
 
@@ -763,9 +763,9 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
   - [Docker 18.05.0-ce](https://github.com/docker/docker-ce/releases/tag/v18.05.0-ce)
   - [Docker compose 1.21.2](https://github.com/docker/compose/releases/tag/1.21.2)
 
-* New 
+* New
   - Allow orchestrator selection from the UI in the "Kubernetes" pane, to allow "docker stack" commands to deploy to Swarm clusters, even if Kubernetes is enabled in Docker for Mac.
-  
+
 * Bug fixes and minor changes
   - Use Simple NTP to minimize clock drift between the virtual machine and the host. Fixes [docker/for-mac#2076](https://github.com/docker/for-mac/issues/2076)
   - Fix filesystem event notifications for Swarm services and those using the new-style --mount option. Fixes [docker/for-mac#2216](https://github.com/docker/for-mac/issues/2216), [docker/for-mac#2375](https://github.com/docker/for-mac/issues/2375)
@@ -782,7 +782,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
   - [Docker 18.05.0-ce-rc1](https://github.com/docker/docker-ce/releases/tag/v18.05.0-ce-rc1)
   - [Notary 0.6.1](https://github.com/docker/notary/releases/tag/v0.6.1)
 
-* New 
+* New
   - Re-enable raw as the default disk format for users running macOS 10.13.4 and higher. Note this change only takes effect after a "reset to factory defaults" or "remove all data" (from the Whale menu > Preferences > Reset). Related to [docker/for-mac#2625](https://github.com/docker/for-mac/issues/2625)
 
 * Bug fixes and minor changes
@@ -802,7 +802,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
   - [Docker 18.04.0-ce-rc2](https://github.com/docker/docker-ce/releases/tag/v18.04.0-ce-rc2)
   - [Kubernetes 1.9.6](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.9.md#v196). If Kubernetes is enabled, the upgrade will be performed automatically when starting Docker for Mac.
 
-* New 
+* New
   - Enable ceph & rbd modules in LinuxKit virtual machine.
 
 * Bug fixes and minor changes

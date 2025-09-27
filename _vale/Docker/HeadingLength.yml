@@ -1,7 +1,0 @@
-extends: occurrence
-message: "Try to keep headings short (< 8 words)."
-link: https://docs.docker.com/contribute/style/formatting/#headings-and-subheadings
-scope: heading
-level: suggestion
-max: 8
-token: \b(\w+)\b

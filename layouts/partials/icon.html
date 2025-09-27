@@ -1,8 +1,21 @@
-{{- $svg := resources.Get (fmt.Printf "icons/%s-fill.svg" .) }}
-{{- if not $svg }}
-  {{- errorf "Failed to get icon: %v\n\n" . }}
-{{ end }}
-{{- if not $svg.Content }}
-  {{- errorf "Failed to get icon: %v\n\n" . }}
+{{- $icon := . -}}
+
+{{- $svgPath := "" -}}
+
+{{- if or (strings.HasSuffix $icon ".svg") (strings.HasPrefix $icon "icons/") }}
+  {{- $svgPath = $icon -}}
+{{- else }}
+  {{- $svgPath = printf "icons/%s-fill.svg" $icon -}}
 {{- end }}
-{{- safe.HTML $svg.Content -}}
+
+{{- $svg := resources.Get $svgPath -}}
+
+{{- if not $svg }}
+  {{- errorf "Failed to get icon: %v (resolved path: %s)\n\n" $icon $svgPath }}
+{{- end }}
+
+{{- if not $svg.Content }}
+  {{- errorf "Empty content for icon: %v (resolved path: %s)\n\n" $icon $svgPath }}
+{{- end }}
+
+{{- $svg.Content | safeHTML -}}

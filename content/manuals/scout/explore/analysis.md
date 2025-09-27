@@ -229,10 +229,8 @@ rating system.
 
 Image analysis on the Docker Scout platform, and analysis triggered by background
 indexing in Docker Desktop, has an image file size limit of 10 GB (uncompressed).
-To analyze images larger than that, you can either:
+To analyze images larger than that:
 
-- Attach [SBOM attestations](/manuals/build/metadata/attestations/sbom.md) at build-time
-- Use the [CLI](#cli) to analyze the image locally
+- Attach an [SBOM attestation](/manuals/build/metadata/attestations/sbom.md) at build-time. When an image includes an SBOM attestation, Docker Scout uses it instead of generating one, so the 10 GB limit doesn’t apply.
+- Alternatively, you can use the [CLI](#cli) to analyze the image locally. The 10 GB limit doesn’t apply when using the CLI. If the image includes an SBOM attestation, the CLI uses it to complete the analysis faster.
 
-Images analyzed locally with the CLI and images with SBOM attestations
-have no maximum file size.

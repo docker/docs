@@ -36,7 +36,7 @@ Create a file named `Dockerfile.dev` in your project root with the following con
 # =========================================
 # Stage 1: Develop the React.js Application
 # =========================================
-ARG NODE_VERSION=22.14.0-alpine
+ARG NODE_VERSION=24.7.0-alpine
 
 # Use a lightweight Node.js image for development
 FROM node:${NODE_VERSION} AS dev
@@ -45,13 +45,13 @@ FROM node:${NODE_VERSION} AS dev
 WORKDIR /app
 
 # Copy package-related files first to leverage Docker's caching mechanism
-COPY --link package.json package-lock.json ./
+COPY package.json package-lock.json ./
 
 # Install project dependencies
 RUN --mount=type=cache,target=/root/.npm npm install
 
 # Copy the rest of the application source code into the container
-COPY --link . .
+COPY . .
 
 # Expose the port used by the Vite development server
 EXPOSE 5173

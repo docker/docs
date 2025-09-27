@@ -10,7 +10,7 @@ long: |-
     a list or index, the output will be a manifest list, however you can disable this
     behavior with `--prefer-index=false` which attempts to preserve the source manifest
     format in the output.
-usage: docker buildx imagetools create [OPTIONS] [SOURCE] [SOURCE...]
+usage: docker buildx imagetools create [OPTIONS] [SOURCE...]
 pname: docker buildx imagetools
 plink: docker_buildx_imagetools.yaml
 options:

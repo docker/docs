@@ -85,7 +85,7 @@ For Pro and Team customers, Docker only offers support for the latest version of
 ### How many machines can I get support for Docker Desktop on?
 
 As a Pro user you can get support for Docker Desktop on a single machine.
-As a Team, you can get support for Docker Desktop for the number of machines equal to the number of seats as part of your plan.
+As a Team, you can get support for Docker Desktop for the number of machines equal to the number of seats as part of your subscription.
 
 ### What OS’s are supported?
 

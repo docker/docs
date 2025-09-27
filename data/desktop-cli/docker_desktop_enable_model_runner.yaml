@@ -26,6 +26,20 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: cors
+      value_type: bool
+      default_value: "all"
+      description: CORS configuration. Can be `all`, `none`, or comma-separated list of allowed origins.
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: gpu
+      value_type: bool
+      default_value: "false"
+      description: Enable GPU support for Model Runner (Windows only).
 deprecated: false
 hidden: false
 experimental: false

@@ -31,7 +31,7 @@ The demonstrated examples can be found in [this GitHub repository](https://githu
 
 This guide is intended for educational purposes, helping developers adapt and optimize configurations for their specific use cases. Additionally, there are existing tools that support Laravel in containers:
 
-- [Laravel Sail](https://laravel.com/docs/11.x/sail): An official package for easily starting Laravel in Docker.
+- [Laravel Sail](https://laravel.com/docs/12.x/sail): An official package for easily starting Laravel in Docker.
 - [Laradock](https://github.com/laradock/laradock): A community project that helps run Laravel applications in Docker.
 
 ## What you’ll learn

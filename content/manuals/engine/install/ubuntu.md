@@ -54,13 +54,12 @@ versions:
 - Ubuntu Oracular 24.10
 - Ubuntu Noble 24.04 (LTS)
 - Ubuntu Jammy 22.04 (LTS)
-- Ubuntu Focal 20.04 (LTS)
 
 Docker Engine for Ubuntu is compatible with x86_64 (or amd64), armhf, arm64,
 s390x, and ppc64le (ppc64el) architectures.
 
 > [!NOTE]
-> 
+>
 > Installation on Ubuntu derivative distributions, such as Linux Mint, is not officially
 > supported (though it may work).
 
@@ -114,6 +113,8 @@ You can install Docker Engine in different ways, depending on your needs:
 - Use a [convenience script](#install-using-the-convenience-script). Only
   recommended for testing and development environments.
 
+{{% include "engine-license.md" %}}
+
 ### Install using the `apt` repository {#install-using-the-repository}
 
 Before you install Docker Engine for the first time on a new host machine, you
@@ -148,7 +149,7 @@ Docker from the repository.
    ```console
    $ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
    ```
-  
+
    {{< /tab >}}
    {{< tab name="Specific version" >}}
 
@@ -173,6 +174,21 @@ Docker from the repository.
 
    {{< /tab >}}
    {{< /tabs >}}
+
+    > [!NOTE]
+    >
+    > The Docker service starts automatically after installation. To verify that
+    > Docker is running, use:
+    > 
+    > ```console
+    > $ sudo systemctl status docker
+    > ```
+    >
+    > Some systems may have this behavior disabled and will require a manual start:
+    >
+    > ```console
+    > $ sudo systemctl start docker
+    > ```
 
 3. Verify that the installation is successful by running the `hello-world` image:
 
@@ -227,12 +243,24 @@ download a new file each time you want to upgrade Docker Engine.
      ./docker-compose-plugin_<version>_<arch>.deb
    ```
 
-   The Docker daemon starts automatically.
+    > [!NOTE]
+    >
+    > The Docker service starts automatically after installation. To verify that
+    > Docker is running, use:
+    > 
+    > ```console
+    > $ sudo systemctl status docker
+    > ```
+    >
+    > Some systems may have this behavior disabled and will require a manual start:
+    >
+    > ```console
+    > $ sudo systemctl start docker
+    > ```
 
 6. Verify that the installation is successful by running the `hello-world` image:
 
    ```console
-   $ sudo service docker start
    $ sudo docker run hello-world
    ```
 

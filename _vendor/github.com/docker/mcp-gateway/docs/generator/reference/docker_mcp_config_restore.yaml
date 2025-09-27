@@ -1,0 +1,13 @@
+command: docker mcp config restore
+short: Restore the whole configuration
+long: Restore the whole configuration
+usage: docker mcp config restore
+pname: docker mcp config
+plink: docker_mcp_config.yaml
+deprecated: false
+hidden: true
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

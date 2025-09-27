@@ -1,7 +1,7 @@
 # docker scout integration list
 
 <!---MARKER_GEN_START-->
-Integration Docker Scout
+List integrations which can be installed
 
 ### Options
 
@@ -12,4 +12,3 @@ Integration Docker Scout
 
 
 <!---MARKER_GEN_END-->
-

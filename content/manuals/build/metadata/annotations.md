@@ -6,12 +6,14 @@ aliases:
 - /build/building/annotations/
 ---
 
+<!-- vale Docker.Spacing = NO -->
+
 Annotations provide descriptive metadata for images. Use annotations to record
 arbitrary information and attach it to your image, which helps consumers and
 tools understand the origin, contents, and how to use the image.
 
 Annotations are similar to, and in some sense overlap with, [labels]. Both
-serve the same purpose: attach metadata to a resource. As a general principle,
+serve the same purpose: to attach metadata to a resource. As a general principle,
 you can think of the difference between annotations and labels as follows:
 
 - Annotations describe OCI image components, such as [manifests], [indexes],
@@ -39,7 +41,7 @@ You can add annotations to an image at build-time, or when creating the image
 manifest or index.
 
 > [!NOTE]
-> 
+>
 > The Docker Engine image store doesn't support loading images with
 > annotations. To build with annotations, make sure to push the image directly
 > to a registry, using the `--push` CLI flag or the
@@ -68,7 +70,7 @@ For examples on how to add annotations to images built with GitHub Actions, see
 You can also add annotations to an image created using `docker buildx
 imagetools create`. This command only supports adding annotations to an index
 or manifest descriptors, see
-[CLI reference](/reference/cli/docker/buildx/imagetools/create.md#annotations).
+[CLI reference](/reference/cli/docker/buildx/imagetools/create.md#annotation).
 
 ## Inspect annotations
 

@@ -1,20 +1,32 @@
 ---
 title: Docker Desktop license agreement
-description: Information about Docker Desktop's license agreement
-keywords: license agreement, docker desktop, subscription
+description: Information about Docker Desktop's license agreement and commercial use requirements
+keywords: docker desktop license, subscription service agreement, commercial use, licensing terms
 weight: 40
 ---
 
-Docker Desktop is licensed under the Docker Subscription Service Agreement. When you download and install Docker Desktop, you will be asked to agree to the updated terms.
+Docker Desktop is licensed under the [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement). When you download and install Docker Desktop, you're asked to agree to these terms.
 
-Our [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement) states:
+The Docker Subscription Service Agreement states:
 
- - Docker Desktop is free for small businesses (fewer than 250 employees AND less than $10 million in annual revenue), personal use, education, and non-commercial open source projects.
- - Otherwise, it requires a paid subscription for professional use.
-- Paid subscriptions are also required for government entities.
-- The Docker Pro, Team, and Business subscriptions include commercial use of Docker Desktop.
+ - Docker Desktop is free for:
+    - Small businesses (fewer than 250 employees AND less than $10 million in annual revenue)
+    - Personal use
+    - Education
+    - Non-commercial open source projects
+- Docker Desktop requires a paid subscription for:
+    - Professional use in larger organizations
+    - Government entities
+    - Commercial use beyond the free tier limits
+- Paid subscriptions that include Docker Desktop:
+    - Docker Pro, Team, and Business subscriptions
 
-Read the [Blog](https://www.docker.com/blog/updating-product-subscriptions/) and [Docker subscription FAQs](https://www.docker.com/pricing/faq) to learn how this may affect companies using Docker Desktop.
+## Understanding licensing terms
+
+For detailed information about how these terms may affect your organization, see:
+
+- [Subscription updates blog post](https://www.docker.com/blog/updating-product-subscriptions/)
+- [Docker subscription FAQs](https://www.docker.com/pricing/faq) to learn how this may affect companies using Docker Desktop.
 
 > [!NOTE]
 >
@@ -22,9 +34,7 @@ Read the [Blog](https://www.docker.com/blog/updating-product-subscriptions/) and
 
 Docker Desktop is built using open-source software. For information about the licensing of open-source components in Docker Desktop, select the whale menu > **About Docker Desktop** > **Acknowledgements**.
 
+## Open source components
+
 Docker Desktop distributes some components that are licensed under the
 GNU General Public License. Select [here](https://download.docker.com/opensource/License.tar.gz) to download the source for these components.
-
-> [!TIP]
->
-> Explore [Docker subscriptions](https://www.docker.com/pricing/) to see what else Docker can offer you.

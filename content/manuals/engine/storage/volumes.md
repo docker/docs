@@ -625,7 +625,7 @@ $ docker volume create \
 	--opt type=cifs \
 	--opt device=//uxxxxx.your-server.de/backup \
 	--opt o=addr=uxxxxx.your-server.de,username=uxxxxxxx,password=*****,file_mode=0777,dir_mode=0777 \
-	--name cif-volume
+	--name cifs-volume
 ```
 
 The `addr` option is required if you specify a hostname instead of an IP.

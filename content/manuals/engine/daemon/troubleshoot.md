@@ -545,7 +545,7 @@ all other running containers as filesystems within the container which mounts
 `/var/lib/docker/`. When you attempt to remove any of these containers, the
 removal attempt may fail with an error like the following:
 
-```none
+```text
 Error: Unable to remove filesystem for
 74bef250361c7817bee19349c93139621b272bc8f654ae112dd4eb9652af9515:
 remove /var/lib/docker/containers/74bef250361c7817bee19349c93139621b272bc8f654ae112dd4eb9652af9515/shm:

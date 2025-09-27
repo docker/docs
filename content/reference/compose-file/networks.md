@@ -1,6 +1,7 @@
 ---
-title: Networks top-level elements
-description: Explore all the attributes the networks top-level element can have.
+linkTitle: Networks
+title: Define and manage networks in Docker Compose
+description: Learn how to configure and control networks using the top-level networks element in Docker Compose.
 keywords: compose, compose specification, networks, compose file reference
 aliases:
  - /compose/compose-file/06-networks/
@@ -60,7 +61,7 @@ networks:
     driver: custom-driver
 ```
 
-The advanced example shows a Compose file which defines two custom networks. The `proxy` service is isolated from the `db` service, because they do not share a network in common. Only `app` can talk to both.
+This example shows a Compose file which defines two custom networks. The `proxy` service is isolated from the `db` service, because they do not share a network in common. Only `app` can talk to both.
 
 ## The default network
 
@@ -98,6 +99,19 @@ For options, see the [Docker Engine docs](https://docs.docker.com/engine/network
 
 ## Attributes
 
+### `attachable`
+
+If `attachable` is set to `true`, then standalone containers should be able to attach to this network, in addition to services.
+If a standalone container attaches to the network, it can communicate with services and other standalone containers
+that are also attached to the network.
+
+```yml
+networks:
+  mynet1:
+    driver: overlay
+    attachable: true
+```
+
 ### `driver`
 
 `driver` specifies which driver should be used for this network. Compose returns an error if the
@@ -125,19 +139,6 @@ networks:
 ```
 
 Consult the [network drivers documentation](/manuals/engine/network/_index.md) for more information.
-
-### `attachable`
-
-If `attachable` is set to `true`, then standalone containers should be able to attach to this network, in addition to services.
-If a standalone container attaches to the network, it can communicate with services and other standalone containers
-that are also attached to the network.
-
-```yml
-networks:
-  mynet1:
-    driver: overlay
-    attachable: true
-```
 
 ### `enable_ipv4`
 
@@ -170,7 +171,7 @@ Compose doesn't attempt to create these networks, and returns an error if one do
  - All other attributes apart from name are irrelevant. If Compose detects any other attribute, it rejects the Compose file as invalid.
 
 In the following example, `proxy` is the gateway to the outside world. Instead of attempting to create a network, Compose
-queries the platform for an existing network simply called `outside` and connects the
+queries the platform for an existing network called `outside` and connects the
 `proxy` service's containers to it.
 
 ```yml

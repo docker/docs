@@ -1,13 +1,13 @@
 ---
-title: Manage an account
+title: Manage a Docker account
+linkTitle: Manage an account
 weight: 20
-description: Learn how to manage settings for your Docker account.
+description: Learn how to manage your Docker account.
 keywords: accounts, docker ID, account settings, account management, docker home
 ---
 
-You can centrally manage your Docker account settings using Docker Home. Here
-you can also take administrative actions for your account and manage your
-account security.
+You can centrally manage your Docker account using Docker Home, including
+adminstrative and security settings.
 
 > [!TIP]
 >
@@ -15,78 +15,104 @@ account security.
 > sign-on (SSO), you may not have permissions to update your account settings.
 > You must contact your administrator to update your settings.
 
-## Update general settings
+## Update account information
 
-1. Sign in to your [Docker account](https://app.docker.com/login).
-2. In Docker Home, select your avatar in the top-right corner to open the
-drop-down.
-3. Select **Account settings**.
-
-From the Account settings page, you can take any of the following actions.
-
-### Update account information
-
-Account information is visible on your account profile in Docker Hub. You can
+Account information is visible on your **Account settings** page. You can
 update the following account information:
 
 - Full name
 - Company
 - Location
 - Website
-- Gravatar email: To add an avatar to your Docker account, create a
-[Gravatar account](https://gravatar.com/) and create your avatar. Next, add your
-Gravatar email to your Docker account settings. It may take some time for your
-avatar to update in Docker.
+- Gravatar email
 
-Make your changes here, then select **Save** to save your settings.
+To add or update your avatar using Gravatar:
 
-### Update email address
+1. Create a [Gravatar account](https://gravatar.com/).
+1. Create your avatar.
+1. Add your Gravatar email to your Docker account settings.
 
-To update your email address, select **Email**:
+It may take some time for your avatar to update in Docker.
 
-1. Enter your new email address.
-2. Enter your password to confirm the change.
-3. Select **Send verification email** to send a verification email to your new
-email address.
+## Update email address
 
-Once you verify your email address, your account information will update.
+To update your email address:
 
-### Change your password
+1. Sign in to your [Docker account](https://app.docker.com/login).
+1. Select your avatar in the top-right corner and select **Account settings**.
+1. Select **Email**.
+1. Enter your new email address and your password to confirm the change.
+1. Select **Send verification email**. Docker sends a verification
+link to your new email.
 
-You can change your password by initiating a password reset via email.
+Your new email address will appear as unverified until you complete the
+verification process. You can:
 
-To change your password, select **Password** and then **Reset password**.
-Follow the instructions in the password reset email.
+- Resend the verification email if needed.
+- Remove the unverified email address at any time before verification.
 
-## Manage security settings
+To verify your email, open your email client and follow the instructions
+in the Docker verification email.
 
-To update your two-factor authentication (2FA) settings, select **2FA**.
-For information on two-factor authentication (2FA) for your account, see
-[Enable two-factor authentication](../security/for-developers/2fa/_index.md)
-to get started.
+> [!NOTE]
+>
+> Docker accounts only support one verified email address at a time, which
+is used for account notifications and security-related communications. You
+can't add multiple verified email addresses to your account.
 
-To manage personal access tokens, select **Personal access tokens**.
-For information on personal access tokens, see
-[Create and manage access tokens](../security/for-developers/access-tokens.md).
+## Change your password
+
+You can change your password by initiating a password reset via email. To change your password:
+
+1. Sign in to your [Docker account](https://app.docker.com/login).
+1. Select your avatar in the top-right corner and select **Account settings**.
+1. Select **Password**, then **Reset password**.
+1. Docker will send you a password reset email with instructions to reset
+your password.
+
+## Manage two-factor authentication
+
+To update your two-factor authentication (2FA) settings:
+
+1. Sign in to your [Docker account](https://app.docker.com/login).
+1. Select your avatar in the top-right corner and select **Account settings**.
+1. Select **2FA**.
+
+For more information, see
+[Enable two-factor authentication](../security/2fa/_index.md).
+
+## Manage personal access tokens
+
+To manage personal access tokens:
+
+1. Sign in to your [Docker account](https://app.docker.com/login).
+1. Select your avatar in the top-right corner and select **Account settings**.
+1. Select **Personal access tokens**.
+
+For more information, see
+[Create and manage access tokens](../security/access-tokens.md).
 
 ## Manage connected accounts
 
-You can unlink Google or GitHub accounts that are linked to your Docker account
-using the Account settings page:
+You can unlink connected Google or GitHub accounts:
 
+1. Sign in to your [Docker account](https://app.docker.com/login).
+1. Select your avatar in the top-right corner and select **Account settings**.
 1. Select **Connected accounts**.
-2. Select **Disconnect** on your connected account.
-3. To fully unlink your Docker account, you must also unlink Docker from Google
+1. Select **Disconnect** on your connected account.
+
+To fully unlink your Docker account, you must also unlink Docker from Google
 or GitHub. See Google or GitHub's documentation for more information:
-    - [Manage connections between your Google Account and third-parties](https://support.google.com/accounts/answer/13533235?hl=en)
-    - [Reviewing and revoking authorization of GitHub Apps](https://docs.github.com/en/apps/using-github-apps/reviewing-and-revoking-authorization-of-github-apps)
 
-## Account management
+- [Manage connections between your Google Account and third-parties](https://support.google.com/accounts/answer/13533235?hl=en)
+- [Reviewing and revoking authorization of GitHub Apps](https://docs.github.com/en/apps/using-github-apps/reviewing-and-revoking-authorization-of-github-apps)
 
-To convert your account into an organization, select **Convert**.
-For more information on converting your account, see
+## Convert your account
+
+For information on converting your account into an organization, see
 [Convert an account into an organization](../admin/organization/convert-account.md).
 
-To deactivate your account, select **Deactivate**.
+## Deactivate your account
+
 For information on deactivating your account, see
 [Deactivating a user account](./deactivate-user-account.md).

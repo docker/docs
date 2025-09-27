@@ -222,8 +222,8 @@ The common parameters described here are:
 
 When you export a compressed output, you can configure the exact compression
 algorithm and level to use. While the default values provide a good
-out-of-the-box experience, you may wish to tweak the parameters to optimize for
-storage vs compute costs. Changing the compression parameters can reduce storage
+out-of-the-box experience, you can tweak the parameters to optimize for
+storage versus compute costs. Changing the compression parameters can reduce storage
 space required, and improve image download times, but will increase build times.
 
 To select the compression algorithm, you can use the `compression` option. For

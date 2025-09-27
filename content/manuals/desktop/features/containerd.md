@@ -59,7 +59,7 @@ To manually enable this feature in Docker Desktop:
 
 1. Navigate to **Settings** in Docker Desktop.
 2. In the **General** tab, check **Use containerd for pulling and storing images**.
-3. Select **Apply & Restart**.
+3. Select **Apply**.
 
 To disable the containerd image store,
 clear the **Use containerd for pulling and storing images** checkbox.

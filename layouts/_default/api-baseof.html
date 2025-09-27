@@ -8,7 +8,7 @@
   <meta name="description" content="{{ .Description }}" />
   <meta charset="utf-8" />
   <!-- favicon -->
-  {{- partialCached "favicon.html" "favicon" }}
+  <link rel="shortcut icon" href="/assets/images/favicon.svg" type="image/svg">
   <style>
     body {
       margin: 0;
@@ -23,9 +23,9 @@
     .auth-tag,.pat,.oat {
       border-radius: 4px;
       color: #fff;
-      padding: 5px; 
+      padding: 5px;
     }
-    
+
     .pat {
       background-color: rgb(149, 80, 124);
     }
@@ -37,9 +37,9 @@
     .oat::after {
       content: "org access token";
     }
-    
+
     .oat {
-      background-color: rgb(24, 111, 175); 
+      background-color: rgb(24, 111, 175);
     }
 
     .auth-tag:not(:last-child) {

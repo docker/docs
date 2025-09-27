@@ -984,6 +984,16 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: use-api-socket
+      value_type: bool
+      default_value: "false"
+      description: Bind mount Docker API socket and required auth
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: user
       shorthand: u
       value_type: string

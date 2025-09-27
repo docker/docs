@@ -1,7 +1,7 @@
-{{/*- Multi-page guide: render a progress bar -*/}}
-<div class="flex flex-col my-4 items-start text-sm">
+{{/* - Multi-page guide: render a progress bar - */}}
+<div class="my-4 flex flex-col items-start text-sm">
   {{ $totalPages := len .CurrentSection.Pages }}
-  {{/*- initialize the page store
+  {{/* - initialize the page store
 
     $stepper_seen controls the color of the item in the stepper
 
@@ -13,42 +13,42 @@
     default to true if kind = section
     (make all entries gray)
 
-  -*/}}
+    -
+  */}}
   {{ page.Store.Set "stepper_seen" .IsSection }}
-  {{/*- Loop over the pages in this guide -*/}}
+  {{/* - Loop over the pages in this guide - */}}
   {{ range $i, $e := .CurrentSection.Pages }}
     {{ $isLast := eq (add $i 1) $totalPages }}
     <div class="flex">
       <div class="flex flex-col items-center">
-        {{/*- Render the page's index digit (1,2,3,4 etc) -*/}}
+        {{/* - Render the page's index digit (1,2,3,4 etc) - */}}
         <a
           href="{{ .Permalink }}"
           class="{{ if (page.Store.Get "stepper_seen") }}
-            bg-gray-light-400 dark:bg-gray-dark-400
+            bg-gray-400 dark:bg-gray-500
           {{ else if (eq . page) }}
-            {{ .Store.Set "stepper_seen" true }} bg-blue-light-400
-            dark:bg-blue-dark-400
+            {{ .Store.Set "stepper_seen" true }} bg-blue-400 dark:bg-blue-800
           {{ else }}
-            bg-green-light-400 dark:bg-green-dark-400
+            bg-green-400 dark:bg-green-dark-400
           {{ end }} flex h-8 w-8 items-center justify-center rounded-full text-white no-underline"
         >
           {{ add $i 1 }}
         </a>
-        {{/*- Render the vertical border -*/}}
+        {{/* - Render the vertical border - */}}
         {{ if not $isLast }}
           <div
             class="{{ if (page.Store.Get "stepper_seen") }}
-              border-gray-light-400 dark:border-gray-dark-400
+              border-gray-400 dark:border-gray-400
             {{ else if (eq . page) }}
-              border-blue-light-400 dark:border-blue-dark-400
+              border-blue-400 dark:border-blue-400
             {{ else }}
-              border-green-light-400 dark:border-green-dark-400
+              border-green-400 dark:border-green-400
             {{ end }} h-6 border-l-2"
           ></div>
         {{ end }}
       </div>
-      {{/*- Render the page's title -*/}}
-      <div class="ml-2 flex self-start h-8 items-center">
+      {{/* - Render the page's title - */}}
+      <div class="ml-2 flex h-8 items-center self-start">
         <a href="{{ .Permalink }}">
           {{ .LinkTitle }}
         </a>

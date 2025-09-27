@@ -26,7 +26,7 @@ same as the registry URL specified in the image tag (following a similar logic t
 `$ docker push`). When using Docker Hub or DTR, the notary
 server URL is the same as the registry URL. However, for self-hosted
 environments or 3rd party registries, you will need to specify an alternative
-URL for the notary server. This is done with:
+URL of the notary server. This is done with:
 
 ```console
 $ export DOCKER_CONTENT_TRUST_SERVER=https://<URL>:<PORT>
