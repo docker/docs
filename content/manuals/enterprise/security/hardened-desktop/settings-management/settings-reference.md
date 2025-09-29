@@ -1077,7 +1077,7 @@ to come from your secure, scanned registry.
 - **OS:** {{< badge color=blue text="All" >}}
 - **Configure this setting with:**
     - Settings Management: `displayedOnboarding` setting in the [`admin-settings.json` file](/manuals/enterprise/security/hardened-desktop/settings-management/configure-json-file.md)
-    - Settings Management: **Block Docker Load** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
+    - Settings Management: **Hide onboarding survey** setting in the [Admin Console](/manuals/enterprise/security/hardened-desktop/settings-management/configure-admin-console.md)
 
 ### Expose Docker API on TCP 2375
 
