@@ -72,6 +72,7 @@ EPERM
 ESXi
 Ethernet
 exploitability
+[Ff]ailover
 Fargate
 Fedora
 firewalld
@@ -225,6 +226,7 @@ Zsh
 [Aa]gentic
 [Aa]utobuilds?
 [Aa]utotests?
+[Aa]utoscaling
 [Bb]uildx
 [Bb]uildpack(s)?
 [Bb]uildx
@@ -233,6 +235,7 @@ Zsh
 [Cc]onfigs
 [dD]eduplicate
 [Dd]ev
+[Dd]iscoverability
 [Dd]istroless
 [Ff]ilepaths?
 [Ff]iletypes?
