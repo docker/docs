@@ -50,6 +50,8 @@ github.com/docker/cli v28.3.3-0.20250711132746-c69d8bde4adc+incompatible h1:5I56
 github.com/docker/cli v28.3.3-0.20250711132746-c69d8bde4adc+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/cli v28.3.3+incompatible h1:fp9ZHAr1WWPGdIWBM1b3zLtgCF+83gRdVMTJsUeiyAo=
 github.com/docker/cli v28.3.3+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
+github.com/docker/cli v28.4.0+incompatible h1:RBcf3Kjw2pMtwui5V0DIMdyeab8glEw5QY0UUU4C9kY=
+github.com/docker/cli v28.4.0+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/compose/v2 v2.36.2 h1:rxk1PUUbhbAS6HkGsYo9xUmMBpKtVwFMNCQjE4+i5fk=
 github.com/docker/compose/v2 v2.36.2/go.mod h1:mZygkne+MAMu/e1B28PBFmG0Z0WefbxZ/IpcjSFdrw8=
 github.com/docker/compose/v2 v2.37.0 h1:R8Yik9ssiRz7T9BRfdOZy0xHDzOFPIJX40DrxzJ62dQ=
@@ -224,6 +226,8 @@ github.com/moby/moby v28.3.2+incompatible h1:K0SaQiU3VJxzMmHarwIa9MUyYFYC6FzCf0Q
 github.com/moby/moby v28.3.2+incompatible/go.mod h1:fDXVQ6+S340veQPv35CzDahGBmHsiclFwfEygB/TWMc=
 github.com/moby/moby v28.3.3+incompatible h1:nzkZIIn9bQP9S553kNmJ+U8PBhdS2ciFWphV2vX/Zp4=
 github.com/moby/moby v28.3.3+incompatible/go.mod h1:fDXVQ6+S340veQPv35CzDahGBmHsiclFwfEygB/TWMc=
+github.com/moby/moby v28.4.0+incompatible h1:Rhu/o+7EaHGx0MV3KOouThtr3hY33m3aKyA6GDR2QmQ=
+github.com/moby/moby v28.4.0+incompatible/go.mod h1:fDXVQ6+S340veQPv35CzDahGBmHsiclFwfEygB/TWMc=
 github.com/moby/sys/atomicwriter v0.1.0 h1:kw5D/EqkBwsBFi0ss9v1VG3wIkVhzGvLklJ+w3A14Sw=
 github.com/moby/sys/atomicwriter v0.1.0/go.mod h1:Ul8oqv2ZMNHOceF643P6FKPXeCmYtlQMvpizfsSoaWs=
 github.com/moby/sys/sequential v0.6.0 h1:qrx7XFUd/5DxtqcoH1h438hF5TmOvzC/lspjy7zgvCU=
