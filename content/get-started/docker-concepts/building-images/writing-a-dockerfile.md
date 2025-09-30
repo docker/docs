@@ -79,38 +79,49 @@ Now that you have the project, you’re ready to create the `Dockerfile`.
 
 1. [Download and install](https://www.docker.com/products/docker-desktop/) Docker Desktop.
 
-2. Create a file named `Dockerfile` in the same folder as the file `package.json`.
+2. Examine the project.
+
+   Explore the contents of `getting-started-todo-app/app/`. You'll notice that a
+   `Dockerfile` already exists. It is a simple text file that you can open in
+   any text or code editor.
+
+3. Delete the existing `Dockerfile`.
+
+   For this exercise, you'll pretend you're starting from scratch and will
+   create a new `Dockerfile`.
+
+4. Create a file named `Dockerfile` in `getting-started-todo-app/app/` folder.
 
     > **Dockerfile file extensions**
     >
     > It's important to note that the `Dockerfile` has _no_ file extension. Some editors
     > will automatically add an extension to the file (or complain it doesn't have one).
 
-3. In the `Dockerfile`, define your base image by adding the following line:
+5. In the `Dockerfile`, define your base image by adding the following line:
 
     ```dockerfile
     FROM node:22-alpine
     ```
 
-4. Now, define the working directory by using the `WORKDIR` instruction. This will specify where future commands will run and the directory files will be copied inside the container image.
+6. Now, define the working directory by using the `WORKDIR` instruction. This will specify where future commands will run and the directory files will be copied inside the container image.
 
     ```dockerfile
     WORKDIR /app
     ```
 
-5. Copy all of the files from your project on your machine into the container image by using the `COPY` instruction:
+7. Copy all of the files from your project on your machine into the container image by using the `COPY` instruction:
 
     ```dockerfile
     COPY . .
     ```
 
-6. Install the app's dependencies by using the `yarn` CLI and package manager. To do so, run a command using the `RUN` instruction:
+8. Install the app's dependencies by using the `yarn` CLI and package manager. To do so, run a command using the `RUN` instruction:
 
     ```dockerfile
     RUN yarn install --production
     ```
 
-7. Finally, specify the default command to run by using the `CMD` instruction:
+9. Finally, specify the default command to run by using the `CMD` instruction:
 
     ```dockerfile
     CMD ["node", "./src/index.js"]
