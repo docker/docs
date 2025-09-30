@@ -90,7 +90,7 @@ Now that you have the project, you’re ready to create the `Dockerfile`.
    For this exercise, you'll pretend you're starting from scratch and will
    create a new `Dockerfile`.
 
-4. Create a file named `Dockerfile` in `getting-started-todo-app/app/` folder.
+4. Create a file named `Dockerfile` in the `getting-started-todo-app/app/` folder.
 
     > **Dockerfile file extensions**
     >
