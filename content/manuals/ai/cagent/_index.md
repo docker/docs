@@ -18,7 +18,7 @@ delegates tasks to the sub-agents you define.
 Each agent:
 - uses the model of your choice, with the parameters of your choice.
 - has access to the [built-in tools](#built-in-tools) and MCP servers
-  configured in the [Docker MCP gateway](/manuals/ai/mcp-gateway/_index.md).
+  configured in the [Docker MCP gateway](/manuals/ai/mcp-catalog-and-toolkit/mcp-gateway.md).
 - works in its own context. They do not share knowledge.
 
 The root agent is your main contact point. Each agent has its own context,
@@ -207,7 +207,7 @@ sub-agents defined in its configuration.
 
 ### Using tools via the Docker MCP Gateway
 
-If you use the [Docker MCP gateway](/manuals/ai/mcp-gateway.md),
+If you use the [Docker MCP gateway](/manuals/ai/mcp-catalog-and-toolkit/mcp-gateway.md),
 you can configure your agent to interact with the
 gateway and use the MCP servers configured in it. See [docker mcp
 gateway run](/reference/cli/docker/mcp/gateway/gateway_run.md).
@@ -257,4 +257,4 @@ it with the `cagent run <filename>` command.
 
 - For more information about cagent, see the
 [GitHub repository](https://github.com/docker/cagent).
-- [Docker MCP Gateway](/manuals/ai/mcp-gateway/_index.md)
+- [Docker MCP Gateway](/manuals/ai/mcp-catalog-and-toolkit/mcp-gateway.md)

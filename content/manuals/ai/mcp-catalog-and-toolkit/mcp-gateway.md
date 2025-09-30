@@ -2,10 +2,7 @@
 title: MCP Gateway
 description: "Docker's MCP Gateway provides secure, centralized, and scalable orchestration of AI tools through containerized MCP servers—empowering developers, operators, and security teams."
 keywords: MCP Gateway
-weight: 50
-params:
-  sidebar:
-    group: Open source
+weight: 40
 ---
 
 The MCP Gateway is Docker's open-source enterprise-ready solution for

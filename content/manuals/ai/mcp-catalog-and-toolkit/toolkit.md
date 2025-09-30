@@ -19,7 +19,7 @@ discovery to local execution.
 
 > [!NOTE]
 > If you need to run your own MCP gateway,
-> see [Docker MCP Gateway](../mcp-gateway/_index.md).
+> see [Docker MCP Gateway](/manuals/ai/mcp-catalog-and-toolkit/mcp-gateway.md).
 
 ## Key features
 
@@ -209,4 +209,4 @@ See an example in [Use the **GitHub Official** MCP server](#example-use-the-gith
 
 ## Related pages
 
-- [Open-source MCP Gateway](/manuals/ai/mcp-gateway/_index.md)
+- [Open-source MCP Gateway](/manuals/ai/mcp-catalog-and-toolkit/mcp-gateway.md)

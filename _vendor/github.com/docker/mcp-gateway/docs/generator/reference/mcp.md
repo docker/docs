@@ -32,5 +32,5 @@ Manage MCP servers and clients
 The MCP Gateway is Docker's open-source enterprise solution for orchestrating
 Model Context Protocol (MCP) servers and clients.
 
-For more information see [Docker MCP](https://docs.docker.com/ai/mcp-gateway/) and
+For more information see [Docker MCP](https://docs.docker.com/ai/mcp-catalog-and-toolkit/mcp-gateway.md) and
 the public [GitHub repository](https://github.com/docker/mcp-gateway).
