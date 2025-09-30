@@ -21,7 +21,7 @@ options:
       value_type: stringArray
       default_value: '[]'
       description: |
-        Allow extra privileged entitlement (e.g., `network.host`, `security.insecure`)
+        Allow extra privileged entitlement (e.g., `network.host`, `security.insecure`, `device`)
       details_url: '#allow'
       deprecated: false
       hidden: false
@@ -345,7 +345,7 @@ options:
       value_type: string
       default_value: auto
       description: |
-        Set type of progress output (`auto`, `quiet`, `plain`, `tty`, `rawjson`). Use plain to show container output
+        Set type of progress output (`auto`, `none`,  `plain`, `quiet`, `rawjson`, `tty`). Use plain to show container output
       details_url: '#progress'
       deprecated: false
       hidden: false
@@ -636,6 +636,10 @@ examples: |-
     - `network.host` - Allows executions with host networking.
     - `security.insecure` - Allows executions without sandbox. See
       [related Dockerfile extensions](/reference/dockerfile/#run---security).
+    - `device` - Allows access to Container Device Interface (CDI) devices.
+       - `--allow device` - Grants access to all devices.
+       - `--allow device=kind|name` - Grants access to a specific device.
+       - `--allow device=kind|name,alias=kind|name` - Grants access to a specific device, with optional aliasing.
 
     For entitlements to be enabled, the BuildKit daemon also needs to allow them
     with `--allow-insecure-entitlement` (see [`create --buildkitd-flags`](/reference/cli/docker/buildx/create/#buildkitd-flags)).

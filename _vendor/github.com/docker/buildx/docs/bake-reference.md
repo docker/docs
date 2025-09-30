@@ -1099,6 +1099,7 @@ or interpolate them in attribute values in your Bake file.
 variable "TAG" {
   type = string
   default = "latest"
+  description: "Tag to use for build"
 }
 
 target "webapp-dev" {
@@ -1110,6 +1111,8 @@ target "webapp-dev" {
 You can assign a default value for a variable in the Bake file,
 or assign a `null` value to it. If you assign a `null` value,
 Buildx uses the default value from the Dockerfile instead.
+
+You can also add a description of the variable's purpose with the `description` field. This attribute is useful when combined with the `docker buildx bake --list=variables` option, providing a more informative output when listing the available variables in a Bake file.
 
 You can override variable defaults set in the Bake file using environment variables.
 The following example sets the `TAG` variable to `dev`,

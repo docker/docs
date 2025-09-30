@@ -15,7 +15,7 @@ require (
 	github.com/containerd/stargz-snapshotter/estargz v0.16.3 // indirect
 	github.com/containerd/typeurl/v2 v2.2.3 // indirect
 	github.com/distribution/reference v0.6.0 // indirect
-	github.com/docker/buildx v0.28.0 // indirect
+	github.com/docker/buildx v0.29.0 // indirect
 	github.com/docker/cli v28.4.0+incompatible // indirect; see "replace" rule at the bottom for actual version
 	github.com/docker/compose/v2 v2.39.4 // indirect
 	github.com/docker/distribution v2.8.3+incompatible // indirect
@@ -53,7 +53,7 @@ require (
 	github.com/mattn/go-runewidth v0.0.16 // indirect
 	github.com/mattn/go-shellwords v1.0.12 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
-	github.com/moby/buildkit v0.24.0 // indirect
+	github.com/moby/buildkit v0.25.0 // indirect
 	github.com/moby/docker-image-spec v1.3.1 // indirect
 	github.com/moby/locker v1.0.1 // indirect
 	github.com/moby/moby v28.4.0+incompatible // indirect; see "replace" rule at the bottom for actual version
@@ -102,17 +102,17 @@ require (
 	google.golang.org/genproto/googleapis/api v0.0.0-20250603155806-513f23925822 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20250603155806-513f23925822 // indirect
 	google.golang.org/grpc v1.74.2 // indirect
-	google.golang.org/protobuf v1.36.6 // indirect
+	google.golang.org/protobuf v1.36.9 // indirect
 	gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	howett.net/plist v1.0.1 // indirect
 )
 
 replace (
-	github.com/docker/buildx => github.com/docker/buildx v0.28.0
+	github.com/docker/buildx => github.com/docker/buildx v0.29.0
 	github.com/docker/cli => github.com/docker/cli v28.4.0+incompatible
-	github.com/docker/docker => github.com/docker/docker v28.4.0+incompatible
 	github.com/docker/compose/v2 => github.com/docker/compose/v2 v2.39.4
+	github.com/docker/docker => github.com/docker/docker v28.4.0+incompatible
 	github.com/docker/model-cli => github.com/docker/model-cli v0.1.41
 	github.com/docker/scout-cli => github.com/docker/scout-cli v1.18.1
 	github.com/moby/buildkit => github.com/moby/buildkit v0.24.0

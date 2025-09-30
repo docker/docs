@@ -59,6 +59,17 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: platform
+      shorthand: p
+      value_type: stringArray
+      default_value: '[]'
+      description: Filter specified platforms of target image
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: prefer-index
       value_type: bool
       default_value: "true"
@@ -74,7 +85,7 @@ options:
       value_type: string
       default_value: auto
       description: |
-        Set type of progress output (`auto`, `plain`, `tty`, `rawjson`). Use plain to show container output
+        Set type of progress output (`auto`, `none`, `plain`, `rawjson`, `tty`). Use plain to show container output
       deprecated: false
       hidden: false
       experimental: false
