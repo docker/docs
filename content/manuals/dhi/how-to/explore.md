@@ -15,12 +15,6 @@ understand the security attestations provided. Use this information to evaluate
 and select the right image variants for your applications before mirroring them
 to your organization.
 
-## Access Docker Hardened Images
-
-Docker Hardened Images requires a subscription. [Sign
-up](https://www.docker.com/products/hardened-images/#getstarted) to access
-Docker Hardened Images.
-
 ## Explore Docker Hardened Images
 
 To explore Docker Hardened Images (DHI):
