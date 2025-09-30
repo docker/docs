@@ -12,6 +12,12 @@ toc_max: 2
 
 {{< rss-button feed="/security/security-announcements/index.xml" text="Subscribe to security RSS feed" >}}
 
+## Docker Desktop 4.47.0 security update: CVE-2025-10657
+
+A vulnerability in Docker Desktop was fixed on September 25 in the [4.47.0](/manuals/desktop/release-notes.md#4470) release:
+
+- Fixed [CVE-2025-10657](https://www.cve.org/CVERecord?id=CVE-2025-10657) where the Enhanced Container Isolation [Docker Socket command restrictions](../enterprise/security/hardened-desktop/enhanced-container-isolation/config.md#command-restrictions) feature was not working properly in Docker Desktop 4.46.0 only (the configuration for it was being ignored).
+
 ## Docker Desktop 4.44.3 security update: CVE-2025-9074
 
 _Last updated August 20, 2025_
