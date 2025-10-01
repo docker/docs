@@ -10,7 +10,7 @@ toc_max: 2
 This page contains information about the new features, improvements, and bug
 fixes in [Docker Buildx](https://github.com/docker/buildx).
 
-## 0.28.0
+## 0.29.0
 
 {{< release-date date="2025-09-30" >}}
 
