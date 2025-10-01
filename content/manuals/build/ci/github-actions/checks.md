@@ -98,3 +98,29 @@ jobs:
           targets: build
           push: true
 ```
+
+### Using the `call` input directly
+
+You can also set the build method with the `call` input which is equivalent to using the `--call` flag with `docker buildx bake`
+
+For example, to run a check without defining `call` in your Bake file:
+
+```yaml
+name: ci
+
+on:
+  push:
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Validate build configuration
+        uses: docker/bake-action@v6
+        with:
+          targets: build
+          call: check
+```
