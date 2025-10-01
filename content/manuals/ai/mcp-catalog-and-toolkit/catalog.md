@@ -50,19 +50,21 @@ Each catalog entry displays:
 - List of tools provided by the MCP server.
 - Example configuration for agent integration.
 
-## Local and Remote MCP servers
+## Server deployment types
 
-The Docker MCP Catalog supports two types of servers: local and remote. Understanding the differences between these server types helps you choose the right approach for your workflow.
+The Docker MCP Catalog supports both local and remote server deployments, each optimized for different use cases and requirements.
 
 ### Local MCP servers
 
-Local MCP servers are containerized applications that run directly on your machine within Docker Desktop. All local servers are built and digitally signed by Docker, providing enhanced security through verified provenance and integrity. These servers run as containers on your local Docker Desktop environment and work without internet connectivity once downloaded. In Docker Desktop, local servers display a Docker whale logo to indicate they are built by Docker.
+Local MCP servers are containerized applications that run directly on your machine. All local servers are built and digitally signed by Docker, providing enhanced security through verified provenance and integrity. These servers run as containers on your local environment and function without internet connectivity once downloaded. Local servers display a Docker icon {{< inline-image src="../../desktop/images/whale-x.svg" alt="docker whale icon" >}} to indicate they are built by Docker.
+
+Local servers offer predictable performance, complete data privacy, and independence from external service availability. They work well for development workflows, sensitive data processing, and scenarios requiring offline functionality.
 
 ### Remote MCP servers
 
-Remote MCP servers are hosted services that you connect to through the internet, typically managed by the original service providers. These servers are maintained and updated by the service provider, ensuring you always have access to the latest features and data without manual updates. In Docker Desktop, remote servers display a cloud icon to indicate their hosted nature.
+Remote MCP servers are hosted services that you connect to through the internet. Service providers maintain and update these servers, ensuring access to current features and live data without requiring local updates or maintenance. Remote servers display a cloud icon {{< inline-image src="../../offload/images/cloud-mode.png" alt="cloud icon" >}} to indicate their hosted nature and external connectivity requirements.
 
-The key advantage of remote servers is their ability to provide always up-to-date capabilities with no local resource usage or storage requirements. They also offer direct access to live data and services.
+Remote servers excel when you need always-current data, want to minimize local resource usage, or require capabilities that benefit from provider-managed infrastructure and scaling.
 
 ## Use an MCP server from the catalog
 
