@@ -28,8 +28,7 @@ grid:
 {{< summary-bar feature_name="Docker MCP Catalog and Toolkit" >}}
 
 [Model Context Protocol](https://modelcontextprotocol.io/introduction) (MCP) is
-an open protocol that standardizes how applications provide context and
-additional functionality to large language models. Through a client-server architecture, applications such as [Gordon](/manuals/ai/gordon/_index.md) or Claude Desktop act as clients that send requests to MCP servers, which then process these requests and deliver the necessary context to AI models.
+an open protocol that standardizes how AI applications access external tools and data sources. Through a client-server architecture, applications such as [Gordon](/manuals/ai/gordon/_index.md) or Claude Desktop act as clients that send requests to MCP servers, which then process these requests and deliver the necessary context to AI models.
 
 Building and managing MCP tools can be complex. Docker MCP Catalog and Toolkit simplifies this by providing a secure, streamlined way to build, share, and run MCP tools, addressing common challenges developers face.
 
@@ -52,11 +51,7 @@ MCP follows a client-server architecture that enables standardized communication
 
 ### MCP servers
 
-MCP servers are systems that use the [Model Context Protocol](https://modelcontextprotocol.io/introduction) to help manage
-and run AI or machine learning models more efficiently. MCP allows different
-parts of a system, like the model, data, and runtime environment, to
-communicate in a standardized way. You can see them as
-add-ons that provide specific tools to an LLM.
+MCP servers are specialized programs that provide specific tools and capabilities to AI models through [Model Context Protocol](https://modelcontextprotocol.io/introduction). Each server focuses on a particular domain, like GitHub integration, database access, or file management. You can think of them as extensions that give AI models the ability to interact with external systems and data sources.
 
 ### MCP clients
 
@@ -68,11 +63,11 @@ When you interact with an AI application that supports MCP, the client establish
 
 The [MCP Gateway](/manuals/ai/mcp-catalog-and-toolkit/mcp-gateway.md) is Docker's open-source solution which connects MCP servers to MCP clients. It provides a unified endpoint that consolidates multiple MCP servers from the Docker MCP Catalog into a single, manageable connection point. Instead of clients connecting directly to individual MCP servers, the MCP Gateway sits in between, providing centralized connectivity, secure layer, and enterprise controls.
 
-In the context of MCP Catalog and Toolkit:
+In the context of Docker's MCP ecosystem:
 
--  MCP Catalog provides the MCP servers (the tools/capabilities)
+-  MCP Catalog hosts the MCP servers (the tools/capabilities)
 -  MCP Gateway orchestrates and secures those servers
--  MCP clients connect through the Gateway to access the servers
+-  MCP clients connect through the Gateway to access cataloged servers
 
 ## How MCP components work together
 
