@@ -115,7 +115,7 @@ replace (
 	github.com/docker/docker => github.com/docker/docker v28.4.0+incompatible
 	github.com/docker/model-cli => github.com/docker/model-cli v0.1.41
 	github.com/docker/scout-cli => github.com/docker/scout-cli v1.18.1
-	github.com/moby/buildkit => github.com/moby/buildkit v0.24.0
+	github.com/moby/buildkit => github.com/moby/buildkit v0.25.0
 	github.com/moby/moby => github.com/moby/moby v28.4.0+incompatible
 )
 
