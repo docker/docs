@@ -32,10 +32,6 @@ This page provides download links, system requirements, and step-by-step install
 
 *For checksums, see [Release notes](/manuals/desktop/release-notes.md).*
 
-> [!WARNING]
->
-> If you're experiencing malware detection issues, follow the steps documented in [docker/for-mac#7527](https://github.com/docker/for-mac/issues/7527).
-
 ## System requirements
 
 {{< tabs >}}
