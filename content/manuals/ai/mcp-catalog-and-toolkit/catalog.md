@@ -29,7 +29,7 @@ compatibility.
 
 ## Key features
 
-- Over 100 verified MCP servers in one place.
+- Extensive collection of verified MCP servers in one place.
 - Publisher verification and versioned releases.
 - Pull-based distribution using Docker infrastructure.
 - Tools provided by partners such as New Relic, Stripe, Grafana, and more.

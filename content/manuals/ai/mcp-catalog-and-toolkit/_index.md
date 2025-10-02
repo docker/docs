@@ -55,9 +55,9 @@ MCP servers are specialized programs that provide specific tools and capabilitie
 
 ### MCP clients
 
-MCP clients are the bridge between AI applications and MCP servers. They enable AI systems to discover, connect to, and interact with external tools and data sources through the standardized MCP protocol. Each client maintains a dedicated one-to-one relationship with a specific MCP server, enabling secure and isolated communication.
+MCP clients are the bridge between AI applications and MCP servers. They enable AI systems to discover, connect to, and interact with external tools and data sources through the standardized MCP protocol. A single client can connect to multiple MCP servers, while each server can also serve multiple clients, creating a flexible many-to-many relationship that allows for rich integration possibilities.
 
-When you interact with an AI application that supports MCP, the client establishes connections to configured servers, discovers available tools and resources, executes requests when needed, and manages contextual information to enhance AI responses.
+When you interact with an AI application that supports MCP, the client establishes connections to configured servers, discovers available tools and resources from all connected servers, executes requests when needed, and manages contextual information to enhance AI responses.
 
 ### MCP Gateway
 
