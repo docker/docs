@@ -95,6 +95,17 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: ignore-suppressed
+      value_type: bool
+      default_value: "false"
+      description: |
+        Filter CVEs found in Scout exceptions based on the specified exception scope
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: ignore-unchanged
       value_type: bool
       default_value: "false"
@@ -171,6 +182,16 @@ options:
       value_type: bool
       default_value: "false"
       description: Filter to unfixed CVEs
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: only-vex-affected
+      value_type: bool
+      default_value: "false"
+      description: Filter CVEs by VEX statements with status not affected
       deprecated: false
       hidden: false
       experimental: false
@@ -260,6 +281,36 @@ options:
       description: Name of stream to compare to
       deprecated: true
       hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: vex
+      value_type: bool
+      default_value: "false"
+      description: Apply VEX statements to filter CVEs
+      deprecated: true
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: vex-author
+      value_type: stringSlice
+      default_value: '[<.*@docker.com>]'
+      description: List of VEX statement authors to accept
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: vex-location
+      value_type: stringSlice
+      default_value: '[]'
+      description: File location of directory or file containing VEX statements
+      deprecated: false
+      hidden: false
       experimental: false
       experimentalcli: false
       kubernetes: false

@@ -20,6 +20,7 @@ cname:
     - docker scout recommendations
     - docker scout repo
     - docker scout version
+    - docker scout vex
     - docker scout watch
 clink:
     - docker_scout_attestation.yaml
@@ -37,6 +38,7 @@ clink:
     - docker_scout_recommendations.yaml
     - docker_scout_repo.yaml
     - docker_scout_version.yaml
+    - docker_scout_vex.yaml
     - docker_scout_watch.yaml
 options:
     - option: debug

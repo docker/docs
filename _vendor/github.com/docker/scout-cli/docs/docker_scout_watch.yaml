@@ -1,9 +1,8 @@
 command: docker scout watch
 short: |
     Watch repositories in a registry and push images and indexes to Docker Scout (experimental)
-long: |-
-    The `docker scout watch` command watches repositories in a registry
-    and pushes images or analysis results to Docker Scout.
+long: |
+    The docker scout watch command watches repositories in a registry and pushes images or image indexes to Docker Scout.
 usage: docker scout watch
 pname: docker scout
 plink: docker_scout.yaml
@@ -129,30 +128,7 @@ inherited_options:
       experimentalcli: false
       kubernetes: false
       swarm: false
-examples: |-
-    ### Watch for new images from two repositories and push them
-
-    ```console
-    $ docker scout watch --org my-org --repository registry-1.example.com/repo-1 --repository registry-2.example.com/repo-2
-    ```
-
-    ### Only push images with a specific tag
-
-    ```console
-    $ docker scout watch --org my-org --repository registry.example.com/my-service --tag latest
-    ```
-
-    ### Watch all repositories of a registry
-
-    ```console
-    $ docker scout watch --org my-org --registry registry.example.com
-    ```
-
-    ### Push all images and not just the new ones
-
-    ```console
-    $ docker scout watch--org my-org --repository registry.example.com/my-service --all-images
-    ```
+examples: "  Watch for new images from two repositories and push them\n  $ docker scout watch --org my-org --repository registry-1.example.com/repo-1 --repository registry-2.example.com/repo-2\e[0m\n\n  Only push images with a specific tag\n  $ docker scout watch --org my-org --repository registry.example.com/my-service --tag latest\e[0m\n\n  Watch all repositories of a registry\n  $ docker scout watch --org my-org --registry registry.example.com\e[0m\n\n  Push all images and not just the new ones\n  $ docker scout watch --org my-org --repository registry.example.com/my-service --all-images\e[0m"
 deprecated: false
 experimental: false
 experimentalcli: true

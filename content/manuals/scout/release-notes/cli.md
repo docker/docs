@@ -9,6 +9,14 @@ This page contains information about the new features, improvements, known
 issues, and bug fixes in the Docker Scout [CLI plugin](https://github.com/docker/scout-cli/)
 and the `docker/scout-action` [GitHub Action](https://github.com/docker/scout-action).
 
+## 1.18.4
+
+{{< release-date date="2025-10-02" >}}
+
+### Bug fixes
+
+- VEX and SPDX fixes.
+
 ## 1.18.3
 
 {{< release-date date="2025-08-13" >}}
