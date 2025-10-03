@@ -34,6 +34,7 @@ The following payment methods are supported:
   - Automated Clearing House (ACH) transfer with a
   [verified](manuals/billing/payment-method.md#verify-a-bank-account) US
   bank account
+- [Pay by invoice](/manuals/billing/history.md)
 
 All charges are in United States dollars (USD).
 
@@ -54,14 +55,14 @@ organization.
 1. Select **Payment methods** from the left-hand menu.
 1. Select **Add payment method**.
 1. Enter your new payment information:
-    - If you are adding a card:
+    - Add a card:
         - Select **Card** and fill out the card information form.
-    - If you are adding a Link payment:
+    - Add a Link payment:
         - Select **Secure, 1-click checkout with Link** and enter your
         Link **email address** and **phone number**.
         - If you don't already use Link, you must fill out the card information
         form to store a card for Link payments.
-    - If you are adding a bank account:
+    - Add a bank account:
         - Select **US bank account**.
         - Verify your **Email** and **Full name**.
         - If your bank is listed, select your bank's name.
@@ -77,7 +78,7 @@ the **Delete** action.
 > [!NOTE]
 >
 > If you want to set a US bank account as your default payment method, you must
-> verify the account first.
+> [verify the account](#verify-a-bank-account) first.
 
 {{< /tab >}}
 {{< tab name="Legacy Docker subscription" >}}
@@ -89,9 +90,9 @@ To add a payment method:
 1. Select the **Payment methods** link.
 1. Select **Add payment method**.
 1. Enter your new payment information:
-    - If you are adding a card:
+    - Add a card:
         - Select **Card** and fill out the card information form.
-    - If you are adding a Link payment:
+    - Add a Link payment:
         - Select **Secure, 1-click checkout with Link** and enter your
         Link **email address** and **phone number**.
         - If you are not an existing Link customer, you must fill out the
@@ -122,14 +123,14 @@ organization.
 1. Select **Payment methods** from the left-hand menu.
 1. Select **Add payment method**.
 1. Enter your new payment information:
-    - If you are adding a card:
+    - Add a card:
         - Select **Card** and fill out the card information form.
-    - If you are adding a Link payment:
+    - Add a Link payment:
         - Select **Secure, 1-click checkout with Link** and enter your
         Link **email address** and **phone number**.
         - If you are not an existing Link customer, you must fill out the
         card information form to store a card for Link payments.
-    - If you are adding a bank account:
+    - Add a bank account:
         - Select **US bank account**.
         - Verify your **Email** and **Full name**.
         - If your bank is listed, select your bank's name.
@@ -156,9 +157,9 @@ To add a payment method:
 1. Select the **Payment methods** link.
 1. Select **Add payment method**.
 1. Enter your new payment information:
-    - If you are adding a card:
+    - Add a card:
         - Select **Card** and fill out the card information form.
-    - If you are adding a Link payment:
+    - Add a Link payment:
         - Select **Secure, 1-click checkout with Link** and enter your
         Link **email address** and **phone number**.
         - If you are not an existing Link customer, you must fill out the
@@ -171,6 +172,27 @@ the **Actions** icon. Then, select **Delete**.
 
 {{< /tab >}}
 {{< /tabs >}}
+
+## Enable pay by invoice
+
+{{< summary-bar feature_name="Pay by invoice" >}}
+
+Pay by invoice is available for Teams and Business customers with annual
+subscriptions, starting with your first renewal. When you select this
+payment method, you'll pay upfront for your first subscription period using a
+payment card or ACH bank transfer.
+
+At renewal time, instead of automatic payment, you'll receive an invoice via
+email that you must pay manually. Pay by invoice is not available for
+subscription upgrades or changes.
+
+1. Sign in to [Docker Home](https://app.docker.com/) and select your
+organization.
+1. Select **Billing**.
+1. Select **Payment methods**, then **Pay by invoice**.
+1. To enable pay by invoice, select the toggle.
+1. Confirm your billing contact details. If you need to change them, select
+**Change** and enter your new details.
 
 ## Verify a bank account
 
@@ -229,12 +251,18 @@ verification email and enter the amount of this deposit to verify your account.
 > You can't manually retry a failed payment. Docker will retry failed payments
 based on the retry schedule.
 
-If your subscription payment fails, there is a grace period of 15 days, including the due date. Docker retries to collect the payment 3 times using the following schedule:
+If your subscription payment fails, there is a grace period of 15 days,
+including the due date. Docker retries to collect the payment 3 times using the
+following schedule:
 
 - 3 days after the due date
 - 5 days after the previous attempt
 - 7 days after the previous attempt
 
-Docker also sends an email notification `Action Required - Credit Card Payment Failed` with an attached unpaid invoice after each failed payment attempt.
+Docker also sends an email notification
+`Action Required - Credit Card Payment Failed` with an attached unpaid invoice
+after each failed payment attempt.
 
-Once the grace period is over and the invoice is still not paid, the subscription downgrades to a free subscription and all paid features are disabled.
+Once the grace period is over and the invoice is still not paid, the
+subscription downgrades to a free subscription and all paid features are
+disabled.
