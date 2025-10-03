@@ -35,16 +35,16 @@ of these binaries by running the following commands:
 
 ```console
 $ docker compose version
-Docker Compose version v2.29.1
+Docker Compose version v2.39.4
 
 $ docker --version
-Docker version 27.1.1, build 6312585
+Docker version 28.4.0, build d8eb465
 
 $ docker version
-Client: 
- Version:           23.0.5
- API version:       1.42
- Go version:        go1.21.12
+Client:
+ Version:           28.4.0
+ API version:       1.51
+ Go version:        go1.24.7
 <...>
 ```
 
