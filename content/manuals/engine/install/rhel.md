@@ -31,6 +31,7 @@ RHEL versions:
 
 - RHEL 8
 - RHEL 9
+- RHEL 10
 
 ### Uninstall old versions
 
