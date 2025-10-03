@@ -15,7 +15,7 @@ require (
 	github.com/containerd/stargz-snapshotter/estargz v0.16.3 // indirect
 	github.com/containerd/typeurl/v2 v2.2.3 // indirect
 	github.com/distribution/reference v0.6.0 // indirect
-	github.com/docker/buildx v0.29.0 // indirect
+	github.com/docker/buildx v0.29.1 // indirect
 	github.com/docker/cli v28.4.0+incompatible // indirect; see "replace" rule at the bottom for actual version
 	github.com/docker/compose/v2 v2.39.4 // indirect
 	github.com/docker/distribution v2.8.3+incompatible // indirect
@@ -109,7 +109,7 @@ require (
 )
 
 replace (
-	github.com/docker/buildx => github.com/docker/buildx v0.29.0
+	github.com/docker/buildx => github.com/docker/buildx v0.29.1
 	github.com/docker/cli => github.com/docker/cli v28.4.0+incompatible
 	github.com/docker/compose/v2 => github.com/docker/compose/v2 v2.39.4
 	github.com/docker/docker => github.com/docker/docker v28.4.0+incompatible
