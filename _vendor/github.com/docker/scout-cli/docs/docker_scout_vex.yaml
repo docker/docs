@@ -1,17 +1,13 @@
-command: docker scout attestation
-aliases: docker scout attestation, docker scout attest
-short: Manage attestations on images
-long: Manage attestations on images
+command: docker scout vex
+aliases: docker scout vex, docker scout vex
+short: Manage VEX attestations on images
+long: Manage VEX attestations on images
 pname: docker scout
 plink: docker_scout.yaml
 cname:
-    - docker scout attestation add
-    - docker scout attestation get
-    - docker scout attestation list
+    - docker scout vex get
 clink:
-    - docker_scout_attestation_add.yaml
-    - docker_scout_attestation_get.yaml
-    - docker_scout_attestation_list.yaml
+    - docker_scout_vex_get.yaml
 inherited_options:
     - option: debug
       value_type: bool

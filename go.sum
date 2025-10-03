@@ -144,6 +144,8 @@ github.com/docker/scout-cli v1.15.0 h1:VhA9niVftEyZ9f5KGwKnrSfQOp2X3uIU3VbE/gTVM
 github.com/docker/scout-cli v1.15.0/go.mod h1:Eo1RyCJsx3ldz/YTY5yGxu9g9mwTYbRUutxQUkow3Fc=
 github.com/docker/scout-cli v1.18.1 h1:snFodhV6xFJryxdUZ0ukPZFZZFnWAGLUuuPZGB3BOK8=
 github.com/docker/scout-cli v1.18.1/go.mod h1:Eo1RyCJsx3ldz/YTY5yGxu9g9mwTYbRUutxQUkow3Fc=
+github.com/docker/scout-cli v1.18.4 h1:Td+SSA55WlD7gmrNaBe0imgfVzzQjlfb/prwBn9GOSw=
+github.com/docker/scout-cli v1.18.4/go.mod h1:Eo1RyCJsx3ldz/YTY5yGxu9g9mwTYbRUutxQUkow3Fc=
 github.com/elastic/go-sysinfo v1.15.3 h1:W+RnmhKFkqPTCRoFq2VCTmsT4p/fwpo+3gKNQsn1XU0=
 github.com/elastic/go-sysinfo v1.15.3/go.mod h1:K/cNrqYTDrSoMh2oDkYEMS2+a72GRxMvNP+GC+vRIlo=
 github.com/elastic/go-windows v1.0.2 h1:yoLLsAsV5cfg9FLhZ9EXZ2n2sQFKeDYrHenkcivY4vI=

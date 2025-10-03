@@ -5,4 +5,4 @@
 # github.com/docker/compose/v2 v2.40.0
 # github.com/docker/model-cli v0.1.41
 # github.com/docker/mcp-gateway v0.13.1-0.20250730013131-e08a3be84765
-# github.com/docker/scout-cli v1.18.1
+# github.com/docker/scout-cli v1.18.4

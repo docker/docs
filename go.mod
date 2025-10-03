@@ -27,7 +27,7 @@ require (
 	github.com/docker/model-cli v0.1.41 // indirect
 	github.com/docker/model-distribution v0.0.0-20250918153037-7d9fc7b72b57 // indirect
 	github.com/docker/model-runner v0.0.0-20250911130340-38bb0171c947 // indirect
-	github.com/docker/scout-cli v1.18.1 // indirect
+	github.com/docker/scout-cli v1.18.4 // indirect
 	github.com/elastic/go-sysinfo v1.15.3 // indirect
 	github.com/elastic/go-windows v1.0.2 // indirect
 	github.com/fatih/color v1.18.0 // indirect
@@ -114,7 +114,7 @@ replace (
 	github.com/docker/compose/v2 => github.com/docker/compose/v2 v2.39.4
 	github.com/docker/docker => github.com/docker/docker v28.4.0+incompatible
 	github.com/docker/model-cli => github.com/docker/model-cli v0.1.41
-	github.com/docker/scout-cli => github.com/docker/scout-cli v1.18.1
+	github.com/docker/scout-cli => github.com/docker/scout-cli v1.18.4
 	github.com/moby/buildkit => github.com/moby/buildkit v0.25.0
 	github.com/moby/moby => github.com/moby/moby v28.4.0+incompatible
 )
