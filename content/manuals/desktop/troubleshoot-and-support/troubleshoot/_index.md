@@ -22,10 +22,6 @@ weight: 10
 
 This page contains information on how to diagnose and troubleshoot Docker Desktop, and how to check the logs.
 
-> [!WARNING]
->
-> If you're experiencing malware detection issues on Mac, follow the steps documented in [docker/for-mac#7527](https://github.com/docker/for-mac/issues/7527).
-
 ## Troubleshoot menu
 
 To navigate to **Troubleshoot** either:
