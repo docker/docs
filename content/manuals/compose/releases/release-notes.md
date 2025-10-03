@@ -29,14 +29,14 @@ For more detailed information, see the [release notes in the Compose repo](https
 
 - Dependencies upgrade: bump compose-go to v2.9.0
 
-## 2.40.9
+## 2.40.0
 
 {{< release-date date="2025-10-03" >}}
 
 ### Bug fixes and enhancements
 
-- Added option to publish Compose application as compose.yaml with images
-- Fixed support for secrets based on environment variable when building with bake
+- Added the option to publish Compose applications as a `compose.yaml` with images
+- Fixed support for secrets based on environment variables when building with bake
 - Fixed support for escaped '$' character when building with bake
 
 ### Update
