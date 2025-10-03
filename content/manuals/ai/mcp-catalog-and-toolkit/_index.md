@@ -28,36 +28,59 @@ grid:
 {{< summary-bar feature_name="Docker MCP Catalog and Toolkit" >}}
 
 [Model Context Protocol](https://modelcontextprotocol.io/introduction) (MCP) is
-an open protocol that standardizes how applications provide context and
-additional functionality to large language models. MCP functions as a
-client-server protocol, where the client, for example an application such as [Gordon](/manuals/ai/gordon/_index.md) or Claude Desktop, sends requests, and the server processes those requests to deliver the necessary context to the AI.
+an open protocol that standardizes how AI applications access external tools and data sources. Through a client-server architecture, applications such as [Gordon](/manuals/ai/gordon/_index.md) or Claude Desktop act as clients that send requests to MCP servers, which then process these requests and deliver the necessary context to AI models.
 
-Docker MCP Catalog and Toolkit is a solution for securely building, sharing, and
-running MCP tools. It simplifies the developer experience across the following areas:
+Building and managing MCP tools can be complex. Docker MCP Catalog and Toolkit simplifies this by providing a secure, streamlined way to build, share, and run MCP tools, addressing common challenges developers face.
 
-- Discovery: A central catalog with verified, versioned tools.
-- Credential management: OAuth-based and secure by default.
-- Execution: Tools run in isolated, containerized environments.
-- Portability: Use MCP tools across Claude, Cursor, Visual Studio Code, and more—no code
-  changes needed.
+Docker MCP Catalog and Toolkit simplifies the developer experience across the following areas:
 
-With Docker Hub and the MCP Toolkit, you can:
+- Discovery: Centralized discovery through a verified catalog of versioned tools.
+- Credential management: Secure credential management with OAuth-based authentication.
+- Execution: Safe execution by running tools in isolated, containerized environments.
+- Portability: True portability. MCP tools work seamlessly across Claude, Cursor, Visual Studio Code, and other platforms without requiring code changes.
 
-- Launch MCP servers in seconds.
-- Add tools using the CLI or GUI.
-- Rely on Docker's pull-based infrastructure for trusted delivery.
+This integrated approach means you can launch MCP servers in seconds, add new tools through either CLI or GUI interfaces, and rely on Docker's pull-based infrastructure for trusted delivery of your tools.
 
-![MCP overview](./images/mcp-overview.svg)
+  ![MCP overview](./images/mcp-overview.svg)
 
-## MCP servers
+To understand how Docker MCP Catalog and Toolkit achieves this streamlined experience, let's explore the underlying architecture and how its key components work together.
 
-MCP servers are systems that use the [Model Context Protocol](https://modelcontextprotocol.io/introduction) (MCP) to help manage
-and run AI or machine learning models more efficiently. MCP allows different
-parts of a system, like the model, data, and runtime environment, to
-communicate in a standardized way. You can see them as
-add-ons that provide specific tools to an LLM.
+## MCP architecture overview
 
-![Example of the GitHub MCP server](./images/mcp-servers-overview.svg)
+MCP follows a client-server architecture that enables standardized communication between AI applications and external tools. This foundational understanding helps you build and integrate MCP solutions effectively.
+
+### MCP servers
+
+MCP servers are specialized programs that provide specific tools and capabilities to AI models through [Model Context Protocol](https://modelcontextprotocol.io/introduction). Each server focuses on a particular domain, like GitHub integration, database access, or file management. You can think of them as extensions that give AI models the ability to interact with external systems and data sources.
+
+### MCP clients
+
+MCP clients are the bridge between AI applications and MCP servers. They enable AI systems to discover, connect to, and interact with external tools and data sources through the standardized MCP protocol. A single client can connect to multiple MCP servers, while each server can also serve multiple clients, creating a flexible many-to-many relationship that allows for rich integration possibilities.
+
+When you interact with an AI application that supports MCP, the client establishes connections to configured servers, discovers available tools and resources from all connected servers, executes requests when needed, and manages contextual information to enhance AI responses.
+
+### MCP Gateway
+
+The [MCP Gateway](/manuals/ai/mcp-catalog-and-toolkit/mcp-gateway.md) is Docker's open-source solution which connects MCP servers to MCP clients. It provides a unified endpoint that consolidates multiple MCP servers from the Docker MCP Catalog into a single, manageable connection point. Instead of clients connecting directly to individual MCP servers, the MCP Gateway sits in between, providing centralized connectivity, secure layer, and enterprise controls.
+
+In the context of Docker's MCP ecosystem:
+
+-  MCP Catalog hosts the MCP servers (the tools/capabilities)
+-  MCP Gateway orchestrates and secures those servers
+-  MCP clients connect through the Gateway to access cataloged servers
+
+## How MCP components work together
+
+MCP components communicate through a structured flow that connects your development environment to external services. The following diagram shows how MCP works in practice with the key components:
+
+1. The MCP client (VS Code) serves as your development environment where you interact with AI assistance.
+2. The MCP Gateway acts as a secure orchestration layer, managing and routing connection between the client (VS Code) and the GitHub Official MCP server.
+3. The MCP server acts as the bridge, providing specialized capabilities. In the following example, the GitHub Official server offers tools like creating pull requests, creating branches, and retrieving issues.
+4. The data source (GitHub) provides the actual service or platform that the MCP server connects to for real-time information and actions.
+
+This architecture enables seamless integration where you can access GitHub functionality directly from VS Code through standardized MCP communication. The server translates requests between your development environment and external services, making it easy to incorporate various tools and data sources into your AI-assisted workflow without complex custom integrations.
+
+  ![Example of the GitHub MCP server](./images/mcp-toolkit-overview.png)
 
 > [!TIP]
 > Example:

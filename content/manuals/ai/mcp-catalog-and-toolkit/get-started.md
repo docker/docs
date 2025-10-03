@@ -132,4 +132,4 @@ After you've installed MCP servers, you can add clients to the MCP Toolkit. Thes
 
 - [MCP Toolkit](/manuals/ai/mcp-catalog-and-toolkit/toolkit.md)
 - [MCP Catalog](/manuals/ai/mcp-catalog-and-toolkit/catalog.md)
-- [Open-source MCP Gateway](/manuals/ai/mcp-gateway/_index.md)
+- [Open-source MCP Gateway](/manuals/ai/mcp-catalog-and-toolkit/mcp-gateway.md)
