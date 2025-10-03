@@ -1,6 +1,6 @@
 ---
 description: Learn how to install Docker Engine on a 32-bit Raspberry Pi OS system. These instructions cover
-  the different installation methods, how to uninstall, and next steps. Note that 32-bit support is deprecated starting with Docker Engine v29.
+  the different installation methods, how to uninstall, and next steps. Note that 32-bit support is deprecated in Docker Engine v29 and later.
 keywords: requirements, apt, installation, install docker engine, Raspberry Pi OS, install, uninstall, upgrade,
   update, deprecated
 title: Install Docker Engine on Raspberry Pi OS (32-bit / armhf) [DEPRECATED]
