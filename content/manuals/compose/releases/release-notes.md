@@ -29,6 +29,21 @@ For more detailed information, see the [release notes in the Compose repo](https
 
 - Dependencies upgrade: bump compose-go to v2.9.0
 
+## 2.40.0
+
+{{< release-date date="2025-10-03" >}}
+
+### Bug fixes and enhancements
+
+- Added the option to publish Compose applications as a `compose.yaml` with images
+- Fixed support for secrets based on environment variables when building with bake
+- Fixed support for escaped '$' character when building with bake
+
+### Update
+
+- Dependencies upgrade: bump docker engine and cli to v28.5.0
+
+
 ## 2.39.3
 
 {{< release-date date="2025-09-09" >}}
