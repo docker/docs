@@ -6,6 +6,7 @@ Amazon
 Anchore
 Apple
 Artifactory
+armhf
 auditable
 autolock
 Azure
