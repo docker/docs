@@ -214,8 +214,8 @@ msiexec /x "DockerDesktop.msi" /quiet
 | `OVERRIDEPROXYHTTP` | Sets the URL of the HTTP proxy that must be used for outgoing HTTP requests. | None |
 | `OVERRIDEPROXYHTTPS` | Sets the URL of the HTTP proxy that must be used for outgoing HTTPS requests. | None |
 | `OVERRIDEPROXYEXCLUDE` | Bypasses proxy settings for the hosts and domains. Uses a comma-separated list. | None |
-| `OVERRIDEPROXYPAC` | Sets the PAC file URL. Applicable for `manual` proxy mode. | None |
-| `OVERRIDEPROXYEMBEDDEDPAC` | Specifies an embedded PAC (Proxy Auto-Config) script. Applicable for `manual` proxy mode. | None |
+| `OVERRIDEPROXYPAC` | Sets the PAC file URL. This setting takes effect only when using `manual` proxy mode. | None |
+| `OVERRIDEPROXYEMBEDDEDPAC` | Specifies an embedded PAC (Proxy Auto-Config) script. This setting takes effect only when using `manual` proxy mode and has precedence over the override-proxy-pac flag.| None |
 | `HYPERVDEFAULTDATAROOT` | Specifies the default location for the Hyper-V VM disk. | None |
 | `WINDOWSCONTAINERSDEFAULTDATAROOT` | Specifies the default location for Windows containers. | None |
 | `WSLDEFAULTDATAROOT` | Specifies the default location for the WSL distribution disk. | None |
