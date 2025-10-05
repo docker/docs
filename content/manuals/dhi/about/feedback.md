@@ -6,8 +6,9 @@ keywords: software supply chain security, feedback, bugs, discussion, questions
 weight: 21
 ---
 
-We’re committed to maintaining the quality, security, and reliability of the Docker Hardened Images (DHI).
-As part of that commitment, we encourage the community to collaborate in improving the Hardened Images ecosystem.
+Committed to maintaining the quality, security, and reliability of the Docker Hardened Images (DHI)
+a repository has been created as a point of contact to encourage the community to collaborate
+in improving the Hardened Images ecosystem.
 
 ## Questions or discussions
 
@@ -29,11 +30,11 @@ You can [open a new issue](https://github.com/docker-hardened-images/discussion/
 - Documentation improvements
 - Security vulnerabilities (see security policy)
 
-We encourage to first search existing issues to see if it’s already been reported.
+It's encouraged to first search existing issues to see if it’s already been reported.
 The DHI team reviews reports regularly and appreciates clear, actionable feedback.
 
 ## Responsible Security Disclosure
 
 It is forbidden to post details of vulnerabilities before coordinated disclosure and resolution.
 
-If you discover a security vulnerability, please report it responsibly by following Docker’s [security disclosure](https://www.docker.com/trust/vulnerability-disclosure-policy/).
+If you discover a security vulnerability, kindly report it responsibly by following Docker’s [security disclosure](https://www.docker.com/trust/vulnerability-disclosure-policy/).
