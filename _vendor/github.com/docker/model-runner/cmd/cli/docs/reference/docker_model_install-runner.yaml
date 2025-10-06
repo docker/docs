@@ -28,8 +28,9 @@ options:
       swarm: false
     - option: port
       value_type: uint16
-      default_value: "12434"
-      description: Docker container port for Docker Model Runner
+      default_value: "0"
+      description: |
+        Docker container port for Docker Model Runner (default: 12434 for Docker CE, 12435 for Cloud mode)
       deprecated: false
       hidden: false
       experimental: false
