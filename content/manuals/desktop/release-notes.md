@@ -1934,8 +1934,6 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 {{< release-date date="2023-10-04" >}}
 
-{{< desktop-install win=true version="4.24.1" build_path="/123237/" >}}
-
 ### Bug fixes and enhancements
 
 #### For Windows
