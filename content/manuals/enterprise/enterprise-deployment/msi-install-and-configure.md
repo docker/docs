@@ -111,12 +111,14 @@ msiexec /i "DockerDesktop.msi" /L*V ".\msi.log" /quiet /norestart ALLOWEDORG="yo
 ```
 
 #### Install interactively specifying a PAC file
+
 ```powershell
 PowerShell
  msiexec --% /i "DockerDesktop.msi" /L*V ".\msi.log"  PROXYHTTPMODE="manual" OVERRIDEPROXYPAC="http://localhost:8080/myproxy.pac"
 ```
 
 #### Install interactively specifying a PAC script
+
 ```powershell
 PowerShell
  msiexec --% /i "DockerDesktop.msi" /L*V ".\msi.log"  PROXYHTTPMODE="manual" OVERRIDEPROXYEMBEDDEDPAC="function FindProxyForURL(url,host) {return ""DIRECT"" ;; }"
@@ -215,7 +217,7 @@ msiexec /x "DockerDesktop.msi" /quiet
 | `OVERRIDEPROXYHTTPS` | Sets the URL of the HTTP proxy that must be used for outgoing HTTPS requests. | None |
 | `OVERRIDEPROXYEXCLUDE` | Bypasses proxy settings for the hosts and domains. Uses a comma-separated list. | None |
 | `OVERRIDEPROXYPAC` | Sets the PAC file URL. This setting takes effect only when using `manual` proxy mode. | None |
-| `OVERRIDEPROXYEMBEDDEDPAC` | Specifies an embedded PAC (Proxy Auto-Config) script. This setting takes effect only when using `manual` proxy mode and has precedence over the override-proxy-pac flag.| None |
+| `OVERRIDEPROXYEMBEDDEDPAC` | Specifies an embedded PAC (Proxy Auto-Config) script. This setting takes effect only when using `manual` proxy mode and has precedence over the `OVERRIDEPROXYPAC` flag.| None |
 | `HYPERVDEFAULTDATAROOT` | Specifies the default location for the Hyper-V VM disk. | None |
 | `WINDOWSCONTAINERSDEFAULTDATAROOT` | Specifies the default location for Windows containers. | None |
 | `WSLDEFAULTDATAROOT` | Specifies the default location for the WSL distribution disk. | None |
