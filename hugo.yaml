@@ -345,7 +345,7 @@ module:
           includeFiles: "*.yaml"
 
     # Model CLI
-    - path: github.com/docker/model-cli
+    - path: github.com/docker/model-runner/cmd/cli
       mounts:
         - source: docs/reference
           target: data/model-cli
