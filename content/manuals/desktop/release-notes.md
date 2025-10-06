@@ -30,6 +30,40 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.48.0
+
+{{< release-date date="2025-10-09" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.48.0" build_path="//" >}}
+
+> [IMPORTANT]
+>
+> Support for macOS 13 has ended. Installing Docker Desktop will require macOS 14 in the next release.
+
+### New
+
+- You can now specify PAC files and Embedded PAC scripts with installer flags. 
+- Administrators can set proxy settings via macOS configuration profiles. 
+
+### Upgrades
+
+- [Docker Compose v2.40.0](https://github.com/docker/compose/releases/tag/v2.40.0)
+- [Docker Buildx v0.29.1](https://github.com/docker/buildx/releases/tag/v0.29.1)
+- [Docker Engine v28.5.0](https://docs.docker.com/engine/release-notes/28/#2850)
+
+### Bug fixes and enhancements
+
+#### For all platforms 
+
+- Fixed an issue where kind cluster state is sometimes reset when Desktop restarts. Fixes [docker/for-mac#77445](https://github.com/docker/for-mac/issues/7745).
+- Removed the obsolete `mcp` key to align with the latest VS Code MCP server changes.
+- Update credential helpers to [v0.9.4](https://github.com/docker/docker-credential-helpers/releases/tag/v0.9.4).
+
+#### For Windows
+
+- Removed the `HKLM\SOFTWARE\Docker Inc.\Docker\1.0` registry key. Look for `docker.exe` in the path to find out where Docker Desktop is installed instead.
+- Fixed startup in WSL 2 mode when IPv6 has been disabled.
+
 ## 4.47.0
 
 {{< release-date date="2025-09-25" >}}
