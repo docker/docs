@@ -134,7 +134,7 @@ The `install` command accepts the following flags:
 - `--override-proxy-pac=<PAC file URL>`: Sets the PAC file URL. This setting takes effect only when using `manual` proxy mode.
 - `--override-proxy-embedded-pac=<PAC script>`: Specifies an embedded PAC (Proxy Auto-Config) script. This setting takes effect only when using `manual` proxy mode and has precedence over the `--override-proxy-pac` flag.
 
-###### Example of specifying PAC file / PAC script:
+###### Example of specifying PAC file / PAC script
 
 ```console
   $ sudo /Applications/Docker.app/Contents/MacOS/install --user testuser --proxy-http-mode="manual" --override-proxy-pac="http://localhost:8080/myproxy.pac" --override-proxy-embedded-pac="function FindProxyForURL(url, host) { return \"DIRECT\"; }"
