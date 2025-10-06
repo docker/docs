@@ -10,6 +10,21 @@ toc_max: 2
 This page contains information about the new features, improvements, and bug
 fixes in [Docker Buildx](https://github.com/docker/buildx).
 
+## 0.29.1
+
+{{< release-date date="2025-10-03" >}}
+
+The full release notes for this release are available
+[on GitHub](https://github.com/docker/buildx/releases/tag/v0.29.1).
+
+### Enhancements
+
+- `imagetools`: Silence warning for empty-type mediatype used in artifacts. [docker/buildx#3448](https://github.com/docker/buildx/pull/3448)
+
+### Bug fixes
+
+- `imagetools`: Fix possible chain copy on create. [docker/buildx#3447](https://github.com/docker/buildx/pull/3447)
+
 ## 0.29.0
 
 {{< release-date date="2025-09-30" >}}
