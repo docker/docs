@@ -120,7 +120,7 @@ as **Pending** until they update to version 4.41 or later.
 
 ### Enable sign-in enforcement for individual unassociated machines
 
-To enable sign-in enforcement for indiviudal unassociated machines:
+To enable sign-in enforcement for individual unassociated machines:
 
 1. Sign in to the [Admin Console](https://app.docker.com/admin) and select
 your organization.
