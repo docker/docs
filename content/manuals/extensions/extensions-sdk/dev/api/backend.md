@@ -110,8 +110,7 @@ console.log(output);
 
 ## Invoke an extension binary on the host
 
-You can run binaries defined in the [host section](../../architecture/metadata.md#host-section)
-of the extension metadata.
+Invoke a binary on the host. The binary is typically shipped with your extension using the [host section](../../architecture/metadata.md#host-section) in the extension metadata. Note that extensions run with user access rights, this API is not restricted to binaries listed in the [host section](../../architecture/metadata.md#host-section) of the extension metadata (some extensions might install software during user interaction, and invoke newly installed binaries even if not listed in the extension metadata).
 
 For example, execute the shipped binary `kubectl -h` command in the host:
 
