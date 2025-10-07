@@ -86,12 +86,19 @@ be required to sign in to Docker Desktop. Once they sign in, their email
 addresses will appear in the Unassociated list, allowing you to then add them
 to your organization.
 
+You can enable sign-in enforcement using two methods:
+
+- For all unassociated machines in your organization
+- For individual unassociated machines
+
 > [!IMPORTANT]
 >
 > Sign-in enforcement only takes effect after Docker Desktop is restarted.
 Users can continue using Docker Desktop until their next restart.
 
 ### Enable sign-in enforcement for all unassociated machines
+
+To enable sign-in enforcement for all unassociated machines:
 
 1. Sign in to the [Admin Console](https://app.docker.com/admin) and select
 your organization.
@@ -112,6 +119,8 @@ using Docker Desktop normally until they update. Their status shows
 as **Pending** until they update to version 4.41 or later.
 
 ### Enable sign-in enforcement for individual unassociated machines
+
+To enable sign-in enforcement for individual unassociated machines:
 
 1. Sign in to the [Admin Console](https://app.docker.com/admin) and select
 your organization.
