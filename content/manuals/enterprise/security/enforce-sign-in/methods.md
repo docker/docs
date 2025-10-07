@@ -77,7 +77,18 @@ Deploy the registry key across your organization using Group Policy:
 
 {{< summary-bar feature_name="Config profiles" >}}
 
-Configuration profiles provide the most secure enforcement method for macOS because they're protected by Apple's System Integrity Protection.
+Configuration profiles provide the most secure enforcement method for macOS, as they're protected by Apple's System Integrity Protection.
+
+The payload is a dictionary of key-values. Docker Desktop supports the following keys:
+
+* `allowedOrgs` sets a list of organizations in one single string, where each organization is separated by a semi-colon.
+* `overrideProxyHTTP`: sets the URL of the HTTP proxy that must be used for outgoing HTTP requests.
+* `overrideProxyHTTPS`: sets the URL of the HTTP proxy that must be used for outgoing HTTPS requests.
+* `overrideProxyExclude` bypasses proxy settings for the specified hosts and domains. Uses a comma-separated list.
+* `overrideProxyPAC` sets the file path where the PAC file is located. It has precedence over the remote PAC file on the selected proxy.
+* `overrideProxyEmbeddedPAC` sets the content of a in-memory PAC file. It has precedence over `overrideProxyPAC`.
+
+Overriding at least one of the proxy settings via Configuration profiles will automatically lock the settings as they're managed by macOS.
 
 1. Create a file named `docker.mobileconfig` with this content:
    ```xml
@@ -104,6 +115,10 @@ Configuration profiles provide the most secure enforcement method for macOS beca
             <string>Your Company Name</string>
             <key>allowedOrgs</key>
             <string>first_org;second_org</string>
+            <key>overrideProxyHTTP</key>
+            <string>http://company.proxy:80</string>
+            <key>overrideProxyHTTPS</key>
+            <string>https://company.proxy:443</string>
           </dict>
         </array>
         <key>PayloadType</key>
