@@ -15,11 +15,19 @@ download-url-base: https://download.docker.com/linux/raspbian
 
 > [!WARNING]
 >
-> Raspberry Pi OS 32-bit (armhf) will soon be deprecated. Starting with Docker Engine v29,
-> new major versions will no longer provide packages for Raspberry Pi OS 32-bit (armhf).
+> **Raspberry Pi OS 32-bit (armhf) Deprecation**
 >
-> It is recommended to migrate to the 64-bit version of Raspberry Pi OS, which
-> is supported and follows the [Debian installation instructions](debian.md).
+> Docker Engine v28 will be the last major version to support Raspberry Pi OS 32-bit (armhf).
+> Starting with Docker Engine v29, new major versions will no longer provide packages for Raspberry Pi OS 32-bit (armhf).
+>
+> **Migration options**
+> - **64-bit ARM:** Install the Debian `arm64` packages (fully supported). See the
+>   [Debian installation instructions](debian.md).
+> - **32-bit ARM (v7):** Install the Debian `armhf` packages (targets ARMv7 CPUs).
+>
+> **Note:** Older devices based on the ARMv6 architecture are no longer supported by official packages, including:
+> - Raspberry Pi 1 (Model A/B/A+/B+)
+> - Raspberry Pi Zero and Zero W
 
 To get started with Docker Engine on Raspberry Pi OS, make sure you
 [meet the prerequisites](#prerequisites), and then follow the
@@ -59,12 +67,15 @@ To install Docker Engine, you need one of the following OS versions:
 
 > [!WARNING]
 >
-> Support for 32-bit (armhf) Raspberry Pi OS will soon end. Docker Engine versions
-> prior to v29 will continue to work, but new major versions starting with
-> v29 will no longer provide 32-bit packages.
+> Docker Engine v28 is the last major version to support Raspberry Pi OS 32-bit (armhf). Starting with v29,
+> no new packages will be provided for 32-bit Raspberry Pi OS.
 >
-> Switch to 64-bit Raspberry Pi OS and follow
-> the [Debian installation instructions](debian.md) for continued support.
+> Migration options:
+> - 64-bit ARM: use Debian `arm64` packages; see the [Debian installation instructions](debian.md).
+> - 32-bit ARM (v7): use Debian `armhf` packages (targets ARMv7 CPUs).
+>
+> Note: ARMv6-based devices (Raspberry Pi 1 models and Raspberry Pi Zero/Zero W) are not supported by
+> official packages.
 
 ### Uninstall old versions
 
