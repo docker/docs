@@ -11,15 +11,15 @@ weight: 90
 
 For braced expressions, the following formats are supported:
  
-| Syntax                | `VAR` has value     | `VAR` is empty      | `VAR` has nonexist |
-|-----------------------|---------------------|---------------------|--------------------|
-| `${VAR}`              | `VAR` value         | empty string        | nonsense error     |
-| `${VAR:-default}`     | `VAR` value         | `default` value     | `default` value    |
-| `${VAR-default}`      | `VAR` value         | empty string        | `default` value    |
-| `${VAR:?error}`       | `VAR` value         | exit with `error`   | exit with `error`  |
-| `${VAR?error}`        | `VAR` value         | empty string        | exit with `error`  |
-| `${VAR:+replacement}` | `replacement` value | empty string        | empty string       |
-| `${VAR+replacement}`  | `replacement` value | `replacement` value | empty string       |
+| Syntax                | `VAR` has value     | `VAR` is empty      | `VAR` is not set  |
+|-----------------------|---------------------|---------------------|-------------------|
+| `${VAR}`              | `VAR` value         | empty string        | nonsense error    |
+| `${VAR:-default}`     | `VAR` value         | `default` value     | `default` value   |
+| `${VAR-default}`      | `VAR` value         | empty string        | `default` value   |
+| `${VAR:?error}`       | `VAR` value         | exit with `error`   | exit with `error` |
+| `${VAR?error}`        | `VAR` value         | empty string        | exit with `error` |
+| `${VAR:+replacement}` | `replacement` value | empty string        | empty string      |
+| `${VAR+replacement}`  | `replacement` value | `replacement` value | empty string      |
 
 Interpolation can also be nested:
 
