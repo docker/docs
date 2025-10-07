@@ -12,9 +12,9 @@ aliases:
 
 A Compose file can use variables to offer more flexibility. If you want to quickly switch 
 between image tags to test multiple versions, or want to adjust a volume source to your local
-environment, you don't need to edit the Compose file each time, you can just set variables that insert values into your Compose file at run time.
+environment, you don't need to edit the Compose file each time, you can just set variables that insert values into your Compose file at runtime.
 
-Interpolation can also be used to insert values into your Compose file at run time, which is then used to pass variables into your container's environment
+Interpolation can also be used to insert values into your Compose file at runtime, which is then used to pass variables into your container's environment
 
 Below is a simple example: 
 
