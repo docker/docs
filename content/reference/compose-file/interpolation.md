@@ -10,17 +10,16 @@ weight: 90
 {{% include "compose/interpolation.md" %}}
 
 For braced expressions, the following formats are supported:
-- Direct substitution
-  - `${VAR}` -> value of `VAR`
-- Default value
-  - `${VAR:-default}` -> value of `VAR` if set and non-empty, otherwise `default`
-  - `${VAR-default}` -> value of `VAR` if set, otherwise `default`
-- Required value
-  - `${VAR:?error}` -> value of `VAR` if set and non-empty, otherwise exit with error
-  - `${VAR?error}` -> value of `VAR` if set, otherwise exit with error
-- Alternative value
-  - `${VAR:+replacement}` -> `replacement` if `VAR` is set and non-empty, otherwise empty
-  - `${VAR+replacement}` -> `replacement` if `VAR` is set, otherwise empty
+ 
+| Syntax                | `VAR` has value     | `VAR` is empty      | `VAR` has nonexist |
+|-----------------------|---------------------|---------------------|--------------------|
+| `${VAR}`              | `VAR` value         | empty string        | nonsense error     |
+| `${VAR:-default}`     | `VAR` value         | `default` value     | `default` value    |
+| `${VAR-default}`      | `VAR` value         | empty string        | `default` value    |
+| `${VAR:?error}`       | `VAR` value         | exit with `error`   | exit with `error`  |
+| `${VAR?error}`        | `VAR` value         | empty string        | exit with `error`  |
+| `${VAR:+replacement}` | `replacement` value | empty string        | empty string       |
+| `${VAR+replacement}`  | `replacement` value | `replacement` value | empty string       |
 
 Interpolation can also be nested:
 
