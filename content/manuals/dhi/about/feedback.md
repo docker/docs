@@ -1,9 +1,9 @@
 ---
-title: Questions, bugs, feedback
+title: Questions, bugs, or feedback
 linkTitle: Feedback
 description: How to interact with the DHI team
 keywords: software supply chain security, feedback, bugs, discussion, questions
-weight: 21
+weight: 50
 ---
 
 Committed to maintaining the quality, security, and reliability of the Docker Hardened Images (DHI)
@@ -13,7 +13,7 @@ in improving the Hardened Images ecosystem.
 ## Questions or discussions
 
 You can use the [GitHub Discussions board](https://github.com/docker-hardened-images/discussion) to engage with the DHI
-team for
+team for:
 
 - General questions about DHIs
 - Best practices and recommendations
@@ -21,9 +21,9 @@ team for
 - Show and tell your implementations
 - Community announcements
 
-## Reporting Bugs or Issues
+## Reporting bugs or issues
 
-You can [open a new issue](https://github.com/docker-hardened-images/discussion/issues/) for topics such as
+You can [open a new issue](https://github.com/docker-hardened-images/discussion/issues/) for topics such as:
 
 - Bug reports
 - Feature requests
@@ -33,8 +33,8 @@ You can [open a new issue](https://github.com/docker-hardened-images/discussion/
 It's encouraged to first search existing issues to see if it’s already been reported.
 The DHI team reviews reports regularly and appreciates clear, actionable feedback.
 
-## Responsible Security Disclosure
+## Responsible security disclosure
 
 It is forbidden to post details of vulnerabilities before coordinated disclosure and resolution.
 
-If you discover a security vulnerability, kindly report it responsibly by following Docker’s [security disclosure](https://www.docker.com/trust/vulnerability-disclosure-policy/).
+If you discover a security vulnerability, report it responsibly by following Docker’s [security disclosure](https://www.docker.com/trust/vulnerability-disclosure-policy/).

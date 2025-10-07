@@ -20,9 +20,9 @@ params:
       description: Learn about the different image types, distributions, and variants offered in the Docker Hardened Images catalog.
       icon: view_module
       link: /dhi/about/available/
-    - title: Questions, bugs, feedback
+    - title: Questions, bugs, or feedback
       icon: question_exchange
-      description: We welcome all contributions and feedback — whether it’s a bug report, feature suggestion, or security concern.
+      description: Docker welcomes all contributions and feedback — whether it’s a bug report, feature suggestion, or security concern.
       link: /dhi/about/feedback 
 ---
 
