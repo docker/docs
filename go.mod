@@ -27,7 +27,7 @@ require (
 	github.com/distribution/reference v0.6.0 // indirect
 	github.com/dlclark/regexp2 v1.11.0 // indirect
 	github.com/docker/buildx v0.29.1 // indirect
-	github.com/docker/cli v28.4.0+incompatible // indirect; see "replace" rule at the bottom for actual version
+	github.com/docker/cli v28.5.1+incompatible // indirect; see "replace" rule at the bottom for actual version
 	github.com/docker/compose/v2 v2.40.0 // indirect
 	github.com/docker/distribution v2.8.3+incompatible // indirect
 	github.com/docker/docker v28.4.0+incompatible // indirect; see "replace" rule at the bottom for actual version
@@ -71,7 +71,7 @@ require (
 	github.com/moby/buildkit v0.25.0 // indirect
 	github.com/moby/docker-image-spec v1.3.1 // indirect
 	github.com/moby/locker v1.0.1 // indirect
-	github.com/moby/moby v28.4.0+incompatible // indirect; see "replace" rule at the bottom for actual version
+	github.com/moby/moby v28.5.1+incompatible // indirect; see "replace" rule at the bottom for actual version
 	github.com/moby/sys/atomicwriter v0.1.0 // indirect
 	github.com/moby/sys/sequential v0.6.0 // indirect
 	github.com/moby/term v0.5.2 // indirect
@@ -131,13 +131,13 @@ require (
 
 replace (
 	github.com/docker/buildx => github.com/docker/buildx v0.29.1
-	github.com/docker/cli => github.com/docker/cli v28.4.0+incompatible
+	github.com/docker/cli => github.com/docker/cli v28.5.1+incompatible
 	github.com/docker/compose/v2 => github.com/docker/compose/v2 v2.39.4
 	github.com/docker/docker => github.com/docker/docker v28.4.0+incompatible
 	github.com/docker/model-runner/cmd/cli => github.com/docker/model-runner/cmd/cli v0.1.44
 	github.com/docker/scout-cli => github.com/docker/scout-cli v1.18.4
 	github.com/moby/buildkit => github.com/moby/buildkit v0.25.0
-	github.com/moby/moby => github.com/moby/moby v28.4.0+incompatible
+	github.com/moby/moby => github.com/moby/moby v28.5.1+incompatible
 )
 
 replace github.com/docker/mcp-gateway => github.com/docker/mcp-gateway v0.13.1-0.20250730013131-e08a3be84765
