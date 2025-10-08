@@ -1,7 +1,8 @@
 # docker mcp catalog show
 
 <!---MARKER_GEN_START-->
-Show a catalog
+Display the contents of a catalog including all server definitions and metadata.
+If no name is provided, shows the Docker official catalog.
 
 ### Options
 

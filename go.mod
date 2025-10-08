@@ -34,7 +34,7 @@ require (
 	github.com/docker/docker-credential-helpers v0.9.3 // indirect
 	github.com/docker/go-connections v0.6.0 // indirect
 	github.com/docker/go-units v0.5.0 // indirect
-	github.com/docker/mcp-gateway v0.13.1-0.20250730013131-e08a3be84765 // indirect
+	github.com/docker/mcp-gateway v0.22.0 // indirect
 	github.com/docker/model-distribution v0.0.0-20250918153037-7d9fc7b72b57 // indirect
 	github.com/docker/model-runner v0.0.0-20250911130340-38bb0171c947 // indirect
 	github.com/docker/model-runner/cmd/cli v0.1.44 // indirect
@@ -138,6 +138,5 @@ replace (
 	github.com/docker/scout-cli => github.com/docker/scout-cli v1.18.4
 	github.com/moby/buildkit => github.com/moby/buildkit v0.25.0
 	github.com/moby/moby => github.com/moby/moby v28.5.1+incompatible
+	github.com/docker/mcp-gateway => github.com/docker/mcp-gateway v0.22.0
 )
-
-replace github.com/docker/mcp-gateway => github.com/docker/mcp-gateway v0.13.1-0.20250730013131-e08a3be84765

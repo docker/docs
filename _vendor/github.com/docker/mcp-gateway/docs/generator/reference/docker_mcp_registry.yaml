@@ -1,0 +1,16 @@
+command: docker mcp registry
+short: Registry operations
+long: Registry operations
+pname: docker mcp
+plink: docker_mcp.yaml
+cname:
+    - docker mcp registry convert
+clink:
+    - docker_mcp_registry_convert.yaml
+deprecated: false
+hidden: true
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

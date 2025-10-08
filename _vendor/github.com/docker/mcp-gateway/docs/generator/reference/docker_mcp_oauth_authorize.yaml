@@ -4,6 +4,16 @@ long: Authorize the specified OAuth app.
 usage: docker mcp oauth authorize <app>
 pname: docker mcp oauth
 plink: docker_mcp_oauth.yaml
+options:
+    - option: scopes
+      value_type: string
+      description: OAuth scopes to request (space-separated)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
 deprecated: false
 hidden: true
 experimental: false

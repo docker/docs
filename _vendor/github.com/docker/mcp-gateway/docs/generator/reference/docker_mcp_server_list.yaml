@@ -17,7 +17,7 @@ options:
       kubernetes: false
       swarm: false
 deprecated: false
-hidden: true
+hidden: false
 experimental: false
 experimentalcli: false
 kubernetes: false
