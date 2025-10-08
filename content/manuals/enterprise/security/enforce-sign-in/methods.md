@@ -81,14 +81,17 @@ Configuration profiles provide the most secure enforcement method for macOS, as 
 
 The payload is a dictionary of key-values. Docker Desktop supports the following keys:
 
-* `allowedOrgs` sets a list of organizations in one single string, where each organization is separated by a semi-colon.
-* `overrideProxyHTTP`: sets the URL of the HTTP proxy that must be used for outgoing HTTP requests.
-* `overrideProxyHTTPS`: sets the URL of the HTTP proxy that must be used for outgoing HTTPS requests.
-* `overrideProxyExclude` bypasses proxy settings for the specified hosts and domains. Uses a comma-separated list.
-* `overrideProxyPAC` sets the file path where the PAC file is located. It has precedence over the remote PAC file on the selected proxy.
-* `overrideProxyEmbeddedPAC` sets the content of a in-memory PAC file. It has precedence over `overrideProxyPAC`.
+- `allowedOrgs`: Sets a list of organizations in one single string, where each organization is separated by a semi-colon.
 
-Overriding at least one of the proxy settings via Configuration profiles will automatically lock the settings as they're managed by macOS.
+In Docker Desktop version 4.48 and later, the following keys are also supported: 
+
+- `overrideProxyHTTP`: Sets the URL of the HTTP proxy that must be used for outgoing HTTP requests.
+- `overrideProxyHTTPS`: Sets the URL of the HTTP proxy that must be used for outgoing HTTPS requests.
+- `overrideProxyExclude`: Bypasses proxy settings for the specified hosts and domains. Uses a comma-separated list.
+- `overrideProxyPAC`: Sets the file path where the PAC file is located. It has precedence over the remote PAC file on the selected proxy.
+- `overrideProxyEmbeddedPAC`: Sets the content of an in-memory PAC file. It has precedence over `overrideProxyPAC`.
+
+Overriding at least one of the proxy settings via Configuration profiles will automatically lock the settings as they're managed by macOS. 
 
 1. Create a file named `docker.mobileconfig` with this content:
    ```xml
