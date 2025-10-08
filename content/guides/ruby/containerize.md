@@ -135,7 +135,7 @@ EXPOSE 3000
 CMD ["./bin/rails", "server"]
 ```
 
-This Dockerfile uses a script at `./bin/docker-entrypoint` as the container's entrypiont. This script prepares the database and runs the application server. Below is an example of such a script.
+This Dockerfile uses a script at `./bin/docker-entrypoint` as the container's entrypoint. This script prepares the database and runs the application server. Below is an example of such a script.
 
 ```bash {title=docker-entrypoint}
 #!/bin/bash -e
