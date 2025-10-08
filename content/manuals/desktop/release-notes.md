@@ -50,6 +50,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - [Docker Compose v2.40.0](https://github.com/docker/compose/releases/tag/v2.40.0)
 - [Docker Buildx v0.29.1](https://github.com/docker/buildx/releases/tag/v0.29.1)
 - [Docker Engine v28.5.0](https://docs.docker.com/engine/release-notes/28/#2850)
+- Docker MCP plugin `v0.22.0`
 
 ### Bug fixes and enhancements
 
@@ -58,6 +59,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Fixed an issue where kind cluster state is sometimes reset when Desktop restarts. Fixes [docker/for-mac#77445](https://github.com/docker/for-mac/issues/7745).
 - Removed the obsolete `mcp` key to align with the latest VS Code MCP server changes.
 - Update credential helpers to [v0.9.4](https://github.com/docker/docker-credential-helpers/releases/tag/v0.9.4).
+- Fixed an issue where Docker Desktop used an expired proxy password while waiting for the user to enter a new one. 
 
 #### For Windows
 
