@@ -64,17 +64,16 @@ Docker Desktop integrates with your preferred development tools and languages, a
 
 ## Products inside Docker Desktop
 
+- [Docker MCP Toolkit and Catalog](/manuals/ai/mcp-catalog-and-toolkit/_index.md)
+- [Docker Model Runner](/manuals/ai/model-runner/_index.md)
+- [Ask Gordon](/manuals/ai/gordon/_index.md)
+- [Docker Offload](/manuals/offload/_index.md)
 - [Docker Engine](/manuals/engine/_index.md)
 - Docker CLI client
-- [Docker Scout](../scout/_index.md)
 - [Docker Build](/manuals/build/_index.md)
 - [Docker Compose](/manuals/compose/_index.md)
-- [Ask Gordon](/manuals/ai/gordon/_index.md)
-- [Docker Extensions](../extensions/_index.md)
-- [Docker Content Trust](/manuals/engine/security/trust/_index.md)
+- [Docker Scout](../scout/_index.md)
 - [Kubernetes](https://github.com/kubernetes/kubernetes/)
-- [Credential Helper](https://github.com/docker/docker-credential-helpers/)
-- [Docker Offload](/manuals/offload/_index.md)
 
 ## Next steps
 
