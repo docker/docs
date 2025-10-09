@@ -1,7 +1,7 @@
 ---
 datafolder: mcp-cli
-datafile: docker_mcp_server_list
-title: docker mcp server list
+datafile: docker_mcp_tools_disable
+title: docker mcp tools disable
 layout: cli
 ---
 

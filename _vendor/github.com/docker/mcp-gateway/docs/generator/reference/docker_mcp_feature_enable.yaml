@@ -1,0 +1,19 @@
+command: docker mcp feature enable
+short: Enable an experimental feature
+long: |-
+    Enable an experimental feature.
+
+    Available features:
+      oauth-interceptor      Enable GitHub OAuth flow interception for automatic authentication
+      mcp-oauth-dcr          Enable Dynamic Client Registration (DCR) for automatic OAuth client setup
+      dynamic-tools          Enable internal MCP management tools (mcp-find, mcp-add, mcp-remove)
+usage: docker mcp feature enable <feature-name>
+pname: docker mcp feature
+plink: docker_mcp_feature.yaml
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

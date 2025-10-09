@@ -1,7 +1,7 @@
 ---
 datafolder: mcp-cli
-datafile: docker_mcp_tools_list
-title: docker mcp tools list
+datafile: docker_mcp_catalog_bootstrap
+title: docker mcp catalog bootstrap
 layout: cli
 ---
 

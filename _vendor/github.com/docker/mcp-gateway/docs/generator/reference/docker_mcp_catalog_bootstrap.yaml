@@ -1,0 +1,20 @@
+command: docker mcp catalog bootstrap
+short: |
+    Create a starter catalog file with Docker and Docker Hub server entries as examples
+long: |-
+    Create a starter catalog file with Docker Hub and Docker CLI server entries as examples.
+    This command extracts the official Docker server definitions and creates a properly formatted
+    catalog file that users can modify and use as a foundation for their custom catalogs.
+
+    The output file is standalone and not automatically imported - users can modify it and then
+    import it or use it as a source for the 'catalog add' command.
+usage: docker mcp catalog bootstrap <output-file-path>
+pname: docker mcp catalog
+plink: docker_mcp_catalog.yaml
+deprecated: false
+hidden: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

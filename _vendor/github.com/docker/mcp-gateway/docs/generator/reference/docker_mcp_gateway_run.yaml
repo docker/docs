@@ -35,6 +35,16 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: additional-tools-config
+      value_type: stringSlice
+      default_value: '[]'
+      description: Additional tools paths to merge with the default tools.yaml
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: block-network
       value_type: bool
       default_value: "false"
@@ -117,6 +127,17 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: enable-all-servers
+      value_type: bool
+      default_value: "false"
+      description: |
+        Enable all servers in the catalog (instead of using individual --servers options)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: interceptor
       value_type: stringArray
       default_value: '[]'
@@ -149,10 +170,30 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: mcp-registry
+      value_type: stringSlice
+      default_value: '[]'
+      description: MCP registry URLs to fetch servers from (can be repeated)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: memory
       value_type: string
       default_value: 2Gb
       description: Memory allocated to each MCP Server (default is 2Gb)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: oci-ref
+      value_type: stringArray
+      default_value: '[]'
+      description: OCI image references to use
       deprecated: false
       hidden: false
       experimental: false
@@ -216,6 +257,16 @@ options:
       value_type: stringSlice
       default_value: '[]'
       description: List of tools to enable
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: tools-config
+      value_type: stringSlice
+      default_value: '[tools.yaml]'
+      description: Paths to the tools files (absolute or relative to ~/.docker/mcp/)
       deprecated: false
       hidden: false
       experimental: false
