@@ -3,7 +3,7 @@ description: Find known issues for Docker Desktop
 keywords: mac, troubleshooting, known issues, Docker Desktop
 title: Known issues
 tags: [ Troubleshooting ]
-weight: 30
+weight: 20
 aliases:
  - /desktop/troubleshoot/known-issues/
 ---

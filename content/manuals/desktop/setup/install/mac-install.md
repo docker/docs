@@ -32,16 +32,6 @@ This page provides download links, system requirements, and step-by-step install
 
 *For checksums, see [Release notes](/manuals/desktop/release-notes.md).*
 
-> **Before you install or update**
->
-> • Quit tools that might call Docker in the background (e.g., **Visual Studio Code**, terminals, agent apps).
->
-> • If you manage fleets or install via MDM, prefer the [**PKG installer**](/manuals/enterprise/enterprise-deployment/pkg-install-and-configure.md) (more reliable, controllable).
->
-> • Keep the installer volume mounted until the installation completes.
->
-> If you encounter a "Docker.app is damaged" dialog, see [Fix "Docker.app is damaged" on macOS](/manuals/desktop/troubleshoot-and-support/troubleshoot/mac-damaged-dialog.md).
-
 ## System requirements
 
 {{< tabs >}}
@@ -72,6 +62,16 @@ This page provides download links, system requirements, and step-by-step install
    ```
 {{< /tab >}}
 {{< /tabs >}}
+
+> **Before you install or update**
+>
+> - Quit tools that might call Docker in the background (Visual Studio Code, terminals, agent apps).
+>
+> - If you manage fleets or install via MDM, use the [**PKG installer**](/manuals/enterprise/enterprise-deployment/pkg-install-and-configure.md).
+>
+> - Keep the installer volume mounted until the installation completes.
+>
+> If you encounter a "Docker.app is damaged" dialog, see [Fix "Docker.app is damaged" on macOS](/manuals/desktop/troubleshoot-and-support/troubleshoot/mac-damaged-dialog.md).
 
 ## Install and run Docker Desktop on Mac
 
