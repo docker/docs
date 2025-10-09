@@ -76,4 +76,6 @@ A number of Docker Captains have also created video courses on Docker and Kubern
 > members. This is not an officially translated version of Docker docs and it may not be up to date.
 > You must use the community-translated docs at your own discretion.
 
+- [Subset of Docker docs in Brazilian Portuguese](https://pt.docs.dev.br/p/docker/docs/)
+  translated by [Adiel Cristo](https://github.com/adielcristo).
 - [Subset of Docker docs in Japanese](https://docs.docker.jp/index.html) translated by Docker Captain [Masahito Zembutsu](https://github.com/zembutsu).
