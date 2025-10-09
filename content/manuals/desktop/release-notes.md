@@ -49,7 +49,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 - [Docker Compose v2.40.0](https://github.com/docker/compose/releases/tag/v2.40.0)
 - [Docker Buildx v0.29.1](https://github.com/docker/buildx/releases/tag/v0.29.1)
-- [Docker Engine v28.5.0](https://docs.docker.com/engine/release-notes/28/#2850)
+- [Docker Engine v28.5.1](https://docs.docker.com/engine/release-notes/28/#2851)
 - Docker MCP plugin `v0.22.0`
 
 ### Bug fixes and enhancements
@@ -60,6 +60,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Removed the obsolete `mcp` key to align with the latest VS Code MCP server changes.
 - Update credential helpers to [v0.9.4](https://github.com/docker/docker-credential-helpers/releases/tag/v0.9.4).
 - Fixed an issue where Docker Desktop used an expired proxy password while waiting for the user to enter a new one. 
+- Fixed a bug which caused Docker Desktop to regularly create new processes with Docker CLI tools under certain conditions. Fixes [docker/for-win#14944](https://github.com/docker/for-win/issues/14944).
 
 #### For Windows
 
