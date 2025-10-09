@@ -120,6 +120,10 @@ volumes:
 
 Compose sets `com.docker.compose.project` and `com.docker.compose.volume` labels.
 
+> [!NOTE]
+>
+> Labels defined here apply to named volumes only. They’re stored on the volume resource and visible via `docker volume inspect`. They do not apply to bind mounts and do not change mount semantics.
+
 ### `name`
 
 `name` sets a custom name for a volume. The name field can be used to reference volumes that contain special
