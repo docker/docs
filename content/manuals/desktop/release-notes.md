@@ -51,6 +51,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - [Docker Buildx v0.29.1](https://github.com/docker/buildx/releases/tag/v0.29.1)
 - [Docker Engine v28.5.1](https://docs.docker.com/engine/release-notes/28/#2851)
 - Docker MCP plugin `v0.22.0`
+- [Docker Model CLI v0.1.42](https://github.com/docker/model-cli/releases/tag/v0.1.42)
 
 ### Bug fixes and enhancements
 
