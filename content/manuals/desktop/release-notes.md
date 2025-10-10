@@ -36,7 +36,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 {{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.48.0" build_path="/207573/" >}}
 
-> [IMPORTANT]
+> [!IMPORTANT]
 >
 > Support for macOS 13 has ended. Installing Docker Desktop will require macOS 14 in the next release.
 
