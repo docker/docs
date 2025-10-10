@@ -61,6 +61,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 - Update credential helpers to [v0.9.4](https://github.com/docker/docker-credential-helpers/releases/tag/v0.9.4).
 - Fixed an issue where Docker Desktop used an expired proxy password while waiting for the user to enter a new one. 
 - Fixed a bug which caused Docker Desktop to regularly create new processes with Docker CLI tools under certain conditions. Fixes [docker/for-win#14944](https://github.com/docker/for-win/issues/14944).
+- Fixed a bug which caused models to not be configured for embeddings with Docker Model Runner via Compose. To specify that a model should be configured for embeddings, you must explicitly add the `--embeddings` runtime flag as described in [AI Models in Docker Compose](https://docs.docker.com/ai/compose/models-and-compose/#model-configuration-options). Fixes [docker/model-runner#166](https://github.com/docker/model-runner/issues/166).
 
 #### For Windows
 
