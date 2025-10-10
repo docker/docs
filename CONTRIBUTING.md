@@ -115,6 +115,7 @@ update the CLI reference docs, refer to the corresponding repository:
 - [docker/cli](https://github.com/docker/cli)
 - [docker/buildx](https://github.com/docker/buildx)
 - [docker/compose](https://github.com/docker/compose)
+- [docker/model-runner](https://github.com/docker/model-runner)
 
 Feel free to raise an issue on this repository if you're not sure how to
 proceed, and we'll help out.
