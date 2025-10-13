@@ -42,8 +42,8 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 ### New
 
-- You can now specify PAC files and Embedded PAC scripts with installer flags. 
-- Administrators can set proxy settings via macOS configuration profiles. 
+- You can now specify PAC files and Embedded PAC scripts with installer flags for [macOS](/manuals/desktop/setup/install/mac-install.md#proxy-configuration) and [Windows](/manuals/desktop/setup/install/windows-install.md#proxy-configuration). 
+- Administrators can set proxy settings via [macOS configuration profiles](/manuals/enterprise/security/enforce-sign-in/methods.md#macos-configuration-profiles-method-recommended). 
 
 ### Upgrades
 
