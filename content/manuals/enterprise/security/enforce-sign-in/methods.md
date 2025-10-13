@@ -119,9 +119,9 @@ Overriding at least one of the proxy settings via Configuration profiles will au
             <key>allowedOrgs</key>
             <string>first_org;second_org</string>
             <key>overrideProxyHTTP</key>
-            <string>http://company.proxy:80</string>
+            <string>http://company.proxy:port</string>
             <key>overrideProxyHTTPS</key>
-            <string>https://company.proxy:443</string>
+            <string>https://company.proxy:port</string>
           </dict>
         </array>
         <key>PayloadType</key>
@@ -145,6 +145,7 @@ Overriding at least one of the proxy settings via Configuration profiles will au
    - Change `com.yourcompany.docker.config` to your company identifier
    - Replace `Your Company Name` with your organization name
    - Update the `allowedOrgs` value with your organization names (separated by semicolons)
+   - Replace `company.proxy:port` with http/https proxy server host(or IP address) and port
 1. Deploy the profile using your MDM solution.
 1. Verify the profile appears in **System Settings** > **General** > **Device Management** under **Device (Managed)** profiles.
 
