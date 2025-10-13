@@ -52,5 +52,22 @@ exports.handler = (event, context, callback) => {
         return
     }
 
+    // Handle directory requests by appending index.html for requests without file extensions
+    let uri = request.uri;
+
+    // Check if the URI has a dot after the last slash (indicating a filename)
+    // This is more accurate than just checking the end of the URI
+    const hasFileExtension = /\.[^/]*$/.test(uri.split('/').pop());
+
+    // If it's not a file, treat it as a directory and append index.html
+    if (!hasFileExtension) {
+        // Ensure the URI ends with a slash before appending index.html
+        if (!uri.endsWith("/")) {
+            uri += "/";
+        }
+        uri += "index.html";
+        request.uri = uri;
+    }
+
     callback(null, request);
 };
