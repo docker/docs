@@ -37,6 +37,8 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
+      - uses: actions/checkout@v5
+
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
@@ -89,6 +91,8 @@ jobs:
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
+
+      - uses: actions/checkout@v5
 
       - name: Build and push
         uses: docker/build-push-action@v6
@@ -153,6 +157,8 @@ jobs:
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
+
+      - uses: actions/checkout@v5
 
       - name: Build and push by digest
         id: build
@@ -281,7 +287,7 @@ jobs:
       matrix: ${{ steps.platforms.outputs.matrix }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Create matrix
         id: platforms
