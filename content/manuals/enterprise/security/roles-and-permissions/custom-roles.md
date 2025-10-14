@@ -4,6 +4,8 @@ description:
 keywords:
 ---
 
+{{< summary-bar feature_name="General admin" >}}
+
 Custom roles allow you to create tailored permission sets that match your
 organization's specific needs. This page covers custom roles, and steps
 to create and manage them.
@@ -11,13 +13,10 @@ to create and manage them.
 ## What are custom roles?
 
 Custom roles let you create tailored permission sets for your organization. You
-can assign custom roles to individual users or teams, and they work alongside
-Docker's default roles (Owner, Editor, Member). Users get either a default role
-or custom role, but not both.
+can assign custom roles to individual users or teams.
+Users get either a core role or custom role, but not both.
 
-Use custom roles when Docker's default roles don't fit your needs, such as for
-billing administrators, security auditors, repository managers, or
-department-specific access control.
+Use custom roles when Docker's default roles don't fit your needs.
 
 ## Prerequisites
 
@@ -123,6 +122,16 @@ assignment counts.
 {{< /tab >}}
 {{< tab name="Bulk users" >}}
 
+
+{{< /tab >}}
+{{< tab name="Teams" >}}
+
+1. Sign in to [Docker Home](https://app.docker.com).
+1. Select **Teams**.
+1. Locate the team, then select the **Actions menu**.
+1. Select **Change role**.
+1. In the pop-up window, select a role from the drop-down menu, then
+select **Save**.
 
 {{< /tab >}}
 {{< /tabs >}}

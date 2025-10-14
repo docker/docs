@@ -11,11 +11,11 @@ grid:
   - title: "Core roles"
     description: Learn about Docker's built-in Member, Editor, and Owner roles with predefined permissions.
     icon: "admin_panel_settings"
-    link: /admin/organization/core-roles/
+    link: /enterprise/security/roles-and-permissions/core-roles/
   - title: "Custom roles"
     description: Create tailored permission sets that match your organization's specific needs.
     icon: "tune"
-    link: /admin/organization/custom-roles/
+    link: /enterprise/security/roles-and-permissions/custom-roles/
 weight: 40
 ---
 
@@ -25,10 +25,10 @@ Roles control what users can do in your Docker organization. When you invite use
 
 Docker provides two types of roles to meet different organizational needs:
 
-- Core roles with predefined permissions
-- Custom roles that you can tailor to your specific requirements
+- [Core roles](/manuals/enterprise/security/roles-and-permissions/core-roles.md) with predefined permissions
+- [Custom roles](/manuals/enterprise/security/roles-and-permissions/custom-roles.md) that you can tailor to your specific requirements
 
-## Core roles versus custom roles
+## Docker roles
 
 ### Core roles
 
@@ -42,7 +42,7 @@ Core roles are Docker's built-in roles with predefined permission sets:
 
 Custom roles allow you to create tailored permission sets by selecting specific permissions from categories like user management, team management, billing, and Hub permissions. Use custom roles when Docker's core roles don't fit your needs.
 
-## When to use each type
+## When to use each role
 
 Use core roles when:
 
