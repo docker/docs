@@ -3,7 +3,7 @@ title: Mirror a Docker Hardened Image repository
 linktitle: Mirror an image
 description: Learn how to mirror an image into your organization's namespace and optionally push it to another private registry.
 weight: 20
-keywords: mirror docker image, private container registry, docker hub automation, webhook image sync, secure image distribution
+keywords: mirror docker image, private container registry, docker hub automation, webhook image sync, secure image distribution, internal registry, jfrog artifactory, harbor registry, amazon ecr, google artifact registry, github container registry
 ---
 
 {{< summary-bar feature_name="Docker Hardened Images" >}}
