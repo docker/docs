@@ -24,13 +24,30 @@ Owners can also see the activity logs for their repository if the repository is 
 
 ## Access activity logs
 
-To view activity logs in the Admin Console:
+{{< tabs >}}
+{{< tab name="Docker Home">}}
+
+To view activity logs in Docker Home:
 
 1. Sign in to [Docker Home](https://app.docker.com) and select your
 organization.
 1. Select **Admin Console**, then **Activity logs**.
 
+{{< /tab >}}
+{{< tab name="API">}}
+
+To view activity logs using the Docker Hub API, use the [Audit logs endpoints](https://docs.docker.com/reference/api/hub/latest/#tag/audit-logs).
+
+{{< /tab >}}
+{{< /tabs >}}
+
 ## Filter and customize activity logs
+
+> [!IMPORTANT]
+>
+> Docker Home displays retains activity logs for 30 days. To retrieve
+activities beyond 30 days, you must use the
+[Docker Hub API](https://docs.docker.com/reference/api/hub/latest/#tag/audit-logs).
 
 By default, the **Activity** tab displays all recorded events within
 the last 30 days. To narrow your view, use the calendar to select a specific
@@ -49,11 +66,6 @@ event type.
 > [!NOTE]
 >
 > Events triggered by Docker Support appear under the username **dockersupport**.
-
-> [!IMPORTANT]
->
-> Docker retains activity logs for three months. To maintain access to older
-data, export logs regularly.
 
 ## Types of activity log events
 
