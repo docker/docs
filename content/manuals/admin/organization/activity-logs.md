@@ -45,7 +45,7 @@ To view activity logs using the Docker Hub API, use the [Audit logs endpoints](h
 
 > [!IMPORTANT]
 >
-> Docker Home displays retains activity logs for 30 days. To retrieve
+> Docker Home retains activity logs for 30 days. To retrieve
 activities beyond 30 days, you must use the
 [Docker Hub API](https://docs.docker.com/reference/api/hub/latest/#tag/audit-logs).
 
