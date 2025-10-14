@@ -32,9 +32,10 @@ organization.
 
 ## Filter and customize activity logs
 
-By default, the **Activity** tab displays all recorded events. To narrow your
-view, use the calendar to select a specific date range. The log updates to
-show only the activities that occurred during that period.
+By default, the **Activity** tab displays all recorded events within
+the last 30 days. To narrow your view, use the calendar to select a specific
+date range. The log updates to show only the activities that occurred during
+that period.
 
 You can also filter by activity type. Use the **All Activities** drop-down to
 focus on organization-level, repository-level, or billing-related events.
