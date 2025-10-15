@@ -10,7 +10,8 @@ keywords: network, nftables, firewall
 > Support for nftables introduced in Docker 29.0.0 is experimental, configuration
 > options, behavior and implementation may all change in future releases.
 > The rules for overlay networks have not yet been migrated from iptables.
-> So, nftables cannot be enabled when the daemon has Swarm enabled.
+> Therefore, nftables cannot be enabled when the Docker daemon is running in
+> Swarm mode.
 
 To use nftables instead of iptables, use Docker Engine option
 `--firewall-backend=nftables` on its command line, or `"firewall-backend": "nftables"`
@@ -37,11 +38,13 @@ Each table contains a number of [base chains](https://wiki.nftables.org/wiki-nft
 and further chains are added for each bridge network. The moby project
 has some [internal documentation](https://github.com/moby/moby/blob/master/integration/network/bridge/nftablesdoc/index.md)
 describing its nftables, and how they depend on network and container
-configuration. But, the tables and their rules are likely to change between
-Docker Engine releases.
+configuration. However, the tables and their rules are likely to change
+between Docker Engine releases.
 
-Do not modify Docker's tables directly as the modifications are likely to
-be lost, Docker expects to have full ownership of its tables.
+> [!NOTE]
+>
+> Do not modify Docker's tables directly as the modifications are likely to
+> be lost, Docker expects to have full ownership of its tables.
 
 > [!NOTE]
 >
@@ -119,7 +122,7 @@ unwanted forwarding. Docker's bridges are in a firewalld zone called
 `docker`, it creates a forwarding policy called `docker-forwarding` that
 accepts forwarding from `ANY` zone to the `docker` zone.
 
-As an example, to use nftables to block forwarding between interfaces `eth0`
+For example, to use nftables to block forwarding between interfaces `eth0`
 and `eth1`, you could use:
 
 ```console
@@ -268,5 +271,5 @@ table ip my-table {
 }
 ```
 
-For more detailed information about nftables configuration and advanced usage,
+For more information about nftables configuration and advanced usage,
 refer to the [nftables wiki](https://wiki.nftables.org/wiki-nftables/index.php/Main_Page).

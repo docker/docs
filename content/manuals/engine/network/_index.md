@@ -31,7 +31,8 @@ and the concepts around container networking.
 
 When Docker Engine on Linux starts for the first time, it has a single
 built-in network called the "default bridge" network. When you run a
-container with no `--network` option, it is connected to the default bridge.
+container without the `--network` option, it is connected to the default
+bridge.
 
 Containers attached to the default bridge have access to network services
 outside the Docker host. They use "masquerading" which means, if the
