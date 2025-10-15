@@ -62,9 +62,10 @@ manual configuration is needed.
 
 > [!NOTE]
 >
-> By default, VEX attestations are fetched from `registry.scout.docker.com`. Ensure that you can access this registry
-> if your network has outbound restrictions. You can also mirror the attestations to an alternate registry. For more
-> details, see [Mirror a Docker Hardened Image repository](mirror.md#mirror-from-docker-hub-to-another-registry).
+> By default, VEX attestations are fetched from `registry.scout.docker.com`. Ensure that you can access this registry if
+> your network has outbound restrictions. You can also mirror the attestations to an alternate registry. For more
+> details, see [Mirror a Docker Hardened Image
+> repository](../how-to/mirror.md#mirror-from-docker-hub-to-another-registry).
 
 To manually retrieve the VEX attestation for tools that support it:
 
