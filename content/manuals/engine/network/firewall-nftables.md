@@ -7,7 +7,7 @@ keywords: network, nftables, firewall
 
 > [!WARNING]
 >
-> Support for nftables introduced in moby 29.0.0 is experimental, configuration
+> Support for nftables introduced in Docker 29.0.0 is experimental, configuration
 > options, behavior and implementation may all change in future releases.
 > The rules for overlay networks have not yet been migrated from iptables.
 > So, nftables cannot be enabled when the daemon has Swarm enabled.
