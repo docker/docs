@@ -113,7 +113,7 @@ $ iptables -I DOCKER-USER -m iprange -i ext_if ! --src-range 192.0.2.1-192.0.2.3
 ```
 
 You can combine `-s` or `--src-range` with `-d` or `--dst-range` to control both
-the source and destination. For instance, if the Docker host has addresses
+the source and destination. For example, if the Docker host has addresses
 `2001:db8:1111::2` and `2001:db8:2222::2`, you can make rules specific to
 `2001:db8:1111::2` and leave `2001:db8:2222::2` open.
 
@@ -128,5 +128,5 @@ external address ranges.
 $ iptables -I DOCKER-USER -m state --state RELATED,ESTABLISHED -j ACCEPT
 ```
 
-For more detailed information about iptables configuration and advanced usage,
+For more information about iptables configuration and advanced usage,
 refer to the [Netfilter.org HOWTO](https://www.netfilter.org/documentation/HOWTO/NAT-HOWTO.html).

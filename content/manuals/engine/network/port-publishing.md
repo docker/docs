@@ -5,8 +5,8 @@ description: Accessing container ports
 keywords: network, iptables, firewall
 ---
 
-By default, for both IPv4 and IPv6, the daemon blocks access to ports that have not
-been published. Published container ports are mapped to host IP addresses.
+By default, for both IPv4 and IPv6, the Docker daemon blocks access to ports that
+have not been published. Published container ports are mapped to host IP addresses.
 To do this, it uses firewall rules to perform Network Address Translation (NAT),
 Port Address Translation (PAT), and masquerading.
 
