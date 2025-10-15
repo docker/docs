@@ -8,15 +8,20 @@ weight: 50
 
 {{< summary-bar feature_name="Compose bridge" >}}
 
-Compose Bridge converts your Docker Compose configuration into platform-specific formats—primarily Kubernetes manifests. The default transformation generates Kubernetes manifests and a Kustomize overlay which are designed for deployment on Docker Desktop with Kubernetes enabled.  
+Compose Bridge converts your Docker Compose configuration into platform-specific deployment formats such as Kubernetes manifests. By default, it geneterates:
+
+- Kubernetes manifests 
+- A Kustomize overlay
+
+These outputs are ready for deployment on Docker Desktop with [Kubernetes enabled](/manuals/desktop/settings-and-maintenance/settings.md#kubernetes).  
+
+Compose Bridge helps you bridge the gap between Compose and Kubernetes, making it easier to adopt Kubernetes while keeping the simplicity and efficiency of Compose.
 
 It's a flexible tool that lets you either take advantage of the [default transformation](usage.md) or [create a custom transformation](customize.md) to suit specific project needs and requirements.  
 
-Compose Bridge significantly simplifies the transition from Docker Compose to Kubernetes, making it easier for you to leverage the power of Kubernetes while maintaining the simplicity and efficiency of Docker Compose.
-
 ## How it works
 
-Compose Bridge uses transformations to let you convert a Compose model into another form. 
+Compose Bridge uses transformations to convert a Compose model into another form. 
 
 A transformation is packaged as a Docker image that receives the fully resolved Compose model as `/in/compose.yaml` and can produce any target format file under `/out`.
 
