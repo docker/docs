@@ -84,7 +84,7 @@ CMD ["bun", "server.js"]
 
 Using the official image is straightforward. In the following Dockerfile, you'll notice that the `FROM` instruction uses `oven/bun` as the base image.
 
-You can find the image on [Docker Hub](https://hub.docker.com/r/oven/bun). This is the official image for Bun created by Oven, the company behind Bun, and it's available on Docker Hub.
+You can find the image on [Docker Hub](https://hub.docker.com/r/oven/bun). This is the Docker Official Image for Bun created by Oven, the company behind Bun, and it's available on Docker Hub.
 
 ```dockerfile
 # Use the official Bun image
