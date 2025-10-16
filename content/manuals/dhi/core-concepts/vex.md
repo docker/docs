@@ -60,6 +60,13 @@ vulnerability management.
 When using Docker Scout, VEX statements are automatically applied and no
 manual configuration is needed.
 
+> [!NOTE]
+>
+> By default, VEX attestations are fetched from `registry.scout.docker.com`. Ensure that you can access this registry if
+> your network has outbound restrictions. You can also mirror the attestations to an alternate registry. For more
+> details, see [Mirror a Docker Hardened Image
+> repository](../how-to/mirror.md#mirror-from-docker-hub-to-another-registry).
+
 To manually retrieve the VEX attestation for tools that support it:
 
 ```console
@@ -70,6 +77,9 @@ $ docker scout vex get <your-namespace>/dhi-<image>:<tag> --output vex.json
 >
 > The `docker scout vex get` command requires [Docker Scout
 > CLI](https://github.com/docker/scout-cli/) version 1.18.3 or later.
+>
+> If the image exists locally on your device, you must prefix the image name with `registry://`. For example, use
+> `registry://docs/dhi-python:3.13` instead of `docs/dhi-python:3.13`.
 
 For example:
 
