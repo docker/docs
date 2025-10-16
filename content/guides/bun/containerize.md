@@ -106,7 +106,7 @@ CMD ["bun", "server.js"]
 {{< /tab >}}
 {{< /tabs >}}
 
-Aside from specifying the base image, the Dockerfile also:
+In addition to specifying the base image, the Dockerfile also:
 
 - Sets the working directory in the container to `/app`.
 - Copies the content of the current directory to the `/app` directory in the container.
