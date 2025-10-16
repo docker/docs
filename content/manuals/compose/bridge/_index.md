@@ -29,7 +29,7 @@ Compose Bridge provides its own transformation for Kubernetes using Go templates
 
 For more detailed information on how these transformations work and how you can customize them for your projects, see [Customize](customize.md).
 
-With Composer version X, Compose Bridge now also supports applications that use LLMs via Docker Model Runner.
+Compose Bridge also supports applications that use LLMs via Docker Model Runner.
 
 For more details, see [Use Model Runner](use-model-runner.md).
 

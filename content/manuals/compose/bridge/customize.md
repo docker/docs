@@ -123,7 +123,7 @@ $ docker compose bridge convert --transformations mycompany/transform
 
 #### Model Runner templates
 
-With Composer version X, the default transformation now includes templates for applications that use LLMs:
+The default transformation also includes templates for applications that use LLMs:
 
 - `model-runner-deployment.tmpl`
 - `model-runner-service.tmpl`
