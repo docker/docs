@@ -58,7 +58,7 @@ Choosing DHI offers the advantage of a production-ready image that is lightweigh
 
 {{< tabs >}}
 {{< tab name="Using Docker Hardened Images" >}}
-Docker Hardened Images (DHIs) are available for Bun on [Docker Hub](https://hub.docker.com/hardened-images/catalog/dhi/bun). Unlike using the official image, you must first mirror the Bun image into your organization and then use it as your base image. Follow the [DHI quickstart](/dhi/get-started/) to create a mirrored repository for Bun.
+Docker Hardened Images (DHIs) are available for Bun on [Docker Hub](https://hub.docker.com/hardened-images/catalog/dhi/bun). Unlike using the Docker Official Image, you must first mirror the Bun image into your organization and then use it as your base image. Follow the instructions in the [DHI quickstart](/dhi/get-started/) to create a mirrored repository for Bun.
 
 Mirrored repositories must start with `dhi-`, for example: `FROM <your-namespace>/dhi-bun:<tag>`. In the following Dockerfile, the `FROM` instruction uses `<your-namespace>/dhi-bun:1` as the base image.
 
