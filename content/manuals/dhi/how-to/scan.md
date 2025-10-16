@@ -118,6 +118,26 @@ insecure images.
 For more details on using Docker Scout in CI, see [Integrating Docker
 Scout with other systems](/manuals/scout/integrations/_index.md).
 
+### Comparing Docker Scout results with other scanners
+
+Some vulnerabilities reported by other scanners may not appear in Docker Scout results. This can happen for several
+reasons:
+
+- Hardware-specific vulnerabilities: Certain vulnerabilities may only affect specific hardware architectures (for
+  example, Power10 processors) that are not relevant to Docker images, so they are not reported by Docker Scout.
+- VEX statement filtering: Docker Scout automatically applies VEX statements to document and suppress vulnerabilities
+  that do not apply to the image. If your scanner does not consume VEX statements, you may see more vulnerabilities
+  reported than what appears in Docker Scout results.
+- Temporary vulnerability identifiers: Temporary vulnerability identifiers (like `TEMP-xxxxxxx` from Debian) are not
+  surfaced by Docker Scout, as they are not intended for external reference.
+
+While Docker Scout handles this filtering automatically, you can manually configure similar filtering with other
+scanners using [Grype ignore rules](https://github.com/anchore/grype#specifying-matches-to-ignore) in its configuration
+file (`~/.grype.yaml`) or [Trivy policy exceptions](https://trivy.dev/v0.19.2/misconfiguration/policy/exceptions/) using
+REGO rules to filter out specific vulnerabilities by CVE ID, package name, fix state, or other criteria. You can also
+use VEX statements with other scanners as described in [Use VEX to filter known non-exploitable
+CVEs](#use-vex-to-filter-known-non-exploitable-cves).
+
 ## Grype
 
 [Grype](https://github.com/anchore/grype) is an open-source scanner that checks
