@@ -26,11 +26,11 @@ It also supplies a Kustomize overlay dedicated to Docker Desktop with:
  - A `PersistentVolumeClaim` to use the Docker Desktop storage provisioner `desktop-storage-provisioner` to handle volume provisioning more effectively.
  - A `Kustomization.yaml` file to link all the resources together.
 
-If your Compose file defines a `models` section for a service, Compose Bridge automatically configures your deployment so your service can locate and use its models.
+If your Compose file defines a `models` section for a service, Compose Bridge automatically configures your deployment so your service can locate and use its models via Docker Model Runner.
 
 For each declared model, the transformation injects two environment variables:
 
-- `<MODELNAME>_URL`: The endpoint for the model runner serving that model  
+- `<MODELNAME>_URL`: The endpoint for Docker Model Runner serving that model  
 - `<MODELNAME>_MODEL`: The model’s name or identifier
 
 You can optionally customize these variable names using `endpoint_var` and `model_var`.

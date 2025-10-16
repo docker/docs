@@ -29,12 +29,7 @@ Compose Bridge provides its own transformation for Kubernetes using Go templates
 
 For more detailed information on how these transformations work and how you can customize them for your projects, see [Customize](customize.md).
 
-With Composer version X, Compose Bridge now also supports applications that use LLMs via a model runner such as Docker Model Runner.
-
-When a service includes the `models` top-level element, Compose Bridge automatically generates environment variables that point to model endpoints and model names.  
-Depending on your deployment needs:
-- On Docker Desktop, containers can access Model Runner running on the host during local development.
-- On Kubernetes, Compose Bridge can deploy an in-cluster Model Runner as part of the generated manifests.
+With Composer version X, Compose Bridge now also supports applications that use LLMs via Docker Model Runner.
 
 For more details, see [Use Model Runner](use-model-runner.md).
 
