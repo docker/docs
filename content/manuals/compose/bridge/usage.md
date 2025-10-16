@@ -26,6 +26,25 @@ It also supplies a Kustomize overlay dedicated to Docker Desktop with:
  - A `PersistentVolumeClaim` to use the Docker Desktop storage provisioner `desktop-storage-provisioner` to handle volume provisioning more effectively.
  - A `Kustomization.yaml` file to link all the resources together.
 
+If your Compose file defines a `models` section for a service, Compose Bridge automatically configures your deployment so your service can locate and use its models.
+
+For each declared model, the transformation injects two environment variables:
+
+- `<MODELNAME>_URL`: The endpoint for the model runner serving that model  
+- `<MODELNAME>_MODEL`: The model’s name or identifier
+
+You can optionally customize these variable names using `endpoint_var` and `model_var`.
+
+The default transformation automatically detects which environment you’re targeting and automatically generates the necessary manifests. 
+
+| Environment    | Endpoint                                        |
+| -------------- | ----------------------------------------------- |
+| Docker Desktop | `http://host.docker.internal:12434/engines/v1/` |
+| Kubernetes     | `http://model-runner/engines/v1/`               |
+
+
+For more details, see [Use Model Runner](use-model-runner.md).
+
 ## Use the default Compose Bridge transformation
 
 To convert your Compose file using the default transformation:
@@ -97,3 +116,4 @@ $ docker compose bridge convert --help
 ## What's next?
 
 - [Explore how you can customize Compose Bridge](customize.md)
+- [Use Model Runner](use-model-runner.md).

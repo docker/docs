@@ -4,7 +4,6 @@ linkTitle: Customize
 weight: 20
 description: Learn how to customize Compose Bridge transformations using Go templates and Compose extensions
 keywords: docker compose bridge, customize compose bridge, compose bridge templates, compose to kubernetes, compose bridge transformation, go templates docker
-
 ---
 
 {{< summary-bar feature_name="Compose bridge" >}}
@@ -121,6 +120,19 @@ Use your transformation as a replacement:
 ```console
 $ docker compose bridge convert --transformations mycompany/transform 
 ```
+#### Model Runner templates
+
+With Composer version X, the default transformation now includes templates for applications that use LLMs:
+
+- `model-runner-deployment.tmpl`
+- `model-runner-service.tmpl`
+- `model-runner-pvc.tmpl`
+- `/overlays/model-runner/kustomization.yaml`
+- `/overlays/desktop/deployment.tmpl`
+
+These templates can be extended or replaced to change how the model runner is deployed or configured.
+
+For more details, see [Use Model Runner](use-model-runner.md).
 
 ### Add your own templates
 

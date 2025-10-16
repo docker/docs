@@ -17,7 +17,7 @@ These outputs are ready for deployment on Docker Desktop with [Kubernetes enable
 
 Compose Bridge helps you bridge the gap between Compose and Kubernetes, making it easier to adopt Kubernetes while keeping the simplicity and efficiency of Compose.
 
-It's a flexible tool that lets you either take advantage of the [default transformation](usage.md) or [create a custom transformation](customize.md) to suit specific project needs and requirements.  
+It's a flexible tool that lets you either take advantage of the [default transformation](usage.md) or [create a custom transformation](customize.md) to suit specific project needs and requirements. 
 
 ## How it works
 
@@ -28,6 +28,15 @@ A transformation is packaged as a Docker image that receives the fully resolved 
 Compose Bridge provides its own transformation for Kubernetes using Go templates, so that it is easy to extend for customization by replacing or appending your own templates.
 
 For more detailed information on how these transformations work and how you can customize them for your projects, see [Customize](customize.md).
+
+With Composer version X, Compose Bridge now also supports applications that use LLMs via a model runner such as Docker Model Runner.
+
+When a service includes the `models` top-level element, Compose Bridge automatically generates environment variables that point to model endpoints and model names.  
+Depending on your deployment needs:
+- On Docker Desktop, containers can access Model Runner running on the host during local development.
+- On Kubernetes, Compose Bridge can deploy an in-cluster Model Runner as part of the generated manifests.
+
+For more details, see [Use Model Runner](use-model-runner.md).
 
 ## What's next?
 
