@@ -109,7 +109,7 @@ CMD ["bun", "server.js"]
 Aside from specifying the base image, the Dockerfile also:
 
 - Sets the working directory in the container to `/app`.
-- Copies the contents of the current directory to the `/app` directory in the container.
+- Copies the content of the current directory to the `/app` directory in the container.
 - Exposes port 3000, where the API is listening for requests.
 - And finally, starts the server when the container launches with the command `bun server.js`.
 
