@@ -52,7 +52,7 @@ You should now have the following contents in your `bun-docker` directory.
 
 ## Create a Dockerfile
 
-Before creating a Dockerfile, you need to choose a base image. You can use either the official image from Oven (the company behind Bun) or a Docker Hardened Image (DHI) from your private DHI catalog.
+Before creating a Dockerfile, you need to choose a base image. You can either use the [Bun Docker Official Image](https://hub.docker.com/r/oven/bun) or a Docker Hardened Image (DHI) from the [Hardened Image catalog](https://hub.docker.com/hardened-images/catalog).
 
 Choosing DHI offers the advantage of a production-ready image that is lightweight and secure. For more information, see [Docker Hardened Images](https://docs.docker.com/dhi/).
 
