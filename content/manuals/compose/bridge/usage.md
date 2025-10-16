@@ -85,7 +85,7 @@ All generated files are stored in the `/out` directory in your project.
 
 > [!IMPORTANT]
 >
-> Before you deploy your Compose Bridge transformations, make sure you have [enabled Kubernetes]((/manuals/desktop/settings-and-maintenance/settings.md#kubernetes)) in Docker Desktop.
+> Before you deploy your Compose Bridge transformations, make sure you have [enabled Kubernetes](/manuals/desktop/settings-and-maintenance/settings.md#kubernetes) in Docker Desktop.
 
 Once the manifests are generated, deploy them to your local Kubernetes cluster:
 
