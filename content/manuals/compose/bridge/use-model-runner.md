@@ -2,7 +2,7 @@
 title: Use Docker Model Runner with Compose Bridge 
 linkTitle: Use Model Runner
 weight: 30
-description:
+description: How to use Docker Model Runner with Compose Bridge for consistent deployments
 keywords: docker compose bridge, customize compose bridge, compose bridge templates, compose to kubernetes, compose bridge transformation, go templates docker, model runner, ai, llms
 ---
 
