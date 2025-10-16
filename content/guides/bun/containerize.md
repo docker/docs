@@ -50,12 +50,44 @@ You should now have the following contents in your `bun-docker` directory.
 │ └── README.md
 ```
 
-In the Dockerfile, you'll notice that the `FROM` instruction uses `oven/bun`
-as the base image. This is the official image for Bun created by Oven, the
-company behind Bun. This image is [available on the Docker Hub](https://hub.docker.com/r/oven/bun).
+## Create a Dockerfile
+
+Before creating a Dockerfile, you need to choose a base image. You can use either the official image from Oven (the company behind Bun) or a Docker Hardened Image (DHI) from your private DHI catalog.
+
+The benefit of choosing DHI is that it is a security-focused image that is built to be minimal and secure. Learn more about DHI [here](/dhi/).
+
+{{< tabs >}}
+{{< tab name="Using Docker Hardened Images" >}}
+Docker Hardened Images (DHIs) are available for Bun on [Docker Hub](https://hub.docker.com/hardened-images/catalog/dhi/bun). Unlike using the official image, you must first mirror the Bun image into your organization and then use it as your base image. Follow the [DHI quickstart](/dhi/get-started/) to create a mirrored repository for Bun.
+
+Mirrored repositories must start with `dhi-`, for example: `FROM <your-namespace>/dhi-bun:<tag>`. In the following Dockerfile, the `FROM` instruction uses `<your-namespace>/dhi-bun:1` as the base image.
 
 ```dockerfile
-# Use the Bun image as the base image
+# Use the DHI Bun image as the base image
+FROM <your-namespace>/dhi-bun:1
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the current directory contents into the container at /app
+COPY . .
+
+# Expose the port on which the API will listen
+EXPOSE 3000
+
+# Run the server when the container launches
+CMD ["bun", "server.js"]
+```
+
+{{< /tab >}}
+{{< tab name="Using the official image" >}}
+
+Using the official image is straightforward. In the following Dockerfile, you'll notice that the `FROM` instruction uses `oven/bun` as the base image.
+
+You can find the image on [Docker Hub](https://hub.docker.com/r/oven/bun). This is the official image for Bun created by Oven, the company behind Bun, and it's available on Docker Hub.
+
+```dockerfile
+# Use the official Bun image
 FROM oven/bun:latest
 
 # Set the working directory in the container
@@ -71,11 +103,14 @@ EXPOSE 3000
 CMD ["bun", "server.js"]
 ```
 
-Aside from specifying `oven/bun` as the base image, this Dockerfile also:
+{{< /tab >}}
+{{< /tabs >}}
 
-- Sets the working directory in the container to `/app`
-- Copies the contents of the current directory to the `/app` directory in the container
-- Exposes port 3000, where the API is listening for requests
+Aside from specifying the base image, the Dockerfile also:
+
+- Sets the working directory in the container to `/app`.
+- Copies the contents of the current directory to the `/app` directory in the container.
+- Exposes port 3000, where the API is listening for requests.
 - And finally, starts the server when the container launches with the command `bun server.js`.
 
 ## Run the application
@@ -120,6 +155,7 @@ Related information:
  - [.dockerignore file](/reference/dockerfile.md#dockerignore-file)
  - [Docker Compose overview](/manuals/compose/_index.md)
  - [Compose file reference](/reference/compose-file/_index.md)
+ - [Docker Hardened Images](/dhi/)
 
 ## Next steps
 
