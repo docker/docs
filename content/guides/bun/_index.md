@@ -10,7 +10,7 @@ params:
   time: 10 minutes
 ---
 
-The Bun getting started guide teaches you how to create a containerized Bun application using Docker. This guide supports using either the official Bun image or Docker Hardened Images (DHI).
+The Bun getting started guide teaches you how to create a containerized Bun application using Docker. 
 
 > **Acknowledgment**
 >
