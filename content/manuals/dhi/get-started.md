@@ -75,13 +75,7 @@ it.
    > **View in repository** to see the mirrored image's location or mirror it to
    > another repository.
   
-2. Follow the on-screen instructions to choose a name. For this guide, the
-   example uses the name `dhi-python`. Note that the name must start with
-   `dhi-`.
-
-   ![Mirror a repository page](./images/dhi-mirror-screen.png)
-
-3. Select **Create repository** to start the mirroring process.
+2. Follow the on-screen instructions to mirror the repository.
 
 It may take a few minutes for all the tags to finish mirroring. Once
 mirrored, the image repository appears in your organization's namespace. For

@@ -47,7 +47,7 @@ you can:
    repository
 
 After mirroring a repository, the repository appears in your organization's
-repository list under the name you specified, prefixed by `dhi-`. It will
+repository list, prefixed by `dhi-`. It will
 continue to receive updated images.
 
 ![Repository list with mirrored repository showing](../images/dhi-python-mirror.png)
