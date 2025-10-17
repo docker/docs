@@ -1,11 +1,15 @@
 ---
-title: Install the Docker Compose standalone
-linkTitle: Standalone
+title: Install the Docker Compose standalone (Legacy)
+linkTitle: Standalone (Legace)
 description: Instructions for installing the legacy Docker Compose standalone tool on Linux and Windows Server
 keywords: install docker-compose, standalone docker compose, docker-compose windows server, install docker compose linux, legacy compose install
 toc_max: 3
 weight: 20
 ---
+
+> [!WARNING]
+>
+> This install scenario is not recommended and is only supported for backward compatibility purposes.
 
 This page contains instructions on how to install Docker Compose standalone on Linux or Windows Server, from the command line.
 
