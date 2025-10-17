@@ -99,6 +99,9 @@ To use the `docker build` command with a non-default builder, you must either:
   > [!TIP]
   > To undo this change, run `docker buildx uninstall`.
 
+  > [!WARNING]
+  > The `docker buildx install` and `docker buildx uninstall` commands are deprecated.
+
 <!-- vale Docker.We = NO -->
 
 In general, we recommend that you use the `docker buildx build` command when
