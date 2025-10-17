@@ -21,8 +21,6 @@ aliases:
 
 This page contains information on how to install, launch and upgrade Docker Desktop on an Arch-based distribution. 
 
-
-
 ## Prerequisites
 
 To install Docker Desktop successfully, you must meet the [general system requirements](_index.md#general-system-requirements).
@@ -33,7 +31,7 @@ To install Docker Desktop successfully, you must meet the [general system requir
 
    ```console
    $ wget https://download.docker.com/linux/static/stable/x86_64/docker-{{% param "docker_ce_version" %}}.tgz -qO- | tar xvfz - docker/docker --strip-components=1
-   $ cp -rp ./docker /usr/local/bin/ && rm -r ./docker
+   $ sudo cp -rp ./docker /usr/local/bin/ && rm -r ./docker
    ```
 
 2. Download the latest Arch package from the [Release notes](/manuals/desktop/release-notes.md).

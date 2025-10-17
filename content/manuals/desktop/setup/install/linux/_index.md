@@ -137,7 +137,7 @@ To install Docker Desktop successfully, your Linux host must meet the following 
 - KVM virtualization support. Follow the [KVM virtualization support instructions](#kvm-virtualization-support) to check if the KVM kernel modules are enabled and how to provide access to the KVM device.
 - QEMU must be version 5.2 or later. We recommend upgrading to the latest version.
 - systemd init system.
-- GNOME, KDE, or MATE desktop environment.
+- GNOME, KDE, or MATE desktop environments are supported but others may work.
   - For many Linux distributions, the GNOME environment does not support tray icons. To add support for tray icons, you need to install a GNOME extension. For example, [AppIndicator](https://extensions.gnome.org/extension/615/appindicator-support/).
 - At least 4 GB of RAM.
 - Enable configuring ID mapping in user namespaces, see [File sharing](/manuals/desktop/troubleshoot-and-support/faqs/linuxfaqs.md#how-do-i-enable-file-sharing). Note that for Docker Desktop version 4.35 and later, this is not required anymore.
