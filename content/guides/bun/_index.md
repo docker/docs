@@ -10,7 +10,7 @@ params:
   time: 10 minutes
 ---
 
-The Bun getting started guide teaches you how to create a containerized Bun application using Docker. In this guide, you'll learn how to:
+The Bun getting started guide teaches you how to create a containerized Bun application using Docker. 
 
 > **Acknowledgment**
 >
