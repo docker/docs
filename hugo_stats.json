@@ -43,6 +43,7 @@
       "Docker-Engine",
       "Docker-Home",
       "Docker-Hub",
+      "Docker-Offload",
       "Docker-Scout",
       "Docker-Scout-Dashboard",
       "Docker-subscription",
