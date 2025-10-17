@@ -98,137 +98,65 @@ jobs:
           tags: user/app:latest
 ```
 
-## Distribute build across multiple runners
+## Distribute multi-platform build across runners
 
 In the previous example, each platform is built on the same runner which can
 take a long time depending on the number of platforms and your Dockerfile.
 
-To solve this issue you can use a matrix strategy to distribute the build for
-each platform across multiple runners and create manifest list using the
-[`buildx imagetools create` command](/reference/cli/docker/buildx/imagetools/create.md).
+To solve this issue, you can use the following reusable workflows for both
+[`docker/build-push-action`](https://github.com/crazy-max/.github?tab=readme-ov-file#build-distribute-mp)
+and [`docker/bake-action`](https://github.com/crazy-max/.github?tab=readme-ov-file#bake-distribute-mp)
+actions to distribute multi-platform builds across runners efficiently.
 
-The following workflow will build the image for each platform on a dedicated
-runner using a matrix strategy and push by digest. Then, the `merge` job will
-create manifest lists and push them to Docker Hub. The [`metadata` action](https://github.com/docker/metadata-action)
-is used to set tags and labels.
+{{< tabs >}}
+{{< tab name="build-push-action" >}}
 
-```yaml
+```yaml {hl_lines=9}
 name: ci
 
 on:
   push:
-
-env:
-  REGISTRY_IMAGE: user/app
+  pull_request:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        platform:
-          - linux/amd64
-          - linux/arm64
-    steps:
-      - name: Prepare
-        run: |
-          platform=${{ matrix.platform }}
-          echo "PLATFORM_PAIR=${platform//\//-}" >> $GITHUB_ENV
-
-      - name: Docker meta
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: ${{ env.REGISTRY_IMAGE }}
-
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ vars.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Build and push by digest
-        id: build
-        uses: docker/build-push-action@v6
-        with:
-          platforms: ${{ matrix.platform }}
-          labels: ${{ steps.meta.outputs.labels }}
-          tags: ${{ env.REGISTRY_IMAGE }}
-          outputs: type=image,push-by-digest=true,name-canonical=true,push=true
-
-      - name: Export digest
-        run: |
-          mkdir -p ${{ runner.temp }}/digests
-          digest="${{ steps.build.outputs.digest }}"
-          touch "${{ runner.temp }}/digests/${digest#sha256:}"
-
-      - name: Upload digest
-        uses: actions/upload-artifact@v4
-        with:
-          name: digests-${{ env.PLATFORM_PAIR }}
-          path: ${{ runner.temp }}/digests/*
-          if-no-files-found: error
-          retention-days: 1
-
-  merge:
-    runs-on: ubuntu-latest
-    needs:
-      - build
-    steps:
-      - name: Download digests
-        uses: actions/download-artifact@v4
-        with:
-          path: ${{ runner.temp }}/digests
-          pattern: digests-*
-          merge-multiple: true
-
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ vars.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Docker meta
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: ${{ env.REGISTRY_IMAGE }}
-          tags: |
-            type=ref,event=branch
-            type=ref,event=pr
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-
-      - name: Create manifest list and push
-        working-directory: ${{ runner.temp }}/digests
-        run: |
-          docker buildx imagetools create $(jq -cr '.tags | map("-t " + .) | join(" ")' <<< "$DOCKER_METADATA_OUTPUT_JSON") \
-            $(printf '${{ env.REGISTRY_IMAGE }}@sha256:%s ' *)
-
-      - name: Inspect image
-        run: |
-          docker buildx imagetools inspect ${{ env.REGISTRY_IMAGE }}:${{ steps.meta.outputs.version }}
+    uses: crazy-max/.github/.github/workflows/build-distribute-mp.yml@main
+    with:
+      push: ${{ github.event_name != 'pull_request' }}
+      cache: true
+      meta-image: user/app
+      build-platforms: linux/amd64,linux/arm64
+      login-username: ${{ vars.DOCKERHUB_USERNAME }}
+    secrets:
+      login-password: ${{ secrets.DOCKERHUB_TOKEN }}
 ```
 
-### With Bake
+Here are the main inputs for this reusable workflow:
 
-It's also possible to build on multiple runners using Bake, with the
-[bake action](https://github.com/docker/bake-action).
+| Name              | Type     | Default | Description                                                                                                                                                                                                                                                |
+|-------------------|----------|---------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `runner`          | String   | `auto`¹ | Runner instance (e.g., `ubuntu-latest`).                                                                                                                                                                                                                   |
+| `push`            | Bool     | `false` | Push image to registry.                                                                                                                                                                                                                                    |
+| `cache`           | Bool     | `false` | Enable GitHub Actions cache backend.                                                                                                                                                                                                                       |
+| `cache-scope`     | String   |         | Which scope GitHub Actions cache object belongs to if `cache` enabled.                                                                                                                                                                                     |
+| `cache-mode`      | String   | `min`   | Cache layers to export if `cache` enabled (one of `min` or `max`).                                                                                                                                                                                         |
+| `summary`         | Bool     | `true`  | Enable [build summary](https://docs.docker.com/build/ci/github-actions/build-summary/) generation.                                                                                                                                                         |
+| `meta-image`      | String   |         | Image to use as base name for tags. This input is similar to [`images` input in `docker/metadata-action`](https://github.com/docker/metadata-action?tab=readme-ov-file#images-input) used in this reusable workflow but accepts a single image name.       |
+| `build-platforms` | List/CSV |         | List of target platforms for build. This input is similar to [`platforms` input in `docker/build-push-action`](https://github.com/docker/build-push-action?tab=readme-ov-file#inputs) used in this reusable workflow. At least two platforms are required. |
+| `login-registry`  | String   |         | Server address of Docker registry. If not set then will default to Docker Hub. This input is similar to [`registry` input in `docker/login-action`](https://github.com/docker/login-action?tab=readme-ov-file#inputs) used in this reusable workflow.      |
+| `login-username`² | String   |         | Username used to log against the Docker registry. This input is similar to [`username` input in `docker/login-action`](https://github.com/docker/login-action?tab=readme-ov-file#inputs) used in this reusable workflow.                                   |
+| `login-password`  | String   |         | Specifies whether the given registry is ECR (auto, true or false). This input is similar to [`password` input in `docker/login-action`](https://github.com/docker/login-action?tab=readme-ov-file#inputs) used in this reusable workflow.                  |
 
-You can find a live example [in this GitHub repository](https://github.com/crazy-max/docker-linguist).
+> [!NOTE]
+> ¹ `auto` will choose the best matching runner depending on the target
+> platform being built (either `ubuntu-latest` or `ubuntu-24.04-arm`).
+> 
+> ² `login-username` can be used as either an input or secret.
 
-The following example achieves the same results as described in
-[the previous section](#distribute-build-across-multiple-runners).
+You can find the list of available inputs directly in [the reusable workflow](https://github.com/crazy-max/.github/blob/main/.github/workflows/build-distribute-mp.yml).
+
+{{< /tab >}}
+{{< tab name="bake-action" >}}
 
 ```hcl
 variable "DEFAULT_TAG" {
@@ -265,144 +193,49 @@ target "image-all" {
 }
 ```
 
-```yaml
+```yaml {hl_lines=9}
 name: ci
 
 on:
   push:
-
-env:
-  REGISTRY_IMAGE: user/app
+  pull_request:
 
 jobs:
-  prepare:
-    runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.platforms.outputs.matrix }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Create matrix
-        id: platforms
-        run: |
-          echo "matrix=$(docker buildx bake image-all --print | jq -cr '.target."image-all".platforms')" >>${GITHUB_OUTPUT}
-
-      - name: Show matrix
-        run: |
-          echo ${{ steps.platforms.outputs.matrix }}
-
-      - name: Docker meta
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: ${{ env.REGISTRY_IMAGE }}
-
-      - name: Rename meta bake definition file
-        run: |
-          mv "${{ steps.meta.outputs.bake-file }}" "${{ runner.temp }}/bake-meta.json"
-
-      - name: Upload meta bake definition
-        uses: actions/upload-artifact@v4
-        with:
-          name: bake-meta
-          path: ${{ runner.temp }}/bake-meta.json
-          if-no-files-found: error
-          retention-days: 1
-
   build:
-    runs-on: ubuntu-latest
-    needs:
-      - prepare
-    strategy:
-      fail-fast: false
-      matrix:
-        platform: ${{ fromJson(needs.prepare.outputs.matrix) }}
-    steps:
-      - name: Prepare
-        run: |
-          platform=${{ matrix.platform }}
-          echo "PLATFORM_PAIR=${platform//\//-}" >> $GITHUB_ENV
-
-      - name: Download meta bake definition
-        uses: actions/download-artifact@v4
-        with:
-          name: bake-meta
-          path: ${{ runner.temp }}
-      
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ vars.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Build
-        id: bake
-        uses: docker/bake-action@v6
-        with:
-          files: |
-            ./docker-bake.hcl
-            cwd://${{ runner.temp }}/bake-meta.json
-          targets: image
-          set: |
-            *.tags=${{ env.REGISTRY_IMAGE }}
-            *.platform=${{ matrix.platform }}
-            *.output=type=image,push-by-digest=true,name-canonical=true,push=true
-
-      - name: Export digest
-        run: |
-          mkdir -p ${{ runner.temp }}/digests
-          digest="${{ fromJSON(steps.bake.outputs.metadata).image['containerimage.digest'] }}"
-          touch "${{ runner.temp }}/digests/${digest#sha256:}"
-
-      - name: Upload digest
-        uses: actions/upload-artifact@v4
-        with:
-          name: digests-${{ env.PLATFORM_PAIR }}
-          path: ${{ runner.temp }}/digests/*
-          if-no-files-found: error
-          retention-days: 1
-
-  merge:
-    runs-on: ubuntu-latest
-    needs:
-      - build
-    steps:
-      - name: Download meta bake definition
-        uses: actions/download-artifact@v4
-        with:
-          name: bake-meta
-          path: ${{ runner.temp }}
-
-      - name: Download digests
-        uses: actions/download-artifact@v4
-        with:
-          path: ${{ runner.temp }}/digests
-          pattern: digests-*
-          merge-multiple: true
-
-      - name: Login to DockerHub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ vars.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Create manifest list and push
-        working-directory: ${{ runner.temp }}/digests
-        run: |
-          docker buildx imagetools create $(jq -cr '.target."docker-metadata-action".tags | map(select(startswith("${{ env.REGISTRY_IMAGE }}")) | "-t " + .) | join(" ")' ${{ runner.temp }}/bake-meta.json) \
-            $(printf '${{ env.REGISTRY_IMAGE }}@sha256:%s ' *)
-
-      - name: Inspect image
-        run: |
-          docker buildx imagetools inspect ${{ env.REGISTRY_IMAGE }}:$(jq -r '.target."docker-metadata-action".args.DOCKER_META_VERSION' ${{ runner.temp }}/bake-meta.json)
+    uses: crazy-max/.github/.github/workflows/build-distribute-mp.yml@main
+    with:
+      target: image-all
+      push: ${{ github.event_name != 'pull_request' }}
+      cache: true
+      meta-image: user/app
+      login-username: ${{ vars.DOCKERHUB_USERNAME }}
+    secrets:
+      login-password: ${{ secrets.DOCKERHUB_TOKEN }}
 ```
+
+Here are the main inputs for this reusable workflow:
+
+| Name              | Type   | Default | Description                                                                                                                                                                                                                                           |
+|-------------------|--------|---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `runner`          | String | `auto`¹ | Runner instance (e.g., `ubuntu-latest`).                                                                                                                                                                                                              |
+| `target`          | String |         | Multi-platform target to build. This input is similar to [`targets` input in `docker/bake-action`](https://github.com/docker/build-push-action?tab=readme-ov-file#inputs) used in this reusable workflow but accepts a single target.                 |
+| `push`            | Bool   | `false` | Push image to registry.                                                                                                                                                                                                                               |
+| `cache`           | Bool   | `false` | Enable GitHub Actions cache backend.                                                                                                                                                                                                                  |
+| `cache-scope`     | String |         | Which scope GitHub Actions cache object belongs to if `cache` enabled.                                                                                                                                                                                |
+| `cache-mode`      | String | `min`   | Cache layers to export if `cache` enabled (one of `min` or `max`).                                                                                                                                                                                    |
+| `summary`         | Bool   | `true`  | Enable [build summary](https://docs.docker.com/build/ci/github-actions/build-summary/) generation.                                                                                                                                                    |
+| `meta-image`      | String |         | Image to use as base name for tags. This input is similar to [`images` input in `docker/metadata-action`](https://github.com/docker/metadata-action?tab=readme-ov-file#images-input) used in this reusable workflow but accepts a single image name.  |
+| `login-registry`  | String |         | Server address of Docker registry. If not set then will default to Docker Hub. This input is similar to [`registry` input in `docker/login-action`](https://github.com/docker/login-action?tab=readme-ov-file#inputs) used in this reusable workflow. |
+| `login-username`² | String |         | Username used to log against the Docker registry. This input is similar to [`username` input in `docker/login-action`](https://github.com/docker/login-action?tab=readme-ov-file#inputs) used in this reusable workflow.                              |
+| `login-password`  | String |         | Specifies whether the given registry is ECR (auto, true or false). This input is similar to [`password` input in `docker/login-action`](https://github.com/docker/login-action?tab=readme-ov-file#inputs) used in this reusable workflow.             |
+
+> [!NOTE]
+> ¹ `auto` will choose the best matching runner depending on the target
+> platform being built (either `ubuntu-latest` or `ubuntu-24.04-arm`).
+> 
+> ² `login-username` can be used as either an input or secret.
+
+You can find the list of available inputs directly in [the reusable workflow](https://github.com/crazy-max/.github/blob/main/.github/workflows/bake-distribute-mp.yml).
+
+{{< /tab >}}
+{{< /tabs >}}
