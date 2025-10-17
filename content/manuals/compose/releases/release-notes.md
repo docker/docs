@@ -15,19 +15,22 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
-## 2.39.4
+## 2.40.1
 
-{{< release-date date="2025-09-19" >}}
+{{< release-date date="2025-10-17" >}}
 
 ### Bug fixes and enhancements
 
-- Added `initial_sync` attribute to the Compose Develop Specification definition, to sync files after starting a watch session
-- Fixed a TLS issue when building with bake
-- Disabled Tty on `run` when running as a piped command
+- Fixed few issues when building with bake
+- Added support of extends with profiles when using `publish` command
+- Added support of `CTRL+Z` to run Compose in background
+- Fixed Secret/Config setup of uid:gid to match container's USER definition 
 
 ### Update
 
-- Dependencies upgrade: bump compose-go to v2.9.0
+- Dependencies upgrade: bump docker engine and cli to v28.5.1
+- Dependencies upgrade: bump buildx to v0.29.1
+- Dependencies upgrade: bump golang to v1.24.9
 
 ## 2.40.0
 
@@ -43,6 +46,19 @@ For more detailed information, see the [release notes in the Compose repo](https
 
 - Dependencies upgrade: bump docker engine and cli to v28.5.0
 
+## 2.39.4
+
+{{< release-date date="2025-09-19" >}}
+
+### Bug fixes and enhancements
+
+- Added `initial_sync` attribute to the Compose Develop Specification definition, to sync files after starting a watch session
+- Fixed a TLS issue when building with bake
+- Disabled Tty on `run` when running as a piped command
+
+### Update
+
+- Dependencies upgrade: bump compose-go to v2.9.0
 
 ## 2.39.3
 
