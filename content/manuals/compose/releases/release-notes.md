@@ -21,10 +21,10 @@ For more detailed information, see the [release notes in the Compose repo](https
 
 ### Bug fixes and enhancements
 
-- Fixed few issues when building with bake
-- Added support of extends with profiles when using `publish` command
+- Fixed a few issues when building with bake
+- Added support of extends with profiles when using the `publish` command
 - Added support of `CTRL+Z` to run Compose in background
-- Fixed Secret/Config setup of uid:gid to match container's USER definition 
+- Fixed secret/config setup of uid:gid to match container's USER definition 
 
 ### Update
 
