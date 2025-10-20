@@ -319,7 +319,7 @@ The long syntax provides more granularity in how the config is created within th
 - `target`: The path and name of the file to be mounted in the service's
   task containers. Defaults to `/<source>` if not specified.
 - `uid` and `gid`: The numeric uid or gid that owns the mounted config file
-  within the service's task containers. Default value when not specified is `USER`.
+  within the service's task containers.
 - `mode`: The [permissions](https://wintelguy.com/permissions-calc.pl) for the file that is mounted within the service's
   task containers, in octal notation. Default value is world-readable (`0444`).
   Writable bit must be ignored. The executable bit can be set.
@@ -1920,7 +1920,7 @@ the service's containers.
 - `target`: The name of the file to be mounted in `/run/secrets/` in the
   service's task container, or absolute path of the file if an alternate location is required. Defaults to `source` if not specified.
 - `uid` and `gid`: The numeric uid or gid that owns the file within
-  `/run/secrets/` in the service's task containers. Default value is `USER`.
+  `/run/secrets/` in the service's task containers.
 - `mode`: The [permissions](https://wintelguy.com/permissions-calc.pl) for the file to be mounted in `/run/secrets/`
   in the service's task containers, in octal notation.
   The default value is world-readable permissions (mode `0444`).
