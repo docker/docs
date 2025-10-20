@@ -216,7 +216,6 @@ $ docker buildx bake --set app.args.mybuildarg=bar --set app.platform=linux/arm6
 >
 > `--set` is a repeatable flag. For array fields such as `tags`, repeat `--set` to provide multiple values or use the `+=` operator to append without replacing.
 > Array literal syntax like `--set target.tags=[a,b]` is not supported.
-> The `platform` field is a special case. It also accepts a comma-separated list.
 
 Pattern matching syntax defined in [https://golang.org/pkg/path/#Match](https://golang.org/pkg/path/#Match)
 is also supported:
