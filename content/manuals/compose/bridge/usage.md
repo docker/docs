@@ -59,23 +59,24 @@ Example output:
 
 ```console
 $ docker compose -f compose.yaml bridge convert
-Kubernetes resource api-deployment.yaml created
-Kubernetes resource db-deployment.yaml created
-Kubernetes resource web-deployment.yaml created
-Kubernetes resource api-expose.yaml created
-Kubernetes resource db-expose.yaml created
-Kubernetes resource web-expose.yaml created
-Kubernetes resource 0-avatars-namespace.yaml created
+Kubernetes resource backend-deployment.yaml created
+Kubernetes resource frontend-deployment.yaml created
+Kubernetes resource backend-expose.yaml created
+Kubernetes resource frontend-expose.yaml created
+Kubernetes resource 0-my-project-namespace.yaml created
 Kubernetes resource default-network-policy.yaml created
-Kubernetes resource private-network-policy.yaml created
-Kubernetes resource public-network-policy.yaml created
-Kubernetes resource db-db_data-persistentVolumeClaim.yaml created
-Kubernetes resource api-service.yaml created
-Kubernetes resource web-service.yaml created
+Kubernetes resource backend-service.yaml created
+Kubernetes resource frontend-service.yaml created
 Kubernetes resource kustomization.yaml created
-Kubernetes resource db-db_data-persistentVolumeClaim.yaml created
-Kubernetes resource api-service.yaml created
-Kubernetes resource web-service.yaml created
+Kubernetes resource backend-deployment.yaml created
+Kubernetes resource frontend-deployment.yaml created
+Kubernetes resource backend-service.yaml created
+Kubernetes resource frontend-service.yaml created
+Kubernetes resource kustomization.yaml created
+Kubernetes resource model-runner-configmap.yaml created
+Kubernetes resource model-runner-deployment.yaml created
+Kubernetes resource model-runner-service.yaml created
+Kubernetes resource model-runner-volume-claim.yaml created
 Kubernetes resource kustomization.yaml created
 ```
 

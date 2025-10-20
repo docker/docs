@@ -79,13 +79,13 @@ The endpoint is automatically injected into your service containers.
 
 ### Kubernetes
 
-When `modelRunner.enabled` is `true`, Compose Bridge generates additional manifests that deploy Docker Model Runner in your cluster, including:
+When `modelRunner.enabled` is `true`, Compose Bridge uses the generated manifests to deploy Docker Model Runner in your cluster, including:
 
 - Deployment: Runs the `docker-model-runner` container
-- Service: Rxposes port `80` (maps to container port `12434`)
+- Service: Exposes port `80` (maps to container port `12434`)
 - `PersistentVolumeClaim`: Stores model files
 
-The `modelRunner.enabled` setting also determines the number of replicas for the `model-runner-deploymen`t:
+The `modelRunner.enabled` setting also determines the number of replicas for the `model-runner-deployment`:
 
 - When `true`, the deployment replica count is set to 1, and Docker Model Runner is deployed in the Kubernetes cluster.
 - When `false`, the replica count is 0, and no Docker Model Runner resources are deployed.
