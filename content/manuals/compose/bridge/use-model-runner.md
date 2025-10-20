@@ -18,39 +18,52 @@ If you have a `models` top-level element in your `compose.yaml` file, Compose Br
 
 ## Configure model runner settings
 
-You can control the model runner through Helm values.
+When deploying using generated Helm Charts, you can control the model runner configuration through Helm values.
 
 ```yaml
+# Model Runner settings
 modelRunner:
-  enabled: true               # true = deploy in-cluster model runner
-                              # false = use Docker Desktop host model runner
-  endpoint: "http://model-runner/engines/v1/"
-  hostEndpoint: "http://host.docker.internal:12434/engines/v1/"
-  image: "docker/model-runner:latest"
-  resources:
-    limits:
-      cpu: "1000m"
-      memory: "2Gi"
-    requests:
-      cpu: "100m"
-      memory: "256Mi"
-  storage:
-    size: "100Gi"
-    storageClass: ""          # Use default storage class if empty
-  models:
-    - sentiment
-    - toxicity
+    # Set to false for Docker Desktop (uses host instance)
+    # Set to true for standalone Kubernetes clusters
+    enabled: false
+    # Endpoint used when enabled=false (Docker Desktop)
+    hostEndpoint: "http://host.docker.internal:12434/engines/v1/"
+    # Deployment settings when enabled=true
+    image: "docker/model-runner:latest"
+    imagePullPolicy: "IfNotPresent"
+    # GPU support
+    gpu:
+        enabled: false
+        vendor: "nvidia" # nvidia or amd
+        count: 1
+    # Node scheduling (uncomment and customize as needed)
+    # nodeSelector:
+    #   accelerator: nvidia-tesla-t4
+    # tolerations: []
+    # affinity: {}
+
+    # Security context
+    securityContext:
+        allowPrivilegeEscalation: false
+    # Environment variables (uncomment and add as needed)
+    # env:
+    #   DMR_ORIGINS: "http://localhost:31246"
+    resources:
+        limits:
+            cpu: "1000m"
+            memory: "2Gi"
+        requests:
+            cpu: "100m"
+            memory: "256Mi"
+    # Storage for models
+    storage:
+        size: "100Gi"
+        storageClass: "" # Empty uses default storage class
+    # Models to pre-pull
+    models:
+        - ai/qwen2.5:latest
+        - ai/mxbai-embed-large
 ```
-
-| Setting        | Description                                                                               |
-| -------------- | ----------------------------------------------------------------------------------------- |
-| `enabled`      | Deploy Docker Model Runner inside your cluster (`true`) or use an external runner (`false`). |
-| `endpoint`     | URL for Docker Model Runner used by injected environment variables.                          |
-| `hostEndpoint` | Address of Docker Model Runner for Docker Desktop.                                            |
-| `models`       | List of models to pre-pull during startup.                                                |
-| `storage`      | Persistent storage configuration for model files.                                         |
-| `resources`    | Resource requests and limits for the model runner pod.                                    |
-
 
 ## Deploying a model runner
 
@@ -68,7 +81,11 @@ The endpoint is automatically injected into your service containers.
 
 When `modelRunner.enabled` is `true`, Compose Bridge generates additional manifests that deploy Docker Model Runner in your cluster, including:
 
-- Deployment — runs the `docker-model-runner` container
-- Service — exposes port `80` (maps to container port `12434`)
-- `PersistentVolumeClaim` — stores model files
+- Deployment: Runs the `docker-model-runner` container
+- Service: Rxposes port `80` (maps to container port `12434`)
+- `PersistentVolumeClaim`: Stores model files
 
+The `modelRunner.enabled` setting also determines the number of replicas for the `model-runner-deploymen`t:
+
+- When `true`, the deployment replica count is set to 1, and Docker Model Runner is deployed in the Kubernetes cluster.
+- When `false`, the replica count is 0, and no Docker Model Runner resources are deployed.

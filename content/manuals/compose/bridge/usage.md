@@ -35,7 +35,7 @@ For each declared model, the transformation injects two environment variables:
 
 You can optionally customize these variable names using `endpoint_var` and `model_var`.
 
-The default transformation automatically detects which environment you’re targeting and automatically generates the necessary manifests. 
+The default transformation generates two different overlays - one for Docker Desktop whilst using a local instance of Docker Model Runner, and a `model-runner` overlay with all the relevant Kubernetes resources to deploy Docker Model Runner in a pod. 
 
 | Environment    | Endpoint                                        |
 | -------------- | ----------------------------------------------- |
@@ -58,7 +58,7 @@ Compose looks for a `compose.yaml` file inside the current directory and generat
 Example output:
 
 ```console
-$ docker compose bridge convert -f compose.yaml 
+$ docker compose -f compose.yaml bridge convert
 Kubernetes resource api-deployment.yaml created
 Kubernetes resource db-deployment.yaml created
 Kubernetes resource web-deployment.yaml created
@@ -104,7 +104,7 @@ $ kubectl apply -k out/overlays/desktop/
 Convert a `compose.yaml` file located in another directory:
 
 ```console
-$ docker compose bridge convert -f <path-to-file>/compose.yaml 
+$ docker compose -f <path-to-file>/compose.yaml bridge convert
 ```
 
 To see all available flags, run:
