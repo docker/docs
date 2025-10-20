@@ -102,6 +102,7 @@ github.com/docker/compose/v2 v2.39.3 h1:a9itRH/aBf9jJM80hQqQYdIzm4+9hcccJRnK5w0F
 github.com/docker/compose/v2 v2.39.3/go.mod h1:AOUEk2X2GpWNn/x/WNN55cc+JkH3mBd6gmx71lHZHv4=
 github.com/docker/compose/v2 v2.39.4 h1:lXIyl0axf8rZ5ThGm25g0y5nvtj1a9HKS08qfMvHiFM=
 github.com/docker/compose/v2 v2.39.4/go.mod h1:HrP3GcmLSdb1YbhcRhr1zWx/8Ulj/9Y+H443hlTAwMA=
+github.com/docker/compose/v2 v2.40.1/go.mod h1:CbSJpKGw20LInVsPjglZ8z7Squ3OBQOD7Ux5nkjGfIU=
 github.com/docker/distribution v2.8.3+incompatible h1:AtKxIZ36LoNK51+Z6RpzLpddBirtxJnzDrHLEKxTAYk=
 github.com/docker/distribution v2.8.3+incompatible/go.mod h1:J2gT2udsDAN96Uj4KfcMRqY0/ypR+oyYUYmja8H+y+w=
 github.com/docker/docker v28.2.2+incompatible h1:CjwRSksz8Yo4+RmQ339Dp/D2tGO5JxwYeqtMOEe0LDw=
@@ -441,6 +442,8 @@ golang.org/x/sys v0.35.0 h1:vz1N37gP5bs89s7He8XuIYXpyY0+QlsKmzipCbUtyxI=
 golang.org/x/sys v0.35.0/go.mod h1:BJP2sWEmIv4KK5OTEluFJCKSidICx8ciO85XgH3Ak8k=
 golang.org/x/sys v0.36.0 h1:KVRy2GtZBrk1cBYA7MKu5bEZFxQk4NIDV6RLVcC8o0k=
 golang.org/x/sys v0.36.0/go.mod h1:OgkHotnGiDImocRcuBABYBEXf8A9a87e/uXjp9XT3ks=
+golang.org/x/sys v0.37.0 h1:fdNQudmxPjkdUTPnLn5mdQv7Zwvbvpaxqs831goi9kQ=
+golang.org/x/sys v0.37.0/go.mod h1:OgkHotnGiDImocRcuBABYBEXf8A9a87e/uXjp9XT3ks=
 golang.org/x/term v0.32.0 h1:DR4lr0TjUs3epypdhTOkMmuF5CDFJ/8pOnbzMZPQ7bg=
 golang.org/x/term v0.32.0/go.mod h1:uZG1FhGx848Sqfsq4/DlJr3xGGsYMu/L5GW4abiaEPQ=
 golang.org/x/text v0.3.0/go.mod h1:NqM8EUOU14njkJ3fqMW+pc6Ldnwhi/IjpwHt7yyuwOQ=
