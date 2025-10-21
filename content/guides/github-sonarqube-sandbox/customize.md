@@ -14,7 +14,10 @@ for your needs.
 
 Modify the prompt to prioritize certain issue types:
 
-```javascript
+{{< tabs group="language" >}}
+{{< tab name="TypeScript" >}}
+
+```typescript
 const prompt = `Using SonarQube and GitHub MCP tools:
 
 Focus only on:
@@ -25,9 +28,29 @@ Focus only on:
 Analyze "${repoPath}" and fix the highest priority issues first.`;
 ```
 
+{{< /tab >}}
+{{< tab name="Python" >}}
+
+```python
+prompt = f"""Using SonarQube and GitHub MCP tools:
+
+Focus only on:
+- Security vulnerabilities (CRITICAL priority)
+- Bugs (HIGH priority)
+- Skip code smells for this iteration
+
+Analyze "{repo_path}" and fix the highest priority issues first."""
+```
+
+{{< /tab >}}
+{{< /tabs >}}
+
 ## Integrate with CI/CD
 
-Add this workflow to GitHub actions to run automatically on pull requests:
+Add this workflow to GitHub Actions to run automatically on pull requests:
+
+{{< tabs group="language" >}}
+{{< tab name="TypeScript" >}}
 
 ```yaml
 name: Automated quality checks
@@ -42,9 +65,9 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: "18"
       - run: npm install
-      - run: node 06-quality-gated-pr.js
+      - run: npx tsx 06-quality-gated-pr.ts
         env:
           E2B_API_KEY: ${{ secrets.E2B_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -55,11 +78,46 @@ jobs:
           SONARQUBE_ORG: your-org-key
 ```
 
+{{< /tab >}}
+{{< tab name="Python" >}}
+
+```yaml
+name: Automated quality checks
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.8"
+      - run: pip install e2b python-dotenv
+      - run: python 06_quality_gated_pr.py
+        env:
+          E2B_API_KEY: ${{ secrets.E2B_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONARQUBE_TOKEN: ${{ secrets.SONARQUBE_TOKEN }}
+          GITHUB_OWNER: ${{ github.repository_owner }}
+          GITHUB_REPO: ${{ github.event.repository.name }}
+          SONARQUBE_ORG: your-org-key
+```
+
+{{< /tab >}}
+{{< /tabs >}}
+
 ## Filter by file patterns
 
 Target specific parts of your codebase:
 
-```javascript
+{{< tabs group="language" >}}
+{{< tab name="TypeScript" >}}
+
+```typescript
 const prompt = `Analyze code quality but only consider:
 - Files in src/**/*.js
 - Exclude test files (*.test.js, *.spec.js)
@@ -68,20 +126,55 @@ const prompt = `Analyze code quality but only consider:
 Focus on production code only.`;
 ```
 
+{{< /tab >}}
+{{< tab name="Python" >}}
+
+```python
+prompt = """Analyze code quality but only consider:
+- Files in src/**/*.js
+- Exclude test files (*.test.js, *.spec.js)
+- Exclude build artifacts in dist/
+
+Focus on production code only."""
+```
+
+{{< /tab >}}
+{{< /tabs >}}
+
 ## Set quality thresholds
 
 Define when PRs should be created:
 
-```javascript
+{{< tabs group="language" >}}
+{{< tab name="TypeScript" >}}
+
+```typescript
 const prompt = `Quality gate thresholds:
 - Only create PR if:
   * Bug count decreases by at least 1
   * No new security vulnerabilities introduced
-  * Code coverage doesn't decrease
+  * Code coverage does not decrease
   * Technical debt reduces by at least 15 minutes
 
-If changes don't meet these thresholds, explain why and skip PR creation.`;
+If changes do not meet these thresholds, explain why and skip PR creation.`;
 ```
+
+{{< /tab >}}
+{{< tab name="Python" >}}
+
+```python
+prompt = """Quality gate thresholds:
+- Only create PR if:
+  * Bug count decreases by at least 1
+  * No new security vulnerabilities introduced
+  * Code coverage does not decrease
+  * Technical debt reduces by at least 15 minutes
+
+If changes do not meet these thresholds, explain why and skip PR creation."""
+```
+
+{{< /tab >}}
+{{< /tabs >}}
 
 ## Next steps
 

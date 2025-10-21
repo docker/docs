@@ -22,9 +22,9 @@ Before you begin, make sure you have:
 - E2B account with [API access](https://e2b.dev/docs/api-key)
 - [Anthropic API key](https://docs.claude.com/en/api/admin-api/apikeys/get-api-key)
 
-    > [!NOTE]
-    >
-    > This example uses Claude CLI which comes pre-installed in E2B sandboxes, but you can adapt the example to work with other AI assistants of your choice. See [E2B's MCP documentation](https://e2b.dev/docs/mcp/quickstart) for alternative connection methods.
+  > [!NOTE]
+  >
+  > This example uses Claude CLI which comes pre-installed in E2B sandboxes, but you can adapt the example to work with other AI assistants of your choice. See [E2B's MCP documentation](https://e2b.dev/docs/mcp/quickstart) for alternative connection methods.
 
 - GitHub account with:
   - A repository containing code to analyze
@@ -33,7 +33,9 @@ Before you begin, make sure you have:
   - [Organization](https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/resources-structure/organization) created
   - [Project configured](https://docs.sonarsource.com/sonarqube-community-build/project-administration/creating-and-importing-projects) for your repository
   - [User token](https://docs.sonarsource.com/sonarqube-server/instance-administration/security/administering-tokens) generated
-- [Node.js 18+](https://nodejs.org/en/download) installed on your machine
+- Language runtime installed:
+  - TypeScript: [Node.js 18+](https://nodejs.org/en/download)
+  - Python: [Python 3.8+](https://www.python.org/downloads/)
 
 > [!NOTE]
 >
@@ -49,7 +51,10 @@ Before you begin, make sure you have:
 
 ## Step 1: Set up your project
 
-1.  Create a new directory for your workflow and initialize Node.js:
+{{< tabs group="language" >}}
+{{< tab name="TypeScript" >}}
+
+1. Create a new directory for your workflow and initialize Node.js:
 
 ```bash
 mkdir github-sonarqube-workflow
@@ -57,7 +62,7 @@ cd github-sonarqube-workflow
 npm init -y
 ```
 
-2.  Open `package.json` and configure it for ES modules:
+2. Open `package.json` and configure it for ES modules:
 
 ```json
 {
@@ -65,9 +70,9 @@ npm init -y
   "version": "1.0.0",
   "description": "Automated code quality workflow using E2B, GitHub, and SonarQube",
   "type": "module",
-  "main": "quality-workflow.js",
+  "main": "quality-workflow.ts",
   "scripts": {
-    "start": "node quality-workflow.js"
+    "start": "tsx quality-workflow.ts"
   },
   "keywords": ["e2b", "github", "sonarqube", "mcp", "code-quality"],
   "author": "",
@@ -75,20 +80,20 @@ npm init -y
 }
 ```
 
-3.  Install required dependencies:
+3. Install required dependencies:
 
 ```bash
 npm install e2b dotenv
+npm install -D typescript tsx @types/node
 ```
 
-4.  Create a `.env` file in your project root:
+4. Create a `.env` file in your project root:
 
 ```bash
 touch .env
 ```
 
-5.  Add your API keys and configuration, replacing the placeholders with your
-    actual credentials:
+5. Add your API keys and configuration, replacing the placeholders with your actual credentials:
 
 ```plaintext
 E2B_API_KEY=your_e2b_api_key_here
@@ -101,21 +106,76 @@ SONARQUBE_TOKEN=your_sonarqube_user_token
 SONARQUBE_URL=https://sonarcloud.io
 ```
 
-6.  Protect your credentials by adding `.env` to `.gitignore`:
+6. Protect your credentials by adding `.env` to `.gitignore`:
 
 ```bash
 echo ".env" >> .gitignore
 echo "node_modules/" >> .gitignore
 ```
 
+{{< /tab >}}
+{{< tab name="Python" >}}
+
+1. Create a new directory for your workflow:
+
+```bash
+mkdir github-sonarqube-workflow
+cd github-sonarqube-workflow
+```
+
+2. Create a virtual environment and activate it:
+
+```bash
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+
+3. Install required dependencies:
+
+```bash
+pip install e2b python-dotenv
+```
+
+4. Create a `.env` file in your project root:
+
+```bash
+touch .env
+```
+
+5. Add your API keys and configuration, replacing the placeholders with your actual credentials:
+
+```plaintext
+E2B_API_KEY=your_e2b_api_key_here
+ANTHROPIC_API_KEY=your_anthropic_api_key_here
+GITHUB_TOKEN=ghp_your_personal_access_token_here
+GITHUB_OWNER=your_github_username
+GITHUB_REPO=your_repository_name
+SONARQUBE_ORG=your_sonarcloud_org_key
+SONARQUBE_TOKEN=your_sonarqube_user_token
+SONARQUBE_URL=https://sonarcloud.io
+```
+
+6. Protect your credentials by adding `.env` to `.gitignore`:
+
+```bash
+echo ".env" >> .gitignore
+echo "venv/" >> .gitignore
+echo "__pycache__/" >> .gitignore
+```
+
+{{< /tab >}}
+{{< /tabs >}}
+
 ## Step 2: Create your first sandbox
 
-Let's start by creating a sandbox and verifying the MCP servers are configured
-correctly.
+Let's start by creating a sandbox and verifying the MCP servers are configured correctly.
 
-Create a file named `01-test-connection.js` in your project root:
+{{< tabs group="language" >}}
+{{< tab name="TypeScript" >}}
 
-```javascript
+Create a file named `01-test-connection.ts` in your project root:
+
+```typescript
 import "dotenv/config";
 import { Sandbox } from "e2b";
 
@@ -126,17 +186,17 @@ async function testConnection() {
 
   const sbx = await Sandbox.betaCreate({
     envs: {
-      ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY,
-      GITHUB_TOKEN: process.env.GITHUB_TOKEN,
-      SONARQUBE_TOKEN: process.env.SONARQUBE_TOKEN,
+      ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY!,
+      GITHUB_TOKEN: process.env.GITHUB_TOKEN!,
+      SONARQUBE_TOKEN: process.env.SONARQUBE_TOKEN!,
     },
     mcp: {
       githubOfficial: {
-        githubPersonalAccessToken: process.env.GITHUB_TOKEN,
+        githubPersonalAccessToken: process.env.GITHUB_TOKEN!,
       },
       sonarqube: {
-        org: process.env.SONARQUBE_ORG,
-        token: process.env.SONARQUBE_TOKEN,
+        org: process.env.SONARQUBE_ORG!,
+        token: process.env.SONARQUBE_TOKEN!,
         url: "https://sonarcloud.io",
       },
     },
@@ -162,7 +222,7 @@ async function testConnection() {
     },
   );
 
-  console.log("\n Connection successful! Cleaning up...");
+  console.log("\nConnection successful! Cleaning up...");
   await sbx.kill();
 }
 
@@ -172,15 +232,83 @@ testConnection().catch(console.error);
 Run this script to verify your setup:
 
 ```bash
-node 01-test-connection.js
+npx tsx 01-test-connection.ts
 ```
+
+{{< /tab >}}
+{{< tab name="Python" >}}
+
+Create a file named `01_test_connection.py` in your project root:
+
+```python
+import os
+import asyncio
+from dotenv import load_dotenv
+from e2b import AsyncSandbox
+
+load_dotenv()
+
+async def test_connection():
+    print("Creating E2B sandbox with GitHub and SonarQube MCP servers...\n")
+
+    sbx = await AsyncSandbox.beta_create(
+        envs={
+            "ANTHROPIC_API_KEY": os.getenv("ANTHROPIC_API_KEY"),
+            "GITHUB_TOKEN": os.getenv("GITHUB_TOKEN"),
+            "SONARQUBE_TOKEN": os.getenv("SONARQUBE_TOKEN"),
+        },
+        mcp={
+            "githubOfficial": {
+                "githubPersonalAccessToken": os.getenv("GITHUB_TOKEN"),
+            },
+            "sonarqube": {
+                "org": os.getenv("SONARQUBE_ORG"),
+                "token": os.getenv("SONARQUBE_TOKEN"),
+                "url": "https://sonarcloud.io",
+            },
+        },
+    )
+
+    mcp_url = sbx.beta_get_mcp_url()
+    mcp_token = await sbx.beta_get_mcp_token()
+
+    print(" Sandbox created successfully!")
+    print(f"MCP Gateway URL: {mcp_url}\n")
+
+    # Wait for MCP initialization
+    await asyncio.sleep(1)
+
+    # Configure Claude to use the MCP gateway
+    print("Connecting Claude CLI to MCP gateway...")
+    await sbx.commands.run(
+        f'claude mcp add --transport http e2b-mcp-gateway {mcp_url} --header "Authorization: Bearer {mcp_token}"',
+        timeout=0,
+        on_stdout=print,
+        on_stderr=print,
+    )
+
+    print("\n Connection successful! Cleaning up...")
+    await sbx.kill()
+
+if __name__ == "__main__":
+    asyncio.run(test_connection())
+```
+
+Run this script to verify your setup:
+
+```bash
+python 01_test_connection.py
+```
+
+{{< /tab >}}
+{{< /tabs >}}
 
 Your output should look similar to the following example:
 
-```console
+```console {collapse=true}
 Creating E2B sandbox with GitHub and SonarQube MCP servers...
 
-Sandbox created successfully!
+✓ Sandbox created successfully!
 MCP Gateway URL: https://50005-xxxxx.e2b.app/mcp
 
 Connecting Claude CLI to MCP gateway...
@@ -190,7 +318,7 @@ Headers: {
 }
 File modified: /home/user/.claude.json [project: /home/user]
 
-Connection successful! Cleaning up...
+✓ Connection successful! Cleaning up...
 ```
 
 You've just learned how to create an E2B sandbox with multiple MCP servers
@@ -203,9 +331,14 @@ MCP servers expose tools that Claude can call. The GitHub MCP server provides
 repository management tools, while SonarQube provides code analysis tools.
 By listing their tools, you know what operations are possible.
 
-To try listing MCP tools, create `02-list-tools.js`:
+To try listing MCP tools:
 
-```javascript
+{{< tabs group="language" >}}
+{{< tab name="TypeScript" >}}
+
+Create `02-list-tools.ts`:
+
+```typescript
 import "dotenv/config";
 import { Sandbox } from "e2b";
 
@@ -214,17 +347,17 @@ async function listTools() {
 
   const sbx = await Sandbox.betaCreate({
     envs: {
-      ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY,
-      GITHUB_TOKEN: process.env.GITHUB_TOKEN,
-      SONARQUBE_TOKEN: process.env.SONARQUBE_TOKEN,
+      ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY!,
+      GITHUB_TOKEN: process.env.GITHUB_TOKEN!,
+      SONARQUBE_TOKEN: process.env.SONARQUBE_TOKEN!,
     },
     mcp: {
       githubOfficial: {
-        githubPersonalAccessToken: process.env.GITHUB_TOKEN,
+        githubPersonalAccessToken: process.env.GITHUB_TOKEN!,
       },
       sonarqube: {
-        org: process.env.SONARQUBE_ORG,
-        token: process.env.SONARQUBE_TOKEN,
+        org: process.env.SONARQUBE_ORG!,
+        token: process.env.SONARQUBE_TOKEN!,
         url: "https://sonarcloud.io",
       },
     },
@@ -260,12 +393,85 @@ listTools().catch(console.error);
 Run the script:
 
 ```bash
-node 02-list-tools.js
+npx tsx 02-list-tools.ts
 ```
+
+{{< /tab >}}
+{{< tab name="Python" >}}
+
+Create `02_list_tools.py`:
+
+```python
+import os
+import asyncio
+from dotenv import load_dotenv
+from e2b import AsyncSandbox
+
+load_dotenv()
+
+async def list_tools():
+    print("Creating sandbox...\n")
+
+    sbx = await AsyncSandbox.beta_create(
+        envs={
+            "ANTHROPIC_API_KEY": os.getenv("ANTHROPIC_API_KEY"),
+            "GITHUB_TOKEN": os.getenv("GITHUB_TOKEN"),
+            "SONARQUBE_TOKEN": os.getenv("SONARQUBE_TOKEN"),
+        },
+        mcp={
+            "githubOfficial": {
+                "githubPersonalAccessToken": os.getenv("GITHUB_TOKEN"),
+            },
+            "sonarqube": {
+                "org": os.getenv("SONARQUBE_ORG"),
+                "token": os.getenv("SONARQUBE_TOKEN"),
+                "url": "https://sonarcloud.io",
+            },
+        },
+    )
+
+    mcp_url = sbx.beta_get_mcp_url()
+    mcp_token = await sbx.beta_get_mcp_token()
+
+    # Wait for MCP initialization
+    await asyncio.sleep(1)
+
+    await sbx.commands.run(
+        f'claude mcp add --transport http e2b-mcp-gateway {mcp_url} --header "Authorization: Bearer {mcp_token}"',
+        timeout=0,
+        on_stdout=print,
+        on_stderr=print,
+    )
+
+    print("\nDiscovering available MCP tools...\n")
+
+    prompt = "List all MCP tools you have access to. For each tool, show its exact name and a brief description."
+
+    await sbx.commands.run(
+        f"echo '{prompt}' | claude -p --dangerously-skip-permissions",
+        timeout=0,
+        on_stdout=print,
+        on_stderr=print,
+    )
+
+    await sbx.kill()
+
+if __name__ == "__main__":
+    asyncio.run(list_tools())
+```
+
+Run the script:
+
+```bash
+python 02_list_tools.py
+```
+
+{{< /tab >}}
+{{< /tabs >}}
 
 In the console, you should see a list of MCP tools:
 
-```console
+```console {collapse=true}
 Creating sandbox...
 
 Sandbox created
@@ -299,9 +505,12 @@ I have access to the following MCP tools:
 Let's try testing GitHub using MCP tools. We'll start simple by listing
 repository issues.
 
-Create `03-test-github.js`:
+{{< tabs group="language" >}}
+{{< tab name="TypeScript" >}}
 
-```javascript
+Create `03-test-github.ts`:
+
+```typescript
 import "dotenv/config";
 import { Sandbox } from "e2b";
 
@@ -310,12 +519,12 @@ async function testGitHub() {
 
   const sbx = await Sandbox.betaCreate({
     envs: {
-      ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY,
-      GITHUB_TOKEN: process.env.GITHUB_TOKEN,
+      ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY!,
+      GITHUB_TOKEN: process.env.GITHUB_TOKEN!,
     },
     mcp: {
       githubOfficial: {
-        githubPersonalAccessToken: process.env.GITHUB_TOKEN,
+        githubPersonalAccessToken: process.env.GITHUB_TOKEN!,
       },
     },
   });
@@ -354,12 +563,80 @@ testGitHub().catch(console.error);
 Run the script:
 
 ```bash
-node 03-test-github.js
+npx tsx 03-test-github.ts
 ```
+
+{{< /tab >}}
+{{< tab name="Python" >}}
+
+Create `03_test_github.py`:
+
+```python
+import os
+import asyncio
+from dotenv import load_dotenv
+from e2b import AsyncSandbox
+
+load_dotenv()
+
+async def test_github():
+    print("Creating sandbox...\n")
+
+    sbx = await AsyncSandbox.beta_create(
+        envs={
+            "ANTHROPIC_API_KEY": os.getenv("ANTHROPIC_API_KEY"),
+            "GITHUB_TOKEN": os.getenv("GITHUB_TOKEN"),
+        },
+        mcp={
+            "githubOfficial": {
+                "githubPersonalAccessToken": os.getenv("GITHUB_TOKEN"),
+            },
+        },
+    )
+
+    mcp_url = sbx.beta_get_mcp_url()
+    mcp_token = await sbx.beta_get_mcp_token()
+
+    await asyncio.sleep(1)
+
+    await sbx.commands.run(
+        f'claude mcp add --transport http e2b-mcp-gateway {mcp_url} --header "Authorization: Bearer {mcp_token}"',
+        timeout=0,
+        on_stdout=print,
+        on_stderr=print,
+    )
+
+    repo_path = f"{os.getenv('GITHUB_OWNER')}/{os.getenv('GITHUB_REPO')}"
+
+    print(f"\nListing issues in {repo_path}...\n")
+
+    prompt = f'Using the GitHub MCP tools, list all open issues in the repository "{repo_path}". Show the issue number, title, and author for each.'
+
+    await sbx.commands.run(
+        f"echo '{prompt}' | claude -p --dangerously-skip-permissions",
+        timeout=0,
+        on_stdout=print,
+        on_stderr=print,
+    )
+
+    await sbx.kill()
+
+if __name__ == "__main__":
+    asyncio.run(test_github())
+```
+
+Run the script:
+
+```bash
+python 03_test_github.py
+```
+
+{{< /tab >}}
+{{< /tabs >}}
 
 You should see Claude use the GitHub MCP tools to list your repository's issues:
 
-```console
+```console {collapse=true}
 Creating sandbox...
 Connecting to MCP gateway...
 
@@ -382,9 +659,12 @@ natural language. Claude decides what tool to call based on your prompt.
 
 Let's analyze code quality using SonarQube MCP tools.
 
-Create `04-test-sonarqube.js`:
+{{< tabs group="language" >}}
+{{< tab name="TypeScript" >}}
 
-```javascript
+Create `04-test-sonarqube.ts`:
+
+```typescript
 import "dotenv/config";
 import { Sandbox } from "e2b";
 
@@ -393,17 +673,17 @@ async function testSonarQube() {
 
   const sbx = await Sandbox.betaCreate({
     envs: {
-      ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY,
-      GITHUB_TOKEN: process.env.GITHUB_TOKEN,
-      SONARQUBE_TOKEN: process.env.SONARQUBE_TOKEN,
+      ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY!,
+      GITHUB_TOKEN: process.env.GITHUB_TOKEN!,
+      SONARQUBE_TOKEN: process.env.SONARQUBE_TOKEN!,
     },
     mcp: {
       githubOfficial: {
-        githubPersonalAccessToken: process.env.GITHUB_TOKEN,
+        githubPersonalAccessToken: process.env.GITHUB_TOKEN!,
       },
       sonarqube: {
-        org: process.env.SONARQUBE_ORG,
-        token: process.env.SONARQUBE_TOKEN,
+        org: process.env.SONARQUBE_ORG!,
+        token: process.env.SONARQUBE_TOKEN!,
         url: "https://sonarcloud.io",
       },
     },
@@ -448,8 +728,87 @@ testSonarQube().catch(console.error);
 Run the script:
 
 ```bash
-node 04-test-sonarqube.js
+npx tsx 04-test-sonarqube.ts
 ```
+
+{{< /tab >}}
+{{< tab name="Python" >}}
+
+Create `04_test_sonarqube.py`:
+
+```python
+import os
+import asyncio
+from dotenv import load_dotenv
+from e2b import AsyncSandbox
+
+load_dotenv()
+
+async def test_sonarqube():
+    print("Creating sandbox...\n")
+
+    sbx = await AsyncSandbox.beta_create(
+        envs={
+            "ANTHROPIC_API_KEY": os.getenv("ANTHROPIC_API_KEY"),
+            "GITHUB_TOKEN": os.getenv("GITHUB_TOKEN"),
+            "SONARQUBE_TOKEN": os.getenv("SONARQUBE_TOKEN"),
+        },
+        mcp={
+            "githubOfficial": {
+                "githubPersonalAccessToken": os.getenv("GITHUB_TOKEN"),
+            },
+            "sonarqube": {
+                "org": os.getenv("SONARQUBE_ORG"),
+                "token": os.getenv("SONARQUBE_TOKEN"),
+                "url": "https://sonarcloud.io",
+            },
+        },
+    )
+
+    mcp_url = sbx.beta_get_mcp_url()
+    mcp_token = await sbx.beta_get_mcp_token()
+
+    await asyncio.sleep(1)
+
+    await sbx.commands.run(
+        f'claude mcp add --transport http e2b-mcp-gateway {mcp_url} --header "Authorization: Bearer {mcp_token}"',
+        timeout=0,
+        on_stdout=print,
+        on_stderr=print,
+    )
+
+    print("\nAnalyzing code quality with SonarQube...\n")
+
+    prompt = """Using the SonarQube MCP tools:
+    1. List all projects in my organization
+    2. For the first project, show:
+    - Quality gate status (pass/fail)
+    - Number of bugs
+    - Number of code smells
+    - Number of security vulnerabilities
+    3. List the top 5 most critical issues found"""
+
+    await sbx.commands.run(
+        f"echo '{prompt}' | claude -p --dangerously-skip-permissions",
+        timeout=0,
+        on_stdout=print,
+        on_stderr=print,
+    )
+
+    await sbx.kill()
+
+if __name__ == "__main__":
+    asyncio.run(test_sonarqube())
+```
+
+Run the script:
+
+```bash
+python 04_test_sonarqube.py
+```
+
+{{< /tab >}}
+{{< /tabs >}}
 
 > [!NOTE]
 >
@@ -457,7 +816,7 @@ node 04-test-sonarqube.js
 
 You should see Claude output SonarQube analysis results:
 
-```console
+```console {collapse=true}
 Creating sandbox...
 
 Analyzing code quality with SonarQube...
@@ -495,9 +854,12 @@ and understand what code needs fixing.
 Now, let's teach Claude to fix code based on quality issues discovered
 by SonarQube.
 
-Create `05-fix-code-issue.js`:
+{{< tabs group="language" >}}
+{{< tab name="TypeScript" >}}
 
-```javascript
+Create `05-fix-code-issue.ts`:
+
+```typescript
 import "dotenv/config";
 import { Sandbox } from "e2b";
 
@@ -506,17 +868,17 @@ async function fixCodeIssue() {
 
   const sbx = await Sandbox.betaCreate({
     envs: {
-      ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY,
-      GITHUB_TOKEN: process.env.GITHUB_TOKEN,
-      SONARQUBE_TOKEN: process.env.SONARQUBE_TOKEN,
+      ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY!,
+      GITHUB_TOKEN: process.env.GITHUB_TOKEN!,
+      SONARQUBE_TOKEN: process.env.SONARQUBE_TOKEN!,
     },
     mcp: {
       githubOfficial: {
-        githubPersonalAccessToken: process.env.GITHUB_TOKEN,
+        githubPersonalAccessToken: process.env.GITHUB_TOKEN!,
       },
       sonarqube: {
-        org: process.env.SONARQUBE_ORG,
-        token: process.env.SONARQUBE_TOKEN,
+        org: process.env.SONARQUBE_ORG!,
+        token: process.env.SONARQUBE_TOKEN!,
         url: "https://sonarcloud.io",
       },
     },
@@ -557,7 +919,7 @@ async function fixCodeIssue() {
     },
   );
 
-  console.log(`\n Check your repository for branch: ${branchName}`);
+  console.log(`\nCheck your repository for branch: ${branchName}`);
 
   await sbx.kill();
 }
@@ -568,8 +930,95 @@ fixCodeIssue().catch(console.error);
 Run the script:
 
 ```bash
-node 05-fix-code-issue.js
+npx tsx 05-fix-code-issue.ts
 ```
+
+{{< /tab >}}
+{{< tab name="Python" >}}
+
+Create `05_fix_code_issue.py`:
+
+```python
+import os
+import asyncio
+import time
+from dotenv import load_dotenv
+from e2b import AsyncSandbox
+
+load_dotenv()
+
+async def fix_code_issue():
+    print("Creating sandbox...\n")
+
+    sbx = await AsyncSandbox.beta_create(
+        envs={
+            "ANTHROPIC_API_KEY": os.getenv("ANTHROPIC_API_KEY"),
+            "GITHUB_TOKEN": os.getenv("GITHUB_TOKEN"),
+            "SONARQUBE_TOKEN": os.getenv("SONARQUBE_TOKEN"),
+        },
+        mcp={
+            "githubOfficial": {
+                "githubPersonalAccessToken": os.getenv("GITHUB_TOKEN"),
+            },
+            "sonarqube": {
+                "org": os.getenv("SONARQUBE_ORG"),
+                "token": os.getenv("SONARQUBE_TOKEN"),
+                "url": "https://sonarcloud.io",
+            },
+        },
+    )
+
+    mcp_url = sbx.beta_get_mcp_url()
+    mcp_token = await sbx.beta_get_mcp_token()
+
+    await asyncio.sleep(1)
+
+    await sbx.commands.run(
+        f'claude mcp add --transport http e2b-mcp-gateway {mcp_url} --header "Authorization: Bearer {mcp_token}"',
+        timeout=0,
+        on_stdout=print,
+        on_stderr=print,
+    )
+
+    repo_path = f"{os.getenv('GITHUB_OWNER')}/{os.getenv('GITHUB_REPO')}"
+    branch_name = f"quality-fix-{int(time.time() * 1000)}"
+
+    print("\nFixing a code quality issue...\n")
+
+    prompt = f"""Using GitHub and SonarQube MCP tools:
+
+    1. Analyze code quality in repository "{repo_path}" with SonarQube
+    2. Find ONE simple issue that can be confidently fixed (like an unused variable or code smell)
+    3. Create a new branch called "{branch_name}"
+    4. Read the file containing the issue using GitHub tools
+    5. Fix the issue in the code
+    6. Commit the fix to the new branch with a clear commit message
+
+    Important: Only fix issues you're 100% confident about. Explain what you're fixing and why."""
+
+    await sbx.commands.run(
+        f"echo '{prompt}' | claude -p --dangerously-skip-permissions",
+        timeout=0,
+        on_stdout=print,
+        on_stderr=print,
+    )
+
+    print(f"\n Check your repository for branch: {branch_name}")
+
+    await sbx.kill()
+
+if __name__ == "__main__":
+    asyncio.run(fix_code_issue())
+```
+
+Run the script:
+
+```bash
+python 05_fix_code_issue.py
+```
+
+{{< /tab >}}
+{{< /tabs >}}
 
 > [!NOTE]
 >
@@ -577,7 +1026,7 @@ node 05-fix-code-issue.js
 
 Claude will analyze your repository and fix a code quality issue:
 
-```console
+```console {collapse=true}
 Creating sandbox...
 
 Fixing a code quality issue...
@@ -623,9 +1072,12 @@ files, make code changes, and commit them.
 Finally, let's build the complete workflow: analyze quality, fix issues,
 and create a PR only if improvements are made.
 
-Create `06-quality-gated-pr.js`:
+{{< tabs group="language" >}}
+{{< tab name="TypeScript" >}}
 
-```javascript
+Create `06-quality-gated-pr.ts`:
+
+```typescript
 import "dotenv/config";
 import { Sandbox } from "e2b";
 
@@ -634,17 +1086,17 @@ async function qualityGatedPR() {
 
   const sbx = await Sandbox.betaCreate({
     envs: {
-      ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY,
-      GITHUB_TOKEN: process.env.GITHUB_TOKEN,
-      SONARQUBE_TOKEN: process.env.SONARQUBE_TOKEN,
+      ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY!,
+      GITHUB_TOKEN: process.env.GITHUB_TOKEN!,
+      SONARQUBE_TOKEN: process.env.SONARQUBE_TOKEN!,
     },
     mcp: {
       githubOfficial: {
-        githubPersonalAccessToken: process.env.GITHUB_TOKEN,
+        githubPersonalAccessToken: process.env.GITHUB_TOKEN!,
       },
       sonarqube: {
-        org: process.env.SONARQUBE_ORG,
-        token: process.env.SONARQUBE_TOKEN,
+        org: process.env.SONARQUBE_ORG!,
+        token: process.env.SONARQUBE_TOKEN!,
         url: "https://sonarcloud.io",
       },
     },
@@ -719,8 +1171,118 @@ qualityGatedPR().catch(console.error);
 Run the script:
 
 ```bash
-node 06-quality-gated-pr.js
+npx tsx 06-quality-gated-pr.ts
 ```
+
+{{< /tab >}}
+{{< tab name="Python" >}}
+
+Create `06_quality_gated_pr.py`:
+
+```python
+import os
+import asyncio
+import time
+from dotenv import load_dotenv
+from e2b import AsyncSandbox
+
+load_dotenv()
+
+async def quality_gated_pr():
+    print("Creating sandbox for quality-gated PR workflow...\n")
+
+    sbx = await AsyncSandbox.beta_create(
+        envs={
+            "ANTHROPIC_API_KEY": os.getenv("ANTHROPIC_API_KEY"),
+            "GITHUB_TOKEN": os.getenv("GITHUB_TOKEN"),
+            "SONARQUBE_TOKEN": os.getenv("SONARQUBE_TOKEN"),
+        },
+        mcp={
+            "githubOfficial": {
+                "githubPersonalAccessToken": os.getenv("GITHUB_TOKEN"),
+            },
+            "sonarqube": {
+                "org": os.getenv("SONARQUBE_ORG"),
+                "token": os.getenv("SONARQUBE_TOKEN"),
+                "url": "https://sonarcloud.io",
+            },
+        },
+    )
+
+    mcp_url = sbx.beta_get_mcp_url()
+    mcp_token = await sbx.beta_get_mcp_token()
+
+    await asyncio.sleep(1)
+
+    await sbx.commands.run(
+        f'claude mcp add --transport http e2b-mcp-gateway {mcp_url} --header "Authorization: Bearer {mcp_token}"',
+        timeout=0,
+        on_stdout=print,
+        on_stderr=print,
+    )
+
+    repo_path = f"{os.getenv('GITHUB_OWNER')}/{os.getenv('GITHUB_REPO')}"
+    branch_name = f"quality-improvements-{int(time.time() * 1000)}"
+
+    print("\nRunning quality-gated PR workflow...\n")
+
+    prompt = f"""You are a code quality engineer. Using GitHub and SonarQube MCP tools:
+
+    STEP 1: ANALYSIS
+    - Get current code quality status from SonarQube for "{repo_path}"
+    - Record the current number of bugs, code smells, and vulnerabilities
+    - Identify 1-3 issues that you can confidently fix
+
+    STEP 2: FIX ISSUES
+    - Create branch "{branch_name}"
+    - For each issue you are fixing:
+        Read the file with the issue
+        Make the fix
+        Commit with a descriptive message
+    - Only fix issues where you are 100 percent confident the fix is correct
+
+    STEP 3: VERIFICATION
+        - After your fixes, check if quality metrics would improve
+        - Calculate: Would this reduce bugs/smells/vulnerabilities?
+
+    STEP 4: QUALITY GATE
+        - Only proceed if your changes improve quality
+        - If quality would not improve, explain why and stop
+
+    STEP 5: CREATE PR (only if quality gate passes)
+        - Create a pull request from "{branch_name}" to main
+        - Title: "Quality improvements: [describe what you fixed]"
+        - Description should include:
+            What issues you fixed
+            Before/after quality metrics
+            Why these fixes improve code quality
+        - Add a comment with detailed SonarQube analysis
+
+    Be thorough and explain your decisions at each step."""
+
+    await sbx.commands.run(
+        f"echo '{prompt.replace(chr(39), chr(39) + chr(92) + chr(39) + chr(39))}' | claude -p --dangerously-skip-permissions",
+        timeout=0,
+        on_stdout=print,
+        on_stderr=print,
+    )
+
+    print(f"\n Workflow complete! Check {repo_path} for new pull request.")
+
+    await sbx.kill()
+
+if __name__ == "__main__":
+    asyncio.run(quality_gated_pr())
+```
+
+Run the script:
+
+```bash
+python 06_quality_gated_pr.py
+```
+
+{{< /tab >}}
+{{< /tabs >}}
 
 > [!NOTE]
 >
@@ -729,7 +1291,7 @@ node 06-quality-gated-pr.js
 Claude will run the entire workflow, creating a quality improvement
 and opening a PR in GitHub:
 
-```console
+```console {collapse=true}
 Creating sandbox for quality-gated PR workflow...
 
 Running quality-gated PR workflow...
@@ -814,31 +1376,34 @@ verifies improvements, and only creates a PR if quality actually improves.
 
 Production workflows need error handling. Let's make our workflow more robust.
 
-Create `07-robust-workflow.js`:
+{{< tabs group="language" >}}
+{{< tab name="TypeScript" >}}
 
-```javascript
+Create `07-robust-workflow.ts`:
+
+```typescript
 import "dotenv/config";
 import { Sandbox } from "e2b";
 
 async function robustWorkflow() {
-  let sbx;
+  let sbx: Sandbox | undefined;
 
   try {
     console.log("Creating sandbox...\n");
 
     sbx = await Sandbox.betaCreate({
       envs: {
-        ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY,
-        GITHUB_TOKEN: process.env.GITHUB_TOKEN,
-        SONARQUBE_TOKEN: process.env.SONARQUBE_TOKEN,
+        ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY!,
+        GITHUB_TOKEN: process.env.GITHUB_TOKEN!,
+        SONARQUBE_TOKEN: process.env.SONARQUBE_TOKEN!,
       },
       mcp: {
         githubOfficial: {
-          githubPersonalAccessToken: process.env.GITHUB_TOKEN,
+          githubPersonalAccessToken: process.env.GITHUB_TOKEN!,
         },
         sonarqube: {
-          org: process.env.SONARQUBE_ORG,
-          token: process.env.SONARQUBE_TOKEN,
+          org: process.env.SONARQUBE_ORG!,
+          token: process.env.SONARQUBE_TOKEN!,
           url: "https://sonarcloud.io",
         },
       },
@@ -880,13 +1445,14 @@ async function robustWorkflow() {
 
     console.log("\n Workflow completed");
   } catch (error) {
-    console.error("\n Workflow failed:", error.message);
+    const err = error as Error;
+    console.error("\n Workflow failed:", err.message);
 
-    if (error.message.includes("403")) {
+    if (err.message.includes("403")) {
       console.error("\n Check your E2B account has MCP gateway access");
-    } else if (error.message.includes("401")) {
+    } else if (err.message.includes("401")) {
       console.error("\n Check your API tokens are valid");
-    } else if (error.message.includes("Credit balance")) {
+    } else if (err.message.includes("Credit balance")) {
       console.error("\n Check your Anthropic API credit balance");
     }
 
@@ -905,8 +1471,113 @@ robustWorkflow().catch(console.error);
 Run the script:
 
 ```bash
-node 07-robust-workflow.js
+npx tsx 07-robust-workflow.ts
 ```
+
+{{< /tab >}}
+{{< tab name="Python" >}}
+
+Create `07_robust_workflow.py`:
+
+```python
+import os
+import asyncio
+import sys
+from dotenv import load_dotenv
+from e2b import AsyncSandbox
+
+load_dotenv()
+
+async def robust_workflow():
+    sbx = None
+
+    try:
+        print("Creating sandbox...\n")
+
+        sbx = await AsyncSandbox.beta_create(
+            envs={
+                "ANTHROPIC_API_KEY": os.getenv("ANTHROPIC_API_KEY"),
+                "GITHUB_TOKEN": os.getenv("GITHUB_TOKEN"),
+                "SONARQUBE_TOKEN": os.getenv("SONARQUBE_TOKEN"),
+            },
+            mcp={
+                "githubOfficial": {
+                    "githubPersonalAccessToken": os.getenv("GITHUB_TOKEN"),
+                },
+                "sonarqube": {
+                    "org": os.getenv("SONARQUBE_ORG"),
+                    "token": os.getenv("SONARQUBE_TOKEN"),
+                    "url": "https://sonarcloud.io",
+                },
+            },
+        )
+
+        mcp_url = sbx.beta_get_mcp_url()
+        mcp_token = await sbx.beta_get_mcp_token()
+
+        await asyncio.sleep(1)
+
+        await sbx.commands.run(
+            f'claude mcp add --transport http e2b-mcp-gateway {mcp_url} --header "Authorization: Bearer {mcp_token}"',
+            timeout=0,  # Fixed: was timeout_ms
+            on_stdout=print,
+            on_stderr=print,
+        )
+
+        repo_path = f"{os.getenv('GITHUB_OWNER')}/{os.getenv('GITHUB_REPO')}"
+
+        print("\nRunning workflow with error handling...\n")
+
+        prompt = f"""Run a quality improvement workflow for "{repo_path}".
+
+        ERROR HANDLING RULES:
+        1. If SonarQube is unreachable, explain the error and stop gracefully
+        2. If GitHub API fails, retry once, then explain and stop
+        3. If no fixable issues are found, explain why and exit (this is not an error)
+        4. If file modifications fail, explain which file and why
+        5. At each step, check for errors before proceeding
+
+        Run the workflow and handle any errors you encounter professionally."""
+
+        await sbx.commands.run(
+            f"echo '{prompt}' | claude -p --dangerously-skip-permissions",
+            timeout=0,
+            on_stdout=print,
+            on_stderr=print,
+        )
+
+        print("\n Workflow completed")
+
+    except Exception as error:
+        print(f"\n✗ Workflow failed: {str(error)}")
+
+        error_msg = str(error)
+        if "403" in error_msg:
+            print("\n Check your E2B account has MCP gateway access")
+        elif "401" in error_msg:
+            print("\n Check your API tokens are valid")
+        elif "Credit balance" in error_msg:
+            print("\n Check your Anthropic API credit balance")
+
+        sys.exit(1)
+
+    finally:
+        if sbx:
+            print("\n Cleaning up sandbox...")
+            await sbx.kill()
+
+if __name__ == "__main__":
+    asyncio.run(robust_workflow())
+```
+
+Run the script:
+
+```bash
+python 07_robust_workflow.py
+```
+
+{{< /tab >}}
+{{< /tabs >}}
 
 Claude will run the entire workflow, and if it encounters an error, respond
 with robust error messaging.
