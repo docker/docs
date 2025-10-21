@@ -21,6 +21,11 @@ Before you begin, make sure you have:
 
 - E2B account with [API access](https://e2b.dev/docs/api-key)
 - [Anthropic API key](https://docs.claude.com/en/api/admin-api/apikeys/get-api-key)
+
+    > [!NOTE]
+    >
+    > This example uses Claude CLI which comes pre-installed in E2B sandboxes, but you can adapt the example to work with other AI assistants of your choice. See [E2B's MCP documentation](https://e2b.dev/docs/mcp/quickstart) for alternative connection methods.
+
 - GitHub account with:
   - A repository containing code to analyze
   - [Personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) with `repo` scope
