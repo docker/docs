@@ -30,6 +30,40 @@ Docker Desktop versions older than 6 months from the latest release are not avai
 
 For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoot-and-support/faqs/releases.md).
 
+## 4.49.0
+
+{{< release-date date="2025-10-23" >}}
+
+{{< desktop-install-v2 all=true win_arm_release="Early Access" version="4.49.0" build_path="/TODO/" >}}
+
+> [!IMPORTANT]
+>
+> Support for Windows 10 and 11 22H2 (19045) has ended. Installing Docker Desktop will require Windows 11 23H2 in the next release.
+
+### New 
+
+- [cagent](/manuals/ai/cagent/_index.md) is now available through Docker Desktop. 
+
+### Upgrades
+
+- [Docker Engine v28.5.1](/manuals/engine/release-notes/28.md#2851)
+- [Docker Compose v2.40.1](https://github.com/docker/compose/releases/tag/v2.40.1)
+- [NVIDIA Container Toolkit v1.17.9](https://github.com/NVIDIA/nvidia-container-toolkit/releases/tag/v1.17.9)
+- Docker Debug `v0.0.45` 
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed an issue where Docker Desktop used an expired proxy password while waiting for the user to enter a new one.
+- Fixed a 'chown' error shown on startup with Docker Debug.
+
+#### For Mac
+
+- Fixed Kubernetes startup hanging when another Kubernetes context was active. Fixes https://github.com/docker/for-mac/issues/7771.
+- If a Rosetta install is cancelled or fails, Rosetta will be disabled in Docker Desktop.
+- Minimum OS version to install or update Docker Desktop on macOS is now macOS Sonoma (version 14) or later.
+
 ## 4.48.0
 
 {{< release-date date="2025-10-09" >}}
