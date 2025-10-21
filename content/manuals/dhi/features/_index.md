@@ -24,6 +24,10 @@ params:
       description: Learn how Docker Hardened Images offer repository-based flexibility with no per-image or per-pull limitations.
       icon: wallet
       link: /dhi/features/flexible/
+    - title: Docker Hardened Image charts
+      description: Learn about Docker Hardened Image charts.
+      icon: leaderboard
+      link: /dhi/features/helm/
 ---
 
 Docker Hardened Images (DHIs) go beyond minimal base and application images by

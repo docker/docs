@@ -24,6 +24,10 @@ params:
       description: Learn how to use Docker Hardened Images in Kubernetes deployments.
       icon: play_arrow
       link: /dhi/how-to/k8s/
+    - title: Use a Docker Hardened Image chart
+      description: Learn how to use a Docker Hardened Image chart.
+      icon: leaderboard
+      link: /dhi/how-to/helm/
     - title: Manage Docker Hardened Images
       description: Learn how to manage your mirrored and customized Docker Hardened Images in your organization.
       icon: reorder
