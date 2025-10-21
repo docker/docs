@@ -8,7 +8,7 @@ keywords: docker compose bridge, compose kubernetes transform, kubernetes from c
 
 {{< summary-bar feature_name="Compose bridge" >}}
 
-includes a built-in transformation that automatically converts your Compose configuration into a set of Kubernetes manifests.
+Compose Bridge includes a built-in transformation that automatically converts your Compose configuration into a set of Kubernetes manifests.
 
 Based on your `compose.yaml` file, it produces:
 
