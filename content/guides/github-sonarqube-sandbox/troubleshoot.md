@@ -1,6 +1,6 @@
 ---
 title: Troubleshoot code quality workflows
-linkTitle: Troubleshooting
+linkTitle: Troubleshoot
 summary: Resolve common issues with E2B sandboxes, MCP server connections, and GitHub/SonarQube integration.
 description: Solutions for MCP tools not loading, authentication errors, permission issues, workflow timeouts, and other common problems when building code quality workflows with E2B.
 weight: 30
@@ -346,7 +346,3 @@ Solution:
 2. Ensure you have at least one project configured in SonarCloud.
 3. Check that your SonarQube token has the necessary permissions.
 4. Confirm your project has been analyzed at least once in SonarCloud.
-
-## Next steps
-
-Explore additional resources for E2B and MCP development.

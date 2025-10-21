@@ -49,7 +49,7 @@ Before you begin, make sure you have:
 > use this approach with trusted code and workflows. For more information,
 > see [Anthropic's guidance on container security](https://docs.anthropic.com/en/docs/claude-code/devcontainer).
 
-## Step 1: Set up your project
+## Set up your project
 
 {{< tabs group="language" >}}
 {{< tab name="TypeScript" >}}
@@ -166,7 +166,7 @@ echo "__pycache__/" >> .gitignore
 {{< /tab >}}
 {{< /tabs >}}
 
-## Step 2: Create your first sandbox
+## Step 1: Create your first sandbox
 
 Let's start by creating a sandbox and verifying the MCP servers are configured correctly.
 
@@ -325,7 +325,7 @@ You've just learned how to create an E2B sandbox with multiple MCP servers
 configured. The `betaCreate` method initializes a cloud environment
 with Claude CLI and your specified MCP servers.
 
-## Step 3: Discover available MCP tools
+## Step 2: Discover available MCP tools
 
 MCP servers expose tools that Claude can call. The GitHub MCP server provides
 repository management tools, while SonarQube provides code analysis tools.
@@ -500,7 +500,7 @@ I have access to the following MCP tools:
 ... (SonarQube analysis tools)
 ```
 
-## Step 4: Test GitHub MCP tools
+## Step 3: Test GitHub MCP tools
 
 Let's try testing GitHub using MCP tools. We'll start simple by listing
 repository issues.
@@ -655,7 +655,7 @@ Here are the first 10 open issues in the <your-repo> repository:
 You can now send prompts to Claude and interact with GitHub through
 natural language. Claude decides what tool to call based on your prompt.
 
-## Step 5: Test SonarQube MCP tools
+## Step 4: Test SonarQube MCP tools
 
 Let's analyze code quality using SonarQube MCP tools.
 
@@ -849,7 +849,7 @@ You can now use SonarQube MCP tools to analyze code quality through
 natural language. You can retrieve quality metrics, identify issues,
 and understand what code needs fixing.
 
-## Step 6: Create a branch and make code changes
+## Step 5: Create a branch and make code changes
 
 Now, let's teach Claude to fix code based on quality issues discovered
 by SonarQube.
@@ -1067,7 +1067,7 @@ The fix is ready for review and can be merged to improve the code quality of the
 You can now use GitHub and SonarQube MCP tools in the same workflow to read
 files, make code changes, and commit them.
 
-## Step 7: Create quality-gated pull requests
+## Step 6: Create quality-gated pull requests
 
 Finally, let's build the complete workflow: analyze quality, fix issues,
 and create a PR only if improvements are made.
@@ -1372,9 +1372,9 @@ You've now built a complete, multi-step workflow with conditional logic.
 Claude analyzes quality with SonarQube, makes fixes using GitHub tools,
 verifies improvements, and only creates a PR if quality actually improves.
 
-## Step 8: Add error handling
+## Step 7: Add error handling
 
-Production workflows need error handling. Let's make our workflow more robust.
+Production workflows need error handling. Let's make the workflow more robust.
 
 {{< tabs group="language" >}}
 {{< tab name="TypeScript" >}}
