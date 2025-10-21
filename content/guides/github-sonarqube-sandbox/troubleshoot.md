@@ -1,5 +1,5 @@
 ---
-title: Troubleshoot code quality workflow issues
+title: Troubleshoot code quality workflows
 linkTitle: Troubleshooting
 summary: Resolve common issues with E2B sandboxes, MCP server connections, and GitHub/SonarQube integration.
 description: Solutions for MCP tools not loading, authentication errors, permission issues, workflow timeouts, and other common problems when building code quality workflows with E2B.
