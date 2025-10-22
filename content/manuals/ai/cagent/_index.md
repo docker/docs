@@ -37,22 +37,10 @@ they don't share knowledge.
 
 ## Get started with cagent
 
-1. Download the [latest release](https://github.com/docker/cagent/releases)
-   for your operating system.
-
-   > [!NOTE]
-   > You might need to give the binary executable permissions.
-   > On macOS and Linux, run:
-
-     ```console
-     chmod +x /path/to/downloads/cagent-linux-<arm/amd>64
-     ```
+1. The easiest way to get cagent is to [install Docker Desktop version 4.49 or later](/manuals/desktop/release-notes.md) for your operating system.
 
    > [!NOTE]
    > You can also build cagent from the source. See the [repository](https://github.com/docker/cagent?tab=readme-ov-file#build-from-source).
-
-1. Optional: Rename the binary as needed and update your PATH to include
-   cagent's executable.
 
 1. Set the following environment variables:
 
