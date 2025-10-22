@@ -55,8 +55,6 @@ on participation tier:
   with Docker Scout
 - [Priority search ranking](#priority-search-ranking): Enhanced discoverability
   in Docker Hub search results
-- [Additional Docker Business seats](#additional-docker-business-seats): Extra
-  team collaboration capabilities
 - [Removal of rate limiting](#removal-of-rate-limiting): Unrestricted pulls for
   development teams
 - [Co-marketing opportunities](#co-marketing-opportunities): Joint promotional
@@ -122,12 +120,6 @@ Verified publisher images receive enhanced visibility in Docker Hub search
 results, making it easier for developers to discover your content. This improved
 discoverability helps drive adoption of your images within the developer
 community.
-
-### Additional Docker Business seats
-
-DVP participants receive additional Docker Business seats as part of their
-program benefits, enabling expanded team collaboration and access to premium
-Docker features for your organization.
 
 ### Removal of rate limiting
 
