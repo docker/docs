@@ -76,7 +76,7 @@ benefits from:
   reducing reliance on origin traffic and ensuring fast access for developers
   everywhere.
 - Durability: Docker maintains a documented backup policy and performs full
-  daily, backups of production data.
+  daily backups of production data.
 
 You simply push your images to Docker Hub as usual, and Docker takes care of the
 rest, serving your image to millions of developers worldwide.
