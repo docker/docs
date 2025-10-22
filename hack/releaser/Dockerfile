@@ -18,18 +18,6 @@ RUN --mount=type=bind,target=. \
   --mount=type=cache,target=/root/.cache/go-build \
   go build -o /out/releaser .
 
-FROM base AS aws-s3-update-config
-ARG DRY_RUN=false
-ARG AWS_REGION
-ARG AWS_S3_BUCKET
-ARG AWS_S3_CONFIG
-RUN --mount=type=bind,target=. \
-  --mount=type=bind,from=releaser,source=/out/releaser,target=/usr/bin/releaser \
-  --mount=type=secret,id=AWS_ACCESS_KEY_ID \
-  --mount=type=secret,id=AWS_SECRET_ACCESS_KEY \
-  --mount=type=secret,id=AWS_SESSION_TOKEN \
-  releaser aws s3-update-config
-
 FROM base AS aws-lambda-invoke
 ARG DRY_RUN=false
 ARG AWS_REGION
