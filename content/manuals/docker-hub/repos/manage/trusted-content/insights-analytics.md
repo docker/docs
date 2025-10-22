@@ -276,7 +276,7 @@ points:
 > reclassified as production to better reflect actual deployment patterns.
 
 {{< /tab >}}
-{{< tab name="Legacy DVP program" >}}
+{{< tab name="DSOS & Legacy DVP programs" >}}
 
 > [!IMPORTANT]
 >
@@ -348,8 +348,6 @@ following these steps:
 1.  Sign in to [Docker Hub](https://hub.docker.com/) and select **My Hub**.
 
 2.  Choose your organization and select **Analytics**.
-
-    ![Organization overview page, with the Insights and Analytics tab](../../../images/organization-tabs.png)
 
 3.  Set the time span for which you want to export analytics data.
 
@@ -496,8 +494,6 @@ from the date of when the field was first introduced, and going forward.
 
 Refer to the tables in the [Data points](#data-points) section to see from which
 date a given data point is available.
-
-
 
 {{< /tab >}}
 {{< /tabs >}}
