@@ -4,7 +4,7 @@ linkTitle: Security FAQs
 description: Frequently asked questions related to MCP Catalog and Toolkit security
 keywords: MCP, Toolkit, MCP server, MCP client, security, faq
 tags: [FAQ]
-weight: 60
+weight: 70
 ---
 
 Docker MCP Catalog and Toolkit is a solution for securely building, sharing, and

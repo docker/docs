@@ -34,6 +34,11 @@ compatibility.
 - Pull-based distribution using Docker infrastructure.
 - Tools provided by partners such as New Relic, Stripe, Grafana, and more.
 
+> [!NOTE]
+> E2B sandboxes now include direct access to the Docker MCP Catalog, giving developers
+> access to over 200 tools and services to seamlessly build and run AI agents. For
+> more information, see [E2B Sandboxes](sandboxes.md).
+
 ## How it works
 
 Each tool in the MCP Catalog is packaged as a Docker image with metadata.
