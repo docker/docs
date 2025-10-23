@@ -155,7 +155,7 @@ Docker Offload:
 docker compose alpha:
   availability: Experimental
 Docker Debug:
-  requires: Docker Desktop 4.48 and later. For Docker Desktop versions 4.47.0 and earlier, you must have a Pro, Team, or Business subscription
+  requires: Docker Desktop 4.49 and later. For Docker Desktop versions 4.48.0 and earlier, you must have a Pro, Team, or Business subscription
 Docker Desktop Archlinux:
   availability: Experimental
 Docker Desktop CLI:
