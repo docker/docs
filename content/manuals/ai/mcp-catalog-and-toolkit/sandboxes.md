@@ -2,6 +2,11 @@
 title: Sandboxes
 description: "Learn how sandboxes provide secure, isolated execution environments for AI agents in the MCP ecosystem, enabling safe code execution and protecting production systems."
 keywords: Sandboxes, E2B, MCP Gateway, isolated environment, AI agent security
+params:
+  sidebar:
+    badge:
+      color: green
+      text: New
 weight: 50
 ---
 
@@ -457,7 +462,8 @@ You can extend this example to combine any of the 200+ MCP servers in the Docker
 
 ## Related pages
 
-- [Docker MCP Toolkit and catalog](/manuals/ai/mcp-catalog-and-toolkit/_index.md)
-- [Docker MCP Gateway](/manuals/ai/mcp-catalog-and-toolkit/mcp-gateway.md)
+- [How to build an AI-powered code quality workflow with SonarQube and E2B](/guides/github-sonarqube-sandbox.md)
 - [Docker + E2B: Building the Future of Trusted AI](https://www.docker.com/blog/docker-e2b-building-the-future-of-trusted-ai/)
+- [Docker MCP Toolkit and Catalog](/manuals/ai/mcp-catalog-and-toolkit/_index.md)
+- [Docker MCP Gateway](/manuals/ai/mcp-catalog-and-toolkit/mcp-gateway.md)
 - [E2B MCP documentation](https://e2b.dev/docs/mcp)
