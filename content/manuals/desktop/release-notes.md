@@ -43,11 +43,12 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ### New 
 
 - [cagent](/manuals/ai/cagent/_index.md) is now available through Docker Desktop. 
+- Docker Debug is now free for all users. 
 
 ### Upgrades
 
 - [Docker Engine v28.5.1](/manuals/engine/release-notes/28.md#2851)
-- [Docker Compose v2.40.1](https://github.com/docker/compose/releases/tag/v2.40.1)
+- [Docker Compose v2.40.2](https://github.com/docker/compose/releases/tag/v2.40.2)
 - [NVIDIA Container Toolkit v1.17.9](https://github.com/NVIDIA/nvidia-container-toolkit/releases/tag/v1.17.9)
 - Docker Debug `v0.0.45` 
 
