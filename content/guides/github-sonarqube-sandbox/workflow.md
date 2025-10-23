@@ -501,7 +501,7 @@ I have access to the following MCP tools:
 
 ## Step 3: Test GitHub MCP tools
 
-Let's try testing GitHub using MCP tools. We'll start simple by listing
+Let's try testing GitHub using MCP tools. Start simple by listing
 repository issues.
 
 {{< tabs group="language" >}}
