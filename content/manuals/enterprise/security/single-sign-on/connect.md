@@ -133,6 +133,7 @@ Complete the integration by pasting your IdP values into Docker.
 {{< tab name="Okta SAML" >}}
 
 1. In Okta, select your app and go to **View SAML setup instructions**.
+1. Optional. Select the checkbox to **Enable IdP-initiated** option.
 1. Copy the **SAML Sign-in URL** and **x509 Certificate**.
 
     > [!IMPORTANT]
