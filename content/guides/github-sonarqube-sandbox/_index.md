@@ -24,9 +24,10 @@ using SonarQube, then generate pull requests with fixes.
 
 ## What you'll build
 
-You'll build a Node.js script that spins up an E2B sandbox, connects GitHub
-and SonarQube MCP servers, and uses Claude to analyze code quality and propose
-improvements.
+You’ll build a Node.js script that spins up an E2B sandbox, connects GitHub and
+SonarQube MCP servers, and uses Claude Code to analyze code quality and propose
+improvements. The MCP servers are containerized and run as part of the E2B
+sandbox.
 
 ## What you'll learn
 
@@ -34,7 +35,7 @@ In this guide, you'll learn:
 
 - How to create E2B sandboxes with multiple MCP servers
 - How to configure GitHub and SonarQube MCP servers for AI workflows
-- How to use Claude CLI inside sandboxes to interact with external tools
+- How to use Claude Code inside sandboxes to interact with external tools
 - How to build automated code review workflows that create quality-gated
 pull requests
 
