@@ -42,7 +42,7 @@ the [custom roles permissions reference](#custom-roles-permissions-reference).
 of selected permissions.
 1. Select **Create**.
 
-With a custom role created, you can now [assign custom roles to users](#assign-custom-roles-to-users).
+With a custom role created, you can now [assign custom roles to users](#assign-custom-roles).
 
 ## Edit a custom role
 
