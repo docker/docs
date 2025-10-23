@@ -28,7 +28,7 @@ require (
 	github.com/dlclark/regexp2 v1.11.0 // indirect
 	github.com/docker/buildx v0.29.1 // indirect
 	github.com/docker/cli v28.5.1+incompatible // indirect; see "replace" rule at the bottom for actual version
-	github.com/docker/compose/v2 v2.40.0 // indirect
+	github.com/docker/compose/v2 v2.40.2 // indirect
 	github.com/docker/distribution v2.8.3+incompatible // indirect
 	github.com/docker/docker v28.5.1+incompatible // indirect; see "replace" rule at the bottom for actual version
 	github.com/docker/docker-credential-helpers v0.9.3 // indirect
@@ -132,7 +132,7 @@ require (
 replace (
 	github.com/docker/buildx => github.com/docker/buildx v0.29.1
 	github.com/docker/cli => github.com/docker/cli v28.5.1+incompatible
-	github.com/docker/compose/v2 => github.com/docker/compose/v2 v2.40.1
+	github.com/docker/compose/v2 => github.com/docker/compose/v2 v2.40.2
 	github.com/docker/docker => github.com/docker/docker v28.4.0+incompatible
 	github.com/docker/mcp-gateway => github.com/docker/mcp-gateway v0.22.0
 	github.com/docker/model-runner/cmd/cli => github.com/docker/model-runner/cmd/cli v0.1.44
