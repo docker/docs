@@ -2,6 +2,11 @@
 title: Sandboxes
 description: "Learn how sandboxes provide secure, isolated execution environments for AI agents in the MCP ecosystem, enabling safe code execution and protecting production systems."
 keywords: Sandboxes, E2B, MCP Gateway, isolated environment, AI agent security
+params:
+  sidebar:
+    badge:
+      color: green
+      text: New
 weight: 50
 ---
 
