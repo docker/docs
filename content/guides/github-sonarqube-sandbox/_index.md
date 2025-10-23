@@ -50,3 +50,7 @@ local environment and credentials
 locally
 - Scalability: Resource-intensive operations like code scanning run in the
 cloud without consuming local resources
+
+## Learn more
+
+Read Docker's blog post: [Docker + E2B: Building the Future of Trusted AI](https://www.docker.com/blog/docker-e2b-building-the-future-of-trusted-ai/).
