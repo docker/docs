@@ -4,9 +4,9 @@ summary: Simplify user access while ensuring security and efficiency in Docker.
 description: A guide for managing roles, provisioning users, and optimizing Docker access with tools like SSO and activity logs.
 tags: [admin]
 params:
-  featured: true
+  featured: false
   time: 20 minutes
-  image: 
+  image:
   resource_links:
     - title: Overview of Administration in Docker
       url: /admin/
