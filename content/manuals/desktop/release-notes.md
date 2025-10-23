@@ -43,7 +43,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 ### New 
 
 - [cagent](/manuals/ai/cagent/_index.md) is now available through Docker Desktop. 
-- Docker Debug is now free for all users. 
+- [Docker Debug](/reference/cli/docker/debug.md) is now free for all users. 
 
 ### Upgrades
 
