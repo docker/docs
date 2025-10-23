@@ -40,7 +40,7 @@ they don't share knowledge.
 1. The easiest way to get cagent is to [install Docker Desktop version 4.49 or later](/manuals/desktop/release-notes.md) for your operating system.
 
    > [!NOTE]
-   > You can also build cagent from the source. See the [repository](https://github.com/docker/cagent?tab=readme-ov-file#build-from-source).
+   > You can also build cagent from the source. For more information, see the [cagent GitHub repository](https://github.com/docker/cagent?tab=readme-ov-file#build-from-source).
 
 1. Set the following environment variables:
 
