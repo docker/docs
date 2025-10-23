@@ -24,6 +24,11 @@ the following benefits:
 - Enterprise observability: Built-in monitoring, logging, and filtering tools ensure
   full visibility and governance of AI tool activity.
 
+> [!NOTE]
+> E2B sandboxes now include direct access to the Docker MCP Catalog, giving developers
+> access to over 200 tools and services to seamlessly build and run AI agents. For
+> more information, see [E2B Sandboxes](sandboxes.md).
+
 ## Who is the MCP Gateway designed for?
 
 The MCP Gateway solves problems encountered by various groups:
