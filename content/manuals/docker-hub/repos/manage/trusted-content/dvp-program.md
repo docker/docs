@@ -99,9 +99,7 @@ DVP organizations can upload custom images for individual repositories on Docker
 Hub. This lets you override the default organization-level logo on a
 per-repository basis.
 
-Only a user with administrative access (owner or team member with administrator
-permission) over the repository can change the repository logo. To manage the
-repository logo, see [Manage repository logo](#manage-repository-logo).
+To manage the repository logo, see [Manage repository logo](#manage-repository-logo).
 
 ### Vulnerability analysis
 
@@ -162,6 +160,8 @@ for each repository in your organization. The following requirements apply:
 - The minimum allowed image size in pixels is 120×120.
 - The maximum allowed image size in pixels is 1000×1000.
 - The maximum allowed image file size is 5MB.
+
+Only a user with an owner or editor role for the organization can change the repository logo.
 
 ### Set the repository logo
 
