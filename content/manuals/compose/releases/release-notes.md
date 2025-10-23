@@ -15,6 +15,18 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.40.2
+
+{{< release-date date="2025-10-22" >}}
+
+### Bug fixes and enhancements
+
+- Added a check to fail builds if the minimal required Buildx version isn’t installed
+- Removed unused code to rely solely on api.Service
+- Improved image detection by checking digests/canonical references, not just tags
+- Introduced `WithPrompt` which adds a pluggable UI for user interactions
+- Reverted fix for secret/config setup of `uid:gid` to match container's `USER` definition 
+
 ## 2.40.1
 
 {{< release-date date="2025-10-17" >}}
@@ -24,7 +36,7 @@ For more detailed information, see the [release notes in the Compose repo](https
 - Fixed a few issues when building with bake
 - Added support of extends with profiles when using the `publish` command
 - Added support of `CTRL+Z` to run Compose in background
-- Fixed secret/config setup of uid:gid to match container's USER definition 
+- Fixed secret/config setup of `uid:gid` to match container's `USER` definition 
 
 ### Update
 
