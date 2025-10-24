@@ -7,128 +7,117 @@ aliases:
   - /ai/mcp-gateway/
 ---
 
-The MCP Gateway is Docker's open-source enterprise-ready solution for
-orchestrating and managing [Model Context Protocol
-(MCP)](https://spec.modelcontextprotocol.io/) servers securely across
-development and production environments. It is designed to help organizations
-connect MCP servers from the [Docker MCP Catalog](https://hub.docker.com/mcp) to
-MCP Clients without compromising security, visibility, or control.
+The MCP Gateway is Docker's open source solution for orchestrating Model
+Context Protocol (MCP) servers. It acts as a centralized proxy between clients
+and servers, managing configuration, credentials, and access control.
 
-By unifying multiple MCP servers into a single, secure endpoint, the MCP Gateway offers
-the following benefits:
-
-- Secure by default: MCP servers run in isolated Docker containers with restricted
-  privileges, network access, and resource usage.
-- Unified management: One gateway endpoint centralizes configuration, credentials,
-  and access control for all MCP servers.
-- Enterprise observability: Built-in monitoring, logging, and filtering tools ensure
-  full visibility and governance of AI tool activity.
+When using MCP servers without the MCP Gateway, you need to configure
+applications individually for each AI application. With the MCP Gateway, you
+configure applications to connect to the Gateway. The Gateway then handles
+server lifecycle, routing, and authentication across all your servers.
 
 > [!NOTE]
+> If you use Docker Desktop with MCP Toolkit enabled, the Gateway runs
+> automatically in the background. You don't need to start or configure it
+> manually. This documentation is for users who want to understand how the
+> Gateway works or run it directly for advanced use cases.
+
+> [!TIP]
 > E2B sandboxes now include direct access to the Docker MCP Catalog, giving developers
 > access to over 200 tools and services to seamlessly build and run AI agents. For
 > more information, see [E2B Sandboxes](sandboxes.md).
 
-## Who is the MCP Gateway designed for?
+## How it works
 
-The MCP Gateway solves problems encountered by various groups:
+MCP Gateway runs MCP servers in isolated Docker containers with restricted
+privileges, network access, and resource usage. It includes built-in logging
+and call-tracing capabilities to ensure full visibility and governance of AI
+tool activity.
 
-- Developers: Deploy MCP servers locally and in production using Docker Compose,
-  with built-in support for protocol handling, credential management, and security policies.
-- Security teams: Achieve enterprise-grade isolation and visibility into AI tool
-  behavior and access patterns.
-- Operators: Scale effortlessly from local development environments to production
-  infrastructure with consistent, low-touch operations.
+The MCP Gateway manages the server's entire lifecycle. When an AI application
+needs to use a tool, it sends a request to the Gateway. The Gateway identifies
+which server handles that tool and, if the server isn't already running, starts
+it as a Docker container. The Gateway then injects any required credentials,
+applies security restrictions, and forwards the request to the server. The
+server processes the request and returns the result through the Gateway back to
+the AI application.
 
-## Key features
+The MCP Gateway solves a fundamental problem: MCP servers are just programs
+that need to run somewhere. Running them directly on your machine means dealing
+with installation, dependencies, updates, and security risks. By running them
+as containers managed by the Gateway, you get isolation, consistent
+environments, and centralized control.
 
-- Server management: List, inspect, and call MCP tools, resources and prompts from multiple servers
-- Container-based servers: Run MCP servers as Docker containers with proper isolation
-- Secrets management: Secure handling of API keys and credentials via Docker Desktop
-- Dynamic discovery and reloading: Automatic tool, prompt, and resource discovery from running servers
-- Monitoring: Built-in logging and call tracing capabilities
+## Usage
 
-## Install a pre-release version of the MCP Gateway
+To use the MCP Gateway, you'll need Docker Desktop with MCP Toolkit enabled.
+Follow the [MCP Toolkit guide](toolkit.md) to enable and configure servers
+through the graphical interface.
 
-If you use Docker Desktop, the MCP Gateway is readily available. Use the
-following instructions to test pre-release versions.
+### Manage the MCP Gateway from the CLI
 
-### Prerequisites
+With MCP Toolkit enabled, you can also interact with the MCP Gateway using the
+CLI. The `docker mcp` suite of commands lets you manage servers and tools
+directly from your terminal. You can also manually run Gateways with custom
+configurations, including security restrictions, server catalogs, and more.
 
-- Docker Desktop with the [MCP Toolkit feature enabled](../mcp-catalog-and-toolkit/toolkit.md#enable-docker-mcp-toolkit).
-- Go 1.24+ (for development)
+To run an MCP Gateway manually, with customized parameters, use the `docker
+mcp` suite of commands.
 
-### Install using a pre-built binary
+1. Browse the [MCP Catalog](https://hub.docker.com/mcp) for a server that you
+   want to use, and copy the install command from the **Manual installation**
+   section.
 
-You can download the latest binary from the [GitHub releases page](https://github.com/docker/mcp-gateway/releases/latest).
-
-Rename the relevant binary and copy it to the destination matching your OS:
-
-| OS      | Binary name      | Destination folder                  |
-|---------|------------------|-------------------------------------|
-| Linux   | `docker-mcp`     | `$HOME/.docker/cli-plugins`         |
-| macOS   | `docker-mcp`     | `$HOME/.docker/cli-plugins`         |
-| Windows | `docker-mcp.exe` | `%USERPROFILE%\.docker\cli-plugins` |
-
-Or copy it into one of these folders for installing it system-wide:
-
-
-{{< tabs group="" >}}
-{{< tab name="On Unix environments">}}
-
-* `/usr/local/lib/docker/cli-plugins` OR `/usr/local/libexec/docker/cli-plugins`
-* `/usr/lib/docker/cli-plugins` OR `/usr/libexec/docker/cli-plugins`
-
-> [!NOTE]
-> You may have to make the binaries executable with `chmod +x`:
-> ```bash
-> $ chmod +x ~/.docker/cli-plugins/docker-mcp
-> ```
-
-{{< /tab >}}
-{{< tab name="On Windows">}}
-
-* `C:\ProgramData\Docker\cli-plugins`
-* `C:\Program Files\Docker\cli-plugins`
-
-{{< /tab >}}
-{{</tabs >}}
-
-You can now use the `mcp` command:
-
-```bash
-docker mcp --help
-```
-
-## Use the MCP Gateway
-
-1. Select a server of your choice from the [MCP Catalog](https://hub.docker.com/mcp)
-   and copy the install command from the **Manual installation** section.
-
-1. For example, run this command in your terminal to install the `duckduckgo`
+   For example, run this command in your terminal to install the `duckduckgo`
    MCP server:
 
    ```console
    docker mcp server enable duckduckgo
    ```
 
-1. Connect a client, like Visual Studio Code:
+2. Connect a client, like Claude Code:
 
    ```console
-   docker mcp client connect vscode
+   docker mcp client connect claude-code
    ```
 
-1. Run the gateway:
+3. Run the gateway:
 
    ```console
    docker mcp gateway run
    ```
 
 Now your MCP gateway is running and you can leverage all the servers set up
-behind it from Visual Studio Code.
+behind it from Claude Code.
 
-[View the complete docs on GitHub.](https://github.com/docker/mcp-gateway?tab=readme-ov-file#usage)
+### Install the MCP Gateway manually
 
-## Related pages
+For Docker Engine without Docker Desktop, you'll need to download and install
+the MCP Gateway separately before you can run it.
 
-- [Docker MCP Toolkit and catalog](/manuals/ai/mcp-catalog-and-toolkit/_index.md)
+1. Download the latest binary from the [GitHub releases page](https://github.com/docker/mcp-gateway/releases/latest).
+
+2. Move or symlink the binary to the destination matching your OS:
+
+   | OS      | Binary destination                  |
+   | ------- | ----------------------------------- |
+   | Linux   | `~/.docker/cli-plugins/docker-mcp`  |
+   | macOS   | `~/.docker/cli-plugins/docker-mcp`  |
+   | Windows | `%USERPROFILE%\.docker\cli-plugins` |
+
+3. Make the binaries executable:
+
+   ```bash
+   $ chmod +x ~/.docker/cli-plugins/docker-mcp
+   ```
+
+You can now use the `docker mcp` command:
+
+```bash
+docker mcp --help
+```
+
+## Additional information
+
+For more details on how the MCP Gateway works and available customization
+options, see the complete documentation [on GitHub](https://github.com/docker/mcp-gateway).
