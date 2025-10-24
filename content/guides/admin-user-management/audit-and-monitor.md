@@ -11,21 +11,18 @@ Activity logs and Insights are useful tools for user and access management in Do
 
 Activity logs track events at the organization and repository levels, offering a clear view of activities like repository changes, team updates, and billing adjustments.
 
-It is available for Docker Team or Docker Business plans, with data retained for three months.
+Activity logs are available for Docker Team or Docker Business plans, with data retained for three months.
 
 ### Key features
 
- - Change tracking: View what changed, who made the change, and when.
-
- - Comprehensive reporting: Monitor critical events such as repository creation, deletion, privacy changes, and role assignments.
+- Change tracking: View what changed, who made the change, and when.
+- Comprehensive reporting: Monitor critical events such as repository creation, deletion, privacy changes, and role assignments.
 
 ### Example scenarios
 
- - Audit trail for security: A repository’s privacy settings were updated unexpectedly. The activity logs reveal which user made the change and when, helping administrators address potential security risks.
-
- - Team collaboration review: Logs show which team members pushed updates to a critical repository, ensuring accountability during a development sprint.
-
- - Billing adjustments: Track who added or removed subscription seats to maintain budgetary control and compliance.
+- Audit trail for security: A repository’s privacy settings were updated unexpectedly. The activity logs reveal which user made the change and when, helping administrators address potential security risks.
+- Team collaboration review: Logs show which team members pushed updates to a critical repository, ensuring accountability during a development sprint.
+- Billing adjustments: Track who added or removed subscription seats to maintain budgetary control and compliance.
 
 For more information, see [Activity logs](/manuals/admin/organization/activity-logs.md).
 
@@ -35,18 +32,23 @@ Insights provide data-driven views of Docker usage to improve team productivity 
 
 ### Key benefits
 
- - Standardized environments: Ensure consistent configurations and enforce best practices across teams.
-
- - Improved visibility: Monitor metrics like Docker Desktop usage, builds, and container activity to understand team workflows and engagement.
-
- - Optimized resources: Track license usage and feature adoption to maximize the value of your Docker subscription.
+- Standardized environments: Ensure consistent configurations and enforce best practices across teams.
+- Improved visibility: Monitor metrics like Docker Desktop usage, builds, and container activity to understand team workflows and engagement.
+- Optimized resources: Track license usage and feature adoption to maximize the value of your Docker subscription.
 
 ### Example scenarios
 
- - Usage trends: Identify underutilized licenses or resources, allowing reallocation to more active teams.
+- Usage trends: Identify underutilized licenses or resources, allowing reallocation to more active teams.
+- Build efficiency: Track average build times and success rates to pinpoint bottlenecks in development processes.
+- Container utilization: Analyze container activity across departments to ensure proper resource distribution and cost efficiency.
 
- - Build efficiency: Track average build times and success rates to pinpoint bottlenecks in development processes.
+For more information, see [Insights](/manuals/admin/organization/insights.md).
 
- - Container utilization: Analyze container activity across departments to ensure proper resource distribution and cost efficiency.
+## Next steps
 
- For more information, see [Insights](/manuals/admin/organization/insights.md).
+Now that you've mastered user and access management in Docker, you can:
+
+- Review your [activity logs](/manuals/admin/organization/activity-logs.md) regularly to maintain security awareness
+- Check your [Insights dashboard](/manuals/admin/organization/insights.md) to identify opportunities for optimization
+- Explore [advanced security features](/manuals/enterprise/security/_index.md) to further enhance your Docker environment
+- Share best practices with your team to ensure consistent adoption of security policies
