@@ -38,7 +38,7 @@ For more frequently asked questions, see the [FAQs](/manuals/desktop/troubleshoo
 
 > [!IMPORTANT]
 >
-> Support for Windows 10 and 11 22H2 (19045) has ended. Installing Docker Desktop will require Windows 11 23H2 in the next release.
+> Support for Windows 10 21H2 (19044) and 11 22H2 (22621) has ended. Installing Docker Desktop will require Windows 10 22H2 (19045) or Windows 11 23H2 (22631) in the next release.
 
 ### New 
 

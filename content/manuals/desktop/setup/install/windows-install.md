@@ -48,7 +48,8 @@ _For checksums, see [Release notes](/manuals/desktop/release-notes.md)_
 {{< tab name="WSL 2 backend, x86_64" >}}
 
 - WSL version 2.1.5 or later.
-- Windows 11 64-bit: Enterprise, Pro, or Education version 23H2 or higher.
+- Windows 10 64-bit: Enterprise, Pro, or Education version 22H2 (build 19045).
+- Windows 11 64-bit: Enterprise, Pro, or Education version 23H2 (build 22631) or higher.
 - Turn on the WSL 2 feature on Windows. For detailed instructions, refer to the
   [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
 - The following hardware prerequisites are required to successfully run
@@ -72,7 +73,8 @@ For more information on setting up WSL 2 with Docker Desktop, see [WSL](/manuals
 {{< /tab >}}
 {{< tab name="Hyper-V backend, x86_64" >}}
 
-- Windows 11 64-bit: Enterprise, Pro, or Education version 23H2 or higher.
+- Windows 10 64-bit: Enterprise, Pro, or Education version 22H2 (build 19045).
+- Windows 11 64-bit: Enterprise, Pro, or Education version 23H2 (build 22631) or higher.
 - Turn on Hyper-V and Containers Windows features.
 - The following hardware prerequisites are required to successfully run Client
   Hyper-V on Windows 10:
@@ -96,7 +98,8 @@ For more information on setting up WSL 2 with Docker Desktop, see [WSL](/manuals
 {{< tab name="WSL 2 backend, Arm (Early Access)" >}}
 
 - WSL version 2.1.5 or later.
-- Windows 11 64-bit: Enterprise, Pro, or Education version 23H2 or higher.
+- Windows 10 64-bit: Enterprise, Pro, or Education version 22H2 (build 19045).
+- Windows 11 64-bit: Enterprise, Pro, or Education version 23H2 (build 22631) or higher.
 - Turn on the WSL 2 feature on Windows. For detailed instructions, refer to the
   [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
 - The following hardware prerequisites are required to successfully run
