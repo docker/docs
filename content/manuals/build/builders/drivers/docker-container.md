@@ -49,7 +49,7 @@ pass to `--driver-opt`:
 | `cgroup-parent`  | String  | `/docker/buildx` | Sets the cgroup parent of the container if Docker is using the "cgroupfs" driver.                                      |
 | `restart-policy` | String  | `unless-stopped` | Sets the container's [restart policy](/manuals/engine/containers/start-containers-automatically.md#use-a-restart-policy).      |
 | `env.<key>`      | String  |                  | Sets the environment variable `key` to the specified `value` in the container.                                         |
-| `no-gha-event`   | Boolean |    `false`       | If `true`, don't automatically injects GitHub Action event metadata into the builder for provenance.                                                   |
+| `provenance-add-gha`   | Boolean |    `false`       | If `true`, don't automatically injects GitHub Action event metadata into the builder for provenance.                                                   |
 
 Before you configure the resource limits for the container,
 read about [configuring runtime resource constraints for containers](/engine/containers/resource_constraints/).
