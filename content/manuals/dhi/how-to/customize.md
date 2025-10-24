@@ -33,7 +33,7 @@ To customize a Docker Hardened Image, follow these steps:
    details.
 
 7. Select the image version you want to customize.
-8. Add packages.
+8. Optional. Add packages.
 
    1. In the **Packages** drop-down, select the packages you want to add to the
       image.
@@ -71,7 +71,19 @@ To customize a Docker Hardened Image, follow these steps:
       > image build still succeeds, but you may have issues when running the
       > image.
 
-9. Select **Next: Configure** and then configure the following options.
+   3. In the **Scripts** section, you can add, edit, or remove scripts.
+
+      Scripts let you add files to the container image that you can access at runtime. They are not executed during 
+      the build process. This is useful for services that require pre-start initialization, such as setup scripts or 
+      file writes to directories like `/var/lock` or `/out`.
+
+      You must specify the following:
+        - The path where the script will be placed
+        - The script content
+        - The UID and GID ownership of the script
+        - The octal file permissions of the script
+
+10. Select **Next: Configure** and then configure the following options.
 
    1. Specify a suffix that is appended to the customized image's tag. For
       example, if you specify `custom` when customizing the `dhi-python:3.13`
@@ -87,7 +99,7 @@ To customize a Docker Hardened Image, follow these steps:
       values that the image will contain.
    8. Add [annotations](/build/metadata/annotations/) to the image.
    9. Add [labels](/reference/dockerfile/#label) to the image.
-10. Select **Create Customization**.
+11. Select **Create Customization**.
 
     A summary of the customization appears. It may take some time for the image
     to build. Once built, it will appear in the **Tags** tab of the repository,
