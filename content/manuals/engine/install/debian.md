@@ -116,12 +116,28 @@ Docker from the repository.
    sudo chmod a+r /etc/apt/keyrings/docker.asc
 
    # Add the repository to Apt sources:
+   # Debian 12 and newer
+   cat << EOF | sudo tee -a /etc/apt/sources.list.d/docker.sources 
+   Types: deb
+   URIs: https://download.docker.com/linux/debian 
+   Suites: $(. /etc/os-release && echo "$VERSION_CODENAME") 
+   Components: stable
+   Architectures: $(dpkg --print-architecture)
+   Signed-By: /etc/apt/keyrings/docker.asc
+   EOF
+
+   # Older versions of Debian
    echo \
      "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] {{% param "download-url-base" %}} \
      $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
      sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
    sudo apt-get update
    ```
+
+   > [!NOTE]
+   > Debain 12 and new supports APT sources files in the `/etc/apt/sources.list.d/` directory. 
+   > This is preferred over adding entries to the main `/etc/apt/sources.list` file.
+   > [Debian Documentation](APT sources files)
 
    > [!NOTE]
    >
