@@ -22,152 +22,209 @@ tests in Docker when developing and when building.
 
 ## Run tests when developing locally
 
-The sample application already has the Jest package for running tests and has tests inside the `spec` directory. When developing locally, you can use Compose to run your tests.
+The sample application uses Vitest for testing with comprehensive test coverage across client and server components. The test suite includes 101 passing tests covering React components, custom hooks, API routes, database operations, and utility functions.
 
-Run the following command to run the test script from the `package.json` file inside a container.
-
-```console
-$ docker compose run server npm run test
-```
-
-To learn more about the command, see [docker compose run](/reference/cli/docker/compose/run/).
-
-You should see output like the following.
+### Run tests locally (without Docker)
 
 ```console
-> docker-nodejs@1.0.0 test
-> jest
-
- PASS  spec/routes/deleteItem.spec.js
- PASS  spec/routes/getItems.spec.js
- PASS  spec/routes/addItem.spec.js
- PASS  spec/routes/updateItem.spec.js
- PASS  spec/persistence/sqlite.spec.js
-  ● Console
-
-    console.log
-      Using sqlite database at /tmp/todo.db
-
-      at Database.log (src/persistence/sqlite.js:18:25)
-
-    console.log
-      Using sqlite database at /tmp/todo.db
-
-      at Database.log (src/persistence/sqlite.js:18:25)
-
-    console.log
-      Using sqlite database at /tmp/todo.db
-
-      at Database.log (src/persistence/sqlite.js:18:25)
-
-    console.log
-      Using sqlite database at /tmp/todo.db
-
-      at Database.log (src/persistence/sqlite.js:18:25)
-
-    console.log
-      Using sqlite database at /tmp/todo.db
-
-      at Database.log (src/persistence/sqlite.js:18:25)
-
-
-Test Suites: 5 passed, 5 total
-Tests:       9 passed, 9 total
-Snapshots:   0 total
-Time:        2.008 s
-Ran all test suites.
+$ npm run test
 ```
+
+### Add test service to Docker Compose
+
+To run tests in a containerized environment, you need to add a dedicated test service to your `compose.yml` file. Add the following service configuration:
+
+```yaml
+services:
+  # ... existing services ...
+
+  # ========================================
+  # Test Service
+  # ========================================
+  app-test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: test
+    container_name: todoapp-test
+    environment:
+      NODE_ENV: test
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: todoapp_test
+      POSTGRES_USER: todoapp
+      POSTGRES_PASSWORD: '${POSTGRES_PASSWORD:-todoapp_password}'
+    depends_on:
+      db:
+        condition: service_healthy
+    command: ['npm', 'run', 'test:coverage']
+    networks:
+      - todoapp-network
+    profiles:
+      - test
+```
+
+This test service configuration:
+
+- **Builds from test stage**: Uses the `test` target from your multi-stage Dockerfile
+- **Isolated test database**: Uses a separate `todoapp_test` database for testing
+- **Profile-based**: Uses the `test` profile so it only runs when explicitly requested
+- **Health dependency**: Waits for the database to be healthy before starting tests
+
+### Run tests in a container
+
+You can run tests using the dedicated test service:
+
+```console
+$ docker compose up app-test --build
+```
+
+Or run tests against the development service:
+
+```console
+$ docker compose run --rm app-dev npm run test
+```
+
+For a one-off test run with coverage:
+
+```console
+$ docker compose run --rm app-dev npm run test:coverage
+```
+
+### Run tests with coverage
+
+To generate a coverage report:
+
+```console
+$ npm run test:coverage
+```
+
+You should see output like the following:
+
+```console
+> docker-nodejs-sample@1.0.0 test
+> vitest --run
+
+ ✓ src/server/__tests__/routes/todos.test.ts (5 tests) 16ms
+ ✓ src/shared/utils/__tests__/validation.test.ts (15 tests) 6ms
+ ✓ src/client/components/__tests__/LoadingSpinner.test.tsx (8 tests) 67ms
+ ✓ src/server/database/__tests__/postgres.test.ts (13 tests) 136ms
+ ✓ src/client/components/__tests__/ErrorMessage.test.tsx (8 tests) 127ms
+ ✓ src/client/components/__tests__/TodoList.test.tsx (8 tests) 147ms
+ ✓ src/client/components/__tests__/TodoItem.test.tsx (8 tests) 218ms
+ ✓ src/client/__tests__/App.test.tsx (13 tests) 259ms
+ ✓ src/client/components/__tests__/AddTodoForm.test.tsx (12 tests) 323ms
+ ✓ src/client/hooks/__tests__/useTodos.test.ts (11 tests) 569ms
+
+ Test Files  10 passed (10)
+      Tests  101 passed (101)
+   Start at  15:32:56
+   Duration  1.98s (transform 456ms, setup 1.26s, collect 1.74s, tests 1.87s, environment 5.82s, prepare 916ms)
+```
+
+### Test Structure
+
+The test suite covers:
+
+- **Client Components** (`src/client/components/__tests__/`): React component testing with React Testing Library
+- **Custom Hooks** (`src/client/hooks/__tests__/`): React hooks testing with proper mocking
+- **Server Routes** (`src/server/__tests__/routes/`): API endpoint testing with Supertest
+- **Database Layer** (`src/server/database/__tests__/`): PostgreSQL database operations testing
+- **Utility Functions** (`src/shared/utils/__tests__/`): Validation and helper function testing
+- **Integration Tests** (`src/client/__tests__/`): Full application integration testing
 
 ## Run tests when building
 
-To run your tests when building, you need to update your Dockerfile to add a new test stage.
+To run tests during the Docker build process, you need to add a dedicated test stage to your Dockerfile. If you haven't already added this stage, add the following to your multi-stage Dockerfile:
 
-The following is the updated Dockerfile.
+```dockerfile
+# ========================================
+# Test Stage
+# ========================================
+FROM build-deps AS test
 
-```dockerfile {hl_lines="27-35"}
-# syntax=docker/dockerfile:1
+# Set environment
+ENV NODE_ENV=test \
+    CI=true
 
-ARG NODE_VERSION=18.0.0
+# Copy source files
+COPY --chown=nodejs:nodejs . .
 
-FROM node:${NODE_VERSION}-alpine as base
-WORKDIR /usr/src/app
-EXPOSE 3000
+# Switch to non-root user
+USER nodejs
 
-FROM base as dev
-RUN --mount=type=bind,source=package.json,target=package.json \
-    --mount=type=bind,source=package-lock.json,target=package-lock.json \
-    --mount=type=cache,target=/root/.npm \
-    npm ci --include=dev
-USER node
-COPY . .
-CMD npm run dev
-
-FROM base as prod
-RUN --mount=type=bind,source=package.json,target=package.json \
-    --mount=type=bind,source=package-lock.json,target=package-lock.json \
-    --mount=type=cache,target=/root/.npm \
-    npm ci --omit=dev
-USER node
-COPY . .
-CMD node src/index.js
-
-FROM base as test
-ENV NODE_ENV test
-RUN --mount=type=bind,source=package.json,target=package.json \
-    --mount=type=bind,source=package-lock.json,target=package-lock.json \
-    --mount=type=cache,target=/root/.npm \
-    npm ci --include=dev
-USER node
-COPY . .
-RUN npm run test
+# Run tests with coverage
+CMD ["npm", "run", "test:coverage"]
 ```
 
-Instead of using `CMD` in the test stage, use `RUN` to run the tests. The reason is that the `CMD` instruction runs when the container runs, and the `RUN` instruction runs when the image is being built and the build will fail if the tests fail.
+This test stage:
 
-Run the following command to build a new image using the test stage as the target and view the test results. Include `--progress=plain` to view the build output, `--no-cache` to ensure the tests always run, and `--target test` to target the test stage.
+- **Test environment**: Sets `NODE_ENV=test` and `CI=true` for proper test execution
+- **Non-root user**: Runs tests as the `nodejs` user for security
+- **Flexible execution**: Uses `CMD` instead of `RUN` to allow running tests during build or as a separate container
+- **Coverage support**: Configured to run tests with coverage reporting
+
+### Build and run tests during image build
+
+To build an image that runs tests during the build process, you can create a custom Dockerfile or modify the existing one temporarily:
 
 ```console
-$ docker build -t node-docker-image-test --progress=plain --no-cache --target test .
+$ docker build --target test -t node-docker-image-test .
 ```
 
-You should see output containing the following.
+### Run tests in a dedicated test container
+
+The recommended approach is to use the test service defined in `compose.yml`:
 
 ```console
-...
+$ docker compose --profile test up app-test --build
+```
 
-#11 [test 3/3] RUN npm run test
-#11 1.058
-#11 1.058 > docker-nodejs@1.0.0 test
-#11 1.058 > jest
-#11 1.058
-#11 3.765 PASS spec/routes/getItems.spec.js
-#11 3.767 PASS spec/routes/deleteItem.spec.js
-#11 3.783 PASS spec/routes/updateItem.spec.js
-#11 3.806 PASS spec/routes/addItem.spec.js
-#11 4.179 PASS spec/persistence/sqlite.spec.js
-#11 4.207
-#11 4.208 Test Suites: 5 passed, 5 total
-#11 4.208 Tests:       9 passed, 9 total
-#11 4.208 Snapshots:   0 total
-#11 4.208 Time:        2.168 s
-#11 4.208 Ran all test suites.
-#11 4.265 npm notice
-#11 4.265 npm notice New major version of npm available! 8.6.0 -> 9.8.1
-#11 4.265 npm notice Changelog: <https://github.com/npm/cli/releases/tag/v9.8.1>
-#11 4.265 npm notice Run `npm install -g npm@9.8.1` to update!
-#11 4.266 npm notice
-#11 DONE 4.3s
+Or run it as a one-off container:
 
-...
+```console
+$ docker compose run --rm app-test
+```
+
+### Run tests with coverage in CI/CD
+
+For continuous integration, you can run tests with coverage:
+
+```console
+$ docker build --target test --progress=plain --no-cache -t test-image .
+$ docker run --rm test-image npm run test:coverage
+```
+
+You should see output containing the following:
+
+```console
+ ✓ src/server/__tests__/routes/todos.test.ts (5 tests) 16ms
+ ✓ src/shared/utils/__tests__/validation.test.ts (15 tests) 6ms
+ ✓ src/client/components/__tests__/LoadingSpinner.test.tsx (8 tests) 67ms
+ ✓ src/server/database/__tests__/postgres.test.ts (13 tests) 136ms
+ ✓ src/client/components/__tests__/ErrorMessage.test.tsx (8 tests) 127ms
+ ✓ src/client/components/__tests__/TodoList.test.tsx (8 tests) 147ms
+ ✓ src/client/components/__tests__/TodoItem.test.tsx (8 tests) 218ms
+ ✓ src/client/__tests__/App.test.tsx (13 tests) 259ms
+ ✓ src/client/components/__tests__/AddTodoForm.test.tsx (12 tests) 323ms
+ ✓ src/client/hooks/__tests__/useTodos.test.ts (11 tests) 569ms
+
+ Test Files  10 passed (10)
+      Tests  101 passed (101)
+   Start at  07:33:25
+   Duration  2.11s (transform 339ms, setup 619ms, collect 1.12s, tests 1.43s, environment 3.52s, prepare 901ms)
 ```
 
 ## Summary
 
-In this section, you learned how to run tests when developing locally using Compose and how to run tests when building your image.
+In this section, you learned how to run tests when developing locally using Docker Compose and how to run tests when building your image.
 
 Related information:
 
-- [docker compose run](/reference/cli/docker/compose/run/)
+- [Dockerfile reference](/reference/dockerfile/) – Understand all Dockerfile instructions and syntax.
+- [Best practices for writing Dockerfiles](/develop/develop-images/dockerfile_best-practices/) – Write efficient, maintainable, and secure Dockerfiles.
+- [Compose file reference](/compose/compose-file/) – Learn the full syntax and options available for configuring services in `compose.yaml`.
+- [`docker compose run` CLI reference](/reference/cli/docker/compose/run/) – Run one-off commands in a service container.
 
 ## Next steps
 

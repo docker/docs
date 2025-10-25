@@ -15,12 +15,20 @@ params:
   time: 20 minutes
 ---
 
-[Node.js](https://nodejs.org/en) is a powerful JavaScript runtime for building scalable, high-performance applications. While it's flexible and fast, managing different development and deployment environments can become complex. Docker offers a solution: a consistent, containerized environment that works everywhere.
+[Node.js](https://nodejs.org/en) is a powerful JavaScript runtime for building scalable, high-performance applications. This guide demonstrates containerizing a modern TypeScript Node.js application with React frontend, PostgreSQL database, and production-ready Docker configurations.
 
-> 
+The sample application is a modern full-stack Todo application featuring:
+
+- **Backend**: Express.js 5.x with TypeScript, PostgreSQL database, RESTful API with comprehensive error handling
+- **Frontend**: React 19 with Vite, Tailwind CSS 4, modern UI components and hooks
+- **Build System**: Lightning-fast esbuild for server builds (12KB output), Vite for client builds
+- **Production Features**: Multi-stage Docker builds, security hardening, health checks, graceful shutdown
+- **Development Tools**: Hot reload, debugging support, comprehensive testing with Vitest
+- **Architecture**: Clean separation of client/server code, shared utilities, and comprehensive test coverage
+
 > **Acknowledgment**
 >
-> Docker extends its sincere gratitude to [Kristiyan Velkov](https://www.linkedin.com/in/kristiyan-velkov-763130b3/) for authoring this guide. As a Docker Captain and experienced Front-end engineer, his expertise in Docker, DevOps, and modern web development has made this resource invaluable for the community, helping developers navigate and optimize their Docker workflows.
+> Docker extends its sincere gratitude to [Kristiyan Velkov](https://www.linkedin.com/in/kristiyan-velkov-763130b3/) for authoring this guide. As a Docker Captain and experienced Full-stack engineer, his expertise in Docker, DevOps, and modern web development has made this resource invaluable for the community, helping developers navigate and optimize their Docker workflows.
 
 ---
 
@@ -42,9 +50,9 @@ To begin, you’ll start by containerizing an existing Node.js application.
 
 Before you begin, make sure you're familiar with the following:
 
-- Basic understanding of [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) or [TypeScript](https://www.typescriptlang.org/).
-- Basic knowledge of [Node.js](https://nodejs.org/en) and [npm](https://docs.npmjs.com/about-npm) for managing dependencies and running scripts.
+- Basic understanding of [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) and [TypeScript](https://www.typescriptlang.org/).
+- Basic knowledge of [Node.js](https://nodejs.org/en), [npm](https://docs.npmjs.com/about-npm), and [React](https://react.dev/) for modern web development.
 - Understanding of Docker concepts such as images, containers, and Dockerfiles. If you're new to Docker, start with the [Docker basics](/get-started/docker-concepts/the-basics/what-is-a-container.md) guide.
+- Familiarity with [Express.js](https://expressjs.com/) for backend API development.
 
 Once you've completed the Node.js getting started modules, you’ll be ready to containerize your own Node.js application using the examples and instructions provided in this guide.
-
