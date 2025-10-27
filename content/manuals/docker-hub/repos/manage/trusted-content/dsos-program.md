@@ -31,8 +31,7 @@ These benefits are valid for one year and publishers can renew annually if the p
 DSOS organizations can upload custom images for individual repositories on Docker Hub.
 This lets you override the default organization-level logo on a per-repository basis.
 
-Only a user with administrative access (owner or team member with administrator permission)
-over the repository can change the repository logo.
+Only a user with an owner or editor role for the organization can change the repository logo.
 
 #### Image requirements
 
