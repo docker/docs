@@ -11,15 +11,10 @@ build. This means that files must be transferred from your local system to the
 cloud over the network.
 
 Transferring files over the network introduces higher latency and lower
-bandwidth compared to local transfers. To reduce these effects, Docker Offload
-includes several performance optimizations:
+bandwidth compared to local transfers.
 
-- It uses attached storage volumes for build cache, which makes reading and writing cache fast.
-- When pulling build results back to your local machine, it only transfers layers that changed since the previous build.
-
-Even with these optimizations, large projects or slower network connections can
-lead to longer transfer times. Here are several ways to optimize your build
-setup for Docker Offload:
+Large projects or slower network connections can lead to longer transfer times. Here are several ways to optimize your
+build setup for Docker Offload:
 
 - [Use `.dockerignore` files](#dockerignore-files)
 - [Choose slim base images](#slim-base-images)

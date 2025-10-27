@@ -2,13 +2,10 @@
 title: Docker Offload
 weight: 15
 description: Find documentation on Docker Offload to help you build and run your container images faster, both locally and in CI
-keywords: build, cloud, cloud build, remote builder
+keywords: cloud, offload, vdi
 params:
   sidebar:
     group: Products
-    badge:
-      color: blue
-      text: Beta
 
 grid:
 
@@ -53,12 +50,11 @@ aliases:
 
 {{< summary-bar feature_name="Docker Offload" >}}
 
-Docker Offload is a fully managed service that lets you offload building and
-running containers to the cloud using the Docker tools you already know. It
-provides cloud infrastructure for fast, consistent builds and compute-heavy
-workloads like running LLMs or machine learning pipelines.
+Docker Offload is a fully managed service that extends [Docker Desktop](/desktop/) to build and run containers in the
+cloud. For developers working in virtual desktop infrastructure (VDI) or on systems that don't support
+nested virtualization, it enables full Docker functionality without the need for local compute resources.
 
-In the following topics, learn about Docker Offload, how to set it up, use it
-for your workflows, and troubleshoot common issues.
+In the following topics, learn about Docker Offload, how to set it up, use it for your workflows, and troubleshoot
+common issues.
 
 {{< grid >}}

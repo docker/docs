@@ -10,10 +10,12 @@ keywords: cloud, usage, cloud minutes, shared cache, top repositories, cloud bui
 
 > [!NOTE]
 >
-> All free trial usage granted for the Docker Offload Beta expire after 90
-> days from the time they are granted. To continue using Docker Offload after
-> your usage expires, you can enable on-demand usage at [Docker Home
+> All free trial usage granted for the Docker Offload Beta expire after 90 days from the time they are granted. To
+> continue using Docker Offload Beta after your usage expires, you can enable on-demand usage at [Docker Home
 > Billing](https://app.docker.com/billing).
+>
+> Implementation and settings for the Docker Offload Beta may differ from the General Availability (GA) release. The
+> following topic describes the user experience for the GA release.
 
 ## Docker Offload billing
 
@@ -21,67 +23,41 @@ For Docker Offload, you can view and configure billing on the **Docker Offload**
 page in [Docker Home Billing](https://app.docker.com/billing). On this page, you
 can:
 
-- View your included usage
+- View your committed usage
 - View rates for cloud resources
-- Enable or disable on-demand usage
+- Manage on-demand billing
+- Track your organization's Docker Offload usage
 - Add or change payment methods
 
-For more general information about billing, see [Billing](../billing/_index.md).
+You must be an organization owner to manage billing. For more general information about billing, see
+[Billing](../billing/_index.md).
 
 ## Docker Offload overview
 
-The Docker Offload overview page in Docker Home provides visibility into
-how you or your team is using cloud resources to build and run containers.
+The **Offload overview** page in Docker Home provides visibility into
+how you are using cloud resources to build and run containers.
 
 To view the **Overview** page:
 
 1. Sign in to [Docker Home](https://app.docker.com/).
 2. Select the account for which you want to manage Docker Offload.
-3. Select **Offload** > **Overview**.
+3. Select **Offload** > **Offload overview**.
 
-The following sections describe the available widgets on **Overview**.
+The following widgets are available:
 
-### Offload minutes
+- My recent sessions: This widget shows your total session time as well as a break down of your most recent sessions'
+  duration.
+- My top 10 images: This widget shows the top 10 images used in Docker Offload in run sessions. It provides insight into
+  which images are most frequently used, helping you understand your container usage patterns.
+- My active sessions: This widget displays any currently active Docker Offload sessions.
 
-This widget shows the total number of offload minutes used over time. Offload
-minutes represent the time spent running builds and containers in the Offload
-environment. You can use this chart to:
+## Docker Offload recent activity
 
-- Track your Offload usage trends over time.
-- Spot spikes in usage, which may indicate CI changes or build issues.
-- Estimate usage against your subscription limits.
+The **Recent activity** page in Docker Home provides detailed information about your recent Docker Offload sessions.
+This includes session ID, start date and time, duration, and number of containers.
 
-### Build cache usage
+To view the **Recent activity** page:
 
-This widget displays data about cache re-use across all builds, helping you
-understand how effectively Docker Offload is using the build cache. It
-provides insight into:
-
-- The percentage of cache hits vs. misses.
-- How much estimated build time is saved by reusing cache layers.
-- Opportunities to improve cache efficiency by tuning your Dockerfiles or build
-  strategy.
-
-### Top repositories built
-
-This widget highlights the repositories with the highest build activity for
-Docker Offload. This widget helps you understand which projects consume the most
-cloud resources and how efficiently they're being built.
-
-It includes both aggregated metrics and per-repository details to give you a
-comprehensive view.
-
-Use this widget to:
-
-- Identify build hotspots: See which repositories are consuming the most build
-  time and resources.
-- Spot trends: Monitor how build activity evolves across your projects.
-- Evaluate efficiency: Check which repositories benefit most from cache re-use.
-- Target improvements: Flag repositories with low cache hits or high failure
-  rates for optimization.
-
-### Top 10 images
-
-This widget shows the top 10 images used in Docker Offload in run sessions. It
-provides insight into which images are most frequently used, helping you
-understand your team's container usage patterns.
+1. Sign in to [Docker Home](https://app.docker.com/).
+2. Select the account for which you want to manage Docker Offload.
+3. Select **Offload** > **Recent activity**.

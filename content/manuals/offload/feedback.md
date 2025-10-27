@@ -5,7 +5,6 @@ title: Give feedback
 weight: 900
 ---
 
-
 There are several ways you can provide feedback on Docker Offload.
 
 ## Quick survey

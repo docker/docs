@@ -16,6 +16,7 @@ product, including how to set up and configure them, see the following manuals:
 - [Docker Build Cloud](../../build-cloud/_index.md)
 - [Docker Scout](../../scout/_index.md)
 - [Testcontainers Cloud](https://testcontainers.com/cloud/docs/#getting-started)
+- [Docker Offload](../../offload/_index.md)
 
 ## Manage product access for your organization
 
@@ -99,6 +100,18 @@ select **Account**.
 1. Select **Settings**, then **Lock access to Testcontainers Cloud**.
 
 {{< /tab >}}
+{{< tab name="Docker Offload" >}}
+
+### Manage Docker Offload access
+
+Docker Offload access is set inside the Docker Desktop Dashboard. To manage Docker Desktop settings for your
+organization, you can use Setttings Management.
+
+Follow the instructions at [Configure Settings Management with the Admin
+Console](/enterprise/security/hardened-desktop/settings-management/configure-admin-console/) and set the **Enable Docker
+Offload** setting to your desired value.
+
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Monitor product usage for your organization
@@ -110,6 +123,7 @@ To view usage for Docker products:
 - Docker Build Cloud: View the **Build minutes** page in [Docker Build Cloud](http://app.docker.com/build).
 - Docker Scout: View the [**Repository settings** page](https://scout.docker.com/settings/repos) in Docker Scout.
 - Testcontainers Cloud: View the [**Billing** page](https://app.testcontainers.cloud/dashboard/billing) in Testcontainers Cloud.
+- Docker Offload: View the **Docker Offload** > **Usage summary** page in [Docker Billing](https://app.docker.com/billing).
 
 If your usage or seat count exceeds your subscription amount, you can
 [scale your subscription](../../subscription/scale.md) to meet your needs.

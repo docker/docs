@@ -8,25 +8,32 @@ keywords: cloud, quickstart, cloud mode, Docker Desktop, GPU support, cloud buil
 
 {{< summary-bar feature_name="Docker Offload" >}}
 
-This quickstart helps you get started with Docker Offload. Docker Offload lets
-you build and run container images faster by offloading resource-intensive tasks
-to the cloud. It provides a cloud-based environment that mirrors your local
-Docker Desktop experience.
+This quickstart covers the steps developers need to get started with [Docker Offload](./about.md). If you're an
+organization owner, see [Manage Docker products](../admin/organization/manage-products.md) to learn how to manage access
+for the developers in your organization.
 
-## Step 1: Sign up and subscribe to Docker Offload for access
+## Prerequisites
 
-To access Docker Offload, you must [sign
-up](https://www.docker.com/products/docker-offload/) and subscribe.
+- You must have [Docker Desktop](/desktop/) installed. Docker Offload works with Docker Desktop version 4.50.0 or later.
+
+## Step 1: Verify access to Docker Offload
+
+To access Docker Offload, you must be part of an organization that has subscribed to Docker Offload. As a developer, you
+can verify this by checking if the Docker Offload toggle appears in the Docker Desktop Dashboard header.
+
+1. Start Docker Desktop and sign in.
+2. In the Docker Desktop Dashboard header, look for the Docker Offload toggle.
+
+![Offload toggle](./images/offload-toggle.png)
+
+If you see the Docker Offload toggle, you have access to Docker Offload and can proceed to the next step. If you don't
+see the Docker Offload toggle, contact your administrator to verify that your organization has subscribed to Docker
+Offload.
 
 ## Step 2: Start Docker Offload
 
-> [!NOTE]
->
-> After subscribing to Docker Offload, the first time you start Docker Desktop
-> and sign in, you may be prompted to start Docker Offload. If you start Docker
-> Offload via this prompt, you can skip the following steps. Note that you can
-> use the following steps to start Docker Offload at any time.
-
+You can start Docker Offload from the CLI or in the header of the Docker Desktop Dashboard. The following steps describe
+how to start Docker Offload using the CLI.
 
 1. Start Docker Desktop and sign in.
 2. Open a terminal and run the following command to start Docker Offload:
@@ -35,23 +42,10 @@ up](https://www.docker.com/products/docker-offload/) and subscribe.
    $ docker offload start
    ```
 
-3. When prompted, select your account to use for Docker Offload. This account
-   will consume Docker Offload usage.
-
-4. When prompted, select whether to enable GPU support. If you choose to enable
-   GPU support, Docker Offload will run in an instance with an NVIDIA L4 GPU,
-   which is useful for machine learning or compute-intensive workloads.
-
-   > [!NOTE]
-   >
-   > Enabling GPU support consumes more budget. For more details, see [Docker
-   > Offload usage](/offload/usage/).
-
-When Docker Offload is started, you'll see a cloud icon ({{< inline-image
-src="./images/cloud-mode.png" alt="Offload mode icon" >}})
-in the Docker Desktop Dashboard header, and the Docker Desktop Dashboard appears purple.
-You can run `docker offload status` in a terminal to check the status of
-Docker Offload.
+When Docker Offload is started, you'll see a cloud icon
+({{< inline-image src="./images/cloud-mode.png" alt="Offload mode icon" >}})
+in the Docker Desktop Dashboard header, and the Docker Desktop Dashboard appears purple. You can run
+`docker offload status` in a terminal to check the status of Docker Offload.
 
 ## Step 3: Run a container with Docker Offload
 
@@ -65,18 +59,16 @@ To verify that Docker Offload is working, run a container:
 $ docker run --rm hello-world
 ```
 
-If you enabled GPU support, you can also run a GPU-enabled container:
-
-```console
-$ docker run --rm --gpus all hello-world
-```
-
 If Docker Offload is working, you'll see `Hello from Docker!` in the terminal output.
 
-## Step 4: Stop Docker Offload
+## Step 4: Monitor your Offload usage
 
-When you're done using Docker Offload, you can stop it. When stopped, you build
-images and run containers locally.
+You can see your current Offload session duration in the Docker Desktop Dashboard footer. To view detailed information,
+in the Docker Desktop Dashboard left navigation select **Offload** > **Insights** when Docker Offload is running.
+
+## Step 5: Stop Docker Offload
+
+Docker Offload automatically idles after a period of inactivity. You can stop it at any time. To stop Docker Offload:
 
 ```console
 $ docker offload stop
@@ -86,6 +78,5 @@ To start Docker Offload again, run the `docker offload start` command.
 
 ## What's next
 
-- [Configure Docker Offload](configuration.md).
-- Try [Docker Model Runner](../ai/model-runner/_index.md) or
-  [Compose](../ai/compose/models-and-compose.md) to run AI models using Docker Offload.
+Configure Docker Offload settings in Docker Desktop. For more information, see [Configure Docker
+Offload](/offload/configuration/).
