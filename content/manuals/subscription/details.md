@@ -18,7 +18,7 @@ Docker subscriptions provide licensing for commercial use of Docker products and
 - [Docker Build Cloud](../build-cloud/_index.md): Powerful cloud-based builders that accelerate build times by up to 39x.
 - [Docker Scout](../scout/_index.md): Tooling for software supply chain security
   that lets you quickly assess image health and accelerate security improvements.
-- [Testcontainers Cloud](https://testcontainers.com/cloud/docs):  Container-based
+- [Testcontainers Cloud](https://testcontainers.com/cloud/docs): Container-based
   testing automation that provides faster tests, a unified developer experience,
   and more.
 - [Docker Hardened Images](/manuals/dhi/_index.md): Minimal, secure, and
